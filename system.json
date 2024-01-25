@@ -4,9 +4,9 @@
   "description": "PTR 2e is a fan-made tabletop RPG based on the Pokemon video games. It is a complete overhaul of the original PTR 1e system.",
   "version": "0.001",
   "compatibility": {
-    "minimum": 11,
-    "verified": "11.314",
-    "maximum": 11
+    "minimum": 12,
+    "verified": "12.316",
+    "maximum": 12
   },
   "authors": [
     {
@@ -18,9 +18,24 @@
   "esmodules": [
     "src/ptr2e.mjs"
   ],
-  "styles": [
-    "static/css/main.css"
+  "scripts": [
+    "static/js/tooltipster.js",
+    "static/js/chart.js",
+    "static/js/chartjs-plugin-datalabels.js",
+    "static/js/tagify.js",
+    "static/js/tagify.polyfills.min.js"
   ],
+  "styles": [
+    "static/css/main.css",
+    "static/css/tooltipster.css",
+    "static/css/progress-bar.css",
+    "static/css/tagify.css"
+  ],
+  "flags": {
+    "hotReload": {
+      "extensions": ["css", "js", "hbs", "json"]
+    }
+  },
   "packs": [],
   "languages": [
     {

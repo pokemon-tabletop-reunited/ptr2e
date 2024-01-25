@@ -8,4 +8,11 @@ export class PTRCombatant extends Combatant {
     get encounter() {
         return this.combat;
     }
+
+    async endTurn(options) {
+        Hooks.callAll("ptr2e.endTurn", this, this.encounter, game.user.id);
+    }
+
+    async startTurn(options) {
+    }
 }
