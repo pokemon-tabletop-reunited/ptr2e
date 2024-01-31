@@ -3,7 +3,7 @@ export default class PTRPerkTreeHUD extends Application {
     static get defaultOptions() {
         return foundry.utils.mergeObject(super.defaultOptions, {
             id: "perk-tree-hud",
-            template: "systems/ptr2e/static/templates/perk-tree/hud.hbs",
+            template: "systems/ptr2e/templates/perk-tree/hud.hbs",
             popOut: false
         });
     }

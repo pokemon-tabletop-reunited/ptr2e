@@ -1,3 +1,6 @@
+import { PTRItem } from "./base.ts";
+import PTRPerk from "./perk/document.ts";
+
 class PTRItemData extends Item {
     system: ItemSystemSource;
 
@@ -114,14 +117,20 @@ class PTRPerkSource extends ItemSystemSource {
     get fromNode(): Node | null;
 }
 
-class PTRNode {
+type PTRNode = {
     id: string
     angle: number
     distance: number
     type: "normal" | "root" | "ranked"
-    connected: string[]
+    connected: Set<string>
     texture: string
     visible: boolean
+    point: {
+        x: number,
+        y: number,
+    }
+    color: string
+    perk: PTRItem<PTRPerk>
 }
 
 class PTRSpecies extends PTRItemData {

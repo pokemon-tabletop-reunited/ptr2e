@@ -1,4 +1,4 @@
-import { PTRActor } from "../../actor/base.mjs";
+import { PTRActor } from "../../actor/base.ts";
 import PTRPerkTreeHUD from "./perk-tree-hud.mjs";
 import { PTRPerkTreeNode, PTRPerkTreeNodeData } from "./perk-tree-node.mjs";
 

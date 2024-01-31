@@ -1,3 +1,6 @@
+import { Chart } from "chart.js/auto";
+import ChartDataLabels from "chartjs-plugin-datalabels";
+
 export class StatsChart {
     constructor(sheet, options = {}, { id, cssclass } = { cssclass: "stats-chart" }) {
         this.sheet = sheet;
