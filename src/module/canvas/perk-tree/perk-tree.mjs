@@ -1,4 +1,4 @@
-import { PTRActor } from "../../actor/base.ts";
+import { ActorPTR2e } from "../../actor/base.ts";
 import PTRPerkTreeHUD from "./perk-tree-hud.mjs";
 import { PTRPerkTreeNode, PTRPerkTreeNodeData } from "./perk-tree-node.mjs";
 
@@ -53,12 +53,12 @@ export default class PTRPerkTree extends PIXI.Container {
 
     /**
      * 
-     * @param {PTRActor} actor 
+     * @param {ActorPTR2e} actor 
      * @param {object} [options]
      * @param {boolean} [options.resetView] 
      */
     async open(actor, { resetView } = {}) {
-        if (!(actor instanceof PTRActor)) throw new Error("PTRPerkTree.open: actor must be an instance of PTRActor");
+        if (!(actor instanceof ActorPTR2e)) throw new Error("PTRPerkTree.open: actor must be an instance of PTRActor");
 
         await this.draw();
 

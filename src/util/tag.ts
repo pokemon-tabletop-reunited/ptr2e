@@ -7,7 +7,7 @@ import Tagify from "@yaireo/tagify";
  * @param {number} options.maxTags
  * @param {boolean} options.enforceWhitelist 
  */
-function tagify(input: HTMLInputElement, { whitelist, maxTags, enforceWhitelist = true, traits = false }: { whitelist?: any, maxTags?: any, enforceWhitelist: boolean, traits: boolean }) {
+function tagify(input: HTMLInputElement, { whitelist, maxTags, enforceWhitelist = true, traits = false }: { whitelist?: any, maxTags?: any, enforceWhitelist?: boolean, traits?: boolean } = {}) {
     if (input?.hasAttribute("name") && input.dataset.dtype !== "JSON") {
         throw Error("Usable only on input elements with JSON data-dtype");
     } else if (!input) {

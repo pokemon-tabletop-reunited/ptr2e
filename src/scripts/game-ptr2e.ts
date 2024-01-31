@@ -1,4 +1,4 @@
-import PTRPerkTree from "../module/canvas/perk-tree/perk-tree.mjs"
+import PTRPerkTree from "@module/canvas/perk-tree/perk-tree.mjs"
 
 const GamePTR = {
     onInit() {
@@ -6,7 +6,7 @@ const GamePTR = {
             tree: new PTRPerkTree()
         }
 
-        game.ptr = foundry.utils.mergeObject(game.ptr ?? {}, initData)
+        game.ptr = fu.mergeObject(game.ptr ?? {}, initData)
     },
     onSetup() { },
     onReady() { }

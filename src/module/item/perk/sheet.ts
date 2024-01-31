@@ -1,7 +1,8 @@
-import { PTRItem } from "../base.ts";
+import { PerkPTR2e } from "@item";
+import { ItemSheetPTR2e } from "@item/base/sheet.ts";
 
-class PTRPerkSheet<TParent extends PTRItem = PTRItem> extends ItemSheet<TParent, DocumentSheetOptions> {
+class PerkSheetPTR2e extends ItemSheetPTR2e<PerkPTR2e> {
 
 }
 
-export default PTRPerkSheet;
+export { PerkSheetPTR2e }

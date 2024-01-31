@@ -1,15 +1,18 @@
-import { PTRItem } from "../base.ts";
-import BaseItemSystem from "../document.ts";
+import { ItemSystemPTR2e, ItemPTR2e } from "@item";
+import { TimeDuration, ItemGrade, IdentificationSource, ItemRarity, ItemCarryType } from "@item/base/data.ts";
 
-/**
- * @extends {GearSystemSource}
- */
-class PTRGear extends BaseItemSystem {
+class GearSystemPTR2e extends ItemSystemPTR2e {
     static override defineSchema() {
         const fields = foundry.data.fields;
         return Object.assign(super.defineSchema(), {
             cost: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
-            crafting: new fields.ObjectField(),
+            crafting: new fields.SchemaField({
+                skill: new fields.StringField({ required: true, initial: "accounting" }),
+                time: new fields.SchemaField({
+                    value: new fields.NumberField({ required: true, initial: 1, validate: (d) => d as number >= 0 }),
+                    unit: new fields.StringField({ required: true, initial: "hours", choices: ["seconds", "minutes", "hours", "days", "weeks", "months", "years"] })
+                })
+            }),
             equipped: new fields.EmbeddedDataField(EquipmentData),
             grade: new fields.StringField({
                 required: true,
@@ -17,7 +20,7 @@ class PTRGear extends BaseItemSystem {
                 choices: ["E", "E+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+", "S-", "S", "S+"]
             }),
             identification: new fields.SchemaField({
-                misidentified: new fields.ForeignDocumentField(PTRItem, { required: false, nullable: true }),
+                misidentified: new fields.ForeignDocumentField(ItemPTR2e, { required: false, nullable: true }),
                 status: new fields.StringField({ required: true, initial: "identified", choices: ["identified", "unidentified", "misidentified"] }),
                 unidentified: new fields.SchemaField({
                     name: new fields.StringField({ required: true, initial: "Unidentified Item" }),
@@ -35,8 +38,17 @@ class PTRGear extends BaseItemSystem {
     }
 }
 
-interface PTRGear extends BaseItemSystem {
-
+interface GearSystemPTR2e extends ItemSystemPTR2e {
+    cost: number,
+    crafting: {
+        skill: PTRSkill,
+        time: TimeDuration,
+    },
+    equipped: EquippedData,
+    grade: ItemGrade,
+    identification: IdentificationSource,
+    quantity: number,
+    rarity: ItemRarity,
 }
 
 class EquipmentData extends foundry.abstract.DataModel {
@@ -49,5 +61,9 @@ class EquipmentData extends foundry.abstract.DataModel {
     }
 }
 
-export default PTRGear;
-export { EquipmentData }
+interface EquippedData extends foundry.abstract.DataModel{
+    carryType: ItemCarryType,
+    handsHeld?: number,
+}
+
+export { GearSystemPTR2e, EquipmentData }

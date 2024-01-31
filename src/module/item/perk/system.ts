@@ -1,8 +1,8 @@
-import { PTRPerkTreeNodeData } from "src/module/canvas/perk-tree/perk-tree-node.mjs";
-import { PTRNode } from "../data.js";
-import BaseItemSystem from "../document.ts";
+import { ItemSystemPTR2e } from "@item";
+import { PTRNode } from "@item/base/data.ts";
+import { PTRPerkTreeNodeData } from "@module/canvas/perk-tree/perk-tree-node.mjs";
 
-class PTRPerk extends BaseItemSystem {
+class PerkSystemPTR2e extends ItemSystemPTR2e {
     static override defineSchema() {
         const fields = foundry.data.fields;
         return Object.assign(super.defineSchema(), {
@@ -10,7 +10,7 @@ class PTRPerk extends BaseItemSystem {
                 id: new fields.StringField({ required: true, blank: false, initial: () => foundry.utils.randomID() }),
                 angle: new fields.AngleField({ required: true, initial: 0 }),
                 distance: new fields.NumberField({ required: true, initial: 100, validate: (d) => d as number >= 0 }),
-                type: new fields.StringField({ choices: ["normal", "root", "ranked"], required: true, initial: "normal"}),
+                type: new fields.StringField({ choices: ["normal", "root", "ranked"], required: true, initial: "normal" }),
                 connected: new fields.ArrayField(new fields.StringField()),
                 texture: new fields.FilePathField({ required: true, categories: ["IMAGE", "MEDIA", "VIDEO"], initial: "systems/ptu/css/images/types2/UntypedIC_Icon.png" }),
                 visible: new fields.BooleanField({ required: true, initial: true }),
@@ -33,7 +33,7 @@ class PTRPerk extends BaseItemSystem {
     }
 }
 
-interface PTRPerk extends BaseItemSystem {
+interface PerkSystemPTR2e extends ItemSystemPTR2e {
     node: PTRNode
 
     /** Perk point cost */
@@ -43,4 +43,4 @@ interface PTRPerk extends BaseItemSystem {
     get fromNode(): Node | null;
 }
 
-export default PTRPerk;
+export { PerkSystemPTR2e };

@@ -1,6 +1,6 @@
-import { PTRCombat } from "./document.ts";
+import { CombatPTR2e } from "@combat";
 
-class PTRCombatTracker<TEncounter extends PTRCombat | null> extends CombatTracker<TEncounter> {
+class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTracker<TEncounter> {
     
     override get template() {
         return 'systems/ptr2e/templates/sidebar/combat-tracker.hbs';
@@ -13,4 +13,4 @@ class PTRCombatTracker<TEncounter extends PTRCombat | null> extends CombatTracke
     }
 }
 
-export { PTRCombatTracker };
+export { CombatTrackerPTR2e };

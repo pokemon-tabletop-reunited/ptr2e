@@ -1,43 +1,8 @@
-abstract class PTRActorData extends Actor {
-    system: ActorSystem;
-    synthetics: ActorSynthetics;
-}
-
 interface ActorSynthetics {
     ephemeralEffects: ModifierSynthetics;
     modifierAdjustments: ModifierAdjustmentSynthetics;
     statisticsModifiers: ModifierSynthetics;
     damageDice: DamageDiceSynthetics;
-}
-
-interface ActorSystem {
-    attributes: Attributes,
-    battleStats: {
-        evasion: Stat,
-        accuracy: Stat,
-        critRate: Stat,
-    },
-    skills: Skills,
-    /** Biological data */
-    biology: Biology,
-    /** Movement Capabilities */
-    capabilities: Capabilities,
-    /** All traits for this actor */
-    traits: Trait[],
-    /** Available advancement points */
-    advancementPoints: number,
-    type: {
-        effectiveness: TypeEffectiveness,
-        types: string[],
-    },
-    species: SpeciesData | null,
-    powerPoints: {
-        max: number,
-        value: number,
-    },
-    health: HealthData,
-    advancement: AdvancementData,
-    money: number
 }
 
 interface Attributes {

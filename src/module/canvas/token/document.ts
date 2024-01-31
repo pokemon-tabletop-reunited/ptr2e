@@ -1,6 +1,6 @@
-import { PTRActor } from "src/module/actor/base.ts";
-import { TokenPTR2e } from "./object.ts";
-import { TokenFlagsPTR2e } from "./data.ts";
+import { ActorPTR2e } from "@actor";
+import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import { TokenFlagsPTR2e } from "@module/canvas/token/data.ts";
 
 class TokenDocumentPTR2e<TParent extends Scene | null = Scene | null> extends TokenDocument<TParent> {
 
@@ -9,7 +9,7 @@ class TokenDocumentPTR2e<TParent extends Scene | null = Scene | null> extends To
 interface TokenDocumentPTR2e<TParent extends Scene | null = Scene | null> extends TokenDocument<TParent> {
     flags: TokenFlagsPTR2e;
 
-    get actor(): PTRActor<this | null> | null;
+    get actor(): ActorPTR2e<this | null> | null;
     get combatant(): Combatant<Combat, this> | null;
     get object(): TokenPTR2e<this> | null;
     get sheet(): TokenConfig<this>;

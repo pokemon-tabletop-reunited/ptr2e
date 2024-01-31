@@ -1,8 +1,8 @@
-import { TokenDocumentPTR2e } from "../canvas/token/document.ts";
-import { PTRCombat } from "./document.ts";
+import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import { CombatPTR2e } from "@combat";
 
 class CombatantPTR2e<
-    TParent extends PTRCombat | null = PTRCombat | null,
+    TParent extends CombatPTR2e | null = CombatPTR2e | null,
     TTokenDocument extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null
 > extends Combatant<TParent, TTokenDocument> {
 
@@ -19,10 +19,10 @@ class CombatantPTR2e<
 }
 
 interface CombatantPTR2e<
-    TParent extends PTRCombat | null = PTRCombat | null,
+    TParent extends CombatPTR2e | null = CombatPTR2e | null,
     TTokenDocument extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null
 > extends Combatant<TParent, TTokenDocument> {
 
 }
 
-export { CombatantPTR2e as PTRCombatant }
+export { CombatantPTR2e }

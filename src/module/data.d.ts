@@ -45,16 +45,3 @@ type ImageFilePath = `${string}.apng` | `${string}.avif` | `${string}.bmp` | `${
 type PokemonType = "normal" | "fire" | "water" | "electric" | "grass" | "ice" | "fighting" | "poison" | "ground" | "flying" | "psychic" | "bug" | "rock" | "ghost" | "dragon" | "dark" | "steel" | "fairy" | "untyped";
 type PokemonCategory = "physical" | "special" | "status";
 type ContestType = "cool" | "cute" | "beautiful" | "tough" | "smart";
-
-interface Node {
-    /** Node ID */
-    id: string
-    /** Node IDs */
-    neighbors: string[]
-    /** If Node ID is a neighbor == true, otherwise false */
-    neighborsById: Record<string, boolean>
-    /** UUID of Perk Item */
-    perkUuid: string
-
-    get perk(): PTRPerk;
-}

@@ -1,34 +1,32 @@
-import { PTRActor, PTRActorProxy } from "../../module/actor/base.ts";
-import { PerkDirectory } from "../../module/apps/sidebar-perks/perks-directory.ts";
-import { PTRCombatTracker } from "../../module/combat/tracker.ts";
-import { PTRItem } from "../../module/item/base.ts";
-import PTRGear from "../../module/item/gear/document.ts";
-import PTRPerk from "../../module/item/perk/document.ts";
-import PTRPerkSheet from "../../module/item/perk/sheet.ts";
+
+import { ActorPTR2e, ActorSheetPTR2e, ActorSystemPTR2e } from "@actor";
+import { CombatTrackerPTR2e } from "@combat";
+import { GearSystemPTR2e, ItemPTR2e, PerkSystemPTR2e } from "@item";
+import { PerkSheetPTR2e } from "@item/perk/sheet.ts";
+import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
 
 export const PTRCONFIG = {
     Actor: {
-        documentClass: PTRActor,
-        proxy: PTRActorProxy,
-        documentClasses: {
-
+        documentClass: ActorPTR2e,
+        dataModels: {
+            character: ActorSystemPTR2e
         },
         sheetClasses: {
-
+            character: ActorSheetPTR2e,
         },
     },
     Item: {
-        documentClass: PTRItem,
+        documentClass: ItemPTR2e,
         dataModels: {
-            perk: PTRPerk,
-            gear: PTRGear
+            perk: PerkSystemPTR2e,
+            gear: GearSystemPTR2e
         },
         sheetClasses: {
-            perk: PTRPerkSheet,
+            perk: PerkSheetPTR2e,
         },
     },
     ui: {
         perks: PerkDirectory,
-        combat: PTRCombatTracker,
+        combat: CombatTrackerPTR2e,
     }
 }

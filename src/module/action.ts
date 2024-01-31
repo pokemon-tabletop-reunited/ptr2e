@@ -1,7 +1,6 @@
-/**
- * @extends {ActionSource}
- */
-class PTRAction extends foundry.abstract.DataModel {
+import { ActionCost, ActionType, TargetOption } from "@item/base/data.ts";
+
+class ActionPTR2e extends foundry.abstract.DataModel {
     static override defineSchema() {
         const fields = foundry.data.fields;
         return {
@@ -14,7 +13,7 @@ class PTRAction extends foundry.abstract.DataModel {
                     "attack", "camping", "downtime", "exploration"
                 ]
             }),
-            range: new fields.EmbeddedDataField(PTRRange),
+            range: new fields.EmbeddedDataField(RangePTR2e),
             cost: new fields.SchemaField({
                 activation: new fields.StringField({
                     required: true, choices: () => [
@@ -30,10 +29,26 @@ class PTRAction extends foundry.abstract.DataModel {
     }
 }
 
-/**
- * @extends {RangeSource}
- */
-class PTRRange extends foundry.abstract.DataModel {
+interface ActionPTR2e extends foundry.abstract.DataModel {
+    slug: string
+    // Action label
+    name: string
+    // Effect text
+    description: string
+    traits: Trait[]
+    type: ActionType
+
+    cost: {
+        activation: ActionCost,
+        powerPoints: number,
+        trigger?: string //| TriggerSource, // prob just string but maybe object
+        delay?: 1 | 2 | 3,
+        priority?: number,
+    }
+    range: RangePTR2e[]
+}
+
+class RangePTR2e extends foundry.abstract.DataModel {
     static override defineSchema() {
         const fields = foundry.data.fields;
         return {
@@ -47,5 +62,10 @@ class PTRRange extends foundry.abstract.DataModel {
         }
     }
 }
+interface RangePTR2e extends foundry.abstract.DataModel {
+    target: TargetOption
+    distance: number
+    unit: DistanceUnit
+}
 
-export { PTRAction, PTRRange }
+export { ActionPTR2e, RangePTR2e }

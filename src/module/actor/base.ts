@@ -1,42 +1,30 @@
-// @ts-nocheck
+import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import { ActorSystemPTR2e } from "@actor";
 
-import { TokenDocumentPTR2e } from "../canvas/token/document.ts";
+class ActorPTR2e<TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null> extends Actor<TParent> {
 
-/**
- * @extends {PTRActorData}
- */
-class PTRActor<TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null> extends Actor<TParent> {
-
-    /**
-     * @returns {Trait[]}
-     */
     get traits() {
         return this.system.traits;
     }
 
-    /**
-     * @returns {Attributes}
-     */
     get attributes() {
         return this.system.attributes;
     }
 
     /** 
      * Step 1 - Copies data from source object to instance attributes
-     * @override 
      * */
-    _initialize() {
+    override _initialize() {
         return super._initialize();
     }
 
     /** 
      * Step 2 - Prepare data for use by the instance. This method is called automatically by DataModel#_initialize workflow
      * The work done by this method should be idempotent. There are situations in which prepareData may be called more than once.
-     * @override 
      * */
-    prepareData() {
+    override prepareData() {
         this.health = {
-            percent: parseInt(Math.floor(Math.random() * 100))
+            percent: Math.floor(Math.random() * 100) 
         }
 
         return super.prepareData();
@@ -44,26 +32,23 @@ class PTRActor<TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | 
 
     /**
      * Step 3 - Prepare data related to this Document itself, before any embedded Documents or derived data is computed.
-     * @override 
      * */
-    prepareBaseData() {
+    override prepareBaseData() {
         return super.prepareBaseData();
     }
 
     /** 
      * Step 4 - Prepare all embedded Document instances which exist within this primary Document.
-     * @override 
      * */
-    prepareEmbeddedDocuments() {
+    override prepareEmbeddedDocuments() {
         return super.prepareEmbeddedDocuments();
     }
 
     /** 
      * Step 5 - Apply transformations or derivations to the values of the source data object.
      * Compute data fields whose values are not stored to the database.
-     * @override 
      * */
-    prepareDerivedData() {
+    override prepareDerivedData() {
         return super.prepareDerivedData();
     }
 
@@ -71,20 +56,19 @@ class PTRActor<TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | 
      * Toggle the perk tree for this actor
      * @param {boolean} active 
      */
-    async togglePerkTree(active) {
+    async togglePerkTree(active: boolean) {
         if((game.ptr.tree.actor === this) && (active !== true)) return game.ptr.tree.close();
         else if(active !== false) return game.ptr.tree.open(this);
     }
 
 }
 
-/**
- * @type {PTRActor}
-*/
-const PTRActorProxy = new Proxy(PTRActor, {
-    construct(_target, args) {
-        return new PTRActor(...args); //TODO: later change this if we add more actor types
+interface ActorPTR2e<TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null> extends Actor<TParent> {
+    system: ActorSystemPTR2e
+    health: {
+        percent: number
     }
-})
+    synthetics: ActorSynthetics
+}
 
-export { PTRActor, PTRActorProxy}
+export { ActorPTR2e }

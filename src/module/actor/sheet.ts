@@ -1,13 +1,13 @@
-import { tagify } from "../../util/tag.ts";
-import { PTRActor } from "./base.ts";
-import { StatsChart } from "./sheets/stats-chart.mjs";
+import { ActorPTR2e } from "@actor";
+import { StatsChart } from "@actor/sheets/stats-chart.mjs";
+import { tagify } from "@utils";
 
-class PTRActorSheet extends ActorSheet<PTRActor> {
+class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
 
-    constructor(actor: PTRActor, options: Partial<ActorSheetOptions>) {
+    constructor(actor: ActorPTR2e, options: Partial<ActorSheetOptions>) {
         super(actor, options);
         this._statsChart = new StatsChart(this);
-        this.tab = PTRActorSheet.defaultOptions.tabs[0].initial;
+        this.tab = ActorSheetPTR2e.defaultOptions.tabs[0].initial;
     }
 
     static override get defaultOptions() {
@@ -40,14 +40,10 @@ class PTRActorSheet extends ActorSheet<PTRActor> {
     }
 
     override getData() {
-        const data = super.getData();
-        // @ts-ignore
-        data.traits = this.actor.traits?.map(t => t.slug);
-        // @ts-ignore
+        const data: Record<string, any> = super.getData();
         data.party = game.actors.filter(a => a != this.actor); //TODO: change
-        // @ts-ignore
         data.activeTab = this.tab;
-        return data;
+        return data as ActorSheetData<ActorPTR2e>;
     }
 
     override activateListeners($html: JQuery<HTMLElement>) {
@@ -56,44 +52,43 @@ class PTRActorSheet extends ActorSheet<PTRActor> {
         this._statsChart.render();
 
         for (const taggifyElement of $html.find(".ptr-tagify")) {
-            // @ts-ignore
             tagify(taggifyElement as HTMLInputElement, { traits: $(taggifyElement).hasClass("system-traits") });
         }
 
-        const actor = this.actor;
-        for (const tooltipElement of $html.find(".ptr-trait")) {
-            $(tooltipElement).tooltipster({
-                contentAsHTML: true,
-                interactive: true,
-                content: 'Loading...',
-                functionInit: function (origin, _content) {
-                    const trait = actor.traits.find((t: { slug: string | undefined; }) => t.slug === tooltipElement.dataset.trait);
-                    if (trait.description || trait.related.length > 0) {
-                        renderTemplate("systems/ptr2e/templates/partials/trait-tooltip.hbs", { trait })
-                            .then(html =>
-                                origin.content(html)
-                            );
-                    }
-                },
-                functionReady: function (_origin, content) {
-                    // @ts-ignore
-                    $(content.tooltip).find(".keyword").tooltipster({
-                        position: "right",
-                        contentAsHTML: true,
-                        content: 'This is where the creature-type keyword explanation would go and if you click it it will open the full view instead of the...',
-                    })
-                }
-            });
-        }
+        //const actor = this.actor;
+        // for (const tooltipElement of $html.find(".ptr-trait")) {
+        //     $(tooltipElement).tooltipster({
+        //         contentAsHTML: true,
+        //         interactive: true,
+        //         content: 'Loading...',
+        //         functionInit: function (origin, _content) {
+        //             const trait = actor.traits.find((t: { slug: string | undefined; }) => t.slug === tooltipElement.dataset.trait);
+        //             if (trait.description || trait.related.length > 0) {
+        //                 renderTemplate("systems/ptr2e/templates/partials/trait-tooltip.hbs", { trait })
+        //                     .then(html =>
+        //                         origin.content(html)
+        //                     );
+        //             }
+        //         },
+        //         functionReady: function (_origin, content) {
+        //             // @ts-ignore
+        //             $(content.tooltip).find(".keyword").tooltipster({
+        //                 position: "right",
+        //                 contentAsHTML: true,
+        //                 content: 'This is where the creature-type keyword explanation would go and if you click it it will open the full view instead of the...',
+        //             })
+        //         }
+        //     });
+        // }
 
         // @ts-ignore
         $html.find(".ptr-perk-tree").on("click", () => this.actor.togglePerkTree());
     }
 }
 
-interface PTRActorSheet extends ActorSheet<PTRActor> {
+interface ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
     _statsChart: StatsChart
     tab: string
 }
 
-export { PTRActorSheet }
+export { ActorSheetPTR2e }

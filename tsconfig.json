@@ -25,6 +25,41 @@
     "resolveJsonModule": true,
     "useDefineForClassFields": true,
     "noErrorTruncation": true,
+    "paths": {
+      "@actor": [
+        "src/module/actor/index.ts"
+      ],
+      "@actor/*": [
+        "src/module/actor/*"
+      ],
+      "@item": [
+        "src/module/item/index.ts"
+      ],
+      "@item/*": [
+        "src/module/item/*"
+      ],
+      "@combat": [
+        "src/module/combat/index.ts"
+      ],
+      "@scene": [
+        "src/module/scene/index.ts"
+      ],
+      "@scene/*": [
+          "src/module/scene/*"
+      ],
+      "@system/*": [
+          "src/module/system/*"
+      ],
+      "@module/*": [
+          "src/module/*"
+      ],
+      "@scripts/*": [
+          "src/scripts/*"
+      ],
+      "@utils": [
+        "src/util/index.ts"
+      ]
+    },
     "types": [
       "node",
       "jest",

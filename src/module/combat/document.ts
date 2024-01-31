@@ -1,7 +1,7 @@
-import { TokenDocumentPTR2e } from "../canvas/token/document.ts";
-import { PTRCombatant } from "./combatant.ts";
+import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import { CombatantPTR2e } from "@combat";
 
-class PTRCombat extends Combat {
+class CombatPTR2e extends Combat {
     
     // @ts-ignore
     override _sortCombatants(a, b) {
@@ -334,7 +334,7 @@ class PTRCombat extends Combat {
             });
     }
 
-    async updateInitiatives(previousCombatant: PTRCombatant, newCombatant: PTRCombatant) {
+    async updateInitiatives(previousCombatant: CombatantPTR2e, newCombatant: CombatantPTR2e) {
         const combatants = this.combatants;
         const initiative = combatants.get(newCombatant.id)?.initiative;
 
@@ -354,8 +354,8 @@ class PTRCombat extends Combat {
     }
 }
 
-interface PTRCombat extends Combat {
-    readonly combatants: foundry.abstract.EmbeddedCollection<PTRCombatant<this, TokenDocumentPTR2e | null>>
+interface CombatPTR2e extends Combat {
+    readonly combatants: foundry.abstract.EmbeddedCollection<CombatantPTR2e<this, TokenDocumentPTR2e | null>>
 }
 
-export { PTRCombat };
+export { CombatPTR2e };

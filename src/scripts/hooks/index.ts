@@ -1,10 +1,7 @@
-import { Init } from "./init.ts";
+import { Init } from "@scripts/hooks/init.ts";
 
 export const PTRHooks = {
     listen() {
-        /**
-         * @type {PTRHook[]}
-         */
         const listeners = [
             // Add listeners here
             Init

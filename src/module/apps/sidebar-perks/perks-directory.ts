@@ -1,7 +1,6 @@
-import { PTRItem } from "src/module/item/base.ts";
-import ItemSystemBase from "src/module/item/document.ts";
+import { ItemPTR2e, ItemSystemPTR2e } from "@item";
 
-class PerkDirectory extends ItemDirectory<PTRItem<ItemSystemBase, null>> {
+class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR2e, null>> {
 
     override get title() {
         return `${game.i18n.localize("DOCUMENT.Perks")} Directory`;
@@ -86,7 +85,7 @@ class PerkDirectory extends ItemDirectory<PTRItem<ItemSystemBase, null>> {
     }
 }
 
-interface PerkDirectory extends ItemDirectory<PTRItem<ItemSystemBase, null>> {
+interface PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR2e, null>> {
 
 }
 

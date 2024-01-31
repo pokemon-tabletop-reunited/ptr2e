@@ -1,26 +1,23 @@
-import { PTRActor } from "./module/actor/base.ts";
-import PTRPerkTree from "./module/canvas/perk-tree/perk-tree.mjs";
-import { PTRItem } from "./module/item/base.ts";
+import { ActorPTR2e } from "@actor";
+import { CombatPTR2e, CombatantPTR2e, CombatTrackerPTR2e } from "@combat";
+import { ItemPTR2e, ItemSystemPTR2e } from "@item";
+import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
+import PTRPerkTree from "@module/canvas/perk-tree/perk-tree.mjs";
+import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import { PTRCONFIG } from "@scripts/config/index.ts";
 import type EnJSON from "static/lang/en.json";
-import { PTRCONFIG } from "./scripts/config/index.ts";
-import { TokenDocumentPTR2e } from "./module/canvas/token/document.ts";
-import { TokenPTR2e } from "./module/canvas/token/object.ts";
-import { PerkDirectory } from "./module/apps/sidebar-perks/perks-directory.ts";
-import { PTRCombat } from "./module/combat/document.ts";
-import { PTRCombatTracker } from "./module/combat/tracker.ts";
-import { PTRCombatant } from "./module/combat/combatant.ts";
-import ItemSystemBase from "./module/item/document.ts";
 
 interface GamePTR2e
     extends Game<
-        PTRActor<null>,
-        Actors<PTRActor<null>>,
+        ActorPTR2e<null>,
+        Actors<ActorPTR2e<null>>,
         ChatMessage,
         Combat,
-        PTRItem<ItemSystemBase, null>,
+        ItemPTR2e<ItemSystemPTR2e, null>,
         Macro,
         Scene,
-        User<PTRActor<null>>
+        User<ActorPTR2e<null>>
     > {
     ptr: {
         tree: PTRPerkTree;
@@ -29,17 +26,17 @@ interface GamePTR2e
 
 type ConfiguredConfig = Config<
     AmbientLightDocument<Scene | null>,
-    ActiveEffect<PTRActor | PTRItem | null>,
-    PTRActor,
+    ActiveEffect<ActorPTR2e | ItemPTR2e | null>,
+    ActorPTR2e,
     ActorDelta<TokenDocumentPTR2e>,
     ChatLog,
     ChatMessage,
-    PTRCombat,
-    PTRCombatant<PTRCombat | null>,
-    PTRCombatTracker<PTRCombat | null>,
+    CombatPTR2e,
+    CombatantPTR2e<CombatPTR2e | null>,
+    CombatTrackerPTR2e<CombatPTR2e | null>,
     CompendiumDirectory,
     Hotbar,
-    PTRItem,
+    ItemPTR2e,
     Macro,
     MeasuredTemplateDocument<Scene | null>,
     TileDocument<Scene | null>,
@@ -73,8 +70,8 @@ declare global {
         var fu: typeof foundry.utils;
 
         var ui: FoundryUI<
-            ActorDirectory<PTRActor<null>>,
-            ItemDirectory<PTRItem<ItemSystemBase, null>>,
+            ActorDirectory<ActorPTR2e<null>>,
+            ItemDirectory<ItemPTR2e<ItemSystemPTR2e, null>>,
             ChatLog,
             CompendiumDirectory,
             CombatTracker<Combat | null>
@@ -84,7 +81,7 @@ declare global {
 
         function getTexture(src: string): PIXI.Texture | PIXI.Spritesheet | null;
 
-        var actor: () => PTRActor<TokenDocumentPTR2e<Scene> | null> | null;
+        var actor: () => ActorPTR2e<TokenDocumentPTR2e<Scene> | null> | null;
     }
 
     const BUILD_MODE: "development" | "production";
