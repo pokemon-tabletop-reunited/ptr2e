@@ -48,6 +48,17 @@ interface ActionPTR2e extends foundry.abstract.DataModel {
     range: RangePTR2e[]
 }
 
+interface AttackPTR2e extends ActionPTR2e {
+    type: "attack"
+    typing: PokemonType,
+    category: PokemonCategory,
+    power: number | null,
+    accuracy: number | null,
+
+    contestType: ContestType,
+    contestEffect: string,
+}
+
 class RangePTR2e extends foundry.abstract.DataModel {
     static override defineSchema() {
         const fields = foundry.data.fields;
@@ -69,3 +80,4 @@ interface RangePTR2e extends foundry.abstract.DataModel {
 }
 
 export { ActionPTR2e, RangePTR2e }
+export type { AttackPTR2e }

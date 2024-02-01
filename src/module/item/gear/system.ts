@@ -1,8 +1,8 @@
-import { ItemSystemPTR2e, ItemPTR2e } from "@item";
+import { ItemSystemPTR2e, ItemPTR2e, GearPTR2e } from "@item";
 import { TimeDuration, ItemGrade, IdentificationSource, ItemRarity, ItemCarryType } from "@item/base/data.ts";
 
 class GearSystemPTR2e extends ItemSystemPTR2e {
-    static override defineSchema() {
+    static override defineSchema(): foundry.data.fields.DataSchema {
         const fields = foundry.data.fields;
         return Object.assign(super.defineSchema(), {
             cost: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
@@ -39,6 +39,8 @@ class GearSystemPTR2e extends ItemSystemPTR2e {
 }
 
 interface GearSystemPTR2e extends ItemSystemPTR2e {
+    type: "gear" | string
+
     cost: number,
     crafting: {
         skill: PTRSkill,
@@ -49,6 +51,8 @@ interface GearSystemPTR2e extends ItemSystemPTR2e {
     identification: IdentificationSource,
     quantity: number,
     rarity: ItemRarity,
+
+    parent: GearPTR2e;
 }
 
 class EquipmentData extends foundry.abstract.DataModel {

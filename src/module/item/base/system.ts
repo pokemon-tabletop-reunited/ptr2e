@@ -2,7 +2,7 @@ import { ActionPTR2e, ItemPTR2e } from "@item";
 import { sluggify } from "@utils";
 
 class ItemSystemPTR2e extends foundry.abstract.TypeDataModel {
-    static override defineSchema() {
+    static override defineSchema(): foundry.data.fields.DataSchema {
         const fields = foundry.data.fields;
         return {
             slug: new fields.StringField({ required: true }),
@@ -30,7 +30,7 @@ interface ItemSystemPTR2e extends foundry.abstract.TypeDataModel {
     description: string
     traits: Trait[]
 
-    parent: ItemPTR2e | null;
+    parent: ItemPTR2e;
 }
 
 export { ItemSystemPTR2e }

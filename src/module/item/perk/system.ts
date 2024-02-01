@@ -1,4 +1,4 @@
-import { ItemSystemPTR2e } from "@item";
+import { ItemSystemPTR2e, PerkPTR2e } from "@item";
 import { PTRNode } from "@item/base/data.ts";
 import { PTRPerkTreeNodeData } from "@module/canvas/perk-tree/perk-tree-node.mjs";
 
@@ -34,6 +34,8 @@ class PerkSystemPTR2e extends ItemSystemPTR2e {
 }
 
 interface PerkSystemPTR2e extends ItemSystemPTR2e {
+    type: "perk"
+
     node: PTRNode
 
     /** Perk point cost */
@@ -41,6 +43,8 @@ interface PerkSystemPTR2e extends ItemSystemPTR2e {
     prerequisites: Trait[]
 
     get fromNode(): Node | null;
+
+    parent: PerkPTR2e;
 }
 
 export { PerkSystemPTR2e };

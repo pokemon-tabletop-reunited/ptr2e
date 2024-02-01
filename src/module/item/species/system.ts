@@ -1,9 +1,9 @@
-import { ItemSystemPTR2e } from "@item";
+import { ItemSystemPTR2e, SpeciesPTR2e } from "@item";
 
 class SpeciesSystemPTR2e extends ItemSystemPTR2e {
     static override defineSchema() {
         const fields = foundry.data.fields;
-        return Object.assign(super.defineSchema(), {
+        const schema = Object.assign(super.defineSchema(), {
             number: new fields.NumberField({ required: true }),
             form: new fields.StringField({ required: false, nullable: true }),
             stats: new fields.SchemaField({
@@ -16,12 +16,20 @@ class SpeciesSystemPTR2e extends ItemSystemPTR2e {
             }),
             types: new fields.ArrayField(new fields.StringField())
         })
+        delete schema["container"];
+        delete schema["actions"];
+        
+        return schema;
     }
 }
 
 interface SpeciesSystemPTR2e extends ItemSystemPTR2e {
+    type: "species";
+
+    slug: string
     number: number
     form: string | null
+    description: string
 
     stats: {
         hp: number,
@@ -33,6 +41,13 @@ interface SpeciesSystemPTR2e extends ItemSystemPTR2e {
     }
 
     types: PokemonType[]
+    traits: Trait[]
+
+    parent: SpeciesPTR2e;
+
+    // Removed fields
+    container: never;
+    actions: never;
 }
 
 export { SpeciesSystemPTR2e };
