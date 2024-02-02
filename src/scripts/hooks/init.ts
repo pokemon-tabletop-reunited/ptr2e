@@ -26,7 +26,7 @@ export const Init = {
             CONFIG.Combatant.documentClass = CombatantPTR2e;
 
             CONFIG.ui.combat = PTRCONFIG.ui.combat
-            CONFIG.ui.perks = PTRCONFIG.ui.perks;
+            //CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
 
             // Define custom Entity classes
             CONFIG.Actor.documentClass = PTRCONFIG.Actor.documentClass;

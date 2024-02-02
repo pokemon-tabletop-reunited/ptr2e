@@ -16,7 +16,7 @@ const upperOrWordBoundariedLowerRE = new RegExp(`${upperCaseLetter}|(?:${wordBou
  * @param text The text to sluggify
  * @param [options.camel=null] The sluggification style to use
  */
-export function sluggify(text: string, { camel }: {camel: string | null} = { camel: null }): string {
+export function sluggify(text: string, { camel }: { camel: string | null } = { camel: null }): string {
     if (typeof text !== "string") {
         console.warn("Non-string argument passed to `sluggify`");
         return "";
@@ -49,6 +49,35 @@ export function sluggify(text: string, { camel }: {camel: string | null} = { cam
             .replace(/\s+/g, "");
 
     throw new Error(`I'm pretty sure that's not a real camel: ${camel}`);
+}
+
+export function formatSlug(slug: string) {
+    return capitalize(slug).replaceAll('-', ' ');
+}
+
+export function capitalize(input: string) {
+    var i, j, str, lowers, uppers;
+    str = input.replace(/([^\W_]+[^\s-]*) */g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+    });
+
+    // Certain minor words should be left lowercase unless 
+    // they are the first or last words in the string
+    lowers = ['A', 'An', 'The', 'And', 'But', 'Or', 'For', 'Nor', 'As', 'At',
+        'By', 'For', 'From', 'In', 'Into', 'Near', 'Of', 'On', 'Onto', 'To', 'With'];
+    for (i = 0, j = lowers.length; i < j; i++)
+        str = str.replace(new RegExp('\\s' + lowers[i] + '\\s', 'g'),
+            function (txt) {
+                return txt.toLowerCase();
+            });
+
+    // Certain words such as initialisms or acronyms should be left uppercase
+    uppers = ['Id', 'Tv'];
+    for (i = 0, j = uppers.length; i < j; i++)
+        str = str.replace(new RegExp('\\b' + uppers[i] + '\\b', 'g'),
+            uppers[i].toUpperCase());
+
+    return str;
 }
 
 // export async function findItemInCompendium({ type, name, compendium }) {

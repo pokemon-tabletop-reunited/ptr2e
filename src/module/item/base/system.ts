@@ -1,4 +1,4 @@
-import { ActionPTR2e, ItemPTR2e } from "@item";
+import { ActionPTR2e, ContainerPTR2e, ItemPTR2e } from "@item";
 import { sluggify } from "@utils";
 
 class ItemSystemPTR2e extends foundry.abstract.TypeDataModel {
@@ -14,11 +14,16 @@ class ItemSystemPTR2e extends foundry.abstract.TypeDataModel {
     }
 
     override prepareBaseData() {
-        this.slug ??= sluggify(this.name ?? "");
+        this.slug ||= sluggify(this.name);
+        this.traits = (this._source.traits as string[]).reduce((acc: Map<string, Trait>, traitSlug: string) => {
+            const trait = game.ptr.data.traits.get(traitSlug)
+            if (trait) acc.set(traitSlug, trait);
+            return acc;
+        }, new Map<string, Trait>());
     }
 
     get name() {
-        return this.parent?.name;
+        return this.parent.name;
     }
 }
 
@@ -26,9 +31,9 @@ interface ItemSystemPTR2e extends foundry.abstract.TypeDataModel {
     slug: string
 
     actions: Record<string, ActionPTR2e>
-    container: ItemPTR2e | null
+    container: ContainerPTR2e
     description: string
-    traits: Trait[]
+    traits: Map<string, Trait>
 
     parent: ItemPTR2e;
 }

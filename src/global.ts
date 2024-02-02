@@ -6,6 +6,7 @@ import PTRPerkTree from "@module/canvas/perk-tree/perk-tree.mjs";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { PTRCONFIG } from "@scripts/config/index.ts";
+import { sluggify } from "@utils";
 import type EnJSON from "static/lang/en.json";
 
 interface GamePTR2e
@@ -21,6 +22,12 @@ interface GamePTR2e
     > {
     ptr: {
         tree: PTRPerkTree;
+        data: {
+            traits: Map<string, Trait>;
+        }
+        util: {
+            sluggify: typeof sluggify;
+        };
     }
 }
 
@@ -51,7 +58,7 @@ declare global {
     interface ConfigPTR2e extends ConfiguredConfig {
         PTR: typeof PTRCONFIG;
         ui: ConfiguredConfig["ui"] & {
-            perks: new () => PerkDirectory;
+            perksTab: new () => PerkDirectory;
         }
     }
 

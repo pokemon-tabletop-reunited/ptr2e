@@ -1,4 +1,5 @@
-import { ContainerPTR2e, GearSystemPTR2e } from "@item";
+import { ContainerPTR2e } from "@item";
+import { GearSystemPTR2e } from "../gear/system.ts";
 
 class ContainerSystemPTR2e extends GearSystemPTR2e {
     static override defineSchema() {
