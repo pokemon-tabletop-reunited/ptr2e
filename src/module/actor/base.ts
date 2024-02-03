@@ -1,7 +1,7 @@
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { ActorSystemPTR2e } from "@actor";
 
-class ActorPTR2e<TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null> extends Actor<TParent> {
+class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null> extends Actor<TParent, TSystem> {
 
     get traits() {
         return this.system.traits;
@@ -63,8 +63,7 @@ class ActorPTR2e<TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e 
 
 }
 
-interface ActorPTR2e<TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null> extends Actor<TParent> {
-    system: ActorSystemPTR2e
+interface ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null> extends Actor<TParent, TSystem> {
     health: {
         percent: number
     }

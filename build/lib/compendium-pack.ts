@@ -1,0 +1,366 @@
+import { isObject, sluggify } from "@utils";
+import fs from "fs";
+import path from "path";
+import { getFilesRecursively, PackError } from "./helpers.ts";
+import { DBFolder, LevelDatabase } from "./level-database.ts";
+import { ActorPTR2e } from "@actor";
+import { ItemPTR2e } from "@item";
+import { PackEntry } from "./types.ts";
+import coreIconsJSON from "../core-icons.json" assert { type: "json" };
+
+type ActorSourcePTR2e = ActorPTR2e["_source"];
+type ItemSourcePTR2e = ItemPTR2e["_source"];
+
+interface PackMetadata {
+    system: string;
+    name: string;
+    path: string;
+    type: CompendiumDocumentType;
+}
+
+function isActorSource(docSource: PackEntry): docSource is ActorSourcePTR2e {
+    return (
+        "system" in docSource && isObject(docSource.system) && "items" in docSource && Array.isArray(docSource.items)
+    );
+}
+
+function isItemSource(docSource: PackEntry): docSource is ItemSourcePTR2e {
+    return (
+        "system" in docSource &&
+        "type" in docSource &&
+        isObject(docSource.system) &&
+        !("text" in docSource) && // JournalEntryPage
+        !isActorSource(docSource)
+    );
+}
+
+/**
+ * This is used to check paths to core icons to ensure correctness. The JSON file will need to be periodically refreshed
+ *  as upstream adds more icons.
+ */
+const coreIcons = new Set(coreIconsJSON);
+
+class CompendiumPack {
+    packId: string;
+    packDir: string;
+    documentType: CompendiumDocumentType;
+    systemId: string;
+    data: PackEntry[];
+    folders: DBFolder[];
+
+    static outDir = path.resolve(process.cwd(), "dist/packs");
+    static #namesToIds: {
+        [K in Extract<CompendiumDocumentType, "Actor" | "Item" | "JournalEntry" | "Macro" | "RollTable">]: Map<
+            string,
+            Map<string, string>
+        >;
+    } & Record<string, Map<string, Map<string, string>> | undefined> = {
+            Actor: new Map(),
+            Item: new Map(),
+            JournalEntry: new Map(),
+            Macro: new Map(),
+            RollTable: new Map(),
+        };
+
+    static #packsMetadata = JSON.parse(fs.readFileSync("static/system.json", "utf-8")).packs as PackMetadata[];
+
+    static LINK_PATTERNS = {
+        world: /@(?:Item|JournalEntry|Actor)\[[^\]]+\]|@Compendium\[world\.[^\]]{16}\]|@UUID\[(?:Item|JournalEntry|Actor)/g,
+        compendium:
+            /@Compendium\[ptr2e\.(?<packName>[^.]+)\.(?<docType>Actor|JournalEntry|Item|Macro|RollTable)\.(?<docName>[^\]]+)\]\{?/g,
+        uuid: /@UUID\[Compendium\.ptr2e\.(?<packName>[^.]+)\.(?<docType>Actor|JournalEntry|Item|Macro|RollTable)\.(?<docName>[^\]]+)\]\{?/g,
+    };
+
+    constructor(packDir: string, parsedData: unknown[], parsedFolders: unknown[]) {
+        const metadata = CompendiumPack.#packsMetadata.find(
+            (pack) => path.basename(pack.path) === path.basename(packDir),
+        );
+        if (metadata === undefined) {
+            throw PackError(`Compendium at ${packDir} has no metadata in the local system.json file.`);
+        }
+        this.systemId = metadata.system;
+        this.packId = metadata.name;
+        this.documentType = metadata.type;
+
+        if (!this.#isFoldersData(parsedFolders)) {
+            throw PackError(`Folder data supplied for ${this.packId} does not resemble folder source data.`);
+        }
+        this.folders = parsedFolders;
+
+        if (!this.#isPackData(parsedData)) {
+            throw PackError(`Data supplied for ${this.packId} does not resemble Foundry document source data.`);
+        }
+
+        this.packDir = packDir;
+
+        CompendiumPack.#namesToIds[this.documentType]?.set(this.packId, new Map());
+        const packMap = CompendiumPack.#namesToIds[this.documentType]?.get(this.packId);
+        if (!packMap) {
+            throw PackError(`Compendium ${this.packId} (${packDir}) was not found.`);
+        }
+
+        parsedData.sort((a, b) => {
+            if (a._id === b._id) {
+                throw PackError(`_id collision in ${this.packId}: ${a._id}`);
+            }
+            return a._id?.localeCompare(b._id ?? "") ?? 0;
+        });
+
+        this.data = parsedData;
+
+        for (const docSource of this.data) {
+            // Populate CompendiumPack.namesToIds for later conversion of compendium links
+            packMap.set(docSource.name, docSource._id ?? "");
+
+            // Check img paths
+            if ("img" in docSource && typeof docSource.img === "string") {
+                const imgPaths = [
+                    docSource.img,
+                    isActorSource(docSource)
+                        ? docSource.items.flatMap((i) => [i.img])
+                        : [],
+                ].flat();
+                const documentName = docSource.name;
+                for (const imgPath of imgPaths) {
+                    if (imgPath.startsWith("data:image")) {
+                        const imgData = imgPath.slice(0, 64);
+                        const msg = `${documentName} (${this.packId}) has base64-encoded image data: ${imgData}...`;
+                        throw PackError(msg);
+                    }
+
+                    const isCoreIconPath = coreIcons.has(imgPath);
+                    const repoImgPath = path.resolve(
+                        process.cwd(),
+                        "static",
+                        decodeURIComponent(imgPath).replace("systems/pf2e/", ""),
+                    );
+                    if (!isCoreIconPath && !fs.existsSync(repoImgPath)) {
+                        throw PackError(`${documentName} (${this.packId}) has an unknown image path: ${imgPath}`);
+                    }
+                    if (!(imgPath === "" || imgPath.match(/\.(?:svg|webp)$/))) {
+                        throw PackError(`${documentName} (${this.packId}) references a non-WEBP/SVG image: ${imgPath}`);
+                    }
+                }
+            }
+
+            if ("type" in docSource) {
+                if (docSource.type === "script") {
+                    // Default macro ownership to 1
+                    docSource.ownership ??= { default: 1 };
+                }
+            }
+        }
+    }
+
+    static loadJSON(dirPath: string): CompendiumPack {
+        const filePaths = getFilesRecursively(dirPath);
+        const parsedData = filePaths.flatMap((path) => this.loadJSONObjects(path, dirPath));
+
+        const folders = ((): DBFolder[] => {
+            const foldersFile = path.resolve(dirPath, "_folders.json");
+            if (fs.existsSync(foldersFile)) {
+                const jsonString = fs.readFileSync(foldersFile, "utf-8");
+                const foldersSource: DBFolder[] = (() => {
+                    try {
+                        return JSON.parse(jsonString);
+                    } catch (error) {
+                        if (error instanceof Error) {
+                            throw PackError(`File ${foldersFile} could not be parsed: ${error.message}`);
+                        }
+                    }
+                })();
+
+                return foldersSource;
+            }
+            return [];
+        })();
+
+        const dbFilename = path.basename(dirPath);
+        return new CompendiumPack(dbFilename, parsedData, folders);
+    }
+
+    static loadJSONObjects(filePath: string, dirPath: string): PackEntry[]  {
+        const jsonString = fs.readFileSync(filePath, "utf-8");
+        const packSource: PackEntry | PackEntry[] = (() => {
+            try {
+                return JSON.parse(jsonString);
+            } catch (error) {
+                if (error instanceof Error) {
+                    throw PackError(`File ${filePath} could not be parsed: ${error.message}`);
+                }
+            }
+        })();
+
+        // If the json is an array, write all documents to individual files, delete the original file, and then parse the individual files.
+        if (Array.isArray(packSource)) {
+            for (const doc of packSource) {
+                const documentName = doc?.name;
+                if (documentName === undefined) {
+                    throw PackError(`Document contained in ${filePath} has no name.`);
+                }
+
+                const filenameForm = sluggify(documentName).concat(".json");
+                const outPath = path.resolve(dirPath, filenameForm);
+                if (fs.existsSync(outPath)) {
+                    console.warn(`File ${outPath} already exists and will be overwritten.`);
+                }
+                fs.writeFileSync(outPath, JSON.stringify(doc, null, '\t'));
+            }
+            fs.rmSync(filePath, { force: true });
+
+            const filePaths = getFilesRecursively(dirPath);
+            return filePaths.flatMap((path) => this.loadJSONObjects(path, dirPath));
+        }
+
+        const documentName = packSource?.name;
+        if (documentName === undefined) {
+            throw PackError(`Document contained in ${filePath} has no name.`);
+        }
+
+        const filenameForm = sluggify(documentName).concat(".json");
+        if (path.basename(filePath) !== filenameForm) {
+            throw PackError(`Filename at ${filePath} does not reflect document name (should be ${filenameForm}).`);
+        }
+
+
+        return [packSource];
+    }
+
+    finalizeAll(): PackEntry[] {
+        return this.data.map((d) => JSON.parse(this.#finalize(d)));
+    }
+
+    #finalize(docSource: PackEntry): string {
+        // Replace all compendium documents linked by name to links by ID
+        const stringified = JSON.stringify(docSource);
+        const worldItemLink = CompendiumPack.LINK_PATTERNS.world.exec(stringified);
+        if (worldItemLink !== null) {
+            throw PackError(`${docSource.name} (${this.packId}) has a link to a world item: ${worldItemLink[0]}`);
+        }
+
+        docSource.flags ??= {};
+        if (isActorSource(docSource)) {
+            docSource.effects = [];
+            docSource.flags.core = { sourceId: this.#sourceIdOf(docSource._id ?? "", { docType: "Actor" }) };
+        }
+
+        if (isItemSource(docSource)) {
+            docSource.effects = [];
+            docSource.flags.core = { sourceId: this.#sourceIdOf(docSource._id ?? "", { docType: "Item" }) };
+            docSource.system.slug ??= sluggify(docSource.name);
+        }
+
+        const replace = (match: string, packId: string, docType: string, docName: string): string => {
+            if (match.includes("JournalEntryPage")) return match;
+
+            const namesToIds = CompendiumPack.#namesToIds[docType]?.get(packId);
+            const link = match.replace(/\{$/, "");
+            if (namesToIds === undefined) {
+                throw PackError(`${docSource.name} (${this.packId}) has a bad pack reference: ${link}`);
+            }
+
+            const documentId: string | undefined = namesToIds.get(docName);
+            if (documentId === undefined) {
+                throw PackError(`${docSource.name} (${this.packId}) has broken link to ${docName}: ${match}`);
+            }
+            const sourceId = this.#sourceIdOf(documentId, { packId, docType });
+            const labelBraceOrFullLabel = match.endsWith("{") ? "{" : `{${docName}}`;
+
+            return `@UUID[${sourceId}]${labelBraceOrFullLabel}`;
+        };
+
+        return JSON.stringify(docSource)
+            .replace(CompendiumPack.LINK_PATTERNS.uuid, replace)
+            .replace(CompendiumPack.LINK_PATTERNS.compendium, replace);
+    }
+
+    #sourceIdOf(documentId: string, { packId, docType }: { packId?: string; docType: "Actor" }): CompendiumActorUUID;
+    #sourceIdOf(documentId: string, { packId, docType }: { packId?: string; docType: "Item" }): CompendiumItemUUID;
+    #sourceIdOf(documentId: string, { packId, docType }: { packId?: string; docType: string }): string;
+    #sourceIdOf(documentId: string, { packId = this.packId, docType }: { packId?: string; docType: string }): string {
+        return `Compendium.${this.systemId}.${packId}.${docType}.${documentId}`;
+    }
+
+    async save(asJson?: boolean): Promise<number> {
+        if (asJson) {
+            return this.saveAsJSON();
+        }
+        if (!fs.lstatSync(CompendiumPack.outDir, { throwIfNoEntry: false })?.isDirectory()) {
+            fs.mkdirSync(CompendiumPack.outDir);
+        }
+        const packDir = path.join(CompendiumPack.outDir, this.packDir);
+
+        // If the old folder is not removed the new data will be inserted into the existing db
+        const stats = fs.lstatSync(packDir, { throwIfNoEntry: false });
+        if (stats?.isDirectory()) {
+            fs.rmSync(packDir, { recursive: true });
+        }
+
+        const db = new LevelDatabase(packDir, { packName: path.basename(packDir) });
+        //@ts-expect-error
+        await db.createPack(this.finalizeAll(), this.folders);
+        console.log(`Pack "${this.packId}" with ${this.data.length} entries built successfully.`);
+
+        return this.data.length;
+    }
+
+    async saveAsJSON(): Promise<number> {
+        const outDir = path.resolve(process.cwd(), "json-assets/packs");
+        if (!fs.lstatSync(outDir, { throwIfNoEntry: false })?.isDirectory()) {
+            fs.mkdirSync(outDir, { recursive: true });
+        }
+
+        const filePath = path.resolve(outDir, this.packDir);
+        const outFile = filePath.concat(".json");
+        if (fs.existsSync(outFile)) {
+            fs.rmSync(outFile, { force: true });
+        }
+        fs.writeFileSync(outFile, JSON.stringify(this.finalizeAll()));
+
+        // Save folders if available
+        if (this.folders.length > 0) {
+            const folderFile = filePath.concat("_folders.json");
+            if (fs.existsSync(folderFile)) {
+                fs.rmSync(folderFile, { force: true });
+            }
+            fs.writeFileSync(folderFile, JSON.stringify(this.folders));
+        }
+        console.log(`File "${this.packDir}.json" with ${this.data.length} entries created successfully.`);
+
+        return this.data.length;
+    }
+
+    #isDocumentSource(maybeDocSource: unknown): maybeDocSource is PackEntry {
+        if (!isObject(maybeDocSource)) return false;
+        const checks = Object.entries({
+            name: (data: { name?: unknown }) => typeof data.name === "string",
+        });
+
+        const failedChecks = checks
+            .map(([key, check]) => (check(maybeDocSource as { name?: unknown }) ? null : key))
+            .filter((key) => key !== null);
+
+        if (failedChecks.length > 0) {
+            throw PackError(
+                `Document source in (${this.packId}) has invalid or missing keys: ${failedChecks.join(", ")}`,
+            );
+        }
+
+        return true;
+    }
+
+    #isPackData(packData: unknown[]): packData is PackEntry[] {
+        return packData.every((maybeDocSource: unknown) => this.#isDocumentSource(maybeDocSource));
+    }
+
+    #isFolderSource(maybeFolderSource: unknown): maybeFolderSource is DBFolder {
+        return isObject(maybeFolderSource) && "_id" in maybeFolderSource && "folder" in maybeFolderSource;
+    }
+
+    #isFoldersData(folderData: unknown[]): folderData is DBFolder[] {
+        return folderData.every((maybeFolderData) => this.#isFolderSource(maybeFolderData as DBFolder));
+    }
+}
+
+export { CompendiumPack, isActorSource, isItemSource, PackError };
+export type { PackMetadata, ItemSourcePTR2e };

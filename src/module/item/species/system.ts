@@ -41,7 +41,7 @@ interface SpeciesSystemPTR2e extends ItemSystemPTR2e {
     }
 
     types: PokemonType[]
-    traits: Trait[]
+    traits: Map<string, Trait>
 
     parent: SpeciesPTR2e;
 

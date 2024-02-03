@@ -1,3 +1,5 @@
+import TypeDataModel from "../../../common/abstract/type-data.js";
+import { ActorSchema } from "../../../common/documents/actor.js";
 import type { ClientBaseActor } from "./client-base-mixes.d.ts";
 
 declare global {
@@ -23,7 +25,7 @@ declare global {
      * let actor = game.actors.get(actorId);
      * ```
      */
-    class Actor<TParent extends TokenDocument | null = TokenDocument | null> extends ClientBaseActor<TParent> {
+    class Actor<TParent extends TokenDocument | null = TokenDocument | null, TSchema extends TypeDataModel = TypeDataModel> extends ClientBaseActor<TParent> {
         /** An object that tracks which tracks the changes to the data model which were applied by active effects */
         overrides: Omit<DeepPartial<this["_source"]>, "prototypeToken">;
 
@@ -206,7 +208,7 @@ declare global {
         ): void;
     }
 
-    interface Actor<TParent extends TokenDocument | null = TokenDocument | null> extends ClientBaseActor<TParent> {
+    interface Actor<TParent extends TokenDocument | null = TokenDocument | null, TSchema extends TypeDataModel = TypeDataModel> extends ClientBaseActor<TParent> {
         readonly effects: foundry.abstract.EmbeddedCollection<ActiveEffect<this>>;
         readonly items: foundry.abstract.EmbeddedCollection<Item<this>>;
 
@@ -215,6 +217,9 @@ declare global {
         get uuid(): ActorUUID;
 
         get folder(): Folder<Actor<null>> | null;
+
+        system: TSchema;
+        _source: SourceFromSchema<ActorSchema<string, TSchema>>;
     }
 
     namespace Actor {

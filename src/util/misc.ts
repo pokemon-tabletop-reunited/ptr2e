@@ -113,7 +113,7 @@ export function capitalize(input: string) {
 //     return species.filter(filterQuery);
 // }
 
-export function isObject(obj: any) {
+export function isObject(obj: any) : obj is Record<string, any> {
     return obj !== null && typeof obj === "object";
 }
 
@@ -165,3 +165,8 @@ export function sortStringRecord(record: Record<string, string>) {
 //     }
 //     return found;
 // }
+
+/** Check if a value is present in the provided array. Especially useful for checking against literal tuples */
+export function tupleHasValue<const A extends readonly unknown[]>(array: A, value: unknown): value is A[number] {
+    return array.includes(value);
+}

@@ -1,4 +1,4 @@
-import { ActorPTR2e } from "@actor";
+import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
 import { CombatPTR2e, CombatantPTR2e, CombatTrackerPTR2e } from "@combat";
 import { ItemPTR2e, ItemSystemPTR2e } from "@item";
 import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
@@ -11,14 +11,14 @@ import type EnJSON from "static/lang/en.json";
 
 interface GamePTR2e
     extends Game<
-        ActorPTR2e<null>,
-        Actors<ActorPTR2e<null>>,
+        ActorPTR2e<ActorSystemPTR2e, null>,
+        Actors<ActorPTR2e<ActorSystemPTR2e, null>>,
         ChatMessage,
         Combat,
         ItemPTR2e<ItemSystemPTR2e, null>,
         Macro,
         Scene,
-        User<ActorPTR2e<null>>
+        User<ActorPTR2e<ActorSystemPTR2e, null>>
     > {
     ptr: {
         tree: PTRPerkTree;
@@ -77,7 +77,7 @@ declare global {
         var fu: typeof foundry.utils;
 
         var ui: FoundryUI<
-            ActorDirectory<ActorPTR2e<null>>,
+            ActorDirectory<ActorPTR2e<ActorSystemPTR2e, null>>,
             ItemDirectory<ItemPTR2e<ItemSystemPTR2e, null>>,
             ChatLog,
             CompendiumDirectory,
@@ -88,7 +88,7 @@ declare global {
 
         function getTexture(src: string): PIXI.Texture | PIXI.Spritesheet | null;
 
-        var actor: () => ActorPTR2e<TokenDocumentPTR2e<Scene> | null> | null;
+        var actor: () => ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e<Scene> | null> | null;
     }
 
     const BUILD_MODE: "development" | "production";

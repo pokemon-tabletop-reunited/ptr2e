@@ -5,9 +5,11 @@
     "private": true,
     "type": "module",
     "scripts": {
-        "build": "npm run clean && vite build",
+        "build": "npm run clean && npm run build:packs && vite build",
+        "build:packs": "tsx ./build/build-packs.ts",
+        "build:packs:json": "tsx ./build/build-packs.ts json",
         "clean": "tsx ./build/clean.ts",
-        "watch": "npm run clean && vite build --watch --mode development",
+        "watch": "npm run clean && npm run build:packs && vite build --watch --mode development",
         "hot": "vite serve",
         "link": "tsx ./build/link-foundry.ts"
     },
@@ -63,6 +65,7 @@
         "@yaireo/tagify": "4.16.4",
         "chart.js": "^4.4.1",
         "chartjs-plugin-datalabels": "^2.2.0",
-        "pixi.js": "^5.3.3"
+        "pixi.js": "^5.3.3",
+        "remeda": "^1.40.0"
     }
 }

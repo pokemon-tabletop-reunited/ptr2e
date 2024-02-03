@@ -1,0 +1,35 @@
+{
+	"_id": "bRVvaMk5KF7yL6vM",
+	"name": "Storm Drain",
+	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
+	"system": {
+		"slug": "storm-drain",
+		"actions": [
+			{
+				"slug": "storm-drain",
+				"name": "Storm Drain",
+				"description": "The triggering attack hits the user instead, dealing no damage and applying no effects. Additionally, the user raises their SPATK stage by +1 for 2 activations.",
+				"traits": [
+					"defensive",
+					"draw-in"
+				],
+				"type": "combat",
+				"range": null,
+				"cost": {
+					"activation": "complex",
+					"powerPoints": 0,
+					"trigger": "A creature within 10m of the user uses a Water-type attack.",
+					"delay": null,
+					"priority": "1"
+				}
+			}
+		]
+	},
+	"type": "ability",
+	"flags": {
+		"core": {
+			"sourceId": "Compendium.ptr2e.core-abilities.Item.bRVvaMk5KF7yL6vM"
+		}
+	},
+	"effects": []
+}
