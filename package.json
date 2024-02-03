@@ -11,7 +11,9 @@
         "clean": "tsx ./build/clean.ts",
         "watch": "npm run clean && npm run build:packs && vite build --watch --mode development",
         "hot": "vite serve",
-        "link": "tsx ./build/link-foundry.ts"
+        "link": "tsx ./build/link-foundry.ts",
+        "test": "jest",
+        "prettier:less": "prettier --check src/styles"
     },
     "devDependencies": {
         "@pixi/graphics-smooth": "^1.1.0",
@@ -43,6 +45,7 @@
         "jest": "^29.7.0",
         "jest-each": "^29.7.0",
         "jsdom": "^23.1.0",
+        "less": "^4.2.0",
         "peggy": "^3.0.2",
         "pixi.js": "7.2.4",
         "prettier": "3.1.1",

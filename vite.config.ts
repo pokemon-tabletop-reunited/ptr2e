@@ -35,7 +35,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
             },
             ...viteStaticCopy({
                 targets: [
-                    {src: "README.md", dest: "."},
+                    { src: "README.md", dest: "." },
                 ]
             })
         )
@@ -83,7 +83,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
         )
     }
 
-    if(command === "serve") {
+    if (command === "serve") {
         const message = "This file is for a running vite dev server and is not copied to a build";
         fs.writeFileSync("./index.html", `<h1>${message}</h1>\n`);
         if (!fs.existsSync("./styles")) fs.mkdirSync("./styles");
@@ -91,8 +91,6 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
         fs.writeFileSync("./ptr2e.mjs", `/** ${message} */\n\nimport "./src/ptr2e.ts";\n`);
         fs.writeFileSync("./vendor.mjs", `/** ${message} */\n`);
     }
-
-    const reEscape = (s: string) => s.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
 
     return {
         base: command === "build" ? "./" : "/systems/ptr2e/",
@@ -105,8 +103,10 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
         esbuild: { keepNames: true },
         build: {
             outDir,
+            assetsDir: "static",
             emptyOutDir: false,
             minify: false,
+            cssMinify: buildMode === "production",
             sourcemap: buildMode === "development",
             lib: {
                 name: "ptr2e",
@@ -115,17 +115,6 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
                 fileName: "ptr2e",
             },
             rollupOptions: {
-                external: new RegExp(
-                    [
-                        "(?:",
-                        reEscape("../../icons/weapons/"),
-                        "[-a-z/]+",
-                        reEscape(".webp"),
-                        "|",
-                        reEscape("../ui/parchment.jpg"),
-                        ")$",
-                    ].join(""),
-                ),
                 output: {
                     assetFileNames: ({ name }): string => (name === "style.css" ? "styles/ptr2e.css" : name ?? ""),
                     chunkFileNames: "[name].mjs",
@@ -142,11 +131,11 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
             port: 30001,
             open: "/game",
             proxy: {
-                "^(?!/systems/ptr2e/)": "http://localhost:30000/",
                 "/socket.io": {
                     target: "ws://localhost:30000",
                     ws: true,
                 },
+                "^(?!/systems/ptr2e/)": "http://localhost:30000/",
             }
         },
         plugins,
