@@ -6,7 +6,8 @@ class ItemSystemPTR2e extends foundry.abstract.TypeDataModel {
         const fields = foundry.data.fields;
         return {
             slug: new fields.StringField({ required: true }),
-            container: new fields.ForeignDocumentField(ItemPTR2e, { required: false, nullable: true }),
+            //TODO: Update in p2
+            container: new fields.DocumentUUIDField({ required: false, nullable: true }),
             actions: new fields.ArrayField(new fields.EmbeddedDataField(ActionPTR2e)),
             description: new fields.HTMLField({ required: false, nullable: true }),
             traits: new fields.SetField(new fields.StringField()),
@@ -20,6 +21,8 @@ class ItemSystemPTR2e extends foundry.abstract.TypeDataModel {
             if (trait) acc.set(traitSlug, trait);
             return acc;
         }, new Map<string, Trait>());
+
+        this.container = fromUuidSync(this._source.container as string, this.parent as ClientDocument | null) as ContainerPTR2e | null;
     }
 
     get name() {
@@ -31,7 +34,7 @@ interface ItemSystemPTR2e extends foundry.abstract.TypeDataModel {
     slug: string
 
     actions: Record<string, ActionPTR2e>
-    container: ContainerPTR2e
+    container: ContainerPTR2e | null
     description: string
     traits: Map<string, Trait>
 

@@ -1,15 +1,8 @@
-import { ItemSystemPTR2e, MovePTR2e } from "@item";
-import { AttackPTR2e } from "@module/action.ts";
+import { MovePTR2e } from "@item";
+import { HasBase } from "@module/data/index.ts";
 
-class MoveSystemPTR2e extends ItemSystemPTR2e {
+abstract class MoveSystem extends HasBase(foundry.abstract.TypeDataModel) {
+    declare parent: MovePTR2e;
 }
 
-interface MoveSystemPTR2e extends ItemSystemPTR2e {
-    type: "move";
-
-    actions: Record<string, AttackPTR2e>;
-
-    parent: MovePTR2e;
-}
-
-export { MoveSystemPTR2e };
+export { MoveSystem }

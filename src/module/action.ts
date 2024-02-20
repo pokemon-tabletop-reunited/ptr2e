@@ -10,7 +10,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
             traits: new fields.ArrayField(new fields.StringField()),
             type: new fields.StringField({
                 required: true, choices: () => [
-                    "attack", "camping", "downtime", "exploration", "passive", "combat"
+                    "attack", "camping", "downtime", "exploration", "passive", "generic"
                 ]
             }),
             range: new fields.EmbeddedDataField(RangePTR2e, { required: false, nullable: true }),

@@ -1,28 +1,29 @@
 import { ContainerPTR2e } from "@item";
-import { GearSystemPTR2e } from "../gear/system.ts";
+import { HasContainer, HasDescription, HasSlug, HasTraits, HasGearData } from "@module/data/index.ts";
 
-class ContainerSystemPTR2e extends GearSystemPTR2e {
-    static override defineSchema() {
+const ContainerExtension = HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))))
+
+abstract class ContainerSystem extends HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel))))) {
+    declare parent: ContainerPTR2e;
+
+    /**
+     * Whether the container is collapsed.
+     * @defaultValue `false`
+     */
+    abstract collapsed: boolean;
+
+    declare _source: InstanceType<typeof ContainerExtension>['_source'] & {
+        collapsed: boolean;
+    }
+
+    static override defineSchema(): foundry.data.fields.DataSchema {
         const fields = foundry.data.fields;
-        const schema = Object.assign(super.defineSchema(), {
-            collapsed: new fields.BooleanField({required: true, initial: false}),
-        })
-        delete schema["actions"];
-        delete schema["identification"];
-        return schema;
+        return {
+            ...super.defineSchema(),
+
+            collapsed: new fields.BooleanField({ required: true, initial: false }),
+        };
     }
 }
 
-interface ContainerSystemPTR2e extends GearSystemPTR2e {
-    type: "container";
-
-    collapsed: boolean;
-
-    parent: ContainerPTR2e;
-
-    // Removed fields
-    actions: never;
-    identification: never;
-}
-
-export { ContainerSystemPTR2e };
+export { ContainerSystem }

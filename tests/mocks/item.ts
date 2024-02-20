@@ -24,7 +24,7 @@ export class MockItem {
         return this._source.name;
     }
 
-    get system(): ItemSystemPTR2e {
+    get system() {
         return this._source.system;
     }
 

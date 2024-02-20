@@ -1,12 +1,7 @@
-import { EquipmentPTR2e, GearSystemPTR2e } from "@item";
+import { EquipmentPTR2e, GearSystem} from "@item";
 
-class EquipmentSystemPTR2e extends GearSystemPTR2e {
+abstract class EquipmentSystem extends GearSystem {
+    declare parent: EquipmentPTR2e;
 }
 
-interface EquipmentSystemPTR2e extends GearSystemPTR2e {
-    type: "equipment";
-
-    parent: EquipmentPTR2e;
-}
-
-export { EquipmentSystemPTR2e };
+export { EquipmentSystem };

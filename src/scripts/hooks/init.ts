@@ -10,6 +10,10 @@ export const Init = {
             console.log('PTR 2e | Initializing');
             // Add initialization code here
 
+            // By default, foundry.abstract.DataModel.defineSchema is coded to throw an error to remind developers to override it.
+            // However, this messes up defineSchema() chaining in template mixins, so we'll scrap that behavior.
+            foundry.abstract.DataModel.defineSchema = () => ({});
+
             // Add actor() to window
             /** @returns {Actor?} */
             window.actor = function () {
@@ -33,6 +37,7 @@ export const Init = {
             CONFIG.Item.documentClass = PTRCONFIG.Item.documentClass;
             CONFIG.Actor.dataModels = PTRCONFIG.Actor.dataModels;
             CONFIG.Item.dataModels = PTRCONFIG.Item.dataModels;
+
 
             // Register custom sheets
             {

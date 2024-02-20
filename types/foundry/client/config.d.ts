@@ -122,7 +122,7 @@ declare global {
                     }
                 >
             >;
-            dataModels: Record<string, typeof foundry.abstract.TypeDataModel>;
+            dataModels: Record<string, Partial<foundry.abstract.TypeDataModel>>;
             typeIcons: Record<string, string>;
             typeLabels: Record<string, string | undefined>;
         };
