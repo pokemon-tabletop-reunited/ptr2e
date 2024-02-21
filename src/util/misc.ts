@@ -1,3 +1,6 @@
+import { BracketedValue } from "@module/effects/data.ts";
+import * as R from "remeda";
+
 const wordCharacter = String.raw`[\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]`;
 const nonWordCharacter = String.raw`[^\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]`;
 const nonWordCharacterRE = new RegExp(nonWordCharacter, "gu");
@@ -113,9 +116,20 @@ export function capitalize(input: string) {
 //     return species.filter(filterQuery);
 // }
 
-export function isObject(obj: any) : obj is Record<string, any> {
-    return obj !== null && typeof obj === "object";
+export function isBracketedValue(value: unknown): value is BracketedValue {
+    return (
+        R.isObject(value) && Array.isArray(value.brackets) && (typeof value.field === "string" || !("fields" in value))
+    );
 }
+
+/** Short form of type and non-null check */
+function isObject<T extends object>(value: unknown): value is Record<string, unknown>;
+function isObject<T extends object>(value: unknown): value is DeepPartial<T>;
+function isObject<T extends string>(value: unknown): value is { [K in T]?: unknown };
+function isObject(value: unknown): boolean {
+    return typeof value === "object" && value !== null;
+}
+export { isObject };
 
 export function isItemUUID(uuid: any) {
     if (typeof uuid !== "string") return false;

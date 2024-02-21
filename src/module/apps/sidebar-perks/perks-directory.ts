@@ -1,6 +1,6 @@
-import { ItemPTR2e, ItemSystemPTR2e } from "@item";
+import { ItemPTR2e, ItemSystemPTR } from "@item";
 
-class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR2e, null>> {
+class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> {
 
     override get title() {
         return `${game.i18n.localize("DOCUMENT.Perks")} Directory`;
@@ -85,7 +85,7 @@ class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR2e, null>> {
     }
 }
 
-interface PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR2e, null>> {
+interface PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> {
 
 }
 

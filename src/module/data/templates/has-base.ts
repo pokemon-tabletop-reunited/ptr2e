@@ -1,9 +1,9 @@
-import { TemplateConstructor } from './DataTemplate.ts';
-import HasActions from './HasActions.ts';
-import HasContainer from './HasContainer.ts';
-import HasDescription from './HasDescription.ts';
-import HasSlug from './HasSlug.ts';
-import HasTraits from './HasTraits.ts';
+import { TemplateConstructor } from './data-template.ts';
+import HasActions from './has-actions.ts';
+import HasContainer from './has-container.ts';
+import HasDescription from './has-description.ts';
+import HasSlug from './has-slug.ts';
+import HasTraits from './has-traits.ts';
 
 /**
  * Adds the base properties of *almost* every item together to target data model.

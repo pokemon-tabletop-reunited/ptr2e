@@ -1,4 +1,4 @@
-import { TemplateConstructor } from './templates/DataTemplate.ts';
+import { TemplateConstructor } from './templates/data-template.ts';
 
 /**
  * Extracted data properties from the Gear data model, so that they can be used in other data models that don't need the full Gear data model.

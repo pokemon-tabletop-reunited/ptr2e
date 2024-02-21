@@ -1,8 +1,9 @@
 import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
 import { CombatPTR2e, CombatantPTR2e, CombatTrackerPTR2e } from "@combat";
-import { ItemPTR2e, ItemSystemPTR2e } from "@item";
+import { ItemPTR2e, ItemSystemPTR } from "@item";
+import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
-import PTRPerkTree from "@module/canvas/perk-tree/perk-tree.mjs";
+import { PerkTree } from "@module/canvas/perk-tree/perk-tree.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { PTRCONFIG } from "@scripts/config/index.ts";
@@ -15,19 +16,20 @@ interface GamePTR2e
         Actors<ActorPTR2e<ActorSystemPTR2e, null>>,
         ChatMessage,
         Combat,
-        ItemPTR2e<ItemSystemPTR2e, null>,
+        ItemPTR2e<ItemSystemPTR, null>,
         Macro,
         Scene,
         User<ActorPTR2e<ActorSystemPTR2e, null>>
     > {
     ptr: {
-        tree: PTRPerkTree;
+        tree: PerkTree;
         data: {
             traits: Map<string, Trait>;
         }
         util: {
             sluggify: typeof sluggify;
         };
+        perks: PerkManager;
     }
 }
 
@@ -78,7 +80,7 @@ declare global {
 
         var ui: FoundryUI<
             ActorDirectory<ActorPTR2e<ActorSystemPTR2e, null>>,
-            ItemDirectory<ItemPTR2e<ItemSystemPTR2e, null>>,
+            ItemDirectory<ItemPTR2e<ItemSystemPTR, null>>,
             ChatLog,
             CompendiumDirectory,
             CombatTracker<Combat | null>

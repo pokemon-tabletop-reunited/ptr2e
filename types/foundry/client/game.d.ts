@@ -32,6 +32,8 @@ declare global {
         // Undocumented
         _documentsReady?: boolean;
 
+        documentTypes: Record<string, string[]>;
+
         /** The object of world data passed from the server */
         data: {
             actors: TActor["_source"][];

@@ -8,7 +8,6 @@ import { MoveSystem } from "./move/system.ts";
 import { PerkSystem } from "./perk/system.ts";
 import { SpeciesSystem } from "./species/system.ts";
 import { WeaponSystem } from "./weapon/system.ts";
-import { ItemSystemPTR2e } from "./base/system.ts";
 
 // Base
 export * from "./base/document.ts";
@@ -36,7 +35,7 @@ export type {
     WeaponPTR2e,
 }
 
-export type ItemSystemPTR = AbilitySystem | ConsumableSystem | ContainerSystem | EquipmentSystem | GearSystem | MoveSystem | PerkSystem | SpeciesSystem | WeaponSystem | ItemSystemPTR2e;
+export type ItemSystemPTR = AbilitySystem | ConsumableSystem | ContainerSystem | EquipmentSystem | GearSystem | MoveSystem | PerkSystem | SpeciesSystem | WeaponSystem;
 
 // Sheets
 export * from "./base/sheet.ts";
@@ -47,7 +46,6 @@ export { PerkSheetPTR2e } from "./perk/sheet.ts";
 export { SpeciesSheetPTR2e } from "./species/sheet.ts";
 
 // Systems
-export * from "./base/system.ts";
 export { AbilitySystem } from "./ability/system.ts";
 export { ContainerSystem } from "./container/system.ts";
 export { GearSystem } from "./gear/system.ts";
@@ -59,5 +57,3 @@ export { WeaponSystem } from "./weapon/system.ts";
 
 // Other Data Models
 export { ActionPTR2e, RangePTR2e } from "../action.ts";
-
-export * as data from "./base/data.ts";

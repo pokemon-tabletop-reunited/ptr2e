@@ -557,6 +557,8 @@ export class ArrayField<
      */
     protected _validateElements(value: unknown[], options?: Record<string, unknown>): DataModelValidationFailure | void;
 
+    protected _validateElement(value: unknown, options?: Record<string, unknown>): DataModelValidationFailure | void;
+
     override initialize(
         value: JSONValue,
         model: ConstructorOf<abstract.DataModel>,
@@ -570,6 +572,8 @@ export class ArrayField<
         data?: object,
         options?: Record<string, unknown>,
     ): unknown;
+
+    migrateSource(sourceData: object, fieldData: any): void;
 }
 
 export interface ArrayField<

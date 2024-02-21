@@ -3,6 +3,12 @@ interface ActorSynthetics {
     modifierAdjustments: ModifierAdjustmentSynthetics;
     statisticsModifiers: ModifierSynthetics;
     damageDice: DamageDiceSynthetics;
+    preparationWarnings: {
+        /** Adds a new preparation warning to be printed when flushed. These warnings are de-duped. */
+        add: (warning: string) => void;
+        /** Prints all preparation warnings, but this printout is debounced to handle prep and off-prep cycles */
+        flush: () => void;
+    };
 }
 
 interface Attributes {

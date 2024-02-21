@@ -1,5 +1,5 @@
 import { sluggify } from '@utils';
-import { TemplateConstructor } from './DataTemplate.ts';
+import { TemplateConstructor } from './data-template.ts';
 
 /**
  * Adds slug property to target data model.

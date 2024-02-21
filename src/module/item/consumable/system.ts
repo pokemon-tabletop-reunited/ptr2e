@@ -5,7 +5,7 @@ const CONSUMABLE_TYPES = ["food", "restorative", "boosters", "ammo", "evolution-
 type ConsumableType = typeof CONSUMABLE_TYPES[number];
 const ConsumableExtension = HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel))))
 
-abstract class ConsumableSystem extends HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))) {
+abstract class ConsumableSystem extends ConsumableExtension {
     declare parent: ConsumablePTR2e;
 
     /**

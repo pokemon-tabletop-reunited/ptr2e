@@ -14,6 +14,7 @@ declare global {
             export import data = Data;
             export import documents = Documents;
             export import utils = Utils;
+            export import applications = Applications;
         }
     }
 }

@@ -1,5 +1,5 @@
 import { ContainerPTR2e } from '@item';
-import { TemplateConstructor } from './DataTemplate.ts';
+import { TemplateConstructor } from './data-template.ts';
 
 /**
  * Adds container property to target data model.

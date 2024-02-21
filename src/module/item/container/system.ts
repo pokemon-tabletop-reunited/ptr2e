@@ -3,7 +3,7 @@ import { HasContainer, HasDescription, HasSlug, HasTraits, HasGearData } from "@
 
 const ContainerExtension = HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))))
 
-abstract class ContainerSystem extends HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel))))) {
+abstract class ContainerSystem extends ContainerExtension {
     declare parent: ContainerPTR2e;
 
     /**

@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import { ItemPTR2e, ItemSystemPTR2e } from "@item";
+import { ItemPTR2e, ItemSystemPTR } from "@item";
 
 type ItemSourcePTR2e = ItemPTR2e['_source'];
 
@@ -31,7 +31,7 @@ export class MockItem {
     static async updateDocuments(
         updates: Record<string, unknown>[] = [],
         _context: DocumentModificationContext<ActorPTR2e | null> = {},
-    ): Promise<ItemPTR2e<ItemSystemPTR2e, ActorPTR2e | null>[]> {
+    ): Promise<ItemPTR2e<ItemSystemPTR, ActorPTR2e | null>[]> {
         return updates.flatMap((update) => {
             const item = game.items.find((item) => item.id === update._id);
             if (item) fu.mergeObject(item._source, update, { performDeletions: true });

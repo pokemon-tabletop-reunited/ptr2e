@@ -1,0 +1,9 @@
+<form>
+    <h1>Hi Again!</h1>
+    {{#each item.system.schema.fields }}
+        {{log this}}
+        {{#unless (or (is this.name "traits") (is this.name "actions"))}}
+            {{formInput this}}
+        {{/unless}}
+    {{/each}}
+</form>

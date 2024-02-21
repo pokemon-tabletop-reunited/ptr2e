@@ -3,7 +3,7 @@ import { HasDescription, HasSlug, HasTraits } from "@module/data/index.ts";
 
 const SpeciesExtension = HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel)))
 
-abstract class SpeciesSystem extends HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel))) {
+abstract class SpeciesSystem extends SpeciesExtension {
     declare parent: SpeciesPTR2e;
 
     /**

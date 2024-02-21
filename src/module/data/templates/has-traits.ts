@@ -1,4 +1,4 @@
-import { TemplateConstructor } from './DataTemplate.ts';
+import { TemplateConstructor } from './data-template.ts';
 
 /**
  * Adds traits property to target data model.

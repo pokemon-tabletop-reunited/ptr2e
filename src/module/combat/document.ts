@@ -218,6 +218,7 @@ class CombatPTR2e extends Combat {
                 actorId: undefined,
                 _id: "roundsinitiative",
                 name: "The Round",
+                type: "round",
                 img: "icons/svg/clockwork.svg",
                 hidden: false,
                 defeated: false,

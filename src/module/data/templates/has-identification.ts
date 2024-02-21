@@ -1,5 +1,5 @@
 import { ItemPTR2e } from '@item';
-import { TemplateConstructor } from './DataTemplate.ts';
+import { TemplateConstructor } from './data-template.ts';
 
 const IDENTIFIED_STATUS = ["identified", "unidentified", "misidentified"] as const;
 type IdentificationStatus = typeof IDENTIFIED_STATUS[number];

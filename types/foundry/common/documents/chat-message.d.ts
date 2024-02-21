@@ -23,11 +23,13 @@ export default interface BaseChatMessage
     get documentName(): ChatMessageMetadata["name"];
 }
 
-export type ChatMessageSchema = {
+export type ChatMessageSchema<TType extends string = string> = {
     /** The _id which uniquely identifies this ChatMessage document */
     _id: fields.DocumentIdField;
+    /** A ChatMessage subtype which configures the system data model applied */
+    type: fields.StringField<TType, TType, true, false, false>;
     /** The message type from CONST.CHAT_MESSAGE_TYPES */
-    type: fields.NumberField<ChatMessageType, ChatMessageType, true, true, true>;
+    style: fields.NumberField<ChatMessageType, ChatMessageType, true, true, true>;
     /** The _id of the User document who generated this message */
     user: fields.ForeignDocumentField<BaseUser, true, false, true>;
     /** The timestamp at which point this message was generated */

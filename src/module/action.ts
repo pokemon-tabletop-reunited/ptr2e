@@ -1,4 +1,9 @@
-import { ActionCost, ActionType, TargetOption } from "@item/base/data.ts";
+// Priority & Interrupt are [Traits] so don't need a data field
+type ActionCost = "simple" | "complete" | "free";
+type ActionType = ActivityType | "attack" | "passive" | "generic";
+type ActivityType = "camping" | "downtime" | "exploration";
+
+type TargetOption = "self" | "ally" | "enemy" | "creature" | "object" | "blast" | "cone" | "line" | "wide-line" | "emanation" | "field" | "aura" | "allied-aura" | "enemy-aura";
 
 class ActionPTR2e extends foundry.abstract.DataModel {
     static override defineSchema() {

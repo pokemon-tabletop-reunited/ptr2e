@@ -1,11 +1,12 @@
-import HasGearData from "./GearMixin.ts"
-import HasActions from "./templates/HasActions.ts"
-import HasBase from "./templates/HasBase.ts"
-import HasContainer from "./templates/HasContainer.ts"
-import HasDescription from "./templates/HasDescription.ts"
-import HasIdentification from "./templates/HasIdentification.ts"
-import HasSlug from "./templates/HasSlug.ts"
-import HasTraits from "./templates/HasTraits.ts"
+import HasGearData from "./gear-mixin.ts"
+import HasActions from "./templates/has-actions.ts"
+import HasBase from "./templates/has-base.ts"
+import HasChanges from "./templates/has-changes.ts"
+import HasContainer from "./templates/has-container.ts"
+import HasDescription from "./templates/has-description.ts"
+import HasIdentification from "./templates/has-identification.ts"
+import HasSlug from "./templates/has-slug.ts"
+import HasTraits from "./templates/has-traits.ts"
 
 export {
     HasActions,
@@ -16,4 +17,5 @@ export {
     HasIdentification,
     HasSlug,
     HasTraits,
+    HasChanges
 }
