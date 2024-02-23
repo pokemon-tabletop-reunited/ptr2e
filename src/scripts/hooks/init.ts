@@ -43,18 +43,15 @@ export const Init = {
             CONFIG.Item.dataModels = PTRCONFIG.Item.dataModels;
             CONFIG.Change = {
                 documentClass: PTRCONFIG.Change.documentClass,
-                dataModels: PTRCONFIG.Change.dataModels,
-                typeLabels: {},
-                typeIcons: {},
+                dataModels: PTRCONFIG.Change.dataModels
             };
-
+        
             // Register custom sheets
             {
                 Actors.unregisterSheet("core", ActorSheet);
                 Actors.registerSheet("ptr2e", ActorSheetPTR2e, { makeDefault: true })
 
                 Items.unregisterSheet("core", ItemSheet);
-                //@ts-expect-error
                 Items.registerSheet("ptr2e", PTRCONFIG.Item.sheetClasses.ability, { types: ["ability"], makeDefault: true });
             }
 

@@ -716,14 +716,14 @@ export class EmbeddedCollectionField<
      * @param options Options which configure the behavior of the field
      */
     constructor(
-        element: ConstructorOf<TDocument>,
+        element: ConstructorOf<Document>,
         options?: ArrayFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>,
     );
 
-    static override _validateElementType(element: unknown): abstract.Document;
+    static override _validateElementType(element: unknown): Document;
 
     /** A reference to the DataModel subclass of the embedded document element */
-    get model(): ConstructorOf<TDocument>;
+    get model(): ConstructorOf<Document>;
 
     /** The DataSchema of the contained Document model. */
     get schema(): TDocument["schema"];

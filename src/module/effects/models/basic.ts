@@ -1,17 +1,11 @@
-//@ts-nocheck
 import { ActorPTR2e } from "@actor";
-import { Change } from "../document.ts";
 import { ChangeModel } from "@module/data/models/change.ts";
-import { ActiveEffectPTR2e } from "@module/effects/document.ts";
+import { BaseActiveEffectSystem } from "./base.ts";
 import { isObject } from "@utils";
 
-/**
- * AELike Change System
- */
-abstract class BasicChangeSystem extends foundry.abstract.TypeDataModel {
-    declare parent: Change<ActiveEffectPTR2e>;
+abstract class BasicEffectSystem extends BaseActiveEffectSystem {
 
-    apply(actor: ActorPTR2e, change: ChangeModel, rollOptions?: string[] | Set<string> | null): void {
+    override apply(actor: ActorPTR2e, change: ChangeModel, rollOptions?: string[] | Set<string> | null): void {
         if (change.ignored) return;
 
         const path = change.resolveInjectedProperties(change.key);
@@ -26,7 +20,7 @@ abstract class BasicChangeSystem extends foundry.abstract.TypeDataModel {
         // Determine the data type of the target field
         const current = fu.getProperty(actor, path) ?? null;
         const changeValue = change.resolveValue(change.value);
-        const newValue = BasicChangeSystem.getNewValue(change.mode, current, changeValue, change.merge);
+        const newValue = BasicEffectSystem.getNewValue(change.mode, current, changeValue, change.merge);
         if (newValue instanceof foundry.data.validation.DataModelValidationFailure) {
             return change.failValidation(newValue.asError().message);
         }
@@ -50,8 +44,8 @@ abstract class BasicChangeSystem extends foundry.abstract.TypeDataModel {
     }
 
     #pathIsValid(path: string): boolean {
-        if (!this.parent.parent.targetsActor()) return false;
-        const actor = this.parent.parent.target;
+        if (!this.parent.targetsActor()) return false;
+        const actor = this.parent.target;
         return (
             path.length > 0 &&
             !/\bnull\b/.test(path) &&
@@ -213,4 +207,4 @@ abstract class BasicChangeSystem extends foundry.abstract.TypeDataModel {
     }
 }
 
-export { BasicChangeSystem }
+export { BasicEffectSystem }

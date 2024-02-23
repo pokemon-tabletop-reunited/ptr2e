@@ -1,13 +1,15 @@
-import { ActorPTR2e } from "@actor";
-import { ItemPTR2e } from "@item";
-import { isBracketedValue } from "@utils";
-import { isObject } from "remeda";
-import { RuleValue, BracketedValue } from "../data.ts";
-import { BaseChange, ChangeSchema } from "./base.ts";
-import { ActiveEffectPTR2e } from "../document.ts";
-import { BaseChangeSystem } from "./models/base.ts";
+import { fields } from 'types/foundry/common/data/module.js';
+import { PredicateField } from "@system/predication/schema-data-fields.ts";
+import { _DataModel } from 'types/foundry/common/abstract/data.js';
+import { ActorPTR2e } from '@actor';
+import { ItemPTR2e } from '@item';
+import { isBracketedValue, isObject } from '@utils';
+import { BracketedValue, RuleValue } from '@module/effects/data.ts';
+import { BaseActiveEffectSystem } from '@module/effects/models/base.ts';
+import { BaseChangeSystem } from './base.ts';
 
-export type ChangeOptions = DocumentConstructionContext<Change['parent']> & {
+export type ChangeModelOptions = {
+    parent: ActorPTR2e | ItemPTR2e | undefined;
     strict?: boolean | undefined;
     sourceIndex?: number | undefined;
     suppressWarnings?: boolean | undefined;
@@ -19,21 +21,64 @@ interface ResolveValueParams {
     warn?: boolean;
 }
 
-export class Change<TParent extends ActiveEffectPTR2e = ActiveEffectPTR2e, TSchema extends BaseChangeSystem = BaseChangeSystem> extends ClientDocumentMixin(BaseChange) {
-    declare parent: TParent;
-    
+export class ChangeModel extends foundry.abstract.DataModel<_DataModel, ChangeSchema> {
+    declare parent: BaseActiveEffectSystem;
+    declare system: BaseChangeSystem;
+
     sourceIndex: number | null;
 
     protected suppressWarnings: boolean;
 
-    get effect() {
-        return this.parent;
+    static get TYPES() {
+        return ['basic']
     }
 
-    constructor(source: PreCreate<Change['_source']>, options: ChangeOptions) {
+    static get documentName() {
+        return 'Change';
+    }
+
+    static get metadata() {
+        return {
+            coreTypes: ["base"],
+            // name: "Change",
+            // collection: "changes",
+            // indexed: false,
+            // compendiumIndexFields: [],
+            // label: "DOCUMENT.Change",
+            // embedded: {},
+            // permissions: { "create": "ASSISTANT", "update": "ASSISTANT", "delete": "ASSISTANT" },
+            // preserveOnImport: ["_id", "sort", "ownership"],
+            // schemaVersion: "12.317",
+            // labelPlural: "DOCUMENT.Changes"
+        }
+    }
+
+    constructor(source: ChangeModel['_source'], options: ChangeModelOptions) {
         super(source, options);
         this.suppressWarnings = options.suppressWarnings ?? !this.actor?.id;
         this.sourceIndex = options.sourceIndex ?? null;
+    }
+
+    static override defineSchema(): ChangeSchema {
+        const fields = foundry.data.fields;
+        return {
+            // Default Foundry Fields
+            key: new fields.StringField({ required: true, label: "EFFECT.ChangeKey" }),
+            value: new fields.StringField({ required: true, label: "EFFECT.ChangeValue" }),
+            mode: new fields.NumberField({
+                integer: true, initial: CONST.ACTIVE_EFFECT_MODES.ADD,
+                label: "EFFECT.ChangeMode"
+            }),
+            priority: new fields.NumberField(),
+
+            // Document fields
+            type: new fields.DocumentTypeField(this as unknown as ConstructorOf<foundry.abstract.Document>, { initial: "basic" }),
+            system: new fields.TypeDataField(this as unknown as ConstructorOf<foundry.abstract.Document>),
+
+            // Custom Fields
+            predicate: new PredicateField(),
+            ignored: new fields.BooleanField({ initial: false })
+        }
     }
 
     /**
@@ -44,11 +89,14 @@ export class Change<TParent extends ActiveEffectPTR2e = ActiveEffectPTR2e, TSche
         return false;
     }
 
+    get effect() {
+        return this.parent.parent;
+    }
     set effect(_) {
         return;
     }
 
-    get actor(): ActorPTR2e | null {
+    get actor() {
         return this.effect.targetsActor() ? this.effect.target : null;
     }
 
@@ -57,8 +105,8 @@ export class Change<TParent extends ActiveEffectPTR2e = ActiveEffectPTR2e, TSche
         return effect.parent instanceof ItemPTR2e ? effect.parent : null;
     }
 
-    public apply(actor: ActorPTR2e, options?: string[]): unknown {
-        return this.system.apply(actor, this, options);
+    public apply(actor: ActorPTR2e, rollOptions?: string[] | Set<string>): unknown {
+        return this.system.apply(actor, rollOptions);
     }
 
     /** Test this rule element's predicate, if present */
@@ -275,9 +323,22 @@ export class Change<TParent extends ActiveEffectPTR2e = ActiveEffectPTR2e, TSche
             })?.value ?? bracketFallthrough
         );
     }
+
 }
 
-export interface Change<TParent extends ActiveEffectPTR2e = ActiveEffectPTR2e, TSchema extends BaseChangeSystem = BaseChangeSystem> extends BaseChange<TParent> {
-    system: TSchema;
-    _source: SourceFromSchema<ChangeSchema<TSchema>>;
+export interface ChangeModel extends foundry.abstract.DataModel<_DataModel, ChangeSchema>, ModelPropsFromSchema<ChangeSchema> {
+
 }
+
+export type ChangeSchema = {
+    key: fields.StringField<string, string, true, false, false>
+    value: fields.StringField<string, string, true, false, false>
+    mode: fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
+    priority: fields.NumberField;
+
+    type: fields.DocumentTypeField;
+    system: fields.TypeDataField;
+
+    predicate: PredicateField;
+    ignored: fields.BooleanField;
+};

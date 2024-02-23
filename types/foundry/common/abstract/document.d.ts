@@ -50,9 +50,6 @@ export default abstract class Document<
     /** The canonical name of this Document type, for example "Actor". */
     get documentName(): string;
 
-    /** The allowed types which may exist for this Document class. */
-    static get TYPES(): string[];
-
     /** Does this Document support additional sub-types? */
     static get hasTypeData(): boolean;
 
@@ -74,9 +71,6 @@ export default abstract class Document<
 
     /** Test whether this Document is embedded within a parent Document */
     get isEmbedded(): boolean;
-
-    /** A Universally Unique Identifier (uuid) for this Document instance. */
-    get uuid(): string;
 
     /* ---------------------------------------- */
     /*  Model Permissions                       */
@@ -602,8 +596,6 @@ export interface DocumentMetadata {
     indexed: boolean;
     compendiumIndexFields: string[];
     label: string;
-    labelPlural: string;
-    schemaVersion: string;
     coreTypes: string[] | number[];
     embedded: Record<string, string>;
     permissions: {
