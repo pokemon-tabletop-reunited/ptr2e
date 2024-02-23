@@ -1,5 +1,6 @@
-import { TemplateConstructor } from './data-template.ts';
+import { ChangeTypes } from '../models/base.ts';
 import { ChangeModel } from '../models/change.ts';
+import { TemplateConstructor } from './data-template.ts';
 
 /**
  * Adds changes property to target data model.
@@ -21,7 +22,7 @@ export default function HasChanges<BaseClass extends TemplateConstructor>(baseCl
             return {
                 ...super.defineSchema(),
 
-                changes: new fields.ArrayField(new fields.EmbeddedDataField(ChangeModel))
+                changes: new fields.ArrayField(new fields.TypedSchemaField(ChangeTypes()))
             };
         }
     }

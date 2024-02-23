@@ -101,7 +101,7 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
 
         // Apply all changes
         for (const change of changes) {
-            change.effect.apply(this, change);
+            change.apply(this);
         }
 
         // Apply special statuses that changed to active tokens

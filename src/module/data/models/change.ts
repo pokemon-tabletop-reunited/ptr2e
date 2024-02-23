@@ -6,7 +6,6 @@ import { ItemPTR2e } from '@item';
 import { isBracketedValue, isObject } from '@utils';
 import { BracketedValue, RuleValue } from '@module/effects/data.ts';
 import { BaseActiveEffectSystem } from '@module/effects/models/base.ts';
-import { BaseChangeSystem } from './base.ts';
 
 export type ChangeModelOptions = {
     parent: ActorPTR2e | ItemPTR2e | undefined;
@@ -21,37 +20,14 @@ interface ResolveValueParams {
     warn?: boolean;
 }
 
-export class ChangeModel extends foundry.abstract.DataModel<_DataModel, ChangeSchema> {
+export class ChangeModel extends foundry.abstract.DataModel {
     declare parent: BaseActiveEffectSystem;
-    declare system: BaseChangeSystem;
+
+    static TYPE = "";
 
     sourceIndex: number | null;
 
     protected suppressWarnings: boolean;
-
-    static get TYPES() {
-        return ['basic']
-    }
-
-    static get documentName() {
-        return 'Change';
-    }
-
-    static get metadata() {
-        return {
-            coreTypes: ["base"],
-            // name: "Change",
-            // collection: "changes",
-            // indexed: false,
-            // compendiumIndexFields: [],
-            // label: "DOCUMENT.Change",
-            // embedded: {},
-            // permissions: { "create": "ASSISTANT", "update": "ASSISTANT", "delete": "ASSISTANT" },
-            // preserveOnImport: ["_id", "sort", "ownership"],
-            // schemaVersion: "12.317",
-            // labelPlural: "DOCUMENT.Changes"
-        }
-    }
 
     constructor(source: ChangeModel['_source'], options: ChangeModelOptions) {
         super(source, options);
@@ -64,16 +40,18 @@ export class ChangeModel extends foundry.abstract.DataModel<_DataModel, ChangeSc
         return {
             // Default Foundry Fields
             key: new fields.StringField({ required: true, label: "EFFECT.ChangeKey" }),
-            value: new fields.StringField({ required: true, label: "EFFECT.ChangeValue" }),
+            value: new fields.NumberField({ required: true, label: "EFFECT.ChangeValue" }),
             mode: new fields.NumberField({
                 integer: true, initial: CONST.ACTIVE_EFFECT_MODES.ADD,
                 label: "EFFECT.ChangeMode"
             }),
             priority: new fields.NumberField(),
 
-            // Document fields
-            type: new fields.DocumentTypeField(this as unknown as ConstructorOf<foundry.abstract.Document>, { initial: "basic" }),
-            system: new fields.TypeDataField(this as unknown as ConstructorOf<foundry.abstract.Document>),
+            // Type field
+            type: new fields.StringField({
+                required: true, blank: false, initial: this.TYPE,
+                validate: value => value === this.TYPE, validationError: `must be equal to "${this.TYPE}"`
+            }),
 
             // Custom Fields
             predicate: new PredicateField(),
@@ -105,8 +83,8 @@ export class ChangeModel extends foundry.abstract.DataModel<_DataModel, ChangeSc
         return effect.parent instanceof ItemPTR2e ? effect.parent : null;
     }
 
-    public apply(actor: ActorPTR2e, rollOptions?: string[] | Set<string>): unknown {
-        return this.system.apply(actor, rollOptions);
+    public apply(_: ActorPTR2e, __?: string[] | Set<string>): unknown {
+        throw new Error("The apply method must be implemented by the subclass");
     }
 
     /** Test this rule element's predicate, if present */
@@ -326,18 +304,17 @@ export class ChangeModel extends foundry.abstract.DataModel<_DataModel, ChangeSc
 
 }
 
-export interface ChangeModel extends foundry.abstract.DataModel<_DataModel, ChangeSchema>, ModelPropsFromSchema<ChangeSchema> {
+export interface ChangeModel extends foundry.abstract.DataModel, ModelPropsFromSchema<ChangeSchema> {
 
 }
 
 export type ChangeSchema = {
     key: fields.StringField<string, string, true, false, false>
-    value: fields.StringField<string, string, true, false, false>
+    value: fields.NumberField<number, number, true, true, true>
     mode: fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
     priority: fields.NumberField;
 
-    type: fields.DocumentTypeField;
-    system: fields.TypeDataField;
+    type: fields.StringField<string, string, true, false, true>;
 
     predicate: PredicateField;
     ignored: fields.BooleanField;

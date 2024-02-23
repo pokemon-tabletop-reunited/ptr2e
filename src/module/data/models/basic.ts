@@ -1,11 +1,12 @@
 import { ActorPTR2e } from "@actor";
-import { BaseChangeSystem } from "./base.ts";
-import { BasicEffectSystem } from "@module/effects/models/basic.ts";
 import { isObject } from "@utils";
-export class BasicChangeSystem extends BaseChangeSystem {
+import { ChangeModel } from "./change.ts";
+export class BasicChangeSystem extends ChangeModel {
+    
+    static override TYPE = "basic";
 
     override apply(actor: ActorPTR2e, rollOptions?: string[] | Set<string> | null): void {
-        const change = this.parent;
+        const change = this;
 
         if (change.ignored) return;
 
@@ -21,7 +22,7 @@ export class BasicChangeSystem extends BaseChangeSystem {
         // Determine the data type of the target field
         const current = fu.getProperty(actor, path) ?? null;
         const changeValue = change.resolveValue(change.value);
-        const newValue = BasicEffectSystem.getNewValue(change.mode, current, changeValue, change.merge);
+        const newValue = BasicChangeSystem.getNewValue(change.mode, current, changeValue, change.merge);
         if (newValue instanceof foundry.data.validation.DataModelValidationFailure) {
             return change.failValidation(newValue.asError().message);
         }

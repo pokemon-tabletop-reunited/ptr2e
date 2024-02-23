@@ -13,7 +13,7 @@ import { RoundCombatantSystem } from "@module/combat/combatant/models/round.ts";
 import { BasicChangeSystem } from "@module/data/models/basic.ts";
 import { ChangeModel } from "@module/data/models/change.ts";
 import { ActiveEffectPTR2e } from "@module/effects/document.ts";
-import { BasicEffectSystem } from "@module/effects/models/basic.ts";
+import { BaseActiveEffectSystem } from "@module/effects/models/base.ts";
 import { RollOptionEffectSystem } from "@module/effects/models/roll-option.ts";
 import Traits from "static/traits.json";
 
@@ -21,7 +21,7 @@ export const PTRCONFIG = {
     ActiveEffect: {
         documentClass: ActiveEffectPTR2e,
         dataModels: {
-            basic: BasicEffectSystem,
+            basic: BaseActiveEffectSystem,
             rolloption: RollOptionEffectSystem,
         }
     },
