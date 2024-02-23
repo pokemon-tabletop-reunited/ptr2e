@@ -2,7 +2,7 @@
 import { ActorPTR2e, ActorSheetPTR2e, ActorSystemPTR2e } from "@actor";
 import { CombatPTR2e, CombatTrackerPTR2e, CombatantPTR2e } from "@combat";
 import { AbilitySystem, ContainerSystem, EquipmentSystem, GearSystem, ItemPTR2e, MoveSystem, PerkSystem, SpeciesSystem, WeaponSystem} from "@item";
-import { AbilitySheetPTR2e } from "@item/ability/sheet.ts";
+import { AbilitySheet } from "@item/ability/sheet.ts";
 import { ConsumableSystem } from "@item/consumable/system.ts";
 import { PerkSheetPTR2e } from "@item/perk/sheet.ts";
 import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
@@ -10,17 +10,15 @@ import { ChatMessagePTR2e } from "@module/chat/document.ts";
 import { ItemMessageSystem } from "@module/chat/models/item.ts";
 import { CharacterCombatantSystem } from "@module/combat/combatant/models/character.ts";
 import { RoundCombatantSystem } from "@module/combat/combatant/models/round.ts";
+import { Change } from "@module/effects/changes/document.ts";
+import { BasicChangeSystem } from "@module/effects/changes/models/basic.ts";
 import { ActiveEffectPTR2e } from "@module/effects/document.ts";
-import { BasicEffectSystem } from "@module/effects/models/basic.ts";
-import { RollOptionEffectSystem } from "@module/effects/models/roll-option.ts";
 import Traits from "static/traits.json";
 
 export const PTRCONFIG = {
     ActiveEffect: {
         documentClass: ActiveEffectPTR2e,
         dataModels: {
-            basic: BasicEffectSystem,
-            rolloption: RollOptionEffectSystem,
         }
     },
     Actor: {
@@ -31,6 +29,12 @@ export const PTRCONFIG = {
         sheetClasses: {
             character: ActorSheetPTR2e,
         },
+    },
+    Change: {
+        documentClass: Change,
+        dataModels: {
+            base: BasicChangeSystem,
+        }
     },
     ChatMessage: {
         documentClass: ChatMessagePTR2e,
@@ -63,7 +67,7 @@ export const PTRCONFIG = {
         },
         sheetClasses: {
             perk: PerkSheetPTR2e,
-            ability: AbilitySheetPTR2e,
+            ability: AbilitySheet,
         },
     },
     ui: {

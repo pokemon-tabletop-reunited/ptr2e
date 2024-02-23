@@ -1,5 +1,38 @@
 @import "utils.less";
 
+.application.document-sheet {
+    background: url(/ui/denim075.png) repeat;
+
+    div[data-application-part='body'] {
+        background: url(/ui/parchment.jpg) repeat;
+        color: black;
+        padding: 0.5rem;
+        border-radius: 5px;
+
+        display: flex;
+        flex-direction: column;
+        align-items:center;
+        height: 100%;
+
+        .flex-row {
+            display: flex;
+            flex-direction: row;
+            align-items: top;
+            gap: 0.5rem;
+            width: 100%;
+        }
+        
+        img {
+            flex: 0 0 64px;
+            height: 64px;
+        }
+        input {
+            flex: 1;
+            margin: 0.25rem;
+        }
+    }
+}
+
 .system-traits {
     --readonly-striped: 0 !important;
 }

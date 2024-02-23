@@ -1,3 +1,5 @@
+import { ApplicationV2 } from "../../../common/applications/api.js";
+
 export {};
 
 declare global {

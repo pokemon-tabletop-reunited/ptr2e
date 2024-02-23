@@ -716,14 +716,14 @@ export class EmbeddedCollectionField<
      * @param options Options which configure the behavior of the field
      */
     constructor(
-        element: ConstructorOf<Document>,
+        element: ConstructorOf<TDocument>,
         options?: ArrayFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>,
     );
 
-    static override _validateElementType(element: unknown): Document;
+    static override _validateElementType(element: unknown): abstract.Document;
 
     /** A reference to the DataModel subclass of the embedded document element */
-    get model(): ConstructorOf<Document>;
+    get model(): ConstructorOf<TDocument>;
 
     /** The DataSchema of the contained Document model. */
     get schema(): TDocument["schema"];
@@ -1000,6 +1000,24 @@ type DocumentStatsSchema = {
     modifiedTime: NumberField;
     lastModifiedBy: ForeignDocumentField<string>;
 };
+
+/**
+ * A subclass of [StringField]{@link StringField} that is used specifically for the Document "type" field.
+ */
+export class DocumentTypeField<
+    TDocument extends abstract.Document = abstract.Document,
+    TSourceProp extends string = string,
+    TRequired extends boolean = true,
+    TNullable extends boolean = false,
+    THasInitial extends boolean = true
+> extends StringField {
+    /**
+     * @param {typeof foundry.abstract.Document} documentClass  The base document class which belongs in this field
+     * @param {StringFieldOptions} [options]  Options which configure the behavior of the field
+     * @param {DataFieldContext} [context]    Additional context which describes the field
+     */
+    constructor(documentClass: ConstructorOf<TDocument>, options?: StringFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>, context?: DataFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>);
+}
 
 /** A subclass of `ObjectField` which supports a system-level data object. */
 export class TypeDataField<

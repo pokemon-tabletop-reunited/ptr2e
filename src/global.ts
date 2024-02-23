@@ -6,9 +6,12 @@ import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
 import { PerkTree } from "@module/canvas/perk-tree/perk-tree.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import { Change } from "@module/effects/changes/document.ts";
 import { PTRCONFIG } from "@scripts/config/index.ts";
 import { sluggify } from "@utils";
 import type EnJSON from "static/lang/en.json";
+import { _Document } from "types/foundry/common/abstract/document.js";
+import { DataSchema } from "types/foundry/common/data/fields.js";
 
 interface GamePTR2e
     extends Game<
@@ -62,6 +65,12 @@ declare global {
         ui: ConfiguredConfig["ui"] & {
             perksTab: new () => PerkDirectory;
         }
+        Change: {
+            documentClass: new (data: PreCreate<Change["_source"]>, context: DocumentConstructionContext<Change["parent"]>) => Change
+            dataModels: Record<string, Partial<foundry.abstract.TypeDataModel>>;
+            typeLabels: Record<string, string>;
+            typeIcons: Record<string, string>;
+        }
     }
 
     const CONFIG: ConfigPTR2e;
@@ -91,6 +100,11 @@ declare global {
         function getTexture(src: string): PIXI.Texture | PIXI.Spritesheet | null;
 
         var actor: () => ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e<Scene> | null> | null;
+
+        function ClientDocumentMixin<
+            TParent extends _Document | null = _Document | null,
+            TSchema extends DataSchema = DataSchema,
+        >(Base: ConstructorOf<foundry.abstract.Document>): ConstructorOf<object>;
     }
 
     const BUILD_MODE: "development" | "production";

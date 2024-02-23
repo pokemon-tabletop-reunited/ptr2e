@@ -1,11 +1,17 @@
+//@ts-nocheck
 import { ActorPTR2e } from "@actor";
+import { Change } from "../document.ts";
 import { ChangeModel } from "@module/data/models/change.ts";
-import { BaseActiveEffectSystem } from "./base.ts";
+import { ActiveEffectPTR2e } from "@module/effects/document.ts";
 import { isObject } from "@utils";
 
-abstract class BasicEffectSystem extends BaseActiveEffectSystem {
+/**
+ * AELike Change System
+ */
+abstract class BasicChangeSystem extends foundry.abstract.TypeDataModel {
+    declare parent: Change<ActiveEffectPTR2e>;
 
-    override apply(actor: ActorPTR2e, change: ChangeModel, rollOptions?: string[] | Set<string> | null): void {
+    apply(actor: ActorPTR2e, change: ChangeModel, rollOptions?: string[] | Set<string> | null): void {
         if (change.ignored) return;
 
         const path = change.resolveInjectedProperties(change.key);
@@ -20,7 +26,7 @@ abstract class BasicEffectSystem extends BaseActiveEffectSystem {
         // Determine the data type of the target field
         const current = fu.getProperty(actor, path) ?? null;
         const changeValue = change.resolveValue(change.value);
-        const newValue = BasicEffectSystem.getNewValue(change.mode, current, changeValue, change.merge);
+        const newValue = BasicChangeSystem.getNewValue(change.mode, current, changeValue, change.merge);
         if (newValue instanceof foundry.data.validation.DataModelValidationFailure) {
             return change.failValidation(newValue.asError().message);
         }
@@ -44,8 +50,8 @@ abstract class BasicEffectSystem extends BaseActiveEffectSystem {
     }
 
     #pathIsValid(path: string): boolean {
-        if (!this.parent.targetsActor()) return false;
-        const actor = this.parent.target;
+        if (!this.parent.parent.targetsActor()) return false;
+        const actor = this.parent.parent.target;
         return (
             path.length > 0 &&
             !/\bnull\b/.test(path) &&
@@ -207,4 +213,4 @@ abstract class BasicEffectSystem extends BaseActiveEffectSystem {
     }
 }
 
-export { BasicEffectSystem }
+export { BasicChangeSystem }

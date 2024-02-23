@@ -41,13 +41,20 @@ export const Init = {
             CONFIG.Combatant.dataModels = PTRCONFIG.Combatant.dataModels;
             CONFIG.Item.documentClass = PTRCONFIG.Item.documentClass;
             CONFIG.Item.dataModels = PTRCONFIG.Item.dataModels;
-        
+            CONFIG.Change = {
+                documentClass: PTRCONFIG.Change.documentClass,
+                dataModels: PTRCONFIG.Change.dataModels,
+                typeLabels: {},
+                typeIcons: {},
+            };
+
             // Register custom sheets
             {
                 Actors.unregisterSheet("core", ActorSheet);
                 Actors.registerSheet("ptr2e", ActorSheetPTR2e, { makeDefault: true })
 
                 Items.unregisterSheet("core", ItemSheet);
+                //@ts-expect-error
                 Items.registerSheet("ptr2e", PTRCONFIG.Item.sheetClasses.ability, { types: ["ability"], makeDefault: true });
             }
 

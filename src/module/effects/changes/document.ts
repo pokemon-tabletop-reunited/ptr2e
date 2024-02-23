@@ -1,14 +1,13 @@
-import { fields } from 'types/foundry/common/data/module.js';
-import { PredicateField } from "@system/predication/schema-data-fields.ts";
-import { _DataModel } from 'types/foundry/common/abstract/data.js';
-import { ActorPTR2e } from '@actor';
-import { ItemPTR2e } from '@item';
-import { isBracketedValue, isObject } from '@utils';
-import { BracketedValue, RuleValue } from '@module/effects/data.ts';
-import { BaseActiveEffectSystem } from '@module/effects/models/base.ts';
+import { ActorPTR2e } from "@actor";
+import { ItemPTR2e } from "@item";
+import { isBracketedValue } from "@utils";
+import { isObject } from "remeda";
+import { RuleValue, BracketedValue } from "../data.ts";
+import { BaseChange, ChangeSchema } from "./base.ts";
+import { ActiveEffectPTR2e } from "../document.ts";
+import { BaseChangeSystem } from "./models/base.ts";
 
-export type ChangeModelOptions = {
-    parent: ActorPTR2e | ItemPTR2e | undefined;
+export type ChangeOptions = DocumentConstructionContext<Change['parent']> & {
     strict?: boolean | undefined;
     sourceIndex?: number | undefined;
     suppressWarnings?: boolean | undefined;
@@ -20,35 +19,21 @@ interface ResolveValueParams {
     warn?: boolean;
 }
 
-export class ChangeModel extends foundry.abstract.DataModel<_DataModel, ChangeSchema> {
-    declare parent: BaseActiveEffectSystem;
-
+export class Change<TParent extends ActiveEffectPTR2e = ActiveEffectPTR2e, TSchema extends BaseChangeSystem = BaseChangeSystem> extends ClientDocumentMixin(BaseChange) {
+    declare parent: TParent;
+    
     sourceIndex: number | null;
 
     protected suppressWarnings: boolean;
 
-    constructor(source: ChangeModel['_source'], options: ChangeModelOptions) {
+    get effect() {
+        return this.parent;
+    }
+
+    constructor(source: PreCreate<Change['_source']>, options: ChangeOptions) {
         super(source, options);
         this.suppressWarnings = options.suppressWarnings ?? !this.actor?.id;
         this.sourceIndex = options.sourceIndex ?? null;
-    }
-
-    static override defineSchema(): ChangeSchema {
-        const fields = foundry.data.fields;
-        return {
-            // Default Foundry Fields
-            key: new fields.StringField({ required: true, label: "EFFECT.ChangeKey" }),
-            value: new fields.StringField({ required: true, label: "EFFECT.ChangeValue" }),
-            mode: new fields.NumberField({
-                integer: true, initial: CONST.ACTIVE_EFFECT_MODES.ADD,
-                label: "EFFECT.ChangeMode"
-            }),
-            priority: new fields.NumberField(),
-
-            // Custom Fields
-            predicate: new PredicateField(),
-            ignored: new fields.BooleanField({ initial: false })
-        }
     }
 
     /**
@@ -59,20 +44,21 @@ export class ChangeModel extends foundry.abstract.DataModel<_DataModel, ChangeSc
         return false;
     }
 
-    get effect() {
-        return this.parent.parent;
-    }
     set effect(_) {
         return;
     }
 
-    get actor() {
+    get actor(): ActorPTR2e | null {
         return this.effect.targetsActor() ? this.effect.target : null;
     }
 
     get item() {
         const effect = this.effect;
         return effect.parent instanceof ItemPTR2e ? effect.parent : null;
+    }
+
+    public apply(actor: ActorPTR2e, options?: string[]): unknown {
+        return this.system.apply(actor, this, options);
     }
 
     /** Test this rule element's predicate, if present */
@@ -289,18 +275,9 @@ export class ChangeModel extends foundry.abstract.DataModel<_DataModel, ChangeSc
             })?.value ?? bracketFallthrough
         );
     }
-
 }
 
-export interface ChangeModel extends foundry.abstract.DataModel<_DataModel, ChangeSchema>, ModelPropsFromSchema<ChangeSchema> {
-
+export interface Change<TParent extends ActiveEffectPTR2e = ActiveEffectPTR2e, TSchema extends BaseChangeSystem = BaseChangeSystem> extends BaseChange<TParent> {
+    system: TSchema;
+    _source: SourceFromSchema<ChangeSchema<TSchema>>;
 }
-
-export type ChangeSchema = {
-    key: fields.StringField<string, string, true, false, false>
-    value: fields.StringField<string, string, true, false, false>
-    mode: fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
-    priority: fields.NumberField;
-    predicate: PredicateField;
-    ignored: fields.BooleanField;
-};
