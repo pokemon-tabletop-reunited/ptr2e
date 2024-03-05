@@ -1,12 +1,48 @@
 {
     "name": "PTR2e System for FoundryVTT",
-    "inputFiles": [
-        "./src/module"
+    "entryPoints": [
+        "./src/module/data/mixins/index.ts",
+        "./src/module/data/models/index.ts",
+        "./src/module/item/data/index.ts",
+        "./src/module/item/sheets/index.ts",
+        "./src/module/item/index.ts",
     ],
     "out": "docs",
-    "mode": "file",
     "readme": "none",
-    "ignoreCompilerErrors": true,
     "categorizeByGroup": true,
-    "includeVersion": true
+    "includeVersion": true,
+    "excludePrivate": true,
+    "excludeInternal": true,
+    "excludeProtected": true,
+    "excludeReferences": true,
+    "sourceLinkExternal": true,
+    "hideParameterTypesInTitle": true,
+    "hideGenerator": true,
+    // "plugin": [
+    //     // "typedoc-plugin-inline-sources",
+    //     "typedoc-plugin-merge-modules"
+    //     // "typedoc-material-theme"
+    // ],
+    // "themeColor": "#4c4eaf",
+    // "mergeModulesMergeMode": "module",
+    "validation": {
+        "notExported": true,
+        "invalidLink": false,
+        "notDocumented": false
+    },
+    "cleanOutputDir": true,
+    "disableSources": true,
+
+    // Add the DMT plugin.
+    "plugin": ["@typhonjs-typedoc/typedoc-theme-dmt"],
+
+    // Set the theme.
+    "theme": "default-modern",
+
+    "dmtNavigation": {
+        "moduleIcon": false, // When true renders module icon.
+        "style": "compact" // A full tree is rendered by default. Other options include 'compact' and 'flat'. The first
+        // renders a full tree, but compacts all intermediary folders with no children and the latter
+        // flattens all module / package paths.
+    }
 }

@@ -1,0 +1,16 @@
+<aside>
+    <form id="ev-stats-form">
+        <h1>EV Stats Form</h1>
+        {{#each stats as |value key|}}
+            <div class="form-group {{key}}">
+                <label>{{localize (concat "PTR2E.Attributes." key ".Label")}}</label>
+                {{rangePicker name=(concat "system.attributes." key ".evs") value=value.evs min=0 max=(lookup ../evMaximums key) step=4}}
+            </div>
+        {{/each}}
+        <div class="form-group">
+            <label>Total (Max 508)</label>
+            <span style="flex: 3"></span>
+            <span style="flex: 0 1 48px; text-align: center;">{{evMaximums.total}}</span>
+        </div>
+    </form>
+</aside>

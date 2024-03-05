@@ -1,9 +1,11 @@
+/** @module foundry */
 import * as Abstract from "./abstract/module.ts";
 import * as Constants from "./constants.ts";
 import * as Data from "./data/module.ts";
 import * as Documents from "./documents/module.ts";
 import * as Packages from "./packages/module.ts";
 import * as Utils from "./utils/module.ts";
+import * as Applications from "./applications/module.ts";
 
 // global-modifying module
 import "./primitives/module.d.ts";
@@ -25,6 +27,8 @@ declare global {
             export import packages = Packages;
             /** Utility functions providing helpful functionality. */
             export import utils = Utils;
+            /** Application classes which represent user interface windows. */
+            export import applications = Applications;
         }
     }
 }

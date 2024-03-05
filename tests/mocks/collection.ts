@@ -1,7 +1,7 @@
 import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
 import { MockActor } from "./actor.ts";
 import { MockItem } from "./item.ts";
-import { ItemPTR2e, ItemSystemPTR2e } from "@item";
+import { ItemPTR2e, ItemSystemPTR } from "@item";
 
 /** In Foundry this is actually a subclass of Map, but it incompatibly extends it at several points. */
 export class MockCollection<V> {
@@ -69,7 +69,7 @@ export class MockActors extends MockWorldCollection<ActorPTR2e<ActorSystemPTR2e,
     documentClass = MockActor as unknown as typeof ActorPTR2e;
 }
 
-export class MockItems extends MockWorldCollection<ItemPTR2e<ItemSystemPTR2e,null>> {
+export class MockItems extends MockWorldCollection<ItemPTR2e<ItemSystemPTR,null>> {
     tokens: Record<string, ActorPTR2e | undefined> = {};
 
     documentClass = MockItem as unknown as typeof ItemPTR2e;

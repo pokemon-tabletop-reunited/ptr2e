@@ -1,3 +1,4 @@
+import TypeDataModel from "../../../common/abstract/type-data.js";
 import type {
     ActiveEffectSchema,
     ActiveEffectSource,
@@ -11,10 +12,9 @@ declare global {
      * Each ActiveEffect belongs to the effects collection of its parent Document.
      * Each ActiveEffect contains a ActiveEffectData object which provides its source data.
      */
-    class ActiveEffect<TParent extends Actor | Item | null>
+    class ActiveEffect<TParent extends Actor | Item | null, TSchema extends TypeDataModel = TypeDataModel>
         extends ClientBaseActiveEffect<TParent>
-        implements TemporaryEffect
-    {
+        implements TemporaryEffect {
         constructor(data: PreCreate<ActiveEffectSource>, context?: DocumentConstructionContext<TParent>);
 
         /** A cached reference to the source name to avoid recurring database lookups */
@@ -52,6 +52,26 @@ declare global {
          */
         override get sheet(): ActiveEffectConfig<this>;
 
+        /**
+         * Is there some system logic that makes this active effect ineligible for application?
+         */
+        get isSuppressed(): boolean;
+
+        get target(): TParent;
+
+        /**
+         * Whether the Active Effect currently applying its changes to the target.
+         */
+        get active(): boolean;
+
+        /**
+         * Does this Active Effect currently modify an Actor?
+         * @type {boolean}
+         */
+        get modifiesActor(): boolean 
+
+
+
         /* -------------------------------------------- */
         /*  Methods                                     */
         /* -------------------------------------------- */
@@ -62,7 +82,7 @@ declare global {
          * @param change The change data being applied
          * @return The resulting applied value
          */
-        apply(actor: Actor<TokenDocument>, change: ActiveEffectSource["changes"][number]): unknown;
+        apply(actor: Actor<TokenDocument | null>, change: ActiveEffectSource["changes"][number]): unknown;
 
         /**
          * Apply an ActiveEffect that uses an ADD application mode.
@@ -128,8 +148,11 @@ declare global {
         ): Promise<boolean | void>;
     }
 
-    interface ActiveEffect<TParent extends Actor | Item | null> extends ClientBaseActiveEffect<TParent> {
+    interface ActiveEffect<TParent extends Actor | Item | null, TSchema extends TypeDataModel = TypeDataModel> extends ClientBaseActiveEffect<TParent> {
         duration: PreparedEffectDurationData;
+
+        system: TSchema;
+        _source: SourceFromSchema<ActiveEffectSchema<string, TSchema>>;
     }
 
     interface PreparedEffectDurationData extends EffectDurationData {

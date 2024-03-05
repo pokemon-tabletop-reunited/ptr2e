@@ -8,10 +8,10 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
         const getAttributeField = (slug: string, withStage = true) => {
             return {
                 ...getStatField(slug, withStage),
-                evs: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
+                evs: new fields.NumberField({ required: true, label: `PTR2E.Attributes.${slug}.Label`, initial: 0, min: 0, max: 200, step: 4, validate: (d) => d as number >= 0 && d as number <= 200 && d as number % 4 === 0 }),
                 ivs: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
                 base: new fields.NumberField({ required: true, initial: 50, validate: (d) => d as number >= 1 }),
-                value: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
+                // value: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
             }
         }
         const getStatField = (slug: string, withStage = true) => {
@@ -61,6 +61,61 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
             experience: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
             money: new fields.NumberField({ required: true, initial: 0}),
         }
+    }
+
+    override prepareBaseData(): void {
+
+        for(const k in this.attributes) {
+            const key = k as keyof Attributes;
+            this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
+        }
+    }
+
+    _calculateStatTotal(stat: Attribute | Omit<Attribute, 'stage'>): number {
+        //TODO: Add these values, for now default to 1
+        const nature = 1, sizeMod = 1, level = 30;
+
+        if('stage' in stat) {
+            /** Calculate a stat that Isn't HP */
+            return Math.floor(
+                (
+                    Math.floor(
+                        (
+                            (
+                                (2 * stat.base)
+                                + stat.ivs
+                                + (stat.evs / 4)
+                            )
+                            * level
+                        )
+                        / 100
+                    )
+                    + 5
+                )
+                * nature
+            )
+        }
+        
+        /** Calculate HP */
+        return Math.floor(
+            (
+                Math.floor(
+                    (
+                        (
+                            (2 * stat.base)
+                            + stat.ivs
+                            + (stat.evs / 4)
+                        )
+                        * level
+                        * sizeMod
+                    )
+                    / 65
+                )
+                + level
+                + 15
+            )
+            * nature
+        )
     }
 }
 

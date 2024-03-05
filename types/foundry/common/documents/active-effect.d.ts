@@ -44,7 +44,7 @@ export default class BaseActiveEffect<TParent extends BaseActor | BaseItem<BaseA
 
 export default interface BaseActiveEffect<TParent extends BaseActor | BaseItem<BaseActor | null> | null>
     extends Document<TParent, ActiveEffectSchema>,
-        ModelPropsFromSchema<ActiveEffectSchema> {
+    ModelPropsFromSchema<ActiveEffectSchema> {
     get documentName(): ActiveEffectMetadata["name"];
 }
 
@@ -55,13 +55,19 @@ export interface ActiveEffectMetadata extends DocumentMetadata {
     isEmbedded: true;
 }
 
-type ActiveEffectSchema = {
+type ActiveEffectSchema<
+    TType extends string = string,
+    TSystemSource extends object = object
+> = {
     _id: fields.DocumentIdField;
+    /** An Actor subtype which configures the system data model applied */
+    type: fields.StringField<TType, TType, true, false, false>;
+    system: fields.TypeDataField<TSystemSource>;
     name: fields.StringField<string, string, true, false, false>;
     changes: fields.ArrayField<
         fields.SchemaField<{
             key: fields.StringField<string, string, true, false, false>;
-            value: fields.StringField<string, string, true, false, false>;
+            value: fields.StringField<string, string, true, false, false> | fields.NumberField<number, number, true, true, true>;
             mode: fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>;
             priority: fields.NumberField;
         }>

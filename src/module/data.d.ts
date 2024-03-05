@@ -10,7 +10,7 @@ type DeferredEphemeralEffect = DeferredPromise<EffectSource | ConditionSource | 
 interface DeferredValueParams {
     /** An object to merge into roll data for `Roll.replaceFormulaData` */
     resolvables?: Record<string, unknown>;
-    /** An object to merge into standard options for `RuleElementPF2e#resolveInjectedProperties` */
+    /** An object to merge into standard options for `RuleElementPTR2e#resolveInjectedProperties` */
     injectables?: Record<string, unknown>;
     /** Roll Options to get against a predicate (if available) */
     test?: string[] | Set<string>;

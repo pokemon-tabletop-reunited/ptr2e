@@ -1,6 +1,7 @@
 import { ActorPTR2e } from "@actor";
-import { StatsChart } from "@actor/sheets/stats-chart.mjs";
+import { StatsChart } from "@actor/sheets/stats-chart.ts";
 import { tagify } from "@utils";
+import StatsForm from "./sheets/stats-form.ts";
 
 class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
 
@@ -54,32 +55,9 @@ class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
         for (const taggifyElement of $html.find(".ptr-tagify")) {
             tagify(taggifyElement as HTMLInputElement, { traits: $(taggifyElement).hasClass("system-traits") });
         }
-
-        //const actor = this.actor;
-        // for (const tooltipElement of $html.find(".ptr-trait")) {
-        //     $(tooltipElement).tooltipster({
-        //         contentAsHTML: true,
-        //         interactive: true,
-        //         content: 'Loading...',
-        //         functionInit: function (origin, _content) {
-        //             const trait = actor.traits.find((t: { slug: string | undefined; }) => t.slug === tooltipElement.dataset.trait);
-        //             if (trait.description || trait.related.length > 0) {
-        //                 renderTemplate("systems/ptr2e/templates/partials/trait-tooltip.hbs", { trait })
-        //                     .then(html =>
-        //                         origin.content(html)
-        //                     );
-        //             }
-        //         },
-        //         functionReady: function (_origin, content) {
-        //             // @ts-ignore
-        //             $(content.tooltip).find(".keyword").tooltipster({
-        //                 position: "right",
-        //                 contentAsHTML: true,
-        //                 content: 'This is where the creature-type keyword explanation would go and if you click it it will open the full view instead of the...',
-        //             })
-        //         }
-        //     });
-        // }
+        
+        // @ts-ignore
+        $html.find(".stats-chart").on("dblclick", () => new StatsForm(this.actor).render(true));
 
         // @ts-ignore
         $html.find(".ptr-perk-tree").on("click", () => this.actor.togglePerkTree());

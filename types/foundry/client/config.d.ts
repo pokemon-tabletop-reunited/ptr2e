@@ -100,6 +100,7 @@ declare global {
             };
             sidebarIcon: string;
             template: string;
+            dataModels: Record<string, Partial<foundry.abstract.TypeDataModel>>;
         };
 
         /** Configuration for Item document */
@@ -122,7 +123,7 @@ declare global {
                     }
                 >
             >;
-            dataModels: Record<string, typeof foundry.abstract.TypeDataModel>;
+            dataModels: Record<string, Partial<foundry.abstract.TypeDataModel>>;
             typeIcons: Record<string, string>;
             typeLabels: Record<string, string | undefined>;
         };
@@ -218,6 +219,8 @@ declare global {
                     context?: DocumentConstructionContext<TActiveEffect["parent"]>,
                 ): TActiveEffect;
             };
+            dataModels: Record<string, Partial<foundry.abstract.TypeDataModel>>;
+            legacyTransferral: boolean;
         };
 
         /** Configuration for the ActorDelta embedded document type. */
@@ -231,6 +234,7 @@ declare global {
                 data: PreCreate<TCombatant["_source"]>,
                 context?: DocumentConstructionContext<TCombatant["parent"]>,
             ) => TCombatant;
+            dataModels: Record<string, Partial<foundry.abstract.TypeDataModel>>;
         };
 
         /** Configuration for the MeasuredTemplate embedded document type and its representation on the game Canvas */

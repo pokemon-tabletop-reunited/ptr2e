@@ -24,6 +24,15 @@ export function deepClone<T>(original: T): T;
 export function duplicate<T>(original: T): T;
 
 /**
+ * Test whether some class is a subclass of a parent.
+ * Returns true if the classes are identical.
+ * @param {Function} cls        The class to test
+ * @param {Function} parent     Some other class which may be a parent
+ * @returns {boolean}           Is the class a subclass of the parent?
+ */
+export function isSubclass<TParent, TSubClass extends TParent>(cls: ConstructorOf<TSubClass>, parent: ConstructorOf<TParent>): cls is ConstructorOf<TSubClass>;
+
+/**
  * Test whether a value is empty-like; either undefined or a content-less object.
  * @param value The value to test
  * @returns Is the value empty-like?

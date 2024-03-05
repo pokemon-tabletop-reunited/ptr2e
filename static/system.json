@@ -5,7 +5,7 @@
   "version": "0.001",
   "compatibility": {
     "minimum": 12,
-    "verified": "12.316",
+    "verified": "12.317",
     "maximum": 12
   },
   "authors": [
@@ -43,8 +43,37 @@
       "path": "lang/en.json"
     }
   ],
+  "documentTypes": {
+    "ActiveEffect": {
+      "basic": {},
+      "rolloption": {}
+    },
+    "Actor": {
+      "character": {}
+    },
+    "ChatMessage": {
+      "item": {}
+    },
+    "Combatant": {
+      "character": {},
+      "round": {}
+    },
+    "Item": {
+      "weapon": {},
+      "ability": {}, 
+      "consumable": {}, 
+      "container": {}, 
+      "equipment": {}, 
+      "gear": {}, 
+      "move": {}, 
+      "perk": {}, 
+      "species": {}
+    }
+  },
   "socket": false,
-  "gridDistance": 1,
-  "gridUnits": "m",
+  "grid": {
+    "distance": 1,
+    "units": "m"
+  },
   "background": "systems/ptr2e/img/splash.webp"
 }

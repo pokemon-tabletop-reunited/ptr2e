@@ -1,5 +1,5 @@
 import { FLAT_HEX_BORDERS } from "../../../scripts/config/hex.ts";
-import PTRPerk from "../../item/perk/system.ts";
+import PTRPerk from "../../item/data/perk.ts";
 import PTRPerkTreeIcon from "./perk-tree-icon.mjs";
 
 class PTRPerkTreeNode extends PTRPerkTreeIcon {

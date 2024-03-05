@@ -1,10 +1,13 @@
 import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
 import { CombatPTR2e, CombatantPTR2e, CombatTrackerPTR2e } from "@combat";
-import { ItemPTR2e, ItemSystemPTR2e } from "@item";
+import { ItemPTR2e, ItemSystemPTR } from "@item";
+import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
-import PTRPerkTree from "@module/canvas/perk-tree/perk-tree.mjs";
+import { PerkTree } from "@module/canvas/perk-tree/perk-tree.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import { ChangeModel } from "@module/data/models/change.ts";
+import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import { PTRCONFIG } from "@scripts/config/index.ts";
 import { sluggify } from "@utils";
 import type EnJSON from "static/lang/en.json";
@@ -15,19 +18,21 @@ interface GamePTR2e
         Actors<ActorPTR2e<ActorSystemPTR2e, null>>,
         ChatMessage,
         Combat,
-        ItemPTR2e<ItemSystemPTR2e, null>,
+        ItemPTR2e<ItemSystemPTR, null>,
         Macro,
         Scene,
         User<ActorPTR2e<ActorSystemPTR2e, null>>
     > {
     ptr: {
-        tree: PTRPerkTree;
+        tree: PerkTree;
         data: {
             traits: Map<string, Trait>;
         }
         util: {
             sluggify: typeof sluggify;
         };
+        perks: PerkManager;
+        tooltips: TooltipsPTR2e;
     }
 }
 
@@ -59,6 +64,10 @@ declare global {
         PTR: typeof PTRCONFIG;
         ui: ConfiguredConfig["ui"] & {
             perksTab: new () => PerkDirectory;
+        },
+        Change: {
+            documentClass: typeof ChangeModel;
+            dataModels: Record<string, Partial<foundry.abstract.TypeDataModel>>;
         }
     }
 
@@ -78,7 +87,7 @@ declare global {
 
         var ui: FoundryUI<
             ActorDirectory<ActorPTR2e<ActorSystemPTR2e, null>>,
-            ItemDirectory<ItemPTR2e<ItemSystemPTR2e, null>>,
+            ItemDirectory<ItemPTR2e<ItemSystemPTR, null>>,
             ChatLog,
             CompendiumDirectory,
             CombatTracker<Combat | null>
@@ -89,6 +98,8 @@ declare global {
         function getTexture(src: string): PIXI.Texture | PIXI.Spritesheet | null;
 
         var actor: () => ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e<Scene> | null> | null;
+
+        let _maxZ: number;
     }
 
     const BUILD_MODE: "development" | "production";
