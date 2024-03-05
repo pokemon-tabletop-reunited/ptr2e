@@ -1,3 +1,4 @@
+/** @module foundry */
 import * as Abstract from "./abstract/module.ts";
 import * as Constants from "./constants.ts";
 import * as Data from "./data/module.ts";

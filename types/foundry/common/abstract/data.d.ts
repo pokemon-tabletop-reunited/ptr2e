@@ -17,13 +17,20 @@ export default abstract class DataModel<
     /**
      * The source data object for this DataModel instance.
      * Once constructed, the source object is sealed such that no keys may be added nor removed.
+     * @protected
      */
     readonly _source: SourceFromSchema<TSchema>;
 
-    /** An immutable reverse-reference to a parent DataModel to which this model belongs. */
+    /** 
+     * An immutable reverse-reference to a parent DataModel to which this model belongs. 
+     * @internal
+     */
     readonly parent: TParent;
 
-    /** The defined and cached Data Schema for all instances of this DataModel. */
+    /** 
+     * The defined and cached Data Schema for all instances of this DataModel. 
+     * @protected
+     */
     protected static _schema: fields.SchemaField<fields.DataSchema> | undefined;
 
     /** Configure the data model instance before validation and initialization workflows are performed. */
@@ -39,17 +46,20 @@ export default abstract class DataModel<
      */
     static defineSchema(): fields.DataSchema;
 
-    /** Define the data schema for documents of this type. */
+    /** Define the data schema for documents of this type. @protected */
     static get schema(): fields.SchemaField<fields.DataSchema>;
 
     /** Define the data schema for this document instance. */
     // PROJECT NOTE: this must be overloaded in an interface merge declaration
+    /**
+     * @protected
+     */
     get schema(): fields.SchemaField<TSchema>;
 
-    /** Is the current state of this DataModel invalid? */
+    /** Is the current state of this DataModel invalid? @protected*/
     get invalid(): boolean;
 
-    /** An array of validation failure instances which may have occurred when this instance was last validated. */
+    /** An array of validation failure instances which may have occurred when this instance was last validated. @protected */
     get validationFailures(): {
         fields: foundry.data.validation.DataModelValidationFailure | null;
         joint: foundry.data.validation.DataModelValidationFailure | null;

@@ -1,5 +1,165 @@
 @import "utils.less";
 
+.document-sheet {
+    background: url(/ui/denim075.png);
+
+    .window-content {
+        background: url(/ui/parchment.jpg);
+        padding: 0.25rem;
+        margin: 0.75rem;
+        border-radius: 5px;
+        height: 100%;
+        color: black;
+    }
+
+    &.stats-form {
+        .window-content {
+            margin-top: 0.25rem;
+
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-template-rows: 35% 65%;
+            grid-template-areas:
+                "baseStats statsChart"
+                "evStats statsChart";
+
+            aside {
+                display: flex;
+
+                form {
+                    flex: 1;
+                }
+            }
+
+            aside[data-application-part="baseStats"] {
+                grid-area: baseStats;
+
+                form#base-stats-form {
+                    display: grid;
+                    grid-template-columns: 30% 15% 40% 15%;
+                    grid-template-rows: min-content 1fr 1fr 1fr;
+                    grid-template-areas: 
+                        "header header header header"
+                        "hpLabel hpValue spatkLabel spatkValue"
+                        "atkLabel atkValue spdefLabel spdefValue"
+                        "defLabel defValue spdLabel spdValue";
+
+                    label {
+                        margin-left: 1rem;
+                        text-align: left;
+                        align-self: center;
+
+                        &.hp {
+                            grid-area: hpLabel;
+                        }
+
+                        &.atk {
+                            grid-area: atkLabel;
+                        }
+
+                        &.def {
+                            grid-area: defLabel;
+                        }
+                        
+                        &.spa {
+                            grid-area: spatkLabel;
+                        }
+                        
+                        &.spd {
+                            grid-area: spdefLabel;
+                        }
+
+                        &.spe {
+                            grid-area: spdLabel;
+                        }
+                    }
+
+                    input {
+                        text-align: center;
+                        align-self: center;
+
+                        &.hp {
+                            grid-area: hpValue;
+                        }
+
+                        &.atk {
+                            grid-area: atkValue;
+                        }
+
+                        &.def {
+                            grid-area: defValue;
+                        }
+
+                        &.spa {
+                            grid-area: spatkValue;
+                        }
+
+                        &.spd {
+                            grid-area: spdefValue;
+                        }
+
+                        &.spe {
+                            grid-area: spdValue;
+                        }
+                    }
+
+                    h1 {
+                        grid-area: header;
+                        text-align: center;
+                    }
+
+                    input[type="submit"] {
+                        grid-area: submit;
+                    }
+                }
+            }
+
+            aside[data-application-part="evStats"] {
+                grid-area: evStats;
+
+                margin-top: 0.25rem;
+
+                form#ev-stats-form {
+                    display: flex;
+                    flex-direction: column;
+
+                    h1 {
+                        text-align: center;
+                    }
+
+                    .form-group {
+                        margin-left: 1rem;
+                    }
+                }
+            }
+
+            aside[data-application-part="statsChart"] {
+                grid-area: statsChart;
+
+                display: flex;
+                flex-direction: column;
+                margin-left: 0.25rem;
+
+                h1 {
+                    text-align: center;
+                }
+                
+                .stats-chart-aside {
+                    align-items: center;
+                    background: #346899;
+                    border-radius: 10px;
+                    margin: 0.25rem;
+                }
+            }
+        }
+    }
+}
+
+.stats-chart-aside {
+    flex: 1;
+    position: relative;
+}
+
 .system-traits {
     --readonly-striped: 0 !important;
 }
@@ -40,7 +200,7 @@
             min-width: 0;
             min-height: 0;
 
-            & > * {
+            &>* {
                 overflow: hidden;
             }
 
@@ -72,21 +232,26 @@
                         &.summary {
                             background-image: url("/systems/ptr2e/img/icons/nav/summary.webp");
                         }
+
                         &.actions {
                             background-image: url("/systems/ptr2e/img/icons/nav/actions.webp");
                         }
+
                         &.skills {
                             background-image: url("/systems/ptr2e/img/icons/nav/skills.webp");
                         }
+
                         &.gear {
                             background-image: url("/systems/ptr2e/img/icons/nav/gear.webp");
                         }
+
                         &.active {
                             filter: drop-shadow(1px 1px 2px var(--color-shadow-primary));
                         }
                     }
                 }
             }
+
             nav.sub-navigation {
                 grid-area: subnav;
                 background: #93d8f1ee;
@@ -181,6 +346,7 @@
                     }
                 }
             }
+
             main {
                 grid-area: main;
 
@@ -190,6 +356,7 @@
                     display: none;
                 }
             }
+
             .main-grid {
                 flex: 1;
 
@@ -200,7 +367,7 @@
                 min-width: 0;
                 min-height: 0;
 
-                & > * {
+                &>* {
                     overflow: hidden;
                 }
 
@@ -292,6 +459,7 @@
     position: absolute;
     z-index: calc(var(--z-index-window) - 1);
 }
+
 #perk-tree-controls {
     position: fixed;
     width: 100%;

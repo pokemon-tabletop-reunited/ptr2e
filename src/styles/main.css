@@ -494,6 +494,124 @@
 .gre-7 {
   grid-row-end: 7;
 }
+.document-sheet {
+  background: url(/ui/denim075.png);
+}
+.document-sheet .window-content {
+  background: url(/ui/parchment.jpg);
+  padding: 0.25rem;
+  margin: 0.75rem;
+  border-radius: 5px;
+  height: 100%;
+  color: black;
+}
+.document-sheet.stats-form .window-content {
+  margin-top: 0.25rem;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 35% 65%;
+  grid-template-areas: "baseStats statsChart" "evStats statsChart";
+}
+.document-sheet.stats-form .window-content aside {
+  display: flex;
+}
+.document-sheet.stats-form .window-content aside form {
+  flex: 1;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] {
+  grid-area: baseStats;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form {
+  display: grid;
+  grid-template-columns: 30% 15% 40% 15%;
+  grid-template-rows: min-content 1fr 1fr 1fr;
+  grid-template-areas: "header header header header" "hpLabel hpValue spatkLabel spatkValue" "atkLabel atkValue spdefLabel spdefValue" "defLabel defValue spdLabel spdValue";
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label {
+  margin-left: 1rem;
+  text-align: left;
+  align-self: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.hp {
+  grid-area: hpLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.atk {
+  grid-area: atkLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.def {
+  grid-area: defLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spa {
+  grid-area: spatkLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spd {
+  grid-area: spdefLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spe {
+  grid-area: spdLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input {
+  text-align: center;
+  align-self: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.hp {
+  grid-area: hpValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.atk {
+  grid-area: atkValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.def {
+  grid-area: defValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spa {
+  grid-area: spatkValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spd {
+  grid-area: spdefValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spe {
+  grid-area: spdValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form h1 {
+  grid-area: header;
+  text-align: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input[type="submit"] {
+  grid-area: submit;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="evStats"] {
+  grid-area: evStats;
+  margin-top: 0.25rem;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form {
+  display: flex;
+  flex-direction: column;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form h1 {
+  text-align: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form .form-group {
+  margin-left: 1rem;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="statsChart"] {
+  grid-area: statsChart;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.25rem;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="statsChart"] h1 {
+  text-align: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="statsChart"] .stats-chart-aside {
+  align-items: center;
+  background: #346899;
+  border-radius: 10px;
+  margin: 0.25rem;
+}
+.stats-chart-aside {
+  flex: 1;
+  position: relative;
+}
 .system-traits {
   --readonly-striped: 0 !important;
 }

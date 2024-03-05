@@ -1,10 +1,8 @@
 
 import { ActorPTR2e, ActorSheetPTR2e, ActorSystemPTR2e } from "@actor";
 import { CombatPTR2e, CombatTrackerPTR2e, CombatantPTR2e } from "@combat";
-import { AbilitySystem, ContainerSystem, EquipmentSystem, GearSystem, ItemPTR2e, MoveSystem, PerkSystem, SpeciesSystem, WeaponSystem} from "@item";
-import { AbilitySheetPTR2e } from "@item/ability/sheet.ts";
-import { ConsumableSystem } from "@item/consumable/system.ts";
-import { PerkSheetPTR2e } from "@item/perk/sheet.ts";
+import { ItemPTR2e, data, sheets } from "@item";
+import { AbilitySheetPTR2e } from "@item/sheets/ability.ts";
 import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
 import { ChatMessagePTR2e } from "@module/chat/document.ts";
 import { ItemMessageSystem } from "@module/chat/models/item.ts";
@@ -59,18 +57,18 @@ export const PTRCONFIG = {
     Item: {
         documentClass: ItemPTR2e,
         dataModels: {
-            ability: AbilitySystem,
-            consumable: ConsumableSystem,
-            container: ContainerSystem,
-            equipment: EquipmentSystem,
-            gear: GearSystem,
-            move: MoveSystem,
-            perk: PerkSystem,
-            species: SpeciesSystem,
-            weapon: WeaponSystem
+            ability: data.AbilitySystemModel,
+            consumable: data.ConsumableSystemModel,
+            container: data.ContainerSystemModel,
+            equipment: data.EquipmentSystemModel,
+            gear: data.GearSystemModel,
+            move: data.MoveSystemModel,
+            perk: data.PerkSystemModel,
+            species: data.SpeciesSystemModel,
+            weapon: data.WeaponSystemModel
         },
         sheetClasses: {
-            perk: PerkSheetPTR2e,
+            perk: [sheets.PerkSheetPTR2e],
             ability: AbilitySheetPTR2e,
         },
     },

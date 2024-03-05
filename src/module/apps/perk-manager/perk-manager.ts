@@ -1,4 +1,5 @@
-import { ItemPTR2e, PerkPTR2e, PerkSystem } from "@item";
+import { ItemPTR2e, PerkPTR2e } from "@item";
+import { PerkSystemModel } from "@item/data/index.ts";
 
 class PerkManager {
 
@@ -15,7 +16,7 @@ class PerkManager {
         for await (const perkSet of this.loadPerks()) {
             for (const perk of perkSet) {
                 if (this.isValidPerk(perk)) {
-                    this.perks.set(perk.slug, perk);
+                    this.perks.set(perk.slug!, perk);
                 }
             }
         }
@@ -28,7 +29,7 @@ class PerkManager {
         return this;
     }
 
-    isValidPerk(perk: unknown): perk is ItemPTR2e<PerkSystem, null> {
+    isValidPerk(perk: unknown): perk is ItemPTR2e<PerkSystemModel, null> {
         return (
             typeof perk === "object"
             && perk !== null

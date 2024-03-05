@@ -39,4 +39,5 @@ declare class ItemSheet<TItem extends Item, TOptions extends DocumentSheetOption
 declare interface ItemSheetData<TItem extends Item> extends DocumentSheetData<TItem> {
     item: TItem;
     data: object;
+    [key: string]: any;
 }

@@ -136,4 +136,57 @@ function _registerBasicHelpers() {
     })
 
     Handlebars.registerHelper("json", function (context) { return JSON.stringify(context); });
+
+    const buildInEachHelper = Handlebars.helpers.each; 
+    Handlebars.registerHelper("each", function (context, options) {
+        let fn = options.fn,
+            inverse = options.inverse,
+            i = 0,
+            ret = '',
+            data: { key: string; index: number; first: boolean; last: boolean } | undefined;
+
+        if (fu.getType(context) === "function") {
+            // @ts-ignore
+            context = context.call(this);
+        }
+
+        function execIteration(field: string, value: unknown, index: number, last: boolean) {
+            if (data) {
+                data.key = field;
+                data.index = index;
+                data.first = index === 0;
+                data.last = !!last;
+            }
+
+            ret =
+                ret +
+                fn(value, {
+                    data: data,
+                    blockParams: [context.get(field), field],
+                });
+        }
+
+        if (fu.getType(context) === 'Map') {
+            if (options.data) {
+                data = Handlebars.Utils.createFrame(options.data);
+            }
+
+            const map = context as Map<string, unknown>;
+            const j = map.size;
+            for (const [key, value] of map) {
+                execIteration(key, value, i++, i === j);
+            }
+        }
+        else {
+            return buildInEachHelper(context, options);
+        }
+
+        if (i === 0) {
+            // @ts-ignore
+            ret = inverse(this);
+        }
+
+        return ret;
+    });
+
 }

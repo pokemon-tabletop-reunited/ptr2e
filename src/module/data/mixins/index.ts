@@ -1,0 +1,10 @@
+/** @module data/mixins */
+export {default as HasActions} from "./has-actions.ts"
+export {default as HasBase} from "./has-base.ts"
+export {default as HasChanges} from "./has-changes.ts"
+export {default as HasContainer} from "./has-container.ts"
+export {default as HasDescription} from "./has-description.ts"
+export {default as HasIdentification} from "./has-identification.ts"
+export {default as HasSlug} from "./has-slug.ts"
+export {default as HasTraits} from "./has-traits.ts"
+export {default as HasGearData} from "./has-gear-data.ts"

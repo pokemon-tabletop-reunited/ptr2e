@@ -1,0 +1,83 @@
+.trait {
+  text-decoration: underline;
+  font-family: monospace;
+  padding: 0.25rem 0;
+}
+aside[role="tooltip"] {
+  background: url('/ui/denim075.png') !important;
+}
+aside[role="tooltip"].locked-tooltip,
+aside[role="tooltip"].locked-tooltip * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+aside[role="tooltip"].locked-tooltip .circular-progress,
+aside[role="tooltip"].locked-tooltip * .circular-progress {
+  animation: none;
+  --progress: 100;
+}
+aside[role="tooltip"].locked-tooltip .circular-progress circle.fg,
+aside[role="tooltip"].locked-tooltip * .circular-progress circle.fg {
+  --stroke: red;
+}
+aside[role="tooltip"].locked-tooltip .circular-progress circle.fgb,
+aside[role="tooltip"].locked-tooltip * .circular-progress circle.fgb {
+  stroke: var(--stroke);
+}
+aside[role="tooltip"] .progress-circle {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 25px;
+  height: 25px;
+  border-radius: 0 0 0 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+aside[role="tooltip"] .circular-progress {
+  --size: 20px;
+  --half-size: calc(var(--size) / 2);
+  --stroke-width: 5px;
+  --radius: calc((var(--size) - var(--stroke-width)) / 2);
+  --circumference: calc(var(--radius) * pi * 2);
+  --dash: calc((var(--progress) * var(--circumference)) / 100);
+  --stroke: #fdb953;
+  animation: progress-animation 2s ease-out 0s 1 forwards;
+}
+aside[role="tooltip"] .circular-progress circle {
+  cx: var(--half-size);
+  cy: var(--half-size);
+  r: var(--radius);
+  stroke-width: var(--stroke-width);
+  fill: none;
+  stroke-linecap: round;
+}
+aside[role="tooltip"] .circular-progress circle.bg {
+  stroke: #ddd;
+}
+aside[role="tooltip"] .circular-progress circle.fg {
+  transform: rotate(-90deg);
+  transform-origin: var(--half-size) var(--half-size);
+  stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+  transition: stroke-dasharray 0.3s linear 0s;
+  stroke: var(--stroke);
+}
+aside[role="tooltip"] .circular-progress circle.fgb {
+  stroke-width: 4px;
+}
+@property --progress {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+@keyframes progress-animation {
+  from {
+    --progress: 0;
+  }
+  to {
+    --progress: 100;
+  }
+}

@@ -7,6 +7,7 @@ import { PerkTree } from "@module/canvas/perk-tree/perk-tree.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { ChangeModel } from "@module/data/models/change.ts";
+import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import { PTRCONFIG } from "@scripts/config/index.ts";
 import { sluggify } from "@utils";
 import type EnJSON from "static/lang/en.json";
@@ -31,6 +32,7 @@ interface GamePTR2e
             sluggify: typeof sluggify;
         };
         perks: PerkManager;
+        tooltips: TooltipsPTR2e;
     }
 }
 
@@ -96,6 +98,8 @@ declare global {
         function getTexture(src: string): PIXI.Texture | PIXI.Spritesheet | null;
 
         var actor: () => ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e<Scene> | null> | null;
+
+        let _maxZ: number;
     }
 
     const BUILD_MODE: "development" | "production";

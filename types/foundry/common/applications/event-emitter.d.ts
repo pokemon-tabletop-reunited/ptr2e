@@ -1,27 +1,26 @@
+type Constructor = (new (...args: any[]) => any);
+export type EmittedEventListener = (event: Event) => any;
+
 /**
-   * Augment a base class with EventEmitter behavior.
-   * @template {Constructor} BaseClass
-   * @param {BaseClass} BaseClass         Some base class augmented with event emitter functionality
-   */
-export function EventEmitterMixin<BaseClass>(BaseClass: BaseClass) {
-    /**
-     * A mixin class which implements the behavior of EventTarget.
-     * This is useful in cases where a class wants EventTarget-like behavior but needs to extend some other class.
-     * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget
-     */
+ * Augment a base class with EventEmitter behavior.
+ * @template {Constructor} BaseClass
+ * @param {BaseClass} BaseClass         Some base class augmented with event emitter functionality
+ */
+//@ts-ignore
+export function EventEmitterMixin<BaseClass extends Constructor>(BaseClass: BaseClass) {
     class EventEmitter extends BaseClass {
 
         /**
          * An array of event types which are valid for this class.
          * @type {string[]}
          */
-        static emittedEvents: string[] = [];
+        static emittedEvents: string[];
 
         /**
          * A mapping of registered events.
          * @type {Object<string, Map<EmittedEventListener, {fn: EmittedEventListener, once: boolean}>>}
          */
-        #events: { [s: string]: Map<EmittedEventListener, { fn: EmittedEventListener; once: boolean; }>; } = {};
+        #events: { [s: string]: Map<EmittedEventListener, { fn: EmittedEventListener; once: boolean; }>; }
 
         /* -------------------------------------------- */
 
@@ -33,7 +32,7 @@ export function EventEmitterMixin<BaseClass>(BaseClass: BaseClass) {
          * @param {object} [options={}]             Options which configure the event listener
          * @param {boolean} [options.once=false]      Should the event only be responded to once and then removed
          */
-        addEventListener(type: string, listener: EmittedEventListener, { once = false }: { once?: boolean; } = {});
+        addEventListener(type: string, listener: EmittedEventListener, { once }: { once?: boolean; }): void;
 
         /* -------------------------------------------- */
 
@@ -43,7 +42,7 @@ export function EventEmitterMixin<BaseClass>(BaseClass: BaseClass) {
          * @param {string} type                     The type of event being removed
          * @param {EmittedEventListener} listener   The listener function being removed
          */
-        removeEventListener(type: string, listener: EmittedEventListener);
+        removeEventListener(type: string, listener: EmittedEventListener): void;
 
         /* -------------------------------------------- */
 

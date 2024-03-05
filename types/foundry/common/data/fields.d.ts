@@ -255,7 +255,51 @@ export abstract class DataField<
      * @param path The field path as an array of strings
      */
     protected _getField(path: string[]): this | undefined;
+
+    /* -------------------------------------------- */
+    /*  Form Field Integration                      */
+    /* -------------------------------------------- */
+
+    /**
+     * Render this DataField as an HTML element.
+     * @param {FormInputConfig} config        Form element configuration parameters
+     * @throws {Error}                        An Error if this DataField subclass does not support input rendering
+     * @returns {HTMLElement|HTMLCollection}  A rendered HTMLElement for the field
+     */
+    toInput(config?: FormInputConfig): HTMLElement | HTMLCollection;
+
+    /* -------------------------------------------- */
+
+    /**
+     * Render this DataField as a standardized form-group element.
+     * @param {FormInputConfig} inputConfig   Input element configuration options passed to DataField#toInput
+     * @param {FormGroupConfig} groupConfig   Configuration options passed to the wrapping form-group
+     * @param {CustomFormInput} customInput   Replace the default input generation for the field with a custom function
+     * @returns {HTMLDivElement}              The rendered form group element
+     */
+    toFormGroup(inputConfig?: FormInputConfig, groupConfig?: FormGroupConfig, customInput?: CustomFormInput): HTMLDivElement;
 }
+
+interface FormInputConfig {
+    name: string;
+    value?: any;
+    required?: boolean;
+    disabled?: boolean;
+    readonly?: boolean;
+    dataset?: Record<string, string>;
+    placeholder?: string;
+}
+
+interface FormGroupConfig {
+    label: string;
+    input: HTMLElement | HTMLCollection;
+    classes?: string[];
+    hint?: string;
+    stacked?: boolean;
+    localize?: boolean;
+}
+
+type CustomFormInput = (field: DataField, config: FormInputConfig) => HTMLElement | HTMLCollection;
 
 /* -------------------------------------------- */
 /*  Data Schema Field                           */

@@ -1,9 +1,12 @@
 <form>
-    <h1>Hi Again!</h1>
-    {{#each item.system.schema.fields }}
-        {{log this}}
-        {{#unless (or (is this.name "traits") (is this.name "actions"))}}
-            {{formInput this}}
-        {{/unless}}
+    <h1>Auto Generated (App v1) Form</h1>
+    {{#each fields as |value key|}}
+        {{formField value value=(lookup ../document.system key) localize=true}}
     {{/each}}
+    <h2 class="mt-2">Traits</h2>
+    <ul>
+    {{#each document.system.traits as |trait|}}
+        <li class="trait" data-tooltip-direction="LEFT" data-trait="{{trait.slug}}" data-tooltip="{{trait.label}}">[{{trait.label}}]</li>
+    {{/each}}
+    </ul>
 </form>

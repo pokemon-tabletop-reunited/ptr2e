@@ -19,7 +19,6 @@ export const Init = {
                 return canvas.tokens.controlled[0]?.actor;
             }
 
-
             // Setup PTR Config
             CONFIG.PTR = PTRCONFIG;
             Object.freeze(CONFIG.PTR);
@@ -52,6 +51,7 @@ export const Init = {
                 Actors.registerSheet("ptr2e", ActorSheetPTR2e, { makeDefault: true })
 
                 Items.unregisterSheet("core", ItemSheet);
+                //@ts-ignore
                 Items.registerSheet("ptr2e", PTRCONFIG.Item.sheetClasses.ability, { types: ["ability"], makeDefault: true });
             }
 

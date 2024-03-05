@@ -16,3 +16,4 @@ declare global {
         hidden?: boolean;
     }
 }
+

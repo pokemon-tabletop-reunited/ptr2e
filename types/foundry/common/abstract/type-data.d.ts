@@ -60,8 +60,12 @@ import type * as packages from "../packages/module.d.ts";
  * ```
  */
 export default class TypeDataModel extends abstract.DataModel {
-    /** The package that is providing this DataModel for the given sub-type. */
+    /** 
+     * The package that is providing this DataModel for the given sub-type.
+     * @protected
+     */
     readonly modelProvider: packages.BaseSystem | packages.BaseModule | null;
+    
 
     constructor(data?: object, options?: DataModelConstructionOptions<abstract.Document | null>);
 
