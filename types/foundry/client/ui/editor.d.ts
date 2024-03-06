@@ -40,9 +40,9 @@ declare global {
          * @param [options.rollData]       The data object providing context for inline rolls
          * @return The enriched HTML content
          */
-        static enrichHTML(content: string | null, options: EnrichmentOptions & { async: false }): string;
-        static enrichHTML(content: string | null, options: EnrichmentOptions & { async: true }): Promise<string>;
-        static enrichHTML(content: string | null, options: EnrichmentOptions): string | Promise<string>;
+        static enrichHTML(content: string | null, options?: EnrichmentOptions & { async: true }): Promise<string>;
+        static enrichHTML(content: string | null, options?: EnrichmentOptions & { async: false }): string;
+        static enrichHTML(content: string | null, options?: EnrichmentOptions): Promise<string>;
 
         /**
          * Convert text of the form @UUID[uuid]{name} to anchor elements.
@@ -194,6 +194,8 @@ declare global {
         links?: boolean;
         rolls?: boolean;
         rollData?: Record<string, unknown>;
+        _embedDepth?: number;
+        relativeTo?: unknown;
     }
 
     type EditorCreateOptions = Partial<TinyMCE.EditorOptions | ProseMirrorEditorOptions> & {

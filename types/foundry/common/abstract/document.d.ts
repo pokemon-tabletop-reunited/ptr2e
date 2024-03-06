@@ -457,6 +457,16 @@ export default abstract class Document<
      */
     unsetFlag(scope: string, key: string): Promise<this>;
 
+    /**
+     * Convert a Document to some HTML display for embedding purposes.
+     * @param {DocumentHTMLEmbedConfig} config  Configuration for embedding behavior.
+     * @param {EnrichmentOptions} [options]     The original enrichment options for cases where the Document embed
+     *                                          content also contains text that must be enriched.
+     * @returns {Promise<HTMLElement|null>}     A representation of the Document as HTML content, or null if such a
+     *                                          representation could not be generated.
+     */
+    toEmbed(config: DocumentHTMLEmbedConfig, options?: EnrichmentOptions): Promise<HTMLElement | null>;
+
     /* -------------------------------------------- */
     /*  Event Handlers                              */
     /* -------------------------------------------- */
@@ -584,6 +594,15 @@ export default abstract class Document<
      */
     toJSON(): RawObject<this>;
 }
+
+type DocumentHTMLEmbedConfig = {
+    values?: string[];
+    classes?: string;
+    inline?: boolean;
+    cite?: boolean;
+    caption?: boolean;
+    label?: string;
+};
 
 type MetadataPermission =
     | keyof typeof CONST.USER_ROLES

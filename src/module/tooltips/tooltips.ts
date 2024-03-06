@@ -1,3 +1,7 @@
+import { ActorPTR2e } from "@actor";
+import { ItemPTR2e } from "@item";
+import AttackPTR2e from "@module/data/models/attack.ts";
+
 export default class TooltipsPTR2e {
     #observer: MutationObserver | undefined;
     #timeout: number | null = null;
@@ -30,8 +34,9 @@ export default class TooltipsPTR2e {
                 const diff = new Set(this.tooltip.classList).difference(new Set(oldValue?.split(" ") ?? []));
                 if (diff.has("active")) {
                     this._clearAutoLock();
-                    this._activateTooltip();
-                    this._autoLockTooltip();
+                    this._activateTooltip().then(result => {
+                        if(result) this._autoLockTooltip();
+                    })
                     return;
                 }
             }
@@ -63,6 +68,11 @@ export default class TooltipsPTR2e {
         if (game.tooltip.element?.classList.contains("trait")) {
             return this._onTraitTooltip();
         }
+        if (game.tooltip.element?.classList.contains("attack")) {
+            return this._onAttackTooltip();
+        }
+
+        return false;
     } 
 
     /**
@@ -70,10 +80,10 @@ export default class TooltipsPTR2e {
      */
     async _onTraitTooltip() {
         const trait = game.tooltip.element?.dataset.trait;
-        if (!trait) return;
+        if (!trait) return false;
 
         const data = game.ptr.data.traits.get(trait);
-        if (!data) return;
+        if (!data) return false;
 
         this.tooltip.innerHTML = `<h4 class="trait">[${data.label}]</h4><cntent>${data.description}</content>
         <div class="progress-circle">
@@ -85,6 +95,35 @@ export default class TooltipsPTR2e {
         </div>`;
         const tooltipDirection = game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined;
         requestAnimationFrame(() => this._positionTooltip(tooltipDirection));
+        return true;
+    }
+
+    async _onAttackTooltip() {
+        const attackSlug = game.tooltip.element?.dataset.action;
+        if (!attackSlug) return false;
+
+        const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset.parent;
+        if(!parentUuid) return false;
+
+        const parent = await fromUuid(parentUuid) as ActorPTR2e | ItemPTR2e;
+        if(!parent) return false;
+
+        const attack = parent.actions.attack!.get(attackSlug) as AttackPTR2e | undefined;
+        if(!attack) return false;
+
+        this.tooltip.classList.add("attack");
+        this.tooltip.innerHTML = `${await renderTemplate("systems/ptr2e/templates/partials/attack-embed.hbs", {attack: attack})}
+        <div class="progress-circle">
+            <svg width="20" height="20" viewBox="0 0 20 20" class="circular-progress">
+                <circle class="bg"></circle>
+                <circle class="fg"></circle>
+                <circle class="fgb"></circle>
+            </svg>
+        </div>`;
+
+        const tooltipDirection = game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined;
+        requestAnimationFrame(() => this._positionTooltip(tooltipDirection));
+        return true;
     }
 
     /**

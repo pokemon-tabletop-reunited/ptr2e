@@ -1,6 +1,8 @@
 // import { ActorPTR2e } from "@actor";
 // import { ChangeModel } from "./change.ts";
 
+import { ActionPTR2e } from "./action.ts";
+import AttackPTR2e from "./attack.ts";
 import { BasicChangeSystem } from "./basic.ts";
 import { RollOptionChangeSystem } from "./rolloption.ts";
 
@@ -13,11 +15,20 @@ import { RollOptionChangeSystem } from "./rolloption.ts";
 //     }
 // }
 
-let types;
+let changeTypes;
 
 export function ChangeTypes() {    
-    return types ??= Object.freeze({
+    return changeTypes ??= Object.freeze({
         [BasicChangeSystem.TYPE]: BasicChangeSystem,
         [RollOptionChangeSystem.TYPE]: RollOptionChangeSystem
+    });
+}
+
+let actionTypes;
+export function ActionTypes() {
+    return actionTypes ??= Object.freeze({
+        [ActionPTR2e.TYPE]: ActionPTR2e,
+        [AttackPTR2e.TYPE]: AttackPTR2e,
+        "passive": ActionPTR2e,
     });
 }

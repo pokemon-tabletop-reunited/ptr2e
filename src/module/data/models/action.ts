@@ -1,22 +1,29 @@
+import { _DataModel } from "types/foundry/common/abstract/data.js";
+
 // Priority & Interrupt are [Traits] so don't need a data field
 type ActionCost = "simple" | "complete" | "free";
-type ActionType = ActivityType | "attack" | "passive" | "generic";
+export type ActionType = ActivityType | "attack" | "passive" | "generic";
 type ActivityType = "camping" | "downtime" | "exploration";
 
 type TargetOption = "self" | "ally" | "enemy" | "creature" | "object" | "blast" | "cone" | "line" | "wide-line" | "emanation" | "field" | "aura" | "allied-aura" | "enemy-aura";
 
 class ActionPTR2e extends foundry.abstract.DataModel {
+    static TYPE: ActionType = "generic" as const;
+
     static override defineSchema() {
         const fields = foundry.data.fields;
         return {
-            slug: new fields.StringField({ required: true }),
-            name: new fields.StringField({ required: true, initial: "New Action" }),
-            description: new fields.HTMLField({ required: false, nullable: true }),
+            slug: new fields.StringField({ required: true, label: "PTR2E.Fields.Slug.Label", hint: "PTR2E.Fields.Slug.Hint" }),
+            name: new fields.StringField({ required: true, initial: "New Action", label: "PTR2E.Fields.Name.Label", hint: "PTR2E.Fields.Name.Hint"  }),
+            description: new fields.HTMLField({ required: false, nullable: true}),
             traits: new fields.ArrayField(new fields.StringField()),
             type: new fields.StringField({
-                required: true, choices: () => [
+                required: true, blank: false, initial: this.TYPE,
+                validate: value => value === this.TYPE || [
                     "attack", "camping", "downtime", "exploration", "passive", "generic"
-                ]
+                ].includes(value as string), 
+                validationError: `must be equal to "${this.TYPE}"`, 
+                label: "PTR2E.Fields.Type.Label", hint: "PTR2E.Fields.Type.Hint" 
             }),
             range: new fields.EmbeddedDataField(RangePTR2e, { required: false, nullable: true }),
             cost: new fields.SchemaField({
@@ -117,10 +124,11 @@ class RangePTR2e extends foundry.abstract.DataModel {
             target: new fields.StringField({
                 required: true, choices: [
                     "self", "ally", "enemy", "creature", "object", "blast", "cone", "line", "wide-line", "emanation", "field"
-                ]
+                ],
+                initial: "creature"
             }),
             distance: new fields.NumberField({ required: true, initial: 0 }),
-            unit: new fields.StringField({ required: true, choices: ["m", "ft"] }),
+            unit: new fields.StringField({ required: true, choices: ["m", "ft"], initial: "m" }),
         }
     }
 }

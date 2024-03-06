@@ -1,0 +1,28 @@
+<h3>{{attack.name}}</h3>
+<aside class="d-flex flex-col">
+    <div class="d-flex flex-row w-100">
+        <label>{{localize "PTR2E.Fields.PokemonType.LabelShort"}}:</label>
+        <label>{{localize "PTR2E.Fields.PokemonCategory.Label"}}:</label>
+    </div>
+    <div class="d-flex flex-row w-100 mt-1 mb-1">
+        <span>{{capitalize attack.typing}}</span>
+        <span>{{capitalize attack.category}}</span>
+    </div>
+    <div class="d-flex flex-row w-100 mt-1">
+        <label>{{localize "PTR2E.Fields.Power.Label"}}:</label>
+        <label>{{localize "PTR2E.Fields.Accuracy.Label"}}:</label>
+    </div>
+    <div class="d-flex flex-row w-100 mt-1 mb-1">
+        <span>{{#if attack.power}}{{attack.power}}{{else}}--{{/if}}</span>
+        <span>{{#if attack.accuracy}}{{attack.accuracy}}%{{else}}--{{/if}}</span>
+    </div>
+</aside>
+{{#if attack.description}}
+    <content>
+        {{attack.description}}
+    </content>
+{{else}}
+    <content class="no-effect">
+        <i class='small'>No effect was provided</i>
+    </content>
+{{/if}}

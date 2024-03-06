@@ -1,0 +1,8 @@
+<content>
+    <h2>{{move.name}}</h2>
+</content>
+{{#each move.actions.attack as |attack|}}
+    <figure class="attack">
+        {{> attack-embed attack=attack}}
+    </figure>
+{{/each}}

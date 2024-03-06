@@ -77,4 +77,13 @@ export default class TypeDataModel extends abstract.DataModel {
      * Compute data fields whose values are not stored to the database.
      */
     prepareDerivedData(): void;
+
+    /**
+     * Convert this Document to some HTML display for embedding purposes.
+     * @param {DocumentHTMLEmbedConfig} config  Configuration for embedding behavior.
+     * @param {EnrichmentOptions} [options]     The original enrichment options for cases where the Document embed content
+     *                                          also contains text that must be enriched.
+     * @returns {Promise<HTMLElement|HTMLCollection|null>}
+     */
+    toEmbed(config: abstract.DocumentHTMLEmbedConfig, options?: EnrichmentOptions): Promise<HTMLElement | HTMLCollection | null>;
 }

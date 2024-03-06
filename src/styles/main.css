@@ -311,9 +311,16 @@
 .d-flex {
   display: flex;
 }
+.flex-grow-1 {
+  flex-grow: 1;
+}
+.flex-grow-0 {
+  flex-grow: 0;
+}
 .flex-row {
   flex-direction: row;
 }
+.flex-col,
 .flex-column {
   flex-direction: column;
 }
@@ -325,6 +332,9 @@
 }
 .justify-content-evenly {
   justify-content: space-evenly;
+}
+.justify-content-end {
+  justify-content: end;
 }
 .align-items-center {
   align-items: center;
@@ -624,6 +634,88 @@
 .ptr-trait:hover {
   background: #e6e6e6;
 }
+[role="tooltip"].attack,
+.embed.move-embed.attack,
+[role="tooltip"] .attack,
+.embed.move-embed .attack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: #121212;
+  border-radius: 10px !important;
+  margin: 0.25rem !important;
+  padding: 0.25rem !important;
+  min-width: 200px;
+  color: #efefef;
+}
+[role="tooltip"].attack h3,
+.embed.move-embed.attack h3,
+[role="tooltip"] .attack h3,
+.embed.move-embed .attack h3 {
+  border-bottom: 1px solid #fefefeaa;
+  margin: 0.25rem 0;
+  padding-bottom: 0.25rem;
+  text-align: center;
+}
+[role="tooltip"].attack div.d-flex,
+.embed.move-embed.attack div.d-flex,
+[role="tooltip"] .attack div.d-flex,
+.embed.move-embed .attack div.d-flex {
+  justify-content: space-between;
+  text-align: center;
+}
+[role="tooltip"].attack label,
+.embed.move-embed.attack label,
+[role="tooltip"] .attack label,
+.embed.move-embed .attack label {
+  font-size: 14px;
+  text-wrap: nowrap;
+  font-weight: bold;
+  flex: 0 0 45%;
+}
+[role="tooltip"].attack span,
+.embed.move-embed.attack span,
+[role="tooltip"] .attack span,
+.embed.move-embed .attack span {
+  font-size: 14px;
+  text-wrap: nowrap;
+  flex: 0 0 45%;
+}
+[role="tooltip"].attack content,
+.embed.move-embed.attack content,
+[role="tooltip"] .attack content,
+.embed.move-embed .attack content {
+  display: flex;
+  min-height: 40px;
+  width: 100%;
+  padding-top: 0.25rem;
+  border-top: 1px solid #fefefeaa;
+}
+[role="tooltip"].attack content.no-effect,
+.embed.move-embed.attack content.no-effect,
+[role="tooltip"] .attack content.no-effect,
+.embed.move-embed .attack content.no-effect {
+  justify-content: center;
+}
+[role="tooltip"].attack content i.small,
+.embed.move-embed.attack content i.small,
+[role="tooltip"] .attack content i.small,
+.embed.move-embed .attack content i.small {
+  font-size: 11px;
+  color: lightgray;
+  align-self: center;
+  text-align: center;
+}
+.ptr2e form .form-group {
+  margin: 0.25rem;
+  padding: 0.25rem;
+  border: 2px groove #fefefe;
+}
+.ptr2e .attack-action {
+  margin: 0.25rem;
+  padding: 0.25rem;
+  border: 2px groove #fefefe;
+}
 .ptr2e img {
   border: unset;
 }
@@ -816,9 +908,8 @@
 }
 .ptr2e.actor form .main-grid .actions {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: start;
   background: #346899;
   border-radius: 10px;
   margin: 0.25rem;
@@ -826,6 +917,27 @@
 .ptr2e.actor form .main-grid .actions.default-location {
   grid-column: 1 / span 3;
   grid-row: 1 / span 5;
+}
+.ptr2e.actor form .main-grid .actions h2 {
+  text-align: center;
+  border-bottom: 1px solid #fefefeaa;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list {
+  list-style: none;
+  margin: 0 0.5rem;
+  padding: 0;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action {
+  padding: 0.5rem;
+  background: #3889adee;
+  border-radius: 5px;
+  color: #efefef;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action:nth-child(odd) {
+  background: #2f608dee;
 }
 .ptr2e.actor form .main-grid .gear {
   display: flex;

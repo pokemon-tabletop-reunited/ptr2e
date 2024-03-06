@@ -55,6 +55,21 @@ class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
         for (const taggifyElement of $html.find(".ptr-tagify")) {
             tagify(taggifyElement as HTMLInputElement, { traits: $(taggifyElement).hasClass("system-traits") });
         }
+
+        $html.find(".item-controls .item-to-chat").on("click", async (event) => {
+            const uuid = (event.currentTarget.closest(".item-controls") as HTMLElement)?.dataset?.uuid;
+            if(!uuid) return;
+            const document = await fromUuid(uuid);
+
+            return document?.toChat?.();
+        });
+        $html.find(".item-controls .item-edit").on("click", async (event) => {
+            const uuid = (event.currentTarget.closest(".item-controls") as HTMLElement)?.dataset?.uuid;
+            if(!uuid) return;
+            const document = await fromUuid(uuid);
+
+            return document?.sheet?.render(true);
+        });
         
         // @ts-ignore
         $html.find(".stats-chart").on("dblclick", () => new StatsForm(this.actor).render(true));

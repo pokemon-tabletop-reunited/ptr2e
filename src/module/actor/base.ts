@@ -1,6 +1,7 @@
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { ActorSystemPTR2e } from "@actor";
 import { ActiveEffectPTR2e } from "@module/effects/document.ts";
+import { ActionPTR2e, ActionType } from "@module/data/models/action.ts";
 
 class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null> extends Actor<TParent, TSystem> {
 
@@ -12,10 +13,24 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
         return this.system.attributes;
     }
 
+    get actions() {
+        return this._actions;
+    }
+
+    _actions!: Record<ActionType, Map<string, ActionPTR2e>>;
+
     /** 
      * Step 1 - Copies data from source object to instance attributes
      * */
     override _initialize() {
+        super._initialize();   
+    }
+
+    /** 
+     * Step 2 - Prepare data for use by the instance. This method is called automatically by DataModel#_initialize workflow
+     * The work done by this method should be idempotent. There are situations in which prepareData may be called more than once.
+     * */
+    override prepareData() {
         const preparationWarnings = new Set<string>();
         this.synthetics = {
             ephemeralEffects: { all: [], damage: [] },
@@ -33,23 +48,24 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
             },
         }
 
-        super._initialize();
+        this._actions = {
+            generic: new Map(),
+            attack: new Map(),
+            exploration: new Map(),
+            downtime: new Map(),
+            camping: new Map(),
+            passive: new Map(),
+        }        
 
-        if (game._documentsReady) {
-            this.synthetics.preparationWarnings.flush();
-        }
-    }
-
-    /** 
-     * Step 2 - Prepare data for use by the instance. This method is called automatically by DataModel#_initialize workflow
-     * The work done by this method should be idempotent. There are situations in which prepareData may be called more than once.
-     * */
-    override prepareData() {
         this.health = {
             percent: Math.floor(Math.random() * 100)
         }
 
-        return super.prepareData();
+        super.prepareData();
+
+        if (game._documentsReady) {
+            this.synthetics.preparationWarnings.flush();
+        }
     }
 
     /**

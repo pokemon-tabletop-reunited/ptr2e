@@ -9,6 +9,8 @@ declare global {
         get isOwner(): boolean;
         get sheet(): FormApplication;
         get uuid(): DocumentUUID;
+
+        toChat?(): Promise<void>;
     }
 
     interface CanvasDocument extends ClientDocument {

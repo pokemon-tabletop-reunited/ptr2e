@@ -38,7 +38,7 @@
                     display: grid;
                     grid-template-columns: 30% 15% 40% 15%;
                     grid-template-rows: min-content 1fr 1fr 1fr;
-                    grid-template-areas: 
+                    grid-template-areas:
                         "header header header header"
                         "hpLabel hpValue spatkLabel spatkValue"
                         "atkLabel atkValue spdefLabel spdefValue"
@@ -60,11 +60,11 @@
                         &.def {
                             grid-area: defLabel;
                         }
-                        
+
                         &.spa {
                             grid-area: spatkLabel;
                         }
-                        
+
                         &.spd {
                             grid-area: spdefLabel;
                         }
@@ -143,7 +143,7 @@
                 h1 {
                     text-align: center;
                 }
-                
+
                 .stats-chart-aside {
                     align-items: center;
                     background: #346899;
@@ -175,7 +175,80 @@
     }
 }
 
+[role="tooltip"], .embed.move-embed {
+    &.attack, .attack {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+
+        background: #121212;
+        border-radius: 10px !important;
+        margin: 0.25rem !important;
+        padding: 0.25rem !important;
+        min-width: 200px;
+
+        color: #efefef;
+
+        h3 {
+            border-bottom: 1px solid #fefefeaa;
+            margin: 0.25rem 0;
+            padding-bottom: 0.25rem;
+            text-align: center;
+        }
+    
+        div.d-flex {
+            justify-content: space-between;
+            text-align: center;
+        }
+
+        label {
+            font-size: 14px;
+            text-wrap: nowrap;
+            font-weight: bold;
+            flex: 0 0 45%;
+        }
+        span {
+            font-size: 14px;
+            text-wrap: nowrap;
+            flex: 0 0 45%;
+        }
+        content {
+            display: flex;
+            min-height: 40px;
+            width: 100%;
+
+            padding-top: 0.25rem;
+            border-top: 1px solid #fefefeaa;
+
+            &.no-effect {
+                justify-content: center;
+            }
+
+            i.small {
+                font-size: 11px;
+                color: lightgray;
+                align-self: center;
+                text-align: center;
+            }
+        }
+    }
+}
+
 .ptr2e {
+    form {
+        .form-group {
+            margin: 0.25rem;
+            padding: 0.25rem;
+            border: 2px groove #fefefe;
+        }
+    }
+
+    .attack-action {
+        margin: 0.25rem;
+        padding: 0.25rem;
+        border: 2px groove #fefefe;
+    }
+
     img {
         border: unset;
     }
@@ -421,9 +494,8 @@
 
                 .actions {
                     display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    align-items: center;
+                    flex-direction: column;
+                    justify-content: start;
 
                     background: #346899;
                     border-radius: 10px;
@@ -432,6 +504,32 @@
                     &.default-location {
                         grid-column: 1 / span 3;
                         grid-row: 1 / span 5;
+                    }
+
+                    h2 {
+                        text-align: center;
+                        border-bottom: 1px solid #fefefeaa;
+                    }
+
+                    ul.action-list {
+                        list-style: none;
+                        margin: 0 0.5rem;
+                        padding: 0;
+
+                        li.action {
+                            padding: 0.5rem;
+                            background: #3889adee;
+                            border-radius: 5px;
+                            color: #efefef;
+                            
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+
+                            &:nth-child(odd) {
+                                background: #2f608dee;
+                            }
+                        }
                     }
                 }
 

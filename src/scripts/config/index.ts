@@ -69,7 +69,8 @@ export const PTRCONFIG = {
         },
         sheetClasses: {
             perk: [sheets.PerkSheetPTR2e],
-            ability: AbilitySheetPTR2e,
+            ability: [AbilitySheetPTR2e],
+            move: [sheets.MoveSheetPTR2e],
         },
     },
     ui: {

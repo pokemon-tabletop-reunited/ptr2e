@@ -1,1 +1,12 @@
-<h3>Actions</h3>
+<h2>{{localize (concat "PTR2E.Actions." type ".Label")}}</h2>
+<ul class="action-list action-list-{{type}}" data-parent="{{uuid}}">
+    {{#each actions as |action|}}
+        <li class="action {{type}}" data-tooltip-direction="LEFT" data-action="{{action.slug}}" data-tooltip="{{action.name}}">
+            <span class="name">{{action.name}}</span>
+            <div class="item-controls" data-action="slug" data-uuid="{{action.parent.parent.uuid}}">
+                <a class="item-control item-to-chat" data-tooltip="Send {{formatSlug action.type}} to chat"><i class="fas fa-external-link-alt"></i></a>
+                <a class="item-control item-edit" data-tooltip="Edit {{formatSlug action.type}}"><i class="fas fa-edit"></i></a>
+            </div>
+        </li>
+    {{/each}}
+</ul>
