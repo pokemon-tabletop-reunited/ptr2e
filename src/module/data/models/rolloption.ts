@@ -5,7 +5,7 @@ export class RollOptionChangeSystem extends ChangeModel {
     static override TYPE = "rolloption";
 
     override apply(actor: ActorPTR2e, rollOptions?: string[] | Set<string> | null): void {
-        console.log('RollOptionChangeSystem.apply', actor, rollOptions);
+        console.debug('RollOptionChangeSystem.apply', actor, rollOptions);
     }
 
 }

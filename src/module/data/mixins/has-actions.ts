@@ -42,7 +42,7 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
             
             if(!this._isValidParent(this.parent)) return;
 
-            const actions = this.parent._actions;
+            const actions = this.parent.actions;
             for(const action of this.actions.values()) {
                 if(actions[action.type].has(action.slug)) {
                     console.warn(`Duplicate action found in Item ${this.parent.id}: ${action.slug}`);

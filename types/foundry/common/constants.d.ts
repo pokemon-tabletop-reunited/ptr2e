@@ -62,6 +62,31 @@ export const CHAT_MESSAGE_TYPES: {
     ROLL: 5;
 };
 
+/** Valid Chat Message types */
+export const CHAT_MESSAGE_STYLES: {
+    /**
+     * An uncategorized chat message
+     */
+    OTHER: 0,
+
+    /**
+     * The message is spoken out of character (OOC).
+     * OOC messages will be outlined by the player's color to make them more easily recognizable.
+     */
+    OOC: 1,
+
+    /**
+     * The message is spoken by an associated character.
+     */
+    IC: 2,
+
+    /**
+     * The message is an emote performed by the selected character.
+     * Entering "/emote waves his hand." while controlling a character named Simon will send the message, "Simon waves his hand."
+     */
+    EMOTE: 3,
+};
+
 /** Define the set of languages which have built-in support in the core software */
 export const CORE_SUPPORTED_LANGUAGES: ["en"];
 

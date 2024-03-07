@@ -40,8 +40,6 @@ declare global {
          * @param [options.rollData]       The data object providing context for inline rolls
          * @return The enriched HTML content
          */
-        static enrichHTML(content: string | null, options?: EnrichmentOptions & { async: true }): Promise<string>;
-        static enrichHTML(content: string | null, options?: EnrichmentOptions & { async: false }): string;
         static enrichHTML(content: string | null, options?: EnrichmentOptions): Promise<string>;
 
         /**

@@ -24,8 +24,6 @@ class ItemPTR2e<TSystem extends ItemSystemPTR = ItemSystemPTR, TParent extends A
         return this._actions;
     }
 
-    _actions!: Record<ActionType, Map<string, ActionPTR2e>>
-
     override prepareBaseData() {
         this._actions = {
             generic: new Map(),
@@ -61,6 +59,10 @@ class ItemPTR2e<TSystem extends ItemSystemPTR = ItemSystemPTR, TParent extends A
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         });
     }
+}
+
+interface ItemPTR2e<TSystem extends ItemSystemPTR = ItemSystemPTR, TParent extends ActorPTR2e | null = ActorPTR2e | null> extends Item<TParent, TSystem> {
+    _actions: Record<ActionType, Map<string, ActionPTR2e>>;
 }
 
 export { ItemPTR2e }

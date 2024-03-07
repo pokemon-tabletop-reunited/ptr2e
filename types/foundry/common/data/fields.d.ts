@@ -496,7 +496,7 @@ export class StringField<
     implements StringFieldOptions<TSourceProp, TRequired, TNullable, THasInitial> {
     /** @param options Options which configure the behavior of the field */
     constructor(options?: StringFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>);
-
+    
     protected static override get _defaults(): StringFieldOptions<string, boolean, boolean, boolean>;
 
     override clean(
@@ -828,6 +828,8 @@ export class DocumentUUIDField<
     TNullable extends boolean = true,
     THasInitial extends boolean = true,
 > extends StringField<string, TModelProp, TRequired, TNullable, THasInitial> {
+    constructor(options?: StringFieldOptions<string, TRequired, TNullable, THasInitial> & {type?: string, embedded?: boolean});
+
     protected static override get _defaults(): StringFieldOptions<string, boolean, boolean, boolean>;
 
     protected override _validateType(value: unknown): boolean;
@@ -866,7 +868,7 @@ export class ForeignDocumentField<
      */
     constructor(
         model: ConstructorOf<abstract.DataModel>,
-        options?: StringFieldOptions<string, TRequired, TNullable, THasInitial>,
+        options?: StringFieldOptions<string, TRequired, TNullable, THasInitial> & { idOnly?: boolean},
     );
 
     /** A reference to the model class which is stored in this field */

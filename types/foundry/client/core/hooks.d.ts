@@ -173,6 +173,18 @@ declare global {
          * @param args  Arguments passed to the hook callback functions
          */
         static call(hook: string, ...args: unknown[]): boolean;
+
+        /**
+         * Notify subscribers that an error has occurred within foundry.
+         * @param {string} location                The method where the error was caught.
+         * @param {Error} error                    The error.
+         * @param {object} [options={}]            Additional options to configure behaviour.
+         * @param {string} [options.msg=""]        A message which should prefix the resulting error or notification.
+         * @param {?string} [options.log=null]     The level at which to log the error to console (if at all).
+         * @param {?string} [options.notify=null]  The level at which to spawn a notification in the UI (if at all).
+         * @param {object} [options.data={}]       Additional data to pass to the hook subscribers.
+         */
+        static onError(location: string, error: Error, options?: { msg?: string; log?: string; notify?: string; data?: object }): void;
     }
 
     interface DropCanvasData<T extends string = string, D extends object = object> {

@@ -2,6 +2,7 @@ import { ActorPTR2e } from "@actor";
 import { StatsChart } from "@actor/sheets/stats-chart.ts";
 import { tagify } from "@utils";
 import StatsForm from "./sheets/stats-form.ts";
+import AttackPTR2e from "@module/data/models/attack.ts";
 
 class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
 
@@ -63,12 +64,26 @@ class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
 
             return document?.toChat?.();
         });
+
         $html.find(".item-controls .item-edit").on("click", async (event) => {
             const uuid = (event.currentTarget.closest(".item-controls") as HTMLElement)?.dataset?.uuid;
             if(!uuid) return;
             const document = await fromUuid(uuid);
 
             return document?.sheet?.render(true);
+        });
+
+        $html.find(".attack .rollable").on("click", async (event) => {
+            const slug = (event.currentTarget.closest("li.attack[data-action]") as HTMLElement)?.dataset?.action;
+            if(!slug) return;
+            const parentUuid = (event.currentTarget.closest("ul.action-list-attack[data-parent]") as HTMLElement)?.dataset?.parent;
+            const parent = await fromUuid(parentUuid) as ActorPTR2e;
+            if(!parent) return;
+
+            const attack = parent.actions.attack.get(slug) as AttackPTR2e;
+            if(!attack) return;
+
+            return attack.roll();
         });
         
         // @ts-ignore

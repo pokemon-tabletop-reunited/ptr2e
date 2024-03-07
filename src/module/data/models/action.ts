@@ -1,3 +1,5 @@
+import { ActorPTR2e } from "@actor";
+import { ItemPTR2e } from "@item";
 import { _DataModel } from "types/foundry/common/abstract/data.js";
 
 // Priority & Interrupt are [Traits] so don't need a data field
@@ -14,16 +16,16 @@ class ActionPTR2e extends foundry.abstract.DataModel {
         const fields = foundry.data.fields;
         return {
             slug: new fields.StringField({ required: true, label: "PTR2E.Fields.Slug.Label", hint: "PTR2E.Fields.Slug.Hint" }),
-            name: new fields.StringField({ required: true, initial: "New Action", label: "PTR2E.Fields.Name.Label", hint: "PTR2E.Fields.Name.Hint"  }),
-            description: new fields.HTMLField({ required: false, nullable: true}),
+            name: new fields.StringField({ required: true, initial: "New Action", label: "PTR2E.Fields.Name.Label", hint: "PTR2E.Fields.Name.Hint" }),
+            description: new fields.HTMLField({ required: false, nullable: true }),
             traits: new fields.ArrayField(new fields.StringField()),
             type: new fields.StringField({
                 required: true, blank: false, initial: this.TYPE,
                 validate: value => value === this.TYPE || [
                     "attack", "camping", "downtime", "exploration", "passive", "generic"
-                ].includes(value as string), 
-                validationError: `must be equal to "${this.TYPE}"`, 
-                label: "PTR2E.Fields.Type.Label", hint: "PTR2E.Fields.Type.Hint" 
+                ].includes(value as string),
+                validationError: `must be equal to "${this.TYPE}"`,
+                label: "PTR2E.Fields.Type.Label", hint: "PTR2E.Fields.Type.Hint"
             }),
             range: new fields.EmbeddedDataField(RangePTR2e, { required: false, nullable: true }),
             cost: new fields.SchemaField({
@@ -36,6 +38,26 @@ class ActionPTR2e extends foundry.abstract.DataModel {
                 priority: new fields.NumberField({ required: false, nullable: true }),
             })
         }
+    }
+
+    get img() {
+        if (this.parent) {
+            if ('img' in this.parent) return this.parent.img as string;
+            if ('parent' in this.parent && this.parent.parent && 'img' in this.parent.parent) return this.parent.parent.img as string;
+        }
+        return 'icons/svg/explosion.svg';
+    }
+
+    get actor(): ActorPTR2e | null {
+        if (this.parent?.parent instanceof ActorPTR2e) return this.parent.parent;
+        if (this.parent?.parent instanceof ItemPTR2e && this.parent.parent.actor instanceof ActorPTR2e) return this.parent.parent.actor;
+        return null;
+    }
+
+    get item(): ItemPTR2e {
+        if (this.parent instanceof ItemPTR2e) return this.parent;
+        if (this.parent?.parent instanceof ItemPTR2e) return this.parent.parent;
+        throw new Error("Action is not a child of an item");
     }
 }
 

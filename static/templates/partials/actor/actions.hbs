@@ -2,6 +2,10 @@
 <ul class="action-list action-list-{{type}}" data-parent="{{uuid}}">
     {{#each actions as |action|}}
         <li class="action {{type}}" data-tooltip-direction="LEFT" data-action="{{action.slug}}" data-tooltip="{{action.name}}">
+            <div class="item-icon {{#if action.rollable}}rollable{{/if}} move">
+                <img class="icon" src="{{action.img}}" data-tooltip="{{action.name}}"/>
+                <img class="dice" src="/icons/svg/d20.svg" data-tooltip="Roll {{action.name}}">
+            </div>
             <span class="name">{{action.name}}</span>
             <div class="item-controls" data-action="slug" data-uuid="{{action.parent.parent.uuid}}">
                 <a class="item-control item-to-chat" data-tooltip="Send {{formatSlug action.type}} to chat"><i class="fas fa-external-link-alt"></i></a>
