@@ -1,5 +1,6 @@
 import { SpeciesPTR2e } from "@item";
 import { HasDescription, HasSlug, HasTraits } from "@module/data/index.ts";
+import { PokemonTypes } from "@scripts/config/effectiveness.ts";
 
 const SpeciesExtension = HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel)))
 
@@ -37,7 +38,7 @@ export default abstract class SpeciesSystem extends SpeciesExtension {
     /**
      * The types of the species.
      */
-    abstract types: PokemonType[];
+    abstract types: PokemonTypes[];
 
     declare _source: InstanceType<typeof SpeciesExtension>['_source'] & {
         number: number;
@@ -50,7 +51,7 @@ export default abstract class SpeciesSystem extends SpeciesExtension {
             spd: number,
             spe: number
         };
-        types: PokemonType[];
+        types: PokemonTypes[];
     }
 
     static override defineSchema(): foundry.data.fields.DataSchema {

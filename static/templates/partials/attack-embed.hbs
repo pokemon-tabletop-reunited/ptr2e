@@ -5,7 +5,7 @@
         <label>{{localize "PTR2E.Fields.PokemonCategory.Label"}}:</label>
     </div>
     <div class="d-flex flex-row w-100 mt-1 mb-1">
-        <span>{{capitalize attack.typing}}</span>
+        <span>{{#each attack.types}}{{capitalize this}}{{#unless @last}}, {{/unless}}{{/each}}</span>
         <span>{{capitalize attack.category}}</span>
     </div>
     <div class="d-flex flex-row w-100 mt-1">

@@ -1,0 +1,270 @@
+.chat-message.message {
+    &.attack {
+        background: #fefefe;
+        padding: 0;
+        color: #1e1e1e;
+
+        --color-underline-header: #6f6c66;
+
+        header.message-header {
+            padding: 0.25rem;
+            background-color: #cdcdcd;
+            border-bottom: 1px solid var(--color-underline-header);
+        }
+
+        .message-content {
+            background-color: #fefefe;
+
+            >header {
+                background-color: #dedede;
+                border-bottom: 1px solid var(--color-underline-header);
+                text-align: center;
+                padding: 3px;
+
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+
+                .icon {
+                    flex: 0 0 36px;
+                    display: flex;
+
+                    img {
+                        width: 36px;
+                        height: 36px;
+                        border: unset;
+                        object-fit: scale-down;
+                    }
+                }
+
+                h3 {
+                    border: unset;
+                    padding: unset;
+                    margin: unset;
+                }
+            }
+
+            >main {
+                display: flex;
+                flex-direction: column;
+
+                .collapse-button {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: end;
+                    align-items: center;
+
+                    .collapse-rolls {
+                        background-color: #eee;
+                        cursor: pointer;
+                        font-size: 15px;
+                        border: none;
+                        outline: none;
+                        padding: 0 0.5rem;
+                        border-bottom: 1px solid var(--color-underline-header);
+
+                        &:after {
+                            content: "▶";
+                            color: #2e2e2e;
+                            font-size: 13px;
+                            float: right;
+                            margin-left: 5px;
+                            width: 10px;
+                        }
+
+                        &.expanded:after {
+                            content: "▼";
+                        }
+                    }
+                }
+
+                >article {
+                    &.collapsed {
+                        display: none;
+                    }
+
+                    display: flex;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+
+                    >section {
+                        flex: 1 0 50%;
+                        padding: 0.5rem;
+                        border-bottom: 1px solid var(--color-underline-header);
+
+                        h3 {
+                            text-align: center;
+                            font-size: 1rem;
+                        }
+
+                        &:nth-child(even) {
+                            border-left: 1px solid var(--color-underline-header);
+                            background-color: #fefefe;
+                        }
+
+                        &:nth-child(odd) {
+                            background-color: #fefefe;
+                        }
+
+                        .dice-roll {
+
+                            .dice-formula,
+                            .dice-total {
+                                border-radius: 10px;
+                            }
+
+                            .dice-tooltip.expanded {
+                                padding: 0.25rem;
+                                background-color: #dedede;
+                                border-radius: 10px;
+                                margin: 0.25rem 0;
+                                text-align: center;
+
+                                .part-header {
+                                    position: relative;
+
+                                    .part-total {
+                                        position: absolute;
+                                        right: 0;
+                                        top: 0;
+                                    }
+                                }
+
+                                ol.dice-rolls {
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: center;
+                                    align-items: center;
+                                }
+                            }
+                        }
+                    }
+
+                    >figure {
+                        flex: 1;
+                        display: flex;
+                        flex-direction: column;
+                        margin: 0;
+
+                        >header {
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: wrap;
+                            justify-content: center;
+
+                            padding: 0 0.25rem;
+
+                            background-color: #dedede;
+                            border-bottom: 1px solid var(--color-underline-header);
+                            border-radius: 0 0 10px 10px;
+
+                            .trait {
+                                flex: 0 1 auto;
+                                margin: 0 2px;
+                            }
+                        }
+                        >main {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+
+                            >aside {
+                                display: flex;
+                                flex-direction: column;
+                                flex: 0 0 44px;
+                                margin: 0.25rem 0.25rem;
+                                gap: 2px;
+
+                                .icon {
+                                    border: unset;
+                                }
+                            }
+                            >article {
+                                flex: 1;
+                                &.center {
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    text-align: center;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            >footer {
+                display: flex;
+                flex-direction: column;
+
+                .target {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    padding: 3px;
+                    height: 43px;
+                    text-align: center;
+
+                    &:nth-child(odd) {
+                        background-color: #fefefe;
+                        border-top: 1px solid var(--color-underline-header);
+                        border-bottom: 1px solid var(--color-underline-header);
+                    }
+
+                    &:nth-child(even) {
+                        background-color: #efefef;
+                    }
+
+                    &:first-child {
+                        border-top: unset;
+                        background-color: #dedede;
+                    }
+
+                    .icon {
+                        flex: 0 0 36px;
+                        display: flex;
+                        justify-content: center;
+
+                        img {
+                            width: 36px;
+                            height: 36px;
+                            border: unset;
+                            object-fit: scale-down;
+                        }
+                    }
+
+                    .status {
+                        margin-left: 0.25rem;
+                        flex: 0 0 64px;
+
+                        i.fas {
+                            font-size: 22px;
+
+                            &.fa-certificate {
+                                color: #4ef091;
+                            }
+
+                            &.fa-crosshairs {
+                                color: #4ef0ba;
+                            }
+
+                            &.fa-times-circle {
+                                color: #f04e4e;
+                            }
+                        }
+                    }
+
+                    .damage {
+                        margin-left: 0.25rem;
+                        flex: 1;
+
+                        span {
+                            font-size: 16px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

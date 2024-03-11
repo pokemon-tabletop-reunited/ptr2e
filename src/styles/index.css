@@ -311,9 +311,16 @@
 .d-flex {
   display: flex;
 }
+.flex-grow-1 {
+  flex-grow: 1;
+}
+.flex-grow-0 {
+  flex-grow: 0;
+}
 .flex-row {
   flex-direction: row;
 }
+.flex-col,
 .flex-column {
   flex-direction: column;
 }
@@ -325,6 +332,9 @@
 }
 .justify-content-evenly {
   justify-content: space-evenly;
+}
+.justify-content-end {
+  justify-content: end;
 }
 .align-items-center {
   align-items: center;
@@ -497,12 +507,120 @@
 .document-sheet {
   background: url(/ui/denim075.png);
 }
-.document-sheet [data-application-part="body"] {
-  background: #f0f0f0;
+.document-sheet .window-content {
+  background: url(/ui/parchment.jpg);
   padding: 0.25rem;
+  margin: 0.75rem;
   border-radius: 5px;
   height: 100%;
   color: black;
+}
+.document-sheet.stats-form .window-content {
+  margin-top: 0.25rem;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 35% 65%;
+  grid-template-areas: "baseStats statsChart" "evStats statsChart";
+}
+.document-sheet.stats-form .window-content aside {
+  display: flex;
+}
+.document-sheet.stats-form .window-content aside form {
+  flex: 1;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] {
+  grid-area: baseStats;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form {
+  display: grid;
+  grid-template-columns: 30% 15% 40% 15%;
+  grid-template-rows: min-content 1fr 1fr 1fr;
+  grid-template-areas: "header header header header" "hpLabel hpValue spatkLabel spatkValue" "atkLabel atkValue spdefLabel spdefValue" "defLabel defValue spdLabel spdValue";
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label {
+  margin-left: 1rem;
+  text-align: left;
+  align-self: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.hp {
+  grid-area: hpLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.atk {
+  grid-area: atkLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.def {
+  grid-area: defLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spa {
+  grid-area: spatkLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spd {
+  grid-area: spdefLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spe {
+  grid-area: spdLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input {
+  text-align: center;
+  align-self: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.hp {
+  grid-area: hpValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.atk {
+  grid-area: atkValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.def {
+  grid-area: defValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spa {
+  grid-area: spatkValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spd {
+  grid-area: spdefValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spe {
+  grid-area: spdValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form h1 {
+  grid-area: header;
+  text-align: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input[type="submit"] {
+  grid-area: submit;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="evStats"] {
+  grid-area: evStats;
+  margin-top: 0.25rem;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form {
+  display: flex;
+  flex-direction: column;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form h1 {
+  text-align: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form .form-group {
+  margin-left: 1rem;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="statsChart"] {
+  grid-area: statsChart;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.25rem;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="statsChart"] h1 {
+  text-align: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="statsChart"] .stats-chart-aside {
+  align-items: center;
+  background: #346899;
+  border-radius: 10px;
+  margin: 0.25rem;
+}
+.stats-chart-aside {
+  flex: 1;
+  position: relative;
 }
 .system-traits {
   --readonly-striped: 0 !important;
@@ -515,6 +633,88 @@
 }
 .ptr-trait:hover {
   background: #e6e6e6;
+}
+[role="tooltip"].attack,
+.embed.move-embed.attack,
+[role="tooltip"] .attack,
+.embed.move-embed .attack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  background: #121212;
+  border-radius: 10px !important;
+  margin: 0.25rem !important;
+  padding: 0.25rem !important;
+  min-width: 200px;
+  color: #efefef;
+}
+[role="tooltip"].attack h3,
+.embed.move-embed.attack h3,
+[role="tooltip"] .attack h3,
+.embed.move-embed .attack h3 {
+  border-bottom: 1px solid #fefefeaa;
+  margin: 0.25rem 0;
+  padding-bottom: 0.25rem;
+  text-align: center;
+}
+[role="tooltip"].attack div.d-flex,
+.embed.move-embed.attack div.d-flex,
+[role="tooltip"] .attack div.d-flex,
+.embed.move-embed .attack div.d-flex {
+  justify-content: space-between;
+  text-align: center;
+}
+[role="tooltip"].attack label,
+.embed.move-embed.attack label,
+[role="tooltip"] .attack label,
+.embed.move-embed .attack label {
+  font-size: 14px;
+  text-wrap: nowrap;
+  font-weight: bold;
+  flex: 0 0 45%;
+}
+[role="tooltip"].attack span,
+.embed.move-embed.attack span,
+[role="tooltip"] .attack span,
+.embed.move-embed .attack span {
+  font-size: 14px;
+  text-wrap: nowrap;
+  flex: 0 0 45%;
+}
+[role="tooltip"].attack content,
+.embed.move-embed.attack content,
+[role="tooltip"] .attack content,
+.embed.move-embed .attack content {
+  display: flex;
+  min-height: 40px;
+  width: 100%;
+  padding-top: 0.25rem;
+  border-top: 1px solid #fefefeaa;
+}
+[role="tooltip"].attack content.no-effect,
+.embed.move-embed.attack content.no-effect,
+[role="tooltip"] .attack content.no-effect,
+.embed.move-embed .attack content.no-effect {
+  justify-content: center;
+}
+[role="tooltip"].attack content i.small,
+.embed.move-embed.attack content i.small,
+[role="tooltip"] .attack content i.small,
+.embed.move-embed .attack content i.small {
+  font-size: 11px;
+  color: lightgray;
+  align-self: center;
+  text-align: center;
+}
+.ptr2e form .form-group {
+  margin: 0.25rem;
+  padding: 0.25rem;
+  border: 2px groove #fefefe;
+}
+.ptr2e .attack-action {
+  margin: 0.25rem;
+  padding: 0.25rem;
+  border: 2px groove #fefefe;
 }
 .ptr2e img {
   border: unset;
@@ -708,9 +908,8 @@
 }
 .ptr2e.actor form .main-grid .actions {
   display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  justify-content: start;
   background: #346899;
   border-radius: 10px;
   margin: 0.25rem;
@@ -718,6 +917,50 @@
 .ptr2e.actor form .main-grid .actions.default-location {
   grid-column: 1 / span 3;
   grid-row: 1 / span 5;
+}
+.ptr2e.actor form .main-grid .actions h2 {
+  text-align: center;
+  border-bottom: 1px solid #fefefeaa;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list {
+  list-style: none;
+  margin: 0 0.5rem;
+  padding: 0;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action {
+  padding: 0.5rem;
+  background: #3889adee;
+  border-radius: 5px;
+  color: #efefef;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action:nth-child(odd) {
+  background: #2f608dee;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon {
+  flex: 0 0 24px;
+  height: 24px;
+  width: 24px;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon .icon {
+  display: block;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon .dice {
+  display: none;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon.rollable:hover > .icon {
+  display: none;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon.rollable:hover > .dice {
+  display: block;
+  cursor: pointer;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
 }
 .ptr2e.actor form .main-grid .gear {
   display: flex;
@@ -757,4 +1000,87 @@
 }
 #perk-tree-controls .hud.editing {
   background: #851a1a;
+}
+.trait {
+  text-decoration: underline;
+  font-family: monospace;
+  padding: 0.25rem 0;
+}
+aside[role="tooltip"] {
+  background: #121212;
+}
+aside[role="tooltip"].locked-tooltip,
+aside[role="tooltip"].locked-tooltip * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+aside[role="tooltip"].locked-tooltip .circular-progress,
+aside[role="tooltip"].locked-tooltip * .circular-progress {
+  animation: none;
+  --progress: 100;
+}
+aside[role="tooltip"].locked-tooltip .circular-progress circle.fg,
+aside[role="tooltip"].locked-tooltip * .circular-progress circle.fg {
+  --stroke: red;
+}
+aside[role="tooltip"].locked-tooltip .circular-progress circle.fgb,
+aside[role="tooltip"].locked-tooltip * .circular-progress circle.fgb {
+  stroke: var(--stroke);
+}
+aside[role="tooltip"] .progress-circle {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 25px;
+  height: 25px;
+  border-radius: 0 0 0 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+aside[role="tooltip"] .circular-progress {
+  --size: 20px;
+  --half-size: calc(var(--size) / 2);
+  --stroke-width: 5px;
+  --radius: calc((var(--size) - var(--stroke-width)) / 2);
+  --circumference: calc(var(--radius) * pi * 2);
+  --dash: calc((var(--progress) * var(--circumference)) / 100);
+  --stroke: #fdb953;
+  animation: progress-animation 2s ease-out 0s 1 forwards;
+}
+aside[role="tooltip"] .circular-progress circle {
+  cx: var(--half-size);
+  cy: var(--half-size);
+  r: var(--radius);
+  stroke-width: var(--stroke-width);
+  fill: none;
+  stroke-linecap: round;
+}
+aside[role="tooltip"] .circular-progress circle.bg {
+  stroke: #ddd;
+}
+aside[role="tooltip"] .circular-progress circle.fg {
+  transform: rotate(-90deg);
+  transform-origin: var(--half-size) var(--half-size);
+  stroke-dasharray: var(--dash) calc(var(--circumference) - var(--dash));
+  transition: stroke-dasharray 0.3s linear 0s;
+  stroke: var(--stroke);
+}
+aside[role="tooltip"] .circular-progress circle.fgb {
+  stroke-width: 4px;
+}
+@property --progress {
+  syntax: "<number>";
+  inherits: false;
+  initial-value: 0;
+}
+@keyframes progress-animation {
+  from {
+    --progress: 0;
+  }
+  to {
+    --progress: 100;
+  }
 }

@@ -18,7 +18,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
             slug: new fields.StringField({ required: true, label: "PTR2E.Fields.Slug.Label", hint: "PTR2E.Fields.Slug.Hint" }),
             name: new fields.StringField({ required: true, initial: "New Action", label: "PTR2E.Fields.Name.Label", hint: "PTR2E.Fields.Name.Hint" }),
             description: new fields.HTMLField({ required: false, nullable: true }),
-            traits: new fields.ArrayField(new fields.StringField()),
+            traits: new fields.SetField(new fields.StringField()),
             type: new fields.StringField({
                 required: true, blank: false, initial: this.TYPE,
                 validate: value => value === this.TYPE || [
@@ -59,6 +59,14 @@ class ActionPTR2e extends foundry.abstract.DataModel {
         if (this.parent?.parent instanceof ItemPTR2e) return this.parent.parent;
         throw new Error("Action is not a child of an item");
     }
+
+    prepareDerivedData() {
+        this.traits = this._source.traits.reduce((acc: Map<string, Trait>, traitSlug: string) => {
+            const trait = game.ptr.data.traits.get(traitSlug)
+            if (trait) acc.set(traitSlug, trait);
+            return acc;
+        }, new Map());
+    }
 }
 
 
@@ -81,9 +89,16 @@ interface ActionPTR2e extends foundry.abstract.DataModel {
      */
     description: string
     /**
-     * The traits of the action.
+     * A record of traits that the item has.
+     * @remarks
+     * This is a record of traits that the item has, keyed by the trait's name.
+     * @example
+     * ```typescript
+     * const item = new ItemPTR2e({ name: 'Flashlight', "system.traits": ["light"] });
+     * console.log(item.system.traits); // { "light": TraitPTR2e }
+     * ```
      */
-    traits: Trait[]
+    traits: Map<string, Trait>
     /**
      * The type of the action.
      * @defaultValue `'generic'`
@@ -135,6 +150,10 @@ interface ActionPTR2e extends foundry.abstract.DataModel {
      * It can be one of `'self'`, `'ally'`, `'enemy'`, `'creature'`, `'object'`, `'blast'`, `'cone'`, `'line'`, `'wide-line'`, `'emanation'`, `'field'`, `'aura'`, `'allied-aura'`, or `'enemy-aura'`.
      */
     range: RangePTR2e[]
+
+    _source: {
+        traits: string[]
+    } & foundry.abstract.DataModel['_source']
 }
 
 

@@ -2,6 +2,8 @@ import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { ActorSystemPTR2e } from "@actor";
 import { ActiveEffectPTR2e } from "@module/effects/document.ts";
 import { ActionPTR2e, ActionType } from "@module/data/models/action.ts";
+import { PokemonTypes, TypeEffectiveness } from "@scripts/config/effectiveness.ts";
+import AttackPTR2e from "@module/data/models/attack.ts";
 
 class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null> extends Actor<TParent, TSystem> {
 
@@ -15,6 +17,10 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
 
     get actions() {
         return this._actions;
+    }
+
+    get level() {
+        return this.system.advancement.level;
     }
 
     /** 
@@ -59,6 +65,8 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
             percent: Math.floor(Math.random() * 100)
         }
 
+        this.system.type.effectiveness = this._calculateEffectiveness();
+
         super.prepareData();
     }
 
@@ -81,6 +89,8 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
      * Compute data fields whose values are not stored to the database.
      * */
     override prepareDerivedData() {
+        this.system.type.effectiveness = this._calculateEffectiveness();
+
         return super.prepareDerivedData();
     }
 
@@ -124,6 +134,20 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
         }
     }
 
+    _calculateEffectiveness(): Record<PokemonTypes, number> {
+        const types = game.settings.get("ptr2e", "pokemonTypes") as TypeEffectiveness;
+        const effectiveness = {} as Record<PokemonTypes, number>;
+        for (const key in types) {
+            const typeKey = key as PokemonTypes;
+            effectiveness[typeKey] = 1;
+            for (const key of this.system.type.types) {
+                const type = key as PokemonTypes;
+                effectiveness[typeKey] *= types[typeKey].effectiveness[type];
+            }
+        }
+        return effectiveness;
+    }
+
     /**
      * Toggle the perk tree for this actor
      * @param {boolean} active 
@@ -152,6 +176,42 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
         return effects;
     }
 
+    //TODO: This should add any relevant modifiers
+    getEvasionStage() {
+        return this.system.battleStats.evasion.stage;
+    }
+    //TODO: This should add any relevant modifiers
+    getAccuracyStage() {
+        return this.system.battleStats.accuracy.stage;
+    }
+
+    getDefenseStat(attack: AttackPTR2e, critModifier: number) {
+        return attack.category === 'physical'
+            ? this.calcStatTotal(this.system.attributes.def, critModifier > 1)
+            : this.calcStatTotal(this.system.attributes.spd, critModifier > 1);
+    }
+    getAttackStat(attack: AttackPTR2e, critModifier: number) {
+        return attack.category === 'physical'
+            ? this.calcStatTotal(this.system.attributes.atk, critModifier > 1)
+            : this.calcStatTotal(this.system.attributes.spa, critModifier > 1);
+    }
+
+    calcStatTotal(stat: Attribute, isCrit: boolean) {
+        const stageModifier = () => {
+            const stage = Math.clamp(stat.stage, -6, 6);
+            return stage > 0 ? ((2 + stage) / 2) : (2 / (2 + Math.abs(stage)));
+        }
+        return isCrit ? stat.value : stat.value * stageModifier();
+    }
+
+    getEffectiveness(moveTypes: Set<PokemonTypes>) {
+        let effectiveness = 1;
+        for (const type of moveTypes) {
+            effectiveness *= (this.system.type.effectiveness[type] ?? 1);
+        }
+        return effectiveness;
+    }
+
     protected override _onEmbeddedDocumentChange(): void {
         super._onEmbeddedDocumentChange();
 
@@ -164,8 +224,9 @@ interface ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParen
     health: {
         percent: number
     }
+
     synthetics: ActorSynthetics
-    
+
     _actions: Record<ActionType, Map<string, ActionPTR2e>>;
 
     level: number

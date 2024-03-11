@@ -48,6 +48,7 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
                     console.warn(`Duplicate action found in Item ${this.parent.id}: ${action.slug}`);
                     continue;
                 }
+                action.prepareDerivedData();
                 actions[action.type].set(action.slug, action);
             }
         }

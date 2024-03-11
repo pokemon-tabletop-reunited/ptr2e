@@ -27,7 +27,8 @@ class ChatMessagePTR2e extends ChatMessage {
                 this.style === CONST.CHAT_MESSAGE_STYLES.IC ? "ic" : null,
                 this.style === CONST.CHAT_MESSAGE_STYLES.EMOTE ? "emote" : null,
                 isWhisper ? "whisper" : null,
-                this.blind ? "blind" : null
+                this.blind ? "blind" : null,
+                this.type
             ].filterJoin(" "),
             isWhisper: this.whisper.length,
             canDelete: game.user.isGM,  // Only GM users are allowed to have the trash-bin icon in the chat log itself
@@ -50,7 +51,72 @@ class ChatMessagePTR2e extends ChatMessage {
         // Flag expanded state of dice rolls
         if (this._rollExpanded) html.find(".dice-tooltip").addClass("expanded");
         Hooks.call("renderChatMessage", this, html, messageData);
+
+        // Add custom listeners
+        this.activateListeners(html);
+
+        // Return the rendered HTML
         return html;
+    }
+
+    activateListeners(html: JQuery<HTMLElement>) {
+        html.find(".dice-roll").on('click', (event) => {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+
+            const roll = event.currentTarget;
+            const expanded = !roll.classList.contains("opened");
+
+            const tooltips = roll.querySelectorAll(".dice-tooltip");
+            for (const tip of tooltips) {
+                if (expanded) $(tip).slideDown(200);
+                else $(tip).slideUp(200);
+                tip.classList.toggle("expanded", expanded);
+            }
+
+            roll.classList.toggle("opened", expanded);
+        })
+
+        html.find('.collapse-rolls').each((_i, el) => {
+            $(el).on('click', (event) => {
+                event.preventDefault();
+
+                const expanded = !el.classList.contains('expanded');
+                const content = el.parentElement?.nextElementSibling as HTMLElement;
+                if (!content) return;
+                if (expanded) {
+                    el.innerHTML = el.innerHTML.replace("Show", "Hide")
+                    $(content).slideDown({ duration: 200, start: () => $(content).css('display', 'flex') });
+                }
+                else {
+                    el.innerHTML = el.innerHTML.replace("Hide", "Show")
+                    $(content).slideUp(200);
+                }
+
+                el.classList.toggle('expanded', expanded);
+
+                const messageElement = $(el).closest(".message")[0]
+                const message = game.messages.get(messageElement.dataset.messageId as string);
+                if (!message) return;
+
+                if (game.messages.contents.at(-1)?.id === message.id) {
+                    setTimeout(() => messageElement.scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" }), 360);
+                }
+            });
+
+            if (el.classList.contains('expanded')) {
+                const content = el.parentElement?.nextElementSibling as HTMLElement;
+                if (!content) return;
+
+                $(content).css('display', 'flex');
+            }
+        });
+    }
+
+    static async expandCollapsible(element: HTMLElement): Promise<void> {
+        if (element.classList.contains('expanded')) return;
+
+        // 
     }
 }
 

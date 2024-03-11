@@ -1,4 +1,6 @@
+import { POKEMON_CATEGORIES, PokemonCategories } from "@module/data/models/attack.ts";
 import { capitalize, formatSlug } from "./misc.ts";
+import { PokemonTypes, getTypes } from "@scripts/config/effectiveness.ts";
 
 export function registerHandlebarsHelpers() {
     _registerBasicHelpers();
@@ -12,6 +14,12 @@ function _registerPTRHelpers() {
 
     Handlebars.registerHelper("calcHeight", function (percent) {
         return Math.round((100 - percent) / 100 * 48);
+    });
+
+    Handlebars.registerHelper("icon", function(img: PokemonTypes | PokemonCategories) {
+        if(!POKEMON_CATEGORIES.includes(img as PokemonCategories) && !getTypes().includes(img as PokemonTypes)) return "<small>Incorrect img data provided</small>";
+
+        return `<img src="/systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${formatSlug(img)}" data-tooltip-direction="LEFT" class="icon" />`;
     });
 }
 

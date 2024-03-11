@@ -42,6 +42,4 @@ type ScienceSkills = "astronomy" | "biology" | "botany" | "chemistry" | "cryptog
 
 type ImageFilePath = "" | `${string}.apng` | `${string}.avif` | `${string}.bmp` | `${string}.gif` | `${string}.jpeg` | `${string}.jpg` | `${string}.png` | `${string}.svg` | `${string}.tiff` | `${string}.webp`;
 
-type PokemonType = "normal" | "fire" | "water" | "electric" | "grass" | "ice" | "fighting" | "poison" | "ground" | "flying" | "psychic" | "bug" | "rock" | "ghost" | "dragon" | "dark" | "steel" | "fairy" | "untyped";
-type PokemonCategory = "physical" | "special" | "status";
 type ContestType = "cool" | "cute" | "beautiful" | "tough" | "smart";

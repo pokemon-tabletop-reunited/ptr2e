@@ -106,7 +106,10 @@ interface HealthData {
 }
 
 interface AdvancementData {
+    /** Calculated Field */
     level: number,
+    /** Calculated Field */
+    advancementPoints: number,
     experience: {
         current: number,
         /** Calculated Field */

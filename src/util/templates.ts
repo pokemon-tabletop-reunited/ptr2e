@@ -7,6 +7,8 @@ export function registerTemplates() {
         "actor-skills": "systems/ptr2e/templates/partials/actor/skills.hbs",
         "actor-actions": "systems/ptr2e/templates/partials/actor/actions.hbs",
         "attack-embed": "systems/ptr2e/templates/partials/attack-embed.hbs",
+        "effect-traits": "systems/ptr2e/templates/partials/effect-traits.hbs",
+        "trait-partial": "systems/ptr2e/templates/partials/trait.hbs",
     }
 
     return loadTemplates(Object.values(templates)).then(() => {

@@ -2,6 +2,7 @@ import { ActorSheetPTR2e } from "@actor";
 import { PTRCONFIG } from "@scripts/config/index.ts";
 import { GamePTR } from "@scripts/game-ptr2e.ts";
 import { registerHandlebarsHelpers, registerTemplates } from "@utils";
+import { default as TypeEffectiveness } from "../config/effectiveness.ts";
 
 export const Init = {
     listen() {
@@ -44,7 +45,7 @@ export const Init = {
                 documentClass: PTRCONFIG.Change.documentClass,
                 dataModels: PTRCONFIG.Change.dataModels
             };
-        
+
             // Register custom sheets
             {
                 Actors.unregisterSheet("core", ActorSheet);
@@ -53,13 +54,23 @@ export const Init = {
                 Items.unregisterSheet("core", ItemSheet);
                 //@ts-ignore
                 Items.registerSheet("ptr2e", PTRCONFIG.Item.sheetClasses.ability, { types: ["ability"], makeDefault: true });
-                for(const type in PTRCONFIG.Item.sheetClasses) {
+                for (const type in PTRCONFIG.Item.sheetClasses) {
                     const key = type as keyof typeof PTRCONFIG.Item.sheetClasses;
-                    for(const sheet of PTRCONFIG.Item.sheetClasses[key]) {
+                    for (const sheet of PTRCONFIG.Item.sheetClasses[key]) {
                         Items.registerSheet("ptr2e", sheet, { types: [type], makeDefault: true });
                     }
                 }
             }
+
+            game.settings.register("ptr2e", "pokemonTypes", {
+                name: "PTR2E.Settings.PokemonTypes.Name",
+                hint: "PTR2E.Settings.PokemonTypes.Hint",
+                scope: "world",
+                config: false,
+                type: Object,
+                default: TypeEffectiveness,
+                requiresReload: true,
+            })
 
             // Register handlebars helpers
             registerHandlebarsHelpers();

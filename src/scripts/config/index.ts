@@ -81,5 +81,5 @@ export const PTRCONFIG = {
     },
     data: {
         traits: Traits,
-    }
+    },
 }

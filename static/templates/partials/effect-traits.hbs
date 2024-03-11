@@ -1,0 +1,26 @@
+<figure class="effect-traits"> {{log this}}
+    {{#if traits}}
+    <header>
+        {{#each traits as |trait|}}
+        {{> trait-partial trait=trait direction="LEFT"}}
+        {{/each}}
+    </header>
+    {{/if}}
+    <main>
+        <aside>
+            {{{icon attack.category}}}
+            {{#each attack.types as |type|}}
+            {{{icon type}}}
+            {{/each}}
+        </aside>
+        {{#if attack.description}}
+        <article>
+            {{{attack.description}}}
+        </article>
+        {{else}}
+        <article class="center">
+            <small><i>No Effect Description Provided</i></small>
+        </article>
+        {{/if}}
+    </main>
+</figure>

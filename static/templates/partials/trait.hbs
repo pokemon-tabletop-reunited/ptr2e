@@ -1,0 +1,3 @@
+<span class="trait" data-tooltip-direction="{{#if direction}}{{direction}}{{else}}UP{{/if}}" data-trait="{{trait.slug}}" data-tooltip="{{trait.label}}">
+    {{#if (or trait.isKeyword isKeyword)}}&lt;<span class="tag">{{trait.label}}</span>&gt;{{else}}[<span class="tag">{{trait.label}}</span>]{{/if}}
+</span>

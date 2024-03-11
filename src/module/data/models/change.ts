@@ -105,7 +105,7 @@ export class ChangeModel extends foundry.abstract.DataModel {
         const fullMessage = message.join(" ");
         const { name, uuid } = this.item ?? this.actor ?? {};
         if (!this.suppressWarnings) {
-            const ruleName = game.i18n.localize(`PTR2e.RuleElement.${this.effect.type}`);
+            const ruleName = game.i18n.localize(`PTR2E.RuleElement.${this.effect.type}`);
             this.actor?.synthetics.preparationWarnings.add(
                 `PTR2e System | ${ruleName} rules element on item ${name} (${uuid}) failed to validate: ${fullMessage}`,
             );

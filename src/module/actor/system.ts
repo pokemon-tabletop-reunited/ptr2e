@@ -1,4 +1,5 @@
 import { ItemPTR2e, SpeciesPTR2e } from "@item";
+import { PokemonTypes, getTypes } from "@scripts/config/effectiveness.ts";
 import { DataSchema } from "types/foundry/common/data/fields.js";
 
 class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
@@ -16,15 +17,20 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
         }
         const getStatField = (slug: string, withStage = true) => {
             const output: DataSchema = {
-                slug: new fields.StringField({ required: true, initial: slug}),
+                slug: new fields.StringField({ required: true, initial: slug }),
             }
-            if (withStage) output.stage = new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= -6 && d as number <= 6});
+            if (withStage) output.stage = new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= -6 && d as number <= 6 });
             return output;
         }
 
         return {
+            advancement: new fields.SchemaField({
+                experience: new fields.SchemaField({
+                    current: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 })
+                })
+            }),
             attributes: new fields.SchemaField({
-                hp: new fields.SchemaField(getAttributeField("hp",false)),
+                hp: new fields.SchemaField(getAttributeField("hp", false)),
                 atk: new fields.SchemaField(getAttributeField("atk")),
                 def: new fields.SchemaField(getAttributeField("def")),
                 spa: new fields.SchemaField(getAttributeField("spa")),
@@ -36,20 +42,21 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
                 accuracy: new fields.SchemaField(getStatField("accuracy")),
                 critRate: new fields.SchemaField(getStatField("critRate")),
             }),
-            skills: new fields.ObjectField({validate: (d: Record<string, Skill> | any) => {
-                if (typeof d !== "object") return false;
-                for (const [key, value] of Object.entries(d as Record<string, Skill>)) {
-                    if (typeof key !== "string" || typeof value !== "object") return false;
-                    if (typeof value.slug !== "string" || typeof value.value !== "number" || typeof value.rvs !== "number") return false;
+            skills: new fields.ObjectField({
+                validate: (d: Record<string, Skill> | any) => {
+                    if (typeof d !== "object") return false;
+                    for (const [key, value] of Object.entries(d as Record<string, Skill>)) {
+                        if (typeof key !== "string" || typeof value !== "object") return false;
+                        if (typeof value.slug !== "string" || typeof value.value !== "number" || typeof value.rvs !== "number") return false;
+                    }
+                    return true;
                 }
-                return true;
-            }}),
+            }),
             biology: new fields.ObjectField(),
             capabilities: new fields.ObjectField(),
             traits: new fields.SetField(new fields.StringField()),
-            advancementPoints: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
             type: new fields.SchemaField({
-                types: new fields.ArrayField(new fields.StringField()),
+                types: new fields.SetField(new fields.StringField({ required: true, choices: getTypes, initial: "untyped", label: "PTR2E.Fields.PokemonType.Label", hint: "PTR2E.Fields.PokemonType.Hint" }), { initial: ["untyped"], label: "PTR2E.Fields.PokemonType.LabelPlural", hint: "PTR2E.Fields.PokemonType.HintPlural", required: true, validate: (d) => (d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false), validationError: "PTR2E.Errors.PokemonType" }),
             }),
             species: new fields.ForeignDocumentField(ItemPTR2e, { required: false, nullable: true }),
             powerPoints: new fields.SchemaField({
@@ -59,23 +66,26 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
                 value: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
             }),
             experience: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
-            money: new fields.NumberField({ required: true, initial: 0}),
+            money: new fields.NumberField({ required: true, initial: 0 }),
         }
     }
 
     override prepareBaseData(): void {
 
-        for(const k in this.attributes) {
+        for (const k in this.attributes) {
             const key = k as keyof Attributes;
             this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
         }
+
+        this.advancement.level = Math.floor(Math.cbrt(this.advancement.experience.current || 1));
+        this.advancement.experience.next = Math.pow(Math.min(this.advancement.level + 1, 100), 3);
     }
 
     _calculateStatTotal(stat: Attribute | Omit<Attribute, 'stage'>): number {
         //TODO: Add these values, for now default to 1
         const nature = 1, sizeMod = 1, level = 30;
 
-        if('stage' in stat) {
+        if ('stage' in stat) {
             /** Calculate a stat that Isn't HP */
             return Math.floor(
                 (
@@ -95,7 +105,7 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
                 * nature
             )
         }
-        
+
         /** Calculate HP */
         return Math.floor(
             (
@@ -133,11 +143,9 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
     capabilities: Capabilities,
     /** All traits for this actor */
     traits: Set<string>, //TODO: Map this to Set<Traits>
-    /** Available advancement points */
-    advancementPoints: number,
     type: {
-        effectiveness: object,
-        types: string[],
+        effectiveness: Record<PokemonTypes, number>,
+        types: Set<PokemonTypes>,
     },
     species: SpeciesPTR2e | null,
     powerPoints: {

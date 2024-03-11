@@ -1,0 +1,51 @@
+    {{log this}}
+<header>
+    <div class="icon">
+        <img src="{{origin.img}}" alt="{{origin.name}}">
+    </div>
+    <h3>{{origin.name}}'s {{attack.name}}</h3>
+    <div class="icon"></div>
+</header>
+<main>
+    <div class="collapse-button">
+        <button type="button" class="collapse-rolls expanded">Hide Info</button>
+    </div>
+    <article class="collapsed justify-content-center" style="border-bottom: 1px solid var(--color-underline-header);">
+        {{> effect-traits traits=attack.traits attack=attack}}
+    </article>
+    <div class="collapse-button">
+        <button type="button" class="collapse-rolls">Show Rolls</button>
+    </div>
+    <article class="collapsed">
+        {{#with rollsHTML}}
+            {{#if accuracyCheck}}{{{accuracyCheck}}}{{/if}}
+            {{#if critCheck}}{{{critCheck}}}{{/if}}
+            {{#if damageRandomness}}{{{damageRandomness}}}{{/if}}
+            {{#each effectChecks}}
+                {{{this}}}
+            {{/each}}
+        {{/with}}
+    </article>
+</main>
+<footer>
+    <div class="target target-header">
+        <div class="icon">Icon</div>
+        <div class="status">Status</div>
+        <div class="damage">Damage</div>
+    </div>
+    {{#each targets as |target uuid|}}
+        <div class="target" data-target-uuid="{{uuid}}">
+            <div class="icon">
+                <img src="{{target.actor.img}}" alt="{{target.name}}">
+            </div>
+            {{#with target.degreeOfSuccess}}
+            <div class="status" data-tooltip="{{this.category}}">
+                <i class="fas fa-{{#if (is this.category "hit")}}certificate{{else if (is this.category "critical")}}crosshairs{{else}}times-circle{{/if}}"></i>
+            </div>
+            {{/with}}
+            <div class="damage" data-tooltip="{{target.damage.value}}">
+                <span>{{target.damage.value}}</span>
+            </div>
+        </div>
+    {{/each}}
+</footer>

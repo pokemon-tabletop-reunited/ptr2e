@@ -24,7 +24,7 @@
                 </div>
                 {{formField action.schema.fields.name value=action.name name=(concat "system.actions." @index ".name") localize=true}}
                 {{!-- {{formField action.schema.fields.slug value=action.slug localize=true}} --}}
-                {{formField action.schema.fields.typing value=action.typing name=(concat "system.actions." @index ".typing") localize=true}}
+                {{formField action.schema.fields.types value=action.types name=(concat "system.actions." @index ".types") localize=true}}
                 {{formField action.schema.fields.category value=action.category name=(concat "system.actions." @index ".category") localize=true}}
                 {{#unless (is action.category "status")}}
                     {{formField action.schema.fields.power value=action.power name=(concat "system.actions." @index ".power") localize=true}}
