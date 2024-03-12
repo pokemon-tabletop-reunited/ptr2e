@@ -1,4 +1,3 @@
-import { tupleHasValue } from "@utils";
 import type { AbstractSublevel } from "abstract-level";
 import { ClassicLevel, type DatabaseOptions } from "classic-level";
 import * as R from "remeda";
@@ -8,6 +7,7 @@ import systemJSON from "../../static/system.json" assert { type: "json" };
 import { PackError } from "./helpers.ts";
 import { PackEntry } from "./types.ts";
 import { ItemSourcePTR2e } from "./compendium-pack.ts";
+import { tupleHasValue } from "./helpers.ts";
 
 const DB_KEYS = ["actors", "items", "journal", "macros", "tables"] as const;
 const EMBEDDED_KEYS = ["items", "pages", "results"] as const;

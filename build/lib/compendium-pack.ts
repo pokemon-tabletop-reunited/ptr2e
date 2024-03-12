@@ -1,15 +1,12 @@
-import { isObject, sluggify } from "@utils";
 import fs from "fs";
 import path from "path";
-import { getFilesRecursively, PackError } from "./helpers.ts";
+import { getFilesRecursively, isObject, PackError, sluggify } from "./helpers.ts";
 import { DBFolder, LevelDatabase } from "./level-database.ts";
-import { ActorPTR2e } from "@actor";
-import { ItemPTR2e } from "@item";
 import { PackEntry } from "./types.ts";
 import coreIconsJSON from "../core-icons.json" assert { type: "json" };
 
-type ActorSourcePTR2e = ActorPTR2e["_source"];
-type ItemSourcePTR2e = ItemPTR2e["_source"];
+type ActorSourcePTR2e = Actor["_source"];
+type ItemSourcePTR2e = Item["_source"];
 
 interface PackMetadata {
     system: string;
@@ -247,6 +244,7 @@ class CompendiumPack {
         if (isItemSource(docSource)) {
             docSource.effects = [];
             docSource.flags.core = { sourceId: this.#sourceIdOf(docSource._id ?? "", { docType: "Item" }) };
+            //@ts-ignore
             docSource.system.slug ??= sluggify(docSource.name);
         }
 
