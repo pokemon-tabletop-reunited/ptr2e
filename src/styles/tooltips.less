@@ -1,14 +1,4 @@
-.trait {
-    font-family: monospace;
-    padding: 0.25rem 0;
-
-    .tag {
-        text-decoration: underline;
-    }
-}
-
 aside[role="tooltip"] {
-
     background: #121212;
 
     &.locked-tooltip,
@@ -101,4 +91,77 @@ aside[role="tooltip"] {
             --progress: 100;
         }
     }
+
+    &.status, &.damage {
+        header {
+            h3 {
+                border-bottom: 1px solid #6f6c66;
+                padding: 0.25rem;
+                margin: 0;
+            }
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+
+            figure {
+                margin: 0.1rem 0.25rem;
+                border: 2px groove #6f6c66;
+                padding: 0.25rem;
+                text-align: center;
+
+                code {
+                    font-size: 0.8rem;
+                    word-wrap: pre-wrap;
+                }
+            }
+            .form-group {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                text-align: start;
+                flex-wrap: wrap;
+                margin: 0.1rem 0.25rem;
+                border: 2px groove #6f6c66;
+                padding: 0.25rem;
+
+                label {
+                    flex: 0 0 auto;    
+                }
+                .form-fields {
+                    flex: 0 0 auto;
+                }
+                .hint {
+                    flex: 0 0 100%;
+                    font-size: 0.75rem;
+                    margin: 0.25rem 0;
+                    font-style: italic;
+                }
+            }
+        }
+
+        footer {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.25rem;
+
+            .button {
+                flex: 0 0 auto;
+                margin: 0 0.25rem;
+            }
+        }
+    }
 }
+
+.trait {
+    font-family: monospace;
+    padding: 0.25rem 0;
+
+    .tag {
+        text-decoration: underline;
+    }
+}
+

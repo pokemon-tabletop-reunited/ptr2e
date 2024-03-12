@@ -1,4 +1,6 @@
+import TypeDataModel from "../../../common/abstract/type-data.js";
 import BaseActor from "../../../common/documents/actor.js";
+import { ChatMessageSchema } from "../../../common/documents/chat-message.js";
 import BaseUser from "../../../common/documents/user.js";
 import type { ClientBaseChatMessage } from "./client-base-mixes.d.ts";
 
@@ -9,7 +11,7 @@ declare global {
      * @see {@link data.ChatMessageData} The ChatMessage data schema
      * @see {@link documents.Messages} The world-level collection of ChatMessage documents
      */
-    class ChatMessage extends ClientBaseChatMessage {
+    class ChatMessage<TSchema extends TypeDataModel = TypeDataModel> extends ClientBaseChatMessage {
         constructor(data: PreCreate<foundry.documents.ChatMessageSource>, context?: MessageConstructionContext);
 
         _rollExpanded: boolean;
@@ -186,8 +188,12 @@ declare global {
         export(): string;
     }
 
-    interface ChatMessage extends ClientBaseChatMessage {
+    interface ChatMessage<TSchema extends TypeDataModel = TypeDataModel> extends ClientBaseChatMessage {
         user: User;
+        author: User;
+
+        system: TSchema;
+        _source: SourceFromSchema<ChatMessageSchema<string, TSchema>>;
     }
 
     namespace ChatMessage {

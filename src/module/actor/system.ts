@@ -26,7 +26,7 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
         return {
             advancement: new fields.SchemaField({
                 experience: new fields.SchemaField({
-                    current: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 })
+                    current: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0, label: "PTR2E.Fields.Experience.Label", hint: "PTR2E.Fields.Experience.Hint"})
                 })
             }),
             attributes: new fields.SchemaField({
@@ -64,26 +64,28 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
             }),
             health: new fields.SchemaField({
                 value: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
+                max: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
             }),
-            experience: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
             money: new fields.NumberField({ required: true, initial: 0 }),
         }
     }
 
     override prepareBaseData(): void {
 
+        this.advancement.level = Math.floor(Math.cbrt(this.advancement.experience.current || 1));
+        this.advancement.experience.next = Math.pow(Math.min(this.advancement.level + 1, 100), 3);
+
         for (const k in this.attributes) {
             const key = k as keyof Attributes;
             this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
         }
 
-        this.advancement.level = Math.floor(Math.cbrt(this.advancement.experience.current || 1));
-        this.advancement.experience.next = Math.pow(Math.min(this.advancement.level + 1, 100), 3);
+        this.health.max = this.attributes.hp.value;
     }
 
     _calculateStatTotal(stat: Attribute | Omit<Attribute, 'stage'>): number {
         //TODO: Add these values, for now default to 1
-        const nature = 1, sizeMod = 1, level = 30;
+        const nature = 1, sizeMod = 1, level = this.advancement.level;
 
         if ('stage' in stat) {
             /** Calculate a stat that Isn't HP */

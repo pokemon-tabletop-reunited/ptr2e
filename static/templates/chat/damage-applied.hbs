@@ -1,0 +1,4 @@
+<main {{#if undone}}class="undone"{{/if}}>
+    <p>{{#if target}}{{target.link}}{{else}}@UUID[{{_source.target}}]{{/if}} took {{damageApplied}} damage</p>
+    {{#if (isGm)}}{{#unless undone}}<button class="revert-damage" data-tooltip="Revert Damage"><i class="fa-solid fa-rotate-left"></i></button>{{/unless}}{{/if}}
+</main>

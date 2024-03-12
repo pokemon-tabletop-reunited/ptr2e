@@ -1,10 +1,3 @@
-.trait {
-  font-family: monospace;
-  padding: 0.25rem 0;
-}
-.trait .tag {
-  text-decoration: underline;
-}
 aside[role="tooltip"] {
   background: #121212;
 }
@@ -82,4 +75,73 @@ aside[role="tooltip"] .circular-progress circle.fgb {
   to {
     --progress: 100;
   }
+}
+aside[role="tooltip"].status header h3,
+aside[role="tooltip"].damage header h3 {
+  border-bottom: 1px solid #6f6c66;
+  padding: 0.25rem;
+  margin: 0;
+}
+aside[role="tooltip"].status main,
+aside[role="tooltip"].damage main {
+  display: flex;
+  flex-direction: column;
+}
+aside[role="tooltip"].status main figure,
+aside[role="tooltip"].damage main figure {
+  margin: 0.1rem 0.25rem;
+  border: 2px groove #6f6c66;
+  padding: 0.25rem;
+  text-align: center;
+}
+aside[role="tooltip"].status main figure code,
+aside[role="tooltip"].damage main figure code {
+  font-size: 0.8rem;
+  word-wrap: pre-wrap;
+}
+aside[role="tooltip"].status main .form-group,
+aside[role="tooltip"].damage main .form-group {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: start;
+  flex-wrap: wrap;
+  margin: 0.1rem 0.25rem;
+  border: 2px groove #6f6c66;
+  padding: 0.25rem;
+}
+aside[role="tooltip"].status main .form-group label,
+aside[role="tooltip"].damage main .form-group label {
+  flex: 0 0 auto;
+}
+aside[role="tooltip"].status main .form-group .form-fields,
+aside[role="tooltip"].damage main .form-group .form-fields {
+  flex: 0 0 auto;
+}
+aside[role="tooltip"].status main .form-group .hint,
+aside[role="tooltip"].damage main .form-group .hint {
+  flex: 0 0 100%;
+  font-size: 0.75rem;
+  margin: 0.25rem 0;
+  font-style: italic;
+}
+aside[role="tooltip"].status footer,
+aside[role="tooltip"].damage footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem;
+}
+aside[role="tooltip"].status footer .button,
+aside[role="tooltip"].damage footer .button {
+  flex: 0 0 auto;
+  margin: 0 0.25rem;
+}
+.trait {
+  font-family: monospace;
+  padding: 0.25rem 0;
+}
+.trait .tag {
+  text-decoration: underline;
 }

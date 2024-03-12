@@ -1,7 +1,10 @@
 import { ActorPTR2e } from "@actor";
 import AttackPTR2e from "@module/data/models/attack.ts";
+import { ChatMessagePTR2e } from "../document.ts";
 
 abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
+    declare parent: ChatMessagePTR2e<AttackMessageSystem>;
+
     /**
      * The rolled Accuracy Check (1d100)
      */
@@ -19,6 +22,10 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
      */
     abstract targets: ActorPTR2e[];
     /**
+     * The overrides for the accuracy check
+     */
+    abstract overrides: Record<string, AccuracySuccessCategory>;
+    /**
      * The actor that is using the attack
      */
     abstract origin: ActorPTR2e;
@@ -31,7 +38,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
      * Saved context for the attack that gets fulfilled when the message is rendered
      */
     abstract context: {
-        targets: Map<string, { actor: ActorPTR2e, degreeOfSuccess: DegreeOfSuccess, damage: DamageCalc | null }>;
+        targets: Map<string, { actor: ActorPTR2e, accuracy: AccuracyCalc, damage: DamageCalc | null }>;
         origin: ActorPTR2e;
         attack: AttackPTR2e;
         accuracyCheck: Rolled<Roll>;
@@ -49,7 +56,10 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         accuracyCheck: string;
         critCheck: string;
         damageRandomness: string;
-        targets: string[];
+        targets: {
+            uuid: string;
+            status: AccuracySuccessCategory;
+        }[];
         origin: string;
         attack: string;
     }
@@ -63,7 +73,10 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             accuracyCheck: new fields.JSONField({ required: true, validate: AttackMessageSystem.#validateRoll }),
             critCheck: new fields.JSONField({ required: true, validate: AttackMessageSystem.#validateRoll }),
             damageRandomness: new fields.JSONField({ required: true, validate: AttackMessageSystem.#validateRoll }),
-            targets: new fields.ArrayField(new fields.DocumentUUIDField({ required: true, type: 'Actor' })),
+            targets: new fields.ArrayField(new fields.SchemaField({
+                uuid: new fields.DocumentUUIDField({ required: true, type: 'Actor' }),
+                status: new fields.StringField({ required: false, choices: Object.values(AccuracySuccessCategories) })
+            })),
             origin: new fields.JSONField({ required: true }),
             attack: new fields.StringField({ required: true }),
         }
@@ -99,9 +112,11 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             Hooks.onError("AttackMessageSystem#damageRandomness", error, { log: 'error', data: this._source });
         }
 
-        this.targets = this._source.targets.map(uuid => {
+        this.overrides = {};
+        this.targets = this._source.targets.map(({ uuid, status }) => {
             const actor = fromUuidSync(uuid) as ActorPTR2e;
             if (!actor) Hooks.onError("AttackMessageSystem#targets", new Error(`Could not find target actor with UUID ${uuid}`), { log: 'error', data: this._source });
+            if (status) this.overrides[actor.uuid] = status;
             return actor;
         });
 
@@ -123,7 +138,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             const renderRollsInner = async (roll: Roll, isPrivate: boolean) => {
                 return roll.render({ isPrivate });
             }
-            
+
             const rolls: {
                 accuracyCheck: string,
                 critCheck: string,
@@ -158,11 +173,11 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         const context = await (async () => {
             if (this.context) return this.context;
 
-            const targets = new Map<string, { actor: ActorPTR2e, degreeOfSuccess: DegreeOfSuccess, damage: DamageCalc | null }>();
+            const targets = new Map<string, { actor: ActorPTR2e, accuracy: AccuracyCalc, damage: DamageCalc | null }>();
             for (const target of this.targets.values()) {
-                const degreeOfSuccess = this._calculateDegreeOfSuccess({ accuracyCheck: this.accuracyCheck, target });
-                const damage = await this._calculateDamage({ damageRandomness: this.damageRandomness, target, critModifier: degreeOfSuccess.degree });
-                targets.set(target.uuid, { actor: target, degreeOfSuccess, damage });
+                const accuracy = this._calculateDegreeOfSuccess({ accuracyCheck: this.accuracyCheck, target });
+                const damage = await this._calculateDamage({ damageRandomness: this.damageRandomness, target, critModifier: accuracy.category === AccuracySuccessCategories.CRITICAL ? 1.5 : 1 });
+                targets.set(target.uuid, { actor: target, accuracy, damage });
             }
 
             return this.context = {
@@ -182,10 +197,14 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     _calculateDegreeOfSuccess({
         accuracyCheck,
         target,
-    }: { accuracyCheck: Rolled<Roll>; target: ActorPTR2e }): DegreeOfSuccess {
+    }: { accuracyCheck: Rolled<Roll>; target: ActorPTR2e }): AccuracyCalc {
+        // Step 0: If an override is present, we should return that.
+        // Calculation should still proceed in case the override is incorrect.
+        const override = this.overrides[target.uuid];
+
         // Step 1: Check if the move has an accuracy, if not it always is a hit
         const moveAccuracy = this.attack.accuracy;
-        if (moveAccuracy === null) return { category: DegreesOfSuccessTypes.HIT, degree: 1 };
+        if (moveAccuracy === null) return { category: override || AccuracySuccessCategories.HIT, context: { moveAccuracy, override: !!override } };
 
         // Step 2: Calculate non-stage accuracy modifiers
         const accuracyModifiers: number[] = [];
@@ -201,9 +220,19 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         const accuracyRoll = accuracyCheck.total;
         const accuracyDC = moveAccuracy * accuracyModifier * stageModifier;
 
+        const context = {
+            moveAccuracy,
+            otherModifiers: accuracyModifier,
+            adjustedStages,
+            stageModifier,
+            accuracyRoll,
+            accuracyDC,
+            override: !!override
+        }
+
         // Step 5: Determine the degree of success
         //TODO: Implement the degree of success calculation
-        return accuracyRoll <= accuracyDC ? { category: DegreesOfSuccessTypes.HIT, degree: 1 } : { category: DegreesOfSuccessTypes.MISS, degree: 1 };
+        return accuracyRoll <= accuracyDC ? { category: override || AccuracySuccessCategories.HIT, context } : { category: override || AccuracySuccessCategories.MISS, context };
     }
 
     async _calculateDamage({
@@ -255,19 +284,67 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             context
         }
     }
+
+    async updateTarget(targetUuid: string, { status }: { status: AccuracySuccessCategory }) {
+        const target = this.context?.targets.get(targetUuid);
+        if (!target) return false;
+
+        const source = fu.duplicate(this._source.targets);
+        const index = source.findIndex(t => t.uuid === targetUuid);
+        if (index === -1) return false;
+
+        source[index].status = status;
+        return await this.parent.update({"system.targets": source});
+    }
+
+    async applyDamage(targetUuid: string) {
+        const target = this.context?.targets.get(targetUuid);
+        if (!target) return false;
+
+        const damage = target.damage;
+        if (!damage) return false;
+
+        const damageApplied = await target.actor.applyDamage(damage.value);
+
+        // @ts-ignore
+        return ChatMessage.create({
+            type: "damage-applied",
+            system: {
+                target: targetUuid,
+                damageApplied
+            }
+        })
+    }
+
+    activateListeners(html: JQuery<HTMLElement>) {
+        html.find(".apply-damage").on('click', (event) => {
+            const targetUuid = (event.currentTarget.closest("[data-target-uuid]") as HTMLElement)?.dataset?.targetUuid;
+            if (!targetUuid) return;
+            this.applyDamage(targetUuid);
+        });
+    }
 }
 
-const DegreesOfSuccessTypes = {
+const AccuracySuccessCategories = {
     CRITICAL: "critical",
     HIT: "hit",
     MISS: "miss",
     FUMBLE: "fumble"
 } as const;
-type DegreeOfSuccessCategory = typeof DegreesOfSuccessTypes[keyof typeof DegreesOfSuccessTypes];
 
-type DegreeOfSuccess = {
-    category: DegreeOfSuccessCategory;
-    degree: number;
+type AccuracyCalc = {
+    category: AccuracySuccessCategory;
+    context: AccuracyContext;
+}
+type AccuracySuccessCategory = typeof AccuracySuccessCategories[keyof typeof AccuracySuccessCategories];
+type AccuracyContext = {
+    moveAccuracy: number | null;
+    otherModifiers?: number;
+    adjustedStages?: number;
+    stageModifier?: number;
+    accuracyRoll?: number;
+    accuracyDC?: number;
+    override: boolean;
 }
 
 type DamageCalc = {

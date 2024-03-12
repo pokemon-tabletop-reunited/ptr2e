@@ -1,0 +1,63 @@
+<content>
+    <header>
+        {{#with accuracy.context}}
+            <h3>{{accuracyRoll}} &le; {{accuracyDC}}</h3>
+        {{/with}}
+        {{#if accuracy.context.override}}
+            <small>Manual Override! ({{formatSlug accuracy.category}})</small>
+        {{/if}}
+    </header>
+    <main>
+        <figure>
+            <code>@accuracyRoll &le; <br>&#40;@moveAccuracy &times; @adjustedStages &times;<br>@otherModifiers&#41;</code>
+        </figure>
+        <figure>
+            {{#with accuracy.context}}
+                <code>{{accuracyRoll}} &le; &#40;{{moveAccuracy}} &times; {{stageModifier}} &times; {{otherModifiers}}&#41;</code>
+            {{/with}}
+        </figure>
+        {{#with accuracy.context}}
+            {{#if accuracyRoll}}{{> variable label="PTR2E.Status.AccuracyRoll.Label" hint="PTR2E.Status.AccuracyRoll.Hint" value=accuracyRoll}}{{/if}}
+            {{#if moveAccuracy}}{{> variable label="PTR2E.Status.MoveAccuracy.Label" hint="PTR2E.Status.MoveAccuracy.Hint" value=moveAccuracy}}{{/if}}
+            {{#if (isdefined adjustedStages)}}{{> variable label="PTR2E.Status.AdjustedStages.Label" hint="PTR2E.Status.AdjustedStages.Hint" value=adjustedStages division="3" value2=stageModifier}}{{/if}}
+            {{#if accuracyModifier}}
+                {{#each accuracyModifier}}
+                    {{#if label}}
+                    {{> variable label=label hint=hint value=value}}
+                    {{else}}
+                    {{> variable label="PTR2E.Status.OtherModifiers" value=this}}
+                    {{/if}}
+                {{/each}}
+            {{/if}}
+        {{/with}}
+    </main>
+    <footer>
+        {{#unless (is accuracy.category "hit")}}{{> control id="hit" label="PTR2E.Status.ChangeToHit"}}{{/unless}}
+        {{#unless (is accuracy.category "critical")}}{{> control id="critical" label="PTR2E.Status.ChangeToCritical"}}{{/unless}}
+        {{#unless (or (is accuracy.category "miss") (is accuracy.category "fumble"))}}{{> control id="miss" label="PTR2E.Status.ChangeToMiss"}}{{/unless}}
+    </footer>
+</content>
+
+{{#*inline "control"}}
+    <button type="button" id="{{id}}">{{#if icon}}<i class="{{icon}}"></i>{{/if}}{{localize label}}</button>
+{{/inline}}
+
+{{#*inline "variable"}}
+    <div class="form-group">
+        <label>{{localize label}}:</label>
+        <div class="form-fields">
+            {{#if division}}
+                {{#if (gte value 0)}}
+                    <span>{{numberFormat value2 decimals=2}} ({{add value division}} / {{division}})</span>
+                {{else}}
+                    <span>{{numberFormat value2 decimals=2}} ({{division}} / {{add value division}})</span>
+                {{/if}}
+            {{else}}
+                <span>{{value}}</span>
+            {{/if}}
+        </div>
+        {{#if hint}}
+        <p class="hint">{{localize hint}}</p>
+        {{/if}}
+    </div>
+{{/inline}}

@@ -1,0 +1,43 @@
+<content>
+    <main>
+        <figure>
+            <code>((((((2 &times; @level) &divide; 5) + 2) &times; @power &times; (@attack &divide; @defense)) &divide; 50) + 2) &times; @targets &times; @critical &times; ((100 - @random) &divide; 100) &times; @stab &times; @type &times; @other</code>
+        </figure>
+        <figure>
+            <code>{{{formatFormula damage.roll._formula}}}</code>
+        </figure>
+        <figure>
+            <code>{{{formatFormula damage.roll.formula}}}</code>
+        </figure>
+        {{#each damage.context as |value key|}}
+            {{> variable label=(concat "PTR2E.Damage." key ".Label") hint=(concat "PTR2E.Damage." key ".Hint") value=value}}
+        {{/each}}
+    </main>
+    {{!-- <footer>
+        {{> control id="apply-damage" label="PTR2E.Damage.ApplyDamage" icon="fas fa-bolt"}}
+    </footer> --}}
+</content>
+
+{{#*inline "control"}}
+    <button type="button" id="{{id}}">{{#if icon}}<i class="{{icon}}"></i>{{/if}}{{localize label}}</button>
+{{/inline}}
+
+{{#*inline "variable"}}
+    <div class="form-group">
+        <label>{{localize label}}:</label>
+        <div class="form-fields">
+            {{#if division}}
+                {{#if (gte value 0)}}
+                    <span>{{add value division}} / {{division}}</span>
+                {{else}}
+                    <span>{{division}} / {{add value division}}</span>
+                {{/if}}
+            {{else}}
+                <span>{{value}}</span>
+            {{/if}}
+        </div>
+        {{#if hint}}
+        <p class="hint">{{localize hint}}</p>
+        {{/if}}
+    </div>
+{{/inline}}

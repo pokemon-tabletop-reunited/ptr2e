@@ -6,6 +6,7 @@ import { AbilitySheetPTR2e } from "@item/sheets/ability.ts";
 import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
 import { ChatMessagePTR2e } from "@module/chat/document.ts";
 import { AttackMessageSystem } from "@module/chat/models/attack.ts";
+import { DamageAppliedMessageSystem } from "@module/chat/models/damage-applied.ts";
 import { ItemMessageSystem } from "@module/chat/models/item.ts";
 import { CharacterCombatantSystem } from "@module/combat/combatant/models/character.ts";
 import { RoundCombatantSystem } from "@module/combat/combatant/models/round.ts";
@@ -43,7 +44,8 @@ export const PTRCONFIG = {
         documentClass: ChatMessagePTR2e,
         dataModels: {
             item: ItemMessageSystem,
-            attack: AttackMessageSystem
+            attack: AttackMessageSystem,
+            "damage-applied": DamageAppliedMessageSystem
         }
     },
     Combat: {

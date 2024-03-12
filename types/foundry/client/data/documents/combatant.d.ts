@@ -1,3 +1,5 @@
+import TypeDataModel from "../../../common/abstract/type-data.js";
+import { CombatantSchema } from "../../../common/documents/combatant.js";
 import type { ClientBaseCombatant } from "./client-base-mixes.d.ts";
 
 declare global {
@@ -10,6 +12,7 @@ declare global {
     class Combatant<
         TParent extends Combat | null,
         TTokenDocument extends TokenDocument | null = TokenDocument | null,
+        TSchema extends TypeDataModel = TypeDataModel
     > extends ClientBaseCombatant<TParent> {
         constructor(data: PreCreate<foundry.documents.CombatantSource>, context?: DocumentConstructionContext<TParent>);
 
@@ -83,7 +86,11 @@ declare global {
     interface Combatant<
         TParent extends Combat | null,
         TTokenDocument extends TokenDocument | null = TokenDocument | null,
+        TSchema extends TypeDataModel = TypeDataModel,
     > extends ClientBaseCombatant<TParent> {
         _sheet: CombatantConfig<this>;
+
+        system: TSchema;
+        _source: SourceFromSchema<CombatantSchema<string, TSchema>>;
     }
 }

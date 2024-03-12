@@ -1,19 +1,50 @@
 .chat-message.message {
-    &.attack {
-        background: #fefefe;
-        padding: 0;
-        color: #1e1e1e;
+    background: #fefefe;
+    padding: 0;
+    color: #1e1e1e;
 
-        --color-underline-header: #6f6c66;
+    --color-underline-header: #6f6c66;
 
-        header.message-header {
-            padding: 0.25rem;
-            background-color: #cdcdcd;
-            border-bottom: 1px solid var(--color-underline-header);
-        }
+    header.message-header {
+        padding: 0.25rem;
+        background-color: #cdcdcd;
+        border-bottom: 1px solid var(--color-underline-header);
+    }
 
+    .message-content {
+        background-color: #fefefe;
+        padding: 0.25rem;
+    }
+
+    &.damage-applied {
         .message-content {
-            background-color: #fefefe;
+            padding: 0;
+
+            >main {
+                display: flex;
+                flex-direction: row;
+
+                padding: 0.25rem;
+
+                &.undone {
+                    text-decoration: line-through;
+                }
+
+                p {
+                    flex: 1;
+                }
+
+                button {
+                    flex: 0 0 50px;
+                    padding: 0;
+                }
+            }
+        }
+    }
+
+    &.attack {
+        .message-content {
+            padding: 0;
 
             >header {
                 background-color: #dedede;
@@ -164,6 +195,7 @@
                                 margin: 0 2px;
                             }
                         }
+
                         >main {
                             display: flex;
                             flex-direction: row;
@@ -180,8 +212,10 @@
                                     border: unset;
                                 }
                             }
+
                             >article {
                                 flex: 1;
+
                                 &.center {
                                     display: flex;
                                     justify-content: center;
@@ -242,11 +276,11 @@
                             font-size: 22px;
 
                             &.fa-certificate {
-                                color: #4ef091;
+                                color: #1edf6e;
                             }
 
                             &.fa-crosshairs {
-                                color: #4ef0ba;
+                                color: #14afdf;
                             }
 
                             &.fa-times-circle {
@@ -261,6 +295,22 @@
 
                         span {
                             font-size: 16px;
+                        }
+                    }
+
+                    .apply {
+                        flex: 0 0 100px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+
+                        button {
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            font-size: 14px;
+                            color: #1e1e1e;
+                            padding: 0;
                         }
                     }
                 }

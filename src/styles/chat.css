@@ -1,16 +1,38 @@
-.chat-message.message.attack {
+.chat-message.message {
   background: #fefefe;
   padding: 0;
   color: #1e1e1e;
   --color-underline-header: #6f6c66;
 }
-.chat-message.message.attack header.message-header {
+.chat-message.message header.message-header {
   padding: 0.25rem;
   background-color: #cdcdcd;
   border-bottom: 1px solid var(--color-underline-header);
 }
-.chat-message.message.attack .message-content {
+.chat-message.message .message-content {
   background-color: #fefefe;
+  padding: 0.25rem;
+}
+.chat-message.message.damage-applied .message-content {
+  padding: 0;
+}
+.chat-message.message.damage-applied .message-content > main {
+  display: flex;
+  flex-direction: row;
+  padding: 0.25rem;
+}
+.chat-message.message.damage-applied .message-content > main.undone {
+  text-decoration: line-through;
+}
+.chat-message.message.damage-applied .message-content > main p {
+  flex: 1;
+}
+.chat-message.message.damage-applied .message-content > main button {
+  flex: 0 0 50px;
+  padding: 0;
+}
+.chat-message.message.attack .message-content {
+  padding: 0;
 }
 .chat-message.message.attack .message-content > header {
   background-color: #dedede;
@@ -203,10 +225,10 @@
   font-size: 22px;
 }
 .chat-message.message.attack .message-content > footer .target .status i.fas.fa-certificate {
-  color: #4ef091;
+  color: #1edf6e;
 }
 .chat-message.message.attack .message-content > footer .target .status i.fas.fa-crosshairs {
-  color: #4ef0ba;
+  color: #14afdf;
 }
 .chat-message.message.attack .message-content > footer .target .status i.fas.fa-times-circle {
   color: #f04e4e;
@@ -217,4 +239,18 @@
 }
 .chat-message.message.attack .message-content > footer .target .damage span {
   font-size: 16px;
+}
+.chat-message.message.attack .message-content > footer .target .apply {
+  flex: 0 0 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chat-message.message.attack .message-content > footer .target .apply button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #1e1e1e;
+  padding: 0;
 }

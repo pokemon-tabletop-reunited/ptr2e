@@ -1,4 +1,3 @@
-    {{log this}}
 <header>
     <div class="icon">
         <img src="{{origin.img}}" alt="{{origin.name}}">
@@ -32,19 +31,23 @@
         <div class="icon">Icon</div>
         <div class="status">Status</div>
         <div class="damage">Damage</div>
+        <div class="apply"></div>
     </div>
     {{#each targets as |target uuid|}}
         <div class="target" data-target-uuid="{{uuid}}">
             <div class="icon">
                 <img src="{{target.actor.img}}" alt="{{target.name}}">
             </div>
-            {{#with target.degreeOfSuccess}}
-            <div class="status" data-tooltip="{{this.category}}">
+            {{#with target.accuracy}}
+            <div class="status" data-tooltip="{{this.category}}" data-tooltip-direction="UP">
                 <i class="fas fa-{{#if (is this.category "hit")}}certificate{{else if (is this.category "critical")}}crosshairs{{else}}times-circle{{/if}}"></i>
             </div>
             {{/with}}
-            <div class="damage" data-tooltip="{{target.damage.value}}">
+            <div class="damage" data-tooltip="{{target.damage.value}}" data-tooltip-direction="LEFT">
                 <span>{{target.damage.value}}</span>
+            </div>
+            <div class="apply">
+                <button type="button" class="apply-damage"><i class="fas fa-bolt"></i>{{localize "PTR2E.Damage.Apply"}}</button>
             </div>
         </div>
     {{/each}}

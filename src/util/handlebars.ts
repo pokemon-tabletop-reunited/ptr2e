@@ -16,10 +16,41 @@ function _registerPTRHelpers() {
         return Math.round((100 - percent) / 100 * 48);
     });
 
-    Handlebars.registerHelper("icon", function(img: PokemonTypes | PokemonCategories) {
-        if(!POKEMON_CATEGORIES.includes(img as PokemonCategories) && !getTypes().includes(img as PokemonTypes)) return "<small>Incorrect img data provided</small>";
+    Handlebars.registerHelper("icon", function (img: PokemonTypes | PokemonCategories) {
+        if (!POKEMON_CATEGORIES.includes(img as PokemonCategories) && !getTypes().includes(img as PokemonTypes)) return "<small>Incorrect img data provided</small>";
 
         return `<img src="/systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${formatSlug(img)}" data-tooltip-direction="LEFT" class="icon" />`;
+    });
+
+    Handlebars.registerHelper("formatFormula", function (formula) {
+        // Find all numbers in the string
+        const numbers = formula.match(/(\d+\.\d+|\d+)/g);
+
+        // If no numbers were found, return the original formula
+        if (!numbers) return formula;
+
+        // Round each number to two decimal places
+        console.log(numbers);
+        const roundedNumbers = numbers.map((num: string) => {
+            const parsedNum = parseFloat(num);
+            return Number.isInteger(parsedNum) ? parsedNum.toString() : parsedNum.toFixed(2);
+        });
+
+        // Replace each number in the formula with its rounded version
+        let roundedFormula = formula;
+        for (let i = 0; i < numbers.length; i++) {
+            roundedFormula = roundedFormula.replace(numbers[i], roundedNumbers[i]);
+        }
+
+        // Replace mathematical symbols with their HTML entities
+        return roundedFormula
+            .replaceAll(')*', ') &times;')
+            .replaceAll('*(', '&times; (')
+            .replaceAll('*', '&times;')
+            .replaceAll(')/', ') &divide;')
+            .replaceAll('/(', '&divide; (')
+            .replaceAll('/', '&divide;')
+            .replaceAll(')+', ') +')
     });
 }
 
@@ -77,6 +108,7 @@ function _registerBasicHelpers() {
     Handlebars.registerHelper("not", function (a, b = false) { return a != b });
     Handlebars.registerHelper("divide", (value1, value2) => Number(value1) / Number(value2));
     Handlebars.registerHelper("multiply", (value1, value2) => Number(value1) * Number(value2));
+    Handlebars.registerHelper("add", (value1, value2) => Number(value1) + Number(value2));
     Handlebars.registerHelper("floor", (value) => Math.floor(Number(value)));
 
     Handlebars.registerHelper("minMaxDiceCheck", function (roll, faces) {
@@ -145,7 +177,7 @@ function _registerBasicHelpers() {
 
     Handlebars.registerHelper("json", function (context) { return JSON.stringify(context); });
 
-    const buildInEachHelper = Handlebars.helpers.each; 
+    const buildInEachHelper = Handlebars.helpers.each;
     Handlebars.registerHelper("each", function (context, options) {
         let fn = options.fn,
             inverse = options.inverse,

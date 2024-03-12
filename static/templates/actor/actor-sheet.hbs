@@ -41,6 +41,26 @@
             <div class="actions default-location">
                 {{> actor-actions type="attack" actions=actor.actions.attack uuid=actor.uuid}}
             </div>
+            <div class="level-field">
+                <h4>Temporary Fields for Tech. Test.</h4>
+                <div class="form-group">
+                    <label>Level</label>
+                    <div class="form-fields">
+                        <input type="number" disabled value="{{actor.system.advancement.level}}"/>
+                    </div>
+                </div>
+                {{formField actor.system.schema.fields.advancement.fields.experience.fields.current value=actor.system.advancement.experience.current localize=true}}
+                <div class="form-group">
+                    <label>Exp Till Next</label>
+                    <div class="form-fields">
+                        <input type="number" disabled value="{{actor.system.advancement.experience.next}}"/>
+                    </div>
+                </div>
+            </div>
+            <div class="link-to-stats">
+                <h4>Temporary Field for Tech. Test.</h4>
+                <h2>Double Click here to Open Stats</h2>
+            </div>
         </div>
         <div class="tab main-grid" data-tab="skills">
             <div class="skills default-location">

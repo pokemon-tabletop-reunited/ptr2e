@@ -51,19 +51,20 @@ export default class AttackPTR2e extends ActionPTR2e {
         if (!accuracyCheck) return false;
 
         const critCheck = await this.rollCritCheck();
-        if(!critCheck) return false;
+        if (!critCheck) return false;
 
         const damageRandomness = await this.rollDamageRandomness();
 
-        const initialTargets = [...game.user.targets].map(t => t.actor?.uuid!).filter(uuid => !!uuid);
+        const initialTargets = [...game.user.targets].filter(t => t.actor?.uuid).map(t => ({ uuid: t.actor!.uuid }));
 
+        // @ts-ignore
         return await ChatMessage.create({
             type: "attack",
             system: {
-                accuracyCheck: typeof accuracyCheck === 'boolean' ? {value: true} : accuracyCheck.toJSON(), // True if always-hit, or the roll
+                accuracyCheck: typeof accuracyCheck === 'boolean' ? { value: true } : accuracyCheck.toJSON(), // True if always-hit, or the roll
                 critCheck: critCheck.toJSON(), // The crit roll
-                damageRandomness: typeof damageRandomness === 'boolean' ? {value: false} : damageRandomness.toJSON(), // False if no damage, or the roll
-                targets: initialTargets, 
+                damageRandomness: typeof damageRandomness === 'boolean' ? { value: false } : damageRandomness.toJSON(), // False if no damage, or the roll
+                targets: initialTargets,
                 origin: fu.mergeObject(this.actor!.toObject(), { uuid: this.actor!.uuid }),
                 attack: this.slug
             }

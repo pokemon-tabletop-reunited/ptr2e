@@ -23,6 +23,10 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
         return this.system.advancement.level;
     }
 
+    get speed() {
+        return this.system.attributes.spe.value;
+    }
+
     /** 
      * Step 1 - Copies data from source object to instance attributes
      * */
@@ -202,6 +206,15 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
             return stage > 0 ? ((2 + stage) / 2) : (2 / (2 + Math.abs(stage)));
         }
         return isCrit ? stat.value : stat.value * stageModifier();
+    }
+
+    async applyDamage(damage: number) {
+        const damageApplied = Math.min(damage || 0, this.system.health.value);
+        if(damageApplied === 0) return 0;
+        await this.update({
+            "system.health.value": Math.clamped(this.system.health.value - damage, 0, this.system.health.max)
+        })
+        return damageApplied;
     }
 
     getEffectiveness(moveTypes: Set<PokemonTypes>) {

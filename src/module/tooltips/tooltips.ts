@@ -1,5 +1,7 @@
 import { ActorPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
+import { ChatMessagePTR2e } from "@module/chat/document.ts";
+import { AttackMessageSystem } from "@module/chat/models/attack.ts";
 import AttackPTR2e from "@module/data/models/attack.ts";
 
 export default class TooltipsPTR2e {
@@ -35,7 +37,7 @@ export default class TooltipsPTR2e {
                 if (diff.has("active")) {
                     this._clearAutoLock();
                     this._activateTooltip().then(result => {
-                        if(result) this._autoLockTooltip();
+                        if (result) this._autoLockTooltip(result);
                     })
                     return;
                 }
@@ -44,36 +46,42 @@ export default class TooltipsPTR2e {
     }
 
     _clearAutoLock() {
-        if(this.#timeout) {
+        if (this.#timeout) {
             window.clearTimeout(this.#timeout);
             this.#timeout = null;
         }
     }
 
-    _autoLockTooltip() {
-        if(this.#timeout) return;
+    _autoLockTooltip(timeout = 2000) {
+        if (this.#timeout) return;
 
         this.#timeout = window.setTimeout(() => {
             this.#timeout = null;
-            if(this.tooltip.classList.contains("active")) {
+            if (this.tooltip.classList.contains("active")) {
                 game.tooltip.lockTooltip();
             }
-        }, 2000)
+        }, timeout)
     }
 
     /**
      * Activate the tooltip
      */
-    async _activateTooltip() {
-        if (game.tooltip.element?.classList.contains("trait")) {
-            return this._onTraitTooltip();
-        }
-        if (game.tooltip.element?.classList.contains("attack")) {
-            return this._onAttackTooltip();
+    async _activateTooltip(): Promise<false | number> {
+        for (const cls of game.tooltip.element?.classList ?? []) {
+            switch (cls) {
+                case "trait":
+                    return this._onTraitTooltip();
+                case "attack":
+                    return this._onAttackTooltip();
+                case "status":
+                    return this._onStatusTooltip();
+                case "damage":
+                    return this._onDamageTooltip();
+            }
         }
 
         return false;
-    } 
+    }
 
     /**
      * Handle trait tooltips
@@ -95,7 +103,7 @@ export default class TooltipsPTR2e {
         </div>`;
         const tooltipDirection = game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined;
         requestAnimationFrame(() => this._positionTooltip(tooltipDirection));
-        return true;
+        return 2000;
     }
 
     async _onAttackTooltip() {
@@ -103,27 +111,98 @@ export default class TooltipsPTR2e {
         if (!attackSlug) return false;
 
         const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset.parent;
-        if(!parentUuid) return false;
+        if (!parentUuid) return false;
 
         const parent = await fromUuid(parentUuid) as ActorPTR2e | ItemPTR2e;
-        if(!parent) return false;
+        if (!parent) return false;
 
         const attack = parent.actions.attack!.get(attackSlug) as AttackPTR2e | undefined;
-        if(!attack) return false;
+        if (!attack) return false;
 
         this.tooltip.classList.add("attack");
-        this.tooltip.innerHTML = `${await renderTemplate("systems/ptr2e/templates/partials/attack-embed.hbs", {attack: attack})}
-        <div class="progress-circle">
+        await this._renderTooltip({ path: "systems/ptr2e/templates/partials/attack-embed.hbs", data: { attack }, direction: game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined });
+        return 2000;
+    }
+
+    async _onStatusTooltip() {
+        const element = game.tooltip.element;
+        if (!element) return false;
+
+        const targetUuid = (element.closest("[data-target-uuid]") as HTMLElement)?.dataset?.targetUuid;
+        if (!targetUuid) return false;
+
+        const messageId = (element.closest("[data-message-id]") as HTMLElement)?.dataset?.messageId;
+        if (!messageId) return false;
+
+        const message = game.messages.get(messageId) as ChatMessagePTR2e<AttackMessageSystem>;
+        if (!message) return false;
+
+        const target = message.system.context?.targets.get(targetUuid);
+        if (!target) return false;
+
+        const accuracy = target.accuracy;
+
+        this.tooltip.classList.add("status");
+        await this._renderTooltip({ path: "systems/ptr2e/templates/chat/tooltips/status.hbs", data: { target, accuracy }, direction: game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined });
+
+        for (const button of this.tooltip.querySelectorAll("button")) {
+            button.addEventListener("click", async (event) => {
+                const type = (event.currentTarget as HTMLElement).id as 'hit' | 'critical' | 'miss';
+                if (!type) return;
+                message.system.updateTarget(targetUuid, { status: type });
+                game.tooltip.deactivate();
+                game.tooltip.dismissLockedTooltips();
+            });
+        }
+
+        return 500;
+    }
+
+    async _onDamageTooltip() {
+        const element = game.tooltip.element;
+        if (!element) return false;
+
+        const targetUuid = (element.closest("[data-target-uuid]") as HTMLElement)?.dataset?.targetUuid;
+        if (!targetUuid) return false;
+
+        const messageId = (element.closest("[data-message-id]") as HTMLElement)?.dataset?.messageId;
+        if (!messageId) return false;
+
+        const message = game.messages.get(messageId) as ChatMessagePTR2e<AttackMessageSystem>;
+        if (!message) return false;
+
+        const target = message.system.context?.targets.get(targetUuid);
+        if (!target) return false;
+
+        const damage = target.damage;
+
+        this.tooltip.classList.add("damage");
+        await this._renderTooltip({ path: "systems/ptr2e/templates/chat/tooltips/damage.hbs", data: { target, damage }, direction: game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined });
+
+        for (const button of this.tooltip.querySelectorAll("button")) {
+            button.addEventListener("click", async (event) => {
+                const type = (event.currentTarget as HTMLElement).id as 'hit' | 'critical' | 'miss';
+                if (!type) return;
+                // message.system.updateTarget(targetUuid, { status: type });
+                game.tooltip.deactivate();
+                game.tooltip.dismissLockedTooltips();
+            });
+        }
+
+        return 500;
+    }
+
+    async _renderTooltip({ path, data, direction = TooltipManager.TOOLTIP_DIRECTIONS.DOWN, autoLock = true }: { path: string; data: any; direction?: TooltipDirections; autoLock?: boolean }) {
+        let html = await renderTemplate(path, data);
+        if (autoLock) html += `<div class="progress-circle">
             <svg width="20" height="20" viewBox="0 0 20 20" class="circular-progress">
                 <circle class="bg"></circle>
                 <circle class="fg"></circle>
                 <circle class="fgb"></circle>
             </svg>
         </div>`;
-
-        const tooltipDirection = game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined;
-        requestAnimationFrame(() => this._positionTooltip(tooltipDirection));
-        return true;
+        this.tooltip.innerHTML = html;
+        requestAnimationFrame(() => this._positionTooltip(direction));
     }
 
     /**

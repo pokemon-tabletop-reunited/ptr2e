@@ -33,7 +33,7 @@ export type ChatMessageSchema<TType extends string = string, TSystemSource exten
     /** The message type from CONST.CHAT_MESSAGE_TYPES */
     style: fields.NumberField<ChatMessageType, ChatMessageType, true, true, true>;
     /** The _id of the User document who generated this message */
-    author: fields.ForeignDocumentField<BaseUser, true, false, true>;
+    user: fields.ForeignDocumentField<BaseUser, true, false, true>;
     /** The timestamp at which point this message was generated */
     timestamp: fields.NumberField<number, number, true, false, true>;
     /** An optional flavor text message which summarizes this message */

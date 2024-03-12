@@ -1,5 +1,6 @@
-class ChatMessagePTR2e extends ChatMessage {
+import TypeDataModel from "types/foundry/common/abstract/type-data.js";
 
+class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends ChatMessage<TSchema> {
     /**
      * @inheritdoc
      * @remarks
@@ -60,6 +61,8 @@ class ChatMessagePTR2e extends ChatMessage {
     }
 
     activateListeners(html: JQuery<HTMLElement>) {
+        if ('activateListeners' in this.system && this.system && typeof this.system.activateListeners === 'function') this.system.activateListeners(html);
+
         html.find(".dice-roll").on('click', (event) => {
             event.preventDefault();
             event.stopImmediatePropagation();

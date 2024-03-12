@@ -23,13 +23,15 @@ interface CombatantMetadata extends DocumentMetadata {
 }
 
 /** The data schema for a Combat document. */
-type CombatantSchema<TType extends string = string> = {
+type CombatantSchema<TType extends string = string, TSystemSource extends object = object> = {
     /** The _id which uniquely identifies this Combatant embedded document */
     _id: fields.DocumentIdField;
     /** The _id of an Actor associated with this Combatant */
     actorId: fields.ForeignDocumentField<string>;
     /** An Combatant subtype which configures the system data model applied */
     type: fields.StringField<TType, TType, true, false, false>;
+    /** The system data object which is defined by the system template.json model */
+    system: fields.TypeDataField<TSystemSource>;
     /** The _id of a Token associated with this Combatant */
     tokenId: fields.ForeignDocumentField<string>;
     /** A customized name which replaces the name of the Token in the tracker */
