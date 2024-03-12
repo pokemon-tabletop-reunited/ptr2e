@@ -5,7 +5,7 @@ class CharacterCombatantSystem extends foundry.abstract.TypeDataModel implements
     declare parent: CombatantPTR2e
 
     get actor() {
-        if (!this.parent.actor) throw new Error("A Combatant must have an associated Actor to use this method.")
+        //if (!this.parent.actor) throw new Error("A Combatant must have an associated Actor to use this method.")
         return this.parent.actor
     }
 
@@ -14,14 +14,16 @@ class CharacterCombatantSystem extends foundry.abstract.TypeDataModel implements
     }
 
     get baseAV() {
-        return (
+        if(!this.actor) return Infinity;
+        return Math.clamp(
+            Math.floor((
             500 * (
                 1 + (
                     ((this.combat.averageLevel - 5) * 21)
                     / 95
                 )
             )
-        ) / this.actor.speed;
+        ) / this.actor.speed), 33, 100);
     }
 }
 

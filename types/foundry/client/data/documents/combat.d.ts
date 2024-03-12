@@ -122,6 +122,14 @@ declare global {
         startCombat(): Promise<this>;
 
         /**
+         * Loads the registered Combat Theme (if any) and plays the requested type of sound.
+         * If multiple exist for that type, one is chosen at random.
+         * @param {string} announcement     The announcement that should be played: "startEncounter", "nextUp", or "yourTurn".
+         * @protected
+         */
+        _playCombatSound(announcement: string): void;
+
+        /**
          * Define how the array of Combatants is sorted in the displayed list of the tracker.
          * This method can be overridden by a system or module which needs to display combatants in an alternative order.
          * By default sort by initiative, next falling back to name, lastly tie-breaking by combatant id.

@@ -43,7 +43,7 @@
             {{/if}}
 
             {{#if user.isGM}}
-            <a class="combat-button combat-control" data-tooltip="COMBAT.InitiativeReset" data-control="resetAll"
+            <a class="combat-button combat-control" data-tooltip="COMBAT.ResetEncounter" data-control="resetEncounter"
                 {{#unless hasCombat}}disabled{{/unless}}>
                 <i class="fas fa-undo"></i>
             </a>
@@ -60,25 +60,22 @@
 
     <ol id="combat-tracker" class="directory-list">
         {{#each turns}}
-        <li class="combatant actor directory-item flexrow {{this.css}} {{#if this.hasActed}}acted{{/if}}" data-combatant-id="{{this.id}}" >
+        <li class="combatant actor directory-item flexrow {{this.css}} {{#if this.preview}}preview{{/if}}" data-combatant-id="{{this.id}}" >
             <img class="token-image" data-src="{{this.img}}" alt="{{this.name}}"/>
             <div class="token-name flexcol">
-                <h4>{{this.name}}</h4>
+                <h4>{{this.name}}{{#if this.preview}} <small>(Preview)</small>{{/if}}</h4>
                 <div class="combatant-controls flexrow">
                     {{#if ../user.isGM}}
+                    {{#unless this.preview}}
+                    {{#unless (is this.type 'round')}}
                     <a class="combatant-control {{#if this.hidden}}active{{/if}}" data-tooltip="COMBAT.ToggleVis" data-control="toggleHidden">
                         <i class="fas fa-eye-slash"></i>
                     </a>
                     <a class="combatant-control {{#if this.defeated}}active{{/if}}" data-tooltip="COMBAT.ToggleDead" data-control="toggleDefeated">
                         <i class="fas fa-skull"></i>
                     </a>
-                    <a class="combatant-control {{#if this.hasActed}}active{{/if}}" data-tooltip="Toggle Acted" data-control="toggleActed">
-                        {{#if this.hasActed}}
-                            <i class="fas fa-times"></i>
-                        {{else}}
-                            <i class="fas fa-check"></i>
-                        {{/if}}
-                    </a>
+                    {{/unless}}
+                    {{/unless}}
                     {{/if}}
                     {{#if this.canPing}}
                     <a class="combatant-control" data-tooltip="COMBAT.PingCombatant" data-control="pingCombatant">
@@ -115,17 +112,18 @@
         {{#if user.isGM}}
             {{#if round}}
             {{!-- <a class="combat-control" data-tooltip="COMBAT.RoundPrev" data-control="previousRound"><i class="fas fa-step-backward"></i></a> --}}
-            <a class="combat-control" data-tooltip="COMBAT.TurnPrev" data-control="previousTurn"><i class="fas fa-arrow-left"></i></a>
+            {{!-- <a class="combat-control" data-tooltip="COMBAT.TurnPrev" data-control="previousTurn"><i class="fas fa-arrow-left"></i></a> --}}
             <a class="combat-control center" data-control="endCombat">{{localize 'COMBAT.End'}}</a>
-            <a class="combat-control" data-tooltip="COMBAT.TurnNext" data-control="nextTurn"><i class="fas fa-arrow-right"></i></a>
+            <a class="combat-control center" data-control="nextTurn">{{localize 'COMBAT.TurnEnd'}}</a>
+            {{!-- <a class="combat-control" data-tooltip="COMBAT.TurnNext" data-control="nextTurn"><i class="fas fa-arrow-right"></i></a> --}}
             {{!-- <a class="combat-control" data-tooltip="COMBAT.RoundNext" data-control="nextRound"><i class="fas fa-step-forward"></i></a> --}}
             {{else}}
             <a class="combat-control center" data-control="startCombat">{{localize 'COMBAT.Begin'}}</a>
             {{/if}}
         {{else if control}}
-        <a class="combat-control" data-tooltip="COMBAT.TurnPrev" data-control="previousTurn"><i class="fas fa-arrow-left"></i></a>
+        {{!-- <a class="combat-control" data-tooltip="COMBAT.TurnPrev" data-control="previousTurn"><i class="fas fa-arrow-left"></i></a> --}}
         <a class="combat-control center" data-control="nextTurn">{{localize 'COMBAT.TurnEnd'}}</a>
-        <a class="combat-control" data-tooltip="COMBAT.TurnNext" data-control="nextTurn"><i class="fas fa-arrow-right"></i></a>
+        {{!-- <a class="combat-control" data-tooltip="COMBAT.TurnNext" data-control="nextTurn"><i class="fas fa-arrow-right"></i></a> --}}
         {{/if}}
     {{/if}}
     </nav>

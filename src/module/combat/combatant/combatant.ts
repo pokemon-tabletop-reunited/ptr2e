@@ -1,6 +1,8 @@
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CombatPTR2e } from "@combat";
 import { CombatantSystemPTR2e } from "./system.ts";
+import BaseActor from "types/foundry/common/documents/actor.js";
+import BaseUser from "types/foundry/common/documents/user.js";
 
 class CombatantPTR2e<
     TParent extends CombatPTR2e | null = CombatPTR2e | null,
@@ -13,14 +15,25 @@ class CombatantPTR2e<
     }
 
     get baseAV() {
-        return this.system.baseAV;
+        return Math.floor(this.system.baseAV);
     }
 
-    async endTurn() {
-        Hooks.callAll("ptr2e.endTurn", this, this.encounter, game.user.id);
+    protected override async _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: User): Promise<boolean | void> {
+        const result = await super._preCreate(data, options, user);
+        if(result === false) return false;
+
+        if(!this.type || this.type === 'base') {
+            this.updateSource({ type: 'character' });
+        }
+        this.updateSource({initiative: 100});
     }
 
-    async startTurn() {
+    protected override _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: BaseUser<BaseActor<null>>): Promise<boolean | void> {
+        if (changed["initiative"] === null || ('-=initiative' in changed) || Number(changed.initiative ?? 0) < 0) {
+            ui.notifications.error(game.i18n.localize("PTR2E.Combat.Combatant.InitiativeNotZeroOrNull"));
+            return Promise.resolve(false);
+        }
+        return super._preUpdate(changed, options, user);
     }
 
     override getInitiativeRoll(formula: string | null): Roll {
@@ -33,7 +46,7 @@ interface CombatantPTR2e<
     TTokenDocument extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
     TSystem extends CombatantSystemPTR2e = CombatantSystemPTR2e
 > extends Combatant<TParent, TTokenDocument, TSystem> {
-
+    _id: string;
 }
 
 export { CombatantPTR2e }

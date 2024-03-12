@@ -14,6 +14,7 @@ declare interface CombatTrackerTurn {
     hasRolled: boolean;
     hasResource: boolean;
     resource: object | null;
+    type?: string;
 }
 
 declare interface CombatTrackerData {

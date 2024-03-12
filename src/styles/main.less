@@ -1,5 +1,57 @@
 @import "utils.less";
 
+ol#combat-tracker {
+    overflow-x: hidden;
+
+    .combatant.actor.directory-item.preview {
+        filter: opacity(0.5);
+        padding: 0.25rem;
+        height: 48px;
+
+        .token-image {
+            height: calc(48px - 0.5rem);
+            object-fit: contain;
+        }
+
+        .token-name {
+            height: calc(48px - 0.5rem);
+
+            h4 {
+                flex: 0 0 16px;
+                line-height: 16px;
+            }
+
+            .combatant-controls {
+                flex: 0 0 12px;
+            }
+        }
+
+        .token-initiative {
+            height: calc(48px - 0.5rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes move-right-left {
+            0% {
+                transform: translateX(0);
+            }
+
+            50% {
+
+                transform: translateX(10px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        animation: move-right-left 3s linear infinite;
+
+    }
+}
+
 .document-sheet {
     background: url(/ui/denim075.png);
 
@@ -175,8 +227,11 @@
     }
 }
 
-[role="tooltip"], .embed.move-embed {
-    &.attack, .attack {
+[role="tooltip"],
+.embed.move-embed {
+
+    &.attack,
+    .attack {
         display: flex;
         flex-direction: column;
         gap: 0.25rem;
@@ -195,7 +250,7 @@
             padding-bottom: 0.25rem;
             text-align: center;
         }
-    
+
         div.d-flex {
             justify-content: space-between;
             text-align: center;
@@ -207,11 +262,13 @@
             font-weight: bold;
             flex: 0 0 45%;
         }
+
         span {
             font-size: 14px;
             text-wrap: nowrap;
             flex: 0 0 45%;
         }
+
         content {
             display: flex;
             min-height: 40px;
@@ -491,8 +548,9 @@
                         grid-row: 1 / span 5;
                     }
                 }
-                
-                .level-field, .link-to-stats {
+
+                .level-field,
+                .link-to-stats {
                     grid-column: 4 / span 2;
                     grid-row: 1 / span 2;
 
@@ -504,7 +562,8 @@
                     margin: 1rem 0.5rem;
                     border-radius: 20px;
 
-                    h2, h4 {
+                    h2,
+                    h4 {
                         align-self: center;
                         margin: 0;
                         font-style: italic;
@@ -545,7 +604,7 @@
                             background: #3889adee;
                             border-radius: 5px;
                             color: #efefef;
-                            
+
                             display: flex;
                             flex-direction: row;
                             justify-content: space-between;
@@ -563,17 +622,17 @@
                                 .icon {
                                     display: block;
                                 }
-        
+
                                 .dice {
                                     display: none;
                                     // background: lightslategray
                                 }
-        
+
                                 &.rollable:hover {
                                     >.icon {
                                         display: none;
                                     }
-        
+
                                     >.dice {
                                         display: block;
                                         cursor: pointer;
