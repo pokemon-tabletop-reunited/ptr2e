@@ -146,7 +146,7 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
             effectiveness[typeKey] = 1;
             for (const key of this.system.type.types) {
                 const type = key as PokemonTypes;
-                effectiveness[typeKey] *= types[typeKey].effectiveness[type];
+                effectiveness[typeKey] *= types[type].effectiveness[typeKey];
             }
         }
         return effectiveness;
