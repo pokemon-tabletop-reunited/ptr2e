@@ -947,7 +947,8 @@ ol#combat-tracker .combatant.actor.directory-item.preview .token-initiative {
   grid-row: 1 / span 5;
 }
 .ptr2e.actor form .main-grid .level-field,
-.ptr2e.actor form .main-grid .link-to-stats {
+.ptr2e.actor form .main-grid .link-to-stats,
+.ptr2e.actor form .main-grid .typings {
   grid-column: 4 / span 2;
   grid-row: 1 / span 2;
   background: #fefefe;
@@ -959,14 +960,20 @@ ol#combat-tracker .combatant.actor.directory-item.preview .token-initiative {
 }
 .ptr2e.actor form .main-grid .level-field h2,
 .ptr2e.actor form .main-grid .link-to-stats h2,
+.ptr2e.actor form .main-grid .typings h2,
 .ptr2e.actor form .main-grid .level-field h4,
-.ptr2e.actor form .main-grid .link-to-stats h4 {
+.ptr2e.actor form .main-grid .link-to-stats h4,
+.ptr2e.actor form .main-grid .typings h4 {
   align-self: center;
   margin: 0;
   font-style: italic;
 }
 .ptr2e.actor form .main-grid .link-to-stats {
   grid-row: 3 / span 1;
+  gap: 0.5rem;
+}
+.ptr2e.actor form .main-grid .typings {
+  grid-row: 4 / span 2;
   gap: 0.5rem;
 }
 .ptr2e.actor form .main-grid .actions {

@@ -12,7 +12,6 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
                 evs: new fields.NumberField({ required: true, label: `PTR2E.Attributes.${slug}.Label`, initial: 0, min: 0, max: 200, step: 4, validate: (d) => d as number >= 0 && d as number <= 200 && d as number % 4 === 0 }),
                 ivs: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
                 base: new fields.NumberField({ required: true, initial: 50, validate: (d) => d as number >= 1 }),
-                // value: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
             }
         }
         const getStatField = (slug: string, withStage = true) => {
