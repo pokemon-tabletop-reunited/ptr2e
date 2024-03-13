@@ -25,7 +25,7 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
         return {
             advancement: new fields.SchemaField({
                 experience: new fields.SchemaField({
-                    current: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0, label: "PTR2E.Fields.Experience.Label", hint: "PTR2E.Fields.Experience.Hint"})
+                    current: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0, label: "PTR2E.Fields.Experience.Label", hint: "PTR2E.Fields.Experience.Hint" })
                 })
             }),
             attributes: new fields.SchemaField({
@@ -120,9 +120,14 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
                         * level
                         * sizeMod
                     )
-                    / 65
+                    / 100
                 )
-                + level
+                + (
+                    (
+                        (Math.PI / 10) + ((Math.log(level + 9)) / Math.PI)
+                    )
+                    * level
+                )
                 + 15
             )
             * nature
