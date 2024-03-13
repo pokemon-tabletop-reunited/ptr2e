@@ -187,6 +187,10 @@ type GridDataSchema = {
     distance: fields.NumberField<number, number, true, false, true>;
     /** A label for the units of measure which are used for grid distance. */
     units: fields.StringField<string, string, true, false, true>;
+    /** A string representing the style used to render the grid lines. */
+    style: fields.StringField<string, string, true, false, true>;
+    /** The width of the grid lines in pixels. */
+    thickness: fields.NumberField<number, number, true, false, true>;
 };
 
 type SceneSource = SourceFromSchema<SceneSchema>;

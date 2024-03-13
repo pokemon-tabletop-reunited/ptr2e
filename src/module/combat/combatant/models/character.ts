@@ -1,3 +1,5 @@
+import BaseActor from "types/foundry/common/documents/actor.js";
+import BaseUser from "types/foundry/common/documents/user.js";
 import { CombatantPTR2e } from "../combatant.ts"
 import { CombatantSystemPTR2e } from "../system.ts";
 
@@ -14,16 +16,21 @@ class CharacterCombatantSystem extends foundry.abstract.TypeDataModel implements
     }
 
     get baseAV() {
-        if(!this.actor) return Infinity;
+        if (!this.actor) return Infinity;
         return Math.clamp(
             Math.floor((
-            500 * (
-                1 + (
-                    ((this.combat.averageLevel - 5) * 21)
-                    / 95
+                500 * (
+                    1 + (
+                        ((this.combat.averageLevel - 5) * 21)
+                        / 95
+                    )
                 )
-            )
-        ) / this.actor.speed), 33, 100);
+            ) / this.actor.speed), 33, 100);
+    }
+
+    override _preDelete(_options: DocumentModificationContext<this["parent"]["parent"]>, _user: BaseUser<BaseActor<null>>): Promise<boolean | void> {
+        if (this.combat.combatant?.id === this.parent.id) return Promise.resolve(false);
+        return super._preDelete(_options, _user);
     }
 }
 

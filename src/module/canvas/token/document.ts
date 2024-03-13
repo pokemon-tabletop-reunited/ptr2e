@@ -1,12 +1,13 @@
 import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { TokenFlagsPTR2e } from "@module/canvas/token/data.ts";
+import { ScenePTR2e } from "../scene.ts";
 
-class TokenDocumentPTR2e<TParent extends Scene | null = Scene | null> extends TokenDocument<TParent> {
+class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
 
 }
 
-interface TokenDocumentPTR2e<TParent extends Scene | null = Scene | null> extends TokenDocument<TParent> {
+interface TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
     flags: TokenFlagsPTR2e;
 
     get actor(): ActorPTR2e<ActorSystemPTR2e, this | null> | null;

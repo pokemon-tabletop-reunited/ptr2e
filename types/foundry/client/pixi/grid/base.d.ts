@@ -1,6 +1,31 @@
-export {};
+export { };
 
 declare global {
+    type GridOffset = { i: number, j: number };
+    type GridCoordinates = GridOffset | Point;
+    interface GridMeasurePathResultWaypoint {
+        backward: GridMeasurePathResultSegment | null;
+        forward: GridMeasurePathResultSegment | null;
+        distance: number;
+        spaces: number;
+        diagonals: number;
+    }
+
+    interface GridMeasurePathResultSegment {
+        from: GridMeasurePathResultWaypoint;
+        to: GridMeasurePathResultWaypoint;
+        distance: number;
+        spaces: number;
+        diagonals: number;
+    }
+    interface GridMeasurePathResult {
+        waypoints: GridMeasurePathResultWaypoint[];
+        segments: GridMeasurePathResultSegment[];
+        distance: number;
+        spaces: number;
+        diagonals: number;
+    }
+
     /**
      * The base grid class.
      * This double-dips to implement the "gridless" option
@@ -9,6 +34,89 @@ declare global {
         constructor(options: BaseGridOptions);
 
         options: BaseGridOptions;
+
+        /**
+        * The grid type (see {@link CONST.GRID_TYPES}).
+        * @type {number}
+        */
+        type: ValueOf<typeof CONST.GRID_TYPES>;
+
+        /**
+         * The size of a grid space in pixels.
+         * @type {number}
+         */
+        size: number;
+
+        /**
+         * The width of a grid space in pixels.
+         * @type {number}
+         */
+        sizeX: number;
+
+        /**
+         * The height of a grid space in pixels.
+         * @type {number}
+         */
+        sizeY: number;
+
+        /**
+         * The distance of a grid space in units.
+         * @type {number}
+         */
+        distance: number;
+
+        /**
+         * The distance units used in this grid.
+         * @type {string}
+         */
+        units: string;
+
+        /**
+         * The style of the grid.
+         * @type {string}
+         */
+        style: string;
+
+        /**
+         * The thickness of the grid.
+         * @type {number}
+         */
+        thickness: number;
+
+        /**
+         * The color of the grid.
+         * @type {Color}
+         */
+        color: HexColorString;
+
+        /**
+         * The opacity of the grid.
+         * @type {number}
+         */
+        alpha: number;
+
+        /**
+         * Returns the offset of the grid space corresponding to the given coordinates.
+         * @param {GridCoordinates} coords    The coordinates
+         * @returns {GridOffset}              The offset
+         */
+        getOffset(coords: GridCoordinates): GridOffset;
+
+        /**
+         * Measure a shortest, direct path through the given waypoints.
+         * @param {GridCoordinates[]} waypoints    The waypoints the path must pass through
+         * @returns {GridMeasurePathResult}
+         */
+        measurePath(waypoints: GridCoordinates[]): GridMeasurePathResult;
+
+        /**
+         * Measures the path and writes the measurements into `result`.
+         * Called by {@link BaseGrid#measurePath}.
+         * @param {GridCoordinates[]} waypoints     The waypoints the path must pass through
+         * @param {GridMeasurePathResult} result    The measurement result that the measurements need to be written to
+         * @protected
+         */
+        _measurePath(waypoints: GridCoordinates[], result: GridMeasurePathResult): void;
 
         /** Grid Unit Width */
         w: number;
@@ -128,9 +236,17 @@ declare global {
     }
 
     interface BaseGridOptions {
-        dimensions: {
+        dimensions?: {
             size: number;
         };
+        diagonals?: ValueOf<typeof CONST.GRID_DIAGONALS>;
+        size?: number;
+        distance?: number;
+        units?: string;
+        style?: string;
+        thickness?: number;
+        color?: HexColorString;
+        alpha?: number;
     }
 
     interface Segment {

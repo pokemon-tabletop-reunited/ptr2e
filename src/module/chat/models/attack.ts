@@ -197,10 +197,10 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     _calculateDegreeOfSuccess({
         accuracyCheck,
         target,
-    }: { accuracyCheck: Rolled<Roll>; target: ActorPTR2e }): AccuracyCalc {
+    }: { accuracyCheck: Rolled<Roll>; target?: ActorPTR2e }): AccuracyCalc {
         // Step 0: If an override is present, we should return that.
         // Calculation should still proceed in case the override is incorrect.
-        const override = this.overrides[target.uuid];
+        const override = this.overrides[target?.uuid ?? ""];
 
         // Step 1: Check if the move has an accuracy, if not it always is a hit
         const moveAccuracy = this.attack.accuracy;
@@ -212,7 +212,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
         // Step 3: Calculate stage accuracy modifiers
         const originAccuracyStage = this.origin.getAccuracyStage();
-        const targetEvasionStage = target.getEvasionStage();
+        const targetEvasionStage = target?.getEvasionStage() ?? 0;
         const adjustedStages = Math.clamp(originAccuracyStage - targetEvasionStage, -6, 6);
         const stageModifier = adjustedStages > 0 ? ((3 + adjustedStages) / 3) : (3 / (3 + Math.abs(adjustedStages)));
 

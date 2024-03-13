@@ -4,6 +4,10 @@ import { CombatPTR2e, CombatTrackerPTR2e, CombatantPTR2e } from "@combat";
 import { ItemPTR2e, data, sheets } from "@item";
 import { AbilitySheetPTR2e } from "@item/sheets/ability.ts";
 import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
+import { SquareGridPTR2e } from "@module/canvas/grid.ts";
+import { TemplateLayerPTR2e } from "@module/canvas/layer/template.ts";
+import { MeasuredTemplatePTR2e } from "@module/canvas/measured-template.ts";
+import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { ChatMessagePTR2e } from "@module/chat/document.ts";
 import { AttackMessageSystem } from "@module/chat/models/attack.ts";
 import { DamageAppliedMessageSystem } from "@module/chat/models/damage-applied.ts";
@@ -58,6 +62,9 @@ export const PTRCONFIG = {
             round: RoundCombatantSystem
         },
     },
+    Grid: {
+        square: SquareGridPTR2e,
+    },
     Item: {
         documentClass: ItemPTR2e,
         dataModels: {
@@ -76,6 +83,13 @@ export const PTRCONFIG = {
             ability: [AbilitySheetPTR2e],
             move: [sheets.MoveSheetPTR2e],
         },
+    },
+    MeasuredTemplate: {
+        objectClass: MeasuredTemplatePTR2e,
+        layerClass: TemplateLayerPTR2e
+    },
+    Scene: {
+        documentClass: ScenePTR2e,
     },
     ui: {
         perks: PerkDirectory,

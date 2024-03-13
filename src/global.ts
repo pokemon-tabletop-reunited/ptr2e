@@ -4,6 +4,7 @@ import { ItemPTR2e, ItemSystemPTR } from "@item";
 import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
 import { PerkTree } from "@module/canvas/perk-tree/perk-tree.ts";
+import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { ChangeModel } from "@module/data/models/change.ts";
@@ -37,7 +38,7 @@ interface GamePTR2e
 }
 
 type ConfiguredConfig = Config<
-    AmbientLightDocument<Scene | null>,
+    AmbientLightDocument<ScenePTR2e | null>,
     ActiveEffect<ActorPTR2e | ItemPTR2e | null>,
     ActorPTR2e,
     ActorDelta<TokenDocumentPTR2e>,
@@ -50,11 +51,11 @@ type ConfiguredConfig = Config<
     Hotbar,
     ItemPTR2e,
     Macro,
-    MeasuredTemplateDocument<Scene | null>,
-    TileDocument<Scene | null>,
+    MeasuredTemplateDocument<ScenePTR2e | null>,
+    TileDocument<ScenePTR2e | null>,
     TokenDocumentPTR2e,
-    WallDocument<Scene | null>,
-    Scene,
+    WallDocument<ScenePTR2e | null>,
+    ScenePTR2e,
     User,
     EffectsCanvasGroup
 >;
@@ -73,10 +74,10 @@ declare global {
 
     const CONFIG: ConfigPTR2e;
     const canvas: Canvas<
-        Scene,
-        AmbientLight<AmbientLightDocument<Scene>>,
-        MeasuredTemplate<MeasuredTemplateDocument<Scene>>,
-        TokenPTR2e<TokenDocumentPTR2e<Scene>>,
+        ScenePTR2e,
+        AmbientLight<AmbientLightDocument<ScenePTR2e>>,
+        MeasuredTemplate<MeasuredTemplateDocument<ScenePTR2e>>,
+        TokenPTR2e<TokenDocumentPTR2e<ScenePTR2e>>,
         EffectsCanvasGroup
     >;
 
@@ -97,7 +98,7 @@ declare global {
 
         function getTexture(src: string): PIXI.Texture | PIXI.Spritesheet | null;
 
-        var actor: () => ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e<Scene> | null> | null;
+        var actor: () => ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e<ScenePTR2e> | null> | null;
 
         let _maxZ: number;
     }

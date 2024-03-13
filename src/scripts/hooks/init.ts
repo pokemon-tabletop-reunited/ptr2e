@@ -46,6 +46,13 @@ export const Init = {
                 dataModels: PTRCONFIG.Change.dataModels
             };
 
+            CONFIG.Scene.documentClass = PTRCONFIG.Scene.documentClass;
+            CONFIG.MeasuredTemplate.defaults.angle = 75;
+            // TODO: Revisit this once v12 is properly out and we can look at how other systems handle the changes.
+            // CONFIG.MeasuredTemplate.objectClass = PTRCONFIG.MeasuredTemplate.objectClass;
+            // CONFIG.MeasuredTemplate.layerClass = PTRCONFIG.MeasuredTemplate.layerClass;
+            // CONFIG.Canvas.layers.templates.layerClass = PTRCONFIG.MeasuredTemplate.layerClass;
+
             // Register custom sheets
             {
                 Actors.unregisterSheet("core", ActorSheet);
