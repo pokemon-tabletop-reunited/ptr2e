@@ -20,13 +20,9 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
             const current = combat?.combatant;
             if (!current) return null;
 
-            const updateData = combat._prepareTurnUpdateData();
-            const currentUpdateData = updateData.combatants?.find((u: {_id: string}) => u._id === current.id);
-            if (!currentUpdateData) return null;
-
             return {
                 ...(data.turns.find((t: {id: string}) => t.id === current.id) || {}),
-                initiative: currentUpdateData.initiative,
+                initiative: current.baseAV,
                 css: "preview",
                 preview: true
             } as CombatTrackerTurn;
