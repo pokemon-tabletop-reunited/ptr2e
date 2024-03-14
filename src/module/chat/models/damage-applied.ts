@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import { ChatMessagePTR2e } from "../document.ts";
+import { ChatMessagePTR2e } from "@chat";
 
 abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel {
     declare parent: ChatMessagePTR2e<DamageAppliedMessageSystem>;
@@ -59,4 +59,4 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
     }
 }
 
-export { DamageAppliedMessageSystem }
+export default DamageAppliedMessageSystem

@@ -1,6 +1,6 @@
 import { ItemSheetOptions, MovePTR2e } from "@item";
 import { ItemSheetPTR2e } from "@item";
-import { ActionPTR2e } from "@module/data/models/action.ts";
+import { ActionPTR2e } from "@data";
 import { sluggify } from "@utils";
 
 export default class MoveSheetPTR2e extends ItemSheetPTR2e<MovePTR2e> {

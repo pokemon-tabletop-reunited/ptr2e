@@ -1,4 +1,4 @@
-import { EquipmentData } from '../models/equipped.ts';
+import { EquipmentData } from '@data';
 import { TemplateConstructor } from './data-template.ts';
 
 /**

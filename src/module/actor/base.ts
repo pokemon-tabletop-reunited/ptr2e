@@ -1,9 +1,8 @@
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { ActorSystemPTR2e } from "@actor";
-import { ActiveEffectPTR2e } from "@module/effects/document.ts";
-import { ActionPTR2e, ActionType } from "@module/data/models/action.ts";
-import { PokemonTypes, TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import AttackPTR2e from "@module/data/models/attack.ts";
+import { ActorSynthetics, ActorSystemPTR2e, Attribute } from "@actor";
+import { ActiveEffectPTR2e } from "@effects";
+import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
+import { ActionPTR2e, ActionType, AttackPTR2e, PokemonType } from "@data";
 
 class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null> extends Actor<TParent, TSystem> {
 
@@ -34,7 +33,6 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
         const preparationWarnings = new Set<string>();
         this.synthetics = {
             ephemeralEffects: { all: [], damage: [] },
-            damageDice: { damage: [], healing: [] },
             modifierAdjustments: { all: [], damage: [] },
             statisticsModifiers: { all: [], damage: [] },
             preparationWarnings: {
@@ -138,14 +136,14 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
         }
     }
 
-    _calculateEffectiveness(): Record<PokemonTypes, number> {
+    _calculateEffectiveness(): Record<PokemonType, number> {
         const types = game.settings.get("ptr2e", "pokemonTypes") as TypeEffectiveness;
-        const effectiveness = {} as Record<PokemonTypes, number>;
+        const effectiveness = {} as Record<PokemonType, number>;
         for (const key in types) {
-            const typeKey = key as PokemonTypes;
+            const typeKey = key as PokemonType;
             effectiveness[typeKey] = 1;
             for (const key of this.system.type.types) {
-                const type = key as PokemonTypes;
+                const type = key as PokemonType;
                 effectiveness[typeKey] *= types[type].effectiveness[typeKey];
             }
         }
@@ -217,7 +215,7 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
         return damageApplied;
     }
 
-    getEffectiveness(moveTypes: Set<PokemonTypes>) {
+    getEffectiveness(moveTypes: Set<PokemonType>) {
         let effectiveness = 1;
         for (const type of moveTypes) {
             effectiveness *= (this.system.type.effectiveness[type] ?? 1);

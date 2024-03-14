@@ -1,6 +1,7 @@
 import { SquareGridPTR2e } from "@module/canvas/grid.ts";
+import { PTRHook } from "./data.ts";
 
-export const GetSceneControlButtons = {
+export const GetSceneControlButtons: PTRHook = {
     listen: () => {
         Hooks.on('getSceneControlButtons', function (hudButtons) {
             const hud = hudButtons.find(val => val.name == "token")

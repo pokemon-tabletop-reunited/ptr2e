@@ -3,8 +3,9 @@ import { PTRCONFIG } from "@scripts/config/index.ts";
 import { GamePTR } from "@scripts/game-ptr2e.ts";
 import { registerHandlebarsHelpers, registerTemplates } from "@utils";
 import { default as TypeEffectiveness } from "../config/effectiveness.ts";
+import { PTRHook } from "./data.ts";
 
-export const Init = {
+export const Init: PTRHook = {
     listen() {
         Hooks.once('init', () => {
             console.log('PTR 2e | Initializing');

@@ -1,7 +1,6 @@
 import BaseActor from "types/foundry/common/documents/actor.js";
 import BaseUser from "types/foundry/common/documents/user.js";
-import { CombatantPTR2e } from "../combatant.ts"
-import { CombatantSystemPTR2e } from "../system.ts";
+import { CombatantPTR2e, CombatantSystemPTR2e } from "@combat";
 
 class CharacterCombatantSystem extends foundry.abstract.TypeDataModel implements CombatantSystemPTR2e {
     declare parent: CombatantPTR2e
@@ -12,7 +11,7 @@ class CharacterCombatantSystem extends foundry.abstract.TypeDataModel implements
     }
 
     get combat() {
-        return this.parent.encounter;
+        return this.parent.encounter; 
     }
 
     get baseAV() {
@@ -34,4 +33,4 @@ class CharacterCombatantSystem extends foundry.abstract.TypeDataModel implements
     }
 }
 
-export { CharacterCombatantSystem }
+export default CharacterCombatantSystem;

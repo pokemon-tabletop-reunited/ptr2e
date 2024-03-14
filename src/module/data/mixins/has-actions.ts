@@ -1,7 +1,7 @@
 import { TemplateConstructor } from './data-template.ts';
-import { MappedArrayField } from '../fields/MappedArrayField.ts';
-import { ActionPTR2e } from '../models/action.ts';
-import { ActionTypes } from '../models/base.ts';
+import { MappedArrayField } from '../fields/mapped-array-field.ts';
+import { ActionPTR2e } from '@data';
+import { ActionModelTypes } from '../models/base.ts';
 import { ActorPTR2e } from '@actor';
 import { ItemPTR2e } from '@item';
 
@@ -29,7 +29,7 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
 
 			return {
 				...super.defineSchema(),
-				actions: new MappedArrayField('slug', new fields.TypedSchemaField(ActionTypes()))
+				actions: new MappedArrayField('slug', new fields.TypedSchemaField(ActionModelTypes()))
 			};
 		}
 

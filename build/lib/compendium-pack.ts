@@ -134,7 +134,7 @@ class CompendiumPack {
                     if (!isCoreIconPath && !fs.existsSync(repoImgPath)) {
                         throw PackError(`${documentName} (${this.packId}) has an unknown image path: ${imgPath}`);
                     }
-                    if (!(imgPath === "" || imgPath.match(/\.(?:svg|webp)$/))) {
+                    if (!((imgPath as string) === "" || imgPath.match(/\.(?:svg|webp)$/))) {
                         throw PackError(`${documentName} (${this.packId}) references a non-WEBP/SVG image: ${imgPath}`);
                     }
                 }
@@ -176,7 +176,7 @@ class CompendiumPack {
         return new CompendiumPack(dbFilename, parsedData, folders);
     }
 
-    static loadJSONObjects(filePath: string, dirPath: string): PackEntry[]  {
+    static loadJSONObjects(filePath: string, dirPath: string): PackEntry[] {
         const jsonString = fs.readFileSync(filePath, "utf-8");
         const packSource: PackEntry | PackEntry[] = (() => {
             try {

@@ -2,6 +2,7 @@ import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts"
 import { PerkTree } from "@module/canvas/perk-tree/perk-tree.ts"
 import TooltipsPTR2e from "@module/tooltips/tooltips.ts"
 import { formatSlug, sluggify } from "@utils"
+import { Trait } from "@data"
 
 const GamePTR = {
     onInit() {

@@ -1,13 +1,7 @@
 import { ActorPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
-import { _DataModel } from "types/foundry/common/abstract/data.js";
-
-// Priority & Interrupt are [Traits] so don't need a data field
-type ActionCost = "simple" | "complete" | "free";
-export type ActionType = ActivityType | "attack" | "passive" | "generic";
-type ActivityType = "camping" | "downtime" | "exploration";
-
-type TargetOption = "self" | "ally" | "enemy" | "creature" | "object" | "blast" | "cone" | "line" | "wide-line" | "emanation" | "field" | "aura" | "allied-aura" | "enemy-aura";
+import { PTRCONSTS, ActionType, ActionCost, Delay, Priority, Trait } from "@data";
+import { RangePTR2e } from "@data";
 
 class ActionPTR2e extends foundry.abstract.DataModel {
     static TYPE: ActionType = "generic" as const;
@@ -21,21 +15,17 @@ class ActionPTR2e extends foundry.abstract.DataModel {
             traits: new fields.SetField(new fields.StringField()),
             type: new fields.StringField({
                 required: true, blank: false, initial: this.TYPE,
-                validate: value => value === this.TYPE || [
-                    "attack", "camping", "downtime", "exploration", "passive", "generic"
-                ].includes(value as string),
+                validate: value => value === this.TYPE || Object.values(PTRCONSTS.ActionTypes).includes(value as ActionType),
                 validationError: `must be equal to "${this.TYPE}"`,
                 label: "PTR2E.Fields.Type.Label", hint: "PTR2E.Fields.Type.Hint"
             }),
             range: new fields.EmbeddedDataField(RangePTR2e, { required: false, nullable: true }),
             cost: new fields.SchemaField({
-                activation: new fields.StringField({
-                    required: true
-                }),
-                powerPoints: new fields.NumberField({ required: true, initial: 0 }),
+                activation: new fields.StringField({ required: true, choices: Object.values(PTRCONSTS.ActivationCost), initial: PTRCONSTS.ActivationCost.SIMPLE }),
+                powerPoints: new fields.NumberField({ required: true, initial: 0, min: 0, integer: true}),
                 trigger: new fields.StringField({ required: false, nullable: true }),
-                delay: new fields.NumberField({ required: false, nullable: true }),
-                priority: new fields.NumberField({ required: false, nullable: true }),
+                delay: new fields.NumberField({ required: false, nullable: true, min: 1, max: 3, integer: true}),
+                priority: new fields.NumberField({ required: false, nullable: true, min: 1, max: 7, integer: true}),
             })
         }
     }
@@ -68,8 +58,6 @@ class ActionPTR2e extends foundry.abstract.DataModel {
         }, new Map());
     }
 }
-
-
 interface ActionPTR2e extends foundry.abstract.DataModel {
     /**
      * A slug for the action.
@@ -135,12 +123,12 @@ interface ActionPTR2e extends foundry.abstract.DataModel {
          * @remarks
          * This is one of `1`, `2`, or `3`.
          */
-        delay?: 1 | 2 | 3,
+        delay?: Delay,
         /**
          * The priority of the action.
          * @defaultValue `0`
          */
-        priority?: number,
+        priority?: Priority,
     }
 
     /**
@@ -156,27 +144,4 @@ interface ActionPTR2e extends foundry.abstract.DataModel {
     } & foundry.abstract.DataModel['_source']
 }
 
-
-
-class RangePTR2e extends foundry.abstract.DataModel {
-    static override defineSchema() {
-        const fields = foundry.data.fields;
-        return {
-            target: new fields.StringField({
-                required: true, choices: [
-                    "self", "ally", "enemy", "creature", "object", "blast", "cone", "line", "wide-line", "emanation", "field"
-                ],
-                initial: "creature"
-            }),
-            distance: new fields.NumberField({ required: true, initial: 0 }),
-            unit: new fields.StringField({ required: true, choices: ["m", "ft"], initial: "m" }),
-        }
-    }
-}
-interface RangePTR2e extends foundry.abstract.DataModel {
-    target: TargetOption
-    distance: number
-    unit: DistanceUnit
-}
-
-export { ActionPTR2e, RangePTR2e }
+export default ActionPTR2e;

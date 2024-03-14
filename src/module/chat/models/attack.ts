@@ -1,6 +1,8 @@
 import { ActorPTR2e } from "@actor";
 import AttackPTR2e from "@module/data/models/attack.ts";
-import { ChatMessagePTR2e } from "../document.ts";
+import { ChatMessagePTR2e } from "@chat";
+import { AccuracySuccessCategory, PTRCONSTS } from "@data";
+import { AccuracyCalc, DamageCalc } from "./data.ts";
 
 abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     declare parent: ChatMessagePTR2e<AttackMessageSystem>;
@@ -75,7 +77,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             damageRandomness: new fields.JSONField({ required: true, validate: AttackMessageSystem.#validateRoll }),
             targets: new fields.ArrayField(new fields.SchemaField({
                 uuid: new fields.DocumentUUIDField({ required: true, type: 'Actor' }),
-                status: new fields.StringField({ required: false, choices: Object.values(AccuracySuccessCategories) })
+                status: new fields.StringField({ required: false, choices: Object.values(PTRCONSTS.AccuracySuccessCategories) })
             })),
             origin: new fields.JSONField({ required: true }),
             attack: new fields.StringField({ required: true }),
@@ -176,7 +178,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             const targets = new Map<string, { actor: ActorPTR2e, accuracy: AccuracyCalc, damage: DamageCalc | null }>();
             for (const target of this.targets.values()) {
                 const accuracy = this._calculateDegreeOfSuccess({ accuracyCheck: this.accuracyCheck, target });
-                const damage = await this._calculateDamage({ damageRandomness: this.damageRandomness, target, critModifier: accuracy.category === AccuracySuccessCategories.CRITICAL ? 1.5 : 1 });
+                const damage = await this._calculateDamage({ damageRandomness: this.damageRandomness, target, critModifier: accuracy.category === PTRCONSTS.AccuracySuccessCategories.CRITICAL ? 1.5 : 1 });
                 targets.set(target.uuid, { actor: target, accuracy, damage });
             }
 
@@ -204,7 +206,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
         // Step 1: Check if the move has an accuracy, if not it always is a hit
         const moveAccuracy = this.attack.accuracy;
-        if (moveAccuracy === null) return { category: override || AccuracySuccessCategories.HIT, context: { moveAccuracy, override: !!override } };
+        if (moveAccuracy === null) return { category: override || PTRCONSTS.AccuracySuccessCategories.HIT, context: { moveAccuracy, override: !!override } };
 
         // Step 2: Calculate non-stage accuracy modifiers
         const accuracyModifiers: number[] = [];
@@ -232,7 +234,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
         // Step 5: Determine the degree of success
         //TODO: Implement the degree of success calculation
-        return accuracyRoll <= accuracyDC ? { category: override || AccuracySuccessCategories.HIT, context } : { category: override || AccuracySuccessCategories.MISS, context };
+        return accuracyRoll <= accuracyDC ? { category: override || PTRCONSTS.AccuracySuccessCategories.HIT, context } : { category: override || PTRCONSTS.AccuracySuccessCategories.MISS, context };
     }
 
     async _calculateDamage({
@@ -325,48 +327,4 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     }
 }
 
-const AccuracySuccessCategories = {
-    CRITICAL: "critical",
-    HIT: "hit",
-    MISS: "miss",
-    FUMBLE: "fumble"
-} as const;
-
-type AccuracyCalc = {
-    category: AccuracySuccessCategory;
-    context: AccuracyContext;
-}
-type AccuracySuccessCategory = typeof AccuracySuccessCategories[keyof typeof AccuracySuccessCategories];
-type AccuracyContext = {
-    moveAccuracy: number | null;
-    otherModifiers?: number;
-    adjustedStages?: number;
-    stageModifier?: number;
-    accuracyRoll?: number;
-    accuracyDC?: number;
-    override: boolean;
-}
-
-type DamageCalc = {
-    roll: Rolled<Roll>;
-    value: number;
-    context: DamageContext;
-} | {
-    value: 0;
-    context: DamageContext;
-}
-type DamageContext = {
-    level: number;
-    power: number;
-    attack: number;
-    defense: number;
-    targets: number;
-    critical: number;
-    random: number;
-    stab: number;
-    type: number;
-    other: number;
-}
-
-
-export { AttackMessageSystem }
+export default AttackMessageSystem;

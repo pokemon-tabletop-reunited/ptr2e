@@ -123,4 +123,4 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     }
 }
 
-export { ChatMessagePTR2e }
+export default ChatMessagePTR2e;

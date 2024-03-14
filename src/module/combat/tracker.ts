@@ -69,4 +69,4 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
     }
 }
 
-export { CombatTrackerPTR2e };
+export default CombatTrackerPTR2e;

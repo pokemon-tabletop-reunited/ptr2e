@@ -1,5 +1,5 @@
-import { ChangeTypes } from '../models/base.ts';
-import { ChangeModel } from '../models/change.ts';
+import { ChangeModelTypes } from '../models/base.ts';
+import { ChangeModel } from '@data';
 import { TemplateConstructor } from './data-template.ts';
 
 /**
@@ -23,7 +23,7 @@ export default function HasChanges<BaseClass extends TemplateConstructor>(baseCl
             return {
                 ...super.defineSchema(),
 
-                changes: new fields.ArrayField(new fields.TypedSchemaField(ChangeTypes()))
+                changes: new fields.ArrayField(new fields.TypedSchemaField(ChangeModelTypes()))
             };
         }
     }

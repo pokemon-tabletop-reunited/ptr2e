@@ -8,3 +8,4 @@ export * from "./sheet.ts";
 export * from "./system.ts";
 
 // Other Data Models
+export type * from "./data.ts";

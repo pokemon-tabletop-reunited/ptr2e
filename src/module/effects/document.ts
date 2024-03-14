@@ -1,13 +1,13 @@
 import { ActorPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
-import { BaseActiveEffectSystem } from "./models/base.ts";
-import { ChangeModel } from "@module/data/models/change.ts";
+import { ActiveEffectSystem } from "@effects";
+import { ChangeModel } from "@data";
 import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
 import BaseActor from "types/foundry/common/documents/actor.js";
 import BaseUser from "types/foundry/common/documents/user.js";
 
 class ActiveEffectPTR2e<TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null> extends ActiveEffect<TParent> {
-    declare system: BaseActiveEffectSystem;
+    declare system: ActiveEffectSystem;
 
     static override defineSchema() {
         const schema = super.defineSchema() as { changes?: object, subtype?: object };
@@ -99,7 +99,4 @@ class ActiveEffectPTR2e<TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR
     }
 }
 
-export { ActiveEffectPTR2e }
-
-// @ts-ignore
-globalThis.BaseActiveEffectSystem = BaseActiveEffectSystem;
+export default ActiveEffectPTR2e;

@@ -1,7 +1,7 @@
-import { ActorPTR2e } from "@actor/base.ts";
 import { DocumentSheetV2 } from "@item/sheets/document.ts";
 import { ApplicationRenderContext, ApplicationRenderOptions, HandlebarsTemplatePart } from "types/foundry/common/applications/api.js";
 import { StatsChart } from "./stats-chart.ts";
+import { Attributes, ActorPTR2e } from "@actor";
 
 //@ts-ignore
 export default class StatsForm extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<ActorPTR2e>) {

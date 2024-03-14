@@ -1,6 +1,6 @@
 import { ActorPTR2e } from "@actor";
 import { ItemSheetPTR2e, ItemSystemPTR } from "@item";
-import { ActionPTR2e, ActionType } from "@module/data/models/action.ts";
+import { ActionType, ActionPTR2e } from "@data";
 
 /**
  * @extends {PTRItemData}

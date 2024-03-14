@@ -1,7 +1,6 @@
 import BaseActor from "types/foundry/common/documents/actor.js";
 import BaseUser from "types/foundry/common/documents/user.js";
-import { CombatantSystemPTR2e } from "../system.ts";
-import { CombatantPTR2e } from "../combatant.ts";
+import { CombatantPTR2e, CombatantSystemPTR2e } from "@combat";
 
 class RoundCombatantSystem extends foundry.abstract.TypeDataModel implements CombatantSystemPTR2e {
     declare parent: CombatantPTR2e
@@ -25,4 +24,4 @@ class RoundCombatantSystem extends foundry.abstract.TypeDataModel implements Com
     }
 }
 
-export { RoundCombatantSystem }
+export default RoundCombatantSystem;

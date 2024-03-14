@@ -1,6 +1,6 @@
 
 import { ActorPTR2e, ActorSheetPTR2e, ActorSystemPTR2e } from "@actor";
-import { CombatPTR2e, CombatTrackerPTR2e, CombatantPTR2e } from "@combat";
+import { CharacterCombatantSystem, CombatPTR2e, CombatTrackerPTR2e, CombatantPTR2e, RoundCombatantSystem } from "@combat";
 import { ItemPTR2e, data, sheets } from "@item";
 import { AbilitySheetPTR2e } from "@item/sheets/ability.ts";
 import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
@@ -8,25 +8,16 @@ import { SquareGridPTR2e } from "@module/canvas/grid.ts";
 import { TemplateLayerPTR2e } from "@module/canvas/layer/template.ts";
 import { MeasuredTemplatePTR2e } from "@module/canvas/measured-template.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
-import { ChatMessagePTR2e } from "@module/chat/document.ts";
-import { AttackMessageSystem } from "@module/chat/models/attack.ts";
-import { DamageAppliedMessageSystem } from "@module/chat/models/damage-applied.ts";
-import { ItemMessageSystem } from "@module/chat/models/item.ts";
-import { CharacterCombatantSystem } from "@module/combat/combatant/models/character.ts";
-import { RoundCombatantSystem } from "@module/combat/combatant/models/round.ts";
-import { BasicChangeSystem } from "@module/data/models/basic.ts";
-import { ChangeModel } from "@module/data/models/change.ts";
-import { ActiveEffectPTR2e } from "@module/effects/document.ts";
-import { BaseActiveEffectSystem } from "@module/effects/models/base.ts";
-import { RollOptionEffectSystem } from "@module/effects/models/roll-option.ts";
+import { BasicChangeSystem, ChangeModel } from "@data";
+import { ActiveEffectPTR2e, ActiveEffectSystem } from "@module/effects/index.ts";
+import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem } from "@module/chat/index.ts";
 import Traits from "static/traits.json";
 
 export const PTRCONFIG = {
     ActiveEffect: {
         documentClass: ActiveEffectPTR2e,
         dataModels: {
-            basic: BaseActiveEffectSystem,
-            rolloption: RollOptionEffectSystem,
+            basic: ActiveEffectSystem,
         }
     },
     Actor: {

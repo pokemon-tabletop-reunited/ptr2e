@@ -7,7 +7,7 @@ import { PerkTree } from "@module/canvas/perk-tree/perk-tree.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { ChangeModel } from "@module/data/models/change.ts";
+import { ChangeModel, Trait } from "@data";
 import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import { PTRCONFIG } from "@scripts/config/index.ts";
 import { sluggify } from "@utils";

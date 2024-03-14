@@ -1,27 +1,13 @@
-import { fields } from 'types/foundry/common/data/module.js';
-import { PredicateField } from "@system/predication/schema-data-fields.ts";
-import { _DataModel } from 'types/foundry/common/abstract/data.js';
-import { ActorPTR2e } from '@actor';
-import { ItemPTR2e } from '@item';
 import { isBracketedValue, isObject } from '@utils';
 import { BracketedValue, RuleValue } from '@module/effects/data.ts';
-import { BaseActiveEffectSystem } from '@module/effects/models/base.ts';
+import { ActiveEffectSystem } from '@effects';
+import { PredicateField } from '@system/predication/schema-data-fields.ts';
+import { ItemPTR2e } from '@item';
+import { ActorPTR2e } from '@actor';
+import { ChangeModelOptions, ChangeSchema, ResolveValueParams } from './data.ts';
 
-export type ChangeModelOptions = {
-    parent: ActorPTR2e | ItemPTR2e | undefined;
-    strict?: boolean | undefined;
-    sourceIndex?: number | undefined;
-    suppressWarnings?: boolean | undefined;
-};
-
-interface ResolveValueParams {
-    evaluate?: boolean;
-    resolvables?: Record<string, unknown>;
-    warn?: boolean;
-}
-
-export class ChangeModel extends foundry.abstract.DataModel {
-    declare parent: BaseActiveEffectSystem;
+class ChangeModel extends foundry.abstract.DataModel {
+    declare parent: ActiveEffectSystem;
 
     static TYPE = "";
 
@@ -304,18 +290,8 @@ export class ChangeModel extends foundry.abstract.DataModel {
 
 }
 
-export interface ChangeModel extends foundry.abstract.DataModel, ModelPropsFromSchema<ChangeSchema> {
+interface ChangeModel extends foundry.abstract.DataModel, ModelPropsFromSchema<ChangeSchema> {
 
 }
 
-export type ChangeSchema = {
-    key: fields.StringField<string, string, true, false, false>
-    value: fields.NumberField<number, number, true, true, true>
-    mode: fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
-    priority: fields.NumberField;
-
-    type: fields.StringField<string, string, true, false, true>;
-
-    predicate: PredicateField;
-    ignored: fields.BooleanField;
-};
+export default ChangeModel;

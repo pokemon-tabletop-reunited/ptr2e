@@ -1,8 +1,7 @@
 import { ActorPTR2e } from "@actor";
+import { AttackMessageSystem, ChatMessagePTR2e } from "@chat";
+import { AttackPTR2e } from "@data";
 import { ItemPTR2e } from "@item";
-import { ChatMessagePTR2e } from "@module/chat/document.ts";
-import { AttackMessageSystem } from "@module/chat/models/attack.ts";
-import AttackPTR2e from "@module/data/models/attack.ts";
 
 export default class TooltipsPTR2e {
     #observer: MutationObserver | undefined;
@@ -290,4 +289,4 @@ export default class TooltipsPTR2e {
     }
 }
 
-type TooltipDirections = keyof typeof TooltipManager.TOOLTIP_DIRECTIONS;
+export type TooltipDirections = keyof typeof TooltipManager.TOOLTIP_DIRECTIONS;

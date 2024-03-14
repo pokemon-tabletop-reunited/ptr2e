@@ -1,8 +1,6 @@
 import { ItemPTR2e } from '@item';
 import { TemplateConstructor } from './data-template.ts';
-
-const IDENTIFIED_STATUS = ["identified", "unidentified", "misidentified"] as const;
-type IdentificationStatus = typeof IDENTIFIED_STATUS[number];
+import { IdentificationStatus, PTRCONSTS } from '@data';
 
 /**
  * Adds Identification property to target data model.
@@ -86,7 +84,7 @@ export default function HasIdentification<BaseClass extends TemplateConstructor>
 
                 identification: new fields.SchemaField({
                     misidentified: new fields.DocumentUUIDField({ required: false, nullable: true }),
-                    status: new fields.StringField({ required: true, initial: "identified", choices: IDENTIFIED_STATUS }),
+                    status: new fields.StringField({ required: true, initial: PTRCONSTS.IdentificationStatuses.IDENTIFIED, choices: Object.values(PTRCONSTS.IdentificationStatuses) }),
                     unidentified: new fields.SchemaField({
                         name: new fields.StringField({ required: true, initial: "Unidentified Item" }),
                         img: new fields.FilePathField({ required: true, categories: ["IMAGE"], initial: "systems/ptu/css/images/icons/item_icon.png" }),

@@ -1,8 +1,8 @@
 import { ActorPTR2e } from "@actor";
 import { isObject } from "@utils";
-import { ChangeModel } from "./change.ts";
-export class BasicChangeSystem extends ChangeModel {
-    
+import { ChangeModel } from "@data";
+
+export default class BasicChangeSystem extends ChangeModel {
     static override TYPE = "basic";
 
     override apply(actor: ActorPTR2e, rollOptions?: string[] | Set<string> | null): void {
@@ -36,7 +36,7 @@ export class BasicChangeSystem extends ChangeModel {
             try {
                 fu.setProperty(actor, path, newValue);
                 // TODO: Implement data change logging here
-            } catch (error) { 
+            } catch (error) {
                 if (error instanceof Error) {
                     return change.failValidation(error.message);
                 }

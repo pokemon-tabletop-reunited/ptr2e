@@ -586,4 +586,4 @@ interface CombatPTR2e extends Combat {
     _averageLevel: number | null;
 }
 
-export { CombatPTR2e };
+export default CombatPTR2e;

@@ -2,4 +2,4 @@ class ItemMessageSystem extends foundry.abstract.TypeDataModel {
 
 }
 
-export { ItemMessageSystem }
+export default ItemMessageSystem;

@@ -1,3 +1,5 @@
+import { PokemonType } from "@data";
+
 export default {
     "normal":{
         "images":{
@@ -614,17 +616,14 @@ export function getTypes() {
     return Object.keys(game.settings.get("ptr2e", "pokemonTypes") as TypeEffectiveness);
 }
 
-const SYSTEM_POKEMON_TYPES = ["untyped", "normal", "fire", "water", "electric", "grass", "ice", "fighting", "poison", "ground", "flying", "psychic", "bug", "rock", "ghost", "dragon", "dark", "steel", "fairy", "nuclear", "shadow"] as const;
-export type PokemonTypes = typeof SYSTEM_POKEMON_TYPES[number];
-
 export type TypeEffectiveness = {
-    [type in PokemonTypes]: {
+    [type in PokemonType]: {
         images: {
             icon: string;
             bar: string;
         };
         effectiveness: {
-            [type in PokemonTypes]: number;
+            [type in PokemonType]: number;
         };
     };
 }

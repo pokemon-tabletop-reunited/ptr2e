@@ -1,3 +1,4 @@
+import Trait from '../models/trait.ts';
 import { TemplateConstructor } from './data-template.ts';
 
 /**

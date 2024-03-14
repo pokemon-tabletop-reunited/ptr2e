@@ -1,6 +1,6 @@
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CombatPTR2e } from "@combat";
-import { CombatantSystemPTR2e } from "./system.ts";
+import { CombatantSystemPTR2e } from "@combat";
 import BaseActor from "types/foundry/common/documents/actor.js";
 import BaseUser from "types/foundry/common/documents/user.js";
 
@@ -20,12 +20,12 @@ class CombatantPTR2e<
 
     protected override async _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: User): Promise<boolean | void> {
         const result = await super._preCreate(data, options, user);
-        if(result === false) return false;
+        if (result === false) return false;
 
-        if(!this.type || this.type === 'base') {
+        if (!this.type || this.type === 'base') {
             this.updateSource({ type: 'character' });
         }
-        this.updateSource({initiative: 100});
+        this.updateSource({ initiative: 100 });
     }
 
     protected override _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: BaseUser<BaseActor<null>>): Promise<boolean | void> {
@@ -49,4 +49,4 @@ interface CombatantPTR2e<
     _id: string;
 }
 
-export { CombatantPTR2e }
+export default CombatantPTR2e;

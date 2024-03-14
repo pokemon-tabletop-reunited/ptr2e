@@ -1,6 +1,8 @@
+import { PokemonType } from "@data";
 import { ItemPTR2e, SpeciesPTR2e } from "@item";
-import { PokemonTypes, getTypes } from "@scripts/config/effectiveness.ts";
+import { getTypes } from "@scripts/config/effectiveness.ts";
 import { DataSchema } from "types/foundry/common/data/fields.js";
+import { AdvancementData, Attribute, Attributes, Biology, Capabilities, HealthData, Skill, Skills, Stat } from "@actor";
 
 class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
     static override defineSchema() {
@@ -150,8 +152,8 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
     /** All traits for this actor */
     traits: Set<string>, //TODO: Map this to Set<Traits>
     type: {
-        effectiveness: Record<PokemonTypes, number>,
-        types: Set<PokemonTypes>,
+        effectiveness: Record<PokemonType, number>,
+        types: Set<PokemonType>,
     },
     species: SpeciesPTR2e | null,
     powerPoints: {
