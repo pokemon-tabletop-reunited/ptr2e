@@ -1,0 +1,49 @@
+ol#combat-tracker {
+    overflow-x: hidden;
+
+    .combatant.actor.directory-item.preview {
+        filter: opacity(0.5);
+        padding: 0.25rem;
+        height: 48px;
+
+        .token-image {
+            height: calc(48px - 0.5rem);
+            object-fit: contain;
+        }
+
+        .token-name {
+            height: calc(48px - 0.5rem);
+
+            h4 {
+                flex: 0 0 16px;
+                line-height: 16px;
+            }
+
+            .combatant-controls {
+                flex: 0 0 12px;
+            }
+        }
+
+        .token-initiative {
+            height: calc(48px - 0.5rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes move-right-left {
+            0% {
+                transform: translateX(0);
+            }
+            50% {
+                transform: translateX(10px);
+            }
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        animation: move-right-left 2.5s linear infinite;
+
+    }
+}

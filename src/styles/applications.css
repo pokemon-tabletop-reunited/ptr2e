@@ -1,0 +1,419 @@
+/** Application V2 Styles **/
+.document-sheet {
+  background: url(/ui/denim075.png);
+}
+.document-sheet .window-content {
+  background: url(/ui/parchment.jpg);
+  padding: 0.25rem;
+  margin: 0.75rem;
+  border-radius: 5px;
+  height: 100%;
+  color: black;
+}
+.document-sheet.stats-form .window-content {
+  margin-top: 0.25rem;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 35% 65%;
+  grid-template-areas: "baseStats statsChart" "evStats statsChart";
+}
+.document-sheet.stats-form .window-content aside {
+  display: flex;
+}
+.document-sheet.stats-form .window-content aside form {
+  flex: 1;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] {
+  grid-area: baseStats;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form {
+  display: grid;
+  grid-template-columns: 30% 15% 40% 15%;
+  grid-template-rows: min-content 1fr 1fr 1fr;
+  grid-template-areas: "header header header header" "hpLabel hpValue spatkLabel spatkValue" "atkLabel atkValue spdefLabel spdefValue" "defLabel defValue spdLabel spdValue";
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label {
+  margin-left: 1rem;
+  text-align: left;
+  align-self: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.hp {
+  grid-area: hpLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.atk {
+  grid-area: atkLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.def {
+  grid-area: defLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spa {
+  grid-area: spatkLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spd {
+  grid-area: spdefLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spe {
+  grid-area: spdLabel;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input {
+  text-align: center;
+  align-self: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.hp {
+  grid-area: hpValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.atk {
+  grid-area: atkValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.def {
+  grid-area: defValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spa {
+  grid-area: spatkValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spd {
+  grid-area: spdefValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spe {
+  grid-area: spdValue;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form h1 {
+  grid-area: header;
+  text-align: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input[type="submit"] {
+  grid-area: submit;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="evStats"] {
+  grid-area: evStats;
+  margin-top: 0.25rem;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form {
+  display: flex;
+  flex-direction: column;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form h1 {
+  text-align: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form .form-group {
+  margin-left: 1rem;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="statsChart"] {
+  grid-area: statsChart;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.25rem;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="statsChart"] h1 {
+  text-align: center;
+}
+.document-sheet.stats-form .window-content aside[data-application-part="statsChart"] .stats-chart-aside {
+  align-items: center;
+  background: #346899;
+  border-radius: 10px;
+  margin: 0.25rem;
+}
+/** Application V1 Styles **/
+.stats-chart-aside {
+  flex: 1;
+  position: relative;
+}
+.ptr2e form .form-group {
+  margin: 0.25rem;
+  padding: 0.25rem;
+  border: 2px groove #fefefe;
+}
+.ptr2e .attack-action {
+  margin: 0.25rem;
+  padding: 0.25rem;
+  border: 2px groove #fefefe;
+}
+.ptr2e img {
+  border: unset;
+}
+.ptr2e.actor {
+  border-radius: 20px 20px 20px 20px;
+}
+.ptr2e.actor section {
+  padding: unset;
+  background: unset;
+}
+.ptr2e.actor form {
+  display: grid;
+  grid-template-columns: 112px auto;
+  grid-template-rows: 48px 36px auto;
+  grid-template-areas: "aside nav" "aside subnav" "aside main";
+  min-width: 0;
+  min-height: 0;
+  background: linear-gradient(to top, #3889adee, #346899ee);
+  border-radius: 0 0 20px 20px;
+}
+.ptr2e.actor form > * {
+  overflow: hidden;
+}
+.ptr2e.actor form nav.main-navigation {
+  grid-area: nav;
+  background: #93d8f1;
+}
+.ptr2e.actor form nav.main-navigation .tabs {
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}
+.ptr2e.actor form nav.main-navigation .tabs .item {
+  color: black;
+  margin: 0.25rem;
+  font-size: 18px;
+  height: 48px;
+  width: 48px;
+  background-size: 48px 48px;
+}
+.ptr2e.actor form nav.main-navigation .tabs .item.summary {
+  background-image: url("/systems/ptr2e/img/icons/nav/summary.webp");
+}
+.ptr2e.actor form nav.main-navigation .tabs .item.actions {
+  background-image: url("/systems/ptr2e/img/icons/nav/actions.webp");
+}
+.ptr2e.actor form nav.main-navigation .tabs .item.skills {
+  background-image: url("/systems/ptr2e/img/icons/nav/skills.webp");
+}
+.ptr2e.actor form nav.main-navigation .tabs .item.gear {
+  background-image: url("/systems/ptr2e/img/icons/nav/gear.webp");
+}
+.ptr2e.actor form nav.main-navigation .tabs .item.active {
+  filter: drop-shadow(1px 1px 2px var(--color-shadow-primary));
+}
+.ptr2e.actor form nav.sub-navigation {
+  grid-area: subnav;
+  background: #93d8f1ee;
+}
+.ptr2e.actor form nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.ptr2e.actor form aside {
+  grid-area: aside;
+  display: flex;
+  flex-direction: column;
+  background: #346899;
+}
+.ptr2e.actor form aside header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ptr2e.actor form aside .party {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.ptr2e.actor form aside .party .party-member {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  box-shadow: inset 0 0 5px #222224;
+  border-radius: 5px;
+  position: relative;
+  margin: 0.2rem;
+}
+.ptr2e.actor form aside .party .party-member:after {
+  position: absolute;
+  width: 4px;
+  height: var(--health-percent);
+  background: black;
+  top: 0;
+  left: 0;
+  content: "";
+}
+.ptr2e.actor form aside .party .party-member .profile-img {
+  height: 80px;
+  width: 80px;
+  filter: drop-shadow(1px 1px 2px #222224);
+  border: none;
+  border-radius: 5px;
+  position: relative;
+}
+.ptr2e.actor form aside .party .party-member .profile-img.black {
+  border-left: 4px solid black;
+  background-color: #00000065;
+}
+.ptr2e.actor form aside .party .party-member .profile-img.darkred {
+  border-left: 4px solid #8b0000;
+  background-color: #8b000065;
+}
+.ptr2e.actor form aside .party .party-member .profile-img.red {
+  border-left: 4px solid red;
+  background-color: #ff000065;
+}
+.ptr2e.actor form aside .party .party-member .profile-img.orange {
+  border-left: 4px solid orange;
+  background-color: #ffa50065;
+}
+.ptr2e.actor form aside .party .party-member .profile-img.green {
+  border-left: 4px solid lime;
+  background-color: #00ff0065;
+}
+.ptr2e.actor form aside .party .party-member .profile-img.lime {
+  border-left: 4px solid green;
+  background-color: #00800065;
+}
+.ptr2e.actor form main {
+  grid-area: main;
+  display: flex;
+}
+.ptr2e.actor form main .tab[data-tab]:not(.active) {
+  display: none;
+}
+.ptr2e.actor form .main-grid {
+  flex: 1;
+  display: grid;
+  grid-template: repeat(5, 1fr) / repeat(5, 1fr);
+  grid-gap: 0.25rem;
+  min-width: 0;
+  min-height: 0;
+}
+.ptr2e.actor form .main-grid > * {
+  overflow: hidden;
+}
+.ptr2e.actor form .main-grid .stats-chart-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #346899;
+  border-radius: 10px;
+  margin: 0.25rem;
+}
+.ptr2e.actor form .main-grid .stats-chart-box.default-location {
+  grid-column: 4 / span 2;
+  grid-row: 1 / span 3;
+}
+.ptr2e.actor form .main-grid .movement {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #3889adee, #346899ee);
+  border-radius: 10px;
+  margin: 0.25rem;
+}
+.ptr2e.actor form .main-grid .movement.default-location {
+  grid-column: 4 / span 2;
+  grid-row: 4 / span 2;
+}
+.ptr2e.actor form .main-grid .skills {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #346899;
+  border-radius: 10px;
+  margin: 0.25rem;
+}
+.ptr2e.actor form .main-grid .skills.default-location {
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 5;
+}
+.ptr2e.actor form .main-grid .level-field,
+.ptr2e.actor form .main-grid .link-to-stats,
+.ptr2e.actor form .main-grid .typings {
+  grid-column: 4 / span 2;
+  grid-row: 1 / span 2;
+  background: #fefefe;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1rem 0.5rem;
+  border-radius: 20px;
+}
+.ptr2e.actor form .main-grid .level-field h2,
+.ptr2e.actor form .main-grid .link-to-stats h2,
+.ptr2e.actor form .main-grid .typings h2,
+.ptr2e.actor form .main-grid .level-field h4,
+.ptr2e.actor form .main-grid .link-to-stats h4,
+.ptr2e.actor form .main-grid .typings h4 {
+  align-self: center;
+  margin: 0;
+  font-style: italic;
+}
+.ptr2e.actor form .main-grid .link-to-stats {
+  grid-row: 3 / span 1;
+  gap: 0.5rem;
+}
+.ptr2e.actor form .main-grid .typings {
+  grid-row: 4 / span 2;
+  gap: 0.5rem;
+}
+.ptr2e.actor form .main-grid .actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  background: #346899;
+  border-radius: 10px;
+  margin: 0.25rem;
+}
+.ptr2e.actor form .main-grid .actions.default-location {
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 5;
+}
+.ptr2e.actor form .main-grid .actions h2 {
+  text-align: center;
+  border-bottom: 1px solid #fefefeaa;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list {
+  list-style: none;
+  margin: 0 0.5rem;
+  padding: 0;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action {
+  padding: 0.5rem;
+  background: #3889adee;
+  border-radius: 5px;
+  color: #efefef;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action:nth-child(odd) {
+  background: #2f608dee;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon {
+  flex: 0 0 24px;
+  height: 24px;
+  width: 24px;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon .icon {
+  display: block;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon .dice {
+  display: none;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon.rollable:hover > .icon {
+  display: none;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon.rollable:hover > .dice {
+  display: block;
+  cursor: pointer;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.ptr2e.actor form .main-grid .gear {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #346899;
+  border-radius: 10px;
+  margin: 0.25rem;
+}
+.ptr2e.actor form .main-grid .gear.default-location {
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 5;
+}
