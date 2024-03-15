@@ -1,5 +1,3 @@
-import BaseActor from "types/foundry/common/documents/actor.js";
-import BaseUser from "types/foundry/common/documents/user.js";
 import { CombatantPTR2e, CombatantSystemPTR2e } from "@combat";
 
 class RoundCombatantSystem extends foundry.abstract.TypeDataModel implements CombatantSystemPTR2e {
@@ -12,14 +10,14 @@ class RoundCombatantSystem extends foundry.abstract.TypeDataModel implements Com
         return 100;
     }
 
-    override _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: BaseUser<BaseActor<null>>): Promise<boolean | void> {
+    override _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
         if (changed.defeated) {
             changed.defeated = false;
         }
         return super._preUpdate(changed, options, user);
     }
 
-    override _preDelete(_options: DocumentModificationContext<this["parent"]["parent"]>, _user: BaseUser<BaseActor<null>>): Promise<boolean | void> {
+    override _preDelete(_options: DocumentModificationContext<this["parent"]["parent"]>, _user: User): Promise<boolean | void> {
         return Promise.resolve(false);
     }
 }

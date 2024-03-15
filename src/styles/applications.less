@@ -1,22 +1,11 @@
 /** Application V2 Styles **/
 .document-sheet {
-    background: url(/ui/denim075.png);
-
-    .window-content {
-        background: url(/ui/parchment.jpg);
-        padding: 0.25rem;
-        margin: 0.75rem;
-        border-radius: 5px;
-        height: 100%;
-        color: black;
-    }
-
     &.stats-form {
         .window-content {
-            margin-top: 0.25rem;
+            padding-top: 0.5rem;
 
             display: grid;
-            grid-template-columns: 50% 50%;
+            grid-template-columns: 55% 45%;
             grid-template-rows: 35% 65%;
             grid-template-areas:
                 "baseStats statsChart"
@@ -28,6 +17,10 @@
                 form {
                     flex: 1;
                 }
+            }
+
+            h1 {
+                font-size: 2rem;
             }
 
             aside[data-application-part="baseStats"] {
@@ -44,7 +37,6 @@
                         "defLabel defValue spdLabel spdValue";
 
                     label {
-                        margin-left: 1rem;
                         text-align: left;
                         align-self: center;
 
@@ -62,14 +54,17 @@
 
                         &.spa {
                             grid-area: spatkLabel;
+                            margin-left: 1rem;
                         }
 
                         &.spd {
                             grid-area: spdefLabel;
+                            margin-left: 1rem;
                         }
 
                         &.spe {
                             grid-area: spdLabel;
+                            margin-left: 1rem;
                         }
                     }
 
@@ -123,11 +118,18 @@
                     flex-direction: column;
 
                     h1 {
+                        margin: 0.5rem 0;
                         text-align: center;
                     }
 
                     .form-group {
-                        margin-left: 1rem;
+                        label {
+                            flex: 0 0 100px;
+                            line-height: 1.75rem;
+                        }
+                        input {
+                            flex: 1;
+                        }
                     }
                 }
             }

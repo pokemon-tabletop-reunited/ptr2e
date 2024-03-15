@@ -1,9 +1,8 @@
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { ActorSynthetics, ActorSystemPTR2e, Attribute } from "@actor";
+import { ActorSynthetics, ActorSystemPTR2e, Attribute, HumanoidActorSystem, PokemonActorSystem } from "@actor";
 import { ActiveEffectPTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import { ActionPTR2e, ActionType, AttackPTR2e, PokemonType } from "@data";
-
 class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null> extends Actor<TParent, TSystem> {
 
     get traits() {
@@ -208,7 +207,7 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
 
     async applyDamage(damage: number) {
         const damageApplied = Math.min(damage || 0, this.system.health.value);
-        if(damageApplied === 0) return 0;
+        if (damageApplied === 0) return 0;
         await this.update({
             "system.health.value": Math.clamped(this.system.health.value - damage, 0, this.system.health.max)
         })
@@ -223,11 +222,26 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
         return effectiveness;
     }
 
+    isHumanoid(): this is ActorPTR2e<HumanoidActorSystem> {
+        return this.type === "humanoid";
+    }
+
+    isPokemon(): this is ActorPTR2e<PokemonActorSystem> {
+        return this.type === "pokemon";
+    }
+
     protected override _onEmbeddedDocumentChange(): void {
         super._onEmbeddedDocumentChange();
 
         // Send any accrued warnings to the console
         this.synthetics.preparationWarnings.flush();
+    }
+
+    protected override async _preCreate(data: this["_source"], options: DocumentModificationContext<TParent> & {fail?: boolean}, user: User): Promise<boolean | void> {
+        const result = await super._preCreate(data, options, user);
+        if (result === false) return false;
+    
+        if(options.fail === true) return false; 
     }
 }
 
@@ -243,4 +257,4 @@ interface ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParen
     level: number
 }
 
-export { ActorPTR2e }
+export default ActorPTR2e;

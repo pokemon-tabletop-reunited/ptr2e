@@ -6,20 +6,7 @@ import { TemplateConstructor } from './data-template.ts';
  * @group Mixins
  */
 export default function HasTraits<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
-    abstract class TemplateClass extends baseClass {
-
-        /**
-         * A record of traits that the item has.
-         * @remarks
-         * This is a record of traits that the item has, keyed by the trait's name.
-         * @example
-         * ```typescript
-         * const item = new ItemPTR2e({ name: 'Flashlight', "system.traits": ["light"] });
-         * console.log(item.system.traits); // { "light": TraitPTR2e }
-         * ```
-         */
-        abstract traits: Map<string, Trait>
-
+    class TemplateClass extends baseClass {
         declare _source: InstanceType<typeof baseClass>['_source'] & {
             //TODO: Update this to Trait String
             traits: string[];
@@ -44,6 +31,20 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
                 return acc;
             }, new Map());
         }
+    }
+
+    interface TemplateClass {
+        /**
+         * A record of traits that the item has.
+         * @remarks
+         * This is a record of traits that the item has, keyed by the trait's name.
+         * @example
+         * ```typescript
+         * const item = new ItemPTR2e({ name: 'Flashlight', "system.traits": ["light"] });
+         * console.log(item.system.traits); // { "light": TraitPTR2e }
+         * ```
+         */
+        traits: Map<string, Trait>
     }
 
     return TemplateClass;

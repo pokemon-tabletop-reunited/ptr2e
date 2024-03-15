@@ -3,6 +3,9 @@ import { StatsChart } from "@actor/sheets/stats-chart.ts";
 import { tagify } from "@utils";
 import StatsForm from "./sheets/stats-form.ts";
 import AttackPTR2e from "@module/data/models/attack.ts";
+import { SpeciesDropSheet } from "./sheets/species-drop-sheet.ts";
+import { SpeciesPTR2e } from "@item";
+import { SpeciesSystemModel } from "@item/data/index.ts";
 
 class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
 
@@ -28,6 +31,36 @@ class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
             submitOnChange: true,
             scrollY: [".sheet-body"]
         });
+    }
+
+    protected override _getHeaderButtons(): ApplicationHeaderButton[] {
+        const buttons = super._getHeaderButtons();
+        if (this.actor.system.species) {
+            buttons.unshift({
+                label: "Species",
+                class: "species",
+                icon: "fas fa-paw",
+                onclick: () => {
+                    const species = this.actor.system.species!;
+                    const sheet = new SpeciesDropSheet((item) => {
+                        if (!item) return;
+                        if (!(item instanceof CONFIG.Item.documentClass && item.system instanceof SpeciesSystemModel)) return;
+                        if (item.slug !== species.slug) {
+                            this.actor.update({ "system.species": item.toObject().system });
+                        }
+                    });
+                    sheet.species = new CONFIG.Item.documentClass({
+                        name: this.actor.name,
+                        type: "species",
+                        img: this.actor.img,
+                        flags: { ptr2e: { disabled: !this.actor.system._source.species } },
+                        system: species
+                    }) as SpeciesPTR2e;
+                    sheet.render(true);
+                }
+            });
+        }
+        return buttons;
     }
 
     override async close(options = {}): Promise<void> {
@@ -59,7 +92,7 @@ class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
 
         $html.find(".item-controls .item-to-chat").on("click", async (event) => {
             const uuid = (event.currentTarget.closest(".item-controls") as HTMLElement)?.dataset?.uuid;
-            if(!uuid) return;
+            if (!uuid) return;
             const document = await fromUuid(uuid);
 
             return document?.toChat?.();
@@ -67,7 +100,7 @@ class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
 
         $html.find(".item-controls .item-edit").on("click", async (event) => {
             const uuid = (event.currentTarget.closest(".item-controls") as HTMLElement)?.dataset?.uuid;
-            if(!uuid) return;
+            if (!uuid) return;
             const document = await fromUuid(uuid);
 
             return document?.sheet?.render(true);
@@ -75,17 +108,17 @@ class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
 
         $html.find(".attack .rollable").on("click", async (event) => {
             const slug = (event.currentTarget.closest("li.attack[data-action]") as HTMLElement)?.dataset?.action;
-            if(!slug) return;
+            if (!slug) return;
             const parentUuid = (event.currentTarget.closest("ul.action-list-attack[data-parent]") as HTMLElement)?.dataset?.parent;
             const parent = await fromUuid(parentUuid) as ActorPTR2e;
-            if(!parent) return;
+            if (!parent) return;
 
             const attack = parent.actions.attack.get(slug) as AttackPTR2e;
-            if(!attack) return;
+            if (!attack) return;
 
             return attack.roll();
         });
-        
+
         // @ts-ignore
         $html.find(".stats-chart, .link-to-stats h2").on("dblclick", () => new StatsForm(this.actor).render(true));
 

@@ -15,7 +15,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     static override DEFAULT_OPTIONS = fu.mergeObject(super.DEFAULT_OPTIONS, {
         classes: ["stats-form"],
         position: {
-            height: 480,
+            height: 500,
             width: 700,
         }
     }, { inplace: false });
@@ -25,14 +25,14 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
             id: "baseStats",
             template: "/systems/ptr2e/templates/actor/stats-form-parts/base-stats-form.hbs",
             forms: {
-                "#base-stats-form": StatsForm.#onSubmitBaseStatsForm
+                "#base-stats-form": {handler: StatsForm.#onSubmitBaseStatsForm}
             }
         },
         evStats: {
             id: "evStats",
             template: "/systems/ptr2e/templates/actor/stats-form-parts/ev-stats-form.hbs",
             forms: {
-                "#ev-stats-form": StatsForm.#onSubmitEvStatsForm
+                "#ev-stats-form": {handler: StatsForm.#onSubmitEvStatsForm}
             }
         },
         statsChart: {
@@ -48,7 +48,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
 
     override _configureRenderOptions(options: ApplicationRenderOptions): void {
         super._configureRenderOptions(options);
-        if (this.document.type !== "character") {
+        if (!!this.document.system._source.species) {
             options.parts = options.parts?.filter(part => part !== "baseStats");
         }
     }
@@ -83,7 +83,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
 
     override _onRender(context: ApplicationRenderContext, options: ApplicationRenderOptions): void {
         super._onRender(context, options);
-        if (context.parts?.includes("statsChart")) {
+        if (options.parts?.includes("statsChart")) {
             this._statsChart.render();
         }
     }
@@ -125,7 +125,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         rangeInput.max = max.toString();
     }
 
-    static async #onSubmitBaseStatsForm(this: StatsForm, event: SubmitEvent, _form: HTMLFormElement, formData: FormDataExtended) {
+    static async #onSubmitBaseStatsForm(this: StatsForm, event: SubmitEvent | Event, _form: HTMLFormElement, formData: FormDataExtended) {
         event.preventDefault();
         const result = await this._updateDocument(formData);
         console.debug(result, this.document.system.attributes);
@@ -135,7 +135,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     /**
      * @this {StatsForm} 
      */
-    static async #onSubmitEvStatsForm(this: StatsForm, event: SubmitEvent, _form: HTMLFormElement, formData: FormDataExtended) {
+    static async #onSubmitEvStatsForm(this: StatsForm, event: SubmitEvent | Event, _form: HTMLFormElement, formData: FormDataExtended) {
         event.preventDefault();
         const result = await this._updateDocument(formData);
         console.debug(result, this.document.system.attributes);

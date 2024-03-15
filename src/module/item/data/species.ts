@@ -7,38 +7,11 @@ const SpeciesExtension = HasTraits(HasDescription(HasSlug(foundry.abstract.TypeD
 /**
  * @category Item Data Models
  */
-export default abstract class SpeciesSystem extends SpeciesExtension {
+class SpeciesSystem extends SpeciesExtension {
     /**
      * @internal
      */
     declare parent: SpeciesPTR2e;
-
-    /**
-     * The # number of the species in the Pokedex.
-     */
-    abstract number: number;
-
-    /**
-     * The form of the species.
-     */
-    abstract form: string | null;
-
-    /**
-     * The stats of the species.
-     */
-    abstract stats: {
-        hp: number,
-        atk: number,
-        def: number,
-        spa: number,
-        spd: number,
-        spe: number
-    }
-
-    /**
-     * The types of the species.
-     */
-    abstract types: PokemonType[];
 
     declare _source: InstanceType<typeof SpeciesExtension>['_source'] & {
         number: number;
@@ -72,3 +45,34 @@ export default abstract class SpeciesSystem extends SpeciesExtension {
         }
     }
 }
+
+interface SpeciesSystem {
+    /**
+     * The # number of the species in the Pokedex.
+     */
+    number: number;
+
+    /**
+     * The form of the species.
+     */
+    form: string | null;
+
+    /**
+     * The stats of the species.
+     */
+    stats: {
+        hp: number,
+        atk: number,
+        def: number,
+        spa: number,
+        spd: number,
+        spe: number
+    }
+
+    /**
+     * The types of the species.
+     */
+    types: PokemonType[];
+}
+
+export default SpeciesSystem;

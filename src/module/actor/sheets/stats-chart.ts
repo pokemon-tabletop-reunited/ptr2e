@@ -1,4 +1,4 @@
-import { ActorPTR2e } from "@actor/base.ts";
+import { ActorPTR2e } from "@actor";
 import { ActorSheetPTR2e } from "@actor/sheet.ts";
 import { DocumentSheetV2 } from "@item/sheets/document.ts";
 import { CenterLabelsPlugin } from "@scripts/chart-plugins.ts";

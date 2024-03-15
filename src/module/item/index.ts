@@ -25,7 +25,6 @@ export type {
     WeaponPTR2e,
 }
 
-
 export type ItemSystemPTR = data.AbilitySystemModel | data.ConsumableSystemModel | data.ContainerSystemModel | data.EquipmentSystemModel | data.GearSystemModel | data.MoveSystemModel | data.PerkSystemModel | data.SpeciesSystemModel | data.WeaponSystemModel;
 
 // Document

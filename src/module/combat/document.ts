@@ -2,8 +2,6 @@ import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CombatantPTR2e } from "@combat";
 import TypeDataModel from "types/foundry/common/abstract/type-data.js";
 import { CombatantSchema } from "types/foundry/common/documents/combatant.js";
-import BaseActor from "types/foundry/common/documents/actor.js";
-import BaseUser from "types/foundry/common/documents/user.js";
 
 class CombatPTR2e extends Combat {
 
@@ -212,7 +210,7 @@ class CombatPTR2e extends Combat {
         return Promise.resolve(this);
     }
 
-    protected override async _preCreate(data: this["_source"], options: DocumentModificationContext<null>, user: BaseUser<BaseActor<null>>): Promise<boolean | void> {
+    protected override async _preCreate(data: this["_source"], options: DocumentModificationContext<null>, user: User): Promise<boolean | void> {
         await super._preCreate(data, options, user);
 
         const round = new CONFIG.Combatant.documentClass({

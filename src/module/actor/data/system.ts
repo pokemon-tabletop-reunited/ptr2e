@@ -1,10 +1,14 @@
 import { PokemonType } from "@data";
-import { ItemPTR2e, SpeciesPTR2e } from "@item";
 import { getTypes } from "@scripts/config/effectiveness.ts";
-import { DataSchema } from "types/foundry/common/data/fields.js";
-import { AdvancementData, Attribute, Attributes, Biology, Capabilities, HealthData, Skill, Skills, Stat } from "@actor";
+import { DataField, DataSchema } from "types/foundry/common/data/fields.js";
+import { ActorPTR2e, AdvancementData, Attribute, Attributes, Biology, Capabilities, HealthData, HumanoidActorSystem, Skill, Skills, Stat } from "@actor";
+import { SpeciesSystemModel } from "@item/data/index.ts";
 
 class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
+    static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
+
+    declare parent: ActorPTR2e<this>;
+
     static override defineSchema() {
         const fields = foundry.data.fields;
 
@@ -59,7 +63,6 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
             type: new fields.SchemaField({
                 types: new fields.SetField(new fields.StringField({ required: true, choices: getTypes, initial: "untyped", label: "PTR2E.Fields.PokemonType.Label", hint: "PTR2E.Fields.PokemonType.Hint" }), { initial: ["untyped"], label: "PTR2E.Fields.PokemonType.LabelPlural", hint: "PTR2E.Fields.PokemonType.HintPlural", required: true, validate: (d) => (d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false), validationError: "PTR2E.Errors.PokemonType" }),
             }),
-            species: new fields.ForeignDocumentField(ItemPTR2e, { required: false, nullable: true }),
             powerPoints: new fields.SchemaField({
                 value: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
             }),
@@ -68,20 +71,39 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
                 max: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
             }),
             money: new fields.NumberField({ required: true, initial: 0 }),
+            species: new fields.SchemaField(SpeciesSystemModel.defineSchema(), { required: false, nullable: true, initial: null }),
         }
     }
 
     override prepareBaseData(): void {
+        this._prepareSpeciesData();
 
         this.advancement.level = Math.floor(Math.cbrt(this.advancement.experience.current || 1));
         this.advancement.experience.next = Math.pow(Math.min(this.advancement.level + 1, 100), 3);
 
         for (const k in this.attributes) {
             const key = k as keyof Attributes;
+            if (this.species?.stats[key]) this.attributes[key].base = this.species.stats[key];
             this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
         }
 
         this.health.max = this.attributes.hp.value;
+    }
+
+    _prepareSpeciesData() {
+        // If the species is not set, they are a humanoid, construct species data for Humanoids.
+        if (!this._source.species) {
+            if (this.parent.isHumanoid()) {
+                this.species = HumanoidActorSystem.constructSpecies(this);
+                return;
+            }
+            let e = new Error("Species not set for non-humanoid actor");
+            (this.parent as ActorPTR2e).synthetics.preparationWarnings.add(e.message);
+            Hooks.onError("ActorSystemPTR2e#_prepareSpeciesData", e, { data: this._source.species });
+            return;
+        }
+
+        this.species = new SpeciesSystemModel(this._source.species);
     }
 
     _calculateStatTotal(stat: Attribute | Omit<Attribute, 'stage'>): number {
@@ -155,7 +177,7 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
         effectiveness: Record<PokemonType, number>,
         types: Set<PokemonType>,
     },
-    species: SpeciesPTR2e | null,
+    species: SpeciesSystemModel | null,
     powerPoints: {
         max: number,
         value: number,
@@ -163,6 +185,12 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
     health: HealthData,
     advancement: AdvancementData,
     money: number
+
+    _source: SourceFromSchema<ActorSystemSchema>
 }
 
-export { ActorSystemPTR2e }
+type ActorSystemSchema = Record<string, DataField<JSONValue, unknown, boolean>> & {
+    species: SpeciesSystemModel['_source'];
+}
+
+export default ActorSystemPTR2e;

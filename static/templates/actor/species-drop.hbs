@@ -1,0 +1,8 @@
+<form class="d-flex flex-column justify-content-center align-items-center">
+    {{#if species}}
+        <p style="text-align: center;"><small>Create species item from this Actor by dragging the below item reference.</small></p>
+        <a class="species-link content-link"><i class="fas fa-suitcase"></i>{{formatSlug species.slug}}</a>
+    {{else}}
+    <small>Drop a valid species item here</small>
+    {{/if}}
+</form>

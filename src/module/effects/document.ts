@@ -3,9 +3,6 @@ import { ItemPTR2e } from "@item";
 import { ActiveEffectSystem } from "@effects";
 import { ChangeModel } from "@data";
 import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
-import BaseActor from "types/foundry/common/documents/actor.js";
-import BaseUser from "types/foundry/common/documents/user.js";
-
 class ActiveEffectPTR2e<TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null> extends ActiveEffect<TParent> {
     declare system: ActiveEffectSystem;
 
@@ -32,7 +29,7 @@ class ActiveEffectPTR2e<TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR
     }
 
     // TODO: Clean this up cause god it's a mess.
-    protected override _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: BaseUser<BaseActor<null>>): Promise<boolean | void> {
+    protected override _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: User): Promise<boolean | void> {
         const parseChangePath = (expanded: { changes: unknown[], system?: unknown }) => {
             expanded.system = fu.mergeObject(expanded.system ?? {}, {
                 changes: expanded.changes

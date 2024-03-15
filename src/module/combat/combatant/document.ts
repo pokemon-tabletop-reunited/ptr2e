@@ -1,8 +1,6 @@
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CombatPTR2e } from "@combat";
 import { CombatantSystemPTR2e } from "@combat";
-import BaseActor from "types/foundry/common/documents/actor.js";
-import BaseUser from "types/foundry/common/documents/user.js";
 
 class CombatantPTR2e<
     TParent extends CombatPTR2e | null = CombatPTR2e | null,
@@ -28,7 +26,7 @@ class CombatantPTR2e<
         this.updateSource({ initiative: 100 });
     }
 
-    protected override _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: BaseUser<BaseActor<null>>): Promise<boolean | void> {
+    protected override _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: User): Promise<boolean | void> {
         if (changed["initiative"] === null || ('-=initiative' in changed) || Number(changed.initiative ?? 0) < 0) {
             ui.notifications.error(game.i18n.localize("PTR2E.Combat.Combatant.InitiativeNotZeroOrNull"));
             return Promise.resolve(false);

@@ -1,5 +1,5 @@
 
-import { ActorPTR2e, ActorSheetPTR2e, ActorSystemPTR2e } from "@actor";
+import { ActorPTR2e, ActorSheetPTR2e, HumanoidActorSystem, PokemonActorSystem } from "@actor";
 import { CharacterCombatantSystem, CombatPTR2e, CombatTrackerPTR2e, CombatantPTR2e, RoundCombatantSystem } from "@combat";
 import { ItemPTR2e, data, sheets } from "@item";
 import { AbilitySheetPTR2e } from "@item/sheets/ability.ts";
@@ -23,7 +23,8 @@ export const PTRCONFIG = {
     Actor: {
         documentClass: ActorPTR2e,
         dataModels: {
-            character: ActorSystemPTR2e
+            humanoid: HumanoidActorSystem,
+            pokemon: PokemonActorSystem
         },
         sheetClasses: {
             character: ActorSheetPTR2e,
@@ -73,6 +74,7 @@ export const PTRCONFIG = {
             perk: [sheets.PerkSheetPTR2e],
             ability: [AbilitySheetPTR2e],
             move: [sheets.MoveSheetPTR2e],
+            species: [sheets.SpeciesSheetPTR2e],
         },
     },
     MeasuredTemplate: {

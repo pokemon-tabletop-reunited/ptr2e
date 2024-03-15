@@ -53,7 +53,6 @@ export interface ApplicationRenderContext {
     force?: boolean;
     position?: ApplicationPosition;
     window?: ApplicationWindowRenderOptions;
-    parts?: string[];
 }
 
 export interface ApplicationWindowRenderOptions {
@@ -657,15 +656,21 @@ export interface HandlebarsTemplatePart<BaseClass extends AppV2Constructor> {
     classes?: string[];
     templates?: string[];
     scrollable?: string[];
-    forms?: Record<string, FormHandlerCallback<BaseClass>>;
+    forms?: Record<string, ApplicationFormConfiguration<BaseClass>>;
+}
+
+export type ApplicationFormConfiguration<BaseClass extends AppV2Constructor> = {
+    handler: FormHandlerCallback<BaseClass>;
+    submitOnChange?: boolean;
+    closeOnSubmit?: boolean;
 }
 
 export type FormHandlerCallback<BaseClass extends AppV2Constructor> = (
     this: InstanceType<BaseClass>,
-    event: SubmitEvent,
+    event: SubmitEvent|Event,
     form: HTMLFormElement,
     formData: FormDataExtended
-) => any;
+) => Promise<void>;
 
 //@ts-ignore
 export function HandlebarsApplicationMixin<BaseClass extends AppV2Constructor>(BaseClass: BaseClass) {

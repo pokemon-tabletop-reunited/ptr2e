@@ -30,7 +30,6 @@ function _registerPTRHelpers() {
         if (!numbers) return formula;
 
         // Round each number to two decimal places
-        console.log(numbers);
         const roundedNumbers = numbers.map((num: string) => {
             const parsedNum = parseFloat(num);
             return Number.isInteger(parsedNum) ? parsedNum.toString() : parsedNum.toFixed(2);
@@ -44,13 +43,8 @@ function _registerPTRHelpers() {
 
         // Replace mathematical symbols with their HTML entities
         return roundedFormula
-            .replaceAll(')*', ') &times;')
-            .replaceAll('*(', '&times; (')
             .replaceAll('*', '&times;')
-            .replaceAll(')/', ') &divide;')
-            .replaceAll('/(', '&divide; (')
             .replaceAll('/', '&divide;')
-            .replaceAll(')+', ') +')
     });
 }
 

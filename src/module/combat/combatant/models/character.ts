@@ -1,5 +1,3 @@
-import BaseActor from "types/foundry/common/documents/actor.js";
-import BaseUser from "types/foundry/common/documents/user.js";
 import { CombatantPTR2e, CombatantSystemPTR2e } from "@combat";
 
 class CharacterCombatantSystem extends foundry.abstract.TypeDataModel implements CombatantSystemPTR2e {
@@ -27,7 +25,7 @@ class CharacterCombatantSystem extends foundry.abstract.TypeDataModel implements
             ) / this.actor.speed), 33, 100);
     }
 
-    override _preDelete(_options: DocumentModificationContext<this["parent"]["parent"]>, _user: BaseUser<BaseActor<null>>): Promise<boolean | void> {
+    override _preDelete(_options: DocumentModificationContext<this["parent"]["parent"]>, _user: User): Promise<boolean | void> {
         if (this.combat.combatant?.id === this.parent.id) return Promise.resolve(false);
         return super._preDelete(_options, _user);
     }
