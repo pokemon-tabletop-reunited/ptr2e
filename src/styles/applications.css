@@ -1,112 +1,197 @@
 /** Application V2 Styles **/
-.document-sheet.stats-form .window-content {
+.sheet.move-sheet .window-content {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  grid-template-rows: calc(1rem + 48px) calc(0.5rem + 32px) auto;
+  grid-template-areas: "header nav" "traits traits" "main main";
+  padding: 0;
+}
+.sheet.move-sheet .window-content .sheet-header {
+  grid-area: header;
+  padding: 0.5rem;
+  padding-right: 1rem;
+  border-bottom: 1px solid #fefefe;
+}
+.sheet.move-sheet .window-content .sheet-header fieldset {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.sheet.move-sheet .window-content .sheet-header img {
+  flex: 0 0 48px;
+  height: 48px;
+  margin: 0 0.25rem;
+  border: unset;
+}
+.sheet.move-sheet .window-content .sheet-header .title {
+  font-size: 2.5rem;
+}
+.sheet.move-sheet .window-content nav.tabs {
+  grid-area: nav;
+  border: unset;
+  margin: 0;
+  padding: 0.5rem;
+  padding-left: 0;
+  border-bottom: 1px solid #fefefe;
+  border-left: 1px solid #fefefe;
+}
+.sheet.move-sheet .window-content aside.traits {
+  grid-area: traits;
+  height: 32px;
+  margin: 0;
+  padding: 0.25rem;
+  border-bottom: 1px solid #fefefe;
+}
+.sheet.move-sheet .window-content section.tab {
+  grid-area: main;
+  padding: 1rem;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .editor,
+.sheet.move-sheet .window-content section.tab[data-tab=details] .editor .editor-content {
+  min-height: 200px;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=actions].active {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem 1rem 1rem 1rem;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions {
+  flex: 0 0 50%;
+  margin: 0.25rem;
+  display: flex;
+  flex-direction: column;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.25rem;
+  border-bottom: 1px solid #fefefe;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name {
+  font-size: 18px;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content {
+  display: flex;
+  flex-direction: column;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content .action {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.25rem;
+  margin: 0.5rem 0;
+}
+.sheet.stats-form .window-content {
   padding-top: 0.5rem;
   display: grid;
   grid-template-columns: 55% 45%;
   grid-template-rows: 35% 65%;
   grid-template-areas: "baseStats statsChart" "evStats statsChart";
 }
-.document-sheet.stats-form .window-content aside {
+.sheet.stats-form .window-content aside {
   display: flex;
 }
-.document-sheet.stats-form .window-content aside form {
+.sheet.stats-form .window-content aside form {
   flex: 1;
 }
-.document-sheet.stats-form .window-content h1 {
+.sheet.stats-form .window-content h1 {
   font-size: 2rem;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] {
   grid-area: baseStats;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form {
   display: grid;
   grid-template-columns: 30% 15% 40% 15%;
   grid-template-rows: min-content 1fr 1fr 1fr;
   grid-template-areas: "header header header header" "hpLabel hpValue spatkLabel spatkValue" "atkLabel atkValue spdefLabel spdefValue" "defLabel defValue spdLabel spdValue";
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label {
   text-align: left;
   align-self: center;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.hp {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.hp {
   grid-area: hpLabel;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.atk {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.atk {
   grid-area: atkLabel;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.def {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.def {
   grid-area: defLabel;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spa {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spa {
   grid-area: spatkLabel;
   margin-left: 1rem;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spd {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spd {
   grid-area: spdefLabel;
   margin-left: 1rem;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spe {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spe {
   grid-area: spdLabel;
   margin-left: 1rem;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input {
   text-align: center;
   align-self: center;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.hp {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.hp {
   grid-area: hpValue;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.atk {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.atk {
   grid-area: atkValue;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.def {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.def {
   grid-area: defValue;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spa {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spa {
   grid-area: spatkValue;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spd {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spd {
   grid-area: spdefValue;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spe {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spe {
   grid-area: spdValue;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form h1 {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form h1 {
   grid-area: header;
   text-align: center;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input[type="submit"] {
+.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input[type="submit"] {
   grid-area: submit;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="evStats"] {
+.sheet.stats-form .window-content aside[data-application-part="evStats"] {
   grid-area: evStats;
   margin-top: 0.25rem;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form {
+.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form {
   display: flex;
   flex-direction: column;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form h1 {
+.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form h1 {
   margin: 0.5rem 0;
   text-align: center;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form .form-group label {
+.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form .form-group label {
   flex: 0 0 100px;
   line-height: 1.75rem;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form .form-group input {
+.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form .form-group input {
   flex: 1;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="statsChart"] {
+.sheet.stats-form .window-content aside[data-application-part="statsChart"] {
   grid-area: statsChart;
   display: flex;
   flex-direction: column;
   margin-left: 0.25rem;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="statsChart"] h1 {
+.sheet.stats-form .window-content aside[data-application-part="statsChart"] h1 {
   text-align: center;
 }
-.document-sheet.stats-form .window-content aside[data-application-part="statsChart"] .stats-chart-aside {
+.sheet.stats-form .window-content aside[data-application-part="statsChart"] .stats-chart-aside {
   align-items: center;
   background: #346899;
   border-radius: 10px;

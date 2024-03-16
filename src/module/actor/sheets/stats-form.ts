@@ -1,15 +1,14 @@
-import { DocumentSheetV2 } from "@item/sheets/document.ts";
-import { ApplicationRenderContext, ApplicationRenderOptions, HandlebarsTemplatePart } from "types/foundry/common/applications/api.js";
 import { StatsChart } from "./stats-chart.ts";
 import { Attributes, ActorPTR2e } from "@actor";
+import { DocumentSheetConfiguration, DocumentSheetV2 } from "@item/sheets/document.ts";
 
-//@ts-ignore
 export default class StatsForm extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<ActorPTR2e>) {
 
     _statsChart: StatsChart;
-    constructor(actor: ActorPTR2e, options: Partial<foundry.applications.api.ApplicationConfiguration>) {
-        super(actor, options);
-        this._statsChart = new StatsChart(this);
+    
+    constructor(options: Partial<foundry.applications.api.DocumentSheetConfiguration>) {
+        super(options);
+        this._statsChart = new StatsChart(this, {});
     }
 
     static override DEFAULT_OPTIONS = fu.mergeObject(super.DEFAULT_OPTIONS, {
@@ -17,22 +16,25 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         position: {
             height: 500,
             width: 700,
-        }
+        },
+        form: {
+            handler: null
+        }   
     }, { inplace: false });
 
-    static override PARTS: Record<string, HandlebarsTemplatePart<typeof StatsForm>> = {
+    static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         baseStats: {
             id: "baseStats",
             template: "/systems/ptr2e/templates/actor/stats-form-parts/base-stats-form.hbs",
             forms: {
-                "#base-stats-form": {handler: StatsForm.#onSubmitBaseStatsForm}
+                "#base-stats-form": {handler: StatsForm.#onSubmitBaseStatsForm }
             }
         },
         evStats: {
             id: "evStats",
             template: "/systems/ptr2e/templates/actor/stats-form-parts/ev-stats-form.hbs",
             forms: {
-                "#ev-stats-form": {handler: StatsForm.#onSubmitEvStatsForm}
+                "#ev-stats-form": {handler: StatsForm.#onSubmitEvStatsForm }
             }
         },
         statsChart: {
@@ -41,12 +43,11 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         }
     }
 
-    // @ts-ignore
     override get title() {
         return game.i18n.localize("PTR2E.ActorSheet.StatsFormTitle");
     }
 
-    override _configureRenderOptions(options: ApplicationRenderOptions): void {
+    override _configureRenderOptions(options: DocumentSheetConfiguration<ActorPTR2e>): void {
         super._configureRenderOptions(options);
         if (!!this.document.system._source.species) {
             options.parts = options.parts?.filter(part => part !== "baseStats");
@@ -63,7 +64,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         }
     }
 
-    override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: ApplicationRenderOptions): void {
+    override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: DocumentSheetConfiguration<ActorPTR2e>): void {
         super._attachPartListeners(partId, htmlElement, options);
         const part = (this.constructor as typeof StatsForm).PARTS[partId];
 
@@ -81,7 +82,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         }
     }
 
-    override _onRender(context: ApplicationRenderContext, options: ApplicationRenderOptions): void {
+    override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: DocumentSheetConfiguration<ActorPTR2e>): void {
         super._onRender(context, options);
         if (options.parts?.includes("statsChart")) {
             this._statsChart.render();
@@ -127,7 +128,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
 
     static async #onSubmitBaseStatsForm(this: StatsForm, event: SubmitEvent | Event, _form: HTMLFormElement, formData: FormDataExtended) {
         event.preventDefault();
-        const result = await this._updateDocument(formData);
+        const result = await this.#updateDocument(formData);
         console.debug(result, this.document.system.attributes);
         this.render({parts: ["statsChart"]});
     }
@@ -137,8 +138,13 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
      */
     static async #onSubmitEvStatsForm(this: StatsForm, event: SubmitEvent | Event, _form: HTMLFormElement, formData: FormDataExtended) {
         event.preventDefault();
-        const result = await this._updateDocument(formData);
+        const result = await this.#updateDocument(formData);
         console.debug(result, this.document.system.attributes);
         this.render({parts: ["statsChart", "evStats"]});
+    }
+
+    async #updateDocument(formData: FormDataExtended) {
+        const submitData = this._prepareSubmitData(formData);
+        await this.document.update(submitData);
     }
 }

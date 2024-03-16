@@ -1,7 +1,7 @@
 import { ActorSheetPTR2e } from "@actor";
 import { PTRCONFIG } from "@scripts/config/index.ts";
 import { GamePTR } from "@scripts/game-ptr2e.ts";
-import { registerHandlebarsHelpers, registerTemplates } from "@utils";
+import { HandlebarTemplates, registerHandlebarsHelpers } from "@utils";
 import { default as TypeEffectiveness } from "../config/effectiveness.ts";
 import { PTRHook } from "./data.ts";
 
@@ -65,6 +65,7 @@ export const Init: PTRHook = {
                 for (const type in PTRCONFIG.Item.sheetClasses) {
                     const key = type as keyof typeof PTRCONFIG.Item.sheetClasses;
                     for (const sheet of PTRCONFIG.Item.sheetClasses[key]) {
+                        //@ts-ignore
                         Items.registerSheet("ptr2e", sheet, { types: [type], makeDefault: true });
                     }
                 }
@@ -82,7 +83,7 @@ export const Init: PTRHook = {
 
             // Register handlebars helpers
             registerHandlebarsHelpers();
-            registerTemplates();
+            HandlebarTemplates.register();
 
             // Create and populate initial game.ptr interface
             GamePTR.onInit();

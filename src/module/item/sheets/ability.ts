@@ -1,8 +1,7 @@
 import { AbilityPTR2e, ItemSheetOptions } from "@item";
 import { ItemSheetPTR2e } from "@item";
-import { DocumentSheetV2 } from "./document.ts";
 
-export default class AbilitySheet extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<AbilityPTR2e>) {
+export default class AbilitySheet extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2<AbilityPTR2e, foundry.applications.api.HandlebarsDocumentSheetConfiguration>) {
     static override DEFAULT_OPTIONS = fu.mergeObject(super.DEFAULT_OPTIONS, {
         classes: ["ability-sheet"],
         position: {
@@ -19,6 +18,7 @@ export default class AbilitySheet extends foundry.applications.api.HandlebarsApp
     }
 
     override async _prepareContext() {
+
         return {
             ...(await super._prepareContext()),
             fields: this.document.system.schema.fields

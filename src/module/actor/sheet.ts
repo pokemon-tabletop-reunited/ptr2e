@@ -119,8 +119,7 @@ class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
             return attack.roll();
         });
 
-        // @ts-ignore
-        $html.find(".stats-chart, .link-to-stats h2").on("dblclick", () => new StatsForm(this.actor).render(true));
+        $html.find(".stats-chart, .link-to-stats h2").on("dblclick", () => new StatsForm({document: this.actor}).render(true));
 
         // @ts-ignore
         $html.find(".ptr-perk-tree").on("click", () => this.actor.togglePerkTree());

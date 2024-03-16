@@ -1,19 +1,18 @@
 import { ActorPTR2e } from "@actor";
 import { ActorSheetPTR2e } from "@actor/sheet.ts";
-import { DocumentSheetV2 } from "@item/sheets/document.ts";
 import { CenterLabelsPlugin } from "@scripts/chart-plugins.ts";
 import { Chart, ChartOptions } from "chart.js/auto";
 import { _longestText, _normalizeAngle } from "chart.js/helpers";
 
 export class StatsChart {
-    sheet: ActorSheetPTR2e | DocumentSheetV2<ActorPTR2e>;
+    sheet: ActorSheetPTR2e | foundry.applications.api.DocumentSheetV2<ActorPTR2e>;
     chart: Chart | undefined;
     _options: ChartOptions;
     id: string | undefined;
     cssclass: string;
     initialized: boolean;
 
-    constructor(sheet: ActorSheetPTR2e | DocumentSheetV2<ActorPTR2e>, options: Partial<ChartOptions> = {}, { id, cssclass }: { id?: string, cssclass: string } = { cssclass: "stats-chart" }) {
+    constructor(sheet: ActorSheetPTR2e | foundry.applications.api.DocumentSheetV2<ActorPTR2e>, options: Partial<ChartOptions> = {}, { id, cssclass }: { id?: string, cssclass: string } = { cssclass: "stats-chart" }) {
         this.sheet = sheet;
         this._options = options;
         this.id = id;

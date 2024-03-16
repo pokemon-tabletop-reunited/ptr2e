@@ -1,5 +1,5 @@
-export function registerTemplates() {
-    const templates = {
+export class HandlebarTemplates {
+    static templates = Object.freeze({
         "stats-chart": "systems/ptr2e/templates/partials/actor/stats-chart.hbs",
         "actor-movement": "systems/ptr2e/templates/partials/actor/movement.hbs",
         "actor-gear": "systems/ptr2e/templates/partials/actor/gear.hbs",
@@ -9,11 +9,24 @@ export function registerTemplates() {
         "attack-embed": "systems/ptr2e/templates/partials/attack-embed.hbs",
         "effect-traits": "systems/ptr2e/templates/partials/effect-traits.hbs",
         "trait-partial": "systems/ptr2e/templates/partials/trait.hbs",
+    }) as Record<string, string>;
+
+    static async register() {
+        return loadTemplates(Object.values(this.templates)).then(() => {
+            for (const [key, value] of Object.entries(this.templates)) {
+                Handlebars.registerPartial(key, `{{> ${value}}}`);
+            }
+        });
     }
 
-    return loadTemplates(Object.values(templates)).then(() => {
-        for (const [key, value] of Object.entries(templates)) {
-            Handlebars.registerPartial(key, `{{> ${value}}}`);
+    static unregister() {
+        for (const key of Object.keys(this.templates)) {
+            Handlebars.unregisterPartial(key);
         }
-    });
-};
+    }
+
+    static reload() {
+        this.unregister();
+        return this.register();
+    }
+}

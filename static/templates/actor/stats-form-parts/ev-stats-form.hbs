@@ -3,7 +3,7 @@
         <h1>EV Stats Form</h1>
         {{#each stats as |value key|}}
             <div class="form-group {{key}}">
-                <label>{{localize (concat "PTR2E.Attributes." key ".Label")}}</label>
+                <label for="{{concat "system.attributes." key ".evs"}}">{{localize (concat "PTR2E.Attributes." key ".Label")}}</label>
                 {{rangePicker name=(concat "system.attributes." key ".evs") value=value.evs min=0 max=(lookup ../evMaximums key) step=4}}
             </div>
         {{/each}}

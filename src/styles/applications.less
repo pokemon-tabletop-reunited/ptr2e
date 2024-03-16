@@ -1,5 +1,121 @@
 /** Application V2 Styles **/
-.document-sheet {
+.sheet {
+    &.move-sheet {
+        .window-content {
+            display: grid;
+            grid-template-columns: 45% 55%;
+            grid-template-rows: calc(1rem + 48px) calc(0.5rem + 32px) auto;
+            grid-template-areas:
+                "header nav"
+                "traits traits"
+                "main main";
+
+            padding: 0;
+
+            .sheet-header {
+                grid-area: header;
+
+                fieldset {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+                img {
+                    flex: 0 0 48px;
+                    height: 48px;
+                    margin: 0 0.25rem;
+                    border: unset;
+                }
+
+                .title {
+                    font-size: 2.5rem;
+
+                }
+
+                padding: 0.5rem;
+                padding-right: 1rem;
+                border-bottom: 1px solid #fefefe;
+            }
+
+            nav.tabs {
+                grid-area: nav;
+                border: unset;
+
+                margin: 0;
+                padding: 0.5rem;
+                padding-left: 0;
+                border-bottom: 1px solid #fefefe;
+                border-left: 1px solid #fefefe;
+            }
+
+            aside.traits {
+                grid-area: traits;
+
+                height: 32px;
+
+                margin: 0;
+                padding: 0.25rem;
+                border-bottom: 1px solid #fefefe;
+            }
+
+            section.tab {
+                grid-area: main;
+
+                padding: 1rem;
+
+                &[data-tab=details] {
+                    .editor, .editor .editor-content {
+                        min-height: 200px;
+                    }
+                }
+
+                &[data-tab=actions].active {
+                    height: 100%;
+                    
+                    display: flex;
+                    flex-direction: column;
+
+                    padding: 0.25rem 1rem 1rem 1rem;
+
+                    .actions {
+                        flex: 0 0 50%;
+                        margin: 0.25rem;
+                        
+                        display: flex;
+                        flex-direction: column;
+
+                        header {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            padding: 0.25rem;
+                            border-bottom: 1px solid #fefefe;
+
+                            .action-name {
+                                font-size: 18px;
+                            }
+                        }
+                        content {
+                            display: flex;
+                            flex-direction: column;
+
+                            .action {
+                                display: flex;
+                                flex-direction: row;
+                                justify-content: space-between;
+                                padding: 0.25rem;
+                                margin: 0.5rem 0;
+                                
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     &.stats-form {
         .window-content {
             padding-top: 0.5rem;
@@ -127,6 +243,7 @@
                             flex: 0 0 100px;
                             line-height: 1.75rem;
                         }
+
                         input {
                             flex: 1;
                         }

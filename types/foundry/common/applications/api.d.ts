@@ -9,18 +9,28 @@ export enum RENDER_STATES {
     RENDERED = 2
 }
 
-export interface ApplicationConfiguration {
+type ApplicationConfiguration = {
+    /** An HTML element identifier used for this Application instance */
     id: string;
+    /** An string discriminator substituted for {id} in the default HTML element identifier for the class*/
     uniqueId: string;
+
+    /** An array of CSS classes to apply to the Application */
     classes: string[];
+    /** The HTMLElement tag type used for the outer Application frame */
     tag: string;
+    /** Configuration of the window behaviors for this Application */
     window: ApplicationWindowConfiguration;
+    /** Click actions supported by the Application and their event handler functions */
     actions: Record<string, ApplicationClickAction>;
+
+    /** Configuration used if the application top-level element is a form */
+    form?: ApplicationFormConfiguration;
+    /** Default positioning data for the application */
     position: Partial<ApplicationPosition>;
-    editable?: boolean;
 }
 
-export interface ApplicationPosition {
+type ApplicationPosition = {
     top: number;
     left: number;
     width: number | "auto";
@@ -29,39 +39,69 @@ export interface ApplicationPosition {
     zIndex: number;
 }
 
-export interface ApplicationWindowConfiguration {
+type ApplicationWindowConfiguration = {
+    /** Is this Application rendered inside a window frame? */
     frame?: boolean;
+    /** Can this Application be positioned via JavaScript or only by CSS */
     positioned?: boolean;
+    /** The window title. Displayed only if the application is framed */
     title?: string;
+    /** An optional Font Awesome icon class displayed left of the window title */
     icon?: string | false;
+    /** An array of window control entries */
     controls?: ApplicationHeaderControlsEntry[];
+    /** Can the window app be minimized by double-clicking on the title */
     minimizable?: boolean;
 }
 
-export interface ApplicationHeaderControlsEntry {
+type ApplicationFormConfiguration = {
+    handler?: ApplicationFormSubmission;
+    submitOnChange?: boolean;
+    closeOnSubmit?: boolean;
+}
+
+type ApplicationFormSubmission = (this: any, event: SubmitEvent | Event, form: HTMLFormElement, formData: FormDataExtended) => Promise<void>;
+
+type ApplicationHeaderControlsEntry = {
+    /** A font-awesome icon class which denotes the control button */
     icon: string;
+    /** The text label for the control button */
     label: string;
+    /** The action name triggered by clicking the control button */
     action: string;
+    /** Is the control button visible for the current client? */
     visible: boolean;
 }
 
-export interface ApplicationConstructorParams {
+type ApplicationConstructorParams = {
     position: ApplicationPosition;
 }
 
-export interface ApplicationRenderContext {
+type ApplicationRenderOptions = {
+    /** Force application rendering. If true, an application which does not yet exist in the DOM is added. If false, only applications which already exist are rendered. */
+    force?: boolean;
+
+    /** A specific position at which to render the Application */
+    position?: ApplicationPosition;
+    /** Updates to the Application window frame */
+    window?: ApplicationWindowRenderOptions;
+    /** Some Application classes, for example the HandlebarsApplication support re-rendering a subset of application parts instead of the full Application HTML. */
+    parts?: string[];
+};
+
+type ApplicationRenderContext = {
     force?: boolean;
     position?: ApplicationPosition;
     window?: ApplicationWindowRenderOptions;
 }
 
-export interface ApplicationWindowRenderOptions {
+type ApplicationWindowRenderOptions = {
     title: string;
     icon: string | false;
     controls: boolean;
 }
 
-export interface ApplicationWindow {
+type ApplicationWindow = {
     title: HTMLHeadingElement;
     icon: HTMLElement;
     close: HTMLButtonElement;
@@ -72,23 +112,20 @@ export interface ApplicationWindow {
     dragTime: number;
 }
 
-type ApplicationRenderOptions = {
-    parts?: string[];
-    force?: boolean;
-    [key: string]: unknown;
-};
-
 type ApplicationClosingOptions = Object;
 
 type ApplicationClickAction = (event: PointerEvent, target: HTMLElement) => any;
 
 
-export class ApplicationV2 extends EventEmitterMixin(Object) {
+export class ApplicationV2<
+    TConfiguration extends ApplicationConfiguration = ApplicationConfiguration,
+    TRenderOptions extends ApplicationRenderOptions = ApplicationRenderOptions
+> extends EventEmitterMixin(Object) {
     /**
      * Applications are constructed by providing an object of configuration options.
      * @param {Partial<ApplicationConfiguration>} [options]     Options used to configure the Application instance
      */
-    constructor(options: Partial<ApplicationConfiguration>);
+    constructor(options: Partial<TConfiguration>);
 
     /**
      * Designates which upstream Application class in this class' inheritance chain is the base application.
@@ -116,7 +153,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * Application instance configuration options.
      * @type {ApplicationConfiguration}
      */
-    options: ApplicationConfiguration;
+    options: TConfiguration;
 
     /**
      * @type {string}
@@ -256,7 +293,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @returns {ApplicationConfiguration}                     Configured options for the application instance
      * @protected
      */
-    _initializeApplicationOptions(options: Partial<ApplicationConfiguration>): ApplicationConfiguration;
+    _initializeApplicationOptions(options: Partial<TConfiguration>): TConfiguration;
 
     /* -------------------------------------------- */
     /*  Rendering                                   */
@@ -271,7 +308,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      *                                                      ApplicationV1#render signature.
      * @returns {Promise<ApplicationV2>}            A Promise which resolves to the rendered Application instance
      */
-    render(options: boolean | ApplicationRenderOptions, _options?: ApplicationRenderOptions): Promise<ApplicationV2>;
+    render(options: boolean | TRenderOptions, _options?: TRenderOptions): Promise<ApplicationV2>;
 
     /* -------------------------------------------- */
 
@@ -281,7 +318,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @param {ApplicationRenderOptions} [options]  Options which configure application rendering behavior
      * @returns {Promise<ApplicationV2>}            A Promise which resolves to the rendered Application instance
      */
-    #render(options: ApplicationRenderOptions): Promise<ApplicationV2>;
+    #render(options: TRenderOptions): Promise<ApplicationV2>;
 
     /* -------------------------------------------- */
 
@@ -290,7 +327,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @param {ApplicationRenderOptions} options      Options which configure application rendering behavior
      * @protected
      */
-    _configureRenderOptions(options: ApplicationRenderOptions): void;
+    _configureRenderOptions(options: TRenderOptions): void;
 
     /* -------------------------------------------- */
 
@@ -300,7 +337,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @returns {Promise<ApplicationRenderContext>}   Context data for the render operation
      * @protected
      */
-    _prepareContext(options?: ApplicationRenderOptions): Promise<Object>;
+    _prepareContext(options?: TRenderOptions): Promise<Object>;
 
     /* -------------------------------------------- */
 
@@ -321,7 +358,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @returns {Promise<HTMLElement|HTMLCollection>} A single rendered HTMLElement or an HTMLCollection of HTMLElements
      * @abstract
      */
-    _renderHTML(context: ApplicationRenderContext, options: ApplicationRenderOptions): Promise<HTMLElement | HTMLCollection | Record<string, HTMLElement>>;
+    _renderHTML(context: ApplicationRenderContext, options: TRenderOptions): Promise<HTMLElement | HTMLCollection | Record<string, HTMLElement>>;
 
     /* -------------------------------------------- */
 
@@ -333,7 +370,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @param {ApplicationRenderOptions} options      Options which configure application rendering behavior
      * @abstract
      */
-    _replaceHTML(result: any, content: HTMLElement, options: ApplicationRenderOptions): void;
+    _replaceHTML(result: any, content: HTMLElement, options: TRenderOptions): void;
 
     /* -------------------------------------------- */
 
@@ -343,7 +380,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @returns {Promise<HTMLElement>}
      * @protected
      */
-    _renderFrame(options: ApplicationRenderOptions): Promise<HTMLElement>;
+    _renderFrame(options: TRenderOptions): Promise<HTMLElement>;
 
     /* -------------------------------------------- */
 
@@ -362,7 +399,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @param {ApplicationRenderOptions} options      Options provided at render-time
      * @protected
      */
-    _updateFrame(options: ApplicationRenderOptions): void;
+    _updateFrame(options: TRenderOptions): void;
 
     /* -------------------------------------------- */
 
@@ -491,7 +528,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @returns {Promise<void>}
      * @protected
      */
-    _preFirstRender(context: ApplicationRenderContext, options: ApplicationRenderOptions): Promise<void>;
+    _preFirstRender(context: ApplicationRenderContext, options: TRenderOptions): Promise<void>;
 
     /**
      * Actions performed after a first render of the Application.
@@ -500,7 +537,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @param {ApplicationRenderOptions} options      Provided render options
      * @protected
      */
-    _onFirstRender(context: ApplicationRenderContext, options: ApplicationRenderOptions): void;
+    _onFirstRender(context: ApplicationRenderContext, options: TRenderOptions): void;
 
     /**
      * Actions performed before any render of the Application.
@@ -510,7 +547,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @returns {Promise<void>}
      * @protected
      */
-    _preRender(context: ApplicationRenderContext, options: ApplicationRenderOptions): Promise<void>;
+    _preRender(context: ApplicationRenderContext, options: TRenderOptions): Promise<void>;
 
     /**
      * Actions performed after any render of the Application.
@@ -519,7 +556,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @param {ApplicationRenderOptions} options      Provided render options
      * @protected
      */
-    _onRender(context: ApplicationRenderContext, options: ApplicationRenderOptions): void;
+    _onRender(context: ApplicationRenderContext, options: TRenderOptions): void;
 
     /**
      * Actions performed before closing the Application.
@@ -528,7 +565,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @returns {Promise<void>}
      * @protected
      */
-    _preClose(options: ApplicationRenderOptions): Promise<void>;
+    _preClose(options: TRenderOptions): Promise<void>;
 
     /**
      * Actions performed after closing the Application.
@@ -536,7 +573,7 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
      * @param {ApplicationRenderOptions} options      Provided render options
      * @protected
      */
-    _onClose(options: ApplicationRenderOptions): void;
+    _onClose(options: TRenderOptions): void;
 
     /**
      * Actions performed before the Application is re-positioned.
@@ -648,38 +685,38 @@ export class ApplicationV2 extends EventEmitterMixin(Object) {
     _awaitTransition(element: HTMLElement, timeout: number): Promise<void>;
 }
 
-type AppV2Constructor = (new (...args: any[]) => ApplicationV2);
+type AppV2Constructor<
+    TConfiguration extends ApplicationConfiguration = ApplicationConfiguration,
+    TRenderOptions extends ApplicationRenderOptions = ApplicationRenderOptions
+> = (new (...args: any[]) => ApplicationV2<TConfiguration, TRenderOptions>);
 
-export interface HandlebarsTemplatePart<BaseClass extends AppV2Constructor> {
+type HandlebarsTemplatePart = {
+    /** The template entry-point for the part */
     template: string;
+    /** A CSS id to assign to the top-level element of the rendered part. This id string is automatically prefixed by the application id. */
     id?: string;
+    /** An array of CSS classes to apply to the top-level element of the rendered part. */
     classes?: string[];
+    /** An array of templates that are required to render the part. If omitted, only the entry-point is inferred as required. */
     templates?: string[];
+    /** An array of selectors within this part whose scroll positions should be persisted during a re-render operation. A blank string is used to denote that the root level of the part is scrollable. */
     scrollable?: string[];
-    forms?: Record<string, ApplicationFormConfiguration<BaseClass>>;
+    /** A registry of forms selectors and submission handlers. */
+    forms?: Record<string, ApplicationFormConfiguration>;
 }
 
-export type ApplicationFormConfiguration<BaseClass extends AppV2Constructor> = {
-    handler: FormHandlerCallback<BaseClass>;
-    submitOnChange?: boolean;
-    closeOnSubmit?: boolean;
-}
-
-export type FormHandlerCallback<BaseClass extends AppV2Constructor> = (
-    this: InstanceType<BaseClass>,
-    event: SubmitEvent|Event,
-    form: HTMLFormElement,
-    formData: FormDataExtended
-) => Promise<void>;
+type HandlebarsRenderOptions = {
+    parts: string[];
+} & ApplicationRenderOptions;
 
 //@ts-ignore
-export function HandlebarsApplicationMixin<BaseClass extends AppV2Constructor>(BaseClass: BaseClass) {
+export function HandlebarsApplicationMixin<BaseClass extends AppV2Constructor<ApplicationConfiguration, HandlebarsRenderOptions>, TRenderOptions extends HandlebarsRenderOptions = HandlebarsRenderOptions>(BaseClass: BaseClass) {
     class ApplicationV2Mixin extends BaseClass {
         /**
          * Configure a registry of template parts which are supported for this application for partial rendering.
          * @type {Record<string, HandlebarsTemplatePart>}
          */
-        static PARTS: Record<string, HandlebarsTemplatePart<BaseClass>>;
+        static PARTS: Record<string, HandlebarsTemplatePart>;
 
         /**
          * A record of all rendered template parts.
@@ -689,24 +726,24 @@ export function HandlebarsApplicationMixin<BaseClass extends AppV2Constructor>(B
         #parts: Record<string, HTMLElement>;
 
         /** @inheritDoc */
-        override _configureRenderOptions(options: ApplicationRenderOptions): void;
+        override _configureRenderOptions(options: TRenderOptions): void;
 
         /* -------------------------------------------- */
 
         /** @inheritDoc */
-        override _preFirstRender(context: Object, options: ApplicationRenderOptions): Promise<void>;
+        override _preFirstRender(context: Object, options: TRenderOptions): Promise<void>;
 
         /* -------------------------------------------- */
 
         /**
          * Render each configured application part using Handlebars templates.
          * @param {ApplicationRenderContext} context        Context data for the render operation
-         * @param {ApplicationRenderOptions} options        Options which configure application rendering behavior
+         * @param {HandlebarsRenderOptions} options        Options which configure application rendering behavior
          * @returns {Promise<Record<string, HTMLElement>>}  A single rendered HTMLElement for each requested part
          * @protected
          * @override
          */
-        override _renderHTML(context: ApplicationRenderContext, options: ApplicationRenderOptions): Promise<Record<string, HTMLElement>>;
+        override _renderHTML(context: ApplicationRenderContext, options: TRenderOptions): Promise<Record<string, HTMLElement>>;
 
         /* -------------------------------------------- */
 
@@ -717,7 +754,7 @@ export function HandlebarsApplicationMixin<BaseClass extends AppV2Constructor>(B
          * @param {string} htmlString               The string rendered for the part
          * @returns {HTMLElement}                   The parsed HTMLElement for the part
          */
-        #parsePartHTML(partId: string, part: HandlebarsTemplatePart<BaseClass>, htmlString: string): HTMLElement;
+        #parsePartHTML(partId: string, part: HandlebarsTemplatePart, htmlString: string): HTMLElement;
         /* -------------------------------------------- */
 
         /**
@@ -765,18 +802,98 @@ export function HandlebarsApplicationMixin<BaseClass extends AppV2Constructor>(B
          * @param {ApplicationRenderOptions} options    Rendering options passed to the render method
          * @protected
          */
-        _attachPartListeners(partId: string, htmlElement: HTMLElement, options: ApplicationRenderOptions): void;
+        _attachPartListeners(partId: string, htmlElement: HTMLElement, options: TRenderOptions): void;
 
         /* -------------------------------------------- */
 
         /**
          * Handle form submissions by processing form data and passing that data onwards to the registered handler.
          * @param {HTMLFormElement} form                The form element being submitted
-         * @param {FormHandlerCallback} handler         The registered submission handler function
-         * @param {SubmitEvent} event                   The form submission event
+         * @param {ApplicationFormSubmission} config    The registered submission handler function
+         * @param {Event|SubmitEvent} event             The form submission event
+         * @returns {Promise<void>}
          */
-        #onSubmitForm(form: HTMLFormElement, handler: FormHandlerCallback<BaseClass>, event: SubmitEvent): void;
+        #onSubmitForm(form: HTMLFormElement, config: ApplicationFormSubmission, event: Event | SubmitEvent): Promise<void>;
 
+        /* -------------------------------------------- */
+
+        /**
+         * Handle changes to an input element within the form.
+         * @param {HTMLFormElement} form                The form element being submitted
+         * @param {ApplicationFormSubmission} config    The registered submission handler function
+         * @param {Event|SubmitEvent} event             The form submission event
+         */
+        #onChangeForm(form: HTMLFormElement, config: ApplicationFormSubmission, event: Event | SubmitEvent);
     }
+
     return ApplicationV2Mixin;
+}
+
+type DocumentSheetConfiguration<TDocument extends foundry.abstract.Document = foundry.abstract.Document> = {
+    document: TDocument;
+    viewPermission: number;
+    editPermission: number;
+    sheetConfig: boolean;
+} & ApplicationConfiguration;
+
+type DocumentSheetRenderOptions = {
+    renderContext: string;
+    renderData: object;
+} & ApplicationRenderOptions;
+
+export type HandlebarsDocumentSheetConfiguration<TDocument extends foundry.abstract.Document = foundry.abstract.Document> = DocumentSheetConfiguration<TDocument> & DocumentSheetRenderOptions & HandlebarsRenderOptions;
+
+export class DocumentSheetV2<
+    TDocument extends foundry.abstract.Document = foundry.abstract.Document,
+    TRenderOptions extends DocumentSheetRenderOptions = DocumentSheetRenderOptions,
+    TConfiguration extends DocumentSheetConfiguration = DocumentSheetConfiguration
+> extends ApplicationV2<TConfiguration, TRenderOptions> {
+
+    /** @inheritdoc */
+    static DEFAULT_OPTIONS: Omit<DocumentSheetConfiguration, 'uniqueId'>;
+
+    get document(): TDocument;
+    #document: TDocument;
+
+    /**
+     * Is this Document sheet visible to the current User?
+     * This is governed by the viewPermission threshold configured for the class.
+     * @type {boolean}
+     */
+    get isVisible(): boolean
+
+    /**
+     * Is this Document sheet editable by the current User?
+     * This is governed by the editPermission threshold configured for the class.
+     * @type {boolean}
+     */
+    get isEditable(): boolean
+
+    /**
+     * Prepare data used to update the Item upon form submission.
+     * @param {FormDataExtended} formData           Submitted form data
+     * @returns {object}                            Prepared submission data as an object
+     * @protected
+     */
+    _prepareSubmitData(formData: FormDataExtended): Record<string, unknown>;
+}
+
+export {
+    ApplicationConfiguration,
+    ApplicationPosition,
+    ApplicationWindowConfiguration,
+    ApplicationFormConfiguration,
+    ApplicationHeaderControlsEntry,
+    ApplicationConstructorParams,
+    ApplicationRenderOptions,
+    ApplicationWindowRenderOptions,
+    ApplicationRenderContext,
+    ApplicationClosingOptions,
+    ApplicationClickAction,
+    ApplicationFormSubmission,
+    AppV2Constructor,
+    DocumentSheetConfiguration,
+    DocumentSheetRenderOptions,
+    HandlebarsRenderOptions,
+    HandlebarsTemplatePart
 }
