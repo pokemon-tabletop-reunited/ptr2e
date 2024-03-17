@@ -709,126 +709,6 @@ type HandlebarsRenderOptions = {
     parts: string[];
 } & ApplicationRenderOptions;
 
-//@ts-ignore
-export function HandlebarsApplicationMixin<BaseClass extends AppV2Constructor<ApplicationConfiguration, HandlebarsRenderOptions>, TRenderOptions extends HandlebarsRenderOptions = HandlebarsRenderOptions>(BaseClass: BaseClass) {
-    class ApplicationV2Mixin extends BaseClass {
-        /**
-         * Configure a registry of template parts which are supported for this application for partial rendering.
-         * @type {Record<string, HandlebarsTemplatePart>}
-         */
-        static PARTS: Record<string, HandlebarsTemplatePart>;
-
-        /**
-         * A record of all rendered template parts.
-         * @returns {Record<string, HTMLElement>}
-         */
-        get parts(): Record<string, HTMLElement>;
-        #parts: Record<string, HTMLElement>;
-
-        /** @inheritDoc */
-        override _configureRenderOptions(options: TRenderOptions): void;
-
-        /* -------------------------------------------- */
-
-        /** @inheritDoc */
-        override _preFirstRender(context: Object, options: TRenderOptions): Promise<void>;
-
-        /* -------------------------------------------- */
-
-        /**
-         * Render each configured application part using Handlebars templates.
-         * @param {ApplicationRenderContext} context        Context data for the render operation
-         * @param {HandlebarsRenderOptions} options        Options which configure application rendering behavior
-         * @returns {Promise<Record<string, HTMLElement>>}  A single rendered HTMLElement for each requested part
-         * @protected
-         * @override
-         */
-        override _renderHTML(context: ApplicationRenderContext, options: TRenderOptions): Promise<Record<string, HTMLElement>>;
-
-        /* -------------------------------------------- */
-
-        /**
-         * Parse the returned HTML string from template rendering into a uniquely identified HTMLElement for insertion.
-         * @param {string} partId                   The id of the part being rendered
-         * @param {HandlebarsTemplatePart} part     Configuration of the part being parsed
-         * @param {string} htmlString               The string rendered for the part
-         * @returns {HTMLElement}                   The parsed HTMLElement for the part
-         */
-        #parsePartHTML(partId: string, part: HandlebarsTemplatePart, htmlString: string): HTMLElement;
-        /* -------------------------------------------- */
-
-        /**
-         * Replace the HTML of the application with the result provided by Handlebars rendering.
-         * @param {Record<string, HTMLElement>} result  The result from Handlebars template rendering
-         * @param {HTMLElement} content                 The content element into which the rendered result must be inserted
-         * @param {ApplicationRenderOptions} options    Options which configure application rendering behavior
-         * @protected
-         * @override
-         */
-        override _replaceHTML(result: Record<string, HTMLElement>, content: HTMLElement, options: ApplicationRenderOptions): void;
-
-        /* -------------------------------------------- */
-
-        /**
-         * Prepare data used to synchronize the state of a template part.
-         * @param {string} partId                       The id of the part being rendered
-         * @param {HTMLElement} newElement              The new rendered HTML element for the part
-         * @param {HTMLElement} priorElement            The prior rendered HTML element for the part
-         * @param {object} state                        A state object which is used to synchronize after replacement
-         * @protected
-         */
-        _preSyncPartState(partId: string, newElement: HTMLElement, priorElement: HTMLElement, state: Object): void;
-
-        /* -------------------------------------------- */
-
-        /**
-         * Synchronize the state of a template part after it has been rendered and replaced in the DOM.
-         * @param {string} partId                       The id of the part being rendered
-         * @param {HTMLElement} newElement              The new rendered HTML element for the part
-         * @param {HTMLElement} priorElement            The prior rendered HTML element for the part
-         * @param {object} state                        A state object which is used to synchronize after replacement
-         * @protected
-         */
-        _syncPartState(partId: string, newElement: HTMLElement, priorElement: HTMLElement, state: Object): void;
-
-        /* -------------------------------------------- */
-        /*  Event Listeners and Handlers                */
-        /* -------------------------------------------- */
-
-        /**
-         * Attach event listeners to rendered template parts.
-         * @param {string} partId                       The id of the part being rendered
-         * @param {HTMLElement} htmlElement             The rendered HTML element for the part
-         * @param {ApplicationRenderOptions} options    Rendering options passed to the render method
-         * @protected
-         */
-        _attachPartListeners(partId: string, htmlElement: HTMLElement, options: TRenderOptions): void;
-
-        /* -------------------------------------------- */
-
-        /**
-         * Handle form submissions by processing form data and passing that data onwards to the registered handler.
-         * @param {HTMLFormElement} form                The form element being submitted
-         * @param {ApplicationFormSubmission} config    The registered submission handler function
-         * @param {Event|SubmitEvent} event             The form submission event
-         * @returns {Promise<void>}
-         */
-        #onSubmitForm(form: HTMLFormElement, config: ApplicationFormSubmission, event: Event | SubmitEvent): Promise<void>;
-
-        /* -------------------------------------------- */
-
-        /**
-         * Handle changes to an input element within the form.
-         * @param {HTMLFormElement} form                The form element being submitted
-         * @param {ApplicationFormSubmission} config    The registered submission handler function
-         * @param {Event|SubmitEvent} event             The form submission event
-         */
-        #onChangeForm(form: HTMLFormElement, config: ApplicationFormSubmission, event: Event | SubmitEvent);
-    }
-
-    return ApplicationV2Mixin;
-}
-
 type DocumentSheetConfiguration<TDocument extends foundry.abstract.Document = foundry.abstract.Document> = {
     document: TDocument;
     viewPermission: number;
@@ -850,7 +730,7 @@ export class DocumentSheetV2<
 > extends ApplicationV2<TConfiguration, TRenderOptions> {
 
     /** @inheritdoc */
-    static DEFAULT_OPTIONS: Omit<DocumentSheetConfiguration, 'uniqueId'>;
+    static override DEFAULT_OPTIONS: Omit<DocumentSheetConfiguration, 'uniqueId'>;
 
     get document(): TDocument;
     #document: TDocument;
@@ -894,6 +774,8 @@ export {
     AppV2Constructor,
     DocumentSheetConfiguration,
     DocumentSheetRenderOptions,
-    HandlebarsRenderOptions,
-    HandlebarsTemplatePart
+    HandlebarsTemplatePart,
+    HandlebarsRenderOptions
 }
+
+export * from "./handlebars-application.ts";

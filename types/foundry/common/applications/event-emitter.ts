@@ -1,4 +1,4 @@
-type Constructor = (new (...args: any[]) => any);
+type Constructor<T = any> = (new (...args: any[]) => T);
 export type EmittedEventListener = (event: Event) => any;
 
 /**
@@ -6,24 +6,15 @@ export type EmittedEventListener = (event: Event) => any;
  * @template {Constructor} BaseClass
  * @param {BaseClass} BaseClass         Some base class augmented with event emitter functionality
  */
-//@ts-ignore
 export function EventEmitterMixin<BaseClass extends Constructor>(BaseClass: BaseClass) {
-    class EventEmitter extends BaseClass {
-
+    abstract class EventEmitter extends BaseClass {
         /**
          * An array of event types which are valid for this class.
          * @type {string[]}
          */
         static emittedEvents: string[];
-
-        /**
-         * A mapping of registered events.
-         * @type {Object<string, Map<EmittedEventListener, {fn: EmittedEventListener, once: boolean}>>}
-         */
-        #events: { [s: string]: Map<EmittedEventListener, { fn: EmittedEventListener; once: boolean; }>; }
-
-        /* -------------------------------------------- */
-
+    }
+    interface EventEmitter {
         /**
          * Add a new event listener for a certain type of event.
          * @see https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
