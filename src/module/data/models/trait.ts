@@ -1,5 +1,13 @@
 class Trait {
-
+    static isValid(value: unknown): value is Trait {
+        if(typeof value === 'string') {
+            return !!game.ptr.data.traits.get(value);
+        }
+        if(value instanceof Trait) {
+            return true;
+        }
+        return false;
+    }
 }
 
 interface Trait {

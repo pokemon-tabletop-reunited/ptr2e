@@ -11,10 +11,10 @@ export default class AttackPTR2e extends ActionPTR2e {
         const fields = foundry.data.fields;
         return {
             ...super.defineSchema(),
-            types: new fields.SetField(new fields.StringField({ required: true, choices: getTypes(), initial: PTRCONSTS.Types.UNTYPED, label: "PTR2E.Fields.PokemonType.Label", hint: "PTR2E.Fields.PokemonType.Hint" }), { initial: ["untyped"], label: "PTR2E.Fields.PokemonType.LabelPlural", hint: "PTR2E.Fields.PokemonType.HintPlural", required: true, validate: (d) => (d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false), validationError: "PTR2E.Errors.PokemonType" }),
-            category: new fields.StringField({ required: true, choices: Object.values(PTRCONSTS.Categories), initial: PTRCONSTS.Categories.PHYSICAL, label: "PTR2E.Fields.PokemonCategory.Label", hint: "PTR2E.Fields.PokemonCategory.Hint" }),
-            power: new fields.NumberField({ required: false, nullable: true, min: 10, max: 250, label: "PTR2E.Fields.Power.Label", hint: "PTR2E.Fields.Power.Hint" }),
-            accuracy: new fields.NumberField({ required: false, nullable: true, min: 10, max: 100, label: "PTR2E.Fields.Accuracy.Label", hint: "PTR2E.Fields.Accuracy.Hint" }),
+            types: new fields.SetField(new fields.StringField({ required: true, choices: getTypes(), initial: PTRCONSTS.Types.UNTYPED, label: "PTR2E.FIELDS.pokemonType.label", hint: "PTR2E.FIELDS.pokemonType.hint" }), { initial: ["untyped"], label: "PTR2E.FIELDS.pokemonType.labelPlural", hint: "PTR2E.FIELDS.pokemonType.hintPlural", required: true, validate: (d) => (d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false), validationError: "PTR2E.Errors.PokemonType" }),
+            category: new fields.StringField({ required: true, choices: Object.values(PTRCONSTS.Categories), initial: PTRCONSTS.Categories.PHYSICAL, label: "PTR2E.FIELDS.pokemonCategory.label", hint: "PTR2E.FIELDS.pokemonCategory.hint" }),
+            power: new fields.NumberField({ required: false, nullable: true, min: 10, max: 250, label: "PTR2E.FIELDS.power.label", hint: "PTR2E.FIELDS.power.hint" }),
+            accuracy: new fields.NumberField({ required: false, nullable: true, min: 10, max: 100, label: "PTR2E.FIELDS.accuracy.label", hint: "PTR2E.FIELDS.accuracy.hint" }),
             contestType: new fields.StringField({ required: true, blank: true, initial: "" }),
             contestEffect: new fields.StringField({ required: true, blank: true, initial: "" }),
         }

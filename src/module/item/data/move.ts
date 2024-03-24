@@ -10,6 +10,8 @@ export default abstract class MoveSystem extends HasBase(foundry.abstract.TypeDa
      */
     declare parent: MovePTR2e;
 
+    static LOCALIZATION_PREFIXES = ["PTR2E", "PTR2E.MoveSystem"];
+
     override async toEmbed(_config: foundry.abstract.DocumentHTMLEmbedConfig, options: EnrichmentOptions = {}): Promise<HTMLElement | HTMLCollection | null> {
         options = { ...options, _embedDepth: (options._embedDepth ?? 0) + 1, relativeTo: this };
 

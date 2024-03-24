@@ -6,7 +6,7 @@ import { TemplateConstructor } from './data-template.ts';
  * @group Mixins
  */
 export default function HasTraits<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
-    class TemplateClass extends baseClass {
+    abstract class TemplateClass extends baseClass {
         declare _source: InstanceType<typeof baseClass>['_source'] & {
             //TODO: Update this to Trait String
             traits: string[];

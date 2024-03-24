@@ -31,7 +31,7 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
         return {
             advancement: new fields.SchemaField({
                 experience: new fields.SchemaField({
-                    current: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0, label: "PTR2E.Fields.Experience.Label", hint: "PTR2E.Fields.Experience.Hint" })
+                    current: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0})
                 })
             }),
             attributes: new fields.SchemaField({
@@ -61,7 +61,7 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
             capabilities: new fields.ObjectField(),
             traits: new fields.SetField(new fields.StringField()),
             type: new fields.SchemaField({
-                types: new fields.SetField(new fields.StringField({ required: true, choices: getTypes, initial: "untyped", label: "PTR2E.Fields.PokemonType.Label", hint: "PTR2E.Fields.PokemonType.Hint" }), { initial: ["untyped"], label: "PTR2E.Fields.PokemonType.LabelPlural", hint: "PTR2E.Fields.PokemonType.HintPlural", required: true, validate: (d) => (d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false), validationError: "PTR2E.Errors.PokemonType" }),
+                types: new fields.SetField(new fields.StringField({ required: true, choices: getTypes, initial: "untyped", label: "PTR2E.FIELDS.PokemonType.Label", hint: "PTR2E.FIELDS.PokemonType.Hint" }), { initial: ["untyped"], label: "PTR2E.FIELDS.PokemonType.LabelPlural", hint: "PTR2E.FIELDS.PokemonType.HintPlural", required: true, validate: (d) => (d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false), validationError: "PTR2E.Errors.PokemonType" }),
             }),
             powerPoints: new fields.SchemaField({
                 value: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),

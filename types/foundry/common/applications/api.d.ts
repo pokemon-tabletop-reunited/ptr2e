@@ -1,4 +1,4 @@
-import { EventEmitterMixin } from "./event-emitter.ts";
+import { EventEmitter, EventEmitterMixin } from "./event-emitter.ts";
 
 export enum RENDER_STATES {
     ERROR = -3,
@@ -6,7 +6,7 @@ export enum RENDER_STATES {
     CLOSED = -1,
     NONE = 0,
     RENDERING = 1,
-    RENDERED = 2
+    RENDERED = 2,
 }
 
 type ApplicationConfiguration = {
@@ -28,7 +28,7 @@ type ApplicationConfiguration = {
     form?: ApplicationFormConfiguration;
     /** Default positioning data for the application */
     position: Partial<ApplicationPosition>;
-}
+};
 
 type ApplicationPosition = {
     top: number;
@@ -37,7 +37,7 @@ type ApplicationPosition = {
     height: number | "auto";
     scale: number;
     zIndex: number;
-}
+};
 
 type ApplicationWindowConfiguration = {
     /** Is this Application rendered inside a window frame? */
@@ -52,15 +52,20 @@ type ApplicationWindowConfiguration = {
     controls?: ApplicationHeaderControlsEntry[];
     /** Can the window app be minimized by double-clicking on the title */
     minimizable?: boolean;
-}
+};
 
 type ApplicationFormConfiguration = {
     handler?: ApplicationFormSubmission;
     submitOnChange?: boolean;
     closeOnSubmit?: boolean;
-}
+};
 
-type ApplicationFormSubmission = (this: any, event: SubmitEvent | Event, form: HTMLFormElement, formData: FormDataExtended) => Promise<void>;
+type ApplicationFormSubmission = (
+    this: any,
+    event: SubmitEvent | Event,
+    form: HTMLFormElement,
+    formData: FormDataExtended
+) => Promise<void>;
 
 type ApplicationHeaderControlsEntry = {
     /** A font-awesome icon class which denotes the control button */
@@ -71,11 +76,11 @@ type ApplicationHeaderControlsEntry = {
     action: string;
     /** Is the control button visible for the current client? */
     visible: boolean;
-}
+};
 
 type ApplicationConstructorParams = {
     position: ApplicationPosition;
-}
+};
 
 type ApplicationRenderOptions = {
     /** Force application rendering. If true, an application which does not yet exist in the DOM is added. If false, only applications which already exist are rendered. */
@@ -93,13 +98,13 @@ type ApplicationRenderContext = {
     force?: boolean;
     position?: ApplicationPosition;
     window?: ApplicationWindowRenderOptions;
-}
+};
 
 type ApplicationWindowRenderOptions = {
     title: string;
     icon: string | false;
     controls: boolean;
-}
+};
 
 type ApplicationWindow = {
     title: HTMLHeadingElement;
@@ -110,16 +115,15 @@ type ApplicationWindow = {
     onDrag: Function;
     dragStartPosition: ApplicationPosition;
     dragTime: number;
-}
+};
 
 type ApplicationClosingOptions = Object;
 
 type ApplicationClickAction = (event: PointerEvent, target: HTMLElement) => any;
 
-
 export class ApplicationV2<
     TConfiguration extends ApplicationConfiguration = ApplicationConfiguration,
-    TRenderOptions extends ApplicationRenderOptions = ApplicationRenderOptions
+    TRenderOptions extends ApplicationRenderOptions = ApplicationRenderOptions,
 > extends EventEmitterMixin(Object) {
     /**
      * Applications are constructed by providing an object of configuration options.
@@ -139,7 +143,7 @@ export class ApplicationV2<
      * The default configuration options which are assigned to every instance of this Application class.
      * @type {Omit<ApplicationConfiguration, uniqueId>}
      */
-    static DEFAULT_OPTIONS: Omit<ApplicationConfiguration, 'uniqueId'>;
+    static DEFAULT_OPTIONS: Omit<ApplicationConfiguration, "uniqueId">;
 
     /**
      * The sequence of rendering states that describe the Application life-cycle.
@@ -185,7 +189,7 @@ export class ApplicationV2<
      * Data pertaining to the minimization status of the Application.
      * @type {{active: boolean, [priorWidth]: number, [priorHeight]: number}}
      */
-    #minimization: { active: boolean; priorWidth: number; priorHeight: number; };
+    #minimization: { active: boolean; priorWidth: number; priorHeight: number };
 
     /**
      * @type {ApplicationPosition}
@@ -230,7 +234,7 @@ export class ApplicationV2<
      * A convenience reference to the title of the Application window.
      * @returns {string}
      */
-    get title(): string
+    get title(): string;
 
     /**
      * The HTMLElement which renders this Application into the DOM.
@@ -248,7 +252,7 @@ export class ApplicationV2<
      * The current position of the application with respect to the window.document.body.
      * @type {ApplicationPosition}
      */
-    position: ApplicationPosition
+    position: ApplicationPosition;
 
     /**
      * Is this Application instance currently rendered?
@@ -358,7 +362,10 @@ export class ApplicationV2<
      * @returns {Promise<HTMLElement|HTMLCollection>} A single rendered HTMLElement or an HTMLCollection of HTMLElements
      * @abstract
      */
-    _renderHTML(context: ApplicationRenderContext, options: TRenderOptions): Promise<HTMLElement | HTMLCollection | Record<string, HTMLElement>>;
+    _renderHTML(
+        context: ApplicationRenderContext,
+        options: TRenderOptions
+    ): Promise<HTMLElement | HTMLCollection | Record<string, HTMLElement>>;
 
     /* -------------------------------------------- */
 
@@ -515,7 +522,17 @@ export class ApplicationV2<
      * @param {any[]} [options.hookArgs]        Arguments passed to the requested hook function
      * @returns {Promise<void>}         A promise which resoles once the handler is complete
      */
-    #doEvent(handler: Function, options: { async: boolean; handlerArgs: any[]; debugText: string; eventName: string; hookName: string; hookArgs: any[] }): Promise<void>;
+    #doEvent(
+        handler: Function,
+        options: {
+            async: boolean;
+            handlerArgs: any[];
+            debugText: string;
+            eventName: string;
+            hookName: string;
+            hookArgs: any[];
+        }
+    ): Promise<void>;
 
     /* -------------------------------------------- */
     /*  Rendering Life-Cycle Methods                */
@@ -687,8 +704,8 @@ export class ApplicationV2<
 
 type AppV2Constructor<
     TConfiguration extends ApplicationConfiguration = ApplicationConfiguration,
-    TRenderOptions extends ApplicationRenderOptions = ApplicationRenderOptions
-> = (new (...args: any[]) => ApplicationV2<TConfiguration, TRenderOptions>);
+    TRenderOptions extends ApplicationRenderOptions = ApplicationRenderOptions,
+> = new (...args: any[]) => ApplicationV2<TConfiguration, TRenderOptions>;
 
 type HandlebarsTemplatePart = {
     /** The template entry-point for the part */
@@ -703,13 +720,15 @@ type HandlebarsTemplatePart = {
     scrollable?: string[];
     /** A registry of forms selectors and submission handlers. */
     forms?: Record<string, ApplicationFormConfiguration>;
-}
+};
 
 type HandlebarsRenderOptions = {
     parts: string[];
 } & ApplicationRenderOptions;
 
-type DocumentSheetConfiguration<TDocument extends foundry.abstract.Document = foundry.abstract.Document> = {
+type DocumentSheetConfiguration<
+    TDocument extends foundry.abstract.Document = foundry.abstract.Document,
+> = {
     document: TDocument;
     viewPermission: number;
     editPermission: number;
@@ -721,16 +740,17 @@ type DocumentSheetRenderOptions = {
     renderData: object;
 } & ApplicationRenderOptions;
 
-export type HandlebarsDocumentSheetConfiguration<TDocument extends foundry.abstract.Document = foundry.abstract.Document> = DocumentSheetConfiguration<TDocument> & DocumentSheetRenderOptions & HandlebarsRenderOptions;
+export type HandlebarsDocumentSheetConfiguration<
+    TDocument extends foundry.abstract.Document = foundry.abstract.Document,
+> = DocumentSheetConfiguration<TDocument> & DocumentSheetRenderOptions & HandlebarsRenderOptions;
 
 export class DocumentSheetV2<
     TDocument extends foundry.abstract.Document = foundry.abstract.Document,
     TRenderOptions extends DocumentSheetRenderOptions = DocumentSheetRenderOptions,
-    TConfiguration extends DocumentSheetConfiguration = DocumentSheetConfiguration
+    TConfiguration extends DocumentSheetConfiguration = DocumentSheetConfiguration,
 > extends ApplicationV2<TConfiguration, TRenderOptions> {
-
     /** @inheritdoc */
-    static override DEFAULT_OPTIONS: Omit<DocumentSheetConfiguration, 'uniqueId'>;
+    static override DEFAULT_OPTIONS: Omit<DocumentSheetConfiguration, "uniqueId">;
 
     get document(): TDocument;
     #document: TDocument;
@@ -740,14 +760,14 @@ export class DocumentSheetV2<
      * This is governed by the viewPermission threshold configured for the class.
      * @type {boolean}
      */
-    get isVisible(): boolean
+    get isVisible(): boolean;
 
     /**
      * Is this Document sheet editable by the current User?
      * This is governed by the editPermission threshold configured for the class.
      * @type {boolean}
      */
-    get isEditable(): boolean
+    get isEditable(): boolean;
 
     /**
      * Prepare data used to update the Item upon form submission.
@@ -757,6 +777,7 @@ export class DocumentSheetV2<
      */
     _prepareSubmitData(formData: FormDataExtended): Record<string, unknown>;
 }
+
 
 export {
     ApplicationConfiguration,
@@ -775,7 +796,123 @@ export {
     DocumentSheetConfiguration,
     DocumentSheetRenderOptions,
     HandlebarsTemplatePart,
-    HandlebarsRenderOptions
-}
+    HandlebarsRenderOptions,
+};
 
 export * from "./handlebars-application.ts";
+
+// export type Mixin<
+//     MixinClass extends new (...args: any[]) => any,
+//     BaseClass extends abstract new (...args: any[]) => any,
+// > = Pick<BaseClass, keyof BaseClass> &
+//     Pick<MixinClass, keyof MixinClass> & {
+//         new (
+//             ...args: ConstructorParameters<MixinClass>
+//         ): InstanceType<BaseClass> & InstanceType<MixinClass>;
+//     };
+
+// declare class HandlebarsApplicationV2 {
+//     /**
+//      * Configure a registry of template parts which are supported for this application for partial rendering.
+//      * @type {Record<string, HandlebarsTemplatePart>}
+//      */
+//     static PARTS: Record<string, HandlebarsTemplatePart>;
+// }
+
+// interface HandlebarsApplicationV2<TRenderOptions extends HandlebarsRenderOptions = HandlebarsRenderOptions> {
+//     /**
+//      * A record of all rendered template parts.
+//      * @returns {Record<string, HTMLElement>}
+//      */
+//     get parts(): Record<string, HTMLElement>;
+
+//     /** @inheritDoc */
+//     _configureRenderOptions(options: TRenderOptions): void;
+
+//     /* -------------------------------------------- */
+
+//     /** @inheritDoc */
+//     _preFirstRender(context: Object, options: TRenderOptions): Promise<void>;
+
+//     /* -------------------------------------------- */
+
+//     /**
+//      * Render each configured application part using Handlebars templates.
+//      * @param {ApplicationRenderContext} context        Context data for the render operation
+//      * @param {HandlebarsRenderOptions} options        Options which configure application rendering behavior
+//      * @returns {Promise<Record<string, HTMLElement>>}  A single rendered HTMLElement for each requested part
+//      * @protected
+//      * @override
+//      */
+//     _renderHTML(
+//         context: ApplicationRenderContext,
+//         options: TRenderOptions
+//     ): Promise<Record<string, HTMLElement>>;
+
+//     /* -------------------------------------------- */
+
+//     /**
+//      * Replace the HTML of the application with the result provided by Handlebars rendering.
+//      * @param {Record<string, HTMLElement>} result  The result from Handlebars template rendering
+//      * @param {HTMLElement} content                 The content element into which the rendered result must be inserted
+//      * @param {ApplicationRenderOptions} options    Options which configure application rendering behavior
+//      * @protected
+//      * @override
+//      */
+//     _replaceHTML(
+//         result: Record<string, HTMLElement>,
+//         content: HTMLElement,
+//         options: ApplicationRenderOptions
+//     ): void;
+
+//     /* -------------------------------------------- */
+
+//     /**
+//      * Prepare data used to synchronize the state of a template part.
+//      * @param {string} partId                       The id of the part being rendered
+//      * @param {HTMLElement} newElement              The new rendered HTML element for the part
+//      * @param {HTMLElement} priorElement            The prior rendered HTML element for the part
+//      * @param {object} state                        A state object which is used to synchronize after replacement
+//      * @protected
+//      */
+//     _preSyncPartState(
+//         partId: string,
+//         newElement: HTMLElement,
+//         priorElement: HTMLElement,
+//         state: Object
+//     ): void;
+
+//     /* -------------------------------------------- */
+
+//     /**
+//      * Synchronize the state of a template part after it has been rendered and replaced in the DOM.
+//      * @param {string} partId                       The id of the part being rendered
+//      * @param {HTMLElement} newElement              The new rendered HTML element for the part
+//      * @param {HTMLElement} priorElement            The prior rendered HTML element for the part
+//      * @param {object} state                        A state object which is used to synchronize after replacement
+//      * @protected
+//      */
+//     _syncPartState(
+//         partId: string,
+//         newElement: HTMLElement,
+//         priorElement: HTMLElement,
+//         state: Object
+//     ): void;
+
+//     /* -------------------------------------------- */
+//     /*  Event Listeners and Handlers                */
+//     /* -------------------------------------------- */
+
+//     /**
+//      * Attach event listeners to rendered template parts.
+//      * @param {string} partId                       The id of the part being rendered
+//      * @param {HTMLElement} htmlElement             The rendered HTML element for the part
+//      * @param {ApplicationRenderOptions} options    Rendering options passed to the render method
+//      * @protected
+//      */
+//     _attachPartListeners(partId: string, htmlElement: HTMLElement, options: TRenderOptions): void;
+// }
+
+// export function HandlebarsApplicationMixin<BaseClass extends AppV2Constructor<ApplicationConfiguration, HandlebarsRenderOptions>>(
+//     BaseClass: BaseClass
+// ): Mixin<typeof HandlebarsApplicationV2, BaseClass>;

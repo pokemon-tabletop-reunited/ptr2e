@@ -10,7 +10,32 @@
                 "traits": {
                     "label": "Traits",
                     "hint": "The traits of the actor."
+                },
+                "advancement": {
+                    "label": "Advancement",
+                    "hint": "The advancement of the actor."
+                },
+                "experience": {
+                    "label": "Experience",
+                    "hint": "The experience of the actor."
+                },
+                "advancement.experience": {
+                    "label": "Experience",
+                    "hint": "The experience of the actor."
+                },
+                "attributes": {
+                    "label": "Attributes",
+                    "hint": "The attributes of the actor."
+                },
+                "skills": {
+                    "label": "Skills",
+                    "hint": "The skills of the actor."
                 }
+            }
+        },
+        "MoveSystem": {
+            "FIELDS": {
+
             }
         },
         "ActorSheet": {
@@ -53,49 +78,91 @@
                 "ResetAV": "Reset to BaseAV"
             }
         },
-        "Fields": {
-            "Slug": {
-                "Label": "Slug",
-                "Hint": "The slug is a unique identifier for the actor and is used in the URL of the actor's sheet."
+        "FIELDS": {
+            "actions": {
+                "label": "Actions",
+                "attack": {
+                    "label": "Attack Action",
+                    "accuracy": {
+                        "label": "Accuracy Localization Prefix",
+                        "hint": "The accuracy of the attack."
+                    }
+                }
             },
-            "Description": {
-                "Label": "Description",
-                "Hint": "A brief description of the effect."
+            "slug": {
+                "label": "Slug",
+                "hint": "The slug is a unique identifier for this entity."
             },
-            "Container": {
-                "Label": "Container",
-                "Hint": "The container item in which this item is stored"
+            "description": {
+                "label": "Description",
+                "hint": "A brief description of the effect."
             },
-            "Type": {
-                "Label": "Type",
-                "Hint": "The type of the Document."
+            "container": {
+                "label": "Container",
+                "hint": "The container item in which this item is stored"
             },
-            "Name": {
-                "Label": "Name",
-                "Hint": "The name of the Document."
+            "actionName": {
+                "label": "Name",
+                "hint": "The name of the Action."
             },
-            "Power": {
-                "Label": "Power",
-                "Hint": "The power of the Attack."
+            "actionType": {
+                "label": "Action Type",
+                "hint": "The type of Action."
             },
-            "Accuracy": {
-                "Label": "Accuracy",
-                "Hint": "The accuracy of the Attack."
+            "actionTraits": {
+                "label": "Traits",
+                "hint": "The traits of the Action."
             },
-            "PokemonType": {
-                "Label": "Elemental Type",
-                "LabelPlural": "Elemental Types",
-                "LabelShort": "Type",
-                "Hint": "The Elemental Type of the Entity.",
-                "HintPlural": "The Elemental Types of this Entity."
+            "target": {
+                "label": "Target",
+                "hint": "The type of targets this action can affect."
             },
-            "PokemonCategory": {
-                "Label": "Category",
-                "Hint": "The Category of the Attack."
+            "distance": {
+                "label": "Distance",
+                "hint": "The distance of the action."
             },
-            "Experience": {
-                "Label": "Experience",
-                "Hint": "The amount of experience the actor has."
+            "unit": {
+                "label": "Unit",
+                "hint": "The measurement unit of the Action."
+            },
+            "activationCost": {
+                "label": "Activation Cost",
+                "hint": "The action cost to activate the Action."
+            },
+            "powerPoints": {
+                "label": "Power Points",
+                "hint": "The number of Power Points the Action uses up when activated."
+            },
+            "trigger": {
+                "label": "Trigger",
+                "hint": "The trigger of the Action (if any)"
+            },
+            "delay": {
+                "label": "Delay",
+                "hint": "The delay value of the Action."
+            },
+            "priority": {
+                "label": "Priority",
+                "hint": "The priority value of the Action."
+            },
+            "power": {
+                "label": "Power",
+                "hint": "The power of the Attack."
+            },
+            "accuracy": {
+                "label": "Accuracy",
+                "hint": "The accuracy of the Attack."
+            },
+            "pokemonType": {
+                "label": "Elemental Type",
+                "labelPlural": "Elemental Types",
+                "labelShort": "Type",
+                "hint": "The Elemental Type of the Entity.",
+                "hintPlural": "The Elemental Types of this Entity."
+            },
+            "pokemonCategory": {
+                "label": "Category",
+                "hint": "The Category of the Attack."
             }
         },
         "MoveSheet": {
@@ -105,6 +172,9 @@
                 },
                 "details": {
                     "label": "Details"
+                },
+                "attack": {
+                    "label": "Attack"
                 },
                 "actions": {
                     "label": "Actions"

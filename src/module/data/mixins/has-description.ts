@@ -16,7 +16,7 @@ export default function HasDescription<BaseClass extends TemplateConstructor>(ba
             return {
                 ...super.defineSchema(),
 
-                description: new fields.HTMLField({ required: false, nullable: true, label: "PTR2E.Fields.Description.Label", hint: "PTR2E.Fields.Description.Hint" }),
+                description: new fields.HTMLField({ required: false, nullable: true}),
             };
         }
     }

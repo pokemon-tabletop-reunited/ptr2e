@@ -9,23 +9,23 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     static override defineSchema() {
         const fields = foundry.data.fields;
         return {
-            slug: new fields.StringField({ required: true, label: "PTR2E.Fields.Slug.Label", hint: "PTR2E.Fields.Slug.Hint" }),
-            name: new fields.StringField({ required: true, initial: "New Action", label: "PTR2E.Fields.Name.Label", hint: "PTR2E.Fields.Name.Hint" }),
-            description: new fields.HTMLField({ required: false, nullable: true }),
-            traits: new fields.SetField(new fields.StringField()),
+            slug: new fields.StringField({ required: true, label: "PTR2E.FIELDS.slug.label", hint: "PTR2E.FIELDS.slug.hint" }),
+            name: new fields.StringField({ required: true, initial: "New Action", label: "PTR2E.FIELDS.actionName.label", hint: "PTR2E.FIELDS.actionName.hint" }),
+            description: new fields.HTMLField({ required: false, nullable: true, label: "PTR2E.FIELDS.description.label", hint: "PTR2E.FIELDS.description.hint" }),
+            traits: new fields.SetField(new fields.StringField({validate: Trait.isValid}), { label: "PTR2E.FIELDS.actionTraits.label", hint: "PTR2E.FIELDS.actionTraits.hint" }),
             type: new fields.StringField({
                 required: true, blank: false, initial: this.TYPE,
                 validate: value => value === this.TYPE || Object.values(PTRCONSTS.ActionTypes).includes(value as ActionType),
                 validationError: `must be equal to "${this.TYPE}"`,
-                label: "PTR2E.Fields.Type.Label", hint: "PTR2E.Fields.Type.Hint"
+                label: "PTR2E.FIELDS.actionType.label", hint: "PTR2E.FIELDS.actionType.hint"
             }),
             range: new fields.EmbeddedDataField(RangePTR2e, { required: false, nullable: true }),
             cost: new fields.SchemaField({
-                activation: new fields.StringField({ required: true, choices: Object.values(PTRCONSTS.ActivationCost), initial: PTRCONSTS.ActivationCost.SIMPLE }),
-                powerPoints: new fields.NumberField({ required: true, initial: 0, min: 0, integer: true}),
-                trigger: new fields.StringField({ required: false, nullable: true }),
-                delay: new fields.NumberField({ required: false, nullable: true, min: 1, max: 3, integer: true}),
-                priority: new fields.NumberField({ required: false, nullable: true, min: 1, max: 7, integer: true}),
+                activation: new fields.StringField({ required: true, choices: Object.values(PTRCONSTS.ActivationCost), initial: PTRCONSTS.ActivationCost.SIMPLE, label: "PTR2E.FIELDS.activationCost.label", hint: "PTR2E.FIELDS.activationCost.hint" }),
+                powerPoints: new fields.NumberField({ required: true, initial: 0, min: 0, integer: true, label: "PTR2E.FIELDS.powerPoints.label", hint: "PTR2E.FIELDS.powerPoints.hint" }),
+                trigger: new fields.StringField({ required: false, nullable: true, label: "PTR2E.FIELDS.trigger.label", hint: "PTR2E.FIELDS.trigger.hint" }),
+                delay: new fields.NumberField({ required: false, nullable: true, min: 1, max: 3, integer: true, label: "PTR2E.FIELDS.delay.label", hint: "PTR2E.FIELDS.delay.hint" }),
+                priority: new fields.NumberField({ required: false, nullable: true, min: 1, max: 7, integer: true, label: "PTR2E.FIELDS.priority.label", hint: "PTR2E.FIELDS.priority.hint" }),
             })
         }
     }

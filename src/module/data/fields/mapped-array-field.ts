@@ -12,7 +12,6 @@ class MappedArrayField<TElementField extends foundry.data.fields.DataField> exte
     override initialize(value: JSONValue, model: any, options: Record<string, unknown>): any {
         if (!value) return value;
         
-
         // if (this._isMap(value)) {
         //     const array = Array.from((value as Map<string, TElementField>).values()).map((element) => this.element.initialize(element, model, options));
         //     return array.reduce((acc: Map<string, TElementField>, element) => {

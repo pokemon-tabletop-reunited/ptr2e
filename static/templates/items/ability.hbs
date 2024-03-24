@@ -1,7 +1,7 @@
 <form>
     <h1>Auto Generated (App v1) Form</h1>
     {{#each fields as |value key|}}
-        {{formField value value=(lookup ../document.system key) localize=true}}
+        {{formField value value=(lookup ../document.system key) localize=true button=true}}
     {{/each}}
     <h2 class="mt-2">Traits</h2>
     <ul>

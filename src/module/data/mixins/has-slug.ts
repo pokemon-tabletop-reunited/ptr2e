@@ -7,17 +7,13 @@ import { TemplateConstructor } from './data-template.ts';
  */
 export default function HasSlug<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
     class TemplateClass extends baseClass {
-        declare _source: InstanceType<typeof baseClass>['_source'] & {
-            slug: string;
-        }
-
         static override defineSchema(): foundry.data.fields.DataSchema {
             const fields = foundry.data.fields;
 
             return {
                 ...super.defineSchema(),
 
-                slug: new fields.StringField({ required: true, label: "PTR2E.Fields.Slug.Label", hint: "PTR2E.Fields.Slug.Hint" }),
+                slug: new fields.StringField({ required: true, label: "PTR2E.FIELDS.Slug.Label", hint: "PTR2E.FIELDS.Slug.Hint" }),
             };
         }
 
@@ -43,8 +39,11 @@ export default function HasSlug<BaseClass extends TemplateConstructor>(baseClass
          * ```
          */
         slug: string;
+
+        _source: InstanceType<typeof baseClass>['_source'] & {
+            slug: string;
+        };
     }
 
     return TemplateClass;
 }
-

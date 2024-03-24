@@ -1,6 +1,13 @@
 /** Application V2 Styles **/
 .sheet {
+    .tag {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+    }
+
     &.move-sheet {
+        background: linear-gradient(to right,rgba(7, 7, 10, 0.9), rgba(19, 17, 31, 0.95));
         .window-content {
             display: grid;
             grid-template-columns: 45% 55%;
@@ -36,7 +43,7 @@
 
                 padding: 0.5rem;
                 padding-right: 1rem;
-                border-bottom: 1px solid #fefefe;
+                border-bottom: 1px solid var(--color-light-6);
             }
 
             nav.tabs {
@@ -46,8 +53,8 @@
                 margin: 0;
                 padding: 0.5rem;
                 padding-left: 0;
-                border-bottom: 1px solid #fefefe;
-                border-left: 1px solid #fefefe;
+                border-bottom: 1px solid var(--color-light-6);
+                border-left: 1px solid var(--color-light-6);
             }
 
             aside.traits {
@@ -57,17 +64,28 @@
 
                 margin: 0;
                 padding: 0.25rem;
-                border-bottom: 1px solid #fefefe;
+                border-bottom: 1px solid var(--color-light-6);
             }
 
             section.tab {
                 grid-area: main;
-
+                
+                height: 100%;
+                overflow: hidden;
                 padding: 1rem;
 
                 &[data-tab=details] {
                     .editor, .editor .editor-content {
                         min-height: 200px;
+                    }
+                }
+
+                &[data-tab=attack] {
+                    padding: 0;
+                    form.scroll {
+                        padding: 1rem;
+                        overflow-y: scroll;
+                        height: 100%;
                     }
                 }
 
@@ -111,6 +129,33 @@
                             }
                         }
                     }
+                }
+
+                fieldset {
+                    padding: 1rem;
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                    gap: 1rem; 
+
+                    margin-bottom: 0.5rem;
+                    border-radius: 8px;
+                    border-color: var(--color-light-6);
+
+                    legend {
+                        font-size: var(--font-size-15);
+                        font-weight: bold;
+                    }
+                }
+
+                .hint {
+                    margin: 0;
+                    font-size: var(--font-size-14);
+                    color: var(--color-light-5);
+                }
+
+                textarea {
+                    resize: vertical;
                 }
             }
         }

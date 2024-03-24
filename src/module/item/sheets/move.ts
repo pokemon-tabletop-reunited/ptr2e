@@ -1,6 +1,6 @@
 import { ItemSheetOptions, MovePTR2e } from "@item";
 import { ItemSheetPTR2e } from "@item";
-import { ActionPTR2e } from "@data";
+import { ActionPTR2e, AttackPTR2e } from "@data";
 import { sluggify } from "@utils";
 import { DocumentSheetConfiguration, DocumentSheetV2 } from "./document.ts";
 
@@ -17,8 +17,8 @@ export class MoveSheetPTR2eV2 extends foundry.applications.api.HandlebarsApplica
     static override DEFAULT_OPTIONS = fu.mergeObject(super.DEFAULT_OPTIONS, {
         classes: ["move-sheet"],
         position: {
-            height: 500,
-            width: 700,
+            height: 700,
+            width: 600,
         },
         form: {
             submitOnChange: true,
@@ -47,15 +47,23 @@ export class MoveSheetPTR2eV2 extends foundry.applications.api.HandlebarsApplica
             id: "details",
             template: "/systems/ptr2e/templates/items/move/move-details.hbs"
         },
-        actions: {
-            id: "actions",
-            template: "/systems/ptr2e/templates/items/move/move-actions.hbs"
+        attack: {
+            id: "attack",
+            template: "/systems/ptr2e/templates/items/move/move-attack.hbs",
+            scrollable: [".scroll"],
+            forms: {
+                "#attack": {
+                    handler: this._submitAttack,
+                    closeOnSubmit: false,
+                    submitOnChange: true
+                }
+            }
         },
         effects: {
             id: "effects",
             template: "/systems/ptr2e/templates/items/move/move-effects.hbs"
         },
-        
+
     }
 
     tabGroups: Record<string, string> = {
@@ -68,19 +76,19 @@ export class MoveSheetPTR2eV2 extends foundry.applications.api.HandlebarsApplica
             group: "sheet",
             icon: "fa-solid fa-house",
             label: "PTR2E.MoveSheet.Tabs.overview.label"
-        }, 
+        },
         details: {
             id: "details",
             group: "sheet",
             icon: "fa-solid fa-cogs",
             label: "PTR2E.MoveSheet.Tabs.details.label"
-        }, 
+        },
         actions: {
-            id: "actions",
+            id: "attack",
             group: "sheet",
             icon: "fa-solid fa-bullseye",
-            label: "PTR2E.MoveSheet.Tabs.actions.label"
-        }, 
+            label: "PTR2E.MoveSheet.Tabs.attack.label"
+        },
         effects: {
             id: "effects",
             group: "sheet",
@@ -90,7 +98,7 @@ export class MoveSheetPTR2eV2 extends foundry.applications.api.HandlebarsApplica
     }
 
     _getTabs() {
-        for(const v of Object.values(this.tabs)) {
+        for (const v of Object.values(this.tabs)) {
             v.active = this.tabGroups[v.group] === v.id;
             v.cssClass = v.active ? "active" : "";
         }
@@ -99,18 +107,40 @@ export class MoveSheetPTR2eV2 extends foundry.applications.api.HandlebarsApplica
     }
 
     override async _prepareContext() {
+        const attack = this.document.actions.attack.values().next().value as AttackPTR2e | undefined;
+
         return {
             ...(await super._prepareContext() as Record<string, unknown>),
             item: this.document,
             source: this.document.toObject(),
             fields: this.document.system.schema.fields,
             tabs: this._getTabs(),
-            traits: this.document.system.traits
+            traits: this.document.system.traits,
+            attack: {
+                attack: attack,
+                source: attack?._source,
+                fields: attack?.schema.fields
+            }
         }
     }
 
     override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: DocumentSheetConfiguration<MovePTR2e>): void {
         super._attachPartListeners(partId, htmlElement, options);
+
+        if(partId === "attack") {
+            // const select
+        }
+    }
+
+    static async _submitAttack(this: MoveSheetPTR2eV2, _event: SubmitEvent | Event, _form: HTMLFormElement, formData: FormDataExtended) {
+        const actions = fu.duplicate(this.document.system._source.actions);
+        const attackIndex = actions.findIndex(action => action.type === "attack");
+        if (attackIndex === -1) return;
+
+        const expanded = fu.expandObject(formData.object).attack as AttackPTR2e['_source'];
+        actions[attackIndex] = fu.mergeObject(actions[attackIndex], expanded, { inplace: false });
+        actions[attackIndex].slug = sluggify(actions[attackIndex].name);
+        await this.document.update({ "system.actions": actions });
     }
 }
 
