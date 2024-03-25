@@ -51,9 +51,13 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     }
 
     prepareDerivedData() {
+        this._traits = [];
         this.traits = this._source.traits.reduce((acc: Map<string, Trait>, traitSlug: string) => {
             const trait = game.ptr.data.traits.get(traitSlug)
-            if (trait) acc.set(traitSlug, trait);
+            if (trait) {
+                acc.set(traitSlug, trait);
+                this._traits.push(trait);
+            }
             return acc;
         }, new Map());
     }
@@ -87,6 +91,7 @@ interface ActionPTR2e extends foundry.abstract.DataModel {
      * ```
      */
     traits: Map<string, Trait>
+    _traits: Trait[];
     /**
      * The type of the action.
      * @defaultValue `'generic'`

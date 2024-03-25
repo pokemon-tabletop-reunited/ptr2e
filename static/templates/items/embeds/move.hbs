@@ -1,22 +1,20 @@
-<content>
+{{!-- <content>
     <h2>{{move.name}}</h2>
 </content>
 {{#each move.actions.attack as |attack|}}
     <figure class="attack">
         {{> attack-embed attack=attack}}
     </figure>
-{{/each}}
+{{/each}} --}}
 
-<figure class="effect-traits">
+<figure>
     <header>
-        <h2>{{move.name}}</h2>
-    </header>
+        <h2>{{attack.name}}</h2>
+    </header> {{log attack}}
     {{#if traits}}
-    <header>
-        {{#each traits as |trait|}}
-        {{> trait-partial trait=trait direction="LEFT"}}
-        {{/each}}
+    <header class="traits">
+        <input type="text" class="traits ptr2e-tagify" name="system.traits" value="{{json traits}}" data-dType="JSON" readonly/>
     </header>
     {{/if}}
-    {{> move-body attack=move.attack fields=move.attack.fields}}
+    {{> move-body attack=attack fields=attack.schema.fields}}
 </figure>

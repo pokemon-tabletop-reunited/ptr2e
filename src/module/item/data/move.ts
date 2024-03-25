@@ -1,6 +1,7 @@
 import { MovePTR2e } from "@item";
-import { ActionPTR2e, HasBase } from "@module/data/index.ts";
+import { ActionPTR2e, AttackPTR2e, HasBase } from "@module/data/index.ts";
 import { sluggify } from "@utils";
+import Tagify from "@yaireo/tagify";
 import BaseActor from "types/foundry/common/documents/actor.js";
 import BaseUser from "types/foundry/common/documents/user.js";
 
@@ -18,10 +19,41 @@ export default abstract class MoveSystem extends HasBase(foundry.abstract.TypeDa
     override async toEmbed(_config: foundry.abstract.DocumentHTMLEmbedConfig, options: EnrichmentOptions = {}): Promise<HTMLElement | HTMLCollection | null> {
         options = { ...options, _embedDepth: (options._embedDepth ?? 0) + 1, relativeTo: this };
 
-        const enrichedMove = await TextEditor.enrichHTML(await renderTemplate("systems/ptr2e/templates/items/embeds/move.hbs", {move: this.parent}), options);
+        const traits = this._traits.map(trait => ({value: trait.slug, label: trait.label}));
+
+        const enrichedMove = await TextEditor.enrichHTML(await renderTemplate("systems/ptr2e/templates/items/embeds/move.hbs", {attack: this.attack, move: this.parent, traits}), options);
         const container = document.createElement("div");
         container.classList.add("embed","move-embed");
         container.innerHTML = enrichedMove;
+
+        for (const input of container.querySelectorAll<HTMLInputElement>(
+            "input.ptr2e-tagify"
+        )) {
+            new Tagify(input, {
+                enforceWhitelist: true,
+                keepInvalidTags: false,
+                editTags: false,
+                tagTextProp: "label",
+                dropdown: {
+                    enabled: 0,
+                    mapValueTo: "label",
+                },
+                templates: {
+                    tag: function(tagData): string {
+                        return `
+                        <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(tagData)}>
+                        <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                        <div>
+                            <span class='tagify__tag-text'>
+                                <span class="trait" data-tooltip-direction="UP" data-trait="${tagData.value}" data-tooltip="${tagData.label}"><span>[</span><span class="tag">${tagData.label}</span><span>]</span></span>
+                            </span>
+                        </div>
+                        `;
+                    },
+                },
+                whitelist: traits
+            });
+        }
 
         return container;
     }
@@ -111,9 +143,9 @@ export default abstract class MoveSystem extends HasBase(foundry.abstract.TypeDa
         return await super._preUpdate(changed, options, user);
     }
 
-    get attack() {
+    get attack(): AttackPTR2e {
         const attack = [...this.actions.values()].find(action => action.type === "attack");
         if (!attack) throw new Error("No attack action found on this move.");
-        return attack; 
+        return attack as AttackPTR2e; 
     }
 }

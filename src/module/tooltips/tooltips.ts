@@ -1,7 +1,8 @@
 import { ActorPTR2e } from "@actor";
 import { AttackMessageSystem, ChatMessagePTR2e } from "@chat";
 import { AttackPTR2e } from "@data";
-import { ItemPTR2e } from "@item";
+import { ItemPTR2e, MovePTR2e } from "@item";
+import Tagify from "@yaireo/tagify";
 
 export default class TooltipsPTR2e {
     #observer: MutationObserver | undefined;
@@ -22,7 +23,6 @@ export default class TooltipsPTR2e {
         this.#observer = new MutationObserver(this._onMutation.bind(this));
         this.#observer.observe(this.tooltip, { attributeFilter: ["class"], attributeOldValue: true })
     }
-
 
     /**
      * Handle changes to the tooltip element
@@ -76,6 +76,8 @@ export default class TooltipsPTR2e {
                     return this._onStatusTooltip();
                 case "damage":
                     return this._onDamageTooltip();
+                case "content-link": 
+                    return this._onContentLinkTooltip();
             }
         }
 
@@ -88,6 +90,8 @@ export default class TooltipsPTR2e {
     async _onTraitTooltip() {
         const trait = game.tooltip.element?.dataset.trait;
         if (!trait) return false;
+
+        const tooltipTrait = game.tooltip.element?.dataset.tooltipTrait ?? false;
 
         const data = game.ptr.data.traits.get(trait);
         if (!data) return false;
@@ -102,7 +106,7 @@ export default class TooltipsPTR2e {
         </div>`;
         const tooltipDirection = game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined;
         requestAnimationFrame(() => this._positionTooltip(tooltipDirection));
-        return 2000;
+        return tooltipTrait ? 1 : 2000;
     }
 
     async _onAttackTooltip() {
@@ -118,8 +122,44 @@ export default class TooltipsPTR2e {
         const attack = parent.actions.attack!.get(attackSlug) as AttackPTR2e | undefined;
         if (!attack) return false;
 
+        return await this.#createAttackTooltip(attack);
+    }
+
+    async #createAttackTooltip(attack: AttackPTR2e) {
+        const traits = attack._traits.map(t => ({value: t.slug, label: t.label}));
+
         this.tooltip.classList.add("attack");
-        await this._renderTooltip({ path: "systems/ptr2e/templates/partials/attack-embed.hbs", data: { attack }, direction: game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined });
+        await this._renderTooltip({ path: "systems/ptr2e/templates/items/embeds/move.hbs", data: { attack, move: parent, traits }, direction: game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined });
+        
+        for (const input of this.tooltip.querySelectorAll<HTMLInputElement>(
+            "input.ptr2e-tagify"
+        )) {
+            new Tagify(input, {
+                enforceWhitelist: true,
+                keepInvalidTags: false,
+                editTags: false,
+                tagTextProp: "label",
+                dropdown: {
+                    enabled: 0,
+                    mapValueTo: "label",
+                },
+                templates: {
+                    tag: function(tagData): string {
+                        return `
+                        <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(tagData)}>
+                        <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                        <div>
+                            <span class='tagify__tag-text'>
+                                <span class="trait" data-tooltip-direction="UP" data-trait="${tagData.value}" data-tooltip="${tagData.label}" data-tooltip-trait="true"><span>[</span><span class="tag">${tagData.label}</span><span>]</span></span>
+                            </span>
+                        </div>
+                        `;
+                    },
+                },
+                whitelist: traits
+            });
+        }
+
         return 2000;
     }
 
@@ -189,6 +229,35 @@ export default class TooltipsPTR2e {
         }
 
         return 500;
+    }
+
+    async _onContentLinkTooltip() {
+        const element = game.tooltip.element;
+        if (!element) return false;
+
+        const uuid = element.dataset.uuid;
+        if (!uuid) return false;
+
+        const entityType = element.dataset.type;
+        if(entityType !== "Item") return false;
+
+        const embedFigure = element.closest("figure.content-embed") as HTMLElement | undefined;
+        if(embedFigure?.classList.contains("no-tooltip") && embedFigure.dataset.uuid === uuid) return false;
+
+        const entity = await fromUuid(uuid) as ItemPTR2e | null;
+        if (!entity) return false;
+
+        switch(entity.type) {
+            case "move":
+                const move = entity as MovePTR2e;
+                const attack = move.system.attack;
+                if(!attack) return false;
+
+                if(game.tooltip.element) game.tooltip.element.dataset.tooltipDirection ||= "LEFT";
+
+                return await this.#createAttackTooltip(attack);
+            default: return false;
+        }
     }
 
     async _renderTooltip({ path, data, direction = TooltipManager.TOOLTIP_DIRECTIONS.DOWN, autoLock = true }: { path: string; data: any; direction?: TooltipDirections; autoLock?: boolean }) {

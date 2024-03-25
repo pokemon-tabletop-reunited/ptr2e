@@ -25,9 +25,13 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
         override prepareBaseData() {
             super.prepareBaseData();
 
+            this._traits = [];
             this.traits = this._source.traits.reduce((acc: Map<string, Trait>, traitSlug: string) => {
                 const trait = game.ptr.data.traits.get(traitSlug)
-                if (trait) acc.set(traitSlug, trait);
+                if (trait) {
+                    acc.set(traitSlug, trait);
+                    this._traits.push(trait);
+                }
                 return acc;
             }, new Map());
         }
@@ -45,6 +49,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
          * ```
          */
         traits: Map<string, Trait>
+        _traits: Trait[];
     }
 
     return TemplateClass;

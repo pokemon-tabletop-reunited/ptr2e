@@ -1,6 +1,12 @@
 aside[role="tooltip"] {
   min-width: 150px;
-  background: #121212;
+  background: linear-gradient(to right, rgba(7, 7, 10, 0.9), rgba(19, 17, 31, 0.95)) !important;
+  border-color: var(--color-light-6) !important;
+  border-radius: 8px !important;
+}
+aside[role="tooltip"] fieldset {
+  border-color: var(--color-light-6);
+  border-radius: 8px;
 }
 aside[role="tooltip"].locked-tooltip,
 aside[role="tooltip"].locked-tooltip * {
@@ -8,6 +14,7 @@ aside[role="tooltip"].locked-tooltip * {
   -moz-user-select: text;
   -ms-user-select: text;
   user-select: text;
+  border-color: var(--color-light-6);
 }
 aside[role="tooltip"].locked-tooltip .circular-progress,
 aside[role="tooltip"].locked-tooltip * .circular-progress {
@@ -16,7 +23,7 @@ aside[role="tooltip"].locked-tooltip * .circular-progress {
 }
 aside[role="tooltip"].locked-tooltip .circular-progress circle.fg,
 aside[role="tooltip"].locked-tooltip * .circular-progress circle.fg {
-  --stroke: red;
+  --stroke: var(--color-light-6);
 }
 aside[role="tooltip"].locked-tooltip .circular-progress circle.fgb,
 aside[role="tooltip"].locked-tooltip * .circular-progress circle.fgb {
@@ -40,7 +47,7 @@ aside[role="tooltip"] .circular-progress {
   --radius: calc((var(--size) - var(--stroke-width)) / 2);
   --circumference: calc(var(--radius) * pi * 2);
   --dash: calc((var(--progress) * var(--circumference)) / 100);
-  --stroke: #fdb953;
+  --stroke: var(--color-light-5);
   animation: progress-animation 2s ease-out 0s 1 forwards;
 }
 aside[role="tooltip"] .circular-progress circle {

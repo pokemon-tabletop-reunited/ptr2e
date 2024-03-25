@@ -55,7 +55,7 @@ class ItemPTR2e<TSystem extends ItemSystemPTR = ItemSystemPTR, TParent extends A
 
     async toChat() {
         return ChatMessage.create({
-            content: `<span>@Embed[${this.uuid} caption=false]</span>`,
+            content: `<span>@Embed[${this.uuid} caption=false classes=no-tooltip]</span>`,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
         });
     }

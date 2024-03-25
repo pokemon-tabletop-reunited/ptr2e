@@ -73,7 +73,7 @@ export const PTRCONFIG = {
         sheetClasses: {
             perk: [sheets.PerkSheetPTR2e],
             ability: [AbilitySheetPTR2e],
-            move: [sheets.MoveSheetPTR2e, sheets.MoveSheetPTR2eV2],
+            move: [sheets.MoveSheetPTR2e],
             species: [sheets.SpeciesSheetPTR2e],
         },
     },

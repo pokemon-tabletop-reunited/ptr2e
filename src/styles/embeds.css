@@ -1,74 +1,62 @@
-[role="tooltip"].attack,
-.embed.move-embed.attack,
-[role="tooltip"] .attack,
-.embed.move-embed .attack {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  background: #121212;
-  border-radius: 10px !important;
-  margin: 0.25rem !important;
-  padding: 0.25rem !important;
-  min-width: 200px;
-  color: #efefef;
-}
-[role="tooltip"].attack h3,
-.embed.move-embed.attack h3,
-[role="tooltip"] .attack h3,
-.embed.move-embed .attack h3 {
-  border-bottom: 1px solid #fefefeaa;
-  margin: 0.25rem 0;
-  padding-bottom: 0.25rem;
+aside[role="tooltip"].attack figure header h2,
+.chat-message .move-embed figure header h2 {
+  border-bottom: unset;
   text-align: center;
 }
-[role="tooltip"].attack div.d-flex,
-.embed.move-embed.attack div.d-flex,
-[role="tooltip"] .attack div.d-flex,
-.embed.move-embed .attack div.d-flex {
-  justify-content: space-between;
-  text-align: center;
-}
-[role="tooltip"].attack label,
-.embed.move-embed.attack label,
-[role="tooltip"] .attack label,
-.embed.move-embed .attack label {
-  font-size: 14px;
-  text-wrap: nowrap;
-  font-weight: bold;
-  flex: 0 0 45%;
-}
-[role="tooltip"].attack span,
-.embed.move-embed.attack span,
-[role="tooltip"] .attack span,
-.embed.move-embed .attack span {
-  font-size: 14px;
-  text-wrap: nowrap;
-  flex: 0 0 45%;
-}
-[role="tooltip"].attack content,
-.embed.move-embed.attack content,
-[role="tooltip"] .attack content,
-.embed.move-embed .attack content {
-  display: flex;
-  min-height: 40px;
+aside[role="tooltip"].attack figure header.traits tags[readonly],
+.chat-message .move-embed figure header.traits tags[readonly] {
   width: 100%;
-  padding-top: 0.25rem;
-  border-top: 1px solid #fefefeaa;
-}
-[role="tooltip"].attack content.no-effect,
-.embed.move-embed.attack content.no-effect,
-[role="tooltip"] .attack content.no-effect,
-.embed.move-embed .attack content.no-effect {
+  --tags-border-color: var(--color-light-6);
+  --tag-bg: var(--color-light-4);
+  --tag-pad: 1px 3px;
+  --readonly-striped: 0;
+  --tag-hover: var(--color-light-3);
   justify-content: center;
 }
-[role="tooltip"].attack content i.small,
-.embed.move-embed.attack content i.small,
-[role="tooltip"] .attack content i.small,
-.embed.move-embed .attack content i.small {
-  font-size: 11px;
-  color: lightgray;
-  align-self: center;
-  text-align: center;
+aside[role="tooltip"].attack figure header.traits tags[readonly] span.tagify__input,
+.chat-message .move-embed figure header.traits tags[readonly] span.tagify__input {
+  display: none;
+}
+aside[role="tooltip"].attack figure aside img,
+.chat-message .move-embed figure aside img {
+  border: unset;
+  border-radius: 50%;
+}
+aside[role="tooltip"].attack figure content.attack-embed,
+.chat-message .move-embed figure content.attack-embed {
+  font-size: 15px;
+}
+aside[role="tooltip"].attack figure content.attack-embed section.attack-info,
+.chat-message .move-embed figure content.attack-embed section.attack-info {
+  grid-template-areas: "basic" "range" "cost";
+}
+aside[role="tooltip"].attack figure content.attack-embed fieldset article,
+.chat-message .move-embed figure content.attack-embed fieldset article {
+  line-height: 1.3;
+  line-break: pre-wrap;
+}
+.chat-message .message-content > figure.content-embed:only-child {
+  margin: 0 0 0.5rem 0;
+}
+.chat-message .move-embed {
+  padding: 0.5rem;
+  border: 1px solid var(--color-light-6);
+  border-radius: 8px;
+  background-color: var(--color-light-3);
+}
+.chat-message .move-embed > figure {
+  margin: 0;
+}
+.chat-message .move-embed tags {
+  border-radius: 8px;
+  background-color: var(--color-light-2);
+}
+.chat-message .move-embed .attack-description fieldset {
+  background: var(--color-light-2);
+}
+.chat-message .move-embed fieldset {
+  border-color: var(--color-light-6);
+  border-radius: 8px;
 }
 content.attack-embed {
   display: flex;
@@ -80,7 +68,11 @@ content.attack-embed aside {
   flex-direction: column;
   flex: 0 0 44px;
   margin: 0.25rem;
-  gap: 2px;
+  gap: 5px;
+}
+content.attack-embed aside img {
+  border: unset;
+  border-radius: 50%;
 }
 content.attack-embed main {
   display: flex;
