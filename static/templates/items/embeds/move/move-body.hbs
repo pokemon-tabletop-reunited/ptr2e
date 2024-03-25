@@ -1,0 +1,56 @@
+<content class="attack-embed">
+    <aside>
+        {{{icon attack.category}}}
+        {{#each attack.types as |type|}}
+        {{{icon type}}}
+        {{/each}}
+    </aside>
+    <main>
+        <section class="attack-info">
+            <fieldset class="basic">
+                <label for="power">{{localize fields.power.label}}</label> <span>{{attack.power}}</span>
+                <label for="accuracy">{{localize fields.accuracy.label}}</label> <span>{{attack.accuracy}}</span>
+            </fieldset>
+
+            <fieldset class="cost">
+                <label for="cost.activation">{{localize fields.cost.fields.activation.label}}</label>
+                <span>{{formatSlug attack.cost.activation}}</span>
+                <label for="cost.powerPoints">{{localize fields.cost.fields.powerPoints.label}}</label>
+                <span>{{attack.cost.powerPoints}}</span>
+                {{#if attack.cost.trigger}}
+                <label for="cost.trigger">{{localize fields.cost.fields.trigger.label}}</label>
+                <span>{{attack.cost.trigger}}</span>
+                {{/if}}
+                {{#if attack.cost.priority}}
+                <label for="cost.priority">{{localize fields.cost.fields.priority.label}}</label>
+                <span>{{attack.cost.priority}}</span>
+                {{/if}}
+                {{#if attack.cost.delay}}
+                <label for="cost.delay">{{localize fields.cost.fields.delay.label}}</label>
+                <span>{{attack.cost.delay}}</span>
+                {{/if}}
+            </fieldset>
+
+            <fieldset class="range">
+                <label for="range.target">{{localize fields.range.fields.target.label}}</label>
+                <span>{{formatSlug attack.range.target}}</span>
+                <label for="range.distance">{{localize fields.range.fields.distance.label}}</label>
+                <span>{{attack.range.distance}}m</span>
+            </fieldset>
+        </section>
+        <section class="attack-description">
+            <fieldset>
+                <legend>Effect Description</legend>
+                {{#if attack.description}}
+                <article>
+                    {{{attack.description}}}
+                </article>
+                {{else}}
+                <article class="center">
+                    <small><i>No Effect Description Provided</i></small>
+                </article>
+                {{/if}}
+            </fieldset>
+        </section>
+    </main>
+</content>

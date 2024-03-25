@@ -1,6 +1,5 @@
 [role="tooltip"],
 .embed.move-embed {
-
     &.attack,
     .attack {
         display: flex;
@@ -57,6 +56,68 @@
                 color: lightgray;
                 align-self: center;
                 text-align: center;
+            }
+        }
+
+    }
+}
+
+content.attack-embed {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    aside {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 44px;
+        margin: 0.25rem;
+        gap: 2px;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        margin: 0 0.25rem;
+
+        section.attack-info {
+            display: grid;
+            grid-template-areas:
+                "basic cost"
+                "range cost";
+
+            fieldset {
+                display: grid !important;
+                grid-template-columns: 60% 40%;
+                grid-auto-rows: 17px;
+                gap: 0.25rem !important;
+                padding: 0.25rem !important;
+                border: unset;
+                margin-bottom: unset !important;
+
+                &.basic {
+                    grid-area: basic;
+                }
+
+                &.range {
+                    grid-area: range;
+                }
+
+                &.cost {
+                    grid-area: cost;
+                }
+
+                label {
+                    font-weight: bold;
+                }
+            }
+        }
+
+        section.attack-description {
+            margin-top: 1rem;
+            article {
+                min-height: 50px;
             }
         }
     }

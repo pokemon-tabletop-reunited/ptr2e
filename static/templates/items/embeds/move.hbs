@@ -6,3 +6,17 @@
         {{> attack-embed attack=attack}}
     </figure>
 {{/each}}
+
+<figure class="effect-traits">
+    <header>
+        <h2>{{move.name}}</h2>
+    </header>
+    {{#if traits}}
+    <header>
+        {{#each traits as |trait|}}
+        {{> trait-partial trait=trait direction="LEFT"}}
+        {{/each}}
+    </header>
+    {{/if}}
+    {{> move-body attack=move.attack fields=move.attack.fields}}
+</figure>

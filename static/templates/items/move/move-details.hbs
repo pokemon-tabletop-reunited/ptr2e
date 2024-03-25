@@ -1,8 +1,16 @@
 <section class="tab sheet-body {{tabs.details.cssClass}}" data-tab="details" data-group="sheet">
     <fieldset>
         <legend>
-            <h3>Details</h3>
+            Details
         </legend>
-        {{formField fields.description value=source.system.description button=true}}
+        <div class="form-group">
+            <label>{{localize fields.description.label}}</label>
+            <div class="form-fields">
+                <textarea name="system.description" class="form-control"
+                    data-dtype="String">{{source.system.description}}</textarea>
+            </div>
+            <p class="hint">{{localize fields.description.hint}}</p>
+        </div>
+        {{!-- {{formField fields.description value=source.system.description button=true}} --}}
     </fieldset>
 </section>

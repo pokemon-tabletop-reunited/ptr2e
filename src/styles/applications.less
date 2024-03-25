@@ -7,11 +7,12 @@
     }
 
     &.move-sheet {
-        background: linear-gradient(to right,rgba(7, 7, 10, 0.9), rgba(19, 17, 31, 0.95));
+        background: linear-gradient(to right, rgba(7, 7, 10, 0.9), rgba(19, 17, 31, 0.95));
+
         .window-content {
             display: grid;
             grid-template-columns: 45% 55%;
-            grid-template-rows: calc(1rem + 48px) calc(0.5rem + 32px) auto;
+            grid-template-rows: calc(1rem + 48px) calc(0.5rem + 38px) auto;
             grid-template-areas:
                 "header nav"
                 "traits traits"
@@ -55,33 +56,54 @@
                 padding-left: 0;
                 border-bottom: 1px solid var(--color-light-6);
                 border-left: 1px solid var(--color-light-6);
+                gap: unset;
             }
 
             aside.traits {
                 grid-area: traits;
 
-                height: 32px;
-
-                margin: 0;
+                height: calc(0.5rem + 38px);
                 padding: 0.25rem;
+
                 border-bottom: 1px solid var(--color-light-6);
+
+                tags {
+                    --tags-border-color: var(--color-light-6);
+                    --tag-bg: var(--color-light-4);
+                    // --tag-text-color: var(--color-dark-6);
+                    width: 100%;
+
+                    --tag-pad: 0;
+
+                    .trait {
+                        display: inline-flex;
+                        padding: 0.25rem;
+
+                        .tag {
+                            text-decoration: underline;
+                        }
+                    }
+                }
             }
 
             section.tab {
                 grid-area: main;
-                
+
                 height: 100%;
                 overflow: hidden;
                 padding: 1rem;
 
                 &[data-tab=details] {
-                    .editor, .editor .editor-content {
+
+                    .editor,
+                    .editor .editor-content {
                         min-height: 200px;
                     }
                 }
 
                 &[data-tab=attack] {
                     padding: 0;
+
                     form.scroll {
                         padding: 1rem;
                         overflow-y: scroll;
@@ -91,7 +113,7 @@
 
                 &[data-tab=actions].active {
                     height: 100%;
-                    
+
                     display: flex;
                     flex-direction: column;
 
@@ -100,7 +122,7 @@
                     .actions {
                         flex: 0 0 50%;
                         margin: 0.25rem;
-                        
+
                         display: flex;
                         flex-direction: column;
 
@@ -115,6 +137,7 @@
                                 font-size: 18px;
                             }
                         }
+
                         content {
                             display: flex;
                             flex-direction: column;
@@ -125,9 +148,15 @@
                                 justify-content: space-between;
                                 padding: 0.25rem;
                                 margin: 0.5rem 0;
-                                
+
                             }
                         }
+                    }
+                }
+
+                &[data-tab="overview"] {
+                    .item-description {
+                        min-height: 150px;
                     }
                 }
 
@@ -136,7 +165,7 @@
                     display: flex;
                     flex-direction: column;
                     flex-wrap: nowrap;
-                    gap: 1rem; 
+                    gap: 1rem;
 
                     margin-bottom: 0.5rem;
                     border-radius: 8px;

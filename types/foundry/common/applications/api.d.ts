@@ -428,7 +428,7 @@ export class ApplicationV2<
      * @param {ApplicationClosingOptions} [options] Options which modify how the application is closed.
      * @returns {Promise<ApplicationV2>}            A Promise which resolves to the closed Application instance
      */
-    close(options: ApplicationClosingOptions): Promise<ApplicationV2>;
+    close(options?: ApplicationClosingOptions): Promise<ApplicationV2>;
 
     /* -------------------------------------------- */
 
@@ -503,6 +503,23 @@ export class ApplicationV2<
      * @returns {Promise<void>}
      */
     maximize(): Promise<void>;
+
+    /**
+     * Bring this Application window to the front of the rendering stack by increasing its z-index.
+     */
+    bringToFront(): void;
+
+    /**
+     * Change the active tab within a tab group in this Application instance.
+     * @param {string} tab        The name of the tab which should become active
+     * @param {string} group      The name of the tab group which defines the set of tabs
+     * @param {object} [options]  Additional options which affect tab navigation
+     * @param {Event} [options.event]                 An interaction event which caused the tab change, if any
+     * @param {HTMLElement} [options.navElement]      An explicit navigation element being modified
+     * @param {boolean} [options.force=false]         Force changing the tab even if the new tab is already active
+     * @param {boolean} [options.updatePosition=true] Update application position after changing the tab?
+     */
+    changeTab(tab: string, group: string, {event, navElement, force, updatePosition}: { event?: Event; navElement?: HTMLElement; force: boolean; updatePosition: boolean }): void;
 
     /* -------------------------------------------- */
     /*  Life-Cycle Handlers                         */
@@ -677,6 +694,13 @@ export class ApplicationV2<
      * @param {PointerEvent} event
      */
     #onWindowDoubleClick(event: PointerEvent): void;
+
+    /**
+     * Handle submission for an Application which uses the form element.
+     * @param {Event|SubmitEvent} event The form submission event
+     * @returns {Promise<void>}
+     */
+    protected _onSubmitForm(event: Event | SubmitEvent): Promise<void>;
 
     /* -------------------------------------------- */
     /*  Helper Methods                              */

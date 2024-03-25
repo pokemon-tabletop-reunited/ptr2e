@@ -24,8 +24,8 @@ class ActionPTR2e extends foundry.abstract.DataModel {
                 activation: new fields.StringField({ required: true, choices: Object.values(PTRCONSTS.ActivationCost), initial: PTRCONSTS.ActivationCost.SIMPLE, label: "PTR2E.FIELDS.activationCost.label", hint: "PTR2E.FIELDS.activationCost.hint" }),
                 powerPoints: new fields.NumberField({ required: true, initial: 0, min: 0, integer: true, label: "PTR2E.FIELDS.powerPoints.label", hint: "PTR2E.FIELDS.powerPoints.hint" }),
                 trigger: new fields.StringField({ required: false, nullable: true, label: "PTR2E.FIELDS.trigger.label", hint: "PTR2E.FIELDS.trigger.hint" }),
-                delay: new fields.NumberField({ required: false, nullable: true, min: 1, max: 3, integer: true, label: "PTR2E.FIELDS.delay.label", hint: "PTR2E.FIELDS.delay.hint" }),
-                priority: new fields.NumberField({ required: false, nullable: true, min: 1, max: 7, integer: true, label: "PTR2E.FIELDS.priority.label", hint: "PTR2E.FIELDS.priority.hint" }),
+                delay: new fields.NumberField({ required: false, nullable: true, min: 1, max: 3, integer: false, label: "PTR2E.FIELDS.delay.label", hint: "PTR2E.FIELDS.delay.hint" }),
+                priority: new fields.NumberField({ required: false, nullable: true, min: 1, max: 7, integer: false, label: "PTR2E.FIELDS.priority.label", hint: "PTR2E.FIELDS.priority.hint" }),
             })
         }
     }

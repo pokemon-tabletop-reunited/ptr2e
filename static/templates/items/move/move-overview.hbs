@@ -1,10 +1,8 @@
 <section class="tab sheet-body {{tabs.overview.cssClass}}" data-tab="overview" data-group="sheet">
-    <fieldset class="h-100">
+    <fieldset>
         <legend>
-            <h3>Effect Description</h3>
+            Move Overview
         </legend>
-        <div class="item-description">
-            {{{source.system.description}}}
-        </div>
+        {{> move-body attack=attack.attack fields=attack.fields}}
     </fieldset>
 </section>

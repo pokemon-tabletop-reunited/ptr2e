@@ -1,3 +1,11 @@
+{{#if trait}}
+    {{> trait}}
+{{else}}
+    {{> trait trait=this}}
+{{/if}}
+
+{{#*inline "trait"}}
 <span class="trait" data-tooltip-direction="{{#if direction}}{{direction}}{{else}}UP{{/if}}" data-trait="{{trait.slug}}" data-tooltip="{{trait.label}}">
-    {{#if (or trait.isKeyword isKeyword)}}&lt;<span class="tag">{{trait.label}}</span>&gt;{{else}}[<span class="tag">{{trait.label}}</span>]{{/if}}
+    {{#if (or trait.isKeyword isKeyword)}}<span>&lt;</span><span class="tag">{{trait.label}}</span><span>&gt;</span>{{else}}<span>[</span><span class="tag">{{trait.label}}</span><span>]</span>{{/if}}
 </span>
+{{/inline}}

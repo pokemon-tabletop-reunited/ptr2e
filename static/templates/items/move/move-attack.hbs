@@ -1,25 +1,11 @@
-<section class="tab sheet-body {{tabs.actions.cssClass}}" data-tab="attack" data-group="sheet">
+<section class="tab sheet-body {{tabs.attack.cssClass}}" data-tab="attack" data-group="sheet">
     <form class="scroll" id="attack">
         {{#with attack}}
-        <fieldset>
-            <legend>Basic</legend>
-            {{formField fields.name value=source.name localize=true}}
-            <div class="form-group">
-                <label>{{localize fields.description.label}}</label>
-                <div class="form-fields">
-                    <textarea name="attack.description" class="form-control"
-                        data-dtype="String">{{source.description}}</textarea>
-                </div>
-                <p class="hint">{{localize fields.description.hint}}</p>
-            </div>
-            {{!-- {{formField fields.description value=source.description localize=true}} --}}
-            {{formField fields.traits value=source.traits localize=true}}
-        </fieldset>
         <fieldset>
             <legend>Range</legend>
             {{formField fields.range.fields.target value=source.range.target localize=true}}
             {{formField fields.range.fields.distance value=source.range.distance localize=true}}
-            {{formField fields.range.fields.unit value=source.range.unit localize=true}}
+            {{!-- {{formField fields.range.fields.unit value=source.range.unit localize=true}} --}}
         </fieldset>
         <fieldset>
             <legend>Cost</legend>

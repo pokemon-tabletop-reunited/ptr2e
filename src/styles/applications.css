@@ -10,7 +10,7 @@
 .sheet.move-sheet .window-content {
   display: grid;
   grid-template-columns: 45% 55%;
-  grid-template-rows: calc(1rem + 48px) calc(0.5rem + 32px) auto;
+  grid-template-rows: calc(1rem + 48px) calc(0.5rem + 38px) auto;
   grid-template-areas: "header nav" "traits traits" "main main";
   padding: 0;
 }
@@ -43,13 +43,26 @@
   padding-left: 0;
   border-bottom: 1px solid var(--color-light-6);
   border-left: 1px solid var(--color-light-6);
+  gap: unset;
 }
 .sheet.move-sheet .window-content aside.traits {
   grid-area: traits;
-  height: 32px;
-  margin: 0;
+  height: calc(0.5rem + 38px);
   padding: 0.25rem;
   border-bottom: 1px solid var(--color-light-6);
+}
+.sheet.move-sheet .window-content aside.traits tags {
+  --tags-border-color: var(--color-light-6);
+  --tag-bg: var(--color-light-4);
+  width: 100%;
+  --tag-pad: 0;
+}
+.sheet.move-sheet .window-content aside.traits tags .trait {
+  display: inline-flex;
+  padding: 0.25rem;
+}
+.sheet.move-sheet .window-content aside.traits tags .trait .tag {
+  text-decoration: underline;
 }
 .sheet.move-sheet .window-content section.tab {
   grid-area: main;
@@ -101,6 +114,9 @@
   justify-content: space-between;
   padding: 0.25rem;
   margin: 0.5rem 0;
+}
+.sheet.move-sheet .window-content section.tab[data-tab="overview"] .item-description {
+  min-height: 150px;
 }
 .sheet.move-sheet .window-content section.tab fieldset {
   padding: 1rem;
