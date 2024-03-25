@@ -354,6 +354,34 @@
     position: relative;
 }
 
+.ptu-sheet {
+    header.explanation {
+        flex-grow: 0;
+        border-bottom: 1px solid #222224;
+    }
+
+    li {
+        margin-bottom: 0.25rem;
+
+        &.key-value {
+            margin-bottom: 0;
+            > ul {
+                margin-bottom: 0.25rem;
+            }
+        }
+    }
+    span.key, summary {
+        font-weight: bold;
+    }
+
+    * {
+        -webkit-user-select: text;
+        -moz-user-select: text;
+        -ms-user-select: text;
+        user-select: text;
+    }
+}
+
 .ptr2e {
     form {
         .form-group {

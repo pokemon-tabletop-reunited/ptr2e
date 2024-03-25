@@ -1,3 +1,7 @@
+import ActorPTR2e from "./base.ts";
+type PTUActor = ActorPTR2e;
+export type {PTUActor};
+
 // Base
 export {default as ActorPTR2e} from "./base.ts";
 

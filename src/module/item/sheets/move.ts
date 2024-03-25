@@ -212,7 +212,7 @@ export default class MoveSheetPTR2eV2 extends foundry.applications.api.Handlebar
                         mapValueTo: "label",
                     },
                     templates: {
-                        tag: function(tagData) {
+                        tag: function(tagData): string {
                             return `
                             <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(tagData)}>
                             <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>

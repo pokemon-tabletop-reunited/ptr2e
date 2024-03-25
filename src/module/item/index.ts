@@ -12,6 +12,7 @@ type MovePTR2e = ItemPTR2e<data.MoveSystemModel>;
 type PerkPTR2e = ItemPTR2e<data.PerkSystemModel>;
 type SpeciesPTR2e = ItemPTR2e<data.SpeciesSystemModel>;
 type WeaponPTR2e = ItemPTR2e<data.WeaponSystemModel>;
+type PTUItem = ItemPTR2e;
 
 export type {
     AbilityPTR2e,
@@ -23,6 +24,7 @@ export type {
     PerkPTR2e,
     SpeciesPTR2e,
     WeaponPTR2e,
+    PTUItem,
 }
 
 export type ItemSystemPTR = data.AbilitySystemModel | data.ConsumableSystemModel | data.ContainerSystemModel | data.EquipmentSystemModel | data.GearSystemModel | data.MoveSystemModel | data.PerkSystemModel | data.SpeciesSystemModel | data.WeaponSystemModel;

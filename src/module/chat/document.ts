@@ -1,6 +1,23 @@
 import TypeDataModel from "types/foundry/common/abstract/type-data.js";
 
 class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends ChatMessage<TSchema> {
+
+    override prepareDerivedData(): void {
+        const rolls = this._source.rolls.map(r => JSON.parse(r));
+        let updated = false;
+        for(const roll of rolls) {
+            if(!roll.class || ["CheckRoll", "CaptureRoll", "DamageRoll", "AttackRoll", "InitiativeRoll"].includes(roll.class)) {
+                roll.class = "Roll";
+                updated = true;
+            }
+        }
+        if(updated) {
+            // this._source.rolls = rolls.map(r => JSON.stringify(r));
+            this.updateSource({"rolls": rolls.map(r => JSON.stringify(r))});
+        }
+        return super.prepareDerivedData();
+    }
+
     /**
      * @inheritdoc
      * @remarks

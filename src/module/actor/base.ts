@@ -25,6 +25,19 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
         return this.system.attributes.spe.value;
     }
 
+    protected override _initializeSource(data: any, options?: DataModelConstructionOptions<TParent> | undefined): this["_source"] {
+        if(data?._stats?.systemId === "ptu") {
+            data.type = "ptu-actor";
+
+            for(const item of data.items) {
+                if(item._stats.systemId === "ptu") {
+                    item.type = "ptu-item";
+                }
+            }
+        }
+        return super._initializeSource(data, options);
+    }
+
     /** 
      * Step 1 - Copies data from source object to instance attributes
      * */
@@ -62,6 +75,7 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
      * The work done by this method should be idempotent. There are situations in which prepareData may be called more than once.
      * */
     override prepareData() {
+        if(this.type === "ptu-actor") return super.prepareData();
         this.health = {
             percent: Math.floor(Math.random() * 100)
         }
@@ -75,6 +89,7 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
      * Step 3 - Prepare data related to this Document itself, before any embedded Documents or derived data is computed.
      * */
     override prepareBaseData() {
+        if(this.type === "ptu-actor") return super.prepareBaseData();
         return super.prepareBaseData();
     }
 
@@ -82,6 +97,7 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
      * Step 4 - Prepare all embedded Document instances which exist within this primary Document.
      * */
     override prepareEmbeddedDocuments() {
+        if(this.type === "ptu-actor") return super.prepareEmbeddedDocuments();
         return super.prepareEmbeddedDocuments();
     }
 
@@ -90,6 +106,7 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
      * Compute data fields whose values are not stored to the database.
      * */
     override prepareDerivedData() {
+        if(this.type === "ptu-actor") return super.prepareDerivedData();
         this.system.type.effectiveness = this._calculateEffectiveness();
 
         return super.prepareDerivedData();
@@ -99,6 +116,7 @@ class ActorPTR2e<TSystem extends ActorSystemPTR2e = ActorSystemPTR2e, TParent ex
      * Apply any transformations to the Actor data which are caused by ActiveEffects.
      */
     override applyActiveEffects() {
+        if(this.type === "ptu-actor") return;
         this.statuses ??= new Set();
         // Identify which special statuses had been active
         const specialStatuses = new Map();

@@ -259,6 +259,29 @@
   flex: 1;
   position: relative;
 }
+.ptu-sheet header.explanation {
+  flex-grow: 0;
+  border-bottom: 1px solid #222224;
+}
+.ptu-sheet li {
+  margin-bottom: 0.25rem;
+}
+.ptu-sheet li.key-value {
+  margin-bottom: 0;
+}
+.ptu-sheet li.key-value > ul {
+  margin-bottom: 0.25rem;
+}
+.ptu-sheet span.key,
+.ptu-sheet summary {
+  font-weight: bold;
+}
+.ptu-sheet * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
 .ptr2e form .form-group {
   margin: 0.25rem;
   padding: 0.25rem;

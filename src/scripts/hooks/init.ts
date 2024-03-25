@@ -58,7 +58,9 @@ export const Init: PTRHook = {
             // Register custom sheets
             {
                 Actors.unregisterSheet("core", ActorSheet);
-                Actors.registerSheet("ptr2e", ActorSheetPTR2e, { makeDefault: true })
+                Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: true })
+                //@ts-ignore
+                Actors.registerSheet("ptr2e", PTRCONFIG.Actor.sheetClasses["ptu-actor"], { types: ["ptu-actor"], makeDefault: true })
 
                 Items.unregisterSheet("core", ItemSheet);
                 //@ts-ignore

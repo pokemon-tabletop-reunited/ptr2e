@@ -5,11 +5,20 @@ import { ActionType, ActionPTR2e } from "@data";
 /**
  * @extends {PTRItemData}
  */
-class ItemPTR2e<TSystem extends ItemSystemPTR = ItemSystemPTR, TParent extends ActorPTR2e | null = ActorPTR2e | null> extends Item<TParent, TSystem> {
-
+class ItemPTR2e<
+    TSystem extends ItemSystemPTR = ItemSystemPTR,
+    TParent extends ActorPTR2e | null = ActorPTR2e | null,
+> extends Item<TParent, TSystem> {
     declare _sheet: ItemSheetPTR2e<this> | null;
     override get sheet() {
         return super.sheet as ItemSheetPTR2e<this>;
+    }
+
+    protected override _initializeSource(data: object & {_stats: {systemId: string}, type: string}, options?: DataModelConstructionOptions<TParent> | undefined): this["_source"] {
+        if(data?._stats?.systemId === "ptu") {
+            data.type = "ptu-item";
+        }
+        return super._initializeSource(data, options);
     }
 
     get slug() {
@@ -25,6 +34,7 @@ class ItemPTR2e<TSystem extends ItemSystemPTR = ItemSystemPTR, TParent extends A
     }
 
     override prepareBaseData() {
+        if (this.type === "ptu-item") return super.prepareBaseData();
         this._actions = {
             generic: new Map(),
             attack: new Map(),
@@ -32,12 +42,13 @@ class ItemPTR2e<TSystem extends ItemSystemPTR = ItemSystemPTR, TParent extends A
             downtime: new Map(),
             camping: new Map(),
             passive: new Map(),
-        }
+        };
         super.prepareBaseData();
     }
 
     override prepareDerivedData(): void {
         super.prepareDerivedData();
+        if (this.type === "ptu-item") return;
 
         if (!this.parent) return;
         const actions = this.parent._actions;
@@ -45,7 +56,9 @@ class ItemPTR2e<TSystem extends ItemSystemPTR = ItemSystemPTR, TParent extends A
             const key = type as ActionType;
             for (const action of this.actions[key].values()) {
                 if (actions[key].has(action.slug)) {
-                    console.warn(`Duplicate action found in Item ${this.id}: ${action.slug} for Actor ${this.parent.id}`);
+                    console.warn(
+                        `Duplicate action found in Item ${this.id}: ${action.slug} for Actor ${this.parent.id}`
+                    );
                     continue;
                 }
                 actions[key].set(action.slug, action);
@@ -61,8 +74,11 @@ class ItemPTR2e<TSystem extends ItemSystemPTR = ItemSystemPTR, TParent extends A
     }
 }
 
-interface ItemPTR2e<TSystem extends ItemSystemPTR = ItemSystemPTR, TParent extends ActorPTR2e | null = ActorPTR2e | null> extends Item<TParent, TSystem> {
+interface ItemPTR2e<
+    TSystem extends ItemSystemPTR = ItemSystemPTR,
+    TParent extends ActorPTR2e | null = ActorPTR2e | null,
+> extends Item<TParent, TSystem> {
     _actions: Record<ActionType, Map<string, ActionPTR2e>>;
 }
 
-export { ItemPTR2e }
+export { ItemPTR2e };

@@ -28,6 +28,7 @@ export const PTRCONFIG = {
         },
         sheetClasses: {
             character: ActorSheetPTR2e,
+            "ptu-actor": sheets.PTUSheet,
         },
     },
     Change: {
@@ -75,6 +76,7 @@ export const PTRCONFIG = {
             ability: [AbilitySheetPTR2e],
             move: [sheets.MoveSheetPTR2e],
             species: [sheets.SpeciesSheetPTR2e],
+            "ptu-item": [sheets.PTUSheet],
         },
     },
     MeasuredTemplate: {

@@ -8,3 +8,4 @@ export { default as MoveSheetPTR2e } from "./move.ts";
 export { default as PerkSheetPTR2e } from "./perk.ts";
 export { default as SpeciesSheetPTR2e } from "./species.ts";
 export { default as WeaponSheetPTR2e } from "./weapon.ts";
+export { default as PTUSheet } from "./ptu-item.ts";
