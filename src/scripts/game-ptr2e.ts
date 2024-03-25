@@ -2,7 +2,7 @@ import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts"
 import { PerkTree } from "@module/canvas/perk-tree/perk-tree.ts"
 import TooltipsPTR2e from "@module/tooltips/tooltips.ts"
 import { formatSlug, sluggify } from "@utils"
-import { Trait } from "@data"
+import { ClockDatabase, Trait } from "@data"
 
 const GamePTR = {
     onInit() {
@@ -15,7 +15,8 @@ const GamePTR = {
                 traits: _prepareTraits()
             },
             perks: new PerkManager(),
-            tooltips: new TooltipsPTR2e()
+            tooltips: new TooltipsPTR2e(),
+            clocks: ClockDatabase
         }
 
         game.ptr = fu.mergeObject(game.ptr ?? {}, initData)

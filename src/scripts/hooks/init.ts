@@ -4,6 +4,7 @@ import { GamePTR } from "@scripts/game-ptr2e.ts";
 import { HandlebarTemplates, registerHandlebarsHelpers } from "@utils";
 import { default as TypeEffectiveness } from "../config/effectiveness.ts";
 import { PTRHook } from "./data.ts";
+import { ClockDatabase } from "@data";
 
 export const Init: PTRHook = {
     listen() {
@@ -80,6 +81,16 @@ export const Init: PTRHook = {
                 default: TypeEffectiveness,
                 requiresReload: true,
             })
+
+            game.settings.register("ptr2e", "clocks", {
+                name: "PTR2E.Settings.Clocks.Name",
+                hint: "PTR2E.Settings.Clocks.Hint",
+                scope: "world",
+                config: false,
+                type: ClockDatabase,
+                default: {},
+                requiresReload: true,
+            });
 
             // Register handlebars helpers
             registerHandlebarsHelpers();
