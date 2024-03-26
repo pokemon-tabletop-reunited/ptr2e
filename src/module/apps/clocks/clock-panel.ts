@@ -156,7 +156,7 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
                         const clock = game.ptr.clocks.db.get(id);
                         if (!clock) return;
                         const newIndex = event.newDraggableIndex;
-                        if (!newIndex) return;
+                        if (newIndex === undefined) return;
                         const clocks = this.clocks;
                         const targetClock = clocks[newIndex];
                         if (!targetClock) return;
