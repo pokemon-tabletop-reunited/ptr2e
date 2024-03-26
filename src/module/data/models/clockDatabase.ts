@@ -17,15 +17,17 @@ class ClockDatabase extends foundry.abstract.DataModel {
     }
     
     static get clocks() {
-        return this.instance.clocks;
+        return this.instance.clocks.sort((a, b) => a.sort === b.sort ? a.label.localeCompare(b.label) : a.sort - b.sort);
+    }
+
+    static refresh() {
+        if(canvas.ready) game.ptr.clocks.panel.refresh({});
     }
 
     static async update(data: ClockDatabase['_source'], refresh = true): Promise<ClockDatabase> {
         await game.settings.set("ptr2e", "clocks", data) as Promise<ClockDatabase>;
 
-        if(refresh) {
-            
-        }
+        if(refresh) this.refresh();
 
         return this.instance;
     }
@@ -40,15 +42,32 @@ class ClockDatabase extends foundry.abstract.DataModel {
         return ClockDatabase.createClock(data);
     }
 
-    static async updateClock(id: string, data: SourceFromSchema<ClockSchema>) {
+    static async updateClocks(data: ({_id: Clock['id']} & Partial<Omit<SourceFromSchema<ClockSchema>, 'id'>>)[]) {
         const instance = this.instance.toObject();
-        const index = instance.clocks.findIndex((clock) => clock.id === id);
-        if (index === -1) return undefined;
-        instance.clocks[index] = data;
+        
+        for(const update of data) {
+            const clockIndex = instance.clocks.findIndex((c) => c.id === update._id);
+            if(clockIndex === -1) continue;
+
+            instance.clocks[clockIndex] = fu.mergeObject(instance.clocks[clockIndex], update);
+        }
+
         return this.update(instance);
     }
 
-    async updateClock(id: string, data: SourceFromSchema<ClockSchema>) {
+    async updateClocks(data: ({_id: Clock['id']} & Partial<Omit<SourceFromSchema<ClockSchema>, 'id'>>)[]) {
+        return ClockDatabase.updateClocks(data);
+    }
+
+    static async updateClock(id: string, data: Partial<SourceFromSchema<ClockSchema>>) {
+        const instance = this.instance.toObject();
+        const index = instance.clocks.findIndex((clock) => clock.id === id);
+        if (index === -1) return undefined;
+        instance.clocks[index] = fu.mergeObject(instance.clocks[index], data);
+        return this.update(instance);
+    }
+
+    async updateClock(id: string, data: Partial<SourceFromSchema<ClockSchema>>) {
         return ClockDatabase.updateClock(id, data);
     }
 
@@ -70,6 +89,14 @@ class ClockDatabase extends foundry.abstract.DataModel {
             if (ids.has(clock.id as string)) throw new Error("Clock IDs must be unique");
             ids.add(clock.id as string);
         }
+    }
+
+    static get(id: string) {
+        return this.clocks.find((clock) => clock.id === id);
+    }
+
+    get(id: string) {
+        return ClockDatabase.get(id);
     }
 }
 

@@ -1,0 +1,204 @@
+.clock-panel {
+    background: unset;
+    box-shadow: unset;
+    border: unset;
+    pointer-events: none;
+
+    position: absolute;
+    top: 5px;
+    right: 0;
+
+    display: flex;
+    flex-direction: column;
+
+    .drag-gap {
+        visibility: hidden;
+    }
+
+    .clock-list {
+        display: contents;
+    }
+
+    &.editable {
+        .clock-entry, [data-action=add-clock], header.window-header {
+            pointer-events: initial;
+        }
+    }
+
+    section {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        align-items: end;
+
+        &.window-content {
+            padding: 0;
+        }
+    }
+
+    header.window-header {
+        background: unset;
+        border: unset;
+    }
+
+    .clock-entry {
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: end;
+        height: 44px;
+        border-radius: 5px 22px 22px 5px;
+
+        margin: 0;
+
+        background: var(--color-cool-5-75);
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+        color: white;
+
+        .clock {
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+
+            --spoke-width: 2px;
+            --clock-color-dark: color-mix(in srgb, var(--clock-color), black 30%);
+
+            align-self: center;
+            aspect-ratio: 1 / 1;
+
+            --filled-ratio: calc(var(--filled) / var(--areas) * 1turn);
+            background: conic-gradient(var(--clock-color) var(--filled-ratio), white var(--filled-ratio) 1turn);
+            border-radius: 50%;
+            border: var(--clock-color-dark) var(--spoke-width) solid;
+
+            position: relative;
+
+            .spoke {
+                width: var(--spoke-width);
+
+                /* Make the spokes slightly larger than the inner radius so they overlay half the outer border, preventing subpixel gaps */
+                height: calc(50% + .5 * var(--spoke-width));
+
+                top: calc(-.5 * var(--spoke-width));
+                right: calc(50% - var(--spoke-width) / 2);
+
+                background: var(--clock-color-dark);
+                position: absolute;
+
+                transform-origin: center bottom;
+                transform: rotate(calc((var(--index) * 1turn) / var(--areas)));
+            }
+        }
+
+        .name-section {
+            display: flex;
+            flex-direction: row;
+            height: 100%;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 4px;
+            overflow-y: hidden;
+
+            .name {
+                align-items: center;
+                cursor: initial;
+                display: flex;
+                min-width: 80px;
+                justify-content: end;
+                margin-left: 0.25rem;
+
+                i {
+                    font-size: 0.8em;
+                    margin-right: 0.25rem;
+                    margin-top: -0.2em;
+                    opacity: 0.95;
+                }
+            }
+
+            .controls {
+                display: flex;
+                flex-direction: column;
+                a {
+                    visibility: hidden;
+                    padding: 2px;
+                }
+            }
+        }
+
+        &:hover .name-section .controls a {
+            visibility: visible;
+        }
+    }
+
+    [data-action=add-clock] {
+        background: var(--color-cool-5-75);
+        box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+        color: white;
+
+        border-radius: 5px;
+        padding: 4px 6px;
+        margin-right: 4px;
+    }
+}
+
+.clock-editor {
+    --background-color: var(--appv2-background);
+
+    main.dialog-content .dropdown-wrapper {
+        display: block;
+        position: relative;
+        height: var(--input-height);
+        
+        .dropdown {
+            position: absolute;
+            /* Left should be (100% - width%) / 2 */
+            left: 10%;
+            width: 80%;
+            
+            padding: 0;
+            margin: 3px 0 0 0;
+
+            background: rgba(15, 15, 15, 0.95);
+            border-radius: 3px;
+            border: 1px solid var(--color-light-6);
+            list-style-type: none;
+
+            li {
+                padding: 3px 0;
+                margin: 0;
+                border-bottom: 1px solid var(--color-light-6);
+                text-align: center;
+
+                &:hover {
+                    background: rgba(208, 184, 163, 0.15)
+                }
+
+                &:last-child {
+                    border: 0;
+                }
+            }
+        }
+
+        &:not(:focus-within) .dropdown {
+            display: none;
+        }
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+    }
+
+    footer {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+
+        button {
+            flex: 0 0 45%;
+        }
+    }
+
+    input[type="color"] {
+        border-color: var(--color-input-border-color);
+    }
+}

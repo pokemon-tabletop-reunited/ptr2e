@@ -940,3 +940,20 @@ export * from "./handlebars-application.ts";
 // export function HandlebarsApplicationMixin<BaseClass extends AppV2Constructor<ApplicationConfiguration, HandlebarsRenderOptions>>(
 //     BaseClass: BaseClass
 // ): Mixin<typeof HandlebarsApplicationV2, BaseClass>;
+
+type DialogV2Configuration = {
+    buttons: DialogV2Button[];
+    content: string;
+    submit: (...args: any[]) => Promise<void>;
+} & ApplicationConfiguration;
+
+type DialogV2Button = {
+    action: string;
+    label: string;
+    icon?: string;
+    callback?: ApplicationClickAction;
+}
+
+export class DialogV2 extends ApplicationV2<DialogV2Configuration> {
+    static prompt(options: Omit<DialogV2Configuration, keyof ApplicationConfiguration | 'submit'> & Partial<ApplicationConfiguration>): Promise<DialogV2>;
+}

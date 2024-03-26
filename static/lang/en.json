@@ -33,10 +33,23 @@
                 }
             }
         },
-        "MoveSystem": {
-            "FIELDS": {
-
+        "Clocks": {
+            "Global": {
+                "Add": "Add Clock",
+                "Delete": {
+                    "Title": "Delete Clock",
+                    "Message": "Are you sure you want to delete clock: {label}?",
+                    "Confirm": "Delete",
+                    "Cancel": "Cancel"
+                },
+                "Editor": {
+                    "TitleEdit": "Edit Clock: {label}",
+                    "TitleAdd": "Create Clock"
+                }
             }
+        },
+        "MoveSystem": {
+            "FIELDS": {}
         },
         "ActorSheet": {
             "StatsFormTitle": "Stats Manager"
@@ -163,6 +176,32 @@
             "pokemonCategory": {
                 "label": "Category",
                 "hint": "The Category of the Attack."
+            },
+            "clock": {
+                "id": {
+                    "label": "Clock ID",
+                    "hint": "The unique identifier of the clock."
+                },
+                "label": {
+                    "label": "Clock Label",
+                    "hint": "The label of the clock."
+                },
+                "value": {
+                    "label": "Clock Value",
+                    "hint": "The current value of the clock."
+                },
+                "max": {
+                    "label": "Clock Max",
+                    "hint": "The maximum value of the clock."
+                },
+                "color": {
+                    "label": "Clock Color",
+                    "hint": "The color of the clock."
+                },
+                "private": {
+                    "label": "Private Clock",
+                    "hint": "Whether the clock is private."
+                }
             }
         },
         "MoveSheet": {

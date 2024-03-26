@@ -1,4 +1,12 @@
 /** Application V2 Styles **/
+:root {
+    --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.9), rgba(19, 17, 31, 0.95));
+}
+
+.application .window-header .window-title {
+    height: 100%;
+}
+
 .sheet {
     .tag {
         display: flex;
@@ -7,7 +15,7 @@
     }
 
     &.move-sheet {
-        background: linear-gradient(to right, rgba(7, 7, 10, 0.9), rgba(19, 17, 31, 0.95));
+        background: var(--appv2-background);
 
         .window-content {
             display: grid;
@@ -343,6 +351,14 @@
                     margin: 0.25rem;
                 }
             }
+        }
+    }
+}
+
+.application {
+    .standard-form {
+        input[type="checkbox"] {
+            --checkbox-background-color: #3d343f;
         }
     }
 }

@@ -1,0 +1,31 @@
+
+<main class="dialog-content standard-form">
+    <fieldset>
+        <legend>Required Info</legend>
+        {{formField fields.label value=clock.label localize=true required=true}}
+        <div class="form-group">
+            <label>{{localize fields.max.label}}</label>
+            <div class="dropdown-wrapper form-fields">
+                {{ numberInput clock.max name="max" step=1 min=1 max=max_size required=true}}
+                <ul class="dropdown">
+                    {{#each presetSizes as |size|}}
+                        <li data-value={{size}}>{{size}}</li>
+                    {{/each}}
+                </ul>
+            </div>
+            <p class="hint">{{localize fields.max.hint}}</p>
+        </div>
+    </fieldset>
+    <fieldset style="--color-input-border-color: {{clock.color}}">
+        <legend>Optional Info</legend>
+        {{formField fields.value value=clock.value localize=true}}
+        {{formField fields.color value=clock.color localize=true}}
+        {{formField fields.private value=clock.private localize=true}}
+    </fieldset>
+    <footer class="dialog-buttons">
+        <button type="submit">
+            <i class="fas fa-save"></i>
+            <label>{{localize "Save"}}</label>
+        </button>
+    </footer>
+</main>

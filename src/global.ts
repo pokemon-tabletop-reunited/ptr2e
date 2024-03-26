@@ -7,11 +7,12 @@ import { PerkTree } from "@module/canvas/perk-tree/perk-tree.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { ChangeModel, Trait } from "@data";
+import { ChangeModel, ClockDatabase, Trait } from "@data";
 import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import { PTRCONFIG } from "@scripts/config/index.ts";
 import { sluggify } from "@utils";
 import type EnJSON from "static/lang/en.json";
+import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 
 interface GamePTR2e
     extends Game<
@@ -26,15 +27,19 @@ interface GamePTR2e
     > {
     ptr: {
         tree: PerkTree;
-        data: {
-            traits: Map<string, Trait>;
-        }
         util: {
             sluggify: typeof sluggify;
         };
+        data: {
+            traits: Map<string, Trait>;
+        };
         perks: PerkManager;
         tooltips: TooltipsPTR2e;
-    }
+        clocks: {
+            db: typeof ClockDatabase;
+            panel: ClockPanel;
+        };
+    };
 }
 
 type ConfiguredConfig = Config<
@@ -65,11 +70,11 @@ declare global {
         PTR: typeof PTRCONFIG;
         ui: ConfiguredConfig["ui"] & {
             perksTab: new () => PerkDirectory;
-        },
+        };
         Change: {
             documentClass: typeof ChangeModel;
             dataModels: Record<string, Partial<foundry.abstract.TypeDataModel>>;
-        }
+        };
     }
 
     const CONFIG: ConfigPTR2e;
