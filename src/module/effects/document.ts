@@ -6,6 +6,10 @@ import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect
 class ActiveEffectPTR2e<TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null> extends ActiveEffect<TParent> {
     declare system: ActiveEffectSystem;
 
+    get slug() {
+        return this.system.slug;
+    }
+
     static override defineSchema() {
         const schema = super.defineSchema() as { changes?: object, subtype?: object };
         delete schema.changes;
@@ -17,7 +21,11 @@ class ActiveEffectPTR2e<TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR
     }
 
     override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
-        return change.apply(actor, options);
+        const result = change.apply(actor, options);
+        if(result === false) return result;
+        
+        actor.rollOptions.addOption("effect", `${this.type}:${this.slug}`);
+        return result;
     }
 
     getRollOptions(): string[] {

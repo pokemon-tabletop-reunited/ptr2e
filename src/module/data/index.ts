@@ -5,3 +5,5 @@ export * from "./models/index.ts"
 
 export * as PTRCONSTS from "./constants.ts"
 export type * from "./constants.ts"
+
+export { default as RollOptionManager } from "./roll-option-manager.ts"
