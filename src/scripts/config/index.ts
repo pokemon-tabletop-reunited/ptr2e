@@ -12,6 +12,7 @@ import { BasicChangeSystem, ChangeModel } from "@data";
 import { ActiveEffectPTR2e, ActiveEffectSystem } from "@module/effects/index.ts";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem } from "@module/chat/index.ts";
 import Traits from "static/traits.json";
+import ItemDirectoryPTR2e from "@item/sidebar.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -69,7 +70,8 @@ export const PTRCONFIG = {
             move: data.MoveSystemModel,
             perk: data.PerkSystemModel,
             species: data.SpeciesSystemModel,
-            weapon: data.WeaponSystemModel
+            weapon: data.WeaponSystemModel,
+            effect: data.EffectSystemModel,
         },
         sheetClasses: {
             perk: [sheets.PerkSheetPTR2e],
@@ -89,6 +91,7 @@ export const PTRCONFIG = {
     ui: {
         perks: PerkDirectory,
         combat: CombatTrackerPTR2e,
+        items: ItemDirectoryPTR2e
     },
     data: {
         traits: Traits,

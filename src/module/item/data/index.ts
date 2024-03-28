@@ -8,3 +8,4 @@ export { default as MoveSystemModel } from "./move.ts";
 export { default as PerkSystemModel } from "./perk.ts";
 export { default as SpeciesSystemModel } from "./species.ts";
 export { default as WeaponSystemModel } from "./weapon.ts";
+export { default as EffectSystemModel } from "./effect.ts";

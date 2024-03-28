@@ -55,6 +55,8 @@ export const Init: PTRHook = {
             // CONFIG.MeasuredTemplate.layerClass = PTRCONFIG.MeasuredTemplate.layerClass;
             // CONFIG.Canvas.layers.templates.layerClass = PTRCONFIG.MeasuredTemplate.layerClass;
 
+            CONFIG.ui.items = PTRCONFIG.ui.items;
+
             // Register custom sheets
             {
                 Actors.unregisterSheet("core", ActorSheet);

@@ -99,11 +99,55 @@ class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
         });
 
         $html.find(".item-controls .item-edit").on("click", async (event) => {
-            const uuid = (event.currentTarget.closest(".item-controls") as HTMLElement)?.dataset?.uuid;
-            if (!uuid) return;
-            const document = await fromUuid(uuid);
+            const {uuid, itemId, effectId} = (event.currentTarget.closest(".item-controls") as HTMLElement)?.dataset;
+            if (uuid) {
+                const document = await fromUuid(uuid);
+    
+                return document?.sheet?.render(true);
+            }
+            if (itemId) {
+                const item = this.actor.items.get(itemId);
+    
+                return item?.sheet?.render(true);
+            }
+            if (effectId) {
+                const effect = this.actor.effects.get(effectId);
+    
+                return effect?.sheet?.render(true);
+            }
+            return;
+        });
 
-            return document?.sheet?.render(true);
+        $html.find(".item-controls .item-delete").on("click", async (event) => {
+            const {uuid, itemId, effectId} = (event.currentTarget.closest(".item-controls") as HTMLElement)?.dataset;
+            if (uuid) {
+                const document = await fromUuid(uuid);
+    
+                if(document) return Dialog.confirm({
+                    title: game.i18n.localize("PTR2E.Dialog.DeleteDocumentTitle"),
+                    content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", { name: document.name as string }),
+                    yes: () => document.delete()
+                })
+            }
+            if (itemId) {
+                const item = this.actor.items.get(itemId);
+    
+                if(item) return Dialog.confirm({
+                    title: game.i18n.localize("PTR2E.Dialog.DeleteDocumentTitle"),
+                    content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", { name: item.name as string }),
+                    yes: () => item.delete()
+                })
+            }
+            if (effectId) {
+                const effect = this.actor.effects.get(effectId);
+    
+                if(effect) return Dialog.confirm({
+                    title: game.i18n.localize("PTR2E.Dialog.DeleteDocumentTitle"),
+                    content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", { name: effect.name as string }),
+                    yes: () => effect.delete()
+                })
+            }
+            return;
         });
 
         $html.find(".attack .rollable").on("click", async (event) => {

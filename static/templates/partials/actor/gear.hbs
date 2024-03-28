@@ -1,1 +1,23 @@
-<h3>Gear</h3>
+<header>
+    <h2>Effects</h2>
+</header>
+<main>
+    <ol class="item-list">
+        {{#each effects}}
+        <li class="item" data-effect-id="{{_id}}">
+            <div class="item-icon">
+                <img class="icon" src="{{#if img}}{{img}}{{else}}/systems/ptr2e/img/icons/effect_icon.webp{{/if}}" title="{{name}}">
+            </div>
+            <div class="item-info">
+                <div class="item-name">
+                    <h4>{{name}}</h4>
+                </div>
+                <div class="item-controls" data-effect-id="{{_id}}">
+                    <a class="item-control item-edit" title="Edit effect"><i class="fas fa-edit"></i></a>
+                    <a class="item-control item-delete" title="Delete effect"><i class="fas fa-trash"></i></a>
+                </div>
+            </div>
+        </li>
+        {{/each}}
+    </ol>
+</main>

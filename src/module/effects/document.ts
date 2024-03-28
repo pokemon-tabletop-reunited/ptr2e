@@ -28,6 +28,14 @@ class ActiveEffectPTR2e<TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR
         return this.modifiesActor;
     }
 
+    override toObject(source?: true | undefined): this["_source"];
+    override toObject(source: false): RawObject<this>;
+    override toObject(source?: boolean | undefined): this["_source"] | RawObject<this> {
+        const data = super.toObject(source) as this["_source"];
+        data.changes = this.changes.map(c => c.toObject()) as this["_source"]["changes"];
+        return data;
+    }
+
     // TODO: Clean this up cause god it's a mess.
     protected override _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentUpdateContext<TParent>, user: User): Promise<boolean | void> {
         const parseChangePath = (expanded: { changes: unknown[], system?: unknown }) => {
