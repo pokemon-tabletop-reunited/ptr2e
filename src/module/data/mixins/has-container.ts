@@ -17,7 +17,7 @@ export default function HasContainer<BaseClass extends TemplateConstructor>(base
         abstract container: ContainerPTR2e | null;
 
 		declare _source: InstanceType<typeof baseClass>['_source'] & {
-            container: DocumentUUID;
+            container?: DocumentUUID | null;
         }
 
 		static override defineSchema(): foundry.data.fields.DataSchema {
@@ -32,7 +32,8 @@ export default function HasContainer<BaseClass extends TemplateConstructor>(base
 
 		override prepareBaseData() {
 			super.prepareBaseData();
-
+			if(!this._source.container) return;
+			
 			Object.defineProperty(
 				this,
 				"container",

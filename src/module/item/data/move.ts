@@ -4,6 +4,7 @@ import { sluggify } from "@utils";
 import Tagify from "@yaireo/tagify";
 import BaseActor from "types/foundry/common/documents/actor.js";
 import BaseUser from "types/foundry/common/documents/user.js";
+import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 
 /**
  * @category Item Data Models
@@ -149,3 +150,11 @@ export default abstract class MoveSystem extends HasBase(foundry.abstract.TypeDa
         return attack as AttackPTR2e; 
     }
 }
+
+export default interface MoveSystem {
+    readonly _source: MoveSystemSource;
+}
+
+export type MoveSource = BaseItemSourcePTR2e<"move", MoveSystemSource>;
+
+interface MoveSystemSource extends Required<ItemSystemSource> {}

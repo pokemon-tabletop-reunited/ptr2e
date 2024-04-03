@@ -34,7 +34,7 @@ class Predicate extends Array<PredicateStatement> {
     }
 
     /** Test this predicate against a domain of discourse */
-    test(options: Set<string> | string[]): boolean {
+    test(options: Iterable<string>): boolean {
         if (this.length === 0) {
             return true;
         } else if (!this.isValid) {

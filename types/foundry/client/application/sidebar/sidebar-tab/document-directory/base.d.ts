@@ -90,6 +90,15 @@ declare global {
         protected _handleDroppedFolder(target: HTMLElement, data: DropCanvasData): Promise<void>;
 
         /**
+         * Create a dropped Entry in this Collection
+         * @param {DirectoryMixinEntry} entry       The Entry being dropped
+         * @param {string} [folderId]               The ID of the Folder to which the Entry should be added
+         * @returns {Promise<DirectoryMixinEntry>}  The created Entry
+         * @protected
+         */
+        protected _createDroppedEntry(entry: TDocument, folderId?: string): Promise<TDocument>;
+
+        /**
          * Default folder context actions
          * @param html The context menu HTML being rendered for the directory
          */

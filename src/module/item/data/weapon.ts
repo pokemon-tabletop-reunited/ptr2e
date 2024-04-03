@@ -1,5 +1,6 @@
 import { WeaponPTR2e } from "@item";
-import GearSystem from "./gear.ts";
+import GearSystem, { GearSystemSource } from "./gear.ts";
+import { BaseItemSourcePTR2e } from "./system.ts";
 
 /**
  * @category Item Data Models
@@ -21,3 +22,7 @@ export default abstract class WeaponSystem extends GearSystem {
         }
     }
 }
+
+export type WeaponSource = BaseItemSourcePTR2e<"weapon", WeaponSystemSource>;
+
+interface WeaponSystemSource extends GearSystemSource {}

@@ -1,5 +1,7 @@
 import { ContainerPTR2e } from "@item";
 import { HasContainer, HasDescription, HasSlug, HasTraits, HasGearData } from "@module/data/index.ts";
+import { BaseItemSourcePTR2e } from "./system.ts";
+import { GearSystemSource } from "./gear.ts";
 
 const ContainerExtension = HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))))
 
@@ -44,4 +46,10 @@ export default abstract class ContainerSystem extends ContainerExtension {
             })
         }
     }
+}
+
+export type ContainerSource = BaseItemSourcePTR2e<"container", ContainerSystemSource>;
+
+interface ContainerSystemSource extends Omit<GearSystemSource, 'actions'> {
+    collapsed: boolean;
 }

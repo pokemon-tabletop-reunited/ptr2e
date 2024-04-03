@@ -1,10 +1,12 @@
 import { ActorPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
 import { ActiveEffectSystem } from "@effects";
-import { ChangeModel } from "@data";
+import { ChangeModel, Trait } from "@data";
 import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
 class ActiveEffectPTR2e<TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null> extends ActiveEffect<TParent> {
     declare system: ActiveEffectSystem;
+
+    declare grantedBy: ItemPTR2e | null;
 
     get slug() {
         return this.system.slug;
@@ -17,19 +19,51 @@ class ActiveEffectPTR2e<TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR
     }
 
     override get changes() {
-        return this.system.changes;
+        return this.system.changes ?? [];
+    }
+
+    get traits(): Map<string, Trait> {
+        return this.system.traits;
+    }
+
+    override prepareDerivedData(): void {
+        super.prepareDerivedData();
+
+        if(this.parent?.rollOptions) {
+            this.parent.rollOptions.addOption("effect", `${this.type}:${this.slug}`);
+        }
     }
 
     override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
         const result = change.apply(actor, options);
         if(result === false) return result;
         
-        actor.rollOptions.addOption("effect", `${this.type}:${this.slug}`);
         return result;
     }
 
-    getRollOptions(): string[] {
-        return [];
+    getRollOptions(prefix = this.type, {includeGranter = true } = {}): string[] {
+        const traitOptions = ((): string[] => {
+            const options = [];
+            for(const trait of this.traits.values()) {
+                options.push(`trait:${trait.slug}`);
+            }
+            return options;
+        })();
+        
+        const granterOptions = includeGranter
+            ? this.grantedBy?.getRollOptions("granter", {includeGranter: false}).map(o => `${prefix}:${o}`) ?? []
+            : [];
+
+        const options = [
+            `${prefix}:id:${this.id}`,
+            `${prefix}:${this.slug}`,
+            `${prefix}:slug:${this.slug}`,
+            ...granterOptions,
+            ...(this.parent?.getRollOptions() ?? []).map(o => `${prefix}:${o}`),
+            ...traitOptions.map(o => `${prefix}:${o}`)
+        ];
+        
+        return options;
     }
 
     targetsActor(): this is ActiveEffectPTR2e<ActorPTR2e> {
@@ -42,6 +76,15 @@ class ActiveEffectPTR2e<TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR
         const data = super.toObject(source) as this["_source"];
         data.changes = this.changes.map(c => c.toObject()) as this["_source"]["changes"];
         return data;
+    }
+
+    protected override async _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: User): Promise<boolean | void> {
+        if(!options.keepId && data._id) {
+            const statusEffect = CONFIG.statusEffects.find(effect => effect._id === data._id);
+            if(statusEffect) options.keepId = true;
+        }
+
+        return super._preCreate(data, options, user);
     }
 
     // TODO: Clean this up cause god it's a mess.
@@ -105,10 +148,6 @@ class ActiveEffectPTR2e<TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR
         delete changed.changes;
 
         return super._preUpdate(changed, options, user);
-    }
-
-    protected override _onUpdate(data: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, userId: string): void {
-        super._onUpdate(data, options, userId);
     }
 }
 

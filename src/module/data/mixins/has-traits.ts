@@ -9,7 +9,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
     abstract class TemplateClass extends baseClass {
         declare _source: InstanceType<typeof baseClass>['_source'] & {
             //TODO: Update this to Trait String
-            traits: string[];
+            traits: Set<string>;
         }
 
         static override defineSchema(): foundry.data.fields.DataSchema {

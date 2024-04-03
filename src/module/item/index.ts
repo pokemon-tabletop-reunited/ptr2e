@@ -26,10 +26,32 @@ export type {
     SpeciesPTR2e,
     WeaponPTR2e,
     PTUItem,
-    EffectPTR2e
-}
+    EffectPTR2e,
+};
 
-export type ItemSystemPTR = data.AbilitySystemModel | data.ConsumableSystemModel | data.ContainerSystemModel | data.EquipmentSystemModel | data.GearSystemModel | data.MoveSystemModel | data.PerkSystemModel | data.SpeciesSystemModel | data.WeaponSystemModel | data.EffectSystemModel;
+export type ItemSystemPTR =
+    | data.AbilitySystemModel
+    | data.ConsumableSystemModel
+    | data.ContainerSystemModel
+    | data.EquipmentSystemModel
+    | data.GearSystemModel
+    | data.MoveSystemModel
+    | data.PerkSystemModel
+    | data.SpeciesSystemModel
+    | data.WeaponSystemModel
+    | data.EffectSystemModel;
+
+export type ItemSourcePTR2e =
+    | data.AbilitySystemSource
+    | data.ConsumableSystemSource
+    | data.ContainerSystemSource
+    | data.EquipmentSystemSource
+    | data.GearSystemSource
+    | data.MoveSystemSource
+    | data.PerkSystemSource
+    | data.SpeciesSystemSource
+    | data.WeaponSystemSource
+    | data.EffectSystemSource;
 
 // Document
 export * from "./document.ts";

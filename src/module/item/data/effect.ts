@@ -1,6 +1,7 @@
 import { ActorPTR2e } from "@actor";
 import { EffectPTR2e } from "@item";
 import { HasSlug } from "@module/data/index.ts";
+import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 
 /**
  * @category Item Data Models
@@ -17,23 +18,31 @@ export default abstract class EffectSystem extends HasSlug(foundry.abstract.Type
         return this.parent._source.effects;
     }
 
-    override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
+    override async _preCreate(
+        data: this["parent"]["_source"],
+        options: DocumentModificationContext<this["parent"]["parent"]>,
+        user: User
+    ): Promise<boolean | void> {
         const result = await super._preCreate(data, options, user);
         if (result === false) return false;
 
-        if(this.parent.parent) {
+        if (this.parent.parent) {
             const parent = this.parent.parent;
-            if(parent instanceof ActorPTR2e) {
+            if (parent instanceof ActorPTR2e) {
                 const effects = this.effects;
                 await parent.createEmbeddedDocuments("ActiveEffect", effects);
                 return false;
             }
         }
 
-        if(!data.img || data.img === "icons/svg/item-bag.svg") {
+        if (!data.img || data.img === "icons/svg/item-bag.svg") {
             this.parent.updateSource({
-                img: "/systems/ptr2e/img/icons/effect_icon.webp"
-            })
+                img: "/systems/ptr2e/img/icons/effect_icon.webp",
+            });
         }
     }
 }
+
+export type EffectSource = BaseItemSourcePTR2e<"effect", EffectSystemSource>;
+
+interface EffectSystemSource extends Pick<ItemSystemSource, "slug"> {}

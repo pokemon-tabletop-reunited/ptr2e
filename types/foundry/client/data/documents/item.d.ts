@@ -60,7 +60,6 @@ declare global {
         get sheet(): ItemSheet<this, DocumentSheetOptions>;
 
         system: TSchema;
-        _source: SourceFromSchema<ItemSchema<string, TSchema>>;
     }
 
     namespace Item {

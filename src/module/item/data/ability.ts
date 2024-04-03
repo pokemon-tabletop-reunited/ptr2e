@@ -1,5 +1,6 @@
 import { AbilityPTR2e } from "@item";
 import { HasBase } from "@module/data/index.ts";
+import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 
 /**
  * @category Item Data Models
@@ -22,4 +23,10 @@ export default abstract class AbilitySystem extends HasBase(foundry.abstract.Typ
             })
         }
     }
+}
+
+export type AbilitySource = BaseItemSourcePTR2e<"ability", AbilitySystemSource>;
+
+interface AbilitySystemSource extends ItemSystemSource {
+    
 }

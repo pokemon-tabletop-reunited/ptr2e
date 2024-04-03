@@ -295,7 +295,6 @@ class CompendiumPack {
         }
 
         const db = new LevelDatabase(packDir, { packName: path.basename(packDir) });
-        //@ts-expect-error
         await db.createPack(this.finalizeAll(), this.folders);
         console.log(`Pack "${this.packId}" with ${this.data.length} entries built successfully.`);
 

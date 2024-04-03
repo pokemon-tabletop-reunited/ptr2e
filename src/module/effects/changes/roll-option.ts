@@ -3,7 +3,7 @@ import { ChangeModel } from "@data";
 import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
 
 export default class RollOptionChangeSystem extends ChangeModel {
-    static override TYPE = "rolloption";
+    static override TYPE = "roll-option";
 
     static override defineSchema() {
         const fields = foundry.data.fields;

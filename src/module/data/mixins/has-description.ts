@@ -7,7 +7,7 @@ import { TemplateConstructor } from './data-template.ts';
 export default function HasDescription<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
     class TemplateClass extends baseClass {
         declare _source: InstanceType<typeof baseClass>['_source'] & {
-            description: string;
+            description?: string | null;
         }
 
         static override defineSchema(): foundry.data.fields.DataSchema {
@@ -29,7 +29,7 @@ export default function HasDescription<BaseClass extends TemplateConstructor>(ba
          * This is a description of the item, which can be as long as necessary.
          * It is often used to provide the effects of the item, or to provide a more detailed description of the item's appearance.
          */
-        description: string;
+        description?: string | null;
     }
 
     return TemplateClass;

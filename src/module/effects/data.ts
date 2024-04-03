@@ -44,6 +44,42 @@ type RuleElementSchema = {
     // requiresInvestment: BooleanField<boolean, boolean, false, true, false>;
 };
 
-type ModelPropsFromRESchema<TSchema extends RuleElementSchema> = Omit<ModelPropsFromSchema<TSchema>, "label">;
+type ModelPropsFromRESchema<TSchema extends RuleElementSchema> = Omit<
+    ModelPropsFromSchema<TSchema>,
+    "label"
+>;
 
-export type { Bracket, BracketedValue, ModelPropsFromRESchema, RuleElementSchema, RuleElementSource, RuleValue };
+type EffectType = "affliction" | "passive";
+
+type BaseEffectSourcePTR2e<
+    TType extends EffectType,
+    TSystemSource extends EffectSystemSource = EffectSystemSource,
+> = foundry.documents.ActiveEffectSource<TType, TSystemSource> & {};
+
+type EffectSystemSource = {
+    /**
+     * A slug for the item, derived from its name.
+     * @defaultValue `slugify(this.name)`
+     * @remarks
+     * This is a unique identifier for the item within its parent actor.
+     * If the item's name changes, the slug should be automatically updated.
+     * If the slug is manually set, it should be unique within the actor's items.
+     * @example
+     * ```typescript
+     * const item = new ItemPTR2e({ name: 'Flashlight' });
+     * console.log(item.slug); // 'flashlight'
+     * ```
+     */
+    slug: string;
+};
+
+export type {
+    Bracket,
+    BracketedValue,
+    ModelPropsFromRESchema,
+    RuleElementSchema,
+    RuleElementSource,
+    RuleValue,
+    EffectSystemSource,
+    BaseEffectSourcePTR2e,
+};

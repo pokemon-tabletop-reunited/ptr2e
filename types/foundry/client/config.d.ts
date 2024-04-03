@@ -1,4 +1,5 @@
 import type * as TinyMCE from "tinymce";
+import { ActiveEffectSource } from "../common/documents/active-effect.js";
 
 declare global {
     interface Config<
@@ -603,11 +604,25 @@ declare global {
         [key: string]: ImageFilePath | VideoFilePath | undefined;
     }
 
-    interface StatusEffect {
+    // interface StatusEffect {
+    //     id: string;
+    //     label: string;
+    //     icon: ImageFilePath | VideoFilePath;
+    // }
+
+    type StatusEffect<TAESource extends ActiveEffectSource = ActiveEffectSource> = StatusEffectConfig<TAESource>;
+
+    type StatusEffectConfig<TAESource extends ActiveEffectSource = ActiveEffectSource> = {
         id: string;
-        label: string;
-        icon: ImageFilePath | VideoFilePath;
-    }
+        _id?: string;
+        img: ImageFilePath | VideoFilePath
+        name: string;
+        /**
+         * @defaultValue `true`
+         */
+        hud?: boolean;
+        statuses?: string[];
+    } & Partial<TAESource>;
 
     interface FontFamilyDefinition {
         /** Whether the font is available in the rich text editor. This will also enable it for notes and drawings. */

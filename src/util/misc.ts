@@ -184,3 +184,26 @@ export function sortStringRecord(record: Record<string, string>) {
 export function tupleHasValue<const A extends readonly unknown[]>(array: A, value: unknown): value is A[number] {
     return array.includes(value);
 }
+
+/** Create a "reduced" item name; that is, one without an "Effect:" or similar prefix */
+export function reduceItemName(label: string): string {
+    return label.includes(":") ? label.replace(/^[^:]+:\s*|\s*\([^)]+\)$/g, "") : label;
+}
+
+let intlNumberFormat: Intl.NumberFormat;
+/**
+ * Return an integer string of a number, always with sign (+/-)
+ * @param value The number to convert to a string
+ * @param options.emptyStringZero If the value is zero, return an empty string
+ * @param options.zeroIsNegative Treat zero as a negative value
+ */
+export function signedInteger(value: number, { emptyStringZero = false, zeroIsNegative = false } = {}): string {
+    if (value === 0 && emptyStringZero) return "";
+    const nf = (intlNumberFormat ??= new Intl.NumberFormat(game.i18n.lang, {
+        maximumFractionDigits: 0,
+        signDisplay: "always",
+    }));
+    const maybeNegativeZero = zeroIsNegative && value === 0 ? -0 : value;
+
+    return nf.format(maybeNegativeZero);
+}

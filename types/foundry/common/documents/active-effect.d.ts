@@ -91,7 +91,7 @@ type ActiveEffectSchema<
     flags: fields.ObjectField<DocumentFlags>;
 };
 
-export type ActiveEffectSource = SourceFromSchema<ActiveEffectSchema>;
+export type ActiveEffectSource<TType extends string = string, TSystemSource extends object = object> = SourceFromSchema<ActiveEffectSchema<TType, TSystemSource>>;
 
 export type EffectChangeData = BaseActiveEffect<null>["changes"][number];
 export type EffectDurationData = BaseActiveEffect<null>["duration"];

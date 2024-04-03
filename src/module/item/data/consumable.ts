@@ -1,5 +1,6 @@
 import { ConsumablePTR2e } from "@item";
 import { HasContainer, HasDescription, HasSlug, HasTraits } from "@module/data/index.ts";
+import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 
 const CONSUMABLE_TYPES = ["food", "restorative", "boosters", "ammo", "evolution-item", "pokeball", "other"] as const
 type ConsumableType = typeof CONSUMABLE_TYPES[number];
@@ -56,5 +57,15 @@ export default abstract class ConsumableSystem extends ConsumableExtension {
                 img: "/systems/ptr2e/img/icons/item_icon.webp"
             })
         }
+    }
+}
+
+export type ConsumableSource = BaseItemSourcePTR2e<"consumable", ConsumableSystemSource>;
+
+interface ConsumableSystemSource extends Omit<ItemSystemSource, 'actions'> {
+    consumableType: ConsumableType;
+    charges: {
+        value: number;
+        max: number;
     }
 }

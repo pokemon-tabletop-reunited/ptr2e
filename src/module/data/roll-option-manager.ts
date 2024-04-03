@@ -2,8 +2,12 @@ import { ActorPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
 
 export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {
+    #initialized = false;
+
     private get options(): RollOptions {
-        return this.document.flags.ptr2e!.rollOptions;
+        if(this.document.flags?.ptr2e?.rollOptions) return this.document.flags.ptr2e.rollOptions;
+        this.#initialized = false;
+        return this.initialize();
     }
 
     public get all(): Record<string, boolean> {
@@ -21,6 +25,7 @@ export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {
         option: string,
         { value = true, addToParent = true } = {}
     ) {
+        this.initialize();
         this.options[domain][option] = value;
         if (domain !== "all") {
             this.options.all[`${domain}:${option}`] = value;
@@ -32,11 +37,26 @@ export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {
             });
         }
     }
+
+    initialize() {
+        if (this.#initialized) return this.options;
+
+        if (!this.document.flags.ptr2e)
+            this.document.flags.ptr2e = {
+                rollOptions: { all: {}, item: {}, effect: {}, self: {} },
+            };
+        else this.document.flags.ptr2e.rollOptions = { all: {}, item: {}, effect: {}, self: {} };
+
+        this.#initialized = true;
+
+        return this.options;
+    }
 }
 export const RollOptionDomains = {
     all: "all",
     item: "item",
-    effect: "effect"
+    effect: "effect",
+    self: "self",
 };
 export type RollOptions = {
     [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;

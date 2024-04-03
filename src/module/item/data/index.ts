@@ -9,3 +9,14 @@ export { default as PerkSystemModel } from "./perk.ts";
 export { default as SpeciesSystemModel } from "./species.ts";
 export { default as WeaponSystemModel } from "./weapon.ts";
 export { default as EffectSystemModel } from "./effect.ts";
+
+export type { AbilitySource as AbilitySystemSource } from "./ability.ts";
+export type { ConsumableSource as ConsumableSystemSource } from "./consumable.ts";
+export type { ContainerSource as ContainerSystemSource } from "./container.ts";
+export type { EquipmentSource as EquipmentSystemSource } from "./equipment.ts";
+export type { GearSource as GearSystemSource } from "./gear.ts";
+export type { MoveSource as MoveSystemSource } from "./move.ts";
+export type { PerkSource as PerkSystemSource } from "./perk.ts";
+export type { SpeciesSource as SpeciesSystemSource } from "./species.ts";
+export type { WeaponSource as WeaponSystemSource } from "./weapon.ts";
+export type { EffectSource as EffectSystemSource } from "./effect.ts";

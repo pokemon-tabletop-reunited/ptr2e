@@ -13,4 +13,16 @@ export default class ItemDirectoryPTR2e<TItem extends ItemPTR2e<ItemSystemPTR, n
         }
         return super._onDrop(event);
     }
+
+    protected override _createDroppedEntry(entry: TItem, folderId?: string | undefined): Promise<TItem> {
+        const data = entry.toObject();
+        data.folder = folderId || null;
+        const options = { keepId: false };
+        if(data._id) {
+            const statusEffect = CONFIG.statusEffects.find(effect => effect._id === data._id);
+            if(statusEffect) options.keepId = true;
+        }
+        //@ts-expect-error
+        return entry.constructor.create(data, options);
+    }
 }

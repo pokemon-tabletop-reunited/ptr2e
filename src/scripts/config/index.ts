@@ -13,6 +13,7 @@ import { ActiveEffectPTR2e, ActiveEffectSystem } from "@module/effects/index.ts"
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem } from "@module/chat/index.ts";
 import Traits from "static/traits.json";
 import ItemDirectoryPTR2e from "@item/sidebar.ts";
+import { StatusEffects } from "./effects.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -96,4 +97,5 @@ export const PTRCONFIG = {
     data: {
         traits: Traits,
     },
+    statusEffects: StatusEffects
 }

@@ -1,28 +1,20 @@
 import { DistanceUnit, Trait, WeightUnit } from "@data";
+import { EffectSourcePTR2e } from "@effects";
+import { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
 
-type ModifierSynthetics = Record<"all" | "damage", DeferredModifier[]> & { [K in string]?: DeferredModifier[] };
-type ModifierAdjustmentSynthetics = { all: ModifierAdjustment[]; damage: ModifierAdjustment[] } & {
-    [K in string]?: ModifierAdjustment[];
-};
-type ModifierAdjustment = {}
-type ModifierPTR2e = {}
+type ModifierSynthetics = Record<"all" | "damage", DeferredModifier[]> & Record<string, DeferredModifier[] | undefined>;
+type ModifierAdjustmentSynthetics = { all: ModifierAdjustment[]; damage: ModifierAdjustment[] } & Record<
+    string,
+    ModifierAdjustment[] | undefined
+>;
+
+type DeferredEphemeralEffect = DeferredPromise<EffectSourcePTR2e | null>;
 type DeferredModifier = DeferredValue<ModifierPTR2e>;
 
-interface DeferredValueParams {
-    /** An object to merge into roll data for `Roll.replaceFormulaData` */
-    resolvables?: Record<string, unknown>;
-    /** An object to merge into standard options for `RuleElementPTR2e#resolveInjectedProperties` */
-    injectables?: Record<string, unknown>;
-    /** Roll Options to get against a predicate (if available) */
-    test?: string[] | Set<string>;
-}
-type DeferredValue<T> = (options?: DeferredValueParams) => T | null;
-type DeferredPromise<T> = (options?: DeferredValueParams) => Promise<T | null>;
-
 interface ActorSynthetics {
-    ephemeralEffects: ModifierSynthetics;
+    ephemeralEffects: Record<string, { target: DeferredEphemeralEffect[]; origin: DeferredEphemeralEffect[] } | undefined>;
     modifierAdjustments: ModifierAdjustmentSynthetics;
-    statisticsModifiers: ModifierSynthetics;
+    modifiers: ModifierSynthetics;
     preparationWarnings: {
         /** Adds a new preparation warning to be printed when flushed. These warnings are de-duped. */
         add: (warning: string) => void;
@@ -146,7 +138,6 @@ export type {
     ModifierSynthetics,
     ModifierAdjustmentSynthetics,
     ModifierAdjustment,
-    ModifierPTR2e,
     DeferredModifier,
     DeferredValueParams,
     DeferredValue,

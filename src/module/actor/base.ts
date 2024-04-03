@@ -57,9 +57,9 @@ class ActorPTR2e<
     override _initialize() {
         const preparationWarnings = new Set<string>();
         this.synthetics = {
-            ephemeralEffects: { all: [], damage: [] },
+            ephemeralEffects: { },
             modifierAdjustments: { all: [], damage: [] },
-            statisticsModifiers: { all: [], damage: [] },
+            modifiers: { all: [], damage: [] },
             preparationWarnings: {
                 add: (warning: string) => preparationWarnings.add(warning),
                 flush: fu.debounce(() => {
@@ -70,6 +70,8 @@ class ActorPTR2e<
                 }, 10), // 10ms also handles separate module executions
             },
         };
+
+        this.rollOptions = new RollOptionManager(this);
 
         this._actions = {
             generic: new Map(),
@@ -90,10 +92,7 @@ class ActorPTR2e<
     override prepareData() {
         if (this.type === "ptu-actor") return super.prepareData();
 
-        if (!this.flags.ptr2e)
-            this.flags.ptr2e = { rollOptions: { all: {}, item: {}, effect: {} } };
-        else this.flags.ptr2e.rollOptions = { all: {}, item: {}, effect: {} };
-        this.rollOptions = new RollOptionManager(this);
+        this.rollOptions.addOption("self", `type:${this.type}`);
 
         this.health = {
             percent: Math.floor(Math.random() * 100),
@@ -205,6 +204,11 @@ class ActorPTR2e<
 
     getRollOptions(): string[] {
         return [];
+    }
+
+    override getRollData(): Record<string, unknown> {
+        const rollData = {actor: this};
+        return rollData;
     }
 
     /**

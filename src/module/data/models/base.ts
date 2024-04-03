@@ -1,10 +1,11 @@
-import { ActionPTR2e, AttackPTR2e, BasicChangeSystem, RollOptionChangeSystem } from "@data";
+import { ActionPTR2e, AttackPTR2e, BasicChangeSystem, RollOptionChangeSystem, FlatModifierChangeSystem } from "@data";
 
 let changeTypes;
 export function ChangeModelTypes() {    
     return changeTypes ??= Object.freeze({
         [BasicChangeSystem.TYPE]: BasicChangeSystem,
-        [RollOptionChangeSystem.TYPE]: RollOptionChangeSystem
+        [RollOptionChangeSystem.TYPE]: RollOptionChangeSystem,
+        [FlatModifierChangeSystem.TYPE]: FlatModifierChangeSystem,
     });
 }
 

@@ -55,6 +55,9 @@ export const Init: PTRHook = {
             // CONFIG.MeasuredTemplate.layerClass = PTRCONFIG.MeasuredTemplate.layerClass;
             // CONFIG.Canvas.layers.templates.layerClass = PTRCONFIG.MeasuredTemplate.layerClass;
 
+            // Setup Active Effects
+            CONFIG.statusEffects = PTRCONFIG.statusEffects;
+
             CONFIG.ui.items = PTRCONFIG.ui.items;
 
             // Register custom sheets

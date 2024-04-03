@@ -1,8 +1,8 @@
 import { ActorPTR2e } from "@actor";
 import { ItemSheetPTR2e, ItemSystemPTR } from "@item";
-import { ActionType, ActionPTR2e, RollOptionManager } from "@data";
-import { ItemFlags } from "types/foundry/common/documents/item.js";
-import type { RollOptions } from "@module/data/roll-option-manager.ts";
+import { ActionType, ActionPTR2e, RollOptionManager, Trait } from "@data";
+import { ActiveEffectPTR2e } from "@effects";
+import { ItemFlagsPTR2e } from "./data/system.ts";
 
 /**
  * @extends {PTRItemData}
@@ -11,7 +11,10 @@ class ItemPTR2e<
     TSystem extends ItemSystemPTR = ItemSystemPTR,
     TParent extends ActorPTR2e | null = ActorPTR2e | null,
 > extends Item<TParent, TSystem> {
+    declare grantedBy: ItemPTR2e | null;
+    
     declare _sheet: ItemSheetPTR2e<this> | null;
+
     override get sheet() {
         return super.sheet as ItemSheetPTR2e<this>;
     }
@@ -30,8 +33,34 @@ class ItemPTR2e<
         return this.system.slug;
     }
 
-    getRollOptions(): string[] {
-        return [];
+    get traits(): Map<string, Trait> | null {
+        return 'traits' in this.system ? this.system.traits : null;
+    }
+
+    getRollOptions(prefix = this.type, {includeGranter = true } = {}): string[] {
+        const traitOptions = ((): string[] => {
+            if(!this.traits) return [];
+            const options = [];
+            for(const trait of this.traits.values()) {
+                options.push(`trait:${trait.slug}`);
+            }
+            return options;
+        })();
+        
+        const granterOptions = includeGranter
+            ? this.grantedBy?.getRollOptions("granter", {includeGranter: false}).map(o => `${prefix}:${o}`) ?? []
+            : [];
+
+        const options = [
+            `${prefix}:id:${this.id}`,
+            `${prefix}:${this.slug}`,
+            `${prefix}:slug:${this.slug}`,
+            ...granterOptions,
+            ...(this.parent?.getRollOptions() ?? []).map(o => `${prefix}:${o}`),
+            ...traitOptions.map(o => `${prefix}:${o}`)
+        ];
+        
+        return options;
     }
 
     get actions() {
@@ -49,9 +78,9 @@ class ItemPTR2e<
             passive: new Map(),
         };
 
-        if (!this.flags.ptr2e) this.flags.ptr2e = { rollOptions: { all: {}, item: {}, effect: {} } };
-        else this.flags.ptr2e.rollOptions = { all: {}, item: {}, effect: {}};
         this.rollOptions = new RollOptionManager(this);
+
+        this.rollOptions.addOption("item", `type:${this.type}`, { addToParent: false });
 
         super.prepareBaseData();
     }
@@ -93,10 +122,10 @@ class ItemPTR2e<
         if (data?.type !== "ActiveEffect")
             return super.fromDropData(data, options) as Promise<TDocument | undefined>;
 
-        let document = null;
+        let document: ActiveEffectPTR2e | null = null;
 
         // Case 1 - Data explicitly provided
-        if (data.data) document = new CONFIG.ActiveEffect.documentClass(data.data as any);
+        if (data.data) document = new CONFIG.ActiveEffect.documentClass(data.data as any) as ActiveEffectPTR2e;
         // Case 2 - UUID provided
         else if (data.uuid) document = await fromUuid(data.uuid);
 
@@ -113,6 +142,7 @@ class ItemPTR2e<
             name: document.name,
             type: "effect",
             effects: [document.toObject()],
+            _id: document._id,
         });
     }
 }
@@ -121,18 +151,15 @@ interface ItemPTR2e<
     TSystem extends ItemSystemPTR = ItemSystemPTR,
     TParent extends ActorPTR2e | null = ActorPTR2e | null,
 > extends Item<TParent, TSystem> {
+    constructor: typeof ItemPTR2e;
+    flags: ItemFlagsPTR2e;
+    readonly _source: foundry.documents.ItemSource<string, TSystem>;
+
+
     _actions: Record<ActionType, Map<string, ActionPTR2e>>;
 
-    flags: ItemFlags2e;
 
     rollOptions: RollOptionManager<this>;
 }
-
-type ItemFlags2e = ItemFlags & {
-    ptr2e: {
-        rollOptions: RollOptions & {};
-        disabled?: boolean;
-    };
-};
 
 export { ItemPTR2e };
