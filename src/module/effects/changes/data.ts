@@ -2,6 +2,8 @@
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import ActiveEffectSystem from "../system.ts";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
+import { RuleValue } from "../data.ts";
+import { RawPredicate } from "@system/predication/predication.ts";
 
 type ChangeModelOptions = {
     parent: ActiveEffectSystem;
@@ -31,12 +33,12 @@ type ChangeSchema = {
 
 type ChangeSource = {
     key: string;
-    value: number;
+    value: RuleValue;
     mode: number;
-    priority?: number;
+    priority?: number | null;
     type: string;
     label?: string;
-    predicate?: string;
+    predicate?: RawPredicate;
     ignored?: boolean;
 };
 

@@ -50,7 +50,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
                 initial: CONST.ACTIVE_EFFECT_MODES.ADD,
                 label: "EFFECT.ChangeMode",
             }),
-            priority: new fields.NumberField(),
+            priority: new fields.NumberField({}),
 
             // Type field
             type: new fields.StringField({
@@ -129,7 +129,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
     }
 
     /** Test this rule element's predicate, if present */
-    public test(options: Iterable<string> | null) {
+    public test(options?: Iterable<string> | null) {
         if (this.ignored) return false;
         if (this.predicate.length === 0) return true;
 
@@ -369,7 +369,7 @@ interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
         ModelPropsFromSchema<ChangeSchema> {
     constructor: typeof ChangeModel<TSchema>;
 
-    value: string | number ;
+    value: string | number;
 
     /**
      * Run between Actor#applyActiveEffects and Actor#prepareDerivedData. Generally limited to ActiveEffect-Like
@@ -405,7 +405,7 @@ interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
     afterRoll?(params: ChangeModel.AfterRollParams): Promise<void>;
 
     /** Runs before the rule's parent effect's owning actor is updated */
-    preUpdateActor?(): Promise<{ create: ItemPTR2e[]; delete: string[] }>;
+    preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[] }>;
 
     /**
      * Runs before this rules element's parent effect is created. The effect is temporarilly constructed. A rule element can
@@ -466,20 +466,22 @@ namespace ChangeModel {
         effectSource: EffectSourcePTR2e;
         /** The source of the change in `effectSource`'s `system.changes` array */
         changeSource: T;
-        /** All items pending creation in a `ItemPTR2e.createDocuments` call */
+        /** All effects pending creation in a `ActiveEffectPTR2e.createDocuments` call */
+        pendingEffects: EffectSourcePTR2e[];
+        /** All items pending creation in a `ActiveEffectPTR2e.createDocuments` call */
         pendingItems: ItemSourcePTR2e[];
         /** Items temporarily constructed from pending item source */
         tempItems: ItemPTR2e[];
         /** The context object from the `ItemPTR2e.createDocuments` call */
-        context: DocumentModificationContext<ActorPTR2e | null>;
+        context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>;
         /** Whether this preCreate run is from a pre-update reevaluation */
         reevaluation?: boolean;
     }
 
     export interface PreDeleteParams {
-        /** All items pending deletion in a `ItemPF2e.deleteDocuments` call */
+        /** All items pending deletion in a `ItemPTR2e.deleteDocuments` call */
         pendingItems: ItemPTR2e[];
-        /** The context object from the `ItemPF2e.deleteDocuments` call */
+        /** The context object from the `ItemPTR2e.deleteDocuments` call */
         context: DocumentModificationContext<ActorPTR2e | null>;
     }
 

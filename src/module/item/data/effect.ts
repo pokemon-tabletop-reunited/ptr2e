@@ -2,6 +2,7 @@ import { ActorPTR2e } from "@actor";
 import { EffectPTR2e } from "@item";
 import { HasSlug } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
+import { ActiveEffectPTR2e } from "@effects";
 
 /**
  * @category Item Data Models
@@ -30,7 +31,7 @@ export default abstract class EffectSystem extends HasSlug(foundry.abstract.Type
             const parent = this.parent.parent;
             if (parent instanceof ActorPTR2e) {
                 const effects = this.effects;
-                await parent.createEmbeddedDocuments("ActiveEffect", effects);
+                await ActiveEffectPTR2e.createDocuments(effects, { parent: parent })
                 return false;
             }
         }

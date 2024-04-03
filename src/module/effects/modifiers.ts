@@ -1,5 +1,5 @@
 import { Predicate, RawPredicate } from "@system/predication/predication.ts";
-import { DamageAlteration } from "./alteration.ts";
+import { DamageAlteration } from "./alterations/damage.ts";
 import ChangeModel from "./changes/change.ts";
 import { signedInteger, sluggify } from "@utils";
 import { ItemPTR2e } from "@item";

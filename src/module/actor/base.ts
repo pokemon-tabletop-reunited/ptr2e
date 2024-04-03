@@ -305,6 +305,7 @@ interface ActorPTR2e<
     TSystem extends ActorSystemPTR2e = ActorSystemPTR2e,
     TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
 > extends Actor<TParent, TSystem> {
+
     health: {
         percent: number;
     };

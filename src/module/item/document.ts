@@ -11,8 +11,10 @@ class ItemPTR2e<
     TSystem extends ItemSystemPTR = ItemSystemPTR,
     TParent extends ActorPTR2e | null = ActorPTR2e | null,
 > extends Item<TParent, TSystem> {
-    declare grantedBy: ItemPTR2e | null;
-    
+    declare grantedBy: ItemPTR2e | ActiveEffectPTR2e | null;
+
+    declare sourceId: string;
+
     declare _sheet: ItemSheetPTR2e<this> | null;
 
     override get sheet() {
@@ -107,7 +109,7 @@ class ItemPTR2e<
         this.rollOptions.addOption("item", `${this.type}:${this.slug}`);
     }
 
-    async toChat() {
+    async toChat()  {
         return ChatMessage.create({
             content: `<span>@Embed[${this.uuid} caption=false classes=no-tooltip]</span>`,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),

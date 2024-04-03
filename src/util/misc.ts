@@ -123,8 +123,8 @@ export function isBracketedValue(value: unknown): value is BracketedValue {
 }
 
 /** Short form of type and non-null check */
-function isObject<T extends object>(value: unknown): value is Record<string, unknown>;
 function isObject<T extends object>(value: unknown): value is DeepPartial<T>;
+function isObject<T extends object>(value: unknown): value is Record<string, unknown>;
 function isObject<T extends string>(value: unknown): value is { [K in T]?: unknown };
 function isObject(value: unknown): boolean {
     return typeof value === "object" && value !== null;

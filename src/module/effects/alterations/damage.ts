@@ -1,5 +1,5 @@
 import { ItemPTR2e } from "@item";
-import { ModifierPTR2e } from "./modifiers.ts";
+import { ModifierPTR2e } from "../modifiers.ts";
 
 class DamageAlteration {
     getNewValue(

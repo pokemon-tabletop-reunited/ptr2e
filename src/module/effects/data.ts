@@ -1,4 +1,6 @@
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
+import ChangeModel from "./changes/change.ts";
+import ActiveEffectSystem from "./system.ts";
 
 type RuleElementSource = {
     key?: JSONValue;
@@ -56,7 +58,7 @@ type BaseEffectSourcePTR2e<
     TSystemSource extends EffectSystemSource = EffectSystemSource,
 > = foundry.documents.ActiveEffectSource<TType, TSystemSource> & {};
 
-type EffectSystemSource = {
+type EffectSystemSource = ActiveEffectSystem & {
     /**
      * A slug for the item, derived from its name.
      * @defaultValue `slugify(this.name)`
@@ -71,6 +73,20 @@ type EffectSystemSource = {
      * ```
      */
     slug: string;
+
+    /**
+     * A record of traits that the item has.
+     * @remarks
+     * This is a record of traits that the item has, keyed by the trait's name.
+     * @example
+     * ```typescript
+     * const item = new ItemPTR2e({ name: 'Flashlight', "system.traits": ["light"] });
+     * console.log(item.system.traits); // { "light": TraitPTR2e }
+     * ```
+     */
+    traits: Set<string>;
+
+    changes: ChangeModel[];
 };
 
 export type {
