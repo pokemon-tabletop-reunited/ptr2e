@@ -134,8 +134,8 @@ class CompendiumPack {
                     if (!isCoreIconPath && !fs.existsSync(repoImgPath)) {
                         throw PackError(`${documentName} (${this.packId}) has an unknown image path: ${imgPath}`);
                     }
-                    if (!((imgPath as string) === "" || imgPath.match(/\.(?:svg|webp)$/))) {
-                        throw PackError(`${documentName} (${this.packId}) references a non-WEBP/SVG image: ${imgPath}`);
+                    if (!((imgPath as string) === "" || imgPath.match(/\.(?:svg|webp|png)$/))) {
+                        throw PackError(`${documentName} (${this.packId}) references a non-WEBP/SVG/PNG image: ${imgPath}`);
                     }
                 }
             }

@@ -130,13 +130,6 @@ export function flattenObject(obj: object, _d?: number): Record<string, unknown>
 export function expandObject<T extends Record<string, unknown>>(obj: object, _d?: number): T;
 
 /**
- * A simple function to test whether or not an Object is empty
- * @param obj    The object to test
- * @return       Is the object empty?
- */
-export function isObjectEmpty(obj: object): boolean;
-
-/**
  * Deeply difference an object against some other, returning the update keys and values
  * @param original
  * @param other

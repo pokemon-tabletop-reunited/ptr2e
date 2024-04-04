@@ -3,6 +3,7 @@ import { AttackPTR2e } from "@data";
 import { sluggify } from "@utils";
 import { DocumentSheetConfiguration, DocumentSheetV2 } from "./document.ts";
 import Tagify from "@yaireo/tagify";
+import GithubManager from "@module/apps/github.ts";
 
 type Tab = {
     id: string;
@@ -26,6 +27,7 @@ export default class MoveSheetPTR2eV2 extends foundry.applications.api.Handlebar
             },
             actions: {
                 toChat: this.#toChat,
+                toGithub: GithubManager.commitItemToGithub,
             },
             form: {
                 submitOnChange: true,
@@ -184,9 +186,17 @@ export default class MoveSheetPTR2eV2 extends foundry.applications.api.Handlebar
 
         // Add send to chat button
         const toChatLabel = game.i18n.localize("PTR2E.MoveSheet.SendToChatLabel");
-        const copyId = `<button type="button" class="header-control fa-solid fa-arrow-up-right-from-square" data-action="toChat"
+        const toChat = `<button type="button" class="header-control fa-solid fa-arrow-up-right-from-square" data-action="toChat"
                                 data-tooltip="${toChatLabel}" aria-label="${toChatLabel}"></button>`;
-        this.window.controls.insertAdjacentHTML("afterend", copyId);
+        this.window.controls.insertAdjacentHTML("afterend", toChat);
+
+        if(game.settings.get("ptr2e", "dev-mode")) {
+            // Add send to chat button
+            const commitToGithubLabel = game.i18n.localize("PTR2E.UI.DevMode.CommitToGithub.Label");
+            const commitToGithub = `<button type="button" class="header-control fa-solid fa-upload" data-action="toGithub"
+                                    data-tooltip="${commitToGithubLabel}" aria-label="${commitToGithubLabel}"></button>`;
+            this.window.controls.insertAdjacentHTML("afterend", commitToGithub);
+        }
 
         return frame;
     }

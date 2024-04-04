@@ -99,6 +99,15 @@ export const Init: PTRHook = {
                 requiresReload: true,
             });
 
+            game.settings.register("ptr2e", "dev-mode", {
+                name: "PTR2E.Settings.DevMode.Name",
+                hint: "PTR2E.Settings.DevMode.Hint",
+                scope: "world",
+                config: true,
+                type: Boolean,
+                default: true,
+            });
+
             // Register handlebars helpers
             registerHandlebarsHelpers();
             HandlebarTemplates.register();
