@@ -18,6 +18,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
             return {
                 ...super.defineSchema(),
 
+                //TODO: Add validation to Traits field
                 traits: new fields.SetField(new fields.StringField())
             };
         }
