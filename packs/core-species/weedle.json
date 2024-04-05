@@ -6,7 +6,9 @@
     "number": 13,
     "size": {
       "category": "tiny",
-      "type": "length"
+      "type": "length",
+      "height": 0.3,
+      "weight": 3.2
     },
     "diet": [
       "herbivore"
@@ -67,32 +69,93 @@
     },
     "slug": "",
     "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spa": 0,
-      "spd": 0,
-      "spe": 0
+      "hp": 40,
+      "atk": 35,
+      "def": 30,
+      "spa": 20,
+      "spd": 20,
+      "spe": 50
     },
     "types": [
-      "untyped"
-    ]
+      "bug",
+      "poison"
+    ],
+    "moves": {
+      "tutor": [
+        {
+          "name": "electroweb",
+          "gen": "ultra-sun-ultra-moon"
+        }
+      ],
+      "levelUp": [
+        {
+          "name": "poison-sting",
+          "gen": "brilliant-diamond-and-shining-pearl",
+          "level": 1
+        },
+        {
+          "name": "string-shot",
+          "gen": "brilliant-diamond-and-shining-pearl",
+          "level": 1
+        },
+        {
+          "name": "bug-bite",
+          "gen": "brilliant-diamond-and-shining-pearl",
+          "level": 9
+        }
+      ]
+    },
+    "captureRate": 255,
+    "eggGroups": [
+      "bug"
+    ],
+    "genderRatio": 4,
+    "evolutions": {
+      "full": {
+        "name": "weedle",
+        "details": null,
+        "evolutions": [
+          {
+            "name": "kakuna",
+            "details": {
+              "gender": null,
+              "item": null,
+              "knownMove": null,
+              "level": 7
+            },
+            "evolutions": [
+              {
+                "name": "beedrill",
+                "details": {
+                  "gender": null,
+                  "item": null,
+                  "knownMove": null,
+                  "level": 10
+                },
+                "evolutions": []
+              }
+            ]
+          }
+        ]
+      }
+    }
   },
   "_id": "BmuDohMAWcHopUmk",
   "effects": [],
   "folder": null,
   "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
+  "ownership": {},
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-species.Item.BmuDohMAWcHopUmk"
+    }
   },
-  "flags": {},
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
     "systemVersion": "0.001",
     "createdTime": 1712230052166,
-    "modifiedTime": 1712230052166,
+    "modifiedTime": 1712321367001,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
   },
   "_key": "!items!BmuDohMAWcHopUmk"

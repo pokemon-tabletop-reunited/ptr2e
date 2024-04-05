@@ -6,7 +6,9 @@
     "number": 11,
     "size": {
       "category": "small",
-      "type": "height"
+      "type": "height",
+      "height": 0.7,
+      "weight": 9.9
     },
     "diet": [
       "nullivore"
@@ -61,32 +63,96 @@
     },
     "slug": "",
     "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spa": 0,
-      "spd": 0,
-      "spe": 0
+      "hp": 50,
+      "atk": 20,
+      "def": 55,
+      "spa": 25,
+      "spd": 25,
+      "spe": 30
     },
     "types": [
-      "untyped"
-    ]
+      "bug"
+    ],
+    "moves": {
+      "tutor": [
+        {
+          "name": "string-shot",
+          "gen": "heartgold-soulsilver"
+        },
+        {
+          "name": "bug-bite",
+          "gen": "ultra-sun-ultra-moon"
+        }
+      ],
+      "machine": [
+        {
+          "name": "iron-defense",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "electroweb",
+          "gen": "sword-shield"
+        }
+      ],
+      "levelUp": [
+        {
+          "name": "harden",
+          "gen": "brilliant-diamond-and-shining-pearl",
+          "level": 1
+        }
+      ]
+    },
+    "captureRate": 120,
+    "eggGroups": [
+      "bug"
+    ],
+    "genderRatio": 4,
+    "evolutions": {
+      "full": {
+        "name": "caterpie",
+        "details": null,
+        "evolutions": [
+          {
+            "name": "metapod",
+            "details": {
+              "gender": null,
+              "item": null,
+              "knownMove": null,
+              "level": 7
+            },
+            "evolutions": [
+              {
+                "name": "butterfree",
+                "details": {
+                  "gender": null,
+                  "item": null,
+                  "knownMove": null,
+                  "level": 10
+                },
+                "evolutions": []
+              }
+            ]
+          }
+        ]
+      }
+    }
   },
   "_id": "DLpRR7pFa4VCgCpC",
   "effects": [],
   "folder": null,
   "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
+  "ownership": {},
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-species.Item.DLpRR7pFa4VCgCpC"
+    }
   },
-  "flags": {},
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
     "systemVersion": "0.001",
     "createdTime": 1712230052166,
-    "modifiedTime": 1712230052166,
+    "modifiedTime": 1712321367001,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
   },
   "_key": "!items!DLpRR7pFa4VCgCpC"

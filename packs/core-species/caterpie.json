@@ -6,7 +6,9 @@
     "number": 10,
     "size": {
       "category": "tiny",
-      "type": "length"
+      "type": "length",
+      "height": 0.3,
+      "weight": 2.9
     },
     "diet": [
       "herbivore"
@@ -65,32 +67,98 @@
     },
     "slug": "",
     "stats": {
-      "hp": 0,
-      "atk": 0,
-      "def": 0,
-      "spa": 0,
-      "spd": 0,
-      "spe": 0
+      "hp": 45,
+      "atk": 30,
+      "def": 35,
+      "spa": 20,
+      "spd": 20,
+      "spe": 45
     },
     "types": [
-      "untyped"
-    ]
+      "bug"
+    ],
+    "moves": {
+      "tutor": [
+        {
+          "name": "snore",
+          "gen": "ultra-sun-ultra-moon"
+        }
+      ],
+      "machine": [
+        {
+          "name": "electroweb",
+          "gen": "sword-shield"
+        }
+      ],
+      "levelUp": [
+        {
+          "name": "tackle",
+          "gen": "brilliant-diamond-and-shining-pearl",
+          "level": 1
+        },
+        {
+          "name": "string-shot",
+          "gen": "brilliant-diamond-and-shining-pearl",
+          "level": 1
+        },
+        {
+          "name": "bug-bite",
+          "gen": "brilliant-diamond-and-shining-pearl",
+          "level": 9
+        }
+      ]
+    },
+    "captureRate": 255,
+    "eggGroups": [
+      "bug"
+    ],
+    "genderRatio": 4,
+    "evolutions": {
+      "full": {
+        "name": "caterpie",
+        "details": null,
+        "evolutions": [
+          {
+            "name": "metapod",
+            "details": {
+              "gender": null,
+              "item": null,
+              "knownMove": null,
+              "level": 7
+            },
+            "evolutions": [
+              {
+                "name": "butterfree",
+                "details": {
+                  "gender": null,
+                  "item": null,
+                  "knownMove": null,
+                  "level": 10
+                },
+                "evolutions": []
+              }
+            ]
+          }
+        ]
+      }
+    }
   },
   "_id": "QEUZx1xKGWHNOHde",
   "effects": [],
   "folder": null,
   "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
+  "ownership": {},
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-species.Item.QEUZx1xKGWHNOHde"
+    }
   },
-  "flags": {},
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
     "systemVersion": "0.001",
     "createdTime": 1712230052166,
-    "modifiedTime": 1712230052166,
+    "modifiedTime": 1712321367001,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
   },
   "_key": "!items!QEUZx1xKGWHNOHde"
