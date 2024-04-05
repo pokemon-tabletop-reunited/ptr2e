@@ -1,3 +1,4 @@
+import { ActionPTR2e } from "@data";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
 import { DocumentSheetV2 } from "@item/sheets/document.ts";
 import { isObject } from "@utils";
@@ -91,6 +92,17 @@ class GithubManager {
         packItem: TDocument["_source"]
     ) {
         const data: Record<string, any> = fu.mergeObject(packItem, diff, { inplace: false });
+        if('actions' in packItem.system && diff.system?.actions !== undefined) {
+            const actions = data.system.actions = packItem.system.actions as unknown as Array<ActionPTR2e>;
+            for(const [key, action] of Object.entries<ActionPTR2e>(diff.system.actions)) {
+                const index = parseInt(key);
+                if(actions[index]) {
+                    actions[index] = fu.mergeObject(actions[index], action, {inplace: false});
+                } else {
+                    data.system.actions.push(action);
+                }
+            }
+        }
 
         if (data.flags?.core) {
             if (data.flags.core?.sourceId) {
