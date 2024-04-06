@@ -177,7 +177,7 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
                 "input.ptr2e-tagify"
             )) {
                 new Tagify(input, {
-                    enforceWhitelist: true,
+                    enforceWhitelist: false,
                     keepInvalidTags: false,
                     editTags: false,
                     tagTextProp: "label",

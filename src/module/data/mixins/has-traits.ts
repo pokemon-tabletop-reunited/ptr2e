@@ -33,6 +33,11 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
                     acc.set(traitSlug, trait);
                     this._traits.push(trait);
                 }
+                else {
+                    console.warn(`Could not find trait with slug ${traitSlug}`);
+                    console.warn("TODO: Remove this functionality and add a migration to remove invalid traits.")
+                    acc.set(traitSlug, { label: Handlebars.helpers.formatSlug(traitSlug), description: '', slug: traitSlug, related: []});
+                }
                 return acc;
             }, new Map());
         }
