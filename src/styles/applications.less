@@ -14,13 +14,13 @@
         align-items: center;
     }
 
-    &.move-sheet {
+    &.move-sheet, &.species-sheet {
         background: var(--appv2-background);
 
         .window-content {
             display: grid;
             grid-template-columns: 45% 55%;
-            grid-template-rows: calc(1rem + 48px) calc(0.5rem + 38px) auto;
+            grid-template-rows: calc(1rem + 48px) min-content auto;
             grid-template-areas:
                 "header nav"
                 "traits traits"
@@ -59,6 +59,8 @@
                 grid-area: nav;
                 border: unset;
 
+                justify-content: space-evenly;
+
                 margin: 0;
                 padding: 0.5rem;
                 padding-left: 0;
@@ -70,7 +72,7 @@
             aside.traits {
                 grid-area: traits;
 
-                height: calc(0.5rem + 38px);
+                min-height: calc(0.5rem + 38px);
                 padding: 0.25rem;
 
                 border-bottom: 1px solid var(--color-light-6);
@@ -102,21 +104,111 @@
                 padding: 1rem;
 
                 &[data-tab=details] {
-
                     .editor,
                     .editor .editor-content {
                         min-height: 200px;
+                    }
+
+                    .base-stats{
+                        display: grid;
+                        grid-template-columns: 1fr 1fr;
+                        grid-column-gap: 0.5rem;
+
+                        padding: 0.5rem;
+                        border: 1px solid var(--color-light-6);
+                        border-radius: 8px;
+
+                        .form-group {
+                            justify-content: space-between;
+                            label {
+                                flex: 0 0 60%;
+                            }
+                            .form-fields {
+                                flex: 0 0 35%;
+                                text-align: center;
+                            }
+                        }
+                    }
+
+                    .movement-header, .base-stats-header {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-between;
+                        align-items: center;
+                        padding: 0.25rem;
+                        margin-top: 0.5rem;
+                        border-bottom: 1px solid var(--color-light-6);
+
+                        .item-controls {
+                            flex: 0 0 45px;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;;
+                        }
+                    }
+
+                    .movement, .skill {
+                        padding: 0.25rem;
+                        border: 1px solid var(--color-light-6); 
+                        border-radius: 8px;
+
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 15px;
+                        grid-column-gap: 0.5rem;
+
+                        &.center {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+
+                            small {
+                                color: var(--color-light-5);
+                            }
+                        }
+
+                        .form-group {
+                            justify-content: space-between;
+                            label {
+                                flex: 0 0 30%;
+                                text-align: center;
+                            }
+                            .form-fields {
+                                flex: 0 0 60%;
+                                text-align: center;
+                            }
+                        }
+
+                        .item-controls {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                    }
+
+                    .move {
+                        display: flex;
+                        flex-direction: row;
+
+                        .form-group {
+                            flex: 1;
+                            text-align: center;
+                            margin: 0.25rem;
+                        }
                     }
                 }
 
                 &[data-tab=attack] {
                     padding: 0;
+                }
 
-                    form.scroll {
-                        padding: 1rem;
-                        overflow-y: scroll;
-                        height: 100%;
-                    }
+                form.scroll {
+                    padding: 1rem;
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+                    height: 100%;
                 }
 
                 &[data-tab=actions].active {
@@ -173,7 +265,7 @@
                     display: flex;
                     flex-direction: column;
                     flex-wrap: nowrap;
-                    gap: 1rem;
+                    gap: 0.5rem;
 
                     margin-bottom: 0.5rem;
                     border-radius: 8px;
@@ -193,6 +285,52 @@
 
                 textarea {
                     resize: vertical;
+                }
+            }
+        }
+    }
+
+    &.species-sheet {
+        .window-content {
+            section.tab {
+                &[data-tab=details] {
+                    padding: 0;
+
+                    div.scroll {
+                        padding: 1rem;
+                        overflow-y: scroll;
+                        overflow-x: hidden;
+                        height: 100%;
+
+                        display: flex;
+                        flex-direction: row;
+                        flex-wrap: wrap;
+                        justify-content: space-between;
+                        gap: 0.5rem;
+
+                        h5 {
+                            margin: 0;
+                        }
+
+                        fieldset {
+                            flex: 0 0 48%;
+                            &.moves {
+                                flex: 0 0 100%;
+
+                                display: flex;
+                                flex-direction: row;
+                                flex-wrap: wrap;
+                                justify-content: space-between;
+
+                                fieldset {
+                                    flex: 0 0 48%;
+                                }
+                            }
+                            &.evolutions {
+                                flex: 0 0 100%;
+                            }
+                        }
+                    }
                 }
             }
         }

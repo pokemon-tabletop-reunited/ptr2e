@@ -13,7 +13,6 @@ import { PTRCONFIG } from "@scripts/config/index.ts";
 import { sluggify } from "@utils";
 import type EnJSON from "static/lang/en.json";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
-import { Pokedex } from "pokeapi-js-wrapper";
 
 interface GamePTR2e
     extends Game<
@@ -30,7 +29,6 @@ interface GamePTR2e
         tree: PerkTree;
         util: {
             sluggify: typeof sluggify;
-            pokeApi: Pokedex;
         };
         data: {
             traits: Map<string, Trait>;

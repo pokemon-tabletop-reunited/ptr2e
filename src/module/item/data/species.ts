@@ -43,38 +43,55 @@ class SpeciesSystem extends SpeciesExtension {
 
         return {
             ...super.defineSchema(),
-            number: new fields.NumberField({ required: true, min: 0 }),
-            form: new fields.StringField({ required: false, nullable: true }),
+            number: new fields.NumberField({
+                required: true,
+                min: 0,
+                label: "PTR2E.FIELDS.pokemonNumber.label",
+                hint: "PTR2E.FIELDS.pokemonNumber.hint",
+            }),
+            form: new fields.StringField({
+                required: false,
+                nullable: true,
+                initial: null,
+                label: "PTR2E.FIELDS.pokemonForm.label",
+                hint: "PTR2E.FIELDS.pokemonForm.hint",
+            }),
             stats: new fields.SchemaField({
                 hp: new fields.NumberField({
                     required: true,
                     initial: 0,
                     validate: (d) => (d as number) >= 0,
+                    label: `PTR2E.Attributes.hp.Label`,
                 }),
                 atk: new fields.NumberField({
                     required: true,
                     initial: 0,
                     validate: (d) => (d as number) >= 0,
+                    label: `PTR2E.Attributes.atk.Label`,
                 }),
                 def: new fields.NumberField({
                     required: true,
                     initial: 0,
                     validate: (d) => (d as number) >= 0,
+                    label: `PTR2E.Attributes.def.Label`,
                 }),
                 spa: new fields.NumberField({
                     required: true,
                     initial: 0,
                     validate: (d) => (d as number) >= 0,
+                    label: `PTR2E.Attributes.spa.Label`,
                 }),
                 spd: new fields.NumberField({
                     required: true,
                     initial: 0,
                     validate: (d) => (d as number) >= 0,
+                    label: `PTR2E.Attributes.spd.Label`,
                 }),
                 spe: new fields.NumberField({
                     required: true,
                     initial: 0,
                     validate: (d) => (d as number) >= 0,
+                    label: `PTR2E.Attributes.spe.Label`,
                 }),
             }),
             types: new fields.SetField(
@@ -100,61 +117,121 @@ class SpeciesSystem extends SpeciesExtension {
                     required: true,
                     initial: "medium",
                     blank: false,
+                    label: "PTR2E.FIELDS.size.category.label",
+                    hint: "PTR2E.FIELDS.size.category.hint",
                 }),
-                type: new fields.StringField({ required: true, initial: "height", blank: false }),
-                height: new fields.NumberField({ required: true, initial: 0, integer: false }),
-                weight: new fields.NumberField({ required: true, initial: 0, integer: false }),
+                type: new fields.StringField({
+                    required: true,
+                    initial: "height",
+                    blank: false,
+                    label: "PTR2E.FIELDS.size.type.label",
+                    hint: "PTR2E.FIELDS.size.type.hint",
+                }),
+                height: new fields.NumberField({
+                    required: true,
+                    initial: 0,
+                    integer: false,
+                    label: "PTR2E.FIELDS.size.height.label",
+                    hint: "PTR2E.FIELDS.size.height.hint",
+                }),
+                weight: new fields.NumberField({
+                    required: true,
+                    initial: 0,
+                    integer: false,
+                    label: "PTR2E.FIELDS.size.weight.label",
+                    hint: "PTR2E.FIELDS.size.weight.hint",
+                }),
             }),
-            diet: new fields.ArrayField(new fields.StringField(), { required: true, initial: [] }),
+            diet: new fields.SetField(new fields.StringField({ blank: false }), {
+                required: true,
+                initial: [],
+                label: "PTR2E.FIELDS.diet.label",
+                hint: "PTR2E.FIELDS.diet.hint",
+            }),
             abilities: new fields.SchemaField({
-                starting: new fields.ArrayField(new fields.StringField(), {
+                starting: new fields.SetField(new fields.StringField({ blank: false }), {
                     required: true,
                     initial: [],
+                    label: "PTR2E.FIELDS.abilities.starting.label",
                 }),
-                basic: new fields.ArrayField(new fields.StringField(), {
+                basic: new fields.SetField(new fields.StringField({ blank: false }), {
                     required: true,
                     initial: [],
+                    label: "PTR2E.FIELDS.abilities.basic.label",
                 }),
-                advanced: new fields.ArrayField(new fields.StringField(), {
+                advanced: new fields.SetField(new fields.StringField({ blank: false }), {
                     required: true,
                     initial: [],
+                    label: "PTR2E.FIELDS.abilities.advanced.label",
                 }),
-                master: new fields.ArrayField(new fields.StringField(), {
+                master: new fields.SetField(new fields.StringField({ blank: false }), {
                     required: true,
                     initial: [],
+                    label: "PTR2E.FIELDS.abilities.master.label",
                 }),
             }),
             movement: new fields.SchemaField({
                 primary: new fields.ArrayField(new fields.ObjectField(), {
                     required: true,
                     initial: [],
+                    label: "PTR2E.FIELDS.movement.primary.label",
                 }),
                 secondary: new fields.ArrayField(new fields.ObjectField(), {
                     required: true,
                     initial: [],
+                    label: "PTR2E.FIELDS.movement.secondary.label",
                 }),
             }),
-            skills: new fields.ObjectField({ required: true, initial: {} }),
+            skills: new SkillsField({ required: true, initial: {} }),
             moves: new fields.SchemaField({
                 levelUp: new fields.ArrayField(getMoveField(true), { required: true, initial: [] }),
                 egg: new fields.ArrayField(getMoveField(), { required: true, initial: [] }),
                 tutor: new fields.ArrayField(getMoveField(), { required: true, initial: [] }),
                 machine: new fields.ArrayField(getMoveField(), { required: true, initial: [] }),
             }),
-            captureRate: new fields.NumberField({ required: true, initial: 0, min: 0, max: 255 }),
-            eggGroups: new fields.ArrayField(new fields.StringField(), {
+            captureRate: new fields.NumberField({
                 required: true,
-                initial: [],
+                initial: 0,
+                min: 0,
+                max: 255,
+                label: "PTR2E.FIELDS.captureRate.label",
+                hint: "PTR2E.FIELDS.captureRate.hint",
             }),
-            genderRatio: new fields.NumberField({ required: true, initial: -1, min: -1, max: 8 }),
-            habitats: new fields.SetField(new fields.StringField(), {
+            eggGroups: new fields.SetField(new fields.StringField({ blank: false }), {
                 required: true,
                 initial: [],
+                label: "PTR2E.FIELDS.eggGroups.label",
+                hint: "PTR2E.FIELDS.eggGroups.hint",
+            }),
+            genderRatio: new fields.NumberField({
+                required: true,
+                initial: -1,
+                min: -1,
+                max: 8,
+                label: "PTR2E.FIELDS.genderRatio.label",
+                hint: "PTR2E.FIELDS.genderRatio.hint",
+            }),
+            habitats: new fields.SetField(new fields.StringField({ blank: false }), {
+                required: true,
+                initial: [],
+                label: "PTR2E.FIELDS.habitats.label",
+                hint: "PTR2E.FIELDS.habitats.hint",
             }),
             evolutions: new fields.SchemaField({
-                full: new fields.EmbeddedDataField(EvolutionData, { required: true, nullable: true, initial: null }),
+                full: new fields.EmbeddedDataField(EvolutionData, {
+                    required: true,
+                    nullable: true,
+                    initial: null,
+                }),
             }),
         };
+    }
+
+    override prepareBaseData(): void {
+        super.prepareBaseData();
+        this.skills = Object.fromEntries(
+            Object.entries(this.skills).sort(([a], [b]) => a.localeCompare(b))
+        );
     }
 
     override async _preCreate(
@@ -170,6 +247,28 @@ class SpeciesSystem extends SpeciesExtension {
                 img: "/systems/ptr2e/img/icons/species_icon.webp",
             });
         }
+    }
+}
+
+class SkillsField<
+    TSourceProp extends object,
+    TModelProp = TSourceProp,
+    TRequired extends boolean = true,
+    TNullable extends boolean = false,
+    THasInitial extends boolean = true,
+> extends foundry.data.fields.ObjectField<
+    TSourceProp,
+    TModelProp,
+    TRequired,
+    TNullable,
+    THasInitial
+> {
+    protected override _cleanType(value: unknown): unknown {
+        if (typeof value !== "object") return super._cleanType(value);
+        
+        return Object.fromEntries(
+            Object.entries(value as Record<string, unknown>).sort(([a], [b]) => a.localeCompare(b))
+        )
     }
 }
 
@@ -281,8 +380,8 @@ interface SpeciesSystem {
     };
 
     movement: {
-        primary: Record<string, number>[];
-        secondary: Record<string, number>[];
+        primary: { type: string; value: number }[];
+        secondary: { type: string; value: number }[];
     };
 
     skills: Record<string, number>;
@@ -304,4 +403,29 @@ interface SpeciesSystemSource extends Omit<ItemSystemSource, "container" | "acti
         spe: number;
     };
     types: PokemonType[];
+
+    size: {
+        /** small, huge, medium etc. */
+        category: string;
+        /** quadraped / height measurement */
+        type: string;
+    };
+
+    diet: string[];
+    habitat: string[];
+    eggGroups: string[];
+
+    abilities: {
+        starting: string[];
+        basic: string[];
+        advanced: string[];
+        master: string[];
+    };
+
+    movement: {
+        primary: Record<string, number>[];
+        secondary: Record<string, number>[];
+    };
+
+    skills: Record<string, number>;
 }

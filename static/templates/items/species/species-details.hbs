@@ -1,0 +1,277 @@
+<section class="tab sheet-body {{tabs.details.cssClass}}" data-tab="details" data-group="sheet">
+    <div class="scroll">
+        <fieldset>
+            <legend>
+                Base Info
+            </legend>
+            <!-- Number -->
+            {{formField fields.number value=source.system.number localize=true}}
+            <!-- Types -->
+            {{formField fields.types value=source.system.types localize=true}}
+            <!-- Capture Rate -->
+            {{formField fields.captureRate value=source.system.captureRate localize=true}}
+            <!-- Stats -->
+            <div class="base-stats-header">
+                <h5>Base Stats</h5>
+            </div>
+            <div class="base-stats">
+                {{formField fields.stats.fields.hp value=source.system.stats.hp localize=true}}
+                {{formField fields.stats.fields.def value=source.system.stats.def localize=true}}
+                {{formField fields.stats.fields.atk value=source.system.stats.atk localize=true}}
+                {{formField fields.stats.fields.spa value=source.system.stats.spa localize=true}}
+                {{formField fields.stats.fields.spd value=source.system.stats.spd localize=true}}
+                {{formField fields.stats.fields.spe value=source.system.stats.spe localize=true}}
+            </div>
+            <!-- Movement -->
+            <div class="movement-header">
+                <h5>Primary Movement</h5>
+                <div class="item-controls">
+                    <a class="item-control item-create" data-tooltip="Add Primary Movement Option" data-field="movement" data-sub-field="primary" data-action="add">
+                        <i class="fas fa-plus-circle" style="margin-right: 3px;"></i>
+                        <span class="readable">{{localize "ITEM.AddButton"}}</span>
+                    </a>
+                </div>
+            </div>
+            {{#if source.system.movement.primary.length}}
+                {{#each source.system.movement.primary as |movement|}}
+                    <div class="movement">
+                        <div class="form-group">
+                            <label>Type</label>
+                            <div class="form-fields">
+                                <input type="text" name="system.movement.primary.{{@index}}.type" class="form-control"
+                                    data-dtype="String" value={{movement.type}}>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Value</label>
+                            <div class="form-fields">
+                                <input type="number" name="system.movement.primary.{{@index}}.value" class="form-control"
+                                    data-dtype="Number" value={{movement.value}}>
+                            </div>
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control" data-action="delete" data-field="movement" data-sub-field="primary" data-index="{{@index}}" data-tooltip="Delete Movement"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                {{/each}}
+            {{else}}
+                <div class="movement center">
+                    <p><small>No Primary Movement Options. Please create one with the Add button</small></p>
+                </div>
+            {{/if}}
+            <div class="movement-header">
+                <h5>Secondary Movement</h5>
+                <div class="item-controls">
+                    <a class="item-control item-create" data-tooltip="Add Secondary Movement Option" data-field="movement" data-sub-field="secondary" data-action="add">
+                        <i class="fas fa-plus-circle" style="margin-right: 3px;"></i>
+                        <span class="readable">{{localize "ITEM.AddButton"}}</span>
+                    </a>
+                </div>
+            </div>
+            {{#if source.system.movement.secondary.length}}
+                {{#each source.system.movement.secondary as |movement|}}
+                    <div class="movement">
+                        <div class="form-group">
+                            <label>Type</label>
+                            <div class="form-fields">
+                                <input type="text" name="system.movement.secondary.{{@index}}.type" class="form-control"
+                                    data-dtype="String" value={{movement.type}}>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Value</label>
+                            <div class="form-fields">
+                                <input type="number" name="system.movement.secondary.{{@index}}.value" class="form-control"
+                                    data-dtype="Number" value={{movement.value}}>
+                            </div>
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control" data-action="delete" data-field="movement" data-sub-field="secondary" data-index="{{@index}}" data-tooltip="Delete Movement"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                {{/each}}
+            {{else}}
+                <div class="movement center">
+                    <p><small>No Secondary Movement Options. Please create one with the Add button</small></p>
+                </div>
+            {{/if}}
+        </fieldset>
+                <fieldset>
+            <legend>
+                Skills
+            </legend>
+            {{#each source.system.skills as |value skill|}}
+                <div class="skill">
+                    <div class="form-group">
+                        <div class="form-fields">
+                            <input type="text" name="system.skills.{{skill}}.name" class="form-control"
+                                data-dtype="String" value={{skill}}>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Value</label>
+                        <div class="form-fields">
+                            <input type="number" name="system.skills.{{skill}}.value" class="form-control"
+                                data-dtype="Number" value={{value}}>
+                        </div>
+                    </div>
+                    <div class="item-controls">
+                        <a class="item-control" data-action="delete" data-field="skills" data-index="{{skill}}" data-tooltip="Delete Skill"><i class="fas fa-trash"></i></a>
+                    </div>
+                </div>
+            {{/each}}
+            <div class="skill">
+                <div class="form-group">
+                    <div class="form-fields">
+                        <input type="text" name="system.skills.new.name" class="form-control"
+                            data-dtype="String" placeholder="New skill name...">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Value</label>
+                    <div class="form-fields">
+                        <input type="number" name="system.skills.new.value" class="form-control"
+                            data-dtype="Number" value="0">
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>
+                Other Info
+            </legend>
+            <!-- Diet -->
+            {{formField fields.diet value=source.system.diet localize=true}}
+            <!-- Size -->
+            {{formField fields.size.fields.category value=source.system.size.category localize=true}}
+            {{formField fields.size.fields.type value=source.system.size.type localize=true}}
+            {{formField fields.size.fields.height value=source.system.size.height localize=true disabled=true}}
+            {{formField fields.size.fields.weight value=source.system.size.weight localize=true disabled=true}}
+            <!-- Gender Ratio -->
+            {{formField fields.genderRatio value=source.system.genderRatio localize=true}}
+            <!-- Egg Groups -->
+            {{formField fields.eggGroups value=source.system.eggGroups localize=true}}
+            <!-- Habitats -->
+            {{formField fields.habitats value=source.system.habitats localize=true}}
+        </fieldset>
+        <fieldset>
+            <legend>
+                Abilities
+            </legend>
+            <!-- Starting -->
+            {{formField fields.abilities.fields.starting value=source.system.abilities.starting localize=true}}
+            <!-- Basic -->
+            {{formField fields.abilities.fields.basic value=source.system.abilities.basic localize=true}}
+            <!-- Advanced -->
+            {{formField fields.abilities.fields.advanced value=source.system.abilities.advanced localize=true}}
+            <!-- Master -->
+            {{formField fields.abilities.fields.master value=source.system.abilities.master localize=true}}
+        </fieldset>
+        <fieldset class="moves">
+            <legend>
+                Moves (not editable)
+            </legend>
+            <fieldset>
+                <legend>
+                    Level Up Moves
+                </legend>
+                {{#each source.system.moves.levelUp as |move|}}
+                    <div class="move">
+                        <div class="form-group">
+                            <div class="form-fields">
+                                <input type="text" readonly class="form-control"
+                                    data-dtype="String" value={{move.name}}>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Level</label>
+                            <div class="form-fields">
+                                <input type="number" readonly class="form-control"
+                                    data-dtype="Number" value={{move.level}}>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Origin</label>
+                            <div class="form-fields">
+                                <input type="text" readonly class="form-control"
+                                    data-dtype="String" value={{move.gen}}>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </fieldset>
+            <fieldset>
+                <legend>
+                    TM Moves
+                </legend>
+                {{#each source.system.moves.machine as |move|}}
+                    <div class="move">
+                        <div class="form-group">
+                            <div class="form-fields">
+                                <input type="text" readonly class="form-control"
+                                    data-dtype="String" value={{move.name}}>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Origin</label>
+                            <div class="form-fields">
+                                <input type="text" readonly class="form-control"
+                                    data-dtype="String" value={{move.gen}}>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </fieldset>
+            <fieldset>
+                <legend>
+                    Tutor Moves
+                </legend>
+                {{#each source.system.moves.tutor as |move|}}
+                    <div class="move">
+                        <div class="form-group">
+                            <div class="form-fields">
+                                <input type="text" readonly class="form-control"
+                                    data-dtype="String" value={{move.name}}>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Origin</label>
+                            <div class="form-fields">
+                                <input type="text" readonly class="form-control"
+                                    data-dtype="String" value={{move.gen}}>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </fieldset>
+            <fieldset>
+                <legend>
+                    Egg Moves
+                </legend>
+                {{#each source.system.moves.egg as |move|}}
+                    <div class="move">
+                        <div class="form-group">
+                            <div class="form-fields">
+                                <input type="text" readonly class="form-control"
+                                    data-dtype="String" value={{move.name}}>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Origin</label>
+                            <div class="form-fields">
+                                <input type="text" readonly class="form-control"
+                                    data-dtype="String" value={{move.gen}}>
+                            </div>
+                        </div>
+                    </div>
+                {{/each}}
+            </fieldset>
+        </fieldset>
+        <fieldset class="evolutions">
+            <legend>
+                Evolutions (not editable)
+            </legend>
+            <small>To be added</small>
+        </fieldset>
+    </div>
+</section>

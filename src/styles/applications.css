@@ -10,40 +10,48 @@
   gap: 10px;
   align-items: center;
 }
-.sheet.move-sheet {
+.sheet.move-sheet,
+.sheet.species-sheet {
   background: var(--appv2-background);
 }
-.sheet.move-sheet .window-content {
+.sheet.move-sheet .window-content,
+.sheet.species-sheet .window-content {
   display: grid;
   grid-template-columns: 45% 55%;
-  grid-template-rows: calc(1rem + 48px) calc(0.5rem + 38px) auto;
+  grid-template-rows: calc(1rem + 48px) min-content auto;
   grid-template-areas: "header nav" "traits traits" "main main";
   padding: 0;
 }
-.sheet.move-sheet .window-content .sheet-header {
+.sheet.move-sheet .window-content .sheet-header,
+.sheet.species-sheet .window-content .sheet-header {
   grid-area: header;
   padding: 0.5rem;
   padding-right: 1rem;
   border-bottom: 1px solid var(--color-light-6);
 }
-.sheet.move-sheet .window-content .sheet-header fieldset {
+.sheet.move-sheet .window-content .sheet-header fieldset,
+.sheet.species-sheet .window-content .sheet-header fieldset {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
-.sheet.move-sheet .window-content .sheet-header img {
+.sheet.move-sheet .window-content .sheet-header img,
+.sheet.species-sheet .window-content .sheet-header img {
   flex: 0 0 48px;
   height: 48px;
   margin: 0 0.25rem;
   border: unset;
 }
-.sheet.move-sheet .window-content .sheet-header .title {
+.sheet.move-sheet .window-content .sheet-header .title,
+.sheet.species-sheet .window-content .sheet-header .title {
   font-size: 2.5rem;
 }
-.sheet.move-sheet .window-content nav.tabs {
+.sheet.move-sheet .window-content nav.tabs,
+.sheet.species-sheet .window-content nav.tabs {
   grid-area: nav;
   border: unset;
+  justify-content: space-evenly;
   margin: 0;
   padding: 0.5rem;
   padding-left: 0;
@@ -51,101 +59,265 @@
   border-left: 1px solid var(--color-light-6);
   gap: unset;
 }
-.sheet.move-sheet .window-content aside.traits {
+.sheet.move-sheet .window-content aside.traits,
+.sheet.species-sheet .window-content aside.traits {
   grid-area: traits;
-  height: calc(0.5rem + 38px);
+  min-height: calc(0.5rem + 38px);
   padding: 0.25rem;
   border-bottom: 1px solid var(--color-light-6);
 }
-.sheet.move-sheet .window-content aside.traits tags {
+.sheet.move-sheet .window-content aside.traits tags,
+.sheet.species-sheet .window-content aside.traits tags {
   --tags-border-color: var(--color-light-6);
   --tag-bg: var(--color-light-4);
   --tag-hover: var(--color-light-3);
   width: 100%;
   --tag-pad: 0;
 }
-.sheet.move-sheet .window-content aside.traits tags .trait {
+.sheet.move-sheet .window-content aside.traits tags .trait,
+.sheet.species-sheet .window-content aside.traits tags .trait {
   display: inline-flex;
   padding: 0.25rem;
 }
-.sheet.move-sheet .window-content aside.traits tags .trait .tag {
+.sheet.move-sheet .window-content aside.traits tags .trait .tag,
+.sheet.species-sheet .window-content aside.traits tags .trait .tag {
   text-decoration: underline;
 }
-.sheet.move-sheet .window-content section.tab {
+.sheet.move-sheet .window-content section.tab,
+.sheet.species-sheet .window-content section.tab {
   grid-area: main;
   height: 100%;
   overflow: hidden;
   padding: 1rem;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .editor,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .editor .editor-content {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .editor,
+.sheet.move-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .editor .editor-content {
   min-height: 200px;
 }
-.sheet.move-sheet .window-content section.tab[data-tab=attack] {
+.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--color-light-6);
+  border-radius: 8px;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group {
+  justify-content: space-between;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label {
+  flex: 0 0 60%;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields {
+  flex: 0 0 35%;
+  text-align: center;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header,
+.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem;
+  margin-top: 0.5rem;
+  border-bottom: 1px solid var(--color-light-6);
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls {
+  flex: 0 0 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .movement,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .movement,
+.sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill {
+  padding: 0.25rem;
+  border: 1px solid var(--color-light-6);
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 15px;
+  grid-column-gap: 0.5rem;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center,
+.sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center small {
+  color: var(--color-light-5);
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group {
+  justify-content: space-between;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group label {
+  flex: 0 0 30%;
+  text-align: center;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields {
+  flex: 0 0 60%;
+  text-align: center;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .item-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .move,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .move {
+  display: flex;
+  flex-direction: row;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.sheet.species-sheet .window-content section.tab[data-tab=details] .move .form-group {
+  flex: 1;
+  text-align: center;
+  margin: 0.25rem;
+}
+.sheet.move-sheet .window-content section.tab[data-tab=attack],
+.sheet.species-sheet .window-content section.tab[data-tab=attack] {
   padding: 0;
 }
-.sheet.move-sheet .window-content section.tab[data-tab=attack] form.scroll {
+.sheet.move-sheet .window-content section.tab form.scroll,
+.sheet.species-sheet .window-content section.tab form.scroll {
   padding: 1rem;
   overflow-y: scroll;
+  overflow-x: hidden;
   height: 100%;
 }
-.sheet.move-sheet .window-content section.tab[data-tab=actions].active {
+.sheet.move-sheet .window-content section.tab[data-tab=actions].active,
+.sheet.species-sheet .window-content section.tab[data-tab=actions].active {
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: 0.25rem 1rem 1rem 1rem;
 }
-.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions {
+.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions,
+.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions {
   flex: 0 0 50%;
   margin: 0.25rem;
   display: flex;
   flex-direction: column;
 }
-.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header {
+.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header,
+.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0.25rem;
   border-bottom: 1px solid #fefefe;
 }
-.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name {
+.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
+.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name {
   font-size: 18px;
 }
-.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content {
+.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content,
+.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions content {
   display: flex;
   flex-direction: column;
 }
-.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content .action {
+.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
+.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions content .action {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0.25rem;
   margin: 0.5rem 0;
 }
-.sheet.move-sheet .window-content section.tab[data-tab="overview"] .item-description {
+.sheet.move-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.sheet.species-sheet .window-content section.tab[data-tab="overview"] .item-description {
   min-height: 150px;
 }
-.sheet.move-sheet .window-content section.tab fieldset {
+.sheet.move-sheet .window-content section.tab fieldset,
+.sheet.species-sheet .window-content section.tab fieldset {
   padding: 1rem;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
-  gap: 1rem;
+  gap: 0.5rem;
   margin-bottom: 0.5rem;
   border-radius: 8px;
   border-color: var(--color-light-6);
 }
-.sheet.move-sheet .window-content section.tab fieldset legend {
+.sheet.move-sheet .window-content section.tab fieldset legend,
+.sheet.species-sheet .window-content section.tab fieldset legend {
   font-size: var(--font-size-15);
   font-weight: bold;
 }
-.sheet.move-sheet .window-content section.tab .hint {
+.sheet.move-sheet .window-content section.tab .hint,
+.sheet.species-sheet .window-content section.tab .hint {
   margin: 0;
   font-size: var(--font-size-14);
   color: var(--color-light-5);
 }
-.sheet.move-sheet .window-content section.tab textarea {
+.sheet.move-sheet .window-content section.tab textarea,
+.sheet.species-sheet .window-content section.tab textarea {
   resize: vertical;
+}
+.sheet.species-sheet .window-content section.tab[data-tab=details] {
+  padding: 0;
+}
+.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll {
+  padding: 1rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll h5 {
+  margin: 0;
+}
+.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset {
+  flex: 0 0 48%;
+}
+.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves fieldset {
+  flex: 0 0 48%;
+}
+.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions {
+  flex: 0 0 100%;
 }
 .sheet.stats-form .window-content {
   padding-top: 0.5rem;

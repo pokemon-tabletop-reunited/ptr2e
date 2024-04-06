@@ -4,7 +4,6 @@ import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import { formatSlug, sluggify } from "@utils";
 import { ClockDatabase, Trait } from "@data";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
-import { Pokedex } from "pokeapi-js-wrapper";
 
 const GamePTR = {
     onInit() {
@@ -12,7 +11,6 @@ const GamePTR = {
             tree: new PerkTree(),
             util: {
                 sluggify,
-                pokeApi: new Pokedex()
             },
             data: {
                 traits: _prepareTraits(),
