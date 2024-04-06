@@ -103,10 +103,8 @@
             {{#each source.system.skills as |value skill|}}
                 <div class="skill">
                     <div class="form-group">
-                        <div class="form-fields">
-                            <input type="text" name="system.skills.{{skill}}.name" class="form-control"
-                                data-dtype="String" value={{skill}}>
-                        </div>
+                        <input type="text" name="system.skills.{{skill}}.name" class="form-control"
+                            data-dtype="String" value={{skill}}>
                     </div>
                     <div class="form-group">
                         <label>Value</label>
@@ -122,10 +120,8 @@
             {{/each}}
             <div class="skill">
                 <div class="form-group">
-                    <div class="form-fields">
-                        <input type="text" name="system.skills.new.name" class="form-control"
-                            data-dtype="String" placeholder="New skill name...">
-                    </div>
+                    <input type="text" name="system.skills.new.name" class="form-control"
+                        data-dtype="String" placeholder="New skill name...">
                 </div>
                 <div class="form-group">
                     <label>Value</label>
