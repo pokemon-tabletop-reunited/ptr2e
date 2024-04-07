@@ -17,6 +17,16 @@ jobs:
       pull-requests: write
 
     steps:
-    - uses: actions/labeler@v5
+    - id: label
+      uses: actions/labeler@v5
       with:
         repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
+    - id: assign-ashe-reviewer
+      uses: dawn0114/assign-action@v1.3.0
+
+    - id: run-pack-build-test
+      if: contains(steps.label.all-labels, 'compendium')
+      run: |
+        echo "Running pack build to check for errors"
+        npm run build:packs
