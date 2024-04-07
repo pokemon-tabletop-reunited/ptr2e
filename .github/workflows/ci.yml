@@ -4,6 +4,9 @@ on:
         branches: [Stable, Staging, Development]
     push:
         branches: [Stable, Staging, Development]
+    pull_request_target: 
+        branches: [Staging, Development]
+        types: [opened, synchronize, reopened]
     workflow_dispatch:
 jobs:
     build:
