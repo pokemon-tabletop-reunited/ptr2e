@@ -1,0 +1,38 @@
+# This workflow will triage pull requests and apply a label based on the
+# paths that are modified in the pull request.
+#
+# To use this workflow, you will need to set up a .github/labeler.yml
+# file with configuration.  For more information, see:
+# https://github.com/actions/labeler
+
+name: "Pull Request Labeler"
+on: [pull_request_target]
+
+jobs:
+  label:
+
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+    - id: label
+      uses: actions/labeler@v5
+      with:
+        repo-token: "${{ secrets.GITHUB_TOKEN }}"
+
+    - id: assign-ashe-reviewer
+      uses: dawn0114/assign-action@v1.3.0
+
+    - id: assign-dev-reviewers
+      uses: dawn0114/assign-action@v1.3.0
+      if: contains(steps.label.all-labels, 'compendium')
+      with:
+        configuration-path: '.github/auto_assign_reviewers.yml'
+
+    - id: run-pack-build-test
+      if: contains(steps.label.all-labels, 'compendium')
+      run: |
+        echo "Running pack build to check for errors"
+        npm run build:packs

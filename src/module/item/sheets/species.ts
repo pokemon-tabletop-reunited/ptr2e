@@ -59,7 +59,7 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
         details: {
             id: "details",
             template: "/systems/ptr2e/templates/items/species/species-details.hbs",
-            scrollable: [".scroll"]
+            scrollable: [".scroll"],
         },
     };
 
@@ -211,50 +211,62 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
             }
         }
 
-        if(partId === "details") {
+        if (partId === "details") {
             const document = this.document;
-            for(const element of htmlElement.querySelectorAll<HTMLElement>(".item-controls a.item-control")) {
+            for (const element of htmlElement.querySelectorAll<HTMLElement>(
+                ".item-controls a.item-control"
+            )) {
                 element.addEventListener("click", async (event) => {
                     event.preventDefault();
                     const action = element.dataset.action;
-                    switch(action) {
+                    switch (action) {
                         case "add": {
-                            const {field, subField} = element.dataset;
+                            const { field, subField } = element.dataset;
 
-                            if(field === "movement") {
-                                const movementArr = fu.deepClone(document.system.movement[subField as keyof typeof document.system.movement]);
+                            if (field === "movement") {
+                                const movementArr = fu.deepClone(
+                                    document.system.movement[
+                                        subField as keyof typeof document.system.movement
+                                    ]
+                                );
                                 movementArr.push({ type: "", value: 0 });
                                 document.update({
                                     system: {
                                         movement: {
-                                            [subField as keyof typeof document.system.movement]: movementArr
-                                        }
-                                    }
-                                })
+                                            [subField as keyof typeof document.system.movement]:
+                                                movementArr,
+                                        },
+                                    },
+                                });
                             }
                             break;
                         }
                         case "delete": {
-                            const {field, subField, index} = element.dataset;
-                            if(field === "movement" && subField && index) {
-                                const movementArr = fu.deepClone(document.system.movement[subField as keyof typeof document.system.movement]);
-                                movementArr.splice(parseInt(index??""), 1);
+                            const { field, subField, index } = element.dataset;
+                            if (field === "movement" && subField && index) {
+                                const movementArr = fu.deepClone(
+                                    document.system.movement[
+                                        subField as keyof typeof document.system.movement
+                                    ]
+                                );
+                                movementArr.splice(parseInt(index ?? ""), 1);
                                 document.update({
                                     system: {
                                         movement: {
-                                            [subField as keyof typeof document.system.movement]: movementArr
-                                        }
-                                    }
-                                })
+                                            [subField as keyof typeof document.system.movement]:
+                                                movementArr,
+                                        },
+                                    },
+                                });
                             }
-                            if(field === "skills" && index) {
+                            if (field === "skills" && index) {
                                 document.update({
                                     system: {
                                         skills: {
-                                            [`-=${index}`]: null
-                                        }
-                                    }
-                                })
+                                            [`-=${index}`]: null,
+                                        },
+                                    },
+                                });
                             }
                             break;
                         }
@@ -264,26 +276,43 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
         }
     }
 
+    override _attachFrameListeners(): void {
+        super._attachFrameListeners();
+        const button = this.element.querySelector<HTMLButtonElement>(".header-control[data-action=copyId]");
+        if (button) {
+            button.addEventListener("contextmenu", async () => {
+                const uuid = this.document.uuid;
+                const label = game.i18n.localize(this.document.constructor.metadata.label);
+                game.clipboard.copyPlainText(uuid);
+                ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", {label, type: "uuid", id: uuid}));
+            });
+        }
+    }
+
     override _onRender(): void {
-        for(const stringTags of this.element.querySelectorAll<HTMLElement>("string-tags")) {
+        for (const stringTags of this.element.querySelectorAll<HTMLElement>("string-tags")) {
             const path = stringTags.getAttribute("name");
             const validate = (() => {
-                if(path?.startsWith("system.")) {
+                if (path?.startsWith("system.")) {
                     const systemPath = path.split(".");
-                    if(systemPath.length === 2) {
-                        const field = this.document.system.schema.fields[systemPath[1]] as foundry.data.fields.SetField<foundry.data.fields.StringField>;
+                    if (systemPath.length === 2) {
+                        const field = this.document.system.schema.fields[
+                            systemPath[1]
+                        ] as foundry.data.fields.SetField<foundry.data.fields.StringField>;
                         return field.element.validate.bind(field.element);
                     }
                     let current = this.document.system.schema.fields;
                     const pathParts = systemPath.slice(1);
-                    for(let i = 0; i < pathParts.length; i++) {
-                        let field = current[pathParts[i]] as foundry.data.fields.SetField<foundry.data.fields.StringField> | foundry.data.fields.SchemaField<foundry.data.fields.DataSchema>;
-                        if(!field) return;
-                        if(field instanceof foundry.data.fields.SchemaField) {
+                    for (let i = 0; i < pathParts.length; i++) {
+                        let field = current[pathParts[i]] as
+                            | foundry.data.fields.SetField<foundry.data.fields.StringField>
+                            | foundry.data.fields.SchemaField<foundry.data.fields.DataSchema>;
+                        if (!field) return;
+                        if (field instanceof foundry.data.fields.SchemaField) {
                             current = field.fields;
                             continue;
                         }
-                        if(field instanceof foundry.data.fields.SetField) {
+                        if (field instanceof foundry.data.fields.SetField) {
                             return field.element.validate.bind(field.element);
                         }
                         return null;
@@ -292,21 +321,23 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
                 return null;
             })();
 
-            for(const button of stringTags.querySelectorAll("button.icon.fa-solid.fa-tag, a.button.remove.fa-solid.fa-times")) {
+            for (const button of stringTags.querySelectorAll(
+                "button.icon.fa-solid.fa-tag, a.button.remove.fa-solid.fa-times"
+            )) {
                 button.addEventListener("click", (_event) => {
                     setTimeout(() => {
                         this.element.dispatchEvent(new Event("submit"));
                     }, 100);
-                })
+                });
             }
             //@ts-expect-error
             stringTags._validateTag = (tag: string): boolean => {
-                if(validate) {
+                if (validate) {
                     const result = validate(tag);
-                    if(result) throw result.asError();
+                    if (result) throw result.asError();
                 }
                 return true;
-            }
+            };
         }
     }
 
@@ -340,28 +371,12 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
         ) {
             // Traits are stored as an array of objects, but we only need the values
             // @ts-expect-error
-            data.system.traits = data.system.traits.map((trait: { value: string }) => trait.value);
-
-            data.system.abilities = {
-                starting: (data.system.abilities.starting ?? []).map((ability) =>
-                    sluggify(ability)
-                ),
-                basic: (data.system.abilities.basic ?? []).map((ability) => sluggify(ability)),
-                advanced: (data.system.abilities.advanced ?? []).map((ability) =>
-                    sluggify(ability)
-                ),
-                master: (data.system.abilities.master ?? []).map((ability) => sluggify(ability)),
-            };
-
-            data.system.diet = (data.system.diet ?? []).map((diet) => sluggify(diet));
-            data.system.habitat = (data.system.habitat ?? []).map((habitat) => sluggify(habitat));
-            data.system.eggGroups = (data.system.eggGroups ?? []).map((eggGroup) =>
-                sluggify(eggGroup)
-            );
+            data.system.traits = data.system.traits.map((trait: { value: string }) => sluggify(trait.value));
 
             const skills: Record<string, number | null> = {};
-            // @ts-expect-error
-            for (const [skill, skillData] of Object.entries(data.system.skills as Record<string, { name: string; value: number }>)) {
+            for (const [skill, skillData] of Object.entries( // @ts-expect-error
+                data.system.skills as Record<string, { name: string; value: number }>
+            )) {
                 if (skill === "new") {
                     if (skillData.name) {
                         skills[sluggify(skillData.name)] = skillData.value;
