@@ -25,6 +25,12 @@ jobs:
     - id: assign-ashe-reviewer
       uses: dawn0114/assign-action@v1.3.0
 
+    - id: assign-dev-reviewers
+      uses: dawn0114/assign-action@v1.3.0
+      if: contains(steps.label.all-labels, 'compendium')
+      with:
+        configuration-path: '.github/auto_assign_reviewers.yml'
+
     - id: run-pack-build-test
       if: contains(steps.label.all-labels, 'compendium')
       run: |
