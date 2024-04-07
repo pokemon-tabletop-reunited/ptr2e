@@ -1,3 +1,4 @@
+import { SlugField } from '../fields/slug-field.ts';
 import Trait from '../models/trait.ts';
 import { TemplateConstructor } from './data-template.ts';
 
@@ -19,7 +20,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
                 ...super.defineSchema(),
 
                 //TODO: Add validation to Traits field
-                traits: new fields.SetField(new fields.StringField())
+                traits: new fields.SetField(new SlugField())
             };
         }
 
