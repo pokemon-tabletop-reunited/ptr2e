@@ -54,6 +54,8 @@ export function sluggify(text: string, { camel }: { camel: string | null } = { c
     throw new Error(`I'm pretty sure that's not a real camel: ${camel}`);
 }
 
+export type SlugCamel = "dromedary" | "bactrian" | null;
+
 export function formatSlug(slug: string) {
     return capitalize(slug).replaceAll('-', ' ');
 }

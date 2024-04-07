@@ -1,5 +1,5 @@
-import { sluggify } from '@utils';
 import { TemplateConstructor } from './data-template.ts';
+import { SlugField } from '../fields/slug-field.ts';
 
 /**
  * Adds slug property to target data model.
@@ -8,19 +8,11 @@ import { TemplateConstructor } from './data-template.ts';
 export default function HasSlug<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
     class TemplateClass extends baseClass {
         static override defineSchema(): foundry.data.fields.DataSchema {
-            const fields = foundry.data.fields;
-
             return {
                 ...super.defineSchema(),
 
-                slug: new fields.StringField({ required: true, label: "PTR2E.FIELDS.Slug.Label", hint: "PTR2E.FIELDS.Slug.Hint" }),
+                slug: new SlugField({ required: true, label: "PTR2E.FIELDS.Slug.Label", hint: "PTR2E.FIELDS.Slug.Hint" }),
             };
-        }
-
-        override prepareBaseData() {
-            super.prepareBaseData();
-
-            this.slug ||= sluggify((this.parent as unknown as { name: string }).name);
         }
     }
 
