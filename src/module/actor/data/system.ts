@@ -1,10 +1,10 @@
-import { PokemonType } from "@data";
+import { HasTraits, PokemonType } from "@data";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { DataField, DataSchema } from "types/foundry/common/data/fields.js";
 import { ActorPTR2e, AdvancementData, Attribute, Attributes, Biology, Capabilities, HealthData, HumanoidActorSystem, Skill, Skills, Stat } from "@actor";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 
-class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
+class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
     static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
 
     declare parent: ActorPTR2e<this>;
@@ -29,6 +29,7 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
         }
 
         return {
+            ...super.defineSchema(),
             advancement: new fields.SchemaField({
                 experience: new fields.SchemaField({
                     current: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0})
@@ -59,7 +60,6 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
             }),
             biology: new fields.ObjectField(),
             capabilities: new fields.ObjectField(),
-            traits: new fields.SetField(new fields.StringField()),
             type: new fields.SchemaField({
                 types: new fields.SetField(new fields.StringField({ required: true, choices: getTypes, initial: "untyped", label: "PTR2E.FIELDS.PokemonType.Label", hint: "PTR2E.FIELDS.PokemonType.Hint" }), { initial: ["untyped"], label: "PTR2E.FIELDS.PokemonType.LabelPlural", hint: "PTR2E.FIELDS.PokemonType.HintPlural", required: true, validate: (d) => (d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false), validationError: "PTR2E.Errors.PokemonType" }),
             }),
@@ -76,6 +76,7 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
     }
 
     override prepareBaseData(): void {
+        super.prepareBaseData();
         this._prepareSpeciesData();
 
         this.advancement.level = Math.floor(Math.cbrt(this.advancement.experience.current || 1));
@@ -103,7 +104,18 @@ class ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
             return;
         }
 
-        this.species = new SpeciesSystemModel(this._source.species);
+        this.species = new SpeciesSystemModel(this._source.species, { parent: this.parent });
+        this.species.prepareBaseData();
+
+        // Add species traits to actor traits
+        for(const trait of this.species.traits.values()) {
+            this.traits.set(trait.slug, trait);
+        }
+    }
+
+    override prepareDerivedData(): void {
+        super.prepareDerivedData();
+        this.species?.prepareDerivedData?.();
     }
 
     _calculateStatTotal(stat: Attribute | Omit<Attribute, 'stage'>): number {
@@ -171,8 +183,6 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
     biology: Biology,
     /** Movement Capabilities */
     capabilities: Capabilities,
-    /** All traits for this actor */
-    traits: Set<string>, //TODO: Map this to Set<Traits>
     type: {
         effectiveness: Record<PokemonType, number>,
         types: Set<PokemonType>,
@@ -191,6 +201,7 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
 
 type ActorSystemSchema = Record<string, DataField<JSONValue, unknown, boolean>> & {
     species: SpeciesSystemModel['_source'];
+    traits: string[];
 }
 
 export default ActorSystemPTR2e;

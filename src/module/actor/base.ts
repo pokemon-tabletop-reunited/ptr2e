@@ -282,6 +282,10 @@ class ActorPTR2e<
         return this.type === "pokemon";
     }
 
+    hasEmbeddedSpecies(): boolean { 
+        return !!this.system._source.species;
+    }
+
     protected override _onEmbeddedDocumentChange(): void {
         super._onEmbeddedDocumentChange();
 

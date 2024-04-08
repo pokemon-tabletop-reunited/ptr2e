@@ -4,6 +4,7 @@ import { PokemonType } from "@data";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
+import { ActorPTR2e } from "@actor";
 
 const SpeciesExtension = HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel)));
 
@@ -14,7 +15,7 @@ class SpeciesSystem extends SpeciesExtension {
     /**
      * @internal
      */
-    declare parent: SpeciesPTR2e;
+    declare parent: SpeciesPTR2e | ActorPTR2e;
 
     declare _source: InstanceType<typeof SpeciesExtension>["_source"] & {
         number: number;
