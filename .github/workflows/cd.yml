@@ -1,14 +1,15 @@
 name: PTR2e CD
 
 on:
-    push:
-        branches:
-            - Stable
-    workflow_dispatch:
+  workflow_run:
+    workflows: ["PTR2e CI"]
+    types:
+      - completed
 
 jobs:
     release:
         runs-on: ubuntu-latest
+        if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'Stable'
 
         steps:
             - uses: actions/checkout@v4
@@ -38,7 +39,7 @@ jobs:
               uses: ncipollo/release-action@v1
               with:
                   name: ${{ env.systemVersion }}
-                  allowUpdates: false
+                  allowUpdates: true
                   draft: false
                   prerelease: false
                   token: ${{ secrets.GITHUB_TOKEN }}

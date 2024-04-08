@@ -3,6 +3,7 @@ import { HasDescription, HasSlug, HasTraits, PTRCONSTS } from "@module/data/inde
 import { PokemonType } from "@data";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
+import { SlugField } from "@module/data/fields/slug-field.ts";
 
 const SpeciesExtension = HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel)));
 
@@ -34,8 +35,8 @@ class SpeciesSystem extends SpeciesExtension {
 
         function getMoveField(hasLevel = false) {
             const innerFields: Record<string, foundry.data.fields.DataField> = {
-                name: new fields.StringField({ required: true }),
-                gen: new fields.StringField({ required: false, blank: true }),
+                name: new SlugField({ required: true }),
+                gen: new SlugField({ required: false, blank: true }),
             };
             if (hasLevel) innerFields.level = new fields.NumberField({ required: true, min: 0 });
             return new fields.SchemaField(innerFields);
@@ -49,7 +50,7 @@ class SpeciesSystem extends SpeciesExtension {
                 label: "PTR2E.FIELDS.pokemonNumber.label",
                 hint: "PTR2E.FIELDS.pokemonNumber.hint",
             }),
-            form: new fields.StringField({
+            form: new SlugField({
                 required: false,
                 nullable: true,
                 initial: null,
@@ -95,7 +96,7 @@ class SpeciesSystem extends SpeciesExtension {
                 }),
             }),
             types: new fields.SetField(
-                new fields.StringField({
+                new SlugField({
                     required: true,
                     choices: getTypes(),
                     initial: PTRCONSTS.Types.UNTYPED,
@@ -113,14 +114,14 @@ class SpeciesSystem extends SpeciesExtension {
                 }
             ),
             size: new fields.SchemaField({
-                category: new fields.StringField({
+                category: new SlugField({
                     required: true,
                     initial: "medium",
                     blank: false,
                     label: "PTR2E.FIELDS.size.category.label",
                     hint: "PTR2E.FIELDS.size.category.hint",
                 }),
-                type: new fields.StringField({
+                type: new SlugField({
                     required: true,
                     initial: "height",
                     blank: false,
@@ -142,41 +143,47 @@ class SpeciesSystem extends SpeciesExtension {
                     hint: "PTR2E.FIELDS.size.weight.hint",
                 }),
             }),
-            diet: new fields.SetField(new fields.StringField({ blank: false }), {
+            diet: new fields.SetField(new SlugField({ blank: false }), {
                 required: true,
                 initial: [],
                 label: "PTR2E.FIELDS.diet.label",
                 hint: "PTR2E.FIELDS.diet.hint",
             }),
             abilities: new fields.SchemaField({
-                starting: new fields.SetField(new fields.StringField({ blank: false }), {
+                starting: new fields.SetField(new SlugField({ blank: false }), {
                     required: true,
                     initial: [],
                     label: "PTR2E.FIELDS.abilities.starting.label",
                 }),
-                basic: new fields.SetField(new fields.StringField({ blank: false }), {
+                basic: new fields.SetField(new SlugField({ blank: false }), {
                     required: true,
                     initial: [],
                     label: "PTR2E.FIELDS.abilities.basic.label",
                 }),
-                advanced: new fields.SetField(new fields.StringField({ blank: false }), {
+                advanced: new fields.SetField(new SlugField({ blank: false }), {
                     required: true,
                     initial: [],
                     label: "PTR2E.FIELDS.abilities.advanced.label",
                 }),
-                master: new fields.SetField(new fields.StringField({ blank: false }), {
+                master: new fields.SetField(new SlugField({ blank: false }), {
                     required: true,
                     initial: [],
                     label: "PTR2E.FIELDS.abilities.master.label",
                 }),
             }),
             movement: new fields.SchemaField({
-                primary: new fields.ArrayField(new fields.ObjectField(), {
+                primary: new fields.ArrayField(new fields.SchemaField({
+                    type: new SlugField({ required: true }),
+                    value: new fields.NumberField({ required: true, min: 0 }),
+                }), {
                     required: true,
                     initial: [],
                     label: "PTR2E.FIELDS.movement.primary.label",
                 }),
-                secondary: new fields.ArrayField(new fields.ObjectField(), {
+                secondary: new fields.ArrayField(new fields.SchemaField({
+                    type: new SlugField({ required: true }),
+                    value: new fields.NumberField({ required: true, min: 0 }),
+                }), {
                     required: true,
                     initial: [],
                     label: "PTR2E.FIELDS.movement.secondary.label",
@@ -197,7 +204,7 @@ class SpeciesSystem extends SpeciesExtension {
                 label: "PTR2E.FIELDS.captureRate.label",
                 hint: "PTR2E.FIELDS.captureRate.hint",
             }),
-            eggGroups: new fields.SetField(new fields.StringField({ blank: false }), {
+            eggGroups: new fields.SetField(new SlugField({ blank: false }), {
                 required: true,
                 initial: [],
                 label: "PTR2E.FIELDS.eggGroups.label",
@@ -211,7 +218,7 @@ class SpeciesSystem extends SpeciesExtension {
                 label: "PTR2E.FIELDS.genderRatio.label",
                 hint: "PTR2E.FIELDS.genderRatio.hint",
             }),
-            habitats: new fields.SetField(new fields.StringField({ blank: false }), {
+            habitats: new fields.SetField(new SlugField({ blank: false }), {
                 required: true,
                 initial: [],
                 label: "PTR2E.FIELDS.habitats.label",
@@ -276,25 +283,24 @@ class EvolutionData extends foundry.abstract.DataModel {
     static override defineSchema(): foundry.data.fields.DataSchema {
         const fields = foundry.data.fields;
         const getSchema = () => ({
-            name: new fields.StringField({ required: true, blank: false }),
+            name: new SlugField({ required: true }),
             details: new fields.SchemaField(
                 {
-                    gender: new fields.StringField({
+                    gender: new SlugField({
                         required: true,
                         blank: false,
                         nullable: true,
                         choices: ["male", "female"],
                     }),
-                    item: new fields.StringField({ required: true, blank: false, nullable: true }),
+                    item: new SlugField({ required: true, nullable: true }),
                     level: new fields.NumberField({
                         required: true,
                         nullable: true,
                         min: 0,
                         max: 100,
                     }),
-                    knownMove: new fields.StringField({
+                    knownMove: new SlugField({
                         required: true,
-                        blank: false,
                         nullable: true,
                     }),
                 },
@@ -423,8 +429,8 @@ interface SpeciesSystemSource extends Omit<ItemSystemSource, "container" | "acti
     };
 
     movement: {
-        primary: Record<string, number>[];
-        secondary: Record<string, number>[];
+        primary: {type: string, value: number}[];
+        secondary:{type: string, value: number}[];
     };
 
     skills: Record<string, number>;

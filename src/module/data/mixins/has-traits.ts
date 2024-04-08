@@ -1,3 +1,4 @@
+import { SlugField } from '../fields/slug-field.ts';
 import Trait from '../models/trait.ts';
 import { TemplateConstructor } from './data-template.ts';
 
@@ -19,7 +20,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
                 ...super.defineSchema(),
 
                 //TODO: Add validation to Traits field
-                traits: new fields.SetField(new fields.StringField())
+                traits: new fields.SetField(new SlugField())
             };
         }
 
@@ -32,6 +33,11 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
                 if (trait) {
                     acc.set(traitSlug, trait);
                     this._traits.push(trait);
+                }
+                else {
+                    console.warn(`Could not find trait with slug ${traitSlug}`);
+                    console.warn("TODO: Remove this functionality and add a migration to remove invalid traits.")
+                    acc.set(traitSlug, { label: Handlebars.helpers.formatSlug(traitSlug), description: '', slug: traitSlug, related: []});
                 }
                 return acc;
             }, new Map());
