@@ -7,7 +7,7 @@ import { PerkTree } from "@module/canvas/perk-tree/perk-tree.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { ChangeModel, ClockDatabase, Trait } from "@data";
+import { ChangeModel, ClockDatabase, TraitsCollection } from "@data";
 import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import { PTRCONFIG } from "@scripts/config/index.ts";
 import { sluggify } from "@utils";
@@ -31,7 +31,7 @@ interface GamePTR2e
             sluggify: typeof sluggify;
         };
         data: {
-            traits: Map<string, Trait>;
+            traits: TraitsCollection
         };
         perks: PerkManager;
         tooltips: TooltipsPTR2e;

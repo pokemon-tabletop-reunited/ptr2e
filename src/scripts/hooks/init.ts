@@ -5,6 +5,7 @@ import { HandlebarTemplates, registerHandlebarsHelpers } from "@utils";
 import { default as TypeEffectiveness } from "../config/effectiveness.ts";
 import { PTRHook } from "./data.ts";
 import { ClockDatabase } from "@data";
+import { TraitSettingsRedirect } from "@module/apps/traits.ts";
 
 export const Init: PTRHook = {
     listen() {
@@ -106,6 +107,25 @@ export const Init: PTRHook = {
                 config: true,
                 type: Boolean,
                 default: true,
+            });
+
+            game.settings.register("ptr2e", "traits", {
+                name: "PTR2E.Settings.Traits.Name",
+                hint: "PTR2E.Settings.Traits.Hint",
+                scope: "world",
+                config: false,
+                type: Array,
+                default: [],
+                onChange: () => {game.ptr.data.traits.refresh();}
+            })
+
+            game.settings.registerMenu("ptr2e", "traits", {
+                name: "PTR2E.Settings.Traits.Name",
+                label: "PTR2E.Settings.Traits.Label",
+                hint: "PTR2E.Settings.Traits.Hint",
+                icon: "fa-solid fa-rectangle-list",
+                type: TraitSettingsRedirect,
+                restricted: true,
             });
 
             // Register handlebars helpers
