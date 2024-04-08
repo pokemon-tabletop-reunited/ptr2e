@@ -125,15 +125,7 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
             return traits;
         })();
 
-        if (!this.#allTraits) {
-            this.#allTraits = [];
-            for (const trait of game.ptr.data.traits.values()) {
-                this.#allTraits.push({
-                    value: trait.slug,
-                    label: trait.label,
-                });
-            }
-        }
+        this.#allTraits = game.ptr.data.traits.asArray().map(trait => ({value: trait.slug, label: trait.label}));
 
         return {
             ...((await super._prepareContext()) as Record<string, unknown>),
@@ -321,15 +313,15 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
                 return null;
             })();
 
-            for (const button of stringTags.querySelectorAll(
-                "button.icon.fa-solid.fa-tag, a.button.remove.fa-solid.fa-times"
-            )) {
-                button.addEventListener("click", (_event) => {
-                    setTimeout(() => {
-                        this.element.dispatchEvent(new Event("submit"));
-                    }, 100);
-                });
+            // @ts-expect-error
+            let refresh = stringTags._refresh.bind(stringTags);
+
+            // @ts-expect-error
+            stringTags._refresh = () => {
+                refresh.call();
+                this.element.dispatchEvent(new Event("submit", {cancelable: true}));
             }
+
             //@ts-expect-error
             stringTags._validateTag = (tag: string): boolean => {
                 if (validate) {
@@ -342,6 +334,7 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
     }
 
     protected override async _onSubmitForm(event: Event | SubmitEvent): Promise<void> {
+        event.preventDefault();
         if (event.target) {
             const target = event.target as HTMLElement;
             if (target.parentElement?.nodeName === "STRING-TAGS") {

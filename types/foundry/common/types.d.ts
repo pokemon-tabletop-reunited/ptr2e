@@ -109,7 +109,6 @@ declare global {
 
     interface SettingsMenuConstructor {
         new (object?: object, options?: Partial<FormApplicationOptions>): FormApplication;
-        registerSettings(): void;
     }
 
     /** A Client Keybinding Action Configuration */

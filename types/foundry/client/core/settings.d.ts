@@ -109,6 +109,7 @@ declare global {
         get(module: "core", key: "noCanvas"): boolean;
         get(module: "core", key: "rollMode"): RollMode;
         get(module: string, key: string): unknown;
+        get<T>(module: string, key: string): T;
 
         /**
          * Get the value of a game setting for a certain module and setting key
