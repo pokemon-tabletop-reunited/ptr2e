@@ -1,225 +1,248 @@
 {
-  "name": "wooloo",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "type": "species",
-  "system": {
-    "types": [
-      "normal"
-    ],
-    "stats": {
-      "hp": 42,
-      "atk": 40,
-      "def": 55,
-      "spa": 40,
-      "spd": 45,
-      "spe": 48
+    "name": "wooloo",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "type": "species",
+    "system": {
+        "types": [
+            "normal"
+        ],
+        "stats": {
+            "hp": 42,
+            "atk": 40,
+            "def": 55,
+            "spa": 40,
+            "spd": 45,
+            "spe": 48
+        },
+        "moves": {
+            "egg": [
+                {
+                    "name": "stomp",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "counter",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "sword-shield"
+                }
+            ],
+            "levelUp": [
+                {
+                    "name": "tackle",
+                    "gen": "sword-shield",
+                    "level": 1
+                },
+                {
+                    "name": "growl",
+                    "gen": "sword-shield",
+                    "level": 1
+                },
+                {
+                    "name": "defense-curl",
+                    "gen": "sword-shield",
+                    "level": 4
+                },
+                {
+                    "name": "copycat",
+                    "gen": "sword-shield",
+                    "level": 8
+                },
+                {
+                    "name": "guard-split",
+                    "gen": "sword-shield",
+                    "level": 12
+                },
+                {
+                    "name": "double-kick",
+                    "gen": "sword-shield",
+                    "level": 16
+                },
+                {
+                    "name": "headbutt",
+                    "gen": "sword-shield",
+                    "level": 21
+                },
+                {
+                    "name": "take-down",
+                    "gen": "sword-shield",
+                    "level": 25
+                },
+                {
+                    "name": "cotton-guard",
+                    "gen": "sword-shield",
+                    "level": 36
+                },
+                {
+                    "name": "double-edge",
+                    "gen": "sword-shield",
+                    "level": 40
+                }
+            ],
+            "machine": [
+                {
+                    "name": "thunder-wave",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "agility",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "rest",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "snore",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "reversal",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "protect",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "endure",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "attract",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "facade",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "payback",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "guard-swap",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "electro-ball",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "round",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "wild-charge",
+                    "gen": "sword-shield"
+                }
+            ],
+            "tutor": [
+                {
+                    "name": "grassy-glide",
+                    "gen": "sword-shield"
+                }
+            ]
+        },
+        "size": {
+            "height": 0.6,
+            "weight": 6,
+            "category": "small",
+            "type": "quad"
+        },
+        "captureRate": 255,
+        "eggGroups": [
+            "ground"
+        ],
+        "genderRatio": 4,
+        "evolutions": {
+            "full": {
+                "name": "wooloo",
+                "details": null,
+                "evolutions": [
+                    {
+                        "name": "dubwool",
+                        "details": {
+                            "gender": null,
+                            "item": null,
+                            "knownMove": null,
+                            "level": 24
+                        },
+                        "evolutions": []
+                    }
+                ]
+            }
+        },
+        "number": 831,
+        "traits": [
+            "pokemon",
+            "lumbering",
+            "underdog",
+            "wool-production",
+            "cushioned-fall",
+            "pack-mon"
+        ],
+        "diet": [
+            "herbivore"
+        ],
+        "abilities": {
+            "starting": [
+                "fluffy",
+                "run-away"
+            ],
+            "basic": [
+                "bulletproof",
+                "friend-guard"
+            ],
+            "advanced": [
+                "absorbing-down",
+                "grass-pelt"
+            ],
+            "master": [
+                "battle-armor",
+                "overcoat"
+            ]
+        },
+        "movement": {
+            "primary": [
+                {
+                    "type": "overland",
+                    "value": 5
+                }
+            ],
+            "secondary": [
+                {
+                    "type": "swim",
+                    "value": 3
+                }
+            ]
+        },
+        "skills": {
+            "acrobatics": 15,
+            "climb": 20,
+            "conversation": 25,
+            "leadership": 10,
+            "lift": 25,
+            "listen": 30,
+            "natural-world": 20,
+            "negotiation": 20,
+            "running": 20,
+            "spot": 30,
+            "survival": 15,
+            "swim": 15
+        },
+        "habitats": []
     },
-    "moves": {
-      "egg": [
-        {
-          "name": "stomp",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "counter",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "swagger",
-          "gen": "sword-shield"
-        }
-      ],
-      "levelUp": [
-        {
-          "name": "tackle",
-          "gen": "sword-shield",
-          "level": 1
-        },
-        {
-          "name": "growl",
-          "gen": "sword-shield",
-          "level": 1
-        },
-        {
-          "name": "defense-curl",
-          "gen": "sword-shield",
-          "level": 4
-        },
-        {
-          "name": "copycat",
-          "gen": "sword-shield",
-          "level": 8
-        },
-        {
-          "name": "guard-split",
-          "gen": "sword-shield",
-          "level": 12
-        },
-        {
-          "name": "double-kick",
-          "gen": "sword-shield",
-          "level": 16
-        },
-        {
-          "name": "headbutt",
-          "gen": "sword-shield",
-          "level": 21
-        },
-        {
-          "name": "take-down",
-          "gen": "sword-shield",
-          "level": 25
-        },
-        {
-          "name": "cotton-guard",
-          "gen": "sword-shield",
-          "level": 36
-        },
-        {
-          "name": "double-edge",
-          "gen": "sword-shield",
-          "level": 40
-        }
-      ],
-      "machine": [
-        {
-          "name": "thunder-wave",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "agility",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rest",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "substitute",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "reversal",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "protect",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "endure",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "facade",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "payback",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "guard-swap",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "electro-ball",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "wild-charge",
-          "gen": "sword-shield"
-        }
-      ],
-      "tutor": [
-        {
-          "name": "grassy-glide",
-          "gen": "sword-shield"
-        }
-      ]
-    },
-    "size": {
-      "height": 0.6,
-      "weight": 6,
-      "category": "medium",
-      "type": "height"
-    },
-    "captureRate": 255,
-    "eggGroups": [
-      "ground"
-    ],
-    "genderRatio": 4,
-    "evolutions": {
-      "full": {
-        "name": "wooloo",
-        "details": null,
-        "evolutions": [
-          {
-            "name": "dubwool",
-            "details": {
-              "gender": null,
-              "item": null,
-              "knownMove": null,
-              "level": 24
-            },
-            "evolutions": []
-          }
-        ]
-      }
-    },
-    "number": 831,
-    "slug": "",
-    "traits": [],
-    "diet": [],
-    "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
-    },
-    "movement": {
-      "primary": [],
-      "secondary": []
-    },
-    "skills": {},
-    "habitats": []
-  },
-  "_id": "xMABltSPihKdvSGh",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.xMABltSPihKdvSGh"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.318",
-    "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!xMABltSPihKdvSGh"
+    "_id": "xMABltSPihKdvSGh",
+    "effects": []
 }
