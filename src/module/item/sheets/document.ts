@@ -19,3 +19,12 @@ export class DocumentSheetV2<TDocument extends foundry.abstract.Document> extend
         if (closeOnSubmit) await this.close();
     }
 }
+
+export type Tab = {
+    id: string;
+    group: string;
+    icon: string;
+    label: string;
+    active?: boolean;
+    cssClass?: string;
+};

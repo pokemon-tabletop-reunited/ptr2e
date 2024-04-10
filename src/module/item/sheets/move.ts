@@ -1,18 +1,9 @@
 import { MovePTR2e } from "@item";
 import { AttackPTR2e } from "@data";
 import { sluggify } from "@utils";
-import { DocumentSheetConfiguration, DocumentSheetV2 } from "./document.ts";
+import { DocumentSheetConfiguration, DocumentSheetV2, Tab } from "./document.ts";
 import Tagify from "@yaireo/tagify";
 import GithubManager from "@module/apps/github.ts";
-
-type Tab = {
-    id: string;
-    group: string;
-    icon: string;
-    label: string;
-    active?: boolean;
-    cssClass?: string;
-};
 
 export default class MoveSheetPTR2eV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     DocumentSheetV2<MovePTR2e>

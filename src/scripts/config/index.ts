@@ -14,6 +14,8 @@ import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, Item
 import Traits from "static/traits.json";
 import ItemDirectoryPTR2e from "@item/sidebar.ts";
 import { StatusEffects } from "./effects.ts";
+import FolderPTR2e from "@module/folder/document.ts";
+import ActorDirectoryPTR2e from "@actor/sidebar.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -57,6 +59,9 @@ export const PTRCONFIG = {
             round: RoundCombatantSystem
         },
     },
+    Folder: {
+        documentClass: FolderPTR2e
+    },
     Grid: {
         square: SquareGridPTR2e,
     },
@@ -92,7 +97,8 @@ export const PTRCONFIG = {
     ui: {
         perks: PerkDirectory,
         combat: CombatTrackerPTR2e,
-        items: ItemDirectoryPTR2e
+        items: ItemDirectoryPTR2e,
+        actors: ActorDirectoryPTR2e
     },
     data: {
         traits: Traits,

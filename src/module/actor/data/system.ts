@@ -81,6 +81,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
 
         this.advancement.level = Math.floor(Math.cbrt(this.advancement.experience.current || 1));
         this.advancement.experience.next = Math.pow(Math.min(this.advancement.level + 1, 100), 3);
+        this.advancement.experience.diff = this.advancement.experience.next - this.advancement.experience.current;
 
         for (const k in this.attributes) {
             const key = k as keyof Attributes;
@@ -89,6 +90,11 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         }
 
         this.health.max = this.attributes.hp.value;
+
+        this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
+
+        // TODO: Remove this once I implement luck
+        if(!this.skills.luck) this.skills.luck = { slug: "luck", value: 1, rvs: 0};
     }
 
     _prepareSpeciesData() {
@@ -110,6 +116,11 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         // Add species traits to actor traits
         for(const trait of this.species.traits.values()) {
             this.traits.set(trait.slug, trait);
+        }
+
+        for(const type of this.species.types.values()) {
+            this.type.types.add(type);
+            if(this.type.types.size > 1 && this.type.types.has("untyped")) this.type.types.delete("untyped");
         }
     }
 

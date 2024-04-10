@@ -49,6 +49,8 @@ export const Init: PTRHook = {
                 dataModels: PTRCONFIG.Change.dataModels
             };
 
+            CONFIG.Folder.documentClass = PTRCONFIG.Folder.documentClass;
+
             CONFIG.Scene.documentClass = PTRCONFIG.Scene.documentClass;
             CONFIG.MeasuredTemplate.defaults.angle = 75;
             // TODO: Revisit this once v12 is properly out and we can look at how other systems handle the changes.
@@ -60,6 +62,7 @@ export const Init: PTRHook = {
             CONFIG.statusEffects = PTRCONFIG.statusEffects;
 
             CONFIG.ui.items = PTRCONFIG.ui.items;
+            CONFIG.ui.actors = PTRCONFIG.ui.actors;
 
             // Register custom sheets
             {

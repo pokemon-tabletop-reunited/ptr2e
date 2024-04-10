@@ -63,7 +63,7 @@ class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
                         type: "species",
                         img: this.actor.img,
                         flags: { ptr2e: { disabled: !this.actor.system._source.species } },
-                        system: species,
+                        system: species.toObject(),
                     }) as SpeciesPTR2e;
                     sheet.render(true);
                 },

@@ -50,7 +50,7 @@ interface Stat {
     stage: number
 }
 
-type PTRSkill = ArtSkill | OccultSkill | PerformanceSkill | PilotingSkills | ScienceSkills | "accounting" | "acrobatics" | "appraise" | "archaeology" | "aura-sense" | "climb" | "computers" | "conversation" | "credit-rating" | "disguise" | "electronics" | "engineering" | "fast-talk" | "history" | "husbandry" | "intimidate" | "leadership" | "legal" | "lift" | "listen" | "locksmith" | "mechanics" | "medicine" | "natural-world" | "navigate" | "negotiation" | "psychology" | "read-lips" | "research" | "ride" | "running" | "sleight-of-hand" | "spot-hidden" | "stealth" | "survival" | "swim" | "teaching" | "track";
+type PTRSkill = ArtSkill | OccultSkill | PerformanceSkill | PilotingSkills | ScienceSkills | "accounting" | "acrobatics" | "appraise" | "archaeology" | "aura-sense" | "climb" | "computers" | "conversation" | "credit-rating" | "disguise" | "electronics" | "engineering" | "fast-talk" | "history" | "husbandry" | "intimidate" | "leadership" | "legal" | "lift" | "listen" | "locksmith" | "mechanics" | "medicine" | "natural-world" | "navigate" | "negotiation" | "psychology" | "read-lips" | "research" | "ride" | "running" | "sleight-of-hand" | "spot-hidden" | "stealth" | "survival" | "swim" | "teaching" | "track" | "luck";
 
 type ArtSkill = "flower-arrangement" | "poetry" | "calligraphy" | "painting" | "songwriting" | "digital-art" | "bonzai";
 type OccultSkill = "psychic" | "ghosts" | "fairies" | "spiritual" | "legendaries";
@@ -131,6 +131,8 @@ interface AdvancementData {
         current: number,
         /** Calculated Field */
         next: number
+        /** Calculated Field - Experience Points till next level */
+        diff: number;
     }
 }
 

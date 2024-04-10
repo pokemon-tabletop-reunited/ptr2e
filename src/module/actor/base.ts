@@ -11,6 +11,10 @@ import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import { ActionPTR2e, ActionType, AttackPTR2e, PokemonType, RollOptionManager } from "@data";
 import { ActorFlags } from "types/foundry/common/documents/actor.js";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
+import FolderPTR2e from "@module/folder/document.ts";
+
+type ActorParty = { owner: ActorPTR2e<ActorSystemPTR2e, null> | null; party: ActorPTR2e<ActorSystemPTR2e, null>[] };
+
 class ActorPTR2e<
     TSystem extends ActorSystemPTR2e = ActorSystemPTR2e,
     TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
@@ -33,6 +37,23 @@ class ActorPTR2e<
 
     get speed() {
         return this.system.attributes.spe.value;
+    }
+
+    get party(): ActorParty | null {
+        if(!this.folder) return null;
+
+        return this._party ??= ((): ActorParty | null => {
+            const owner = (():ActorPTR2e<TSystem, null> | null => {
+                if(this.folder?.owner) return fromUuidSync<ActorPTR2e<TSystem, null>>(this.folder.owner);
+                return null;
+            })();
+            const party = ((): (ActorPTR2e<TSystem, null>)[] => {
+                if(this.folder?.isInParty(this.uuid)) return this.folder.party.flatMap(uuid => uuid === this.uuid ? this as ActorPTR2e<TSystem, null> : fromUuidSync<ActorPTR2e<TSystem, null>>(uuid) ?? []);
+                return [];
+            })();
+    
+            return owner || party.length ? { owner, party } : null;
+        })();
     }
 
     protected override _initializeSource(
@@ -70,6 +91,8 @@ class ActorPTR2e<
                 }, 10), // 10ms also handles separate module executions
             },
         };
+
+        this._party = null;
 
         this.rollOptions = new RollOptionManager(this);
 
@@ -309,6 +332,9 @@ interface ActorPTR2e<
     TSystem extends ActorSystemPTR2e = ActorSystemPTR2e,
     TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
 > extends Actor<TParent, TSystem> {
+    get folder(): FolderPTR2e<ActorPTR2e<TSystem, null>> | null;
+
+    _party: ActorParty | null;
 
     health: {
         percent: number;

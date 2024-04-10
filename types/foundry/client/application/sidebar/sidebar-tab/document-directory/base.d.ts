@@ -56,6 +56,15 @@ declare global {
          */
         protected static _sortAlphabetical(a: WorldDocument, b: WorldDocument): number;
 
+        /**
+         * Sort two Entries using their numeric sort fields.
+         * @param {Object} a    Some Entry
+         * @param {Object} b    Some other Entry
+         * @returns {number}    The sort order between Entries a and b
+         * @protected
+         */
+        static _sortStandard(a: WorldDocument, b: WorldDocument): number;
+
         protected override _render(force?: boolean, context?: SidebarDirectoryRenderOptions): Promise<void>;
 
         protected override _renderInner(data: object): Promise<JQuery>;

@@ -13,14 +13,26 @@ function _registerPTRHelpers() {
     });
 
     Handlebars.registerHelper("calcHeight", function (percent) {
-        return Math.round((100 - percent) / 100 * 48);
+        return Math.round(((100 - percent) / 100) * 48);
     });
 
-    Handlebars.registerHelper("icon", function (img: PokemonType | PokemonCategory) {
-        if (!Object.values(PTRCONSTS.Categories).includes(img as PokemonCategory) && !getTypes().includes(img as PokemonType)) return "<small>Incorrect img data provided</small>";
+    Handlebars.registerHelper(
+        "icon",
+        function (img: PokemonType | PokemonCategory, args: {hash: Record<string, string>}) {
+            if (
+                !Object.values(PTRCONSTS.Categories).includes(img as PokemonCategory) &&
+                !getTypes().includes(img as PokemonType)
+            )
+                return "<small>Incorrect img data provided</small>";
 
-        return `<img src="/systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${formatSlug(img)}" data-tooltip-direction="LEFT" class="icon" />`;
-    });
+            const hash = args.hash;
+            const direction: string = hash?.direction ?? "LEFT";
+            const tooltip: string = hash?.tooltip ?? formatSlug(img);
+            const classes: string = hash?.classes ?? "";
+
+            return `<img src="/systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`;
+        }
+    );
 
     Handlebars.registerHelper("formatFormula", function (formula) {
         // Find all numbers in the string
@@ -42,31 +54,29 @@ function _registerPTRHelpers() {
         }
 
         // Replace mathematical symbols with their HTML entities
-        return roundedFormula
-            .replaceAll('*', '&times;')
-            .replaceAll('/', '&divide;')
+        return roundedFormula.replaceAll("*", "&times;").replaceAll("/", "&divide;");
     });
 }
 
 function _registerBasicHelpers() {
     Handlebars.registerHelper("concat", function () {
-        var outStr = '';
+        var outStr = "";
         for (var arg in arguments) {
-            if (typeof arguments[arg] != 'object') {
+            if (typeof arguments[arg] != "object") {
                 outStr += arguments[arg];
             }
         }
         return outStr;
     });
 
-    Handlebars.registerHelper('switch', function (value, options) {
+    Handlebars.registerHelper("switch", function (value, options) {
         // @ts-ignore
         this.switch_value = value;
         // @ts-ignore
         return options.fn(this);
     });
 
-    Handlebars.registerHelper('case', function (value, options) {
+    Handlebars.registerHelper("case", function (value, options) {
         // @ts-ignore
         if (value == this.switch_value) {
             // @ts-ignore
@@ -78,14 +88,16 @@ function _registerBasicHelpers() {
         return str.toLowerCase ? str.toLowerCase() : str;
     });
 
-    Handlebars.registerHelper("capitalizeFirst", (e) => { return "string" != typeof e ? e : e.charAt(0).toUpperCase() + e.slice(1) });
+    Handlebars.registerHelper("capitalizeFirst", (e) => {
+        return "string" != typeof e ? e : e.charAt(0).toUpperCase() + e.slice(1);
+    });
 
     Handlebars.registerHelper("capitalize", capitalize);
 
     Handlebars.registerHelper("formatLocalize", (key, value) => ({
-        "hash": {
-            [key]: value
-        }
+        hash: {
+            [key]: value,
+        },
     }));
 
     Handlebars.registerHelper("formatSlug", formatSlug);
@@ -94,12 +106,24 @@ function _registerBasicHelpers() {
         return value !== undefined;
     });
 
-    Handlebars.registerHelper("is", function (a, b) { return a == b });
-    Handlebars.registerHelper("bigger", function (a, b) { return a > b });
-    Handlebars.registerHelper("biggerOrEqual", function (a, b) { return a >= b });
-    Handlebars.registerHelper("and", function (a, b) { return a && b });
-    Handlebars.registerHelper("or", function (a, b) { return a || b });
-    Handlebars.registerHelper("not", function (a, b = false) { return a != b });
+    Handlebars.registerHelper("is", function (a, b) {
+        return a == b;
+    });
+    Handlebars.registerHelper("bigger", function (a, b) {
+        return a > b;
+    });
+    Handlebars.registerHelper("biggerOrEqual", function (a, b) {
+        return a >= b;
+    });
+    Handlebars.registerHelper("and", function (a, b) {
+        return a && b;
+    });
+    Handlebars.registerHelper("or", function (a, b) {
+        return a || b;
+    });
+    Handlebars.registerHelper("not", function (a, b = false) {
+        return a != b;
+    });
     Handlebars.registerHelper("divide", (value1, value2) => Number(value1) / Number(value2));
     Handlebars.registerHelper("multiply", (value1, value2) => Number(value1) * Number(value2));
     Handlebars.registerHelper("add", (value1, value2) => Number(value1) + Number(value2));
@@ -111,23 +135,27 @@ function _registerBasicHelpers() {
 
     Handlebars.registerHelper("isGm", function () {
         return game.user.isGM;
-    })
+    });
 
-    Handlebars.registerHelper('contains', function (needle, haystack) {
+    Handlebars.registerHelper("contains", function (needle, haystack) {
         needle = Handlebars.escapeExpression(needle);
         haystack = Handlebars.escapeExpression(haystack);
-        return (haystack.indexOf(needle) > -1) ? true : false;
+        return haystack.indexOf(needle) > -1 ? true : false;
     });
 
-    Handlebars.registerHelper('ifContains', function (needle, haystack, options) {
+    Handlebars.registerHelper("ifContains", function (needle, haystack, options) {
         needle = Handlebars.escapeExpression(needle);
         haystack = Handlebars.escapeExpression(haystack); // @ts-ignore
-        return (haystack.indexOf(needle) > -1) ? options.fn(this) : options.inverse(this);
+        return haystack.indexOf(needle) > -1 ? options.fn(this) : options.inverse(this);
     });
 
-    Handlebars.registerHelper("inc", function (num) { return Number(num) + 1 })
+    Handlebars.registerHelper("inc", function (num) {
+        return Number(num) + 1;
+    });
 
-    Handlebars.registerHelper("newline", function (a) { return a.replace("\\n", "\n") });
+    Handlebars.registerHelper("newline", function (a) {
+        return a.replace("\\n", "\n");
+    });
 
     Handlebars.registerHelper("lpad", function (str, len, char) {
         str = str.toString();
@@ -135,17 +163,17 @@ function _registerBasicHelpers() {
         return str;
     });
 
-    Handlebars.registerHelper('padDecimal', function (value, decimals) {
+    Handlebars.registerHelper("padDecimal", function (value, decimals) {
         const stringValue = String(value);
-        const decimalIndex = stringValue.indexOf('.');
+        const decimalIndex = stringValue.indexOf(".");
         if (decimalIndex === -1) {
             // No decimal point found, add the specified number of decimal places
-            return `${stringValue}.${'0'.repeat(decimals)}`;
+            return `${stringValue}.${"0".repeat(decimals)}`;
         } else {
             // Decimal point found, pad the decimal places up to the specified number
             const numDecimals = stringValue.length - decimalIndex - 1;
             if (numDecimals < decimals) {
-                return `${stringValue}${'0'.repeat(decimals - numDecimals)}`;
+                return `${stringValue}${"0".repeat(decimals - numDecimals)}`;
             } else {
                 return stringValue;
             }
@@ -153,7 +181,7 @@ function _registerBasicHelpers() {
     });
 
     Handlebars.registerHelper("diceResult", function (roll, term) {
-        const result = roll.terms.find((t: { faces: any; }) => t.faces == term);
+        const result = roll.terms.find((t: { faces: any }) => t.faces == term);
         if (result) return result.total ?? result.results[0].result;
     });
 
@@ -167,16 +195,18 @@ function _registerBasicHelpers() {
 
     Handlebars.registerHelper("ld", function (key, value) {
         return { hash: { [key]: value } };
-    })
+    });
 
-    Handlebars.registerHelper("json", function (context) { return JSON.stringify(context); });
+    Handlebars.registerHelper("json", function (context) {
+        return JSON.stringify(context);
+    });
 
     const buildInEachHelper = Handlebars.helpers.each;
     Handlebars.registerHelper("each", function (context, options) {
         let fn = options.fn,
             inverse = options.inverse,
             i = 0,
-            ret = '',
+            ret = "",
             data: { key: string; index: number; first: boolean; last: boolean } | undefined;
 
         if (fu.getType(context) === "function") {
@@ -200,7 +230,7 @@ function _registerBasicHelpers() {
                 });
         }
 
-        if (fu.getType(context) === 'Map') {
+        if (fu.getType(context) === "Map") {
             if (options.data) {
                 data = Handlebars.Utils.createFrame(options.data);
             }
@@ -210,8 +240,7 @@ function _registerBasicHelpers() {
             for (const [key, value] of map) {
                 execIteration(key, value, i++, i === j);
             }
-        }
-        else {
+        } else {
             return buildInEachHelper(context, options);
         }
 
@@ -222,5 +251,4 @@ function _registerBasicHelpers() {
 
         return ret;
     });
-
 }
