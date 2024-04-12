@@ -65,12 +65,12 @@ declare global {
          * @param options Initial positioning and sizing options for the dialog form
          * @return An active FolderConfig instance for creating the new Folder entity
          */
-        static createDialog<TDocument extends foundry.abstract.Document>(
+        static createDialog<TDocument extends EnfolderableDocument>(
             this: ConstructorOf<TDocument>,
             data?: Record<string, unknown>,
             context?: {
                 parent?: TDocument["parent"];
-                pack?: Collection<TDocument> | null;
+                pack?: CompendiumCollection<TDocument> | string | null;
             } & Partial<FormApplicationOptions>,
         ): Promise<TDocument | null>;
 

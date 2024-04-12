@@ -8,16 +8,17 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     folder: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>;
 
     constructor(
-        folder: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>,
-        options: Partial<foundry.applications.api.ApplicationConfiguration> = {}
+        options: Partial<foundry.applications.api.ApplicationConfiguration> & {folder?: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>} = {}
     ) {
+        if(!options.folder) throw new Error("No folder provided for party sheet");
         super(options);
-        this.folder = folder;
+        this.folder = options.folder;
     }
 
     static override DEFAULT_OPTIONS = fu.mergeObject(
         super.DEFAULT_OPTIONS,
         {
+            id: "{id}",
             classes: ["sheet","party-sheet"],
             position: {
                 height: 460,
@@ -74,6 +75,12 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         return `${this.folder.name} - Party Sheet`;
     }
 
+    override _initializeApplicationOptions(options: Partial<foundry.applications.api.ApplicationConfiguration> & {folder?: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>}): foundry.applications.api.ApplicationConfiguration {
+        options = super._initializeApplicationOptions(options);
+        options.uniqueId = `${this.constructor.name}-${options.folder?.uuid}`;
+        return options as foundry.applications.api.ApplicationConfiguration;
+    }
+
     override async _prepareContext() {
         
         const owner = this.folder.owner ? await fromUuid(this.folder.owner) : null;
@@ -91,6 +98,23 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
             owner,
             party,
             folder: this.folder
+        }
+    }
+
+    override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
+        super._attachPartListeners(partId, htmlElement, options);
+        if (partId === "overview") {
+            for(const member of htmlElement.querySelectorAll(".party-member")) {
+                member.addEventListener("dblclick", this._onPartyMemberClick.bind(this));
+            }
+        }
+    }
+
+    _onPartyMemberClick(event: Event) {
+        const actorId = (event.currentTarget as HTMLElement).dataset.actorId;
+        if(actorId) {
+            const actor = game.actors.get(actorId);
+            if(actor) actor.sheet?.render(true);
         }
     }
 }

@@ -259,19 +259,6 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
         }
     }
 
-    override _attachFrameListeners(): void {
-        super._attachFrameListeners();
-        const button = this.element.querySelector<HTMLButtonElement>(".header-control[data-action=copyId]");
-        if (button) {
-            button.addEventListener("contextmenu", async () => {
-                const uuid = this.document.uuid;
-                const label = game.i18n.localize(this.document.constructor.metadata.label);
-                game.clipboard.copyPlainText(uuid);
-                ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", {label, type: "uuid", id: uuid}));
-            });
-        }
-    }
-
     override _onRender(): void {
         for (const stringTags of this.element.querySelectorAll<HTMLElement>("string-tags")) {
             const path = stringTags.getAttribute("name");

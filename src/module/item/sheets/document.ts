@@ -18,6 +18,21 @@ export class DocumentSheetV2<TDocument extends foundry.abstract.Document> extend
         if (handler instanceof Function) await handler.call(this, event, element, formData);
         if (closeOnSubmit) await this.close();
     }
+
+    override _attachFrameListeners(): void {
+        super._attachFrameListeners();
+        const button = this.element.querySelector<HTMLButtonElement>(".header-control[data-action=copyId]");
+        if (button) {
+            button.addEventListener("contextmenu", async () => {
+                //@ts-ignore
+                const uuid = this.document.uuid;
+                //@ts-ignore
+                const label = game.i18n.localize(this.document.constructor.metadata.label);
+                game.clipboard.copyPlainText(uuid);
+                ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", {label, type: "uuid", id: uuid}));
+            });
+        }
+    }
 }
 
 export type Tab = {

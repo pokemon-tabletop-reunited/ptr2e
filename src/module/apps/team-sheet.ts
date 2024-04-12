@@ -8,11 +8,11 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
     folder: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>;
 
     constructor(
-        folder: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>,
-        options: Partial<foundry.applications.api.ApplicationConfiguration> = {}
+        options: Partial<foundry.applications.api.ApplicationConfiguration> & {folder?: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>} = {}
     ) {
+        if(!options.folder) throw new Error("No folder provided for party sheet");
         super(options);
-        this.folder = folder;
+        this.folder = options.folder;
     }
 
     static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -74,6 +74,12 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
         return `${this.folder.name} - Team Sheet`;
     }
 
+    override _initializeApplicationOptions(options: Partial<foundry.applications.api.ApplicationConfiguration> & {folder?: FolderPTR2e<ActorPTR2e<ActorSystemPTR2e, null>>}): foundry.applications.api.ApplicationConfiguration {
+        options = super._initializeApplicationOptions(options);
+        options.uniqueId = `${this.constructor.name}-${options.folder?.uuid}`;
+        return options as foundry.applications.api.ApplicationConfiguration;
+    }
+
     override async _prepareContext() {
         const team = [];
         for(const memberUuid of this.folder.team) {
@@ -95,6 +101,39 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
             tabs: this._getTabs(),
             team,
             folder: this.folder
+        }
+    }
+
+    override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
+        super._attachPartListeners(partId, htmlElement, options);
+        if (partId === "overview") {
+            for(const member of htmlElement.querySelectorAll(".party-member")) {
+                member.addEventListener("dblclick", this._onMemberClick.bind(this));
+            }
+            for(const member of htmlElement.querySelectorAll(".team-member > .thumbnail")) {
+                member.addEventListener("dblclick", this._onMemberClick.bind(this));
+            }
+            for(const member of htmlElement.querySelectorAll(".team-member")) {
+                member.addEventListener("dblclick", this._onTeamClick.bind(this));
+            }
+        }
+    }
+
+    _onMemberClick(event: Event) {
+        event.stopPropagation();
+        // event.stopImmediatePropagation();
+        const actorId = (event.currentTarget as HTMLElement).dataset.actorId;
+        if(actorId) {
+            const actor = game.actors.get(actorId);
+            if(actor) actor.sheet?.render(true);
+        }
+    }
+
+    _onTeamClick(event: Event) {
+        const folderId = (event.currentTarget as HTMLElement).dataset.folderId;
+        if(folderId) {
+            const folder = game.folders.get<FolderPTR2e>(folderId);
+            if(folder) folder.renderPartySheet();
         }
     }
 }

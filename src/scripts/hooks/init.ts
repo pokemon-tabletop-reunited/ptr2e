@@ -81,6 +81,10 @@ export const Init: PTRHook = {
                         Items.registerSheet("ptr2e", sheet, { types: [type], makeDefault: true });
                     }
                 }
+
+                Folders.unregisterSheet("core", FolderConfig);
+                // @ts-ignore
+                Folders.registerSheet("ptr2e", PTRCONFIG.Folder.sheetClasses.folder, { types: ["Folder", "Actor"], makeDefault: true });
             }
 
             game.settings.register("ptr2e", "pokemonTypes", {

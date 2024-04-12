@@ -1,6 +1,7 @@
 import FolderPTR2e from "@module/folder/document.ts";
 import ActorPTR2e from "./base.ts";
 import ActorSystemPTR2e from "./data/system.ts";
+import FolderConfigPTR2e from "@module/folder/sheet.ts";
 
 export default class ActorDirectoryPTR2e<
     TActor extends ActorPTR2e<ActorSystemPTR2e, null>,
@@ -25,6 +26,27 @@ export default class ActorDirectoryPTR2e<
             },
             { inplace: false }
         );
+    }
+
+    override _getFolderContextOptions() {
+        const options = super._getFolderContextOptions();
+        const option = options.find((o) => o.name === "FOLDER.Edit");
+        if (option) {
+            option.callback = async (header) => {
+                const li = header.closest(".directory-item")[0];
+                const folder = await fromUuid(li.dataset.uuid);
+                const r = li.getBoundingClientRect();
+                const context = {
+                    document: folder!,
+                    position: {
+                        top: r.top,
+                        left: r.left - FolderConfigPTR2e.DEFAULT_OPTIONS.position.width - 10,
+                    },
+                };
+                new FolderConfigPTR2e(context).render(true);
+            };
+        }
+        return options;
     }
 
     override async getData(options?: Partial<ApplicationOptions> | undefined): Promise<object> {
@@ -84,7 +106,7 @@ export default class ActorDirectoryPTR2e<
         html.find(".open-team").on("click", this._openTeam.bind(this));
     }
 
-    protected _openParty(event: JQuery.ClickEvent){
+    protected _openParty(event: JQuery.ClickEvent) {
         event.preventDefault();
         event.stopPropagation();
 
@@ -108,6 +130,30 @@ export default class ActorDirectoryPTR2e<
 
         const folder = game.folders.get<FolderPTR2e>(folderId);
         return folder?.renderTeamSheet();
+    }
+
+    /**
+     * Create a new Folder in this SidebarDirectory
+     * @param {PointerEvent} event    The originating button click event
+     * @protected
+     */
+    protected override _onCreateFolder(event: PointerEvent) {
+        event.preventDefault();
+        event.stopPropagation();
+        const button = event.currentTarget as HTMLElement;
+        const li = button.closest<HTMLElement>(".directory-item");
+        const data = { folder: li?.dataset?.folderId || null, type: this.entryType };
+        const options: {
+            top: number;
+            left: number;
+            pack?: string;
+        } = {
+            top: button.offsetTop,
+            left: window.innerWidth - 310 - FolderConfigPTR2e.DEFAULT_OPTIONS.position.width,
+        };
+        if (this.collection instanceof CompendiumCollection)
+            options.pack = this.collection.collection;
+        FolderPTR2e.createDialog(data, options);
     }
 
     protected override async _handleDroppedEntry(
