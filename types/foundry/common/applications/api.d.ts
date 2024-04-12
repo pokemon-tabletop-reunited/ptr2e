@@ -312,7 +312,7 @@ export class ApplicationV2<
      *                                                      ApplicationV1#render signature.
      * @returns {Promise<ApplicationV2>}            A Promise which resolves to the rendered Application instance
      */
-    render(options: boolean | TRenderOptions, _options?: TRenderOptions): Promise<ApplicationV2>;
+    render(options: boolean | TRenderOptions, _options?: TRenderOptions): Promise<this>;
 
     /* -------------------------------------------- */
 
@@ -322,7 +322,7 @@ export class ApplicationV2<
      * @param {ApplicationRenderOptions} [options]  Options which configure application rendering behavior
      * @returns {Promise<ApplicationV2>}            A Promise which resolves to the rendered Application instance
      */
-    #render(options: TRenderOptions): Promise<ApplicationV2>;
+    #render(options: TRenderOptions): Promise<this>;
 
     /* -------------------------------------------- */
 

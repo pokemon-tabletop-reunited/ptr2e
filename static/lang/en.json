@@ -55,6 +55,30 @@
         "ActorSheet": {
             "StatsFormTitle": "Stats Manager"
         },
+        "Settings": {
+            "DevMode": {
+                "Name":"Developer Mode",
+                "Hint": "Enable developer mode, this will allow you to commit changes to the Github repository."
+            },
+            "Traits": {
+                "Name": "Traits Settings",
+                "Label": "Open Menu",
+                "Hint": "Manage Traits available in the System",
+                "Title": "Traits Settings",
+                "systemTraits": {
+                    "Label": "System Traits",
+                    "Hint": "These traits are defined by the system itself and can therefore not be deleted.<br>You can however override the properties by declaring a User Trait with the same name.<br><br>Please keep in mind that any attached automation to traits will not adhere to overriden core traits."
+                },
+                "userTraits": {
+                    "Label": "User Traits",
+                    "Hint": "Custom traits defined by the Game Master.<br><br>If a trait with the same name as a system trait is defined here, it will override the system trait."
+                },
+                "moduleTraits": {
+                    "Label": "Module Traits",
+                    "Hint": "Traits added through a module, they cannot be edited by Game Masters."
+                }
+            }
+        },
         "Attributes": {
             "hp": {
                 "Label": "Hit Points",
@@ -205,7 +229,7 @@
                 },
                 "weight": {
                     "label": "Weight",
-                    "hint": "The Weight of the Pokemon in Meters."
+                    "hint": "The Weight of the Pokemon in Kilos."
                 }
             },
             "genderRatio": {

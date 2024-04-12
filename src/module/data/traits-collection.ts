@@ -1,0 +1,61 @@
+import { formatSlug, sluggify } from "@utils";
+import Trait from "./models/trait.ts";
+
+export default class PTR2eTraits extends Map<string, Trait> {
+    rawModuleTraits: Trait[] = [];
+    #cachedArray: Trait[] | null = null;
+
+    constructor() {
+        super();
+        this.refresh();
+    }
+
+    static create() {
+        return new PTR2eTraits().refresh();
+    }
+
+    refresh() {
+        this.clear();
+        this.#cachedArray = null;
+
+        for(const trait of CONFIG.PTR.data.traits) {
+            this.set(trait.slug, trait);
+        }
+    
+        // Allow custom-defined user Traits from the world
+        const settingTraits = game.settings.get<Trait[]>("ptr2e", "traits");
+        if (settingTraits?.length > 0) {
+            settingTraits.forEach((trait: Trait) => {
+                if (!trait.slug && !trait.label) return;
+                trait.slug ??= sluggify(trait.label);
+                trait.label ??= formatSlug(trait.slug);
+                trait.description ??= "";
+                trait.related ??= [];
+                this.set(trait.slug, trait);
+            });
+        }
+    
+        // Allow modules to add and override Traits
+        const toAdd: Trait[] = [];
+        Hooks.callAll("ptr2e.prepareTraits", toAdd);
+    
+        if (toAdd.length > 0) {
+            toAdd.forEach((trait: Trait) => {
+                if (!trait.slug && !trait.label) return;
+                trait.slug ??= sluggify(trait.label);
+                trait.label ??= formatSlug(trait.slug);
+                trait.description ??= "";
+                trait.related ??= [];
+                this.set(trait.slug, trait);
+            });
+        }
+    
+        this.rawModuleTraits = fu.deepClone(toAdd);
+    
+        return this;
+    }
+
+    asArray() {
+        return this.#cachedArray ??= Array.from(this.values());
+    }
+}
