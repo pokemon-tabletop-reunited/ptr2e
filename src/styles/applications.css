@@ -323,6 +323,78 @@
 .sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions {
   flex: 0 0 100%;
 }
+.sheet#traits-settings .window-content {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 44px auto 44px;
+  grid-template-areas: "header" "main" "footer";
+  padding: 0;
+}
+.sheet#traits-settings nav.tabs {
+  grid-area: header;
+  justify-content: space-evenly;
+  margin-top: 0;
+  border: unset;
+  border-bottom: 1px solid var(--color-light-6);
+}
+.sheet#traits-settings section.tab {
+  grid-area: main;
+  height: 100%;
+  overflow: hidden;
+}
+.sheet#traits-settings section.tab header {
+  padding: 0.25rem;
+  border: 1px solid var(--color-light-6);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+.sheet#traits-settings section.tab article.traits.editable .form-group {
+  flex-wrap: nowrap;
+}
+.sheet#traits-settings section.tab article.traits.editable .form-group.header {
+  margin-bottom: 0.75rem;
+}
+.sheet#traits-settings section.tab article.traits.editable .form-group.header h5 {
+  margin: unset;
+}
+.sheet#traits-settings section.tab article.traits.editable .form-group label {
+  flex: 0 1 30%;
+}
+.sheet#traits-settings section.tab article.traits.editable .form-group div.form-fields {
+  flex: 0 1 60%;
+}
+.sheet#traits-settings section.tab article.traits.editable .form-group .trait-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex: 0 0 45px;
+}
+.sheet#traits-settings section.tab .form-group.center,
+.sheet#traits-settings section.tab .form-group .center {
+  text-align: center;
+}
+.sheet#traits-settings section.tab .form-group textarea {
+  resize: vertical;
+}
+.sheet#traits-settings .scroll {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100% - 1rem);
+  margin: 0.5rem;
+}
+.sheet#traits-settings footer {
+  grid-area: footer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  border-top: 1px solid var(--color-light-6);
+}
+.sheet#traits-settings footer button {
+  flex: 0 0 48%;
+}
 .sheet.stats-form .window-content {
   padding-top: 0.5rem;
   display: grid;

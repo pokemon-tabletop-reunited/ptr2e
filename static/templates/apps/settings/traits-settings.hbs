@@ -1,0 +1,59 @@
+{{#with (lookup tabs partId) as | tab |}}
+    <section class="tab sheet-body {{tab.cssClass}} standard-form" data-tab="{{tab.id}}" data-group="type">
+        {{!-- <main class="scroll"> --}}
+            <fieldset class="scroll">
+                <legend>
+                    {{localize tab.label}}
+                </legend>
+                <header>
+                    <p>{{{localize tab.hint}}}</p>
+                </header>
+                <article class="traits {{#if (eq tab.id 'userTraits')}}editable{{/if}}">
+                    <div class="form-group center header">
+                        <label><h5>Trait</h5></label>
+                        <div class="form-fields">
+                            <h5>Description</h5>
+                        </div>
+                        {{#if (eq tab.id 'userTraits')}}
+                            <div class="trait-controls create">
+                                <a class="trait-control trait-create" data-tooltip="Add Trait" data-action="add">
+                                    <i class="fas fa-plus-circle" style="margin-right: 3px;"></i>
+                                    <span class="readable">{{localize "ITEM.AddButton"}}</span>
+                                </a>
+                            </div>
+                        {{/if}}
+                    </div>
+                    
+                    {{#with (lookup ../traits ../partId) as | traits |}}
+                        {{#each traits as | trait |}}
+                            <div class="form-group" data-slug="{{trait.slug}}">
+                                {{#if (eq tab.id 'userTraits')}}
+                                <input type="hidden" name="trait.{{trait.slug}}.slug" value="{{trait.slug}}"/>
+                                <label class="center"><input type="text" data-dType="String" name="trait.{{trait.slug}}.label" value="{{trait.label}}"/></label>
+                                <div class="form-fields">
+                                    <textarea name="trait.{{trait.slug}}.description" class="form-control"
+                                        data-dtype="String">{{trait.description}}</textarea>
+                                </div>
+                                <div class="trait-controls">
+                                    <a class="trait-control trait-delete" data-slug="{{trait.slug}}" data-tooltip="Delete Trait" data-action="delete" >
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                                {{else}}
+                                    <label class="center">{{trait.label}}</label>
+                                    <div class="form-fields">
+                                        <textarea disabled>{{{trait.description}}}</textarea>
+                                    </div>
+                                {{/if}}
+                            </div>
+                        {{/each}}
+                    {{else}}
+                        <div class="form-group center empty">
+                            <p><small>No traits of this type exist</small></p>
+                        </div>
+                    {{/with}}
+                </article>
+            </fieldset>
+        {{!-- </main> --}}
+    </section>
+{{/with}}

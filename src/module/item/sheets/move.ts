@@ -156,15 +156,7 @@ export default class MoveSheetPTR2eV2 extends foundry.applications.api.Handlebar
             return traits;
         })();
 
-        if(!this.#allTraits) {
-            this.#allTraits = [];
-            for (const trait of game.ptr.data.traits.values()) {
-                this.#allTraits.push({
-                    value: trait.slug,
-                    label: trait.label
-                });
-            }
-        }
+        this.#allTraits = game.ptr.data.traits.asArray().map(trait => ({value: trait.slug, label: trait.label}));
 
         return {
             ...((await super._prepareContext()) as Record<string, unknown>),
