@@ -1,4 +1,4 @@
-<section class="standard-form" autocomplete="off">
+<section class="standard-form">
     <input type="hidden" name="type" value="{{folder.type}}"/>
     <input type="hidden" name="folder" value="{{folder.folder}}"/>
 
@@ -11,7 +11,7 @@
 
     <div class="form-group">
         <label>{{localize "FOLDER.Color"}}</label>
-        <div class="form-fields" style="--color-input-border-color: {{folder.color}}">
+        <div class="form-fields" {{#if folder.color}}style="--color-input-border-color: {{folder.color}}"{{/if}}>
             {{colorPicker name="color" value=folder.color}}
         </div>
     </div>
@@ -22,5 +22,4 @@
             {{radioBoxes "sorting" sortingModes checked=folder.sorting localize=true}}
         </div>
     </div>
-    <button type="submit"><i class="fas fa-check"></i> {{submitText}}</button>
 </section>

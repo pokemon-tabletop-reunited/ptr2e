@@ -1,79 +1,80 @@
 <section class="tab sheet-body {{tabs.overview.cssClass}}" data-tab="overview" data-group="sheet" {{#if folder.color}}style="--owner-folder-background: {{folder.color.css}};"{{/if}}>
-    <header class="party-member" data-actor-id="{{owner.id}}">
-        <div class="thumbnail">
-            <img src="{{owner.img}}" alt="{{owner.name}}">
-        </div>
-        <main>
-            <div class="title">
-                <span class="name">{{owner.name}}</span>
-                <span class="level">Level {{owner.system.advancement.level}}</span>
-            </div>
-            <div class="health">
-                <span>Health</span>
-                <div class="details">
-                    <span class="hp">{{owner.system.health.value}}</span>
-                    <span class="divider">/</span>
-                    <span class="hp">{{owner.system.health.max}}</span>
-                </div>
-            </div>
-            <div class="pp">
-                <span>PP</span>
-                <div class="details">
-                    <span class="pp">{{owner.system.powerPoints.value}}</span>
-                    <span class="divider">/</span>
-                    <span class="pp">{{owner.system.powerPoints.max}}</span>
-                </div>
-            </div>
-            <div class="types">
-                {{#each owner.system.type.types as |type|}}
-                    <span>{{{icon type direction="DOWN"}}}</span>
-                {{/each}}
-            </div>
-            <div class="experience label">
-                <span>Current EXP:</span>
-                <span>EXP Till Level-up:</span>
-            </div>
-            <div class="experience value">
-                <span>{{owner.system.advancement.experience.current}}</span>
-                <span>{{owner.system.advancement.experience.diff}}</span>
-            </div>
-        </main>
-    </header>
-    <main>
-        {{#each party}}
-        <section class="party-member" data-actor-id="{{this.id}}">
+    <div class="scroll">
+        <header class="party-member" data-actor-id="{{owner.id}}">
             <div class="thumbnail">
-                <img src="{{this.img}}" alt="{{this.name}}">
+                <img src="{{owner.img}}" alt="{{owner.name}}">
             </div>
             <main>
                 <div class="title">
-                    <span class="name">{{this.name}}</span>
-                    <span class="level">Level {{this.system.advancement.level}}</span>
+                    <span class="name">{{owner.name}}</span>
+                    <span class="level">Level {{owner.system.advancement.level}}</span>
                 </div>
                 <div class="health">
                     <span>Health</span>
                     <div class="details">
-                        <span class="hp">{{this.system.health.value}}</span>
+                        <span class="hp">{{owner.system.health.value}}</span>
                         <span class="divider">/</span>
-                        <span class="hp">{{this.system.health.max}}</span>
+                        <span class="hp">{{owner.system.health.max}}</span>
                     </div>
                 </div>
                 <div class="pp">
                     <span>PP</span>
                     <div class="details">
-                        <span class="pp">{{this.system.powerPoints.value}}</span>
+                        <span class="pp">{{owner.system.powerPoints.value}}</span>
                         <span class="divider">/</span>
-                        <span class="pp">{{this.system.powerPoints.max}}</span>
+                        <span class="pp">{{owner.system.powerPoints.max}}</span>
                     </div>
                 </div>
                 <div class="types">
-                    {{#each this.system.type.types as |type|}}
+                    {{#each owner.system.type.types as |type|}}
                         <span>{{{icon type direction="DOWN"}}}</span>
                     {{/each}}
                 </div>
+                <div class="experience label">
+                    <span>Current EXP:</span>
+                    <span>EXP Till Level-up:</span>
+                </div>
+                <div class="experience value">
+                    <span>{{owner.system.advancement.experience.current}}</span>
+                    <span>{{owner.system.advancement.experience.diff}}</span>
+                </div>
             </main>
-        </section>
-        {{/each}}
-    </main>
-
+        </header>
+        <main>
+            {{#each party}}
+            <section class="party-member" data-actor-id="{{this.id}}">
+                <div class="thumbnail">
+                    <img src="{{this.img}}" alt="{{this.name}}">
+                </div>
+                <main>
+                    <div class="title">
+                        <span class="name">{{this.name}}</span>
+                        <span class="level">Level {{this.system.advancement.level}}</span>
+                    </div>
+                    <div class="health">
+                        <span>Health</span>
+                        <div class="details">
+                            <span class="hp">{{this.system.health.value}}</span>
+                            <span class="divider">/</span>
+                            <span class="hp">{{this.system.health.max}}</span>
+                        </div>
+                    </div>
+                    <div class="pp">
+                        <span>PP</span>
+                        <div class="details">
+                            <span class="pp">{{this.system.powerPoints.value}}</span>
+                            <span class="divider">/</span>
+                            <span class="pp">{{this.system.powerPoints.max}}</span>
+                        </div>
+                    </div>
+                    <div class="types">
+                        {{#each this.system.type.types as |type|}}
+                            <span>{{{icon type direction="DOWN"}}}</span>
+                        {{/each}}
+                    </div>
+                </main>
+            </section>
+            {{/each}}
+        </main>
+    </div>
 </section>

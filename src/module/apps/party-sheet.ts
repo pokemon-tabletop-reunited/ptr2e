@@ -22,7 +22,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
             classes: ["sheet","party-sheet"],
             position: {
                 height: 460,
-                width: 520,
+                width: 528,
             },
         },
         { inplace: false }
@@ -36,6 +36,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
         overview: {
             id: "overview",
             template: "/systems/ptr2e/templates/apps/party/overview.hbs",
+            scrollable: [".scroll"]
         },
         party: {
             id: "party",

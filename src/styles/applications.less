@@ -610,14 +610,23 @@
             }
         }
 
-        .tab {
+        .window-content .tab {
             &[data-tab="overview"] {
-                display: grid;
+                padding: 0;
 
-                grid-template-rows: 35% 65%;
-                grid-template-areas:
-                    "owner"
-                    "party";
+                .scroll {
+                    padding: 1rem;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    height: 100%;
+    
+                    display: grid;
+    
+                    grid-template-rows: 35% 65%;
+                    grid-template-areas:
+                        "owner"
+                        "party";
+                }
             }
         }
 
@@ -997,173 +1006,237 @@
             }
         }
 
-        .tab {
+        .window-content .tab {
             
             &[data-tab="overview"] {
-                display: flex;
-                flex-direction: column;
-                justify-content: start;
-                gap: 0.5rem;
-                
-                main {
-                    --owner-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 80%, transparent);
-                    --party-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 60%, transparent);
-                    
-                    --item-height: 110px;
-                    height: var(--item-height);
+                padding: 0;
 
+                .scroll {
+                    padding: 1rem;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                    height: 100%;
+    
                     display: flex;
-                    flex-direction: row;
-                    justify-content: space-between;
-
-                    > section {
-                        flex: 1;
-
+                    flex-direction: column;
+                    justify-content: start;
+                    gap: 0.5rem;
+                    
+                    main {
+                        --owner-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 80%, transparent);
+                        --party-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 60%, transparent);
+                        
+                        --item-height: 110px;
+                        height: var(--item-height);
+    
                         display: flex;
-                        background: var(--owner-background-color);
-                        border-radius: 12px;
-
-                        .thumbnail {
-                            align-self: center;
-                            flex: 0 0 calc(70px + 1rem);
-                            padding: 0.5rem 0.5rem 0.5rem 0.5rem;
-            
-                            img {
-                                max-width: 100%;
-                                height: auto;
-                                object-fit: scale-down;
-
-                                border: unset;
-                                border-radius: 50%;
-                            }
-                        }
-            
-                        main {
+                        flex-direction: row;
+                        justify-content: space-between;
+    
+                        > section {
                             flex: 1;
-                            height: 100%;
-                            position: relative;
-
-                            &::before {
-                                content: '';
-                                position: absolute;
-                                width: 100%;
-                                height: 100%;
-                                background: var(--party-background-color);
-                                clip-path: polygon(100% 0, 100% 0, 100% 100%, 80% 100%);
-                            }
-
-                            display: grid;
-                            grid-template-columns: 1fr 1fr;
-                            column-gap: 0.5rem;
-                            grid-template-areas: 
-                                "title title"
-                                "health pp";
-
-                            align-items: center;
-            
-                            .title {
-                                grid-area: title;
-                                
-                                display: flex;
-                                flex-direction: column;
-                                justify-content: start;
-
-                                .level {
-                                    font-size: x-small;
-                                }
-                            }
-            
-                            .health {
-                                grid-area: health;
-                            
-                                display: flex;
-                                flex-direction: column;
-                                
-                                .details {
-                                    margin-top: 0.1rem;
-                                    display: flex;
-                                    flex-direction: row;
-                                    align-items: center;
-            
-                                    span {
-                                        font-size: 12px;
-                                        // color: var(--color-text-dark-primary);
-                                    }
-                                    .divider {
-                                        margin: 0 0.25rem;
-                                    }
-                                }
-                            }
-            
-                            .pp {
-                                grid-area: pp;
-                            
-                                display: flex;
-                                flex-direction: column;
-            
-                                .details {
-                                    margin-top: 0.1rem;
-                                    display: flex;
-                                    flex-direction: row;
-                                    align-items: center;
-            
-                                    span {
-                                        font-size: 12px;
-                                        // color: var(--color-text-dark-primary);
-                                    }
-                                    .divider {
-                                        margin: 0 0.25rem;
-                                    }
-                                }
-                            }
-                        }
-
-                        > aside {
-                            flex: 0 0 44%;
     
                             display: flex;
-                            background: var(--party-background-color);
-                            border-radius: 0 12px 12px 0;
-    
-                            padding: 0.25rem;
-    
-                            display: grid;
-                            grid-template-columns: 1fr 1fr 1fr;
-                            &:has(> :nth-child(7)) {
-                                grid-template-columns: 1fr 1fr 1fr 1fr;
-                            }
-                            &:has(> :nth-child(9)) {
-                                grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-                                overflow-y: auto;
-                            }
-                            row-gap: 4px;
-                            grid-template-rows: calc(calc(var(--item-height) - 0.5rem) / 2 - 2px) calc(calc(var(--item-height) - 0.5rem) / 2 - 2px);
+                            background: var(--owner-background-color);
+                            border-radius: 12px;
     
                             .thumbnail {
-                                text-align: center;
-                                width: 100%;
-                                height: 100%;
-                                padding: unset;
+                                align-self: center;
+                                flex: 0 0 calc(70px + 1rem);
+                                padding: 0.5rem 0.5rem 0.5rem 0.5rem;
                 
                                 img {
-                                    height: 100%;
-                                    width: auto;
+                                    max-width: 100%;
+                                    height: auto;
                                     object-fit: scale-down;
     
                                     border: unset;
                                     border-radius: 50%;
                                 }
                             }
+                
+                            main {
+                                flex: 1;
+                                height: 100%;
+                                position: relative;
+    
+                                &::before {
+                                    content: '';
+                                    position: absolute;
+                                    width: 100%;
+                                    height: 100%;
+                                    background: var(--party-background-color);
+                                    clip-path: polygon(100% 0, 100% 0, 100% 100%, 80% 100%);
+                                }
+    
+                                display: grid;
+                                grid-template-columns: 1fr 1fr;
+                                column-gap: 0.5rem;
+                                grid-template-areas: 
+                                    "title title"
+                                    "health pp";
+    
+                                align-items: center;
+                
+                                .title {
+                                    grid-area: title;
+                                    
+                                    display: flex;
+                                    flex-direction: column;
+                                    justify-content: start;
+    
+                                    .level {
+                                        font-size: x-small;
+                                    }
+                                }
+                
+                                .health {
+                                    grid-area: health;
+                                
+                                    display: flex;
+                                    flex-direction: column;
+                                    
+                                    .details {
+                                        margin-top: 0.1rem;
+                                        display: flex;
+                                        flex-direction: row;
+                                        align-items: center;
+                
+                                        span {
+                                            font-size: 12px;
+                                            // color: var(--color-text-dark-primary);
+                                        }
+                                        .divider {
+                                            margin: 0 0.25rem;
+                                        }
+                                    }
+                                }
+                
+                                .pp {
+                                    grid-area: pp;
+                                
+                                    display: flex;
+                                    flex-direction: column;
+                
+                                    .details {
+                                        margin-top: 0.1rem;
+                                        display: flex;
+                                        flex-direction: row;
+                                        align-items: center;
+                
+                                        span {
+                                            font-size: 12px;
+                                            // color: var(--color-text-dark-primary);
+                                        }
+                                        .divider {
+                                            margin: 0 0.25rem;
+                                        }
+                                    }
+                                }
+                            }
+    
+                            > aside {
+                                flex: 0 0 44%;
+        
+                                display: flex;
+                                background: var(--party-background-color);
+                                border-radius: 0 12px 12px 0;
+        
+                                padding: 0.25rem;
+        
+                                display: grid;
+                                grid-template-columns: 1fr 1fr 1fr;
+                                &:has(> :nth-child(7)) {
+                                    grid-template-columns: 1fr 1fr 1fr 1fr;
+                                }
+                                &:has(> :nth-child(9)) {
+                                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+                                    overflow-y: auto;
+                                }
+                                row-gap: 4px;
+                                grid-template-rows: calc(calc(var(--item-height) - 0.5rem) / 2 - 2px) calc(calc(var(--item-height) - 0.5rem) / 2 - 2px);
+        
+                                .thumbnail {
+                                    text-align: center;
+                                    width: 100%;
+                                    height: 100%;
+                                    padding: unset;
+                    
+                                    img {
+                                        height: 100%;
+                                        width: auto;
+                                        object-fit: scale-down;
+        
+                                        border: unset;
+                                        border-radius: 50%;
+                                    }
+                                }
+                            }
                         }
+    
                     }
-
                 }
             }
         }
     }
 
+    &.folder-edit {
+        .standard-form {
+            gap: 0.25rem;
+
+            fieldset {
+                gap: 0.5rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        section.team-member {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            height: 50px;
+            border: 1px solid var(--color-light-6);
+            border-radius: 8px;
+            
+            &.empty {
+                justify-content: center;
+                height: 100px;
+                border: 1px dashed var(--color-light-6);
+                border-radius: 8px;
+
+                color: var(--color-light-5);
+                font-size: medium;
+
+                text-align: center;
+                white-space: pre-line;
+                word-break: break-word;
+            }
+
+            .thumbnail {
+                flex: 0 0 48px;
+                height: 48px;
+                margin-right: 0.5rem;
+
+                img {
+                    border-radius: 50%;
+                    height: 48px;
+                    width: 48px;
+                    border: unset;
+                }
+            }
+            
+            .title {
+                flex: 1;
+            }
+
+            .dismiss {
+                flex: 0 0 20px;
+            }
+        }
+    }
+
     input[type="color"] {
-        border-color: var(--color-input-border-color, black);
+        border-color: var(--color-input-border-color, #000);
     }
 }
 

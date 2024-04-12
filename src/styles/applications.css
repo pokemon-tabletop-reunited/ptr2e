@@ -621,7 +621,14 @@
   border: unset;
   border-bottom: 1px solid var(--border-color);
 }
-.sheet.party-sheet .tab[data-tab="overview"] {
+.sheet.party-sheet .window-content .tab[data-tab="overview"] {
+  padding: 0;
+}
+.sheet.party-sheet .window-content .tab[data-tab="overview"] .scroll {
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
   display: grid;
   grid-template-rows: 35% 65%;
   grid-template-areas: "owner" "party";
@@ -925,13 +932,20 @@
   border: unset;
   border-bottom: 1px solid var(--border-color);
 }
-.sheet.team-sheet .tab[data-tab="overview"] {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] {
+  padding: 0;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll {
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: start;
   gap: 0.5rem;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main {
   --owner-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 80%, transparent);
   --party-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 60%, transparent);
   --item-height: 110px;
@@ -940,25 +954,25 @@
   flex-direction: row;
   justify-content: space-between;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section {
   flex: 1;
   display: flex;
   background: var(--owner-background-color);
   border-radius: 12px;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section .thumbnail {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section .thumbnail {
   align-self: center;
   flex: 0 0 calc(70px + 1rem);
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section .thumbnail img {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section .thumbnail img {
   max-width: 100%;
   height: auto;
   object-fit: scale-down;
   border: unset;
   border-radius: 50%;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section main {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main {
   flex: 1;
   height: 100%;
   position: relative;
@@ -968,7 +982,7 @@
   grid-template-areas: "title title" "health pp";
   align-items: center;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section main::before {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main::before {
   content: '';
   position: absolute;
   width: 100%;
@@ -976,50 +990,50 @@
   background: var(--party-background-color);
   clip-path: polygon(100% 0, 100% 0, 100% 100%, 80% 100%);
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section main .title {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .title {
   grid-area: title;
   display: flex;
   flex-direction: column;
   justify-content: start;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section main .title .level {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .title .level {
   font-size: x-small;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section main .health {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health {
   grid-area: health;
   display: flex;
   flex-direction: column;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section main .health .details {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section main .health .details span {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details span {
   font-size: 12px;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section main .health .details .divider {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details .divider {
   margin: 0 0.25rem;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section main .pp {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp {
   grid-area: pp;
   display: flex;
   flex-direction: column;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section main .pp .details {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section main .pp .details span {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details span {
   font-size: 12px;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section main .pp .details .divider {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details .divider {
   margin: 0 0.25rem;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section > aside {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside {
   flex: 0 0 44%;
   display: flex;
   background: var(--party-background-color);
@@ -1030,28 +1044,71 @@
   row-gap: 4px;
   grid-template-rows: calc(calc(var(--item-height) - 0.5rem) / 2 - 2px) calc(calc(var(--item-height) - 0.5rem) / 2 - 2px);
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section > aside:has( > :nth-child(7)) {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside:has( > :nth-child(7)) {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section > aside:has( > :nth-child(9)) {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside:has( > :nth-child(9)) {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   overflow-y: auto;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section > aside .thumbnail {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside .thumbnail {
   text-align: center;
   width: 100%;
   height: 100%;
   padding: unset;
 }
-.sheet.team-sheet .tab[data-tab="overview"] main > section > aside .thumbnail img {
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside .thumbnail img {
   height: 100%;
   width: auto;
   object-fit: scale-down;
   border: unset;
   border-radius: 50%;
 }
+.sheet.folder-edit .standard-form {
+  gap: 0.25rem;
+}
+.sheet.folder-edit .standard-form fieldset {
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sheet.folder-edit section.team-member {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+  border: 1px solid var(--color-light-6);
+  border-radius: 8px;
+}
+.sheet.folder-edit section.team-member.empty {
+  justify-content: center;
+  height: 100px;
+  border: 1px dashed var(--color-light-6);
+  border-radius: 8px;
+  color: var(--color-light-5);
+  font-size: medium;
+  text-align: center;
+  white-space: pre-line;
+  word-break: break-word;
+}
+.sheet.folder-edit section.team-member .thumbnail {
+  flex: 0 0 48px;
+  height: 48px;
+  margin-right: 0.5rem;
+}
+.sheet.folder-edit section.team-member .thumbnail img {
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+  border: unset;
+}
+.sheet.folder-edit section.team-member .title {
+  flex: 1;
+}
+.sheet.folder-edit section.team-member .dismiss {
+  flex: 0 0 20px;
+}
 .sheet input[type="color"] {
-  border-color: var(--color-input-border-color, black);
+  border-color: var(--color-input-border-color, #000);
 }
 .application .standard-form input[type="checkbox"] {
   --checkbox-background-color: #3d343f;

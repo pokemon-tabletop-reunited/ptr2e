@@ -35,6 +35,7 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
         overview: {
             id: "overview",
             template: "/systems/ptr2e/templates/apps/team/overview.hbs",
+            scrollable: [".scroll"]
         },
         party: {
             id: "party",

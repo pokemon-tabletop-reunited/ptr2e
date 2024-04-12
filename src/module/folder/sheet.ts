@@ -1,6 +1,7 @@
 import { DocumentSheetConfiguration, DocumentSheetV2 } from "@item/sheets/document.ts";
 import FolderPTR2e from "./document.ts";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/api.js";
+import { ActorPTR2e } from "@actor";
 
 class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
     DocumentSheetV2<FolderPTR2e>
@@ -23,9 +24,17 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     );
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
-        sheet: {
-            id: "sheet",
+        base: {
+            id: "base",
             template: "/systems/ptr2e/templates/folder/folder-edit.hbs",
+        },
+        members: {
+            id: "members",
+            template: "/systems/ptr2e/templates/folder/folder-members.hbs",
+        },
+        submit: {
+            id: "submit",
+            template: "/systems/ptr2e/templates/folder/folder-submit.hbs",
         },
     };
 
@@ -54,9 +63,20 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
         //@ts-ignore
         const label = game.i18n.localize(Folder.implementation.metadata.label);
 
+        const owner = this.document.owner ? await fromUuid(this.document.owner) : null;
+        const team = [];
+        for (const memberUuid of this.document.team) {
+            const actor = await fromUuid(memberUuid);
+            if (actor && actor instanceof ActorPTR2e) {
+                team.push({ actor, folder: actor.folder });
+            }
+        }
+
         return {
             ...context,
             folder: folder,
+            owner,
+            team,
             name: folder._id ? folder.name : "",
             newName: game.i18n.format("DOCUMENT.New", { type: label }),
             safeColor:
@@ -70,20 +90,105 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     }
 
     override _attachPartListeners(
-        _partId: string,
+        partId: string,
         htmlElement: HTMLElement,
         _options: HandlebarsRenderOptions
     ): void {
-        const colorElement = htmlElement.querySelector<HTMLInputElement>("input[type='color']")!;
-        const edits = colorElement.dataset.edit;
-        if (edits) {
-            colorElement.addEventListener("input", () => {
-                const sibling = colorElement.previousElementSibling as HTMLInputElement | undefined;
-                if (sibling?.getAttribute("name") !== edits) return;
+        if (partId === "base") {
+            const colorElement =
+                htmlElement.querySelector<HTMLInputElement>("input[type='color']")!;
+            const edits = colorElement.dataset.edit;
+            if (edits) {
+                colorElement.addEventListener("input", () => {
+                    const sibling = colorElement.previousElementSibling as
+                        | HTMLInputElement
+                        | undefined;
+                    if (sibling?.getAttribute("name") !== edits) return;
 
-                sibling.value = colorElement.value;
-                colorElement.style.setProperty("--color-input-border-color", colorElement.value);
-            });
+                    sibling.value = colorElement.value;
+                    colorElement.style.setProperty(
+                        "--color-input-border-color",
+                        colorElement.value
+                    );
+                });
+            }
+        }
+
+        if(partId === "members") {
+            const ownerFieldset = htmlElement.querySelector<HTMLFieldSetElement>("fieldset.owner");
+            const teamFieldset = htmlElement.querySelector<HTMLFieldSetElement>("fieldset.team");
+
+            ownerFieldset?.addEventListener("drop", FolderConfigPTR2e._onDropOwner.bind(this));
+            teamFieldset?.addEventListener("drop", FolderConfigPTR2e._onDropTeam.bind(this));
+
+            for(const dismiss of htmlElement.querySelectorAll<HTMLAnchorElement>(".dismiss a[data-action='remove']")) {
+                dismiss.addEventListener("click", FolderConfigPTR2e._onDismiss.bind(this));
+            }
+        }
+    }
+
+    static async _onDismiss(this: FolderConfigPTR2e, event: MouseEvent) {
+        const target = event.currentTarget as HTMLElement;
+        const {type, uuid} = target.dataset;
+        if(!type || !uuid) return;
+
+        switch(type) {
+            case "owner": {
+                await FolderConfigPTR2e._updateFolder(this.document, { "flags.ptr2e.owner": null });
+                break;
+            }
+            case "team": {
+                const team = fu.deepClone(this.document.team);
+                await FolderConfigPTR2e._updateFolder(this.document, { "flags.ptr2e.team": team.filter(t => t !== uuid) });
+                break;
+            }
+        }
+
+        return this.render({parts: ["members"]}).then(_ => {this.position.height = "auto"; return _})
+    }
+
+    static async _onDropOwner(this: FolderConfigPTR2e, event: DragEvent) {
+        if(!event.dataTransfer) return;
+        if(this.document.owner) {
+            ui.notifications.warn("Folder already has an owner. If you mean to update the owner, please remove the old one first.");
+            return;
+        }
+
+        const data = JSON.parse(event.dataTransfer.getData("text/plain"));
+        if(!data) return;
+
+        const actor = game.actors.get(data.id) ?? await fromUuid(data.uuid);
+        if(!actor || !(actor instanceof ActorPTR2e)) return;
+
+        await actor.update({ "folder": this.document.id});
+        await FolderConfigPTR2e._updateFolder(this.document, { "flags.ptr2e.owner": actor.uuid });
+
+        return this.render({parts: ["members"]}).then(_ => {this.position.height = "auto"; return _})
+    }
+
+    static async _onDropTeam(this: FolderConfigPTR2e, event: DragEvent) {
+        if(!event.dataTransfer) return;
+
+        const data = JSON.parse(event.dataTransfer.getData("text/plain"));
+        if(!data) return;
+
+        const actor = game.actors.get(data.id) ?? await fromUuid(data.uuid);
+        if(!actor || !(actor instanceof ActorPTR2e)) return;
+
+        const team = fu.deepClone(this.document.team);
+        if(team.includes(actor.uuid)) return;
+
+        team.push(actor.uuid);
+        await FolderConfigPTR2e._updateFolder(this.document, { "flags.ptr2e.team": team });
+
+        return this.render({parts: ["members"]}).then(_ => {this.position.height = "auto"; return _})
+    }
+
+    static async _updateFolder(folder: FolderPTR2e, data: Record<string, unknown>) {
+        if(folder.id) return await folder.update(data);
+        else {
+            folder.updateSource(data);
+            return folder;
         }
     }
 
