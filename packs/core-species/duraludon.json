@@ -225,6 +225,11 @@
           "level": 1
         },
         {
+          "name": "metal-claw",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
           "name": "rock-smash",
           "gen": "scarlet-violet",
           "level": 6
@@ -233,6 +238,26 @@
           "name": "hone-claws",
           "gen": "scarlet-violet",
           "level": 12
+        },
+        {
+          "name": "metal-sound",
+          "gen": "scarlet-violet",
+          "level": 18
+        },
+        {
+          "name": "breaking-swipe",
+          "gen": "scarlet-violet",
+          "level": 24
+        },
+        {
+          "name": "dragon-tail",
+          "gen": "scarlet-violet",
+          "level": 30
+        },
+        {
+          "name": "iron-defense",
+          "gen": "scarlet-violet",
+          "level": 36
         },
         {
           "name": "focus-energy",
@@ -245,9 +270,24 @@
           "level": 42
         },
         {
+          "name": "dragon-claw",
+          "gen": "scarlet-violet",
+          "level": 48
+        },
+        {
+          "name": "flash-cannon",
+          "gen": "scarlet-violet",
+          "level": 54
+        },
+        {
           "name": "metal-burst",
           "gen": "scarlet-violet",
           "level": 60
+        },
+        {
+          "name": "hyper-beam",
+          "gen": "scarlet-violet",
+          "level": 66
         }
       ],
       "egg": [
@@ -266,6 +306,14 @@
       ],
       "tutor": [
         {
+          "name": "draco-meteor",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "steel-beam",
+          "gen": "sword-shield"
+        },
+        {
           "name": "steel-roller",
           "gen": "sword-shield"
         }
@@ -274,8 +322,8 @@
     "size": {
       "height": 1.8,
       "weight": 40,
-      "category": "medium",
-      "type": "height"
+      "category": "large",
+      "type": "quad"
     },
     "captureRate": 45,
     "eggGroups": [
@@ -297,30 +345,64 @@
       }
     },
     "number": 884,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "bipedal",
+      "rust-vulnerability",
+      "darkvision"
+    ],
+    "diet": [
+      "terravore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "light-metal",
+        "heavy-metal"
+      ],
+      "basic": [
+        "stalwart",
+        "polarize"
+      ],
+      "advanced": [
+        "stamina",
+        "sturdy"
+      ],
+      "master": [
+        "juggernaut",
+        "raw-might"
+      ]
     },
     "movement": {
-      "primary": [],
-      "secondary": []
+      "primary": [
+        {
+          "type": "overland",
+          "value": 9
+        }
+      ],
+      "secondary": [
+        {
+          "type": "burrow",
+          "value": 4
+        }
+      ]
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "acrobatics": 15,
+      "climb": 25,
+      "conversation": 20,
+      "intimidate": 40,
+      "lift": 40,
+      "listen": 30,
+      "natural-world": 20,
+      "running": 20,
+      "spot": 30,
+      "survival": 35
+    },
+    "habitats": [],
+    "slug": "duraludon"
   },
   "_id": "8zwoJEr5uIUPtLr3",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.8zwoJEr5uIUPtLr3"
@@ -329,10 +411,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!8zwoJEr5uIUPtLr3"
 }

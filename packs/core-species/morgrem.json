@@ -118,6 +118,10 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "assurance",
+          "gen": "sword-shield"
+        },
+        {
           "name": "fling",
           "gen": "scarlet-violet"
         },
@@ -192,11 +196,6 @@
       ],
       "levelUp": [
         {
-          "name": "false-surrender",
-          "gen": "scarlet-violet",
-          "level": 0
-        },
-        {
           "name": "bite",
           "gen": "scarlet-violet",
           "level": 1
@@ -217,6 +216,11 @@
           "level": 1
         },
         {
+          "name": "fake-tears",
+          "gen": "scarlet-violet",
+          "level": 12
+        },
+        {
           "name": "assurance",
           "gen": "scarlet-violet",
           "level": 16
@@ -235,15 +239,48 @@
           "name": "torment",
           "gen": "scarlet-violet",
           "level": 28
+        },
+        {
+          "name": "dark-pulse",
+          "gen": "scarlet-violet",
+          "level": 35
+        },
+        {
+          "name": "nasty-plot",
+          "gen": "scarlet-violet",
+          "level": 40
+        },
+        {
+          "name": "play-rough",
+          "gen": "scarlet-violet",
+          "level": 46
+        },
+        {
+          "name": "foul-play",
+          "gen": "scarlet-violet",
+          "level": 52
+        },
+        {
+          "name": "false-surrender",
+          "gen": "scarlet-violet"
         }
       ],
       "egg": [],
-      "tutor": []
+      "tutor": [
+        {
+          "name": "burning-jealousy",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "lash-out",
+          "gen": "sword-shield"
+        }
+      ]
     },
     "size": {
       "height": 0.8,
       "weight": 12.5,
-      "category": "medium",
+      "category": "small",
       "type": "height"
     },
     "captureRate": 120,
@@ -251,7 +288,6 @@
       "fairy",
       "humanshape"
     ],
-    "genderRatio": 0,
     "evolutions": {
       "full": {
         "name": "impidimp",
@@ -282,30 +318,76 @@
       }
     },
     "number": 860,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "bipedal",
+      "underdog",
+      "silent",
+      "stealth",
+      "darkvision",
+      "sprouter-plant-growth",
+      "mushroom-harvest"
+    ],
+    "diet": [
+      "empathovore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "prankster",
+        "frisk"
+      ],
+      "basic": [
+        "pickpocket",
+        "magician"
+      ],
+      "advanced": [
+        "infiltrator",
+        "screen-cleaner"
+      ],
+      "master": [
+        "fairy-dust",
+        "dark-shroud"
+      ]
     },
     "movement": {
-      "primary": [],
-      "secondary": []
+      "primary": [
+        {
+          "type": "overland",
+          "value": 7
+        }
+      ],
+      "secondary": [
+        {
+          "type": "swim",
+          "value": 3
+        }
+      ]
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "acrobatics": 35,
+      "climb": 40,
+      "conversation": 30,
+      "fast-talk": 45,
+      "intimidate": 40,
+      "lift": 30,
+      "listen": 35,
+      "locksmith": 35,
+      "natural-world": 40,
+      "occult-fairies": 45,
+      "psychology": 45,
+      "read-lips": 35,
+      "running": 45,
+      "sleight-of-hand": 45,
+      "stealth": 50,
+      "survival": 40,
+      "swim": 30,
+      "track": 30
+    },
+    "habitats": [],
+    "slug": "morgrem"
   },
   "_id": "Ver31B2ZvjMXBntg",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.Ver31B2ZvjMXBntg"
@@ -314,10 +396,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185555199,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!Ver31B2ZvjMXBntg"
 }

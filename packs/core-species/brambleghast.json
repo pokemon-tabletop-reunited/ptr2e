@@ -4,8 +4,8 @@
   "type": "species",
   "system": {
     "types": [
-      "grass",
-      "ghost"
+      "ghost",
+      "grass"
     ],
     "stats": {
       "hp": 55,
@@ -43,9 +43,19 @@
           "level": 9
         },
         {
+          "name": "bullet-seed",
+          "gen": "scarlet-violet",
+          "level": 13
+        },
+        {
           "name": "infestation",
           "gen": "scarlet-violet",
           "level": 17
+        },
+        {
+          "name": "hex",
+          "gen": "scarlet-violet",
+          "level": 21
         },
         {
           "name": "mega-drain",
@@ -56,6 +66,26 @@
           "name": "disable",
           "gen": "scarlet-violet",
           "level": 29
+        },
+        {
+          "name": "phantom-force",
+          "gen": "scarlet-violet",
+          "level": 35
+        },
+        {
+          "name": "giga-drain",
+          "gen": "scarlet-violet",
+          "level": 40
+        },
+        {
+          "name": "curse",
+          "gen": "scarlet-violet",
+          "level": 45
+        },
+        {
+          "name": "pain-split",
+          "gen": "scarlet-violet",
+          "level": 50
         },
         {
           "name": "power-whip",
@@ -204,7 +234,7 @@
       "height": 1.2,
       "weight": 6,
       "category": "medium",
-      "type": "height"
+      "type": "quad"
     },
     "captureRate": 45,
     "eggGroups": [
@@ -230,30 +260,65 @@
       }
     },
     "number": 947,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "breathless",
+      "darkvision",
+      "fully-evolved",
+      "legless",
+      "reach",
+      "underdog"
+    ],
+    "diet": [
+      "carnivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "wind-rider",
+        "infiltrator"
+      ],
+      "basic": [
+        "sand-rush",
+        "pickup"
+      ],
+      "advanced": [
+        "own-tempo",
+        "tangling-hair"
+      ],
+      "master": [
+        "arid-adaptation",
+        "lacerate"
+      ]
     },
     "movement": {
-      "primary": [],
+      "primary": [
+        {
+          "type": "overland",
+          "value": 9
+        }
+      ],
       "secondary": []
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "acrobatics": 30,
+      "climb": 45,
+      "conversation": 55,
+      "intimidate": 65,
+      "lift": 30,
+      "listen": 40,
+      "natural-world": 20,
+      "navigate": 30,
+      "negotiation": 20,
+      "running": 40,
+      "spot-hidden": 50,
+      "stealth": 65,
+      "survival": 85
+    },
+    "habitats": [],
+    "slug": "brambleghast"
   },
   "_id": "suGLPTjK3FPhyPyG",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.suGLPTjK3FPhyPyG"
@@ -262,10 +327,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!suGLPTjK3FPhyPyG"
 }

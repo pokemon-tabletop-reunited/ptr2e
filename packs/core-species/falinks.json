@@ -41,6 +41,10 @@
           "gen": "sword-shield"
         },
         {
+          "name": "focus-energy",
+          "gen": "sword-shield"
+        },
+        {
           "name": "rest",
           "gen": "scarlet-violet"
         },
@@ -75,6 +79,10 @@
         {
           "name": "sleep-talk",
           "gen": "scarlet-violet"
+        },
+        {
+          "name": "megahorn",
+          "gen": "sword-shield"
         },
         {
           "name": "rain-dance",
@@ -220,6 +228,11 @@
           "level": 1
         },
         {
+          "name": "protect",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
           "name": "rock-smash",
           "gen": "scarlet-violet",
           "level": 5
@@ -235,6 +248,21 @@
           "level": 15
         },
         {
+          "name": "bulk-up",
+          "gen": "scarlet-violet",
+          "level": 20
+        },
+        {
+          "name": "endure",
+          "gen": "scarlet-violet",
+          "level": 25
+        },
+        {
+          "name": "reversal",
+          "gen": "scarlet-violet",
+          "level": 30
+        },
+        {
           "name": "first-impression",
           "gen": "scarlet-violet",
           "level": 35
@@ -243,6 +271,16 @@
           "name": "no-retreat",
           "gen": "scarlet-violet",
           "level": 40
+        },
+        {
+          "name": "iron-defense",
+          "gen": "scarlet-violet",
+          "level": 45
+        },
+        {
+          "name": "close-combat",
+          "gen": "scarlet-violet",
+          "level": 50
         },
         {
           "name": "megahorn",
@@ -256,13 +294,18 @@
         }
       ],
       "egg": [],
-      "tutor": []
+      "tutor": [
+        {
+          "name": "coaching",
+          "gen": "sword-shield"
+        }
+      ]
     },
     "size": {
       "height": 3,
       "weight": 62,
-      "category": "medium",
-      "type": "height"
+      "category": "large",
+      "type": "length"
     },
     "captureRate": 45,
     "eggGroups": [
@@ -278,30 +321,63 @@
       }
     },
     "number": 870,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "gestalt",
+      "pack-mon",
+      "underdog",
+      "fully-evolved",
+      "bipedal"
+    ],
+    "diet": [
+      "omnivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "battle-armor",
+        "defiant"
+      ],
+      "basic": [
+        "armor-tail",
+        "bulletproof"
+      ],
+      "advanced": [
+        "hyper-cutter",
+        "friend-guard"
+      ],
+      "master": [
+        "scrappy",
+        "stamina"
+      ]
     },
     "movement": {
-      "primary": [],
+      "primary": [
+        {
+          "type": "overland",
+          "value": 8
+        }
+      ],
       "secondary": []
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "acrobatics": 40,
+      "conversation": 40,
+      "intimidate": 55,
+      "leadership": 60,
+      "lift": 50,
+      "listen": 40,
+      "natural-world": 40,
+      "navigate": 30,
+      "running": 45,
+      "spot": 40,
+      "survival": 35,
+      "track": 30
+    },
+    "habitats": [],
+    "slug": "falinks"
   },
   "_id": "mbEaQB9vZEquwAlB",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.mbEaQB9vZEquwAlB"
@@ -310,10 +386,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!mbEaQB9vZEquwAlB"
 }

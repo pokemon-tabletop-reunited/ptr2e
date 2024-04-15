@@ -4,8 +4,8 @@
   "type": "species",
   "system": {
     "types": [
-      "dragon",
-      "ghost"
+      "ghost",
+      "dragon"
     ],
     "stats": {
       "hp": 68,
@@ -162,6 +162,10 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "assurance",
+          "gen": "sword-shield"
+        },
+        {
           "name": "dragon-pulse",
           "gen": "scarlet-violet"
         },
@@ -250,9 +254,39 @@
           "level": 12
         },
         {
+          "name": "hex",
+          "gen": "scarlet-violet",
+          "level": 18
+        },
+        {
+          "name": "agility",
+          "gen": "scarlet-violet",
+          "level": 24
+        },
+        {
           "name": "double-hit",
           "gen": "scarlet-violet",
           "level": 30
+        },
+        {
+          "name": "u-turn",
+          "gen": "scarlet-violet",
+          "level": 36
+        },
+        {
+          "name": "dragon-dance",
+          "gen": "scarlet-violet",
+          "level": 42
+        },
+        {
+          "name": "phantom-force",
+          "gen": "scarlet-violet",
+          "level": 48
+        },
+        {
+          "name": "take-down",
+          "gen": "scarlet-violet",
+          "level": 54
         },
         {
           "name": "dragon-rush",
@@ -260,19 +294,33 @@
           "level": 61
         },
         {
+          "name": "double-edge",
+          "gen": "scarlet-violet",
+          "level": 66
+        },
+        {
           "name": "last-resort",
           "gen": "scarlet-violet",
           "level": 72
+        },
+        {
+          "name": "dragon-pulse",
+          "gen": "scarlet-violet"
         }
       ],
       "egg": [],
-      "tutor": []
+      "tutor": [
+        {
+          "name": "draco-meteor",
+          "gen": "sword-shield"
+        }
+      ]
     },
     "size": {
       "height": 1.4,
       "weight": 11,
       "category": "medium",
-      "type": "height"
+      "type": "length"
     },
     "captureRate": 45,
     "eggGroups": [
@@ -310,30 +358,65 @@
       }
     },
     "number": 886,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "underdog",
+      "living-weapon",
+      "missile",
+      "breathless",
+      "hover",
+      "jet",
+      "pack-mon",
+      "pack-leader"
+    ],
+    "diet": [
+      "nullivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "clear-body",
+        "infiltrator"
+      ],
+      "basic": [
+        "cursed-body",
+        "rock-head"
+      ],
+      "advanced": [
+        "aerodynamic",
+        "artillery"
+      ],
+      "master": [
+        "perforate",
+        "sniper"
+      ]
     },
     "movement": {
-      "primary": [],
+      "primary": [
+        {
+          "type": "flight",
+          "value": 26
+        }
+      ],
       "secondary": []
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "conversation": 40,
+      "intimidate": 40,
+      "leadership": 30,
+      "lift": 35,
+      "listen": 20,
+      "negotiation": 30,
+      "occult-ghosts": 45,
+      "ride": 40,
+      "running": 55,
+      "spot": 60,
+      "stealth": 45
+    },
+    "habitats": [],
+    "slug": "drakloak"
   },
   "_id": "RDGFEtj1sZPtuo3y",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.RDGFEtj1sZPtuo3y"
@@ -342,10 +425,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185555199,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!RDGFEtj1sZPtuo3y"
 }
