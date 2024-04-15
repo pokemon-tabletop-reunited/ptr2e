@@ -154,7 +154,7 @@ export default class BasicChangeSystem extends ChangeModel {
             return change;
         }
 
-        return new foundry.data.validation.DataModelValidationFailure({ invalidValue: change, fallback: false });
+        return new foundry.data.validation.DataModelValidationFailure({ message: `Unable to Add \`${change}\` to \`${current}\`. This is likely due to an invalid Key.`, invalidValue: change, fallback: false });
     }
 
     /* -------------------------------------------- */
@@ -165,10 +165,10 @@ export default class BasicChangeSystem extends ChangeModel {
      */
     static _applyMultiply(change: unknown, current: unknown): number | foundry.data.validation.DataModelValidationFailure {
         if (typeof change !== 'number') {
-            return new foundry.data.validation.DataModelValidationFailure({ invalidValue: change, fallback: false });
+            return new foundry.data.validation.DataModelValidationFailure({ message: `Invalid value \`${change}\` for mode Multiply, value must be a number.`, invalidValue: change, fallback: false });
         }
         if (!(typeof current === 'number' || current === undefined)) {
-            return new foundry.data.validation.DataModelValidationFailure({ invalidValue: current, fallback: false });
+            return new foundry.data.validation.DataModelValidationFailure({ message: `Unable to apply mode Multiply on \`${current}\`. This is likely due to an invalid Key.`, invalidValue: current, fallback: false });
         }
         return Math.trunc((current ?? 0) * change);
     }
@@ -199,10 +199,10 @@ export default class BasicChangeSystem extends ChangeModel {
      */
     static _applyUpgrade(change: unknown, current: unknown, upgrade = true) {
         if (typeof change !== "number") {
-            return new foundry.data.validation.DataModelValidationFailure({ invalidValue: change, fallback: false });
+            return new foundry.data.validation.DataModelValidationFailure({ message: `Invalid value \`${change}\` for mode ${upgrade ? "Upgrade" : "Downgrade"}, value must be a number.`, invalidValue: change, fallback: false });
         }
         if (!(typeof current === "number" || current === undefined)) {
-            return new foundry.data.validation.DataModelValidationFailure({ invalidValue: current, fallback: false });
+            return new foundry.data.validation.DataModelValidationFailure({ message: `Unable to apply mode ${upgrade ? "Upgrade" : "Downgrade"} on \`${current}\`. This is likely due to an invalid Key.`,invalidValue: current, fallback: false });
         }
 
         return upgrade ? Math.max(current ?? 0, change) : Math.min(current ?? 0, change);

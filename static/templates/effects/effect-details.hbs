@@ -1,0 +1,29 @@
+<section class="tab sheet-body {{tabs.details.cssClass}}" data-tab="details" data-group="sheet">
+    <div class="scroll">
+        <div class="form-group">
+            <label>{{ localize "EFFECT.DurationTurns" }}</label>
+            <div class="form-fields">
+                <label>{{ localize "COMBAT.Rounds" }}</label>
+                <input type="number" name="duration.rounds" value="{{ data.duration.rounds }}"/>
+                <label>{{ localize "COMBAT.Turns" }}</label>
+                <input type="number" name="duration.turns" value="{{ data.duration.turns }}"/>
+            </div>
+        </div>
+        <div class="form-group">
+            <label>{{ localize "EFFECT.Combat" }}</label>
+            <div class="form-fields">
+                <input type="text" name="duration.combat" value="{{ data.duration.combat }}" disabled/>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>{{ localize "EFFECT.StartTurns" }}</label>
+            <div class="form-fields">
+                <label>{{ localize "COMBAT.Round" }}</label>
+                <input type="number" name="duration.startRound" value="{{ data.duration.startRound }}"/>
+                <label>{{ localize "COMBAT.Turn" }}</label>
+                <input type="number" name="duration.startTurn" value="{{ data.duration.startTurn }}"/>
+            </div>
+        </div>
+    </div>
+</section>

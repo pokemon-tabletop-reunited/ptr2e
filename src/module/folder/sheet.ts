@@ -94,6 +94,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
         htmlElement: HTMLElement,
         _options: HandlebarsRenderOptions
     ): void {
+        super._attachPartListeners(partId, htmlElement, _options);
         if (partId === "base") {
             const colorElement =
                 htmlElement.querySelector<HTMLInputElement>("input[type='color']")!;

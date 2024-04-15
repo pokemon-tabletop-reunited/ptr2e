@@ -1,5 +1,6 @@
 import { BracketedValue } from "@module/effects/data.ts";
 import * as R from "remeda";
+import Sortable from "sortablejs";
 
 const wordCharacter = String.raw`[\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]`;
 const nonWordCharacter = String.raw`[^\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]`;
@@ -19,7 +20,7 @@ const upperOrWordBoundariedLowerRE = new RegExp(`${upperCaseLetter}|(?:${wordBou
  * @param text The text to sluggify
  * @param [options.camel=null] The sluggification style to use
  */
-export function sluggify(text: string, { camel }: { camel: string | null } = { camel: null }): string {
+function sluggify(text: string, { camel }: { camel: string | null } = { camel: null }): string {
     if (typeof text !== "string") {
         console.warn("Non-string argument passed to `sluggify`");
         return "";
@@ -54,13 +55,13 @@ export function sluggify(text: string, { camel }: { camel: string | null } = { c
     throw new Error(`I'm pretty sure that's not a real camel: ${camel}`);
 }
 
-export type SlugCamel = "dromedary" | "bactrian" | null;
+type SlugCamel = "dromedary" | "bactrian" | null;
 
-export function formatSlug(slug: string) {
+function formatSlug(slug: string) {
     return capitalize(slug).replaceAll('-', ' ');
 }
 
-export function capitalize(input: string) {
+function capitalize(input: string) {
     var i, j, str, lowers, uppers;
     str = input.replace(/([^\W_]+[^\s-]*) */g, function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -85,7 +86,7 @@ export function capitalize(input: string) {
     return str;
 }
 
-// export async function findItemInCompendium({ type, name, compendium }) {
+// async function findItemInCompendium({ type, name, compendium }) {
 //     if (!type || !name) return undefined;
 //     const pack = (() => {
 //         if (game.packs.get(compendium)) return game.packs.get(compendium);
@@ -112,16 +113,32 @@ export function capitalize(input: string) {
 
 // }
 
-// export async function querySpeciesCompendium(filterQuery) {
+// async function querySpeciesCompendium(filterQuery) {
 //     const pack = game.packs.get("ptu.species");
 //     const species = await pack.getDocuments();
 //     return species.filter(filterQuery);
 // }
 
-export function isBracketedValue(value: unknown): value is BracketedValue {
+function isBracketedValue(value: unknown): value is BracketedValue {
     return (
         R.isObject(value) && Array.isArray(value.brackets) && (typeof value.field === "string" || !("fields" in value))
     );
+}
+
+/** Generate and return an HTML element for a FontAwesome icon */
+type FontAwesomeStyle = "solid" | "regular" | "duotone";
+
+function fontAwesomeIcon(
+    glyph: string,
+    { style = "solid", fixedWidth = false }: { style?: FontAwesomeStyle; fixedWidth?: boolean } = {},
+): HTMLElement {
+    const styleClass = `fa-${style}`;
+    const glyphClass = glyph.startsWith("fa-") ? glyph : `fa-${glyph}`;
+    const icon = document.createElement("i");
+    icon.classList.add(styleClass, glyphClass);
+    if (fixedWidth) icon.classList.add("fa-fw");
+
+    return icon;
 }
 
 /** Short form of type and non-null check */
@@ -131,9 +148,8 @@ function isObject<T extends string>(value: unknown): value is { [K in T]?: unkno
 function isObject(value: unknown): boolean {
     return typeof value === "object" && value !== null;
 }
-export { isObject };
 
-export function isItemUUID(uuid: any) {
+function isItemUUID(uuid: any) {
     if (typeof uuid !== "string") return false;
     if (/^(?:Actor\.[a-zA-Z0-9]{16}\.)?Item\.[a-zA-Z0-9]{16}$/.test(uuid)) {
         return true;
@@ -147,11 +163,11 @@ export function isItemUUID(uuid: any) {
     return pack?.documentName === "Item";
 }
 
-export function isTokenUUID(uuid: any) {
+function isTokenUUID(uuid: any) {
     return typeof uuid === "string" && /^Scene\.[A-Za-z0-9]{16}\.Token\.[A-Za-z0-9]{16}$/.test(uuid);
 }
 
-export function sortStringRecord(record: Record<string, string>) {
+function sortStringRecord(record: Record<string, string>) {
     return Object.fromEntries(
         Object.entries(record)
             .map((entry) => {
@@ -168,7 +184,7 @@ export function sortStringRecord(record: Record<string, string>) {
 //  * @param type The type of the item required for name search
 //  * @param item Original item to derrive search params from
 //  */
-// export async function getItemFromCompendium({ uuid, name, type, item }) {
+// async function getItemFromCompendium({ uuid, name, type, item }) {
 //     let found = null;
 //     if (uuid) {
 //         found = await fromUuid(uuid);
@@ -183,12 +199,12 @@ export function sortStringRecord(record: Record<string, string>) {
 // }
 
 /** Check if a value is present in the provided array. Especially useful for checking against literal tuples */
-export function tupleHasValue<const A extends readonly unknown[]>(array: A, value: unknown): value is A[number] {
+function tupleHasValue<const A extends readonly unknown[]>(array: A, value: unknown): value is A[number] {
     return array.includes(value);
 }
 
 /** Create a "reduced" item name; that is, one without an "Effect:" or similar prefix */
-export function reduceItemName(label: string): string {
+function reduceItemName(label: string): string {
     return label.includes(":") ? label.replace(/^[^:]+:\s*|\s*\([^)]+\)$/g, "") : label;
 }
 
@@ -199,7 +215,7 @@ let intlNumberFormat: Intl.NumberFormat;
  * @param options.emptyStringZero If the value is zero, return an empty string
  * @param options.zeroIsNegative Treat zero as a negative value
  */
-export function signedInteger(value: number, { emptyStringZero = false, zeroIsNegative = false } = {}): string {
+function signedInteger(value: number, { emptyStringZero = false, zeroIsNegative = false } = {}): string {
     if (value === 0 && emptyStringZero) return "";
     const nf = (intlNumberFormat ??= new Intl.NumberFormat(game.i18n.lang, {
         maximumFractionDigits: 0,
@@ -208,4 +224,47 @@ export function signedInteger(value: number, { emptyStringZero = false, zeroIsNe
     const maybeNegativeZero = zeroIsNegative && value === 0 ? -0 : value;
 
     return nf.format(maybeNegativeZero);
+}
+
+const SORTABLE_BASE_OPTIONS: Sortable.Options = {
+    animation: 200,
+    direction: "vertical",
+    dragClass: "drag-preview",
+    dragoverBubble: true,
+    easing: "cubic-bezier(1, 0, 0, 1)",
+    fallbackOnBody: true,
+    ghostClass: "drag-gap",
+    // group: "inventory",
+    // filter: "div.item-summary",
+    // preventOnFilter: false,
+    // swapThreshold: 0.25,
+
+    // // These options are from the Autoscroll plugin and serve as a fallback on mobile/safari/ie/edge
+    // // Other browsers use the native implementation
+    // scroll: true,
+    // scrollSensitivity: 30,
+    // scrollSpeed: 15,
+
+    // delay: 500,
+    // delayOnTouchOnly: true,
+};
+
+export {
+    fontAwesomeIcon,
+    formatSlug,
+    isBracketedValue,
+    isItemUUID,
+    isObject,
+    isTokenUUID,
+    reduceItemName,
+    signedInteger,
+    sluggify,
+    sortStringRecord,
+    tupleHasValue,
+    capitalize,
+    SORTABLE_BASE_OPTIONS
+}
+export type {
+    FontAwesomeStyle,
+    SlugCamel,
 }

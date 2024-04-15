@@ -18,7 +18,7 @@ function _registerPTRHelpers() {
 
     Handlebars.registerHelper(
         "icon",
-        function (img: PokemonType | PokemonCategory, args: {hash: Record<string, string>}) {
+        function (img: PokemonType | PokemonCategory, args: { hash: Record<string, string> }) {
             if (
                 !Object.values(PTRCONSTS.Categories).includes(img as PokemonCategory) &&
                 !getTypes().includes(img as PokemonType)
@@ -197,8 +197,8 @@ function _registerBasicHelpers() {
         return { hash: { [key]: value } };
     });
 
-    Handlebars.registerHelper("json", function (context) {
-        return JSON.stringify(context);
+    Handlebars.registerHelper("json", function (context, args: {hash: {spaces: string | number}}) {
+        return JSON.stringify(context, null, Number(args?.hash?.spaces ?? 2));
     });
 
     const buildInEachHelper = Handlebars.helpers.each;

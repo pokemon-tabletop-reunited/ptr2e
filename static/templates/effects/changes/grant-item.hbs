@@ -1,0 +1,40 @@
+<div class="form-group">
+    <label class="short" for="{{fieldIdPrefix}}uuid">{{localize "PTR2E.Effect.FIELDS.ChangeUuid.label"}}</label>
+    <div class="form-fields">
+        <input type="text" name="{{basePath}}.value" id="{{fieldIdPrefix}}uuid" value="{{change.value}}" />
+        {{#if granted}}
+            <a class="content-link" data-uuid="{{granted.uuid}}" data-link="{{granted.uuid}}" data-tooltip="{{granted.name}}" data-type="Item" data-tooltip-direction="RIGHT">
+                <img src="{{granted.img}}"/> {{granted.name}}
+            </a>
+        {{/if}}
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="short">{{localize fields.predicate.label}}</label>
+    <input type="text" name="{{basePath}}.predicate" value="{{json change.predicate spaces=0}}" />
+</div>
+
+<div class="form-group">
+    <label for="{{fieldIdPrefix}}allow-duplicates" data-tooltip="{{localize fields.allowDuplicate.hint}}">{{localize fields.allowDuplicate.label}}</label>
+    <div class="form-fields">
+        <input
+            type="checkbox"
+            name="{{basePath}}.allowDuplicate"
+            id="{{fieldIdPrefix}}allow-duplicates"
+            {{checked change.allowDuplicate}}
+        />
+    </div>
+</div>
+
+<div class="form-group">
+    <label for="{{fieldIdPrefix}}reevaluate-on-update" data-tooltip="{{localize fields.reevaluateOnUpdate.hint}}">{{localize fields.reevaluateOnUpdate.label}}</label>
+    <div class="form-fields">
+        <input
+            type="checkbox"
+            name="{{basePath}}.reevaluateOnUpdate"
+            id="{{fieldIdPrefix}}reevaluate-on-update"
+            {{checked change.reevaluateOnUpdate}}
+        />
+    </div>
+</div>
