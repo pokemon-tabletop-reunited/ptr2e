@@ -4,8 +4,8 @@
   "type": "species",
   "system": {
     "types": [
-      "ice",
-      "bug"
+      "bug",
+      "ice"
     ],
     "stats": {
       "hp": 70,
@@ -76,6 +76,10 @@
         {
           "name": "endure",
           "gen": "scarlet-violet"
+        },
+        {
+          "name": "attract",
+          "gen": "sword-shield"
         },
         {
           "name": "sleep-talk",
@@ -210,6 +214,16 @@
           "level": 1
         },
         {
+          "name": "helping-hand",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "struggle-bug",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
           "name": "stun-spore",
           "gen": "scarlet-violet",
           "level": 4
@@ -230,14 +244,48 @@
           "level": 16
         },
         {
+          "name": "feather-dance",
+          "gen": "scarlet-violet",
+          "level": 21
+        },
+        {
           "name": "aurora-beam",
           "gen": "scarlet-violet",
           "level": 24
         },
         {
+          "name": "hail",
+          "gen": "sword-shield",
+          "level": 28
+        },
+        {
+          "name": "snowscape",
+          "gen": "scarlet-violet",
+          "level": 28
+        },
+        {
+          "name": "bug-buzz",
+          "gen": "scarlet-violet",
+          "level": 32
+        },
+        {
+          "name": "blizzard",
+          "gen": "scarlet-violet",
+          "level": 40
+        },
+        {
+          "name": "icy-wind",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "aurora-veil",
           "gen": "scarlet-violet",
           "level": 36
+        },
+        {
+          "name": "tailwind",
+          "gen": "scarlet-violet",
+          "level": 44
         },
         {
           "name": "wide-guard",
@@ -252,6 +300,14 @@
       ],
       "tutor": [
         {
+          "name": "skitter-smack",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "triple-axel",
+          "gen": "sword-shield"
+        },
+        {
           "name": "dual-wingbeat",
           "gen": "sword-shield"
         }
@@ -262,7 +318,7 @@
       "height": 1.3,
       "weight": 42,
       "category": "medium",
-      "type": "height"
+      "type": "quad"
     },
     "captureRate": 75,
     "eggGroups": [
@@ -288,30 +344,66 @@
       }
     },
     "number": 873,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "winged",
+      "underdog",
+      "fully-evolved",
+      "chiller",
+      "wallclimber"
+    ],
+    "diet": [
+      "snow"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "shield-dust",
+        "ice-scales"
+      ],
+      "basic": [
+        "compound-eyes",
+        "snow-warning"
+      ],
+      "advanced": [
+        "ice-body",
+        "chill-wave"
+      ],
+      "master": [
+        "snow-cloak",
+        "frost-coat"
+      ]
     },
     "movement": {
-      "primary": [],
-      "secondary": []
+      "primary": [
+        {
+          "type": "flight",
+          "value": 10
+        }
+      ],
+      "secondary": [
+        {
+          "type": "overland",
+          "value": 3
+        }
+      ]
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "acrobatics": 20,
+      "climb": 50,
+      "disguise": 40,
+      "lift": 25,
+      "listen": 50,
+      "natural-world": 45,
+      "running": 40,
+      "spot": 50,
+      "stealth": 60,
+      "survival": 50
+    },
+    "habitats": [],
+    "slug": "frosmoth"
   },
   "_id": "0976TRN63XfSPMwg",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.0976TRN63XfSPMwg"
@@ -320,10 +412,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185555199,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!0976TRN63XfSPMwg"
 }

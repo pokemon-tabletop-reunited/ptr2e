@@ -32,6 +32,11 @@
           "level": 5
         },
         {
+          "name": "charge",
+          "gen": "scarlet-violet",
+          "level": 10
+        },
+        {
           "name": "fury-attack",
           "gen": "scarlet-violet",
           "level": 15
@@ -50,6 +55,21 @@
           "name": "recover",
           "gen": "scarlet-violet",
           "level": 30
+        },
+        {
+          "name": "curse",
+          "gen": "scarlet-violet",
+          "level": 35
+        },
+        {
+          "name": "electric-terrain",
+          "gen": "scarlet-violet",
+          "level": 40
+        },
+        {
+          "name": "poison-jab",
+          "gen": "scarlet-violet",
+          "level": 45
         },
         {
           "name": "zing-zap",
@@ -277,7 +297,7 @@
     "size": {
       "height": 0.3,
       "weight": 1,
-      "category": "medium",
+      "category": "tiny",
       "type": "height"
     },
     "captureRate": 75,
@@ -294,30 +314,63 @@
       }
     },
     "number": 871,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "underdog",
+      "legless",
+      "wallclimber",
+      "wavesense",
+      "fully-evolved"
+    ],
+    "diet": [
+      "herbivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "lightning-rod",
+        "electric-surge"
+      ],
+      "basic": [
+        "electromorphosis",
+        "iron-barbs"
+      ],
+      "advanced": [
+        "stakeout",
+        "suction-cups"
+      ],
+      "master": [
+        "static",
+        "simple"
+      ]
     },
     "movement": {
-      "primary": [],
+      "primary": [
+        {
+          "type": "overland",
+          "value": 3
+        },
+        {
+          "type": "swim",
+          "value": 3
+        }
+      ],
       "secondary": []
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "climb": 40,
+      "conversation": 30,
+      "intimidate": 35,
+      "lift": 25,
+      "listen": 35,
+      "natural-world": 30,
+      "survival": 35,
+      "swim": 40
+    },
+    "habitats": [],
+    "slug": "pincurchin"
   },
   "_id": "wb0Ro2ZSYlKng0pT",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.wb0Ro2ZSYlKng0pT"
@@ -326,10 +379,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!wb0Ro2ZSYlKng0pT"
 }

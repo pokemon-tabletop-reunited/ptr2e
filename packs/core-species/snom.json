@@ -4,8 +4,8 @@
   "type": "species",
   "system": {
     "types": [
-      "ice",
-      "bug"
+      "bug",
+      "ice"
     ],
     "stats": {
       "hp": 30,
@@ -95,6 +95,11 @@
           "name": "powder-snow",
           "gen": "scarlet-violet",
           "level": 1
+        },
+        {
+          "name": "struggle-bug",
+          "gen": "scarlet-violet",
+          "level": 1
         }
       ],
       "egg": [
@@ -103,17 +108,26 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "bug-bite",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "fairy-wind",
           "gen": "scarlet-violet"
         }
       ],
-      "tutor": []
+      "tutor": [
+        {
+          "name": "skitter-smack",
+          "gen": "sword-shield"
+        }
+      ]
     },
     "size": {
       "height": 0.3,
       "weight": 3.8,
-      "category": "medium",
-      "type": "height"
+      "category": "tiny",
+      "type": "quad"
     },
     "captureRate": 190,
     "eggGroups": [
@@ -139,30 +153,60 @@
       }
     },
     "number": 872,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "legless",
+      "underdog",
+      "wallclimber",
+      "chiller"
+    ],
+    "diet": [
+      "snow"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "shield-dust",
+        "ice-scales"
+      ],
+      "basic": [
+        "compound-eyes",
+        "snow-warning"
+      ],
+      "advanced": [
+        "ice-body",
+        "chill-wave"
+      ],
+      "master": [
+        "snow-cloak",
+        "frost-coat"
+      ]
     },
     "movement": {
-      "primary": [],
+      "primary": [
+        {
+          "type": "overland",
+          "value": 3
+        }
+      ],
       "secondary": []
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "climb": 30,
+      "conversation": 35,
+      "disguise": 40,
+      "lift": 10,
+      "listen": 35,
+      "natural-world": 30,
+      "running": 20,
+      "spot": 35,
+      "stealth": 40,
+      "survival": 35
+    },
+    "habitats": [],
+    "slug": "snom"
   },
   "_id": "H4aGcVk0t89qyUS4",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.H4aGcVk0t89qyUS4"
@@ -171,10 +215,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!H4aGcVk0t89qyUS4"
 }

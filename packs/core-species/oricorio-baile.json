@@ -4,8 +4,8 @@
   "type": "species",
   "system": {
     "types": [
-      "fire",
-      "flying"
+      "flying",
+      "fire"
     ],
     "stats": {
       "hp": 75,
@@ -33,8 +33,33 @@
           "level": 6
         },
         {
+          "name": "helping-hand",
+          "gen": "scarlet-violet",
+          "level": 10
+        },
+        {
+          "name": "air-cutter",
+          "gen": "scarlet-violet",
+          "level": 13
+        },
+        {
+          "name": "baton-pass",
+          "gen": "scarlet-violet",
+          "level": 16
+        },
+        {
+          "name": "feather-dance",
+          "gen": "scarlet-violet",
+          "level": 20
+        },
+        {
           "name": "double-slap",
           "gen": "ultra-sun-ultra-moon",
+          "level": 23
+        },
+        {
+          "name": "acrobatics",
+          "gen": "scarlet-violet",
           "level": 23
         },
         {
@@ -53,14 +78,34 @@
           "level": 33
         },
         {
+          "name": "captivate",
+          "gen": "ultra-sun-ultra-moon",
+          "level": 33
+        },
+        {
+          "name": "air-slash",
+          "gen": "scarlet-violet",
+          "level": 36
+        },
+        {
           "name": "revelation-dance",
           "gen": "scarlet-violet",
           "level": 40
         },
         {
+          "name": "agility",
+          "gen": "scarlet-violet",
+          "level": 43
+        },
+        {
           "name": "mirror-move",
           "gen": "ultra-sun-ultra-moon",
           "level": 43
+        },
+        {
+          "name": "hurricane",
+          "gen": "scarlet-violet",
+          "level": 47
         }
       ],
       "machine": [
@@ -133,6 +178,10 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
+          "name": "attract",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
           "name": "sleep-talk",
           "gen": "scarlet-violet"
         },
@@ -142,6 +191,10 @@
         },
         {
           "name": "frustration",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "safeguard",
           "gen": "ultra-sun-ultra-moon"
         },
         {
@@ -191,6 +244,10 @@
         {
           "name": "calm-mind",
           "gen": "scarlet-violet"
+        },
+        {
+          "name": "roost",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "tailwind",
@@ -259,11 +316,27 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
+          "name": "icy-wind",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "helping-hand",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
           "name": "role-play",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "covet",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "tailwind",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "defog",
           "gen": "ultra-sun-ultra-moon"
         }
       ],
@@ -279,6 +352,10 @@
         {
           "name": "pluck",
           "gen": "scarlet-violet"
+        },
+        {
+          "name": "tailwind",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "defog",
@@ -313,7 +390,6 @@
       }
     },
     "number": 741,
-    "slug": "",
     "traits": [
       "pokemon",
       "necter-forme",
@@ -321,14 +397,18 @@
       "awkward-flyer",
       "winged",
       "underdog",
-      "fully-evolved"
+      "fully-evolved",
+      "firestarter"
     ],
-    "diet": [],
+    "diet": [
+      "herbivore"
+    ],
     "abilities": {
       "starting": [
         "dancer"
       ],
       "basic": [
+        "blaze",
         "keen-eye"
       ],
       "advanced": [
@@ -336,16 +416,55 @@
         "forewarn"
       ],
       "master": [
-        "friend-guard"
+        "combustion",
+        "no-guard"
       ]
     },
     "movement": {
-      "primary": [],
-      "secondary": []
+      "primary": [
+        {
+          "type": "overland",
+          "value": 10
+        }
+      ],
+      "secondary": [
+        {
+          "type": "flight",
+          "value": 5
+        }
+      ]
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "acrobatics": 60,
+      "arts-dancing": 80,
+      "natural-world": 40,
+      "navigate": 40,
+      "performance-tough": 75,
+      "running": 55,
+      "spot": 40
+    },
+    "habitats": [],
+    "slug": "oricorio-baile"
   },
   "_id": "NQkjDVYhFt84ekUJ",
-  "effects": []
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-species.Item.NQkjDVYhFt84ekUJ"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.318",
+    "systemId": "ptr2e",
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!NQkjDVYhFt84ekUJ"
 }

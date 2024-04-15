@@ -4,8 +4,8 @@
   "type": "species",
   "system": {
     "types": [
-      "poison",
-      "normal"
+      "normal",
+      "poison"
     ],
     "stats": {
       "hp": 40,
@@ -26,6 +26,11 @@
           "name": "leer",
           "gen": "scarlet-violet",
           "level": 1
+        },
+        {
+          "name": "acid-spray",
+          "gen": "scarlet-violet",
+          "level": 5
         },
         {
           "name": "bite",
@@ -56,6 +61,36 @@
           "name": "slash",
           "gen": "scarlet-violet",
           "level": 21
+        },
+        {
+          "name": "u-turn",
+          "gen": "scarlet-violet",
+          "level": 25
+        },
+        {
+          "name": "poison-jab",
+          "gen": "scarlet-violet",
+          "level": 29
+        },
+        {
+          "name": "taunt",
+          "gen": "scarlet-violet",
+          "level": 33
+        },
+        {
+          "name": "substitute",
+          "gen": "scarlet-violet",
+          "level": 36
+        },
+        {
+          "name": "knock-off",
+          "gen": "scarlet-violet",
+          "level": 40
+        },
+        {
+          "name": "gunk-shot",
+          "gen": "scarlet-violet",
+          "level": 45
         }
       ],
       "machine": [
@@ -226,6 +261,14 @@
       ],
       "egg": [
         {
+          "name": "toxic",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "super-fang",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "swagger",
           "gen": "scarlet-violet"
         },
@@ -247,8 +290,8 @@
     "size": {
       "height": 0.2,
       "weight": 0.7,
-      "category": "medium",
-      "type": "height"
+      "category": "tiny",
+      "type": "quad"
     },
     "captureRate": 190,
     "eggGroups": [
@@ -274,30 +317,68 @@
       }
     },
     "number": 944,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "darkvision",
+      "toxic-skin",
+      "underdog",
+      "wallclimber"
+    ],
+    "diet": [
+      "carnivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "unburden",
+        "pickpocket"
+      ],
+      "basic": [
+        "poison-touch",
+        "prankster"
+      ],
+      "advanced": [
+        "nocturnal",
+        "covert"
+      ],
+      "master": [
+        "spiteful",
+        "toxic-shock"
+      ]
     },
     "movement": {
-      "primary": [],
-      "secondary": []
+      "primary": [
+        {
+          "type": "overland",
+          "value": 7
+        }
+      ],
+      "secondary": [
+        {
+          "type": "swim",
+          "value": 3
+        }
+      ]
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "acrobatics": 15,
+      "climb": 25,
+      "conversation": 10,
+      "intimidate": 20,
+      "lift": 10,
+      "listen": 35,
+      "natural-world": 30,
+      "negotiation": 15,
+      "running": 15,
+      "spot-hidden": 35,
+      "stealth": 45,
+      "survival": 25,
+      "track": 20
+    },
+    "habitats": [],
+    "slug": "shroodle"
   },
   "_id": "yhBST6knf1tDOyrq",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.yhBST6knf1tDOyrq"
@@ -306,10 +387,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!yhBST6knf1tDOyrq"
 }
