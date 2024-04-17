@@ -404,30 +404,32 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
 
     override _prepareSubmitData(formData: FormDataExtended): Record<string, unknown> & {system?: Record<string, unknown>} {
         const data = fu.expandObject(formData.object) as Record<string, unknown> & {
-            system: { changes: Record<number, ChangeModel["_source"]> };
+            system?: { changes?: Record<number, ChangeModel["_source"]> };
         };
 
+        if(data.system?.changes) {
         const changes = this.document.toObject().system.changes as ChangeModel["_source"][];
-        for(const changeSection of htmlQueryAll(this.element, ".effect-change[data-idx]")) {
-            const idx = Number(changeSection.dataset.idx);
-            const changeForm = this.#changeForms[idx];
-            if(idx >= changes.length) throw new Error(`Change index ${idx} out of bounds`);
+            for(const changeSection of htmlQueryAll(this.element, ".effect-change[data-idx]")) {
+                const idx = Number(changeSection.dataset.idx);
+                const changeForm = this.#changeForms[idx];
+                if(idx >= changes.length) throw new Error(`Change index ${idx} out of bounds`);
 
-            const incomingData = data.system?.changes?.[idx];
-            if(incomingData) {
-                changeForm.updateObject(incomingData);
-                const validationFailures = changeForm.change.schema.validate(changeForm.source, {partial: true});
-                if(validationFailures && validationFailures.unresolved) {
-                    changeForm.updateValidationErrors(validationFailures);
-                    ui.notifications.error(game.i18n.localize("PTR2E.EffectSheet.ChangeEditor.Errors.UnableToSaveDueToValidationFailure"));
-                    return {};
-                }
-                else {
-                    changes[idx] = changeForm.source;
+                const incomingData = data.system?.changes?.[idx];
+                if(incomingData) {
+                    changeForm.updateObject(incomingData);
+                    const validationFailures = changeForm.change.schema.validate(changeForm.source, {partial: true});
+                    if(validationFailures && validationFailures.unresolved) {
+                        changeForm.updateValidationErrors(validationFailures);
+                        ui.notifications.error(game.i18n.localize("PTR2E.EffectSheet.ChangeEditor.Errors.UnableToSaveDueToValidationFailure"));
+                        return {};
+                    }
+                    else {
+                        changes[idx] = changeForm.source;
+                    }
                 }
             }
+            data.system.changes = changes;
         }
-        data.system.changes = changes;
 
         data.statuses ??= [];
         return data;

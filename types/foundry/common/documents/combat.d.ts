@@ -25,9 +25,11 @@ interface CombatMetadata extends DocumentMetadata {
     isPrimary: true;
 }
 
-type CombatSchema = {
+type CombatSchema<TSystemSource extends object = object> = {
     /** The _id which uniquely identifies this Combat document */
     _id: fields.DocumentIdField;
+    /** The system data object which is defined by the system template.json model */
+    system: fields.TypeDataField<TSystemSource>;
     /** The _id of a Scene within which this Combat occurs */
     scene: fields.ForeignDocumentField<documents.BaseScene>;
     /** A Collection of Combatant embedded Documents */

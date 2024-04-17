@@ -1,5 +1,6 @@
 import { DistanceUnit, Trait, WeightUnit } from "@data";
 import { EffectSourcePTR2e } from "@effects";
+import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
 
 type ModifierSynthetics = Record<"all" | "damage", DeferredModifier[]> & Record<string, DeferredModifier[] | undefined>;
@@ -21,6 +22,7 @@ interface ActorSynthetics {
         /** Prints all preparation warnings, but this printout is debounced to handle prep and off-prep cycles */
         flush: () => void;
     };
+    afflictions: {data: AfflictionActiveEffectSystem[], ids: Set<string>};
 }
 
 interface Attributes {

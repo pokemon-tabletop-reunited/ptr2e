@@ -40,6 +40,7 @@ export const Init: PTRHook = {
             CONFIG.ChatMessage.documentClass = PTRCONFIG.ChatMessage.documentClass;
             CONFIG.ChatMessage.dataModels = PTRCONFIG.ChatMessage.dataModels;
             CONFIG.Combat.documentClass = PTRCONFIG.Combat.documentClass;
+            CONFIG.Combat.dataModels = PTRCONFIG.Combat.dataModels;
             CONFIG.Combatant.documentClass = PTRCONFIG.Combatant.documentClass;
             CONFIG.Combatant.dataModels = PTRCONFIG.Combatant.dataModels;
             CONFIG.Item.documentClass = PTRCONFIG.Item.documentClass;

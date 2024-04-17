@@ -3,6 +3,7 @@ import { ItemPTR2e, ItemSourcePTR2e } from "@item";
 import { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { ChangeModel, Trait } from "@data";
 import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
+import { CombatPTR2e } from "@combat";
 class ActiveEffectPTR2e<
     TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null,
     TSystem extends ActiveEffectSystem = ActiveEffectSystem,
@@ -14,7 +15,10 @@ class ActiveEffectPTR2e<
     }
 
     static override defineSchema() {
-        const schema = super.defineSchema() as { changes?: object; subtype?: object };
+        const schema = super.defineSchema() as { changes?: ActiveEffectSchema["changes"] } & Omit<
+            ActiveEffectSchema,
+            "changes"
+        >;
         delete schema.changes;
         return schema as ActiveEffectSchema;
     }
@@ -27,6 +31,11 @@ class ActiveEffectPTR2e<
         return this.system.traits;
     }
 
+    get expired(): boolean {
+        if (this.duration.type !== "turns") return false;
+        return this.duration.remaining === 0;
+    }
+
     override prepareDerivedData(): void {
         super.prepareDerivedData();
 
@@ -36,10 +45,7 @@ class ActiveEffectPTR2e<
     }
 
     override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
-        const result = change.apply(actor, options);
-        if (result === false) return result;
-
-        return result;
+        return this.system.apply(actor, change, options);
     }
 
     getRollOptions(prefix = this.type, { includeGranter = true } = {}): string[] {
@@ -66,11 +72,84 @@ class ActiveEffectPTR2e<
             ...traitOptions.map((o) => `${prefix}:${o}`),
         ];
 
-        return options;
+        return this.system.getRollOptions(options);
     }
 
     targetsActor(): this is ActiveEffectPTR2e<ActorPTR2e> {
         return this.modifiesActor;
+    }
+
+    /**
+     * Override the implementation of ActiveEffect#_requiresDurationUpdate to support activation-based initiative.
+     * Duration is purely handled in terms of combat turns elapsed.
+     */
+    override _requiresDurationUpdate() {
+        const { _combatTime, type } = this.duration;
+        if (type === "turns" && game.combat) {
+            //@ts-ignore
+            const ct = this.parent?.combatant?.system.activations; //(game.combat as CombatPTR2e).system.turn;
+            return ct !== _combatTime && !!(this.target as ActorPTR2e)?.inCombat;
+        }
+        return false;
+    }
+
+    /**
+     * Override the implementation of ActiveEffect#_prepareDuration to support activation-based initiative.
+     * Duration is purely handled in terms of combat turns elapsed.
+     */
+    override _prepareDuration(): Partial<ActiveEffectPTR2e["duration"]> {
+        const d = this.duration;
+
+        // Turn-based duration
+        if (d.rounds || d.turns) {
+            const cbt = game.combat as CombatPTR2e | undefined;
+            if (!cbt || !this.targetsActor())
+                return {
+                    type: "turns",
+                    _combatTime: undefined,
+                };
+
+            // Determine the current combat duration
+            const durationTurn = d.turns ?? 0;
+            const startTurn = d.startTurn ?? 0;
+
+            // Determine parent combatant's activation amount
+            const currentTurn = this.parent.combatant?.system.activations;
+            if (currentTurn === undefined)
+                return {
+                    type: "turns",
+                    _combatTime: undefined,
+                };
+
+            // If the effect has not started yet display the full duration
+            if (currentTurn <= startTurn) {
+                return {
+                    type: "turns",
+                    duration: durationTurn,
+                    remaining: durationTurn,
+                    label: this._getDurationLabel(0, d.turns),
+                    _combatTime: currentTurn,
+                };
+            }
+
+            // Some number of remaining turns (possibly zero)
+            const remainingTurns = Math.max(startTurn + durationTurn - currentTurn, 0);
+            return {
+                type: "turns",
+                duration: durationTurn,
+                remaining: remainingTurns,
+                label: this._getDurationLabel(0, remainingTurns),
+                _combatTime: currentTurn,
+            };
+        }
+
+        // No duration
+        return {
+            type: "none",
+            duration: null,
+            remaining: null,
+            label: game.i18n.localize("None"),
+        };
     }
 
     override toObject(source?: true | undefined): this["_source"];
@@ -89,6 +168,13 @@ class ActiveEffectPTR2e<
         if (!options.keepId && data._id) {
             const statusEffect = CONFIG.statusEffects.find((effect) => effect._id === data._id);
             if (statusEffect) options.keepId = true;
+        }
+        if(this.targetsActor() && data.duration?.turns && !data.duration.startTurn) {
+            this.updateSource({
+                duration: {
+                    startTurn: this.parent.combatant?.system.activations ?? 0,
+                },
+            });
         }
 
         return super._preCreate(data, options, user);
@@ -190,15 +276,15 @@ class ActiveEffectPTR2e<
 
         const tempItems: ItemPTR2e[] = [];
         const outputItemSources: ItemSourcePTR2e[] = [];
-        const outputEffectSources = effects.map(e => e._source as EffectSourcePTR2e);
+        const outputEffectSources = effects.map((e) => e._source as EffectSourcePTR2e);
 
         // Process effect preCreate changes for all effects that are going to be added
         // This may add additional effects or items (such as via GrantItem)
-        for(const effect of effects) {
+        for (const effect of effects) {
             const effectSource = effect._source as EffectSourcePTR2e;
             const changes = effect.system.changes;
 
-            for(const change of changes) {
+            for (const change of changes) {
                 const changeSource = change._source;
                 await change.preCreate?.({
                     effectSource,
@@ -206,12 +292,15 @@ class ActiveEffectPTR2e<
                     pendingEffects: outputEffectSources,
                     pendingItems: outputItemSources,
                     tempItems,
-                    context
-                })
+                    context,
+                });
             }
         }
 
-        await ItemPTR2e.createDocuments(outputItemSources, context as DocumentModificationContext<ActorPTR2e | null>);
+        await ItemPTR2e.createDocuments(
+            outputItemSources,
+            context as DocumentModificationContext<ActorPTR2e | null>
+        );
         // Create the effects
         return super.createDocuments(outputEffectSources, context) as Promise<ActiveEffectPTR2e[]>;
     }
