@@ -8,6 +8,8 @@ class ActiveEffectPTR2e<
     TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null,
     TSystem extends ActiveEffectSystem = ActiveEffectSystem,
 > extends ActiveEffect<TParent, TSystem> {
+    static LOCALIZATION_PREFIXES = ["PTR2E.Effect"];
+
     declare grantedBy: ItemPTR2e | null;
 
     get slug() {
@@ -34,6 +36,18 @@ class ActiveEffectPTR2e<
     get expired(): boolean {
         if (this.duration.type !== "turns") return false;
         return this.duration.remaining === 0;
+    }
+
+    override prepareBaseData(): void {
+        super.prepareBaseData();
+        
+        this._name = this._source.name;
+        Object.defineProperty(this, "name", {
+            get: () => this.duration.remaining !== undefined ? `${this._name} ${this.duration.remaining}` : this._name,
+            set: (value: string) => {
+                this._name = value;
+            }
+        })
     }
 
     override prepareDerivedData(): void {
@@ -311,6 +325,8 @@ interface ActiveEffectPTR2e<
     TSystem extends ActiveEffectSystem = ActiveEffectSystem,
 > {
     readonly _source: foundry.documents.ActiveEffectSource<string, TSystem>;
+
+    _name: string;
 }
 
 export default ActiveEffectPTR2e;

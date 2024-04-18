@@ -1,7 +1,13 @@
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
-import { CombatantPTR2e, CombatantSystemPTR2e, CombatSystemPTR2e, RoundCombatantSystem } from "@combat";
+import {
+    CombatantPTR2e,
+    CombatantSystemPTR2e,
+    CombatSystemPTR2e,
+    RoundCombatantSystem,
+} from "@combat";
 import TypeDataModel from "types/foundry/common/abstract/type-data.js";
 import { CombatantSchema } from "types/foundry/common/documents/combatant.js";
+import { ActorPTR2e } from "@actor";
 
 class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     get averageLevel(): number {
@@ -98,12 +104,12 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
             // if (!game.user.isGM) {
             //     return this.update(updateData) as Promise<this>;
             // } else {
-                await this.updateEmbeddedDocuments(
-                    "Combatant",
-                    updateData.combatants as EmbeddedDocumentUpdateData[]
-                );
-                delete updateData.combatants;
-                return this.update(updateData) as Promise<this>;
+            await this.updateEmbeddedDocuments(
+                "Combatant",
+                updateData.combatants as EmbeddedDocumentUpdateData[]
+            );
+            delete updateData.combatants;
+            return this.update(updateData) as Promise<this>;
             // }
         } catch (error: any) {
             ui.notifications.error(error.message);
@@ -139,7 +145,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
             [key: string]: {
                 _id: string;
                 initiative: number;
-                system?: Partial<CombatantSystemPTR2e["_source"]>
+                system?: Partial<CombatantSystemPTR2e["_source"]>;
             };
         } = {};
 
@@ -168,7 +174,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
                 initiative: Math.max(0, currentCombatant.baseAV - initiativeReduction),
                 system: {
                     activationsHad: (currentCombatant.system.activations ?? 0) + 1,
-                }
+                },
             };
         }
 
@@ -300,6 +306,14 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
             this.round === 0 ? this.combatants.map((c) => c.id) : documents.map((c) => c._id!)
         );
         this.updateEmbeddedDocuments("Combatant", inits);
+
+        const participants = new Set(
+            [
+                ...this.system.participants,
+                ...this.combatants.map((c) => c.actor?.uuid ?? c.token?.uuid ?? []),
+            ].flat()
+        );
+        this.update({ "system.participants": participants });
     }
 
     protected override _onDeleteDescendantDocuments(
@@ -317,6 +331,17 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
             const inits = this._idToUpdateBaseInitiativeArray(this.combatants.map((c) => c.id));
             this.updateEmbeddedDocuments("Combatant", inits);
         }
+    }
+
+    protected override _onDelete(options: DocumentModificationContext<null>, userId: string): void {
+        super._onDelete(options, userId);
+    
+        const participants = this.system.participants;
+        for (const uuid of participants) {
+            const actor = fromUuidSync(uuid);
+            if(actor instanceof ActorPTR2e) actor.onEndCombat();
+        }
+
     }
 }
 

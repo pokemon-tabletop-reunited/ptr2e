@@ -3,7 +3,8 @@
     "TYPES.Actor.character": "Character",
     "TYPES.Item.move": "Move",
     "TYPES.Item.species": "Species",
-    "TYPES.ActiveEffect.basic": "ActiveEffect",
+    "TYPES.ActiveEffect.passive": "Passive Effect",
+    "TYPES.ActiveEffect.affliction": "Affliction",
     "ITEM.AddButton": "Add",
     "ITEM.DeleteButton": "Delete",
     "PTR2E": {
@@ -60,6 +61,40 @@
                 "ChangePredicate": {
                     "label": "Predicate",
                     "hint": "The predicate of the change."
+                },
+                "priority": {
+                    "label": "Priority",
+                    "hint": "Affliction's are applied in batches based on their priority, from lowest to highest.\nThe system keeps all healing affliction at priority 0, and all damaging afflictions at priority 30, and in-between those numbers special cases are handled.\n\nFor homebrew content we recommend using these same numbers if your affliction is meant to be applied in the same batch as the system afflictions."
+                },
+                "formula": {
+                    "label": "Formula",
+                    "hint": "The result of this formula will be multiplied by the afflicted target's Max HP.\nExample Input: \"1/16\" (this is 1 tick)"
+                },
+                "type": {
+                    "label": "Type",
+                    "hint": "Whether this affliction's formula should be applied as damage or healing."
+                },
+                "removeAfterCombat": {
+                    "label": "Remove After Combat",
+                    "hint": "Whether this effect should be removed after a combat encounter ends."
+                },
+                "removeOnRecall": {
+                    "label": "Remove On Recall",
+                    "hint": "Whether this effect should be removed when the actor is taken out of combat (without ending combat)."
+                },
+                "duration": {
+                    "turns": {
+                        "label": "Affl. Duration (Activations)",
+                        "hint": "The number of activations this affliction will last before it is automatically deleted.\nLeave blank for afflictions that should persist indefinitely."
+                    },
+                    "startTurn": {
+                        "label": "Applied On Activation",
+                        "hint": "The Nth activation of the actor this affliction applies to, when the affliction was first applied.\nNote: Generally should not be edited."
+                    },
+                    "remaining": {
+                        "label": "Remaining Activations",
+                        "hint": "The number of activations remaining before this affliction expires and is removed."
+                    }
                 }
             }
         },

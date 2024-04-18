@@ -180,6 +180,8 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
                     index: form.index,
                 }))
             ),
+            fields: this.document.schema.fields,
+            system: this.document.system,
         };
     }
 

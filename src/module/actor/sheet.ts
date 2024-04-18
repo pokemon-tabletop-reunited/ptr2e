@@ -201,6 +201,12 @@ class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
         // @ts-ignore
         $html.find(".ptr-perk-tree").on("click", () => this.actor.togglePerkTree());
     }
+
+    /** Emulate a sheet item drop from the canvas */
+    async emulateItemDrop(data: DropCanvasData) {
+        // @ts-expect-error
+        return this._onDropItem({ preventDefault: () => { } }, data);
+    }
 }
 
 interface ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {

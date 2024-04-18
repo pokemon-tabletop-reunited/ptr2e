@@ -1,5 +1,6 @@
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import {
+    ActorSheetPTR2e,
     ActorSynthetics,
     ActorSystemPTR2e,
     Attribute,
@@ -503,11 +504,19 @@ class ActorPTR2e<
         return output;
     }
 
+    /**
+     * Delete all effects that should be deleted when combat ends
+     */
+    onEndCombat() {
+        const applicable = this.effects.filter(s => (s as ActiveEffectPTR2e<this>).system.removeAfterCombat);
+        this.deleteEmbeddedDocuments("ActiveEffect", applicable.map(s => s.id));
+    }
+
     protected override _onEmbeddedDocumentChange(): void {
         super._onEmbeddedDocumentChange();
 
         // Send any accrued warnings to the console
-        this.synthetics.preparationWarnings.flush();
+        this.synthetics.preparationWarnings.flush(); 
     }
 
     protected override async _preCreate(
@@ -527,6 +536,8 @@ interface ActorPTR2e<
     TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
 > extends Actor<TParent, TSystem> {
     get folder(): FolderPTR2e<ActorPTR2e<TSystem, null>> | null;
+
+    sheet: ActorSheetPTR2e;
 
     _party: ActorParty | null;
 

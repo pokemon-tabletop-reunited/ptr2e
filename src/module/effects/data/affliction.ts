@@ -1,6 +1,6 @@
 import { ActorPTR2e } from "@actor";
 import ChangeModel from "../changes/change.ts";
-import ActiveEffectSystem from "../system.ts";
+import ActiveEffectSystem, { ActiveEffectSystemSchema } from "../system.ts";
 
 class AfflictionActiveEffectSystem extends ActiveEffectSystem {
     static override defineSchema(): AfflictionSystemSchema {
@@ -9,9 +9,19 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
             ...super.defineSchema(),
             priority: new fields.NumberField({
                 required: true,
-                initial: 0,
-                min: 0,
+                initial: 50,
+                nullable: false
+            }),
+            formula: new fields.StringField({
+                required: true,
+                initial: "",
+                nullable: false
+            }),
+            type: new fields.StringField({
+                required: true,
+                initial: "damage",
                 nullable: false,
+                choices: ["damage", "healing"]
             }),
         };
     }
@@ -33,9 +43,6 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
         const damage = this._calculateDamage();
         if (damage) {
             output.damage = damage;
-            if(this.parent.id === 'mTtT8rk8ROvlR1p0') {
-                output.damage.type = "healing";
-            }
         }
 
         return output;
@@ -46,12 +53,17 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
      * Returns a string of the damage formula
      */
     protected _calculateDamage(): { formula: string; type: "damage" | "healing" } | void {
-        return { formula: "1/16", type: "damage" };
+        if (!this.formula) return;
+
+        return {
+            formula: this.formula,
+            type: this.type,
+        };
     }
 
     override apply(actor: ActorPTR2e, change?: ChangeModel, options?: string[]): unknown {
-        const afflictions = (actor.synthetics.afflictions ??= {data: [], ids: new Set()});
-        if(!afflictions.ids.has(this.parent.id)) {
+        const afflictions = (actor.synthetics.afflictions ??= { data: [], ids: new Set() });
+        if (!afflictions.ids.has(this.parent.id)) {
             afflictions.data.push(this);
             afflictions.ids.add(this.parent.id);
         }
@@ -67,7 +79,15 @@ interface AfflictionActiveEffectSystem
 
 type AfflictionSystemSchema = {
     priority: foundry.data.fields.NumberField<number, number, true, false, true>;
-};
+    formula: foundry.data.fields.StringField<string, string, true, false, true>;
+    type: foundry.data.fields.StringField<
+        "damage" | "healing",
+        "damage" | "healing",
+        true,
+        false,
+        true
+    >;
+} & ActiveEffectSystemSchema;
 
 type EndOfTurn =
     | {

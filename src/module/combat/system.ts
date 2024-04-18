@@ -12,6 +12,7 @@ class CombatSystem extends foundry.abstract.TypeDataModel {
         return {
             ...super.defineSchema(),
             turn: new fields.NumberField({ required: true, initial: 0, min: 0, nullable: false }),
+            participants: new fields.SetField(new fields.DocumentUUIDField(), {required: true, initial: []}),
         };
     }
 
@@ -26,6 +27,7 @@ interface CombatSystem extends foundry.abstract.TypeDataModel, ModelPropsFromSch
 
 type CombatSystemSchema = {
     turn: foundry.data.fields.NumberField<number, number, true, false, true>;
+    participants: foundry.data.fields.SetField<foundry.data.fields.DocumentUUIDField<string>, string[], Set<string>, true, false, true>;
 };
 
 export default CombatSystem;

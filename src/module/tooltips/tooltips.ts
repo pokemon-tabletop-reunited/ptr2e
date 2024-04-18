@@ -246,7 +246,7 @@ export default class TooltipsPTR2e {
         this.tooltip.classList.add("damage-info");
         await this._renderTooltip({ path: "systems/ptr2e/templates/chat/tooltips/damage-info.hbs", data: { notes: message.system._notesHTML }, direction: game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined });
 
-        return 2000;
+        return 500;
     }
 
     async _onContentLinkTooltip() {
