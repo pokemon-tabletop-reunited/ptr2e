@@ -223,7 +223,12 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
                     const formData = new FormDataExtended(this.element);
                     const data = this._prepareSubmitData(formData);
 
-                    const changes = data.system?.changes as Partial<ChangeModel["_source"]>[];
+                    if(!data.system?.changes) {
+                        if(data.system) data.system.changes = [];
+                        else data.system = {changes: []};
+                    }
+
+                    const changes = data.system.changes as Partial<ChangeModel["_source"]>[];
                     changes.push({
                         type: BasicChangeSystem.TYPE,
                     });
@@ -250,7 +255,7 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
 
                     const data = this._prepareSubmitData(formData);
 
-                    const changes = data.system?.changes as ChangeModel["_source"][];
+                    const changes = data.system?.changes as ChangeModel["_source"][] ?? [];
                     const index = Number(select.parentElement?.dataset.changeIndex ?? "NaN");
                     if (changes && Number.isInteger(index) && changes.length > index) {
                         changes[index].type = select.value;
@@ -277,7 +282,7 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
                     const formData = new FormDataExtended(this.element);
                     const data = this._prepareSubmitData(formData);
 
-                    const changes = data.system?.changes as ChangeModel["_source"][];
+                    const changes = data.system?.changes as ChangeModel["_source"][] ?? [];
                     const index = Number(anchor.dataset.changeIndex ?? "NaN");
                     if (changes && Number.isInteger(index) && changes.length > index) {
                         changes.splice(index, 1);

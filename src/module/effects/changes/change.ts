@@ -68,6 +68,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
             mode: new fields.NumberField({
                 integer: true,
                 initial: CONST.ACTIVE_EFFECT_MODES.ADD,
+                choices: Object.fromEntries(Object.entries(CONST.ACTIVE_EFFECT_MODES).map(([k, v]) => [v, k])),
                 label: "PTR2E.Effect.FIELDS.ChangeMode.label",
                 hint: "PTR2E.Effect.FIELDS.ChangeMode.hint",
             }),
