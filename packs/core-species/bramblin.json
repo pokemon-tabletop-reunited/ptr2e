@@ -4,8 +4,8 @@
   "type": "species",
   "system": {
     "types": [
-      "grass",
-      "ghost"
+      "ghost",
+      "grass"
     ],
     "stats": {
       "hp": 40,
@@ -43,9 +43,19 @@
           "level": 9
         },
         {
+          "name": "bullet-seed",
+          "gen": "scarlet-violet",
+          "level": 13
+        },
+        {
           "name": "infestation",
           "gen": "scarlet-violet",
           "level": 17
+        },
+        {
+          "name": "hex",
+          "gen": "scarlet-violet",
+          "level": 21
         },
         {
           "name": "mega-drain",
@@ -56,6 +66,26 @@
           "name": "disable",
           "gen": "scarlet-violet",
           "level": 29
+        },
+        {
+          "name": "phantom-force",
+          "gen": "scarlet-violet",
+          "level": 35
+        },
+        {
+          "name": "giga-drain",
+          "gen": "scarlet-violet",
+          "level": 40
+        },
+        {
+          "name": "curse",
+          "gen": "scarlet-violet",
+          "level": 45
+        },
+        {
+          "name": "pain-split",
+          "gen": "scarlet-violet",
+          "level": 50
         },
         {
           "name": "power-whip",
@@ -212,8 +242,8 @@
     "size": {
       "height": 0.6,
       "weight": 0.6,
-      "category": "medium",
-      "type": "height"
+      "category": "small",
+      "type": "quad"
     },
     "captureRate": 190,
     "eggGroups": [
@@ -239,30 +269,64 @@
       }
     },
     "number": 946,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "breathless",
+      "darkvision",
+      "legless",
+      "reach",
+      "underdog"
+    ],
+    "diet": [
+      "nullivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "wind-rider",
+        "infiltrator"
+      ],
+      "basic": [
+        "sand-rush",
+        "pickup"
+      ],
+      "advanced": [
+        "own-tempo",
+        "tangling-hair"
+      ],
+      "master": [
+        "arid-adaptation",
+        "lacerate"
+      ]
     },
     "movement": {
-      "primary": [],
+      "primary": [
+        {
+          "type": "overland",
+          "value": 6
+        }
+      ],
       "secondary": []
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "acrobatics": 5,
+      "climb": 15,
+      "conversation": 20,
+      "intimidate": 30,
+      "lift": 20,
+      "listen": 25,
+      "natural-world": 10,
+      "navigate": 15,
+      "negotiation": 10,
+      "running": 20,
+      "spot-hidden": 25,
+      "stealth": 40,
+      "survival": 50
+    },
+    "habitats": [],
+    "slug": "bramblin"
   },
   "_id": "hLPX4EgmC73g8SFt",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.hLPX4EgmC73g8SFt"
@@ -271,10 +335,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!hLPX4EgmC73g8SFt"
 }
