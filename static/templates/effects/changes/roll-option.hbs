@@ -1,0 +1,18 @@
+<div class="form-group">
+    <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeDomain.label"}}</label>
+    <div class="form-fields">
+        <input type="text" name="{{basePath}}.domain" value="{{change.domain}}" />
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="short">{{localize fields.value.label}}</label>
+    <div class="form-fields">
+        <input type="text" name="{{basePath}}.value" value="{{change.value}}" />
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="short">{{localize fields.predicate.label}}</label>
+    <input type="text" name="{{basePath}}.predicate" value="{{json change.predicate spaces=0}}" />
+</div>

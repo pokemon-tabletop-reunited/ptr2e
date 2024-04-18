@@ -1,0 +1,27 @@
+<section class="effect-change" data-type="{{change.type}}" data-idx="{{index}}">
+    <header class="change-header">
+        <i class="fa-solid fa-bars drag-handle"></i>
+        <div class="label">
+            {{formField fields.label value=source.label name=(concat basePath ".label") localize=true}}
+        </div>
+        <div class="type" data-change-index="{{index}}">
+            {{formInput fields.type value=source.type name=(concat basePath ".type") localize=true}}
+        </div>
+        <div class="item-controls">
+            <a class="edit-change" data-change-index="{{index}}" data-tooltip="{{localize "PTR2E.EffectSheet.ChangeEditor.Controls.Edit"}}"><i class="fa-solid fa-fw fa-edit"></i></a>
+            <a class="remove-change" data-change-index="{{index}}" data-tooltip="{{localize "PTR2E.EffectSheet.ChangeEditor.Controls.Remove"}}"><i class="fa-solid fa-fw fa-trash"></i></a>
+        </div>
+    </header>
+    <main class="container">
+        {{{template}}}
+    </main>
+    {{#if validationFailures}}
+        <div class="validation-failures">
+            <ul>
+                {{#each validationFailures as |message|}}
+                    <li><span>{{message}}</span></li>
+                {{/each}}
+            </ul>
+        </div>
+    {{/if}}
+</section>

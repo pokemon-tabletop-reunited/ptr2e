@@ -10,7 +10,7 @@ declare global {
         get sheet(): FormApplication;
         get uuid(): DocumentUUID;
 
-        toChat?(): Promise<void>;
+        toChat?(): Promise<any>;
     }
 
     interface CanvasDocument extends ClientDocument {

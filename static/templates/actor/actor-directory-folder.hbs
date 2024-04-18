@@ -1,0 +1,54 @@
+<li class="directory-item folder flexcol {{#unless folder.expanded}}collapsed{{/unless}}"
+    data-folder-id="{{folder.id}}" data-uuid={{folder.uuid}} data-folder-depth="{{node.depth}}" {{#if folder.color}}style="--owner-folder-background: {{folder.color.css}};"{{/if}}>
+  <header class="folder-header flexrow" {{#if folder.color}}style="background-color: {{folder.color.css}}"{{/if}}>
+    <h3 class="noborder"><i class="fas fa-folder-open fa-fw"></i>{{folder.name}}</h3>
+
+    {{#if node.team}}
+    <a class="create-button open-team">
+        <i class="fas fa-users"></i>
+    </a>
+    {{/if}}
+    {{#if node.owner}}
+    <a class="create-button open-party">
+        <i class="fas fa-user-group"></i>
+    </a>
+    {{/if}}
+    {{#if @root.canCreateFolder}}
+    <a class="create-button create-folder">
+      <i class="{{@root.folderIcon}}"></i>
+      <i class="fas fa-plus"></i>
+    </a>
+    {{/if}}
+    {{#if @root.canCreateEntry}}
+    <a class="create-button create-entry">
+      <i class="{{@root.sidebarIcon}}"></i>
+      <i class="fas fa-plus"></i>
+    </a>
+    {{/if}}
+  </header>
+
+  <ol class="subdirectory" {{#if folder.color}}style="border-left-color: {{folder.color.css}}"{{/if}}>
+    {{~#if node.owner}}
+      {{> (lookup @root "entryPartial") actor=node.owner cssClasses="owner"}}
+    {{/if}}
+    {{#if (and node.owner node.party.length)}}
+        <li class="directory-item party party-header">
+            <h4 class="document-name">
+                <span>{{localize "PTR2E.ActorSidebar.Party.Label" name=node.owner.name}}</span>
+            </h4>
+        </li>
+    {{/if}}
+    {{#each node.party}}
+        {{> (lookup @root "entryPartial") actor=this cssClasses="party"}}
+    {{/each}}
+    {{#each node.team}}
+        {{> (lookup @root "entryPartial") actor=this cssClasses="team" fake=true}}
+    {{/each}}
+	{{#each node.children}}
+      {{> (lookup @root "folderPartial") node=this folder=this.folder}}
+    {{/each}}
+    {{#each node.entries}}
+      {{> (lookup @root "entryPartial") actor=this}}
+    {{/each~}}
+  </ol>
+</li>

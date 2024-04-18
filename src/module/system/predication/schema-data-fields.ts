@@ -7,7 +7,6 @@ class PredicateStatementField extends foundry.data.fields.DataField<PredicateSta
             ...options,
             required: true,
             nullable: false,
-            initial: undefined,
             validationError: "must be a recognized predication statement",
         });
     }
@@ -32,7 +31,7 @@ class PredicateField<
     THasInitial extends boolean = true,
 > extends foundry.data.fields.ArrayField<PredicateStatementField, RawPredicate, Predicate, TRequired, TNullable, THasInitial> {
     constructor(options: foundry.data.fields.ArrayFieldOptions<RawPredicate, TRequired, TNullable, THasInitial> = {}) {
-        super(new PredicateStatementField(), { label: "PTR2E.RuleEditor.General.Predicate", ...options });
+        super(new PredicateStatementField(), { label: "PTR2E.Effect.FIELDS.ChangePredicate.label", ...options });
     }
 
     /** Construct a `Predicate` from the initialized `PredicateStatement[]` */

@@ -1,5 +1,6 @@
 import { TemplateConstructor } from './data-template.ts';
 import { SlugField } from '../fields/slug-field.ts';
+import { sluggify } from '@utils';
 
 /**
  * Adds slug property to target data model.
@@ -13,6 +14,12 @@ export default function HasSlug<BaseClass extends TemplateConstructor>(baseClass
 
                 slug: new SlugField({ required: true, label: "PTR2E.FIELDS.Slug.Label", hint: "PTR2E.FIELDS.Slug.Hint" }),
             };
+        }
+
+        override prepareBaseData() {
+            super.prepareBaseData();
+
+            this.slug ||= sluggify((this.parent as ClientDocument).name ?? "");
         }
     }
 

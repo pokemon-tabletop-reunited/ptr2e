@@ -7,16 +7,7 @@ import { TemplateConstructor } from './data-template.ts';
  * @group Mixins
  */
 export default function HasChanges<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
-    abstract class TemplateClass extends baseClass {
-        /**
-         * An array of changes to the item's data.
-         */
-        abstract changes: ChangeModel[]
-
-        declare _source: InstanceType<typeof baseClass>['_source'] & {
-            changes: ChangeModel[];
-        }
-
+    class TemplateClass extends baseClass {
         static override defineSchema(): foundry.data.fields.DataSchema {
             const fields = foundry.data.fields;
 
@@ -25,6 +16,14 @@ export default function HasChanges<BaseClass extends TemplateConstructor>(baseCl
 
                 changes: new fields.ArrayField(new fields.TypedSchemaField(ChangeModelTypes()))
             };
+        }
+    }
+
+    interface TemplateClass {
+        changes: ChangeModel[];
+
+        _source: InstanceType<typeof baseClass>['_source'] & {
+            changes: ChangeModel[];
         }
     }
 

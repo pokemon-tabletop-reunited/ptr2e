@@ -1,7 +1,16 @@
-import { CombatantPTR2e, CombatantSystemPTR2e } from "@combat";
+import { CombatantPTR2e, CombatantSystemPTR2e, CombatPTR2e } from "@combat";
 
-class RoundCombatantSystem extends foundry.abstract.TypeDataModel implements CombatantSystemPTR2e {
+class RoundCombatantSystem extends CombatantSystemPTR2e {
     declare parent: CombatantPTR2e
+
+    static readonly id = "roundsinitiative" as const;
+    static get instance(): CombatantPTR2e<CombatPTR2e, null, RoundCombatantSystem> | null {
+        return game.combat?.combatants.get(this.id) as CombatantPTR2e<CombatPTR2e, null, RoundCombatantSystem> ?? null;
+    }
+
+    override get activations() {
+        return this.parent.parent!.round;
+    }
 
     /**
      * The Round always has a base AV of 100

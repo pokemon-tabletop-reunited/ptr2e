@@ -3,9 +3,133 @@
     "TYPES.Actor.character": "Character",
     "TYPES.Item.move": "Move",
     "TYPES.Item.species": "Species",
+    "TYPES.ActiveEffect.passive": "Passive Effect",
+    "TYPES.ActiveEffect.affliction": "Affliction",
     "ITEM.AddButton": "Add",
     "ITEM.DeleteButton": "Delete",
     "PTR2E": {
+        "Effect": {
+            "FIELDS": {
+                "ChangeType": {
+                    "label": "Type",
+                    "hint": "The type of change.",
+                    "basic": "AE-Like",
+                    "flat-modifier": "Flat Modifier",
+                    "roll-option": "Roll Option",
+                    "grant-item": "Grant Item"
+                },
+                "ChangeLabel": {
+                    "label": "Label",
+                    "hint": "The label of the change."
+                },
+                "ChangeMode": {
+                    "label": "Mode",
+                    "hint": "The mode of the change."
+                },
+                "ChangeKey": {
+                    "label": "Path",
+                    "hint": "The system path of the change."
+                },
+                "ChangeValue": {
+                    "label": "Value",
+                    "hint": "The value of the change."
+                },
+                "ChangeSelector": {
+                    "label": "Selector",
+                    "hint": "The selector of the change."
+                },
+                "ChangeDomain": {
+                    "label": "Domain",
+                    "hint": "The domain of the change."
+                },
+                "ChangeUuid": {
+                    "label": "UUID",
+                    "hint": "The UUID of the change.",
+                    "invalid": {
+                        "notAnItemUuid": "UUID must be a valid Item UUID.",
+                        "itemNotFound": "Failed to find an Item with UUID \"{uuid}\"."
+                    }
+                },
+                "ChangeReevaluateOnUpdate": {
+                    "label": "Reevaluate on Update",
+                    "hint": "Whether to reevaluate this change on update."
+                },
+                "ChangeAllowDuplicate": {
+                    "label": "Allow Duplicate",
+                    "hint": "Whether to allow duplicates of this item."
+                },
+                "ChangePredicate": {
+                    "label": "Predicate",
+                    "hint": "The predicate of the change."
+                },
+                "priority": {
+                    "label": "Priority",
+                    "hint": "Affliction's are applied in batches based on their priority, from lowest to highest.\nThe system keeps all healing affliction at priority 0, and all damaging afflictions at priority 30, and in-between those numbers special cases are handled.\n\nFor homebrew content we recommend using these same numbers if your affliction is meant to be applied in the same batch as the system afflictions."
+                },
+                "formula": {
+                    "label": "Formula",
+                    "hint": "The result of this formula will be multiplied by the afflicted target's Max HP.\nExample Input: \"1/16\" (this is 1 tick)"
+                },
+                "type": {
+                    "label": "Type",
+                    "hint": "Whether this affliction's formula should be applied as damage or healing."
+                },
+                "removeAfterCombat": {
+                    "label": "Remove After Combat",
+                    "hint": "Whether this effect should be removed after a combat encounter ends."
+                },
+                "removeOnRecall": {
+                    "label": "Remove On Recall",
+                    "hint": "Whether this effect should be removed when the actor is taken out of combat (without ending combat)."
+                },
+                "duration": {
+                    "turns": {
+                        "label": "Affl. Duration (Activations)",
+                        "hint": "The number of activations this affliction will last before it is automatically deleted.\nLeave blank for afflictions that should persist indefinitely."
+                    },
+                    "startTurn": {
+                        "label": "Applied On Activation",
+                        "hint": "The Nth activation of the actor this affliction applies to, when the affliction was first applied.\nNote: Generally should not be edited."
+                    },
+                    "remaining": {
+                        "label": "Remaining Activations",
+                        "hint": "The number of activations remaining before this affliction expires and is removed."
+                    }
+                }
+            }
+        },
+        "EffectSheet": {
+            "Tabs": {
+                "overview": {
+                    "label": "Overview"
+                },
+                "details": {
+                    "label": "Details"
+                },
+                "changes": {
+                    "label": "Changes"
+                }
+            },
+            "ChangeEditor": {
+                "General": {
+                    "Primitive": "Primitive",
+                    "Brackets": "Brackets",
+                    "Value": "Value",
+                    "Range": "Range"
+                },
+                "Controls": {
+                    "Edit": "Edit as JSON",
+                    "Remove": "Delete Change",
+                    "Close": "Close Editor",
+                    "Apply": "Apply Changes",
+                    "Add": "Create Change"
+                },
+                "Errors": {
+                    "UnableToSaveDueToValidationFailure": "Unable to save changes due to validation failure(s). Please check the changes and resolve the issues.",
+                    "ChangeSyntax": "Syntax error in rule element definition: {message}"
+                }
+            }
+        },
         "ActorSystem": {
             "FIELDS": {
                 "traits": {
@@ -54,6 +178,24 @@
         },
         "ActorSheet": {
             "StatsFormTitle": "Stats Manager"
+        },
+        "ActorSidebar": {
+            "Party": {
+                "Label": "{name}'s Party"
+            }
+        },
+        "Folder": {
+            "Sheet": {
+                "Owner": {
+                    "Label": "Owner",
+                    "Hint": "Drag actor here to transform this folder into a Party Folder",
+                    "Remove": "Remove Owner"
+                },
+                "Team": {
+                    "Label": "Team Members",
+                    "Hint": "Drag actor here to transform this folder into a Team Folder"
+                }
+            }
         },
         "Settings": {
             "DevMode": {
@@ -319,6 +461,26 @@
                 }
             },
             "SendToChatLabel": "Send to Chat"
+        },
+        "PartySheet": {
+            "Tabs": {
+                "overview": {
+                    "label": "Overview"
+                },
+                "party": {
+                    "label": "Party"
+                }
+            }
+        },
+        "TeamSheet": {
+            "Tabs": {
+                "overview": {
+                    "label": "Overview"
+                },
+                "party": {
+                    "label": "Parties"
+                }
+            }
         },
         "Status": {
             "AccuracyRoll": {

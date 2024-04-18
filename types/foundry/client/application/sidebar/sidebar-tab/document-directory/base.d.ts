@@ -23,6 +23,15 @@ declare global {
         /** The WorldCollection instance which this Sidebar Directory displays. */
         static get collection(): WorldCollection<WorldDocument>;
 
+        /**
+         * The type of Entry that is contained in this DirectoryTab.
+         * @type {string}
+         */
+        get entryType(): string;
+
+        /** @see {DocumentDirectory.collection} */
+        get collection(): WorldCollection<TDocument>;
+
         /** Initialize the content of the directory by categorizing folders and documents into a hierarchical tree structure. */
         initialize(): void;
 
@@ -55,6 +64,15 @@ declare global {
          *         0 if the position of a and b should not change.
          */
         protected static _sortAlphabetical(a: WorldDocument, b: WorldDocument): number;
+
+        /**
+         * Sort two Entries using their numeric sort fields.
+         * @param {Object} a    Some Entry
+         * @param {Object} b    Some other Entry
+         * @returns {number}    The sort order between Entries a and b
+         * @protected
+         */
+        static _sortStandard(a: WorldDocument, b: WorldDocument): number;
 
         protected override _render(force?: boolean, context?: SidebarDirectoryRenderOptions): Promise<void>;
 
@@ -103,6 +121,20 @@ declare global {
          * @param html The context menu HTML being rendered for the directory
          */
         protected _contextMenu(html: JQuery): void;
+
+        /**
+         * Get the set of ContextMenu options which should be used for Folders in a SidebarDirectory
+         * @returns {object[]}   The Array of context options passed to the ContextMenu instance
+         * @protected
+         */
+        protected _getFolderContextOptions(): ContextMenuEntry[]
+
+        /**
+         * Create a new Folder in this SidebarDirectory
+         * @param {PointerEvent} event    The originating button click event
+         * @protected
+         */
+        protected _onCreateFolder(event: PointerEvent): void;
     }
 
     interface SidebarDirectoryOptions extends ApplicationOptions {

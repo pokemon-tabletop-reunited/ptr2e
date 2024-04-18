@@ -1,16 +1,7 @@
 import { Trait } from "@data";
+import { Tab } from "@item/sheets/document.ts";
 import { sluggify } from "@utils";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/api.js";
-
-type Tab = {
-    id: string;
-    group: string;
-    icon: string;
-    label: string;
-    active?: boolean;
-    cssClass?: string;
-    hint: string;
-};
 
 class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2) {
     newCounter = 0;
@@ -63,7 +54,7 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         type: "userTraits",
     };
 
-    tabs: Record<string, Tab> = {
+    tabs: Record<string, Tab & {hint: string}> = {
         systemTraits: {
             id: "systemTraits",
             group: "type",

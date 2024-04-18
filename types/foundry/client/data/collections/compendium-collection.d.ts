@@ -227,10 +227,16 @@ declare global {
         documentId?: string | undefined;
         /** The parent document type. */
         documentType?: string;
-        /** An already-resolved document. */
-        doc?: ClientDocument | null;
         /** Any remaining Embedded Document parts. */
         embedded: string[];
+        /**  */
+        id?: string;
+        /** */
+        primaryId?: string;
+        /** */
+        primaryType?: string;
+        /** */
+        type?: string;
     }
 
     /**
