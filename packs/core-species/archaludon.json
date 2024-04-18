@@ -220,12 +220,12 @@
       ],
       "levelUp": [
         {
-          "name": "electro-shot",
+          "name": "leer",
           "gen": "scarlet-violet",
-          "level": 0
+          "level": 1
         },
         {
-          "name": "leer",
+          "name": "metal-claw",
           "gen": "scarlet-violet",
           "level": 1
         },
@@ -240,14 +240,53 @@
           "level": 12
         },
         {
+          "name": "metal-sound",
+          "gen": "scarlet-violet",
+          "level": 18
+        },
+        {
+          "name": "breaking-swipe",
+          "gen": "scarlet-violet",
+          "level": 24
+        },
+        {
+          "name": "dragon-tail",
+          "gen": "scarlet-violet",
+          "level": 30
+        },
+        {
+          "name": "iron-defense",
+          "gen": "scarlet-violet",
+          "level": 36
+        },
+        {
           "name": "focus-energy",
           "gen": "scarlet-violet",
           "level": 42
         },
         {
+          "name": "dragon-claw",
+          "gen": "scarlet-violet",
+          "level": 48
+        },
+        {
+          "name": "flash-cannon",
+          "gen": "scarlet-violet",
+          "level": 54
+        },
+        {
           "name": "metal-burst",
           "gen": "scarlet-violet",
           "level": 60
+        },
+        {
+          "name": "hyper-beam",
+          "gen": "scarlet-violet",
+          "level": 66
+        },
+        {
+          "name": "electro-shot",
+          "gen": "scarlet-violet"
         }
       ],
       "egg": [
@@ -269,8 +308,8 @@
     "size": {
       "height": 2,
       "weight": 60,
-      "category": "medium",
-      "type": "height"
+      "category": "large",
+      "type": "quad"
     },
     "captureRate": 10,
     "eggGroups": [],
@@ -289,30 +328,64 @@
       }
     },
     "number": 1018,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "bipedal",
+      "darkvision",
+      "fully-evolved"
+    ],
+    "diet": [
+      "terravore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "light-metal",
+        "heavy-metal"
+      ],
+      "basic": [
+        "stalwart",
+        "polarize"
+      ],
+      "advanced": [
+        "stamina",
+        "sturdy"
+      ],
+      "master": [
+        "juggernaut",
+        "raw-might"
+      ]
     },
     "movement": {
-      "primary": [],
-      "secondary": []
+      "primary": [
+        {
+          "type": "overland",
+          "value": 9
+        }
+      ],
+      "secondary": [
+        {
+          "type": "burrow",
+          "value": 4
+        }
+      ]
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "acrobatics": 20,
+      "climb": 40,
+      "conversation": 30,
+      "intimidate": 65,
+      "lift": 65,
+      "listen": 45,
+      "natural-world": 35,
+      "running": 40,
+      "spot": 45,
+      "survival": 50
+    },
+    "habitats": [],
+    "slug": "archaludon"
   },
   "_id": "6NKbLnXSDTXsUC0M",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.6NKbLnXSDTXsUC0M"
@@ -321,10 +394,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185555199,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!6NKbLnXSDTXsUC0M"
 }

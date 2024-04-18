@@ -161,6 +161,10 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "mystical-fire",
+          "gen": "sword-shield"
+        },
+        {
           "name": "dazzling-gleam",
           "gen": "scarlet-violet"
         },
@@ -194,6 +198,11 @@
           "level": 5
         },
         {
+          "name": "disarming-voice",
+          "gen": "scarlet-violet",
+          "level": 10
+        },
+        {
           "name": "aromatherapy",
           "gen": "sword-shield",
           "level": 15
@@ -204,9 +213,29 @@
           "level": 15
         },
         {
+          "name": "psybeam",
+          "gen": "scarlet-violet",
+          "level": 20
+        },
+        {
           "name": "heal-pulse",
           "gen": "scarlet-violet",
           "level": 25
+        },
+        {
+          "name": "dazzling-gleam",
+          "gen": "scarlet-violet",
+          "level": 30
+        },
+        {
+          "name": "calm-mind",
+          "gen": "scarlet-violet",
+          "level": 35
+        },
+        {
+          "name": "psychic",
+          "gen": "scarlet-violet",
+          "level": 40
         },
         {
           "name": "healing-wish",
@@ -228,17 +257,26 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "aromatic-mist",
+          "gen": "sword-shield"
+        },
+        {
           "name": "nuzzle",
           "gen": "scarlet-violet"
         }
       ],
-      "tutor": []
+      "tutor": [
+        {
+          "name": "expanding-force",
+          "gen": "sword-shield"
+        }
+      ]
     },
     "size": {
       "height": 0.4,
       "weight": 3.4,
-      "category": "medium",
-      "type": "height"
+      "category": "tiny",
+      "type": "quad"
     },
     "captureRate": 235,
     "eggGroups": [
@@ -275,30 +313,62 @@
       }
     },
     "number": 856,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "underdog",
+      "telepath",
+      "bipedal",
+      "aura-user",
+      "blindsense"
+    ],
+    "diet": [
+      "omnivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "healer",
+        "anticipation"
+      ],
+      "basic": [
+        "magic-bounce",
+        "telepathy"
+      ],
+      "advanced": [
+        "magic-guard",
+        "rattled"
+      ],
+      "master": [
+        "pastel-veil",
+        "serene-grace"
+      ]
     },
     "movement": {
-      "primary": [],
+      "primary": [
+        {
+          "type": "overland",
+          "value": 4
+        }
+      ],
       "secondary": []
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "acrobatics": 10,
+      "aura-sense": 30,
+      "conversation": 15,
+      "lift": 10,
+      "listen": 25,
+      "natural-world": 20,
+      "occult-psychic": 30,
+      "psychology": 30,
+      "running": 15,
+      "spot": 10,
+      "survival": 20
+    },
+    "habitats": [],
+    "slug": "hatenna"
   },
   "_id": "mbCAnP0byCqVjDfd",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.mbCAnP0byCqVjDfd"
@@ -307,10 +377,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!mbCAnP0byCqVjDfd"
 }

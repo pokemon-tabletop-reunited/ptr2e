@@ -37,9 +37,24 @@
           "level": 1
         },
         {
+          "name": "bulldoze",
+          "gen": "scarlet-violet",
+          "level": 15
+        },
+        {
           "name": "stomp",
           "gen": "scarlet-violet",
           "level": 20
+        },
+        {
+          "name": "iron-defense",
+          "gen": "scarlet-violet",
+          "level": 25
+        },
+        {
+          "name": "dig",
+          "gen": "scarlet-violet",
+          "level": 30
         },
         {
           "name": "strength",
@@ -47,9 +62,28 @@
           "level": 37
         },
         {
+          "name": "iron-head",
+          "gen": "scarlet-violet",
+          "level": 44
+        },
+        {
+          "name": "high-horsepower",
+          "gen": "scarlet-violet",
+          "level": 58
+        },
+        {
           "name": "superpower",
           "gen": "scarlet-violet",
           "level": 65
+        },
+        {
+          "name": "heavy-slam",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "play-rough",
+          "gen": "scarlet-violet",
+          "level": 51
         }
       ],
       "machine": [
@@ -140,6 +174,10 @@
         {
           "name": "taunt",
           "gen": "scarlet-violet"
+        },
+        {
+          "name": "superpower",
+          "gen": "sword-shield"
         },
         {
           "name": "revenge",
@@ -280,6 +318,10 @@
       ],
       "tutor": [
         {
+          "name": "steel-beam",
+          "gen": "sword-shield"
+        },
+        {
           "name": "steel-roller",
           "gen": "sword-shield"
         }
@@ -289,8 +331,8 @@
     "size": {
       "height": 3,
       "weight": 650,
-      "category": "medium",
-      "type": "height"
+      "category": "huge",
+      "type": "quad"
     },
     "captureRate": 90,
     "eggGroups": [
@@ -317,30 +359,70 @@
       }
     },
     "number": 879,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "quadruped",
+      "lumbering",
+      "pack-mon",
+      "underdog",
+      "fully-evolved"
+    ],
+    "diet": [
+      "herbivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "sheer-force",
+        "heavy-metal"
+      ],
+      "basic": [
+        "filter",
+        "intimidate"
+      ],
+      "advanced": [
+        "sand-force",
+        "sand-rush"
+      ],
+      "master": [
+        "huge-power",
+        "mold-breaker"
+      ]
     },
     "movement": {
-      "primary": [],
-      "secondary": []
+      "primary": [
+        {
+          "type": "overland",
+          "value": 3
+        }
+      ],
+      "secondary": [
+        {
+          "type": "swim",
+          "value": 3
+        }
+      ]
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "climb": 30,
+      "conversation": 40,
+      "husbandry": 20,
+      "intimidate": 50,
+      "leadership": 40,
+      "lift": 75,
+      "listen": 60,
+      "natural-world": 50,
+      "navigate": 50,
+      "negotiation": 40,
+      "running": 45,
+      "spot": 50,
+      "survival": 50,
+      "swim": 40
+    },
+    "habitats": [],
+    "slug": "copperajah"
   },
   "_id": "n2W7jTlhfZD4s7Ce",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.n2W7jTlhfZD4s7Ce"
@@ -349,10 +431,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185555199,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!n2W7jTlhfZD4s7Ce"
 }

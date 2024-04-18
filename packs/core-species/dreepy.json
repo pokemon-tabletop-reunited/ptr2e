@@ -4,8 +4,8 @@
   "type": "species",
   "system": {
     "types": [
-      "dragon",
-      "ghost"
+      "ghost",
+      "dragon"
     ],
     "stats": {
       "hp": 28,
@@ -48,11 +48,23 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "confuse-ray",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "curse",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "grudge",
           "gen": "sword-shield"
         },
         {
           "name": "sucker-punch",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "dragon-tail",
           "gen": "scarlet-violet"
         }
       ],
@@ -130,13 +142,18 @@
           "gen": "scarlet-violet"
         }
       ],
-      "tutor": []
+      "tutor": [
+        {
+          "name": "draco-meteor",
+          "gen": "sword-shield"
+        }
+      ]
     },
     "size": {
       "height": 0.5,
       "weight": 2,
-      "category": "medium",
-      "type": "height"
+      "category": "tiny",
+      "type": "length"
     },
     "captureRate": 45,
     "eggGroups": [
@@ -174,30 +191,64 @@
       }
     },
     "number": 885,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "underdog",
+      "living-weapon",
+      "missile",
+      "breathless",
+      "hover",
+      "jet",
+      "pack-mon"
+    ],
+    "diet": [
+      "nullivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "clear-body",
+        "infiltrator"
+      ],
+      "basic": [
+        "cursed-body",
+        "rock-head"
+      ],
+      "advanced": [
+        "aerodynamic",
+        "artillery"
+      ],
+      "master": [
+        "perforate",
+        "sniper"
+      ]
     },
     "movement": {
-      "primary": [],
+      "primary": [
+        {
+          "type": "flight",
+          "value": 21
+        }
+      ],
       "secondary": []
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "conversation": 25,
+      "intimidate": 15,
+      "leadership": 10,
+      "lift": 10,
+      "listen": 10,
+      "negotiation": 20,
+      "occult-ghosts": 25,
+      "ride": 30,
+      "running": 40,
+      "spot": 40,
+      "stealth": 25
+    },
+    "habitats": [],
+    "slug": "dreepy"
   },
   "_id": "D7EFVprVAaeNuqrX",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.D7EFVprVAaeNuqrX"
@@ -206,10 +257,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!D7EFVprVAaeNuqrX"
 }

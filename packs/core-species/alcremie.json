@@ -17,11 +17,6 @@
     "moves": {
       "levelUp": [
         {
-          "name": "decorate",
-          "gen": "scarlet-violet",
-          "level": 0
-        },
-        {
           "name": "tackle",
           "gen": "scarlet-violet",
           "level": 1
@@ -42,6 +37,16 @@
           "level": 1
         },
         {
+          "name": "draining-kiss",
+          "gen": "scarlet-violet",
+          "level": 15
+        },
+        {
+          "name": "charm",
+          "gen": "scarlet-violet",
+          "level": 20
+        },
+        {
           "name": "aromatherapy",
           "gen": "sword-shield",
           "level": 20
@@ -57,14 +62,28 @@
           "level": 30
         },
         {
+          "name": "dazzling-gleam",
+          "gen": "scarlet-violet",
+          "level": 35
+        },
+        {
           "name": "recover",
           "gen": "scarlet-violet",
           "level": 40
         },
         {
+          "name": "misty-terrain",
+          "gen": "scarlet-violet",
+          "level": 45
+        },
+        {
           "name": "entrainment",
           "gen": "scarlet-violet",
           "level": 50
+        },
+        {
+          "name": "decorate",
+          "gen": "scarlet-violet"
         }
       ],
       "machine": [
@@ -119,6 +138,10 @@
         {
           "name": "charm",
           "gen": "scarlet-violet"
+        },
+        {
+          "name": "attract",
+          "gen": "sword-shield"
         },
         {
           "name": "sleep-talk",
@@ -251,12 +274,17 @@
           "gen": "scarlet-violet"
         }
       ],
-      "tutor": []
+      "tutor": [
+        {
+          "name": "misty-explosion",
+          "gen": "sword-shield"
+        }
+      ]
     },
     "size": {
       "height": 0.3,
       "weight": 0.5,
-      "category": "medium",
+      "category": "tiny",
       "type": "height"
     },
     "captureRate": 100,
@@ -284,30 +312,59 @@
       }
     },
     "number": 869,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "legless",
+      "bait",
+      "underdog",
+      "fully-evolved"
+    ],
+    "diet": [
+      "sweets"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "sweet-veil",
+        "aroma-veil"
+      ],
+      "basic": [
+        "misty-surge",
+        "run-away"
+      ],
+      "advanced": [
+        "ripen",
+        "harvest"
+      ],
+      "master": [
+        "power-of-alchemy",
+        "pastel-veil"
+      ]
     },
     "movement": {
-      "primary": [],
+      "primary": [
+        {
+          "type": "overland",
+          "value": 7
+        }
+      ],
       "secondary": []
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "conversation": 50,
+      "husbandry": 55,
+      "lift": 30,
+      "listen": 40,
+      "natural-world": 40,
+      "negotiation": 45,
+      "occult-fairies": 50,
+      "running": 35,
+      "spot": 40
+    },
+    "habitats": [],
+    "slug": "alcremie"
   },
   "_id": "AvfxaTSs2QBqaZZh",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.AvfxaTSs2QBqaZZh"
@@ -316,10 +373,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185555199,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!AvfxaTSs2QBqaZZh"
 }

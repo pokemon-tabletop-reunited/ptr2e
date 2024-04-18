@@ -37,6 +37,16 @@
           "level": 10
         },
         {
+          "name": "draining-kiss",
+          "gen": "scarlet-violet",
+          "level": 15
+        },
+        {
+          "name": "charm",
+          "gen": "scarlet-violet",
+          "level": 20
+        },
+        {
           "name": "aromatherapy",
           "gen": "sword-shield",
           "level": 20
@@ -52,9 +62,19 @@
           "level": 30
         },
         {
+          "name": "dazzling-gleam",
+          "gen": "scarlet-violet",
+          "level": 35
+        },
+        {
           "name": "recover",
           "gen": "scarlet-violet",
           "level": 40
+        },
+        {
+          "name": "misty-terrain",
+          "gen": "scarlet-violet",
+          "level": 45
         },
         {
           "name": "entrainment",
@@ -86,6 +106,10 @@
         {
           "name": "charm",
           "gen": "scarlet-violet"
+        },
+        {
+          "name": "attract",
+          "gen": "sword-shield"
         },
         {
           "name": "sleep-talk",
@@ -143,8 +167,8 @@
     "size": {
       "height": 0.2,
       "weight": 0.3,
-      "category": "medium",
-      "type": "height"
+      "category": "tiny",
+      "type": "quad"
     },
     "captureRate": 200,
     "eggGroups": [
@@ -171,30 +195,58 @@
       }
     },
     "number": 868,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "hover",
+      "bait",
+      "underdog"
+    ],
+    "diet": [
+      "sweets"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "sweet-veil",
+        "aroma-veil"
+      ],
+      "basic": [
+        "misty-surge",
+        "run-away"
+      ],
+      "advanced": [
+        "ripen",
+        "harvest"
+      ],
+      "master": [
+        "power-of-alchemy",
+        "pastel-veil"
+      ]
     },
     "movement": {
-      "primary": [],
+      "primary": [
+        {
+          "type": "flight",
+          "value": 5
+        }
+      ],
       "secondary": []
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "conversation": 30,
+      "husbandry": 30,
+      "lift": 15,
+      "listen": 20,
+      "natural-world": 20,
+      "negotiation": 25,
+      "occult-fairies": 25,
+      "running": 20,
+      "spot": 25
+    },
+    "habitats": [],
+    "slug": "milcery"
   },
   "_id": "O3Duv8YFWLAx6MhQ",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.O3Duv8YFWLAx6MhQ"
@@ -203,10 +255,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!O3Duv8YFWLAx6MhQ"
 }

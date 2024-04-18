@@ -28,6 +28,16 @@
           "level": 1
         },
         {
+          "name": "protect",
+          "gen": "sword-shield",
+          "level": 7
+        },
+        {
+          "name": "brutal-swing",
+          "gen": "sword-shield",
+          "level": 14
+        },
+        {
           "name": "ancient-power",
           "gen": "sword-shield",
           "level": 21
@@ -53,9 +63,19 @@
           "level": 49
         },
         {
+          "name": "crunch",
+          "gen": "sword-shield",
+          "level": 56
+        },
+        {
           "name": "fishious-rend",
           "gen": "sword-shield",
           "level": 63
+        },
+        {
+          "name": "dragon-pulse",
+          "gen": "sword-shield",
+          "level": 70
         },
         {
           "name": "dragon-rush",
@@ -236,7 +256,7 @@
     "size": {
       "height": 2.3,
       "weight": 215,
-      "category": "medium",
+      "category": "large",
       "type": "height"
     },
     "captureRate": 45,
@@ -252,30 +272,62 @@
       }
     },
     "number": 882,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "bipedal",
+      "underdog",
+      "fully-evolved",
+      "scientific-abomination",
+      "gilled",
+      "rapid"
+    ],
+    "diet": [
+      "carnivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "water-absorb",
+        "strong-jaw"
+      ],
+      "basic": [
+        "sand-rush",
+        "torrent"
+      ],
+      "advanced": [
+        "earth-eater",
+        "juggernaut"
+      ],
+      "master": [
+        "anger-point",
+        "speed-boost"
+      ]
     },
     "movement": {
-      "primary": [],
-      "secondary": []
+      "primary": [
+        {
+          "type": "overland",
+          "value": 12
+        }
+      ],
+      "secondary": [
+        {
+          "type": "swim",
+          "value": 3
+        }
+      ]
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "acrobatics": 15,
+      "lift": 20,
+      "listen": 30,
+      "running": 50,
+      "spot": 30
+    },
+    "habitats": [],
+    "slug": "dracovish"
   },
   "_id": "0wvGdIiZmFZEKcod",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.0wvGdIiZmFZEKcod"
@@ -284,10 +336,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!0wvGdIiZmFZEKcod"
 }

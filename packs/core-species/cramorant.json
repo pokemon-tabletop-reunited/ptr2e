@@ -1,19 +1,25 @@
 {
-    "name": "cramorant",
-    "img": "/systems/ptr2e/img/icons/species_icon.webp",
-    "type": "species",
-    "system": {
-        "types": [
-            "flying",
-            "water"
-        ],
-        "stats": {
-            "hp": 70,
-            "atk": 85,
-            "def": 55,
-            "spa": 85,
-            "spd": 95,
-            "spe": 85
+  "name": "cramorant",
+  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "type": "species",
+  "system": {
+    "types": [
+      "flying",
+      "water"
+    ],
+    "stats": {
+      "hp": 70,
+      "atk": 85,
+      "def": 55,
+      "spa": 85,
+      "spd": 95,
+      "spe": 85
+    },
+    "moves": {
+      "machine": [
+        {
+          "name": "fly",
+          "gen": "scarlet-violet"
         },
         "moves": {
             "machine": [
@@ -122,6 +128,10 @@
                     "gen": "scarlet-violet"
                 },
                 {
+                    "name": "dive",
+                    "gen": "sword-shield"
+                },
+                {
                     "name": "feather-dance",
                     "gen": "scarlet-violet"
                 },
@@ -224,6 +234,11 @@
                     "level": 1
                 },
                 {
+                    "name": "belch",
+                    "gen": "sword-shield",
+                    "level": 1
+                },
+                {
                     "name": "water-gun",
                     "gen": "scarlet-violet",
                     "level": 7
@@ -249,12 +264,30 @@
                     "level": 35
                 },
                 {
+                    "name": "amnesia",
+                    "gen": "scarlet-violet",
+                    "level": 42
+                },
+                {
                     "name": "thrash",
                     "gen": "scarlet-violet",
                     "level": 49
+                },
+                {
+                    "name": "hydro-pump",
+                    "gen": "scarlet-violet",
+                    "level": 56
                 }
             ],
             "egg": [
+                {
+                    "name": "feather-dance",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "aerial-ace",
+                    "gen": "scarlet-violet"
+                },
                 {
                     "name": "roost",
                     "gen": "scarlet-violet"
@@ -276,26 +309,20 @@
                     "gen": "scarlet-violet"
                 }
             ],
-            "tutor": []
+            "tutor": [
+                {
+                    "name": "dual-wingbeat",
+                    "gen": "sword-shield"
+                }
+            ]
         },
-        "size": {
-            "height": 0.8,
-            "weight": 18,
-            "category": "small",
-            "type": "quad"
+        {
+          "name": "hydro-pump",
+          "gen": "scarlet-violet"
         },
-        "captureRate": 45,
-        "eggGroups": [
-            "water1",
-            "flying"
-        ],
-        "genderRatio": 4,
-        "evolutions": {
-            "full": {
-                "name": "cramorant",
-                "details": null,
-                "evolutions": []
-            }
+        {
+          "name": "surf",
+          "gen": "scarlet-violet"
         },
         "number": 845,
         "traits": [
@@ -310,7 +337,7 @@
         ],
         "abilities": {
             "starting": [
-                "gulp-missile"
+                "regurgitation"
             ],
             "basic": [
                 "simple",
@@ -325,35 +352,113 @@
                 "deadeye"
             ]
         },
-        "movement": {
-            "primary": [
-                {
-                    "type": "flight",
-                    "value": 13
-                }
-            ],
-            "secondary": [
-                {
-                    "type": "swim",
-                    "value": 8
-                }
-            ]
+        {
+          "name": "blizzard",
+          "gen": "scarlet-violet"
         },
-        "skills": {
-            "acrobatics": 40,
-            "climb": 10,
-            "conversation": 25,
-            "lift": 60,
-            "listen": 40,
-            "natural-world": 40,
-            "navigate": 30,
-            "running": 45,
-            "spot": 50,
-            "survival": 30,
-            "swim": 45
+        {
+          "name": "hyper-beam",
+          "gen": "scarlet-violet"
         },
-        "habitats": []
+        "habitats": [],
+        "slug": "cramorant"
     },
-    "_id": "J2OSFAP2IMeHyGc9",
-    "effects": []
+    "size": {
+      "height": 0.8,
+      "weight": 18,
+      "category": "small",
+      "type": "quad"
+    },
+    "captureRate": 45,
+    "eggGroups": [
+      "water1",
+      "flying"
+    ],
+    "genderRatio": 4,
+    "evolutions": {
+      "full": {
+        "name": "cramorant",
+        "details": null,
+        "evolutions": []
+      }
+    },
+    "number": 845,
+    "traits": [
+      "pokemon",
+      "winged",
+      "underdog",
+      "natural-backpack",
+      "fully-evolved"
+    ],
+    "diet": [
+      "carnivore"
+    ],
+    "abilities": {
+      "starting": [
+        "gulp-missile"
+      ],
+      "basic": [
+        "simple",
+        "gluttony"
+      ],
+      "advanced": [
+        "swift-swim",
+        "adaptability"
+      ],
+      "master": [
+        "stubborn",
+        "deadeye"
+      ]
+    },
+    "movement": {
+      "primary": [
+        {
+          "type": "flight",
+          "value": 13
+        }
+      ],
+      "secondary": [
+        {
+          "type": "swim",
+          "value": 8
+        }
+      ]
+    },
+    "skills": {
+      "acrobatics": 40,
+      "climb": 10,
+      "conversation": 25,
+      "lift": 60,
+      "listen": 40,
+      "natural-world": 40,
+      "navigate": 30,
+      "running": 45,
+      "spot": 50,
+      "survival": 30,
+      "swim": 45
+    },
+    "habitats": [],
+    "slug": "cramorant"
+  },
+  "_id": "J2OSFAP2IMeHyGc9",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-species.Item.J2OSFAP2IMeHyGc9"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.318",
+    "systemId": "ptr2e",
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!J2OSFAP2IMeHyGc9"
 }
