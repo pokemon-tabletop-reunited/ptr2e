@@ -1,5 +1,16 @@
 import Tagify from "@yaireo/tagify";
 
+function transformWhitelist(whitelist: WhitelistData): string[] | TagData[] {
+    return Array.isArray(whitelist)
+        ? whitelist
+        : Object.entries(whitelist)
+              .map(([key, locPath]) => ({
+                  id: key,
+                  value: game.i18n.localize(typeof locPath === "string" ? locPath : locPath.label),
+              }))
+              .sort((a, b) => a.value.localeCompare(b.value, game.i18n.lang));
+}
+
 /**
  * @param {HTMLInputElement} input 
  * @param {Object} options
@@ -7,14 +18,16 @@ import Tagify from "@yaireo/tagify";
  * @param {number} options.maxTags
  * @param {boolean} options.enforceWhitelist 
  */
-function tagify(input: HTMLInputElement, { whitelist, maxTags, enforceWhitelist = true, traits = false }: { whitelist?: any, maxTags?: any, enforceWhitelist?: boolean, traits?: boolean } = {}) {
+function tagify(input: HTMLInputElement, options?: TagifyOptions): Tagify<TagRecord>;
+function tagify(input: HTMLInputElement | null, options?: TagifyOptions): Tagify<TagRecord> | null;
+function tagify(input: HTMLInputElement | null, { whitelist, maxTags, enforceWhitelist = true, traits = false }: TagifyOptions = {}): Tagify<TagRecord> | null {
     if (input?.hasAttribute("name") && input.dataset.dtype !== "JSON") {
         throw Error("Usable only on input elements with JSON data-dtype");
     } else if (!input) {
         return null;
     }
 
-    const whitelistTransformed = whitelist; //? transformWhitelist(whitelist) : [];
+    const whitelistTransformed = whitelist ? transformWhitelist(whitelist) : [];
     const maxItems = whitelist ? Object.keys(whitelistTransformed).length : undefined;
 
     const tagify = new Tagify(input, {
@@ -56,5 +69,29 @@ function tagify(input: HTMLInputElement, { whitelist, maxTags, enforceWhitelist 
 
     return tagify;
 }
+
+/**
+ * Standard properties expected by Tagify, where the `id` and `value` is what Foundry and the system would respectively
+ * call the `value` and `label`
+ */
+type TagRecord = Record<"id" | "value", string>;
+
+type TagData = TagRecord & {
+    title?: string;
+    class?: string;
+};
+
+interface TagifyOptions {
+    /** The maximum number of tags that may be added to the input */
+    maxTags?: number;
+    /** A whitelist record */
+    whitelist?: WhitelistData;
+    /** Whether this whitelist is exhaustive */
+    enforceWhitelist?: boolean;
+    /** Whether or not this is a traits list */
+    traits?: boolean
+}
+
+type WhitelistData = string[] | Record<string, string | { label: string }>;
 
 export { tagify }

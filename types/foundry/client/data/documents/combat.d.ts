@@ -1,3 +1,5 @@
+import TypeDataModel from "../../../common/abstract/type-data.js";
+import { CombatSchema } from "../../../common/documents/combat.js";
 import type { ClientBaseCombat } from "./client-base-mixes.d.ts";
 
 declare global {
@@ -6,7 +8,7 @@ declare global {
      * Each Combat document contains CombatData which defines its data schema.
      * @param [data={}] Initial data provided to construct the Combat document
      */
-    class Combat extends ClientBaseCombat {
+    class Combat<TSchema extends TypeDataModel = TypeDataModel> extends ClientBaseCombat {
         constructor(data: PreCreate<foundry.documents.CombatSource>, context?: DocumentConstructionContext<null>);
 
         /** Track the sorted turn order of this combat encounter */
@@ -232,8 +234,11 @@ declare global {
         protected _onStartTurn(combatant: Combatant<this>): Promise<void>;
     }
 
-    interface Combat extends ClientBaseCombat {
+    interface Combat<TSchema extends TypeDataModel = TypeDataModel> extends ClientBaseCombat {
         readonly combatants: foundry.abstract.EmbeddedCollection<Combatant<this>>;
+
+        system: TSchema;
+        _source: SourceFromSchema<CombatSchema<TSchema>>;
     }
 
     interface CombatHistoryData {

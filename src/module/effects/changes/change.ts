@@ -8,6 +8,7 @@ import { ChangeModelOptions, ChangeSchema, ChangeSource, ResolveValueParams } fr
 import { DataModelValidationOptions } from "types/foundry/common/abstract/data.js";
 import * as R from "remeda";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
+import { ChangeModelTypes } from "@data";
 
 class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.abstract.DataModel<
     ActiveEffectSystem,
@@ -15,7 +16,15 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
 > {
     static TYPE = "";
 
-    sourceIndex: number | null = null;
+    static get label() {
+        return "PTR2E.Effect.FIELDS.ChangeType."+this.TYPE;
+    }
+
+    get sourceIndex(): number | null {
+        return this.#sourceIndex ?? this.effect.changes.indexOf(this);
+    }
+
+    #sourceIndex: number | null = null;
 
     protected suppressWarnings = false;
 
@@ -29,7 +38,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
 
         // Always suppress warnings if the actor has no ID (and is therefore a temporary clone)
         this.suppressWarnings = options.suppressWarnings ?? !this.actor?.id;
-        this.sourceIndex = options.sourceIndex ?? null;
+        this.#sourceIndex = options.sourceIndex ?? null;
 
         this.label = this.label
             ? game.i18n.format(this.resolveInjectedProperties(this.label), {
@@ -43,12 +52,25 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
         const fields = foundry.data.fields;
         return {
             // Default Foundry Fields
-            key: new fields.StringField({ required: true, label: "EFFECT.ChangeKey" }),
-            value: new ResolvableValueField({ required: true, nullable: false, initial: "", label: "EFFECT.ChangeValue" }),
+            key: new fields.StringField({
+                required: true,
+                label: "PTR2E.Effect.FIELDS.ChangeKey.label",
+                hint: "PTR2E.Effect.FIELDS.ChangeKey.hint",
+                initial: ""
+            }),
+            value: new ResolvableValueField({
+                required: true,
+                nullable: false,
+                initial: "",
+                label: "PTR2E.Effect.FIELDS.ChangeValue.label",
+                hint: "PTR2E.Effect.FIELDS.ChangeValue.hint",
+            }),
             mode: new fields.NumberField({
                 integer: true,
                 initial: CONST.ACTIVE_EFFECT_MODES.ADD,
-                label: "EFFECT.ChangeMode",
+                choices: Object.fromEntries(Object.entries(CONST.ACTIVE_EFFECT_MODES).map(([k, v]) => [v, k])),
+                label: "PTR2E.Effect.FIELDS.ChangeMode.label",
+                hint: "PTR2E.Effect.FIELDS.ChangeMode.hint",
             }),
             priority: new fields.NumberField({}),
 
@@ -57,8 +79,11 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
                 required: true,
                 blank: false,
                 initial: this.TYPE,
+                choices: ChangeModelTypes,
                 validate: (value) => value === this.TYPE,
                 validationError: `must be equal to "${this.TYPE}"`,
+                label: "PTR2E.Effect.FIELDS.ChangeType.label",
+                // hint: "PTR2E.Effect.FIELDS.ChangeType.hint",
             }),
 
             // Custom Fields
@@ -67,7 +92,8 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
                 nullable: false,
                 blank: false,
                 initial: undefined,
-                label: "EFFECT.ChangeLabel",
+                label: "PTR2E.Effect.FIELDS.ChangeLabel.label",
+                // hint: "PTR2E.Effect.FIELDS.ChangeLabel.hint",
             }),
             predicate: new PredicateField(),
             ignored: new fields.BooleanField({ initial: false }),
@@ -412,7 +438,12 @@ interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
      * alter itself before its parent effect is stored on a document; it can also alter the effect source itself in the same
      * manner.
      */
-    preCreate?({ changeSource, effectSource, pendingItems, context }: ChangeModel.PreCreateParams): Promise<void>;
+    preCreate?({
+        changeSource,
+        effectSource,
+        pendingItems,
+        context,
+    }: ChangeModel.PreCreateParams): Promise<void>;
 
     /**
      * Runs before this rules element's parent item is created. The item is temporarilly constructed. A rule element can
@@ -485,9 +516,7 @@ namespace ChangeModel {
         context: DocumentModificationContext<ActorPTR2e | null>;
     }
 
-    export interface AfterRollParams {
-
-    }
+    export interface AfterRollParams {}
 }
 
 export default ChangeModel;

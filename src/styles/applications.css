@@ -11,11 +11,17 @@
   align-items: center;
 }
 .sheet.move-sheet,
-.sheet.species-sheet {
+.sheet.species-sheet,
+.sheet.party-sheet,
+.sheet.team-sheet,
+.sheet.active-effect-sheet {
   background: var(--appv2-background);
 }
 .sheet.move-sheet .window-content,
-.sheet.species-sheet .window-content {
+.sheet.species-sheet .window-content,
+.sheet.party-sheet .window-content,
+.sheet.team-sheet .window-content,
+.sheet.active-effect-sheet .window-content {
   display: grid;
   grid-template-columns: 45% 55%;
   grid-template-rows: calc(1rem + 48px) min-content auto;
@@ -23,32 +29,47 @@
   padding: 0;
 }
 .sheet.move-sheet .window-content .sheet-header,
-.sheet.species-sheet .window-content .sheet-header {
+.sheet.species-sheet .window-content .sheet-header,
+.sheet.party-sheet .window-content .sheet-header,
+.sheet.team-sheet .window-content .sheet-header,
+.sheet.active-effect-sheet .window-content .sheet-header {
   grid-area: header;
   padding: 0.5rem;
   padding-right: 1rem;
   border-bottom: 1px solid var(--color-light-6);
 }
 .sheet.move-sheet .window-content .sheet-header fieldset,
-.sheet.species-sheet .window-content .sheet-header fieldset {
+.sheet.species-sheet .window-content .sheet-header fieldset,
+.sheet.party-sheet .window-content .sheet-header fieldset,
+.sheet.team-sheet .window-content .sheet-header fieldset,
+.sheet.active-effect-sheet .window-content .sheet-header fieldset {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 .sheet.move-sheet .window-content .sheet-header img,
-.sheet.species-sheet .window-content .sheet-header img {
+.sheet.species-sheet .window-content .sheet-header img,
+.sheet.party-sheet .window-content .sheet-header img,
+.sheet.team-sheet .window-content .sheet-header img,
+.sheet.active-effect-sheet .window-content .sheet-header img {
   flex: 0 0 48px;
   height: 48px;
   margin: 0 0.25rem;
   border: unset;
 }
 .sheet.move-sheet .window-content .sheet-header .title,
-.sheet.species-sheet .window-content .sheet-header .title {
+.sheet.species-sheet .window-content .sheet-header .title,
+.sheet.party-sheet .window-content .sheet-header .title,
+.sheet.team-sheet .window-content .sheet-header .title,
+.sheet.active-effect-sheet .window-content .sheet-header .title {
   font-size: 2.5rem;
 }
 .sheet.move-sheet .window-content nav.tabs,
-.sheet.species-sheet .window-content nav.tabs {
+.sheet.species-sheet .window-content nav.tabs,
+.sheet.party-sheet .window-content nav.tabs,
+.sheet.team-sheet .window-content nav.tabs,
+.sheet.active-effect-sheet .window-content nav.tabs {
   grid-area: nav;
   border: unset;
   justify-content: space-evenly;
@@ -60,14 +81,20 @@
   gap: unset;
 }
 .sheet.move-sheet .window-content aside.traits,
-.sheet.species-sheet .window-content aside.traits {
+.sheet.species-sheet .window-content aside.traits,
+.sheet.party-sheet .window-content aside.traits,
+.sheet.team-sheet .window-content aside.traits,
+.sheet.active-effect-sheet .window-content aside.traits {
   grid-area: traits;
   min-height: calc(0.5rem + 38px);
   padding: 0.25rem;
   border-bottom: 1px solid var(--color-light-6);
 }
 .sheet.move-sheet .window-content aside.traits tags,
-.sheet.species-sheet .window-content aside.traits tags {
+.sheet.species-sheet .window-content aside.traits tags,
+.sheet.party-sheet .window-content aside.traits tags,
+.sheet.team-sheet .window-content aside.traits tags,
+.sheet.active-effect-sheet .window-content aside.traits tags {
   --tags-border-color: var(--color-light-6);
   --tag-bg: var(--color-light-4);
   --tag-hover: var(--color-light-3);
@@ -75,16 +102,25 @@
   --tag-pad: 0;
 }
 .sheet.move-sheet .window-content aside.traits tags .trait,
-.sheet.species-sheet .window-content aside.traits tags .trait {
+.sheet.species-sheet .window-content aside.traits tags .trait,
+.sheet.party-sheet .window-content aside.traits tags .trait,
+.sheet.team-sheet .window-content aside.traits tags .trait,
+.sheet.active-effect-sheet .window-content aside.traits tags .trait {
   display: inline-flex;
   padding: 0.25rem;
 }
 .sheet.move-sheet .window-content aside.traits tags .trait .tag,
-.sheet.species-sheet .window-content aside.traits tags .trait .tag {
+.sheet.species-sheet .window-content aside.traits tags .trait .tag,
+.sheet.party-sheet .window-content aside.traits tags .trait .tag,
+.sheet.team-sheet .window-content aside.traits tags .trait .tag,
+.sheet.active-effect-sheet .window-content aside.traits tags .trait .tag {
   text-decoration: underline;
 }
 .sheet.move-sheet .window-content section.tab,
-.sheet.species-sheet .window-content section.tab {
+.sheet.species-sheet .window-content section.tab,
+.sheet.party-sheet .window-content section.tab,
+.sheet.team-sheet .window-content section.tab,
+.sheet.active-effect-sheet .window-content section.tab {
   grid-area: main;
   height: 100%;
   overflow: hidden;
@@ -92,12 +128,21 @@
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .editor,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .editor,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .editor,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .editor,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .editor .editor-content {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor .editor-content {
   min-height: 200px;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 0.5rem;
@@ -106,22 +151,37 @@
   border-radius: 8px;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group {
   justify-content: space-between;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label {
   flex: 0 0 60%;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields {
   flex: 0 0 35%;
   text-align: center;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .movement-header,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .movement-header,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -132,8 +192,14 @@
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls {
   flex: 0 0 45px;
   display: flex;
   flex-direction: row;
@@ -142,8 +208,14 @@
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .movement,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .movement,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .skill,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .skill,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill {
   padding: 0.25rem;
   border: 1px solid var(--color-light-6);
   border-radius: 8px;
@@ -153,8 +225,14 @@
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .movement.center,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .movement.center,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .skill.center,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .skill.center,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill.center {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -162,81 +240,135 @@
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center small,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center small {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill.center small {
   color: var(--color-light-5);
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group {
   justify-content: space-between;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group label {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group label {
   flex: 0 0 30%;
   text-align: center;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields {
   flex: 0 0 60%;
   text-align: center;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .item-controls {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .item-controls {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .skill,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .skill,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill {
   grid-template-columns: 30% auto 15px;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .move,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .move {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .move,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .move,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .move,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .move {
   display: flex;
   flex-direction: row;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .move .form-group,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .move .form-group {
+.sheet.species-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.sheet.party-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.sheet.team-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .move .form-group {
   flex: 1;
   text-align: center;
   margin: 0.25rem;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=attack],
-.sheet.species-sheet .window-content section.tab[data-tab=attack] {
+.sheet.species-sheet .window-content section.tab[data-tab=attack],
+.sheet.party-sheet .window-content section.tab[data-tab=attack],
+.sheet.team-sheet .window-content section.tab[data-tab=attack],
+.sheet.active-effect-sheet .window-content section.tab[data-tab=attack] {
   padding: 0;
 }
 .sheet.move-sheet .window-content section.tab form.scroll,
-.sheet.species-sheet .window-content section.tab form.scroll {
+.sheet.species-sheet .window-content section.tab form.scroll,
+.sheet.party-sheet .window-content section.tab form.scroll,
+.sheet.team-sheet .window-content section.tab form.scroll,
+.sheet.active-effect-sheet .window-content section.tab form.scroll {
   padding: 1rem;
   overflow-y: scroll;
   overflow-x: hidden;
   height: 100%;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=actions].active,
-.sheet.species-sheet .window-content section.tab[data-tab=actions].active {
+.sheet.species-sheet .window-content section.tab[data-tab=actions].active,
+.sheet.party-sheet .window-content section.tab[data-tab=actions].active,
+.sheet.team-sheet .window-content section.tab[data-tab=actions].active,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active {
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: 0.25rem 1rem 1rem 1rem;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions,
-.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions {
+.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions,
+.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions,
+.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions {
   flex: 0 0 50%;
   margin: 0.25rem;
   display: flex;
   flex-direction: column;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header,
-.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions header {
+.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions header,
+.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions header,
+.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions header,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -244,16 +376,25 @@
   border-bottom: 1px solid #fefefe;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
-.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name {
+.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
+.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
+.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name {
   font-size: 18px;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content,
-.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions content {
+.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions content,
+.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions content,
+.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions content,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions content {
   display: flex;
   flex-direction: column;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
-.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions content .action {
+.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
+.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
+.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
+.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions content .action {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -261,11 +402,17 @@
   margin: 0.5rem 0;
 }
 .sheet.move-sheet .window-content section.tab[data-tab="overview"] .item-description,
-.sheet.species-sheet .window-content section.tab[data-tab="overview"] .item-description {
+.sheet.species-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.sheet.party-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.sheet.team-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.sheet.active-effect-sheet .window-content section.tab[data-tab="overview"] .item-description {
   min-height: 150px;
 }
 .sheet.move-sheet .window-content section.tab fieldset,
-.sheet.species-sheet .window-content section.tab fieldset {
+.sheet.species-sheet .window-content section.tab fieldset,
+.sheet.party-sheet .window-content section.tab fieldset,
+.sheet.team-sheet .window-content section.tab fieldset,
+.sheet.active-effect-sheet .window-content section.tab fieldset {
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -276,18 +423,28 @@
   border-color: var(--color-light-6);
 }
 .sheet.move-sheet .window-content section.tab fieldset legend,
-.sheet.species-sheet .window-content section.tab fieldset legend {
+.sheet.species-sheet .window-content section.tab fieldset legend,
+.sheet.party-sheet .window-content section.tab fieldset legend,
+.sheet.team-sheet .window-content section.tab fieldset legend,
+.sheet.active-effect-sheet .window-content section.tab fieldset legend {
   font-size: var(--font-size-15);
   font-weight: bold;
 }
 .sheet.move-sheet .window-content section.tab .hint,
-.sheet.species-sheet .window-content section.tab .hint {
+.sheet.species-sheet .window-content section.tab .hint,
+.sheet.party-sheet .window-content section.tab .hint,
+.sheet.team-sheet .window-content section.tab .hint,
+.sheet.active-effect-sheet .window-content section.tab .hint {
   margin: 0;
   font-size: var(--font-size-14);
   color: var(--color-light-5);
+  white-space: pre-line;
 }
 .sheet.move-sheet .window-content section.tab textarea,
-.sheet.species-sheet .window-content section.tab textarea {
+.sheet.species-sheet .window-content section.tab textarea,
+.sheet.party-sheet .window-content section.tab textarea,
+.sheet.team-sheet .window-content section.tab textarea,
+.sheet.active-effect-sheet .window-content section.tab textarea {
   resize: vertical;
 }
 .sheet.species-sheet .window-content section.tab[data-tab=details] {
@@ -507,6 +664,684 @@
   background: #346899;
   border-radius: 10px;
   margin: 0.25rem;
+}
+.sheet.party-sheet .window-content {
+  grid-template-columns: unset;
+  grid-template-rows: 44px auto;
+  grid-template-areas: "nav" "main";
+}
+.sheet.party-sheet .window-content nav.tabs {
+  border: unset;
+  border-bottom: 1px solid var(--border-color);
+}
+.sheet.party-sheet .window-content .tab[data-tab="overview"] {
+  padding: 0;
+}
+.sheet.party-sheet .window-content .tab[data-tab="overview"] .scroll {
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 35% 65%;
+  grid-template-areas: "owner" "party";
+}
+.sheet.party-sheet .party-member {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  --owner-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 80%, transparent);
+  --party-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 60%, transparent);
+}
+.sheet.party-sheet .party-member .thumbnail {
+  padding: 0.25rem;
+}
+.sheet.party-sheet .party-member .thumbnail img {
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+  border: unset;
+}
+.sheet.party-sheet .party-member .title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.sheet.party-sheet .party-member .title .level {
+  font-size: x-small;
+  color: var(--color-text-light-primary);
+}
+.sheet.party-sheet header.party-member {
+  grid-area: owner;
+  background: var(--owner-background-color);
+  border-radius: 12px;
+  margin: 0.5rem 0.25rem;
+  padding: 0.25rem;
+}
+.sheet.party-sheet header.party-member .thumbnail {
+  flex: 0 0 calc(80px + 0.5rem);
+  padding: 0.5rem 0.5rem 0.5rem 0;
+}
+.sheet.party-sheet header.party-member .thumbnail img {
+  width: unset;
+  max-width: 100%;
+  height: auto;
+  object-fit: scale-down;
+}
+.sheet.party-sheet header.party-member main {
+  flex: 1;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 4fr 3fr 3fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 0.5rem;
+  grid-template-areas: "title health pp" "types experience-label experience-value";
+}
+.sheet.party-sheet header.party-member main div.title,
+.sheet.party-sheet header.party-member main div.health,
+.sheet.party-sheet header.party-member main div.pp,
+.sheet.party-sheet header.party-member main div.experience {
+  margin: 2px;
+}
+.sheet.party-sheet header.party-member main .title {
+  grid-area: title;
+  justify-content: start;
+}
+.sheet.party-sheet header.party-member main .health {
+  grid-area: health;
+  display: flex;
+  flex-direction: column;
+}
+.sheet.party-sheet header.party-member main .health .details {
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.sheet.party-sheet header.party-member main .health .details span {
+  font-size: 12px;
+  color: var(--color-text-light-primary);
+}
+.sheet.party-sheet header.party-member main .health .details .divider {
+  margin: 0 0.25rem;
+}
+.sheet.party-sheet header.party-member main .pp {
+  grid-area: pp;
+  display: flex;
+  flex-direction: column;
+}
+.sheet.party-sheet header.party-member main .pp .details {
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.sheet.party-sheet header.party-member main .pp .details span {
+  font-size: 12px;
+  color: var(--color-text-light-primary);
+}
+.sheet.party-sheet header.party-member main .pp .details .divider {
+  margin: 0 0.25rem;
+}
+.sheet.party-sheet header.party-member main .types {
+  grid-area: types;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.sheet.party-sheet header.party-member main .types span {
+  flex: 0 0 38px;
+  height: 38px;
+  margin: 2px;
+}
+.sheet.party-sheet header.party-member main .types span img {
+  height: 38px;
+  width: 38px;
+  object-fit: scale-down;
+  border: unset;
+  border-radius: 50%;
+}
+.sheet.party-sheet header.party-member main .types:has(:nth-child(4)) span {
+  flex: 0 0 32px;
+  height: 32px;
+}
+.sheet.party-sheet header.party-member main .types:has(:nth-child(4)) span img {
+  height: 32px;
+  width: 32px;
+}
+.sheet.party-sheet header.party-member main .types:has(:nth-child(5)) span {
+  flex: 0 0 25px;
+  height: 25px;
+}
+.sheet.party-sheet header.party-member main .types:has(:nth-child(5)) span img {
+  height: 25px;
+  width: 25px;
+}
+.sheet.party-sheet header.party-member main .types:has( > :nth-child(6)) span {
+  flex: 0 0 20px;
+  height: 20px;
+}
+.sheet.party-sheet header.party-member main .types:has( > :nth-child(6)) span img {
+  height: 20px;
+  width: 20px;
+}
+.sheet.party-sheet header.party-member main .types:has( > :nth-child(13)) {
+  overflow-y: auto;
+}
+.sheet.party-sheet header.party-member main .types:has( > :nth-child(13)) span {
+  flex: 0 0 21px;
+  height: 21px;
+}
+.sheet.party-sheet header.party-member main .types:has( > :nth-child(13)) span img {
+  height: 21px;
+  width: 21px;
+}
+.sheet.party-sheet header.party-member main .experience {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.sheet.party-sheet header.party-member main .experience.label {
+  grid-area: experience-label;
+}
+.sheet.party-sheet header.party-member main .experience.value {
+  grid-area: experience-value;
+  color: var(--color-text-light-primary);
+}
+.sheet.party-sheet main {
+  grid-area: party;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  flex-wrap: wrap;
+  align-content: start;
+}
+.sheet.party-sheet main section.party-member {
+  flex: 0 0 48%;
+  max-width: 48%;
+  height: 70px;
+  margin: 0.25rem;
+  background: var(--party-background-color);
+  border-radius: 12px;
+}
+.sheet.party-sheet main section.party-member main {
+  flex: 1;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "title health" "types pp";
+}
+.sheet.party-sheet main section.party-member main div.title,
+.sheet.party-sheet main section.party-member main div.health,
+.sheet.party-sheet main section.party-member main div.pp {
+  margin: 2px;
+}
+.sheet.party-sheet main section.party-member main .title {
+  grid-area: title;
+  justify-content: end;
+}
+.sheet.party-sheet main section.party-member main .health {
+  grid-area: health;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  font-size: small;
+}
+.sheet.party-sheet main section.party-member main .health .details {
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.sheet.party-sheet main section.party-member main .health .details span {
+  font-size: x-small;
+  color: var(--color-text-light-primary);
+}
+.sheet.party-sheet main section.party-member main .health .details .divider {
+  margin: 0 0.25rem;
+}
+.sheet.party-sheet main section.party-member main .pp {
+  grid-area: pp;
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+}
+.sheet.party-sheet main section.party-member main .pp .details {
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.sheet.party-sheet main section.party-member main .pp .details span {
+  font-size: x-small;
+  color: var(--color-text-light-primary);
+}
+.sheet.party-sheet main section.party-member main .pp .details .divider {
+  margin: 0 0.25rem;
+}
+.sheet.party-sheet main section.party-member main .types {
+  grid-area: types;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  overflow: hidden;
+}
+.sheet.party-sheet main section.party-member main .types span {
+  flex: 0 0 28px;
+  height: 28px;
+  margin: 2px;
+}
+.sheet.party-sheet main section.party-member main .types span img {
+  height: 28px;
+  width: 28px;
+  object-fit: scale-down;
+  border: unset;
+  border-radius: 50%;
+}
+.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span {
+  flex: 0 0 24px;
+  height: 24px;
+}
+.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span img {
+  height: 24px;
+  width: 24px;
+}
+.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span {
+  flex: 0 0 17px;
+  height: 17px;
+}
+.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span img {
+  height: 17px;
+  width: 17px;
+}
+.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span {
+  flex: 0 0 13px;
+  height: 13px;
+}
+.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span img {
+  height: 13px;
+  width: 13px;
+}
+.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) {
+  overflow-y: auto;
+}
+.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span {
+  flex: 0 0 15px;
+  height: 15px;
+}
+.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span img {
+  height: 15px;
+  width: 15px;
+}
+.sheet.team-sheet .window-content {
+  grid-template-columns: unset;
+  grid-template-rows: 44px auto;
+  grid-template-areas: "nav" "main";
+}
+.sheet.team-sheet .window-content nav.tabs {
+  border: unset;
+  border-bottom: 1px solid var(--border-color);
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] {
+  padding: 0;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll {
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0.5rem;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main {
+  --owner-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 80%, transparent);
+  --party-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 60%, transparent);
+  --item-height: 110px;
+  height: var(--item-height);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section {
+  flex: 1;
+  display: flex;
+  background: var(--owner-background-color);
+  border-radius: 12px;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section .thumbnail {
+  align-self: center;
+  flex: 0 0 calc(70px + 1rem);
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section .thumbnail img {
+  max-width: 100%;
+  height: auto;
+  object-fit: scale-down;
+  border: unset;
+  border-radius: 50%;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.5rem;
+  grid-template-areas: "title title" "health pp";
+  align-items: center;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--party-background-color);
+  clip-path: polygon(100% 0, 100% 0, 100% 100%, 80% 100%);
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .title {
+  grid-area: title;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .title .level {
+  font-size: x-small;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health {
+  grid-area: health;
+  display: flex;
+  flex-direction: column;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details {
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details span {
+  font-size: 12px;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details .divider {
+  margin: 0 0.25rem;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp {
+  grid-area: pp;
+  display: flex;
+  flex-direction: column;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details {
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details span {
+  font-size: 12px;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details .divider {
+  margin: 0 0.25rem;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside {
+  flex: 0 0 44%;
+  display: flex;
+  background: var(--party-background-color);
+  border-radius: 0 12px 12px 0;
+  padding: 0.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 4px;
+  grid-template-rows: calc(calc(var(--item-height) - 0.5rem) / 2 - 2px) calc(calc(var(--item-height) - 0.5rem) / 2 - 2px);
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside:has( > :nth-child(7)) {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside:has( > :nth-child(9)) {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  overflow-y: auto;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside .thumbnail {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: unset;
+}
+.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside .thumbnail img {
+  height: 100%;
+  width: auto;
+  object-fit: scale-down;
+  border: unset;
+  border-radius: 50%;
+}
+.sheet.folder-edit .standard-form {
+  gap: 0.25rem;
+}
+.sheet.folder-edit .standard-form fieldset {
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.sheet.folder-edit section.team-member {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+  border: 1px solid var(--color-light-6);
+  border-radius: 8px;
+}
+.sheet.folder-edit section.team-member.empty {
+  justify-content: center;
+  height: 100px;
+  border: 1px dashed var(--color-light-6);
+  border-radius: 8px;
+  color: var(--color-light-5);
+  font-size: medium;
+  text-align: center;
+  white-space: pre-line;
+  word-break: break-word;
+}
+.sheet.folder-edit section.team-member .thumbnail {
+  flex: 0 0 48px;
+  height: 48px;
+  margin-right: 0.5rem;
+}
+.sheet.folder-edit section.team-member .thumbnail img {
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+  border: unset;
+}
+.sheet.folder-edit section.team-member .title {
+  flex: 1;
+}
+.sheet.folder-edit section.team-member .dismiss {
+  flex: 0 0 20px;
+}
+.sheet.active-effect-sheet .window-content {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  grid-template-rows: calc(1rem + 48px) auto;
+  grid-template-areas: "header tabs" "main main";
+}
+.sheet.active-effect-sheet .window-content header.sheet-header {
+  flex-wrap: nowrap;
+}
+.sheet.active-effect-sheet .window-content nav.tabs {
+  grid-area: tabs;
+}
+.sheet.active-effect-sheet .window-content .tab:has(div.scroll) {
+  padding: 0;
+}
+.sheet.active-effect-sheet .window-content .tab div.scroll {
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0.5rem;
+}
+.sheet.active-effect-sheet .window-content .tab div.scroll .change-element-forms {
+  display: contents;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing {
+  display: contents;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing .item-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing .item-controls button {
+  flex: 0 0 30%;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing > .cm-editor {
+  flex: 1;
+  background-color: #ffffffdd;
+  color: #222224;
+  overflow: hidden;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change {
+  padding: unset;
+  border: 1px solid var(--color-light-6);
+  border-radius: 8px;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid var(--color-light-6);
+  padding: 0.25rem 0.5rem;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .drag-handle {
+  cursor: grab;
+  font-weight: normal;
+  margin-right: 0.375rem;
+  padding: 0.125rem;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .label {
+  flex: 0 0 40%;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .label .form-group label {
+  flex: 0 1 min-content;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .type {
+  flex: 0 0 40%;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .item-controls {
+  flex: 0 0 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 4px;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main {
+  padding: 0.25rem 0.5rem;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main textarea {
+  resize: vertical;
+  min-height: 86px;
+  padding: 0.5rem;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group label.short {
+  align-items: center;
+  display: Flex;
+  gap: 4px;
+  white-space: nowrap;
+  padding-right: 0.5rem;
+  flex: 0 0 80px;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .form-fields {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .form-fields .content-link {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+  font-weight: 400;
+  padding: 2px 4px;
+  text-shadow: none !important;
+  line-height: 1.6em;
+  color: var(--color-cool-5);
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .form-fields .content-link img {
+  height: 16px;
+  width: 16px;
+  border: unset;
+  object-fit: scale-down;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .attached-input {
+  display: flex;
+  flex-direction: row;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .attached-input button {
+  border-radius: 4px 0 0 4px;
+}
+.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .attached-input input {
+  border-radius: 0 4px 4px 0;
+}
+.sheet.active-effect-sheet .window-content .tab .validation-failures {
+  background: rgba(214, 150, 0, 0.5);
+  border-radius: 4px;
+  margin: 0.5rem;
+}
+.sheet.active-effect-sheet .window-content .tab .validation-failures ul {
+  list-style: "\f071" outside;
+  padding: 0.25rem 0.25rem 0.25rem 1.5rem;
+  margin: 0;
+}
+.sheet.active-effect-sheet .window-content .tab .validation-failures ul li {
+  font-weight: 900;
+  font-family: var(--font-awesome);
+}
+.sheet.active-effect-sheet .window-content .tab .validation-failures ul li > span {
+  margin-left: 0.25rem;
+  font-weight: normal;
+  font-family: var(--font-primary);
+}
+.sheet.active-effect-sheet .window-content .tab .create-change {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+.sheet.active-effect-sheet .window-content .tab .create-change button {
+  flex: 0 0 30%;
+}
+.sheet.active-effect-sheet .window-content footer.sheet-footer {
+  all: unset;
+  grid-area: submit;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 34px;
+  border-top: 1px solid var(--color-light-6);
+}
+.sheet.active-effect-sheet .window-content footer.sheet-footer button {
+  flex: 0 0 48%;
+}
+.sheet input[type="color"] {
+  border-color: var(--color-input-border-color, #000);
 }
 .application .standard-form input[type="checkbox"] {
   --checkbox-background-color: #3d343f;
@@ -873,4 +1708,51 @@
 }
 .ptr2e .item-list .item .item-info .item-controls {
   flex: 0 0 44px;
+}
+.ptr2e .directory-item {
+  --mixed-background-color: color-mix(in srgb, var(--owner-folder-background, #346899) 40%, transparent);
+}
+.ptr2e .directory-item.party-header {
+  line-height: normal;
+  background: var(--owner-folder-background);
+  border: 3px solid var(--owner-folder-background) !important;
+  border-top: unset !important;
+}
+.ptr2e .directory-item.party-header .document-name {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin: unset;
+}
+.ptr2e .directory-item.party-header .document-name span {
+  color: var(--color-text-light-highlight);
+}
+.ptr2e .directory-item.document.owner,
+.ptr2e .directory-item.document.party,
+.ptr2e .directory-item.document.team {
+  background: var(--mixed-background-color);
+  border: 3px solid var(--owner-folder-background);
+}
+.ptr2e .directory-item.document.owner {
+  border-top: unset;
+}
+.ptr2e .directory-item.document.party,
+.ptr2e .directory-item.document.team {
+  border: unset;
+  border-left: 3px solid var(--owner-folder-background);
+  border-right: 3px solid var(--owner-folder-background);
+}
+.ptr2e .directory-item.document.party.last,
+.ptr2e .directory-item.document.team.last {
+  border-bottom: 3px solid var(--owner-folder-background);
+}
+.ptr2e .directory-item.document .entry-name.document-name {
+  line-height: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ptr2e .directory-item.document .entry-name.document-name .actor-level {
+  font-size: x-small;
+  color: var(--color-text-light-primary);
 }

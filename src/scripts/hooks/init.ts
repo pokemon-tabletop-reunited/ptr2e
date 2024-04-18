@@ -40,6 +40,7 @@ export const Init: PTRHook = {
             CONFIG.ChatMessage.documentClass = PTRCONFIG.ChatMessage.documentClass;
             CONFIG.ChatMessage.dataModels = PTRCONFIG.ChatMessage.dataModels;
             CONFIG.Combat.documentClass = PTRCONFIG.Combat.documentClass;
+            CONFIG.Combat.dataModels = PTRCONFIG.Combat.dataModels;
             CONFIG.Combatant.documentClass = PTRCONFIG.Combatant.documentClass;
             CONFIG.Combatant.dataModels = PTRCONFIG.Combatant.dataModels;
             CONFIG.Item.documentClass = PTRCONFIG.Item.documentClass;
@@ -48,6 +49,8 @@ export const Init: PTRHook = {
                 documentClass: PTRCONFIG.Change.documentClass,
                 dataModels: PTRCONFIG.Change.dataModels
             };
+
+            CONFIG.Folder.documentClass = PTRCONFIG.Folder.documentClass;
 
             CONFIG.Scene.documentClass = PTRCONFIG.Scene.documentClass;
             CONFIG.MeasuredTemplate.defaults.angle = 75;
@@ -60,6 +63,7 @@ export const Init: PTRHook = {
             CONFIG.statusEffects = PTRCONFIG.statusEffects;
 
             CONFIG.ui.items = PTRCONFIG.ui.items;
+            CONFIG.ui.actors = PTRCONFIG.ui.actors;
 
             // Register custom sheets
             {
@@ -78,6 +82,10 @@ export const Init: PTRHook = {
                         Items.registerSheet("ptr2e", sheet, { types: [type], makeDefault: true });
                     }
                 }
+
+                DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
+                // @ts-ignore
+                DocumentSheetConfig.registerSheet(ActiveEffect, "ptr2e", PTRCONFIG.ActiveEffect.sheetClasses.effect, { makeDefault: true });
             }
 
             game.settings.register("ptr2e", "pokemonTypes", {

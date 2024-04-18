@@ -31,7 +31,6 @@ class UUIDUtils {
             )
         ).flat();
 
-        //@ts-expect-error
         return R.sortBy([...packEmbeddedDocs, ...worldDocsAndCacheHits, ...packDocs], (d) => uuids.indexOf(d.uuid));
     }
 

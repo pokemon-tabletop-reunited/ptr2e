@@ -36,21 +36,23 @@ class ItemPTR2e<
     }
 
     get traits(): Map<string, Trait> | null {
-        return 'traits' in this.system ? this.system.traits : null;
+        return "traits" in this.system ? this.system.traits : null;
     }
 
-    getRollOptions(prefix = this.type, {includeGranter = true } = {}): string[] {
+    getRollOptions(prefix = this.type, { includeGranter = true } = {}): string[] {
         const traitOptions = ((): string[] => {
-            if(!this.traits) return [];
+            if (!this.traits) return [];
             const options = [];
-            for(const trait of this.traits.values()) {
+            for (const trait of this.traits.values()) {
                 options.push(`trait:${trait.slug}`);
             }
             return options;
         })();
-        
+
         const granterOptions = includeGranter
-            ? this.grantedBy?.getRollOptions("granter", {includeGranter: false}).map(o => `${prefix}:${o}`) ?? []
+            ? this.grantedBy
+                  ?.getRollOptions("granter", { includeGranter: false })
+                  .map((o) => `${prefix}:${o}`) ?? []
             : [];
 
         const options = [
@@ -58,10 +60,10 @@ class ItemPTR2e<
             `${prefix}:${this.slug}`,
             `${prefix}:slug:${this.slug}`,
             ...granterOptions,
-            ...(this.parent?.getRollOptions() ?? []).map(o => `${prefix}:${o}`),
-            ...traitOptions.map(o => `${prefix}:${o}`)
+            ...(this.parent?.getRollOptions() ?? []).map((o) => `${prefix}:${o}`),
+            ...traitOptions.map((o) => `${prefix}:${o}`),
         ];
-        
+
         return options;
     }
 
@@ -109,7 +111,7 @@ class ItemPTR2e<
         this.rollOptions.addOption("item", `${this.type}:${this.slug}`);
     }
 
-    async toChat()  {
+    async toChat() {
         return ChatMessage.create({
             content: `<span>@Embed[${this.uuid} caption=false classes=no-tooltip]</span>`,
             speaker: ChatMessage.getSpeaker({ actor: this.actor }),
@@ -127,7 +129,8 @@ class ItemPTR2e<
         let document: ActiveEffectPTR2e | null = null;
 
         // Case 1 - Data explicitly provided
-        if (data.data) document = new CONFIG.ActiveEffect.documentClass(data.data as any) as ActiveEffectPTR2e;
+        if (data.data)
+            document = new CONFIG.ActiveEffect.documentClass(data.data as any) as ActiveEffectPTR2e;
         // Case 2 - UUID provided
         else if (data.uuid) document = await fromUuid(data.uuid);
 
@@ -147,6 +150,32 @@ class ItemPTR2e<
             _id: document._id,
         });
     }
+
+    static override async createDocuments<TDocument extends foundry.abstract.Document>(
+        this: ConstructorOf<TDocument>,
+        data?: (TDocument | PreCreate<TDocument["_source"]>)[],
+        context?: DocumentModificationContext<TDocument["parent"]>
+    ): Promise<TDocument[]> {
+        const sources = data?.map((d) => (d instanceof ItemPTR2e ? d.toObject() : d as PreCreate<ItemPTR2e["_source"]>)) ?? [];
+
+        const actor = context?.parent as ActorPTR2e | null;
+        if (!actor) return super.createDocuments<TDocument>(data, context);
+
+        const specialTypes = ["species"];
+
+        for (const source of sources) {
+            if (specialTypes.includes(source.type as string)) {
+                switch (source.type) {
+                    case "species": {
+                        return [];
+                    }
+                }
+                return [];
+            }
+        }
+
+        return super.createDocuments<TDocument>(data, context);
+    }
 }
 
 interface ItemPTR2e<
@@ -157,9 +186,7 @@ interface ItemPTR2e<
     flags: ItemFlagsPTR2e;
     readonly _source: foundry.documents.ItemSource<string, TSystem>;
 
-
     _actions: Record<ActionType, Map<string, ActionPTR2e>>;
-
 
     rollOptions: RollOptionManager<this>;
 }

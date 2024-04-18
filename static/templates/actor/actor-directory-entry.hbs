@@ -1,0 +1,10 @@
+<li class="directory-item document {{#unless fake}}{{@root.documentCls}}{{/unless}} flexrow {{#if cssClasses}}{{cssClasses}}{{/if}} {{#if @last}}last{{/if}}"
+    data-entry-id="{{actor.id}}" data-document-id="{{actor.id}}">
+    {{#if actor.thumbnail}}
+        <img class="thumbnail" title="{{actor.name}}" data-src="{{actor.thumbnail}}" />
+    {{/if}}
+    <h4 class="entry-name document-name">
+        <a>{{actor.name}}</a>
+        <div class="actor-level">Level {{actor.system.advancement.level}}</div>
+    </h4>
+</li>

@@ -1,4 +1,4 @@
 <main {{#if undone}}class="undone"{{/if}}>
-    <p>{{#if target}}{{target.link}}{{else}}@UUID[{{_source.target}}]{{/if}} took {{damageApplied}} damage</p>
+    <p>{{#if target}}{{target.link}}{{else}}@UUID[{{_source.target}}]{{/if}} {{#if (lt damageApplied 0)}}healed for {{abs damageApplied}} {{else}}took {{damageApplied}} damage {{/if}}{{#if _notesHTML}}<i class="fas fa-info-circle small damage-info" data-tooltip="Additional Info" data-tooltip-direction="UP" data-message="{{parent.uuid}}"></i>{{/if}}</p>
     {{#if (isGm)}}{{#unless undone}}<button class="revert-damage" data-tooltip="Revert Damage"><i class="fa-solid fa-rotate-left"></i></button>{{/unless}}{{/if}}
 </main>

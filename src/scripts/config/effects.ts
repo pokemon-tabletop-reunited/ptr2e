@@ -4,7 +4,6 @@ export const StatusEffects: StatusEffect[] = [
       _id: "dead000000000000",
       name: "EFFECT.StatusDead",
       img: "icons/svg/skull.svg",
-      type: "basic",
       system: {
         changes: [{
             key: "fainted",

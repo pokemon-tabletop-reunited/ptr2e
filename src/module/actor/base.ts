@@ -1,5 +1,6 @@
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import {
+    ActorSheetPTR2e,
     ActorSynthetics,
     ActorSystemPTR2e,
     Attribute,
@@ -11,6 +12,16 @@ import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import { ActionPTR2e, ActionType, AttackPTR2e, PokemonType, RollOptionManager } from "@data";
 import { ActorFlags } from "types/foundry/common/documents/actor.js";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
+import FolderPTR2e from "@module/folder/document.ts";
+import { CombatantPTR2e, CombatPTR2e } from "@combat";
+import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
+import { ChatMessagePTR2e } from "@chat";
+
+type ActorParty = {
+    owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
+    party: ActorPTR2e<ActorSystemPTR2e, null>[];
+};
+
 class ActorPTR2e<
     TSystem extends ActorSystemPTR2e = ActorSystemPTR2e,
     TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
@@ -27,12 +38,46 @@ class ActorPTR2e<
         return this._actions;
     }
 
+    get combatant(): CombatantPTR2e | null {
+        const combatants = (game.combat as CombatPTR2e | undefined)?.combatants.filter(
+            (c) => c.actorId === this.id && !c.actor?.token
+        );
+        return combatants?.length
+            ? combatants.length > 1
+                ? combatants.find((c) => c.actor === this) ?? null
+                : combatants[0]
+            : null;
+    }
+
     get level() {
         return this.system.advancement.level;
     }
 
     get speed() {
         return this.system.attributes.spe.value;
+    }
+
+    get party(): ActorParty | null {
+        if (!this.folder) return null;
+
+        return (this._party ??= ((): ActorParty | null => {
+            const owner = ((): ActorPTR2e<TSystem, null> | null => {
+                if (this.folder?.owner)
+                    return fromUuidSync<ActorPTR2e<TSystem, null>>(this.folder.owner);
+                return null;
+            })();
+            const party = ((): ActorPTR2e<TSystem, null>[] => {
+                if (this.folder?.isInParty(this.uuid))
+                    return this.folder.party.flatMap((uuid) =>
+                        uuid === this.uuid
+                            ? (this as ActorPTR2e<TSystem, null>)
+                            : fromUuidSync<ActorPTR2e<TSystem, null>>(uuid) ?? []
+                    );
+                return [];
+            })();
+
+            return owner || party.length ? { owner, party } : null;
+        })());
     }
 
     protected override _initializeSource(
@@ -57,7 +102,7 @@ class ActorPTR2e<
     override _initialize() {
         const preparationWarnings = new Set<string>();
         this.synthetics = {
-            ephemeralEffects: { },
+            ephemeralEffects: {},
             modifierAdjustments: { all: [], damage: [] },
             modifiers: { all: [], damage: [] },
             preparationWarnings: {
@@ -69,7 +114,10 @@ class ActorPTR2e<
                     preparationWarnings.clear();
                 }, 10), // 10ms also handles separate module executions
             },
+            afflictions: { data: [], ids: new Set() },
         };
+
+        this._party = null;
 
         this.rollOptions = new RollOptionManager(this);
 
@@ -137,6 +185,7 @@ class ActorPTR2e<
     override applyActiveEffects() {
         if (this.type === "ptu-actor") return;
         this.statuses ??= new Set();
+
         // Identify which special statuses had been active
         const specialStatuses = new Map();
         for (const statusId of Object.values(CONFIG.specialStatusEffects)) {
@@ -146,6 +195,8 @@ class ActorPTR2e<
 
         // Organize non-disabled effects by their application priority
         const changes = [];
+        // Afflictions don't always have changes, so we need to track them separately
+        const afflictions: ActiveEffectPTR2e<ActorPTR2e, AfflictionActiveEffectSystem>[] = [];
         for (const effect of this.allApplicableEffects() as Generator<
             ActiveEffectPTR2e<ActorPTR2e>,
             void,
@@ -160,12 +211,16 @@ class ActorPTR2e<
                 })
             );
             for (const statusId of effect.statuses) this.statuses.add(statusId);
+            if(!effect.changes.length && effect.type === "affliction") afflictions.push(effect as ActiveEffectPTR2e<ActorPTR2e, AfflictionActiveEffectSystem>);
         }
         changes.sort((a, b) => a.priority! - b.priority!);
 
         // Apply all changes
         for (const change of changes) {
             change.effect.apply(this, change);
+        }
+        for (const affliction of afflictions) {
+            affliction.system.apply(this);
         }
 
         // Apply special statuses that changed to active tokens
@@ -207,7 +262,7 @@ class ActorPTR2e<
     }
 
     override getRollData(): Record<string, unknown> {
-        const rollData = {actor: this};
+        const rollData = { actor: this };
         return rollData;
     }
 
@@ -282,11 +337,186 @@ class ActorPTR2e<
         return this.type === "pokemon";
     }
 
+    hasEmbeddedSpecies(): boolean {
+        return !!this.system._source.species;
+    }
+
+    async onEndActivation() {
+        if(!this.synthetics.afflictions.data.length) return;
+        const afflictions = this.synthetics.afflictions.data.reduce<{
+            toDelete: string[];
+            toUpdate: Partial<ActiveEffectPTR2e<ActorPTR2e>["_source"]>[];
+            groups: {
+                [key: number]: {
+                    afflictions: { formula?: string; affliction: AfflictionActiveEffectSystem }[];
+                    type?: "healing" | "damage" | "both";
+                };
+            };
+        }>(
+            (acc, affliction) => {
+                const result = affliction.onEndActivation();
+                if (result.type === "delete") acc.toDelete.push(affliction.parent.id);
+                else if (result.type === "update") acc.toUpdate.push(result.update);
+                if (result.damage) {
+                    acc.groups[affliction.priority] ??= { afflictions: [] };
+
+                    acc.groups[affliction.priority].afflictions.push({
+                        formula: result.damage?.formula,
+                        affliction,
+                    });
+                    if (result.damage?.type) {
+                        if (
+                            acc.groups[affliction.priority].type &&
+                            acc.groups[affliction.priority].type !== result.damage.type
+                        ) {
+                            acc.groups[affliction.priority].type = "both";
+                        } else {
+                            acc.groups[affliction.priority].type = result.damage.type;
+                        }
+                    }
+                }
+                return acc;
+            },
+            {
+                toDelete: [],
+                toUpdate: [],
+                groups: {},
+            }
+        );
+
+        const sortedGroups = Object.entries(afflictions.groups).sort(
+            ([a], [b]) => Number(a) - Number(b)
+        )
+        function getFormula(type: "healing" | "damage" | "both"): string {
+            switch (type) {
+                case "healing":
+                    return "floor(min(((@formula) * @health.max) + @health.value, @health.max))";
+                case "damage":
+                    return "ceil(max(0, @health.value - ((@formula) * @health.max)))";
+                case "both":
+                    return "round(clamp(@health.value - ((@formula) * @health.max), 0, @health.max))";
+            }
+        }
+
+        let newHealth = this.system.health.value;
+        const notes: string[][] = [];
+
+        for (const [_, group] of sortedGroups) {
+            if(!group.type) continue;
+            if(group.type === "healing" && newHealth === this.system.health.max) continue;
+            if(group.type && newHealth === 0) break;
+
+            const groupFormula = group.afflictions.map(({ formula }) => formula).join(" + ");
+            const rollFormula = getFormula(group.type);
+            const result = (
+                await new Roll(rollFormula, {
+                    formula: groupFormula,
+                    actor: this,
+                    health: {
+                        max: this.system.health.max,
+                        value: newHealth,
+                    },
+                }).roll()
+            ).total;
+
+            const numberResult = Number(result);
+            if (!Number.isNaN(numberResult)) {
+                notes.push(
+                    await this._generateHealthChangeNotes(group, { old: newHealth, new: numberResult })
+                );
+                newHealth = numberResult;
+            }
+        }
+
+        const updates: DeepPartial<ActorPTR2e['_source']> = {}
+        const validAfflictionUpdates = afflictions.toUpdate.filter(update => update._id);
+        if(validAfflictionUpdates.length > 0) updates.effects = validAfflictionUpdates as foundry.documents.ActorSource['effects']
+        
+        const oldHealth = this.system.health.value;
+        if(newHealth !== oldHealth) {
+            updates.system = {
+                health: {
+                    value: newHealth
+                }
+            }
+        }
+
+        if(afflictions.toDelete.length !== 0) {
+            await this.deleteEmbeddedDocuments("ActiveEffect", afflictions.toDelete);
+        }
+        if(!fu.isEmpty(updates)) {
+            await this.update(updates);
+            if(newHealth !== oldHealth) {
+                //@ts-expect-error
+                await ChatMessagePTR2e.create({
+                    type: "damage-applied",
+                    system: {
+                        notes,
+                        damageApplied: oldHealth - newHealth,
+                        target: this.uuid,
+                    }
+                })
+            }
+        }
+        else if(notes.length > 0) {
+            //@ts-expect-error
+            await ChatMessagePTR2e.create({
+                type: "damage-applied",
+                system: {
+                    notes,
+                    damageApplied: 0,
+                    undone: true,
+                    target: this.uuid,
+                }
+            })
+        }
+    }
+
+    /**
+     * Generate a list of notes for the health change of end of turn afflictions
+     */
+    async _generateHealthChangeNotes(
+        group: {
+            afflictions: { formula?: string; affliction: AfflictionActiveEffectSystem }[];
+            type?: "healing" | "damage" | "both";
+        },
+        health: { old: number; new: number }
+    ): Promise<string[]> {
+        const output = [];
+
+        for (const { formula, affliction } of group.afflictions) {
+            if (!formula) continue;
+            const result = (await new Roll("@formula * @actor.system.health.max", {formula, actor: this}).roll()).total;
+            output.push(`${affliction.parent.link}: ${formula} (${result})`);
+        }
+
+        const healthChange = health.new - health.old;
+        if(health.new > health.old ) {
+            output.push(`<span class='damage'>Healed for ${healthChange} health</span>`);
+        }
+        else if(health.new < health.old) {
+            output.push(`<span class='damage'>Took ${Math.abs(healthChange)} damage</span>`);
+        }
+        else {
+            output.push(`<span class='damage'>No change in health</span>`);
+        }
+
+        return output;
+    }
+
+    /**
+     * Delete all effects that should be deleted when combat ends
+     */
+    onEndCombat() {
+        const applicable = this.effects.filter(s => (s as ActiveEffectPTR2e<this>).system.removeAfterCombat);
+        this.deleteEmbeddedDocuments("ActiveEffect", applicable.map(s => s.id));
+    }
+
     protected override _onEmbeddedDocumentChange(): void {
         super._onEmbeddedDocumentChange();
 
         // Send any accrued warnings to the console
-        this.synthetics.preparationWarnings.flush();
+        this.synthetics.preparationWarnings.flush(); 
     }
 
     protected override async _preCreate(
@@ -305,6 +535,11 @@ interface ActorPTR2e<
     TSystem extends ActorSystemPTR2e = ActorSystemPTR2e,
     TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
 > extends Actor<TParent, TSystem> {
+    get folder(): FolderPTR2e<ActorPTR2e<TSystem, null>> | null;
+
+    sheet: ActorSheetPTR2e;
+
+    _party: ActorParty | null;
 
     health: {
         percent: number;

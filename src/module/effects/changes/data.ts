@@ -19,7 +19,7 @@ interface ResolveValueParams {
 }
 
 type ChangeSchema = {
-    key: foundry.data.fields.StringField<string, string, true, false, false>
+    key: foundry.data.fields.StringField<string, string, true, false, true>
     value: ResolvableValueField<true, false, true>
     mode: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
     priority: foundry.data.fields.NumberField;

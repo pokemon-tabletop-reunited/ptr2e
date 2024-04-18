@@ -5091,12 +5091,12 @@ export class ClientBaseFolder extends foundry.documents.BaseFolder {
      * @param [context={}] Additional context options or dialog positioning options
      * @returns A Promise which resolves to the created Document, or null if the dialog was closed.
      */
-    static createDialog<TDocument extends foundry.abstract.Document>(
+    static createDialog<TDocument extends EnfolderableDocument>(
         this: ConstructorOf<TDocument>,
         data?: Record<string, unknown>,
         context?: {
             parent?: TDocument["parent"];
-            pack?: Collection<TDocument> | null;
+            pack?: CompendiumCollection<TDocument> | string | null;
         } & Partial<FormApplicationOptions>,
     ): Promise<TDocument | null>;
 

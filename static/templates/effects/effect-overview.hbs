@@ -1,0 +1,51 @@
+<section class="tab sheet-body {{tabs.overview.cssClass}}" data-tab="overview" data-group="sheet">
+    <div class="scroll">
+        <div class="form-group">
+            <label>{{ localize "EFFECT.Tint" }}</label>
+            <div class="form-fields" {{#if data.tint}}style="--color-input-border-color: {{data.tint}}"{{/if}}>
+                {{colorPicker name="tint" value=data.tint}}
+            </div>
+        </div>
+
+        <div class="form-group stacked">
+            <label>{{ localize "EFFECT.Description" }}</label>
+            {{!-- {{editor descriptionHTML target="description" button=false editable=editable engine="prosemirror" collaborate=false}} --}}
+            <textarea name="description" placeholder="{{ localize "EFFECT.Description" }}">{{ data.description }}</textarea>
+        </div>
+
+        <div class="form-group">
+            <label>{{ localize "EFFECT.Disabled" }}</label>
+            <input type="checkbox" name="disabled" {{ checked data.disabled }}/>
+        </div>
+
+        {{#if isActorEffect}}
+        <div class="form-group">
+            <label>{{ localize "EFFECT.Origin" }}</label>
+            <div class="form-fields">
+                <input type="text" name="origin" value="{{ data.origin }}" disabled/>
+            </div>
+        </div>
+        {{/if}}
+
+        {{#if isItemEffect}}
+        <div class="form-group">
+            <label>{{ labels.transfer.name }}</label>
+            <div class="form-fields">
+                <input type="checkbox" name="transfer" {{checked data.transfer}}/>
+            </div>
+            <p class="hint">{{ labels.transfer.hint }}</p>
+        </div>
+        {{/if}}
+
+        <div class="form-group">
+            <label>Status Conditions</label>
+            <div class="form-fields">
+                <multi-select name="statuses">
+                    {{#each statuses as |status|}}
+                    <option value="{{status.id}}" {{status.selected}}>{{status.label}}</option>
+                    {{/each}}
+                </multi-select>
+            </div>
+        </div>
+    </div>
+</section>

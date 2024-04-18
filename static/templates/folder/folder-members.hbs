@@ -1,0 +1,41 @@
+<section class="standard-form">
+    {{#unless team}}
+    <fieldset class="owner">
+        <legend>{{localize "PTR2E.Folder.Sheet.Owner.Label"}}</legend>
+        {{#if owner}}
+            {{> member actor=owner folder=folder type='owner'}}
+        {{else}}
+            <section class="team-member party empty">
+                <p><small>{{localize "PTR2E.Folder.Sheet.Owner.Hint"}}</small></p>
+            </section>
+        {{/if}}
+    </fieldset>
+    {{/unless}}
+    {{#unless owner}}
+    <fieldset class="team">
+        <legend>{{localize "PTR2E.Folder.Sheet.Team.Label"}}</legend>
+        {{#each team}}
+            {{> member actor=this.actor folder=folder type='team'}}
+        {{else}}
+            <section class="team-member team empty">
+                <p><small>{{localize "PTR2E.Folder.Sheet.Team.Hint"}}</small></p>
+            </section>
+        {{/each}}
+    </fieldset>
+    {{/unless}}
+</section>
+
+
+{{#*inline "member"}}
+    <section class="team-member" data-folder-id="{{folder.id}}">
+        <div class="thumbnail" data-actor-id="{{actor.id}}">
+            <img src="{{actor.img}}" alt="{{actor.name}}">
+        </div>
+        <div class="title">
+            <span class="name">{{actor.name}}</span>
+        </div>
+        <div class="dismiss">
+            <a class="fas fa-times" title="{{localize "PTR2E.Folder.Sheet.Owner.Remove"}}" data-action="remove" data-uuid="{{actor.uuid}}" data-type="{{type}}"></a>
+        </div>
+    </section>
+{{/inline}}

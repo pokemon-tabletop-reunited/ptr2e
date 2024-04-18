@@ -13,6 +13,10 @@ export default class FlatModifierChangeSystem extends ChangeModel {
         }
     }
 
+    get selector() {
+        return this.key;
+    }
+
     override apply(actor: ActorPTR2e): void {
         this.beforePrepareData(actor);
     }

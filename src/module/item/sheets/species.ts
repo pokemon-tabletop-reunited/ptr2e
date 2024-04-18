@@ -1,18 +1,9 @@
 import { SpeciesPTR2e } from "@item";
-import { DocumentSheetConfiguration, DocumentSheetV2 } from "./document.ts";
+import { DocumentSheetConfiguration, DocumentSheetV2, Tab } from "./document.ts";
 import Tagify from "@yaireo/tagify";
 import GithubManager from "@module/apps/github.ts";
 import { SpeciesSystemSource } from "@item/data/index.ts";
 import { sluggify } from "@utils";
-
-type Tab = {
-    id: string;
-    group: string;
-    icon: string;
-    label: string;
-    active?: boolean;
-    cssClass?: string;
-};
 
 export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     DocumentSheetV2<SpeciesPTR2e>
@@ -265,19 +256,6 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
                     }
                 });
             }
-        }
-    }
-
-    override _attachFrameListeners(): void {
-        super._attachFrameListeners();
-        const button = this.element.querySelector<HTMLButtonElement>(".header-control[data-action=copyId]");
-        if (button) {
-            button.addEventListener("contextmenu", async () => {
-                const uuid = this.document.uuid;
-                const label = game.i18n.localize(this.document.constructor.metadata.label);
-                game.clipboard.copyPlainText(uuid);
-                ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", {label, type: "uuid", id: uuid}));
-            });
         }
     }
 

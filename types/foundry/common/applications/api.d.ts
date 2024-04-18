@@ -87,7 +87,7 @@ type ApplicationRenderOptions = {
     force?: boolean;
 
     /** A specific position at which to render the Application */
-    position?: ApplicationPosition;
+    position?: Partial<ApplicationPosition>;
     /** Updates to the Application window frame */
     window?: ApplicationWindowRenderOptions;
     /** Some Application classes, for example the HandlebarsApplication support re-rendering a subset of application parts instead of the full Application HTML. */
@@ -149,7 +149,7 @@ export class ApplicationV2<
      * The sequence of rendering states that describe the Application life-cycle.
      * @enum {number}
      */
-    static RENDER_STATES: RENDER_STATES;
+    static RENDER_STATES: typeof RENDER_STATES;
 
     static override emittedEvents: ["render", "close", "position"];
 
