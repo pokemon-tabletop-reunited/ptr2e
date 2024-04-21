@@ -1,0 +1,26 @@
+<figure>
+    <header class="header">
+        <h2>{{document.name}}</h2>
+    </header>
+    {{#if traits}}
+    <header class="traits">
+        <input type="text" class="traits ptr2e-tagify" name="system.traits" value="{{json traits}}" data-dType="JSON" readonly/>
+    </header>
+    {{/if}}
+    <content>
+        <section class="item-description">
+            <fieldset>
+                <legend>Effect Description</legend>
+                {{#if document.system.description}}
+                <article>
+                    {{{document.system.description}}}
+                </article>
+                {{else}}
+                <article class="center">
+                    <small><i>No Effect Description Provided</i></small>
+                </article>
+                {{/if}}
+            </fieldset>
+        </section>
+    </content>
+</figure>

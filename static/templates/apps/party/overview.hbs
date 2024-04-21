@@ -27,7 +27,7 @@
                 </div>
                 <div class="types">
                     {{#each owner.system.type.types as |type|}}
-                        <span>{{{icon type direction="DOWN"}}}</span>
+                        <span>{{{getIcon type direction="DOWN"}}}</span>
                     {{/each}}
                 </div>
                 <div class="experience label">
@@ -69,7 +69,7 @@
                     </div>
                     <div class="types">
                         {{#each this.system.type.types as |type|}}
-                            <span>{{{icon type direction="DOWN"}}}</span>
+                            <span>{{{getIcon type direction="DOWN"}}}</span>
                         {{/each}}
                     </div>
                 </main>

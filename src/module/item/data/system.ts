@@ -88,7 +88,7 @@ type ItemSystemSource = {
      * This is a description of the item, which can be as long as necessary.
      * It is often used to provide the effects of the item, or to provide a more detailed description of the item's appearance.
      */
-    description?: string | null;
+    description: string;
 
     /**
      * The container that the item is in.

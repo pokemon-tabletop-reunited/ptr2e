@@ -1,5 +1,5 @@
-import { EquipmentData } from '@data';
-import { TemplateConstructor } from './data-template.ts';
+import { EquipmentData } from "@data";
+import { TemplateConstructor } from "./data-template.ts";
 
 /**
  * Extracted data properties from the Gear data model, so that they can be used in other data models that don't need the full Gear data model.
@@ -7,7 +7,6 @@ import { TemplateConstructor } from './data-template.ts';
  */
 export default function HasGearData<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
     abstract class TemplateClass extends baseClass {
-
         /**
          * The cost of the item.
          * @defaultValue `0`
@@ -44,7 +43,7 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
             time: {
                 value: number;
                 unit: string;
-            }
+            };
         };
 
         /**
@@ -99,20 +98,20 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
          */
         abstract rarity: string;
 
-        declare _source: InstanceType<typeof baseClass>['_source'] & {
+        declare _source: InstanceType<typeof baseClass>["_source"] & {
             cost: number;
             crafting: {
                 skill: string;
                 time: {
                     value: number;
                     unit: string;
-                }
+                };
             };
             equipped: EquipmentData;
             grade: string;
             quantity: number;
             rarity: string;
-        }
+        };
 
         static override defineSchema(): foundry.data.fields.DataSchema {
             const fields = foundry.data.fields;
@@ -120,25 +119,89 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
             return {
                 ...super.defineSchema(),
 
-                cost: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
+                cost: new fields.NumberField({
+                    required: true,
+                    initial: 0,
+                    validate: (d) => (d as number) >= 0,
+                    label: "PTR2E.FIELDS.gear.cost.label",
+                    hint: "PTR2E.FIELDS.gear.cost.hint",
+                }),
                 crafting: new fields.SchemaField({
-                    skill: new fields.StringField({ required: true, initial: "accounting" }),
+                    skill: new fields.StringField({
+                        required: true,
+                        initial: "accounting",
+                        label: "PTR2E.FIELDS.gear.crafting.skill.label",
+                        hint: "PTR2E.FIELDS.gear.crafting.skill.hint",
+                    }),
                     time: new fields.SchemaField({
-                        value: new fields.NumberField({ required: true, initial: 1, validate: (d) => d as number >= 0 }),
-                        unit: new fields.StringField({ required: true, initial: "hours", choices: ["seconds", "minutes", "hours", "days", "weeks", "months", "years"] })
-                    })
+                        value: new fields.NumberField({
+                            required: true,
+                            initial: 1,
+                            validate: (d) => (d as number) >= 0,
+                            label: "PTR2E.FIELDS.gear.crafting.time.value.label",
+                            hint: "PTR2E.FIELDS.gear.crafting.time.value.hint",
+                        }),
+                        unit: new fields.StringField({
+                            required: true,
+                            initial: "hours",
+                            choices: [
+                                "seconds",
+                                "minutes",
+                                "hours",
+                                "days",
+                                "weeks",
+                                "months",
+                                "years",
+                            ],
+                            label: "PTR2E.FIELDS.gear.crafting.time.unit.label",
+                            hint: "PTR2E.FIELDS.gear.crafting.time.unit.hint",
+                        }),
+                    }),
                 }),
                 equipped: new fields.EmbeddedDataField(EquipmentData),
                 grade: new fields.StringField({
                     required: true,
                     initial: "E",
-                    choices: ["E", "E+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+", "S-", "S", "S+"]
+                    choices: [
+                        "E",
+                        "E+",
+                        "D-",
+                        "D",
+                        "D+",
+                        "C-",
+                        "C",
+                        "C+",
+                        "B-",
+                        "B",
+                        "B+",
+                        "A-",
+                        "A",
+                        "A+",
+                        "S-",
+                        "S",
+                        "S+",
+                    ],
+                    label: "PTR2E.FIELDS.gear.grade.label",
+                    hint: "PTR2E.FIELDS.gear.grade.hint",
                 }),
-                quantity: new fields.NumberField({ required: true, initial: 1, validate: (d) => d as number >= 0 }),
+                quantity: new fields.NumberField({
+                    required: true,
+                    initial: 1,
+                    validate: (d) => (d as number) >= 0,
+                    label: "PTR2E.FIELDS.gear.quantity.label",
+                    hint: "PTR2E.FIELDS.gear.quantity.hint",
+                }),
                 rarity: new fields.StringField({
                     required: true,
                     initial: "common",
-                    choices: ["common", "uncommon", "rare", "unique"]
+                    choices: {
+                        common: "PTR2E.FIELDS.gear.rarity.common",
+                        uncommon: "PTR2E.FIELDS.gear.rarity.uncommon",
+                        rare: "PTR2E.FIELDS.gear.rarity.rare",
+                        unique: "PTR2E.FIELDS.gear.rarity.unique",
+                    },
+                    label: "PTR2E.FIELDS.gear.rarity.label",
+                    hint: "PTR2E.FIELDS.gear.rarity.hint",
                 }),
             };
         }

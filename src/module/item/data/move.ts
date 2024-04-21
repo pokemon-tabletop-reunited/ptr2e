@@ -1,15 +1,12 @@
 import { MovePTR2e } from "@item";
-import { ActionPTR2e, AttackPTR2e, HasBase } from "@module/data/index.ts";
+import { ActionPTR2e, AttackPTR2e, HasBase, HasEmbed } from "@module/data/index.ts";
 import { sluggify } from "@utils";
-import Tagify from "@yaireo/tagify";
-import BaseActor from "types/foundry/common/documents/actor.js";
-import BaseUser from "types/foundry/common/documents/user.js";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 
 /**
  * @category Item Data Models
  */
-export default abstract class MoveSystem extends HasBase(foundry.abstract.TypeDataModel) {
+export default abstract class MoveSystem extends HasEmbed(HasBase(foundry.abstract.TypeDataModel), "move") {
     /**
      * @internal
      */
@@ -18,48 +15,14 @@ export default abstract class MoveSystem extends HasBase(foundry.abstract.TypeDa
     static LOCALIZATION_PREFIXES = ["PTR2E", "PTR2E.MoveSystem"];
 
     override async toEmbed(_config: foundry.abstract.DocumentHTMLEmbedConfig, options: EnrichmentOptions = {}): Promise<HTMLElement | HTMLCollection | null> {
-        options = { ...options, _embedDepth: (options._embedDepth ?? 0) + 1, relativeTo: this };
-
-        const traits = this._traits.map(trait => ({value: trait.slug, label: trait.label}));
-
-        const enrichedMove = await TextEditor.enrichHTML(await renderTemplate("systems/ptr2e/templates/items/embeds/move.hbs", {attack: this.attack, move: this.parent, traits}), options);
-        const container = document.createElement("div");
-        container.classList.add("embed","move-embed");
-        container.innerHTML = enrichedMove;
-
-        for (const input of container.querySelectorAll<HTMLInputElement>(
-            "input.ptr2e-tagify"
-        )) {
-            new Tagify(input, {
-                enforceWhitelist: true,
-                keepInvalidTags: false,
-                editTags: false,
-                tagTextProp: "label",
-                dropdown: {
-                    enabled: 0,
-                    mapValueTo: "label",
-                },
-                templates: {
-                    tag: function(tagData): string {
-                        return `
-                        <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(tagData)}>
-                        <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                        <div>
-                            <span class='tagify__tag-text'>
-                                <span class="trait" data-tooltip-direction="UP" data-trait="${tagData.value}" data-tooltip="${tagData.label}"><span>[</span><span class="tag">${tagData.label}</span><span>]</span></span>
-                            </span>
-                        </div>
-                        `;
-                    },
-                },
-                whitelist: traits
-            });
-        }
-
-        return container;
+        return super.toEmbed(_config, options, {attack: this.attack, move: this.parent});
     }
 
-    override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]>, user: BaseUser<BaseActor<null>>): Promise<boolean | void> {
+    override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
+        if(data.system === undefined) {
+            //@ts-expect-error
+            data.system = {actions: []};
+        }
         if(data.system.actions instanceof Map) {
             throw new Error("Actions must be an array.");
         }
@@ -72,6 +35,7 @@ export default abstract class MoveSystem extends HasBase(foundry.abstract.TypeDa
                     slug: sluggify(`${data.name} Attack`),
                     type: "attack",
                 }]
+                this.parent.updateSource({"system.actions": data.system.actions});
             }
             else if(!actions.some(action => action.type === "attack")) {
                 //@ts-expect-error
@@ -80,13 +44,20 @@ export default abstract class MoveSystem extends HasBase(foundry.abstract.TypeDa
                     slug: sluggify(`${data.name} Attack`),
                     type: "attack",
                 });
+                this.parent.updateSource({"system.actions": data.system.actions});
             }
+        }
+
+        if(!data.img || data.img === "icons/svg/item-bag.svg") {
+            this.parent.updateSource({
+                img: "/systems/ptr2e/img/icons/untyped_icon.png"
+            })
         }
 
         return await super._preCreate(data, options, user);
     }
 
-    override async _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: BaseUser<BaseActor<null>>): Promise<boolean | void> {
+    override async _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
         if(changed.system?.actions !== undefined) {
             if(Array.isArray(changed.system.actions)) {
                 const mainAction = changed.system.actions.find(action => action.type === "attack");

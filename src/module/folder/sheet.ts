@@ -86,6 +86,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
                       folder.color?.css ?? "#000000",
             sortingModes: { a: "FOLDER.SortAlphabetical", m: "FOLDER.SortManual" },
             submitText: game.i18n.localize(folder._id ? "FOLDER.Update" : "FOLDER.Create"),
+            fields: this.document.schema.fields
         };
     }
 
@@ -95,25 +96,25 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
         _options: HandlebarsRenderOptions
     ): void {
         super._attachPartListeners(partId, htmlElement, _options);
-        if (partId === "base") {
-            const colorElement =
-                htmlElement.querySelector<HTMLInputElement>("input[type='color']")!;
-            const edits = colorElement.dataset.edit;
-            if (edits) {
-                colorElement.addEventListener("input", () => {
-                    const sibling = colorElement.previousElementSibling as
-                        | HTMLInputElement
-                        | undefined;
-                    if (sibling?.getAttribute("name") !== edits) return;
+        // if (partId === "base") {
+        //     const colorElement =
+        //         htmlElement.querySelector<HTMLInputElement>("input[type='color']")!;
+        //     const edits = colorElement.dataset.edit;
+        //     if (edits) {
+        //         colorElement.addEventListener("input", () => {
+        //             const sibling = colorElement.previousElementSibling as
+        //                 | HTMLInputElement
+        //                 | undefined;
+        //             if (sibling?.getAttribute("name") !== edits) return;
 
-                    sibling.value = colorElement.value;
-                    colorElement.style.setProperty(
-                        "--color-input-border-color",
-                        colorElement.value
-                    );
-                });
-            }
-        }
+        //             sibling.value = colorElement.value;
+        //             colorElement.style.setProperty(
+        //                 "--color-input-border-color",
+        //                 colorElement.value
+        //             );
+        //         });
+        //     }
+        // }
 
         if(partId === "members") {
             const ownerFieldset = htmlElement.querySelector<HTMLFieldSetElement>("fieldset.owner");

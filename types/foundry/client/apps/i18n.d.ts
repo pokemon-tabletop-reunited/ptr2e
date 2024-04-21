@@ -52,6 +52,14 @@ declare class Localization {
     setLanguage(lang: string): Promise<void>;
 
     /**
+     * Return whether a certain string has a known translation defined.
+     * @param {string} stringId     The string key being translated
+     * @param {boolean} [fallback]  Allow fallback translations to count?
+     * @returns {boolean}
+     */
+    has(stringId: string, fallback?: boolean): boolean;
+
+    /**
      * Localize a string by drawing a translation from the available translations dictionary, if available
      * If a translation is not available, the original string is returned
      * @param stringId  The string ID to translate

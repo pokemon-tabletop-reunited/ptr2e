@@ -1,0 +1,35 @@
+<figure>
+    <header class="header">
+        <h2>{{document.name}}</h2>
+    </header>
+    {{#if traits}}
+    <header class="traits">
+        <input type="text" class="traits ptr2e-tagify" name="system.traits" value="{{json traits}}" data-dType="JSON" readonly/>
+    </header>
+    {{/if}}
+    <content class="effect-embed">
+        {{#if (eq document.type 'affliction')}}
+            <section class="details">
+                <fieldset>
+                    <label for="duration.turns">{{localize parentFields.duration.fields.turns.label}}</label> <span>{{document.duration.turns}}</span>
+                    {{#if (isdefined document.duration.startTurn)}}<label for="duration.startTurn">{{localize parentFields.duration.fields.startTurn.label}}</label> <span>{{document.duration.startTurn}}</span>{{/if}}
+                    {{#if (isdefined document.duration.remaining)}}<label for="duration.remaining">{{localize "PTR2E.Effect.Fields.duration.remaining.label"}}</label> <span>{{document.duration.remaining}}</span>{{/if}}
+                </fieldset>
+            </section>
+        {{/if}}
+        <section class="effect-description">
+            <fieldset>
+                <legend>Effect Description</legend>
+                {{#if document.description}}
+                <article>
+                    {{{document.description}}}
+                </article>
+                {{else}}
+                <article class="center">
+                    <small><i>No Effect Description Provided</i></small>
+                </article>
+                {{/if}}
+            </fieldset>
+        </section>
+    </content>
+</figure>

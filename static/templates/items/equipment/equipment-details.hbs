@@ -1,0 +1,34 @@
+<section class="tab sheet-body {{tabs.details.cssClass}}" data-tab="details" data-group="sheet">
+    <div class="scroll">
+        <fieldset>
+            <legend>
+                Current State
+            </legend>
+            {{formField fields.quantity value=source.system.quantity localize=true}}
+            {{formField fields.equipped.fields.carryType value=source.system.equipped.carryType localize=true}}
+            {{formField fields.equipped.fields.handsHeld value=source.system.equipped.handsHeld localize=true}}
+        </fieldset>
+        <fieldset>
+            <legend>
+                Quality & Value
+            </legend>
+            {{formField fields.cost value=source.system.cost localize=true}}
+            {{formField fields.grade value=source.system.grade localize=true}}
+            {{formField fields.rarity value=source.system.rarity localize=true}} 
+        </fieldset>
+        <fieldset>
+            <legend>
+                Crafting
+            </legend>
+            {{formField fields.crafting.fields.skill value=source.system.crafting.skill localize=true}}
+            {{formField fields.crafting.fields.time.fields.value value=source.system.crafting.time.value localize=true}}
+            {{formField fields.crafting.fields.time.fields.unit value=source.system.crafting.time.unit localize=true}}
+        </fieldset>
+        <fieldset>
+            <legend>
+                Description
+            </legend>
+            {{formField fields.description value=source.system.description toggled=true localize=true}}
+        </fieldset>
+    </div>
+</section>

@@ -14,6 +14,6 @@ declare global {
 
         createPopout(): SidebarTab;
 
-        get collection(): DocumentCollection<TItem>;
+        get collection(): WorldCollection<TItem>;
     }
 }

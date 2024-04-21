@@ -5,6 +5,7 @@ import { sluggify } from "@utils";
 import { ClockDatabase, TraitsCollection } from "@data";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import { Pokedex } from "pokeapi-js-wrapper";
+import { UUIDUtils } from "src/util/uuid.ts";
 
 const GamePTR = {
     onInit() {
@@ -12,7 +13,8 @@ const GamePTR = {
             tree: new PerkTree(),
             util: {
                 sluggify,
-                pokeApi: new Pokedex()
+                pokeApi: new Pokedex(),
+                uuid: UUIDUtils
             },
             data: {
                 traits: TraitsCollection.create(),

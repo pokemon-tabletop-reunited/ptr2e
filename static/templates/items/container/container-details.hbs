@@ -1,0 +1,11 @@
+<section class="tab sheet-body {{tabs.details.cssClass}}" data-tab="details" data-group="sheet">
+    <div class="scroll">
+        <fieldset>
+            <legend>
+                Details
+            </legend>
+            {{formField fields.collapsed value=source.system.collapsed localize=true}}
+            {{formField fields.description value=source.system.description toggled=true localize=true}}
+        </fieldset>
+    </div>
+</section>
