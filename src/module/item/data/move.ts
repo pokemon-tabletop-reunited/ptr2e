@@ -48,6 +48,12 @@ export default abstract class MoveSystem extends HasEmbed(HasBase(foundry.abstra
             }
         }
 
+        if(!data.img || data.img === "icons/svg/item-bag.svg") {
+            this.parent.updateSource({
+                img: "/systems/ptr2e/img/icons/untyped_icon.png"
+            })
+        }
+
         return await super._preCreate(data, options, user);
     }
 

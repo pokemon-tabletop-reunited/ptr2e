@@ -48,6 +48,14 @@ declare global {
 
         initializeTree(): void;
 
+        /**
+         * Creates the list of Folder options in this Collection in hierarchical order
+         * for populating the options of a select tag.
+         * @returns {{id: string, name: string}[]}
+         * @internal
+         */
+        _formatFolderSelectOptions(): { id: string; name: string }[];
+
         /** Sort two Entries by name, alphabetically. */
         static _sortAlphabetical(a: Document, b: Document): number;
 
