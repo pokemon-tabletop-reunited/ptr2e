@@ -41,6 +41,10 @@ export default abstract class ActiveEffectSystem extends HasEmbed(
 
         return result;
     }
+
+    override async toEmbed(_config: foundry.abstract.DocumentHTMLEmbedConfig, options: EnrichmentOptions = {}): Promise<HTMLElement | HTMLCollection | null> {
+        return super.toEmbed(_config, options, {parentFields: this.parent.schema.fields});
+    }
 }
 
 export default interface ActiveEffectSystem

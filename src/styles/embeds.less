@@ -65,7 +65,9 @@ aside[role="tooltip"].attack,
             }
         }
 
-        content.item-embed {
+        content.item-embed, content.effect-embed {
+            all: unset;
+
             section.details {
                 display: flex;
                 flex-direction: column;
@@ -83,6 +85,13 @@ aside[role="tooltip"].attack,
     
                     label {
                         font-weight: bold;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow-x: hidden;
+
+                        + span {
+                            margin-left: 0.25rem;
+                        }
                     }
     
                     article {
@@ -128,7 +137,8 @@ aside[role="tooltip"].attack,
         }
 
         .attack-description fieldset,
-        .item-description fieldset {
+        .item-description fieldset,
+        .effect-description fieldset {
             background: var(--color-light-2);
         }
 
