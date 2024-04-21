@@ -17,7 +17,7 @@ function _registerPTRHelpers() {
     });
 
     Handlebars.registerHelper(
-        "icon",
+        "getIcon",
         function (img: PokemonType | PokemonCategory, args: { hash: Record<string, string> }) {
             if (
                 !Object.values(PTRCONSTS.Categories).includes(img as PokemonCategory) &&

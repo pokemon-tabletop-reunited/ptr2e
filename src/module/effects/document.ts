@@ -40,14 +40,17 @@ class ActiveEffectPTR2e<
 
     override prepareBaseData(): void {
         super.prepareBaseData();
-        
+
         this._name = this._source.name;
         Object.defineProperty(this, "name", {
-            get: () => this.duration.remaining !== undefined ? `${this._name} ${this.duration.remaining}` : this._name,
+            get: () =>
+                this.duration.remaining !== undefined
+                    ? `${this._name} ${this.duration.remaining}`
+                    : this._name,
             set: (value: string) => {
                 this._name = value;
-            }
-        })
+            },
+        });
     }
 
     override prepareDerivedData(): void {
@@ -166,6 +169,19 @@ class ActiveEffectPTR2e<
         };
     }
 
+    toChat(): Promise<any> {
+        return ChatMessage.create({
+            content: `<span>@Embed[${this.uuid} caption=false classes=no-tooltip]</span>`,
+            speaker: ChatMessage.getSpeaker({
+                actor: this.targetsActor()
+                    ? this.target
+                    : this.parent instanceof ItemPTR2e
+                      ? this.parent.actor
+                      : game.user.character ?? null,
+            }),
+        });
+    }
+
     override toObject(source?: true | undefined): this["_source"];
     override toObject(source: false): RawObject<this>;
     override toObject(source?: boolean | undefined): this["_source"] | RawObject<this> {
@@ -183,7 +199,7 @@ class ActiveEffectPTR2e<
             const statusEffect = CONFIG.statusEffects.find((effect) => effect._id === data._id);
             if (statusEffect) options.keepId = true;
         }
-        if(this.targetsActor() && data.duration?.turns && !data.duration.startTurn) {
+        if (this.targetsActor() && data.duration?.turns && !data.duration.startTurn) {
             this.updateSource({
                 duration: {
                     startTurn: this.parent.combatant?.system.activations ?? 0,

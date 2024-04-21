@@ -73,8 +73,6 @@ export const Init: PTRHook = {
                 Actors.registerSheet("ptr2e", PTRCONFIG.Actor.sheetClasses["ptu-actor"], { types: ["ptu-actor"], makeDefault: true })
 
                 Items.unregisterSheet("core", ItemSheet);
-                //@ts-ignore
-                Items.registerSheet("ptr2e", PTRCONFIG.Item.sheetClasses.ability, { types: ["ability"], makeDefault: true });
                 for (const type in PTRCONFIG.Item.sheetClasses) {
                     const key = type as keyof typeof PTRCONFIG.Item.sheetClasses;
                     for (const sheet of PTRCONFIG.Item.sheetClasses[key]) {

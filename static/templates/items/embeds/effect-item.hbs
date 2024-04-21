@@ -1,0 +1,18 @@
+<figure>
+    <header class="header">
+        <h2>{{document.name}}</h2>
+    </header>
+    <content>
+        {{#each effects as |effect|}}
+            <span>@Embed[{{effect.uuid}} caption=false classes=no-tooltip]</span>
+            {{else}}
+            <section class="item-description">
+                <fieldset>
+                    <article class="center">
+                        <small><i>This Effect item has no embedded Effects.</i></small>
+                    </article>
+                </fieldset>
+            </section>
+        {{/each}}
+    </content>
+</figure>

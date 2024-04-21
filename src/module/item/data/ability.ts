@@ -1,5 +1,5 @@
 import { AbilityPTR2e } from "@item";
-import { HasBase } from "@module/data/index.ts";
+import { HasBase, HasEmbed } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 
 /**
@@ -7,7 +7,7 @@ import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
  * @extends {HasBase}
  * @extends {foundry.abstract.TypeDataModel}
  */
-export default abstract class AbilitySystem extends HasBase(foundry.abstract.TypeDataModel) {
+export default abstract class AbilitySystem extends HasEmbed(HasBase(foundry.abstract.TypeDataModel), "ability") {
     /**
      * @internal
      */

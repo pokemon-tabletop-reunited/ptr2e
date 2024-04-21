@@ -1,12 +1,12 @@
 import { SpeciesPTR2e } from "@item";
-import { HasDescription, HasSlug, HasTraits, PTRCONSTS } from "@module/data/index.ts";
+import { HasDescription, HasEmbed, HasSlug, HasTraits, PTRCONSTS } from "@module/data/index.ts";
 import { PokemonType } from "@data";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { ActorPTR2e } from "@actor";
 
-const SpeciesExtension = HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel)));
+const SpeciesExtension = HasEmbed(HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel))), "species");
 
 /**
  * @category Item Data Models

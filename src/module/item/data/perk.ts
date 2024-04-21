@@ -1,13 +1,14 @@
 import { PerkPTR2e } from "@item";
-import { HasTraits, HasActions, HasSlug, HasDescription } from "@module/data/index.ts";
+import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed } from "@module/data/index.ts";
 import { sluggify } from "@utils";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 
 const NODE_TYPES = ["normal", "root", "ranked"] as const;
 type NodeType = (typeof NODE_TYPES)[number];
 
-const PerkExtension = HasTraits(
-    HasDescription(HasSlug(HasActions(foundry.abstract.TypeDataModel)))
+const PerkExtension = HasEmbed(
+    HasTraits(HasDescription(HasSlug(HasActions(foundry.abstract.TypeDataModel)))),
+    "perk"
 );
 
 /**

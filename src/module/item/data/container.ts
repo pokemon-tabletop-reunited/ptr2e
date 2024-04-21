@@ -1,9 +1,9 @@
 import { ContainerPTR2e } from "@item";
-import { HasContainer, HasDescription, HasSlug, HasTraits, HasGearData } from "@module/data/index.ts";
+import { HasContainer, HasDescription, HasSlug, HasTraits, HasGearData, HasEmbed } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e } from "./system.ts";
 import { GearSystemSource } from "./gear.ts";
 
-const ContainerExtension = HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))))
+const ContainerExtension = HasEmbed(HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel))))), "container");
 
 /**
  * @category Item Data Models
@@ -32,7 +32,7 @@ export default abstract class ContainerSystem extends ContainerExtension {
         return {
             ...super.defineSchema(),
 
-            collapsed: new fields.BooleanField({ required: true, initial: false }),
+            collapsed: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.collapsed.label", hint: "PTR2E.FIELDS.collapsed.hint"}),
         };
     }
 

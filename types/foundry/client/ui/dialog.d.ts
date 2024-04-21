@@ -180,6 +180,10 @@ interface DialogData {
     buttons?: Record<string, DialogButton>;
     default?: string;
     render?: (html: HTMLElement | JQuery) => void;
+    label?: string;
+    callback?: (html: JQuery) => void;
+    rejectClose?: boolean;
+    options?: object;
 }
 
 interface DialogButton {

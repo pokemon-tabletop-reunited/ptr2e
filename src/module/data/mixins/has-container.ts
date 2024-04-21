@@ -26,7 +26,7 @@ export default function HasContainer<BaseClass extends TemplateConstructor>(base
 			return {
 				...super.defineSchema(),
                 
-                container: new fields.DocumentUUIDField( { required: false, nullable: true, label: "PTR2E.FIELDS.Container.Label", hint: "PTR2E.FIELDS.Container.Hint"})
+                container: new fields.DocumentUUIDField( { required: false, nullable: true, label: "PTR2E.FIELDS.container.label", hint: "PTR2E.FIELDS.container.hint"})
 			};
 		}
 

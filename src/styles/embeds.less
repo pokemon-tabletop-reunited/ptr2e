@@ -1,5 +1,15 @@
 aside[role="tooltip"].attack,
-.chat-message .move-embed {
+.chat-message .move-embed,
+.chat-message .effect-embed,
+.chat-message .ability-embed,
+.chat-message .consumable-embed,
+.chat-message .container-embed,
+.chat-message .effect-item-embed,
+.chat-message .equipment-embed,
+.chat-message .gear-embed,
+.chat-message .perk-embed,
+.chat-message .species-embed,
+.chat-message .weapon-embed {
     figure {
         header {
             h2 {
@@ -7,7 +17,14 @@ aside[role="tooltip"].attack,
                 text-align: center;
             }
 
+            &.header {
+                margin-bottom: 0.5rem;
+                border-bottom: 1px solid var(--color-light-6);
+            }
+
             &.traits {
+                border-bottom: unset;
+
                 tags[readonly] {
                     width: 100%;
 
@@ -34,6 +51,7 @@ aside[role="tooltip"].attack,
 
         content.attack-embed {
             font-size: 15px;
+
             section.attack-info {
                 grid-template-areas:
                     "basic"
@@ -46,23 +64,71 @@ aside[role="tooltip"].attack,
                 line-break: pre-wrap;
             }
         }
+
+        content.item-embed, content.effect-embed {
+            all: unset;
+
+            section.details {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .details {
+                fieldset {
+                    display: grid !important;
+                    grid-template-columns: 60% 40%;
+                    grid-auto-rows: 17px;
+                    gap: 0.25rem !important;
+                    padding: 0.25rem !important;
+                    border: 1px solid var(--color-light-6);
+                    border-radius: 8px;
+                    margin-bottom: 0.5rem !important;
+    
+                    label {
+                        font-weight: bold;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                        overflow-x: hidden;
+
+                        + span {
+                            margin-left: 0.25rem;
+                        }
+                    }
+    
+                    article {
+                        line-height: 1.3;
+                        line-break: pre-wrap;
+                    }
+                }
+            }
+        }
     }
 }
 
 .chat-message {
     .message-content {
-        > figure.content-embed:only-child {
+        >figure.content-embed:only-child {
             margin: 0 0 0.5rem 0;
         }
     }
 
-    .move-embed {
+    .move-embed,
+    .effect-embed,
+    .ability-embed,
+    .consumable-embed,
+    .container-embed,
+    .effect-item-embed,
+    .equipment-embed,
+    .gear-embed,
+    .perk-embed,
+    .species-embed,
+    .weapon-embed {
         padding: 0.5rem;
         border: 1px solid var(--color-light-6);
         border-radius: 8px;
-        background-color: var(--color-light-3);
+        background-color: color-mix(in srgb, var(--color-light-3) 80%, transparent);
 
-        > figure {
+        >figure {
             margin: 0;
         }
 
@@ -71,9 +137,12 @@ aside[role="tooltip"].attack,
             background-color: var(--color-light-2);
         }
 
-        .attack-description fieldset {
+        .attack-description fieldset,
+        .item-description fieldset,
+        .effect-description fieldset {
             background: var(--color-light-2);
         }
+
         fieldset {
             border-color: var(--color-light-6);
             border-radius: 8px;
@@ -140,6 +209,7 @@ content.attack-embed {
 
         section.attack-description {
             margin-top: 1rem;
+
             article {
                 min-height: 50px;
             }
