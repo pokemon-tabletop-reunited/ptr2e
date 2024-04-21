@@ -140,7 +140,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
         }
     }
 
-    override _prepareSubmitData(formData: FormDataExtended): Record<string, unknown> {
+    override _prepareSubmitData(_event: SubmitEvent, _form: HTMLFormElement, formData: FormDataExtended): Record<string, unknown> {
         const data = fu.expandObject(formData.object);
         function isSystem(system: unknown): system is SpeciesSystemSource["system"] {
             return (
