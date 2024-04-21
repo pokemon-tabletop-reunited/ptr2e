@@ -13,6 +13,35 @@ aside[role="tooltip"].attack figure header h2,
   border-bottom: unset;
   text-align: center;
 }
+aside[role="tooltip"].attack figure header.header,
+.chat-message .move-embed figure header.header,
+.chat-message .effect-embed figure header.header,
+.chat-message .ability-embed figure header.header,
+.chat-message .consumable-embed figure header.header,
+.chat-message .container-embed figure header.header,
+.chat-message .effect-item-embed figure header.header,
+.chat-message .equipment-embed figure header.header,
+.chat-message .gear-embed figure header.header,
+.chat-message .perk-embed figure header.header,
+.chat-message .species-embed figure header.header,
+.chat-message .weapon-embed figure header.header {
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-light-6);
+}
+aside[role="tooltip"].attack figure header.traits,
+.chat-message .move-embed figure header.traits,
+.chat-message .effect-embed figure header.traits,
+.chat-message .ability-embed figure header.traits,
+.chat-message .consumable-embed figure header.traits,
+.chat-message .container-embed figure header.traits,
+.chat-message .effect-item-embed figure header.traits,
+.chat-message .equipment-embed figure header.traits,
+.chat-message .gear-embed figure header.traits,
+.chat-message .perk-embed figure header.traits,
+.chat-message .species-embed figure header.traits,
+.chat-message .weapon-embed figure header.traits {
+  border-bottom: unset;
+}
 aside[role="tooltip"].attack figure header.traits tags[readonly],
 .chat-message .move-embed figure header.traits tags[readonly],
 .chat-message .effect-embed figure header.traits tags[readonly],
@@ -105,6 +134,70 @@ aside[role="tooltip"].attack figure content.attack-embed fieldset article,
   line-height: 1.3;
   line-break: pre-wrap;
 }
+aside[role="tooltip"].attack figure content.item-embed section.details,
+.chat-message .move-embed figure content.item-embed section.details,
+.chat-message .effect-embed figure content.item-embed section.details,
+.chat-message .ability-embed figure content.item-embed section.details,
+.chat-message .consumable-embed figure content.item-embed section.details,
+.chat-message .container-embed figure content.item-embed section.details,
+.chat-message .effect-item-embed figure content.item-embed section.details,
+.chat-message .equipment-embed figure content.item-embed section.details,
+.chat-message .gear-embed figure content.item-embed section.details,
+.chat-message .perk-embed figure content.item-embed section.details,
+.chat-message .species-embed figure content.item-embed section.details,
+.chat-message .weapon-embed figure content.item-embed section.details {
+  display: flex;
+  flex-direction: column;
+}
+aside[role="tooltip"].attack figure content.item-embed .details fieldset,
+.chat-message .move-embed figure content.item-embed .details fieldset,
+.chat-message .effect-embed figure content.item-embed .details fieldset,
+.chat-message .ability-embed figure content.item-embed .details fieldset,
+.chat-message .consumable-embed figure content.item-embed .details fieldset,
+.chat-message .container-embed figure content.item-embed .details fieldset,
+.chat-message .effect-item-embed figure content.item-embed .details fieldset,
+.chat-message .equipment-embed figure content.item-embed .details fieldset,
+.chat-message .gear-embed figure content.item-embed .details fieldset,
+.chat-message .perk-embed figure content.item-embed .details fieldset,
+.chat-message .species-embed figure content.item-embed .details fieldset,
+.chat-message .weapon-embed figure content.item-embed .details fieldset {
+  display: grid !important;
+  grid-template-columns: 60% 40%;
+  grid-auto-rows: 17px;
+  gap: 0.25rem !important;
+  padding: 0.25rem !important;
+  border: unset;
+  margin-bottom: unset !important;
+}
+aside[role="tooltip"].attack figure content.item-embed .details fieldset label,
+.chat-message .move-embed figure content.item-embed .details fieldset label,
+.chat-message .effect-embed figure content.item-embed .details fieldset label,
+.chat-message .ability-embed figure content.item-embed .details fieldset label,
+.chat-message .consumable-embed figure content.item-embed .details fieldset label,
+.chat-message .container-embed figure content.item-embed .details fieldset label,
+.chat-message .effect-item-embed figure content.item-embed .details fieldset label,
+.chat-message .equipment-embed figure content.item-embed .details fieldset label,
+.chat-message .gear-embed figure content.item-embed .details fieldset label,
+.chat-message .perk-embed figure content.item-embed .details fieldset label,
+.chat-message .species-embed figure content.item-embed .details fieldset label,
+.chat-message .weapon-embed figure content.item-embed .details fieldset label {
+  font-weight: bold;
+}
+aside[role="tooltip"].attack figure content.item-embed .details fieldset article,
+.chat-message .move-embed figure content.item-embed .details fieldset article,
+.chat-message .effect-embed figure content.item-embed .details fieldset article,
+.chat-message .ability-embed figure content.item-embed .details fieldset article,
+.chat-message .consumable-embed figure content.item-embed .details fieldset article,
+.chat-message .container-embed figure content.item-embed .details fieldset article,
+.chat-message .effect-item-embed figure content.item-embed .details fieldset article,
+.chat-message .equipment-embed figure content.item-embed .details fieldset article,
+.chat-message .gear-embed figure content.item-embed .details fieldset article,
+.chat-message .perk-embed figure content.item-embed .details fieldset article,
+.chat-message .species-embed figure content.item-embed .details fieldset article,
+.chat-message .weapon-embed figure content.item-embed .details fieldset article {
+  line-height: 1.3;
+  line-break: pre-wrap;
+}
 .chat-message .message-content > figure.content-embed:only-child {
   margin: 0 0 0.5rem 0;
 }
@@ -161,7 +254,18 @@ aside[role="tooltip"].attack figure content.attack-embed fieldset article,
 .chat-message .gear-embed .attack-description fieldset,
 .chat-message .perk-embed .attack-description fieldset,
 .chat-message .species-embed .attack-description fieldset,
-.chat-message .weapon-embed .attack-description fieldset {
+.chat-message .weapon-embed .attack-description fieldset,
+.chat-message .move-embed .item-description fieldset,
+.chat-message .effect-embed .item-description fieldset,
+.chat-message .ability-embed .item-description fieldset,
+.chat-message .consumable-embed .item-description fieldset,
+.chat-message .container-embed .item-description fieldset,
+.chat-message .effect-item-embed .item-description fieldset,
+.chat-message .equipment-embed .item-description fieldset,
+.chat-message .gear-embed .item-description fieldset,
+.chat-message .perk-embed .item-description fieldset,
+.chat-message .species-embed .item-description fieldset,
+.chat-message .weapon-embed .item-description fieldset {
   background: var(--color-light-2);
 }
 .chat-message .move-embed fieldset,

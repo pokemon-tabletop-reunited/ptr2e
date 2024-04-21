@@ -1,5 +1,5 @@
 <figure>
-    <header>
+    <header class="header">
         <h2>{{document.name}}</h2>
     </header>
     {{#if traits}}
@@ -7,7 +7,29 @@
         <input type="text" class="traits ptr2e-tagify" name="system.traits" value="{{json traits}}" data-dType="JSON" readonly/>
     </header>
     {{/if}}
-    <content>
-        {{{document.system.description}}}
+    <content class="item-embed">
+        <section class="details">
+            <fieldset>
+                <label for="type">{{localize fields.consumableType.label}}</label> <span>{{localize (lookup fields.consumableType.choices document.system.consumableType)}}</span>
+            </fieldset>
+            <fieldset>
+                <label for="charges.value">{{localize fields.charges.fields.value.label}}</label> <span>{{document.system.charges.value}}</span>
+                <label for="charges.max">{{localize fields.charges.fields.max.label}}</label> <span>{{document.system.charges.max}}</span>
+            </fieldset>
+        </section>
+        <section class="item-description">
+            <fieldset>
+                <legend>Effect Description</legend>
+                {{#if document.system.description}}
+                <article>
+                    {{{document.system.description}}}
+                </article>
+                {{else}}
+                <article class="center">
+                    <small><i>No Effect Description Provided</i></small>
+                </article>
+                {{/if}}
+            </fieldset>
+        </section>
     </content>
 </figure>

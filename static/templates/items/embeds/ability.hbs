@@ -1,5 +1,5 @@
 <figure>
-    <header>
+    <header class="header">
         <h2>{{document.name}}</h2>
     </header>
     {{#if traits}}
@@ -8,6 +8,19 @@
     </header>
     {{/if}}
     <content>
-        {{{document.system.description}}}
+        <section class="item-description">
+            <fieldset>
+                <legend>Effect Description</legend>
+                {{#if document.system.description}}
+                <article>
+                    {{{document.system.description}}}
+                </article>
+                {{else}}
+                <article class="center">
+                    <small><i>No Effect Description Provided</i></small>
+                </article>
+                {{/if}}
+            </fieldset>
+        </section>
     </content>
 </figure>

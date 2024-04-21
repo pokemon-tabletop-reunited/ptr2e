@@ -15,7 +15,7 @@ export default function HasEmbed<BaseClass extends TemplateConstructor>(baseClas
                 return [];
             })();
 
-            const enrichedEffect = await TextEditor.enrichHTML(await renderTemplate(`systems/ptr2e/templates/items/embeds/${type}.hbs`, {...additionalProperties, document: this.parent, traits}), options);
+            const enrichedEffect = await TextEditor.enrichHTML(await renderTemplate(`systems/ptr2e/templates/items/embeds/${type}.hbs`, {...additionalProperties, document: this.parent, fields: this.schema.fields, traits}), options);
             const container = document.createElement("div");
             container.classList.add("embed",`${type}-embed`);
             container.innerHTML = enrichedEffect;
