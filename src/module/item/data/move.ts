@@ -19,6 +19,10 @@ export default abstract class MoveSystem extends HasEmbed(HasBase(foundry.abstra
     }
 
     override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
+        if(data.system === undefined) {
+            //@ts-expect-error
+            data.system = {actions: []};
+        }
         if(data.system.actions instanceof Map) {
             throw new Error("Actions must be an array.");
         }
@@ -31,6 +35,7 @@ export default abstract class MoveSystem extends HasEmbed(HasBase(foundry.abstra
                     slug: sluggify(`${data.name} Attack`),
                     type: "attack",
                 }]
+                this.parent.updateSource({"system.actions": data.system.actions});
             }
             else if(!actions.some(action => action.type === "attack")) {
                 //@ts-expect-error
@@ -39,6 +44,7 @@ export default abstract class MoveSystem extends HasEmbed(HasBase(foundry.abstra
                     slug: sluggify(`${data.name} Attack`),
                     type: "attack",
                 });
+                this.parent.updateSource({"system.actions": data.system.actions});
             }
         }
 

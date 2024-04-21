@@ -1,113 +1,76 @@
 import { MovePTR2e } from "@item";
 import { AttackPTR2e } from "@data";
-import { htmlQueryAll, sluggify } from "@utils";
-import { DocumentSheetConfiguration, DocumentSheetV2, Tab } from "./document.ts";
-import Tagify from "@yaireo/tagify";
-import GithubManager from "@module/apps/github.ts";
-import { ActiveEffectPTR2e } from "@effects";
+import { sluggify } from "@utils";
+import { Tab } from "./document.ts";
+import { default as ItemSheetPTR2e } from "./base.ts";
 
-export default class MoveSheetPTR2eV2 extends foundry.applications.api.HandlebarsApplicationMixin(
-    DocumentSheetV2<MovePTR2e>
-) {
+export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
     static override DEFAULT_OPTIONS = fu.mergeObject(
         super.DEFAULT_OPTIONS,
         {
             classes: ["move-sheet"],
-            position: {
-                height: 450,
-                width: 550,
-            },
-            actions: {
-                toChat: this.#toChat,
-                toGithub: GithubManager.commitItemToGithub,
-            },
-            form: {
-                submitOnChange: true,
-                closeOnSubmit: false,
-            },
         },
         { inplace: false }
     );
 
-    #allTraits: { value: string; label: string }[] | undefined;
+    static override readonly overviewTemplate =
+        "systems/ptr2e/templates/items/move/move-overview.hbs";
+    static override readonly detailsTemplate =
+        "systems/ptr2e/templates/items/move/move-details.hbs";
+    override noActions: boolean = true;
 
-    static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
-        header: {
-            id: "header",
-            template: "/systems/ptr2e/templates/items/parts/item-header.hbs",
-        },
-        tabs: {
-            id: "tabs",
-            template: "/systems/ptr2e/templates/items/parts/item-tabs.hbs",
-        },
-        traits: {
-            id: "traits",
-            template: "/systems/ptr2e/templates/items/parts/item-traits.hbs",
-        },
-        overview: {
-            id: "overview",
-            template: "/systems/ptr2e/templates/items/move/move-overview.hbs",
-        },
-        details: {
-            id: "details",
-            template: "/systems/ptr2e/templates/items/move/move-details.hbs",
-        },
-        attack: {
-            id: "attack",
-            template: "/systems/ptr2e/templates/items/move/move-attack.hbs",
-            scrollable: [".scroll"],
-            forms: {
-                "#attack": {
-                    handler: this._submitAttack,
-                    closeOnSubmit: false,
-                    submitOnChange: true,
+    static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> =
+        fu.mergeObject(
+            super.PARTS,
+            {
+                overview: {
+                    template: MoveSheet.overviewTemplate,
+                },
+                details: {
+                    template: MoveSheet.detailsTemplate,
+                },
+                attack: {
+                    id: "attack",
+                    template: "/systems/ptr2e/templates/items/move/move-attack.hbs",
+                    scrollable: [".scroll"],
+                    forms: {
+                        "#attack": {
+                            handler: this._submitAttack,
+                            closeOnSubmit: false,
+                            submitOnChange: true,
+                        },
+                    },
                 },
             },
-        },
-        effects: {
-            id: "effects",
-            template: "/systems/ptr2e/templates/items/move/move-effects.hbs",
-        },
-    };
+            { inplace: false }
+        );
 
-    tabGroups: Record<string, string> = {
-        sheet: "overview",
-    };
-
-    tabs: Record<string, Tab> = {
+    override tabs: Record<string, Tab> = {
         overview: {
             id: "overview",
             group: "sheet",
             icon: "fa-solid fa-house",
-            label: "PTR2E.MoveSheet.Tabs.overview.label",
+            label: "PTR2E.ItemSheet.Tabs.overview.label",
         },
         details: {
             id: "details",
             group: "sheet",
             icon: "fa-solid fa-cogs",
-            label: "PTR2E.MoveSheet.Tabs.details.label",
+            label: "PTR2E.ItemSheet.Tabs.details.label",
         },
         attack: {
             id: "attack",
             group: "sheet",
             icon: "fa-solid fa-bullseye",
-            label: "PTR2E.MoveSheet.Tabs.attack.label",
+            label: "PTR2E.ItemSheet.Tabs.attack.label",
         },
         effects: {
             id: "effects",
             group: "sheet",
             icon: "fa-solid fa-star",
-            label: "PTR2E.MoveSheet.Tabs.effects.label",
+            label: "PTR2E.ItemSheet.Tabs.effects.label",
         },
     };
-
-    _getTabs() {
-        for (const v of Object.values(this.tabs)) {
-            v.active = this.tabGroups[v.group] === v.id;
-            v.cssClass = v.active ? "active" : "";
-        }
-        return this.tabs;
-    }
 
     override changeTab(
         tab: string,
@@ -137,31 +100,8 @@ export default class MoveSheetPTR2eV2 extends foundry.applications.api.Handlebar
             | AttackPTR2e
             | undefined;
 
-        const traits = await (async () => {
-            const traits = [];
-            for (const trait of this.document.system.traits.values()) {
-                traits.push({
-                    value: trait.slug,
-                    label: trait.label,
-                });
-            }
-            return traits;
-        })();
-
-        this.#allTraits = game.ptr.data.traits
-            .asArray()
-            .map((trait) => ({ value: trait.slug, label: trait.label }));
-
-        const effects = this.document.effects.contents;
-
         return {
-            ...((await super._prepareContext()) as Record<string, unknown>),
-            item: this.document,
-            source: this.document.toObject(),
-            fields: this.document.system.schema.fields,
-            tabs: this._getTabs(),
-            traits,
-            effects,
+            ...(await super._prepareContext()),
             attack: {
                 attack: attack,
                 source: attack?._source,
@@ -170,144 +110,8 @@ export default class MoveSheetPTR2eV2 extends foundry.applications.api.Handlebar
         };
     }
 
-    override async _renderFrame(options: DocumentSheetConfiguration<MovePTR2e>) {
-        const frame = await super._renderFrame(options);
-
-        // Add send to chat button
-        const toChatLabel = game.i18n.localize("PTR2E.MoveSheet.SendToChatLabel");
-        const toChat = `<button type="button" class="header-control fa-solid fa-arrow-up-right-from-square" data-action="toChat"
-                                data-tooltip="${toChatLabel}" aria-label="${toChatLabel}"></button>`;
-        this.window.controls.insertAdjacentHTML("afterend", toChat);
-
-        if (game.settings.get("ptr2e", "dev-mode")) {
-            // Add send to chat button
-            const commitToGithubLabel = game.i18n.localize("PTR2E.UI.DevMode.CommitToGithub.Label");
-            const commitToGithub = `<button type="button" class="header-control fa-solid fa-upload" data-action="toGithub"
-                                    data-tooltip="${commitToGithubLabel}" aria-label="${commitToGithubLabel}"></button>`;
-            this.window.controls.insertAdjacentHTML("afterend", commitToGithub);
-        }
-
-        return frame;
-    }
-
-    override _attachFrameListeners(): void {
-        super._attachFrameListeners();
-        this.element.addEventListener("drop", this._onDrop.bind(this));
-    }
-
-    override _attachPartListeners(
-        partId: string,
-        htmlElement: HTMLElement,
-        options: DocumentSheetConfiguration<MovePTR2e>
-    ): void {
-        super._attachPartListeners(partId, htmlElement, options);
-
-        if (partId === "traits") {
-            for (const input of htmlElement.querySelectorAll<HTMLInputElement>(
-                "input.ptr2e-tagify"
-            )) {
-                new Tagify(input, {
-                    enforceWhitelist: true,
-                    keepInvalidTags: false,
-                    editTags: false,
-                    tagTextProp: "label",
-                    dropdown: {
-                        enabled: 0,
-                        mapValueTo: "label",
-                    },
-                    templates: {
-                        tag: function (tagData): string {
-                            return `
-                            <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
-                                tagData
-                            )}>
-                            <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                            <div>
-                                <span class='tagify__tag-text'>
-                                    <span class="trait" data-tooltip-direction="UP" data-trait="${
-                                        tagData.value
-                                    }" data-tooltip="${
-                                        tagData.label
-                                    }"><span>[</span><span class="tag">${
-                                        tagData.label
-                                    }</span><span>]</span></span>
-                                </span>
-                            </div>
-                            `;
-                        },
-                    },
-                    whitelist: this.#allTraits,
-                });
-            }
-        }
-
-        if (partId === "effects") {
-            for (const element of htmlQueryAll(htmlElement, ".item-controls .effect-to-chat")) {
-                element.addEventListener("click", async (event) => {
-                    const effectId = (
-                        (event.currentTarget as HTMLElement)?.closest(".effect") as HTMLElement
-                    )?.dataset.id;
-                    if (!effectId) return;
-                    return (this.document.effects.get(effectId) as ActiveEffectPTR2e)?.toChat();
-                });
-            }
-
-            for (const element of htmlQueryAll(htmlElement, ".item-controls .effect-edit")) {
-                element.addEventListener("click", async (event) => {
-                    const effectId = (
-                        (event.currentTarget as HTMLElement)?.closest(".effect") as HTMLElement
-                    )?.dataset.id;
-                    if (!effectId) return;
-                    return (
-                        this.document.effects.get(effectId) as ActiveEffectPTR2e
-                    )?.sheet?.render(true);
-                });
-            }
-
-            for (const element of htmlQueryAll(htmlElement, ".item-controls .effect-delete")) {
-                element.addEventListener("click", async (event) => {
-                    const effectId = (
-                        (event.currentTarget as HTMLElement)?.closest(".effect") as HTMLElement
-                    )?.dataset.id;
-                    const effect = this.document.effects.get(effectId!);
-                    if (!effect) return;
-                    return foundry.applications.api.DialogV2.confirm({
-                        yes: {
-                            callback: () => effect.delete(),
-                        },
-                        content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", {
-                            name: effect.name,
-                        }),
-                        window: {
-                            title: game.i18n.format("PTR2E.Dialog.DeleteDocumentTitle", {
-                                name: effect.name,
-                            }),
-                        },
-                    });
-                });
-            }
-        }
-    }
-
-    override _prepareSubmitData(formData: FormDataExtended): Record<string, unknown> {
-        const data = fu.expandObject(formData.object);
-        if ("system" in data && data.system && typeof data.system === "object") {
-            if (
-                "traits" in data.system &&
-                data.system.traits &&
-                Array.isArray(data.system.traits) &&
-                data.system.traits.length
-            ) {
-                data.system.traits = data.system.traits.map(
-                    (trait: { value: string }) => trait.value
-                );
-            }
-        }
-        return data;
-    }
-
     static async _submitAttack(
-        this: MoveSheetPTR2eV2,
+        this: MoveSheet,
         _event: SubmitEvent | Event,
         _form: HTMLFormElement,
         formData: FormDataExtended
@@ -324,31 +128,5 @@ export default class MoveSheetPTR2eV2 extends foundry.applications.api.Handlebar
         //@ts-expect-error
         actions[attackIndex].traits = this.document.system._source.traits;
         await this.document.update({ "system.actions": actions });
-    }
-
-    static async #toChat(this: MoveSheetPTR2eV2, _event: Event) {
-        return this.document.toChat();
-    }
-
-    async _onDrop(event: DragEvent) {
-        event.preventDefault();
-        const data = TextEditor.getDragEventData<{ type: string }>(event);
-        const item = this.document;
-        const allowed = Hooks.call("dropItemSheetData", item, data, event);
-        if (allowed === false) return;
-
-        // Handle different data types
-        switch (data.type) {
-            case "ActiveEffect": {
-                this._onDropActiveEffect(event, data);
-            }
-        }
-    }
-
-    async _onDropActiveEffect(_event: DragEvent, data: object) {
-        const effect = await ActiveEffectPTR2e.fromDropData(data);
-        if (!this.document.isOwner || !effect) return false;
-        if (effect.target === this.document) return false;
-        return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.document });
     }
 }

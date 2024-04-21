@@ -2,7 +2,6 @@
 import { ActorPTR2e, ActorSheetPTR2e, HumanoidActorSystem, PokemonActorSystem } from "@actor";
 import { CharacterCombatantSystem, CombatPTR2e, CombatSystemPTR2e, CombatTrackerPTR2e, CombatantPTR2e, RoundCombatantSystem } from "@combat";
 import { ItemPTR2e, data, sheets } from "@item";
-import { AbilitySheetPTR2e } from "@item/sheets/ability.ts";
 import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
 import { SquareGridPTR2e } from "@module/canvas/grid.ts";
 import { TemplateLayerPTR2e } from "@module/canvas/layer/template.ts";
@@ -85,19 +84,25 @@ export const PTRCONFIG = {
             ability: data.AbilitySystemModel,
             consumable: data.ConsumableSystemModel,
             container: data.ContainerSystemModel,
+            effect: data.EffectSystemModel,
             equipment: data.EquipmentSystemModel,
             gear: data.GearSystemModel,
             move: data.MoveSystemModel,
             perk: data.PerkSystemModel,
             species: data.SpeciesSystemModel,
             weapon: data.WeaponSystemModel,
-            effect: data.EffectSystemModel,
         },
         sheetClasses: {
-            perk: [sheets.PerkSheetPTR2e],
-            ability: [AbilitySheetPTR2e],
+            ability: [sheets.AbilitySheetPTR2e],
+            consumable: [sheets.ConsumableSheetPTR2e],
+            container: [sheets.ContainerSheetPTR2e],
+            effect: [sheets.EffectSheetPTR2e],
+            equipment: [sheets.EquipmentSheetPTR2e],
+            gear: [sheets.GearSheetPTR2e],
             move: [sheets.MoveSheetPTR2e],
+            perk: [sheets.PerkSheetPTR2e],
             species: [sheets.SpeciesSheetPTR2e],
+            weapon: [sheets.WeaponSheetPTR2e],
             "ptu-item": [sheets.PTUSheet],
         },
     },

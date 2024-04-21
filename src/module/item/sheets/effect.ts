@@ -1,7 +1,7 @@
-import { GearPTR2e } from "@item";
+import { EffectPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
-export default class GearSheet extends ItemSheetPTR2e<GearPTR2e["system"]> {
+export default class EffectSheet extends ItemSheetPTR2e<EffectPTR2e["system"]> {
     static override DEFAULT_OPTIONS = fu.mergeObject(
         super.DEFAULT_OPTIONS,
         {
@@ -10,17 +10,17 @@ export default class GearSheet extends ItemSheetPTR2e<GearPTR2e["system"]> {
         { inplace: false }
     );
 
-    static override readonly overviewTemplate= "systems/ptr2e/templates/items/gear/gear-overview.hbs";
-    static override readonly detailsTemplate= "systems/ptr2e/templates/items/gear/gear-details.hbs";
+    static override readonly overviewTemplate= "systems/ptr2e/templates/items/effect/effect-overview.hbs";
+    static override readonly detailsTemplate= "systems/ptr2e/templates/items/effect/effect-details.hbs";
     override noActions: boolean = true;
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = 
         fu.mergeObject(super.PARTS, {
             overview: {
-                template: GearSheet.overviewTemplate,
+                template: EffectSheet.overviewTemplate,
             },
             details: {
-                template: GearSheet.detailsTemplate,
+                template: EffectSheet.detailsTemplate,
             },
         }, { inplace: false });
 }

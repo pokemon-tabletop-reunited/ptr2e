@@ -52,6 +52,8 @@ type ApplicationWindowConfiguration = {
     controls?: ApplicationHeaderControlsEntry[];
     /** Can the window app be minimized by double-clicking on the title */
     minimizable?: boolean;
+    /** Resizable */
+    resizable?: boolean;
 };
 
 type ApplicationFormConfiguration = {

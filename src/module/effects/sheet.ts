@@ -24,6 +24,9 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
                 closeOnSubmit: false,
                 submitOnChange: true,
             },
+            window: {
+                resizable: true,
+            }
         },
         { inplace: false }
     );
