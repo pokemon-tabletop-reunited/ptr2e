@@ -1,8 +1,10 @@
 <section class="tab sheet-body {{tabs.details.cssClass}}" data-tab="details" data-group="sheet">
-    <fieldset>
-        <legend>
-            Details
-        </legend>
-    
-    </fieldset>
+    <div class="scroll">
+        <fieldset>
+            <legend>
+                Details
+            </legend>
+            {{formField fields.description value=source.system.description toggled=true localize=true}}
+        </fieldset>
+    </div>
 </section>

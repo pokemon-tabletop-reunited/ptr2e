@@ -123,7 +123,6 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
         const expanded = fu.expandObject(formData.object).attack as AttackPTR2e["_source"];
         actions[attackIndex] = fu.mergeObject(actions[attackIndex], expanded, { inplace: false });
         actions[attackIndex].slug = sluggify(actions[attackIndex].name);
-        //@ts-expect-error
         actions[attackIndex].description = this.document.system._source.description;
         //@ts-expect-error
         actions[attackIndex].traits = this.document.system._source.traits;
