@@ -796,12 +796,14 @@ export class DocumentSheetV2<
     get isEditable(): boolean;
 
     /**
-     * Prepare data used to update the Item upon form submission.
-     * @param {FormDataExtended} formData           Submitted form data
-     * @returns {object}                            Prepared submission data as an object
-     * @protected
-     */
-    _prepareSubmitData(formData: FormDataExtended): Record<string, unknown>;
+   * Prepare data used to update the Item upon form submission.
+   * @param {SubmitEvent} event                   The originating form submission event
+   * @param {HTMLFormElement} form                The form element that was submitted
+   * @param {FormDataExtended} formData           Processed data for the submitted form
+   * @returns {object}                            Prepared submission data as an object
+   * @protected
+   */
+    _prepareSubmitData(event: SubmitEvent, form: HTMLFormElement, formData: FormDataExtended): Record<string, unknown>;
 }
 
 
