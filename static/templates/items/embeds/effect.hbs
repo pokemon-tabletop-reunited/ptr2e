@@ -12,8 +12,8 @@
             <section class="details">
                 <fieldset>
                     <label for="duration.turns">{{localize parentFields.duration.fields.turns.label}}</label> <span>{{document.duration.turns}}</span>
-                    <label for="duration.startTurn">{{localize parentFields.duration.fields.startTurn.label}}</label> <span>{{document.duration.startTurn}}</span>
-                    <label for="duration.remaining">{{localize parentFields.duration.fields.remaining.label}}</label> <span>{{document.duration.remaining}}</span>
+                    {{#if (isdefined document.duration.startTurn)}}<label for="duration.startTurn">{{localize parentFields.duration.fields.startTurn.label}}</label> <span>{{document.duration.startTurn}}</span>{{/if}}
+                    {{#if (isdefined document.duration.remaining)}}<label for="duration.remaining">{{localize "PTR2E.Effect.Fields.duration.remaining.label"}}</label> <span>{{document.duration.remaining}}</span>{{/if}}
                 </fieldset>
             </section>
         {{/if}}
