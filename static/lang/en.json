@@ -70,10 +70,6 @@
                     "label": "Predicate",
                     "hint": "The predicate of the change."
                 },
-                "Description": {
-                    "label": "Description",
-                    "hint": "The effect description of this document."
-                },
                 "priority": {
                     "label": "Priority",
                     "hint": "Affliction's are applied in batches based on their priority, from lowest to highest.\nThe system keeps all healing affliction at priority 0, and all damaging afflictions at priority 30, and in-between those numbers special cases are handled.\n\nFor homebrew content we recommend using these same numbers if your affliction is meant to be applied in the same batch as the system afflictions."
@@ -291,6 +287,29 @@
             }
         },
         "FIELDS": {
+            "consumable": {
+                "type": {
+                    "label": "Type",
+                    "hint": "The type of consumable.",
+                    "food": "Food",
+                    "restorative": "Restorative",
+                    "boosters": "Boosters",
+                    "ammo": "Ammo",
+                    "evolution-item": "Evolution Item",
+                    "pokeball": "Pokeball",
+                    "other": "Other"
+                },
+                "charges": {
+                    "value": {
+                        "label": "Charges",
+                        "hint": "The number of charges this consumable has."
+                    },
+                    "max": {
+                        "label": "Max Charges",
+                        "hint": "The maximum number of charges this consumable can have."
+                    }
+                }
+            },
             "actions": {
                 "label": "Actions",
                 "attack": {
@@ -306,8 +325,8 @@
                 "hint": "The slug is a unique identifier for this entity."
             },
             "description": {
-                "label": "Description",
-                "hint": "A brief description of the effect."
+                "label": "Effect Description",
+                "hint": "The effect description of this document."
             },
             "container": {
                 "label": "Container",

@@ -20,7 +20,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
                 ...super.defineSchema(),
 
                 //TODO: Add validation to Traits field
-                traits: new fields.SetField(new SlugField())
+                traits: new fields.SetField(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.traits.label", hint: "PTR2E.FIELDS.traits.hint" })
             };
         }
 

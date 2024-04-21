@@ -1230,6 +1230,19 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet.folder-edit section.team-member .dismiss {
   flex: 0 0 20px;
 }
+.sheet .window-content .tab:has(div.scroll) {
+  padding: 0;
+}
+.sheet .window-content .tab div.scroll {
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0.5rem;
+}
 .sheet.active-effect-sheet .window-content {
   display: grid;
   grid-template-columns: 35% 65%;

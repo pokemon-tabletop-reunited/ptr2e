@@ -2,8 +2,16 @@ import { ConsumablePTR2e } from "@item";
 import { HasContainer, HasDescription, HasEmbed, HasSlug, HasTraits } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 
-const CONSUMABLE_TYPES = ["food", "restorative", "boosters", "ammo", "evolution-item", "pokeball", "other"] as const
-type ConsumableType = typeof CONSUMABLE_TYPES[number];
+const CONSUMABLE_TYPES = {
+    ammo: "PTR2E.FIELDS.consumable.type.ammo",
+    boosters: "PTR2E.FIELDS.consumable.type.boosters",
+    "evolution-item": "PTR2E.FIELDS.consumable.type.evolution-item",
+    food: "PTR2E.FIELDS.consumable.type.food",
+    pokeball:"PTR2E.FIELDS.consumable.type.pokeball",
+    restorative:"PTR2E.FIELDS.consumable.type.restorative",
+    other:"PTR2E.FIELDS.consumable.type.other",
+} as const
+type ConsumableType = typeof CONSUMABLE_TYPES[keyof typeof CONSUMABLE_TYPES];
 const ConsumableExtension = HasEmbed(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))), "consumable");
 
 /**
@@ -43,9 +51,16 @@ export default abstract class ConsumableSystem extends ConsumableExtension {
         const fields = foundry.data.fields;
         return {
             ...super.defineSchema(),
-            consumableType: new fields.StringField({ required: true, initial: "other", choices: CONSUMABLE_TYPES }),
-            charges: new fields.NumberField({ required: true, initial: 1 }),
+            consumableType: new fields.StringField({ required: true, initial: "other", choices: CONSUMABLE_TYPES, label: "PTR2E.FIELDS.consumable.type.label", hint: "PTR2E.FIELDS.consumable.type.hint"}),
+            charges: new fields.SchemaField({
+                value: new fields.NumberField({ required: true, initial: 1, min: 0, step: 1, label: "PTR2E.FIELDS.consumable.charges.value.label", hint: "PTR2E.FIELDS.consumable.charges.value.hint"}),
+                max: new fields.NumberField({ required: true, initial: 1, min: 1, step: 1, label: "PTR2E.FIELDS.consumable.charges.max.label", hint: "PTR2E.FIELDS.consumable.charges.max.hint"}),
+            }),
         };
+    }
+
+    static override validateJoint(data: ConsumableSystem['_source']) {
+        if(data.charges.value > data.charges.max) throw new Error("PTR2E.Errors.ChargesValueGreaterThanMax");
     }
 
     override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {

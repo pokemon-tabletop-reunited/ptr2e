@@ -12,7 +12,7 @@ export default function HasDescription<BaseClass extends TemplateConstructor>(ba
             return {
                 ...super.defineSchema(),
 
-                description: new fields.HTMLField({ required: true, initial: ""}),
+                description: new fields.HTMLField({ required: true, initial: "", label: "PTR2E.FIELDS.description.label", hint: "PTR2E.FIELDS.description.hint"}),
             };
         }
     }
