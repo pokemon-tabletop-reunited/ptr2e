@@ -24,13 +24,25 @@ declare global {
         protected override _sheet: ActiveEffectConfig<this> | null;
 
         /**
+         * Determine whether the ActiveEffect requires a duration update.
+         * True if the worldTime has changed for an effect whose duration is tracked in seconds.
+         * True if the combat turn has changed for an effect tracked in turns where the effect target is a combatant.
+         */
+        protected _requiresDurationUpdate(): boolean;
+
+        /**
+         * Compute derived data related to active effect duration.
+         */
+        protected _prepareDuration(): Partial<ActiveEffect<TParent>['duration']>;
+
+        /**
          * Format a round+turn combination as a decimal
          * @param round    The round number
          * @param turn     The turn number
          * @param [nTurns] The maximum number of turns in the encounter
          * @returns The decimal representation
          */
-        protected _getCombatTime(round: number, turn: number, nTurns?: number): number;
+        protected _getCombatTime(round: number | null, turn: number | null, nTurns?: number): number;
 
         /**
          * Format a number of rounds and turns into a human-readable duration label
@@ -38,7 +50,13 @@ declare global {
          * @param turns   The number of turns
          * @returns The formatted label
          */
-        protected _getDurationLabel(rounds: number, turns: number): string;
+        protected _getDurationLabel(rounds: number | null, turns: number | null): string;
+
+        /**
+        * Retrieve the initial duration configuration.
+        * @returns {{duration: {startTime: number, [startRound]: number, [startTurn]: number}}}
+        */
+        static getInitialDuration(): Partial<ActiveEffect<Actor>['duration']>;
 
         /** Describe whether the ActiveEffect has a temporary duration based on combat turns or rounds. */
         get isTemporary(): boolean;
@@ -157,8 +175,11 @@ declare global {
 
     interface PreparedEffectDurationData extends EffectDurationData {
         type: string;
-        remaining?: string;
-        label?: string;
+        duration: number | null
+        remaining: number | null;
+        label: string;
+        _worldTime?: number;
+        _combatTime?: number;
     }
 
     interface TemporaryEffect extends ModelPropsFromSchema<ActiveEffectSchema> {

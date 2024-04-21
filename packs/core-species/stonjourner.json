@@ -32,14 +32,49 @@
           "level": 6
         },
         {
+          "name": "rock-tomb",
+          "gen": "scarlet-violet",
+          "level": 12
+        },
+        {
+          "name": "gravity",
+          "gen": "scarlet-violet",
+          "level": 18
+        },
+        {
           "name": "stomp",
           "gen": "scarlet-violet",
           "level": 24
         },
         {
+          "name": "stealth-rock",
+          "gen": "scarlet-violet",
+          "level": 30
+        },
+        {
+          "name": "rock-slide",
+          "gen": "scarlet-violet",
+          "level": 36
+        },
+        {
+          "name": "body-slam",
+          "gen": "scarlet-violet",
+          "level": 42
+        },
+        {
           "name": "wide-guard",
           "gen": "scarlet-violet",
           "level": 48
+        },
+        {
+          "name": "heavy-slam",
+          "gen": "scarlet-violet",
+          "level": 54
+        },
+        {
+          "name": "stone-edge",
+          "gen": "scarlet-violet",
+          "level": 60
         },
         {
           "name": "mega-kick",
@@ -48,6 +83,10 @@
         }
       ],
       "machine": [
+        {
+          "name": "mega-kick",
+          "gen": "sword-shield"
+        },
         {
           "name": "body-slam",
           "gen": "scarlet-violet"
@@ -243,16 +282,25 @@
       ],
       "egg": [
         {
+          "name": "curse",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "ancient-power",
           "gen": "scarlet-violet"
         }
       ],
-      "tutor": []
+      "tutor": [
+        {
+          "name": "meteor-beam",
+          "gen": "sword-shield"
+        }
+      ]
     },
     "size": {
       "height": 2.5,
       "weight": 520,
-      "category": "medium",
+      "category": "large",
       "type": "height"
     },
     "captureRate": 60,
@@ -268,30 +316,61 @@
       }
     },
     "number": 874,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "bipedal",
+      "fully-evolved",
+      "underdog",
+      "breathless",
+      "tireless"
+    ],
+    "diet": [
+      "nullivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "power-spot"
+      ],
+      "basic": [
+        "friend-guard",
+        "pressure"
+      ],
+      "advanced": [
+        "equinox",
+        "power-fists"
+      ],
+      "master": [
+        "petrified",
+        "battle-armor"
+      ]
     },
     "movement": {
-      "primary": [],
+      "primary": [
+        {
+          "type": "overland",
+          "value": 7
+        }
+      ],
       "secondary": []
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "archaeology": 40,
+      "conversation": 20,
+      "history": 50,
+      "intimidate": 40,
+      "lift": 70,
+      "natural-world": 60,
+      "navigate": 60,
+      "occult-geomancy": 50,
+      "running": 20,
+      "spot": 40,
+      "survival": 30
+    },
+    "habitats": [],
+    "slug": "stonjourner"
   },
   "_id": "tSCjZIGVR8m7Zqhs",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.tSCjZIGVR8m7Zqhs"
@@ -300,10 +379,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!tSCjZIGVR8m7Zqhs"
 }

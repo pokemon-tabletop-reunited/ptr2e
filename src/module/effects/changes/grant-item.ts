@@ -52,14 +52,33 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
     static override defineSchema(): GrantItemSchema {
         const fields = foundry.data.fields;
+        const schema = super.defineSchema();
+        schema.value.validate = GrantItemChangeSystem.#validateUuid;
         return {
-            ...super.defineSchema(),
-            reevaluateOnUpdate: new fields.BooleanField(),
+            ...schema,
+            reevaluateOnUpdate: new fields.BooleanField({label: "PTR2E.Effect.FIELDS.ChangeReevaluateOnUpdate.label"}),
             inMemoryOnly: new fields.BooleanField(),
-            allowDuplicate: new fields.BooleanField({ initial: true }),
+            allowDuplicate: new fields.BooleanField({ initial: true, label: "PTR2E.Effect.FIELDS.ChangeAllowDuplicate.label"}),
             alterations: new fields.ArrayField(new fields.EmbeddedDataField(ItemAlteration)),
             track: new fields.BooleanField(),
         };
+    }
+
+    static override #validateUuid(value: unknown): void | foundry.data.validation.DataModelValidationFailure {
+        if (!UUIDUtils.isItemUUID(value)) {
+            return new foundry.data.validation.DataModelValidationFailure({
+                invalidValue: value,
+                message: game.i18n.localize("PTR2E.Effect.FIELDS.ChangeUuid.invalid.notAnItemUuid"),
+                unresolved: false
+            });
+        }
+        if(!fromUuidSync(value)) {
+            return new foundry.data.validation.DataModelValidationFailure({
+                invalidValue: value,
+                message: game.i18n.format("PTR2E.Effect.FIELDS.ChangeUuid.invalid.itemNotFound", {uuid: value}),
+                unresolved: false
+            });
+        }
     }
 
     static ON_DELETE_ACTIONS = ["cascade", "detach", "restrict"] as const;

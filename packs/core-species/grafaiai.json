@@ -4,8 +4,8 @@
   "type": "species",
   "system": {
     "types": [
-      "poison",
-      "normal"
+      "normal",
+      "poison"
     ],
     "stats": {
       "hp": 63,
@@ -18,11 +18,6 @@
     "moves": {
       "levelUp": [
         {
-          "name": "doodle",
-          "gen": "scarlet-violet",
-          "level": 0
-        },
-        {
           "name": "scratch",
           "gen": "scarlet-violet",
           "level": 1
@@ -31,6 +26,11 @@
           "name": "leer",
           "gen": "scarlet-violet",
           "level": 1
+        },
+        {
+          "name": "acid-spray",
+          "gen": "scarlet-violet",
+          "level": 5
         },
         {
           "name": "fury-swipes",
@@ -56,6 +56,40 @@
           "name": "slash",
           "gen": "scarlet-violet",
           "level": 21
+        },
+        {
+          "name": "u-turn",
+          "gen": "scarlet-violet",
+          "level": 25
+        },
+        {
+          "name": "poison-jab",
+          "gen": "scarlet-violet",
+          "level": 33
+        },
+        {
+          "name": "taunt",
+          "gen": "scarlet-violet",
+          "level": 37
+        },
+        {
+          "name": "substitute",
+          "gen": "scarlet-violet",
+          "level": 40
+        },
+        {
+          "name": "knock-off",
+          "gen": "scarlet-violet",
+          "level": 45
+        },
+        {
+          "name": "gunk-shot",
+          "gen": "scarlet-violet",
+          "level": 51
+        },
+        {
+          "name": "doodle",
+          "gen": "scarlet-violet"
         }
       ],
       "machine": [
@@ -258,7 +292,7 @@
     "size": {
       "height": 0.7,
       "weight": 27.2,
-      "category": "medium",
+      "category": "small",
       "type": "height"
     },
     "captureRate": 90,
@@ -285,30 +319,69 @@
       }
     },
     "number": 945,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "darkvision",
+      "reach",
+      "toxic-skin",
+      "underdog",
+      "wallclimber"
+    ],
+    "diet": [
+      "carnivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "unburden",
+        "moody"
+      ],
+      "basic": [
+        "poison-touch",
+        "prankster"
+      ],
+      "advanced": [
+        "nocturnal",
+        "covert"
+      ],
+      "master": [
+        "spiteful",
+        "toxic-shock"
+      ]
     },
     "movement": {
-      "primary": [],
-      "secondary": []
+      "primary": [
+        {
+          "type": "overland",
+          "value": 11
+        }
+      ],
+      "secondary": [
+        {
+          "type": "swim",
+          "value": 5
+        }
+      ]
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "acrobatics": 35,
+      "climb": 55,
+      "conversation": 15,
+      "intimidate": 45,
+      "lift": 15,
+      "listen": 70,
+      "natural-world": 65,
+      "negotiation": 25,
+      "running": 30,
+      "spot-hidden": 60,
+      "stealth": 80,
+      "survival": 45,
+      "track": 40
+    },
+    "habitats": [],
+    "slug": "grafaiai"
   },
   "_id": "FgjJwInkQowGNvJX",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.FgjJwInkQowGNvJX"
@@ -317,10 +390,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185555199,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!FgjJwInkQowGNvJX"
 }

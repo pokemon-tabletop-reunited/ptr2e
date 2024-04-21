@@ -134,6 +134,7 @@ declare global {
             documentClass: {
                 new (data: PreCreate<TCombat["_source"]>, context?: DocumentConstructionContext<null>): TCombat;
             };
+            dataModels: Record<string, Partial<foundry.abstract.TypeDataModel>>;
             collection: typeof CombatEncounters;
             defeatedStatusId: string;
             sidebarIcon: string;

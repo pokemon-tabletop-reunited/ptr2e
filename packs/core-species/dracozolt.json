@@ -247,6 +247,11 @@
           "level": 63
         },
         {
+          "name": "dragon-pulse",
+          "gen": "sword-shield",
+          "level": 70
+        },
+        {
           "name": "dragon-rush",
           "gen": "sword-shield",
           "level": 77
@@ -271,8 +276,8 @@
     "size": {
       "height": 1.8,
       "weight": 190,
-      "category": "medium",
-      "type": "height"
+      "category": "large",
+      "type": "quad"
     },
     "captureRate": 45,
     "eggGroups": [
@@ -287,30 +292,61 @@
       }
     },
     "number": 880,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "bipedal",
+      "underdog",
+      "fully-evolved",
+      "scientific-abomination"
+    ],
+    "diet": [
+      "herbivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "volt-absorb",
+        "hustle"
+      ],
+      "basic": [
+        "sand-rush",
+        "early-bird"
+      ],
+      "advanced": [
+        "sand-veil",
+        "cursed-body"
+      ],
+      "master": [
+        "sand-stream",
+        "protosynthesis"
+      ]
     },
     "movement": {
-      "primary": [],
-      "secondary": []
+      "primary": [
+        {
+          "type": "overland",
+          "value": 8
+        }
+      ],
+      "secondary": [
+        {
+          "type": "swim",
+          "value": 3
+        }
+      ]
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "acrobatics": 35,
+      "climb": 20,
+      "lift": 40,
+      "listen": 40,
+      "running": 35,
+      "spot": 40
+    },
+    "habitats": [],
+    "slug": "dracozolt"
   },
   "_id": "8nh5E5nVtaBz9HuV",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.8nh5E5nVtaBz9HuV"
@@ -319,10 +355,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!8nh5E5nVtaBz9HuV"
 }

@@ -1,0 +1,25 @@
+<section class="tab sheet-body {{tabs.details.cssClass}}" data-tab="details" data-group="sheet">
+    <div class="scroll">
+        {{formField fields.duration.fields.turns value=data.duration.turns localize=true}}
+        {{formField fields.duration.fields.startTurn value=data.duration.startTurn localize=true}}
+
+        <div class="form-group">
+            <label>{{localize "PTR2E.Effect.FIELDS.duration.remaining.label"}}</label>
+            <div class="form-fields">
+                <input type="number" disabled value="{{data.duration.remaining}}">
+            </div>
+            <p class="hint">{{localize "PTR2E.Effect.FIELDS.duration.remaining.hint"}}</p>
+        </div>
+
+        {{#if (is data.type "affliction")}}
+            {{formField system.schema.fields.priority value=data.system.priority localize=true}}
+
+            {{formField system.schema.fields.formula value=data.system.formula localize=true}}
+
+            {{formField system.schema.fields.type value=data.system.type localize=true}}
+        {{/if}}
+
+        {{formField system.schema.fields.removeAfterCombat value=data.system.removeAfterCombat localize=true}}
+        {{formField system.schema.fields.removeOnRecall value=data.system.removeOnRecall localize=true}}
+    </div>
+</section>

@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import { AttackMessageSystem, ChatMessagePTR2e } from "@chat";
+import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } from "@chat";
 import { AttackPTR2e } from "@data";
 import { ItemPTR2e, MovePTR2e } from "@item";
 import Tagify from "@yaireo/tagify";
@@ -78,6 +78,8 @@ export default class TooltipsPTR2e {
                     return this._onDamageTooltip();
                 case "content-link": 
                     return this._onContentLinkTooltip();
+                case "damage-info":
+                    return this._onDamageInfoTooltip();
             }
         }
 
@@ -231,6 +233,22 @@ export default class TooltipsPTR2e {
         return 500;
     }
 
+    async _onDamageInfoTooltip() {
+        const element = game.tooltip.element;
+        if (!element) return false;
+
+        const uuid = element.dataset.message
+        if (!uuid) return false;
+
+        const message = await fromUuid(uuid) as ChatMessagePTR2e<DamageAppliedMessageSystem>;
+        if (!message) return false;
+
+        this.tooltip.classList.add("damage-info");
+        await this._renderTooltip({ path: "systems/ptr2e/templates/chat/tooltips/damage-info.hbs", data: { notes: message.system._notesHTML }, direction: game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined });
+
+        return 500;
+    }
+
     async _onContentLinkTooltip() {
         const element = game.tooltip.element;
         if (!element) return false;
@@ -269,7 +287,7 @@ export default class TooltipsPTR2e {
                 <circle class="fgb"></circle>
             </svg>
         </div>`;
-        this.tooltip.innerHTML = html;
+        this.tooltip.innerHTML = await TextEditor.enrichHTML(html);
         requestAnimationFrame(() => this._positionTooltip(direction));
     }
 

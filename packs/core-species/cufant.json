@@ -25,11 +25,19 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "double-edge",
+          "gen": "scarlet-violet"
+        },
+        {
           "name": "fissure",
           "gen": "scarlet-violet"
         },
         {
           "name": "defense-curl",
+          "gen": "scarlet-violet"
+        },
+        {
+          "name": "curse",
           "gen": "scarlet-violet"
         },
         {
@@ -63,14 +71,44 @@
           "level": 10
         },
         {
+          "name": "bulldoze",
+          "gen": "scarlet-violet",
+          "level": 15
+        },
+        {
           "name": "stomp",
           "gen": "scarlet-violet",
           "level": 20
         },
         {
+          "name": "iron-defense",
+          "gen": "scarlet-violet",
+          "level": 25
+        },
+        {
+          "name": "dig",
+          "gen": "scarlet-violet",
+          "level": 30
+        },
+        {
           "name": "strength",
           "gen": "scarlet-violet",
           "level": 35
+        },
+        {
+          "name": "iron-head",
+          "gen": "scarlet-violet",
+          "level": 40
+        },
+        {
+          "name": "play-rough",
+          "gen": "scarlet-violet",
+          "level": 45
+        },
+        {
+          "name": "high-horsepower",
+          "gen": "scarlet-violet",
+          "level": 50
         },
         {
           "name": "superpower",
@@ -150,6 +188,10 @@
         {
           "name": "facade",
           "gen": "scarlet-violet"
+        },
+        {
+          "name": "superpower",
+          "gen": "sword-shield"
         },
         {
           "name": "brick-break",
@@ -254,6 +296,10 @@
       ],
       "tutor": [
         {
+          "name": "steel-beam",
+          "gen": "sword-shield"
+        },
+        {
           "name": "steel-roller",
           "gen": "sword-shield"
         }
@@ -263,7 +309,7 @@
       "height": 1.2,
       "weight": 100,
       "category": "medium",
-      "type": "height"
+      "type": "quad"
     },
     "captureRate": 190,
     "eggGroups": [
@@ -290,30 +336,68 @@
       }
     },
     "number": 878,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "quadruped",
+      "lumbering",
+      "pack-mon",
+      "underdog"
+    ],
+    "diet": [
+      "herbivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "sheer-force",
+        "heavy-metal"
+      ],
+      "basic": [
+        "filter",
+        "intimidate"
+      ],
+      "advanced": [
+        "sand-force",
+        "sand-rush"
+      ],
+      "master": [
+        "huge-power",
+        "mold-breaker"
+      ]
     },
     "movement": {
-      "primary": [],
-      "secondary": []
+      "primary": [
+        {
+          "type": "overland",
+          "value": 4
+        }
+      ],
+      "secondary": [
+        {
+          "type": "swim",
+          "value": 3
+        }
+      ]
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "climb": 15,
+      "conversation": 25,
+      "intimidate": 25,
+      "leadership": 20,
+      "lift": 50,
+      "listen": 40,
+      "natural-world": 30,
+      "navigate": 35,
+      "negotiation": 30,
+      "running": 20,
+      "spot": 30,
+      "survival": 35,
+      "swim": 20
+    },
+    "habitats": [],
+    "slug": "cufant"
   },
   "_id": "PMBo8fpPg7jUFpgy",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.PMBo8fpPg7jUFpgy"
@@ -322,10 +406,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!PMBo8fpPg7jUFpgy"
 }

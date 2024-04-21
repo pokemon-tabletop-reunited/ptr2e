@@ -1,7 +1,8 @@
 aside[role="tooltip"] {
     min-width: 150px;
     
-    background: linear-gradient(to right, rgba(7, 7, 10, 0.9), rgba(19, 17, 31, 0.95)) !important;
+    --tooltip-background: linear-gradient(to right, rgba(7, 7, 10, 0.9), rgba(19, 17, 31, 0.95));
+    background: var(--tooltip-background) !important;
     border-color: var(--color-light-6) !important;
     border-radius: 8px !important;
 
@@ -160,6 +161,65 @@ aside[role="tooltip"] {
             .button {
                 flex: 0 0 auto;
                 margin: 0 0.25rem;
+            }
+        }
+    }
+
+    &:has(.damage-info) {
+        padding: 0 !important;
+        min-width: 165px;
+    }
+
+    &.damage-info {
+        display: flex;
+        flex-direction: column;
+
+        header {
+            padding: 0.5rem;
+            padding-right: 0.75rem;
+
+            h5 {
+                margin: 0;
+            }
+
+            border-bottom: 1px solid var(--color-light-6);
+            width: 100%;
+        }
+
+        .note {
+            display: flex;
+            flex-direction: column;
+
+            padding: 0.5rem;
+
+            figure {
+                margin: 0;
+                padding-bottom: 0.5rem;
+                min-height: 20px;
+
+                .content-link {
+                    display: inline-block;
+
+                    background: var(--tooltip-background);
+                    border-color: var(--color-border-dark-tertiary);
+                    
+                    &.broken-link, &.broken {
+                        border-color: red;
+                    }
+                }
+
+                &:first-child {
+                    padding-top: unset;
+                }
+
+                &:last-child {
+                    padding: 0.5rem 0 0.25rem 0;
+                }
+
+                &.damage {
+                    // padding-top: 0.25rem;
+                    border-top: 1px solid var(--color-light-6);
+                }
             }
         }
     }

@@ -1,6 +1,6 @@
 
 import { ActorPTR2e, ActorSheetPTR2e, HumanoidActorSystem, PokemonActorSystem } from "@actor";
-import { CharacterCombatantSystem, CombatPTR2e, CombatTrackerPTR2e, CombatantPTR2e, RoundCombatantSystem } from "@combat";
+import { CharacterCombatantSystem, CombatPTR2e, CombatSystemPTR2e, CombatTrackerPTR2e, CombatantPTR2e, RoundCombatantSystem } from "@combat";
 import { ItemPTR2e, data, sheets } from "@item";
 import { AbilitySheetPTR2e } from "@item/sheets/ability.ts";
 import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
@@ -9,17 +9,27 @@ import { TemplateLayerPTR2e } from "@module/canvas/layer/template.ts";
 import { MeasuredTemplatePTR2e } from "@module/canvas/measured-template.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { BasicChangeSystem, ChangeModel } from "@data";
-import { ActiveEffectPTR2e, ActiveEffectSystem } from "@module/effects/index.ts";
+import { ActiveEffectPTR2e } from "@module/effects/index.ts";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem } from "@module/chat/index.ts";
 import Traits from "static/traits.json";
 import ItemDirectoryPTR2e from "@item/sidebar.ts";
 import { StatusEffects } from "./effects.ts";
+import FolderPTR2e from "@module/folder/document.ts";
+import ActorDirectoryPTR2e from "@actor/sidebar.ts";
+import FolderConfigPTR2e from "@module/folder/sheet.ts";
+import ActiveEffectConfigPTR2e from "@module/effects/sheet.ts";
+import PassiveActiveEffectSystem from "@module/effects/data/passive.ts";
+import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
         documentClass: ActiveEffectPTR2e,
         dataModels: {
-            basic: ActiveEffectSystem,
+            passive: PassiveActiveEffectSystem,
+            affliction: AfflictionActiveEffectSystem,
+        },
+        sheetClasses: {
+            effect: ActiveEffectConfigPTR2e,
         }
     },
     Actor: {
@@ -48,7 +58,10 @@ export const PTRCONFIG = {
         }
     },
     Combat: {
-        documentClass: CombatPTR2e
+        documentClass: CombatPTR2e,
+        dataModels: {
+            base: CombatSystemPTR2e
+        }
     },
     Combatant: {
         documentClass: CombatantPTR2e,
@@ -56,6 +69,12 @@ export const PTRCONFIG = {
             character: CharacterCombatantSystem,
             round: RoundCombatantSystem
         },
+    },
+    Folder: {
+        documentClass: FolderPTR2e,
+        sheetClasses: {
+            folder: FolderConfigPTR2e
+        }
     },
     Grid: {
         square: SquareGridPTR2e,
@@ -92,7 +111,8 @@ export const PTRCONFIG = {
     ui: {
         perks: PerkDirectory,
         combat: CombatTrackerPTR2e,
-        items: ItemDirectoryPTR2e
+        items: ItemDirectoryPTR2e,
+        actors: ActorDirectoryPTR2e
     },
     data: {
         traits: Traits,

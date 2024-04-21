@@ -4,8 +4,8 @@
   "type": "species",
   "system": {
     "types": [
-      "dragon",
-      "ghost"
+      "ghost",
+      "dragon"
     ],
     "stats": {
       "hp": 88,
@@ -186,6 +186,10 @@
           "gen": "scarlet-violet"
         },
         {
+          "name": "assurance",
+          "gen": "sword-shield"
+        },
+        {
           "name": "dragon-pulse",
           "gen": "scarlet-violet"
         },
@@ -248,11 +252,6 @@
       ],
       "levelUp": [
         {
-          "name": "dragon-darts",
-          "gen": "scarlet-violet",
-          "level": 0
-        },
-        {
           "name": "bite",
           "gen": "scarlet-violet",
           "level": 1
@@ -293,9 +292,39 @@
           "level": 12
         },
         {
+          "name": "hex",
+          "gen": "scarlet-violet",
+          "level": 18
+        },
+        {
+          "name": "agility",
+          "gen": "scarlet-violet",
+          "level": 24
+        },
+        {
           "name": "double-hit",
           "gen": "scarlet-violet",
           "level": 30
+        },
+        {
+          "name": "u-turn",
+          "gen": "scarlet-violet",
+          "level": 36
+        },
+        {
+          "name": "dragon-dance",
+          "gen": "scarlet-violet",
+          "level": 42
+        },
+        {
+          "name": "phantom-force",
+          "gen": "scarlet-violet",
+          "level": 48
+        },
+        {
+          "name": "take-down",
+          "gen": "scarlet-violet",
+          "level": 54
         },
         {
           "name": "dragon-rush",
@@ -303,18 +332,32 @@
           "level": 63
         },
         {
+          "name": "double-edge",
+          "gen": "scarlet-violet",
+          "level": 70
+        },
+        {
           "name": "last-resort",
           "gen": "scarlet-violet",
           "level": 78
+        },
+        {
+          "name": "dragon-darts",
+          "gen": "scarlet-violet"
         }
       ],
       "egg": [],
-      "tutor": []
+      "tutor": [
+        {
+          "name": "draco-meteor",
+          "gen": "sword-shield"
+        }
+      ]
     },
     "size": {
       "height": 3,
       "weight": 50,
-      "category": "medium",
+      "category": "large",
       "type": "height"
     },
     "captureRate": 45,
@@ -353,30 +396,64 @@
       }
     },
     "number": 887,
-    "slug": "",
-    "traits": ["pokemon"],
+    "traits": [
+      "pokemon",
+      "living-weapon",
+      "missile",
+      "breathless",
+      "hover",
+      "jet",
+      "pack-leader",
+      "invisibility",
+      "stealth",
+      "silent"
+    ],
     "diet": [],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "clear-body",
+        "infiltrator"
+      ],
+      "basic": [
+        "cursed-body",
+        "rock-head"
+      ],
+      "advanced": [
+        "aerodynamic",
+        "artillery"
+      ],
+      "master": [
+        "perforate",
+        "sniper"
+      ]
     },
     "movement": {
-      "primary": [],
+      "primary": [
+        {
+          "type": "flight",
+          "value": 36
+        }
+      ],
       "secondary": []
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "conversation": 50,
+      "intimidate": 65,
+      "leadership": 50,
+      "lift": 60,
+      "listen": 30,
+      "negotiation": 40,
+      "occult-ghosts": 65,
+      "ride": 40,
+      "running": 80,
+      "spot": 80,
+      "stealth": 65
+    },
+    "habitats": [],
+    "slug": "dragapult"
   },
   "_id": "T3n8FlfAh9bUxrKk",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.T3n8FlfAh9bUxrKk"
@@ -385,10 +462,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185555199,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!T3n8FlfAh9bUxrKk"
 }

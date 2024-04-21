@@ -170,6 +170,16 @@
           "level": 1
         },
         {
+          "name": "protect",
+          "gen": "sword-shield",
+          "level": 7
+        },
+        {
+          "name": "icy-wind",
+          "gen": "sword-shield",
+          "level": 14
+        },
+        {
           "name": "ancient-power",
           "gen": "sword-shield",
           "level": 21
@@ -195,6 +205,11 @@
           "level": 49
         },
         {
+          "name": "crunch",
+          "gen": "sword-shield",
+          "level": 56
+        },
+        {
           "name": "fishious-rend",
           "gen": "sword-shield",
           "level": 63
@@ -203,6 +218,11 @@
           "name": "icicle-crash",
           "gen": "sword-shield",
           "level": 70
+        },
+        {
+          "name": "blizzard",
+          "gen": "sword-shield",
+          "level": 77
         }
       ],
       "tutor": [
@@ -216,8 +236,8 @@
     "size": {
       "height": 2,
       "weight": 175,
-      "category": "medium",
-      "type": "height"
+      "category": "large",
+      "type": "length"
     },
     "captureRate": 45,
     "eggGroups": [
@@ -232,30 +252,56 @@
       }
     },
     "number": 883,
-    "slug": "",
-    "traits": ["pokemon"],
-    "diet": [],
+    "traits": [
+      "pokemon",
+      "legless",
+      "gilled",
+      "natural-swimmer",
+      "underdog",
+      "fully-evolved",
+      "scientific-abomination"
+    ],
+    "diet": [
+      "carnivore"
+    ],
     "abilities": {
-      "starting": [],
-      "basic": [],
-      "advanced": [],
-      "master": []
+      "starting": [
+        "water-absorb",
+        "ice-body"
+      ],
+      "basic": [
+        "slush-rush",
+        "torrent"
+      ],
+      "advanced": [
+        "rain-dish",
+        "rough-skin"
+      ],
+      "master": [
+        "sheer-force",
+        "simple"
+      ]
     },
     "movement": {
-      "primary": [],
+      "primary": [
+        {
+          "type": "swim",
+          "value": 9
+        }
+      ],
       "secondary": []
     },
-    "skills": {},
-    "habitats": []
+    "skills": {
+      "lift": 40,
+      "listen": 40,
+      "spot": 20,
+      "swim": 60
+    },
+    "habitats": [],
+    "slug": "arctovish"
   },
   "_id": "YYXM9EccB5m5yAUA",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
   "flags": {
     "core": {
       "sourceId": "Compendium.ptr2e.core-species.Item.YYXM9EccB5m5yAUA"
@@ -264,10 +310,15 @@
   "_stats": {
     "coreVersion": "12.318",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
-    "createdTime": 1712331093837,
-    "modifiedTime": 1712331093837,
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1713185519745,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
   },
   "_key": "!items!YYXM9EccB5m5yAUA"
 }
