@@ -98,7 +98,7 @@ type ApplicationRenderContext = {
     force?: boolean;
     position?: ApplicationPosition;
     window?: ApplicationWindowRenderOptions;
-};
+} & Record<string, unknown>
 
 type ApplicationWindowRenderOptions = {
     title: string;
@@ -700,7 +700,7 @@ export class ApplicationV2<
      * @param {Event|SubmitEvent} event The form submission event
      * @returns {Promise<void>}
      */
-    protected _onSubmitForm(event: Event | SubmitEvent): Promise<void>;
+    protected _onSubmitForm(config: ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void>;
 
     /* -------------------------------------------- */
     /*  Helper Methods                              */
@@ -954,6 +954,26 @@ type DialogV2Button = {
     callback?: ApplicationClickAction;
 }
 
+interface DialogV2WaitOptions {
+    rejectClose?: boolean;
+}
+
 export class DialogV2 extends ApplicationV2<DialogV2Configuration> {
     static prompt(options: Omit<DialogV2Configuration, keyof ApplicationConfiguration | 'submit'> & Partial<ApplicationConfiguration>): Promise<DialogV2>;
+    
+    /**
+     * A utility helper to generate a dialog with yes and no buttons.
+     * @param {Partial<ApplicationConfiguration & DialogV2Configuration & DialogV2WaitOptions>} [options]
+     * @param {DialogV2Button} [options.yes]  Options to overwrite the default yes button configuration.
+     * @param {DialogV2Button} [options.no]   Options to overwrite the default no button configuration.
+     * @returns {Promise<any>}                Resolves to true if the yes button was pressed, or false if the no button
+     *                                        was pressed. If additional buttons were provided, the Promise resolves to
+     *                                        the identifier of the one that was pressed, or the value returned by its
+     *                                        callback. If the dialog was dismissed, and rejectClose is false, the
+     *                                        Promise resolves to null.
+     */
+    static confirm(options: Partial<ApplicationConfiguration & DialogV2Configuration & DialogV2WaitOptions> & {
+        yes?: Partial<DialogV2Button>;
+        no?: Partial<DialogV2Button>;
+    }): Promise<any>;
 }

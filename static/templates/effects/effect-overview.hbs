@@ -1,40 +1,19 @@
 <section class="tab sheet-body {{tabs.overview.cssClass}}" data-tab="overview" data-group="sheet">
     <div class="scroll">
-        <div class="form-group">
-            <label>{{ localize "EFFECT.Tint" }}</label>
-            <div class="form-fields" {{#if data.tint}}style="--color-input-border-color: {{data.tint}}"{{/if}}>
-                {{colorPicker name="tint" value=data.tint}}
-            </div>
-        </div>
-
-        <div class="form-group stacked">
-            <label>{{ localize "EFFECT.Description" }}</label>
-            {{!-- {{editor descriptionHTML target="description" button=false editable=editable engine="prosemirror" collaborate=false}} --}}
-            <textarea name="description" placeholder="{{ localize "EFFECT.Description" }}">{{ data.description }}</textarea>
-        </div>
-
-        <div class="form-group">
-            <label>{{ localize "EFFECT.Disabled" }}</label>
-            <input type="checkbox" name="disabled" {{ checked data.disabled }}/>
-        </div>
-
-        {{#if isActorEffect}}
-        <div class="form-group">
-            <label>{{ localize "EFFECT.Origin" }}</label>
-            <div class="form-fields">
-                <input type="text" name="origin" value="{{ data.origin }}" disabled/>
-            </div>
-        </div>
+        {{formField fields.tint value=data.tint localize=true}}
+        
+        {{#if hasDescription}}
+            {{formField fields.description value=data.description localize=true toggled=true}}
         {{/if}}
 
+        {{formField fields.disabled value=data.disabled localize=true}}
+        
+        {{#if isActorEffect}}
+            {{formField fields.origin value=data.origin disabled=true localize=true}}
+        {{/if}}
+        
         {{#if isItemEffect}}
-        <div class="form-group">
-            <label>{{ labels.transfer.name }}</label>
-            <div class="form-fields">
-                <input type="checkbox" name="transfer" {{checked data.transfer}}/>
-            </div>
-            <p class="hint">{{ labels.transfer.hint }}</p>
-        </div>
+            {{formField fields.transfer value=data.transfer localize=true}}
         {{/if}}
 
         <div class="form-group">

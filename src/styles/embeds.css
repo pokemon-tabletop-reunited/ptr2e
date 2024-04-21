@@ -1,10 +1,12 @@
 aside[role="tooltip"].attack figure header h2,
-.chat-message .move-embed figure header h2 {
+.chat-message .move-embed figure header h2,
+.effect-embed figure header h2 {
   border-bottom: unset;
   text-align: center;
 }
 aside[role="tooltip"].attack figure header.traits tags[readonly],
-.chat-message .move-embed figure header.traits tags[readonly] {
+.chat-message .move-embed figure header.traits tags[readonly],
+.effect-embed figure header.traits tags[readonly] {
   width: 100%;
   --tags-border-color: var(--color-light-6);
   --tag-bg: var(--color-light-4);
@@ -14,47 +16,57 @@ aside[role="tooltip"].attack figure header.traits tags[readonly],
   justify-content: center;
 }
 aside[role="tooltip"].attack figure header.traits tags[readonly] span.tagify__input,
-.chat-message .move-embed figure header.traits tags[readonly] span.tagify__input {
+.chat-message .move-embed figure header.traits tags[readonly] span.tagify__input,
+.effect-embed figure header.traits tags[readonly] span.tagify__input {
   display: none;
 }
 aside[role="tooltip"].attack figure aside img,
-.chat-message .move-embed figure aside img {
+.chat-message .move-embed figure aside img,
+.effect-embed figure aside img {
   border: unset;
   border-radius: 50%;
 }
 aside[role="tooltip"].attack figure content.attack-embed,
-.chat-message .move-embed figure content.attack-embed {
+.chat-message .move-embed figure content.attack-embed,
+.effect-embed figure content.attack-embed {
   font-size: 15px;
 }
 aside[role="tooltip"].attack figure content.attack-embed section.attack-info,
-.chat-message .move-embed figure content.attack-embed section.attack-info {
+.chat-message .move-embed figure content.attack-embed section.attack-info,
+.effect-embed figure content.attack-embed section.attack-info {
   grid-template-areas: "basic" "range" "cost";
 }
 aside[role="tooltip"].attack figure content.attack-embed fieldset article,
-.chat-message .move-embed figure content.attack-embed fieldset article {
+.chat-message .move-embed figure content.attack-embed fieldset article,
+.effect-embed figure content.attack-embed fieldset article {
   line-height: 1.3;
   line-break: pre-wrap;
 }
 .chat-message .message-content > figure.content-embed:only-child {
   margin: 0 0 0.5rem 0;
 }
-.chat-message .move-embed {
+.chat-message .move-embed,
+.chat-message .effect-embed {
   padding: 0.5rem;
   border: 1px solid var(--color-light-6);
   border-radius: 8px;
   background-color: var(--color-light-3);
 }
-.chat-message .move-embed > figure {
+.chat-message .move-embed > figure,
+.chat-message .effect-embed > figure {
   margin: 0;
 }
-.chat-message .move-embed tags {
+.chat-message .move-embed tags,
+.chat-message .effect-embed tags {
   border-radius: 8px;
   background-color: var(--color-light-2);
 }
-.chat-message .move-embed .attack-description fieldset {
+.chat-message .move-embed .attack-description fieldset,
+.chat-message .effect-embed .attack-description fieldset {
   background: var(--color-light-2);
 }
-.chat-message .move-embed fieldset {
+.chat-message .move-embed fieldset,
+.chat-message .effect-embed fieldset {
   border-color: var(--color-light-6);
   border-radius: 8px;
 }

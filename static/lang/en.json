@@ -95,6 +95,26 @@
                         "label": "Remaining Activations",
                         "hint": "The number of activations remaining before this affliction expires and is removed."
                     }
+                },
+                "tint": {
+                    "label": "Icon Tint Color",
+                    "hint": "The color tint to apply to the effect icon."
+                },
+                "description": {
+                    "label": "Effect Description",
+                    "hint": "Description of the effect."
+                },
+                "disabled": {
+                    "label": "Effect Suspended?",
+                    "hint": "Whether this effect is suspended and should not be applied."
+                },
+                "origin": {
+                    "label": "Effect Origin",
+                    "hint": "The origin of the effect if any."
+                },
+                "transfer": {
+                    "label": "Transfer Effect?",
+                    "hint": "Whether this effect should apply to the actor holding this item (checked), or the item itself (unchecked)."
                 }
             }
         },
@@ -558,6 +578,10 @@
                 "Name": "Developer Mode",
                 "Hint": "Enable developer mode."
             }
+        },
+        "Dialog": {
+            "DeleteDocumentContent": "Are you sure you want to delete: {name}?",
+            "DeleteDocumentTitle": "Delete {name}?"
         }
     }
 }

@@ -179,6 +179,7 @@ declare global {
          * @param event The drag event which contains JSON data.
          * @returns The extracted JSON data. The object will be empty if the DragEvent did not contain JSON-parseable data.
          */
+        static getDragEventData<T>(event: DragEvent): T;
         static getDragEventData(event: DragEvent): object;
 
         /** Given a Drop event, returns a Content link if possible such as @Actor[ABC123], else null */

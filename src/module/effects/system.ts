@@ -1,9 +1,10 @@
-import { ChangeModel, HasChanges, HasSlug, HasTraits } from "@module/data/index.ts";
+import { ChangeModel, HasChanges, HasEmbed, HasSlug, HasTraits } from "@module/data/index.ts";
 import { ActiveEffectPTR2e } from "@effects";
 import { ActorPTR2e } from "@actor";
 
-export default abstract class ActiveEffectSystem extends HasTraits(
-    HasSlug(HasChanges(foundry.abstract.TypeDataModel))
+export default abstract class ActiveEffectSystem extends HasEmbed(
+    HasTraits(HasSlug(HasChanges(foundry.abstract.TypeDataModel))),
+    "effect"
 ) {
     static LOCALIZATION_PREFIXES = ["PTR2E.Effect"];
 
@@ -16,14 +17,14 @@ export default abstract class ActiveEffectSystem extends HasTraits(
             removeAfterCombat: new fields.BooleanField({
                 required: true,
                 initial: true,
-                nullable: false
+                nullable: false,
             }),
             removeOnRecall: new fields.BooleanField({
                 required: true,
                 initial: false,
-                nullable: false
+                nullable: false,
             }),
-        }
+        };
     }
 
     /**
@@ -42,11 +43,10 @@ export default abstract class ActiveEffectSystem extends HasTraits(
     }
 }
 
-export default interface ActiveEffectSystem extends ModelPropsFromSchema<ActiveEffectSystemSchema> {
-
-}
+export default interface ActiveEffectSystem
+    extends ModelPropsFromSchema<ActiveEffectSystemSchema> {}
 
 export type ActiveEffectSystemSchema = {
     removeAfterCombat: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
     removeOnRecall: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
-}
+};

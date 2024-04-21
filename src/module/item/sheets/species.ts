@@ -311,7 +311,7 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
         }
     }
 
-    protected override async _onSubmitForm(event: Event | SubmitEvent): Promise<void> {
+    protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {
         event.preventDefault();
         if (event.target) {
             const target = event.target as HTMLElement;
@@ -320,7 +320,7 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
                 return;
             }
         }
-        return super._onSubmitForm(event);
+        return super._onSubmitForm(config, event);
     }
 
     override _prepareSubmitData(formData: FormDataExtended): Record<string, unknown> {

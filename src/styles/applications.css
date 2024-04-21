@@ -1,6 +1,21 @@
 /** Application V2 Styles **/
-:root {
-  --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.9), rgba(19, 17, 31, 0.95));
+body {
+  --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  --hint-text-color: var(--color-light-5);
+  --border-theme-color: var(--color-light-6);
+  --color-theme-4: var(--color-light-4);
+  --color-theme-3: var(--color-light-3);
+}
+body.theme-light {
+  --appv2-background: linear-gradient(to right, rgba(212, 210, 198, 0.93), rgba(240, 237, 223, 0.95));
+  --hint-text-color: var(--color-dark-5);
+  --border-theme-color: var(--color-dark-6);
+}
+body.theme-light .application textarea:read-only {
+  color: var(--color-dark-6);
+}
+body.theme-dark .sheet prose-mirror .editor-content .content-link {
+  color: var(--color-cool-5);
 }
 .application .window-header .window-title {
   height: 100%;
@@ -9,6 +24,18 @@
   display: flex;
   gap: 10px;
   align-items: center;
+}
+.sheet prose-mirror {
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  margin: 5px 0;
+}
+.sheet prose-mirror .editor-menu button.pm-dropdown {
+  color: var(--color-dark-1);
+}
+.sheet prose-mirror .editor-content,
+.sheet prose-mirror .editor-container .editor-content {
+  padding: 0.5rem;
 }
 .sheet.move-sheet,
 .sheet.species-sheet,
@@ -36,7 +63,7 @@
   grid-area: header;
   padding: 0.5rem;
   padding-right: 1rem;
-  border-bottom: 1px solid var(--color-light-6);
+  border-bottom: 1px solid var(--border-theme-color);
 }
 .sheet.move-sheet .window-content .sheet-header fieldset,
 .sheet.species-sheet .window-content .sheet-header fieldset,
@@ -76,8 +103,8 @@
   margin: 0;
   padding: 0.5rem;
   padding-left: 0;
-  border-bottom: 1px solid var(--color-light-6);
-  border-left: 1px solid var(--color-light-6);
+  border-bottom: 1px solid var(--border-theme-color);
+  border-left: 1px solid var(--border-theme-color);
   gap: unset;
 }
 .sheet.move-sheet .window-content aside.traits,
@@ -88,16 +115,16 @@
   grid-area: traits;
   min-height: calc(0.5rem + 38px);
   padding: 0.25rem;
-  border-bottom: 1px solid var(--color-light-6);
+  border-bottom: 1px solid var(--border-theme-color);
 }
 .sheet.move-sheet .window-content aside.traits tags,
 .sheet.species-sheet .window-content aside.traits tags,
 .sheet.party-sheet .window-content aside.traits tags,
 .sheet.team-sheet .window-content aside.traits tags,
 .sheet.active-effect-sheet .window-content aside.traits tags {
-  --tags-border-color: var(--color-light-6);
-  --tag-bg: var(--color-light-4);
-  --tag-hover: var(--color-light-3);
+  --tags-border-color: var(--border-theme-color);
+  --tag-bg: var(--color-theme-4);
+  --tag-hover: var(--color-theme-3);
   width: 100%;
   --tag-pad: 0;
 }
@@ -147,7 +174,7 @@
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 0.5rem;
   padding: 0.5rem;
-  border: 1px solid var(--color-light-6);
+  border: 1px solid var(--border-theme-color);
   border-radius: 8px;
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
@@ -188,7 +215,7 @@
   align-items: center;
   padding: 0.25rem;
   margin-top: 0.5rem;
-  border-bottom: 1px solid var(--color-light-6);
+  border-bottom: 1px solid var(--border-theme-color);
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
@@ -217,7 +244,7 @@
 .sheet.team-sheet .window-content section.tab[data-tab=details] .skill,
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill {
   padding: 0.25rem;
-  border: 1px solid var(--color-light-6);
+  border: 1px solid var(--border-theme-color);
   border-radius: 8px;
   display: grid;
   grid-template-columns: 1fr 1fr 15px;
@@ -248,7 +275,7 @@
 .sheet.party-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .sheet.team-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill.center small {
-  color: var(--color-light-5);
+  color: var(--hint-text-color);
 }
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group,
@@ -408,6 +435,45 @@
 .sheet.active-effect-sheet .window-content section.tab[data-tab="overview"] .item-description {
   min-height: 150px;
 }
+.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list {
+  list-style: none;
+  margin: 0 0.5rem;
+  padding: 0;
+}
+.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect {
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-theme-color);
+}
+.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
 .sheet.move-sheet .window-content section.tab fieldset,
 .sheet.species-sheet .window-content section.tab fieldset,
 .sheet.party-sheet .window-content section.tab fieldset,
@@ -420,7 +486,7 @@
   gap: 0.5rem;
   margin-bottom: 0.5rem;
   border-radius: 8px;
-  border-color: var(--color-light-6);
+  border-color: var(--border-theme-color);
 }
 .sheet.move-sheet .window-content section.tab fieldset legend,
 .sheet.species-sheet .window-content section.tab fieldset legend,
@@ -437,8 +503,9 @@
 .sheet.active-effect-sheet .window-content section.tab .hint {
   margin: 0;
   font-size: var(--font-size-14);
-  color: var(--color-light-5);
+  color: var(--hint-text-color);
   white-space: pre-line;
+  word-break: break-word;
 }
 .sheet.move-sheet .window-content section.tab textarea,
 .sheet.species-sheet .window-content section.tab textarea,
@@ -480,6 +547,9 @@
 .sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions {
   flex: 0 0 100%;
 }
+.sheet#traits-settings {
+  background: var(--appv2-background);
+}
 .sheet#traits-settings .window-content {
   display: grid;
   grid-template-columns: 100%;
@@ -492,7 +562,7 @@
   justify-content: space-evenly;
   margin-top: 0;
   border: unset;
-  border-bottom: 1px solid var(--color-light-6);
+  border-bottom: 1px solid var(--border-theme-color);
 }
 .sheet#traits-settings section.tab {
   grid-area: main;
@@ -501,7 +571,7 @@
 }
 .sheet#traits-settings section.tab header {
   padding: 0.25rem;
-  border: 1px solid var(--color-light-6);
+  border: 1px solid var(--border-theme-color);
   border-radius: 8px;
   margin-bottom: 0.5rem;
 }
@@ -547,7 +617,7 @@
   justify-content: center;
   align-items: center;
   padding: 2px;
-  border-top: 1px solid var(--color-light-6);
+  border-top: 1px solid var(--border-theme-color);
 }
 .sheet#traits-settings footer button {
   flex: 0 0 48%;
@@ -672,7 +742,7 @@
 }
 .sheet.party-sheet .window-content nav.tabs {
   border: unset;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-theme-color);
 }
 .sheet.party-sheet .window-content .tab[data-tab="overview"] {
   padding: 0;
@@ -983,7 +1053,7 @@
 }
 .sheet.team-sheet .window-content nav.tabs {
   border: unset;
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-theme-color);
 }
 .sheet.team-sheet .window-content .tab[data-tab="overview"] {
   padding: 0;
@@ -1129,15 +1199,15 @@
   flex-direction: row;
   align-items: center;
   height: 50px;
-  border: 1px solid var(--color-light-6);
+  border: 1px solid var(--border-theme-color);
   border-radius: 8px;
 }
 .sheet.folder-edit section.team-member.empty {
   justify-content: center;
   height: 100px;
-  border: 1px dashed var(--color-light-6);
+  border: 1px dashed var(--border-theme-color);
   border-radius: 8px;
-  color: var(--color-light-5);
+  color: var(--hint-text-color);
   font-size: medium;
   text-align: center;
   white-space: pre-line;
@@ -1209,7 +1279,7 @@
 }
 .sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change {
   padding: unset;
-  border: 1px solid var(--color-light-6);
+  border: 1px solid var(--border-theme-color);
   border-radius: 8px;
 }
 .sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header {
@@ -1217,7 +1287,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 0.5rem;
-  border-bottom: 1px solid var(--color-light-6);
+  border-bottom: 1px solid var(--border-theme-color);
   padding: 0.25rem 0.5rem;
 }
 .sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .drag-handle {
@@ -1231,6 +1301,7 @@
 }
 .sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .label .form-group label {
   flex: 0 1 min-content;
+  margin-right: 0.5rem;
 }
 .sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .type {
   flex: 0 0 40%;
@@ -1335,7 +1406,7 @@
   justify-content: center;
   align-items: center;
   height: 34px;
-  border-top: 1px solid var(--color-light-6);
+  border-top: 1px solid var(--border-theme-color);
 }
 .sheet.active-effect-sheet .window-content footer.sheet-footer button {
   flex: 0 0 48%;

@@ -1,11 +1,13 @@
 <figure>
     <header>
-        <h2>{{attack.name}}</h2>
+        <h2>{{document.name}}</h2>
     </header>
     {{#if traits}}
     <header class="traits">
         <input type="text" class="traits ptr2e-tagify" name="system.traits" value="{{json traits}}" data-dType="JSON" readonly/>
     </header>
     {{/if}}
-    {{> move-body attack=attack fields=attack.schema.fields}}
+    <content>
+        {{{document.description}}}
+    </content>
 </figure>

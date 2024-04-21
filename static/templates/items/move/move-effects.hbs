@@ -3,5 +3,18 @@
         <legend>
             Effects
         </legend>
+        <ul class="effect-list">
+            {{#each effects as |effect|}}
+                <li class="effect" data-tooltip-direction="LEFT" data-id="{{effect.id}}" data-tooltip="{{effect.name}}">
+                    <div class="effect-icon"><img src="{{effect.img}}" class="icon"></div>
+                    <span class="name">{{effect.name}}</span>
+                    <div class="item-controls">
+                        <a class="item-control effect-to-chat" data-tooltip="Send Effect to chat"><i class="fas fa-external-link-alt"></i></a>
+                        <a class="item-control effect-edit" data-tooltip="Edit Effect"><i class="fas fa-edit"></i></a>
+                        <a class="item-control effect-delete" data-tooltip="Delete Effect"><i class="fas fa-trash"></i></a>
+                    </div>
+                </li>
+            {{/each}}
+        </ul>
     </fieldset>
 </section>

@@ -16,7 +16,7 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
         {
             classes: ["active-effect-sheet"],
             position: {
-                width: 630,
+                width: 550,
                 height: "auto",
             },
             form: {
@@ -153,6 +153,14 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
         if (!source.img) source.img = "/systems/ptr2e/img/icons/effect_icon.webp";
 
         this.#createChangeForms();
+
+        context.hasDescription = "description" in this.document;
+        if ( context.hasDescription ) {
+            context.descriptionHTML = await TextEditor.enrichHTML(this.document.description, {
+                secrets: this.document.isOwner,
+                relativeTo: this.document
+            });
+        }
 
         return {
             ...context,
