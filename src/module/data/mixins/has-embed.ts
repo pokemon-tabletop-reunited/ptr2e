@@ -5,9 +5,9 @@ import { TemplateConstructor } from './data-template.ts';
  * Adds slug property to target data model.
  * @group Mixins
  */
-export default function HasEmbed<BaseClass extends TemplateConstructor>(baseClass: BaseClass, type: string) {
+export default function HasEmbed<BaseClass extends TemplateConstructor>(baseClass: BaseClass, baseType: string) {
     class TemplateClass extends baseClass {
-        override async toEmbed(_config: foundry.abstract.DocumentHTMLEmbedConfig, options: EnrichmentOptions, additionalProperties: Record<string, unknown> = {}): Promise<HTMLElement | HTMLCollection | null> {
+        override async toEmbed(_config: foundry.abstract.DocumentHTMLEmbedConfig, options: EnrichmentOptions, additionalProperties: Record<string, unknown> = {}, type = baseType): Promise<HTMLElement | HTMLCollection | null> {
             options = { ...options, _embedDepth: (options._embedDepth ?? 0) + 1, relativeTo: this };
             
             const traits = (() => {

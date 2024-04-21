@@ -1,10 +1,10 @@
 import { ConsumablePTR2e } from "@item";
-import { HasContainer, HasDescription, HasSlug, HasTraits } from "@module/data/index.ts";
+import { HasContainer, HasDescription, HasEmbed, HasSlug, HasTraits } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 
 const CONSUMABLE_TYPES = ["food", "restorative", "boosters", "ammo", "evolution-item", "pokeball", "other"] as const
 type ConsumableType = typeof CONSUMABLE_TYPES[number];
-const ConsumableExtension = HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel))))
+const ConsumableExtension = HasEmbed(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))), "consumable");
 
 /**
  * @category Item Data Models

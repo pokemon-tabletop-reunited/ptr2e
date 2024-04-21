@@ -21,6 +21,10 @@ export default abstract class WeaponSystem extends GearSystem {
             })
         }
     }
+
+    override async toEmbed(_config: foundry.abstract.DocumentHTMLEmbedConfig, options: EnrichmentOptions, additionalProperties: Record<string, unknown> = {}): Promise<HTMLElement | HTMLCollection | null> {
+        return super.toEmbed(_config, options, additionalProperties, "weapon");
+    }
 }
 
 export type WeaponSource = BaseItemSourcePTR2e<"weapon", WeaponSystemSource>;

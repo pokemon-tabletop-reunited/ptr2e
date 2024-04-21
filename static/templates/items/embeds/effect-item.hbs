@@ -1,0 +1,10 @@
+<figure>
+    <header>
+        <h2>{{document.name}}</h2>
+    </header>
+    <content>
+        {{#each effects as |effect|}}
+            <span>@Embed[{{effect.uuid}} caption=false classes=no-tooltip]</span>
+        {{/each}}
+    </content>
+</figure>

@@ -1,5 +1,15 @@
 aside[role="tooltip"].attack,
-.chat-message .move-embed, .effect-embed {
+.chat-message .move-embed,
+.chat-message .effect-embed,
+.chat-message .ability-embed,
+.chat-message .consumable-embed,
+.chat-message .container-embed,
+.chat-message .effect-item-embed,
+.chat-message .equipment-embed,
+.chat-message .gear-embed,
+.chat-message .perk-embed,
+.chat-message .species-embed,
+.chat-message .weapon-embed {
     figure {
         header {
             h2 {
@@ -34,6 +44,7 @@ aside[role="tooltip"].attack,
 
         content.attack-embed {
             font-size: 15px;
+
             section.attack-info {
                 grid-template-areas:
                     "basic"
@@ -51,18 +62,28 @@ aside[role="tooltip"].attack,
 
 .chat-message {
     .message-content {
-        > figure.content-embed:only-child {
+        >figure.content-embed:only-child {
             margin: 0 0 0.5rem 0;
         }
     }
 
-    .move-embed, .effect-embed {
+    .move-embed,
+    .effect-embed,
+    .ability-embed,
+    .consumable-embed,
+    .container-embed,
+    .effect-item-embed,
+    .equipment-embed,
+    .gear-embed,
+    .perk-embed,
+    .species-embed,
+    .weapon-embed {
         padding: 0.5rem;
         border: 1px solid var(--color-light-6);
         border-radius: 8px;
-        background-color: var(--color-light-3);
+        background-color: color-mix(in srgb, var(--color-light-3) 80%, transparent);
 
-        > figure {
+        >figure {
             margin: 0;
         }
 
@@ -74,6 +95,7 @@ aside[role="tooltip"].attack,
         .attack-description fieldset {
             background: var(--color-light-2);
         }
+
         fieldset {
             border-color: var(--color-light-6);
             border-radius: 8px;
@@ -140,6 +162,7 @@ content.attack-embed {
 
         section.attack-description {
             margin-top: 1rem;
+
             article {
                 min-height: 50px;
             }
