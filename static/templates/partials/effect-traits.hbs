@@ -8,9 +8,9 @@
     {{/if}}
     <main>
         <aside>
-            {{{icon attack.category}}}
+            {{{getIcon attack.category}}}
             {{#each attack.types as |type|}}
-            {{{icon type}}}
+            {{{getIcon type}}}
             {{/each}}
         </aside>
         {{#if attack.description}}

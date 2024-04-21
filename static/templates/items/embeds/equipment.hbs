@@ -1,0 +1,52 @@
+<figure>
+    <header class="header">
+        <h2>{{document.name}}</h2>
+    </header>
+    {{#if traits}}
+    <header class="traits">
+        <input type="text" class="traits ptr2e-tagify" name="system.traits" value="{{json traits}}" data-dType="JSON" readonly/>
+    </header>
+    {{/if}}
+    <content class="item-embed">
+        <section class="details">
+            <fieldset>
+                <legend>
+                    Current State
+                </legend>
+                <label for="quantity">{{localize fields.quantity.label}}</label> <span>{{document.system.quantity}}</span>
+                <label for="equipped.carryType">{{localize fields.equipped.fields.carryType.label}}</label> <span>{{document.system.equipped.carryType}}</span>
+                {{#if document.system.equipped.handsHeld}}<label for="equipped.handsHeld">{{localize fields.equipped.fields.handsHeld.label}}</label> <span>{{document.system.equipped.handsHeld}}</span>{{/if}}
+            </fieldset>
+            <fieldset>
+                <legend>
+                    Quality & Value
+                </legend>
+                <label for="cost">{{localize fields.cost.label}}</label> <span>{{document.system.cost}} $</span>
+                <label for="grade">{{localize fields.grade.label}}</label> <span>{{document.system.grade}}</span>
+                <label for="rarity">{{localize fields.rarity.label}}</label> <span>{{document.system.rarity}}</span>
+            </fieldset>
+            <fieldset>
+                <legend>
+                    Crafting
+                </legend>
+                <label for="crafting.skill">{{localize fields.crafting.fields.skill.label}}</label> <span>{{document.system.crafting.skill}}</span>
+                <label for="crafting.time.value">{{localize fields.crafting.fields.time.fields.value.label}}</label> <span>{{document.system.crafting.time.value}}</span>
+                <label for="crafting.time.unit">{{localize fields.crafting.fields.time.fields.unit.label}}</label> <span>{{document.system.crafting.time.unit}}</span>
+            </fieldset>
+        </section>
+        <section class="item-description">
+            <fieldset>
+                <legend>Effect Description</legend>
+                {{#if document.system.description}}
+                <article>
+                    {{{document.system.description}}}
+                </article>
+                {{else}}
+                <article class="center">
+                    <small><i>No Effect Description Provided</i></small>
+                </article>
+                {{/if}}
+            </fieldset>
+        </section>
+    </content>
+</figure>

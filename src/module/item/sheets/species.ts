@@ -1,64 +1,36 @@
 import { SpeciesPTR2e } from "@item";
-import { DocumentSheetConfiguration, DocumentSheetV2, Tab } from "./document.ts";
-import Tagify from "@yaireo/tagify";
-import GithubManager from "@module/apps/github.ts";
+import { DocumentSheetConfiguration, Tab } from "./document.ts";
 import { SpeciesSystemSource } from "@item/data/index.ts";
 import { sluggify } from "@utils";
+import { default as ItemSheetPTR2e } from "./base.ts";
+import * as R from "remeda";
 
-export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.HandlebarsApplicationMixin(
-    DocumentSheetV2<SpeciesPTR2e>
-) {
+export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]> {
     static override DEFAULT_OPTIONS = fu.mergeObject(
         super.DEFAULT_OPTIONS,
         {
             classes: ["species-sheet"],
-            position: {
-                height: 450,
-                width: 550,
-            },
-            actions: {
-                toChat: this.#toChat,
-                toGithub: GithubManager.commitItemToGithub,
-            },
-            form: {
-                submitOnChange: true,
-                closeOnSubmit: false,
-            },
         },
         { inplace: false }
     );
 
-    #allTraits: { value: string; label: string }[] | undefined;
+    static override readonly overviewTemplate= "systems/ptr2e/templates/items/species/species-overview.hbs";
+    static override readonly detailsTemplate= "systems/ptr2e/templates/items/species/species-details.hbs";
+    override noActions: boolean = true;
 
-    static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
-        header: {
-            id: "header",
-            template: "/systems/ptr2e/templates/items/parts/item-header.hbs",
-        },
-        tabs: {
-            id: "tabs",
-            template: "/systems/ptr2e/templates/items/parts/item-tabs.hbs",
-        },
-        traits: {
-            id: "traits",
-            template: "/systems/ptr2e/templates/items/parts/item-traits.hbs",
-        },
-        overview: {
-            id: "overview",
-            template: "/systems/ptr2e/templates/items/species/species-overview.hbs",
-        },
-        details: {
-            id: "details",
-            template: "/systems/ptr2e/templates/items/species/species-details.hbs",
-            scrollable: [".scroll"],
-        },
-    };
+    static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = R.omit(
+        fu.mergeObject(super.PARTS, {
+            overview: {
+                template: SpeciesSheet.overviewTemplate,
+            },
+            details: {
+                template: SpeciesSheet.detailsTemplate,
+            },
+        }, { inplace: false }),
+        ["actions", "effects"]
+    );
 
-    tabGroups: Record<string, string> = {
-        sheet: "overview",
-    };
-
-    tabs: Record<string, Tab> = {
+    override tabs: Record<string, Tab> = {
         overview: {
             id: "overview",
             group: "sheet",
@@ -72,14 +44,6 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
             label: "PTR2E.SpeciesSheet.Tabs.details.label",
         },
     };
-
-    _getTabs() {
-        for (const v of Object.values(this.tabs)) {
-            v.active = this.tabGroups[v.group] === v.id;
-            v.cssClass = v.active ? "active" : "";
-        }
-        return this.tabs;
-    }
 
     override changeTab(
         tab: string,
@@ -104,95 +68,12 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
         }
     }
 
-    override async _prepareContext() {
-        const traits = await (async () => {
-            const traits = [];
-            for (const trait of this.document.system.traits.values()) {
-                traits.push({
-                    value: trait.slug,
-                    label: trait.label,
-                });
-            }
-            return traits;
-        })();
-
-        this.#allTraits = game.ptr.data.traits.asArray().map(trait => ({value: trait.slug, label: trait.label}));
-
-        return {
-            ...((await super._prepareContext()) as Record<string, unknown>),
-            item: this.document,
-            source: this.document.toObject(),
-            fields: this.document.system.schema.fields,
-            tabs: this._getTabs(),
-            traits,
-        };
-    }
-
-    override async _renderFrame(options: DocumentSheetConfiguration<SpeciesPTR2e>) {
-        const frame = await super._renderFrame(options);
-
-        // Add send to chat button
-        const toChatLabel = game.i18n.localize("PTR2E.SpeciesSheet.SendToChatLabel");
-        const toChat = `<button type="button" class="header-control fa-solid fa-arrow-up-right-from-square" data-action="toChat"
-                                data-tooltip="${toChatLabel}" aria-label="${toChatLabel}"></button>`;
-        this.window.controls.insertAdjacentHTML("afterend", toChat);
-
-        if (game.settings.get("ptr2e", "dev-mode")) {
-            // Add send to chat button
-            const commitToGithubLabel = game.i18n.localize("PTR2E.UI.DevMode.CommitToGithub.Label");
-            const commitToGithub = `<button type="button" class="header-control fa-solid fa-upload" data-action="toGithub"
-                                    data-tooltip="${commitToGithubLabel}" aria-label="${commitToGithubLabel}"></button>`;
-            this.window.controls.insertAdjacentHTML("afterend", commitToGithub);
-        }
-
-        return frame;
-    }
-
     override _attachPartListeners(
         partId: string,
         htmlElement: HTMLElement,
         options: DocumentSheetConfiguration<SpeciesPTR2e>
     ): void {
         super._attachPartListeners(partId, htmlElement, options);
-
-        if (partId === "traits") {
-            for (const input of htmlElement.querySelectorAll<HTMLInputElement>(
-                "input.ptr2e-tagify"
-            )) {
-                new Tagify(input, {
-                    enforceWhitelist: false,
-                    keepInvalidTags: false,
-                    editTags: false,
-                    tagTextProp: "label",
-                    dropdown: {
-                        enabled: 0,
-                        mapValueTo: "label",
-                    },
-                    templates: {
-                        tag: function (tagData): string {
-                            return `
-                            <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
-                                tagData
-                            )}>
-                            <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
-                            <div>
-                                <span class='tagify__tag-text'>
-                                    <span class="trait" data-tooltip-direction="UP" data-trait="${
-                                        tagData.value
-                                    }" data-tooltip="${
-                                        tagData.label
-                                    }"><span>[</span><span class="tag">${
-                                        tagData.label
-                                    }</span><span>]</span></span>
-                                </span>
-                            </div>
-                            `;
-                        },
-                    },
-                    whitelist: this.#allTraits,
-                });
-            }
-        }
 
         if (partId === "details") {
             const document = this.document;
@@ -259,70 +140,6 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
         }
     }
 
-    override _onRender(): void {
-        for (const stringTags of this.element.querySelectorAll<HTMLElement>("string-tags")) {
-            const path = stringTags.getAttribute("name");
-            const validate = (() => {
-                if (path?.startsWith("system.")) {
-                    const systemPath = path.split(".");
-                    if (systemPath.length === 2) {
-                        const field = this.document.system.schema.fields[
-                            systemPath[1]
-                        ] as foundry.data.fields.SetField<foundry.data.fields.StringField>;
-                        return field.element.validate.bind(field.element);
-                    }
-                    let current = this.document.system.schema.fields;
-                    const pathParts = systemPath.slice(1);
-                    for (let i = 0; i < pathParts.length; i++) {
-                        let field = current[pathParts[i]] as
-                            | foundry.data.fields.SetField<foundry.data.fields.StringField>
-                            | foundry.data.fields.SchemaField<foundry.data.fields.DataSchema>;
-                        if (!field) return;
-                        if (field instanceof foundry.data.fields.SchemaField) {
-                            current = field.fields;
-                            continue;
-                        }
-                        if (field instanceof foundry.data.fields.SetField) {
-                            return field.element.validate.bind(field.element);
-                        }
-                        return null;
-                    }
-                }
-                return null;
-            })();
-
-            // @ts-expect-error
-            let refresh = stringTags._refresh.bind(stringTags);
-
-            // @ts-expect-error
-            stringTags._refresh = () => {
-                refresh.call();
-                this.element.dispatchEvent(new Event("submit", {cancelable: true}));
-            }
-
-            //@ts-expect-error
-            stringTags._validateTag = (tag: string): boolean => {
-                if (validate) {
-                    const result = validate(tag);
-                    if (result) throw result.asError();
-                }
-                return true;
-            };
-        }
-    }
-
-    protected override async _onSubmitForm(event: Event | SubmitEvent): Promise<void> {
-        event.preventDefault();
-        if (event.target) {
-            const target = event.target as HTMLElement;
-            if (target.parentElement?.nodeName === "STRING-TAGS") {
-                event.stopImmediatePropagation();
-                return;
-            }
-        }
-        return super._onSubmitForm(event);
-    }
-
     override _prepareSubmitData(formData: FormDataExtended): Record<string, unknown> {
         const data = fu.expandObject(formData.object);
         function isSystem(system: unknown): system is SpeciesSystemSource["system"] {
@@ -367,9 +184,5 @@ export default class SpeciesSheetPTR2eV2 extends foundry.applications.api.Handle
         }
 
         return data;
-    }
-
-    static async #toChat(this: SpeciesSheetPTR2eV2, _event: Event) {
-        return this.document.toChat();
     }
 }

@@ -21,6 +21,10 @@ export default abstract class EquipmentSystem extends GearSystem {
             })
         }
     }
+
+    override async toEmbed(_config: foundry.abstract.DocumentHTMLEmbedConfig, options: EnrichmentOptions, additionalProperties: Record<string, unknown> = {}): Promise<HTMLElement | HTMLCollection | null> {
+        return super.toEmbed(_config, options, additionalProperties, "equipment");
+    }
 }
 
 export type EquipmentSource = BaseItemSourcePTR2e<"equipment", EquipmentSystemSource>;

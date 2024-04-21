@@ -98,13 +98,13 @@ type PokemonType = typeof Types[keyof typeof Types];
 type ContestType = typeof ContestTypes[keyof typeof ContestTypes];
 
 const CarryTypes = {
-    STOWED: "stowed",
-    HELD: "held",
-    WORN: "worn",
-    DROPPED: "dropped"
+    stowed: "PTR2E.FIELDS.gear.equipped.carryType.stowed",
+    held: "PTR2E.FIELDS.gear.equipped.carryType.held",
+    worn: "PTR2E.FIELDS.gear.equipped.carryType.worn",
+    dropped: "PTR2E.FIELDS.gear.equipped.carryType.dropped"
 } as const;
 
-type CarryType = typeof CarryTypes[keyof typeof CarryTypes];
+type CarryType = keyof typeof CarryTypes;
 
 const IdentificationStatuses = {
     IDENTIFIED: "identified",

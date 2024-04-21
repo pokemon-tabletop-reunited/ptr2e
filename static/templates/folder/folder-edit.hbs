@@ -9,12 +9,14 @@
         </div>
     </div>
 
-    <div class="form-group">
+    {{formField fields.color value=folder.color localize=true}}
+
+    {{!-- <div class="form-group">
         <label>{{localize "FOLDER.Color"}}</label>
         <div class="form-fields" {{#if folder.color}}style="--color-input-border-color: {{folder.color}}"{{/if}}>
             {{colorPicker name="color" value=folder.color}}
         </div>
-    </div>
+    </div> --}}
 
     <div class="form-group">
         <label>{{localize "FOLDER.SortMode"}}</label>

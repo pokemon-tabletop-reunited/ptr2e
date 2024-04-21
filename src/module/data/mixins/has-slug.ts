@@ -12,7 +12,7 @@ export default function HasSlug<BaseClass extends TemplateConstructor>(baseClass
             return {
                 ...super.defineSchema(),
 
-                slug: new SlugField({ required: true, label: "PTR2E.FIELDS.Slug.Label", hint: "PTR2E.FIELDS.Slug.Hint" }),
+                slug: new SlugField({ required: true, label: "PTR2E.FIELDS.slug.label", hint: "PTR2E.FIELDS.slug.hint" }),
             };
         }
 

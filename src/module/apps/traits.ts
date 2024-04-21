@@ -1,7 +1,7 @@
 import { Trait } from "@data";
 import { Tab } from "@item/sheets/document.ts";
 import { sluggify } from "@utils";
-import { HandlebarsRenderOptions } from "types/foundry/common/applications/api.js";
+import { ApplicationRenderContext, HandlebarsRenderOptions } from "types/foundry/common/applications/api.js";
 
 class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2) {
     newCounter = 0;
@@ -99,6 +99,12 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
             },
             tabs: this._getTabs(options.parts)
         }
+    }
+
+    override async _preparePartContext(partId: string, context: ApplicationRenderContext): Promise<ApplicationRenderContext> {
+        const preparedContext = await super._preparePartContext(partId, context);
+        preparedContext.partId = partId;
+        return preparedContext;
     }
 
     override _configureRenderOptions(options: HandlebarsRenderOptions): void {

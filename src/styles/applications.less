@@ -1,6 +1,28 @@
 /** Application V2 Styles **/
-:root {
-    --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.9), rgba(19, 17, 31, 0.95));
+body {
+    --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+    --hint-text-color: var(--color-light-5);
+    --border-theme-color: var(--color-light-6);
+    --color-theme-4: var(--color-light-4);
+    --color-theme-3: var(--color-light-3);
+    
+    &.theme-light {
+        --appv2-background: linear-gradient(to right, rgba(212, 210, 198, 0.93), rgba(240, 237, 223, 0.95));
+        --hint-text-color: var(--color-dark-5);
+        --border-theme-color: var(--color-dark-6);
+        
+        .application textarea:read-only {
+            color: var(--color-dark-6);
+        }
+    }
+
+    &.theme-dark {
+        .sheet prose-mirror .editor-content {
+            .content-link {
+                color: var(--color-cool-5);
+            }
+        }
+    }
 }
 
 .application .window-header .window-title {
@@ -12,6 +34,22 @@
         display: flex;
         gap: 10px;
         align-items: center;
+    }
+
+    prose-mirror {
+        border: 1px solid var(--border-theme-color);
+        border-radius: 8px;
+        margin: 5px 0;
+
+        .editor-menu {
+            button.pm-dropdown {
+                color: var(--color-dark-1);
+            }
+        }
+
+        .editor-content, .editor-container .editor-content {
+            padding: 0.5rem;
+        }
     }
 
     &.move-sheet, &.species-sheet, &.party-sheet, &.team-sheet, &.active-effect-sheet {
@@ -51,7 +89,7 @@
 
                 padding: 0.5rem;
                 padding-right: 1rem;
-                border-bottom: 1px solid var(--color-light-6);
+                border-bottom: 1px solid var(--border-theme-color);
             }
 
             nav.tabs {
@@ -63,8 +101,8 @@
                 margin: 0;
                 padding: 0.5rem;
                 padding-left: 0;
-                border-bottom: 1px solid var(--color-light-6);
-                border-left: 1px solid var(--color-light-6);
+                border-bottom: 1px solid var(--border-theme-color);
+                border-left: 1px solid var(--border-theme-color);
                 gap: unset;
             }
 
@@ -74,12 +112,12 @@
                 min-height: calc(0.5rem + 38px);
                 padding: 0.25rem;
 
-                border-bottom: 1px solid var(--color-light-6);
+                border-bottom: 1px solid var(--border-theme-color);
 
                 tags {
-                    --tags-border-color: var(--color-light-6);
-                    --tag-bg: var(--color-light-4);
-                    --tag-hover: var(--color-light-3);
+                    --tags-border-color: var(--border-theme-color);
+                    --tag-bg: var(--color-theme-4);
+                    --tag-hover: var(--color-theme-3);
                     width: 100%;
 
                     --tag-pad: 0;
@@ -114,7 +152,7 @@
                         grid-column-gap: 0.5rem;
 
                         padding: 0.5rem;
-                        border: 1px solid var(--color-light-6);
+                        border: 1px solid var(--border-theme-color);
                         border-radius: 8px;
 
                         .form-group {
@@ -136,7 +174,7 @@
                         align-items: center;
                         padding: 0.25rem;
                         margin-top: 0.5rem;
-                        border-bottom: 1px solid var(--color-light-6);
+                        border-bottom: 1px solid var(--border-theme-color);
 
                         .item-controls {
                             flex: 0 0 45px;
@@ -149,7 +187,7 @@
 
                     .movement, .skill {
                         padding: 0.25rem;
-                        border: 1px solid var(--color-light-6); 
+                        border: 1px solid var(--border-theme-color); 
                         border-radius: 8px;
 
                         display: grid;
@@ -163,7 +201,7 @@
                             align-items: center;
 
                             small {
-                                color: var(--color-light-5);
+                                color: var(--hint-text-color);
                             }
                         }
 
@@ -263,6 +301,36 @@
                     }
                 }
 
+                &[data-tab="effects"] {
+                    ul.effect-list {
+                        list-style: none;
+                        margin: 0 0.5rem;
+                        padding: 0;
+
+                        li.effect {
+                            padding: 0.5rem;
+                            border-radius: 5px;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+
+                            border: 1px solid var(--border-theme-color);
+
+                            .effect-icon {
+                                flex: 0 0 28px;
+                                height: 28px;
+                                width: 28px;
+                            }
+
+                            .name {
+                                flex-grow: 1;
+                                margin: 0 0.25rem;
+                            }
+                        }
+                    }
+                }
+
                 fieldset {
                     padding: 1rem;
                     display: flex;
@@ -272,7 +340,7 @@
 
                     margin-bottom: 0.5rem;
                     border-radius: 8px;
-                    border-color: var(--color-light-6);
+                    border-color: var(--border-theme-color);
 
                     legend {
                         font-size: var(--font-size-15);
@@ -283,8 +351,9 @@
                 .hint {
                     margin: 0;
                     font-size: var(--font-size-14);
-                    color: var(--color-light-5);
+                    color: var(--hint-text-color);
                     white-space: pre-line;
+                    word-break: break-word;
                 }
 
                 textarea {
@@ -341,6 +410,8 @@
     }
 
     &#traits-settings {
+        background: var(--appv2-background);
+
         .window-content {
             display: grid;
             grid-template-columns: 100%;
@@ -360,7 +431,7 @@
 
             margin-top: 0;
             border: unset;
-            border-bottom: 1px solid var(--color-light-6);
+            border-bottom: 1px solid var(--border-theme-color);
         }
 
         section.tab {
@@ -371,7 +442,7 @@
 
             header {
                 padding: 0.25rem;
-                border: 1px solid var(--color-light-6);
+                border: 1px solid var(--border-theme-color);
                 border-radius: 8px;
                 margin-bottom: 0.5rem;
             }
@@ -433,7 +504,7 @@
             align-items: center;
 
             padding: 2px;
-            border-top: 1px solid var(--color-light-6);
+            border-top: 1px solid var(--border-theme-color);
 
             button {
                 flex: 0 0 48%;
@@ -607,7 +678,7 @@
 
             nav.tabs {
                 border: unset;
-                border-bottom: 1px solid var(--border-color);
+                border-bottom: 1px solid var(--border-theme-color);
             }
         }
 
@@ -1003,7 +1074,7 @@
 
             nav.tabs {
                 border: unset;
-                border-bottom: 1px solid var(--border-color);
+                border-bottom: 1px solid var(--border-theme-color);
             }
         }
 
@@ -1196,16 +1267,16 @@
             flex-direction: row;
             align-items: center;
             height: 50px;
-            border: 1px solid var(--color-light-6);
+            border: 1px solid var(--border-theme-color);
             border-radius: 8px;
             
             &.empty {
                 justify-content: center;
                 height: 100px;
-                border: 1px dashed var(--color-light-6);
+                border: 1px dashed var(--border-theme-color);
                 border-radius: 8px;
 
-                color: var(--color-light-5);
+                color: var(--hint-text-color);
                 font-size: medium;
 
                 text-align: center;
@@ -1233,6 +1304,23 @@
             .dismiss {
                 flex: 0 0 20px;
             }
+        }
+    }
+
+    .window-content .tab {
+        &:has(div.scroll) {
+            padding: 0;
+        }
+
+        div.scroll {
+            padding: 1rem;
+            overflow-y: auto;
+            overflow-x: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: start;
+            gap: 0.5rem;
         }
     }
 
@@ -1306,7 +1394,7 @@
                     }
                     .effect-change {
                         padding: unset;
-                        border: 1px solid var(--color-light-6);
+                        border: 1px solid var(--border-theme-color);
                         border-radius: 8px;
 
                         header {
@@ -1315,7 +1403,7 @@
                             align-items: center;
 
                             padding: 0 0.5rem;
-                            border-bottom: 1px solid var(--color-light-6);
+                            border-bottom: 1px solid var(--border-theme-color);
                             padding: 0.25rem 0.5rem;
 
                             .drag-handle {
@@ -1331,6 +1419,7 @@
                                 .form-group {
                                     label {
                                         flex: 0 1 min-content;
+                                        margin-right: 0.5rem;
                                     }
                                 }
                             }
@@ -1466,7 +1555,7 @@
                 align-items: center;
                 height: 34px;
 
-                border-top: 1px solid var(--color-light-6);
+                border-top: 1px solid var(--border-theme-color);
 
                 button {
                     flex: 0 0 48%;

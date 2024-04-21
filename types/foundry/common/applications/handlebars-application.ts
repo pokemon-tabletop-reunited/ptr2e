@@ -39,6 +39,22 @@ function HandlebarsApplicationMixin<BaseClass extends AppV2Constructor<Applicati
         /* -------------------------------------------- */
 
         /**
+         * Prepare context that is specific to only a single rendered part.
+         *
+         * It is recommended to augment or mutate the shared context so that downstream methods like _onRender have
+         * visibility into the data that was used for rendering. It is acceptable to return a different context object
+         * rather than mutating the shared context at the expense of this transparency.
+         *
+         * @param {string} partId                         The part being rendered
+         * @param {ApplicationRenderContext} context      Shared context provided by _prepareContext
+         * @returns {Promise<ApplicationRenderContext>}   Context data for a specific part
+         * @protected
+         */
+        _preparePartContext(partId: string, context: ApplicationRenderContext): Promise<ApplicationRenderContext>;
+
+        /* -------------------------------------------- */
+
+        /**
          * Replace the HTML of the application with the result provided by Handlebars rendering.
          * @param {Record<string, HTMLElement>} result  The result from Handlebars template rendering
          * @param {HTMLElement} content                 The content element into which the rendered result must be inserted

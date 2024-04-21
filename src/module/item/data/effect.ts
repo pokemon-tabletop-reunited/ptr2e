@@ -1,6 +1,6 @@
 import { ActorPTR2e } from "@actor";
 import { EffectPTR2e } from "@item";
-import { HasSlug } from "@module/data/index.ts";
+import { HasEmbed, HasSlug } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { ActiveEffectPTR2e } from "@effects";
 
@@ -9,7 +9,7 @@ import { ActiveEffectPTR2e } from "@effects";
  * @extends {HasBase}
  * @extends {foundry.abstract.TypeDataModel}
  */
-export default abstract class EffectSystem extends HasSlug(foundry.abstract.TypeDataModel) {
+export default abstract class EffectSystem extends HasEmbed(HasSlug(foundry.abstract.TypeDataModel), "effect-item") {
     /**
      * @internal
      */
@@ -41,6 +41,10 @@ export default abstract class EffectSystem extends HasSlug(foundry.abstract.Type
                 img: "/systems/ptr2e/img/icons/effect_icon.webp",
             });
         }
+    }
+
+    override async toEmbed(_config: foundry.abstract.DocumentHTMLEmbedConfig, options: EnrichmentOptions = {}): Promise<HTMLElement | HTMLCollection | null> {
+        return super.toEmbed(_config, options, {effects: this.parent.effects.contents});
     }
 }
 

@@ -1,11 +1,11 @@
 import { GearPTR2e } from "@item";
-import { EquipmentData, HasBase, HasGearData, HasIdentification, IdentificationStatus} from "@module/data/index.ts";
+import { EquipmentData, HasBase, HasEmbed, HasGearData, HasIdentification, IdentificationStatus} from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 
 /**
  * @category Item Data Models
  */
-export default abstract class GearSystem extends HasIdentification(HasGearData(HasBase(foundry.abstract.TypeDataModel))) {
+export default abstract class GearSystem extends HasEmbed(HasIdentification(HasGearData(HasBase(foundry.abstract.TypeDataModel))), "gear") {
     /**
      * @internal
      */
