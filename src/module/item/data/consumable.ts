@@ -11,7 +11,7 @@ const CONSUMABLE_TYPES = {
     restorative:"PTR2E.FIELDS.consumable.type.restorative",
     other:"PTR2E.FIELDS.consumable.type.other",
 } as const
-type ConsumableType = typeof CONSUMABLE_TYPES[keyof typeof CONSUMABLE_TYPES];
+type ConsumableType = keyof typeof CONSUMABLE_TYPES;
 const ConsumableExtension = HasEmbed(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))), "consumable");
 
 /**
