@@ -126,9 +126,9 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         rangeInput.max = max.toString();
     }
 
-    static async #onSubmitBaseStatsForm(this: StatsForm, event: SubmitEvent | Event, _form: HTMLFormElement, formData: FormDataExtended) {
+    static async #onSubmitBaseStatsForm(this: StatsForm, event: SubmitEvent | Event, form: HTMLFormElement, formData: FormDataExtended) {
         event.preventDefault();
-        const result = await this.#updateDocument(formData);
+        const result = await this.#updateDocument(event as SubmitEvent, form, formData);
         console.debug(result, this.document.system.attributes);
         this.render({parts: ["statsChart"]});
     }
@@ -136,15 +136,15 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     /**
      * @this {StatsForm} 
      */
-    static async #onSubmitEvStatsForm(this: StatsForm, event: SubmitEvent | Event, _form: HTMLFormElement, formData: FormDataExtended) {
+    static async #onSubmitEvStatsForm(this: StatsForm, event: SubmitEvent | Event, form: HTMLFormElement, formData: FormDataExtended) {
         event.preventDefault();
-        const result = await this.#updateDocument(formData);
+        const result = await this.#updateDocument(event as SubmitEvent, form, formData);
         console.debug(result, this.document.system.attributes);
         this.render({parts: ["statsChart", "evStats"]});
     }
 
-    async #updateDocument(formData: FormDataExtended) {
-        const submitData = this._prepareSubmitData(formData);
+    async #updateDocument(event: SubmitEvent, form: HTMLFormElement, formData: FormDataExtended) {
+        const submitData = this._prepareSubmitData(event, form, formData);
         await this.document.update(submitData);
     }
 }

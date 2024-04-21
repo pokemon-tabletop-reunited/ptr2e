@@ -2,7 +2,7 @@ import { DocumentSheetConfiguration, DocumentSheetV2, Tab } from "@item/sheets/d
 import ActiveEffectPTR2e from "./document.ts";
 import { CHANGE_FORMS, ChangeForm, ChangeFormOptions } from "./changes/sheet/index.ts";
 import * as R from "remeda";
-import { htmlQuery, htmlQueryAll, SORTABLE_BASE_OPTIONS } from "@utils";
+import { htmlQuery, htmlQueryAll, sluggify, SORTABLE_BASE_OPTIONS } from "@utils";
 import ChangeModel from "./changes/change.ts";
 import { BasicChangeSystem, ChangeModelTypes } from "@data";
 import { CodeMirror } from "./codemirror.ts";
@@ -26,7 +26,7 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
             },
             window: {
                 resizable: true,
-            }
+            },
         },
         { inplace: false }
     );
@@ -54,7 +54,7 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
             id: "changes",
             template: "/systems/ptr2e/templates/effects/effect-changes.hbs",
             scrollable: [".scroll"],
-        }
+        },
     };
 
     #changeForms: ChangeForm[] = [];
@@ -158,10 +158,10 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
         this.#createChangeForms();
 
         context.hasDescription = "description" in this.document;
-        if ( context.hasDescription ) {
+        if (context.hasDescription) {
             context.descriptionHTML = await TextEditor.enrichHTML(this.document.description, {
                 secrets: this.document.isOwner,
-                relativeTo: this.document
+                relativeTo: this.document,
             });
         }
 
@@ -232,11 +232,15 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
                 anchor.addEventListener("click", async (event) => {
                     event.preventDefault();
                     const formData = new FormDataExtended(this.element);
-                    const data = this._prepareSubmitData(formData);
+                    const data = this._prepareSubmitData(
+                        event as unknown as SubmitEvent,
+                        this.element as HTMLFormElement,
+                        formData
+                    );
 
-                    if(!data.system?.changes) {
-                        if(data.system) data.system.changes = [];
-                        else data.system = {changes: []};
+                    if (!data.system?.changes) {
+                        if (data.system) data.system.changes = [];
+                        else data.system = { changes: [] };
                     }
 
                     const changes = data.system.changes as Partial<ChangeModel["_source"]>[];
@@ -254,19 +258,31 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
                     const formData = new FormDataExtended(this.element);
 
                     // Manually update the JSON data with the new type if it doesn't exist
-                    const selectValue = formData.object[`system.changes.${select.parentElement?.dataset.changeIndex}.type`]
-                    const obj = formData.object[`system.changes.${select.parentElement?.dataset.changeIndex}`];
-                    if(obj && typeof obj === "string") {
+                    const selectValue =
+                        formData.object[
+                            `system.changes.${select.parentElement?.dataset.changeIndex}.type`
+                        ];
+                    const obj =
+                        formData.object[
+                            `system.changes.${select.parentElement?.dataset.changeIndex}`
+                        ];
+                    if (obj && typeof obj === "string") {
                         const json = JSON.parse(obj);
-                        if(!json.type) {
+                        if (!json.type) {
                             json.type = selectValue;
-                            formData.object[`system.changes.${select.parentElement?.dataset.changeIndex}`] = JSON.stringify(json);
+                            formData.object[
+                                `system.changes.${select.parentElement?.dataset.changeIndex}`
+                            ] = JSON.stringify(json);
                         }
                     }
 
-                    const data = this._prepareSubmitData(formData);
+                    const data = this._prepareSubmitData(
+                        event as SubmitEvent,
+                        this.element as HTMLFormElement,
+                        formData
+                    );
 
-                    const changes = data.system?.changes as ChangeModel["_source"][] ?? [];
+                    const changes = (data.system?.changes as ChangeModel["_source"][]) ?? [];
                     const index = Number(select.parentElement?.dataset.changeIndex ?? "NaN");
                     if (changes && Number.isInteger(index) && changes.length > index) {
                         changes[index].type = select.value;
@@ -289,11 +305,15 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
             }
 
             for (const anchor of htmlQueryAll(htmlElement, "a.remove-change")) {
-                anchor.addEventListener("click", async (_event) => {
+                anchor.addEventListener("click", async (event) => {
                     const formData = new FormDataExtended(this.element);
-                    const data = this._prepareSubmitData(formData);
+                    const data = this._prepareSubmitData(
+                        event as unknown as SubmitEvent,
+                        this.element as HTMLFormElement,
+                        formData
+                    );
 
-                    const changes = data.system?.changes as ChangeModel["_source"][] ?? [];
+                    const changes = (data.system?.changes as ChangeModel["_source"][]) ?? [];
                     const index = Number(anchor.dataset.changeIndex ?? "NaN");
                     if (changes && Number.isInteger(index) && changes.length > index) {
                         changes.splice(index, 1);
@@ -354,9 +374,12 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
                         } catch (error) {
                             if (error instanceof Error) {
                                 ui.notifications.error(
-                                    game.i18n.format("PTR2E.EffectSheet.ChangeEditor.Errors.ChangeSyntax", {
-                                        message: error.message,
-                                    })
+                                    game.i18n.format(
+                                        "PTR2E.EffectSheet.ChangeEditor.Errors.ChangeSyntax",
+                                        {
+                                            message: error.message,
+                                        }
+                                    )
                                 );
                                 console.warn(
                                     "Syntax error in change definition.",
@@ -420,34 +443,57 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
         }
     }
 
-    override _prepareSubmitData(formData: FormDataExtended): Record<string, unknown> & {system?: Record<string, unknown>} {
+    override _prepareSubmitData(
+        _event: SubmitEvent,
+        _form: HTMLFormElement,
+        formData: FormDataExtended
+    ): Record<string, unknown> & { system?: Record<string, unknown> } {
         const data = fu.expandObject(formData.object) as Record<string, unknown> & {
-            system?: { changes?: Record<number, ChangeModel["_source"]> };
+            system?: { changes?: Record<number, ChangeModel["_source"]>, traits?: string[] };
         };
 
-        if(data.system?.changes) {
-        const changes = this.document.toObject().system.changes as ChangeModel["_source"][];
-            for(const changeSection of htmlQueryAll(this.element, ".effect-change[data-idx]")) {
+        if (data.system?.changes) {
+            const changes = this.document.toObject().system.changes as ChangeModel["_source"][];
+            for (const changeSection of htmlQueryAll(this.element, ".effect-change[data-idx]")) {
                 const idx = Number(changeSection.dataset.idx);
                 const changeForm = this.#changeForms[idx];
-                if(idx >= changes.length) throw new Error(`Change index ${idx} out of bounds`);
+                if (idx >= changes.length) throw new Error(`Change index ${idx} out of bounds`);
 
                 const incomingData = data.system?.changes?.[idx];
-                if(incomingData) {
+                if (incomingData) {
                     changeForm.updateObject(incomingData);
-                    const validationFailures = changeForm.change.schema.validate(changeForm.source, {partial: true});
-                    if(validationFailures && validationFailures.unresolved) {
+                    const validationFailures = changeForm.change.schema.validate(
+                        changeForm.source,
+                        { partial: true }
+                    );
+                    if (validationFailures && validationFailures.unresolved) {
                         changeForm.updateValidationErrors(validationFailures);
-                        ui.notifications.error(game.i18n.localize("PTR2E.EffectSheet.ChangeEditor.Errors.UnableToSaveDueToValidationFailure"));
+                        ui.notifications.error(
+                            game.i18n.localize(
+                                "PTR2E.EffectSheet.ChangeEditor.Errors.UnableToSaveDueToValidationFailure"
+                            )
+                        );
                         return {};
-                    }
-                    else {
+                    } else {
                         changes[idx] = changeForm.source;
                     }
                 }
             }
             data.system.changes = changes;
         }
+
+        if (
+            "system" in data &&
+            data.system &&
+            typeof data.system === "object" &&
+            "traits" in data.system &&
+            Array.isArray(data.system.traits)
+        )
+            // Traits are stored as an array of objects, but we only need the values
+            // @ts-expect-error
+            data.system.traits = data.system.traits.map((trait: { value: string }) =>
+                sluggify(trait.value)
+            );
 
         data.statuses ??= [];
         return data;
@@ -503,10 +549,15 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
         });
     }
 
-    static async #onSubmit(this: ActiveEffectConfigPTR2e, event: SubmitEvent, _form: HTMLFormElement, formData: FormDataExtended) {
+    static async #onSubmit(
+        this: ActiveEffectConfigPTR2e,
+        event: SubmitEvent,
+        form: HTMLFormElement,
+        formData: FormDataExtended
+    ) {
         event.preventDefault();
         event.stopPropagation();
-        const submitData = this._prepareSubmitData(formData);
+        const submitData = this._prepareSubmitData(event, form, formData);
         if (fu.isEmpty(submitData)) return;
 
         await this.document.update(submitData);
