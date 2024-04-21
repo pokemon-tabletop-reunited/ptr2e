@@ -32,7 +32,7 @@ export default abstract class ContainerSystem extends ContainerExtension {
         return {
             ...super.defineSchema(),
 
-            collapsed: new fields.BooleanField({ required: true, initial: false }),
+            collapsed: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.collapsed.label", hint: "PTR2E.FIELDS.collapsed.hint"}),
         };
     }
 
