@@ -6,6 +6,8 @@ import { ClockDatabase, TraitsCollection } from "@data";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import { Pokedex } from "pokeapi-js-wrapper";
 import { UUIDUtils } from "src/util/uuid.ts";
+import TokenPanel from "@module/apps/token-panel.ts";
+import { TokenPTR2e } from "@module/canvas/token/object.ts";
 
 const GamePTR = {
     onInit() {
@@ -25,13 +27,18 @@ const GamePTR = {
                 db: ClockDatabase,
                 panel: new ClockPanel({ id: "ptr2e-clock-panel" }),
             },
+            tokenPanel: new TokenPanel(null, { id: "ptr2e-token-panel" })
         };
 
         const top = document.querySelector("#ui-top") as HTMLElement;
         if (top) {
-            const template = document.createElement("template");
-            template.setAttribute("id", "ptr2e-clock-panel");
-            top?.insertAdjacentElement("afterend", template);
+            const clockTemplate = document.createElement("template");
+            clockTemplate.setAttribute("id", "ptr2e-clock-panel");
+            top?.insertAdjacentElement("afterend", clockTemplate);
+
+            const tokenTemplate = document.createElement("template");
+            tokenTemplate.setAttribute("id", "ptr2e-token-panel");
+            top?.insertAdjacentElement("afterend", tokenTemplate);
         }
 
         game.ptr = fu.mergeObject(game.ptr ?? {}, initData);
@@ -42,6 +49,8 @@ const GamePTR = {
     },
     onReady() {
         game.ptr.clocks.panel.render(true);
+        game.ptr.tokenPanel.render(true);
+        game.ptr.tokenPanel.token = game.user.character?.getActiveTokens().at(0) as TokenPTR2e | null;
     },
 };
 

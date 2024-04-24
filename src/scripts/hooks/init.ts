@@ -49,6 +49,8 @@ export const Init: PTRHook = {
                 documentClass: PTRCONFIG.Change.documentClass,
                 dataModels: PTRCONFIG.Change.dataModels
             };
+            CONFIG.Token.documentClass = PTRCONFIG.Token.documentClass;
+            CONFIG.Token.objectClass = PTRCONFIG.Token.objectClass;
 
             CONFIG.Folder.documentClass = PTRCONFIG.Folder.documentClass;
 

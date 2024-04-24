@@ -1,0 +1,259 @@
+import { ActorPTR2e } from "@actor";
+import { AttackPTR2e } from "@data";
+import { Tab } from "@item/sheets/document.ts";
+import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import { htmlQuery, htmlQueryAll } from "@utils";
+import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
+
+export default class TokenPanel extends foundry.applications.api.HandlebarsApplicationMixin(
+    foundry.applications.api.ApplicationV2
+) {
+    get token(): TokenPTR2e | null {
+        return this._token;
+    }
+    set token(value: TokenPTR2e | null) {
+        if (this._token === value) return;
+        this._token = value;
+        this.refresh(true);
+    }
+
+    public refresh = fu.debounce(this.render, 100);
+
+    private _token: TokenPTR2e | null;
+
+    constructor(
+        token: TokenPTR2e | null,
+        options: Partial<foundry.applications.api.ApplicationConfiguration> = {}
+    ) {
+        super(options);
+        this._token = token;
+    }
+
+    static override DEFAULT_OPTIONS = fu.mergeObject(
+        super.DEFAULT_OPTIONS,
+        {
+            classes: ["token-panel"],
+            tag: "aside",
+            window: {
+                minimizable: false,
+                frame: false,
+                positioned: false,
+            },
+        },
+        { inplace: false }
+    );
+
+    static override PARTS = {
+        info: {
+            id: "info",
+            template: "/systems/ptr2e/templates/apps/token-panel/info.hbs",
+        },
+        party: {
+            id: "party",
+            template: "/systems/ptr2e/templates/apps/token-panel/party.hbs",
+        },
+        nav: {
+            id: "nav",
+            template: "/systems/ptr2e/templates/apps/token-panel/nav.hbs",
+        },
+        attacks: {
+            id: "attacks",
+            template: "/systems/ptr2e/templates/apps/token-panel/attacks.hbs",
+        },
+    };
+
+    tabGroups: Record<string, string> = {
+        sheet: "attacks",
+    };
+
+    tabs: Record<string, Tab> = {
+        attacks: {
+            id: "attacks",
+            group: "sheet",
+            icon: "fa-solid fa-burst",
+            label: "PTR2E.TokenPanel.Tabs.attacks.label",
+        },
+    };
+
+    _getTabs() {
+        for (const v of Object.values(this.tabs)) {
+            v.active = this.tabGroups[v.group] === v.id;
+            v.cssClass = v.active ? "active" : "";
+        }
+        return this.tabs;
+    }
+
+    override _configureRenderOptions(options: foundry.applications.api.HandlebarsRenderOptions): void {
+        super._configureRenderOptions(options);
+        if(!this.token?.actor?.party) {
+            options.parts = options.parts?.filter(part => part !== "party");
+        }
+    }
+
+    override async _renderHTML(
+        context: foundry.applications.api.ApplicationRenderContext,
+        options: foundry.applications.api.HandlebarsRenderOptions
+    ): Promise<Record<string, HTMLElement>> {
+        if (this.token) return super._renderHTML(context, options);
+
+        return options.parts.reduce(
+            (acc, partId) => {
+                const t = document.createElement("template");
+                t.dataset.applicationPart = partId;
+                acc[partId] = t;
+                return acc;
+            },
+            {} as Record<string, HTMLElement>
+        );
+    }
+
+    override async _prepareContext(
+        options?: foundry.applications.api.HandlebarsRenderOptions | undefined
+    ): Promise<Object> {
+        const context = await super._prepareContext(options);
+        if (!this.token) return context;
+
+        const actor = this.token.actor;
+        if (!actor) return false;
+        const attacks = actor.actions.attack;
+
+        const party = actor.party;
+        const isOwner = party?.owner == this.token.actor;
+
+        return {
+            ...context,
+            token: this.token,
+            actor: this.token.actor,
+            party,
+            isOwner,
+            attacks,
+            tabs: this._getTabs(),
+        };
+    }
+
+    override _attachPartListeners(
+        partId: string,
+        htmlElement: HTMLElement,
+        _options: HandlebarsRenderOptions
+    ): void {
+        function registerActorEvents(element: HTMLElement) {
+            let _clickActorTimeout: number | null = null;
+
+            element.addEventListener("click", async (event) => {
+                const uuid = (event.currentTarget as HTMLElement).dataset.uuid;
+                if(!uuid) return;
+
+                const actor = await fromUuid<ActorPTR2e>(uuid);
+                if(!actor) return;
+
+                const token = actor.getActiveTokens(false)[0];
+                if(!token) return;
+
+                if(_clickActorTimeout) clearTimeout(_clickActorTimeout);
+                _clickActorTimeout = setTimeout(() => {
+                    token.control({ releaseOthers: true });
+                    canvas.animatePan({ x: token.x, y: token.y });
+                }, 200) as unknown as number;
+            });
+
+            element.addEventListener("dblclick", async (event) => {
+                if(_clickActorTimeout) clearTimeout(_clickActorTimeout);
+
+                const uuid = (event.currentTarget as HTMLElement).dataset.uuid;
+                if(!uuid) return;
+
+                const actor = await fromUuid(uuid);
+                return actor?.sheet?.render(true);
+            });
+
+            let highlights: Token[] = [];
+            element.addEventListener("mouseover", async (event) => {
+                event.preventDefault();
+                if(!canvas.ready) return;
+
+                const uuid = (event.currentTarget as HTMLElement).dataset.uuid;
+                if(!uuid) return;
+
+                const actor = await fromUuid<ActorPTR2e>(uuid);
+                if(!actor) return;
+
+                const tokens = actor.getActiveTokens(false);
+                if(!tokens?.length) return;
+
+                if(tokens.every(t => t.isVisible)) {
+                    //@ts-expect-error ignore protected clause.
+                    tokens.forEach(t => t._onHoverIn(event));
+                    highlights = tokens;
+                }
+            });
+
+            element.addEventListener("mouseout", async (event) => {
+                event.preventDefault();
+                if(!canvas.ready) return;
+
+                if(!highlights.length) return;
+
+                //@ts-expect-error ignore protected clause.
+                highlights.forEach(t => t._onHoverOut(event));
+                highlights = [];
+            });
+
+            htmlQuery(element, 'img')?.addEventListener("dragstart", event => {
+                const uuid = ((event.currentTarget as HTMLElement).parentElement as HTMLElement).dataset.uuid;
+                if(!uuid) return;
+                console.log("dragstart", uuid)
+
+                event.dataTransfer!.setData("text/plain", JSON.stringify({
+                    type: "Actor",
+                    uuid,
+                }));
+            })
+        }
+        if(partId === "info") {
+            const element = htmlQuery(htmlElement, ".actor");
+            if(element) {
+                registerActorEvents(element);
+            }
+        }
+        if(partId === "party") {
+            for(const member of htmlQueryAll(htmlElement, ".icon")) {
+                registerActorEvents(member);
+            }
+        }
+        if (partId === "attacks") {
+            for (const element of htmlQueryAll(htmlElement, ".attack")) {
+                const rollable = htmlQuery(element, ".rollable");
+                if (rollable) {
+                    rollable.addEventListener("click", async (event) => {
+                        const slug = (
+                            (event.currentTarget as HTMLElement).closest(
+                                ".attack[data-action]"
+                            ) as HTMLElement
+                        )?.dataset?.action;
+                        if (!slug) return;
+
+                        const attack = this.token!.actor!.actions.attack.get(slug) as AttackPTR2e;
+                        if (!attack) return;
+
+                        return attack.roll();
+                    });
+                }
+
+                element.addEventListener("contextmenu", async (event) => {
+                    event.preventDefault();
+                    const slug = (
+                        (event.currentTarget as HTMLElement).closest(
+                            ".attack[data-action]"
+                        ) as HTMLElement
+                    )?.dataset?.action;
+                    if (!slug) return;
+
+                    const attack = this.token!.actor!.actions.attack.get(slug) as AttackPTR2e;
+                    if (!attack) return;
+
+                    return attack.item.toChat();
+                });
+            }
+        }
+    }
+}

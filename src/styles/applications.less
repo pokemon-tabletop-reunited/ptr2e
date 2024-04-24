@@ -1,6 +1,7 @@
 /** Application V2 Styles **/
 body {
     --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+    --appv2-text-color: var(--color-light-1);
     --hint-text-color: var(--color-light-5);
     --border-theme-color: var(--color-light-6);
     --color-theme-4: var(--color-light-4);
@@ -8,6 +9,7 @@ body {
     
     &.theme-light {
         --appv2-background: linear-gradient(to right, rgba(212, 210, 198, 0.93), rgba(240, 237, 223, 0.95));
+        --appv2-text-color: var(--color-dark-1);
         --hint-text-color: var(--color-dark-5);
         --border-theme-color: var(--color-dark-6);
         
@@ -1573,6 +1575,204 @@ body {
     .standard-form {
         input[type="checkbox"] {
             --checkbox-background-color: #3d343f;
+        }
+    }
+}
+
+.token-panel {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: var(--appv2-background);
+    color: var(--appv2-text-color);
+
+    margin: 0 15px 10px 0;
+    pointer-events: all;
+
+    border-radius: 0 8px 8px 0;
+    border: 1px solid var(--border-theme-color);
+    border-left: unset;
+
+    display: flex;
+    flex-direction: column;
+
+    word-wrap: break-word;
+    width: 135px;
+
+    &:has(template[data-application-part="info"]) {
+        display: none !important;
+    }
+    
+    nav.tabs {
+        order: 3;
+        flex-direction: column;
+
+        a {
+            padding: 0.25rem;
+            background: var(--appv2-background);
+            border-top: 1px solid var(--border-theme-color);
+            width: 100%;
+
+            &:first-child {
+                border-top: unset;
+            }
+            &:last-child {
+                border-radius: 0 0 8px 0;
+            }
+        }
+    }
+
+    .tab {
+        position: absolute;
+        right: 100%;
+        bottom: -1px;
+        background: var(--appv2-background);
+        
+        border-radius: 8px 8px 0 8px;
+        border: 1px solid var(--border-theme-color);
+
+        min-width: 150px;
+        min-height: 110%;
+
+        &[data-tab="attacks"] {
+            &.active {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+            }
+
+            .attack-item {
+                display: flex;
+                flex-direction: row;
+
+                .icon {
+                    flex: 0 0 32px;
+                    height: 32px;
+                    width: 32px;
+                    align-self: center;
+
+                    cursor: pointer;
+
+                    img {
+                        border: unset;
+
+                        &.dice {
+                            display: none;
+                        }
+                    }
+
+                    &:hover {
+                        img {
+                            display: none;
+
+                            &.dice {
+                                display: unset;
+                            }
+                        
+                        }
+                    }
+                }
+                .name {
+                    flex: 1;
+                    align-self: center;
+                    text-align: center;
+                    padding: 0.25rem;
+                    min-width: 0;
+                    text-overflow: ellipsis;
+                }
+
+                background: var(--appv2-background);
+
+                &:nth-child(odd) {
+                    background: color-mix(in srgb, var(--appv2-background) 90%, transparent);
+                }
+
+                border-top: 1px solid var(--border-theme-color);
+
+                &:first-child {
+                    border-top: unset;
+
+                    img {
+                        border-radius: 8px 0 0 0;
+                    }
+                }
+
+                &:last-child {
+                    img {
+                        border-radius: 0 0 0 8px;
+                    }
+                }
+            }
+        }
+    }
+
+    section.token-info, section.party {
+        order: 1;
+
+        display: flex;
+        border-bottom: 1px solid var(--border-theme-color);
+
+        .icon {
+            flex: 0 0 48px;
+            height: 48px;
+            width: 48px;
+            align-self: center;
+
+            img {
+                border: unset;
+                height: 100%;
+            }
+        }
+
+        .name {
+            flex: 1;
+            padding: 0.25rem;
+            text-align: center;
+            align-self: center;
+            min-width: 0;
+            max-height: 48px;
+            text-overflow: ellipsis;
+        }
+
+        .party-header {
+            flex: 0 0 100%;
+            color: var(--hint-text-color);
+            font-size: 12px;
+            padding: 2px;
+            border-bottom: 1px solid var(--border-theme-color);
+            text-align: center;
+            align-self: center;
+        }
+
+        flex-wrap: wrap;
+        
+        .owner {
+            flex: 0 0 100%;
+            display: flex;
+            border-bottom: 1px solid var(--border-theme-color);
+
+            .icon {
+                flex: 0 0 32px;
+                height: 32px;
+                width: 32px;
+            }
+
+            font-size: 12px;
+        }
+    }
+
+    section.party {
+        order: 2; 
+
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: left;
+
+        .icon {
+            flex: 0 0 calc(100% / 3);
+
+            height: 42px;
+            width: 42px;
         }
     }
 }

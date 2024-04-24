@@ -198,7 +198,7 @@ export default class ItemSheetPTR2eV2<
                 "input.ptr2e-tagify"
             )) {
                 new Tagify(input, {
-                    enforceWhitelist: true,
+                    enforceWhitelist: false,
                     keepInvalidTags: false,
                     editTags: false,
                     tagTextProp: "label",
