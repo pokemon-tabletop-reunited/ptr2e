@@ -61,6 +61,8 @@ function _registerPTRHelpers() {
 function _registerBasicHelpers() {
     Handlebars.registerHelper("abs", value => Math.abs(Number(value)));
 
+    Handlebars.registerHelper("getProperty", (obj, key) => fu.getProperty(obj, key));
+
     Handlebars.registerHelper("concat", function () {
         var outStr = "";
         for (var arg in arguments) {

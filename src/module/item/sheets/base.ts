@@ -55,6 +55,7 @@ export default class ItemSheetPTR2eV2<
         overview: {
             id: "overview",
             template: this.overviewTemplate,
+            scrollable: [".scroll"],
         },
         details: {
             id: "details",
