@@ -10,6 +10,7 @@ export class HandlebarTemplates {
         "effect-traits": "systems/ptr2e/templates/partials/effect-traits.hbs",
         "trait-partial": "systems/ptr2e/templates/partials/trait.hbs",
         "move-body": "systems/ptr2e/templates/items/embeds/move/move-body.hbs",
+        "species-body": "systems/ptr2e/templates/items/embeds/species/species-body.hbs",
     }) as Record<string, string>;
 
     static async register() {

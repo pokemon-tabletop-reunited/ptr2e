@@ -1,0 +1,71 @@
+<content class="species-embed">
+    <aside>
+        {{#each document.system.types as |type|}}
+        {{{getIcon type}}}
+        {{/each}}
+    </aside>
+    <main>
+        <section class="species-basestats">
+            <fieldset>
+                <legend>Base Stats</legend>
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="highlight">{{localize "PTR2E.Attributes.hp.Label"}}</th>
+                            <td>{{document.system.stats.hp}}</td>
+                        </tr>
+                        <tr>
+                            <th class="highlight">{{localize "PTR2E.Attributes.atk.Label"}}</th>
+                            <td>{{document.system.stats.atk}}</td>
+                        </tr>
+                        <tr>
+                            <th class="highlight">{{localize "PTR2E.Attributes.def.Label"}}</th>
+                            <td>{{document.system.stats.def}}</td>
+                        </tr>
+                        <tr>
+                            <th class="highlight">{{localize "PTR2E.Attributes.spa.Label"}}</th>
+                            <td>{{document.system.stats.spa}}</td>
+                        </tr>
+                        <tr>
+                            <th class="highlight">{{localize "PTR2E.Attributes.spd.Label"}}</th>
+                            <td>{{document.system.stats.spd}}</td>
+                        </tr>
+                        <tr>
+                            <th class="highlight">{{localize "PTR2E.Attributes.spe.Label"}}</th>
+                            <td>{{document.system.stats.spe}}</td>
+                        </tr>
+                    </thead>
+                </table>
+            </fieldset>
+        </section>
+        <section class="species-primary-movement">
+            <fieldset>
+                <legend>Primary Movement</legend>
+                <table>
+                    <thead>                        
+                    {{#each document.system.movement.primary as |movement|}}
+                        <tr>
+                            <th class="highlight">{{formatSlug movement.type}}</th>
+                            <td>{{movement.value}}</td>
+                        </tr>
+                    {{/each}}
+                </thead>
+            </table>
+            </fieldset>
+        </section>
+        <section class="species-description">
+            <fieldset>
+                <legend>Species Description</legend>
+                {{#if document.description}}
+                <article>
+                    {{{document.description}}}
+                </article>
+                {{else}}
+                <article class="center">
+                    <small><i>No Species Description Provided</i></small>
+                </article>
+                {{/if}}
+            </fieldset>
+        </section>
+    </main>
+</content>
