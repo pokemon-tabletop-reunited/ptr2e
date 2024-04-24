@@ -450,3 +450,33 @@ content.attack-embed main section.attack-description {
 content.attack-embed main section.attack-description article {
   min-height: 50px;
 }
+content.species-embed {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+content.species-embed aside {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 44px;
+  margin: 0.25rem;
+  gap: 5px;
+}
+content.species-embed aside img {
+  border: unset;
+  border-radius: 50%;
+}
+content.species-embed table {
+  border: none;
+}
+content.species-embed table thead {
+  background: transparent;
+  color: black;
+  text-shadow: none !important;
+  border-bottom: none;
+}
+content.species-embed fieldset {
+  border-color: var(--color-light-6);
+  border-radius: 8px;
+  background: #efe6d8;
+}

@@ -216,3 +216,39 @@ content.attack-embed {
         }
     }
 }
+
+content.species-embed {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;  
+
+    aside {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 44px;
+        margin: 0.25rem;
+        gap: 5px;
+
+        img {
+            border: unset;
+            border-radius: 50%;
+        }
+    }
+
+    table{
+        border: none;
+
+        thead{
+            background: transparent;
+            color: black;
+            text-shadow: none !important;
+            border-bottom: none;
+        }
+    }
+
+    fieldset {
+        border-color: var(--color-light-6);
+        border-radius: 8px;
+        background: #efe6d8;
+    }
+}    

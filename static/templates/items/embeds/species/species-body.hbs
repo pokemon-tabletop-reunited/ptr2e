@@ -53,19 +53,22 @@
             </table>
             </fieldset>
         </section>
-        <section class="species-description">
+        {{#if document.system.movement.secondary}}
+        <section class="species-secondary-movement">
             <fieldset>
-                <legend>Species Description</legend>
-                {{#if document.description}}
-                <article>
-                    {{{document.description}}}
-                </article>
-                {{else}}
-                <article class="center">
-                    <small><i>No Species Description Provided</i></small>
-                </article>
-                {{/if}}
+                <legend>Secondary Movement</legend>
+                <table>
+                    <thead>                        
+                    {{#each document.system.movement.secondary as |movement|}}
+                        <tr>
+                            <th class="highlight">{{formatSlug movement.type}}</th>
+                            <td>{{movement.value}}</td>
+                        </tr>
+                    {{/each}}
+                </thead>
+            </table>
             </fieldset>
         </section>
+        {{/if}}
     </main>
 </content>
