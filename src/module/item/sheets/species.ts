@@ -10,6 +10,10 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
         super.DEFAULT_OPTIONS,
         {
             classes: ["species-sheet"],
+            position: {
+                height: 725,
+                width: 700,
+            },
         },
         { inplace: false }
     );
@@ -64,7 +68,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
         if (tab === "details") {
             this.setPosition({ height: 1000, width: 870 });
         } else {
-            this.setPosition({ height: 450, width: 550 });
+            this.setPosition({ height: 725, width: 700 });
         }
     }
 
