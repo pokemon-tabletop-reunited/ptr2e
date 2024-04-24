@@ -67,11 +67,18 @@ class ActorPTR2e<
                 return null;
             })();
             const party = ((): ActorPTR2e<TSystem, null>[] => {
-                if (this.folder?.isInParty(this.uuid))
-                    return this.folder.party.flatMap((uuid) =>
-                        uuid === this.uuid
+                const uuid = (() => {
+                    if (this.parent instanceof TokenDocumentPTR2e) {
+                        return this.parent.baseActor?.uuid ?? this.uuid;
+                    }
+                    return this.uuid;
+                })();
+
+                if (this.folder?.isFolderOwner(uuid) || this.folder?.isInParty(uuid))
+                    return this.folder.party.flatMap((u) =>
+                        u === uuid
                             ? (this as ActorPTR2e<TSystem, null>)
-                            : fromUuidSync<ActorPTR2e<TSystem, null>>(uuid) ?? []
+                            : fromUuidSync<ActorPTR2e<TSystem, null>>(u) ?? []
                     );
                 return [];
             })();

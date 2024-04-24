@@ -13,6 +13,7 @@ import { PTRCONFIG } from "@scripts/config/index.ts";
 import { sluggify } from "@utils";
 import type EnJSON from "static/lang/en.json";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
+import TokenPanel from "@module/apps/token-panel.ts";
 
 interface GamePTR2e
     extends Game<
@@ -39,6 +40,7 @@ interface GamePTR2e
             db: typeof ClockDatabase;
             panel: ClockPanel;
         };
+        tokenPanel: TokenPanel;
     };
 }
 

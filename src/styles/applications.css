@@ -1,6 +1,7 @@
 /** Application V2 Styles **/
 body {
   --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  --appv2-text-color: var(--color-light-1);
   --hint-text-color: var(--color-light-5);
   --border-theme-color: var(--color-light-6);
   --color-theme-4: var(--color-light-4);
@@ -8,6 +9,7 @@ body {
 }
 body.theme-light {
   --appv2-background: linear-gradient(to right, rgba(212, 210, 198, 0.93), rgba(240, 237, 223, 0.95));
+  --appv2-text-color: var(--color-dark-1);
   --hint-text-color: var(--color-dark-5);
   --border-theme-color: var(--color-dark-6);
 }
@@ -1429,6 +1431,164 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 }
 .application .standard-form input[type="checkbox"] {
   --checkbox-background-color: #3d343f;
+}
+.token-panel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: var(--appv2-background);
+  color: var(--appv2-text-color);
+  margin: 0 15px 10px 0;
+  pointer-events: all;
+  border-radius: 0 8px 8px 0;
+  border: 1px solid var(--border-theme-color);
+  border-left: unset;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  width: 135px;
+}
+.token-panel:has(template[data-application-part="info"]) {
+  display: none !important;
+}
+.token-panel nav.tabs {
+  order: 3;
+  flex-direction: column;
+}
+.token-panel nav.tabs a {
+  padding: 0.25rem;
+  background: var(--appv2-background);
+  border-top: 1px solid var(--border-theme-color);
+  width: 100%;
+}
+.token-panel nav.tabs a:first-child {
+  border-top: unset;
+}
+.token-panel nav.tabs a:last-child {
+  border-radius: 0 0 8px 0;
+}
+.token-panel .tab {
+  position: absolute;
+  right: 100%;
+  bottom: -1px;
+  background: var(--appv2-background);
+  border-radius: 8px 8px 0 8px;
+  border: 1px solid var(--border-theme-color);
+  min-width: 150px;
+  min-height: 110%;
+}
+.token-panel .tab[data-tab="attacks"].active {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item {
+  display: flex;
+  flex-direction: row;
+  background: var(--appv2-background);
+  border-top: 1px solid var(--border-theme-color);
+}
+.token-panel .tab[data-tab="attacks"] .attack-item .icon {
+  flex: 0 0 32px;
+  height: 32px;
+  width: 32px;
+  align-self: center;
+  cursor: pointer;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item .icon img {
+  border: unset;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item .icon img.dice {
+  display: none;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item .icon:hover img {
+  display: none;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item .icon:hover img.dice {
+  display: unset;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item .name {
+  flex: 1;
+  align-self: center;
+  text-align: center;
+  padding: 0.25rem;
+  min-width: 0;
+  text-overflow: ellipsis;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item:nth-child(odd) {
+  background: color-mix(in srgb, var(--appv2-background) 90%, transparent);
+}
+.token-panel .tab[data-tab="attacks"] .attack-item:first-child {
+  border-top: unset;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item:first-child img {
+  border-radius: 8px 0 0 0;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item:last-child img {
+  border-radius: 0 0 0 8px;
+}
+.token-panel section.token-info,
+.token-panel section.party {
+  order: 1;
+  display: flex;
+  border-bottom: 1px solid var(--border-theme-color);
+  flex-wrap: wrap;
+}
+.token-panel section.token-info .icon,
+.token-panel section.party .icon {
+  flex: 0 0 48px;
+  height: 48px;
+  width: 48px;
+  align-self: center;
+}
+.token-panel section.token-info .icon img,
+.token-panel section.party .icon img {
+  border: unset;
+  height: 100%;
+}
+.token-panel section.token-info .name,
+.token-panel section.party .name {
+  flex: 1;
+  padding: 0.25rem;
+  text-align: center;
+  align-self: center;
+  min-width: 0;
+  max-height: 48px;
+  text-overflow: ellipsis;
+}
+.token-panel section.token-info .party-header,
+.token-panel section.party .party-header {
+  flex: 0 0 100%;
+  color: var(--hint-text-color);
+  font-size: 12px;
+  padding: 2px;
+  border-bottom: 1px solid var(--border-theme-color);
+  text-align: center;
+  align-self: center;
+}
+.token-panel section.token-info .owner,
+.token-panel section.party .owner {
+  flex: 0 0 100%;
+  display: flex;
+  border-bottom: 1px solid var(--border-theme-color);
+  font-size: 12px;
+}
+.token-panel section.token-info .owner .icon,
+.token-panel section.party .owner .icon {
+  flex: 0 0 32px;
+  height: 32px;
+  width: 32px;
+}
+.token-panel section.party {
+  order: 2;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+.token-panel section.party .icon {
+  flex: 0 0 calc(100% / 3);
+  height: 42px;
+  width: 42px;
 }
 /** Application V1 Styles **/
 .stats-chart-aside {
