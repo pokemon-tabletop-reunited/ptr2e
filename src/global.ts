@@ -10,7 +10,7 @@ import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { ChangeModel, ClockDatabase, TraitsCollection } from "@data";
 import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import { PTRCONFIG } from "@scripts/config/index.ts";
-import { sluggify } from "@utils";
+import { ImageResolver, sluggify } from "@utils";
 import type EnJSON from "static/lang/en.json";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import TokenPanel from "@module/apps/token-panel.ts";
@@ -30,6 +30,7 @@ interface GamePTR2e
         tree: PerkTree;
         util: {
             sluggify: typeof sluggify;
+            image: ImageResolver;
         };
         data: {
             traits: TraitsCollection

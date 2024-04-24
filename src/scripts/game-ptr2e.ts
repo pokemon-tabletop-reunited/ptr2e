@@ -1,7 +1,7 @@
 import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 import { PerkTree } from "@module/canvas/perk-tree/perk-tree.ts";
 import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
-import { sluggify } from "@utils";
+import { ImageResolver, sluggify } from "@utils";
 import { ClockDatabase, TraitsCollection } from "@data";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import { Pokedex } from "pokeapi-js-wrapper";
@@ -16,7 +16,8 @@ const GamePTR = {
             util: {
                 sluggify,
                 pokeApi: new Pokedex(),
-                uuid: UUIDUtils
+                uuid: UUIDUtils,
+                image: ImageResolver
             },
             data: {
                 traits: TraitsCollection.create(),

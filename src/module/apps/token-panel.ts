@@ -94,7 +94,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
         context: foundry.applications.api.ApplicationRenderContext,
         options: foundry.applications.api.HandlebarsRenderOptions
     ): Promise<Record<string, HTMLElement>> {
-        if (this.token) return super._renderHTML(context, options);
+        if (this.token?.actor) return super._renderHTML(context, options);
 
         return options.parts.reduce(
             (acc, partId) => {
