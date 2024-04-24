@@ -68,35 +68,6 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
         };
     }
 
-    override _attachPartListeners(
-        partId: string,
-        htmlElement: HTMLElement,
-        _options: HandlebarsRenderOptions
-    ): void {
-        if (partId === "clocks") {
-            const inputElement =
-                htmlElement.querySelector<HTMLInputElement>(".dropdown-wrapper input")!;
-            htmlElement.querySelector(".dropdown li")?.addEventListener("mousedown", (event) => {
-                inputElement.value = (event.target as HTMLElement).getAttribute("data-value") ?? "";
-            });
-
-            const colorElement =
-                htmlElement.querySelector<HTMLInputElement>("input[type='color']")!;
-            const edits = colorElement.dataset.edit;
-            if (edits) {
-                colorElement.addEventListener("input", () => {
-                    const sibling = colorElement.previousElementSibling as
-                        | HTMLInputElement
-                        | undefined;
-                    if (sibling?.getAttribute("name") !== edits) return;
-
-                    sibling.value = colorElement.value;
-                    colorElement.style.setProperty("--color-input-border-color", colorElement.value);
-                });
-            }
-        }
-    }
-
     static #submit(
         this: ClockEditor,
         event: Event,
