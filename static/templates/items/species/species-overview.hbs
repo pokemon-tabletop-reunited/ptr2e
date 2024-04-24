@@ -5,6 +5,14 @@
                 Species Overview
             </legend>
             {{> species-body document=item}}
+            <fieldset>
+                <legend>
+                    Description
+                </legend>
+                <div class="description">
+                    {{{item.system.description}}}
+                </div>
+            </fieldset>
         </fieldset>
     </div>
 </section>
