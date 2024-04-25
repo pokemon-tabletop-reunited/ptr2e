@@ -27,7 +27,7 @@ interface GamePTR2e
         User<ActorPTR2e<ActorSystemPTR2e, null>>
     > {
     ptr: {
-        tree: PerkWeb;
+        web: PerkWeb;
         util: {
             sluggify: typeof sluggify;
             image: ImageResolver;

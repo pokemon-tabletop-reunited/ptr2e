@@ -1,8 +1,8 @@
 import { PerkPTR2e } from "@item";
 import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
-import { CoordinateString } from "@module/canvas/perk-tree/perk-web.ts";
 import { PerkNodeConfig } from "@module/canvas/perk-tree/perk-node.ts";
+import { SlugField } from "@module/data/fields/slug-field.ts";
 
 const PerkExtension = HasEmbed(
     HasTraits(HasDescription(HasSlug(HasActions(foundry.abstract.TypeDataModel)))),
@@ -31,11 +31,7 @@ export default abstract class PerkSystem extends PerkExtension {
             node: new fields.SchemaField({
                 i: new fields.NumberField({ required: true, initial: 0 }),
                 j: new fields.NumberField({ required: true, initial: 0 }),
-                connected: new fields.SetField(new fields.StringField({validate: (val) => {
-                    // Check if the string is in the format of "i,j"
-                    if(typeof val !== "string") return false;
-                    return /^\d+,\d+$/.test(val);
-                }}), { required: true, initial: [] }),
+                connected: new fields.SetField<SlugField<true, boolean, boolean>, (string|null)[], Set<string | null>, true>(new SlugField(), { required: true, initial: [] }),
                 config: new fields.SchemaField({
                     alpha: new fields.NumberField({ required: false, min: 0, max: 1}),
                     backgroundColor: new fields.ColorField({ required: false}),
@@ -81,7 +77,7 @@ export default abstract class PerkSystem extends PerkExtension {
     
         if(game.ptr.perks.initialized) {
             game.ptr.perks.perks.set(this.slug, this.parent);
-            if(game.ptr.tree.actor) game.ptr.tree.refresh({nodeRefresh: true})
+            if(game.ptr.web.actor) game.ptr.web.refresh({nodeRefresh: true})
         }
     }
 }
@@ -96,7 +92,7 @@ type PerkSchema = {
     node: foundry.data.fields.SchemaField<{
         i: foundry.data.fields.NumberField<number, number, true, false, true>;
         j: foundry.data.fields.NumberField<number, number, true, false, true>;
-        connected: foundry.data.fields.SetField<foundry.data.fields.StringField<CoordinateString>, CoordinateString[], Set<CoordinateString>, true, false, true>;
+        connected: foundry.data.fields.SetField<SlugField<true, boolean, boolean>, (string|null)[], Set<string | null>, true>;
         config: foundry.data.fields.SchemaField<{
             alpha: foundry.data.fields.NumberField<number, number, false, false, false>;
             backgroundColor: foundry.data.fields.ColorField<false, false, false>;
@@ -122,7 +118,7 @@ type PerkSchema = {
     }, {
         i: number;
         j: number;
-        connected: CoordinateString[];
+        connected: string[];
         config: {
             alpha: number;
             backgroundColor: HexColorString;
@@ -134,7 +130,7 @@ type PerkSchema = {
     }, {
         i: number;
         j: number;
-        connected: Set<CoordinateString>;
+        connected: Set<string>;
         config: Partial<PerkNodeConfig> | undefined;
     }>;
 }
@@ -148,7 +144,7 @@ interface PerkSystemSource extends Omit<ItemSystemSource, "container"> {
     node: {
         i: number;
         j: number;
-        connected: Set<CoordinateString>;
+        connected: Set<string>;
         config: Partial<PerkNodeConfig> | undefined;
     };
 }

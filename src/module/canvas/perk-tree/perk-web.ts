@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import PTRPerkTreeHUD from "./perk-tree-hud.mjs";
+import PTRPerkTreeHUD from "./perk-tree-hud.ts";
 import { Hexagon } from "./hexagon.ts";
 import { PerkEditState, PerkNode } from "./perk-node.ts";
 import { PerkStore, PTRNode } from "./perks-store.ts";
@@ -266,7 +266,7 @@ class PerkWeb extends PIXI.Container {
         this.nodes.addChild(node.element);
 
         for (const connected of node.connected) {
-            const target = this.collection.get(connected);
+            const target = this.collection.getName(connected);
             if (!target) {
                 console.warn(`Could not find node with name ${connected}`);
                 continue;
@@ -282,11 +282,11 @@ class PerkWeb extends PIXI.Container {
         // If the edge has already been drawn, return
         if (this.collection.getEdge(node1, node2)) return;
         // Make sure the nodes are connected bi-directionally
-        if (!node1.connected.has(`${node2.position.i},${node2.position.j}`)) {
-            node1.connected.add(`${node2.position.i},${node2.position.j}`);
+        if (!node1.connected.has(node2.perk.slug)) {
+            node1.connected.add(node2.perk.slug);
         }
-        if (!node2.connected.has(`${node1.position.i},${node1.position.j}`)) {
-            node2.connected.add(`${node1.position.i},${node1.position.j}`);
+        if (!node2.connected.has(node1.perk.slug)) {
+            node2.connected.add(node1.perk.slug);
         }
 
         // Draw the edge
@@ -388,16 +388,33 @@ class PerkWeb extends PIXI.Container {
     }
 
     public connectNodes(node1: PerkNode, node2: PerkNode) {
+        function updateItems() {
+            const updates = [];
+            if(node1.node.perk) {
+                const connections = new Set(node1.node.connected);
+                updates.push({_id: node1.node.perk._id, "system.node.connected": Array.from(connections)});
+            }
+            if(node2.node.perk) {
+                const connections = new Set(node2.node.connected);
+                updates.push({_id: node2.node.perk._id, "system.node.connected": Array.from(connections)});
+            }
+            if(updates.length) {
+                Item.updateDocuments(updates);
+            }
+        }
+
         const existing = this.collection.getEdge(node1.node, node2.node);
         if (existing) {
-            node1.node.connected.delete(`${node2.node.position.i},${node2.node.position.j}`);
-            node2.node.connected.delete(`${node1.node.position.i},${node1.node.position.j}`);
+            node1.node.connected.delete(node2.node.perk.slug);
+            node2.node.connected.delete(node1.node.perk.slug);
             this.edges.removeChild(existing);
             this.collection.unregisterEdge(node1.node, node2.node);
+            updateItems();
             return;
         }
 
         this._drawEdge(node1.node, node2.node);
+        updateItems();
     }
 
     public updateHexPosition(
@@ -426,6 +443,9 @@ class PerkWeb extends PIXI.Container {
         if (this.activeNode === node) {
             this.deactivateNode();
         }
+
+        const {i, j} = this.getHexCoordinates(x, y);
+        node.node.perk?.update({ "system.node": {i, j} });
     }
 
     public toggleEditMode() {

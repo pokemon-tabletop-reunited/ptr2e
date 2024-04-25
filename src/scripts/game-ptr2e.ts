@@ -12,7 +12,7 @@ import PerkWeb from "@module/canvas/perk-tree/perk-web.ts";
 const GamePTR = {
     onInit() {
         const initData = {
-            tree: new PerkWeb(),
+            web: new PerkWeb(),
             util: {
                 sluggify,
                 pokeApi: new Pokedex(),

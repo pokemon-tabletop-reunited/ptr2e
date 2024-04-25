@@ -1,6 +1,7 @@
 import { PerkPTR2e } from "@item";
 import { PerkNode } from "./perk-node.ts";
 import { CoordinateString } from "./perk-web.ts";
+import { sluggify } from "@utils";
 
 type EdgeCoordinateString = `${CoordinateString}-${CoordinateString}`;
 
@@ -10,8 +11,8 @@ type PTRNode = {
         j: number;
     };
     element?: PerkNode;
-    perk: PerkPTR2e | null;
-    connected: Set<CoordinateString>;
+    perk: PerkPTR2e;
+    connected: Set<string>;
 };
 
 class PerkStore extends Collection<PTRNode> {
@@ -35,6 +36,18 @@ class PerkStore extends Collection<PTRNode> {
             }
         }
         return new PerkStore(nodes);
+
+        // for(const node of store.values()) {
+        //     if(node.connected.size) {
+        //         node.connected = new Set(node.connected.map(slug => {
+        //             const {i,j} = store.getName(slug)?.position ?? {};
+        //             if(i === undefined || j === undefined) return "";
+        //             return `${i},${j}`;
+        //         })).filter(s => !!s);
+        //     }
+        // }
+
+        // return store;
     }
 
     async initialize() {
@@ -96,7 +109,7 @@ class PerkStore extends Collection<PTRNode> {
         name: string,
         { strict }: { strict?: boolean | undefined } | undefined = {}
     ): PTRNode | undefined {
-        const entry = this.find((node) => node.perk?.name === name);
+        const entry = this.find((node) => node.perk?.slug === sluggify(name));
         if (strict && entry === undefined) {
             throw new Error(`An entry with name ${name} does not exist in the collection`);
         }

@@ -36,7 +36,7 @@ class PerkNode extends PIXI.Container {
     }
 
     get active() {
-        return game.ptr.tree.activeNode === this;
+        return game.ptr.web.activeNode === this;
     }
 
     async draw(config: Partial<PerkNodeConfig> = {}) {
@@ -72,8 +72,8 @@ class PerkNode extends PIXI.Container {
 
     redrawEdges() {
         for (const connected of this.node.connected) {
-            const node = game.ptr.tree.collection.get(connected);
-            if (node) game.ptr.tree.redrawEdge(this.node, node);
+            const node = game.ptr.web.collection.getName(connected);
+            if (node) game.ptr.web.redrawEdge(this.node, node);
         }
     }
 
@@ -97,7 +97,7 @@ class PerkNode extends PIXI.Container {
             if (event.button === 0) return this._onClickLeftEnd(event);
         });
         this.addEventListener("globalpointermove", (event) => {
-            if (game.ptr.tree.canvas.hidden) return;
+            if (game.ptr.web.canvas.hidden) return;
             const doc = document.elementFromPoint(event.globalX, event.globalY);
             if (doc?.id !== "perk-tree") return;
             if (!this.active) return; // Only move active nodes
@@ -114,40 +114,40 @@ class PerkNode extends PIXI.Container {
     }
 
     _onClickLeft(_event: PIXI.FederatedPointerEvent) {
-        if (!game.ptr.tree.editMode) {
-            game.ptr.tree.perkHUD.activate(this);
+        if (!game.ptr.web.editMode) {
+            game.ptr.web.perkHUD.activate(this);
         } else {
             this.originalPosition = this.position.clone();
 
             if (this.active) {
-                game.ptr.tree.updateHexPosition(this);
+                game.ptr.web.updateHexPosition(this);
                 if (this.active) {
-                    game.ptr.tree.deactivateNode();
+                    game.ptr.web.deactivateNode();
                 }
             } else {
-                if (game.ptr.tree.activeNode?.state === 2) {
-                    game.ptr.tree.connectNodes(game.ptr.tree.activeNode, this);
+                if (game.ptr.web.activeNode?.state === 2) {
+                    game.ptr.web.connectNodes(game.ptr.web.activeNode, this);
                 } else {
-                    game.ptr.tree.activateNode(this, 1);
+                    game.ptr.web.activateNode(this, 1);
                 }
             }
         }
     }
 
     _onClickLeftEnd(_event: PIXI.FederatedPointerEvent) {
-        if (game.ptr.tree.editMode) {
+        if (game.ptr.web.editMode) {
             if (this.active) {
-                game.ptr.tree.updateHexPosition(this);
+                game.ptr.web.updateHexPosition(this);
             }
         }
     }
 
     _onClickRight(_event: PIXI.FederatedPointerEvent) {
-        if (game.ptr.tree.editMode) {
+        if (game.ptr.web.editMode) {
             if (this.active) {
-                game.ptr.tree.deactivateNode();
+                game.ptr.web.deactivateNode();
             } else {
-                game.ptr.tree.activateNode(this, 2);
+                game.ptr.web.activateNode(this, 2);
             }
         }
     }
