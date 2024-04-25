@@ -1,10 +1,8 @@
 import { PerkPTR2e } from "@item";
 import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed } from "@module/data/index.ts";
-import { sluggify } from "@utils";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
-
-const NODE_TYPES = ["normal", "root", "ranked"] as const;
-type NodeType = (typeof NODE_TYPES)[number];
+import { CoordinateString } from "@module/canvas/perk-tree/perk-web.ts";
+import { PerkNodeConfig } from "@module/canvas/perk-tree/perk-node.ts";
 
 const PerkExtension = HasEmbed(
     HasTraits(HasDescription(HasSlug(HasActions(foundry.abstract.TypeDataModel)))),
@@ -20,70 +18,9 @@ export default abstract class PerkSystem extends PerkExtension {
      */
     declare parent: PerkPTR2e;
 
-    /**
-     * The prerequisites for this perk before it can be taken.
-     */
-    abstract prerequisites: string[];
+    declare _source: InstanceType<typeof PerkExtension>[`_source`] & SourceFromSchema<PerkSchema>;
 
-    /**
-     * The cost of this perk.
-     */
-    abstract cost: number;
-
-    /**
-     * The node data for this perk.
-     */
-    abstract node: {
-        /**
-         * The angle of the node.
-         * @defaultValue `0`
-         * @remarks
-         * This is a value between 0 and 360.
-         */
-        angle: number;
-        /**
-         * The distance of the node from the center.
-         */
-        distance: number;
-        /**
-         * The type of the node.
-         * @defaultValue `normal`
-         * @remarks
-         * This is one of `normal`, `root`, or `ranked`.
-         */
-        type: NodeType;
-        /**
-         * The nodes that this node is connected to.
-         */
-        connected: Set<string>;
-        /**
-         * The texture of the node.
-         */
-        texture: string;
-        /**
-         * Whether the node's visibility has been toggled by the GM.
-         */
-        visible: boolean;
-    };
-
-    /**
-     * @internal
-     */
-    declare _source: InstanceType<typeof PerkExtension>["_source"] & {
-        prerequisites: string[];
-        cost: number;
-
-        node: {
-            angle: number;
-            distance: number;
-            type: NodeType;
-            connected: Set<string>;
-            texture: string;
-            visible: boolean;
-        };
-    };
-
-    static override defineSchema(): foundry.data.fields.DataSchema {
+    static override defineSchema(): PerkSchema {
         const fields = foundry.data.fields;
         return {
             ...super.defineSchema(),
@@ -92,31 +29,36 @@ export default abstract class PerkSystem extends PerkExtension {
             cost: new fields.NumberField({ required: true, initial: 1 }),
 
             node: new fields.SchemaField({
-                angle: new fields.AngleField({ required: true, initial: 0 }),
-                distance: new fields.NumberField({
-                    required: true,
-                    initial: 100,
-                    validate: (d) => (d as number) >= 0,
-                }),
-                type: new fields.StringField({
-                    choices: NODE_TYPES,
-                    required: true,
-                    initial: NODE_TYPES.at(0),
-                }),
-                connected: new fields.SetField(new fields.StringField(), {
-                    validate: (d) => {
-                        return Array.from(d as string[]).every((slug) => sluggify(slug) == slug);
-                    },
-                    validationError: "Invalid slug in connection set.",
-                }),
-                texture: new fields.FilePathField({
-                    required: true,
-                    categories: ["IMAGE"],
-                    initial: "/systems/ptr2e/img/icons/feat_icon.webp",
-                }),
-                visible: new fields.BooleanField({ required: true, initial: true }),
+                i: new fields.NumberField({ required: true, initial: 0 }),
+                j: new fields.NumberField({ required: true, initial: 0 }),
+                connected: new fields.SetField(new fields.StringField({validate: (val) => {
+                    // Check if the string is in the format of "i,j"
+                    if(typeof val !== "string") return false;
+                    return /^\d+,\d+$/.test(val);
+                }}), { required: true, initial: [] }),
+                config: new fields.SchemaField({
+                    alpha: new fields.NumberField({ required: false, min: 0, max: 1}),
+                    backgroundColor: new fields.ColorField({ required: false}),
+                    borderColor: new fields.ColorField({ required: false}),
+                    borderWidth: new fields.NumberField({ required: false, min: 0}),
+                    texture: new fields.FilePathField({categories: ["IMAGE"], required: false}),
+                    tint: new fields.ColorField({ required: false}),
+                }, {required: false})
             }),
         };
+    }
+
+    override prepareBaseData() {
+        super.prepareBaseData();
+
+        if(this.node.config) {
+            if(this.node.config.backgroundColor) this.node.config.backgroundColor = Color.fromString(this._source.node.config.backgroundColor);
+            if(this.node.config.borderColor) this.node.config.borderColor = Color.fromString(this._source.node.config.borderColor);
+            if(this.node.config.tint) this.node.config.tint = Color.fromString(this._source.node.config.tint);
+            for(const key of Object.keys(this.node.config)) {
+                if(this.node.config[key as keyof typeof this.node.config] === null) delete this.node.config[key as keyof typeof this.node.config];
+            }
+        }
     }
 
     override async _preCreate(
@@ -133,9 +75,69 @@ export default abstract class PerkSystem extends PerkExtension {
             });
         }
     }
+
+    override _onCreate(data: object, options: object, userId: string): void {
+        super._onCreate(data, options, userId);
+    
+        if(game.ptr.perks.initialized) {
+            game.ptr.perks.perks.set(this.slug, this.parent);
+            if(game.ptr.tree.actor) game.ptr.tree.refresh({nodeRefresh: true})
+        }
+    }
 }
 
-export type { NodeType };
+export default interface PerkSystem extends ModelPropsFromSchema<PerkSchema> {
+}
+
+type PerkSchema = {
+    prerequisites: foundry.data.fields.ArrayField<foundry.data.fields.StringField, string[], string[], true, false, true>;
+    cost: foundry.data.fields.NumberField<number, number, true, false, true>;
+
+    node: foundry.data.fields.SchemaField<{
+        i: foundry.data.fields.NumberField<number, number, true, false, true>;
+        j: foundry.data.fields.NumberField<number, number, true, false, true>;
+        connected: foundry.data.fields.SetField<foundry.data.fields.StringField<CoordinateString>, CoordinateString[], Set<CoordinateString>, true, false, true>;
+        config: foundry.data.fields.SchemaField<{
+            alpha: foundry.data.fields.NumberField<number, number, false, false, false>;
+            backgroundColor: foundry.data.fields.ColorField<false, false, false>;
+            borderColor: foundry.data.fields.ColorField<false, false, false>;
+            borderWidth: foundry.data.fields.NumberField<number, number, false, false, false>;
+            texture: foundry.data.fields.FilePathField<ImageFilePath, ImageFilePath, false, false, false>;
+            tint: foundry.data.fields.ColorField<false, false, false>;
+        }, {
+            alpha: number;
+            backgroundColor: HexColorString;
+            borderColor: HexColorString;
+            borderWidth: number;
+            texture: ImageFilePath;
+            tint: HexColorString;
+        }, {
+            alpha: number;
+            backgroundColor: number;
+            borderColor: number;
+            borderWidth: number;
+            texture: string;
+            tint: number;
+        }, false, false, true>;
+    }, {
+        i: number;
+        j: number;
+        connected: CoordinateString[];
+        config: {
+            alpha: number;
+            backgroundColor: HexColorString;
+            borderColor: HexColorString;
+            borderWidth: number;
+            texture: ImageFilePath;
+            tint: HexColorString;
+        }
+    }, {
+        i: number;
+        j: number;
+        connected: Set<CoordinateString>;
+        config: Partial<PerkNodeConfig> | undefined;
+    }>;
+}
 
 export type PerkSource = BaseItemSourcePTR2e<"perk", PerkSystemSource>;
 
@@ -144,11 +146,9 @@ interface PerkSystemSource extends Omit<ItemSystemSource, "container"> {
     cost: number;
 
     node: {
-        angle: number;
-        distance: number;
-        type: NodeType;
-        connected: Set<string>;
-        texture: string;
-        visible: boolean;
+        i: number;
+        j: number;
+        connected: Set<CoordinateString>;
+        config: Partial<PerkNodeConfig> | undefined;
     };
 }

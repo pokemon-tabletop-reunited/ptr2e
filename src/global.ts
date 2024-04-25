@@ -3,7 +3,6 @@ import { CombatPTR2e, CombatantPTR2e, CombatTrackerPTR2e } from "@combat";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
 import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
-import { PerkTree } from "@module/canvas/perk-tree/perk-tree.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
@@ -14,6 +13,7 @@ import { ImageResolver, sluggify } from "@utils";
 import type EnJSON from "static/lang/en.json";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import TokenPanel from "@module/apps/token-panel.ts";
+import PerkWeb from "@module/canvas/perk-tree/perk-web.ts";
 
 interface GamePTR2e
     extends Game<
@@ -27,7 +27,7 @@ interface GamePTR2e
         User<ActorPTR2e<ActorSystemPTR2e, null>>
     > {
     ptr: {
-        tree: PerkTree;
+        tree: PerkWeb;
         util: {
             sluggify: typeof sluggify;
             image: ImageResolver;

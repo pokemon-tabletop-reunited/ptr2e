@@ -75,7 +75,7 @@ class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> {
     }
 
     override async close(options = {}) {
-        if (game.ptr.tree.editMode) { this.minimize(); return; }
+        //if (game.ptr.tree.editMode) { this.minimize(); return; }
         return super.close(options);
     }
 

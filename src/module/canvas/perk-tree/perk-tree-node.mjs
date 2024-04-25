@@ -10,7 +10,7 @@ class PTRPerkTreeNode extends PTRPerkTreeIcon {
     }
 
     get active() {
-        return game.ptr.tree.active === this;
+        return game.ptr.tree.activeNode === this;
     }
 
     get editMode() {

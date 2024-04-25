@@ -1,5 +1,4 @@
 import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
-import { PerkTree } from "@module/canvas/perk-tree/perk-tree.ts";
 import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import { ImageResolver, sluggify } from "@utils";
 import { ClockDatabase, TraitsCollection } from "@data";
@@ -8,11 +7,12 @@ import { Pokedex } from "pokeapi-js-wrapper";
 import { UUIDUtils } from "src/util/uuid.ts";
 import TokenPanel from "@module/apps/token-panel.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import PerkWeb from "@module/canvas/perk-tree/perk-web.ts";
 
 const GamePTR = {
     onInit() {
         const initData = {
-            tree: new PerkTree(),
+            tree: new PerkWeb(),
             util: {
                 sluggify,
                 pokeApi: new Pokedex(),
