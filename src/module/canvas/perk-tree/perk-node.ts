@@ -53,6 +53,7 @@ class PerkNode extends PIXI.Container {
     private _legal = true;
 
     async draw(config: Partial<PerkNodeConfig> = {}) {
+        if(!this.node.perk?.system.visible) return;
         const { alpha, backgroundColor, texture, tint, scale} = Object.assign(this.config, config);
 
         // Icon Shape
@@ -70,6 +71,12 @@ class PerkNode extends PIXI.Container {
         this.icon.alpha = alpha ?? 1;
         this.icon.tint = tint ?? 0x000000;
         this.scale.set(scale ?? 1)
+
+        if(this.node.perk.system.hidden) {
+            this.icon.tint = 0x999999;
+            this.icon.alpha = 0.5;
+            this.config.borderColor = 0x777777;
+        }
 
         // Draw Icon Mask
         this._drawMask();
@@ -98,7 +105,9 @@ class PerkNode extends PIXI.Container {
             event.stopPropagation();
 
             // Right click
-            if (event.button) return this._onClickRight(event);
+            if (event.button === 2) return this._onClickRight(event);
+            // Middle click
+            if (event.button === 1) return this._onClickMiddle(event);
             // Left click
             if (event.button === 0) return this._onClickLeft(event);
         });
@@ -173,6 +182,12 @@ class PerkNode extends PIXI.Container {
             } else {
                 game.ptr.web.activateNode(this, 2);
             }
+        }
+    }
+
+    _onClickMiddle(_event: PIXI.FederatedPointerEvent) {
+        if (game.ptr.web.editMode) {
+            game.ptr.web.toggleNodeVisibility(this);
         }
     }
 

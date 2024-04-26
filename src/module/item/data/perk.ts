@@ -31,16 +31,23 @@ export default abstract class PerkSystem extends PerkExtension {
             node: new fields.SchemaField({
                 i: new fields.NumberField({ required: true, nullable: true, initial: null }),
                 j: new fields.NumberField({ required: true, nullable: true, initial: null }),
-                connected: new fields.SetField<SlugField<true, boolean, boolean>, (string|null)[], Set<string | null>, true>(new SlugField(), { required: true, initial: [] }),
-                config: new fields.SchemaField({
-                    alpha: new fields.NumberField({ required: false, min: 0, max: 1}),
-                    backgroundColor: new fields.ColorField({ required: false}),
-                    borderColor: new fields.ColorField({ required: false}),
-                    borderWidth: new fields.NumberField({ required: false, min: 0}),
-                    texture: new fields.FilePathField({categories: ["IMAGE"], required: false}),
-                    tint: new fields.ColorField({ required: false}),
-                    scale: new fields.NumberField({ required: false, min: 0.5, max: 2}),
-                }, {required: false})
+                connected: new fields.SetField<SlugField<true, boolean, boolean>,(string | null)[],Set<string | null>,true>(new SlugField(), { required: true, initial: [] }),
+                config: new fields.SchemaField(
+                    {
+                        alpha: new fields.NumberField({ required: false, min: 0, max: 1 }),
+                        backgroundColor: new fields.ColorField({ required: false }),
+                        borderColor: new fields.ColorField({ required: false }),
+                        borderWidth: new fields.NumberField({ required: false, min: 0 }),
+                        texture: new fields.FilePathField({
+                            categories: ["IMAGE"],
+                            required: false,
+                        }),
+                        tint: new fields.ColorField({ required: false }),
+                        scale: new fields.NumberField({ required: false, min: 0.5, max: 2 }),
+                    },
+                    { required: false }
+                ),
+                hidden: new fields.BooleanField({ required: true, initial: false }),
             }),
         };
     }
@@ -48,14 +55,40 @@ export default abstract class PerkSystem extends PerkExtension {
     override prepareBaseData() {
         super.prepareBaseData();
 
-        if(this.node.config) {
-            if(this.node.config.backgroundColor) this.node.config.backgroundColor = Color.fromString(this._source.node.config.backgroundColor);
-            if(this.node.config.borderColor) this.node.config.borderColor = Color.fromString(this._source.node.config.borderColor);
-            if(this.node.config.tint) this.node.config.tint = Color.fromString(this._source.node.config.tint);
-            for(const key of Object.keys(this.node.config)) {
-                if(this.node.config[key as keyof typeof this.node.config] === null) delete this.node.config[key as keyof typeof this.node.config];
+        if (this.node.config) {
+            if (this.node.config.backgroundColor)
+                this.node.config.backgroundColor = Color.fromString(
+                    this._source.node.config.backgroundColor
+                );
+            if (this.node.config.borderColor)
+                this.node.config.borderColor = Color.fromString(
+                    this._source.node.config.borderColor
+                );
+            if (this.node.config.tint)
+                this.node.config.tint = Color.fromString(this._source.node.config.tint);
+            for (const key of Object.keys(this.node.config)) {
+                if (this.node.config[key as keyof typeof this.node.config] === null)
+                    delete this.node.config[key as keyof typeof this.node.config];
             }
         }
+    }
+
+    get visible() {
+        if(game.user.isGM) {
+            return this.hidden
+                ? game.ptr.web.editMode || false //TODO: Replace false with the toggle for hidden nodes in the UI
+                    ? true
+                    : false
+                : true;
+        }
+
+        if(!this.parent.visible) return false;
+
+        return !this.hidden;
+    }
+
+    get hidden() {
+        return this.node.hidden;
     }
 
     override async _preCreate(
@@ -75,70 +108,107 @@ export default abstract class PerkSystem extends PerkExtension {
 
     override _onCreate(data: object, options: object, userId: string): void {
         super._onCreate(data, options, userId);
-    
-        if(game.ptr.perks.initialized) {
+
+        if (game.ptr.perks.initialized) {
             game.ptr.perks.perks.set(this.slug, this.parent);
-            if(game.ptr.web.actor) game.ptr.web.refresh({nodeRefresh: true})
+            if (game.ptr.web.actor) game.ptr.web.refresh({ nodeRefresh: true });
         }
     }
 }
 
-export default interface PerkSystem extends ModelPropsFromSchema<PerkSchema> {
-}
+export default interface PerkSystem extends ModelPropsFromSchema<PerkSchema> {}
 
 type PerkSchema = {
-    prerequisites: foundry.data.fields.ArrayField<foundry.data.fields.StringField, string[], string[], true, false, true>;
+    prerequisites: foundry.data.fields.ArrayField<
+        foundry.data.fields.StringField,
+        string[],
+        string[],
+        true,
+        false,
+        true
+    >;
     cost: foundry.data.fields.NumberField<number, number, true, false, true>;
 
-    node: foundry.data.fields.SchemaField<{
-        i: foundry.data.fields.NumberField<number, number, true, true, true>;
-        j: foundry.data.fields.NumberField<number, number, true, true, true>;
-        connected: foundry.data.fields.SetField<SlugField<true, boolean, boolean>, (string|null)[], Set<string | null>, true>;
-        config: foundry.data.fields.SchemaField<{
-            alpha: foundry.data.fields.NumberField<number, number, false, false, false>;
-            backgroundColor: foundry.data.fields.ColorField<false, false, false>;
-            borderColor: foundry.data.fields.ColorField<false, false, false>;
-            borderWidth: foundry.data.fields.NumberField<number, number, false, false, false>;
-            texture: foundry.data.fields.FilePathField<ImageFilePath, ImageFilePath, false, false, false>;
-            tint: foundry.data.fields.ColorField<false, false, false>;
-            scale: foundry.data.fields.NumberField<number, number, false, false, false>;
-        }, {
-            alpha: number;
-            backgroundColor: HexColorString;
-            borderColor: HexColorString;
-            borderWidth: number;
-            texture: ImageFilePath;
-            tint: HexColorString;
-            scale: number;
-        }, {
-            alpha: number;
-            backgroundColor: number;
-            borderColor: number;
-            borderWidth: number;
-            texture: string;
-            tint: number;
-            scale: number;
-        }, false, false, true>;
-    }, {
-        i: number | null;
-        j: number | null;
-        connected: string[];
-        config: {
-            alpha: number;
-            backgroundColor: HexColorString;
-            borderColor: HexColorString;
-            borderWidth: number;
-            texture: ImageFilePath;
-            tint: HexColorString;
-            scale: number;
+    node: foundry.data.fields.SchemaField<
+        {
+            i: foundry.data.fields.NumberField<number, number, true, true, true>;
+            j: foundry.data.fields.NumberField<number, number, true, true, true>;
+            connected: foundry.data.fields.SetField<
+                SlugField<true, boolean, boolean>,
+                (string | null)[],
+                Set<string | null>,
+                true
+            >;
+            config: foundry.data.fields.SchemaField<
+                {
+                    alpha: foundry.data.fields.NumberField<number, number, false, false, false>;
+                    backgroundColor: foundry.data.fields.ColorField<false, false, false>;
+                    borderColor: foundry.data.fields.ColorField<false, false, false>;
+                    borderWidth: foundry.data.fields.NumberField<
+                        number,
+                        number,
+                        false,
+                        false,
+                        false
+                    >;
+                    texture: foundry.data.fields.FilePathField<
+                        ImageFilePath,
+                        ImageFilePath,
+                        false,
+                        false,
+                        false
+                    >;
+                    tint: foundry.data.fields.ColorField<false, false, false>;
+                    scale: foundry.data.fields.NumberField<number, number, false, false, false>;
+                },
+                {
+                    alpha: number;
+                    backgroundColor: HexColorString;
+                    borderColor: HexColorString;
+                    borderWidth: number;
+                    texture: ImageFilePath;
+                    tint: HexColorString;
+                    scale: number;
+                },
+                {
+                    alpha: number;
+                    backgroundColor: number;
+                    borderColor: number;
+                    borderWidth: number;
+                    texture: string;
+                    tint: number;
+                    scale: number;
+                },
+                false,
+                false,
+                true
+            >;
+            hidden: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+        },
+        {
+            i: number | null;
+            j: number | null;
+            connected: string[];
+            config: {
+                alpha: number;
+                backgroundColor: HexColorString;
+                borderColor: HexColorString;
+                borderWidth: number;
+                texture: ImageFilePath;
+                tint: HexColorString;
+                scale: number;
+            };
+            hidden: boolean;
+        },
+        {
+            i: number | null;
+            j: number | null;
+            connected: Set<string>;
+            config: Partial<PerkNodeConfig> | undefined;
+            hidden: boolean;
         }
-    }, {
-        i: number | null;
-        j: number | null;
-        connected: Set<string>;
-        config: Partial<PerkNodeConfig> | undefined;
-    }>;
-}
+    >;
+};
 
 export type PerkSource = BaseItemSourcePTR2e<"perk", PerkSystemSource>;
 

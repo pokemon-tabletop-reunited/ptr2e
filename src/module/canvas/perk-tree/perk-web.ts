@@ -294,6 +294,10 @@ class PerkWeb extends PIXI.Container {
         if (!node1.element) this._drawNode(node1);
         if (!node2.element) this._drawNode(node2);
 
+        // If either node ain't visible, return
+        if(!node1.perk.system.visible || !node2.perk.system.visible) return;
+        const isHidden = node1.perk.system.hidden || node2.perk.system.hidden;
+
         // If the edge has already been drawn, return
         if (this.collection.getEdge(node1, node2)) return;
         // Make sure the nodes are connected bi-directionally
@@ -306,7 +310,7 @@ class PerkWeb extends PIXI.Container {
 
         // Draw the edge
         const edge = new PIXI.Graphics();
-        edge.lineStyle(2, 0x000000, 1);
+        edge.lineStyle(2, isHidden ? 0x888888 : 0x000000, isHidden ? 0.5 : 1);
         edge.moveTo(node1.element!.x, node1.element!.y);
         edge.lineTo(node2.element!.x, node2.element!.y);
         this.collection.registerEdge(node1, node2, edge);
@@ -562,6 +566,13 @@ class PerkWeb extends PIXI.Container {
         return true;
     }
 
+    public async toggleNodeVisibility(node: PerkNode) {
+        await node.node.perk?.update({
+            "system.node.hidden": !node.node.perk.system.hidden,
+        })
+        return this.refresh({ nodeRefresh: true });
+    }
+
     public toggleEditMode() {
         this.editMode = !this.editMode;
         if (this.editMode) {
@@ -575,6 +586,7 @@ class PerkWeb extends PIXI.Container {
             this.app.renderer.background.alpha = 0.35;
         }
         if (this.activeNode) this.deactivateNode();
+        this.refresh({nodeRefresh: true});
     }
 
     private alignHUD() {
