@@ -29,5 +29,6 @@ declare global {
         sidebar: Sidebar;
         tables: RollTableDirectory;
         windows: Record<number, Application>;
+        activeWindow: Application | null;
     }
 }

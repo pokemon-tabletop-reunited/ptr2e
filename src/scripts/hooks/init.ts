@@ -29,7 +29,7 @@ export const Init: PTRHook = {
 
             // Set custom combat settings
             CONFIG.ui.combat = PTRCONFIG.ui.combat
-            //CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
+            CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
 
             // Define custom Entity classes
             CONFIG.ActiveEffect.documentClass = PTRCONFIG.ActiveEffect.documentClass;

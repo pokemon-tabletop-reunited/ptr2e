@@ -29,8 +29,8 @@ export default abstract class PerkSystem extends PerkExtension {
             cost: new fields.NumberField({ required: true, initial: 1 }),
 
             node: new fields.SchemaField({
-                i: new fields.NumberField({ required: true, initial: 0 }),
-                j: new fields.NumberField({ required: true, initial: 0 }),
+                i: new fields.NumberField({ required: true, nullable: true, initial: null }),
+                j: new fields.NumberField({ required: true, nullable: true, initial: null }),
                 connected: new fields.SetField<SlugField<true, boolean, boolean>, (string|null)[], Set<string | null>, true>(new SlugField(), { required: true, initial: [] }),
                 config: new fields.SchemaField({
                     alpha: new fields.NumberField({ required: false, min: 0, max: 1}),
@@ -90,8 +90,8 @@ type PerkSchema = {
     cost: foundry.data.fields.NumberField<number, number, true, false, true>;
 
     node: foundry.data.fields.SchemaField<{
-        i: foundry.data.fields.NumberField<number, number, true, false, true>;
-        j: foundry.data.fields.NumberField<number, number, true, false, true>;
+        i: foundry.data.fields.NumberField<number, number, true, true, true>;
+        j: foundry.data.fields.NumberField<number, number, true, true, true>;
         connected: foundry.data.fields.SetField<SlugField<true, boolean, boolean>, (string|null)[], Set<string | null>, true>;
         config: foundry.data.fields.SchemaField<{
             alpha: foundry.data.fields.NumberField<number, number, false, false, false>;
@@ -116,8 +116,8 @@ type PerkSchema = {
             tint: number;
         }, false, false, true>;
     }, {
-        i: number;
-        j: number;
+        i: number | null;
+        j: number | null;
         connected: string[];
         config: {
             alpha: number;
@@ -128,8 +128,8 @@ type PerkSchema = {
             tint: HexColorString;
         }
     }, {
-        i: number;
-        j: number;
+        i: number | null;
+        j: number | null;
         connected: Set<string>;
         config: Partial<PerkNodeConfig> | undefined;
     }>;

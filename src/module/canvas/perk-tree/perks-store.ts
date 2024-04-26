@@ -27,7 +27,7 @@ class PerkStore extends Collection<PTRNode> {
         const perkManager = await game.ptr.perks.initialize();
         const nodes: PTRNode[] = [];
         for (const perk of perkManager.perks.values()) {
-            if (perk.system.node) {
+            if (perk.system.node && perk.system.node.i !== null && perk.system.node.j !== null) {
                 nodes.push({
                     position: { i: perk.system.node.i, j: perk.system.node.j },
                     perk: perk,
@@ -52,9 +52,10 @@ class PerkStore extends Collection<PTRNode> {
 
     async initialize() {
         this.clear();
+        this.edges.clear();
         const perkManager = await game.ptr.perks.initialize();
         for (const perk of perkManager.perks.values()) {
-            if (perk.system.node) {
+            if (perk.system.node && perk.system.node.i !== null && perk.system.node.j !== null) {
                 this.set(`${perk.system.node.i},${perk.system.node.j}`, {
                     position: { i: perk.system.node.i, j: perk.system.node.j },
                     perk: perk,

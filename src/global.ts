@@ -101,7 +101,7 @@ declare global {
             CompendiumDirectory,
             CombatTracker<Combat | null>
         > & {
-            perks: PerkDirectory;
+            perksTab: PerkDirectory;
         };
 
         function getTexture(src: string): PIXI.Texture | PIXI.Spritesheet | null;

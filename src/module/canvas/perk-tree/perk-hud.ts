@@ -57,13 +57,6 @@ class PerkHUD extends Application {
             top: this._object.y - (this._object.height / 2),
         }
         this.element.css(options);
-
-        // const globalPosition = this.object.getGlobalPosition();
-        // const position = {
-        //     left: left || (globalPosition.x + (this.object.width / 2) + 25),
-        //     top: (globalPosition.y - (this.object.height / 2))
-        // }
-        // this.element.css(position);
     }
 }
 

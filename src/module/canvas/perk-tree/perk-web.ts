@@ -4,6 +4,7 @@ import { Hexagon } from "./hexagon.ts";
 import { PerkEditState, PerkNode } from "./perk-node.ts";
 import { PerkStore, PTRNode } from "./perks-store.ts";
 import { PerkHUD } from "./perk-hud.ts";
+import { ItemPTR2e } from "@item";
 
 class PerkWeb extends PIXI.Container {
     get activeNode() {
@@ -14,6 +15,8 @@ class PerkWeb extends PIXI.Container {
     }
 
     #active: PerkNode | null = null;
+    // @ts-ignore
+    #dragDrop: DragDrop;
 
     constructor() {
         super();
@@ -40,6 +43,9 @@ class PerkWeb extends PIXI.Container {
             }),
             writable: false,
         });
+
+        // Enable Drag & Drop handling
+        this.#dragDrop = new DragDrop({callbacks: {drop: this._onDrop.bind(this)}}).bind(this.canvas);
 
         // Setup easy access to the stage
         Object.defineProperty(this, "stage", {
@@ -241,6 +247,7 @@ class PerkWeb extends PIXI.Container {
 
         if (nodeRefresh) {
             this.nodes.removeChildren();
+            this.edges.removeChildren();
             await this.collection.initialize();
         }
 
@@ -449,14 +456,16 @@ class PerkWeb extends PIXI.Container {
     }
 
     public toggleEditMode() {
-        if (!this.editMode) {
+        this.editMode = !this.editMode;
+        if (this.editMode) {
+            if(!ui.perksTab.popout || ui.perksTab.popout._minimized) ui.perksTab.renderPopout();
             this.app.renderer.background.color = 0x851a1a;
             this.app.renderer.background.alpha = 0.35;
         } else {
+            ui.perksTab.popout?.close();
             this.app.renderer.background.color = 0xcccccc;
             this.app.renderer.background.alpha = 0.35;
         }
-        this.editMode = !this.editMode;
         if (this.activeNode) this.deactivateNode();
     }
 
@@ -468,6 +477,50 @@ class PerkWeb extends PIXI.Container {
         hud.style.left = `${x}px`;
         hud.style.top = `${y}px`;
         hud.style.transform = `scale(${scale})`;
+    }
+
+    protected async _onDrop(event: DragEvent) {
+        event.preventDefault();
+        const data = TextEditor.getDragEventData<DropCanvasData<string, ItemPTR2e> & {i: number, j: number}>(event);
+        if(!data?.type) return;
+
+        // Acquire the cursor position transformed to Canvas coordinates
+        const [x, y] = [event.clientX, event.clientY];
+        const t = this.stage.worldTransform;
+        const {i,j} = this.getHexCoordinates((x - t.tx) / this.stage.scale.x, (y - t.ty) / this.stage.scale.y);
+        data.i = i;
+        data.j = j;
+        
+        /**
+         * A hook event that fires when some useful data is dropped onto the
+         * Canvas.
+         * @function dropCanvasData
+         * @memberof hookEvents
+         * @param {Canvas} canvas The Canvas
+         * @param {object} data   The data that has been dropped onto the Canvas
+         */
+        const allowed = Hooks.call("dropPerkWebCanvasData", this, data);
+        if (allowed === false) return;
+
+        // Handle the drop
+        switch(data.type) {
+            case "Item": {
+                const item = await ItemPTR2e.fromDropData(data);
+                // If no item or the type isn't perk return
+                if (!item || item.type !== "perk") return;
+
+                const existing = this.collection.getName(item.slug);
+                if(existing) {
+                    return this.updateHexPosition(existing.element!, {i, j});
+                }
+
+                await item.update({"system.node": {
+                    i,
+                    j
+                }})
+                return await this.refresh({nodeRefresh: true});
+            }
+        }
     }
 }
 type CoordinateString = `${number},${number}`;
