@@ -39,6 +39,7 @@ export default abstract class PerkSystem extends PerkExtension {
                     borderWidth: new fields.NumberField({ required: false, min: 0}),
                     texture: new fields.FilePathField({categories: ["IMAGE"], required: false}),
                     tint: new fields.ColorField({ required: false}),
+                    scale: new fields.NumberField({ required: false, min: 0.5, max: 2}),
                 }, {required: false})
             }),
         };
@@ -100,6 +101,7 @@ type PerkSchema = {
             borderWidth: foundry.data.fields.NumberField<number, number, false, false, false>;
             texture: foundry.data.fields.FilePathField<ImageFilePath, ImageFilePath, false, false, false>;
             tint: foundry.data.fields.ColorField<false, false, false>;
+            scale: foundry.data.fields.NumberField<number, number, false, false, false>;
         }, {
             alpha: number;
             backgroundColor: HexColorString;
@@ -107,6 +109,7 @@ type PerkSchema = {
             borderWidth: number;
             texture: ImageFilePath;
             tint: HexColorString;
+            scale: number;
         }, {
             alpha: number;
             backgroundColor: number;
@@ -114,6 +117,7 @@ type PerkSchema = {
             borderWidth: number;
             texture: string;
             tint: number;
+            scale: number;
         }, false, false, true>;
     }, {
         i: number | null;
@@ -126,6 +130,7 @@ type PerkSchema = {
             borderWidth: number;
             texture: ImageFilePath;
             tint: HexColorString;
+            scale: number;
         }
     }, {
         i: number | null;

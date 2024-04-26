@@ -9,12 +9,13 @@ class PerkNode extends PIXI.Container {
         this.config = fu.mergeObject(
             fu.mergeObject(
                 {
-                    alpha: 0.8,
+                    alpha: 1,
                     backgroundColor: 0x000000,
                     borderColor: 0x000000,
                     borderWidth: 1,
                     tint: 0xffffff,
                     texture: "",
+                    scale: 1,
                 },
                 node.perk?.system.node?.config ?? {},
                 {inplace: false}
@@ -52,7 +53,7 @@ class PerkNode extends PIXI.Container {
     private _legal = true;
 
     async draw(config: Partial<PerkNodeConfig> = {}) {
-        const { alpha, backgroundColor, texture, tint } = Object.assign(this.config, config);
+        const { alpha, backgroundColor, texture, tint, scale} = Object.assign(this.config, config);
 
         // Icon Shape
         this.shape = this._getShape();
@@ -68,6 +69,7 @@ class PerkNode extends PIXI.Container {
         this.icon.width = this.icon.height = PerkWeb.HEX_SIZE * 2;
         this.icon.alpha = alpha ?? 1;
         this.icon.tint = tint ?? 0x000000;
+        this.scale.set(scale ?? 1)
 
         // Draw Icon Mask
         this._drawMask();
@@ -235,6 +237,7 @@ type PerkNodeConfig = {
     borderWidth: number;
     texture: FilePath;
     tint: number;
+    scale: number;
 };
 
 type PerkEditState = {
