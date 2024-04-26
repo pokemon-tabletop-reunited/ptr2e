@@ -102,7 +102,7 @@ class PerkNode extends PIXI.Container {
             // Left click
             if (event.button === 0) return this._onClickLeft(event);
         });
-        this.addEventListener("pointerup", (event) => {
+        this.addEventListener("pointerup", async (event) => {
             event.stopPropagation();
 
             // Right click
@@ -137,12 +137,12 @@ class PerkNode extends PIXI.Container {
         this.cursor = "pointer";
     }
 
-    _onClickLeft(_event: PIXI.FederatedPointerEvent) {
+    async _onClickLeft(_event: PIXI.FederatedPointerEvent) {
         if (!game.ptr.web.editMode) {
             game.ptr.web.perkHUD.activate(this);
         } else {
             if (this.active) {
-                const result = game.ptr.web.updateHexPosition(this);
+                const result = await game.ptr.web.updateHexPosition(this);
                 if(!result) return;
                 if (this.active) {
                     game.ptr.web.deactivateNode();
@@ -158,10 +158,10 @@ class PerkNode extends PIXI.Container {
         }
     }
 
-    _onClickLeftEnd(_event: PIXI.FederatedPointerEvent) {
+    async _onClickLeftEnd(_event: PIXI.FederatedPointerEvent) {
         if (game.ptr.web.editMode) {
             if (this.active) {
-                game.ptr.web.updateHexPosition(this);
+                await game.ptr.web.updateHexPosition(this);
             }
         }
     }

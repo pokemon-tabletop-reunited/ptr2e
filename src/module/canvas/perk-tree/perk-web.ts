@@ -384,10 +384,14 @@ class PerkWeb extends PIXI.Container {
             },
         });
         if (this.activeNode.originalPosition) {
-            this.updateHexPosition(this.activeNode, {
-                x: this.activeNode.originalPosition.x,
-                y: this.activeNode.originalPosition.y,
-            }, true);
+            this.updateHexPosition(
+                this.activeNode,
+                {
+                    x: this.activeNode.originalPosition.x,
+                    y: this.activeNode.originalPosition.y,
+                },
+                true
+            );
         }
         return true;
     }
@@ -499,7 +503,7 @@ class PerkWeb extends PIXI.Container {
         return true;
     }
 
-    public updateHexPosition(
+    public async updateHexPosition(
         node: PerkNode,
         point?: { x: number; y: number } | { i: number; j: number },
         ignoreOriginal = false
@@ -523,29 +527,37 @@ class PerkWeb extends PIXI.Container {
             const { i, j } = this.getHexCoordinates(node.x, node.y);
             return this.getHexPosition(i, j);
         })();
-        if (!ignoreOriginal && node.originalPosition?.x === x && node.originalPosition?.y === y) return true;
+        if (!ignoreOriginal && node.originalPosition?.x === x && node.originalPosition?.y === y)
+            return true;
         const { i, j } = this.getHexCoordinates(x, y);
         if (!this.isLegalSpot(i, j)) {
             ui.notifications.error("A node cannot be placed within 1 hex of another node.");
             return false;
         }
 
-        const { i: oldI, j: oldJ } = fu.duplicate(node.node.position);
-        this.#lastUpdate = { i: oldI, j: oldJ, node };
+        try {
+            await node.node.perk?.update({ "system.node": { i, j } });
 
-        node.node.position = { i, j };
-        this.collection.set(`${i},${j}`, node.node);
-        this.collection.delete(`${oldI},${oldJ}`);
+            const { i: oldI, j: oldJ } = fu.duplicate(node.node.position);
+            this.#lastUpdate = { i: oldI, j: oldJ, node };
 
-        node.position.set(x, y);
-        node.originalPosition = null;
-        node.redrawEdges();
+            node.node.position = { i, j };
+            this.collection.set(`${i},${j}`, node.node);
+            this.collection.delete(`${oldI},${oldJ}`);
 
-        if (this.activeNode === node) {
-            this.deactivateNode();
+            node.position.set(x, y);
+            node.originalPosition = null;
+            node.redrawEdges();
+        } catch {
+            if(node.originalPosition) {
+                node.position.set(node.originalPosition.x, node.originalPosition.y);
+                node.redrawEdges();
+            }
+        } finally {
+            if (this.activeNode === node) {
+                this.deactivateNode();
+            }
         }
-
-        node.node.perk?.update({ "system.node": { i, j } });
 
         return true;
     }
@@ -553,6 +565,7 @@ class PerkWeb extends PIXI.Container {
     public toggleEditMode() {
         this.editMode = !this.editMode;
         if (this.editMode) {
+            this.perkHUD?.clear()
             if (!ui.perksTab.popout || ui.perksTab.popout._minimized) ui.perksTab.renderPopout();
             this.app.renderer.background.color = 0x851a1a;
             this.app.renderer.background.alpha = 0.35;
