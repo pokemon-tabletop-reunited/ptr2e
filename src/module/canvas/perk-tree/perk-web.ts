@@ -18,6 +18,12 @@ class PerkWeb extends PIXI.Container {
     // @ts-ignore
     #dragDrop: DragDrop;
 
+    #lastUpdate: {
+        i: number,
+        j: number,
+        node: PerkNode
+    } | null = null
+
     constructor() {
         super();
 
@@ -160,7 +166,7 @@ class PerkWeb extends PIXI.Container {
     }
 
     protected _drawBackground() {
-        const backgroundSize = 10000;
+        const backgroundSize = 50000;
         const background = new PIXI.Graphics();
         background
             .beginFill(0x000000, 0.1)
@@ -347,6 +353,15 @@ class PerkWeb extends PIXI.Container {
         this.onResize(); // set initial dimensions
     }
 
+    public onUndo(context: KeyboardEventContext) {
+        if(!this.editMode || !this.#lastUpdate) return;
+        context.event?.preventDefault();
+        context.event?.stopPropagation();
+        const {i, j, node} = this.#lastUpdate;
+        this.updateHexPosition(node, {i, j});
+        ui.notifications.info(`Restored previous position for ${node.node.perk?.name}`);
+    }
+
     private onDragRightMove(event: {
         interactionData: {
             origin: { x: number; y: number };
@@ -424,6 +439,30 @@ class PerkWeb extends PIXI.Container {
         updateItems();
     }
 
+    /**
+     * A hex cannot be within a radius of 1 hex of another hex.
+     */
+    public isLegalSpot(i: number, j: number) {
+        // Calculate all adjacent hex coordinates based on input
+        const spotsToCheck = [
+            [i, j],
+            [i, j + 1],
+            [i, j - 1],
+            [i + 1, j],
+            [i - 1, j],
+            [i + 1, j - 1],
+            [i - 1, j + 1],
+        ];
+
+        // Check if any of the adjacent hexes are already occupied
+        for (const [i, j] of spotsToCheck) {
+            const node = this.collection.get(`${i},${j}`);
+            if(node && node.element !== this.activeNode) return false;
+        }
+
+        return true;
+    }
+
     public updateHexPosition(
         node: PerkNode,
         point?: { x: number; y: number } | { i: number; j: number }
@@ -438,21 +477,36 @@ class PerkWeb extends PIXI.Container {
                     return this.getHexPosition(point.i, point.j);
                 }
             }
-            if (node.originalPosition === node.position) return { x: node.x, y: node.y };
+            if (node.originalPosition?.x === node.position.x && node.originalPosition?.y === node.position.y) return { x: node.x, y: node.y };
 
             const { i, j } = this.getHexCoordinates(node.x, node.y);
             return this.getHexPosition(i, j);
         })();
-        if (node.position.x === x && node.position.y === y) return;
-        node.position.set(x, y);
-        node.redrawEdges();
+        if (node.originalPosition?.x === x && node.originalPosition?.y === y) return true;
+        const {i, j} = this.getHexCoordinates(x, y);
+        if(!this.isLegalSpot(i, j)) {
+            ui.notifications.error("A node cannot be placed within 1 hex of another node.");
+            return false; 
+        }
 
+        const {i: oldI, j: oldJ} = fu.duplicate(node.node.position);
+        this.#lastUpdate = {i: oldI, j: oldJ, node};
+
+        node.node.position = {i, j};
+        this.collection.set(`${i},${j}`, node.node);
+        this.collection.delete(`${oldI},${oldJ}`);
+
+        node.position.set(x, y);
+        node.originalPosition = null;
+        node.redrawEdges();
+        
         if (this.activeNode === node) {
             this.deactivateNode();
         }
 
-        const {i, j} = this.getHexCoordinates(x, y);
         node.node.perk?.update({ "system.node": {i, j} });
+
+        return true;
     }
 
     public toggleEditMode() {
@@ -479,10 +533,10 @@ class PerkWeb extends PIXI.Container {
         hud.style.transform = `scale(${scale})`;
     }
 
-    protected async _onDrop(event: DragEvent) {
+    protected async _onDrop(event: DragEvent): Promise<this> {
         event.preventDefault();
         const data = TextEditor.getDragEventData<DropCanvasData<string, ItemPTR2e> & {i: number, j: number}>(event);
-        if(!data?.type) return;
+        if(!data?.type) return this;
 
         // Acquire the cursor position transformed to Canvas coordinates
         const [x, y] = [event.clientX, event.clientY];
@@ -500,18 +554,19 @@ class PerkWeb extends PIXI.Container {
          * @param {object} data   The data that has been dropped onto the Canvas
          */
         const allowed = Hooks.call("dropPerkWebCanvasData", this, data);
-        if (allowed === false) return;
+        if (allowed === false) return this;
 
         // Handle the drop
         switch(data.type) {
             case "Item": {
                 const item = await ItemPTR2e.fromDropData(data);
                 // If no item or the type isn't perk return
-                if (!item || item.type !== "perk") return;
+                if (!item || item.type !== "perk") return this;
 
                 const existing = this.collection.getName(item.slug);
                 if(existing) {
-                    return this.updateHexPosition(existing.element!, {i, j});
+                    this.updateHexPosition(existing.element!, {i, j});
+                    return this;
                 }
 
                 await item.update({"system.node": {
@@ -521,6 +576,7 @@ class PerkWeb extends PIXI.Container {
                 return await this.refresh({nodeRefresh: true});
             }
         }
+        return this
     }
 }
 type CoordinateString = `${number},${number}`;

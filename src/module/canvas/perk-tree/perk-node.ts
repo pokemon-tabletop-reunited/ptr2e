@@ -39,6 +39,18 @@ class PerkNode extends PIXI.Container {
         return game.ptr.web.activeNode === this;
     }
 
+    get legal() {
+        return this._legal;
+    }
+    set legal(value: boolean) {
+        if(value === this._legal) return;
+        this._legal = value;
+        this.icon.tint = this.config.tint = value ? 0xffffff : 0x999999;
+        this.config.borderColor = value ? (this.active ? 0x00ff00 : 0x000000) : 0xff0000;
+        this._drawBorder();
+    }
+    private _legal = true;
+
     async draw(config: Partial<PerkNodeConfig> = {}) {
         const { alpha, backgroundColor, texture, tint } = Object.assign(this.config, config);
 
@@ -104,9 +116,19 @@ class PerkNode extends PIXI.Container {
             if (this.state !== 1) return; // Only move nodes in position mode (1)
 
             // Move node
-            const newPosition = event.data.getLocalPosition(this.parent);
-            this.position.set(newPosition.x, newPosition.y);
+            const newPosition = event.getLocalPosition(this.parent);
+            const { i, j } = game.ptr.web.getHexCoordinates(newPosition.x, newPosition.y);
+            const { x, y } = game.ptr.web.getHexPosition(i, j);
+            this.position.set(x, y);
             this.redrawEdges();
+
+            // If node is in illegal position, mark it as such
+            if(!game.ptr.web.isLegalSpot(i, j)) {
+                this.legal = false;
+            }
+            else {
+                this.legal = true;
+            }
         });
 
         this.eventMode = "static";
@@ -117,10 +139,9 @@ class PerkNode extends PIXI.Container {
         if (!game.ptr.web.editMode) {
             game.ptr.web.perkHUD.activate(this);
         } else {
-            this.originalPosition = this.position.clone();
-
             if (this.active) {
-                game.ptr.web.updateHexPosition(this);
+                const result = game.ptr.web.updateHexPosition(this);
+                if(!result) return;
                 if (this.active) {
                     game.ptr.web.deactivateNode();
                 }
@@ -128,6 +149,7 @@ class PerkNode extends PIXI.Container {
                 if (game.ptr.web.activeNode?.state === 2) {
                     game.ptr.web.connectNodes(game.ptr.web.activeNode, this);
                 } else {
+                    this.originalPosition = this.position.clone();
                     game.ptr.web.activateNode(this, 1);
                 }
             }
@@ -229,7 +251,7 @@ interface PerkNode {
     border: PIXI.Graphics;
     shape: PIXI.Polygon;
 
-    originalPosition: PIXI.Point;
+    originalPosition: PIXI.Point | null;
 
     state: ValueOf<PerkEditState>;
 }

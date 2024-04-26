@@ -136,6 +136,18 @@ export const Init: PTRHook = {
                 restricted: true,
             });
 
+            game.keybindings.register("ptr2e", "undo",{
+                name: "PTR2E.Keybindings.Undo.Name",
+                hint: "PTR2E.Keybindings.Undo.Hint",
+                editable: [
+                    {
+                        key: "KeyZ",
+                        modifiers: ["Control"]
+                    }
+                ],
+                onDown: (context) => game.ptr.web?.onUndo(context),
+            });
+
             // Register handlebars helpers
             registerHandlebarsHelpers();
             HandlebarTemplates.register();

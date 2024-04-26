@@ -15,8 +15,10 @@ type PTRNode = {
     connected: Set<string>;
 };
 
+type SluggedEdgeString = `${string}-${string}`;
+
 class PerkStore extends Collection<PTRNode> {
-    private edges: Map<EdgeCoordinateString, PIXI.Graphics>;
+    private edges: Map<SluggedEdgeString, PIXI.Graphics>;
 
     constructor(entries: PTRNode[] = []) {
         super(entries.map((entry) => [`${entry.position.i},${entry.position.j}`, entry]));
@@ -36,18 +38,6 @@ class PerkStore extends Collection<PTRNode> {
             }
         }
         return new PerkStore(nodes);
-
-        // for(const node of store.values()) {
-        //     if(node.connected.size) {
-        //         node.connected = new Set(node.connected.map(slug => {
-        //             const {i,j} = store.getName(slug)?.position ?? {};
-        //             if(i === undefined || j === undefined) return "";
-        //             return `${i},${j}`;
-        //         })).filter(s => !!s);
-        //     }
-        // }
-
-        // return store;
     }
 
     async initialize() {
@@ -65,32 +55,13 @@ class PerkStore extends Collection<PTRNode> {
         }
     }
 
-    getEdge(node1: CoordinateString, node2: CoordinateString): PIXI.Graphics | null;
-    getEdge(node1: { i: number; j: number }, node2: { i: number; j: number }): PIXI.Graphics | null;
-    getEdge(node1: PTRNode, node2: PTRNode): PIXI.Graphics | null;
-    getEdge(
-        node1: PTRNode | { i: number; j: number } | CoordinateString,
-        node2: PTRNode | { i: number; j: number } | CoordinateString
-    ): PIXI.Graphics | null {
-        const { ij, ij2 } = ((): { ij: CoordinateString; ij2: CoordinateString } => {
-            if (typeof node1 === "string")
-                return { ij: node1 as CoordinateString, ij2: node2 as CoordinateString };
-            if ("i" in node1)
-                return {
-                    ij: `${node1.i},${node1.j}`,
-                    ij2: `${(node2 as { i: number }).i},${(node2 as { j: number }).j}`,
-                };
-            return {
-                ij: `${(node1 as PTRNode).position.i},${(node1 as PTRNode).position.j}`,
-                ij2: `${(node2 as PTRNode).position.i},${(node2 as PTRNode).position.j}`,
-            };
-        })();
-        return this.edges.get(`${ij}-${ij2}`) ?? this.edges.get(`${ij2}-${ij}`) ?? null;
+    getEdge(node1: PTRNode, node2: PTRNode): PIXI.Graphics | null {
+        return this.edges.get(`${node1.perk.slug}-${node2.perk.slug}`) ?? this.edges.get(`${node2.perk.slug}-${node1.perk.slug}`) ?? null;
     }
 
     registerEdge(node1: PTRNode, node2: PTRNode, edge: PIXI.Graphics) {
         this.edges.set(
-            `${node1.position.i},${node1.position.j}-${node2.position.i},${node2.position.j}`,
+            `${node1.perk.slug}-${node2.perk.slug}`,
             edge
         );
         return this;
@@ -98,12 +69,21 @@ class PerkStore extends Collection<PTRNode> {
 
     unregisterEdge(node1: PTRNode, node2: PTRNode) {
         this.edges.delete(
-            `${node1.position.i},${node1.position.j}-${node2.position.i},${node2.position.j}`
+            `${node1.perk.slug}-${node2.perk.slug}`
         );
         this.edges.delete(
-            `${node2.position.i},${node2.position.j}-${node1.position.i},${node1.position.j}`
+            `${node2.perk.slug}-${node1.perk.slug}`
         );
         return this;
+    }
+
+    override get(ij: CoordinateString): PTRNode | undefined {
+        return super.get(ij);
+    }
+
+    //@ts-expect-error
+    override has(ij: CoordinateString): boolean {
+        return super.has(ij);
     }
 
     override getName(
