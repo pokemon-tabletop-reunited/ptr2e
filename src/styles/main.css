@@ -14,15 +14,16 @@
   position: absolute;
   z-index: calc(var(--z-index-window) - 1);
 }
-#perk-tree-controls {
+#perk-web-hud {
   position: fixed;
   width: 100%;
   bottom: 50px;
   justify-content: center;
   pointer-events: none;
   z-index: calc(var(--z-index-tooltip) - 2);
+  display: flex;
 }
-#perk-tree-controls .hud {
+#perk-web-hud .hud {
   pointer-events: all;
   width: 100%;
   max-width: 800px;
@@ -31,8 +32,17 @@
   background: #111112;
   color: white;
   border-radius: 15px;
+  display: flex;
   gap: 0.25rem;
 }
-#perk-tree-controls .hud.editing {
+#perk-web-hud .hud.editing {
   background: #851a1a;
+}
+#perk-hud {
+  pointer-events: all;
+}
+#perk-hud footer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
