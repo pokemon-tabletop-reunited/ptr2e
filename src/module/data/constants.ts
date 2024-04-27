@@ -13,7 +13,7 @@ const ActionTypes = {
 
 const ActivationCost = {
     SIMPLE: "simple",
-    COMPLETE: "complete",
+    COMPLEX: "complex",
     FREE: "free",
 } as const;
 

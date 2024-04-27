@@ -27,6 +27,12 @@ export default abstract class PerkSystem extends PerkExtension {
 
             prerequisites: new fields.ArrayField(new fields.StringField()),
             cost: new fields.NumberField({ required: true, initial: 1 }),
+            
+            design: new fields.SchemaField({
+                arena: new fields.StringField({required: true, nullable: true, initial: null, choices: ["physical", "mental", "social"]}),
+                approach: new fields.StringField({required: true, nullable: true, initial: null, choices: ["power", "finesse", "resilience"]}),
+                archetype: new fields.StringField({required: true, nullable: true, initial: null}),
+            }),
 
             node: new fields.SchemaField({
                 i: new fields.NumberField({ required: true, nullable: true, initial: null }),
@@ -128,7 +134,26 @@ type PerkSchema = {
         true
     >;
     cost: foundry.data.fields.NumberField<number, number, true, false, true>;
-
+    design: foundry.data.fields.SchemaField<
+        {
+            arena: foundry.data.fields.StringField<string, string, true, true, true>;
+            approach: foundry.data.fields.StringField<string, string, true, true, true>;
+            archetype: foundry.data.fields.StringField<string, string, true, true, true>;
+        },
+        {
+            arena: string | null;
+            approach: string | null;
+            archetype: string | null;
+        },
+        {
+            arena: string | null;
+            approach: string | null;
+            archetype: string | null;
+        },
+        true,
+        false,
+        true
+    >;
     node: foundry.data.fields.SchemaField<
         {
             i: foundry.data.fields.NumberField<number, number, true, true, true>;

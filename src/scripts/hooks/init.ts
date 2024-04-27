@@ -5,7 +5,7 @@ import { HandlebarTemplates, registerHandlebarsHelpers } from "@utils";
 import { default as TypeEffectiveness } from "../config/effectiveness.ts";
 import { PTRHook } from "./data.ts";
 import { ClockDatabase } from "@data";
-import { TraitSettingsRedirect } from "@module/apps/traits.ts";
+import { TraitsSettingsMenu } from "@module/apps/traits.ts";
 
 export const Init: PTRHook = {
     listen() {
@@ -132,7 +132,7 @@ export const Init: PTRHook = {
                 label: "PTR2E.Settings.Traits.Label",
                 hint: "PTR2E.Settings.Traits.Hint",
                 icon: "fa-solid fa-rectangle-list",
-                type: TraitSettingsRedirect,
+                type: TraitsSettingsMenu,
                 restricted: true,
             });
 

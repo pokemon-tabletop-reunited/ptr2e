@@ -16,5 +16,8 @@ export function ActionModelTypes() {
         [ActionPTR2e.TYPE]: ActionPTR2e,
         [AttackPTR2e.TYPE]: AttackPTR2e,
         "passive": ActionPTR2e,
+        "exploration": ActionPTR2e,
+        "downtime": ActionPTR2e,
+        "camping": ActionPTR2e,
     });
 }
