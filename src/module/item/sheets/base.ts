@@ -13,7 +13,7 @@ export default class ItemSheetPTR2eV2<
         {
             classes: ["move-sheet"],
             position: {
-                height: 450,
+                height: 500,
                 width: 550,
             },
             actions: {

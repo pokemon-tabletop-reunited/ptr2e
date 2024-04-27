@@ -91,7 +91,7 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
         if (tab === "attack") {
             this.setPosition({ height: 700 });
         } else {
-            this.setPosition({ height: 450 });
+            this.setPosition({ height: 500 });
         }
     }
 
