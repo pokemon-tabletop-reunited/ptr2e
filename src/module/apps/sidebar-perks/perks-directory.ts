@@ -5,6 +5,12 @@ class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> {
         return this._popout;
     }
 
+    static override get defaultOptions(): SidebarDirectoryOptions {
+        return fu.mergeObject(super.defaultOptions, {
+            popOut: true
+        });
+    }
+
     override get title() {
         return `${game.i18n.localize("TYPES.Item.perk")} ${game.i18n.localize("Directory")}`;
     }
