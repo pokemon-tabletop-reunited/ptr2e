@@ -601,6 +601,7 @@ class PerkWeb extends PIXI.Container {
 
     protected async _onDrop(event: DragEvent): Promise<this> {
         event.preventDefault();
+        if(!this.editMode) return this;
         const data = TextEditor.getDragEventData<
             DropCanvasData<string, ItemPTR2e> & { i: number; j: number }
         >(event);

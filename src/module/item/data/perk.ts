@@ -25,35 +25,37 @@ export default abstract class PerkSystem extends PerkExtension {
         return {
             ...super.defineSchema(),
 
-            prerequisites: new fields.ArrayField(new fields.StringField()),
-            cost: new fields.NumberField({ required: true, initial: 1 }),
+            prerequisites: new fields.SetField(new fields.StringField(), {label: "PTR2E.FIELDS.prerequisites.label", hint: "PTR2E.FIELDS.prerequisites.hint"}),
+            cost: new fields.NumberField({ required: true, initial: 1, label: "PTR2E.FIELDS.apCost.label", hint: "PTR2E.FIELDS.apCost.hint"}),
             
             design: new fields.SchemaField({
-                arena: new fields.StringField({required: true, nullable: true, initial: null, choices: ["physical", "mental", "social"]}),
-                approach: new fields.StringField({required: true, nullable: true, initial: null, choices: ["power", "finesse", "resilience"]}),
-                archetype: new fields.StringField({required: true, nullable: true, initial: null}),
+                arena: new fields.StringField({required: true, nullable: true, initial: null, choices: ["physical", "mental", "social"], label: "PTR2E.FIELDS.design.arena.label", hint: "PTR2E.FIELDS.design.arena.hint"}),
+                approach: new fields.StringField({required: true, nullable: true, initial: null, choices: ["power", "finesse", "resilience"], label: "PTR2E.FIELDS.design.approach.label", hint: "PTR2E.FIELDS.design.approach.hint"}),
+                archetype: new fields.StringField({required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.design.archetype.label", hint: "PTR2E.FIELDS.design.archetype.hint"}),
             }),
 
             node: new fields.SchemaField({
-                i: new fields.NumberField({ required: true, nullable: true, initial: null }),
-                j: new fields.NumberField({ required: true, nullable: true, initial: null }),
-                connected: new fields.SetField<SlugField<true, boolean, boolean>,(string | null)[],Set<string | null>,true>(new SlugField(), { required: true, initial: [] }),
+                i: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.i.label", hint: "PTR2E.FIELDS.node.i.hint"}),
+                j: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.j.label", hint: "PTR2E.FIELDS.node.j.hint"}),
+                connected: new fields.SetField<SlugField<true, boolean, boolean>,(string | null)[],Set<string | null>,true>(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.node.connected.label", hint: "PTR2E.FIELDS.node.connected.hint" }),
                 config: new fields.SchemaField(
                     {
-                        alpha: new fields.NumberField({ required: false, min: 0, max: 1 }),
-                        backgroundColor: new fields.ColorField({ required: false }),
-                        borderColor: new fields.ColorField({ required: false }),
-                        borderWidth: new fields.NumberField({ required: false, min: 0 }),
+                        alpha: new fields.NumberField({ required: false, min: 0, max: 1, label: "PTR2E.FIELDS.node.config.alpha.label", hint: "PTR2E.FIELDS.node.config.alpha.hint" }),
+                        backgroundColor: new fields.ColorField({ required: false, label: "PTR2E.FIELDS.node.config.backgroundColor.label", hint: "PTR2E.FIELDS.node.config.backgroundColor.hint" }),
+                        borderColor: new fields.ColorField({ required: false, label: "PTR2E.FIELDS.node.config.borderColor.label", hint: "PTR2E.FIELDS.node.config.borderColor.hint" }),
+                        borderWidth: new fields.NumberField({ required: false, min: 0, label: "PTR2E.FIELDS.node.config.borderWidth.label", hint: "PTR2E.FIELDS.node.config.borderWidth.hint" }),
                         texture: new fields.FilePathField({
                             categories: ["IMAGE"],
                             required: false,
+                            label: "PTR2E.FIELDS.node.config.texture.label",
+                            hint: "PTR2E.FIELDS.node.config.texture.hint",
                         }),
-                        tint: new fields.ColorField({ required: false }),
-                        scale: new fields.NumberField({ required: false, min: 0.5, max: 2 }),
+                        tint: new fields.ColorField({ required: false, label: "PTR2E.FIELDS.node.config.tint.label", hint: "PTR2E.FIELDS.node.config.tint.hint" }),
+                        scale: new fields.NumberField({ required: false, min: 0.5, max: 2, label: "PTR2E.FIELDS.node.config.scale.label", hint: "PTR2E.FIELDS.node.config.scale.hint" }),
                     },
                     { required: false }
                 ),
-                hidden: new fields.BooleanField({ required: true, initial: false }),
+                hidden: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.node.hidden.label", hint: "PTR2E.FIELDS.node.hidden.hint" }),
             }),
         };
     }
@@ -125,10 +127,10 @@ export default abstract class PerkSystem extends PerkExtension {
 export default interface PerkSystem extends ModelPropsFromSchema<PerkSchema> {}
 
 type PerkSchema = {
-    prerequisites: foundry.data.fields.ArrayField<
+    prerequisites: foundry.data.fields.SetField<
         foundry.data.fields.StringField,
         string[],
-        string[],
+        Set<string>,
         true,
         false,
         true

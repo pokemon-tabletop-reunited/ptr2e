@@ -159,6 +159,22 @@ export const Init: PTRHook = {
                 onDown: (context) => game.ptr.web?.onDelete(context),
             });
 
+            //TODO: Delete once foundry fixes this
+            //@ts-expect-error
+            foundry.applications.elements.HTMLStringTagsElement.renderTag = function (tag: string): string {
+                const element = document.createElement("div");
+                element.classList.add("tag");
+                element.dataset.key = tag;
+                const span = document.createElement("span");
+                span.textContent = tag;
+                element.appendChild(span);
+                const a = document.createElement("a");
+                a.classList.add("button", "remove", ...this.icons.remove.split(' '));
+                a.dataset.tooltip = this.labels.remove;
+                element.appendChild(a);
+                return element.outerHTML;
+            }
+
             // Register handlebars helpers
             registerHandlebarsHelpers();
             HandlebarTemplates.register();
