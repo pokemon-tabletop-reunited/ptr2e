@@ -69,7 +69,7 @@ class PerkWeb extends PIXI.Container {
         });
 
         Object.defineProperty(this, "perkHUD", {
-            value: new PerkHUD(),
+            value: new PerkHUD({}),
             writable: false,
         });
 

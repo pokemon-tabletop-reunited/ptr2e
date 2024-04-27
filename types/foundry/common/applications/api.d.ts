@@ -473,7 +473,7 @@ export class ApplicationV2<
      * @see ApplicationV2#setPosition
      * @protected
      */
-    _updatePosition(): void;
+    _updatePosition(position: ApplicationPosition): ApplicationPosition;
 
     /* -------------------------------------------- */
     /*  Other Public Methods                        */
