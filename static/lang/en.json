@@ -15,6 +15,7 @@
     "TYPES.ActiveEffect.affliction": "Affliction",
     "ITEM.AddButton": "Add",
     "ITEM.DeleteButton": "Delete",
+    
     "PTR2E": {
         "Effect": {
             "FIELDS": {
@@ -536,6 +537,93 @@
                     "label": "Private Clock",
                     "hint": "Whether the clock is private."
                 }
+            },
+            "prerequisites": {
+                "label": "Prerequisites",
+                "hint": "The prerequisites to pickup this Perk."
+            },
+            "apCost": {
+                "label": "AP Cost",
+                "hint": "The Advancement Point cost to purchase this Perk."
+            },
+            "design": {
+                "arena": {
+                    "label": "Arena",
+                    "hint": "Physical / Mental / Social",
+                    "physical": "Physical",
+                    "mental": "Mental",
+                    "social": "Social"
+                },
+                "approach": {
+                    "label": "Approach",
+                    "hint": "Power / Finesse / Resilience",
+                    "power": "Power",
+                    "finesse": "Finesse",
+                    "resilience": "Resilience"
+                },
+                "archetype": {
+                    "label": "Archetype",
+                    "hint": "The Archetype to which this perk belongs"
+                }
+            },
+            "node": {
+                "i": {
+                    "label": "I",
+                    "hint": "I is the equivalent to X but in Hexagonal Grid Space"
+                },
+                "j": {
+                    "label": "J",
+                    "hint": "J is the equivalent to Y but in Hexagonal Grid Space"
+                },
+                "connected": {
+                    "label": "Connected",
+                    "hint": "List of all nodes (slugs) which are connected to this node"
+                },
+                "hidden": {
+                    "label": "Hidden",
+                    "hint": "Whether this node is hidden to players or not"
+                },
+                "config": {
+                    "alpha": {
+                        "label": "Alpha",
+                        "hint": "The alpha (transparency) value of the node."
+                    },
+                    "backgroundColor": {
+                        "label": "Background Color",
+                        "hint": "The background color of the node."
+                    },
+                    "borderColor": {
+                        "label": "Border Color",
+                        "hint": "The border color of the node."
+                    },
+                    "borderWidth": {
+                        "label": "Border Width",
+                        "hint": "The border width of the node."
+                    },
+                    "texture": {
+                        "label": "Texture",
+                        "hint": "The texture of the node (URL to img)."
+                    },
+                    "tint": {
+                        "label": "Tint",
+                        "hint": "The tint of the node."
+                    },
+                    "scale": {
+                        "label": "Scale",
+                        "hint": "The scale of the node. (Should be 1 for normal nodes, or 1.6 for base nodes)"
+                    }
+                }
+            },
+            "stats": {
+                "label": "Base Stats"
+            },
+            "movement": {
+                "primary": {
+                    "label": "Primary Movement"
+                },
+                "secondary": {
+                    "label": "Secondary Movement"
+                }
             }
         },
         "ItemSheet": {
@@ -586,6 +674,13 @@
                 },
                 "party": {
                     "label": "Parties"
+                }
+            }
+        },
+        "TokenPanel": {
+            "Tabs": {
+                "attacks": {
+                    "label": "Attacks"
                 }
             }
         },

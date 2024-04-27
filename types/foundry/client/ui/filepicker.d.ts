@@ -91,7 +91,15 @@ declare class FilePicker extends Application<FilePickerOptions> {
         source: string,
         target: string,
         options?: { bucket?: string; extensions?: string[]; wildcard?: boolean },
-    ): Promise<object>;
+    ): Promise<Partial<{
+        dirs: string[];
+        extensions: string[];
+        files: string[];
+        gridSize: number | null;
+        private: boolean;
+        privateDirs: string[];
+        target: string;
+    }>>;
 
     /**
      * Dispatch a POST request to the server containing a directory path and a file to upload

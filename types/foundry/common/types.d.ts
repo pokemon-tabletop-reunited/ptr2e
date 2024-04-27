@@ -1,4 +1,5 @@
 import type { DataModel, Document } from "./abstract/module.d.ts";
+import { ApplicationConfiguration, ApplicationRenderOptions, ApplicationV2 } from "./applications/api.js";
 
 declare global {
     interface DocumentConstructionContext<TParent extends Document | null>
@@ -108,8 +109,8 @@ declare global {
     }
 
     interface SettingsMenuConstructor {
-        new (object?: object, options?: Partial<FormApplicationOptions>): FormApplication;
-    }
+        new (var1: Partial<ApplicationConfiguration> | object, options?: Partial<FormApplicationOptions>): FormApplication | ApplicationV2;
+    } 
 
     /** A Client Keybinding Action Configuration */
     interface KeybindingActionConfig {

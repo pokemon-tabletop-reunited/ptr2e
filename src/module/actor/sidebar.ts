@@ -7,16 +7,16 @@ export default class ActorDirectoryPTR2e<
     TActor extends ActorPTR2e<ActorSystemPTR2e, null>,
 > extends ActorDirectory<TActor> {
     static override entryPartial: string =
-        "systems/ptr2e/templates/actor/actor-directory-entry.hbs";
+        "systems/ptr2e/templates/sidebar/actor-directory-entry.hbs";
 
     static override folderPartial: string =
-        "systems/ptr2e/templates/actor/actor-directory-folder.hbs";
+        "systems/ptr2e/templates/sidebar/actor-directory-folder.hbs";
 
     static override get defaultOptions() {
         return foundry.utils.mergeObject(
             super.defaultOptions,
             {
-                template: "systems/ptr2e/templates/actor/actor-directory.hbs",
+                template: "systems/ptr2e/templates/sidebar/actor-directory.hbs",
                 dragDrop: [
                     {
                         dragSelector: ".directory-item.actor, .directory-item.folder",

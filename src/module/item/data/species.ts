@@ -95,7 +95,7 @@ class SpeciesSystem extends SpeciesExtension {
                     validate: (d) => (d as number) >= 0,
                     label: `PTR2E.Attributes.spe.Label`,
                 }),
-            }),
+            }, {label: "PTR2E.FIELDS.stats.label"}),
             types: new fields.SetField(
                 new SlugField({
                     required: true,
