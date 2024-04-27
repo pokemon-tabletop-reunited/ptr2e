@@ -152,8 +152,11 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     static async _onDropOwner(this: FolderConfigPTR2e, event: DragEvent) {
         if(!event.dataTransfer) return;
         if(this.document.owner) {
-            ui.notifications.warn("Folder already has an owner. If you mean to update the owner, please remove the old one first.");
-            return;
+            const owner = await fromUuid(this.document.owner);
+            if(owner) {
+                ui.notifications.warn("Folder already has an owner. If you mean to update the owner, please remove the old one first.");
+                return;
+            }
         }
 
         const data = JSON.parse(event.dataTransfer.getData("text/plain"));
