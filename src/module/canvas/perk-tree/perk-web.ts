@@ -112,6 +112,8 @@ class PerkWeb extends PIXI.Container {
     }
 
     async close() {
+        if(this.editMode) await this.toggleEditMode();
+
         const actor = this.actor;
         this.actor = null;
         actor?.sheet.render(false);
@@ -586,7 +588,7 @@ class PerkWeb extends PIXI.Container {
             this.app.renderer.background.alpha = 0.35;
         }
         if (this.activeNode) this.deactivateNode();
-        this.refresh({nodeRefresh: true});
+        return this.refresh({nodeRefresh: true});
     }
 
     private alignHUD() {
