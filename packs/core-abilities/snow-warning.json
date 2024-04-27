@@ -1,35 +1,32 @@
 {
-	"_id": "xs4pxOSmBkN7NNi0",
-	"name": "Snow Warning",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "snow-warning",
-		"actions": [
-			{
-				"slug": "snow-warning",
-				"name": "Snow Warning",
-				"description": "Connection - Snowscape. When the using Snowscape, the user can spend an additional 2 PP to have the weather become (T2 Snowy) for 5 rounds instead of Snowy Weather.",
-				"traits": [
-					"connection",
-					"weather"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.xs4pxOSmBkN7NNi0"
-		}
-	},
-	"effects": []
+    "name": "Snow Warning",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Snow Warning",
+                "slug": "snow-warning",
+                "type": "generic",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "field",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Snowscape. The Weather becomes Hailstorm for 5 rounds instead of Snowy.",
+        "traits": [
+            "connection",
+            "weather"
+        ]
+    },
+    "_id": "2P2RJoPTcsWqjAl6",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

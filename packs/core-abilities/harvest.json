@@ -1,34 +1,31 @@
 {
-	"_id": "oVtuTD9xIXay1v7M",
-	"name": "Harvest",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "harvest",
-		"actions": [
-			{
-				"slug": "harvest",
-				"name": "Harvest",
-				"description": "The user rolls an Easy Natural World skill check and on a success recycles a copy of the consumed item and equips it. If Sunny Weather is active, this is a Second-Nature check instead. A creature with Harvest can roll this check as a Downtime Action with a 1 day duration to create a copy of any Natural [Food] item, with the difficulty changing depending on item rarity and grade.",
-				"traits": [
-					"environ"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.oVtuTD9xIXay1v7M"
-		}
-	},
-	"effects": []
+    "name": "Harvest",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Harvest",
+                "slug": "harvest",
+                "type": "downtime",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user rolls an Easy Natural World skill check and on a success recycles a copy of the consumed item and equips it. If Sun Weather is active, this is a Trivial Natural World check instead. Passive: the creature gains [Berry Grower] if it did not already possess it.",
+        "traits": [
+            "environ"
+        ]
+    },
+    "_id": "jX2sjEy8SaOT0MVN",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

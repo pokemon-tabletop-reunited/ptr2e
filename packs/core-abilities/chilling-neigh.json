@@ -1,34 +1,31 @@
 {
-	"_id": "DxMX0GnbCep5qECt",
-	"name": "Chilling Neigh",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "chilling-neigh",
-		"actions": [
-			{
-				"slug": "chilling-neigh",
-				"name": "Chilling Neigh",
-				"description": "Your ATK stage is increased by +1 for 5 activations. If more than one creature Faints due to a single action from the user, this effect only activates once.",
-				"traits": [
-					"legendary"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.DxMX0GnbCep5qECt"
-		}
-	},
-	"effects": []
+    "name": "Chilling Neigh",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Chilling Neigh",
+                "slug": "chilling-neigh",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 1
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's ATK stage is increased by +1 for 5 activations.",
+        "traits": [
+            "legendary"
+        ]
+    },
+    "_id": "zJcX8C1h3Jf4dkFO",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

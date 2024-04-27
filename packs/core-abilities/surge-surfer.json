@@ -1,34 +1,31 @@
 {
-	"_id": "N6YjvEXyByvYUmNn",
-	"name": "Surge Surfer",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "surge-surfer",
-		"actions": [
-			{
-				"slug": "surge-surfer",
-				"name": "Surge Surfer",
-				"description": "While Electric Terrain is active the user's Speed Stat is doubled.",
-				"traits": [
-					"environ"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.N6YjvEXyByvYUmNn"
-		}
-	},
-	"effects": []
+    "name": "Surge Surfer",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Surge Surfer",
+                "slug": "surge-surfer",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While Electric Terrain is active the user's SPD Stat is doubled.",
+        "traits": [
+            "environ"
+        ]
+    },
+    "_id": "hoZuOIoOF7Jw1NLM",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

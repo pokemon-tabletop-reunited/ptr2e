@@ -1,34 +1,31 @@
 {
-	"_id": "GnAHiTwb7ioIhXBe",
-	"name": "Battle Armor",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "battle-armor",
-		"actions": [
-			{
-				"slug": "battle-armor",
-				"name": "Battle Armor",
-				"description": "The user is protected from Critical Hits. If the user were to take Critical Hit damage, they take normal damage instead. The user also takes 30% less damage from contact attacks.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.GnAHiTwb7ioIhXBe"
-		}
-	},
-	"effects": []
+    "name": "Battle Armor",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Battle Armor",
+                "slug": "battle-armor",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is protected from Critical Hits, if the user were to take Critical Hit damage, they take normal damage instead. The user also takes 30% less damage from [Contact] attacks.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "f7t4w9tBns9E9vrf",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

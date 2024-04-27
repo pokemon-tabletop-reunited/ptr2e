@@ -1,34 +1,31 @@
 {
-	"_id": "FkvvOV2CrDumzvcE",
-	"name": "Mirror Armor",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "mirror-armor",
-		"actions": [
-			{
-				"slug": "mirror-armor",
-				"name": "Mirror Armor",
-				"description": "The user does not gain the effect and the triggering creature gains it instead with double the duration.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "complex",
-					"powerPoints": 0,
-					"trigger": "Another creature applies a Negative stage effect to the user.",
-					"delay": null,
-					"priority": "1"
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.FkvvOV2CrDumzvcE"
-		}
-	},
-	"effects": []
+    "name": "Mirror Armor",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Mirror Armor",
+                "slug": "mirror-armor",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user does not gain the triggering effect and the triggering creature gains it instead with double the duration.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "K6glMoe8IGiv4QsE",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

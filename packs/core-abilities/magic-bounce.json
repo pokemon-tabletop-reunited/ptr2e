@@ -1,34 +1,31 @@
 {
-	"_id": "3xv7d9xYWfP5AJ7v",
-	"name": "Magic Bounce",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "magic-bounce",
-		"actions": [
-			{
-				"slug": "magic-bounce",
-				"name": "Magic Bounce",
-				"description": "The triggering attack fails to hit the user, and the attacking creature is instead targeted and hit with the triggering attack, applying the effects to themself.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "complex",
-					"powerPoints": 0,
-					"trigger": "The user is hit by a Status-category attack.",
-					"delay": null,
-					"priority": "1"
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.3xv7d9xYWfP5AJ7v"
-		}
-	},
-	"effects": []
+    "name": "Magic Bounce",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Magic Bounce",
+                "slug": "magic-bounce",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 20,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The triggering attack fails to hit the user, and the triggering creature is instead targeted and hit with the triggering attack, applying the effects to themself.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "nyacgGrmIg95MpvA",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,34 +1,31 @@
 {
-	"_id": "0SgcxQyzvOr1kSRk",
-	"name": "Pickpocket",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "pickpocket",
-		"actions": [
-			{
-				"slug": "pickpocket",
-				"name": "Pickpocket",
-				"description": "Connection - Thief. When using the attack Thief, the user can spend an additional 2 PP to steal the targets Held Item. Items stolen with thief are now added to the user's inventory instead of being dropped on the ground if the user's equip slots are full. If the user is an owned Pokemon, the stolen items are thrown towards their trainer as a Free Action.",
-				"traits": [
-					"connection"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.0SgcxQyzvOr1kSRk"
-		}
-	},
-	"effects": []
+    "name": "Pickpocket",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Pickpocket",
+                "slug": "pickpocket",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "object",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Thief. When using the attack Thief, the user can steel the target's Held Item. Items stolen with Thief are now added to the user's inventory instead of being dropped on the ground if the user's Equipment Slots are full. If the user is an owned Pokemon, the user freely uses Fling with 0 Power to throw the item towards their Trainer.",
+        "traits": [
+            "connection"
+        ]
+    },
+    "_id": "ybdBwoCxieDSe8GO",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

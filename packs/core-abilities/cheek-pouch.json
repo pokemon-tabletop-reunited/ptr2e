@@ -1,34 +1,31 @@
 {
-	"_id": "4gyauRI7ccoHEs7P",
-	"name": "Cheek Pouch",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "cheek-pouch",
-		"actions": [
-			{
-				"slug": "cheek-pouch",
-				"name": "Cheek Pouch",
-				"description": "Whenever you consume a [Food] item, you also recover HP equal to 1/3 your Max HP in addition to the [Food] item's effect.",
-				"traits": [
-					"healing"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.4gyauRI7ccoHEs7P"
-		}
-	},
-	"effects": []
+    "name": "Cheek Pouch",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Cheek Pouch",
+                "slug": "cheek-pouch",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Whenever the user consumes a [Food] item, they recover 5 Ticks of HP in addition to the [Food] item's effect.",
+        "traits": [
+            "healing"
+        ]
+    },
+    "_id": "acAAEwvAF5V7WNdK",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

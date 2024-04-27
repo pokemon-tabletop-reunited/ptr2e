@@ -1,34 +1,31 @@
 {
-	"_id": "oOpsBt7fR7LFJ1o8",
-	"name": "Tera Shift",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "tera-shift",
-		"actions": [
-			{
-				"slug": "tera-shift",
-				"name": "Tera Shift",
-				"description": "The user enters its Terastal Forme, and this ability is replaced with Tera Shell.",
-				"traits": [
-					"legendary"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.oOpsBt7fR7LFJ1o8"
-		}
-	},
-	"effects": []
+    "name": "Tera Shift",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Tera Shift",
+                "slug": "tera-shift",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user enters its Terastal Forme, and this ability is replaced with Tera Shell.",
+        "traits": [
+            "legendary"
+        ]
+    },
+    "_id": "YHBy3afwVn6bKH2v",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

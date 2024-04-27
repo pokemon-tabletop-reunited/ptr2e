@@ -1,37 +1,34 @@
 {
-	"_id": "TFggDqDopShn323U",
-	"name": "Prism Armor",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "prism-armor",
-		"actions": [
-			{
-				"slug": "prism-armor",
-				"name": "Prism Armor",
-				"description": "The user takes 40% reduced damage from incoming super effective attacks. As a Camp Action, Necrozma can fuse with Lunala or Solgaleo to change formes.",
-				"traits": [
-					"legendary",
-					"defensive",
-					"fusion",
-					"forme-change"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.TFggDqDopShn323U"
-		}
-	},
-	"effects": []
+    "name": "Prism Armor",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Prism Armor",
+                "slug": "prism-armor",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user takes 40% reduced damage from incoming super effective attacks. As a Downtime Action, Necrozma can fuse or unfuse with Lunala or Solgaleo to change Formes. If the user is a Dawn Wings Necrozma, they also possess Cosmic Eclipse as an Extra Ability, and if they are Dusk Mane Necrozma, they possess Cosmic Luminance as an Extra Ability. When the user undergoes Ultra Burst and changes Formes, this Ability is replaced with Blinding One.",
+        "traits": [
+            "legendary",
+            "defensive",
+            "fusion",
+            "forme-change"
+        ]
+    },
+    "_id": "LFGIoygjteujjzr9",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

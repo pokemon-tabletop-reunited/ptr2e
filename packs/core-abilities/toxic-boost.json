@@ -1,32 +1,29 @@
 {
-	"_id": "qRFfJsnPgvKHUFt0",
-	"name": "Toxic Boost",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "toxic-boost",
-		"actions": [
-			{
-				"slug": "toxic-boost",
-				"name": "Toxic Boost",
-				"description": "While the user is affected by Poison or Bad Poison, the power of their Physical-category attacks is increased by 50%",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.qRFfJsnPgvKHUFt0"
-		}
-	},
-	"effects": []
+    "name": "Toxic Boost",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Toxic Boost",
+                "slug": "toxic-boost",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While the user is affected by Poison or Blight, the power of their Physical-category attacks is increased by 50%",
+        "traits": []
+    },
+    "_id": "FeiVSVJ67b31uyr8",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

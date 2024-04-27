@@ -1,35 +1,33 @@
 {
-	"_id": "nTqi6vPrWxOuB4bq",
-	"name": "Beads of Ruin",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "beads-of-ruin",
-		"actions": [
-			{
-				"slug": "beads-of-ruin",
-				"name": "Beads of Ruin",
-				"description": "All other creatures have their SPDEF stat reduced by 25%. This reduction happens before any stage changes.",
-				"traits": [
-					"legendary",
-					"aura"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.nTqi6vPrWxOuB4bq"
-		}
-	},
-	"effects": []
+    "name": "Beads of Ruin",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Beads of Ruin",
+                "slug": "beads-of-ruin",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "field",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Ruination. All other creatures have their SPDEF stat reduced by 25%. This reduction happens before any stage changes.",
+        "traits": [
+            "legendary",
+            "aura",
+            "connection"
+        ]
+    },
+    "_id": "d6BPb3uoSqNAXlgP",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

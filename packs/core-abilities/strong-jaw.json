@@ -1,32 +1,29 @@
 {
-	"_id": "Szodix4DKhlFXkf8",
-	"name": "Strong Jaw",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "strong-jaw",
-		"actions": [
-			{
-				"slug": "strong-jaw",
-				"name": "Strong Jaw",
-				"description": "The user's [Jaw] attacks have 30% increased Power.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.Szodix4DKhlFXkf8"
-		}
-	},
-	"effects": []
+    "name": "Strong Jaw",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Strong Jaw",
+                "slug": "strong-jaw",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's [Jaw] attacks have 30% increased Power.",
+        "traits": []
+    },
+    "_id": "kmTVI5s7bCGCBl2g",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

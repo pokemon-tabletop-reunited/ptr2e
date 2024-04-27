@@ -1,34 +1,31 @@
 {
-	"_id": "EhVlEHLBfUMKizDh",
-	"name": "Cloud Nine",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "cloud-nine",
-		"actions": [
-			{
-				"slug": "cloud-nine",
-				"name": "Cloud Nine",
-				"description": "The triggering attack fails to activate and becomes Disabled 5.",
-				"traits": [
-					"environ"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "complex",
-					"powerPoints": 0,
-					"trigger": "A creature on the field uses a [Weather] attack.",
-					"delay": null,
-					"priority": "1"
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.EhVlEHLBfUMKizDh"
-		}
-	},
-	"effects": []
+    "name": "Cloud Nine",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Cloud Nine",
+                "slug": "cloud-nine",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The triggering action fails and becomes Disabled 5 if it was an attack, or Nullified 5 if it was an ability.",
+        "traits": [
+            "environ"
+        ]
+    },
+    "_id": "rBY66P7gsm7WVd4b",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

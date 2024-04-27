@@ -1,34 +1,31 @@
 {
-	"_id": "OA7MExbFWUJVnVfV",
-	"name": "Synchronize",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "synchronize",
-		"actions": [
-			{
-				"slug": "synchronize",
-				"name": "Synchronize",
-				"description": "Trigger: The user is inflicted with a Major Status Condition from another creature. Effect: The triggering creature is also affected by the same Major Status Condition they inflicted on the user, if applicable.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.OA7MExbFWUJVnVfV"
-		}
-	},
-	"effects": []
+    "name": "Synchronize",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Synchronize",
+                "slug": "synchronize",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 4
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 15,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The triggering creature is also affected by the same Major Status Condition they inflicted on the user, if possible.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "i8LEqo493XEeBYWD",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

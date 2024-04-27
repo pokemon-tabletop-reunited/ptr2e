@@ -1,34 +1,31 @@
 {
-	"_id": "gwMxSfbI0BUQEbXF",
-	"name": "Purifying Salt",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "purifying-salt",
-		"actions": [
-			{
-				"slug": "purifying-salt",
-				"name": "Purifying Salt",
-				"description": "Major and Minor Status Conditions applied to the user have half their duration. The user takes 50% reduced damage from incoming Ghost-type attacks.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.gwMxSfbI0BUQEbXF"
-		}
-	},
-	"effects": []
+    "name": "Purifying Salt",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Purifying Salt",
+                "slug": "purifying-salt",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Major and Minor Status Conditions applied to the user have half their duration. The user takes 50% reduced damage from incoming Ghost-Type attacks.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "YWP0oiP6X1CkTyQ9",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

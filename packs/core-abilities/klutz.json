@@ -1,32 +1,29 @@
 {
-	"_id": "BM97qn17VYr5pH8I",
-	"name": "Klutz",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "klutz",
-		"actions": [
-			{
-				"slug": "klutz",
-				"name": "Klutz",
-				"description": "The user's Fling Power for throwable items is increased by 20%, but the Fling ACC of throwable items is reduced by 20%.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.BM97qn17VYr5pH8I"
-		}
-	},
-	"effects": []
+    "name": "Klutz",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Klutz",
+                "slug": "klutz",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's Fling Power for throwable items is increased by 30%, but the Fling Accuracy of throwable items is reduced by -10.",
+        "traits": []
+    },
+    "_id": "iWrMWfDaUXb0xA4k",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

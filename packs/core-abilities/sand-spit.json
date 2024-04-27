@@ -1,34 +1,32 @@
 {
-	"_id": "h4zuvNErAbrhQCyW",
-	"name": "Sand Spit",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "sand-spit",
-		"actions": [
-			{
-				"slug": "sand-spit",
-				"name": "Sand Spit",
-				"description": "Connection - Sand ATK Trigger: The user is hit by an attack. Effect: The user uses Sand ATK on the attacking creature, and the attack is rerolled. The rerolled attack does not cost additional PP nor further triggers Sand Spit. When using Sand ATK, the user can spend an additional 2 PP to have it deal Ground-type damage with 25 power.",
-				"traits": [
-					"connection",
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "complex",
-					"powerPoints": 0,
-					"delay": null,
-					"priority": "1"
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.h4zuvNErAbrhQCyW"
-		}
-	},
-	"effects": []
+    "name": "Sand Spit",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Sand Spit",
+                "slug": "sand-spit",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Sand Attack. The user freely uses Sand Attack on the attacking creature, and then the triggering attack is rerolled. The rerolled attack does not cost additional PP nor can it trigger Sand Spit again. When using Sand Attack, the user can spend an additional 2 PP to have it deal Ground-Type damage with 25 power.",
+        "traits": [
+            "connection",
+            "defensive"
+        ]
+    },
+    "_id": "xxe87sTxjpPMf4JC",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

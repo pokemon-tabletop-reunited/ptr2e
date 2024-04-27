@@ -1,32 +1,29 @@
 {
-	"_id": "v7mWUfwIwlkbQZob",
-	"name": "Damp",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "damp",
-		"actions": [
-			{
-				"slug": "damp",
-				"name": "Damp",
-				"description": "The triggering action fails and becomes Disabled 5 if it was a attack, or Nullified 5 if it was an ability.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "complex",
-					"powerPoints": 0,
-					"trigger": "A creature on the field uses an [Explode] attack or ability.",
-					"delay": null,
-					"priority": "1"
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.v7mWUfwIwlkbQZob"
-		}
-	},
-	"effects": []
+    "name": "Damp",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Damp",
+                "slug": "damp",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 6
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 15,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The triggering action fails and becomes Disabled 5 if it was an attack, or Nullified 5 if it was an ability.",
+        "traits": []
+    },
+    "_id": "r8AK6SqjgjhH1bs8",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

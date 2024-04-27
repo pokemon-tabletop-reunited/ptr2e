@@ -1,32 +1,31 @@
 {
-	"_id": "Z2I8ryFMXKKl5riM",
-	"name": "Neutralizing Gas",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "neutralizing-gas",
-		"actions": [
-			{
-				"slug": "neutralizing-gas",
-				"name": "Neutralizing Gas",
-				"description": "All creatures within 5m of the user have their abilities Nullified. [Innate] Abilities are unaffected by Neutralizing Gas.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.Z2I8ryFMXKKl5riM"
-		}
-	},
-	"effects": []
+    "name": "Neutralizing Gas",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Neutralizing Gas",
+                "slug": "neutralizing-gas",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "emanation",
+                    "distance": 5,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "All creatures in range have their abilities Nullified. [Innate] Abilities are unaffected by Neutralizing Gas.",
+        "traits": [
+            "aura"
+        ]
+    },
+    "_id": "wvTqqKH4WEVJMSF6",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

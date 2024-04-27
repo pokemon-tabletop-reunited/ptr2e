@@ -1,35 +1,32 @@
 {
-	"_id": "O02RdJ91My5T35SN",
-	"name": "Desolate Land",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "desolate-land",
-		"actions": [
-			{
-				"slug": "desolate-land",
-				"name": "Desolate Land",
-				"description": "When the user is active on the field, the Weather is changed to (T3 Sunny). This weather persists while the user with this ability is active. When the user faints or switches out the weather will change to (T2 Sunny) for 5 rounds.",
-				"traits": [
-					"legendary",
-					"weather"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.O02RdJ91My5T35SN"
-		}
-	},
-	"effects": []
+    "name": "Desolate Land",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Desolate Land",
+                "slug": "desolate-land",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "field",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The Weather is changed to Dessicating Heat. When the user faints or switches out the weather will change to Blistering Heat for 5 rounds.",
+        "traits": [
+            "legendary",
+            "weather"
+        ]
+    },
+    "_id": "UZuJt9tycQ1RvBZu",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

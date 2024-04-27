@@ -1,34 +1,31 @@
 {
-	"_id": "hhQFy66w0vznHJku",
-	"name": "Beast Boost",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "beast-boost",
-		"actions": [
-			{
-				"slug": "beast-boost",
-				"name": "Beast Boost",
-				"description": "Your highest stat increases by +1 stage for 5 activations. If your highest stats are tied, you choose which one gets the boost. If more than one creature Faints due to a single action from the user, this effect only activates once.",
-				"traits": [
-					"legendary"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.hhQFy66w0vznHJku"
-		}
-	},
-	"effects": []
+    "name": "Beast Boost",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Beast Boost",
+                "slug": "beast-boost",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's highest stat increases by +1 stage for 5 activations. If two or more highest stats are tied, the user chooses which one this ability affects.",
+        "traits": [
+            "legendary"
+        ]
+    },
+    "_id": "HAKGnd5C0hTkAIUd",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

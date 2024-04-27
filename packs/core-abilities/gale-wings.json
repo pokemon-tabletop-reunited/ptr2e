@@ -1,32 +1,29 @@
 {
-	"_id": "oluoTSHfjeG4VXJG",
-	"name": "Gale Wings",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "gale-wings",
-		"actions": [
-			{
-				"slug": "gale-wings",
-				"name": "Gale Wings",
-				"description": "If the user's HP is higher than 3/4 of their Max HP, all of the user's Flying-type attacks gain [Priority 1], or have their [Priority X] increased by 1. This only works on attacks whose type is originally Flying-type.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.oluoTSHfjeG4VXJG"
-		}
-	},
-	"effects": []
+    "name": "Gale Wings",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Gale Wings",
+                "slug": "gale-wings",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "If the user's HP is higher than 3/4 of their Max HP, all of the user's Flying-Type attacks gain [Priority 1], or have their [Priority X] increased by 1. This only works on attacks whose type is originally Flying-Type.",
+        "traits": []
+    },
+    "_id": "DNvfbm5G6nmhVrKz",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

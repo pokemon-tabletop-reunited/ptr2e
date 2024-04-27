@@ -1,34 +1,31 @@
 {
-	"_id": "ojIbkL91ozSdnGyN",
-	"name": "Water Bubble",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "water-bubble",
-		"actions": [
-			{
-				"slug": "water-bubble",
-				"name": "Water Bubble",
-				"description": "The user reduces the damage from incoming Fire-type attacks by 50%. The user's Water-type attacks have 50% increased power. The user is immune to the Burn condition.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.ojIbkL91ozSdnGyN"
-		}
-	},
-	"effects": []
+    "name": "Water Bubble",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Water Bubble",
+                "slug": "water-bubble",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user reduces the damage from incoming Fire-Type attacks by 50%. The user's Water-Type attacks have 50% increased power. The user is immune to the Burn condition.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "C6WmIwII1nfmpaz0",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

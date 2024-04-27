@@ -1,32 +1,29 @@
 {
-	"_id": "QXG5Sp09sRrW42M1",
-	"name": "Screen Cleaner",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "screen-cleaner",
-		"actions": [
-			{
-				"slug": "screen-cleaner",
-				"name": "Screen Cleaner",
-				"description": "The triggering attack fails and is Disabled 5.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "complex",
-					"powerPoints": 0,
-					"trigger": "Another creature uses a [Shield] attack.",
-					"delay": null,
-					"priority": "6"
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.QXG5Sp09sRrW42M1"
-		}
-	},
-	"effects": []
+    "name": "Screen Cleaner",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Screen Cleaner",
+                "slug": "screen-cleaner",
+                "type": "generic",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 4
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 15,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The triggering attack fails and is Disabled 5.",
+        "traits": []
+    },
+    "_id": "wUtU3reBObpmr2kR",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

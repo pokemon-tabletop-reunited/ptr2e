@@ -1,34 +1,31 @@
 {
-	"_id": "lkgBYBiwgHKYJUb0",
-	"name": "Fur Coat",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "fur-coat",
-		"actions": [
-			{
-				"slug": "fur-coat",
-				"name": "Fur Coat",
-				"description": "The user takes 50% less damage from Physical-category attacks.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.lkgBYBiwgHKYJUb0"
-		}
-	},
-	"effects": []
+    "name": "Fur Coat",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Fur Coat",
+                "slug": "fur-coat",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user takes 50% less damage from Physical-Category attacks.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "jykicJZ8CmfEr4ra",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,34 +1,31 @@
 {
-	"_id": "wrN7YciRVTirs8fw",
-	"name": "Comatose",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "comatose",
-		"actions": [
-			{
-				"slug": "comatose",
-				"name": "Comatose",
-				"description": "Major Status Conditions affecting the user are reduced by 2 every activation instead of 1. The user is always considered to be affected by the Drowsy condition for the application of move and ability effects. The user ignores the effects of the Drowsy condition.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.wrN7YciRVTirs8fw"
-		}
-	},
-	"effects": []
+    "name": "Comatose",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Comatose",
+                "slug": "comatose",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Major Status Conditions affecting the user are reduced by 2 every activation instead of 1. The user is always considered to be affected by the Drowsy condition for the application of attack and ability effects. The user ignores the effects of the Drowsy condition.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "AjuRPvTtYgQHld98",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

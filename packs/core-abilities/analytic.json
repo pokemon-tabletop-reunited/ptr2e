@@ -1,32 +1,29 @@
 {
-	"_id": "TyNkfVnPUnIcXL6R",
-	"name": "Analytic",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "analytic",
-		"actions": [
-			{
-				"slug": "analytic",
-				"name": "Analytic",
-				"description": "Increases the power of [Delay X] actions by 30%",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.TyNkfVnPUnIcXL6R"
-		}
-	},
-	"effects": []
+    "name": "Analytic",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Analytic",
+                "slug": "analytic",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Increases the power of [Delay X] actions by 30%.",
+        "traits": []
+    },
+    "_id": "vBtX1lO8Hczaure0",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

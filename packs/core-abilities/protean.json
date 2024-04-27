@@ -1,32 +1,29 @@
 {
-	"_id": "bZnTBckkqPihrf3D",
-	"name": "Protean",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "protean",
-		"actions": [
-			{
-				"slug": "protean",
-				"name": "Protean",
-				"description": "Before applying damage, the user's Type changes to the Type of the triggering attack. The user remains as the transformed type for 5 activations, or until switched out or Fainted. Protean can only be used once per combat.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.bZnTBckkqPihrf3D"
-		}
-	},
-	"effects": []
+    "name": "Protean",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Protean",
+                "slug": "protean",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 1
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user may change their Types to the Type of the triggering attack before the attack is initiated. The user remains as the triggering attack's Type for 5 activations, or until switched out or Fainted. Protean can only be used once per combat.",
+        "traits": []
+    },
+    "_id": "7tiaikM0TjRYeYtM",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

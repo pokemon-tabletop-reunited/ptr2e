@@ -1,32 +1,29 @@
 {
-	"_id": "9e5KSa0HFQZ6dar3",
-	"name": "Natural Cure",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "natural-cure",
-		"actions": [
-			{
-				"slug": "natural-cure",
-				"name": "Natural Cure",
-				"description": "When the user is switched out, they are cured of all Major Status Conditions affecting them.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.9e5KSa0HFQZ6dar3"
-		}
-	},
-	"effects": []
+    "name": "Natural Cure",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Natural Cure",
+                "slug": "natural-cure",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is cured of all Major Status Conditions affecting them.",
+        "traits": []
+    },
+    "_id": "dzhha2RQmDQCQWLs",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

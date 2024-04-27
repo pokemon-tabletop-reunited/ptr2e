@@ -1,34 +1,31 @@
 {
-	"_id": "ppfJ5MVWAqddH6Ar",
-	"name": "Multitype",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "multitype",
-		"actions": [
-			{
-				"slug": "multitype",
-				"name": "Multitype",
-				"description": "The user can equip a Type Plate item without using their Accessory Slot. The user's type changes to match the Type Plate. If the user has two different Type Plates equipped, the user gains both types. When using Judgement, the user can spend an additional 2 PP to change the damage type Judgement deals to any available type of their choosing. (Typeless is excluded from this choice)",
-				"traits": [
-					"legendary"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.ppfJ5MVWAqddH6Ar"
-		}
-	},
-	"effects": []
+    "name": "Multitype",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Multitype",
+                "slug": "multitype",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user may change the Type of the triggering attack to any available Type of their choosing (except Typeless) for the rest of their activation. Passive: The user can equip a Type Plate item without using their Accessory Slot, and the user's type changes to match the Type Plate. If the user has two different Type Plates equipped, the user gains both types. If the user possesses the Legend Plate, Judgement instead always receives STAB and always deals damage as if it was one step super-effective.",
+        "traits": [
+            "legendary"
+        ]
+    },
+    "_id": "NjDINCH6Y5o9MeDO",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

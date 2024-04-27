@@ -1,34 +1,31 @@
 {
-	"_id": "C5GdTKlvQQEDHt7d",
-	"name": "Sturdy",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "sturdy",
-		"actions": [
-			{
-				"slug": "sturdy",
-				"name": "Sturdy",
-				"description": "Connection - Endure. When using Endure as an Interrupt action, the user can spend 2 additional AP to prevent their HP from falling below 1/2 their Max HP for the triggering attack.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.C5GdTKlvQQEDHt7d"
-		}
-	},
-	"effects": []
+    "name": "Sturdy",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Sturdy",
+                "slug": "sturdy",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Incoming damage from attacks cannot deal more than 50% of the user's HP as damage. The user is immune to the effects of [Execute] attacks.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "WSCvEL48VmFxp6vS",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

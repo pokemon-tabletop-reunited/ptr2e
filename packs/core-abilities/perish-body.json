@@ -1,34 +1,31 @@
 {
-	"_id": "UsOqnhSQZZ5ILRiJ",
-	"name": "Perish Body",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "perish-body",
-		"actions": [
-			{
-				"slug": "perish-body",
-				"name": "Perish Body",
-				"description": "The user and and attacking creature gain the effect of Perish Song. This is not the same as using the attack Perish Song.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.UsOqnhSQZZ5ILRiJ"
-		}
-	},
-	"effects": []
+    "name": "Perish Body",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Perish Body",
+                "slug": "perish-body",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 5
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user and and the triggering creature gain Perish 3.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "yviyrzakRNeepeLV",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

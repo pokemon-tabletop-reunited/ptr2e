@@ -1,32 +1,29 @@
 {
-	"_id": "Oy4zAr5POSztQYqg",
-	"name": "Tinted Lens",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "tinted-lens",
-		"actions": [
-			{
-				"slug": "tinted-lens",
-				"name": "Tinted Lens",
-				"description": "The user's damaging attacks that are resisted by their targets deals double damage on hit.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.Oy4zAr5POSztQYqg"
-		}
-	},
-	"effects": []
+    "name": "Tinted Lens",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Tinted Lens",
+                "slug": "tinted-lens",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's Physical or Special-Category attacks that are resisted by their targets deals double damage on hit.",
+        "traits": []
+    },
+    "_id": "CObHYzitSNpQ32ck",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

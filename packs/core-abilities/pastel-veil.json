@@ -1,35 +1,32 @@
 {
-	"_id": "p7UtB2j9ceDUQJiB",
-	"name": "Pastel Veil",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "pastel-veil",
-		"actions": [
-			{
-				"slug": "pastel-veil",
-				"name": "Pastel Veil",
-				"description": "The user is immune to the Poison and Bad Poison conditions. Allied creatures within 5m of the user have their Poison and Bad Poison condition duration reduce by 2 at the end of each of their activations instead of 1.",
-				"traits": [
-					"defensive",
-					"aura"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.p7UtB2j9ceDUQJiB"
-		}
-	},
-	"effects": []
+    "name": "Pastel Veil",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Pastel Veil",
+                "slug": "pastel-veil",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "allied-aura",
+                    "distance": 5,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is immune to the Poison and Blight conditions. Allied creatures in range have their Poison and Blight condition duration reduce by 2 at the end of each of their activations instead of 1.",
+        "traits": [
+            "defensive",
+            "aura"
+        ]
+    },
+    "_id": "cwF9EMQr0GNh6iNM",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

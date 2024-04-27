@@ -1,34 +1,31 @@
 {
-	"_id": "eYKXRO6jDT6AsAFE",
-	"name": "Wonder Skin",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "wonder-skin",
-		"actions": [
-			{
-				"slug": "wonder-skin",
-				"name": "Wonder Skin",
-				"description": "Incoming Status-category attacks against the user have half ACC.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.eYKXRO6jDT6AsAFE"
-		}
-	},
-	"effects": []
+    "name": "Wonder Skin",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Wonder Skin",
+                "slug": "wonder-skin",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user has +2 EVA against Status-Category attacks.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "lErB9WZwKqFAAqWS",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

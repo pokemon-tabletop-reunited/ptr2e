@@ -1,34 +1,31 @@
 {
-	"_id": "iUnePGRskZQWbr1k",
-	"name": "Soundproof",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "soundproof",
-		"actions": [
-			{
-				"slug": "soundproof",
-				"name": "Soundproof",
-				"description": "The user is immune to the damage and effects of [Sonic] moves.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.iUnePGRskZQWbr1k"
-		}
-	},
-	"effects": []
+    "name": "Soundproof",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Soundproof",
+                "slug": "soundproof",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is immune to the damage and effects of [Sonic] Actions and Attacks.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "ansR6B3kwajd5lIc",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

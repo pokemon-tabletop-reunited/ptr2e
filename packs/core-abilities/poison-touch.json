@@ -1,32 +1,29 @@
 {
-	"_id": "lL6K5dO6OBC10V8A",
-	"name": "Poison Touch",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "poison-touch",
-		"actions": [
-			{
-				"slug": "poison-touch",
-				"name": "Poison Touch",
-				"description": "When the user hits a creature with a contact attack, the targeted creature has a 30% chance of being Poisoned 5.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.lL6K5dO6OBC10V8A"
-		}
-	},
-	"effects": []
+    "name": "Poison Touch",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Poison Touch",
+                "slug": "poison-touch",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The targeted creature has a 30% chance of being Poisoned 5.",
+        "traits": []
+    },
+    "_id": "imDjhZT9F5pNPghn",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

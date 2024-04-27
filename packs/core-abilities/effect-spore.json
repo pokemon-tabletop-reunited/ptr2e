@@ -1,35 +1,32 @@
 {
-	"_id": "8fZvX5rc7qQYnCnM",
-	"name": "Effect Spore",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "effect-spore",
-		"actions": [
-			{
-				"slug": "effect-spore",
-				"name": "Effect Spore",
-				"description": "When the user is hit by a contact attack, the attacking creature rolls has a 30% chance of either being Paralyzed 5, given Sleep 5, or being Poisoned 5.",
-				"traits": [
-					"defensive",
-					"powder"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.8fZvX5rc7qQYnCnM"
-		}
-	},
-	"effects": []
+    "name": "Effect Spore",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Effect Spore",
+                "slug": "effect-spore",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The triggering creature has a 30% chance of either being Paralyzed 5, becoming Drowsy 5, or being Poisoned 5.",
+        "traits": [
+            "defensive",
+            "powder"
+        ]
+    },
+    "_id": "QPNPq0jEp2qHSaUY",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

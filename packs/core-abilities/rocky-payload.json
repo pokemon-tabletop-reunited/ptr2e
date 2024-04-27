@@ -1,32 +1,32 @@
 {
-	"_id": "AL2vj39go0VRQ7b2",
-	"name": "Rocky Payload",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "rocky-payload",
-		"actions": [
-			{
-				"slug": "rocky-payload",
-				"name": "Rocky Payload",
-				"description": "Increases the power of the user's Rock-type attacks by 50%.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.AL2vj39go0VRQ7b2"
-		}
-	},
-	"effects": []
+    "name": "Rocky Payload",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Rocky Payload",
+                "slug": "rocky-payload",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Increases the Power of the user's Rock-Type attacks by 50%.",
+        "traits": [
+            "stab",
+            "rock"
+        ]
+    },
+    "_id": "lunmkR9PiJsBk2Et",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

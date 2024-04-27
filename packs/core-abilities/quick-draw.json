@@ -1,32 +1,29 @@
 {
-	"_id": "YfaB4LFpTsTyzjCn",
-	"name": "Quick Draw",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "quick-draw",
-		"actions": [
-			{
-				"slug": "quick-draw",
-				"name": "Quick Draw",
-				"description": "The user's [Missile] attacks can be used as a [Priority 1] Action.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.YfaB4LFpTsTyzjCn"
-		}
-	},
-	"effects": []
+    "name": "Quick Draw",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Quick Draw",
+                "slug": "quick-draw",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's [Missile] attacks gain [Priority 1].",
+        "traits": []
+    },
+    "_id": "IhIoSNeMgYax0BFG",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

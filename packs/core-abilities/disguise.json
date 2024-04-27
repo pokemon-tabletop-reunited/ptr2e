@@ -1,35 +1,33 @@
 {
-	"_id": "MT8aUoZMqQULoPuf",
-	"name": "Disguise",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "disguise",
-		"actions": [
-			{
-				"slug": "disguise",
-				"name": "Disguise",
-				"description": "The first time the user takes damage in combat, they take 0 damage. Afterward, this ability cannot be used again until the end of the battle.",
-				"traits": [
-					"defensive",
-					"forme-change"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.MT8aUoZMqQULoPuf"
-		}
-	},
-	"effects": []
+    "name": "Disguise",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Disguise",
+                "slug": "disguise",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "At the start of combat the user is Disguised. The first time the user takes damage in combat while Disguised, they take 0 damage and the lose the Disguised condition. Afterward, this ability cannot be used again until the end of the battle.",
+        "traits": [
+            "defensive",
+            "forme-change",
+            "innate"
+        ]
+    },
+    "_id": "rL20Tp4ZKRidauea",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

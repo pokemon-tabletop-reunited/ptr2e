@@ -1,32 +1,29 @@
 {
-	"_id": "TgrguwNIAoZk1JNo",
-	"name": "Skill Link",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "skill-link",
-		"actions": [
-			{
-				"slug": "skill-link",
-				"name": "Skill Link",
-				"description": "The user's [5-Strike] attacks that hit will always strike the target 5 times.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.TgrguwNIAoZk1JNo"
-		}
-	},
-	"effects": []
+    "name": "Skill Link",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Skill Link",
+                "slug": "skill-link",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's [X-Strike] attacks with X<5 gain [Danger Close], and those that have X>5 have their hit calculation changed to \"4+d(X-4)\".",
+        "traits": []
+    },
+    "_id": "u5nSmqyvqcpormU8",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

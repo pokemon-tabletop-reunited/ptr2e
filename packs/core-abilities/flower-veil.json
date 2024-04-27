@@ -1,34 +1,31 @@
 {
-	"_id": "7OAOilVtHWcnXjQo",
-	"name": "Flower Veil",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "flower-veil",
-		"actions": [
-			{
-				"slug": "flower-veil",
-				"name": "Flower Veil",
-				"description": "Allied Grass-type creatures within 5m of the user are immune to Negative stage effects.",
-				"traits": [
-					"aura"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.7OAOilVtHWcnXjQo"
-		}
-	},
-	"effects": []
+    "name": "Flower Veil",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Flower Veil",
+                "slug": "flower-veil",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "allied-aura",
+                    "distance": 5,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Allied Grass-Type creatures within range ignore negative stage effects.",
+        "traits": [
+            "aura"
+        ]
+    },
+    "_id": "YnNtuqbPAVdjlDye",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

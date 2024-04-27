@@ -1,35 +1,32 @@
 {
-	"_id": "mNVtLJbTEWBpCjWx",
-	"name": "Sweet Veil",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "sweet-veil",
-		"actions": [
-			{
-				"slug": "sweet-veil",
-				"name": "Sweet Veil",
-				"description": "The user is immune to the Sleep and Bad Sleep condition. The duration of Sleep and Bad Sleep affecting allied creatures within 10m of the user are reduced by 2 instead of 1 at the end of each of their activations.",
-				"traits": [
-					"defensive",
-					"aura"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.mNVtLJbTEWBpCjWx"
-		}
-	},
-	"effects": []
+    "name": "Sweet Veil",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Sweet Veil",
+                "slug": "sweet-veil",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "aura",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is immune to the Drowsy and Nightmares conditions. The duration of Drowsy and Nightmares affecting allied creatures within 10m of the user are reduced by 2 instead of 1 at the end of each of their activations.",
+        "traits": [
+            "defensive",
+            "aura"
+        ]
+    },
+    "_id": "XVZ52QoIx9ja1UjA",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

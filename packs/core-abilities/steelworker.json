@@ -1,32 +1,32 @@
 {
-	"_id": "6gwjzPJ7DuZP5Rem",
-	"name": "Steelworker",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "steelworker",
-		"actions": [
-			{
-				"slug": "steelworker",
-				"name": "Steelworker",
-				"description": "All of the creatures damaging attacks are [Delay 3] actions and have 50% increased power.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.6gwjzPJ7DuZP5Rem"
-		}
-	},
-	"effects": []
+    "name": "Steelworker",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Steelworker",
+                "slug": "steelworker",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Increases the Power of the user's Steel-Type attacks by 50%.",
+        "traits": [
+            "stab",
+            "steel"
+        ]
+    },
+    "_id": "7tzGjQTmJ31NiX3O",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

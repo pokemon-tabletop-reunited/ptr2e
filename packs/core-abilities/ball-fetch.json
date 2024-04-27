@@ -1,32 +1,29 @@
 {
-	"_id": "SUekqsWEyt6fyESQ",
-	"name": "Ball Fetch",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "ball-fetch",
-		"actions": [
-			{
-				"slug": "ball-fetch",
-				"name": "Ball Fetch",
-				"description": "At the end of a battle, a creature with this ability will retrieve all Throwable items that missed for their allies. The user cannot be Fainted for this ability to work.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.SUekqsWEyt6fyESQ"
-		}
-	},
-	"effects": []
+    "name": "Ball Fetch",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Ball Fetch",
+                "slug": "ball-fetch",
+                "type": "generic",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "object",
+                    "distance": 8,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user gains +2 EVA for 1 Activation. Then the user freely moves to the fallen item and picks it up, making it a Held Item.",
+        "traits": []
+    },
+    "_id": "Ar3x6HuL8RvfpQKV",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }
