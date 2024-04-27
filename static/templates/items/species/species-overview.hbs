@@ -1,8 +1,18 @@
 <section class="tab sheet-body {{tabs.overview.cssClass}}" data-tab="overview" data-group="sheet">
-    <fieldset>
-        <legend>
-            Species Overview
-        </legend>
-        
-    </fieldset>
+    <div class="scroll">
+        <fieldset>
+            <legend>
+                Species Overview
+            </legend>
+            {{> species-body document=item}}
+            <fieldset>
+                <legend>
+                    Description
+                </legend>
+                <div class="description">
+                    {{{item.system.description}}}
+                </div>
+            </fieldset>
+        </fieldset>
+    </div>
 </section>

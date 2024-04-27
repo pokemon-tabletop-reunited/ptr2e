@@ -1,0 +1,40 @@
+<content class="species-embed">
+    <aside>
+        {{#each document.system.types as |type|}}
+            {{{getIcon type}}}
+        {{/each}}
+    </aside>
+    <main>
+        <section class="species-basestats">
+            <fieldset>
+                <legend>{{localize fields.stats.label}}</legend>
+                {{#each fields.stats.fields}}
+                    <label for="{{this.fieldPath}}">{{localize this.label}}</label>
+                    <span>{{getProperty ../document fieldPath}}</span>
+                {{/each}}
+            </fieldset>
+        </section>
+        <section class="species-primary-movement">
+            <fieldset>
+                <legend>{{localize fields.movement.fields.primary.label}}</legend>
+                {{#each document.system.movement.primary as |movement|}}
+                    <label for="system.movement.primary.{{@index}}">{{formatSlug movement.type}}</label>
+                    <span>{{movement.value}}</span>
+                {{/each}}
+            </table>
+            </fieldset>
+        </section>
+        {{#if document.system.movement.secondary}}
+        <section class="species-secondary-movement">
+            <fieldset>
+                <legend>{{localize fields.movement.fields.secondary.label}}</legend>
+                {{#each document.system.movement.secondary as |movement|}}
+                    <label for="system.movement.secondary.{{@index}}">{{formatSlug movement.type}}</label>
+                    <span>{{movement.value}}</span>
+                {{/each}}
+            </table>
+            </fieldset>
+        </section>
+        {{/if}}
+    </main>
+</content>

@@ -40,6 +40,11 @@ aside[role="tooltip"].attack,
                     }
                 }
             }
+
+            .dexNumber{
+                font-size: smaller;
+                color: #6b6b6b;
+            }
         }
 
         aside {
@@ -147,8 +152,83 @@ aside[role="tooltip"].attack,
             border-color: var(--color-light-6);
             border-radius: 8px;
         }
+
+        content.species-embed {
+            border: unset;
+            background: unset;
+
+            fieldset {
+                border-color: var(--color-light-6);
+                border-radius: 8px;
+                background: #efe6d8;
+            }
+
+            main {
+                grid-template-areas: 
+                    "stats"
+                    "primary-movement"
+                    "secondary-movement";
+            }
+        }
+
     }
 }
+
+content.species-embed {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;  
+
+    aside {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 44px;
+        margin: 0.25rem;
+        gap: 5px;
+
+        img {
+            border: unset;
+            border-radius: 50%;
+        }
+    }
+
+    main {
+        flex: 1 0 auto;
+        margin: 0 0.25rem;
+
+        display: grid;
+        grid-template-areas: 
+            "stats primary-movement"
+            "stats secondary-movement";
+
+        section {
+            &.species-basestats {
+                grid-area: stats;
+            }
+            &.species-primary-movement {
+                grid-area: primary-movement;
+            }
+            &.species-secondary-movement {
+                grid-area: secondary-movement;
+            }
+            
+            fieldset {
+                display: grid !important;
+                grid-template-columns: 70% 30%;
+                grid-auto-rows: 17px;
+                gap: 0.25rem;
+                height: 100%;
+                
+                label {
+                    font-weight: bold;
+                }
+                span {
+                    text-align: center;
+                }
+            }
+        }
+    }
+}    
 
 content.attack-embed {
     display: flex;
@@ -216,3 +296,4 @@ content.attack-embed {
         }
     }
 }
+
