@@ -2,6 +2,7 @@ import { PerkPTR2e } from "@item";
 import { PerkNode } from "./perk-node.ts";
 import { CoordinateString } from "./perk-web.ts";
 import { sluggify } from "@utils";
+import PerkGraph from "./perk-graph.ts";
 
 type EdgeCoordinateString = `${CoordinateString}-${CoordinateString}`;
 
@@ -19,10 +20,22 @@ type SluggedEdgeString = `${string}-${string}`;
 
 class PerkStore extends Collection<PTRNode> {
     private edges: Map<SluggedEdgeString, PIXI.Graphics>;
+    private _graph: PerkGraph;
+    private _rootNodes: PTRNode[] | null = null;
+
+    get rootNodes() {
+        return this._rootNodes ??= this.filter(node => node.perk.system.node.type === "root");
+    }
+
+    get graph() {
+        return this._graph;
+    }
 
     constructor(entries: PTRNode[] = []) {
         super(entries.map((entry) => [`${entry.position.i},${entry.position.j}`, entry]));
         this.edges = new Map();
+
+        this._graph = new PerkGraph(this);
     }
 
     static async create() {
@@ -43,6 +56,7 @@ class PerkStore extends Collection<PTRNode> {
     async initialize() {
         this.clear();
         this.edges.clear();
+        this._rootNodes = null;
         const perkManager = await game.ptr.perks.initialize();
         for (const perk of perkManager.perks.values()) {
             if (perk.system.node && perk.system.node.i !== null && perk.system.node.j !== null) {
@@ -53,27 +67,25 @@ class PerkStore extends Collection<PTRNode> {
                 });
             }
         }
+        if (this.size > 0) this._graph.initialize();
     }
 
     getEdge(node1: PTRNode, node2: PTRNode): PIXI.Graphics | null {
-        return this.edges.get(`${node1.perk.slug}-${node2.perk.slug}`) ?? this.edges.get(`${node2.perk.slug}-${node1.perk.slug}`) ?? null;
+        return (
+            this.edges.get(`${node1.perk.slug}-${node2.perk.slug}`) ??
+            this.edges.get(`${node2.perk.slug}-${node1.perk.slug}`) ??
+            null
+        );
     }
 
     registerEdge(node1: PTRNode, node2: PTRNode, edge: PIXI.Graphics) {
-        this.edges.set(
-            `${node1.perk.slug}-${node2.perk.slug}`,
-            edge
-        );
+        this.edges.set(`${node1.perk.slug}-${node2.perk.slug}`, edge);
         return this;
     }
 
     unregisterEdge(node1: PTRNode, node2: PTRNode) {
-        this.edges.delete(
-            `${node1.perk.slug}-${node2.perk.slug}`
-        );
-        this.edges.delete(
-            `${node2.perk.slug}-${node1.perk.slug}`
-        );
+        this.edges.delete(`${node1.perk.slug}-${node2.perk.slug}`);
+        this.edges.delete(`${node2.perk.slug}-${node1.perk.slug}`);
         return this;
     }
 
@@ -86,10 +98,10 @@ class PerkStore extends Collection<PTRNode> {
         return super.has(ij);
     }
 
-    override getName(
-        name: string,
-        { strict }: { strict?: boolean | undefined } | undefined = {}
-    ): PTRNode | undefined {
+    override getName(name: string, { strict }: { strict: true; }): PTRNode;
+    override getName(name: string, { strict }: { strict: false; }): PTRNode | undefined;
+    override getName(name: string): PTRNode | undefined;
+    override getName(name: string, { strict }: { strict?: boolean | undefined; } = {}): PTRNode | undefined {
         const entry = this.find((node) => node.perk?.slug === sluggify(name));
         if (strict && entry === undefined) {
             throw new Error(`An entry with name ${name} does not exist in the collection`);

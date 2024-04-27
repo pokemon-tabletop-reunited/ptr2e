@@ -119,7 +119,10 @@ type ApplicationWindow = {
     dragTime: number;
 };
 
-type ApplicationClosingOptions = Object;
+type ApplicationClosingOptions = {
+    animate: boolean;
+    closeKey: boolean;
+};
 
 type ApplicationClickAction = (event: PointerEvent, target: HTMLElement) => any;
 
@@ -430,7 +433,7 @@ export class ApplicationV2<
      * @param {ApplicationClosingOptions} [options] Options which modify how the application is closed.
      * @returns {Promise<ApplicationV2>}            A Promise which resolves to the closed Application instance
      */
-    close(options?: ApplicationClosingOptions): Promise<ApplicationV2>;
+    close(options?: Partial<ApplicationClosingOptions>): Promise<ApplicationV2>;
 
     /* -------------------------------------------- */
 
@@ -470,7 +473,7 @@ export class ApplicationV2<
      * @see ApplicationV2#setPosition
      * @protected
      */
-    _updatePosition(): void;
+    _updatePosition(position: ApplicationPosition): ApplicationPosition;
 
     /* -------------------------------------------- */
     /*  Other Public Methods                        */

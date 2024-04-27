@@ -51,11 +51,12 @@ export default abstract class PerkSystem extends PerkExtension {
                             hint: "PTR2E.FIELDS.node.config.texture.hint",
                         }),
                         tint: new fields.ColorField({ required: false, label: "PTR2E.FIELDS.node.config.tint.label", hint: "PTR2E.FIELDS.node.config.tint.hint" }),
-                        scale: new fields.NumberField({ required: false, min: 0.5, max: 2, label: "PTR2E.FIELDS.node.config.scale.label", hint: "PTR2E.FIELDS.node.config.scale.hint" }),
+                        scale: new fields.NumberField({ required: false, min: 0.5, max: 1.6, label: "PTR2E.FIELDS.node.config.scale.label", hint: "PTR2E.FIELDS.node.config.scale.hint" }),
                     },
                     { required: false }
                 ),
                 hidden: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.node.hidden.label", hint: "PTR2E.FIELDS.node.hidden.hint" }),
+                type: new fields.StringField({ required: true, choices: ["normal", "root", "ranked"], initial: "normal" })
             }),
         };
     }
@@ -77,6 +78,20 @@ export default abstract class PerkSystem extends PerkExtension {
             for (const key of Object.keys(this.node.config)) {
                 if (this.node.config[key as keyof typeof this.node.config] === null)
                     delete this.node.config[key as keyof typeof this.node.config];
+            }
+        }
+
+        switch(this.node.type) {
+            case "root": {
+                //this.node.hidden = false; TODO: Discuss need of this?
+                this.node.config = fu.mergeObject(this.node.config ?? {}, {
+                    borderWidth: 3,
+                    scale: 1.6,
+                })
+                break;
+            }
+            case "ranked": {
+                break;
             }
         }
     }
@@ -211,6 +226,7 @@ type PerkSchema = {
                 true
             >;
             hidden: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+            type: foundry.data.fields.StringField<"normal" | "root" | "ranked", "normal", true, false, true>;
         },
         {
             i: number | null;
@@ -226,6 +242,7 @@ type PerkSchema = {
                 scale: number;
             };
             hidden: boolean;
+            type: "normal" | "root" | "ranked";
         },
         {
             i: number | null;
@@ -233,6 +250,7 @@ type PerkSchema = {
             connected: Set<string>;
             config: Partial<PerkNodeConfig> | undefined;
             hidden: boolean;
+            type: "normal" | "root" | "ranked";
         }
     >;
 };
