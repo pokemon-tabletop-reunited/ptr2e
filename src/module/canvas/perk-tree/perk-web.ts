@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import PTRPerkTreeHUD from "./perk-tree-hud.ts";
+import PTRPerkTreeHUD from "./perk-web-hud.ts";
 import { Hexagon } from "./hexagon.ts";
 import { PerkEditState, PerkNode } from "./perk-node.ts";
 import { PerkStore, PTRNode } from "./perks-store.ts";
@@ -64,7 +64,7 @@ class PerkWeb extends PIXI.Container {
 
         // Setup controls
         Object.defineProperty(this, "controls", {
-            value: new PTRPerkTreeHUD(),
+            value: new PTRPerkTreeHUD({}),
             writable: false,
         });
 
@@ -121,7 +121,7 @@ class PerkWeb extends PIXI.Container {
 
         // Deactive UI
         this.perkHUD.clear();
-        this.controls.close();
+        this.controls.close({animate: false});
 
         this.canvas.hidden = true;
         this.stage.eventMode = "none";
