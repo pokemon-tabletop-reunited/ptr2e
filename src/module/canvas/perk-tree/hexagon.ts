@@ -1,5 +1,8 @@
 import PerkWeb from "./perk-web.ts";
 
+/**
+ * DEBUG Hexagon class for the PerkWeb
+ */
 export class Hexagon {
     i: number;
     j: number;

@@ -17,6 +17,10 @@ class PerkHUDV2 extends foundry.applications.api.HandlebarsApplicationMixin(
                 width: "auto",
                 height: "auto",
             },
+            actions: {
+                "cheapest-path": PerkHUDV2.HighlightCheapestPath,
+                "shortest-path": PerkHUDV2.HighlightShortestPath,
+            }
         },
         { inplace: false }
     );
@@ -35,7 +39,7 @@ class PerkHUDV2 extends foundry.applications.api.HandlebarsApplicationMixin(
 
     override async _prepareContext() {
         if(!this._object) return {};
-        
+
         const data = this._object?.node;
         return fu.mergeObject(data, {}, { inplace: false });
     }
@@ -83,6 +87,16 @@ class PerkHUDV2 extends foundry.applications.api.HandlebarsApplicationMixin(
         const hud = document.getElementById("hud");
         hud?.appendChild(element);
         return element;
+    }
+
+    static async HighlightCheapestPath(this: PerkHUDV2, _event: PointerEvent) {
+        if(!this._object) return;
+        game.ptr.web.highlightCheapestPath(this._object);
+    }
+
+    static async HighlightShortestPath(this: PerkHUDV2, _event: PointerEvent) {
+        if(!this._object) return;
+        game.ptr.web.highlightShortestPath(this._object);
     }
 }
 

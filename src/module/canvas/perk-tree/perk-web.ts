@@ -5,6 +5,7 @@ import { PerkEditState, PerkNode } from "./perk-node.ts";
 import { PerkStore, PTRNode } from "./perks-store.ts";
 import { PerkHUD } from "./perk-hud.ts";
 import { ItemPTR2e } from "@item";
+import { Path, PathStep } from "./perk-graph.ts";
 
 class PerkWeb extends PIXI.Container {
     get activeNode() {
@@ -292,7 +293,7 @@ class PerkWeb extends PIXI.Container {
         }
     }
 
-    private _drawEdge(node1: PTRNode, node2: PTRNode) {
+    private _drawEdge(node1: PTRNode, node2: PTRNode, styling?: { color?: number; width?: number, alpha?: number}) {
         if (!node1.element) this._drawNode(node1);
         if (!node2.element) this._drawNode(node2);
 
@@ -310,9 +311,13 @@ class PerkWeb extends PIXI.Container {
             node2.connected.add(node1.perk.slug);
         }
 
+        const color = styling?.color ?? (isHidden ? 0x888888 : 0x000000);
+        const width = styling?.width ?? 2;
+        const alpha = styling?.alpha ?? (isHidden ? 0.5 : 1);
+
         // Draw the edge
         const edge = new PIXI.Graphics();
-        edge.lineStyle(2, isHidden ? 0x888888 : 0x000000, isHidden ? 0.5 : 1);
+        edge.lineStyle(width, color, alpha);
         edge.moveTo(node1.element!.x, node1.element!.y);
         edge.lineTo(node2.element!.x, node2.element!.y);
         this.collection.registerEdge(node1, node2, edge);
@@ -320,14 +325,19 @@ class PerkWeb extends PIXI.Container {
     }
 
     // Redraw an edge between two nodes
-    public redrawEdge(node1: PTRNode, node2: PTRNode) {
+    public redrawEdge(node1: PTRNode, node2: PTRNode, styling?: { color?: number; width?: number, alpha?: number}) {
         const edge = this.collection.getEdge(node1, node2);
         if (!edge) {
             console.warn(`Could not find edge between ${node1.perk?.name} and ${node2.perk?.name}`);
             return;
         }
+        const isHidden = node1.perk.system.hidden || node2.perk.system.hidden;
+        const color = styling?.color ?? (isHidden ? 0x888888 : 0x000000);
+        const width = styling?.width ?? 2;
+        const alpha = styling?.alpha ?? (isHidden ? 0.5 : 1);
+
         edge.clear();
-        edge.lineStyle(2, 0x000000, 1);
+        edge.lineStyle(width, color, alpha);
         edge.moveTo(node1.element!.x, node1.element!.y);
         edge.lineTo(node2.element!.x, node2.element!.y);
     }
@@ -580,10 +590,28 @@ class PerkWeb extends PIXI.Container {
         if (this.editMode) {
             this.perkHUD?.clear()
             if (!ui.perksTab.popout || ui.perksTab.popout._minimized) ui.perksTab.renderPopout();
+            
+            if(game.settings.get("ptr2e", "dev-mode")) {
+                const pack = game.packs.get("ptr2e.core-perks");
+                if(pack) {
+                    pack.configure({locked: false})
+                    pack.render(true, {top: 0, left: window.innerWidth - 310 - 350})
+                }
+            }
+
             this.app.renderer.background.color = 0x851a1a;
             this.app.renderer.background.alpha = 0.35;
         } else {
             ui.perksTab.popout?.close();
+
+            if(game.settings.get("ptr2e", "dev-mode")) {
+                const pack = game.packs.get("ptr2e.core-perks");
+                if(pack) {
+                    pack.configure({locked: true})
+                    pack.apps.forEach(app => app.close())
+                }
+            }
+
             this.app.renderer.background.color = 0xcccccc;
             this.app.renderer.background.alpha = 0.35;
         }
@@ -653,6 +681,45 @@ class PerkWeb extends PIXI.Container {
             }
         }
         return this;
+    }
+
+    public highlightCheapestPath(node1: PerkNode, node2?: PerkNode): void {
+        if(node2) {
+            const path = this.collection.graph.getCheapestPath(node1.node, node2.node);
+            if(path) this.highlightPath(path);
+            return;
+        }
+
+        const path = this.collection.graph.getPathToRoot(node1.node, "cheapest");
+        if(path) this.highlightPath(path);
+    }
+
+    public highlightShortestPath(node1: PerkNode, node2?: PerkNode): void {
+        if(node2) {
+            const path = this.collection.graph.getShortestPath(node1.node, node2.node);
+            if(path) this.highlightPath(path);
+            return;
+        }
+
+        const path = this.collection.graph.getPathToRoot(node1.node, "shortest");
+        if(path) this.highlightPath(path);
+    }
+
+    public highlightPath(path: Path): void {
+        let current: PathStep | null = path.startStep;
+        while(current) {
+            const element = current.node.entry.element;
+            if(element) {
+                const isRoot = element.node.perk.system.node.type === "root";
+                element.scale.set(isRoot ? 1.8 : 1.2);
+                element._drawBorder(0x008800, isRoot ? 7 : 3);
+                if(current.next) {
+                    const edge = this.collection.getEdge(current.node.entry, current.next.node.entry);
+                    if(edge) this.redrawEdge(current.node.entry, current.next.node.entry, {color: 0x008800, width: 4, alpha: 1});
+                }
+            }
+            current = current.next;
+        }
     }
 }
 type CoordinateString = `${number},${number}`;
