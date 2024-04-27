@@ -259,8 +259,8 @@ class ActorPTR2e<
      * @param {boolean} active
      */
     async togglePerkTree(active: boolean) {
-        if (game.ptr.tree.actor === this && active !== true) return game.ptr.tree.close();
-        else if (active !== false) return game.ptr.tree.open(this);
+        if (game.ptr.web.actor === this && active !== true) return game.ptr.web.close();
+        else if (active !== false) return game.ptr.web.open(this);
         return;
     }
 

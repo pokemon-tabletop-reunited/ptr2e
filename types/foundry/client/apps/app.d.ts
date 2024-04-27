@@ -244,6 +244,11 @@ declare global {
         /* -------------------------------------------- */
 
         /**
+         * Bring the application to the top of the rendering stack
+         */
+        bringToTop(): void;
+
+        /**
          * Close the application and un-register references to it within UI mappings
          * This function returns a Promise which resolves once the window closing animation concludes
          * @fires closeApplication

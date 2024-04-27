@@ -26,6 +26,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   display: flex;
   gap: 10px;
   align-items: center;
+  flex: 1 0 100%;
 }
 .sheet prose-mirror {
   border: 1px solid var(--border-theme-color);
@@ -1589,6 +1590,19 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   flex: 0 0 calc(100% / 3);
   height: 42px;
   width: 42px;
+}
+#perk-hud {
+  position: absolute;
+  min-width: 220px;
+  width: min-content;
+  max-width: 600px;
+  text-align: left;
+  padding: 1rem;
+  color: var(--appv2-text-color);
+  background: var(--appv2-background);
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  z-index: calc(var(--z-index-tooltip) - 1);
 }
 /** Application V1 Styles **/
 .stats-chart-aside {

@@ -187,6 +187,7 @@ class ItemPTR2e<
         context: {
             parent?: TDocument["parent"];
             pack?: Collection<TDocument> | null;
+            perksOnly?: boolean;
         } & Partial<FormApplicationOptions>,
     ): Promise<TDocument | null>{
         let {parent, pack, ...options} = context;
@@ -194,7 +195,7 @@ class ItemPTR2e<
         // Collect data
         //@ts-expect-error
         const documentName = this.metadata.name;
-        const types = game.documentTypes[documentName].filter(t => t !== CONST.BASE_DOCUMENT_TYPE && t !== "ptu-item");
+        const types = context.perksOnly ? ["perk"] : game.documentTypes[documentName].filter(t => t !== CONST.BASE_DOCUMENT_TYPE && t !== "ptu-item");
         let collection: Items<ItemPTR2e<ItemSystemPTR, null>> | undefined;
         if ( !parent ) {
             if ( pack ) collection = game.packs.get(pack as unknown as string) as unknown as Items<ItemPTR2e<ItemSystemPTR, null>>;
@@ -202,7 +203,7 @@ class ItemPTR2e<
         }
         const folders = collection?._formatFolderSelectOptions() ?? [];
         //@ts-expect-error
-        const label = game.i18n.localize(this.metadata.label);
+        const label = context.perksOnly ? game.i18n.localize("TYPES.Item.perk") : game.i18n.localize(this.metadata.label);
         const title = game.i18n.format("DOCUMENT.Create", {type: label});
         // Render the document creation form
         const html = await renderTemplate("templates/sidebar/document-create.html", {

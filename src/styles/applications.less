@@ -36,6 +36,7 @@ body {
         display: flex;
         gap: 10px;
         align-items: center;
+        flex: 1 0 100%;
     }
 
     prose-mirror {
@@ -1775,6 +1776,21 @@ body {
             width: 42px;
         }
     }
+}
+
+#perk-hud {
+    position: absolute;
+    min-width: 220px;
+    width: min-content;
+    max-width: 600px;
+    text-align: left;
+
+    padding: 1rem;
+    color: var(--appv2-text-color);
+    background: var(--appv2-background);
+    border: 1px solid var(--border-theme-color);
+    border-radius: 8px;
+    z-index: calc(var(--z-index-tooltip) - 1);
 }
 
 

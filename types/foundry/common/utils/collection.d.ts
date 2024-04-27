@@ -104,6 +104,12 @@ declare interface Collection<V>
      * @return Was the test condition passed by at least one entry?
      */
     some(condition: (value: V) => boolean): boolean;
+
+    /**
+     * Convert the Collection to a primitive array of its contents.
+     * @returns {object[]}  An array of contained values
+     */
+    toJSON(): object[];
 }
 
 declare interface CollectionConstructor {
