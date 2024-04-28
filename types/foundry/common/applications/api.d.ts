@@ -100,7 +100,7 @@ type ApplicationRenderContext = {
     force?: boolean;
     position?: ApplicationPosition;
     window?: ApplicationWindowRenderOptions;
-} & Record<string, unknown>
+} & Record<string, unknown>;
 
 type ApplicationWindowRenderOptions = {
     title: string;
@@ -524,7 +524,16 @@ export class ApplicationV2<
      * @param {boolean} [options.force=false]         Force changing the tab even if the new tab is already active
      * @param {boolean} [options.updatePosition=true] Update application position after changing the tab?
      */
-    changeTab(tab: string, group: string, {event, navElement, force, updatePosition}: { event?: Event; navElement?: HTMLElement; force: boolean; updatePosition: boolean }): void;
+    changeTab(
+        tab: string,
+        group: string,
+        {
+            event,
+            navElement,
+            force,
+            updatePosition,
+        }: { event?: Event; navElement?: HTMLElement; force: boolean; updatePosition: boolean }
+    ): void;
 
     /* -------------------------------------------- */
     /*  Life-Cycle Handlers                         */
@@ -705,7 +714,10 @@ export class ApplicationV2<
      * @param {Event|SubmitEvent} event The form submission event
      * @returns {Promise<void>}
      */
-    protected _onSubmitForm(config: ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void>;
+    protected _onSubmitForm(
+        config: ApplicationFormConfiguration,
+        event: Event | SubmitEvent
+    ): Promise<void>;
 
     /* -------------------------------------------- */
     /*  Helper Methods                              */
@@ -799,16 +811,37 @@ export class DocumentSheetV2<
     get isEditable(): boolean;
 
     /**
-   * Prepare data used to update the Item upon form submission.
-   * @param {SubmitEvent} event                   The originating form submission event
-   * @param {HTMLFormElement} form                The form element that was submitted
-   * @param {FormDataExtended} formData           Processed data for the submitted form
-   * @returns {object}                            Prepared submission data as an object
-   * @protected
-   */
-    _prepareSubmitData(event: SubmitEvent, form: HTMLFormElement, formData: FormDataExtended): Record<string, unknown>;
+     * Prepare data used to update the Item upon form submission.
+     * @param {SubmitEvent} event                   The originating form submission event
+     * @param {HTMLFormElement} form                The form element that was submitted
+     * @param {FormDataExtended} formData           Processed data for the submitted form
+     * @returns {object}                            Prepared submission data as an object
+     * @protected
+     */
+    _prepareSubmitData(
+        event: SubmitEvent,
+        form: HTMLFormElement,
+        formData: FormDataExtended
+    ): Record<string, unknown>;
 }
 
+export class ActorSheetV2<
+    TDocument extends Actor = Actor,
+    TRenderOptions extends DocumentSheetRenderOptions = DocumentSheetRenderOptions,
+    TConfiguration extends DocumentSheetConfiguration = DocumentSheetConfiguration,
+> extends DocumentSheetV2<TDocument, TRenderOptions, TConfiguration> {
+    /**
+     * The Actor document managed by this sheet.
+     * @type {ClientDocument}
+     */
+    get actor(): TDocument;
+
+    /**
+     * If this sheet manages the ActorDelta of an unlinked Token, reference that Token document.
+     * @type {TokenDocument|null}
+     */
+    get token(): TokenDocument | null;
+}
 
 export {
     ApplicationConfiguration,
@@ -959,15 +992,18 @@ type DialogV2Button = {
     label: string;
     icon?: string;
     callback?: ApplicationClickAction;
-}
+};
 
 interface DialogV2WaitOptions {
     rejectClose?: boolean;
 }
 
 export class DialogV2 extends ApplicationV2<DialogV2Configuration> {
-    static prompt(options: Omit<DialogV2Configuration, keyof ApplicationConfiguration | 'submit'> & Partial<ApplicationConfiguration>): Promise<DialogV2>;
-    
+    static prompt(
+        options: Omit<DialogV2Configuration, keyof ApplicationConfiguration | "submit"> &
+            Partial<ApplicationConfiguration>
+    ): Promise<DialogV2>;
+
     /**
      * A utility helper to generate a dialog with yes and no buttons.
      * @param {Partial<ApplicationConfiguration & DialogV2Configuration & DialogV2WaitOptions>} [options]
@@ -979,8 +1015,10 @@ export class DialogV2 extends ApplicationV2<DialogV2Configuration> {
      *                                        callback. If the dialog was dismissed, and rejectClose is false, the
      *                                        Promise resolves to null.
      */
-    static confirm(options: Partial<ApplicationConfiguration & DialogV2Configuration & DialogV2WaitOptions> & {
-        yes?: Partial<DialogV2Button>;
-        no?: Partial<DialogV2Button>;
-    }): Promise<any>;
+    static confirm(
+        options: Partial<ApplicationConfiguration & DialogV2Configuration & DialogV2WaitOptions> & {
+            yes?: Partial<DialogV2Button>;
+            no?: Partial<DialogV2Button>;
+        }
+    ): Promise<any>;
 }
