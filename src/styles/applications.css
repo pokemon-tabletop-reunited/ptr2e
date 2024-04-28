@@ -40,6 +40,132 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet prose-mirror .editor-container .editor-content {
   padding: 0.5rem;
 }
+.sheet.actor.v2 {
+  background: var(--appv2-background);
+}
+.sheet.actor.v2 .window-content {
+  display: grid;
+  grid-template-columns: 22% 78%;
+  grid-template-rows: 65px auto;
+  grid-template-areas: "header nav" "sidebar main";
+}
+.sheet.actor.v2 .window-content aside.actor-header {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 64px auto;
+  grid-template-rows: auto;
+  border-bottom: 1px solid var(--border-theme-color);
+  border-right: 1px solid var(--border-theme-color);
+}
+.sheet.actor.v2 .window-content aside.actor-header img {
+  flex: 0 0 64px;
+  height: 64px;
+  border: unset;
+}
+.sheet.actor.v2 .window-content aside.actor-header .title {
+  flex: 1 0 auto;
+  margin: 0 0.5rem;
+  align-self: center;
+}
+.sheet.actor.v2 .window-content nav.tabs {
+  grid-area: nav;
+  border: unset;
+  border-bottom: 1px solid var(--border-theme-color);
+  justify-content: space-evenly;
+  font-size: 13px;
+  margin: 0;
+  padding: 0.5rem;
+  gap: unset;
+}
+.sheet.actor.v2 .window-content nav.tabs > [data-tab] {
+  padding: 8px;
+}
+.sheet.actor.v2 .window-content aside.sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-theme-color);
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs > div {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: var(--hint-text-color);
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs label {
+  font-size: 12px;
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs input {
+  width: 80%;
+  align-self: center;
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-current,
+.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-current,
+.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-max,
+.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-max {
+  flex: 0 1 auto;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-theme-color);
+  column-gap: 0.5rem;
+  row-gap: 0.25rem;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience > div {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  color: var(--hint-text-color);
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience label {
+  flex: 1 0 40%;
+  align-content: center;
+  text-align: left;
+  font-size: 12px;
+  padding-left: 1rem;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience input {
+  flex: 0 1 40%;
+  align-self: center;
+  align-content: center;
+  margin-right: 0.5rem;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience .xp-current {
+  grid-area: xp-current;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience .xp-next {
+  grid-area: xp-next;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience .xp-diff {
+  grid-area: xp-diff;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience .level {
+  grid-area: level;
+}
+.sheet.actor.v2 .window-content aside.sidebar .perk-web-button {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button {
+  flex: 0 0 70%;
+}
+.sheet.actor.v2 .window-content .tab {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
 .sheet.move-sheet,
 .sheet.species-sheet,
 .sheet.party-sheet,

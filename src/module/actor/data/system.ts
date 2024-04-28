@@ -17,7 +17,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 ...getStatField(slug, withStage),
                 evs: new fields.NumberField({ required: true, label: `PTR2E.Attributes.${slug}.Label`, initial: 0, min: 0, max: 200, step: 4, validate: (d) => d as number >= 0 && d as number <= 200 && d as number % 4 === 0 }),
                 ivs: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
-                base: new fields.NumberField({ required: true, initial: 50, validate: (d) => d as number >= 1 }),
+                base: new fields.NumberField({ required: true, initial: 50, validate: (d) => d as number >= 1}),
             }
         }
         const getStatField = (slug: string, withStage = true) => {
@@ -32,8 +32,11 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
             ...super.defineSchema(),
             advancement: new fields.SchemaField({
                 experience: new fields.SchemaField({
-                    current: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0})
-                })
+                    current: new fields.NumberField({ required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.experience.current.label", hint: "PTR2E.FIELDS.experience.current.hint" }),
+                    next: new fields.NumberField({ required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.experience.next.label", hint: "PTR2E.FIELDS.experience.next.hint" }),
+                    diff: new fields.NumberField({ required: true, initial: 0, min: 0, label: "PTR2E.FIELDS.experience.diff.label", hint: "PTR2E.FIELDS.experience.diff.hint" }),
+                }),
+                level: new fields.NumberField({ required: true, initial: 1, min: 1, max: 100, label: "PTR2E.FIELDS.level.label", hint: "PTR2E.FIELDS.level.hint" }),
             }),
             attributes: new fields.SchemaField({
                 hp: new fields.SchemaField(getAttributeField("hp", false)),
@@ -64,11 +67,12 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 types: new fields.SetField(new fields.StringField({ required: true, choices: getTypes, initial: "untyped", label: "PTR2E.FIELDS.PokemonType.Label", hint: "PTR2E.FIELDS.PokemonType.Hint" }), { initial: ["untyped"], label: "PTR2E.FIELDS.PokemonType.LabelPlural", hint: "PTR2E.FIELDS.PokemonType.HintPlural", required: true, validate: (d) => (d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false), validationError: "PTR2E.Errors.PokemonType" }),
             }),
             powerPoints: new fields.SchemaField({
-                value: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
+                value: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0, label: "PTR2E.FIELDS.powerPoints.value.label", hint: "PTR2E.FIELDS.powerPoints.value.hint" }),
+                max: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0, label: "PTR2E.FIELDS.powerPoints.max.label", hint: "PTR2E.FIELDS.powerPoints.max.hint" }),
             }),
             health: new fields.SchemaField({
-                value: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
-                max: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0 }),
+                value: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0, label: "PTR2E.FIELDS.health.value.label", hint: "PTR2E.FIELDS.health.value.hint" }),
+                max: new fields.NumberField({ required: true, initial: 0, validate: (d) => d as number >= 0, label: "PTR2E.FIELDS.health.max.label", hint: "PTR2E.FIELDS.health.max.hint" }),
             }),
             money: new fields.NumberField({ required: true, initial: 0 }),
             species: new fields.SchemaField(SpeciesSystemModel.defineSchema(), { required: false, nullable: true, initial: null }),

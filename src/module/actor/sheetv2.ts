@@ -3,9 +3,10 @@ import ActorPTR2e from "./base.ts";
 import { SpeciesDropSheet } from "./sheets/species-drop-sheet.ts";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { sluggify } from "@utils";
+import { Tab } from "@item/sheets/document.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
-    foundry.applications.api.ActorSheetV2<
+    foundry.applications.sheets.ActorSheetV2<
         ActorPTR2e,
         foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>
     >
@@ -13,10 +14,13 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     static override DEFAULT_OPTIONS = fu.mergeObject(
         super.DEFAULT_OPTIONS,
         {
-            classes: ["ptr2e", "sheet", "actor"],
+            classes: ["ptr2e", "sheet", "actor", "v2"],
             position: {
                 width: 900,
                 height: 660,
+            },
+            window: {
+                resizable: true,
             },
             form: {
                 submitOnChange: true,
@@ -48,6 +52,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                         system: species.toObject(),
                     }) as SpeciesPTR2e;
                     sheet.render(true);
+                },
+                "open-perk-web": function(this: ActorSheetPTRV2, _event: Event) {
+                    game.ptr.web.open(this.actor);
                 }
             }
         },
@@ -63,10 +70,105 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             id: "nav",
             template: "systems/ptr2e/templates/actor/actor-nav.hbs",
         },
+        sidebar: {
+            id: "sidebar",
+            template: "systems/ptr2e/templates/actor/actor-sidebar.hbs",
+        },
+        overview: {
+            id: "overview",
+            template: "systems/ptr2e/templates/actor/actor-overview.hbs",
+        },
+        actions: {
+            id: "actions",
+            template: "systems/ptr2e/templates/actor/actor-actions.hbs",
+        },
+        inventory: {
+            id: "inventory",
+            template: "systems/ptr2e/templates/actor/actor-inventory.hbs",
+        },
+        clocks: {
+            id: "clocks",
+            template: "systems/ptr2e/templates/actor/actor-clocks.hbs",
+        },
+        perks: {
+            id: "perks",
+            template: "systems/ptr2e/templates/actor/actor-perks.hbs",
+        },
+        biography: {
+            id: "biography",
+            template: "systems/ptr2e/templates/actor/actor-biography.hbs",
+        },
+        effects: {
+            id: "effects",
+            template: "systems/ptr2e/templates/actor/actor-effects.hbs",
+        },
     };
 
+    tabGroups: Record<string, string> = {
+        sheet: "overview",
+    };
+
+    tabs: Record<string, Tab> = {
+        overview: {
+            id: "overview",
+            group: "sheet",
+            icon: "fa-solid fa-house",
+            label: "PTR2E.ActorSheet.Tabs.overview.label",
+        },
+        actions: {
+            id: "actions",
+            group: "sheet",
+            icon: "fa-solid fa-burst",
+            label: "PTR2E.ActorSheet.Tabs.actions.label",
+        },
+        inventory: {
+            id: "inventory",
+            group: "sheet",
+            icon: "fa-solid fa-suitcase",
+            label: "PTR2E.ActorSheet.Tabs.inventory.label",
+        },
+        clocks: {
+            id: "clocks",
+            group: "sheet",
+            icon: "fa-solid fa-clock",
+            label: "PTR2E.ActorSheet.Tabs.clocks.label",
+        },
+        perks: {
+            id: "perks",
+            group: "sheet",
+            icon: "fa-solid fa-crown",
+            label: "PTR2E.ActorSheet.Tabs.perks.label",
+        },
+        biography: {
+            id: "biography",
+            group: "sheet",
+            icon: "fa-solid fa-book-open",
+            label: "PTR2E.ActorSheet.Tabs.biography.label",
+        },
+        effects: {
+            id: "effects",
+            group: "sheet",
+            icon: "fa-solid fa-star",
+            label: "PTR2E.ActorSheet.Tabs.effects.label",
+        },
+    };
+
+    _getTabs() {
+        for (const v of Object.values(this.tabs)) {
+            v.active = this.tabGroups[v.group] === v.id;
+            v.cssClass = v.active ? "active" : "";
+        }
+        return this.tabs;
+    }
+
     override async _prepareContext(options?: foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>){
-        const context = await super._prepareContext(options);
+        const context = await super._prepareContext(options) as Record<string, unknown>;
+
+        context.actor = this.actor;
+        context.source = this.actor._source;
+        context.fields = this.actor.system.schema.fields;
+        context.baseFields = this.actor.schema.fields;
+        context.tabs = this._getTabs();
 
         return context;
     }
@@ -83,13 +185,6 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             return this;
         }
         return super.close(options) as Promise<this>;
-    }
-
-    override async _preClose(options: foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>): Promise<void> {
-        await super._preClose(options);
-        
-        // Submit the form if it's open
-        this.element.dispatchEvent(new SubmitEvent("submit", {cancelable: true}));
     }
 
     override async _renderFrame(options: foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>): Promise<HTMLElement> {

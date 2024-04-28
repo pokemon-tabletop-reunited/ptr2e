@@ -8,7 +8,7 @@ export class DocumentSheetV2<TDocument extends foundry.abstract.Document> extend
     protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {
         event.preventDefault();
         const { handler, closeOnSubmit } = config;
-        const element = this.element as HTMLFormElement
+        const element = (event.currentTarget ?? this.element) as HTMLFormElement
 
         $(element).find("tags ~ input").each((_i, input) => {
             if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";

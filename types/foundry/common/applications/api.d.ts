@@ -825,24 +825,6 @@ export class DocumentSheetV2<
     ): Record<string, unknown>;
 }
 
-export class ActorSheetV2<
-    TDocument extends Actor = Actor,
-    TRenderOptions extends DocumentSheetRenderOptions = DocumentSheetRenderOptions,
-    TConfiguration extends DocumentSheetConfiguration = DocumentSheetConfiguration,
-> extends DocumentSheetV2<TDocument, TRenderOptions, TConfiguration> {
-    /**
-     * The Actor document managed by this sheet.
-     * @type {ClientDocument}
-     */
-    get actor(): TDocument;
-
-    /**
-     * If this sheet manages the ActorDelta of an unlinked Token, reference that Token document.
-     * @type {TokenDocument|null}
-     */
-    get token(): TokenDocument | null;
-}
-
 export {
     ApplicationConfiguration,
     ApplicationPosition,

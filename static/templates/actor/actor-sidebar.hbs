@@ -1,0 +1,51 @@
+<aside class="sidebar">
+    <div class="inputs">
+        <div class="hp-current">
+            <label for="system.health.value">{{localize fields.health.fields.value.label}} {{localize "PTR2E.FIELDS.health.short"}}</label>
+            {{formInput fields.health.fields.value value=actor.system.health.value localized=true}}
+        </div>
+        <div class="hp-max">
+            <label for="system.health.max">{{localize fields.health.fields.max.label}} {{localize "PTR2E.FIELDS.health.short"}}</label>
+            {{formInput fields.health.fields.max value=actor.system.health.max localized=true disabled=true}}
+        </div>
+    </div>
+    <div class="inputs">
+        <div class="pp-current">
+            <label for="system.powerPoints.value">{{localize fields.powerPoints.fields.value.label}} {{localize "PTR2E.FIELDS.powerPoints.short"}}</label>
+            {{formInput fields.powerPoints.fields.value value=actor.system.powerPoints.value localized=true}}
+        </div>
+        <div class="pp-max">
+            <label for="system.powerPoints.max">{{localize fields.powerPoints.fields.max.label}} {{localize "PTR2E.FIELDS.powerPoints.short"}}</label>
+            {{formInput fields.powerPoints.fields.max value=actor.system.powerPoints.max localized=true disabled=true}}
+        </div>
+    </div>
+    <div class="experience">
+        <div class="xp-current">
+            <label for="system.advancement.experience.value">{{localize fields.advancement.fields.experience.fields.current.label}}</label>
+            {{formInput fields.advancement.fields.experience.fields.current value=actor.system.advancement.experience.current localized=true}}
+        </div>
+        <div class="xp-diff">
+            <label for="system.advancement.experience.diff">{{localize fields.advancement.fields.experience.fields.diff.label}}</label>
+            {{formInput fields.advancement.fields.experience.fields.diff value=actor.system.advancement.experience.diff localized=true disabled=true}}
+        </div>
+        <div class="xp-next">
+            <label for="system.advancement.experience.next">{{localize fields.advancement.fields.experience.fields.next.label}}</label>
+            {{formInput fields.advancement.fields.experience.fields.next value=actor.system.advancement.experience.next localized=true disabled=true}}
+        </div>
+        <div class="level">
+            <label for="system.advancement.level">{{localize fields.advancement.fields.level.label}}</label>
+            {{formInput fields.advancement.fields.level value=actor.system.advancement.level localized=true disabled=true}}
+        </div>
+    </div>
+    <ul>
+        <li>Stages</li>
+        <li>Movement</li>
+        <li>Favourite Skills</li>
+    </ul>
+    <div class="perk-web-button">
+        <button class="perk-web-button" data-action="open-perk-web">
+            <i class="fas fa-sitemap"></i>
+            <label>{{localize "PTR2E.ActorSheet.Buttons.perkWeb"}}</label>
+        </button>
+    </div>
+</aside>

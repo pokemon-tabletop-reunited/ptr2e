@@ -1,6 +1,7 @@
 {
     "COMBAT.ResetEncounter": "Reset Encounter",
-    "TYPES.Actor.character": "Character",
+    "TYPES.Actor.humanoid": "Humanoid",
+    "TYPES.Actor.pokemon": "Pokémon",
     "TYPES.Item.ability": "Ability",
     "TYPES.Item.consumable": "Consumable",
     "TYPES.Item.container": "Container",
@@ -206,7 +207,33 @@
             "FIELDS": {}
         },
         "ActorSheet": {
-            "StatsFormTitle": "Stats Manager"
+            "StatsFormTitle": "Stats Manager",
+            "Tabs": {
+                "overview": {
+                    "label": "Overview"
+                },
+                "actions": {
+                    "label": "Actions"
+                },
+                "inventory": {
+                    "label": "Inventory"
+                },
+                "clocks": {
+                    "label": "Crafting & Clocks"
+                },
+                "perks": {
+                    "label": "Perks & Abilities"
+                },
+                "biography": {
+                    "label": "Biography"
+                },
+                "effects": {
+                    "label": "Effects"
+                }
+            },
+            "Buttons": {
+                "perkWeb": "Open Perk Web"
+            }
         },
         "ActorSidebar": {
             "Party": {
@@ -417,10 +444,6 @@
                 "label": "Action Cost",
                 "hint": "The action cost to activate the Action."
             },
-            "powerPoints": {
-                "label": "PP Cost",
-                "hint": "The number of Power Points the Action uses up when activated."
-            },
             "trigger": {
                 "label": "Trigger",
                 "hint": "The trigger of the Action. (if any)"
@@ -624,6 +647,53 @@
                 "secondary": {
                     "label": "Secondary Movement"
                 }
+            },
+            "powerPoints": {
+                "label": "PP Cost",
+                "hint": "The number of Power Points the Action uses up when activated.",
+                "short": "PP",
+                "value": {
+                    "label": "Current",
+                    "hint": "The number of Power Points the Move uses."
+                },
+                "max": {
+                    "label": "Max",
+                    "hint": "The maximum number of Power Points the Move can have."
+                }
+            },
+            "health": {
+                "label": "Health",
+                "hint": "The health of the actor.",
+                "short": "HP",
+                "value": {
+                    "label": "Current",
+                    "hint": "The health value of the actor."
+                },
+                "max": {
+                    "label": "Max",
+                    "hint": "The maximum health value of the actor."
+                }
+            },
+            "experience": {
+                "label": "Experience",
+                "hint": "The experience of the actor.",
+                "short": "EXP",
+                "current": {
+                    "label": "Current EXP",
+                    "hint": "The current experience value of the actor."
+                },
+                "next": {
+                    "label": "Next EXP Req.",
+                    "hint": "The experience value required to reach the next level."
+                },
+                "diff": {
+                    "label": "EXP to Next",
+                    "hint": "The experience value required to reach the next level."
+                }
+            },
+            "level": {
+                "label": "Level",
+                "hint": "The level of the actor."
             }
         },
         "ItemSheet": {
