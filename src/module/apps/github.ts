@@ -8,6 +8,7 @@ class GithubManager {
         move: "ptr2e.core-moves",
         species: "ptr2e.core-species",
         ability: "ptr2e.core-abilities",
+        perk: "ptr2e.core-perks",
     } as const;
 
     static async getExistingItem<TDocument extends ItemPTR2e>(
@@ -187,10 +188,11 @@ class GithubManager {
             return;
         }
 
+        const isPack = document === existing;
         const itemData = document.toObject();
         const existingData = existing.toObject();
 
-        const diff = GithubManager.getDiffableItem(itemData, existingData);
+        const diff = isPack ? itemData as Record<string, any> : GithubManager.getDiffableItem(itemData, existingData);
         if (fu.isEmpty(diff)) {
             ui.notifications.info(`No changes to commit`);
             return;
