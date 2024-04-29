@@ -315,7 +315,8 @@
       "quadraped",
       "aura-user",
       "medium",
-      "glow"
+      "glow",
+      "lumbering"
     ],
     "diet": [],
     "abilities": {
@@ -337,12 +338,16 @@
     },
     "movement": {
       "primary": [
-        "type": "overland"
-        "value": 9
+        {
+          "type": "flight",
+          "value": 9
+        }
       ],
       "secondary": [
-        "type": "flight"
-        "value": 12
+        {
+          "type": "overland",
+          "value": 6
+        }
       ]
     },
     "skills": {
