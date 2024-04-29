@@ -55,26 +55,5 @@ export default function HasEmbed<BaseClass extends TemplateConstructor>(baseClas
         }
     }
 
-    interface TemplateClass {
-        /**
-         * A slug for the item, derived from its name.
-         * @defaultValue `slugify(this.name)`
-         * @remarks
-         * This is a unique identifier for the item within its parent actor.
-         * If the item's name changes, the slug should be automatically updated.
-         * If the slug is manually set, it should be unique within the actor's items.
-         * @example
-         * ```typescript
-         * const item = new ItemPTR2e({ name: 'Flashlight' });
-         * console.log(item.slug); // 'flashlight'
-         * ```
-         */
-        slug: string;
-
-        _source: InstanceType<typeof baseClass>['_source'] & {
-            slug: string;
-        };
-    }
-
     return TemplateClass;
 }

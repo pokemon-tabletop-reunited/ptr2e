@@ -1,5 +1,5 @@
 import { ItemPTR2e, ItemSystemPTR } from "@item";
-import { htmlQueryAll } from "@utils";
+import { htmlQueryAll, sluggify } from "@utils";
 import { DocumentSheetConfiguration, DocumentSheetV2, Tab } from "./document.ts";
 import Tagify from "@yaireo/tagify";
 import GithubManager from "@module/apps/github.ts";
@@ -13,7 +13,7 @@ export default class ItemSheetPTR2eV2<
         {
             classes: ["move-sheet"],
             position: {
-                height: 450,
+                height: 500,
                 width: 550,
             },
             actions: {
@@ -55,18 +55,22 @@ export default class ItemSheetPTR2eV2<
         overview: {
             id: "overview",
             template: this.overviewTemplate,
+            scrollable: [".scroll"],
         },
         details: {
             id: "details",
             template: this.detailsTemplate,
+            scrollable: [".scroll"]
         },
         actions: {
             id: "actions",
             template: "/systems/ptr2e/templates/items/parts/item-actions.hbs",
+            scrollable: [".scroll"]
         },
         effects: {
             id: "effects",
             template: "/systems/ptr2e/templates/items/parts/item-effects.hbs",
+            scrollable: [".scroll"]
         },
     };
 
@@ -142,6 +146,22 @@ export default class ItemSheetPTR2eV2<
         };
     }
 
+    override _prepareSubmitData(event: SubmitEvent, form: HTMLFormElement, formData: FormDataExtended): Record<string, unknown> {
+        const submitData = super._prepareSubmitData(event, form, formData);
+
+        if(
+            "system" in submitData &&
+            submitData.system &&
+            typeof submitData.system === "object" &&
+            "traits" in submitData.system &&
+            Array.isArray(submitData.system.traits)
+        )
+        // Traits are stored as an array of objects, but we only need the values
+        submitData.system.traits = submitData.system.traits.map((trait: { value: string }) => sluggify(trait.value));
+
+        return submitData;
+    }
+
     override async _renderFrame(options: DocumentSheetConfiguration<ItemPTR2e<TSystem>>) {
         const frame = await super._renderFrame(options);
 
@@ -179,7 +199,7 @@ export default class ItemSheetPTR2eV2<
                 "input.ptr2e-tagify"
             )) {
                 new Tagify(input, {
-                    enforceWhitelist: true,
+                    enforceWhitelist: false,
                     keepInvalidTags: false,
                     editTags: false,
                     tagTextProp: "label",

@@ -1,34 +1,31 @@
 {
-	"_id": "xCIgc97ppcW9O2ib",
-	"name": "Color Change",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "color-change",
-		"actions": [
-			{
-				"slug": "color-change",
-				"name": "Color Change",
-				"description": "Your Type changes to match the Type of the triggering attack. Passive: Your Stealth skill checks have one more degree of success.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.xCIgc97ppcW9O2ib"
-		}
-	},
-	"effects": []
+    "name": "Color Change",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Color Change",
+                "slug": "color-change",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 1
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Your Type changes to match the Type of the triggering attack. Passive: Your Stealth skill checks have one more degree of success.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "QRDtQirkxXZCa9ze",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

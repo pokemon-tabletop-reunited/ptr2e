@@ -1,35 +1,32 @@
 {
-	"_id": "SDDvHKW5Pxig1lEy",
-	"name": "Grassy Surge",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "grassy-surge",
-		"actions": [
-			{
-				"slug": "grassy-surge",
-				"name": "Grassy Surge",
-				"description": "Connection - Grassy Terrain. When using Grassy Terrain, the user can spend an additional 2 PP to increase the number of rounds Grassy Terrain persists by 2.",
-				"traits": [
-					"connection",
-					"terrain"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.SDDvHKW5Pxig1lEy"
-		}
-	},
-	"effects": []
+    "name": "Grassy Surge",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Grassy Surge",
+                "slug": "grassy-surge",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Grassy Terrain. Increase the number of rounds Grassy Terrain persists by 2.",
+        "traits": [
+            "terrain",
+            "connection"
+        ]
+    },
+    "_id": "LQSdA5lGPPygYbHz",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

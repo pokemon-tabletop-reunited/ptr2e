@@ -1,34 +1,31 @@
 {
-	"_id": "E1Fs9iudPExj5T6M",
-	"name": "Limber",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "limber",
-		"actions": [
-			{
-				"slug": "limber",
-				"name": "Limber",
-				"description": "The user is immune to the Paralyzed condition. The user auto-succeeds on an escape check for the Grappled condition.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.E1Fs9iudPExj5T6M"
-		}
-	},
-	"effects": []
+    "name": "Limber",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Limber",
+                "slug": "limber",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is immune to the Paralyzed condition. The user auto-succeeds on an escape check for the Grappled condition.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "Ww2aGVKEhRUZsUyQ",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

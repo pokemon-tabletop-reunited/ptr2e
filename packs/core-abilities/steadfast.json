@@ -1,32 +1,29 @@
 {
-	"_id": "6X4POO9x2LC8yhT3",
-	"name": "Steadfast",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "steadfast",
-		"actions": [
-			{
-				"slug": "steadfast",
-				"name": "Steadfast",
-				"description": "While the user is affected by the Flinched condition, their default SPD stage is increased to +2.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.6X4POO9x2LC8yhT3"
-		}
-	},
-	"effects": []
+    "name": "Steadfast",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Steadfast",
+                "slug": "steadfast",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While the user is Flinched, their default SPD stage is increased by +2.",
+        "traits": []
+    },
+    "_id": "nuIaubvLczbJZ919",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

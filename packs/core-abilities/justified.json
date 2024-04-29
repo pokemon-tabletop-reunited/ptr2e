@@ -1,34 +1,31 @@
 {
-	"_id": "evXCq7iN8qUFxbjq",
-	"name": "Justified",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "justified",
-		"actions": [
-			{
-				"slug": "justified",
-				"name": "Justified",
-				"description": "The user's ATK stage is increased by +1 for 5 activations.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.evXCq7iN8qUFxbjq"
-		}
-	},
-	"effects": []
+    "name": "Justified",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Justified",
+                "slug": "justified",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's ATK stage is increased by +1 for 5 activations.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "ZmNfzSQDBObV24f9",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

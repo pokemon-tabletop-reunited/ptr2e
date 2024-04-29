@@ -95,7 +95,7 @@ class SpeciesSystem extends SpeciesExtension {
                     validate: (d) => (d as number) >= 0,
                     label: `PTR2E.Attributes.spe.Label`,
                 }),
-            }),
+            }, {label: "PTR2E.FIELDS.stats.label"}),
             types: new fields.SetField(
                 new SlugField({
                     required: true,
@@ -174,7 +174,7 @@ class SpeciesSystem extends SpeciesExtension {
             }),
             movement: new fields.SchemaField({
                 primary: new fields.ArrayField(new fields.SchemaField({
-                    type: new SlugField({ required: true }),
+                    type: new SlugField({ required: true, blank: true, nullable: false, initial: ""}),
                     value: new fields.NumberField({ required: true, min: 0 }),
                 }), {
                     required: true,
@@ -182,7 +182,7 @@ class SpeciesSystem extends SpeciesExtension {
                     label: "PTR2E.FIELDS.movement.primary.label",
                 }),
                 secondary: new fields.ArrayField(new fields.SchemaField({
-                    type: new SlugField({ required: true }),
+                    type: new SlugField({ required: true, blank: true, nullable: false, initial: ""}),
                     value: new fields.NumberField({ required: true, min: 0 }),
                 }), {
                     required: true,

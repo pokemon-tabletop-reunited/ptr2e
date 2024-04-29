@@ -1,35 +1,32 @@
 {
-	"_id": "JQEpgLALSwb0uxpE",
-	"name": "Delta Stream",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "delta-stream",
-		"actions": [
-			{
-				"slug": "delta-stream",
-				"name": "Delta Stream",
-				"description": "When the user is active on the field, the Weather is changed to Windstorm (T3 Windy). This weather persists while the user with this ability is active. When the user faints or switches out the weather will change to (T2 Windy) for 5 rounds.",
-				"traits": [
-					"legendary",
-					"weather"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.JQEpgLALSwb0uxpE"
-		}
-	},
-	"effects": []
+    "name": "Delta Stream",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Delta Stream",
+                "slug": "delta-stream",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "field",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The Weather is changed to Cyclone. When the user faints or switches out the weather will change to Gale for 5 rounds.",
+        "traits": [
+            "legendary",
+            "weather"
+        ]
+    },
+    "_id": "y1eR8IFVYROXwg5e",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

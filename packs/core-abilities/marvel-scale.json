@@ -1,34 +1,31 @@
 {
-	"_id": "FdEDZETEgkHtXQZK",
-	"name": "Marvel Scale",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "marvel-scale",
-		"actions": [
-			{
-				"slug": "marvel-scale",
-				"name": "Marvel Scale",
-				"description": "While the user is affected by a Major Status Condition, the user's DEF stat is increased by 50%",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.FdEDZETEgkHtXQZK"
-		}
-	},
-	"effects": []
+    "name": "Marvel Scale",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Marvel Scale",
+                "slug": "marvel-scale",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While the user is affected by a Major Status Condition, the user's Base DEF is increased by 50%.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "ewOSQkUvTbtJzS8G",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

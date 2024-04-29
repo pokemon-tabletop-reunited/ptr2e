@@ -1,34 +1,31 @@
 {
-	"_id": "2o8GqSmbDa4PZWrs",
-	"name": "Iron Barbs",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "iron-barbs",
-		"actions": [
-			{
-				"slug": "iron-barbs",
-				"name": "Iron Barbs",
-				"description": "When the user is hit by a contact attack, the attacker takes a Tick of HP damage.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.2o8GqSmbDa4PZWrs"
-		}
-	},
-	"effects": []
+    "name": "Iron Barbs",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Iron Barbs",
+                "slug": "iron-barbs",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The source of the triggering attack takes 2 Ticks of HP damage, and loses -1 ATK stage for 5 Activations.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "9m2kLbRwHSLBipdk",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,34 +1,31 @@
 {
-	"_id": "goGnZzMHxewgeRXP",
-	"name": "Unseen Fist",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "unseen-fist",
-		"actions": [
-			{
-				"slug": "unseen-fist",
-				"name": "Unseen Fist",
-				"description": "The user's contact attacks ignore [Shield] attack effects.",
-				"traits": [
-					"legendary"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.goGnZzMHxewgeRXP"
-		}
-	},
-	"effects": []
+    "name": "Unseen Fist",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Unseen Fist",
+                "slug": "unseen-fist",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's [Contact] attacks ignore [Shield] attack effects.",
+        "traits": [
+            "legendary"
+        ]
+    },
+    "_id": "bm790HBkNzxkz4BS",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

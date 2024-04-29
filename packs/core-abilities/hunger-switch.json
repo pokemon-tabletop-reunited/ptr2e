@@ -1,34 +1,31 @@
 {
-	"_id": "ZDap3IgNApbhP88h",
-	"name": "Hunger Switch",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "hunger-switch",
-		"actions": [
-			{
-				"slug": "hunger-switch",
-				"name": "Hunger Switch",
-				"description": "At the end of the user's activations, they will alternate between Full Belly Mode Forme and Hangry Mode Forme. While in Full Belly Mode, consuming an equipped [Food] Item will give +1 DEF and SPDEF stages for 3 activations. While in Hangry Mode, consuming an equipped [Food] Item will give +1 ATK and SPATK stages for 3 activations.",
-				"traits": [
-					"forme-change"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.ZDap3IgNApbhP88h"
-		}
-	},
-	"effects": []
+    "name": "Hunger Switch",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Hunger Switch",
+                "slug": "hunger-switch",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "At the end of the user's activations, they will alternate between Full Belly Mode Forme and Hangry Mode Forme. While in Full Belly Mode, consuming an equipped [Food] Item will give +1 DEF and SPDEF stages for 3 activations. While in Hangry Mode, consuming an equipped [Food] Item will give +1 ATK and SPATK stages for 3 activations.",
+        "traits": [
+            "forme-change"
+        ]
+    },
+    "_id": "VWxK07GlPb65B1lj",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

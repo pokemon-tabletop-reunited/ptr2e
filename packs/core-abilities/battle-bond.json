@@ -1,34 +1,31 @@
 {
-	"_id": "FP9ZDWqjP5PQKI8y",
-	"name": "Battle Bond",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "battle-bond",
-		"actions": [
-			{
-				"slug": "battle-bond",
-				"name": "Battle Bond",
-				"description": "You change into your Battle Bond Forme.",
-				"traits": [
-					"forme-change"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.FP9ZDWqjP5PQKI8y"
-		}
-	},
-	"effects": []
+    "name": "Battle Bond",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Battle Bond",
+                "slug": "battle-bond",
+                "type": "generic",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 5
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user undergoes Phenomenal Transformation that it is elligible for, ignoring the standard activation requirements until the end of combat, or they Faint.",
+        "traits": [
+            "forme-change"
+        ]
+    },
+    "_id": "CtnwA8rGECl3TMkB",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

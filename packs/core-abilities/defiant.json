@@ -1,32 +1,29 @@
 {
-	"_id": "lDIbCUw9IZ95q1Dr",
-	"name": "Defiant",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "defiant",
-		"actions": [
-			{
-				"slug": "defiant",
-				"name": "Defiant",
-				"description": "The user's SPATK stage increases by +2 for 5 activations.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.lDIbCUw9IZ95q1Dr"
-		}
-	},
-	"effects": []
+    "name": "Defiant",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Defiant",
+                "slug": "defiant",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's ATK stage increases by +2 for 5 activations.",
+        "traits": []
+    },
+    "_id": "KZ9125C8TGOpz4k8",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,34 +1,31 @@
 {
-	"_id": "QORIJXUCdKn36T2Y",
-	"name": "Rain Dish",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "rain-dish",
-		"actions": [
-			{
-				"slug": "rain-dish",
-				"name": "Rain Dish",
-				"description": "While Rainy Weather is active, the user recovers a Tick of HP at the end of each of their activations.",
-				"traits": [
-					"healing"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.QORIJXUCdKn36T2Y"
-		}
-	},
-	"effects": []
+    "name": "Rain Dish",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Rain Dish",
+                "slug": "rain-dish",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While Rain Weather is active, the user recovers a Tick of HP at the end of each of their activations.",
+        "traits": [
+            "healing"
+        ]
+    },
+    "_id": "FDaqtEGwC7VqcnJ7",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

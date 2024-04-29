@@ -1,34 +1,31 @@
 {
-	"_id": "RPPvTBoXcak63sMy",
-	"name": "Pressure",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "pressure",
-		"actions": [
-			{
-				"slug": "pressure",
-				"name": "Pressure",
-				"description": "All enemy creatures within 10m of the user spend an additional 50% PP on all actions that use PP.",
-				"traits": [
-					"aura"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.RPPvTBoXcak63sMy"
-		}
-	},
-	"effects": []
+    "name": "Pressure",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Pressure",
+                "slug": "pressure",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "enemy-aura",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "All enemy creatures within range of the user spend an additional 50% PP on all actions that use PP.",
+        "traits": [
+            "aura"
+        ]
+    },
+    "_id": "jdKafD6O593nwk5F",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

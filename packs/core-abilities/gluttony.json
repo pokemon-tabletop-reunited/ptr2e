@@ -1,32 +1,29 @@
 {
-	"_id": "DPVJV9Kvdb0UgE3l",
-	"name": "Gluttony",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "gluttony",
-		"actions": [
-			{
-				"slug": "gluttony",
-				"name": "Gluttony",
-				"description": "The user can equip two additional [Food] items as Belt items, and can consume equipped [Food] items as a Free Action while their health is lower than 1/2 their Max HP",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.DPVJV9Kvdb0UgE3l"
-		}
-	},
-	"effects": []
+    "name": "Gluttony",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Gluttony",
+                "slug": "gluttony",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user can equip two additional [Food] items as Belt items, and can consume equipped [Food] items as a Free Action while their HP is 50% or lower.",
+        "traits": []
+    },
+    "_id": "5ucdQiQk6sT4y81S",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

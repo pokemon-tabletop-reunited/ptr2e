@@ -1,34 +1,31 @@
 {
-	"_id": "QnGA0VUcZHhiUzvg",
-	"name": "Magnet Pull",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "magnet-pull",
-		"actions": [
-			{
-				"slug": "magnet-pull",
-				"name": "Magnet Pull",
-				"description": "Steel-type creatures within 5m of the user are Bound and Slowed.",
-				"traits": [
-					"friendly"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.QnGA0VUcZHhiUzvg"
-		}
-	},
-	"effects": []
+    "name": "Magnet Pull",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Magnet Pull",
+                "slug": "magnet-pull",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "emanation",
+                    "distance": 5,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Steel-Type creatures in range are Stuck.",
+        "traits": [
+            "friendly"
+        ]
+    },
+    "_id": "LniVbrH8RkxZ5YNc",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

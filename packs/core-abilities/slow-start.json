@@ -1,34 +1,31 @@
 {
-	"_id": "4UaXBs6i7GxX5i8k",
-	"name": "Slow Start",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "slow-start",
-		"actions": [
-			{
-				"slug": "slow-start",
-				"name": "Slow Start",
-				"description": "The user's default ATK and Speed stage are -4. After each of the user's activations, the user's default ATK and Speed stage increase by 1. After combat or upon Fainting, the user's default ATK and Speed stage reset to -4.",
-				"traits": [
-					"legendary"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.4UaXBs6i7GxX5i8k"
-		}
-	},
-	"effects": []
+    "name": "Slow Start",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Slow Start",
+                "slug": "slow-start",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's default ATK and SPD stages are -4. After each of the user's activations, the user's default ATK and SPD stage increase by 1.",
+        "traits": [
+            "legendary"
+        ]
+    },
+    "_id": "qCqv4YASsFxQhGjp",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

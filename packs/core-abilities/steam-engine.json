@@ -1,32 +1,29 @@
 {
-	"_id": "hVRJDucvpI3iADHq",
-	"name": "Steam Engine",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "steam-engine",
-		"actions": [
-			{
-				"slug": "steam-engine",
-				"name": "Steam Engine",
-				"description": "After damage is applied, the user's Speed stage increases by +3 for 5 activations.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.hVRJDucvpI3iADHq"
-		}
-	},
-	"effects": []
+    "name": "Steam Engine",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Steam Engine",
+                "slug": "steam-engine",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 4
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's SPD stage increases by +3 for 5 activations.",
+        "traits": []
+    },
+    "_id": "0J1EQ5ruyo8cmCss",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

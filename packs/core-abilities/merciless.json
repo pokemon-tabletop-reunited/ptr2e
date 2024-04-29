@@ -1,32 +1,29 @@
 {
-	"_id": "LsiV6942eWpOBVwv",
-	"name": "Merciless",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "merciless",
-		"actions": [
-			{
-				"slug": "merciless",
-				"name": "Merciless",
-				"description": "If the user's attack hits a target afflicted with Poison or Bad Poison, it is a Critical Hit.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.LsiV6942eWpOBVwv"
-		}
-	},
-	"effects": []
+    "name": "Merciless",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Merciless",
+                "slug": "merciless",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 1
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 20,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The triggering attack is made into is a Critical Hit.",
+        "traits": []
+    },
+    "_id": "xtzHIBmntFKfiBhL",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

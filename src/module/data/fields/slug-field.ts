@@ -8,7 +8,7 @@ class SlugField<
     THasInitial extends boolean = boolean,
 > extends StrictStringField<string, string, TRequired, TNullable, THasInitial> {
     constructor(options: SlugFieldOptions<TRequired, TNullable, THasInitial> = {}) {
-        options.blank = false;
+        options.blank ??= false;
         options.camel ??= null;
         super(options);
     }

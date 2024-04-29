@@ -1,32 +1,29 @@
 {
-	"_id": "lzH6I9IyAxnbK51x",
-	"name": "Pickup",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "pickup",
-		"actions": [
-			{
-				"slug": "pickup",
-				"name": "Pickup",
-				"description": "The user can perform a Sprint maneuver to move towards the item. If the user is adjacent to the item at the end of this movement or when the ability is triggered, they pick up and equip the item if able. As a Downtime Action with a duration of 1 day, the user can explore the nearby area and roll their Luck. On a success, they find an item on the Pickup table. If the user is an owned Pokemon, they use their trainers Luck for the Pickup roll.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.lzH6I9IyAxnbK51x"
-		}
-	},
-	"effects": []
+    "name": "Pickup",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Pickup",
+                "slug": "pickup",
+                "type": "downtime",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "object",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user freely moves up to a Movement Score of their choice towards a [Hazard]. If the user is adjacent to the [Hazard] at the end of this movement, the [Hazard] is cleared.\n\nAs a Downtime Activity, the user can explore the nearby area and roll their Luck. On a success, they find an item on the Pickup table. If the user is an owned Pokemon, they use their trainers Luck for the Pickup roll.",
+        "traits": []
+    },
+    "_id": "X2yN5oEVsfXzA6f9",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

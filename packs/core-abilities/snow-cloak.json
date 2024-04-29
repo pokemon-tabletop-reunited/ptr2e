@@ -1,35 +1,32 @@
 {
-	"_id": "sxhEg72xb1ux2nxm",
-	"name": "Snow Cloak",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "snow-cloak",
-		"actions": [
-			{
-				"slug": "snow-cloak",
-				"name": "Snow Cloak",
-				"description": "While Snowy Weather is active, all incoming attacks against the user have 20% reduced ACC. The user is immune to the negative effects of Snowy Weather.",
-				"traits": [
-					"environ",
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.sxhEg72xb1ux2nxm"
-		}
-	},
-	"effects": []
+    "name": "Snow Cloak",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Snow Cloak",
+                "slug": "snow-cloak",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While Snow Weather is active, the user has +1 default EVA. The user is immune to the negative effects of Snow Weather.",
+        "traits": [
+            "environ",
+            "defensive"
+        ]
+    },
+    "_id": "Cj83ZAzmMoaT7F6a",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

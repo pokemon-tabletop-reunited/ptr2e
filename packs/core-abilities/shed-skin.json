@@ -1,32 +1,29 @@
 {
-	"_id": "KxKzHPTzdF5VtxXV",
-	"name": "Shed Skin",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "shed-skin",
-		"actions": [
-			{
-				"slug": "shed-skin",
-				"name": "Shed Skin",
-				"description": "Major Status Conditions affecting the user are cured if their duration is 2 or less turns.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.KxKzHPTzdF5VtxXV"
-		}
-	},
-	"effects": []
+    "name": "Shed Skin",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Shed Skin",
+                "slug": "shed-skin",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Major Status Conditions affecting the user are cured if their duration is 2 or less turns.",
+        "traits": []
+    },
+    "_id": "CVV1zMcenDFfhNXP",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,34 +1,31 @@
 {
-	"_id": "xVUV9OxZZZYA98oX",
-	"name": "Good as Gold",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "good-as-gold",
-		"actions": [
-			{
-				"slug": "good-as-gold",
-				"name": "Good as Gold",
-				"description": "The user is unaffected by Status-category attacks that target it. It may still be affected by Status Conditions and other effects caused by [Weather], [Terrain], [Hazard], Physical- and Special-Category attacks, and abilities.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.xVUV9OxZZZYA98oX"
-		}
-	},
-	"effects": []
+    "name": "Good as Gold",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Good as Gold",
+                "slug": "good-as-gold",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is unaffected by Status-category attacks that target it.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "SZZYJZzS2xxX8c0V",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

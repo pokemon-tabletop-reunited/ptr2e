@@ -1,34 +1,31 @@
 {
-	"_id": "tv8DMZulPfoAkCop",
-	"name": "Filter",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "filter",
-		"actions": [
-			{
-				"slug": "filter",
-				"name": "Filter",
-				"description": "Super-effective damage against the user is reduced by 25%.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.tv8DMZulPfoAkCop"
-		}
-	},
-	"effects": []
+    "name": "Filter",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Filter",
+                "slug": "filter",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Super-effective damage against the user is reduced by 25%.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "nbXOkus3If98hnqk",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

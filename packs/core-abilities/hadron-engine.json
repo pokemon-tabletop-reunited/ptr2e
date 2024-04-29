@@ -1,35 +1,32 @@
 {
-	"_id": "ZRC7XF4Mj2n7DXY8",
-	"name": "Hadron Engine",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "hadron-engine",
-		"actions": [
-			{
-				"slug": "hadron-engine",
-				"name": "Hadron Engine",
-				"description": "At the start of combat, or when the user switches in, the terrain is changed to Electric Terrain and remains Electric Terrain while the user is active on the field. Additionally, the user's SPATK stat increases by 33% while Electric Terrain is active. If the user uses Electro Drift while on Electric Terrain, their Speed stage increases by +1 for 2 activations. If the user Faints or is switched out, current active Electric Terrain lasts 3 rounds.",
-				"traits": [
-					"legendary",
-					"terrain"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.ZRC7XF4Mj2n7DXY8"
-		}
-	},
-	"effects": []
+    "name": "Hadron Engine",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Hadron Engine",
+                "slug": "hadron-engine",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "field",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The terrain is changed to Electric Terrain and remains Electric Terrain while the user is active on the field. Additionally, the user's Base SPATK stat increases by 33% while Electric Terrain is active. If the user uses Electro Drift while on Electric Terrain, their SPD stage increases by +1 for 5 activations. If the user Faints or is switched out, current active Electric Terrain lasts 5 rounds.",
+        "traits": [
+            "legendary",
+            "terrain"
+        ]
+    },
+    "_id": "UScGyuR6ChUTiTsk",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

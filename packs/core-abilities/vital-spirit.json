@@ -1,34 +1,31 @@
 {
-	"_id": "yoeuDHqhstOWriAP",
-	"name": "Vital Spirit",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "vital-spirit",
-		"actions": [
-			{
-				"slug": "vital-spirit",
-				"name": "Vital Spirit",
-				"description": "The user is immune to the Sleep condition and Bad Sleep. The user's ignores the effects of Weary 1.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.yoeuDHqhstOWriAP"
-		}
-	},
-	"effects": []
+    "name": "Vital Spirit",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Vital Spirit",
+                "slug": "vital-spirit",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is immune to the Drowsy condition and Nightmares. The user ignores the effects of Weary 1.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "SAVDBmLRCTRvzk4C",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

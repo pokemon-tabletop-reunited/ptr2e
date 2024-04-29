@@ -1,32 +1,29 @@
 {
-	"_id": "ywEAynyNKYg6CvZk",
-	"name": "Anger Shell",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "anger-shell",
-		"actions": [
-			{
-				"slug": "anger-shell",
-				"name": "Anger Shell",
-				"description": "The user gains +1 ATK, SPATK, and SPD stages and loses -1 DEF and SPDEF stages for 5 activations.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.ywEAynyNKYg6CvZk"
-		}
-	},
-	"effects": []
+    "name": "Anger Shell",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Anger Shell",
+                "slug": "anger-shell",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user gains +1 ATK, SPATK, and SPD stages and loses -1 DEF and SPDEF stages for 5 activations.",
+        "traits": []
+    },
+    "_id": "smn3M5QpH7toXscZ",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

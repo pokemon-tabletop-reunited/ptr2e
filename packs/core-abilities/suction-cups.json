@@ -1,34 +1,31 @@
 {
-	"_id": "7KKsOEzPNysRs5ph",
-	"name": "Suction Cups",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "suction-cups",
-		"actions": [
-			{
-				"slug": "suction-cups",
-				"name": "Suction Cups",
-				"description": "The user is immune to the [Push] effect and cannot be affected by any forced movement. The user's Climb skill checks have one more degree of success.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.7KKsOEzPNysRs5ph"
-		}
-	},
-	"effects": []
+    "name": "Suction Cups",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Suction Cups",
+                "slug": "suction-cups",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is immune to the [Push] effect and cannot be affected by any forced movement. The user's Climb skill checks have one more degree of success.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "M6VG70s1AdYJOpjr",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

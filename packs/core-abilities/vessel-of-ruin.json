@@ -1,35 +1,33 @@
 {
-	"_id": "qWbUiXJPeclKHS9X",
-	"name": "Vessel of Ruin",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "vessel-of-ruin",
-		"actions": [
-			{
-				"slug": "vessel-of-ruin",
-				"name": "Vessel of Ruin",
-				"description": "All other creatures have their SPATK stat reduced by 25%. This reduction happens before any stage changes.",
-				"traits": [
-					"legendary",
-					"aura"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.qWbUiXJPeclKHS9X"
-		}
-	},
-	"effects": []
+    "name": "Vessel of Ruin",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Vessel of Ruin",
+                "slug": "vessel-of-ruin",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "field",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Ruination. All other creatures have their SPATK stat reduced by 25%. This reduction happens before any stage changes.",
+        "traits": [
+            "legendary",
+            "aura",
+            "connection"
+        ]
+    },
+    "_id": "zpvnpMiFQvKFwtP5",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

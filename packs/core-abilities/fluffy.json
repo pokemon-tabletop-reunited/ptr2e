@@ -1,34 +1,31 @@
 {
-	"_id": "vMMhf9g4a6VojlUw",
-	"name": "Fluffy",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "fluffy",
-		"actions": [
-			{
-				"slug": "fluffy",
-				"name": "Fluffy",
-				"description": "The user freely moves up to half of a Movement speed of their choice away from the attacker without triggering Interrupt Actions. If the user is an owned Pokemon, they may freely switch out and be replaced by another owned Pokemon from their party.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.vMMhf9g4a6VojlUw"
-		}
-	},
-	"effects": []
+    "name": "Fluffy",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Fluffy",
+                "slug": "fluffy",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user takes 50% less damage from [Contact] attacks and 100% more damage from Fire-Type attacks and effects.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "dF1Y8VyGkyD4otT1",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

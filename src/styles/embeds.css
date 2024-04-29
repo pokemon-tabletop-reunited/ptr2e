@@ -76,6 +76,21 @@ aside[role="tooltip"].attack figure header.traits tags[readonly] span.tagify__in
 .chat-message .weapon-embed figure header.traits tags[readonly] span.tagify__input {
   display: none;
 }
+aside[role="tooltip"].attack figure header .dexNumber,
+.chat-message .move-embed figure header .dexNumber,
+.chat-message .effect-embed figure header .dexNumber,
+.chat-message .ability-embed figure header .dexNumber,
+.chat-message .consumable-embed figure header .dexNumber,
+.chat-message .container-embed figure header .dexNumber,
+.chat-message .effect-item-embed figure header .dexNumber,
+.chat-message .equipment-embed figure header .dexNumber,
+.chat-message .gear-embed figure header .dexNumber,
+.chat-message .perk-embed figure header .dexNumber,
+.chat-message .species-embed figure header .dexNumber,
+.chat-message .weapon-embed figure header .dexNumber {
+  font-size: smaller;
+  color: #6b6b6b;
+}
 aside[role="tooltip"].attack figure aside img,
 .chat-message .move-embed figure aside img,
 .chat-message .effect-embed figure aside img,
@@ -396,6 +411,92 @@ aside[role="tooltip"].attack figure content.effect-embed .details fieldset artic
 .chat-message .weapon-embed fieldset {
   border-color: var(--color-light-6);
   border-radius: 8px;
+}
+.chat-message .move-embed content.species-embed,
+.chat-message .effect-embed content.species-embed,
+.chat-message .ability-embed content.species-embed,
+.chat-message .consumable-embed content.species-embed,
+.chat-message .container-embed content.species-embed,
+.chat-message .effect-item-embed content.species-embed,
+.chat-message .equipment-embed content.species-embed,
+.chat-message .gear-embed content.species-embed,
+.chat-message .perk-embed content.species-embed,
+.chat-message .species-embed content.species-embed,
+.chat-message .weapon-embed content.species-embed {
+  border: unset;
+  background: unset;
+}
+.chat-message .move-embed content.species-embed fieldset,
+.chat-message .effect-embed content.species-embed fieldset,
+.chat-message .ability-embed content.species-embed fieldset,
+.chat-message .consumable-embed content.species-embed fieldset,
+.chat-message .container-embed content.species-embed fieldset,
+.chat-message .effect-item-embed content.species-embed fieldset,
+.chat-message .equipment-embed content.species-embed fieldset,
+.chat-message .gear-embed content.species-embed fieldset,
+.chat-message .perk-embed content.species-embed fieldset,
+.chat-message .species-embed content.species-embed fieldset,
+.chat-message .weapon-embed content.species-embed fieldset {
+  border-color: var(--color-light-6);
+  border-radius: 8px;
+  background: #efe6d8;
+}
+.chat-message .move-embed content.species-embed main,
+.chat-message .effect-embed content.species-embed main,
+.chat-message .ability-embed content.species-embed main,
+.chat-message .consumable-embed content.species-embed main,
+.chat-message .container-embed content.species-embed main,
+.chat-message .effect-item-embed content.species-embed main,
+.chat-message .equipment-embed content.species-embed main,
+.chat-message .gear-embed content.species-embed main,
+.chat-message .perk-embed content.species-embed main,
+.chat-message .species-embed content.species-embed main,
+.chat-message .weapon-embed content.species-embed main {
+  grid-template-areas: "stats" "primary-movement" "secondary-movement";
+}
+content.species-embed {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+content.species-embed aside {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 44px;
+  margin: 0.25rem;
+  gap: 5px;
+}
+content.species-embed aside img {
+  border: unset;
+  border-radius: 50%;
+}
+content.species-embed main {
+  flex: 1 0 auto;
+  margin: 0 0.25rem;
+  display: grid;
+  grid-template-areas: "stats primary-movement" "stats secondary-movement";
+}
+content.species-embed main section.species-basestats {
+  grid-area: stats;
+}
+content.species-embed main section.species-primary-movement {
+  grid-area: primary-movement;
+}
+content.species-embed main section.species-secondary-movement {
+  grid-area: secondary-movement;
+}
+content.species-embed main section fieldset {
+  display: grid !important;
+  grid-template-columns: 70% 30%;
+  grid-auto-rows: 17px;
+  gap: 0.25rem;
+  height: 100%;
+}
+content.species-embed main section fieldset label {
+  font-weight: bold;
+}
+content.species-embed main section fieldset span {
+  text-align: center;
 }
 content.attack-embed {
   display: flex;

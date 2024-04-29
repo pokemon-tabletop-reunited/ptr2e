@@ -1,32 +1,29 @@
 {
-	"_id": "iAH4qcnQWy0RVXR3",
-	"name": "Ripen",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "ripen",
-		"actions": [
-			{
-				"slug": "ripen",
-				"name": "Ripen",
-				"description": "The healing effects of equipped Natural [Food] items are doubled for the user. As a Camp Action, the user can convert any equipped Natural [Food] items into ripened versions, doubling their effects. Ripened [Food] items are not affected further by this ability.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.iAH4qcnQWy0RVXR3"
-		}
-	},
-	"effects": []
+    "name": "Ripen",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Ripen",
+                "slug": "ripen",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The healing effects of equipped [Natural][Food] items are doubled for the user. As a Camp Action, the user can convert any equipped [Natural][Food] items into ripened versions, doubling their effects. [Ripened][Food] items are not affected further by this ability.",
+        "traits": []
+    },
+    "_id": "6h3lVuXJ9taCzrJL",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

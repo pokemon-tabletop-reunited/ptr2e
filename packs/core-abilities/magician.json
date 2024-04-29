@@ -1,32 +1,29 @@
 {
-	"_id": "0hPdwofKdnLXfrnV",
-	"name": "Magician",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "magician",
-		"actions": [
-			{
-				"slug": "magician",
-				"name": "Magician",
-				"description": "The user steals one equipped Accessory or Belt slot item from the target. The user must have an empty equipment slot to use this ability.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.0hPdwofKdnLXfrnV"
-		}
-	},
-	"effects": []
+    "name": "Magician",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Magician",
+                "slug": "magician",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 5
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user steals one equipped Accessory or Belt slot item from the triggering target. The user must have an empty equipment slot to use this ability.",
+        "traits": []
+    },
+    "_id": "mK6cxMmulCLWka6p",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

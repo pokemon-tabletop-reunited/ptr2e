@@ -1,32 +1,29 @@
 {
-	"_id": "EzBasWEOZ3Cr43sX",
-	"name": "Speed Boost",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "speed-boost",
-		"actions": [
-			{
-				"slug": "speed-boost",
-				"name": "Speed Boost",
-				"description": "When using the Dash action, the mount of extra movement allowance the user gains is doubled.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.EzBasWEOZ3Cr43sX"
-		}
-	},
-	"effects": []
+    "name": "Speed Boost",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Speed Boost",
+                "slug": "speed-boost",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "When using the Rush action, the amount of extra Movement the user gains is doubled.",
+        "traits": []
+    },
+    "_id": "HE2M2HRkvid33eKh",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

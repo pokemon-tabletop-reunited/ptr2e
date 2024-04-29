@@ -1,34 +1,31 @@
 {
-	"_id": "DkqlM3lRIbW3HSLA",
-	"name": "Static",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "static",
-		"actions": [
-			{
-				"slug": "static",
-				"name": "Static",
-				"description": "When the user is hit by a attack that makes contact, the attacking creature has a 30% chance of becoming Paralyzed 5.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.DkqlM3lRIbW3HSLA"
-		}
-	},
-	"effects": []
+    "name": "Static",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Static",
+                "slug": "static",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The triggering creature has a 30% chance of becoming Paralyzed 5.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "M4eJrT3Xxlfkcd0K",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

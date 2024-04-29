@@ -1,34 +1,31 @@
 {
-	"_id": "uzWrYjWljyzEdH75",
-	"name": "Inner Focus",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "inner-focus",
-		"actions": [
-			{
-				"slug": "inner-focus",
-				"name": "Inner Focus",
-				"description": "The user is immune to the Flinched condition, and also is unaffected by [Social] Ability effects.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.uzWrYjWljyzEdH75"
-		}
-	},
-	"effects": []
+    "name": "Inner Focus",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Inner Focus",
+                "slug": "inner-focus",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is immune to the Flinched condition, and also is unaffected by [Social] Ability effects.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "LYwMmWdmkiGaBeQL",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

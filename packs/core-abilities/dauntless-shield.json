@@ -1,34 +1,31 @@
 {
-	"_id": "44odMNWlUgJlJT7M",
-	"name": "Dauntless Shield",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "dauntless-shield",
-		"actions": [
-			{
-				"slug": "dauntless-shield",
-				"name": "Dauntless Shield",
-				"description": "The user's default DEF stage is +1. At the start of combat, or when switched in, the user raises their DEF stage by +1 for 5 activations.",
-				"traits": [
-					"legendary"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.44odMNWlUgJlJT7M"
-		}
-	},
-	"effects": []
+    "name": "Dauntless Shield",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Dauntless Shield",
+                "slug": "dauntless-shield",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Iron Head. The triggering creature gains Taunted 7, and the user gains Rebound 7. Passive:  When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Bash for the remainder of the combat. The user's default DEF stage is +1.",
+        "traits": [
+            "legendary"
+        ]
+    },
+    "_id": "ewkaQ2v4SzZYEWLb",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

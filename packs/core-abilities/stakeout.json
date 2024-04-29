@@ -1,32 +1,29 @@
 {
-	"_id": "e2pbNcQgYzc8EnIr",
-	"name": "Stakeout",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "stakeout",
-		"actions": [
-			{
-				"slug": "stakeout",
-				"name": "Stakeout",
-				"description": "The user's attacks will have double power against creatures who have switched in before the end of the round. This does not count for a creature that was switched in to replace a Fainted creature.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.e2pbNcQgYzc8EnIr"
-		}
-	},
-	"effects": []
+    "name": "Stakeout",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Stakeout",
+                "slug": "stakeout",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's attacks will have double power against creatures who have switched in or newly joined combat before the end of the current round. This does not count for a creature that was switched in to replace a Fainted creature.",
+        "traits": []
+    },
+    "_id": "zhIEg309KcUIQq1J",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,35 +1,32 @@
 {
-	"_id": "CWuo2IoolTPd5fsu",
-	"name": "Sand Stream",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "sand-stream",
-		"actions": [
-			{
-				"slug": "sand-stream",
-				"name": "Sand Stream",
-				"description": "Connection - Sandstorm. When the using Sandstorm, the user can spend an additional 2 PP to have the weather become (T2 Sandy) for 5 rounds instead of Sandy Weather.",
-				"traits": [
-					"connection",
-					"weather"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.CWuo2IoolTPd5fsu"
-		}
-	},
-	"effects": []
+    "name": "Sand Stream",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Sand Stream",
+                "slug": "sand-stream",
+                "type": "generic",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "field",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Sandstorm. The weather becomes Duststorm for 5 rounds instead of Dusty.",
+        "traits": [
+            "connection",
+            "weather"
+        ]
+    },
+    "_id": "syfx1pO9rbLxicR2",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

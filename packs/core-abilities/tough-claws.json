@@ -1,32 +1,29 @@
 {
-	"_id": "jAhxzK7hGJPS8osk",
-	"name": "Tough Claws",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "tough-claws",
-		"actions": [
-			{
-				"slug": "tough-claws",
-				"name": "Tough Claws",
-				"description": "The user's contact attacks have 30% increased power.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.jAhxzK7hGJPS8osk"
-		}
-	},
-	"effects": []
+    "name": "Tough Claws",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Tough Claws",
+                "slug": "tough-claws",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's [Contact] attacks have 30% increased power.",
+        "traits": []
+    },
+    "_id": "M8xYrzdDzUODX1iY",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,8 +1,43 @@
 <section class="tab sheet-body {{tabs.details.cssClass}}" data-tab="details" data-group="sheet">
-    <fieldset>
-        <legend>
-            Details
-        </legend>
-    
-    </fieldset>
+    <div class="scroll">
+        <fieldset>
+            <legend>
+                Basic Information
+            </legend>
+            {{formField fields.prerequisites value=source.system.prerequisites localize=true}}
+            {{formField fields.cost value=source.system.cost localize=true}}
+
+            {{formField fields.description value=source.system.description toggled=true localize=true}}
+        </fieldset>
+        <fieldset>
+            <legend>
+                Design
+            </legend>
+            {{formField fields.design.fields.arena value=source.system.design.arena localize=true}}
+            {{formField fields.design.fields.approach value=source.system.design.approach localize=true}}
+            {{formField fields.design.fields.archetype value=source.system.design.archetype localize=true}}
+        </fieldset>
+        <fieldset>
+            <legend>
+                Node Configuration (DEBUG VALUES)
+            </legend>
+            {{formField fields.node.fields.i value=source.system.node.i localize=true}}
+            {{formField fields.node.fields.j value=source.system.node.j localize=true}}
+            {{formField fields.node.fields.hidden value=source.system.node.hidden localize=true}}
+
+            {{formField fields.node.fields.connected value=source.system.node.connected localize=true}}
+            <fieldset>
+                <legend>
+                    Display Configuration
+                </legend>
+                {{formField fields.node.fields.config.fields.alpha value=source.system.node.config.alpha localize=true}}
+                {{formField fields.node.fields.config.fields.backgroundColor value=source.system.node.config.backgroundColor localize=true}}
+                {{formField fields.node.fields.config.fields.borderColor value=source.system.node.config.borderColor localize=true}}
+                {{formField fields.node.fields.config.fields.borderWidth value=source.system.node.config.borderWidth localize=true}}
+                {{formField fields.node.fields.config.fields.texture value=source.system.node.config.texture localize=true}}
+                {{formField fields.node.fields.config.fields.tint value=source.system.node.config.tint localize=true}}
+                {{formField fields.node.fields.config.fields.scale value=source.system.node.config.scale localize=true}}
+            </fieldset>
+        </fieldset>
+    </div>
 </section>

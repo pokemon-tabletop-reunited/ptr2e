@@ -1,34 +1,31 @@
 {
-	"_id": "PeHwdsV5MaEFCobv",
-	"name": "Motor Drive",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "motor-drive",
-		"actions": [
-			{
-				"slug": "motor-drive",
-				"name": "Motor Drive",
-				"description": "The user takes no damage from the triggering attack and is unaffected by the triggering attack's effect. Then the user raises their SPD stage by +1 for 5 activations.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.PeHwdsV5MaEFCobv"
-		}
-	},
-	"effects": []
+    "name": "Motor Drive",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Motor Drive",
+                "slug": "motor-drive",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user takes no damage from the triggering attack and is unaffected by the triggering attack's effect. Then the user raises their SPD stage by +1 for 5 activations.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "8LJCPumwRzMmjsUl",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

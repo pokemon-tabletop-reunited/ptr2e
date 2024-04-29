@@ -1,34 +1,31 @@
 {
-	"_id": "ppXWoOanr9Gud00B",
-	"name": "Solar Power",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "solar-power",
-		"actions": [
-			{
-				"slug": "solar-power",
-				"name": "Solar Power",
-				"description": "While Sunny Weather is active, the user's SPATK stat is increased by 50%. In Sunny Weather, the user loses a Tick of HP at the end of each of their activations.",
-				"traits": [
-					"environ"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.ppXWoOanr9Gud00B"
-		}
-	},
-	"effects": []
+    "name": "Solar Power",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Solar Power",
+                "slug": "solar-power",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While Sun Weather is active, the user's SPATK stat is increased by 50%. In Sunny Weather, the user loses a Tick of HP at the end of each of their activations.",
+        "traits": [
+            "environ"
+        ]
+    },
+    "_id": "AtmfysPJTvfwYcDc",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

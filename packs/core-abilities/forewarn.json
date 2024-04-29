@@ -1,34 +1,31 @@
 {
-	"_id": "7jZEBxPm9imX9gQb",
-	"name": "Forewarn",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "forewarn",
-		"actions": [
-			{
-				"slug": "forewarn",
-				"name": "Forewarn",
-				"description": "The user is considered to have +1 EVA stage for attacks that deal Super-effective damage that target the user.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.7jZEBxPm9imX9gQb"
-		}
-	},
-	"effects": []
+    "name": "Forewarn",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Forewarn",
+                "slug": "forewarn",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is considered to have +1 EVA stage for attacks that deal super-effective damage that target the user.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "D3tS2tP0CMZeP97b",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

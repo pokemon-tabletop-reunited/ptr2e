@@ -1,34 +1,31 @@
 {
-	"_id": "WVOz8ZkxZ2z7NKQR",
-	"name": "Shield Dust",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "shield-dust",
-		"actions": [
-			{
-				"slug": "shield-dust",
-				"name": "Shield Dust",
-				"description": "The user is immune to the secondary effects of damaging moves.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.WVOz8ZkxZ2z7NKQR"
-		}
-	},
-	"effects": []
+    "name": "Shield Dust",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Shield Dust",
+                "slug": "shield-dust",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is immune to the secondary effects of Physical or Special-Category attacks.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "vKLlWbWyyLGYXDGH",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

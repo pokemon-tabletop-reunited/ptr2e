@@ -1,32 +1,29 @@
 {
-	"_id": "lawUiSlonmiwPdWu",
-	"name": "Heavy Metal",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "heavy-metal",
-		"actions": [
-			{
-				"slug": "heavy-metal",
-				"name": "Heavy Metal",
-				"description": "The user's WC is increased by +3. The user is immune to being Pushed.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.lawUiSlonmiwPdWu"
-		}
-	},
-	"effects": []
+    "name": "Heavy Metal",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Heavy Metal",
+                "slug": "heavy-metal",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's WC is increased by +3.",
+        "traits": []
+    },
+    "_id": "hph4XgnJeqNs3sWO",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,34 +1,31 @@
 {
-	"_id": "NDnqFczr2a8xaHOm",
-	"name": "Liquid Ooze",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "liquid-ooze",
-		"actions": [
-			{
-				"slug": "liquid-ooze",
-				"name": "Liquid Ooze",
-				"description": "If the user is hit by a [Drain] attack, the attacking creature takes damage equal to the amount healed by the [Drain] attack instead of healing.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.NDnqFczr2a8xaHOm"
-		}
-	},
-	"effects": []
+    "name": "Liquid Ooze",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Liquid Ooze",
+                "slug": "liquid-ooze",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 20,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The triggering creature takes damage equal to the amount healed by the [Drain] attack instead of healing.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "ewaPSjjByIFbUaBN",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

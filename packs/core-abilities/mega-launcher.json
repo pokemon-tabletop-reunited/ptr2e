@@ -1,32 +1,29 @@
 {
-	"_id": "dRDCWcFB52IBShU4",
-	"name": "Mega Launcher",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "mega-launcher",
-		"actions": [
-			{
-				"slug": "mega-launcher",
-				"name": "Mega Launcher",
-				"description": "The power of the user's [Pulse] attacks is increased by 50%.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.dRDCWcFB52IBShU4"
-		}
-	},
-	"effects": []
+    "name": "Mega Launcher",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Mega Launcher",
+                "slug": "mega-launcher",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The power of the user's [Pulse] attacks is increased by 30%.",
+        "traits": []
+    },
+    "_id": "xqLD1goIc5uzoBOW",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

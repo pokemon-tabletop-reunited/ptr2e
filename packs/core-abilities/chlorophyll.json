@@ -1,34 +1,31 @@
 {
-	"_id": "r4xpKrRDOLIC0QuJ",
-	"name": "Chlorophyll",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "chlorophyll",
-		"actions": [
-			{
-				"slug": "chlorophyll",
-				"name": "Chlorophyll",
-				"description": "Your Speed stat is doubled in Sunny Weather.",
-				"traits": [
-					"environ"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.r4xpKrRDOLIC0QuJ"
-		}
-	},
-	"effects": []
+    "name": "Chlorophyll",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Chlorophyll",
+                "slug": "chlorophyll",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's SPD stat is doubled in Sunny Weather.",
+        "traits": [
+            "environ"
+        ]
+    },
+    "_id": "WYo0NxITeIfSXA1j",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

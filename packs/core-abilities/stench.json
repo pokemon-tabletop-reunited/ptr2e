@@ -1,32 +1,29 @@
 {
-	"_id": "NHaUFXD6Urs840V2",
-	"name": "Stench",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "stench",
-		"actions": [
-			{
-				"slug": "stench",
-				"name": "Stench",
-				"description": "Whenever the user hits with a damaging move, the affected target has a 10% chance to become Flinched 5.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.NHaUFXD6Urs840V2"
-		}
-	},
-	"effects": []
+    "name": "Stench",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Stench",
+                "slug": "stench",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 5,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The target has a 10% chance to become Flinched 5.",
+        "traits": []
+    },
+    "_id": "ECP6LBPBTigx9aGi",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

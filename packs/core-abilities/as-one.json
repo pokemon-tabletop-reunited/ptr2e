@@ -1,36 +1,33 @@
 {
-	"_id": "i2wPDzOz21V3UIya",
-	"name": "As One",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "as-one",
-		"actions": [
-			{
-				"slug": "as-one",
-				"name": "As One",
-				"description": "During Camp, Calyrex can fuse or unfuse with either Glastrier or Spectrier to change Formes.",
-				"traits": [
-					"legendary",
-					"fusion",
-					"forme-change"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.i2wPDzOz21V3UIya"
-		}
-	},
-	"effects": []
+    "name": "As One",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "As One",
+                "slug": "as-one",
+                "type": "camping",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "During Camp, Calyrex can fuse or unfuse with either Glastrier or Spectrier to change Formes.",
+        "traits": [
+            "legendary",
+            "fusion",
+            "forme-change"
+        ]
+    },
+    "_id": "9Ny8yjIgDxu7DtTa",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,32 +1,29 @@
 {
-	"_id": "xoxSQDwNhCfOs8c3",
-	"name": "Big Pecks",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "big-pecks",
-		"actions": [
-			{
-				"slug": "big-pecks",
-				"name": "Big Pecks",
-				"description": "Your Flying-type contact attacks ignore stage changes and [Defensive] attack effects on their targets.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.xoxSQDwNhCfOs8c3"
-		}
-	},
-	"effects": []
+    "name": "Big Pecks",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Big Pecks",
+                "slug": "big-pecks",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's Flying-Type [Contact] attacks ignore stage changes and [Defensive] effects on their targets.",
+        "traits": []
+    },
+    "_id": "E9QUsUoXidXwovJl",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

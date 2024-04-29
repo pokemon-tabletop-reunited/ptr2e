@@ -1,32 +1,29 @@
 {
-	"_id": "JPIaGTwNuFMDX7Dg",
-	"name": "Keen Eye",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "keen-eye",
-		"actions": [
-			{
-				"slug": "keen-eye",
-				"name": "Keen Eye",
-				"description": "The user is immune to Negative ACC stage effects. When the user gains a Positive ACC stage effect, the duration is increased by 1 activation.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.JPIaGTwNuFMDX7Dg"
-		}
-	},
-	"effects": []
+    "name": "Keen Eye",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Keen Eye",
+                "slug": "keen-eye",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "When the user gains a positive ACC stage effect, the duration is increased by 1 activation. Passive:  The user is immune to negative ACC stage effects, and the user has +1 default ACC stage.",
+        "traits": []
+    },
+    "_id": "UopQHE33ziD2zX00",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -206,13 +206,4 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     }
 }
 
-//@ts-ignore
-class TraitSettingsRedirect extends FormApplication {
-    // @ts-ignore
-    override async render(force?: boolean | undefined, options?: RenderOptions | undefined): Promise<this> {
-        // @ts-ignore
-        return new TraitsSettingsMenu({}).render(true);
-    }
-}
-
-export {TraitSettingsRedirect, TraitsSettingsMenu}
+export {TraitsSettingsMenu}

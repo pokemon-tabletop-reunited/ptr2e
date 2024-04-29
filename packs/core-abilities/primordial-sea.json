@@ -1,35 +1,32 @@
 {
-	"_id": "FF6p2sYWNOr0qndp",
-	"name": "Primordial Sea",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "primordial-sea",
-		"actions": [
-			{
-				"slug": "primordial-sea",
-				"name": "Primordial Sea",
-				"description": "When the user is active on the field, the Weather is changed to (T3 Rainy). This weather persists while the user with this ability is active. When the user faints or switches out the weather will change to (T2 Rainy) for 5 rounds.",
-				"traits": [
-					"legendary",
-					"weather"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.FF6p2sYWNOr0qndp"
-		}
-	},
-	"effects": []
+    "name": "Primordial Sea",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Primordial Sea",
+                "slug": "primordial-sea",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "field",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The Weather is changed to Deluge. When the user faints or switches out the weather changes to Thunderstorm for 5 rounds.",
+        "traits": [
+            "legendary",
+            "weather"
+        ]
+    },
+    "_id": "bJoS4VWrxx8KrWLa",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

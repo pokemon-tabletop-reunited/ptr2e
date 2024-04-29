@@ -1,34 +1,31 @@
 {
-	"_id": "ZjFevfPVWbE82S8s",
-	"name": "Unaware",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "unaware",
-		"actions": [
-			{
-				"slug": "unaware",
-				"name": "Unaware",
-				"description": "The user ignores all stage changes on other creatures on the field.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.ZjFevfPVWbE82S8s"
-		}
-	},
-	"effects": []
+    "name": "Unaware",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Unaware",
+                "slug": "unaware",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user ignores all stage changes on other creatures on the field.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "GF8tOfbeNup4M651",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,32 +1,29 @@
 {
-	"_id": "uHO9qSQJtvfCgYqa",
-	"name": "Moxie",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "moxie",
-		"actions": [
-			{
-				"slug": "moxie",
-				"name": "Moxie",
-				"description": "The user's ATK stage is raised by +1 for 5 activations.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.uHO9qSQJtvfCgYqa"
-		}
-	},
-	"effects": []
+    "name": "Moxie",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Moxie",
+                "slug": "moxie",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's ATK stage is raised by +1 for 5 activations.",
+        "traits": []
+    },
+    "_id": "QWEo8P4eQmd6W2BO",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

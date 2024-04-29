@@ -1,34 +1,31 @@
 {
-	"_id": "Qf6tpe3TXH3Wg2Pt",
-	"name": "Gooey",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "gooey",
-		"actions": [
-			{
-				"slug": "gooey",
-				"name": "Gooey",
-				"description": "When the user is hit by a contact attack, the attacking creature's SPD stage is lowered by -1 for 5 activations.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.Qf6tpe3TXH3Wg2Pt"
-		}
-	},
-	"effects": []
+    "name": "Gooey",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Gooey",
+                "slug": "gooey",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The triggering creature's SPD stage is lowered by -1 for 5 activations.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "c5W8OEEsfTvfvTfD",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

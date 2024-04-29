@@ -1,32 +1,29 @@
 {
-	"_id": "26QyX0PLTmjZ24D5",
-	"name": "Mold Breaker",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "mold-breaker",
-		"actions": [
-			{
-				"slug": "mold-breaker",
-				"name": "Mold Breaker",
-				"description": "The user's attacks are unaffected by the effects of [Defensive] abilities.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.26QyX0PLTmjZ24D5"
-		}
-	},
-	"effects": []
+    "name": "Mold Breaker",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Mold Breaker",
+                "slug": "mold-breaker",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's attacks are unaffected by the effects of [Defensive] abilities.",
+        "traits": []
+    },
+    "_id": "kiiOYetnLNW3Ksd4",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }
