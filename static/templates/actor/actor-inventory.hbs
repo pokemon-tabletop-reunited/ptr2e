@@ -1,5 +1,38 @@
-<section class="tab sheet-body {{tabs.details.cssClass}}" data-tab="inventory" data-group="sheet">
-    <div class="scroll">
-        
+<section class="tab sheet-body {{tabs.inventory.cssClass}}" data-tab="inventory" data-group="sheet">
+    <div class="scroll inventory">
+        {{#each inventory as |items category|}}
+            <header>
+                <span class="item-name">{{category}}</span>
+                <span class="quantity">Quantity</span>
+                <div class="item-controls">
+                    <a data-action="create-item" data-tooltip="PTR2E.ActorSheet.CreateItem" data-types="{{category}}"><i
+                            class="fa-solid fa-fw fa-plus"></i></a>
+                </div>
+            </header>
+            <ul class="items" data-item-types="{{category}}">
+                {{#each items}}
+                <li data-item-id="{{this.id}}">
+                    <div class="item-name">
+                        <div class="item-image">
+                            <img src="{{this.img}}" title="{{this.name}}">
+                        </div>
+                        <div class="item-name rarity-{{this.system.rarity}}">{{this.name}}</div>
+                    </div>
+                    <div class="quantity">
+                        <a class="decrease" data-action="decrease-quantity" title="[Click] Decrease by 1<br>[Shift-Click] Decrease by 5<br>[Control-Click] Decrease by 10" draggable="false">–</a>
+                        <span>{{this.system.quantity}}</span>
+                        <a class="increase" data-action="increase-quantity" title="[Click] Increase by 1<br>[Shift-Click] Increase by 5<br>[Control-Click] Increase by 10" draggable="false">+</a>
+                    </div>
+                    <div class="item-controls">
+                        <a class="item-carry-type" data-tooltip="PTR2E.ActorSheet.Inventory.CarryType.OpenMenu" data-action="open-carry-type-menu" draggable="false"><i class="fa-solid {{this.system.carryTypeIcon}} fa-fw"></i></a>
+                        {{!-- <a data-action="toggle-identified" data-tooltip="PTR2E.identification.Mystify" draggable="false"><i class="fa-regular fa-question-circle fa-fw"></i></a> --}}
+                        <a data-action="edit-item" data-tooltip="PTR2E.ActorSheet.Inventory.EditItem" draggable="false"><i class="fa-solid fa-fw fa-edit"></i></a>
+                        <a data-action="delete-item" data-tooltip="PTR2E.ActorSheet.Inventory.DeleteItem" draggable="false"><i class="fa-solid fa-fw fa-trash"></i></a>
+                    </div>
+                </li>
+                {{/each}}
+            </ul>
+        {{/each}}
+
     </div>
 </section>

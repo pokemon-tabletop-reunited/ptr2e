@@ -1,9 +1,17 @@
-import { SpeciesPTR2e } from "@item";
+import { ItemPTR2e, ItemSystemPTR, SpeciesPTR2e } from "@item";
 import ActorPTR2e from "./base.ts";
 import { SpeciesDropSheet } from "./sheets/species-drop-sheet.ts";
 import { SpeciesSystemModel } from "@item/data/index.ts";
-import { sluggify } from "@utils";
+import { htmlQueryAll, sluggify } from "@utils";
 import { Tab } from "@item/sheets/document.ts";
+import { ActiveEffectPTR2e } from "@effects";
+import { ActorComponentKey, ActorComponents, ComponentPopout } from "./components/sheet.ts";
+import { EffectComponent } from "./components/effect-component.ts";
+import GearSystem from "@item/data/gear.ts";
+import WeaponSystem from "@item/data/weapon.ts";
+import ConsumableSystem from "@item/data/consumable.ts";
+import EquipmentSystem from "@item/data/equipment.ts";
+import ContainerSystem from "@item/data/container.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     foundry.applications.sheets.ActorSheetV2<
@@ -168,15 +176,93 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         context.source = this.actor._source;
         context.fields = this.actor.system.schema.fields;
         context.baseFields = this.actor.schema.fields;
+        context.effects = this.actor.effects.contents;
+        context.inventory = (() => {
+            const inventory: Record<string, ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]> = {};
+            for (const item of this.actor.items) {
+                const physicalItems = ["weapon", "gear", "consumable", "equipment", "container"]
+                function isTypeOfPhysicalItem(item: Item): item is ItemPTR2e<GearSystem | WeaponSystem | ConsumableSystem | EquipmentSystem | ContainerSystem, ActorPTR2e> {
+                    return physicalItems.includes(item.type);
+                }
+                if (isTypeOfPhysicalItem(item)) {
+                    const category = item.type;
+                    if (!inventory[category]) inventory[category] = [];
+                    inventory[category].push(item);
+                }
+            }
+            return inventory;
+        })();
         context.tabs = this._getTabs();
 
         return context;
     }
 
+    override _attachFrameListeners(): void {
+        super._attachFrameListeners();
+        this.element.addEventListener("drop", this._onDrop.bind(this));
+    }
+
     override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
         super._attachPartListeners(partId, htmlElement, options);
 
-        
+        for(const element of htmlQueryAll(htmlElement, ".can-popout")) {
+            const div = document.createElement("div");
+            div.classList.add("popout-control");
+            const component = element.dataset.component;
+            div.dataset.component = component;
+            div.dataset.tooltip = ActorComponents[component as ActorComponentKey].TOOLTIP;
+            div.innerHTML = `<i class="fas fa-external-link-alt"></i>`;
+            div.addEventListener("click", this._onPopout.bind(this));
+            element.appendChild(div);
+        }
+
+        if(partId === "effects") {
+            EffectComponent.attachListeners(htmlElement, this.actor);
+        }
+    }
+
+    async _onPopout(event: Event) {
+        event.preventDefault();
+        const target = event.currentTarget as HTMLElement;
+        const component = target.dataset.component as ActorComponentKey;
+        const sheet = new ComponentPopout({actor: this.actor, component});
+        sheet.render(true);
+    }
+
+    async _onDrop(event: DragEvent): Promise<any> {
+        event.preventDefault();
+        const data = TextEditor.getDragEventData<{ type: string }>(event);
+        const item = this.document;
+        const allowed = Hooks.call("dropItemSheetData", item, data, event);
+        if (allowed === false) return;
+
+        // Handle different data types
+        switch (data.type) {
+            case "ActiveEffect": {
+                return this._onDropActiveEffect(event, data);
+            }
+            case "Item": {
+                const item = await ItemPTR2e.fromDropData(data as any);
+                if(!item) return;
+                switch(item.type) {
+                    case "effect": {
+                        const effects = item.effects.map((effect) => effect.toObject());
+                        if(effects.length === 0) return;
+                        return ActiveEffectPTR2e.createDocuments(effects, {parent: this.document})
+                    }
+                    default: {
+                        return this.actor.createEmbeddedDocuments("Item", [item.toObject()]);
+                    }
+                }
+            }
+        }
+    }
+
+    async _onDropActiveEffect(_event: DragEvent, data: object) {
+        const effect = await ActiveEffectPTR2e.fromDropData(data);
+        if (!this.document.isOwner || !effect) return false;
+        if (effect.target === this.document) return false;
+        return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.document });
     }
 
     override async close(options: Partial<foundry.applications.api.ApplicationClosingOptions> = {}): Promise<this> {
