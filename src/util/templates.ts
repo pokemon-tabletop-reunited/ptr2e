@@ -11,6 +11,9 @@ export class HandlebarTemplates {
         "trait-partial": "systems/ptr2e/templates/partials/trait.hbs",
         "move-body": "systems/ptr2e/templates/items/embeds/move/move-body.hbs",
         "species-body": "systems/ptr2e/templates/items/embeds/species/species-body.hbs",
+
+        // All Actor Sheet Components
+        "actor-effect-component": "systems/ptr2e/templates/actor/components/actor-effect-component.hbs",
     }) as Record<string, string>;
 
     static async register() {

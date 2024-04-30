@@ -40,6 +40,351 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet prose-mirror .editor-container .editor-content {
   padding: 0.5rem;
 }
+.sheet.actor.v2 {
+  background: var(--appv2-background);
+}
+.sheet.actor.v2 .window-content {
+  display: grid;
+  grid-template-columns: 22% 78%;
+  grid-template-rows: 65px auto;
+  grid-template-areas: "header nav" "sidebar main";
+}
+.sheet.actor.v2 .window-content aside.actor-header {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 64px auto;
+  grid-template-rows: auto;
+  border-bottom: 1px solid var(--border-theme-color);
+  border-right: 1px solid var(--border-theme-color);
+}
+.sheet.actor.v2 .window-content aside.actor-header img {
+  flex: 0 0 64px;
+  height: 64px;
+  border: unset;
+}
+.sheet.actor.v2 .window-content aside.actor-header .title {
+  flex: 1 0 auto;
+  margin: 0 0.5rem;
+  align-self: center;
+}
+.sheet.actor.v2 .window-content nav.tabs {
+  grid-area: nav;
+  border: unset;
+  border-bottom: 1px solid var(--border-theme-color);
+  justify-content: space-evenly;
+  font-size: 25px;
+  margin: 0;
+  padding: 0.5rem;
+  gap: unset;
+}
+.sheet.actor.v2 .window-content nav.tabs > [data-tab] {
+  padding: 8px;
+}
+.sheet.actor.v2 .window-content aside.sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-theme-color);
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs > div {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: var(--hint-text-color);
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs label {
+  font-size: 12px;
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs input {
+  width: 80%;
+  align-self: center;
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-current,
+.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-current,
+.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-max,
+.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-max {
+  flex: 0 1 auto;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-theme-color);
+  column-gap: 0.5rem;
+  row-gap: 0.25rem;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience > div {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  color: var(--hint-text-color);
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience label {
+  flex: 1 0 40%;
+  align-content: center;
+  text-align: left;
+  font-size: 12px;
+  padding-left: 1rem;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience input {
+  flex: 0 1 40%;
+  align-self: center;
+  align-content: center;
+  margin-right: 0.5rem;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience .xp-current {
+  grid-area: xp-current;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience .xp-next {
+  grid-area: xp-next;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience .xp-diff {
+  grid-area: xp-diff;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience .level {
+  grid-area: level;
+}
+.sheet.actor.v2 .window-content aside.sidebar .perk-web-button {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button {
+  flex: 0 0 70%;
+}
+.sheet.actor.v2 .window-content .tab.active {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+.sheet.actor.v2 .window-content .tab.active fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  height: 100%;
+  background: var(--appv2-background);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+.sheet.actor.v2 .window-content .tab.active fieldset legend {
+  font-size: var(--font-size-15);
+  font-weight: bold;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .scroll.inventory {
+  grid-area: span 5 / span 3;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  gap: 0;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header {
+  align-items: center;
+  background: var(--appv2-background);
+  color: var(--appv2-text-color);
+  display: flex;
+  justify-content: end;
+  font-size: 0.625rem;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-top: 0.375rem;
+  padding: 0.25rem 0;
+  text-rendering: optimizeLegibility;
+  text-transform: uppercase;
+  width: 100%;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 4px 4px 0 0;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header:first-child {
+  margin-top: 0;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name {
+  padding-left: 0.5rem;
+  font-size: 1.125rem !important;
+  text-transform: capitalize;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header > :last-child {
+  padding-right: 0.25rem;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items {
+  border: 1px solid var(--border-theme-color);
+  border-top: unset;
+  border-radius: 0 0 4px 4px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: unset;
+  padding: 2px 0;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li:nth-child(odd) {
+  background: var(--appv2-background);
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li:last-child {
+  border-radius: 0 0 4px 4px;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name {
+  align-items: center;
+  display: flex;
+  flex: 2;
+  font-weight: 500;
+  font-size: 0.825rem;
+  gap: 0.25rem;
+  padding-right: 0.25rem;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name .item-image,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name .item-image {
+  display: flex;
+  flex: 0 0 1.75rem;
+  height: 1.75rem;
+  position: relative;
+  margin-left: 2px;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name .item-name,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name .item-name {
+  font-weight: 500;
+  margin: auto auto auto 0;
+  padding: 0.125rem;
+  word-break: break-word;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 4.25rem;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity .decrease,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity .decrease,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity .increase,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity .increase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  width: 1.125rem;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity span,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity span {
+  min-width: 2ch;
+  text-align: center;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls {
+  flex-basis: 4.75rem;
+  gap: 1px;
+  justify-content: end;
+  align-items: center;
+  display: flex;
+}
+.sheet.actor.v2 .window-content .tab.active .effects-display {
+  padding: 0.5rem;
+  grid-area: span 5 / span 3;
+}
+.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list {
+  list-style: none;
+  margin: 0 0.5rem;
+  padding: 0;
+}
+.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect {
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-theme-color);
+}
+.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .effect-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.sheet.actor.v2 .window-content .can-popout {
+  position: relative;
+}
+.sheet.actor.v2 .window-content .can-popout .popout-control {
+  position: absolute;
+  top: -9px;
+  right: -2px;
+  background: var(--appv2-background);
+  border: 1px solid var(--border-theme-color);
+  padding: 2px;
+  border-radius: 0 4px 0 4px;
+  cursor: pointer;
+}
+.sheet.actor.popout {
+  background: var(--appv2-background);
+}
+.sheet.actor.popout .effects-display {
+  padding: 0.5rem;
+}
+.sheet.actor.popout .effects-display ul.effect-list {
+  list-style: none;
+  margin: 0 0.5rem;
+  padding: 0;
+}
+.sheet.actor.popout .effects-display ul.effect-list li.effect {
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 250px;
+  border: 1px solid var(--border-theme-color);
+}
+.sheet.actor.popout .effects-display ul.effect-list li.effect .effect-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.sheet.actor.popout .effects-display ul.effect-list li.effect .name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.sheet.actor.popout fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  height: 100%;
+  background: var(--appv2-background);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+.sheet.actor.popout fieldset legend {
+  font-size: var(--font-size-15);
+  font-weight: bold;
+}
 .sheet.move-sheet,
 .sheet.species-sheet,
 .sheet.party-sheet,
@@ -1603,6 +1948,22 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   border: 1px solid var(--border-theme-color);
   border-radius: 8px;
   z-index: calc(var(--z-index-tooltip) - 1);
+}
+#perk-hud a.content-link {
+  color: black;
+}
+#perk-hud header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+#perk-hud footer {
+  margin-top: 0.5rem;
+  padding: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 /** Application V1 Styles **/
 .stats-chart-aside {

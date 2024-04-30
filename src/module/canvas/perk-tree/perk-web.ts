@@ -312,7 +312,7 @@ class PerkWeb extends PIXI.Container {
         }
 
         const color = styling?.color ?? (isHidden ? 0x888888 : 0x000000);
-        const width = styling?.width ?? 2;
+        const width = styling?.width ?? 3;
         const alpha = styling?.alpha ?? (isHidden ? 0.5 : 1);
 
         // Draw the edge
@@ -333,7 +333,7 @@ class PerkWeb extends PIXI.Container {
         }
         const isHidden = node1.perk.system.hidden || node2.perk.system.hidden;
         const color = styling?.color ?? (isHidden ? 0x888888 : 0x000000);
-        const width = styling?.width ?? 2;
+        const width = styling?.width ?? 3;
         const alpha = styling?.alpha ?? (isHidden ? 0.5 : 1);
 
         edge.clear();

@@ -6,6 +6,7 @@ import { default as TypeEffectiveness } from "../config/effectiveness.ts";
 import { PTRHook } from "./data.ts";
 import { ClockDatabase } from "@data";
 import { TraitsSettingsMenu } from "@module/apps/traits.ts";
+import ActorSheetPTRV2 from "@actor/sheetv2.ts";
 
 export const Init: PTRHook = {
     listen() {
@@ -70,7 +71,9 @@ export const Init: PTRHook = {
             // Register custom sheets
             {
                 Actors.unregisterSheet("core", ActorSheet);
-                Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: true })
+                Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: false })
+                //@ts-ignore
+                Actors.registerSheet("ptr2e", ActorSheetPTRV2, { types: ["humanoid", "pokemon"], makeDefault: true })
                 //@ts-ignore
                 Actors.registerSheet("ptr2e", PTRCONFIG.Actor.sheetClasses["ptu-actor"], { types: ["ptu-actor"], makeDefault: true })
 

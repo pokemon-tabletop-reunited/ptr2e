@@ -1,4 +1,3 @@
-import { ApplicationPosition } from "types/foundry/common/applications/api.js";
 import { PerkNode } from "./perk-node.ts";
 
 class PerkHUDV2 extends foundry.applications.api.HandlebarsApplicationMixin(
@@ -50,6 +49,14 @@ class PerkHUDV2 extends foundry.applications.api.HandlebarsApplicationMixin(
         return this.render(true);
     }
 
+    override async _renderHTML(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions) {
+        const rendered = await super._renderHTML(context, options);
+        for(const [key, value] of Object.entries(rendered)) {
+            rendered[key].innerHTML = await TextEditor.enrichHTML(value.innerHTML);
+        }
+        return rendered;
+    } 
+
     public clear(): void {
         let states = Application.RENDER_STATES;
         if (this.state <= states.NONE) return;
@@ -59,7 +66,7 @@ class PerkHUDV2 extends foundry.applications.api.HandlebarsApplicationMixin(
         this.close({ animate: false });
     }
 
-    override setPosition(): ApplicationPosition {
+    override setPosition(): foundry.applications.api.ApplicationPosition {
         if (!this._object) return this.position;
 
         const options = {
@@ -69,7 +76,7 @@ class PerkHUDV2 extends foundry.applications.api.HandlebarsApplicationMixin(
         return super.setPosition(options);
     }
 
-    override _updatePosition(position: ApplicationPosition) {
+    override _updatePosition(position: foundry.applications.api.ApplicationPosition) {
         const result = super._updatePosition(position);
         if (!this.element) return result;
 
