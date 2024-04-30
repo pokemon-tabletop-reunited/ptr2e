@@ -4,8 +4,9 @@ import { Hexagon } from "./hexagon.ts";
 import { PerkEditState, PerkNode } from "./perk-node.ts";
 import { PerkStore, PTRNode } from "./perks-store.ts";
 import { PerkHUD } from "./perk-hud.ts";
-import { ItemPTR2e, PerkPTR2e } from "@item";
+import { ItemPTR2e } from "@item";
 import { Path, PathStep } from "./perk-graph.ts";
+import { TilingSprite } from "pixi.js";
 
 class PerkWeb extends PIXI.Container {
     get activeNode() {
@@ -113,7 +114,7 @@ class PerkWeb extends PIXI.Container {
     }
 
     async close() {
-        if(this.editMode) await this.toggleEditMode();
+        if (this.editMode) await this.toggleEditMode();
 
         const actor = this.actor;
         this.actor = null;
@@ -122,7 +123,7 @@ class PerkWeb extends PIXI.Container {
 
         // Deactive UI
         this.perkHUD.clear();
-        this.controls.close({animate: false});
+        this.controls.close({ animate: false });
 
         this.canvas.hidden = true;
         this.stage.eventMode = "none";
@@ -148,7 +149,7 @@ class PerkWeb extends PIXI.Container {
         this.backgroundLayer = this.addChild(new PIXI.Container());
         this.foregroundLayer = this.addChild(new PIXI.Container());
 
-        this.background = this.backgroundLayer.addChild(this._drawBackground());
+        this.background = this.backgroundLayer.addChild(await this._drawBackground());
         // DEBUG Grid
         if (this.DEBUG) {
             this.grid = this.backgroundLayer.addChild(this._drawGrid());
@@ -170,19 +171,38 @@ class PerkWeb extends PIXI.Container {
         return this;
     }
 
-    protected _drawBackground() {
+    protected async _drawBackground() {
         const backgroundSize = 50000;
-        const background = new PIXI.Graphics();
-        background
-            .beginFill(0x000000, 0.1)
-            .drawRect(
-                -backgroundSize,
-                -backgroundSize,
-                backgroundSize + backgroundSize,
-                backgroundSize + backgroundSize
-            )
-            .endFill();
+
+        // Load the texture
+        const texture = (getTexture("/ui/denim075.png") as PIXI.Texture) ?? ((await loadTexture("/ui/denim075.png")) as PIXI.Texture);
+
+        // Create a tiling sprite with the texture
+        const background = new TilingSprite(texture, backgroundSize * 2, backgroundSize * 2);
+
+        // Position the sprite at the center of the background
+        background.x = -backgroundSize;
+        background.y = -backgroundSize;
+
         return background;
+
+        // const background = new PIXI.Graphics();
+        // background
+        //     .beginFill(0x000000, 0.1)
+        //     .drawRect(
+        //         -backgroundSize,
+        //         -backgroundSize,
+        //         backgroundSize + backgroundSize,
+        //         backgroundSize + backgroundSize
+        //     )
+        //     .endFill();
+
+        // const sprite = background.addChild(new PIXI.Sprite());
+        // sprite.texture =
+        //     (getTexture("/ui/denim075.png") as PIXI.Texture) ??
+        //     ((await loadTexture("/ui/denim075.png")) as PIXI.Texture);
+        
+        // return background;
     }
 
     protected _drawGrid() {
@@ -293,12 +313,16 @@ class PerkWeb extends PIXI.Container {
         }
     }
 
-    private _drawEdge(node1: PTRNode, node2: PTRNode, styling?: { color?: number; width?: number, alpha?: number}) {
+    private _drawEdge(
+        node1: PTRNode,
+        node2: PTRNode,
+        styling?: { color?: number; width?: number; alpha?: number }
+    ) {
         if (!node1.element) this._drawNode(node1);
         if (!node2.element) this._drawNode(node2);
 
         // If either node ain't visible, return
-        if(!node1.perk.system.visible || !node2.perk.system.visible) return;
+        if (!node1.perk.system.visible || !node2.perk.system.visible) return;
         const isHidden = node1.perk.system.hidden || node2.perk.system.hidden;
 
         // If the edge has already been drawn, return
@@ -325,7 +349,11 @@ class PerkWeb extends PIXI.Container {
     }
 
     // Redraw an edge between two nodes
-    public redrawEdge(node1: PTRNode, node2: PTRNode, styling?: { color?: number; width?: number, alpha?: number}) {
+    public redrawEdge(
+        node1: PTRNode,
+        node2: PTRNode,
+        styling?: { color?: number; width?: number; alpha?: number }
+    ) {
         const edge = this.collection.getEdge(node1, node2);
         if (!edge) {
             console.warn(`Could not find edge between ${node1.perk?.name} and ${node2.perk?.name}`);
@@ -461,37 +489,35 @@ class PerkWeb extends PIXI.Container {
 
     public connectNodes(node1: PerkNode, node2: PerkNode) {
         function updateItems() {
-            const updates: Record<string, {updates: (Record<string,unknown>)[], pack?: string}> = {
+            const updates: Record<string, { updates: Record<string, unknown>[]; pack?: string }> = {
                 world: {
-                    updates: []
-                }
+                    updates: [],
+                },
             };
             if (node1.node.perk) {
                 const connections = new Set(node1.node.connected);
-                if(node1.node.perk.pack) {
-                    updates[node1.node.perk.pack] ??= {updates: [], pack: node1.node.perk.pack};
+                if (node1.node.perk.pack) {
+                    updates[node1.node.perk.pack] ??= { updates: [], pack: node1.node.perk.pack };
                     updates[node1.node.perk.pack].updates.push({
                         _id: node1.node.perk._id,
                         "system.node.connected": Array.from(connections),
                     });
-                }
-                else {
+                } else {
                     updates.world.updates.push({
                         _id: node1.node.perk._id,
                         "system.node.connected": Array.from(connections),
-                    })
+                    });
                 }
             }
             if (node2.node.perk) {
                 const connections = new Set(node2.node.connected);
-                if(node2.node.perk.pack) {
-                    updates[node2.node.perk.pack] ??= {updates: [], pack: node2.node.perk.pack};
+                if (node2.node.perk.pack) {
+                    updates[node2.node.perk.pack] ??= { updates: [], pack: node2.node.perk.pack };
                     updates[node2.node.perk.pack].updates.push({
                         _id: node2.node.perk._id,
                         "system.node.connected": Array.from(connections),
                     });
-                }
-                else {
+                } else {
                     updates.world.updates.push({
                         _id: node2.node.perk._id,
                         "system.node.connected": Array.from(connections),
@@ -499,9 +525,9 @@ class PerkWeb extends PIXI.Container {
                 }
             }
             if (Object.keys(updates).length > 1) {
-                for(const pack in updates) {
-                    const {updates: docs, pack: packName} = updates[pack];
-                    Item.updateDocuments(docs, {pack: packName});
+                for (const pack in updates) {
+                    const { updates: docs, pack: packName } = updates[pack];
+                    Item.updateDocuments(docs, { pack: packName });
                 }
             } else if (updates.world.updates.length > 0) {
                 Item.updateDocuments(updates.world.updates);
@@ -592,7 +618,7 @@ class PerkWeb extends PIXI.Container {
             node.originalPosition = null;
             node.redrawEdges();
         } catch {
-            if(node.originalPosition) {
+            if (node.originalPosition) {
                 node.position.set(node.originalPosition.x, node.originalPosition.y);
                 node.redrawEdges();
             }
@@ -608,21 +634,21 @@ class PerkWeb extends PIXI.Container {
     public async toggleNodeVisibility(node: PerkNode) {
         await node.node.perk?.update({
             "system.node.hidden": !node.node.perk.system.hidden,
-        })
+        });
         return this.refresh({ nodeRefresh: true });
     }
 
     public toggleEditMode() {
         this.editMode = !this.editMode;
         if (this.editMode) {
-            this.perkHUD?.clear()
+            this.perkHUD?.clear();
             if (!ui.perksTab.popout || ui.perksTab.popout._minimized) ui.perksTab.renderPopout();
-            
-            if(game.settings.get("ptr2e", "dev-mode")) {
+
+            if (game.settings.get("ptr2e", "dev-mode")) {
                 const pack = game.packs.get("ptr2e.core-perks");
-                if(pack) {
-                    pack.configure({locked: false})
-                    pack.render(true, {top: 0, left: window.innerWidth - 310 - 350})
+                if (pack) {
+                    pack.configure({ locked: false });
+                    pack.render(true, { top: 0, left: window.innerWidth - 310 - 350 });
                 }
             }
 
@@ -631,11 +657,11 @@ class PerkWeb extends PIXI.Container {
         } else {
             ui.perksTab.popout?.close();
 
-            if(game.settings.get("ptr2e", "dev-mode")) {
+            if (game.settings.get("ptr2e", "dev-mode")) {
                 const pack = game.packs.get("ptr2e.core-perks");
-                if(pack) {
-                    pack.configure({locked: true})
-                    pack.apps.forEach(app => app.close())
+                if (pack) {
+                    pack.configure({ locked: true });
+                    pack.apps.forEach((app) => app.close());
                 }
             }
 
@@ -643,7 +669,7 @@ class PerkWeb extends PIXI.Container {
             this.app.renderer.background.alpha = 0.35;
         }
         if (this.activeNode) this.deactivateNode();
-        return this.refresh({nodeRefresh: true});
+        return this.refresh({ nodeRefresh: true });
     }
 
     private alignHUD() {
@@ -658,7 +684,7 @@ class PerkWeb extends PIXI.Container {
 
     protected async _onDrop(event: DragEvent): Promise<this> {
         event.preventDefault();
-        if(!this.editMode) return this;
+        if (!this.editMode) return this;
         const data = TextEditor.getDragEventData<
             DropCanvasData<string, ItemPTR2e> & { i: number; j: number }
         >(event);
@@ -711,38 +737,46 @@ class PerkWeb extends PIXI.Container {
     }
 
     public highlightCheapestPath(node1: PerkNode, node2?: PerkNode): void {
-        if(node2) {
+        if (node2) {
             const path = this.collection.graph.getCheapestPath(node1.node, node2.node);
-            if(path) this.highlightPath(path);
+            if (path) this.highlightPath(path);
             return;
         }
 
         const path = this.collection.graph.getPathToRoot(node1.node, "cheapest");
-        if(path) this.highlightPath(path);
+        if (path) this.highlightPath(path);
     }
 
     public highlightShortestPath(node1: PerkNode, node2?: PerkNode): void {
-        if(node2) {
+        if (node2) {
             const path = this.collection.graph.getShortestPath(node1.node, node2.node);
-            if(path) this.highlightPath(path);
+            if (path) this.highlightPath(path);
             return;
         }
 
         const path = this.collection.graph.getPathToRoot(node1.node, "shortest");
-        if(path) this.highlightPath(path);
+        if (path) this.highlightPath(path);
     }
 
     public highlightPath(path: Path): void {
         let current: PathStep | null = path.startStep;
-        while(current) {
+        while (current) {
             const element = current.node.entry.element;
-            if(element) {
+            if (element) {
                 const isRoot = element.node.perk.system.node.type === "root";
                 element.scale.set(isRoot ? 1.8 : 1.2);
                 element._drawBorder(0x008800, isRoot ? 7 : 3);
-                if(current.next) {
-                    const edge = this.collection.getEdge(current.node.entry, current.next.node.entry);
-                    if(edge) this.redrawEdge(current.node.entry, current.next.node.entry, {color: 0x008800, width: 4, alpha: 1});
+                if (current.next) {
+                    const edge = this.collection.getEdge(
+                        current.node.entry,
+                        current.next.node.entry
+                    );
+                    if (edge)
+                        this.redrawEdge(current.node.entry, current.next.node.entry, {
+                            color: 0x008800,
+                            width: 4,
+                            alpha: 1,
+                        });
                 }
             }
             current = current.next;
@@ -763,7 +797,7 @@ interface PerkWeb {
     backgroundLayer: PIXI.Container;
     foregroundLayer: PIXI.Container;
 
-    background: PIXI.Graphics;
+    background: TilingSprite;
     grid: PIXI.Graphics;
 
     nodes: PIXI.Container;
