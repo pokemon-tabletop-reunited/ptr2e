@@ -4,7 +4,7 @@ import { Hexagon } from "./hexagon.ts";
 import { PerkEditState, PerkNode } from "./perk-node.ts";
 import { PerkStore, PTRNode } from "./perks-store.ts";
 import { PerkHUD } from "./perk-hud.ts";
-import { ItemPTR2e } from "@item";
+import { ItemPTR2e, PerkPTR2e } from "@item";
 import { Path, PathStep } from "./perk-graph.ts";
 
 class PerkWeb extends PIXI.Container {
@@ -461,23 +461,50 @@ class PerkWeb extends PIXI.Container {
 
     public connectNodes(node1: PerkNode, node2: PerkNode) {
         function updateItems() {
-            const updates = [];
+            const updates: Record<string, {updates: (Record<string,unknown>)[], pack?: string}> = {
+                world: {
+                    updates: []
+                }
+            };
             if (node1.node.perk) {
                 const connections = new Set(node1.node.connected);
-                updates.push({
-                    _id: node1.node.perk._id,
-                    "system.node.connected": Array.from(connections),
-                });
+                if(node1.node.perk.pack) {
+                    updates[node1.node.perk.pack] ??= {updates: [], pack: node1.node.perk.pack};
+                    updates[node1.node.perk.pack].updates.push({
+                        _id: node1.node.perk._id,
+                        "system.node.connected": Array.from(connections),
+                    });
+                }
+                else {
+                    updates.world.updates.push({
+                        _id: node1.node.perk._id,
+                        "system.node.connected": Array.from(connections),
+                    })
+                }
             }
             if (node2.node.perk) {
                 const connections = new Set(node2.node.connected);
-                updates.push({
-                    _id: node2.node.perk._id,
-                    "system.node.connected": Array.from(connections),
-                });
+                if(node2.node.perk.pack) {
+                    updates[node2.node.perk.pack] ??= {updates: [], pack: node2.node.perk.pack};
+                    updates[node2.node.perk.pack].updates.push({
+                        _id: node2.node.perk._id,
+                        "system.node.connected": Array.from(connections),
+                    });
+                }
+                else {
+                    updates.world.updates.push({
+                        _id: node2.node.perk._id,
+                        "system.node.connected": Array.from(connections),
+                    });
+                }
             }
-            if (updates.length) {
-                Item.updateDocuments(updates);
+            if (Object.keys(updates).length > 1) {
+                for(const pack in updates) {
+                    const {updates: docs, pack: packName} = updates[pack];
+                    Item.updateDocuments(docs, {pack: packName});
+                }
+            } else if (updates.world.updates.length > 0) {
+                Item.updateDocuments(updates.world.updates);
             }
         }
 
