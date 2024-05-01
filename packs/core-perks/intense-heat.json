@@ -1,70 +1,58 @@
 {
-  "name": "Intense Heat",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "[Fire]"
-    ],
-    "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "[Fire Type]"
-    },
-    "description": "Your Fire-Type moves gain a Burn Effect Range of 20%, or expand your existing effect range by 10%",
-    "actions": [
-      {
-        "name": "Intense Heat",
-        "slug": "intense-heat",
-        "description": "Your Fire-Type moves gain a Burn Effect Range of 20%, or expand your existing effect range by 10%",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Intense Heat",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "[Fire]"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "physical",
+            "approach": "power",
+            "archetype": "[Fire Type]"
         },
-        "type": "passive",
+        "description": "Your Fire-Type moves gain a Burn Effect Range of 20%, or expand your existing effect range by 10%",
+        "actions": [
+            {
+                "name": "Intense Heat",
+                "slug": "intense-heat",
+                "description": "Your Fire-Type moves gain a Burn Effect Range of 20%, or expand your existing effect range by 10%",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "intense-heat",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "TCYfgKMsSUhsv9Tp",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!TCYfgKMsSUhsv9Tp"
+        "node": {
+            "i": 16,
+            "j": 16,
+            "connected": [
+                "incognito",
+                "hit-run",
+                "fiendish-provocation",
+                "hardy-trekker",
+                "one-with-the-green",
+                "open-your-heart",
+                "spectral-stalker",
+                "urge-mount"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/icons/fire_icon.png",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "TCYfgKMsSUhsv9Tp",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

@@ -1,70 +1,53 @@
 {
-  "name": "Scholar",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Research 25"
-    ],
-    "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Knowledge"
-    },
-    "description": "You gain access to the Research Camp Action. You may not know something then and there in the moment, but with enough dedication and the right resources, you will find out eventually.",
-    "actions": [
-      {
-        "name": "Scholar",
-        "slug": "scholar",
-        "description": "You gain access to the Research Camp Action. You may not know something then and there in the moment, but with enough dedication and the right resources, you will find out eventually.",
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Scholar",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Research 25"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "mental",
+            "approach": "resilience",
+            "archetype": "Knowledge"
         },
-        "type": "camping",
+        "description": "You gain access to the Research Camp Action. You may not know something then and there in the moment, but with enough dedication and the right resources, you will find out eventually.",
+        "actions": [
+            {
+                "name": "Scholar",
+                "slug": "scholar",
+                "description": "You gain access to the Research Camp Action. You may not know something then and there in the moment, but with enough dedication and the right resources, you will find out eventually.",
+                "cost": {
+                    "activation": "complex"
+                },
+                "type": "camping",
+                "traits": []
+            }
+        ],
+        "slug": "scholar",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "KEvYjwxJ3bWLCknR",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!KEvYjwxJ3bWLCknR"
+        "node": {
+            "i": 3,
+            "j": 22,
+            "connected": [
+                "hobby-gardener",
+                "hardy-trekker",
+                "open-your-heart"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#808080",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "KEvYjwxJ3bWLCknR",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

@@ -1,71 +1,53 @@
 {
-  "name": "Belt Expansion 2",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Belt Expansion 1",
-      "Human"
-    ],
-    "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Gear"
-    },
-    "description": "Add an additional Belt slot.",
-    "actions": [
-      {
-        "name": "Belt Expansion 2",
-        "slug": "belt-expansion-2",
-        "description": "Add an additional Belt slot.",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Belt Expansion 2",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Belt Expansion 1",
+            "Human"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "physical",
+            "approach": "resilience",
+            "archetype": "Gear"
         },
-        "type": "passive",
+        "description": "Add an additional Belt slot.",
+        "actions": [
+            {
+                "name": "Belt Expansion 2",
+                "slug": "belt-expansion-2",
+                "description": "Add an additional Belt slot.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "belt-expansion-2",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "sJ1B6djHXWc4F5Ez",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!sJ1B6djHXWc4F5Ez"
+        "node": {
+            "i": 48,
+            "j": 12,
+            "connected": [
+                "belt-expansion-1",
+                "belt-expansion-3"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#800000",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "sJ1B6djHXWc4F5Ez",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

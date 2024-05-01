@@ -1,70 +1,57 @@
 {
-  "name": "Aura Channeling",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Aura Sense 50"
-    ],
-    "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "Aura"
-    },
-    "description": "You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to [Ghost][Pokemon].",
-    "actions": [
-      {
-        "name": "Aura Channeling",
-        "slug": "aura-channeling",
-        "description": "You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to [Ghost][Pokemon].",
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+    "name": "Aura Channeling",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Aura Sense 50"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "mental",
+            "approach": "finesse",
+            "archetype": "Aura"
         },
-        "type": "exploration",
+        "description": "You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to [Ghost][Pokemon].",
+        "actions": [
+            {
+                "name": "Aura Channeling",
+                "slug": "aura-channeling",
+                "description": "You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to [Ghost][Pokemon].",
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 3
+                },
+                "type": "exploration",
+                "traits": []
+            }
+        ],
+        "slug": "aura-channeling",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "UKe2X1IyhElRxVSJ",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!UKe2X1IyhElRxVSJ"
+        "node": {
+            "i": -12,
+            "j": -12,
+            "connected": [
+                "aura-projection",
+                "aura-empathy",
+                "aura-user",
+                "aura-bonding",
+                "shielding-aura",
+                "aura-haze"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#ccdef0",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+                "tint": "#3e52a3",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "UKe2X1IyhElRxVSJ",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

@@ -1,70 +1,56 @@
 {
-  "name": "Pack Alpha",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Leadership 25"
-    ],
-    "cost": 1,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Pack Leader"
-    },
-    "description": "You gain the [Pack Leader] trait, and may designate consenting creatures with the [Pack Mon] trait as members of your pack.",
-    "actions": [
-      {
-        "name": "Pack Alpha",
-        "slug": "pack-alpha",
-        "description": "You gain the [Pack Leader] trait, and may designate consenting creatures with the [Pack Mon] trait as members of your pack.",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Pack Alpha",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Leadership 25"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "social",
+            "approach": "power",
+            "archetype": "Pack Leader"
         },
-        "type": "passive",
+        "description": "You gain the [Pack Leader] trait, and may designate consenting creatures with the [Pack Mon] trait as members of your pack.",
+        "actions": [
+            {
+                "name": "Pack Alpha",
+                "slug": "pack-alpha",
+                "description": "You gain the [Pack Leader] trait, and may designate consenting creatures with the [Pack Mon] trait as members of your pack.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "pack-alpha",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "ee07hyZxFObQ5emn",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!ee07hyZxFObQ5emn"
+        "node": {
+            "i": 8,
+            "j": -25,
+            "connected": [
+                "nurturing-shoots",
+                "breeder",
+                "fighting-fit",
+                "pack-mon",
+                "pile-on",
+                "walking-dead"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "ee07hyZxFObQ5emn",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

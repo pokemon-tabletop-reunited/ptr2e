@@ -1,70 +1,56 @@
 {
-  "name": "Hobby Gardener",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Natural World 20"
-    ],
-    "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Botany"
-    },
-    "description": "You understand the basics of caring for and propagating plants. You've even managed to keep a house plant alive for several weeks. You can grow Grade E plants as a Camp Action.",
-    "actions": [
-      {
-        "name": "Hobby Gardener",
-        "slug": "hobby-gardener",
-        "description": "You understand the basics of caring for and propagating plants. You've even managed to keep a house plant alive for several weeks. You can grow Grade E plants as a Camp Action.",
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Hobby Gardener",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Natural World 20"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "mental",
+            "approach": "resilience",
+            "archetype": "Botany"
         },
-        "type": "camping",
+        "description": "You understand the basics of caring for and propagating plants. You've even managed to keep a house plant alive for several weeks. You can grow Grade E plants as a Camp Action.",
+        "actions": [
+            {
+                "name": "Hobby Gardener",
+                "slug": "hobby-gardener",
+                "description": "You understand the basics of caring for and propagating plants. You've even managed to keep a house plant alive for several weeks. You can grow Grade E plants as a Camp Action.",
+                "cost": {
+                    "activation": "complex"
+                },
+                "type": "camping",
+                "traits": []
+            }
+        ],
+        "slug": "hobby-gardener",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "GwAsdCjwvx72W8Um",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!GwAsdCjwvx72W8Um"
+        "node": {
+            "i": -5,
+            "j": 24,
+            "connected": [
+                "cyclist",
+                "formation-attacks",
+                "hardy-trekker",
+                "lean-in",
+                "open-your-heart",
+                "scholar"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#008000",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "GwAsdCjwvx72W8Um",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

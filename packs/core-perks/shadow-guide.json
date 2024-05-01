@@ -1,71 +1,56 @@
 {
-  "name": "Shadow Guide",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "[Trainer] or [Expedition Leader]",
-      "Psychology 30"
-    ],
-    "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Shadow"
-    },
-    "description": "[Closed Heart] creatures that you are responsible for may gain XP, level up, learn new moves and evolve as normal.",
-    "actions": [
-      {
-        "name": "Shadow Guide",
-        "slug": "shadow-guide",
-        "description": "[Closed Heart] creatures that you are responsible for may gain XP, level up, learn new moves and evolve as normal.",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Shadow Guide",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "[Trainer] or [Expedition Leader]",
+            "Psychology 30"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "social",
+            "approach": "power",
+            "archetype": "Shadow"
         },
-        "type": "passive",
+        "description": "[Closed Heart] creatures that you are responsible for may gain XP, level up, learn new moves and evolve as normal.",
+        "actions": [
+            {
+                "name": "Shadow Guide",
+                "slug": "shadow-guide",
+                "description": "[Closed Heart] creatures that you are responsible for may gain XP, level up, learn new moves and evolve as normal.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "shadow-guide",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "hqj8DQgk8QnBPehy",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!hqj8DQgk8QnBPehy"
+        "node": {
+            "i": 13,
+            "j": -11,
+            "connected": [
+                "beastmaster",
+                "root-2",
+                "frenzied-assault",
+                "bug-catcher",
+                "dead-to-rights"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/icons/shadow_icon.png",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "hqj8DQgk8QnBPehy",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

@@ -1,71 +1,53 @@
 {
-  "name": "Long-Range Psychoportation",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "[Teleporter]",
-      "Occult (Psychic) 60"
-    ],
-    "cost": 5,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "[Psychic Type]"
-    },
-    "description": "You may fast travel via Teleportation to any settlement that you have previously visited, along with anyone touching you at the moment of transmission.",
-    "actions": [
-      {
-        "name": "Long-Range Psychoportation",
-        "slug": "long-range-psychoportation",
-        "description": "You may fast travel via Teleportation to any settlement that you have previously visited, along with anyone touching you at the moment of transmission.",
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 10,
-          "delay": null,
-          "priority": null
+    "name": "Long-Range Psychoportation",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "[Teleporter]",
+            "Occult (Psychic) 60"
+        ],
+        "cost": 5,
+        "design": {
+            "arena": "mental",
+            "approach": "power",
+            "archetype": "[Psychic Type]"
         },
-        "type": "exploration",
+        "description": "You may fast travel via Teleportation to any settlement that you have previously visited, along with anyone touching you at the moment of transmission.",
+        "actions": [
+            {
+                "name": "Long-Range Psychoportation",
+                "slug": "long-range-psychoportation",
+                "description": "You may fast travel via Teleportation to any settlement that you have previously visited, along with anyone touching you at the moment of transmission.",
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 10
+                },
+                "type": "exploration",
+                "traits": []
+            }
+        ],
+        "slug": "long-range-psychoportation",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "clK02KrlSlmoP2Ad",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!clK02KrlSlmoP2Ad"
+        "node": {
+            "i": 91,
+            "j": 23,
+            "connected": [
+                "root-6"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/icons/psychic_icon.png",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "clK02KrlSlmoP2Ad",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

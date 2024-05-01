@@ -1,72 +1,58 @@
 {
-  "name": "Aura Bonding",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Aura Sense 35",
-      "Aura Empathy",
-      "Aura Projection"
-    ],
-    "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "finesse",
-      "archetype": "Aura"
-    },
-    "description": "You may substitute Aura Sense in place of the Conversation skill when interacting with creatures that the GM deems to be receptive.",
-    "actions": [
-      {
-        "name": "Aura Bonding",
-        "slug": "aura-bonding",
-        "description": "You may substitute Aura Sense in place of the Conversation skill when interacting with creatures that the GM deems to be receptive.",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Aura Bonding",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Aura Sense 35",
+            "Aura Empathy",
+            "Aura Projection"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "social",
+            "approach": "finesse",
+            "archetype": "Aura"
         },
-        "type": "passive",
+        "description": "You may substitute Aura Sense in place of the Conversation skill when interacting with creatures that the GM deems to be receptive.",
+        "actions": [
+            {
+                "name": "Aura Bonding",
+                "slug": "aura-bonding",
+                "description": "You may substitute Aura Sense in place of the Conversation skill when interacting with creatures that the GM deems to be receptive.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "aura-bonding",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "UfdaseGwkBOgrqbz",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!UfdaseGwkBOgrqbz"
+        "node": {
+            "i": -15,
+            "j": -16,
+            "connected": [
+                "aura-dampening",
+                "aura-empathy",
+                "aura-channeling",
+                "shielding-aura",
+                "shift-consciousness-aura",
+                "soothing-aura"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#0000ff",
+                "borderColor": null,
+                "borderWidth": 0,
+                "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "UfdaseGwkBOgrqbz",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }
