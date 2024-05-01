@@ -1,70 +1,55 @@
 {
-  "name": "Strong Style",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Leadership 25"
-    ],
-    "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Support"
-    },
-    "description": "The target gains Strong 1.",
-    "actions": [
-      {
-        "name": "Strong Style",
-        "slug": "strong-style",
-        "description": "The target gains Strong 1.",
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+    "name": "Strong Style",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Leadership 25"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "physical",
+            "approach": "power",
+            "archetype": "Support"
         },
-        "type": "generic",
+        "description": "The target gains Strong 1.",
+        "actions": [
+            {
+                "name": "Strong Style",
+                "slug": "strong-style",
+                "description": "The target gains Strong 1.",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 2
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "strong-style",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "hUR6oZAwJlNWX6WG",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!hUR6oZAwJlNWX6WG"
+        "node": {
+            "i": -18,
+            "j": -5,
+            "connected": [
+                "fearsome-defense",
+                "adhesive-digits",
+                "aura-haze",
+                "root-perk"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#ff0000",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "hUR6oZAwJlNWX6WG",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }
