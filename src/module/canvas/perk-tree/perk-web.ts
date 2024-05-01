@@ -108,7 +108,7 @@ class PerkWeb extends PIXI.Container {
         this.stage.eventMode = "static";
         this.stage.interactiveChildren = true;
         this.canvas.hidden = false;
-        canvas.hud.element[0].style.zIndex = "9999";
+        canvas.hud.element[0].style.zIndex = "100";
 
         return this;
     }
@@ -674,7 +674,7 @@ class PerkWeb extends PIXI.Container {
 
     private alignHUD() {
         const hud = canvas.hud.element[0];
-        if (!hud.style.zIndex) hud.style.zIndex = "9999";
+        if (!hud.style.zIndex) hud.style.zIndex = "100";
         const { x, y } = this.getGlobalPosition();
         const scale = this.stage.scale.x;
         hud.style.left = `${x}px`;

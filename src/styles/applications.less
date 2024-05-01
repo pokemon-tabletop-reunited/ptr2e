@@ -480,6 +480,7 @@ body {
         }
     }
 
+    &#perk-hud-base,
     &.move-sheet,
     &.species-sheet,
     &.party-sheet,
@@ -771,34 +772,58 @@ body {
                     }
                 }
 
-                fieldset {
-                    padding: 1rem;
-                    display: flex;
-                    flex-direction: column;
-                    flex-wrap: nowrap;
-                    gap: 0.5rem;
+            }
+        }
 
-                    margin-bottom: 0.5rem;
-                    border-radius: 8px;
-                    border-color: var(--border-theme-color);
+        fieldset {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            gap: 0.5rem;
 
-                    legend {
-                        font-size: var(--font-size-15);
-                        font-weight: bold;
-                    }
-                }
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            border-color: var(--border-theme-color);
 
-                .hint {
-                    margin: 0;
-                    font-size: var(--font-size-14);
-                    color: var(--hint-text-color);
-                    white-space: pre-line;
-                    word-break: break-word;
-                }
+            legend {
+                font-size: var(--font-size-15);
+                font-weight: bold;
+            }
+        }
 
-                textarea {
-                    resize: vertical;
-                }
+        .hint {
+            margin: 0;
+            font-size: var(--font-size-14);
+            color: var(--hint-text-color);
+            white-space: pre-line;
+            word-break: break-word;
+        }
+
+        textarea {
+            resize: vertical;
+        }
+    }
+
+    &#perk-hud-base {
+        header {
+            h2 {
+                flex: 1;
+                text-align: center;
+                padding-bottom: 0.25rem;
+            }
+        }
+
+        footer {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            gap: 0;
+
+            button {
+                flex: 0 0 30%;
+                margin: 0;
             }
         }
     }
@@ -2244,7 +2269,7 @@ body {
 
 #perk-hud {
     position: absolute;
-    min-width: 220px;
+    min-width: 300px;
     width: min-content;
     max-width: 600px;
     text-align: left;
