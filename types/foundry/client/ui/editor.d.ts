@@ -1,6 +1,15 @@
 import type * as TinyMCE from "tinymce";
 
 declare global {
+    type EnrichmentAnchorOptions = {
+        attrs?: Record<string, string>;
+        dataset?: Record<string, string>;
+        classes?: string[];
+        name?: string;
+        icon?: string;
+    };
+
+
     /** A collection of helper functions and utility methods related to the rich text editor */
     class TextEditor {
         /**
@@ -115,6 +124,13 @@ declare global {
             match: RegExpMatchArray,
             options?: { async?: boolean; relativeTo?: ClientDocument },
         ): HTMLAnchorElement | Promise<HTMLAnchorElement>;
+
+        /**
+         * Helper method to create an anchor element.
+         * @param {Partial<EnrichmentAnchorOptions>} [options]  Options to configure the anchor's construction.
+         * @returns {HTMLAnchorElement}
+         */
+        static createAnchor(options?: Partial<EnrichmentAnchorOptions>): HTMLAnchorElement;
 
         /**
          * Replace a hyperlink-like string with an actual HTML &lt;a> tag

@@ -9,8 +9,13 @@ export class HandlebarTemplates {
         "attack-embed": "systems/ptr2e/templates/partials/attack-embed.hbs",
         "effect-traits": "systems/ptr2e/templates/partials/effect-traits.hbs",
         "trait-partial": "systems/ptr2e/templates/partials/trait.hbs",
+        // All Item Sheet Embeds
         "move-body": "systems/ptr2e/templates/items/embeds/move/move-body.hbs",
         "species-body": "systems/ptr2e/templates/items/embeds/species/species-body.hbs",
+        "perk-body": "systems/ptr2e/templates/items/embeds/perk/perk-body.hbs",
+
+        // All Actor Sheet Components
+        "actor-effect-component": "systems/ptr2e/templates/actor/components/actor-effect-component.hbs",
     }) as Record<string, string>;
 
     static async register() {

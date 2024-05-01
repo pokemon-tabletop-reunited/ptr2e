@@ -24,23 +24,20 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
                     async handler(code, chunk) {
                         return chunk.fileName.endsWith(".mjs")
                             ? esbuild.transform(code, {
-                                keepNames: true,
-                                minifyIdentifiers: true,
-                                minifySyntax: true,
-                                minifyWhitespace: true
-                            })
+                                  keepNames: true,
+                                  minifyIdentifiers: true,
+                                  minifySyntax: true,
+                                  minifyWhitespace: true,
+                              })
                             : code;
-                    }
-                }
+                    },
+                },
             },
             ...viteStaticCopy({
-                targets: [
-                    { src: "README.md", dest: "." },
-                ]
+                targets: [{ src: "README.md", dest: "." }],
             })
-        )
-    }
-    else {
+        );
+    } else {
         plugins.push(
             {
                 name: "touch-vendor-mjs",
@@ -80,7 +77,7 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
                     }
                 },
             }
-        )
+        );
     }
 
     if (command === "serve") {
@@ -98,13 +95,13 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
         define: {
             BUILD_MODE: JSON.stringify(buildMode),
             EN_JSON: JSON.stringify(EN_JSON),
-            fu: "foundry.utils"
+            fu: "foundry.utils",
         },
         esbuild: { keepNames: true },
         build: {
             outDir,
             assetsDir: "static",
-            emptyOutDir: false,
+            emptyOutDir: false, // fails if world is running due to compendium locks. We do it in "npm run clean" instead.
             minify: false,
             cssMinify: buildMode === "production",
             sourcemap: buildMode === "development",
@@ -115,17 +112,20 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
                 fileName: "ptr2e",
             },
             rollupOptions: {
+                external: new RegExp(".webp$"),
                 output: {
-                    assetFileNames: ({ name }): string => (name === "style.css" ? "styles/ptr2e.css" : name ?? ""),
+                    assetFileNames: ({ name }): string =>
+                        name === "style.css" ? "styles/ptr2e.css" : name ?? "",
                     chunkFileNames: "[name].mjs",
                     entryFileNames: "ptr2e.mjs",
                     manualChunks: {
-                        vendor: buildMode === "production" ? Object.keys(packageJSON.dependencies) : [],
+                        vendor:
+                            buildMode === "production" ? Object.keys(packageJSON.dependencies) : [],
                     },
                 },
                 watch: { buildDelay: 100 },
             },
-            target: "es2022"
+            target: "es2022",
         },
         server: {
             port: 30001,
@@ -136,13 +136,13 @@ const config = Vite.defineConfig(({ command, mode }): Vite.UserConfig => {
                     ws: true,
                 },
                 "^(?!/systems/ptr2e/)": "http://localhost:30000/",
-            }
+            },
         },
         plugins,
         css: {
             devSourcemap: buildMode === "development",
-        }
-    }
+        },
+    };
 });
 
 export default config;

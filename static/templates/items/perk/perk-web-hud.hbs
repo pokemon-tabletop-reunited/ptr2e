@@ -1,6 +1,15 @@
-<aside id="perk-hud">
-    <header>{{#if perk}}{{perk.name}}{{/if}} ({{position.i}},{{position.j}})</header>
+<aside id="perk-hud" class="sheet">
+    <header class="header">
+        <h2>{{perk.name}}</h2>
+    </header>
+    {{#if traits}}
+        <header class="traits">
+            <input type="text" class="traits ptr2e-tagify" name="system.traits" value="{{json traits}}" data-dType="JSON" readonly/>
+        </header>
+    {{/if}}
+        {{> perk-body document=perk fields=perk.system.schema.fields}}
     <footer>
+        <button data-action="open-sheet">Open Sheet</button>
         <button data-action="cheapest-path">Highlight Cheapest Path</button>
         <button data-action="shortest-path">Highlight Shortest Path</button>
     </footer>

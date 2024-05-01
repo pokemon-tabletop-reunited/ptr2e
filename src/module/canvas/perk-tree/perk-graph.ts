@@ -200,7 +200,7 @@ class PerkGraph {
         while (Object.keys(unvisited).length > 0) {
             // Get the current node
             const currentSlug = Object.keys(unvisited).reduce((a, b) =>
-                unvisited[a].cost < unvisited[b].cost ? a : b
+                unvisited[a].total < unvisited[b].total ? a : b
             );
             const current = unvisited[currentSlug];
 
