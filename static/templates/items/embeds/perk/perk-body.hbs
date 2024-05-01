@@ -1,0 +1,23 @@
+<content class="perk-embed">
+    <main>
+        <section class="perk-info">
+            <fieldset>
+                <legend>Basic Information</legend>
+                <fieldset class="prereqs">
+                    <legend>{{localize fields.prerequisites.label}}</legend>
+                    <ul>
+                        {{#each document.system.prerequisites}}<li>{{{asContentLink this}}}</li>{{else}}<li class="none">No Prerequisites.</li>{{/each}}
+                    </ul>
+                </fieldset>
+                <div class="cost-row">
+                    <label for="system.cost">{{localize fields.cost.label}}</label>
+                    <span>{{document.system.cost}}</span>
+                </div>
+            </fieldset>
+        </section>
+        <fieldset>
+            <legend>{{localize fields.description.label}}</legend>
+            <div class="effect-description">{{{document.system.description}}}</div>
+        </fieldset>
+    </main>
+</content>

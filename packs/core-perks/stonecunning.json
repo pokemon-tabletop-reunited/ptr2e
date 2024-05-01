@@ -1,70 +1,53 @@
 {
-  "name": "Stonecunning",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "[Ground] or [Rock]"
-    ],
-    "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "[Ground / Rock Type]"
-    },
-    "description": "You gain the [Tremorsense 20] trait.",
-    "actions": [
-      {
-        "name": "Stonecunning",
-        "slug": "stonecunning",
-        "description": "You gain the [Tremorsense 20] trait.",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Stonecunning",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "[Ground] or [Rock]"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "mental",
+            "approach": "finesse",
+            "archetype": "[Ground / Rock Type]"
         },
-        "type": "passive",
+        "description": "You gain the [Tremorsense 20] trait.",
+        "actions": [
+            {
+                "name": "Stonecunning",
+                "slug": "stonecunning",
+                "description": "You gain the [Tremorsense 20] trait.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "stonecunning",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "lTOiK3AutkgbMo7J",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!lTOiK3AutkgbMo7J"
+        "node": {
+            "i": -16,
+            "j": 28,
+            "connected": [
+                "root-5",
+                "koffing-class-curry",
+                "lean-in"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/icons/rock_icon.png",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "lTOiK3AutkgbMo7J",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

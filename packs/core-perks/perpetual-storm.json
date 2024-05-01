@@ -1,70 +1,52 @@
 {
-  "name": "Perpetual Storm",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Climate Change"
-    ],
-    "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Climatology"
-    },
-    "description": "When a Weather created by you or an ally would expire, you can spend PP, multiplied by the Weather's Tier. The Weather is not dissipated and lasts for 2 more Rounds.",
-    "actions": [
-      {
-        "name": "Perpetual Storm",
-        "slug": "perpetual-storm",
-        "description": "When a Weather created by you or an ally would expire, you can spend PP, multiplied by the Weather's Tier. The Weather is not dissipated and lasts for 2 more Rounds.",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+    "name": "Perpetual Storm",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Climate Change"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "physical",
+            "approach": "finesse",
+            "archetype": "Climatology"
         },
-        "type": "generic",
+        "description": "When a Weather created by you or an ally would expire, you can spend PP, multiplied by the Weather's Tier. The Weather is not dissipated and lasts for 2 more Rounds.",
+        "actions": [
+            {
+                "name": "Perpetual Storm",
+                "slug": "perpetual-storm",
+                "description": "When a Weather created by you or an ally would expire, you can spend PP, multiplied by the Weather's Tier. The Weather is not dissipated and lasts for 2 more Rounds.",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "perpetual-storm",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "LvxsCjJDbfgyQ7G5",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!LvxsCjJDbfgyQ7G5"
+        "node": {
+            "i": -42,
+            "j": 20,
+            "connected": [
+                "climate-change"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#400080",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "LvxsCjJDbfgyQ7G5",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

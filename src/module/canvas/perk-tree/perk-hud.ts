@@ -19,6 +19,10 @@ class PerkHUDV2 extends foundry.applications.api.HandlebarsApplicationMixin(
             actions: {
                 "cheapest-path": PerkHUDV2.HighlightCheapestPath,
                 "shortest-path": PerkHUDV2.HighlightShortestPath,
+                "open-sheet": function(this: PerkHUDV2) {
+                    if(!this._object?.node?.perk) return;
+                    this._object.node.perk.sheet.render(true);
+                }
             }
         },
         { inplace: false }
@@ -39,8 +43,25 @@ class PerkHUDV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     override async _prepareContext() {
         if(!this._object) return {};
 
+        const document = this._object.node.perk;
+        const traits = (() => {
+            if ("traits" in document.system) {
+                const traits = [];
+                for (const trait of document.system.traits.values()) {
+                    traits.push({
+                        value: trait.slug,
+                        label: trait.label,
+                    });
+                }
+                return traits;
+            }
+            return [];
+        })();
+
         const data = this._object?.node;
-        return fu.mergeObject(data, {}, { inplace: false });
+        return fu.mergeObject(data, {
+            traits
+        }, { inplace: false });
     }
 
     public async activate(object: PerkNode) {
@@ -69,19 +90,32 @@ class PerkHUDV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     override setPosition(): foundry.applications.api.ApplicationPosition {
         if (!this._object) return this.position;
 
-        const options = {
+        const options: Partial<foundry.applications.api.ApplicationPosition> = {
             left: this._object.x + this._object.width / 2 + 10,
             top: this._object.y - this._object.height / 2,
+            height: "auto",
+            width: "auto",
         };
         return super.setPosition(options);
     }
 
     override _updatePosition(position: foundry.applications.api.ApplicationPosition) {
+        const implicitHeight = position.height === "auto";
+        const implicitWidth = position.width === "auto";
+
         const result = super._updatePosition(position);
         if (!this.element) return result;
 
         result.left = position.left;
         result.top = position.top;
+        if (implicitHeight) {
+            this.element.style.height = "";
+            result.height = "auto";
+        }
+        if (implicitWidth) {
+            this.element.style.width = "";
+            result.width = "auto";
+        }
         return result;
     }
 

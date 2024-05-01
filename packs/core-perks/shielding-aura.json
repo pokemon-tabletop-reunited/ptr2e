@@ -1,70 +1,56 @@
 {
-  "name": "Shielding Aura",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Aura Sense 50"
-    ],
-    "cost": 3,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Aura"
-    },
-    "description": "You harden your Aura about yourself. You gain Resolved 5.",
-    "actions": [
-      {
-        "name": "Shielding Aura",
-        "slug": "shielding-aura",
-        "description": "You harden your Aura about yourself. You gain Resolved 5.",
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null
+    "name": "Shielding Aura",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Aura Sense 50"
+        ],
+        "cost": 3,
+        "design": {
+            "arena": "physical",
+            "approach": "resilience",
+            "archetype": "Aura"
         },
-        "type": "generic",
+        "description": "You harden your Aura about yourself. You gain Resolved 5.",
+        "actions": [
+            {
+                "name": "Shielding Aura",
+                "slug": "shielding-aura",
+                "description": "You harden your Aura about yourself. You gain Resolved 5.",
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 4
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "shielding-aura",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "D4mh3LuuSy0DDBj0",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!D4mh3LuuSy0DDBj0"
+        "node": {
+            "i": -12,
+            "j": -20,
+            "connected": [
+                "aura-bonding",
+                "aura-channeling",
+                "aura-empathy",
+                "shift-consciousness-aura",
+                "sight-beyond-sight"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#8000ff",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "D4mh3LuuSy0DDBj0",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

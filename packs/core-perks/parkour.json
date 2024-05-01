@@ -1,70 +1,57 @@
 {
-  "name": "Parkour",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Acrobatics 45"
-    ],
-    "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Athleticism"
-    },
-    "description": "When your Movement would take you into an obstacle that could reasonably be traversed within your Overland Movement Allowance, you may make a Hard (-20) Acrobatics check to temporarily grant yourself [Wallclimber] during that movement. If you have not returned to stable ground before your activation ends, you immediately fall.",
-    "actions": [
-      {
-        "name": "Parkour",
-        "slug": "parkour",
-        "description": "When your Movement would take you into an obstacle that could reasonably be traversed within your Overland Movement Allowance, you may make a Hard (-20) Acrobatics check to temporarily grant yourself [Wallclimber] during that movement. If you have not returned to stable ground before your activation ends, you immediately fall.",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Parkour",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Acrobatics 45"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "physical",
+            "approach": "finesse",
+            "archetype": "Athleticism"
         },
-        "type": "passive",
+        "description": "When your Movement would take you into an obstacle that could reasonably be traversed within your Overland Movement Allowance, you may make a Hard (-20) Acrobatics check to temporarily grant yourself [Wallclimber] during that movement. If you have not returned to stable ground before your activation ends, you immediately fall.",
+        "actions": [
+            {
+                "name": "Parkour",
+                "slug": "parkour",
+                "description": "When your Movement would take you into an obstacle that could reasonably be traversed within your Overland Movement Allowance, you may make a Hard (-20) Acrobatics check to temporarily grant yourself [Wallclimber] during that movement. If you have not returned to stable ground before your activation ends, you immediately fall.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "parkour",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "95OUHWV4eEI4I3Fe",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!95OUHWV4eEI4I3Fe"
+        "node": {
+            "i": -33,
+            "j": -5,
+            "connected": [
+                "freeclimber",
+                "fearsome-defense",
+                "aura-dampening",
+                "sea-lungs",
+                "telekinetic-potential",
+                "telepathic-potential",
+                "ultraviolet"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#0000ff",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "95OUHWV4eEI4I3Fe",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

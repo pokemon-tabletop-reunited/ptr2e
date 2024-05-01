@@ -1,70 +1,57 @@
 {
-  "name": "Dead Eye",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "None"
-    ],
-    "cost": 4,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Combat"
-    },
-    "description": "Trigger: You score a hit with a damaging ranged move which is not a Critical Hit. The attack becomes a critical hit.",
-    "actions": [
-      {
-        "name": "Dead Eye",
-        "slug": "dead-eye",
-        "description": "Trigger: You score a hit with a damaging ranged move which is not a Critical Hit. The attack becomes a critical hit.",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null
+    "name": "Dead Eye",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "None"
+        ],
+        "cost": 4,
+        "design": {
+            "arena": "physical",
+            "approach": "finesse",
+            "archetype": "Combat"
         },
-        "type": "generic",
+        "description": "Trigger: You score a hit with a damaging ranged move which is not a Critical Hit. The attack becomes a critical hit.",
+        "actions": [
+            {
+                "name": "Dead Eye",
+                "slug": "dead-eye",
+                "description": "Trigger: You score a hit with a damaging ranged move which is not a Critical Hit. The attack becomes a critical hit.",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 5
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "dead-eye",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "XwBEo0SPEQ5UtA0l",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!XwBEo0SPEQ5UtA0l"
+        "node": {
+            "i": -16,
+            "j": 6,
+            "connected": [
+                "root-perk",
+                "dead-to-rights",
+                "drifter",
+                "firefly",
+                "fisherman",
+                "silver-bullet"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#0000ff",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "XwBEo0SPEQ5UtA0l",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

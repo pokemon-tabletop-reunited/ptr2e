@@ -1,70 +1,63 @@
 {
-  "name": "Belt Expansion 1",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "None"
-    ],
-    "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Gear"
-    },
-    "description": "Add an additional Belt slot.",
-    "actions": [
-      {
-        "name": "Belt Expansion 1",
-        "slug": "belt-expansion-1",
-        "description": "Add an additional Belt slot.",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Belt Expansion 1",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "None"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "physical",
+            "approach": "resilience",
+            "archetype": "Gear"
         },
-        "type": "passive",
+        "description": "Add an additional Belt slot.",
+        "actions": [
+            {
+                "name": "Belt Expansion 1",
+                "slug": "belt-expansion-1",
+                "description": "Add an additional Belt slot.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "belt-expansion-1",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "zAKTLdBrA5eeGCsX",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!zAKTLdBrA5eeGCsX"
+        "node": {
+            "i": 44,
+            "j": 8,
+            "connected": [
+                "root-3",
+                "belt-expansion-2",
+                "blacksmith",
+                "agile-style",
+                "burglar",
+                "dual-wielder",
+                "fast-pitch",
+                "forensic-accountant",
+                "gemcutter",
+                "root-6",
+                "powerlifter",
+                "trained-rider",
+                "trained-wielder"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#004080",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "zAKTLdBrA5eeGCsX",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }
