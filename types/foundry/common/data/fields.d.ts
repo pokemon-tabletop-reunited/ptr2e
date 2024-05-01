@@ -268,6 +268,16 @@ export abstract class DataField<
      */
     toInput(config?: FormInputConfig): HTMLElement | HTMLCollection;
 
+    /**
+     * Render this DataField as an HTML element.
+     * Subclasses should implement this method rather than the public toInput method which wraps it.
+     * @param {FormInputConfig} config        Form element configuration parameters
+     * @throws {Error}                        An Error if this DataField subclass does not support input rendering
+     * @returns {HTMLElement|HTMLCollection}  A rendered HTMLElement for the field
+     * @protected
+     */
+    _toInput(config: FormInputConfig): HTMLElement | HTMLCollection;
+
     /* -------------------------------------------- */
 
     /**
@@ -280,9 +290,9 @@ export abstract class DataField<
     toFormGroup(inputConfig?: FormInputConfig, groupConfig?: FormGroupConfig, customInput?: CustomFormInput): HTMLDivElement;
 }
 
-interface FormInputConfig {
+interface FormInputConfig<TValue = any>{
     name: string;
-    value?: any;
+    value?: TValue;
     required?: boolean;
     disabled?: boolean;
     readonly?: boolean;
@@ -509,6 +519,20 @@ export class StringField<
     protected override _validateSpecial(value: unknown): boolean | void;
 
     protected _validateType(value: unknown): boolean | void;
+
+    /**
+     * Get a record of eligible choices for the field.
+     * @param {Record<any, any>|Array<any>} choices
+     * @param {object} [options]
+     * @param {boolean} [options.labelAttr="label"]     The property in the choice object values to use as the option label.
+     * @param {boolean} [options.localize=false]        Pass each label through string localization?
+     * @returns {Record<string, any>}
+     * @internal
+     */
+    static _getChoices(
+        choices: Record<string, string> | string[],
+        options?: { labelAttr?: string; localize?: boolean },
+    ): Record<string, string>;
 }
 
 type ObjectFieldOptions<
