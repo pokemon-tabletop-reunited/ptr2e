@@ -249,6 +249,17 @@ const SORTABLE_BASE_OPTIONS: Sortable.Options = {
     // delayOnTouchOnly: true,
 };
 
+/**
+ * Converts a possible UUID string to an embedded UUID string if it is a valid UUID
+ */
+function maybeUuidStringToUuidEmbed(uuid: string) {
+    const result = fu.parseUuid(uuid);
+    if(result?.id) {
+        return `@UUID[${uuid}]`;
+    }
+    return uuid;
+}
+
 export {
     fontAwesomeIcon,
     formatSlug,
@@ -262,7 +273,8 @@ export {
     sortStringRecord,
     tupleHasValue,
     capitalize,
-    SORTABLE_BASE_OPTIONS
+    SORTABLE_BASE_OPTIONS,
+    maybeUuidStringToUuidEmbed,
 }
 export type {
     FontAwesomeStyle,

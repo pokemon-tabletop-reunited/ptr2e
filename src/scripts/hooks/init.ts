@@ -7,6 +7,7 @@ import { PTRHook } from "./data.ts";
 import { ClockDatabase } from "@data";
 import { TraitsSettingsMenu } from "@module/apps/traits.ts";
 import ActorSheetPTRV2 from "@actor/sheetv2.ts";
+import { HTMLStringTagsElementPTR2e } from "@module/apps/string-tags.ts";
 
 export const Init: PTRHook = {
     listen() {
@@ -163,7 +164,6 @@ export const Init: PTRHook = {
             });
 
             //TODO: Delete once foundry fixes this
-            //@ts-expect-error
             foundry.applications.elements.HTMLStringTagsElement.renderTag = function (tag: string): string {
                 const element = document.createElement("div");
                 element.classList.add("tag");
@@ -177,6 +177,8 @@ export const Init: PTRHook = {
                 element.appendChild(a);
                 return element.outerHTML;
             }
+
+            window.customElements.define(HTMLStringTagsElementPTR2e.tagName, HTMLStringTagsElementPTR2e);
 
             // Register handlebars helpers
             registerHandlebarsHelpers();
