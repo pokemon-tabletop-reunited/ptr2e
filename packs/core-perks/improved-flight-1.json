@@ -1,70 +1,52 @@
 {
-  "name": "Improved Flight 1",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "A Flight Movement Allowance"
-    ],
-    "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Mobility"
-    },
-    "description": "Improve your Flight Movement Allowance by 2.",
-    "actions": [
-      {
-        "name": "Improved Flight 1",
-        "slug": "improved-flight-1",
-        "description": "Improve your Flight Movement Allowance by 2.",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Improved Flight 1",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "A Flight Movement Allowance"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "physical",
+            "approach": "power",
+            "archetype": "Mobility"
         },
-        "type": "passive",
+        "description": "Improve your Flight Movement Allowance by 2.",
+        "actions": [
+            {
+                "name": "Improved Flight 1",
+                "slug": "improved-flight-1",
+                "description": "Improve your Flight Movement Allowance by 2.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "improved-flight-1",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "zMt840jnFxHWURAj",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!zMt840jnFxHWURAj"
+        "node": {
+            "i": 98,
+            "j": 9,
+            "connected": [
+                "root-6",
+                "improved-flight-2"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/icons/flying_icon.png",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "zMt840jnFxHWURAj",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

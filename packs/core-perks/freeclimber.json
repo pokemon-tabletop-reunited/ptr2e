@@ -1,70 +1,58 @@
 {
-  "name": "Freeclimber",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Climb 45"
-    ],
-    "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Athleticism"
-    },
-    "description": "You are able to climb without suffering penalties due to lack of equipment.",
-    "actions": [
-      {
-        "name": "Freeclimber",
-        "slug": "freeclimber",
-        "description": "You are able to climb without suffering penalties due to lack of equipment.",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Freeclimber",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Climb 45"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "physical",
+            "approach": "resilience",
+            "archetype": "Athleticism"
         },
-        "type": "passive",
+        "description": "You are able to climb without suffering penalties due to lack of equipment.",
+        "actions": [
+            {
+                "name": "Freeclimber",
+                "slug": "freeclimber",
+                "description": "You are able to climb without suffering penalties due to lack of equipment.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "freeclimber",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "sAukVqClITEpjQE3",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!sAukVqClITEpjQE3"
+        "node": {
+            "i": -36,
+            "j": 2,
+            "connected": [
+                "fearsome-defense",
+                "climate-controller",
+                "drifter",
+                "knee-steering",
+                "parkour",
+                "sea-lungs",
+                "telepathic-potential",
+                "ultraviolet"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#004000",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "sAukVqClITEpjQE3",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

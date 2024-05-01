@@ -3,6 +3,7 @@ import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed } from "@modul
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { PerkNodeConfig } from "@module/canvas/perk-tree/perk-node.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
+import { SetField } from "@module/data/fields/set-field.ts";
 
 const PerkExtension = HasEmbed(
     HasTraits(HasDescription(HasSlug(HasActions(foundry.abstract.TypeDataModel)))),
@@ -25,7 +26,7 @@ export default abstract class PerkSystem extends PerkExtension {
         return {
             ...super.defineSchema(),
 
-            prerequisites: new fields.SetField(new fields.StringField(), {label: "PTR2E.FIELDS.prerequisites.label", hint: "PTR2E.FIELDS.prerequisites.hint"}),
+            prerequisites: new SetField(new fields.StringField(), {label: "PTR2E.FIELDS.prerequisites.label", hint: "PTR2E.FIELDS.prerequisites.hint"}),
             cost: new fields.NumberField({ required: true, initial: 1, label: "PTR2E.FIELDS.apCost.label", hint: "PTR2E.FIELDS.apCost.hint"}),
             
             design: new fields.SchemaField({

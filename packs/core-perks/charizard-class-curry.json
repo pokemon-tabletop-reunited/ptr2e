@@ -1,71 +1,53 @@
 {
-  "name": "Charizard-class Curry",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Husbandry 80",
-      "Copperajah-Class Curry"
-    ],
-    "cost": 5,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Chef"
-    },
-    "description": "You are able to make Charizard-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP and have them recover from Exposure. On a 1-25, you attract a non-hostile Pokemon from the local environment to investigate the camp.",
-    "actions": [
-      {
-        "name": "Charizard-class Curry",
-        "slug": "charizard-class-curry",
-        "description": "You are able to make Charizard-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP and have them recover from Exposure. On a 1-25, you attract a non-hostile Pokemon from the local environment to investigate the camp.",
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Charizard-class Curry",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Husbandry 80",
+            "Copperajah-Class Curry"
+        ],
+        "cost": 5,
+        "design": {
+            "arena": "social",
+            "approach": "power",
+            "archetype": "Chef"
         },
-        "type": "camping",
+        "description": "You are able to make Charizard-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP and have them recover from Exposure. On a 1-25, you attract a non-hostile Pokemon from the local environment to investigate the camp.",
+        "actions": [
+            {
+                "name": "Charizard-class Curry",
+                "slug": "charizard-class-curry",
+                "description": "You are able to make Charizard-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP and have them recover from Exposure. On a 1-25, you attract a non-hostile Pokemon from the local environment to investigate the camp.",
+                "cost": {
+                    "activation": "complex"
+                },
+                "type": "camping",
+                "traits": []
+            }
+        ],
+        "slug": "charizard-class-curry",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "7IwAmBCPdulCY7yD",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!7IwAmBCPdulCY7yD"
+        "node": {
+            "i": -3,
+            "j": 13,
+            "connected": [
+                "copperajah-class-curry",
+                "hitmon-class-sandwiches"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#ff8000",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "7IwAmBCPdulCY7yD",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

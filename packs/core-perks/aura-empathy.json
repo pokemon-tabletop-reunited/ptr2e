@@ -1,70 +1,55 @@
 {
-  "name": "Aura Empathy",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Aura Sense 25"
-    ],
-    "cost": 1,
-    "design": {
-      "arena": "social",
-      "approach": "finesse",
-      "archetype": "Aura"
-    },
-    "description": "You have a knack for reading the auras of others, allowing you to understand their moods and potentially pick up some surface thoughts. (Skill check may be required)",
-    "actions": [
-      {
-        "name": "Aura Empathy",
-        "slug": "aura-empathy",
-        "description": "You have a knack for reading the auras of others, allowing you to understand their moods and potentially pick up some surface thoughts. (Skill check may be required)",
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Aura Empathy",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Aura Sense 25"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "social",
+            "approach": "finesse",
+            "archetype": "Aura"
         },
-        "type": "generic",
+        "description": "You have a knack for reading the auras of others, allowing you to understand their moods and potentially pick up some surface thoughts. (Skill check may be required)",
+        "actions": [
+            {
+                "name": "Aura Empathy",
+                "slug": "aura-empathy",
+                "description": "You have a knack for reading the auras of others, allowing you to understand their moods and potentially pick up some surface thoughts. (Skill check may be required)",
+                "cost": {
+                    "activation": "simple"
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "aura-empathy",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "0oopLlKDWl1rf2Sm",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!0oopLlKDWl1rf2Sm"
+        "node": {
+            "i": -9,
+            "j": -18,
+            "connected": [
+                "aura-bonding",
+                "aura-channeling",
+                "aura-projection",
+                "shielding-aura",
+                "sight-beyond-sight"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#80ff80",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "0oopLlKDWl1rf2Sm",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }
