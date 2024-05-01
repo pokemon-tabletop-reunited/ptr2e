@@ -1,70 +1,56 @@
 {
-  "name": "Aura Dampening",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Aura Sense 30"
-    ],
-    "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "resilience",
-      "archetype": "Aura"
-    },
-    "description": "You are able to dampen your Aura, making it difficult to read your moods and intentions. You may spend the 2 PP cost as an [Interrupt 3] Free Action when someone attempts to probe your Aura using Aura Empathy to inflict a -20 penalty to any triggering Aura Sense check.",
-    "actions": [
-      {
-        "name": "Aura Dampening",
-        "slug": "aura-dampening",
-        "description": "You are able to dampen your Aura, making it difficult to read your moods and intentions. You may spend the 2 PP cost as an [Interrupt 3] Free Action when someone attempts to probe your Aura using Aura Empathy to inflict a -20 penalty to any triggering Aura Sense check.",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+    "name": "Aura Dampening",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Aura Sense 30"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "social",
+            "approach": "resilience",
+            "archetype": "Aura"
         },
-        "type": "generic",
+        "description": "You are able to dampen your Aura, making it difficult to read your moods and intentions. You may spend the 2 PP cost as an [Interrupt 3] Free Action when someone attempts to probe your Aura using Aura Empathy to inflict a -20 penalty to any triggering Aura Sense check.",
+        "actions": [
+            {
+                "name": "Aura Dampening",
+                "slug": "aura-dampening",
+                "description": "You are able to dampen your Aura, making it difficult to read your moods and intentions. You may spend the 2 PP cost as an [Interrupt 3] Free Action when someone attempts to probe your Aura using Aura Empathy to inflict a -20 penalty to any triggering Aura Sense check.",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "aura-dampening",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "3j8tXm6MJWi1JKsH",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!3j8tXm6MJWi1JKsH"
+        "node": {
+            "i": -17,
+            "j": -13,
+            "connected": [
+                "aura-haze",
+                "aura-bonding",
+                "parkour",
+                "shift-consciousness-aura",
+                "soothing-aura"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#808000",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "3j8tXm6MJWi1JKsH",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }
