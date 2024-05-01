@@ -1,70 +1,56 @@
 {
-  "name": "Shadow Bubble",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "[Dark]"
-    ],
-    "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "[Dark Type]"
-    },
-    "description": "You create a 3m radius bubble of Darkness aroud you. You are considered to have 3 stages of Cover versus Ranged Moves for 3 Activations.",
-    "actions": [
-      {
-        "name": "Shadow Bubble",
-        "slug": "shadow-bubble",
-        "description": "You create a 3m radius bubble of Darkness aroud you. You are considered to have 3 stages of Cover versus Ranged Moves for 3 Activations.",
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+    "name": "Shadow Bubble",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "[Dark]"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "mental",
+            "approach": "power",
+            "archetype": "[Dark Type]"
         },
-        "type": "generic",
+        "description": "You create a 3m radius bubble of Darkness aroud you. You are considered to have 3 stages of Cover versus Ranged Moves for 3 Activations.",
+        "actions": [
+            {
+                "name": "Shadow Bubble",
+                "slug": "shadow-bubble",
+                "description": "You create a 3m radius bubble of Darkness aroud you. You are considered to have 3 stages of Cover versus Ranged Moves for 3 Activations.",
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 3
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "shadow-bubble",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "A182pJvsuUmdsxeR",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!A182pJvsuUmdsxeR"
+        "node": {
+            "i": 49,
+            "j": -20,
+            "connected": [
+                "root-3",
+                "basic-ball-crafting",
+                "secret-ninja-tools",
+                "training-ball-specs",
+                "type-ball-specs"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/icons/dark_icon.png",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "A182pJvsuUmdsxeR",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }
