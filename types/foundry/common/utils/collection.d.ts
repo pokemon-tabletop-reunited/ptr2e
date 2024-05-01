@@ -73,6 +73,8 @@ declare interface Collection<V>
      * @param strict Throw an Error if the requested id does not exist, otherwise return null. Default false.
      * @return The retrieved Entity, if one was found, otherwise null;
      */
+    getName(name: string, { strict }: { strict: true }): V;
+    getName(name: string, { strict }: { strict: false }): V | undefined;
     getName(name: string, { strict }?: { strict?: boolean }): V | undefined;
 
     /**
@@ -104,6 +106,12 @@ declare interface Collection<V>
      * @return Was the test condition passed by at least one entry?
      */
     some(condition: (value: V) => boolean): boolean;
+
+    /**
+     * Convert the Collection to a primitive array of its contents.
+     * @returns {object[]}  An array of contained values
+     */
+    toJSON(): object[];
 }
 
 declare interface CollectionConstructor {

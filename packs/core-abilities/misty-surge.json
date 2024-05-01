@@ -1,35 +1,32 @@
 {
-	"_id": "S8yHCy1IHidZZTlv",
-	"name": "Misty Surge",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "misty-surge",
-		"actions": [
-			{
-				"slug": "misty-surge",
-				"name": "Misty Surge",
-				"description": "Connection - MistyTerrain. When using Misty Terrain, the user can spend an additional 2 PP to increase the number of rounds Misty Terrain persists by 2.",
-				"traits": [
-					"connection",
-					"terrain"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.S8yHCy1IHidZZTlv"
-		}
-	},
-	"effects": []
+    "name": "Misty Surge",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Misty Surge",
+                "slug": "misty-surge",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "field",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Misty Terrain. The number of rounds Misty Terrain persists is increased by +2.",
+        "traits": [
+            "connection",
+            "terrain"
+        ]
+    },
+    "_id": "PiSRkzoRIHbBUxHY",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

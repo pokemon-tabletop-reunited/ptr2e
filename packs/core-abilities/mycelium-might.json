@@ -1,32 +1,29 @@
 {
-	"_id": "wfHPCTcXgIEHH9xQ",
-	"name": "Mycelium Might",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "mycelium-might",
-		"actions": [
-			{
-				"slug": "mycelium-might",
-				"name": "Mycelium Might",
-				"description": "The user's Status-category attacks are always [Delay 3] actions. The user's Status-category attacks ignore the effects of other creatures [Defensive] ability effects and always apply effects.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.wfHPCTcXgIEHH9xQ"
-		}
-	},
-	"effects": []
+    "name": "Mycelium Might",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Mycelium Might",
+                "slug": "mycelium-might",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's Status-category attacks are always [Delay 3] actions. The user's Status-category attacks ignore the effects of other creatures [Defensive] ability effects and always apply effects.",
+        "traits": []
+    },
+    "_id": "LJCQRuPUk5T9iCJw",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

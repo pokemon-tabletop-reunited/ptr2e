@@ -1,34 +1,32 @@
 {
-	"_id": "Hl7NW69O9jCGXc1B",
-	"name": "Grass Pelt",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "grass-pelt",
-		"actions": [
-			{
-				"slug": "grass-pelt",
-				"name": "Grass Pelt",
-				"description": "While Grassy Terrain is active, the user's DEF Stat is increased by 50%.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.Hl7NW69O9jCGXc1B"
-		}
-	},
-	"effects": []
+    "name": "Grass Pelt",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Grass Pelt",
+                "slug": "grass-pelt",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While Grassy Terrain is active, the user's DEF Stat is increased by 50%.",
+        "traits": [
+            "defensive",
+            "environ"
+        ]
+    },
+    "_id": "tw6vnDkbxjtdB1kk",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

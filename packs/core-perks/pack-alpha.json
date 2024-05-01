@@ -1,0 +1,56 @@
+{
+    "name": "Pack Alpha",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Leadership 25"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "social",
+            "approach": "power",
+            "archetype": "Pack Leader"
+        },
+        "description": "You gain the [Pack Leader] trait, and may designate consenting creatures with the [Pack Mon] trait as members of your pack.",
+        "actions": [
+            {
+                "name": "Pack Alpha",
+                "slug": "pack-alpha",
+                "description": "You gain the [Pack Leader] trait, and may designate consenting creatures with the [Pack Mon] trait as members of your pack.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "pack-alpha",
+        "traits": [],
+        "node": {
+            "i": 8,
+            "j": -25,
+            "connected": [
+                "nurturing-shoots",
+                "breeder",
+                "fighting-fit",
+                "pack-mon",
+                "pile-on",
+                "walking-dead"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "ee07hyZxFObQ5emn",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

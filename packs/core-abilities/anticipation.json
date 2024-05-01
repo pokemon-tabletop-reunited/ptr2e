@@ -1,32 +1,29 @@
 {
-	"_id": "QTbmjc91y99OpoLr",
-	"name": "Anticipation",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "anticipation",
-		"actions": [
-			{
-				"slug": "anticipation",
-				"name": "Anticipation",
-				"description": "The user targets one enemy creature on the field. The user knows the highest power attack on the target's Active attack List.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.QTbmjc91y99OpoLr"
-		}
-	},
-	"effects": []
+    "name": "Anticipation",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Anticipation",
+                "slug": "anticipation",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 20,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user knows the highest Power attack on the target's Active List. The user takes half damage from this attack for the duration of the combat, until switched out, or Fainted.",
+        "traits": []
+    },
+    "_id": "9WznGaPM4CbfIIZZ",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

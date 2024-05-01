@@ -1,34 +1,31 @@
 {
-	"_id": "Q7DAbR8LlxkPJP13",
-	"name": "Sand Rush",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "sand-rush",
-		"actions": [
-			{
-				"slug": "sand-rush",
-				"name": "Sand Rush",
-				"description": "The user's Speed stat is doubled in Sandy Weather. The user is immune to the negative effects of Sandy Weather.",
-				"traits": [
-					"environ"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.Q7DAbR8LlxkPJP13"
-		}
-	},
-	"effects": []
+    "name": "Sand Rush",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Sand Rush",
+                "slug": "sand-rush",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's SPD stat is doubled in Dust Weather. The user is immune to the negative effects of Dust Weather.",
+        "traits": [
+            "environ"
+        ]
+    },
+    "_id": "w8SdWeEOBfhM7bkz",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

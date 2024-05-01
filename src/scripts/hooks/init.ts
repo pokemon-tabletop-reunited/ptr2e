@@ -5,7 +5,9 @@ import { HandlebarTemplates, registerHandlebarsHelpers } from "@utils";
 import { default as TypeEffectiveness } from "../config/effectiveness.ts";
 import { PTRHook } from "./data.ts";
 import { ClockDatabase } from "@data";
-import { TraitSettingsRedirect } from "@module/apps/traits.ts";
+import { TraitsSettingsMenu } from "@module/apps/traits.ts";
+import ActorSheetPTRV2 from "@actor/sheetv2.ts";
+import { HTMLStringTagsElementPTR2e } from "@module/apps/string-tags.ts";
 
 export const Init: PTRHook = {
     listen() {
@@ -29,7 +31,7 @@ export const Init: PTRHook = {
 
             // Set custom combat settings
             CONFIG.ui.combat = PTRCONFIG.ui.combat
-            //CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
+            CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
 
             // Define custom Entity classes
             CONFIG.ActiveEffect.documentClass = PTRCONFIG.ActiveEffect.documentClass;
@@ -49,6 +51,8 @@ export const Init: PTRHook = {
                 documentClass: PTRCONFIG.Change.documentClass,
                 dataModels: PTRCONFIG.Change.dataModels
             };
+            CONFIG.Token.documentClass = PTRCONFIG.Token.documentClass;
+            CONFIG.Token.objectClass = PTRCONFIG.Token.objectClass;
 
             CONFIG.Folder.documentClass = PTRCONFIG.Folder.documentClass;
 
@@ -68,7 +72,9 @@ export const Init: PTRHook = {
             // Register custom sheets
             {
                 Actors.unregisterSheet("core", ActorSheet);
-                Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: true })
+                Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: false })
+                //@ts-ignore
+                Actors.registerSheet("ptr2e", ActorSheetPTRV2, { types: ["humanoid", "pokemon"], makeDefault: true })
                 //@ts-ignore
                 Actors.registerSheet("ptr2e", PTRCONFIG.Actor.sheetClasses["ptu-actor"], { types: ["ptu-actor"], makeDefault: true })
 
@@ -130,9 +136,49 @@ export const Init: PTRHook = {
                 label: "PTR2E.Settings.Traits.Label",
                 hint: "PTR2E.Settings.Traits.Hint",
                 icon: "fa-solid fa-rectangle-list",
-                type: TraitSettingsRedirect,
+                type: TraitsSettingsMenu,
                 restricted: true,
             });
+
+            game.keybindings.register("ptr2e", "undo",{
+                name: "PTR2E.Keybindings.Undo.Name",
+                hint: "PTR2E.Keybindings.Undo.Hint",
+                editable: [
+                    {
+                        key: "KeyZ",
+                        modifiers: ["Control"]
+                    }
+                ],
+                onDown: (context) => game.ptr.web?.onUndo(context),
+            });
+            game.keybindings.register("ptr2e", "delete",{
+                name: "PTR2E.Keybindings.Delete.Name",
+                hint: "PTR2E.Keybindings.Delete.Hint",
+                editable: [
+                    {
+                        key: "Delete",
+                        modifiers: []
+                    }
+                ],
+                onDown: (context) => game.ptr.web?.onDelete(context),
+            });
+
+            //TODO: Delete once foundry fixes this
+            foundry.applications.elements.HTMLStringTagsElement.renderTag = function (tag: string): string {
+                const element = document.createElement("div");
+                element.classList.add("tag");
+                element.dataset.key = tag;
+                const span = document.createElement("span");
+                span.textContent = tag;
+                element.appendChild(span);
+                const a = document.createElement("a");
+                a.classList.add("button", "remove", ...this.icons.remove.split(' '));
+                a.dataset.tooltip = this.labels.remove;
+                element.appendChild(a);
+                return element.outerHTML;
+            }
+
+            window.customElements.define(HTMLStringTagsElementPTR2e.tagName, HTMLStringTagsElementPTR2e);
 
             // Register handlebars helpers
             registerHandlebarsHelpers();

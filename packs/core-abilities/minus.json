@@ -1,32 +1,29 @@
 {
-	"_id": "Imk7cm6bIaHR40td",
-	"name": "Minus",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "minus",
-		"actions": [
-			{
-				"slug": "minus",
-				"name": "Minus",
-				"description": "If there is at least one other allied creature with the Plus, Cationic or Anionic ability on the field, the user's SPATK stat is increased by 50%. If the user is within 5m of an ally with the Plus, Cationic, or Anionic Ability, they gain the effect of that ability.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.Imk7cm6bIaHR40td"
-		}
-	},
-	"effects": []
+    "name": "Minus",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Minus",
+                "slug": "minus",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "If there is at least one other allied creature with the Plus, Cationic or Anionic ability on the field, the user's SPATK stat is increased by 50%. If the user is within range of an ally with the Plus, Cationic, or Anionic Ability, they gain the effect of that ability.",
+        "traits": []
+    },
+    "_id": "pBK8d9cfTLhmu8N6",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

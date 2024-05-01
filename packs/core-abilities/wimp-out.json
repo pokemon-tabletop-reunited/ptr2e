@@ -1,34 +1,31 @@
 {
-	"_id": "RapDnOqfn6qi7iEE",
-	"name": "Wimp Out",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "wimp-out",
-		"actions": [
-			{
-				"slug": "wimp-out",
-				"name": "Wimp Out",
-				"description": "The user freely attacks up to half their movement allowance away from the attacking creature. If the user is an owned Pokemon, they may Switch out from battle as a Free Action, allowing their trainer to Switch In a replacement as a Free Action.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.RapDnOqfn6qi7iEE"
-		}
-	},
-	"effects": []
+    "name": "Wimp Out",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Wimp Out",
+                "slug": "wimp-out",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user freely moves up to half their Movement Score away from the attacking creature. If the user is an owned Pokemon, they may Switch out from battle as a Free Action, allowing their trainer to Switch In a replacement as a Free Action.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "mLPCUiwUR6C4rzD4",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

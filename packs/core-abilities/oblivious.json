@@ -1,34 +1,31 @@
 {
-	"_id": "H9pjHZ0rMCV4QTUc",
-	"name": "Oblivious",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "oblivious",
-		"actions": [
-			{
-				"slug": "oblivious",
-				"name": "Oblivious",
-				"description": "[Social] attack and ability effects affecting the user has their duration reduced by 2 instead of 1 at the end of each of the user's activations.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.H9pjHZ0rMCV4QTUc"
-		}
-	},
-	"effects": []
+    "name": "Oblivious",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Oblivious",
+                "slug": "oblivious",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "[Social] attack and ability effects affecting the user have their duration reduced by 2 instead of 1 at the end of each of the user's activations.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "1dM2QBbJGkTthOkk",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

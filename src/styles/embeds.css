@@ -25,7 +25,6 @@ aside[role="tooltip"].attack figure header.header,
 .chat-message .perk-embed figure header.header,
 .chat-message .species-embed figure header.header,
 .chat-message .weapon-embed figure header.header {
-  margin-bottom: 0.5rem;
   border-bottom: 1px solid var(--color-light-6);
 }
 aside[role="tooltip"].attack figure header.traits,
@@ -40,6 +39,7 @@ aside[role="tooltip"].attack figure header.traits,
 .chat-message .perk-embed figure header.traits,
 .chat-message .species-embed figure header.traits,
 .chat-message .weapon-embed figure header.traits {
+  margin-top: 0.5rem;
   border-bottom: unset;
 }
 aside[role="tooltip"].attack figure header.traits tags[readonly],
@@ -75,6 +75,21 @@ aside[role="tooltip"].attack figure header.traits tags[readonly] span.tagify__in
 .chat-message .species-embed figure header.traits tags[readonly] span.tagify__input,
 .chat-message .weapon-embed figure header.traits tags[readonly] span.tagify__input {
   display: none;
+}
+aside[role="tooltip"].attack figure header .dexNumber,
+.chat-message .move-embed figure header .dexNumber,
+.chat-message .effect-embed figure header .dexNumber,
+.chat-message .ability-embed figure header .dexNumber,
+.chat-message .consumable-embed figure header .dexNumber,
+.chat-message .container-embed figure header .dexNumber,
+.chat-message .effect-item-embed figure header .dexNumber,
+.chat-message .equipment-embed figure header .dexNumber,
+.chat-message .gear-embed figure header .dexNumber,
+.chat-message .perk-embed figure header .dexNumber,
+.chat-message .species-embed figure header .dexNumber,
+.chat-message .weapon-embed figure header .dexNumber {
+  font-size: smaller;
+  color: #6b6b6b;
 }
 aside[role="tooltip"].attack figure aside img,
 .chat-message .move-embed figure aside img,
@@ -396,6 +411,271 @@ aside[role="tooltip"].attack figure content.effect-embed .details fieldset artic
 .chat-message .weapon-embed fieldset {
   border-color: var(--color-light-6);
   border-radius: 8px;
+}
+.chat-message .move-embed fieldset legend,
+.chat-message .effect-embed fieldset legend,
+.chat-message .ability-embed fieldset legend,
+.chat-message .consumable-embed fieldset legend,
+.chat-message .container-embed fieldset legend,
+.chat-message .effect-item-embed fieldset legend,
+.chat-message .equipment-embed fieldset legend,
+.chat-message .gear-embed fieldset legend,
+.chat-message .perk-embed fieldset legend,
+.chat-message .species-embed fieldset legend,
+.chat-message .weapon-embed fieldset legend {
+  font-weight: bold;
+}
+.chat-message .move-embed fieldset .effect-description,
+.chat-message .effect-embed fieldset .effect-description,
+.chat-message .ability-embed fieldset .effect-description,
+.chat-message .consumable-embed fieldset .effect-description,
+.chat-message .container-embed fieldset .effect-description,
+.chat-message .effect-item-embed fieldset .effect-description,
+.chat-message .equipment-embed fieldset .effect-description,
+.chat-message .gear-embed fieldset .effect-description,
+.chat-message .perk-embed fieldset .effect-description,
+.chat-message .species-embed fieldset .effect-description,
+.chat-message .weapon-embed fieldset .effect-description {
+  white-space: pre-line;
+  word-break: break-word;
+}
+.chat-message .move-embed content.species-embed,
+.chat-message .effect-embed content.species-embed,
+.chat-message .ability-embed content.species-embed,
+.chat-message .consumable-embed content.species-embed,
+.chat-message .container-embed content.species-embed,
+.chat-message .effect-item-embed content.species-embed,
+.chat-message .equipment-embed content.species-embed,
+.chat-message .gear-embed content.species-embed,
+.chat-message .perk-embed content.species-embed,
+.chat-message .species-embed content.species-embed,
+.chat-message .weapon-embed content.species-embed,
+.chat-message .move-embed content.perk-embed,
+.chat-message .effect-embed content.perk-embed,
+.chat-message .ability-embed content.perk-embed,
+.chat-message .consumable-embed content.perk-embed,
+.chat-message .container-embed content.perk-embed,
+.chat-message .effect-item-embed content.perk-embed,
+.chat-message .equipment-embed content.perk-embed,
+.chat-message .gear-embed content.perk-embed,
+.chat-message .perk-embed content.perk-embed,
+.chat-message .species-embed content.perk-embed,
+.chat-message .weapon-embed content.perk-embed {
+  display: block;
+  border: unset;
+  background: unset;
+}
+.chat-message .move-embed content.species-embed section,
+.chat-message .effect-embed content.species-embed section,
+.chat-message .ability-embed content.species-embed section,
+.chat-message .consumable-embed content.species-embed section,
+.chat-message .container-embed content.species-embed section,
+.chat-message .effect-item-embed content.species-embed section,
+.chat-message .equipment-embed content.species-embed section,
+.chat-message .gear-embed content.species-embed section,
+.chat-message .perk-embed content.species-embed section,
+.chat-message .species-embed content.species-embed section,
+.chat-message .weapon-embed content.species-embed section,
+.chat-message .move-embed content.perk-embed section,
+.chat-message .effect-embed content.perk-embed section,
+.chat-message .ability-embed content.perk-embed section,
+.chat-message .consumable-embed content.perk-embed section,
+.chat-message .container-embed content.perk-embed section,
+.chat-message .effect-item-embed content.perk-embed section,
+.chat-message .equipment-embed content.perk-embed section,
+.chat-message .gear-embed content.perk-embed section,
+.chat-message .perk-embed content.perk-embed section,
+.chat-message .species-embed content.perk-embed section,
+.chat-message .weapon-embed content.perk-embed section {
+  margin-bottom: 0.5rem;
+}
+.chat-message .move-embed content.species-embed section:last-child,
+.chat-message .effect-embed content.species-embed section:last-child,
+.chat-message .ability-embed content.species-embed section:last-child,
+.chat-message .consumable-embed content.species-embed section:last-child,
+.chat-message .container-embed content.species-embed section:last-child,
+.chat-message .effect-item-embed content.species-embed section:last-child,
+.chat-message .equipment-embed content.species-embed section:last-child,
+.chat-message .gear-embed content.species-embed section:last-child,
+.chat-message .perk-embed content.species-embed section:last-child,
+.chat-message .species-embed content.species-embed section:last-child,
+.chat-message .weapon-embed content.species-embed section:last-child,
+.chat-message .move-embed content.perk-embed section:last-child,
+.chat-message .effect-embed content.perk-embed section:last-child,
+.chat-message .ability-embed content.perk-embed section:last-child,
+.chat-message .consumable-embed content.perk-embed section:last-child,
+.chat-message .container-embed content.perk-embed section:last-child,
+.chat-message .effect-item-embed content.perk-embed section:last-child,
+.chat-message .equipment-embed content.perk-embed section:last-child,
+.chat-message .gear-embed content.perk-embed section:last-child,
+.chat-message .perk-embed content.perk-embed section:last-child,
+.chat-message .species-embed content.perk-embed section:last-child,
+.chat-message .weapon-embed content.perk-embed section:last-child {
+  margin-bottom: unset;
+}
+.chat-message .move-embed content.species-embed fieldset,
+.chat-message .effect-embed content.species-embed fieldset,
+.chat-message .ability-embed content.species-embed fieldset,
+.chat-message .consumable-embed content.species-embed fieldset,
+.chat-message .container-embed content.species-embed fieldset,
+.chat-message .effect-item-embed content.species-embed fieldset,
+.chat-message .equipment-embed content.species-embed fieldset,
+.chat-message .gear-embed content.species-embed fieldset,
+.chat-message .perk-embed content.species-embed fieldset,
+.chat-message .species-embed content.species-embed fieldset,
+.chat-message .weapon-embed content.species-embed fieldset,
+.chat-message .move-embed content.perk-embed fieldset,
+.chat-message .effect-embed content.perk-embed fieldset,
+.chat-message .ability-embed content.perk-embed fieldset,
+.chat-message .consumable-embed content.perk-embed fieldset,
+.chat-message .container-embed content.perk-embed fieldset,
+.chat-message .effect-item-embed content.perk-embed fieldset,
+.chat-message .equipment-embed content.perk-embed fieldset,
+.chat-message .gear-embed content.perk-embed fieldset,
+.chat-message .perk-embed content.perk-embed fieldset,
+.chat-message .species-embed content.perk-embed fieldset,
+.chat-message .weapon-embed content.perk-embed fieldset {
+  border-color: var(--color-light-6);
+  border-radius: 8px;
+  background: #efe6d8;
+}
+.chat-message .move-embed content.species-embed fieldset label,
+.chat-message .effect-embed content.species-embed fieldset label,
+.chat-message .ability-embed content.species-embed fieldset label,
+.chat-message .consumable-embed content.species-embed fieldset label,
+.chat-message .container-embed content.species-embed fieldset label,
+.chat-message .effect-item-embed content.species-embed fieldset label,
+.chat-message .equipment-embed content.species-embed fieldset label,
+.chat-message .gear-embed content.species-embed fieldset label,
+.chat-message .perk-embed content.species-embed fieldset label,
+.chat-message .species-embed content.species-embed fieldset label,
+.chat-message .weapon-embed content.species-embed fieldset label,
+.chat-message .move-embed content.perk-embed fieldset label,
+.chat-message .effect-embed content.perk-embed fieldset label,
+.chat-message .ability-embed content.perk-embed fieldset label,
+.chat-message .consumable-embed content.perk-embed fieldset label,
+.chat-message .container-embed content.perk-embed fieldset label,
+.chat-message .effect-item-embed content.perk-embed fieldset label,
+.chat-message .equipment-embed content.perk-embed fieldset label,
+.chat-message .gear-embed content.perk-embed fieldset label,
+.chat-message .perk-embed content.perk-embed fieldset label,
+.chat-message .species-embed content.perk-embed fieldset label,
+.chat-message .weapon-embed content.perk-embed fieldset label {
+  font-weight: bold;
+}
+.chat-message .move-embed content.species-embed fieldset span,
+.chat-message .effect-embed content.species-embed fieldset span,
+.chat-message .ability-embed content.species-embed fieldset span,
+.chat-message .consumable-embed content.species-embed fieldset span,
+.chat-message .container-embed content.species-embed fieldset span,
+.chat-message .effect-item-embed content.species-embed fieldset span,
+.chat-message .equipment-embed content.species-embed fieldset span,
+.chat-message .gear-embed content.species-embed fieldset span,
+.chat-message .perk-embed content.species-embed fieldset span,
+.chat-message .species-embed content.species-embed fieldset span,
+.chat-message .weapon-embed content.species-embed fieldset span,
+.chat-message .move-embed content.perk-embed fieldset span,
+.chat-message .effect-embed content.perk-embed fieldset span,
+.chat-message .ability-embed content.perk-embed fieldset span,
+.chat-message .consumable-embed content.perk-embed fieldset span,
+.chat-message .container-embed content.perk-embed fieldset span,
+.chat-message .effect-item-embed content.perk-embed fieldset span,
+.chat-message .equipment-embed content.perk-embed fieldset span,
+.chat-message .gear-embed content.perk-embed fieldset span,
+.chat-message .perk-embed content.perk-embed fieldset span,
+.chat-message .species-embed content.perk-embed fieldset span,
+.chat-message .weapon-embed content.perk-embed fieldset span {
+  text-align: center;
+}
+.chat-message .move-embed content.species-embed main,
+.chat-message .effect-embed content.species-embed main,
+.chat-message .ability-embed content.species-embed main,
+.chat-message .consumable-embed content.species-embed main,
+.chat-message .container-embed content.species-embed main,
+.chat-message .effect-item-embed content.species-embed main,
+.chat-message .equipment-embed content.species-embed main,
+.chat-message .gear-embed content.species-embed main,
+.chat-message .perk-embed content.species-embed main,
+.chat-message .species-embed content.species-embed main,
+.chat-message .weapon-embed content.species-embed main {
+  grid-template-areas: "stats" "primary-movement" "secondary-movement";
+}
+content.perk-embed .perk-info fieldset {
+  text-align: left;
+}
+content.perk-embed .perk-info fieldset .cost-row {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-auto-rows: 17px;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  margin-bottom: unset;
+}
+content.perk-embed .perk-info fieldset .cost-row label {
+  font-weight: bold;
+}
+content.perk-embed .perk-info fieldset .cost-row span {
+  text-align: center;
+}
+content.perk-embed .perk-info fieldset.prereqs {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+}
+content.perk-embed .perk-info fieldset.prereqs ul {
+  margin: 0;
+}
+content.perk-embed .perk-info fieldset.prereqs ul:has(.none) {
+  margin: unset;
+  padding: unset;
+}
+content.perk-embed .perk-info fieldset.prereqs li {
+  text-align: left;
+}
+content.perk-embed .perk-info fieldset.prereqs li.none {
+  text-align: center;
+  font-size: smaller;
+  color: #6b6b6b;
+  list-style: none;
+  font-style: italic;
+}
+content.species-embed {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+content.species-embed aside {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 44px;
+  margin: 0.25rem;
+  gap: 5px;
+}
+content.species-embed aside img {
+  border: unset;
+  border-radius: 50%;
+}
+content.species-embed main {
+  flex: 1 0 auto;
+  margin: 0 0.25rem;
+  display: grid;
+  grid-template-areas: "stats primary-movement" "stats secondary-movement";
+}
+content.species-embed main section.species-basestats {
+  grid-area: stats;
+}
+content.species-embed main section.species-primary-movement {
+  grid-area: primary-movement;
+}
+content.species-embed main section.species-secondary-movement {
+  grid-area: secondary-movement;
+}
+content.species-embed main section fieldset {
+  display: grid !important;
+  grid-template-columns: 70% 30%;
+  grid-auto-rows: 17px;
+  gap: 0.25rem;
+  height: 100%;
 }
 content.attack-embed {
   display: flex;

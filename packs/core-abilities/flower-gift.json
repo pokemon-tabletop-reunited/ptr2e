@@ -1,34 +1,32 @@
 {
-	"_id": "SP19D5EKPVOxNyyD",
-	"name": "Flower Gift",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "flower-gift",
-		"actions": [
-			{
-				"slug": "flower-gift",
-				"name": "Flower Gift",
-				"description": "While in Sunny Weather, Cherrim changes to Sunny Form Cherrim. While in Sunny Form, Cherrim raises the ATK and SPDEF of themself and allied creatures on the field by 50%.",
-				"traits": [
-					"forme-change"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.SP19D5EKPVOxNyyD"
-		}
-	},
-	"effects": []
+    "name": "Flower Gift",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Flower Gift",
+                "slug": "flower-gift",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "allied-aura",
+                    "distance": 15,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While in Sun Weather, the user changes to their Sunny Forme. While in Sunny Forme, the Base ATK and SPDEF stats of the user and allied creatures in range are increased by 50%.",
+        "traits": [
+            "forme-change",
+            "aura"
+        ]
+    },
+    "_id": "cH8mVC6uPMvRSUVO",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

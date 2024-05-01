@@ -1,0 +1,57 @@
+{
+    "name": "Parkour",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Acrobatics 45"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "physical",
+            "approach": "finesse",
+            "archetype": "Athleticism"
+        },
+        "description": "When your Movement would take you into an obstacle that could reasonably be traversed within your Overland Movement Allowance, you may make a Hard (-20) Acrobatics check to temporarily grant yourself [Wallclimber] during that movement. If you have not returned to stable ground before your activation ends, you immediately fall.",
+        "actions": [
+            {
+                "name": "Parkour",
+                "slug": "parkour",
+                "description": "When your Movement would take you into an obstacle that could reasonably be traversed within your Overland Movement Allowance, you may make a Hard (-20) Acrobatics check to temporarily grant yourself [Wallclimber] during that movement. If you have not returned to stable ground before your activation ends, you immediately fall.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "parkour",
+        "traits": [],
+        "node": {
+            "i": -33,
+            "j": -5,
+            "connected": [
+                "freeclimber",
+                "fearsome-defense",
+                "aura-dampening",
+                "sea-lungs",
+                "telekinetic-potential",
+                "telepathic-potential",
+                "ultraviolet"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#0000ff",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "95OUHWV4eEI4I3Fe",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

@@ -1,35 +1,32 @@
 {
-	"_id": "HXCWlHjsqO8aDCCq",
-	"name": "Drought",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "drought",
-		"actions": [
-			{
-				"slug": "drought",
-				"name": "Drought",
-				"description": "Connection - Sunny Day. When using Sunny Day, the user can spend an additional 2 PP to have the weather become (T2 Sun) for 5 rounds instead of Sunny Weather.",
-				"traits": [
-					"connection",
-					"weather"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.HXCWlHjsqO8aDCCq"
-		}
-	},
-	"effects": []
+    "name": "Drought",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Drought",
+                "slug": "drought",
+                "type": "generic",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "field",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Sunny Day. The weather becomes Blistering Heat for 5 rounds instead of Sunny.",
+        "traits": [
+            "connection",
+            "weather"
+        ]
+    },
+    "_id": "oQolPxdZBJwJydNO",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,0 +1,54 @@
+{
+    "name": "Detect Minds",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "[Telepath]"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "mental",
+            "approach": "finesse",
+            "archetype": "[Psychic Type]"
+        },
+        "description": "You can detect the presence of minds within a range equal to your Occult (Psychic) Skill in metres, unless those minds have been concealed in some way.",
+        "actions": [
+            {
+                "name": "Detect Minds",
+                "slug": "detect-minds",
+                "description": "You can detect the presence of minds within a range equal to your Occult (Psychic) Skill in metres, unless those minds have been concealed in some way.",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 2
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "detect-minds",
+        "traits": [],
+        "node": {
+            "i": -16,
+            "j": 54,
+            "connected": [
+                "beauty",
+                "root-4",
+                "conceal-mind"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/icons/psychic_icon.png",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "W565Ar8WPA07HEBx",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

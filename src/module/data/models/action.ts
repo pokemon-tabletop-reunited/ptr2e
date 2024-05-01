@@ -108,7 +108,7 @@ interface ActionPTR2e extends foundry.abstract.DataModel {
          * The activation cost of the action.
          * @defaultValue `'simple'`
          * @remarks
-         * This is one of `'simple'`, `'complete'`, or `'free'`.
+         * This is one of `'simple'`, `'complex'`, or `'free'`.
          */
         activation: ActionCost,
         /**

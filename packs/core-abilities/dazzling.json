@@ -1,34 +1,31 @@
 {
-	"_id": "ZRKz6JesthqnsMgF",
-	"name": "Dazzling",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "dazzling",
-		"actions": [
-			{
-				"slug": "dazzling",
-				"name": "Dazzling",
-				"description": "Other creatures' Interrupt Actions cannot be declared on the user's activations.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.ZRKz6JesthqnsMgF"
-		}
-	},
-	"effects": []
+    "name": "Dazzling",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Dazzling",
+                "slug": "dazzling",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "field",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Other creatures' [Interrupt X] Actions cannot be declared on the user's activations.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "I4jwxlyXqos99bBW",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

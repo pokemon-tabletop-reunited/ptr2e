@@ -1,34 +1,31 @@
 {
-	"_id": "pplm3iADpcvbCyTa",
-	"name": "Cursed Body",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "cursed-body",
-		"actions": [
-			{
-				"slug": "cursed-body",
-				"name": "Cursed Body",
-				"description": "When the user is hit by a damaging attack, the attacking creature has a 30% chance for the triggering attack to become Disabled 5.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.pplm3iADpcvbCyTa"
-		}
-	},
-	"effects": []
+    "name": "Cursed Body",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Cursed Body",
+                "slug": "cursed-body",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The triggering creature has a 30% chance for the triggering attack to become Disabled 5.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "FZPJLE028UqSDDue",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

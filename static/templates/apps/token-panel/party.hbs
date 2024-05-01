@@ -1,0 +1,25 @@
+<section class="party">
+    {{#unless isOwner}}
+        {{#if party.owner}}
+            <div class="party-header">
+                <span>Party Leader</span>
+            </div>
+            <div class="owner">
+                <div class="icon actor" data-tooltip="{{party.owner.name}}" data-tooltip-direction="UP" data-uuid="{{party.owner.uuid}}">
+                    <img draggable="true" src="{{party.owner.img}}" alt="{{party.owner.name}}">
+                </div>
+                <div class="name">
+                    <span class="leader-name">{{party.owner.name}}</span>
+                </div>
+            </div>
+        {{/if}}
+    {{/unless}}
+    <div class="party-header">
+        <span>Party Members</span>
+    </div>
+    {{#each party.party as |actor|}}
+        <div class="icon actor" data-tooltip="{{actor.name}}" data-tooltip-direction="UP" data-uuid="{{actor.uuid}}">
+            <img draggable="true" src="{{actor.img}}" alt="{{actor.name}}">
+        </div>
+    {{/each}}
+</section>

@@ -1,0 +1,56 @@
+{
+    "name": "Shielding Aura",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Aura Sense 50"
+        ],
+        "cost": 3,
+        "design": {
+            "arena": "physical",
+            "approach": "resilience",
+            "archetype": "Aura"
+        },
+        "description": "You harden your Aura about yourself. You gain Resolved 5.",
+        "actions": [
+            {
+                "name": "Shielding Aura",
+                "slug": "shielding-aura",
+                "description": "You harden your Aura about yourself. You gain Resolved 5.",
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 4
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "shielding-aura",
+        "traits": [],
+        "node": {
+            "i": -12,
+            "j": -20,
+            "connected": [
+                "aura-bonding",
+                "aura-channeling",
+                "aura-empathy",
+                "shift-consciousness-aura",
+                "sight-beyond-sight"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#8000ff",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "D4mh3LuuSy0DDBj0",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

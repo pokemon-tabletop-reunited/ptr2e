@@ -1,34 +1,31 @@
 {
-	"_id": "0mhQYwMD24xFAfrW",
-	"name": "Shadow Tag",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "shadow-tag",
-		"actions": [
-			{
-				"slug": "shadow-tag",
-				"name": "Shadow Tag",
-				"description": "All enemy creatures within 3m of the user are Stuck and Slowed.",
-				"traits": [
-					"trap"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.0mhQYwMD24xFAfrW"
-		}
-	},
-	"effects": []
+    "name": "Shadow Tag",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Shadow Tag",
+                "slug": "shadow-tag",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "aura",
+                    "distance": 5,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "All enemy creatures within 5m of the user are Stuck and Slowed.",
+        "traits": [
+            "trap"
+        ]
+    },
+    "_id": "rI19dKdKQNDruQFI",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

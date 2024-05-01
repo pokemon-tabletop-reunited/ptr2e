@@ -1,0 +1,56 @@
+{
+    "name": "Pokeball Repairs",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Electronics 20"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "mental",
+            "approach": "resilience",
+            "archetype": "Crafting"
+        },
+        "description": "You may make a Mechanics check with a penalty based on the Grade of the PokeBall you wish to repair after a failed capture check (-10 for Great Balls, -20 for Ultra Balls, etc). This requires appropriate tools.",
+        "actions": [
+            {
+                "name": "Pokeball Repairs",
+                "slug": "pokeball-repairs",
+                "description": "You may make a Mechanics check with a penalty based on the Grade of the PokeBall you wish to repair after a failed capture check (-10 for Great Balls, -20 for Ultra Balls, etc). This requires appropriate tools.",
+                "cost": {
+                    "activation": "complex"
+                },
+                "type": "camping",
+                "traits": []
+            }
+        ],
+        "slug": "pokeball-repairs",
+        "traits": [],
+        "node": {
+            "i": 40,
+            "j": -20,
+            "connected": [
+                "basic-ball-crafting",
+                "curveball-technique",
+                "berserk",
+                "emergency-retreat",
+                "secret-ninja-tools",
+                "venomous"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#808080",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "2YjQ2sYKiLQSFmJP",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

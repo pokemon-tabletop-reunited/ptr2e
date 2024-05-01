@@ -1,0 +1,55 @@
+{
+    "name": "Blacksmith",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Profession (Smith) 10"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "physical",
+            "approach": "power",
+            "archetype": "Crafting"
+        },
+        "description": "You have trained as a Blacksmith and may craft [Smith] recipes you know.",
+        "actions": [
+            {
+                "name": "Blacksmith",
+                "slug": "blacksmith",
+                "description": "You have trained as a Blacksmith and may craft [Smith] recipes you know.",
+                "cost": {
+                    "activation": "complex"
+                },
+                "type": "camping",
+                "traits": []
+            }
+        ],
+        "slug": "blacksmith",
+        "traits": [],
+        "node": {
+            "i": 47,
+            "j": -6,
+            "connected": [
+                "root-3",
+                "basic-ball-crafting",
+                "belt-expansion-1",
+                "fast-pitch",
+                "trained-rider"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#400040",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
+                "tint": "#ffff80",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "AZsIBU1VHzxX4NHx",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

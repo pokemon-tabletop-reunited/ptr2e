@@ -1,0 +1,59 @@
+{
+    "name": "Silver Bullet",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "[Trainer] or [Expedition Leader]",
+            "Psychology 40"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "mental",
+            "approach": "power",
+            "archetype": "Shadow"
+        },
+        "description": "The target gains +25% damage against [Shadow] creatures with their next Attack.",
+        "actions": [
+            {
+                "name": "Silver Bullet",
+                "slug": "silver-bullet",
+                "description": "The target gains +25% damage against [Shadow] creatures with their next Attack.",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 2
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "silver-bullet",
+        "traits": [],
+        "node": {
+            "i": -16,
+            "j": 12,
+            "connected": [
+                "mankey-see-mankey-do",
+                "drifter",
+                "dead-eye",
+                "koffing-class-curry",
+                "fisherman",
+                "unreasonable",
+                "weaponized-weather"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#ffffff",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
+                "tint": "#040404",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "r69KkYo3UhSWLXpG",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

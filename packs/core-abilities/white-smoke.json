@@ -1,35 +1,33 @@
 {
-	"_id": "2IChQHa6jtYgitxs",
-	"name": "White Smoke",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "white-smoke",
-		"actions": [
-			{
-				"slug": "white-smoke",
-				"name": "White Smoke",
-				"description": "A 2m smoky cloud emanates from the user. Any creature within the cloud has +1 EVA Stage. The user is immune to Negative Stage Change effects.",
-				"traits": [
-					"defensive",
-					"hazard"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.2IChQHa6jtYgitxs"
-		}
-	},
-	"effects": []
+    "name": "White Smoke",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "White Smoke",
+                "slug": "white-smoke",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Smokescreen. The user freely uses Smokescreen with the blast centered on themselves. Then, the triggering effect is cured. Smokescreen created by the user does not affect themselves or allies.",
+        "traits": [
+            "defensive",
+            "hazard",
+            "connection"
+        ]
+    },
+    "_id": "0ChCa28ibPq8Rnws",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

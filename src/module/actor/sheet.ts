@@ -73,7 +73,7 @@ class ActorSheetPTR2e extends ActorSheet<ActorPTR2e> {
     }
 
     override async close(options = {}): Promise<void> {
-        if (game.ptr.tree.actor === this.actor) {
+        if (game.ptr.web.actor === this.actor) {
             this.minimize();
             return;
         }

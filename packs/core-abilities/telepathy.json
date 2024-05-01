@@ -1,34 +1,31 @@
 {
-	"_id": "SSVEl8XFB5aTOp6l",
-	"name": "Telepathy",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "telepathy",
-		"actions": [
-			{
-				"slug": "telepathy",
-				"name": "Telepathy",
-				"description": "The user is unaffected by area-of-effect attacks from allied creatures. The user's area-of-effect attacks do not affect or damage allies.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.SSVEl8XFB5aTOp6l"
-		}
-	},
-	"effects": []
+    "name": "Telepathy",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Telepathy",
+                "slug": "telepathy",
+                "type": "generic",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is unaffected by the triggering attack. Passive: The user's area-of-effect Physical- and Special- Category attacks gain [Friendly].",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "rRvUkG9ajLnOdUDA",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

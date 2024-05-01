@@ -1,34 +1,31 @@
 {
-	"_id": "6YiZnRvJqXgcx4X4",
-	"name": "Leaf Guard",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "leaf-guard",
-		"actions": [
-			{
-				"slug": "leaf-guard",
-				"name": "Leaf Guard",
-				"description": "While Sunny Weather is active, the user is immune to the effects of Major Status Conditions inflicted by other creatures.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.6YiZnRvJqXgcx4X4"
-		}
-	},
-	"effects": []
+    "name": "Leaf Guard",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Leaf Guard",
+                "slug": "leaf-guard",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While Sun Weather is active, the user is immune to the effects of Major Status Conditions inflicted by other creatures.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "ZjYffy3wgp9MxO77",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

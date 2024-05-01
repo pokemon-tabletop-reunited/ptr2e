@@ -1,32 +1,29 @@
 {
-	"_id": "XbLpQ3kG5uwII754",
-	"name": "Receiver",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "receiver",
-		"actions": [
-			{
-				"slug": "receiver",
-				"name": "Receiver",
-				"description": "The user copies 1 Ability a Fainted allied creature has and replaces Receiver with it for the rest of combat. Copied abilities with a Trigger that requires the user to switch in activate with this effect. [Legendary] and [Forme-Change] abilities cannot be copied.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.XbLpQ3kG5uwII754"
-		}
-	},
-	"effects": []
+    "name": "Receiver",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Receiver",
+                "slug": "receiver",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 20,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user copies 1 Ability the Fainted allied creature has and replaces Receiver with it for the rest of combat. Copied abilities with a Trigger that requires the user to switch in activate with this effect. [Legendary], [Innate], and [Forme Change] abilities cannot be copied.",
+        "traits": []
+    },
+    "_id": "QHrvZPnta5pfxRM4",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

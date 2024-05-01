@@ -1,34 +1,31 @@
 {
-	"_id": "nKW5sr1U4zvctFUi",
-	"name": "Symbiosis",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "symbiosis",
-		"actions": [
-			{
-				"slug": "symbiosis",
-				"name": "Symbiosis",
-				"description": "For every active ally on the field that shares a Type with the user, the user takes 10% reduced damage from incoming attacks, to a maximum of 30% reduced damage.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.nKW5sr1U4zvctFUi"
-		}
-	},
-	"effects": []
+    "name": "Symbiosis",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Symbiosis",
+                "slug": "symbiosis",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "For every active ally on the field that shares a Type with the user, the user takes 10% reduced damage from incoming attacks, to a maximum of 30% reduced damage.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "DXwtY4QIJwPVqKq5",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

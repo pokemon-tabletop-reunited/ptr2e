@@ -1,32 +1,29 @@
 {
-	"_id": "LKGbP8T1HU6ZC4ST",
-	"name": "Iron Fist",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "iron-fist",
-		"actions": [
-			{
-				"slug": "iron-fist",
-				"name": "Iron Fist",
-				"description": "The user's [Punch] attacks have 30% increased Power.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.LKGbP8T1HU6ZC4ST"
-		}
-	},
-	"effects": []
+    "name": "Iron Fist",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Iron Fist",
+                "slug": "iron-fist",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's [Punch] attacks have 30% increased Power.",
+        "traits": []
+    },
+    "_id": "vS6IIfae94Y2hx5d",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

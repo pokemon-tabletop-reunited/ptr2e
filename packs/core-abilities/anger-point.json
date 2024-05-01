@@ -1,34 +1,31 @@
 {
-	"_id": "pFrI6fjddLR2gRQa",
-	"name": "Anger Point",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "anger-point",
-		"actions": [
-			{
-				"slug": "anger-point",
-				"name": "Anger Point",
-				"description": "The user gains +6 ATK stages for 5 activations.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.pFrI6fjddLR2gRQa"
-		}
-	},
-	"effects": []
+    "name": "Anger Point",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Anger Point",
+                "slug": "anger-point",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user gains +6 ATK stages for 5 activations.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "Q5bRwXdj0FOnpKU5",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

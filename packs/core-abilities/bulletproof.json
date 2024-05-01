@@ -1,34 +1,31 @@
 {
-	"_id": "7iiddwQZalM2aSRp",
-	"name": "Bulletproof",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "bulletproof",
-		"actions": [
-			{
-				"slug": "bulletproof",
-				"name": "Bulletproof",
-				"description": "Your are immune to the damage and effects of [Explode] and [Missile] attacks.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.7iiddwQZalM2aSRp"
-		}
-	},
-	"effects": []
+    "name": "Bulletproof",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Bulletproof",
+                "slug": "bulletproof",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is immune to the damage and effects of [Explode] and [Missile] attacks.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "kpdBkWskGU0ovhHY",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

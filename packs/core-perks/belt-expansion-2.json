@@ -1,0 +1,53 @@
+{
+    "name": "Belt Expansion 2",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Belt Expansion 1",
+            "Human"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "physical",
+            "approach": "resilience",
+            "archetype": "Gear"
+        },
+        "description": "Add an additional Belt slot.",
+        "actions": [
+            {
+                "name": "Belt Expansion 2",
+                "slug": "belt-expansion-2",
+                "description": "Add an additional Belt slot.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "belt-expansion-2",
+        "traits": [],
+        "node": {
+            "i": 48,
+            "j": 12,
+            "connected": [
+                "belt-expansion-1",
+                "belt-expansion-3"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#800000",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "sJ1B6djHXWc4F5Ez",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

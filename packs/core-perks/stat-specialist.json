@@ -1,0 +1,55 @@
+{
+    "name": "<Stat> Specialist",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Leadership 40",
+            "[Trainer] or [Expedition Leader]"
+        ],
+        "cost": 3,
+        "design": {
+            "arena": "mental",
+            "approach": "resilience",
+            "archetype": "Stat Ace"
+        },
+        "description": "Creatures considered to be under your command or ownership (i.e. owned pokemon, expedition team members, human NPC underlings) gain the <stat specialist=\"\"> keyword, which becomes the relevant Stat Specialist trait. You yourself also gain this trait.</stat>",
+        "actions": [
+            {
+                "name": "<Stat> Specialist",
+                "slug": "stat-specialist",
+                "description": "Creatures considered to be under your command or ownership (i.e. owned pokemon, expedition team members, human NPC underlings) gain the <Stat Specialist> keyword, which becomes the relevant Stat Specialist trait. You yourself also gain this trait.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "stat-specialist",
+        "traits": [],
+        "node": {
+            "i": 18,
+            "j": -21,
+            "connected": [
+                "root-2",
+                "stat-iv-booster-1",
+                "fighting-fit",
+                "shiny-mutation"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "DUzi1e72sbfcLQU1",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

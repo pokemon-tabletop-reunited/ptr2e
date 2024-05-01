@@ -1,0 +1,54 @@
+{
+    "name": "Aura User",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Aura Sense 20"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "mental",
+            "approach": "resilience",
+            "archetype": "Aura"
+        },
+        "description": "You gain [Aura User].",
+        "actions": [
+            {
+                "name": "Aura User",
+                "slug": "aura-user",
+                "description": "You gain [Aura User].",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "aura-user",
+        "traits": [],
+        "node": {
+            "i": -10,
+            "j": -9,
+            "connected": [
+                "aura-projection",
+                "aura-haze",
+                "root-perk",
+                "aura-channeling"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#bcf0d8",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+                "tint": "#18af68",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "ft8sIBRLOGVjp70g",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

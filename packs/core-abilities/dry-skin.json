@@ -1,35 +1,33 @@
 {
-	"_id": "LTe7FdaESiTqxP3O",
-	"name": "Dry Skin",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "dry-skin",
-		"actions": [
-			{
-				"slug": "dry-skin",
-				"name": "Dry Skin",
-				"description": "The user recovers 1/4 of their Max HP when hit by a Water-type attack, and recovers a tick of HP at the end of their turn in Rainy Weather. The user takes 25% more damage from Fire-type attacks, and loses a Tick of HP at the end of their turn in Sunny Weather.",
-				"traits": [
-					"healing",
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.LTe7FdaESiTqxP3O"
-		}
-	},
-	"effects": []
+    "name": "Dry Skin",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Dry Skin",
+                "slug": "dry-skin",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user recovers 1/4 of their Max HP when hit by a Water-Type attack, and recovers a tick of HP at the end of their turn in Rain Weather. The user takes 25% more damage from Fire-Type attacks, and loses a Tick of HP at the end of their turn in Sun Weather.",
+        "traits": [
+            "healing",
+            "defensive",
+            "environ"
+        ]
+    },
+    "_id": "NhCpJD1o5LtcONZ9",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

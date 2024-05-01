@@ -1,0 +1,55 @@
+{
+    "name": "Pile on!",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Leadership 40",
+            "[Pack Leader]"
+        ],
+        "cost": 3,
+        "design": {
+            "arena": "social",
+            "approach": "power",
+            "archetype": "Pack Leader"
+        },
+        "description": "You give the order and designate an enemy. All Pack members within melee range of the enemy may immediately activate and attack without influencing the turn-order.",
+        "actions": [
+            {
+                "name": "Pile on!",
+                "slug": "pile-on",
+                "description": "You give the order and designate an enemy. All Pack members within melee range of the enemy may immediately activate and attack without influencing the turn-order.",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 7
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "pile-on",
+        "traits": [],
+        "node": {
+            "i": 11,
+            "j": -30,
+            "connected": [
+                "pack-alpha",
+                "fighting-fit",
+                "pack-mon"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#808080",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "KXbyn4g4lS9uCkjq",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

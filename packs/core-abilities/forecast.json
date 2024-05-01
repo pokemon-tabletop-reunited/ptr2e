@@ -1,36 +1,32 @@
 {
-	"_id": "Vtec0WHBDSk9qnsW",
-	"name": "Forecast",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "forecast",
-		"actions": [
-			{
-				"slug": "forecast",
-				"name": "Forecast",
-				"description": "Connection- Weather Ball. Castform's Forme changes depending on the current active weather. When using Weather Ball, the Castform can spend an additional 2 PP to add the [Blast 3] trait to the attack.",
-				"traits": [
-					"connection",
-					"environ",
-					"forme-change"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.Vtec0WHBDSk9qnsW"
-		}
-	},
-	"effects": []
+    "name": "Forecast",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Forecast",
+                "slug": "forecast",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Weather Ball.  The user adds the [Blast 3] trait to the triggering attack for the rest of their current activation. Passive: The user's Base Stats increase by 10% per Tier of active [Weather] conditions (max 50%), and the user may treat itself as being under the effect of a number additional [Weather] conditions (for the purposes of its attacks and abilities) equal to the highest Tier [Weather] condition present.",
+        "traits": [
+            "connection",
+            "environ"
+        ]
+    },
+    "_id": "qh45phDDPUeTg2zu",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

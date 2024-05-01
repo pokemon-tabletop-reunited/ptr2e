@@ -1,36 +1,33 @@
 {
-	"_id": "yJ0wJFXccqhsELiO",
-	"name": "Stance Change",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "stance-change",
-		"actions": [
-			{
-				"slug": "stance-change",
-				"name": "Stance Change",
-				"description": "Connection - King's Shield. The user starts combat in Shield Forme. When the user uses a damaging attack they change to Blade Forme before attacking. When using King's Shield, the user can spend an additional 2 AP to increase their DEF and SPDEF by +1 for 2 activations.",
-				"traits": [
-					"connection",
-					"forme-change",
-					"innate"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.yJ0wJFXccqhsELiO"
-		}
-	},
-	"effects": []
+    "name": "Stance Change",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Stance Change",
+                "slug": "stance-change",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 1
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - King's Shield. The user changes to Blade Forme before attacking. Passive: The user starts combat in Shield Forme.  When using King's Shield, the user can spend an additional 4 AP to increase their DEF and SPDEF by +1 for 5 activations.",
+        "traits": [
+            "connection",
+            "forme-change",
+            "innate"
+        ]
+    },
+    "_id": "8nKNHOGfLzpmqP24",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

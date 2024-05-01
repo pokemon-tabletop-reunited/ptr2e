@@ -1,34 +1,31 @@
 {
-	"_id": "PeOpAQZt8X0z5tJj",
-	"name": "Ice Body",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "ice-body",
-		"actions": [
-			{
-				"slug": "ice-body",
-				"name": "Ice Body",
-				"description": "While Snowy Weather is active, the user recovers a tick of HP at the end of each of their activations. The user is immune to negative effects from Snow Weather.",
-				"traits": [
-					"healing"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.PeOpAQZt8X0z5tJj"
-		}
-	},
-	"effects": []
+    "name": "Ice Body",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Ice Body",
+                "slug": "ice-body",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While Snow Weather is active, the user recovers a tick of HP at the end of each of their activations. The user is immune to negative effects from Snow Weather.",
+        "traits": [
+            "healing"
+        ]
+    },
+    "_id": "NMjyU6wi1aL5u6c0",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

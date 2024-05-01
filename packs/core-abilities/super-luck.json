@@ -1,32 +1,29 @@
 {
-	"_id": "cew6c7V7gNgG6Fc6",
-	"name": "Super Luck",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "super-luck",
-		"actions": [
-			{
-				"slug": "super-luck",
-				"name": "Super Luck",
-				"description": "The user's default Critical Hit stage is +1. When rolling to increase Luck at the end of a session, the user rolls a d10 twice and keeps the better result. If the user is an owned Pokemon, the Trainer gets an additional d6 roll for Luck instead.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.cew6c7V7gNgG6Fc6"
-		}
-	},
-	"effects": []
+    "name": "Super Luck",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Super Luck",
+                "slug": "super-luck",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's default CRIT stage is +1. When rolling to increase Luck at the end of a session, the user rolls a d10 twice and keeps the better result. If the user is an owned Pokemon, the Trainer gets an additional d6 roll for Luck instead.",
+        "traits": []
+    },
+    "_id": "1dAyKvDcstganE9X",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

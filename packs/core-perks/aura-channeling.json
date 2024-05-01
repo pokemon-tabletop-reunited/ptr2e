@@ -1,0 +1,57 @@
+{
+    "name": "Aura Channeling",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Aura Sense 50"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "mental",
+            "approach": "finesse",
+            "archetype": "Aura"
+        },
+        "description": "You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to [Ghost][Pokemon].",
+        "actions": [
+            {
+                "name": "Aura Channeling",
+                "slug": "aura-channeling",
+                "description": "You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to [Ghost][Pokemon].",
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 3
+                },
+                "type": "exploration",
+                "traits": []
+            }
+        ],
+        "slug": "aura-channeling",
+        "traits": [],
+        "node": {
+            "i": -12,
+            "j": -12,
+            "connected": [
+                "aura-projection",
+                "aura-empathy",
+                "aura-user",
+                "aura-bonding",
+                "shielding-aura",
+                "aura-haze"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#ccdef0",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+                "tint": "#3e52a3",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "UKe2X1IyhElRxVSJ",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

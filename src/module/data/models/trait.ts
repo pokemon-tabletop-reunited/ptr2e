@@ -1,7 +1,7 @@
 class Trait {
     static isValid(value: unknown): value is Trait {
         if(typeof value === 'string') {
-            return !!game.ptr.data.traits.get(value);
+            return true; //!!game.ptr.data.traits.get(value);
         }
         if(value instanceof Trait) {
             return true;

@@ -1,32 +1,29 @@
 {
-	"_id": "w6If52tF4A0F9QAW",
-	"name": "Run Away",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "run-away",
-		"actions": [
-			{
-				"slug": "run-away",
-				"name": "Run Away",
-				"description": "The user can use the Sprint maneuver as a Simple Action. The user is immune to the Bound Condition.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.w6If52tF4A0F9QAW"
-		}
-	},
-	"effects": []
+    "name": "Run Away",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Run Away",
+                "slug": "run-away",
+                "type": "generic",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 1
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The uses the Sprint action. Passive: The user is immune to the Bound Condition.",
+        "traits": []
+    },
+    "_id": "dtEddJtu007ox3xh",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

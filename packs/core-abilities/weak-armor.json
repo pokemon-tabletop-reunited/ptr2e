@@ -1,32 +1,29 @@
 {
-	"_id": "2jfCeGmL8hVIJS5N",
-	"name": "Weak Armor",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "weak-armor",
-		"actions": [
-			{
-				"slug": "weak-armor",
-				"name": "Weak Armor",
-				"description": "The user loses -1 DEF stage and gains +1 Speed stage for 5 activations.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.2jfCeGmL8hVIJS5N"
-		}
-	},
-	"effects": []
+    "name": "Weak Armor",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Weak Armor",
+                "slug": "weak-armor",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 1
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user loses -1 DEF stage and gains +1 SPD stage for 5 activations.",
+        "traits": []
+    },
+    "_id": "5bIulnCahBWI6N9w",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

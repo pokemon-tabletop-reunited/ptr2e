@@ -1,34 +1,31 @@
 {
-	"_id": "NIrOH4bEg6yhrLsA",
-	"name": "Clear Body",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "clear-body",
-		"actions": [
-			{
-				"slug": "clear-body",
-				"name": "Clear Body",
-				"description": "Your stage cannot be decreased by attack or ability effects from other creatures.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.NIrOH4bEg6yhrLsA"
-		}
-	},
-	"effects": []
+    "name": "Clear Body",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Clear Body",
+                "slug": "clear-body",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user ignores negative stage changes.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "jIgoPaCoUjNj0MWb",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

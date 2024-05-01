@@ -1,0 +1,53 @@
+{
+    "name": "<Type> Domain",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Teaching 50"
+        ],
+        "cost": 4,
+        "design": {
+            "arena": "mental",
+            "approach": "finesse",
+            "archetype": "Type Ace"
+        },
+        "description": "You are able to tutor [Domain] abilities associated to your chosen <type>. Only creatures that have your chosen <type> can learn these abilties.</type></type>",
+        "actions": [
+            {
+                "name": "<Type> Domain",
+                "slug": "type-domain",
+                "description": "You are able to tutor [Domain] abilities associated to your chosen <Type>. Only creatures that have your chosen <Type> can learn these abilties.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "type-domain",
+        "traits": [],
+        "node": {
+            "i": -42,
+            "j": 35,
+            "connected": [
+                "root-5",
+                "type-style",
+                "mental-alarm"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "aMMwSJntCErBGbQZ",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

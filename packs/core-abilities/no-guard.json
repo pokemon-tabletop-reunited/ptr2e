@@ -1,32 +1,29 @@
 {
-	"_id": "h4OxAUM1tOzjwZD6",
-	"name": "No Guard",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "no-guard",
-		"actions": [
-			{
-				"slug": "no-guard",
-				"name": "No Guard",
-				"description": "All of the user's attacks cannot miss. All incoming attacks to the user cannot miss. This does not affect RIP.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.h4OxAUM1tOzjwZD6"
-		}
-	},
-	"effects": []
+    "name": "No Guard",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "No Guard",
+                "slug": "no-guard",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "All of the user's attacks cannot miss. All incoming attacks to the user cannot miss. This does not affect RIP.",
+        "traits": []
+    },
+    "_id": "A5szFUW3fLf8qDvr",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

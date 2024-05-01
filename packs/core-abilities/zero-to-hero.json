@@ -1,36 +1,33 @@
 {
-	"_id": "JuEUR0AD26n6hkos",
-	"name": "Zero to Hero",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "zero-to-hero",
-		"actions": [
-			{
-				"slug": "zero-to-hero",
-				"name": "Zero to Hero",
-				"description": "Connection - Flip Turn. The user transforms into their Hero Forme when they are Switched In until the end of combat or when the user Faints. When using Flip Turn, the user can spend an additional 2 PP to transform into their Hero Forme for 5 activations. Zero to Hero cannot activate if the user is Weary.",
-				"traits": [
-					"forme-change",
-					"innate",
-					"connection"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.JuEUR0AD26n6hkos"
-		}
-	},
-	"effects": []
+    "name": "Zero to Hero",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Zero to Hero",
+                "slug": "zero-to-hero",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Flip Turn. The user transforms into their Hero Forme until the end of combat or when the user Faints. When using Flip Turn, the user can spend an additional 4 PP to transform into their Hero Forme for 3 activations. Zero to Hero cannot activate if the user is Weary.",
+        "traits": [
+            "forme-change",
+            "innate",
+            "connection"
+        ]
+    },
+    "_id": "91nGEpX3z5gwXXAZ",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

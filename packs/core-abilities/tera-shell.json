@@ -1,34 +1,31 @@
 {
-	"_id": "R5L7yRqJOUQ4lyoF",
-	"name": "Tera Shell",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "tera-shell",
-		"actions": [
-			{
-				"slug": "tera-shell",
-				"name": "Tera Shell",
-				"description": "While at Full HP, all unresisted attacks targeting the user are considered to be resisted by 1 step.",
-				"traits": [
-					"legendary"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.R5L7yRqJOUQ4lyoF"
-		}
-	},
-	"effects": []
+    "name": "Tera Shell",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Tera Shell",
+                "slug": "tera-shell",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While at 75% or more HP, all incoming damage is reduced by 50%. This does not affect set damage. Upon leaving battle, the user returns to its Normal Forme.",
+        "traits": [
+            "legendary"
+        ]
+    },
+    "_id": "vWvCwYWcIrtUf791",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

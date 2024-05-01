@@ -1,32 +1,29 @@
 {
-	"_id": "P59TXoWcmioAt58A",
-	"name": "Huge Power",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "huge-power",
-		"actions": [
-			{
-				"slug": "huge-power",
-				"name": "Huge Power",
-				"description": "Doubles the user's ATK stat.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.P59TXoWcmioAt58A"
-		}
-	},
-	"effects": []
+    "name": "Huge Power",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Huge Power",
+                "slug": "huge-power",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Doubles the user's Base ATK stat. This effect applies before Stage Increase/Decrease effects.",
+        "traits": []
+    },
+    "_id": "optmmrEV0nDjqZBz",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

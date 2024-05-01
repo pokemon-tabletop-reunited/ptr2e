@@ -1,35 +1,32 @@
 {
-	"_id": "nYhffd6YUD61BRZT",
-	"name": "Psychic Surge",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "psychic-surge",
-		"actions": [
-			{
-				"slug": "psychic-surge",
-				"name": "Psychic Surge",
-				"description": "Connection - Psychic Terrain. When using Psychic Terrain, the user can spend an additional 2 PP to increase the number of rounds Psychic Terrain persists by 2.",
-				"traits": [
-					"terrain",
-					"connection"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.nYhffd6YUD61BRZT"
-		}
-	},
-	"effects": []
+    "name": "Psychic Surge",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Psychic Surge",
+                "slug": "psychic-surge",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Psychic Terrain. Increase the number of rounds Psychic Terrain persists by 2.",
+        "traits": [
+            "terrain",
+            "connection"
+        ]
+    },
+    "_id": "0h6OOETbOXdFbtlx",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

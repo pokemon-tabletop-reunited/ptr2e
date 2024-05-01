@@ -1,34 +1,31 @@
 {
-	"_id": "61O23VdmClTKJXDn",
-	"name": "Illusion",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "illusion",
-		"actions": [
-			{
-				"slug": "illusion",
-				"name": "Illusion",
-				"description": "At the start of combat, or when switched in, the user is Disguised. While Disguised, the user's default EVA stage is 1. If the user is hit by an attack the Disguise is broken.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.61O23VdmClTKJXDn"
-		}
-	},
-	"effects": []
+    "name": "Illusion",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Illusion",
+                "slug": "illusion",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "At the start of combat, or when switched in, the user is Disguised. While Disguised, the user takes the forme of a random creature, or the forme of an allied creature in their team, and their default EVA stage is 1. If the user is hit by a Physical or Special-category attack they lose the Disguised condition.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "IF79LRFt3HKGoPW4",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

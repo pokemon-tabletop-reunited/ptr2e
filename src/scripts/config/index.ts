@@ -19,6 +19,8 @@ import FolderConfigPTR2e from "@module/folder/sheet.ts";
 import ActiveEffectConfigPTR2e from "@module/effects/sheet.ts";
 import PassiveActiveEffectSystem from "@module/effects/data/passive.ts";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
+import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
+import { TokenPTR2e } from "@module/canvas/token/object.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -109,6 +111,10 @@ export const PTRCONFIG = {
     MeasuredTemplate: {
         objectClass: MeasuredTemplatePTR2e,
         layerClass: TemplateLayerPTR2e
+    },
+    Token: {
+        documentClass: TokenDocumentPTR2e,
+        objectClass: TokenPTR2e
     },
     Scene: {
         documentClass: ScenePTR2e,

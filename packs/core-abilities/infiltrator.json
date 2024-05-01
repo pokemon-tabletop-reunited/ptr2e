@@ -1,32 +1,29 @@
 {
-	"_id": "6rDWJP3O2FjxwdI1",
-	"name": "Infiltrator",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "infiltrator",
-		"actions": [
-			{
-				"slug": "infiltrator",
-				"name": "Infiltrator",
-				"description": "At the start of combat, or when switched in, the user is Disguised. While Disguised, the user's default EVA stage is 1. If the user is hit with an attack, the Disguise is broken.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.6rDWJP3O2FjxwdI1"
-		}
-	},
-	"effects": []
+    "name": "Infiltrator",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Infiltrator",
+                "slug": "infiltrator",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "enemy",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's [Contact] attacks ignore [Shield] effects when attacking a creature in range. Attacks against creatures with an active [Shield] effect deal 20% more damage.",
+        "traits": []
+    },
+    "_id": "0m9p135CegdgAnTC",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

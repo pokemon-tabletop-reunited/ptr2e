@@ -1,34 +1,31 @@
 {
-	"_id": "05H1zp2YfV0aqKh0",
-	"name": "Intrepid Sword",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "intrepid-sword",
-		"actions": [
-			{
-				"slug": "intrepid-sword",
-				"name": "Intrepid Sword",
-				"description": "The user's default ATK stage is +1. At the start of combat, or when switched in, the user raises their ATK stage by +1 for 5 activations.",
-				"traits": [
-					"legendary"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.05H1zp2YfV0aqKh0"
-		}
-	},
-	"effects": []
+    "name": "Intrepid Sword",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Intrepid Sword",
+                "slug": "intrepid-sword",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Iron Head. The triggering creature gains Fear 7, and the user gains Chanted 7. Passive:  When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Blade for the remainder of the combat. The user's default ATK stage is +1.",
+        "traits": [
+            "legendary"
+        ]
+    },
+    "_id": "sgFG95TFmb3fCdKo",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

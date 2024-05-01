@@ -1,34 +1,31 @@
 {
-	"_id": "C2u3Ko1mEawUO9SU",
-	"name": "Magic Guard",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "magic-guard",
-		"actions": [
-			{
-				"slug": "magic-guard",
-				"name": "Magic Guard",
-				"description": "The user is immune to damage from Conditions, attack effects and equipped item effects.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.C2u3Ko1mEawUO9SU"
-		}
-	},
-	"effects": []
+    "name": "Magic Guard",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Magic Guard",
+                "slug": "magic-guard",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is immune to damage from Conditions, attack effects and equipped item effects.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "7Ceyhd3IqiHLUrvk",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

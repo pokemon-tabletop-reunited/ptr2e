@@ -1,32 +1,29 @@
 {
-	"_id": "CK8BLgjd8dXRcrkH",
-	"name": "Flare Boost",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "flare-boost",
-		"actions": [
-			{
-				"slug": "flare-boost",
-				"name": "Flare Boost",
-				"description": "While the user is affected by Burn, the Power of their Special-category attacks is increased by 50%",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.CK8BLgjd8dXRcrkH"
-		}
-	},
-	"effects": []
+    "name": "Flare Boost",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Flare Boost",
+                "slug": "flare-boost",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While the user is affected by Burn, the Power of their Special-Category attacks is increased by 50%",
+        "traits": []
+    },
+    "_id": "H51qOxRVJ19zWRnK",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

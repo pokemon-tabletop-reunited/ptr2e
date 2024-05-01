@@ -1,6 +1,7 @@
 /** Application V2 Styles **/
 body {
   --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  --appv2-text-color: var(--color-light-1);
   --hint-text-color: var(--color-light-5);
   --border-theme-color: var(--color-light-6);
   --color-theme-4: var(--color-light-4);
@@ -8,6 +9,7 @@ body {
 }
 body.theme-light {
   --appv2-background: linear-gradient(to right, rgba(212, 210, 198, 0.93), rgba(240, 237, 223, 0.95));
+  --appv2-text-color: var(--color-dark-1);
   --hint-text-color: var(--color-dark-5);
   --border-theme-color: var(--color-dark-6);
 }
@@ -17,6 +19,9 @@ body.theme-light .application textarea:read-only {
 body.theme-dark .sheet prose-mirror .editor-content .content-link {
   color: var(--color-cool-5);
 }
+body.theme-dark .sheet a.content-link {
+  color: black;
+}
 .application .window-header .window-title {
   height: 100%;
 }
@@ -24,6 +29,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   display: flex;
   gap: 10px;
   align-items: center;
+  flex: 1 0 100%;
 }
 .sheet prose-mirror {
   border: 1px solid var(--border-theme-color);
@@ -37,6 +43,352 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet prose-mirror .editor-container .editor-content {
   padding: 0.5rem;
 }
+.sheet.actor.v2 {
+  background: var(--appv2-background);
+}
+.sheet.actor.v2 .window-content {
+  display: grid;
+  grid-template-columns: 22% 78%;
+  grid-template-rows: 65px auto;
+  grid-template-areas: "header nav" "sidebar main";
+}
+.sheet.actor.v2 .window-content aside.actor-header {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 64px auto;
+  grid-template-rows: auto;
+  border-bottom: 1px solid var(--border-theme-color);
+  border-right: 1px solid var(--border-theme-color);
+}
+.sheet.actor.v2 .window-content aside.actor-header img {
+  flex: 0 0 64px;
+  height: 64px;
+  border: unset;
+}
+.sheet.actor.v2 .window-content aside.actor-header .title {
+  flex: 1 0 auto;
+  margin: 0 0.5rem;
+  align-self: center;
+}
+.sheet.actor.v2 .window-content nav.tabs {
+  grid-area: nav;
+  border: unset;
+  border-bottom: 1px solid var(--border-theme-color);
+  justify-content: space-evenly;
+  font-size: 25px;
+  margin: 0;
+  padding: 0.5rem;
+  gap: unset;
+}
+.sheet.actor.v2 .window-content nav.tabs > [data-tab] {
+  padding: 8px;
+}
+.sheet.actor.v2 .window-content aside.sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-theme-color);
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs > div {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: var(--hint-text-color);
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs label {
+  font-size: 12px;
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs input {
+  width: 80%;
+  align-self: center;
+}
+.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-current,
+.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-current,
+.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-max,
+.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-max {
+  flex: 0 1 auto;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-theme-color);
+  column-gap: 0.5rem;
+  row-gap: 0.25rem;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience > div {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  color: var(--hint-text-color);
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience label {
+  flex: 1 0 40%;
+  align-content: center;
+  text-align: left;
+  font-size: 12px;
+  padding-left: 1rem;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience input {
+  flex: 0 1 40%;
+  align-self: center;
+  align-content: center;
+  margin-right: 0.5rem;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience .xp-current {
+  grid-area: xp-current;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience .xp-next {
+  grid-area: xp-next;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience .xp-diff {
+  grid-area: xp-diff;
+}
+.sheet.actor.v2 .window-content aside.sidebar .experience .level {
+  grid-area: level;
+}
+.sheet.actor.v2 .window-content aside.sidebar .perk-web-button {
+  margin-top: auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button {
+  flex: 0 0 70%;
+}
+.sheet.actor.v2 .window-content .tab.active {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+}
+.sheet.actor.v2 .window-content .tab.active fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  height: 100%;
+  background: var(--appv2-background);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+.sheet.actor.v2 .window-content .tab.active fieldset legend {
+  font-size: var(--font-size-15);
+  font-weight: bold;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .scroll.inventory {
+  grid-area: span 5 / span 3;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  gap: 0;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header {
+  align-items: center;
+  background: var(--appv2-background);
+  color: var(--appv2-text-color);
+  display: flex;
+  justify-content: end;
+  font-size: 0.625rem;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-top: 0.375rem;
+  padding: 0.25rem 0;
+  text-rendering: optimizeLegibility;
+  text-transform: uppercase;
+  width: 100%;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 4px 4px 0 0;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header:first-child {
+  margin-top: 0;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name {
+  padding-left: 0.5rem;
+  font-size: 1.125rem !important;
+  text-transform: capitalize;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header > :last-child {
+  padding-right: 0.25rem;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items {
+  border: 1px solid var(--border-theme-color);
+  border-top: unset;
+  border-radius: 0 0 4px 4px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: unset;
+  padding: 2px 0;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li:nth-child(odd) {
+  background: var(--appv2-background);
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li:last-child {
+  border-radius: 0 0 4px 4px;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name {
+  align-items: center;
+  display: flex;
+  flex: 2;
+  font-weight: 500;
+  font-size: 0.825rem;
+  gap: 0.25rem;
+  padding-right: 0.25rem;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name .item-image,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name .item-image {
+  display: flex;
+  flex: 0 0 1.75rem;
+  height: 1.75rem;
+  position: relative;
+  margin-left: 2px;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name .item-name,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name .item-name {
+  font-weight: 500;
+  margin: auto auto auto 0;
+  padding: 0.125rem;
+  word-break: break-word;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 4.25rem;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity .decrease,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity .decrease,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity .increase,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity .increase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  width: 1.125rem;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity span,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity span {
+  min-width: 2ch;
+  text-align: center;
+}
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls,
+.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls {
+  flex-basis: 4.75rem;
+  gap: 1px;
+  justify-content: end;
+  align-items: center;
+  display: flex;
+}
+.sheet.actor.v2 .window-content .tab.active .effects-display {
+  padding: 0.5rem;
+  grid-area: span 5 / span 3;
+}
+.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list {
+  list-style: none;
+  margin: 0 0.5rem;
+  padding: 0;
+}
+.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect {
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-theme-color);
+}
+.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .effect-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.sheet.actor.v2 .window-content .can-popout {
+  position: relative;
+}
+.sheet.actor.v2 .window-content .can-popout .popout-control {
+  position: absolute;
+  top: -9px;
+  right: -2px;
+  background: var(--appv2-background);
+  border: 1px solid var(--border-theme-color);
+  padding: 2px;
+  border-radius: 0 4px 0 4px;
+  cursor: pointer;
+}
+.sheet.actor.popout {
+  background: var(--appv2-background);
+}
+.sheet.actor.popout .effects-display {
+  padding: 0.5rem;
+}
+.sheet.actor.popout .effects-display ul.effect-list {
+  list-style: none;
+  margin: 0 0.5rem;
+  padding: 0;
+}
+.sheet.actor.popout .effects-display ul.effect-list li.effect {
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 250px;
+  border: 1px solid var(--border-theme-color);
+}
+.sheet.actor.popout .effects-display ul.effect-list li.effect .effect-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.sheet.actor.popout .effects-display ul.effect-list li.effect .name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.sheet.actor.popout fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  height: 100%;
+  background: var(--appv2-background);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+.sheet.actor.popout fieldset legend {
+  font-size: var(--font-size-15);
+  font-weight: bold;
+}
+.sheet#perk-hud-base,
 .sheet.move-sheet,
 .sheet.species-sheet,
 .sheet.party-sheet,
@@ -44,6 +396,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet.active-effect-sheet {
   background: var(--appv2-background);
 }
+.sheet#perk-hud-base .window-content,
 .sheet.move-sheet .window-content,
 .sheet.species-sheet .window-content,
 .sheet.party-sheet .window-content,
@@ -55,6 +408,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   grid-template-areas: "header nav" "traits traits" "main main";
   padding: 0;
 }
+.sheet#perk-hud-base .window-content .sheet-header,
 .sheet.move-sheet .window-content .sheet-header,
 .sheet.species-sheet .window-content .sheet-header,
 .sheet.party-sheet .window-content .sheet-header,
@@ -65,6 +419,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   padding-right: 1rem;
   border-bottom: 1px solid var(--border-theme-color);
 }
+.sheet#perk-hud-base .window-content .sheet-header fieldset,
 .sheet.move-sheet .window-content .sheet-header fieldset,
 .sheet.species-sheet .window-content .sheet-header fieldset,
 .sheet.party-sheet .window-content .sheet-header fieldset,
@@ -75,6 +430,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   align-items: center;
   justify-content: center;
 }
+.sheet#perk-hud-base .window-content .sheet-header img,
 .sheet.move-sheet .window-content .sheet-header img,
 .sheet.species-sheet .window-content .sheet-header img,
 .sheet.party-sheet .window-content .sheet-header img,
@@ -85,6 +441,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   margin: 0 0.25rem;
   border: unset;
 }
+.sheet#perk-hud-base .window-content .sheet-header .title,
 .sheet.move-sheet .window-content .sheet-header .title,
 .sheet.species-sheet .window-content .sheet-header .title,
 .sheet.party-sheet .window-content .sheet-header .title,
@@ -92,6 +449,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet.active-effect-sheet .window-content .sheet-header .title {
   font-size: 2.5rem;
 }
+.sheet#perk-hud-base .window-content nav.tabs,
 .sheet.move-sheet .window-content nav.tabs,
 .sheet.species-sheet .window-content nav.tabs,
 .sheet.party-sheet .window-content nav.tabs,
@@ -107,6 +465,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   border-left: 1px solid var(--border-theme-color);
   gap: unset;
 }
+.sheet#perk-hud-base .window-content aside.traits,
 .sheet.move-sheet .window-content aside.traits,
 .sheet.species-sheet .window-content aside.traits,
 .sheet.party-sheet .window-content aside.traits,
@@ -117,6 +476,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   padding: 0.25rem;
   border-bottom: 1px solid var(--border-theme-color);
 }
+.sheet#perk-hud-base .window-content aside.traits tags,
 .sheet.move-sheet .window-content aside.traits tags,
 .sheet.species-sheet .window-content aside.traits tags,
 .sheet.party-sheet .window-content aside.traits tags,
@@ -128,6 +488,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   width: 100%;
   --tag-pad: 0;
 }
+.sheet#perk-hud-base .window-content aside.traits tags .trait,
 .sheet.move-sheet .window-content aside.traits tags .trait,
 .sheet.species-sheet .window-content aside.traits tags .trait,
 .sheet.party-sheet .window-content aside.traits tags .trait,
@@ -136,6 +497,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   display: inline-flex;
   padding: 0.25rem;
 }
+.sheet#perk-hud-base .window-content aside.traits tags .trait .tag,
 .sheet.move-sheet .window-content aside.traits tags .trait .tag,
 .sheet.species-sheet .window-content aside.traits tags .trait .tag,
 .sheet.party-sheet .window-content aside.traits tags .trait .tag,
@@ -143,6 +505,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet.active-effect-sheet .window-content aside.traits tags .trait .tag {
   text-decoration: underline;
 }
+.sheet#perk-hud-base .window-content section.tab,
 .sheet.move-sheet .window-content section.tab,
 .sheet.species-sheet .window-content section.tab,
 .sheet.party-sheet .window-content section.tab,
@@ -153,11 +516,13 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   overflow: hidden;
   padding: 1rem;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .editor,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .editor,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .editor,
 .sheet.team-sheet .window-content section.tab[data-tab=details] .editor,
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor,
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor .editor-content,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
@@ -165,6 +530,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor .editor-content {
   min-height: 200px;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats,
@@ -177,6 +543,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   border: 1px solid var(--border-theme-color);
   border-radius: 8px;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
@@ -184,6 +551,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group {
   justify-content: space-between;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
@@ -191,6 +559,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label {
   flex: 0 0 60%;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
@@ -199,11 +568,13 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   flex: 0 0 35%;
   text-align: center;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .movement-header,
 .sheet.team-sheet .window-content section.tab[data-tab=details] .movement-header,
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header,
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats-header,
@@ -217,11 +588,13 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   margin-top: 0.5rem;
   border-bottom: 1px solid var(--border-theme-color);
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .sheet.team-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
@@ -233,11 +606,13 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   justify-content: space-between;
   align-items: center;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .movement,
 .sheet.team-sheet .window-content section.tab[data-tab=details] .movement,
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement,
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .skill,
@@ -250,11 +625,13 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   grid-template-columns: 1fr 1fr 15px;
   grid-column-gap: 0.5rem;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .movement.center,
 .sheet.team-sheet .window-content section.tab[data-tab=details] .movement.center,
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center,
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .skill.center,
@@ -265,11 +642,13 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   justify-content: center;
   align-items: center;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center small,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .sheet.team-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center small,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .skill.center small,
@@ -277,11 +656,13 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill.center small {
   color: var(--hint-text-color);
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group,
@@ -289,11 +670,13 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group {
   justify-content: space-between;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group label,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group label,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
@@ -302,11 +685,13 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   flex: 0 0 30%;
   text-align: center;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
@@ -315,11 +700,13 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   flex: 0 0 60%;
   text-align: center;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .item-controls,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .sheet.team-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .item-controls,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
@@ -330,6 +717,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   justify-content: center;
   align-items: center;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .skill,
@@ -337,6 +725,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill {
   grid-template-columns: 30% auto 15px;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .move,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .move,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .move,
@@ -345,6 +734,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   display: flex;
   flex-direction: row;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move .form-group,
 .sheet.move-sheet .window-content section.tab[data-tab=details] .move .form-group,
 .sheet.species-sheet .window-content section.tab[data-tab=details] .move .form-group,
 .sheet.party-sheet .window-content section.tab[data-tab=details] .move .form-group,
@@ -354,6 +744,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   text-align: center;
   margin: 0.25rem;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=attack],
 .sheet.move-sheet .window-content section.tab[data-tab=attack],
 .sheet.species-sheet .window-content section.tab[data-tab=attack],
 .sheet.party-sheet .window-content section.tab[data-tab=attack],
@@ -361,6 +752,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet.active-effect-sheet .window-content section.tab[data-tab=attack] {
   padding: 0;
 }
+.sheet#perk-hud-base .window-content section.tab form.scroll,
 .sheet.move-sheet .window-content section.tab form.scroll,
 .sheet.species-sheet .window-content section.tab form.scroll,
 .sheet.party-sheet .window-content section.tab form.scroll,
@@ -371,6 +763,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   overflow-x: hidden;
   height: 100%;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active,
 .sheet.move-sheet .window-content section.tab[data-tab=actions].active,
 .sheet.species-sheet .window-content section.tab[data-tab=actions].active,
 .sheet.party-sheet .window-content section.tab[data-tab=actions].active,
@@ -381,6 +774,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   flex-direction: column;
   padding: 0.25rem 1rem 1rem 1rem;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions,
 .sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions,
 .sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions,
 .sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions,
@@ -391,6 +785,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   display: flex;
   flex-direction: column;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions header,
 .sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header,
 .sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions header,
 .sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions header,
@@ -402,6 +797,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   padding: 0.25rem;
   border-bottom: 1px solid #fefefe;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions header .action-name,
 .sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
 .sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
 .sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
@@ -409,6 +805,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name {
   font-size: 18px;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions content,
 .sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content,
 .sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions content,
 .sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions content,
@@ -417,6 +814,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   display: flex;
   flex-direction: column;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions content .action,
 .sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
 .sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
 .sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
@@ -428,6 +826,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   padding: 0.25rem;
   margin: 0.5rem 0;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab="overview"] .item-description,
 .sheet.move-sheet .window-content section.tab[data-tab="overview"] .item-description,
 .sheet.species-sheet .window-content section.tab[data-tab="overview"] .item-description,
 .sheet.party-sheet .window-content section.tab[data-tab="overview"] .item-description,
@@ -435,6 +834,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 .sheet.active-effect-sheet .window-content section.tab[data-tab="overview"] .item-description {
   min-height: 150px;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list,
 .sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
@@ -444,6 +844,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   margin: 0 0.5rem;
   padding: 0;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
@@ -457,6 +858,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   align-items: center;
   border: 1px solid var(--border-theme-color);
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
@@ -466,6 +868,7 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   height: 28px;
   width: 28px;
 }
+.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
@@ -474,11 +877,12 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   flex-grow: 1;
   margin: 0 0.25rem;
 }
-.sheet.move-sheet .window-content section.tab fieldset,
-.sheet.species-sheet .window-content section.tab fieldset,
-.sheet.party-sheet .window-content section.tab fieldset,
-.sheet.team-sheet .window-content section.tab fieldset,
-.sheet.active-effect-sheet .window-content section.tab fieldset {
+.sheet#perk-hud-base fieldset,
+.sheet.move-sheet fieldset,
+.sheet.species-sheet fieldset,
+.sheet.party-sheet fieldset,
+.sheet.team-sheet fieldset,
+.sheet.active-effect-sheet fieldset {
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -488,31 +892,50 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
   border-radius: 8px;
   border-color: var(--border-theme-color);
 }
-.sheet.move-sheet .window-content section.tab fieldset legend,
-.sheet.species-sheet .window-content section.tab fieldset legend,
-.sheet.party-sheet .window-content section.tab fieldset legend,
-.sheet.team-sheet .window-content section.tab fieldset legend,
-.sheet.active-effect-sheet .window-content section.tab fieldset legend {
+.sheet#perk-hud-base fieldset legend,
+.sheet.move-sheet fieldset legend,
+.sheet.species-sheet fieldset legend,
+.sheet.party-sheet fieldset legend,
+.sheet.team-sheet fieldset legend,
+.sheet.active-effect-sheet fieldset legend {
   font-size: var(--font-size-15);
   font-weight: bold;
 }
-.sheet.move-sheet .window-content section.tab .hint,
-.sheet.species-sheet .window-content section.tab .hint,
-.sheet.party-sheet .window-content section.tab .hint,
-.sheet.team-sheet .window-content section.tab .hint,
-.sheet.active-effect-sheet .window-content section.tab .hint {
+.sheet#perk-hud-base .hint,
+.sheet.move-sheet .hint,
+.sheet.species-sheet .hint,
+.sheet.party-sheet .hint,
+.sheet.team-sheet .hint,
+.sheet.active-effect-sheet .hint {
   margin: 0;
   font-size: var(--font-size-14);
   color: var(--hint-text-color);
   white-space: pre-line;
   word-break: break-word;
 }
-.sheet.move-sheet .window-content section.tab textarea,
-.sheet.species-sheet .window-content section.tab textarea,
-.sheet.party-sheet .window-content section.tab textarea,
-.sheet.team-sheet .window-content section.tab textarea,
-.sheet.active-effect-sheet .window-content section.tab textarea {
+.sheet#perk-hud-base textarea,
+.sheet.move-sheet textarea,
+.sheet.species-sheet textarea,
+.sheet.party-sheet textarea,
+.sheet.team-sheet textarea,
+.sheet.active-effect-sheet textarea {
   resize: vertical;
+}
+.sheet#perk-hud-base header h2 {
+  flex: 1;
+  text-align: center;
+  padding-bottom: 0.25rem;
+}
+.sheet#perk-hud-base footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 0;
+}
+.sheet#perk-hud-base footer button {
+  flex: 0 0 30%;
+  margin: 0;
 }
 .sheet.species-sheet .window-content section.tab[data-tab=details] {
   padding: 0;
@@ -1429,6 +1852,194 @@ body.theme-dark .sheet prose-mirror .editor-content .content-link {
 }
 .application .standard-form input[type="checkbox"] {
   --checkbox-background-color: #3d343f;
+}
+.token-panel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: var(--appv2-background);
+  color: var(--appv2-text-color);
+  margin: 0 15px 10px 0;
+  pointer-events: all;
+  border-radius: 0 8px 8px 0;
+  border: 1px solid var(--border-theme-color);
+  border-left: unset;
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  width: 135px;
+}
+.token-panel:has(template[data-application-part="info"]) {
+  display: none !important;
+}
+.token-panel nav.tabs {
+  order: 3;
+  flex-direction: column;
+}
+.token-panel nav.tabs a {
+  padding: 0.25rem;
+  background: var(--appv2-background);
+  border-top: 1px solid var(--border-theme-color);
+  width: 100%;
+}
+.token-panel nav.tabs a:first-child {
+  border-top: unset;
+}
+.token-panel nav.tabs a:last-child {
+  border-radius: 0 0 8px 0;
+}
+.token-panel .tab {
+  position: absolute;
+  right: 100%;
+  bottom: -1px;
+  background: var(--appv2-background);
+  border-radius: 8px 8px 0 8px;
+  border: 1px solid var(--border-theme-color);
+  min-width: 150px;
+  min-height: 110%;
+}
+.token-panel .tab[data-tab="attacks"].active {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item {
+  display: flex;
+  flex-direction: row;
+  background: var(--appv2-background);
+  border-top: 1px solid var(--border-theme-color);
+}
+.token-panel .tab[data-tab="attacks"] .attack-item .icon {
+  flex: 0 0 32px;
+  height: 32px;
+  width: 32px;
+  align-self: center;
+  cursor: pointer;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item .icon img {
+  border: unset;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item .icon img.dice {
+  display: none;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item .icon:hover img {
+  display: none;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item .icon:hover img.dice {
+  display: unset;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item .name {
+  flex: 1;
+  align-self: center;
+  text-align: center;
+  padding: 0.25rem;
+  min-width: 0;
+  text-overflow: ellipsis;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item:nth-child(odd) {
+  background: color-mix(in srgb, var(--appv2-background) 90%, transparent);
+}
+.token-panel .tab[data-tab="attacks"] .attack-item:first-child {
+  border-top: unset;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item:first-child img {
+  border-radius: 8px 0 0 0;
+}
+.token-panel .tab[data-tab="attacks"] .attack-item:last-child img {
+  border-radius: 0 0 0 8px;
+}
+.token-panel section.token-info,
+.token-panel section.party {
+  order: 1;
+  display: flex;
+  border-bottom: 1px solid var(--border-theme-color);
+  flex-wrap: wrap;
+}
+.token-panel section.token-info .icon,
+.token-panel section.party .icon {
+  flex: 0 0 48px;
+  height: 48px;
+  width: 48px;
+  align-self: center;
+}
+.token-panel section.token-info .icon img,
+.token-panel section.party .icon img {
+  border: unset;
+  height: 100%;
+}
+.token-panel section.token-info .name,
+.token-panel section.party .name {
+  flex: 1;
+  padding: 0.25rem;
+  text-align: center;
+  align-self: center;
+  min-width: 0;
+  max-height: 48px;
+  text-overflow: ellipsis;
+}
+.token-panel section.token-info .party-header,
+.token-panel section.party .party-header {
+  flex: 0 0 100%;
+  color: var(--hint-text-color);
+  font-size: 12px;
+  padding: 2px;
+  border-bottom: 1px solid var(--border-theme-color);
+  text-align: center;
+  align-self: center;
+}
+.token-panel section.token-info .owner,
+.token-panel section.party .owner {
+  flex: 0 0 100%;
+  display: flex;
+  border-bottom: 1px solid var(--border-theme-color);
+  font-size: 12px;
+}
+.token-panel section.token-info .owner .icon,
+.token-panel section.party .owner .icon {
+  flex: 0 0 32px;
+  height: 32px;
+  width: 32px;
+}
+.token-panel section.party {
+  order: 2;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+.token-panel section.party .icon {
+  flex: 0 0 calc(100% / 3);
+  height: 42px;
+  width: 42px;
+}
+#perk-hud {
+  position: absolute;
+  min-width: 300px;
+  width: min-content;
+  max-width: 600px;
+  text-align: left;
+  padding: 1rem;
+  color: var(--appv2-text-color);
+  background: var(--appv2-background);
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  z-index: calc(var(--z-index-tooltip) - 1);
+  transform: scale(2.5);
+}
+#perk-hud a.content-link {
+  color: black;
+}
+#perk-hud header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+#perk-hud footer {
+  margin-top: 0.5rem;
+  padding: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 /** Application V1 Styles **/
 .stats-chart-aside {

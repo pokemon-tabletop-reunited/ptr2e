@@ -56,10 +56,79 @@ function _registerPTRHelpers() {
         // Replace mathematical symbols with their HTML entities
         return roundedFormula.replaceAll("*", "&times;").replaceAll("/", "&divide;");
     });
+
+    Handlebars.registerHelper("asContentLink", function (content: string) {
+        const uuid = fu.parseUuid(content);
+        if (!uuid.id) {
+            // Return as raw string
+            // But escape the content in case of Keyword strings
+            const ele = document.createElement("div");
+            ele.innerText = content;
+            return ele.innerHTML;
+        }
+
+        const doc = fromUuidSync(content);
+        if (!doc) {
+            return TextEditor.createAnchor({
+                classes: ["content-link", "broken"],
+                icon: "fas fa-unlink",
+                dataset: {},
+                attrs: {}
+            }).outerHTML
+        }
+
+        const ele = document.createElement("div");
+        ele.innerText = doc.name!;
+        const name = ele.innerHTML;
+
+        const {type, tooltip, icon} = ((): {tooltip: string, icon: string, type: string} => {
+            if(doc instanceof foundry.abstract.Document) {
+                const documentConfig = CONFIG[doc.documentName as keyof typeof CONFIG];
+                const documentName = game.i18n.localize(`DOCUMENT.${doc.documentName}`);
+
+                if('type' in doc && typeof doc.type === 'string' && typeof documentConfig === 'object' && 'typeLabels' in documentConfig && 'sidebarIcon' in documentConfig) {
+                    const typeLabel = documentConfig.typeLabels[doc.type];
+                    const typeName = game.i18n.has(typeLabel) ? game.i18n.localize(typeLabel) : "";
+                    const tooltip = typeName ? game.i18n.format("DOCUMENT.TypePageFormat", {type: typeName, page: documentName}) : documentName;
+                    const icon = documentConfig.typeIcons?.[doc.type] ?? documentConfig.sidebarIcon;
+                    return {tooltip, icon, type: doc.documentName};
+                }
+                // @ts-expect-error
+                return {tooltip: documentName, icon: documentConfig.sidebarIcon, type: doc.documentName};
+            }
+            
+            const documentName = game.packs.get(doc.pack)?.documentName!;
+            return {
+                tooltip: name,
+                type: documentName,
+                //@ts-expect-error
+                icon: CONFIG[documentName].sidebarIcon
+            }
+        })();
+
+        const data = {
+            classes: ["content-link"],
+            attrs: {draggable: true as unknown as string},
+            name,
+            dataset: {
+                link: "",
+                uuid: content,
+                type,
+                tooltip,
+                id: uuid.id,
+                pack: doc.pack,
+            },
+            icon
+        }
+
+        return TextEditor.createAnchor(data).outerHTML;
+    });
 }
 
 function _registerBasicHelpers() {
     Handlebars.registerHelper("abs", value => Math.abs(Number(value)));
+
+    Handlebars.registerHelper("getProperty", (obj, key) => fu.getProperty(obj, key));
 
     Handlebars.registerHelper("concat", function () {
         var outStr = "";

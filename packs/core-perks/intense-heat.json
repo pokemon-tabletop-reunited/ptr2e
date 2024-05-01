@@ -1,0 +1,58 @@
+{
+    "name": "Intense Heat",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "[Fire]"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "physical",
+            "approach": "power",
+            "archetype": "[Fire Type]"
+        },
+        "description": "Your Fire-Type moves gain a Burn Effect Range of 20%, or expand your existing effect range by 10%",
+        "actions": [
+            {
+                "name": "Intense Heat",
+                "slug": "intense-heat",
+                "description": "Your Fire-Type moves gain a Burn Effect Range of 20%, or expand your existing effect range by 10%",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "intense-heat",
+        "traits": [],
+        "node": {
+            "i": 16,
+            "j": 16,
+            "connected": [
+                "incognito",
+                "hit-run",
+                "fiendish-provocation",
+                "hardy-trekker",
+                "one-with-the-green",
+                "open-your-heart",
+                "spectral-stalker",
+                "urge-mount"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/icons/fire_icon.png",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "TCYfgKMsSUhsv9Tp",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

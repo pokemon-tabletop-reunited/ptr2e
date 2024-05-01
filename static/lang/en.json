@@ -1,6 +1,7 @@
 {
     "COMBAT.ResetEncounter": "Reset Encounter",
-    "TYPES.Actor.character": "Character",
+    "TYPES.Actor.humanoid": "Humanoid",
+    "TYPES.Actor.pokemon": "Pokémon",
     "TYPES.Item.ability": "Ability",
     "TYPES.Item.consumable": "Consumable",
     "TYPES.Item.container": "Container",
@@ -15,6 +16,7 @@
     "TYPES.ActiveEffect.affliction": "Affliction",
     "ITEM.AddButton": "Add",
     "ITEM.DeleteButton": "Delete",
+    
     "PTR2E": {
         "Effect": {
             "FIELDS": {
@@ -202,10 +204,50 @@
             }
         },
         "MoveSystem": {
-            "FIELDS": {}
+            "FIELDS": {} 
         },
         "ActorSheet": {
-            "StatsFormTitle": "Stats Manager"
+            "StatsFormTitle": "Stats Manager",
+            "Tabs": {
+                "overview": {
+                    "label": "Overview"
+                },
+                "actions": {
+                    "label": "Actions"
+                },
+                "inventory": {
+                    "label": "Inventory"
+                },
+                "clocks": {
+                    "label": "Crafting & Clocks"
+                },
+                "perks": {
+                    "label": "Perks & Abilities"
+                },
+                "biography": {
+                    "label": "Biography"
+                },
+                "effects": {
+                    "label": "Effects"
+                }
+            },
+            "Buttons": {
+                "perkWeb": "Open Perk Web"
+            },
+            "Components": {
+                "actor": "Open Actor",
+                "EffectComponent": {
+                    "title": "{actor}'s Effects"
+                },
+                "Effects": {
+                    "tooltip": "Popout Effects"
+                }
+            },
+            "Inventory": {
+                "CreateItem": "Create Item",
+                "EditItem": "Edit Item",
+                "DeleteItem": "Delete Item"
+            }
         },
         "ActorSidebar": {
             "Party": {
@@ -416,10 +458,6 @@
                 "label": "Action Cost",
                 "hint": "The action cost to activate the Action."
             },
-            "powerPoints": {
-                "label": "PP Cost",
-                "hint": "The number of Power Points the Action uses up when activated."
-            },
             "trigger": {
                 "label": "Trigger",
                 "hint": "The trigger of the Action. (if any)"
@@ -536,6 +574,140 @@
                     "label": "Private Clock",
                     "hint": "Whether the clock is private."
                 }
+            },
+            "prerequisites": {
+                "label": "Prerequisites",
+                "hint": "The prerequisites to pickup this Perk."
+            },
+            "apCost": {
+                "label": "AP Cost",
+                "hint": "The Advancement Point cost to purchase this Perk."
+            },
+            "design": {
+                "arena": {
+                    "label": "Arena",
+                    "hint": "Physical / Mental / Social",
+                    "physical": "Physical",
+                    "mental": "Mental",
+                    "social": "Social"
+                },
+                "approach": {
+                    "label": "Approach",
+                    "hint": "Power / Finesse / Resilience",
+                    "power": "Power",
+                    "finesse": "Finesse",
+                    "resilience": "Resilience"
+                },
+                "archetype": {
+                    "label": "Archetype",
+                    "hint": "The Archetype to which this perk belongs"
+                }
+            },
+            "node": {
+                "i": {
+                    "label": "I",
+                    "hint": "I is the equivalent to X but in Hexagonal Grid Space"
+                },
+                "j": {
+                    "label": "J",
+                    "hint": "J is the equivalent to Y but in Hexagonal Grid Space"
+                },
+                "connected": {
+                    "label": "Connected",
+                    "hint": "List of all nodes (slugs) which are connected to this node"
+                },
+                "hidden": {
+                    "label": "Hidden",
+                    "hint": "Whether this node is hidden to players or not"
+                },
+                "config": {
+                    "alpha": {
+                        "label": "Alpha",
+                        "hint": "The alpha (transparency) value of the node."
+                    },
+                    "backgroundColor": {
+                        "label": "Background Color",
+                        "hint": "The background color of the node."
+                    },
+                    "borderColor": {
+                        "label": "Border Color",
+                        "hint": "The border color of the node."
+                    },
+                    "borderWidth": {
+                        "label": "Border Width",
+                        "hint": "The border width of the node."
+                    },
+                    "texture": {
+                        "label": "Texture",
+                        "hint": "The texture of the node (URL to img)."
+                    },
+                    "tint": {
+                        "label": "Tint",
+                        "hint": "The tint of the node."
+                    },
+                    "scale": {
+                        "label": "Scale",
+                        "hint": "The scale of the node. (Should be 1 for normal nodes, or 1.6 for base nodes)"
+                    }
+                }
+            },
+            "stats": {
+                "label": "Base Stats"
+            },
+            "movement": {
+                "primary": {
+                    "label": "Primary Movement"
+                },
+                "secondary": {
+                    "label": "Secondary Movement"
+                }
+            },
+            "powerPoints": {
+                "label": "PP Cost",
+                "hint": "The number of Power Points the Action uses up when activated.",
+                "short": "PP",
+                "value": {
+                    "label": "Current",
+                    "hint": "The number of Power Points the Move uses."
+                },
+                "max": {
+                    "label": "Max",
+                    "hint": "The maximum number of Power Points the Move can have."
+                }
+            },
+            "health": {
+                "label": "Health",
+                "hint": "The health of the actor.",
+                "short": "HP",
+                "value": {
+                    "label": "Current",
+                    "hint": "The health value of the actor."
+                },
+                "max": {
+                    "label": "Max",
+                    "hint": "The maximum health value of the actor."
+                }
+            },
+            "experience": {
+                "label": "Experience",
+                "hint": "The experience of the actor.",
+                "short": "EXP",
+                "current": {
+                    "label": "Current EXP",
+                    "hint": "The current experience value of the actor."
+                },
+                "next": {
+                    "label": "Next EXP Req.",
+                    "hint": "The experience value required to reach the next level."
+                },
+                "diff": {
+                    "label": "EXP to Next",
+                    "hint": "The experience value required to reach the next level."
+                }
+            },
+            "level": {
+                "label": "Level",
+                "hint": "The level of the actor."
             }
         },
         "ItemSheet": {
@@ -586,6 +758,13 @@
                 },
                 "party": {
                     "label": "Parties"
+                }
+            }
+        },
+        "TokenPanel": {
+            "Tabs": {
+                "attacks": {
+                    "label": "Attacks"
                 }
             }
         },

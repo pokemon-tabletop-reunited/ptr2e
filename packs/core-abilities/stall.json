@@ -1,32 +1,29 @@
 {
-	"_id": "KkQt1wKx45LAJvEK",
-	"name": "Stall",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "stall",
-		"actions": [
-			{
-				"slug": "stall",
-				"name": "Stall",
-				"description": "All of the creatures damaging attacks are [Delay 3] actions and have 50% increased power.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.KkQt1wKx45LAJvEK"
-		}
-	},
-	"effects": []
+    "name": "Stall",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Stall",
+                "slug": "stall",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "All of the user's Physical- and Special-Category attacks gain [Delay 3] and have 50% increased power.",
+        "traits": []
+    },
+    "_id": "MBJ0zjDu9vbNKVNM",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,32 +1,29 @@
 {
-	"_id": "ucGuqlAQqsLxhuU1",
-	"name": "Rivalry",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "rivalry",
-		"actions": [
-			{
-				"slug": "rivalry",
-				"name": "Rivalry",
-				"description": "If the user attacks another creature that shares a Type with them, the user does 20% more damage.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.ucGuqlAQqsLxhuU1"
-		}
-	},
-	"effects": []
+    "name": "Rivalry",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Rivalry",
+                "slug": "rivalry",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 20,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The target takes 20% more damage from the triggering attack.",
+        "traits": []
+    },
+    "_id": "KJJ4yV5JM3scGrBl",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

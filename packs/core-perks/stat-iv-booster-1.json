@@ -1,0 +1,53 @@
+{
+    "name": "<Stat> IV Booster 1",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "<Stat Specialist>"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "physical",
+            "approach": "resilience",
+            "archetype": "Stat Ace"
+        },
+        "description": "Increase your <stat> IV by 5.</stat>",
+        "actions": [
+            {
+                "name": "<Stat> IV Booster 1",
+                "slug": "stat-iv-booster-1",
+                "description": "Increase your <Stat> IV by 5.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "stat-iv-booster-1",
+        "traits": [],
+        "node": {
+            "i": 24,
+            "j": -23,
+            "connected": [
+                "stat-specialist",
+                "stat-iv-booster-2",
+                "root-2"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "wqHZnaqbcQqOeLO7",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

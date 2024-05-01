@@ -1,34 +1,32 @@
 {
-	"_id": "BkofQ5HcLKpfMABb",
-	"name": "Wind Rider",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "wind-rider",
-		"actions": [
-			{
-				"slug": "wind-rider",
-				"name": "Wind Rider",
-				"description": "The user takes no damage and is unaffected by the triggering attacks effect. Then the user's ATK Stage increases by +1 for 5 activations. While Windy Weather is active, the user's default ATK Stage is +1.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.BkofQ5HcLKpfMABb"
-		}
-	},
-	"effects": []
+    "name": "Wind Rider",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Wind Rider",
+                "slug": "wind-rider",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 3
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user takes no damage and is unaffected by the triggering attack's effect. Then the user's ATK Stage increases by +1 for 5 activations. Passive: The user is treated as having the Flying-Type for the effects of Wind Weather, and has +1 default ATK stages and a Flight Score of +3 while Wind Weather is Active.",
+        "traits": [
+            "defensive",
+            "environ"
+        ]
+    },
+    "_id": "9ZENWum82Y6m6MoC",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

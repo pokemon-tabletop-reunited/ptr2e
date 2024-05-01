@@ -1,0 +1,55 @@
+{
+    "name": "Venomous",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "[Poison]"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "physical",
+            "approach": "finesse",
+            "archetype": "[Poison Type]"
+        },
+        "description": "You gain the [Venomous] Trait",
+        "actions": [
+            {
+                "name": "Venomous",
+                "slug": "venomous",
+                "description": "You gain the [Venomous] Trait",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "venomous",
+        "traits": [],
+        "node": {
+            "i": 39,
+            "j": -28,
+            "connected": [
+                "secret-ninja-tools",
+                "controlled-curve",
+                "curveball-technique",
+                "pokeball-repairs",
+                "emergency-retreat"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/icons/poison_icon.png",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "hvuakkloMFHGmBMe",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

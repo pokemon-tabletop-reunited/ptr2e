@@ -1,34 +1,31 @@
 {
-	"_id": "MkZ4elzR1B9dtSEv",
-	"name": "Flame Body",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "flame-body",
-		"actions": [
-			{
-				"slug": "flame-body",
-				"name": "Flame Body",
-				"description": "When the user is hit by a damaging contact attack, the attacking creature has a 30% chance of being Burned 5.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.MkZ4elzR1B9dtSEv"
-		}
-	},
-	"effects": []
+    "name": "Flame Body",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Flame Body",
+                "slug": "flame-body",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The attacking creature has a 30% chance of being Burned 5.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "8OpIUsOG6ixvXSeh",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

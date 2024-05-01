@@ -1,32 +1,29 @@
 {
-	"_id": "XjSE1dNGMtnjSQvb",
-	"name": "Trace",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "trace",
-		"actions": [
-			{
-				"slug": "trace",
-				"name": "Trace",
-				"description": "The user targets 1 other creature on the field and replaces Trace with one ability the targeted creature knows until they are switched out, Faint or combat ends. If the targeted creature has more than one ability, the target chooses which ability the user copies. Trace cannot copy [Innate] abilities.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "simple",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.XjSE1dNGMtnjSQvb"
-		}
-	},
-	"effects": []
+    "name": "Trace",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Trace",
+                "slug": "trace",
+                "type": "generic",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 5
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 20,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user replaces Trace with one ability the targeted creature knows until the user is switched out, Faint or combat ends. If the targeted creature has more than one ability, the target chooses which ability the user copies.  [Legendary], [Innate], and [Forme Change] abilities cannot be copied.",
+        "traits": []
+    },
+    "_id": "fI2EahhtTP1XcDP6",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

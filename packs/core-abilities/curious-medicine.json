@@ -1,32 +1,31 @@
 {
-	"_id": "hSfvFXkwronO2KgP",
-	"name": "Curious Medicine",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "curious-medicine",
-		"actions": [
-			{
-				"slug": "curious-medicine",
-				"name": "Curious Medicine",
-				"description": "When the user is switched into battle, all allies stage is reset to default value (usually 0)",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.hSfvFXkwronO2KgP"
-		}
-	},
-	"effects": []
+    "name": "Curious Medicine",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Curious Medicine",
+                "slug": "curious-medicine",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Haze. The user freely uses Haze. Whenever user uses Haze, they can 2 PP to have either 1) the user and its allies or 2) foes be excluded from Haze's effect.",
+        "traits": [
+            "connection"
+        ]
+    },
+    "_id": "mVZlsG4DNCl0HbTZ",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

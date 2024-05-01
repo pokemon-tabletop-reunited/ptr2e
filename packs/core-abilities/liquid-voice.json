@@ -1,32 +1,29 @@
 {
-	"_id": "lOXtbn7YaqKvmAen",
-	"name": "Liquid Voice",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "liquid-voice",
-		"actions": [
-			{
-				"slug": "liquid-voice",
-				"name": "Liquid Voice",
-				"description": "Any [Sonic] attack the user knows has its original type changed to Water-type.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.lOXtbn7YaqKvmAen"
-		}
-	},
-	"effects": []
+    "name": "Liquid Voice",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Liquid Voice",
+                "slug": "liquid-voice",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Any [Sonic] attack the user knows has its original type changed to Water-Type.",
+        "traits": []
+    },
+    "_id": "1QUZtobDqm86t70d",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

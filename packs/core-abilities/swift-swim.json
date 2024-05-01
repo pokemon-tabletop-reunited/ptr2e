@@ -1,34 +1,31 @@
 {
-	"_id": "P3OjdjDOmSNzrXdw",
-	"name": "Swift Swim",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "swift-swim",
-		"actions": [
-			{
-				"slug": "swift-swim",
-				"name": "Swift Swim",
-				"description": "While Rainy Weather is active, the user's Speed Stat is doubled.",
-				"traits": [
-					"environ"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.P3OjdjDOmSNzrXdw"
-		}
-	},
-	"effects": []
+    "name": "Swift Swim",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Swift Swim",
+                "slug": "swift-swim",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While Rain Weather is active, the user's SPD Stat is doubled.",
+        "traits": [
+            "environ"
+        ]
+    },
+    "_id": "4Fo6KuOXvRacaMlA",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

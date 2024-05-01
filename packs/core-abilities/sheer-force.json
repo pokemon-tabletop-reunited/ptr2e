@@ -1,32 +1,29 @@
 {
-	"_id": "t4Tt78hC9SKWkHsi",
-	"name": "Sheer Force",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "sheer-force",
-		"actions": [
-			{
-				"slug": "sheer-force",
-				"name": "Sheer Force",
-				"description": "The user's damaging attacks that apply a secondary effect on hit have 30% increased power, but can no longer apply secondary effects with moves.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.t4Tt78hC9SKWkHsi"
-		}
-	},
-	"effects": []
+    "name": "Sheer Force",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Sheer Force",
+                "slug": "sheer-force",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's Physical or Special-Category attacks that apply a secondary effect on hit have 30% increased power, but can no longer apply their secondary effects.",
+        "traits": []
+    },
+    "_id": "YJC4GyCfluNVGjQ6",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

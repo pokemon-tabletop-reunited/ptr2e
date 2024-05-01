@@ -1,0 +1,56 @@
+{
+    "name": "Pack Mon",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "None"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "social",
+            "approach": "resilience",
+            "archetype": "Pack Mon"
+        },
+        "description": "You gain the [Pack Mon] trait and may join a pack.",
+        "actions": [
+            {
+                "name": "Pack Mon",
+                "slug": "pack-mon",
+                "description": "You gain the [Pack Mon] trait and may join a pack.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "pack-mon",
+        "traits": [],
+        "node": {
+            "i": 13,
+            "j": -21,
+            "connected": [
+                "pack-alpha",
+                "breeder",
+                "fighting-fit",
+                "root-2",
+                "pile-on",
+                "shiny-mutation"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#00ff00",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "g7RkEg1WRz28MU8R",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

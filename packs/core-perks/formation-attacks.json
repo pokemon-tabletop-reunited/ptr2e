@@ -1,0 +1,57 @@
+{
+    "name": "Formation Attacks",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Conversation 25",
+            "[Pack Mon]"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "mental",
+            "approach": "finesse",
+            "archetype": "Pack Mon"
+        },
+        "description": "When your Pack gangs up on an opponent, all members engaged with the same opponent gain +1 Accuracy Stage per engaged pack member.",
+        "actions": [
+            {
+                "name": "Formation Attacks",
+                "slug": "formation-attacks",
+                "description": "When your Pack gangs up on an opponent, all members engaged with the same opponent gain +1 Accuracy Stage per engaged pack member.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "formation-attacks",
+        "traits": [],
+        "node": {
+            "i": -2,
+            "j": 32,
+            "connected": [
+                "cyclist",
+                "false-swipe",
+                "cheerleader",
+                "hardy-trekker",
+                "hobby-gardener",
+                "pokemaniac"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#8080ff",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "zW2fOBtO1e0LEv2K",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

@@ -1,32 +1,29 @@
 {
-	"_id": "7vNHARUy3vXEe9sK",
-	"name": "Gorilla Tactics",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "gorilla-tactics",
-		"actions": [
-			{
-				"slug": "gorilla-tactics",
-				"name": "Gorilla Tactics",
-				"description": "The user's ATK stat is increased by 50%. Whenever the user uses an attack, that attack is Choice-Locked for 5 activations.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.7vNHARUy3vXEe9sK"
-		}
-	},
-	"effects": []
+    "name": "Gorilla Tactics",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Gorilla Tactics",
+                "slug": "gorilla-tactics",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's Base ATK stat is increased by 50%. Whenever the user uses an attack, that attack is Choice-Locked 5 (this effect does not stack).",
+        "traits": []
+    },
+    "_id": "hDS2m3ZPLmWwDsl4",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,34 +1,31 @@
 {
-	"_id": "xYyVpX9FjP6dKRBV",
-	"name": "Poison Heal",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "poison-heal",
-		"actions": [
-			{
-				"slug": "poison-heal",
-				"name": "Poison Heal",
-				"description": "If the user is affected by the Poison or Bad Poison condition, they recover a Tick of HP each turn instead of taking damage.",
-				"traits": [
-					"healing"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.xYyVpX9FjP6dKRBV"
-		}
-	},
-	"effects": []
+    "name": "Poison Heal",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Poison Heal",
+                "slug": "poison-heal",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "If the user is affected by the Poison or Blight condition, they recover a Tick of HP each turn instead of taking damage.",
+        "traits": [
+            "healing"
+        ]
+    },
+    "_id": "7UilwHVwPC92P7Jz",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

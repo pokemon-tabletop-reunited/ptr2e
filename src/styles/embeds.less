@@ -18,11 +18,11 @@ aside[role="tooltip"].attack,
             }
 
             &.header {
-                margin-bottom: 0.5rem;
                 border-bottom: 1px solid var(--color-light-6);
             }
 
             &.traits {
+                margin-top: 0.5rem;
                 border-bottom: unset;
 
                 tags[readonly] {
@@ -39,6 +39,11 @@ aside[role="tooltip"].attack,
                         display: none;
                     }
                 }
+            }
+
+            .dexNumber{
+                font-size: smaller;
+                color: #6b6b6b;
             }
         }
 
@@ -146,9 +151,152 @@ aside[role="tooltip"].attack,
         fieldset {
             border-color: var(--color-light-6);
             border-radius: 8px;
+
+            legend {
+                font-weight: bold;
+            }
+
+            .effect-description {
+                white-space: pre-line;
+                word-break: break-word;
+            }
+        }
+
+        content {
+            &.species-embed, &.perk-embed {
+                display: block;
+                border: unset;
+                background: unset;
+
+                section {
+                    margin-bottom: 0.5rem;
+
+                    &:last-child {
+                        margin-bottom: unset;
+                    }
+                }
+    
+                fieldset {
+                    border-color: var(--color-light-6);
+                    border-radius: 8px;
+                    background: #efe6d8;
+
+                    label {
+                        font-weight: bold;
+                    }
+                    span {
+                        text-align: center;
+                    }
+                }
+            }
+            &.species-embed {
+                main {
+                    grid-template-areas: 
+                        "stats"
+                        "primary-movement"
+                        "secondary-movement";
+                }    
+            }
         }
     }
 }
+
+content.perk-embed {
+    .perk-info fieldset {
+        text-align: left;
+
+        .cost-row {
+            display: grid;
+            grid-template-columns: 50% 50%;
+            grid-auto-rows: 17px;
+            gap: 0.25rem;
+            padding: 0.25rem;
+            margin-bottom: unset;
+
+            label {
+                font-weight: bold;
+            }
+
+            span {
+                text-align: center;
+            }
+        }
+
+        &.prereqs {
+            display: flex;
+            flex-direction: column;
+            ul {
+                margin: 0;
+                &:has(.none) {
+                    margin: unset;
+                    padding: unset;
+                }
+            }
+
+            li {   
+                text-align: left;
+
+                &.none {
+                    text-align: center;
+                    font-size: smaller;
+                    color: #6b6b6b;
+                    list-style: none;
+                    font-style: italic;
+                }
+            }
+            margin-bottom: 0.5rem;
+        }
+    }
+}
+
+content.species-embed {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;  
+
+    aside {
+        display: flex;
+        flex-direction: column;
+        flex: 0 0 44px;
+        margin: 0.25rem;
+        gap: 5px;
+
+        img {
+            border: unset;
+            border-radius: 50%;
+        }
+    }
+
+    main {
+        flex: 1 0 auto;
+        margin: 0 0.25rem;
+
+        display: grid;
+        grid-template-areas: 
+            "stats primary-movement"
+            "stats secondary-movement";
+
+        section {
+            &.species-basestats {
+                grid-area: stats;
+            }
+            &.species-primary-movement {
+                grid-area: primary-movement;
+            }
+            &.species-secondary-movement {
+                grid-area: secondary-movement;
+            }
+            
+            fieldset {
+                display: grid !important;
+                grid-template-columns: 70% 30%;
+                grid-auto-rows: 17px;
+                gap: 0.25rem;
+                height: 100%;
+            }
+        }
+    }
+}    
 
 content.attack-embed {
     display: flex;
@@ -216,3 +364,4 @@ content.attack-embed {
         }
     }
 }
+

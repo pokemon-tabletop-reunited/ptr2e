@@ -1,32 +1,29 @@
 {
-	"_id": "8suh1bGfMo1D11Do",
-	"name": "Berserk",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "berserk",
-		"actions": [
-			{
-				"slug": "berserk",
-				"name": "Berserk",
-				"description": "While your current HP is less than 1/2 your Max HP, your default SPATK stage is increased by +1.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.8suh1bGfMo1D11Do"
-		}
-	},
-	"effects": []
+    "name": "Berserk",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Berserk",
+                "slug": "berserk",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While the user is at 50% HP or less, their default SPATK stage is increased by +1.",
+        "traits": []
+    },
+    "_id": "3M99juQOyxPeaUar",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

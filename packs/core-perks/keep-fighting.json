@@ -1,0 +1,58 @@
+{
+    "name": "Keep Fighting!",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Conversation 50",
+            "Leadership 50"
+        ],
+        "cost": 4,
+        "design": {
+            "arena": "social",
+            "approach": "power",
+            "archetype": "Support"
+        },
+        "description": "When an ally is reduced to below 1HP, you may activate this ability. They are instead reduced to 1HP, and do not gain a stack of Weary. After this, they then clear any Afflictions and recover 30% of their Max HP.",
+        "actions": [
+            {
+                "name": "Keep Fighting!",
+                "slug": "keep-fighting",
+                "description": "When an ally is reduced to below 1HP, you may activate this ability. They are instead reduced to 1HP, and do not gain a stack of Weary. After this, they then clear any Afflictions and recover 30% of their Max HP.",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 10
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "keep-fighting",
+        "traits": [],
+        "node": {
+            "i": 11,
+            "j": 3,
+            "connected": [
+                "firefly",
+                "hypnotic-suggestion",
+                "incognito",
+                "one-with-the-green",
+                "potent-venom",
+                "screen-setter"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#ffffff",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+                "tint": "#191919",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "3RMFsZTuMdDhCyZg",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

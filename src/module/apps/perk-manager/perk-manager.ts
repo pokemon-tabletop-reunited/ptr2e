@@ -3,7 +3,7 @@ import { PerkSystemModel } from "@item/data/index.ts";
 
 class PerkManager {
 
-    private packs: string[] = ["ptr2e.perks"];
+    private packs: string[] = ["ptr2e.core-perks"];
     readonly perks: Map<string, PerkPTR2e> = new Map();
 
     get initialized() {

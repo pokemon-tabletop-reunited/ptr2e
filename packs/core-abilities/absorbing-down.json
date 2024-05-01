@@ -1,34 +1,31 @@
 {
-	"_id": "QAKj6hKLFv3GGC89",
-	"name": "Absorbing Down",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "absorbing-down",
-		"actions": [
-			{
-				"slug": "absorbing-down",
-				"name": "Absorbing Down",
-				"description": "Your DEF stage cannot be decreased by attack or ability effects from other creatures. Whenever your DEF stage increases, the effect duration increases by 1 activation.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.QAKj6hKLFv3GGC89"
-		}
-	},
-	"effects": []
+    "name": "Absorbing Down",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Absorbing Down",
+                "slug": "absorbing-down",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The triggering effect's duration increases by 2. Passive: The user ignores negative DEF stages.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "0U4bji480vIfU35y",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

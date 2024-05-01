@@ -1,34 +1,31 @@
 {
-	"_id": "FJ9Vh22wXzm4noE5",
-	"name": "Thick Fat",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "thick-fat",
-		"actions": [
-			{
-				"slug": "thick-fat",
-				"name": "Thick Fat",
-				"description": "The user takes 50% reduced damage from Fire and Ice-type attacks.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.FJ9Vh22wXzm4noE5"
-		}
-	},
-	"effects": []
+    "name": "Thick Fat",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Thick Fat",
+                "slug": "thick-fat",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user takes 50% reduced damage from Fire and Ice-Type attacks.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "RS60os197DTbEcoO",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

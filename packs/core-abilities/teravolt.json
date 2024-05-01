@@ -1,36 +1,33 @@
 {
-	"_id": "zdSEGprhgDm8iUfY",
-	"name": "Teravolt",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "teravolt",
-		"actions": [
-			{
-				"slug": "teravolt",
-				"name": "Teravolt",
-				"description": "The user's attacks are unaffected by the abilities of other creatures on the field. When using Fusion Bolt, the user may spend an additional 2 PP to also inflict Nullified 5 on one of the target's abilities. If the user uses Bolt Strike, the user may spend an additional 2 PP to inflict Nullified 5 on one of the target's abilities as well as inflicting Blinded 5.",
-				"traits": [
-					"legendary",
-					"defensive",
-					"aura"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.zdSEGprhgDm8iUfY"
-		}
-	},
-	"effects": []
+    "name": "Teravolt",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Teravolt",
+                "slug": "teravolt",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's attacks are unaffected by the abilities of other creatures on the field. When using Fusion Bolt, the user may spend an additional 2 PP to also inflict Nullified 5 on one of the target's abilities. If the user uses Bolt Strike, the user may spend an additional 2 PP to inflict Nullified 5 on one of the target's abilities as well as inflicting Blinded 5.",
+        "traits": [
+            "legendary",
+            "defensive",
+            "aura"
+        ]
+    },
+    "_id": "fwtIQydiNYmee6Pm",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

@@ -1,32 +1,29 @@
 {
-	"_id": "XjhhJaE66LMN0BNl",
-	"name": "Competitive",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "competitive",
-		"actions": [
-			{
-				"slug": "competitive",
-				"name": "Competitive",
-				"description": "Your SPATK stage increases by +2 for 5 activations.",
-				"traits": [],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.XjhhJaE66LMN0BNl"
-		}
-	},
-	"effects": []
+    "name": "Competitive",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Competitive",
+                "slug": "competitive",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's SPATK stage increases by +2 for 5 activations.",
+        "traits": []
+    },
+    "_id": "ApWtS5Q5HKvLpL2n",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

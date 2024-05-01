@@ -1,0 +1,59 @@
+{
+    "name": "Down The Sights",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "None"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "mental",
+            "approach": "resilience",
+            "archetype": "Combat"
+        },
+        "description": "You take aim and pay the activation cost. Your next Ranged Move gains +1 Critical Rate Stage.",
+        "actions": [
+            {
+                "name": "Down The Sights",
+                "slug": "down-the-sights",
+                "description": "You take aim and pay the activation cost. Your next Ranged Move gains +1 Critical Rate Stage.",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 2
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "down-the-sights",
+        "traits": [],
+        "node": {
+            "i": 24,
+            "j": -7,
+            "connected": [
+                "bug-catcher",
+                "dead-to-rights",
+                "root-3",
+                "firefly",
+                "frenzied-assault",
+                "hesitation",
+                "hypnotic-suggestion",
+                "precise-style"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "eHdFNdcyllxflfNA",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

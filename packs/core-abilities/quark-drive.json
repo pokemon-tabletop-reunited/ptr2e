@@ -1,35 +1,32 @@
 {
-	"_id": "FghqSTQgadMl4Ho1",
-	"name": "Quark Drive",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "quark-drive",
-		"actions": [
-			{
-				"slug": "quark-drive",
-				"name": "Quark Drive",
-				"description": "While Electric Terrain is active, the user's highest Stat, excluding HP, is increased by 30%, or 50% if the stat is Speed. This is before stat changes from stage, Conditions and Items. If the user has an equipped Booster Energy, Quark Drive can be activated for 5 activations once per combat.",
-				"traits": [
-					"aura",
-					"environ"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.FghqSTQgadMl4Ho1"
-		}
-	},
-	"effects": []
+    "name": "Quark Drive",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Quark Drive",
+                "slug": "quark-drive",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "While Electric Terrain is active, the user's highest Stat, excluding HP, is increased by 30%, or 50% if the stat is SPD. This is before stat changes from stage, Conditions and Items. If the user has an equipped Booster Energy, Quark Drive can be activated for 5 activations once per combat.",
+        "traits": [
+            "aura",
+            "environ"
+        ]
+    },
+    "_id": "MECU3qDl6oVsMjla",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

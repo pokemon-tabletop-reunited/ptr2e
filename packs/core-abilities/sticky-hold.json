@@ -1,34 +1,31 @@
 {
-	"_id": "W5Tw2gyB0SwEHuje",
-	"name": "Sticky Hold",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "sticky-hold",
-		"actions": [
-			{
-				"slug": "sticky-hold",
-				"name": "Sticky Hold",
-				"description": "The user's equipped items cannot be stolen or knocked off. The user's Grapple Maneuver check has one more degree of success.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.W5Tw2gyB0SwEHuje"
-		}
-	},
-	"effects": []
+    "name": "Sticky Hold",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Sticky Hold",
+                "slug": "sticky-hold",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user's Equipped items cannot be stolen or affected by Knock Off. The user's Grapple Maneuver checks are one degree more successful.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "dvt1XkyzNMosl8ds",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

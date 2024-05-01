@@ -1,34 +1,31 @@
 {
-	"_id": "XY31Qjh8fY7irKuP",
-	"name": "Stalwart",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "stalwart",
-		"actions": [
-			{
-				"slug": "stalwart",
-				"name": "Stalwart",
-				"description": "The user is immune to the [Push] effect and cannot be affected by any forced movement. The user's Lift skill checks have one more degree of success.",
-				"traits": [
-					"defensive"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "passive",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.XY31Qjh8fY7irKuP"
-		}
-	},
-	"effects": []
+    "name": "Stalwart",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Stalwart",
+                "slug": "stalwart",
+                "type": "passive",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 0
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "The user is immune to the [Push] effect and cannot be affected by any forced movement. The user's Lift skill checks have one more degree of success.",
+        "traits": [
+            "defensive"
+        ]
+    },
+    "_id": "8R1vxsQM7NO5UwOw",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

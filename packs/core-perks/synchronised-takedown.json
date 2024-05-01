@@ -1,0 +1,58 @@
+{
+    "name": "Synchronised Takedown",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Leadership 50",
+            "[Pack Leader]",
+            "Pile On!",
+            "Stealth 50"
+        ],
+        "cost": 4,
+        "design": {
+            "arena": "social",
+            "approach": "finesse",
+            "archetype": "Pack Leader"
+        },
+        "description": "If your Pack has yet to be discovered, you may declare a Synchronised Takedown. All pack members may get one attack before combat begins.",
+        "actions": [
+            {
+                "name": "Synchronised Takedown",
+                "slug": "synchronised-takedown",
+                "description": "If your Pack has yet to be discovered, you may declare a Synchronised Takedown. All pack members may get one attack before combat begins.",
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 10
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "synchronised-takedown",
+        "traits": [],
+        "node": {
+            "i": 29,
+            "j": 10,
+            "connected": [
+                "hit-run",
+                "gemcutter",
+                "hesitation",
+                "urge-mount"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#111111",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "F3jNJOuVohlK9fft",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}

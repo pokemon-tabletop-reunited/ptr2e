@@ -1,34 +1,32 @@
 {
-	"_id": "UUdjhvy3HTZjKpoR",
-	"name": "Poison Puppeteer",
-	"img": "/systems/ptr2e/img/icons/ability_icon.webp",
-	"system": {
-		"slug": "poison-puppeteer",
-		"actions": [
-			{
-				"slug": "poison-puppeteer",
-				"name": "Poison Puppeteer",
-				"description": "The affected creature is afflicted with Confused 5.",
-				"traits": [
-					"legendary"
-				],
-				"type": "combat",
-				"range": null,
-				"cost": {
-					"activation": "free",
-					"powerPoints": 0,
-					"trigger": null,
-					"delay": null,
-					"priority": null
-				}
-			}
-		]
-	},
-	"type": "ability",
-	"flags": {
-		"core": {
-			"sourceId": "Compendium.ptr2e.core-abilities.Item.UUdjhvy3HTZjKpoR"
-		}
-	},
-	"effects": []
+    "name": "Poison Puppeteer",
+    "type": "ability",
+    "system": {
+        "actions": [
+            {
+                "name": "Poison Puppeteer",
+                "slug": "poison-puppeteer",
+                "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 2
+                },
+                "range": {
+                    "target": "self",
+                    "distance": 0,
+                    "unit": "m"
+                },
+                "traits": []
+            }
+        ],
+        "description": "Connection - Malignant Chain. The affected creature is afflicted with Confused 5.",
+        "traits": [
+            "legendary",
+            "connection"
+        ]
+    },
+    "_id": "3CyiH4PRZBEaNGDf",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "effects": [],
+    "folder": null
 }

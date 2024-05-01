@@ -1,0 +1,56 @@
+{
+    "name": "Soothing Aura",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Aura Sense 60",
+            "Aura Bonding"
+        ],
+        "cost": 3,
+        "design": {
+            "arena": "social",
+            "approach": "power",
+            "archetype": "Aura"
+        },
+        "description": "You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked. Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.",
+        "actions": [
+            {
+                "name": "Soothing Aura",
+                "slug": "soothing-aura",
+                "description": "You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked. Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.",
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 5
+                },
+                "type": "generic",
+                "traits": []
+            }
+        ],
+        "slug": "soothing-aura",
+        "traits": [],
+        "node": {
+            "i": -20,
+            "j": -15,
+            "connected": [
+                "shift-consciousness-aura",
+                "aura-bonding",
+                "aura-dampening",
+                "telekinetic-potential"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#008000",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+                "tint": "#151515",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "6m9rPR0KNKTQ2B40",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}
