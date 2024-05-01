@@ -1,70 +1,55 @@
 {
-  "name": "Acrobat",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Acrobatics 30"
-    ],
-    "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Athleticism"
-    },
-    "description": "You gain a +10 to Acrobatics checks when benefitting from a running start.",
-    "actions": [
-      {
-        "name": "Acrobat",
-        "slug": "acrobat",
-        "description": "You gain a +10 to Acrobatics checks when benefitting from a running start.",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+    "name": "Acrobat",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Acrobatics 30"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "physical",
+            "approach": "finesse",
+            "archetype": "Athleticism"
         },
-        "type": "passive",
+        "description": "You gain a +10 to Acrobatics checks when benefitting from a running start.",
+        "actions": [
+            {
+                "name": "Acrobat",
+                "slug": "acrobat",
+                "description": "You gain a +10 to Acrobatics checks when benefitting from a running start.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": []
+            }
+        ],
+        "slug": "acrobat",
         "traits": [],
-        "range": null
-      }
-    ],
-    "slug": null,
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": null,
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false
-    }
-  },
-  "_id": "MDkJ0KhnAvqw0v3J",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1714205852150,
-    "modifiedTime": 1714205852150,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!MDkJ0KhnAvqw0v3J"
+        "node": {
+            "i": -17,
+            "j": 3,
+            "connected": [
+                "root-perk",
+                "adhesive-digits",
+                "fisherman",
+                "snare",
+                "sprint"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#004080",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "MDkJ0KhnAvqw0v3J",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }
