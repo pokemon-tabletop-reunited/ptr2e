@@ -11,7 +11,7 @@
             "approach": "finesse",
             "archetype": "Capture"
         },
-        "description": "Your Fling move may not reduce a Pokemon to less than 1 HP when utilising a [PokeBall] item.",
+        "description": "<p>When using Fling with a [PokeBall] item, you may prevent the attack from lowering a Pokemon below 1 HP.</p>",
         "actions": [
             {
                 "name": "Controlled Curve",
@@ -22,7 +22,11 @@
                     "powerPoints": 1
                 },
                 "type": "generic",
-                "traits": []
+                "traits": [],
+                "range": {
+                    "target": "enemy",
+                    "unit": "m"
+                }
             }
         ],
         "slug": "controlled-curve",
