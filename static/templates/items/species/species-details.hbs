@@ -265,9 +265,44 @@
         </fieldset>
         <fieldset class="evolutions">
             <legend>
-                Evolutions (not editable)
+                Evolutions
             </legend>
-            <small>To be added</small>
+            <div class="evolution no-shadow">
+                <header>
+                    {{source.system.evolutions.full.name}}
+                </header>
+                <fieldset>
+                    <legend>
+                        Evolutions
+                    </legend>
+                {{#each source.system.evolutions.full.evolutions}}
+                    {{> evolution}}
+                {{else}}
+                    <small>No further evolutions, drop species here to add one</small>
+                {{/each}}
+                </fieldset>                
+            </div>
         </fieldset>
     </div>
 </section>
+
+{{#*inline "evolution"}}
+    <div class="evolution">
+        <header>
+            {{this.name}}
+        </header>
+        <div class="method">
+            insert method dropdown here with value
+        </div>
+        <fieldset>
+            <legend>
+                Evolutions
+            </legend>
+            {{#each this.evolutions}}
+                {{> evolution}}
+            {{else}}
+                <small>No further evolutions, drop species here to add one</small>
+            {{/each}}
+        </fieldset>
+    </div>
+{{/inline}}

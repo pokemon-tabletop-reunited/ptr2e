@@ -1,6 +1,8 @@
 /** Application V2 Styles **/
 body {
+  --appv2-background-flat: rgba(12, 11, 22, 0.94);
   --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  --appv2-background-alt: linear-gradient(to right, rgba(28, 25, 46, 0.5), rgba(24, 24, 34, 0.53));
   --appv2-text-color: var(--color-light-1);
   --hint-text-color: var(--color-light-5);
   --border-theme-color: var(--color-light-6);
@@ -8,7 +10,9 @@ body {
   --color-theme-3: var(--color-light-3);
 }
 body.theme-light {
+  --appv2-background-flat: rgba(225, 222, 210, 0.94);
   --appv2-background: linear-gradient(to right, rgba(212, 210, 198, 0.93), rgba(240, 237, 223, 0.95));
+  --appv2-background-alt: linear-gradient(to right, rgba(240, 237, 223, 0.5), rgba(225, 222, 210, 0.53));
   --appv2-text-color: var(--color-dark-1);
   --hint-text-color: var(--color-dark-5);
   --border-theme-color: var(--color-dark-6);
@@ -969,6 +973,34 @@ body.theme-dark .sheet a.content-link {
 }
 .sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions {
   flex: 0 0 100%;
+  background: var(--appv2-background);
+}
+.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 16px;
+}
+.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-transform: capitalize;
+}
+.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution .method {
+  color: slategrey;
+  font-style: italic;
+}
+.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution small {
+  color: lightgray;
+  font-style: italic;
+  text-align: center;
+}
+.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset {
+  background: var(--appv2-background);
+}
+.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution.no-shadow {
+  box-shadow: unset;
 }
 .sheet#traits-settings {
   background: var(--appv2-background);
