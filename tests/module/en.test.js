@@ -10,10 +10,10 @@ describe("Load json file", () => {
     });
 
     test("it should contain valid translation keys", async () => {
-        const input = json["TYPES.Actor.character"];
-        // EQUAL TO:  const input = json["TYPES.Actor.character"];
+        const input = json["TYPES.Actor.humanoid"];
+        // EQUAL TO:  const input = json["TYPES.Actor.humanoid"];
 
-        const output = "Character";
+        const output = "Humanoid";
 
         expect(input).toEqual(output);
     });

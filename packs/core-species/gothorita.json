@@ -541,33 +541,48 @@
     "genderRatio": 6,
     "habitats": [],
     "evolutions": {
-      "full": {
-        "name": "gothita",
-        "details": null,
-        "evolutions": [
-          {
-            "name": "gothorita",
-            "details": {
-              "gender": null,
-              "item": null,
-              "knownMove": null,
-              "level": 32
-            },
-            "evolutions": [
-              {
-                "name": "gothitelle",
-                "details": {
-                  "gender": null,
-                  "item": null,
-                  "knownMove": null,
-                  "level": 41
-                },
-                "evolutions": []
+      "name": "gothita",
+      "details": null,
+      "evolutions": [
+        {
+          "name": "gothorita",
+          "uuid": "Compendium.ptr2e.core-species.Item.zXdkGJ7d2GhYNbL8",
+          "methods": [
+            {
+              "type": "level",
+              "level": 32,
+              "operand": "and"
+            }
+          ],
+          "evolutions": [
+            {
+              "name": "gothitelle",
+              "uuid": "Compendium.ptr2e.core-species.Item.o8AO2CZ5Jty8SABk",
+              "methods": [
+                {
+                  "type": "level",
+                  "level": 41,
+                  "operand": "and"
+                }
+              ],
+              "evolutions": [],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
               }
-            ]
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
           }
-        ]
-      }
+        }
+      ],
+      "uuid": "Compendium.ptr2e.core-species.Item.zXdkGJ7d2GhYNbL8"
     }
   },
   "_id": "zXdkGJ7d2GhYNbL8",
@@ -584,12 +599,14 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.318",
+    "coreVersion": "12.320",
     "systemId": "ptr2e",
     "systemVersion": "0.004",
     "createdTime": 1712327701027,
-    "modifiedTime": 1713185519745,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+    "modifiedTime": 1714663305677,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": "Compendium.ptr2e.core-species.Item.zXdkGJ7d2GhYNbL8",
+    "duplicateSource": null
   },
   "_key": "!items!zXdkGJ7d2GhYNbL8"
 }

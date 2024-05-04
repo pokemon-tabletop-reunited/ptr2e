@@ -1,6 +1,8 @@
 /** Application V2 Styles **/
 body {
+  --appv2-background-flat: rgba(12, 11, 22, 0.94);
   --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  --appv2-background-alt: linear-gradient(to right, rgba(28, 25, 46, 0.5), rgba(24, 24, 34, 0.53));
   --appv2-text-color: var(--color-light-1);
   --hint-text-color: var(--color-light-5);
   --border-theme-color: var(--color-light-6);
@@ -8,7 +10,9 @@ body {
   --color-theme-3: var(--color-light-3);
 }
 body.theme-light {
+  --appv2-background-flat: rgba(225, 222, 210, 0.94);
   --appv2-background: linear-gradient(to right, rgba(212, 210, 198, 0.93), rgba(240, 237, 223, 0.95));
+  --appv2-background-alt: linear-gradient(to right, rgba(240, 237, 223, 0.5), rgba(225, 222, 210, 0.53));
   --appv2-text-color: var(--color-dark-1);
   --hint-text-color: var(--color-dark-5);
   --border-theme-color: var(--color-dark-6);
@@ -25,34 +29,44 @@ body.theme-dark .sheet a.content-link {
 .application .window-header .window-title {
   height: 100%;
 }
-.sheet .tag {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex: 1 0 100%;
+.application.sheet multi-select .tags,
+.application.sheet string-tags .tags,
+.application.sheet string-tags-ptr2e .tags {
+  flex-direction: column;
+  align-items: start;
 }
-.sheet prose-mirror {
+.application.sheet multi-select .tags .tag,
+.application.sheet string-tags .tags .tag,
+.application.sheet string-tags-ptr2e .tags .tag {
+  font-size: var(--font-size-14);
+}
+.application.sheet multi-select .tags .tag:has(a.content-link),
+.application.sheet string-tags .tags .tag:has(a.content-link),
+.application.sheet string-tags-ptr2e .tags .tag:has(a.content-link) {
+  padding: 4px 0.25rem;
+}
+.application.sheet prose-mirror {
   border: 1px solid var(--border-theme-color);
   border-radius: 8px;
   margin: 5px 0;
 }
-.sheet prose-mirror .editor-menu button.pm-dropdown {
+.application.sheet prose-mirror .editor-menu button.pm-dropdown {
   color: var(--color-dark-1);
 }
-.sheet prose-mirror .editor-content,
-.sheet prose-mirror .editor-container .editor-content {
+.application.sheet prose-mirror .editor-content,
+.application.sheet prose-mirror .editor-container .editor-content {
   padding: 0.5rem;
 }
-.sheet.actor.v2 {
+.application.sheet.actor.v2 {
   background: var(--appv2-background);
 }
-.sheet.actor.v2 .window-content {
+.application.sheet.actor.v2 .window-content {
   display: grid;
   grid-template-columns: 22% 78%;
   grid-template-rows: 65px auto;
   grid-template-areas: "header nav" "sidebar main";
 }
-.sheet.actor.v2 .window-content aside.actor-header {
+.application.sheet.actor.v2 .window-content aside.actor-header {
   grid-area: header;
   display: grid;
   grid-template-columns: 64px auto;
@@ -60,17 +74,17 @@ body.theme-dark .sheet a.content-link {
   border-bottom: 1px solid var(--border-theme-color);
   border-right: 1px solid var(--border-theme-color);
 }
-.sheet.actor.v2 .window-content aside.actor-header img {
+.application.sheet.actor.v2 .window-content aside.actor-header img {
   flex: 0 0 64px;
   height: 64px;
   border: unset;
 }
-.sheet.actor.v2 .window-content aside.actor-header .title {
+.application.sheet.actor.v2 .window-content aside.actor-header .title {
   flex: 1 0 auto;
   margin: 0 0.5rem;
   align-self: center;
 }
-.sheet.actor.v2 .window-content nav.tabs {
+.application.sheet.actor.v2 .window-content nav.tabs {
   grid-area: nav;
   border: unset;
   border-bottom: 1px solid var(--border-theme-color);
@@ -80,42 +94,42 @@ body.theme-dark .sheet a.content-link {
   padding: 0.5rem;
   gap: unset;
 }
-.sheet.actor.v2 .window-content nav.tabs > [data-tab] {
+.application.sheet.actor.v2 .window-content nav.tabs > [data-tab] {
   padding: 8px;
 }
-.sheet.actor.v2 .window-content aside.sidebar {
+.application.sheet.actor.v2 .window-content aside.sidebar {
   grid-area: sidebar;
   display: flex;
   flex-direction: column;
   border-right: 1px solid var(--border-theme-color);
 }
-.sheet.actor.v2 .window-content aside.sidebar .inputs {
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0.5rem;
   border-bottom: 1px solid var(--border-theme-color);
 }
-.sheet.actor.v2 .window-content aside.sidebar .inputs > div {
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs > div {
   display: flex;
   flex-direction: column;
   text-align: center;
   color: var(--hint-text-color);
 }
-.sheet.actor.v2 .window-content aside.sidebar .inputs label {
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs label {
   font-size: 12px;
 }
-.sheet.actor.v2 .window-content aside.sidebar .inputs input {
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs input {
   width: 80%;
   align-self: center;
 }
-.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-current,
-.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-current,
-.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-max,
-.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-max {
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-current,
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-current,
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-max,
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-max {
   flex: 0 1 auto;
 }
-.sheet.actor.v2 .window-content aside.sidebar .experience {
+.application.sheet.actor.v2 .window-content aside.sidebar .experience {
   display: flex;
   flex-direction: column;
   padding: 0.5rem;
@@ -123,53 +137,53 @@ body.theme-dark .sheet a.content-link {
   column-gap: 0.5rem;
   row-gap: 0.25rem;
 }
-.sheet.actor.v2 .window-content aside.sidebar .experience > div {
+.application.sheet.actor.v2 .window-content aside.sidebar .experience > div {
   display: flex;
   flex-direction: row;
   text-align: center;
   color: var(--hint-text-color);
 }
-.sheet.actor.v2 .window-content aside.sidebar .experience label {
+.application.sheet.actor.v2 .window-content aside.sidebar .experience label {
   flex: 1 0 40%;
   align-content: center;
   text-align: left;
   font-size: 12px;
   padding-left: 1rem;
 }
-.sheet.actor.v2 .window-content aside.sidebar .experience input {
+.application.sheet.actor.v2 .window-content aside.sidebar .experience input {
   flex: 0 1 40%;
   align-self: center;
   align-content: center;
   margin-right: 0.5rem;
 }
-.sheet.actor.v2 .window-content aside.sidebar .experience .xp-current {
+.application.sheet.actor.v2 .window-content aside.sidebar .experience .xp-current {
   grid-area: xp-current;
 }
-.sheet.actor.v2 .window-content aside.sidebar .experience .xp-next {
+.application.sheet.actor.v2 .window-content aside.sidebar .experience .xp-next {
   grid-area: xp-next;
 }
-.sheet.actor.v2 .window-content aside.sidebar .experience .xp-diff {
+.application.sheet.actor.v2 .window-content aside.sidebar .experience .xp-diff {
   grid-area: xp-diff;
 }
-.sheet.actor.v2 .window-content aside.sidebar .experience .level {
+.application.sheet.actor.v2 .window-content aside.sidebar .experience .level {
   grid-area: level;
 }
-.sheet.actor.v2 .window-content aside.sidebar .perk-web-button {
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button {
   margin-top: auto;
   display: flex;
   justify-content: center;
   margin-bottom: 0.5rem;
 }
-.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button {
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button {
   flex: 0 0 70%;
 }
-.sheet.actor.v2 .window-content .tab.active {
+.application.sheet.actor.v2 .window-content .tab.active {
   grid-area: main;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
 }
-.sheet.actor.v2 .window-content .tab.active fieldset {
+.application.sheet.actor.v2 .window-content .tab.active fieldset {
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -181,18 +195,18 @@ body.theme-dark .sheet a.content-link {
   border-radius: 8px;
   border-color: var(--border-theme-color);
 }
-.sheet.actor.v2 .window-content .tab.active fieldset legend {
+.application.sheet.actor.v2 .window-content .tab.active fieldset legend {
   font-size: var(--font-size-15);
   font-weight: bold;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .scroll.inventory {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .scroll.inventory {
   grid-area: span 5 / span 3;
   overflow-y: auto;
   overflow-x: hidden;
   height: 100%;
   gap: 0;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header {
   align-items: center;
   background: var(--appv2-background);
   color: var(--appv2-text-color);
@@ -209,18 +223,18 @@ body.theme-dark .sheet a.content-link {
   border: 1px solid var(--border-theme-color);
   border-radius: 4px 4px 0 0;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header:first-child {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header:first-child {
   margin-top: 0;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name {
   padding-left: 0.5rem;
   font-size: 1.125rem !important;
   text-transform: capitalize;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header > :last-child {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header > :last-child {
   padding-right: 0.25rem;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items {
   border: 1px solid var(--border-theme-color);
   border-top: unset;
   border-radius: 0 0 4px 4px;
@@ -232,7 +246,7 @@ body.theme-dark .sheet a.content-link {
   position: relative;
   width: 100%;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -240,14 +254,14 @@ body.theme-dark .sheet a.content-link {
   margin: unset;
   padding: 2px 0;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li:nth-child(odd) {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li:nth-child(odd) {
   background: var(--appv2-background);
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li:last-child {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li:last-child {
   border-radius: 0 0 4px 4px;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name,
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name {
   align-items: center;
   display: flex;
   flex: 2;
@@ -256,32 +270,32 @@ body.theme-dark .sheet a.content-link {
   gap: 0.25rem;
   padding-right: 0.25rem;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name .item-image,
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name .item-image {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name .item-image,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name .item-image {
   display: flex;
   flex: 0 0 1.75rem;
   height: 1.75rem;
   position: relative;
   margin-left: 2px;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name .item-name,
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name .item-name {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name .item-name,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name .item-name {
   font-weight: 500;
   margin: auto auto auto 0;
   padding: 0.125rem;
   word-break: break-word;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity,
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-basis: 4.25rem;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity .decrease,
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity .decrease,
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity .increase,
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity .increase {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity .decrease,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity .decrease,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity .increase,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity .increase {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -289,29 +303,29 @@ body.theme-dark .sheet a.content-link {
   text-align: center;
   width: 1.125rem;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity span,
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity span {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity span,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity span {
   min-width: 2ch;
   text-align: center;
 }
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls,
-.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls {
   flex-basis: 4.75rem;
   gap: 1px;
   justify-content: end;
   align-items: center;
   display: flex;
 }
-.sheet.actor.v2 .window-content .tab.active .effects-display {
+.application.sheet.actor.v2 .window-content .tab.active .effects-display {
   padding: 0.5rem;
   grid-area: span 5 / span 3;
 }
-.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list {
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list {
   list-style: none;
   margin: 0 0.5rem;
   padding: 0;
 }
-.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect {
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect {
   padding: 0.5rem;
   border-radius: 5px;
   display: flex;
@@ -320,19 +334,19 @@ body.theme-dark .sheet a.content-link {
   align-items: center;
   border: 1px solid var(--border-theme-color);
 }
-.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .effect-icon {
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .effect-icon {
   flex: 0 0 28px;
   height: 28px;
   width: 28px;
 }
-.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .name {
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .name {
   flex-grow: 1;
   margin: 0 0.25rem;
 }
-.sheet.actor.v2 .window-content .can-popout {
+.application.sheet.actor.v2 .window-content .can-popout {
   position: relative;
 }
-.sheet.actor.v2 .window-content .can-popout .popout-control {
+.application.sheet.actor.v2 .window-content .can-popout .popout-control {
   position: absolute;
   top: -9px;
   right: -2px;
@@ -342,18 +356,18 @@ body.theme-dark .sheet a.content-link {
   border-radius: 0 4px 0 4px;
   cursor: pointer;
 }
-.sheet.actor.popout {
+.application.sheet.actor.popout {
   background: var(--appv2-background);
 }
-.sheet.actor.popout .effects-display {
+.application.sheet.actor.popout .effects-display {
   padding: 0.5rem;
 }
-.sheet.actor.popout .effects-display ul.effect-list {
+.application.sheet.actor.popout .effects-display ul.effect-list {
   list-style: none;
   margin: 0 0.5rem;
   padding: 0;
 }
-.sheet.actor.popout .effects-display ul.effect-list li.effect {
+.application.sheet.actor.popout .effects-display ul.effect-list li.effect {
   padding: 0.5rem;
   border-radius: 5px;
   display: flex;
@@ -363,16 +377,16 @@ body.theme-dark .sheet a.content-link {
   min-width: 250px;
   border: 1px solid var(--border-theme-color);
 }
-.sheet.actor.popout .effects-display ul.effect-list li.effect .effect-icon {
+.application.sheet.actor.popout .effects-display ul.effect-list li.effect .effect-icon {
   flex: 0 0 28px;
   height: 28px;
   width: 28px;
 }
-.sheet.actor.popout .effects-display ul.effect-list li.effect .name {
+.application.sheet.actor.popout .effects-display ul.effect-list li.effect .name {
   flex-grow: 1;
   margin: 0 0.25rem;
 }
-.sheet.actor.popout fieldset {
+.application.sheet.actor.popout fieldset {
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -384,77 +398,77 @@ body.theme-dark .sheet a.content-link {
   border-radius: 8px;
   border-color: var(--border-theme-color);
 }
-.sheet.actor.popout fieldset legend {
+.application.sheet.actor.popout fieldset legend {
   font-size: var(--font-size-15);
   font-weight: bold;
 }
-.sheet#perk-hud-base,
-.sheet.move-sheet,
-.sheet.species-sheet,
-.sheet.party-sheet,
-.sheet.team-sheet,
-.sheet.active-effect-sheet {
+.application.sheet#perk-hud-base,
+.application.sheet.move-sheet,
+.application.sheet.species-sheet,
+.application.sheet.party-sheet,
+.application.sheet.team-sheet,
+.application.sheet.active-effect-sheet {
   background: var(--appv2-background);
 }
-.sheet#perk-hud-base .window-content,
-.sheet.move-sheet .window-content,
-.sheet.species-sheet .window-content,
-.sheet.party-sheet .window-content,
-.sheet.team-sheet .window-content,
-.sheet.active-effect-sheet .window-content {
+.application.sheet#perk-hud-base .window-content,
+.application.sheet.move-sheet .window-content,
+.application.sheet.species-sheet .window-content,
+.application.sheet.party-sheet .window-content,
+.application.sheet.team-sheet .window-content,
+.application.sheet.active-effect-sheet .window-content {
   display: grid;
   grid-template-columns: 45% 55%;
   grid-template-rows: calc(1rem + 48px) min-content auto;
   grid-template-areas: "header nav" "traits traits" "main main";
   padding: 0;
 }
-.sheet#perk-hud-base .window-content .sheet-header,
-.sheet.move-sheet .window-content .sheet-header,
-.sheet.species-sheet .window-content .sheet-header,
-.sheet.party-sheet .window-content .sheet-header,
-.sheet.team-sheet .window-content .sheet-header,
-.sheet.active-effect-sheet .window-content .sheet-header {
+.application.sheet#perk-hud-base .window-content .sheet-header,
+.application.sheet.move-sheet .window-content .sheet-header,
+.application.sheet.species-sheet .window-content .sheet-header,
+.application.sheet.party-sheet .window-content .sheet-header,
+.application.sheet.team-sheet .window-content .sheet-header,
+.application.sheet.active-effect-sheet .window-content .sheet-header {
   grid-area: header;
   padding: 0.5rem;
   padding-right: 1rem;
   border-bottom: 1px solid var(--border-theme-color);
 }
-.sheet#perk-hud-base .window-content .sheet-header fieldset,
-.sheet.move-sheet .window-content .sheet-header fieldset,
-.sheet.species-sheet .window-content .sheet-header fieldset,
-.sheet.party-sheet .window-content .sheet-header fieldset,
-.sheet.team-sheet .window-content .sheet-header fieldset,
-.sheet.active-effect-sheet .window-content .sheet-header fieldset {
+.application.sheet#perk-hud-base .window-content .sheet-header fieldset,
+.application.sheet.move-sheet .window-content .sheet-header fieldset,
+.application.sheet.species-sheet .window-content .sheet-header fieldset,
+.application.sheet.party-sheet .window-content .sheet-header fieldset,
+.application.sheet.team-sheet .window-content .sheet-header fieldset,
+.application.sheet.active-effect-sheet .window-content .sheet-header fieldset {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
 }
-.sheet#perk-hud-base .window-content .sheet-header img,
-.sheet.move-sheet .window-content .sheet-header img,
-.sheet.species-sheet .window-content .sheet-header img,
-.sheet.party-sheet .window-content .sheet-header img,
-.sheet.team-sheet .window-content .sheet-header img,
-.sheet.active-effect-sheet .window-content .sheet-header img {
+.application.sheet#perk-hud-base .window-content .sheet-header img,
+.application.sheet.move-sheet .window-content .sheet-header img,
+.application.sheet.species-sheet .window-content .sheet-header img,
+.application.sheet.party-sheet .window-content .sheet-header img,
+.application.sheet.team-sheet .window-content .sheet-header img,
+.application.sheet.active-effect-sheet .window-content .sheet-header img {
   flex: 0 0 48px;
   height: 48px;
   margin: 0 0.25rem;
   border: unset;
 }
-.sheet#perk-hud-base .window-content .sheet-header .title,
-.sheet.move-sheet .window-content .sheet-header .title,
-.sheet.species-sheet .window-content .sheet-header .title,
-.sheet.party-sheet .window-content .sheet-header .title,
-.sheet.team-sheet .window-content .sheet-header .title,
-.sheet.active-effect-sheet .window-content .sheet-header .title {
+.application.sheet#perk-hud-base .window-content .sheet-header .title,
+.application.sheet.move-sheet .window-content .sheet-header .title,
+.application.sheet.species-sheet .window-content .sheet-header .title,
+.application.sheet.party-sheet .window-content .sheet-header .title,
+.application.sheet.team-sheet .window-content .sheet-header .title,
+.application.sheet.active-effect-sheet .window-content .sheet-header .title {
   font-size: 2.5rem;
 }
-.sheet#perk-hud-base .window-content nav.tabs,
-.sheet.move-sheet .window-content nav.tabs,
-.sheet.species-sheet .window-content nav.tabs,
-.sheet.party-sheet .window-content nav.tabs,
-.sheet.team-sheet .window-content nav.tabs,
-.sheet.active-effect-sheet .window-content nav.tabs {
+.application.sheet#perk-hud-base .window-content nav.tabs,
+.application.sheet.move-sheet .window-content nav.tabs,
+.application.sheet.species-sheet .window-content nav.tabs,
+.application.sheet.party-sheet .window-content nav.tabs,
+.application.sheet.team-sheet .window-content nav.tabs,
+.application.sheet.active-effect-sheet .window-content nav.tabs {
   grid-area: nav;
   border: unset;
   justify-content: space-evenly;
@@ -465,77 +479,77 @@ body.theme-dark .sheet a.content-link {
   border-left: 1px solid var(--border-theme-color);
   gap: unset;
 }
-.sheet#perk-hud-base .window-content aside.traits,
-.sheet.move-sheet .window-content aside.traits,
-.sheet.species-sheet .window-content aside.traits,
-.sheet.party-sheet .window-content aside.traits,
-.sheet.team-sheet .window-content aside.traits,
-.sheet.active-effect-sheet .window-content aside.traits {
+.application.sheet#perk-hud-base .window-content aside.traits,
+.application.sheet.move-sheet .window-content aside.traits,
+.application.sheet.species-sheet .window-content aside.traits,
+.application.sheet.party-sheet .window-content aside.traits,
+.application.sheet.team-sheet .window-content aside.traits,
+.application.sheet.active-effect-sheet .window-content aside.traits {
   grid-area: traits;
   min-height: calc(0.5rem + 38px);
   padding: 0.25rem;
   border-bottom: 1px solid var(--border-theme-color);
 }
-.sheet#perk-hud-base .window-content aside.traits tags,
-.sheet.move-sheet .window-content aside.traits tags,
-.sheet.species-sheet .window-content aside.traits tags,
-.sheet.party-sheet .window-content aside.traits tags,
-.sheet.team-sheet .window-content aside.traits tags,
-.sheet.active-effect-sheet .window-content aside.traits tags {
+.application.sheet#perk-hud-base .window-content aside.traits tags,
+.application.sheet.move-sheet .window-content aside.traits tags,
+.application.sheet.species-sheet .window-content aside.traits tags,
+.application.sheet.party-sheet .window-content aside.traits tags,
+.application.sheet.team-sheet .window-content aside.traits tags,
+.application.sheet.active-effect-sheet .window-content aside.traits tags {
   --tags-border-color: var(--border-theme-color);
   --tag-bg: var(--color-theme-4);
   --tag-hover: var(--color-theme-3);
   width: 100%;
   --tag-pad: 0;
 }
-.sheet#perk-hud-base .window-content aside.traits tags .trait,
-.sheet.move-sheet .window-content aside.traits tags .trait,
-.sheet.species-sheet .window-content aside.traits tags .trait,
-.sheet.party-sheet .window-content aside.traits tags .trait,
-.sheet.team-sheet .window-content aside.traits tags .trait,
-.sheet.active-effect-sheet .window-content aside.traits tags .trait {
+.application.sheet#perk-hud-base .window-content aside.traits tags .trait,
+.application.sheet.move-sheet .window-content aside.traits tags .trait,
+.application.sheet.species-sheet .window-content aside.traits tags .trait,
+.application.sheet.party-sheet .window-content aside.traits tags .trait,
+.application.sheet.team-sheet .window-content aside.traits tags .trait,
+.application.sheet.active-effect-sheet .window-content aside.traits tags .trait {
   display: inline-flex;
   padding: 0.25rem;
 }
-.sheet#perk-hud-base .window-content aside.traits tags .trait .tag,
-.sheet.move-sheet .window-content aside.traits tags .trait .tag,
-.sheet.species-sheet .window-content aside.traits tags .trait .tag,
-.sheet.party-sheet .window-content aside.traits tags .trait .tag,
-.sheet.team-sheet .window-content aside.traits tags .trait .tag,
-.sheet.active-effect-sheet .window-content aside.traits tags .trait .tag {
+.application.sheet#perk-hud-base .window-content aside.traits tags .trait .tag,
+.application.sheet.move-sheet .window-content aside.traits tags .trait .tag,
+.application.sheet.species-sheet .window-content aside.traits tags .trait .tag,
+.application.sheet.party-sheet .window-content aside.traits tags .trait .tag,
+.application.sheet.team-sheet .window-content aside.traits tags .trait .tag,
+.application.sheet.active-effect-sheet .window-content aside.traits tags .trait .tag {
   text-decoration: underline;
 }
-.sheet#perk-hud-base .window-content section.tab,
-.sheet.move-sheet .window-content section.tab,
-.sheet.species-sheet .window-content section.tab,
-.sheet.party-sheet .window-content section.tab,
-.sheet.team-sheet .window-content section.tab,
-.sheet.active-effect-sheet .window-content section.tab {
+.application.sheet#perk-hud-base .window-content section.tab,
+.application.sheet.move-sheet .window-content section.tab,
+.application.sheet.species-sheet .window-content section.tab,
+.application.sheet.party-sheet .window-content section.tab,
+.application.sheet.team-sheet .window-content section.tab,
+.application.sheet.active-effect-sheet .window-content section.tab {
   grid-area: main;
   height: 100%;
   overflow: hidden;
   padding: 1rem;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .editor,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .editor,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .editor,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .editor,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor,
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor .editor-content,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor .editor-content {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor .editor-content {
   min-height: 200px;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 0.5rem;
@@ -543,43 +557,43 @@ body.theme-dark .sheet a.content-link {
   border: 1px solid var(--border-theme-color);
   border-radius: 8px;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group {
   justify-content: space-between;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group label,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label {
   flex: 0 0 60%;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields {
   flex: 0 0 35%;
   text-align: center;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .movement-header,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .movement-header,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header,
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats-header,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats-header,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats-header {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats-header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -588,36 +602,36 @@ body.theme-dark .sheet a.content-link {
   margin-top: 0.5rem;
   border-bottom: 1px solid var(--border-theme-color);
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header .item-controls,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls {
   flex: 0 0 45px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .movement,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .movement,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .movement,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .movement,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement,
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .skill,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .skill,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill {
   padding: 0.25rem;
   border: 1px solid var(--border-theme-color);
   border-radius: 8px;
@@ -625,231 +639,231 @@ body.theme-dark .sheet a.content-link {
   grid-template-columns: 1fr 1fr 15px;
   grid-column-gap: 0.5rem;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .movement.center,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .movement.center,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center,
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .skill.center,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .skill.center,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill.center {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill.center {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center small,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center small,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center small,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .movement.center small,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .movement.center small,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center small,
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center small,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center small,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center small,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .skill.center small,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .skill.center small,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill.center small {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill.center small {
   color: var(--hint-text-color);
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group,
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group {
   justify-content: space-between;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group label,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group label,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group label {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group label {
   flex: 0 0 30%;
   text-align: center;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields {
   flex: 0 0 60%;
   text-align: center;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .item-controls,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .item-controls,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .item-controls {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .item-controls {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .skill,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .skill,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill {
   grid-template-columns: 30% auto 15px;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .move,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .move,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .move,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .move,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .move {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .move,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .move,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .move,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .move,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .move {
   display: flex;
   flex-direction: row;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move .form-group,
-.sheet.move-sheet .window-content section.tab[data-tab=details] .move .form-group,
-.sheet.species-sheet .window-content section.tab[data-tab=details] .move .form-group,
-.sheet.party-sheet .window-content section.tab[data-tab=details] .move .form-group,
-.sheet.team-sheet .window-content section.tab[data-tab=details] .move .form-group,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .move .form-group {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .move .form-group {
   flex: 1;
   text-align: center;
   margin: 0.25rem;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=attack],
-.sheet.move-sheet .window-content section.tab[data-tab=attack],
-.sheet.species-sheet .window-content section.tab[data-tab=attack],
-.sheet.party-sheet .window-content section.tab[data-tab=attack],
-.sheet.team-sheet .window-content section.tab[data-tab=attack],
-.sheet.active-effect-sheet .window-content section.tab[data-tab=attack] {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=attack],
+.application.sheet.move-sheet .window-content section.tab[data-tab=attack],
+.application.sheet.species-sheet .window-content section.tab[data-tab=attack],
+.application.sheet.party-sheet .window-content section.tab[data-tab=attack],
+.application.sheet.team-sheet .window-content section.tab[data-tab=attack],
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=attack] {
   padding: 0;
 }
-.sheet#perk-hud-base .window-content section.tab form.scroll,
-.sheet.move-sheet .window-content section.tab form.scroll,
-.sheet.species-sheet .window-content section.tab form.scroll,
-.sheet.party-sheet .window-content section.tab form.scroll,
-.sheet.team-sheet .window-content section.tab form.scroll,
-.sheet.active-effect-sheet .window-content section.tab form.scroll {
+.application.sheet#perk-hud-base .window-content section.tab form.scroll,
+.application.sheet.move-sheet .window-content section.tab form.scroll,
+.application.sheet.species-sheet .window-content section.tab form.scroll,
+.application.sheet.party-sheet .window-content section.tab form.scroll,
+.application.sheet.team-sheet .window-content section.tab form.scroll,
+.application.sheet.active-effect-sheet .window-content section.tab form.scroll {
   padding: 1rem;
   overflow-y: scroll;
   overflow-x: hidden;
   height: 100%;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active,
-.sheet.move-sheet .window-content section.tab[data-tab=actions].active,
-.sheet.species-sheet .window-content section.tab[data-tab=actions].active,
-.sheet.party-sheet .window-content section.tab[data-tab=actions].active,
-.sheet.team-sheet .window-content section.tab[data-tab=actions].active,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active {
   height: 100%;
   display: flex;
   flex-direction: column;
   padding: 0.25rem 1rem 1rem 1rem;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions,
-.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions,
-.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions,
-.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions,
-.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions {
   flex: 0 0 50%;
   margin: 0.25rem;
   display: flex;
   flex-direction: column;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions header,
-.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header,
-.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions header,
-.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions header,
-.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions header,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions header {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions header,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions header,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions header,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions header,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions header {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0.25rem;
   border-bottom: 1px solid #fefefe;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions header .action-name,
-.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
-.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
-.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
-.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions header .action-name,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions header .action-name {
   font-size: 18px;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions content,
-.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content,
-.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions content,
-.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions content,
-.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions content,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions content {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions content,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions content,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions content,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions content,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions content {
   display: flex;
   flex-direction: column;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions content .action,
-.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
-.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
-.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
-.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
-.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions content .action {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions content .action,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions content .action,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions content .action {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   padding: 0.25rem;
   margin: 0.5rem 0;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab="overview"] .item-description,
-.sheet.move-sheet .window-content section.tab[data-tab="overview"] .item-description,
-.sheet.species-sheet .window-content section.tab[data-tab="overview"] .item-description,
-.sheet.party-sheet .window-content section.tab[data-tab="overview"] .item-description,
-.sheet.team-sheet .window-content section.tab[data-tab="overview"] .item-description,
-.sheet.active-effect-sheet .window-content section.tab[data-tab="overview"] .item-description {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.move-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.species-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.party-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.team-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="overview"] .item-description {
   min-height: 150px;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list,
-.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
-.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
-.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
-.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
-.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list {
   list-style: none;
   margin: 0 0.5rem;
   padding: 0;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
-.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
-.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
-.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
-.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
-.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect {
   padding: 0.5rem;
   border-radius: 5px;
   display: flex;
@@ -858,31 +872,31 @@ body.theme-dark .sheet a.content-link {
   align-items: center;
   border: 1px solid var(--border-theme-color);
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
-.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
-.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
-.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
-.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
-.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon {
   flex: 0 0 28px;
   height: 28px;
   width: 28px;
 }
-.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
-.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
-.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
-.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
-.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
-.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name {
+.application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name {
   flex-grow: 1;
   margin: 0 0.25rem;
 }
-.sheet#perk-hud-base fieldset,
-.sheet.move-sheet fieldset,
-.sheet.species-sheet fieldset,
-.sheet.party-sheet fieldset,
-.sheet.team-sheet fieldset,
-.sheet.active-effect-sheet fieldset {
+.application.sheet#perk-hud-base fieldset,
+.application.sheet.move-sheet fieldset,
+.application.sheet.species-sheet fieldset,
+.application.sheet.party-sheet fieldset,
+.application.sheet.team-sheet fieldset,
+.application.sheet.active-effect-sheet fieldset {
   padding: 1rem;
   display: flex;
   flex-direction: column;
@@ -892,55 +906,55 @@ body.theme-dark .sheet a.content-link {
   border-radius: 8px;
   border-color: var(--border-theme-color);
 }
-.sheet#perk-hud-base fieldset legend,
-.sheet.move-sheet fieldset legend,
-.sheet.species-sheet fieldset legend,
-.sheet.party-sheet fieldset legend,
-.sheet.team-sheet fieldset legend,
-.sheet.active-effect-sheet fieldset legend {
+.application.sheet#perk-hud-base fieldset legend,
+.application.sheet.move-sheet fieldset legend,
+.application.sheet.species-sheet fieldset legend,
+.application.sheet.party-sheet fieldset legend,
+.application.sheet.team-sheet fieldset legend,
+.application.sheet.active-effect-sheet fieldset legend {
   font-size: var(--font-size-15);
   font-weight: bold;
 }
-.sheet#perk-hud-base .hint,
-.sheet.move-sheet .hint,
-.sheet.species-sheet .hint,
-.sheet.party-sheet .hint,
-.sheet.team-sheet .hint,
-.sheet.active-effect-sheet .hint {
+.application.sheet#perk-hud-base .hint,
+.application.sheet.move-sheet .hint,
+.application.sheet.species-sheet .hint,
+.application.sheet.party-sheet .hint,
+.application.sheet.team-sheet .hint,
+.application.sheet.active-effect-sheet .hint {
   margin: 0;
   font-size: var(--font-size-14);
   color: var(--hint-text-color);
   white-space: pre-line;
   word-break: break-word;
 }
-.sheet#perk-hud-base textarea,
-.sheet.move-sheet textarea,
-.sheet.species-sheet textarea,
-.sheet.party-sheet textarea,
-.sheet.team-sheet textarea,
-.sheet.active-effect-sheet textarea {
+.application.sheet#perk-hud-base textarea,
+.application.sheet.move-sheet textarea,
+.application.sheet.species-sheet textarea,
+.application.sheet.party-sheet textarea,
+.application.sheet.team-sheet textarea,
+.application.sheet.active-effect-sheet textarea {
   resize: vertical;
 }
-.sheet#perk-hud-base header h2 {
+.application.sheet#perk-hud-base header h2 {
   flex: 1;
   text-align: center;
   padding-bottom: 0.25rem;
 }
-.sheet#perk-hud-base footer {
+.application.sheet#perk-hud-base footer {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-evenly;
   gap: 0;
 }
-.sheet#perk-hud-base footer button {
+.application.sheet#perk-hud-base footer button {
   flex: 0 0 30%;
   margin: 0;
 }
-.sheet.species-sheet .window-content section.tab[data-tab=details] {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] {
   padding: 0;
 }
-.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll {
   padding: 1rem;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -951,89 +965,231 @@ body.theme-dark .sheet a.content-link {
   justify-content: space-between;
   gap: 0.5rem;
 }
-.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll h5 {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll h5 {
   margin: 0;
 }
-.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset {
   flex: 0 0 48%;
 }
-.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves {
   flex: 0 0 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves fieldset {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves fieldset {
   flex: 0 0 48%;
 }
-.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions {
   flex: 0 0 100%;
-}
-.sheet#traits-settings {
   background: var(--appv2-background);
 }
-.sheet#traits-settings .window-content {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos {
+  position: relative;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos.dragover,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover {
+  box-shadow: inset 0 0 30px var(--border-theme-color);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos.dragover > *,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover > * {
+  filter: opacity(0.5) blur(2px);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos.dragover > .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover > .dragover-info {
+  display: flex;
+  filter: unset;
+  font-size: 1rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  top: -5px;
+  left: 0;
+  pointer-events: none;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos.dragover > .dragover-info p,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover > .dragover-info p {
+  background: #ebc99a;
+  padding: 0.5rem;
+  width: fit-content;
+  border-radius: 8px;
+  color: black;
+  font-style: italic;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos .dragover-info {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  align-content: center;
+  text-align: center;
+  display: none;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  --img-size: 48px;
+  height: var(--img-size);
+  padding: 0 8px;
+  display: flex;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .icon {
+  flex: 0 0 var(--img-size);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .icon img {
+  height: var(--img-size);
+  width: var(--img-size);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .name {
+  padding-left: 0.5rem;
+  align-content: center;
+  flex: 1;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .item-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 0 0 48px;
+  margin-right: 10px;
+  gap: 5px;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header span {
+  font-size: 0.75rem;
+  color: var(--hint-text-color);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  justify-content: space-between;
+  text-align: center;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method.header {
+  font-weight: bold;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method select {
+  text-align: center;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method .form-group {
+  flex: 0 0 calc(31% - 0.25rem);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method .item-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 0 0 20px;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods small {
+  align-self: center;
+  align-content: center;
+  text-align: center;
+  color: var(--hint-text-color);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution small {
+  color: lightgray;
+  font-style: italic;
+  text-align: center;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution span.evolutions-header {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  padding-bottom: 0.25rem;
+  margin: 0 0.5rem;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution .hidden {
+  display: none;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset {
+  background: var(--appv2-background);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset legend {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution.no-shadow {
+  box-shadow: unset;
+}
+.application.sheet#traits-settings {
+  background: var(--appv2-background);
+}
+.application.sheet#traits-settings .window-content {
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: 44px auto 44px;
   grid-template-areas: "header" "main" "footer";
   padding: 0;
 }
-.sheet#traits-settings nav.tabs {
+.application.sheet#traits-settings nav.tabs {
   grid-area: header;
   justify-content: space-evenly;
   margin-top: 0;
   border: unset;
   border-bottom: 1px solid var(--border-theme-color);
 }
-.sheet#traits-settings section.tab {
+.application.sheet#traits-settings section.tab {
   grid-area: main;
   height: 100%;
   overflow: hidden;
 }
-.sheet#traits-settings section.tab header {
+.application.sheet#traits-settings section.tab header {
   padding: 0.25rem;
   border: 1px solid var(--border-theme-color);
   border-radius: 8px;
   margin-bottom: 0.5rem;
 }
-.sheet#traits-settings section.tab article.traits.editable .form-group {
+.application.sheet#traits-settings section.tab article.traits.editable .form-group {
   flex-wrap: nowrap;
 }
-.sheet#traits-settings section.tab article.traits.editable .form-group.header {
+.application.sheet#traits-settings section.tab article.traits.editable .form-group.header {
   margin-bottom: 0.75rem;
 }
-.sheet#traits-settings section.tab article.traits.editable .form-group.header h5 {
+.application.sheet#traits-settings section.tab article.traits.editable .form-group.header h5 {
   margin: unset;
 }
-.sheet#traits-settings section.tab article.traits.editable .form-group label {
+.application.sheet#traits-settings section.tab article.traits.editable .form-group label {
   flex: 0 1 30%;
 }
-.sheet#traits-settings section.tab article.traits.editable .form-group div.form-fields {
+.application.sheet#traits-settings section.tab article.traits.editable .form-group div.form-fields {
   flex: 0 1 60%;
 }
-.sheet#traits-settings section.tab article.traits.editable .form-group .trait-controls {
+.application.sheet#traits-settings section.tab article.traits.editable .form-group .trait-controls {
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
   flex: 0 0 45px;
 }
-.sheet#traits-settings section.tab .form-group.center,
-.sheet#traits-settings section.tab .form-group .center {
+.application.sheet#traits-settings section.tab .form-group.center,
+.application.sheet#traits-settings section.tab .form-group .center {
   text-align: center;
 }
-.sheet#traits-settings section.tab .form-group textarea {
+.application.sheet#traits-settings section.tab .form-group textarea {
   resize: vertical;
 }
-.sheet#traits-settings .scroll {
+.application.sheet#traits-settings .scroll {
   overflow-y: scroll;
   overflow-x: hidden;
   height: calc(100% - 1rem);
   margin: 0.5rem;
 }
-.sheet#traits-settings footer {
+.application.sheet#traits-settings footer {
   grid-area: footer;
   display: flex;
   flex-direction: row;
@@ -1042,135 +1198,135 @@ body.theme-dark .sheet a.content-link {
   padding: 2px;
   border-top: 1px solid var(--border-theme-color);
 }
-.sheet#traits-settings footer button {
+.application.sheet#traits-settings footer button {
   flex: 0 0 48%;
 }
-.sheet.stats-form .window-content {
+.application.sheet.stats-form .window-content {
   padding-top: 0.5rem;
   display: grid;
   grid-template-columns: 55% 45%;
   grid-template-rows: 35% 65%;
   grid-template-areas: "baseStats statsChart" "evStats statsChart";
 }
-.sheet.stats-form .window-content aside {
+.application.sheet.stats-form .window-content aside {
   display: flex;
 }
-.sheet.stats-form .window-content aside form {
+.application.sheet.stats-form .window-content aside form {
   flex: 1;
 }
-.sheet.stats-form .window-content h1 {
+.application.sheet.stats-form .window-content h1 {
   font-size: 2rem;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] {
   grid-area: baseStats;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form {
   display: grid;
   grid-template-columns: 30% 15% 40% 15%;
   grid-template-rows: min-content 1fr 1fr 1fr;
   grid-template-areas: "header header header header" "hpLabel hpValue spatkLabel spatkValue" "atkLabel atkValue spdefLabel spdefValue" "defLabel defValue spdLabel spdValue";
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label {
   text-align: left;
   align-self: center;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.hp {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.hp {
   grid-area: hpLabel;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.atk {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.atk {
   grid-area: atkLabel;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.def {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.def {
   grid-area: defLabel;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spa {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spa {
   grid-area: spatkLabel;
   margin-left: 1rem;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spd {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spd {
   grid-area: spdefLabel;
   margin-left: 1rem;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spe {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spe {
   grid-area: spdLabel;
   margin-left: 1rem;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input {
   text-align: center;
   align-self: center;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.hp {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.hp {
   grid-area: hpValue;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.atk {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.atk {
   grid-area: atkValue;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.def {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.def {
   grid-area: defValue;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spa {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spa {
   grid-area: spatkValue;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spd {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spd {
   grid-area: spdefValue;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spe {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spe {
   grid-area: spdValue;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form h1 {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form h1 {
   grid-area: header;
   text-align: center;
 }
-.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input[type="submit"] {
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input[type="submit"] {
   grid-area: submit;
 }
-.sheet.stats-form .window-content aside[data-application-part="evStats"] {
+.application.sheet.stats-form .window-content aside[data-application-part="evStats"] {
   grid-area: evStats;
   margin-top: 0.25rem;
 }
-.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form {
+.application.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form {
   display: flex;
   flex-direction: column;
 }
-.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form h1 {
+.application.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form h1 {
   margin: 0.5rem 0;
   text-align: center;
 }
-.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form .form-group label {
+.application.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form .form-group label {
   flex: 0 0 100px;
   line-height: 1.75rem;
 }
-.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form .form-group input {
+.application.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form .form-group input {
   flex: 1;
 }
-.sheet.stats-form .window-content aside[data-application-part="statsChart"] {
+.application.sheet.stats-form .window-content aside[data-application-part="statsChart"] {
   grid-area: statsChart;
   display: flex;
   flex-direction: column;
   margin-left: 0.25rem;
 }
-.sheet.stats-form .window-content aside[data-application-part="statsChart"] h1 {
+.application.sheet.stats-form .window-content aside[data-application-part="statsChart"] h1 {
   text-align: center;
 }
-.sheet.stats-form .window-content aside[data-application-part="statsChart"] .stats-chart-aside {
+.application.sheet.stats-form .window-content aside[data-application-part="statsChart"] .stats-chart-aside {
   align-items: center;
   background: #346899;
   border-radius: 10px;
   margin: 0.25rem;
 }
-.sheet.party-sheet .window-content {
+.application.sheet.party-sheet .window-content {
   grid-template-columns: unset;
   grid-template-rows: 44px auto;
   grid-template-areas: "nav" "main";
 }
-.sheet.party-sheet .window-content nav.tabs {
+.application.sheet.party-sheet .window-content nav.tabs {
   border: unset;
   border-bottom: 1px solid var(--border-theme-color);
 }
-.sheet.party-sheet .window-content .tab[data-tab="overview"] {
+.application.sheet.party-sheet .window-content .tab[data-tab="overview"] {
   padding: 0;
 }
-.sheet.party-sheet .window-content .tab[data-tab="overview"] .scroll {
+.application.sheet.party-sheet .window-content .tab[data-tab="overview"] .scroll {
   padding: 1rem;
   overflow-y: auto;
   overflow-x: hidden;
@@ -1179,49 +1335,49 @@ body.theme-dark .sheet a.content-link {
   grid-template-rows: 35% 65%;
   grid-template-areas: "owner" "party";
 }
-.sheet.party-sheet .party-member {
+.application.sheet.party-sheet .party-member {
   display: flex;
   flex-direction: row;
   align-items: center;
   --owner-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 80%, transparent);
   --party-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 60%, transparent);
 }
-.sheet.party-sheet .party-member .thumbnail {
+.application.sheet.party-sheet .party-member .thumbnail {
   padding: 0.25rem;
 }
-.sheet.party-sheet .party-member .thumbnail img {
+.application.sheet.party-sheet .party-member .thumbnail img {
   border-radius: 50%;
   height: 48px;
   width: 48px;
   border: unset;
 }
-.sheet.party-sheet .party-member .title {
+.application.sheet.party-sheet .party-member .title {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.sheet.party-sheet .party-member .title .level {
+.application.sheet.party-sheet .party-member .title .level {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
-.sheet.party-sheet header.party-member {
+.application.sheet.party-sheet header.party-member {
   grid-area: owner;
   background: var(--owner-background-color);
   border-radius: 12px;
   margin: 0.5rem 0.25rem;
   padding: 0.25rem;
 }
-.sheet.party-sheet header.party-member .thumbnail {
+.application.sheet.party-sheet header.party-member .thumbnail {
   flex: 0 0 calc(80px + 0.5rem);
   padding: 0.5rem 0.5rem 0.5rem 0;
 }
-.sheet.party-sheet header.party-member .thumbnail img {
+.application.sheet.party-sheet header.party-member .thumbnail img {
   width: unset;
   max-width: 100%;
   height: auto;
   object-fit: scale-down;
 }
-.sheet.party-sheet header.party-member main {
+.application.sheet.party-sheet header.party-member main {
   flex: 1;
   height: 100%;
   display: grid;
@@ -1230,119 +1386,119 @@ body.theme-dark .sheet a.content-link {
   column-gap: 0.5rem;
   grid-template-areas: "title health pp" "types experience-label experience-value";
 }
-.sheet.party-sheet header.party-member main div.title,
-.sheet.party-sheet header.party-member main div.health,
-.sheet.party-sheet header.party-member main div.pp,
-.sheet.party-sheet header.party-member main div.experience {
+.application.sheet.party-sheet header.party-member main div.title,
+.application.sheet.party-sheet header.party-member main div.health,
+.application.sheet.party-sheet header.party-member main div.pp,
+.application.sheet.party-sheet header.party-member main div.experience {
   margin: 2px;
 }
-.sheet.party-sheet header.party-member main .title {
+.application.sheet.party-sheet header.party-member main .title {
   grid-area: title;
   justify-content: start;
 }
-.sheet.party-sheet header.party-member main .health {
+.application.sheet.party-sheet header.party-member main .health {
   grid-area: health;
   display: flex;
   flex-direction: column;
 }
-.sheet.party-sheet header.party-member main .health .details {
+.application.sheet.party-sheet header.party-member main .health .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.sheet.party-sheet header.party-member main .health .details span {
+.application.sheet.party-sheet header.party-member main .health .details span {
   font-size: 12px;
   color: var(--color-text-light-primary);
 }
-.sheet.party-sheet header.party-member main .health .details .divider {
+.application.sheet.party-sheet header.party-member main .health .details .divider {
   margin: 0 0.25rem;
 }
-.sheet.party-sheet header.party-member main .pp {
+.application.sheet.party-sheet header.party-member main .pp {
   grid-area: pp;
   display: flex;
   flex-direction: column;
 }
-.sheet.party-sheet header.party-member main .pp .details {
+.application.sheet.party-sheet header.party-member main .pp .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.sheet.party-sheet header.party-member main .pp .details span {
+.application.sheet.party-sheet header.party-member main .pp .details span {
   font-size: 12px;
   color: var(--color-text-light-primary);
 }
-.sheet.party-sheet header.party-member main .pp .details .divider {
+.application.sheet.party-sheet header.party-member main .pp .details .divider {
   margin: 0 0.25rem;
 }
-.sheet.party-sheet header.party-member main .types {
+.application.sheet.party-sheet header.party-member main .types {
   grid-area: types;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   overflow: hidden;
 }
-.sheet.party-sheet header.party-member main .types span {
+.application.sheet.party-sheet header.party-member main .types span {
   flex: 0 0 38px;
   height: 38px;
   margin: 2px;
 }
-.sheet.party-sheet header.party-member main .types span img {
+.application.sheet.party-sheet header.party-member main .types span img {
   height: 38px;
   width: 38px;
   object-fit: scale-down;
   border: unset;
   border-radius: 50%;
 }
-.sheet.party-sheet header.party-member main .types:has(:nth-child(4)) span {
+.application.sheet.party-sheet header.party-member main .types:has(:nth-child(4)) span {
   flex: 0 0 32px;
   height: 32px;
 }
-.sheet.party-sheet header.party-member main .types:has(:nth-child(4)) span img {
+.application.sheet.party-sheet header.party-member main .types:has(:nth-child(4)) span img {
   height: 32px;
   width: 32px;
 }
-.sheet.party-sheet header.party-member main .types:has(:nth-child(5)) span {
+.application.sheet.party-sheet header.party-member main .types:has(:nth-child(5)) span {
   flex: 0 0 25px;
   height: 25px;
 }
-.sheet.party-sheet header.party-member main .types:has(:nth-child(5)) span img {
+.application.sheet.party-sheet header.party-member main .types:has(:nth-child(5)) span img {
   height: 25px;
   width: 25px;
 }
-.sheet.party-sheet header.party-member main .types:has( > :nth-child(6)) span {
+.application.sheet.party-sheet header.party-member main .types:has( > :nth-child(6)) span {
   flex: 0 0 20px;
   height: 20px;
 }
-.sheet.party-sheet header.party-member main .types:has( > :nth-child(6)) span img {
+.application.sheet.party-sheet header.party-member main .types:has( > :nth-child(6)) span img {
   height: 20px;
   width: 20px;
 }
-.sheet.party-sheet header.party-member main .types:has( > :nth-child(13)) {
+.application.sheet.party-sheet header.party-member main .types:has( > :nth-child(13)) {
   overflow-y: auto;
 }
-.sheet.party-sheet header.party-member main .types:has( > :nth-child(13)) span {
+.application.sheet.party-sheet header.party-member main .types:has( > :nth-child(13)) span {
   flex: 0 0 21px;
   height: 21px;
 }
-.sheet.party-sheet header.party-member main .types:has( > :nth-child(13)) span img {
+.application.sheet.party-sheet header.party-member main .types:has( > :nth-child(13)) span img {
   height: 21px;
   width: 21px;
 }
-.sheet.party-sheet header.party-member main .experience {
+.application.sheet.party-sheet header.party-member main .experience {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
 }
-.sheet.party-sheet header.party-member main .experience.label {
+.application.sheet.party-sheet header.party-member main .experience.label {
   grid-area: experience-label;
 }
-.sheet.party-sheet header.party-member main .experience.value {
+.application.sheet.party-sheet header.party-member main .experience.value {
   grid-area: experience-value;
   color: var(--color-text-light-primary);
 }
-.sheet.party-sheet main {
+.application.sheet.party-sheet main {
   grid-area: party;
   display: flex;
   flex-direction: row;
@@ -1350,7 +1506,7 @@ body.theme-dark .sheet a.content-link {
   flex-wrap: wrap;
   align-content: start;
 }
-.sheet.party-sheet main section.party-member {
+.application.sheet.party-sheet main section.party-member {
   flex: 0 0 48%;
   max-width: 48%;
   height: 70px;
@@ -1358,7 +1514,7 @@ body.theme-dark .sheet a.content-link {
   background: var(--party-background-color);
   border-radius: 12px;
 }
-.sheet.party-sheet main section.party-member main {
+.application.sheet.party-sheet main section.party-member main {
   flex: 1;
   height: 100%;
   display: grid;
@@ -1366,55 +1522,55 @@ body.theme-dark .sheet a.content-link {
   grid-template-rows: 1fr 1fr;
   grid-template-areas: "title health" "types pp";
 }
-.sheet.party-sheet main section.party-member main div.title,
-.sheet.party-sheet main section.party-member main div.health,
-.sheet.party-sheet main section.party-member main div.pp {
+.application.sheet.party-sheet main section.party-member main div.title,
+.application.sheet.party-sheet main section.party-member main div.health,
+.application.sheet.party-sheet main section.party-member main div.pp {
   margin: 2px;
 }
-.sheet.party-sheet main section.party-member main .title {
+.application.sheet.party-sheet main section.party-member main .title {
   grid-area: title;
   justify-content: end;
 }
-.sheet.party-sheet main section.party-member main .health {
+.application.sheet.party-sheet main section.party-member main .health {
   grid-area: health;
   display: flex;
   flex-direction: column;
   justify-content: end;
   font-size: small;
 }
-.sheet.party-sheet main section.party-member main .health .details {
+.application.sheet.party-sheet main section.party-member main .health .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.sheet.party-sheet main section.party-member main .health .details span {
+.application.sheet.party-sheet main section.party-member main .health .details span {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
-.sheet.party-sheet main section.party-member main .health .details .divider {
+.application.sheet.party-sheet main section.party-member main .health .details .divider {
   margin: 0 0.25rem;
 }
-.sheet.party-sheet main section.party-member main .pp {
+.application.sheet.party-sheet main section.party-member main .pp {
   grid-area: pp;
   display: flex;
   flex-direction: column;
   font-size: small;
 }
-.sheet.party-sheet main section.party-member main .pp .details {
+.application.sheet.party-sheet main section.party-member main .pp .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.sheet.party-sheet main section.party-member main .pp .details span {
+.application.sheet.party-sheet main section.party-member main .pp .details span {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
-.sheet.party-sheet main section.party-member main .pp .details .divider {
+.application.sheet.party-sheet main section.party-member main .pp .details .divider {
   margin: 0 0.25rem;
 }
-.sheet.party-sheet main section.party-member main .types {
+.application.sheet.party-sheet main section.party-member main .types {
   grid-area: types;
   display: flex;
   flex-direction: row;
@@ -1422,66 +1578,66 @@ body.theme-dark .sheet a.content-link {
   align-items: center;
   overflow: hidden;
 }
-.sheet.party-sheet main section.party-member main .types span {
+.application.sheet.party-sheet main section.party-member main .types span {
   flex: 0 0 28px;
   height: 28px;
   margin: 2px;
 }
-.sheet.party-sheet main section.party-member main .types span img {
+.application.sheet.party-sheet main section.party-member main .types span img {
   height: 28px;
   width: 28px;
   object-fit: scale-down;
   border: unset;
   border-radius: 50%;
 }
-.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span {
   flex: 0 0 24px;
   height: 24px;
 }
-.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span img {
   height: 24px;
   width: 24px;
 }
-.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span {
   flex: 0 0 17px;
   height: 17px;
 }
-.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span img {
   height: 17px;
   width: 17px;
 }
-.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span {
   flex: 0 0 13px;
   height: 13px;
 }
-.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span img {
   height: 13px;
   width: 13px;
 }
-.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) {
   overflow-y: auto;
 }
-.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span {
   flex: 0 0 15px;
   height: 15px;
 }
-.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span img {
   height: 15px;
   width: 15px;
 }
-.sheet.team-sheet .window-content {
+.application.sheet.team-sheet .window-content {
   grid-template-columns: unset;
   grid-template-rows: 44px auto;
   grid-template-areas: "nav" "main";
 }
-.sheet.team-sheet .window-content nav.tabs {
+.application.sheet.team-sheet .window-content nav.tabs {
   border: unset;
   border-bottom: 1px solid var(--border-theme-color);
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] {
   padding: 0;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll {
   padding: 1rem;
   overflow-y: auto;
   overflow-x: hidden;
@@ -1491,7 +1647,7 @@ body.theme-dark .sheet a.content-link {
   justify-content: start;
   gap: 0.5rem;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main {
   --owner-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 80%, transparent);
   --party-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 60%, transparent);
   --item-height: 110px;
@@ -1500,25 +1656,25 @@ body.theme-dark .sheet a.content-link {
   flex-direction: row;
   justify-content: space-between;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section {
   flex: 1;
   display: flex;
   background: var(--owner-background-color);
   border-radius: 12px;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section .thumbnail {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section .thumbnail {
   align-self: center;
   flex: 0 0 calc(70px + 1rem);
   padding: 0.5rem 0.5rem 0.5rem 0.5rem;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section .thumbnail img {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section .thumbnail img {
   max-width: 100%;
   height: auto;
   object-fit: scale-down;
   border: unset;
   border-radius: 50%;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main {
   flex: 1;
   height: 100%;
   position: relative;
@@ -1528,7 +1684,7 @@ body.theme-dark .sheet a.content-link {
   grid-template-areas: "title title" "health pp";
   align-items: center;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main::before {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main::before {
   content: '';
   position: absolute;
   width: 100%;
@@ -1536,50 +1692,50 @@ body.theme-dark .sheet a.content-link {
   background: var(--party-background-color);
   clip-path: polygon(100% 0, 100% 0, 100% 100%, 80% 100%);
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .title {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .title {
   grid-area: title;
   display: flex;
   flex-direction: column;
   justify-content: start;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .title .level {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .title .level {
   font-size: x-small;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health {
   grid-area: health;
   display: flex;
   flex-direction: column;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details span {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details span {
   font-size: 12px;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details .divider {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details .divider {
   margin: 0 0.25rem;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp {
   grid-area: pp;
   display: flex;
   flex-direction: column;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details span {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details span {
   font-size: 12px;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details .divider {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details .divider {
   margin: 0 0.25rem;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside {
   flex: 0 0 44%;
   display: flex;
   background: var(--party-background-color);
@@ -1590,34 +1746,34 @@ body.theme-dark .sheet a.content-link {
   row-gap: 4px;
   grid-template-rows: calc(calc(var(--item-height) - 0.5rem) / 2 - 2px) calc(calc(var(--item-height) - 0.5rem) / 2 - 2px);
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside:has( > :nth-child(7)) {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside:has( > :nth-child(7)) {
   grid-template-columns: 1fr 1fr 1fr 1fr;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside:has( > :nth-child(9)) {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside:has( > :nth-child(9)) {
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   overflow-y: auto;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside .thumbnail {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside .thumbnail {
   text-align: center;
   width: 100%;
   height: 100%;
   padding: unset;
 }
-.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside .thumbnail img {
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside .thumbnail img {
   height: 100%;
   width: auto;
   object-fit: scale-down;
   border: unset;
   border-radius: 50%;
 }
-.sheet.folder-edit .standard-form {
+.application.sheet.folder-edit .standard-form {
   gap: 0.25rem;
 }
-.sheet.folder-edit .standard-form fieldset {
+.application.sheet.folder-edit .standard-form fieldset {
   gap: 0.5rem;
   margin-bottom: 0.5rem;
 }
-.sheet.folder-edit section.team-member {
+.application.sheet.folder-edit section.team-member {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -1625,7 +1781,7 @@ body.theme-dark .sheet a.content-link {
   border: 1px solid var(--border-theme-color);
   border-radius: 8px;
 }
-.sheet.folder-edit section.team-member.empty {
+.application.sheet.folder-edit section.team-member.empty {
   justify-content: center;
   height: 100px;
   border: 1px dashed var(--border-theme-color);
@@ -1636,27 +1792,27 @@ body.theme-dark .sheet a.content-link {
   white-space: pre-line;
   word-break: break-word;
 }
-.sheet.folder-edit section.team-member .thumbnail {
+.application.sheet.folder-edit section.team-member .thumbnail {
   flex: 0 0 48px;
   height: 48px;
   margin-right: 0.5rem;
 }
-.sheet.folder-edit section.team-member .thumbnail img {
+.application.sheet.folder-edit section.team-member .thumbnail img {
   border-radius: 50%;
   height: 48px;
   width: 48px;
   border: unset;
 }
-.sheet.folder-edit section.team-member .title {
+.application.sheet.folder-edit section.team-member .title {
   flex: 1;
 }
-.sheet.folder-edit section.team-member .dismiss {
+.application.sheet.folder-edit section.team-member .dismiss {
   flex: 0 0 20px;
 }
-.sheet .window-content .tab:has(div.scroll) {
+.application.sheet .window-content .tab:has(div.scroll) {
   padding: 0;
 }
-.sheet .window-content .tab div.scroll {
+.application.sheet .window-content .tab div.scroll {
   padding: 1rem;
   overflow-y: auto;
   overflow-x: hidden;
@@ -1666,22 +1822,22 @@ body.theme-dark .sheet a.content-link {
   justify-content: start;
   gap: 0.5rem;
 }
-.sheet.active-effect-sheet .window-content {
+.application.sheet.active-effect-sheet .window-content {
   display: grid;
   grid-template-columns: 35% 65%;
   grid-template-rows: calc(1rem + 48px) auto;
   grid-template-areas: "header tabs" "main main";
 }
-.sheet.active-effect-sheet .window-content header.sheet-header {
+.application.sheet.active-effect-sheet .window-content header.sheet-header {
   flex-wrap: nowrap;
 }
-.sheet.active-effect-sheet .window-content nav.tabs {
+.application.sheet.active-effect-sheet .window-content nav.tabs {
   grid-area: tabs;
 }
-.sheet.active-effect-sheet .window-content .tab:has(div.scroll) {
+.application.sheet.active-effect-sheet .window-content .tab:has(div.scroll) {
   padding: 0;
 }
-.sheet.active-effect-sheet .window-content .tab div.scroll {
+.application.sheet.active-effect-sheet .window-content .tab div.scroll {
   padding: 1rem;
   overflow-y: auto;
   overflow-x: hidden;
@@ -1691,34 +1847,34 @@ body.theme-dark .sheet a.content-link {
   justify-content: start;
   gap: 0.5rem;
 }
-.sheet.active-effect-sheet .window-content .tab div.scroll .change-element-forms {
+.application.sheet.active-effect-sheet .window-content .tab div.scroll .change-element-forms {
   display: contents;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing {
   display: contents;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing .item-controls {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing .item-controls {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
   margin-top: 0.5rem;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing .item-controls button {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing .item-controls button {
   flex: 0 0 30%;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing > .cm-editor {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing > .cm-editor {
   flex: 1;
   background-color: #ffffffdd;
   color: #222224;
   overflow: hidden;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change {
   padding: unset;
   border: 1px solid var(--border-theme-color);
   border-radius: 8px;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -1726,43 +1882,43 @@ body.theme-dark .sheet a.content-link {
   border-bottom: 1px solid var(--border-theme-color);
   padding: 0.25rem 0.5rem;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .drag-handle {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .drag-handle {
   cursor: grab;
   font-weight: normal;
   margin-right: 0.375rem;
   padding: 0.125rem;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .label {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .label {
   flex: 0 0 40%;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .label .form-group label {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .label .form-group label {
   flex: 0 1 min-content;
   margin-right: 0.5rem;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .type {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .type {
   flex: 0 0 40%;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .item-controls {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .item-controls {
   flex: 0 0 45px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   gap: 4px;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main {
   padding: 0.25rem 0.5rem;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main textarea {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main textarea {
   resize: vertical;
   min-height: 86px;
   padding: 0.5rem;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group label.short {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group label.short {
   align-items: center;
   display: Flex;
   gap: 4px;
@@ -1770,7 +1926,7 @@ body.theme-dark .sheet a.content-link {
   padding-right: 0.5rem;
   flex: 0 0 80px;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .form-fields {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .form-fields {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
@@ -1778,7 +1934,7 @@ body.theme-dark .sheet a.content-link {
   align-items: center;
   gap: 4px;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .form-fields .content-link {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .form-fields .content-link {
   display: flex;
   flex: 0 0 auto;
   flex-direction: row;
@@ -1790,51 +1946,51 @@ body.theme-dark .sheet a.content-link {
   line-height: 1.6em;
   color: var(--color-cool-5);
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .form-fields .content-link img {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .form-fields .content-link img {
   height: 16px;
   width: 16px;
   border: unset;
   object-fit: scale-down;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .attached-input {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .attached-input {
   display: flex;
   flex-direction: row;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .attached-input button {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .attached-input button {
   border-radius: 4px 0 0 4px;
 }
-.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .attached-input input {
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .attached-input input {
   border-radius: 0 4px 4px 0;
 }
-.sheet.active-effect-sheet .window-content .tab .validation-failures {
+.application.sheet.active-effect-sheet .window-content .tab .validation-failures {
   background: rgba(214, 150, 0, 0.5);
   border-radius: 4px;
   margin: 0.5rem;
 }
-.sheet.active-effect-sheet .window-content .tab .validation-failures ul {
+.application.sheet.active-effect-sheet .window-content .tab .validation-failures ul {
   list-style: "\f071" outside;
   padding: 0.25rem 0.25rem 0.25rem 1.5rem;
   margin: 0;
 }
-.sheet.active-effect-sheet .window-content .tab .validation-failures ul li {
+.application.sheet.active-effect-sheet .window-content .tab .validation-failures ul li {
   font-weight: 900;
   font-family: var(--font-awesome);
 }
-.sheet.active-effect-sheet .window-content .tab .validation-failures ul li > span {
+.application.sheet.active-effect-sheet .window-content .tab .validation-failures ul li > span {
   margin-left: 0.25rem;
   font-weight: normal;
   font-family: var(--font-primary);
 }
-.sheet.active-effect-sheet .window-content .tab .create-change {
+.application.sheet.active-effect-sheet .window-content .tab .create-change {
   display: flex;
   flex-direction: row;
   justify-content: end;
   align-items: center;
 }
-.sheet.active-effect-sheet .window-content .tab .create-change button {
+.application.sheet.active-effect-sheet .window-content .tab .create-change button {
   flex: 0 0 30%;
 }
-.sheet.active-effect-sheet .window-content footer.sheet-footer {
+.application.sheet.active-effect-sheet .window-content footer.sheet-footer {
   all: unset;
   grid-area: submit;
   display: flex;
@@ -1844,10 +2000,10 @@ body.theme-dark .sheet a.content-link {
   height: 34px;
   border-top: 1px solid var(--border-theme-color);
 }
-.sheet.active-effect-sheet .window-content footer.sheet-footer button {
+.application.sheet.active-effect-sheet .window-content footer.sheet-footer button {
   flex: 0 0 48%;
 }
-.sheet input[type="color"] {
+.application.sheet input[type="color"] {
   border-color: var(--color-input-border-color, #000);
 }
 .application .standard-form input[type="checkbox"] {

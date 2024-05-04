@@ -330,33 +330,49 @@
     ],
     "genderRatio": 4,
     "evolutions": {
-      "full": {
-        "name": "grubbin",
-        "details": null,
-        "evolutions": [
-          {
-            "name": "charjabug",
-            "details": {
-              "gender": null,
-              "item": null,
-              "knownMove": null,
-              "level": 20
-            },
-            "evolutions": [
-              {
-                "name": "vikavolt",
-                "details": {
-                  "gender": null,
+      "name": "grubbin",
+      "details": null,
+      "evolutions": [
+        {
+          "name": "charjabug",
+          "uuid": "Compendium.ptr2e.core-species.Item.qpAgx3txkwrZAcpb",
+          "methods": [
+            {
+              "type": "level",
+              "level": 20,
+              "operand": "and"
+            }
+          ],
+          "evolutions": [
+            {
+              "name": "vikavolt",
+              "uuid": "Compendium.ptr2e.core-species.Item.K9gS2PXkyr9m7sL2",
+              "methods": [
+                {
+                  "type": "item",
                   "item": "thunder-stone",
-                  "knownMove": null,
-                  "level": null
-                },
-                "evolutions": []
+                  "operand": "or",
+                  "held": false
+                }
+              ],
+              "evolutions": [],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
               }
-            ]
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
           }
-        ]
-      }
+        }
+      ],
+      "uuid": "Compendium.ptr2e.core-species.Item.qpAgx3txkwrZAcpb"
     },
     "number": 737,
     "traits": [
@@ -418,12 +434,14 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.318",
+    "coreVersion": "12.320",
     "systemId": "ptr2e",
     "systemVersion": "0.004",
     "createdTime": null,
-    "modifiedTime": 1713185555199,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+    "modifiedTime": 1714663305677,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": "Compendium.ptr2e.core-species.Item.qpAgx3txkwrZAcpb",
+    "duplicateSource": null
   },
   "folder": null,
   "sort": 0,

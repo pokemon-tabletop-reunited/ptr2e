@@ -139,33 +139,49 @@
     "genderRatio": 4,
     "habitats": [],
     "evolutions": {
-      "full": {
-        "name": "tynamo",
-        "details": null,
-        "evolutions": [
-          {
-            "name": "eelektrik",
-            "details": {
-              "gender": null,
-              "item": null,
-              "knownMove": null,
-              "level": 39
-            },
-            "evolutions": [
-              {
-                "name": "eelektross",
-                "details": {
-                  "gender": null,
+      "name": "tynamo",
+      "details": null,
+      "evolutions": [
+        {
+          "name": "eelektrik",
+          "uuid": "Compendium.ptr2e.core-species.Item.vltop3pwPMgTaT6v",
+          "methods": [
+            {
+              "type": "level",
+              "level": 39,
+              "operand": "and"
+            }
+          ],
+          "evolutions": [
+            {
+              "name": "eelektross",
+              "uuid": "Compendium.ptr2e.core-species.Item.x9B4tiWtriPFSOgr",
+              "methods": [
+                {
+                  "type": "item",
                   "item": "thunder-stone",
-                  "knownMove": null,
-                  "level": null
-                },
-                "evolutions": []
+                  "operand": "or",
+                  "held": false
+                }
+              ],
+              "evolutions": [],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
               }
-            ]
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
           }
-        ]
-      }
+        }
+      ],
+      "uuid": "Compendium.ptr2e.core-species.Item.OyQ6MlS6rT3mfvGD"
     }
   },
   "_id": "OyQ6MlS6rT3mfvGD",
@@ -182,12 +198,14 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.318",
+    "coreVersion": "12.320",
     "systemId": "ptr2e",
     "systemVersion": "0.004",
     "createdTime": 1712327701027,
-    "modifiedTime": 1713185519745,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+    "modifiedTime": 1714663305677,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": "Compendium.ptr2e.core-species.Item.OyQ6MlS6rT3mfvGD",
+    "duplicateSource": null
   },
   "_key": "!items!OyQ6MlS6rT3mfvGD"
 }
