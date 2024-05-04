@@ -248,12 +248,17 @@ class SpeciesSystem extends SpeciesExtension {
                 label: "PTR2E.FIELDS.habitats.label",
                 hint: "PTR2E.FIELDS.habitats.hint",
             }),
-            evolutions: new fields.SchemaField({
-                full: new fields.EmbeddedDataField(EvolutionData, {
-                    required: true,
-                    nullable: true,
-                    initial: null,
-                }),
+            // evolutions: new fields.SchemaField({
+            //     full: new fields.EmbeddedDataField(EvolutionData, {
+            //         required: true,
+            //         nullable: true,
+            //         initial: null,
+            //     }),
+            // }),
+            evolutions: new fields.EmbeddedDataField(EvolutionData, {
+                required: true,
+                nullable: true,
+                initial: null,
             }),
         };
     }
@@ -303,7 +308,7 @@ class SkillsField<
     }
 }
 
-class EvolutionData extends foundry.abstract.DataModel {
+export class EvolutionData extends foundry.abstract.DataModel {
     static override defineSchema(): foundry.data.fields.DataSchema {
         const fields = foundry.data.fields;
 
@@ -313,7 +318,11 @@ class EvolutionData extends foundry.abstract.DataModel {
                 initial: initial as string,
                 choices: ["level", "item", "move", "gender"],
             }),
-            operand: new fields.StringField({ required: true, initial: "and", choices: ["and", "or"] })
+            operand: new fields.StringField({
+                required: true,
+                initial: "and",
+                choices: ["and", "or"],
+            }),
         });
 
         // Minimum level required to evolve
@@ -436,6 +445,32 @@ class EvolutionData extends foundry.abstract.DataModel {
     }
 }
 
+export interface EvolutionData {
+    name: string;
+    uuid: string;
+    methods: ({
+        operand: "and" | "or";
+    } & (
+        | {
+              type: "level";
+              level: number;
+          }
+        | {
+              type: "item";
+              item: string;
+          }
+        | {
+              type: "move";
+              move: string;
+          }
+        | {
+              type: "gender";
+              gender: "male" | "female" | "genderless";
+          }
+    ))[];
+    evolutions: EvolutionData[] | null;
+}
+
 interface SpeciesSystem {
     /**
      * The # number of the species in the Pokedex.
@@ -488,6 +523,8 @@ interface SpeciesSystem {
         secondary: { type: string; value: number }[];
     };
 
+    evolutions: EvolutionData;
+
     skills: Record<string, number>;
 }
 
@@ -530,6 +567,8 @@ interface SpeciesSystemSource extends Omit<ItemSystemSource, "container" | "acti
         primary: { type: string; value: number }[];
         secondary: { type: string; value: number }[];
     };
+
+    evolutions: EvolutionData;
 
     skills: Record<string, number>;
 }

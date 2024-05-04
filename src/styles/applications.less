@@ -39,12 +39,20 @@ body {
     height: 100%;
 }
 
-.sheet {
-    .tag {
-        display: flex;
-        gap: 10px;
-        align-items: center;
-        flex: 1 0 100%;
+.application.sheet {
+    multi-select, string-tags, string-tags-ptr2e {
+        .tags {
+          flex-direction: column;
+          align-items: start;
+
+          .tag {
+            font-size: var(--font-size-14);
+
+            &:has(a.content-link) {
+              padding: 4px 0.25rem;
+            }
+          }
+        }
     }
 
     prose-mirror {
@@ -874,6 +882,47 @@ body {
                                 flex: 0 0 100%;
                                 background: var(--appv2-background);
 
+                                .evos, &.evos { 
+                                    position: relative;
+                                    &.dragover {
+                                        box-shadow: inset 0 0 30px var(--border-theme-color);
+
+                                        > * {
+                                            filter: opacity(0.5) blur(2px);
+                                        }
+                                        
+                                        > .dragover-info {
+                                            display: flex;
+                                            filter: unset;
+                                            font-size: 1rem;
+                                            flex-direction: row;
+                                            align-items: center;
+                                            justify-content: center;
+                                            top: -5px;
+                                            left: 0;
+                                            pointer-events: none;
+
+                                            p {
+                                                background: #ebc99a;
+                                                padding: 0.5rem;
+                                                width: fit-content;
+                                                border-radius: 8px;
+                                                color: black;
+                                                font-style: italic;
+                                            }
+                                        }
+                                    }
+
+                                    .dragover-info {
+                                        position: absolute;
+                                        width: 100%;
+                                        height: 100%;
+                                        align-content: center;
+                                        text-align: center;
+                                        display: none;
+                                    }
+                                }
+
                                 .evolution {
                                     display: flex;
                                     flex-direction: column;
@@ -882,10 +931,77 @@ body {
                                         font-size: 1.25rem;
                                         font-weight: bold;
                                         text-transform: capitalize;
+                                        --img-size: 48px;
+                                        height: var(--img-size);
+                                        padding: 0 8px;
+
+                                        display: flex;
+                                        .icon {
+                                            flex: 0 0 var(--img-size);
+                                            img {
+                                                height: var(--img-size);
+                                                width: var(--img-size);
+                                            }
+                                        }
+                                        .name {
+                                            padding-left: 0.5rem;
+                                            align-content: center;
+                                            flex: 1;
+                                        }
+
+                                        .item-controls {
+                                            display: flex;
+                                            flex-direction: row;
+                                            justify-content: flex-end;
+                                            align-items: center;
+                                            flex: 0 0 48px;
+                                            margin-right: 10px;
+                                            gap: 5px;
+                                        }
+
+                                        span {
+                                            font-size: 0.75rem;
+                                            color: var(--hint-text-color);
+                                        }
                                     }
-                                    .method {
-                                        color: slategrey;
-                                        font-style: italic;
+                                    fieldset.methods {
+                                        display: flex;
+                                        flex-direction: column;
+                                        gap: 0.25rem;
+
+                                        .method {
+                                            display: flex;
+                                            flex-direction: row;
+                                            flex-wrap: wrap;
+                                            gap: 0.25rem;
+                                            justify-content: space-between;
+
+                                            &.header {
+                                                font-weight: bold;
+                                            }
+                                            text-align: center;
+                                            select {
+                                                text-align: center;
+                                            }
+
+                                            .form-group {
+                                                flex: 0 0 calc(31% - 0.25rem);
+                                            }
+                                            .item-controls {
+                                                display: flex;
+                                                flex-direction: row;
+                                                justify-content: flex-end;
+                                                align-items: center;
+                                                flex: 0 0 20px;
+                                            }
+                                        }
+
+                                        small {
+                                            align-self: center;
+                                            align-content: center;
+                                            text-align: center;
+                                            color: var(--hint-text-color);
+                                        }
                                     }
                                     small {
                                         color: lightgray;
@@ -893,12 +1009,31 @@ body {
                                         text-align: center;
                                     }
 
-                                    fieldset {
-                                        background: var(--appv2-background);
+                                    span.evolutions-header {
+                                        font-size: 1.25rem; 
+                                        font-weight: bold; 
+                                        text-transform: capitalize; 
+                                        padding-bottom: 0.25rem; 
+                                        margin: 0 0.5rem;
                                     }
 
-                                    padding: 0.5rem;
-                                    border-radius: 16px;
+                                    
+
+                                    .hidden {
+                                        display: none;
+                                    }
+
+                                    fieldset {
+                                        background: var(--appv2-background);
+
+                                        legend {
+                                            font-weight: bold;
+                                            text-transform: capitalize;
+                                        }
+                                    }
+
+                                    // padding: 0.5rem;
+                                    // border-radius: 16px;
 
                                     &.no-shadow {
                                         box-shadow: unset;

@@ -34,6 +34,33 @@ function _registerPTRHelpers() {
         }
     );
 
+    Handlebars.registerHelper("iconFromUuid", function (uuid, args: {hash: Record<string, string>}) {
+        const doc = fromUuidSync(uuid);
+        const img = document.createElement("img");
+        for(const key in args.hash) {
+            img.setAttribute(key, args.hash[key]);
+        }
+        if (!doc) {
+            img.src = "/icons/svg/hazard.svg";
+            return img.outerHTML;
+        }
+
+        img.src = doc.img;
+        img.alt ||= doc.name;
+        return img.outerHTML;
+    });
+
+    Handlebars.registerHelper("formatIndex", function (index) {
+        const num = Number(index);
+        if(isNaN(num)) return index;
+        switch(index) {
+            case 0: return "1st";
+            case 1: return "2nd";
+            case 2: return "3rd";
+            default: return `${num + 1}th`;
+        }
+    });
+
     Handlebars.registerHelper("formatFormula", function (formula) {
         // Find all numbers in the string
         const numbers = formula.match(/(\d+\.\d+|\d+)/g);
