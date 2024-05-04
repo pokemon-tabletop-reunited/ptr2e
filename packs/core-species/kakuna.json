@@ -113,33 +113,48 @@
     ],
     "genderRatio": 4,
     "evolutions": {
-      "full": {
-        "name": "weedle",
-        "details": null,
-        "evolutions": [
-          {
-            "name": "kakuna",
-            "details": {
-              "gender": null,
-              "item": null,
-              "knownMove": null,
-              "level": 7
-            },
-            "evolutions": [
-              {
-                "name": "beedrill",
-                "details": {
-                  "gender": null,
-                  "item": null,
-                  "knownMove": null,
-                  "level": 10
-                },
-                "evolutions": []
+      "name": "weedle",
+      "details": null,
+      "evolutions": [
+        {
+          "name": "kakuna",
+          "uuid": "Compendium.ptr2e.core-species.Item.iS3osR58JBMCkN6g",
+          "methods": [
+            {
+              "type": "level",
+              "level": 7,
+              "operand": "and"
+            }
+          ],
+          "evolutions": [
+            {
+              "name": "beedrill",
+              "uuid": "Compendium.ptr2e.core-species.Item.PhFGJrxZDAK8PxwU",
+              "methods": [
+                {
+                  "type": "level",
+                  "level": 10,
+                  "operand": "and"
+                }
+              ],
+              "evolutions": [],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
               }
-            ]
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
           }
-        ]
-      }
+        }
+      ],
+      "uuid": "Compendium.ptr2e.core-species.Item.iS3osR58JBMCkN6g"
     }
   },
   "_id": "iS3osR58JBMCkN6g",
@@ -153,12 +168,14 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.318",
+    "coreVersion": "12.320",
     "systemId": "ptr2e",
-    "systemVersion": "0.001",
+    "systemVersion": "0.004",
     "createdTime": 1712230052166,
-    "modifiedTime": 1712422006379,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+    "modifiedTime": 1714663305677,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": "Compendium.ptr2e.core-species.Item.iS3osR58JBMCkN6g",
+    "duplicateSource": null
   },
   "_key": "!items!iS3osR58JBMCkN6g"
 }

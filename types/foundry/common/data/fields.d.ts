@@ -254,7 +254,7 @@ export abstract class DataField<
      * Recursively traverse a schema and retrieve a field specification by a given path
      * @param path The field path as an array of strings
      */
-    protected _getField(path: string[]): this | undefined;
+    _getField(path: string[]): this | undefined;
 
     /* -------------------------------------------- */
     /*  Form Field Integration                      */

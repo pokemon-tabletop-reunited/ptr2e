@@ -1,141 +1,186 @@
 {
-    "name": "cosmog",
-    "img": "/systems/ptr2e/img/icons/species_icon.webp",
-    "type": "species",
-    "system": {
-        "types": [
-            "psychic"
-        ],
-        "stats": {
-            "hp": 43,
-            "atk": 29,
-            "def": 31,
-            "spa": 29,
-            "spd": 31,
-            "spe": 37
-        },
-        "moves": {
-            "levelUp": [
-                {
-                    "name": "teleport",
-                    "gen": "scarlet-violet",
-                    "level": 1
-                },
-                {
-                    "name": "splash",
-                    "gen": "scarlet-violet",
-                    "level": 1
-                }
-            ],
-            "egg": [],
-            "tutor": [],
-            "machine": []
-        },
-        "size": {
-            "height": 0.2,
-            "weight": 0.1,
-            "category": "tiny",
-            "type": "quad"
-        },
-        "captureRate": 45,
-        "eggGroups": [
-            "no-eggs"
-        ],
-        "genderRatio": -1,
-        "evolutions": {
-            "full": {
-                "name": "cosmog",
-                "details": null,
-                "evolutions": [
-                    {
-                        "name": "cosmoem",
-                        "details": {
-                            "gender": null,
-                            "item": null,
-                            "knownMove": null,
-                            "level": 43
-                        },
-                        "evolutions": [
-                            {
-                                "name": "solgaleo",
-                                "details": {
-                                    "gender": null,
-                                    "item": null,
-                                    "knownMove": null,
-                                    "level": 53
-                                },
-                                "evolutions": []
-                            },
-                            {
-                                "name": "lunala",
-                                "details": {
-                                    "gender": null,
-                                    "item": null,
-                                    "knownMove": null,
-                                    "level": 53
-                                },
-                                "evolutions": []
-                            }
-                        ]
-                    }
-                ]
-            }
-        },
-        "number": 789,
-        "traits": [
-            "pokemon",
-            "legendary",
-            "underdog",
-            "hover",
-            "teleporter",
-            "dangerous-ultra-wormhole"
-        ],
-        "diet": [
-            "nullivore"
-        ],
-        "abilities": {
-            "starting": [
-                "beast-boost"
-            ],
-            "basic": [
-                "unaware",
-                "magic-bounce"
-            ],
-            "advanced": [
-                "sturdy",
-                "magic-guard"
-            ],
-            "master": [
-                "full-metal-body",
-                "shadow-shield"
-            ]
-        },
-        "movement": {
-            "primary": [
-                {
-                    "type": "flight",
-                    "value": 6
-                },
-                {
-                    "type": "teleport",
-                    "value": 6
-                }
-            ],
-            "secondary": []
-        },
-        "skills": {
-            "conversation": 25,
-            "listen": 25,
-            "navigate": 35,
-            "negotiation": 20,
-            "occult-legends": 20,
-            "occult-psychic": 30,
-            "occult-ultra-beasts": 25,
-            "running": 20,
-            "spot": 25
-        },
-        "habitats": []
+  "name": "cosmog",
+  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "type": "species",
+  "system": {
+    "types": [
+      "psychic"
+    ],
+    "stats": {
+      "hp": 43,
+      "atk": 29,
+      "def": 31,
+      "spa": 29,
+      "spd": 31,
+      "spe": 37
     },
-    "_id": "XRRwQRXawRg2oxRH",
-    "effects": []
+    "moves": {
+      "levelUp": [
+        {
+          "name": "teleport",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "splash",
+          "gen": "scarlet-violet",
+          "level": 1
+        }
+      ],
+      "egg": [],
+      "tutor": [],
+      "machine": []
+    },
+    "size": {
+      "height": 0.2,
+      "weight": 0.1,
+      "category": "tiny",
+      "type": "quad"
+    },
+    "captureRate": 45,
+    "eggGroups": [
+      "no-eggs"
+    ],
+    "genderRatio": -1,
+    "evolutions": {
+      "name": "cosmog",
+      "details": null,
+      "evolutions": [
+        {
+          "name": "cosmoem",
+          "uuid": "Compendium.ptr2e.core-species.Item.HOfS7vBFF6ME2LiA",
+          "methods": [
+            {
+              "type": "level",
+              "level": 43,
+              "operand": "and"
+            }
+          ],
+          "evolutions": [
+            {
+              "name": "solgaleo",
+              "uuid": "Compendium.ptr2e.core-species.Item.KCaLP0tjvwK3Fqjs",
+              "methods": [
+                {
+                  "type": "level",
+                  "level": 53,
+                  "operand": "and"
+                }
+              ],
+              "evolutions": [],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
+              }
+            },
+            {
+              "name": "lunala",
+              "uuid": "Compendium.ptr2e.core-species.Item.hpsUcuamiebvodm7",
+              "methods": [
+                {
+                  "type": "level",
+                  "level": 53,
+                  "operand": "and"
+                }
+              ],
+              "evolutions": [],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
+              }
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          }
+        }
+      ],
+      "uuid": "Compendium.ptr2e.core-species.Item.XRRwQRXawRg2oxRH"
+    },
+    "number": 789,
+    "traits": [
+      "pokemon",
+      "legendary",
+      "underdog",
+      "hover",
+      "teleporter",
+      "dangerous-ultra-wormhole"
+    ],
+    "diet": [
+      "nullivore"
+    ],
+    "abilities": {
+      "starting": [
+        "beast-boost"
+      ],
+      "basic": [
+        "unaware",
+        "magic-bounce"
+      ],
+      "advanced": [
+        "sturdy",
+        "magic-guard"
+      ],
+      "master": [
+        "full-metal-body",
+        "shadow-shield"
+      ]
+    },
+    "movement": {
+      "primary": [
+        {
+          "type": "flight",
+          "value": 6
+        },
+        {
+          "type": "teleport",
+          "value": 6
+        }
+      ],
+      "secondary": []
+    },
+    "skills": {
+      "conversation": 25,
+      "listen": 25,
+      "navigate": 35,
+      "negotiation": 20,
+      "occult-legends": 20,
+      "occult-psychic": 30,
+      "occult-ultra-beasts": 25,
+      "running": 20,
+      "spot": 25
+    },
+    "habitats": [],
+    "slug": "cosmog"
+  },
+  "_id": "XRRwQRXawRg2oxRH",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-species.Item.XRRwQRXawRg2oxRH"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.320",
+    "systemId": "ptr2e",
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1714663305677,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!XRRwQRXawRg2oxRH"
 }

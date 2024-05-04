@@ -1,17 +1,22 @@
-import { SpeciesPTR2e } from "@item";
+import { ItemPTR2e, SpeciesPTR2e } from "@item";
 import { DocumentSheetConfiguration, Tab } from "./document.ts";
 import { SpeciesSystemSource } from "@item/data/index.ts";
-import { sluggify } from "@utils";
+import { htmlQueryAll, sluggify } from "@utils";
 import { default as ItemSheetPTR2e } from "./base.ts";
 import * as R from "remeda";
+import { EvolutionData } from "@item/data/species.ts";
 
 export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]> {
     static override DEFAULT_OPTIONS = fu.mergeObject(
         super.DEFAULT_OPTIONS,
         {
             classes: ["species-sheet"],
+            actions: {
+                "copy-evolution-tree": SpeciesSheet.#copyEvolutionTree,
+                "paste-evolution-tree": SpeciesSheet.#pasteEvolutionTree
+            }
         },
-        { inplace: false }
+        { inplace: false },
     );
 
     static override readonly overviewTemplate= "systems/ptr2e/templates/items/species/species-overview.hbs";
@@ -65,6 +70,13 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
             this.setPosition({ height: 1000, width: 870 });
         } else {
             this.setPosition({ height: 500, width: 550 });
+        }
+    }
+
+    override async _prepareContext() {
+        return {
+            ...(await super._prepareContext()),
+            copyPresent: !!SpeciesSheet.copyInfo && SpeciesSheet.copyInfo !== this.document.system.evolutions,
         }
     }
 
@@ -137,6 +149,54 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
                     }
                 });
             }
+
+            for(const element of htmlQueryAll(htmlElement, ".evolution a[data-action]")) {
+                element.addEventListener("click", async (event) => {
+                    event.preventDefault();
+                    const action = element.dataset.action;
+                    switch (action) {
+                        case "add-method": {
+                            return SpeciesSheet.#addMethod.call(this, event);   
+                        }
+                        case "delete-method": {
+                            return SpeciesSheet.#deleteMethod.call(this, event);
+                        }
+                        case "delete-evolution": {
+                            return SpeciesSheet.#deleteEvolution.call(this, event);
+                        }
+                        case "open-sheet": {
+                            const { uuid } = element.dataset;
+                            if(!uuid) return;
+                            const item = await fromUuid<ItemPTR2e>(uuid);
+                            if(item) item.sheet?.render(true);    
+                        }
+                    }
+                });
+            }
+
+            const evoFieldsets = htmlElement.querySelectorAll("fieldset.evos");
+            htmlElement.addEventListener("dragover", (event) => {
+                event.preventDefault();
+                const target = (event.target as HTMLElement).closest("fieldset.evos");
+                if (!target) return;
+            
+                // Remove the dragover class from all fieldset.evos elements
+                evoFieldsets.forEach((fieldset) => fieldset.classList.remove("dragover"));
+            
+                // Add the dragover class to the current target
+                target.classList.add("dragover");
+            });
+                        
+            htmlElement.addEventListener("dragleave", (event) => {
+                const target = (event.target as HTMLElement).closest("fieldset.evos");
+                const relatedTarget = event.relatedTarget as HTMLElement;
+                if (!target || target.contains(relatedTarget)) return;
+                target.classList.remove("dragover");
+            });
+
+            for(const dropTarget of evoFieldsets) {
+                dropTarget.addEventListener("drop", (event) => SpeciesSheet.#dropEvolution.call(this, event as DragEvent));
+            }
         }
     }
 
@@ -185,4 +245,112 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
 
         return data;
     }
+
+    static async #deleteEvolution(this: SpeciesSheet, event: Event): Promise<void> {
+        event.preventDefault();
+        const { field, index } = (event.currentTarget as HTMLElement).dataset;
+        if(!field || !index) return;
+
+        const arrayPath = field.split(".").slice(0, -1).join(".");
+
+        const doc = this.document.toObject();
+        const evolutions = doc.system.evolutions;
+        const evos = fu.getProperty<EvolutionData[]>(doc, arrayPath) ?? [];
+        evos.splice(parseInt(index), 1);
+        this.document.update({"system.evolutions": evolutions})
+    }
+
+    static async #addMethod(this: SpeciesSheet, event: Event): Promise<void> {
+        event.preventDefault();
+        const { field } = (event.currentTarget as HTMLElement).dataset;
+        if(!field) return;
+
+        const doc = this.document.toObject();
+        const evolutions: EvolutionData = doc.system.evolutions;
+        const methods = fu.getProperty<EvolutionData['methods']>(doc, field) ?? [];
+        methods.push({ type: "level", level: 20, operand: "and"});
+        this.document.update({"system.evolutions": evolutions});
+    }
+
+    static async #deleteMethod(this: SpeciesSheet, event: Event): Promise<void> {
+        event.preventDefault();
+        const { field, index } = (event.currentTarget as HTMLElement).dataset;
+        if(!field || !index) return;
+
+        const doc = this.document.toObject();
+        const evolutions: EvolutionData = doc.system.evolutions;
+        const methods = fu.getProperty<EvolutionData['methods']>(doc, field) ?? [];
+        methods.splice(parseInt(index), 1);
+        this.document.update({"system.evolutions": evolutions});
+    }
+
+    static async #dropEvolution(this: SpeciesSheet, event: DragEvent): Promise<void> {
+        event.preventDefault();
+        const target = (event.target as HTMLElement).closest("fieldset.evos") as HTMLElement
+        if (!target) return;
+        target.classList.remove("dragover");
+
+        const { path } = target.dataset;
+        if(!path) return;
+
+        const data = TextEditor.getDragEventData(event) as Record<string, string>;
+        if(data.type !== "Item" || !data.uuid) return;
+        const item = await fromUuid<ItemPTR2e>(data.uuid);
+        if(!item || !(item instanceof ItemPTR2e)) return;
+
+        const doc = this.document.toObject();
+        if(path === "system.evolutions") {
+            const newEvo = {
+                name: item.name,
+                uuid: item.uuid,
+                methods: [],
+                evolutions: doc.system.evolutions.evolutions
+            }
+            await this.document.update({"system.evolutions": newEvo});
+            return;
+        }
+        const evolutions: EvolutionData['_source'][] = fu.getProperty(doc, path);
+        evolutions.push({
+            name: item.name,
+            uuid: item.uuid,
+            methods: [],
+            evolutions: []
+        });
+        
+        await this.document.update({"system.evolutions": doc.system.evolutions});
+        return;
+    }
+
+    static #copyEvolutionTree(this: SpeciesSheet, event: Event) {
+        event.preventDefault();
+        const evolutions = this.document.system.evolutions;
+        SpeciesSheet.copyInfo = evolutions;
+        ui.notifications.info(game.i18n.format(`PTR2E.SpeciesSheet.evolutions.copyPasteTree.copy`,{name: this.document.name}) );
+
+        for(const sheet of foundry.applications.instances.values()) {
+            if(!(sheet instanceof SpeciesSheet) || sheet.document.id === this.document.id) continue;
+            sheet.render({parts: ["details"]});
+        }
+    }
+
+    static #pasteEvolutionTree(this: SpeciesSheet, event: Event) {
+        event.preventDefault();
+        if(SpeciesSheet.copyInfo === null) return;
+
+        const copyInfo = SpeciesSheet.copyInfo;
+        foundry.applications.api.DialogV2.confirm({
+            window: {
+                title: game.i18n.localize(`PTR2E.SpeciesSheet.evolutions.copyPasteTree.paste.title`)
+            },
+            content: game.i18n.format(`PTR2E.SpeciesSheet.evolutions.copyPasteTree.paste.content`,{thisName: this.document.name, copyName: copyInfo.name}),
+            yes: {
+                callback: async () => {
+                    await this.document.update({"system.evolutions": copyInfo});
+                    ui.notifications.info(game.i18n.format(`PTR2E.SpeciesSheet.evolutions.copyPasteTree.paste.success`,{name: copyInfo.name}))
+                }
+            }
+        });
+    }
+
+    public static copyInfo: null | EvolutionData = null;
 }

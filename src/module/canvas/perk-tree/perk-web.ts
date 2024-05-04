@@ -86,7 +86,7 @@ class PerkWeb extends PIXI.Container {
         this.editMode = false;
     }
 
-    public static readonly HEX_SIZE = 40 as const;
+    public static readonly HEX_SIZE = 60 as const;
     public static readonly GRID_RADIUS = 50 as const;
     #drawn = false;
 

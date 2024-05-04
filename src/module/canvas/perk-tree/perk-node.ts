@@ -193,10 +193,10 @@ class PerkNode extends PIXI.Container {
         const hudHeight = hud.element.offsetHeight * scale;
 
         // Create a virtual boundary around the HUD
-        const boundaryXStart = hudXOffset - 125 * scale;
-        const boundaryXEnd = hudXOffset + hudWidth + 125 * scale;
-        const boundaryYStart = hudYOffset - 125 * scale;
-        const boundaryYEnd = hudYOffset + hudHeight + 125 * scale;
+        const boundaryXStart = hudXOffset - (200 * scale)
+        const boundaryXEnd = hudXOffset + (hudWidth * 2.5) + (200 * scale * 2.5) 
+        const boundaryYStart = hudYOffset - (200 * scale)
+        const boundaryYEnd = hudYOffset + (hudHeight * 2.5) + (200 * scale * 2.5)
 
         // Check if the pointer is within the boundary
         if (x >= boundaryXStart && x <= boundaryXEnd && y >= boundaryYStart && y <= boundaryYEnd) {
