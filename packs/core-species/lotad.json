@@ -507,33 +507,49 @@
     ],
     "genderRatio": 4,
     "evolutions": {
-      "full": {
-        "name": "lotad",
-        "details": null,
-        "evolutions": [
-          {
-            "name": "lombre",
-            "details": {
-              "gender": null,
-              "item": null,
-              "knownMove": null,
-              "level": 14
-            },
-            "evolutions": [
-              {
-                "name": "ludicolo",
-                "details": {
-                  "gender": null,
+      "name": "lotad",
+      "details": null,
+      "evolutions": [
+        {
+          "name": "lombre",
+          "uuid": "Compendium.ptr2e.core-species.Item.zmRuQ2fYnY5ARsai",
+          "methods": [
+            {
+              "type": "level",
+              "level": 14,
+              "operand": "and"
+            }
+          ],
+          "evolutions": [
+            {
+              "name": "ludicolo",
+              "uuid": "Compendium.ptr2e.core-species.Item.ZNJsweWNtFpu4Wh9",
+              "methods": [
+                {
+                  "type": "item",
                   "item": "water-stone",
-                  "knownMove": null,
-                  "level": null
-                },
-                "evolutions": []
+                  "operand": "or",
+                  "held": false
+                }
+              ],
+              "evolutions": [],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
               }
-            ]
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
           }
-        ]
-      }
+        }
+      ],
+      "uuid": "Compendium.ptr2e.core-species.Item.2q5wHFHLWemwIyqy"
     }
   },
   "_id": "2q5wHFHLWemwIyqy",
@@ -547,12 +563,14 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.318",
+    "coreVersion": "12.320",
     "systemId": "ptr2e",
     "systemVersion": "0.004",
     "createdTime": 1712230052166,
-    "modifiedTime": 1713185519745,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+    "modifiedTime": 1714663305677,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": "Compendium.ptr2e.core-species.Item.2q5wHFHLWemwIyqy",
+    "duplicateSource": null
   },
   "_key": "!items!2q5wHFHLWemwIyqy"
 }

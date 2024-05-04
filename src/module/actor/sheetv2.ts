@@ -98,6 +98,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             id: "clocks",
             template: "systems/ptr2e/templates/actor/actor-clocks.hbs",
         },
+        skills: {
+            id: "skills",
+            template: "systems/ptr2e/templates/actor/actor-skills.hbs",
+        },
         perks: {
             id: "perks",
             template: "systems/ptr2e/templates/actor/actor-perks.hbs",
@@ -134,6 +138,12 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             group: "sheet",
             icon: "fa-solid fa-suitcase",
             label: "PTR2E.ActorSheet.Tabs.inventory.label",
+        },
+        skills: {
+            id: "skills",
+            group: "sheet",
+            icon: "fa-solid fa-dice-d20",
+            label: "PTR2E.ActorSheet.Tabs.skills.label",
         },
         clocks: {
             id: "clocks",

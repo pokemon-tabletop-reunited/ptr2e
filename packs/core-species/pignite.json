@@ -553,33 +553,48 @@
     "genderRatio": 1,
     "habitats": [],
     "evolutions": {
-      "full": {
-        "name": "tepig",
-        "details": null,
-        "evolutions": [
-          {
-            "name": "pignite",
-            "details": {
-              "gender": null,
-              "item": null,
-              "knownMove": null,
-              "level": 17
-            },
-            "evolutions": [
-              {
-                "name": "emboar",
-                "details": {
-                  "gender": null,
-                  "item": null,
-                  "knownMove": null,
-                  "level": 36
-                },
-                "evolutions": []
+      "name": "tepig",
+      "details": null,
+      "evolutions": [
+        {
+          "name": "pignite",
+          "uuid": "Compendium.ptr2e.core-species.Item.9WRh376M23jW1Kbm",
+          "methods": [
+            {
+              "type": "level",
+              "level": 17,
+              "operand": "and"
+            }
+          ],
+          "evolutions": [
+            {
+              "name": "emboar",
+              "uuid": "Compendium.ptr2e.core-species.Item.fhEnznD8phdXhQW8",
+              "methods": [
+                {
+                  "type": "level",
+                  "level": 36,
+                  "operand": "and"
+                }
+              ],
+              "evolutions": [],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
               }
-            ]
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
           }
-        ]
-      }
+        }
+      ],
+      "uuid": "Compendium.ptr2e.core-species.Item.9WRh376M23jW1Kbm"
     }
   },
   "_id": "9WRh376M23jW1Kbm",
@@ -596,12 +611,14 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.318",
+    "coreVersion": "12.320",
     "systemId": "ptr2e",
     "systemVersion": "0.004",
     "createdTime": 1712327701027,
-    "modifiedTime": 1713185555199,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+    "modifiedTime": 1714663305677,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": "Compendium.ptr2e.core-species.Item.9WRh376M23jW1Kbm",
+    "duplicateSource": null
   },
   "_key": "!items!9WRh376M23jW1Kbm"
 }

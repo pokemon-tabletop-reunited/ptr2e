@@ -793,43 +793,68 @@
     ],
     "genderRatio": 4,
     "evolutions": {
-      "full": {
-        "name": "poliwag",
-        "details": null,
-        "evolutions": [
-          {
-            "name": "poliwhirl",
-            "details": {
-              "gender": null,
-              "item": null,
-              "knownMove": null,
-              "level": 25
-            },
-            "evolutions": [
-              {
-                "name": "poliwrath",
-                "details": {
-                  "gender": null,
+      "name": "poliwag",
+      "details": null,
+      "evolutions": [
+        {
+          "name": "poliwhirl",
+          "uuid": "Compendium.ptr2e.core-species.Item.GQgqAHxbXuep5oum",
+          "methods": [
+            {
+              "type": "level",
+              "level": 25,
+              "operand": "and"
+            }
+          ],
+          "evolutions": [
+            {
+              "name": "poliwrath",
+              "uuid": "Compendium.ptr2e.core-species.Item.5sXcAhedmd5rHS2y",
+              "methods": [
+                {
+                  "type": "item",
                   "item": "water-stone",
-                  "knownMove": null,
-                  "level": null
-                },
-                "evolutions": []
-              },
-              {
-                "name": "politoed",
-                "details": {
-                  "gender": null,
-                  "item": "kings-rock",
-                  "knownMove": null,
-                  "level": null
-                },
-                "evolutions": []
+                  "operand": "or",
+                  "held": false
+                }
+              ],
+              "evolutions": [],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
               }
-            ]
+            },
+            {
+              "name": "politoed",
+              "uuid": "Compendium.ptr2e.core-species.Item.eDeVwWD2O5YW7e8m",
+              "methods": [
+                {
+                  "type": "item",
+                  "item": "kings-rock",
+                  "operand": "or",
+                  "held": false
+                }
+              ],
+              "evolutions": [],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
+              }
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
           }
-        ]
-      }
+        }
+      ],
+      "uuid": "Compendium.ptr2e.core-species.Item.5sXcAhedmd5rHS2y"
     }
   },
   "_id": "5sXcAhedmd5rHS2y",
@@ -843,12 +868,14 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.318",
+    "coreVersion": "12.320",
     "systemId": "ptr2e",
     "systemVersion": "0.004",
     "createdTime": 1712230052166,
-    "modifiedTime": 1713185555199,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+    "modifiedTime": 1714663305677,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": "Compendium.ptr2e.core-species.Item.5sXcAhedmd5rHS2y",
+    "duplicateSource": null
   },
   "_key": "!items!5sXcAhedmd5rHS2y"
 }

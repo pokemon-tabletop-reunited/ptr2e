@@ -416,32 +416,57 @@
     "genderRatio": 8,
     "habitats": [],
     "evolutions": {
-      "full": {
-        "name": "burmy",
-        "details": null,
-        "evolutions": [
-          {
-            "name": "wormadam",
-            "details": {
+      "name": "burmy",
+      "details": null,
+      "evolutions": [
+        {
+          "name": "wormadam",
+          "uuid": null,
+          "methods": [
+            {
+              "type": "gender",
               "gender": "female",
-              "item": null,
-              "knownMove": null,
-              "level": 20
+              "operand": "and"
             },
-            "evolutions": []
-          },
-          {
-            "name": "mothim",
-            "details": {
-              "gender": "male",
-              "item": null,
-              "knownMove": null,
-              "level": 20
-            },
-            "evolutions": []
+            {
+              "type": "level",
+              "level": 20,
+              "operand": "and"
+            }
+          ],
+          "evolutions": [],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
           }
-        ]
-      }
+        },
+        {
+          "name": "mothim",
+          "uuid": "Compendium.ptr2e.core-species.Item.heMcRmrA3pK8e2kU",
+          "methods": [
+            {
+              "type": "gender",
+              "gender": "male",
+              "operand": "and"
+            },
+            {
+              "type": "level",
+              "level": 20,
+              "operand": "and"
+            }
+          ],
+          "evolutions": [],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          }
+        }
+      ],
+      "uuid": "Compendium.ptr2e.core-species.Item.kdCNZLjBRVXxfu3U"
     }
   },
   "effects": [],
@@ -458,12 +483,14 @@
   "_id": "kdCNZLjBRVXxfu3U",
   "sort": 0,
   "_stats": {
-    "coreVersion": "12.318",
+    "coreVersion": "12.320",
     "systemId": "ptr2e",
     "systemVersion": "0.004",
     "createdTime": 1712328175342,
-    "modifiedTime": 1713185519745,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+    "modifiedTime": 1714663305677,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": "Compendium.ptr2e.core-species.Item.kdCNZLjBRVXxfu3U",
+    "duplicateSource": null
   },
   "_key": "!items!kdCNZLjBRVXxfu3U"
 }

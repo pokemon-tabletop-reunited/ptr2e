@@ -192,22 +192,34 @@
     "genderRatio": 1,
     "habitats": [],
     "evolutions": {
-      "full": {
-        "name": "combee",
-        "details": null,
-        "evolutions": [
-          {
-            "name": "vespiquen",
-            "details": {
+      "name": "combee",
+      "details": null,
+      "evolutions": [
+        {
+          "name": "vespiquen",
+          "uuid": "Compendium.ptr2e.core-species.Item.DmtwbwJnTIgpwUK0",
+          "methods": [
+            {
+              "type": "gender",
               "gender": "female",
-              "item": null,
-              "knownMove": null,
-              "level": 21
+              "operand": "and"
             },
-            "evolutions": []
+            {
+              "type": "level",
+              "level": 21,
+              "operand": "and"
+            }
+          ],
+          "evolutions": [],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
           }
-        ]
-      }
+        }
+      ],
+      "uuid": "Compendium.ptr2e.core-species.Item.v9agBcB1ewBRiDPX"
     }
   },
   "_id": "v9agBcB1ewBRiDPX",
@@ -224,12 +236,14 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.318",
+    "coreVersion": "12.320",
     "systemId": "ptr2e",
     "systemVersion": "0.004",
     "createdTime": 1712327701027,
-    "modifiedTime": 1713185519745,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+    "modifiedTime": 1714663305677,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": "Compendium.ptr2e.core-species.Item.v9agBcB1ewBRiDPX",
+    "duplicateSource": null
   },
   "_key": "!items!v9agBcB1ewBRiDPX"
 }

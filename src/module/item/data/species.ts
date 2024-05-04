@@ -5,8 +5,12 @@ import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { ActorPTR2e } from "@actor";
+import { DataSchema } from "types/foundry/common/data/fields.js";
 
-const SpeciesExtension = HasEmbed(HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel))), "species");
+const SpeciesExtension = HasEmbed(
+    HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel))),
+    "species"
+);
 
 /**
  * @category Item Data Models
@@ -58,44 +62,47 @@ class SpeciesSystem extends SpeciesExtension {
                 label: "PTR2E.FIELDS.pokemonForm.label",
                 hint: "PTR2E.FIELDS.pokemonForm.hint",
             }),
-            stats: new fields.SchemaField({
-                hp: new fields.NumberField({
-                    required: true,
-                    initial: 0,
-                    validate: (d) => (d as number) >= 0,
-                    label: `PTR2E.Attributes.hp.Label`,
-                }),
-                atk: new fields.NumberField({
-                    required: true,
-                    initial: 0,
-                    validate: (d) => (d as number) >= 0,
-                    label: `PTR2E.Attributes.atk.Label`,
-                }),
-                def: new fields.NumberField({
-                    required: true,
-                    initial: 0,
-                    validate: (d) => (d as number) >= 0,
-                    label: `PTR2E.Attributes.def.Label`,
-                }),
-                spa: new fields.NumberField({
-                    required: true,
-                    initial: 0,
-                    validate: (d) => (d as number) >= 0,
-                    label: `PTR2E.Attributes.spa.Label`,
-                }),
-                spd: new fields.NumberField({
-                    required: true,
-                    initial: 0,
-                    validate: (d) => (d as number) >= 0,
-                    label: `PTR2E.Attributes.spd.Label`,
-                }),
-                spe: new fields.NumberField({
-                    required: true,
-                    initial: 0,
-                    validate: (d) => (d as number) >= 0,
-                    label: `PTR2E.Attributes.spe.Label`,
-                }),
-            }, {label: "PTR2E.FIELDS.stats.label"}),
+            stats: new fields.SchemaField(
+                {
+                    hp: new fields.NumberField({
+                        required: true,
+                        initial: 0,
+                        validate: (d) => (d as number) >= 0,
+                        label: `PTR2E.Attributes.hp.Label`,
+                    }),
+                    atk: new fields.NumberField({
+                        required: true,
+                        initial: 0,
+                        validate: (d) => (d as number) >= 0,
+                        label: `PTR2E.Attributes.atk.Label`,
+                    }),
+                    def: new fields.NumberField({
+                        required: true,
+                        initial: 0,
+                        validate: (d) => (d as number) >= 0,
+                        label: `PTR2E.Attributes.def.Label`,
+                    }),
+                    spa: new fields.NumberField({
+                        required: true,
+                        initial: 0,
+                        validate: (d) => (d as number) >= 0,
+                        label: `PTR2E.Attributes.spa.Label`,
+                    }),
+                    spd: new fields.NumberField({
+                        required: true,
+                        initial: 0,
+                        validate: (d) => (d as number) >= 0,
+                        label: `PTR2E.Attributes.spd.Label`,
+                    }),
+                    spe: new fields.NumberField({
+                        required: true,
+                        initial: 0,
+                        validate: (d) => (d as number) >= 0,
+                        label: `PTR2E.Attributes.spe.Label`,
+                    }),
+                },
+                { label: "PTR2E.FIELDS.stats.label" }
+            ),
             types: new fields.SetField(
                 new SlugField({
                     required: true,
@@ -173,22 +180,38 @@ class SpeciesSystem extends SpeciesExtension {
                 }),
             }),
             movement: new fields.SchemaField({
-                primary: new fields.ArrayField(new fields.SchemaField({
-                    type: new SlugField({ required: true, blank: true, nullable: false, initial: ""}),
-                    value: new fields.NumberField({ required: true, min: 0 }),
-                }), {
-                    required: true,
-                    initial: [],
-                    label: "PTR2E.FIELDS.movement.primary.label",
-                }),
-                secondary: new fields.ArrayField(new fields.SchemaField({
-                    type: new SlugField({ required: true, blank: true, nullable: false, initial: ""}),
-                    value: new fields.NumberField({ required: true, min: 0 }),
-                }), {
-                    required: true,
-                    initial: [],
-                    label: "PTR2E.FIELDS.movement.secondary.label",
-                }),
+                primary: new fields.ArrayField(
+                    new fields.SchemaField({
+                        type: new SlugField({
+                            required: true,
+                            blank: true,
+                            nullable: false,
+                            initial: "",
+                        }),
+                        value: new fields.NumberField({ required: true, min: 0 }),
+                    }),
+                    {
+                        required: true,
+                        initial: [],
+                        label: "PTR2E.FIELDS.movement.primary.label",
+                    }
+                ),
+                secondary: new fields.ArrayField(
+                    new fields.SchemaField({
+                        type: new SlugField({
+                            required: true,
+                            blank: true,
+                            nullable: false,
+                            initial: "",
+                        }),
+                        value: new fields.NumberField({ required: true, min: 0 }),
+                    }),
+                    {
+                        required: true,
+                        initial: [],
+                        label: "PTR2E.FIELDS.movement.secondary.label",
+                    }
+                ),
             }),
             skills: new SkillsField({ required: true, initial: {} }),
             moves: new fields.SchemaField({
@@ -225,12 +248,17 @@ class SpeciesSystem extends SpeciesExtension {
                 label: "PTR2E.FIELDS.habitats.label",
                 hint: "PTR2E.FIELDS.habitats.hint",
             }),
-            evolutions: new fields.SchemaField({
-                full: new fields.EmbeddedDataField(EvolutionData, {
-                    required: true,
-                    nullable: true,
-                    initial: null,
-                }),
+            // evolutions: new fields.SchemaField({
+            //     full: new fields.EmbeddedDataField(EvolutionData, {
+            //         required: true,
+            //         nullable: true,
+            //         initial: null,
+            //     }),
+            // }),
+            evolutions: new fields.EmbeddedDataField(EvolutionData, {
+                required: true,
+                nullable: true,
+                initial: null,
             }),
         };
     }
@@ -273,18 +301,96 @@ class SkillsField<
 > {
     protected override _cleanType(value: unknown): unknown {
         if (typeof value !== "object") return super._cleanType(value);
-        
+
         return Object.fromEntries(
             Object.entries(value as Record<string, unknown>).sort(([a], [b]) => a.localeCompare(b))
-        )
+        );
     }
 }
 
-class EvolutionData extends foundry.abstract.DataModel {
+export class EvolutionData extends foundry.abstract.DataModel {
     static override defineSchema(): foundry.data.fields.DataSchema {
         const fields = foundry.data.fields;
+
+        const getTypeField = (initial: "level" | "item" | "move" | "gender") => ({
+            type: new fields.StringField({
+                required: true,
+                initial: initial as string,
+                choices: ["level", "item", "move", "gender"],
+            }),
+            operand: new fields.StringField({
+                required: true,
+                initial: "and",
+                choices: ["and", "or"],
+            }),
+        });
+
+        // Minimum level required to evolve
+        class LevelMethodField extends foundry.abstract.DataModel {
+            static override defineSchema(): DataSchema {
+                const fields = foundry.data.fields;
+                return {
+                    ...getTypeField("level"),
+                    level: new fields.NumberField({
+                        required: true,
+                        min: 1,
+                        max: 100,
+                        initial: 20,
+                    }),
+                };
+            }
+        }
+        // Must have a certain gender
+        class GenderMethodField extends foundry.abstract.DataModel {
+            static override defineSchema(): DataSchema {
+                const fields = foundry.data.fields;
+                return {
+                    ...getTypeField("gender"),
+                    gender: new fields.StringField({
+                        required: true,
+                        choices: ["male", "female", "genderless"],
+                    }),
+                };
+            }
+        }
+        // Must hold/use a certain item
+        class ItemMethodField extends foundry.abstract.DataModel {
+            static override defineSchema(): DataSchema {
+                const fields = foundry.data.fields;
+                return {
+                    ...getTypeField("item"),
+                    item: new fields.StringField({ required: true, initial: "" }),
+                    // If true the item must be held, otherwise it must be used.
+                    held: new fields.BooleanField({ required: true, initial: false }),
+                };
+            }
+        }
+        // Must know a certain move
+        class MoveMethodField extends foundry.abstract.DataModel {
+            static override defineSchema(): DataSchema {
+                const fields = foundry.data.fields;
+                return {
+                    ...getTypeField("move"),
+                    move: new fields.StringField({ required: true, initial: "" }),
+                };
+            }
+        }
+
         const getSchema = () => ({
             name: new SlugField({ required: true }),
+            uuid: new fields.DocumentUUIDField({ type: "Item", required: false }),
+            methods: new fields.ArrayField(
+                new fields.TypedSchemaField({
+                    level: LevelMethodField,
+                    item: ItemMethodField,
+                    move: MoveMethodField,
+                    gender: GenderMethodField,
+                }),
+                {
+                    required: true,
+                    initial: [],
+                }
+            ),
             details: new fields.SchemaField(
                 {
                     gender: new SlugField({
@@ -339,6 +445,32 @@ class EvolutionData extends foundry.abstract.DataModel {
     }
 }
 
+export interface EvolutionData {
+    name: string;
+    uuid: string;
+    methods: ({
+        operand: "and" | "or";
+    } & (
+        | {
+              type: "level";
+              level: number;
+          }
+        | {
+              type: "item";
+              item: string;
+          }
+        | {
+              type: "move";
+              move: string;
+          }
+        | {
+              type: "gender";
+              gender: "male" | "female" | "genderless";
+          }
+    ))[];
+    evolutions: EvolutionData[] | null;
+}
+
 interface SpeciesSystem {
     /**
      * The # number of the species in the Pokedex.
@@ -391,6 +523,8 @@ interface SpeciesSystem {
         secondary: { type: string; value: number }[];
     };
 
+    evolutions: EvolutionData;
+
     skills: Record<string, number>;
 }
 
@@ -430,9 +564,11 @@ interface SpeciesSystemSource extends Omit<ItemSystemSource, "container" | "acti
     };
 
     movement: {
-        primary: {type: string, value: number}[];
-        secondary:{type: string, value: number}[];
+        primary: { type: string; value: number }[];
+        secondary: { type: string; value: number }[];
     };
+
+    evolutions: EvolutionData;
 
     skills: Record<string, number>;
 }

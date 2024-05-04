@@ -218,6 +218,9 @@
                 "inventory": {
                     "label": "Inventory"
                 },
+                "skills": {
+                    "label": "Skills"
+                },
                 "clocks": {
                     "label": "Crafting & Clocks"
                 },
@@ -739,7 +742,56 @@
                     "label": "Details"
                 }
             },
-            "SendToChatLabel": "Send to Chat"
+            "SendToChatLabel": "Send to Chat",
+            "evolutions": {
+                "label": "Evolutions",
+                "missing": "No further evolutions, drop species here to add one",
+                "methods": {
+                    "label": "Evolution Methods",
+                    "missing": "No method specified, please add one.",
+                    "type": {
+                        "label": "Type",
+                        "hint": "The type of this method (Minimum Level, Item Held, Move Known, Gender)",
+                        "level": {
+                            "label": "Level",
+                            "hint": "The minimum level the creature must be to evolve into this form"
+                        },
+                        "item": {
+                            "label": "Item",
+                            "hint": "The item the creature must be holding to evolve into this form (the item will be consumed)"
+                        },
+                        "move": {
+                            "label": "Move",
+                            "hint": "The move the creature must know to evolve into this form"
+                        },
+                        "gender": {
+                            "label": "Gender",
+                            "hint": "The Gender the creature must be to evolve into this form",
+                            "male": "Male",
+                            "female": "Female",
+                            "genderless": "Genderless"
+                        }
+                    },
+                    "value": {
+                        "label": "Value",
+                        "hint": "The value of the method, hover over individual fields for more specific details."
+                    },
+                    "operand": {
+                        "label": "And / Or",
+                        "hint": "All requirements marked as 'And' must be met, while only one one of the requirements marked as 'Or' needs to be.",
+                        "and": "And",
+                        "or": "Or"
+                    }
+                },
+                "copyPasteTree": {
+                    "copy": "Evolution tree from species '{name}' copied",
+                    "paste": {
+                        "title": "Paste Evolution Tree?",
+                        "content": "Are you sure you wish to overwrite the Evolution Tree for '{thisName}'?<br><br>The copied version's 1st Stage is: '{copyName}'?<br><br><i><b>This action cannot be undone.</b></i>",
+                        "success": "Evolution tree from species '{name}' pasted"
+                    }
+                }
+            }
         },
         "PartySheet": {
             "Tabs": {

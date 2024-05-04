@@ -1,146 +1,191 @@
 {
-    "name": "cosmoem",
-    "img": "/systems/ptr2e/img/icons/species_icon.webp",
-    "type": "species",
-    "system": {
-        "types": [
-            "psychic"
-        ],
-        "stats": {
-            "hp": 43,
-            "atk": 29,
-            "def": 131,
-            "spa": 29,
-            "spd": 131,
-            "spe": 37
-        },
-        "moves": {
-            "levelUp": [
-                {
-                    "name": "teleport",
-                    "gen": "scarlet-violet",
-                    "level": 1
-                },
-                {
-                    "name": "cosmic-power",
-                    "gen": "scarlet-violet",
-                    "level": null
-                }
-            ],
-            "egg": [],
-            "tutor": [],
-            "machine": [
-                {
-                    "name": "cosmic-power",
-                    "gen": "sword-shield"
-                }
-            ]
-        },
-        "size": {
-            "height": 0.1,
-            "weight": 999.9,
-            "category": "diminutive",
-            "type": "quad"
-        },
-        "captureRate": 45,
-        "eggGroups": [
-            "no-eggs"
-        ],
-        "genderRatio": -1,
-        "evolutions": {
-            "full": {
-                "name": "cosmog",
-                "details": null,
-                "evolutions": [
-                    {
-                        "name": "cosmoem",
-                        "details": {
-                            "gender": null,
-                            "item": null,
-                            "knownMove": null,
-                            "level": 43
-                        },
-                        "evolutions": [
-                            {
-                                "name": "solgaleo",
-                                "details": {
-                                    "gender": null,
-                                    "item": null,
-                                    "knownMove": null,
-                                    "level": 53
-                                },
-                                "evolutions": []
-                            },
-                            {
-                                "name": "lunala",
-                                "details": {
-                                    "gender": null,
-                                    "item": null,
-                                    "knownMove": null,
-                                    "level": 53
-                                },
-                                "evolutions": []
-                            }
-                        ]
-                    }
-                ]
-            }
-        },
-        "number": 790,
-        "traits": [
-            "pokemon",
-            "legendary",
-            "underdog",
-            "hover",
-            "teleporter",
-            "dangerous-ultra-wormhole"
-        ],
-        "diet": [
-            "nullivore"
-        ],
-        "abilities": {
-            "starting": [
-                "beast-boost"
-            ],
-            "basic": [
-                "unaware",
-                "magic-bounce"
-            ],
-            "advanced": [
-                "sturdy",
-                "magic-guard"
-            ],
-            "master": [
-                "full-metal-body",
-                "shadow-shield"
-            ]
-        },
-        "movement": {
-            "primary": [
-                {
-                    "type": "flight",
-                    "value": 6
-                },
-                {
-                    "type": "teleport",
-                    "value": 6
-                }
-            ],
-            "secondary": []
-        },
-        "skills": {
-            "conversation": 40,
-            "listen": 40,
-            "navigate": 50,
-            "negotiation": 35,
-            "occult-legends": 40,
-            "occult-psychic": 50,
-            "occult-ultra-beast": 40,
-            "running": 30,
-            "spot": 40
-        },
-        "habitats": []
+  "name": "cosmoem",
+  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "type": "species",
+  "system": {
+    "types": [
+      "psychic"
+    ],
+    "stats": {
+      "hp": 43,
+      "atk": 29,
+      "def": 131,
+      "spa": 29,
+      "spd": 131,
+      "spe": 37
     },
-    "_id": "HOfS7vBFF6ME2LiA",
-    "effects": []
+    "moves": {
+      "levelUp": [
+        {
+          "name": "teleport",
+          "gen": "scarlet-violet",
+          "level": 1
+        },
+        {
+          "name": "cosmic-power",
+          "gen": "scarlet-violet",
+          "level": null
+        }
+      ],
+      "egg": [],
+      "tutor": [],
+      "machine": [
+        {
+          "name": "cosmic-power",
+          "gen": "sword-shield"
+        }
+      ]
+    },
+    "size": {
+      "height": 0.1,
+      "weight": 999.9,
+      "category": "diminutive",
+      "type": "quad"
+    },
+    "captureRate": 45,
+    "eggGroups": [
+      "no-eggs"
+    ],
+    "genderRatio": -1,
+    "evolutions": {
+      "name": "cosmog",
+      "details": null,
+      "evolutions": [
+        {
+          "name": "cosmoem",
+          "uuid": "Compendium.ptr2e.core-species.Item.HOfS7vBFF6ME2LiA",
+          "methods": [
+            {
+              "type": "level",
+              "level": 43,
+              "operand": "and"
+            }
+          ],
+          "evolutions": [
+            {
+              "name": "solgaleo",
+              "uuid": "Compendium.ptr2e.core-species.Item.KCaLP0tjvwK3Fqjs",
+              "methods": [
+                {
+                  "type": "level",
+                  "level": 53,
+                  "operand": "and"
+                }
+              ],
+              "evolutions": [],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
+              }
+            },
+            {
+              "name": "lunala",
+              "uuid": "Compendium.ptr2e.core-species.Item.hpsUcuamiebvodm7",
+              "methods": [
+                {
+                  "type": "level",
+                  "level": 53,
+                  "operand": "and"
+                }
+              ],
+              "evolutions": [],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
+              }
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          }
+        }
+      ],
+      "uuid": "Compendium.ptr2e.core-species.Item.HOfS7vBFF6ME2LiA"
+    },
+    "number": 790,
+    "traits": [
+      "pokemon",
+      "legendary",
+      "underdog",
+      "hover",
+      "teleporter",
+      "dangerous-ultra-wormhole"
+    ],
+    "diet": [
+      "nullivore"
+    ],
+    "abilities": {
+      "starting": [
+        "beast-boost"
+      ],
+      "basic": [
+        "unaware",
+        "magic-bounce"
+      ],
+      "advanced": [
+        "sturdy",
+        "magic-guard"
+      ],
+      "master": [
+        "full-metal-body",
+        "shadow-shield"
+      ]
+    },
+    "movement": {
+      "primary": [
+        {
+          "type": "flight",
+          "value": 6
+        },
+        {
+          "type": "teleport",
+          "value": 6
+        }
+      ],
+      "secondary": []
+    },
+    "skills": {
+      "conversation": 40,
+      "listen": 40,
+      "navigate": 50,
+      "negotiation": 35,
+      "occult-legends": 40,
+      "occult-psychic": 50,
+      "occult-ultra-beast": 40,
+      "running": 30,
+      "spot": 40
+    },
+    "habitats": [],
+    "slug": "cosmoem"
+  },
+  "_id": "HOfS7vBFF6ME2LiA",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-species.Item.HOfS7vBFF6ME2LiA"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.320",
+    "systemId": "ptr2e",
+    "systemVersion": "0.004",
+    "createdTime": null,
+    "modifiedTime": 1714663305677,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!HOfS7vBFF6ME2LiA"
 }
