@@ -1,681 +1,650 @@
 {
-  "name": "galarian-slowking",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 199,
-    "size": {
-      "category": "medium",
-      "type": "height",
-      "height": 1.8,
-      "weight": 79.5
+    "name": "galarian-slowking",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 199,
+        "size": {
+            "category": "medium",
+            "type": "height",
+            "height": 1.8,
+            "weight": 79.5
+        },
+        "diet": [
+            "herbivore"
+        ],
+        "movement": {
+            "primary": [
+                {
+                    "type": "swim",
+                    "value": 5
+                }
+            ],
+            "secondary": [
+                {
+                    "type": "overland",
+                    "value": 3
+                }
+            ]
+        },
+        "traits": [
+            "pokemon",
+            "bipedal",
+            "lumbering",
+            "natural-swimmer",
+            "bait",
+            "darkvision-15",
+            "split-evolution",
+            "aura-user",
+            "speech",
+            "gilled",
+            "telepath",
+            "venomous",
+            "galarian"
+        ],
+        "abilities": {
+            "starting": [
+                "curious-medicine",
+                "own-tempo"
+            ],
+            "basic": [
+                "amphibious",
+                "regenerator"
+            ],
+            "advanced": [
+                "regression-field",
+                "cloud-nine"
+            ],
+            "master": [
+                "sage-power",
+                "super-luck"
+            ]
+        },
+        "skills": {
+            "acrobatics": 20,
+            "aura-sense": 40,
+            "climb": 30,
+            "conversation": 50,
+            "fast-talk": 50,
+            "lift": 40,
+            "listen": 60,
+            "medicine": 50,
+            "natural-world": 50,
+            "negotiate": 45,
+            "running": 20,
+            "spot": 60,
+            "stealth": 40,
+            "survival": 45,
+            "swim": 60,
+            "teaching": 30
+        },
+        "stats": {
+            "hp": 95,
+            "atk": 65,
+            "def": 80,
+            "spa": 110,
+            "spd": 110,
+            "spe": 30
+        },
+        "types": [
+            "poison",
+            "psychic"
+        ],
+        "moves": {
+            "egg": [
+                {
+                    "name": "toxic",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "future-sight",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "chilly-reception",
+                    "gen": "scarlet-violet"
+                }
+            ],
+            "machine": [
+                {
+                    "name": "mega-punch",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "pay-day",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "fire-punch",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "ice-punch",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "thunder-punch",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "mega-kick",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "body-slam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "take-down",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "flamethrower",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "hydro-pump",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "surf",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "ice-beam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "blizzard",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "psybeam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "hyper-beam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "thunder-wave",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "earthquake",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "dig",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "toxic",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "psychic",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "light-screen",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "metronome",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "fire-blast",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "waterfall",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "swift",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "amnesia",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "rest",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "tri-attack",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "snore",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "curse",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "protect",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "scary-face",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "sludge-bomb",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "icy-wind",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "endure",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "attract",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "safeguard",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "iron-tail",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "rain-dance",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "sunny-day",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "psych-up",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "shadow-ball",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "future-sight",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "whirlpool",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "hail",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "facade",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "taunt",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "trick",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "brick-break",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "skill-swap",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "imprison",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "dive",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "weather-ball",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "muddy-water",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "iron-defense",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "mud-shot",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "calm-mind",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "water-pulse",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "brine",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "fling",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "toxic-spikes",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "poison-jab",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "power-gem",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "drain-punch",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "focus-blast",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "giga-impact",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "nasty-plot",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "avalanche",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "zen-headbutt",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "trick-room",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "gunk-shot",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "grass-knot",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "wonder-room",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "psyshock",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "venoshock",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "sludge-wave",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "low-sweep",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "acid-spray",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "foul-play",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "round",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "stored-power",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "scald",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "hex",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "bulldoze",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "razor-shell",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "snarl",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "venom-drench",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "psychic-terrain",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "stomping-tantrum",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "liquidation",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "expanding-force",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "tera-blast",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "chilling-water",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "psychic-noise",
+                    "gen": "scarlet-violet"
+                }
+            ],
+            "levelUp": [
+                {
+                    "name": "tackle",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "growl",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "acid",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "curse",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "swagger",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "power-gem",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "nasty-plot",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "yawn",
+                    "gen": "scarlet-violet",
+                    "level": 9
+                },
+                {
+                    "name": "confusion",
+                    "gen": "scarlet-violet",
+                    "level": 12
+                },
+                {
+                    "name": "disable",
+                    "gen": "scarlet-violet",
+                    "level": 15
+                },
+                {
+                    "name": "water-pulse",
+                    "gen": "scarlet-violet",
+                    "level": 18
+                },
+                {
+                    "name": "headbutt",
+                    "gen": "scarlet-violet",
+                    "level": 21
+                },
+                {
+                    "name": "zen-headbutt",
+                    "gen": "scarlet-violet",
+                    "level": 24
+                },
+                {
+                    "name": "amnesia",
+                    "gen": "scarlet-violet",
+                    "level": 27
+                },
+                {
+                    "name": "surf",
+                    "gen": "scarlet-violet",
+                    "level": 30
+                },
+                {
+                    "name": "slack-off",
+                    "gen": "scarlet-violet",
+                    "level": 33
+                },
+                {
+                    "name": "psychic",
+                    "gen": "scarlet-violet",
+                    "level": 36
+                },
+                {
+                    "name": "psych-up",
+                    "gen": "scarlet-violet",
+                    "level": 39
+                },
+                {
+                    "name": "rain-dance",
+                    "gen": "scarlet-violet",
+                    "level": 42
+                },
+                {
+                    "name": "heal-pulse",
+                    "gen": "scarlet-violet",
+                    "level": 45
+                },
+                {
+                    "name": "eerie-spell",
+                    "gen": "scarlet-violet",
+                    "level": null
+                }
+            ],
+            "tutor": [
+                {
+                    "name": "expanding-force",
+                    "gen": "sword-shield"
+                }
+            ]
+        },
+        "captureRate": 70,
+        "eggGroups": [
+            "monster",
+            "water1"
+        ],
+        "genderRatio": 4,
+        "evolutions": {
+            "name": "galarian-slowpoke",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "galarian-slowking",
+                    "uuid": "Compendium.ptr2e.core-species.Item.Cc6SxK2lZcQh4EFL",
+                    "methods": [
+                        {
+                            "type": "level",
+                            "level": 37,
+                            "operand": "or"
+                        },
+                        {
+                            "type": "item",
+                            "item": "galarica-wreath",
+                            "operand": "or",
+                            "held": false
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    },
+                    "evolutions": []
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.qIlDyPzO4Ui5vqNX",
+            "methods": []
+        },
+        "habitats": []
     },
-    "diet": [
-      "herbivore"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "swim",
-          "value": 5
-        }
-      ],
-      "secondary": [
-        {
-          "type": "overland",
-          "value": 3
-        }
-      ]
-    },
-    "traits": [
-      "pokemon",
-      "bipedal",
-      "lumbering",
-      "natural-swimmer",
-      "bait",
-      "darkvision-15",
-      "split-evolution",
-      "aura-user",
-      "speech",
-      "gilled",
-      "telepath",
-      "venomous",
-      "galarian"
-    ],
-    "abilities": {
-      "starting": [
-        "curious-medicine",
-        "own-tempo"
-      ],
-      "basic": [
-        "amphibious",
-        "regenerator"
-      ],
-      "advanced": [
-        "regression-field",
-        "cloud-nine"
-      ],
-      "master": [
-        "sage-power",
-        "super-luck"
-      ]
-    },
-    "skills": {
-      "acrobatics": 20,
-      "aura-sense": 40,
-      "climb": 30,
-      "conversation": 50,
-      "fast-talk": 50,
-      "lift": 40,
-      "listen": 60,
-      "medicine": 50,
-      "natural-world": 50,
-      "negotiate": 45,
-      "running": 20,
-      "spot": 60,
-      "stealth": 40,
-      "survival": 45,
-      "swim": 60,
-      "teaching": 30
-    },
-    "slug": "",
-    "stats": {
-      "hp": 95,
-      "atk": 65,
-      "def": 80,
-      "spa": 110,
-      "spd": 110,
-      "spe": 30
-    },
-    "types": [
-      "poison",
-      "psychic"
-    ],
-    "moves": {
-      "egg": [
-        {
-          "name": "toxic",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "future-sight",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "chilly-reception",
-          "gen": "scarlet-violet"
-        }
-      ],
-      "machine": [
-        {
-          "name": "mega-punch",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "pay-day",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "fire-punch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "ice-punch",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "thunder-punch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "mega-kick",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "body-slam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "take-down",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flamethrower",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hydro-pump",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "surf",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "ice-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "blizzard",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "psybeam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hyper-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "thunder-wave",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "earthquake",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "dig",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "toxic",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "psychic",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "light-screen",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "metronome",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "fire-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "waterfall",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "swift",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "amnesia",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "tri-attack",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "substitute",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "curse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "scary-face",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sludge-bomb",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "icy-wind",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "safeguard",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "iron-tail",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "psych-up",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "shadow-ball",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "future-sight",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "whirlpool",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hail",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "taunt",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "trick",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "brick-break",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "skill-swap",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "imprison",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "dive",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "weather-ball",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "muddy-water",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "iron-defense",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "mud-shot",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "calm-mind",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "water-pulse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "brine",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "fling",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "toxic-spikes",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "poison-jab",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "power-gem",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "drain-punch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "focus-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "giga-impact",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "nasty-plot",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "avalanche",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "zen-headbutt",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "trick-room",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "gunk-shot",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "grass-knot",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "wonder-room",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "psyshock",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "venoshock",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sludge-wave",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "low-sweep",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "acid-spray",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "foul-play",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "stored-power",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "scald",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hex",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "bulldoze",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "razor-shell",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "snarl",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "venom-drench",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "psychic-terrain",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "stomping-tantrum",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "liquidation",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "expanding-force",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "tera-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "chilling-water",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "psychic-noise",
-          "gen": "scarlet-violet"
-        }
-      ],
-      "levelUp": [
-        {
-          "name": "tackle",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "growl",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "acid",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "curse",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "swagger",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "power-gem",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "nasty-plot",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "yawn",
-          "gen": "scarlet-violet",
-          "level": 9
-        },
-        {
-          "name": "confusion",
-          "gen": "scarlet-violet",
-          "level": 12
-        },
-        {
-          "name": "disable",
-          "gen": "scarlet-violet",
-          "level": 15
-        },
-        {
-          "name": "water-pulse",
-          "gen": "scarlet-violet",
-          "level": 18
-        },
-        {
-          "name": "headbutt",
-          "gen": "scarlet-violet",
-          "level": 21
-        },
-        {
-          "name": "zen-headbutt",
-          "gen": "scarlet-violet",
-          "level": 24
-        },
-        {
-          "name": "amnesia",
-          "gen": "scarlet-violet",
-          "level": 27
-        },
-        {
-          "name": "surf",
-          "gen": "scarlet-violet",
-          "level": 30
-        },
-        {
-          "name": "slack-off",
-          "gen": "scarlet-violet",
-          "level": 33
-        },
-        {
-          "name": "psychic",
-          "gen": "scarlet-violet",
-          "level": 36
-        },
-        {
-          "name": "psych-up",
-          "gen": "scarlet-violet",
-          "level": 39
-        },
-        {
-          "name": "rain-dance",
-          "gen": "scarlet-violet",
-          "level": 42
-        },
-        {
-          "name": "heal-pulse",
-          "gen": "scarlet-violet",
-          "level": 45
-        },
-        {
-          "name": "eerie-spell",
-          "gen": "scarlet-violet"
-        }
-      ],
-      "tutor": [
-        {
-          "name": "expanding-force",
-          "gen": "sword-shield"
-        }
-      ]
-    },
-    "captureRate": 70,
-    "eggGroups": [
-      "monster",
-      "water1"
-    ],
-    "genderRatio": 4,
-    "evolutions": {
-      "name": "slowpoke",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "slowbro",
-          "uuid": "Compendium.ptr2e.core-species.Item.V0JLTpFpHzqHiom5",
-          "methods": [
-            {
-              "type": "item",
-              "item": "galarica-cuff",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
-        {
-          "name": "slowking",
-          "uuid": "Compendium.ptr2e.core-species.Item.4kbbBdYGuE2kgBMQ",
-          "methods": [
-            {
-              "type": "item",
-              "item": "galarica-wreath",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.Cc6SxK2lZcQh4EFL"
-    }
-  },
-  "_id": "Cc6SxK2lZcQh4EFL",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {},
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.Cc6SxK2lZcQh4EFL"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.Cc6SxK2lZcQh4EFL",
-    "duplicateSource": null
-  },
-  "_key": "!items!Cc6SxK2lZcQh4EFL"
+    "_id": "Cc6SxK2lZcQh4EFL",
+    "effects": []
 }
