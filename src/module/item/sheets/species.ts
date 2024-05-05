@@ -33,6 +33,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
             },
             evolution: {
                 template: "systems/ptr2e/templates/items/species/species-evolution.hbs",
+                scrollable: [".scroll"]
             },
         }, { inplace: false }),
         ["actions", "effects"]
