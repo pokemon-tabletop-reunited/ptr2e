@@ -31,6 +31,9 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
             details: {
                 template: SpeciesSheet.detailsTemplate,
             },
+            evolution: {
+                template: "systems/ptr2e/templates/items/species/species-evolution.hbs",
+            },
         }, { inplace: false }),
         ["actions", "effects"]
     );
@@ -48,30 +51,36 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
             icon: "fa-solid fa-cogs",
             label: "PTR2E.SpeciesSheet.Tabs.details.label",
         },
+        evolution: {
+            id: "evolution",
+            group: "sheet",
+            icon: "fa-solid fa-star",
+            label: "PTR2E.SpeciesSheet.Tabs.evolution.label",
+        },
     };
 
-    override changeTab(
-        tab: string,
-        group: string,
-        {
-            event,
-            navElement,
-            force = false,
-            updatePosition = true,
-        }: { event?: Event; navElement?: HTMLElement; force: boolean; updatePosition: boolean } = {
-            force: false,
-            updatePosition: true,
-        }
-    ): void {
-        super.changeTab(tab, group, { event, navElement, force, updatePosition });
-        if (!updatePosition) return;
+    // override changeTab(
+    //     tab: string,
+    //     group: string,
+    //     {
+    //         event,
+    //         navElement,
+    //         force = false,
+    //         updatePosition = true,
+    //     }: { event?: Event; navElement?: HTMLElement; force: boolean; updatePosition: boolean } = {
+    //         force: false,
+    //         updatePosition: true,
+    //     }
+    // ): void {
+    //     super.changeTab(tab, group, { event, navElement, force, updatePosition });
+    //     if (!updatePosition) return;
 
-        if (tab === "details") {
-            this.setPosition({ height: 1000, width: 870 });
-        } else {
-            this.setPosition({ height: 500, width: 550 });
-        }
-    }
+    //     if (tab === "details") {
+    //         this.setPosition({ height: 1000, width: 870 });
+    //     } else {
+    //         this.setPosition({ height: 500, width: 550 });
+    //     }
+    // }
 
     override async _prepareContext() {
         return {

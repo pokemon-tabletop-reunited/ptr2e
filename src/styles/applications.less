@@ -844,6 +844,13 @@ body {
         .window-content {
             section.tab {
                 &[data-tab=details] {
+                    div.scroll fieldset {
+                        flex: 1 0 48%;
+                        min-width: 300px;
+                    }
+                }
+
+                &[data-tab=details], &[data-tab=evolution] {
                     padding: 0;
 
                     div.scroll {
@@ -863,7 +870,6 @@ body {
                         }
 
                         fieldset {
-                            flex: 0 0 48%;
 
                             &.moves {
                                 flex: 0 0 100%;

@@ -951,10 +951,16 @@ body.theme-dark .sheet a.content-link {
   flex: 0 0 30%;
   margin: 0;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset {
+  flex: 1 0 48%;
+  min-width: 300px;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details],
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] {
   padding: 0;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll {
   padding: 1rem;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -965,40 +971,49 @@ body.theme-dark .sheet a.content-link {
   justify-content: space-between;
   gap: 0.5rem;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll h5 {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll h5,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll h5 {
   margin: 0;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset {
-  flex: 0 0 48%;
-}
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.moves {
   flex: 0 0 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves fieldset {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves fieldset,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.moves fieldset {
   flex: 0 0 48%;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions {
   flex: 0 0 100%;
   background: var(--appv2-background);
 }
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos,
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos {
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evos,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions.evos {
   position: relative;
 }
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos.dragover,
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover {
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evos.dragover,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions.evos.dragover {
   box-shadow: inset 0 0 30px var(--border-theme-color);
 }
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos.dragover > *,
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover > * {
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evos.dragover > *,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover > *,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions.evos.dragover > * {
   filter: opacity(0.5) blur(2px);
 }
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos.dragover > .dragover-info,
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover > .dragover-info {
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evos.dragover > .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover > .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions.evos.dragover > .dragover-info {
   display: flex;
   filter: unset;
   font-size: 1rem;
@@ -1010,7 +1025,9 @@ body.theme-dark .sheet a.content-link {
   pointer-events: none;
 }
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos.dragover > .dragover-info p,
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover > .dragover-info p {
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evos.dragover > .dragover-info p,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover > .dragover-info p,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions.evos.dragover > .dragover-info p {
   background: #ebc99a;
   padding: 0.5rem;
   width: fit-content;
@@ -1019,7 +1036,9 @@ body.theme-dark .sheet a.content-link {
   font-style: italic;
 }
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos .dragover-info,
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos .dragover-info {
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evos .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions.evos .dragover-info {
   position: absolute;
   width: 100%;
   height: 100%;
@@ -1027,12 +1046,14 @@ body.theme-dark .sheet a.content-link {
   text-align: center;
   display: none;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution header {
   font-size: 1.25rem;
   font-weight: bold;
   text-transform: capitalize;
@@ -1041,19 +1062,23 @@ body.theme-dark .sheet a.content-link {
   padding: 0 8px;
   display: flex;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .icon {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .icon,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution header .icon {
   flex: 0 0 var(--img-size);
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .icon img {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .icon img,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution header .icon img {
   height: var(--img-size);
   width: var(--img-size);
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .name {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .name,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution header .name {
   padding-left: 0.5rem;
   align-content: center;
   flex: 1;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .item-controls {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution header .item-controls {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -1062,16 +1087,19 @@ body.theme-dark .sheet a.content-link {
   margin-right: 10px;
   gap: 5px;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header span {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header span,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution header span {
   font-size: 0.75rem;
   color: var(--hint-text-color);
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods .method {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -1079,51 +1107,62 @@ body.theme-dark .sheet a.content-link {
   justify-content: space-between;
   text-align: center;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method.header {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method.header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods .method.header {
   font-weight: bold;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method select {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method select,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods .method select {
   text-align: center;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method .form-group {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method .form-group,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods .method .form-group {
   flex: 0 0 calc(31% - 0.25rem);
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method .item-controls {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods .method .item-controls {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
   flex: 0 0 20px;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods small {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods small,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods small {
   align-self: center;
   align-content: center;
   text-align: center;
   color: var(--hint-text-color);
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution small {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution small,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution small {
   color: lightgray;
   font-style: italic;
   text-align: center;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution span.evolutions-header {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution span.evolutions-header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution span.evolutions-header {
   font-size: 1.25rem;
   font-weight: bold;
   text-transform: capitalize;
   padding-bottom: 0.25rem;
   margin: 0 0.5rem;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution .hidden {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution .hidden,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution .hidden {
   display: none;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset {
   background: var(--appv2-background);
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset legend {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset legend,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset legend {
   font-weight: bold;
   text-transform: capitalize;
 }
-.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution.no-shadow {
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution.no-shadow,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution.no-shadow {
   box-shadow: unset;
 }
 .application.sheet#traits-settings {
