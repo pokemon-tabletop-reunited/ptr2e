@@ -1,430 +1,412 @@
 {
-  "name": "galarian-corsola",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 222,
-    "size": {
-      "category": "tiny",
-      "type": "height",
-      "height": 0.6,
-      "weight": 0.5
+    "name": "galarian-corsola",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 222,
+        "size": {
+            "category": "tiny",
+            "type": "height",
+            "height": 0.6,
+            "weight": 0.5
+        },
+        "diet": [
+            "auravore"
+        ],
+        "movement": {
+            "primary": [
+                {
+                    "type": "swim",
+                    "value": 3
+                },
+                {
+                    "type": "overland",
+                    "value": 3
+                }
+            ],
+            "secondary": []
+        },
+        "traits": [
+            "pokemon",
+            "quadrupedal",
+            "lumbering",
+            "wavesense-15",
+            "pack-mon",
+            "breathless",
+            "galarian",
+            "underdog"
+        ],
+        "abilities": {
+            "starting": [
+                "haunt",
+                "weak-armor"
+            ],
+            "basic": [
+                "cursed-body"
+            ],
+            "advanced": [
+                "graveyard",
+                "scavenger"
+            ],
+            "master": [
+                "heliophobia",
+                "haunting"
+            ]
+        },
+        "skills": {
+            "climb": 30,
+            "conversation": 20,
+            "intimidate": 30,
+            "leadership": 15,
+            "lift": 25,
+            "listen": 30,
+            "survival": 25,
+            "swim": 30
+        },
+        "stats": {
+            "hp": 60,
+            "atk": 55,
+            "def": 100,
+            "spa": 65,
+            "spd": 100,
+            "spe": 30
+        },
+        "types": [
+            "ghost"
+        ],
+        "moves": {
+            "egg": [
+                {
+                    "name": "confuse-ray",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "haze",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "destiny-bond",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "nature-power",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "water-pulse",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "head-smash",
+                    "gen": "sword-shield"
+                }
+            ],
+            "tutor": [
+                {
+                    "name": "meteor-beam",
+                    "gen": "sword-shield"
+                }
+            ],
+            "machine": [
+                {
+                    "name": "body-slam",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "hydro-pump",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "surf",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "ice-beam",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "blizzard",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "earthquake",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "dig",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "psychic",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "screech",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "light-screen",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "reflect",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "self-destruct",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "amnesia",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "rest",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "rock-slide",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "snore",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "protect",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "icy-wind",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sandstorm",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "giga-drain",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "endure",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "attract",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "safeguard",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "rain-dance",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sunny-day",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "shadow-ball",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "whirlpool",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "hail",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "will-o-wisp",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "facade",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "rock-tomb",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "icicle-spear",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "iron-defense",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "calm-mind",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "rock-blast",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "brine",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "power-gem",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "earth-power",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "stone-edge",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "stealth-rock",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "round",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "scald",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "hex",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "bulldoze",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "throat-chop",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "stomping-tantrum",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "liquidation",
+                    "gen": "sword-shield"
+                }
+            ],
+            "levelUp": [
+                {
+                    "name": "tackle",
+                    "gen": "sword-shield",
+                    "level": 1
+                },
+                {
+                    "name": "harden",
+                    "gen": "sword-shield",
+                    "level": 1
+                },
+                {
+                    "name": "astonish",
+                    "gen": "sword-shield",
+                    "level": 5
+                },
+                {
+                    "name": "disable",
+                    "gen": "sword-shield",
+                    "level": 10
+                },
+                {
+                    "name": "spite",
+                    "gen": "sword-shield",
+                    "level": 15
+                },
+                {
+                    "name": "ancient-power",
+                    "gen": "sword-shield",
+                    "level": 20
+                },
+                {
+                    "name": "hex",
+                    "gen": "sword-shield",
+                    "level": 25
+                },
+                {
+                    "name": "curse",
+                    "gen": "sword-shield",
+                    "level": 30
+                },
+                {
+                    "name": "strength-sap",
+                    "gen": "sword-shield",
+                    "level": 35
+                },
+                {
+                    "name": "power-gem",
+                    "gen": "sword-shield",
+                    "level": 40
+                },
+                {
+                    "name": "night-shade",
+                    "gen": "sword-shield",
+                    "level": 45
+                },
+                {
+                    "name": "grudge",
+                    "gen": "sword-shield",
+                    "level": 50
+                },
+                {
+                    "name": "mirror-coat",
+                    "gen": "sword-shield",
+                    "level": 55
+                }
+            ]
+        },
+        "captureRate": 60,
+        "eggGroups": [
+            "water1",
+            "water3"
+        ],
+        "genderRatio": 6,
+        "evolutions": {
+            "name": "galarian-corsola",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "cursola",
+                    "uuid": "Compendium.ptr2e.core-species.Item.uiYdrHTc7h1CP8Rj",
+                    "methods": [
+                        {
+                            "type": "level",
+                            "level": 38,
+                            "operand": "and"
+                        }
+                    ],
+                    "evolutions": [],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    }
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.hPRFW1qly3EGagCw",
+            "methods": []
+        },
+        "habitats": []
     },
-    "diet": [
-      "auravore"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "swim",
-          "value": 3
-        },
-        {
-          "type": "overland",
-          "value": 3
-        }
-      ],
-      "secondary": []
-    },
-    "traits": [
-      "pokemon",
-      "quadrupedal",
-      "lumbering",
-      "wavesense-15",
-      "pack-mon",
-      "breathless",
-      "galarian",
-      "underdog"
-    ],
-    "abilities": {
-      "starting": [
-        "haunt",
-        "weak-armor"
-      ],
-      "basic": [
-        "cursed-body"
-      ],
-      "advanced": [
-        "graveyard",
-        "scavenger"
-      ],
-      "master": [
-        "heliophobia",
-        "haunting"
-      ]
-    },
-    "skills": {
-      "climb": 30,
-      "conversation": 20,
-      "intimidate": 30,
-      "leadership": 15,
-      "lift": 25,
-      "listen": 30,
-      "survival": 25,
-      "swim": 30
-    },
-    "slug": "",
-    "stats": {
-      "hp": 60,
-      "atk": 55,
-      "def": 100,
-      "spa": 65,
-      "spd": 100,
-      "spe": 30
-    },
-    "types": [
-      "ghost"
-    ],
-    "moves": {
-      "egg": [
-        {
-          "name": "confuse-ray",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "haze",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "destiny-bond",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "nature-power",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "water-pulse",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "head-smash",
-          "gen": "sword-shield"
-        }
-      ],
-      "tutor": [
-        {
-          "name": "meteor-beam",
-          "gen": "sword-shield"
-        }
-      ],
-      "machine": [
-        {
-          "name": "body-slam",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hydro-pump",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "surf",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "ice-beam",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "blizzard",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "earthquake",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "dig",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "psychic",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "screech",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "light-screen",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "reflect",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "self-destruct",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "amnesia",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rest",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rock-slide",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "substitute",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "protect",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "icy-wind",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sandstorm",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "giga-drain",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "endure",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "safeguard",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "shadow-ball",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "whirlpool",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hail",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "will-o-wisp",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "facade",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rock-tomb",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "icicle-spear",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "iron-defense",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "calm-mind",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rock-blast",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "brine",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "power-gem",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "earth-power",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "stone-edge",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "stealth-rock",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "scald",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hex",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "bulldoze",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "throat-chop",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "stomping-tantrum",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "liquidation",
-          "gen": "sword-shield"
-        }
-      ],
-      "levelUp": [
-        {
-          "name": "tackle",
-          "gen": "sword-shield",
-          "level": 1
-        },
-        {
-          "name": "harden",
-          "gen": "sword-shield",
-          "level": 1
-        },
-        {
-          "name": "astonish",
-          "gen": "sword-shield",
-          "level": 5
-        },
-        {
-          "name": "disable",
-          "gen": "sword-shield",
-          "level": 10
-        },
-        {
-          "name": "spite",
-          "gen": "sword-shield",
-          "level": 15
-        },
-        {
-          "name": "ancient-power",
-          "gen": "sword-shield",
-          "level": 20
-        },
-        {
-          "name": "hex",
-          "gen": "sword-shield",
-          "level": 25
-        },
-        {
-          "name": "curse",
-          "gen": "sword-shield",
-          "level": 30
-        },
-        {
-          "name": "strength-sap",
-          "gen": "sword-shield",
-          "level": 35
-        },
-        {
-          "name": "power-gem",
-          "gen": "sword-shield",
-          "level": 40
-        },
-        {
-          "name": "night-shade",
-          "gen": "sword-shield",
-          "level": 45
-        },
-        {
-          "name": "grudge",
-          "gen": "sword-shield",
-          "level": 50
-        },
-        {
-          "name": "mirror-coat",
-          "gen": "sword-shield",
-          "level": 55
-        }
-      ]
-    },
-    "captureRate": 60,
-    "eggGroups": [
-      "water1",
-      "water3"
-    ],
-    "genderRatio": 6,
-    "evolutions": {
-      "name": "corsola",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "cursola",
-          "uuid": "Compendium.ptr2e.core-species.Item.uiYdrHTc7h1CP8Rj",
-          "methods": [
-            {
-              "type": "level",
-              "level": 38,
-              "operand": "and"
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.hPRFW1qly3EGagCw"
-    }
-  },
-  "_id": "hPRFW1qly3EGagCw",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {},
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.hPRFW1qly3EGagCw"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.hPRFW1qly3EGagCw",
-    "duplicateSource": null
-  },
-  "_key": "!items!hPRFW1qly3EGagCw"
+    "_id": "hPRFW1qly3EGagCw",
+    "effects": []
 }
