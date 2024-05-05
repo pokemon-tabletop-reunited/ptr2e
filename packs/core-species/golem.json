@@ -1,775 +1,769 @@
 {
-  "name": "golem",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 76,
-    "size": {
-      "category": "medium",
-      "type": "height",
-      "height": 1.4,
-      "weight": 300
+    "name": "golem",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 76,
+        "size": {
+            "category": "medium",
+            "type": "height",
+            "height": 1.4,
+            "weight": 300
+        },
+        "diet": [
+            "silicavore"
+        ],
+        "movement": {
+            "primary": [
+                {
+                    "type": "overland",
+                    "value": 5
+                }
+            ],
+            "secondary": []
+        },
+        "traits": [
+            "pokemon",
+            "breathless",
+            "thermal-camoflauge",
+            "darkvision-15",
+            "volatile-bomb"
+        ],
+        "abilities": {
+            "starting": [
+                "rock-head",
+                "sturdy"
+            ],
+            "basic": [
+                "sand-veil",
+                "lets-roll"
+            ],
+            "advanced": [
+                "reckless",
+                "sand-rush"
+            ],
+            "master": [
+                "aftermath",
+                "solid-rock"
+            ]
+        },
+        "skills": {
+            "acrobatics": 40,
+            "climb": 50,
+            "conversation": 35,
+            "intimidate": 70,
+            "lift": 70,
+            "listen": 50,
+            "negotiation": 35,
+            "running": 70,
+            "spot": 50,
+            "stealth": 50
+        },
+        "stats": {
+            "hp": 80,
+            "atk": 120,
+            "def": 130,
+            "spa": 55,
+            "spd": 65,
+            "spe": 45
+        },
+        "types": [
+            "ground",
+            "rock"
+        ],
+        "moves": {
+            "egg": [
+                {
+                    "name": "mega-punch",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "curse",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "flail",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "dynamic-punch",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "block",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "hammer-arm",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "wide-guard",
+                    "gen": "scarlet-violet"
+                }
+            ],
+            "tutor": [
+                {
+                    "name": "mega-punch",
+                    "gen": "firered-leafgreen"
+                },
+                {
+                    "name": "fire-punch",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "thunder-punch",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "mega-kick",
+                    "gen": "firered-leafgreen"
+                },
+                {
+                    "name": "headbutt",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "body-slam",
+                    "gen": "xd"
+                },
+                {
+                    "name": "double-edge",
+                    "gen": "xd"
+                },
+                {
+                    "name": "flamethrower",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "counter",
+                    "gen": "firered-leafgreen"
+                },
+                {
+                    "name": "seismic-toss",
+                    "gen": "xd"
+                },
+                {
+                    "name": "mimic",
+                    "gen": "xd"
+                },
+                {
+                    "name": "defense-curl",
+                    "gen": "emerald"
+                },
+                {
+                    "name": "metronome",
+                    "gen": "firered-leafgreen"
+                },
+                {
+                    "name": "self-destruct",
+                    "gen": "xd"
+                },
+                {
+                    "name": "explosion",
+                    "gen": "firered-leafgreen"
+                },
+                {
+                    "name": "rock-slide",
+                    "gen": "firered-leafgreen"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "xd"
+                },
+                {
+                    "name": "snore",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "mud-slap",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "endure",
+                    "gen": "emerald"
+                },
+                {
+                    "name": "rollout",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "xd"
+                },
+                {
+                    "name": "fury-cutter",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "black-2-white-2"
+                },
+                {
+                    "name": "dynamic-punch",
+                    "gen": "emerald"
+                },
+                {
+                    "name": "ancient-power",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "focus-punch",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "superpower",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "iron-defense",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "block",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "sucker-punch",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "earth-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "iron-head",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "stealth-rock",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "stomping-tantrum",
+                    "gen": "ultra-sun-ultra-moon"
+                }
+            ],
+            "machine": [
+                {
+                    "name": "mega-punch",
+                    "gen": "yellow"
+                },
+                {
+                    "name": "fire-punch",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "thunder-punch",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "mega-kick",
+                    "gen": "yellow"
+                },
+                {
+                    "name": "headbutt",
+                    "gen": "lets-go-pikachu-lets-go-eevee"
+                },
+                {
+                    "name": "body-slam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "take-down",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "double-edge",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "roar",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "flamethrower",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "hyper-beam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "submission",
+                    "gen": "yellow"
+                },
+                {
+                    "name": "counter",
+                    "gen": "yellow"
+                },
+                {
+                    "name": "seismic-toss",
+                    "gen": "lets-go-pikachu-lets-go-eevee"
+                },
+                {
+                    "name": "strength",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "earthquake",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "fissure",
+                    "gen": "yellow"
+                },
+                {
+                    "name": "dig",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "toxic",
+                    "gen": "lets-go-pikachu-lets-go-eevee"
+                },
+                {
+                    "name": "rage",
+                    "gen": "yellow"
+                },
+                {
+                    "name": "mimic",
+                    "gen": "yellow"
+                },
+                {
+                    "name": "double-team",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "defense-curl",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "bide",
+                    "gen": "yellow"
+                },
+                {
+                    "name": "metronome",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "self-destruct",
+                    "gen": "lets-go-pikachu-lets-go-eevee"
+                },
+                {
+                    "name": "fire-blast",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "explosion",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "rest",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "rock-slide",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "snore",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "curse",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "protect",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "scary-face",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "mud-slap",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "sandstorm",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "endure",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "rollout",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "fury-cutter",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "attract",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "return",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "frustration",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "dynamic-punch",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "hidden-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "sunny-day",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "rock-smash",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "facade",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "focus-punch",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "nature-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "superpower",
+                    "gen": "lets-go-pikachu-lets-go-eevee"
+                },
+                {
+                    "name": "brick-break",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "secret-power",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "rock-tomb",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "iron-defense",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "mud-shot",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "rock-blast",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "gyro-ball",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "natural-gift",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "fling",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "rock-polish",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "focus-blast",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "earth-power",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "giga-impact",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "rock-climb",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "iron-head",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "stone-edge",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "captivate",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "stealth-rock",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "smack-down",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "heavy-slam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "round",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "incinerate",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "bulldoze",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "confide",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "power-up-punch",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "high-horsepower",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "stomping-tantrum",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "body-press",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "tera-blast",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "hard-press",
+                    "gen": "scarlet-violet"
+                }
+            ],
+            "levelUp": [
+                {
+                    "name": "mega-punch",
+                    "gen": "lets-go-pikachu-lets-go-eevee",
+                    "level": 1
+                },
+                {
+                    "name": "tackle",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "defense-curl",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "rock-polish",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "heavy-slam",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "sand-attack",
+                    "gen": "lets-go-pikachu-lets-go-eevee",
+                    "level": 3
+                },
+                {
+                    "name": "sandstorm",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 4
+                },
+                {
+                    "name": "mud-sport",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 4
+                },
+                {
+                    "name": "bide",
+                    "gen": "lets-go-pikachu-lets-go-eevee",
+                    "level": 6
+                },
+                {
+                    "name": "rollout",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 10
+                },
+                {
+                    "name": "steamroller",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 10
+                },
+                {
+                    "name": "harden",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 12
+                },
+                {
+                    "name": "magnitude",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 12
+                },
+                {
+                    "name": "take-down",
+                    "gen": "lets-go-pikachu-lets-go-eevee",
+                    "level": 15
+                },
+                {
+                    "name": "rock-throw",
+                    "gen": "scarlet-violet",
+                    "level": 16
+                },
+                {
+                    "name": "smack-down",
+                    "gen": "scarlet-violet",
+                    "level": 18
+                },
+                {
+                    "name": "bulldoze",
+                    "gen": "scarlet-violet",
+                    "level": 22
+                },
+                {
+                    "name": "rock-slide",
+                    "gen": "lets-go-pikachu-lets-go-eevee",
+                    "level": 23
+                },
+                {
+                    "name": "self-destruct",
+                    "gen": "scarlet-violet",
+                    "level": 24
+                },
+                {
+                    "name": "stealth-rock",
+                    "gen": "scarlet-violet",
+                    "level": 30
+                },
+                {
+                    "name": "rock-blast",
+                    "gen": "scarlet-violet",
+                    "level": 34
+                },
+                {
+                    "name": "earthquake",
+                    "gen": "scarlet-violet",
+                    "level": 40
+                },
+                {
+                    "name": "explosion",
+                    "gen": "scarlet-violet",
+                    "level": 44
+                },
+                {
+                    "name": "double-edge",
+                    "gen": "scarlet-violet",
+                    "level": 50
+                },
+                {
+                    "name": "stone-edge",
+                    "gen": "scarlet-violet",
+                    "level": 54
+                }
+            ]
+        },
+        "captureRate": 45,
+        "eggGroups": [
+            "mineral"
+        ],
+        "genderRatio": 4,
+        "evolutions": {
+            "name": "geodude",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "graveler",
+                    "uuid": "Compendium.ptr2e.core-species.Item.Qppi5EojZQkw0JNZ",
+                    "methods": [
+                        {
+                            "type": "level",
+                            "level": 25,
+                            "operand": "and"
+                        }
+                    ],
+                    "evolutions": [
+                        {
+                            "name": "golem",
+                            "uuid": "Compendium.ptr2e.core-species.Item.j1zD0kq6aUr2kYxc",
+                            "methods": [
+                                {
+                                    "type": "level",
+                                    "level": 38,
+                                    "operand": "or"
+                                },
+                                {
+                                    "type": "item",
+                                    "item": "linking-chord",
+                                    "operand": "or",
+                                    "held": false
+                                }
+                            ],
+                            "details": {
+                                "gender": null,
+                                "item": null,
+                                "level": null,
+                                "knownMove": null
+                            },
+                            "evolutions": []
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    }
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.j1zD0kq6aUr2kYxc",
+            "methods": []
+        },
+        "habitats": []
     },
-    "diet": [
-      "silicavore"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 5
-        }
-      ],
-      "secondary": []
-    },
-    "traits": [
-      "pokemon",
-      "breathless",
-      "thermal-camoflauge",
-      "darkvision-15",
-      "volatile-bomb"
-    ],
-    "abilities": {
-      "starting": [
-        "rock-head",
-        "sturdy"
-      ],
-      "basic": [
-        "sand-veil",
-        "lets-roll"
-      ],
-      "advanced": [
-        "reckless",
-        "sand-rush"
-      ],
-      "master": [
-        "aftermath",
-        "solid-rock"
-      ]
-    },
-    "skills": {
-      "acrobatics": 40,
-      "climb": 50,
-      "conversation": 35,
-      "intimidate": 70,
-      "lift": 70,
-      "listen": 50,
-      "negotiation": 35,
-      "running": 70,
-      "spot": 50,
-      "stealth": 50
-    },
-    "slug": "",
-    "stats": {
-      "hp": 80,
-      "atk": 120,
-      "def": 130,
-      "spa": 55,
-      "spd": 65,
-      "spe": 45
-    },
-    "types": [
-      "rock",
-      "ground"
-    ],
-    "moves": {
-      "egg": [
-        {
-          "name": "mega-punch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "curse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flail",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "dynamic-punch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "block",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hammer-arm",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "wide-guard",
-          "gen": "scarlet-violet"
-        }
-      ],
-      "tutor": [
-        {
-          "name": "mega-punch",
-          "gen": "firered-leafgreen"
-        },
-        {
-          "name": "fire-punch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "thunder-punch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "mega-kick",
-          "gen": "firered-leafgreen"
-        },
-        {
-          "name": "headbutt",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "body-slam",
-          "gen": "xd"
-        },
-        {
-          "name": "double-edge",
-          "gen": "xd"
-        },
-        {
-          "name": "flamethrower",
-          "gen": "crystal"
-        },
-        {
-          "name": "counter",
-          "gen": "firered-leafgreen"
-        },
-        {
-          "name": "seismic-toss",
-          "gen": "xd"
-        },
-        {
-          "name": "mimic",
-          "gen": "xd"
-        },
-        {
-          "name": "defense-curl",
-          "gen": "emerald"
-        },
-        {
-          "name": "metronome",
-          "gen": "firered-leafgreen"
-        },
-        {
-          "name": "self-destruct",
-          "gen": "xd"
-        },
-        {
-          "name": "explosion",
-          "gen": "firered-leafgreen"
-        },
-        {
-          "name": "rock-slide",
-          "gen": "firered-leafgreen"
-        },
-        {
-          "name": "substitute",
-          "gen": "xd"
-        },
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "mud-slap",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "endure",
-          "gen": "emerald"
-        },
-        {
-          "name": "rollout",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "swagger",
-          "gen": "xd"
-        },
-        {
-          "name": "fury-cutter",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "dynamic-punch",
-          "gen": "emerald"
-        },
-        {
-          "name": "ancient-power",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "focus-punch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "superpower",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "iron-defense",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "block",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sucker-punch",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "earth-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "iron-head",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "stealth-rock",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "stomping-tantrum",
-          "gen": "ultra-sun-ultra-moon"
-        }
-      ],
-      "machine": [
-        {
-          "name": "mega-punch",
-          "gen": "yellow"
-        },
-        {
-          "name": "fire-punch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "thunder-punch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "mega-kick",
-          "gen": "yellow"
-        },
-        {
-          "name": "headbutt",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "body-slam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "take-down",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "double-edge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "roar",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flamethrower",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hyper-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "submission",
-          "gen": "yellow"
-        },
-        {
-          "name": "counter",
-          "gen": "yellow"
-        },
-        {
-          "name": "seismic-toss",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "strength",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "earthquake",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "fissure",
-          "gen": "yellow"
-        },
-        {
-          "name": "dig",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "toxic",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "rage",
-          "gen": "yellow"
-        },
-        {
-          "name": "mimic",
-          "gen": "yellow"
-        },
-        {
-          "name": "double-team",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "defense-curl",
-          "gen": "crystal"
-        },
-        {
-          "name": "bide",
-          "gen": "yellow"
-        },
-        {
-          "name": "metronome",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "self-destruct",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "fire-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "explosion",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-slide",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "substitute",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "snore",
-          "gen": "crystal"
-        },
-        {
-          "name": "curse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "scary-face",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "mud-slap",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sandstorm",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rollout",
-          "gen": "crystal"
-        },
-        {
-          "name": "swagger",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "fury-cutter",
-          "gen": "crystal"
-        },
-        {
-          "name": "attract",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "dynamic-punch",
-          "gen": "crystal"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-smash",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "focus-punch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "nature-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "superpower",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "brick-break",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "rock-tomb",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "iron-defense",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "mud-shot",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "gyro-ball",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "natural-gift",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "fling",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-polish",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "focus-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "earth-power",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "giga-impact",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-climb",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "iron-head",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "stone-edge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "captivate",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "stealth-rock",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "smack-down",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "heavy-slam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "incinerate",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "bulldoze",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "power-up-punch",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "high-horsepower",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "stomping-tantrum",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "body-press",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "tera-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hard-press",
-          "gen": "scarlet-violet"
-        }
-      ],
-      "levelUp": [
-        {
-          "name": "mega-punch",
-          "gen": "lets-go-pikachu-lets-go-eevee",
-          "level": 1
-        },
-        {
-          "name": "tackle",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "defense-curl",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "rock-polish",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "heavy-slam",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "sand-attack",
-          "gen": "lets-go-pikachu-lets-go-eevee",
-          "level": 3
-        },
-        {
-          "name": "sandstorm",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 4
-        },
-        {
-          "name": "mud-sport",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 4
-        },
-        {
-          "name": "bide",
-          "gen": "lets-go-pikachu-lets-go-eevee",
-          "level": 6
-        },
-        {
-          "name": "rollout",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 10
-        },
-        {
-          "name": "steamroller",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 10
-        },
-        {
-          "name": "harden",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 12
-        },
-        {
-          "name": "magnitude",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 12
-        },
-        {
-          "name": "take-down",
-          "gen": "lets-go-pikachu-lets-go-eevee",
-          "level": 15
-        },
-        {
-          "name": "rock-throw",
-          "gen": "scarlet-violet",
-          "level": 16
-        },
-        {
-          "name": "smack-down",
-          "gen": "scarlet-violet",
-          "level": 18
-        },
-        {
-          "name": "bulldoze",
-          "gen": "scarlet-violet",
-          "level": 22
-        },
-        {
-          "name": "rock-slide",
-          "gen": "lets-go-pikachu-lets-go-eevee",
-          "level": 23
-        },
-        {
-          "name": "self-destruct",
-          "gen": "scarlet-violet",
-          "level": 24
-        },
-        {
-          "name": "stealth-rock",
-          "gen": "scarlet-violet",
-          "level": 30
-        },
-        {
-          "name": "rock-blast",
-          "gen": "scarlet-violet",
-          "level": 34
-        },
-        {
-          "name": "earthquake",
-          "gen": "scarlet-violet",
-          "level": 40
-        },
-        {
-          "name": "explosion",
-          "gen": "scarlet-violet",
-          "level": 44
-        },
-        {
-          "name": "double-edge",
-          "gen": "scarlet-violet",
-          "level": 50
-        },
-        {
-          "name": "stone-edge",
-          "gen": "scarlet-violet",
-          "level": 54
-        }
-      ]
-    },
-    "captureRate": 45,
-    "eggGroups": [
-      "mineral"
-    ],
-    "genderRatio": 4,
-    "evolutions": {
-      "name": "geodude",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "graveler",
-          "uuid": "Compendium.ptr2e.core-species.Item.Qppi5EojZQkw0JNZ",
-          "methods": [
-            {
-              "type": "level",
-              "level": 25,
-              "operand": "and"
-            }
-          ],
-          "evolutions": [
-            {
-              "name": "golem",
-              "uuid": "Compendium.ptr2e.core-species.Item.j1zD0kq6aUr2kYxc",
-              "methods": [],
-              "evolutions": [],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              }
-            }
-          ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.j1zD0kq6aUr2kYxc"
-    }
-  },
-  "_id": "j1zD0kq6aUr2kYxc",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {},
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.j1zD0kq6aUr2kYxc"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.j1zD0kq6aUr2kYxc",
-    "duplicateSource": null
-  },
-  "_key": "!items!j1zD0kq6aUr2kYxc"
+    "_id": "j1zD0kq6aUr2kYxc",
+    "effects": []
 }
