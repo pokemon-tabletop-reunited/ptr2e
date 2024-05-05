@@ -1,216 +1,163 @@
 {
-  "name": "silcoon",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 266,
-    "size": {
-      "category": "tiny",
-      "type": "height",
-      "height": 0.6,
-      "weight": 10
-    },
-    "diet": [
-      "nullivore"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 3
+    "name": "silcoon",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 266,
+        "size": {
+            "category": "tiny",
+            "type": "height",
+            "height": 0.6,
+            "weight": 10
         },
-        {
-          "type": "threaded",
-          "value": 3
-        }
-      ],
-      "secondary": []
-    },
-    "traits": [
-      "pokemon",
-      "cocoon",
-      "darkvision-15",
-      "wallclimber",
-      "venomous",
-      "underdog"
-    ],
-    "abilities": {
-      "starting": [
-        "shed-skin",
-        "battle-armor"
-      ],
-      "basic": [
-        "regenerator",
-        "sturdy"
-      ],
-      "advanced": [
-        "pollen-field",
-        "angry-buzz"
-      ],
-      "master": [
-        "overcoat",
-        "clear-body"
-      ]
-    },
-    "skills": {
-      "climb": 40,
-      "conversation": 30,
-      "intimidate": 30,
-      "lift": 10,
-      "listen": 40,
-      "natural-world": 40,
-      "navigate": 15,
-      "negotiation": 30,
-      "running": 10,
-      "spot": 40,
-      "stealth": 40,
-      "survival": 40
-    },
-    "slug": "",
-    "stats": {
-      "hp": 50,
-      "atk": 35,
-      "def": 55,
-      "spa": 25,
-      "spd": 25,
-      "spe": 15
-    },
-    "types": [
-      "bug"
-    ],
-    "moves": {
-      "tutor": [
-        {
-          "name": "string-shot",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "iron-defense",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "bug-bite",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "electroweb",
-          "gen": "ultra-sun-ultra-moon"
-        }
-      ],
-      "levelUp": [
-        {
-          "name": "harden",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 1
-        }
-      ]
-    },
-    "captureRate": 120,
-    "eggGroups": [
-      "bug"
-    ],
-    "genderRatio": 4,
-    "evolutions": {
-      "name": "wurmple",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "silcoon",
-          "uuid": "Compendium.ptr2e.core-species.Item.W8SR9b5EwvxtzIKk",
-          "methods": [
-            {
-              "type": "level",
-              "level": 7,
-              "operand": "and"
-            }
-          ],
-          "evolutions": [
-            {
-              "name": "beautifly",
-              "uuid": "Compendium.ptr2e.core-species.Item.g9LFPZPUUaDCJ2mt",
-              "methods": [
+        "diet": [
+            "nullivore"
+        ],
+        "movement": {
+            "primary": [
                 {
-                  "type": "level",
-                  "level": 10,
-                  "operand": "and"
-                }
-              ],
-              "evolutions": [],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              }
-            }
-          ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
-        {
-          "name": "cascoon",
-          "uuid": "Compendium.ptr2e.core-species.Item.jl2vWuKiTk1OgSOQ",
-          "methods": [
-            {
-              "type": "level",
-              "level": 7,
-              "operand": "and"
-            }
-          ],
-          "evolutions": [
-            {
-              "name": "dustox",
-              "uuid": "Compendium.ptr2e.core-species.Item.unsutL4D1ZHXsU6J",
-              "methods": [
+                    "type": "overland",
+                    "value": 3
+                },
                 {
-                  "type": "level",
-                  "level": 10,
-                  "operand": "and"
+                    "type": "threaded",
+                    "value": 3
                 }
-              ],
-              "evolutions": [],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              }
-            }
-          ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.W8SR9b5EwvxtzIKk"
-    }
-  },
-  "_id": "W8SR9b5EwvxtzIKk",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {},
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.W8SR9b5EwvxtzIKk"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.W8SR9b5EwvxtzIKk",
-    "duplicateSource": null
-  },
-  "_key": "!items!W8SR9b5EwvxtzIKk"
+            ],
+            "secondary": []
+        },
+        "traits": [
+            "pokemon",
+            "cocoon",
+            "darkvision-15",
+            "wallclimber",
+            "venomous",
+            "underdog"
+        ],
+        "abilities": {
+            "starting": [
+                "shed-skin",
+                "battle-armor"
+            ],
+            "basic": [
+                "regenerator",
+                "sturdy"
+            ],
+            "advanced": [
+                "pollen-field",
+                "angry-buzz"
+            ],
+            "master": [
+                "overcoat",
+                "clear-body"
+            ]
+        },
+        "skills": {
+            "climb": 40,
+            "conversation": 30,
+            "intimidate": 30,
+            "lift": 10,
+            "listen": 40,
+            "natural-world": 40,
+            "navigate": 15,
+            "negotiation": 30,
+            "running": 10,
+            "spot": 40,
+            "stealth": 40,
+            "survival": 40
+        },
+        "stats": {
+            "hp": 50,
+            "atk": 35,
+            "def": 55,
+            "spa": 25,
+            "spd": 25,
+            "spe": 15
+        },
+        "types": [
+            "bug"
+        ],
+        "moves": {
+            "tutor": [
+                {
+                    "name": "string-shot",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "iron-defense",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "bug-bite",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "electroweb",
+                    "gen": "ultra-sun-ultra-moon"
+                }
+            ],
+            "levelUp": [
+                {
+                    "name": "harden",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 1
+                }
+            ],
+            "egg": [],
+            "machine": []
+        },
+        "captureRate": 120,
+        "eggGroups": [
+            "bug"
+        ],
+        "genderRatio": 4,
+        "evolutions": {
+            "name": "wurmple",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "silcoon",
+                    "uuid": "Compendium.ptr2e.core-species.Item.W8SR9b5EwvxtzIKk",
+                    "methods": [
+                        {
+                            "type": "level",
+                            "level": 7,
+                            "operand": "and"
+                        }
+                    ],
+                    "evolutions": [
+                        {
+                            "name": "beautifly",
+                            "uuid": "Compendium.ptr2e.core-species.Item.g9LFPZPUUaDCJ2mt",
+                            "methods": [
+                                {
+                                    "type": "level",
+                                    "level": 10,
+                                    "operand": "and"
+                                }
+                            ],
+                            "evolutions": [],
+                            "details": {
+                                "gender": null,
+                                "item": null,
+                                "level": null,
+                                "knownMove": null
+                            }
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    }
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.W8SR9b5EwvxtzIKk",
+            "methods": []
+        },
+        "habitats": []
+    },
+    "_id": "W8SR9b5EwvxtzIKk",
+    "effects": []
 }
