@@ -1,694 +1,657 @@
 {
-  "name": "corsola",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 222,
-    "size": {
-      "category": "tiny",
-      "type": "height",
-      "height": 0.6,
-      "weight": 5
+    "name": "corsola",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 222,
+        "size": {
+            "category": "tiny",
+            "type": "height",
+            "height": 0.6,
+            "weight": 5
+        },
+        "diet": [
+            "plankton"
+        ],
+        "movement": {
+            "primary": [
+                {
+                    "type": "swim",
+                    "value": 4
+                },
+                {
+                    "type": "overland",
+                    "value": 4
+                }
+            ],
+            "secondary": []
+        },
+        "traits": [
+            "pokemon",
+            "quadrupedal",
+            "lumbering",
+            "wavesense-15",
+            "pack-mon",
+            "breathless",
+            "underdog"
+        ],
+        "abilities": {
+            "starting": [
+                "hustle",
+                "natural-cure"
+            ],
+            "basic": [
+                "sturdy",
+                "regenerator"
+            ],
+            "advanced": [
+                "water-veil",
+                "rough-skin"
+            ],
+            "master": [
+                "solid-rock",
+                "sharp-coral"
+            ]
+        },
+        "skills": {
+            "climb": 30,
+            "conversation": 20,
+            "leadership": 15,
+            "lift": 25,
+            "listen": 30,
+            "negotiation": 15,
+            "survival": 25,
+            "swim": 30
+        },
+        "stats": {
+            "hp": 65,
+            "atk": 55,
+            "def": 95,
+            "spa": 65,
+            "spd": 95,
+            "spe": 35
+        },
+        "types": [
+            "water",
+            "rock"
+        ],
+        "moves": {
+            "egg": [
+                {
+                    "name": "mist",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "screech",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "confuse-ray",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "barrier",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "bide",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "amnesia",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "rock-slide",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "curse",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "safeguard",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "nature-power",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "ingrain",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "camouflage",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "icicle-spear",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "water-pulse",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "aqua-ring",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "head-smash",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "liquidation",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                }
+            ],
+            "tutor": [
+                {
+                    "name": "headbutt",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "body-slam",
+                    "gen": "xd"
+                },
+                {
+                    "name": "double-edge",
+                    "gen": "xd"
+                },
+                {
+                    "name": "ice-beam",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "mimic",
+                    "gen": "xd"
+                },
+                {
+                    "name": "defense-curl",
+                    "gen": "emerald"
+                },
+                {
+                    "name": "self-destruct",
+                    "gen": "xd"
+                },
+                {
+                    "name": "explosion",
+                    "gen": "firered-leafgreen"
+                },
+                {
+                    "name": "rock-slide",
+                    "gen": "firered-leafgreen"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "xd"
+                },
+                {
+                    "name": "snore",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "mud-slap",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "icy-wind",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "endure",
+                    "gen": "emerald"
+                },
+                {
+                    "name": "rollout",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "xd"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "black-2-white-2"
+                },
+                {
+                    "name": "ancient-power",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "magic-coat",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "endeavor",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "iron-defense",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "water-pulse",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "sucker-punch",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "earth-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "stealth-rock",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "throat-chop",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "stomping-tantrum",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "liquidation",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "meteor-beam",
+                    "gen": "sword-shield"
+                }
+            ],
+            "machine": [
+                {
+                    "name": "headbutt",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "body-slam",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "hydro-pump",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "surf",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "ice-beam",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "blizzard",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "strength",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "earthquake",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "dig",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "toxic",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "psychic",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "screech",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "double-team",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "defense-curl",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "light-screen",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "reflect",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "self-destruct",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "amnesia",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "explosion",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "rest",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "rock-slide",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "snore",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "curse",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "protect",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "mud-slap",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "icy-wind",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sandstorm",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "endure",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "rollout",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "attract",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "return",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "frustration",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "safeguard",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "hidden-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "rain-dance",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "sunny-day",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "shadow-ball",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "rock-smash",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "whirlpool",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "hail",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "facade",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "nature-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "secret-power",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "rock-tomb",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "icicle-spear",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "iron-defense",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "calm-mind",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "rock-blast",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "water-pulse",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "brine",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "natural-gift",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "rock-polish",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "power-gem",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "earth-power",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "stone-edge",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "captivate",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "stealth-rock",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "round",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "scald",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "bulldoze",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "confide",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "throat-chop",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "stomping-tantrum",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "liquidation",
+                    "gen": "sword-shield"
+                }
+            ],
+            "levelUp": [
+                {
+                    "name": "tackle",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 1
+                },
+                {
+                    "name": "harden",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 1
+                },
+                {
+                    "name": "bubble",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 4
+                },
+                {
+                    "name": "water-gun",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 5
+                },
+                {
+                    "name": "aqua-ring",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 10
+                },
+                {
+                    "name": "refresh",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 13
+                },
+                {
+                    "name": "endure",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 15
+                },
+                {
+                    "name": "spike-cannon",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 20
+                },
+                {
+                    "name": "ancient-power",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 20
+                },
+                {
+                    "name": "lucky-chant",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 23
+                },
+                {
+                    "name": "bubble-beam",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 25
+                },
+                {
+                    "name": "brine",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 27
+                },
+                {
+                    "name": "iron-defense",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 29
+                },
+                {
+                    "name": "flail",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 30
+                },
+                {
+                    "name": "rock-blast",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 31
+                },
+                {
+                    "name": "life-dew",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 35
+                },
+                {
+                    "name": "power-gem",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 40
+                },
+                {
+                    "name": "earth-power",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 45
+                },
+                {
+                    "name": "recover",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 50
+                },
+                {
+                    "name": "mirror-coat",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 55
+                }
+            ]
+        },
+        "captureRate": 60,
+        "eggGroups": [
+            "water1",
+            "water3"
+        ],
+        "genderRatio": 6,
+        "evolutions": {
+            "name": "corsola",
+            "details": null,
+            "evolutions": [],
+            "uuid": "Compendium.ptr2e.core-species.Item.lCR6IT3i0LkQjQwf",
+            "methods": []
+        },
+        "habitats": []
     },
-    "diet": [
-      "plankton"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "swim",
-          "value": 4
-        },
-        {
-          "type": "overland",
-          "value": 4
-        }
-      ],
-      "secondary": []
-    },
-    "traits": [
-      "pokemon",
-      "quadrupedal",
-      "lumbering",
-      "wavesense-15",
-      "pack-mon",
-      "breathless",
-      "underdog"
-    ],
-    "abilities": {
-      "starting": [
-        "hustle",
-        "natural-cure"
-      ],
-      "basic": [
-        "sturdy",
-        "regenerator"
-      ],
-      "advanced": [
-        "water-veil",
-        "rough-skin"
-      ],
-      "master": [
-        "solid-rock",
-        "sharp-coral"
-      ]
-    },
-    "skills": {
-      "climb": 30,
-      "conversation": 20,
-      "leadership": 15,
-      "lift": 25,
-      "listen": 30,
-      "negotiation": 15,
-      "survival": 25,
-      "swim": 30
-    },
-    "slug": "",
-    "stats": {
-      "hp": 65,
-      "atk": 55,
-      "def": 95,
-      "spa": 65,
-      "spd": 95,
-      "spe": 35
-    },
-    "types": [
-      "water",
-      "rock"
-    ],
-    "moves": {
-      "egg": [
-        {
-          "name": "mist",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "screech",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "confuse-ray",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "barrier",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "bide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "amnesia",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "rock-slide",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "curse",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "safeguard",
-          "gen": "crystal"
-        },
-        {
-          "name": "nature-power",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "ingrain",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "camouflage",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "icicle-spear",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "water-pulse",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "aqua-ring",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "head-smash",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "liquidation",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        }
-      ],
-      "tutor": [
-        {
-          "name": "headbutt",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "body-slam",
-          "gen": "xd"
-        },
-        {
-          "name": "double-edge",
-          "gen": "xd"
-        },
-        {
-          "name": "ice-beam",
-          "gen": "crystal"
-        },
-        {
-          "name": "mimic",
-          "gen": "xd"
-        },
-        {
-          "name": "defense-curl",
-          "gen": "emerald"
-        },
-        {
-          "name": "self-destruct",
-          "gen": "xd"
-        },
-        {
-          "name": "explosion",
-          "gen": "firered-leafgreen"
-        },
-        {
-          "name": "rock-slide",
-          "gen": "firered-leafgreen"
-        },
-        {
-          "name": "substitute",
-          "gen": "xd"
-        },
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "mud-slap",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "icy-wind",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "endure",
-          "gen": "emerald"
-        },
-        {
-          "name": "rollout",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "swagger",
-          "gen": "xd"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "ancient-power",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "magic-coat",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "endeavor",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "iron-defense",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "water-pulse",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sucker-punch",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "earth-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "stealth-rock",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "throat-chop",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "stomping-tantrum",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "liquidation",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "meteor-beam",
-          "gen": "sword-shield"
-        }
-      ],
-      "machine": [
-        {
-          "name": "headbutt",
-          "gen": "crystal"
-        },
-        {
-          "name": "body-slam",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hydro-pump",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "surf",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "ice-beam",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "blizzard",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "strength",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "earthquake",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "dig",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "psychic",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "screech",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "double-team",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "defense-curl",
-          "gen": "crystal"
-        },
-        {
-          "name": "light-screen",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "reflect",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "self-destruct",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "amnesia",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "explosion",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "rest",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "rock-slide",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "substitute",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "curse",
-          "gen": "crystal"
-        },
-        {
-          "name": "protect",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "mud-slap",
-          "gen": "crystal"
-        },
-        {
-          "name": "icy-wind",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sandstorm",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "endure",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "rollout",
-          "gen": "crystal"
-        },
-        {
-          "name": "swagger",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "attract",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "safeguard",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "shadow-ball",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "rock-smash",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "whirlpool",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hail",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "facade",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "nature-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "rock-tomb",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "icicle-spear",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "iron-defense",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "calm-mind",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "rock-blast",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "water-pulse",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "brine",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "natural-gift",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "rock-polish",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "power-gem",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "earth-power",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "stone-edge",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "captivate",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "stealth-rock",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "scald",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "bulldoze",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "throat-chop",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "stomping-tantrum",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "liquidation",
-          "gen": "sword-shield"
-        }
-      ],
-      "levelUp": [
-        {
-          "name": "tackle",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 1
-        },
-        {
-          "name": "harden",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 1
-        },
-        {
-          "name": "bubble",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 4
-        },
-        {
-          "name": "water-gun",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 5
-        },
-        {
-          "name": "aqua-ring",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 10
-        },
-        {
-          "name": "refresh",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 13
-        },
-        {
-          "name": "endure",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 15
-        },
-        {
-          "name": "spike-cannon",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 20
-        },
-        {
-          "name": "ancient-power",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 20
-        },
-        {
-          "name": "lucky-chant",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 23
-        },
-        {
-          "name": "bubble-beam",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 25
-        },
-        {
-          "name": "brine",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 27
-        },
-        {
-          "name": "iron-defense",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 29
-        },
-        {
-          "name": "flail",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 30
-        },
-        {
-          "name": "rock-blast",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 31
-        },
-        {
-          "name": "life-dew",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 35
-        },
-        {
-          "name": "power-gem",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 40
-        },
-        {
-          "name": "earth-power",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 45
-        },
-        {
-          "name": "recover",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 50
-        },
-        {
-          "name": "mirror-coat",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 55
-        }
-      ]
-    },
-    "captureRate": 60,
-    "eggGroups": [
-      "water1",
-      "water3"
-    ],
-    "genderRatio": 6,
-    "evolutions": {
-      "name": "corsola",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "cursola",
-          "uuid": "Compendium.ptr2e.core-species.Item.uiYdrHTc7h1CP8Rj",
-          "methods": [
-            {
-              "type": "level",
-              "level": 38,
-              "operand": "and"
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.lCR6IT3i0LkQjQwf"
-    }
-  },
-  "_id": "lCR6IT3i0LkQjQwf",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {},
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.lCR6IT3i0LkQjQwf"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.lCR6IT3i0LkQjQwf",
-    "duplicateSource": null
-  },
-  "_key": "!items!lCR6IT3i0LkQjQwf"
+    "_id": "lCR6IT3i0LkQjQwf",
+    "effects": []
 }
