@@ -158,7 +158,8 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
                     }
                 });
             }
-
+        }
+        if(partId === "evolution") {
             for(const element of htmlQueryAll(htmlElement, ".evolution a[data-action]")) {
                 element.addEventListener("click", async (event) => {
                     event.preventDefault();
