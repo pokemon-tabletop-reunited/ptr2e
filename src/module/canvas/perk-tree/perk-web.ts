@@ -171,11 +171,17 @@ class PerkWeb extends PIXI.Container {
         return this;
     }
 
+    static get backgroundSize() {
+        return 50000;
+    }
+
     protected async _drawBackground() {
-        const backgroundSize = 50000;
+        const backgroundSize = PerkWeb.backgroundSize;
 
         // Load the texture
-        const texture = (getTexture("/ui/denim075.png") as PIXI.Texture) ?? ((await loadTexture("/ui/denim075.png")) as PIXI.Texture);
+        const texture =
+            (getTexture("/ui/denim075.png") as PIXI.Texture) ??
+            ((await loadTexture("/ui/denim075.png")) as PIXI.Texture);
 
         // Create a tiling sprite with the texture
         const background = new TilingSprite(texture, backgroundSize * 2, backgroundSize * 2);
@@ -201,7 +207,7 @@ class PerkWeb extends PIXI.Container {
         // sprite.texture =
         //     (getTexture("/ui/denim075.png") as PIXI.Texture) ??
         //     ((await loadTexture("/ui/denim075.png")) as PIXI.Texture);
-        
+
         // return background;
     }
 
@@ -260,17 +266,17 @@ class PerkWeb extends PIXI.Container {
         }
     }
 
-    private pan({ x, y, scale }: { x?: number; y?: number; scale?: number } = {}) {
-        x ??= this.stage.pivot.x;
-        y ??= this.stage.pivot.y;
-        scale ??= this.stage.scale.x;
-        this.stage.pivot.set(x, y);
-        this.stage.scale.set(scale, scale);
-        this.perkHUD.setPosition();
-        this.alignHUD();
+    // private pan({ x, y, scale }: { x?: number; y?: number; scale?: number } = {}) {
+    //     x ??= this.stage.pivot.x;
+    //     y ??= this.stage.pivot.y;
+    //     scale ??= this.stage.scale.x;
+    //     this.stage.pivot.set(x, y);
+    //     this.stage.scale.set(scale, scale);
+    //     this.perkHUD.setPosition();
+    //     this.alignHUD();
 
-        return this;
-    }
+    //     return this;
+    // }
 
     public async refresh({ nodeRefresh } = { nodeRefresh: false }) {
         // Render the HUD
@@ -380,18 +386,23 @@ class PerkWeb extends PIXI.Container {
             if (event.button === 0 && this.perkHUD.object) this.perkHUD.clear();
         });
 
-        this.interactionManager = new MouseInteractionManager(
-            this as any,
-            this as any,
-            {},
-            {
-                dragRightMove: this.onDragRightMove,
+        // Remove stage listeners
+        const callbacks = {
+            hoverOut: () => {
+                //@ts-expect-error
+                if(this.interactionManager.target === this) {
+                    return false;
+                }
+                return;
             },
-            {
-                application: this.app,
-                dragResistance: 30,
-            }
-        ).activate();
+            dragRightMove: this.onDragRightMove,
+        }
+
+        const manager = new MouseInteractionManager(this as any, this as any, {}, callbacks, {
+            dragResistance: 30,
+            application: this.app,
+        });
+        this.interactionManager = manager.activate();
 
         // Window Events
         window.addEventListener("resize", this.onResize.bind(this));
@@ -454,6 +465,52 @@ class PerkWeb extends PIXI.Container {
             x: this.stage.pivot.x - dx * DRAG_SPEED_MODIFIER,
             y: this.stage.pivot.y - dy * DRAG_SPEED_MODIFIER,
         });
+    }
+
+    private pan({ x, y, scale }: { x?: number; y?: number; scale?: number } = {}) {
+        // Constrain the resulting canvas view
+        const constrained = this._constrainView({ x, y, scale });
+        const scaleChange = constrained.scale !== this.stage.scale.x;
+
+        // Set the pivot point
+        this.stage.pivot.set(constrained.x, constrained.y);
+
+        // Set the zoom level
+        if (scaleChange) {
+            this.stage.scale.set(constrained.scale, constrained.scale);
+        }
+
+        // Align the HUDs
+        this.perkHUD.setPosition();
+        this.alignHUD();
+
+        // Emulate mouse event to update the hover states
+        // MouseInteractionManager.emulateMoveEvent();
+        return this;
+    }
+
+    private _constrainView({ x, y, scale }: { x?: number; y?: number; scale?: number }) {
+        if (!Number.isNumeric(x)) x = this.stage.pivot.x;
+        if (!Number.isNumeric(y)) y = this.stage.pivot.y;
+        if (!Number.isNumeric(scale)) scale = this.stage.scale.x;
+        const d = {width: PerkWeb.backgroundSize, height: PerkWeb.backgroundSize};
+
+        // Constrain the scale to the maximum zoom level
+        const maxScale = 0.75;
+        const minScale =
+            1 / Math.max(d.width / window.innerWidth, d.height / window.innerHeight, maxScale);
+        scale = Math.clamp(scale!, minScale, maxScale);
+
+        // Constrain the pivot point using the new scale
+        const paddingX = d.width * 0; // If padding is wished change 0 to % like 0.1 for 10% padding
+        const paddingY = d.height * 0; 
+        const maxX = ((d.width + paddingX) * scale - window.innerWidth / 2) / scale;
+        const maxY = ((d.height + paddingY) * scale - window.innerHeight / 2) / scale;
+        x = Math.clamp(x!, -maxX, maxX);
+        y = Math.clamp(y!, -maxY, maxY);
+
+        // Return the constrained view dimensions
+        return { x, y, scale };
     }
 
     /**
