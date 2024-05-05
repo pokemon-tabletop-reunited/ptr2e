@@ -1,659 +1,646 @@
 {
-  "name": "alolan-sandshrew",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 27,
-    "size": {
-      "category": "tiny",
-      "type": "height",
-      "height": 0.7,
-      "weight": 40
+    "name": "alolan-sandshrew",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 27,
+        "size": {
+            "category": "tiny",
+            "type": "height",
+            "height": 0.7,
+            "weight": 40
+        },
+        "diet": [
+            "insectivore"
+        ],
+        "movement": {
+            "primary": [
+                {
+                    "type": "overland",
+                    "value": 4
+                },
+                {
+                    "type": "burrow",
+                    "value": 4
+                }
+            ],
+            "secondary": [
+                {
+                    "type": "swim",
+                    "value": 3
+                }
+            ]
+        },
+        "traits": [
+            "pokemon",
+            "bipedal",
+            "underdog",
+            "tremorsense",
+            "natural-burrower",
+            "direction-sense",
+            "alolan"
+        ],
+        "abilities": {
+            "starting": [
+                "snow-cloak",
+                "lets-roll"
+            ],
+            "basic": [
+                "slush-rush",
+                "tough-claws"
+            ],
+            "advanced": [
+                "stamina",
+                "sharpness"
+            ],
+            "master": [
+                "mountaineer",
+                "tuck-and-roll"
+            ]
+        },
+        "skills": {
+            "acrobatics": 30,
+            "climb": 40,
+            "conversation": 20,
+            "intimidate": 20,
+            "lift": 35,
+            "listen": 35,
+            "natural-world": 25,
+            "navigate": 35,
+            "negotiation": 20,
+            "running": 35,
+            "spot": 15,
+            "stealth": 40,
+            "swim": 10
+        },
+        "stats": {
+            "hp": 50,
+            "atk": 75,
+            "def": 90,
+            "spa": 10,
+            "spd": 35,
+            "spe": 40
+        },
+        "types": [
+            "ice",
+            "steel"
+        ],
+        "moves": {
+            "egg": [
+                {
+                    "name": "counter",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "amnesia",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "curse",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "flail",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "endure",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "metal-claw",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "mirror-coat",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "crush-claw",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "icicle-spear",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "night-slash",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "ice-shard",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "hone-claws",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "chip-away",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "icicle-crash",
+                    "gen": "ultra-sun-ultra-moon"
+                }
+            ],
+            "tutor": [
+                {
+                    "name": "ice-punch",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "super-fang",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "snore",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "icy-wind",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "iron-tail",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "focus-punch",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "knock-off",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "iron-defense",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "covet",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "aqua-tail",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "iron-head",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "stealth-rock",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "throat-chop",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "steel-beam",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "steel-roller",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "triple-axel",
+                    "gen": "sword-shield"
+                }
+            ],
+            "machine": [
+                {
+                    "name": "ice-punch",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "swords-dance",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "headbutt",
+                    "gen": "lets-go-pikachu-lets-go-eevee"
+                },
+                {
+                    "name": "body-slam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "take-down",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "double-edge",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "ice-beam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "blizzard",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "low-kick",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "seismic-toss",
+                    "gen": "lets-go-pikachu-lets-go-eevee"
+                },
+                {
+                    "name": "earthquake",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "dig",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "toxic",
+                    "gen": "lets-go-pikachu-lets-go-eevee"
+                },
+                {
+                    "name": "double-team",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "swift",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "amnesia",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "leech-life",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "rest",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "rock-slide",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "super-fang",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "thief",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "snore",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "curse",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "protect",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "icy-wind",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "endure",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "attract",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "return",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "frustration",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "safeguard",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "iron-tail",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "metal-claw",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "hidden-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "sunny-day",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "hail",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "facade",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "focus-punch",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "brick-break",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "knock-off",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "endeavor",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "rock-tomb",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "aerial-ace",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "icicle-spear",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "iron-defense",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "gyro-ball",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "fling",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "poison-jab",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "x-scissor",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "avalanche",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "shadow-claw",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "flash-cannon",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "iron-head",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "stealth-rock",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "round",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "bulldoze",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "frost-breath",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "work-up",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "confide",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "throat-chop",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "aurora-veil",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "steel-beam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "triple-axel",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "tera-blast",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "ice-spinner",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "snowscape",
+                    "gen": "scarlet-violet"
+                }
+            ],
+            "levelUp": [
+                {
+                    "name": "scratch",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "defense-curl",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "mist",
+                    "gen": "scarlet-violet",
+                    "level": 3
+                },
+                {
+                    "name": "bide",
+                    "gen": "lets-go-pikachu-lets-go-eevee",
+                    "level": 4
+                },
+                {
+                    "name": "powder-snow",
+                    "gen": "scarlet-violet",
+                    "level": 6
+                },
+                {
+                    "name": "ice-ball",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 7
+                },
+                {
+                    "name": "ice-shard",
+                    "gen": "lets-go-pikachu-lets-go-eevee",
+                    "level": 8
+                },
+                {
+                    "name": "rollout",
+                    "gen": "scarlet-violet",
+                    "level": 9
+                },
+                {
+                    "name": "fury-cutter",
+                    "gen": "scarlet-violet",
+                    "level": 12
+                },
+                {
+                    "name": "rapid-spin",
+                    "gen": "scarlet-violet",
+                    "level": 15
+                },
+                {
+                    "name": "mirror-coat",
+                    "gen": "lets-go-pikachu-lets-go-eevee",
+                    "level": 16
+                },
+                {
+                    "name": "metal-claw",
+                    "gen": "scarlet-violet",
+                    "level": 18
+                },
+                {
+                    "name": "swift",
+                    "gen": "scarlet-violet",
+                    "level": 21
+                },
+                {
+                    "name": "ice-punch",
+                    "gen": "lets-go-pikachu-lets-go-eevee",
+                    "level": 24
+                },
+                {
+                    "name": "fury-swipes",
+                    "gen": "scarlet-violet",
+                    "level": 24
+                },
+                {
+                    "name": "iron-defense",
+                    "gen": "scarlet-violet",
+                    "level": 27
+                },
+                {
+                    "name": "slash",
+                    "gen": "scarlet-violet",
+                    "level": 30
+                },
+                {
+                    "name": "iron-head",
+                    "gen": "scarlet-violet",
+                    "level": 33
+                },
+                {
+                    "name": "gyro-ball",
+                    "gen": "scarlet-violet",
+                    "level": 36
+                },
+                {
+                    "name": "swords-dance",
+                    "gen": "scarlet-violet",
+                    "level": 39
+                },
+                {
+                    "name": "hail",
+                    "gen": "sword-shield",
+                    "level": 42
+                },
+                {
+                    "name": "snowscape",
+                    "gen": "scarlet-violet",
+                    "level": 42
+                },
+                {
+                    "name": "blizzard",
+                    "gen": "scarlet-violet",
+                    "level": 45
+                }
+            ]
+        },
+        "captureRate": 255,
+        "eggGroups": [
+            "ground"
+        ],
+        "genderRatio": 4,
+        "evolutions": {
+            "name": "alolan-sandshrew",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "alolan-sandslash",
+                    "uuid": "Compendium.ptr2e.core-species.Item.FmqwIC7tvuff5OEP",
+                    "methods": [
+                        {
+                            "type": "level",
+                            "level": 22,
+                            "operand": "or"
+                        },
+                        {
+                            "type": "item",
+                            "item": "ice-stone",
+                            "operand": "or",
+                            "held": false
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    },
+                    "evolutions": []
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.uKT634NaMlQjwgUx",
+            "methods": []
+        },
+        "habitats": []
     },
-    "diet": [
-      "insectivore"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 4
-        },
-        {
-          "type": "burrow",
-          "value": 4
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
-    "traits": [
-      "pokemon",
-      "bipedal",
-      "underdog",
-      "tremorsense",
-      "natural-burrower",
-      "direction-sense",
-      "alolan"
-    ],
-    "abilities": {
-      "starting": [
-        "snow-cloak",
-        "lets-roll"
-      ],
-      "basic": [
-        "slush-rush",
-        "tough-claws"
-      ],
-      "advanced": [
-        "stamina",
-        "sharpness"
-      ],
-      "master": [
-        "mountaineer",
-        "tuck-and-roll"
-      ]
-    },
-    "skills": {
-      "acrobatics": 30,
-      "climb": 40,
-      "conversation": 20,
-      "intimidate": 20,
-      "lift": 35,
-      "listen": 35,
-      "natural-world": 25,
-      "navigate": 35,
-      "negotiation": 20,
-      "running": 35,
-      "spot": 15,
-      "stealth": 40,
-      "swim": 10
-    },
-    "slug": "",
-    "stats": {
-      "hp": 50,
-      "atk": 75,
-      "def": 90,
-      "spa": 10,
-      "spd": 35,
-      "spe": 40
-    },
-    "types": [
-      "ice",
-      "steel"
-    ],
-    "moves": {
-      "egg": [
-        {
-          "name": "counter",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "amnesia",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "curse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flail",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "metal-claw",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "mirror-coat",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "crush-claw",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "icicle-spear",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "night-slash",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "ice-shard",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hone-claws",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "chip-away",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "icicle-crash",
-          "gen": "ultra-sun-ultra-moon"
-        }
-      ],
-      "tutor": [
-        {
-          "name": "ice-punch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "super-fang",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "icy-wind",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "iron-tail",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "focus-punch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "knock-off",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "iron-defense",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "covet",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "aqua-tail",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "iron-head",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "stealth-rock",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "throat-chop",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "steel-beam",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "steel-roller",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "triple-axel",
-          "gen": "sword-shield"
-        }
-      ],
-      "machine": [
-        {
-          "name": "ice-punch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "swords-dance",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "headbutt",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "body-slam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "take-down",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "double-edge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "ice-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "blizzard",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "low-kick",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "seismic-toss",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "earthquake",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "dig",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "toxic",
-          "gen": "lets-go-pikachu-lets-go-eevee"
-        },
-        {
-          "name": "double-team",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "swift",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "amnesia",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "leech-life",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-slide",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "super-fang",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "substitute",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "thief",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "curse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "icy-wind",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "swagger",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "safeguard",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "iron-tail",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "metal-claw",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hail",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "focus-punch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "brick-break",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "knock-off",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endeavor",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-tomb",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "aerial-ace",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "icicle-spear",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "iron-defense",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "gyro-ball",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "fling",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "poison-jab",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "x-scissor",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "avalanche",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "shadow-claw",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flash-cannon",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "iron-head",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "stealth-rock",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "bulldoze",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "frost-breath",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "work-up",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "throat-chop",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "aurora-veil",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "steel-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "triple-axel",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "tera-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "ice-spinner",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "snowscape",
-          "gen": "scarlet-violet"
-        }
-      ],
-      "levelUp": [
-        {
-          "name": "scratch",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "defense-curl",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "mist",
-          "gen": "scarlet-violet",
-          "level": 3
-        },
-        {
-          "name": "bide",
-          "gen": "lets-go-pikachu-lets-go-eevee",
-          "level": 4
-        },
-        {
-          "name": "powder-snow",
-          "gen": "scarlet-violet",
-          "level": 6
-        },
-        {
-          "name": "ice-ball",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 7
-        },
-        {
-          "name": "ice-shard",
-          "gen": "lets-go-pikachu-lets-go-eevee",
-          "level": 8
-        },
-        {
-          "name": "rollout",
-          "gen": "scarlet-violet",
-          "level": 9
-        },
-        {
-          "name": "fury-cutter",
-          "gen": "scarlet-violet",
-          "level": 12
-        },
-        {
-          "name": "rapid-spin",
-          "gen": "scarlet-violet",
-          "level": 15
-        },
-        {
-          "name": "mirror-coat",
-          "gen": "lets-go-pikachu-lets-go-eevee",
-          "level": 16
-        },
-        {
-          "name": "metal-claw",
-          "gen": "scarlet-violet",
-          "level": 18
-        },
-        {
-          "name": "swift",
-          "gen": "scarlet-violet",
-          "level": 21
-        },
-        {
-          "name": "ice-punch",
-          "gen": "lets-go-pikachu-lets-go-eevee",
-          "level": 24
-        },
-        {
-          "name": "fury-swipes",
-          "gen": "scarlet-violet",
-          "level": 24
-        },
-        {
-          "name": "iron-defense",
-          "gen": "scarlet-violet",
-          "level": 27
-        },
-        {
-          "name": "slash",
-          "gen": "scarlet-violet",
-          "level": 30
-        },
-        {
-          "name": "iron-head",
-          "gen": "scarlet-violet",
-          "level": 33
-        },
-        {
-          "name": "gyro-ball",
-          "gen": "scarlet-violet",
-          "level": 36
-        },
-        {
-          "name": "swords-dance",
-          "gen": "scarlet-violet",
-          "level": 39
-        },
-        {
-          "name": "hail",
-          "gen": "sword-shield",
-          "level": 42
-        },
-        {
-          "name": "snowscape",
-          "gen": "scarlet-violet",
-          "level": 42
-        },
-        {
-          "name": "blizzard",
-          "gen": "scarlet-violet",
-          "level": 45
-        }
-      ]
-    },
-    "captureRate": 255,
-    "eggGroups": [
-      "ground"
-    ],
-    "genderRatio": 4,
-    "evolutions": {
-      "name": "sandshrew",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "sandslash",
-          "uuid": "Compendium.ptr2e.core-species.Item.bNLR28WqX3FL4gUU",
-          "methods": [
-            {
-              "type": "item",
-              "item": "ice-stone",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.uKT634NaMlQjwgUx"
-    }
-  },
-  "_id": "uKT634NaMlQjwgUx",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {},
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.uKT634NaMlQjwgUx"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.uKT634NaMlQjwgUx",
-    "duplicateSource": null
-  },
-  "_key": "!items!uKT634NaMlQjwgUx"
+    "_id": "uKT634NaMlQjwgUx",
+    "effects": []
 }
