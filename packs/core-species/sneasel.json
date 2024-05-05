@@ -1,832 +1,800 @@
 {
-  "name": "sneasel",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 215,
-    "size": {
-      "category": "tiny",
-      "type": "height",
-      "height": 0.9,
-      "weight": 28
+    "name": "sneasel",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 215,
+        "size": {
+            "category": "tiny",
+            "type": "height",
+            "height": 0.9,
+            "weight": 28
+        },
+        "diet": [
+            "ovivore"
+        ],
+        "movement": {
+            "primary": [
+                {
+                    "type": "overland",
+                    "value": 12
+                }
+            ],
+            "secondary": [
+                {
+                    "type": "swim",
+                    "value": 6
+                }
+            ]
+        },
+        "traits": [
+            "pokemon",
+            "bipedal",
+            "wallclimber",
+            "darkvision-15",
+            "underdog"
+        ],
+        "abilities": {
+            "starting": [
+                "inner-focus",
+                "keen-eye"
+            ],
+            "basic": [
+                "tough-claws",
+                "pickpocket"
+            ],
+            "advanced": [
+                "technician",
+                "ambush"
+            ],
+            "master": [
+                "infiltrator",
+                "fatal-precision"
+            ]
+        },
+        "skills": {
+            "acrobatics": 35,
+            "climb": 40,
+            "conversation": 15,
+            "fast-talk": 35,
+            "intimidate": 30,
+            "lift": 30,
+            "listen": 20,
+            "natural-world": 25,
+            "negotiation": 15,
+            "running": 35,
+            "sleight-ofhand": 30,
+            "spot": 35,
+            "stealth": 40,
+            "survival": 30,
+            "swim": 20,
+            "track": 30
+        },
+        "stats": {
+            "hp": 55,
+            "atk": 95,
+            "def": 55,
+            "spa": 35,
+            "spd": 75,
+            "spe": 115
+        },
+        "types": [
+            "dark",
+            "ice"
+        ],
+        "moves": {
+            "egg": [
+                {
+                    "name": "ice-punch",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "bite",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "counter",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "reflect",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "spite",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "foresight",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "pursuit",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "fake-out",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "assist",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "crush-claw",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "feint",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "punishment",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "avalanche",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "ice-shard",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "double-hit",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "icicle-crash",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "throat-chop",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                }
+            ],
+            "tutor": [
+                {
+                    "name": "ice-punch",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "swords-dance",
+                    "gen": "firered-leafgreen"
+                },
+                {
+                    "name": "headbutt",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "double-edge",
+                    "gen": "xd"
+                },
+                {
+                    "name": "ice-beam",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "low-kick",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "counter",
+                    "gen": "firered-leafgreen"
+                },
+                {
+                    "name": "mimic",
+                    "gen": "xd"
+                },
+                {
+                    "name": "defense-curl",
+                    "gen": "emerald"
+                },
+                {
+                    "name": "swift",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "dream-eater",
+                    "gen": "xd"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "xd"
+                },
+                {
+                    "name": "nightmare",
+                    "gen": "xd"
+                },
+                {
+                    "name": "snore",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "spite",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "mud-slap",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "icy-wind",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "endure",
+                    "gen": "emerald"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "xd"
+                },
+                {
+                    "name": "fury-cutter",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "black-2-white-2"
+                },
+                {
+                    "name": "dynamic-punch",
+                    "gen": "emerald"
+                },
+                {
+                    "name": "iron-tail",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "psych-up",
+                    "gen": "emerald"
+                },
+                {
+                    "name": "focus-punch",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "knock-off",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "snatch",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "dark-pulse",
+                    "gen": "black-2-white-2"
+                },
+                {
+                    "name": "foul-play",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "laser-focus",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "throat-chop",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "lash-out",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "triple-axel",
+                    "gen": "sword-shield"
+                }
+            ],
+            "machine": [
+                {
+                    "name": "mega-punch",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "ice-punch",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "swords-dance",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "cut",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "mega-kick",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "headbutt",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "take-down",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "surf",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "ice-beam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "blizzard",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "low-kick",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "strength",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "dig",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "toxic",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "agility",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "screech",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "double-team",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "defense-curl",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "reflect",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "swift",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "dream-eater",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "rest",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "thief",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "nightmare",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "snore",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "curse",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "reversal",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "spite",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "protect",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "scary-face",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "mud-slap",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "icy-wind",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "detect",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "endure",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "false-swipe",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "fury-cutter",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "attract",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "return",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "frustration",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "dynamic-punch",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "iron-tail",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "metal-claw",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "hidden-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "rain-dance",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "sunny-day",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "psych-up",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "shadow-ball",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "rock-smash",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "whirlpool",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "beat-up",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "hail",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "torment",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "facade",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "focus-punch",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "taunt",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "helping-hand",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "brick-break",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "knock-off",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "snatch",
+                    "gen": "xd"
+                },
+                {
+                    "name": "secret-power",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "fake-tears",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "aerial-ace",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "icicle-spear",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "calm-mind",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "water-pulse",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "natural-gift",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "payback",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "embargo",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "fling",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "poison-jab",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "dark-pulse",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "x-scissor",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "giga-impact",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "nasty-plot",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "avalanche",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "shadow-claw",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "psycho-cut",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "captivate",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "hone-claws",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "low-sweep",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "foul-play",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "round",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "retaliate",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "snarl",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "confide",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "power-up-punch",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "throat-chop",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "lash-out",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "triple-axel",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "tera-blast",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "snowscape",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "trailblaze",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "upper-hand",
+                    "gen": "scarlet-violet"
+                }
+            ],
+            "levelUp": [
+                {
+                    "name": "scratch",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "leer",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "taunt",
+                    "gen": "scarlet-violet",
+                    "level": 6
+                },
+                {
+                    "name": "feint-attack",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 10
+                },
+                {
+                    "name": "quick-attack",
+                    "gen": "scarlet-violet",
+                    "level": 12
+                },
+                {
+                    "name": "metal-claw",
+                    "gen": "scarlet-violet",
+                    "level": 18
+                },
+                {
+                    "name": "icy-wind",
+                    "gen": "scarlet-violet",
+                    "level": 24
+                },
+                {
+                    "name": "fury-swipes",
+                    "gen": "scarlet-violet",
+                    "level": 30
+                },
+                {
+                    "name": "hone-claws",
+                    "gen": "scarlet-violet",
+                    "level": 36
+                },
+                {
+                    "name": "snatch",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 40
+                },
+                {
+                    "name": "beat-up",
+                    "gen": "scarlet-violet",
+                    "level": 42
+                },
+                {
+                    "name": "punishment",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 44
+                },
+                {
+                    "name": "ice-shard",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 47
+                },
+                {
+                    "name": "agility",
+                    "gen": "scarlet-violet",
+                    "level": 48
+                },
+                {
+                    "name": "screech",
+                    "gen": "scarlet-violet",
+                    "level": 54
+                },
+                {
+                    "name": "slash",
+                    "gen": "scarlet-violet",
+                    "level": 60
+                }
+            ]
+        },
+        "captureRate": 60,
+        "eggGroups": [
+            "ground"
+        ],
+        "genderRatio": 4,
+        "evolutions": {
+            "name": "sneasel",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "weavile",
+                    "uuid": "Compendium.ptr2e.core-species.Item.fRXs2m8WUwcCKeiE",
+                    "methods": [
+                        {
+                            "type": "item",
+                            "item": "razor-claw",
+                            "operand": "or",
+                            "held": false
+                        },
+                        {
+                            "type": "level",
+                            "level": 32,
+                            "operand": "or"
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    },
+                    "evolutions": []
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.fRXs2m8WUwcCKeiE",
+            "methods": []
+        },
+        "habitats": []
     },
-    "diet": [
-      "ovivore"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 12
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 6
-        }
-      ]
-    },
-    "traits": [
-      "pokemon",
-      "bipedal",
-      "wallclimber",
-      "darkvision-15",
-      "underdog"
-    ],
-    "abilities": {
-      "starting": [
-        "inner-focus",
-        "keen-eye"
-      ],
-      "basic": [
-        "tough-claws",
-        "pickpocket"
-      ],
-      "advanced": [
-        "technician",
-        "ambush"
-      ],
-      "master": [
-        "infiltrator",
-        "fatal-precision"
-      ]
-    },
-    "skills": {
-      "acrobatics": 35,
-      "climb": 40,
-      "conversation": 15,
-      "fast-talk": 35,
-      "intimidate": 30,
-      "lift": 30,
-      "listen": 20,
-      "natural-world": 25,
-      "negotiation": 15,
-      "running": 35,
-      "sleight-ofhand": 30,
-      "spot": 35,
-      "stealth": 40,
-      "survival": 30,
-      "swim": 20,
-      "track": 30
-    },
-    "slug": "",
-    "stats": {
-      "hp": 55,
-      "atk": 95,
-      "def": 55,
-      "spa": 35,
-      "spd": 75,
-      "spe": 115
-    },
-    "types": [
-      "dark",
-      "ice"
-    ],
-    "moves": {
-      "egg": [
-        {
-          "name": "ice-punch",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "bite",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "counter",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "reflect",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "spite",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "foresight",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "pursuit",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "fake-out",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "assist",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "crush-claw",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "feint",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "punishment",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "avalanche",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "ice-shard",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "double-hit",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "icicle-crash",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "throat-chop",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        }
-      ],
-      "tutor": [
-        {
-          "name": "ice-punch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "swords-dance",
-          "gen": "firered-leafgreen"
-        },
-        {
-          "name": "headbutt",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "double-edge",
-          "gen": "xd"
-        },
-        {
-          "name": "ice-beam",
-          "gen": "crystal"
-        },
-        {
-          "name": "low-kick",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "counter",
-          "gen": "firered-leafgreen"
-        },
-        {
-          "name": "mimic",
-          "gen": "xd"
-        },
-        {
-          "name": "defense-curl",
-          "gen": "emerald"
-        },
-        {
-          "name": "swift",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "dream-eater",
-          "gen": "xd"
-        },
-        {
-          "name": "substitute",
-          "gen": "xd"
-        },
-        {
-          "name": "nightmare",
-          "gen": "xd"
-        },
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "spite",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "mud-slap",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "icy-wind",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "endure",
-          "gen": "emerald"
-        },
-        {
-          "name": "swagger",
-          "gen": "xd"
-        },
-        {
-          "name": "fury-cutter",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "dynamic-punch",
-          "gen": "emerald"
-        },
-        {
-          "name": "iron-tail",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "psych-up",
-          "gen": "emerald"
-        },
-        {
-          "name": "focus-punch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "knock-off",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "snatch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "dark-pulse",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "foul-play",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "laser-focus",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "throat-chop",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "lash-out",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "triple-axel",
-          "gen": "sword-shield"
-        }
-      ],
-      "machine": [
-        {
-          "name": "mega-punch",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "ice-punch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "swords-dance",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "cut",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "mega-kick",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "headbutt",
-          "gen": "crystal"
-        },
-        {
-          "name": "take-down",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "surf",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "ice-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "blizzard",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "low-kick",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "strength",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "dig",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "agility",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "screech",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "double-team",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "defense-curl",
-          "gen": "crystal"
-        },
-        {
-          "name": "reflect",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "swift",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "dream-eater",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "substitute",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "thief",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "nightmare",
-          "gen": "crystal"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "curse",
-          "gen": "crystal"
-        },
-        {
-          "name": "reversal",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "spite",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "scary-face",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "mud-slap",
-          "gen": "crystal"
-        },
-        {
-          "name": "icy-wind",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "detect",
-          "gen": "crystal"
-        },
-        {
-          "name": "endure",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "false-swipe",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "swagger",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "fury-cutter",
-          "gen": "crystal"
-        },
-        {
-          "name": "attract",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "dynamic-punch",
-          "gen": "crystal"
-        },
-        {
-          "name": "iron-tail",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "metal-claw",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "psych-up",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "shadow-ball",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rock-smash",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "whirlpool",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "beat-up",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hail",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "torment",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "focus-punch",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "taunt",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "helping-hand",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "brick-break",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "knock-off",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "snatch",
-          "gen": "xd"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "fake-tears",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "aerial-ace",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "icicle-spear",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "calm-mind",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "water-pulse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "natural-gift",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "payback",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "embargo",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "fling",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "poison-jab",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "dark-pulse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "x-scissor",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "giga-impact",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "nasty-plot",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "avalanche",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "shadow-claw",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "psycho-cut",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "captivate",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "hone-claws",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "low-sweep",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "foul-play",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "retaliate",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "snarl",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "power-up-punch",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "throat-chop",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "lash-out",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "triple-axel",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "tera-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "snowscape",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "trailblaze",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "upper-hand",
-          "gen": "scarlet-violet"
-        }
-      ],
-      "levelUp": [
-        {
-          "name": "scratch",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "leer",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "taunt",
-          "gen": "scarlet-violet",
-          "level": 6
-        },
-        {
-          "name": "feint-attack",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 10
-        },
-        {
-          "name": "quick-attack",
-          "gen": "scarlet-violet",
-          "level": 12
-        },
-        {
-          "name": "metal-claw",
-          "gen": "scarlet-violet",
-          "level": 18
-        },
-        {
-          "name": "icy-wind",
-          "gen": "scarlet-violet",
-          "level": 24
-        },
-        {
-          "name": "fury-swipes",
-          "gen": "scarlet-violet",
-          "level": 30
-        },
-        {
-          "name": "hone-claws",
-          "gen": "scarlet-violet",
-          "level": 36
-        },
-        {
-          "name": "snatch",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 40
-        },
-        {
-          "name": "beat-up",
-          "gen": "scarlet-violet",
-          "level": 42
-        },
-        {
-          "name": "punishment",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 44
-        },
-        {
-          "name": "ice-shard",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 47
-        },
-        {
-          "name": "agility",
-          "gen": "scarlet-violet",
-          "level": 48
-        },
-        {
-          "name": "screech",
-          "gen": "scarlet-violet",
-          "level": 54
-        },
-        {
-          "name": "slash",
-          "gen": "scarlet-violet",
-          "level": 60
-        }
-      ]
-    },
-    "captureRate": 60,
-    "eggGroups": [
-      "ground"
-    ],
-    "genderRatio": 4,
-    "evolutions": {
-      "name": "sneasel",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "weavile",
-          "uuid": "Compendium.ptr2e.core-species.Item.fRXs2m8WUwcCKeiE",
-          "methods": [
-            {
-              "type": "item",
-              "item": "razor-claw",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
-        {
-          "name": "sneasler",
-          "uuid": "Compendium.ptr2e.core-species.Item.7FQufFN5EZOn5sxs",
-          "methods": [
-            {
-              "type": "item",
-              "item": "razor-claw",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.tot601NnhzABAQi6"
-    }
-  },
-  "_id": "tot601NnhzABAQi6",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {},
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.tot601NnhzABAQi6"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.tot601NnhzABAQi6",
-    "duplicateSource": null
-  },
-  "_key": "!items!tot601NnhzABAQi6"
+    "_id": "tot601NnhzABAQi6",
+    "effects": []
 }
