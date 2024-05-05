@@ -1,60 +1,79 @@
 {
-    "name": "Controlled Curve",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Curveball Technique"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "physical",
-            "approach": "finesse",
-            "archetype": "Capture"
-        },
-        "description": "<p>When using Fling with a [PokeBall] item, you may prevent the attack from lowering a Pokemon below 1 HP.</p>",
-        "actions": [
-            {
-                "name": "Controlled Curve",
-                "slug": "controlled-curve",
-                "description": "Your Fling move may not reduce a Pokemon to less than 1 HP when utilising a [PokeBall] item.",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 1
-                },
-                "type": "generic",
-                "traits": [],
-                "range": {
-                    "target": "enemy",
-                    "unit": "m"
-                }
-            }
-        ],
-        "slug": "controlled-curve",
-        "traits": [],
-        "node": {
-            "i": 46,
-            "j": -30,
-            "connected": [
-                "curveball-technique",
-                "hunting-ball-expertise",
-                "hunting-ball-specs",
-                "venomous",
-                "weighted-ball-systems"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#8000ff",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Controlled Curve",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Curveball Technique"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Capture"
     },
-    "_id": "YxpE00r5vbxyBmsV",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "<p>When using Fling with a [PokeBall] item, you may prevent the attack from lowering a Pokemon below 1 HP.</p>",
+    "actions": [
+      {
+        "name": "Controlled Curve",
+        "slug": "controlled-curve",
+        "description": "Your Fling move may not reduce a Pokemon to less than 1 HP when utilising a [PokeBall] item.",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1
+        },
+        "type": "generic",
+        "traits": [],
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "controlled-curve",
+    "traits": [],
+    "node": {
+      "i": -55,
+      "j": 73,
+      "connected": [
+        "capture-ace-2",
+        "fast-pitch",
+        "curveball-technique"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#8000ff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "YxpE00r5vbxyBmsV",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.YxpE00r5vbxyBmsV"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714916804538,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!YxpE00r5vbxyBmsV"
 }

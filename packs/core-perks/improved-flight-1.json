@@ -1,52 +1,74 @@
 {
-    "name": "Improved Flight 1",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "A Flight Movement Allowance"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "physical",
-            "approach": "power",
-            "archetype": "Mobility"
-        },
-        "description": "Improve your Flight Movement Allowance by 2.",
-        "actions": [
-            {
-                "name": "Improved Flight 1",
-                "slug": "improved-flight-1",
-                "description": "Improve your Flight Movement Allowance by 2.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "improved-flight-1",
-        "traits": [],
-        "node": {
-            "i": 98,
-            "j": 9,
-            "connected": [
-                "root-6",
-                "improved-flight-2"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/flying_icon.png",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Improved Flight 1",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "A Flight Movement Allowance"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Mobility"
     },
-    "_id": "zMt840jnFxHWURAj",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "Improve your Flight Movement Allowance by 2.",
+    "actions": [
+      {
+        "name": "Improved Flight 1",
+        "slug": "improved-flight-1",
+        "description": "Improve your Flight Movement Allowance by 2.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "improved-flight-1",
+    "traits": [],
+    "node": {
+      "i": -108,
+      "j": 41,
+      "connected": [
+        "drifter",
+        "telekinetic-potential",
+        "psychoportation"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/flying_icon.png",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "zMt840jnFxHWURAj",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.zMt840jnFxHWURAj"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714921945775,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!zMt840jnFxHWURAj"
 }

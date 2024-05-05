@@ -1,55 +1,79 @@
 {
-    "name": "Tactician",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Leadership 30"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "social",
-            "approach": "finesse",
-            "archetype": "Support"
-        },
-        "description": "You are able to issue Commands to allied creatures which you are not deemed to have ownership of.",
-        "actions": [
-            {
-                "name": "Tactician",
-                "slug": "tactician",
-                "description": "You are able to issue Commands to allied creatures which you are not deemed to have ownership of.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "tactician",
-        "traits": [],
-        "node": {
-            "i": 60,
-            "j": -7,
-            "connected": [
-                "advanced-ball-weights",
-                "rapid-style",
-                "fast-pitch",
-                "dual-wielder",
-                "weather-capture-specs"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#80ffff",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-                "tint": "#0f0f0f",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Tactician",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Leadership 30"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "Support"
     },
-    "_id": "13JRGGWEpyfuZZuG",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You are able to issue Commands to allied creatures which you are not deemed to have ownership of.",
+    "actions": [
+      {
+        "name": "Tactician",
+        "slug": "tactician",
+        "description": "You are able to issue Commands to allied creatures which you are not deemed to have ownership of.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "tactician",
+    "traits": [],
+    "node": {
+      "i": 31,
+      "j": -47,
+      "connected": [
+        "root-3",
+        "unreasonable",
+        "stat-specialist",
+        "rapid-style",
+        "mobilize",
+        "keep-fighting",
+        "cheerleader",
+        "quick-switch"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#80ffff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+        "tint": "#0f0f0f",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "13JRGGWEpyfuZZuG",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.13JRGGWEpyfuZZuG"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922322473,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!13JRGGWEpyfuZZuG"
 }

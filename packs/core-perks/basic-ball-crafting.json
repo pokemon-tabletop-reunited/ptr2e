@@ -1,61 +1,79 @@
 {
-    "name": "Basic Ball Crafting",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Electronics 25"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "mental",
-            "approach": "resilience",
-            "archetype": "Crafting"
-        },
-        "description": "As a Camp Action, you can craft PokeBalls. This Perk also grants you the Basic Ball recipe.",
-        "actions": [
-            {
-                "name": "Basic Ball Crafting",
-                "slug": "basic-ball-crafting",
-                "description": "As a Camp Action, you can craft PokeBalls. This Perk also grants you the Basic Ball recipe.",
-                "cost": {
-                    "activation": "complex"
-                },
-                "type": "camping",
-                "traits": []
-            }
-        ],
-        "slug": "basic-ball-crafting",
-        "traits": [],
-        "node": {
-            "i": 44,
-            "j": -17,
-            "connected": [
-                "root-3",
-                "adrenaline-rush",
-                "advanced-ball-crafting",
-                "advanced-ball-weights",
-                "advanced-training-balls",
-                "berserk",
-                "blacksmith",
-                "bug-catcher",
-                "curveball-technique",
-                "pokeball-repairs",
-                "shadow-bubble"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#400080",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
-                "tint": "#ffffff",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Basic Ball Crafting",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Electronics 25"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Crafting"
     },
-    "_id": "nT6V9QuEPMqAy4Xj",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "As a Camp Action, you can craft PokeBalls. This Perk also grants you the Basic Ball recipe.",
+    "actions": [
+      {
+        "name": "Basic Ball Crafting",
+        "slug": "basic-ball-crafting",
+        "description": "As a Camp Action, you can craft PokeBalls. This Perk also grants you the Basic Ball recipe.",
+        "cost": {
+          "activation": "complex"
+        },
+        "type": "camping",
+        "traits": []
+      }
+    ],
+    "slug": "basic-ball-crafting",
+    "traits": [],
+    "node": {
+      "i": -34,
+      "j": 58,
+      "connected": [
+        "blacksmith",
+        "pokeball-repairs",
+        "weighted-ball-systems",
+        "training-ball-specs",
+        "hunting-ball-specs",
+        "gemcutter",
+        "root-4",
+        "trubbish-class-sandwiches"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#400080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "nT6V9QuEPMqAy4Xj",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.nT6V9QuEPMqAy4Xj"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714921101154,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!nT6V9QuEPMqAy4Xj"
 }

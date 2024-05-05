@@ -1,57 +1,74 @@
 {
-    "name": "Cyclist",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Riding 25"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "physical",
-            "approach": "power",
-            "archetype": "Athleticism"
-        },
-        "description": "When riding a [Cycle], your Overland Movement Allowance increases by +3, and you may use Take Down as if it were on your Active List. When riding a [Rotom Device] [Cycle] you get access to Wild Charge instead of Take Down.",
-        "actions": [
-            {
-                "name": "Cyclist",
-                "slug": "cyclist",
-                "description": "When riding a [Cycle], your Overland Movement Allowance increases by +3, and you may use Take Down as if it were on your Active List. When riding a [Rotom Device] [Cycle] you get access to Wild Charge instead of Take Down.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "cyclist",
-        "traits": [],
-        "node": {
-            "i": -12,
-            "j": 30,
-            "connected": [
-                "root-5",
-                "all-seasonal",
-                "formation-attacks",
-                "hobby-gardener",
-                "lean-in",
-                "palaeontologist",
-                "pokemaniac"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#e4db1b",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
-                "tint": "#121212",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Cyclist",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Riding 25"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Athleticism"
     },
-    "_id": "AFU1teCNRoIixS3n",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "When riding a [Cycle], your Overland Movement Allowance increases by +3, and you may use Take Down as if it were on your Active List. When riding a [Rotom Device] [Cycle] you get access to Wild Charge instead of Take Down.",
+    "actions": [
+      {
+        "name": "Cyclist",
+        "slug": "cyclist",
+        "description": "When riding a [Cycle], your Overland Movement Allowance increases by +3, and you may use Take Down as if it were on your Active List. When riding a [Rotom Device] [Cycle] you get access to Wild Charge instead of Take Down.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "cyclist",
+    "traits": [],
+    "node": {
+      "i": 41,
+      "j": -91,
+      "connected": [
+        "root-2",
+        "emergency-retreat",
+        "improved-overland-5"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#e4db1b",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
+        "tint": "#121212",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "AFU1teCNRoIixS3n",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.AFU1teCNRoIixS3n"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922286138,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!AFU1teCNRoIixS3n"
 }

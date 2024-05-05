@@ -6,7 +6,7 @@ import { PerkStore, PTRNode } from "./perks-store.ts";
 import { PerkHUD } from "./perk-hud.ts";
 import { ItemPTR2e } from "@item";
 import { Path, PathStep } from "./perk-graph.ts";
-import { TilingSprite } from "pixi.js";
+import { FederatedEvent, TilingSprite } from "pixi.js";
 
 class PerkWeb extends PIXI.Container {
     get activeNode() {
@@ -84,6 +84,7 @@ class PerkWeb extends PIXI.Container {
         this.#drawn = false;
         this.hexes = new Map();
         this.editMode = false;
+        this.controlled = [];
     }
 
     public static readonly HEX_SIZE = 60 as const;
@@ -102,7 +103,7 @@ class PerkWeb extends PIXI.Container {
             await actor.sheet.minimize();
         }
 
-        this.pan(resetView ? { x: 0, y: 0, scale: 1.0 } : {}).refresh();
+        this.pan(resetView ? { x: -2238, y: 0, scale: 0.1 } : {}).refresh();
 
         canvas.stage.eventMode = "none";
         this.stage.eventMode = "static";
@@ -148,6 +149,7 @@ class PerkWeb extends PIXI.Container {
 
         this.backgroundLayer = this.addChild(new PIXI.Container());
         this.foregroundLayer = this.addChild(new PIXI.Container());
+        this.select = this.addChild(new PIXI.Graphics()) as PIXI.Graphics & { active: boolean };
 
         this.background = this.backgroundLayer.addChild(await this._drawBackground());
         // DEBUG Grid
@@ -388,15 +390,23 @@ class PerkWeb extends PIXI.Container {
 
         // Remove stage listeners
         const callbacks = {
-            hoverOut: () => {
-                //@ts-expect-error
-                if(this.interactionManager.target === this) {
-                    return false;
+            hoverOut: (event: FederatedEvent) => {
+                if(event.nativeEvent.target !== event.nativeEvent.currentTarget) return false;
+                return;
+            },
+            clickRight: () => {
+                if (this.controlled.length) {
+                    this.controlled.forEach((node) => node.releaseControl());
+                    return true;
                 }
                 return;
             },
             dragRightMove: this.onDragRightMove,
-        }
+            dragLeftStart: this.onDragLeftStart,
+            dragLeftMove: this.onDragLeftMove,
+            dragLeftDrop: this.onDragLeftDrop,
+            dragLeftCancel: this.onDragLeftCancel,
+        };
 
         const manager = new MouseInteractionManager(this as any, this as any, {}, callbacks, {
             dragResistance: 30,
@@ -415,15 +425,57 @@ class PerkWeb extends PIXI.Container {
         context.event?.preventDefault();
         context.event?.stopPropagation();
         const { i, j, node } = this.#lastUpdate;
-        this.updateHexPosition(node, { i, j });
+        this.updateHexPosition(node, { point: { i, j } });
         ui.notifications.info(`Restored previous position for ${node.node.perk?.name}`);
         return true;
     }
 
     public onDelete(context: KeyboardEventContext) {
-        if (!this.editMode || !this.activeNode) return;
+        if(this.canvas.hidden) return;
         context.event?.preventDefault();
         context.event?.stopPropagation();
+        if (!this.editMode || (!this.activeNode && !this.controlled.length)) return;
+
+        if(this.controlled.length) {
+            const nodes = this.controlled.filter((node) => node !== this.activeNode);
+            if(this.activeNode) nodes.push(this.activeNode);
+            const names = nodes.map((node) => `<li>${node.node.perk.name}</li>`).join("");
+            foundry.applications.api.DialogV2.confirm({
+                window: {
+                    title: `Delete Nodes`,
+                },
+                content: `<p>Are you sure you want to delete all of the following nodes from the web?</p> <ul>${names}</ul>`,
+                yes: {
+                    callback: async () => {
+                        const updates = [];
+                        const packUpdates: Record<string, {_id: string, "system.node": {i: null, j: null}}[]> = {};
+                        for (const node of nodes) {
+                            const perk = node.node.perk;
+                            if(perk.pack) {
+                                packUpdates[perk.pack] ??= []
+                                packUpdates[perk.pack].push({
+                                    _id: perk.id,
+                                    "system.node": { i: null, j: null }
+                                })
+                            }
+                            else {
+                                updates.push({
+                                    _id: perk.id,
+                                    "system.node": { i: null, j: null }
+                                });
+                            }
+                        }
+                        await Item.updateDocuments(updates);
+                        for(const pack in packUpdates) {
+                            await Item.updateDocuments(packUpdates[pack], {pack});
+                        }
+                        return this.refresh({ nodeRefresh: true });
+                    },
+                },
+            });
+            return true;
+        }
+        if(!this.activeNode) return;
 
         const node = this.activeNode.node;
         foundry.applications.api.DialogV2.confirm({
@@ -439,14 +491,13 @@ class PerkWeb extends PIXI.Container {
             },
         });
         if (this.activeNode.originalPosition) {
-            this.updateHexPosition(
-                this.activeNode,
-                {
+            this.updateHexPosition(this.activeNode, {
+                ignoreOriginal: true,
+                point: {
                     x: this.activeNode.originalPosition.x,
                     y: this.activeNode.originalPosition.y,
                 },
-                true
-            );
+            });
         }
         return true;
     }
@@ -493,7 +544,7 @@ class PerkWeb extends PIXI.Container {
         if (!Number.isNumeric(x)) x = this.stage.pivot.x;
         if (!Number.isNumeric(y)) y = this.stage.pivot.y;
         if (!Number.isNumeric(scale)) scale = this.stage.scale.x;
-        const d = {width: PerkWeb.backgroundSize, height: PerkWeb.backgroundSize};
+        const d = { width: PerkWeb.backgroundSize, height: PerkWeb.backgroundSize };
 
         // Constrain the scale to the maximum zoom level
         const maxScale = 0.75;
@@ -503,7 +554,7 @@ class PerkWeb extends PIXI.Container {
 
         // Constrain the pivot point using the new scale
         const paddingX = d.width * 0; // If padding is wished change 0 to % like 0.1 for 10% padding
-        const paddingY = d.height * 0; 
+        const paddingY = d.height * 0;
         const maxX = ((d.width + paddingX) * scale - window.innerWidth / 2) / scale;
         const maxY = ((d.height + paddingY) * scale - window.innerHeight / 2) / scale;
         x = Math.clamp(x!, -maxX, maxX);
@@ -532,6 +583,118 @@ class PerkWeb extends PIXI.Container {
         const deltaZ =
             ("delta" in event ? (event.delta as number) : event.deltaX) < 0 ? 1.05 : 0.95;
         this.pan({ scale: deltaZ * this.stage.scale.x });
+    }
+
+    private onDragLeftStart(event: {
+        interactionData: {
+            coords?: { x: number; y: number; width: number; height: number };
+        };
+    }) {
+        // The event object appears to be reused, so delete any coords from a previous selection.
+        delete event.interactionData.coords;
+        this.select.active = true;
+        return;
+    }
+
+    private onDragLeftMove(event: {
+        interactionData: {
+            origin: { x: number; y: number };
+            destination: { x: number; y: number };
+            coords?: { x: number; y: number; width: number; height: number };
+        };
+    }) {
+        if (this.select.active) return this.onDragSelect(event);
+    }
+
+    private onDragLeftDrop(event: {
+        shiftKey: boolean;
+        interactionData: {
+            origin: { x: number; y: number };
+            destination: { x: number; y: number };
+            coords?: { x: number; y: number; width: number; height: number };
+        };
+    }) {
+        // Extract event data
+        const coords = event.interactionData.coords;
+
+        if (this.select.active) {
+            this.select.clear();
+            this.select.active = false;
+            const releaseOthers = !event.shiftKey;
+            if (!coords) return;
+            return this.selectObjects(coords, { releaseOthers });
+        }
+        return;
+    }
+
+    private onDragLeftCancel() {
+        if (this.select.active) {
+            this.select.clear();
+            return true;
+        }
+        return;
+    }
+
+    private onDragSelect(event: {
+        interactionData: {
+            origin: { x: number; y: number };
+            destination: { x: number; y: number };
+            coords?: { x: number; y: number; width: number; height: number };
+        };
+    }) {
+        if (!this.editMode) return;
+        // Extract event data
+        const { origin, destination } = event.interactionData;
+
+        // Determine rectangle coordinates
+        let coords = {
+            x: Math.min(origin.x, destination.x),
+            y: Math.min(origin.y, destination.y),
+            width: Math.abs(destination.x - origin.x),
+            height: Math.abs(destination.y - origin.y),
+        };
+
+        // Draw the select rectangle
+        this.drawSelect(coords);
+        event.interactionData.coords = coords;
+    }
+
+    private drawSelect({
+        x,
+        y,
+        width,
+        height,
+    }: {
+        x: number;
+        y: number;
+        width: number;
+        height: number;
+    }) {
+        const s = this.select.clear();
+        s.lineStyle(3, 0xff9829, 1).drawRect(x, y, width, height);
+    }
+
+    public selectObjects(
+        { x, y, height, width }: { x: number; y: number; height: number; width: number },
+        { releaseOthers = true } = {}
+    ) {
+        const oldSet = new Set<PerkNode>(this.controlled);
+        const newSet = new Set<PerkNode>();
+
+        for (const node of this.collection) {
+            if (!node.element) continue;
+            const { x: nodeX, y: nodeY } = node.element.position;
+            if (nodeX < x || nodeX > x + width || nodeY < y || nodeY > y + height) continue;
+            newSet.add(node.element);
+        }
+
+        const toRelease = oldSet.difference(newSet);
+        if (releaseOthers) toRelease.forEach((node) => node.releaseControl());
+
+        const toControl = newSet.difference(oldSet);
+        toControl.forEach((node) => node.control());
+
+        return (releaseOthers && toRelease.size > 0) || toControl.size > 0;
     }
 
     public activateNode(node: PerkNode, mode: ValueOf<PerkEditState>) {
@@ -623,7 +786,12 @@ class PerkWeb extends PIXI.Container {
         // Check if any of the adjacent hexes are already occupied
         for (const [i, j] of spotsToCheck) {
             const node = this.collection.get(`${i},${j}`);
-            if (node && node.element !== this.activeNode) return false;
+            if (
+                node &&
+                node.element !== this.activeNode &&
+                !this.controlled.includes(node.element!)
+            )
+                return false;
         }
 
         return true;
@@ -631,8 +799,46 @@ class PerkWeb extends PIXI.Container {
 
     public async updateHexPosition(
         node: PerkNode,
-        point?: { x: number; y: number } | { i: number; j: number },
-        ignoreOriginal = false
+        {
+            ignoreOriginal,
+            updateDataOnly,
+            point,
+        }: {
+            updateDataOnly?: false;
+            ignoreOriginal?: boolean;
+            point?: { x: number; y: number } | { i: number; j: number };
+        }
+    ): Promise<boolean>;
+    public async updateHexPosition(
+        node: PerkNode,
+        {
+            ignoreOriginal,
+            updateDataOnly,
+            point,
+        }: {
+            updateDataOnly: true;
+            ignoreOriginal?: boolean;
+            point?: { x: number; y: number } | { i: number; j: number };
+        }
+    ): Promise<{
+        itemUpdate: { _id: string; "system.node": { i: number; j: number } };
+        options?: { pack: string };
+        nodeUpdate: {node: PerkNode; coords: { i: number; j: number; x: number; y: number }};
+    } | boolean>;
+    public async updateHexPosition(
+        node: PerkNode,
+        {
+            ignoreOriginal = false,
+            updateDataOnly = false,
+            point,
+        }: {
+            ignoreOriginal?: boolean;
+            updateDataOnly?: boolean;
+            point?: { x: number; y: number } | { i: number; j: number };
+        } = {
+            ignoreOriginal: false,
+            updateDataOnly: false,
+        }
     ) {
         const { x, y } = ((): { x: number; y: number } => {
             if (point) {
@@ -661,31 +867,68 @@ class PerkWeb extends PIXI.Container {
             return false;
         }
 
+        if (updateDataOnly) {
+            const perk = node.node.perk;
+            const update: {
+                itemUpdate: { _id: string; "system.node": { i: number; j: number } };
+                options?: { pack: string };
+                nodeUpdate: {node: PerkNode; coords: { i: number; j: number; x: number; y: number }};
+            } = {
+                itemUpdate: { _id: perk.id, "system.node": { i, j } },
+                nodeUpdate: { node, coords: { i, j, x, y } },
+            };
+            if (perk.pack) {
+                update.options = { pack: perk.pack };
+            }
+            return update;
+        }
+
         try {
-            await node.node.perk?.update({ "system.node": { i, j } });
+            await node.node.perk.update({ "system.node": { i, j } });
 
-            const { i: oldI, j: oldJ } = fu.duplicate(node.node.position);
-            this.#lastUpdate = { i: oldI, j: oldJ, node };
-
-            node.node.position = { i, j };
-            this.collection.set(`${i},${j}`, node.node);
-            this.collection.delete(`${oldI},${oldJ}`);
-
-            node.position.set(x, y);
-            node.originalPosition = null;
-            node.redrawEdges();
+            this.updateNewNodePositions([{ node, coords: { i, j, x, y } }]);
         } catch {
+            this.resetFailedUpdateNodePositions([node]);
+        }
+
+        return true;
+    }
+
+    public updateNewNodePositions(
+        nodes: { node: PerkNode; coords: { i: number; j: number; x: number; y: number } }[]
+    ) {
+        for (const entry of nodes) {
+            this.updateNodeItemPosition(entry.node, entry.coords);
+            if (this.activeNode === entry.node) this.deactivateNode();
+        }
+    }
+
+    public resetFailedUpdateNodePositions(nodes: PerkNode[]) {
+        for (const node of nodes) {
             if (node.originalPosition) {
                 node.position.set(node.originalPosition.x, node.originalPosition.y);
                 node.redrawEdges();
             }
-        } finally {
-            if (this.activeNode === node) {
-                this.deactivateNode();
-            }
+            if (this.activeNode === node) this.deactivateNode();
         }
+    }
 
-        return true;
+    private updateNodeItemPosition(
+        node: PerkNode,
+        { i, j, x, y }: { i: number; j: number; x: number; y: number }
+    ) {
+        //await node.node.perk?.update({ "system.node": { i, j } });
+
+        const { i: oldI, j: oldJ } = fu.duplicate(node.node.position);
+        this.#lastUpdate = { i: oldI, j: oldJ, node };
+
+        node.node.position = { i, j };
+        this.collection.set(`${i},${j}`, node.node);
+        this.collection.delete(`${oldI},${oldJ}`);
+
+        node.position.set(x, y);
+        node.originalPosition = null;
+        node.redrawEdges();
     }
 
     public async toggleNodeVisibility(node: PerkNode) {
@@ -777,7 +1020,7 @@ class PerkWeb extends PIXI.Container {
 
                 const existing = this.collection.getName(item.slug);
                 if (existing) {
-                    this.updateHexPosition(existing.element!, { i, j });
+                    this.updateHexPosition(existing.element!, { point: { i, j } });
                     return this;
                 }
 
@@ -853,6 +1096,7 @@ interface PerkWeb {
 
     backgroundLayer: PIXI.Container;
     foregroundLayer: PIXI.Container;
+    select: PIXI.Graphics & { active: boolean };
 
     background: TilingSprite;
     grid: PIXI.Graphics;
@@ -865,6 +1109,8 @@ interface PerkWeb {
     collection: PerkStore;
 
     editMode: boolean;
+
+    controlled: PerkNode[];
 }
 export type { CoordinateString };
 export default PerkWeb;

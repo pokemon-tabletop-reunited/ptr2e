@@ -1,56 +1,75 @@
 {
-    "name": "Inner Warmth",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Fire]"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "physical",
-            "approach": "power",
-            "archetype": "[Fire Type]"
-        },
-        "description": "You gain the [Heater] trait.",
-        "actions": [
-            {
-                "name": "Inner Warmth",
-                "slug": "inner-warmth",
-                "description": "You gain the [Heater] trait.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "inner-warmth",
-        "traits": [],
-        "node": {
-            "i": 38,
-            "j": 23,
-            "connected": [
-                "agile-style",
-                "climatologist",
-                "burglar",
-                "powerlifter",
-                "type-specialty",
-                "weathered"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/fire_icon.png",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Inner Warmth",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Fire]"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "[Fire Type]"
     },
-    "_id": "vgrtXLOiip6DrtUb",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You gain the [Heater] trait.",
+    "actions": [
+      {
+        "name": "Inner Warmth",
+        "slug": "inner-warmth",
+        "description": "You gain the [Heater] trait.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "inner-warmth",
+    "traits": [],
+    "node": {
+      "i": 10,
+      "j": 39,
+      "connected": [
+        "type-embodiment-type-2",
+        "root-4",
+        "intense-heat",
+        "firefly"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/fire_icon.png",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "vgrtXLOiip6DrtUb",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.vgrtXLOiip6DrtUb"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714921535442,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!vgrtXLOiip6DrtUb"
 }

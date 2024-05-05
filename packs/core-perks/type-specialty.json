@@ -1,53 +1,77 @@
 {
-    "name": "Type Specialty",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "None"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "social",
-            "approach": "finesse",
-            "archetype": "Type Ace"
-        },
-        "description": "You gain +10 to social interaction skill tests when interacting with Pokemon of your preferred type. The cost on this scales with each additional type chosen.",
-        "actions": [
-            {
-                "name": "Type Specialty",
-                "slug": "type-specialty",
-                "description": "You gain +10 to social interaction skill tests when interacting with Pokemon of your preferred type. The cost on this scales with each additional type chosen.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "type-specialty",
-        "traits": [],
-        "node": {
-            "i": 33,
-            "j": 37,
-            "connected": [
-                "root-4",
-                "evasive-style",
-                "inner-warmth"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#c0c0c0",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
-                "tint": "#ffffff",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Type Specialty",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "Type Ace"
     },
-    "_id": "7M9EE1mHIJeoAWhp",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You gain +10 to social interaction skill tests when interacting with Pokemon of your preferred type. The cost on this scales with each additional type chosen.",
+    "actions": [
+      {
+        "name": "Type Specialty",
+        "slug": "type-specialty",
+        "description": "You gain +10 to social interaction skill tests when interacting with Pokemon of your preferred type. The cost on this scales with each additional type chosen.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "type-specialty",
+    "traits": [],
+    "node": {
+      "i": -50,
+      "j": -17,
+      "connected": [
+        "root-1",
+        "type-domain",
+        "type-tutoring",
+        "type-embodiment-type",
+        "scholar",
+        "improved-overland-4"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#c0c0c0",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "7M9EE1mHIJeoAWhp",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.7M9EE1mHIJeoAWhp"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714921040344,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!7M9EE1mHIJeoAWhp"
 }

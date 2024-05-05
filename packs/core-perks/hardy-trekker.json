@@ -1,60 +1,77 @@
 {
-    "name": "Hardy Trekker",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Trainer] or [Expedition Leader]",
-            "Survival 40"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "physical",
-            "approach": "resilience",
-            "archetype": "Outdoorsman"
-        },
-        "description": "Until the start of the next Round, the user possesses the Ability Overcoat.",
-        "actions": [
-            {
-                "name": "Hardy Trekker",
-                "slug": "hardy-trekker",
-                "description": "Until the start of the next Round, the user possesses the Ability Overcoat.",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 4
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "hardy-trekker",
-        "traits": [],
-        "node": {
-            "i": 5,
-            "j": 26,
-            "connected": [
-                "formation-attacks",
-                "cheerleader",
-                "fiendish-provocation",
-                "hobby-gardener",
-                "intense-heat",
-                "open-your-heart",
-                "scholar",
-                "spectral-stalker"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#808080",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
-                "tint": "#ffffff",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Hardy Trekker",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Trainer] or [Expedition Leader]",
+      "Survival 40"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Outdoorsman"
     },
-    "_id": "iOlwna5vtQnrFxtc",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "Until the start of the next Round, the user possesses the Ability Overcoat.",
+    "actions": [
+      {
+        "name": "Hardy Trekker",
+        "slug": "hardy-trekker",
+        "description": "Until the start of the next Round, the user possesses the Ability Overcoat.",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "hardy-trekker",
+    "traits": [],
+    "node": {
+      "i": -44,
+      "j": -61,
+      "connected": [
+        "weathered",
+        "swimming-lessons",
+        "improved-overland-2",
+        "improved-swim-1"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#808080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "iOlwna5vtQnrFxtc",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.iOlwna5vtQnrFxtc"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714918740776,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!iOlwna5vtQnrFxtc"
 }

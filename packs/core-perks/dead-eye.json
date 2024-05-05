@@ -1,57 +1,75 @@
 {
-    "name": "Dead Eye",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "None"
-        ],
-        "cost": 4,
-        "design": {
-            "arena": "physical",
-            "approach": "finesse",
-            "archetype": "Combat"
-        },
-        "description": "Trigger: You score a hit with a damaging ranged move which is not a Critical Hit. The attack becomes a critical hit.",
-        "actions": [
-            {
-                "name": "Dead Eye",
-                "slug": "dead-eye",
-                "description": "Trigger: You score a hit with a damaging ranged move which is not a Critical Hit. The attack becomes a critical hit.",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 5
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "dead-eye",
-        "traits": [],
-        "node": {
-            "i": -16,
-            "j": 6,
-            "connected": [
-                "root-1",
-                "dead-to-rights",
-                "drifter",
-                "firefly",
-                "fisherman",
-                "silver-bullet"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#0000ff",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-                "tint": "#ffffff",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Dead Eye",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 4,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Combat"
     },
-    "_id": "XwBEo0SPEQ5UtA0l",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "Trigger: You score a hit with a damaging ranged move which is not a Critical Hit. The attack becomes a critical hit.",
+    "actions": [
+      {
+        "name": "Dead Eye",
+        "slug": "dead-eye",
+        "description": "Trigger: You score a hit with a damaging ranged move which is not a Critical Hit. The attack becomes a critical hit.",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 5
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "dead-eye",
+    "traits": [],
+    "node": {
+      "i": -43,
+      "j": 95,
+      "connected": [
+        "down-the-sights",
+        "dead-to-rights",
+        "precise-style"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#0000ff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "XwBEo0SPEQ5UtA0l",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.XwBEo0SPEQ5UtA0l"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922220971,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!XwBEo0SPEQ5UtA0l"
 }

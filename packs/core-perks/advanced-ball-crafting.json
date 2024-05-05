@@ -1,60 +1,77 @@
 {
-    "name": "Advanced Ball Crafting",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Electronics 40",
-            "Basic Ball Crafting"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "mental",
-            "approach": "resilience",
-            "archetype": "Crafting"
-        },
-        "description": "You learn the Great Ball recipe.",
-        "actions": [
-            {
-                "name": "Advanced Ball Crafting",
-                "slug": "advanced-ball-crafting",
-                "description": "You learn the Great Ball recipe.",
-                "cost": {
-                    "activation": "complex"
-                },
-                "type": "camping",
-                "traits": []
-            }
-        ],
-        "slug": "advanced-ball-crafting",
-        "traits": [],
-        "node": {
-            "i": 53,
-            "j": -18,
-            "connected": [
-                "basic-ball-crafting",
-                "dimensional-balls",
-                "expansive-weather-captures",
-                "expert-ball-crafting",
-                "training-ball-specs",
-                "type-ball-range-boost",
-                "type-ball-specs",
-                "weather-capture-specs",
-                "weighted-ball-expertise"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#ff0080",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Advanced Ball Crafting",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Electronics 40",
+      "Basic Ball Crafting"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Crafting"
     },
-    "_id": "FJbAcmnTSwKkuIhY",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You learn the Great Ball recipe.",
+    "actions": [
+      {
+        "name": "Advanced Ball Crafting",
+        "slug": "advanced-ball-crafting",
+        "description": "You learn the Great Ball recipe.",
+        "cost": {
+          "activation": "complex"
+        },
+        "type": "camping",
+        "traits": []
+      }
+    ],
+    "slug": "advanced-ball-crafting",
+    "traits": [],
+    "node": {
+      "i": -42,
+      "j": 42,
+      "connected": [
+        "weighted-ball-systems",
+        "training-ball-specs",
+        "hunting-ball-specs",
+        "weather-capture-specs",
+        "capture-ace-1"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ff0080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "FJbAcmnTSwKkuIhY",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.FJbAcmnTSwKkuIhY"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714916314182,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!FJbAcmnTSwKkuIhY"
 }

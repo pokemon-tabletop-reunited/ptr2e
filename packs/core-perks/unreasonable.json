@@ -1,60 +1,81 @@
 {
-    "name": "Unreasonable",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Intimidate 30"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "social",
-            "approach": "resilience",
-            "archetype": "Face"
-        },
-        "description": "<p>You are unreasonable to deal with and can sometimes counter people's attempts to undermine you in a social confrontation. When targeted by a Conversation or Deception skill check, you may resist using Intimidate instead of Psychology.</p>",
-        "actions": [
-            {
-                "name": "Unreasonable",
-                "slug": "unreasonable",
-                "description": "You are unreasonable to deal with and can sometimes counter people's attempts to undermine you in a social confrontation.",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 2
-                },
-                "type": "generic",
-                "traits": [],
-                "range": {
-                    "target": "enemy",
-                    "unit": "m"
-                }
-            }
-        ],
-        "slug": "unreasonable",
-        "traits": [],
-        "node": {
-            "i": -2,
-            "j": 9,
-            "connected": [
-                "fisherman",
-                "potent-venom",
-                "screen-setter",
-                "silver-bullet",
-                "milcery-class-curry"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#ffffff",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
-                "tint": "#141414",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Unreasonable",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Intimidate 30"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "Face"
     },
-    "_id": "zFg7hQjnXI2qaLYt",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "<p>You are unreasonable to deal with and can sometimes counter people's attempts to undermine you in a social confrontation. When targeted by a Conversation or Deception skill check, you may resist using Intimidate instead of Psychology.</p>",
+    "actions": [
+      {
+        "name": "Unreasonable",
+        "slug": "unreasonable",
+        "description": "You are unreasonable to deal with and can sometimes counter people's attempts to undermine you in a social confrontation.",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2
+        },
+        "type": "generic",
+        "traits": [],
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "unreasonable",
+    "traits": [],
+    "node": {
+      "i": 27,
+      "j": -30,
+      "connected": [
+        "you-belong-to-me",
+        "root-3",
+        "tactician",
+        "hesitation",
+        "thug"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ffffff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
+        "tint": "#141414",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "zFg7hQjnXI2qaLYt",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.zFg7hQjnXI2qaLYt"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714917460277,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!zFg7hQjnXI2qaLYt"
 }

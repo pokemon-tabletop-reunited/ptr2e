@@ -1,56 +1,75 @@
 {
-    "name": "Nurturing Shoots",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Grass]"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "social",
-            "approach": "finesse",
-            "archetype": "[Grass Type]"
-        },
-        "description": "You gain the [Sprouter] trait.",
-        "actions": [
-            {
-                "name": "Nurturing Shoots",
-                "slug": "nurturing-shoots",
-                "description": "You gain the [Sprouter] trait.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "nurturing-shoots",
-        "traits": [],
-        "node": {
-            "i": 4,
-            "j": -22,
-            "connected": [
-                "mobilize",
-                "breeder",
-                "groomer",
-                "root-2",
-                "pack-alpha",
-                "walking-dead"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/grass_icon.png",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Nurturing Shoots",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Grass]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "[Grass Type]"
     },
-    "_id": "cAm1mX4AkuIz2hi1",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You gain the [Sprouter] trait.",
+    "actions": [
+      {
+        "name": "Nurturing Shoots",
+        "slug": "nurturing-shoots",
+        "description": "You gain the [Sprouter] trait.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "nurturing-shoots",
+    "traits": [],
+    "node": {
+      "i": -68,
+      "j": -9,
+      "connected": [
+        "hobby-gardener",
+        "one-with-the-green",
+        "type-embodiment-type",
+        "climatologist"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/grass_icon.png",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "cAm1mX4AkuIz2hi1",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.cAm1mX4AkuIz2hi1"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922073702,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!cAm1mX4AkuIz2hi1"
 }

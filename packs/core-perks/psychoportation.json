@@ -1,51 +1,75 @@
 {
-    "name": "Psychoportation",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Psychic]"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "mental",
-            "approach": "power",
-            "archetype": "[Psychic Type]"
-        },
-        "description": "You gain the [Teleporter] trait. Additionally, you gain a Teleport Movement Allowance equal to that of your highest Primary <movement type=\"\">.</movement>",
-        "actions": [
-            {
-                "name": "Psychoportation",
-                "slug": "psychoportation",
-                "description": "You gain the [Teleporter] trait. Additionally, you gain a Teleport Movement Allowance equal to that of your highest Primary <Movement Type>.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "psychoportation",
-        "traits": [],
-        "node": {
-            "i": 88,
-            "j": 8,
-            "connected": [
-                "root-6"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/psychic_icon.png",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Psychoportation",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Psychic]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "[Psychic Type]"
     },
-    "_id": "362jA0jsfgTgKKiE",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You gain the [Teleporter] trait. Additionally, you gain a Teleport Movement Allowance equal to that of your highest Primary <movement type=\"\">.</movement>",
+    "actions": [
+      {
+        "name": "Psychoportation",
+        "slug": "psychoportation",
+        "description": "You gain the [Teleporter] trait. Additionally, you gain a Teleport Movement Allowance equal to that of your highest Primary <Movement Type>.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "psychoportation",
+    "traits": [],
+    "node": {
+      "i": -106,
+      "j": 46,
+      "connected": [
+        "improved-teleportation-1",
+        "telekinetic-potential",
+        "long-range-psychoportation",
+        "improved-flight-1"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/psychic_icon.png",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "362jA0jsfgTgKKiE",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.362jA0jsfgTgKKiE"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714921945775,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!362jA0jsfgTgKKiE"
 }
