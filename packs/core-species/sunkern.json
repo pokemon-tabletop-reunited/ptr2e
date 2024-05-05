@@ -1,531 +1,518 @@
 {
-  "name": "sunkern",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 191,
-    "size": {
-      "category": "tiny",
-      "type": "height",
-      "height": 0.3,
-      "weight": 1.8
+    "name": "sunkern",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 191,
+        "size": {
+            "category": "tiny",
+            "type": "height",
+            "height": 0.3,
+            "weight": 1.8
+        },
+        "diet": [
+            "photosynthesis"
+        ],
+        "movement": {
+            "primary": [
+                {
+                    "type": "overland",
+                    "value": 3
+                }
+            ],
+            "secondary": []
+        },
+        "traits": [
+            "pokemon",
+            "hopper",
+            "sprouter",
+            "underdog"
+        ],
+        "abilities": {
+            "starting": [
+                "chlorophyll",
+                "solar-power"
+            ],
+            "basic": [
+                "early-bird",
+                "chloroplast"
+            ],
+            "advanced": [
+                "adaptability",
+                "big-leaves"
+            ],
+            "master": [
+                "sunbathe",
+                "drought"
+            ]
+        },
+        "skills": {
+            "acrobatics": 25,
+            "conversation": 30,
+            "lift": 10,
+            "listen": 25,
+            "natural-world": 30,
+            "running": 5,
+            "spot": 15,
+            "survival": 25
+        },
+        "stats": {
+            "hp": 30,
+            "atk": 30,
+            "def": 30,
+            "spa": 30,
+            "spd": 30,
+            "spe": 30
+        },
+        "types": [
+            "grass"
+        ],
+        "moves": {
+            "egg": [
+                {
+                    "name": "leech-seed",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "bide",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "curse",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "endure",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "encore",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "sweet-scent",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "morning-sun",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "nature-power",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "helping-hand",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "ingrain",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "grass-whistle",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "natural-gift",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "grassy-terrain",
+                    "gen": "scarlet-violet"
+                }
+            ],
+            "tutor": [
+                {
+                    "name": "swords-dance",
+                    "gen": "firered-leafgreen"
+                },
+                {
+                    "name": "double-edge",
+                    "gen": "xd"
+                },
+                {
+                    "name": "mimic",
+                    "gen": "xd"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "xd"
+                },
+                {
+                    "name": "snore",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "giga-drain",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "endure",
+                    "gen": "emerald"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "xd"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "black-2-white-2"
+                },
+                {
+                    "name": "synthesis",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "uproar",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "helping-hand",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "endeavor",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "worry-seed",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "seed-bomb",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "earth-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "after-you",
+                    "gen": "ultra-sun-ultra-moon"
+                }
+            ],
+            "machine": [
+                {
+                    "name": "swords-dance",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "cut",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "take-down",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "double-edge",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "solar-beam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "toxic",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "double-team",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "light-screen",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "flash",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "rest",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "snore",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "curse",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "protect",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "sludge-bomb",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "giga-drain",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "endure",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "attract",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "return",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "frustration",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "safeguard",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "encore",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "sweet-scent",
+                    "gen": "crystal"
+                },
+                {
+                    "name": "hidden-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "rain-dance",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "sunny-day",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "facade",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "nature-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "helping-hand",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "endeavor",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "secret-power",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "weather-ball",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "bullet-seed",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "magical-leaf",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "natural-gift",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "seed-bomb",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "energy-ball",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "earth-power",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "leaf-storm",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "captivate",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "grass-knot",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "round",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "grassy-terrain",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "confide",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "tera-blast",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "trailblaze",
+                    "gen": "scarlet-violet"
+                }
+            ],
+            "levelUp": [
+                {
+                    "name": "tackle",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "growth",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "ingrain",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 4
+                },
+                {
+                    "name": "absorb",
+                    "gen": "scarlet-violet",
+                    "level": 7
+                },
+                {
+                    "name": "grass-whistle",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 7
+                },
+                {
+                    "name": "mega-drain",
+                    "gen": "scarlet-violet",
+                    "level": 10
+                },
+                {
+                    "name": "leech-seed",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 13
+                },
+                {
+                    "name": "razor-leaf",
+                    "gen": "scarlet-violet",
+                    "level": 16
+                },
+                {
+                    "name": "worry-seed",
+                    "gen": "scarlet-violet",
+                    "level": 19
+                },
+                {
+                    "name": "giga-drain",
+                    "gen": "scarlet-violet",
+                    "level": 22
+                },
+                {
+                    "name": "endeavor",
+                    "gen": "scarlet-violet",
+                    "level": 25
+                },
+                {
+                    "name": "synthesis",
+                    "gen": "scarlet-violet",
+                    "level": 28
+                },
+                {
+                    "name": "solar-beam",
+                    "gen": "scarlet-violet",
+                    "level": 31
+                },
+                {
+                    "name": "natural-gift",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 31
+                },
+                {
+                    "name": "double-edge",
+                    "gen": "scarlet-violet",
+                    "level": 34
+                },
+                {
+                    "name": "sunny-day",
+                    "gen": "scarlet-violet",
+                    "level": 36
+                },
+                {
+                    "name": "seed-bomb",
+                    "gen": "scarlet-violet",
+                    "level": 39
+                }
+            ]
+        },
+        "captureRate": 235,
+        "eggGroups": [
+            "plant"
+        ],
+        "genderRatio": 4,
+        "evolutions": {
+            "name": "sunkern",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "sunflora",
+                    "uuid": "Compendium.ptr2e.core-species.Item.SrVNMRejBOWNWj6q",
+                    "methods": [
+                        {
+                            "type": "item",
+                            "item": "sun-stone",
+                            "operand": "or",
+                            "held": false
+                        },
+                        {
+                            "type": "level",
+                            "level": 24,
+                            "operand": "or"
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    },
+                    "evolutions": []
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.SrVNMRejBOWNWj6q",
+            "methods": []
+        },
+        "habitats": []
     },
-    "diet": [
-      "photosynthesis"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 3
-        }
-      ],
-      "secondary": []
-    },
-    "traits": [
-      "pokemon",
-      "hopper",
-      "sprouter",
-      "underdog"
-    ],
-    "abilities": {
-      "starting": [
-        "chlorophyll",
-        "solar-power"
-      ],
-      "basic": [
-        "early-bird",
-        "chloroplast"
-      ],
-      "advanced": [
-        "adaptability",
-        "big-leaves"
-      ],
-      "master": [
-        "sunbathe",
-        "drought"
-      ]
-    },
-    "skills": {
-      "acrobatics": 25,
-      "conversation": 30,
-      "lift": 10,
-      "listen": 25,
-      "natural-world": 30,
-      "running": 5,
-      "spot": 15,
-      "survival": 25
-    },
-    "slug": "",
-    "stats": {
-      "hp": 30,
-      "atk": 30,
-      "def": 30,
-      "spa": 30,
-      "spd": 30,
-      "spe": 30
-    },
-    "types": [
-      "grass"
-    ],
-    "moves": {
-      "egg": [
-        {
-          "name": "leech-seed",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "bide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "curse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "encore",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sweet-scent",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "morning-sun",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "nature-power",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "helping-hand",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "ingrain",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "grass-whistle",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "natural-gift",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "grassy-terrain",
-          "gen": "scarlet-violet"
-        }
-      ],
-      "tutor": [
-        {
-          "name": "swords-dance",
-          "gen": "firered-leafgreen"
-        },
-        {
-          "name": "double-edge",
-          "gen": "xd"
-        },
-        {
-          "name": "mimic",
-          "gen": "xd"
-        },
-        {
-          "name": "substitute",
-          "gen": "xd"
-        },
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "giga-drain",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "endure",
-          "gen": "emerald"
-        },
-        {
-          "name": "swagger",
-          "gen": "xd"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "synthesis",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "uproar",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "helping-hand",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "endeavor",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "worry-seed",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "seed-bomb",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "earth-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "after-you",
-          "gen": "ultra-sun-ultra-moon"
-        }
-      ],
-      "machine": [
-        {
-          "name": "swords-dance",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "cut",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "take-down",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "double-edge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "solar-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "double-team",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "light-screen",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flash",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "substitute",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "snore",
-          "gen": "crystal"
-        },
-        {
-          "name": "curse",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sludge-bomb",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "giga-drain",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "swagger",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "attract",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "safeguard",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "encore",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sweet-scent",
-          "gen": "crystal"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "nature-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "helping-hand",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endeavor",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "weather-ball",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "bullet-seed",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "magical-leaf",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "natural-gift",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "seed-bomb",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "energy-ball",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "earth-power",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "leaf-storm",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "captivate",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "grass-knot",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "grassy-terrain",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "tera-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "trailblaze",
-          "gen": "scarlet-violet"
-        }
-      ],
-      "levelUp": [
-        {
-          "name": "tackle",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "growth",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "ingrain",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 4
-        },
-        {
-          "name": "absorb",
-          "gen": "scarlet-violet",
-          "level": 7
-        },
-        {
-          "name": "grass-whistle",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 7
-        },
-        {
-          "name": "mega-drain",
-          "gen": "scarlet-violet",
-          "level": 10
-        },
-        {
-          "name": "leech-seed",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 13
-        },
-        {
-          "name": "razor-leaf",
-          "gen": "scarlet-violet",
-          "level": 16
-        },
-        {
-          "name": "worry-seed",
-          "gen": "scarlet-violet",
-          "level": 19
-        },
-        {
-          "name": "giga-drain",
-          "gen": "scarlet-violet",
-          "level": 22
-        },
-        {
-          "name": "endeavor",
-          "gen": "scarlet-violet",
-          "level": 25
-        },
-        {
-          "name": "synthesis",
-          "gen": "scarlet-violet",
-          "level": 28
-        },
-        {
-          "name": "solar-beam",
-          "gen": "scarlet-violet",
-          "level": 31
-        },
-        {
-          "name": "natural-gift",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 31
-        },
-        {
-          "name": "double-edge",
-          "gen": "scarlet-violet",
-          "level": 34
-        },
-        {
-          "name": "sunny-day",
-          "gen": "scarlet-violet",
-          "level": 36
-        },
-        {
-          "name": "seed-bomb",
-          "gen": "scarlet-violet",
-          "level": 39
-        }
-      ]
-    },
-    "captureRate": 235,
-    "eggGroups": [
-      "plant"
-    ],
-    "genderRatio": 4,
-    "evolutions": {
-      "name": "sunkern",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "sunflora",
-          "uuid": "Compendium.ptr2e.core-species.Item.SrVNMRejBOWNWj6q",
-          "methods": [
-            {
-              "type": "item",
-              "item": "sun-stone",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.cPVr9wWAqF4kmcXw"
-    }
-  },
-  "_id": "cPVr9wWAqF4kmcXw",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {},
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.cPVr9wWAqF4kmcXw"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.cPVr9wWAqF4kmcXw",
-    "duplicateSource": null
-  },
-  "_key": "!items!cPVr9wWAqF4kmcXw"
+    "_id": "cPVr9wWAqF4kmcXw",
+    "effects": []
 }
