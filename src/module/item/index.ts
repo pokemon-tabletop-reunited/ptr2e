@@ -41,6 +41,14 @@ export type ItemSystemPTR =
     | data.WeaponSystemModel
     | data.EffectSystemModel;
 
+export type ItemSystemsWithActions =
+    | data.AbilitySystemModel
+    | data.EquipmentSystemModel
+    | data.GearSystemModel
+    | data.MoveSystemModel
+    | data.PerkSystemModel
+    | data.WeaponSystemModel;
+
 export type ItemSourcePTR2e =
     | data.AbilitySystemSource
     | data.ConsumableSystemSource

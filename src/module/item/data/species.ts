@@ -349,6 +349,7 @@ export class EvolutionData extends foundry.abstract.DataModel {
                     gender: new fields.StringField({
                         required: true,
                         choices: ["male", "female", "genderless"],
+                        initial: "genderless"
                     }),
                 };
             }

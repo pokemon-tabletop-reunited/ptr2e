@@ -1,42 +1,37 @@
 <section class="tab sheet-body {{tabs.actions.cssClass}}" data-tab="actions" data-group="sheet">
-    {{#each item.actions as |map type|}}
-        {{#if (eq type "attack")}} 
-            {{> actions type=type map=map}}
-        {{else}}
-        {{#unless (eq map.size 0)}}
-            {{> actions type=type map=map}}
-        {{/unless}}
-        {{/if}}
-    {{/each}}
+    <div class="scroll">
+        <fieldset class="actions">
+            <legend>Actions</legend>
+            <div class="actions-header">
+                <div class="action-name">Action Name</div>
+                <div class="action-type">Action Type</div>
+                <div class="action-controls item-controls">
+                    <a class="item-control item-create" title="Add Action" data-type="action" data-action="add-action" data-action-type="attack">
+                        <i class="fas fa-plus-circle" style="margin-right: 3px;"></i>
+                        <span class="readable">{{localize "ITEM.AddButton"}}</span>
+                    </a>
+                </div>
+            </div>
+            <div class="actions-list">
+                {{#each item.actions as |map type|}}
+                    {{#each map as |action slug|}}
+                        {{> action action=action}}
+                    {{/each}}
+                {{/each}}
+            </div>
+        </fieldset>
+    </div>
 </section>
-
-{{#*inline "actions"}}
-<div class="actions">
-    <header>
-        <div class="action-name">Action Name</div>
-        <div class="action-controls item-controls">
-            <a class="item-control item-create" title="Add {{formatSlug type}}" data-type="action" data-action-type="{{type}}">
-                <i class="fas fa-plus-circle" style="margin-right: 3px;"></i>
-                <span class="readable">{{localize "ITEM.AddButton"}}</span>
-            </a>
-        </div>
-    </header>
-    <content>
-        {{#each map as |action slug|}}
-            {{> action action=action}}
-        {{/each}}
-    </content>
-</div>
-{{/inline}}
 
 {{#*inline "action"}}
     <div class="action" data-action="{{action.slug}}">
         <div class="action-name">{{action.name}}</div>
+        <div class="action-type">{{action.type}}</div>
         <div class="action-controls item-controls">
-            <a class="item-control item-edit" data-tooltip="Edit Action" data-type="action" data-action="edit">
+            <a class="item-control item-edit" data-slug="{{action.slug}}" data-tooltip="Edit Action" data-type="action" data-action="edit-action">
                 <i class="fas fa-edit"></i>
             </a>
-            <a class="item-control item-delete" data-tooltip="Delete Action" data-type="action" data-action="delete">
+            <a class="item-control item-delete" data-slug="{{action.slug}}" data-tooltip="Delete Action" data-type="action" data-action="delete-action">
                 <i class="fas fa-trash"></i>
             </a>
         </div>

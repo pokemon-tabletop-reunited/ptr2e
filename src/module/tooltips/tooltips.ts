@@ -119,7 +119,7 @@ export default class TooltipsPTR2e {
     }
 
     async _onAttackTooltip() {
-        const attackSlug = game.tooltip.element?.dataset.action;
+        const attackSlug = game.tooltip.element?.dataset.slug;
         if (!attackSlug) return false;
 
         const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset

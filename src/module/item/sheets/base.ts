@@ -1,9 +1,10 @@
-import { ItemPTR2e, ItemSystemPTR } from "@item";
+import { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
 import { htmlQueryAll, sluggify } from "@utils";
 import { DocumentSheetConfiguration, DocumentSheetV2, Tab } from "./document.ts";
 import Tagify from "@yaireo/tagify";
 import GithubManager from "@module/apps/github.ts";
 import { ActiveEffectPTR2e } from "@effects";
+import { ActionEditor } from "@module/apps/action-editor.ts";
 
 export default class ItemSheetPTR2eV2<
     TSystem extends ItemSystemPTR,
@@ -26,8 +27,8 @@ export default class ItemSheetPTR2eV2<
             },
             window: {
                 minimizable: true,
-                resizable: true
-            }
+                resizable: true,
+            },
         },
         { inplace: false }
     );
@@ -60,17 +61,17 @@ export default class ItemSheetPTR2eV2<
         details: {
             id: "details",
             template: this.detailsTemplate,
-            scrollable: [".scroll"]
+            scrollable: [".scroll"],
         },
         actions: {
             id: "actions",
             template: "/systems/ptr2e/templates/items/parts/item-actions.hbs",
-            scrollable: [".scroll"]
+            scrollable: [".scroll"],
         },
         effects: {
             id: "effects",
             template: "/systems/ptr2e/templates/items/parts/item-effects.hbs",
-            scrollable: [".scroll"]
+            scrollable: [".scroll"],
         },
     };
 
@@ -106,7 +107,7 @@ export default class ItemSheetPTR2eV2<
     };
 
     _getTabs() {
-        if(this.noActions) delete this.tabs.actions;
+        if (this.noActions) delete this.tabs.actions;
         for (const v of Object.values(this.tabs)) {
             v.active = this.tabGroups[v.group] === v.id;
             v.cssClass = v.active ? "active" : "";
@@ -146,18 +147,24 @@ export default class ItemSheetPTR2eV2<
         };
     }
 
-    override _prepareSubmitData(event: SubmitEvent, form: HTMLFormElement, formData: FormDataExtended): Record<string, unknown> {
+    override _prepareSubmitData(
+        event: SubmitEvent,
+        form: HTMLFormElement,
+        formData: FormDataExtended
+    ): Record<string, unknown> {
         const submitData = super._prepareSubmitData(event, form, formData);
 
-        if(
+        if (
             "system" in submitData &&
             submitData.system &&
             typeof submitData.system === "object" &&
             "traits" in submitData.system &&
             Array.isArray(submitData.system.traits)
         )
-        // Traits are stored as an array of objects, but we only need the values
-        submitData.system.traits = submitData.system.traits.map((trait: { value: string }) => sluggify(trait.value));
+            // Traits are stored as an array of objects, but we only need the values
+            submitData.system.traits = submitData.system.traits.map((trait: { value: string }) =>
+                sluggify(trait.value)
+            );
 
         return submitData;
     }
@@ -267,19 +274,88 @@ export default class ItemSheetPTR2eV2<
                     if (!effect) return;
 
                     // Confirm the deletion unless the user is holding Shift
-                    return event.shiftKey ? effect.delete() : foundry.applications.api.DialogV2.confirm({
-                        yes: {
-                            callback: () => effect.delete(),
-                        },
-                        content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", {
-                            name: effect.name,
-                        }),
-                        window: {
-                            title: game.i18n.format("PTR2E.Dialog.DeleteDocumentTitle", {
-                                name: effect.name,
-                            }),
-                        },
-                    });
+                    return event.shiftKey
+                        ? effect.delete()
+                        : foundry.applications.api.DialogV2.confirm({
+                              yes: {
+                                  callback: () => effect.delete(),
+                              },
+                              content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", {
+                                  name: effect.name,
+                              }),
+                              window: {
+                                  title: game.i18n.format("PTR2E.Dialog.DeleteDocumentTitle", {
+                                      name: effect.name,
+                                  }),
+                              },
+                          });
+                });
+            }
+        }
+
+        if (partId === "actions") {
+            const addButton = htmlElement.querySelector(".actions a[data-action='add-action']");
+            addButton?.addEventListener("click", async () => {
+                if (!("actions" in this.document.system)) return;
+                const actions = this.document.system._source.actions ?? [];
+
+                let num = actions.length + 1;
+                const action = {
+                    name: `${this.document.name} Action (#${num})`,
+                    slug: sluggify(`${this.document.name} Action (#${num})`),
+                    description: this.document.system.description ?? "",
+                    traits: this.document.system._source.traits ?? [],
+                    type: "generic"
+                }
+
+                while(this.document.system.actions.has(action.slug)) {
+                    action.name = `${this.document.name} Action (#${++num})`;
+                    action.slug = sluggify(action.name);
+                }
+
+                // @ts-expect-error
+                actions.push(action);
+                this.document.update({ "system.actions": actions });
+            });
+
+            for (const element of htmlQueryAll(htmlElement, ".actions .action a[data-action]")) {
+                element.addEventListener("click", async (event) => {
+                    const { slug, action: actionType } = (event.currentTarget as HTMLElement)
+                        .dataset;
+                    if (!slug) return;
+
+                    if (!("actions" in this.document.system)) return;
+                    const action = this.document.system.actions.get(slug);
+                    if (!action) return;
+
+                    switch (actionType) {
+                        case "edit-action": {
+                            const sheet = new ActionEditor(this.document as ItemPTR2e<ItemSystemsWithActions>, slug);
+                            sheet.render(true);
+                            return;
+                        }
+                        case "delete-action": {
+                            const document = this.document;
+
+                            foundry.applications.api.DialogV2.confirm({
+                                window: {
+                                    title: game.i18n.localize("PTR2E.Dialog.DeleteDocumentTitle"),
+                                },
+                                content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", {
+                                    name: action.name,
+                                }),
+                                yes: {
+                                    callback: () => {
+                                        if (!("actions" in document.system)) return;
+                                        const actions = document.system._source.actions.filter(
+                                            (a) => a.slug !== slug
+                                        );
+                                        document.update({ "system.actions": actions });
+                                    },
+                                },
+                            });
+                        }
+                    }
                 });
             }
         }
@@ -323,8 +399,8 @@ export default class ItemSheetPTR2eV2<
             // @ts-expect-error
             stringTags._refresh = () => {
                 refresh.call();
-                this.element.dispatchEvent(new Event("submit", {cancelable: true}));
-            }
+                this.element.dispatchEvent(new Event("submit", { cancelable: true }));
+            };
 
             //@ts-expect-error
             stringTags._validateTag = (tag: string): boolean => {
@@ -337,7 +413,10 @@ export default class ItemSheetPTR2eV2<
         }
     }
 
-    protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {
+    protected override async _onSubmitForm(
+        config: foundry.applications.api.ApplicationFormConfiguration,
+        event: Event | SubmitEvent
+    ): Promise<void> {
         event.preventDefault();
         if (event.target) {
             const target = event.target as HTMLElement;
@@ -370,10 +449,10 @@ export default class ItemSheetPTR2eV2<
             }
             case "Item": {
                 const item = await ItemPTR2e.fromDropData(data as any);
-                if (!item || item.type !== 'effect') return;
+                if (!item || item.type !== "effect") return;
                 const effects = item.effects.map((effect) => effect.toObject());
-                if(effects.length === 0) return;
-                return ActiveEffectPTR2e.createDocuments(effects, {parent: this.document})
+                if (effects.length === 0) return;
+                return ActiveEffectPTR2e.createDocuments(effects, { parent: this.document });
             }
         }
     }

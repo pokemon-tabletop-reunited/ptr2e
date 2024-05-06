@@ -1,5 +1,86 @@
 <section class="tab sheet-body {{tabs.actions.cssClass}}" data-tab="actions" data-group="sheet">
-    <div class="scroll">
-        
-    </div>
+    <nav class="sheet-tabs sub-tabs tabs">
+        {{#each subtabs as |tab|}}
+        <a class="{{tab.cssClass}}" data-action="tab" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+            <i class="{{tab.icon}}"></i>
+            <label>{{localize tab.label}}</label>
+        </a>
+        {{/each}}
+    </nav>
+    <section class="tab sheet-body {{subtabs.actionsCombat.cssClass}}" data-tab="actionsCombat" data-group="actions">
+        <div class="attacks scroll">
+            <fieldset class="slots">
+                <legend>Attack Slots</legend>
+                {{#each actor.attacks.actions as |action|}}
+                    {{#if action}}
+                        {{> action action=action direction="LEFT"}}
+                    {{else}}
+                        <div class="action empty">
+                            <div class="action-icon"></div>
+                            <span class="action-name">Available Move Slot</span>
+                        </div>
+                    {{/if}}
+                {{/each}}
+                <a class="edit-movelist" data-action="edit-movelist">Known Attacks</a>
+            </fieldset>
+            <fieldset>
+                <legend>Other Attacks</legend>
+                {{#each actor.actions.attack as |action|}}
+                    {{#if action.free}}
+                        {{> action action=action direction="LEFT"}}
+                    {{/if}}
+                {{/each}}
+            </fieldset>
+        </div>
+        <fieldset class="passives scroll">
+            <legend>Passives</legend>
+            {{#each actor.actions.passive as |action|}}
+                {{> action action=action direction="RIGHT"}}
+            {{/each}}
+        </fieldset>
+    </section>
+    <section class="tab sheet-body {{subtabs.actionsDowntime.cssClass}}" data-tab="actionsDowntime" data-group="actions">
+        <fieldset class="camping scroll">
+            <legend>Camping</legend>
+            {{#each actor.actions.camping as |action|}}
+                {{> action action=action direction="LEFT"}}
+            {{/each}}
+        </fieldset>
+        <fieldset class="downtime scroll">
+            <legend>Downtime</legend>
+            {{#each actor.actions.downtime as |action|}}
+                {{> action action=action direction="RIGHT"}}
+            {{/each}}
+        </fieldset>
+    </section>
+    <section class="tab sheet-body {{subtabs.actionsOther.cssClass}}" data-tab="actionsOther" data-group="actions">
+        <fieldset class="generic scroll">
+            <legend>Generic</legend>
+            {{#each actor.actions.generic as |action|}}
+                {{> action action=action direction="LEFT"}}
+            {{/each}}
+        </fieldset>
+        <fieldset class="exploration scroll">
+            <legend>Exploration</legend>
+            {{#each actor.actions.exploration as |action|}}
+                {{> action action=action direction="RIGHT"}}
+            {{/each}}
+        </fieldset>
+    </section>
 </section>
+
+{{#*inline "action"}}
+    <div class="action {{action.type}}" data-tooltip-direction="{{direction}}" data-slug="{{action.slug}}" data-parent="{{action.item.uuid}}" data-tooltip="{{action.name}}">
+        <div class="action-icon {{#if action.rollable}}rollable{{/if}}">
+            <img class="icon" src="{{action.img}}" data-tooltip="{{action.name}}"/>
+            <img class="dice" src="/icons/svg/d20.svg" data-tooltip="Roll {{action.name}}">
+        </div>
+        <span class="action-name">{{action.name}}</span>
+        <div class="action-controls item-controls">
+            <a class="item-control item-to-chat" data-tooltip="Send {{formatSlug action.type}} to chat"><i class="fas fa-external-link-alt"></i></a>
+            <a class="item-control item-edit" data-tooltip="Edit Action" data-type="action" data-action="edit-action">
+                <i class="fas fa-edit"></i>
+            </a>
+        </div>
+    </div>
+{{/inline}}

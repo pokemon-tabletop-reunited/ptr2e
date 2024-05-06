@@ -16,6 +16,7 @@ import FolderPTR2e from "@module/folder/document.ts";
 import { CombatantPTR2e, CombatPTR2e } from "@combat";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
+import { MovePTR2e } from "@item";
 
 type ActorParty = {
     owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -137,6 +138,12 @@ class ActorPTR2e<
             passive: new Map(),
         };
 
+        this.attacks = {
+            slots: 6,
+            actions: Array.fromRange(6).reduce((acc, i) => ({ ...acc, [i]: null }), {}),
+            available: [],
+        };
+
         super._initialize();
     }
 
@@ -183,7 +190,35 @@ class ActorPTR2e<
         if (this.type === "ptu-actor") return super.prepareDerivedData();
         this.system.type.effectiveness = this._calculateEffectiveness();
 
-        return super.prepareDerivedData();
+        super.prepareDerivedData();
+
+        this.attacks.slots = this.system.slots;
+        this.attacks.actions = Array.fromRange(this.attacks.slots).reduce((acc, i) => ({ ...acc, [i]: null }), {});
+
+        for(const attack of this.actions.attack.values() as IterableIterator<AttackPTR2e>) {
+            if(attack.free) continue;
+
+            const item = attack.item;
+            if(item.type === "move") {
+                const move = item as MovePTR2e;
+                const primaryAttack = move.system.attack;
+                if(primaryAttack.slug !== attack.slug && primaryAttack.slot !== null && this.attacks.actions[primaryAttack.slot]?.slug === primaryAttack.slug) {
+                    attack.free = true;
+                }
+            }
+
+            if(attack.slot === null) {
+                this.attacks.available.push(attack);
+                continue;
+            }
+            if(this.attacks.actions[attack.slot] !== null) {
+                if(this.attacks.actions[attack.slot].slug !== attack.slug) {
+                    this.attacks.available.push(this.attacks.actions[attack.slot]);
+                }
+                continue;
+            }
+            this.attacks.actions[attack.slot] = attack;
+        }
     }
 
     /**
@@ -561,6 +596,12 @@ interface ActorPTR2e<
     flags: ActorFlags2e;
 
     rollOptions: RollOptionManager<this>;
+
+    attacks: {
+        slots: number;
+        actions: Record<number, AttackPTR2e>;
+        available: AttackPTR2e[];
+    }
 }
 
 type ActorFlags2e = ActorFlags & {

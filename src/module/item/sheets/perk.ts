@@ -12,7 +12,7 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
 
     static override readonly overviewTemplate= "systems/ptr2e/templates/items/perk/perk-overview.hbs";
     static override readonly detailsTemplate= "systems/ptr2e/templates/items/perk/perk-details.hbs";
-    override noActions: boolean = true;
+    override noActions: boolean = false;
 
     override async _prepareContext() {
         const [itemNames, itemLinks] = await (async () => {

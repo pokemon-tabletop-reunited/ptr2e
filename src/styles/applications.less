@@ -73,6 +73,7 @@ body {
     }
 
     &.actor.v2 {
+        min-width: 700px;
         background: var(--appv2-background);
 
         .window-content {
@@ -230,6 +231,14 @@ body {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
                 grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+                overflow: hidden;
+                height: 100%;
+
+                .scroll {
+                    height: 100%;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                }
 
                 fieldset {
                     padding: 1rem;
@@ -383,6 +392,121 @@ body {
                     }
                 }
 
+                &[data-tab="actions"] {
+                    display: grid;
+                    grid-template-areas: 
+                        "subnav"
+                        "body";
+                    grid-template-columns: unset;
+                    grid-template-rows: 30px auto;
+
+                    nav.sub-tabs {
+                        grid-area: subnav;
+
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-evenly;
+                        font-size: 16px;
+                        
+                        a label {
+                            margin-left: 5px;
+                        }
+                    }
+
+                    section.active {
+                        grid-area: body;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 12px 1fr 1fr;
+                        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+                        padding: 0.5rem;
+                        overflow: hidden;
+
+                        div.attacks {
+                            grid-area: span 5 / span 2;
+                            padding: 0;
+
+                            fieldset {
+                                margin-bottom: unset;
+
+                                &.slots {
+                                    position: relative;
+                                    height: min-content;
+                                }
+
+                                .edit-movelist {
+                                    position: absolute;
+                                    right: -2px;
+                                    top: -9px;
+                                    padding: 3px 5px;
+                                    background: var(--appv2-background);
+                                    border: 1px solid var(--border-theme-color);
+                                    border-radius: 0 8px 0 0;
+                                }
+                            }
+                        }
+                        fieldset {
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+
+                            &.generic, &.attacks, &.camping {
+                                grid-area: span 5 / span 2;
+                            }
+                            &.exploration, &.passives, &.downtime {
+                                grid-area: 1 / 4 / 6 / 6;
+                            }
+
+                            // .slots {
+                            //     display: flex;
+                            //     flex-direction: column;
+                            //     flex-wrap: nowrap;
+                            //     gap: 0.5rem;
+                            //     border-bottom: 1px solid var(--border-theme-color);
+                            // }
+
+                            .action {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                
+                                .action-icon {
+                                    flex: 0 0 28px;
+                                    height: 28px;
+                                    width: 28px;
+                                    .dice {
+                                        display: none;
+                                    }
+                                    &.rollable {
+                                        cursor: pointer;
+
+                                        &:hover {
+                                            .icon {
+                                                display: none;
+                                            }
+                                            .dice {
+                                                display: block;
+                                            }
+                                        }
+                                    }
+                                }
+                                .action-name {
+                                    flex-grow: 1;
+                                    margin: 0 0.25rem;
+                                }
+                                .action-controls {
+                                    flex: 0 0 60px;
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: flex-end;
+                                    align-items: center;
+                                    margin-left: auto;
+                                    gap: 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+
                 .effects-display {
                     padding: 0.5rem;
 
@@ -493,6 +617,7 @@ body {
     }
 
     &#perk-hud-base,
+    &.action-sheet,
     &.move-sheet,
     &.species-sheet,
     &.party-sheet,
@@ -706,43 +831,42 @@ body {
                 }
 
                 &[data-tab=actions].active {
-                    height: 100%;
-
-                    display: flex;
-                    flex-direction: column;
-
-                    padding: 0.25rem 1rem 1rem 1rem;
-
                     .actions {
-                        flex: 0 0 50%;
-                        margin: 0.25rem;
-
                         display: flex;
                         flex-direction: column;
 
-                        header {
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: space-between;
-                            padding: 0.25rem;
-                            border-bottom: 1px solid #fefefe;
-
-                            .action-name {
-                                font-size: 18px;
-                            }
-                        }
-
-                        content {
+                        .actions-list {
                             display: flex;
                             flex-direction: column;
+                            gap: 0.5rem;
+                        }
 
-                            .action {
+                        .actions-header {
+                            font-weight: bold;
+                            margin-bottom: 0.5rem;
+                            border-bottom: 1px solid var(--border-theme-color);
+                        }
+                        
+                        .actions-header, .actions-list .action {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            padding: 0.25rem;
+
+                            .action-name {
+                                flex: 0 0 30%;
+                            }
+                            .action-type {
+                                flex: 0 0 30%;
+                            }
+                            .item-controls {
+                                flex: 0 0 60px;
                                 display: flex;
                                 flex-direction: row;
-                                justify-content: space-between;
-                                padding: 0.25rem;
-                                margin: 0.5rem 0;
-
+                                justify-content: flex-end;
+                                align-items: center;
+                                margin-left: auto;
+                                gap: 5px;
                             }
                         }
                     }
@@ -814,6 +938,32 @@ body {
 
         textarea {
             resize: vertical;
+        }
+    }
+
+    &.action-sheet {
+        .window-content {
+            grid-template-columns: unset;
+            grid-template-areas:
+                "header"
+                "traits"
+                "main";
+
+            header.sheet-header {
+                gap: 10px;
+            }
+
+            section.action {
+                grid-area: main;
+                overflow: hidden;
+
+                .scroll {
+                    padding: 1rem;
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+                    height: 100%;
+                }
+            }
         }
     }
 

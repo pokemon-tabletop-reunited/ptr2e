@@ -34,7 +34,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                 submitOnChange: true,
             },
             actions: {
-                "species-header": async function(this: ActorSheetPTRV2, event: Event) {
+                "species-header": async function (this: ActorSheetPTRV2, event: Event) {
                     event.preventDefault();
                     const species = this.actor.system.species!;
                     const sheet = new SpeciesDropSheet((item) => {
@@ -53,7 +53,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                         }
                     });
                     sheet.species = new CONFIG.Item.documentClass({
-                        name: this.document.hasEmbeddedSpecies() ? Handlebars.helpers.formatSlug(species.slug) : this.actor.name,
+                        name: this.document.hasEmbeddedSpecies()
+                            ? Handlebars.helpers.formatSlug(species.slug)
+                            : this.actor.name,
                         type: "species",
                         img: this.actor.img,
                         flags: { ptr2e: { disabled: !this.actor.system._source.species } },
@@ -61,10 +63,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                     }) as SpeciesPTR2e;
                     sheet.render(true);
                 },
-                "open-perk-web": function(this: ActorSheetPTRV2, _event: Event) {
+                "open-perk-web": function (this: ActorSheetPTRV2, _event: Event) {
                     game.ptr.web.open(this.actor);
-                }
-            }
+                },
+            },
         },
         { inplace: false }
     );
@@ -118,6 +120,28 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     tabGroups: Record<string, string> = {
         sheet: "overview",
+        actions: "actionsCombat",
+    };
+
+    subtabs: Record<string, Tab> = {
+        actionsCombat: {
+            id: "actionsCombat",
+            group: "actions",
+            icon: "fa-solid fa-burst",
+            label: "PTR2E.ActorSheet.Tabs.actions.combat.label",
+        },
+        actionsDowntime: {
+            id: "actionsDowntime",
+            group: "actions",
+            icon: "fa-solid fa-clock",
+            label: "PTR2E.ActorSheet.Tabs.actions.downtime.label",
+        },
+        actionsOther: {
+            id: "actionsOther",
+            group: "actions",
+            icon: "fa-solid fa-dice-d20",
+            label: "PTR2E.ActorSheet.Tabs.actions.other.label",
+        },
     };
 
     tabs: Record<string, Tab> = {
@@ -179,19 +203,31 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         return this.tabs;
     }
 
-    override async _prepareContext(options?: foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>){
-        const context = await super._prepareContext(options) as Record<string, unknown>;
+    _getSubTabs() {
+        for (const v of Object.values(this.subtabs)) {
+            v.active = this.tabGroups[v.group] === v.id;
+            v.cssClass = v.active ? "active" : "";
+        }
+        return this.subtabs;
+    }
 
-        context.actor = this.actor;
-        context.source = this.actor._source;
-        context.fields = this.actor.system.schema.fields;
-        context.baseFields = this.actor.schema.fields;
-        context.effects = this.actor.effects.contents;
-        context.inventory = (() => {
+    override async _prepareContext(
+        options?: foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>
+    ) {
+        const inventory = (() => {
             const inventory: Record<string, ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]> = {};
             for (const item of this.actor.items) {
-                const physicalItems = ["weapon", "gear", "consumable", "equipment", "container"]
-                function isTypeOfPhysicalItem(item: Item): item is ItemPTR2e<GearSystem | WeaponSystem | ConsumableSystem | EquipmentSystem | ContainerSystem, ActorPTR2e> {
+                const physicalItems = ["weapon", "gear", "consumable", "equipment", "container"];
+                function isTypeOfPhysicalItem(
+                    item: Item
+                ): item is ItemPTR2e<
+                    | GearSystem
+                    | WeaponSystem
+                    | ConsumableSystem
+                    | EquipmentSystem
+                    | ContainerSystem,
+                    ActorPTR2e
+                > {
                     return physicalItems.includes(item.type);
                 }
                 if (isTypeOfPhysicalItem(item)) {
@@ -202,9 +238,18 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             }
             return inventory;
         })();
-        context.tabs = this._getTabs();
 
-        return context;
+        return {
+            ...(await super._prepareContext(options)),
+            actor: this.actor,
+            source: this.actor._source,
+            fields: this.actor.system.schema.fields,
+            baseFields: this.actor.schema.fields,
+            effects: this.actor.effects.contents,
+            inventory,
+            tabs: this._getTabs(),
+            subtabs: this._getSubTabs(),
+        };
     }
 
     override _attachFrameListeners(): void {
@@ -212,10 +257,14 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         this.element.addEventListener("drop", this._onDrop.bind(this));
     }
 
-    override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
+    override _attachPartListeners(
+        partId: string,
+        htmlElement: HTMLElement,
+        options: foundry.applications.api.HandlebarsRenderOptions
+    ): void {
         super._attachPartListeners(partId, htmlElement, options);
 
-        for(const element of htmlQueryAll(htmlElement, ".can-popout")) {
+        for (const element of htmlQueryAll(htmlElement, ".can-popout")) {
             const div = document.createElement("div");
             div.classList.add("popout-control");
             const component = element.dataset.component;
@@ -226,7 +275,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             element.appendChild(div);
         }
 
-        if(partId === "effects") {
+        if (partId === "effects") {
             EffectComponent.attachListeners(htmlElement, this.actor);
         }
     }
@@ -235,7 +284,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         event.preventDefault();
         const target = event.currentTarget as HTMLElement;
         const component = target.dataset.component as ActorComponentKey;
-        const sheet = new ComponentPopout({actor: this.actor, component});
+        const sheet = new ComponentPopout({ actor: this.actor, component });
         sheet.render(true);
     }
 
@@ -253,12 +302,14 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             }
             case "Item": {
                 const item = await ItemPTR2e.fromDropData(data as any);
-                if(!item) return;
-                switch(item.type) {
+                if (!item) return;
+                switch (item.type) {
                     case "effect": {
                         const effects = item.effects.map((effect) => effect.toObject());
-                        if(effects.length === 0) return;
-                        return ActiveEffectPTR2e.createDocuments(effects, {parent: this.document})
+                        if (effects.length === 0) return;
+                        return ActiveEffectPTR2e.createDocuments(effects, {
+                            parent: this.document,
+                        });
                     }
                     default: {
                         return this.actor.createEmbeddedDocuments("Item", [item.toObject()]);
@@ -275,15 +326,19 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.document });
     }
 
-    override async close(options: Partial<foundry.applications.api.ApplicationClosingOptions> = {}): Promise<this> {
-        if(game.ptr.web.actor === this.actor) {
+    override async close(
+        options: Partial<foundry.applications.api.ApplicationClosingOptions> = {}
+    ): Promise<this> {
+        if (game.ptr.web.actor === this.actor) {
             this.minimize();
             return this;
         }
         return super.close(options) as Promise<this>;
     }
 
-    override async _renderFrame(options: foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>): Promise<HTMLElement> {
+    override async _renderFrame(
+        options: foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>
+    ): Promise<HTMLElement> {
         const frame = await super._renderFrame(options);
 
         // Add Species button to the header

@@ -17,6 +17,8 @@ export default class AttackPTR2e extends ActionPTR2e {
             accuracy: new fields.NumberField({ required: false, nullable: true, min: 10, max: 100, label: "PTR2E.FIELDS.accuracy.label", hint: "PTR2E.FIELDS.accuracy.hint" }),
             contestType: new fields.StringField({ required: true, blank: true, initial: "" }),
             contestEffect: new fields.StringField({ required: true, blank: true, initial: "" }),
+            free: new fields.BooleanField({ required: false, initial: false, label: "PTR2E.FIELDS.free.label", hint: "PTR2E.FIELDS.free.hint" }),
+            slot: new fields.NumberField({ required: false, nullable: true, initial: null, label: "PTR2E.FIELDS.slot.label", hint: "PTR2E.FIELDS.slot.hint" }),
         }
     }
 
@@ -126,4 +128,7 @@ export default interface AttackPTR2e extends ActionPTR2e {
 
     contestType: ContestType,
     contestEffect: string,
+
+    free: boolean,
+    slot: number | null,
 }
