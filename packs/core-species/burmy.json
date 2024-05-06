@@ -1,219 +1,243 @@
 {
-  "name": "burmy",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 412,
-    "size": {
-      "category": "tiny",
-      "type": "height",
-      "height": 0.2,
-      "weight": 3.4
-    },
-    "diet": [
-      "herbivore"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 4
+    "name": "burmy",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 412,
+        "size": {
+            "category": "tiny",
+            "type": "height",
+            "height": 0.2,
+            "weight": 3.4
+        },
+        "diet": [
+            "herbivore"
+        ],
+        "movement": {
+            "primary": [
+                {
+                    "type": "overland",
+                    "value": 4
+                }
+            ],
+            "secondary": []
+        },
+        "traits": [
+            "pokemon",
+            "underdog",
+            "reach",
+            "many-legged",
+            "split-evolution"
+        ],
+        "abilities": {
+            "starting": [
+                "overcoat",
+                "oblivious"
+            ],
+            "basic": [
+                "shed-skin",
+                "run-away"
+            ],
+            "advanced": [
+                "stamina",
+                "forage"
+            ],
+            "master": [
+                "symbiosis",
+                "opportunist"
+            ]
+        },
+        "skills": {
+            "acrobatics": 10,
+            "climb": 10,
+            "conversation": 25,
+            "intimidate": 15,
+            "lift": 15,
+            "listen": 35,
+            "natural-world": 45,
+            "navigate": 35,
+            "negotiation": 25,
+            "running": 5,
+            "spot": 20,
+            "stealth": 45,
+            "survival": 40
+        },
+        "stats": {
+            "hp": 40,
+            "atk": 29,
+            "def": 45,
+            "spa": 29,
+            "spd": 45,
+            "spe": 36
+        },
+        "types": [
+            "bug"
+        ],
+        "moves": {
+            "levelUp": [
+                {
+                    "name": "protect",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 1
+                },
+                {
+                    "name": "tackle",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 10
+                },
+                {
+                    "name": "bug-bite",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 15
+                },
+                {
+                    "name": "string-shot",
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "level": 20
+                },
+                {
+                    "name": "hidden-power",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 20
+                }
+            ],
+            "egg": [],
+            "tutor": [
+                {
+                    "name": "string-shot",
+                    "gen": "heartgold-soulsilver"
+                },
+                {
+                    "name": "snore",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "bug-bite",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "electroweb",
+                    "gen": "ultra-sun-ultra-moon"
+                }
+            ],
+            "machine": [
+                {
+                    "name": "protect",
+                    "gen": "brilliant-diamond-and-shining-pearl"
+                },
+                {
+                    "name": "hidden-power",
+                    "gen": "ultra-sun-ultra-moon"
+                }
+            ]
+        },
+        "captureRate": 120,
+        "eggGroups": [
+            "bug"
+        ],
+        "genderRatio": 4,
+        "habitats": [],
+        "evolutions": {
+            "name": "burmy",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "mothim",
+                    "uuid": "Compendium.ptr2e.core-species.Item.heMcRmrA3pK8e2kU",
+                    "methods": [
+                        {
+                            "type": "gender",
+                            "gender": "male",
+                            "operand": "and"
+                        },
+                        {
+                            "type": "level",
+                            "level": 20,
+                            "operand": "and"
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    },
+                    "evolutions": []
+                },
+                {
+                    "name": "wormadam-sandy",
+                    "uuid": "Compendium.ptr2e.core-species.Item.kdCNZLjBRVXxfu3U",
+                    "methods": [
+                        {
+                            "type": "gender",
+                            "gender": "female",
+                            "operand": "and"
+                        },
+                        {
+                            "type": "level",
+                            "level": 20,
+                            "operand": "and"
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    },
+                    "evolutions": []
+                },
+                {
+                    "name": "wormadam-plant",
+                    "uuid": "Compendium.ptr2e.core-species.Item.SrE7RrOI4zGTeJeZ",
+                    "methods": [
+                        {
+                            "type": "gender",
+                            "gender": "female",
+                            "operand": "and"
+                        },
+                        {
+                            "type": "level",
+                            "level": 20,
+                            "operand": "and"
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    },
+                    "evolutions": []
+                },
+                {
+                    "name": "wormadam-trash",
+                    "uuid": "Compendium.ptr2e.core-species.Item.KkZGHoV5VoKO94eE",
+                    "methods": [
+                        {
+                            "type": "gender",
+                            "gender": "female",
+                            "operand": "and"
+                        },
+                        {
+                            "type": "level",
+                            "level": 20,
+                            "operand": "and"
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    },
+                    "evolutions": []
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.kmFRu6lAhtEfASJy",
+            "methods": []
         }
-      ],
-      "secondary": []
     },
-    "traits": [
-      "pokemon",
-      "underdog",
-      "reach",
-      "many-legged",
-      "split-evolution"
-    ],
-    "abilities": {
-      "starting": [
-        "overcoat",
-        "oblivious"
-      ],
-      "basic": [
-        "shed-skin",
-        "run-away"
-      ],
-      "advanced": [
-        "stamina",
-        "forage"
-      ],
-      "master": [
-        "symbiosis",
-        "opportunist"
-      ]
-    },
-    "skills": {
-      "acrobatics": 10,
-      "climb": 10,
-      "conversation": 25,
-      "intimidate": 15,
-      "lift": 15,
-      "listen": 35,
-      "natural-world": 45,
-      "navigate": 35,
-      "negotiation": 25,
-      "running": 5,
-      "spot": 20,
-      "stealth": 45,
-      "survival": 40
-    },
-    "slug": "",
-    "stats": {
-      "hp": 40,
-      "atk": 29,
-      "def": 45,
-      "spa": 29,
-      "spd": 45,
-      "spe": 36
-    },
-    "types": [
-      "bug"
-    ],
-    "moves": {
-      "levelUp": [
-        {
-          "name": "protect",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 1
-        },
-        {
-          "name": "tackle",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 10
-        },
-        {
-          "name": "bug-bite",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 15
-        },
-        {
-          "name": "string-shot",
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 20
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 20
-        }
-      ],
-      "egg": [],
-      "tutor": [
-        {
-          "name": "string-shot",
-          "gen": "heartgold-soulsilver"
-        },
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "bug-bite",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "electroweb",
-          "gen": "ultra-sun-ultra-moon"
-        }
-      ],
-      "machine": [
-        {
-          "name": "protect",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        }
-      ]
-    },
-    "captureRate": 120,
-    "eggGroups": [
-      "bug"
-    ],
-    "genderRatio": 4,
-    "habitats": [],
-    "evolutions": {
-      "name": "burmy",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "wormadam",
-          "uuid": null,
-          "methods": [
-            {
-              "type": "gender",
-              "gender": "female",
-              "operand": "and"
-            },
-            {
-              "type": "level",
-              "level": 20,
-              "operand": "and"
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
-        {
-          "name": "mothim",
-          "uuid": "Compendium.ptr2e.core-species.Item.heMcRmrA3pK8e2kU",
-          "methods": [
-            {
-              "type": "gender",
-              "gender": "male",
-              "operand": "and"
-            },
-            {
-              "type": "level",
-              "level": 20,
-              "operand": "and"
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.kmFRu6lAhtEfASJy"
-    }
-  },
-  "_id": "kmFRu6lAhtEfASJy",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.kmFRu6lAhtEfASJy"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712327701027,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.kmFRu6lAhtEfASJy",
-    "duplicateSource": null
-  },
-  "_key": "!items!kmFRu6lAhtEfASJy"
+    "_id": "kmFRu6lAhtEfASJy",
+    "effects": []
 }
