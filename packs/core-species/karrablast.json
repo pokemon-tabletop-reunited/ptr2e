@@ -1,438 +1,428 @@
 {
-  "name": "karrablast",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 588,
-    "size": {
-      "category": "small",
-      "type": "height",
-      "height": 0.5,
-      "weight": 5.9
+    "name": "karrablast",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 588,
+        "size": {
+            "category": "small",
+            "type": "height",
+            "height": 0.5,
+            "weight": 5.9
+        },
+        "diet": [
+            "omnivore"
+        ],
+        "movement": {
+            "primary": [
+                {
+                    "type": "overland",
+                    "value": 6
+                }
+            ],
+            "secondary": [
+                {
+                    "type": "swim",
+                    "value": 3
+                }
+            ]
+        },
+        "traits": [
+            "pokemon",
+            "underdog",
+            "bipedal",
+            "linked-evolution",
+            "ir-vision-15"
+        ],
+        "abilities": {
+            "starting": [
+                "swarm",
+                "shed-skin"
+            ],
+            "basic": [
+                "no-guard",
+                "quick-feet"
+            ],
+            "advanced": [
+                "unburden",
+                "sticky-hold"
+            ],
+            "master": [
+                "forge-buster",
+                "moxie"
+            ]
+        },
+        "skills": {
+            "acrobatics": 30,
+            "climb": 30,
+            "conversation": 20,
+            "intimidate": 15,
+            "lift": 25,
+            "listen": 30,
+            "natural-world": 20,
+            "negotiation": 15,
+            "running": 35,
+            "spot": 40,
+            "stealth": 40,
+            "swim": 10,
+            "track": 40
+        },
+        "stats": {
+            "hp": 50,
+            "atk": 75,
+            "def": 45,
+            "spa": 40,
+            "spd": 45,
+            "spe": 60
+        },
+        "types": [
+            "bug"
+        ],
+        "moves": {
+            "levelUp": [
+                {
+                    "name": "leer",
+                    "gen": "sword-shield",
+                    "level": 1
+                },
+                {
+                    "name": "peck",
+                    "gen": "sword-shield",
+                    "level": 1
+                },
+                {
+                    "name": "fury-cutter",
+                    "gen": "sword-shield",
+                    "level": 4
+                },
+                {
+                    "name": "endure",
+                    "gen": "sword-shield",
+                    "level": 8
+                },
+                {
+                    "name": "false-swipe",
+                    "gen": "sword-shield",
+                    "level": 12
+                },
+                {
+                    "name": "fury-attack",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 16
+                },
+                {
+                    "name": "acid-spray",
+                    "gen": "sword-shield",
+                    "level": 16
+                },
+                {
+                    "name": "headbutt",
+                    "gen": "sword-shield",
+                    "level": 20
+                },
+                {
+                    "name": "flail",
+                    "gen": "sword-shield",
+                    "level": 24
+                },
+                {
+                    "name": "scary-face",
+                    "gen": "sword-shield",
+                    "level": 28
+                },
+                {
+                    "name": "slash",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 32
+                },
+                {
+                    "name": "x-scissor",
+                    "gen": "sword-shield",
+                    "level": 32
+                },
+                {
+                    "name": "swords-dance",
+                    "gen": "sword-shield",
+                    "level": 36
+                },
+                {
+                    "name": "take-down",
+                    "gen": "sword-shield",
+                    "level": 40
+                },
+                {
+                    "name": "bug-buzz",
+                    "gen": "sword-shield",
+                    "level": 44
+                },
+                {
+                    "name": "double-edge",
+                    "gen": "sword-shield",
+                    "level": 48
+                }
+            ],
+            "egg": [
+                {
+                    "name": "horn-attack",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "counter",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "screech",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "slash",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "feint-attack",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "megahorn",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "pursuit",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "knock-off",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "night-slash",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "bug-bite",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "drill-run",
+                    "gen": "ultra-sun-ultra-moon"
+                }
+            ],
+            "tutor": [
+                {
+                    "name": "snore",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "giga-drain",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "black-2-white-2"
+                },
+                {
+                    "name": "knock-off",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "signal-beam",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "iron-defense",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "bug-bite",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "drill-run",
+                    "gen": "ultra-sun-ultra-moon"
+                }
+            ],
+            "machine": [
+                {
+                    "name": "swords-dance",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "cut",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "toxic",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "screech",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "double-team",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "rest",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "snore",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "protect",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "scary-face",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "giga-drain",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "endure",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "false-swipe",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "attract",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "return",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "frustration",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "megahorn",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "encore",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "hidden-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "rain-dance",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "facade",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "secret-power",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "aerial-ace",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "iron-defense",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "poison-jab",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "x-scissor",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "bug-buzz",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "energy-ball",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "round",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "struggle-bug",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "drill-run",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "confide",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "infestation",
+                    "gen": "ultra-sun-ultra-moon"
+                }
+            ]
+        },
+        "captureRate": 200,
+        "eggGroups": [
+            "bug"
+        ],
+        "genderRatio": 4,
+        "habitats": [],
+        "evolutions": {
+            "name": "karrablast",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "escavalier",
+                    "uuid": "Compendium.ptr2e.core-species.Item.YH7fKQKRSSKwjv9v",
+                    "methods": [
+                        {
+                            "type": "item",
+                            "item": "linking-chord",
+                            "operand": "or",
+                            "held": false
+                        },
+                        {
+                            "type": "level",
+                            "level": 32,
+                            "operand": "or"
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    },
+                    "evolutions": []
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.YH7fKQKRSSKwjv9v",
+            "methods": []
+        }
     },
-    "diet": [
-      "omnivore"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 6
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
-    "traits": [
-      "pokemon",
-      "underdog",
-      "bipedal",
-      "linked-evolution",
-      "ir-vision-15"
-    ],
-    "abilities": {
-      "starting": [
-        "swarm",
-        "shed-skin"
-      ],
-      "basic": [
-        "no-guard",
-        "quick-feet"
-      ],
-      "advanced": [
-        "unburden",
-        "sticky-hold"
-      ],
-      "master": [
-        "forge-buster",
-        "moxie"
-      ]
-    },
-    "skills": {
-      "acrobatics": 30,
-      "climb": 30,
-      "conversation": 20,
-      "intimidate": 15,
-      "lift": 25,
-      "listen": 30,
-      "natural-world": 20,
-      "negotiation": 15,
-      "running": 35,
-      "spot": 40,
-      "stealth": 40,
-      "swim": 10,
-      "track": 40
-    },
-    "slug": "",
-    "stats": {
-      "hp": 50,
-      "atk": 75,
-      "def": 45,
-      "spa": 40,
-      "spd": 45,
-      "spe": 60
-    },
-    "types": [
-      "bug"
-    ],
-    "moves": {
-      "levelUp": [
-        {
-          "name": "leer",
-          "gen": "sword-shield",
-          "level": 1
-        },
-        {
-          "name": "peck",
-          "gen": "sword-shield",
-          "level": 1
-        },
-        {
-          "name": "fury-cutter",
-          "gen": "sword-shield",
-          "level": 4
-        },
-        {
-          "name": "endure",
-          "gen": "sword-shield",
-          "level": 8
-        },
-        {
-          "name": "false-swipe",
-          "gen": "sword-shield",
-          "level": 12
-        },
-        {
-          "name": "fury-attack",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 16
-        },
-        {
-          "name": "acid-spray",
-          "gen": "sword-shield",
-          "level": 16
-        },
-        {
-          "name": "headbutt",
-          "gen": "sword-shield",
-          "level": 20
-        },
-        {
-          "name": "flail",
-          "gen": "sword-shield",
-          "level": 24
-        },
-        {
-          "name": "scary-face",
-          "gen": "sword-shield",
-          "level": 28
-        },
-        {
-          "name": "slash",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 32
-        },
-        {
-          "name": "x-scissor",
-          "gen": "sword-shield",
-          "level": 32
-        },
-        {
-          "name": "swords-dance",
-          "gen": "sword-shield",
-          "level": 36
-        },
-        {
-          "name": "take-down",
-          "gen": "sword-shield",
-          "level": 40
-        },
-        {
-          "name": "bug-buzz",
-          "gen": "sword-shield",
-          "level": 44
-        },
-        {
-          "name": "double-edge",
-          "gen": "sword-shield",
-          "level": 48
-        }
-      ],
-      "egg": [
-        {
-          "name": "horn-attack",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "counter",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "screech",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "slash",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "feint-attack",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "megahorn",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "pursuit",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "knock-off",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "night-slash",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "bug-bite",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "drill-run",
-          "gen": "ultra-sun-ultra-moon"
-        }
-      ],
-      "tutor": [
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "giga-drain",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "knock-off",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "signal-beam",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "iron-defense",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "bug-bite",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "drill-run",
-          "gen": "ultra-sun-ultra-moon"
-        }
-      ],
-      "machine": [
-        {
-          "name": "swords-dance",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "cut",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "screech",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "double-team",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rest",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "substitute",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "protect",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "scary-face",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "giga-drain",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "endure",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "false-swipe",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "swagger",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "megahorn",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "encore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "facade",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "aerial-ace",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "iron-defense",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "poison-jab",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "x-scissor",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "bug-buzz",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "energy-ball",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "struggle-bug",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "drill-run",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "infestation",
-          "gen": "ultra-sun-ultra-moon"
-        }
-      ]
-    },
-    "captureRate": 200,
-    "eggGroups": [
-      "bug"
-    ],
-    "genderRatio": 4,
-    "habitats": [],
-    "evolutions": {
-      "name": "karrablast",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "escavalier",
-          "uuid": "Compendium.ptr2e.core-species.Item.YH7fKQKRSSKwjv9v",
-          "methods": [],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.cjWY5mSlYXi33dt4"
-    }
-  },
-  "_id": "cjWY5mSlYXi33dt4",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.cjWY5mSlYXi33dt4"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712327701027,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.cjWY5mSlYXi33dt4",
-    "duplicateSource": null
-  },
-  "_key": "!items!cjWY5mSlYXi33dt4"
+    "_id": "cjWY5mSlYXi33dt4",
+    "effects": []
 }
