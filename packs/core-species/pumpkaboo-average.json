@@ -1,500 +1,490 @@
 {
-  "name": "pumpkaboo-average",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 710,
-    "size": {
-      "category": "tiny-medium-variable",
-      "type": "height",
-      "height": 0.4,
-      "weight": 5
+    "name": "pumpkaboo-average",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 710,
+        "size": {
+            "category": "tiny-medium-variable",
+            "type": "height",
+            "height": 0.4,
+            "weight": 5
+        },
+        "diet": [
+            "auravore"
+        ],
+        "movement": {
+            "primary": [
+                {
+                    "type": "flight",
+                    "value": 5
+                }
+            ],
+            "secondary": [
+                {
+                    "type": "overland",
+                    "value": 2
+                }
+            ]
+        },
+        "traits": [
+            "pokemon",
+            "underdog",
+            "hover",
+            "hopper"
+        ],
+        "abilities": {
+            "starting": [
+                "pickup",
+                "frisk"
+            ],
+            "basic": [
+                "insomnia",
+                "haunt"
+            ],
+            "advanced": [
+                "illuminate",
+                "magician"
+            ],
+            "master": [
+                "cursed-body",
+                "oblivious"
+            ]
+        },
+        "skills": {
+            "acrobatics": 10,
+            "climb": 15,
+            "conversation": 15,
+            "intimidate": 20,
+            "lift": 10,
+            "listen": 15,
+            "natural-world": 25,
+            "navigate": 20,
+            "negotiation": 20,
+            "running": 20,
+            "spot": 30,
+            "stealth": 30,
+            "survival": 25,
+            "track": 30
+        },
+        "stats": {
+            "hp": 49,
+            "atk": 66,
+            "def": 70,
+            "spa": 44,
+            "spd": 55,
+            "spe": 51
+        },
+        "types": [
+            "ghost",
+            "grass"
+        ],
+        "moves": {
+            "levelUp": [
+                {
+                    "name": "astonish",
+                    "gen": "sword-shield",
+                    "level": 1
+                },
+                {
+                    "name": "shadow-sneak",
+                    "gen": "sword-shield",
+                    "level": 4
+                },
+                {
+                    "name": "confuse-ray",
+                    "gen": "sword-shield",
+                    "level": 8
+                },
+                {
+                    "name": "razor-leaf",
+                    "gen": "sword-shield",
+                    "level": 12
+                },
+                {
+                    "name": "leech-seed",
+                    "gen": "sword-shield",
+                    "level": 16
+                },
+                {
+                    "name": "bullet-seed",
+                    "gen": "sword-shield",
+                    "level": 20
+                },
+                {
+                    "name": "scary-face",
+                    "gen": "sword-shield",
+                    "level": 24
+                },
+                {
+                    "name": "worry-seed",
+                    "gen": "sword-shield",
+                    "level": 28
+                },
+                {
+                    "name": "seed-bomb",
+                    "gen": "sword-shield",
+                    "level": 32
+                },
+                {
+                    "name": "shadow-ball",
+                    "gen": "sword-shield",
+                    "level": 36
+                },
+                {
+                    "name": "trick-or-treat",
+                    "gen": "sword-shield",
+                    "level": 36
+                },
+                {
+                    "name": "trick",
+                    "gen": "sword-shield",
+                    "level": 40
+                },
+                {
+                    "name": "pain-split",
+                    "gen": "sword-shield",
+                    "level": 44
+                }
+            ],
+            "egg": [
+                {
+                    "name": "disable",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "curse",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "destiny-bond",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "bestow",
+                    "gen": "ultra-sun-ultra-moon"
+                }
+            ],
+            "tutor": [
+                {
+                    "name": "spite",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "giga-drain",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "pain-split",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "synthesis",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "trick",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "role-play",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "magic-coat",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "skill-swap",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "worry-seed",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "seed-bomb",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "telekinesis",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "foul-play",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "ally-switch",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "grassy-glide",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "skitter-smack",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "poltergeist",
+                    "gen": "sword-shield"
+                }
+            ],
+            "machine": [
+                {
+                    "name": "flamethrower",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "solar-beam",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "toxic",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "psychic",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "double-team",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "light-screen",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "fire-blast",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "dream-eater",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "flash",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "explosion",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "rest",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "rock-slide",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "thief",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "snore",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "protect",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "scary-face",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sludge-bomb",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "giga-drain",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "endure",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "attract",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "return",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "frustration",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "safeguard",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "hidden-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "sunny-day",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "shadow-ball",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "rock-smash",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "will-o-wisp",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "facade",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "nature-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "trick",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "skill-swap",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "imprison",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "secret-power",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "bullet-seed",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "gyro-ball",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "dark-pulse",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "seed-bomb",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "energy-ball",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "trick-room",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "grass-knot",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "charge-beam",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "flame-charge",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "foul-play",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "round",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "ally-switch",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "hex",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "incinerate",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "confide",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "mystical-fire",
+                    "gen": "sword-shield"
+                }
+            ]
+        },
+        "captureRate": 120,
+        "eggGroups": [
+            "indeterminate"
+        ],
+        "genderRatio": 4,
+        "habitats": [],
+        "evolutions": {
+            "name": "pumpkaboo",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "gourgeist",
+                    "uuid": "Compendium.ptr2e.core-species.Item.wmsEqbSQwM8Zay1g",
+                    "methods": [
+                        {
+                            "type": "level",
+                            "level": 31,
+                            "operand": "or"
+                        },
+                        {
+                            "type": "item",
+                            "item": "linking-chord",
+                            "operand": "or",
+                            "held": false
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    },
+                    "evolutions": []
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.wmsEqbSQwM8Zay1g",
+            "methods": []
+        }
     },
-    "diet": [
-      "auravore"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "flight",
-          "value": 5
-        }
-      ],
-      "secondary": [
-        {
-          "type": "overland",
-          "value": 2
-        }
-      ]
-    },
-    "traits": [
-      "pokemon",
-      "underdog",
-      "hover",
-      "hopper"
-    ],
-    "abilities": {
-      "starting": [
-        "pickup",
-        "frisk"
-      ],
-      "basic": [
-        "insomnia",
-        "haunt"
-      ],
-      "advanced": [
-        "illuminate",
-        "magician"
-      ],
-      "master": [
-        "cursed-body",
-        "oblivious"
-      ]
-    },
-    "skills": {
-      "acrobatics": 10,
-      "climb": 15,
-      "conversation": 15,
-      "intimidate": 20,
-      "lift": 10,
-      "listen": 15,
-      "natural-world": 25,
-      "navigate": 20,
-      "negotiation": 20,
-      "running": 20,
-      "spot": 30,
-      "stealth": 30,
-      "survival": 25,
-      "track": 30
-    },
-    "slug": "",
-    "stats": {
-      "hp": 49,
-      "atk": 66,
-      "def": 70,
-      "spa": 44,
-      "spd": 55,
-      "spe": 51
-    },
-    "types": [
-      "ghost",
-      "grass"
-    ],
-    "moves": {
-      "levelUp": [
-        {
-          "name": "astonish",
-          "gen": "sword-shield",
-          "level": 1
-        },
-        {
-          "name": "shadow-sneak",
-          "gen": "sword-shield",
-          "level": 4
-        },
-        {
-          "name": "confuse-ray",
-          "gen": "sword-shield",
-          "level": 8
-        },
-        {
-          "name": "razor-leaf",
-          "gen": "sword-shield",
-          "level": 12
-        },
-        {
-          "name": "leech-seed",
-          "gen": "sword-shield",
-          "level": 16
-        },
-        {
-          "name": "bullet-seed",
-          "gen": "sword-shield",
-          "level": 20
-        },
-        {
-          "name": "scary-face",
-          "gen": "sword-shield",
-          "level": 24
-        },
-        {
-          "name": "worry-seed",
-          "gen": "sword-shield",
-          "level": 28
-        },
-        {
-          "name": "seed-bomb",
-          "gen": "sword-shield",
-          "level": 32
-        },
-        {
-          "name": "shadow-ball",
-          "gen": "sword-shield",
-          "level": 36
-        },
-        {
-          "name": "trick-or-treat",
-          "gen": "sword-shield",
-          "level": 36
-        },
-        {
-          "name": "trick",
-          "gen": "sword-shield",
-          "level": 40
-        },
-        {
-          "name": "pain-split",
-          "gen": "sword-shield",
-          "level": 44
-        }
-      ],
-      "egg": [
-        {
-          "name": "disable",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "curse",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "destiny-bond",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "bestow",
-          "gen": "ultra-sun-ultra-moon"
-        }
-      ],
-      "tutor": [
-        {
-          "name": "spite",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "giga-drain",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "pain-split",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "synthesis",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "trick",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "role-play",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "magic-coat",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "skill-swap",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "worry-seed",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "seed-bomb",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "telekinesis",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "foul-play",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "ally-switch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "grassy-glide",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "skitter-smack",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "poltergeist",
-          "gen": "sword-shield"
-        }
-      ],
-      "machine": [
-        {
-          "name": "flamethrower",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "solar-beam",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "psychic",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "double-team",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "light-screen",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "fire-blast",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "dream-eater",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "flash",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "explosion",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rest",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rock-slide",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "substitute",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "thief",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "protect",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "scary-face",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sludge-bomb",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "giga-drain",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "endure",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "swagger",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "safeguard",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "shadow-ball",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rock-smash",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "will-o-wisp",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "facade",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "nature-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "trick",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "skill-swap",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "imprison",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "bullet-seed",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "gyro-ball",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "dark-pulse",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "seed-bomb",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "energy-ball",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "trick-room",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "grass-knot",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "charge-beam",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "flame-charge",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "foul-play",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "ally-switch",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hex",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "incinerate",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "mystical-fire",
-          "gen": "sword-shield"
-        }
-      ]
-    },
-    "captureRate": 120,
-    "eggGroups": [
-      "indeterminate"
-    ],
-    "genderRatio": 4,
-    "habitats": [],
-    "evolutions": {
-      "name": "pumpkaboo",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "gourgeist",
-          "uuid": "Compendium.ptr2e.core-species.Item.wmsEqbSQwM8Zay1g",
-          "methods": [],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.ReUlmCDpQ5yNzt4W"
-    }
-  },
-  "_id": "ReUlmCDpQ5yNzt4W",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.ReUlmCDpQ5yNzt4W"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712327701027,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.ReUlmCDpQ5yNzt4W",
-    "duplicateSource": null
-  },
-  "_key": "!items!ReUlmCDpQ5yNzt4W"
+    "_id": "ReUlmCDpQ5yNzt4W",
+    "effects": []
 }
