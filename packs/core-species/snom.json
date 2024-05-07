@@ -1,232 +1,224 @@
 {
-  "name": "snom",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "type": "species",
-  "system": {
-    "types": [
-      "bug",
-      "ice"
-    ],
-    "stats": {
-      "hp": 30,
-      "atk": 25,
-      "def": 35,
-      "spa": 45,
-      "spd": 30,
-      "spe": 20
+    "name": "snom",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "type": "species",
+    "system": {
+        "types": [
+            "bug",
+            "ice"
+        ],
+        "stats": {
+            "hp": 30,
+            "atk": 25,
+            "def": 35,
+            "spa": 45,
+            "spd": 30,
+            "spe": 20
+        },
+        "moves": {
+            "machine": [
+                {
+                    "name": "rest",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "snore",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "protect",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "icy-wind",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "endure",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "attract",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "facade",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "icicle-spear",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "bug-buzz",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "bug-bite",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "round",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "struggle-bug",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "lunge",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "skitter-smack",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "tera-blast",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "pounce",
+                    "gen": "scarlet-violet"
+                }
+            ],
+            "levelUp": [
+                {
+                    "name": "powder-snow",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "struggle-bug",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                }
+            ],
+            "egg": [
+                {
+                    "name": "mirror-coat",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "bug-bite",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "fairy-wind",
+                    "gen": "scarlet-violet"
+                }
+            ],
+            "tutor": [
+                {
+                    "name": "skitter-smack",
+                    "gen": "sword-shield"
+                }
+            ]
+        },
+        "size": {
+            "height": 0.3,
+            "weight": 3.8,
+            "category": "tiny",
+            "type": "quad"
+        },
+        "captureRate": 190,
+        "eggGroups": [
+            "bug"
+        ],
+        "genderRatio": 4,
+        "evolutions": {
+            "name": "snom",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "frosmoth",
+                    "uuid": "Compendium.ptr2e.core-species.Item.0976TRN63XfSPMwg",
+                    "methods": [
+                        {
+                            "type": "level",
+                            "level": 26,
+                            "operand": "or"
+                        },
+                        {
+                            "type": "item",
+                            "item": "ice-stone",
+                            "operand": "or",
+                            "held": false
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    },
+                    "evolutions": []
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.0976TRN63XfSPMwg",
+            "methods": []
+        },
+        "number": 872,
+        "traits": [
+            "pokemon",
+            "legless",
+            "underdog",
+            "wallclimber",
+            "chiller"
+        ],
+        "diet": [
+            "snow"
+        ],
+        "abilities": {
+            "starting": [
+                "shield-dust",
+                "ice-scales"
+            ],
+            "basic": [
+                "compound-eyes",
+                "snow-warning"
+            ],
+            "advanced": [
+                "ice-body",
+                "chill-wave"
+            ],
+            "master": [
+                "snow-cloak",
+                "frost-coat"
+            ]
+        },
+        "movement": {
+            "primary": [
+                {
+                    "type": "overland",
+                    "value": 3
+                }
+            ],
+            "secondary": []
+        },
+        "skills": {
+            "climb": 30,
+            "conversation": 35,
+            "disguise": 40,
+            "lift": 10,
+            "listen": 35,
+            "natural-world": 30,
+            "running": 20,
+            "spot": 35,
+            "stealth": 40,
+            "survival": 35
+        },
+        "habitats": [],
+        "slug": "snom"
     },
-    "moves": {
-      "machine": [
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "substitute",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "icy-wind",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "icicle-spear",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "bug-buzz",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "bug-bite",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "struggle-bug",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "lunge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "skitter-smack",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "tera-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "pounce",
-          "gen": "scarlet-violet"
-        }
-      ],
-      "levelUp": [
-        {
-          "name": "powder-snow",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "struggle-bug",
-          "gen": "scarlet-violet",
-          "level": 1
-        }
-      ],
-      "egg": [
-        {
-          "name": "mirror-coat",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "bug-bite",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "fairy-wind",
-          "gen": "scarlet-violet"
-        }
-      ],
-      "tutor": [
-        {
-          "name": "skitter-smack",
-          "gen": "sword-shield"
-        }
-      ]
-    },
-    "size": {
-      "height": 0.3,
-      "weight": 3.8,
-      "category": "tiny",
-      "type": "quad"
-    },
-    "captureRate": 190,
-    "eggGroups": [
-      "bug"
-    ],
-    "genderRatio": 4,
-    "evolutions": {
-      "name": "snom",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "frosmoth",
-          "uuid": "Compendium.ptr2e.core-species.Item.0976TRN63XfSPMwg",
-          "methods": [],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.H4aGcVk0t89qyUS4"
-    },
-    "number": 872,
-    "traits": [
-      "pokemon",
-      "legless",
-      "underdog",
-      "wallclimber",
-      "chiller"
-    ],
-    "diet": [
-      "snow"
-    ],
-    "abilities": {
-      "starting": [
-        "shield-dust",
-        "ice-scales"
-      ],
-      "basic": [
-        "compound-eyes",
-        "snow-warning"
-      ],
-      "advanced": [
-        "ice-body",
-        "chill-wave"
-      ],
-      "master": [
-        "snow-cloak",
-        "frost-coat"
-      ]
-    },
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 3
-        }
-      ],
-      "secondary": []
-    },
-    "skills": {
-      "climb": 30,
-      "conversation": 35,
-      "disguise": 40,
-      "lift": 10,
-      "listen": 35,
-      "natural-world": 30,
-      "running": 20,
-      "spot": 35,
-      "stealth": 40,
-      "survival": 35
-    },
-    "habitats": [],
-    "slug": "snom"
-  },
-  "_id": "H4aGcVk0t89qyUS4",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.H4aGcVk0t89qyUS4"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": null,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.H4aGcVk0t89qyUS4",
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!H4aGcVk0t89qyUS4"
+    "_id": "H4aGcVk0t89qyUS4",
+    "effects": []
 }
