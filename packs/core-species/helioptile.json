@@ -1,466 +1,449 @@
 {
-  "name": "helioptile",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 694,
-    "size": {
-      "category": "tiny",
-      "type": "height",
-      "height": 0.5,
-      "weight": 6
+    "name": "helioptile",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 694,
+        "size": {
+            "category": "tiny",
+            "type": "height",
+            "height": 0.5,
+            "weight": 6
+        },
+        "diet": [
+            "phototroph"
+        ],
+        "movement": {
+            "primary": [
+                {
+                    "type": "overland",
+                    "value": 7
+                }
+            ],
+            "secondary": [
+                {
+                    "type": "swim",
+                    "value": 3
+                }
+            ]
+        },
+        "traits": [
+            "pokemon",
+            "glow",
+            "underdog",
+            "zapper"
+        ],
+        "abilities": {
+            "starting": [
+                "arid-adaptation",
+                "sand-veil"
+            ],
+            "basic": [
+                "solar-power",
+                "sunbathe"
+            ],
+            "advanced": [
+                "sun-worship",
+                "minus"
+            ],
+            "master": [
+                "sequence",
+                "chlorophyll"
+            ]
+        },
+        "skills": {
+            "acrobatics": 25,
+            "climb": 20,
+            "conversation": 30,
+            "intimidate": 35,
+            "leadership": 10,
+            "lift": 15,
+            "listen": 20,
+            "natural-world": 30,
+            "navigate": 20,
+            "negotiation": 10,
+            "running": 40,
+            "spot": 20,
+            "stealth": 25,
+            "survival": 35,
+            "track": 15
+        },
+        "stats": {
+            "hp": 44,
+            "atk": 38,
+            "def": 33,
+            "spa": 61,
+            "spd": 43,
+            "spe": 70
+        },
+        "types": [
+            "normal",
+            "electric"
+        ],
+        "moves": {
+            "levelUp": [
+                {
+                    "name": "tail-whip",
+                    "gen": "sword-shield",
+                    "level": 1
+                },
+                {
+                    "name": "mud-slap",
+                    "gen": "sword-shield",
+                    "level": 1
+                },
+                {
+                    "name": "pound",
+                    "gen": "sword-shield",
+                    "level": 4
+                },
+                {
+                    "name": "thunder-shock",
+                    "gen": "sword-shield",
+                    "level": 8
+                },
+                {
+                    "name": "quick-attack",
+                    "gen": "sword-shield",
+                    "level": 12
+                },
+                {
+                    "name": "charge",
+                    "gen": "sword-shield",
+                    "level": 16
+                },
+                {
+                    "name": "bulldoze",
+                    "gen": "sword-shield",
+                    "level": 20
+                },
+                {
+                    "name": "razor-wind",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 22
+                },
+                {
+                    "name": "volt-switch",
+                    "gen": "sword-shield",
+                    "level": 24
+                },
+                {
+                    "name": "parabolic-charge",
+                    "gen": "sword-shield",
+                    "level": 28
+                },
+                {
+                    "name": "thunder-wave",
+                    "gen": "sword-shield",
+                    "level": 32
+                },
+                {
+                    "name": "thunderbolt",
+                    "gen": "sword-shield",
+                    "level": 36
+                },
+                {
+                    "name": "electrify",
+                    "gen": "sword-shield",
+                    "level": 40
+                },
+                {
+                    "name": "thunder",
+                    "gen": "sword-shield",
+                    "level": 44
+                }
+            ],
+            "egg": [
+                {
+                    "name": "agility",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "glare",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "camouflage",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "dragon-rush",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "dragon-tail",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "electric-terrain",
+                    "gen": "ultra-sun-ultra-moon"
+                }
+            ],
+            "tutor": [
+                {
+                    "name": "snore",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "iron-tail",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "signal-beam",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "shock-wave",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "magnet-rise",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "ally-switch",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "electroweb",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "scale-shot",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "rising-voltage",
+                    "gen": "sword-shield"
+                }
+            ],
+            "machine": [
+                {
+                    "name": "cut",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "surf",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "thunderbolt",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "thunder-wave",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "thunder",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "dig",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "toxic",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "agility",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "double-team",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "light-screen",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "swift",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "flash",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "rest",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "rock-slide",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "snore",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "protect",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sandstorm",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "endure",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "attract",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "return",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "frustration",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "iron-tail",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "hidden-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "rain-dance",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "psych-up",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "facade",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "secret-power",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "rock-tomb",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "u-turn",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "dark-pulse",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "grass-knot",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "charge-beam",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "electro-ball",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "low-sweep",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "round",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "ally-switch",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "volt-switch",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "bulldoze",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "dragon-tail",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "electroweb",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "wild-charge",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "confide",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "electric-terrain",
+                    "gen": "sword-shield"
+                }
+            ]
+        },
+        "captureRate": 190,
+        "eggGroups": [
+            "monster",
+            "dragon"
+        ],
+        "genderRatio": 4,
+        "habitats": [],
+        "evolutions": {
+            "name": "helioptile",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "heliolisk",
+                    "uuid": "Compendium.ptr2e.core-species.Item.nLwDfj3d94ntw4au",
+                    "methods": [
+                        {
+                            "type": "item",
+                            "item": "sun-stone",
+                            "operand": "or",
+                            "held": false
+                        },
+                        {
+                            "type": "level",
+                            "level": 33,
+                            "operand": "or"
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    },
+                    "evolutions": []
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.uSaJiw1CAzTDluSy",
+            "methods": []
+        }
     },
-    "diet": [
-      "phototroph"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 7
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 3
-        }
-      ]
-    },
-    "traits": [
-      "pokemon",
-      "glow",
-      "underdog",
-      "zapper"
-    ],
-    "abilities": {
-      "starting": [
-        "arid-adaptation",
-        "sand-veil"
-      ],
-      "basic": [
-        "solar-power",
-        "sunbathe"
-      ],
-      "advanced": [
-        "sun-worship",
-        "minus"
-      ],
-      "master": [
-        "sequence",
-        "chlorophyll"
-      ]
-    },
-    "skills": {
-      "acrobatics": 25,
-      "climb": 20,
-      "conversation": 30,
-      "intimidate": 35,
-      "lift": 15,
-      "listen": 20,
-      "leadership": 10,
-      "natural-world": 30,
-      "navigate": 20,
-      "negotiation": 10,
-      "running": 40,
-      "spot": 20,
-      "stealth": 25,
-      "survival": 35,
-      "track": 15
-    },
-    "slug": "",
-    "stats": {
-      "hp": 44,
-      "atk": 38,
-      "def": 33,
-      "spa": 61,
-      "spd": 43,
-      "spe": 70
-    },
-    "types": [
-      "electric",
-      "normal"
-    ],
-    "moves": {
-      "levelUp": [
-        {
-          "name": "tail-whip",
-          "gen": "sword-shield",
-          "level": 1
-        },
-        {
-          "name": "mud-slap",
-          "gen": "sword-shield",
-          "level": 1
-        },
-        {
-          "name": "pound",
-          "gen": "sword-shield",
-          "level": 4
-        },
-        {
-          "name": "thunder-shock",
-          "gen": "sword-shield",
-          "level": 8
-        },
-        {
-          "name": "quick-attack",
-          "gen": "sword-shield",
-          "level": 12
-        },
-        {
-          "name": "charge",
-          "gen": "sword-shield",
-          "level": 16
-        },
-        {
-          "name": "bulldoze",
-          "gen": "sword-shield",
-          "level": 20
-        },
-        {
-          "name": "razor-wind",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 22
-        },
-        {
-          "name": "volt-switch",
-          "gen": "sword-shield",
-          "level": 24
-        },
-        {
-          "name": "parabolic-charge",
-          "gen": "sword-shield",
-          "level": 28
-        },
-        {
-          "name": "thunder-wave",
-          "gen": "sword-shield",
-          "level": 32
-        },
-        {
-          "name": "thunderbolt",
-          "gen": "sword-shield",
-          "level": 36
-        },
-        {
-          "name": "electrify",
-          "gen": "sword-shield",
-          "level": 40
-        },
-        {
-          "name": "thunder",
-          "gen": "sword-shield",
-          "level": 44
-        }
-      ],
-      "egg": [
-        {
-          "name": "agility",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "glare",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "camouflage",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "dragon-rush",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "dragon-tail",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "electric-terrain",
-          "gen": "ultra-sun-ultra-moon"
-        }
-      ],
-      "tutor": [
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "iron-tail",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "signal-beam",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "shock-wave",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "magnet-rise",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "ally-switch",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "electroweb",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "scale-shot",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rising-voltage",
-          "gen": "sword-shield"
-        }
-      ],
-      "machine": [
-        {
-          "name": "cut",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "surf",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "thunderbolt",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "thunder-wave",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "thunder",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "dig",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "agility",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "double-team",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "light-screen",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "swift",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "flash",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "rest",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "rock-slide",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "substitute",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "protect",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sandstorm",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "endure",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "swagger",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "iron-tail",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rain-dance",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "psych-up",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "facade",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "rock-tomb",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "u-turn",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "dark-pulse",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "grass-knot",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "charge-beam",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "electro-ball",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "low-sweep",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "ally-switch",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "volt-switch",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "bulldoze",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "dragon-tail",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "electroweb",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "wild-charge",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "electric-terrain",
-          "gen": "sword-shield"
-        }
-      ]
-    },
-    "captureRate": 190,
-    "eggGroups": [
-      "monster",
-      "dragon"
-    ],
-    "genderRatio": 4,
-    "habitats": [],
-    "evolutions": {
-      "name": "helioptile",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "heliolisk",
-          "uuid": "Compendium.ptr2e.core-species.Item.nLwDfj3d94ntw4au",
-          "methods": [
-            {
-              "type": "item",
-              "item": "sun-stone",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.uSaJiw1CAzTDluSy"
-    }
-  },
-  "_id": "uSaJiw1CAzTDluSy",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.uSaJiw1CAzTDluSy"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712327701027,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.uSaJiw1CAzTDluSy",
-    "duplicateSource": null
-  },
-  "_key": "!items!uSaJiw1CAzTDluSy"
+    "_id": "uSaJiw1CAzTDluSy",
+    "effects": []
 }
