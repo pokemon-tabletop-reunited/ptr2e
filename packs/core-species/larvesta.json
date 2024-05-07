@@ -1,503 +1,481 @@
 {
-  "name": "larvesta",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 636,
-    "size": {
-      "category": "small",
-      "type": "quad",
-      "height": 1.1,
-      "weight": 28.8
+    "name": "larvesta",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 636,
+        "size": {
+            "category": "small",
+            "type": "quad",
+            "height": 1.1,
+            "weight": 28.8
+        },
+        "diet": [
+            "herbivore"
+        ],
+        "movement": {
+            "primary": [
+                {
+                    "type": "overland",
+                    "value": 9
+                }
+            ],
+            "secondary": [
+                {
+                    "type": "swim",
+                    "value": 5
+                }
+            ]
+        },
+        "traits": [
+            "pokemon",
+            "underdog",
+            "quadrupedal",
+            "incubator",
+            "firestarter",
+            "heater",
+            "glow"
+        ],
+        "abilities": {
+            "starting": [
+                "swarm",
+                "reckless"
+            ],
+            "basic": [
+                "flame-body",
+                "compound-eyes"
+            ],
+            "advanced": [
+                "tinted-lens",
+                "overcoat"
+            ],
+            "master": [
+                "raging-flame",
+                "ashen-coat"
+            ]
+        },
+        "skills": {
+            "acrobatics": 10,
+            "climb": 35,
+            "conversation": 30,
+            "intimidate": 35,
+            "lift": 30,
+            "listen": 30,
+            "natural-world": 30,
+            "navigate": 30,
+            "negotiation": 25,
+            "running": 25,
+            "spot": 30,
+            "stealth": 10,
+            "survival": 35,
+            "swim": 10
+        },
+        "stats": {
+            "hp": 55,
+            "atk": 85,
+            "def": 55,
+            "spa": 50,
+            "spd": 55,
+            "spe": 60
+        },
+        "types": [
+            "bug",
+            "fire"
+        ],
+        "moves": {
+            "levelUp": [
+                {
+                    "name": "ember",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "string-shot",
+                    "gen": "scarlet-violet",
+                    "level": 1
+                },
+                {
+                    "name": "flame-charge",
+                    "gen": "scarlet-violet",
+                    "level": 6
+                },
+                {
+                    "name": "absorb",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 10
+                },
+                {
+                    "name": "struggle-bug",
+                    "gen": "scarlet-violet",
+                    "level": 12
+                },
+                {
+                    "name": "flame-wheel",
+                    "gen": "scarlet-violet",
+                    "level": 18
+                },
+                {
+                    "name": "bug-bite",
+                    "gen": "scarlet-violet",
+                    "level": 24
+                },
+                {
+                    "name": "screech",
+                    "gen": "scarlet-violet",
+                    "level": 30
+                },
+                {
+                    "name": "leech-life",
+                    "gen": "scarlet-violet",
+                    "level": 36
+                },
+                {
+                    "name": "bug-buzz",
+                    "gen": "scarlet-violet",
+                    "level": 42
+                },
+                {
+                    "name": "take-down",
+                    "gen": "scarlet-violet",
+                    "level": 48
+                },
+                {
+                    "name": "amnesia",
+                    "gen": "scarlet-violet",
+                    "level": 54
+                },
+                {
+                    "name": "double-edge",
+                    "gen": "scarlet-violet",
+                    "level": 60
+                },
+                {
+                    "name": "flare-blitz",
+                    "gen": "scarlet-violet",
+                    "level": 66
+                },
+                {
+                    "name": "thrash",
+                    "gen": "ultra-sun-ultra-moon",
+                    "level": 90
+                }
+            ],
+            "egg": [
+                {
+                    "name": "thrash",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "absorb",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "string-shot",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "harden",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "foresight",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "endure",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "morning-sun",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "magnet-rise",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "zen-headbutt",
+                    "gen": "ultra-sun-ultra-moon"
+                }
+            ],
+            "tutor": [
+                {
+                    "name": "snore",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "giga-drain",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "black-2-white-2"
+                },
+                {
+                    "name": "heat-wave",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "signal-beam",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "magnet-rise",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "zen-headbutt",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "bug-bite",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "skitter-smack",
+                    "gen": "sword-shield"
+                }
+            ],
+            "machine": [
+                {
+                    "name": "body-slam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "take-down",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "double-edge",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "flamethrower",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "solar-beam",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "fire-spin",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "toxic",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "psychic",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "screech",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "double-team",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "light-screen",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "fire-blast",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "amnesia",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "leech-life",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "rest",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "substitute",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "snore",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "protect",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "giga-drain",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "endure",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "swagger",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "attract",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "sleep-talk",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "return",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "frustration",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "safeguard",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "hidden-power",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "sunny-day",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "heat-wave",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "will-o-wisp",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "facade",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "secret-power",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "overheat",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "calm-mind",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "u-turn",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "flare-blitz",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "bug-buzz",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "zen-headbutt",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "bug-bite",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "flame-charge",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "round",
+                    "gen": "sword-shield"
+                },
+                {
+                    "name": "incinerate",
+                    "gen": "omega-ruby-alpha-sapphire"
+                },
+                {
+                    "name": "acrobatics",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "struggle-bug",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "wild-charge",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "confide",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "lunge",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "skitter-smack",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "tera-blast",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "pounce",
+                    "gen": "scarlet-violet"
+                },
+                {
+                    "name": "trailblaze",
+                    "gen": "scarlet-violet"
+                }
+            ]
+        },
+        "captureRate": 45,
+        "eggGroups": [
+            "bug"
+        ],
+        "genderRatio": 4,
+        "habitats": [],
+        "evolutions": {
+            "name": "larvesta",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "volcarona",
+                    "uuid": "Compendium.ptr2e.core-species.Item.JndK7Uh87zSx3TLe",
+                    "methods": [
+                        {
+                            "type": "level",
+                            "level": 41,
+                            "operand": "and"
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    },
+                    "evolutions": []
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.JndK7Uh87zSx3TLe",
+            "methods": []
+        }
     },
-    "diet": [
-      "herbivore"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 9
-        }
-      ],
-      "secondary": [
-        {
-          "type": "swim",
-          "value": 5
-        }
-      ]
-    },
-    "traits": [
-      "pokemon",
-      "underdog",
-      "quadrupedal",
-      "incubator",
-      "firestarter",
-      "heater",
-      "glow"
-    ],
-    "abilities": {
-      "starting": [
-        "swarm",
-        "reckless"
-      ],
-      "basic": [
-        "flame-body",
-        "compound-eyes"
-      ],
-      "advanced": [
-        "tinted-lens",
-        "overcoat"
-      ],
-      "master": [
-        "raging-flame",
-        "ashen-coat"
-      ]
-    },
-    "skills": {
-      "acrobatics": 10,
-      "climb": 35,
-      "conversation": 30,
-      "intimidate": 35,
-      "lift": 30,
-      "listen": 30,
-      "natural-world": 30,
-      "navigate": 30,
-      "negotiation": 25,
-      "running": 25,
-      "spot": 30,
-      "stealth": 10,
-      "survival": 35,
-      "swim": 10
-    },
-    "slug": "",
-    "stats": {
-      "hp": 55,
-      "atk": 85,
-      "def": 55,
-      "spa": 50,
-      "spd": 55,
-      "spe": 60
-    },
-    "types": [
-      "bug",
-      "fire"
-    ],
-    "moves": {
-      "levelUp": [
-        {
-          "name": "ember",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "string-shot",
-          "gen": "scarlet-violet",
-          "level": 1
-        },
-        {
-          "name": "flame-charge",
-          "gen": "scarlet-violet",
-          "level": 6
-        },
-        {
-          "name": "absorb",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 10
-        },
-        {
-          "name": "struggle-bug",
-          "gen": "scarlet-violet",
-          "level": 12
-        },
-        {
-          "name": "flame-wheel",
-          "gen": "scarlet-violet",
-          "level": 18
-        },
-        {
-          "name": "bug-bite",
-          "gen": "scarlet-violet",
-          "level": 24
-        },
-        {
-          "name": "screech",
-          "gen": "scarlet-violet",
-          "level": 30
-        },
-        {
-          "name": "leech-life",
-          "gen": "scarlet-violet",
-          "level": 36
-        },
-        {
-          "name": "bug-buzz",
-          "gen": "scarlet-violet",
-          "level": 42
-        },
-        {
-          "name": "take-down",
-          "gen": "scarlet-violet",
-          "level": 48
-        },
-        {
-          "name": "amnesia",
-          "gen": "scarlet-violet",
-          "level": 54
-        },
-        {
-          "name": "double-edge",
-          "gen": "scarlet-violet",
-          "level": 60
-        },
-        {
-          "name": "flare-blitz",
-          "gen": "scarlet-violet",
-          "level": 66
-        },
-        {
-          "name": "thrash",
-          "gen": "ultra-sun-ultra-moon",
-          "level": 90
-        }
-      ],
-      "egg": [
-        {
-          "name": "thrash",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "absorb",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "string-shot",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "harden",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "foresight",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "endure",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "morning-sun",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "magnet-rise",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "zen-headbutt",
-          "gen": "ultra-sun-ultra-moon"
-        }
-      ],
-      "tutor": [
-        {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "giga-drain",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "black-2-white-2"
-        },
-        {
-          "name": "heat-wave",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "signal-beam",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "magnet-rise",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "zen-headbutt",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "bug-bite",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "skitter-smack",
-          "gen": "sword-shield"
-        }
-      ],
-      "machine": [
-        {
-          "name": "body-slam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "take-down",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "double-edge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flamethrower",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "solar-beam",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "fire-spin",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "toxic",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "psychic",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "screech",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "double-team",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "light-screen",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "fire-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "amnesia",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "leech-life",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "rest",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "substitute",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "snore",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "protect",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "giga-drain",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "endure",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "swagger",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "safeguard",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "sunny-day",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "heat-wave",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "will-o-wisp",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "facade",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "overheat",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "calm-mind",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "u-turn",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flare-blitz",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "bug-buzz",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "zen-headbutt",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "bug-bite",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "flame-charge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "incinerate",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "acrobatics",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "struggle-bug",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "wild-charge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "confide",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "lunge",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "skitter-smack",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "tera-blast",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "pounce",
-          "gen": "scarlet-violet"
-        },
-        {
-          "name": "trailblaze",
-          "gen": "scarlet-violet"
-        }
-      ]
-    },
-    "captureRate": 45,
-    "eggGroups": [
-      "bug"
-    ],
-    "genderRatio": 4,
-    "habitats": [],
-    "evolutions": {
-      "name": "larvesta",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "volcarona",
-          "uuid": "Compendium.ptr2e.core-species.Item.JndK7Uh87zSx3TLe",
-          "methods": [
-            {
-              "type": "level",
-              "level": 59,
-              "operand": "and"
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.g5ytyUWcwL2Sywc9"
-    }
-  },
-  "_id": "g5ytyUWcwL2Sywc9",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.g5ytyUWcwL2Sywc9"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712327701027,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.g5ytyUWcwL2Sywc9",
-    "duplicateSource": null
-  },
-  "_key": "!items!g5ytyUWcwL2Sywc9"
+    "_id": "g5ytyUWcwL2Sywc9",
+    "effects": []
 }
