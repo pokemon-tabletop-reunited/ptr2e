@@ -1,12 +1,13 @@
 import { ActorPTR2e } from "@actor";
-import { ItemPTR2e } from "@item";
+import { ItemPTR2e, ItemSystemsWithActions } from "@item";
 import { PTRCONSTS, ActionType, ActionCost, Delay, Priority, Trait } from "@data";
 import { RangePTR2e } from "@data";
+import { CollectionField } from "../fields/collection-field.ts";
 
 class ActionPTR2e extends foundry.abstract.DataModel {
     static TYPE: ActionType = "generic" as const;
 
-    static override defineSchema() {
+    static override defineSchema(): ActionSchema {
         const fields = foundry.data.fields;
         return {
             slug: new fields.StringField({
@@ -26,7 +27,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
                 label: "PTR2E.FIELDS.description.label",
                 hint: "PTR2E.FIELDS.description.hint",
             }),
-            traits: new fields.SetField(new fields.StringField({ validate: Trait.isValid }), {
+            traits: new CollectionField(new fields.StringField({ validate: Trait.isValid }), "slug", {
                 label: "PTR2E.FIELDS.actionTraits.label",
                 hint: "PTR2E.FIELDS.actionTraits.hint",
             }),
@@ -102,109 +103,84 @@ class ActionPTR2e extends foundry.abstract.DataModel {
         return null;
     }
 
-    get item(): ItemPTR2e {
+    get item(): ItemPTR2e<ItemSystemsWithActions> {
         if (this.parent instanceof ItemPTR2e) return this.parent;
         if (this.parent?.parent instanceof ItemPTR2e) return this.parent.parent;
         throw new Error("Action is not a child of an item");
     }
 
     prepareDerivedData() {
-        this._traits = [];
-        this.traits = this._source.traits.reduce((acc: Map<string, Trait>, traitSlug: string) => {
+        this.traits = this._source.traits.reduce((acc: Collection<Trait>, traitSlug: string) => {
             const trait = game.ptr.data.traits.get(traitSlug);
             if (trait) {
                 acc.set(traitSlug, trait);
-                this._traits.push(trait);
             }
             return acc;
-        }, new Map());
+        }, new Collection());
+    }
+
+    /**
+     * Serialize salient information about this Action's owning Document when dragging it.
+     */
+    toDragData(): Record<string, unknown> {
+        const dragData: Record<string, unknown> = {
+            type: this.item.documentName,
+            action: {
+                slug: this.slug,
+                type: this.type,
+            }
+        }
+        if(this.item.id) dragData.uuid = this.item.uuid;
+        else dragData.data = this.item.toObject();
+        return dragData;
+    }
+
+    /**
+     * Apply an update to the Action through it's parent Item.
+     */
+    async update(data: DeepPartial<SourceFromSchema<ActionSchema>>) {
+        const currentActions = this.prepareUpdate(data);
+        return this.item.update({"system.actions": currentActions});
+    }
+
+    prepareUpdate(data: DeepPartial<SourceFromSchema<ActionSchema>>) {
+        const currentActions = this.item.system.toObject().actions;
+        let actionIndex = currentActions.findIndex((a) => a.slug === this.slug);
+        fu.mergeObject(currentActions[actionIndex], data);
+        return currentActions;
     }
 }
-interface ActionPTR2e extends foundry.abstract.DataModel {
-    /**
-     * A slug for the action.
-     * @remarks
-     * This is a unique identifier for the action, which is used to reference it in the system.
-     * It is derived from the name of the action.
-     */
-    slug: string;
-    /**
-     * The name of the action.
-     * @remarks
-     * Supports localization.
-     */
-    name: string;
-    /**
-     * The effect description of the action.
-     */
-    description: string;
-    /**
-     * A record of traits that the item has.
-     * @remarks
-     * This is a record of traits that the item has, keyed by the trait's name.
-     * @example
-     * ```typescript
-     * const item = new ItemPTR2e({ name: 'Flashlight', "system.traits": ["light"] });
-     * console.log(item.system.traits); // { "light": TraitPTR2e }
-     * ```
-     */
-    traits: Map<string, Trait>;
-    _traits: Trait[];
-    /**
-     * The type of the action.
-     * @defaultValue `'generic'`
-     * @remarks
-     * This is one of `'attack'`, `'camping'`, `'downtime'`, `'exploration'`, `'passive'`, or `'generic'`.
-     */
-    type: ActionType;
+interface ActionPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<ActionSchema> {
+    _source: SourceFromSchema<ActionSchema>;
+    traits: Collection<Trait>;
+}
 
-    /**
-     * The costs associated with using the action.
-     */
-    cost: {
-        /**
-         * The activation cost of the action.
-         * @defaultValue `'simple'`
-         * @remarks
-         * This is one of `'simple'`, `'complex'`, or `'free'`.
-         */
+export type ActionSchema = {
+    slug: foundry.data.fields.StringField<string, string, true>;
+    name: foundry.data.fields.StringField<string, string, true, false, true>;
+    description: foundry.data.fields.HTMLField<string, string, false, true>;
+    traits: CollectionField<foundry.data.fields.StringField>;
+    type: foundry.data.fields.StringField<string, ActionType, true, false, true>;
+    range: foundry.data.fields.EmbeddedDataField<RangePTR2e, false, true>;
+    cost: foundry.data.fields.SchemaField<{
+        activation: foundry.data.fields.StringField<ActionCost, string, true, false, true>;
+        powerPoints: foundry.data.fields.NumberField<number, number, true, false, true>;
+        trigger: foundry.data.fields.StringField<string, string, false, true>;
+        delay: foundry.data.fields.NumberField<Delay, number, false, true>;
+        priority: foundry.data.fields.NumberField<Priority, number, false, true>;
+    }, {
         activation: ActionCost;
-        /**
-         * The power points required to use the action.
-         * @defaultValue `0`
-         */
         powerPoints: number;
-        /**
-         * The trigger for the action.
-         * @remarks
-         * Todo: Decide what value this should be.
-         */
-        trigger?: string;
-        /**
-         * The delay of the action.
-         * @defaultValue `1`
-         * @remarks
-         * This is one of `1`, `2`, or `3`.
-         */
-        delay?: Delay;
-        /**
-         * The priority of the action.
-         * @defaultValue `0`
-         */
-        priority?: Priority;
-    };
-
-    /**
-     * The range of the action.
-     * @remarks
-     * This is the range of the action.
-     * It can be one of `'self'`, `'ally'`, `'enemy'`, `'creature'`, `'object'`, `'blast'`, `'cone'`, `'line'`, `'wide-line'`, `'emanation'`, `'field'`, `'aura'`, `'allied-aura'`, or `'enemy-aura'`.
-     */
-    range: RangePTR2e[];
-
-    _source: {
-        traits: string[];
-    } & foundry.abstract.DataModel["_source"];
+        trigger: string;
+        delay: Delay;
+        priority: Priority;
+    }, {
+        activation: ActionCost;
+        powerPoints: number;
+        trigger: string;
+        delay: Delay;
+        priority: Priority;  
+    }>;
 }
 
 export default ActionPTR2e;

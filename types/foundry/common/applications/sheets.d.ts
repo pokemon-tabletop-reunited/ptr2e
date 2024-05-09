@@ -37,6 +37,9 @@ declare class ItemSheetV2<
     get item(): TDocument;
 }
 
+
+
 export {
-    ActorSheetV2
+    ActorSheetV2,
+    ItemSheetV2
 }

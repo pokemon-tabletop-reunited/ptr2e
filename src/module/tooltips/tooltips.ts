@@ -136,7 +136,7 @@ export default class TooltipsPTR2e {
     }
 
     async #createAttackTooltip(attack: AttackPTR2e) {
-        const traits = attack._traits.map((t) => ({ value: t.slug, label: t.label }));
+        const traits = attack.traits.map((t) => ({ value: t.slug, label: t.label }));
 
         this.tooltip.classList.add("attack");
         await this._renderTooltip({

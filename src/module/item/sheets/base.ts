@@ -119,7 +119,7 @@ export default class ItemSheetPTR2eV2<
         const traits = (() => {
             if ("traits" in this.document.system) {
                 const traits = [];
-                for (const trait of this.document.system.traits.values()) {
+                for (const trait of this.document.system.traits) {
                     traits.push({
                         value: trait.slug,
                         label: trait.label,
@@ -130,9 +130,7 @@ export default class ItemSheetPTR2eV2<
             return [];
         })();
 
-        this.#allTraits = game.ptr.data.traits
-            .asArray()
-            .map((trait) => ({ value: trait.slug, label: trait.label }));
+        this.#allTraits = game.ptr.data.traits.map((trait) => ({ value: trait.slug, label: trait.label }));
 
         const effects = this.document.effects.contents;
 

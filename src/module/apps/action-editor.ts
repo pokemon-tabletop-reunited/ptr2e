@@ -57,7 +57,7 @@ export class ActionEditor<
     }
 
     constructor(document: TDocument, actionSlug: string, options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
-        options.uniqueId = `action-editor-${document.id}-${actionSlug}`;
+        options.id = `action-editor-${document.id}-${actionSlug}`;
         super(options);
         this.document = document;
         this.actionSlug = actionSlug;
@@ -69,7 +69,7 @@ export class ActionEditor<
         const traits = (() => {
             if ("traits" in this.action) {
                 const traits = [];
-                for (const trait of this.action.traits.values()) {
+                for (const trait of this.action.traits) {
                     traits.push({
                         value: trait.slug,
                         label: trait.label,
@@ -80,9 +80,7 @@ export class ActionEditor<
             return [];
         })();
 
-        this.#allTraits = game.ptr.data.traits
-            .asArray()
-            .map((trait) => ({ value: trait.slug, label: trait.label }));
+        this.#allTraits = game.ptr.data.traits.map((trait) => ({ value: trait.slug, label: trait.label }));
 
         return {
             document: this.document,

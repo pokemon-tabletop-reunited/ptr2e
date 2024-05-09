@@ -38,7 +38,6 @@ export default abstract class MoveSystem extends HasEmbed(HasBase(foundry.abstra
                 this.parent.updateSource({"system.actions": data.system.actions});
             }
             else if(!actions.some(action => action.type === "attack")) {
-                //@ts-expect-error
                 data.system.actions.unshift({
                     name: `${data.name} Attack`,
                     slug: sluggify(`${data.name} Attack`),
@@ -75,7 +74,7 @@ export default abstract class MoveSystem extends HasEmbed(HasBase(foundry.abstra
                 if(mainAttackIndex === -1) {
                     return false;
                 }
-                changedActions[mainAttackIndex].description = changed.system.description;
+                changedActions[mainAttackIndex].description = changed.system.description as string;
             }
             else {
                 const attacks = this._source.actions;

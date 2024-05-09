@@ -1,13 +1,14 @@
 import { ActorPTR2e } from "@actor";
 import { ActionPTR2e, ContestType, PTRCONSTS, PokemonCategory, PokemonType } from "@data";
 import { getTypes } from "@scripts/config/effectiveness.ts";
+import { ActionSchema } from "./action.ts";
 
 export default class AttackPTR2e extends ActionPTR2e {
     declare type: "attack";
 
     static override TYPE = "attack" as const;
 
-    static override defineSchema() {
+    static override defineSchema(): AttackSchema & ActionSchema {
         const fields = foundry.data.fields;
         return {
             ...super.defineSchema(),
@@ -17,8 +18,8 @@ export default class AttackPTR2e extends ActionPTR2e {
             accuracy: new fields.NumberField({ required: false, nullable: true, min: 10, max: 100, label: "PTR2E.FIELDS.accuracy.label", hint: "PTR2E.FIELDS.accuracy.hint" }),
             contestType: new fields.StringField({ required: true, blank: true, initial: "" }),
             contestEffect: new fields.StringField({ required: true, blank: true, initial: "" }),
-            free: new fields.BooleanField({ required: false, initial: false, label: "PTR2E.FIELDS.free.label", hint: "PTR2E.FIELDS.free.hint" }),
-            slot: new fields.NumberField({ required: false, nullable: true, initial: null, label: "PTR2E.FIELDS.slot.label", hint: "PTR2E.FIELDS.slot.hint" }),
+            free: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.free.label", hint: "PTR2E.FIELDS.free.hint" }),
+            slot: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.slot.label", hint: "PTR2E.FIELDS.slot.hint" }),
         }
     }
 
@@ -92,43 +93,58 @@ export default class AttackPTR2e extends ActionPTR2e {
         return new Roll("2d8").roll();
     }
 }
-export default interface AttackPTR2e extends ActionPTR2e {
-    /**
-     * The typing of the effect.
-     * @remarks
-     * This is the type of the attack, which is used to determine the effectiveness of the attack.
-     * @defaultValue `'untyped'`
-     */
-    types: Set<PokemonType>,
+export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {
+    update(data: DeepPartial<SourceFromSchema<AttackSchema>> & DeepPartial<SourceFromSchema<ActionSchema>>): Promise<this['item']>;
+    prepareUpdate(data: DeepPartial<SourceFromSchema<AttackSchema>> & DeepPartial<SourceFromSchema<ActionSchema>>): (SourceFromSchema<ActionSchema> & SourceFromSchema<AttackSchema>)[]
 
-    /**
-     * The category of the attack.
-     * @defaultValue `'physical'`
-     * @remarks
-     * This is the category of the attack, which is used to determine the effectiveness of the attack.
-     * This is one of `'physical'`, `'special'`, or `'status'`.
-     */
-    category: PokemonCategory,
+    // /**
+    //  * The typing of the effect.
+    //  * @remarks
+    //  * This is the type of the attack, which is used to determine the effectiveness of the attack.
+    //  * @defaultValue `'untyped'`
+    //  */
+    // types: Set<PokemonType>,
 
-    /**
-     * The power of the attack.
-     * @defaultValue `null`
-     * @remarks
-     * This is the power of the attack, which is used to determine the effectiveness of the attack.
-     */
-    power: number | null,
+    // /**
+    //  * The category of the attack.
+    //  * @defaultValue `'physical'`
+    //  * @remarks
+    //  * This is the category of the attack, which is used to determine the effectiveness of the attack.
+    //  * This is one of `'physical'`, `'special'`, or `'status'`.
+    //  */
+    // category: PokemonCategory,
 
-    /**
-     * The accuracy of the attack.
-     * @defaultValue `null`
-     * @remarks
-     * This is the accuracy of the attack, which is used to determine the effectiveness of the attack.
-     */
-    accuracy: number | null,
+    // /**
+    //  * The power of the attack.
+    //  * @defaultValue `null`
+    //  * @remarks
+    //  * This is the power of the attack, which is used to determine the effectiveness of the attack.
+    //  */
+    // power: number | null,
 
-    contestType: ContestType,
-    contestEffect: string,
+    // /**
+    //  * The accuracy of the attack.
+    //  * @defaultValue `null`
+    //  * @remarks
+    //  * This is the accuracy of the attack, which is used to determine the effectiveness of the attack.
+    //  */
+    // accuracy: number | null,
 
-    free: boolean,
-    slot: number | null,
+    // contestType: ContestType,
+    // contestEffect: string,
+
+    // free: boolean,
+    // slot: number | null,
+    _source: SourceFromSchema<AttackSchema> & SourceFromSchema<ActionSchema>;
 }
+
+type AttackSchema = {
+    types: foundry.data.fields.SetField<foundry.data.fields.StringField<string, PokemonType, true, false, true>, PokemonType[], Set<PokemonType>, true, false, true>;
+    category: foundry.data.fields.StringField<string, PokemonCategory, true, false, true>;
+    power: foundry.data.fields.NumberField<number>;
+    accuracy: foundry.data.fields.NumberField<number>;
+    contestType: foundry.data.fields.StringField<string, ContestType, true>;
+    contestEffect: foundry.data.fields.StringField<string, string, true>;
+    free: foundry.data.fields.BooleanField<boolean, boolean>;
+    slot: foundry.data.fields.NumberField<number, number, true, true, true>;
+};

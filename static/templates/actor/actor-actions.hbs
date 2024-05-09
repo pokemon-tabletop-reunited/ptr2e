@@ -13,9 +13,9 @@
                 <legend>Attack Slots</legend>
                 {{#each actor.attacks.actions as |action|}}
                     {{#if action}}
-                        {{> action action=action direction="LEFT"}}
+                        {{> action action=action direction="LEFT" slot=@index}}
                     {{else}}
-                        <div class="action empty">
+                        <div class="action empty" data-slot="{{@index}}">
                             <div class="action-icon"></div>
                             <span class="action-name">Available Move Slot</span>
                         </div>
@@ -70,16 +70,19 @@
 </section>
 
 {{#*inline "action"}}
-    <div class="action {{action.type}}" data-tooltip-direction="{{direction}}" data-slug="{{action.slug}}" data-parent="{{action.item.uuid}}" data-tooltip="{{action.name}}">
+    <div class="action {{action.type}}" data-tooltip-direction="{{direction}}" data-slug="{{action.slug}}" data-parent="{{action.item.uuid}}" data-tooltip="{{action.name}}" {{#if (isdefined slot)}}data-slot="{{slot}}"{{/if}}>
         <div class="action-icon {{#if action.rollable}}rollable{{/if}}">
-            <img class="icon" src="{{action.img}}" data-tooltip="{{action.name}}"/>
+            <img class="icon" src="{{action.img}}"/>
             <img class="dice" src="/icons/svg/d20.svg" data-tooltip="Roll {{action.name}}">
         </div>
         <span class="action-name">{{action.name}}</span>
         <div class="action-controls item-controls">
-            <a class="item-control item-to-chat" data-tooltip="Send {{formatSlug action.type}} to chat"><i class="fas fa-external-link-alt"></i></a>
-            <a class="item-control item-edit" data-tooltip="Edit Action" data-type="action" data-action="edit-action">
+            <a class="item-control item-to-chat" data-tooltip-direction="UP" data-tooltip="Send {{formatSlug action.type}} to chat" data-action="action-to-chat"><i class="fas fa-external-link-alt"></i></a>
+            <a class="item-control item-edit" data-tooltip-direction="UP" data-tooltip="Edit Action" data-action="action-edit">
                 <i class="fas fa-edit"></i>
+            </a>
+            <a class="item-control item-delete" data-tooltip-direction="UP" data-tooltip="Delete Action" data-action="action-delete">
+                <i class="fas fa-trash"></i>
             </a>
         </div>
     </div>

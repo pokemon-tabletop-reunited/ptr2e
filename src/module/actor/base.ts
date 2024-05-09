@@ -9,7 +9,7 @@ import {
 } from "@actor";
 import { ActiveEffectPTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import { ActionPTR2e, ActionType, AttackPTR2e, PokemonType, RollOptionManager } from "@data";
+import { AttackPTR2e, PokemonType, RollOptionManager } from "@data";
 import { ActorFlags } from "types/foundry/common/documents/actor.js";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -17,6 +17,7 @@ import { CombatantPTR2e, CombatPTR2e } from "@combat";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
 import { MovePTR2e } from "@item";
+import { ActionsCollections } from "./actions.ts";
 
 type ActorParty = {
     owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -129,14 +130,7 @@ class ActorPTR2e<
 
         this.rollOptions = new RollOptionManager(this);
 
-        this._actions = {
-            generic: new Map(),
-            attack: new Map(),
-            exploration: new Map(),
-            downtime: new Map(),
-            camping: new Map(),
-            passive: new Map(),
-        };
+        this._actions = new ActionsCollections(this);
 
         this.attacks = {
             slots: 6,
@@ -195,7 +189,7 @@ class ActorPTR2e<
         this.attacks.slots = this.system.slots;
         this.attacks.actions = Array.fromRange(this.attacks.slots).reduce((acc, i) => ({ ...acc, [i]: null }), {});
 
-        for(const attack of this.actions.attack.values() as IterableIterator<AttackPTR2e>) {
+        for(const attack of this.actions.attack) {
             if(attack.free) continue;
 
             const item = attack.item;
@@ -589,7 +583,7 @@ interface ActorPTR2e<
 
     synthetics: ActorSynthetics;
 
-    _actions: Record<ActionType, Map<string, ActionPTR2e>>;
+    _actions: ActionsCollections;
 
     level: number;
 

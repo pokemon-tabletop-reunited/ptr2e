@@ -4,7 +4,6 @@ import { SpeciesDropSheet } from "./sheets/species-drop-sheet.ts";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { htmlQueryAll, sluggify } from "@utils";
 import { Tab } from "@item/sheets/document.ts";
-import { ActiveEffectPTR2e } from "@effects";
 import { ActorComponentKey, ActorComponents, ComponentPopout } from "./components/sheet.ts";
 import { EffectComponent } from "./components/effect-component.ts";
 import GearSystem from "@item/data/gear.ts";
@@ -12,12 +11,12 @@ import WeaponSystem from "@item/data/weapon.ts";
 import ConsumableSystem from "@item/data/consumable.ts";
 import EquipmentSystem from "@item/data/equipment.ts";
 import ContainerSystem from "@item/data/container.ts";
+import { KnownActionsApp } from "@module/apps/known-attacks.ts";
+import { ActorSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
+import { ActionEditor } from "@module/apps/action-editor.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
-    foundry.applications.sheets.ActorSheetV2<
-        ActorPTR2e,
-        foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>
-    >
+    ActorSheetV2Expanded
 ) {
     static override DEFAULT_OPTIONS = fu.mergeObject(
         super.DEFAULT_OPTIONS,
@@ -33,6 +32,11 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             form: {
                 submitOnChange: true,
             },
+            dragDrop: [
+                {
+                    dropSelector: ".window-content",
+                }
+            ],
             actions: {
                 "species-header": async function (this: ActorSheetPTRV2, event: Event) {
                     event.preventDefault();
@@ -66,6 +70,12 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                 "open-perk-web": function (this: ActorSheetPTRV2, _event: Event) {
                     game.ptr.web.open(this.actor);
                 },
+                "edit-movelist": function (this: ActorSheetPTRV2, _event: Event) {
+                    new KnownActionsApp(this.actor).render(true);
+                },
+                "action-to-chat": ActorSheetPTRV2._onToChatAction,
+                "action-edit": ActorSheetPTRV2._onEditAction,
+                "action-delete": ActorSheetPTRV2._onDeleteAction,
             },
         },
         { inplace: false }
@@ -252,11 +262,6 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         };
     }
 
-    override _attachFrameListeners(): void {
-        super._attachFrameListeners();
-        this.element.addEventListener("drop", this._onDrop.bind(this));
-    }
-
     override _attachPartListeners(
         partId: string,
         htmlElement: HTMLElement,
@@ -288,44 +293,6 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         sheet.render(true);
     }
 
-    async _onDrop(event: DragEvent): Promise<any> {
-        event.preventDefault();
-        const data = TextEditor.getDragEventData<{ type: string }>(event);
-        const item = this.document;
-        const allowed = Hooks.call("dropItemSheetData", item, data, event);
-        if (allowed === false) return;
-
-        // Handle different data types
-        switch (data.type) {
-            case "ActiveEffect": {
-                return this._onDropActiveEffect(event, data);
-            }
-            case "Item": {
-                const item = await ItemPTR2e.fromDropData(data as any);
-                if (!item) return;
-                switch (item.type) {
-                    case "effect": {
-                        const effects = item.effects.map((effect) => effect.toObject());
-                        if (effects.length === 0) return;
-                        return ActiveEffectPTR2e.createDocuments(effects, {
-                            parent: this.document,
-                        });
-                    }
-                    default: {
-                        return this.actor.createEmbeddedDocuments("Item", [item.toObject()]);
-                    }
-                }
-            }
-        }
-    }
-
-    async _onDropActiveEffect(_event: DragEvent, data: object) {
-        const effect = await ActiveEffectPTR2e.fromDropData(data);
-        if (!this.document.isOwner || !effect) return false;
-        if (effect.target === this.document) return false;
-        return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.document });
-    }
-
     override async close(
         options: Partial<foundry.applications.api.ApplicationClosingOptions> = {}
     ): Promise<this> {
@@ -348,6 +315,91 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         this.window.close.insertAdjacentHTML("beforebegin", speciesButton);
 
         return frame;
+    }
+
+    override _onDrop(event: DragEvent) {
+        const data: {
+            type: string;
+            action?: {
+                slug: string;
+                type: string;
+            };
+        } = TextEditor.getDragEventData(event);
+        if(!data.action?.slug) return super._onDrop(event);
+
+        const actionDiv = (event.target as HTMLElement).closest(".action[data-slot]") as HTMLElement;
+        if (!actionDiv) return;
+
+        const slug = data.action.slug;
+        if(!slug) return;
+
+        const slot = Number(actionDiv.dataset.slot);
+        if (isNaN(slot)) return;
+
+        const action = this.actor.actions.attack.get(slug);
+        if (!action) return;
+
+        const currentAction = this.actor.attacks.actions[slot]
+        if(!currentAction) {
+            action.update({"slot": slot});
+            return;
+        }
+        if(currentAction.slug === slug) return;
+
+        currentAction.update({"slot": null});
+        action.update({"slot": slot});
+
+        return;
+    }
+
+    static async _onToChatAction(this: ActorSheetPTRV2, event: Event) {
+        const actionDiv = (event.target as HTMLElement).closest(".action") as HTMLElement;
+        if (!actionDiv) return;
+
+        const slug = actionDiv.dataset.slug;
+        if (!slug) return;
+
+        const action = this.actor.actions.get(slug);
+        //TODO: Support sending individual attacks to chat
+        action?.item.toChat();
+    }
+
+    static async _onEditAction(this: ActorSheetPTRV2, event: Event) {
+        const actionDiv = (event.target as HTMLElement).closest(".action") as HTMLElement;
+        if (!actionDiv) return;
+
+        const slug = actionDiv.dataset.slug;
+        if (!slug) return;
+
+        const action = this.actor.actions.get(slug);
+        if (!action) return;
+
+        new ActionEditor(action.item, action.slug).render(true);
+    }
+
+    static async _onDeleteAction(this: ActorSheetPTRV2, event: Event) {
+        const actionDiv = (event.target as HTMLElement).closest(".action") as HTMLElement;
+        if (!actionDiv) return;
+
+        const slug = actionDiv.dataset.slug;
+        if (!slug) return;
+
+        const action = this.actor.actions.get(slug);
+        if (!action) return;
+
+        const item = action.item;
+
+        foundry.applications.api.DialogV2.confirm({
+            window: {
+                title: game.i18n.localize("PTR2E.Dialog.DeleteAction.Title"),
+            },
+            content: game.i18n.format("PTR2E.Dialog.DeleteAction.Content", { name: item.name }),
+            yes: {
+                callback: async () => {
+                    await item.delete();
+                },
+            },
+        });
     }
 }
 

@@ -13,10 +13,8 @@
                 </div>
             </div>
             <div class="actions-list">
-                {{#each item.actions as |map type|}}
-                    {{#each map as |action slug|}}
-                        {{> action action=action}}
-                    {{/each}}
+                {{#each item.actions as |action|}}
+                    {{> action action=action}}
                 {{/each}}
             </div>
         </fieldset>
