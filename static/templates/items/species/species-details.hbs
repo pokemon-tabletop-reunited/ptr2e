@@ -96,25 +96,28 @@
                 </div>
             {{/if}}
         </fieldset>
-                <fieldset>
+        <fieldset>
             <legend>
                 Skills
             </legend>
-            {{#each source.system.skills as |value skill|}}
+            {{#each source.system.skills as |skill|}}
                 <div class="skill">
                     <div class="form-group">
-                        <input type="text" name="system.skills.{{skill}}.name" class="form-control"
-                            data-dtype="String" value={{skill}}>
+                        <input type="text" name="system.skills.{{@index}}.name" class="form-control"
+                            data-dtype="String" value="{{formatSlug skill.slug}}">
                     </div>
                     <div class="form-group">
                         <label>Value</label>
                         <div class="form-fields">
-                            <input type="number" name="system.skills.{{skill}}.value" class="form-control"
-                                data-dtype="Number" value={{value}}>
+                            <input type="number" name="system.skills.{{@index}}.value" class="form-control"
+                                data-dtype="Number" value="{{skill.value}}">
                         </div>
                     </div>
+                    <div class="form-group hidden">
+                        <input type="hidden" name="system.skills.{{@index}}.slug" value="{{skill.slug}}">
+                    </div>
                     <div class="item-controls">
-                        <a class="item-control" data-action="delete" data-field="skills" data-index="{{skill}}" data-tooltip="Delete Skill"><i class="fas fa-trash"></i></a>
+                        <a class="item-control" data-action="delete" data-field="skills" data-index="{{@index}}" data-tooltip="Delete Skill"><i class="fas fa-trash"></i></a>
                     </div>
                 </div>
             {{/each}}
@@ -127,8 +130,11 @@
                     <label>Value</label>
                     <div class="form-fields">
                         <input type="number" name="system.skills.new.value" class="form-control"
-                            data-dtype="Number" value="0">
+                            data-dtype="Number" value="1">
                     </div>
+                </div>
+                <div class="form-group hidden">
+                    <input type="hidden" name="system.skills.new.slug" value="new">
                 </div>
             </div>
         </fieldset>

@@ -507,6 +507,124 @@ body {
                     }
                 }
 
+                &[data-tab="skills"] {
+                    .skill-component {
+                        grid-area: span 5 / span 3;
+                        padding: 0.5rem;
+
+                        .scroll {
+                            overflow-y: auto;
+                            overflow-x: hidden;
+                            height: 100%;
+                            gap: 0;
+                        }
+
+                        .skills {
+                            .skill-list {
+                                display: flex;
+                                flex-direction: column;
+                                height: 100%;
+
+                                .skill-group {
+                                    height: unset;
+                                    display: flex;
+                                    flex-direction: column;
+                                    flex-wrap: nowrap;
+
+                                    &.hidden-skill .skill-group-label {
+                                        filter: opacity(0.7);
+                                    }
+
+                                    .skill-group-label {
+                                        margin-left: calc(16px + 0.25rem);
+                                        border-bottom: 1px solid var(--border-theme-color);
+                                        padding: 4px 0;
+                                        font-weight: bold;
+                                    }
+                                    
+                                    .skill {
+                                        padding-left: unset;
+                                        margin-left: calc(16px + 0.25rem);
+                                    }    
+                                }
+    
+                                .skill {
+                                    display: flex;
+                                    flex-direction: row;
+                                    align-items: center;
+                                    padding: 4px 0;
+    
+                                    border-bottom: 1px solid var(--border-theme-color);
+
+                                    
+                                    .skill-icon {
+                                        flex: 0 0 16px;
+                                        height: 16px;
+                                        width: 16px;
+                                        cursor: pointer;
+                                        img {
+                                            border:unset;
+                                            filter: invert(1);
+                                        }
+                                    }
+    
+                                    .skill-name {
+                                        flex-grow: 1;
+                                        margin: 0 0.25rem;
+                                    }
+    
+                                    .skill-total {
+                                        flex: 0 0 80px;
+                                        text-align: center;
+                                    }
+    
+                                    .skill-controls {
+                                        flex: 0 0 60px;
+                                        display: flex;
+                                        flex-direction: row;
+                                        justify-content: flex-end;
+                                        align-items: center;
+                                        margin-left: auto;
+                                        gap: 5px;
+
+                                        .item-control {
+                                            flex: 0 0 18px;
+                                        }
+                                    }
+    
+                                    &.favourite {
+                                        filter: brightness(1.5);
+                                        // &:not(:has(~ .favourite)) {
+                                        //     border-bottom: 2px solid var(--border-theme-color);
+                                        // }
+                                    }
+                                    
+                                    &.hidden-skill {
+                                        filter: opacity(0.7);
+                                    }
+
+                                    // &:has(+ .hidden-skill):not(.hidden-skill) {
+                                    //     border-bottom: 2px solid var(--border-theme-color);
+                                    // }
+                                }
+                                .divider {
+                                    margin-top: 0.75rem;
+                                }
+                                header.skill {
+                                    border-bottom-width: 2px;
+                                    font-weight: bold;
+                                }
+                            }
+                        }
+                    }
+
+                    .skill-options {
+                        grid-area: 1 / 4 / 2 / 6;
+
+                        padding: 0.5rem;
+                    }
+                }
+
                 .effects-display {
                     padding: 0.5rem;
 

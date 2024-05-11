@@ -10,11 +10,12 @@ import {
     Capabilities,
     HealthData,
     HumanoidActorSystem,
-    Skill,
-    Skills,
     Stat,
 } from "@actor";
 import { SpeciesSystemModel } from "@item/data/index.ts";
+import { getInitialSkillList } from "@scripts/config/skills.ts";
+import { CollectionField } from "@module/data/fields/collection-field.ts";
+import SkillPTR2e from "@module/data/models/skill.ts";
 
 class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
     static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -112,21 +113,11 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 accuracy: new fields.SchemaField(getStatField("accuracy")),
                 critRate: new fields.SchemaField(getStatField("critRate")),
             }),
-            skills: new fields.ObjectField({
-                validate: (d: Record<string, Skill> | any) => {
-                    if (typeof d !== "object") return false;
-                    for (const [key, value] of Object.entries(d as Record<string, Skill>)) {
-                        if (typeof key !== "string" || typeof value !== "object") return false;
-                        if (
-                            typeof value.slug !== "string" ||
-                            typeof value.value !== "number" ||
-                            typeof value.rvs !== "number"
-                        )
-                            return false;
-                    }
-                    return true;
-                },
-            }),
+            skills: new CollectionField(
+                new fields.EmbeddedDataField(SkillPTR2e),
+                "slug",
+                { initial: getInitialSkillList }
+            ),
             biology: new fields.ObjectField(),
             capabilities: new fields.ObjectField(),
             type: new fields.SchemaField({
@@ -198,6 +189,19 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         };
     }
 
+    // static override validateJoint(data: SourceFromSchema<DataSchema>): void {
+    //     super.validateJoint(data);
+    //     //@ts-expect-error
+    //     for (const [key, skill] of Object.entries(data.skills) as [string, Skill][]) {
+    //         if (["luck", "resources"].includes(skill.slug) && skill.rvs !== null) {
+    //             throw new Error("Luck & Resources should not have RVs");
+    //         }
+    //         // if(skill.slug !== key) {
+    //         //     throw new Error("Skill key does not match slug");
+    //         // }
+    //     }
+    // }
+
     override prepareBaseData(): void {
         super.prepareBaseData();
         this._prepareSpeciesData();
@@ -213,12 +217,13 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
             this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
         }
 
+        for (const skill of this.skills) {
+            skill.prepareBaseData();
+        }
+
         this.health.max = this.attributes.hp.value;
 
         this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
-
-        // TODO: Remove this once I implement luck
-        if (!this.skills.luck) this.skills.luck = { slug: "luck", value: 1, rvs: 0 };
     }
 
     _prepareSpeciesData() {
@@ -255,8 +260,8 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         super.prepareDerivedData();
         this.species?.prepareDerivedData?.();
 
-        if(this.modifiers['slots']?.value) {
-            this.slots = (this._source.slots as number) + this.modifiers['slots'].value;
+        if (this.modifiers["slots"]?.value) {
+            this.slots = (this._source.slots as number) + this.modifiers["slots"].value;
         }
     }
 
@@ -290,7 +295,7 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
         accuracy: Stat;
         critRate: Stat;
     };
-    skills: Skills;
+    skills: Collection<SkillPTR2e>;
     /** Biological data */
     biology: Biology;
     /** Movement Capabilities */
@@ -311,11 +316,12 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
 
     modifiers: Record<
         string,
-        {
-            value: number;
-            source: string;
-            type: string;
-        } | undefined
+        | {
+              value: number;
+              source: string;
+              type: string;
+          }
+        | undefined
     >;
 
     _source: SourceFromSchema<ActorSystemSchema>;

@@ -14,6 +14,8 @@ import ContainerSystem from "@item/data/container.ts";
 import { KnownActionsApp } from "@module/apps/known-attacks.ts";
 import { ActorSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
+import { Skill } from "./data.ts";
+import SkillPTR2e from "@module/data/models/skill.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     ActorSheetV2Expanded
@@ -35,7 +37,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             dragDrop: [
                 {
                     dropSelector: ".window-content",
-                }
+                },
             ],
             actions: {
                 "species-header": async function (this: ActorSheetPTRV2, event: Event) {
@@ -76,10 +78,23 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                 "action-to-chat": ActorSheetPTRV2._onToChatAction,
                 "action-edit": ActorSheetPTRV2._onEditAction,
                 "action-delete": ActorSheetPTRV2._onDeleteAction,
+                "favourite-skill": ActorSheetPTRV2._onFavouriteSkill,
+                "hide-skill": ActorSheetPTRV2._onHideSkill,
+                "toggle-hidden-skills": async function (this: ActorSheetPTRV2, _event: Event) {
+                    const appSettings = fu.duplicate(game.user.getFlag("ptr2e", "appSettings") ?? {}) as Record<string, Record<string, unknown>>;
+                    if (!appSettings[this.appId]) appSettings[this.appId] = {hideHiddenSkills: true};
+                    appSettings[this.appId].hideHiddenSkills = !appSettings[this.appId].hideHiddenSkills;
+                    await game.user.setFlag("ptr2e", "appSettings", appSettings);
+                    this.render({parts: ["skills"]});
+                },
             },
         },
         { inplace: false }
     );
+
+    get appId() {
+        return this.id.replaceAll(".", "-");
+    }
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         header: {
@@ -249,6 +264,51 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             return inventory;
         })();
 
+        const skills = (() => {
+            const favouriteGroups: SkillCategory = { none: { label: null, skills: [] } };
+            const hiddenGroups: SkillCategory = { none: { label: null, skills: [] } };
+            const normalGroups: SkillCategory = { none: { label: null, skills: [] } };
+
+            for (const skill of this.actor.system.skills.contents.sort((a, b) =>
+                a.slug.localeCompare(b.slug)
+            )) {
+                if (skill.favourite) {
+                    const group = skill.group || "none";
+                    if (!favouriteGroups[group])
+                        favouriteGroups[group] = { label: group, skills: [] };
+                    favouriteGroups[group].skills.push(skill);
+                } else if (skill.hidden) {
+                    const group = skill.group || "none";
+                    if (!hiddenGroups[group]) hiddenGroups[group] = { label: group, skills: [] };
+                    hiddenGroups[group].skills.push(skill);
+                } else {
+                    const group = skill.group || "none";
+
+                    if (!normalGroups[group]) normalGroups[group] = { label: group, skills: [] };
+                    normalGroups[group].skills.push(skill);
+                }
+            }
+            return {
+                favourites: Object.entries(favouriteGroups)
+                    .sort((a, b) => a[0].localeCompare(b[0]))
+                    .map(([, v]) => v),
+                hidden: Object.entries(hiddenGroups)
+                    .sort((a, b) => a[0].localeCompare(b[0]))
+                    .map(([, v]) => v),
+                normal: Object.entries(normalGroups)
+                    .sort((a, b) => a[0].localeCompare(b[0]))
+                    .map(([, v]) => v),
+            };
+        })();
+
+        const hideHiddenSkills = (() => {
+            const appSettings = game.user.getFlag("ptr2e", "appSettings") as Record<string, Record<string, unknown>>;
+            if(appSettings?.[this.appId]) {
+                return appSettings[this.appId].hideHiddenSkills;
+            }
+            return true;
+        })();
+
         return {
             ...(await super._prepareContext(options)),
             actor: this.actor,
@@ -259,6 +319,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             inventory,
             tabs: this._getTabs(),
             subtabs: this._getSubTabs(),
+            skills,
+            hideHiddenSkills,
         };
     }
 
@@ -325,13 +387,15 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                 type: string;
             };
         } = TextEditor.getDragEventData(event);
-        if(!data.action?.slug) return super._onDrop(event);
+        if (!data.action?.slug) return super._onDrop(event);
 
-        const actionDiv = (event.target as HTMLElement).closest(".action[data-slot]") as HTMLElement;
+        const actionDiv = (event.target as HTMLElement).closest(
+            ".action[data-slot]"
+        ) as HTMLElement;
         if (!actionDiv) return;
 
         const slug = data.action.slug;
-        if(!slug) return;
+        if (!slug) return;
 
         const slot = Number(actionDiv.dataset.slot);
         if (isNaN(slot)) return;
@@ -339,15 +403,15 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         const action = this.actor.actions.attack.get(slug);
         if (!action) return;
 
-        const currentAction = this.actor.attacks.actions[slot]
-        if(!currentAction) {
-            action.update({"slot": slot});
+        const currentAction = this.actor.attacks.actions[slot];
+        if (!currentAction) {
+            action.update({ slot: slot });
             return;
         }
-        if(currentAction.slug === slug) return;
+        if (currentAction.slug === slug) return;
 
-        currentAction.update({"slot": null});
-        action.update({"slot": slot});
+        currentAction.update({ slot: null });
+        action.update({ slot: slot });
 
         return;
     }
@@ -401,6 +465,43 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             },
         });
     }
+
+    static async _onFavouriteSkill(this: ActorSheetPTRV2, event: Event) {
+        const skillDiv = (event.target as HTMLElement).closest(".skill") as HTMLElement;
+        if (!skillDiv) return;
+
+        const slug = skillDiv.dataset.slug;
+        if (!slug) return;
+
+        const skills = this.actor.system.toObject().skills as SkillPTR2e["_source"][];
+        const index = skills.findIndex((s) => s.slug === slug);
+        if (index === -1) return;
+
+        skills[index].favourite = !skills[index].favourite;
+        if(skills[index].favourite && skills[index].hidden) skills[index].hidden = false;
+        this.actor.update({ "system.skills": skills });
+    }
+
+    static async _onHideSkill(this: ActorSheetPTRV2, event: Event) {
+        const skillDiv = (event.target as HTMLElement).closest(".skill") as HTMLElement;
+        if (!skillDiv) return;
+
+        const slug = skillDiv.dataset.slug;
+        if (!slug) return;
+
+        const skills = this.actor.system.toObject().skills as SkillPTR2e["_source"][];
+        const index = skills.findIndex((s) => s.slug === slug);
+        if (index === -1) return;
+
+        skills[index].hidden = !skills[index].hidden;
+        if(skills[index].hidden && skills[index].favourite) skills[index].favourite = false;
+        this.actor.update({ "system.skills": skills });
+    }
 }
 
 export default ActorSheetPTRV2;
+
+type SkillCategory = { none: { label: null; skills: Skill[] } } & Record<
+    string,
+    { label: string | null; skills: Skill[] }
+>;

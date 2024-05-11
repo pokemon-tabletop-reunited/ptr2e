@@ -5,6 +5,8 @@ import { htmlQueryAll, sluggify } from "@utils";
 import { default as ItemSheetPTR2e } from "./base.ts";
 import * as R from "remeda";
 import { EvolutionData } from "@item/data/species.ts";
+import SkillPTR2e from "@module/data/models/skill.ts";
+import { partialSkillToSkill } from "@scripts/config/skills.ts";
 
 export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]> {
     static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -146,13 +148,9 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
                                 });
                             }
                             if (field === "skills" && index) {
-                                document.update({
-                                    system: {
-                                        skills: {
-                                            [`-=${index}`]: null,
-                                        },
-                                    },
-                                });
+                                const skills = document.system.toObject().skills as SkillPTR2e['_source'][];
+                                skills.splice(parseInt(index), 1);
+                                document.update({"system.skills": skills});
                             }
                             break;
                         }
@@ -232,26 +230,24 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
             // @ts-expect-error
             data.system.traits = data.system.traits.map((trait: { value: string }) => sluggify(trait.value));
 
-            const skills: Record<string, number | null> = {};
-            for (const [skill, skillData] of Object.entries( // @ts-expect-error
-                data.system.skills as Record<string, { name: string; value: number }>
-            )) {
-                if (skill === "new") {
-                    if (skillData.name) {
-                        skills[sluggify(skillData.name)] = skillData.value;
+            const skills: Partial<SkillPTR2e['_source']>[] = [];
+            for (const skill of Object.values(data.system.skills as unknown as Record<string, { slug: string; value: number, name: string }>)) {
+                if (skill.slug === "new") {
+                    if (skill.name) {
+                        skills.push({
+                            slug: sluggify(skill.name),
+                            value: skill.value
+                        });
                     }
                     continue;
                 }
-                if (skill === sluggify(skillData.name)) {
-                    skills[skill] = skillData.value;
-                    continue;
-                } else {
-                    skills[sluggify(skillData.name)] = skillData.value;
-                    skills["-=" + skill] = null;
-                }
+                skills.push({
+                    slug: sluggify(skill.name),
+                    value: skill.value
+                })
             }
             // set data.system.skills equal to skills but sort it by key first
-            data.system.skills = skills as Record<string, number>;
+            data.system.skills = skills.map(s => partialSkillToSkill(s)).sort((a, b) => a.slug.localeCompare(b.slug));
         }
 
         return data;

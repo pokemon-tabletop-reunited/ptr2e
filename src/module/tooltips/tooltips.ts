@@ -85,6 +85,8 @@ export default class TooltipsPTR2e {
                     return this._onContentLinkTooltip();
                 case "damage-info":
                     return this._onDamageInfoTooltip();
+                case "skill":
+                    return this._onSkillTooltip();
             }
         }
 
@@ -116,6 +118,31 @@ export default class TooltipsPTR2e {
             | undefined;
         requestAnimationFrame(() => this._positionTooltip(tooltipDirection));
         return tooltipTrait ? 1 : 2000;
+    }
+
+    async _onSkillTooltip() {
+        const skillSlug = game.tooltip.element?.dataset.slug;
+        if (!skillSlug) return false;
+
+        const skillGroup = game.tooltip.element?.dataset.group;
+        const localizeKey = skillGroup ? `PTR2E.Skills.${skillGroup}.${skillSlug}` : `PTR2E.Skills.${skillSlug}`;
+
+        const localized = game.i18n.localize(`${localizeKey}.hint`);
+        if (localized === `${localizeKey}.hint`) return false;
+
+        this.tooltip.innerHTML = `<h4 class="skill">${game.i18n.localize(`${localizeKey}.label`)}</h4><content>${localized}</content>
+        <div class="progress-circle">
+            <svg width="20" height="20" viewBox="0 0 20 20" class="circular-progress">
+                <circle class="bg"></circle>
+                <circle class="fg"></circle>
+                <circle class="fgb"></circle>
+            </svg>
+        </div>`;
+        const tooltipDirection = game.tooltip.element?.dataset.tooltipDirection as
+            | TooltipDirections
+            | undefined;
+        requestAnimationFrame(() => this._positionTooltip(tooltipDirection));
+        return 2000;
     }
 
     async _onAttackTooltip() {

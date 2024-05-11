@@ -6,6 +6,8 @@ import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { ActorPTR2e } from "@actor";
 import { DataSchema } from "types/foundry/common/data/fields.js";
+import SkillPTR2e from "@module/data/models/skill.ts";
+import { CollectionField } from "@module/data/fields/collection-field.ts";
 
 const SpeciesExtension = HasEmbed(
     HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel))),
@@ -213,7 +215,7 @@ class SpeciesSystem extends SpeciesExtension {
                     }
                 ),
             }),
-            skills: new SkillsField({ required: true, initial: {} }),
+            skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e)),
             moves: new fields.SchemaField({
                 levelUp: new fields.ArrayField(getMoveField(true), { required: true, initial: [] }),
                 egg: new fields.ArrayField(getMoveField(), { required: true, initial: [] }),
@@ -248,26 +250,12 @@ class SpeciesSystem extends SpeciesExtension {
                 label: "PTR2E.FIELDS.habitats.label",
                 hint: "PTR2E.FIELDS.habitats.hint",
             }),
-            // evolutions: new fields.SchemaField({
-            //     full: new fields.EmbeddedDataField(EvolutionData, {
-            //         required: true,
-            //         nullable: true,
-            //         initial: null,
-            //     }),
-            // }),
             evolutions: new fields.EmbeddedDataField(EvolutionData, {
                 required: true,
                 nullable: true,
                 initial: null,
             }),
         };
-    }
-
-    override prepareBaseData(): void {
-        super.prepareBaseData();
-        this.skills = Object.fromEntries(
-            Object.entries(this.skills).sort(([a], [b]) => a.localeCompare(b))
-        );
     }
 
     override async _preCreate(
@@ -283,28 +271,6 @@ class SpeciesSystem extends SpeciesExtension {
                 img: "/systems/ptr2e/img/icons/species_icon.webp",
             });
         }
-    }
-}
-
-class SkillsField<
-    TSourceProp extends object,
-    TModelProp = TSourceProp,
-    TRequired extends boolean = true,
-    TNullable extends boolean = false,
-    THasInitial extends boolean = true,
-> extends foundry.data.fields.ObjectField<
-    TSourceProp,
-    TModelProp,
-    TRequired,
-    TNullable,
-    THasInitial
-> {
-    protected override _cleanType(value: unknown): unknown {
-        if (typeof value !== "object") return super._cleanType(value);
-
-        return Object.fromEntries(
-            Object.entries(value as Record<string, unknown>).sort(([a], [b]) => a.localeCompare(b))
-        );
     }
 }
 
@@ -526,7 +492,7 @@ interface SpeciesSystem {
 
     evolutions: EvolutionData;
 
-    skills: Record<string, number>;
+    skills: Collection<SkillPTR2e>;
 }
 
 export default SpeciesSystem;
@@ -571,5 +537,5 @@ interface SpeciesSystemSource extends Omit<ItemSystemSource, "container" | "acti
 
     evolutions: EvolutionData;
 
-    skills: Record<string, number>;
+    skills: SkillPTR2e["_source"][];
 }

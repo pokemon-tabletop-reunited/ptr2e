@@ -55,12 +55,12 @@ export default class ItemSheetPTR2eV2<
         },
         overview: {
             id: "overview",
-            template: this.overviewTemplate,
+            template: "",
             scrollable: [".scroll"],
         },
         details: {
             id: "details",
-            template: this.detailsTemplate,
+            template: "",
             scrollable: [".scroll"],
         },
         actions: {
