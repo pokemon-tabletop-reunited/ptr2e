@@ -1322,7 +1322,7 @@ body {
                     }
                 }
 
-                &[data-tab=details], &[data-tab=evolution] {
+                &[data-tab=details], &[data-tab=evolution], &[data-tab=moves] {
                     padding: 0;
 
                     div.scroll {
@@ -1350,9 +1350,53 @@ body {
                                 flex-direction: row;
                                 flex-wrap: wrap;
                                 justify-content: space-between;
-
+                                
                                 fieldset {
-                                    flex: 0 0 48%;
+                                    &.level-up {
+                                        flex: 1 0 170px;
+                                        min-width: 370px;
+                                        max-width: 600px;
+                                    }
+                                    &.tutor {
+                                        flex: 1 0 220px;
+                                        min-width: 220px;
+                                        flex-direction: row;
+                                        flex-wrap: wrap;
+                                        justify-content: space-between;
+
+                                        .move {
+                                            flex: 1 0 48%;
+                                            min-width: calc(220px - 2rem;)
+                                        }
+                                    }
+                                    &.dragover {
+                                        box-shadow: inset 0 0 30px var(--border-theme-color);
+
+                                        > * {
+                                            filter: opacity(0.5) blur(1px);
+                                        }
+                                    }
+
+                                    .move {
+                                        display: flex;
+                                        flex-direction: row;
+                
+                                        .form-group {
+                                            flex: 1;
+                                            text-align: center;
+                                            margin: 0.25rem;
+                                        }
+
+                                        .item-controls {
+                                            display: flex;
+                                            flex-direction: row;
+                                            justify-content: flex-end;
+                                            align-items: center;
+                                            flex: 0 0 40px;
+                                            margin-right: 5px;
+                                            gap: 8px;
+                                        }
+                                    }
                                 }
                             }
 

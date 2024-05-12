@@ -1,0 +1,50 @@
+{
+  "name": "Fishious Rend",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/water_icon.png",
+  "system": {
+    "slug": "fishious-rend",
+    "description": "Effect: Fishious Rend is more powerful based on how fast the user is compared to the target.\nFishious Rend's Power = min(2*85, (15*UserSPD / TargetSPD) + 85)",
+    "traits": [
+      "jaw",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "fishious-rend",
+        "name": "Fishious Rend",
+        "type": "attack",
+        "traits": [
+          "jaw",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 85,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "Effect: Fishious Rend is more powerful based on how fast the user is compared to the target.\nFishious Rend's Power = min(2*85, (15*UserSPD / TargetSPD) + 85)",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "3vRm9EZx3DA659bR",
+  "effects": []
+}
