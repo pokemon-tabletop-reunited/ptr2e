@@ -1,4 +1,5 @@
 import { ActorPTR2e } from "@actor";
+import { SkillsComponent } from "@actor/components/skills-component.ts";
 import { AttackPTR2e } from "@data";
 import { Tab } from "@item/sheets/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
@@ -72,6 +73,10 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
             id: "generic",
             template: "/systems/ptr2e/templates/apps/token-panel/generic-actions.hbs",
         },
+        skills: {
+            id: "skills",
+            template: "/systems/ptr2e/templates/apps/token-panel/favourite-skills.hbs",
+        }
     };
 
     tabGroups: Record<string, string> = {
@@ -103,6 +108,12 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
             icon: "fa-solid fa-burst",
             label: "PTR2E.TokenPanel.Tabs.generic-actions.label",
         },
+        skills: {
+            id: "skills",
+            group: "sheet",
+            icon: "fa-solid fa-burst",
+            label: "PTR2E.TokenPanel.Tabs.skills.label",
+        }
     };
 
     _getTabs() {
@@ -153,6 +164,8 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
         const party = actor.party;
         const isOwner = party?.owner == this.token.actor;
 
+        const {skills} = SkillsComponent.prepareSkillsData(actor);
+
         return {
             ...context,
             token: this.token,
@@ -160,6 +173,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
             party,
             isOwner,
             actions,
+            skills: skills.favourites.flatMap(s => s.skills),
             tabs: this._getTabs(),
         };
     }

@@ -2770,14 +2770,14 @@ body {
 
         min-width: 150px;
 
-        &.action-tab {
+        &.action-tab, &.skill-tab {
             &.active {
                 display: flex;
                 flex-direction: column;
                 justify-content: flex-end;
             }
 
-            .attack-item, .action-item {
+            .attack-item, .action-item, .skill-item {
                 display: flex;
                 flex-direction: row;
 
@@ -2837,6 +2837,20 @@ body {
 
                 &:last-child, &:last-child img{
                     border-radius: 0 0 0 8px;
+                }
+            }
+
+            .skill-item {
+                .icon {
+                    filter: invert(1);
+                    height: 28px;
+                    width: 28px;
+                    flex: 0 0 28px;
+
+                    img {
+                        display: unset !important;
+                        margin-top: 2px;
+                    }
                 }
             }
         }

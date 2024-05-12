@@ -2625,20 +2625,29 @@ body.theme-dark .sheet a.content-link {
   border: 1px solid var(--border-theme-color);
   min-width: 150px;
 }
-.token-panel .tab.action-tab.active {
+.token-panel .tab.action-tab.active,
+.token-panel .tab.skill-tab.active {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
 }
 .token-panel .tab.action-tab .attack-item,
-.token-panel .tab.action-tab .action-item {
+.token-panel .tab.skill-tab .attack-item,
+.token-panel .tab.action-tab .action-item,
+.token-panel .tab.skill-tab .action-item,
+.token-panel .tab.action-tab .skill-item,
+.token-panel .tab.skill-tab .skill-item {
   display: flex;
   flex-direction: row;
   background: var(--appv2-background);
   border-top: 1px solid var(--border-theme-color);
 }
 .token-panel .tab.action-tab .attack-item .icon,
-.token-panel .tab.action-tab .action-item .icon {
+.token-panel .tab.skill-tab .attack-item .icon,
+.token-panel .tab.action-tab .action-item .icon,
+.token-panel .tab.skill-tab .action-item .icon,
+.token-panel .tab.action-tab .skill-item .icon,
+.token-panel .tab.skill-tab .skill-item .icon {
   flex: 0 0 32px;
   height: 32px;
   width: 32px;
@@ -2646,23 +2655,43 @@ body.theme-dark .sheet a.content-link {
   cursor: pointer;
 }
 .token-panel .tab.action-tab .attack-item .icon img,
-.token-panel .tab.action-tab .action-item .icon img {
+.token-panel .tab.skill-tab .attack-item .icon img,
+.token-panel .tab.action-tab .action-item .icon img,
+.token-panel .tab.skill-tab .action-item .icon img,
+.token-panel .tab.action-tab .skill-item .icon img,
+.token-panel .tab.skill-tab .skill-item .icon img {
   border: unset;
 }
 .token-panel .tab.action-tab .attack-item .icon img.dice,
-.token-panel .tab.action-tab .action-item .icon img.dice {
+.token-panel .tab.skill-tab .attack-item .icon img.dice,
+.token-panel .tab.action-tab .action-item .icon img.dice,
+.token-panel .tab.skill-tab .action-item .icon img.dice,
+.token-panel .tab.action-tab .skill-item .icon img.dice,
+.token-panel .tab.skill-tab .skill-item .icon img.dice {
   display: none;
 }
 .token-panel .tab.action-tab .attack-item .icon:hover img,
-.token-panel .tab.action-tab .action-item .icon:hover img {
+.token-panel .tab.skill-tab .attack-item .icon:hover img,
+.token-panel .tab.action-tab .action-item .icon:hover img,
+.token-panel .tab.skill-tab .action-item .icon:hover img,
+.token-panel .tab.action-tab .skill-item .icon:hover img,
+.token-panel .tab.skill-tab .skill-item .icon:hover img {
   display: none;
 }
 .token-panel .tab.action-tab .attack-item .icon:hover img.dice,
-.token-panel .tab.action-tab .action-item .icon:hover img.dice {
+.token-panel .tab.skill-tab .attack-item .icon:hover img.dice,
+.token-panel .tab.action-tab .action-item .icon:hover img.dice,
+.token-panel .tab.skill-tab .action-item .icon:hover img.dice,
+.token-panel .tab.action-tab .skill-item .icon:hover img.dice,
+.token-panel .tab.skill-tab .skill-item .icon:hover img.dice {
   display: unset;
 }
 .token-panel .tab.action-tab .attack-item .name,
-.token-panel .tab.action-tab .action-item .name {
+.token-panel .tab.skill-tab .attack-item .name,
+.token-panel .tab.action-tab .action-item .name,
+.token-panel .tab.skill-tab .action-item .name,
+.token-panel .tab.action-tab .skill-item .name,
+.token-panel .tab.skill-tab .skill-item .name {
   flex: 1;
   align-self: center;
   text-align: center;
@@ -2671,25 +2700,61 @@ body.theme-dark .sheet a.content-link {
   text-overflow: ellipsis;
 }
 .token-panel .tab.action-tab .attack-item .name.small,
-.token-panel .tab.action-tab .action-item .name.small {
+.token-panel .tab.skill-tab .attack-item .name.small,
+.token-panel .tab.action-tab .action-item .name.small,
+.token-panel .tab.skill-tab .action-item .name.small,
+.token-panel .tab.action-tab .skill-item .name.small,
+.token-panel .tab.skill-tab .skill-item .name.small {
   padding: 1rem;
 }
 .token-panel .tab.action-tab .attack-item:nth-child(odd),
-.token-panel .tab.action-tab .action-item:nth-child(odd) {
+.token-panel .tab.skill-tab .attack-item:nth-child(odd),
+.token-panel .tab.action-tab .action-item:nth-child(odd),
+.token-panel .tab.skill-tab .action-item:nth-child(odd),
+.token-panel .tab.action-tab .skill-item:nth-child(odd),
+.token-panel .tab.skill-tab .skill-item:nth-child(odd) {
   background: color-mix(in srgb, var(--appv2-background) 90%, transparent);
 }
 .token-panel .tab.action-tab .attack-item:first-child,
+.token-panel .tab.skill-tab .attack-item:first-child,
 .token-panel .tab.action-tab .action-item:first-child,
+.token-panel .tab.skill-tab .action-item:first-child,
+.token-panel .tab.action-tab .skill-item:first-child,
+.token-panel .tab.skill-tab .skill-item:first-child,
 .token-panel .tab.action-tab .attack-item:first-child img,
-.token-panel .tab.action-tab .action-item:first-child img {
+.token-panel .tab.skill-tab .attack-item:first-child img,
+.token-panel .tab.action-tab .action-item:first-child img,
+.token-panel .tab.skill-tab .action-item:first-child img,
+.token-panel .tab.action-tab .skill-item:first-child img,
+.token-panel .tab.skill-tab .skill-item:first-child img {
   border-top: unset;
   border-radius: 8px 0 0 0;
 }
 .token-panel .tab.action-tab .attack-item:last-child,
+.token-panel .tab.skill-tab .attack-item:last-child,
 .token-panel .tab.action-tab .action-item:last-child,
+.token-panel .tab.skill-tab .action-item:last-child,
+.token-panel .tab.action-tab .skill-item:last-child,
+.token-panel .tab.skill-tab .skill-item:last-child,
 .token-panel .tab.action-tab .attack-item:last-child img,
-.token-panel .tab.action-tab .action-item:last-child img {
+.token-panel .tab.skill-tab .attack-item:last-child img,
+.token-panel .tab.action-tab .action-item:last-child img,
+.token-panel .tab.skill-tab .action-item:last-child img,
+.token-panel .tab.action-tab .skill-item:last-child img,
+.token-panel .tab.skill-tab .skill-item:last-child img {
   border-radius: 0 0 0 8px;
+}
+.token-panel .tab.action-tab .skill-item .icon,
+.token-panel .tab.skill-tab .skill-item .icon {
+  filter: invert(1);
+  height: 28px;
+  width: 28px;
+  flex: 0 0 28px;
+}
+.token-panel .tab.action-tab .skill-item .icon img,
+.token-panel .tab.skill-tab .skill-item .icon img {
+  display: unset !important;
+  margin-top: 2px;
 }
 .token-panel section.token-info,
 .token-panel section.party {
