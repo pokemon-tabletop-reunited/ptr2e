@@ -1,0 +1,10 @@
+<section class="skill-roll {{#if (gt degreeOfSuccess 0)}}success{{else}}failure{{/if}}">
+    {{{inner}}}
+    <footer>
+        {{#if (gt degreeOfSuccess 0)}}
+            <p class="dos success">{{abs degreeOfSuccess}} Degrees of Success</p>
+        {{else}}
+            <p class="dos failure">{{abs degreeOfSuccess}} Degrees of Failure</p>
+        {{/if}}
+    </footer>
+</section>

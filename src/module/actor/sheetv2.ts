@@ -312,7 +312,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         }
 
 
-        if(partId === "skills") {
+        if(partId === "skills" || partId === "overview") {
             SkillsComponent.attachListeners(htmlElement, this.actor);
         }
     }

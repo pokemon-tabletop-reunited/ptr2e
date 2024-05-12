@@ -26,6 +26,10 @@ class SkillPTR2e extends foundry.abstract.DataModel {
         };
     }
 
+    get actor() {
+        return this.parent.parent!;
+    }
+
     prepareBaseData(): void {
         const speciesTrait = this.parent.species?.skills?.get(this.slug);
         if(speciesTrait) {
@@ -33,6 +37,24 @@ class SkillPTR2e extends foundry.abstract.DataModel {
         }
 
         this.total = this.value + (this.rvs ?? 0);
+    }
+
+    async roll() {
+        const roll = await this.rollCheck();
+
+        // @ts-expect-error
+        return await ChatMessage.create({
+            type: "skill",
+            system: {
+                roll: roll.toJSON(),
+                slug: this.slug,
+                origin: fu.mergeObject(this.actor.toObject(), { uuid: this.actor.uuid }),
+            },
+        });
+    }
+
+    async rollCheck(): Promise<Rolled<Roll>> {
+        return new Roll("1d100ms@skill", {skill: this.total}).roll();
     }
 }
 

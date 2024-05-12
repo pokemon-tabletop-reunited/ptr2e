@@ -127,6 +127,20 @@ class SkillsComponent extends ActorComponent {
                 refreshApps();
             });
         }
+
+        for (const element of htmlQueryAll(htmlElement, ".skill-icon.rollable")) {
+            element.addEventListener("click", async (event) => {
+                const skillSlug = (
+                    (event.currentTarget as HTMLElement)?.closest(".skill") as HTMLElement
+                )?.dataset.slug;
+                if (!skillSlug) return;
+
+                const skill = actor.system.skills.get(skillSlug);
+                if(!skill) return;
+
+                return skill.roll();
+            });
+        }
     }
 }
 
