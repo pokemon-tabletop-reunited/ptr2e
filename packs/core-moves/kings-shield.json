@@ -1,0 +1,52 @@
+{
+  "name": "King's Shield",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/steel_icon.png",
+  "system": {
+    "slug": "kings-shield",
+    "description": "Trigger: You are hit by a Physical or Special damaging move.\nEffect: The triggering attack fails to hit you, and additional attacks that hit you also fail to hit you until your next activation, or when the round ends, whichever is first. attacks failing to hit you do not activate on-miss effects. If any of these attacks are [Contact] attacks, that attack's user loses -2 ATK stages for 5 activations.",
+    "traits": [
+      "shield",
+      "exhaust",
+      "interrupt-4"
+    ],
+    "actions": [
+      {
+        "slug": "kings-shield",
+        "name": "King's Shield",
+        "type": "attack",
+        "traits": [
+          "shield",
+          "exhaust",
+          "interrupt-4"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "You are hit by a Physical or Special damaging move."
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "steel"
+        ],
+        "description": "Trigger: You are hit by a Physical or Special damaging move.\nEffect: The triggering attack fails to hit you, and additional attacks that hit you also fail to hit you until your next activation, or when the round ends, whichever is first. attacks failing to hit you do not activate on-miss effects. If any of these attacks are [Contact] attacks, that attack's user loses -2 ATK stages for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "KgS6ulU2aIjf0vbo",
+  "effects": []
+}

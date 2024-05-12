@@ -1,0 +1,50 @@
+{
+  "name": "Ocean's Wrath",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/water_icon.png",
+  "system": {
+    "slug": "oceans-wrath",
+    "description": "Effect: All valid targets become Bound 3. While Bound, they take a Tick of HP in damage at the end of each of their activations.",
+    "traits": [
+      "legendary",
+      "blast-3"
+    ],
+    "actions": [
+      {
+        "slug": "oceans-wrath",
+        "name": "Ocean's Wrath",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "blast-3"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 90,
+        "accuracy": 90,
+        "types": [
+          "water"
+        ],
+        "description": "Effect: All valid targets become Bound 3. While Bound, they take a Tick of HP in damage at the end of each of their activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "Tyd4SLX0nURJZXSc",
+  "effects": []
+}
