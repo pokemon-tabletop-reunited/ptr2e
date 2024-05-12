@@ -49,23 +49,128 @@
         "shadow-shield"
       ]
     },
-    "skills": {
-      "acrobatics": 5,
-      "climb": 5,
-      "conversation": 20,
-      "intimidate": 30,
-      "lift": 20,
-      "listen": 30,
-      "natural-world": 20,
-      "navigate": 25,
-      "negotiation": 20,
-      "running": 20,
-      "spot": 30,
-      "stealth": 35,
-      "survival": 25,
-      "occult-spiritual": 35,
-      "occult-ghost": 35
-    },
+    "skills": [
+      {
+        "slug": "acrobatics",
+        "value": 5,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "climb",
+        "value": 5,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "conversation",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "intimidate",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "natural-world",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "navigate",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiation",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "occult-ghost",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
+        "slug": "occult-spiritual",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
+        "slug": "running",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 20,
@@ -590,6 +695,12 @@
               "operand": "and"
             }
           ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          },
           "evolutions": [
             {
               "name": "dusknoir",
@@ -600,26 +711,25 @@
                   "item": "reaper-cloth",
                   "operand": "or",
                   "held": false
+                },
+                {
+                  "type": "level",
+                  "level": 31,
+                  "operand": "or"
                 }
               ],
-              "evolutions": [],
               "details": {
                 "gender": null,
                 "item": null,
                 "level": null,
                 "knownMove": null
-              }
+              },
+              "evolutions": []
             }
-          ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
+          ]
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.NRLM4OLKyc5fyeQ6"
+      "uuid": "Compendium.ptr2e.core-species.Item.N0qK5vxpzw3opgHT"
     }
   },
   "_id": "NRLM4OLKyc5fyeQ6",
@@ -633,11 +743,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.NRLM4OLKyc5fyeQ6",
     "duplicateSource": null

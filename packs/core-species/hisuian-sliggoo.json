@@ -50,22 +50,120 @@
         "friend-guard"
       ]
     },
-    "skills": {
-      "acrobatics": 15,
-      "climb": 55,
-      "conversation": 25,
-      "intimidate": 15,
-      "lift": 30,
-      "listen": 40,
-      "natural-world": 45,
-      "navigate": 35,
-      "negotiation": 25,
-      "running": 5,
-      "spot": 5,
-      "stealth": 40,
-      "survival": 40,
-      "track": 25
-    },
+    "skills": [
+      {
+        "slug": "acrobatics",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "climb",
+        "value": 55,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "conversation",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "intimidate",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "natural-world",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "navigate",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiation",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 5,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 5,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "track",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 58,
@@ -315,33 +413,19 @@
       "details": null,
       "evolutions": [
         {
-          "name": "sliggoo",
-          "uuid": "Compendium.ptr2e.core-species.Item.3xSuDKZXchqrwt67",
+          "name": "hisuian-sliggoo",
+          "uuid": "Compendium.ptr2e.core-species.Item.afEa7zL3pdRiBAcD",
           "methods": [
             {
               "type": "level",
               "level": 40,
-              "operand": "and"
-            }
-          ],
-          "evolutions": [
+              "operand": "or"
+            },
             {
-              "name": "goodra",
-              "uuid": "Compendium.ptr2e.core-species.Item.eKlXb1U35vt44vZQ",
-              "methods": [
-                {
-                  "type": "level",
-                  "level": 50,
-                  "operand": "and"
-                }
-              ],
-              "evolutions": [],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              }
+              "type": "item",
+              "item": "linking-chord",
+              "operand": "or",
+              "held": false
             }
           ],
           "details": {
@@ -349,10 +433,30 @@
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": [
+            {
+              "name": "hisuian-goodra",
+              "uuid": "Compendium.ptr2e.core-species.Item.AJIa9EWiT6g1Swba",
+              "methods": [
+                {
+                  "type": "level",
+                  "level": 50,
+                  "operand": "and"
+                }
+              ],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
+              },
+              "evolutions": []
+            }
+          ]
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.afEa7zL3pdRiBAcD"
+      "uuid": "Compendium.ptr2e.core-species.Item.ch9abdxnjppXGWjH"
     }
   },
   "_id": "afEa7zL3pdRiBAcD",
@@ -369,11 +473,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712327701027,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.afEa7zL3pdRiBAcD",
     "duplicateSource": null

@@ -46,20 +46,104 @@
         "juggernaut"
       ]
     },
-    "skills": {
-      "acrobatics": 20,
-      "climb": 50,
-      "conversation": 35,
-      "intimidate": 45,
-      "lift": 60,
-      "listen": 65,
-      "natural-world": 45,
-      "navigate": 45,
-      "negotiation": 35,
-      "running": 10,
-      "stealth": 45,
-      "survival": 40
-    },
+    "skills": [
+      {
+        "slug": "acrobatics",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "climb",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "conversation",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "intimidate",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 65,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "natural-world",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "navigate",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiation",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 10,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 85,
@@ -415,14 +499,26 @@
             {
               "name": "gigalith",
               "uuid": "Compendium.ptr2e.core-species.Item.hBXgr1KrkRdP4p6g",
-              "methods": [],
-              "evolutions": [],
+              "methods": [
+                {
+                  "type": "level",
+                  "level": 38,
+                  "operand": "or"
+                },
+                {
+                  "type": "item",
+                  "item": "linking-chord",
+                  "operand": "or",
+                  "held": false
+                }
+              ],
               "details": {
                 "gender": null,
                 "item": null,
                 "level": null,
                 "knownMove": null
-              }
+              },
+              "evolutions": []
             }
           ],
           "details": {
@@ -450,11 +546,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712327701027,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.hBXgr1KrkRdP4p6g",
     "duplicateSource": null

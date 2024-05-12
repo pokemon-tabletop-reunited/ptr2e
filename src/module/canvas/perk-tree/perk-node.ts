@@ -1,3 +1,4 @@
+import { ItemPTR2e } from "@item";
 import PerkWeb from "./perk-web.ts";
 import { PTRNode } from "./perks-store.ts";
 
@@ -152,6 +153,10 @@ class PerkNode extends PIXI.Container {
             if (!this.active) return; // Only move active nodes
             if (this.state !== 1) return; // Only move nodes in position mode (1)
 
+            if(game.ptr.web.perkHUD.object) {
+                game.ptr.web.perkHUD.clear();
+            }
+
             // Move node
             const newPosition = event.getLocalPosition(this.parent);
             const { i, j } = game.ptr.web.getHexCoordinates(newPosition.x, newPosition.y);
@@ -159,11 +164,32 @@ class PerkNode extends PIXI.Container {
             this.position.set(x, y);
             this.redrawEdges();
 
+            // Move all other nodes relative to this dragged node
+            const dx = x - this.originalPosition!.x;
+            const dy = y - this.originalPosition!.y;
+            const nodes = game.ptr.web.controlled.filter((node) => node !== this);
+            for(const node of nodes) {
+                if(!node) continue;
+
+                node.position.set(node.originalPosition!.x + dx, node.originalPosition!.y + dy);
+                node.redrawEdges();
+            }
+
             // If node is in illegal position, mark it as such
             if (!game.ptr.web.isLegalSpot(i, j)) {
                 this.legal = false;
             } else {
                 this.legal = true;
+            }
+
+            // Check if all other nodes are in legal spots
+            for(const node of game.ptr.web.controlled) {
+                const { i, j } = game.ptr.web.getHexCoordinates(node.position.x, node.position.y);
+                if (!game.ptr.web.isLegalSpot(i, j)) {
+                    node.legal = false;
+                } else {
+                    node.legal = true;
+                }
             }
         });
 
@@ -211,16 +237,18 @@ class PerkNode extends PIXI.Container {
             game.ptr.web.perkHUD.activate(this);
         } else {
             if (this.active) {
-                const result = await game.ptr.web.updateHexPosition(this);
-                if (!result) return;
-                if (this.active) {
-                    game.ptr.web.deactivateNode();
-                }
+                await this.savePosition();
             } else {
                 if (game.ptr.web.activeNode?.state === 2) {
                     game.ptr.web.connectNodes(game.ptr.web.activeNode, this);
                 } else {
+                    // Save original position
                     this.originalPosition = this.position.clone();
+                    // Save original position of all other controlled nodes
+                    for(const node of game.ptr.web.controlled) {
+                        node.originalPosition = node.position.clone();
+                    }
+
                     game.ptr.web.activateNode(this, 1);
                 }
             }
@@ -230,8 +258,81 @@ class PerkNode extends PIXI.Container {
     async _onClickLeftEnd(_event: PIXI.FederatedPointerEvent) {
         if (game.ptr.web.editMode) {
             if (this.active) {
-                await game.ptr.web.updateHexPosition(this);
+                await this.savePosition();
+                if(game.ptr.web.activeNode === this) {
+                    game.ptr.web.deactivateNode();
+                }
             }
+        }
+    }
+
+    async savePosition() {
+        // Check if any node will be in an illegal position
+        const otherNodes = game.ptr.web.controlled.filter((node) => node !== this);
+        for(const node of otherNodes) {
+            if (!node.legal) return;
+        }
+        if(!this.legal) return;
+
+        // Prepare all updates
+        const nodeUpdates = [];
+        const worldUpdates = [];
+        const packUpdates: Record<string, {_id: string, "system.node": {i: number, j: number}}[]> = {};
+
+        // Get update for this node
+        const thisUpdate = await game.ptr.web.updateHexPosition(this, {updateDataOnly: true});
+        if(typeof thisUpdate === 'boolean') return;
+        if(thisUpdate.options?.pack) {
+            packUpdates[thisUpdate.options.pack] ??= [];
+            packUpdates[thisUpdate.options.pack].push( thisUpdate.itemUpdate);
+        }
+        else {
+            worldUpdates.push(thisUpdate.itemUpdate);
+        }
+        nodeUpdates.push(thisUpdate.nodeUpdate);
+
+        // Update all others
+        for(const node of otherNodes) {
+            const update = await game.ptr.web.updateHexPosition(node, {updateDataOnly: true});
+            if(typeof update === 'boolean') return;
+            if(update.options?.pack) {
+                packUpdates[update.options.pack] ??= [];
+                packUpdates[update.options.pack].push(update.itemUpdate);
+            }
+            else {
+                worldUpdates.push(update.itemUpdate);
+            }
+            nodeUpdates.push(update.nodeUpdate);
+        }
+
+        try {
+            const updated: string[] = [];
+            const r = await ItemPTR2e.updateDocuments(worldUpdates);
+            if(r) updated.push(...r.map(u => u.id));
+            for(const pack in packUpdates) {
+                const p = game.packs.get(pack);
+                if(!p) continue;
+                const r = await ItemPTR2e.updateDocuments(packUpdates[pack], {pack});
+                if(r) updated.push(...r.map(u => u.id));
+            }
+            const {updates, failedUpdates} = (() => {
+                const updates = [];
+                const failedUpdates = [];
+                for(const nodeUpdate of nodeUpdates) {
+                    if(updated.includes(nodeUpdate.node.node.perk.id))  updates.push(nodeUpdate);
+                    else failedUpdates.push(nodeUpdate);
+                }
+                return {updates, failedUpdates};
+            })();
+            game.ptr.web.updateNewNodePositions(updates);
+            game.ptr.web.resetFailedUpdateNodePositions(failedUpdates.map(n => n.node));
+        } catch {
+            game.ptr.web.resetFailedUpdateNodePositions(nodeUpdates.map(n => n.node));
+        }
+
+        this.releaseControl();
+        for(const node of otherNodes) {
+            node.releaseControl();
         }
     }
 
@@ -302,6 +403,22 @@ class PerkNode extends PIXI.Container {
         this.config.borderColor = this.node.perk.system.node.config?.borderColor || 0x000000;
         this._drawBorder();
         return this;
+    }
+
+    public control() {
+        this.config.borderColor = 0xff9829;
+        this.config.borderWidth = 3;
+        this.scale.set((this.node.perk.system.node.config?.scale ?? 1) * 1.2 || 1.2)
+        this._drawBorder();
+        game.ptr.web.controlled.push(this);
+    }
+
+    public releaseControl() {
+        this.config.borderColor = this.node.perk.system.node.config?.borderColor || 0x000000;
+        this.config.borderWidth = this.node.perk.system.node.config?.borderWidth || 1;
+        this._drawBorder();
+        this.scale.set(this.node.perk.system.node.config?.scale || 1)
+        game.ptr.web.controlled = game.ptr.web.controlled.filter((node) => node !== this);
     }
 }
 

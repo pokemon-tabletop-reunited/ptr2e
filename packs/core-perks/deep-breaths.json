@@ -1,56 +1,74 @@
 {
-    "name": "Deep Breaths",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Shadow Guide",
-            "Psychology 50"
-        ],
-        "cost": 3,
-        "design": {
-            "arena": "social",
-            "approach": "finesse",
-            "archetype": "Shadow"
-        },
-        "description": "You may activate this perk when a [Closed Heart] creature would gain Hyper Mode. That creature does not gain Hyper Mode and is healed 2 Ticks of HP and 10 PP.",
-        "actions": [
-            {
-                "name": "Deep Breaths",
-                "slug": "deep-breaths",
-                "description": "You may activate this perk when a [Closed Heart] creature would gain Hyper Mode. That creature does not gain Hyper Mode and is healed 2 Ticks of HP and 10 PP.",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 4
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "deep-breaths",
-        "traits": [],
-        "node": {
-            "i": 19,
-            "j": 49,
-            "connected": [
-                "root-4",
-                "dark-clarity",
-                "lead-from-behind",
-                "touched-legendary"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#808000",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Deep Breaths",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Shadow Guide",
+      "Psychology 50"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "Shadow"
     },
-    "_id": "qP0uRTj023iaIgyr",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You may activate this perk when a [Closed Heart] creature would gain Hyper Mode. That creature does not gain Hyper Mode and is healed 2 Ticks of HP and 10 PP.",
+    "actions": [
+      {
+        "name": "Deep Breaths",
+        "slug": "deep-breaths",
+        "description": "You may activate this perk when a [Closed Heart] creature would gain Hyper Mode. That creature does not gain Hyper Mode and is healed 2 Ticks of HP and 10 PP.",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "deep-breaths",
+    "traits": [],
+    "node": {
+      "i": 63,
+      "j": -56,
+      "connected": [
+        "shadow-guide"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#808000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "qP0uRTj023iaIgyr",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.qP0uRTj023iaIgyr"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714920453372,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!qP0uRTj023iaIgyr"
 }

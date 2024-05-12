@@ -52,22 +52,120 @@
         "tough-claws"
       ]
     },
-    "skills": {
-      "acrobatics": 15,
-      "climb": 15,
-      "conversation": 15,
-      "intimidate": 25,
-      "lift": 25,
-      "listen": 35,
-      "natural-world": 25,
-      "navigate": 30,
-      "negotiation": 15,
-      "running": 35,
-      "spot": 45,
-      "stealth": 20,
-      "survival": 40,
-      "track": 30
-    },
+    "skills": [
+      {
+        "slug": "acrobatics",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "climb",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "conversation",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "intimidate",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "natural-world",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "navigate",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiation",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "track",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 70,
@@ -455,17 +553,41 @@
           "methods": [
             {
               "type": "level",
-              "level": 54,
+              "level": 34,
               "operand": "and"
             }
           ],
-          "evolutions": [],
           "details": {
             "gender": null,
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": []
+        },
+        {
+          "name": "hisuian-braviary",
+          "uuid": "Compendium.ptr2e.core-species.Item.GU4tF7se5fiQ01iX",
+          "methods": [
+            {
+              "type": "level",
+              "level": 34,
+              "operand": "or"
+            },
+            {
+              "type": "item",
+              "item": "linking-chord",
+              "operand": "or",
+              "held": false
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          },
+          "evolutions": []
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.pyZamrkL16BWbkgG"
@@ -485,11 +607,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712327701027,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.pyZamrkL16BWbkgG",
     "duplicateSource": null

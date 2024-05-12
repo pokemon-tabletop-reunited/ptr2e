@@ -52,19 +52,96 @@
         "magic-guard"
       ]
     },
-    "skills": {
-      "acrobatics": 20,
-      "conversation": 30,
-      "fast-talk": 30,
-      "lift": 15,
-      "listen": 30,
-      "negotiation": 30,
-      "performance": 10,
-      "running": 20,
-      "sleight-ofhand": 15,
-      "spot": 30,
-      "swim": 20
-    },
+    "skills": [
+      {
+        "slug": "acrobatics",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "conversation",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "fast-talk",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiation",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "performance-all",
+        "value": 10,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "performance"
+      },
+      {
+        "slug": "running",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "sleight-ofhand",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 20,
@@ -646,6 +723,24 @@
               "operand": "and"
             }
           ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          },
+          "evolutions": []
+        },
+        {
+          "name": "galarian-mr-mime",
+          "uuid": "Compendium.ptr2e.core-species.Item.N6yaUbYg9QLmVMxP",
+          "methods": [
+            {
+              "type": "move",
+              "move": "mimic",
+              "operand": "and"
+            }
+          ],
           "evolutions": [
             {
               "name": "mr-rime",
@@ -657,13 +752,13 @@
                   "operand": "and"
                 }
               ],
-              "evolutions": [],
               "details": {
                 "gender": null,
                 "item": null,
                 "level": null,
                 "knownMove": null
-              }
+              },
+              "evolutions": []
             }
           ],
           "details": {
@@ -688,11 +783,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.QIYzkXCGv98ltEJG",
     "duplicateSource": null

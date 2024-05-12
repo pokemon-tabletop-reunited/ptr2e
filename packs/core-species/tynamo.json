@@ -54,19 +54,96 @@
         "feisty"
       ]
     },
-    "skills": {
-      "conversation": 10,
-      "intimidate": 10,
-      "lift": 10,
-      "listen": 35,
-      "natural-world": 25,
-      "navigate": 30,
-      "running": 40,
-      "spot": 25,
-      "stealth": 40,
-      "survival": 30,
-      "swim": 40
-    },
+    "skills": [
+      {
+        "slug": "conversation",
+        "value": 10,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "intimidate",
+        "value": 10,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 10,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "natural-world",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "navigate",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 35,
@@ -148,10 +225,16 @@
           "methods": [
             {
               "type": "level",
-              "level": 39,
+              "level": 29,
               "operand": "and"
             }
           ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          },
           "evolutions": [
             {
               "name": "eelektross",
@@ -162,26 +245,25 @@
                   "item": "thunder-stone",
                   "operand": "or",
                   "held": false
+                },
+                {
+                  "type": "level",
+                  "level": 42,
+                  "operand": "or"
                 }
               ],
-              "evolutions": [],
               "details": {
                 "gender": null,
                 "item": null,
                 "level": null,
                 "knownMove": null
-              }
+              },
+              "evolutions": []
             }
-          ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
+          ]
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.OyQ6MlS6rT3mfvGD"
+      "uuid": "Compendium.ptr2e.core-species.Item.x9B4tiWtriPFSOgr"
     }
   },
   "_id": "OyQ6MlS6rT3mfvGD",
@@ -198,11 +280,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712327701027,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.OyQ6MlS6rT3mfvGD",
     "duplicateSource": null

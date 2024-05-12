@@ -29,7 +29,7 @@ class ActiveEffectPTR2e<
         return this.system.changes ?? [];
     }
 
-    get traits(): Map<string, Trait> {
+    get traits(): Collection<Trait> {
         return this.system.traits;
     }
 

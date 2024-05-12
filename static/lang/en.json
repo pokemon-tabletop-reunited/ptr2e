@@ -184,7 +184,10 @@
                 },
                 "skills": {
                     "label": "Skills",
-                    "hint": "The skills of the actor."
+                    "hint": "The skills of the actor.",
+                    "options": "Skill List Options",
+                    "toggleHidden": "Toggle Hidden Skills",
+                    "editSkills": "Open Skills Editor"
                 }
             }
         },
@@ -213,7 +216,19 @@
                     "label": "Overview"
                 },
                 "actions": {
-                    "label": "Actions"
+                    "label": "Actions",
+                    "combat": {
+                        "label": "Combat Actions"
+                    },
+                    "downtime": {
+                        "label": "Downtime Actions"
+                    },
+                    "exploration": {
+                        "label": "Exploration Actions"
+                    },
+                    "other": {
+                        "label": "Generic Actions"
+                    }
                 },
                 "inventory": {
                     "label": "Inventory"
@@ -234,13 +249,23 @@
                     "label": "Effects"
                 }
             },
+            "KnownAttacks": {
+                "hint": "Drag & Drop moves onto the actor / known attack sheet to add them as available options.<br><br>Drag & Drop from the Known Attack's sheet onto the Actor's Attack Slots to assign moves to the slots!"
+            },
             "Buttons": {
                 "perkWeb": "Open Perk Web"
             },
             "Components": {
                 "actor": "Open Actor",
+                "toggle-hidden-skills": "Toggle Hidden Skills",
                 "EffectComponent": {
                     "title": "{actor}'s Effects"
+                },
+                "SkillsComponent": {
+                    "title": "{actor}'s Skills"
+                },
+                "FavouriteSkillsComponent": {
+                    "title": "{actor}'s Favourite Skills"
                 },
                 "Effects": {
                     "tooltip": "Popout Effects"
@@ -818,8 +843,20 @@
         },
         "TokenPanel": {
             "Tabs": {
-                "attacks": {
-                    "label": "Attacks"
+                "attack-slots": {
+                    "label": "Attack Slots"
+                },
+                "attack-other": {
+                    "label": "Other Attacks"
+                },
+                "passives": {
+                    "label": "Passives"
+                },
+                "generic-actions": {
+                    "label": "Generic Actions"
+                },
+                "skills": {
+                    "label": "Skills"
                 }
             }
         },
@@ -903,6 +940,372 @@
         "Dialog": {
             "DeleteDocumentContent": "Are you sure you want to delete: {name}?",
             "DeleteDocumentTitle": "Delete {name}?"
+        },
+        "Skills": {
+            "luck": {
+                "label": "Luck",
+                "hint": "Luck is your anime protagonist style plot armor. It gives the ability to manipulate a skill check, and a few other aspects of the game. Luck is a resource that only Player Characters and Aces have. At character creation, a player determines their initial luck by rolling 3d6 and multiplying the result by 5.<br><br>For more information, see the Luck section of the rulebook."
+            },
+            "accounting": {
+                "label": "Accounting",
+                "hint": "This skill is used to look over records, be they financial, inventory, or otherwise and look for discrepancies. Things that just don't add up. Serves a niche as an investigation skill, or potentially a professional skill for campaigns that way inclined."
+            },
+            "acrobatics": {
+                "label": "Acrobatics",
+                "hint": "The Acrobatics skill is responsible for jumping and vaulting, along with activities such as zip wiring and parachuting. It does not, however, cover trying to fly at speed but it can be utilized in place of Running for Threaded movement."
+            },
+            "appraise": {
+                "label": "Appraise",
+                "hint": "This skill is used to determine the relative value of an object. A successful Appraise role might lend an edge as part of a Negotiation, or yield information pertaining to the quality of a piece of gear a character might have."
+            },
+            "archaeology": {
+                "label": "Archaeology",
+                "hint": "This skill is used to study ancient things. This includes studying ruins, knowledge of past civilizations, and deciphering lost inscriptions."
+            },
+            "aura-sense": {
+                "label": "Aura Sense",
+                "hint": "The Aura Sense skill governs interactions with Aura, ranging from perceiving and analyzing aura to manipulating it and the process of Channeling."
+            },
+            "climb": {
+                "label": "Climb",
+                "hint": "This is a fairly straightforward skill. It governs the pace and aptitude for climbing."
+            },
+            "computers": {
+                "label": "Computers",
+                "hint": "The all-around skill that governs the use of computers and the internet. GMs may find this skill warrants converting into a skill category for more tech-intensive campaigns."
+            },
+            "conversation": {
+                "label": "Conversation",
+                "hint": "This is a general-purpose social skill that covers interaction uses such as charming and persuading. Any socialization that doesn't cover lying, intimidation or deal-making. In the unusual event that this roll needs to be opposed, the other side should also use Conversation."
+            },
+            "disguise": {
+                "label": "Disguise",
+                "hint": "For when you need to pretend to be someone or something else. Opposed by Psychology or Spot, depending on which is more appropriate."
+            },
+            "electronics": {
+                "label": "Electronics",
+                "hint": "This skill is used to understand electronics and perform electrical repairs on devices. Some Pokemon may use the Electronics skill to manipulate or disrupt electrical devices."
+            },
+            "engineering": {
+                "label": "Engineering",
+                "hint": "This skill is used to understand complex engineering designs. If appropriate can be used in design and construction capacities, but more commonly it would be utilized by a character seeking to sabotage or damage a structure or vehicle."
+            },
+            "fast-talk": {
+                "label": "Fast Talk",
+                "hint": "The skill used to bamboozle, confound, and lie your way around obstacles. Obfuscate your intent with either masterful ad-lib deception, or by merely confusing your opponent."
+            },
+            "handiwork": {
+                "label": "Handiwork",
+                "hint": "The Handiwork skill covers various trades and crafts, mainly covering construction, woodworking, sewing, fletching, plumbing, and more! This ranges from broad knowledge of specific trades to specific capability in applying said knowledge, like in terms of Crafting."
+            },
+            "history": {
+                "label": "History",
+                "hint": "This skill is used to establish familiarity with historical events. It tends to be more applicable to more recent history, as the ancient falls within the purview of the Archaeology skill."
+            },
+            "husbandry": {
+                "label": "Husbandry",
+                "hint": "The function of this skill is to feed and care for others. This skill governs cooking, breeding and general care of both Pokemon and humans."
+            },
+            "intimidate": {
+                "label": "Intimidate",
+                "hint": "The Intimidate skill is what you need when you want to scare someone or bully your way into getting what you want. It may get you results, but creatures will likely remember you and it will not be fondly. This skill can be opposed with Intimidate or Leadership."
+            },
+            "leadership": {
+                "label": "Leadership",
+                "hint": "This skill is used to establish authority over others similar to Intimidate, however with respect rather than fear. It can be used to inspire and command, and interacts with Pack Mon perks. You may use the Leadership skill to bolster an ally that someone is attempting to intimidate."
+            },
+            "legal": {
+                "label": "Legal",
+                "hint": "This skill represents a character's understanding of the legal system and its processes, and can either utilize that knowledge to help stay out of trouble or to have the knowledge needed to manipulate procedures to their advantage."
+            },
+            "lift": {
+                "label": "Lift",
+                "hint": "This skill governs the raw physical ability to lift and carry and to perform feats of strength beyond what a creature could normally do comfortably."
+            },
+            "listen": {
+                "label": "Listen",
+                "hint": "This skill governs the ability to detect creatures or activity through hearing."
+            },
+            "locksmith": {
+                "label": "Locksmith",
+                "hint": "The art of picking locks. This can be used as a general breaking & entering skill, with computers governing hacking one's way into electronic systems. In suitably advanced settings, consider allowing Locksmith to work with electronic locks also."
+            },
+            "mechanics": {
+                "label": "Mechanics",
+                "hint": "The purpose of the Mechanics skill is to perform mechanical repairs and upgrades to machines or devices, working with non-electrical components."
+            },
+            "medicine": {
+                "label": "Medicine",
+                "hint": "This skill governs all medical training, whether that be diagnostics, first aid or surgery."
+            },
+            "natural-world": {
+                "label": "Natural World",
+                "hint": "The Natural World skill is used for a character to understand the fundamentals of nature, such as identifying trees and mosses and types of berries and mushrooms. Also covers non-artistic gardening pursuits."
+            },
+            "navigate": {
+                "label": "Navigate",
+                "hint": "This skill is used to find your way when traveling outside of your normal default habitat. This is as true for migratory Pokemon as it is for humans leaving their cities, but would not be required for a Pokemon staying in its forest, or the human navigating around the city in which they live."
+            },
+            "negotiation": {
+                "label": "Negotiation",
+                "hint": "This skill covers the art of the deal. If you want something and the other creature is willing to give you it, for a price, then this skill can be used to determine who gets the better end of the deal."
+            },
+            "psychology": {
+                "label": "Psychology",
+                "hint": "This skill is used to determine someone's mental or emotional state. This can either be from a perspective of reading their intentions, providing them with treatment (such as traumatized Shadow Pokemon), or seeing through someone's Disguise act or Fast Talking."
+            },
+            "read-lips": {
+                "label": "Read Lips",
+                "hint": "This skill is used when a character is able to see someone speaking but is unable to hear them for whatever reason, and wants to understand what they are saying. Potentially useful for any hearing-impaired characters."
+            },
+            "research": {
+                "label": "Research",
+                "hint": "This skill is used to hit the books at the library or similar. Specifically for finding out information that your character needs but does not already know by virtue of their other skills."
+            },
+            "resources": {
+                "label": "Resources",
+                "hint": "This skill cannot be raised using skill points after level 1. The Resources skill is used to determine your character's spending power, and can also serve as a measure of their status."
+            },
+            "ride": {
+                "label": "Ride",
+                "hint": "The Ride skill is used to stay mounted on another creature. For gentle transit, Ride checks generally should not be required, but once things get tense a Ride skill can be all that separates you from a mouthful of dirt. May also be used in riding competitions."
+            },
+            "running": {
+                "label": "Running",
+                "hint": "The Running skill is for when overland or flying creatures gotta go fast. Use this skill to gain additional movement allowance after you've consumed all of yours in combat, or to participate in feats of speed during events such as a Pokeathlon"
+            },
+            "sleight-of-hand": {
+                "label": "Sleight of Hand",
+                "hint": "This skill covers feats of legerdemain and physical misdirection, such as card tricks and other non-magical illusions along with the likes of picking pockets."
+            },
+            "spot": {
+                "label": "Spot",
+                "hint": "As the name implies, this skill is utilized to spot things, usually something hard to see or outright hidden. That can be creatures within your field of view trying to use Stealth against you, or it can be used in an investigative context to look for hidden clues."
+            },
+            "stealth": {
+                "label": "Stealth",
+                "hint": "This skill covers efforts to conceal yourself that do not rely on disguise or social interaction. This is opposed by Listen where creatures do not have you in their field of view, or Spot if they do. Can also be utilized to blend into crowds and to tail unsuspecting marks."
+            },
+            "survival": {
+                "label": "Survival",
+                "hint": "This skill is used to find shelter and to seek out edible foods in the wilderness. It may be appropriate to use for field crafting of things like Rafts and temporary bridges."
+            },
+            "swim": {
+                "label": "Swim",
+                "hint": "The Swim skill covers all applications of the Acrobatics and Running skills but in the water. It also covers any checks that might be required in line with diving."
+            },
+            "teaching": {
+                "label": "Teaching",
+                "hint": "The teaching skills is used to help instruct another in a skill with which you already possess. You may roll a Teaching check for any skill you have at rank 25 or higher. The target gains +10 per Degree of Success to their next check in the relevant skill."
+            },
+            "track": {
+                "label": "Track",
+                "hint": "The Track skill is used to follow the trail that another creature has left in order to follow them to their home or other location. If the creature is actively trying to avoid being followed, this is opposed by Stealth. Also used for Fishing."
+            },
+            "arts": {
+                "label": "Arts",
+                "hint": "This is a collection of undefined skills for the most part, though some examples might exist such as Painting or Flower Arrangement. This skill is a measure of talent for creative pursuits and is left to the player to define the bounds of their art.",
+                "painting": {
+                    "label": "Painting",
+                    "hint": "This skill is used to create works of art using paint. This can be used to create paintings, murals, or other works of art."
+                },
+                "sculpting": {
+                    "label": "Sculpting",
+                    "hint": "This skill is used to create works of art using clay or stone. This can be used to create sculptures, statues, or other works of art."
+                },
+                "acting": {
+                    "label": "Acting",
+                    "hint": "This skill is used to perform on stage or in front of a camera. This can be used to act in plays, movies, or other performances."
+                },
+                "dancing": {
+                    "label": "Dancing",
+                    "hint": "This skill is used to perform dance routines. This can be used to dance in shows, competitions, or other performances."
+                },
+                "singing": {
+                    "label": "Singing",
+                    "hint": "This skill is used to perform songs. This can be used to sing in concerts, competitions, or other performances."
+                },
+                "flower-arrangement": {
+                    "label": "Flower Arrangement",
+                    "hint": "This skill is used to create works of art using flowers. This can be used to create bouquets, wreaths, or other works of art."
+                },
+                "writing": {
+                    "label": "Writing",
+                    "hint": "This skill is used to create written works. This can be used to write books, articles, or other written works."
+                }
+            },
+            "occult": {
+                "label": "Occult",
+                "hint": "The Occult skills are actually several skills under one group, purchased separately. These are Psychic, Ghost, Dragon, Fairy, Spiritual, Legendary, Paradox. The skills cover knowledge about the topics they’re named for. GMs may wish to add more Occult knowledge as appropriate for their campaign setting.",
+                "psychic": {
+                    "label": "Psychic",
+                    "hint": "This skill is used to understand and use psychic powers."
+                },
+                "ghost": {
+                    "label": "Ghost",
+                    "hint": "This skill is used to understand and interact with ghostly entities."
+                },
+                "dragon": {
+                    "label": "Dragon",
+                    "hint": "This skill is used to understand and interact with dragon-like entities."
+                },
+                "fairy": {
+                    "label": "Fairy",
+                    "hint": "This skill is used to understand and interact with fairy-like entities."
+                },
+                "spiritual": {
+                    "label": "Spiritual",
+                    "hint": "This skill is used to understand and interact with spiritual entities."
+                },
+                "legendary": {
+                    "label": "Legendary",
+                    "hint": "This skill is used to understand and interact with legendary entities."
+                },
+                "paradox": {
+                    "label": "Paradox",
+                    "hint": "This skill is used to understand and interact with paradoxical entities."
+                }
+            },
+            "performance": {
+                "label": "Performance",
+                "hint": "Performance comes in Cool, Clever, Cute, Beauty and Tough variations and these are the primary skills used for Pokemon Contests, but that doesn’t need to be their only applications. We encourage you to let your creativity thrive with these.",
+                "cool": {
+                    "label": "Cool",
+                    "hint": "This skill is used to perform cool tricks or stunts. This can be used to impress an audience, intimidate an opponent, or show off in general."
+                },
+                "clever": {
+                    "label": "Clever",
+                    "hint": "This skill is used to perform clever tricks or stunts. This can be used to outsmart an opponent, solve a puzzle, or show off in general."
+                },
+                "cute": {
+                    "label": "Cute",
+                    "hint": "This skill is used to perform cute tricks or stunts. This can be used to charm an audience, distract an opponent, or show off in general."
+                },
+                "beauty": {
+                    "label": "Beauty",
+                    "hint": "This skill is used to perform beautiful tricks or stunts. This can be used to impress an audience, inspire an opponent, or show off in general."
+                },
+                "tough": {
+                    "label": "Tough",
+                    "hint": "This skill is used to perform tough tricks or stunts. This can be used to intimidate an audience, overpower an opponent, or show off in general."
+                }
+            },
+            "pilot": {
+                "label": "Pilot",
+                "hint": "This group of skills, purchased separately, measure a character’s ability to pilot a vehicle. The example Piloting skills we have included here are Bike, Small Motor Vehicles, Cars, Utility Vehicles, Military Ground Vehicles, Walkers, Aircraft, Aerospace Vehicles, Exotic Vehicle (Specific), Watercraft. You may wish to add or remove from this list as appropriate for your campaign setting (such as carriages in a fantasy setting.)",
+                "bike": {
+                    "label": "Bike",
+                    "hint": "This skill is used to pilot a bike."
+                },
+                "small-motor-vehicles": {
+                    "label": "Small Motor Vehicles",
+                    "hint": "This skill is used to pilot small motor vehicles."
+                },
+                "cars": {
+                    "label": "Cars",
+                    "hint": "This skill is used to pilot cars."
+                },
+                "utility-vehicles": {
+                    "label": "Utility Vehicles",
+                    "hint": "This skill is used to pilot utility vehicles."
+                },
+                "military-ground-vehicles": {
+                    "label": "Military Ground Vehicles",
+                    "hint": "This skill is used to pilot military ground vehicles."
+                },
+                "walkers": {
+                    "label": "Walkers",
+                    "hint": "This skill is used to pilot walkers."
+                },
+                "aircraft": {
+                    "label": "Aircraft",
+                    "hint": "This skill is used to pilot aircraft."
+                },
+                "aerospace-vehicles": {
+                    "label": "Aerospace Vehicles",
+                    "hint": "This skill is used to pilot aerospace vehicles."
+                },
+                "exotic-vehicle-specific": {
+                    "label": "Exotic Vehicle (Specific)",
+                    "hint": "This skill is used to pilot a specific exotic vehicle."
+                },
+                "watercraft": {
+                    "label": "Watercraft",
+                    "hint": "This skill is used to pilot watercraft."
+                }
+            },
+            "science": {
+                "label": "Science",
+                "hint": "The Science group skill covers a number of fields, purchased separately. Examples include Astronomy, Biology, Botany, Chemistry, Cryptography, Forensics, Geology, Mathematics, Meteorology, Parapsychology, Pharmacy, Physics, Zoology. Pokémon-specific fields include Meganobiology, Terastology, Ultrology, Paradoxian Studies. The GM may add to or remove from this list as appropriate to their campaign. This skill represents specialized knowledge in a field and will generally rely upon either specific perks, or a situational application that the GM or Player must call for.",
+                "astronomy": {
+                    "label": "Astronomy",
+                    "hint": "This skill is used to study the stars and planets."
+                },
+                "biology": {
+                    "label": "Biology",
+                    "hint": "This skill is used to study living organisms."
+                },
+                "botany": {
+                    "label": "Botany",
+                    "hint": "This skill is used to study plants."
+                },
+                "chemistry": {
+                    "label": "Chemistry",
+                    "hint": "This skill is used to study chemicals."
+                },
+                "cryptography": {
+                    "label": "Cryptography",
+                    "hint": "This skill is used to study codes and ciphers."
+                },
+                "forensics": {
+                    "label": "Forensics",
+                    "hint": "This skill is used to study evidence from crime scenes."
+                },
+                "geology": {
+                    "label": "Geology",
+                    "hint": "This skill is used to study rocks and minerals."
+                },
+                "mathematics": {
+                    "label": "Mathematics",
+                    "hint": "This skill is used to study numbers and equations."
+                },
+                "meteorology": {
+                    "label": "Meteorology",
+                    "hint": "This skill is used to study the weather."
+                },
+                "parapsychology": {
+                    "label": "Parapsychology",
+                    "hint": "This skill is used to study psychic phenomena."
+                },
+                "pharmacy": {
+                    "label": "Pharmacy",
+                    "hint": "This skill is used to study drugs and medicines."
+                },
+                "physics": {
+                    "label": "Physics",
+                    "hint": "This skill is used to study matter and energy."
+                },
+                "zoology": {
+                    "label": "Zoology",
+                    "hint": "This skill is used to study animals."
+                },
+                "meganobiology": {
+                    "label": "Meganobiology",
+                    "hint": "This skill is used to study the biology of Mega Evolutions."
+                },
+                "terastology": {
+                    "label": "Terastology",
+                    "hint": "This skill is used to study the biology of Gigantamax forms."
+                },
+                "ultrology": {
+                    "label": "Ultrology",
+                    "hint": "This skill is used to study the biology of Ultra Beasts."
+                },
+                "paradoxian-studies": {
+                    "label": "Paradoxian Studies",
+                    "hint": "This skill is used to study the biology of Paradox Pokemon."
+                }
+            }
         }
     }
 }

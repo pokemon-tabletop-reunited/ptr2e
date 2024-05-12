@@ -57,22 +57,120 @@
         "super-luck"
       ]
     },
-    "skills": {
-      "acrobatics": 10,
-      "climb": 25,
-      "conversation": 15,
-      "fast-talk": 30,
-      "lift": 25,
-      "listen": 40,
-      "natural-world": 25,
-      "negotiate": 20,
-      "running": 10,
-      "spot": 40,
-      "stealth": 30,
-      "survival": 20,
-      "swim": 40,
-      "armor-slowpoke": "This unique form of Slowpoke is normally only found on the Isle of Armor and cannot evolve. It does, however, treat Overland and Swim as primary movements with a rating of 20."
-    },
+    "skills": [
+      {
+        "slug": "acrobatics",
+        "value": 10,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "armor-slowpoke",
+        "value": "This unique form of Slowpoke is normally only found on the Isle of Armor and cannot evolve. It does, however, treat Overland and Swim as primary movements with a rating of 20.",
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "climb",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "conversation",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "fast-talk",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "natural-world",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiate",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 10,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 90,
@@ -467,13 +565,18 @@
     ],
     "genderRatio": 4,
     "evolutions": {
-      "name": "slowpoke",
+      "name": "galarian-slowpoke",
       "details": null,
       "evolutions": [
         {
-          "name": "slowbro",
-          "uuid": "Compendium.ptr2e.core-species.Item.V0JLTpFpHzqHiom5",
+          "name": "galarian-slowbro",
+          "uuid": "Compendium.ptr2e.core-species.Item.qKMhXsoShky2xaLZ",
           "methods": [
+            {
+              "type": "level",
+              "level": 37,
+              "operand": "or"
+            },
             {
               "type": "item",
               "item": "galarica-cuff",
@@ -481,18 +584,23 @@
               "held": false
             }
           ],
-          "evolutions": [],
           "details": {
             "gender": null,
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": []
         },
         {
-          "name": "slowking",
-          "uuid": "Compendium.ptr2e.core-species.Item.4kbbBdYGuE2kgBMQ",
+          "name": "galarian-slowking",
+          "uuid": "Compendium.ptr2e.core-species.Item.Cc6SxK2lZcQh4EFL",
           "methods": [
+            {
+              "type": "level",
+              "level": 37,
+              "operand": "or"
+            },
             {
               "type": "item",
               "item": "galarica-wreath",
@@ -500,13 +608,13 @@
               "held": false
             }
           ],
-          "evolutions": [],
           "details": {
             "gender": null,
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": []
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.qIlDyPzO4Ui5vqNX"
@@ -523,11 +631,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.qIlDyPzO4Ui5vqNX",
     "duplicateSource": null

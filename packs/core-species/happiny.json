@@ -46,24 +46,136 @@
         "self-sufficient"
       ]
     },
-    "skills": {
-      "acrobatics": 15,
-      "climb": 15,
-      "conversation": 30,
-      "resources": 20,
-      "husbandry": 35,
-      "lift": 15,
-      "listen": 20,
-      "medicine": 40,
-      "natural-world": 25,
-      "negotiation": 30,
-      "psychology": 30,
-      "research": 35,
-      "running": 30,
-      "spot": 20,
-      "survival": 15,
-      "teaching": 20
-    },
+    "skills": [
+      {
+        "slug": "acrobatics",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "climb",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "conversation",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "husbandry",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "medicine",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "natural-world",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiation",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "psychology",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "research",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "resources",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "teaching",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 100,
@@ -485,32 +597,17 @@
     ],
     "genderRatio": 8,
     "evolutions": {
-      "name": "happiny",
+      "name": "rhyhorn",
       "details": null,
       "evolutions": [
         {
-          "name": "chansey",
-          "uuid": "Compendium.ptr2e.core-species.Item.inXVND6bfUdY5ksv",
+          "name": "rhydon",
+          "uuid": "Compendium.ptr2e.core-species.Item.7bhWOgrX8BaFk8T2",
           "methods": [
             {
-              "type": "item",
-              "item": "oval-stone",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [
-            {
-              "name": "blissey",
-              "uuid": "Compendium.ptr2e.core-species.Item.bWrd2kY80xae5vQY",
-              "methods": [],
-              "evolutions": [],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              }
+              "type": "level",
+              "level": 42,
+              "operand": "and"
             }
           ],
           "details": {
@@ -518,10 +615,36 @@
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": [
+            {
+              "name": "rhyperior",
+              "uuid": "Compendium.ptr2e.core-species.Item.vh6LElnAS6Yep8QZ",
+              "methods": [
+                {
+                  "type": "item",
+                  "item": "protector",
+                  "operand": "or",
+                  "held": false
+                },
+                {
+                  "type": "level",
+                  "level": 50,
+                  "operand": "or"
+                }
+              ],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
+              },
+              "evolutions": []
+            }
+          ]
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.EwWHSoOg3MZwbISa"
+      "uuid": "Compendium.ptr2e.core-species.Item.sMeP7oy9e1Xoo1YL"
     }
   },
   "_id": "EwWHSoOg3MZwbISa",
@@ -535,11 +658,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.EwWHSoOg3MZwbISa",
     "duplicateSource": null

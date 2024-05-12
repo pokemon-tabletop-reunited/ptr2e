@@ -1,4 +1,4 @@
-<section class="party">
+<section class="party{{#unless party}} hidden{{/unless}}">
     {{#unless isOwner}}
         {{#if party.owner}}
             <div class="party-header">

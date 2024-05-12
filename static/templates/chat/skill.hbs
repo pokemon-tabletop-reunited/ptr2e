@@ -1,0 +1,9 @@
+<header>
+    <div class="icon">
+        <img src="{{actor.img}}" alt="{{actor.name}}">
+    </div>
+    <h3>{{actor.name}}'s {{#if label}}{{label}}{{else}}{{formatSlug skill.slug}} Check{{/if}}</h3>
+</header>
+<main>
+    {{{rollHTML}}}
+</main>

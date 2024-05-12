@@ -28,7 +28,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
             super.prepareBaseData();
 
             this._traits = [];
-            this.traits = this._source.traits.reduce((acc: Map<string, Trait>, traitSlug: string) => {
+            this.traits = this._source.traits.reduce((acc: Collection<Trait>, traitSlug: string) => {
                 const trait = game.ptr.data.traits.get(traitSlug)
                 if (trait) {
                     acc.set(traitSlug, trait);
@@ -40,7 +40,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
                     acc.set(traitSlug, { label: Handlebars.helpers.formatSlug(traitSlug), description: '', slug: traitSlug, related: []});
                 }
                 return acc;
-            }, new Map());
+            }, new Collection<Trait>());
         }
     }
 
@@ -55,7 +55,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
          * console.log(item.system.traits); // { "light": TraitPTR2e }
          * ```
          */
-        traits: Map<string, Trait>
+        traits: Collection<Trait>
         _traits: Trait[];
     }
 

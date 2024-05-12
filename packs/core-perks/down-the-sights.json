@@ -1,59 +1,79 @@
 {
-    "name": "Down The Sights",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "None"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "mental",
-            "approach": "resilience",
-            "archetype": "Combat"
-        },
-        "description": "You take aim and pay the activation cost. Your next Ranged Move gains +1 Critical Rate Stage.",
-        "actions": [
-            {
-                "name": "Down The Sights",
-                "slug": "down-the-sights",
-                "description": "You take aim and pay the activation cost. Your next Ranged Move gains +1 Critical Rate Stage.",
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 2
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "down-the-sights",
-        "traits": [],
-        "node": {
-            "i": 24,
-            "j": -7,
-            "connected": [
-                "bug-catcher",
-                "dead-to-rights",
-                "root-3",
-                "firefly",
-                "frenzied-assault",
-                "hesitation",
-                "hypnotic-suggestion",
-                "precise-style"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-                "tint": "#ffffff",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Down The Sights",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Combat"
     },
-    "_id": "eHdFNdcyllxflfNA",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You take aim and pay the activation cost. Your next Ranged Move gains +1 Critical Rate Stage.",
+    "actions": [
+      {
+        "name": "Down The Sights",
+        "slug": "down-the-sights",
+        "description": "You take aim and pay the activation cost. Your next Ranged Move gains +1 Critical Rate Stage.",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "down-the-sights",
+    "traits": [],
+    "node": {
+      "i": -44,
+      "j": 90,
+      "connected": [
+        "trained-wielder",
+        "root-5",
+        "rapid-fire-style-1",
+        "false-swipe",
+        "dead-to-rights",
+        "dead-eye",
+        "precise-style"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "eHdFNdcyllxflfNA",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.eHdFNdcyllxflfNA"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922230678,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!eHdFNdcyllxflfNA"
 }

@@ -52,22 +52,120 @@
         "celebration"
       ]
     },
-    "skills": {
-      "acrobatics": 35,
-      "conversation": 45,
-      "intimidate": 40,
-      "leadership": 35,
-      "lift": 35,
-      "listen": 40,
-      "natural-world": 40,
-      "negotiation": 40,
-      "ride": 35,
-      "running": 45,
-      "spot": 40,
-      "stealth": 20,
-      "survival": 50,
-      "swim": 25
-    },
+    "skills": [
+      {
+        "slug": "acrobatics",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "conversation",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "intimidate",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "leadership",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "natural-world",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiation",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "ride",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 65,
@@ -643,44 +741,6 @@
       "details": null,
       "evolutions": [
         {
-          "name": "vaporeon",
-          "uuid": "Compendium.ptr2e.core-species.Item.hVY20AdfvLPcJxz7",
-          "methods": [
-            {
-              "type": "item",
-              "item": "water-stone",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
-        {
-          "name": "jolteon",
-          "uuid": "Compendium.ptr2e.core-species.Item.z48oPxYxbtuBFYYF",
-          "methods": [
-            {
-              "type": "item",
-              "item": "thunder-stone",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
-        {
           "name": "flareon",
           "uuid": "Compendium.ptr2e.core-species.Item.mRkJYO7Gqg8xNfPl",
           "methods": [
@@ -689,89 +749,20 @@
               "item": "fire-stone",
               "operand": "or",
               "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
-        {
-          "name": "espeon",
-          "uuid": "Compendium.ptr2e.core-species.Item.XblC013bmcMJBqoR",
-          "methods": [],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
-        {
-          "name": "umbreon",
-          "uuid": "Compendium.ptr2e.core-species.Item.as0m2VUV7NgVVPaA",
-          "methods": [],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
-        {
-          "name": "leafeon",
-          "uuid": "Compendium.ptr2e.core-species.Item.xS4Zmx2OG1yQu3df",
-          "methods": [
+            },
             {
-              "type": "item",
-              "item": "leaf-stone",
-              "operand": "or",
-              "held": false
+              "type": "level",
+              "level": 25,
+              "operand": "or"
             }
           ],
-          "evolutions": [],
           "details": {
             "gender": null,
             "item": null,
             "level": null,
             "knownMove": null
-          }
-        },
-        {
-          "name": "glaceon",
-          "uuid": "Compendium.ptr2e.core-species.Item.t6PwxXiIe85TOJjZ",
-          "methods": [
-            {
-              "type": "item",
-              "item": "ice-stone",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
-        {
-          "name": "sylveon",
-          "uuid": "Compendium.ptr2e.core-species.Item.2pVuK1e9OzaaUX91",
-          "methods": [],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
+          },
+          "evolutions": []
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.mRkJYO7Gqg8xNfPl"
@@ -788,11 +779,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.mRkJYO7Gqg8xNfPl",
     "duplicateSource": null

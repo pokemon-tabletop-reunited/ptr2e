@@ -60,24 +60,136 @@
         "super-luck"
       ]
     },
-    "skills": {
-      "acrobatics": 20,
-      "aura-sense": 40,
-      "climb": 30,
-      "conversation": 50,
-      "fast-talk": 50,
-      "lift": 40,
-      "listen": 60,
-      "medicine": 50,
-      "natural-world": 50,
-      "negotiate": 45,
-      "running": 20,
-      "spot": 60,
-      "stealth": 40,
-      "survival": 45,
-      "swim": 60,
-      "teaching": 30
-    },
+    "skills": [
+      {
+        "slug": "acrobatics",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "aura-sense",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "climb",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "conversation",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "fast-talk",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "medicine",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "natural-world",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiate",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "teaching",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 95,
@@ -612,32 +724,18 @@
     ],
     "genderRatio": 4,
     "evolutions": {
-      "name": "slowpoke",
+      "name": "galarian-slowpoke",
       "details": null,
       "evolutions": [
         {
-          "name": "slowbro",
-          "uuid": "Compendium.ptr2e.core-species.Item.V0JLTpFpHzqHiom5",
+          "name": "galarian-slowking",
+          "uuid": "Compendium.ptr2e.core-species.Item.Cc6SxK2lZcQh4EFL",
           "methods": [
             {
-              "type": "item",
-              "item": "galarica-cuff",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
-        {
-          "name": "slowking",
-          "uuid": "Compendium.ptr2e.core-species.Item.4kbbBdYGuE2kgBMQ",
-          "methods": [
+              "type": "level",
+              "level": 37,
+              "operand": "or"
+            },
             {
               "type": "item",
               "item": "galarica-wreath",
@@ -645,16 +743,16 @@
               "held": false
             }
           ],
-          "evolutions": [],
           "details": {
             "gender": null,
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": []
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.Cc6SxK2lZcQh4EFL"
+      "uuid": "Compendium.ptr2e.core-species.Item.qIlDyPzO4Ui5vqNX"
     }
   },
   "_id": "Cc6SxK2lZcQh4EFL",
@@ -668,11 +766,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.Cc6SxK2lZcQh4EFL",
     "duplicateSource": null

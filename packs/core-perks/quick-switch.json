@@ -1,56 +1,74 @@
 {
-    "name": "Quick Switch",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Trainer]"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "mental",
-            "approach": "finesse",
-            "archetype": "Juggler"
-        },
-        "description": "Quick Switch changes a Switch from a Complex Action to a Simple Action at the cost of 2PP.",
-        "actions": [
-            {
-                "name": "Quick Switch",
-                "slug": "quick-switch",
-                "description": "Quick Switch changes a Switch from a Complex Action to a Simple Action at the cost of 2PP.",
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 2
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "quick-switch",
-        "traits": [],
-        "node": {
-            "i": 21,
-            "j": 29,
-            "connected": [
-                "gemcutter",
-                "agile-style",
-                "fiendish-provocation",
-                "cheerleader",
-                "root-4"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#ff8000",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
-                "tint": "#151515",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Quick Switch",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Trainer]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "Juggler"
     },
-    "_id": "kGNc0h7Xs3dmXRjt",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "Quick Switch changes a Switch from a Complex Action to a Simple Action at the cost of 2PP.",
+    "actions": [
+      {
+        "name": "Quick Switch",
+        "slug": "quick-switch",
+        "description": "Quick Switch changes a Switch from a Complex Action to a Simple Action at the cost of 2PP.",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "quick-switch",
+    "traits": [],
+    "node": {
+      "i": 23,
+      "j": -41,
+      "connected": [
+        "tactician",
+        "rapid-style"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ff8000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
+        "tint": "#151515",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "kGNc0h7Xs3dmXRjt",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.kGNc0h7Xs3dmXRjt"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922330335,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!kGNc0h7Xs3dmXRjt"
 }

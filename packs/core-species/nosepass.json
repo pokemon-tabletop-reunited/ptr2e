@@ -47,21 +47,112 @@
         "sand-veil"
       ]
     },
-    "skills": {
-      "acrobatics": 20,
-      "climb": 40,
-      "conversation": 35,
-      "intimidate": 30,
-      "lift": 40,
-      "listen": 40,
-      "natural-world": 40,
-      "navigate": 50,
-      "negotiation": 30,
-      "running": 20,
-      "spot": 35,
-      "stealth": 40,
-      "survival": 35
-    },
+    "skills": [
+      {
+        "slug": "acrobatics",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "climb",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "conversation",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "intimidate",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "natural-world",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "navigate",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiation",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 30,
@@ -584,17 +675,29 @@
         {
           "name": "probopass",
           "uuid": "Compendium.ptr2e.core-species.Item.OvuheXW3kzsWBBQ5",
-          "methods": [],
-          "evolutions": [],
+          "methods": [
+            {
+              "type": "level",
+              "level": 31,
+              "operand": "or"
+            },
+            {
+              "type": "item",
+              "item": "thunder-stone",
+              "operand": "or",
+              "held": false
+            }
+          ],
           "details": {
             "gender": null,
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": []
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.peKbrlieq04FwOaq"
+      "uuid": "Compendium.ptr2e.core-species.Item.OvuheXW3kzsWBBQ5"
     }
   },
   "_id": "peKbrlieq04FwOaq",
@@ -608,11 +711,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.peKbrlieq04FwOaq",
     "duplicateSource": null

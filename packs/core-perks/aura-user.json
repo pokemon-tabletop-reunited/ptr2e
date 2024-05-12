@@ -1,54 +1,79 @@
 {
-    "name": "Aura User",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Aura Sense 20"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "mental",
-            "approach": "resilience",
-            "archetype": "Aura"
-        },
-        "description": "You gain [Aura User].",
-        "actions": [
-            {
-                "name": "Aura User",
-                "slug": "aura-user",
-                "description": "You gain [Aura User].",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "aura-user",
-        "traits": [],
-        "node": {
-            "i": -10,
-            "j": -9,
-            "connected": [
-                "aura-projection",
-                "aura-haze",
-                "root-1",
-                "aura-channeling"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#bcf0d8",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-                "tint": "#18af68",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Aura User",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Aura Sense 20"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Aura"
     },
-    "_id": "ft8sIBRLOGVjp70g",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You gain [Aura User].",
+    "actions": [
+      {
+        "name": "Aura User",
+        "slug": "aura-user",
+        "description": "You gain [Aura User].",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "aura-user",
+    "traits": [],
+    "node": {
+      "i": 15,
+      "j": -79,
+      "connected": [
+        "root-2",
+        "aura-haze",
+        "freeclimber",
+        "evasive-style",
+        "shielding-aura",
+        "aura-empathy",
+        "aura-dampening",
+        "keep-fighting"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#bcf0d8",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+        "tint": "#18af68",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "ft8sIBRLOGVjp70g",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.ft8sIBRLOGVjp70g"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714920845077,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!ft8sIBRLOGVjp70g"
 }

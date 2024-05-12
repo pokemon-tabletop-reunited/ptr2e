@@ -47,19 +47,96 @@
         "soul-eater"
       ]
     },
-    "skills": {
-      "conversation": 15,
-      "lift": 15,
-      "listen": 20,
-      "natural-world": 10,
-      "navigate": 15,
-      "running": 15,
-      "spot": 20,
-      "stealth": 20,
-      "survival": 25,
-      "history": 35,
-      "occult-ghost": 25
-    },
+    "skills": [
+      {
+        "slug": "conversation",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "history",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "natural-world",
+        "value": 10,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "navigate",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "occult-ghost",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
+        "slug": "running",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 45,
@@ -386,6 +463,12 @@
               "operand": "and"
             }
           ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          },
           "evolutions": [
             {
               "name": "aegislash",
@@ -396,26 +479,25 @@
                   "item": "dusk-stone",
                   "operand": "or",
                   "held": false
+                },
+                {
+                  "type": "level",
+                  "level": 45,
+                  "operand": "or"
                 }
               ],
-              "evolutions": [],
               "details": {
                 "gender": null,
                 "item": null,
                 "level": null,
                 "knownMove": null
-              }
+              },
+              "evolutions": []
             }
-          ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
+          ]
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.tPERYPJLMNt5aub6"
+      "uuid": "Compendium.ptr2e.core-species.Item.JPS7YzHXVVQaHta6"
     }
   },
   "_id": "tPERYPJLMNt5aub6",
@@ -432,11 +514,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712327701027,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.tPERYPJLMNt5aub6",
     "duplicateSource": null

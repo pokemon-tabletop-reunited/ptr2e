@@ -53,16 +53,72 @@
         "chlorophyll"
       ]
     },
-    "skills": {
-      "conversation": 55,
-      "electronics": 45,
-      "intimidate": 30,
-      "listen": 45,
-      "negotiation": 50,
-      "running": 50,
-      "spot": 45,
-      "stealth": 65
-    },
+    "skills": [
+      {
+        "slug": "conversation",
+        "value": 55,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "electronics",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "intimidate",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiation",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 65,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 60,
@@ -340,29 +396,47 @@
       "mineral"
     ],
     "evolutions": {
-      "name": "voltorb",
+      "name": "hisuian-voltorb",
       "details": null,
       "evolutions": [
         {
-          "name": "electrode",
-          "uuid": "Compendium.ptr2e.core-species.Item.L8gG9hUvDkv3rm0v",
+          "name": "hisuian-electrode",
+          "uuid": "Compendium.ptr2e.core-species.Item.G7WUIrl97y7Mss9b",
           "methods": [
             {
               "type": "level",
               "level": 30,
-              "operand": "and"
+              "operand": "or"
+            },
+            {
+              "type": "item",
+              "item": "leaf-stone",
+              "operand": "or",
+              "held": false
             }
           ],
-          "evolutions": [],
           "details": {
             "gender": null,
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": []
+        },
+        {
+          "name": "hisuian-electrode",
+          "uuid": "Compendium.ptr2e.core-species.Item.G7WUIrl97y7Mss9b",
+          "methods": [],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          },
+          "evolutions": []
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.G7WUIrl97y7Mss9b"
+      "uuid": "Compendium.ptr2e.core-species.Item.c3Ux4RF5z1C0NbVs"
     }
   },
   "_id": "G7WUIrl97y7Mss9b",
@@ -376,11 +450,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.G7WUIrl97y7Mss9b",
     "duplicateSource": null

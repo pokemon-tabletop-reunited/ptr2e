@@ -1,60 +1,74 @@
 {
-    "name": "Firefly",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Fire]"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "physical",
-            "approach": "resilience",
-            "archetype": "[Fire Type]"
-        },
-        "description": "You may choose to emit light at a range of 3m Bright, 9m Dim.",
-        "actions": [
-            {
-                "name": "Firefly",
-                "slug": "firefly",
-                "description": "You may choose to emit light at a range of 3m Bright, 9m Dim.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "firefly",
-        "traits": [],
-        "node": {
-            "i": 3,
-            "j": 2,
-            "connected": [
-                "root-1",
-                "dead-to-rights",
-                "dead-eye",
-                "down-the-sights",
-                "fisherman",
-                "frenzied-assault",
-                "hypnotic-suggestion",
-                "keep-fighting",
-                "potent-venom",
-                "snare"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/fire_icon.png",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Firefly",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Fire]"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "[Fire Type]"
     },
-    "_id": "LPWul8LmZhwp1FbR",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You may choose to emit light at a range of 3m Bright, 9m Dim.",
+    "actions": [
+      {
+        "name": "Firefly",
+        "slug": "firefly",
+        "description": "You may choose to emit light at a range of 3m Bright, 9m Dim.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "firefly",
+    "traits": [],
+    "node": {
+      "i": 12,
+      "j": 43,
+      "connected": [
+        "intense-heat",
+        "inner-warmth",
+        "root-4"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/fire_icon.png",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "LPWul8LmZhwp1FbR",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.LPWul8LmZhwp1FbR"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714921533500,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!LPWul8LmZhwp1FbR"
 }

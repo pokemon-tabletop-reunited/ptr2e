@@ -1,9 +1,10 @@
 import { TemplateConstructor } from './data-template.ts';
-import { MappedArrayField } from '../fields/mapped-array-field.ts';
+// import { MappedArrayField } from '../fields/mapped-array-field.ts';
 import { ActionPTR2e } from '@data';
 import { ActionModelTypes } from '../models/base.ts';
 import { ActorPTR2e } from '@actor';
 import { ItemPTR2e } from '@item';
+import { CollectionField } from '../fields/collection-field.ts';
 
 /**
  * Adds actions property to target data model.
@@ -11,17 +12,8 @@ import { ItemPTR2e } from '@item';
  */
 export default function HasActions<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
 	abstract class TemplateClass extends baseClass {
-        
-        /**
-         * A record of actions that the item has.
-         * @remarks
-         * This is a record of actions that the item has, keyed by the action's slug.
-         * @see {@link ActionPTR2e}
-         */
-        abstract actions: Map<string, ActionPTR2e>
-
         declare _source: InstanceType<typeof baseClass>['_source'] & {
-            actions: ActionPTR2e[];
+            actions: ActionPTR2e['_source'][];
         }
 
 		static override defineSchema(): foundry.data.fields.DataSchema {
@@ -29,7 +21,8 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
 
 			return {
 				...super.defineSchema(),
-				actions: new MappedArrayField('slug', new fields.TypedSchemaField(ActionModelTypes()))
+                actions: new CollectionField(new fields.TypedSchemaField(ActionModelTypes()), 'slug')
+				// actions: new MappedArrayField('slug', new fields.TypedSchemaField(ActionModelTypes()))
 			};
 		}
 
@@ -42,14 +35,10 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
             
             if(!this._isValidParent(this.parent)) return;
 
-            const actions = this.parent.actions;
-            for(const action of this.actions.values()) {
-                if(actions[action.type].has(action.slug)) {
-                    console.warn(`Duplicate action found in Item ${this.parent.id}: ${action.slug}`);
-                    continue;
-                }
+            for(const action of this.actions) {
+                if(this.parent.actions.has(action.slug)) continue;
                 action.prepareDerivedData();
-                actions[action.type].set(action.slug, action);
+                this.parent.actions.set(action.slug, action);
             }
         }
 
@@ -60,6 +49,16 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
             );
         }
 	}
+
+    interface TemplateClass {
+        /**
+         * A record of actions that the item has.
+         * @remarks
+         * This is a record of actions that the item has, keyed by the action's slug.
+         * @see {@link ActionPTR2e}
+         */
+        actions: Collection<ActionPTR2e>;
+    }
 
 	return TemplateClass;
 }

@@ -1,56 +1,75 @@
 {
-    "name": "Groomer",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Husbandry 30"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "social",
-            "approach": "power",
-            "archetype": "Coordinator"
-        },
-        "description": "You are a capable Pokemon Groomer. Maybe even good enough to go professional. You may take the Groom camp action, awarding the party +10 to Perform, Conversation and Negotiation skill checks for the next day.",
-        "actions": [
-            {
-                "name": "Groomer",
-                "slug": "groomer",
-                "description": "You are a capable Pokemon Groomer. Maybe even good enough to go professional. You may take the Groom camp action, awarding the party +10 to Perform, Conversation and Negotiation skill checks for the next day.",
-                "cost": {
-                    "activation": "complex"
-                },
-                "type": "camping",
-                "traits": []
-            }
-        ],
-        "slug": "groomer",
-        "traits": [],
-        "node": {
-            "i": 0,
-            "j": -12,
-            "connected": [
-                "root-1",
-                "beastmaster",
-                "breeder",
-                "mobilize",
-                "nurturing-shoots",
-                "walking-dead"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#e0c2ff",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Coordinator.svg",
-                "tint": "#7114bd",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Groomer",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Husbandry 30"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "Coordinator"
     },
-    "_id": "p3pjnE4oCajU1TZQ",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You are a capable Pokemon Groomer. Maybe even good enough to go professional. You may take the Groom camp action, awarding the party +10 to Perform, Conversation and Negotiation skill checks for the next day.",
+    "actions": [
+      {
+        "name": "Groomer",
+        "slug": "groomer",
+        "description": "You are a capable Pokemon Groomer. Maybe even good enough to go professional. You may take the Groom camp action, awarding the party +10 to Perform, Conversation and Negotiation skill checks for the next day.",
+        "cost": {
+          "activation": "complex"
+        },
+        "type": "camping",
+        "traits": []
+      }
+    ],
+    "slug": "groomer",
+    "traits": [],
+    "node": {
+      "i": -31,
+      "j": -46,
+      "connected": [
+        "breeder",
+        "root-1",
+        "underdogs-spirit-1",
+        "agile-style"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#e0c2ff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Coordinator.svg",
+        "tint": "#7114bd",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "p3pjnE4oCajU1TZQ",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.p3pjnE4oCajU1TZQ"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714920307010,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!p3pjnE4oCajU1TZQ"
 }

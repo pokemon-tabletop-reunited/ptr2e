@@ -1,56 +1,74 @@
 {
-    "name": "Potent Venom",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Poison]"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "physical",
-            "approach": "resilience",
-            "archetype": "[Poison Type]"
-        },
-        "description": "You increase the effect range of Poison effects by 10%. Additionally, your Struggle and Weapon attacks gain a 20% Poison Effect Range.",
-        "actions": [
-            {
-                "name": "Potent Venom",
-                "slug": "potent-venom",
-                "description": "You increase the effect range of Poison effects by 10%. Additionally, your Struggle and Weapon attacks gain a 20% Poison Effect Range.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "potent-venom",
-        "traits": [],
-        "node": {
-            "i": 3,
-            "j": 6,
-            "connected": [
-                "firefly",
-                "fisherman",
-                "keep-fighting",
-                "one-with-the-green",
-                "screen-setter",
-                "unreasonable"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/poison_icon.png",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Potent Venom",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Poison]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "[Poison Type]"
     },
-    "_id": "TaUuAKRcosusMkC9",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You increase the effect range of Poison effects by 10%. Additionally, your Struggle and Weapon attacks gain a 20% Poison Effect Range.",
+    "actions": [
+      {
+        "name": "Potent Venom",
+        "slug": "potent-venom",
+        "description": "You increase the effect range of Poison effects by 10%. Additionally, your Struggle and Weapon attacks gain a 20% Poison Effect Range.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "potent-venom",
+    "traits": [],
+    "node": {
+      "i": -66,
+      "j": 8,
+      "connected": [
+        "venomous",
+        "one-with-the-green",
+        "improved-overland-4"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/poison_icon.png",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "TaUuAKRcosusMkC9",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.TaUuAKRcosusMkC9"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922119266,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!TaUuAKRcosusMkC9"
 }

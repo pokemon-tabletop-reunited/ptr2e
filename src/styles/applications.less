@@ -73,6 +73,7 @@ body {
     }
 
     &.actor.v2 {
+        min-width: 700px;
         background: var(--appv2-background);
 
         .window-content {
@@ -230,6 +231,14 @@ body {
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
                 grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+                overflow: hidden;
+                height: 100%;
+
+                .scroll {
+                    height: 100%;
+                    overflow-y: auto;
+                    overflow-x: hidden;
+                }
 
                 fieldset {
                     padding: 1rem;
@@ -383,6 +392,248 @@ body {
                     }
                 }
 
+                &[data-tab="actions"] {
+                    display: grid;
+                    grid-template-areas: 
+                        "subnav"
+                        "body";
+                    grid-template-columns: unset;
+                    grid-template-rows: 30px auto;
+
+                    nav.sub-tabs {
+                        grid-area: subnav;
+
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: space-evenly;
+                        font-size: 16px;
+                        
+                        a label {
+                            margin-left: 5px;
+                        }
+                    }
+
+                    section.active {
+                        grid-area: body;
+                        display: grid;
+                        grid-template-columns: 1fr 1fr 12px 1fr 1fr;
+                        grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+                        padding: 0.5rem;
+                        overflow: hidden;
+
+                        div.attacks {
+                            grid-area: span 5 / span 2;
+                            padding: 0;
+
+                            fieldset {
+                                margin-bottom: unset;
+
+                                &.slots {
+                                    position: relative;
+                                    height: min-content;
+                                }
+
+                                .edit-movelist {
+                                    position: absolute;
+                                    right: -2px;
+                                    top: -10px;
+                                    padding: 3px 5px;
+                                    background: var(--appv2-background);
+                                    border: 2px groove var(--border-theme-color);
+                                    border-radius: 0 8px 0 4px;
+                                }
+                            }
+                        }
+                        fieldset {
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+
+                            &.generic, &.attacks, &.camping {
+                                grid-area: span 5 / span 2;
+                            }
+                            &.exploration, &.passives, &.downtime {
+                                grid-area: 1 / 4 / 6 / 6;
+                            }
+
+                            // .slots {
+                            //     display: flex;
+                            //     flex-direction: column;
+                            //     flex-wrap: nowrap;
+                            //     gap: 0.5rem;
+                            //     border-bottom: 1px solid var(--border-theme-color);
+                            // }
+
+                            .action {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                
+                                .action-icon {
+                                    flex: 0 0 28px;
+                                    height: 28px;
+                                    width: 28px;
+                                    .dice {
+                                        display: none;
+                                    }
+                                    &.rollable {
+                                        cursor: pointer;
+
+                                        &:hover {
+                                            .icon {
+                                                display: none;
+                                            }
+                                            .dice {
+                                                display: block;
+                                            }
+                                        }
+                                    }
+                                }
+                                .action-name {
+                                    flex-grow: 1;
+                                    margin: 0 0.25rem;
+                                }
+                                .action-controls {
+                                    flex: 0 0 60px;
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: flex-end;
+                                    align-items: center;
+                                    margin-left: auto;
+                                    gap: 5px;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                &[data-tab="skills"], &[data-tab="overview"] {
+                    .skill-component {
+                        grid-area: span 5 / span 3;
+                        padding: 0.5rem;
+
+                        .scroll {
+                            overflow-y: auto;
+                            overflow-x: hidden;
+                            height: 100%;
+                            gap: 0;
+                        }
+
+                        .skills {
+                            .skill-list {
+                                display: flex;
+                                flex-direction: column;
+                                height: 100%;
+                                padding: 0;
+
+                                .skill-group {
+                                    height: unset;
+                                    display: flex;
+                                    flex-direction: column;
+                                    flex-wrap: nowrap;
+
+                                    &.hidden-skill .skill-group-label {
+                                        filter: opacity(0.7);
+                                    }
+
+                                    .skill-group-label {
+                                        margin-left: calc(16px + 0.25rem);
+                                        border-bottom: 1px solid var(--border-theme-color);
+                                        padding: 4px 0;
+                                        font-weight: bold;
+                                    }
+                                    
+                                    .skill {
+                                        padding-left: unset;
+                                        margin-left: calc(16px + 0.25rem);
+                                    }    
+                                }
+    
+                                .skill {
+                                    display: flex;
+                                    flex-direction: row;
+                                    align-items: center;
+                                    padding: 4px 0;
+    
+                                    border-bottom: 1px solid var(--border-theme-color);
+
+                                    
+                                    .skill-icon {
+                                        flex: 0 0 16px;
+                                        height: 16px;
+                                        width: 16px;
+                                        cursor: pointer;
+                                        img {
+                                            border:unset;
+                                            filter: invert(1);
+                                        }
+                                    }
+    
+                                    .skill-name {
+                                        flex-grow: 1;
+                                        margin: 0 0.25rem;
+                                    }
+    
+                                    .skill-total {
+                                        flex: 0 0 80px;
+                                        text-align: center;
+                                    }
+    
+                                    .skill-controls {
+                                        flex: 0 0 60px;
+                                        display: flex;
+                                        flex-direction: row;
+                                        justify-content: flex-end;
+                                        align-items: center;
+                                        margin-left: auto;
+                                        gap: 5px;
+
+                                        .item-control {
+                                            flex: 0 0 18px;
+                                        }
+                                    }
+    
+                                    &.favourite {
+                                        filter: brightness(1.5);
+                                        // &:not(:has(~ .favourite)) {
+                                        //     border-bottom: 2px solid var(--border-theme-color);
+                                        // }
+                                    }
+                                    
+                                    &.hidden-skill {
+                                        filter: opacity(0.7);
+                                    }
+
+                                    // &:has(+ .hidden-skill):not(.hidden-skill) {
+                                    //     border-bottom: 2px solid var(--border-theme-color);
+                                    // }
+                                }
+                                .divider {
+                                    margin-top: 0.75rem;
+                                }
+                                header.skill {
+                                    border-bottom-width: 2px;
+                                    font-weight: bold;
+                                }
+                            }
+                        }
+                    }
+
+                    .skill-options {
+                        grid-area: 1 / 4 / 2 / 6;
+
+                        padding: 0.5rem;
+                    }
+                }
+
+                &[data-tab="overview"] {
+                    .skill-component {
+                        grid-area: span 3 / span 2;
+
+                        
+                    }
+                }
+
                 .effects-display {
                     padding: 0.5rem;
 
@@ -471,6 +722,117 @@ body {
             }
         }
 
+        .skill-component {
+            min-width: 290px;
+            padding: 0.5rem;
+
+            .scroll {
+                overflow-y: auto;
+                overflow-x: hidden;
+                height: 100%;
+                gap: 0;
+            }
+
+            .skills {
+                .skill-list {
+                    display: flex;
+                    flex-direction: column;
+                    height: 100%;
+                    padding: 0;
+
+                    .skill-group {
+                        height: unset;
+                        display: flex;
+                        flex-direction: column;
+                        flex-wrap: nowrap;
+
+                        &.hidden-skill .skill-group-label {
+                            filter: opacity(0.7);
+                        }
+
+                        .skill-group-label {
+                            margin-left: calc(16px + 0.25rem);
+                            border-bottom: 1px solid var(--border-theme-color);
+                            padding: 4px 0;
+                            font-weight: bold;
+                        }
+                        
+                        .skill {
+                            padding-left: unset;
+                            margin-left: calc(16px + 0.25rem);
+                        }    
+                    }
+
+                    .skill {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        padding: 4px 0;
+
+                        border-bottom: 1px solid var(--border-theme-color);
+
+                        
+                        .skill-icon {
+                            flex: 0 0 16px;
+                            height: 16px;
+                            width: 16px;
+                            cursor: pointer;
+                            img {
+                                border:unset;
+                                filter: invert(1);
+                            }
+                        }
+
+                        .skill-name {
+                            flex-grow: 1;
+                            margin: 0 0.25rem;
+                        }
+
+                        .skill-total {
+                            flex: 0 0 80px;
+                            text-align: center;
+                        }
+
+                        .skill-controls {
+                            flex: 0 0 60px;
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: flex-end;
+                            align-items: center;
+                            margin-left: auto;
+                            gap: 5px;
+
+                            .item-control {
+                                flex: 0 0 18px;
+                            }
+                        }
+
+                        &.favourite {
+                            filter: brightness(1.5);
+                            // &:not(:has(~ .favourite)) {
+                            //     border-bottom: 2px solid var(--border-theme-color);
+                            // }
+                        }
+                        
+                        &.hidden-skill {
+                            filter: opacity(0.7);
+                        }
+
+                        // &:has(+ .hidden-skill):not(.hidden-skill) {
+                        //     border-bottom: 2px solid var(--border-theme-color);
+                        // }
+                    }
+                    .divider {
+                        margin-top: 0.75rem;
+                    }
+                    header.skill {
+                        border-bottom-width: 2px;
+                        font-weight: bold;
+                    }
+                }
+            }
+        }
+
         fieldset {
             padding: 1rem;
             display: flex;
@@ -493,6 +855,8 @@ body {
     }
 
     &#perk-hud-base,
+    &.known-actions-sheet,
+    &.action-sheet,
     &.move-sheet,
     &.species-sheet,
     &.party-sheet,
@@ -706,43 +1070,42 @@ body {
                 }
 
                 &[data-tab=actions].active {
-                    height: 100%;
-
-                    display: flex;
-                    flex-direction: column;
-
-                    padding: 0.25rem 1rem 1rem 1rem;
-
                     .actions {
-                        flex: 0 0 50%;
-                        margin: 0.25rem;
-
                         display: flex;
                         flex-direction: column;
 
-                        header {
-                            display: flex;
-                            flex-direction: row;
-                            justify-content: space-between;
-                            padding: 0.25rem;
-                            border-bottom: 1px solid #fefefe;
-
-                            .action-name {
-                                font-size: 18px;
-                            }
-                        }
-
-                        content {
+                        .actions-list {
                             display: flex;
                             flex-direction: column;
+                            gap: 0.5rem;
+                        }
 
-                            .action {
+                        .actions-header {
+                            font-weight: bold;
+                            margin-bottom: 0.5rem;
+                            border-bottom: 1px solid var(--border-theme-color);
+                        }
+                        
+                        .actions-header, .actions-list .action {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: center;
+                            padding: 0.25rem;
+
+                            .action-name {
+                                flex: 0 0 30%;
+                            }
+                            .action-type {
+                                flex: 0 0 30%;
+                            }
+                            .item-controls {
+                                flex: 0 0 60px;
                                 display: flex;
                                 flex-direction: row;
-                                justify-content: space-between;
-                                padding: 0.25rem;
-                                margin: 0.5rem 0;
-
+                                justify-content: flex-end;
+                                align-items: center;
+                                margin-left: auto;
+                                gap: 5px;
                             }
                         }
                     }
@@ -814,6 +1177,105 @@ body {
 
         textarea {
             resize: vertical;
+        }
+    }
+
+    &.known-actions-sheet {
+        .info-tooltip {
+            &:hover, &:focus {
+                box-shadow: unset;
+                outline: unset;
+            }
+            cursor: help;
+        }
+
+        .window-content {
+            display: block;
+        }
+
+        article.known-attacks {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 0.25rem;
+
+            .action {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 4px 0;
+
+                border-bottom: 1px solid var(--border-theme-color);
+
+                &:last-child {
+                    border-bottom: unset;
+                }
+                
+                .action-icon {
+                    flex: 0 0 28px;
+                    height: 28px;
+                    width: 28px;
+                    .dice {
+                        display: none;
+                    }
+                    &.rollable {
+                        cursor: pointer;
+
+                        &:hover {
+                            .icon {
+                                display: none;
+                            }
+                            .dice {
+                                display: block;
+                            }
+                        }
+                    }
+                    img {
+                        border:unset;
+                    }
+                }
+                .action-name {
+                    flex-grow: 1;
+                    margin: 0 0.25rem;
+                }
+                .action-controls {
+                    flex: 0 0 60px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    align-items: center;
+                    margin-left: auto;
+                    gap: 5px;
+                }
+            }
+        }
+    }
+
+    &.action-sheet {
+        .window-content {
+            grid-template-columns: unset;
+            grid-template-areas:
+                "header"
+                "traits"
+                "main";
+
+            header.sheet-header {
+                gap: 10px;
+            }
+
+            section.action {
+                grid-area: main;
+                overflow: hidden;
+
+                .scroll {
+                    padding: 1rem;
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+                    height: 100%;
+                }
+            }
         }
     }
 
@@ -2273,6 +2735,10 @@ body {
         display: none !important;
     }
 
+    .hidden {
+        display: none !important;
+    }
+
     nav.tabs {
         order: 3;
         flex-direction: column;
@@ -2299,20 +2765,19 @@ body {
         bottom: -1px;
         background: var(--appv2-background);
 
-        border-radius: 8px 8px 0 8px;
+        border-radius: 8px 0px 0 8px;
         border: 1px solid var(--border-theme-color);
 
         min-width: 150px;
-        min-height: 110%;
 
-        &[data-tab="attacks"] {
+        &.action-tab, &.skill-tab {
             &.active {
                 display: flex;
                 flex-direction: column;
-                justify-content: space-evenly;
+                justify-content: flex-end;
             }
 
-            .attack-item {
+            .attack-item, .action-item, .skill-item {
                 display: flex;
                 flex-direction: row;
 
@@ -2351,6 +2816,10 @@ body {
                     padding: 0.25rem;
                     min-width: 0;
                     text-overflow: ellipsis;
+
+                    &.small {
+                        padding: 1rem;
+                    }
                 }
 
                 background: var(--appv2-background);
@@ -2361,17 +2830,26 @@ body {
 
                 border-top: 1px solid var(--border-theme-color);
 
-                &:first-child {
+                &:first-child, &:first-child img{
                     border-top: unset;
-
-                    img {
-                        border-radius: 8px 0 0 0;
-                    }
+                    border-radius: 8px 0 0 0;
                 }
 
-                &:last-child {
+                &:last-child, &:last-child img{
+                    border-radius: 0 0 0 8px;
+                }
+            }
+
+            .skill-item {
+                .icon {
+                    filter: invert(1);
+                    height: 28px;
+                    width: 28px;
+                    flex: 0 0 28px;
+
                     img {
-                        border-radius: 0 0 0 8px;
+                        display: unset !important;
+                        margin-top: 2px;
                     }
                 }
             }

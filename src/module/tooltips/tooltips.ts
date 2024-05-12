@@ -85,6 +85,8 @@ export default class TooltipsPTR2e {
                     return this._onContentLinkTooltip();
                 case "damage-info":
                     return this._onDamageInfoTooltip();
+                case "skill":
+                    return this._onSkillTooltip();
             }
         }
 
@@ -118,8 +120,33 @@ export default class TooltipsPTR2e {
         return tooltipTrait ? 1 : 2000;
     }
 
+    async _onSkillTooltip() {
+        const skillSlug = game.tooltip.element?.dataset.slug;
+        if (!skillSlug) return false;
+
+        const skillGroup = game.tooltip.element?.dataset.group;
+        const localizeKey = skillGroup ? `PTR2E.Skills.${skillGroup}.${skillSlug}` : `PTR2E.Skills.${skillSlug}`;
+
+        const localized = game.i18n.localize(`${localizeKey}.hint`);
+        if (localized === `${localizeKey}.hint`) return false;
+
+        this.tooltip.innerHTML = `<h4 class="skill">${game.i18n.localize(`${localizeKey}.label`)}</h4><content>${localized}</content>
+        <div class="progress-circle">
+            <svg width="20" height="20" viewBox="0 0 20 20" class="circular-progress">
+                <circle class="bg"></circle>
+                <circle class="fg"></circle>
+                <circle class="fgb"></circle>
+            </svg>
+        </div>`;
+        const tooltipDirection = game.tooltip.element?.dataset.tooltipDirection as
+            | TooltipDirections
+            | undefined;
+        requestAnimationFrame(() => this._positionTooltip(tooltipDirection));
+        return 2000;
+    }
+
     async _onAttackTooltip() {
-        const attackSlug = game.tooltip.element?.dataset.action;
+        const attackSlug = game.tooltip.element?.dataset.slug;
         if (!attackSlug) return false;
 
         const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
@@ -136,7 +163,7 @@ export default class TooltipsPTR2e {
     }
 
     async #createAttackTooltip(attack: AttackPTR2e) {
-        const traits = attack._traits.map((t) => ({ value: t.slug, label: t.label }));
+        const traits = attack.traits.map((t) => ({ value: t.slug, label: t.label }));
 
         this.tooltip.classList.add("attack");
         await this._renderTooltip({

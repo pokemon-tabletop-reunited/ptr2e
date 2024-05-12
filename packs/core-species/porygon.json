@@ -51,9 +51,16 @@
         "perfectionist"
       ]
     },
-    "skills": {
-      "computers": 40
-    },
+    "skills": [
+      {
+        "slug": "computers",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 65,
@@ -599,8 +606,19 @@
               "item": "up-grade",
               "operand": "or",
               "held": false
+            },
+            {
+              "type": "level",
+              "level": 25,
+              "operand": "or"
             }
           ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          },
           "evolutions": [
             {
               "name": "porygon-z",
@@ -611,26 +629,25 @@
                   "item": "dubious-disc",
                   "operand": "or",
                   "held": false
+                },
+                {
+                  "type": "level",
+                  "level": 35,
+                  "operand": "or"
                 }
               ],
-              "evolutions": [],
               "details": {
                 "gender": null,
                 "item": null,
                 "level": null,
                 "knownMove": null
-              }
+              },
+              "evolutions": []
             }
-          ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
+          ]
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.wi4WJ5XlGJO7eMA9"
+      "uuid": "Compendium.ptr2e.core-species.Item.bfUNgdPtQbCWvOm1"
     }
   },
   "_id": "wi4WJ5XlGJO7eMA9",
@@ -644,11 +661,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.wi4WJ5XlGJO7eMA9",
     "duplicateSource": null

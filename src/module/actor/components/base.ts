@@ -19,6 +19,13 @@ class ActorComponent {
         return html;
     }
 
+    /**
+     * For injecting header buttons and other elements into the frame
+     */
+    renderFrame(_close: HTMLElement) {
+        // Implement in subclass
+    }
+
     attachListeners(_html: HTMLElement) {
         // Implement in subclass
     }

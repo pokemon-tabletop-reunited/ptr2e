@@ -335,7 +335,7 @@ function _registerBasicHelpers() {
 
             const map = context as Map<string, unknown>;
             const j = map.size;
-            for (const [key, value] of map) {
+            for (const [key, value] of (map instanceof Collection ? map.entries() : map)) {
                 execIteration(key, value, i++, i === j);
             }
         } else {

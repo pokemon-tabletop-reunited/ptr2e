@@ -52,20 +52,104 @@
         "soul-link"
       ]
     },
-    "skills": {
-      "acrobatics": 40,
-      "climb": 60,
-      "conversation": 50,
-      "intimidate": 70,
-      "lift": 55,
-      "listen": 50,
-      "negotiation": 45,
-      "occult-ghost": 45,
-      "running": 60,
-      "spot": 60,
-      "stealth": 50,
-      "survival": 60
-    },
+    "skills": [
+      {
+        "slug": "acrobatics",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "climb",
+        "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "conversation",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "intimidate",
+        "value": 70,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 55,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiation",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "occult-ghost",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
+        "slug": "running",
+        "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 73,
@@ -421,24 +505,28 @@
               "operand": "and"
             }
           ],
-          "evolutions": [
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          },
+          "evolutions": []
+        },
+        {
+          "name": "hisuian-typhlosion",
+          "uuid": "Compendium.ptr2e.core-species.Item.rC4Z8rGxMH2XE3xi",
+          "methods": [
             {
-              "name": "typhlosion",
-              "uuid": "Compendium.ptr2e.core-species.Item.bhgvYR3D8Se77vZK",
-              "methods": [
-                {
-                  "type": "level",
-                  "level": 36,
-                  "operand": "and"
-                }
-              ],
-              "evolutions": [],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              }
+              "type": "level",
+              "level": 36,
+              "operand": "or"
+            },
+            {
+              "type": "item",
+              "item": "linking-chord",
+              "operand": "or",
+              "held": false
             }
           ],
           "details": {
@@ -446,10 +534,11 @@
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": []
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.rC4Z8rGxMH2XE3xi"
+      "uuid": "Compendium.ptr2e.core-species.Item.6r9PIDH1IiIKDIhz"
     }
   },
   "_id": "rC4Z8rGxMH2XE3xi",
@@ -463,11 +552,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": 1712230052166,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.rC4Z8rGxMH2XE3xi",
     "duplicateSource": null

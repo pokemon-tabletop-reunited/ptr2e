@@ -52,7 +52,7 @@ interface Stat {
     stage: number
 }
 
-type PTRSkill = ArtSkill | OccultSkill | PerformanceSkill | PilotingSkills | ScienceSkills | "accounting" | "acrobatics" | "appraise" | "archaeology" | "aura-sense" | "climb" | "computers" | "conversation" | "credit-rating" | "disguise" | "electronics" | "engineering" | "fast-talk" | "history" | "husbandry" | "intimidate" | "leadership" | "legal" | "lift" | "listen" | "locksmith" | "mechanics" | "medicine" | "natural-world" | "navigate" | "negotiation" | "psychology" | "read-lips" | "research" | "ride" | "running" | "sleight-of-hand" | "spot-hidden" | "stealth" | "survival" | "swim" | "teaching" | "track" | "luck";
+type PTRSkill = string | ArtSkill | OccultSkill | PerformanceSkill | PilotingSkills | ScienceSkills | "accounting" | "acrobatics" | "appraise" | "archaeology" | "aura-sense" | "climb" | "computers" | "conversation" | "credit-rating" | "disguise" | "electronics" | "engineering" | "fast-talk" | "history" | "husbandry" | "intimidate" | "leadership" | "legal" | "lift" | "listen" | "locksmith" | "mechanics" | "medicine" | "natural-world" | "navigate" | "negotiation" | "psychology" | "read-lips" | "research" | "ride" | "running" | "sleight-of-hand" | "spot-hidden" | "stealth" | "survival" | "swim" | "teaching" | "track" | "luck";
 
 type ArtSkill = "flower-arrangement" | "poetry" | "calligraphy" | "painting" | "songwriting" | "digital-art" | "bonzai";
 type OccultSkill = "psychic" | "ghosts" | "fairies" | "spiritual" | "legendaries";
@@ -62,6 +62,8 @@ type ScienceSkills = "astronomy" | "biology" | "botany" | "chemistry" | "cryptog
 
 interface Skills {
     [slug: string]: Skill,
+    luck: Skill,
+    resources: Skill,
 }
 
 interface Skill {
@@ -70,7 +72,15 @@ interface Skill {
     /** Skill Total Value */
     value: number,
     /** Refinement Values invested in this skill */
-    rvs: number,
+    rvs: number | null,
+    /** Whether this skill is marked as Favourite or not */
+    favourite: boolean,
+    /** Whether this skill is marked as Hidden or not */
+    hidden: boolean,
+    /** Total value of skill (Calculated) */
+    total: number,
+    /** Skill Category group */
+    group?: string,
 }
 
 interface Biology {

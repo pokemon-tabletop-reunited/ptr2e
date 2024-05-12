@@ -256,70 +256,50 @@
       "details": null,
       "evolutions": [
         {
-          "name": "flapple",
-          "uuid": "Compendium.ptr2e.core-species.Item.xnJet59AouDBHvBo",
-          "methods": [
-            {
-              "type": "item",
-              "item": "tart-apple",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
-        {
-          "name": "appletun",
-          "uuid": "Compendium.ptr2e.core-species.Item.vN7yFgFuxp5X5K7O",
-          "methods": [
-            {
-              "type": "item",
-              "item": "sweet-apple",
-              "operand": "or",
-              "held": false
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
-        {
           "name": "dipplin",
           "uuid": "Compendium.ptr2e.core-species.Item.Rfy05K8o7QQIte5g",
-          "methods": [],
+          "methods": [
+            {
+              "type": "item",
+              "item": "syrupy-apple",
+              "operand": "or",
+              "held": false
+            },
+            {
+              "type": "level",
+              "level": 30,
+              "operand": "or"
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          },
           "evolutions": [
             {
               "name": "hydrapple",
               "uuid": "Compendium.ptr2e.core-species.Item.Act66k3ubXPSSUyG",
-              "methods": [],
-              "evolutions": [],
+              "methods": [
+                {
+                  "type": "move",
+                  "move": "dragon-cheer",
+                  "operand": "and"
+                }
+              ],
               "details": {
                 "gender": null,
                 "item": null,
                 "level": null,
                 "knownMove": null
-              }
+              },
+              "evolutions": []
             }
-          ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
+          ]
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.Rfy05K8o7QQIte5g"
+      "uuid": "Compendium.ptr2e.core-species.Item.UzTe4h4Vy1oEf7ro"
     },
     "number": 1011,
     "traits": [
@@ -364,21 +344,112 @@
         }
       ]
     },
-    "skills": {
-      "acrobatics": 30,
-      "climb": 30,
-      "conversation": 35,
-      "disguise": 40,
-      "intimidate": 25,
-      "lift": 25,
-      "listen": 40,
-      "natural-world": 40,
-      "running": 20,
-      "spot": 45,
-      "stealth": 40,
-      "survival": 40,
-      "swim": 20
-    },
+    "skills": [
+      {
+        "slug": "acrobatics",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "climb",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "conversation",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "disguise",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "intimidate",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "natural-world",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "habitats": [],
     "slug": "dipplin"
   },
@@ -390,11 +461,11 @@
     }
   },
   "_stats": {
-    "coreVersion": "12.320",
+    "coreVersion": "12.322",
     "systemId": "ptr2e",
-    "systemVersion": "0.004",
+    "systemVersion": "0.005",
     "createdTime": null,
-    "modifiedTime": 1714663305677,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.Rfy05K8o7QQIte5g",
     "duplicateSource": null

@@ -1,57 +1,73 @@
 {
-    "name": "Open Your Heart",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Shadow Guide",
-            "Psychology 60"
-        ],
-        "cost": 3,
-        "design": {
-            "arena": "social",
-            "approach": "finesse",
-            "archetype": "Shadow"
-        },
-        "description": "You have the necessary knowledge and skill to perform the Purification Ceremony that forms the final stage of cleansing a [Closed Heart] creature.",
-        "actions": [
-            {
-                "name": "Open Your Heart",
-                "slug": "open-your-heart",
-                "description": "You have the necessary knowledge and skill to perform the Purification Ceremony that forms the final stage of cleansing a [Closed Heart] creature.",
-                "cost": {
-                    "activation": "complex"
-                },
-                "type": "camping",
-                "traits": []
-            }
-        ],
-        "slug": "open-your-heart",
-        "traits": [],
-        "node": {
-            "i": 9,
-            "j": 16,
-            "connected": [
-                "one-with-the-green",
-                "intense-heat",
-                "hardy-trekker",
-                "hobby-gardener",
-                "scholar",
-                "screen-setter"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/shadow_icon.png",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Open Your Heart",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Shadow Guide",
+      "Psychology 60"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "Shadow"
     },
-    "_id": "UXnjHFxuFH43XwVS",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You have the necessary knowledge and skill to perform the Purification Ceremony that forms the final stage of cleansing a [Closed Heart] creature.",
+    "actions": [
+      {
+        "name": "Open Your Heart",
+        "slug": "open-your-heart",
+        "description": "You have the necessary knowledge and skill to perform the Purification Ceremony that forms the final stage of cleansing a [Closed Heart] creature.",
+        "cost": {
+          "activation": "complex"
+        },
+        "type": "camping",
+        "traits": []
+      }
+    ],
+    "slug": "open-your-heart",
+    "traits": [],
+    "node": {
+      "i": 60,
+      "j": -52,
+      "connected": [
+        "shadow-guide"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/shadow_icon.png",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "UXnjHFxuFH43XwVS",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.UXnjHFxuFH43XwVS"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714920453372,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!UXnjHFxuFH43XwVS"
 }

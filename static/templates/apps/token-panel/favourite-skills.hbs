@@ -1,0 +1,18 @@
+<section class="tab sheet-body {{tabs.skills.cssClass}} action-tab" data-tab="skills" data-group="sheet" {{#if actor}}data-parent="{{actor.uuid}}"{{/if}}>
+    {{#each skills as |skill|}}
+        <div class="skill-item skill" data-tooltip-direction="LEFT" data-group="{{skill.group}}" data-slug="{{skill.slug}}" data-tooltip="{{skill.slug}}">
+            <div class="icon rollable">
+                <img src="/icons/dice/d10black.svg" data-tooltip="Roll {{formatSlug skill.slug}}">
+            </div>
+            <div class="name">
+                {{formatSlug skill.slug}}
+            </div>
+        </div>
+    {{else}}
+        <div class="skill-item">
+            <div class="name small">
+                <small>No Favourite Skills</small>
+            </div>
+        </div>
+    {{/each}}
+</section>

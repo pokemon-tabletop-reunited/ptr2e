@@ -9,13 +9,15 @@ import {
 } from "@actor";
 import { ActiveEffectPTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import { ActionPTR2e, ActionType, AttackPTR2e, PokemonType, RollOptionManager } from "@data";
+import { AttackPTR2e, PokemonType, RollOptionManager } from "@data";
 import { ActorFlags } from "types/foundry/common/documents/actor.js";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
 import FolderPTR2e from "@module/folder/document.ts";
 import { CombatantPTR2e, CombatPTR2e } from "@combat";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
+import { MovePTR2e } from "@item";
+import { ActionsCollections } from "./actions.ts";
 
 type ActorParty = {
     owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -128,13 +130,12 @@ class ActorPTR2e<
 
         this.rollOptions = new RollOptionManager(this);
 
-        this._actions = {
-            generic: new Map(),
-            attack: new Map(),
-            exploration: new Map(),
-            downtime: new Map(),
-            camping: new Map(),
-            passive: new Map(),
+        this._actions = new ActionsCollections(this);
+
+        this.attacks = {
+            slots: 6,
+            actions: Array.fromRange(6).reduce((acc, i) => ({ ...acc, [i]: null }), {}),
+            available: [],
         };
 
         super._initialize();
@@ -183,7 +184,35 @@ class ActorPTR2e<
         if (this.type === "ptu-actor") return super.prepareDerivedData();
         this.system.type.effectiveness = this._calculateEffectiveness();
 
-        return super.prepareDerivedData();
+        super.prepareDerivedData();
+
+        this.attacks.slots = this.system.slots;
+        this.attacks.actions = Array.fromRange(this.attacks.slots).reduce((acc, i) => ({ ...acc, [i]: null }), {});
+
+        for(const attack of this.actions.attack) {
+            if(attack.free) continue;
+
+            const item = attack.item;
+            if(item.type === "move") {
+                const move = item as MovePTR2e;
+                const primaryAttack = move.system.attack;
+                if(primaryAttack.slug !== attack.slug && primaryAttack.slot !== null && this.attacks.actions[primaryAttack.slot]?.slug === primaryAttack.slug) {
+                    attack.free = true;
+                }
+            }
+
+            if(attack.slot === null) {
+                this.attacks.available.push(attack);
+                continue;
+            }
+            if(this.attacks.actions[attack.slot] !== null) {
+                if(this.attacks.actions[attack.slot].slug !== attack.slug) {
+                    this.attacks.available.push(this.attacks.actions[attack.slot]);
+                }
+                continue;
+            }
+            this.attacks.actions[attack.slot] = attack;
+        }
     }
 
     /**
@@ -554,13 +583,19 @@ interface ActorPTR2e<
 
     synthetics: ActorSynthetics;
 
-    _actions: Record<ActionType, Map<string, ActionPTR2e>>;
+    _actions: ActionsCollections;
 
     level: number;
 
     flags: ActorFlags2e;
 
     rollOptions: RollOptionManager<this>;
+
+    attacks: {
+        slots: number;
+        actions: Record<number, AttackPTR2e>;
+        available: AttackPTR2e[];
+    }
 }
 
 type ActorFlags2e = ActorFlags & {

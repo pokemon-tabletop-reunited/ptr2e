@@ -3,10 +3,10 @@
  * This concept is reused throughout Foundry VTT where a collection of uniquely identified elements is required.
  */
 declare interface Collection<V>
-    extends Omit<Map<string, V>, "forEach" | "delete" | "set" | SymbolConstructor["iterator"]> {
+    extends Omit<Map<string, V>, "forEach" | "delete" | "set" | "clear" | SymbolConstructor["iterator"]> {
     set(key: string, value: V): this;
-
     delete(key: string): boolean;
+    clear(): void;
 
     /** When iterating over a Collection, we should iterate over its values instead of over its entries */
     [Symbol.iterator](): IterableIterator<V>;

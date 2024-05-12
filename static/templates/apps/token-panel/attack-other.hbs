@@ -1,5 +1,5 @@
-<section class="tab sheet-body {{tabs.attacks.cssClass}}" data-tab="attacks" data-group="sheet" {{#if actor}}data-parent="{{actor.uuid}}"{{/if}}>
-    {{#each attacks as |attack|}}
+<section class="tab sheet-body {{tabs.other-attacks.cssClass}} action-tab" data-tab="other-attacks" data-group="sheet" {{#if actor}}data-parent="{{actor.uuid}}"{{/if}}>
+    {{#each actions.other as |attack|}}
         <div class="attack-item attack" data-tooltip-direction="LEFT" data-action="{{attack.slug}}" data-tooltip="{{attack.name}}">
             <div class="icon rollable">
                 <img src="{{attack.img}}" alt="{{attack.name}}">
@@ -11,7 +11,7 @@
         </div>
     {{else}}
         <div class="attack-item">
-            <div class="name">
+            <div class="name small">
                 <small>No Attacks Found</small>
             </div>
         </div>
