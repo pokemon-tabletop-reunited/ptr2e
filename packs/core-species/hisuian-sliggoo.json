@@ -413,33 +413,19 @@
       "details": null,
       "evolutions": [
         {
-          "name": "sliggoo",
-          "uuid": "Compendium.ptr2e.core-species.Item.3xSuDKZXchqrwt67",
+          "name": "hisuian-sliggoo",
+          "uuid": "Compendium.ptr2e.core-species.Item.afEa7zL3pdRiBAcD",
           "methods": [
             {
               "type": "level",
               "level": 40,
-              "operand": "and"
-            }
-          ],
-          "evolutions": [
+              "operand": "or"
+            },
             {
-              "name": "goodra",
-              "uuid": "Compendium.ptr2e.core-species.Item.eKlXb1U35vt44vZQ",
-              "methods": [
-                {
-                  "type": "level",
-                  "level": 50,
-                  "operand": "and"
-                }
-              ],
-              "evolutions": [],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              }
+              "type": "item",
+              "item": "linking-chord",
+              "operand": "or",
+              "held": false
             }
           ],
           "details": {
@@ -447,10 +433,30 @@
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": [
+            {
+              "name": "hisuian-goodra",
+              "uuid": "Compendium.ptr2e.core-species.Item.AJIa9EWiT6g1Swba",
+              "methods": [
+                {
+                  "type": "level",
+                  "level": 50,
+                  "operand": "and"
+                }
+              ],
+              "details": {
+                "gender": null,
+                "item": null,
+                "level": null,
+                "knownMove": null
+              },
+              "evolutions": []
+            }
+          ]
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.afEa7zL3pdRiBAcD"
+      "uuid": "Compendium.ptr2e.core-species.Item.ch9abdxnjppXGWjH"
     }
   },
   "_id": "afEa7zL3pdRiBAcD",
@@ -471,7 +477,7 @@
     "systemId": "ptr2e",
     "systemVersion": "0.005",
     "createdTime": 1712327701027,
-    "modifiedTime": 1715435282608,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.afEa7zL3pdRiBAcD",
     "duplicateSource": null

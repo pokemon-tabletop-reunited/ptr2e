@@ -447,20 +447,32 @@
     ],
     "genderRatio": 4,
     "evolutions": {
-      "name": "farfetchd",
+      "name": "galarian-farfetchd",
       "details": null,
       "evolutions": [
         {
           "name": "sirfetchd",
           "uuid": "Compendium.ptr2e.core-species.Item.3xBUsvMFpLPG7DYW",
-          "methods": [],
-          "evolutions": [],
+          "methods": [
+            {
+              "type": "item",
+              "item": "big-leek",
+              "operand": "or",
+              "held": false
+            },
+            {
+              "type": "level",
+              "level": 35,
+              "operand": "or"
+            }
+          ],
           "details": {
             "gender": null,
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": []
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.vGX3GJi4VMlvldnP"
@@ -481,7 +493,7 @@
     "systemId": "ptr2e",
     "systemVersion": "0.005",
     "createdTime": 1712230052166,
-    "modifiedTime": 1715435282608,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.vGX3GJi4VMlvldnP",
     "duplicateSource": null

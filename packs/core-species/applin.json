@@ -96,15 +96,20 @@
               "item": "tart-apple",
               "operand": "or",
               "held": false
+            },
+            {
+              "type": "level",
+              "level": 30,
+              "operand": "or"
             }
           ],
-          "evolutions": [],
           "details": {
             "gender": null,
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": []
         },
         {
           "name": "appletun",
@@ -115,32 +120,55 @@
               "item": "sweet-apple",
               "operand": "or",
               "held": false
+            },
+            {
+              "type": "level",
+              "level": 30,
+              "operand": "or"
             }
           ],
-          "evolutions": [],
           "details": {
             "gender": null,
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": []
         },
         {
           "name": "dipplin",
           "uuid": "Compendium.ptr2e.core-species.Item.Rfy05K8o7QQIte5g",
-          "methods": [],
+          "methods": [
+            {
+              "type": "item",
+              "item": "syrupy-apple",
+              "operand": "or",
+              "held": false
+            },
+            {
+              "type": "level",
+              "level": 30,
+              "operand": "or"
+            }
+          ],
           "evolutions": [
             {
               "name": "hydrapple",
               "uuid": "Compendium.ptr2e.core-species.Item.Act66k3ubXPSSUyG",
-              "methods": [],
-              "evolutions": [],
+              "methods": [
+                {
+                  "type": "move",
+                  "move": "dragon-cheer",
+                  "operand": "and"
+                }
+              ],
               "details": {
                 "gender": null,
                 "item": null,
                 "level": null,
                 "knownMove": null
-              }
+              },
+              "evolutions": []
             }
           ],
           "details": {
@@ -316,7 +344,7 @@
     "systemId": "ptr2e",
     "systemVersion": "0.005",
     "createdTime": null,
-    "modifiedTime": 1715435282608,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.UzTe4h4Vy1oEf7ro",
     "duplicateSource": null

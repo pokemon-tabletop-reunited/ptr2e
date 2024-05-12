@@ -659,12 +659,12 @@
     ],
     "genderRatio": 4,
     "evolutions": {
-      "name": "geodude",
+      "name": "alolan-geodude",
       "details": null,
       "evolutions": [
         {
-          "name": "graveler",
-          "uuid": "Compendium.ptr2e.core-species.Item.Qppi5EojZQkw0JNZ",
+          "name": "alolan-graveler",
+          "uuid": "Compendium.ptr2e.core-species.Item.6HpV31ACEhyKwbrH",
           "methods": [
             {
               "type": "level",
@@ -674,16 +674,28 @@
           ],
           "evolutions": [
             {
-              "name": "golem",
-              "uuid": "Compendium.ptr2e.core-species.Item.j1zD0kq6aUr2kYxc",
-              "methods": [],
-              "evolutions": [],
+              "name": "alolan-golem",
+              "uuid": "Compendium.ptr2e.core-species.Item.Qg9LrDff6qScwTR7",
+              "methods": [
+                {
+                  "type": "level",
+                  "level": 38,
+                  "operand": "or"
+                },
+                {
+                  "type": "item",
+                  "item": "linking-chord",
+                  "operand": "or",
+                  "held": false
+                }
+              ],
               "details": {
                 "gender": null,
                 "item": null,
                 "level": null,
                 "knownMove": null
-              }
+              },
+              "evolutions": []
             }
           ],
           "details": {
@@ -694,7 +706,7 @@
           }
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.Qg9LrDff6qScwTR7"
+      "uuid": "Compendium.ptr2e.core-species.Item.aAPMNsP5HxMYpTJ6"
     }
   },
   "_id": "Qg9LrDff6qScwTR7",
@@ -712,7 +724,7 @@
     "systemId": "ptr2e",
     "systemVersion": "0.005",
     "createdTime": 1712230052166,
-    "modifiedTime": 1715435282608,
+    "modifiedTime": 1715518845878,
     "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
     "compendiumSource": "Compendium.ptr2e.core-species.Item.Qg9LrDff6qScwTR7",
     "duplicateSource": null
