@@ -1,9 +1,12 @@
 import ActorPTR2e from "../base.ts";
 import { ActorComponent } from "./base.ts";
 import { EffectComponent } from "./effect-component.ts";
+import { FavouriteSkillsComponent, SkillsComponent } from "./skills-component.ts";
 
 const ActorComponents = {
-    "effects": EffectComponent
+    "effects": EffectComponent,
+    "skills": SkillsComponent,
+    "favourite-skills": FavouriteSkillsComponent,
 }
 type ActorComponentKey = keyof typeof ActorComponents;
 
@@ -37,8 +40,8 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
     );
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
-        content: {
-            id: "content",
+        popout: {
+            id: "popout",
             template: "systems/ptr2e/templates/actor/actor-component.hbs",
         }
     };
@@ -77,13 +80,15 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
     override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
         super._attachPartListeners(partId, htmlElement, options);
 
-        if(partId === "content") {
+        if(partId === "popout") {
             this.component.attachListeners(htmlElement);
         }
     }
 
     override async _renderFrame(options: foundry.applications.api.HandlebarsRenderOptions): Promise<HTMLElement> {
         const frame = await super._renderFrame(options);
+
+        this.component.renderFrame(this.window.close);
 
         // Add Actor button to the header
         const actorLabel = game.i18n.localize("PTR2E.ActorSheet.Components.actor");

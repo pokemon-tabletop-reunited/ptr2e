@@ -418,66 +418,80 @@ body.theme-dark .sheet a.content-link {
   margin-left: auto;
   gap: 5px;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component {
   grid-area: span 5 / span 3;
   padding: 0.5rem;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .scroll {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .scroll,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .scroll {
   overflow-y: auto;
   overflow-x: hidden;
   height: 100%;
   gap: 0;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list {
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 0;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill-group {
   height: unset;
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group.hidden-skill .skill-group-label {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group.hidden-skill .skill-group-label,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill-group.hidden-skill .skill-group-label {
   filter: opacity(0.7);
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group .skill-group-label {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group .skill-group-label,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill-group .skill-group-label {
   margin-left: calc(16px + 0.25rem);
   border-bottom: 1px solid var(--border-theme-color);
   padding: 4px 0;
   font-weight: bold;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group .skill {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group .skill,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill-group .skill {
   padding-left: unset;
   margin-left: calc(16px + 0.25rem);
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill {
   display: flex;
   flex-direction: row;
   align-items: center;
   padding: 4px 0;
   border-bottom: 1px solid var(--border-theme-color);
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-icon {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-icon,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill .skill-icon {
   flex: 0 0 16px;
   height: 16px;
   width: 16px;
   cursor: pointer;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-icon img {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-icon img,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill .skill-icon img {
   border: unset;
   filter: invert(1);
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-name {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-name,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill .skill-name {
   flex-grow: 1;
   margin: 0 0.25rem;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-total {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-total,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill .skill-total {
   flex: 0 0 80px;
   text-align: center;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-controls {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-controls,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill .skill-controls {
   flex: 0 0 60px;
   display: flex;
   flex-direction: row;
@@ -486,25 +500,34 @@ body.theme-dark .sheet a.content-link {
   margin-left: auto;
   gap: 5px;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-controls .item-control {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-controls .item-control,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill .skill-controls .item-control {
   flex: 0 0 18px;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill.favourite {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill.favourite,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill.favourite {
   filter: brightness(1.5);
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill.hidden-skill {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill.hidden-skill,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill.hidden-skill {
   filter: opacity(0.7);
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .divider {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .divider,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .divider {
   margin-top: 0.75rem;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list header.skill {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list header.skill,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list header.skill {
   border-bottom-width: 2px;
   font-weight: bold;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options {
   grid-area: 1 / 4 / 2 / 6;
   padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component {
+  grid-area: span 3 / span 2;
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display {
   padding: 0.5rem;
@@ -575,6 +598,91 @@ body.theme-dark .sheet a.content-link {
 .application.sheet.actor.popout .effects-display ul.effect-list li.effect .name {
   flex-grow: 1;
   margin: 0 0.25rem;
+}
+.application.sheet.actor.popout .skill-component {
+  min-width: 290px;
+  padding: 0.5rem;
+}
+.application.sheet.actor.popout .skill-component .scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  gap: 0;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill-group {
+  height: unset;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill-group.hidden-skill .skill-group-label {
+  filter: opacity(0.7);
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill-group .skill-group-label {
+  margin-left: calc(16px + 0.25rem);
+  border-bottom: 1px solid var(--border-theme-color);
+  padding: 4px 0;
+  font-weight: bold;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill-group .skill {
+  padding-left: unset;
+  margin-left: calc(16px + 0.25rem);
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill .skill-icon {
+  flex: 0 0 16px;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill .skill-icon img {
+  border: unset;
+  filter: invert(1);
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill .skill-name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill .skill-total {
+  flex: 0 0 80px;
+  text-align: center;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill .skill-controls {
+  flex: 0 0 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  gap: 5px;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill .skill-controls .item-control {
+  flex: 0 0 18px;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill.favourite {
+  filter: brightness(1.5);
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill.hidden-skill {
+  filter: opacity(0.7);
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .divider {
+  margin-top: 0.75rem;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list header.skill {
+  border-bottom-width: 2px;
+  font-weight: bold;
 }
 .application.sheet.actor.popout fieldset {
   padding: 1rem;

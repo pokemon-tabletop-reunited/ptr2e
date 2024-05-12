@@ -14,8 +14,8 @@ import ContainerSystem from "@item/data/container.ts";
 import { KnownActionsApp } from "@module/apps/known-attacks.ts";
 import { ActorSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
-import { Skill } from "./data.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
+import { SkillsComponent } from "./components/skills-component.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     ActorSheetV2Expanded
@@ -85,7 +85,15 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                     if (!appSettings[this.appId]) appSettings[this.appId] = {hideHiddenSkills: true};
                     appSettings[this.appId].hideHiddenSkills = !appSettings[this.appId].hideHiddenSkills;
                     await game.user.setFlag("ptr2e", "appSettings", appSettings);
-                    this.render({parts: ["skills"]});
+                    
+                    for(const app of Object.values(this.actor.apps)) {
+                        if(app instanceof foundry.applications.api.ApplicationV2) {
+                            const parts = (app as unknown as {parts: Record<string, unknown>}).parts;
+                            if('popout' in parts) app.render({parts: ["popout"]})
+                            if('skills' in parts) app.render({parts: ["skills"]})
+                        }
+                        else app?.render();
+                    }
                 },
             },
         },
@@ -264,50 +272,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             return inventory;
         })();
 
-        const skills = (() => {
-            const favouriteGroups: SkillCategory = { none: { label: null, skills: [] } };
-            const hiddenGroups: SkillCategory = { none: { label: null, skills: [] } };
-            const normalGroups: SkillCategory = { none: { label: null, skills: [] } };
-
-            for (const skill of this.actor.system.skills.contents.sort((a, b) =>
-                a.slug.localeCompare(b.slug)
-            )) {
-                if (skill.favourite) {
-                    const group = skill.group || "none";
-                    if (!favouriteGroups[group])
-                        favouriteGroups[group] = { label: group, skills: [] };
-                    favouriteGroups[group].skills.push(skill);
-                } else if (skill.hidden) {
-                    const group = skill.group || "none";
-                    if (!hiddenGroups[group]) hiddenGroups[group] = { label: group, skills: [] };
-                    hiddenGroups[group].skills.push(skill);
-                } else {
-                    const group = skill.group || "none";
-
-                    if (!normalGroups[group]) normalGroups[group] = { label: group, skills: [] };
-                    normalGroups[group].skills.push(skill);
-                }
-            }
-            return {
-                favourites: Object.entries(favouriteGroups)
-                    .sort((a, b) => a[0].localeCompare(b[0]))
-                    .map(([, v]) => v),
-                hidden: Object.entries(hiddenGroups)
-                    .sort((a, b) => a[0].localeCompare(b[0]))
-                    .map(([, v]) => v),
-                normal: Object.entries(normalGroups)
-                    .sort((a, b) => a[0].localeCompare(b[0]))
-                    .map(([, v]) => v),
-            };
-        })();
-
-        const hideHiddenSkills = (() => {
-            const appSettings = game.user.getFlag("ptr2e", "appSettings") as Record<string, Record<string, unknown>>;
-            if(appSettings?.[this.appId]) {
-                return appSettings[this.appId].hideHiddenSkills;
-            }
-            return true;
-        })();
+        const {skills, hideHiddenSkills} = SkillsComponent.prepareSkillsData(this.actor);
 
         return {
             ...(await super._prepareContext(options)),
@@ -344,6 +309,11 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
         if (partId === "effects") {
             EffectComponent.attachListeners(htmlElement, this.actor);
+        }
+
+
+        if(partId === "skills") {
+            SkillsComponent.attachListeners(htmlElement, this.actor);
         }
     }
 
@@ -500,8 +470,3 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 }
 
 export default ActorSheetPTRV2;
-
-type SkillCategory = { none: { label: null; skills: Skill[] } } & Record<
-    string,
-    { label: string | null; skills: Skill[] }
->;
