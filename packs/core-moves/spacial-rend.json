@@ -1,0 +1,74 @@
+{
+  "name": "Spacial Rend",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dragon_icon.png",
+  "system": {
+    "slug": "spacial-rend",
+    "description": "Effect: On hit, non-[Legendary] targets are Lifted 3. The user may spend 4 PP to have this attack lose [Blast 6] and change its Range to \"15m Wide Line\" until their next Activation.",
+    "traits": [
+      "legendary",
+      "crit-2",
+      "smite",
+      "sharp",
+      "blast-6"
+    ],
+    "actions": [
+      {
+        "slug": "spacial-rend",
+        "name": "Spacial Rend",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "crit-2",
+          "smite",
+          "sharp",
+          "blast-6"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "dragon"
+        ],
+        "description": "Effect: On hit, non-[Legendary] targets are Lifted 3. The user may spend 4 PP to have this attack lose [Blast 6] and change its Range to \"15m Wide Line\" until their next Activation.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "SrGEHvXVGd311qxA",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.322",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1715529254303,
+    "modifiedTime": 1715529254303,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!SrGEHvXVGd311qxA"
+}

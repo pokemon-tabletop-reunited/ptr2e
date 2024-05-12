@@ -1,0 +1,74 @@
+{
+  "name": "Freeze Shock",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ice_icon.png",
+  "system": {
+    "slug": "freeze-shock",
+    "description": "Effect: Set-Up: The user may freely move using a Movement Score of their choice, and gains Braced 1.\nResolution: On their next activation, they attack with and resolve Freeze Shock. On hit, all valid targets have a 30% chance of becoming Paralyzed 5.",
+    "traits": [
+      "set-up",
+      "defensive",
+      "blast-5",
+      "smite",
+      "legendary"
+    ],
+    "actions": [
+      {
+        "slug": "freeze-shock",
+        "name": "Freeze Shock",
+        "type": "attack",
+        "traits": [
+          "set-up",
+          "defensive",
+          "blast-5",
+          "smite",
+          "legendary"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 140,
+        "accuracy": 90,
+        "types": [
+          "ice"
+        ],
+        "description": "Effect: Set-Up: The user may freely move using a Movement Score of their choice, and gains Braced 1.\nResolution: On their next activation, they attack with and resolve Freeze Shock. On hit, all valid targets have a 30% chance of becoming Paralyzed 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "5fCRZDJX3ORUba4H",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.322",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1715529254303,
+    "modifiedTime": 1715529254303,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!5fCRZDJX3ORUba4H"
+}

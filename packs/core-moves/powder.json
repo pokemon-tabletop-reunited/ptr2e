@@ -1,0 +1,72 @@
+{
+  "name": "Powder",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/bug_icon.png",
+  "system": {
+    "slug": "powder",
+    "description": "Effect: All valid targets are covered in a flammable Powder for 5 activations. If a creature covered in Powder attempts to use a Fire-typed move, the attack fails and they deal 4 Ticks of their HP as damage to themselves and all adjacent creatures. If a creature covered in Powder is hit by a Fire-type move, they deal 4 Ticks of their HP as damage to themselves and all adjacent creatures.",
+    "traits": [
+      "powder",
+      "blast-1",
+      "explode",
+      "priority-1"
+    ],
+    "actions": [
+      {
+        "slug": "powder",
+        "name": "Powder",
+        "type": "attack",
+        "traits": [
+          "powder",
+          "blast-1",
+          "explode",
+          "priority-1"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": 1,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "bug"
+        ],
+        "description": "Effect: All valid targets are covered in a flammable Powder for 5 activations. If a creature covered in Powder attempts to use a Fire-typed move, the attack fails and they deal 4 Ticks of their HP as damage to themselves and all adjacent creatures. If a creature covered in Powder is hit by a Fire-type move, they deal 4 Ticks of their HP as damage to themselves and all adjacent creatures.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "XOezqCVXnuNgBQRS",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.322",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1715529254303,
+    "modifiedTime": 1715529254303,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!XOezqCVXnuNgBQRS"
+}

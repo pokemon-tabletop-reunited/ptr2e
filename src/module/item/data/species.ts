@@ -218,9 +218,7 @@ class SpeciesSystem extends SpeciesExtension {
             skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e)),
             moves: new fields.SchemaField({
                 levelUp: new fields.ArrayField(getMoveField(true), { required: true, initial: [] }),
-                egg: new fields.ArrayField(getMoveField(), { required: true, initial: [] }),
                 tutor: new fields.ArrayField(getMoveField(), { required: true, initial: [] }),
-                machine: new fields.ArrayField(getMoveField(), { required: true, initial: [] }),
             }),
             captureRate: new fields.NumberField({
                 required: true,

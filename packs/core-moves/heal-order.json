@@ -1,0 +1,68 @@
+{
+  "name": "Heal Order",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/bug_icon.png",
+  "system": {
+    "slug": "heal-order",
+    "description": "Effect: The user recovers HP equal to 1/4 their Max HP. If there is at least one allied Bug-typed creature on the field this healing is increased by 1/4 for each allied Bug-typed creature. Healing cannot exceed 100% Max HP",
+    "traits": [
+      "healing",
+      "dance"
+    ],
+    "actions": [
+      {
+        "slug": "heal-order",
+        "name": "Heal Order",
+        "type": "attack",
+        "traits": [
+          "healing",
+          "dance"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "bug"
+        ],
+        "description": "Effect: The user recovers HP equal to 1/4 their Max HP. If there is at least one allied Bug-typed creature on the field this healing is increased by 1/4 for each allied Bug-typed creature. Healing cannot exceed 100% Max HP",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "jAVzPMZah2qXr2qi",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.322",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1715529254303,
+    "modifiedTime": 1715529254303,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!jAVzPMZah2qXr2qi"
+}

@@ -1,0 +1,68 @@
+{
+  "name": "Infestation",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/bug_icon.png",
+  "system": {
+    "slug": "infestation",
+    "description": "Effect: All valid targets become Bound 5. While Bound, they take a Tick of HP in damage at the end of each of their activations.",
+    "traits": [
+      "trap",
+      "blast-1"
+    ],
+    "actions": [
+      {
+        "slug": "infestation",
+        "name": "Infestation",
+        "type": "attack",
+        "traits": [
+          "trap",
+          "blast-1"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 20,
+        "accuracy": 100,
+        "types": [
+          "bug"
+        ],
+        "description": "Effect: All valid targets become Bound 5. While Bound, they take a Tick of HP in damage at the end of each of their activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "BIG6nxi9Dw2cWq9X",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.322",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1715529254303,
+    "modifiedTime": 1715529254303,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!BIG6nxi9Dw2cWq9X"
+}

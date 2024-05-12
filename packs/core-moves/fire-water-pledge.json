@@ -1,0 +1,70 @@
+{
+  "name": "Fire-Water Pledge",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/water_icon.png",
+  "system": {
+    "slug": "fire-water-pledge",
+    "description": "Trigger: The user comboed Fire/Water Pledge.\nEffect: The Terrain is set to Rainbow Sky for 3 Rounds. This attack does not clear other [Terrain] types, and the effect is not cleared by the use of other [Terrain] moves.",
+    "traits": [
+      "pledge",
+      "pledge-combo",
+      "terrain"
+    ],
+    "actions": [
+      {
+        "slug": "fire-water-pledge",
+        "name": "Fire-Water Pledge",
+        "type": "attack",
+        "traits": [
+          "pledge",
+          "pledge-combo",
+          "terrain"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user comboed Fire/Water Pledge."
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "water"
+        ],
+        "description": "Trigger: The user comboed Fire/Water Pledge.\nEffect: The Terrain is set to Rainbow Sky for 3 Rounds. This attack does not clear other [Terrain] types, and the effect is not cleared by the use of other [Terrain] moves.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "IJDuJszJJJcS64qf",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.322",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1715529254303,
+    "modifiedTime": 1715529254303,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!IJDuJszJJJcS64qf"
+}

@@ -1,0 +1,70 @@
+{
+  "name": "Memento",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "memento",
+    "description": "The user's HP is set to 0. On hit, all valid targets in range have their ATK stage and SPATK stage reduced by -2 for 5 activations.",
+    "traits": [
+      "self-ko",
+      "explode",
+      "friendly"
+    ],
+    "actions": [
+      {
+        "slug": "memento",
+        "name": "Memento",
+        "type": "attack",
+        "traits": [
+          "self-ko",
+          "explode",
+          "friendly"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "The user's HP is set to 0. On hit, all valid targets in range have their ATK stage and SPATK stage reduced by -2 for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "6VWrBC5kqwasXoKX",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.322",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1715529254303,
+    "modifiedTime": 1715529254303,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!6VWrBC5kqwasXoKX"
+}

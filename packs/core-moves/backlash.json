@@ -1,0 +1,68 @@
+{
+  "name": "Backlash",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/shadow_icon.png",
+  "system": {
+    "slug": "backlash",
+    "description": "Trigger: Activated by a Condition\nEffect: The user freely moves up to the Score of a Movement Type it possesses and attacks the nearest creature with this Attack. If multiple creatures are equally close to the user, the target is selected randomly. If the nearest target or a randomly-selected target cannot be moved to using the creature's Movement, the next-closest creature is selected or another creature is randomly selected. If the user cannot resolve this Attack against a target, it instead hits itself with Fumble.",
+    "traits": [
+      "basic",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "backlash",
+        "name": "Backlash",
+        "type": "attack",
+        "traits": [
+          "basic",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "Activated by a Condition"
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 90,
+        "types": [
+          "shadow"
+        ],
+        "description": "Trigger: Activated by a Condition\nEffect: The user freely moves up to the Score of a Movement Type it possesses and attacks the nearest creature with this Attack. If multiple creatures are equally close to the user, the target is selected randomly. If the nearest target or a randomly-selected target cannot be moved to using the creature's Movement, the next-closest creature is selected or another creature is randomly selected. If the user cannot resolve this Attack against a target, it instead hits itself with Fumble.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "3RvYsD6CXrWCW0YS",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.322",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1715529254303,
+    "modifiedTime": 1715529254303,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!3RvYsD6CXrWCW0YS"
+}

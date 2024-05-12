@@ -1,0 +1,66 @@
+{
+  "name": "Stealth Rock",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/rock_icon.png",
+  "system": {
+    "slug": "stealth-rock",
+    "description": "Effect: The user places 5 floating rock mine Hazards within Range. When a creature moves within 2m of a rock mine, it homes in on them and deals a Tick of Rock-Type damage.",
+    "traits": [
+      "hazard"
+    ],
+    "actions": [
+      {
+        "slug": "stealth-rock",
+        "name": "Stealth Rock",
+        "type": "attack",
+        "traits": [
+          "hazard"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "rock"
+        ],
+        "description": "Effect: The user places 5 floating rock mine Hazards within Range. When a creature moves within 2m of a rock mine, it homes in on them and deals a Tick of Rock-Type damage.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "JSSINn7yRN0wXMZ2",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.322",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1715529254303,
+    "modifiedTime": 1715529254303,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!JSSINn7yRN0wXMZ2"
+}

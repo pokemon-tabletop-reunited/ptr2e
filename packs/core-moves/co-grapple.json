@@ -1,0 +1,70 @@
+{
+  "name": "Co-Grapple",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/untyped_icon.png",
+  "system": {
+    "slug": "co-grapple",
+    "description": "Trigger: A creature within Range is targeted by Grab.\nEffect: The user joins the triggering rolls and checks, contributing their Size and WC to the side of their choice. If a Grapple is formed, the user also gains the Grapple Condition. \nThe user may join an ongoing Grapple as a Simple Action on their Activation with this Action.",
+    "traits": [
+      "basic",
+      "contact",
+      "interrupt-1"
+    ],
+    "actions": [
+      {
+        "slug": "co-grapple",
+        "name": "Co-Grapple",
+        "type": "attack",
+        "traits": [
+          "basic",
+          "contact",
+          "interrupt-1"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "A creature within Range is targeted by Grab."
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "untyped"
+        ],
+        "description": "Trigger: A creature within Range is targeted by Grab.\nEffect: The user joins the triggering rolls and checks, contributing their Size and WC to the side of their choice. If a Grapple is formed, the user also gains the Grapple Condition. \nThe user may join an ongoing Grapple as a Simple Action on their Activation with this Action.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "NJy3eYAmlcqfqIua",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.322",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1715529254303,
+    "modifiedTime": 1715529254303,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!NJy3eYAmlcqfqIua"
+}

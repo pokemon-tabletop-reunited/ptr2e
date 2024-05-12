@@ -1,0 +1,66 @@
+{
+  "name": "Gulp Missile",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/water_icon.png",
+  "system": {
+    "slug": "gulp-missile",
+    "description": "Effect: When the user has an Engulfed creature equipped as a [Stash] item, they can launch the Engulfed creature as part of Gulp Missile. When the Engulfed creature is launched, this Attack's Power increases to 90, the Attack's Type changes to a Type possessed by the launched creature, and the launched creature takes the damage of the attack, resisted two steps. When launching a Engulfed creature, Gulp Missile has a 20% chance to reduce the target's DEF stage by -1 on hit, a 20% chance to reduce SPDEF stage by -1 on hit, and a 20% chance to inflict Paralyzed 5 on hit.",
+    "traits": [
+      "missile"
+    ],
+    "actions": [
+      {
+        "slug": "gulp-missile",
+        "name": "Gulp Missile",
+        "type": "attack",
+        "traits": [
+          "missile"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 45,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "Effect: When the user has an Engulfed creature equipped as a [Stash] item, they can launch the Engulfed creature as part of Gulp Missile. When the Engulfed creature is launched, this Attack's Power increases to 90, the Attack's Type changes to a Type possessed by the launched creature, and the launched creature takes the damage of the attack, resisted two steps. When launching a Engulfed creature, Gulp Missile has a 20% chance to reduce the target's DEF stage by -1 on hit, a 20% chance to reduce SPDEF stage by -1 on hit, and a 20% chance to inflict Paralyzed 5 on hit.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "YIcOap0TZ9OgW9wP",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.322",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1715529254303,
+    "modifiedTime": 1715529254303,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!YIcOap0TZ9OgW9wP"
+}

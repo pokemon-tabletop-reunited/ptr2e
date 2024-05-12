@@ -1,0 +1,68 @@
+{
+  "name": "Teatime",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "teatime",
+    "description": "Effect: The user recovers 4 Ticks of HP. If the user is holding a [Food] item, then they may consume the [Food] item, regardless of the item's activation condition, to increase this move's healing effect to 8 Ticks in addition to the food item's effect. All other creatures on the field may also consume an equipped food item in this fashion as a Free Action in response to this move's resolution.",
+    "traits": [
+      "healing",
+      "social"
+    ],
+    "actions": [
+      {
+        "slug": "teatime",
+        "name": "Teatime",
+        "type": "attack",
+        "traits": [
+          "healing",
+          "social"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The user recovers 4 Ticks of HP. If the user is holding a [Food] item, then they may consume the [Food] item, regardless of the item's activation condition, to increase this move's healing effect to 8 Ticks in addition to the food item's effect. All other creatures on the field may also consume an equipped food item in this fashion as a Free Action in response to this move's resolution.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "lR7K1KeX5KnrUp1L",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.322",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1715529254303,
+    "modifiedTime": 1715529254303,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!lR7K1KeX5KnrUp1L"
+}

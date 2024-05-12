@@ -1,0 +1,68 @@
+{
+  "name": "Livewire",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "livewire",
+    "description": "Effect: Items and sharp edges over the [Blast] area begin crackling with electricity. A creature that attacks through the live conductors takes a Tick of Electric Type HP damage for every meter they travel. If a creature attacks at least 3 meters through the hazard, they become Paralyzed 5. The presence of Rainy Weather and Electric Terrain reduces the number of meters required to cause Paralyzed by 1 each.",
+    "traits": [
+      "hazard",
+      "blast-4"
+    ],
+    "actions": [
+      {
+        "slug": "livewire",
+        "name": "Livewire",
+        "type": "attack",
+        "traits": [
+          "hazard",
+          "blast-4"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: Items and sharp edges over the [Blast] area begin crackling with electricity. A creature that attacks through the live conductors takes a Tick of Electric Type HP damage for every meter they travel. If a creature attacks at least 3 meters through the hazard, they become Paralyzed 5. The presence of Rainy Weather and Electric Terrain reduces the number of meters required to cause Paralyzed by 1 each.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "DgPZ1JQ3CjpKqz3O",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.322",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1715529254303,
+    "modifiedTime": 1715529254303,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!DgPZ1JQ3CjpKqz3O"
+}
