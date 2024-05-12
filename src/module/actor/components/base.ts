@@ -4,6 +4,8 @@ class ActorComponent {
     static TEMPLATE: string;
     static TOOLTIP: string;
 
+    static ACTIONS: Record<string, (event: Event) => Promise<void>> = {};
+
     actor: ActorPTR2e;
 
     constructor(actor: ActorPTR2e) {
@@ -29,6 +31,10 @@ class ActorComponent {
     attachListeners(_html: HTMLElement) {
         // Implement in subclass
     }
+}
+
+interface ActorComponent {
+    constructor: typeof ActorComponent;
 }
 
 export { ActorComponent }

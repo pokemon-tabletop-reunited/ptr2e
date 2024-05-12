@@ -74,6 +74,11 @@ body {
 
     &.actor.v2 {
         min-width: 700px;
+
+        &.minimized {
+            min-width: unset;
+        }
+
         background: var(--appv2-background);
 
         .window-content {
@@ -691,11 +696,13 @@ body {
 
         .effects-display {
             padding: 0.5rem;
+            max-height: 600px;
 
             ul.effect-list {
                 list-style: none;
                 margin: 0 0.5rem;
                 padding: 0;
+                max-height: 500px;
 
                 li.effect {
                     padding: 0.5rem;
@@ -722,18 +729,21 @@ body {
             }
         }
 
+        .scroll {
+            overflow-y: auto;
+            overflow-x: hidden;
+            height: 100%;
+            gap: 0;
+        }
+
         .skill-component {
-            min-width: 290px;
+            min-width: 330px;
+            max-height: 600px;
             padding: 0.5rem;
 
-            .scroll {
-                overflow-y: auto;
-                overflow-x: hidden;
-                height: 100%;
-                gap: 0;
-            }
-
             .skills {
+                max-height: calc(600px - 1rem);
+
                 .skill-list {
                     display: flex;
                     flex-direction: column;

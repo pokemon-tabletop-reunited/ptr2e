@@ -51,8 +51,12 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
     }
 
     override _initializeApplicationOptions(options: Partial<foundry.applications.api.ApplicationConfiguration> & ComponentApplicationConfiguration): foundry.applications.api.ApplicationConfiguration & ComponentApplicationConfiguration {
+        const appOptions = super._initializeApplicationOptions(options);
+        if(typeof options.component !== "string") 
+            appOptions.actions = fu.mergeObject(appOptions.actions, options.component.constructor.ACTIONS);
+        
         return {
-            ...super._initializeApplicationOptions(options),
+            ...appOptions,
             uniqueId: `actor-${options.actor!.uuid}-${options.component!.constructor.name}`,
             actor: options.actor,
             component: options.component,
