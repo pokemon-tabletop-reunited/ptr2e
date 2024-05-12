@@ -56,22 +56,52 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
             id: "nav",
             template: "/systems/ptr2e/templates/apps/token-panel/nav.hbs",
         },
-        attacks: {
-            id: "attacks",
-            template: "/systems/ptr2e/templates/apps/token-panel/attacks.hbs",
+        "attack-slots": {
+            id: "attack-slots",
+            template: "/systems/ptr2e/templates/apps/token-panel/attack-slots.hbs",
+        },
+        "other-attacks": {
+            id: "other-attacks",
+            template: "/systems/ptr2e/templates/apps/token-panel/attack-other.hbs",
+        },
+        passives: {
+            id: "passives",
+            template: "/systems/ptr2e/templates/apps/token-panel/passives.hbs",
+        },
+        generic: {
+            id: "generic",
+            template: "/systems/ptr2e/templates/apps/token-panel/generic-actions.hbs",
         },
     };
 
     tabGroups: Record<string, string> = {
-        sheet: "attacks",
+        sheet: "attack-slots",
     };
 
     tabs: Record<string, Tab> = {
-        attacks: {
-            id: "attacks",
+        "attack-slots": {
+            id: "attack-slots",
             group: "sheet",
             icon: "fa-solid fa-burst",
-            label: "PTR2E.TokenPanel.Tabs.attacks.label",
+            label: "PTR2E.TokenPanel.Tabs.attack-slots.label",
+        },
+        "other-attacks": {
+            id: "other-attacks",
+            group: "sheet",
+            icon: "fa-solid fa-burst",
+            label: "PTR2E.TokenPanel.Tabs.attack-other.label",
+        },
+        passives: {
+            id: "passives",
+            group: "sheet",
+            icon: "fa-solid fa-burst",
+            label: "PTR2E.TokenPanel.Tabs.passives.label",
+        },
+        generic: {
+            id: "generic",
+            group: "sheet",
+            icon: "fa-solid fa-burst",
+            label: "PTR2E.TokenPanel.Tabs.generic-actions.label",
         },
     };
 
@@ -85,9 +115,6 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
 
     override _configureRenderOptions(options: foundry.applications.api.HandlebarsRenderOptions): void {
         super._configureRenderOptions(options);
-        if(!this.token?.actor?.party) {
-            options.parts = options.parts?.filter(part => part !== "party");
-        }
     }
 
     override async _renderHTML(
@@ -115,7 +142,13 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
 
         const actor = this.token.actor;
         if (!actor) return false;
-        const attacks = actor.actions.attack;
+        
+        const actions = {
+            passives: actor.actions.passive,
+            generic: actor.actions.generic,
+            slots: Object.values(actor.attacks.actions),
+            other: actor.actions.attack.filter(a => a.free),
+        };
 
         const party = actor.party;
         const isOwner = party?.owner == this.token.actor;
@@ -126,7 +159,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
             actor: this.token.actor,
             party,
             isOwner,
-            attacks,
+            actions,
             tabs: this._getTabs(),
         };
     }

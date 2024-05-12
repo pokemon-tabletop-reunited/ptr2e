@@ -2735,6 +2735,10 @@ body {
         display: none !important;
     }
 
+    .hidden {
+        display: none !important;
+    }
+
     nav.tabs {
         order: 3;
         flex-direction: column;
@@ -2761,20 +2765,19 @@ body {
         bottom: -1px;
         background: var(--appv2-background);
 
-        border-radius: 8px 8px 0 8px;
+        border-radius: 8px 0px 0 8px;
         border: 1px solid var(--border-theme-color);
 
         min-width: 150px;
-        min-height: 110%;
 
-        &[data-tab="attacks"] {
+        &.action-tab {
             &.active {
                 display: flex;
                 flex-direction: column;
-                justify-content: space-evenly;
+                justify-content: flex-end;
             }
 
-            .attack-item {
+            .attack-item, .action-item {
                 display: flex;
                 flex-direction: row;
 
@@ -2813,6 +2816,10 @@ body {
                     padding: 0.25rem;
                     min-width: 0;
                     text-overflow: ellipsis;
+
+                    &.small {
+                        padding: 1rem;
+                    }
                 }
 
                 background: var(--appv2-background);
@@ -2823,18 +2830,13 @@ body {
 
                 border-top: 1px solid var(--border-theme-color);
 
-                &:first-child {
+                &:first-child, &:first-child img{
                     border-top: unset;
-
-                    img {
-                        border-radius: 8px 0 0 0;
-                    }
+                    border-radius: 8px 0 0 0;
                 }
 
-                &:last-child {
-                    img {
-                        border-radius: 0 0 0 8px;
-                    }
+                &:last-child, &:last-child img{
+                    border-radius: 0 0 0 8px;
                 }
             }
         }
