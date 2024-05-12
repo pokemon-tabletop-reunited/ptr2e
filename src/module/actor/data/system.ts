@@ -220,6 +220,13 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         for (const skill of this.skills) {
             skill.prepareBaseData();
         }
+        for(const skill of game.ptr.data.skills) {
+            if(!this.skills.has(skill.slug)) {
+                const newSkill = new SkillPTR2e(fu.duplicate(skill), { parent: this });
+                newSkill.prepareBaseData();
+                this.skills.set(newSkill.slug, newSkill);
+            }
+        }
 
         this.health.max = this.attributes.hp.value;
 

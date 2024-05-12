@@ -64,6 +64,10 @@ interface SkillPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<Sk
     total: number;
 }
 
+type CoreSkill = Omit<SkillPTR2e['_source'], 'value' | 'rvs'>
+type CustomSkill = CoreSkill & { label: string, description: string }
+type Skill = CoreSkill | CustomSkill;
+
 type SkillSchema = {
     slug: SlugField<true, false, false>;
     value: foundry.data.fields.NumberField<number, number, true, false, true>;
@@ -74,3 +78,4 @@ type SkillSchema = {
 };
 
 export default SkillPTR2e;
+export type { SkillSchema, Skill, CoreSkill, CustomSkill}

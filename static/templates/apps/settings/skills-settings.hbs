@@ -1,0 +1,76 @@
+{{#with (lookup tabs partId) as | tab |}}
+    <section class="tab sheet-body {{tab.cssClass}} standard-form" data-tab="{{tab.id}}" data-group="type">
+        {{!-- <main class="scroll"> --}}
+            <fieldset class="scroll">
+                <legend>
+                    {{localize tab.label}}
+                </legend>
+                <header>
+                    <p>{{{localize tab.hint}}}</p>
+                </header>
+                <article class="skills {{#unless (eq tab.id 'moduleSkills')}}editable{{/unless}}">
+                    <div class="form-group center header">
+                        <label ><h5>Skill</h5></label>
+                        <label><h5>Group</h5></label>
+                        {{#if (eq tab.id 'userSkills')}}
+                            <div class="form-fields" data-tooltip="{{localize "PTR2E.Settings.Skills.description"}}">
+                                <h5>Description</h5>
+                            </div>
+                            <div class="skill-controls create">
+                                <a class="item-control create-skill" data-tooltip="Add Skill" data-action="add">
+                                    <i class="fas fa-plus-circle" style="margin-right: 3px;"></i>
+                                    <span class="readable">{{localize "ITEM.AddButton"}}</span>
+                                </a>
+                            </div>
+                            {{else}}
+                            <div class="skill-controls item-controls"></div>
+                        {{/if}}
+                    </div>
+                    {{#with (lookup ../skills ../partId) as | skills |}}
+                        {{#each skills as | skill |}}
+                            <div class="form-group" data-slug="{{skill.slug}}">
+                                {{#if (eq tab.id 'userSkills')}}
+                                <input type="hidden" name="skill.{{skill.slug}}.slug" value="{{skill.slug}}"/>
+                                <label class="center"><input type="text" data-dType="String" name="skill.{{skill.slug}}.label" value="{{skill.label}}"/></label>
+                                <label class="center skill" {{#if skill.group}}data-tooltip="{{skill.group}}" data-slug="{{skill.group}}"{{/if}}><input type="text" data-dType="String" name="skill.{{skill.slug}}.group" value="{{skill.group}}"/></label>
+                                <div class="form-fields">
+                                    <textarea name="skill.{{skill.slug}}.description" class="form-control"
+                                        data-dtype="String">{{skill.description}}</textarea>
+                                </div>
+                                {{else}}
+                                    <label class="center skill" data-tooltip="{{formatSlug skill.slug}}" data-slug="{{skill.slug}}" data-group="{{skill.group}}">{{formatSlug skill.slug}}</label>
+                                    {{#if skill.group}}
+                                        <label class="center skill" data-tooltip="{{formatSlug skill.group}}" data-slug="{{skill.group}}">{{formatSlug skill.group}}</label>
+                                    {{else}}
+                                        <label class="center"><small>None</small></label>
+                                    {{/if}}
+                                {{/if}}
+                                <div class="skill-controls item-controls">
+                                    <!-- Favourite / Hide Skill -->
+                                    {{#if skill.favourite}}
+                                        <a style="color: gold;" class="item-control favourite-skill" data-tooltip-direction="UP" data-tooltip="Unfavourite {{formatSlug skill.slug}}" data-action="favourite-skill"><i class="fas fa-star"></i></a>
+                                    {{else}}
+                                        <a class="item-control favourite-skill" data-tooltip-direction="UP" data-tooltip="Favourite {{formatSlug skill.slug}}" data-action="favourite-skill"><i class="far fa-star"></i></a>
+                                    {{/if}}
+                                    {{#if skill.hidden}}
+                                        <a style="color: slategray;" class="item-control hide-skill" data-tooltip-direction="UP" data-tooltip="Unhide {{formatSlug skill.slug}}" data-action="hide-skill"><i class="fas fa-eye-slash"></i></a>
+                                    {{else}}
+                                        <a class="item-control hide-skill" data-tooltip-direction="UP" data-tooltip="Hide {{formatSlug skill.slug}}" data-action="hide-skill"><i class="far fa-eye"></i></a>
+                                    {{/if}}
+                                    <!-- Delete Skill -->
+                                    {{#if (eq tab.id 'userSkills')}}
+                                        <a class="item-control delete-skill" data-tooltip-direction="UP" data-tooltip="Delete {{formatSlug skill.slug}}" data-action="delete-skill"><i class="fas fa-trash"></i></a>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        {{/each}}
+                    {{else}}
+                        <div class="form-group center empty">
+                            <p><small>No skills of this type exist</small></p>
+                        </div>
+                    {{/with}}
+                </article>
+            </fieldset>
+        {{!-- </main> --}}
+    </section>
+{{/with}}

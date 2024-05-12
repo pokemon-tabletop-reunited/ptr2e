@@ -8,6 +8,7 @@ import { ClockDatabase } from "@data";
 import { TraitsSettingsMenu } from "@module/apps/traits.ts";
 import ActorSheetPTRV2 from "@actor/sheetv2.ts";
 import { HTMLStringTagsElementPTR2e } from "@module/apps/string-tags.ts";
+import { SkillsSettingsMenu } from "@module/apps/skills.ts";
 
 export const Init: PTRHook = {
     listen() {
@@ -137,6 +138,25 @@ export const Init: PTRHook = {
                 hint: "PTR2E.Settings.Traits.Hint",
                 icon: "fa-solid fa-rectangle-list",
                 type: TraitsSettingsMenu,
+                restricted: true,
+            });
+
+            game.settings.register("ptr2e", "skills", {
+                name: "PTR2E.Settings.Skills.Name",
+                hint: "PTR2E.Settings.Skills.Hint",
+                scope: "world",
+                config: false,
+                type: Array,
+                default: [],
+                onChange: () => {game.ptr.data.skills.refresh();}
+            })
+
+            game.settings.registerMenu("ptr2e", "skills", {
+                name: "PTR2E.Settings.Skills.Name",
+                label: "PTR2E.Settings.Skills.Label",
+                hint: "PTR2E.Settings.Skills.Hint",
+                icon: "fa-solid fa-rectangle-list",
+                type: SkillsSettingsMenu,
                 restricted: true,
             });
 
