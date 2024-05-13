@@ -1,0 +1,55 @@
+{
+  "name": "Dive",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/water_icon.png",
+  "system": {
+    "slug": "dive",
+    "description": "Effect: Set-Up: The user freely Moves up to half of their Base Swim Score, and ends their activation. While in this state, they have +4 EVA stages.\nResolution: On their next activation, the user freely Moves up to one-and-a-half times their Base Swim Score and attacks with Dive.",
+    "traits": [
+      "set-up",
+      "defensive",
+      "contact",
+      "pass-3"
+    ],
+    "actions": [
+      {
+        "slug": "dive",
+        "name": "Dive",
+        "type": "attack",
+        "traits": [
+          "set-up",
+          "defensive",
+          "contact",
+          "pass-3"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "Effect: Set-Up: The user freely Moves up to half of their Base Swim Score, and ends their activation. While in this state, they have +4 EVA stages.\nResolution: On their next activation, the user freely Moves up to one-and-a-half times their Base Swim Score and attacks with Dive.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "G4SRScedf5uS7s1I",
+  "effects": []
+}

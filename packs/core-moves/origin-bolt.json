@@ -1,0 +1,51 @@
+{
+  "name": "Origin Bolt",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "origin-bolt",
+    "description": "Effect: On hit, the target has a 30% chance of being Paralyzed 5. When using this attack while Harden, the user gains 2 Ticks of HP.",
+    "traits": [
+      "smite",
+      "legendary"
+    ],
+    "actions": [
+      {
+        "slug": "origin-bolt",
+        "name": "Origin Bolt",
+        "type": "attack",
+        "traits": [
+          "smite",
+          "legendary"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: On hit, the target has a 30% chance of being Paralyzed 5. When using this attack while Harden, the user gains 2 Ticks of HP.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "TExeUgZTCNriTVlk",
+  "effects": []
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Engulf",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ghost_icon.png",
+  "system": {
+    "slug": "engulf",
+    "description": "Effect: All [Hazard] and [Shield] attack effects in Range are cleared, as are the Leech and Bound conditions.",
+    "traits": [
+      "move-locked",
+      "exhaust"
+    ],
+    "actions": [
+      {
+        "slug": "engulf",
+        "name": "Engulf",
+        "type": "attack",
+        "traits": [
+          "move-locked",
+          "exhaust"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 7,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "ghost"
+        ],
+        "description": "Effect: All [Hazard] and [Shield] attack effects in Range are cleared, as are the Leech and Bound conditions.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "v7DeY7cPLe5xLE9Y",
+  "effects": []
+}

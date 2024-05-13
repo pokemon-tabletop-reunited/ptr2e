@@ -1,0 +1,53 @@
+{
+  "name": "Poison Tail",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/poison_icon.png",
+  "system": {
+    "slug": "poison-tail",
+    "description": "Effect: On hit, the target has a 10% chance of being Poison 5.",
+    "traits": [
+      "crit-1",
+      "tail",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "poison-tail",
+        "name": "Poison Tail",
+        "type": "attack",
+        "traits": [
+          "crit-1",
+          "tail",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: On hit, the target has a 10% chance of being Poison 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "q9zc4tqLoLZiCdCz",
+  "effects": []
+}

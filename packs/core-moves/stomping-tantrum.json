@@ -1,0 +1,50 @@
+{
+  "name": "Stomping Tantrum",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ground_icon.png",
+  "system": {
+    "slug": "stomping-tantrum",
+    "description": "Effect: If the user's last used attack resulted in a miss or failed on the user's previous activation, Stomping Tantrum's Power is doubled.",
+    "traits": [
+      "contact",
+      "crushing"
+    ],
+    "actions": [
+      {
+        "slug": "stomping-tantrum",
+        "name": "Stomping Tantrum",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "crushing"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 75,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "Effect: If the user's last used attack resulted in a miss or failed on the user's previous activation, Stomping Tantrum's Power is doubled.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "Unoi1NgtyzdkAmfk",
+  "effects": []
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Dragon Rush",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dragon_icon.png",
+  "system": {
+    "slug": "dragon-rush",
+    "description": "Effect: On hit, the target has a 20% chance of being Flinched 3.",
+    "traits": [
+      "crushing",
+      "pass-3",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "dragon-rush",
+        "name": "Dragon Rush",
+        "type": "attack",
+        "traits": [
+          "crushing",
+          "pass-3",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 75,
+        "types": [
+          "dragon"
+        ],
+        "description": "Effect: On hit, the target has a 20% chance of being Flinched 3.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "sBKrwPZi8gBdeIND",
+  "effects": []
+}

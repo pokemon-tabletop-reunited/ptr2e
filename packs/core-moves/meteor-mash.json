@@ -1,0 +1,55 @@
+{
+  "name": "Meteor Mash",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/steel_icon.png",
+  "system": {
+    "slug": "meteor-mash",
+    "description": "Effect: On hit, the user has a 20% chance of increasing their ATK stage by +1 for 5 activations.",
+    "traits": [
+      "punch",
+      "dash",
+      "crushing",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "meteor-mash",
+        "name": "Meteor Mash",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "dash",
+          "crushing",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 90,
+        "types": [
+          "steel"
+        ],
+        "description": "Effect: On hit, the user has a 20% chance of increasing their ATK stage by +1 for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "xpZK7MUf1eFdnvBe",
+  "effects": []
+}

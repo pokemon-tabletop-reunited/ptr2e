@@ -1,0 +1,49 @@
+{
+  "name": "Salt Cure",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/rock_icon.png",
+  "system": {
+    "slug": "salt-cure",
+    "description": "Effect: On hit, all valid targets are afflicted with Salted for 5 activations. Salt Cured creatures take a tick of HP damage at the end of each of their activations. Steel-type and Water-type creatures take 2 ticks of HP damage at the end of each of their activations instead. Salt Cure's duration cannot be refreshed; and the effect ends when the duration ends, the creature is switched out, Faints or combat ends.",
+    "traits": [
+      "blast-1"
+    ],
+    "actions": [
+      {
+        "slug": "salt-cure",
+        "name": "Salt Cure",
+        "type": "attack",
+        "traits": [
+          "blast-1"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "rock"
+        ],
+        "description": "Effect: On hit, all valid targets are afflicted with Salted for 5 activations. Salt Cured creatures take a tick of HP damage at the end of each of their activations. Steel-type and Water-type creatures take 2 ticks of HP damage at the end of each of their activations instead. Salt Cure's duration cannot be refreshed; and the effect ends when the duration ends, the creature is switched out, Faints or combat ends.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "75gNlQThpP9cULI9",
+  "effects": []
+}

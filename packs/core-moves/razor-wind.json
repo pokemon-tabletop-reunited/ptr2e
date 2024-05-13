@@ -1,0 +1,59 @@
+{
+  "name": "Razor Wind",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "razor-wind",
+    "description": "Effect: Set-Up: The user starts whipping up a whirlwind, gaining +3 EVA stages for 5 activations.\nResolution: On their next activation, the user attacks with this Attack.",
+    "traits": [
+      "set-up",
+      "defensive",
+      "crit-1",
+      "blast-2",
+      "wind",
+      "sharp"
+    ],
+    "actions": [
+      {
+        "slug": "razor-wind",
+        "name": "Razor Wind",
+        "type": "attack",
+        "traits": [
+          "set-up",
+          "defensive",
+          "crit-1",
+          "blast-2",
+          "wind",
+          "sharp"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: Set-Up: The user starts whipping up a whirlwind, gaining +3 EVA stages for 5 activations.\nResolution: On their next activation, the user attacks with this Attack.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "NuOieSZVQ6CO174A",
+  "effects": []
+}

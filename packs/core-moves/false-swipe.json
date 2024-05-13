@@ -1,0 +1,51 @@
+{
+  "name": "False Swipe",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "false-swipe",
+    "description": "Effect: The target cannot fall below 1 HP by damage from False Swipe.",
+    "traits": [
+      "sharp",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "false-swipe",
+        "name": "False Swipe",
+        "type": "attack",
+        "traits": [
+          "sharp",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The target cannot fall below 1 HP by damage from False Swipe.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "E"
+  },
+  "_id": "flkctHlLzHAYEjSy",
+  "effects": []
+}

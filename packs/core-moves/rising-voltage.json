@@ -1,0 +1,50 @@
+{
+  "name": "Rising Voltage",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "rising-voltage",
+    "description": "Effect: If Electric Terrain is active, this Attack's Power is doubled.",
+    "traits": [
+      "earthbound",
+      "environ"
+    ],
+    "actions": [
+      {
+        "slug": "rising-voltage",
+        "name": "Rising Voltage",
+        "type": "attack",
+        "traits": [
+          "earthbound",
+          "environ"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: If Electric Terrain is active, this Attack's Power is doubled.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "uC3oEhE62n2eCqXN",
+  "effects": []
+}

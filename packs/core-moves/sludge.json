@@ -1,0 +1,49 @@
+{
+  "name": "Sludge",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/poison_icon.png",
+  "system": {
+    "slug": "sludge",
+    "description": "Effect: On hit, all valid targets have a 30% chance of being Poison 5.",
+    "traits": [
+      "blast-1"
+    ],
+    "actions": [
+      {
+        "slug": "sludge",
+        "name": "Sludge",
+        "type": "attack",
+        "traits": [
+          "blast-1"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 65,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: On hit, all valid targets have a 30% chance of being Poison 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "JyY5EGIMXjZ4p62a",
+  "effects": []
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Poison Fang",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/poison_icon.png",
+  "system": {
+    "slug": "poison-fang",
+    "description": "Effect: On hit, the target has a 50% chance of gaining Blight 8.",
+    "traits": [
+      "jaw",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "poison-fang",
+        "name": "Poison Fang",
+        "type": "attack",
+        "traits": [
+          "jaw",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: On hit, the target has a 50% chance of gaining Blight 8.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "Ir2EzL8JX7ZeToFq",
+  "effects": []
+}

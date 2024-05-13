@@ -1,0 +1,55 @@
+{
+  "name": "Cut",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "cut",
+    "description": "Effect: Cut ignores the target’s positive DEF stages.",
+    "traits": [
+      "pass-2",
+      "sharp",
+      "contact",
+      "field"
+    ],
+    "actions": [
+      {
+        "slug": "cut",
+        "name": "Cut",
+        "type": "attack",
+        "traits": [
+          "pass-2",
+          "sharp",
+          "contact",
+          "field"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 50,
+        "accuracy": 95,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: Cut ignores the target’s positive DEF stages.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "D"
+  },
+  "_id": "TkmsrwP0c6jUPCih",
+  "effects": []
+}

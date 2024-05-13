@@ -1,0 +1,51 @@
+{
+  "name": "Pixie Tail",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fairy_icon.png",
+  "system": {
+    "slug": "pixie-tail",
+    "description": "Effect: On hit, the target has a 30% chance of losing -1 SPDEF stage for 5 activations.",
+    "traits": [
+      "tail",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "pixie-tail",
+        "name": "Pixie Tail",
+        "type": "attack",
+        "traits": [
+          "tail",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 75,
+        "types": [
+          "fairy"
+        ],
+        "description": "Effect: On hit, the target has a 30% chance of losing -1 SPDEF stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "Ychp463vORkNlFgs",
+  "effects": []
+}

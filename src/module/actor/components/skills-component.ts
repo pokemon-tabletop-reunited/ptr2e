@@ -8,6 +8,26 @@ class SkillsComponent extends ActorComponent {
     static override TEMPLATE = "systems/ptr2e/templates/actor/components/actor-skills-component.hbs";
     static override TOOLTIP = "PTR2E.ActorSheet.Components.Skills.tooltip";
 
+    static override ACTIONS = {
+        "toggle-hidden-skills": async function (this: SkillsComponent, _event: Event) {
+            const appSettings = fu.duplicate(game.user.getFlag("ptr2e", "appSettings") ?? {}) as Record<string, Record<string, unknown>>;
+            const appId = `ActorSheetPTRV2-${this.actor.uuid.replaceAll(".", "-")}`;
+            if (!appSettings[appId]) appSettings[appId] = {hideHiddenSkills: true};
+
+            appSettings[appId].hideHiddenSkills = !appSettings[appId].hideHiddenSkills;
+            await game.user.setFlag("ptr2e", "appSettings", appSettings);
+            
+            for(const app of Object.values(this.actor.apps)) {
+                if(app instanceof foundry.applications.api.ApplicationV2) {
+                    const parts = (app as unknown as {parts: Record<string, unknown>}).parts;
+                    if('popout' in parts) app.render({parts: ["popout"]})
+                    if('skills' in parts) app.render({parts: ["skills"]})
+                }
+                else app?.render();
+            }
+        },
+    }
+
     static prepareSkillsData(actor: ActorPTR2e) {
         const skills = (() => {
             const favouriteGroups: SkillCategory = { none: { label: null, skills: [] } };

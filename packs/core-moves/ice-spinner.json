@@ -1,0 +1,49 @@
+{
+  "name": "Ice Spinner",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ice_icon.png",
+  "system": {
+    "slug": "ice-spinner",
+    "description": "Effect: The user clears any [Hazards] within range, and ends any [Trap] attack effects the user has.",
+    "traits": [
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "ice-spinner",
+        "name": "Ice Spinner",
+        "type": "attack",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "ice"
+        ],
+        "description": "Effect: The user clears any [Hazards] within range, and ends any [Trap] attack effects the user has.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "2PD128uhhuNvUOkk",
+  "effects": []
+}

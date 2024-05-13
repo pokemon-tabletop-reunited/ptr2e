@@ -1,0 +1,55 @@
+{
+  "name": "Force Palm",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "force-palm",
+    "description": "Effect: On hit, the target has a 30% chance of becoming Paralyzed 5.",
+    "traits": [
+      "push-1",
+      "pulse",
+      "contact",
+      "aura"
+    ],
+    "actions": [
+      {
+        "slug": "force-palm",
+        "name": "Force Palm",
+        "type": "attack",
+        "traits": [
+          "push-1",
+          "pulse",
+          "contact",
+          "aura"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: On hit, the target has a 30% chance of becoming Paralyzed 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "7eWAp2IGkSaGo0e0",
+  "effects": []
+}

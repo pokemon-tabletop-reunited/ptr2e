@@ -1,0 +1,53 @@
+{
+  "name": "Floaty Fall",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/flying_icon.png",
+  "system": {
+    "slug": "floaty-fall",
+    "description": "Effect: On hit, the target has a 30% chance of being Flinched 3.",
+    "traits": [
+      "mascot",
+      "dash",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "floaty-fall",
+        "name": "Floaty Fall",
+        "type": "attack",
+        "traits": [
+          "mascot",
+          "dash",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 95,
+        "types": [
+          "flying"
+        ],
+        "description": "Effect: On hit, the target has a 30% chance of being Flinched 3.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "PNkHma7aKgEZYapq",
+  "effects": []
+}

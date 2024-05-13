@@ -1,0 +1,51 @@
+{
+  "name": "Fusion Bolt",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "fusion-bolt",
+    "description": "Effect: If Fusion Flare was used by another creature during the current or previous round, Fusion Bolt has its Power doubled.",
+    "traits": [
+      "smite",
+      "legendary"
+    ],
+    "actions": [
+      {
+        "slug": "fusion-bolt",
+        "name": "Fusion Bolt",
+        "type": "attack",
+        "traits": [
+          "smite",
+          "legendary"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: If Fusion Flare was used by another creature during the current or previous round, Fusion Bolt has its Power doubled.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "nRBM1Zfd0uYiXR5r",
+  "effects": []
+}

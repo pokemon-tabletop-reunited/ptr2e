@@ -1,0 +1,51 @@
+{
+  "name": "Shell Trap",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fire_icon.png",
+  "system": {
+    "slug": "shell-trap",
+    "description": "Effect: The user gains Resolved 3. While Resolved from this attack: when a foe uses a damaging [Contact] attack that targets any creature adjacent to the user while this effect is active, the user may Intercept the triggering attack, and then freely attack the target with Shell Trap. When the user is attacked with a [Contact] attack, the user freely attacks the attacker with Shell Trap.",
+    "traits": [
+      "explode",
+      "draw-in"
+    ],
+    "actions": [
+      {
+        "slug": "shell-trap",
+        "name": "Shell Trap",
+        "type": "attack",
+        "traits": [
+          "explode",
+          "draw-in"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 150,
+        "accuracy": 100,
+        "types": [
+          "fire"
+        ],
+        "description": "Effect: The user gains Resolved 3. While Resolved from this attack: when a foe uses a damaging [Contact] attack that targets any creature adjacent to the user while this effect is active, the user may Intercept the triggering attack, and then freely attack the target with Shell Trap. When the user is attacked with a [Contact] attack, the user freely attacks the attacker with Shell Trap.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "Jya0OmutdLGkvKWc",
+  "effects": []
+}

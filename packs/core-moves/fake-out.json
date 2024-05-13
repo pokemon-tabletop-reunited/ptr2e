@@ -1,0 +1,53 @@
+{
+  "name": "Fake Out",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "fake-out",
+    "description": "Effect: The target becomes Flinched 5 on hit.",
+    "traits": [
+      "dash",
+      "priority-3",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "fake-out",
+        "name": "Fake Out",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "priority-3",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": 3,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The target becomes Flinched 5 on hit.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "bETEHMYZpiBol842",
+  "effects": []
+}

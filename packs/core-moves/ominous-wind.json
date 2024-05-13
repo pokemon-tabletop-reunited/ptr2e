@@ -1,0 +1,49 @@
+{
+  "name": "Ominous Wind",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ghost_icon.png",
+  "system": {
+    "slug": "ominous-wind",
+    "description": "Effect: After this attack resolves, the user has a 10% chance of gaining ATK, DEF, SPATK, SPDEF and SPD stage by 1 for 5 activations.",
+    "traits": [
+      "wind"
+    ],
+    "actions": [
+      {
+        "slug": "ominous-wind",
+        "name": "Ominous Wind",
+        "type": "attack",
+        "traits": [
+          "wind"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "ghost"
+        ],
+        "description": "Effect: After this attack resolves, the user has a 10% chance of gaining ATK, DEF, SPATK, SPDEF and SPD stage by 1 for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "ldbAbUuyzZpiYKDh",
+  "effects": []
+}

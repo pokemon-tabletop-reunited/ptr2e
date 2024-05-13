@@ -1,0 +1,52 @@
+{
+  "name": "Z-Pose!",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/untyped_icon.png",
+  "system": {
+    "slug": "z-pose",
+    "description": "Effect: The user triggers the Z-Crystal or the Z-Power-Crystal possessed by the target, allowing them to use a [Zenith] Action during their next Activation.",
+    "traits": [
+      "phenomenon",
+      "command",
+      "dash"
+    ],
+    "actions": [
+      {
+        "slug": "z-pose",
+        "name": "Z-Pose!",
+        "type": "attack",
+        "traits": [
+          "phenomenon",
+          "command",
+          "dash"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "untyped"
+        ],
+        "description": "Effect: The user triggers the Z-Crystal or the Z-Power-Crystal possessed by the target, allowing them to use a [Zenith] Action during their next Activation.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "HH5ypkTt9duMhDyh",
+  "effects": []
+}

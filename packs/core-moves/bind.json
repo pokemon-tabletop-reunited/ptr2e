@@ -1,0 +1,49 @@
+{
+  "name": "Bind",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "bind",
+    "description": "Effect: The user auto-succeeds on a Grapple Maneuver check against the targeton hit. While the target is Grappled, they take a Tick of HP damage at the end of each of their activations, and suffer a -20 to rolls to escape the Grapple.",
+    "traits": [
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "bind",
+        "name": "Bind",
+        "type": "attack",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 15,
+        "accuracy": 85,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The user auto-succeeds on a Grapple Maneuver check against the targeton hit. While the target is Grappled, they take a Tick of HP damage at the end of each of their activations, and suffer a -20 to rolls to escape the Grapple.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "FmYMJamRwY1Ngj7j",
+  "effects": []
+}

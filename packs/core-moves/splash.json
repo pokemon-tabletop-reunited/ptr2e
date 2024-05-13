@@ -1,0 +1,50 @@
+{
+  "name": "Splash",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "splash",
+    "description": "Effect: Before attacking, you may freely move 1m in any direction.",
+    "traits": [
+      "basic",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "splash",
+        "name": "Splash",
+        "type": "attack",
+        "traits": [
+          "basic",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 10,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: Before attacking, you may freely move 1m in any direction.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "zsfPLAkIqk2KQaP7",
+  "effects": []
+}

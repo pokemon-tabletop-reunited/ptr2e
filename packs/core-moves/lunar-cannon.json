@@ -1,0 +1,55 @@
+{
+  "name": "Lunar Cannon",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "lunar-cannon",
+    "description": "Effect: Set-Up: The user gains +1 SPATK and EVA stage for 5 activations, and ends their activation. If the weather is New Moon, the user Sets-Up and resolves Lunar Cannon on the same activation.\nResolution: The user resolves and attacks with Lunar Cannon. If there is Sun Weather, Lunar Cannon's Power is reduced by 50%.",
+    "traits": [
+      "set-up",
+      "defensive",
+      "ray",
+      "environ"
+    ],
+    "actions": [
+      {
+        "slug": "lunar-cannon",
+        "name": "Lunar Cannon",
+        "type": "attack",
+        "traits": [
+          "set-up",
+          "defensive",
+          "ray",
+          "environ"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 110,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "Effect: Set-Up: The user gains +1 SPATK and EVA stage for 5 activations, and ends their activation. If the weather is New Moon, the user Sets-Up and resolves Lunar Cannon on the same activation.\nResolution: The user resolves and attacks with Lunar Cannon. If there is Sun Weather, Lunar Cannon's Power is reduced by 50%.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "yphE676PNRvCy0tE",
+  "effects": []
+}

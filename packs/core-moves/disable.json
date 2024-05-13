@@ -1,0 +1,49 @@
+{
+  "name": "Disable",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "disable",
+    "description": "Trigger: A foe uses an attack.\nEffect: The triggering attack becomes Disabled 5 after it resolves.",
+    "traits": [
+      "interrupt-1"
+    ],
+    "actions": [
+      {
+        "slug": "disable",
+        "name": "Disable",
+        "type": "attack",
+        "traits": [
+          "interrupt-1"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "A foe uses an attack."
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Trigger: A foe uses an attack.\nEffect: The triggering attack becomes Disabled 5 after it resolves.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "g2dBn6zaIVcZCIuM",
+  "effects": []
+}

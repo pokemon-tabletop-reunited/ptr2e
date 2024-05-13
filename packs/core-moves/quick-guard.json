@@ -1,0 +1,53 @@
+{
+  "name": "Quick Guard",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "quick-guard",
+    "description": "Trigger: The user or an ally in range is targeted by a [Priority X] Action.\nEffect: The triggering attack fails to hit, and additional attacks that use Priority that would hit also fail to hit until until the round ends. These attacks that would fail to hit do not activate on-miss effects.",
+    "traits": [
+      "shield",
+      "exhaust",
+      "interrupt-4"
+    ],
+    "actions": [
+      {
+        "slug": "quick-guard",
+        "name": "Quick Guard",
+        "type": "attack",
+        "traits": [
+          "shield",
+          "exhaust",
+          "interrupt-4"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user or an ally in range is targeted by a [Priority X] Action."
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "fighting"
+        ],
+        "description": "Trigger: The user or an ally in range is targeted by a [Priority X] Action.\nEffect: The triggering attack fails to hit, and additional attacks that use Priority that would hit also fail to hit until until the round ends. These attacks that would fail to hit do not activate on-miss effects.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "Gp34GOsGraD3JlsH",
+  "effects": []
+}

@@ -1,0 +1,50 @@
+{
+  "name": "Thunder Cage",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "thunder-cage",
+    "description": "Effect: On hit, the target becomes Bound 5. While Bound, the target and any creatures within 3m of the bound creature take a Tick of HP damage at the end of their activations.",
+    "traits": [
+      "legendary",
+      "trap"
+    ],
+    "actions": [
+      {
+        "slug": "thunder-cage",
+        "name": "Thunder Cage",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "trap"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 15,
+        "accuracy": 90,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: On hit, the target becomes Bound 5. While Bound, the target and any creatures within 3m of the bound creature take a Tick of HP damage at the end of their activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "WtsWkk7bobMJktAg",
+  "effects": []
+}

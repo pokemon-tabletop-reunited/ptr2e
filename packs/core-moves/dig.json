@@ -1,0 +1,55 @@
+{
+  "name": "Dig",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ground_icon.png",
+  "system": {
+    "slug": "dig",
+    "description": "Effect: Set-Up: The user freely moves up to half of their Burrow Score, and ends their activation. While in this state, they have +4 EVA stages.\nResolution: On their next activation, the user freely attacks up to one-and-a-half times their Burrow Score and attacks with and resolves Dig.",
+    "traits": [
+      "set-up",
+      "defensive",
+      "burrow",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "dig",
+        "name": "Dig",
+        "type": "attack",
+        "traits": [
+          "set-up",
+          "defensive",
+          "burrow",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "Effect: Set-Up: The user freely moves up to half of their Burrow Score, and ends their activation. While in this state, they have +4 EVA stages.\nResolution: On their next activation, the user freely attacks up to one-and-a-half times their Burrow Score and attacks with and resolves Dig.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "90a4UOjXNVJQEjSy",
+  "effects": []
+}

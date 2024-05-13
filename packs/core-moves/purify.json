@@ -1,0 +1,49 @@
+{
+  "name": "Purify",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/poison_icon.png",
+  "system": {
+    "slug": "purify",
+    "description": "Effect: The target is cured of all Major Status Conditions. If the target is cured this way, the user recovers HP equal to 1/2 their Max HP.",
+    "traits": [
+      "healing"
+    ],
+    "actions": [
+      {
+        "slug": "purify",
+        "name": "Purify",
+        "type": "attack",
+        "traits": [
+          "healing"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: The target is cured of all Major Status Conditions. If the target is cured this way, the user recovers HP equal to 1/2 their Max HP.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "W85QPAFdQRYn5Yfp",
+  "effects": []
+}

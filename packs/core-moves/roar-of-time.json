@@ -1,0 +1,53 @@
+{
+  "name": "Roar of Time",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dragon_icon.png",
+  "system": {
+    "slug": "roar-of-time",
+    "description": "Effect: On hit, all valid targets are Slowed 7. The user may spend 4 PP and change this attack's Range to \"15m Cone\" until their next Activation.",
+    "traits": [
+      "legendary",
+      "smite",
+      "exhaust"
+    ],
+    "actions": [
+      {
+        "slug": "roar-of-time",
+        "name": "Roar of Time",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "smite",
+          "exhaust"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 150,
+        "accuracy": 90,
+        "types": [
+          "dragon"
+        ],
+        "description": "Effect: On hit, all valid targets are Slowed 7. The user may spend 4 PP and change this attack's Range to \"15m Cone\" until their next Activation.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "PTh9HrZFLR9vXBGN",
+  "effects": []
+}

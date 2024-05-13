@@ -1,0 +1,49 @@
+{
+  "name": "Charm",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fairy_icon.png",
+  "system": {
+    "slug": "charm",
+    "description": "Effect: On hit, the target loses -2 ATK stage for 5 activations. If the target is affected by the Charmed condition, they lose -3 ATK stage for 7 activations instead.",
+    "traits": [
+      "social"
+    ],
+    "actions": [
+      {
+        "slug": "charm",
+        "name": "Charm",
+        "type": "attack",
+        "traits": [
+          "social"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "fairy"
+        ],
+        "description": "Effect: On hit, the target loses -2 ATK stage for 5 activations. If the target is affected by the Charmed condition, they lose -3 ATK stage for 7 activations instead.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "qz5m0G6pBtTputPs",
+  "effects": []
+}

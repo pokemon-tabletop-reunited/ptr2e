@@ -1,0 +1,51 @@
+{
+  "name": "Crashing Bolt",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "crashing-bolt",
+    "description": "Effect: On hit, the target becomes Grounded 5 and has a 20% chance to become Paralyzed 5.",
+    "traits": [
+      "sky",
+      "smite"
+    ],
+    "actions": [
+      {
+        "slug": "crashing-bolt",
+        "name": "Crashing Bolt",
+        "type": "attack",
+        "traits": [
+          "sky",
+          "smite"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: On hit, the target becomes Grounded 5 and has a 20% chance to become Paralyzed 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "cPkIDh9sgxuYJURv",
+  "effects": []
+}

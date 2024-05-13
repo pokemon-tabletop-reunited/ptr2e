@@ -1,0 +1,51 @@
+{
+  "name": "Dynamic Punch",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "dynamic-punch",
+    "description": "Effect: On hit, the target becomes Confused 7.",
+    "traits": [
+      "punch",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "dynamic-punch",
+        "name": "Dynamic Punch",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 50,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: On hit, the target becomes Confused 7.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "CD4xTw6z9gp9tqmR",
+  "effects": []
+}

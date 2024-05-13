@@ -1,0 +1,57 @@
+{
+  "name": "Skull Bash",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "skull-bash",
+    "description": "Effect: Set-Up: The user takes a charging stance, gaining Braced 1 and gain +1 DEF stage for 5 activations.\nResolution: On their next activation, they attack with Skull Bash.",
+    "traits": [
+      "set-up",
+      "dash",
+      "defensive",
+      "curl",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "skull-bash",
+        "name": "Skull Bash",
+        "type": "attack",
+        "traits": [
+          "set-up",
+          "dash",
+          "defensive",
+          "curl",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 130,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: Set-Up: The user takes a charging stance, gaining Braced 1 and gain +1 DEF stage for 5 activations.\nResolution: On their next activation, they attack with Skull Bash.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "cw3MOFXqhEP3p6yY",
+  "effects": []
+}

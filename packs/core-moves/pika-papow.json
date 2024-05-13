@@ -1,0 +1,53 @@
+{
+  "name": "Pika Papow",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "pika-papow",
+    "description": "Effect: For every active ally in the user's own party, Pika Papow's Power increases by 10, up to a maximum of 100 power.",
+    "traits": [
+      "mascot",
+      "priority-1",
+      "danger-close"
+    ],
+    "actions": [
+      {
+        "slug": "pika-papow",
+        "name": "Pika Papow",
+        "type": "attack",
+        "traits": [
+          "mascot",
+          "priority-1",
+          "danger-close"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": 1,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 50,
+        "accuracy": null,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: For every active ally in the user's own party, Pika Papow's Power increases by 10, up to a maximum of 100 power.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "dGgdxC87l0NtyZV4",
+  "effects": []
+}

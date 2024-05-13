@@ -1,0 +1,51 @@
+{
+  "name": "Dark Pulse",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "dark-pulse",
+    "description": "On hit, the target has a 20% chance of being Flinched 2.",
+    "traits": [
+      "pulse",
+      "aura"
+    ],
+    "actions": [
+      {
+        "slug": "dark-pulse",
+        "name": "Dark Pulse",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "aura"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "On hit, the target has a 20% chance of being Flinched 2.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "b0lJe38pFiac5Fo4",
+  "effects": []
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Explosion",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "explosion",
+    "description": "Effect: The user's HP becomes 0 on attack resolution.",
+    "traits": [
+      "smite",
+      "self-ko",
+      "explode"
+    ],
+    "actions": [
+      {
+        "slug": "explosion",
+        "name": "Explosion",
+        "type": "attack",
+        "traits": [
+          "smite",
+          "self-ko",
+          "explode"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 250,
+        "accuracy": 85,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The user's HP becomes 0 on attack resolution.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "91GiwIW0SyPOsG2f",
+  "effects": []
+}

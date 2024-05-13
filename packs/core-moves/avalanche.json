@@ -1,0 +1,51 @@
+{
+  "name": "Avalanche",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ice_icon.png",
+  "system": {
+    "slug": "avalanche",
+    "description": "Effect: If the user has been damaged by an Attack since its last activation, this Attack's Power doubles.",
+    "traits": [
+      "pass-2",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "avalanche",
+        "name": "Avalanche",
+        "type": "attack",
+        "traits": [
+          "pass-2",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "ice"
+        ],
+        "description": "Effect: If the user has been damaged by an Attack since its last activation, this Attack's Power doubles.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "zZ55vAygD5n9KM2i",
+  "effects": []
+}

@@ -1,0 +1,50 @@
+{
+  "name": "Sand Tomb",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ground_icon.png",
+  "system": {
+    "slug": "sand-tomb",
+    "description": "Effect: All valid targets become Bound 5. While Bound, they take a Tick of HP in damage at the end of each of their activations.",
+    "traits": [
+      "trap",
+      "blast-1"
+    ],
+    "actions": [
+      {
+        "slug": "sand-tomb",
+        "name": "Sand Tomb",
+        "type": "attack",
+        "traits": [
+          "trap",
+          "blast-1"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 35,
+        "accuracy": 85,
+        "types": [
+          "ground"
+        ],
+        "description": "Effect: All valid targets become Bound 5. While Bound, they take a Tick of HP in damage at the end of each of their activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "a1D1mIpSuATCjJZD",
+  "effects": []
+}

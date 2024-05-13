@@ -1,0 +1,52 @@
+{
+  "name": "Tenebrous Typhoon",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/shadow_icon.png",
+  "system": {
+    "slug": "tenebrous-typhoon",
+    "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal\nEffect: On hit, all valid targets are Vulnerable 5.\nRequirement: Requirement: [Lugia] Z-Power-Crystal as an Accessory Item and Shadow Blast on the user's Active List.",
+    "traits": [
+      "zenith",
+      "move-locked",
+      "crit-2"
+    ],
+    "actions": [
+      {
+        "slug": "tenebrous-typhoon",
+        "name": "Tenebrous Typhoon",
+        "type": "attack",
+        "traits": [
+          "zenith",
+          "move-locked",
+          "crit-2"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal"
+        },
+        "category": "special",
+        "power": 250,
+        "accuracy": 100,
+        "types": [
+          "shadow"
+        ],
+        "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal\nEffect: On hit, all valid targets are Vulnerable 5.\nRequirement: Requirement: [Lugia] Z-Power-Crystal as an Accessory Item and Shadow Blast on the user's Active List.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "gGREhduorVawK1Sy",
+  "effects": []
+}

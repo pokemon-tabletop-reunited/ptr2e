@@ -1,0 +1,49 @@
+{
+  "name": "Smelling Salts",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "smelling-salts",
+    "description": "Effect: If the target is Paralyzed, Smelling Salts has 140 power. A Paralyzed target is cured of Paralysis after Smelling Salts resolves.",
+    "traits": [
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "smelling-salts",
+        "name": "Smelling Salts",
+        "type": "attack",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: If the target is Paralyzed, Smelling Salts has 140 power. A Paralyzed target is cured of Paralysis after Smelling Salts resolves.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "qtFxob1JHeUKKR2H",
+  "effects": []
+}

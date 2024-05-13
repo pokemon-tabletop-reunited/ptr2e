@@ -1,0 +1,53 @@
+{
+  "name": "Shed Tail",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "shed-tail",
+    "description": "Effect: The user reduces their HP by 1/2 their Max HP and creates a Substitute. The Substitute's HP is equal to 1/2 the sacrificed HP. The user then switches out with another Pokemon in thier own Party, granting their replacement the Substitute.",
+    "traits": [
+      "defensive",
+      "substitute",
+      "tail"
+    ],
+    "actions": [
+      {
+        "slug": "shed-tail",
+        "name": "Shed Tail",
+        "type": "attack",
+        "traits": [
+          "defensive",
+          "substitute",
+          "tail"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The user reduces their HP by 1/2 their Max HP and creates a Substitute. The Substitute's HP is equal to 1/2 the sacrificed HP. The user then switches out with another Pokemon in thier own Party, granting their replacement the Substitute.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "ZvT2asxd8fzcw1Mh",
+  "effects": []
+}

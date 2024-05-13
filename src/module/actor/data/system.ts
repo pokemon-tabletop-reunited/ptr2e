@@ -211,6 +211,22 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         this.advancement.experience.diff =
             this.advancement.experience.next - this.advancement.experience.current;
 
+        //TODO: Change humanoid to ACE trait exclusively
+        const isAce = this.parent.isHumanoid() || this.traits.has("ace");
+        const rvTotal = (isAce ? 400 : 110) + (10 * (this.advancement.level - 1))
+        Object.defineProperty(this.advancement, "rvs", {
+            value: {
+                total: rvTotal,
+                spent: 0
+            },
+            writable: true
+        });
+        if(this.advancement.rvs.available === undefined) {
+            Object.defineProperty(this.advancement.rvs, "available", {
+                get: () => this.advancement.rvs.total - this.advancement.rvs.spent,
+            });
+        }
+
         for (const k in this.attributes) {
             const key = k as keyof Attributes;
             if (this.species?.stats[key]) this.attributes[key].base = this.species.stats[key];
@@ -219,6 +235,13 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
 
         for (const skill of this.skills) {
             skill.prepareBaseData();
+        }
+        for(const skill of game.ptr.data.skills) {
+            if(!this.skills.has(skill.slug)) {
+                const newSkill = new SkillPTR2e(fu.duplicate(skill), { parent: this });
+                newSkill.prepareBaseData();
+                this.skills.set(newSkill.slug, newSkill);
+            }
         }
 
         this.health.max = this.attributes.hp.value;

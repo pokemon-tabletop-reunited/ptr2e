@@ -1,0 +1,49 @@
+{
+  "name": "Electrostun",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "electrostun",
+    "description": "Effect: On hit, the target has a 50% chance of gaining Paralyzed 5.",
+    "traits": [
+      "priority-1"
+    ],
+    "actions": [
+      {
+        "slug": "electrostun",
+        "name": "Electrostun",
+        "type": "attack",
+        "traits": [
+          "priority-1"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 60,
+        "accuracy": 85,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: On hit, the target has a 50% chance of gaining Paralyzed 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "soVMOalKmy1IeVSm",
+  "effects": []
+}

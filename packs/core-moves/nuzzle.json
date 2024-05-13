@@ -1,0 +1,53 @@
+{
+  "name": "Nuzzle",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "nuzzle",
+    "description": "Effect: On hit, the target becomes Paralyzed 5.",
+    "traits": [
+      "dash",
+      "social",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "nuzzle",
+        "name": "Nuzzle",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "social",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 20,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: On hit, the target becomes Paralyzed 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "ZKbVAIPd8HzRUe2y",
+  "effects": []
+}

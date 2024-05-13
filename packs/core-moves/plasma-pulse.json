@@ -1,0 +1,49 @@
+{
+  "name": "Plasma Pulse",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "plasma-pulse",
+    "description": "Effect: This attack deals double damage to creatures that have Paralysis. On hit, all valid targets have a 10% chance to become Paralyzed 5.",
+    "traits": [
+      "pulse"
+    ],
+    "actions": [
+      {
+        "slug": "plasma-pulse",
+        "name": "Plasma Pulse",
+        "type": "attack",
+        "traits": [
+          "pulse"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 65,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: This attack deals double damage to creatures that have Paralysis. On hit, all valid targets have a 10% chance to become Paralyzed 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "mCAB8qA6BlMEPgg6",
+  "effects": []
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Rock Climb",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "rock-climb",
+    "description": "Effect: On hit, the target has a 20% chance of being Confused 5.",
+    "traits": [
+      "dash",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "rock-climb",
+        "name": "Rock Climb",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 85,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: On hit, the target has a 20% chance of being Confused 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "SJLdQyoY9zBtoCTR",
+  "effects": []
+}

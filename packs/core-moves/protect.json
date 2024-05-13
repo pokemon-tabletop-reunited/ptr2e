@@ -1,0 +1,52 @@
+{
+  "name": "Protect",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "protect",
+    "description": "Trigger: The user is targeted by a Physical- or Special-Category Attack\nEffect: The triggering attack fails, and additional attacks that target the user also fail until the user's next activation. Attacks failing to hit do not deal damage, activate secondary effects, or activate on-miss effects.",
+    "traits": [
+      "shield",
+      "exhaust",
+      "interrupt-4"
+    ],
+    "actions": [
+      {
+        "slug": "protect",
+        "name": "Protect",
+        "type": "attack",
+        "traits": [
+          "shield",
+          "exhaust",
+          "interrupt-4"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user is targeted by a Physical- or Special-Category Attack"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Trigger: The user is targeted by a Physical- or Special-Category Attack\nEffect: The triggering attack fails, and additional attacks that target the user also fail until the user's next activation. Attacks failing to hit do not deal damage, activate secondary effects, or activate on-miss effects.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "DwzmkHqd28xR3P3c",
+  "effects": []
+}

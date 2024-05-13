@@ -1,0 +1,51 @@
+{
+  "name": "Energy Ball",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/grass_icon.png",
+  "system": {
+    "slug": "energy-ball",
+    "description": "Effect: On hit, the target has a 10% chance of losing -1 SPDEF stage for 5 activations.",
+    "traits": [
+      "pulse",
+      "missile"
+    ],
+    "actions": [
+      {
+        "slug": "energy-ball",
+        "name": "Energy Ball",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "grass"
+        ],
+        "description": "Effect: On hit, the target has a 10% chance of losing -1 SPDEF stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "3CZZrDIgUZGEod8O",
+  "effects": []
+}

@@ -1,0 +1,52 @@
+{
+  "name": "Grab",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/untyped_icon.png",
+  "system": {
+    "slug": "grab",
+    "description": "Effect: the user's ACC is modified by (userCatMod-targetCatMod)/2 for this attack. On hit, the user makes a LIft Check, CR = (userWC-targetWC) / 2. On success, the user and target gain Grapple, and the user is in control of the grapple.",
+    "traits": [
+      "basic",
+      "contact",
+      "manipulate"
+    ],
+    "actions": [
+      {
+        "slug": "grab",
+        "name": "Grab",
+        "type": "attack",
+        "traits": [
+          "basic",
+          "contact",
+          "manipulate"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "untyped"
+        ],
+        "description": "Effect: the user's ACC is modified by (userCatMod-targetCatMod)/2 for this attack. On hit, the user makes a LIft Check, CR = (userWC-targetWC) / 2. On success, the user and target gain Grapple, and the user is in control of the grapple.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "nZIEKK2aQE5Y53Q4",
+  "effects": []
+}

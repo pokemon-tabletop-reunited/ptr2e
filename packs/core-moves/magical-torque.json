@@ -1,0 +1,53 @@
+{
+  "name": "Magical Torque",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fairy_icon.png",
+  "system": {
+    "slug": "magical-torque",
+    "description": "Effect: On hit, all valid targets have a 30% chance of gaining Confused 5.",
+    "traits": [
+      "dash",
+      "pass-3",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "magical-torque",
+        "name": "Magical Torque",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "pass-3",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "fairy"
+        ],
+        "description": "Effect: On hit, all valid targets have a 30% chance of gaining Confused 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "4IHIiJ9F2fZJiLCo",
+  "effects": []
+}

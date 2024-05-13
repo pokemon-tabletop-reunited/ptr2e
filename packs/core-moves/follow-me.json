@@ -1,0 +1,51 @@
+{
+  "name": "Follow Me",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "follow-me",
+    "description": "Trigger: A foe targets an ally with an Attack\nEffect: The foe must target the user with the Attack.",
+    "traits": [
+      "social",
+      "interrupt-2"
+    ],
+    "actions": [
+      {
+        "slug": "follow-me",
+        "name": "Follow Me",
+        "type": "attack",
+        "traits": [
+          "social",
+          "interrupt-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "A foe targets an ally with an Attack"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Trigger: A foe targets an ally with an Attack\nEffect: The foe must target the user with the Attack.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "E"
+  },
+  "_id": "m8s6cV8zqbFyuLLf",
+  "effects": []
+}

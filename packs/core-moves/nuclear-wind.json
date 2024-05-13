@@ -1,0 +1,51 @@
+{
+  "name": "Nuclear Wind",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/nuclear_icon.png",
+  "system": {
+    "slug": "nuclear-wind",
+    "description": "Effect: On use of Nuclear Wind, the user has a 5% chance of freely using the attack Fallout.",
+    "traits": [
+      "wind",
+      "sky"
+    ],
+    "actions": [
+      {
+        "slug": "nuclear-wind",
+        "name": "Nuclear Wind",
+        "type": "attack",
+        "traits": [
+          "wind",
+          "sky"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 65,
+        "accuracy": 90,
+        "types": [
+          "nuclear"
+        ],
+        "description": "Effect: On use of Nuclear Wind, the user has a 5% chance of freely using the attack Fallout.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "uUEpjaPOYOB2ZZv7",
+  "effects": []
+}

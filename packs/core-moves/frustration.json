@@ -1,0 +1,49 @@
+{
+  "name": "Frustration",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "frustration",
+    "description": "Effect: If the user is Enraged, Confused or Flinched, Frustration's Power is 100.",
+    "traits": [
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "frustration",
+        "name": "Frustration",
+        "type": "attack",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: If the user is Enraged, Confused or Flinched, Frustration's Power is 100.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "mFqcA84HvScXVSuG",
+  "effects": []
+}

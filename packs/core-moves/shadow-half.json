@@ -1,0 +1,51 @@
+{
+  "name": "Shadow Half",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/shadow_icon.png",
+  "system": {
+    "slug": "shadow-half",
+    "description": "Effect: On hit, all valid targets lose 1/2 of their current HP. The user also loses half of its current HP. This attack always deals a minimum of 1 HP in damage.",
+    "traits": [
+      "exhaust",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "shadow-half",
+        "name": "Shadow Half",
+        "type": "attack",
+        "traits": [
+          "exhaust",
+          "contact"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 90,
+        "types": [
+          "shadow"
+        ],
+        "description": "Effect: On hit, all valid targets lose 1/2 of their current HP. The user also loses half of its current HP. This attack always deals a minimum of 1 HP in damage.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "E"
+  },
+  "_id": "U9Oa4lRhtSpeRkej",
+  "effects": []
+}

@@ -21,6 +21,7 @@ import PassiveActiveEffectSystem from "@module/effects/data/passive.ts";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import { default as Skills } from "./skills.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -128,6 +129,7 @@ export const PTRCONFIG = {
     },
     data: {
         traits: Traits,
+        skills: Skills,
     },
     statusEffects: StatusEffects
 }

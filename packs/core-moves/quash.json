@@ -1,0 +1,49 @@
+{
+  "name": "Quash",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "quash",
+    "description": "On hit, the target's next action is a [Delay 3] action.",
+    "traits": [
+      "priority-1"
+    ],
+    "actions": [
+      {
+        "slug": "quash",
+        "name": "Quash",
+        "type": "attack",
+        "traits": [
+          "priority-1"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": 1,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "On hit, the target's next action is a [Delay 3] action.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "mMcNWWrDSmtvCIiv",
+  "effects": []
+}

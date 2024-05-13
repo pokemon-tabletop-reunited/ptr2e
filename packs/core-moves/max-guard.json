@@ -1,0 +1,50 @@
+{
+  "name": "Max Guard",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "max-guard",
+    "description": "Trigger: The user would be hit by an attack.\nEffect: The triggering attack fails to hit the user, and additional attacks that would hit also fail to hit the user until their next activation, including [Max] attacks. Attacks failing to hit the user do not activate on-miss effects.\nRequirement: User is Dynamaxed and has a Status-Category attack on their Active List.",
+    "traits": [
+      "max",
+      "interrupt-7"
+    ],
+    "actions": [
+      {
+        "slug": "max-guard",
+        "name": "Max Guard",
+        "type": "attack",
+        "traits": [
+          "max",
+          "interrupt-7"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 10,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user would be hit by an attack."
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Trigger: The user would be hit by an attack.\nEffect: The triggering attack fails to hit the user, and additional attacks that would hit also fail to hit the user until their next activation, including [Max] attacks. Attacks failing to hit the user do not activate on-miss effects.\nRequirement: User is Dynamaxed and has a Status-Category attack on their Active List.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "toXvNxC5ajcyVJhY",
+  "effects": []
+}

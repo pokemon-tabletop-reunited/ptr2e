@@ -1,0 +1,53 @@
+{
+  "name": "Play Rough",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fairy_icon.png",
+  "system": {
+    "slug": "play-rough",
+    "description": "Effect: On hit, the has a 10% chance of losing -1 ATK stage for 5 activations.",
+    "traits": [
+      "dash",
+      "push-3",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "play-rough",
+        "name": "Play Rough",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "push-3",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 90,
+        "types": [
+          "fairy"
+        ],
+        "description": "Effect: On hit, the has a 10% chance of losing -1 ATK stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "cTJm9kr95bnmbdBN",
+  "effects": []
+}

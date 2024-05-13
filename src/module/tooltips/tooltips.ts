@@ -2,6 +2,7 @@ import { ActorPTR2e } from "@actor";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } from "@chat";
 import { AttackPTR2e } from "@data";
 import { EffectPTR2e, ItemPTR2e, MovePTR2e } from "@item";
+import { CustomSkill } from "@module/data/models/skill.ts";
 import Tagify from "@yaireo/tagify";
 
 export default class TooltipsPTR2e {
@@ -127,10 +128,22 @@ export default class TooltipsPTR2e {
         const skillGroup = game.tooltip.element?.dataset.group;
         const localizeKey = skillGroup ? `PTR2E.Skills.${skillGroup}.${skillSlug}` : `PTR2E.Skills.${skillSlug}`;
 
-        const localized = game.i18n.localize(`${localizeKey}.hint`);
-        if (localized === `${localizeKey}.hint`) return false;
+        const {localizedContent, localizedLabel} = (() => {
+            const localizedContent = game.i18n.localize(`${localizeKey}.hint`);
+            if (localizedContent === `${localizeKey}.hint`) {
+                const skill = game.ptr.data.skills.get(skillSlug) as CustomSkill;
+                return {
+                    localizedContent: skill?.description ?? null,
+                    localizedLabel: skill?.label ?? (Handlebars.helpers.formatSlug(skill.slug) || null)
+                };
+            }
 
-        this.tooltip.innerHTML = `<h4 class="skill">${game.i18n.localize(`${localizeKey}.label`)}</h4><content>${localized}</content>
+            const localizedLabel = game.i18n.localize(`${localizeKey}.label`);
+            return {localizedContent, localizedLabel};
+        })();
+        if(localizedContent === null) return false;
+
+        this.tooltip.innerHTML = `<h4 class="skill">${localizedLabel}</h4><content>${localizedContent}</content>
         <div class="progress-circle">
             <svg width="20" height="20" viewBox="0 0 20 20" class="circular-progress">
                 <circle class="bg"></circle>

@@ -1,0 +1,51 @@
+{
+  "name": "Sacred Fire",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fire_icon.png",
+  "system": {
+    "slug": "sacred-fire",
+    "description": "Effect: On hit, all valid targets have a 50% chance of gaining Burn 7. If a Burn target would be Burn by this attack, they instead have Char 5 applied.",
+    "traits": [
+      "defrost",
+      "legendary"
+    ],
+    "actions": [
+      {
+        "slug": "sacred-fire",
+        "name": "Sacred Fire",
+        "type": "attack",
+        "traits": [
+          "defrost",
+          "legendary"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "fire"
+        ],
+        "description": "Effect: On hit, all valid targets have a 50% chance of gaining Burn 7. If a Burn target would be Burn by this attack, they instead have Char 5 applied.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "hoQZlSqWhAC3WujH",
+  "effects": []
+}

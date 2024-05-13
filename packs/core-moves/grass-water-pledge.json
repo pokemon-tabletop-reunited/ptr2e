@@ -1,0 +1,54 @@
+{
+  "name": "Grass-Water Pledge",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/grass_icon.png",
+  "system": {
+    "slug": "grass-water-pledge",
+    "description": "Trigger: The user comboed Grass/Water Pledge.\nEffect: The Terrain is set to Mucky Terrain for 3 Rounds.",
+    "traits": [
+      "pledge",
+      "pledge-combo",
+      "hazard",
+      "blast-5"
+    ],
+    "actions": [
+      {
+        "slug": "grass-water-pledge",
+        "name": "Grass-Water Pledge",
+        "type": "attack",
+        "traits": [
+          "pledge",
+          "pledge-combo",
+          "hazard",
+          "blast-5"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user comboed Grass/Water Pledge."
+        },
+        "category": "special",
+        "power": 30,
+        "accuracy": 85,
+        "types": [
+          "grass"
+        ],
+        "description": "Trigger: The user comboed Grass/Water Pledge.\nEffect: The Terrain is set to Mucky Terrain for 3 Rounds.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "kl97syesN8u2BlOo",
+  "effects": []
+}

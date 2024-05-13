@@ -1,20 +1,11 @@
-import SkillPTR2e from "@module/data/models/skill.ts";
+import SkillPTR2e, { CoreSkill } from "@module/data/models/skill.ts";
 
 /**
  * Get all skills loaded into the world for default skill creation.
  * Luck & Resources are always present.
  */
-export function getAllSkillSlugs(): Set<string> {
-    const skills = new Set<string>();
-    //TODO: Load from settings
-    for (const skill in BaseSkills) {
-        skills.add(skill);
-    }
-
-    skills.add("luck");
-    skills.add("resources");
-
-    return skills;
+export function getAllSkillSlugs(): string[] {
+    return [...game.ptr.data.skills.keys()];
 }
 
 /**
@@ -31,8 +22,6 @@ export function partialSkillToSkill(partialSkill: Partial<SkillPTR2e['_source']>
     const schema = SkillPTR2e.schema;
     const initial = (schema.initial as () => SourceFromSchema<foundry.data.fields.DataSchema>)();
 
-    if((partialSkill.value ?? 0) + (partialSkill.rvs ?? 0) < 1) partialSkill.hidden ??= true;
-
     if (!partialSkill.slug) throw new Error("Partial Skill is missing slug");
     return fu.mergeObject(initial, partialSkill) as SkillPTR2e['_source'];
 }
@@ -43,12 +32,11 @@ const BaseSkills = {
     luck: {
         slug: "luck",
         favourite: true,
-        hidden: false,
     },
     resources: {
         slug: "resources",
         favourite: true,
-        hidden: false,
+        value: 10
     },
     accounting: { slug: "accounting" },
     acrobatics: { slug: "acrobatics" },
@@ -134,6 +122,6 @@ const BaseSkills = {
     swim: { slug: "swim" },
     teaching: { slug: "teaching" },
     track: { slug: "track" },
-} as Record<string, Partial<SkillPTR2e['_source']>>;
+} as Record<string, Partial<Omit<CoreSkill, 'slug'>> & Required<Pick<CoreSkill, 'slug'>>>;
 
 export default BaseSkills;

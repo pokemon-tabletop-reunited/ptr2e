@@ -1,43 +1,49 @@
 {
-  "_id": "RHcJxk6rp0XKso8R",
-  "type": "move",
   "name": "Ember",
+  "type": "move",
   "img": "/systems/ptr2e/img/icons/fire_icon.png",
   "system": {
-    "slug": "move",
-    "description": "On hit, the target has a 10% chance of being Burned 5.",
+    "slug": "ember",
+    "description": "Effect: On hit, the target has a 10% chance of gaining Burn 5.",
+    "traits": [
+      "missile"
+    ],
     "actions": [
       {
         "slug": "ember",
         "name": "Ember",
         "type": "attack",
         "traits": [
-          "basic",
           "missile"
         ],
         "range": {
-          "target": "enemy",
+          "target": "creature",
           "distance": 5,
           "unit": "m"
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": null
         },
         "category": "special",
         "power": 40,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
         "types": [
           "fire"
         ],
-        "description": "On hit, the target has a 10% chance of being Burned 5."
+        "description": "Effect: On hit, the target has a 10% chance of gaining Burn 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
       }
     ],
-    "traits": [
-      "basic",
-      "missile"
-    ]
-  }
+    "container": null,
+    "grade": "E"
+  },
+  "_id": "8TyLPn3KFFCL3XMX",
+  "effects": []
 }

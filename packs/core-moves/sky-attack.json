@@ -1,0 +1,55 @@
+{
+  "name": "Sky Attack",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/flying_icon.png",
+  "system": {
+    "slug": "sky-attack",
+    "description": "Effect: Set-Up: The user is bathed in a harsh light, gaining +2 EVA stages for 3 Activations.\nResolution: On their next activation, the freely moves up to double their Flight Score, and attacks with this attack.",
+    "traits": [
+      "set-up",
+      "defensive",
+      "crit-1",
+      "pass-4"
+    ],
+    "actions": [
+      {
+        "slug": "sky-attack",
+        "name": "Sky Attack",
+        "type": "attack",
+        "traits": [
+          "set-up",
+          "defensive",
+          "crit-1",
+          "pass-4"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 140,
+        "accuracy": 90,
+        "types": [
+          "flying"
+        ],
+        "description": "Effect: Set-Up: The user is bathed in a harsh light, gaining +2 EVA stages for 3 Activations.\nResolution: On their next activation, the freely moves up to double their Flight Score, and attacks with this attack.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "7QvTao3ipJznOyey",
+  "effects": []
+}

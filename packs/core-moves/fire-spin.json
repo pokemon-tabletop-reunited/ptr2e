@@ -1,0 +1,51 @@
+{
+  "name": "Fire Spin",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fire_icon.png",
+  "system": {
+    "slug": "fire-spin",
+    "description": "Effect: All valid targets become Bound 4. While Bound, they take a Tick of HP in damage at the end of each of their activations.",
+    "traits": [
+      "blast-1",
+      "trap"
+    ],
+    "actions": [
+      {
+        "slug": "fire-spin",
+        "name": "Fire Spin",
+        "type": "attack",
+        "traits": [
+          "blast-1",
+          "trap"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 35,
+        "accuracy": 85,
+        "types": [
+          "fire"
+        ],
+        "description": "Effect: All valid targets become Bound 4. While Bound, they take a Tick of HP in damage at the end of each of their activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "TrpZl57SnSzKKmk2",
+  "effects": []
+}

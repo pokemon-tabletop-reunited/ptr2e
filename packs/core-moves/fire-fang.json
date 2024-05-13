@@ -1,0 +1,51 @@
+{
+  "name": "Fire Fang",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fire_icon.png",
+  "system": {
+    "slug": "fire-fang",
+    "description": "Effect: On hit, the target target has a 10% chance of gaining Burn 4, and a 10% chance of being Flinched 4.",
+    "traits": [
+      "jaw",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "fire-fang",
+        "name": "Fire Fang",
+        "type": "attack",
+        "traits": [
+          "jaw",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 65,
+        "accuracy": 95,
+        "types": [
+          "fire"
+        ],
+        "description": "Effect: On hit, the target target has a 10% chance of gaining Burn 4, and a 10% chance of being Flinched 4.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "pqZ5P3yI0bOu6Qni",
+  "effects": []
+}

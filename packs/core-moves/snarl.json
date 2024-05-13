@@ -1,0 +1,51 @@
+{
+  "name": "Snarl",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "snarl",
+    "description": "On hit, all valid targets lose -1 SPATK stage for 5 activations.",
+    "traits": [
+      "sonic",
+      "social"
+    ],
+    "actions": [
+      {
+        "slug": "snarl",
+        "name": "Snarl",
+        "type": "attack",
+        "traits": [
+          "sonic",
+          "social"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 55,
+        "accuracy": 95,
+        "types": [
+          "dark"
+        ],
+        "description": "On hit, all valid targets lose -1 SPATK stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "ETIoZqMMiW74sq3s",
+  "effects": []
+}

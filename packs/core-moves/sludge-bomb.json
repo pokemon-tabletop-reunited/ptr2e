@@ -1,0 +1,53 @@
+{
+  "name": "Sludge Bomb",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/poison_icon.png",
+  "system": {
+    "slug": "sludge-bomb",
+    "description": "Effect: On hit, all valid targets have a 30% chance of being Poison 5.",
+    "traits": [
+      "explode",
+      "missile",
+      "blast-2"
+    ],
+    "actions": [
+      {
+        "slug": "sludge-bomb",
+        "name": "Sludge Bomb",
+        "type": "attack",
+        "traits": [
+          "explode",
+          "missile",
+          "blast-2"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: On hit, all valid targets have a 30% chance of being Poison 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "3NZj02Fbw14aWuTa",
+  "effects": []
+}

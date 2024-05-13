@@ -1,0 +1,53 @@
+{
+  "name": "Zing Zap",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "zing-zap",
+    "description": "Effect: On hit, the target has a 30% chance of being Flinched 2.",
+    "traits": [
+      "dash",
+      "push-2",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "zing-zap",
+        "name": "Zing Zap",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "push-2",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: On hit, the target has a 30% chance of being Flinched 2.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "ViKXeq2l1oFuRimQ",
+  "effects": []
+}

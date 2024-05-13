@@ -1,0 +1,51 @@
+{
+  "name": "Bubble Beam",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/water_icon.png",
+  "system": {
+    "slug": "bubble-beam",
+    "description": "Effect: On hit, the target has a 10% chance of losing -1 SPD stage for 5 activations.",
+    "traits": [
+      "missile",
+      "ray"
+    ],
+    "actions": [
+      {
+        "slug": "bubble-beam",
+        "name": "Bubble Beam",
+        "type": "attack",
+        "traits": [
+          "missile",
+          "ray"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 65,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "Effect: On hit, the target has a 10% chance of losing -1 SPD stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "cfZjUganrYbHUYFm",
+  "effects": []
+}

@@ -187,7 +187,8 @@
                     "hint": "The skills of the actor.",
                     "options": "Skill List Options",
                     "toggleHidden": "Toggle Hidden Skills",
-                    "editSkills": "Open Skills Editor"
+                    "editSkills": "Open Skills Editor",
+                    "luckRoll": "Roll 'End of Day' Luck Check"
                 }
             }
         },
@@ -207,7 +208,12 @@
             }
         },
         "MoveSystem": {
-            "FIELDS": {} 
+            "FIELDS": {
+                "grade": {
+                    "label": "Grade",
+                    "hint": "The grade of the move."
+                }
+            } 
         },
         "ActorSheet": {
             "StatsFormTitle": "Stats Manager",
@@ -269,6 +275,9 @@
                 },
                 "Effects": {
                     "tooltip": "Popout Effects"
+                },
+                "Skills": {
+                    "tooltip": "Popout Skills"
                 }
             },
             "Inventory": {
@@ -317,6 +326,48 @@
                     "Label": "Module Traits",
                     "Hint": "Traits added through a module, they cannot be edited by Game Masters."
                 }
+            },
+            "Skills": {
+                "Name": "Skills Settings",
+                "Label": "Open Menu",
+                "Hint": "Manage Skills available in the System",
+                "Title": "Skills Settings",
+                "systemSkills": {
+                    "Label": "System Skills",
+                    "Hint": "These skills are defined by the system itself and can therefore not be deleted.<br>Although they can be hidden by default."
+                },
+                "userSkills": {
+                    "Label": "User Skills",
+                    "Hint": "Custom skills defined by the Game Master."
+                },
+                "moduleSkills": {
+                    "Label": "Module Skills",
+                    "Hint": "Skills added through a module, they cannot be edited by Game Masters."
+                },
+                "description": "Optional description that displays on hover of a Skill",
+                "deleteSkill": {
+                    "Title": "Delete Skill: {name}",
+                    "Content": "Are you sure you want to delete the skill: {name}?"
+                }
+            }
+        },
+        "SkillsEditor": {
+            "ResetSkills": {
+                "title": "Reset Skills for {name}",
+                "content": "Are you sure you want to reset the skills for {name}?<br>This will remove all RV investment completely and cannot be undone."
+            },
+            "ChangeResources": {
+                "title": "Change Resources for {name}",
+                "content": "<content><div class='form-group'><label style='flex-basis: 30%;'>Current Value: {value}</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
+                "submit": "Change Resources",
+                "warn": "Resource total for {name} cannot drop below 1."
+            },
+            "RollLuck": {
+                "title": "Reroll Luck for {name}",
+                "content": "Are you sure you want to reroll the luck for {name}?<br>This should only be done with <b>explicit permission</b> from the GM!",
+                "roll": "{name}'s Luck Roll!",
+                "reroll": "{name} just <b style='color: #aa0200;' data-tooltip-direction='UP' data-tooltip='Rerolling your luck may only be done with explicit permission from the GM!'>Rerolled</b> their Luck!!",
+                "result": "The new score of {result} has been applied to their Luck Skill."
             }
         },
         "Attributes": {
@@ -768,6 +819,9 @@
                 },
                 "evolution": {
                     "label": "Evolutions"
+                },
+                "moves": {
+                    "label": "Moves"
                 }
             },
             "SendToChatLabel": "Send to Chat",
@@ -819,6 +873,9 @@
                         "success": "Evolution tree from species '{name}' pasted"
                     }
                 }
+            },
+            "moves": {
+                "dropMoveError": "Only moves can be added to this list"
             }
         },
         "PartySheet": {

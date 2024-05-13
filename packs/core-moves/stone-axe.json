@@ -1,0 +1,53 @@
+{
+  "name": "Stone Axe",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/rock_icon.png",
+  "system": {
+    "slug": "stone-axe",
+    "description": "Effect: On hit, the user freely uses Stealth Rock.",
+    "traits": [
+      "sharp",
+      "crit-1",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "stone-axe",
+        "name": "Stone Axe",
+        "type": "attack",
+        "traits": [
+          "sharp",
+          "crit-1",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 65,
+        "accuracy": 90,
+        "types": [
+          "rock"
+        ],
+        "description": "Effect: On hit, the user freely uses Stealth Rock.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "3wjlqfCFIR2Jk1WH",
+  "effects": []
+}

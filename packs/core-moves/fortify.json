@@ -1,0 +1,53 @@
+{
+  "name": "Fortify",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/steel_icon.png",
+  "system": {
+    "slug": "fortify",
+    "description": "Effect: Set-Up: the user radiates an uplifting power, with the user gaining Braced 1 and Harden 7, and healing 3 Ticks of HP.\nResolution: The user and all allies within range gain +1 DEF and SPDEF stages for 7 activations.",
+    "traits": [
+      "legendary",
+      "aura",
+      "set-up"
+    ],
+    "actions": [
+      {
+        "slug": "fortify",
+        "name": "Fortify",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "aura",
+          "set-up"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "steel"
+        ],
+        "description": "Effect: Set-Up: the user radiates an uplifting power, with the user gaining Braced 1 and Harden 7, and healing 3 Ticks of HP.\nResolution: The user and all allies within range gain +1 DEF and SPDEF stages for 7 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "Y1uDok1TyCvhGqDG",
+  "effects": []
+}

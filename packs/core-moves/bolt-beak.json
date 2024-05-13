@@ -1,0 +1,51 @@
+{
+  "name": "Bolt Beak",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "bolt-beak",
+    "description": "Effect: Bolt Beak is more powerful based on how fast the user is compared to the target.\nBolt Beak's Power = min(2*85, (15*UserSPD / TargetSPD) + 85)",
+    "traits": [
+      "jaw",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "bolt-beak",
+        "name": "Bolt Beak",
+        "type": "attack",
+        "traits": [
+          "jaw",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 85,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: Bolt Beak is more powerful based on how fast the user is compared to the target.\nBolt Beak's Power = min(2*85, (15*UserSPD / TargetSPD) + 85)",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "Z3Sgpqvo2RhTpoUN",
+  "effects": []
+}

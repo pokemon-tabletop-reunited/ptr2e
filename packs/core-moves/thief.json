@@ -1,0 +1,49 @@
+{
+  "name": "Thief",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "thief",
+    "description": "On hit, the user steals the target's equipped Acessory item or one Belt item and equips it on themself. If the user already has an equipped Accessory or Belt item, the stolen item is dropped on the ground in a square adjacent to the target.",
+    "traits": [
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "thief",
+        "name": "Thief",
+        "type": "attack",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "On hit, the user steals the target's equipped Acessory item or one Belt item and equips it on themself. If the user already has an equipped Accessory or Belt item, the stolen item is dropped on the ground in a square adjacent to the target.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "jxorjVcjferdaDBc",
+  "effects": []
+}

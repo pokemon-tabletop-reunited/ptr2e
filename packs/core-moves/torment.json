@@ -1,0 +1,49 @@
+{
+  "name": "Torment",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "torment",
+    "description": "On hit, the target cannot use the same attack consecutively on their activations for 5 rounds.",
+    "traits": [
+      "social"
+    ],
+    "actions": [
+      {
+        "slug": "torment",
+        "name": "Torment",
+        "type": "attack",
+        "traits": [
+          "social"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "On hit, the target cannot use the same attack consecutively on their activations for 5 rounds.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "Cu2xRbjUL4Uhm836",
+  "effects": []
+}

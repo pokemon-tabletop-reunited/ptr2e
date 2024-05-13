@@ -1,0 +1,49 @@
+{
+  "name": "Facade",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "facade",
+    "description": "Effect: If the user is afflicted with a Major Status Condition, Facade's Power doubles.",
+    "traits": [
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "facade",
+        "name": "Facade",
+        "type": "attack",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: If the user is afflicted with a Major Status Condition, Facade's Power doubles.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "eEIG8jgmrxWgRVMz",
+  "effects": []
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Court Change",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "court-change",
+    "description": "Effect: All Hazards within 8m are relocated to squares of the user's choice within 12m. Positive, temporary effects affecting \"all allies\" and \"all foes\" have those targets switched to \"all foes\" and \"all allies\" respectively.",
+    "traits": [
+      "environ"
+    ],
+    "actions": [
+      {
+        "slug": "court-change",
+        "name": "Court Change",
+        "type": "attack",
+        "traits": [
+          "environ"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: All Hazards within 8m are relocated to squares of the user's choice within 12m. Positive, temporary effects affecting \"all allies\" and \"all foes\" have those targets switched to \"all foes\" and \"all allies\" respectively.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "W07yma5fmbXBiLUZ",
+  "effects": []
+}

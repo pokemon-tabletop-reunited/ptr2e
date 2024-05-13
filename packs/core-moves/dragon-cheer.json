@@ -1,0 +1,49 @@
+{
+  "name": "Dragon Cheer",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dragon_icon.png",
+  "system": {
+    "slug": "dragon-cheer",
+    "description": "Effect: The user and all allies in range gain +1 CRIT stage for 5 activations. Dragon-type creature instead gain +2 CRIT stages for 5 activations.",
+    "traits": [
+      "sonic"
+    ],
+    "actions": [
+      {
+        "slug": "dragon-cheer",
+        "name": "Dragon Cheer",
+        "type": "attack",
+        "traits": [
+          "sonic"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "dragon"
+        ],
+        "description": "Effect: The user and all allies in range gain +1 CRIT stage for 5 activations. Dragon-type creature instead gain +2 CRIT stages for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "VoiUETAcuekeVO32",
+  "effects": []
+}

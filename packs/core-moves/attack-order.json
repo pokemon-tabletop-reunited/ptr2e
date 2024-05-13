@@ -1,0 +1,55 @@
+{
+  "name": "Attack Order",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/bug_icon.png",
+  "system": {
+    "slug": "attack-order",
+    "description": "Effect: After this attack resolves, allied Bug-typed creatures on the field can use their next Bug-Type attack with Base Power 60 or less as [Priority 1].",
+    "traits": [
+      "crit-1",
+      "dance",
+      "blast-1",
+      "friendly"
+    ],
+    "actions": [
+      {
+        "slug": "attack-order",
+        "name": "Attack Order",
+        "type": "attack",
+        "traits": [
+          "crit-1",
+          "dance",
+          "blast-1",
+          "friendly"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "bug"
+        ],
+        "description": "Effect: After this attack resolves, allied Bug-typed creatures on the field can use their next Bug-Type attack with Base Power 60 or less as [Priority 1].",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "wuheZ4zIzC0w574v",
+  "effects": []
+}

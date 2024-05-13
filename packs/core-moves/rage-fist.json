@@ -1,0 +1,53 @@
+{
+  "name": "Rage Fist",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ghost_icon.png",
+  "system": {
+    "slug": "rage-fist",
+    "description": "Effect: Rage Fist's Power is equal to 50+50 x the number of times the user has been hit by attacks (other than its own) this combat, up to a maximum of 350 power.",
+    "traits": [
+      "punch",
+      "dash",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "rage-fist",
+        "name": "Rage Fist",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "dash",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "ghost"
+        ],
+        "description": "Effect: Rage Fist's Power is equal to 50+50 x the number of times the user has been hit by attacks (other than its own) this combat, up to a maximum of 350 power.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "05M62ikAeJYas6Oi",
+  "effects": []
+}

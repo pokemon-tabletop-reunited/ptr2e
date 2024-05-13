@@ -1,0 +1,49 @@
+{
+  "name": "Life Dew",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/water_icon.png",
+  "system": {
+    "slug": "life-dew",
+    "description": "Effect: The user and any allies in range heal Hit Points equal to 1/4 of their Maximum Hit Points.",
+    "traits": [
+      "healing"
+    ],
+    "actions": [
+      {
+        "slug": "life-dew",
+        "name": "Life Dew",
+        "type": "attack",
+        "traits": [
+          "healing"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "water"
+        ],
+        "description": "Effect: The user and any allies in range heal Hit Points equal to 1/4 of their Maximum Hit Points.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "hH1UG0B67nDPgUIt",
+  "effects": []
+}

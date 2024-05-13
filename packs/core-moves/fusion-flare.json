@@ -1,0 +1,55 @@
+{
+  "name": "Fusion Flare",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fire_icon.png",
+  "system": {
+    "slug": "fusion-flare",
+    "description": "Effect: If Fusion Bolt was used by another creature during the current or previous round, Fusion Flare has its Power doubled.",
+    "traits": [
+      "blast-1",
+      "smite",
+      "legendary",
+      "defrost"
+    ],
+    "actions": [
+      {
+        "slug": "fusion-flare",
+        "name": "Fusion Flare",
+        "type": "attack",
+        "traits": [
+          "blast-1",
+          "smite",
+          "legendary",
+          "defrost"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "fire"
+        ],
+        "description": "Effect: If Fusion Bolt was used by another creature during the current or previous round, Fusion Flare has its Power doubled.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "arJaiRGaufTkxD9e",
+  "effects": []
+}

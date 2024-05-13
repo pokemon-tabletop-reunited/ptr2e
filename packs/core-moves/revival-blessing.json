@@ -1,0 +1,48 @@
+{
+  "name": "Revival Blessing",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "revival-blessing",
+    "description": "Effect: The user selects 1 Fainted creature and revives them, healing them of 50% of their Max HP and not giving them a Stack of Weary.",
+    "traits": [
+      "healing"
+    ],
+    "actions": [
+      {
+        "slug": "revival-blessing",
+        "name": "Revival Blessing",
+        "type": "attack",
+        "traits": [
+          "healing"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 10,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The user selects 1 Fainted creature and revives them, healing them of 50% of their Max HP and not giving them a Stack of Weary.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "dfQkE1mR2xRYFF1c",
+  "effects": []
+}

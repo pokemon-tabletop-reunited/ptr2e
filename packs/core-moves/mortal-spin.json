@@ -1,0 +1,49 @@
+{
+  "name": "Mortal Spin",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/poison_icon.png",
+  "system": {
+    "slug": "mortal-spin",
+    "description": "Effect: On hit, all valid targets gain Poison 5. The user ends the effects of any [Hazard] attack effects in range, and ends the effect of [Trap] attacks on themself.",
+    "traits": [
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "mortal-spin",
+        "name": "Mortal Spin",
+        "type": "attack",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 30,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: On hit, all valid targets gain Poison 5. The user ends the effects of any [Hazard] attack effects in range, and ends the effect of [Trap] attacks on themself.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "sDL742fsNamQJfbS",
+  "effects": []
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Self-Destruct",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "self-destruct",
+    "description": "Effect: The user's HP becomes 0 on attack resolution.",
+    "traits": [
+      "smite",
+      "explode",
+      "self-ko"
+    ],
+    "actions": [
+      {
+        "slug": "self-destruct",
+        "name": "Self-Destruct",
+        "type": "attack",
+        "traits": [
+          "smite",
+          "explode",
+          "self-ko"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 200,
+        "accuracy": 90,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The user's HP becomes 0 on attack resolution.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "mooOpgSzALgXclFp",
+  "effects": []
+}

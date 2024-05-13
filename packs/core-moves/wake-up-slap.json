@@ -1,0 +1,49 @@
+{
+  "name": "Wake-Up Slap",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "wake-up-slap",
+    "description": "Effect: If the target has the Drowsy or Nightmares condition, this Attack's Power doubles and the target is cured of Drowsy or Nightmares on hit, with the target gaining Flinched 5.",
+    "traits": [
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "wake-up-slap",
+        "name": "Wake-Up Slap",
+        "type": "attack",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: If the target has the Drowsy or Nightmares condition, this Attack's Power doubles and the target is cured of Drowsy or Nightmares on hit, with the target gaining Flinched 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "0Fa6CTcxg45VyXNP",
+  "effects": []
+}

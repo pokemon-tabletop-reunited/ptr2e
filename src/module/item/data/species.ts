@@ -42,10 +42,11 @@ class SpeciesSystem extends SpeciesExtension {
 
         function getMoveField(hasLevel = false) {
             const innerFields: Record<string, foundry.data.fields.DataField> = {
-                name: new SlugField({ required: true }),
-                gen: new SlugField({ required: false, blank: true }),
+                name: new SlugField({ required: true}),
+                uuid: new fields.DocumentUUIDField({ required: true, type: "Item", embedded: false }),
+                gen: new SlugField({ required: false, blank: true}),
             };
-            if (hasLevel) innerFields.level = new fields.NumberField({ required: true, min: 0 });
+            if (hasLevel) innerFields.level = new fields.NumberField({ required: true, min: 0, initial: 0 });
             return new fields.SchemaField(innerFields);
         }
 
@@ -218,9 +219,7 @@ class SpeciesSystem extends SpeciesExtension {
             skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e)),
             moves: new fields.SchemaField({
                 levelUp: new fields.ArrayField(getMoveField(true), { required: true, initial: [] }),
-                egg: new fields.ArrayField(getMoveField(), { required: true, initial: [] }),
                 tutor: new fields.ArrayField(getMoveField(), { required: true, initial: [] }),
-                machine: new fields.ArrayField(getMoveField(), { required: true, initial: [] }),
             }),
             captureRate: new fields.NumberField({
                 required: true,
@@ -256,6 +255,16 @@ class SpeciesSystem extends SpeciesExtension {
                 initial: null,
             }),
         };
+    }
+
+    override prepareBaseData(): void {
+        super.prepareBaseData();
+        this.moves.levelUp = this.moves.levelUp.sort((a, b) => {
+            const levelDifference = a.level - b.level;
+            if (levelDifference !== 0) return levelDifference;
+            return a.name.localeCompare(b.name);
+        });
+        this.moves.tutor = this.moves.tutor.sort((a, b) => a.name.localeCompare(b.name));
     }
 
     override async _preCreate(
@@ -477,6 +486,11 @@ interface SpeciesSystem {
     };
 
     diet: string[];
+
+    moves: {
+        levelUp: { name: string; uuid: string; gen?: string, level: number }[];
+        tutor: { name: string; uuid: string; gen?: string }[];
+    };
 
     abilities: {
         starting: string[];

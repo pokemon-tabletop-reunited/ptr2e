@@ -1,0 +1,49 @@
+{
+  "name": "Imprison",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/psychic_icon.png",
+  "system": {
+    "slug": "imprison",
+    "description": "Effect: For every attack the target and the user share on their Active Lists, the target loses 10 PP.",
+    "traits": [
+      "friendly"
+    ],
+    "actions": [
+      {
+        "slug": "imprison",
+        "name": "Imprison",
+        "type": "attack",
+        "traits": [
+          "friendly"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "psychic"
+        ],
+        "description": "Effect: For every attack the target and the user share on their Active Lists, the target loses 10 PP.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "rCxhEEmJLIJ90L1g",
+  "effects": []
+}

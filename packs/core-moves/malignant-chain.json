@@ -1,0 +1,51 @@
+{
+  "name": "Malignant Chain",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/poison_icon.png",
+  "system": {
+    "slug": "malignant-chain",
+    "description": "Effect: On hit, the target has a 50% chance of gaining Blight 8 and a 50% chance of becoming Paralyzed 5.",
+    "traits": [
+      "smite",
+      "legendary"
+    ],
+    "actions": [
+      {
+        "slug": "malignant-chain",
+        "name": "Malignant Chain",
+        "type": "attack",
+        "traits": [
+          "smite",
+          "legendary"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: On hit, the target has a 50% chance of gaining Blight 8 and a 50% chance of becoming Paralyzed 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "fFKx2U3ztyLCAuRH",
+  "effects": []
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Water Sport",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/water_icon.png",
+  "system": {
+    "slug": "water-sport",
+    "description": "Effect: The Terrain type is set to Flooded Terrain for 3 rounds.",
+    "traits": [
+      "terrain"
+    ],
+    "actions": [
+      {
+        "slug": "water-sport",
+        "name": "Water Sport",
+        "type": "attack",
+        "traits": [
+          "terrain"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "water"
+        ],
+        "description": "Effect: The Terrain type is set to Flooded Terrain for 3 rounds.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "oLVu4JTAI7CmWoOx",
+  "effects": []
+}

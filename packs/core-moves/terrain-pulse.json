@@ -1,0 +1,51 @@
+{
+  "name": "Terrain Pulse",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "terrain-pulse",
+    "description": "Effect: Terrain Pulse's Power, Category, and Type change according to the associated Terrain on the Terrain Chart.",
+    "traits": [
+      "environ",
+      "pulse"
+    ],
+    "actions": [
+      {
+        "slug": "terrain-pulse",
+        "name": "Terrain Pulse",
+        "type": "attack",
+        "traits": [
+          "environ",
+          "pulse"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: Terrain Pulse's Power, Category, and Type change according to the associated Terrain on the Terrain Chart.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "FmTQF5CvjZmhUlcZ",
+  "effects": []
+}

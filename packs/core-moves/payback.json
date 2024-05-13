@@ -1,0 +1,49 @@
+{
+  "name": "Payback",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "payback",
+    "description": "If the user was hit by a damaging attack before the the use of this attack this round, Payback's Power is doubled.",
+    "traits": [
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "payback",
+        "name": "Payback",
+        "type": "attack",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "If the user was hit by a damaging attack before the the use of this attack this round, Payback's Power is doubled.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "IWtQyZKNtwfpsM1d",
+  "effects": []
+}

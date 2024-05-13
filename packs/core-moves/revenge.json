@@ -1,0 +1,51 @@
+{
+  "name": "Revenge",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "revenge",
+    "description": "Effect: If the user has been damaged since its last activation, Revenge's Power is doubled.",
+    "traits": [
+      "delay-2",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "revenge",
+        "name": "Revenge",
+        "type": "attack",
+        "traits": [
+          "delay-2",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": 2,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: If the user has been damaged since its last activation, Revenge's Power is doubled.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "5xhsqbWOJO8k23Pa",
+  "effects": []
+}

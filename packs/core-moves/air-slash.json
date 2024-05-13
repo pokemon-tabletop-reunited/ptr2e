@@ -1,0 +1,49 @@
+{
+  "name": "Air Slash",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/flying_icon.png",
+  "system": {
+    "slug": "air-slash",
+    "description": "Effect: On hit, the target has a 30% chance of being Flinched 2.",
+    "traits": [
+      "sharp"
+    ],
+    "actions": [
+      {
+        "slug": "air-slash",
+        "name": "Air Slash",
+        "type": "attack",
+        "traits": [
+          "sharp"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 75,
+        "accuracy": 95,
+        "types": [
+          "flying"
+        ],
+        "description": "Effect: On hit, the target has a 30% chance of being Flinched 2.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "lxpXiXqapEF8GFPC",
+  "effects": []
+}

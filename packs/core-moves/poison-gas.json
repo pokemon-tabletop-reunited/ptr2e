@@ -1,0 +1,51 @@
+{
+  "name": "Poison Gas",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/poison_icon.png",
+  "system": {
+    "slug": "poison-gas",
+    "description": "Effect: An Obscurring Cloud is created in the [Blast] area. Any creature that starts their activation in, or enters the Poison Gas becomes Poison 5.",
+    "traits": [
+      "hazard",
+      "blast-4"
+    ],
+    "actions": [
+      {
+        "slug": "poison-gas",
+        "name": "Poison Gas",
+        "type": "attack",
+        "traits": [
+          "hazard",
+          "blast-4"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: An Obscurring Cloud is created in the [Blast] area. Any creature that starts their activation in, or enters the Poison Gas becomes Poison 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "1uSmoHF5veiMfJQI",
+  "effects": []
+}

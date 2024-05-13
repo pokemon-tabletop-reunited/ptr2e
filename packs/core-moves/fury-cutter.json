@@ -1,0 +1,51 @@
+{
+  "name": "Fury Cutter",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/bug_icon.png",
+  "system": {
+    "slug": "fury-cutter",
+    "description": "Effect: For each consecutive time this attack hits after the first, Fury Cutter's Power doubles up to a maximum power of 160. Fury Cutter's Power resets if the user is switched out, fainted, combat ends or an item is used on the user.",
+    "traits": [
+      "sharp",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "fury-cutter",
+        "name": "Fury Cutter",
+        "type": "attack",
+        "traits": [
+          "sharp",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 95,
+        "types": [
+          "bug"
+        ],
+        "description": "Effect: For each consecutive time this attack hits after the first, Fury Cutter's Power doubles up to a maximum power of 160. Fury Cutter's Power resets if the user is switched out, fainted, combat ends or an item is used on the user.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "ZKLifoB2o3zYLOwK",
+  "effects": []
+}

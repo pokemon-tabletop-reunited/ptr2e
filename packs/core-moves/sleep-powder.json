@@ -1,0 +1,49 @@
+{
+  "name": "Sleep Powder",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/grass_icon.png",
+  "system": {
+    "slug": "sleep-powder",
+    "description": "Effect: On hit, all valid targets gain Drowsy 5.",
+    "traits": [
+      "powder"
+    ],
+    "actions": [
+      {
+        "slug": "sleep-powder",
+        "name": "Sleep Powder",
+        "type": "attack",
+        "traits": [
+          "powder"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 75,
+        "types": [
+          "grass"
+        ],
+        "description": "Effect: On hit, all valid targets gain Drowsy 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "buK9s08GXOcjRSJN",
+  "effects": []
+}

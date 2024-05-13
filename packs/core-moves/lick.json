@@ -1,0 +1,51 @@
+{
+  "name": "Lick",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ghost_icon.png",
+  "system": {
+    "slug": "lick",
+    "description": "Effect: On hit, the target has a 30% chance of being Paralyzed 5.",
+    "traits": [
+      "basic",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "lick",
+        "name": "Lick",
+        "type": "attack",
+        "traits": [
+          "basic",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 30,
+        "accuracy": 100,
+        "types": [
+          "ghost"
+        ],
+        "description": "Effect: On hit, the target has a 30% chance of being Paralyzed 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "E"
+  },
+  "_id": "Qdsf2xwSPLu5qbWK",
+  "effects": []
+}

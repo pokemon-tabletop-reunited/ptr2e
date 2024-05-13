@@ -1,0 +1,54 @@
+{
+  "name": "Malicious Moonsault",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "malicious-moonsault",
+    "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal\nEffect: The user may freely move up to double their Overland Score when declaring this attack. On hit, all valid targets have a 60% chance losing -1 DEF stage for 5 activations.\nRequirement: [Incineroar] Z-Power-Crystal as an Accessory Item and Darkest Lariat on the user's Active List.",
+    "traits": [
+      "zenith",
+      "move-locked",
+      "crushing",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "malicious-moonsault",
+        "name": "Malicious Moonsault",
+        "type": "attack",
+        "traits": [
+          "zenith",
+          "move-locked",
+          "crushing",
+          "contact"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal"
+        },
+        "category": "physical",
+        "power": 180,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal\nEffect: The user may freely move up to double their Overland Score when declaring this attack. On hit, all valid targets have a 60% chance losing -1 DEF stage for 5 activations.\nRequirement: [Incineroar] Z-Power-Crystal as an Accessory Item and Darkest Lariat on the user's Active List.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "e55bzYPcP88YLxce",
+  "effects": []
+}

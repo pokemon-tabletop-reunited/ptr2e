@@ -1,0 +1,48 @@
+{
+  "name": "Soft-Boiled",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "soft-boiled",
+    "description": "Effect: The user recovers HP equal to 50% of their Max HP. The user instead may reduce their health by 20% of their Max HP to recover an adjacent ally's HP by the amount of health sacrificed.",
+    "traits": [
+      "healing"
+    ],
+    "actions": [
+      {
+        "slug": "soft-boiled",
+        "name": "Soft-Boiled",
+        "type": "attack",
+        "traits": [
+          "healing"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The user recovers HP equal to 50% of their Max HP. The user instead may reduce their health by 20% of their Max HP to recover an adjacent ally's HP by the amount of health sacrificed.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "ewV58agg79EWVEQn",
+  "effects": []
+}
