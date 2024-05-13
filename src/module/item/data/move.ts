@@ -41,8 +41,6 @@ export default abstract class MoveSystem extends HasEmbed(HasBase(foundry.abstra
                     "S",
                     "S+",
                 ],
-                label: "PTR2E.FIELDS.gear.grade.label",
-                hint: "PTR2E.FIELDS.gear.grade.hint",
             }),
         };
     }
