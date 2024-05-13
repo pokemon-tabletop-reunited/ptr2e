@@ -7,4 +7,14 @@
             <p class="dos failure">{{abs degreeOfSuccess}} Degrees of Failure</p>
         {{/if}}
     </footer>
+    {{#if luckRoll}}
+        <section class="luck mt-1">
+            {{{innerLuck}}}
+            {{#if (gt degreeOfSuccess 0)}}
+                <footer>
+                    <p class="luck-roll success">Score! Luck increases by {{luckRoll}}. <button type="button" data-action="increase-luck" {{#if appliedLuck}}disabled{{/if}}>Apply</button></p>
+                </footer>
+            {{/if}}
+        </section>
+    {{/if}}
 </section>

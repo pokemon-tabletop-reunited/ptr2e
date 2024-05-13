@@ -32,11 +32,14 @@ class SkillPTR2e extends foundry.abstract.DataModel {
 
     prepareBaseData(): void {
         const speciesTrait = this.parent.species?.skills?.get(this.slug);
-        if(speciesTrait) {
+        if (speciesTrait && this.value <= 1) {
             this.value = speciesTrait.value;
         }
 
         this.total = this.value + (this.rvs ?? 0);
+        if ((this.rvs ?? 0) > 0 && this.parent.advancement?.rvs?.total && !["luck", "resources"].includes(this.slug)) {
+            this.parent.advancement.rvs.spent += this.rvs!;
+        }
     }
 
     async roll() {
@@ -49,12 +52,29 @@ class SkillPTR2e extends foundry.abstract.DataModel {
                 roll: roll.toJSON(),
                 slug: this.slug,
                 origin: fu.mergeObject(this.actor.toObject(), { uuid: this.actor.uuid }),
+                luckRoll: null
+            },
+        });
+    }
+
+    async endOfDayLuckRoll() {
+        if(this.slug !== "luck") return;
+        const roll = await this.rollCheck();
+
+        // @ts-expect-error
+        return await ChatMessage.create({
+            type: "skill",
+            system: {
+                roll: roll.toJSON(),
+                slug: this.slug,
+                origin: fu.mergeObject(this.actor.toObject(), { uuid: this.actor.uuid }),
+                luckRoll: (await new Roll("1d10").roll()).toJSON()
             },
         });
     }
 
     async rollCheck(): Promise<Rolled<Roll>> {
-        return new Roll("1d100ms@skill", {skill: this.total}).roll();
+        return new Roll("1d100ms@skill", { skill: this.total }).roll();
     }
 }
 
@@ -64,8 +84,8 @@ interface SkillPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<Sk
     total: number;
 }
 
-type CoreSkill = Omit<SkillPTR2e['_source'], 'value' | 'rvs'>
-type CustomSkill = CoreSkill & { label: string, description: string }
+type CoreSkill = Omit<SkillPTR2e["_source"], "value" | "rvs">;
+type CustomSkill = CoreSkill & { label: string; description: string };
 type Skill = CoreSkill | CustomSkill;
 
 type SkillSchema = {
@@ -78,4 +98,4 @@ type SkillSchema = {
 };
 
 export default SkillPTR2e;
-export type { SkillSchema, Skill, CoreSkill, CustomSkill}
+export type { SkillSchema, Skill, CoreSkill, CustomSkill };

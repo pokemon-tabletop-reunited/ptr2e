@@ -16,6 +16,7 @@ import { ActorSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { SkillsComponent } from "./components/skills-component.ts";
+import { SkillsEditor } from "@module/apps/skills-editor.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     ActorSheetV2Expanded
@@ -69,10 +70,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                     }) as SpeciesPTR2e;
                     sheet.render(true);
                 },
-                "open-perk-web": function (this: ActorSheetPTRV2, _event: Event) {
+                "open-perk-web": function (this: ActorSheetPTRV2) {
                     game.ptr.web.open(this.actor);
                 },
-                "edit-movelist": function (this: ActorSheetPTRV2, _event: Event) {
+                "edit-movelist": function (this: ActorSheetPTRV2) {
                     new KnownActionsApp(this.actor).render(true);
                 },
                 "action-to-chat": ActorSheetPTRV2._onToChatAction,
@@ -80,7 +81,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                 "action-delete": ActorSheetPTRV2._onDeleteAction,
                 "favourite-skill": ActorSheetPTRV2._onFavouriteSkill,
                 "hide-skill": ActorSheetPTRV2._onHideSkill,
-                "toggle-hidden-skills": async function (this: ActorSheetPTRV2, _event: Event) {
+                "toggle-hidden-skills": async function (this: ActorSheetPTRV2) {
                     const appSettings = fu.duplicate(game.user.getFlag("ptr2e", "appSettings") ?? {}) as Record<string, Record<string, unknown>>;
                     if (!appSettings[this.appId]) appSettings[this.appId] = {hideHiddenSkills: true};
                     appSettings[this.appId].hideHiddenSkills = !appSettings[this.appId].hideHiddenSkills;
@@ -95,6 +96,13 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                         else app?.render();
                     }
                 },
+                "edit-skills": async function (this: ActorSheetPTRV2) {
+                    new SkillsEditor(this.actor).render(true);
+                },
+                "luck-roll": async function(this: ActorSheetPTRV2) {
+                    const skill = this.actor.system.skills.get("luck")!;
+                    await skill.endOfDayLuckRoll();
+                }
             },
         },
         { inplace: false }

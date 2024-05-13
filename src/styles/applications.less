@@ -864,6 +864,7 @@ body {
         }
     }
 
+    &.skill-sheet
     &#perk-hud-base,
     &.known-actions-sheet,
     &.action-sheet,
@@ -1187,6 +1188,97 @@ body {
 
         textarea {
             resize: vertical;
+        }
+    }
+
+    &.skill-sheet {
+        .skill-editor {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+
+            .controls {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-evenly;
+                align-items: center;
+                gap: 0.5rem;
+                flex: 0 0 min-content;
+
+                .buttons {
+                    flex: 0 0 35%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.25rem;
+                }
+
+                .points {
+                    flex: 0 0 55%;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.25rem;
+
+                    label {
+                        display: flex;
+                        flex-direction: row;
+                        span {
+                            margin-left: auto;
+                            align-self: flex-end;
+                        }
+                    }
+                }
+            }
+
+            .skills {
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                overflow: hidden;
+
+                div.skill, header.skill {
+                    display: flex;
+                    flex-direction: row;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 4px 0;
+                    text-align: center;
+
+                    label, input, button {
+                        flex: 0 0 22%;
+                        text-align: center;
+                    }
+                }
+                header.skill {
+                    border: 1px solid var(--border-theme-color);
+                    border-radius: 8px;
+                    margin-bottom: 0.25rem;
+                }
+            }
+        }
+
+        fieldset {
+            padding: 1rem;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            gap: 0.5rem;
+
+            background: var(--appv2-background);
+
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            border-color: var(--border-theme-color);
+
+            legend {
+                font-size: var(--font-size-15);
+                font-weight: bold;
+            }
+        }
+
+        .scroll {
+            overflow-x: hidden;
+            overflow-y: auto;
+            height: 100%;
         }
     }
 

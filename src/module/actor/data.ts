@@ -146,6 +146,15 @@ interface AdvancementData {
         /** Calculated Field - Experience Points till next level */
         diff: number;
     }
+    /** Calculated Field */
+    rvs: {
+        /** Calculated Field */
+        total: number,
+        /** Calculated Field */
+        available: number,
+        /** Calculated Field */
+        spent: number
+    }
 }
 
 export type {

@@ -36,6 +36,7 @@ const BaseSkills = {
     resources: {
         slug: "resources",
         favourite: true,
+        value: 10
     },
     accounting: { slug: "accounting" },
     acrobatics: { slug: "acrobatics" },

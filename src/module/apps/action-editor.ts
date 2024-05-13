@@ -57,7 +57,7 @@ export class ActionEditor<
     }
 
     constructor(document: TDocument, actionSlug: string, options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
-        options.id = `action-editor-${document.id}-${actionSlug}`;
+        options.id = `action-editor-${document.uuid}-${actionSlug}`;
         super(options);
         this.document = document;
         this.actionSlug = actionSlug;

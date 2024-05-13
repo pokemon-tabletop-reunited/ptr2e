@@ -848,7 +848,8 @@ export {
 export * from "./handlebars-application.ts";
 
 type DialogV2Configuration = {
-    buttons: DialogV2Button[];
+    buttons?: DialogV2Button[];
+    ok?: DialogV2Button;
     content: string;
     submit: (...args: any[]) => Promise<void>;
 } & ApplicationConfiguration;

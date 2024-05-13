@@ -1,0 +1,42 @@
+<section class="skill-editor">
+    <fieldset class="controls">
+        <legend>Controls</legend>
+        <div class="buttons">
+            <button type="button" data-action="reset-skills">Reset All Investment</button>
+            <button type="button" data-action="change-resources">Change Resources</button>
+        </div>
+        <div class="points">
+            <label>Spent Points: <span>{{points.spent}} / {{points.total}}</span></label>
+            <label>Points Available: <span><b>{{points.available}}</b></span></label>
+        </div>
+    </fieldset>
+    <fieldset class="skills">
+        <div class="scroll">
+            <header class="skill">
+                <label>Skill</label>
+                <label>Base</label>
+                <label>Current Investment</label>
+                <label>Apply Investment</label>
+            </header>
+            {{#each skills}}
+                <div class="skill">
+                    <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}</label>
+                    <label>{{value}}</label>
+                    <label>{{rvs}}</label>
+                    {{#if (eq this.slug "luck")}}
+                        <button type="button" data-action="roll-luck">{{#if @root.isReroll}}Reroll{{else}}Roll{{/if}} Luck</button>
+                    {{else}}
+                        {{#if (and (eq this.slug "resources") (not @root.levelOne true))}}
+                            <label></label>
+                        {{else}}
+                            <input name="{{slug}}.investment" type="number" min="0" max="{{@root.maxInvestment}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
+                        {{/if}}
+                    {{/if}}
+                </div>
+            {{/each}}
+        </div>
+    </fieldset>
+    <footer class="controls">
+        <button type="submit">Apply Investment</button>
+    </footer>
+</section>
