@@ -14,6 +14,39 @@ export default abstract class MoveSystem extends HasEmbed(HasBase(foundry.abstra
 
     static LOCALIZATION_PREFIXES = ["PTR2E", "PTR2E.MoveSystem"];
 
+    static override defineSchema(): foundry.data.fields.DataSchema {
+        const fields = foundry.data.fields;
+        return {
+            ...super.defineSchema(),
+
+            grade: new fields.StringField({
+                required: true,
+                initial: "E",
+                choices: [
+                    "E",
+                    "E+",
+                    "D-",
+                    "D",
+                    "D+",
+                    "C-",
+                    "C",
+                    "C+",
+                    "B-",
+                    "B",
+                    "B+",
+                    "A-",
+                    "A",
+                    "A+",
+                    "S-",
+                    "S",
+                    "S+",
+                ],
+                label: "PTR2E.FIELDS.gear.grade.label",
+                hint: "PTR2E.FIELDS.gear.grade.hint",
+            }),
+        };
+    }
+
     override async toEmbed(_config: foundry.abstract.DocumentHTMLEmbedConfig, options: EnrichmentOptions = {}): Promise<HTMLElement | HTMLCollection | null> {
         return super.toEmbed(_config, options, {attack: this.attack, move: this.parent});
     }

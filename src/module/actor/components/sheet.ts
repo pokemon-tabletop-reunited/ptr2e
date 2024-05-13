@@ -21,6 +21,7 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
     static override DEFAULT_OPTIONS = fu.mergeObject(
         super.DEFAULT_OPTIONS,
         {
+            id: "{id}",
             classes: ["ptr2e", "sheet", "actor", "popout"],
             position: {
                 width: 'auto',
@@ -57,7 +58,7 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
         
         return {
             ...appOptions,
-            uniqueId: `actor-${options.actor!.uuid}-${options.component!.constructor.name}`,
+            uniqueId: `${options.component!.constructor.name}-${options.actor!.uuid}`,
             actor: options.actor,
             component: options.component,
         }

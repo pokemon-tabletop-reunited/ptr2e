@@ -161,7 +161,8 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
                 equipped: new fields.EmbeddedDataField(EquipmentData),
                 grade: new fields.StringField({
                     required: true,
-                    initial: "E",
+                    nullable: true,
+                    initial: null,
                     choices: [
                         "E",
                         "E+",
