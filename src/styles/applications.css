@@ -529,6 +529,22 @@ body.theme-dark .sheet a.content-link {
   grid-area: 1 / 4 / 2 / 6;
   padding: 0.5rem;
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button:has(small.unspend),
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button:has(small.unspend) {
+  animation: glow 1s infinite alternate;
+}
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px -5px gold;
+  }
+  to {
+    box-shadow: 0 0 5px 5px gold;
+  }
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button small.unspend,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button small.unspend {
+  font-size: 10px;
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component {
   grid-area: span 3 / span 2;
 }

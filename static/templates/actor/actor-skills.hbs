@@ -5,7 +5,7 @@
             <legend>{{localize "PTR2E.ActorSystem.FIELDS.skills.options"}}</legend>
 
             <button type="button" class="toggle-hidden-skills" title="Toggle Hidden Skills" data-action="toggle-hidden-skills"><i class="fas fa-eye-slash"></i> {{localize "PTR2E.ActorSystem.FIELDS.skills.toggleHidden"}}</button>
-            <button type="button" class="edit-skills" data-action="edit-skills" title="Edit Skills"><i class="fas fa-edit"></i> {{localize "PTR2E.ActorSystem.FIELDS.skills.editSkills"}}</button>
+            <button type="button" class="edit-skills" data-action="edit-skills" title="Edit Skills"><i class="fas fa-edit"></i> {{localize "PTR2E.ActorSystem.FIELDS.skills.editSkills"}} {{#if actor.system.advancement.rvs.available}}<small class="ml-1 unspend">({{actor.system.advancement.rvs.available}} Unspend!)</small>{{/if}}</button>
             <button type="button" class="luck-roll" data-action="luck-roll" title="End of Day Luck Roll"><i class="fas fa-dice-d10"></i> {{localize "PTR2E.ActorSystem.FIELDS.skills.luckRoll"}}</button>
         </fieldset>
     </div>
