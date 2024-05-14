@@ -1,0 +1,49 @@
+{
+  "name": "Scorched Earth",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ground_icon.png",
+  "system": {
+    "slug": "scorched-earth",
+    "description": "Effect: This attack is considered to be both Fire and Ground Type. On hit, the target has a 10% chance to become Burn 5.",
+    "traits": [
+      "earthbound"
+    ],
+    "actions": [
+      {
+        "slug": "scorched-earth",
+        "name": "Scorched Earth",
+        "type": "attack",
+        "traits": [
+          "earthbound"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 90,
+        "types": [
+          "ground"
+        ],
+        "description": "Effect: This attack is considered to be both Fire and Ground Type. On hit, the target has a 10% chance to become Burn 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "gcZqyJnKPPHpmsqZ",
+  "effects": []
+}

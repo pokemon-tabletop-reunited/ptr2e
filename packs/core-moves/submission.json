@@ -1,0 +1,53 @@
+{
+  "name": "Submission",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "submission",
+    "description": "Effect: If the user and target are in the same Grapple, Submission gains [Danger Close], and has its Power increase to 110.",
+    "traits": [
+      "recoil-1-4",
+      "contact",
+      "grapple"
+    ],
+    "actions": [
+      {
+        "slug": "submission",
+        "name": "Submission",
+        "type": "attack",
+        "traits": [
+          "recoil-1-4",
+          "contact",
+          "grapple"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 80,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: If the user and target are in the same Grapple, Submission gains [Danger Close], and has its Power increase to 110.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "Eet56V4kfBEqWFgk",
+  "effects": []
+}

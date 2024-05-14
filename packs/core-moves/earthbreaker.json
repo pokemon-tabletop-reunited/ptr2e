@@ -1,0 +1,53 @@
+{
+  "name": "Earthbreaker",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/steel_icon.png",
+  "system": {
+    "slug": "earthbreaker",
+    "description": "Effect: If a target is Burrowed underground, Earthmover ignores range increment and the target's EVA stage increases.  This attack is Super Effective against the Ground Type.",
+    "traits": [
+      "legendary",
+      "pass-3",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "earthbreaker",
+        "name": "Earthbreaker",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "pass-3",
+          "contact"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "description": "Effect: If a target is Burrowed underground, Earthmover ignores range increment and the target's EVA stage increases.  This attack is Super Effective against the Ground Type.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "kytCZLpRQLB0X9X9",
+  "effects": []
+}

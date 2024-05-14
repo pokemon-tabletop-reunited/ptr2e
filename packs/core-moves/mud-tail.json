@@ -1,0 +1,51 @@
+{
+  "name": "Mud Tail",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ground_icon.png",
+  "system": {
+    "slug": "mud-tail",
+    "description": "Effect: On hit, the target is Slowed 5.",
+    "traits": [
+      "tail",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "mud-tail",
+        "name": "Mud Tail",
+        "type": "attack",
+        "traits": [
+          "tail",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 90,
+        "types": [
+          "ground"
+        ],
+        "description": "Effect: On hit, the target is Slowed 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "V8O8neYaAcnUKYEl",
+  "effects": []
+}

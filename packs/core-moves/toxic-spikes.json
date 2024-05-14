@@ -1,0 +1,51 @@
+{
+  "name": "Toxic Spikes",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/poison_icon.png",
+  "system": {
+    "slug": "toxic-spikes",
+    "description": "Effect: Poison tipped spikes are spread over the [Blast] area. A creature that starts an Activation in a space contraining Poison Spikes, they gain Poison 1. A creature that moves Overland through the Hazard gain Poison 1 for each square travelled. After gaining 4 stacks of Poison this way, the creature gains Blight equal to the number of Poison stacks they currently have.",
+    "traits": [
+      "hazard",
+      "blast-4"
+    ],
+    "actions": [
+      {
+        "slug": "toxic-spikes",
+        "name": "Toxic Spikes",
+        "type": "attack",
+        "traits": [
+          "hazard",
+          "blast-4"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: Poison tipped spikes are spread over the [Blast] area. A creature that starts an Activation in a space contraining Poison Spikes, they gain Poison 1. A creature that moves Overland through the Hazard gain Poison 1 for each square travelled. After gaining 4 stacks of Poison this way, the creature gains Blight equal to the number of Poison stacks they currently have.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "ZPdwItj91QOBjAgC",
+  "effects": []
+}

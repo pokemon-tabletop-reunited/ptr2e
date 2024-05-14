@@ -1,0 +1,53 @@
+{
+  "name": "Shin Kick",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "shin-kick",
+    "description": "Effect: On hit, the target has a 30% chance to be Flinched 5.",
+    "traits": [
+      "contact",
+      "kick",
+      "priority-2"
+    ],
+    "actions": [
+      {
+        "slug": "shin-kick",
+        "name": "Shin Kick",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "kick",
+          "priority-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": 2,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 45,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "Effect: On hit, the target has a 30% chance to be Flinched 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "yfmQSUfWUp0BJEpo",
+  "effects": []
+}

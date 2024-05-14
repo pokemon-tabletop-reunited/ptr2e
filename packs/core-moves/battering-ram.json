@@ -1,0 +1,53 @@
+{
+  "name": "Battering Ram",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/rock_icon.png",
+  "system": {
+    "slug": "battering-ram",
+    "description": "Effect: On hit, all [Shield] effects that the target is benefitting from are removed.",
+    "traits": [
+      "dash",
+      "pass-2",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "battering-ram",
+        "name": "Battering Ram",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "pass-2",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "rock"
+        ],
+        "description": "Effect: On hit, all [Shield] effects that the target is benefitting from are removed.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "ti0zhOW1914VMZVg",
+  "effects": []
+}

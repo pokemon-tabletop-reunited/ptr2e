@@ -1,0 +1,51 @@
+{
+  "name": "Depth Charge",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/water_icon.png",
+  "system": {
+    "slug": "depth-charge",
+    "description": "Effect: If a target is Swimming, Depth Charge ignores range increment and the target's EVA stage increases. Depth Charge's Power is doubled against Swimming targets.",
+    "traits": [
+      "blast-2",
+      "explode"
+    ],
+    "actions": [
+      {
+        "slug": "depth-charge",
+        "name": "Depth Charge",
+        "type": "attack",
+        "traits": [
+          "blast-2",
+          "explode"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 70,
+        "accuracy": 85,
+        "types": [
+          "water"
+        ],
+        "description": "Effect: If a target is Swimming, Depth Charge ignores range increment and the target's EVA stage increases. Depth Charge's Power is doubled against Swimming targets.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "uYrOp53quR0k2gqN",
+  "effects": []
+}

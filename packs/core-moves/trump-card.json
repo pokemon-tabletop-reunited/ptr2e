@@ -1,0 +1,51 @@
+{
+  "name": "Trump Card",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "trump-card",
+    "description": "Effect: Trump Card's Power increases by 5 for every 1 PP lower than the Max PP the user has, up to a maximum of 200 power.",
+    "traits": [
+      "contact",
+      "danger-close"
+    ],
+    "actions": [
+      {
+        "slug": "trump-card",
+        "name": "Trump Card",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "danger-close"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 40,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: Trump Card's Power increases by 5 for every 1 PP lower than the Max PP the user has, up to a maximum of 200 power.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "Z8InvSwboNkkZu7d",
+  "effects": []
+}

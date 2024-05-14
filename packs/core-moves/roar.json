@@ -1,0 +1,55 @@
+{
+  "name": "Roar",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "roar",
+    "description": "Effect: All valid targets gain Fear 3 and are forced to attack away from the user.",
+    "traits": [
+      "social",
+      "sonic",
+      "friendly",
+      "delay-3"
+    ],
+    "actions": [
+      {
+        "slug": "roar",
+        "name": "Roar",
+        "type": "attack",
+        "traits": [
+          "social",
+          "sonic",
+          "friendly",
+          "delay-3"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": 3,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: All valid targets gain Fear 3 and are forced to attack away from the user.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "JkdiBWMUql7JsHN6",
+  "effects": []
+}

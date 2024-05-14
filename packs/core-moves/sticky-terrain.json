@@ -1,0 +1,49 @@
+{
+  "name": "Sticky Terrain",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/bug_icon.png",
+  "system": {
+    "slug": "sticky-terrain",
+    "description": "Effect: The Terrain type is set to Sticky Terrain for 3 rounds.",
+    "traits": [
+      "terrain"
+    ],
+    "actions": [
+      {
+        "slug": "sticky-terrain",
+        "name": "Sticky Terrain",
+        "type": "attack",
+        "traits": [
+          "terrain"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "bug"
+        ],
+        "description": "Effect: The Terrain type is set to Sticky Terrain for 3 rounds.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "Ev61RpEoR7LKfLtz",
+  "effects": []
+}

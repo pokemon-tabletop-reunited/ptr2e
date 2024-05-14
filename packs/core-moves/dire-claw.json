@@ -1,0 +1,49 @@
+{
+  "name": "Dire Claw",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/poison_icon.png",
+  "system": {
+    "slug": "dire-claw",
+    "description": "Effect: When used, roll a d3; 1 for Poison, 2 for Paralysis, 3 for Drowsy. On hit, the target rolls has a 50% of gaining  rolled condition for 5 activations.",
+    "traits": [
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "dire-claw",
+        "name": "Dire Claw",
+        "type": "attack",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: When used, roll a d3; 1 for Poison, 2 for Paralysis, 3 for Drowsy. On hit, the target rolls has a 50% of gaining  rolled condition for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "697n2MmrhrzaWUGr",
+  "effects": []
+}

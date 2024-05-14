@@ -1,0 +1,51 @@
+{
+  "name": "Aqua Step",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/water_icon.png",
+  "system": {
+    "slug": "aqua-step",
+    "description": "Effect: On hit, the user gains +1 SPD stage for 5 activations.",
+    "traits": [
+      "contact",
+      "dance"
+    ],
+    "actions": [
+      {
+        "slug": "aqua-step",
+        "name": "Aqua Step",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "dance"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "Effect: On hit, the user gains +1 SPD stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "jsbjpCbL51owSNvD",
+  "effects": []
+}

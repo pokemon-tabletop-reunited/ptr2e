@@ -1,0 +1,49 @@
+{
+  "name": "Shadow Mist",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/shadow_icon.png",
+  "system": {
+    "slug": "shadow-mist",
+    "description": "Effect: On hit, all valid targets lose -2 EVA stage for 5 activations.",
+    "traits": [
+      "friendly"
+    ],
+    "actions": [
+      {
+        "slug": "shadow-mist",
+        "name": "Shadow Mist",
+        "type": "attack",
+        "traits": [
+          "friendly"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "shadow"
+        ],
+        "description": "Effect: On hit, all valid targets lose -2 EVA stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "E"
+  },
+  "_id": "joTVpu34LTla2KBr",
+  "effects": []
+}

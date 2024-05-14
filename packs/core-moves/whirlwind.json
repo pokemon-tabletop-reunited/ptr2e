@@ -1,0 +1,52 @@
+{
+  "name": "Whirlwind",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "whirlwind",
+    "description": "Effect: Valid targets that collide with other creatures or suffer fall damage lose an additional Tick of HP as damage.",
+    "traits": [
+      "wind",
+      "push-6",
+      "delay-2"
+    ],
+    "actions": [
+      {
+        "slug": "whirlwind",
+        "name": "Whirlwind",
+        "type": "attack",
+        "traits": [
+          "wind",
+          "push-6",
+          "delay-2"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": 2,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: Valid targets that collide with other creatures or suffer fall damage lose an additional Tick of HP as damage.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "TApjY3OyzhA8yaN8",
+  "effects": []
+}

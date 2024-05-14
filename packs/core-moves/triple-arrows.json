@@ -1,0 +1,49 @@
+{
+  "name": "Triple Arrows",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "triple-arrows",
+    "description": "Effect: On hit, the target has a 50% chance of losing -1 DEF stage for 5 activations, and a 30% chance of becoming Flinched 2.",
+    "traits": [
+      "crit-1"
+    ],
+    "actions": [
+      {
+        "slug": "triple-arrows",
+        "name": "Triple Arrows",
+        "type": "attack",
+        "traits": [
+          "crit-1"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: On hit, the target has a 50% chance of losing -1 DEF stage for 5 activations, and a 30% chance of becoming Flinched 2.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "L0dwluoFQhtZlXpT",
+  "effects": []
+}

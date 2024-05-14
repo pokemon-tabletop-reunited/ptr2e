@@ -1,51 +1,82 @@
 {
-    "name": "Type Embodiment <Type>",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "None"
-        ],
-        "cost": 3,
-        "design": {
-            "arena": "mental",
-            "approach": "resilience",
-            "archetype": "Elemental"
-        },
-        "description": "You gain a <type> trait. A recommended limit on <type> traits is 3 total, but this can be revised at GM discretion. May replace an existing <type>.</type></type></type>",
-        "actions": [
-            {
-                "name": "Type Embodiment <Type>",
-                "slug": "type-embodiment-type",
-                "description": "You gain a <Type> trait. A recommended limit on <Type> traits is 3 total, but this can be revised at GM discretion. May replace an existing <Type>.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "type-embodiment-type",
-        "traits": [],
-        "node": {
-            "i": -51,
-            "j": 36,
-            "connected": [
-                "root-5"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#161616",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
-                "tint": "#ffffff",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Type Embodiment <Type>",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Elemental"
     },
-    "_id": "3hmeZeafNkHeCKvi",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You gain a <type> trait. A recommended limit on <type> traits is 3 total, but this can be revised at GM discretion. May replace an existing <type>.</type></type></type>",
+    "actions": [
+      {
+        "name": "Type Embodiment <Type>",
+        "slug": "type-embodiment-type",
+        "description": "You gain a <Type> trait. A recommended limit on <Type> traits is 3 total, but this can be revised at GM discretion. May replace an existing <Type>.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "type-embodiment-type",
+    "traits": [],
+    "node": {
+      "i": -93,
+      "j": 29,
+      "connected": [
+        "root-6",
+        "type-specialty",
+        "adhesive-digits",
+        "telepathic-potential",
+        "telekinetic-potential",
+        "drifter",
+        "magnetise",
+        "one-with-the-green",
+        "nurturing-shoots",
+        "weaponized-weather",
+        "venomous"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#161616",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "3hmeZeafNkHeCKvi",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.3hmeZeafNkHeCKvi"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922108122,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!3hmeZeafNkHeCKvi"
 }

@@ -9,7 +9,7 @@ import { MeasuredTemplatePTR2e } from "@module/canvas/measured-template.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { BasicChangeSystem, ChangeModel } from "@data";
 import { ActiveEffectPTR2e } from "@module/effects/index.ts";
-import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem } from "@module/chat/index.ts";
+import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem, SkillMessageSystem } from "@module/chat/index.ts";
 import Traits from "static/traits.json";
 import ItemDirectoryPTR2e from "@item/sidebar.ts";
 import { StatusEffects } from "./effects.ts";
@@ -21,6 +21,7 @@ import PassiveActiveEffectSystem from "@module/effects/data/passive.ts";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import { default as Skills } from "./skills.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -55,7 +56,8 @@ export const PTRCONFIG = {
         dataModels: {
             item: ItemMessageSystem,
             attack: AttackMessageSystem,
-            "damage-applied": DamageAppliedMessageSystem
+            "damage-applied": DamageAppliedMessageSystem,
+            skill: SkillMessageSystem,
         }
     },
     Combat: {
@@ -127,6 +129,7 @@ export const PTRCONFIG = {
     },
     data: {
         traits: Traits,
+        skills: Skills,
     },
     statusEffects: StatusEffects
 }

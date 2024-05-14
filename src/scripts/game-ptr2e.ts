@@ -1,7 +1,7 @@
 import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import { ImageResolver, sluggify } from "@utils";
-import { ClockDatabase, TraitsCollection } from "@data";
+import { ClockDatabase, SkillsCollection, TraitsCollection } from "@data";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import { Pokedex } from "pokeapi-js-wrapper";
 import { UUIDUtils } from "src/util/uuid.ts";
@@ -21,6 +21,7 @@ const GamePTR = {
             },
             data: {
                 traits: TraitsCollection.create(),
+                skills: SkillsCollection.create()
             },
             perks: new PerkManager(),
             tooltips: new TooltipsPTR2e(),

@@ -1,59 +1,75 @@
 {
-    "name": "Dead To Rights",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "None"
-        ],
-        "cost": 3,
-        "design": {
-            "arena": "physical",
-            "approach": "finesse",
-            "archetype": "Combat"
-        },
-        "description": "Your next Ranged Move gains +3 Accuracy Stages and +4 Critical Hit Rate Stages. To use this, your target must not have any cover.",
-        "actions": [
-            {
-                "name": "Dead To Rights",
-                "slug": "dead-to-rights",
-                "description": "Your next Ranged Move gains +3 Accuracy Stages and +4 Critical Hit Rate Stages. To use this, your target must not have any cover.",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 10
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "dead-to-rights",
-        "traits": [],
-        "node": {
-            "i": 2,
-            "j": -7,
-            "connected": [
-                "dead-eye",
-                "root-1",
-                "bug-catcher",
-                "down-the-sights",
-                "firefly",
-                "frenzied-assault",
-                "shadow-guide",
-                "snare"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#ff0080",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-                "tint": "#0f0f0f",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Dead To Rights",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Combat"
     },
-    "_id": "7Uhx4SiJFnFrbhB6",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "Your next Ranged Move gains +3 Accuracy Stages and +4 Critical Hit Rate Stages. To use this, your target must not have any cover.",
+    "actions": [
+      {
+        "name": "Dead To Rights",
+        "slug": "dead-to-rights",
+        "description": "Your next Ranged Move gains +3 Accuracy Stages and +4 Critical Hit Rate Stages. To use this, your target must not have any cover.",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 10
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "dead-to-rights",
+    "traits": [],
+    "node": {
+      "i": -36,
+      "j": 93,
+      "connected": [
+        "down-the-sights",
+        "rapid-fire-style-1",
+        "dead-eye"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ff0080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+        "tint": "#0f0f0f",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "7Uhx4SiJFnFrbhB6",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.7Uhx4SiJFnFrbhB6"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922220971,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!7Uhx4SiJFnFrbhB6"
 }

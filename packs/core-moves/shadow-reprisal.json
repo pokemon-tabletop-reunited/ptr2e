@@ -1,0 +1,49 @@
+{
+  "name": "Shadow Reprisal",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/shadow_icon.png",
+  "system": {
+    "slug": "shadow-reprisal",
+    "description": "Effect: Shadow Reprisal's Power increases by 2 for every 1% of missing HP the user has, up to a maximum of 200.",
+    "traits": [
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "shadow-reprisal",
+        "name": "Shadow Reprisal",
+        "type": "attack",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 20,
+        "accuracy": 100,
+        "types": [
+          "shadow"
+        ],
+        "description": "Effect: Shadow Reprisal's Power increases by 2 for every 1% of missing HP the user has, up to a maximum of 200.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "E"
+  },
+  "_id": "vLIEAHyewpzlrioS",
+  "effects": []
+}

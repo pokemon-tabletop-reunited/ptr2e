@@ -1,8 +1,9 @@
 import { ActorPTR2e } from "@actor";
-import { ItemSheetPTR2e, ItemSystemPTR } from "@item";
-import { ActionType, ActionPTR2e, RollOptionManager, Trait } from "@data";
+import { ItemSheetPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
+import { RollOptionManager, Trait } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemFlagsPTR2e } from "./data/system.ts";
+import { ActionsCollections } from "@actor/actions.ts";
 
 /**
  * @extends {PTRItemData}
@@ -35,7 +36,7 @@ class ItemPTR2e<
         return this.system.slug;
     }
 
-    get traits(): Map<string, Trait> | null {
+    get traits(): Collection<Trait> | null {
         return "traits" in this.system ? this.system.traits : null;
     }
 
@@ -43,7 +44,7 @@ class ItemPTR2e<
         const traitOptions = ((): string[] => {
             if (!this.traits) return [];
             const options = [];
-            for (const trait of this.traits.values()) {
+            for (const trait of this.traits) {
                 options.push(`trait:${trait.slug}`);
             }
             return options;
@@ -73,14 +74,7 @@ class ItemPTR2e<
 
     override prepareBaseData() {
         if (this.type === "ptu-item") return super.prepareBaseData();
-        this._actions = {
-            generic: new Map(),
-            attack: new Map(),
-            exploration: new Map(),
-            downtime: new Map(),
-            camping: new Map(),
-            passive: new Map(),
-        };
+        this._actions = new ActionsCollections(this);
 
         this.rollOptions = new RollOptionManager(this);
 
@@ -94,21 +88,13 @@ class ItemPTR2e<
         if (this.type === "ptu-item") return;
 
         if (!this.parent) return;
-        const actions = this.parent._actions;
-        for (const type in this.actions) {
-            const key = type as ActionType;
-            for (const action of this.actions[key].values()) {
-                if (actions[key].has(action.slug)) {
-                    console.warn(
-                        `Duplicate action found in Item ${this.id}: ${action.slug} for Actor ${this.parent.id}`
-                    );
-                    continue;
-                }
-                actions[key].set(action.slug, action);
-            }
-        }
+        if(this.hasActions()) this.parent._actions.addActionsFromItem(this);
 
         this.rollOptions.addOption("item", `${this.type}:${this.slug}`);
+    }
+
+    hasActions(): this is ItemPTR2e<ItemSystemsWithActions> {
+        return 'actions' in this.system && this.system.actions.size > 0;
     }
 
     async toChat() {
@@ -250,7 +236,7 @@ interface ItemPTR2e<
     flags: ItemFlagsPTR2e;
     readonly _source: foundry.documents.ItemSource<string, TSystem>;
 
-    _actions: Record<ActionType, Map<string, ActionPTR2e>>;
+    _actions: ActionsCollections;
 
     rollOptions: RollOptionManager<this>;
 }

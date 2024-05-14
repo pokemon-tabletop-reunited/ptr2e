@@ -1,0 +1,51 @@
+{
+  "name": "Swallow",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "swallow",
+    "description": "Effect: Can only be used if you have at least 1 Stockpile Stack. You spend all of your Stockpile stacks to heal. Swallow heals 1/4 Max HP for 1 Stack, 1/2 Max HP for 2 stacks, and heals all HP for 3 stacks.",
+    "traits": [
+      "healing",
+      "linked"
+    ],
+    "actions": [
+      {
+        "slug": "swallow",
+        "name": "Swallow",
+        "type": "attack",
+        "traits": [
+          "healing",
+          "linked"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: Can only be used if you have at least 1 Stockpile Stack. You spend all of your Stockpile stacks to heal. Swallow heals 1/4 Max HP for 1 Stack, 1/2 Max HP for 2 stacks, and heals all HP for 3 stacks.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "jbbUPlp1eccwGyGY",
+  "effects": []
+}

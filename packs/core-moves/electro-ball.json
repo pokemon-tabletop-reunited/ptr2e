@@ -1,0 +1,51 @@
+{
+  "name": "Electro Ball",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "electro-ball",
+    "description": "Effect: Electro Ball is more powerful based on how fast the user is compared to the target.\nElectro Ball's Power = min(4*40, (20*UserSPD / TargetSPD) + 40)",
+    "traits": [
+      "pulse",
+      "missile"
+    ],
+    "actions": [
+      {
+        "slug": "electro-ball",
+        "name": "Electro Ball",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: Electro Ball is more powerful based on how fast the user is compared to the target.\nElectro Ball's Power = min(4*40, (20*UserSPD / TargetSPD) + 40)",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "eMhdr1eKjt0NLcfO",
+  "effects": []
+}

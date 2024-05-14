@@ -1,0 +1,49 @@
+{
+  "name": "Sketch",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "sketch",
+    "description": "Effect: The user permanently copies an attack the target has used by spending PP equal to the PP cost of the attack to be copied. The user must have seen the target use the attack recently in order to copy it. The copied attack is added to the user's Active attack List. If the user's Active attack List is full, the copied attack is added to the user's Repertoire.",
+    "traits": [
+      "move-locked"
+    ],
+    "actions": [
+      {
+        "slug": "sketch",
+        "name": "Sketch",
+        "type": "attack",
+        "traits": [
+          "move-locked"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The user permanently copies an attack the target has used by spending PP equal to the PP cost of the attack to be copied. The user must have seen the target use the attack recently in order to copy it. The copied attack is added to the user's Active attack List. If the user's Active attack List is full, the copied attack is added to the user's Repertoire.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "E"
+  },
+  "_id": "wxoELV5tLA5axoVc",
+  "effects": []
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Tri Attack",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "tri-attack",
+    "description": "Effect: On hit, the target has a 15% chance of being Paralyzed 5, a 15% chance of gaining Burn 5, and a 15% chance of gaining Freeze 5.",
+    "traits": [
+      "pulse",
+      "ray"
+    ],
+    "actions": [
+      {
+        "slug": "tri-attack",
+        "name": "Tri Attack",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "ray"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: On hit, the target has a 15% chance of being Paralyzed 5, a 15% chance of gaining Burn 5, and a 15% chance of gaining Freeze 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "yy01fk9ACLAv0lDv",
+  "effects": []
+}

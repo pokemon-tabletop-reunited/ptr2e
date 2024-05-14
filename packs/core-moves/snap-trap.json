@@ -1,0 +1,51 @@
+{
+  "name": "Snap Trap",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/grass_icon.png",
+  "system": {
+    "slug": "snap-trap",
+    "description": "Effect: The user auto-succeeds on a Grapple Maneuver check against the target if Snap Trap hits. While the target is Grappled, they take a Tick of HP damage at the end of each of their activations.",
+    "traits": [
+      "trap",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "snap-trap",
+        "name": "Snap Trap",
+        "type": "attack",
+        "traits": [
+          "trap",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 35,
+        "accuracy": 100,
+        "types": [
+          "grass"
+        ],
+        "description": "Effect: The user auto-succeeds on a Grapple Maneuver check against the target if Snap Trap hits. While the target is Grappled, they take a Tick of HP damage at the end of each of their activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "WAqNZJ3vepYYIM0c",
+  "effects": []
+}

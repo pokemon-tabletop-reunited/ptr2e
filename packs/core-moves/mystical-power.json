@@ -1,0 +1,51 @@
+{
+  "name": "Mystical Power",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/psychic_icon.png",
+  "system": {
+    "slug": "mystical-power",
+    "description": "Effect: On hit, the user gains +1 SPATK stage for 5 activations.",
+    "traits": [
+      "legendary",
+      "smite"
+    ],
+    "actions": [
+      {
+        "slug": "mystical-power",
+        "name": "Mystical Power",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "smite"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 70,
+        "accuracy": 90,
+        "types": [
+          "psychic"
+        ],
+        "description": "Effect: On hit, the user gains +1 SPATK stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "TYBZrOrPs3wJaTGf",
+  "effects": []
+}

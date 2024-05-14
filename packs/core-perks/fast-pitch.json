@@ -1,55 +1,75 @@
 {
-    "name": "Fast Pitch",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Lift 25"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "physical",
-            "approach": "power",
-            "archetype": "Capture"
-        },
-        "description": "You may activate Fling with [Priority 3] utilising a [Pokeball], and spend up to 4 additional PP to gain +1 to the [Priority X] of the Fling per PP spent.",
-        "actions": [
-            {
-                "name": "Fast Pitch",
-                "slug": "fast-pitch",
-                "description": "You may activate Fling with [Priority 3] utilising a [Pokeball], and spend up to 4 additional PP to gain +1 to the [Priority X] of the Fling per PP spent.",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 3
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "fast-pitch",
-        "traits": [],
-        "node": {
-            "i": 52,
-            "j": -3,
-            "connected": [
-                "blacksmith",
-                "belt-expansion-1",
-                "dual-wielder",
-                "tactician"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#ff8040",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Fast Pitch",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Lift 25"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Capture"
     },
-    "_id": "P49Aro4LHhgEkPC5",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You may activate Fling with [Priority 3] utilising a [Pokeball], and spend up to 4 additional PP to gain +1 to the [Priority X] of the Fling per PP spent.",
+    "actions": [
+      {
+        "name": "Fast Pitch",
+        "slug": "fast-pitch",
+        "description": "You may activate Fling with [Priority 3] utilising a [Pokeball], and spend up to 4 additional PP to gain +1 to the [Priority X] of the Fling per PP spent.",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "fast-pitch",
+    "traits": [],
+    "node": {
+      "i": -65,
+      "j": 82,
+      "connected": [
+        "root-5",
+        "curveball-technique",
+        "controlled-curve"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ff8040",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "P49Aro4LHhgEkPC5",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.P49Aro4LHhgEkPC5"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714916672878,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!P49Aro4LHhgEkPC5"
 }

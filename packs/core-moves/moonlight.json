@@ -1,0 +1,51 @@
+{
+  "name": "Moonlight",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fairy_icon.png",
+  "system": {
+    "slug": "moonlight",
+    "description": "Effect: The user recovers HP equal to 50% of their Max HP. While there is New Moon Weather, the user recovers HP equal to 2/3rds of their Max HP instead. In any other weather, the user recovers HP equal to 25% of their Max HP instead.",
+    "traits": [
+      "healing",
+      "environ"
+    ],
+    "actions": [
+      {
+        "slug": "moonlight",
+        "name": "Moonlight",
+        "type": "attack",
+        "traits": [
+          "healing",
+          "environ"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": null,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "fairy"
+        ],
+        "description": "Effect: The user recovers HP equal to 50% of their Max HP. While there is New Moon Weather, the user recovers HP equal to 2/3rds of their Max HP instead. In any other weather, the user recovers HP equal to 25% of their Max HP instead.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "X3F57CfU9m8vx1ws",
+  "effects": []
+}

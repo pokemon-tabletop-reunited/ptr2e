@@ -1,0 +1,55 @@
+{
+  "name": "Storm Throw",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "storm-throw",
+    "description": "Trigger: The user is in control of a Grapple.\nEffect: This attack gains [Danger Close], and has its [Push X] increased by +2. If the user is not in control of a Grapple, this attack cannot be declared.",
+    "traits": [
+      "crit-4",
+      "push-2",
+      "contact",
+      "grapple"
+    ],
+    "actions": [
+      {
+        "slug": "storm-throw",
+        "name": "Storm Throw",
+        "type": "attack",
+        "traits": [
+          "crit-4",
+          "push-2",
+          "contact",
+          "grapple"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user is in control of a Grapple."
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "Trigger: The user is in control of a Grapple.\nEffect: This attack gains [Danger Close], and has its [Push X] increased by +2. If the user is not in control of a Grapple, this attack cannot be declared.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "ViPvD33GB5Ou7Eqj",
+  "effects": []
+}

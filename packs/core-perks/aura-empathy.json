@@ -1,55 +1,76 @@
 {
-    "name": "Aura Empathy",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Aura Sense 25"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "social",
-            "approach": "finesse",
-            "archetype": "Aura"
-        },
-        "description": "You have a knack for reading the auras of others, allowing you to understand their moods and potentially pick up some surface thoughts. (Skill check may be required)",
-        "actions": [
-            {
-                "name": "Aura Empathy",
-                "slug": "aura-empathy",
-                "description": "You have a knack for reading the auras of others, allowing you to understand their moods and potentially pick up some surface thoughts. (Skill check may be required)",
-                "cost": {
-                    "activation": "simple"
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "aura-empathy",
-        "traits": [],
-        "node": {
-            "i": -9,
-            "j": -18,
-            "connected": [
-                "aura-bonding",
-                "aura-channeling",
-                "aura-projection",
-                "shielding-aura",
-                "sight-beyond-sight"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#80ff80",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Aura Empathy",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Aura Sense 25"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "Aura"
     },
-    "_id": "0oopLlKDWl1rf2Sm",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You have a knack for reading the auras of others, allowing you to understand their moods and potentially pick up some surface thoughts. (Skill check may be required)",
+    "actions": [
+      {
+        "name": "Aura Empathy",
+        "slug": "aura-empathy",
+        "description": "You have a knack for reading the auras of others, allowing you to understand their moods and potentially pick up some surface thoughts. (Skill check may be required)",
+        "cost": {
+          "activation": "simple"
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "aura-empathy",
+    "traits": [],
+    "node": {
+      "i": 3,
+      "j": -66,
+      "connected": [
+        "aura-user",
+        "aura-bonding",
+        "aura-projection",
+        "aura-dampening",
+        "sight-beyond-sight"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#80ff80",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "0oopLlKDWl1rf2Sm",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.0oopLlKDWl1rf2Sm"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714920527631,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!0oopLlKDWl1rf2Sm"
 }

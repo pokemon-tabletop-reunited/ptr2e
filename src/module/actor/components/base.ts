@@ -4,6 +4,8 @@ class ActorComponent {
     static TEMPLATE: string;
     static TOOLTIP: string;
 
+    static ACTIONS: Record<string, (event: Event) => Promise<void>> = {};
+
     actor: ActorPTR2e;
 
     constructor(actor: ActorPTR2e) {
@@ -19,9 +21,20 @@ class ActorComponent {
         return html;
     }
 
+    /**
+     * For injecting header buttons and other elements into the frame
+     */
+    renderFrame(_close: HTMLElement) {
+        // Implement in subclass
+    }
+
     attachListeners(_html: HTMLElement) {
         // Implement in subclass
     }
+}
+
+interface ActorComponent {
+    constructor: typeof ActorComponent;
 }
 
 export { ActorComponent }

@@ -1,0 +1,51 @@
+{
+  "name": "Knock Off",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "knock-off",
+    "description": "On hit, the target's equipped Held item is knocked onto the ground in a space adjacent to the target.",
+    "traits": [
+      "dash",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "knock-off",
+        "name": "Knock Off",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 65,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "On hit, the target's equipped Held item is knocked onto the ground in a space adjacent to the target.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "z284lye0vzrzlKdX",
+  "effects": []
+}

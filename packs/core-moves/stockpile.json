@@ -1,0 +1,49 @@
+{
+  "name": "Stockpile",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "stockpile",
+    "description": "Effect: [Linked Attack: Spit Up][Linked Attack: Swallow]\nThe user gains 1 Stockpile Stack for 5 activations. A Stockpile Stack raises the user's DEF and SPDEF stage by +1. The user may only have a maximum of 3 Stockpile Stacks at a time.",
+    "traits": [
+      "defensive"
+    ],
+    "actions": [
+      {
+        "slug": "stockpile",
+        "name": "Stockpile",
+        "type": "attack",
+        "traits": [
+          "defensive"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: [Linked Attack: Spit Up][Linked Attack: Swallow]\nThe user gains 1 Stockpile Stack for 5 activations. A Stockpile Stack raises the user's DEF and SPDEF stage by +1. The user may only have a maximum of 3 Stockpile Stacks at a time.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "mGsDKzPNQ42oalNp",
+  "effects": []
+}

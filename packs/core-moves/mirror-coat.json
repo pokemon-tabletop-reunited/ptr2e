@@ -1,0 +1,49 @@
+{
+  "name": "Mirror Coat",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/psychic_icon.png",
+  "system": {
+    "slug": "mirror-coat",
+    "description": "Trigger: The user is damaged by a Special damaging attack.\nEffect: The user attacks the creature that attacked it, dealing twice the amount of damage it were dealt by the triggering attack (this is not modified by the target's SPDEF or other effects).",
+    "traits": [
+      "interrupt-3"
+    ],
+    "actions": [
+      {
+        "slug": "mirror-coat",
+        "name": "Mirror Coat",
+        "type": "attack",
+        "traits": [
+          "interrupt-3"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user is damaged by a Special damaging attack."
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "Trigger: The user is damaged by a Special damaging attack.\nEffect: The user attacks the creature that attacked it, dealing twice the amount of damage it were dealt by the triggering attack (this is not modified by the target's SPDEF or other effects).",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "YBM5wpQaekDhGwTE",
+  "effects": []
+}

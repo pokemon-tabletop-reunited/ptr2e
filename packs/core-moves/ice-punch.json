@@ -1,0 +1,51 @@
+{
+  "name": "Ice Punch",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ice_icon.png",
+  "system": {
+    "slug": "ice-punch",
+    "description": "Effect: On hit, the target has a 10% chance of becoming Freeze 5.",
+    "traits": [
+      "punch",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "ice-punch",
+        "name": "Ice Punch",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 75,
+        "accuracy": 100,
+        "types": [
+          "ice"
+        ],
+        "description": "Effect: On hit, the target has a 10% chance of becoming Freeze 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "Y4swIcPTHvLab8Ev",
+  "effects": []
+}

@@ -1,0 +1,50 @@
+{
+  "name": "Earthquake",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ground_icon.png",
+  "system": {
+    "slug": "earthquake",
+    "description": "Effect: If a target is Burrowing, Earthquake ignores range increment and the target's EVA stage increases. Additionally, Earthquake's Power is doubled against Burrowed targets.",
+    "traits": [
+      "earthbound",
+      "smite"
+    ],
+    "actions": [
+      {
+        "slug": "earthquake",
+        "name": "Earthquake",
+        "type": "attack",
+        "traits": [
+          "earthbound",
+          "smite"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "Effect: If a target is Burrowing, Earthquake ignores range increment and the target's EVA stage increases. Additionally, Earthquake's Power is doubled against Burrowed targets.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "XNpXPx2w9KKZ8chL",
+  "effects": []
+}

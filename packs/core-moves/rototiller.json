@@ -1,0 +1,50 @@
+{
+  "name": "Rototiller",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ground_icon.png",
+  "system": {
+    "slug": "rototiller",
+    "description": "Effect: All Grass Type creatures on the field gain +1 ATK stage and SPATK stage for 5 activations. If Grassy Terrain is active, the stage increase is doubled instead.",
+    "traits": [
+      "earthbound",
+      "environ"
+    ],
+    "actions": [
+      {
+        "slug": "rototiller",
+        "name": "Rototiller",
+        "type": "attack",
+        "traits": [
+          "earthbound",
+          "environ"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "ground"
+        ],
+        "description": "Effect: All Grass Type creatures on the field gain +1 ATK stage and SPATK stage for 5 activations. If Grassy Terrain is active, the stage increase is doubled instead.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "trUx6XLdQp9lZdq0",
+  "effects": []
+}

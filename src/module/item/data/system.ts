@@ -79,7 +79,7 @@ type ItemSystemSource = {
     /**
      * A set of actions that the item has.
      */
-    actions: ActionPTR2e[];
+    actions: ActionPTR2e['_source'][];
 
     /**
      * A description of the item.

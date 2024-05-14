@@ -1,0 +1,51 @@
+{
+  "name": "Zap Cannon",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "zap-cannon",
+    "description": "Effect: On hit, all valid targets are Paralyzed 5.",
+    "traits": [
+      "missile",
+      "blast-3"
+    ],
+    "actions": [
+      {
+        "slug": "zap-cannon",
+        "name": "Zap Cannon",
+        "type": "attack",
+        "traits": [
+          "missile",
+          "blast-3"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 120,
+        "accuracy": 55,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: On hit, all valid targets are Paralyzed 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "lSTQMYs44xeXh27N",
+  "effects": []
+}

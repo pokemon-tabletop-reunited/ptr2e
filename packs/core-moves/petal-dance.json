@@ -1,0 +1,51 @@
+{
+  "name": "Petal Dance",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/grass_icon.png",
+  "system": {
+    "slug": "petal-dance",
+    "description": "Effect: The user gains Choice-Locked 2. While Choice-Locked, the user does not consume PP. After these activations, the user is Confused 5.",
+    "traits": [
+      "contact",
+      "dance"
+    ],
+    "actions": [
+      {
+        "slug": "petal-dance",
+        "name": "Petal Dance",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "dance"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "grass"
+        ],
+        "description": "Effect: The user gains Choice-Locked 2. While Choice-Locked, the user does not consume PP. After these activations, the user is Confused 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "qtnOwdTTrDs7k7vn",
+  "effects": []
+}

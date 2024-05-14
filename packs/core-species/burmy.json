@@ -47,21 +47,112 @@
         "opportunist"
       ]
     },
-    "skills": {
-      "acrobatics": 10,
-      "climb": 10,
-      "conversation": 25,
-      "intimidate": 15,
-      "lift": 15,
-      "listen": 35,
-      "natural-world": 45,
-      "navigate": 35,
-      "negotiation": 25,
-      "running": 5,
-      "spot": 20,
-      "stealth": 45,
-      "survival": 40
-    },
+    "skills": [
+      {
+        "slug": "acrobatics",
+        "value": 10,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "climb",
+        "value": 10,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "conversation",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "intimidate",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "lift",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "natural-world",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "navigate",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiation",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "running",
+        "value": 5,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "spot",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      }
+    ],
     "slug": "",
     "stats": {
       "hp": 40,
@@ -78,57 +169,45 @@
       "levelUp": [
         {
           "name": "protect",
+          "level": 1,
           "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 1
+          "uuid": "Compendium.ptr2e.core-moves.Item.DwzmkHqd28xR3P3c"
         },
         {
           "name": "tackle",
+          "level": 10,
           "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 10
+          "uuid": "Compendium.ptr2e.core-moves.Item.fWOSmnI68Lct2LUn"
         },
         {
           "name": "bug-bite",
+          "level": 15,
           "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 15
+          "uuid": "Compendium.ptr2e.core-moves.Item.VWTUbiZH5inKfQn8"
         },
         {
           "name": "string-shot",
+          "level": 20,
           "gen": "brilliant-diamond-and-shining-pearl",
-          "level": 20
+          "uuid": "Compendium.ptr2e.core-moves.Item.TijijTYIY2UOVWOn"
         },
         {
           "name": "hidden-power",
+          "level": 20,
           "gen": "ultra-sun-ultra-moon",
-          "level": 20
+          "uuid": "Compendium.ptr2e.core-moves.Item.1lkeVmjLt8Vp0izT"
         }
       ],
-      "egg": [],
       "tutor": [
         {
-          "name": "string-shot",
-          "gen": "heartgold-soulsilver"
-        },
-        {
           "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "bug-bite",
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "uuid": "Compendium.ptr2e.core-moves.Item.4XGhnE4bWGYPKRxO"
         },
         {
           "name": "electroweb",
-          "gen": "ultra-sun-ultra-moon"
-        }
-      ],
-      "machine": [
-        {
-          "name": "protect",
-          "gen": "brilliant-diamond-and-shining-pearl"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "uuid": "Compendium.ptr2e.core-moves.Item.DLoWCGaBlU23XnUI"
         }
       ]
     },
@@ -142,29 +221,6 @@
       "name": "burmy",
       "details": null,
       "evolutions": [
-        {
-          "name": "wormadam",
-          "uuid": null,
-          "methods": [
-            {
-              "type": "gender",
-              "gender": "female",
-              "operand": "and"
-            },
-            {
-              "type": "level",
-              "level": 20,
-              "operand": "and"
-            }
-          ],
-          "evolutions": [],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        },
         {
           "name": "mothim",
           "uuid": "Compendium.ptr2e.core-species.Item.heMcRmrA3pK8e2kU",
@@ -180,13 +236,82 @@
               "operand": "and"
             }
           ],
-          "evolutions": [],
           "details": {
             "gender": null,
             "item": null,
             "level": null,
             "knownMove": null
-          }
+          },
+          "evolutions": []
+        },
+        {
+          "name": "wormadam-sandy",
+          "uuid": "Compendium.ptr2e.core-species.Item.kdCNZLjBRVXxfu3U",
+          "methods": [
+            {
+              "type": "gender",
+              "gender": "female",
+              "operand": "and"
+            },
+            {
+              "type": "level",
+              "level": 20,
+              "operand": "and"
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          },
+          "evolutions": []
+        },
+        {
+          "name": "wormadam-plant",
+          "uuid": "Compendium.ptr2e.core-species.Item.SrE7RrOI4zGTeJeZ",
+          "methods": [
+            {
+              "type": "gender",
+              "gender": "female",
+              "operand": "and"
+            },
+            {
+              "type": "level",
+              "level": 20,
+              "operand": "and"
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          },
+          "evolutions": []
+        },
+        {
+          "name": "wormadam-trash",
+          "uuid": "Compendium.ptr2e.core-species.Item.KkZGHoV5VoKO94eE",
+          "methods": [
+            {
+              "type": "gender",
+              "gender": "female",
+              "operand": "and"
+            },
+            {
+              "type": "level",
+              "level": 20,
+              "operand": "and"
+            }
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          },
+          "evolutions": []
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.kmFRu6lAhtEfASJy"
@@ -194,26 +319,5 @@
   },
   "_id": "kmFRu6lAhtEfASJy",
   "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-species.Item.kmFRu6lAhtEfASJy"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.320",
-    "systemId": "ptr2e",
-    "systemVersion": "0.004",
-    "createdTime": 1712327701027,
-    "modifiedTime": 1714663305677,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": "Compendium.ptr2e.core-species.Item.kmFRu6lAhtEfASJy",
-    "duplicateSource": null
-  },
-  "_key": "!items!kmFRu6lAhtEfASJy"
+  "folder": null
 }

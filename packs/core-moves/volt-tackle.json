@@ -1,0 +1,55 @@
+{
+  "name": "Volt Tackle",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "volt-tackle",
+    "description": "Effect: On hit, the target has a 10% chance of becoming Paralyzed 5.",
+    "traits": [
+      "recoil-1-3",
+      "dash",
+      "push-2",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "volt-tackle",
+        "name": "Volt Tackle",
+        "type": "attack",
+        "traits": [
+          "recoil-1-3",
+          "dash",
+          "push-2",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: On hit, the target has a 10% chance of becoming Paralyzed 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "WLj5EwH05mdgKRez",
+  "effects": []
+}

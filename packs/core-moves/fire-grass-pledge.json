@@ -1,0 +1,54 @@
+{
+  "name": "Fire-Grass Pledge",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fire_icon.png",
+  "system": {
+    "slug": "fire-grass-pledge",
+    "description": "Trigger: The user comboed Fire/Grass Pledge.\nEffect: The Terrain is set to Scorched Terrain for 3 Rounds.",
+    "traits": [
+      "pledge",
+      "pledge-combo",
+      "terrain",
+      "blast-2"
+    ],
+    "actions": [
+      {
+        "slug": "fire-grass-pledge",
+        "name": "Fire-Grass Pledge",
+        "type": "attack",
+        "traits": [
+          "pledge",
+          "pledge-combo",
+          "terrain",
+          "blast-2"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user comboed Fire/Grass Pledge."
+        },
+        "category": "special",
+        "power": 50,
+        "accuracy": 95,
+        "types": [
+          "fire"
+        ],
+        "description": "Trigger: The user comboed Fire/Grass Pledge.\nEffect: The Terrain is set to Scorched Terrain for 3 Rounds.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "yXnp3GjoQYyDw9pW",
+  "effects": []
+}

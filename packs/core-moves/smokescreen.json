@@ -1,0 +1,50 @@
+{
+  "name": "Smokescreen",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "smokescreen",
+    "description": "Effect: An Obscurring Cloud is created in the [Blast] area for 5 rounds. Any creature that starts their activation in, or enters the hazard becomes Blind 2.",
+    "traits": [
+      "hazard",
+      "blast-4"
+    ],
+    "actions": [
+      {
+        "slug": "smokescreen",
+        "name": "Smokescreen",
+        "type": "attack",
+        "traits": [
+          "hazard",
+          "blast-4"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: An Obscurring Cloud is created in the [Blast] area for 5 rounds. Any creature that starts their activation in, or enters the hazard becomes Blind 2.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "pYNVsTCmUw7oWhRg",
+  "effects": []
+}

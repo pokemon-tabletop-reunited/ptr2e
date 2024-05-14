@@ -1,0 +1,55 @@
+{
+  "name": "Crush Grip",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "crush-grip",
+    "description": "Effect: Crush Grip’s Power is equal to: 120 x TargetCurrentHP/TargetMaxHP. If the Target is Grappled by the user, Crush Grip gains [Danger Close]. Crush Grip ignores the target’s positive DEF stages.",
+    "traits": [
+      "legendary",
+      "crushing",
+      "contact",
+      "grapple"
+    ],
+    "actions": [
+      {
+        "slug": "crush-grip",
+        "name": "Crush Grip",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "crushing",
+          "contact",
+          "grapple"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: Crush Grip’s Power is equal to: 120 x TargetCurrentHP/TargetMaxHP. If the Target is Grappled by the user, Crush Grip gains [Danger Close]. Crush Grip ignores the target’s positive DEF stages.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "0hJmzpADt8XQzegu",
+  "effects": []
+}

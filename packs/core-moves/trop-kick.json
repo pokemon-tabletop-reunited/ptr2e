@@ -1,0 +1,55 @@
+{
+  "name": "Trop Kick",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/grass_icon.png",
+  "system": {
+    "slug": "trop-kick",
+    "description": "Effect: On hit, the target loses -1 ATK stage for 5 activations.",
+    "traits": [
+      "dash",
+      "kick",
+      "push-1",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "trop-kick",
+        "name": "Trop Kick",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "kick",
+          "push-1",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "grass"
+        ],
+        "description": "Effect: On hit, the target loses -1 ATK stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "2I5U1h1VUufQ1P8Z",
+  "effects": []
+}

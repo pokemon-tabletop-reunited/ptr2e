@@ -1,0 +1,51 @@
+{
+  "name": "Bug Bite",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/bug_icon.png",
+  "system": {
+    "slug": "bug-bite",
+    "description": "Effect: The user steals and consumes one equipped Food item on the target.",
+    "traits": [
+      "jaw",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "bug-bite",
+        "name": "Bug Bite",
+        "type": "attack",
+        "traits": [
+          "jaw",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "bug"
+        ],
+        "description": "Effect: The user steals and consumes one equipped Food item on the target.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "VWTUbiZH5inKfQn8",
+  "effects": []
+}

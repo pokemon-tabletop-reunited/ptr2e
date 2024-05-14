@@ -1,0 +1,53 @@
+<section class="tab sheet-body {{tabs.moves.cssClass}}" data-tab="moves" data-group="sheet">
+    <div class="scroll">
+        <fieldset class="moves">
+            <legend>
+                Moves 
+            </legend>
+            <fieldset class="level-up">
+                <legend>
+                    Level Up Moves
+                </legend>
+                {{#each item.system.moves.levelUp as |move|}}
+                    <div class="move" data-index="{{@index}}" data-slug="{{move.name}}" {{#if move.gen}}data-origin="{{move.gen}}" data-tooltip="Originates from: {{formatSlug move.gen}}"{{/if}}>
+                        <div class="form-group">
+                            <div class="form-fields">
+                                {{{asContentLink move.uuid}}}
+                                <input type="hidden" class="form-control" data-dtype="String" value={{move.name}}>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Level</label>
+                            <div class="form-fields">
+                                <input type="number" class="form-control" data-dtype="Number" value={{move.level}}>
+                            </div>
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control" data-action="toggle-tutor" data-field="level" data-slug="{{move.name}}" data-tooltip="Mark {{formatSlug move.name}} as Tutor Move"><i class="far fa-circle"></i></a>
+                            <a class="item-control" data-action="delete-move" data-field="level" data-slug="{{move.name}}" data-tooltip="Delete Move: {{formatSlug move.name}}"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                {{/each}}
+            </fieldset>
+            <fieldset class="tutor">
+                <legend>
+                    Tutor Moves
+                </legend>
+                {{#each item.system.moves.tutor as |move|}}
+                    <div class="move" data-index="{{@index}}" data-slug="{{move.name}}" {{#if move.gen}}data-origin="{{move.gen}}" data-tooltip="Originates from: {{formatSlug move.gen}}"{{/if}}>
+                        <div class="form-group">
+                            <div class="form-fields">
+                                {{{asContentLink move.uuid}}}
+                                <input type="hidden" class="form-control" data-dtype="String" value={{move.name}}>
+                            </div>
+                        </div>
+                        <div class="item-controls">
+                            <a class="item-control" data-action="toggle-tutor" data-field="tutor" data-slug="{{move.name}}" data-tooltip="Unmark {{formatSlug move.name}} as Tutor Move"><i class="fas fa-circle" style="color: #18520b;"></i></a>
+                            <a class="item-control" data-action="delete-move" data-field="tutor" data-slug="{{move.name}}" data-tooltip="Delete Move: {{formatSlug move.name}}"><i class="fas fa-trash"></i></a>
+                        </div>
+                    </div>
+                {{/each}}
+            </fieldset>
+        </fieldset>
+    </div>
+</section>

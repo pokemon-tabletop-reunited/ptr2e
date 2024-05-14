@@ -1,0 +1,53 @@
+{
+  "name": "Body Press",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "body-press",
+    "description": "Effect: This Attack uses the user's DEF in calculating damage, rather than their ATK.",
+    "traits": [
+      "crushing",
+      "dash",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "body-press",
+        "name": "Body Press",
+        "type": "attack",
+        "traits": [
+          "crushing",
+          "dash",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: This Attack uses the user's DEF in calculating damage, rather than their ATK.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "14Y2q4Gi9E8pQCHQ",
+  "effects": []
+}

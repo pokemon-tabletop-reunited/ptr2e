@@ -1,0 +1,53 @@
+{
+  "name": "Obstruct",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "obstruct",
+    "description": "The triggering attack fails to hit you, and additional attacks that hit you also fail to hit you until your next activation. Attacks failing to hit you do not activate on-miss effects. If any of these Attacks would make [Contact], that move's user loses -2 DEF stages for 5 activations.",
+    "traits": [
+      "shield",
+      "exhaust",
+      "interrupt-4"
+    ],
+    "actions": [
+      {
+        "slug": "obstruct",
+        "name": "Obstruct",
+        "type": "attack",
+        "traits": [
+          "shield",
+          "exhaust",
+          "interrupt-4"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "You are targeted by an Attack."
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "The triggering attack fails to hit you, and additional attacks that hit you also fail to hit you until your next activation. Attacks failing to hit you do not activate on-miss effects. If any of these Attacks would make [Contact], that move's user loses -2 DEF stages for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "Jrma5dcbpLZ2t8Je",
+  "effects": []
+}

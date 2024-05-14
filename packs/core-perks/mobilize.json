@@ -1,56 +1,76 @@
 {
-    "name": "Mobilize",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Leadership 20"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "social",
-            "approach": "finesse",
-            "archetype": "Support"
-        },
-        "description": "Allies influenced by this Command cannot provoke Attacks by moving.",
-        "actions": [
-            {
-                "name": "Mobilize",
-                "slug": "mobilize",
-                "description": "Allies influenced by this Command cannot provoke Attacks by moving.",
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 2
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "mobilize",
-        "traits": [],
-        "node": {
-            "i": -2,
-            "j": -16,
-            "connected": [
-                "root-1",
-                "groomer",
-                "breeder",
-                "nurturing-shoots",
-                "walking-dead"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#00ff40",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-                "tint": "#141414",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Mobilize",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Leadership 20"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "Support"
     },
-    "_id": "EhfPkS23yRI8VENp",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "Allies influenced by this Command cannot provoke Attacks by moving.",
+    "actions": [
+      {
+        "name": "Mobilize",
+        "slug": "mobilize",
+        "description": "Allies influenced by this Command cannot provoke Attacks by moving.",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "mobilize",
+    "traits": [],
+    "node": {
+      "i": 46,
+      "j": -56,
+      "connected": [
+        "root-3",
+        "tactician",
+        "cheerleader",
+        "emergency-retreat"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#00ff40",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+        "tint": "#141414",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "EhfPkS23yRI8VENp",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.EhfPkS23yRI8VENp"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714920514975,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!EhfPkS23yRI8VENp"
 }

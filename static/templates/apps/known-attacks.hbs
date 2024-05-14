@@ -1,0 +1,22 @@
+<article class="known-attacks">
+    {{#each attacks as |action|}}
+        {{> action action=action direction="RIGHT"}}
+    {{/each}}
+</article>
+
+{{#*inline "action"}}
+    <div class="action {{action.type}}" data-tooltip-direction="{{direction}}" data-slug="{{action.slug}}" data-parent="{{action.item.uuid}}" data-tooltip="{{action.name}}">
+        <div class="action-icon">
+            <img class="icon" src="{{action.img}}"/>
+        </div>
+        <span class="action-name">{{action.name}}</span>
+        <div class="action-controls item-controls">
+            <a class="item-control item-edit" data-tooltip-direction="UP" data-tooltip="Edit Action" data-type="action" data-action="action-edit">
+                <i class="fas fa-edit"></i>
+            </a>
+            <a class="item-control item-delete" data-tooltip-direction="UP" data-tooltip="Delete Action" data-type="action" data-action="action-delete">
+                <i class="fas fa-trash"></i>
+            </a>
+        </div>
+    </div>
+{{/inline}}

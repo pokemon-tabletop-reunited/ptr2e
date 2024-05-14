@@ -1,0 +1,51 @@
+{
+  "name": "Rock Smash",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "rock-smash",
+    "description": "Effect: On hit, the target has a 50% chance of becoming loses -1 DEF stage for 5 activations.",
+    "traits": [
+      "basic",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "rock-smash",
+        "name": "Rock Smash",
+        "type": "attack",
+        "traits": [
+          "basic",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: On hit, the target has a 50% chance of becoming loses -1 DEF stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "E"
+  },
+  "_id": "x8owJfS8Dnlj3Wbe",
+  "effects": []
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Aurora Beam",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ice_icon.png",
+  "system": {
+    "slug": "aurora-beam",
+    "description": "Effect: On hit, the target has a 10% chance of losing -1 ATK stage for 5 activations.",
+    "traits": [
+      "ray"
+    ],
+    "actions": [
+      {
+        "slug": "aurora-beam",
+        "name": "Aurora Beam",
+        "type": "attack",
+        "traits": [
+          "ray"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 65,
+        "accuracy": 100,
+        "types": [
+          "ice"
+        ],
+        "description": "Effect: On hit, the target has a 10% chance of losing -1 ATK stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "awYJvSlNlSo0yRSW",
+  "effects": []
+}

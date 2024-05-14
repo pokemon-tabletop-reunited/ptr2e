@@ -1,0 +1,52 @@
+{
+  "name": "Guardian of Alola",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fairy_icon.png",
+  "system": {
+    "slug": "guardian-of-alola",
+    "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal\nEffect: On hit, all valid targets lose 75% of their current HP.\nRequirement: [Tapu Fini], [Tapu Koko], [Tapu Bulu], or [Tapu Lele] Z-Power-Crystal as an Accessory Item and Nature's Madness on the user's Active List.",
+    "traits": [
+      "zenith",
+      "move-locked",
+      "blast-5"
+    ],
+    "actions": [
+      {
+        "slug": "guardian-of-alola",
+        "name": "Guardian of Alola",
+        "type": "attack",
+        "traits": [
+          "zenith",
+          "move-locked",
+          "blast-5"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 25,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal"
+        },
+        "category": "special",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "fairy"
+        ],
+        "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal\nEffect: On hit, all valid targets lose 75% of their current HP.\nRequirement: [Tapu Fini], [Tapu Koko], [Tapu Bulu], or [Tapu Lele] Z-Power-Crystal as an Accessory Item and Nature's Madness on the user's Active List.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "M4FWMgoYfsXcskD0",
+  "effects": []
+}

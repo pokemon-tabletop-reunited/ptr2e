@@ -1,0 +1,51 @@
+{
+  "name": "Wish",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "wish",
+    "description": "Effect: Set-Up: The user makes a wish, ending their current activation.\nResolution: On their next activation, they can select 1 creature on the field (which can be the user), to recover HP equal to 1/2 the Wish User's Max HP.",
+    "traits": [
+      "healing",
+      "set-up"
+    ],
+    "actions": [
+      {
+        "slug": "wish",
+        "name": "Wish",
+        "type": "attack",
+        "traits": [
+          "healing",
+          "set-up"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: Set-Up: The user makes a wish, ending their current activation.\nResolution: On their next activation, they can select 1 creature on the field (which can be the user), to recover HP equal to 1/2 the Wish User's Max HP.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "0mfq7wAjGYBPrmiN",
+  "effects": []
+}

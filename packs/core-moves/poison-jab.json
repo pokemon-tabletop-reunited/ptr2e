@@ -1,0 +1,51 @@
+{
+  "name": "Poison Jab",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/poison_icon.png",
+  "system": {
+    "slug": "poison-jab",
+    "description": "Effect: On hit, the target has a 30% chance of gaining Poison 5.",
+    "traits": [
+      "punch",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "poison-jab",
+        "name": "Poison Jab",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: On hit, the target has a 30% chance of gaining Poison 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "4wFEqQDdZyWTRHRL",
+  "effects": []
+}

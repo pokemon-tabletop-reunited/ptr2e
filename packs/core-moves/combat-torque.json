@@ -1,0 +1,53 @@
+{
+  "name": "Combat Torque",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "combat-torque",
+    "description": "Effect: On hit, the target has a 30% chance of becoming Paralyzed 5.",
+    "traits": [
+      "dash",
+      "pass-3",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "combat-torque",
+        "name": "Combat Torque",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "pass-3",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: On hit, the target has a 30% chance of becoming Paralyzed 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "2wLXjKrZ0yf39UFF",
+  "effects": []
+}

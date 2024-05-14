@@ -1,0 +1,51 @@
+{
+  "name": "Steel Beam",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/steel_icon.png",
+  "system": {
+    "slug": "steel-beam",
+    "description": "Effect: The user sacrifices HP equal to 1/2 of their Max HP then attacks with this move. If the user's current HP is less than or equal to 1/2 of their Max HP, this attack fails.",
+    "traits": [
+      "ray",
+      "smite"
+    ],
+    "actions": [
+      {
+        "slug": "steel-beam",
+        "name": "Steel Beam",
+        "type": "attack",
+        "traits": [
+          "ray",
+          "smite"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 140,
+        "accuracy": 95,
+        "types": [
+          "steel"
+        ],
+        "description": "Effect: The user sacrifices HP equal to 1/2 of their Max HP then attacks with this move. If the user's current HP is less than or equal to 1/2 of their Max HP, this attack fails.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "5Srn3lfprE15Xo10",
+  "effects": []
+}

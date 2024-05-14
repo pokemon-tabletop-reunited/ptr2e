@@ -1,0 +1,53 @@
+{
+  "name": "Steel Wing",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/steel_icon.png",
+  "system": {
+    "slug": "steel-wing",
+    "description": "Effect: On hit, the user has a 10% chance of raising their DEF stage by +1 for 5 activations.",
+    "traits": [
+      "sharp",
+      "pass-2",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "steel-wing",
+        "name": "Steel Wing",
+        "type": "attack",
+        "traits": [
+          "sharp",
+          "pass-2",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 90,
+        "types": [
+          "steel"
+        ],
+        "description": "Effect: On hit, the user has a 10% chance of raising their DEF stage by +1 for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "GaZA17geF0W38wzi",
+  "effects": []
+}

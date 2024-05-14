@@ -1,0 +1,55 @@
+{
+  "name": "Crystal Rush",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/rock_icon.png",
+  "system": {
+    "slug": "crystal-rush",
+    "description": "Effect: This attack is neutral against all Types, and ignores Type immunities.",
+    "traits": [
+      "move-locked",
+      "dash",
+      "priority-1",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "crystal-rush",
+        "name": "Crystal Rush",
+        "type": "attack",
+        "traits": [
+          "move-locked",
+          "dash",
+          "priority-1",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": 1,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 55,
+        "accuracy": 100,
+        "types": [
+          "rock"
+        ],
+        "description": "Effect: This attack is neutral against all Types, and ignores Type immunities.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "D"
+  },
+  "_id": "DlWfIdSFTuOpY0YW",
+  "effects": []
+}

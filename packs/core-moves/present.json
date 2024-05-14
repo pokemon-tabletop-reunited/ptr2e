@@ -1,0 +1,50 @@
+{
+  "name": "Present",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "present",
+    "description": "Effect: On use, this attack's Power has a 40% chance of being 40, a 30% chance of being 80, a 10% chance of being 120, and 30% of it instead healing all valid targets' HP equal to 1/4 of their respective Max HP.",
+    "traits": [
+      "blast-1",
+      "healing"
+    ],
+    "actions": [
+      {
+        "slug": "present",
+        "name": "Present",
+        "type": "attack",
+        "traits": [
+          "blast-1",
+          "healing"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 90,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: On use, this attack's Power has a 40% chance of being 40, a 30% chance of being 80, a 10% chance of being 120, and 30% of it instead healing all valid targets' HP equal to 1/4 of their respective Max HP.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "dTzHNqMNr83eSDwF",
+  "effects": []
+}

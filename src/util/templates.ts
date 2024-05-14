@@ -16,6 +16,7 @@ export class HandlebarTemplates {
 
         // All Actor Sheet Components
         "actor-effect-component": "systems/ptr2e/templates/actor/components/actor-effect-component.hbs",
+        "actor-skills-component": "systems/ptr2e/templates/actor/components/actor-skills-component.hbs",
     }) as Record<string, string>;
 
     static async register() {

@@ -1,53 +1,77 @@
 {
-    "name": "Rapid Style",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Leadership 40"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "physical",
-            "approach": "finesse",
-            "archetype": "Support"
-        },
-        "description": "The target gains Rapid 1.",
-        "actions": [
-            {
-                "name": "Rapid Style",
-                "slug": "rapid-style",
-                "description": "The target gains Rapid 1.",
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 2
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "rapid-style",
-        "traits": [],
-        "node": {
-            "i": 52,
-            "j": -9,
-            "connected": [
-                "root-3",
-                "tactician"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#800080",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-                "tint": "#ffffff",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Rapid Style",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Leadership 40"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Support"
     },
-    "_id": "jJJ6DaJCklHa5x2X",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "The target gains Rapid 1.",
+    "actions": [
+      {
+        "name": "Rapid Style",
+        "slug": "rapid-style",
+        "description": "The target gains Rapid 1.",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "rapid-style",
+    "traits": [],
+    "node": {
+      "i": 23,
+      "j": -35,
+      "connected": [
+        "stat-specialist",
+        "tactician",
+        "root-3",
+        "improved-overland-3",
+        "quick-switch"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#800080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "jJJ6DaJCklHa5x2X",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.jJJ6DaJCklHa5x2X"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922328617,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!jJJ6DaJCklHa5x2X"
 }

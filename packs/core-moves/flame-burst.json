@@ -1,0 +1,49 @@
+{
+  "name": "Flame Burst",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fire_icon.png",
+  "system": {
+    "slug": "flame-burst",
+    "description": "Effect: On hit, all creatures adjacent to the target take a Tick of HP damage. This effect is considered be an [Explode] effect.",
+    "traits": [
+      "missile"
+    ],
+    "actions": [
+      {
+        "slug": "flame-burst",
+        "name": "Flame Burst",
+        "type": "attack",
+        "traits": [
+          "missile"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "fire"
+        ],
+        "description": "Effect: On hit, all creatures adjacent to the target take a Tick of HP damage. This effect is considered be an [Explode] effect.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "sLhx0Ks1iQn4qY1h",
+  "effects": []
+}

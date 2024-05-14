@@ -1,0 +1,51 @@
+{
+  "name": "U-Turn",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/bug_icon.png",
+  "system": {
+    "slug": "u-turn",
+    "description": "Effect: On hit, the user may freely move themselves up to half of the Movement Score of their choice away from the target. If the user is an owned Pokémon, they may then immediately be returned their Poké Ball and another Pokémon may immediately be sent out in their place.",
+    "traits": [
+      "dash",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "u-turn",
+        "name": "U-Turn",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "bug"
+        ],
+        "description": "Effect: On hit, the user may freely move themselves up to half of the Movement Score of their choice away from the target. If the user is an owned Pokémon, they may then immediately be returned their Poké Ball and another Pokémon may immediately be sent out in their place.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "DTnhRJBYhTBapjIK",
+  "effects": []
+}

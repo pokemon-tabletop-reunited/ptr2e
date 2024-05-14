@@ -1,0 +1,53 @@
+{
+  "name": "Blaze Kick",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fire_icon.png",
+  "system": {
+    "slug": "blaze-kick",
+    "description": "Effect: On hit, the target has a 10% chance of gaining Burn 5.",
+    "traits": [
+      "kick",
+      "crit-1",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "blaze-kick",
+        "name": "Blaze Kick",
+        "type": "attack",
+        "traits": [
+          "kick",
+          "crit-1",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 85,
+        "accuracy": 90,
+        "types": [
+          "fire"
+        ],
+        "description": "Effect: On hit, the target has a 10% chance of gaining Burn 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "gArkopcQviud9bHg",
+  "effects": []
+}

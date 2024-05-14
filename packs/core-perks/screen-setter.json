@@ -1,56 +1,73 @@
 {
-    "name": "Screen Setter",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Moves Known (Light Screen & Reflect)"
-        ],
-        "cost": 4,
-        "design": {
-            "arena": "mental",
-            "approach": "resilience",
-            "archetype": "Support"
-        },
-        "description": "When using either the move Light Screen or Reflect, you may spend 3PP to also use the other one at the same time. The 3PP cost must be paid in addition to the PP costs of both moves.",
-        "actions": [
-            {
-                "name": "Screen Setter",
-                "slug": "screen-setter",
-                "description": "When using either the move Light Screen or Reflect, you may spend 3PP to also use the other one at the same time. The 3PP cost must be paid in addition to the PP costs of both moves.",
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 3
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "screen-setter",
-        "traits": [],
-        "node": {
-            "i": 9,
-            "j": 10,
-            "connected": [
-                "potent-venom",
-                "open-your-heart",
-                "one-with-the-green",
-                "keep-fighting",
-                "unreasonable"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": "#808080",
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Occultism.svg",
-                "tint": "#ffffff",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Screen Setter",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Moves Known (Light Screen & Reflect)"
+    ],
+    "cost": 4,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Support"
     },
-    "_id": "cnTPWqYXmGaFZfBd",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "When using either the move Light Screen or Reflect, you may spend 3PP to also use the other one at the same time. The 3PP cost must be paid in addition to the PP costs of both moves.",
+    "actions": [
+      {
+        "name": "Screen Setter",
+        "slug": "screen-setter",
+        "description": "When using either the move Light Screen or Reflect, you may spend 3PP to also use the other one at the same time. The 3PP cost must be paid in addition to the PP costs of both moves.",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "screen-setter",
+    "traits": [],
+    "node": {
+      "i": -96,
+      "j": 58,
+      "connected": [
+        "root-6"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": "#808080",
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Occultism.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "cnTPWqYXmGaFZfBd",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.cnTPWqYXmGaFZfBd"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922165623,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!cnTPWqYXmGaFZfBd"
 }

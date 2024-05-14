@@ -1,0 +1,49 @@
+{
+  "name": "Close Combat",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "close-combat",
+    "description": "Effect: On hit, the user loses -1 DEF and SPDEF stage for 5 activations.",
+    "traits": [
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "close-combat",
+        "name": "Close Combat",
+        "type": "attack",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: On hit, the user loses -1 DEF and SPDEF stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "QekmbpWWRcyhJkci",
+  "effects": []
+}

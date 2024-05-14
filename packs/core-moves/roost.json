@@ -1,0 +1,49 @@
+{
+  "name": "Roost",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/flying_icon.png",
+  "system": {
+    "slug": "roost",
+    "description": "Effect: The user recovers HP equal to 1/2 their Max HP. The user becomes Grounded and loses their Flying-Typing until the start of their next activation.",
+    "traits": [
+      "healing"
+    ],
+    "actions": [
+      {
+        "slug": "roost",
+        "name": "Roost",
+        "type": "attack",
+        "traits": [
+          "healing"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "flying"
+        ],
+        "description": "Effect: The user recovers HP equal to 1/2 their Max HP. The user becomes Grounded and loses their Flying-Typing until the start of their next activation.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "tHekRdJAQNoJLmmy",
+  "effects": []
+}

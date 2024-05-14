@@ -1,56 +1,74 @@
 {
-    "name": "Aura Haze",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Aura Sense 40"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "physical",
-            "approach": "resilience",
-            "archetype": "Aura"
-        },
-        "description": "Your skill at manipulating your own Aura allows you to create an indistinct haze about yourself. You gain +1 EVA stage for 5 Activations.",
-        "actions": [
-            {
-                "name": "Aura Haze",
-                "slug": "aura-haze",
-                "description": "Your skill at manipulating your own Aura allows you to create an indistinct haze about yourself. You gain +1 EVA stage for 5 Activations.",
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 4
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "aura-haze",
-        "traits": [],
-        "node": {
-            "i": -16,
-            "j": -9,
-            "connected": [
-                "aura-user",
-                "aura-dampening",
-                "fearsome-defense",
-                "aura-channeling",
-                "strong-style"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#e4b9b9",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-                "tint": "#da7777",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Aura Haze",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Aura Sense 40"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Aura"
     },
-    "_id": "UmbmjzRANft3PAxG",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "Your skill at manipulating your own Aura allows you to create an indistinct haze about yourself. You gain +1 EVA stage for 5 Activations.",
+    "actions": [
+      {
+        "name": "Aura Haze",
+        "slug": "aura-haze",
+        "description": "Your skill at manipulating your own Aura allows you to create an indistinct haze about yourself. You gain +1 EVA stage for 5 Activations.",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 4
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "aura-haze",
+    "traits": [],
+    "node": {
+      "i": 13,
+      "j": -70,
+      "connected": [
+        "aura-user",
+        "aura-dampening"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#e4b9b9",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+        "tint": "#da7777",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "UmbmjzRANft3PAxG",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.UmbmjzRANft3PAxG"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714920527631,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!UmbmjzRANft3PAxG"
 }

@@ -1,0 +1,53 @@
+{
+  "name": "Baneful Bunker",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/poison_icon.png",
+  "system": {
+    "slug": "baneful-bunker",
+    "description": "Trigger: You are targeted by an Attack.\nEffect: The triggering attack fails to hit you, and additional attacks that hit you also fail to hit you until your next activation, or when the round ends, whichever is first. Attacks failing to hit you do not activate on-miss effects. If the triggering Attack has [Contact], the attacker gains Poison 3.",
+    "traits": [
+      "shield",
+      "exhaust",
+      "interrupt-4"
+    ],
+    "actions": [
+      {
+        "slug": "baneful-bunker",
+        "name": "Baneful Bunker",
+        "type": "attack",
+        "traits": [
+          "shield",
+          "exhaust",
+          "interrupt-4"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "You are targeted by an Attack."
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "poison"
+        ],
+        "description": "Trigger: You are targeted by an Attack.\nEffect: The triggering attack fails to hit you, and additional attacks that hit you also fail to hit you until your next activation, or when the round ends, whichever is first. Attacks failing to hit you do not activate on-miss effects. If the triggering Attack has [Contact], the attacker gains Poison 3.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "HDK3YOdmbs7c551o",
+  "effects": []
+}

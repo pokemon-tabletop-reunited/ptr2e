@@ -1,0 +1,49 @@
+{
+  "name": "Grudge",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ghost_icon.png",
+  "system": {
+    "slug": "grudge",
+    "description": "Trigger: You are hit with an Attack.\nEffect: The triggering creature loses PP equal to double the PP cost of the triggering Attack.",
+    "traits": [
+      "interrupt-2"
+    ],
+    "actions": [
+      {
+        "slug": "grudge",
+        "name": "Grudge",
+        "type": "attack",
+        "traits": [
+          "interrupt-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": "You are hit with an Attack."
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "ghost"
+        ],
+        "description": "Trigger: You are hit with an Attack.\nEffect: The triggering creature loses PP equal to double the PP cost of the triggering Attack.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "fUiCzF9ucUhoJLBq",
+  "effects": []
+}

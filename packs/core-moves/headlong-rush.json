@@ -1,0 +1,53 @@
+{
+  "name": "Headlong Rush",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ground_icon.png",
+  "system": {
+    "slug": "headlong-rush",
+    "description": "Effect: On hit, the user's DEF stage and SPDEF stage are reduced by -1 for 5 activations.",
+    "traits": [
+      "dash",
+      "push-3",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "headlong-rush",
+        "name": "Headlong Rush",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "push-3",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "Effect: On hit, the user's DEF stage and SPDEF stage are reduced by -1 for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "LVCSxYPgZneA4TtP",
+  "effects": []
+}

@@ -1,0 +1,49 @@
+{
+  "name": "Final Gambit",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "final-gambit",
+    "description": "Effect: The user reduces its HP to zero, dealing the amount that was lost to the target.",
+    "traits": [
+      "self-ko"
+    ],
+    "actions": [
+      {
+        "slug": "final-gambit",
+        "name": "Final Gambit",
+        "type": "attack",
+        "traits": [
+          "self-ko"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: The user reduces its HP to zero, dealing the amount that was lost to the target.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "k2eyNpUG5U3zxCtn",
+  "effects": []
+}

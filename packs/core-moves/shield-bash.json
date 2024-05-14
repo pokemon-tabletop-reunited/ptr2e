@@ -1,0 +1,51 @@
+{
+  "name": "Shield Bash",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/steel_icon.png",
+  "system": {
+    "slug": "shield-bash",
+    "description": "Effect: This attack uses the user's DEF in calculating this move's damage, rather than ATK.",
+    "traits": [
+      "dash",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "shield-bash",
+        "name": "Shield Bash",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "description": "Effect: This attack uses the user's DEF in calculating this move's damage, rather than ATK.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "lctMFK1EyYtA8Qx8",
+  "effects": []
+}

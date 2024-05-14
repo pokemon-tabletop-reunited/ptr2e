@@ -1,0 +1,55 @@
+{
+  "name": "Circle Throw",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "circle-throw",
+    "description": "Effect: The target is Pushed 8m minus their WC, losing the Grapple Condition if applicable. If the target is an owned Pokémon, they are immediately returned their Poké Ball.",
+    "traits": [
+      "push",
+      "delay-1",
+      "contact",
+      "grapple"
+    ],
+    "actions": [
+      {
+        "slug": "circle-throw",
+        "name": "Circle Throw",
+        "type": "attack",
+        "traits": [
+          "push",
+          "delay-1",
+          "contact",
+          "grapple"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": 1,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 90,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: The target is Pushed 8m minus their WC, losing the Grapple Condition if applicable. If the target is an owned Pokémon, they are immediately returned their Poké Ball.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "3KlcIgcWJFr9EKFx",
+  "effects": []
+}

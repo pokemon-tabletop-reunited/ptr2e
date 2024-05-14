@@ -1,0 +1,51 @@
+{
+  "name": "Smack Down",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/rock_icon.png",
+  "system": {
+    "slug": "smack-down",
+    "description": "Effect: On hit, the target becomes Grounded 5.",
+    "traits": [
+      "sky",
+      "missile"
+    ],
+    "actions": [
+      {
+        "slug": "smack-down",
+        "name": "Smack Down",
+        "type": "attack",
+        "traits": [
+          "sky",
+          "missile"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "rock"
+        ],
+        "description": "Effect: On hit, the target becomes Grounded 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "Oe8RUc2NyOogqMD3",
+  "effects": []
+}

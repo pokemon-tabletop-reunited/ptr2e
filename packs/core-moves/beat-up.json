@@ -1,0 +1,51 @@
+{
+  "name": "Beat Up",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "beat-up",
+    "description": "Beat Up's [X-Stike] value is equal to 1 plus the number of active allied creatures in the user's own Team plus the number of allied creatures adjacent to the target, to a maximum of 15 hits.",
+    "traits": [
+      "dash",
+      "x-strike"
+    ],
+    "actions": [
+      {
+        "slug": "beat-up",
+        "name": "Beat Up",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "x-strike"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 15,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "Beat Up's [X-Stike] value is equal to 1 plus the number of active allied creatures in the user's own Team plus the number of allied creatures adjacent to the target, to a maximum of 15 hits.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "V9TPmNdhcCvnw98x",
+  "effects": []
+}

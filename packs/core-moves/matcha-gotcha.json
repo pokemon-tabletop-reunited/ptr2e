@@ -1,0 +1,50 @@
+{
+  "name": "Matcha Gotcha",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/grass_icon.png",
+  "system": {
+    "slug": "matcha-gotcha",
+    "description": "Effect: On hit, all valid targets have a 20% change of gaining Burn 5.",
+    "traits": [
+      "drain-1-2",
+      "defrost"
+    ],
+    "actions": [
+      {
+        "slug": "matcha-gotcha",
+        "name": "Matcha Gotcha",
+        "type": "attack",
+        "traits": [
+          "drain-1-2",
+          "defrost"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 90,
+        "types": [
+          "grass"
+        ],
+        "description": "Effect: On hit, all valid targets have a 20% change of gaining Burn 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "qbw0X9rYwQxjYy98",
+  "effects": []
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Cross Poison",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/poison_icon.png",
+  "system": {
+    "slug": "cross-poison",
+    "description": "Effect: On hit, the target rolls a has a 10% chance of becoming Poison 5.",
+    "traits": [
+      "crit-1",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "cross-poison",
+        "name": "Cross Poison",
+        "type": "attack",
+        "traits": [
+          "crit-1",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: On hit, the target rolls a has a 10% chance of becoming Poison 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "GlM8a7MxJdeUJv4V",
+  "effects": []
+}

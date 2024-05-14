@@ -1,0 +1,55 @@
+{
+  "name": "Bolt Strike",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "bolt-strike",
+    "description": "Effect: On hit, the target has a 20% chance of being Paralyzed 7.",
+    "traits": [
+      "legendary",
+      "smite",
+      "pass-7",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "bolt-strike",
+        "name": "Bolt Strike",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "smite",
+          "pass-7",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 130,
+        "accuracy": 85,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: On hit, the target has a 20% chance of being Paralyzed 7.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "nVBR5wDXpMQkHpdT",
+  "effects": []
+}

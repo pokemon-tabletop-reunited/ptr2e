@@ -1,58 +1,75 @@
 {
-    "name": "Frenzied Assault",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "None"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "physical",
-            "approach": "power",
-            "archetype": "Combat"
-        },
-        "description": "When Enraged, you may spend the PP cost to act with priority 3. You may spend additional PP up to a total of 7 to increase the Priority rating with which you act.",
-        "actions": [
-            {
-                "name": "Frenzied Assault",
-                "slug": "frenzied-assault",
-                "description": "When Enraged, you may spend the PP cost to act with priority 3. You may spend additional PP up to a total of 7 to increase the Priority rating with which you act.",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 3
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "frenzied-assault",
-        "traits": [],
-        "node": {
-            "i": 11,
-            "j": -4,
-            "connected": [
-                "dead-to-rights",
-                "beastmaster",
-                "root-2",
-                "down-the-sights",
-                "firefly",
-                "hypnotic-suggestion",
-                "shadow-guide"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#ff0000",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Frenzied Assault",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Combat"
     },
-    "_id": "IMn0UktiyUWZXQty",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "When Enraged, you may spend the PP cost to act with priority 3. You may spend additional PP up to a total of 7 to increase the Priority rating with which you act.",
+    "actions": [
+      {
+        "name": "Frenzied Assault",
+        "slug": "frenzied-assault",
+        "description": "When Enraged, you may spend the PP cost to act with priority 3. You may spend additional PP up to a total of 7 to increase the Priority rating with which you act.",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "frenzied-assault",
+    "traits": [],
+    "node": {
+      "i": 67,
+      "j": -74,
+      "connected": [
+        "berserk",
+        "ultraviolet",
+        "fiendish-provocation"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ff0000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "IMn0UktiyUWZXQty",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.IMn0UktiyUWZXQty"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714920537025,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!IMn0UktiyUWZXQty"
 }

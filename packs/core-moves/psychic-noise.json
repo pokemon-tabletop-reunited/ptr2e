@@ -1,0 +1,49 @@
+{
+  "name": "Psychic Noise",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/psychic_icon.png",
+  "system": {
+    "slug": "psychic-noise",
+    "description": "Effect: On hit, the target cannot recover HP from any source for 2 activations.",
+    "traits": [
+      "sonic"
+    ],
+    "actions": [
+      {
+        "slug": "psychic-noise",
+        "name": "Psychic Noise",
+        "type": "attack",
+        "traits": [
+          "sonic"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 75,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "Effect: On hit, the target cannot recover HP from any source for 2 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "uFDEwGGaBvMpq7VY",
+  "effects": []
+}

@@ -1,0 +1,51 @@
+{
+  "name": "Golden Glove",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "golden-glove",
+    "description": "Effect: If Golden Fist is used at least once in combat, the user rolls a Simple Accounting Skill Check. On a success, the user (or their Trainer, if they're an owned Pokemon), gains +1 to their Resources Skill. Every 3 DoS confers +1 additonal increase to Resources.",
+    "traits": [
+      "punch",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "golden-glove",
+        "name": "Golden Glove",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: If Golden Fist is used at least once in combat, the user rolls a Simple Accounting Skill Check. On a success, the user (or their Trainer, if they're an owned Pokemon), gains +1 to their Resources Skill. Every 3 DoS confers +1 additonal increase to Resources.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "iRdBErMn26fPDLnr",
+  "effects": []
+}

@@ -1,0 +1,55 @@
+{
+  "name": "Frost Slash",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ice_icon.png",
+  "system": {
+    "slug": "frost-slash",
+    "description": "Effect: On hit, the target has a 10% chance of becoming Freeze 5.",
+    "traits": [
+      "sharp",
+      "crit-1",
+      "pass-2",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "frost-slash",
+        "name": "Frost Slash",
+        "type": "attack",
+        "traits": [
+          "sharp",
+          "crit-1",
+          "pass-2",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "ice"
+        ],
+        "description": "Effect: On hit, the target has a 10% chance of becoming Freeze 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "ksB7B7lvDLFdR8Gn",
+  "effects": []
+}

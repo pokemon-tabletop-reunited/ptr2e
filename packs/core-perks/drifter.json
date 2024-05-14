@@ -1,59 +1,74 @@
 {
-    "name": "Drifter",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Flying] or [Telekinetic]"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "mental",
-            "approach": "finesse",
-            "archetype": "[Flying/Psychic Type]"
-        },
-        "description": "You gain the [Hover] trait, and if you did not already possess a Flight movement, you gain a Flight Movement Allowance equal to that of your highest Primary <movement type=\"\">.</movement>",
-        "actions": [
-            {
-                "name": "Drifter",
-                "slug": "drifter",
-                "description": "You gain the [Hover] trait, and if you did not already possess a Flight movement, you gain a Flight Movement Allowance equal to that of your highest Primary <Movement Type>.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "drifter",
-        "traits": [],
-        "node": {
-            "i": -27,
-            "j": 9,
-            "connected": [
-                "root-5",
-                "climate-change",
-                "climate-controller",
-                "dead-eye",
-                "adhesive-digits",
-                "freeclimber",
-                "mankey-see-mankey-do",
-                "silver-bullet",
-                "sprint"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/flying_icon.png",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Drifter",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Flying] or [Telekinetic]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "[Flying/Psychic Type]"
     },
-    "_id": "KxU35Iv6OY04jW0M",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You gain the [Hover] trait, and if you did not already possess a Flight movement, you gain a Flight Movement Allowance equal to that of your highest Primary <movement type=\"\">.</movement>",
+    "actions": [
+      {
+        "name": "Drifter",
+        "slug": "drifter",
+        "description": "You gain the [Hover] trait, and if you did not already possess a Flight movement, you gain a Flight Movement Allowance equal to that of your highest Primary <Movement Type>.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "drifter",
+    "traits": [],
+    "node": {
+      "i": -103,
+      "j": 34,
+      "connected": [
+        "type-embodiment-type",
+        "telekinetic-potential",
+        "improved-flight-1"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/flying_icon.png",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "KxU35Iv6OY04jW0M",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.KxU35Iv6OY04jW0M"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714921929726,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!KxU35Iv6OY04jW0M"
 }

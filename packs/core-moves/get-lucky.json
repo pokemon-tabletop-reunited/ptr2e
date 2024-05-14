@@ -1,0 +1,49 @@
+{
+  "name": "Get Lucky",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "get-lucky",
+    "description": "Effect: On hit, the user's gains +1 CRIT stages for 5 activations.",
+    "traits": [
+      "crit-2"
+    ],
+    "actions": [
+      {
+        "slug": "get-lucky",
+        "name": "Get Lucky",
+        "type": "attack",
+        "traits": [
+          "crit-2"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 80,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: On hit, the user's gains +1 CRIT stages for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "nqj3Af4JjE4cBAmi",
+  "effects": []
+}

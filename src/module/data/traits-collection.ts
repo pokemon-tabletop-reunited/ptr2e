@@ -1,9 +1,8 @@
 import { formatSlug, sluggify } from "@utils";
 import Trait from "./models/trait.ts";
 
-export default class PTR2eTraits extends Map<string, Trait> {
+export default class PTR2eTraits extends Collection<Trait> {
     rawModuleTraits: Trait[] = [];
-    #cachedArray: Trait[] | null = null;
 
     constructor() {
         super();
@@ -16,7 +15,6 @@ export default class PTR2eTraits extends Map<string, Trait> {
 
     refresh() {
         this.clear();
-        this.#cachedArray = null;
 
         for(const trait of CONFIG.PTR.data.traits) {
             this.set(trait.slug, trait);
@@ -53,9 +51,5 @@ export default class PTR2eTraits extends Map<string, Trait> {
         this.rawModuleTraits = fu.deepClone(toAdd);
     
         return this;
-    }
-
-    asArray() {
-        return this.#cachedArray ??= Array.from(this.values());
     }
 }

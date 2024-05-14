@@ -1,0 +1,48 @@
+{
+  "name": "Bone Club",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ground_icon.png",
+  "system": {
+    "slug": "bone-club",
+    "description": "Effect: On hit, the target has a 10% chance of being Flinched 4.",
+    "traits": [
+      "bone"
+    ],
+    "actions": [
+      {
+        "slug": "bone-club",
+        "name": "Bone Club",
+        "type": "attack",
+        "traits": [
+          "bone"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 65,
+        "accuracy": 85,
+        "types": [
+          "ground"
+        ],
+        "description": "Effect: On hit, the target has a 10% chance of being Flinched 4.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null
+  },
+  "_id": "iaEneHWmr71r7fP0",
+  "effects": []
+}

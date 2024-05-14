@@ -1,0 +1,49 @@
+{
+  "name": "Comeuppance",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "comeuppance",
+    "description": "The user attacks the creature that attacked it, dealing 1.5x the amount of damage it were dealt by the triggering attack (this is not modified by the target's defenses or other effects).",
+    "traits": [
+      "interrupt-1"
+    ],
+    "actions": [
+      {
+        "slug": "comeuppance",
+        "name": "Comeuppance",
+        "type": "attack",
+        "traits": [
+          "interrupt-1"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user is damaged by Physical- or Special-Category Attack."
+        },
+        "category": "physical",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "The user attacks the creature that attacked it, dealing 1.5x the amount of damage it were dealt by the triggering attack (this is not modified by the target's defenses or other effects).",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "VWwskJkjqcH3vXxP",
+  "effects": []
+}

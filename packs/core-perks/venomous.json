@@ -1,55 +1,75 @@
 {
-    "name": "Venomous",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Poison]"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "physical",
-            "approach": "finesse",
-            "archetype": "[Poison Type]"
-        },
-        "description": "You gain the [Venomous] Trait",
-        "actions": [
-            {
-                "name": "Venomous",
-                "slug": "venomous",
-                "description": "You gain the [Venomous] Trait",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "venomous",
-        "traits": [],
-        "node": {
-            "i": 39,
-            "j": -28,
-            "connected": [
-                "secret-ninja-tools",
-                "controlled-curve",
-                "curveball-technique",
-                "pokeball-repairs",
-                "emergency-retreat"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/poison_icon.png",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Venomous",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Poison]"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "[Poison Type]"
     },
-    "_id": "hvuakkloMFHGmBMe",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You gain the [Venomous] Trait",
+    "actions": [
+      {
+        "name": "Venomous",
+        "slug": "venomous",
+        "description": "You gain the [Venomous] Trait",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "venomous",
+    "traits": [],
+    "node": {
+      "i": -77,
+      "j": 17,
+      "connected": [
+        "improved-threaded-1",
+        "potent-venom",
+        "type-embodiment-type",
+        "improved-overland-4"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/poison_icon.png",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "hvuakkloMFHGmBMe",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.hvuakkloMFHGmBMe"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922136813,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!hvuakkloMFHGmBMe"
 }

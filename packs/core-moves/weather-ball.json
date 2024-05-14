@@ -1,0 +1,53 @@
+{
+  "name": "Weather Ball",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "weather-ball",
+    "description": "Effect: If there is an active [Weather], Weather Ball's Power increases by 25 x the highest Tier of [Weather], and the Type changes to match a Type associated with the Weather Chart (user's Choice).",
+    "traits": [
+      "pulse",
+      "missile",
+      "environ"
+    ],
+    "actions": [
+      {
+        "slug": "weather-ball",
+        "name": "Weather Ball",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile",
+          "environ"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: If there is an active [Weather], Weather Ball's Power increases by 25 x the highest Tier of [Weather], and the Type changes to match a Type associated with the Weather Chart (user's Choice).",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "cZHbswFvDLxTRSq2",
+  "effects": []
+}

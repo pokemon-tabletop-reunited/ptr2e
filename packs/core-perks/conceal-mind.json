@@ -1,57 +1,76 @@
 {
-    "name": "Conceal Mind",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Telepath]"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "mental",
-            "approach": "finesse",
-            "archetype": "[Psychic Type]"
-        },
-        "description": "You may hide your mind's presence as an [Interrupt 4] in response to an incoming telepathic sweep of the area. You automatically become aware of any telepaths who are actively searching for minds.",
-        "actions": [
-            {
-                "name": "Conceal Mind",
-                "slug": "conceal-mind",
-                "description": "You may hide your mind's presence as an [Interrupt 4] in response to an incoming telepathic sweep of the area. You automatically become aware of any telepaths who are actively searching for minds.",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 2
-                },
-                "type": "generic",
-                "traits": []
-            }
-        ],
-        "slug": "conceal-mind",
-        "traits": [],
-        "node": {
-            "i": -24,
-            "j": 49,
-            "connected": [
-                "type-style",
-                "root-5",
-                "all-seasonal",
-                "detect-minds",
-                "palaeontologist",
-                "thug"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#400000",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/psychic_icon.png",
-                "tint": "#ffffff",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Conceal Mind",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Telepath]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "[Psychic Type]"
     },
-    "_id": "x43vlmG7j09l1BGN",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You may hide your mind's presence as an [Interrupt 4] in response to an incoming telepathic sweep of the area. You automatically become aware of any telepaths who are actively searching for minds.",
+    "actions": [
+      {
+        "name": "Conceal Mind",
+        "slug": "conceal-mind",
+        "description": "You may hide your mind's presence as an [Interrupt 4] in response to an incoming telepathic sweep of the area. You automatically become aware of any telepaths who are actively searching for minds.",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2
+        },
+        "type": "generic",
+        "traits": []
+      }
+    ],
+    "slug": "conceal-mind",
+    "traits": [],
+    "node": {
+      "i": -103,
+      "j": 54,
+      "connected": [
+        "telepathic-potential",
+        "detect-minds",
+        "telekinetic-potential",
+        "hypnotic-suggestion"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#400000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/psychic_icon.png",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "x43vlmG7j09l1BGN",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.x43vlmG7j09l1BGN"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714921754512,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!x43vlmG7j09l1BGN"
 }

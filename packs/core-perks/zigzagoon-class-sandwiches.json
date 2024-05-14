@@ -1,54 +1,76 @@
 {
-    "name": "Zigzagoon-Class Sandwiches",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Husbandry 20",
-            "Trubbish-Class Sandwiches"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "social",
-            "approach": "resilience",
-            "archetype": "Chef"
-        },
-        "description": "You are able to make Zigzagoon-Class Sandwiches as a Camp Action. In addition to their usual effects, these sandwiches confer a +20 on one skill check of your choosing in the following day. Some diners find themselves oddly unable to walk in a straight line after eating these sandwiches.",
-        "actions": [
-            {
-                "name": "Zigzagoon-Class Sandwiches",
-                "slug": "zigzagoon-class-sandwiches",
-                "description": "You are able to make Zigzagoon-Class Sandwiches as a Camp Action. In addition to their usual effects, these sandwiches confer a +20 on one skill check of your choosing in the following day. Some diners find themselves oddly unable to walk in a straight line after eating these sandwiches.",
-                "cost": {
-                    "activation": "complex"
-                },
-                "type": "camping",
-                "traits": []
-            }
-        ],
-        "slug": "zigzagoon-class-sandwiches",
-        "traits": [],
-        "node": {
-            "i": -15,
-            "j": 20,
-            "connected": [
-                "lechonk-class-sandwiches",
-                "wobbufet-class-curry",
-                "trubbish-class-sandwiches"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#804000",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
-                "tint": "#ffffff",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Zigzagoon-Class Sandwiches",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Husbandry 20",
+      "Trubbish-Class Sandwiches"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "Chef"
     },
-    "_id": "EICoj1ArkNCRaWrJ",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You are able to make Zigzagoon-Class Sandwiches as a Camp Action. In addition to their usual effects, these sandwiches confer a +20 on one skill check of your choosing in the following day. Some diners find themselves oddly unable to walk in a straight line after eating these sandwiches.",
+    "actions": [
+      {
+        "name": "Zigzagoon-Class Sandwiches",
+        "slug": "zigzagoon-class-sandwiches",
+        "description": "You are able to make Zigzagoon-Class Sandwiches as a Camp Action. In addition to their usual effects, these sandwiches confer a +20 on one skill check of your choosing in the following day. Some diners find themselves oddly unable to walk in a straight line after eating these sandwiches.",
+        "cost": {
+          "activation": "complex"
+        },
+        "type": "camping",
+        "traits": []
+      }
+    ],
+    "slug": "zigzagoon-class-sandwiches",
+    "traits": [],
+    "node": {
+      "i": -14,
+      "j": 31,
+      "connected": [
+        "trubbish-class-sandwiches",
+        "lechonk-class-sandwiches",
+        "sprint",
+        "hit-run"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#804000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "EICoj1ArkNCRaWrJ",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.EICoj1ArkNCRaWrJ"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714917639566,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!EICoj1ArkNCRaWrJ"
 }

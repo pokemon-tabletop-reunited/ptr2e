@@ -1,0 +1,53 @@
+{
+  "name": "Focus Punch",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fighting_icon.png",
+  "system": {
+    "slug": "focus-punch",
+    "description": "Effect: If the user is hit by at least one Physical or Special attack after the declaration and before the resolution of Focus Punch, Focus Punch's Power is reduced by half.",
+    "traits": [
+      "punch",
+      "delay-3",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "focus-punch",
+        "name": "Focus Punch",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "delay-3",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": 3,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 150,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "Effect: If the user is hit by at least one Physical or Special attack after the declaration and before the resolution of Focus Punch, Focus Punch's Power is reduced by half.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "jaH1jRHxZtCQhQ0f",
+  "effects": []
+}

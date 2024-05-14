@@ -115,6 +115,18 @@ export default abstract class PerkSystem extends PerkExtension {
         return this.node.hidden;
     }
 
+    override async _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
+        if(this.node.type === "root") {
+            const node = changed?.system?.node;
+            if(!node) return super._preUpdate(changed, options, user);
+
+            if((node.i || node.j || node.hidden) && (!node.type || node.type === "root")) {
+                ui.notifications.error("Root nodes cannot be moved or hidden");
+                return false;
+            }
+        }
+    }
+
     override async _preCreate(
         data: this["parent"]["_source"],
         options: DocumentModificationContext<this["parent"]["parent"]>,

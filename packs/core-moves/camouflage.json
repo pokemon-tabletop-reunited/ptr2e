@@ -1,0 +1,51 @@
+{
+  "name": "Camouflage",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "camouflage",
+    "description": "Effect: The user's coloring matches that of the surrounding terrain, becoming Hidden. The user’s Type also changes to that of an associated type on the Terrain Chart.",
+    "traits": [
+      "stealthy",
+      "environ"
+    ],
+    "actions": [
+      {
+        "slug": "camouflage",
+        "name": "Camouflage",
+        "type": "attack",
+        "traits": [
+          "stealthy",
+          "environ"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The user's coloring matches that of the surrounding terrain, becoming Hidden. The user’s Type also changes to that of an associated type on the Terrain Chart.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "OLLOREnyfAEVULxw",
+  "effects": []
+}

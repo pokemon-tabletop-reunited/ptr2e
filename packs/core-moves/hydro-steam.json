@@ -1,0 +1,53 @@
+{
+  "name": "Hydro Steam",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/water_icon.png",
+  "system": {
+    "slug": "hydro-steam",
+    "description": "Effect: The attack is considered to be a Fire-Type attack for the effects of Sun.",
+    "traits": [
+      "environ",
+      "defrost",
+      "paradox"
+    ],
+    "actions": [
+      {
+        "slug": "hydro-steam",
+        "name": "Hydro Steam",
+        "type": "attack",
+        "traits": [
+          "environ",
+          "defrost",
+          "paradox"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "Effect: The attack is considered to be a Fire-Type attack for the effects of Sun.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "uYc1Wn1oAEKtDOLS",
+  "effects": []
+}

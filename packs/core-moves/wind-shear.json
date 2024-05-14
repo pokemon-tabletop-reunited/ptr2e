@@ -1,0 +1,49 @@
+{
+  "name": "Wind Shear",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/flying_icon.png",
+  "system": {
+    "slug": "wind-shear",
+    "description": "Effect: Wind Shear is more powerful based on how fast the user is compared to all valid targets.\nWind Shear's Power = min(3*45, (20*UserSPD / TargetSPD) + 45)",
+    "traits": [
+      "wind"
+    ],
+    "actions": [
+      {
+        "slug": "wind-shear",
+        "name": "Wind Shear",
+        "type": "attack",
+        "traits": [
+          "wind"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 45,
+        "accuracy": 95,
+        "types": [
+          "flying"
+        ],
+        "description": "Effect: Wind Shear is more powerful based on how fast the user is compared to all valid targets.\nWind Shear's Power = min(3*45, (20*UserSPD / TargetSPD) + 45)",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "k20VFQLHV61MKECa",
+  "effects": []
+}

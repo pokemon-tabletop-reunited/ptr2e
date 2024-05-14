@@ -1,0 +1,51 @@
+{
+  "name": "Fiery Dance",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fire_icon.png",
+  "system": {
+    "slug": "fiery-dance",
+    "description": "Effect: On hit, the user has a 10% chance of gaining +1 SPATK stage for 5 activations.",
+    "traits": [
+      "defrost",
+      "dance"
+    ],
+    "actions": [
+      {
+        "slug": "fiery-dance",
+        "name": "Fiery Dance",
+        "type": "attack",
+        "traits": [
+          "defrost",
+          "dance"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "fire"
+        ],
+        "description": "Effect: On hit, the user has a 10% chance of gaining +1 SPATK stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "vrQst1m15xgWTAY8",
+  "effects": []
+}

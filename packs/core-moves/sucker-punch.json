@@ -1,0 +1,55 @@
+{
+  "name": "Sucker Punch",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "sucker-punch",
+    "description": "The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with this Attack. If the target Faints due to damage from this Attack, the triggering attack fails.",
+    "traits": [
+      "punch",
+      "dash",
+      "interrupt-1",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "sucker-punch",
+        "name": "Sucker Punch",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "dash",
+          "interrupt-1",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": "You are targeted by a Physical- or Special-Category Attack."
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with this Attack. If the target Faints due to damage from this Attack, the triggering attack fails.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "gzx5oHPWNvGvHEPK",
+  "effects": []
+}

@@ -1,0 +1,53 @@
+{
+  "name": "Feint",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "feint",
+    "description": "Effect: On hit, all of the target's [Shield] effects are removed before damage is dealt.",
+    "traits": [
+      "dash",
+      "priority-2",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "feint",
+        "name": "Feint",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "priority-2",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": 2,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 30,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: On hit, all of the target's [Shield] effects are removed before damage is dealt.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "PjOZd4TXRrr4PyHx",
+  "effects": []
+}

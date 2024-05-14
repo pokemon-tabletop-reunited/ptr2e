@@ -1,0 +1,45 @@
+{
+  "name": "Water Spout",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/water_icon.png",
+  "system": {
+    "slug": "water-spout",
+    "description": "Effect: Water Spout's Power is equal to: 150 x UserCurrentHP/UserMaxHP.",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "water-spout",
+        "name": "Water Spout",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "emanation",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 150,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "Effect: Water Spout's Power is equal to: 150 x UserCurrentHP/UserMaxHP.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "ILPyd5fHvqNJt0rT",
+  "effects": []
+}

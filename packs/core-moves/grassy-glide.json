@@ -1,0 +1,51 @@
+{
+  "name": "Grassy Glide",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/grass_icon.png",
+  "system": {
+    "slug": "grassy-glide",
+    "description": "Effect: If the user is grounded on a Grassy square, they may use this attack as \"Priority 1\".",
+    "traits": [
+      "environ",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "grassy-glide",
+        "name": "Grassy Glide",
+        "type": "attack",
+        "traits": [
+          "environ",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "grass"
+        ],
+        "description": "Effect: If the user is grounded on a Grassy square, they may use this attack as \"Priority 1\".",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "fYErLjpYjYvlKV8H",
+  "effects": []
+}

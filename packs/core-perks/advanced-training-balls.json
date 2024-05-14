@@ -1,43 +1,62 @@
 {
-    "name": "Advanced Training Balls",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Electronics 60",
-            "Training Ball Specs"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "mental",
-            "approach": "resilience",
-            "archetype": "Crafting"
-        },
-        "description": "You learn five [Training Ball] recipies.",
-        "actions": [],
-        "slug": "advanced-training-balls",
-        "traits": [],
-        "node": {
-            "i": 48,
-            "j": -11,
-            "connected": [
-                "basic-ball-crafting",
-                "advanced-ball-weights",
-                "type-ball-range-boost"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#004000",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
-                "tint": "#1b1b1b",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Advanced Training Balls",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Electronics 60",
+      "Training Ball Specs"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Crafting"
     },
-    "_id": "5DGV0ckzaiojM0FU",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You learn five [Training Ball] recipies.",
+    "actions": [],
+    "slug": "advanced-training-balls",
+    "traits": [],
+    "node": {
+      "i": -37,
+      "j": 47,
+      "connected": [
+        "training-ball-specs"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#004000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
+        "tint": "#1b1b1b",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "5DGV0ckzaiojM0FU",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.5DGV0ckzaiojM0FU"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714915147627,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!5DGV0ckzaiojM0FU"
 }

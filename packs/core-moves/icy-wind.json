@@ -1,0 +1,49 @@
+{
+  "name": "Icy Wind",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ice_icon.png",
+  "system": {
+    "slug": "icy-wind",
+    "description": "Effect: On hit, all valid targets lose -1 SPD stage for 5 activations.",
+    "traits": [
+      "wind"
+    ],
+    "actions": [
+      {
+        "slug": "icy-wind",
+        "name": "Icy Wind",
+        "type": "attack",
+        "traits": [
+          "wind"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 55,
+        "accuracy": 95,
+        "types": [
+          "ice"
+        ],
+        "description": "Effect: On hit, all valid targets lose -1 SPD stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "YoLEpica6f4PLgWO",
+  "effects": []
+}

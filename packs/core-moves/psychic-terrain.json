@@ -1,0 +1,49 @@
+{
+  "name": "Psychic Terrain",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/psychic_icon.png",
+  "system": {
+    "slug": "psychic-terrain",
+    "description": "Effect: The Terrain type is set to Psychic Terrain for 3 rounds.",
+    "traits": [
+      "terrain"
+    ],
+    "actions": [
+      {
+        "slug": "psychic-terrain",
+        "name": "Psychic Terrain",
+        "type": "attack",
+        "traits": [
+          "terrain"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "psychic"
+        ],
+        "description": "Effect: The Terrain type is set to Psychic Terrain for 3 rounds.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "McNMuaosHAbgfV8b",
+  "effects": []
+}

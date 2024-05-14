@@ -1,0 +1,51 @@
+{
+  "name": "Heartful Embrace",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fairy_icon.png",
+  "system": {
+    "slug": "heartful-embrace",
+    "description": "Effect: On hit, the target has a 10% chance of losing -1 ATK stage for 5 activations. This attack is one step more effective against Shadow-Types.",
+    "traits": [
+      "aura",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "heartful-embrace",
+        "name": "Heartful Embrace",
+        "type": "attack",
+        "traits": [
+          "aura",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 95,
+        "types": [
+          "fairy"
+        ],
+        "description": "Effect: On hit, the target has a 10% chance of losing -1 ATK stage for 5 activations. This attack is one step more effective against Shadow-Types.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "rhlH5AxbLwkBZBSN",
+  "effects": []
+}

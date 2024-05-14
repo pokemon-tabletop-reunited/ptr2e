@@ -1,57 +1,77 @@
 {
-    "name": "Bug Catcher",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Stealth 20",
-            "Survival 20"
-        ],
-        "cost": 1,
-        "design": {
-            "arena": "physical",
-            "approach": "finesse",
-            "archetype": "Capture"
-        },
-        "description": "You are skilled with the use of a hand-held net. You may choose to remove [Contact] from your Actions that inflict Grapple.",
-        "actions": [
-            {
-                "name": "Bug Catcher",
-                "slug": "bug-catcher",
-                "description": "You are skilled with the use of a hand-held net. You may choose to remove [Contact] from your Actions that inflict Grapple.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "bug-catcher",
-        "traits": [],
-        "node": {
-            "i": 22,
-            "j": -10,
-            "connected": [
-                "root-2",
-                "root-3",
-                "basic-ball-crafting",
-                "dead-to-rights",
-                "down-the-sights",
-                "shadow-guide"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#008000",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
-                "tint": "#808000",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Bug Catcher",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Stealth 20",
+      "Survival 20"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Capture"
     },
-    "_id": "3sJf4zRNNWz0vn4n",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You are skilled with the use of a hand-held net. You may choose to remove [Contact] from your Actions that inflict Grapple.",
+    "actions": [
+      {
+        "name": "Bug Catcher",
+        "slug": "bug-catcher",
+        "description": "You are skilled with the use of a hand-held net. You may choose to remove [Contact] from your Actions that inflict Grapple.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "bug-catcher",
+    "traits": [],
+    "node": {
+      "i": -38,
+      "j": 74,
+      "connected": [
+        "false-swipe",
+        "trained-wielder",
+        "curveball-technique",
+        "fisherman",
+        "snare"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#008000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
+        "tint": "#808000",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "3sJf4zRNNWz0vn4n",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.3sJf4zRNNWz0vn4n"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714916780795,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!3sJf4zRNNWz0vn4n"
 }

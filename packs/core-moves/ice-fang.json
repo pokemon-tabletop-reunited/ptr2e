@@ -1,0 +1,51 @@
+{
+  "name": "Ice Fang",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ice_icon.png",
+  "system": {
+    "slug": "ice-fang",
+    "description": "Effect: On hit, the target has a 10% chance of becoming Freeze 5, and a 10% chance of becoming Flinched 5.",
+    "traits": [
+      "jaw",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "ice-fang",
+        "name": "Ice Fang",
+        "type": "attack",
+        "traits": [
+          "jaw",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 65,
+        "accuracy": 95,
+        "types": [
+          "ice"
+        ],
+        "description": "Effect: On hit, the target has a 10% chance of becoming Freeze 5, and a 10% chance of becoming Flinched 5.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "WpolCDpAPNZl7wGS",
+  "effects": []
+}

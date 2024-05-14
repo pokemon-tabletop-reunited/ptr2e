@@ -1,0 +1,49 @@
+{
+  "name": "Medusa Ray",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/rock_icon.png",
+  "system": {
+    "slug": "medusa-ray",
+    "description": "Effect: The target becomes Rock Type for 5 activations. If used on a target that already has the Rock Type, the target loses 4 Ticks of HP.",
+    "traits": [
+      "move-locked"
+    ],
+    "actions": [
+      {
+        "slug": "medusa-ray",
+        "name": "Medusa Ray",
+        "type": "attack",
+        "traits": [
+          "move-locked"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "rock"
+        ],
+        "description": "Effect: The target becomes Rock Type for 5 activations. If used on a target that already has the Rock Type, the target loses 4 Ticks of HP.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "wRuFhK7ix6eelLX8",
+  "effects": []
+}

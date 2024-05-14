@@ -1,51 +1,76 @@
 {
-    "name": "Shovel Hands",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Ground]"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "physical",
-            "approach": "power",
-            "archetype": "[Ground Type]"
-        },
-        "description": "You gain a Burrow Movement Allowance equal to your Overland Movement Allowance.",
-        "actions": [
-            {
-                "name": "Shovel Hands",
-                "slug": "shovel-hands",
-                "description": "You gain a Burrow Movement Allowance equal to your Overland Movement Allowance.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "shovel-hands",
-        "traits": [],
-        "node": {
-            "i": 98,
-            "j": 6,
-            "connected": [
-                "root-6"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/ground_icon.png",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Shovel Hands",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Ground]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "[Ground Type]"
     },
-    "_id": "bViFIhDmZmpeLhUG",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You gain a Burrow Movement Allowance equal to your Overland Movement Allowance.",
+    "actions": [
+      {
+        "name": "Shovel Hands",
+        "slug": "shovel-hands",
+        "description": "You gain a Burrow Movement Allowance equal to your Overland Movement Allowance.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "shovel-hands",
+    "traits": [],
+    "node": {
+      "i": -67,
+      "j": 49,
+      "connected": [
+        "root-6",
+        "gemcutter",
+        "stonecunning",
+        "powerlifter",
+        "improved-burrow-1"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/ground_icon.png",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "bViFIhDmZmpeLhUG",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.bViFIhDmZmpeLhUG"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922366490,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!bViFIhDmZmpeLhUG"
 }

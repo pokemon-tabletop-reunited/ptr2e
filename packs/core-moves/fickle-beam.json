@@ -1,0 +1,49 @@
+{
+  "name": "Fickle Beam",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dragon_icon.png",
+  "system": {
+    "slug": "fickle-beam",
+    "description": "Effect: Fickle Beam has a 30% chance to increase its Power to 160 when used.",
+    "traits": [
+      "ray"
+    ],
+    "actions": [
+      {
+        "slug": "fickle-beam",
+        "name": "Fickle Beam",
+        "type": "attack",
+        "traits": [
+          "ray"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "dragon"
+        ],
+        "description": "Effect: Fickle Beam has a 30% chance to increase its Power to 160 when used.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "PfDvMQzv0MCAJxeB",
+  "effects": []
+}

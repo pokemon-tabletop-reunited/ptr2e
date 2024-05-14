@@ -1,0 +1,53 @@
+{
+  "name": "Glaive Rush",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dragon_icon.png",
+  "system": {
+    "slug": "glaive-rush",
+    "description": "Effect: On hit, the user loses -2 DEF, SPDEF, and EVA stages for 1 Activation.",
+    "traits": [
+      "sharp",
+      "dash",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "glaive-rush",
+        "name": "Glaive Rush",
+        "type": "attack",
+        "traits": [
+          "sharp",
+          "dash",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "dragon"
+        ],
+        "description": "Effect: On hit, the user loses -2 DEF, SPDEF, and EVA stages for 1 Activation.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "eNwfP4lkgvvICtVW",
+  "effects": []
+}

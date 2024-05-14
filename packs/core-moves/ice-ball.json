@@ -1,0 +1,55 @@
+{
+  "name": "Ice Ball",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/ice_icon.png",
+  "system": {
+    "slug": "ice-ball",
+    "description": "Effect: Before using Ice Ball, the user may freely move up to half of a Movement Score of their choice. The user gains Choice-Locked 3. While Choice-Locked, the user does not consume PP. Each successive use of Ice Ball increases Ice Ball’s Power by 30, and Ice Ball's Power is reset to 30 if it misses or there is not a valid target.",
+    "traits": [
+      "pass-3",
+      "crushing",
+      "curl",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "ice-ball",
+        "name": "Ice Ball",
+        "type": "attack",
+        "traits": [
+          "pass-3",
+          "crushing",
+          "curl",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 30,
+        "accuracy": 90,
+        "types": [
+          "ice"
+        ],
+        "description": "Effect: Before using Ice Ball, the user may freely move up to half of a Movement Score of their choice. The user gains Choice-Locked 3. While Choice-Locked, the user does not consume PP. Each successive use of Ice Ball increases Ice Ball’s Power by 30, and Ice Ball's Power is reset to 30 if it misses or there is not a valid target.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "gUME0ttGEmZbK7WJ",
+  "effects": []
+}

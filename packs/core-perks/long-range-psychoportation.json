@@ -1,53 +1,75 @@
 {
-    "name": "Long-Range Psychoportation",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Teleporter]",
-            "Occult (Psychic) 60"
-        ],
-        "cost": 5,
-        "design": {
-            "arena": "mental",
-            "approach": "power",
-            "archetype": "[Psychic Type]"
-        },
-        "description": "You may fast travel via Teleportation to any settlement that you have previously visited, along with anyone touching you at the moment of transmission.",
-        "actions": [
-            {
-                "name": "Long-Range Psychoportation",
-                "slug": "long-range-psychoportation",
-                "description": "You may fast travel via Teleportation to any settlement that you have previously visited, along with anyone touching you at the moment of transmission.",
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 10
-                },
-                "type": "exploration",
-                "traits": []
-            }
-        ],
-        "slug": "long-range-psychoportation",
-        "traits": [],
-        "node": {
-            "i": 91,
-            "j": 23,
-            "connected": [
-                "root-6"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/psychic_icon.png",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Long-Range Psychoportation",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Teleporter]",
+      "Occult (Psychic) 60"
+    ],
+    "cost": 5,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "[Psychic Type]"
     },
-    "_id": "clK02KrlSlmoP2Ad",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You may fast travel via Teleportation to any settlement that you have previously visited, along with anyone touching you at the moment of transmission.",
+    "actions": [
+      {
+        "name": "Long-Range Psychoportation",
+        "slug": "long-range-psychoportation",
+        "description": "You may fast travel via Teleportation to any settlement that you have previously visited, along with anyone touching you at the moment of transmission.",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 10
+        },
+        "type": "exploration",
+        "traits": []
+      }
+    ],
+    "slug": "long-range-psychoportation",
+    "traits": [],
+    "node": {
+      "i": -114,
+      "j": 52,
+      "connected": [
+        "psychoportation",
+        "improved-teleportation-1"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/psychic_icon.png",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "clK02KrlSlmoP2Ad",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.clK02KrlSlmoP2Ad"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714921819519,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!clK02KrlSlmoP2Ad"
 }

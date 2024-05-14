@@ -1,0 +1,51 @@
+{
+  "name": "Ion Deluge",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/electric_icon.png",
+  "system": {
+    "slug": "ion-deluge",
+    "description": "Effect: The Terrain is set to Ion Deluge for 3 Rounds. This attack does not clear other [Terrain] types, and the effect is not cleared by the use of other [Terrain] effects.",
+    "traits": [
+      "terrain",
+      "priority-1"
+    ],
+    "actions": [
+      {
+        "slug": "ion-deluge",
+        "name": "Ion Deluge",
+        "type": "attack",
+        "traits": [
+          "terrain",
+          "priority-1"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": 1,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "electric"
+        ],
+        "description": "Effect: The Terrain is set to Ion Deluge for 3 Rounds. This attack does not clear other [Terrain] types, and the effect is not cleared by the use of other [Terrain] effects.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "D"
+  },
+  "_id": "hF6zJaUnuawOma8P",
+  "effects": []
+}

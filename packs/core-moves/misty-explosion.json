@@ -1,0 +1,53 @@
+{
+  "name": "Misty Explosion",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/fairy_icon.png",
+  "system": {
+    "slug": "misty-explosion",
+    "description": "Effect: If Misty Terrain is active, this Attack's Power is doubled.",
+    "traits": [
+      "self-ko",
+      "explode",
+      "environ"
+    ],
+    "actions": [
+      {
+        "slug": "misty-explosion",
+        "name": "Misty Explosion",
+        "type": "attack",
+        "traits": [
+          "self-ko",
+          "explode",
+          "environ"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "fairy"
+        ],
+        "description": "Effect: If Misty Terrain is active, this Attack's Power is doubled.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "S"
+  },
+  "_id": "Zp9NSx1GLGO5aarf",
+  "effects": []
+}

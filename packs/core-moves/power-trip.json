@@ -1,0 +1,51 @@
+{
+  "name": "Power Trip",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/dark_icon.png",
+  "system": {
+    "slug": "power-trip",
+    "description": "Power Trip's Power increases by 20 for every positive stage increase above Default stage the user has.",
+    "traits": [
+      "dash",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "power-trip",
+        "name": "Power Trip",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 20,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "Power Trip's Power increases by 20 for every positive stage increase above Default stage the user has.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "B"
+  },
+  "_id": "yoBSCEEZtzbZESMt",
+  "effects": []
+}

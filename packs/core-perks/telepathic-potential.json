@@ -1,55 +1,75 @@
 {
-    "name": "Telepathic Potential",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Psychic]"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "mental",
-            "approach": "finesse",
-            "archetype": "[Psychic Type]"
-        },
-        "description": "You gain the [Telepath] trait.",
-        "actions": [
-            {
-                "name": "Telepathic Potential",
-                "slug": "telepathic-potential",
-                "description": "You gain the [Telepath] trait.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "telepathic-potential",
-        "traits": [],
-        "node": {
-            "i": -42,
-            "j": -2,
-            "connected": [
-                "telekinetic-potential",
-                "parkour",
-                "sea-lungs",
-                "freeclimber",
-                "ultraviolet"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/psychic_icon.png",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Telepathic Potential",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Psychic]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "[Psychic Type]"
     },
-    "_id": "4n06ljZtbCqy6lEC",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You gain the [Telepath] trait.",
+    "actions": [
+      {
+        "name": "Telepathic Potential",
+        "slug": "telepathic-potential",
+        "description": "You gain the [Telepath] trait.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "telepathic-potential",
+    "traits": [],
+    "node": {
+      "i": -97,
+      "j": 50,
+      "connected": [
+        "root-6",
+        "type-embodiment-type",
+        "conceal-mind",
+        "detect-minds"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/psychic_icon.png",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "4n06ljZtbCqy6lEC",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.4n06ljZtbCqy6lEC"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714921807180,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!4n06ljZtbCqy6lEC"
 }

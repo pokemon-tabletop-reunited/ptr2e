@@ -14,6 +14,37 @@ export default abstract class MoveSystem extends HasEmbed(HasBase(foundry.abstra
 
     static LOCALIZATION_PREFIXES = ["PTR2E", "PTR2E.MoveSystem"];
 
+    static override defineSchema(): foundry.data.fields.DataSchema {
+        const fields = foundry.data.fields;
+        return {
+            ...super.defineSchema(),
+
+            grade: new fields.StringField({
+                required: true,
+                initial: "E",
+                choices: [
+                    "E",
+                    "E+",
+                    "D-",
+                    "D",
+                    "D+",
+                    "C-",
+                    "C",
+                    "C+",
+                    "B-",
+                    "B",
+                    "B+",
+                    "A-",
+                    "A",
+                    "A+",
+                    "S-",
+                    "S",
+                    "S+",
+                ],
+            }),
+        };
+    }
+
     override async toEmbed(_config: foundry.abstract.DocumentHTMLEmbedConfig, options: EnrichmentOptions = {}): Promise<HTMLElement | HTMLCollection | null> {
         return super.toEmbed(_config, options, {attack: this.attack, move: this.parent});
     }
@@ -38,7 +69,6 @@ export default abstract class MoveSystem extends HasEmbed(HasBase(foundry.abstra
                 this.parent.updateSource({"system.actions": data.system.actions});
             }
             else if(!actions.some(action => action.type === "attack")) {
-                //@ts-expect-error
                 data.system.actions.unshift({
                     name: `${data.name} Attack`,
                     slug: sluggify(`${data.name} Attack`),
@@ -75,7 +105,7 @@ export default abstract class MoveSystem extends HasEmbed(HasBase(foundry.abstra
                 if(mainAttackIndex === -1) {
                     return false;
                 }
-                changedActions[mainAttackIndex].description = changed.system.description;
+                changedActions[mainAttackIndex].description = changed.system.description as string;
             }
             else {
                 const attacks = this._source.actions;

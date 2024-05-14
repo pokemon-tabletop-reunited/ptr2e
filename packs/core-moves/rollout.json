@@ -1,0 +1,53 @@
+{
+  "name": "Rollout",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/rock_icon.png",
+  "system": {
+    "slug": "rollout",
+    "description": "Effect: Before using Rollout, the user may freely attack up to half of the Movement Score of their choice. The user gains Choice-Locked 4. While Choice-Locked, the user does not consume PP. Each successive use of Rollout increases Rollout’s Power by 30, and Rollout's Power is reset to 30 if it misses or there is not a valid target.",
+    "traits": [
+      "pass-3",
+      "curl",
+      "contact"
+    ],
+    "actions": [
+      {
+        "slug": "rollout",
+        "name": "Rollout",
+        "type": "attack",
+        "traits": [
+          "pass-3",
+          "curl",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 30,
+        "accuracy": 90,
+        "types": [
+          "rock"
+        ],
+        "description": "Effect: Before using Rollout, the user may freely attack up to half of the Movement Score of their choice. The user gains Choice-Locked 4. While Choice-Locked, the user does not consume PP. Each successive use of Rollout increases Rollout’s Power by 30, and Rollout's Power is reset to 30 if it misses or there is not a valid target.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "bFF1KeeCZw3IjRHQ",
+  "effects": []
+}

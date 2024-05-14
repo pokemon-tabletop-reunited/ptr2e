@@ -1,57 +1,74 @@
 {
-    "name": "One With The Green",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "[Grass]"
-        ],
-        "cost": 3,
-        "design": {
-            "arena": "physical",
-            "approach": "resilience",
-            "archetype": "[Grass Type]"
-        },
-        "description": "You add the Sap Sipper ability to your Trained Abilities list.",
-        "actions": [
-            {
-                "name": "One With The Green",
-                "slug": "one-with-the-green",
-                "description": "You add the Sap Sipper ability to your Trained Abilities list.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": []
-            }
-        ],
-        "slug": "one-with-the-green",
-        "traits": [],
-        "node": {
-            "i": 15,
-            "j": 7,
-            "connected": [
-                "keep-fighting",
-                "incognito",
-                "intense-heat",
-                "open-your-heart",
-                "potent-venom",
-                "screen-setter",
-                "urge-mount"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": null,
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/icons/grass_icon.png",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "One With The Green",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Grass]"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "[Grass Type]"
     },
-    "_id": "ks3F2x6TCKlFrWTO",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "You add the Sap Sipper ability to your Trained Abilities list.",
+    "actions": [
+      {
+        "name": "One With The Green",
+        "slug": "one-with-the-green",
+        "description": "You add the Sap Sipper ability to your Trained Abilities list.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": []
+      }
+    ],
+    "slug": "one-with-the-green",
+    "traits": [],
+    "node": {
+      "i": -63,
+      "j": -6,
+      "connected": [
+        "type-embodiment-type",
+        "nurturing-shoots",
+        "potent-venom"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/icons/grass_icon.png",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "ks3F2x6TCKlFrWTO",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-perks.Item.ks3F2x6TCKlFrWTO"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.321",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": null,
+    "modifiedTime": 1714922114331,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
+    "compendiumSource": null,
+    "duplicateSource": null
+  },
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0
+  },
+  "_key": "!items!ks3F2x6TCKlFrWTO"
 }

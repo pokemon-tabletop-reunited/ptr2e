@@ -1,0 +1,49 @@
+{
+  "name": "Metal Sound",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/steel_icon.png",
+  "system": {
+    "slug": "metal-sound",
+    "description": "Effect: On hit, all valid targets lose -2 SPDEF for 5 activations.",
+    "traits": [
+      "sonic"
+    ],
+    "actions": [
+      {
+        "slug": "metal-sound",
+        "name": "Metal Sound",
+        "type": "attack",
+        "traits": [
+          "sonic"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 85,
+        "types": [
+          "steel"
+        ],
+        "description": "Effect: On hit, all valid targets lose -2 SPDEF for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "E"
+  },
+  "_id": "mYQseVatavuGbtWc",
+  "effects": []
+}

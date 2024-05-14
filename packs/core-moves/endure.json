@@ -1,0 +1,51 @@
+{
+  "name": "Endure",
+  "type": "move",
+  "img": "/systems/ptr2e/img/icons/normal_icon.png",
+  "system": {
+    "slug": "endure",
+    "description": "Trigger: The user is hit by a Physical- or Special-Category Attack\nEffect: The user resists the attack by 1 step and cannot fall below 1 HP from the attack.",
+    "traits": [
+      "defensive",
+      "interrupt-4"
+    ],
+    "actions": [
+      {
+        "slug": "endure",
+        "name": "Endure",
+        "type": "attack",
+        "traits": [
+          "defensive",
+          "interrupt-4"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user is hit by a Physical- or Special-Category Attack"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Trigger: The user is hit by a Physical- or Special-Category Attack\nEffect: The user resists the attack by 1 step and cannot fall below 1 HP from the attack.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "eEQiYEm2y7wkcKnx",
+  "effects": []
+}
