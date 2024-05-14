@@ -1,74 +1,56 @@
 {
-  "name": "Hitmon-Class Sandwiches",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Husbandry 80",
-      "Ralts-Class Sandwiches"
-    ],
-    "cost": 5,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Chef"
-    },
-    "description": "The ultimate in exploration nutrition. The adventurer with Hitmon-Class Sandwiches for Lunch gains a passive +20 to all skill checks for the following day, and can gain an additional +25 to one skill check that day.",
-    "actions": [
-      {
-        "name": "Hitmon-Class Sandwiches",
-        "slug": "hitmon-class-sandwiches",
-        "description": "The ultimate in exploration nutrition. The adventurer with Hitmon-Class Sandwiches for Lunch gains a passive +20 to all skill checks for the following day, and can gain an additional +25 to one skill check that day.",
-        "cost": {
-          "activation": "complex"
+    "name": "Hitmon-Class Sandwiches",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Husbandry 80"
+        ],
+        "cost": 5,
+        "design": {
+            "arena": "social",
+            "approach": "power",
+            "archetype": "Chef"
         },
-        "type": "camping",
-        "traits": []
-      }
-    ],
-    "slug": "hitmon-class-sandwiches",
-    "traits": [],
-    "node": {
-      "i": -28,
-      "j": 12,
-      "connected": [
-        "ralts-class-sandwiches",
-        "lechonk-class-sandwiches"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#804000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
-  },
-  "_id": "mHmtUUfzz3IXBye5",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.mHmtUUfzz3IXBye5"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714916229035,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!mHmtUUfzz3IXBye5"
+        "description": "The ultimate in exploration nutrition. The adventurer with Hitmon-Class Sandwiches for Lunch gains a passive +20 to all skill checks for the following day, and can gain an additional +25 to one skill check that day.",
+        "actions": [
+            {
+                "name": "Hitmon-Class Sandwiches",
+                "slug": "hitmon-class-sandwiches",
+                "description": "The ultimate in exploration nutrition. The adventurer with Hitmon-Class Sandwiches for Lunch gains a passive +20 to all skill checks for the following day, and can gain an additional +25 to one skill check that day.",
+                "cost": {
+                    "activation": "complex"
+                },
+                "type": "camping",
+                "traits": [],
+                "range": {
+                    "target": "enemy",
+                    "unit": "m"
+                }
+            }
+        ],
+        "slug": "hitmon-class-sandwiches",
+        "traits": [],
+        "node": {
+            "i": -28,
+            "j": 12,
+            "connected": [
+                "ralts-class-sandwiches",
+                "lechonk-class-sandwiches"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#804000",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "mHmtUUfzz3IXBye5",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }
