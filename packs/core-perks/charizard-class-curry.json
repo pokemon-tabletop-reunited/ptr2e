@@ -1,74 +1,56 @@
 {
-  "name": "Charizard-class Curry",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Husbandry 80",
-      "Copperajah-Class Curry"
-    ],
-    "cost": 5,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Chef"
-    },
-    "description": "You are able to make Charizard-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP and have them recover from Exposure. On a 1-25, you attract a non-hostile Pokemon from the local environment to investigate the camp.",
-    "actions": [
-      {
-        "name": "Charizard-class Curry",
-        "slug": "charizard-class-curry",
-        "description": "You are able to make Charizard-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP and have them recover from Exposure. On a 1-25, you attract a non-hostile Pokemon from the local environment to investigate the camp.",
-        "cost": {
-          "activation": "complex"
+    "name": "Charizard-class Curry",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Husbandry 80"
+        ],
+        "cost": 5,
+        "design": {
+            "arena": "social",
+            "approach": "power",
+            "archetype": "Chef"
         },
-        "type": "camping",
-        "traits": []
-      }
-    ],
-    "slug": "charizard-class-curry",
-    "traits": [],
-    "node": {
-      "i": -32,
-      "j": 12,
-      "connected": [
-        "copperajah-class-curry",
-        "milcery-class-curry"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ff8000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
-  },
-  "_id": "7IwAmBCPdulCY7yD",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.7IwAmBCPdulCY7yD"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714916226541,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!7IwAmBCPdulCY7yD"
+        "description": "You are able to make Charizard-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP and have them recover from Exposure. On a 1-25, you attract a non-hostile Pokemon from the local environment to investigate the camp.",
+        "actions": [
+            {
+                "name": "Charizard-class Curry",
+                "slug": "charizard-class-curry",
+                "description": "You are able to make Charizard-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP and have them recover from Exposure. On a 1-25, you attract a non-hostile Pokemon from the local environment to investigate the camp.",
+                "cost": {
+                    "activation": "complex"
+                },
+                "type": "camping",
+                "traits": [],
+                "range": {
+                    "target": "enemy",
+                    "unit": "m"
+                }
+            }
+        ],
+        "slug": "charizard-class-curry",
+        "traits": [],
+        "node": {
+            "i": -32,
+            "j": 12,
+            "connected": [
+                "copperajah-class-curry",
+                "milcery-class-curry"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#ff8000",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "7IwAmBCPdulCY7yD",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }
