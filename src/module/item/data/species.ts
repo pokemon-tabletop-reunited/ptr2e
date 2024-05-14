@@ -544,6 +544,11 @@ interface SpeciesSystemSource extends Omit<ItemSystemSource, "container" | "acti
         master: string[];
     };
 
+    moves: {
+        levelUp: { name: string; uuid: string; gen?: string, level: number }[];
+        tutor: { name: string; uuid: string; gen?: string }[];
+    }
+
     movement: {
         primary: { type: string; value: number }[];
         secondary: { type: string; value: number }[];

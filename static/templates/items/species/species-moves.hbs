@@ -13,13 +13,15 @@
                         <div class="form-group">
                             <div class="form-fields">
                                 {{{asContentLink move.uuid}}}
-                                <input type="hidden" class="form-control" data-dtype="String" value={{move.name}}>
+                                <input type="hidden" name="system.moves.levelUp.{{@index}}.name" class="form-control" data-dtype="String" value={{move.name}}>
+                                <input type="hidden" name="system.moves.levelUp.{{@index}}.uuid" class="form-control" data-dtype="String" value={{move.uuid}}>
+                                {{#if move.gen}}<input type="hidden" name="system.moves.levelUp.{{@index}}.gen" class="form-control" data-dtype="String" value={{move.gen}}>{{/if}}
                             </div>
                         </div>
                         <div class="form-group">
                             <label>Level</label>
                             <div class="form-fields">
-                                <input type="number" class="form-control" data-dtype="Number" value={{move.level}}>
+                                <input type="number" name="system.moves.levelUp.{{@index}}.level" class="form-control" data-dtype="Number" value={{move.level}}>
                             </div>
                         </div>
                         <div class="item-controls">
@@ -38,7 +40,9 @@
                         <div class="form-group">
                             <div class="form-fields">
                                 {{{asContentLink move.uuid}}}
-                                <input type="hidden" class="form-control" data-dtype="String" value={{move.name}}>
+                                <input type="hidden" name="system.moves.tutor.{{@index}}.name" class="form-control" data-dtype="String" value={{move.name}}>
+                                <input type="hidden" name="system.moves.tutor.{{@index}}.uuid" class="form-control" data-dtype="String" value={{move.uuid}}>
+                                {{#if move.gen}}<input type="hidden" name="system.moves.tutor.{{@index}}.gen" class="form-control" data-dtype="String" value={{move.gen}}>{{/if}}
                             </div>
                         </div>
                         <div class="item-controls">
