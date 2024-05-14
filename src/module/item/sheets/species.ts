@@ -311,6 +311,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
                     value: skill.value,
                 });
             }
+
             // set data.system.skills equal to skills but sort it by key first
             data.system.skills = skills
                 .map((s) => partialSkillToSkill(s))

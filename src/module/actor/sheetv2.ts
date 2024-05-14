@@ -82,27 +82,31 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                 "favourite-skill": ActorSheetPTRV2._onFavouriteSkill,
                 "hide-skill": ActorSheetPTRV2._onHideSkill,
                 "toggle-hidden-skills": async function (this: ActorSheetPTRV2) {
-                    const appSettings = fu.duplicate(game.user.getFlag("ptr2e", "appSettings") ?? {}) as Record<string, Record<string, unknown>>;
-                    if (!appSettings[this.appId]) appSettings[this.appId] = {hideHiddenSkills: true};
-                    appSettings[this.appId].hideHiddenSkills = !appSettings[this.appId].hideHiddenSkills;
+                    const appSettings = fu.duplicate(
+                        game.user.getFlag("ptr2e", "appSettings") ?? {}
+                    ) as Record<string, Record<string, unknown>>;
+                    if (!appSettings[this.appId])
+                        appSettings[this.appId] = { hideHiddenSkills: true };
+                    appSettings[this.appId].hideHiddenSkills =
+                        !appSettings[this.appId].hideHiddenSkills;
                     await game.user.setFlag("ptr2e", "appSettings", appSettings);
-                    
-                    for(const app of Object.values(this.actor.apps)) {
-                        if(app instanceof foundry.applications.api.ApplicationV2) {
-                            const parts = (app as unknown as {parts: Record<string, unknown>}).parts;
-                            if('popout' in parts) app.render({parts: ["popout"]})
-                            if('skills' in parts) app.render({parts: ["skills"]})
-                        }
-                        else app?.render();
+
+                    for (const app of Object.values(this.actor.apps)) {
+                        if (app instanceof foundry.applications.api.ApplicationV2) {
+                            const parts = (app as unknown as { parts: Record<string, unknown> })
+                                .parts;
+                            if ("popout" in parts) app.render({ parts: ["popout"] });
+                            if ("skills" in parts) app.render({ parts: ["skills"] });
+                        } else app?.render();
                     }
                 },
                 "edit-skills": async function (this: ActorSheetPTRV2) {
                     new SkillsEditor(this.actor).render(true);
                 },
-                "luck-roll": async function(this: ActorSheetPTRV2) {
+                "luck-roll": async function (this: ActorSheetPTRV2) {
                     const skill = this.actor.system.skills.get("luck")!;
                     await skill.endOfDayLuckRoll();
-                }
+                },
             },
         },
         { inplace: false }
@@ -280,7 +284,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             return inventory;
         })();
 
-        const {skills, hideHiddenSkills} = SkillsComponent.prepareSkillsData(this.actor);
+        const { skills, hideHiddenSkills } = SkillsComponent.prepareSkillsData(this.actor);
 
         return {
             ...(await super._prepareContext(options)),
@@ -319,8 +323,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             EffectComponent.attachListeners(htmlElement, this.actor);
         }
 
-
-        if(partId === "skills" || partId === "overview") {
+        if (partId === "skills" || partId === "overview") {
             SkillsComponent.attachListeners(htmlElement, this.actor);
         }
     }
@@ -456,7 +459,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         if (index === -1) return;
 
         skills[index].favourite = !skills[index].favourite;
-        if(skills[index].favourite && skills[index].hidden) skills[index].hidden = false;
+        if (skills[index].favourite && skills[index].hidden) skills[index].hidden = false;
         this.actor.update({ "system.skills": skills });
     }
 
@@ -472,7 +475,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         if (index === -1) return;
 
         skills[index].hidden = !skills[index].hidden;
-        if(skills[index].hidden && skills[index].favourite) skills[index].favourite = false;
+        if (skills[index].hidden && skills[index].favourite) skills[index].favourite = false;
         this.actor.update({ "system.skills": skills });
     }
 }
