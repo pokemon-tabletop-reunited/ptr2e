@@ -57,6 +57,8 @@ export default class AttackPTR2e extends ActionPTR2e {
 
         const initialTargets = [...game.user.targets].filter(t => t.actor?.uuid).map(t => ({ uuid: t.actor!.uuid }));
 
+        // new ModifierPopup({origin: this.actor!, operation: { type: "attack", slug: this.slug }});
+
         // @ts-ignore
         return await ChatMessage.create({
             type: "attack",

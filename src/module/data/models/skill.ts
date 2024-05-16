@@ -42,39 +42,17 @@ class SkillPTR2e extends foundry.abstract.DataModel {
         }
     }
 
-    async roll() {
-        const roll = await this.rollCheck();
+    get statistic() {
+        return this.actor.skills[this.slug];
+    }
 
-        // @ts-expect-error
-        return await ChatMessage.create({
-            type: "skill",
-            system: {
-                roll: roll.toJSON(),
-                slug: this.slug,
-                origin: fu.mergeObject(this.actor.toObject(), { uuid: this.actor.uuid }),
-                luckRoll: null
-            },
-        });
+    async roll() {
+        return this.statistic.roll();
     }
 
     async endOfDayLuckRoll() {
         if(this.slug !== "luck") return;
-        const roll = await this.rollCheck();
-
-        // @ts-expect-error
-        return await ChatMessage.create({
-            type: "skill",
-            system: {
-                roll: roll.toJSON(),
-                slug: this.slug,
-                origin: fu.mergeObject(this.actor.toObject(), { uuid: this.actor.uuid }),
-                luckRoll: (await new Roll("1d10").roll()).toJSON()
-            },
-        });
-    }
-
-    async rollCheck(): Promise<Rolled<Roll>> {
-        return new Roll("1d100ms@skill", { skill: this.total }).roll();
+        return this.statistic.roll({type: 'luck-check'})
     }
 }
 

@@ -1,0 +1,46 @@
+<main>
+    <fieldset class="skill-modifiers">
+        <legend>Skill Modifiers</legend>
+        <header class="modifier">
+            <span class="mod">Modifier</span>
+            <span class="value">Value</span>
+            <span class="exclude"></span>
+        </header>
+        <article>
+            <section class="modifier-panel">
+                {{#each modifiers as |modifier idx|}}
+                    {{#unless modifier.hidden}}
+                        <div class="modifier{{#if modifier.ignored}} ignored{{#if modifier.hideIfDisabled}} hidden{{/if}}{{/if}}" data-index="{{idx}}">
+                            <span class="mod">{{modifier.label}}</span>
+                            <span class="value"> {{modifier.modifier}}</span>
+                            <span class="exclude">
+                                <input type="checkbox" {{#unless modifier.ignored}}checked{{/unless}}>
+                            </span>
+                        </div>
+                    {{/unless}}
+                {{/each}}
+            </section>
+            <section class="add-modifier-panel">
+                <div class="modifier">
+                    <input type="text" class="mod add-modifier-name" placeholder="New Modifier">
+                    <input type="number" class="value add-modifier-value" placeholder="+1" />
+                    <button type="button" class="exclude add-modifier">+Add</button>
+                </div>
+            </section>
+        </article>
+    </fieldset>
+    {{#if challengeRating}}
+        <fieldset class="skill-challenge-rating">
+            <legend>Challenge Rating</legend>
+            <article>
+                <label>Challenge Rating</label>
+                <select name="challenge-rating">
+                    {{selectOptions challengeRatings selected=challengeRating localize=true}}
+                </select>
+            </article>
+        </fieldset>
+    {{/if}}
+    <footer clas="mt-3">
+        <button type="submit">Submit</button>
+    </footer>
+</main>

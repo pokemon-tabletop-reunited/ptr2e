@@ -2,6 +2,7 @@ import { DistanceUnit, Trait, WeightUnit } from "@data";
 import { EffectSourcePTR2e } from "@effects";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
+import { RollNote } from "@system/notes.ts";
 
 type ModifierSynthetics = Record<"all" | "damage", DeferredModifier[]> & Record<string, DeferredModifier[] | undefined>;
 type ModifierAdjustmentSynthetics = { all: ModifierAdjustment[]; damage: ModifierAdjustment[] } & Record<
@@ -23,6 +24,7 @@ interface ActorSynthetics {
         flush: () => void;
     };
     afflictions: {data: AfflictionActiveEffectSystem[], ids: Set<string>};
+    rollNotes: Record<string, RollNote[]>;
 }
 
 interface Attributes {

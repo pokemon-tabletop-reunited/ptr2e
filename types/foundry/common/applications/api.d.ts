@@ -103,9 +103,9 @@ type ApplicationRenderContext = {
 } & Record<string, unknown>;
 
 type ApplicationWindowRenderOptions = {
-    title: string;
-    icon: string | false;
-    controls: boolean;
+    title?: string;
+    icon?: string | false;
+    controls?: boolean;
 };
 
 type ApplicationWindow = {
@@ -865,6 +865,8 @@ interface DialogV2WaitOptions {
     rejectClose?: boolean;
 }
 
+export type DialogV2Options = Partial<ApplicationConfiguration & DialogV2Configuration & DialogV2WaitOptions>;
+
 export class DialogV2 extends ApplicationV2<DialogV2Configuration> {
     static prompt(
         options: Omit<DialogV2Configuration, keyof ApplicationConfiguration | "submit"> &
@@ -883,9 +885,21 @@ export class DialogV2 extends ApplicationV2<DialogV2Configuration> {
      *                                        Promise resolves to null.
      */
     static confirm(
-        options: Partial<ApplicationConfiguration & DialogV2Configuration & DialogV2WaitOptions> & {
+        options: DialogV2Options & {
             yes?: Partial<DialogV2Button>;
             no?: Partial<DialogV2Button>;
         }
+    ): Promise<any>;
+
+    /**
+     * Spawn a dialog and wait for it to be dismissed or submitted.
+     * @param {Partial<ApplicationConfiguration & DialogV2Configuration>} [options]
+     * @param {boolean} [options.rejectClose=true]  Throw a Promise rejection if the dialog is dismissed.
+     * @returns {Promise<any>}                      Resolves to the identifier of the button used to submit the dialog,
+     *                                              or the value returned by that button's callback. If the dialog was
+     *                                              dismissed, and rejectClose is false, the Promise resolves to null.
+     */
+    static wait(
+        options: DialogV2Options
     ): Promise<any>;
 }

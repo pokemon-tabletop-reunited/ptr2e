@@ -4,6 +4,7 @@ import ChangeModel from "./changes/change.ts";
 import { signedInteger, sluggify } from "@utils";
 import { ItemPTR2e } from "@item";
 import * as R from "remeda";
+import { RollNote } from "@system/notes.ts";
 
 interface RawModifier {
     /** An identifier for this modifier; should generally be a localization key (see en.json). */
@@ -16,12 +17,8 @@ interface RawModifier {
     modifier: number;
     /** Numeric adjustments to apply */
     adjustments?: ModifierAdjustment[];
-    /** If true, this modifier will be applied to the final roll; if false, it will be ignored. */
-    enabled?: boolean;
     /** If true, these custom dice are being ignored in the damage calculation. */
     ignored?: boolean;
-    /** The source from which this modifier originates, if any. */
-    source?: string | null;
     /** A predicate which determines when this modifier is active. */
     predicate?: RawPredicate;
     /** If true, this modifier is only active on a critical hit. */
@@ -30,12 +27,15 @@ interface RawModifier {
     traits?: string[];
     /** Hide this modifier in UIs if it is disabled */
     hideIfDisabled?: boolean;
+    /** If this modifier should not show up in the prompt regardless of whether it's disabled */
+    hidden?: boolean;
 }
 
 interface ModifierAdjustment {
     slug: string | null;
     test: (options: Iterable<string>) => boolean;
     relabel?: string;
+    suppress?: boolean;
     getNewValue?: (current: number) => number;
 }
 
@@ -66,16 +66,16 @@ class ModifierPTR2e implements RawModifier {
 
     adjustments: ModifierAdjustment[];
     alterations: DamageAlteration[];
-    enabled: boolean;
     ignored: boolean;
     /** The originating rule element of this modifier, if any: used to retrieve "parent" item roll options */
     change: ChangeModel | null;
-    source: string | null;
     
     predicate: Predicate;
     critical: boolean | null;
     traits: string[];
     hideIfDisabled: boolean;
+    /** If this modifier should not show up in the prompt regardless of whether it's disabled */
+    hidden: boolean;
 
     /**
      * The "category" of modifier (a misnomer since bonuses and penalties aren't modifiers):
@@ -86,16 +86,9 @@ class ModifierPTR2e implements RawModifier {
 
     /**
      * Create a new modifier.
-     * Legacy parameters:
-     * @param name The name for the modifier; should generally be a localization key.
-     * @param modifier The actual numeric benefit/penalty that this modifier provides.
-     * @param type The type of the modifier - modifiers of the same type do not stack (except for `untyped` modifiers).
-     * @param enabled If true, this modifier will be applied to the result; otherwise, it will not.
-     * @param source The source from which this modifier originates, if any.
-     * @param notes Any notes about this modifier.
      */
     constructor(args: ModifierObjectParams) {
-        this.label = game.i18n.localize(args.label ?? args.name)
+        this.label = game.i18n.localize(args.label)
         this.slug = sluggify(args.slug ?? this.label);
 
         this.#originalValue = this.modifier = args.modifier;
@@ -103,13 +96,12 @@ class ModifierPTR2e implements RawModifier {
         this.domains = args.domains ?? [];
         this.adjustments = fu.deepClone(args.adjustments ?? []);
         this.alterations = [args.alterations ?? []].flat();
-        this.enabled = args.enabled ?? true;
         this.ignored = args.ignored ?? false;
-        this.source = args.source ?? null;
         this.predicate = new Predicate(args.predicate ?? []);
         this.traits = fu.deepClone(args.traits ?? []);
         this.hideIfDisabled = args.hideIfDisabled ?? false;
         this.critical = args.critical ?? null;
+        this.hidden = args.hidden ?? false;
         
         this.change = args.change ?? null;
         // Prevent upstream from blindly diving into recursion loops
@@ -144,8 +136,8 @@ class ModifierPTR2e implements RawModifier {
     }
 
     /** Return a copy of this ModifierPTR2e instance */
-    clone(data: Partial<ModifierObjectParams> = {}, options: {test?: Iterable<string>} = {}): ModifierPTR2e {
-        const clone = new ModifierPTR2e(fu.mergeObject({...this, modifier: this.#originalValue, ...data}));
+    clone(options: {test?: Iterable<string>} = {}): ModifierPTR2e {
+        const clone = new ModifierPTR2e(fu.mergeObject({...this, modifier: this.#originalValue}));
         if(options.test) clone.test(options.test);
 
         return clone;
@@ -174,8 +166,7 @@ class ModifierPTR2e implements RawModifier {
     test(options: Iterable<string>): void {
         if(this.predicate.length === 0) return;
         const rollOptions = this.change ? [...options, ...this.change.getRollOptions()] : options;
-        this.enabled = this.predicate.test(rollOptions);
-        this.ignored = !this.enabled;
+        this.ignored = !this.predicate.test(rollOptions);
     }
 
     toObject(): Required<RawModifier> {
@@ -190,13 +181,181 @@ class ModifierPTR2e implements RawModifier {
     }
 }
 
+/**
+ * Represents a statistic on an actor and its commonly applied modifiers. Each statistic or check can have multiple
+ * modifiers, even of the same type, but the stacking rules are applied to ensure that only a single bonus and penalty
+ * of each type is applied to the total modifier.
+ */
+class StatisticModifier {
+    /** The slug of this collection of modifiers for a statistic. */
+    slug: string;
+    /** The display label of this statistic */
+    declare label?: string;
+    /** The list of modifiers which affect the statistic. */
+    protected _modifiers: ModifierPTR2e[];
+    /** The total modifier for the statistic, after applying stacking rules. */
+    declare totalModifier: number;
+    /** A textual breakdown of the modifiers factoring into this statistic */
+    breakdown = "";
+    /** Optional notes, which are often added to statistic modifiers */
+    notes?: RollNote[];
+
+    /**
+     * @param slug The name of this collection of statistic modifiers.
+     * @param modifiers All relevant modifiers for this statistic.
+     * @param rollOptions Roll options used for initial total calculation
+     */
+    constructor(slug: string, modifiers: ModifierPTR2e[] = [], rollOptions: string[] | Set<string> = new Set()) {
+        rollOptions = rollOptions instanceof Set ? rollOptions : new Set(rollOptions);
+        this.slug = slug;
+
+        // De-duplication. Prefer higher valued
+        const seen = modifiers.reduce((result: Record<string, ModifierPTR2e>, modifier) => {
+            const existing = result[modifier.slug];
+            if (!existing || existing.ignored || Math.abs(modifier.modifier) > Math.abs(result[modifier.slug].modifier)) {
+                result[modifier.slug] = modifier;
+            }
+            return result;
+        }, {});
+        this._modifiers = Object.values(seen);
+
+        this.calculateTotal(rollOptions);
+    }
+
+    /** Get the list of all modifiers in this collection */
+    get modifiers(): ModifierPTR2e[] {
+        return [...this._modifiers];
+    }
+
+    get signedTotal(): string {
+        return signedInteger(this.totalModifier);
+    }
+
+    /** Add a modifier to the end of this collection. */
+    push(modifier: ModifierPTR2e): number {
+        // de-duplication. If an existing one exists, replace if higher valued
+        const existingIdx = this._modifiers.findIndex((o) => o.slug === modifier.slug);
+        const existing = this._modifiers[existingIdx];
+        if (!existing) {
+            this._modifiers.push(modifier);
+            this.calculateTotal();
+        } else if (Math.abs(modifier.modifier) > Math.abs(existing.modifier)) {
+            this._modifiers[existingIdx] = modifier;
+            this.calculateTotal();
+        }
+
+        return this._modifiers.length;
+    }
+
+    /** Add a modifier to the beginning of this collection. */
+    unshift(modifier: ModifierPTR2e): number {
+        // de-duplication
+        if (this._modifiers.find((o) => o.slug === modifier.slug) === undefined) {
+            this._modifiers.unshift(modifier);
+            this.calculateTotal();
+        }
+        return this._modifiers.length;
+    }
+
+    /** Delete a modifier from this collection by name or reference */
+    delete(modifierSlug: string | ModifierPTR2e): boolean {
+        const toDelete =
+            typeof modifierSlug === "object"
+                ? modifierSlug
+                : this._modifiers.find((modifier) => modifier.slug === modifierSlug);
+        const wasDeleted =
+            toDelete && this._modifiers.includes(toDelete)
+                ? !!this._modifiers.findSplice((modifier) => modifier === toDelete)
+                : false;
+        if (wasDeleted) this.calculateTotal();
+
+        return wasDeleted;
+    }
+
+    /** Obtain the total modifier, optionally retesting predicates, and finally applying stacking rules. */
+    calculateTotal(rollOptions: Set<string> = new Set()): void {
+        if (rollOptions.size > 0) {
+            for (const modifier of this._modifiers) {
+                modifier.test(rollOptions);
+            }
+
+            adjustModifiers(this._modifiers, rollOptions);
+        }
+        
+        this.totalModifier = this._modifiers.filter((m) => !m.ignored).reduce((total, m) => total + m.modifier, 0);
+    }
+}
+
+function adjustModifiers(modifiers: ModifierPTR2e[], rollOptions: Set<string>): void {
+    for (const modifier of [...modifiers].sort((a, b) => Math.abs(b.value) - Math.abs(a.value))) {
+        const allRollOptions = [...rollOptions, ...modifier.getRollOptions()];
+        const adjustments = modifier.adjustments.filter((a) => a.test(allRollOptions));
+        if (adjustments.some((a) => a.suppress)) {
+            modifier.ignored = true;
+            continue;
+        }
+
+        type ResolvedAdjustment = { value: number; relabel: string | null };
+        const resolvedAdjustment = adjustments.reduce(
+            (resolved: ResolvedAdjustment, adjustment) => {
+                const newValue = adjustment.getNewValue?.(resolved.value) ?? resolved.value;
+                if (newValue !== resolved.value) {
+                    resolved.value = newValue;
+                    resolved.relabel = adjustment.relabel ?? null;
+                }
+                return resolved;
+            },
+            { value: modifier.modifier, relabel: null },
+        );
+        modifier.modifier = resolvedAdjustment.value;
+
+        if (resolvedAdjustment.relabel) {
+            modifier.label = game.i18n.localize(resolvedAdjustment.relabel);
+        }
+
+        //TODO: Check if we can reuse this for type resolution
+        // // If applicable, change the damage type of this modifier, using only the final adjustment found
+        // modifier.damageType = adjustments.reduce(
+        //     (damageType: DamageType | null, adjustment) => adjustment.getDamageType?.(damageType) ?? damageType,
+        //     modifier.damageType,
+        // );
+    }
+}
+
+/**
+ * Represents the list of modifiers for a specific check.
+ */
+class CheckModifier extends StatisticModifier {
+    /**
+     * @param slug The unique slug of this check modifier
+     * @param statistic The statistic modifier to copy fields from
+     * @param modifiers Additional modifiers to add to this check
+     */
+    constructor(
+        slug: string,
+        statistic: { modifiers: readonly ModifierPTR2e[] },
+        modifiers: ModifierPTR2e[] = [],
+        rollOptions: string[] | Set<string> = new Set(),
+    ) {
+        const baseModifiers = statistic.modifiers
+            .filter((modifier: unknown) => {
+                if (modifier instanceof ModifierPTR2e) return true;
+                if (R.isObject(modifier) && "slug" in modifier && typeof modifier.slug === "string") {
+                    ui.notifications.error(`Unsupported modifier object (slug: ${modifier.slug}) passed`);
+                }
+                return false;
+            })
+            .map((m) => m.clone());
+        super(slug, baseModifiers.concat(modifiers), rollOptions);
+    }
+}
+
 interface ModifierObjectParams extends RawModifier {
-    name?: string;
     change?: ChangeModel | null;
     alterations?: DamageAlteration[];
 }
 
-export { ModifierPTR2e };
+export { ModifierPTR2e, StatisticModifier, CheckModifier };
 export type {
     ModifierAdjustment,
     RawModifier,

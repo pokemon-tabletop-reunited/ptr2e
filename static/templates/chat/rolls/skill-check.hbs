@@ -1,4 +1,7 @@
 <section class="skill-roll {{#if (gt degreeOfSuccess 0)}}success{{else}}failure{{/if}}">
+    <header class="breakdown">
+        {{{breakdown}}}
+    </header>
     {{{inner}}}
     <footer>
         {{#if (gt degreeOfSuccess 0)}}
@@ -7,6 +10,11 @@
             <p class="dos failure">{{abs degreeOfSuccess}} Degrees of Failure</p>
         {{/if}}
     </footer>
+    {{#if notes}}
+        <section class="notes">
+            {{{notes}}}
+        </section>
+    {{/if}}
     {{#if luckRoll}}
         <section class="luck mt-1">
             {{{innerLuck}}}

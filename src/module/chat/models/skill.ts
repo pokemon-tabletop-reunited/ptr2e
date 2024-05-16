@@ -2,6 +2,7 @@ import { ActorPTR2e } from "@actor";
 import { ChatMessagePTR2e } from "@chat";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
+import { CheckRoll } from "@system/rolls/check-roll.ts";
 
 interface SkillMessageSystem
     extends foundry.abstract.TypeDataModel,
@@ -11,17 +12,17 @@ interface SkillMessageSystem
     context: {
         actor?: ActorPTR2e;
         skill?: SkillPTR2e;
-        roll?: Rolled<Roll>;
-        luckRoll?: Rolled<Roll> | null;
+        roll?: Rolled<CheckRoll>;
+        luckRoll?: Rolled<CheckRoll> | null;
         appliedLuck?: boolean;
     } | null;
 }
 
 type SkillMessageSchema = {
-    roll: foundry.data.fields.JSONField<Rolled<Roll>, true, false, false>;
+    roll: foundry.data.fields.JSONField<Rolled<CheckRoll>, true, false, false>;
     origin: foundry.data.fields.JSONField<ActorPTR2e["_source"], true, false, false>;
     slug: SlugField<true, false, false>;
-    luckRoll: foundry.data.fields.JSONField<Rolled<Roll>, true, true, false>;
+    luckRoll: foundry.data.fields.JSONField<Rolled<CheckRoll>, true, true, false>;
     appliedLuck: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
 };
 
@@ -60,7 +61,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
 
         let roll;
         try {
-            roll = Roll.fromJSON(this._source.roll) as Rolled<Roll>;
+            roll = Roll.fromJSON(this._source.roll) as Rolled<CheckRoll>;
         } catch (error: any) {
             Hooks.onError("SkillMessageSystem#roll", error, { log: "error", data: this._source });
         }
@@ -68,7 +69,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
         let luckRoll;
         try {
             if (this._source.luckRoll)
-                luckRoll = Roll.fromJSON(this._source.luckRoll) as Rolled<Roll>;
+                luckRoll = Roll.fromJSON(this._source.luckRoll) as Rolled<CheckRoll>;
             else luckRoll = null;
         } catch (error: any) {
             Hooks.onError("SkillMessageSystem#luckRoll", error, {
@@ -132,7 +133,8 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
                 isPrivate,
                 degreeOfSuccess: context.degreeOfSuccess,
                 luckRoll: context.luckRoll?.total,
-                appliedLuck: this._source.appliedLuck
+                appliedLuck: this._source.appliedLuck,
+                breakdown: context.roll.data.breakdown,
             });
         })();
 

@@ -4,7 +4,11 @@ import { TokenFlagsPTR2e } from "@module/canvas/token/data.ts";
 import { ScenePTR2e } from "../scene.ts";
 
 class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
-
+    get playersCanSeeName(): boolean {
+        const anyoneCanSee: TokenDisplayMode[] = [CONST.TOKEN_DISPLAY_MODES.ALWAYS, CONST.TOKEN_DISPLAY_MODES.HOVER];
+        const nameDisplayMode = this.displayName;
+        return anyoneCanSee.includes(nameDisplayMode) || this.actor?.alliance === "party";
+    }
 }
 
 interface TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {

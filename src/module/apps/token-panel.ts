@@ -267,7 +267,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
                 registerActorEvents(member);
             }
         }
-        if (partId === "attacks") {
+        if (partId === "attack-slots" || partId === "other-attacks") {
             for (const element of htmlQueryAll(htmlElement, ".attack")) {
                 const rollable = htmlQuery(element, ".rollable");
                 if (rollable) {
@@ -299,6 +299,19 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
                     if (!attack) return;
 
                     return attack.item.toChat();
+                });
+            }
+        }
+        if(partId === "skills") {
+            for(const element of htmlQueryAll(htmlElement, ".skill .rollable")) {
+                element.addEventListener("click", async (event) => {
+                    const slug = ((event.currentTarget as HTMLElement).parentElement as HTMLElement).dataset.slug;
+                    if(!slug) return;
+
+                    const skill = this.token!.actor!.system.skills.get(slug);
+                    if(!skill) return;
+
+                    return skill.roll();
                 });
             }
         }

@@ -2844,6 +2844,113 @@ body.theme-dark .sheet a.content-link {
 .application.sheet.active-effect-sheet .window-content footer.sheet-footer button {
   flex: 0 0 48%;
 }
+.application.sheet.modifier-popup .window-content {
+  padding: 0.5rem;
+}
+.application.sheet.modifier-popup main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+.application.sheet.modifier-popup main fieldset {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 1rem;
+  flex-wrap: nowrap;
+  height: 100%;
+  background: var(--appv2-background);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+.application.sheet.modifier-popup main fieldset legend {
+  font-size: var(--font-size-15);
+  font-weight: bold;
+}
+.application.sheet.modifier-popup main fieldset header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.25rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup main fieldset header .label {
+  flex: 0 0 50%;
+}
+.application.sheet.modifier-popup main fieldset header .item-controls {
+  flex: 0 0 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 4px;
+}
+.application.sheet.modifier-popup main fieldset article {
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.modifier-popup main fieldset article section {
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.modifier-popup main fieldset.skill-challenge-rating article {
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+.application.sheet.modifier-popup main fieldset.skill-challenge-rating article label {
+  flex: 0 0 40%;
+}
+.application.sheet.modifier-popup main fieldset.skill-challenge-rating article select {
+  flex: 0 0 55%;
+}
+.application.sheet.modifier-popup main fieldset .modifier {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.5rem 0.25rem;
+  text-align: center;
+}
+.application.sheet.modifier-popup main fieldset .modifier .mod {
+  flex: 0 0 40%;
+}
+.application.sheet.modifier-popup main fieldset .modifier .value {
+  flex: 0 0 40%;
+}
+.application.sheet.modifier-popup main fieldset .modifier .exclude {
+  flex: 0 0 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.application.sheet.modifier-popup main fieldset .modifier .exclude input {
+  align-content: center;
+}
+.application.sheet.modifier-popup main fieldset .modifier.ignored input {
+  --checkbox-checked-color: #666;
+}
+.application.sheet.modifier-popup main fieldset div.modifier {
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup main fieldset div.modifier:last-child {
+  border-bottom: unset;
+}
+.application.sheet.modifier-popup main fieldset section.modifier-panel {
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup main footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.application.sheet.modifier-popup main footer button {
+  flex: 0 0 60%;
+}
 .application.sheet input[type="color"] {
   border-color: var(--color-input-border-color, #000);
 }

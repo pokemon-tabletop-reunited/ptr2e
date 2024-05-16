@@ -22,6 +22,7 @@ import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { default as Skills } from "./skills.ts";
+import { CheckRoll } from "@system/rolls/check-roll.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -72,6 +73,11 @@ export const PTRCONFIG = {
             character: CharacterCombatantSystem,
             round: RoundCombatantSystem
         },
+    },
+    Dice: {
+        rolls: [
+            CheckRoll
+        ]
     },
     Folder: {
         documentClass: FolderPTR2e,

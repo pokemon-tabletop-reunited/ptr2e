@@ -18,6 +18,8 @@ import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
 import { MovePTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
+import { CustomSkill } from "@module/data/models/skill.ts";
+import { Statistic } from "@system/statistics/statistic.ts";
 
 type ActorParty = {
     owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -28,6 +30,10 @@ class ActorPTR2e<
     TSystem extends ActorSystemPTR2e = ActorSystemPTR2e,
     TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
 > extends Actor<TParent, TSystem> {
+    get alliance(): string {
+        return "";
+    }
+
     get traits() {
         return this.system.traits;
     }
@@ -124,6 +130,7 @@ class ActorPTR2e<
                 }, 10), // 10ms also handles separate module executions
             },
             afflictions: { data: [], ids: new Set() },
+            rollNotes: {},
         };
 
         this._party = null;
@@ -186,27 +193,36 @@ class ActorPTR2e<
 
         super.prepareDerivedData();
 
-        this.attacks.slots = this.system.slots;
-        this.attacks.actions = Array.fromRange(this.attacks.slots).reduce((acc, i) => ({ ...acc, [i]: null }), {});
+        this.skills = this.prepareSkills();
 
-        for(const attack of this.actions.attack) {
-            if(attack.free) continue;
+        this.attacks.slots = this.system.slots;
+        this.attacks.actions = Array.fromRange(this.attacks.slots).reduce(
+            (acc, i) => ({ ...acc, [i]: null }),
+            {}
+        );
+
+        for (const attack of this.actions.attack) {
+            if (attack.free) continue;
 
             const item = attack.item;
-            if(item.type === "move") {
+            if (item.type === "move") {
                 const move = item as MovePTR2e;
                 const primaryAttack = move.system.attack;
-                if(primaryAttack.slug !== attack.slug && primaryAttack.slot !== null && this.attacks.actions[primaryAttack.slot]?.slug === primaryAttack.slug) {
+                if (
+                    primaryAttack.slug !== attack.slug &&
+                    primaryAttack.slot !== null &&
+                    this.attacks.actions[primaryAttack.slot]?.slug === primaryAttack.slug
+                ) {
                     attack.free = true;
                 }
             }
 
-            if(attack.slot === null) {
+            if (attack.slot === null) {
                 this.attacks.available.push(attack);
                 continue;
             }
-            if(this.attacks.actions[attack.slot] !== null) {
-                if(this.attacks.actions[attack.slot].slug !== attack.slug) {
+            if (this.attacks.actions[attack.slot] !== null) {
+                if (this.attacks.actions[attack.slot].slug !== attack.slug) {
                     this.attacks.available.push(this.attacks.actions[attack.slot]);
                 }
                 continue;
@@ -247,7 +263,10 @@ class ActorPTR2e<
                 })
             );
             for (const statusId of effect.statuses) this.statuses.add(statusId);
-            if(!effect.changes.length && effect.type === "affliction") afflictions.push(effect as ActiveEffectPTR2e<ActorPTR2e, AfflictionActiveEffectSystem>);
+            if (!effect.changes.length && effect.type === "affliction")
+                afflictions.push(
+                    effect as ActiveEffectPTR2e<ActorPTR2e, AfflictionActiveEffectSystem>
+                );
         }
         changes.sort((a, b) => a.priority! - b.priority!);
 
@@ -283,6 +302,40 @@ class ActorPTR2e<
         return effectiveness;
     }
 
+    private prepareSkills(): Record<string, Statistic> {
+        const skills = {} as Record<string, Statistic>;
+        for (const skill of this.system.skills) {
+            const domains = [
+                "all",
+                "skill-check",
+                `${skill.slug}`,
+                `${skill.slug}-check`,
+                skill.group ? [`${skill.group}-based`, `${skill.group}-based-check`] : [],
+            ].flat();
+
+            const label = (() => {
+                const baseKey = skill.group
+                    ? `PTR2E.Skills.${skill.group}.${skill.slug}`
+                    : `PTR2E.Skills.${skill.slug}`;
+                if (game.i18n.has(baseKey + ".label"))
+                    return game.i18n.localize(baseKey + ".label");
+                const customSkill = game.ptr.data.skills.get(skill.slug) as CustomSkill;
+                return customSkill?.label ?? Handlebars.helpers.formatSlug(skill.slug);
+            })();
+
+            const statistic = new Statistic(this, {
+                slug: skill.slug,
+                label,
+                domains,
+                modifiers: [],
+                check: { type: "skill-check" },
+            });
+
+            skills[skill.slug] = statistic;
+        }
+        return skills;
+    }
+
     /**
      * Toggle the perk tree for this actor
      * @param {boolean} active
@@ -293,8 +346,28 @@ class ActorPTR2e<
         return;
     }
 
-    getRollOptions(): string[] {
-        return [];
+    getRollOptions(domains: string[] = []): string[] {
+        const withAll = Array.from(new Set(["all", ...domains]));
+        const { rollOptions } = this;
+        const toReturn: Set<string> = new Set();
+
+        for (const domain of withAll) {
+            for (const [option, value] of Object.entries(
+                rollOptions.getFromDomain(domain as keyof RollOptions) ?? {}
+            )) {
+                if (value) toReturn.add(option);
+            }
+        }
+
+        return Array.from(toReturn);
+    }
+
+    /** Get roll options from this actor's effects, traits, and other properties */
+    getSelfRollOptions(prefix: "self" | "target" | "origin" = "self"): string[] {
+        const { rollOptions } = this;
+        return Object.keys(rollOptions.all).flatMap((o) =>
+            o.startsWith("self:") && rollOptions.all[o] ? o.replace(/^self/, prefix) : []
+        );
     }
 
     override getRollData(): Record<string, unknown> {
@@ -378,7 +451,7 @@ class ActorPTR2e<
     }
 
     async onEndActivation() {
-        if(!this.synthetics.afflictions.data.length) return;
+        if (!this.synthetics.afflictions.data.length) return;
         const afflictions = this.synthetics.afflictions.data.reduce<{
             toDelete: string[];
             toUpdate: Partial<ActiveEffectPTR2e<ActorPTR2e>["_source"]>[];
@@ -422,7 +495,7 @@ class ActorPTR2e<
 
         const sortedGroups = Object.entries(afflictions.groups).sort(
             ([a], [b]) => Number(a) - Number(b)
-        )
+        );
         function getFormula(type: "healing" | "damage" | "both"): string {
             switch (type) {
                 case "healing":
@@ -438,9 +511,9 @@ class ActorPTR2e<
         const notes: string[][] = [];
 
         for (const [_, group] of sortedGroups) {
-            if(!group.type) continue;
-            if(group.type === "healing" && newHealth === this.system.health.max) continue;
-            if(group.type && newHealth === 0) break;
+            if (!group.type) continue;
+            if (group.type === "healing" && newHealth === this.system.health.max) continue;
+            if (group.type && newHealth === 0) break;
 
             const groupFormula = group.afflictions.map(({ formula }) => formula).join(" + ");
             const rollFormula = getFormula(group.type);
@@ -458,31 +531,35 @@ class ActorPTR2e<
             const numberResult = Number(result);
             if (!Number.isNaN(numberResult)) {
                 notes.push(
-                    await this._generateHealthChangeNotes(group, { old: newHealth, new: numberResult })
+                    await this._generateHealthChangeNotes(group, {
+                        old: newHealth,
+                        new: numberResult,
+                    })
                 );
                 newHealth = numberResult;
             }
         }
 
-        const updates: DeepPartial<ActorPTR2e['_source']> = {}
-        const validAfflictionUpdates = afflictions.toUpdate.filter(update => update._id);
-        if(validAfflictionUpdates.length > 0) updates.effects = validAfflictionUpdates as foundry.documents.ActorSource['effects']
-        
+        const updates: DeepPartial<ActorPTR2e["_source"]> = {};
+        const validAfflictionUpdates = afflictions.toUpdate.filter((update) => update._id);
+        if (validAfflictionUpdates.length > 0)
+            updates.effects = validAfflictionUpdates as foundry.documents.ActorSource["effects"];
+
         const oldHealth = this.system.health.value;
-        if(newHealth !== oldHealth) {
+        if (newHealth !== oldHealth) {
             updates.system = {
                 health: {
-                    value: newHealth
-                }
-            }
+                    value: newHealth,
+                },
+            };
         }
 
-        if(afflictions.toDelete.length !== 0) {
+        if (afflictions.toDelete.length !== 0) {
             await this.deleteEmbeddedDocuments("ActiveEffect", afflictions.toDelete);
         }
-        if(!fu.isEmpty(updates)) {
+        if (!fu.isEmpty(updates)) {
             await this.update(updates);
-            if(newHealth !== oldHealth) {
+            if (newHealth !== oldHealth) {
                 //@ts-expect-error
                 await ChatMessagePTR2e.create({
                     type: "damage-applied",
@@ -490,11 +567,10 @@ class ActorPTR2e<
                         notes,
                         damageApplied: oldHealth - newHealth,
                         target: this.uuid,
-                    }
-                })
+                    },
+                });
             }
-        }
-        else if(notes.length > 0) {
+        } else if (notes.length > 0) {
             //@ts-expect-error
             await ChatMessagePTR2e.create({
                 type: "damage-applied",
@@ -503,8 +579,8 @@ class ActorPTR2e<
                     damageApplied: 0,
                     undone: true,
                     target: this.uuid,
-                }
-            })
+                },
+            });
         }
     }
 
@@ -522,18 +598,21 @@ class ActorPTR2e<
 
         for (const { formula, affliction } of group.afflictions) {
             if (!formula) continue;
-            const result = (await new Roll("@formula * @actor.system.health.max", {formula, actor: this}).roll()).total;
+            const result = (
+                await new Roll("@formula * @actor.system.health.max", {
+                    formula,
+                    actor: this,
+                }).roll()
+            ).total;
             output.push(`${affliction.parent.link}: ${formula} (${result})`);
         }
 
         const healthChange = health.new - health.old;
-        if(health.new > health.old ) {
+        if (health.new > health.old) {
             output.push(`<span class='damage'>Healed for ${healthChange} health</span>`);
-        }
-        else if(health.new < health.old) {
+        } else if (health.new < health.old) {
             output.push(`<span class='damage'>Took ${Math.abs(healthChange)} damage</span>`);
-        }
-        else {
+        } else {
             output.push(`<span class='damage'>No change in health</span>`);
         }
 
@@ -544,15 +623,20 @@ class ActorPTR2e<
      * Delete all effects that should be deleted when combat ends
      */
     onEndCombat() {
-        const applicable = this.effects.filter(s => (s as ActiveEffectPTR2e<this>).system.removeAfterCombat);
-        this.deleteEmbeddedDocuments("ActiveEffect", applicable.map(s => s.id));
+        const applicable = this.effects.filter(
+            (s) => (s as ActiveEffectPTR2e<this>).system.removeAfterCombat
+        );
+        this.deleteEmbeddedDocuments(
+            "ActiveEffect",
+            applicable.map((s) => s.id)
+        );
     }
 
     protected override _onEmbeddedDocumentChange(): void {
         super._onEmbeddedDocumentChange();
 
         // Send any accrued warnings to the console
-        this.synthetics.preparationWarnings.flush(); 
+        this.synthetics.preparationWarnings.flush();
     }
 
     protected override async _preCreate(
@@ -595,7 +679,9 @@ interface ActorPTR2e<
         slots: number;
         actions: Record<number, AttackPTR2e>;
         available: AttackPTR2e[];
-    }
+    };
+
+    skills: Record<string, Statistic>;
 }
 
 type ActorFlags2e = ActorFlags & {

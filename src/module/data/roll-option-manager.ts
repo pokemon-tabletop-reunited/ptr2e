@@ -14,6 +14,10 @@ export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {
         return this.options.all;
     }
 
+    public getFromDomain(domain: keyof RollOptions): Record<string, boolean> {
+        return this.options[domain];
+    }
+
     private document: TParent;
 
     constructor(document: TParent) {
