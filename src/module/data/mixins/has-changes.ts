@@ -14,7 +14,7 @@ export default function HasChanges<BaseClass extends TemplateConstructor>(baseCl
             return {
                 ...super.defineSchema(),
 
-                changes: new fields.ArrayField(new fields.TypedSchemaField(ChangeModelTypes()))
+                changes: new fields.ArrayField(new fields.TypedSchemaField(ChangeModelTypes(), { required: true, initial: [], nullable: false }))
             };
         }
     }

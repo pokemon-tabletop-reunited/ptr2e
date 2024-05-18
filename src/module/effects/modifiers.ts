@@ -393,7 +393,7 @@ class AttackCheckModifier extends CheckModifier {
                     acc[modifier.type][modifier.method] += modifier.modifier;
                     break;
                 case "percentile":
-                    acc[modifier.type][modifier.method] *= 1 + (modifier.modifier >= 1 ? modifier.modifier / 100 : modifier.modifier);
+                    acc[modifier.type][modifier.method] *= (modifier.modifier >= 1 ? modifier.modifier / 100 : modifier.modifier);
                     break;
             }
             return acc;

@@ -646,7 +646,7 @@ class ActorPTR2e<
         const context = await this.getRollContext(params);
         const rangeIncrement = context.target?.rangeIncrement ?? null;
 
-        const appliesTo = context.target?.actor?.uuid ?? null;
+        const appliesTo = context.target?.token?.actor?.uuid ?? (context.target?.actor?.id ? context.target.actor.uuid : null) ?? null;
 
         const rangePenalty = rangeIncrement ? new ModifierPTR2e({
             label: "Range Penalty",
@@ -824,7 +824,7 @@ class ActorPTR2e<
 
     protected getContextualClone(
         rollOptions: string[],
-        ephemeralEffects: EffectSourcePTR2e[]
+        ephemeralEffects: EffectSourcePTR2e[],
     ): this {
         const rollOptionsAll = rollOptions.reduce(
             (options: Record<string, boolean>, option: string) => ({ ...options, [option]: true }),

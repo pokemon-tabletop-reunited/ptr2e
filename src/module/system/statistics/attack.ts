@@ -54,7 +54,7 @@ class AttackStatistic extends Statistic {
         const itemTraits = item.traits!;
         const meleeOrRanged = attack.isMelee ? "melee" : "ranged";
 
-        data.domains = R.uniq(
+        data.domains = data.check!.domains = R.uniq(
             [
                 `all`,
                 `check`,
@@ -76,6 +76,7 @@ class AttackStatistic extends Statistic {
                         label: game.i18n.localize("PTR2E.Modifiers.power"),
                         modifier: attack.power!,
                         method: "base",
+                        type: "damage"
                     })
                 );
             } else {
@@ -88,6 +89,7 @@ class AttackStatistic extends Statistic {
                     label: game.i18n.localize(`PTR2E.Modifiers.${attack.category}Attack`),
                     modifier: actor.attributes[attack.category === "physical" ? "atk" : "spa"].value,
                     method: "flat",
+                    type: "damage"
                 })
             );
         }
@@ -122,9 +124,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         this.parent = parent;
         data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
 
-        const checkDomains = new Set(R.compact(["check", data.check.domains].flat()));
-
-        data.check.domains = Array.from(checkDomains);
+        data.check.domains = Array.from(new Set(data.check.domains ?? []));
         this.domains = R.uniq(R.compact([data.domains, data.check.domains].flat()));
 
         this.label = data.check?.label

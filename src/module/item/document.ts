@@ -18,7 +18,7 @@ class ItemPTR2e<
 
     declare _sheet: ItemSheetPTR2e<this> | null;
 
-    override get sheet() {
+    override get sheet(): ItemSheetPTR2e<this> {
         return super.sheet as ItemSheetPTR2e<this>;
     }
 
