@@ -3,7 +3,7 @@ import { BaseStatistic } from "./base.ts";
 import { StatisticCheckData, StatisticData, StatisticDifficultyClassData } from "./data.ts";
 import { CheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
-import { CheckRoll, CheckRollCallback, CheckType } from "@system/rolls/check-roll.ts";
+import { AttackRollCallback, CheckRoll, CheckRollCallback, CheckType } from "@system/rolls/check-roll.ts";
 import * as R from "remeda";
 import {
     extractModifierAdjustments,
@@ -24,7 +24,7 @@ class Statistic extends BaseStatistic {
 
     config: RollOptionConfig;
 
-    #check?: StatisticCheck<this>;
+    #check?: BaseStatisticCheck<any, any, this>;
 
     constructor(actor: ActorPTR2e, data: StatisticData, config: RollOptionConfig = {}) {
         data.modifiers ??= [];
@@ -58,7 +58,7 @@ class Statistic extends BaseStatistic {
         this.data.dc ??= { domains: [`${this.slug}-dc`] };
     }
 
-    get check(): StatisticCheck<this> {
+    get check(): BaseStatisticCheck<any, any, this> {
         return (this.#check ??= new StatisticCheck(this, this.data, this.config));
     }
 
@@ -168,7 +168,7 @@ class Statistic extends BaseStatistic {
     // }
 }
 
-class StatisticCheck<TParent extends Statistic = Statistic> {
+class StatisticCheck<TParent extends Statistic = Statistic> implements BaseStatisticCheck<StatisticRollParameters, Rolled<CheckRoll>, TParent> {
     parent: TParent;
     type: CheckType;
     label: string;
@@ -229,7 +229,7 @@ class StatisticCheck<TParent extends Statistic = Statistic> {
         return this.parent.createRollOptions(this.domains, args);
     }
 
-    async roll(args: StatisticRollParameters = {}): Promise<Rolled<CheckRoll> | Promise<Rolled<CheckRoll>[]> | null> {
+    async roll(args: StatisticRollParameters = {}): Promise<Rolled<CheckRoll> | null> {
         // Use a CheckDC Object
         args.dc =
             typeof args.dc === "number" ? { value: Math.trunc(args.dc) || 0 } : args.dc ?? null;
@@ -307,7 +307,7 @@ class StatisticCheck<TParent extends Statistic = Statistic> {
             { modifiers: this.modifiers },
             extraModifiers
         );
-        const roll = await CheckPTR2e.roll(check, context, null, args.callback);
+        const roll = await CheckPTR2e.roll(check, context, args.callback);
 
         return roll;
     }
@@ -320,7 +320,21 @@ class StatisticCheck<TParent extends Statistic = Statistic> {
     }
 }
 
-interface StatisticRollParameters {
+interface BaseStatisticCheck<TRollParam, TRollResult, TParent extends Statistic = Statistic> {
+    parent: TParent;
+    type: CheckType;
+    label: string;
+    domains: string[];
+    mod: number;
+    modifiers: ModifierPTR2e[];
+
+    get actor(): ActorPTR2e;
+    createRollOptions(args: RollOptionConfig): Set<string>;
+    roll(args: TRollParam): Promise<TRollResult | null>;
+    get breakdown(): string;
+}
+
+interface StatisticRollParameters<TCallback extends CheckRollCallback | AttackRollCallback = CheckRollCallback>{
     /** A string of some kind to identify the roll: will be included in `CheckRoll#options` */
     identifier?: string;
     /** The slug of an action of which this check is a constituent roll */
@@ -368,7 +382,11 @@ interface StatisticRollParameters {
     /** Event that caused this roll to occur */
     event?: Event;
     /** Callback called when the roll occurs. */
-    callback?: CheckRollCallback;
+    callback?: TCallback;
+}
+
+interface AttackStatisticRollParameters extends StatisticRollParameters<AttackRollCallback> {
+    consumeAmmo?: boolean 
 }
 
 interface CheckDCReference {
@@ -384,4 +402,4 @@ interface RollOptionConfig {
 }
 
 export { Statistic, StatisticCheck };
-export type { StatisticRollParameters, RollOptionConfig }
+export type { StatisticRollParameters, RollOptionConfig, AttackStatisticRollParameters, BaseStatisticCheck}

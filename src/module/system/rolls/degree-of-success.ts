@@ -1,3 +1,4 @@
+import { CheckContext } from "@system/data.ts";
 import { CheckRoll } from "./check-roll.ts";
 
 class DegreeOfSuccess {
@@ -13,9 +14,7 @@ class DegreeOfSuccess {
     /** The total of the roll including modifiers */
     readonly rollTotal: number;
 
-    constructor(
-        roll: Rolled<CheckRoll> | RollBrief
-    ) {
+    constructor(roll: Rolled<CheckRoll> | RollBrief) {
         if (roll instanceof Roll) {
             this.dieResult =
                 (roll.isDeterministic
@@ -35,8 +34,18 @@ class DegreeOfSuccess {
 
     #calculateDegreeOfSuccess(): number {
         return this.rollTotal > 0
-                ? Math.ceil(this.rollTotal / -10) - 1
-                : Math.floor(this.rollTotal / -10) + 1
+            ? Math.ceil(this.rollTotal / -10) - 1
+            : Math.floor(this.rollTotal / -10) + 1;
+    }
+
+    static create(
+        roll: Rolled<CheckRoll>,
+        context?: CheckContext
+    ): DegreeOfSuccess | null {
+        // TODO: Implement
+        const dos = new DegreeOfSuccess(roll);
+        roll.options.degreeOfSuccess = dos.value;
+        return dos;
     }
 }
 

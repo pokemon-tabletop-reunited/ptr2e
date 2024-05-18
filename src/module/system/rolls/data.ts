@@ -92,6 +92,8 @@ interface CheckRollContext extends BaseRollContext {
     damaging?: boolean;
     /** Is the roll a reroll? */
     isReroll?: boolean;
+    /** Omitted Subrolls */
+    omittedSubrolls?: Set<'accuracy' | 'crit' | 'damage'>;
 }
 
 export type { AttackRollParams, BaseRollContext, CheckRollContext, DamageRollParams, RollParameters, RollData};

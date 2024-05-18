@@ -1,20 +1,19 @@
 import { AttackPTR2e } from "@data";
-import { RollOptionConfig, Statistic, StatisticCheck, StatisticRollParameters } from "./statistic.ts";
+import { AttackStatisticRollParameters, BaseStatisticCheck, RollOptionConfig, Statistic } from "./statistic.ts";
 import { StatisticData } from "./data.ts";
 import * as R from "remeda";
-import { ModifierPTR2e } from "@module/effects/modifiers.ts";
-import { CheckRoll } from "@system/rolls/check-roll.ts";
+import { CheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
+import { AttackRollResult } from "@system/rolls/check-roll.ts";
 import { ItemPTR2e, ItemSystemsWithActions } from "@item";
 import { ActorPTR2e } from "@actor";
 import { CheckContext } from "@system/data.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { extractNotes } from "src/util/rule-helpers.ts";
+import { extractModifierAdjustments, extractModifiers, extractNotes } from "src/util/rule-helpers.ts";
 import { CheckRollContext } from "@system/rolls/data.ts";
-import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CheckPTR2e } from "@system/check.ts";
 
 type AttackStatisticData = StatisticData & Required<Pick<StatisticData, "defferedValueParams" | 'modifiers' | 'domains' | 'rollOptions'>>;
-type AttackRollParameters = StatisticRollParameters & { consumeAmmo?: boolean };
+type AttackRollParameters = AttackStatisticRollParameters
 
 class AttackStatistic extends Statistic {
     declare data: AttackStatisticData;
@@ -111,9 +110,58 @@ class AttackStatistic extends Statistic {
     }
 }
 
-class AttackCheck<Statistic extends AttackStatistic> extends StatisticCheck<Statistic> {
-    constructor(statistic: Statistic, data: AttackStatisticData, config: RollOptionConfig) {
-        super(statistic, data, config);
+class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements BaseStatisticCheck<AttackRollParameters, AttackRollResult['rolls'][], TParent> {
+    parent: TParent;
+    type: "attack-roll";
+    label: string;
+    domains: string[];
+    mod: number;
+    modifiers: ModifierPTR2e[];
+
+    constructor(parent: TParent, data: StatisticData, config: RollOptionConfig = {}) {
+        this.parent = parent;
+        data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
+
+        const checkDomains = new Set(R.compact(["check", data.check.domains].flat()));
+
+        data.check.domains = Array.from(checkDomains);
+        this.domains = R.uniq(R.compact([data.domains, data.check.domains].flat()));
+
+        this.label = data.check?.label
+            ? game.i18n.localize(data.check.label) || this.parent.label
+            : this.parent.label;
+
+        const parentModifiers = parent.modifiers.map((modifier) => modifier.clone());
+        const checkOnlyModifiers = [
+            data.check?.modifiers ?? [],
+            extractModifiers(parent.actor.synthetics, data.check?.domains ?? []),
+        ]
+            .flat()
+            .map((modifier) => {
+                modifier.adjustments.push(
+                    ...extractModifierAdjustments(
+                        parent.actor.synthetics.modifierAdjustments,
+                        parent.domains,
+                        this.parent.slug
+                    )
+                );
+                return modifier;
+            });
+
+        const rollOptions = parent.createRollOptions(this.domains, config);
+        this.modifiers = [
+            ...parentModifiers,
+            ...checkOnlyModifiers.map((modifier) => modifier.clone({ test: rollOptions })),
+        ];
+        this.mod = new StatisticModifier(this.label, this.modifiers, rollOptions).totalModifier;
+    }
+
+    get actor() {
+        return this.parent.actor;
+    }
+
+    createRollOptions(args: RollOptionConfig = {}): Set<string> {
+        return this.parent.createRollOptions(this.domains, args);
     }
 
     get item(): ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> {
@@ -126,7 +174,7 @@ class AttackCheck<Statistic extends AttackStatistic> extends StatisticCheck<Stat
         return false;
     }
 
-    override async roll(args: AttackRollParameters = {}): Promise<Rolled<CheckRoll> | Promise<Rolled<CheckRoll>[]> | null> {
+    async roll(args: AttackRollParameters = {}): Promise<AttackRollResult['rolls'][] | null> {
         const options: Set<string> = new Set(args.extraRollOptions ?? []);
         //const consumeAmmo = args.consumeAmmo ?? this.itemConsumesAmmo;
         //TODO: If ammo is consumed, check if there is ammo to consume
@@ -135,17 +183,27 @@ class AttackCheck<Statistic extends AttackStatistic> extends StatisticCheck<Stat
             if(args.targets) return args.targets.map(t => ({actor: t}));
             return [...game.user.targets ?? []].map(t => ({actor: t.actor as ActorPTR2e, token: t as TokenPTR2e}));
         })()
-        const contexts: Record<ActorPTR2e['id'], CheckContext<ActorPTR2e, AttackCheck<Statistic>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>> = {}
+
+        // Get context without target for basic information 
+        const context = await this.actor.getCheckContext({
+            attack: this.attack,
+            domains: this.domains,
+            statistic: this,
+            options,
+            traits: args.traits ?? this.item.traits,
+        }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>;
+
+        const contexts: Record<ActorUUID, CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>> = {}
         let anyValidTargets = false;
         for(const target of targets) {
-            const currContext = contexts[target.actor.id] = await this.actor.getCheckContext({
+            const currContext = contexts[target.actor.uuid] = await this.actor.getCheckContext({
                 attack: this.attack,
                 domains: this.domains,
                 statistic: this,
                 target: target,
                 options,
                 traits: args.traits ?? this.item.traits,
-            }) as CheckContext<ActorPTR2e, AttackCheck<Statistic>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
+            }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
 
             if(this.attack.isRanged && typeof currContext.target?.rangeIncrement === "number") {
                 const rip = currContext.target!.rangeIncrement!;
@@ -172,31 +230,45 @@ class AttackCheck<Statistic extends AttackStatistic> extends StatisticCheck<Stat
             return null;
         }
 
-        const token =
-            args.token ??
-            (this.actor.getActiveTokens(false, true).shift() as TokenDocumentPTR2e | null);
+        const notes = extractNotes(context.self.actor.synthetics.rollNotes, this.domains);
 
         //TODO: Apply just-in-time roll options from changes
-        const checkContext: CheckRollContext & {contexts: Record<string, CheckContext>} = {
+
+        const checkContext: CheckRollContext & {contexts: Record<ActorUUID, CheckContext>} = {
             type: "attack-roll",
             identifier: args.identifier ?? `${this.item.slug}.${this.attack.slug}`,
             action: args.action || this.label || this.attack.name,
             title: args.title || this.label || this.attack.name,
-            actor: this.actor,
-            token,
-            contexts,
-            item: args.item ?? this.item,
+            actor: context.self.actor,
+            token: context.self.token,
+            item: context.self.item,
+            options: context.options,
+            notes,
+            contexts: contexts as Record<ActorUUID, CheckContext>,
             domains: this.domains,
             damaging: args.damaging,
             createMessage: args.createMessage ?? true,
+            skipDialog: args.skipDialog ?? false,
         }
+        const check = new CheckModifier(
+            this.parent.slug,
+            { modifiers: this.modifiers },
+            args.modifiers ?? []
+        );
 
-        const rolls = await CheckPTR2e.rolls(checkContext, args.event, args.callback);
+        const rolls = await CheckPTR2e.rolls(check, checkContext, args.callback);
         if(rolls?.length) {
             //TODO: Apply post-roll options from changes
         }
 
         return rolls;
+    }
+
+    get breakdown(): string {
+        return this.modifiers
+            .filter((m) => !m.ignored)
+            .map((m) => `${m.label}: ${m.signedValue}`)
+            .join(", ");
     }
 }
 

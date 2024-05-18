@@ -3,7 +3,7 @@ import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CheckRollContext } from "@system/rolls/data.ts";
 import TypeDataModel from "types/foundry/common/abstract/type-data.js";
-import { CheckRoll } from "../system/rolls/check-roll.ts";
+import { AttackRollResult, CheckRoll } from "../system/rolls/check-roll.ts";
 
 class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends ChatMessage<TSchema> {
     /** Get the actor associated with this chat message */
@@ -211,7 +211,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         if(type === "luck") {
             const luckRoll = await (async () => {
                 if('luckRoll' in context && context.luckRoll && context.luckRoll instanceof CheckRoll) return context.luckRoll;
-                return await CheckRoll.createFromData({type: "luck-roll"}).roll();
+                return await CheckRoll.createFromData({type: "luck-roll"})!.roll();
             })(); 
             const luckRollJson = luckRoll.toJSON();
             luckRollJson.data = luckRoll.data;
@@ -230,6 +230,13 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
             flavor,
             system
         });
+    }
+
+    static async createFromResults<TTypeDataModel extends TypeDataModel = TypeDataModel>(
+        _context: CheckRollContext & {notesList?: HTMLUListElement | null},
+        _results: AttackRollResult[]
+    ): Promise<ChatMessagePTR2e<TTypeDataModel> | undefined> {
+        return;
     }
 }
 

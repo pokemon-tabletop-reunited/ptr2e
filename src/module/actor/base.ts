@@ -19,7 +19,7 @@ import { ChatMessagePTR2e } from "@chat";
 import { ItemPTR2e, ItemSystemsWithActions, MovePTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
-import { Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
+import { BaseStatisticCheck, Statistic } from "@system/statistics/statistic.ts";
 import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
 import { extractEphemeralEffects } from "src/util/rule-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
@@ -638,7 +638,7 @@ class ActorPTR2e<
     }
 
     async getCheckContext<
-        TStatistic extends StatisticCheck,
+        TStatistic extends BaseStatisticCheck<any, any>,
         TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>,
     >(
         params: CheckContextParams<TStatistic, TItem>
@@ -646,11 +646,15 @@ class ActorPTR2e<
         const context = await this.getRollContext(params);
         const rangeIncrement = context.target?.rangeIncrement ?? null;
 
+        const appliesTo = context.target?.actor?.uuid ?? null;
+
         const rangePenalty = rangeIncrement ? new ModifierPTR2e({
             label: "Range Penalty",
-            slug: "range-penalty",
+            slug: `range-penalty-${appliesTo ?? fu.randomID()}`,
             modifier: Math.min(-(rangeIncrement * (rangeIncrement + 1) / 2), 0),
-            method: "stage"
+            method: "stage",
+            type: "accuracy",
+            appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
         }) : null
         if(rangePenalty) context.self.modifiers.push(rangePenalty);
 
@@ -658,7 +662,7 @@ class ActorPTR2e<
     }
 
     protected getRollContext<
-        TStatistic extends StatisticCheck,
+        TStatistic extends BaseStatisticCheck<any, any>,
         TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>,
     >(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
     protected async getRollContext(params: RollContextParams): Promise<RollContext<this>> {
