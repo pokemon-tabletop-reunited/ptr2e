@@ -394,13 +394,12 @@ class ActorPTR2e<
         return effects;
     }
 
-    //TODO: This should add any relevant modifiers
-    getEvasionStage() {
-        return this.system.battleStats.evasion.stage;
+    get evasionStage() {
+        return this.system.battleStats.evasion.stage + (this.system.modifiers["evasion"] ?? 0);
     }
-    //TODO: This should add any relevant modifiers
-    getAccuracyStage() {
-        return this.system.battleStats.accuracy.stage;
+
+    get accuracyStage() {
+        return this.system.battleStats.accuracy.stage + (this.system.modifiers["accuracy"] ?? 0);
     }
 
     getDefenseStat(attack: AttackPTR2e, critModifier: number) {
@@ -657,6 +656,19 @@ class ActorPTR2e<
             appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
         }) : null
         if(rangePenalty) context.self.modifiers.push(rangePenalty);
+
+        const evasionStages = context.target?.actor?.evasionStage ?? 0;
+        if(evasionStages !== 0) {
+            const evasionModifier = new ModifierPTR2e({
+                label: "Evasion Modifier",
+                slug: `evasion-modifier-${appliesTo ?? fu.randomID()}`,
+                modifier: evasionStages,
+                method: "stage",
+                type: "evasion",
+                appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
+            });
+            context.self.modifiers.push(evasionModifier);
+        }
 
         return { ...context};
     }

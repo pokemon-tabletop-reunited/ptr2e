@@ -148,6 +148,19 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
                 return modifier;
             });
 
+        const accuracyStages = this.actor.accuracyStage;
+        if(accuracyStages != 0) {
+            checkOnlyModifiers.push(
+                new ModifierPTR2e({
+                    slug: "accuracy",
+                    label: game.i18n.localize("PTR2E.Modifiers.accuracy"),
+                    modifier: accuracyStages,
+                    method: "stage",
+                    type: "accuracy"
+                })
+            );
+        }
+
         const rollOptions = parent.createRollOptions(this.domains, config);
         this.modifiers = [
             ...parentModifiers,

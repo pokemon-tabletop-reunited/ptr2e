@@ -22,7 +22,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
 
     declare parent: ActorPTR2e<this>;
 
-    modifiers: Record<string, { value: number; source: string; type: string } | undefined> = {};
+    modifiers: Record<string, number | undefined> = {};
 
     static override defineSchema() {
         const fields = foundry.data.fields;
@@ -113,11 +113,9 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 accuracy: new fields.SchemaField(getStatField("accuracy")),
                 critRate: new fields.SchemaField(getStatField("critRate")),
             }),
-            skills: new CollectionField(
-                new fields.EmbeddedDataField(SkillPTR2e),
-                "slug",
-                { initial: getInitialSkillList }
-            ),
+            skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e), "slug", {
+                initial: getInitialSkillList,
+            }),
             biology: new fields.ObjectField(),
             capabilities: new fields.ObjectField(),
             type: new fields.SchemaField({
@@ -204,6 +202,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
 
     override prepareBaseData(): void {
         super.prepareBaseData();
+        this._initializeModifiers();
         this._prepareSpeciesData();
 
         this.advancement.level = Math.floor(Math.cbrt(this.advancement.experience.current || 1));
@@ -213,15 +212,15 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
 
         //TODO: Change humanoid to ACE trait exclusively
         const isAce = this.parent.isHumanoid() || this.traits.has("ace");
-        const rvTotal = (isAce ? 400 : 110) + (10 * (this.advancement.level - 1))
+        const rvTotal = (isAce ? 400 : 110) + 10 * (this.advancement.level - 1);
         Object.defineProperty(this.advancement, "rvs", {
             value: {
                 total: rvTotal,
-                spent: 0
+                spent: 0,
             },
-            writable: true
+            writable: true,
         });
-        if(this.advancement.rvs.available === undefined) {
+        if (this.advancement.rvs.available === undefined) {
             Object.defineProperty(this.advancement.rvs, "available", {
                 get: () => this.advancement.rvs.total - this.advancement.rvs.spent,
             });
@@ -236,8 +235,8 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         for (const skill of this.skills) {
             skill.prepareBaseData();
         }
-        for(const skill of game.ptr.data.skills) {
-            if(!this.skills.has(skill.slug)) {
+        for (const skill of game.ptr.data.skills) {
+            if (!this.skills.has(skill.slug)) {
                 const newSkill = new SkillPTR2e(fu.duplicate(skill), { parent: this });
                 newSkill.prepareBaseData();
                 this.skills.set(newSkill.slug, newSkill);
@@ -247,6 +246,14 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         this.health.max = this.attributes.hp.value;
 
         this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
+    }
+
+    _initializeModifiers() {
+        this.modifiers = {
+            slots: 0,
+            accuracy: 0,
+            evasion: 0
+        };
     }
 
     _prepareSpeciesData() {
@@ -283,8 +290,8 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         super.prepareDerivedData();
         this.species?.prepareDerivedData?.();
 
-        if (this.modifiers["slots"]?.value) {
-            this.slots = (this._source.slots as number) + this.modifiers["slots"].value;
+        if (this.modifiers["slots"]) {
+            this.slots = (this._source.slots as number) + this.modifiers["slots"];
         }
     }
 
@@ -337,15 +344,7 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
     money: number;
     slots: number;
 
-    modifiers: Record<
-        string,
-        | {
-              value: number;
-              source: string;
-              type: string;
-          }
-        | undefined
-    >;
+    modifiers: Record<string, number | undefined>;
 
     _source: SourceFromSchema<ActorSystemSchema>;
 }

@@ -213,8 +213,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         const accuracyModifier = accuracyModifiers.reduce((acc, mod) => acc * mod, 1);
 
         // Step 3: Calculate stage accuracy modifiers
-        const originAccuracyStage = this.origin.getAccuracyStage();
-        const targetEvasionStage = target?.getEvasionStage() ?? 0;
+        const originAccuracyStage = this.origin.accuracyStage;
+        const targetEvasionStage = target?.evasionStage ?? 0;
         const adjustedStages = Math.clamp(originAccuracyStage - targetEvasionStage, -6, 6);
         const stageModifier = adjustedStages > 0 ? ((3 + adjustedStages) / 3) : (3 / (3 + Math.abs(adjustedStages)));
 
