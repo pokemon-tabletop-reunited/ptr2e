@@ -29,6 +29,8 @@ interface RawModifier {
     hideIfDisabled?: boolean;
     /** If this modifier should not show up in the prompt regardless of whether it's disabled */
     hidden?: boolean;
+    /** The method of application of this modifier */
+    method?: "base" | "flat" | "percentile" | "stage";
 }
 
 interface ModifierAdjustment {
@@ -77,6 +79,8 @@ class ModifierPTR2e implements RawModifier {
     /** If this modifier should not show up in the prompt regardless of whether it's disabled */
     hidden: boolean;
 
+    method: "base" | "flat" | "percentile" | "stage";
+
     /**
      * The "category" of modifier (a misnomer since bonuses and penalties aren't modifiers):
      * Recorded before adjustments in case of adjustment to zero
@@ -102,6 +106,7 @@ class ModifierPTR2e implements RawModifier {
         this.hideIfDisabled = args.hideIfDisabled ?? false;
         this.critical = args.critical ?? null;
         this.hidden = args.hidden ?? false;
+        this.method = args.method ?? "percentile";
         
         this.change = args.change ?? null;
         // Prevent upstream from blindly diving into recursion loops

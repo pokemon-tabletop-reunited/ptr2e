@@ -1,5 +1,6 @@
 import { ModifierPTR2e, RawModifier } from "@module/effects/modifiers.ts";
 import { CheckType } from "@system/rolls/check-roll.ts";
+import { DeferredValueParams } from "@module/effects/modifiers.ts";
 
 interface BaseStatisticData {
     /** An identifier such as "accounting" or "ember" */
@@ -9,6 +10,8 @@ interface BaseStatisticData {
     domains?: string[];
     /** Modifiers not retrieved from the actor's synthetics record */
     modifiers?: ModifierPTR2e[];
+    /** Parameters for deferred value resolution */
+    defferedValueParams?: DeferredValueParams;
 }
 
 /** Used to build the actual statistic object */

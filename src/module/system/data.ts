@@ -1,19 +1,55 @@
 import { ActorPTR2e } from "@actor";
 import { StatisticCheck } from "./statistics/statistic.ts";
-import { ItemPTR2e, ItemSystemPTR } from "@item";
+import { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
 import { CheckDC } from "@system/rolls/degree-of-success.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
+import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import { AttackPTR2e, Trait } from "@data";
+import { RollNote } from "./notes.ts";
+
+interface CheckContextParams<
+    TStatistic extends StatisticCheck = StatisticCheck,
+    TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null = ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null,
+> extends RollContextParams<TStatistic, TItem> {
+
+}
+
+interface RollContextParams<
+    TStatistic extends StatisticCheck | null = StatisticCheck  | null,
+    TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null = ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null,
+> {
+    /** The statistic used for the roll */
+    statistic: TStatistic;
+    /** A targeted token: may not be applicable if the action isn't targeted */
+    target?: { actor?: ActorPTR2e | null; token?: TokenPTR2e | null } | null;
+    /** The item being used in the attack or damage roll */
+    item?: TItem;
+    /** The attack being used in the attack or damage roll */
+    attack?: AttackPTR2e;
+    /** Domains from which to draw roll options */
+    domains: string[];
+    /** Initial roll options for the strike */
+    options: Set<string>;
+    /** Whether the request is for display in a sheet view. If so, targets are not considered */
+    viewOnly?: boolean;
+    /** A direct way of informing a roll is part of a melee action: it is otherwise inferred from the attack item */
+    melee?: boolean;
+    /** Action traits associated with the roll */
+    traits?: string[] | Collection<Trait> | null;
+}
 
 interface CheckContext<
-    TActor extends ActorPTR2e,
+    TActor extends ActorPTR2e = ActorPTR2e,
     TStatistic extends StatisticCheck = StatisticCheck,
     TItem extends ItemPTR2e<ItemSystemPTR, ActorPTR2e> | null = ItemPTR2e<
         ItemSystemPTR,
         ActorPTR2e
     > | null,
 > extends RollContext<TActor, TStatistic, TItem> {
-    dc: CheckDC | null;
+    dc?: CheckDC | null;
+    outOfRange?: boolean;
+    notes?: RollNote[];
 }
 
 /** Context for the attack or damage roll of a strike */
@@ -44,6 +80,7 @@ interface AttackSelf<
     token: TokenDocumentPTR2e | null;
     statistic: TStatistic,
     item: TItem,
+    attack: AttackPTR2e,
     modifiers: ModifierPTR2e[]
 }
 
@@ -54,4 +91,4 @@ interface RollTarget {
     rangeIncrement: number | null;
 }
 
-export type { CheckContext, RollContext, AttackSelf, RollTarget };
+export type { CheckContext, RollContext, AttackSelf, RollTarget, CheckContextParams, RollContextParams};

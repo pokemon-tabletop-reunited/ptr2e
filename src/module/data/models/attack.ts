@@ -2,6 +2,7 @@ import { ActorPTR2e } from "@actor";
 import { ActionPTR2e, ContestType, PTRCONSTS, PokemonCategory, PokemonType } from "@data";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { ActionSchema } from "./action.ts";
+import { AttackStatistic } from "@system/statistics/attack.ts";
 
 export default class AttackPTR2e extends ActionPTR2e {
     declare type: "attack";
@@ -12,21 +13,71 @@ export default class AttackPTR2e extends ActionPTR2e {
         const fields = foundry.data.fields;
         return {
             ...super.defineSchema(),
-            types: new fields.SetField(new fields.StringField({ required: true, choices: getTypes(), initial: PTRCONSTS.Types.UNTYPED, label: "PTR2E.FIELDS.pokemonType.label", hint: "PTR2E.FIELDS.pokemonType.hint" }), { initial: ["untyped"], label: "PTR2E.FIELDS.pokemonType.labelPlural", hint: "PTR2E.FIELDS.pokemonType.hintPlural", required: true, validate: (d) => (d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false), validationError: "PTR2E.Errors.PokemonType" }),
-            category: new fields.StringField({ required: true, choices: Object.values(PTRCONSTS.Categories), initial: PTRCONSTS.Categories.PHYSICAL, label: "PTR2E.FIELDS.pokemonCategory.label", hint: "PTR2E.FIELDS.pokemonCategory.hint" }),
-            power: new fields.NumberField({ required: false, nullable: true, min: 10, max: 250, label: "PTR2E.FIELDS.power.label", hint: "PTR2E.FIELDS.power.hint" }),
-            accuracy: new fields.NumberField({ required: false, nullable: true, min: 10, max: 100, label: "PTR2E.FIELDS.accuracy.label", hint: "PTR2E.FIELDS.accuracy.hint" }),
+            types: new fields.SetField(
+                new fields.StringField({
+                    required: true,
+                    choices: getTypes(),
+                    initial: PTRCONSTS.Types.UNTYPED,
+                    label: "PTR2E.FIELDS.pokemonType.label",
+                    hint: "PTR2E.FIELDS.pokemonType.hint",
+                }),
+                {
+                    initial: ["untyped"],
+                    label: "PTR2E.FIELDS.pokemonType.labelPlural",
+                    hint: "PTR2E.FIELDS.pokemonType.hintPlural",
+                    required: true,
+                    validate: (d) =>
+                        d instanceof Set ? d.size > 0 : Array.isArray(d) ? d.length > 0 : false,
+                    validationError: "PTR2E.Errors.PokemonType",
+                }
+            ),
+            category: new fields.StringField({
+                required: true,
+                choices: Object.values(PTRCONSTS.Categories),
+                initial: PTRCONSTS.Categories.PHYSICAL,
+                label: "PTR2E.FIELDS.pokemonCategory.label",
+                hint: "PTR2E.FIELDS.pokemonCategory.hint",
+            }),
+            power: new fields.NumberField({
+                required: false,
+                nullable: true,
+                min: 10,
+                max: 250,
+                label: "PTR2E.FIELDS.power.label",
+                hint: "PTR2E.FIELDS.power.hint",
+            }),
+            accuracy: new fields.NumberField({
+                required: false,
+                nullable: true,
+                min: 10,
+                max: 100,
+                label: "PTR2E.FIELDS.accuracy.label",
+                hint: "PTR2E.FIELDS.accuracy.hint",
+            }),
             contestType: new fields.StringField({ required: true, blank: true, initial: "" }),
             contestEffect: new fields.StringField({ required: true, blank: true, initial: "" }),
-            free: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.free.label", hint: "PTR2E.FIELDS.free.hint" }),
-            slot: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.slot.label", hint: "PTR2E.FIELDS.slot.hint" }),
-        }
+            free: new fields.BooleanField({
+                required: true,
+                initial: false,
+                label: "PTR2E.FIELDS.free.label",
+                hint: "PTR2E.FIELDS.free.hint",
+            }),
+            slot: new fields.NumberField({
+                required: true,
+                nullable: true,
+                initial: null,
+                label: "PTR2E.FIELDS.slot.label",
+                hint: "PTR2E.FIELDS.slot.hint",
+            }),
+        };
     }
 
-    static override validateJoint(data: AttackPTR2e['_source']) {
+    static override validateJoint(data: AttackPTR2e["_source"]) {
         const category = data.category as PokemonCategory;
         const power = data.power as number;
-        if (category === "status" && power) throw new Error("Status moves cannot have a power value.");
+        if (category === "status" && power)
+            throw new Error("Status moves cannot have a power value.");
+        // if (category !== "status" && !power) throw new Error("Physical and special moves must have a power value.");
     }
 
     // TODO: This should add any relevant modifiers
@@ -36,8 +87,8 @@ export default class AttackPTR2e extends ActionPTR2e {
         return intersection.size === 1 && this.types.has(PTRCONSTS.Types.UNTYPED)
             ? 1
             : intersection.size > 0
-                ? 1.5
-                : 1;
+              ? 1.5
+              : 1;
     }
 
     get rollable(): boolean {
@@ -55,7 +106,9 @@ export default class AttackPTR2e extends ActionPTR2e {
 
         const damageRandomness = await this.rollDamageRandomness();
 
-        const initialTargets = [...game.user.targets].filter(t => t.actor?.uuid).map(t => ({ uuid: t.actor!.uuid }));
+        const initialTargets = [...game.user.targets]
+            .filter((t) => t.actor?.uuid)
+            .map((t) => ({ uuid: t.actor!.uuid }));
 
         // new ModifierPopup({origin: this.actor!, operation: { type: "attack", slug: this.slug }});
 
@@ -63,14 +116,18 @@ export default class AttackPTR2e extends ActionPTR2e {
         return await ChatMessage.create({
             type: "attack",
             system: {
-                accuracyCheck: typeof accuracyCheck === 'boolean' ? { value: true } : accuracyCheck.toJSON(), // True if always-hit, or the roll
+                accuracyCheck:
+                    typeof accuracyCheck === "boolean" ? { value: true } : accuracyCheck.toJSON(), // True if always-hit, or the roll
                 critCheck: critCheck.toJSON(), // The crit roll
-                damageRandomness: typeof damageRandomness === 'boolean' ? { value: false } : damageRandomness.toJSON(), // False if no damage, or the roll
+                damageRandomness:
+                    typeof damageRandomness === "boolean"
+                        ? { value: false }
+                        : damageRandomness.toJSON(), // False if no damage, or the roll
                 targets: initialTargets,
                 origin: fu.mergeObject(this.actor!.toObject(), { uuid: this.actor!.uuid }),
-                attack: this.slug
-            }
-        })
+                attack: this.slug,
+            },
+        });
     }
 
     async rollAccuracyCheck(origin: ActorPTR2e | null = this.actor) {
@@ -94,10 +151,45 @@ export default class AttackPTR2e extends ActionPTR2e {
 
         return new Roll("2d8").roll();
     }
+
+    override prepareDerivedData(): void {
+        super.prepareDerivedData();
+
+        this.statistic = this.prepareStatistic({});
+    }
+
+    get isMelee(): boolean {
+        return false; // TODO: Implement
+    }
+
+    get isRanged(): boolean {
+        return false; // TODO: Implement
+    }
+
+    public prepareStatistic({}, { force }: { force?: boolean } = {}): AttackStatistic | null {
+        if (!force && this.statistic) return this.statistic;
+        if (!this.actor) return null;
+        return new AttackStatistic(this);
+    }
+
+    public getRangeIncrement(distance: number | null): number | null {
+        if(distance === null || !this.range || !["ally", "enemy", "creature", "object"].includes(this.range.target)) return null;
+
+        const increment = this.range.distance;
+        return Math.max(Math.ceil(distance / increment), 1) - 1;
+    }
 }
 export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {
-    update(data: DeepPartial<SourceFromSchema<AttackSchema>> & DeepPartial<SourceFromSchema<ActionSchema>>): Promise<this['item']>;
-    prepareUpdate(data: DeepPartial<SourceFromSchema<AttackSchema>> & DeepPartial<SourceFromSchema<ActionSchema>>): (SourceFromSchema<ActionSchema> & SourceFromSchema<AttackSchema>)[]
+    update(
+        data: DeepPartial<SourceFromSchema<AttackSchema>> &
+            DeepPartial<SourceFromSchema<ActionSchema>>
+    ): Promise<this["item"]>;
+    prepareUpdate(
+        data: DeepPartial<SourceFromSchema<AttackSchema>> &
+            DeepPartial<SourceFromSchema<ActionSchema>>
+    ): (SourceFromSchema<ActionSchema> & SourceFromSchema<AttackSchema>)[];
+
+    statistic: Maybe<AttackStatistic>;
 
     // /**
     //  * The typing of the effect.
@@ -141,7 +233,14 @@ export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<A
 }
 
 type AttackSchema = {
-    types: foundry.data.fields.SetField<foundry.data.fields.StringField<string, PokemonType, true, false, true>, PokemonType[], Set<PokemonType>, true, false, true>;
+    types: foundry.data.fields.SetField<
+        foundry.data.fields.StringField<string, PokemonType, true, false, true>,
+        PokemonType[],
+        Set<PokemonType>,
+        true,
+        false,
+        true
+    >;
     category: foundry.data.fields.StringField<string, PokemonCategory, true, false, true>;
     power: foundry.data.fields.NumberField<number>;
     accuracy: foundry.data.fields.NumberField<number>;

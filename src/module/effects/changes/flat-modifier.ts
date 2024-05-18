@@ -44,6 +44,7 @@ export default class FlatModifierChangeSystem extends ChangeModel {
                 predicate: this.resolveInjectedProperties(predicate),
                 change: this,
                 hideIfDisabled: this.hideIfDisabled,
+                //TODO: Add method of application
             })
             if(options.test) modifier.test(options.test);
 

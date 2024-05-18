@@ -8,8 +8,17 @@ import { CheckRollContext } from "@system/rolls/data.ts";
 import { DegreeOfSuccess } from "@system/rolls/degree-of-success.ts";
 import { sluggify } from "@utils";
 import { eventToRollParams } from "src/util/sheet-util.ts";
+import { CheckContext } from "./data.ts";
 
 class CheckPTR2e {
+    static async rolls(
+        context: Omit<CheckRollContext, 'target' | 'targets'> & {contexts: Record<string, CheckContext>},
+        event: JQuery.TriggeredEvent | Event | null = null,
+        callback?: CheckRollCallback
+    ): Promise<Rolled<CheckRoll>[]> {
+        throw new Error("Method not implemented." + context + event + callback);
+    }
+
     static async roll(
         check: CheckModifier,
         context: CheckRollContext = {},

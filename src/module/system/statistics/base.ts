@@ -27,7 +27,7 @@ abstract class BaseStatistic {
         this.domains = R.uniq((data.domains ??= []));
         const modifiers = [
             data.modifiers ?? [],
-            extractModifiers(this.actor.synthetics, this.domains),
+            extractModifiers(this.actor.synthetics, this.domains, data.defferedValueParams),
         ].flat();
         //TODO: Commented line from PF2e is about removing duplicates and taking the highest value, evaluate necessity
         this.modifiers = modifiers.map(m => m.clone()) //new StatisticModifier("", modifiers).modifiers.map((m) => m.clone());

@@ -59,7 +59,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
         this.context = context;
 
         if(this.context.type != "luck-check" && !check.modifiers.find(s => s.slug === "challenge-rating")) {
-            check.push(new ModifierPTR2e({ label: "Challenge Rating", modifier: 10, slug: "challenge-rating", hidden: true}));
+            check.push(new ModifierPTR2e({ label: "Challenge Rating", modifier: 10, slug: "challenge-rating", hidden: true, method: 'flat'}));
         }
 
         this.originallyEnabled = new Set(check.modifiers.filter((m) => !m.ignored));
@@ -149,7 +149,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
             if (errors.length > 0) {
                 ui.notifications.error(errors.join(" "));
             } else {
-                this.check.push(new ModifierPTR2e({ label: name, modifier: value }));
+                this.check.push(new ModifierPTR2e({ label: name, modifier: value, method: 'flat'}));
                 this.render({window: {title: this.title}});
             }
         })
