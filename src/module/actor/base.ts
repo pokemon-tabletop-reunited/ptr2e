@@ -648,7 +648,7 @@ class ActorPTR2e<
         const appliesTo = context.target?.token?.actor?.uuid ?? (context.target?.actor?.id ? context.target.actor.uuid : null) ?? null;
 
         const rangePenalty = rangeIncrement ? new ModifierPTR2e({
-            label: "Range Penalty",
+            label: "PTR2E.Modifiers.rip",
             slug: `range-penalty-${appliesTo ?? fu.randomID()}`,
             modifier: Math.min(-(rangeIncrement * (rangeIncrement + 1) / 2), 0),
             method: "stage",
@@ -660,7 +660,7 @@ class ActorPTR2e<
         const evasionStages = context.target?.actor?.evasionStage ?? 0;
         if(evasionStages !== 0) {
             const evasionModifier = new ModifierPTR2e({
-                label: "Evasion Modifier",
+                label: "PTR2E.Modifiers.evasion",
                 slug: `evasion-modifier-${appliesTo ?? fu.randomID()}`,
                 modifier: evasionStages,
                 method: "stage",

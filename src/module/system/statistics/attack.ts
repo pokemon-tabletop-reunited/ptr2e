@@ -76,7 +76,8 @@ class AttackStatistic extends Statistic {
                         label: game.i18n.localize("PTR2E.Modifiers.power"),
                         modifier: attack.power!,
                         method: "base",
-                        type: "damage"
+                        type: "damage",
+                        hidden: true
                     })
                 );
             } else {
@@ -89,7 +90,8 @@ class AttackStatistic extends Statistic {
                     label: game.i18n.localize(`PTR2E.Modifiers.${attack.category}Attack`),
                     modifier: actor.attributes[attack.category === "physical" ? "atk" : "spa"].value,
                     method: "flat",
-                    type: "damage"
+                    type: "damage",
+                    hidden: true
                 })
             );
         }
@@ -193,7 +195,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         //TODO: If ammo is consumed, check if there is ammo to consume
 
         const targets: {actor: ActorPTR2e, token?: TokenPTR2e}[] = (() => {
-            if(args.targets) return args.targets.map(t => ({actor: t}));
+            if(args.targets) return args.targets.map(t => ({actor: t, token: t.token?.object as TokenPTR2e}));
             return [...game.user.targets ?? []].map(t => ({actor: t.actor as ActorPTR2e, token: t as TokenPTR2e}));
         })()
 

@@ -39,7 +39,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
     }
 
     override get title() {
-        return `Modifier Popup: ${this.context.title?.trim() || this.check.slug} (${this.check.signedTotal})`;
+        return `Modifiers: ${this.context.title?.trim() || this.check.slug} (${this.check.signedTotal})`;
     }
 
     constructor(
@@ -237,18 +237,15 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
             return;
         }
         const result = formData.object;
-
-        const modifiers = this.check.modifiers;
         const rollMode = result.rollMode as RollMode;
 
-        this.resolve({ modifiers, rollMode });
+        this.resolve({ rollMode });
         this.promise = null;
         this.resolve = undefined;
     }
 }
 
 export type ModifierPopupResult = {
-    modifiers: ModifierPTR2e[];
     rollMode: RollMode;
 };
 

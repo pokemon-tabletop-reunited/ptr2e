@@ -96,7 +96,7 @@ class ModifierPTR2e implements RawModifier {
      * Create a new modifier.
      */
     constructor(args: ModifierObjectParams) {
-        this.label = game.i18n.localize(args.label)
+        this.label = game.i18n.localize(args.label ?? args.slug)
         this.slug = sluggify(args.slug ?? this.label);
 
         this.#originalValue = this.modifier = args.modifier;
@@ -148,7 +148,7 @@ class ModifierPTR2e implements RawModifier {
 
     /** Return a copy of this ModifierPTR2e instance */
     clone(options: {test?: Iterable<string>} = {}): ModifierPTR2e {
-        const clone = new ModifierPTR2e(fu.mergeObject({...this, modifier: this.#originalValue}));
+        const clone = new ModifierPTR2e(fu.mergeObject({...this, modifier: this.#originalValue, appliesTo: new Map(this.appliesTo)}));
         if(options.test) clone.test(options.test);
 
         return clone;
@@ -379,6 +379,7 @@ class AttackCheckModifier extends CheckModifier {
             adjustModifiers(this._modifiers, rollOptions);
         }
 
+        this.totalModifier = 0;
         this.totalModifiers = this._modifiers.filter(m => !m.ignored).reduce((acc, modifier) => {
             acc[modifier.type] ??= {
                 base: 0,
