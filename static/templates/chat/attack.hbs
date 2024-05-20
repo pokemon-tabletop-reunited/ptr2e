@@ -31,8 +31,8 @@
         <div class="icon">Icon</div>
         <div class="status">Status</div>
         <div class="damage">Damage</div>
-        <div class="apply"></div>
-    </div>
+        <div class="apply">{{#if (isGm)}}<button type="button" class="update-targets" data-tooltip="[Left Click] to add current selected targets<br>[Left Alt + Left Click] to overwrite targets with currently selected targets"><i class="fas fa-crosshairs"></i></button>{{/if}}</div>
+    </div> 
     {{#each results as |data uuid|}}
         <div class="target" data-target-uuid="{{data.target.uuid}}">
             <div class="icon">

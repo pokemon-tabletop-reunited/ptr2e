@@ -186,6 +186,7 @@ class CheckPTR2e {
 
         if (callback) {
             await callback(
+                context,
                 results,
                 message,
             );

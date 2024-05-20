@@ -1,5 +1,6 @@
 <content>
     <header>
+        <small>Accuracy Roll</small>
         {{#with accuracy.context}}
             <h3>{{accuracyRoll}} &le; {{accuracyDC}}</h3>
         {{/with}}
@@ -9,7 +10,7 @@
     </header>
     <main>
         <figure>
-            <code>@accuracyRoll &le; <br>&#40;@moveAccuracy &times; @adjustedStages &times;<br>@otherModifiers&#41;</code>
+            <code>@accuracyRoll &le; <br>&#40;@moveAccuracy &plus; @otherModifiers&#41;<br> &times; @adjustedStages</code>
         </figure>
         <figure>
             {{#with accuracy.context}}
@@ -29,6 +30,22 @@
                     {{/if}}
                 {{/each}}
             {{/if}}
+        {{/with}}
+    </main>
+    <header>
+        <small>Crit Roll</small>
+        {{#with accuracy.context}}
+            <h3>{{critRoll}} &le; {{critDC}}</h3>
+        {{/with}}
+    </header>
+    <main>
+        <figure>
+            <code>@critRoll &le; @critDC</code>
+        </figure>
+        {{#with accuracy.context}}
+            {{#if critRoll}}{{> variable label="PTR2E.Status.CritRoll.Label" hint="PTR2E.Status.CritRoll.Hint" value=critRoll}}{{/if}}
+            {{#if critDC}}{{> variable label="PTR2E.Status.CritDC.Label" hint="PTR2E.Status.CritDC.Hint" value=critDC}}{{/if}}
+            {{#if (isdefined critStages)}}{{> variable label="PTR2E.Status.CritStages.Label" hint="PTR2E.Status.CritStages.Hint" value=critStages}}{{/if}}
         {{/with}}
     </main>
     <footer>

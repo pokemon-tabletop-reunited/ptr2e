@@ -77,10 +77,10 @@ class AttackRoll extends CheckRoll {
         // Status moves cannot crit
         if (attack.category === "status") return null;
 
+        options.critStages = Math.clamp(data.check.total?.crit?.stage ?? 0, 0, 3)
+
         const formula = "1d100ms@dc";
-        // @ts-expect-error
-        const dc = ((critStages: number): number => {
-            const stage = Math.clamp(critStages, 0, 3);
+        const dc = ((stage: 0 | 1 | 2 | 3): number => {
             switch (stage) {
                 case 0:
                     return Math.floor(100 * (1 / 24));
@@ -91,7 +91,9 @@ class AttackRoll extends CheckRoll {
                 case 3:
                     return 100;
             }
-        })(data.check.total?.crit?.stage ?? 0);
+        })(options.critStages as 0 | 1 | 2 | 3);
+
+        options.critDC = dc;
 
         return new AttackRoll(formula, { dc }, options);
     }

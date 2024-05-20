@@ -3,9 +3,9 @@ import AttackPTR2e from "@module/data/models/attack.ts";
 import { ChatMessagePTR2e } from "@chat";
 import { AccuracySuccessCategory, PTRCONSTS } from "@data";
 import { SlugField } from "@module/data/fields/slug-field.ts";
-import { MappingField } from "@module/data/fields/mapping-field.ts";
 import { AttackRoll } from "@system/rolls/attack-roll.ts";
 import { AccuracyCalc, DamageCalc } from "./data.ts";
+import { CollectionField } from "@module/data/fields/collection-field.ts";
 
 abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     declare parent: ChatMessagePTR2e<AttackMessageSystem>;
@@ -42,17 +42,16 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                     initial: [],
                 }
             ),
-            overrides: new MappingField(
+            overrides: new CollectionField(
                 new fields.SchemaField({
-                    hit: new SlugField({
-                        required: true,
-                        nullable: true,
+                    value: new SlugField({
                         choices: Object.values(PTRCONSTS.AccuracySuccessCategories),
                     }),
-                    crit: new fields.BooleanField({ required: true, nullable: true }),
+                    uuid: new fields.DocumentUUIDField({}),
                 }),
-                { required: true, initial: {} }
-            ) as AttackMessageSchema["overrides"],
+                "uuid",
+                { required: true, initial: [] }
+            ),
         };
     }
 
@@ -67,6 +66,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     }
 
     override prepareBaseData(): void {
+        this.context = null;
+
         const fromRollData = (rollData: string | null) => {
             if (!rollData) return null;
             try {
@@ -137,9 +138,30 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
             // TODO: Implement effect checks
             const rolls = {
-                accuracy: await renderInnerRoll(data.accuracy, isPrivate),
-                crit: await renderInnerRoll(data.crit, isPrivate),
-                damage: await renderInnerRoll(data.damage, isPrivate),
+                accuracy: await renderTemplate(
+                    "/systems/ptr2e/templates/chat/rolls/accuracy-check.hbs",
+                    {
+                        inner: await renderInnerRoll(data.accuracy, isPrivate),
+                        isPrivate,
+                        type: "accuracy",
+                        label: "PTR2E.Attack.AccuracyCheck",
+                    }
+                ),
+                crit: await renderTemplate("/systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
+                    inner: await renderInnerRoll(data.crit, isPrivate),
+                    isPrivate,
+                    type: "crit",
+                    label: "PTR2E.Attack.CritCheck",
+                }),
+                damage: await renderTemplate(
+                    "/systems/ptr2e/templates/chat/rolls/damage-randomness.hbs",
+                    {
+                        inner: await renderInnerRoll(data.damage, isPrivate),
+                        isPrivate,
+                        type: "damage",
+                        label: "PTR2E.Attack.DamageRandomness",
+                    }
+                ),
             };
 
             return rolls;
@@ -158,7 +180,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                                 target: result.target,
                                 rolls: await renderRolls(result, false),
                                 hit:
-                                    this.overrides[result.target.uuid] ||
+                                    this.overrides.get(result.target.uuid)?.value ||
                                     AttackRoll.successCategory(result.accuracy, result.crit),
                             };
                             if (result.damage) {
@@ -174,13 +196,17 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                                     context.damageRoll = damage;
                                 }
                             }
-                            if(result.accuracy) {
+                            if (result.accuracy) {
                                 context.accuracyRoll = {
                                     category: context.hit,
-                                    context: result.accuracy.options
-                                }
-                                context.accuracyRoll.context.override = this.overrides[result.target.uuid] !== undefined;
-                                context.accuracyRoll.context.accuracyRoll = result.accuracy.dice[0].values[0];
+                                    context: result.accuracy.options,
+                                };
+                                context.accuracyRoll.context.override =
+                                    this.overrides.get(result.target.uuid) !== undefined;
+                                context.accuracyRoll.context.accuracyRoll =
+                                    result.accuracy.dice[0].values[0];
+                                context.accuracyRoll.context.critRoll =
+                                    result.crit!.dice[0].values[0];
                             }
                             return [result.target.uuid, context];
                         })
@@ -191,15 +217,27 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         return renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
     }
 
-    //@ts-ignore
-    async updateTarget(targetUuid: string, {status }: { status: AccuracySuccessCategory }) {
-        // const target = this.context?.targets.get(targetUuid);
-        // if (!target) return false;
-        // const source = fu.duplicate(this._source.targets);
-        // const index = source.findIndex((t) => t.uuid === targetUuid);
-        // if (index === -1) return false;
-        // source[index].status = status;
-        // return await this.parent.update({ "system.targets": source });
+    async updateTarget(targetUuid: ActorUUID, { status }: { status: AccuracySuccessCategory }) {
+        const target = this.context?.results.get(targetUuid);
+        if (!target) return false;
+
+        const overrides = fu.duplicate(this._source.overrides);
+        const index = overrides.findIndex((override) => override.uuid === targetUuid);
+        if(index === -1) {
+            overrides.push({
+                value: status,
+                uuid: targetUuid,
+            });
+        }
+        else {
+            overrides[index].value = status;
+        }
+
+        return this.parent.update({
+            system: {
+                overrides
+            },
+        });
     }
 
     async applyDamage(targetUuid: ActorUUID) {
@@ -222,6 +260,47 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         });
     }
 
+    async updateTargets(event: JQuery.ClickEvent) {
+        const targets = canvas.tokens.controlled.map(t => t.actor).filter(t => !!t) as ActorPTR2e[]
+        if(!targets.length) return;
+        
+        await this.attack.statistic?.check.roll({
+            createMessage: false,
+            targets,
+            callback: (_context, results) => {
+                const newResults = results.map((r) => ({
+                    target: (() => {
+                        const json: Record<string, unknown> = r.context.target!.actor.toJSON();
+                        json.uuid =
+                            r.context.target!.token?.actor?.uuid ?? r.context.target!.actor.uuid;
+                        return json;
+                    })(),
+                    accuracy: r.rolls.accuracy!.toJSON(),
+                    crit: r.rolls.crit!.toJSON(),
+                    damage: r.rolls.damage!.toJSON(),
+                }))
+
+                if(event.altKey) {
+                    this.parent.update({
+                        system: {
+                            results: newResults,
+                        },
+                    });
+                    return;
+                }
+                
+                //@ts-expect-error
+                const updateResults = this._source.results.concat(newResults);
+
+                this.parent.update({
+                    system: {
+                        results: updateResults,
+                    },
+                });
+            }
+        });
+    }
+
     activateListeners(html: JQuery<HTMLElement>) {
         html.find(".apply-damage").on("click", (event) => {
             const targetUuid = (event.currentTarget.closest("[data-target-uuid]") as HTMLElement)
@@ -229,6 +308,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             if (!targetUuid) return;
             this.applyDamage(targetUuid);
         });
+        html.find(".update-targets").on("click", this.updateTargets.bind(this));
     }
 }
 
@@ -238,7 +318,7 @@ interface AttackMessageSystem
     _source: SourceFromSchema<AttackMessageSchema>;
     attack: AttackPTR2e;
     context: Maybe<AttackMessageRenderContext>;
-    overrides: Record<ActorUUID, AccuracySuccessCategory>;
+    overrides: Collection<{value: AccuracySuccessCategory, uuid: ActorUUID}>;
 }
 type AttackMessageRenderContext = {
     origin: ActorPTR2e;
@@ -255,7 +335,7 @@ type AttackMessageRenderContextData = {
     target: ActorPTR2e;
     hit: AccuracySuccessCategory;
     damage?: number;
-    damageRoll?: DamageCalc
+    damageRoll?: DamageCalc;
     accuracyRoll?: AccuracyCalc;
 };
 
@@ -270,13 +350,19 @@ type AttackMessageSchema = {
         false,
         true
     >;
-    overrides: MappingField<
-        Record<ActorUUID, AccuracySuccessCategory>,
-        Record<ActorUUID, AccuracySuccessCategory>,
+    overrides: CollectionField<
+        foundry.data.fields.SchemaField<OverrideSchema>,
+        foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<OverrideSchema>>[],
+        foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<OverrideSchema>>[],
         true,
         false,
         true
     >;
+};
+
+type OverrideSchema = {
+    value: SlugField<true, false, false>;
+    uuid: foundry.data.fields.DocumentUUIDField<"Actor", true, false, false>;
 };
 
 type ResultData = foundry.data.fields.ModelPropFromDataField<ResultSchema>;

@@ -3,6 +3,7 @@ import { DegreeOfSuccess } from "./degree-of-success.ts";
 import { CheckRollContext } from "./data.ts";
 import { CheckModifier } from "@module/effects/modifiers.ts";
 import { AttackRollDataPTR2e } from "./attack-roll.ts";
+import { CheckContext } from "@system/data.ts";
 
 class CheckRoll extends Roll {
     static createFromData(options: CheckRollDataPTR2e): CheckRoll {
@@ -107,6 +108,7 @@ type CheckRollCallback = (
 ) => Promise<void> | void;
 
 type AttackRollCallback = (
+    context: Omit<CheckRollContext, 'target' | 'targets'> & {contexts: Record<string, CheckContext>},
     results: AttackRollResult[],
     message: Maybe<ChatMessagePTR2e>,
 ) => Promise<void> | void;

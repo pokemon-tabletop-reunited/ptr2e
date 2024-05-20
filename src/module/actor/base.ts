@@ -425,7 +425,7 @@ class ActorPTR2e<
         const damageApplied = Math.min(damage || 0, this.system.health.value);
         if (damageApplied === 0) return 0;
         await this.update({
-            "system.health.value": Math.clamped(
+            "system.health.value": Math.clamp(
                 this.system.health.value - damage,
                 0,
                 this.system.health.max

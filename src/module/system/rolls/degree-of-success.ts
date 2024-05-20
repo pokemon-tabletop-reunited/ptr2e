@@ -40,7 +40,7 @@ class DegreeOfSuccess {
 
     static create(
         roll: Rolled<CheckRoll>,
-        context?: CheckContext
+        _context?: CheckContext
     ): DegreeOfSuccess | null {
         // TODO: Implement
         const dos = new DegreeOfSuccess(roll);

@@ -98,6 +98,10 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         const template = await renderTemplate(CONFIG.ChatMessage.template, messageData);
         let html = $(template);
 
+        // Set the message header color
+        html.css("--user-color", `var(--user-color-${this.author.id})`);
+        html.css("border-color", `var(--user-color-${this.author.id})`);
+
         // Flag expanded state of dice rolls
         if (this._rollExpanded) html.find(".dice-tooltip").addClass("expanded");
         Hooks.call("renderChatMessage", this, html, messageData);
@@ -178,7 +182,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
                 $(content).css("display", "flex");
             }
 
-            if(el.dataset.uuid) {
+            if (el.dataset.uuid) {
                 let highlights: Token[] = [];
                 el.addEventListener("mouseover", async (event) => {
                     event.preventDefault();
@@ -218,18 +222,22 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     }
 
     static async createFromRoll<TTypeDataModel extends TypeDataModel = TypeDataModel>(
-        context: CheckRollContext & {notesList?: HTMLUListElement | null},
+        context: CheckRollContext & { notesList?: HTMLUListElement | null },
         roll: Rolled<CheckRoll>
     ): Promise<ChatMessagePTR2e<TTypeDataModel> | undefined> {
         let type = (() => {
-            switch(context.type ?? roll.data.type) {
-                case "check": return "check";
-                case "attack-roll": return "attack";
-                case "skill-check": return "skill";
-                case "luck-check": return "luck";
+            switch (context.type ?? roll.data.type) {
+                case "check":
+                    return "check";
+                case "attack-roll":
+                    return "attack";
+                case "skill-check":
+                    return "skill";
+                case "luck-check":
+                    return "luck";
             }
-            return 'base';
-        })()
+            return "base";
+        })();
         const rollJson = roll.toJSON();
         rollJson.data = roll.data;
         const system: Record<string, unknown> = {
@@ -237,14 +245,19 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
             origin: context.actor?.toJSON(),
             slug: context.action ?? context.title ?? type,
             luckRoll: null,
-        }
+        };
         const rolls = [rollJson];
 
-        if(type === "luck") {
+        if (type === "luck") {
             const luckRoll = await (async () => {
-                if('luckRoll' in context && context.luckRoll && context.luckRoll instanceof CheckRoll) return context.luckRoll;
-                return await CheckRoll.createFromData({type: "luck-roll"})!.roll();
-            })(); 
+                if (
+                    "luckRoll" in context &&
+                    context.luckRoll &&
+                    context.luckRoll instanceof CheckRoll
+                )
+                    return context.luckRoll;
+                return await CheckRoll.createFromData({ type: "luck-roll" })!.roll();
+            })();
             const luckRollJson = luckRoll.toJSON();
             luckRollJson.data = luckRoll.data;
             system.luckRoll = luckRollJson;
@@ -252,26 +265,43 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
             type = "skill";
         }
 
-        const speaker = ChatMessagePTR2e.getSpeaker({actor: context.actor!, token: context.token!});
+        const speaker = ChatMessagePTR2e.getSpeaker({
+            actor: context.actor!,
+            token: context.token!,
+        });
         const flavor = context.notesList ? context.notesList.innerHTML : context.title ?? "";
-        
+
         //@ts-expect-error
         return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({
             type,
             speaker,
             flavor,
-            system
+            system,
         });
     }
 
     static async createFromResults(
-        context: CheckRollContext & {notesList?: HTMLUListElement | null},
-        results: AttackRollResult[]
-    ): Promise<ChatMessagePTR2e<AttackMessageSystem> | undefined> {
-        if(!context.action) return;
-        if(!context.actor) return;
+        context: CheckRollContext & { notesList?: HTMLUListElement | null },
+        results: AttackRollResult[],
+        dataOnly: true
+    ): Promise<DeepPartial<ChatMessagePTR2e<AttackMessageSystem>> | undefined >;
+    static async createFromResults(
+        context: CheckRollContext & { notesList?: HTMLUListElement | null },
+        results: AttackRollResult[],
+        dataOnly?: false
+    ): Promise<ChatMessagePTR2e<AttackMessageSystem> | undefined >;
+    static async createFromResults(
+        context: CheckRollContext & { notesList?: HTMLUListElement | null },
+        results: AttackRollResult[],
+        dataOnly: boolean = false
+    ): Promise<ChatMessagePTR2e<AttackMessageSystem> | DeepPartial<ChatMessagePTR2e<AttackMessageSystem>> | undefined > {
+        if (!context.action) return;
+        if (!context.actor) return;
 
-        const speaker = ChatMessagePTR2e.getSpeaker({actor: context.actor!, token: context.token!});
+        const speaker = ChatMessagePTR2e.getSpeaker({
+            actor: context.actor!,
+            token: context.token!,
+        });
         const flavor = context.notesList ? context.notesList.innerHTML : context.title ?? "";
 
         const system: {
@@ -285,24 +315,32 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
                 json.uuid = context.token?.actor?.uuid ?? context.actor.uuid;
                 return json;
             })(),
-            results: results.map(r => ({
+            results: results.map((r) => ({
                 target: (() => {
                     const json: Record<string, unknown> = r.context.target!.actor.toJSON();
-                    json.uuid = r.context.target!.token?.actor?.uuid ?? r.context.target!.actor.uuid;
+                    json.uuid =
+                        r.context.target!.token?.actor?.uuid ?? r.context.target!.actor.uuid;
                     return json;
                 })(),
                 accuracy: r.rolls.accuracy!.toJSON(),
                 crit: r.rolls.crit!.toJSON(),
-                damage: r.rolls.damage!.toJSON()
-            }))
-        }
-        
-        return ChatMessagePTR2e.create<ChatMessagePTR2e<AttackMessageSystem>>({
-            type: "attack",
-            speaker,
-            flavor,
-            system
-        });
+                damage: r.rolls.damage!.toJSON(),
+            })),
+        };
+
+        return dataOnly
+            ? {
+                  type: "attack",
+                  speaker,
+                  flavor,
+                  system,
+              }
+            : ChatMessagePTR2e.create<ChatMessagePTR2e<AttackMessageSystem>>({
+                  type: "attack",
+                  speaker,
+                  flavor,
+                  system,
+              });
     }
 }
 

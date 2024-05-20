@@ -13,6 +13,9 @@ type AccuracyContext = {
     accuracyRoll?: number;
     accuracyDC?: number;
     override?: boolean;
+    critDC?: number;
+    critStages?: number;
+    critRoll?: number;
 }
 
 type DamageCalc = {

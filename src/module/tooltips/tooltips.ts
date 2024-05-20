@@ -298,7 +298,7 @@ export default class TooltipsPTR2e {
             button.addEventListener("click", async (event) => {
                 const type = (event.currentTarget as HTMLElement).id as "hit" | "critical" | "miss";
                 if (!type) return;
-                // message.system.updateTarget(targetUuid, { status: type });
+                message.system.updateTarget(targetUuid, { status: type });
                 game.tooltip.deactivate();
                 game.tooltip.dismissLockedTooltips();
             });

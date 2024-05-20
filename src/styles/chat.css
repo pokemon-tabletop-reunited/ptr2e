@@ -1,5 +1,5 @@
 .chat-message.message {
-  background: #fefefe;
+  background: var(--user-color, #fefefe);
   padding: 0;
   color: #1e1e1e;
   --color-underline-header: #6f6c66;
@@ -14,10 +14,15 @@
   background-color: #dcdcdc;
 }
 .chat-message.message header.message-header {
+  color: whitesmoke;
+  text-shadow: 1px 1px 5px #1e1e1e;
   padding: 0.25rem;
-  background-color: #cdcdcd;
+  background-color: var(--user-color, #cdcdcd);
   border-bottom: 1px solid var(--color-underline-header);
   border-radius: 5px 5px 0 0;
+}
+.chat-message.message header.message-header .flavor-text {
+  font-style: italic;
 }
 .chat-message.message .message-content {
   background-color: #fefefe;
