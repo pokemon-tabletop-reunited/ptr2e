@@ -316,6 +316,40 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 nature
         );
     }
+
+    override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean }, user: User): Promise<boolean | void> {
+        //@ts-expect-error
+        if(this._source.traits.has("humanoid") && this.parent.type === "pokemon") {
+            this.parent.updateSource({ "type": "humanoid" })
+        }
+        //@ts-expect-error
+        if(this._source.traits.has("pokemon") && this.parent.type === "humanoid") {
+            this.parent.updateSource({ "type": "pokemon" })
+        }
+
+        await super._preCreate(data, options, user);
+    }
+
+    override _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
+        if(changed.system?.traits) {
+            const hasTrait = (trait: string) => {
+                if(changed.system!.traits instanceof Collection) return changed.system!.traits.has(trait);
+                if(Array.isArray(changed.system!.traits)) return changed.system!.traits.includes(trait);
+                return false;
+            }
+            if(hasTrait("humanoid") && hasTrait("pokemon")) {
+                throw new Error("Cannot have both humanoid and pokemon traits");
+            }
+            if(hasTrait("humanoid") && this.parent.type === "pokemon") {
+                changed.type = "humanoid";
+            }
+            if(hasTrait("pokemon") && this.parent.type === "humanoid") {
+                changed.type = "pokemon";
+            }
+        }
+
+        return super._preUpdate(changed, options, user);
+    }
 }
 
 interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {

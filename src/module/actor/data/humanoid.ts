@@ -5,6 +5,8 @@ import { sluggify } from "@utils";
 import { PTRCONSTS } from "@data";
 
 class HumanoidActorSystem extends ActorSystemPTR2e {
+    declare parent: ActorPTR2e<this>;
+
     static constructSpecies(system: HumanoidActorSystem): SpeciesSystemModel {
         const data = {
             slug: sluggify(system.parent.name),
@@ -22,7 +24,15 @@ class HumanoidActorSystem extends ActorSystemPTR2e {
         };
         return new SpeciesSystemModel(data);
     }
-    declare parent: ActorPTR2e<this>;
+
+    override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean }, user: User): Promise<boolean | void> {
+        //@ts-expect-error
+        if(!this._source.traits?.length) {
+            this.parent.updateSource({ "system.traits": ["humanoid", "underdog"] })
+        }
+
+        await super._preCreate(data, options, user);
+    }
 }
 
 export default HumanoidActorSystem;

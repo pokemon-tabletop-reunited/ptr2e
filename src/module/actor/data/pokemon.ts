@@ -7,7 +7,7 @@ import { SpeciesSystemModel } from "@item/data/index.ts";
 class PokemonActorSystem extends ActorSystemPTR2e {
     declare parent: ActorPTR2e<this>;
 
-    override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean }, _user: User): Promise<boolean | void> {
+    override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean }, user: User): Promise<boolean | void> {
         if (!this._source.species) {
 
             const promise = await new Promise((resolve, _reject) => {
@@ -30,7 +30,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
             return false;
         }
 
-        await super._preCreate(data, options, _user);
+        await super._preCreate(data, options, user);
     }
 }
 
