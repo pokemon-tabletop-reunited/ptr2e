@@ -3,7 +3,8 @@ import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CheckRollContext } from "@system/rolls/data.ts";
 import TypeDataModel from "types/foundry/common/abstract/type-data.js";
-import { CheckRoll } from "../system/rolls/check-roll.ts";
+import { AttackRollResult, CheckRoll } from "../system/rolls/check-roll.ts";
+import AttackMessageSystem from "./models/attack.ts";
 
 class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends ChatMessage<TSchema> {
     /** Get the actor associated with this chat message */
@@ -97,6 +98,10 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         const template = await renderTemplate(CONFIG.ChatMessage.template, messageData);
         let html = $(template);
 
+        // Set the message header color
+        html.css("--user-color", `var(--user-color-${this.author.id})`);
+        html.css("border-color", `var(--user-color-${this.author.id})`);
+
         // Flag expanded state of dice rolls
         if (this._rollExpanded) html.find(".dice-tooltip").addClass("expanded");
         Hooks.call("renderChatMessage", this, html, messageData);
@@ -176,6 +181,37 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
 
                 $(content).css("display", "flex");
             }
+
+            if (el.dataset.uuid) {
+                let highlights: Token[] = [];
+                el.addEventListener("mouseover", async (event) => {
+                    event.preventDefault();
+                    if (!canvas.ready) return;
+
+                    const actor = (await fromUuid(el.dataset.uuid)) as ActorPTR2e;
+                    if (!actor) return;
+
+                    const tokens = actor.getActiveTokens(false);
+                    if (!tokens?.length) return;
+
+                    if (tokens.every((t) => t.isVisible)) {
+                        //@ts-expect-error ignore protected clause.
+                        tokens.forEach((t) => t._onHoverIn(event));
+                        highlights = tokens;
+                    }
+                });
+
+                el.addEventListener("mouseout", async (event) => {
+                    event.preventDefault();
+                    if (!canvas.ready) return;
+
+                    if (!highlights.length) return;
+
+                    //@ts-expect-error ignore protected clause.
+                    highlights.forEach((t) => t._onHoverOut(event));
+                    highlights = [];
+                });
+            }
         });
     }
 
@@ -186,18 +222,22 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     }
 
     static async createFromRoll<TTypeDataModel extends TypeDataModel = TypeDataModel>(
-        context: CheckRollContext & {notesList?: HTMLUListElement | null},
+        context: CheckRollContext & { notesList?: HTMLUListElement | null },
         roll: Rolled<CheckRoll>
     ): Promise<ChatMessagePTR2e<TTypeDataModel> | undefined> {
         let type = (() => {
-            switch(context.type ?? roll.data.type) {
-                case "check": return "check";
-                case "attack-roll": return "attack";
-                case "skill-check": return "skill";
-                case "luck-check": return "luck";
+            switch (context.type ?? roll.data.type) {
+                case "check":
+                    return "check";
+                case "attack-roll":
+                    return "attack";
+                case "skill-check":
+                    return "skill";
+                case "luck-check":
+                    return "luck";
             }
-            return 'base';
-        })()
+            return "base";
+        })();
         const rollJson = roll.toJSON();
         rollJson.data = roll.data;
         const system: Record<string, unknown> = {
@@ -205,14 +245,19 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
             origin: context.actor?.toJSON(),
             slug: context.action ?? context.title ?? type,
             luckRoll: null,
-        }
+        };
         const rolls = [rollJson];
 
-        if(type === "luck") {
+        if (type === "luck") {
             const luckRoll = await (async () => {
-                if('luckRoll' in context && context.luckRoll && context.luckRoll instanceof CheckRoll) return context.luckRoll;
-                return await CheckRoll.createFromData({type: "luck-roll"}).roll();
-            })(); 
+                if (
+                    "luckRoll" in context &&
+                    context.luckRoll &&
+                    context.luckRoll instanceof CheckRoll
+                )
+                    return context.luckRoll;
+                return await CheckRoll.createFromData({ type: "luck-roll" })!.roll();
+            })();
             const luckRollJson = luckRoll.toJSON();
             luckRollJson.data = luckRoll.data;
             system.luckRoll = luckRollJson;
@@ -220,16 +265,82 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
             type = "skill";
         }
 
-        const speaker = ChatMessagePTR2e.getSpeaker({actor: context.actor!, token: context.token!});
+        const speaker = ChatMessagePTR2e.getSpeaker({
+            actor: context.actor!,
+            token: context.token!,
+        });
         const flavor = context.notesList ? context.notesList.innerHTML : context.title ?? "";
-        
+
         //@ts-expect-error
         return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({
             type,
             speaker,
             flavor,
-            system
+            system,
         });
+    }
+
+    static async createFromResults(
+        context: CheckRollContext & { notesList?: HTMLUListElement | null },
+        results: AttackRollResult[],
+        dataOnly: true
+    ): Promise<DeepPartial<ChatMessagePTR2e<AttackMessageSystem>> | undefined >;
+    static async createFromResults(
+        context: CheckRollContext & { notesList?: HTMLUListElement | null },
+        results: AttackRollResult[],
+        dataOnly?: false
+    ): Promise<ChatMessagePTR2e<AttackMessageSystem> | undefined >;
+    static async createFromResults(
+        context: CheckRollContext & { notesList?: HTMLUListElement | null },
+        results: AttackRollResult[],
+        dataOnly: boolean = false
+    ): Promise<ChatMessagePTR2e<AttackMessageSystem> | DeepPartial<ChatMessagePTR2e<AttackMessageSystem>> | undefined > {
+        if (!context.action) return;
+        if (!context.actor) return;
+
+        const speaker = ChatMessagePTR2e.getSpeaker({
+            actor: context.actor!,
+            token: context.token!,
+        });
+        const flavor = context.notesList ? context.notesList.innerHTML : context.title ?? "";
+
+        const system: {
+            attackSlug: string;
+            origin: Record<string, unknown>;
+            results: Record<string, unknown>[];
+        } = {
+            attackSlug: context.action,
+            origin: (() => {
+                const json: Record<string, unknown> = context.actor!.toJSON();
+                json.uuid = context.token?.actor?.uuid ?? context.actor.uuid;
+                return json;
+            })(),
+            results: results.map((r) => ({
+                target: (() => {
+                    const json: Record<string, unknown> = r.context.target!.actor.toJSON();
+                    json.uuid =
+                        r.context.target!.token?.actor?.uuid ?? r.context.target!.actor.uuid;
+                    return json;
+                })(),
+                accuracy: r.rolls.accuracy!.toJSON(),
+                crit: r.rolls.crit!.toJSON(),
+                damage: r.rolls.damage!.toJSON(),
+            })),
+        };
+
+        return dataOnly
+            ? {
+                  type: "attack",
+                  speaker,
+                  flavor,
+                  system,
+              }
+            : ChatMessagePTR2e.create<ChatMessagePTR2e<AttackMessageSystem>>({
+                  type: "attack",
+                  speaker,
+                  flavor,
+                  system,
+              });
     }
 }
 

@@ -1,29 +1,40 @@
-//@ts-nocheck
-
-import { ModifierPTR2e } from "@module/effects/modifiers.ts";
+import { ActorPTR2e, ActorSynthetics } from "@actor";
+import { AttackPTR2e } from "@data";
+import { BracketedValue, EffectSourcePTR2e } from "@effects";
+import { ItemPTR2e } from "@item";
+import {
+    DeferredValueParams,
+    ModifierAdjustment,
+    ModifierPTR2e,
+} from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
+import * as R from "remeda";
 
 /** Extracts a list of all cloned modifiers across all given keys in a single list. */
 function extractModifiers(
-    synthetics: Pick<RuleElementSynthetics, "modifierAdjustments" | "modifiers">,
+    synthetics: Pick<ActorSynthetics, "modifierAdjustments" | "modifiers">,
     selectors: string[],
-    options: DeferredValueParams = {},
+    options: DeferredValueParams = {}
 ): ModifierPTR2e[] {
     const { modifierAdjustments, modifiers: syntheticModifiers } = synthetics;
     const modifiers = Array.from(new Set(selectors))
         .flatMap((s) => syntheticModifiers[s] ?? [])
         .flatMap((d) => d(options) ?? []);
     for (const modifier of modifiers) {
-        modifier.adjustments = extractModifierAdjustments(modifierAdjustments, selectors, modifier.slug);
+        modifier.adjustments = extractModifierAdjustments(
+            modifierAdjustments,
+            selectors,
+            modifier.slug
+        );
     }
 
     return modifiers;
 }
 
 function extractModifierAdjustments(
-    adjustmentsRecord: RuleElementSynthetics["modifierAdjustments"],
+    adjustmentsRecord: ActorSynthetics["modifierAdjustments"],
     selectors: string[],
-    slug: string,
+    slug: string
 ): ModifierAdjustment[] {
     const adjustments = Array.from(new Set(selectors.flatMap((s) => adjustmentsRecord[s] ?? [])));
     return adjustments.filter((a) => [slug, null].includes(a.slug));
@@ -34,153 +45,128 @@ function extractNotes(rollNotes: Record<string, RollNote[]>, selectors: string[]
     return selectors.flatMap((s) => (rollNotes[s] ?? []).map((n) => n.clone()));
 }
 
-function extractDamageDice(
-    deferredDice: DamageDiceSynthetics,
-    selectors: string[],
-    options: TestableDeferredValueParams,
-): DamageDicePF2e[] {
-    return selectors.flatMap((s) => deferredDice[s] ?? []).flatMap((d) => d(options) ?? []);
-}
-
-function processDamageCategoryStacking(
-    base: BaseDamageData[],
-    options: { modifiers: ModifierPF2e[]; dice: DamageDicePF2e[]; test: Set<string> },
-): { modifiers: ModifierPF2e[]; dice: DamageDicePF2e[] } {
-    const { dice } = options;
-    const groupedModifiers = R.groupBy(options.modifiers, (m) => (m.category === "persistent" ? "persistent" : "main"));
-
-    const modifiers = [
-        ...new StatisticModifier("damage", groupedModifiers.main ?? [], options.test).modifiers,
-        ...new StatisticModifier("persistent", groupedModifiers.persistent ?? [], options.test).modifiers,
-    ];
-
-    const allPersistent = base.length > 0 && base.every((b) => b.category === "persistent");
-
-    return {
-        modifiers: allPersistent ? modifiers.filter((m) => m.category === "persistent") : modifiers,
-        dice: allPersistent ? dice.filter((m) => m.category === "persistent") : dice,
-    };
-}
+// function extractDamageDice(
+//     deferredDice: DamageDiceSynthetics,
+//     selectors: string[],
+//     options: TestableDeferredValueParams,
+// ): DamageDicePTR2e[] {
+//     return selectors.flatMap((s) => deferredDice[s] ?? []).flatMap((d) => d(options) ?? []);
+// }
 
 async function extractEphemeralEffects({
     affects,
     origin,
     target,
     item,
+    attack,
     domains,
     options,
-}: ExtractEphemeralEffectsParams): Promise<(ConditionSource | EffectSource)[]> {
+}: ExtractEphemeralEffectsParams): Promise<EffectSourcePTR2e[]> {
     if (!(origin && target)) return [];
 
     const [effectsFrom, effectsTo] = affects === "target" ? [origin, target] : [target, origin];
-    const fullOptions = [...options, effectsFrom.getRollOptions(domains), effectsTo.getSelfRollOptions(affects)].flat();
-    const resolvables = item ? (item.isOfType("spell") ? { spell: item } : { weapon: item }) : {};
+    const fullOptions = [
+        ...options,
+        effectsFrom.getRollOptions(domains),
+        effectsTo.getSelfRollOptions(affects),
+    ].flat();
+    const resolvables = { item, attack };
     return (
         await Promise.all(
             domains
                 .flatMap((s) => effectsFrom.synthetics.ephemeralEffects[s]?.[affects] ?? [])
-                .map((d) => d({ test: fullOptions, resolvables })),
+                .map((d) => d({ test: fullOptions, resolvables }))
         )
     ).flatMap((e) => e ?? []);
 }
 
 interface ExtractEphemeralEffectsParams {
     affects: "target" | "origin";
-    origin: ActorPF2e | null;
-    target: Maybe<ActorPF2e>;
-    item: ItemPF2e | null;
+    origin: ActorPTR2e | null;
+    target: Maybe<ActorPTR2e>;
+    item: ItemPTR2e | null;
+    attack: AttackPTR2e | null;
     domains: string[];
     options: Set<string> | string[];
 }
 
-function extractRollTwice(
-    rollTwices: Record<string, RollTwiceSynthetic[]>,
-    selectors: string[],
-    options: Set<string>,
-): RollTwiceOption {
-    const twices = selectors.flatMap((s) => rollTwices[s] ?? []).filter((rt) => rt.predicate?.test(options) ?? true);
-    if (twices.length === 0) return false;
-    if (twices.some((rt) => rt.keep === "higher") && twices.some((rt) => rt.keep === "lower")) {
-        return false;
-    }
+// function extractRollSubstitutions(
+//     substitutions: Record<string, RollSubstitution[]>,
+//     domains: string[],
+//     rollOptions: Set<string>
+// ): RollSubstitution[] {
+//     return domains
+//         .flatMap((d) => fu.deepClone(substitutions[d] ?? []))
+//         .filter((s) => s.predicate?.test(rollOptions) ?? true);
+// }
 
-    return twices.at(0)?.keep === "higher" ? "keep-higher" : "keep-lower";
-}
-
-function extractRollSubstitutions(
-    substitutions: Record<string, RollSubstitution[]>,
-    domains: string[],
-    rollOptions: Set<string>,
-): RollSubstitution[] {
-    return domains
-        .flatMap((d) => fu.deepClone(substitutions[d] ?? []))
-        .filter((s) => s.predicate?.test(rollOptions) ?? true);
-}
-
-function extractDegreeOfSuccessAdjustments(
-    synthetics: Pick<RuleElementSynthetics, "degreeOfSuccessAdjustments">,
-    selectors: string[],
-): DegreeOfSuccessAdjustment[] {
-    return Object.values(R.pick(synthetics.degreeOfSuccessAdjustments, selectors)).flat();
-}
+// function extractDegreeOfSuccessAdjustments(
+//     synthetics: Pick<ActorSynthetics, "degreeOfSuccessAdjustments">,
+//     selectors: string[]
+// ): DegreeOfSuccessAdjustment[] {
+//     return Object.values(R.pick(synthetics.degreeOfSuccessAdjustments, selectors)).flat();
+// }
 
 function isBracketedValue(value: unknown): value is BracketedValue {
     return (
-        R.isObject(value) && Array.isArray(value.brackets) && (typeof value.field === "string" || !("fields" in value))
+        R.isObject(value) &&
+        Array.isArray(value.brackets) &&
+        (typeof value.field === "string" || !("fields" in value))
     );
 }
 
-async function processPreUpdateActorHooks(
-    changed: Record<string, unknown>,
-    { pack }: { pack: string | null },
-): Promise<void> {
-    const actorId = String(changed._id);
-    const actor = pack ? await game.packs.get(pack)?.getDocument(actorId) : game.actors.get(actorId);
-    if (!(actor instanceof ActorPF2e)) return;
+// async function processPreUpdateActorHooks(
+//     changed: Record<string, unknown>,
+//     { pack }: { pack: string | null }
+// ): Promise<void> {
+//     const actorId = String(changed._id);
+//     const actor = pack
+//         ? await game.packs.get(pack)?.getDocument(actorId)
+//         : game.actors.get(actorId);
+//     if (!(actor instanceof ActorPTR2e)) return;
 
-    // Run preUpdateActor rule element callbacks
-    type WithPreUpdateActor = RuleElementPF2e & {
-        preUpdateActor: NonNullable<RuleElementPF2e["preUpdateActor"]>;
-    };
-    const rules = actor.rules.filter((r): r is WithPreUpdateActor => !!r.preUpdateActor);
-    if (rules.length === 0) return;
+//     // Run preUpdateActor rule element callbacks
+//     type WithPreUpdateActor = ChangeModel & {
+//         preUpdateActor: NonNullable<ChangeModel["preUpdateActor"]>;
+//     };
+//     const rules = actor.rules.filter((r): r is WithPreUpdateActor => !!r.preUpdateActor);
+//     if (rules.length === 0) return;
 
-    actor.flags.pf2e.rollOptions = actor.clone(changed, { keepId: true }).flags.pf2e.rollOptions;
-    const createDeletes = (
-        await Promise.all(
-            rules.map(
-                (r): Promise<{ create: ItemSourcePF2e[]; delete: string[] }> =>
-                    actor.items.has(r.item.id) ? r.preUpdateActor() : new Promise(() => ({ create: [], delete: [] })),
-            ),
-        )
-    ).reduce(
-        (combined, cd) => {
-            combined.create.push(...cd.create);
-            combined.delete.push(...cd.delete);
-            return combined;
-        },
-        { create: [], delete: [] },
-    );
-    createDeletes.delete = R.uniq(createDeletes.delete).filter((id) => actor.items.has(id));
+//     actor.flags.ptr2e.rollOptions = actor.clone(changed, { keepId: true }).flags.ptr2e.rollOptions;
+//     const createDeletes = (
+//         await Promise.all(
+//             rules.map(
+//                 (r): Promise<{ create: ItemSourcePTR2e[]; delete: string[] }> =>
+//                     actor.items.has(r.item.id)
+//                         ? r.preUpdateActor()
+//                         : new Promise(() => ({ create: [], delete: [] }))
+//             )
+//         )
+//     ).reduce(
+//         (combined, cd) => {
+//             combined.create.push(...cd.create);
+//             combined.delete.push(...cd.delete);
+//             return combined;
+//         },
+//         { create: [], delete: [] }
+//     );
+//     createDeletes.delete = R.uniq(createDeletes.delete).filter((id) => actor.items.has(id));
 
-    if (createDeletes.create.length > 0) {
-        await actor.createEmbeddedDocuments("Item", createDeletes.create, { keepId: true, render: false });
-    }
-    if (createDeletes.delete.length > 0) {
-        await actor.deleteEmbeddedDocuments("Item", createDeletes.delete, { render: false });
-    }
-}
+//     if (createDeletes.create.length > 0) {
+//         await actor.createEmbeddedDocuments("Item", createDeletes.create, {
+//             keepId: true,
+//             render: false,
+//         });
+//     }
+//     if (createDeletes.delete.length > 0) {
+//         await actor.deleteEmbeddedDocuments("Item", createDeletes.delete, { render: false });
+//     }
+// }
 
 export {
-    extractDamageDice,
-    extractDegreeOfSuccessAdjustments,
-    extractEphemeralEffects,
-    extractModifierAdjustments,
     extractModifiers,
+    extractModifierAdjustments,
     extractNotes,
-    extractRollSubstitutions,
-    extractRollTwice,
+    extractEphemeralEffects,
     isBracketedValue,
-    processDamageCategoryStacking,
-    processPreUpdateActorHooks,
-};
+}

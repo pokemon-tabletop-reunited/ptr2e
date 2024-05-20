@@ -44,7 +44,7 @@ class ActiveEffectPTR2e<
         this._name = this._source.name;
         Object.defineProperty(this, "name", {
             get: () =>
-                this.duration.remaining !== undefined
+                this.duration.remaining !== null && this.duration.remaining !== undefined
                     ? `${this._name} ${this.duration.remaining}`
                     : this._name,
             set: (value: string) => {
@@ -312,7 +312,7 @@ class ActiveEffectPTR2e<
         // This may add additional effects or items (such as via GrantItem)
         for (const effect of effects) {
             const effectSource = effect._source as EffectSourcePTR2e;
-            const changes = effect.system.changes;
+            const changes = effect.system.changes ?? [];
 
             for (const change of changes) {
                 const changeSource = change._source;

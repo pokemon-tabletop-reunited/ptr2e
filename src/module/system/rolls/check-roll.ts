@@ -1,9 +1,14 @@
 import { ChatMessagePTR2e } from "@chat";
+import { DegreeOfSuccess } from "./degree-of-success.ts";
+import { CheckRollContext } from "./data.ts";
+import { CheckModifier } from "@module/effects/modifiers.ts";
+import { AttackRollDataPTR2e } from "./attack-roll.ts";
+import { CheckContext } from "@system/data.ts";
 
 class CheckRoll extends Roll {
     static createFromData(options: CheckRollDataPTR2e): CheckRoll {
         const {formula, data} = CheckRoll.createFormula(options);
-        return new CheckRoll(formula, data);
+        return new CheckRoll(formula, data, options);
     }
 
     static createFormula(options: CheckRollDataPTR2e): { formula: string; data: Record<string, unknown> } {
@@ -78,13 +83,34 @@ interface CheckRollDataPTR2e extends RollDataPTR2e {
     domains?: string[];
 }
 
+type AttackRollResult = {
+    rolls: {
+        accuracy: Rolled<CheckRoll> | null,
+        crit: Rolled<CheckRoll> | null,
+        damage: Rolled<CheckRoll> | null
+    },
+    degrees: {
+        accuracy: DegreeOfSuccess | null,
+        crit: DegreeOfSuccess | null,
+        damage: DegreeOfSuccess | null
+    },
+    options: AttackRollDataPTR2e,
+    context: CheckRollContext,
+    check: CheckModifier
+}
+
 type CheckType = "check" | "attack-roll" | "skill-check" | "luck-roll" | "luck-check";
 
 type CheckRollCallback = (
     roll: Rolled<CheckRoll>,
     outcome: number | null | undefined,
     message: Maybe<ChatMessagePTR2e>,
-    event: Event | null,
 ) => Promise<void> | void;
 
-export { CheckRoll, type CheckType, type CheckRollCallback }
+type AttackRollCallback = (
+    context: Omit<CheckRollContext, 'target' | 'targets'> & {contexts: Record<string, CheckContext>},
+    results: AttackRollResult[],
+    message: Maybe<ChatMessagePTR2e>,
+) => Promise<void> | void;
+
+export { CheckRoll, type CheckRollDataPTR2e, type CheckType, type CheckRollCallback, type AttackRollCallback, type AttackRollResult}

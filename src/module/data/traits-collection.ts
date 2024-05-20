@@ -17,7 +17,8 @@ export default class PTR2eTraits extends Collection<Trait> {
         this.clear();
 
         for(const trait of CONFIG.PTR.data.traits) {
-            this.set(trait.slug, trait);
+            if(!trait.description) trait.description = "";
+            this.set(trait.slug, trait as Trait);
         }
     
         // Allow custom-defined user Traits from the world

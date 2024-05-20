@@ -20,12 +20,6 @@ body.theme-light {
 body.theme-light .application textarea:read-only {
   color: var(--color-dark-6);
 }
-body.theme-dark .sheet prose-mirror .editor-content .content-link {
-  color: var(--color-cool-5);
-}
-body.theme-dark .sheet a.content-link {
-  color: black;
-}
 .application .window-header .window-title {
   height: 100%;
 }
@@ -2865,11 +2859,11 @@ body.theme-dark .sheet a.content-link {
   border-radius: 8px;
   border-color: var(--border-theme-color);
 }
-.application.sheet.modifier-popup main fieldset legend {
+.application.sheet.modifier-popup main legend {
   font-size: var(--font-size-15);
   font-weight: bold;
 }
-.application.sheet.modifier-popup main fieldset header {
+.application.sheet.modifier-popup main header {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -2877,37 +2871,37 @@ body.theme-dark .sheet a.content-link {
   padding: 0.25rem;
   border-bottom: 1px solid var(--border-theme-color);
 }
-.application.sheet.modifier-popup main fieldset header .label {
+.application.sheet.modifier-popup main header .label {
   flex: 0 0 50%;
 }
-.application.sheet.modifier-popup main fieldset header .item-controls {
+.application.sheet.modifier-popup main header .item-controls {
   flex: 0 0 45px;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   gap: 4px;
 }
-.application.sheet.modifier-popup main fieldset article {
+.application.sheet.modifier-popup main article {
   display: flex;
   flex-direction: column;
 }
-.application.sheet.modifier-popup main fieldset article section {
+.application.sheet.modifier-popup main article section {
   display: flex;
   flex-direction: column;
 }
-.application.sheet.modifier-popup main fieldset.skill-challenge-rating article {
+.application.sheet.modifier-popup main.skill-challenge-rating article {
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
   text-align: center;
 }
-.application.sheet.modifier-popup main fieldset.skill-challenge-rating article label {
+.application.sheet.modifier-popup main.skill-challenge-rating article label {
   flex: 0 0 40%;
 }
-.application.sheet.modifier-popup main fieldset.skill-challenge-rating article select {
+.application.sheet.modifier-popup main.skill-challenge-rating article select {
   flex: 0 0 55%;
 }
-.application.sheet.modifier-popup main fieldset .modifier {
+.application.sheet.modifier-popup main .modifier {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
@@ -2915,31 +2909,35 @@ body.theme-dark .sheet a.content-link {
   padding: 0.5rem 0.25rem;
   text-align: center;
 }
-.application.sheet.modifier-popup main fieldset .modifier .mod {
+.application.sheet.modifier-popup main .modifier .mod {
+  flex: 0 0 40%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  padding: 0 0.5rem;
+}
+.application.sheet.modifier-popup main .modifier .value {
   flex: 0 0 40%;
 }
-.application.sheet.modifier-popup main fieldset .modifier .value {
-  flex: 0 0 40%;
-}
-.application.sheet.modifier-popup main fieldset .modifier .exclude {
+.application.sheet.modifier-popup main .modifier .exclude {
   flex: 0 0 45px;
   display: flex;
   flex-direction: row;
   justify-content: center;
 }
-.application.sheet.modifier-popup main fieldset .modifier .exclude input {
+.application.sheet.modifier-popup main .modifier .exclude input {
   align-content: center;
 }
-.application.sheet.modifier-popup main fieldset .modifier.ignored input {
+.application.sheet.modifier-popup main .modifier.ignored input {
   --checkbox-checked-color: #666;
 }
-.application.sheet.modifier-popup main fieldset div.modifier {
+.application.sheet.modifier-popup main div.modifier {
   border-bottom: 1px solid var(--border-theme-color);
 }
-.application.sheet.modifier-popup main fieldset div.modifier:last-child {
+.application.sheet.modifier-popup main div.modifier:last-child {
   border-bottom: unset;
 }
-.application.sheet.modifier-popup main fieldset section.modifier-panel {
+.application.sheet.modifier-popup main section.modifier-panel {
   border-bottom: 1px solid var(--border-theme-color);
 }
 .application.sheet.modifier-popup main footer {
@@ -2950,6 +2948,177 @@ body.theme-dark .sheet a.content-link {
 }
 .application.sheet.modifier-popup main footer button {
   flex: 0 0 60%;
+}
+.application.sheet.modifier-popup.attack main {
+  padding: 0.5rem;
+  margin-bottom: 0;
+}
+.application.sheet.modifier-popup.attack main article .modifier,
+.application.sheet.modifier-popup.attack main header.modifier {
+  gap: 0.2rem;
+  flex-wrap: wrap;
+}
+.application.sheet.modifier-popup.attack main article .modifier .mod,
+.application.sheet.modifier-popup.attack main header.modifier .mod {
+  flex: 0 0 38%;
+}
+.application.sheet.modifier-popup.attack main article .modifier .type,
+.application.sheet.modifier-popup.attack main header.modifier .type {
+  flex: 0 0 32%;
+}
+.application.sheet.modifier-popup.attack main article .modifier .value,
+.application.sheet.modifier-popup.attack main header.modifier .value {
+  flex: 0 0 calc(30% - 52px - 0.6rem);
+}
+.application.sheet.modifier-popup.attack main article .modifier .exclude,
+.application.sheet.modifier-popup.attack main header.modifier .exclude {
+  flex: 0 0 50px;
+  overflow: hidden;
+}
+.application.sheet.modifier-popup.attack main article .modifier-panel .modifier {
+  flex: 0 0 30px;
+}
+.application.sheet.modifier-popup.attack main article .modifier-panel .modifier > * {
+  height: 30px;
+  align-content: center;
+  align-self: center;
+  align-items: center;
+}
+.application.sheet.modifier-popup.attack main article .modifier-panel .modifier .mod {
+  border-right: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup.attack main article .modifier-panel .modifier .type {
+  border-right: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup.attack main article .modifier-panel .modifier .value {
+  border-right: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup.attack main .appliesTo {
+  flex: 1;
+  text-align: start;
+  font-size: smaller;
+  border: 1px solid var(--border-theme-color);
+  border-top: 0;
+  border-radius: 0 0 8px 8px;
+  flex: 0 0 30px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.application.sheet.modifier-popup.attack main .appliesTo > * {
+  padding: 3px;
+  height: 30px;
+}
+.application.sheet.modifier-popup.attack main .appliesTo:last-child {
+  margin-bottom: unset;
+}
+.application.sheet.modifier-popup.attack main .appliesTo .label {
+  flex: 0 0 65px;
+  text-align: center;
+  align-content: center;
+  font-weight: bold;
+  border-right: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup.attack main .appliesTo .avatars {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  padding: 3px 0.5rem;
+  gap: 5px;
+}
+.application.sheet.modifier-popup.attack main .appliesTo .avatars span.avatar {
+  flex: 0 0 24px;
+  height: 24px;
+  width: 24px;
+  object-fit: scale-down;
+}
+.application.sheet.modifier-popup.attack main .appliesTo .avatars span.avatar.unapplicable {
+  position: relative;
+  /** Put a red slash from top left to bottom right over the avatar */
+}
+.application.sheet.modifier-popup.attack main .appliesTo .avatars span.avatar.unapplicable::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3e%3cline x1='0' y1='0' x2='100' y2='100' stroke-width='10' stroke='%23aa0200'/%3e%3c/svg%3e");
+}
+.application.sheet.modifier-popup.attack main .appliesTo .avatars span.avatar.unapplicable img {
+  filter: grayscale(1);
+}
+.application.sheet.modifier-popup.attack main .appliesTo .avatars span.avatar img {
+  height: 24px;
+  width: 24px;
+  object-fit: scale-down;
+  border: unset;
+  border-radius: 50%;
+}
+.application.sheet.modifier-popup.attack main .appliesTo .all {
+  flex: 0 0 calc(52px + 0.2rem);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 3px;
+  font-weight: bold;
+  border-left: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup.attack main .appliesTo .all input[type='checkbox'] {
+  height: 14px;
+  width: 14px;
+  flex: 0 0 14px;
+  margin: 0;
+  align-content: center;
+  text-align: center;
+}
+.application.sheet.modifier-popup.attack main .appliesTo .all input[type='checkbox']::before {
+  font-size: 14px;
+}
+.application.sheet.modifier-popup.attack main .add-modifier-panel {
+  margin-top: 0.5rem;
+}
+.application.sheet.modifier-popup.attack main .add-modifier-panel .modifier {
+  padding: 0;
+}
+.application.sheet.modifier-popup.attack main header {
+  border: unset;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  padding: 0.1rem 0;
+  margin: 0 1px;
+}
+.application.sheet.modifier-popup.attack main header .mod,
+.application.sheet.modifier-popup.attack main header .type,
+.application.sheet.modifier-popup.attack main header .value {
+  border-right: 1px solid transparent;
+}
+.application.sheet.modifier-popup.attack main .modifier-panel {
+  border: unset;
+}
+.application.sheet.modifier-popup.attack main .modifier-panel .modifier {
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px 8px 0 0;
+  padding: 0;
+}
+.application.sheet.modifier-popup.attack main .modifier-panel.avatar-scroll .appliesTo {
+  flex: 0 0 40px;
+}
+.application.sheet.modifier-popup.attack main .modifier-panel.avatar-scroll .appliesTo > * {
+  padding: 3px;
+  height: 40px;
+}
+.application.sheet.modifier-popup.attack main .modifier-panel.avatar-scroll .appliesTo .avatars {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.application.sheet.modifier-popup.attack main footer {
+  margin-top: 0.5rem;
 }
 .application.sheet input[type="color"] {
   border-color: var(--color-input-border-color, #000);

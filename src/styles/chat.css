@@ -1,5 +1,5 @@
 .chat-message.message {
-  background: #fefefe;
+  background: var(--user-color, #fefefe);
   padding: 0;
   color: #1e1e1e;
   --color-underline-header: #6f6c66;
@@ -14,14 +14,19 @@
   background-color: #dcdcdc;
 }
 .chat-message.message header.message-header {
+  color: whitesmoke;
+  text-shadow: 1px 1px 5px #1e1e1e;
   padding: 0.25rem;
-  background-color: #cdcdcd;
-  border-bottom: 1px solid var(--color-underline-header);
+  background-color: var(--user-color, #cdcdcd);
   border-radius: 5px 5px 0 0;
+}
+.chat-message.message header.message-header .flavor-text {
+  font-style: italic;
 }
 .chat-message.message .message-content {
   background-color: #fefefe;
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
 }
 .chat-message.message.damage-applied .message-content {
   padding: 0;
@@ -29,7 +34,7 @@
 .chat-message.message.damage-applied .message-content > main {
   display: flex;
   flex-direction: row;
-  padding: 0.25rem;
+  padding: 0.25rem 0.5rem;
 }
 .chat-message.message.damage-applied .message-content > main.undone {
   text-decoration: line-through;
@@ -55,6 +60,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  border-radius: 8px 8px 0 0;
 }
 .chat-message.message.attack .message-content > header .icon,
 .chat-message.message.skill .message-content > header .icon {
@@ -228,6 +234,7 @@
 .chat-message.message.skill .message-content > footer {
   display: flex;
   flex-direction: column;
+  border-radius: 0 0 8px 8px;
 }
 .chat-message.message.attack .message-content > footer .target,
 .chat-message.message.skill .message-content > footer .target {
@@ -252,6 +259,10 @@
 .chat-message.message.skill .message-content > footer .target:first-child {
   border-top: unset;
   background-color: #dedede;
+}
+.chat-message.message.attack .message-content > footer .target:last-child,
+.chat-message.message.skill .message-content > footer .target:last-child {
+  border-radius: 0 0 8px 8px;
 }
 .chat-message.message.attack .message-content > footer .target .icon,
 .chat-message.message.skill .message-content > footer .target .icon {
@@ -311,6 +322,15 @@
   font-size: 14px;
   color: #1e1e1e;
   padding: 0;
+}
+.chat-message.message.attack .message-content > footer .target .apply button.update-targets,
+.chat-message.message.skill .message-content > footer .target .apply button.update-targets {
+  flex: 0 0 60%;
+  padding: 0.25rem;
+}
+.chat-message.message.attack .message-content > footer .target .apply button.update-targets i,
+.chat-message.message.skill .message-content > footer .target .apply button.update-targets i {
+  margin: 0;
 }
 .chat-message.message.skill .message-content header {
   justify-content: flex-start;

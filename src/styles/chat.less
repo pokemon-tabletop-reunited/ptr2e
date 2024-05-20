@@ -1,5 +1,5 @@
 .chat-message.message {
-    background: #fefefe;
+    background: var(--user-color, #fefefe);
     padding: 0;
     color: #1e1e1e;
 
@@ -16,15 +16,21 @@
     }
 
     header.message-header {
+        color: whitesmoke;
+        text-shadow: 1px 1px 5px #1e1e1e;
         padding: 0.25rem;
-        background-color: #cdcdcd;
-        border-bottom: 1px solid var(--color-underline-header);
+        background-color: var(--user-color, #cdcdcd);
         border-radius: 5px 5px 0 0;
+
+        .flavor-text {
+            font-style: italic;
+        }
     }
 
     .message-content {
         background-color: #fefefe;
-        padding: 0.25rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 8px;
     }
 
     &.damage-applied {
@@ -35,7 +41,7 @@
                 display: flex;
                 flex-direction: row;
 
-                padding: 0.25rem;
+                padding: 0.25rem 0.5rem;
 
                 &.undone {
                     text-decoration: line-through;
@@ -67,6 +73,7 @@
                 flex-direction: row;
                 justify-content: space-between;
                 align-items: center;
+                border-radius: 8px 8px 0 0;
 
                 .icon {
                     flex: 0 0 36px;
@@ -244,6 +251,7 @@
             >footer {
                 display: flex;
                 flex-direction: column;
+                border-radius: 0 0 8px 8px;
 
                 .target {
                     display: flex;
@@ -266,6 +274,10 @@
                     &:first-child {
                         border-top: unset;
                         background-color: #dedede;
+                    }
+
+                    &:last-child {
+                        border-radius: 0 0 8px 8px;
                     }
 
                     .icon {
@@ -324,6 +336,14 @@
                             font-size: 14px;
                             color: #1e1e1e;
                             padding: 0;
+
+                            &.update-targets {
+                                flex: 0 0 60%;
+                                padding: 0.25rem;
+                                i {
+                                    margin: 0;
+                                }
+                            }
                         }
                     }
                 }

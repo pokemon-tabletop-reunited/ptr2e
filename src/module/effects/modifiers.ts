@@ -29,6 +29,10 @@ interface RawModifier {
     hideIfDisabled?: boolean;
     /** If this modifier should not show up in the prompt regardless of whether it's disabled */
     hidden?: boolean;
+    /** The method of application of this modifier */
+    method?: "base" | "flat" | "percentile" | "stage";
+    /** The type of roll this modifier applies to, any if not relevant. */
+    type?: "any" | "damage" | "accuracy" | "evasion" | "crit" | "power"
 }
 
 interface ModifierAdjustment {
@@ -76,6 +80,10 @@ class ModifierPTR2e implements RawModifier {
     hideIfDisabled: boolean;
     /** If this modifier should not show up in the prompt regardless of whether it's disabled */
     hidden: boolean;
+    appliesTo: Map<ActorUUID, boolean>;
+
+    method: "base" | "flat" | "percentile" | "stage";
+    type: "any" | "damage" | "accuracy" | "evasion" | "crit" | "power"
 
     /**
      * The "category" of modifier (a misnomer since bonuses and penalties aren't modifiers):
@@ -88,7 +96,7 @@ class ModifierPTR2e implements RawModifier {
      * Create a new modifier.
      */
     constructor(args: ModifierObjectParams) {
-        this.label = game.i18n.localize(args.label)
+        this.label = game.i18n.localize(args.label ?? args.slug)
         this.slug = sluggify(args.slug ?? this.label);
 
         this.#originalValue = this.modifier = args.modifier;
@@ -102,6 +110,9 @@ class ModifierPTR2e implements RawModifier {
         this.hideIfDisabled = args.hideIfDisabled ?? false;
         this.critical = args.critical ?? null;
         this.hidden = args.hidden ?? false;
+        this.method = args.method ?? "percentile";
+        this.type = args.type ?? "any";
+        this.appliesTo = args.appliesTo ?? new Map();
         
         this.change = args.change ?? null;
         // Prevent upstream from blindly diving into recursion loops
@@ -137,7 +148,7 @@ class ModifierPTR2e implements RawModifier {
 
     /** Return a copy of this ModifierPTR2e instance */
     clone(options: {test?: Iterable<string>} = {}): ModifierPTR2e {
-        const clone = new ModifierPTR2e(fu.mergeObject({...this, modifier: this.#originalValue}));
+        const clone = new ModifierPTR2e(fu.mergeObject({...this, modifier: this.#originalValue, appliesTo: new Map(this.appliesTo)}));
         if(options.test) clone.test(options.test);
 
         return clone;
@@ -199,6 +210,8 @@ class StatisticModifier {
     breakdown = "";
     /** Optional notes, which are often added to statistic modifiers */
     notes?: RollNote[];
+    /** Total Modifiers for in use with the Attack Statistic. */
+    protected totalModifiers: Record<ModifierPTR2e['type'], Record<ModifierPTR2e['method'], number>> | null;
 
     /**
      * @param slug The name of this collection of statistic modifiers.
@@ -350,12 +363,62 @@ class CheckModifier extends StatisticModifier {
     }
 }
 
+class AttackCheckModifier extends CheckModifier {
+    declare protected totalModifiers: Record<ModifierPTR2e['type'], Record<ModifierPTR2e['method'], number>>;
+    
+    get total() {
+        return this.totalModifiers;
+    }
+
+    override calculateTotal(rollOptions: Set<string> = new Set()): void {
+        if (rollOptions.size > 0) {
+            for (const modifier of this._modifiers) {
+                modifier.test(rollOptions);
+            }
+
+            adjustModifiers(this._modifiers, rollOptions);
+        }
+
+        this.totalModifier = 0;
+        this.totalModifiers = this._modifiers.filter(m => !m.ignored).reduce((acc, modifier) => {
+            acc[modifier.type] ??= {
+                base: 0,
+                flat: 0,
+                stage: 0,
+                percentile: 1,
+            };
+            switch(modifier.method) {
+                case "base":
+                case "flat":
+                case "stage":
+                    acc[modifier.type][modifier.method] += modifier.modifier;
+                    break;
+                case "percentile":
+                    acc[modifier.type][modifier.method] *= (modifier.modifier >= 1 ? modifier.modifier / 100 : modifier.modifier);
+                    break;
+            }
+            return acc;
+        }, {} as Record<ModifierPTR2e['type'], Record<ModifierPTR2e['method'], number>>);
+    }
+}
+
 interface ModifierObjectParams extends RawModifier {
     change?: ChangeModel | null;
     alterations?: DamageAlteration[];
+    /** 
+     * In the case of a roll with multiple targets, 
+     * this modifier should only be applied to attacks against the specified targets.
+     * but is still affecting the attacker.
+     * 
+     * @remarks 
+     * the string key is the target's UUID
+     * the boolean value is whether the modifier applies to that target 
+     * (like 'ignored' can be toggled with the modifier popup)
+     * */
+    appliesTo?: Maybe<Map<ActorUUID, boolean>>;
 }
 
-export { ModifierPTR2e, StatisticModifier, CheckModifier };
+export { ModifierPTR2e, StatisticModifier, CheckModifier, AttackCheckModifier, adjustModifiers };
 export type {
     ModifierAdjustment,
     RawModifier,
@@ -364,3 +427,8 @@ export type {
     DeferredValue,
     DeferredPromise,
 };
+
+//@ts-ignore
+globalThis.ModifierPTR2e = ModifierPTR2e;
+//@ts-ignore
+globalThis.CheckModifier = CheckModifier;

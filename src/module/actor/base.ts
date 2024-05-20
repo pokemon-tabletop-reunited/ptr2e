@@ -7,7 +7,7 @@ import {
     HumanoidActorSystem,
     PokemonActorSystem,
 } from "@actor";
-import { ActiveEffectPTR2e } from "@effects";
+import { ActiveEffectPTR2e, EffectSourcePTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import { AttackPTR2e, PokemonType, RollOptionManager } from "@data";
 import { ActorFlags } from "types/foundry/common/documents/actor.js";
@@ -16,10 +16,15 @@ import FolderPTR2e from "@module/folder/document.ts";
 import { CombatantPTR2e, CombatPTR2e } from "@combat";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
-import { MovePTR2e } from "@item";
+import { ItemPTR2e, ItemSystemsWithActions, MovePTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
-import { Statistic } from "@system/statistics/statistic.ts";
+import { BaseStatisticCheck, Statistic } from "@system/statistics/statistic.ts";
+import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
+import { extractEphemeralEffects } from "src/util/rule-helpers.ts";
+import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import * as R from "remeda";
+import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 
 type ActorParty = {
     owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -389,24 +394,23 @@ class ActorPTR2e<
         return effects;
     }
 
-    //TODO: This should add any relevant modifiers
-    getEvasionStage() {
-        return this.system.battleStats.evasion.stage;
-    }
-    //TODO: This should add any relevant modifiers
-    getAccuracyStage() {
-        return this.system.battleStats.accuracy.stage;
+    get evasionStage() {
+        return this.system.battleStats.evasion.stage + (this.system.modifiers["evasion"] ?? 0);
     }
 
-    getDefenseStat(attack: AttackPTR2e, critModifier: number) {
-        return attack.category === "physical"
-            ? this.calcStatTotal(this.system.attributes.def, critModifier > 1)
-            : this.calcStatTotal(this.system.attributes.spd, critModifier > 1);
+    get accuracyStage() {
+        return this.system.battleStats.accuracy.stage + (this.system.modifiers["accuracy"] ?? 0);
     }
-    getAttackStat(attack: AttackPTR2e, critModifier: number) {
+
+    getDefenseStat(attack: {category: AttackPTR2e['category']}, isCrit: boolean) {
         return attack.category === "physical"
-            ? this.calcStatTotal(this.system.attributes.atk, critModifier > 1)
-            : this.calcStatTotal(this.system.attributes.spa, critModifier > 1);
+            ? this.calcStatTotal(this.system.attributes.def, isCrit)
+            : this.calcStatTotal(this.system.attributes.spd, isCrit);
+    }
+    getAttackStat(attack: {category: AttackPTR2e['category']}, isCrit: boolean) {
+        return attack.category === "physical"
+            ? this.calcStatTotal(this.system.attributes.atk, isCrit)
+            : this.calcStatTotal(this.system.attributes.spa, isCrit);
     }
 
     calcStatTotal(stat: Attribute, isCrit: boolean) {
@@ -421,7 +425,7 @@ class ActorPTR2e<
         const damageApplied = Math.min(damage || 0, this.system.health.value);
         if (damageApplied === 0) return 0;
         await this.update({
-            "system.health.value": Math.clamped(
+            "system.health.value": Math.clamp(
                 this.system.health.value - damage,
                 0,
                 this.system.health.max
@@ -630,6 +634,225 @@ class ActorPTR2e<
             "ActiveEffect",
             applicable.map((s) => s.id)
         );
+    }
+
+    async getCheckContext<
+        TStatistic extends BaseStatisticCheck<any, any>,
+        TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>,
+    >(
+        params: CheckContextParams<TStatistic, TItem>
+    ): Promise<CheckContext<this, TStatistic, TItem>> {
+        const context = await this.getRollContext(params);
+        const rangeIncrement = context.target?.rangeIncrement ?? null;
+
+        const appliesTo = context.target?.token?.actor?.uuid ?? (context.target?.actor?.id ? context.target.actor.uuid : null) ?? null;
+
+        const rangePenalty = rangeIncrement ? new ModifierPTR2e({
+            label: "PTR2E.Modifiers.rip",
+            slug: `range-penalty-${appliesTo ?? fu.randomID()}`,
+            modifier: Math.min(-(rangeIncrement * (rangeIncrement + 1) / 2), 0),
+            method: "stage",
+            type: "accuracy",
+            appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
+        }) : null
+        if(rangePenalty) context.self.modifiers.push(rangePenalty);
+
+        const evasionStages = context.target?.actor?.evasionStage ?? 0;
+        if(evasionStages !== 0) {
+            const evasionModifier = new ModifierPTR2e({
+                label: "PTR2E.Modifiers.evasion",
+                slug: `evasion-modifier-${appliesTo ?? fu.randomID()}`,
+                modifier: evasionStages,
+                method: "stage",
+                type: "evasion",
+                appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
+            });
+            context.self.modifiers.push(evasionModifier);
+        }
+
+        return { ...context};
+    }
+
+    protected getRollContext<
+        TStatistic extends BaseStatisticCheck<any, any>,
+        TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>,
+    >(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
+    protected async getRollContext(params: RollContextParams): Promise<RollContext<this>> {
+        const [selfToken, targetToken]: [TokenPTR2e | null, TokenPTR2e | null] =
+            canvas.ready && !params.viewOnly
+                ? [
+                      canvas.tokens.controlled.find((t) => t.actor === this) ??
+                          (this.getActiveTokens().shift() as TokenPTR2e) ??
+                          null,
+                      params.target?.token ??
+                          (params.target?.actor?.getActiveTokens().shift() as TokenPTR2e) ??
+                          null,
+                  ]
+                : [null, null];
+
+        const originEphemeralEffects = await extractEphemeralEffects({
+            affects: "origin",
+            origin: this,
+            target: params.target?.actor ?? targetToken?.actor ?? null,
+            item: params.item ?? null,
+            attack: params.attack ?? null,
+            domains: params.domains,
+            options: [...params.options, ...(params.item?.getRollOptions("item") ?? [])],
+        });
+
+        const initialActionOptions =
+            params.traits?.map((t) => `self:action:trait:${typeof t === "string" ? t : t.slug}`) ??
+            [];
+
+        const selfActor =
+            params.viewOnly || !targetToken?.actor
+                ? this
+                : this.getContextualClone(
+                      R.compact([
+                          ...Array.from(params.options),
+                          ...targetToken.actor.getSelfRollOptions("target"),
+                          ...initialActionOptions,
+                      ]),
+                      originEphemeralEffects
+                  );
+
+        //TODO: Implement Move Variants
+        //const attackActions = params.attack ? [params.attack] : [];
+
+        const statistic = params.statistic;
+
+        const selfItem = ((): ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null => {
+            // 1. Simplest case: no context clone, so used the item passed to this method
+            if (selfActor === this) return params.item ?? null;
+
+            // 2. Get the item from the statistic if it's stored therein
+            if (
+                statistic &&    
+                "item" in statistic &&
+                statistic.item instanceof ItemPTR2e &&
+                "actions" in statistic.item.system
+            ) {
+                return statistic.item as ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>;
+            }
+
+            // 3. Get the item directly from the context clone
+            const itemClone = selfActor.items.get(params.item?.id ?? "") as unknown as
+                | ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>
+                | undefined;
+            if (itemClone) return itemClone;
+
+            // 4 Give up :(
+            return params.item ?? null;
+        })();
+
+        //TODO: Probably needs similar implementation to selfItem
+        const selfAttack = params.attack;
+
+        const itemOptions = selfItem?.getRollOptions("item") ?? [];
+        const actionTraits = R.uniq(
+            params.traits?.map((t) => (typeof t === "string" ? t : t.slug)) ?? []
+        );
+
+        // Calculate distance and range increment, set as a roll option
+        const distance = selfToken && targetToken ? selfToken.distanceTo(targetToken) : 0;
+        const [originDistance, targetDistance] =
+            typeof distance === "number"
+                ? [`origin:distance:${distance}`, `target:distance:${distance}`]
+                : [null, null];
+
+        const originRollOptions = selfToken && targetToken 
+            ? R.compact(
+                R.uniq([
+                    ...selfActor.getSelfRollOptions('origin'),
+                    ...actionTraits.map((t) => `origin:action:trait:${t}`),
+                    ...(originDistance ? [originDistance] : [])
+                ])
+            )
+            : [];
+
+        // Target roll options
+        const getTargetRollOptions = (actor: Maybe<ActorPTR2e>): string[] => {
+            const targetOptions = actor?.getSelfRollOptions("target") ?? [];
+            if(targetToken) {
+                targetOptions.push("target") // An indicator that there is any kind of target.
+            }
+            return targetOptions.sort();
+        }
+        const targetRollOptions = getTargetRollOptions(targetToken?.actor);
+
+        // Get ephemeral effects from this actor that affect the target while being attacked
+        const targetEphemeralEffects = await extractEphemeralEffects({
+            affects: "target",
+            origin: selfActor,
+            target: targetToken?.actor ?? null,
+            item: selfItem,
+            attack: params.attack ?? null,
+            domains: params.domains,
+            options: [...params.options, ...itemOptions, ...targetRollOptions],
+        });
+
+        // Clone the actor to recalculate its AC with contextual roll options
+        const targetActor = params.viewOnly
+            ? null
+            : (params.target?.actor ?? targetToken?.actor)?.getContextualClone(
+                  R.compact([...params.options, ...itemOptions, ...originRollOptions]),
+                  targetEphemeralEffects,
+              ) ?? null;
+
+        const rollOptions = new Set(
+            R.compact([
+                ...params.options,
+                ...selfActor.getRollOptions(params.domains),
+                ...(targetActor ? getTargetRollOptions(targetActor) : targetRollOptions),
+                ...actionTraits.map(t => `self:action:trait:${t}`),
+                ...itemOptions,
+                ...(targetDistance ? [targetDistance] : []),
+            ])
+        )
+
+        const rangeIncrement = selfAttack ? selfAttack.getRangeIncrement(distance) : null;
+        if(rangeIncrement) rollOptions.add(`target:range-increment:${rangeIncrement}`);
+
+        const self = {
+            actor: selfActor,
+            token: selfToken?.document ?? null,
+            statistic,
+            item: selfItem,
+            attack: selfAttack!,
+            modifiers: []
+        }
+
+        const target = 
+            targetActor && targetToken && distance !== null
+                ? { actor: targetActor, token: targetToken.document, distance, rangeIncrement }
+                : null;
+        return {
+            options: rollOptions,
+            self,
+            target,
+            traits: actionTraits
+        }
+    }
+
+    protected getContextualClone(
+        rollOptions: string[],
+        ephemeralEffects: EffectSourcePTR2e[],
+    ): this {
+        const rollOptionsAll = rollOptions.reduce(
+            (options: Record<string, boolean>, option: string) => ({ ...options, [option]: true }),
+            {}
+        );
+        const applicableEffects = ephemeralEffects.filter((effect) => !this.isImmuneTo(effect));
+
+        return this.clone({
+            items: [fu.deepClone(this._source.items), applicableEffects].flat(),
+            flags: { ptr2e: { rollOptions: { all: rollOptionsAll } } },
+        });
+    }
+
+    //TODO: Implement
+    isImmuneTo(_effect: EffectSourcePTR2e): boolean {
+        return false;
     }
 
     protected override _onEmbeddedDocumentChange(): void {

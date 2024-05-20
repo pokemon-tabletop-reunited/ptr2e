@@ -17,6 +17,7 @@ import { ActionEditor } from "@module/apps/action-editor.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { SkillsComponent } from "./components/skills-component.ts";
 import { SkillsEditor } from "@module/apps/skills-editor.ts";
+import { AttackPTR2e } from "@data";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     ActorSheetV2Expanded
@@ -75,6 +76,18 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                 },
                 "edit-movelist": function (this: ActorSheetPTRV2) {
                     new KnownActionsApp(this.actor).render(true);
+                },
+                "roll-attack": async function (this: ActorSheetPTRV2, event: Event) {
+                    const actionDiv = (event.target as HTMLElement).closest(".action") as HTMLElement;
+                    if (!actionDiv) return;
+
+                    const slug = actionDiv.dataset.slug;
+                    if (!slug) return;
+
+                    const action = this.actor.actions.get(slug);
+                    if (!action || !(action instanceof AttackPTR2e)) return;
+
+                    await action.roll();
                 },
                 "action-to-chat": ActorSheetPTRV2._onToChatAction,
                 "action-edit": ActorSheetPTRV2._onEditAction,

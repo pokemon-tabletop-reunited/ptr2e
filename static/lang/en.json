@@ -18,6 +18,18 @@
     "ITEM.DeleteButton": "Delete",
     
     "PTR2E": {
+        "Modifiers": {
+            "power": "Attack Power",
+            "accuracy": "Accuracy Stages",
+            "evasion": "Evasion Stages",
+            "critical": "Critical Hit",
+            "attack": "Attack Stat",
+            "defense": "Defense Stat",
+            "specialAttack": "Special Attack Stat",
+            "specialDefense": "Special Defense Stat",
+            "speed": "Speed Stat",
+            "rip": "Range Increment Penalty"
+        },
         "Effect": {
             "FIELDS": {
                 "ChangeType": {
@@ -25,6 +37,8 @@
                     "hint": "The type of change.",
                     "basic": "AE-Like",
                     "flat-modifier": "Flat Modifier",
+                    "stage-modifier": "Stage Modifier",
+                    "percentile-modifier": "Percentile Modifier",
                     "roll-option": "Roll Option",
                     "grant-item": "Grant Item"
                 },
@@ -926,9 +940,21 @@
                 "Label": "Move Accuracy",
                 "Hint": "The accuracy of the move."
             },
+            "CritRoll": {
+                "Label": "Crit Roll",
+                "Hint": "The roll to determine if the attack crits."
+            },
+            "CritDC": {
+                "Label": "Crit DC",
+                "Hint": "The crit DC of this attack, calculated based on the attacker's crit stages."
+            },
             "AdjustedStages": {
                 "Label": "Adjusted Stages",
                 "Hint": "The combined accuracy stages of the attacker, and evasion stages of the defender. (max 6, min -6)"
+            },
+            "CritStages": {
+                "Label": "Crit Stages",
+                "Hint": "The Crit Stages applied to this attack (min 0, max 3)"
             },
             "OtherModifiers": "Other Modifiers",
             "ChangeToCritical": "Make Crit",

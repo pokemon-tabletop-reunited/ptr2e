@@ -6,13 +6,16 @@ type AccuracyCalc = {
 }
 
 type AccuracyContext = {
-    moveAccuracy: number | null;
+    moveAccuracy?: number | null;
     otherModifiers?: number;
     adjustedStages?: number;
     stageModifier?: number;
     accuracyRoll?: number;
     accuracyDC?: number;
-    override: boolean;
+    override?: boolean;
+    critDC?: number;
+    critStages?: number;
+    critRoll?: number;
 }
 
 type DamageCalc = {

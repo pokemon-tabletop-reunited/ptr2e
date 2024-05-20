@@ -1,0 +1,55 @@
+<main>
+    <header class="modifier">
+        <span class="mod">Modifier</span>
+        <span class="type">Type</span>
+        <span class="value">Value</span>
+        <span class="exclude"></span>
+    </header>
+    <article>
+        <section class="modifier-panel{{#if avatarScroll}} avatar-scroll{{/if}}">
+            {{#each modifiers as |modifier|}}
+                {{#unless modifier.hidden}}
+                    <div class="modifier{{#if modifier.ignored}} ignored{{#if modifier.hideIfDisabled}} hidden{{/if}}{{/if}}" data-collection="{{modifier.collection}}" data-slug="{{modifier.slug}}">
+                        <span class="mod" data-tooltip="{{modifier.label}}" data-tooltip-direction="UP">{{modifier.label}}</span>
+                        <span class="type">{{formatSlug modifier.select}}</span>
+                        <span class="value"> {{modifier.modifier}}</span>
+                        <span class="exclude">
+                            <input type="checkbox" {{#unless modifier.ignored}}checked{{/unless}}>
+                        </span>
+                    </div>
+                    <span class="appliesTo" data-collection="{{modifier.collection}}" data-slug="{{modifier.slug}}">
+                        <span class="label">Applies to</span>
+                        <span class="avatars">
+                            {{#each modifier.appliesTo}}
+                                <span class="avatar{{#unless this.value}} unapplicable{{/unless}}" data-uuid="{{this.uuid}}" data-tooltip="{{this.name}}" data-tooltip-direction="UP">
+                                    <img src="{{this.img}}" alt="{{this.name}}">
+                                </span>
+                            {{/each}}
+                        </span>
+                        <span class="all">
+                            <input type="checkbox" {{#if modifier.appliesToAll}}checked{{/if}}>
+                            <label for="all">All?</label>
+                        </span>
+                    </span>
+                {{/unless}}
+            {{/each}}
+        </section>
+        <section class="add-modifier-panel">
+            <div class="modifier">
+                <input type="text" class="mod add-modifier-name" placeholder="New Modifier">
+                <select class="type add-modifier-type">
+                    <option value="accuracy-stage">Accuracy Stage</option>
+                    <option value="accuracy-flat">Accuracy Flat</option>
+                    <option value="crit-stage">Crit Stage</option>
+                    <option value="power-percent">Power Percent</option>
+                    <option value="damage-percent">Damage Percent</option>
+                </select>
+                <input type="number" class="value add-modifier-value" placeholder="+1" />
+                <button type="button" class="exclude add-modifier">+Add</button>
+            </div>
+        </section>
+    </article>
+    <footer clas="mt-3">
+        <button type="submit">Submit</button>
+    </footer>
+</main>

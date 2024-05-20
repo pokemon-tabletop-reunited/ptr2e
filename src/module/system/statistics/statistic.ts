@@ -1,15 +1,15 @@
 import { ActorPTR2e } from "@actor";
 import { BaseStatistic } from "./base.ts";
-import {
-    StatisticCheckData,
-    StatisticData,
-    StatisticDifficultyClassData,
-} from "./data.ts";
+import { StatisticCheckData, StatisticData, StatisticDifficultyClassData } from "./data.ts";
 import { CheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
-import { CheckRoll, CheckRollCallback, CheckType } from "@system/rolls/check-roll.ts";
+import { AttackRollCallback, CheckRoll, CheckRollCallback, CheckType } from "@system/rolls/check-roll.ts";
 import * as R from "remeda";
-import { extractModifierAdjustments, extractModifiers, extractNotes } from "src/util/rule-helpers.ts";
+import {
+    extractModifierAdjustments,
+    extractModifiers,
+    extractNotes,
+} from "src/util/rule-helpers.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CheckDC } from "@system/rolls/degree-of-success.ts";
 import { RollNote, RollNoteSource } from "@system/notes.ts";
@@ -24,8 +24,7 @@ class Statistic extends BaseStatistic {
 
     config: RollOptionConfig;
 
-    #check?: StatisticCheck<this>;
-    // #dc?: StatisticDifficultyClass<this>;
+    #check?: BaseStatisticCheck<any, any, this>;
 
     constructor(actor: ActorPTR2e, data: StatisticData, config: RollOptionConfig = {}) {
         data.modifiers ??= [];
@@ -37,6 +36,7 @@ class Statistic extends BaseStatistic {
                       slug: data.slug,
                       label: data.label,
                       modifier: actor.system.skills.get(data.slug)!.total,
+                      method: "flat",
                   })
                 : null;
 
@@ -58,13 +58,9 @@ class Statistic extends BaseStatistic {
         this.data.dc ??= { domains: [`${this.slug}-dc`] };
     }
 
-    get check(): StatisticCheck<this> {
+    get check(): BaseStatisticCheck<any, any, this> {
         return (this.#check ??= new StatisticCheck(this, this.data, this.config));
     }
-
-    // get dc(): StatisticDifficultyClass<this> {
-    //     return (this.#dc ??= new StatisticDifficultyClass(this, this.data, this.config));
-    // }
 
     /** Convenience getter to the statistic's total modifier */
     get mod(): number {
@@ -153,7 +149,7 @@ class Statistic extends BaseStatistic {
 
     /** Shortcut to `this#check#roll` */
     roll(args: StatisticRollParameters = {}): Promise<Rolled<CheckRoll> | null> {
-        return this.check.roll(args);
+        return this.check.roll(args) as Promise<Rolled<CheckRoll> | null>;
     }
 
     // /** Creates view data for sheets and chat messages */
@@ -172,7 +168,7 @@ class Statistic extends BaseStatistic {
     // }
 }
 
-class StatisticCheck<TParent extends Statistic = Statistic> {
+class StatisticCheck<TParent extends Statistic = Statistic> implements BaseStatisticCheck<StatisticRollParameters, Rolled<CheckRoll>, TParent> {
     parent: TParent;
     type: CheckType;
     label: string;
@@ -188,8 +184,7 @@ class StatisticCheck<TParent extends Statistic = Statistic> {
         const checkDomains = new Set(R.compact(["check", data.check.domains].flat()));
         if (this.type === "attack-roll") {
             checkDomains.add("attack");
-            checkDomains.add("attack-roll");
-            checkDomains.add(`${this.parent.slug}-attack-roll`);
+            checkDomains.add(`${this.parent.slug}-attack`);
         } else {
             checkDomains.add(`${this.parent.slug}-check`);
         }
@@ -217,12 +212,12 @@ class StatisticCheck<TParent extends Statistic = Statistic> {
                 );
                 return modifier;
             });
-        
+
         const rollOptions = parent.createRollOptions(this.domains, config);
         this.modifiers = [
             ...parentModifiers,
-            ...checkOnlyModifiers.map(modifier => modifier.clone({test: rollOptions}))
-        ]
+            ...checkOnlyModifiers.map((modifier) => modifier.clone({ test: rollOptions })),
+        ];
         this.mod = new StatisticModifier(this.label, this.modifiers, rollOptions).totalModifier;
     }
 
@@ -236,32 +231,39 @@ class StatisticCheck<TParent extends Statistic = Statistic> {
 
     async roll(args: StatisticRollParameters = {}): Promise<Rolled<CheckRoll> | null> {
         // Use a CheckDC Object
-        args.dc = typeof args.dc === "number" ? { value: Math.trunc(args.dc) || 0 } : args.dc ?? null;
+        args.dc =
+            typeof args.dc === "number" ? { value: Math.trunc(args.dc) || 0 } : args.dc ?? null;
 
-        const {rollMode, skipDialog} = args;
+        const { rollMode, skipDialog } = args;
         const domains = this.domains;
         // The origin's token
-        const token = args.token ?? this.actor.getActiveTokens(false, true).shift() as TokenDocumentPTR2e | null;
+        const token =
+            args.token ??
+            (this.actor.getActiveTokens(false, true).shift() as TokenDocumentPTR2e | null);
         const item = args.item ?? null;
         const origin = args.origin;
-        
-        const targetTokens = origin ? null : (
-            args.targets?.flatMap(target => target?.getActiveTokens() ?? []) ?? Array.from(game.user.targets)
-        ) as TokenPTR2e[] ?? null;
+
+        const targetTokens = origin
+            ? null
+            : ((args.targets?.flatMap((target) => target?.getActiveTokens() ?? []) ??
+                  Array.from(game.user.targets)) as TokenPTR2e[]) ?? null;
 
         //TODO: Implement roll context for attacks
-        const rollContext: CheckContext<this['actor']> | null = null as CheckContext<this['actor']> | null;
+        const rollContext: CheckContext<this["actor"]> | null = null as CheckContext<
+            this["actor"]
+        > | null;
 
         const selfActor = rollContext?.self.actor ?? this.actor;
         const dc = typeof args.dc?.value === "number" ? args.dc : rollContext?.dc ?? null;
-        const targets: RollTarget[] | null = targetTokens?.map(token => {
-            return {
-                actor: token.actor!,
-                token: token.document,
-                distance: 0,
-                rangeIncrement: null
-            }
-        }) ?? null;
+        const targets: RollTarget[] | null =
+            targetTokens?.map((token) => {
+                return {
+                    actor: token.actor!,
+                    token: token.document,
+                    distance: 0,
+                    rangeIncrement: null,
+                };
+            }) ?? null;
 
         const extraModifiers = R.compact([args.modifiers, rollContext?.self.modifiers].flat());
 
@@ -274,11 +276,14 @@ class StatisticCheck<TParent extends Statistic = Statistic> {
             this.parent.base ? `check:statistic:base:${this.parent.base.slug}` : null,
         ]);
 
-        const options = this.createRollOptions({...args, origin, extraRollOptions});
-        const notes = [...extractNotes(selfActor.synthetics.rollNotes, domains), ...(args.extraRollNotes ?? [])];
+        const options = this.createRollOptions({ ...args, origin, extraRollOptions });
+        const notes = [
+            ...extractNotes(selfActor.synthetics.rollNotes, domains),
+            ...(args.extraRollNotes ?? []),
+        ];
 
         //TODO: Apply just-in-time roll options from changes
-        
+
         const context: CheckRollContext = {
             actor: selfActor,
             token,
@@ -295,23 +300,41 @@ class StatisticCheck<TParent extends Statistic = Statistic> {
             rollMode,
             skipDialog,
             title: args.title?.trim() || args.label?.trim() || this.label,
-            createMessage: args.createMessage ?? true
-        }
-        const check = new CheckModifier(this.parent.slug, {modifiers: this.modifiers}, extraModifiers);
-        const roll = await CheckPTR2e.roll(check, context, null, args.callback);
+            createMessage: args.createMessage ?? true,
+        };
+        const check = new CheckModifier(
+            this.parent.slug,
+            { modifiers: this.modifiers },
+            extraModifiers
+        );
+        const roll = await CheckPTR2e.roll(check, context, args.callback);
 
         return roll;
     }
 
     get breakdown(): string {
         return this.modifiers
-            .filter(m => !m.ignored)
-            .map(m => `${m.label}: ${m.signedValue}`)
+            .filter((m) => !m.ignored)
+            .map((m) => `${m.label}: ${m.signedValue}`)
             .join(", ");
     }
 }
 
-interface StatisticRollParameters {
+interface BaseStatisticCheck<TRollParam, TRollResult, TParent extends Statistic = Statistic> {
+    parent: TParent;
+    type: CheckType;
+    label: string;
+    domains: string[];
+    mod: number;
+    modifiers: ModifierPTR2e[];
+
+    get actor(): ActorPTR2e;
+    createRollOptions(args: RollOptionConfig): Set<string>;
+    roll(args: TRollParam): Promise<TRollResult | null>;
+    get breakdown(): string;
+}
+
+interface StatisticRollParameters<TCallback extends CheckRollCallback | AttackRollCallback = CheckRollCallback>{
     /** A string of some kind to identify the roll: will be included in `CheckRoll#options` */
     identifier?: string;
     /** The slug of an action of which this check is a constituent roll */
@@ -356,8 +379,14 @@ interface StatisticRollParameters {
     createMessage?: boolean;
     /** Type override for things like luck-checks */
     type?: CheckType;
+    /** Event that caused this roll to occur */
+    event?: Event;
     /** Callback called when the roll occurs. */
-    callback?: CheckRollCallback;
+    callback?: TCallback;
+}
+
+interface AttackStatisticRollParameters extends StatisticRollParameters<AttackRollCallback> {
+    consumeAmmo?: boolean 
 }
 
 interface CheckDCReference {
@@ -373,3 +402,4 @@ interface RollOptionConfig {
 }
 
 export { Statistic, StatisticCheck };
+export type { StatisticRollParameters, RollOptionConfig, AttackStatisticRollParameters, BaseStatisticCheck}

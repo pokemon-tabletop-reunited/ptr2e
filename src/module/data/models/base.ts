@@ -1,4 +1,4 @@
-import { ActionPTR2e, AttackPTR2e, BasicChangeSystem, RollOptionChangeSystem, FlatModifierChangeSystem, GrantItemChangeSystem } from "@data";
+import { ActionPTR2e, AttackPTR2e, BasicChangeSystem, RollOptionChangeSystem, FlatModifierChangeSystem, GrantItemChangeSystem, StageModifierSystem, PercentileModifierSystem } from "@data";
 
 let changeTypes;
 export function ChangeModelTypes() {    
@@ -7,6 +7,8 @@ export function ChangeModelTypes() {
         [RollOptionChangeSystem.TYPE]: RollOptionChangeSystem,
         [FlatModifierChangeSystem.TYPE]: FlatModifierChangeSystem,
         [GrantItemChangeSystem.TYPE]: GrantItemChangeSystem,
+        [StageModifierSystem.TYPE]: StageModifierSystem,
+        [PercentileModifierSystem.TYPE]: PercentileModifierSystem,
     });
 }
 
