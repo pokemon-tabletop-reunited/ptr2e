@@ -13,17 +13,17 @@
         {{> effect-traits traits=attack.traits attack=attack}}
     </article>
     {{#each results as |data uuid|}}
-    <div class="collapse-button">
-        <button type="button" class="collapse-rolls" data-uuid="{{uuid}}">Show Rolls for {{data.target.name}}</button>
-    </div>
-    <article class="collapsed">
-        {{#if data.rolls.accuracy}}{{{data.rolls.accuracy}}}{{/if}}
-        {{#if data.rolls.crit}}{{{data.rolls.crit}}}{{/if}}
-        {{#if data.rolls.damage}}{{{data.rolls.damage}}}{{/if}}
-        {{#each data.rolls.effects}}
-            {{{this}}}
-        {{/each}}
-    </article>
+        <div class="collapse-button">
+            <button type="button" class="collapse-rolls" data-uuid="{{uuid}}">Show Rolls for {{data.target.name}}</button>
+        </div>
+        <article class="collapsed">
+            {{#if data.rolls.accuracy}}{{{data.rolls.accuracy}}}{{/if}}
+            {{#if data.rolls.crit}}{{{data.rolls.crit}}}{{/if}}
+            {{#if data.rolls.damage}}{{{data.rolls.damage}}}{{/if}}
+            {{#each data.rolls.effects}}
+                {{{this}}}
+            {{/each}}
+        </article>
     {{/each}}
 </main>
 <footer>
@@ -31,7 +31,7 @@
         <div class="icon">Icon</div>
         <div class="status">Status</div>
         <div class="damage">Damage</div>
-        <div class="apply">{{#if (isGm)}}<button type="button" class="update-targets" data-tooltip="[Left Click] to add current selected targets<br>[Left Alt + Left Click] to overwrite targets with currently selected targets"><i class="fas fa-crosshairs"></i></button>{{/if}}</div>
+        <div class="apply"><button type="button" class="update-targets" data-tooltip="[Left Click] to add current selected/targeted actors<br>[Left Alt + Left Click] to overwrite targets with currently selected/targeted actors"><i class="fas fa-crosshairs"></i></button></div>
     </div> 
     {{#each results as |data uuid|}}
         <div class="target" data-target-uuid="{{data.target.uuid}}">

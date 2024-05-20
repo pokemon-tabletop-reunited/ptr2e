@@ -261,7 +261,14 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     }
 
     async updateTargets(event: JQuery.ClickEvent) {
-        const targets = canvas.tokens.controlled.map(t => t.actor).filter(t => !!t) as ActorPTR2e[]
+        const targets = (() => {
+            const controlled = canvas.tokens.controlled.map(t => t.actor).filter(t => !!t) as ActorPTR2e[];
+            if(controlled.length) {
+                if(!(controlled.length === 1 && controlled[0].uuid === this.origin.uuid)) return controlled;
+            }
+
+            return [...game.user.targets].map(t => t.actor).filter(t => !!t) as ActorPTR2e[];
+        })()
         if(!targets.length) return;
         
         await this.attack.statistic?.check.roll({

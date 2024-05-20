@@ -252,7 +252,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
             domains: this.domains,
             damaging: args.damaging,
             createMessage: args.createMessage ?? true,
-            skipDialog: args.skipDialog ?? false,
+            skipDialog: args.skipDialog ?? targets.length === 0,
         }
         const check = new CheckModifier(
             this.parent.slug,
