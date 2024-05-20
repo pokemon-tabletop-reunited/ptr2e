@@ -105,7 +105,7 @@ class CheckPTR2e {
                 showBreakdown: !!context.actor?.hasPlayerOwner,
                 breakdown: targetCheck.breakdown,
                 attack: targetContext.self.attack,
-                rip: !!targetContext.target?.rangeIncrement
+                rip: !!targetContext.target?.rangeIncrement,
             };
     
             const rolls: {

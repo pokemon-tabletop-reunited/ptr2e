@@ -50,7 +50,7 @@
                 {{#if (gte value 0)}}
                     <span>{{numberFormat value2 decimals=2}} ({{add value division}} / {{division}})</span>
                 {{else}}
-                    <span>{{numberFormat value2 decimals=2}} ({{division}} / {{add value division}})</span>
+                    <span>{{numberFormat value2 decimals=2}} ({{division}} / {{add (abs value) division}})</span>
                 {{/if}}
             {{else}}
                 <span>{{value}}</span>

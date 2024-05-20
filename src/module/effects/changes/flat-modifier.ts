@@ -34,7 +34,7 @@ export default class FlatModifierChangeSystem extends ChangeModel {
         if (!resolvedSelector) return;
 
         const { selector, type } = ((): { selector: string; type: ModifierPTR2e["type"] } => {
-            const suffixes = ["accuracy", "evasion", "damage", "crit"] as const;
+            const suffixes = ["accuracy", "evasion", "damage", "crit", "power"] as const;
 
             for (const suffix of suffixes) {
                 if (resolvedSelector.endsWith("-" + suffix)) {

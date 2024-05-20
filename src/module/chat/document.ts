@@ -4,6 +4,7 @@ import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CheckRollContext } from "@system/rolls/data.ts";
 import TypeDataModel from "types/foundry/common/abstract/type-data.js";
 import { AttackRollResult, CheckRoll } from "../system/rolls/check-roll.ts";
+import AttackMessageSystem from "./models/attack.ts";
 
 class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends ChatMessage<TSchema> {
     /** Get the actor associated with this chat message */
@@ -176,6 +177,37 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
 
                 $(content).css("display", "flex");
             }
+
+            if(el.dataset.uuid) {
+                let highlights: Token[] = [];
+                el.addEventListener("mouseover", async (event) => {
+                    event.preventDefault();
+                    if (!canvas.ready) return;
+
+                    const actor = (await fromUuid(el.dataset.uuid)) as ActorPTR2e;
+                    if (!actor) return;
+
+                    const tokens = actor.getActiveTokens(false);
+                    if (!tokens?.length) return;
+
+                    if (tokens.every((t) => t.isVisible)) {
+                        //@ts-expect-error ignore protected clause.
+                        tokens.forEach((t) => t._onHoverIn(event));
+                        highlights = tokens;
+                    }
+                });
+
+                el.addEventListener("mouseout", async (event) => {
+                    event.preventDefault();
+                    if (!canvas.ready) return;
+
+                    if (!highlights.length) return;
+
+                    //@ts-expect-error ignore protected clause.
+                    highlights.forEach((t) => t._onHoverOut(event));
+                    highlights = [];
+                });
+            }
         });
     }
 
@@ -232,11 +264,45 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         });
     }
 
-    static async createFromResults<TTypeDataModel extends TypeDataModel = TypeDataModel>(
-        _context: CheckRollContext & {notesList?: HTMLUListElement | null},
-        _results: AttackRollResult[]
-    ): Promise<ChatMessagePTR2e<TTypeDataModel> | undefined> {
-        return;
+    static async createFromResults(
+        context: CheckRollContext & {notesList?: HTMLUListElement | null},
+        results: AttackRollResult[]
+    ): Promise<ChatMessagePTR2e<AttackMessageSystem> | undefined> {
+        if(!context.action) return;
+        if(!context.actor) return;
+
+        const speaker = ChatMessagePTR2e.getSpeaker({actor: context.actor!, token: context.token!});
+        const flavor = context.notesList ? context.notesList.innerHTML : context.title ?? "";
+
+        const system: {
+            attackSlug: string;
+            origin: Record<string, unknown>;
+            results: Record<string, unknown>[];
+        } = {
+            attackSlug: context.action,
+            origin: (() => {
+                const json: Record<string, unknown> = context.actor!.toJSON();
+                json.uuid = context.token?.actor?.uuid ?? context.actor.uuid;
+                return json;
+            })(),
+            results: results.map(r => ({
+                target: (() => {
+                    const json: Record<string, unknown> = r.context.target!.actor.toJSON();
+                    json.uuid = r.context.target!.token?.actor?.uuid ?? r.context.target!.actor.uuid;
+                    return json;
+                })(),
+                accuracy: r.rolls.accuracy!.toJSON(),
+                crit: r.rolls.crit!.toJSON(),
+                damage: r.rolls.damage!.toJSON()
+            }))
+        }
+        
+        return ChatMessagePTR2e.create<ChatMessagePTR2e<AttackMessageSystem>>({
+            type: "attack",
+            speaker,
+            flavor,
+            system
+        });
     }
 }
 

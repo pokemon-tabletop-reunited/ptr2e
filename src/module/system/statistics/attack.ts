@@ -76,24 +76,13 @@ class AttackStatistic extends Statistic {
                         label: game.i18n.localize("PTR2E.Modifiers.power"),
                         modifier: attack.power!,
                         method: "base",
-                        type: "damage",
+                        type: "power",
                         hidden: true
                     })
                 );
             } else {
                 //TODO: Implement alt. move formulas, such as flat damage or weight based.
             }
-
-            data.modifiers.push(
-                new ModifierPTR2e({
-                    slug: "category",
-                    label: game.i18n.localize(`PTR2E.Modifiers.${attack.category}Attack`),
-                    modifier: actor.attributes[attack.category === "physical" ? "atk" : "spa"].value,
-                    method: "flat",
-                    type: "damage",
-                    hidden: true
-                })
-            );
         }
 
         data.rollOptions = [

@@ -67,6 +67,8 @@ export class AttackModifierPopup extends ModifierPopup {
                               : "invalid";
                     case "crit":
                         return method === "stage" ? "crit-stage" : "invalid";
+                    case "power":
+                        return method === "percentile" ? "power-percentile" : "invalid";
                     case "damage":
                         return method === "percentile" ? "damage-percentile" : "invalid";
                     default:
@@ -78,8 +80,9 @@ export class AttackModifierPopup extends ModifierPopup {
                 "accuracy-stage": 1,
                 "accuracy-flat": 2,
                 "crit-stage": 3,
-                "damage-percentile": 4,
-                invalid: 5,
+                "power-percentile": 4,
+                "damage-percentile": 5,
+                invalid: 6,
             };
 
             const checkModifiers = this.check.modifiers.map((m) => {
@@ -127,7 +130,7 @@ export class AttackModifierPopup extends ModifierPopup {
                         return output;
                     })(),
                 };
-                if(modifier.appliesTo.every((entry) => entry.value)) modifier.appliesToAll = true;
+                if (modifier.appliesTo.every((entry) => entry.value)) modifier.appliesToAll = true;
                 if (modifier.select === "invalid") modifier.hidden = true;
                 return modifier;
             });
@@ -164,7 +167,7 @@ export class AttackModifierPopup extends ModifierPopup {
                         return output;
                     })(),
                 };
-                if(modifier.appliesTo.every((entry) => entry.value)) modifier.appliesToAll = true;
+                if (modifier.appliesTo.every((entry) => entry.value)) modifier.appliesToAll = true;
                 if (modifier.select === "invalid") modifier.hidden = true;
                 return modifier;
             });
@@ -305,7 +308,7 @@ export class AttackModifierPopup extends ModifierPopup {
                 errors.push("Modifier value must not be zero.");
             }
             if (
-                !["accuracy-stage", "accuracy-flat", "crit-stage", "damage-percent"].includes(
+                !["accuracy-stage", "accuracy-flat", "crit-stage", "damage-percent", "power-percent"].includes(
                     modifierType
                 )
             ) {
@@ -329,6 +332,8 @@ export class AttackModifierPopup extends ModifierPopup {
                             return { method: "stage", type: "crit" };
                         case "damage-percent":
                             return { method: "percentile", type: "damage" };
+                        case "power-percent":
+                            return { method: "percentile", type: "power" };
                     }
                     return {};
                 })(modifierType);
@@ -369,17 +374,20 @@ export class AttackModifierPopup extends ModifierPopup {
             }
         }
         for (const [slug, modifier] of this.sharedModifiers.entries()) {
-            if (modifier.appliesTo.size === this.targets.length && [...modifier.appliesTo.values()].every((value) => value)) {
+            if (
+                modifier.appliesTo.size === this.targets.length &&
+                [...modifier.appliesTo.values()].every((value) => value)
+            ) {
                 this.check.push(modifier);
                 this.sharedModifiers.delete(slug);
             }
         }
 
         for (const modifier of sharedModifiers) {
-            if(this.sharedModifiers.has(modifier.slug)) continue;
+            if (this.sharedModifiers.has(modifier.slug)) continue;
 
-            for(const target of this.targets) {
-                if(modifier.appliesTo.has(target)) continue;
+            for (const target of this.targets) {
+                if (modifier.appliesTo.has(target)) continue;
                 modifier.appliesTo.set(target, true);
             }
             this.sharedModifiers.set(modifier.slug, modifier);

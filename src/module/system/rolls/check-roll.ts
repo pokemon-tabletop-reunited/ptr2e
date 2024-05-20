@@ -2,6 +2,7 @@ import { ChatMessagePTR2e } from "@chat";
 import { DegreeOfSuccess } from "./degree-of-success.ts";
 import { CheckRollContext } from "./data.ts";
 import { CheckModifier } from "@module/effects/modifiers.ts";
+import { AttackRollDataPTR2e } from "./attack-roll.ts";
 
 class CheckRoll extends Roll {
     static createFromData(options: CheckRollDataPTR2e): CheckRoll {
@@ -92,7 +93,7 @@ type AttackRollResult = {
         crit: DegreeOfSuccess | null,
         damage: DegreeOfSuccess | null
     },
-    options: CheckRollContext,
+    options: AttackRollDataPTR2e,
     context: CheckRollContext,
     check: CheckModifier
 }

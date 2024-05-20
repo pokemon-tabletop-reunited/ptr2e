@@ -12,19 +12,19 @@
     <article class="collapsed justify-content-center" style="border-bottom: 1px solid var(--color-underline-header);">
         {{> effect-traits traits=attack.traits attack=attack}}
     </article>
+    {{#each results as |data uuid|}}
     <div class="collapse-button">
-        <button type="button" class="collapse-rolls">Show Rolls</button>
+        <button type="button" class="collapse-rolls" data-uuid="{{uuid}}">Show Rolls for {{data.target.name}}</button>
     </div>
     <article class="collapsed">
-        {{#with rollsHTML}}
-            {{#if accuracyCheck}}{{{accuracyCheck}}}{{/if}}
-            {{#if critCheck}}{{{critCheck}}}{{/if}}
-            {{#if damageRandomness}}{{{damageRandomness}}}{{/if}}
-            {{#each effectChecks}}
-                {{{this}}}
-            {{/each}}
-        {{/with}}
+        {{#if data.rolls.accuracy}}{{{data.rolls.accuracy}}}{{/if}}
+        {{#if data.rolls.crit}}{{{data.rolls.crit}}}{{/if}}
+        {{#if data.rolls.damage}}{{{data.rolls.damage}}}{{/if}}
+        {{#each data.rolls.effects}}
+            {{{this}}}
+        {{/each}}
     </article>
+    {{/each}}
 </main>
 <footer>
     <div class="target target-header">
@@ -33,18 +33,18 @@
         <div class="damage">Damage</div>
         <div class="apply"></div>
     </div>
-    {{#each targets as |target uuid|}}
-        <div class="target" data-target-uuid="{{uuid}}">
+    {{#each results as |data uuid|}}
+        <div class="target" data-target-uuid="{{data.target.uuid}}">
             <div class="icon">
-                <img src="{{target.actor.img}}" alt="{{target.name}}">
+                <img src="{{data.target.img}}" alt="{{data.target.name}}">
             </div>
-            {{#with target.accuracy}}
-            <div class="status" data-tooltip="{{this.category}}" data-tooltip-direction="UP">
-                <i class="fas fa-{{#if (is this.category "hit")}}certificate{{else if (is this.category "critical")}}crosshairs{{else}}times-circle{{/if}}"></i>
+            {{#with data.hit}}
+            <div class="status" data-tooltip="{{this}}" data-tooltip-direction="UP">
+                <i class="fas fa-{{#if (is this "hit")}}certificate{{else if (is this "critical")}}crosshairs{{else}}times-circle{{/if}}"></i>
             </div>
             {{/with}}
-            <div class="damage" data-tooltip="{{target.damage.value}}" data-tooltip-direction="LEFT">
-                <span>{{target.damage.value}}</span>
+            <div class="damage" data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT">
+                <span>{{data.damage}}</span>
             </div>
             <div class="apply">
                 <button type="button" class="apply-damage"><i class="fas fa-bolt"></i>{{localize "PTR2E.Damage.Apply"}}</button>

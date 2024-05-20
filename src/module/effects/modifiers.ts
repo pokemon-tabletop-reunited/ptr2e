@@ -32,7 +32,7 @@ interface RawModifier {
     /** The method of application of this modifier */
     method?: "base" | "flat" | "percentile" | "stage";
     /** The type of roll this modifier applies to, any if not relevant. */
-    type?: "any" | "damage" | "accuracy" | "evasion" | "crit"
+    type?: "any" | "damage" | "accuracy" | "evasion" | "crit" | "power"
 }
 
 interface ModifierAdjustment {
@@ -83,7 +83,7 @@ class ModifierPTR2e implements RawModifier {
     appliesTo: Map<ActorUUID, boolean>;
 
     method: "base" | "flat" | "percentile" | "stage";
-    type: "any" | "damage" | "accuracy" | "evasion" | "crit"
+    type: "any" | "damage" | "accuracy" | "evasion" | "crit" | "power"
 
     /**
      * The "category" of modifier (a misnomer since bonuses and penalties aren't modifiers):

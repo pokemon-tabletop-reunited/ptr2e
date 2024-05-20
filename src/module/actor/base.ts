@@ -402,15 +402,15 @@ class ActorPTR2e<
         return this.system.battleStats.accuracy.stage + (this.system.modifiers["accuracy"] ?? 0);
     }
 
-    getDefenseStat(attack: AttackPTR2e, critModifier: number) {
+    getDefenseStat(attack: {category: AttackPTR2e['category']}, isCrit: boolean) {
         return attack.category === "physical"
-            ? this.calcStatTotal(this.system.attributes.def, critModifier > 1)
-            : this.calcStatTotal(this.system.attributes.spd, critModifier > 1);
+            ? this.calcStatTotal(this.system.attributes.def, isCrit)
+            : this.calcStatTotal(this.system.attributes.spd, isCrit);
     }
-    getAttackStat(attack: AttackPTR2e, critModifier: number) {
+    getAttackStat(attack: {category: AttackPTR2e['category']}, isCrit: boolean) {
         return attack.category === "physical"
-            ? this.calcStatTotal(this.system.attributes.atk, critModifier > 1)
-            : this.calcStatTotal(this.system.attributes.spa, critModifier > 1);
+            ? this.calcStatTotal(this.system.attributes.atk, isCrit)
+            : this.calcStatTotal(this.system.attributes.spa, isCrit);
     }
 
     calcStatTotal(stat: Attribute, isCrit: boolean) {

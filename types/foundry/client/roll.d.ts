@@ -119,6 +119,8 @@ declare global {
         // evaluate({ minimize, maximize, async }: EvaluateRollParams & { async: true }): Promise<Rolled<this>>;
         evaluate({ minimize, maximize, async }?: EvaluateRollParams): Promise<Rolled<this>>;
 
+        evaluateSync({ minimize, maximize }?: EvaluateRollParams): Rolled<this>;
+
         /**
          * Evaluate the roll asynchronously.
          * A temporary helper method used to migrate behavior from 0.7.x (sync by default) to 0.9.x (async by default).
@@ -461,6 +463,8 @@ declare global {
         minimize?: boolean;
         maximize?: boolean;
         async?: boolean;
+        allowStrings?: boolean;
+        strict?: boolean;
     }
 
     // Empty extended interface that can be expanded by the system without polluting Math itself

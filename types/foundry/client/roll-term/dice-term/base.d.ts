@@ -56,7 +56,7 @@ declare global {
         override get total(): number | undefined;
 
         /** Return an array of rolled values which are still active within this term */
-        get values(): number;
+        get values(): number[];
 
         /* -------------------------------------------- */
         /*  Dice Term Methods                           */

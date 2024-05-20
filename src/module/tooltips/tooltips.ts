@@ -230,7 +230,7 @@ export default class TooltipsPTR2e {
         if (!element) return false;
 
         const targetUuid = (element.closest("[data-target-uuid]") as HTMLElement)?.dataset
-            ?.targetUuid;
+            ?.targetUuid as Maybe<ActorUUID>;
         if (!targetUuid) return false;
 
         const messageId = (element.closest("[data-message-id]") as HTMLElement)?.dataset?.messageId;
@@ -239,10 +239,10 @@ export default class TooltipsPTR2e {
         const message = game.messages.get(messageId) as ChatMessagePTR2e<AttackMessageSystem>;
         if (!message) return false;
 
-        const target = message.system.context?.targets.get(targetUuid);
+        const target = message.system.context?.results.get(targetUuid);
         if (!target) return false;
 
-        const accuracy = target.accuracy;
+        const accuracy = target.accuracyRoll;
 
         this.tooltip.classList.add("status");
         await this._renderTooltip({
@@ -271,7 +271,7 @@ export default class TooltipsPTR2e {
         if (!element) return false;
 
         const targetUuid = (element.closest("[data-target-uuid]") as HTMLElement)?.dataset
-            ?.targetUuid;
+            ?.targetUuid as Maybe<ActorUUID>;
         if (!targetUuid) return false;
 
         const messageId = (element.closest("[data-message-id]") as HTMLElement)?.dataset?.messageId;
@@ -280,10 +280,10 @@ export default class TooltipsPTR2e {
         const message = game.messages.get(messageId) as ChatMessagePTR2e<AttackMessageSystem>;
         if (!message) return false;
 
-        const target = message.system.context?.targets.get(targetUuid);
+        const target = message.system.context?.results.get(targetUuid);
         if (!target) return false;
 
-        const damage = target.damage;
+        const damage = target.damageRoll;
 
         this.tooltip.classList.add("damage");
         await this._renderTooltip({
