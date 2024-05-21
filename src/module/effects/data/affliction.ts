@@ -10,18 +10,18 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
             priority: new fields.NumberField({
                 required: true,
                 initial: 50,
-                nullable: false
+                nullable: false,
             }),
             formula: new fields.StringField({
                 required: true,
                 initial: "",
-                nullable: false
+                nullable: true,
             }),
             type: new fields.StringField({
                 required: true,
                 initial: "damage",
-                nullable: false,
-                choices: ["damage", "healing"]
+                nullable: true, //@ts-expect-error
+                choices: { damage: "damage", healing: "healing" },
             }),
         };
     }
@@ -53,7 +53,7 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
      * Returns a string of the damage formula
      */
     protected _calculateDamage(): { formula: string; type: "damage" | "healing" } | void {
-        if (!this.formula) return;
+        if (!this.formula || !this.type) return;
 
         return {
             formula: this.formula,
@@ -79,12 +79,12 @@ interface AfflictionActiveEffectSystem
 
 type AfflictionSystemSchema = {
     priority: foundry.data.fields.NumberField<number, number, true, false, true>;
-    formula: foundry.data.fields.StringField<string, string, true, false, true>;
+    formula: foundry.data.fields.StringField<string, string, true, true, true>;
     type: foundry.data.fields.StringField<
         "damage" | "healing",
         "damage" | "healing",
         true,
-        false,
+        true,
         true
     >;
 } & ActiveEffectSystemSchema;

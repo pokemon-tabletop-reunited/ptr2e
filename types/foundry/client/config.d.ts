@@ -623,7 +623,7 @@ declare global {
          */
         hud?: boolean;
         statuses?: string[];
-    } & Partial<TAESource>;
+    } & DeepPartial<TAESource>;
 
     interface FontFamilyDefinition {
         /** Whether the font is available in the rich text editor. This will also enable it for notes and drawings. */

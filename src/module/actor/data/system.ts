@@ -319,14 +319,13 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
 
     override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean }, user: User): Promise<boolean | void> {
         //@ts-expect-error
-        if(this._source.traits.has("humanoid") && this.parent.type === "pokemon") {
+        if(this._source.traits.includes("humanoid") && this.parent.type === "pokemon") {
             this.parent.updateSource({ "type": "humanoid" })
         }
         //@ts-expect-error
-        if(this._source.traits.has("pokemon") && this.parent.type === "humanoid") {
+        if(this._source.traits.includes("pokemon") && this.parent.type === "humanoid") {
             this.parent.updateSource({ "type": "pokemon" })
         }
-
         await super._preCreate(data, options, user);
     }
 

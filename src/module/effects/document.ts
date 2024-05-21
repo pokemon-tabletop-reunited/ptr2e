@@ -118,7 +118,7 @@ class ActiveEffectPTR2e<
         const d = this.duration;
 
         // Turn-based duration
-        if (d.rounds || d.turns) {
+        if (this.parent && (d.rounds || d.turns)) {
             const cbt = game.combat as CombatPTR2e | undefined;
             if (!cbt || !this.targetsActor())
                 return {
@@ -199,6 +199,10 @@ class ActiveEffectPTR2e<
             const statusEffect = CONFIG.statusEffects.find((effect) => effect._id === data._id);
             if (statusEffect) options.keepId = true;
         }
+
+        const result = await super._preCreate(data, options, user);
+        if(result === false) return false;
+        
         if (this.targetsActor() && data.duration?.turns && !data.duration.startTurn) {
             this.updateSource({
                 duration: {
@@ -207,7 +211,13 @@ class ActiveEffectPTR2e<
             });
         }
 
-        return super._preCreate(data, options, user);
+        if(data.description.startsWith("PTR2E.Effect.")) {
+            this.updateSource({
+                description: game.i18n.localize(data.description),
+            })
+        }
+
+        return result;
     }
 
     // TODO: Clean this up cause god it's a mess.

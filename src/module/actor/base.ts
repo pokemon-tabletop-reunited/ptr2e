@@ -53,7 +53,7 @@ class ActorPTR2e<
 
     get combatant(): CombatantPTR2e | null {
         const combatants = (game.combat as CombatPTR2e | undefined)?.combatants.filter(
-            (c) => c.actorId === this.id && !c.actor?.token
+            (c) => c.actor === this
         );
         return combatants?.length
             ? combatants.length > 1
