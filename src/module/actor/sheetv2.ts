@@ -2,7 +2,7 @@ import { ItemPTR2e, ItemSystemPTR, SpeciesPTR2e } from "@item";
 import ActorPTR2e from "./base.ts";
 import { SpeciesDropSheet } from "./sheets/species-drop-sheet.ts";
 import { SpeciesSystemModel } from "@item/data/index.ts";
-import { htmlQueryAll, sluggify } from "@utils";
+import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { Tab } from "@item/sheets/document.ts";
 import { ActorComponentKey, ActorComponents, ComponentPopout } from "./components/sheet.ts";
 import { EffectComponent } from "./components/effect-component.ts";
@@ -376,6 +376,27 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             div.innerHTML = `<i class="fas fa-external-link-alt"></i>`;
             div.addEventListener("click", this._onPopout.bind(this));
             element.appendChild(div);
+        }
+
+        if(partId === "header" && this.isEditable) {
+            htmlQuery(htmlElement, "img[data-edit]")?.addEventListener("click", (event) => {
+                const imgElement = event.currentTarget as HTMLImageElement;
+                const attr = imgElement.dataset.edit;
+                const current = foundry.utils.getProperty<string | undefined>(this.actor, attr!);
+                const {img} = ActorPTR2e.getDefaultArtwork(this.actor.toObject()) ?? {};
+                const fp = new FilePicker({
+                    current,
+                    type: "image",
+                    redirectToRoot: img ? [img] : [],
+                    callback: (path: string) => {
+                        imgElement.src = path;
+                        if(this.options.form?.submitOnChange) this.element.dispatchEvent(new Event("submit", { cancelable: true }));
+                    },
+                    top: this.position.top + 40,
+                    left: this.position.left + 10,
+                })
+                fp.browse();
+            });
         }
 
         if (partId === "effects") {

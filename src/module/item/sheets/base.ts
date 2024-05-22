@@ -1,5 +1,5 @@
 import { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
-import { htmlQueryAll, sluggify } from "@utils";
+import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { DocumentSheetConfiguration, DocumentSheetV2, Tab } from "./document.ts";
 import Tagify from "@yaireo/tagify";
 import GithubManager from "@module/apps/github.ts";
@@ -356,6 +356,27 @@ export default class ItemSheetPTR2e<
                     }
                 });
             }
+        }
+
+        if(partId === "header" && this.isEditable) {
+            htmlQuery(htmlElement, "img[data-edit]")?.addEventListener("click", (event) => {
+                const imgElement = event.currentTarget as HTMLImageElement;
+                const attr = imgElement.dataset.edit;
+                const current = foundry.utils.getProperty<string | undefined>(this.document, attr!);
+                const {img} = this.document.constructor.getDefaultArtwork(this.document.toObject()) ?? {};
+                const fp = new FilePicker({
+                    current,
+                    type: "image",
+                    redirectToRoot: img ? [img] : [],
+                    callback: (path: string) => {
+                        imgElement.src = path;
+                        if(this.options.form?.submitOnChange) this.element.dispatchEvent(new Event("submit", { cancelable: true }));
+                    },
+                    top: this.position.top + 40,
+                    left: this.position.left + 10,
+                })
+                fp.browse();
+            });
         }
     }
 

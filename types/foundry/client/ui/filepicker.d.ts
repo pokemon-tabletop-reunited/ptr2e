@@ -24,7 +24,7 @@ declare class FilePicker extends Application<FilePickerOptions> {
     /** The current set of file extensions which are being filtered upon */
     extension: string[];
 
-    constructor(options: FilePickerOptions);
+    constructor(options: Partial<FilePickerOptions>);
 
     /** Record the last-browsed directory path so that re-opening a different FilePicker instance uses the same target */
     static LAST_BROWSED_DIRECTORY: string;
@@ -73,7 +73,7 @@ declare class FilePicker extends Application<FilePickerOptions> {
      * @param target    The target within the currently active source location.
      * @param options   Browsing options
      */
-    browse(target: string, options?: object): Promise<object>;
+    browse(target?: string, options?: object): Promise<object>;
 
     /**
      * Browse files for a certain directory location
