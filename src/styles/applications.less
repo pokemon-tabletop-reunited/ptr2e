@@ -3612,6 +3612,56 @@ body {
                 }
             }
         }
+
+        &.effect-tab {
+            &.active {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+            }
+            .effect {
+                display: flex;
+                flex-direction: row;
+
+                .icon {
+                    flex: 0 0 32px;
+                    height: 32px;
+                    width: 32px;
+                    align-self: center;
+
+                    img {
+                        border: unset;
+                    }
+                }
+
+                .name {
+                    flex: 1;
+                    align-self: center;
+                    text-align: center;
+                    padding: 0.25rem;
+                    min-width: 0;
+                    text-overflow: ellipsis;
+                }
+
+                background: var(--appv2-background);
+
+                &:nth-child(odd) {
+                    background: color-mix(in srgb, var(--appv2-background) 90%, transparent);
+                }
+
+                border-top: 1px solid var(--border-theme-color);
+
+                &:first-child {
+                    border-top: unset;
+                    border-radius: 8px 8px 0 0;
+                }
+
+                &:last-child {
+                    border-radius: 0 0 8px 8px;
+                }
+            
+            }
+        }
     }
 
     section.token-info,

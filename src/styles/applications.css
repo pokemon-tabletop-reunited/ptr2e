@@ -3495,6 +3495,44 @@ body.theme-light .application textarea:read-only {
   display: unset !important;
   margin-top: 2px;
 }
+.token-panel .tab.effect-tab.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.token-panel .tab.effect-tab .effect {
+  display: flex;
+  flex-direction: row;
+  background: var(--appv2-background);
+  border-top: 1px solid var(--border-theme-color);
+}
+.token-panel .tab.effect-tab .effect .icon {
+  flex: 0 0 32px;
+  height: 32px;
+  width: 32px;
+  align-self: center;
+}
+.token-panel .tab.effect-tab .effect .icon img {
+  border: unset;
+}
+.token-panel .tab.effect-tab .effect .name {
+  flex: 1;
+  align-self: center;
+  text-align: center;
+  padding: 0.25rem;
+  min-width: 0;
+  text-overflow: ellipsis;
+}
+.token-panel .tab.effect-tab .effect:nth-child(odd) {
+  background: color-mix(in srgb, var(--appv2-background) 90%, transparent);
+}
+.token-panel .tab.effect-tab .effect:first-child {
+  border-top: unset;
+  border-radius: 8px 8px 0 0;
+}
+.token-panel .tab.effect-tab .effect:last-child {
+  border-radius: 0 0 8px 8px;
+}
 .token-panel section.token-info,
 .token-panel section.party {
   order: 1;

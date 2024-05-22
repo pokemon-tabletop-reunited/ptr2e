@@ -14,6 +14,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
     }
     set token(value: TokenPTR2e | null) {
         if (this._token === value) return;
+        this.updateAppListeners(value);
         this._token = value;
         this.refresh(true);
     }
@@ -76,6 +77,10 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
         skills: {
             id: "skills",
             template: "/systems/ptr2e/templates/apps/token-panel/favourite-skills.hbs",
+        },
+        effects: {
+            id: "effects",
+            template: "/systems/ptr2e/templates/apps/token-panel/effects.hbs",
         }
     };
 
@@ -113,6 +118,12 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
             group: "sheet",
             icon: "fa-solid fa-burst",
             label: "PTR2E.TokenPanel.Tabs.skills.label",
+        },
+        effects: {
+            id: "effects",
+            group: "sheet",
+            icon: "fa-solid fa-star",
+            label: "PTR2E.TokenPanel.Tabs.effects.label",
         }
     };
 
@@ -170,6 +181,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
             ...context,
             token: this.token,
             actor: this.token.actor,
+            effects: this.token.actor?.effects.contents ?? [],
             party,
             isOwner,
             actions,
@@ -315,5 +327,16 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
                 });
             }
         }
+    }
+
+    updateAppListeners(token: TokenPTR2e | null) {
+        if(this.token?.actor) {
+            //@ts-expect-error
+            delete this.token.actor.apps[this.id];
+        }
+
+        if(!token?.actor) return;
+        //@ts-expect-error
+        token.actor.apps[this.id] = this;
     }
 }

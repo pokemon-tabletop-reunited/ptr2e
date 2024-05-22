@@ -116,7 +116,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
     }
 
     get actor() {
-        return this.effect.targetsActor() ? this.effect.target : null;
+        return (this.effect.parent && this.effect.targetsActor()) ? this.effect.target : null;
     }
 
     get item() {

@@ -1,0 +1,14 @@
+<section class="tab sheet-body {{tabs.effects.cssClass}} effect-tab" data-tab="effects" data-group="sheet" {{#if actor}}data-parent="{{actor.uuid}}"{{/if}}>
+    {{#each effects as |effect|}}
+        <div class="effect" data-tooltip-direction="LEFT" data-id="{{effect.id}}" data-tooltip="{{effect.name}}">
+            <div class="effect-icon"><img src="{{effect.img}}" class="icon"></div>
+            <span class="name">{{effect.name}}</span>
+        </div>
+    {{else}}
+        <div class="effect">
+            <div class="name small">
+                <small>No Effects Found</small>
+            </div>
+        </div>
+    {{/each}}
+</section>
