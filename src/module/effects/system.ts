@@ -24,6 +24,7 @@ export default abstract class ActiveEffectSystem extends HasEmbed(
                 initial: false,
                 nullable: false,
             }),
+            stacks: new fields.NumberField({required: true, initial: 0, min: 0, nullable: false}),
         };
     }
 
@@ -53,4 +54,5 @@ export default interface ActiveEffectSystem
 export type ActiveEffectSystemSchema = {
     removeAfterCombat: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
     removeOnRecall: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+    stacks: foundry.data.fields.NumberField<number, number, true, false, true>;
 };

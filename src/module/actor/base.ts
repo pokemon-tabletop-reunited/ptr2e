@@ -7,7 +7,7 @@ import {
     HumanoidActorSystem,
     PokemonActorSystem,
 } from "@actor";
-import { ActiveEffectPTR2e, EffectSourcePTR2e } from "@effects";
+import { ActiveEffectPTR2e, ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import { AttackPTR2e, PokemonType, RollOptionManager } from "@data";
 import { ActorFlags } from "types/foundry/common/documents/actor.js";
@@ -25,6 +25,7 @@ import { extractEphemeralEffects } from "src/util/rule-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
+import { sluggify } from "@utils";
 
 type ActorParty = {
     owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -402,12 +403,12 @@ class ActorPTR2e<
         return this.system.battleStats.accuracy.stage + (this.system.modifiers["accuracy"] ?? 0);
     }
 
-    getDefenseStat(attack: {category: AttackPTR2e['category']}, isCrit: boolean) {
+    getDefenseStat(attack: { category: AttackPTR2e["category"] }, isCrit: boolean) {
         return attack.category === "physical"
             ? this.calcStatTotal(this.system.attributes.def, isCrit)
             : this.calcStatTotal(this.system.attributes.spd, isCrit);
     }
-    getAttackStat(attack: {category: AttackPTR2e['category']}, isCrit: boolean) {
+    getAttackStat(attack: { category: AttackPTR2e["category"] }, isCrit: boolean) {
         return attack.category === "physical"
             ? this.calcStatTotal(this.system.attributes.atk, isCrit)
             : this.calcStatTotal(this.system.attributes.spa, isCrit);
@@ -645,20 +646,25 @@ class ActorPTR2e<
         const context = await this.getRollContext(params);
         const rangeIncrement = context.target?.rangeIncrement ?? null;
 
-        const appliesTo = context.target?.token?.actor?.uuid ?? (context.target?.actor?.id ? context.target.actor.uuid : null) ?? null;
+        const appliesTo =
+            context.target?.token?.actor?.uuid ??
+            (context.target?.actor?.id ? context.target.actor.uuid : null) ??
+            null;
 
-        const rangePenalty = rangeIncrement ? new ModifierPTR2e({
-            label: "PTR2E.Modifiers.rip",
-            slug: `range-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
-            modifier: Math.min(-(rangeIncrement * (rangeIncrement + 1) / 2), 0),
-            method: "stage",
-            type: "accuracy",
-            appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
-        }) : null
-        if(rangePenalty) context.self.modifiers.push(rangePenalty);
+        const rangePenalty = rangeIncrement
+            ? new ModifierPTR2e({
+                  label: "PTR2E.Modifiers.rip",
+                  slug: `range-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
+                  modifier: Math.min(-((rangeIncrement * (rangeIncrement + 1)) / 2), 0),
+                  method: "stage",
+                  type: "accuracy",
+                  appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
+              })
+            : null;
+        if (rangePenalty) context.self.modifiers.push(rangePenalty);
 
         const evasionStages = context.target?.actor?.evasionStage ?? 0;
-        if(evasionStages !== 0) {
+        if (evasionStages !== 0) {
             const evasionModifier = new ModifierPTR2e({
                 label: "PTR2E.Modifiers.evasion",
                 slug: `evasion-modifier-unicqi-${appliesTo ?? fu.randomID()}`,
@@ -671,7 +677,7 @@ class ActorPTR2e<
         }
 
         const accuracyStages = context.self.actor.accuracyStage;
-        if(accuracyStages != 0) {
+        if (accuracyStages != 0) {
             context.self.modifiers.push(
                 new ModifierPTR2e({
                     slug: `accuracy-modifier-unicqi-${appliesTo ?? fu.randomID()}`,
@@ -684,7 +690,7 @@ class ActorPTR2e<
             );
         }
 
-        return { ...context};
+        return { ...context };
     }
 
     protected getRollContext<
@@ -733,12 +739,14 @@ class ActorPTR2e<
         //TODO: Implement Move Variants
         //const attackActions = params.attack ? [params.attack] : [];
 
-        const statistic = params.viewOnly ? params.statistic : (() => {
-            const attack = selfActor.actions.attack.get(params.attack?.slug);
-            if(!attack) return null;
+        const statistic = params.viewOnly
+            ? params.statistic
+            : (() => {
+                  const attack = selfActor.actions.attack.get(params.attack?.slug);
+                  if (!attack) return null;
 
-            return attack.statistic?.check as Maybe<StatisticCheck>
-        })() ?? params.statistic
+                  return attack.statistic?.check as Maybe<StatisticCheck>;
+              })() ?? params.statistic;
 
         const selfItem = ((): ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null => {
             // 1. Simplest case: no context clone, so used the item passed to this method
@@ -746,7 +754,7 @@ class ActorPTR2e<
 
             // 2. Get the item from the statistic if it's stored therein
             if (
-                statistic &&    
+                statistic &&
                 "item" in statistic &&
                 statistic.item instanceof ItemPTR2e &&
                 "actions" in statistic.item.system
@@ -779,24 +787,25 @@ class ActorPTR2e<
                 ? [`origin:distance:${distance}`, `target:distance:${distance}`]
                 : [null, null];
 
-        const originRollOptions = selfToken && targetToken 
-            ? R.compact(
-                R.uniq([
-                    ...selfActor.getSelfRollOptions('origin'),
-                    ...actionTraits.map((t) => `origin:action:trait:${t}`),
-                    ...(originDistance ? [originDistance] : [])
-                ])
-            )
-            : [];
+        const originRollOptions =
+            selfToken && targetToken
+                ? R.compact(
+                      R.uniq([
+                          ...selfActor.getSelfRollOptions("origin"),
+                          ...actionTraits.map((t) => `origin:action:trait:${t}`),
+                          ...(originDistance ? [originDistance] : []),
+                      ])
+                  )
+                : [];
 
         // Target roll options
         const getTargetRollOptions = (actor: Maybe<ActorPTR2e>): string[] => {
             const targetOptions = actor?.getSelfRollOptions("target") ?? [];
-            if(targetToken) {
-                targetOptions.push("target") // An indicator that there is any kind of target.
+            if (targetToken) {
+                targetOptions.push("target"); // An indicator that there is any kind of target.
             }
             return targetOptions.sort();
-        }
+        };
         const targetRollOptions = getTargetRollOptions(targetToken?.actor);
 
         // Get ephemeral effects from this actor that affect the target while being attacked
@@ -815,7 +824,7 @@ class ActorPTR2e<
             ? null
             : (params.target?.actor ?? targetToken?.actor)?.getContextualClone(
                   R.compact([...params.options, ...itemOptions, ...originRollOptions]),
-                  targetEphemeralEffects,
+                  targetEphemeralEffects
               ) ?? null;
 
         const rollOptions = new Set(
@@ -823,14 +832,14 @@ class ActorPTR2e<
                 ...params.options,
                 ...selfActor.getRollOptions(params.domains),
                 ...(targetActor ? getTargetRollOptions(targetActor) : targetRollOptions),
-                ...actionTraits.map(t => `self:action:trait:${t}`),
+                ...actionTraits.map((t) => `self:action:trait:${t}`),
                 ...itemOptions,
                 ...(targetDistance ? [targetDistance] : []),
             ])
-        )
+        );
 
         const rangeIncrement = selfAttack ? selfAttack.getRangeIncrement(distance) : null;
-        if(rangeIncrement) rollOptions.add(`target:range-increment:${rangeIncrement}`);
+        if (rangeIncrement) rollOptions.add(`target:range-increment:${rangeIncrement}`);
 
         const self = {
             actor: selfActor,
@@ -838,10 +847,10 @@ class ActorPTR2e<
             statistic,
             item: selfItem,
             attack: selfAttack!,
-            modifiers: []
-        }
+            modifiers: [],
+        };
 
-        const target = 
+        const target =
             targetActor && targetToken && distance !== null
                 ? { actor: targetActor, token: targetToken.document, distance, rangeIncrement }
                 : null;
@@ -849,13 +858,13 @@ class ActorPTR2e<
             options: rollOptions,
             self,
             target,
-            traits: actionTraits
-        }
+            traits: actionTraits,
+        };
     }
 
     protected getContextualClone(
         rollOptions: string[],
-        ephemeralEffects: EffectSourcePTR2e[],
+        ephemeralEffects: EffectSourcePTR2e[]
     ): this {
         const rollOptionsAll = rollOptions.reduce(
             (options: Record<string, boolean>, option: string) => ({ ...options, [option]: true }),
@@ -891,6 +900,60 @@ class ActorPTR2e<
         if (result === false) return false;
 
         if (options.fail === true) return false;
+    }
+
+    override async toggleStatusEffect(
+        statusId: string,
+        { active, overlay = false }: { active?: boolean; overlay?: boolean } = {}
+    ): Promise<any> {
+        const status = CONFIG.statusEffects.find((e) => e.id === statusId);
+        if (!status)
+            throw new Error(`Invalid status ID "${statusId}" provided to Actor#toggleStatusEffect`);
+        const existing = [];
+
+        // Find the effect with the static _id of the status effect
+        if (status._id) {
+            const effect = this.effects.get(status._id);
+            if (effect) existing.push(effect.id);
+        }
+
+        // If no static _id, find all single-status effects that have this status
+        else {
+            for (const effect of this.effects) {
+                const statuses = effect.statuses;
+                if (statuses.size === 1 && statuses.has(status.id)) existing.push(effect.id);
+            }
+        }
+
+        if((status.system as ActiveEffectSystem['_source'])?.stacks) {
+            const slug = sluggify(game.i18n.localize(status.name));
+            for(const id of existing) {
+                const effect = this.effects.get(id) as ActiveEffectPTR2e<this>;
+                if(effect.slug === slug) {
+                    if(overlay) {
+                        if(effect.system.stacks > 1) effect.update({"system.stacks": effect.system.stacks - 1});
+                        else effect.delete();
+                    }
+                    else {
+                        effect.update({"system.stacks": effect.system.stacks + 1});
+                    }
+                    return false;
+                }
+            }
+        }
+
+        // Remove the existing effects unless the status effect is forced active
+        if (existing.length) {
+            if (active) return true;
+            await this.deleteEmbeddedDocuments("ActiveEffect", existing);
+            return false;
+        }
+
+        // Create a new effect unless the status effect is forced inactive
+        if (!active && active !== undefined) return;
+        const effect = await ActiveEffectPTR2e.fromStatusEffect(statusId);
+        if (overlay) effect.updateSource({ "flags.core.overlay": true });
+        return ActiveEffectPTR2e.create<any>(effect.toObject(), { parent: this, keepId: true })
     }
 }
 

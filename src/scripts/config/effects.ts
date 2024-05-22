@@ -350,8 +350,8 @@ export const StatusEffects: StatusEffect[] = [
         description: "PTR2E.Effect.Statuses.Descriptions.slowed",
     },
     {
-        id: "blinded",
-        name: "PTR2E.Effect.Statuses.Labels.blinded",
+        id: "blind",
+        name: "PTR2E.Effect.Statuses.Labels.blind",
         img: "/systems/ptr2e/img/conditions/blindness.svg",
         type: "affliction",
         duration: {
@@ -372,7 +372,7 @@ export const StatusEffects: StatusEffect[] = [
             removeAfterCombat: true,
             traits: [],
         },
-        description: "PTR2E.Effect.Statuses.Descriptions.blinded",
+        description: "PTR2E.Effect.Statuses.Descriptions.blind",
     },
     {
         id: "vulnerable",
@@ -494,8 +494,23 @@ export const StatusEffects: StatusEffect[] = [
         img: "icons/svg/stoned.svg",
         type: "passive",
         system: {
-            changes: [],
+            changes: [
+                {
+                    type: "basic",
+                    key: "system.battleStats.accuracy.stage",
+                    value: "min(0, -(@effect.system.stacks * (@effect.system.stacks + 1) / 2))",
+                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                },
+                {
+                    type: "basic",
+                    key: "system.battleStats.evasion.stage",
+                    value: "min(0, -(@effect.system.stacks * (@effect.system.stacks + 1) / 2))",
+                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
+                }
+            ],
             traits: [],
+            stacks: 1,
+            removeAfterCombat: false
         },
         description: "PTR2E.Effect.Statuses.Descriptions.weary",
     },

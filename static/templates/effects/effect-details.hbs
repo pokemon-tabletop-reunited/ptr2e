@@ -19,6 +19,10 @@
             {{formField system.schema.fields.type value=data.system.type localize=true}}
         {{/if}}
 
+        {{#if (gt data.system.stacks 0)}}
+            {{formField system.schema.fields.stacks value=data.system.stacks localize=true}}
+        {{/if}}
+
         {{formField system.schema.fields.removeAfterCombat value=data.system.removeAfterCombat localize=true}}
         {{formField system.schema.fields.removeOnRecall value=data.system.removeOnRecall localize=true}}
     </div>

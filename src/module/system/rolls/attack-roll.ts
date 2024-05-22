@@ -58,6 +58,7 @@ class AttackRoll extends CheckRoll {
             options.stageModifier = stageBonus;
             
             if(stageBonus === -Infinity) return 0;
+            if(options.outOfRange) return 0;
 
             return Math.clamp(Math.floor((baseAccuracy + accuracyFlat) * stageBonus), 1, 100);
         })(
@@ -203,6 +204,7 @@ type AttackRollDataPTR2e = CheckRollDataPTR2e & {
     attackType?: "accuracy" | "crit" | "damage";
     power?: number;
     damageMod?: number;
+    outOfRange: boolean;
 } & AccuracyContext
 
 export { AttackRoll, type AttackRollDataPTR2e, type AttackRollCreationData };

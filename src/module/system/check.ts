@@ -112,6 +112,7 @@ class CheckPTR2e {
                 breakdown: targetCheck.breakdown,
                 attack: targetContext.self.attack,
                 rip: !!targetContext.target?.rangeIncrement,
+                outOfRange: !!targetContext.outOfRange
             };
     
             const rolls: {

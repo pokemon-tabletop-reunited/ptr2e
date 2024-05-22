@@ -139,5 +139,13 @@ export const PTRCONFIG = {
         traits: Traits,
         skills: Skills,
     },
-    statusEffects: StatusEffects
+    statusEffects: StatusEffects,
+    specialStatusEffects: {
+        "DEFEATED": "dead",
+        "INVISIBLE": "invisible",
+        "BLIND": "blind",
+        "BURROW": "burrow",
+        "HOVER": "raised",
+        "FLY": "fly"
+    }
 }

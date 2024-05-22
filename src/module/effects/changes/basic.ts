@@ -21,7 +21,13 @@ export default class BasicChangeSystem extends ChangeModel {
 
         // Determine the data type of the target field
         const current = fu.getProperty(actor, path) ?? null;
-        const changeValue = change.resolveValue(change.value);
+        const resolvables = {
+            actor: actor,
+            item: change.item,
+            effect: change.effect,
+            change: change,
+        }
+        const changeValue = change.resolveValue(change.value, 0, {resolvables});
         const newValue = BasicChangeSystem.getNewValue(change.mode, current, changeValue, change.merge);
         if (newValue instanceof foundry.data.validation.DataModelValidationFailure) {
             return change.failValidation(newValue.asError().message);

@@ -4,6 +4,7 @@ import { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { ChangeModel, Trait } from "@data";
 import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
 import { CombatPTR2e } from "@combat";
+import { sluggify } from "@utils";
 class ActiveEffectPTR2e<
     TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null,
     TSystem extends ActiveEffectSystem = ActiveEffectSystem,
@@ -13,7 +14,7 @@ class ActiveEffectPTR2e<
     declare grantedBy: ItemPTR2e | null;
 
     get slug() {
-        return this.system.slug;
+        return this.system._source.slug ?? sluggify(this._name);
     }
 
     static override defineSchema() {
@@ -46,7 +47,9 @@ class ActiveEffectPTR2e<
             get: () =>
                 this.duration.remaining !== null && this.duration.remaining !== undefined
                     ? `${this._name} ${this.duration.remaining}`
-                    : this._name,
+                    : this.system.stacks > 1
+                        ? `${this._name} ${this.system.stacks}`
+                        : this._name,
             set: (value: string) => {
                 this._name = value;
             },
@@ -304,10 +307,17 @@ class ActiveEffectPTR2e<
         if (!parent) return super.createDocuments(sources, context) as Promise<ActiveEffectPTR2e[]>;
 
         const effects = await (async (): Promise<ActiveEffectPTR2e[]> => {
-            const effects = sources.map((source) => {
+            const effects = sources.flatMap((source) => {
                 if (!(context.keepId || context.keepEmbeddedIds)) {
                     source._id = fu.randomID();
                 }
+
+                const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(e => e.slug === sluggify(source.name));
+                if(existing?.system.stacks) {
+                    existing.update({"system.stacks": existing.system.stacks + 1});
+                    return [];
+                }
+
                 return new this(source, { parent });
             });
             return effects;

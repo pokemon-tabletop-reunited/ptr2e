@@ -67,6 +67,7 @@ export const Init: PTRHook = {
 
             // Setup Active Effects
             CONFIG.statusEffects = PTRCONFIG.statusEffects;
+            CONFIG.specialStatusEffects = PTRCONFIG.specialStatusEffects;
 
             CONFIG.ui.items = PTRCONFIG.ui.items;
             CONFIG.ui.actors = PTRCONFIG.ui.actors;
