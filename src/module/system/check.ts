@@ -25,12 +25,18 @@ class CheckPTR2e {
         for(const targetContext of Object.values(context.contexts)) {
             if(targetContext.self.modifiers?.length) {
                 for(const modifier of targetContext.self.modifiers) {
-                    if(sharedModifiers.has(modifier.slug)) {
+                    const slug = modifier.slug.split('-unicqi-')[0];
+
+                    let handled = false;
+                    for(const sharedModifier of sharedModifiers.filter(sm => sm.slug.startsWith(slug))) {
+                        if(modifier.value !== sharedModifier.value) continue;
                         for(const [uuid, enabled] of modifier.appliesTo.entries()) {
-                            sharedModifiers.get(modifier.slug)!.appliesTo.set(uuid, enabled);
+                            sharedModifier.appliesTo.set(uuid, enabled);
                         }
-                        continue;
+                        handled = true;
                     }
+                    if(handled) continue;
+
                     sharedModifiers.set(modifier.slug, modifier);
                 }
             }

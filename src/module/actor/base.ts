@@ -19,7 +19,7 @@ import { ChatMessagePTR2e } from "@chat";
 import { ItemPTR2e, ItemSystemsWithActions, MovePTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
-import { BaseStatisticCheck, Statistic } from "@system/statistics/statistic.ts";
+import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
 import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
 import { extractEphemeralEffects } from "src/util/rule-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
@@ -649,7 +649,7 @@ class ActorPTR2e<
 
         const rangePenalty = rangeIncrement ? new ModifierPTR2e({
             label: "PTR2E.Modifiers.rip",
-            slug: `range-penalty-${appliesTo ?? fu.randomID()}`,
+            slug: `range-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
             modifier: Math.min(-(rangeIncrement * (rangeIncrement + 1) / 2), 0),
             method: "stage",
             type: "accuracy",
@@ -661,13 +661,27 @@ class ActorPTR2e<
         if(evasionStages !== 0) {
             const evasionModifier = new ModifierPTR2e({
                 label: "PTR2E.Modifiers.evasion",
-                slug: `evasion-modifier-${appliesTo ?? fu.randomID()}`,
+                slug: `evasion-modifier-unicqi-${appliesTo ?? fu.randomID()}`,
                 modifier: evasionStages,
                 method: "stage",
                 type: "evasion",
                 appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
             });
             context.self.modifiers.push(evasionModifier);
+        }
+
+        const accuracyStages = context.self.actor.accuracyStage;
+        if(accuracyStages != 0) {
+            context.self.modifiers.push(
+                new ModifierPTR2e({
+                    slug: `accuracy-modifier-unicqi-${appliesTo ?? fu.randomID()}`,
+                    label: "PTR2E.Modifiers.accuracy",
+                    modifier: accuracyStages,
+                    method: "stage",
+                    type: "accuracy",
+                    appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
+                })
+            );
         }
 
         return { ...context};
@@ -719,7 +733,12 @@ class ActorPTR2e<
         //TODO: Implement Move Variants
         //const attackActions = params.attack ? [params.attack] : [];
 
-        const statistic = params.statistic;
+        const statistic = params.viewOnly ? params.statistic : (() => {
+            const attack = selfActor.actions.attack.get(params.attack?.slug);
+            if(!attack) return null;
+
+            return attack.statistic?.check as Maybe<StatisticCheck>
+        })() ?? params.statistic
 
         const selfItem = ((): ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null => {
             // 1. Simplest case: no context clone, so used the item passed to this method
@@ -845,7 +864,8 @@ class ActorPTR2e<
         const applicableEffects = ephemeralEffects.filter((effect) => !this.isImmuneTo(effect));
 
         return this.clone({
-            items: [fu.deepClone(this._source.items), applicableEffects].flat(),
+            items: [fu.deepClone(this._source.items)].flat(),
+            effects: [fu.deepClone(this._source.effects), applicableEffects].flat(),
             flags: { ptr2e: { rollOptions: { all: rollOptionsAll } } },
         });
     }

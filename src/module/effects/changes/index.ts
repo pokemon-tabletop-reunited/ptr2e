@@ -6,4 +6,5 @@ export { default as GrantItemChangeSystem } from "./grant-item.ts";
 export { default as GrantEffectChangeSystem } from "./grant-effect.ts";
 export { default as StageModifierSystem } from "./stage-modifier.ts";
 export { default as PercentileModifierSystem } from "./percentile-modifier.ts";
+export { default as EphemeralEffectChangeSystem } from "./ephemeral-effect.ts";
 export type * from "./data.ts";

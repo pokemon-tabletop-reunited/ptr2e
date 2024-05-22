@@ -10,7 +10,7 @@ type ModifierAdjustmentSynthetics = { all: ModifierAdjustment[]; damage: Modifie
     ModifierAdjustment[] | undefined
 >;
 
-type DeferredEphemeralEffect = DeferredPromise<EffectSourcePTR2e | null>;
+export type DeferredEphemeralEffect = DeferredPromise<EffectSourcePTR2e[] | null>;
 type DeferredModifier = DeferredValue<ModifierPTR2e>;
 
 interface ActorSynthetics {

@@ -47,15 +47,17 @@ class AttackRoll extends CheckRoll {
         ) => {
             const { flat: accuracyFlat, stage: accuracyStage } = accuracyModifiers;
             const stageBonus = (() => {
-                const evasion = evasionStage;
                 const accuracy = accuracyStage;
+                if(Math.abs(accuracy) === Infinity) return -Infinity;
+                const evasion = evasionStage;
                 const stages = Math.clamp(accuracy - evasion, -6, 6);
                 options.adjustedStages = stages;
                 return stages >= 0 ? (3 + stages) / 3 : 3 / (3 - stages);
             })();
-
             options.otherModifiers = accuracyFlat;
             options.stageModifier = stageBonus;
+            
+            if(stageBonus === -Infinity) return 0;
 
             return Math.clamp(Math.floor((baseAccuracy + accuracyFlat) * stageBonus), 1, 100);
         })(
