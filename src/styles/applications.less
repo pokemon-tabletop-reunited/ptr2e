@@ -653,22 +653,61 @@ body {
                 &[data-tab="overview"] {
                     .skill-component {
                         grid-area: span 3 / span 2;
-
-                        
                     }
                 }
 
-                .effects-display {
+                &[data-tab="perks"] {
+                    grid-template-columns: 1fr 5px 1fr;
+                    grid-template-rows: 4rem calc(100% - 4rem);
+                    grid-template-areas:
+                        "traits traits traits"
+                        "perks . abilities";
+
+                    aside.traits {
+                        grid-area: traits;
+        
+                        min-height: calc(0.5rem + 38px);
+                        padding: 0.25rem;
+        
+                        border-bottom: 1px solid var(--border-theme-color);
+        
+                        tags {
+                            --tags-border-color: var(--border-theme-color);
+                            --tag-bg: var(--color-theme-4);
+                            --tag-hover: var(--color-theme-3);
+                            width: 100%;
+        
+                            --tag-pad: 0;
+        
+                            .trait {
+                                display: inline-flex;
+                                padding: 0.25rem;
+        
+                                .tag {
+                                    text-decoration: underline;
+                                }
+                            }
+                        }
+                    }
+
+                    .perks-display {
+                        grid-area: perks;
+                    }
+
+                    .abilities-display {
+                        grid-area: abilities;
+                    }
+                }
+
+                .effects-display, .perks-display, .abilities-display {
                     padding: 0.5rem;
 
-                    grid-area: span 5 / span 3;
-
-                    ul.effect-list {
+                    ul.effect-list, ul.perk-list, ul.ability-list {
                         list-style: none;
                         margin: 0 0.5rem;
                         padding: 0;
 
-                        li.effect {
+                        li.effect, li.item {
                             padding: 0.5rem;
                             border-radius: 5px;
                             display: flex;
@@ -678,7 +717,7 @@ body {
 
                             border: 1px solid var(--border-theme-color);
 
-                            .effect-icon {
+                            .effect-icon, .item-icon {
                                 flex: 0 0 28px;
                                 height: 28px;
                                 width: 28px;
@@ -690,6 +729,10 @@ body {
                             }
                         }
                     }
+                }
+
+                .effects-display {
+                    grid-area: span 5 / span 3;
                 }
             }
 
@@ -713,17 +756,17 @@ body {
     &.actor.popout {
         background: var(--appv2-background);
 
-        .effects-display {
+        .effects-display, .abilities-display, .perks-display {
             padding: 0.5rem;
             max-height: 600px;
 
-            ul.effect-list {
+            ul.effect-list, ul.perk-list, ul.ability-list {
                 list-style: none;
                 margin: 0 0.5rem;
                 padding: 0;
                 max-height: 500px;
 
-                li.effect {
+                li.effect, li.item {
                     padding: 0.5rem;
                     border-radius: 5px;
                     display: flex;
@@ -734,7 +777,7 @@ body {
 
                     border: 1px solid var(--border-theme-color);
 
-                    .effect-icon {
+                    .effect-icon, .item-icon {
                         flex: 0 0 28px;
                         height: 28px;
                         width: 28px;

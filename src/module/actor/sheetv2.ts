@@ -9,6 +9,7 @@ import { EffectComponent } from "./components/effect-component.ts";
 import GearSystem from "@item/data/gear.ts";
 import WeaponSystem from "@item/data/weapon.ts";
 import ConsumableSystem from "@item/data/consumable.ts";
+import Tagify from "@yaireo/tagify";
 import EquipmentSystem from "@item/data/equipment.ts";
 import ContainerSystem from "@item/data/container.ts";
 import { KnownActionsApp } from "@module/apps/known-attacks.ts";
@@ -18,6 +19,8 @@ import SkillPTR2e from "@module/data/models/skill.ts";
 import { SkillsComponent } from "./components/skills-component.ts";
 import { SkillsEditor } from "@module/apps/skills-editor.ts";
 import { AttackPTR2e } from "@data";
+import { PerksComponent } from "./components/perks-component.ts";
+import { AbilitiesComponent } from "./components/abilities-component.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     ActorSheetV2Expanded
@@ -78,7 +81,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                     new KnownActionsApp(this.actor).render(true);
                 },
                 "roll-attack": async function (this: ActorSheetPTRV2, event: Event) {
-                    const actionDiv = (event.target as HTMLElement).closest(".action") as HTMLElement;
+                    const actionDiv = (event.target as HTMLElement).closest(
+                        ".action"
+                    ) as HTMLElement;
                     if (!actionDiv) return;
 
                     const slug = actionDiv.dataset.slug;
@@ -128,6 +133,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     get appId() {
         return this.id.replaceAll(".", "-");
     }
+
+    #allTraits: { value: string; label: string }[] | undefined;
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         header: {
@@ -272,31 +279,6 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     override async _prepareContext(
         options?: foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>
     ) {
-        const inventory = (() => {
-            const inventory: Record<string, ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]> = {};
-            for (const item of this.actor.items) {
-                const physicalItems = ["weapon", "gear", "consumable", "equipment", "container"];
-                function isTypeOfPhysicalItem(
-                    item: Item
-                ): item is ItemPTR2e<
-                    | GearSystem
-                    | WeaponSystem
-                    | ConsumableSystem
-                    | EquipmentSystem
-                    | ContainerSystem,
-                    ActorPTR2e
-                > {
-                    return physicalItems.includes(item.type);
-                }
-                if (isTypeOfPhysicalItem(item)) {
-                    const category = item.type;
-                    if (!inventory[category]) inventory[category] = [];
-                    inventory[category].push(item);
-                }
-            }
-            return inventory;
-        })();
-
         const { skills, hideHiddenSkills } = SkillsComponent.prepareSkillsData(this.actor);
 
         return {
@@ -305,13 +287,77 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             source: this.actor._source,
             fields: this.actor.system.schema.fields,
             baseFields: this.actor.schema.fields,
-            effects: this.actor.effects.contents,
-            inventory,
             tabs: this._getTabs(),
-            subtabs: this._getSubTabs(),
             skills,
             hideHiddenSkills,
         };
+    }
+
+    override async _preparePartContext(partId: string, context: foundry.applications.api.ApplicationRenderContext) {
+        if(partId === "inventory") {
+            const inventory = (() => {
+                const inventory: Record<string, ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]> = {};
+                for (const item of this.actor.items) {
+                    const physicalItems = ["weapon", "gear", "consumable", "equipment", "container"];
+                    function isTypeOfPhysicalItem(
+                        item: Item
+                    ): item is ItemPTR2e<
+                        | GearSystem
+                        | WeaponSystem
+                        | ConsumableSystem
+                        | EquipmentSystem
+                        | ContainerSystem,
+                        ActorPTR2e
+                    > {
+                        return physicalItems.includes(item.type);
+                    }
+                    if (isTypeOfPhysicalItem(item)) {
+                        const category = item.type;
+                        if (!inventory[category]) inventory[category] = [];
+                        inventory[category].push(item);
+                    }
+                }
+                return inventory;
+            })();
+            context.inventory = inventory;
+        }
+
+        if(partId === "actions") {
+            context.subtabs = this._getSubTabs();
+        }
+        
+        if(partId === "effects") {
+            context.effects = this.actor.effects.contents;
+        }
+
+        if(partId === "perks") {
+            const traits = (() => {
+                if ("traits" in this.document.system) {
+                    const traits = [];
+                    for (const trait of this.document.system.traits) {
+                        traits.push({
+                            value: trait.slug,
+                            label: trait.label,
+                        });
+                    }
+                    return traits;
+                }
+                return [];
+            })();
+    
+            this.#allTraits = game.ptr.data.traits.map((trait) => ({
+                value: trait.slug,
+                label: trait.label,
+            }));
+
+            context.traits = traits;
+
+            const { perk: perks, ability: abilities } = this.actor.itemTypes;
+            context.perks = perks;
+            context.abilities = abilities;
+        }
+
+        return context;
     }
 
     override _attachPartListeners(
@@ -339,6 +385,70 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         if (partId === "skills" || partId === "overview") {
             SkillsComponent.attachListeners(htmlElement, this.actor);
         }
+
+        if (partId === "perks") {
+            PerksComponent.attachListeners(htmlElement, this.actor);
+            AbilitiesComponent.attachListeners(htmlElement, this.actor);
+
+            for (const input of htmlElement.querySelectorAll<HTMLInputElement>(
+                "input.ptr2e-tagify"
+            )) {
+                new Tagify(input, {
+                    enforceWhitelist: false,
+                    keepInvalidTags: false,
+                    editTags: false,
+                    tagTextProp: "label",
+                    dropdown: {
+                        enabled: 0,
+                        mapValueTo: "label",
+                    },
+                    templates: {
+                        tag: function (tagData): string {
+                            return `
+                            <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
+                                tagData
+                            )}>
+                            <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                            <div>
+                                <span class='tagify__tag-text'>
+                                    <span class="trait" data-tooltip-direction="UP" data-trait="${
+                                        tagData.value
+                                    }" data-tooltip="${
+                                        tagData.label
+                                    }"><span>[</span><span class="tag">${
+                                        tagData.label
+                                    }</span><span>]</span></span>
+                                </span>
+                            </div>
+                            `;
+                        },
+                    },
+                    whitelist: this.#allTraits,
+                });
+            }
+        }
+    }
+
+    override _prepareSubmitData(
+        event: SubmitEvent,
+        form: HTMLFormElement,
+        formData: FormDataExtended
+    ): Record<string, unknown> {
+        const submitData = formData.object;
+        
+        if (
+            "system.traits" in submitData &&
+            submitData["system.traits"] &&
+            typeof submitData["system.traits"] === "object" &&
+            Array.isArray(submitData["system.traits"])
+        ) {
+            // Traits are stored as an array of objects, but we only need the values
+            submitData["system.traits"] = submitData["system.traits"].map((trait: { value: string }) =>
+                sluggify(trait.value)
+            );
+        }
+
+        return super._prepareSubmitData(event, form, formData);
     }
 
     async _onPopout(event: Event) {

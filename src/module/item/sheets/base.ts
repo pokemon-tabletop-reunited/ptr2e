@@ -6,7 +6,7 @@ import GithubManager from "@module/apps/github.ts";
 import { ActiveEffectPTR2e } from "@effects";
 import { ActionEditor } from "@module/apps/action-editor.ts";
 
-export default class ItemSheetPTR2eV2<
+export default class ItemSheetPTR2e<
     TSystem extends ItemSystemPTR,
 > extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<ItemPTR2e>) {
     static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -150,21 +150,21 @@ export default class ItemSheetPTR2eV2<
         form: HTMLFormElement,
         formData: FormDataExtended
     ): Record<string, unknown> {
-        const submitData = super._prepareSubmitData(event, form, formData);
-
+        const submitData = formData.object;
+        
         if (
-            "system" in submitData &&
-            submitData.system &&
-            typeof submitData.system === "object" &&
-            "traits" in submitData.system &&
-            Array.isArray(submitData.system.traits)
-        )
+            "system.traits" in submitData &&
+            submitData["system.traits"] &&
+            typeof submitData["system.traits"] === "object" &&
+            Array.isArray(submitData["system.traits"])
+        ) {
             // Traits are stored as an array of objects, but we only need the values
-            submitData.system.traits = submitData.system.traits.map((trait: { value: string }) =>
+            submitData["system.traits"] = submitData["system.traits"].map((trait: { value: string }) =>
                 sluggify(trait.value)
             );
+        }
 
-        return submitData;
+        return super._prepareSubmitData(event, form, formData);
     }
 
     override async _renderFrame(options: DocumentSheetConfiguration<ItemPTR2e<TSystem>>) {
@@ -427,7 +427,7 @@ export default class ItemSheetPTR2eV2<
     }
 
     static async #toChat<TSystem extends ItemSystemPTR>(
-        this: ItemSheetPTR2eV2<TSystem>,
+        this: ItemSheetPTR2e<TSystem>,
         _event: Event
     ) {
         return this.document.toChat();
@@ -463,6 +463,6 @@ export default class ItemSheetPTR2eV2<
     }
 }
 
-export default interface ItemSheetPTR2eV2<TSystem extends ItemSystemPTR> {
+export default interface ItemSheetPTR2e<TSystem extends ItemSystemPTR> {
     get document(): ItemPTR2e<TSystem>;
 }

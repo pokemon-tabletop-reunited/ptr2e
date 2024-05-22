@@ -542,16 +542,73 @@ body.theme-light .application textarea:read-only {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component {
   grid-area: span 3 / span 2;
 }
-.application.sheet.actor.v2 .window-content .tab.active .effects-display {
-  padding: 0.5rem;
-  grid-area: span 5 / span 3;
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] {
+  grid-template-columns: 1fr 5px 1fr;
+  grid-template-rows: 4rem calc(100% - 4rem);
+  grid-template-areas: "traits traits traits" "perks . abilities";
 }
-.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] aside.traits {
+  grid-area: traits;
+  min-height: calc(0.5rem + 38px);
+  padding: 0.25rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] aside.traits tags {
+  --tags-border-color: var(--border-theme-color);
+  --tag-bg: var(--color-theme-4);
+  --tag-hover: var(--color-theme-3);
+  width: 100%;
+  --tag-pad: 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] aside.traits tags .trait {
+  display: inline-flex;
+  padding: 0.25rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] aside.traits tags .trait .tag {
+  text-decoration: underline;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .perks-display {
+  grid-area: perks;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display {
+  grid-area: abilities;
+}
+.application.sheet.actor.v2 .window-content .tab.active .effects-display,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display {
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list {
   list-style: none;
   margin: 0 0.5rem;
   padding: 0;
 }
-.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect {
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item {
   padding: 0.5rem;
   border-radius: 5px;
   display: flex;
@@ -560,14 +617,69 @@ body.theme-light .application textarea:read-only {
   align-items: center;
   border: 1px solid var(--border-theme-color);
 }
-.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .effect-icon {
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item .item-icon {
   flex: 0 0 28px;
   height: 28px;
   width: 28px;
 }
-.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .name {
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item .name {
   flex-grow: 1;
   margin: 0 0.25rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active .effects-display {
+  grid-area: span 5 / span 3;
 }
 .application.sheet.actor.v2 .window-content .can-popout {
   position: relative;
@@ -585,17 +697,44 @@ body.theme-light .application textarea:read-only {
 .application.sheet.actor.popout {
   background: var(--appv2-background);
 }
-.application.sheet.actor.popout .effects-display {
+.application.sheet.actor.popout .effects-display,
+.application.sheet.actor.popout .abilities-display,
+.application.sheet.actor.popout .perks-display {
   padding: 0.5rem;
   max-height: 600px;
 }
-.application.sheet.actor.popout .effects-display ul.effect-list {
+.application.sheet.actor.popout .effects-display ul.effect-list,
+.application.sheet.actor.popout .abilities-display ul.effect-list,
+.application.sheet.actor.popout .perks-display ul.effect-list,
+.application.sheet.actor.popout .effects-display ul.perk-list,
+.application.sheet.actor.popout .abilities-display ul.perk-list,
+.application.sheet.actor.popout .perks-display ul.perk-list,
+.application.sheet.actor.popout .effects-display ul.ability-list,
+.application.sheet.actor.popout .abilities-display ul.ability-list,
+.application.sheet.actor.popout .perks-display ul.ability-list {
   list-style: none;
   margin: 0 0.5rem;
   padding: 0;
   max-height: 500px;
 }
-.application.sheet.actor.popout .effects-display ul.effect-list li.effect {
+.application.sheet.actor.popout .effects-display ul.effect-list li.effect,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.effect,
+.application.sheet.actor.popout .perks-display ul.effect-list li.effect,
+.application.sheet.actor.popout .effects-display ul.perk-list li.effect,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.effect,
+.application.sheet.actor.popout .perks-display ul.perk-list li.effect,
+.application.sheet.actor.popout .effects-display ul.ability-list li.effect,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.effect,
+.application.sheet.actor.popout .perks-display ul.ability-list li.effect,
+.application.sheet.actor.popout .effects-display ul.effect-list li.item,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.item,
+.application.sheet.actor.popout .perks-display ul.effect-list li.item,
+.application.sheet.actor.popout .effects-display ul.perk-list li.item,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.item,
+.application.sheet.actor.popout .perks-display ul.perk-list li.item,
+.application.sheet.actor.popout .effects-display ul.ability-list li.item,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.item,
+.application.sheet.actor.popout .perks-display ul.ability-list li.item {
   padding: 0.5rem;
   border-radius: 5px;
   display: flex;
@@ -605,12 +744,64 @@ body.theme-light .application textarea:read-only {
   min-width: 250px;
   border: 1px solid var(--border-theme-color);
 }
-.application.sheet.actor.popout .effects-display ul.effect-list li.effect .effect-icon {
+.application.sheet.actor.popout .effects-display ul.effect-list li.effect .effect-icon,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.effect .effect-icon,
+.application.sheet.actor.popout .perks-display ul.effect-list li.effect .effect-icon,
+.application.sheet.actor.popout .effects-display ul.perk-list li.effect .effect-icon,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.effect .effect-icon,
+.application.sheet.actor.popout .perks-display ul.perk-list li.effect .effect-icon,
+.application.sheet.actor.popout .effects-display ul.ability-list li.effect .effect-icon,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.effect .effect-icon,
+.application.sheet.actor.popout .perks-display ul.ability-list li.effect .effect-icon,
+.application.sheet.actor.popout .effects-display ul.effect-list li.item .effect-icon,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.item .effect-icon,
+.application.sheet.actor.popout .perks-display ul.effect-list li.item .effect-icon,
+.application.sheet.actor.popout .effects-display ul.perk-list li.item .effect-icon,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.item .effect-icon,
+.application.sheet.actor.popout .perks-display ul.perk-list li.item .effect-icon,
+.application.sheet.actor.popout .effects-display ul.ability-list li.item .effect-icon,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.item .effect-icon,
+.application.sheet.actor.popout .perks-display ul.ability-list li.item .effect-icon,
+.application.sheet.actor.popout .effects-display ul.effect-list li.effect .item-icon,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.effect .item-icon,
+.application.sheet.actor.popout .perks-display ul.effect-list li.effect .item-icon,
+.application.sheet.actor.popout .effects-display ul.perk-list li.effect .item-icon,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.effect .item-icon,
+.application.sheet.actor.popout .perks-display ul.perk-list li.effect .item-icon,
+.application.sheet.actor.popout .effects-display ul.ability-list li.effect .item-icon,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.effect .item-icon,
+.application.sheet.actor.popout .perks-display ul.ability-list li.effect .item-icon,
+.application.sheet.actor.popout .effects-display ul.effect-list li.item .item-icon,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.item .item-icon,
+.application.sheet.actor.popout .perks-display ul.effect-list li.item .item-icon,
+.application.sheet.actor.popout .effects-display ul.perk-list li.item .item-icon,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.item .item-icon,
+.application.sheet.actor.popout .perks-display ul.perk-list li.item .item-icon,
+.application.sheet.actor.popout .effects-display ul.ability-list li.item .item-icon,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.item .item-icon,
+.application.sheet.actor.popout .perks-display ul.ability-list li.item .item-icon {
   flex: 0 0 28px;
   height: 28px;
   width: 28px;
 }
-.application.sheet.actor.popout .effects-display ul.effect-list li.effect .name {
+.application.sheet.actor.popout .effects-display ul.effect-list li.effect .name,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.effect .name,
+.application.sheet.actor.popout .perks-display ul.effect-list li.effect .name,
+.application.sheet.actor.popout .effects-display ul.perk-list li.effect .name,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.effect .name,
+.application.sheet.actor.popout .perks-display ul.perk-list li.effect .name,
+.application.sheet.actor.popout .effects-display ul.ability-list li.effect .name,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.effect .name,
+.application.sheet.actor.popout .perks-display ul.ability-list li.effect .name,
+.application.sheet.actor.popout .effects-display ul.effect-list li.item .name,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.item .name,
+.application.sheet.actor.popout .perks-display ul.effect-list li.item .name,
+.application.sheet.actor.popout .effects-display ul.perk-list li.item .name,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.item .name,
+.application.sheet.actor.popout .perks-display ul.perk-list li.item .name,
+.application.sheet.actor.popout .effects-display ul.ability-list li.item .name,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.item .name,
+.application.sheet.actor.popout .perks-display ul.ability-list li.item .name {
   flex-grow: 1;
   margin: 0 0.25rem;
 }
