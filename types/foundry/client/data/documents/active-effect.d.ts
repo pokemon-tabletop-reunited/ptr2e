@@ -24,6 +24,18 @@ declare global {
         protected override _sheet: ActiveEffectConfig<this> | null;
 
         /**
+         * Create an ActiveEffect instance from some status effect ID.
+         * Delegates to {@link ActiveEffect._fromStatusEffect} to create the ActiveEffect instance
+         * after creating the ActiveEffect data from the status effect data if `CONFIG.statusEffects`.
+         * @param {string} statusId                             The status effect ID.
+         * @param {DocumentModificationContext} [options={}]    Additional options to pass to ActiveEffect instantiation.
+         * @returns {Promise<ActiveEffect>}                     The created ActiveEffect instance.
+         * @throws    An error if there's not status effect in `CONFIG.statusEffects` with the given status ID,
+         *            and if the status has implicit statuses but doesn't have a static _id.
+         */
+        static fromStatusEffect<TParent extends Actor | Item | null>(statusId: string, options?: DocumentModificationContext<TParent>): Promise<ActiveEffect<TParent>>;
+
+        /**
          * Determine whether the ActiveEffect requires a duration update.
          * True if the worldTime has changed for an effect whose duration is tracked in seconds.
          * True if the combat turn has changed for an effect tracked in turns where the effect target is a combatant.

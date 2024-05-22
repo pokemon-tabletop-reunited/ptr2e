@@ -110,6 +110,15 @@ export default class GrantItemChangeSystem extends ChangeModel {
         }
     }
 
+    protected async getItem(key: string): Promise<Maybe<ClientDocument>> {
+        try {
+            return (await fromUuid(key))?.clone() ?? null
+        } catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
+
     override async preCreate(args: ChangeModel.PreCreateParams<ChangeSource>): Promise<void> {
         if(this.inMemoryOnly || this.invalid || !this.actor) return;
 
@@ -117,14 +126,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
         const changeSource: GrantItemSource = args.changeSource;
 
         const uuid = this.resolveInjectedProperties(this.uuid);
-        const grantedItem: ClientDocument | null = await (async () => {
-            try {
-                return (await fromUuid(uuid))?.clone() ?? null;
-            } catch (error) {
-                console.error(error);
-                return null;
-            }
-        })();
+        const grantedItem: Maybe<ClientDocument> = await this.getItem(uuid);
         if (!(grantedItem instanceof ItemPTR2e)) return;
 
         changeSource.key =

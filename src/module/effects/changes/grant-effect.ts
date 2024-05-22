@@ -1,0 +1,38 @@
+import { ActorPTR2e } from "@actor";
+import { GrantItemChangeSystem } from "@data";
+import { ItemPTR2e } from "@item";
+import ActiveEffectPTR2e from "../document.ts";
+
+export default class GrantEffectChangeSystem extends GrantItemChangeSystem {
+    static override TYPE = "grant-effect";
+
+    static override defineSchema() {
+        const schema = super.defineSchema();
+        schema.value.validate = () => {};
+        schema.value.options.choices = CONFIG.PTR.statusEffects.reduce((choices, status) => {
+            choices[status.id] = status.name;
+            return choices;
+        }, {} as Record<string, string>);
+        return schema;
+    }
+
+    override apply(_actor: ActorPTR2e, _rollOptions?: string[] | Set<string> | null): void {
+        // TODO: Implement createInMemoryCondition
+    }
+
+    override async getItem(key: string): Promise<Maybe<ItemPTR2e>> {
+        try {
+            const effect = await ActiveEffectPTR2e.fromStatusEffect(key)
+            
+            return new ItemPTR2e({
+                name: effect.name,
+                type: "effect",
+                effects: [effect.toObject()]
+            })
+        }
+        catch (error) {
+            console.error(error);
+            return null;
+        }
+    }
+}
