@@ -542,9 +542,20 @@ body.theme-light .application textarea:read-only {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component {
   grid-area: span 3 / span 2;
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside {
+  grid-area: 1 / 4 / 4 / 6;
+  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  border-radius: 8px;
+  border: 1px solid var(--border-theme-color);
+  margin: 1rem 1rem 0.25rem 0.25rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] {
   grid-template-columns: 1fr 5px 1fr;
-  grid-template-rows: 4rem calc(100% - 4rem);
+  grid-template-rows: min-content auto;
   grid-template-areas: "traits traits traits" "perks . abilities";
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] aside.traits {
@@ -1596,6 +1607,9 @@ body.theme-light .application textarea:read-only {
 .application.sheet.active-effect-sheet textarea {
   resize: vertical;
 }
+.application.sheet.skill-sheet {
+  max-height: 750px;
+}
 .application.sheet.skill-sheet .skill-editor {
   display: flex;
   flex-direction: column;
@@ -1634,6 +1648,7 @@ body.theme-light .application textarea:read-only {
   flex-direction: column;
   gap: 0.5rem;
   overflow: hidden;
+  max-height: 520px;
 }
 .application.sheet.skill-sheet .skill-editor .skills div.skill,
 .application.sheet.skill-sheet .skill-editor .skills header.skill {
@@ -2336,7 +2351,7 @@ body.theme-light .application textarea:read-only {
 }
 .application.sheet.stats-form .window-content aside[data-application-part="statsChart"] .stats-chart-aside {
   align-items: center;
-  background: #346899;
+  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
   border-radius: 10px;
   margin: 0.25rem;
 }

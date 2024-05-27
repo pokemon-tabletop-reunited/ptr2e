@@ -13,7 +13,7 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
         return {
             mode: new fields.StringField({
                 required: true,
-                choices: ["add", "downgrade", "multiply", "override", "remove", "subtract", "upgrade"],
+                choices: ["add", "downgrade", "multiply", "override", "remove", "subtract", "upgrade"].reduce<Record<string,string>>((acc, mode) => ({...acc, [mode]: mode}), {}),
             }),
             property: new fields.StringField({
                 required: true,

@@ -985,14 +985,7 @@ export const StatusEffects: StatusEffect[] = [
             turns: 5,
         },
         system: {
-            changes: [
-                {
-                    type: "basic",
-                    key: "system.battleStats.evasion.stage",
-                    value: 1,
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                },
-            ],
+            changes: [],
             formula: null,
             type: null,
             removeOnRecall: false,
@@ -1000,6 +993,24 @@ export const StatusEffects: StatusEffect[] = [
             traits: [],
         },
         description: "PTR2E.Effect.Statuses.Descriptions.shrink",
+    },
+    {
+        id: "enlarge",
+        name: "PTR2E.Effect.Statuses.Labels.enlarge",
+        img: "icons/svg/regen.svg",
+        type: "affliction",
+        duration: {
+            turns: 5,
+        },
+        system: {
+            changes: [],
+            formula: null,
+            type: null,
+            removeOnRecall: false,
+            removeAfterCombat: true,
+            traits: [],
+        },
+        description: "PTR2E.Effect.Statuses.Descriptions.enlarge",
     },
     {
         id: "marked",

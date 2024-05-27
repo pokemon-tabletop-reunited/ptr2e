@@ -17,6 +17,13 @@ class ActiveEffectPTR2e<
         return this.system._source.slug ?? sluggify(this._name);
     }
 
+    static override get schema() {
+        if ( this.hasOwnProperty("_schema") ) return this._schema!;
+        const schema = new foundry.data.fields.SchemaField(Object.freeze(this.defineSchema()));
+        Object.defineProperty(this, "_schema", {value: schema, writable: false});
+        return schema;
+    }
+
     static override defineSchema() {
         const schema = super.defineSchema() as { changes?: ActiveEffectSchema["changes"] } & Omit<
             ActiveEffectSchema,

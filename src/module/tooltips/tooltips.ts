@@ -1,6 +1,6 @@
 import { ActorPTR2e } from "@actor";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } from "@chat";
-import { AttackPTR2e } from "@data";
+import { ActionPTR2e, AttackPTR2e } from "@data";
 import { EffectPTR2e, ItemPTR2e, MovePTR2e } from "@item";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import Tagify from "@yaireo/tagify";
@@ -78,11 +78,14 @@ export default class TooltipsPTR2e {
                     return this._onTraitTooltip();
                 case "attack":
                     return this._onAttackTooltip();
+                case "action": 
+                    return this._onActionTooltip();
                 case "status":
                     return this._onStatusTooltip();
                 case "damage":
                     return this._onDamageTooltip();
                 case "content-link":
+                case "item": 
                     return this._onContentLinkTooltip();
                 case "damage-info":
                     return this._onDamageInfoTooltip();
@@ -155,6 +158,73 @@ export default class TooltipsPTR2e {
             | TooltipDirections
             | undefined;
         requestAnimationFrame(() => this._positionTooltip(tooltipDirection));
+        return 2000;
+    }
+
+    async _onActionTooltip() {
+        const attackSlug = game.tooltip.element?.dataset.slug;
+        if (!attackSlug) return false;
+
+        const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
+            .parent;
+        if (!parentUuid) return false;
+
+        const parent = (await fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
+        if (!parent) return false;
+
+        const attack = parent.actions.get(attackSlug) as ActionPTR2e | undefined;
+        if (!attack) return false;
+
+        return await this.#createActionTooltip(attack);
+    }
+
+    async #createActionTooltip(action: ActionPTR2e) {
+        const traits = action.traits.map((t) => ({ value: t.slug, label: t.label }));
+
+        this.tooltip.classList.add("attack");
+        await this._renderTooltip({
+            path: "systems/ptr2e/templates/items/embeds/action.hbs",
+            data: { action, move: parent, traits, fields: action.schema.fields },
+            direction: game.tooltip.element?.dataset.tooltipDirection as
+                | TooltipDirections
+                | undefined,
+        });
+
+        for (const input of this.tooltip.querySelectorAll<HTMLInputElement>("input.ptr2e-tagify")) {
+            new Tagify(input, {
+                enforceWhitelist: true,
+                keepInvalidTags: false,
+                editTags: false,
+                tagTextProp: "label",
+                dropdown: {
+                    enabled: 0,
+                    mapValueTo: "label",
+                },
+                templates: {
+                    tag: function (tagData): string {
+                        return `
+                        <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
+                            tagData
+                        )}>
+                        <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                        <div>
+                            <span class='tagify__tag-text'>
+                                <span class="trait" data-tooltip-direction="UP" data-trait="${
+                                    tagData.value
+                                }" data-tooltip="${
+                                    tagData.label
+                                }" data-tooltip-trait="true"><span>[</span><span class="tag">${
+                                    tagData.label
+                                }</span><span>]</span></span>
+                            </span>
+                        </div>
+                        `;
+                    },
+                },
+                whitelist: traits,
+            });
+        }
+
         return 2000;
     }
 
@@ -403,7 +473,7 @@ export default class TooltipsPTR2e {
         if (!uuid) return false;
 
         const entityType = element.dataset.type;
-        if (entityType !== "Item") return false;
+        if (entityType && entityType !== "Item") return false;
 
         const embedFigure = element.closest("figure.content-embed") as HTMLElement | undefined;
         if (embedFigure?.classList.contains("no-tooltip") && embedFigure.dataset.uuid === uuid)

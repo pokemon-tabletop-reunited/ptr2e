@@ -109,7 +109,7 @@ class SpeciesSystem extends SpeciesExtension {
             types: new fields.SetField(
                 new SlugField({
                     required: true,
-                    choices: getTypes(),
+                    choices: getTypes().reduce<Record<string,string>>((acc, type) => ({...acc, [type]: type}), {}),
                     initial: PTRCONSTS.Types.UNTYPED,
                     label: "PTR2E.FIELDS.pokemonType.label",
                     hint: "PTR2E.FIELDS.pokemonType.hint",
@@ -291,12 +291,12 @@ export class EvolutionData extends foundry.abstract.DataModel {
             type: new fields.StringField({
                 required: true,
                 initial: initial as string,
-                choices: ["level", "item", "move", "gender"],
+                choices: ["level", "item", "move", "gender"].reduce<Record<string,string>>((acc, type) => ({...acc, [type]: type}), {}),
             }),
             operand: new fields.StringField({
                 required: true,
                 initial: "and",
-                choices: ["and", "or"],
+                choices: ["and", "or"].reduce<Record<string,string>>((acc, operand) => ({...acc, [operand]: operand}), {}),
             }),
         });
 
@@ -323,7 +323,7 @@ export class EvolutionData extends foundry.abstract.DataModel {
                     ...getTypeField("gender"),
                     gender: new fields.StringField({
                         required: true,
-                        choices: ["male", "female", "genderless"],
+                        choices: ["male", "female", "genderless"].reduce<Record<string,string>>((acc, gender) => ({...acc, [gender]: gender}), {}),
                         initial: "genderless"
                     }),
                 };
@@ -373,7 +373,7 @@ export class EvolutionData extends foundry.abstract.DataModel {
                         required: true,
                         blank: false,
                         nullable: true,
-                        choices: ["male", "female"],
+                        choices: ["male", "female"].reduce<Record<string,string>>((acc, gender) => ({...acc, [gender]: gender}), {}),
                     }),
                     item: new SlugField({ required: true, nullable: true }),
                     level: new fields.NumberField({

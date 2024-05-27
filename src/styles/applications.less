@@ -654,11 +654,25 @@ body {
                     .skill-component {
                         grid-area: span 3 / span 2;
                     }
+
+                    aside.stats-chart-aside {
+                        grid-area: 1 / 4 / 4 / 6;
+
+                        background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+                        border-radius: 8px;
+                        border: 1px solid var(--border-theme-color);
+                        margin: 1rem 1rem 0.25rem 0.25rem;
+
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                    }
                 }
 
                 &[data-tab="perks"] {
                     grid-template-columns: 1fr 5px 1fr;
-                    grid-template-rows: 4rem calc(100% - 4rem);
+                    grid-template-rows: min-content auto;
                     grid-template-areas:
                         "traits traits traits"
                         "perks . abilities";
@@ -1254,6 +1268,8 @@ body {
     }
 
     &.skill-sheet {
+        max-height: 750px;
+
         .skill-editor {
             display: flex;
             flex-direction: column;
@@ -1296,6 +1312,7 @@ body {
                 flex-direction: column;
                 gap: 0.5rem;
                 overflow: hidden;
+                max-height: 520px;
 
                 div.skill, header.skill {
                     display: flex;
@@ -2094,7 +2111,7 @@ body {
 
                 .stats-chart-aside {
                     align-items: center;
-                    background: #346899;
+                    background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
                     border-radius: 10px;
                     margin: 0.25rem;
                 }

@@ -19,20 +19,22 @@
                 <label>Apply Investment</label>
             </header>
             {{#each skills}}
-                <div class="skill">
-                    <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}</label>
-                    <label>{{value}}</label>
-                    <label>{{rvs}}</label>
-                    {{#if (eq this.slug "luck")}}
-                        <button type="button" data-action="roll-luck">{{#if @root.isReroll}}Reroll{{else}}Roll{{/if}} Luck</button>
-                    {{else}}
-                        {{#if (and (eq this.slug "resources") (not @root.levelOne true))}}
-                            <label></label>
+                {{#unless hidden}}
+                    <div class="skill">
+                        <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}</label>
+                        <label>{{value}}</label>
+                        <label>{{rvs}}</label>
+                        {{#if (eq this.slug "luck")}}
+                            <button type="button" data-action="roll-luck">{{#if @root.isReroll}}Reroll{{else}}Roll{{/if}} Luck</button>
                         {{else}}
-                            <input name="{{slug}}.investment" type="number" min="0" max="{{@root.maxInvestment}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
+                            {{#if (and (eq this.slug "resources") (not @root.levelOne true))}}
+                                <label></label>
+                            {{else}}
+                                <input name="{{slug}}.investment" type="number" max="{{@root.maxInvestment}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
+                            {{/if}}
                         {{/if}}
-                    {{/if}}
-                </div>
+                    </div>
+                {{/unless}}
             {{/each}}
         </div>
     </fieldset>

@@ -122,7 +122,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 types: new fields.SetField(
                     new fields.StringField({
                         required: true,
-                        choices: getTypes,
+                        choices: getTypes().reduce<Record<string,string>>((acc, type) => ({...acc, [type]: type}), {}),
                         initial: "untyped",
                         label: "PTR2E.FIELDS.PokemonType.Label",
                         hint: "PTR2E.FIELDS.PokemonType.Hint",
