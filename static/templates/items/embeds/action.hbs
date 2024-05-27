@@ -1,0 +1,45 @@
+<figure>
+    <header class="header">
+        <h2>{{action.name}}</h2>
+    </header>
+    {{#if traits}}
+    <header class="traits">
+        <input type="text" class="traits ptr2e-tagify" name="system.traits" value="{{json traits}}" data-dType="JSON" readonly/>
+    </header>
+    {{/if}}
+    <content class="item-embed">
+        <section class="details">
+            {{#if action.range}}
+                <fieldset>
+                    <legend>Range</legend>
+                        {{#if action.range.target}}<label for="range.target">{{localize fields.range.fields.target.label}}</label> <span>{{formatSlug action.range.target}}</span>{{/if}}
+                        {{#if action.range.distance}}<label for="range.distance">{{localize fields.range.fields.distance.label}}</label> <span>{{action.range.distance}}</span>{{/if}}
+                </fieldset>
+            {{/if}}
+            {{#if action.cost}}
+                <fieldset>
+                    <legend>Cost</legend>
+                        {{#if action.cost.activation}}<label for="cost.activation">{{localize fields.cost.fields.activation.label}}</label> <span>{{formatSlug action.cost.activation}}</span>{{/if}}
+                        {{#if action.cost.powerPoints}}<label for="cost.powerPoints">{{localize fields.cost.fields.powerPoints.label}}</label> <span>{{action.cost.powerPoints}}</span>{{/if}}
+                        {{#if action.cost.trigger}}<label for="cost.trigger">{{localize fields.cost.fields.trigger.label}}</label> <span>{{formatSlug action.cost.trigger}}</span>{{/if}}
+                        {{#if action.cost.delay}}<label for="cost.delay">{{localize fields.cost.fields.delay.label}}</label> <span>{{action.cost.delay}}</span>{{/if}}
+                        {{#if action.cost.priority}}<label for="cost.priority">{{localize fields.cost.fields.priority.label}}</label> <span>{{action.cost.priority}}</span>{{/if}}
+                </fieldset>
+            {{/if}}
+        </section>
+        <section class="item-description">
+            <fieldset>
+                <legend>Effect Description</legend>
+                {{#if action.description}}
+                <article>
+                    {{{action.description}}}
+                </article>
+                {{else}}
+                <article class="center">
+                    <small><i>No Effect Description Provided</i></small>
+                </article>
+                {{/if}}
+            </fieldset>
+        </section>
+    </content>
+</figure>

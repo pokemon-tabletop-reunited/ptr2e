@@ -1,5 +1,5 @@
 aside[role="tooltip"] {
-  min-width: 150px;
+  min-width: 165px;
   --tooltip-background: linear-gradient(to right, rgba(7, 7, 10, 0.9), rgba(19, 17, 31, 0.95));
   background: var(--tooltip-background) !important;
   border-color: var(--color-light-6) !important;
@@ -29,6 +29,9 @@ aside[role="tooltip"].locked-tooltip * .circular-progress circle.fg {
 aside[role="tooltip"].locked-tooltip .circular-progress circle.fgb,
 aside[role="tooltip"].locked-tooltip * .circular-progress circle.fgb {
   stroke: var(--stroke);
+}
+aside[role="tooltip"].text-right {
+  text-align: unset !important;
 }
 aside[role="tooltip"] .progress-circle {
   position: absolute;
@@ -191,4 +194,7 @@ aside[role="tooltip"].damage-info .note figure:last-child {
 }
 aside[role="tooltip"].damage-info .note figure.damage {
   border-top: 1px solid var(--color-light-6);
+}
+aside[role="tooltip"] .attack-embed {
+  min-width: 275px;
 }

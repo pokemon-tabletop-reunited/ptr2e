@@ -5,7 +5,7 @@
         </legend>
         <ul class="ability-list scroll">
             {{#each abilities as |ability|}}
-                <li class="item ability" data-tooltip-direction="LEFT" data-id="{{ability.id}}" data-uuid="{{ability.uuid}}" data-tooltip="{{ability.name}}">
+                <li class="item ability" data-tooltip-direction="{{../direction}}" data-id="{{ability.id}}" data-uuid="{{ability.uuid}}" data-tooltip="{{ability.name}}">
                     <div class="item-icon"><img src="{{ability.img}}" class="icon"></div>
                     <span class="name">{{ability.name}}</span>
                     <div class="item-controls">

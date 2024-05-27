@@ -1,7 +1,7 @@
 <h2>{{localize (concat "PTR2E.Actions." type ".Label")}}</h2>
 <ul class="action-list action-list-{{type}}" data-parent="{{uuid}}">
     {{#each actions as |action|}}
-        <li class="action {{type}}" data-tooltip-direction="LEFT" data-slug="{{action.slug}}" data-tooltip="{{action.name}}">
+        <li class="{{type}} action" data-tooltip-direction="LEFT" data-slug="{{action.slug}}" data-tooltip="{{action.name}}">
             <div class="item-icon {{#if action.rollable}}rollable{{/if}} move">
                 <img class="icon" src="{{action.img}}" data-tooltip="{{action.name}}"/>
                 <img class="dice" src="/icons/svg/d20.svg" data-tooltip="Roll {{action.name}}">

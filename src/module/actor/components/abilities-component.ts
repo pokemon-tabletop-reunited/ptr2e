@@ -8,7 +8,8 @@ class AbilitiesComponent extends ActorComponent {
     static override TOOLTIP = "PTR2E.ActorSheet.Components.Abilities.tooltip";
 
     override renderComponent(data: Record<string, unknown>): Promise<string> {
-        data.ability = this.actor.itemTypes.ability;
+        data.abilities = this.actor.itemTypes.ability;
+        data.direction = "LEFT";
         return renderTemplate(this.template, data);
     }
 
