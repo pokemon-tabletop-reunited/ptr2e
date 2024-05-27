@@ -15,7 +15,7 @@ export default class EphemeralEffectChangeSystem extends ChangeModel {
             ...schema,
             affects: new fields.StringField({
                 required: true,
-                choices: ["target", "origin"],
+                choices: ["target", "origin"].reduce<Record<string,string>>((acc, affects) => ({...acc, [affects]: affects}), {}),
                 initial: "target",
             }),
         };

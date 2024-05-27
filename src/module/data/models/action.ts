@@ -35,7 +35,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
                 required: true,
                 blank: false,
                 initial: this.TYPE,
-                choices: Object.values(PTRCONSTS.ActionTypes),
+                choices: Object.values(PTRCONSTS.ActionTypes).reduce<Record<string,string>>((acc, type) => ({...acc, [type]: type}), {}),
                 label: "PTR2E.FIELDS.actionType.label",
                 hint: "PTR2E.FIELDS.actionType.hint",
             }),
@@ -43,11 +43,11 @@ class ActionPTR2e extends foundry.abstract.DataModel {
             cost: new fields.SchemaField({
                 activation: new fields.StringField({
                     required: true,
-                    choices: Object.values(PTRCONSTS.ActivationCost),
+                    choices: Object.values(PTRCONSTS.ActivationCost).reduce<Record<string,string>>((acc, activation) => ({...acc, [activation]: activation}), {}),
                     initial: PTRCONSTS.ActivationCost.SIMPLE,
                     label: "PTR2E.FIELDS.activationCost.label",
                     hint: "PTR2E.FIELDS.activationCost.hint",
-                }),
+                }) as foundry.data.fields.StringField<ActionCost, string, true, false, true>,
                 powerPoints: new fields.NumberField({
                     required: true,
                     initial: 0,

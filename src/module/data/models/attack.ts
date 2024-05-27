@@ -16,7 +16,7 @@ export default class AttackPTR2e extends ActionPTR2e {
             types: new fields.SetField(
                 new fields.StringField({
                     required: true,
-                    choices: getTypes(),
+                    choices: getTypes().reduce<Record<string,string>>((acc, type) => ({...acc, [type]: type}), {}),
                     initial: PTRCONSTS.Types.UNTYPED,
                     label: "PTR2E.FIELDS.pokemonType.label",
                     hint: "PTR2E.FIELDS.pokemonType.hint",
@@ -33,7 +33,7 @@ export default class AttackPTR2e extends ActionPTR2e {
             ),
             category: new fields.StringField({
                 required: true,
-                choices: Object.values(PTRCONSTS.Categories),
+                choices: Object.values(PTRCONSTS.Categories).reduce<Record<string,string>>((acc, category) => ({...acc, [category]: category}), {}),
                 initial: PTRCONSTS.Categories.PHYSICAL,
                 label: "PTR2E.FIELDS.pokemonCategory.label",
                 hint: "PTR2E.FIELDS.pokemonCategory.hint",

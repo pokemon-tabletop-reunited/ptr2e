@@ -120,7 +120,7 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
         const attackIndex = actions.findIndex((action) => action.type === "attack");
         if (attackIndex === -1) return;
 
-        const expanded = fu.expandObject(formData.object).attack as AttackPTR2e["_source"];
+        const expanded = fu.expandObject(formData.object) as AttackPTR2e["_source"];
         actions[attackIndex] = fu.mergeObject(actions[attackIndex], expanded, { inplace: false });
         actions[attackIndex].slug = sluggify(actions[attackIndex].name);
         actions[attackIndex].description = this.document.system._source.description;

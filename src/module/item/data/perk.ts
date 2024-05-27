@@ -30,15 +30,15 @@ export default abstract class PerkSystem extends PerkExtension {
             cost: new fields.NumberField({ required: true, initial: 1, label: "PTR2E.FIELDS.apCost.label", hint: "PTR2E.FIELDS.apCost.hint"}),
             
             design: new fields.SchemaField({
-                arena: new fields.StringField({required: true, nullable: true, initial: null, choices: ["physical", "mental", "social"], label: "PTR2E.FIELDS.design.arena.label", hint: "PTR2E.FIELDS.design.arena.hint"}),
-                approach: new fields.StringField({required: true, nullable: true, initial: null, choices: ["power", "finesse", "resilience"], label: "PTR2E.FIELDS.design.approach.label", hint: "PTR2E.FIELDS.design.approach.hint"}),
+                arena: new fields.StringField({required: true, nullable: true, initial: null, choices: ["physical", "mental", "social"].reduce<Record<string,string>>((acc, arena) => ({...acc, [arena]: arena}), {}), label: "PTR2E.FIELDS.design.arena.label", hint: "PTR2E.FIELDS.design.arena.hint"}),
+                approach: new fields.StringField({required: true, nullable: true, initial: null, choices: ["power", "finesse", "resilience"].reduce<Record<string,string>>((acc, approach) => ({...acc, [approach]: approach}), {}), label: "PTR2E.FIELDS.design.approach.label", hint: "PTR2E.FIELDS.design.approach.hint"}),
                 archetype: new fields.StringField({required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.design.archetype.label", hint: "PTR2E.FIELDS.design.archetype.hint"}),
             }),
 
             node: new fields.SchemaField({
                 i: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.i.label", hint: "PTR2E.FIELDS.node.i.hint"}),
                 j: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.j.label", hint: "PTR2E.FIELDS.node.j.hint"}),
-                connected: new fields.SetField<SlugField<true, boolean, boolean>,(string | null)[],Set<string | null>,true>(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.node.connected.label", hint: "PTR2E.FIELDS.node.connected.hint" }),
+                connected: new fields.SetField<SlugField<true, boolean, boolean>,(string)[],Set<string | null>,true>(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.node.connected.label", hint: "PTR2E.FIELDS.node.connected.hint" }),
                 config: new fields.SchemaField(
                     {
                         alpha: new fields.NumberField({ required: false, min: 0, max: 1, label: "PTR2E.FIELDS.node.config.alpha.label", hint: "PTR2E.FIELDS.node.config.alpha.hint" }),
@@ -57,7 +57,7 @@ export default abstract class PerkSystem extends PerkExtension {
                     { required: false }
                 ),
                 hidden: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.node.hidden.label", hint: "PTR2E.FIELDS.node.hidden.hint" }),
-                type: new fields.StringField({ required: true, choices: ["normal", "root", "ranked"], initial: "normal" })
+                type: new fields.StringField({ required: true, choices: ["normal", "root", "ranked"].reduce<Record<string,string>>((acc, type) => ({...acc, [type]: type}), {}), initial: "normal" })
             }),
         };
     }
