@@ -13,7 +13,7 @@ import Tagify from "@yaireo/tagify";
 import EquipmentSystem from "@item/data/equipment.ts";
 import ContainerSystem from "@item/data/container.ts";
 import { KnownActionsApp } from "@module/apps/known-attacks.ts";
-import { ActorSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
+import { ActorSheetV2Expanded, DocumentSheetConfigurationExpanded } from "@module/apps/appv2-expanded.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { SkillsComponent } from "./components/skills-component.ts";
@@ -21,10 +21,18 @@ import { SkillsEditor } from "@module/apps/skills-editor.ts";
 import { AttackPTR2e } from "@data";
 import { PerksComponent } from "./components/perks-component.ts";
 import { AbilitiesComponent } from "./components/abilities-component.ts";
+import { StatsChart } from "./sheets/stats-chart.ts";
+import StatsForm from "./sheets/stats-form.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     ActorSheetV2Expanded
 ) {
+    constructor(options: Partial<DocumentSheetConfigurationExpanded> = {}) {
+        super(options);
+
+        this.statsChart = new StatsChart(this);
+    }
+
     static override DEFAULT_OPTIONS = fu.mergeObject(
         super.DEFAULT_OPTIONS,
         {
@@ -182,6 +190,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             template: "systems/ptr2e/templates/actor/actor-effects.hbs",
         },
     };
+
+    protected statsChart: StatsChart;
 
     tabGroups: Record<string, string> = {
         sheet: "overview",
@@ -397,6 +407,11 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                 })
                 fp.browse();
             });
+        }
+
+        if(partId === "overview") {
+            this.statsChart.render();
+            htmlQuery(htmlElement, ".stats-chart")?.addEventListener("dblclick", () => new StatsForm({document: this.actor}).render(true));
         }
 
         if (partId === "effects") {

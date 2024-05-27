@@ -654,6 +654,20 @@ body {
                     .skill-component {
                         grid-area: span 3 / span 2;
                     }
+
+                    aside.stats-chart-aside {
+                        grid-area: 1 / 4 / 4 / 6;
+
+                        background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+                        border-radius: 8px;
+                        border: 1px solid var(--border-theme-color);
+                        margin: 1rem 1rem 0.25rem 0.25rem;
+
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                    }
                 }
 
                 &[data-tab="perks"] {
@@ -2094,7 +2108,7 @@ body {
 
                 .stats-chart-aside {
                     align-items: center;
-                    background: #346899;
+                    background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
                     border-radius: 10px;
                     margin: 0.25rem;
                 }
