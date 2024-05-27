@@ -108,7 +108,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             skills: this.skills,
             points,
             maxInvestment,
-            isReroll: !levelOne || (levelOne && this.document.system.skills.get("luck")!.value! > 1),
+            isReroll:
+                !levelOne || (levelOne && this.document.system.skills.get("luck")!.value! > 1),
             levelOne,
         };
     }
@@ -155,6 +156,11 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                 callback: async () => {
                     await document.update({
                         "system.skills": document.system.skills.map((skill) => {
+                            if(skill.slug === "resources") return {
+                                ...skill,
+                                rvs: 0,
+                                value: 10,
+                            };
                             return {
                                 ...skill,
                                 rvs: 0,
@@ -242,9 +248,12 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             await roll.toMessage({
                 speaker: ChatMessage.getSpeaker({ actor: document }),
                 flavor,
-                content: `<p>${flavor}</p>${await roll.render()}<p>${game.i18n.format("PTR2E.SkillsEditor.RollLuck.result", {
-                    result: roll.total,
-                })}</p>`,
+                content: `<p>${flavor}</p>${await roll.render()}<p>${game.i18n.format(
+                    "PTR2E.SkillsEditor.RollLuck.result",
+                    {
+                        result: roll.total,
+                    }
+                )}</p>`,
             });
 
             thisRef.skills.find((skill) => skill.slug === "luck")!.value = roll.total;
@@ -290,13 +299,16 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         const data = fu.expandObject<Record<string, { investment: string }>>(formData.object);
         const skills = this.document.system.toObject().skills as SkillPTR2e["_source"][];
         const maxInvestment = this.document.system.advancement.level === 1 ? 90 : 100;
+
+        let resourceMod = 0;
         for (const skill of skills) {
             const skillData = data[skill.slug];
             if (!skillData) continue;
             const investment = parseInt(skillData.investment);
             if (isNaN(investment) || !investment) continue;
 
-            skill.rvs = Math.min((skill.rvs ?? 0) + investment, maxInvestment);
+            if(skill.slug === "resources" && investment < 0) resourceMod = investment; 
+            skill.rvs = Math.clamp((skill.rvs ?? 0) + investment, 0, maxInvestment);
             delete data[skill.slug];
         }
 
@@ -307,14 +319,25 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             const skillData = game.ptr.data.skills.get(slug);
             if (!skillData || !game.ptr.data.skills.isCustomSkill(skillData)) continue;
 
+            if(slug === "resources" && investment < 0) resourceMod = investment;
+
             skills.push({
                 slug,
                 value: 1,
-                rvs: Math.min(investment, maxInvestment),
+                rvs: Math.clamp(investment, 0, maxInvestment),
                 favourite: skillData.favourite ?? false,
                 hidden: skillData.hidden ?? false,
                 group: skillData.group || undefined,
             });
+        }
+
+        if (this.document.system.advancement.level === 1) {
+            const resourceIndex = skills.findIndex((skill) => skill.slug === "resources");
+            if (resourceIndex !== -1) {
+                const resources = skills[resourceIndex];
+                resources.value += (resources.rvs ?? 0) + resourceMod;
+                resources.rvs = 0;
+            }
         }
 
         await this.document.update({

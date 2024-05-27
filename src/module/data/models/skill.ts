@@ -40,6 +40,9 @@ class SkillPTR2e extends foundry.abstract.DataModel {
         if ((this.rvs ?? 0) > 0 && this.parent.advancement?.rvs?.total && !["luck", "resources"].includes(this.slug)) {
             this.parent.advancement.rvs.spent += this.rvs!;
         }
+        if(this.slug === "resources") {
+            this.parent.advancement.rvs.spent += this.value - 10;
+        }
     }
 
     get statistic() {
