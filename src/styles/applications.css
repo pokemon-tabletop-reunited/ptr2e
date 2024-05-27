@@ -544,7 +544,7 @@ body.theme-light .application textarea:read-only {
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] {
   grid-template-columns: 1fr 5px 1fr;
-  grid-template-rows: 4rem calc(100% - 4rem);
+  grid-template-rows: min-content auto;
   grid-template-areas: "traits traits traits" "perks . abilities";
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] aside.traits {
