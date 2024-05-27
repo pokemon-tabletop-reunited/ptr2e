@@ -40,7 +40,7 @@ export default abstract class MoveSystem extends HasEmbed(HasBase(foundry.abstra
                     "S-",
                     "S",
                     "S+",
-                ],
+                ].reduce((acc, grade) => ({...acc, [grade]: grade}), {})
             }),
         };
     }
