@@ -11,7 +11,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             tag: "form",
             classes: ["sheet skill-sheet"],
             position: {
-                height: 750,
+                height: 'auto',
                 width: 500,
             },
             form: {
@@ -59,7 +59,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     resetSkills(): this["skills"] {
         const skills = [];
         for (const skill of this.document.system.skills) {
-            if (game.i18n.has(`PTR2E.Skills.${skill.slug}.label`)) {
+            if (game.i18n.has(`PTR2E.Skills.${skill.group ? `${skill.group}.${skill.slug}` : skill.slug}.label`)) {
                 const label = game.i18n.format(
                     `PTR2E.Skills.${
                         skill.group ? `${skill.group}.${skill.slug}` : skill.slug
