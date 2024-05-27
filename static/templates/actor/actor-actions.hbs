@@ -81,9 +81,11 @@
             <a class="item-control item-edit" data-tooltip-direction="UP" data-tooltip="Edit Action" data-action="action-edit">
                 <i class="fas fa-edit"></i>
             </a>
-            <a class="item-control item-delete" data-tooltip-direction="UP" data-tooltip="Delete Action" data-action="action-delete">
-                <i class="fas fa-trash"></i>
-            </a>
+            {{#unless (isdefined slot)}}
+                <a class="item-control item-delete" data-tooltip-direction="UP" data-tooltip="Delete Action" data-action="action-delete">
+                    <i class="fas fa-trash"></i>
+                </a>
+            {{/unless}}
         </div>
     </div>
 {{/inline}}
