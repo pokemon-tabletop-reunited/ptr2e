@@ -129,6 +129,20 @@ export class ActorSheetV2Expanded<
         this._dragDropHandlers = this._createDragDropHandlers();
     }
 
+    protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {
+        event.preventDefault();
+        const { handler, closeOnSubmit } = config;
+        const element = (event.currentTarget ?? this.element) as HTMLFormElement
+
+        $(element).find("tags ~ input").each((_i, input) => {
+            if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
+        });
+
+        const formData = new FormDataExtended(element);
+        if (handler instanceof Function) await handler.call(this, event, element, formData);
+        if (closeOnSubmit) await this.close();
+    }
+
     override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: TRenderOptions): void {
         super._onRender(context, options);
 
