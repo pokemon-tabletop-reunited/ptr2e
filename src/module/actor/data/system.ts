@@ -61,6 +61,8 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                     required: true,
                     initial: 0,
                     validate: (d) => (d as number) >= -6 && (d as number) <= 6,
+                    label: `PTR2E.Attributes.${slug}.Stage.Label`,
+                    hint: `PTR2E.Attributes.${slug}.Stage.Hint`,
                 });
             return output;
         };
@@ -111,7 +113,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
             battleStats: new fields.SchemaField({
                 evasion: new fields.SchemaField(getStatField("evasion")),
                 accuracy: new fields.SchemaField(getStatField("accuracy")),
-                critRate: new fields.SchemaField(getStatField("critRate")),
+                critRate: new fields.SchemaField(getStatField("crit-rate")),
             }),
             skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e), "slug", {
                 initial: getInitialSkillList,

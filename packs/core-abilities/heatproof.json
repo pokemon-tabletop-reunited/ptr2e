@@ -1,31 +1,55 @@
 {
-    "name": "Heatproof",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Heatproof",
-                "slug": "heatproof",
-                "type": "passive",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 0
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The user takes 50% reduced damage from Fire-Type attacks. If the user has Burn, they only take half damage from the Burn damage.",
+  "name": "Heatproof",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "defensive"
-        ]
-    },
-    "_id": "wwdqMWtnGqXSdTzN",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "defensive"
+        ],
+        "name": "Heatproof",
+        "slug": "heatproof",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Effect: The user takes 50% reduced damage from Fire-Type attacks. If the user has Burned, they only take half damage from the Burn damage."
+      }
+    ],
+    "description": "Effect: The user takes 50% reduced damage from Fire-Type attacks. If the user has Burned, they only take half damage from the Burn damage.",
+    "traits": [
+      "defensive"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "oRkwEqDiODRGWCX1",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!oRkwEqDiODRGWCX1"
 }

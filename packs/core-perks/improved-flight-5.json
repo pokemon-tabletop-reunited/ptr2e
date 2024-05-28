@@ -1,70 +1,53 @@
 {
-  "name": "Improved Flight 5",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Improved Flight 4"
-    ],
-    "cost": 5,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Mobility"
-    },
-    "description": "Improve your Flight Movement Allowance by 2.",
-    "actions": [
-      {
-        "name": "Improved Flight 5",
-        "slug": "improved-flight-5",
-        "description": "Improve your Flight Movement Allowance by 2.",
-        "cost": {
-          "activation": "free"
+    "name": "Improved Flight 5",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "A Flight Movement Allowance"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "physical",
+            "approach": "power",
+            "archetype": "Mobility"
         },
-        "type": "passive",
-        "traits": []
-      }
-    ],
-    "slug": "improved-flight-5",
-    "traits": [],
-    "node": {
-      "i": null,
-      "j": null,
-      "connected": [],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/icons/flying_icon.png",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
-  },
-  "_id": "qYYFNPIgzdYQKlJp",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.qYYFNPIgzdYQKlJp"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714911489215,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!qYYFNPIgzdYQKlJp"
+        "description": "Improve your Flight Movement Allowance by 2.",
+        "actions": [
+            {
+                "name": "Improved Flight 5",
+                "slug": "improved-flight-5",
+                "description": "Improve your Flight Movement Allowance by 2.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": [],
+                "range": {
+                    "target": "enemy",
+                    "unit": "m"
+                }
+            }
+        ],
+        "slug": "improved-flight-5",
+        "traits": [],
+        "node": {
+            "i": null,
+            "j": null,
+            "connected": [],
+            "config": {
+                "alpha": null,
+                "backgroundColor": null,
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/icons/flying_icon.png",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "qYYFNPIgzdYQKlJp",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }

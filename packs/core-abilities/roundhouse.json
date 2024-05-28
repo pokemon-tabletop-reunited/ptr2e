@@ -1,29 +1,52 @@
 {
-    "name": "Roundhouse",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Roundhouse",
-                "slug": "roundhouse",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 2
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The triggering attack's Range to changes to \"1m Burst\" until the end of the user's Activation.",
-        "traits": []
-    },
-    "_id": "Rag9fVceQb50ZLmw",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": "0nG9TRDSwrmcTFwO"
+  "name": "Roundhouse",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Roundhouse",
+        "slug": "roundhouse",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "The declares a [Kick] attack.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: The declares a [Kick] attack.\nEffect: The triggering attack's Range to changes to \"1m Burst\" until the end of the user's Activation."
+      }
+    ],
+    "description": "Trigger: The declares a [Kick] attack.\nEffect: The triggering attack's Range to changes to \"1m Burst\" until the end of the user's Activation.",
+    "traits": [],
+    "slug": null,
+    "container": null
+  },
+  "folder": "0nG9TRDSwrmcTFwO",
+  "_id": "JndiKIEhPSfS6iIX",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!JndiKIEhPSfS6iIX"
 }

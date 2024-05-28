@@ -1,32 +1,75 @@
 {
-    "name": "Wishmaker",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Wishmaker",
-                "slug": "wishmaker",
-                "type": "generic",
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 5
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "Connection - Wish. The user selections to utilize one of the following effects to utilize in place of Wish's normal Resolution effect:\n- The target is healed 12 Ticks of HP, and creatures allied to the target in a 5m Burst of the target are healed 4 Ticks of HP.\n- The target gains +3 stages to a Stat of the target's choice, and creatures allied to the target in a 2m Burst of the target gain +1 stage in that Stat, all for 7 Activations.\n- The target is cured of all its Status Conditions (except Weary), and creatures allied to the target in a 4m Burst of the target are healed of 1 random Status Condition they possess.\n- The target is loses 1 Weary and regains 20% of its max PP, minimum 20, and creatures allied to the target in a Burst 3 of the target regain 10 PP.\n- The target loses 4 Ticks of HP, and creatures not allied to the target in a 5m Burst of the target lose 10 Ticks of HP.\nPassive: The user possesses the Comatose Ability.",
+  "name": "Wishmaker",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "legendary",
-            "connection"
-        ]
-    },
-    "_id": "bWIaoFR6rwTVEvGy",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "legendary",
+          "connection"
+        ],
+        "name": "Wishmaker",
+        "slug": "wishmaker",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "trigger": "The user resolves Wish.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: The user resolves Wish.\nEffect: Connection - Wish. The user selections to utilize one of the following effects to utilize in place of Wish's normal Resolution effect:\n- The target is healed 12 Ticks of HP, and creatures allied to the target in a 5m Burst of the target are healed 4 Ticks of HP.\n- The target gains +3 stages to a Stat of the target's choice, and creatures allied to the target in a 2m Burst of the target gain +1 stage in that Stat, all for 7 Activations.\n- The target is cured of all its Status Afflictions (except Weary), and creatures allied to the target in a 4m Burst of the target are healed of 1 random Status Affliction they possess.\n- The target is loses 1 Weary and regains 20% of its max PP, minimum 20, and creatures allied to the target in a Burst 3 of the target regain 10 PP.\n- The target loses 4 Ticks of HP, and creatures not allied to the target in a 5m Burst of the target lose 10 Ticks of HP."
+      },
+      {
+        "traits": [
+          "legendary",
+          "connection"
+        ],
+        "name": "Wishmaker",
+        "slug": "wishmaker",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": null,
+        "description": "Passive: The user possesses the Comatose Ability."
+      }
+    ],
+    "description": "Trigger: The user resolves Wish.\nEffect: Connection - Wish. The user selections to utilize one of the following effects to utilize in place of Wish's normal Resolution effect:\n- The target is healed 12 Ticks of HP, and creatures allied to the target in a 5m Burst of the target are healed 4 Ticks of HP.\n- The target gains +3 stages to a Stat of the target's choice, and creatures allied to the target in a 2m Burst of the target gain +1 stage in that Stat, all for 7 Activations.\n- The target is cured of all its Status Afflictions (except Weary), and creatures allied to the target in a 4m Burst of the target are healed of 1 random Status Affliction they possess.\n- The target is loses 1 Weary and regains 20% of its max PP, minimum 20, and creatures allied to the target in a Burst 3 of the target regain 10 PP.\n- The target loses 4 Ticks of HP, and creatures not allied to the target in a 5m Burst of the target lose 10 Ticks of HP.\nPassive: The user possesses the Comatose Ability.",
+    "traits": [
+      "legendary",
+      "connection"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "UqcOktU7m7EH2znT",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!UqcOktU7m7EH2znT"
 }

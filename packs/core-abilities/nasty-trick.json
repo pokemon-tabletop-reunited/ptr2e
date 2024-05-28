@@ -1,32 +1,58 @@
 {
-    "name": "Nasty Trick",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Nasty Trick",
-                "slug": "nasty-trick",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 1
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The user gains Resolved 2.",
+  "name": "Nasty Trick",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "strategist",
-            "dark"
-        ]
-    },
-    "_id": "fkfpKhCrKwf6g0d4",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "strategist",
+          "dark"
+        ],
+        "name": "Nasty Trick",
+        "slug": "nasty-trick",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1,
+          "trigger": "The user resolves a Dark-Type attack",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: The user resolves a Dark-Type attack\nEffect: The user gains Resolved 2."
+      }
+    ],
+    "description": "Trigger: The user resolves a Dark-Type attack\nEffect: The user gains Resolved 2.",
+    "traits": [
+      "strategist",
+      "dark"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "2UtCESgmcB3T0Xxf",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!2UtCESgmcB3T0Xxf"
 }

@@ -1,29 +1,52 @@
 {
-    "name": "Receiver",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Receiver",
-                "slug": "receiver",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 3
-                },
-                "range": {
-                    "target": "creature",
-                    "distance": 20,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The user copies 1 Ability the Fainted allied creature has and replaces Receiver with it for the rest of combat. Copied abilities with a Trigger that requires the user to switch in activate with this effect. [Legendary], [Innate], and [Forme Change] abilities cannot be copied.",
-        "traits": []
-    },
-    "_id": "QHrvZPnta5pfxRM4",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+  "name": "Receiver",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Receiver",
+        "slug": "receiver",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "An allied creature Faints or the user is switched in to replace a Fainted ally.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        },
+        "description": "Trigger: An allied creature Faints or the user is switched in to replace a Fainted ally.\nEffect: The user copies 1 Ability the Fainted allied creature has and replaces Receiver with it for the rest of combat. Copied abilities with a Trigger that requires the user to switch in activate with this effect. [Legendary], [Innate], and [Forme chance] abilities cannot be copied."
+      }
+    ],
+    "description": "Trigger: An allied creature Faints or the user is switched in to replace a Fainted ally.\nEffect: The user copies 1 Ability the Fainted allied creature has and replaces Receiver with it for the rest of combat. Copied abilities with a Trigger that requires the user to switch in activate with this effect. [Legendary], [Innate], and [Forme chance] abilities cannot be copied.",
+    "traits": [],
+    "slug": null,
+    "container": null
+  },
+  "_id": "aw3pyLLOxFkHKbr6",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!aw3pyLLOxFkHKbr6"
 }

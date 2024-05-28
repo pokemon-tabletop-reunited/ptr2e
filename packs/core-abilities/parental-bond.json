@@ -1,31 +1,56 @@
 {
-    "name": "Parental Bond",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Parental Bond",
-                "slug": "parental-bond",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 2
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The user may use the triggering attack freely, with its Power reduced by 66%. This ability does not apply to [X-Strike] or [Execute] attacks.",
+  "name": "Parental Bond",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "innate"
-        ]
-    },
-    "_id": "JNBmeIvsJeoNDRy4",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "innate"
+        ],
+        "name": "Parental Bond",
+        "slug": "parental-bond",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "The user resolves a Physical or Special-Category attack.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: The user resolves a Physical or Special-Category attack.\nEffect: The user may use the triggering attack freely, with its Power reduced by 66%. This ability does not apply to [X-Strike] or [Execute] attacks."
+      }
+    ],
+    "description": "Trigger: The user resolves a Physical or Special-Category attack.\nEffect: The user may use the triggering attack freely, with its Power reduced by 66%. This ability does not apply to [X-Strike] or [Execute] attacks.",
+    "traits": [
+      "innate"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "ox2ZzOsq4bmezkns",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!ox2ZzOsq4bmezkns"
 }

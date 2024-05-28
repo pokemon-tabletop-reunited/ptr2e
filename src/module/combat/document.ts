@@ -15,7 +15,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
             this.combatants.reduce((acc, combatant) => {
                 if (!combatant.actor) return acc;
                 return acc + combatant.actor.level;
-            }, 0) / (this.combatants.size || 1));
+            }, 0) / ((this.combatants.size - 1) || 1));
     }
 
     get roundCombatant(): CombatantPTR2e<this, null, RoundCombatantSystem> {
@@ -285,7 +285,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
             img: "icons/svg/clockwork.svg",
             type: "round",
             initiative: 100,
-        });
+        }, { parent: this});
         const combatants = this.combatants.map((c) => c.toObject());
         combatants.push(round.toObject());
         this.updateSource({ combatants });

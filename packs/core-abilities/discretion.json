@@ -1,29 +1,52 @@
 {
-    "name": "Discretion",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Discretion",
-                "slug": "discretion",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 4
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The user does not spend PP on the missed attack, and gains +2 ACC stages for 5 activations.",
-        "traits": []
-    },
-    "_id": "eKuTsWFJ9R5QLkCO",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": "0nG9TRDSwrmcTFwO"
+  "name": "Discretion",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Discretion",
+        "slug": "discretion",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "The user misses with an attack.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: The user misses with an attack.\nEffect: The user does not spend PP on the missed attack, and gains +2 ACC stages for 5 activations."
+      }
+    ],
+    "description": "Trigger: The user misses with an attack.\nEffect: The user does not spend PP on the missed attack, and gains +2 ACC stages for 5 activations.",
+    "traits": [],
+    "slug": null,
+    "container": null
+  },
+  "folder": "0nG9TRDSwrmcTFwO",
+  "_id": "VM76lMqpqLmOyVpu",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!VM76lMqpqLmOyVpu"
 }

@@ -1,31 +1,56 @@
 {
-    "name": "Curious Medicine",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Curious Medicine",
-                "slug": "curious-medicine",
-                "type": "passive",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 0
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "Connection - Haze. The user freely uses Haze. Whenever user uses Haze, they can 2 PP to have either 1) the user and its allies or 2) foes be excluded from Haze's effect.",
+  "name": "Curious Medicine",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "connection"
-        ]
-    },
-    "_id": "mVZlsG4DNCl0HbTZ",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "connection"
+        ],
+        "name": "Curious Medicine",
+        "slug": "curious-medicine",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "trigger": "The user is switched into combat.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: The user is switched into combat.\nEffect: Connection - Haze. The user freely uses Haze. Whenever user uses Haze, they can 2 PP to have either 1) the user and its allies or 2) foes be excluded from Haze's effect."
+      }
+    ],
+    "description": "Trigger: The user is switched into combat.\nEffect: Connection - Haze. The user freely uses Haze. Whenever user uses Haze, they can 2 PP to have either 1) the user and its allies or 2) foes be excluded from Haze's effect.",
+    "traits": [
+      "connection"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "AEKdQTZi4O8tBpm5",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!AEKdQTZi4O8tBpm5"
 }
