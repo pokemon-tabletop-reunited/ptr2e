@@ -1,31 +1,56 @@
 {
-    "name": "Innards Out",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Innards Out",
-                "slug": "innards-out",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 0
-                },
-                "range": {
-                    "target": "enemy",
-                    "distance": 5,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The user retaliates against the triggering creature in range, dealing the damage they took before fainitng to the triggering creature's HP.",
+  "name": "Innards Out",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "defensive"
-        ]
-    },
-    "_id": "IHF5myINMFFezKdm",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "defensive"
+        ],
+        "name": "Innards Out",
+        "slug": "innards-out",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "trigger": "The user is Fainted by an attack.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "enemy",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "Trigger: The user is Fainted by an attack.\nEffect: The user retaliates against the triggering creature in range, dealing the damage they took before fainitng to the triggering creature's HP."
+      }
+    ],
+    "description": "Trigger: The user is Fainted by an attack.\nEffect: The user retaliates against the triggering creature in range, dealing the damage they took before fainitng to the triggering creature's HP.",
+    "traits": [
+      "defensive"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "slX9donFBumFr05N",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!slX9donFBumFr05N"
 }

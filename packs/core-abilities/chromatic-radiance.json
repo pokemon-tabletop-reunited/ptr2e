@@ -1,32 +1,58 @@
 {
-    "name": "Chromatic Radiance",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Chromatic Radiance",
-                "slug": "chromatic-radiance",
-                "type": "passive",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 0
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "Connection: Sacred Fire. When using a Fire-Type attack, the user recovers 3 ticks of HP. Whenever the user recovers HP, allies within 10m recover a tick of HP.",
+  "name": "Chromatic Radiance",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "legendary",
-            "connection"
-        ]
-    },
-    "_id": "v6Vwd13nUq2N5g2X",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "legendary",
+          "connection"
+        ],
+        "name": "Chromatic Radiance",
+        "slug": "chromatic-radiance",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "trigger": "Sunny Weather is present.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: Sunny Weather is present.\nEffect: Connection: Sacred Fire. When using a Fire-Type attack, the user recovers 3 ticks of HP. Whenever the user recovers HP, allies within 10m recover a tick of HP."
+      }
+    ],
+    "description": "Trigger: Sunny Weather is present.\nEffect: Connection: Sacred Fire. When using a Fire-Type attack, the user recovers 3 ticks of HP. Whenever the user recovers HP, allies within 10m recover a tick of HP.",
+    "traits": [
+      "legendary",
+      "connection"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "Z2D1B8HhNUAKWaKa",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!Z2D1B8HhNUAKWaKa"
 }

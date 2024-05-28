@@ -1,32 +1,58 @@
 {
-    "name": "Electric Surge",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Electric Surge",
-                "slug": "electric-surge",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 2
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "Connection - Electric Terrain. Increase the number of rounds Electric Terrain persists by 2.",
+  "name": "Electric Surge",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "terrain",
-            "connection"
-        ]
-    },
-    "_id": "jmZNl73jBRxs0Wff",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "terrain",
+          "connection"
+        ],
+        "name": "Electric Surge",
+        "slug": "electric-surge",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "The user uses Electric Terrain.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: The user uses Electric Terrain.\nEffect: Connection - Electric Terrain. Increase the number of rounds Electric Terrain persists by 2."
+      }
+    ],
+    "description": "Trigger: The user uses Electric Terrain.\nEffect: Connection - Electric Terrain. Increase the number of rounds Electric Terrain persists by 2.",
+    "traits": [
+      "terrain",
+      "connection"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "dfgFR3b6OQ51IFij",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!dfgFR3b6OQ51IFij"
 }

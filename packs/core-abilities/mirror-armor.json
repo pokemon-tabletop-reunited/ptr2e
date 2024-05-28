@@ -1,31 +1,56 @@
 {
-    "name": "Mirror Armor",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Mirror Armor",
-                "slug": "mirror-armor",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 3
-                },
-                "range": {
-                    "target": "creature",
-                    "distance": 10,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The user does not gain the triggering effect and the triggering creature gains it instead with double the duration.",
+  "name": "Mirror Armor",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "defensive"
-        ]
-    },
-    "_id": "K6glMoe8IGiv4QsE",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "defensive"
+        ],
+        "name": "Mirror Armor",
+        "slug": "mirror-armor",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "Another creature applies a negative stage effect to the user.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "Trigger: Another creature applies a negative stage effect to the user.\nEffect: The user does not gain the triggering effect and the triggering creature gains it instead with double the duration."
+      }
+    ],
+    "description": "Trigger: Another creature applies a negative stage effect to the user.\nEffect: The user does not gain the triggering effect and the triggering creature gains it instead with double the duration.",
+    "traits": [
+      "defensive"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "BYkkkJPO5INaDcdz",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!BYkkkJPO5INaDcdz"
 }

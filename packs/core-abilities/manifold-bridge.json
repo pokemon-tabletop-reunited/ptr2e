@@ -1,33 +1,60 @@
 {
-    "name": "Manifold Bridge",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Manifold Bridge",
-                "slug": "manifold-bridge",
-                "type": "generic",
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 7
-                },
-                "range": {
-                    "target": "creature",
-                    "distance": 20,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "Connection - Spacial Rend. The triggering effect does not affect the user, and the target is relocated 30-WC metres in the direction of the user's choice. When the user declares the use of an Action or Ability with a target other then Self, the user may spend 6 PP, the user freely Teleports to a spot within 8m of a target.",
+  "name": "Manifold Bridge",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "legendary",
-            "connection",
-            "defensive"
-        ]
-    },
-    "_id": "DOqrE6VyTqPUCfHR",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "legendary",
+          "connection",
+          "defensive"
+        ],
+        "name": "Manifold Bridge",
+        "slug": "manifold-bridge",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 7,
+          "trigger": "The user would be affected by a declared Action, Attack, or Ability.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        },
+        "description": "Trigger: The user would be affected by a declared Action, Attack, or Ability.\nEffect: Connection - Spacial Rend. The triggering effect does not affect the user, and the target is relocated 30-WC metres in the direction of the user's choice. When the user declares the use of an Action or Ability with a target other then Self, the user may spend 6 PP, the user freely Teleports to a spot within 8m of a target."
+      }
+    ],
+    "description": "Trigger: The user would be affected by a declared Action, Attack, or Ability.\nEffect: Connection - Spacial Rend. The triggering effect does not affect the user, and the target is relocated 30-WC metres in the direction of the user's choice. When the user declares the use of an Action or Ability with a target other then Self, the user may spend 6 PP, the user freely Teleports to a spot within 8m of a target.",
+    "traits": [
+      "legendary",
+      "connection",
+      "defensive"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "34jYiNQbDjMFeRrJ",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!34jYiNQbDjMFeRrJ"
 }

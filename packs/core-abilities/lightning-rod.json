@@ -1,32 +1,58 @@
 {
-    "name": "Lightning Rod",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Lightning Rod",
-                "slug": "lightning-rod",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 3
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 10,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The triggering attack hits the user instead, dealing no damage and applying no effects. Additionally, the user raises their SPATK stage by +1 for 5 activations.",
+  "name": "Lightning Rod",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "defensive",
-            "draw-in"
-        ]
-    },
-    "_id": "hx3pHGtq1b18XIKH",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "defensive",
+          "draw-in"
+        ],
+        "name": "Lightning Rod",
+        "slug": "lightning-rod",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "A creature in range uses an Electric-Type attack.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "Trigger: A creature in range uses an Electric-Type attack.\nEffect: The triggering attack hits the user instead, dealing no damage and applying no effects. Additionally, the user raises their SPATK stage by +1 for 5 activations."
+      }
+    ],
+    "description": "Trigger: A creature in range uses an Electric-Type attack.\nEffect: The triggering attack hits the user instead, dealing no damage and applying no effects. Additionally, the user raises their SPATK stage by +1 for 5 activations.",
+    "traits": [
+      "defensive",
+      "draw-in"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "zGgfm8CE0qrdcmdf",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!zGgfm8CE0qrdcmdf"
 }

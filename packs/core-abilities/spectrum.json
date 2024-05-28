@@ -1,31 +1,56 @@
 {
-    "name": "Spectrum",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Spectrum",
-                "slug": "spectrum",
-                "type": "passive",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 0
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 10,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The user's non-Dragon Type changes to one of the Types of the nearest creature within Range. If no creatures are within Range, or the creature lacks a Type, the user's non-Dragon Type changes to Normal.",
+  "name": "Spectrum",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "innate"
-        ]
-    },
-    "_id": "BRfoOaRH6zyyJVrL",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": "0nG9TRDSwrmcTFwO"
+          "innate"
+        ],
+        "name": "Spectrum",
+        "slug": "spectrum",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "trigger": "The start of the user's Activation.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "Trigger: The start of the user's Activation.\nEffect: The user's non-Dragon Type changes to one of the Types of the nearest creature within Range. If no creatures are within Range, or the creature lacks a Type, the user's non-Dragon Type changes to Normal."
+      }
+    ],
+    "description": "Trigger: The start of the user's Activation.\nEffect: The user's non-Dragon Type changes to one of the Types of the nearest creature within Range. If no creatures are within Range, or the creature lacks a Type, the user's non-Dragon Type changes to Normal.",
+    "traits": [
+      "innate"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "folder": "0nG9TRDSwrmcTFwO",
+  "_id": "0F015y584oxn7wWl",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!0F015y584oxn7wWl"
 }

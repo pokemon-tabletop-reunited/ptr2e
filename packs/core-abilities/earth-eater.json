@@ -1,32 +1,58 @@
 {
-    "name": "Earth Eater",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Earth Eater",
-                "slug": "earth-eater",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 4
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The user ignores the damage and effects of the triggering attack and recovers 4 Ticks of HP.",
+  "name": "Earth Eater",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "healing",
-            "defensive"
-        ]
-    },
-    "_id": "i0rVcg0zi4vZEYCq",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "healing",
+          "defensive"
+        ],
+        "name": "Earth Eater",
+        "slug": "earth-eater",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "The user is hit by a Ground-Type attack.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: The user is hit by a Ground-Type attack.\nEffect: The user ignores the damage and effects of the triggering attack and recovers 4 Ticks of HP."
+      }
+    ],
+    "description": "Trigger: The user is hit by a Ground-Type attack.\nEffect: The user ignores the damage and effects of the triggering attack and recovers 4 Ticks of HP.",
+    "traits": [
+      "healing",
+      "defensive"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "CwD0qR63pFkatLwC",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!CwD0qR63pFkatLwC"
 }
