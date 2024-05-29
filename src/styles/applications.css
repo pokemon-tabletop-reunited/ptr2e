@@ -61,6 +61,7 @@ body.theme-light .application textarea:read-only {
 }
 .application.sheet.actor.v2 {
   min-width: 700px;
+  min-height: 660px;
   background: var(--appv2-background);
 }
 .application.sheet.actor.v2.minimized {
@@ -615,9 +616,11 @@ body.theme-light .application textarea:read-only {
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .perks-display {
   grid-area: perks;
+  overflow: hidden;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display {
   grid-area: abilities;
+  overflow: hidden;
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display,
