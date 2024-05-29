@@ -23,6 +23,14 @@ body.theme-light .application textarea:read-only {
 .application .window-header .window-title {
   height: 100%;
 }
+.ptr2e.application .controls-dropdown.expanded {
+  background: var(--appv2-background);
+  box-shadow: unset;
+  border: 1px solid var(--border-theme-color);
+}
+.ptr2e.application .controls-dropdown.expanded button {
+  background: none;
+}
 .application.sheet multi-select .tags,
 .application.sheet string-tags .tags,
 .application.sheet string-tags-ptr2e .tags {
@@ -168,13 +176,14 @@ body.theme-light .application textarea:read-only {
   grid-area: level;
 }
 .application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button {
-  margin-top: auto;
   display: flex;
   justify-content: center;
-  margin-bottom: 0.5rem;
+  flex: 1;
+  align-items: center;
 }
 .application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button {
   flex: 0 0 70%;
+  height: 30px;
 }
 .application.sheet.actor.v2 .window-content .tab.active {
   grid-area: main;

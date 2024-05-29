@@ -43,6 +43,15 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             },
             window: {
                 resizable: true,
+                controls: [
+                    ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
+                    {
+                        icon: "fas fa-paw",
+                        label: "PTR2E.ActorSheet.Species",
+                        action: "species-header",
+                        visible: true
+                    }
+                ]
             },
             form: {
                 submitOnChange: true,
@@ -72,14 +81,15 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                         }
                     });
                     sheet.species = new CONFIG.Item.documentClass({
+                        _id: "actorSpeciesItem",
                         name: this.document.hasEmbeddedSpecies()
                             ? Handlebars.helpers.formatSlug(species.slug)
                             : this.actor.name,
                         type: "species",
                         img: this.actor.img,
-                        flags: { ptr2e: { disabled: !this.actor.system._source.species } },
+                        flags: { ptr2e: { disabled: !this.actor.system._source.species, virtual: true } },
                         system: species.toObject(),
-                    }) as SpeciesPTR2e;
+                    }, {parent: this.document}) as SpeciesPTR2e;
                     sheet.render(true);
                 },
                 "open-perk-web": function (this: ActorSheetPTRV2) {
@@ -507,20 +517,6 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             return this;
         }
         return super.close(options) as Promise<this>;
-    }
-
-    override async _renderFrame(
-        options: foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>
-    ): Promise<HTMLElement> {
-        const frame = await super._renderFrame(options);
-
-        // Add Species button to the header
-        const speciesLabel = game.i18n.localize("PTR2E.ActorSheet.Species");
-        const speciesButton = `<button type="button" class="header-control fa-solid fa-paw" data-action="species-header"
-                                    data-tooltip="${speciesLabel}" aria-label="${speciesLabel}"></button>`;
-        this.window.close.insertAdjacentHTML("beforebegin", speciesButton);
-
-        return frame;
     }
 
     override _onDrop(event: DragEvent) {

@@ -117,7 +117,7 @@ export class ActorSheetV2Expanded<
     DocumentSheetConfigurationExpanded
 > {
     static override DEFAULT_OPTIONS: Omit<DocumentSheetConfigurationExpanded, "uniqueId"> =
-        foundry.utils.mergeObject(foundry.applications.api.DocumentSheetV2.DEFAULT_OPTIONS, {
+        foundry.utils.mergeObject(foundry.applications.sheets.ActorSheetV2.DEFAULT_OPTIONS, {
             dragDrop: [],
         });
 

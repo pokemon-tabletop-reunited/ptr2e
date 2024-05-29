@@ -27,6 +27,15 @@ body {
     height: 100%;
 }
 
+.ptr2e.application .controls-dropdown.expanded {
+    background: var(--appv2-background);
+    box-shadow: unset;
+    border: 1px solid var(--border-theme-color);
+    button {
+        background: none;
+    }
+}
+
 .application.sheet {
     multi-select, string-tags, string-tags-ptr2e {
         .tags {
@@ -206,13 +215,14 @@ body {
                 }
 
                 .perk-web-button {
-                    margin-top: auto;
                     display: flex;
                     justify-content: center;
-                    margin-bottom: 0.5rem;
+                    flex: 1;
+                    align-items: center;;
                     
                     button {
                         flex: 0 0 70%;
+                        height: 30px;
                     }
                 }
             }

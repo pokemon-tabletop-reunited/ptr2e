@@ -274,7 +274,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 return;
             }
         } else {
-            this.species = new SpeciesSystemModel(this._source.species, { parent: this.parent });
+            this.species = new SpeciesSystemModel(this._source.species, { parent: this.parent, virtual: true });
         }
         this.species.prepareBaseData();
 
