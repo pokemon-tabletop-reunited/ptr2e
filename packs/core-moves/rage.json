@@ -1,48 +1,41 @@
 {
-  "name": "Rage",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/normal_icon.png",
-  "system": {
-    "slug": "rage",
-    "description": "Effect: The user becomes Enraged until the end of the round, is switched out, or is Fainted. While Enraged, if the user is hit by a damaging attack, they gain +1 ATK stage for 5 activations.",
-    "traits": [
-      "contact"
-    ],
-    "actions": [
-      {
+    "name": "Rage",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/normal_icon.png",
+    "system": {
         "slug": "rage",
-        "name": "Rage",
-        "type": "attack",
+        "description": "Effect: The user gains Enraged 2. While Enraged, if the user is hit by a damaging attack, they gain +1 ATK stage for 5 activations.",
         "traits": [
-          "contact"
+            "contact"
         ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "physical",
-        "power": 20,
-        "accuracy": 100,
-        "types": [
-          "normal"
+        "actions": [
+            {
+                "slug": "rage",
+                "name": "Rage",
+                "type": "attack",
+                "traits": [
+                    "contact"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 5
+                },
+                "category": "physical",
+                "power": 20,
+                "accuracy": 100,
+                "types": [
+                    "normal"
+                ],
+                "description": "Effect: The user gains Enraged 2. While Enraged, if the user is hit by a damaging attack, they gain +1 ATK stage for 5 activations."
+            }
         ],
-        "description": "Effect: The user becomes Enraged until the end of the round, is switched out, or is Fainted. While Enraged, if the user is hit by a damaging attack, they gain +1 ATK stage for 5 activations.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null
-  },
-  "_id": "6OK8vhZYljL4X7cd",
-  "effects": []
+        "grade": "E"
+    },
+    "_id": "6OK8vhZYljL4X7cd",
+    "effects": []
 }
