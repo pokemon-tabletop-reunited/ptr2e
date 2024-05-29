@@ -46,7 +46,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 }),
                 base: new fields.NumberField({
                     required: true,
-                    initial: 50,
+                    initial: 40,
                     validate: (d) => (d as number) >= 1,
                 }),
             };

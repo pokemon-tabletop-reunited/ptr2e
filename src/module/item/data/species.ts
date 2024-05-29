@@ -35,6 +35,7 @@ class SpeciesSystem extends SpeciesExtension {
             spe: number;
         };
         types: PokemonType[];
+        traits: string[];
     };
 
     constructor(data?: object, options?: DataModelConstructionOptions<foundry.abstract.Document | null> & { virtual?: boolean}) {
