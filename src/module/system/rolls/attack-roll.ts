@@ -183,7 +183,7 @@ class AttackRoll extends CheckRoll {
 
         return {
             roll,
-            value: Math.max(otherModifier >= 1 ? 1 : 0, roundToNearestDownOnPoint5(roll.total)),
+            value: Math.max(typeEffectiveness === 0 ? 0 : otherModifier >= 1 ? 1 : 0, roundToNearestDownOnPoint5(roll.total)),
             context
         };
     }

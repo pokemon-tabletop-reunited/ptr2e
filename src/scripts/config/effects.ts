@@ -14,6 +14,8 @@ export const StatusEffects: StatusEffect[] = [
                     domain: "effect",
                 },
             ],
+            removeOnRecall: false,
+            removeAfterCombat: false
         },
     },
     {

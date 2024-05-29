@@ -58,10 +58,11 @@ function sluggify(text: string, { camel }: { camel: string | null } = { camel: n
 type SlugCamel = "dromedary" | "bactrian" | null;
 
 function formatSlug(slug: string) {
-    return capitalize(slug).replaceAll('-', ' ');
+    return capitalize(slug)?.replaceAll('-', ' ');
 }
 
-function capitalize(input: string) {
+function capitalize(input: Maybe<string>) {
+    if(!input) return input;
     var i, j, str, lowers, uppers;
     str = input.replace(/([^\W_]+[^\s-]*) */g, function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
@@ -253,7 +254,7 @@ const SORTABLE_BASE_OPTIONS: Sortable.Options = {
  * Converts a possible UUID string to an embedded UUID string if it is a valid UUID
  */
 function maybeUuidStringToUuidEmbed(uuid: string) {
-    const result = fu.parseUuid(uuid);
+    const result = uuid ? fu.parseUuid(uuid) : null;
     if(result?.id) {
         return `@UUID[${uuid}]`;
     }

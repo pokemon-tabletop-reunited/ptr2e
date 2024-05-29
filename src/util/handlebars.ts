@@ -85,8 +85,8 @@ function _registerPTRHelpers() {
     });
 
     Handlebars.registerHelper("asContentLink", function (content: string) {
-        const uuid = fu.parseUuid(content);
-        if (!uuid.id) {
+        const uuid = content ? fu.parseUuid(content) : null;
+        if (!uuid?.id) {
             // Return as raw string
             // But escape the content in case of Keyword strings
             const ele = document.createElement("div");
