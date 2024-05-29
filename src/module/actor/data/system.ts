@@ -7,7 +7,6 @@ import {
     Attribute,
     Attributes,
     Biology,
-    Capabilities,
     HealthData,
     HumanoidActorSystem,
     Stat,
@@ -124,7 +123,10 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 types: new fields.SetField(
                     new fields.StringField({
                         required: true,
-                        choices: getTypes().reduce<Record<string,string>>((acc, type) => ({...acc, [type]: type}), {}),
+                        choices: getTypes().reduce<Record<string, string>>(
+                            (acc, type) => ({ ...acc, [type]: type }),
+                            {}
+                        ),
                         initial: "untyped",
                         label: "PTR2E.FIELDS.PokemonType.Label",
                         hint: "PTR2E.FIELDS.PokemonType.Hint",
@@ -254,7 +256,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         this.modifiers = {
             slots: 0,
             accuracy: 0,
-            evasion: 0
+            evasion: 0,
         };
     }
 
@@ -263,17 +265,17 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         if (!this._source.species) {
             if (this.parent.isHumanoid()) {
                 this.species = HumanoidActorSystem.constructSpecies(this);
+            } else {
+                let e = new Error("Species not set for non-humanoid actor");
+                (this.parent as ActorPTR2e).synthetics.preparationWarnings.add(e.message);
+                Hooks.onError("ActorSystemPTR2e#_prepareSpeciesData", e, {
+                    data: this._source.species,
+                });
                 return;
             }
-            let e = new Error("Species not set for non-humanoid actor");
-            (this.parent as ActorPTR2e).synthetics.preparationWarnings.add(e.message);
-            Hooks.onError("ActorSystemPTR2e#_prepareSpeciesData", e, {
-                data: this._source.species,
-            });
-            return;
+        } else {
+            this.species = new SpeciesSystemModel(this._source.species, { parent: this.parent });
         }
-
-        this.species = new SpeciesSystemModel(this._source.species, { parent: this.parent });
         this.species.prepareBaseData();
 
         // Add species traits to actor traits
@@ -285,6 +287,18 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
             this.type.types.add(type);
             if (this.type.types.size > 1 && this.type.types.has("untyped"))
                 this.type.types.delete("untyped");
+        }
+
+        this.movement = new Collection(
+            [
+                this.species.movement.primary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "primary" }]),
+                this.species.movement.secondary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "secondary" }])
+            ].flat()
+        );
+
+        // Every creature has a base overland of 3 at least.
+        if((Number(this.movement.get("overland")?.value) || 0) <= 3) {
+            this.movement.set("overland", { method: "overland", value: 3, type: "secondary" });
         }
     }
 
@@ -319,32 +333,42 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         );
     }
 
-    override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean }, user: User): Promise<boolean | void> {
+    override async _preCreate(
+        data: this["parent"]["_source"],
+        options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean },
+        user: User
+    ): Promise<boolean | void> {
         //@ts-expect-error
-        if(this._source.traits.includes("humanoid") && this.parent.type === "pokemon") {
-            this.parent.updateSource({ "type": "humanoid" })
+        if (this._source.traits.includes("humanoid") && this.parent.type === "pokemon") {
+            this.parent.updateSource({ type: "humanoid" });
         }
         //@ts-expect-error
-        if(this._source.traits.includes("pokemon") && this.parent.type === "humanoid") {
-            this.parent.updateSource({ "type": "pokemon" })
+        if (this._source.traits.includes("pokemon") && this.parent.type === "humanoid") {
+            this.parent.updateSource({ type: "pokemon" });
         }
         await super._preCreate(data, options, user);
     }
 
-    override _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
-        if(changed.system?.traits) {
+    override _preUpdate(
+        changed: DeepPartial<this["parent"]["_source"]>,
+        options: DocumentUpdateContext<this["parent"]["parent"]>,
+        user: User
+    ): Promise<boolean | void> {
+        if (changed.system?.traits) {
             const hasTrait = (trait: string) => {
-                if(changed.system!.traits instanceof Collection) return changed.system!.traits.has(trait);
-                if(Array.isArray(changed.system!.traits)) return changed.system!.traits.includes(trait);
+                if (changed.system!.traits instanceof Collection)
+                    return changed.system!.traits.has(trait);
+                if (Array.isArray(changed.system!.traits))
+                    return changed.system!.traits.includes(trait);
                 return false;
-            }
-            if(hasTrait("humanoid") && hasTrait("pokemon")) {
+            };
+            if (hasTrait("humanoid") && hasTrait("pokemon")) {
                 throw new Error("Cannot have both humanoid and pokemon traits");
             }
-            if(hasTrait("humanoid") && this.parent.type === "pokemon") {
+            if (hasTrait("humanoid") && this.parent.type === "pokemon") {
                 changed.type = "humanoid";
             }
-            if(hasTrait("pokemon") && this.parent.type === "humanoid") {
+            if (hasTrait("pokemon") && this.parent.type === "humanoid") {
                 changed.type = "pokemon";
             }
         }
@@ -364,7 +388,6 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
     /** Biological data */
     biology: Biology;
     /** Movement Capabilities */
-    capabilities: Capabilities;
     type: {
         effectiveness: Record<PokemonType, number>;
         types: Set<PokemonType>;
@@ -379,10 +402,14 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
     money: number;
     slots: number;
 
+    movement: Collection<Movement>;
+
     modifiers: Record<string, number | undefined>;
 
     _source: SourceFromSchema<ActorSystemSchema>;
 }
+
+type Movement = { method: string; value: number; type: "primary" | "secondary" };
 
 type ActorSystemSchema = Record<string, DataField<JSONValue, unknown, boolean>> & {
     species: SpeciesSystemModel["_source"];

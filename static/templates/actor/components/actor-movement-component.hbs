@@ -1,0 +1,11 @@
+<div class="movement-component">
+    <fieldset class="can-popout" data-component="movement">
+        <legend>Movement Totals</legend>
+        {{#each movement}}
+            <div class="movement">
+                <label>{{formatSlug method}}</label>
+                <input type="number" value="{{value}}" readonly>
+            </div>
+        {{/each}}
+    </fieldset>
+</div>

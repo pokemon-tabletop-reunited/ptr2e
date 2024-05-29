@@ -304,6 +304,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     }
 
     override async _preparePartContext(partId: string, context: foundry.applications.api.ApplicationRenderContext) {
+        if(partId === "overview") {
+            context.movement = this.actor.system.movement.contents;
+        }
+
         if(partId === "inventory") {
             const inventory = (() => {
                 const inventory: Record<string, ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]> = {};
