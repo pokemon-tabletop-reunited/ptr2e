@@ -903,6 +903,16 @@ class ActorPTR2e<
             if(changed.system.health.value as number <= 0 && !fainted) {
                 changed.effects ??= [];
                 (changed.effects as ActiveEffectPTR2e['_source'][]).push((await ActiveEffectPTR2e.fromStatusEffect('dead')).toObject() as ActiveEffectPTR2e['_source']);
+
+                const weary = this.effects.get("wearycondition00");
+                if(!weary) {
+                    (changed.effects as ActiveEffectPTR2e['_source'][]).push((await ActiveEffectPTR2e.fromStatusEffect('weary')).toObject() as ActiveEffectPTR2e['_source']);
+                }
+                else {
+                    const wearyData = weary.toObject() as ActiveEffectPTR2e['_source'];
+                    wearyData.system.stacks = wearyData.system.stacks + 1;
+                    (changed.effects as ActiveEffectPTR2e['_source'][]).push(wearyData);
+                }
             }
             else if(changed.system.health.value as number > 0 && fainted) {
                 await this.deleteEmbeddedDocuments("ActiveEffect", ["faintedcondition"]);

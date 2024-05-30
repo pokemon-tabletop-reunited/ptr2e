@@ -492,6 +492,7 @@ export const StatusEffects: StatusEffect[] = [
     },
     {
         id: "weary",
+        _id: "wearycondition00",
         name: "PTR2E.Effect.Statuses.Labels.weary",
         img: "icons/svg/stoned.svg",
         type: "passive",
