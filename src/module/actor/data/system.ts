@@ -309,6 +309,12 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         if (this.modifiers["slots"]) {
             this.slots = (this._source.slots as number) + this.modifiers["slots"];
         }
+
+        for (const k in this.attributes) {
+            const key = k as keyof Attributes;
+            if (this.species?.stats[key]) this.attributes[key].base = this.species.stats[key];
+            this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
+        }
     }
 
     _calculateStatTotal(stat: Attribute | Omit<Attribute, "stage">): number {
