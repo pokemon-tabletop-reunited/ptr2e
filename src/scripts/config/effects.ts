@@ -1,7 +1,7 @@
 export const StatusEffects: StatusEffect[] = [
     {
         id: "dead",
-        _id: "dead000000000000",
+        _id: "faintedcondition",
         name: "PTR2E.Effect.Statuses.Labels.fainted",
         img: "/systems/ptr2e/img/conditions/fainted.svg",
         type: "passive",

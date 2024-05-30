@@ -163,12 +163,7 @@ class ActorPTR2e<
 
         this.rollOptions.addOption("self", `type:${this.type}`);
 
-        this.health = {
-            percent: Math.floor(Math.random() * 100),
-        };
-
         this.system.type.effectiveness = this._calculateEffectiveness();
-        this.flags;
 
         super.prepareData();
     }
@@ -900,6 +895,21 @@ class ActorPTR2e<
         if (result === false) return false;
 
         if (options.fail === true) return false;
+    }
+
+    protected override async _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: User): Promise<boolean | void> {
+        if(changed.system?.health?.value !== undefined) {
+            const fainted = this.effects.get("faintedcondition") !== undefined
+            if(changed.system.health.value as number <= 0 && !fainted) {
+                changed.effects ??= [];
+                (changed.effects as ActiveEffectPTR2e['_source'][]).push((await ActiveEffectPTR2e.fromStatusEffect('dead')).toObject() as ActiveEffectPTR2e['_source']);
+            }
+            else if(changed.system.health.value as number > 0 && fainted) {
+                await this.deleteEmbeddedDocuments("ActiveEffect", ["faintedcondition"]);
+            }
+        }
+
+        return super._preUpdate(changed, options, user);
     }
 
     override async toggleStatusEffect(
