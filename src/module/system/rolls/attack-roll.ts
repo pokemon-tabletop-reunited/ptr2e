@@ -149,7 +149,7 @@ class AttackRoll extends CheckRoll {
         const damageRoll = Number(this.result);
 
         // Attack & Defense stats of the origin and target
-        const attackStat = origin.getAttackStat(attack, isCritHit);
+        const attackStat = origin.getAttackStat(attack);
         const defenseStat = target.getDefenseStat(attack, isCritHit);
 
         // Type effectiveness
