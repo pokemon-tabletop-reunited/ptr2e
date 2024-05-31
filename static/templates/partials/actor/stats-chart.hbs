@@ -1,5 +1,14 @@
 <aside class="stats-chart-aside">
-    <canvas class="stats-chart" {{#if id}}id="{{id}}"{{/if}}>
+    {{#if fieldset}}
+        <fieldset>
+            <legend>Stats Chart</legend>
+            <canvas class="stats-chart" {{#if id}}id="{{id}}" {{/if}}>
 
-    </canvas>
+            </canvas>
+        </fieldset>
+    {{else}}
+        <canvas class="stats-chart" {{#if id}}id="{{id}}" {{/if}}>
+
+        </canvas>
+    {{/if}}
 </aside>

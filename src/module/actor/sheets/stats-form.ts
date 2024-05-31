@@ -1,5 +1,6 @@
 import { StatsChart } from "./stats-chart.ts";
 import { Attributes, ActorPTR2e } from "@actor";
+import { SpeciesSystemModel } from "@item/data/index.ts";
 import { DocumentSheetConfiguration } from "@item/sheets/document.ts";
 
 export default class StatsForm extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2<ActorPTR2e, foundry.applications.api.HandlebarsDocumentSheetConfiguration>) {
@@ -49,7 +50,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
 
     override _configureRenderOptions(options: DocumentSheetConfiguration<ActorPTR2e>): void {
         super._configureRenderOptions(options);
-        if (!!this.document.system._source.species) {
+        if ((this.document.system._source.species as Maybe<SpeciesSystemModel['_source']>)?.traits?.includes("pokemon")) {
             options.parts = options.parts?.filter(part => part !== "baseStats");
         }
     }
@@ -128,8 +129,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
 
     static async #onSubmitBaseStatsForm(this: StatsForm, event: SubmitEvent | Event, form: HTMLFormElement, formData: FormDataExtended) {
         event.preventDefault();
-        const result = await this.#updateDocument(event as SubmitEvent, form, formData);
-        console.debug(result, this.document.system.attributes);
+        await this.#updateDocument(event as SubmitEvent, form, formData);
         this.render({parts: ["statsChart"]});
     }
 
@@ -138,13 +138,34 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
      */
     static async #onSubmitEvStatsForm(this: StatsForm, event: SubmitEvent | Event, form: HTMLFormElement, formData: FormDataExtended) {
         event.preventDefault();
-        const result = await this.#updateDocument(event as SubmitEvent, form, formData);
-        console.debug(result, this.document.system.attributes);
+        await this.#updateDocument(event as SubmitEvent, form, formData);
         this.render({parts: ["statsChart", "evStats"]});
     }
 
     async #updateDocument(event: SubmitEvent, form: HTMLFormElement, formData: FormDataExtended) {
-        const submitData = this._prepareSubmitData(event, form, formData);
+        const submitData = this._prepareSubmitData(event, form, formData) as any;
+
+        if(submitData.system?.attributes && this.document.isHumanoid()) {
+            submitData.system!.species ??= {};
+            submitData.system.species.stats = Object.entries(submitData.system.attributes).reduce((acc, [key, value]) => {
+                acc[key] = (value as {base: number}).base;
+                return acc;
+            }, {} as Record<string, number>)
+            if(submitData.system.attributes.spe.base && submitData.system.attributes.spe.base !== (this.document.system._source as unknown as {attributes: Attributes}).attributes.spe.base) {
+                submitData.system.species.movement = this.document.system.movement.contents;
+                const overland = submitData.system.species.movement.find((m: any) => m.method === "overland")!
+
+                overland.value = Math.max(3, Math.floor(submitData.system.attributes.spe.base / 10));
+                if(overland.type !== "primary") overland.type = "primary";
+
+                submitData.system.species.movement = (submitData.system.species.movement as {type: string, method: string, value: number}[]).reduce((acc, m) => {
+                    acc[m.type] ??= [];
+                    acc[m.type].push({type: m.method, value: m.value});
+                    return acc;
+                }, {primary: [], secondary: []} as Record<string, {type: string, value: number}[]>);
+            }
+        }
+
         await this.document.update(submitData);
     }
 }

@@ -1,7 +1,7 @@
 export const StatusEffects: StatusEffect[] = [
     {
         id: "dead",
-        _id: "dead000000000000",
+        _id: "faintedcondition",
         name: "PTR2E.Effect.Statuses.Labels.fainted",
         img: "/systems/ptr2e/img/conditions/fainted.svg",
         type: "passive",
@@ -14,6 +14,8 @@ export const StatusEffects: StatusEffect[] = [
                     domain: "effect",
                 },
             ],
+            removeOnRecall: false,
+            removeAfterCombat: false
         },
     },
     {
@@ -490,6 +492,7 @@ export const StatusEffects: StatusEffect[] = [
     },
     {
         id: "weary",
+        _id: "wearycondition00",
         name: "PTR2E.Effect.Statuses.Labels.weary",
         img: "icons/svg/stoned.svg",
         type: "passive",

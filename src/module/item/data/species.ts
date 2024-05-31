@@ -35,7 +35,14 @@ class SpeciesSystem extends SpeciesExtension {
             spe: number;
         };
         types: PokemonType[];
+        traits: string[];
     };
+
+    constructor(data?: object, options?: DataModelConstructionOptions<foundry.abstract.Document | null> & { virtual?: boolean}) {
+        super(data, options);
+
+        this.virtual = options?.virtual ?? false;
+    }
 
     static override defineSchema(): foundry.data.fields.DataSchema {
         const fields = foundry.data.fields;
@@ -507,6 +514,8 @@ interface SpeciesSystem {
     evolutions: EvolutionData;
 
     skills: Collection<SkillPTR2e>;
+
+    virtual: boolean;
 }
 
 export default SpeciesSystem;

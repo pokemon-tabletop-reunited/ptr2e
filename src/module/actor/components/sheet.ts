@@ -2,6 +2,7 @@ import ActorPTR2e from "../base.ts";
 import { AbilitiesComponent } from "./abilities-component.ts";
 import { ActorComponent } from "./base.ts";
 import { EffectComponent } from "./effect-component.ts";
+import { MovementComponent } from "./movement-component.ts";
 import { PerksComponent } from "./perks-component.ts";
 import { FavouriteSkillsComponent, SkillsComponent } from "./skills-component.ts";
 
@@ -11,6 +12,7 @@ const ActorComponents = {
     "favourite-skills": FavouriteSkillsComponent,
     "abilities": AbilitiesComponent,
     "perks": PerksComponent,
+    "movement": MovementComponent,
 }
 type ActorComponentKey = keyof typeof ActorComponents;
 

@@ -21,22 +21,19 @@ body {
             color: var(--color-dark-6);
         }
     }
-
-    // &.theme-dark {
-        // .sheet prose-mirror .editor-content {
-        //     .content-link {
-        //         color: var(--color-cool-5);
-        //     }
-        // }
-
-        // .sheet a.content-link {
-        //     color: black;
-        // }
-    // }
 }
 
 .application .window-header .window-title {
     height: 100%;
+}
+
+.ptr2e.application .controls-dropdown.expanded {
+    background: var(--appv2-background);
+    box-shadow: unset;
+    border: 1px solid var(--border-theme-color);
+    button {
+        background: none;
+    }
 }
 
 .application.sheet {
@@ -60,10 +57,8 @@ body {
         border-radius: 8px;
         margin: 5px 0;
 
-        .editor-menu {
-            button.pm-dropdown {
-                color: var(--color-dark-1);
-            }
+        menu {
+            gap: 0;
         }
 
         .editor-content,
@@ -74,6 +69,7 @@ body {
 
     &.actor.v2 {
         min-width: 700px;
+        min-height: 660px;
 
         &.minimized {
             min-width: unset;
@@ -220,13 +216,14 @@ body {
                 }
 
                 .perk-web-button {
-                    margin-top: auto;
                     display: flex;
                     justify-content: center;
-                    margin-bottom: 0.5rem;
+                    flex: 1;
+                    align-items: center;;
                     
                     button {
                         flex: 0 0 70%;
+                        height: 30px;
                     }
                 }
             }
@@ -652,22 +649,49 @@ body {
                 }
 
                 &[data-tab="overview"] {
+                    grid-template-columns: repeat(7, 1fr);
+                    grid-template-rows: repeat(7, 1fr);
+
                     .skill-component {
-                        grid-area: span 3 / span 2;
+                        grid-area: 1 / 1 / span 4 / span 3;
                     }
 
                     aside.stats-chart-aside {
-                        grid-area: 1 / 4 / 4 / 6;
+                        grid-area: 1 / 5 / span 4 / span 3;
+                        padding: 0.5rem;
 
-                        background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
-                        border-radius: 8px;
-                        border: 1px solid var(--border-theme-color);
-                        margin: 1rem 1rem 0.25rem 0.25rem;
+                        fieldset {
+                            background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+                            border-radius: 8px;
+                            border: 1px solid var(--border-theme-color);
+    
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: center;
+                            align-items: center;
 
-                        display: flex;
-                        flex-direction: row;
-                        justify-content: center;
-                        align-items: center;
+                            canvas {
+                                max-width: 100%;
+                                max-height: 100%;
+                            }
+                        }
+                    }
+
+                    .movement-component {
+                        grid-area: 5 / 1 / span 3 / span 3;
+                        padding: 0.5rem;
+
+                        .movement {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: center;
+                            text-align: center;
+
+                            label, input {
+                                flex: 0 0 45%;
+                            }
+                        }
                     }
                 }
 
@@ -707,10 +731,12 @@ body {
 
                     .perks-display {
                         grid-area: perks;
+                        overflow: hidden;
                     }
 
                     .abilities-display {
                         grid-area: abilities;
+                        overflow: hidden;
                     }
                 }
 
@@ -916,6 +942,22 @@ body {
                         border-bottom-width: 2px;
                         font-weight: bold;
                     }
+                }
+            }
+        }
+
+        .movement-component {
+            padding: 0.5rem;
+
+            .movement {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                text-align: center;
+
+                label, input {
+                    flex: 0 0 45%;
                 }
             }
         }

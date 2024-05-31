@@ -163,12 +163,7 @@ class ActorPTR2e<
 
         this.rollOptions.addOption("self", `type:${this.type}`);
 
-        this.health = {
-            percent: Math.floor(Math.random() * 100),
-        };
-
         this.system.type.effectiveness = this._calculateEffectiveness();
-        this.flags;
 
         super.prepareData();
     }
@@ -408,18 +403,18 @@ class ActorPTR2e<
             ? this.calcStatTotal(this.system.attributes.def, isCrit)
             : this.calcStatTotal(this.system.attributes.spd, isCrit);
     }
-    getAttackStat(attack: { category: AttackPTR2e["category"] }, isCrit: boolean) {
+    getAttackStat(attack: { category: AttackPTR2e["category"] }) {
         return attack.category === "physical"
-            ? this.calcStatTotal(this.system.attributes.atk, isCrit)
-            : this.calcStatTotal(this.system.attributes.spa, isCrit);
+            ? this.calcStatTotal(this.system.attributes.atk, false)
+            : this.calcStatTotal(this.system.attributes.spa, false);
     }
 
     calcStatTotal(stat: Attribute, isCrit: boolean) {
         const stageModifier = () => {
-            const stage = Math.clamp(stat.stage, -6, 6);
+            const stage = Math.clamp(stat.stage, -6, isCrit ? 0 : 6);
             return stage > 0 ? (2 + stage) / 2 : 2 / (2 + Math.abs(stage));
         };
-        return isCrit ? stat.value : stat.value * stageModifier();
+        return stat.value * stageModifier();
     }
 
     async applyDamage(damage: number) {
@@ -900,6 +895,31 @@ class ActorPTR2e<
         if (result === false) return false;
 
         if (options.fail === true) return false;
+    }
+
+    protected override async _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: User): Promise<boolean | void> {
+        if(changed.system?.health?.value !== undefined) {
+            const fainted = this.effects.get("faintedcondition") !== undefined
+            if(changed.system.health.value as number <= 0 && !fainted) {
+                changed.effects ??= [];
+                (changed.effects as ActiveEffectPTR2e['_source'][]).push((await ActiveEffectPTR2e.fromStatusEffect('dead')).toObject() as ActiveEffectPTR2e['_source']);
+
+                const weary = this.effects.get("wearycondition00");
+                if(!weary) {
+                    (changed.effects as ActiveEffectPTR2e['_source'][]).push((await ActiveEffectPTR2e.fromStatusEffect('weary')).toObject() as ActiveEffectPTR2e['_source']);
+                }
+                else {
+                    const wearyData = weary.toObject() as ActiveEffectPTR2e['_source'];
+                    wearyData.system.stacks = wearyData.system.stacks + 1;
+                    (changed.effects as ActiveEffectPTR2e['_source'][]).push(wearyData);
+                }
+            }
+            else if(changed.system.health.value as number > 0 && fainted) {
+                await this.deleteEmbeddedDocuments("ActiveEffect", ["faintedcondition"]);
+            }
+        }
+
+        return super._preUpdate(changed, options, user);
     }
 
     override async toggleStatusEffect(

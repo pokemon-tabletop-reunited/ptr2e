@@ -134,6 +134,8 @@ export default class ItemSheetPTR2e<
 
         const effects = this.document.effects.contents;
 
+        const enrichedDescription = await TextEditor.enrichHTML(this.document.system.description)
+
         return {
             ...((await super._prepareContext()) as Record<string, unknown>),
             item: this.document,
@@ -142,6 +144,7 @@ export default class ItemSheetPTR2e<
             tabs: this._getTabs(),
             traits,
             effects,
+            enrichedDescription
         };
     }
 

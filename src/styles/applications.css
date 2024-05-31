@@ -23,6 +23,14 @@ body.theme-light .application textarea:read-only {
 .application .window-header .window-title {
   height: 100%;
 }
+.ptr2e.application .controls-dropdown.expanded {
+  background: var(--appv2-background);
+  box-shadow: unset;
+  border: 1px solid var(--border-theme-color);
+}
+.ptr2e.application .controls-dropdown.expanded button {
+  background: none;
+}
 .application.sheet multi-select .tags,
 .application.sheet string-tags .tags,
 .application.sheet string-tags-ptr2e .tags {
@@ -44,8 +52,8 @@ body.theme-light .application textarea:read-only {
   border-radius: 8px;
   margin: 5px 0;
 }
-.application.sheet prose-mirror .editor-menu button.pm-dropdown {
-  color: var(--color-dark-1);
+.application.sheet prose-mirror menu {
+  gap: 0;
 }
 .application.sheet prose-mirror .editor-content,
 .application.sheet prose-mirror .editor-container .editor-content {
@@ -53,6 +61,7 @@ body.theme-light .application textarea:read-only {
 }
 .application.sheet.actor.v2 {
   min-width: 700px;
+  min-height: 660px;
   background: var(--appv2-background);
 }
 .application.sheet.actor.v2.minimized {
@@ -168,13 +177,14 @@ body.theme-light .application textarea:read-only {
   grid-area: level;
 }
 .application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button {
-  margin-top: auto;
   display: flex;
   justify-content: center;
-  margin-bottom: 0.5rem;
+  flex: 1;
+  align-items: center;
 }
 .application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button {
   flex: 0 0 70%;
+  height: 30px;
 }
 .application.sheet.actor.v2 .window-content .tab.active {
   grid-area: main;
@@ -540,19 +550,44 @@ body.theme-light .application textarea:read-only {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button small.unspend {
   font-size: 10px;
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] {
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component {
-  grid-area: span 3 / span 2;
+  grid-area: 1 / 1 / span 4 / span 3;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside {
-  grid-area: 1 / 4 / 4 / 6;
+  grid-area: 1 / 5 / span 4 / span 3;
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside fieldset {
   background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
   border-radius: 8px;
   border: 1px solid var(--border-theme-color);
-  margin: 1rem 1rem 0.25rem 0.25rem;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside fieldset canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component {
+  grid-area: 5 / 1 / span 3 / span 3;
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component .movement {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component .movement label,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component .movement input {
+  flex: 0 0 45%;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] {
   grid-template-columns: 1fr 5px 1fr;
@@ -581,9 +616,11 @@ body.theme-light .application textarea:read-only {
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .perks-display {
   grid-area: perks;
+  overflow: hidden;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display {
   grid-area: abilities;
+  overflow: hidden;
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display,
@@ -905,6 +942,20 @@ body.theme-light .application textarea:read-only {
 .application.sheet.actor.popout .skill-component .skills .skill-list header.skill {
   border-bottom-width: 2px;
   font-weight: bold;
+}
+.application.sheet.actor.popout .movement-component {
+  padding: 0.5rem;
+}
+.application.sheet.actor.popout .movement-component .movement {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.application.sheet.actor.popout .movement-component .movement label,
+.application.sheet.actor.popout .movement-component .movement input {
+  flex: 0 0 45%;
 }
 .application.sheet.actor.popout fieldset {
   padding: 1rem;

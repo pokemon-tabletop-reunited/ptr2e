@@ -1,3 +1,118 @@
+.sheet .tab.active.sheet-body div.embed {
+  padding: 0.5rem;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  background: var(--appv2-background);
+  text-wrap: pretty;
+}
+.sheet .tab.active.sheet-body div.embed figure {
+  margin: 0;
+}
+.sheet .tab.active.sheet-body div.embed header h2 {
+  border-bottom: unset;
+  text-align: center;
+  font-family: inherit;
+  margin: 0 0 0.5rem 0;
+}
+.sheet .tab.active.sheet-body div.embed header.header {
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.sheet .tab.active.sheet-body div.embed header.traits {
+  margin-top: 0.5rem;
+  border-bottom: unset;
+}
+.sheet .tab.active.sheet-body div.embed header.traits tags[readonly] {
+  width: 100%;
+  --tags-border-color: var(--border-theme-color);
+  --tag-bg: var(--color-light-4);
+  --tag-pad: 1px 3px;
+  --readonly-striped: 0;
+  --tag-hover: var(--color-light-3);
+  justify-content: center;
+}
+.sheet .tab.active.sheet-body div.embed header.traits tags[readonly] span.tagify__input {
+  display: none;
+}
+.sheet .tab.active.sheet-body div.embed header .dexNumber {
+  font-size: smaller;
+  color: #6b6b6b;
+}
+.sheet .tab.active.sheet-body div.embed aside img {
+  border: unset;
+  border-radius: 50%;
+}
+.sheet .tab.active.sheet-body div.embed content.attack-embed {
+  margin-top: 0.25rem;
+}
+.sheet .tab.active.sheet-body div.embed content.attack-embed .attack-description article {
+  text-wrap: pretty;
+}
+.sheet .tab.active.sheet-body div.embed content.item-embed,
+.sheet .tab.active.sheet-body div.embed content.effect-embed {
+  all: unset;
+}
+.sheet .tab.active.sheet-body div.embed content.item-embed section.details,
+.sheet .tab.active.sheet-body div.embed content.effect-embed section.details {
+  display: flex;
+  flex-direction: column;
+}
+.sheet .tab.active.sheet-body div.embed content.item-embed .details fieldset,
+.sheet .tab.active.sheet-body div.embed content.effect-embed .details fieldset {
+  display: grid !important;
+  grid-template-columns: 60% 40%;
+  grid-auto-rows: 20px;
+  gap: 0.25rem !important;
+  padding: 0.25rem !important;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+.sheet .tab.active.sheet-body div.embed content.item-embed .details fieldset label,
+.sheet .tab.active.sheet-body div.embed content.effect-embed .details fieldset label {
+  font-weight: bold;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow-x: hidden;
+}
+.sheet .tab.active.sheet-body div.embed content.item-embed .details fieldset label + span,
+.sheet .tab.active.sheet-body div.embed content.effect-embed .details fieldset label + span {
+  margin-left: 0.25rem;
+}
+.sheet .tab.active.sheet-body div.embed content.item-embed .details fieldset article,
+.sheet .tab.active.sheet-body div.embed content.effect-embed .details fieldset article {
+  line-height: 1.3;
+  line-break: pre-wrap;
+}
+.sheet .tab.active.sheet-body div.embed content.effect-embed section.details {
+  margin: 0.5rem 0;
+}
+.sheet .tab.active.sheet-body div.embed content.effect-embed section.details fieldset {
+  margin: 0;
+  grid-template-columns: 75% 25%;
+}
+aside[role="tooltip"].attack figure,
+aside[role="tooltip"].ability figure,
+aside[role="tooltip"].consumable figure,
+aside[role="tooltip"].container figure,
+aside[role="tooltip"].effect figure,
+aside[role="tooltip"].equipment figure,
+aside[role="tooltip"].gear figure,
+aside[role="tooltip"].perk figure,
+aside[role="tooltip"].species figure,
+aside[role="tooltip"].weapon figure,
+.chat-message .move-embed figure,
+.chat-message .effect-embed figure,
+.chat-message .ability-embed figure,
+.chat-message .consumable-embed figure,
+.chat-message .container-embed figure,
+.chat-message .effect-item-embed figure,
+.chat-message .equipment-embed figure,
+.chat-message .gear-embed figure,
+.chat-message .perk-embed figure,
+.chat-message .species-embed figure,
+.chat-message .weapon-embed figure {
+  text-wrap: pretty;
+}
 aside[role="tooltip"].attack figure header h2,
 aside[role="tooltip"].ability figure header h2,
 aside[role="tooltip"].consumable figure header h2,
@@ -169,6 +284,29 @@ aside[role="tooltip"].weapon figure aside img,
   border: unset;
   border-radius: 50%;
 }
+aside[role="tooltip"].attack figure .content-embed,
+aside[role="tooltip"].ability figure .content-embed,
+aside[role="tooltip"].consumable figure .content-embed,
+aside[role="tooltip"].container figure .content-embed,
+aside[role="tooltip"].effect figure .content-embed,
+aside[role="tooltip"].equipment figure .content-embed,
+aside[role="tooltip"].gear figure .content-embed,
+aside[role="tooltip"].perk figure .content-embed,
+aside[role="tooltip"].species figure .content-embed,
+aside[role="tooltip"].weapon figure .content-embed,
+.chat-message .move-embed figure .content-embed,
+.chat-message .effect-embed figure .content-embed,
+.chat-message .ability-embed figure .content-embed,
+.chat-message .consumable-embed figure .content-embed,
+.chat-message .container-embed figure .content-embed,
+.chat-message .effect-item-embed figure .content-embed,
+.chat-message .equipment-embed figure .content-embed,
+.chat-message .gear-embed figure .content-embed,
+.chat-message .perk-embed figure .content-embed,
+.chat-message .species-embed figure .content-embed,
+.chat-message .weapon-embed figure .content-embed {
+  font-size: 85%;
+}
 aside[role="tooltip"].attack figure content.attack-embed,
 aside[role="tooltip"].ability figure content.attack-embed,
 aside[role="tooltip"].consumable figure content.attack-embed,
@@ -190,8 +328,8 @@ aside[role="tooltip"].weapon figure content.attack-embed,
 .chat-message .perk-embed figure content.attack-embed,
 .chat-message .species-embed figure content.attack-embed,
 .chat-message .weapon-embed figure content.attack-embed {
-  margin-top: unset;
-  font-size: 15px;
+  margin-top: 0.25rem;
+  font-size: 90%;
 }
 aside[role="tooltip"].attack figure content.attack-embed section.attack-info,
 aside[role="tooltip"].ability figure content.attack-embed section.attack-info,
@@ -215,6 +353,29 @@ aside[role="tooltip"].weapon figure content.attack-embed section.attack-info,
 .chat-message .species-embed figure content.attack-embed section.attack-info,
 .chat-message .weapon-embed figure content.attack-embed section.attack-info {
   grid-template-areas: "basic" "range" "cost";
+}
+aside[role="tooltip"].attack figure content.attack-embed section.attack-info fieldset,
+aside[role="tooltip"].ability figure content.attack-embed section.attack-info fieldset,
+aside[role="tooltip"].consumable figure content.attack-embed section.attack-info fieldset,
+aside[role="tooltip"].container figure content.attack-embed section.attack-info fieldset,
+aside[role="tooltip"].effect figure content.attack-embed section.attack-info fieldset,
+aside[role="tooltip"].equipment figure content.attack-embed section.attack-info fieldset,
+aside[role="tooltip"].gear figure content.attack-embed section.attack-info fieldset,
+aside[role="tooltip"].perk figure content.attack-embed section.attack-info fieldset,
+aside[role="tooltip"].species figure content.attack-embed section.attack-info fieldset,
+aside[role="tooltip"].weapon figure content.attack-embed section.attack-info fieldset,
+.chat-message .move-embed figure content.attack-embed section.attack-info fieldset,
+.chat-message .effect-embed figure content.attack-embed section.attack-info fieldset,
+.chat-message .ability-embed figure content.attack-embed section.attack-info fieldset,
+.chat-message .consumable-embed figure content.attack-embed section.attack-info fieldset,
+.chat-message .container-embed figure content.attack-embed section.attack-info fieldset,
+.chat-message .effect-item-embed figure content.attack-embed section.attack-info fieldset,
+.chat-message .equipment-embed figure content.attack-embed section.attack-info fieldset,
+.chat-message .gear-embed figure content.attack-embed section.attack-info fieldset,
+.chat-message .perk-embed figure content.attack-embed section.attack-info fieldset,
+.chat-message .species-embed figure content.attack-embed section.attack-info fieldset,
+.chat-message .weapon-embed figure content.attack-embed section.attack-info fieldset {
+  background: unset;
 }
 aside[role="tooltip"].attack figure content.attack-embed fieldset article,
 aside[role="tooltip"].ability figure content.attack-embed fieldset article,
@@ -1006,12 +1167,14 @@ content.attack-embed main section.attack-info fieldset {
   padding: 0.25rem !important;
   border: unset;
   margin-bottom: unset !important;
+  align-items: center;
 }
 content.attack-embed main section.attack-info fieldset.basic {
   grid-area: basic;
 }
 content.attack-embed main section.attack-info fieldset.range {
   grid-area: range;
+  grid-template-rows: 17px 24px;
 }
 content.attack-embed main section.attack-info fieldset.cost {
   grid-area: cost;

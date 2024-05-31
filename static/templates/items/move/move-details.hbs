@@ -4,14 +4,6 @@
             Details
         </legend>
         {{formField fields.grade value=source.system.grade}}
-        <div class="form-group">
-            <label>{{localize fields.description.label}}</label>
-            <div class="form-fields">
-                <textarea name="system.description" class="form-control"
-                    data-dtype="String">{{source.system.description}}</textarea>
-            </div>
-            <p class="hint">{{localize fields.description.hint}}</p>
-        </div>
-        {{!-- {{formField fields.description value=source.system.description button=true}} --}}
+        {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true localize=true}}
     </fieldset>
 </section>

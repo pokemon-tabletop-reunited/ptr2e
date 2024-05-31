@@ -180,7 +180,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
 
         for (const combatant of this.turns) {
             if (combatantUpdateData[combatant._id]) continue;
-            if (combatant.defeated) continue;
+            if (combatant.isDefeated) continue;
             combatantUpdateData[combatant._id] = {
                 _id: combatant._id,
                 initiative: Math.max(0, (combatant.initiative ?? 0) - initiativeReduction),
