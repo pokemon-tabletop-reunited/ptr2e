@@ -1,33 +1,59 @@
 {
-    "name": "Disguise",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Disguise",
-                "slug": "disguise",
-                "type": "passive",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 0
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "At the start of combat the user is Disguised. The first time the user takes damage in combat while Disguised, they take 0 damage and the lose the Disguised condition. Afterward, this ability cannot be used again until the end of the battle.",
+  "name": "Disguise",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "defensive",
-            "forme-change",
-            "innate"
-        ]
-    },
-    "_id": "rL20Tp4ZKRidauea",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "defensive",
+          "forme-change",
+          "innate"
+        ],
+        "name": "Disguise",
+        "slug": "disguise",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Effect: At the start of combat the user is Disguised. The first time the user takes damage in combat while Disguised, they take 0 damage and the lose the Disguised Affliction. Afterward, this ability cannot be used again until the end of the battle."
+      }
+    ],
+    "description": "Effect: At the start of combat the user is Disguised. The first time the user takes damage in combat while Disguised, they take 0 damage and the lose the Disguised Affliction. Afterward, this ability cannot be used again until the end of the battle.",
+    "traits": [
+      "defensive",
+      "forme-change",
+      "innate"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "GSihqZ6v41FeM2HZ",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!GSihqZ6v41FeM2HZ"
 }

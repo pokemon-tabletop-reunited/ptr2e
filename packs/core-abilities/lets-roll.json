@@ -1,31 +1,72 @@
 {
-    "name": "Let's Roll",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Let's Roll",
-                "slug": "lets-roll",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 2
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "Connection - Defense Curl. The user freely uses Defense Curl. Passive: When using Defense Curl, the user can spend 2 PP to increase the duration of Curled condition by 3.",
+  "name": "Let's Roll",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "connection"
-        ]
-    },
-    "_id": "gcUWo3UMtHj5VePO",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": "0nG9TRDSwrmcTFwO"
+          "connection"
+        ],
+        "name": "Let's Roll",
+        "slug": "lets-roll",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "At the start of combat or when the user is switched in.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: At the start of combat or when the user is switched in.\nEffect: Connection - Defense Curl. The user freely uses Defense Curl."
+      },
+      {
+        "traits": [
+          "connection"
+        ],
+        "name": "Let's Roll",
+        "slug": "lets-roll",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": null,
+        "description": "Passive: When using Defense Curl, the user can spend 2 PP to increase the duration of Curled Affliction by 3."
+      }
+    ],
+    "description": "Trigger: At the start of combat or when the user is switched in.\nEffect: Connection - Defense Curl. The user freely uses Defense Curl. Passive: When using Defense Curl, the user can spend 2 PP to increase the duration of Curled Affliction by 3.",
+    "traits": [
+      "connection"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "folder": "0nG9TRDSwrmcTFwO",
+  "_id": "NKwlORX98U7JMiNa",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!NKwlORX98U7JMiNa"
 }

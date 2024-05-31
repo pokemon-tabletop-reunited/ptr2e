@@ -1,32 +1,58 @@
 {
-    "name": "Ocean's Wrath",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Ocean's Wrath",
-                "slug": "oceans-wrath",
-                "type": "passive",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 0
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "Connection: Aeroblast. The user's Flying-Type attacks never miss and have [Crit 1]. If a Flying-Type attack already has [Crit X] it is inceased by +1.",
+  "name": "Ocean's Wrath",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "legendary",
-            "connection"
-        ]
-    },
-    "_id": "MqsLIv61T6LbtiaY",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "legendary",
+          "connection"
+        ],
+        "name": "Ocean's Wrath",
+        "slug": "oceans-wrath",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "trigger": "Rainy Weather is present.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: Rainy Weather is present.\nEffect: Connection: Aeroblast. The user's Flying-Type attacks never miss and have [Crit 1]. If a Flying-Type attack already has [Crit X] it is increased by +1."
+      }
+    ],
+    "description": "Trigger: Rainy Weather is present.\nEffect: Connection: Aeroblast. The user's Flying-Type attacks never miss and have [Crit 1]. If a Flying-Type attack already has [Crit X] it is increased by +1.",
+    "traits": [
+      "legendary",
+      "connection"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "wVN3NvZnjyL0rhRT",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!wVN3NvZnjyL0rhRT"
 }

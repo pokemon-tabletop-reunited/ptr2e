@@ -1,33 +1,78 @@
 {
-    "name": "Power Construct",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Power Construct",
-                "slug": "power-construct",
-                "type": "generic",
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 4
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "Connection - Core Enforcer. The user transforms into their Complete Forme the rest of the combat, and recovers HP equal to 1/2 their Max HP after changing formes. Passive: When the user uses Core Enforcer, they recover a Tick of HP.",
+  "name": "Power Construct",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "legendary",
-            "forme-change",
-            "connection"
-        ]
-    },
-    "_id": "vB2AjGFlijDSGoaT",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "legendary",
+          "forme-change",
+          "connection"
+        ],
+        "name": "Power Construct",
+        "slug": "power-construct",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 4,
+          "trigger": "The user is reduced to 50% or fewer HP.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: The user is reduced to 50% or fewer HP.\nEffect: Connection - Core Enforcer. The user transforms into their Complete Forme the rest of the combat, and recovers HP equal to 1/2 their Max HP after changing formes."
+      },
+      {
+        "traits": [
+          "legendary",
+          "forme-change",
+          "connection"
+        ],
+        "name": "Power Construct",
+        "slug": "power-construct",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": null,
+        "description": "Passive: When the user uses Core Enforcer, they recover a Tick of HP."
+      }
+    ],
+    "description": "Trigger: The user is reduced to 50% or fewer HP.\nEffect: Connection - Core Enforcer. The user transforms into their Complete Forme the rest of the combat, and recovers HP equal to 1/2 their Max HP after changing formes. Passive: When the user uses Core Enforcer, they recover a Tick of HP.",
+    "traits": [
+      "legendary",
+      "forme-change",
+      "connection"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "3fzi5kHXfB9DZ2Ew",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!3fzi5kHXfB9DZ2Ew"
 }

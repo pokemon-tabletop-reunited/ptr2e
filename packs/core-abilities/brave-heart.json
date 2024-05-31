@@ -1,29 +1,52 @@
 {
-    "name": "Brave Heart",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Brave Heart",
-                "slug": "brave-heart",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 5
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The user gains +X ATK stages for 5 activations, where X is equal to total number of stages raised by that effect.",
-        "traits": []
-    },
-    "_id": "pjvhhzmlI5chaQvP",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": "0nG9TRDSwrmcTFwO"
+  "name": "Brave Heart",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Brave Heart",
+        "slug": "brave-heart",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 5,
+          "trigger": "A foe within 5m gains at least one positive stage from an effect.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: A foe within 5m gains at least one positive stage from an effect.\nEffect: The user gains +X ATK stages for 5 activations, where X is equal to total number of stages raised by that effect."
+      }
+    ],
+    "description": "Trigger: A foe within 5m gains at least one positive stage from an effect.\nEffect: The user gains +X ATK stages for 5 activations, where X is equal to total number of stages raised by that effect.",
+    "traits": [],
+    "slug": null,
+    "container": null
+  },
+  "folder": "0nG9TRDSwrmcTFwO",
+  "_id": "NY6hlsAyKogLfVtI",
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!NY6hlsAyKogLfVtI"
 }

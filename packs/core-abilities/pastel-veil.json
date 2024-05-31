@@ -1,32 +1,57 @@
 {
-    "name": "Pastel Veil",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Pastel Veil",
-                "slug": "pastel-veil",
-                "type": "passive",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 0
-                },
-                "range": {
-                    "target": "allied-aura",
-                    "distance": 5,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The user is immune to the Poison and Blight conditions. Allied creatures in range have their Poison and Blight condition duration reduce by 2 at the end of each of their activations instead of 1.",
+  "name": "Pastel Veil",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "defensive",
-            "aura"
-        ]
-    },
-    "_id": "cwF9EMQr0GNh6iNM",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "defensive",
+          "aura"
+        ],
+        "name": "Pastel Veil",
+        "slug": "pastel-veil",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "allied-aura",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "Effect: The user is immune to the Poison and Blight Afflictions. Allied creatures in range have their Poison and Blight Affliction duration reduce by 2 at the end of each of their activations instead of 1."
+      }
+    ],
+    "description": "Effect: The user is immune to the Poison and Blight Afflictions. Allied creatures in range have their Poison and Blight Affliction duration reduce by 2 at the end of each of their activations instead of 1.",
+    "traits": [
+      "defensive",
+      "aura"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "WLcv6UB9iIqy9cqA",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!WLcv6UB9iIqy9cqA"
 }

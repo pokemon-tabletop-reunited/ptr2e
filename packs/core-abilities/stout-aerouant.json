@@ -1,32 +1,75 @@
 {
-    "name": "Stout Aerouant",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Stout Aerouant",
-                "slug": "stout-aerouant",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 3
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "Connection - Dragon Energy. Negative stage changes affecting the user are removed. Passive: Dragon Energy on the user's Active List gains [Drain 1/2].",
+  "name": "Stout Aerouant",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "legendary",
-            "connection"
-        ]
-    },
-    "_id": "LoWprf4b6ku7y0rP",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "legendary",
+          "connection"
+        ],
+        "name": "Stout Aerouant",
+        "slug": "stout-aerouant",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "The user resolves a Dragon-Type attack",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: The user resolves a Dragon-Type attack\nEffect: Connection - Dragon Energy. Negative stage changes affecting the user are removed."
+      },
+      {
+        "traits": [
+          "legendary",
+          "connection"
+        ],
+        "name": "Stout Aerouant",
+        "slug": "stout-aerouant",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": null,
+        "description": "Passive: Dragon Energy on the user's Active List gains [Drain 1/2]."
+      }
+    ],
+    "description": "Trigger: The user resolves a Dragon-Type attack\nEffect: Connection - Dragon Energy. Negative stage changes affecting the user are removed. Passive: Dragon Energy on the user's Active List gains [Drain 1/2].",
+    "traits": [
+      "legendary",
+      "connection"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "fgnUpZqSxSncHLqF",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!fgnUpZqSxSncHLqF"
 }

@@ -1,29 +1,52 @@
 {
-    "name": "Rivalry",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Rivalry",
-                "slug": "rivalry",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 0
-                },
-                "range": {
-                    "target": "creature",
-                    "distance": 20,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The target takes 20% more damage from the triggering attack.",
-        "traits": []
-    },
-    "_id": "KJJ4yV5JM3scGrBl",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+  "name": "Rivalry",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Rivalry",
+        "slug": "rivalry",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "trigger": "The user attacks a creature that they share a Type with using a Physical- or Special-Category attack.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        },
+        "description": "Trigger: The user attacks a creature that they share a Type with using a Physical- or Special-Category attack.\nEffect: The target takes 20% more damage from the triggering attack."
+      }
+    ],
+    "description": "Trigger: The user attacks a creature that they share a Type with using a Physical- or Special-Category attack.\nEffect: The target takes 20% more damage from the triggering attack.",
+    "traits": [],
+    "slug": null,
+    "container": null
+  },
+  "_id": "GrGz4ogRfJMZkKno",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!GrGz4ogRfJMZkKno"
 }

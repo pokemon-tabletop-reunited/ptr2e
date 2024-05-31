@@ -1,32 +1,58 @@
 {
-    "name": "Electromorphosis",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Electromorphosis",
-                "slug": "electromorphosis",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 2
-                },
-                "range": {
-                    "target": "self",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "Connection - Charge. The user freely uses Charge.",
+  "name": "Electromorphosis",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "defensive",
-            "connection"
-        ]
-    },
-    "_id": "D5ejPNoUBDWCD1of",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "defensive",
+          "connection"
+        ],
+        "name": "Electromorphosis",
+        "slug": "electromorphosis",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "The user is hit by a Physical or Special-category attack.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: The user is hit by a Physical or Special-category attack. \nEffect: Connection - Charge. The user freely uses Charge."
+      }
+    ],
+    "description": "Trigger: The user is hit by a Physical or Special-category attack. \nEffect: Connection - Charge. The user freely uses Charge.",
+    "traits": [
+      "defensive",
+      "connection"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "j9Tw0Acw7QTDno46",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!j9Tw0Acw7QTDno46"
 }

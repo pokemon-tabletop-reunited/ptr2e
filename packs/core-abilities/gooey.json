@@ -1,31 +1,56 @@
 {
-    "name": "Gooey",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Gooey",
-                "slug": "gooey",
-                "type": "passive",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 3
-                },
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "The triggering creature's SPD stage is lowered by -1 for 5 activations.",
+  "name": "Gooey",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "defensive"
-        ]
-    },
-    "_id": "c5W8OEEsfTvfvTfD",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "defensive"
+        ],
+        "name": "Gooey",
+        "slug": "gooey",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "The user is hit by a [Contact] attack.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The triggering creature's SPD stage is lowered by -1 for 5 activations."
+      }
+    ],
+    "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The triggering creature's SPD stage is lowered by -1 for 5 activations.",
+    "traits": [
+      "defensive"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "2DGL8nuYIiQeOJUv",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!2DGL8nuYIiQeOJUv"
 }

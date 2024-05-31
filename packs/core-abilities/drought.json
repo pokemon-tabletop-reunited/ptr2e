@@ -1,32 +1,58 @@
 {
-    "name": "Drought",
-    "type": "ability",
-    "system": {
-        "actions": [
-            {
-                "name": "Drought",
-                "slug": "drought",
-                "type": "generic",
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 2
-                },
-                "range": {
-                    "target": "field",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "traits": []
-            }
-        ],
-        "description": "Connection - Sunny Day. The weather becomes Blistering Heat for 5 rounds instead of Sunny.",
+  "name": "Drought",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "connection",
-            "weather"
-        ]
-    },
-    "_id": "oQolPxdZBJwJydNO",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "effects": [],
-    "folder": null
+          "connection",
+          "weather"
+        ],
+        "name": "Drought",
+        "slug": "drought",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2,
+          "trigger": "The user uses Drought.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Trigger: The user uses Sunny Day.\nEffect: Connection - Sunny Day. The set SunnyWeather has its duration increased by +2 Rounds."
+      }
+    ],
+    "description": "Trigger: The user uses Sunny Day.\nEffect: Connection - Sunny Day. The set SunnyWeather has its duration increased by +2 Rounds.",
+    "traits": [
+      "connection",
+      "weather"
+    ],
+    "slug": null,
+    "container": null
+  },
+  "_id": "o9y5NB42vrAfxz7L",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.324",
+    "systemId": "ptr2e",
+    "systemVersion": "0.005",
+    "createdTime": 1716919240454,
+    "modifiedTime": 1716919240454,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!o9y5NB42vrAfxz7L"
 }
