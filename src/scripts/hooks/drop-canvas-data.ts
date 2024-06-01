@@ -16,7 +16,7 @@ export const DropCanvasData = {
                         });
                     })()
                     
-                    await ActorPTR2e.create({
+                    const actor = await ActorPTR2e.create({
                         name: item.name,
                         type: item.traits?.has("humanoid") ? "humanoid" : "pokemon",
                         folder: folder?.id,
@@ -24,6 +24,14 @@ export const DropCanvasData = {
                             species: (item as SpeciesPTR2e).toObject().system
                         }
                     })
+                    if(!actor || !canvas.scene) return;
+
+                    const x = Math.floor(drop.x / canvas.scene.grid.size) * canvas.scene.grid.size
+                    const y = Math.floor(drop.y / canvas.scene.grid.size) * canvas.scene.grid.size
+
+                    const tokenData = await actor.getTokenDocument({x,y});
+                    //@ts-expect-error
+                    await canvas.scene.createEmbeddedDocuments("Token", [tokenData]);
                 }
             }
         });
