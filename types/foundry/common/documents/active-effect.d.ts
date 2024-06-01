@@ -84,6 +84,7 @@ type ActiveEffectSchema<
     }>;
     description: fields.HTMLField;
     icon: fields.FilePathField<ImageFilePath>;
+    img: fields.FilePathField<ImageFilePath>;
     origin: fields.StringField<ActorUUID | ItemUUID, ActorUUID | ItemUUID, false, true, true>;
     tint: fields.ColorField;
     transfer: fields.BooleanField;

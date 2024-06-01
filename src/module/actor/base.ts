@@ -1009,7 +1009,7 @@ interface ActorPTR2e<
 
     skills: Record<string, Statistic>;
 
-    get itemTypes(): Record<string, ItemPTR2e>;
+    get itemTypes(): Record<string, ItemPTR2e[]>;
 }
 
 type ActorFlags2e = ActorFlags & {

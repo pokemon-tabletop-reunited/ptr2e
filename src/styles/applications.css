@@ -1556,6 +1556,33 @@ body.theme-light .application textarea:read-only {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab="overview"] .item-description {
   min-height: 150px;
 }
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.action-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add {
+  position: relative;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.action-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control {
+  position: absolute;
+  top: -9px;
+  right: -2px;
+  background: var(--appv2-background);
+  border: 1px solid var(--border-theme-color);
+  padding: 2px;
+  border-radius: 0 4px 0 4px;
+  cursor: pointer;
+}
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,

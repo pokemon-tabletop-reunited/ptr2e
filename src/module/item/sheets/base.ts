@@ -130,11 +130,14 @@ export default class ItemSheetPTR2e<
             return [];
         })();
 
-        this.#allTraits = game.ptr.data.traits.map((trait) => ({ value: trait.slug, label: trait.label }));
+        this.#allTraits = game.ptr.data.traits.map((trait) => ({
+            value: trait.slug,
+            label: trait.label,
+        }));
 
         const effects = this.document.effects.contents;
 
-        const enrichedDescription = await TextEditor.enrichHTML(this.document.system.description)
+        const enrichedDescription = await TextEditor.enrichHTML(this.document.system.description);
 
         return {
             ...((await super._prepareContext()) as Record<string, unknown>),
@@ -144,7 +147,7 @@ export default class ItemSheetPTR2e<
             tabs: this._getTabs(),
             traits,
             effects,
-            enrichedDescription
+            enrichedDescription,
         };
     }
 
@@ -154,7 +157,7 @@ export default class ItemSheetPTR2e<
         formData: FormDataExtended
     ): Record<string, unknown> {
         const submitData = formData.object;
-        
+
         if (
             "system.traits" in submitData &&
             submitData["system.traits"] &&
@@ -162,8 +165,8 @@ export default class ItemSheetPTR2e<
             Array.isArray(submitData["system.traits"])
         ) {
             // Traits are stored as an array of objects, but we only need the values
-            submitData["system.traits"] = submitData["system.traits"].map((trait: { value: string }) =>
-                sluggify(trait.value)
+            submitData["system.traits"] = submitData["system.traits"].map(
+                (trait: { value: string }) => sluggify(trait.value)
             );
         }
 
@@ -201,6 +204,16 @@ export default class ItemSheetPTR2e<
         options: DocumentSheetConfiguration<ItemPTR2e<TSystem>>
     ): void {
         super._attachPartListeners(partId, htmlElement, options);
+
+        for (const element of htmlQueryAll(htmlElement, ".can-add")) {
+            const div = document.createElement("div");
+            div.classList.add("add-control");
+            div.dataset.type = element.dataset.type;
+            div.dataset.tooltip = game.i18n.localize("Add");
+            div.innerHTML = `<i class="fas fa-plus"></i>`;
+            div.addEventListener("click", this._onCreate.bind(this));
+            element.appendChild(div);
+        }
 
         if (partId === "traits") {
             for (const input of htmlElement.querySelectorAll<HTMLInputElement>(
@@ -306,10 +319,10 @@ export default class ItemSheetPTR2e<
                     slug: sluggify(`${this.document.name} Action (#${num})`),
                     description: this.document.system.description ?? "",
                     traits: this.document.system._source.traits ?? [],
-                    type: "generic"
-                }
+                    type: "generic",
+                };
 
-                while(this.document.system.actions.has(action.slug)) {
+                while (this.document.system.actions.has(action.slug)) {
                     action.name = `${this.document.name} Action (#${++num})`;
                     action.slug = sluggify(action.name);
                 }
@@ -331,7 +344,10 @@ export default class ItemSheetPTR2e<
 
                     switch (actionType) {
                         case "edit-action": {
-                            const sheet = new ActionEditor(this.document as ItemPTR2e<ItemSystemsWithActions>, slug);
+                            const sheet = new ActionEditor(
+                                this.document as ItemPTR2e<ItemSystemsWithActions>,
+                                slug
+                            );
                             sheet.render(true);
                             return;
                         }
@@ -361,23 +377,25 @@ export default class ItemSheetPTR2e<
             }
         }
 
-        if(partId === "header" && this.isEditable) {
+        if (partId === "header" && this.isEditable) {
             htmlQuery(htmlElement, "img[data-edit]")?.addEventListener("click", (event) => {
                 const imgElement = event.currentTarget as HTMLImageElement;
                 const attr = imgElement.dataset.edit;
                 const current = foundry.utils.getProperty<string | undefined>(this.document, attr!);
-                const {img} = this.document.constructor.getDefaultArtwork(this.document.toObject()) ?? {};
+                const { img } =
+                    this.document.constructor.getDefaultArtwork(this.document.toObject()) ?? {};
                 const fp = new FilePicker({
                     current,
                     type: "image",
                     redirectToRoot: img ? [img] : [],
                     callback: (path: string) => {
                         imgElement.src = path;
-                        if(this.options.form?.submitOnChange) this.element.dispatchEvent(new Event("submit", { cancelable: true }));
+                        if (this.options.form?.submitOnChange)
+                            this.element.dispatchEvent(new Event("submit", { cancelable: true }));
                     },
                     top: this.position.top + 40,
                     left: this.position.left + 10,
-                })
+                });
                 fp.browse();
             });
         }
@@ -484,6 +502,16 @@ export default class ItemSheetPTR2e<
         if (!this.document.isOwner || !effect) return false;
         if (effect.target === this.document) return false;
         return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.document });
+    }
+
+    protected async _onCreate(event: Event) {
+        const type = (event.currentTarget as HTMLElement).dataset.type;
+        if (!type) return;
+
+        // Items only support effects
+        if (type !== "effect") return;
+        
+        return ActiveEffectPTR2e.createDialog({}, { parent: this.document });
     }
 }
 
