@@ -1,45 +1,36 @@
 {
-  "name": "Dragon Rage",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/dragon_icon.png",
-  "system": {
-    "slug": "dragon-rage",
-    "description": "Effect: This attack deals 60 flat damage to the target's HP. This is not modified by the target's defenses or other effects.",
-    "traits": [],
-    "actions": [
-      {
+    "name": "Dragon Rage",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/dragon_icon.png",
+    "system": {
         "slug": "dragon-rage",
-        "name": "Dragon Rage",
-        "type": "attack",
+        "description": "<p>Effect: This attack deals 40 flat damage to the target's HP. This is not modified by the target's defenses or other effects.</p>",
         "traits": [],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "special",
-        "power": null,
-        "accuracy": 100,
-        "types": [
-          "dragon"
+        "actions": [
+            {
+                "slug": "dragon-rage",
+                "name": "Dragon Rage",
+                "type": "attack",
+                "traits": [],
+                "range": {
+                    "target": "creature",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 7
+                },
+                "category": "special",
+                "accuracy": 100,
+                "types": [
+                    "dragon"
+                ],
+                "description": "<p>Effect: This attack deals 40 flat damage to the target's HP. This is not modified by the target's defenses or other effects.</p>"
+            }
         ],
-        "description": "Effect: This attack deals 60 flat damage to the target's HP. This is not modified by the target's defenses or other effects.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "C"
-  },
-  "_id": "PFcT7WCVrxW0GXub",
-  "effects": []
+        "grade": "B"
+    },
+    "_id": "PFcT7WCVrxW0GXub",
+    "effects": []
 }
