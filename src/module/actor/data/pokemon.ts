@@ -17,7 +17,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
 
             if (promise instanceof ItemPTR2e && promise.system instanceof SpeciesSystemModel) {
                 this.updateSource({ species: promise.toObject().system })
-                if (data.name.includes("New Actor")) {
+                if (data.name.includes(game.i18n.localize('TYPES.Actor.pokemon'))) {
                     this.parent.updateSource({ name: promise.name });
                 }
                 if ((!data.img || data.img === 'icons/svg/mystery-man.svg') && promise.img) {

@@ -84,7 +84,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                     });
                     sheet.species = new CONFIG.Item.documentClass({
                         _id: "actorSpeciesItem",
-                        name: this.document.hasEmbeddedSpecies()
+                        name: species.slug
                             ? Handlebars.helpers.formatSlug(species.slug)
                             : this.actor.name,
                         type: "species",
