@@ -1,75 +1,58 @@
 {
-  "name": "Fighting Fit",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "HP Specialist"
-    ],
-    "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Stat Ace"
-    },
-    "description": "If you receive healing whilst below maximum hit point, any excess healing is converted into Temp HP rather than lost.",
-    "actions": [
-      {
-        "name": "Fighting Fit",
-        "slug": "fighting-fit",
-        "description": "If you receive healing whilst below maximum hit point, any excess healing is converted into Temp HP rather than lost.",
-        "cost": {
-          "activation": "free"
+    "name": "Fighting Fit",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "HP Specialist"
+        ],
+        "cost": 2,
+        "design": {
+            "arena": "physical",
+            "approach": "resilience",
+            "archetype": "Stat Ace"
         },
-        "type": "passive",
-        "traits": []
-      }
-    ],
-    "slug": "fighting-fit",
-    "traits": [],
-    "node": {
-      "i": 1,
-      "j": -4,
-      "connected": [
-        "fearsome-defense",
-        "adrenaline-rush",
-        "thug",
-        "improved-overland-3"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#00ff00",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
-        "tint": "#070707",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
-  },
-  "_id": "hTjil7K4gGfLJtJ0",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.hTjil7K4gGfLJtJ0"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920358821,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!hTjil7K4gGfLJtJ0"
+        "description": "<p>If you receive healing whilst below maximum hit point, any excess healing is converted into Shields rather than lost.</p>",
+        "actions": [
+            {
+                "name": "Fighting Fit",
+                "slug": "fighting-fit",
+                "description": "If you receive healing whilst below maximum hit point, any excess healing is converted into Temp HP rather than lost.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": [],
+                "range": {
+                    "target": "enemy",
+                    "unit": "m"
+                }
+            }
+        ],
+        "slug": "fighting-fit",
+        "traits": [],
+        "node": {
+            "i": 1,
+            "j": -4,
+            "connected": [
+                "fearsome-defense",
+                "adrenaline-rush",
+                "thug",
+                "improved-overland-3"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#00ff00",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
+                "tint": "#070707",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "hTjil7K4gGfLJtJ0",
+    "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
+    "effects": []
 }
