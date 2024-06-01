@@ -103,6 +103,25 @@ declare global {
         getOffset(coords: GridCoordinates): GridOffset;
 
         /**
+         * Returns the smallest possible range containing the offsets of all grid spaces that intersect the given bounds.
+         * If the bounds are empty (nonpositive width or height), then the offset range is empty.
+         * @example
+         * ```js
+         * const [i0, j0, i1, j1] = grid.getOffsetRange(bounds);
+         * for ( let i = i0; i < i1; i++ ) {
+         *   for ( let j = j0; j < j1; j++ ) {
+         *     const offset = {i, j};
+         *     // ...
+         *   }
+         * }
+         * ```
+         * @param {Rectangle} bounds                                      The bounds
+         * @returns {[i0: number, j0: number, i1: number, j1: number]}    The offset range
+         * @abstract
+         */
+        getOffsetRange(bounds: Rectangle): [number, number, number, number];
+
+        /**
          * Measure a shortest, direct path through the given waypoints.
          * @param {GridCoordinates[]} waypoints    The waypoints the path must pass through
          * @returns {GridMeasurePathResult}
