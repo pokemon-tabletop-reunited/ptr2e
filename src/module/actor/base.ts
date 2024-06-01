@@ -451,6 +451,7 @@ class ActorPTR2e<
     }
 
     async onEndActivation() {
+        if(!(game.user === game.users.activeGM)) return;
         if (!this.synthetics.afflictions.data.length) return;
         const afflictions = this.synthetics.afflictions.data.reduce<{
             toDelete: string[];
