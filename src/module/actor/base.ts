@@ -901,18 +901,18 @@ class ActorPTR2e<
         if(changed.system?.health?.value !== undefined) {
             const fainted = this.effects.get("faintedcondition") !== undefined
             if(changed.system.health.value as number <= 0 && !fainted) {
-                changed.effects ??= [];
-                (changed.effects as ActiveEffectPTR2e['_source'][]).push((await ActiveEffectPTR2e.fromStatusEffect('dead')).toObject() as ActiveEffectPTR2e['_source']);
+                const effects: ActiveEffectPTR2e['_source'][] = [];
+                effects.push((await ActiveEffectPTR2e.fromStatusEffect('dead')).toObject() as ActiveEffectPTR2e['_source']);
 
-                const weary = this.effects.get("wearycondition00");
+                const weary = this.effects.get("wearycondition00") as ActiveEffectPTR2e<this> | undefined;
                 if(!weary) {
-                    (changed.effects as ActiveEffectPTR2e['_source'][]).push((await ActiveEffectPTR2e.fromStatusEffect('weary')).toObject() as ActiveEffectPTR2e['_source']);
+                    effects.push((await ActiveEffectPTR2e.fromStatusEffect('weary')).toObject() as ActiveEffectPTR2e['_source']);
                 }
                 else {
-                    const wearyData = weary.toObject() as ActiveEffectPTR2e['_source'];
-                    wearyData.system.stacks = wearyData.system.stacks + 1;
-                    (changed.effects as ActiveEffectPTR2e['_source'][]).push(wearyData);
+                    await weary.update({"system.stacks": weary.system.stacks + 1});
                 }
+
+                await this.createEmbeddedDocuments("ActiveEffect", effects);
             }
             else if(changed.system.health.value as number > 0 && fainted) {
                 await this.deleteEmbeddedDocuments("ActiveEffect", ["faintedcondition"]);
