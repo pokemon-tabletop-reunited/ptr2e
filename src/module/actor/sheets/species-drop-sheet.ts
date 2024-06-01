@@ -1,43 +1,88 @@
 import { ItemPTR2e } from "@item";
 import { SpeciesSystemModel } from "@item/data/index.ts";
+import {
+    ApplicationConfigurationExpanded,
+    ApplicationV2Expanded,
+} from "@module/apps/appv2-expanded.ts";
+import { htmlQueryAll } from "@utils";
 
-class SpeciesDropSheet extends FormApplication {
-    declare object: (value: unknown) => unknown;
+class SpeciesDropSheetV2 extends foundry.applications.api.HandlebarsApplicationMixin(
+    ApplicationV2Expanded
+) {
+    static override DEFAULT_OPTIONS = fu.mergeObject(
+        super.DEFAULT_OPTIONS,
+        {
+            classes: ["pokemon", "sheet", "actor"],
+            position: {
+                width: 250,
+                height: 141,
+            },
+            window: {
+                resizable: false,
+            },
+            form: {
+                submitOnChange: true,
+                closeOnSubmit: true,
+                handler: this.#onSubmit,
+            },
+            tag: "form",
+            dragDrop: [{ dragSelector: ".species-link", dropSelector: "form" }],
+        },
+        { inplace: false }
+    );
+
+    static override PARTS : Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+        main: {
+            id: "main",
+            template: "systems/ptr2e/templates/actor/species-drop.hbs",
+        },
+    }
+
+    static async #onSubmit(
+        this: SpeciesDropSheetV2,
+        _event: SubmitEvent | Event,
+        _form: HTMLFormElement,
+        formData: FormDataExtended
+    ) {
+        this.promise(formData.object.species);
+    }
+
+    promise: (value: unknown) => unknown;
     species: ItemPTR2e<SpeciesSystemModel> | null;
 
-    constructor(promise: (value: unknown) => unknown, options?: ApplicationOptions) {
-        super(promise, options);
+    constructor(
+        promise: (value: unknown) => unknown,
+        options?: ApplicationConfigurationExpanded & { species: ItemPTR2e<SpeciesSystemModel> }
+    ) {
+        super(options);
 
-        this.species = null;
+        this.promise = promise;
+        this.species = options?.species ?? null;
     }
 
-    static override get defaultOptions() {
-        return fu.mergeObject(super.defaultOptions, {
-            classes: ["pokemon", "sheet", "actor"],
-            template: "/systems/ptr2e/templates/actor/species-drop.hbs",
-            width: 250,
-            height: 125,
-            closeOnSubmit: true,
-            submitOnChange: true,
-            submitOnClose: true,
-            resizable: false,
-            title: "Creating a Pokemon...",
-            dragDrop: [{ dragSelector: ".species-link", dropSelector: "form" }]
-        });
+    override get title() {
+        return this.species?.flags?.ptr2e?.virtual
+            ? `Update ${this.species.actor!.name}'s Species`
+            : "Creating a Pokemon...";
     }
 
-    override getData(options?: Partial<FormApplicationOptions> | undefined) {
+    override async _prepareContext(): Promise<Object> {
         return {
-            ...(super.getData(options) as FormApplicationData<object>),
-            species: this.species
+            ...(await super._prepareContext()),
+            species: this.species,
         };
     }
 
-    override activateListeners(html: JQuery<HTMLElement>): void {
-        html.find('.species-link').on('click', () => this.species?.sheet?.render(true));
+    override _attachPartListeners(
+        _partId: string,
+        htmlElement: HTMLElement
+    ): void {
+        htmlQueryAll(htmlElement, ".species-link").forEach((element) => {
+            element.addEventListener("click", () => this.species?.sheet?.render(true));
+        });
     }
 
-    protected override _onDragStart(event: DragEvent): void {
+    override _onDragStart(event: DragEvent): void {
         if (!this.species) return;
         event.dataTransfer?.setData(
             "text/plain",
@@ -47,13 +92,13 @@ class SpeciesDropSheet extends FormApplication {
                     name: this.species.name,
                     type: "species",
                     img: this.species.img,
-                    system: this.species.system
-                }
+                    system: this.species.system,
+                },
             })
         );
     }
 
-    protected override async _onDrop(event: DragEvent) {
+    override async _onDrop(event: DragEvent) {
         const data = TextEditor.getDragEventData(event) as Record<string, string>;
         if (data.type === "Item") {
             const item = await fromUuid(data.uuid);
@@ -69,13 +114,9 @@ class SpeciesDropSheet extends FormApplication {
 
             this.species = item;
 
-            this.submit();
+            this.element.dispatchEvent(new Event("submit", {cancelable: true}));
         }
-    }
-
-    protected override async _updateObject(_event: Event, _formData: Record<string, unknown>): Promise<void> {
-        await this.object(this.species);
     }
 }
 
-export { SpeciesDropSheet };
+export { SpeciesDropSheetV2 as SpeciesDropSheet };

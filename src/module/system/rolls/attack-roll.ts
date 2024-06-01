@@ -149,7 +149,7 @@ class AttackRoll extends CheckRoll {
         const damageRoll = Number(this.result);
 
         // Attack & Defense stats of the origin and target
-        const attackStat = origin.getAttackStat(attack, isCritHit);
+        const attackStat = origin.getAttackStat(attack);
         const defenseStat = target.getDefenseStat(attack, isCritHit);
 
         // Type effectiveness
@@ -183,7 +183,7 @@ class AttackRoll extends CheckRoll {
 
         return {
             roll,
-            value: Math.max(otherModifier >= 1 ? 1 : 0, roundToNearestDownOnPoint5(roll.total)),
+            value: Math.max(typeEffectiveness === 0 ? 0 : otherModifier >= 1 ? 1 : 0, roundToNearestDownOnPoint5(roll.total)),
             context
         };
     }

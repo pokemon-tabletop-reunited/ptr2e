@@ -1,1 +1,3 @@
-export const instances: Map<unknown,unknown>
+import { ApplicationV2 } from "./api.js";
+
+export const instances: Map<string,ApplicationV2>

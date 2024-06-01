@@ -184,8 +184,13 @@ class GithubManager {
 
         const existing = await GithubManager.getExistingItem(document, pack);
         if (!existing) {
-            ui.notifications.error(`Cannot find existing item in '${pack.name}' pack`);
-            return;
+            try {
+                return GithubManager.applyGithubCommit(document.toObject() as ItemPTR2e["_source"]);
+            }
+            catch {
+                ui.notifications.error("An unexpected error occured.");
+                return;
+            }
         }
 
         const isPack = document === existing;
@@ -216,10 +221,8 @@ class GithubManager {
 
     static async applyGithubCommit<TDocument extends ItemPTR2e>(
         realDiff: TDocument["_source"],
-        diff: Record<string, any>
+        diff?: Record<string, any>
     ) {
-        console.debug(realDiff, diff);
-
         const identity = await (async () => {
             const id = game.user.getFlag("ptr2e", "dev-identity") as string;
             if (id) {
@@ -275,7 +278,7 @@ class GithubManager {
                 },
                 body: JSON.stringify({
                     data: realDiff,
-                    diff: diff,
+                    diff: diff || {},
                 }),
             });
             if(commit.ok) {

@@ -97,14 +97,6 @@ interface Biology {
     diet: string[],
 }
 
-interface Capabilities {
-    overland: Movement,
-    swim: Movement,
-    burrow: Movement,
-    sky: Movement,
-    threaded: Movement
-}
-
 interface CapabilityClass {
     /** Capability Key */
     slug: string,
@@ -180,7 +172,6 @@ export type {
     Skills,
     Skill,
     Biology,
-    Capabilities,
     CapabilityClass,
     Movement,
     HealthData,

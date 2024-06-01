@@ -101,7 +101,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         };
         points.available = points.total - points.spent;
         const levelOne = this.document.system.advancement.level === 1;
-        const maxInvestment = Math.min(points.available, levelOne ? 90 : 100);
+        const maxInvestment = Math.clamp(points.available,0, levelOne ? 90 : 100);
 
         return {
             document: this.document,
