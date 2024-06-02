@@ -124,7 +124,7 @@ type ApplicationClosingOptions = {
     closeKey: boolean;
 };
 
-type ApplicationClickAction = (event: PointerEvent, target: HTMLElement) => any;
+type ApplicationClickAction = (event: PointerEvent, target: HTMLElement, element?: HTMLElement) => any;
 
 export class ApplicationV2<
     TConfiguration extends ApplicationConfiguration = ApplicationConfiguration,
@@ -868,10 +868,10 @@ interface DialogV2WaitOptions {
 export type DialogV2Options = Partial<ApplicationConfiguration & DialogV2Configuration & DialogV2WaitOptions>;
 
 export class DialogV2 extends ApplicationV2<DialogV2Configuration> {
-    static prompt(
+    static prompt<TReturn>(
         options: Omit<DialogV2Configuration, keyof ApplicationConfiguration | "submit"> &
             Partial<ApplicationConfiguration>
-    ): Promise<DialogV2>;
+    ): Promise<TReturn>;
 
     /**
      * A utility helper to generate a dialog with yes and no buttons.

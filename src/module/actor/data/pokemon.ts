@@ -4,8 +4,9 @@ import { SpeciesDropSheet } from "@actor/sheets/species-drop-sheet.ts";
 import { AbilityPTR2e, ItemPTR2e, MovePTR2e } from "@item";
 import { SpeciesSystemModel, SpeciesSystemSource } from "@item/data/index.ts";
 import natureData from "@scripts/config/natures.ts";
-import { ImageResolver, sluggify } from "@utils";
+import { htmlQuery, ImageResolver, sluggify } from "@utils";
 import { AttackPTR2e } from "@data";
+import { Progress } from "src/util/progress.ts";
 
 class PokemonActorSystem extends ActorSystemPTR2e {
     declare parent: ActorPTR2e<this>;
@@ -44,6 +45,10 @@ class PokemonActorSystem extends ActorSystemPTR2e {
     }
 
     async _preCreateGenerateSpeciesData(species: SpeciesSystemSource["system"]) {
+        const progress = new Progress({steps: 5});
+        progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix")+game.i18n.localize("PTR2E.PokemonGeneration.Progress.Step1"));
+
+        // TODO: Change this into a proper App.
         const { minLevel, maxLevel, shinyChance, preventEvolution, linkToken } =
             await (async (): Promise<{
                 minLevel: number;
@@ -52,10 +57,52 @@ class PokemonActorSystem extends ActorSystemPTR2e {
                 preventEvolution: boolean;
                 linkToken: boolean;
             }> => {
+                const {
+                    minLevel,
+                    maxLevel
+                } = await (async (): Promise<{
+                    minLevel?: number;
+                    maxLevel?: number;
+                }> => {
+                    try {
+                        return await foundry.applications.api.DialogV2.prompt<{
+                            minLevel: number;
+                            maxLevel: number;
+                        }>({
+                            window: {
+                                title: `Generating ${species.slug || this.parent.name}`,
+                            },
+                            content: `
+                                <header class="mb-2 center-text">Level Range (min-max)</header>
+                                <content class="center-text d-flex flex-row align-items-center justify-content-evenly">
+                                    <input class="fb-45" type="number" name="min-level" value="5" data-tooltip="Min Level"/>
+                                    <input class="fb-45" type="number" name="max-level" value="5" data-tooltip="Max Level"/>
+                                </content>
+                            `,
+                            ok: {
+                                action: 'ok',
+                                label: "Generate",
+                                callback: (_event, _target, element) => {
+                                    const form = htmlQuery(element, "form");
+                                    if(!form) return null;
+                                    const formData = new FormDataExtended(form);
+                                    return {
+                                        minLevel: formData.object["min-level"],
+                                        maxLevel: formData.object["max-level"],
+                                    };
+                                }
+                            }
+                        });
+                    }
+                    catch {
+                        return {};
+                    }
+                })();
+
                 // TODO: Prompt for additional info. For now, just return hardcoded values
                 return {
-                    minLevel: this.advancement.level > 1 ? this.advancement.level : 5,
-                    maxLevel: this.advancement.level > 1 ? this.advancement.level : 5,
+                    minLevel: minLevel || 5,
+                    maxLevel: maxLevel || 5,
                     shinyChance: 1,
                     preventEvolution: false,
                     linkToken: false,
@@ -80,6 +127,9 @@ class PokemonActorSystem extends ActorSystemPTR2e {
                 : Math.random() < species.genderRatio / 8
                   ? "male"
                   : "female";
+
+        progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix")+game.i18n.localize("PTR2E.PokemonGeneration.Progress.Step2"));
+
         const evolution = await (async (): Promise<SpeciesSystemSource["system"]> => {
             if (preventEvolution) return species;
             // TODO: Implement evolutions
@@ -116,90 +166,135 @@ class PokemonActorSystem extends ActorSystemPTR2e {
         })();
 
         const stats = (() => {
-            //TODO: Implement
-            return {
-                hp: {
-                    evs: 0
-                },
-                atk: {
-                    evs: 0
-                },
-                def: {
-                    evs: 0
-                },
-                spa: {
-                    evs: 0
-                },
-                spd: {
-                    evs: 0
-                },
-                spe: {
-                    evs: 0
+            const randomPoints = Math.ceil(Math.random() * 508 * 0.25);
+
+            class weightedBag<T> {
+                entries: { entry: T; weight: number }[] = [];
+                total = 0;
+                addEntry(entry: T, weight: number) {
+                    this.total += weight;
+                    this.entries.push({ entry, weight: this.total });
+                }
+                get() {
+                    return this.entries.find((entry) => entry.weight >= Math.random() * this.total)!
+                        .entry;
                 }
             }
-        })();
 
-        const moves: MovePTR2e['_source'][] = await (async () => {
-            const levelUpMoves = species.moves.levelUp.filter((move) => move.level <= level);
-            
-            const moveItems = await Promise.all(levelUpMoves.map(async (move) => fromUuid(move.uuid)));
-            return moveItems.reduce((acc, move, index) => {
-                if(move && move instanceof ItemPTR2e) {
-                    const moveData = move.toObject();
-                    if(index < 6) {
-                        const actions = moveData.system.actions as AttackPTR2e['_source'][];
-                        if(actions.length) {
-                            actions[0].slot = index;
-                        }
-                    }
-                    acc.push(moveData);
+            const calculateStats = (points: number, weighted: boolean) => {
+                const bag = new weightedBag<keyof typeof stats>();
+                const stats = {} as Record<keyof typeof evolution.stats, number>;
+
+                for (const key in evolution.stats) {
+                    stats[key as keyof typeof stats] = 0;
+                    bag.addEntry(
+                        key as keyof typeof stats,
+                        weighted ? evolution.stats[key as keyof typeof evolution.stats] : 1
+                    );
                 }
-                return acc;
-            }, [] as MovePTR2e['_source'][]);
+
+                for (let i = 0; i < points; i++) {
+                    stats[bag.get()]++;
+                }
+                return stats;
+            };
+
+            const weightedStats = calculateStats(508 - randomPoints, true);
+            const randomStats = calculateStats(randomPoints, false);
+
+            return Object.keys(evolution.stats).reduce(
+                (acc, key) => {
+                    const stat = key as keyof typeof evolution.stats;
+                    acc[stat] = { evs: weightedStats[stat] + randomStats[stat] };
+                    return acc;
+                },
+                {} as Record<keyof typeof evolution.stats, { evs: number }>
+            );
         })();
 
+        progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix")+game.i18n.localize("PTR2E.PokemonGeneration.Progress.Step3"));
 
-        const abilities: AbilityPTR2e['_source'][] = await (async () => {
+        const moves: MovePTR2e["_source"][] = await (async () => {
+            const levelUpMoves = species.moves.levelUp.filter((move) => move.level <= level);
+
+            const moveItems = await Promise.all(
+                levelUpMoves.map(async (move) => fromUuid(move.uuid))
+            );
+            return moveItems.reduce(
+                (acc, move, index) => {
+                    if (move && move instanceof ItemPTR2e) {
+                        const moveData = move.toObject();
+                        if (index < 6) {
+                            const actions = moveData.system.actions as AttackPTR2e["_source"][];
+                            if (actions.length) {
+                                actions[0].slot = index;
+                            }
+                        }
+                        acc.push(moveData);
+                    }
+                    return acc;
+                },
+                [] as MovePTR2e["_source"][]
+            );
+        })();
+
+        progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix")+game.i18n.localize("PTR2E.PokemonGeneration.Progress.Step4"));
+
+        const abilities: AbilityPTR2e["_source"][] = await (async () => {
             const sets = [species.abilities.starting];
-            if(level >= 20) sets.push(species.abilities.basic);
-            if(level >= 50) sets.push(species.abilities.advanced);
-            if(level >= 80) sets.push(species.abilities.master);
+            if (level >= 20) sets.push(species.abilities.basic);
+            if (level >= 50) sets.push(species.abilities.advanced);
+            if (level >= 80) sets.push(species.abilities.master);
 
             // TODO: Remove this once we have implemented Ability UUIDs
-            if(PokemonActorSystem.abilitiesMap === null) {
-                const coreAbilities = await game.packs.get("ptr2e.core-abilities")!.getDocuments() as AbilityPTR2e[];
-                PokemonActorSystem.abilitiesMap = new Map(coreAbilities.map((ability) => [ability.slug, ability]));
+            if (PokemonActorSystem.abilitiesMap === null) {
+                const coreAbilities = (await game.packs
+                    .get("ptr2e.core-abilities")!
+                    .getDocuments()) as AbilityPTR2e[];
+                PokemonActorSystem.abilitiesMap = new Map(
+                    coreAbilities.map((ability) => [ability.slug, ability])
+                );
             }
 
-            const abilityItems = await Promise.all(sets.map((set) => {
-                // Pick one random ability from this set
-                const ability = set[Math.floor(Math.random() * set.length)];
-                // TODO: Implement Ability UUIDs   
-                return PokemonActorSystem.abilitiesMap!.get(ability);
-            }))
+            const abilityItems = await Promise.all(
+                sets.map((set) => {
+                    // Pick one random ability from this set
+                    const ability = set[Math.floor(Math.random() * set.length)];
+                    // TODO: Implement Ability UUIDs
+                    return PokemonActorSystem.abilitiesMap!.get(ability);
+                })
+            );
 
-            return abilityItems.reduce((acc, ability) => {
-                if(ability && ability instanceof ItemPTR2e) acc.push(ability.toObject());
-                return acc;
-            }, [] as AbilityPTR2e['_source'][]);
+            return abilityItems.reduce(
+                (acc, ability) => {
+                    if (ability && ability instanceof ItemPTR2e) acc.push(ability.toObject());
+                    return acc;
+                },
+                [] as AbilityPTR2e["_source"][]
+            );
         })();
 
         const items = (() => {
             const items = this.parent.items.map((item) => item.toObject());
-            if(moves.length) items.push(...moves);
-            if(abilities.length) items.push(...abilities);
+            if (moves.length) items.push(...moves);
+            if (abilities.length) items.push(...abilities);
             return items;
         })();
 
+        progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix")+game.i18n.localize("PTR2E.PokemonGeneration.Progress.Step5"));
+
         const img = await (async () => {
             const config = game.ptr.data.artMap.get(evolution.slug || sluggify(this.parent.name));
-            if(!config) return 'icons/svg/mystery-man.svg';
-            const resolver = await ImageResolver.createFromSpeciesData({
-                dexId: evolution.number,
-                shiny,
-                forms: evolution.form ? [evolution.form] : []
-            }, config)
-            return resolver?.result || 'icons/svg/mystery-man.svg';
+            if (!config) return "icons/svg/mystery-man.svg";
+            const resolver = await ImageResolver.createFromSpeciesData(
+                {
+                    dexId: evolution.number,
+                    shiny,
+                    forms: evolution.form ? [evolution.form] : [],
+                },
+                config
+            );
+            return resolver?.result || "icons/svg/mystery-man.svg";
         })();
         //TODO: Decouple this.
         const tokenImage = img;
@@ -241,6 +336,8 @@ class PokemonActorSystem extends ActorSystemPTR2e {
                 { inplace: false }
             ),
         });
+
+        progress.close(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix")+game.i18n.localize("PTR2E.PokemonGeneration.Progress.Complete"));
     }
 }
 
