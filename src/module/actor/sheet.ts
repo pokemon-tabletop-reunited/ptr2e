@@ -451,6 +451,46 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             SkillsComponent.attachListeners(htmlElement, this.actor);
         }
 
+        if(partId === "inventory") {
+            for (const element of htmlQueryAll(htmlElement, ".tab[data-tab='inventory'] .item-controls a[data-action=edit-item]")) {
+                element.addEventListener("click", async (event) => {
+                    const itemId = (
+                        (event.currentTarget as HTMLElement)?.closest("[data-item-id]") as HTMLElement
+                    )?.dataset.itemId;
+                    if (!itemId) return;
+                    return (
+                        this.document.items.get(itemId) as ItemPTR2e
+                    )?.sheet?.render(true);
+                });
+            }
+    
+            for (const element of htmlQueryAll(htmlElement, ".tab[data-tab='inventory'] .item-controls a[data-action=delete-item]")) {
+                element.addEventListener("click", async (event) => {
+                    const itemId = (
+                        (event.currentTarget as HTMLElement)?.closest("[data-item-id]") as HTMLElement
+                    )?.dataset.itemId;
+                    const item = this.document.items.get(itemId!);
+                    if (!item) return;
+    
+                    // Confirm the deletion unless the user is holding Shift
+                    return event.shiftKey ? item.delete() : foundry.applications.api.DialogV2.confirm({
+                        yes: {
+                            callback: () => item.delete(),
+                        },
+                        content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", {
+                            name: item.name,
+                        }),
+                        window: {
+                            title: game.i18n.format("PTR2E.Dialog.DeleteDocumentTitle", {
+                                name: item.name,
+                            }),
+                        },
+                    });
+                });
+            }
+        
+        }
+
         if (partId === "perks") {
             PerksComponent.attachListeners(htmlElement, this.actor);
             AbilitiesComponent.attachListeners(htmlElement, this.actor);
