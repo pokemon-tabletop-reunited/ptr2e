@@ -3419,13 +3419,13 @@ body.theme-light .application textarea:read-only {
   color: var(--appv2-text-color);
   margin: 0 15px 10px 0;
   pointer-events: all;
-  border-radius: 0 8px 8px 0;
+  border-radius: 8px 8px 8px 0;
   border: 1px solid var(--border-theme-color);
-  border-left: unset;
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
   width: 135px;
+  z-index: 71;
 }
 .token-panel:has(template[data-application-part="info"]) {
   display: none !important;
@@ -3626,6 +3626,9 @@ body.theme-light .application textarea:read-only {
 }
 .token-panel .tab.effect-tab .effect:last-child {
   border-radius: 0 0 8px 8px;
+}
+.token-panel section.token-info .icon img {
+  border-radius: 8px 0 0 0;
 }
 .token-panel section.token-info,
 .token-panel section.party {

@@ -1,6 +1,6 @@
 <section class="tab sheet-body {{tabs.attack-slots.cssClass}} action-tab" data-tab="attack-slots" data-group="sheet" {{#if actor}}data-parent="{{actor.uuid}}"{{/if}}>
     {{#each actions.slots as |attack|}}
-        <div class="attack-item attack" data-tooltip-direction="LEFT" data-action="{{attack.slug}}" data-tooltip="{{attack.name}}">
+        <div class="attack-item attack action" data-tooltip-direction="LEFT" data-action="{{attack.slug}}" data-tooltip="{{attack.name}}">
             {{#if attack.name}}
                 <div class="icon rollable">
                     <img src="{{attack.img}}" alt="{{attack.name}}">

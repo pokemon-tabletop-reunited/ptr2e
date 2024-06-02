@@ -1,6 +1,6 @@
 <section class="tab sheet-body {{tabs.passives.cssClass}} action-tab" data-tab="passives" data-group="sheet" {{#if actor}}data-parent="{{actor.uuid}}"{{/if}}>
     {{#each actions.passive as |action|}}
-        <div class="action-item generic" data-tooltip-direction="LEFT" data-action="{{action.slug}}" data-tooltip="{{action.name}}">
+        <div class="action-item generic action" data-tooltip-direction="LEFT" data-action="{{action.slug}}" data-tooltip="{{action.name}}">
             <div class="icon">
                 <img src="{{action.img}}" alt="{{action.name}}">
             </div>

@@ -1,6 +1,6 @@
 <section class="tab sheet-body {{tabs.generic.cssClass}} action-tab" data-tab="generic" data-group="sheet" {{#if actor}}data-parent="{{actor.uuid}}"{{/if}}>
     {{#each actions.generic as |action|}}
-        <div class="action-item generic" data-tooltip-direction="LEFT" data-action="{{action.slug}}" data-tooltip="{{action.name}}">
+        <div class="action-item generic action" data-tooltip-direction="LEFT" data-action="{{action.slug}}" data-tooltip="{{action.name}}">
             <div class="icon{{#if action.rollable}} rollable{{/if}}">
                 <img src="{{action.img}}" alt="{{action.name}}">
                 <img class="dice" src="/icons/svg/d20.svg" data-tooltip="Roll {{action.name}}">
