@@ -6,7 +6,7 @@ import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { ChangeModel, ClockDatabase, SkillsCollection, TraitsCollection } from "@data";
+import { ArtMapCollection, ChangeModel, ClockDatabase, SkillsCollection, TraitsCollection } from "@data";
 import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import { PTRCONFIG } from "@scripts/config/index.ts";
 import { ImageResolver, sluggify } from "@utils";
@@ -35,6 +35,7 @@ interface GamePTR2e
         data: {
             traits: TraitsCollection;
             skills: SkillsCollection;
+            artMap: ArtMapCollection;
         };
         perks: PerkManager;
         tooltips: TooltipsPTR2e;

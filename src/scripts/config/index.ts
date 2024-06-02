@@ -11,7 +11,6 @@ import { BasicChangeSystem, ChangeModel } from "@data";
 import { ActiveEffectPTR2e } from "@module/effects/index.ts";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem, SkillMessageSystem } from "@module/chat/index.ts";
 import Traits from "static/traits.json";
-import ArtMap from "static/artmap.json";
 import ItemDirectoryPTR2e from "@item/sidebar.ts";
 import { StatusEffects } from "./effects.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -25,8 +24,6 @@ import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { default as Skills } from "./skills.ts";
 import { CheckRoll } from "@system/rolls/check-roll.ts";
 import { AttackRoll } from "@system/rolls/attack-roll.ts";
-import { SpeciesSystemModel } from "@item/data/index.ts";
-import { SpeciesImageData } from "@utils";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -141,7 +138,6 @@ export const PTRCONFIG = {
     data: {
         traits: Traits,
         skills: Skills,
-        speciesArtMap: ArtMap as Record<SpeciesSystemModel["slug"], SpeciesImageData>
     },
     statusEffects: StatusEffects,
     specialStatusEffects: {

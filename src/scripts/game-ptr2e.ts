@@ -1,7 +1,7 @@
 import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import { ImageResolver, sluggify } from "@utils";
-import { ClockDatabase, SkillsCollection, TraitsCollection } from "@data";
+import { ArtMapCollection, ClockDatabase, SkillsCollection, TraitsCollection } from "@data";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import { Pokedex } from "pokeapi-js-wrapper";
 import { UUIDUtils } from "src/util/uuid.ts";
@@ -21,7 +21,8 @@ const GamePTR = {
             },
             data: {
                 traits: TraitsCollection.create(),
-                skills: SkillsCollection.create()
+                skills: SkillsCollection.create(),
+                artMap: ArtMapCollection.create()
             },
             perks: new PerkManager(),
             tooltips: new TooltipsPTR2e(),
@@ -53,6 +54,9 @@ const GamePTR = {
         game.ptr.clocks.panel.render(true);
         game.ptr.tokenPanel.render(true);
         game.ptr.tokenPanel.token = game.user.character?.getActiveTokens().at(0) as TokenPTR2e | null;
+
+        // Initialize the art map collection.
+        game.ptr.data.artMap.refresh();
     },
 };
 

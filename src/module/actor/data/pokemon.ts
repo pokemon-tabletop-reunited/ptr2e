@@ -192,7 +192,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
         })();
 
         const img = await (async () => {
-            const config = CONFIG.PTR.data.speciesArtMap[evolution.slug || sluggify(this.parent.name)];
+            const config = game.ptr.data.artMap.get(evolution.slug || sluggify(this.parent.name));
             if(!config) return 'icons/svg/mystery-man.svg';
             const resolver = await ImageResolver.createFromSpeciesData({
                 dexId: evolution.number,

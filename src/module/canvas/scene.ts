@@ -14,7 +14,8 @@ export class ScenePTR2e extends Scene {
 
     static #getGrid(scene: Scene): BaseGrid | null {
         const grid = scene.grid;
-        if ( grid instanceof BaseGrid ) return grid;
+        //@ts-expect-error
+        if ( grid instanceof foundry.grid.GridlessGrid ) return grid;
 
         const T = CONST.GRID_TYPES;
         const type = grid.type;
