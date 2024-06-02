@@ -36,6 +36,7 @@ interface GamePTR2e
             traits: TraitsCollection;
             skills: SkillsCollection;
             artMap: ArtMapCollection;
+            afflictions: Map<string, StatusEffect>;
         };
         perks: PerkManager;
         tooltips: TooltipsPTR2e;

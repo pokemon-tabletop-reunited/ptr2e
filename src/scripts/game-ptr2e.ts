@@ -8,6 +8,7 @@ import { UUIDUtils } from "src/util/uuid.ts";
 import TokenPanel from "@module/apps/token-panel.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import PerkWeb from "@module/canvas/perk-tree/perk-web.ts";
+import {TextEnricher} from "./ui/text-enrichers.ts";
 
 const GamePTR = {
     onInit() {
@@ -22,7 +23,8 @@ const GamePTR = {
             data: {
                 traits: TraitsCollection.create(),
                 skills: SkillsCollection.create(),
-                artMap: ArtMapCollection.create()
+                artMap: ArtMapCollection.create(),
+                afflictions: new Map(CONFIG.statusEffects.map(se => [se.id, se]))
             },
             perks: new PerkManager(),
             tooltips: new TooltipsPTR2e(),
@@ -32,6 +34,12 @@ const GamePTR = {
             },
             tokenPanel: new TokenPanel(null, { id: "ptr2e-token-panel" })
         };
+
+        // Add reference for 'fainted' to the 'dead' condition
+        initData.data.afflictions.set("fainted", initData.data.afflictions.get("dead")!);
+
+        // Initialize the text enricher
+        TextEnricher.init();
 
         const top = document.querySelector("#ui-top") as HTMLElement;
         if (top) {

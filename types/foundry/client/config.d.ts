@@ -554,10 +554,7 @@ declare global {
 
         /** Custom enrichers for TextEditor.enrichHTML */
         TextEditor: {
-            enrichers: {
-                pattern: RegExp;
-                enricher: (match: RegExpMatchArray, options: EnrichmentOptions) => Promise<HTMLElement | null>;
-            }[];
+            enrichers: TextEditorEnricherConfig[];
         };
 
         /* -------------------------------------------- */
@@ -638,4 +635,11 @@ declare global {
          */
         urls: string[];
     }
+
+    type TextEditorEnricherConfig = {
+        pattern: RegExp;
+        enricher: TextEditorEnricher;
+    }
+
+    type TextEditorEnricher = (match: RegExpMatchArray, options: EnrichmentOptions) => Promise<HTMLElement | null>;
 }

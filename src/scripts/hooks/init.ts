@@ -6,6 +6,7 @@ import { PTRHook } from "./data.ts";
 import ActorSheetPTRV2 from "@actor/sheetv2.ts";
 import { HTMLStringTagsElementPTR2e } from "@module/apps/string-tags.ts";
 import { initializeSettings } from "@scripts/settings.ts";
+import { default as enrichers} from "@scripts/ui/text-enrichers.ts";
 
 export const Init: PTRHook = {
     listen() {
@@ -95,6 +96,8 @@ export const Init: PTRHook = {
             initializeSettings();
 
             window.customElements.define(HTMLStringTagsElementPTR2e.tagName, HTMLStringTagsElementPTR2e);
+
+            CONFIG.TextEditor.enrichers.push(...enrichers);
 
             // Register handlebars helpers
             registerHandlebarsHelpers();

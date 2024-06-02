@@ -1,3 +1,5 @@
+import { htmlQueryAll } from "@utils";
+
 export type DocumentSheetConfiguration<TDocument extends foundry.abstract.Document> =
     foundry.applications.api.HandlebarsDocumentSheetConfiguration<TDocument>;
 export class DocumentSheetV2<TDocument extends foundry.abstract.Document> extends foundry
@@ -19,20 +21,29 @@ export class DocumentSheetV2<TDocument extends foundry.abstract.Document> extend
         if (closeOnSubmit) await this.close();
     }
 
-    // override _attachFrameListeners(): void {
-    //     super._attachFrameListeners();
-    //     const button = this.element.querySelector<HTMLButtonElement>(".header-control[data-action=copyId]");
-    //     if (button) {
-    //         button.addEventListener("contextmenu", async () => {
-    //             //@ts-ignore
-    //             const uuid = this.document.uuid;
-    //             //@ts-ignore
-    //             const label = game.i18n.localize(this.document.constructor.metadata.label);
-    //             game.clipboard.copyPlainText(uuid);
-    //             ui.notifications.info(game.i18n.format("DOCUMENT.IdCopiedClipboard", {label, type: "uuid", id: uuid}));
-    //         });
-    //     }
-    // }
+    override get isEditable(): boolean {
+        if(this.document instanceof ActiveEffect && !this.document.parent) return false;
+        return super.isEditable;
+    }
+
+    override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsDocumentSheetConfiguration): void {
+        super._onRender(context, options);
+        if (!this.isEditable) {
+            const content = this.element.querySelector('.window-content');
+            if (!content) return;
+
+            for(const input of ["INPUT", "SELECT", "TEXTAREA", "BUTTON"]) {
+                for(const element of content.getElementsByTagName(input)) {
+                    if(input === "TEXTAREA") (element as HTMLTextAreaElement).readOnly = true;
+                    else (element as HTMLInputElement).disabled = true;
+                }
+            }
+            for(const element of htmlQueryAll(content, ".item-controls a")) {
+                (element as HTMLButtonElement).disabled = true;
+                element.attributes.setNamedItem(document.createAttribute("disabled"));
+            }
+        }
+    }
 }
 
 export type Tab = {

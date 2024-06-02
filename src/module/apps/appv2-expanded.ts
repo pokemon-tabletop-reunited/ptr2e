@@ -248,6 +248,8 @@ export class ActorSheetV2Expanded<
 
         // Handle different data types
         switch (data.type) {
+            case "Affliction":
+                return this._onDropAffliction(event, data);
             case "ActiveEffect":
                 return this._onDropActiveEffect(event, data);
             case "Actor":
@@ -259,6 +261,20 @@ export class ActorSheetV2Expanded<
         }
         return;
     }
+
+    async _onDropAffliction(_event: DragEvent, data: object) {
+        if(!('id' in data && typeof data.id === 'string')) return false;
+
+        const affliction = game.ptr.data.afflictions.get(data.id);
+        if (!affliction) return false;
+
+        const effect = await ActiveEffectPTR2e.fromStatusEffect(affliction.id) as ActiveEffectPTR2e;
+        if(!effect) return false;
+
+        return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.actor });
+    }
+
+    /* -------------------------------------------- */
 
     /**
      * Handle the dropping of ActiveEffect data onto an Actor Sheet
