@@ -3,7 +3,6 @@ import { PTRCONFIG } from "@scripts/config/index.ts";
 import { GamePTR } from "@scripts/game-ptr2e.ts";
 import { HandlebarTemplates, registerHandlebarsHelpers } from "@utils";
 import { PTRHook } from "./data.ts";
-import ActorSheetPTRV2 from "@actor/sheetv2.ts";
 import { HTMLStringTagsElementPTR2e } from "@module/apps/string-tags.ts";
 import { initializeSettings } from "@scripts/settings.ts";
 import { default as enrichers} from "@scripts/ui/text-enrichers.ts";
@@ -73,9 +72,8 @@ export const Init: PTRHook = {
             // Register custom sheets
             {
                 Actors.unregisterSheet("core", ActorSheet);
-                Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: false })
                 //@ts-ignore
-                Actors.registerSheet("ptr2e", ActorSheetPTRV2, { types: ["humanoid", "pokemon"], makeDefault: true })
+                Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: true })
                 //@ts-ignore
                 Actors.registerSheet("ptr2e", PTRCONFIG.Actor.sheetClasses["ptu-actor"], { types: ["ptu-actor"], makeDefault: true })
 

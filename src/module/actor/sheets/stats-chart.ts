@@ -1,5 +1,5 @@
 import { ActorPTR2e } from "@actor";
-import { ActorSheetPTR2e } from "@actor/sheet.ts";
+import { ActorSheetPTR2e } from "@actor";
 import { CenterLabelsPlugin } from "@scripts/chart-plugins.ts";
 import { Chart, ChartOptions } from "chart.js/auto";
 import { _longestText, _normalizeAngle } from "chart.js/helpers";
@@ -21,11 +21,7 @@ export class StatsChart {
     }
 
     get canvas(): HTMLCanvasElement {
-        return (
-            (this.sheet instanceof foundry.applications.api.ApplicationV2)
-                ? this.sheet.element
-                : this.sheet.element[0]
-        ).querySelector(`canvas.${this.cssclass}${this.id ? `#${this.id}` : ""}`) as HTMLCanvasElement
+        return this.sheet.element.querySelector(`canvas.${this.cssclass}${this.id ? `#${this.id}` : ""}`) as HTMLCanvasElement
     }
 
     static get defaultOptions() {

@@ -6,7 +6,7 @@ export type {PTUActor};
 export {default as ActorPTR2e} from "./base.ts";
 
 // Sheets
-export * from "./sheet.ts";
+export {default as ActorSheetPTR2e} from "./sheet.ts";
 
 // Systems
 export * from "./data/index.ts";

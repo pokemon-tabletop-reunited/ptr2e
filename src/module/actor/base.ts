@@ -1,6 +1,5 @@
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import {
-    ActorSheetPTR2e,
     ActorSynthetics,
     ActorSystemPTR2e,
     Attribute,
@@ -983,8 +982,6 @@ interface ActorPTR2e<
     TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
 > extends Actor<TParent, TSystem> {
     get folder(): FolderPTR2e<ActorPTR2e<TSystem, null>> | null;
-
-    sheet: ActorSheetPTR2e;
 
     _party: ActorParty | null;
 

@@ -1,11 +1,6 @@
 export class HandlebarTemplates {
     static templates = Object.freeze({
-        "stats-chart": "systems/ptr2e/templates/partials/actor/stats-chart.hbs",
-        "actor-movement": "systems/ptr2e/templates/partials/actor/movement.hbs",
-        "actor-gear": "systems/ptr2e/templates/partials/actor/gear.hbs",
-        "actor-abilities": "systems/ptr2e/templates/partials/actor/abilities.hbs",
-        "actor-skills": "systems/ptr2e/templates/partials/actor/skills.hbs",
-        "actor-actions": "systems/ptr2e/templates/partials/actor/actions.hbs",
+        "stats-chart": "systems/ptr2e/templates/partials/stats-chart.hbs",
         "attack-embed": "systems/ptr2e/templates/partials/attack-embed.hbs",
         "effect-traits": "systems/ptr2e/templates/partials/effect-traits.hbs",
         "trait-partial": "systems/ptr2e/templates/partials/trait.hbs",
