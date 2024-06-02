@@ -42,9 +42,9 @@ class SpeciesDropSheetV2 extends foundry.applications.api.HandlebarsApplicationM
         this: SpeciesDropSheetV2,
         _event: SubmitEvent | Event,
         _form: HTMLFormElement,
-        formData: FormDataExtended
+        _formData: FormDataExtended
     ) {
-        this.promise(formData.object.species);
+        this.promise(this.species);
     }
 
     promise: (value: unknown) => unknown;

@@ -23,6 +23,7 @@ import { PerksComponent } from "./components/perks-component.ts";
 import { AbilitiesComponent } from "./components/abilities-component.ts";
 import { StatsChart } from "./sheets/stats-chart.ts";
 import StatsForm from "./sheets/stats-form.ts";
+import { ActiveEffectPTR2e } from "@effects";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     ActorSheetV2Expanded
@@ -59,7 +60,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             dragDrop: [
                 {
                     dropSelector: ".window-content",
-                },
+                    dragSelector: "fieldset .item, fieldset .effect, fieldset .action",
+                }
             ],
             actions: {
                 "species-header": async function (this: ActorSheetPTRV2, event: Event) {
@@ -82,7 +84,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                     });
                     sheet.species = new CONFIG.Item.documentClass({
                         _id: "actorSpeciesItem",
-                        name: this.document.hasEmbeddedSpecies()
+                        name: species.slug
                             ? Handlebars.helpers.formatSlug(species.slug)
                             : this.actor.name,
                         type: "species",
@@ -341,6 +343,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                         inventory[category].push(item);
                     }
                 }
+                for(const key of Object.keys(inventory)) {
+                    inventory[key].sort((a, b) => a.sort - b.sort);
+                }
                 return inventory;
             })();
             context.inventory = inventory;
@@ -377,8 +382,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             context.traits = traits;
 
             const { perk: perks, ability: abilities } = this.actor.itemTypes;
-            context.perks = perks;
-            context.abilities = abilities;
+            context.perks = perks.sort((a, b) => a.sort - b.sort);
+            context.abilities = abilities.sort((a, b) => a.sort - b.sort);
         }
 
         return context;
@@ -399,6 +404,16 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             div.dataset.tooltip = ActorComponents[component as ActorComponentKey].TOOLTIP;
             div.innerHTML = `<i class="fas fa-external-link-alt"></i>`;
             div.addEventListener("click", this._onPopout.bind(this));
+            element.appendChild(div);
+        }
+
+        for (const element of htmlQueryAll(htmlElement, ".can-add")) {
+            const div = document.createElement("div");
+            div.classList.add("add-control");
+            div.dataset.type = element.dataset.type;
+            div.dataset.tooltip = game.i18n.localize("Add");
+            div.innerHTML = `<i class="fas fa-plus"></i>`;
+            div.addEventListener("click", this._onCreate.bind(this));
             element.appendChild(div);
         }
 
@@ -519,6 +534,24 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         return super.close(options) as Promise<this>;
     }
 
+    override _onDragStart(event: DragEvent) {
+        const target = event.currentTarget as HTMLElement;
+        if(!target.classList.contains("attack")) return super._onDragStart(event);
+
+        const actionSlug = target.dataset.slug;
+        if(!actionSlug) return;
+
+        const action = this.document.actions.attack.get(actionSlug);
+        if(!action) return;
+
+        // Create drag data
+        const dragData = action.toDragData();
+        if(!dragData) return;
+    
+        // Set data transfer
+        event.dataTransfer!.setData("text/plain", JSON.stringify(dragData));
+    }
+
     override _onDrop(event: DragEvent) {
         const data: {
             type: string;
@@ -636,6 +669,23 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         skills[index].hidden = !skills[index].hidden;
         if (skills[index].hidden && skills[index].favourite) skills[index].favourite = false;
         this.actor.update({ "system.skills": skills });
+    }
+
+    protected async _onCreate(event: Event) {
+        const type = (event.currentTarget as HTMLElement).dataset.type;
+        if (!type) return;
+
+        switch(type) {
+            case "effect": {
+                return ActiveEffectPTR2e.createDialog({}, {parent: this.document});
+            }
+            default: {
+                const itemType = Item.TYPES.includes(type) ? type : null;
+                if (!itemType) return;
+
+                return ItemPTR2e.createDialog({}, {parent: this.document, types: [itemType]})
+            }
+        }
     }
 }
 

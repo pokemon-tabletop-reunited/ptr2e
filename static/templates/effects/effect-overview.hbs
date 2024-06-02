@@ -3,7 +3,7 @@
         {{formField fields.tint value=data.tint localize=true}}
         
         {{#if hasDescription}}
-            {{formField fields.description value=data.description localize=true toggled=true}}
+            {{formField fields.description enriched=descriptionHTML value=source.description localize=true toggled=true}}
         {{/if}}
 
         {{formField fields.disabled value=data.disabled localize=true}}

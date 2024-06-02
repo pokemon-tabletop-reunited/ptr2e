@@ -92,7 +92,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     }
 
     get rollable(): boolean {
-        return this.accuracy !== null && this.power !== null;
+        return this.accuracy !== null || this.power !== null;
     }
 
     async roll(args?: AttackStatisticRollParameters) {
@@ -125,7 +125,7 @@ export default class AttackPTR2e extends ActionPTR2e {
         if(distance === null || !this.range || !["ally", "enemy", "creature", "object"].includes(this.range.target)) return null;
 
         // TODO: Implement Reach
-        if(this.range.distance === 0) return distance > 1 ? Infinity : 0;
+        if(this.range.distance === 0) return distance >= 2 ? Infinity : 0;
         const increment = this.range.distance;
         return Math.max(Math.ceil(distance / increment), 1) - 1;
     }

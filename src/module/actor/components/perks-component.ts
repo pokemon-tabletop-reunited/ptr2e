@@ -21,7 +21,7 @@ class PerksComponent extends ActorComponent {
             element.addEventListener("click", async (event) => {
                 const itemId = (
                     (event.currentTarget as HTMLElement)?.closest(".item") as HTMLElement
-                )?.dataset.id;
+                )?.dataset.itemId;
                 if (!itemId) return;
                 return (
                     actor.items.get(itemId) as PerkPTR2e
@@ -33,7 +33,7 @@ class PerksComponent extends ActorComponent {
             element.addEventListener("click", async (event) => {
                 const itemId = (
                     (event.currentTarget as HTMLElement)?.closest(".item") as HTMLElement
-                )?.dataset.id;
+                )?.dataset.itemId;
                 if (!itemId) return;
                 return (
                     actor.items.get(itemId) as PerkPTR2e
@@ -45,7 +45,7 @@ class PerksComponent extends ActorComponent {
             element.addEventListener("click", async (event) => {
                 const itemId = (
                     (event.currentTarget as HTMLElement)?.closest(".item") as HTMLElement
-                )?.dataset.id;
+                )?.dataset.itemId;
                 const item = actor.items.get(itemId!);
                 if (!item) return;
 

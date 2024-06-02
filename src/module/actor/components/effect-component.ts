@@ -21,7 +21,7 @@ class EffectComponent extends ActorComponent {
             element.addEventListener("click", async (event) => {
                 const effectId = (
                     (event.currentTarget as HTMLElement)?.closest(".effect") as HTMLElement
-                )?.dataset.id;
+                )?.dataset.effectId;
                 if (!effectId) return;
                 return (
                     actor.effects.get(effectId) as ActiveEffectPTR2e<ActorPTR2e>
@@ -33,7 +33,7 @@ class EffectComponent extends ActorComponent {
             element.addEventListener("click", async (event) => {
                 const effectId = (
                     (event.currentTarget as HTMLElement)?.closest(".effect") as HTMLElement
-                )?.dataset.id;
+                )?.dataset.effectId;
                 if (!effectId) return;
                 return (
                     actor.effects.get(effectId) as ActiveEffectPTR2e<ActorPTR2e>
@@ -45,7 +45,7 @@ class EffectComponent extends ActorComponent {
             element.addEventListener("click", async (event) => {
                 const effectId = (
                     (event.currentTarget as HTMLElement)?.closest(".effect") as HTMLElement
-                )?.dataset.id;
+                )?.dataset.effectId;
                 const effect = actor.effects.get(effectId!);
                 if (!effect) return;
 

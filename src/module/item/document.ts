@@ -175,6 +175,7 @@ class ItemPTR2e<
             parent?: TDocument["parent"];
             pack?: Collection<TDocument> | null;
             perksOnly?: boolean;
+            types?: string[];
         } & Partial<FormApplicationOptions>,
     ): Promise<TDocument | null>{
         let {parent, pack, ...options} = context;
