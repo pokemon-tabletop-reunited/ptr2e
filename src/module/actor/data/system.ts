@@ -15,6 +15,7 @@ import { SpeciesSystemModel } from "@item/data/index.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
+import natures from "@scripts/config/natures.ts";
 
 class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
     static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -180,6 +181,21 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 nullable: true,
                 initial: null,
             }),
+            shiny: new fields.BooleanField({ required: true, initial: false }),
+            nature: new fields.StringField({
+                required: true,
+                choices: Object.keys(natures).reduce<Record<keyof typeof natures, string>>((acc, key) => ({ ...acc, [key]: key }), {} as Record<keyof typeof natures, string>),
+                initial: "hardy",
+            }),
+            gender: new fields.StringField({
+                required: true,
+                choices: {
+                    "genderless": "genderless",
+                    "male": "male",
+                    "female": "female"
+                },
+                initial: "genderless" as "genderless" | "male" | "female",
+            }),
             slots: new fields.NumberField({
                 required: true,
                 initial: 6,
@@ -209,10 +225,18 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         this._initializeModifiers();
         this._prepareSpeciesData();
 
-        this.advancement.level = Math.floor(Math.cbrt(this.advancement.experience.current || 1));
-        this.advancement.experience.next = Math.pow(Math.min(this.advancement.level + 1, 100), 3);
-        this.advancement.experience.diff =
-            this.advancement.experience.next - this.advancement.experience.current;
+        if(this.parent.isHumanoid()) {
+            this.advancement.level = Math.floor(Math.cbrt(((this.advancement.experience.current || 1) * 4) / 5));
+            this.advancement.experience.next = (5 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 4
+            this.advancement.experience.diff =
+                this.advancement.experience.next - this.advancement.experience.current;
+        }
+        else {
+            this.advancement.level = Math.floor(Math.cbrt(((this.advancement.experience.current || 1) * 6) / 3));
+            this.advancement.experience.next = (3 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 6
+            this.advancement.experience.diff =
+                this.advancement.experience.next - this.advancement.experience.current;
+        }
 
         //TODO: Change humanoid to ACE trait exclusively
         const isAce = this.parent.isHumanoid() || this.traits.has("ace");

@@ -8,5 +8,6 @@ export type * from "./constants.ts"
 
 export { default as TraitsCollection } from "./traits-collection.ts"
 export { default as SkillsCollection } from "./skills-collection.ts"
+export { default as ArtMapCollection } from "./art-map-collection.ts"
 
 export { default as RollOptionManager } from "./roll-option-manager.ts"

@@ -563,6 +563,8 @@ interface SpeciesSystemSource extends Omit<ItemSystemSource, "container" | "acti
         secondary: { type: string; value: number }[];
     };
 
+    genderRatio: number; // 0-8, -1 for genderless
+
     evolutions: EvolutionData;
 
     skills: SkillPTR2e["_source"][];
