@@ -1141,6 +1141,7 @@ content.attack-embed {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 content.attack-embed aside {
   display: flex;
@@ -1191,4 +1192,7 @@ content.attack-embed main section.attack-description {
 }
 content.attack-embed main section.attack-description article {
   min-height: 50px;
+}
+content.attack-embed content.attack-embed.variant {
+  flex: 0 0 100%;
 }

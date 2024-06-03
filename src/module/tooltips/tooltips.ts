@@ -300,7 +300,7 @@ export default class TooltipsPTR2e {
         this.tooltip.classList.add("attack");
         await this._renderTooltip({
             path: "systems/ptr2e/templates/items/embeds/move.hbs",
-            data: { attack, move: parent, traits },
+            data: { attack, move: parent, attackTraits: traits },
             direction: game.tooltip.element?.dataset.tooltipDirection as
                 | TooltipDirections
                 | undefined,

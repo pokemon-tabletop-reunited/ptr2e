@@ -15,7 +15,7 @@ import FolderPTR2e from "@module/folder/document.ts";
 import { CombatantPTR2e, CombatPTR2e } from "@combat";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
-import { ItemPTR2e, ItemSystemsWithActions, MovePTR2e } from "@item";
+import { ItemPTR2e, ItemSystemsWithActions } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
@@ -203,19 +203,6 @@ class ActorPTR2e<
 
         for (const attack of this.actions.attack) {
             if (attack.free) continue;
-
-            const item = attack.item;
-            if (item.type === "move") {
-                const move = item as MovePTR2e;
-                const primaryAttack = move.system.attack;
-                if (
-                    primaryAttack.slug !== attack.slug &&
-                    primaryAttack.slot !== null &&
-                    this.attacks.actions[primaryAttack.slot]?.slug === primaryAttack.slug
-                ) {
-                    attack.free = true;
-                }
-            }
 
             if (attack.slot === null) {
                 this.attacks.available.push(attack);

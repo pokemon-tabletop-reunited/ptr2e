@@ -19,7 +19,7 @@
                 <span>{{attack.cost.powerPoints}}</span>
                 {{#if attack.cost.trigger}}
                 <label for="cost.trigger">{{localize fields.cost.fields.trigger.label}}</label>
-                <span>{{attack.cost.trigger}}</span>
+                <span data-tooltip="{{attack.cost.trigger}}" style="text-decoration: underline; cursor: help;">Trigger</span>
                 {{/if}}
                 {{#if attack.cost.priority}}
                 <label for="cost.priority">{{localize fields.cost.fields.priority.label}}</label>

@@ -637,8 +637,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         if (!slug) return;
 
         const action = this.actor.actions.get(slug);
-        //TODO: Support sending individual attacks to chat
-        action?.item.toChat();
+        action?.toChat();
     }
 
     static async _onEditAction(this: ActorSheetPTRV2, event: Event) {

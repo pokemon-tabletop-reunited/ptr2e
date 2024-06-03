@@ -22,7 +22,6 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
 			return {
 				...super.defineSchema(),
                 actions: new CollectionField(new fields.TypedSchemaField(ActionModelTypes()), 'slug')
-				// actions: new MappedArrayField('slug', new fields.TypedSchemaField(ActionModelTypes()))
 			};
 		}
 

@@ -229,7 +229,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         const checkContext: CheckRollContext & {contexts: Record<ActorUUID, CheckContext>} = {
             type: "attack-roll",
             identifier: args.identifier ?? `${this.item.slug}.${this.attack.slug}`,
-            action: args.action || this.label || this.attack.name,
+            action: args.action || this.attack.slug,
             title: args.title || this.label || this.attack.name,
             actor: context.self.actor,
             token: context.self.token,

@@ -3,6 +3,7 @@ import { getTypes } from "@scripts/config/effectiveness.ts";
 import { ActionSchema } from "./action.ts";
 import { AttackStatistic } from "@system/statistics/attack.ts";
 import { AttackStatisticRollParameters } from "@system/statistics/statistic.ts";
+import { MovePTR2e } from "@item";
 
 export default class AttackPTR2e extends ActionPTR2e {
     declare type: "attack";
@@ -103,6 +104,10 @@ export default class AttackPTR2e extends ActionPTR2e {
 
     override prepareDerivedData(): void {
         super.prepareDerivedData();
+
+        if(this.item.type === "move" && (this.item as MovePTR2e).system.attack.slug !== this.slug) {
+            this.free = true;
+        }
 
         this.statistic = this.prepareStatistic();
     }

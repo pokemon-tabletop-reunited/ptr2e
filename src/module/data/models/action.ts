@@ -3,14 +3,19 @@ import { ItemPTR2e, ItemSystemsWithActions } from "@item";
 import { PTRCONSTS, ActionType, ActionCost, Delay, Priority, Trait } from "@data";
 import { RangePTR2e } from "@data";
 import { CollectionField } from "../fields/collection-field.ts";
+import { SlugField } from "../fields/slug-field.ts";
 
 class ActionPTR2e extends foundry.abstract.DataModel {
     static TYPE: ActionType = "generic" as const;
 
+    static get baseImg(): ImageFilePath {
+        return "icons/svg/explosion.svg";
+    }
+
     static override defineSchema(): ActionSchema {
         const fields = foundry.data.fields;
         return {
-            slug: new fields.StringField({
+            slug: new SlugField({
                 required: true,
                 label: "PTR2E.FIELDS.slug.label",
                 hint: "PTR2E.FIELDS.slug.hint",
@@ -26,6 +31,11 @@ class ActionPTR2e extends foundry.abstract.DataModel {
                 nullable: true,
                 label: "PTR2E.FIELDS.description.label",
                 hint: "PTR2E.FIELDS.description.hint",
+            }),
+            img: new fields.FilePathField({
+                required: true,
+                categories: ["IMAGE"],
+                initial: () => ActionPTR2e.baseImg,
             }),
             traits: new CollectionField(new fields.StringField({ validate: Trait.isValid }), "slug", {
                 label: "PTR2E.FIELDS.actionTraits.label",
@@ -81,16 +91,8 @@ class ActionPTR2e extends foundry.abstract.DataModel {
                     hint: "PTR2E.FIELDS.priority.hint",
                 }),
             }),
+            variant: new SlugField({ required: false, nullable: true }),
         };
-    }
-
-    get img() {
-        if (this.parent) {
-            if ("img" in this.parent) return this.parent.img as string;
-            if ("parent" in this.parent && this.parent.parent && "img" in this.parent.parent)
-                return this.parent.parent.img as string;
-        }
-        return "icons/svg/explosion.svg";
     }
 
     get actor(): ActorPTR2e | null {
@@ -109,6 +111,11 @@ class ActionPTR2e extends foundry.abstract.DataModel {
         throw new Error("Action is not a child of an item");
     }
 
+    get original(): ActionPTR2e | null {
+        if(!this.variant) return null;
+        return this.item.actions.get(this.variant) ?? null;
+    }
+
     prepareDerivedData() {
         this.traits = this._source.traits.reduce((acc: Collection<Trait>, traitSlug: string) => {
             const trait = game.ptr.data.traits.get(traitSlug);
@@ -117,6 +124,10 @@ class ActionPTR2e extends foundry.abstract.DataModel {
             }
             return acc;
         }, new Collection());
+
+        if(this.img === ActionPTR2e.baseImg && this.item.img !== this.item.constructor.implementation.DEFAULT_ICON) {
+            this.img = this.item.img;
+        }
     }
 
     /**
@@ -149,6 +160,10 @@ class ActionPTR2e extends foundry.abstract.DataModel {
         fu.mergeObject(currentActions[actionIndex], data);
         return currentActions;
     }
+
+    toChat() {
+        return this.item.toChat();
+    }
 }
 interface ActionPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<ActionSchema> {
     _source: SourceFromSchema<ActionSchema>;
@@ -156,9 +171,10 @@ interface ActionPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<A
 }
 
 export type ActionSchema = {
-    slug: foundry.data.fields.StringField<string, string, true>;
+    slug: SlugField<true, false, false>
     name: foundry.data.fields.StringField<string, string, true, false, true>;
     description: foundry.data.fields.HTMLField<string, string, false, true>;
+    img: foundry.data.fields.FilePathField<ImageFilePath, string, true, false, true>;
     traits: CollectionField<foundry.data.fields.StringField>;
     type: foundry.data.fields.StringField<string, ActionType, true, false, true>;
     range: foundry.data.fields.EmbeddedDataField<RangePTR2e, false, true>;
@@ -181,6 +197,7 @@ export type ActionSchema = {
         delay: Delay;
         priority: Priority;  
     }>;
+    variant: SlugField<false>;
 }
 
 export default ActionPTR2e;

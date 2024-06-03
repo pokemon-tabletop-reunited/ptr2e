@@ -2,10 +2,21 @@
     <form class="scroll" id="attack">
         {{#with attack}}
         <fieldset>
+            <legend>Attack</legend>
+            {{formField fields.types value=source.types localize=true}}
+            {{formField fields.category value=source.category localize=true}}
+            {{formField fields.power value=source.power localize=true}}
+            {{formField fields.accuracy value=source.accuracy localize=true}}
+            {{formField fields.free value=free localize=true}}
+        </fieldset>
+        <fieldset>
+            <legend>Effect Description</legend>
+            {{formField fields.description enriched=enrichedDescription value=source.description localize=true}}
+        </fieldset>
+        <fieldset>
             <legend>Range</legend>
             {{formField fields.range.fields.target value=source.range.target localize=true}}
             {{formField fields.range.fields.distance value=source.range.distance localize=true}}
-            {{!-- {{formField fields.range.fields.unit value=source.range.unit localize=true}} --}}
         </fieldset>
         <fieldset>
             <legend>Cost</legend>
@@ -14,13 +25,6 @@
             {{formField fields.cost.fields.trigger value=source.cost.trigger localize=true}}
             {{formField fields.cost.fields.delay value=source.cost.delay localize=true}}
             {{formField fields.cost.fields.priority value=source.cost.priority localize=true}}
-        </fieldset>
-        <fieldset>
-            <legend>Attack</legend>
-            {{formField fields.types value=source.types localize=true}}
-            {{formField fields.category value=source.category localize=true}}
-            {{formField fields.power value=source.power localize=true}}
-            {{formField fields.accuracy value=source.accuracy localize=true}}
         </fieldset>
         {{/with}}
     </form>

@@ -526,6 +526,7 @@ content.attack-embed {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    flex-wrap: wrap;
 
     aside {
         display: flex;
@@ -588,5 +589,9 @@ content.attack-embed {
                 min-height: 50px;
             }
         }
+    }
+
+    content.attack-embed.variant {
+        flex: 0 0 100%;
     }
 }
