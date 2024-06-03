@@ -227,13 +227,13 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
 
         if(this.parent.isHumanoid()) {
             this.advancement.level = Math.floor(Math.cbrt(((this.advancement.experience.current || 1) * 4) / 5));
-            this.advancement.experience.next = (5 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 4
+            this.advancement.experience.next = Math.ceil((5 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 4)
             this.advancement.experience.diff =
                 this.advancement.experience.next - this.advancement.experience.current;
         }
         else {
             this.advancement.level = Math.floor(Math.cbrt(((this.advancement.experience.current || 1) * 6) / 3));
-            this.advancement.experience.next = (3 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 6
+            this.advancement.experience.next = Math.ceil((3 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 6)
             this.advancement.experience.diff =
                 this.advancement.experience.next - this.advancement.experience.current;
         }

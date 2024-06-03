@@ -899,7 +899,7 @@ class ActorPTR2e<
                     await weary.update({"system.stacks": weary.system.stacks + 1});
                 }
 
-                await this.createEmbeddedDocuments("ActiveEffect", effects);
+                await this.createEmbeddedDocuments("ActiveEffect", effects, {keepId: true});
             }
             else if(changed.system.health.value as number > 0 && fainted) {
                 await this.deleteEmbeddedDocuments("ActiveEffect", ["faintedcondition"]);

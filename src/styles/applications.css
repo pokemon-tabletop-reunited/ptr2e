@@ -33,13 +33,18 @@ body .application.sheet .form-group {
 .application .window-header .window-title {
   height: 100%;
 }
-.ptr2e.application .controls-dropdown.expanded {
+.ptr2e.application .controls-dropdown,
+.sheet.application .controls-dropdown {
   background: var(--appv2-background);
   box-shadow: unset;
-  border: 1px solid var(--border-theme-color);
 }
-.ptr2e.application .controls-dropdown.expanded button {
+.ptr2e.application .controls-dropdown button,
+.sheet.application .controls-dropdown button {
   background: none;
+}
+.ptr2e.application .controls-dropdown.expanded,
+.sheet.application .controls-dropdown.expanded {
+  border: 1px solid var(--border-theme-color);
 }
 .application.sheet multi-select .tags,
 .application.sheet string-tags .tags,
@@ -140,6 +145,7 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content aside.sidebar .inputs input {
   width: 80%;
   align-self: center;
+  margin-top: 2px;
 }
 .application.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-current,
 .application.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-current,

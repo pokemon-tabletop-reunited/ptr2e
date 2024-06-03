@@ -39,12 +39,14 @@ body {
     height: 100%;
 }
 
-.ptr2e.application .controls-dropdown.expanded {
+.ptr2e.application .controls-dropdown, .sheet.application .controls-dropdown {
     background: var(--appv2-background);
     box-shadow: unset;
-    border: 1px solid var(--border-theme-color);
     button {
         background: none;
+    }
+    &.expanded {
+        border: 1px solid var(--border-theme-color);
     }
 }
 
@@ -171,6 +173,7 @@ body {
                     input {
                         width: 80%;
                         align-self: center;
+                        margin-top: 2px;
                     }
 
                     .hp-current,

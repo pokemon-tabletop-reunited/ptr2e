@@ -24,10 +24,40 @@ export class ActionEditor<
             window: {
                 minimizable: true,
                 resizable: true,
+                controls: [
+                    {
+                        label: "PTR2E.ItemSheet.SendToChatLabel",
+                        icon: "fas fa-arrow-up-right-from-square",
+                        action: "toChat"
+                    },
+                    {
+                        label: "PTR2E.Actions.OpenItemLabel",
+                        icon: "fas fa-suitcase",
+                        action: "openItem"
+                    },
+                    {
+                        label: "PTR2E.Actions.CreateVariantLabel",
+                        icon: "fas fa-plus",
+                        action: "createVariant"
+                    },
+                    {
+                        label: "PTR2E.Actions.VariantOfLabel",
+                        icon: "fas fa-burst",
+                        action: "openOriginal"
+                    },
+                    {
+                        label: "PTR2E.Actions.DeleteVariantLabel",
+                        icon: "fas fa-trash",
+                        action: "deleteVariant"
+                    }
+                ]
             },
             actions: {
                 toChat: function toChat<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
                     this.document.toChat();
+                },
+                openItem: function openItem<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
+                    this.document.sheet.render(true);
                 },
                 createVariant: async function createVariant<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
                     const actions = this.document.system.toObject().actions;
@@ -123,6 +153,15 @@ export class ActionEditor<
         this.actionSlug = actionSlug;
 
         if(!this.action) throw new Error(`Action ${actionSlug} not found on item ${document.name}`);
+    }
+
+    override _getHeaderControls(): foundry.applications.api.ApplicationHeaderControlsEntry[] {
+        const controls = super._getHeaderControls();
+        for(const control of controls) {
+            if(!['deleteVariant','openOriginal'].includes(control.action)) continue;
+            control.visible = !!this.action.variant
+        }
+        return controls;
     }
 
     override async _prepareContext() {
@@ -239,35 +278,41 @@ export class ActionEditor<
         }
     }
 
-    override async _renderFrame(options: foundry.applications.api.HandlebarsRenderOptions) {
-        const frame = await super._renderFrame(options);
+    // override async _renderFrame(options: foundry.applications.api.HandlebarsRenderOptions) {
+    //     const frame = await super._renderFrame(options);
 
-        // Add send to chat button
-        const toChatLabel = game.i18n.localize("PTR2E.ItemSheet.SendToChatLabel");
-        const toChat = `<button type="button" class="header-control fa-solid fa-arrow-up-right-from-square" data-action="toChat"
-                                data-tooltip="${toChatLabel}" aria-label="${toChatLabel}"></button>`;
-        this.window.controls.insertAdjacentHTML("afterend", toChat);
+    //     // Add send to chat button
+    //     const toChatLabel = game.i18n.localize("PTR2E.ItemSheet.SendToChatLabel");
+    //     const toChat = `<button type="button" class="header-control fa-solid fa-arrow-up-right-from-square" data-action="toChat"
+    //                             data-tooltip="${toChatLabel}" aria-label="${toChatLabel}"></button>`;
+    //     this.window.controls.insertAdjacentHTML("afterend", toChat);
 
-        // Add send to chat button
-        const createVariantLabel = game.i18n.localize("PTR2E.Actions.CreateVariantLabel");
-        const createVariant = `<button type="button" class="header-control fa-solid fa-plus" data-action="createVariant"
-                                data-tooltip="${createVariantLabel}" aria-label="${createVariantLabel}"></button>`;
-        this.window.controls.insertAdjacentHTML("afterend", createVariant);
+    //     // Add send to chat button
+    //     const openItemLabel = game.i18n.localize("PTR2E.Actions.OpenItemLabel");
+    //     const openItem = `<button type="button" class="header-control fa-solid fa-suitcase" data-action="toChat"
+    //                             data-tooltip="${openItemLabel}" aria-label="${openItemLabel}"></button>`;
+    //     this.window.controls.insertAdjacentHTML("afterend", openItem);
 
-        if(this.action.variant) {
-            const variantOfLabel = game.i18n.localize("PTR2E.Actions.VariantOfLabel");
-            const variantOfButton = `<button type="button" class="header-control fa-solid fa-arrow-down-to-square" data-action="openOriginal"
-                                    data-tooltip="${variantOfLabel}" aria-label="${variantOfLabel}"></button>`;
-            this.window.controls.insertAdjacentHTML("afterend", variantOfButton);
+    //     // Add send to chat button
+    //     const createVariantLabel = game.i18n.localize("PTR2E.Actions.CreateVariantLabel");
+    //     const createVariant = `<button type="button" class="header-control fa-solid fa-plus" data-action="createVariant"
+    //                             data-tooltip="${createVariantLabel}" aria-label="${createVariantLabel}"></button>`;
+    //     this.window.controls.insertAdjacentHTML("afterend", createVariant);
 
-            const deleteVariantLabel = game.i18n.localize("PTR2E.Actions.DeleteVariantLabel");
-            const deleteVariantButton = `<button type="button" class="header-control fa-solid fa-trash" data-action="deleteVariant"
-                                    data-tooltip="${deleteVariantLabel}" aria-label="${deleteVariantLabel}"></button>`;
-            this.window.controls.insertAdjacentHTML("afterend", deleteVariantButton);
-        }
+    //     if(this.action.variant) {
+    //         const variantOfLabel = game.i18n.localize("PTR2E.Actions.VariantOfLabel");
+    //         const variantOfButton = `<button type="button" class="header-control fa-solid fa-arrow-down-to-square" data-action="openOriginal"
+    //                                 data-tooltip="${variantOfLabel}" aria-label="${variantOfLabel}"></button>`;
+    //         this.window.controls.insertAdjacentHTML("afterend", variantOfButton);
+
+    //         const deleteVariantLabel = game.i18n.localize("PTR2E.Actions.DeleteVariantLabel");
+    //         const deleteVariantButton = `<button type="button" class="header-control fa-solid fa-trash" data-action="deleteVariant"
+    //                                 data-tooltip="${deleteVariantLabel}" aria-label="${deleteVariantLabel}"></button>`;
+    //         this.window.controls.insertAdjacentHTML("afterend", deleteVariantButton);
+    //     }
         
-        return frame;
-    }
+    //     return frame;
+    // }
 
     protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {
         event.preventDefault();
