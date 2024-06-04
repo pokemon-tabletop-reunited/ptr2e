@@ -1,49 +1,44 @@
 {
-  "name": "Snatch",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/dark_icon.png",
-  "system": {
-    "slug": "snatch",
-    "description": "The triggering attack fails for the target, and the user freely uses the triggering attack, selecting new targets if necessary .",
-    "traits": [
-      "interrupt-4"
-    ],
-    "actions": [
-      {
+    "name": "Snatch",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/dark_icon.png",
+    "system": {
         "slug": "snatch",
-        "name": "Snatch",
-        "type": "attack",
-        "traits": [
-          "interrupt-4"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": "A creature in range uses a Status move"
-        },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "dark"
-        ],
         "description": "The triggering attack fails for the target, and the user freely uses the triggering attack, selecting new targets if necessary .",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "A"
-  },
-  "_id": "8U5CdSY2okR90rh4",
-  "effects": []
+        "traits": [
+            "interrupt-4",
+            "danger-close"
+        ],
+        "actions": [
+            {
+                "slug": "snatch",
+                "name": "Snatch",
+                "type": "attack",
+                "traits": [
+                    "interrupt-4",
+                    "danger-close"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 7,
+                    "trigger": "A creature in range uses a Status move"
+                },
+                "category": "status",
+                "accuracy": 100,
+                "types": [
+                    "dark"
+                ],
+                "description": "The triggering attack fails for the target, and the user freely uses the triggering attack, selecting new targets if necessary .",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "grade": "A"
+    },
+    "_id": "8U5CdSY2okR90rh4",
+    "effects": []
 }
