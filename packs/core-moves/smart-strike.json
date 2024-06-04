@@ -1,55 +1,46 @@
 {
-  "name": "Smart Strike",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/steel_icon.png",
-  "system": {
-    "slug": "smart-strike",
-    "description": "",
-    "traits": [
-      "dash",
-      "contact",
-      "danger-close",
-      "horn"
-    ],
-    "actions": [
-      {
+    "name": "Smart Strike",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/steel_icon.png",
+    "system": {
         "slug": "smart-strike",
-        "name": "Smart Strike",
-        "type": "attack",
         "traits": [
-          "dash",
-          "contact",
-          "danger-close",
-          "horn"
+            "dash",
+            "contact",
+            "danger-close",
+            "horn"
         ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "physical",
-        "power": 70,
-        "accuracy": null,
-        "types": [
-          "steel"
+        "actions": [
+            {
+                "slug": "smart-strike",
+                "name": "Smart Strike",
+                "type": "attack",
+                "traits": [
+                    "dash",
+                    "contact",
+                    "danger-close",
+                    "horn"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 7
+                },
+                "category": "physical",
+                "power": 70,
+                "accuracy": 100,
+                "types": [
+                    "steel"
+                ],
+                "img": "icons/svg/explosion.svg"
+            }
         ],
-        "description": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "A"
-  },
-  "_id": "7BsYdZi4uUJ6verF",
-  "effects": []
+        "grade": "A"
+    },
+    "_id": "7BsYdZi4uUJ6verF",
+    "effects": []
 }
