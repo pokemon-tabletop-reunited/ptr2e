@@ -172,7 +172,7 @@ class AttackRoll extends CheckRoll {
             other: otherModifier,
         };
         const roll = new Roll(
-            "((((((2 * @level) / 5) + 2) * @power * (@attack / @defense)) / 50) + 2) * @targets * @critical * ((100 - @random) / 100) * @stab * @type * @other",
+            "((((((2 * @level) / 5) + 2) * @power * (@attack / (@defense * (4 / 3)))) / 50) + 2) * @targets * @critical * ((100 - @random) / 100) * @stab * @type * @other",
             context
         ).evaluateSync();
 

@@ -1,7 +1,7 @@
 <content>
     <main>
         <figure>
-            <code>((((((2 &times; @level) &divide; 5) + 2) &times; @power &times; (@attack &divide; @defense)) &divide; 50) + 2) &times; @targets &times; @critical &times; ((100 - @random) &divide; 100) &times; @stab &times; @type &times; @other</code>
+            <code>((((((2 &times; @level) &divide; 5) + 2) &times; @power &times; (@attack &divide; (@defense &times; (4 / 3)))) &divide; 50) + 2) &times; @targets &times; @critical &times; ((100 - @random) &divide; 100) &times; @stab &times; @type &times; @other</code>
         </figure>
         <figure>
             <code>{{{formatFormula damage.roll.formula}}}</code>
