@@ -1,55 +1,48 @@
 {
-  "name": "Veevee Volley",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/normal_icon.png",
-  "system": {
-    "slug": "veevee-volley",
-    "description": "Effect: For every active ally in the user's own party, Veevee Volkey's Power increases by 10, up to a maximum of 100 power.",
-    "traits": [
-      "mascot",
-      "dash",
-      "contact",
-      "danger-close"
-    ],
-    "actions": [
-      {
+    "name": "Veevee Volley",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/normal_icon.png",
+    "system": {
         "slug": "veevee-volley",
-        "name": "Veevee Volley",
-        "type": "attack",
-        "traits": [
-          "mascot",
-          "dash",
-          "contact",
-          "danger-close"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "physical",
-        "power": 50,
-        "accuracy": null,
-        "types": [
-          "normal"
-        ],
         "description": "Effect: For every active ally in the user's own party, Veevee Volkey's Power increases by 10, up to a maximum of 100 power.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "C"
-  },
-  "_id": "QKxWcfVXzQrKvduM",
-  "effects": []
+        "traits": [
+            "mascot",
+            "dash",
+            "contact",
+            "danger-close"
+        ],
+        "actions": [
+            {
+                "slug": "veevee-volley",
+                "name": "Veevee Volley",
+                "type": "attack",
+                "traits": [
+                    "mascot",
+                    "dash",
+                    "contact",
+                    "danger-close"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 5
+                },
+                "category": "physical",
+                "power": 50,
+                "accuracy": 100,
+                "types": [
+                    "normal"
+                ],
+                "description": "Effect: For every active ally in the user's own party, Veevee Volkey's Power increases by 10, up to a maximum of 100 power.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "grade": "C"
+    },
+    "_id": "QKxWcfVXzQrKvduM",
+    "effects": []
 }
