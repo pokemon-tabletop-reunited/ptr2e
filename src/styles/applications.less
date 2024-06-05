@@ -281,12 +281,28 @@ body {
 
                 &[data-tab="inventory"] {
                     .scroll.inventory {
-                        grid-area: span 5 / span 3;
+                        grid-area: 1 / 1 / span 5 / span 3;
 
                         overflow-y: auto;
                         overflow-x: hidden;
                         height: 100%;
                         gap: 0;
+                    }
+
+                    .inventory-points {
+                        grid-area: 1 / 4 / span 2 / span 2;
+                        padding: 0.5rem 0.5rem 0 0;
+                        
+                        fieldset {
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+                            overflow: hidden;
+
+                            input {
+                                text-align: center;
+                            }
+                        }
                     }
 
                     header {
@@ -350,6 +366,18 @@ body {
 
                             &:last-child {
                                 border-radius: 0 0 4px 4px;
+                            }
+                        }
+
+                        .item-name {
+                            &.rarity-uncommon {
+                                color: #33a7ff;
+                            }
+                            &.rarity-rare {
+                                color: #f5c42e;
+                            }
+                            &.rarity-unique {
+                                color: #a526ff;
                             }
                         }
                     }

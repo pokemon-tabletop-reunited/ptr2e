@@ -3,7 +3,9 @@
         {{#each inventory as |items category|}}
             <header>
                 <span class="item-name">{{category}}</span>
+                {{#if (isdefined items.0.system.quantity)}}
                 <span class="quantity">Quantity</span>
+                {{/if}}
                 <div class="item-controls">
                     <a data-action="create-item" data-tooltip="PTR2E.ActorSheet.CreateItem" data-types="{{category}}"><i
                             class="fa-solid fa-fw fa-plus"></i></a>
@@ -11,28 +13,42 @@
             </header>
             <ul class="items" data-item-types="{{category}}">
                 {{#each items}}
-                <li data-item-id="{{this.id}}">
-                    <div class="item-name">
+                <li class="item" data-item-id="{{this.id}}">
+                    <div class="item-name item" data-uuid={{this.uuid}} data-tooltip="{{this.name}}" data-tooltip-direction="LEFT">
                         <div class="item-image">
                             <img src="{{this.img}}" title="{{this.name}}">
                         </div>
                         <div class="item-name rarity-{{this.system.rarity}}">{{this.name}}</div>
                     </div>
+                    {{#if (isdefined this.system.quantity)}}
                     <div class="quantity">
                         <a class="decrease" data-action="decrease-quantity" title="[Click] Decrease by 1<br>[Shift-Click] Decrease by 5<br>[Control-Click] Decrease by 10" draggable="false">–</a>
                         <span>{{this.system.quantity}}</span>
                         <a class="increase" data-action="increase-quantity" title="[Click] Increase by 1<br>[Shift-Click] Increase by 5<br>[Control-Click] Increase by 10" draggable="false">+</a>
                     </div>
+                    {{/if}}
                     <div class="item-controls">
-                        <a class="item-carry-type" data-tooltip="PTR2E.ActorSheet.Inventory.CarryType.OpenMenu" data-action="open-carry-type-menu" draggable="false"><i class="fa-solid {{this.system.carryTypeIcon}} fa-fw"></i></a>
+                        {{!-- <a class="item-carry-type" data-tooltip="PTR2E.ActorSheet.Inventory.CarryType.OpenMenu" data-action="open-carry-type-menu" draggable="false"><i class="fa-solid {{this.system.carryTypeIcon}} fa-fw"></i></a> --}}
                         {{!-- <a data-action="toggle-identified" data-tooltip="PTR2E.identification.Mystify" draggable="false"><i class="fa-regular fa-question-circle fa-fw"></i></a> --}}
-                        <a data-action="edit-item" data-tooltip="PTR2E.ActorSheet.Inventory.EditItem" draggable="false"><i class="fa-solid fa-fw fa-edit"></i></a>
-                        <a data-action="delete-item" data-tooltip="PTR2E.ActorSheet.Inventory.DeleteItem" draggable="false"><i class="fa-solid fa-fw fa-trash"></i></a>
+                        <a data-action="edit-item" data-tooltip-direction="UP" data-tooltip="PTR2E.ActorSheet.Inventory.EditItem" draggable="false"><i class="fa-solid fa-fw fa-edit"></i></a>
+                        <a data-action="delete-item" data-tooltip-direction="UP" data-tooltip="PTR2E.ActorSheet.Inventory.DeleteItem" draggable="false"><i class="fa-solid fa-fw fa-trash"></i></a>
                     </div>
                 </li>
                 {{/each}}
             </ul>
         {{/each}}
-
+    </div>
+    <div class="inventory-points standard-form">
+        <fieldset>
+            <legend>Inventory Points</legend>
+            {{formGroup fields.inventoryPoints.fields.current value=source.inventoryPoints.current localize=true}}
+            <div class="form-group">
+                <label>{{localize 'PTR2E.FIELDS.inventoryPoints.max.label'}}</label>
+                <div class="form-fields">
+                    <input type="number" value="{{actor.system.inventoryPoints.max}}" disabled/>
+                </div>
+                <p class="hint">{{localize 'PTR2E.FIELDS.inventoryPoints.max.hint'}}</p>
+            </div>
+        </fieldset>
     </div>
 </section>

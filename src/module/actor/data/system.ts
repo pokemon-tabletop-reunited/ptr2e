@@ -204,21 +204,17 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 label: "PTR2E.FIELDS.slots.label",
                 hint: "PTR2E.FIELDS.slots.hint",
             }),
+            inventoryPoints: new fields.SchemaField({
+                current: new fields.NumberField({
+                    required: true,
+                    initial: 0,
+                    min: 0,
+                    label: "PTR2E.FIELDS.inventoryPoints.current.label",
+                    hint: "PTR2E.FIELDS.inventoryPoints.current.hint",
+                }),
+            })
         };
     }
-
-    // static override validateJoint(data: SourceFromSchema<DataSchema>): void {
-    //     super.validateJoint(data);
-    //     //@ts-expect-error
-    //     for (const [key, skill] of Object.entries(data.skills) as [string, Skill][]) {
-    //         if (["luck", "resources"].includes(skill.slug) && skill.rvs !== null) {
-    //             throw new Error("Luck & Resources should not have RVs");
-    //         }
-    //         // if(skill.slug !== key) {
-    //         //     throw new Error("Skill key does not match slug");
-    //         // }
-    //     }
-    // }
 
     override prepareBaseData(): void {
         super.prepareBaseData();
@@ -274,6 +270,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         this.health.max = this.attributes.hp.value;
 
         this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
+        this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
     }
 
     _initializeModifiers() {
@@ -431,6 +428,10 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
     advancement: AdvancementData;
     money: number;
     slots: number;
+    inventoryPoints: {
+        current: number,
+        max: number
+    }
 
     movement: Collection<Movement>;
 

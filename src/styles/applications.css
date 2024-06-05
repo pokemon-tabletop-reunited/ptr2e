@@ -233,11 +233,24 @@ body .application.sheet .form-group {
   font-weight: bold;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .scroll.inventory {
-  grid-area: span 5 / span 3;
+  grid-area: 1 / 1 / span 5 / span 3;
   overflow-y: auto;
   overflow-x: hidden;
   height: 100%;
   gap: 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points {
+  grid-area: 1 / 4 / span 2 / span 2;
+  padding: 0.5rem 0.5rem 0 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points fieldset {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points fieldset input {
+  text-align: center;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header {
   align-items: center;
@@ -292,6 +305,15 @@ body .application.sheet .form-group {
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li:last-child {
   border-radius: 0 0 4px 4px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name.rarity-uncommon {
+  color: #33a7ff;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name.rarity-rare {
+  color: #f5c42e;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name.rarity-unique {
+  color: #a526ff;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name {

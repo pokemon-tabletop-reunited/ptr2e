@@ -144,6 +144,16 @@ aside[role="tooltip"].weapon,
             h2 {
                 border-bottom: unset;
                 text-align: center;
+
+                &.rarity-uncommon {
+                    color: #33a7ff;
+                }
+                &.rarity-rare {
+                    color: #dfad12;
+                }
+                &.rarity-unique {
+                    color: #a526ff;
+                }
             }
 
             &.header {
@@ -406,19 +416,38 @@ aside[role="tooltip"].perk,
 aside[role="tooltip"].species,
 aside[role="tooltip"].weapon {
     figure {
-        header.traits {
-            margin-bottom: 0.75rem;
+        header {
+            &.rarity-uncommon {
+                color: #33a7ff;
+            }
+            &.rarity-rare {
+                color: #f5c42e;
+            }
+            &.rarity-unique {
+                color: #a526ff;
+            }
+            
+            .traits {
+                margin-bottom: 0.75rem;
+            }
+        }
+
+        .content-link {
+            --content-link-background: rgba(0, 0, 0, 0.1);
+            background: var(--content-link-background);
         }
     }
 
 }
 
 aside[role="tooltip"].effect {
+    .content-link {
+        --content-link-background: rgba(0, 0, 0, 0.1);
+        background: var(--content-link-background);
+    }
+    
     .content-embed {
         margin: 0.5rem 0;
-        figcaption a.content-link {
-            color: black;
-        }
     }
     .effect-embed {
         padding: 0.5rem;

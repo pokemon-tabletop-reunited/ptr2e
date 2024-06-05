@@ -60,7 +60,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             dragDrop: [
                 {
                     dropSelector: ".window-content",
-                    dragSelector: "fieldset .item, fieldset .effect, fieldset .action",
+                    dragSelector: "fieldset .item, fieldset .effect, fieldset .action, ul.items > li",
                 }
             ],
             actions: {
@@ -486,6 +486,31 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                             }),
                         },
                     });
+                });
+            }
+
+            for(const element of htmlQueryAll(htmlElement, ".tab[data-tab='inventory'] .quantity a[data-action]")) {
+                element.addEventListener("click", async (event) => {
+                    const itemId = (
+                        (event.currentTarget as HTMLElement)?.closest("[data-item-id]") as HTMLElement
+                    )?.dataset.itemId;
+                    const item = this.document.items.get(itemId!) as ItemPTR2e;
+                    if (!item || !('quantity' in item.system)) return;
+    
+                    const action = (event.currentTarget as HTMLElement)?.dataset.action;
+                    const isShift = event.shiftKey;
+                    const isCtrl = event.ctrlKey;
+                    const amount = isCtrl ? 10 : isShift ? 5 : 1;
+                    switch(action) {
+                        case "increase-quantity": {
+                            item.update({ "system.quantity": item.system.quantity + amount });
+                            break;
+                        }
+                        case "decrease-quantity": {
+                            item.update({ "system.quantity": Math.max(0, item.system.quantity - amount) });
+                            break;
+                        }
+                    }
                 });
             }
         
