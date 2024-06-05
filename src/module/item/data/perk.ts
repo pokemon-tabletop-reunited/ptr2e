@@ -145,7 +145,7 @@ export default abstract class PerkSystem extends PerkExtension {
     override _onCreate(data: object, options: object, userId: string): void {
         super._onCreate(data, options, userId);
 
-        if (game.ptr.perks.initialized) {
+        if (game.ptr.perks.initialized && !this.parent.actor) {
             game.ptr.perks.perks.set(this.slug, this.parent);
             if (game.ptr.web.actor) game.ptr.web.refresh({ nodeRefresh: true });
         }

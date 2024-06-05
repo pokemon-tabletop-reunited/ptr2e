@@ -6,6 +6,11 @@ class PerkManager {
     private packs: string[] = ["ptr2e.core-perks"];
     readonly perks: Map<string, PerkPTR2e> = new Map();
 
+    get(key: string) {
+        if(!this.initialized) return null;
+        return this.perks.get(key);
+    }
+
     get initialized() {
         return this.perks.size > 0;
     }
