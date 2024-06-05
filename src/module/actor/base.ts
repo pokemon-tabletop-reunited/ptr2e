@@ -15,7 +15,7 @@ import FolderPTR2e from "@module/folder/document.ts";
 import { CombatantPTR2e, CombatPTR2e } from "@combat";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
-import { ItemPTR2e, ItemSystemsWithActions } from "@item";
+import { ItemPTR2e, ItemSystemsWithActions, PerkPTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
@@ -49,6 +49,13 @@ class ActorPTR2e<
 
     get actions() {
         return this._actions;
+    }
+
+    get perks(): Map<string, PerkPTR2e> {
+        return this._perks ?? (this._perks = (this.itemTypes.perk as PerkPTR2e[]).reduce((acc, perk) => {
+            acc.set(perk.system.originSlug ?? perk.slug, perk);
+            return acc;
+        }, new Map<string, PerkPTR2e>()));
     }
 
     get combatant(): CombatantPTR2e | null {
@@ -139,6 +146,7 @@ class ActorPTR2e<
         };
 
         this._party = null;
+        this._perks = null;
 
         this.rollOptions = new RollOptionManager(this);
 
@@ -979,6 +987,7 @@ interface ActorPTR2e<
     synthetics: ActorSynthetics;
 
     _actions: ActionsCollections;
+    _perks: Map<string, PerkPTR2e> | null;
 
     level: number;
 

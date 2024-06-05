@@ -46,7 +46,7 @@ class PerkWeb extends PIXI.Container {
                 height: window.innerHeight,
                 antialias: false,
                 background: 0xcccccc,
-                backgroundAlpha: 0.35,
+                backgroundAlpha: 0,
                 powerPreference: "high-performance",
             }),
             writable: false,
@@ -95,9 +95,10 @@ class PerkWeb extends PIXI.Container {
 
     async open(actor?: ActorPTR2e, { resetView = true } = {}) {
         if (!actor && !this.actor) return this;
+        this.actor = actor ?? null;
+        
         await this.draw();
 
-        this.actor = actor ?? null;
         if (actor) {
             actor.sheet.setPosition({ left: 20, top: 20 });
             await actor.sheet.minimize();
@@ -140,7 +141,7 @@ class PerkWeb extends PIXI.Container {
         if (this.#drawn) return;
 
         // Load perks and initialize the collection
-        await this.collection.initialize();
+        await this.collection.initialize(this.actor);
 
         // Set the pivot point to the center of the viewport
         const { width, height } = this.app.renderer.screen;
@@ -152,6 +153,7 @@ class PerkWeb extends PIXI.Container {
         this.select = this.addChild(new PIXI.Graphics()) as PIXI.Graphics & { active: boolean };
 
         this.background = this.backgroundLayer.addChild(await this._drawBackground());
+
         // DEBUG Grid
         if (this.DEBUG) {
             this.grid = this.backgroundLayer.addChild(this._drawGrid());
@@ -182,11 +184,12 @@ class PerkWeb extends PIXI.Container {
 
         // Load the texture
         const texture =
-            (getTexture("/ui/denim075.png") as PIXI.Texture) ??
-            ((await loadTexture("/ui/denim075.png")) as PIXI.Texture);
+            (getTexture("/ui/denim.png") as PIXI.Texture) ??
+            ((await loadTexture("/ui/denim.png")) as PIXI.Texture);
 
         // Create a tiling sprite with the texture
         const background = new TilingSprite(texture, backgroundSize * 2, backgroundSize * 2);
+        background.alpha = 0.99;
 
         // Position the sprite at the center of the background
         background.x = -backgroundSize;
@@ -287,7 +290,7 @@ class PerkWeb extends PIXI.Container {
         if (nodeRefresh) {
             this.nodes.removeChildren();
             this.edges.removeChildren();
-            await this.collection.initialize();
+            await this.collection.initialize(this.actor);
         }
 
         for (const node of this.collection) {
@@ -391,7 +394,7 @@ class PerkWeb extends PIXI.Container {
         // Remove stage listeners
         const callbacks = {
             hoverOut: (event: FederatedEvent) => {
-                if(event.nativeEvent.target !== event.nativeEvent.currentTarget) return false;
+                if(event.nativeEvent.target !== (event.nativeEvent as UIEvent).currentTarget) return false;
                 return;
             },
             clickRight: () => {

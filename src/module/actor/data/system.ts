@@ -216,6 +216,23 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         };
     }
 
+    protected override _initialize(options?: Record<string, unknown>): void {
+        super._initialize(options);
+
+        Object.defineProperty(this.advancement, "advancementPoints", {
+            value: {
+                total: 0,
+                spent: 0
+            },
+            writable: true,
+        });
+        if(this.advancement.advancementPoints.available === undefined) {
+            Object.defineProperty(this.advancement.advancementPoints, "available", {
+                get: () => this.advancement.advancementPoints.total - this.advancement.advancementPoints.spent
+            })
+        }
+    }
+
     override prepareBaseData(): void {
         super.prepareBaseData();
         this._initializeModifiers();
@@ -249,6 +266,10 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 get: () => this.advancement.rvs.total - this.advancement.rvs.spent,
             });
         }
+
+        // Calculate Advancement Points total
+        this.advancement.advancementPoints.total = this.parent.isHumanoid() ? (19 + this.advancement.level) : (10 + Math.floor(this.advancement.level / 2));
+        this.advancement.advancementPoints.spent = 0;
 
         for (const k in this.attributes) {
             const key = k as keyof Attributes;

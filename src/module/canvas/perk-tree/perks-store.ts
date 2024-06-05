@@ -1,8 +1,10 @@
 import { PerkPTR2e } from "@item";
-import { PerkNode } from "./perk-node.ts";
+import { PerkNode, PerkPurchaseState, PerkState } from "./perk-node.ts";
 import { CoordinateString } from "./perk-web.ts";
 import { sluggify } from "@utils";
 import PerkGraph from "./perk-graph.ts";
+import { ActorPTR2e } from "@actor";
+import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 
 type EdgeCoordinateString = `${CoordinateString}-${CoordinateString}`;
 
@@ -14,6 +16,7 @@ type PTRNode = {
     element?: PerkNode;
     perk: PerkPTR2e;
     connected: Set<string>;
+    state: PerkPurchaseState;
 };
 
 type SluggedEdgeString = `${string}-${string}`;
@@ -38,36 +41,88 @@ class PerkStore extends Collection<PTRNode> {
         this._graph = new PerkGraph(this);
     }
 
-    static async create() {
-        const perkManager = await game.ptr.perks.initialize();
-        const nodes: PTRNode[] = [];
-        for (const perk of perkManager.perks.values()) {
-            if (perk.system.node && perk.system.node.i !== null && perk.system.node.j !== null) {
-                nodes.push({
-                    position: { i: perk.system.node.i, j: perk.system.node.j },
-                    perk: perk,
-                    connected: new Set(perk.system.node.connected),
-                });
-            }
-        }
-        return new PerkStore(nodes);
-    }
-
-    async initialize() {
+    async initialize(actor: Maybe<ActorPTR2e>) {
         this.clear();
         this.edges.clear();
         this._rootNodes = null;
         const perkManager = await game.ptr.perks.initialize();
+        let hasRoot = false;
         for (const perk of perkManager.perks.values()) {
             if (perk.system.node && perk.system.node.i !== null && perk.system.node.j !== null) {
+                const connected = new Set(perk.system.node.connected);
+                const isRoot = perk.system.node.type === "root";
+                const state = actor?.perks.get(perk.slug) ? PerkState.purchased : PerkState.unavailable
+
                 this.set(`${perk.system.node.i},${perk.system.node.j}`, {
                     position: { i: perk.system.node.i, j: perk.system.node.j },
                     perk: perk,
-                    connected: new Set(perk.system.node.connected),
+                    connected,
+                    state
                 });
+                if(state === PerkState.purchased) this.updatePerkState(perk, actor!, perkManager);
+                if(state === PerkState.unavailable) this.tryUpdatePerkState(this.get(`${perk.system.node.i},${perk.system.node.j}`)!, actor, perkManager);
+                if(isRoot && state === PerkState.purchased) hasRoot = true;
             }
         }
+        for(const rootNode of this.filter(node => node.perk.system.node.type === "root")) {
+            if(rootNode.state === PerkState.unavailable && ((actor?.system.advancement.advancementPoints.available ?? 0) >= (hasRoot ? 5 : 1))) {
+                rootNode.state = PerkState.available;
+            }
+            else if(rootNode.state === PerkState.unavailable) rootNode.state = PerkState.connected;
+        }
         if (this.size > 0) this._graph.initialize();
+    }
+
+    /**
+     * Update all connected perks to mark them connected, and in turn determine their availability.
+     * @param currentPerk A perk that has been purchased
+     * @param actor 
+     * @param manager 
+     */
+    updatePerkState(currentPerk: PerkPTR2e, actor: ActorPTR2e, manager: PerkManager)  {
+        for(const connected of new Set(currentPerk.system.node.connected)) {
+            const connectedPerk = manager.perks.get(connected);
+            if(!connectedPerk || connectedPerk.system.node.i === null || connectedPerk.system.node.j === null) continue;
+            const isRootPerk = connectedPerk.system.node.type === 'root';
+            
+            const connectedNode = this.get(`${connectedPerk.system.node.i},${connectedPerk.system.node.j}`);
+            if(!connectedNode || connectedNode.state !== PerkState.unavailable) continue;
+            
+            //TODO: Implement proper prerequisite checking
+            if(actor.system.advancement.advancementPoints.available >= (isRootPerk ? 1 : connectedPerk.system.cost)) {
+                connectedNode.state = PerkState.available;
+                continue;
+            }
+            
+            connectedNode.state = PerkState.connected;
+        }
+    }
+
+    /**
+     * Checks all connected perks to see if this one should be available.
+     * @param currentPerk 
+     * @param actor 
+     * @param manager 
+     */
+    tryUpdatePerkState(currentNode: PTRNode, actor: Maybe<ActorPTR2e>, manager: PerkManager) {
+        const isRootNode = currentNode.perk.system.node.type === "root"
+
+        for(const connected of new Set(currentNode.connected)) {
+            const connectedPerk = manager.perks.get(connected);
+            if(!connectedPerk || connectedPerk.system.node.i === null || connectedPerk.system.node.j === null) continue;
+            
+            const connectedNode = this.get(`${connectedPerk.system.node.i},${connectedPerk.system.node.j}`);
+            if(!connectedNode || connectedNode.state !== PerkState.purchased) continue;
+
+            //TODO: Implement proper prerequisite checking
+            if(actor && actor.system.advancement.advancementPoints.available >= (isRootNode ? 1 : currentNode.perk.system.cost)) {
+                currentNode.state = PerkState.available;
+            }
+            else {
+                currentNode.state = PerkState.connected;
+            }
+            break;
+        }
     }
 
     getEdge(node1: PTRNode, node2: PTRNode): PIXI.Graphics | null {
