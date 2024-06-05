@@ -70,7 +70,7 @@ class ImageResolver {
     findSpecies(config: ImageSpeciesResolverConfig) {
         const {dexId, shiny, forms} = config;
 
-        const baseNeedle = [...dexId.toString()];
+        const baseNeedle = [...Handlebars.helpers.lpad(dexId.toString(), 3, 0)];
         const formsNeedleSuffix = [...forms.flatMap(f => [...f])];
 
         function formMatch(result: string) {
