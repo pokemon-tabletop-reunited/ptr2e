@@ -4,12 +4,14 @@ on:
   workflow_run:
     workflows: ["PTR2e CI"]
     types:
-      - completed
+        - completed
+    branches:
+        - Stable
 
 jobs:
     release:
+        if: github.event.workflow_run.conclusion == 'success'
         runs-on: ubuntu-latest
-        if: github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'Stable'
 
         steps:
             - uses: actions/checkout@v4
@@ -39,7 +41,7 @@ jobs:
               uses: ncipollo/release-action@v1
               with:
                   name: ${{ env.systemVersion }}
-                  allowUpdates: true
+                  allowUpdates: false
                   draft: false
                   prerelease: false
                   token: ${{ secrets.GITHUB_TOKEN }}
