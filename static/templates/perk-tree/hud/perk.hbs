@@ -1,0 +1,25 @@
+<section>
+    {{#with perk}}
+        {{#if document}}
+            <header class="perk-header">
+                <h2>Selected Perk Details</h2>
+            </header>
+            <figure>
+                <header class="header">
+                    <h2>{{document.name}}</h2>
+                </header>
+                {{#if traits}}
+                <header class="traits">
+                    <input type="text" class="traits ptr2e-tagify" value="{{json traits}}" data-dType="JSON" readonly/>
+                </header>
+                {{/if}}
+                {{> perk-body}}
+            </figure>
+            <footer>
+                <button class="purchase {{#unless purchasable}}unavailable{{/unless}}" data-action="purchase" {{#unless purchasable}}disabled{{/unless}}>
+                    <i class="fas fa-sack-dollar"></i> Purchase Perk ({{document.system.cost}} AP)
+                </button>
+            </footer>
+        {{/if}}
+    {{/with}}
+</section>
