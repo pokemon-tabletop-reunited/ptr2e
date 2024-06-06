@@ -9,9 +9,9 @@ export const StatusEffects: StatusEffect[] = [
         system: {
             changes: [
                 {
-                    key: "fainted",
                     type: "roll-option",
                     domain: "effect",
+                    value: "fainted"
                 },
             ],
             removeOnRecall: false,

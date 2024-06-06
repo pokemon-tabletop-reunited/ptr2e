@@ -35,8 +35,8 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
                     this._traits.push(trait);
                 }
                 else {
-                    console.warn(`Could not find trait with slug ${traitSlug}`);
-                    console.warn("TODO: Remove this functionality and add a migration to remove invalid traits.")
+                    console.debug(`Could not find trait with slug ${traitSlug}`);
+                    console.debug("TODO: Remove this functionality and add a migration to remove invalid traits.")
                     acc.set(traitSlug, { label: Handlebars.helpers.formatSlug(traitSlug), description: '', slug: traitSlug, related: []});
                 }
                 return acc;

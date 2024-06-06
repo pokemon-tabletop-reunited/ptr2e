@@ -1,6 +1,7 @@
 import { ItemPTR2e } from "@item";
 import PerkWeb from "./perk-web.ts";
 import { PTRNode } from "./perks-store.ts";
+import { AdjustmentFilter, GlowFilter, OutlineFilter } from "pixi-filters";
 
 class PerkNode extends PIXI.Container {
     constructor(node: PTRNode, config: Partial<PerkNodeConfig> = {}) {
@@ -13,7 +14,7 @@ class PerkNode extends PIXI.Container {
                     alpha: 1,
                     backgroundColor: 0x000000,
                     borderColor: 0x000000,
-                    borderWidth: 1,
+                    borderWidth: 2,
                     tint: 0xffffff,
                     texture: "",
                     scale: 1,
@@ -35,6 +36,9 @@ class PerkNode extends PIXI.Container {
 
         // Border Color
         this.border = this.addChild(new PIXI.Graphics());
+
+        // Determine state
+        this.state = node.state;
     }
 
     get active() {
@@ -44,6 +48,7 @@ class PerkNode extends PIXI.Container {
     get legal() {
         return this._legal;
     }
+
     set legal(value: boolean) {
         if (value === this._legal) return;
         this._legal = value;
@@ -58,6 +63,98 @@ class PerkNode extends PIXI.Container {
         this._drawBorder();
     }
     private _legal = true;
+
+    // get alphaLevel() {
+    //     return this.node.perk.system.hidden
+    //         ? 0.5
+    //         : (() => {
+    //               switch (this.state) {
+    //                   case PerkState.unavailable:
+    //                       return 0.6;
+    //                   case PerkState.connected:
+    //                       return 0.95;
+    //                   case PerkState.available:
+    //                       return 1;
+    //                   case PerkState.purchased:
+    //                       return 1;
+    //               }
+    //           })() ||
+    //               this.node.perk.system.node.config?.alpha ||
+    //               1;
+    // }
+
+    // get tintColor() {
+    //     return this.node.perk.system.hidden
+    //         ? 0x666666
+    //         : (() => {
+    //               switch (this.state) {
+    //                   case PerkState.unavailable:
+    //                       return 0x888888;
+    //                   case PerkState.connected:
+    //                       return 0xeeeeee;
+    //                   case PerkState.available:
+    //                       return 0x000000;
+    //                   case PerkState.purchased:
+    //                       return 0x000000;
+    //               }
+    //           })() ||
+    //               this.node.perk.system.node.config?.tint ||
+    //               0x000000;
+    // }
+
+    get saturation() {
+        return this.node.perk.system.hidden
+            ? 0
+            : (() => {
+                  switch (this.state) {
+                      case PerkState.unavailable:
+                          return 0;
+                      case PerkState.connected:
+                          return 0.5;
+                      case PerkState.available:
+                          return 1;
+                      case PerkState.purchased:
+                          return 1;
+                  }
+              })() || 0;
+    }
+
+    get brightness() {
+        return this.node.perk.system.hidden
+            ? 0.25
+            : (() => {
+                  switch (this.state) {
+                      case PerkState.unavailable:
+                          return 0.5;
+                      case PerkState.connected:
+                          return 0.75;
+                      case PerkState.available:
+                          return 1;
+                      case PerkState.purchased:
+                          return 1;
+                  }
+              })() || 0;
+    }
+
+    get borderColor() {
+        return this.node.perk.system.hidden
+            ? 0x777777
+            : (() => {
+                return null;
+                  switch (this.state) {
+                      case PerkState.unavailable:
+                          return 0xff0000;
+                      case PerkState.connected:
+                          return 0xff0000;
+                      case PerkState.available:
+                          return 0x000000;
+                      case PerkState.purchased:
+                          return 0x00ff00;
+                  }
+              })() ||
+                  this.node.perk.system.node.config?.borderColor ||
+                  0x000000;
+    }
 
     async draw(config: Partial<PerkNodeConfig> = {}) {
         if (!this.node.perk?.system.visible) return;
@@ -79,11 +176,20 @@ class PerkNode extends PIXI.Container {
         this.icon.tint = tint ?? 0x000000;
         this.scale.set(scale ?? 1);
 
-        if (this.node.perk.system.hidden) {
-            this.icon.tint = 0x999999;
-            this.icon.alpha = 0.5;
-            this.config.borderColor = 0x777777;
-        }
+        // const saturationFilter = new ColorMatrixFilter();
+        // saturationFilter.saturate(this.saturation, false);
+        // const brightnessFilter = new ColorMatrixFilter();
+        // brightnessFilter.brightness(this.brightness, false);
+        const adjustmentFilter = new AdjustmentFilter({saturation: this.saturation, brightness: this.brightness})
+        
+        const connectedFilter = new GlowFilter({distance: 10, innerStrength: 1, color: 0xad3f3f, alpha: 0.7})
+        const availableFilter = new GlowFilter({distance: 15, innerStrength: 1, color: 0xffffff})
+        const purchasedFilter = new OutlineFilter(3, 0x9ce7a7, 1, 0.8)
+
+        this.filters = [adjustmentFilter];
+        if(this.state === PerkState.connected) this.filters.push(connectedFilter);
+        if(this.state === PerkState.available) this.filters.push(availableFilter);
+        if(this.state === PerkState.purchased) this.filters.push(purchasedFilter);
 
         // Draw Icon Mask
         this._drawMask();
@@ -151,9 +257,9 @@ class PerkNode extends PIXI.Container {
             const doc = document.elementFromPoint(event.globalX, event.globalY);
             if (doc?.id !== "perk-tree") return;
             if (!this.active) return; // Only move active nodes
-            if (this.state !== 1) return; // Only move nodes in position mode (1)
+            if (this.editState !== 1) return; // Only move nodes in position mode (1)
 
-            if(game.ptr.web.perkHUD.object) {
+            if (game.ptr.web.perkHUD.object) {
                 game.ptr.web.perkHUD.clear();
             }
 
@@ -168,8 +274,8 @@ class PerkNode extends PIXI.Container {
             const dx = x - this.originalPosition!.x;
             const dy = y - this.originalPosition!.y;
             const nodes = game.ptr.web.controlled.filter((node) => node !== this);
-            for(const node of nodes) {
-                if(!node) continue;
+            for (const node of nodes) {
+                if (!node) continue;
 
                 node.position.set(node.originalPosition!.x + dx, node.originalPosition!.y + dy);
                 node.redrawEdges();
@@ -183,7 +289,7 @@ class PerkNode extends PIXI.Container {
             }
 
             // Check if all other nodes are in legal spots
-            for(const node of game.ptr.web.controlled) {
+            for (const node of game.ptr.web.controlled) {
                 const { i, j } = game.ptr.web.getHexCoordinates(node.position.x, node.position.y);
                 if (!game.ptr.web.isLegalSpot(i, j)) {
                     node.legal = false;
@@ -208,7 +314,6 @@ class PerkNode extends PIXI.Container {
          * Therefore offset the perkHUD's x and y by the canvas HUD's position
          **/
         const webHUD = canvas.hud.element[0];
-        
 
         const scale = parseFloat(webHUD.style.transform.replace("scale(", ""));
         const hudXOffset = Math.round(hud.position.left * scale) + webHUD.offsetLeft;
@@ -219,10 +324,10 @@ class PerkNode extends PIXI.Container {
         const hudHeight = hud.element.offsetHeight * scale;
 
         // Create a virtual boundary around the HUD
-        const boundaryXStart = hudXOffset - (200 * scale)
-        const boundaryXEnd = hudXOffset + (hudWidth * 2.5) + (200 * scale * 2.5) 
-        const boundaryYStart = hudYOffset - (200 * scale)
-        const boundaryYEnd = hudYOffset + (hudHeight * 2.5) + (200 * scale * 2.5)
+        const boundaryXStart = hudXOffset - 200 * scale;
+        const boundaryXEnd = hudXOffset + hudWidth * 2.5 + 200 * scale * 2.5;
+        const boundaryYStart = hudYOffset - 200 * scale;
+        const boundaryYEnd = hudYOffset + hudHeight * 2.5 + 200 * scale * 2.5;
 
         // Check if the pointer is within the boundary
         if (x >= boundaryXStart && x <= boundaryXEnd && y >= boundaryYStart && y <= boundaryYEnd) {
@@ -239,13 +344,13 @@ class PerkNode extends PIXI.Container {
             if (this.active) {
                 await this.savePosition();
             } else {
-                if (game.ptr.web.activeNode?.state === 2) {
+                if (game.ptr.web.activeNode?.editState === 2) {
                     game.ptr.web.connectNodes(game.ptr.web.activeNode, this);
                 } else {
                     // Save original position
                     this.originalPosition = this.position.clone();
                     // Save original position of all other controlled nodes
-                    for(const node of game.ptr.web.controlled) {
+                    for (const node of game.ptr.web.controlled) {
                         node.originalPosition = node.position.clone();
                     }
 
@@ -259,7 +364,7 @@ class PerkNode extends PIXI.Container {
         if (game.ptr.web.editMode) {
             if (this.active) {
                 await this.savePosition();
-                if(game.ptr.web.activeNode === this) {
+                if (game.ptr.web.activeNode === this) {
                     game.ptr.web.deactivateNode();
                 }
             }
@@ -269,37 +374,38 @@ class PerkNode extends PIXI.Container {
     async savePosition() {
         // Check if any node will be in an illegal position
         const otherNodes = game.ptr.web.controlled.filter((node) => node !== this);
-        for(const node of otherNodes) {
+        for (const node of otherNodes) {
             if (!node.legal) return;
         }
-        if(!this.legal) return;
+        if (!this.legal) return;
 
         // Prepare all updates
         const nodeUpdates = [];
         const worldUpdates = [];
-        const packUpdates: Record<string, {_id: string, "system.node": {i: number, j: number}}[]> = {};
+        const packUpdates: Record<
+            string,
+            { _id: string; "system.node": { i: number; j: number } }[]
+        > = {};
 
         // Get update for this node
-        const thisUpdate = await game.ptr.web.updateHexPosition(this, {updateDataOnly: true});
-        if(typeof thisUpdate === 'boolean') return;
-        if(thisUpdate.options?.pack) {
+        const thisUpdate = await game.ptr.web.updateHexPosition(this, { updateDataOnly: true });
+        if (typeof thisUpdate === "boolean") return;
+        if (thisUpdate.options?.pack) {
             packUpdates[thisUpdate.options.pack] ??= [];
-            packUpdates[thisUpdate.options.pack].push( thisUpdate.itemUpdate);
-        }
-        else {
+            packUpdates[thisUpdate.options.pack].push(thisUpdate.itemUpdate);
+        } else {
             worldUpdates.push(thisUpdate.itemUpdate);
         }
         nodeUpdates.push(thisUpdate.nodeUpdate);
 
         // Update all others
-        for(const node of otherNodes) {
-            const update = await game.ptr.web.updateHexPosition(node, {updateDataOnly: true});
-            if(typeof update === 'boolean') return;
-            if(update.options?.pack) {
+        for (const node of otherNodes) {
+            const update = await game.ptr.web.updateHexPosition(node, { updateDataOnly: true });
+            if (typeof update === "boolean") return;
+            if (update.options?.pack) {
                 packUpdates[update.options.pack] ??= [];
                 packUpdates[update.options.pack].push(update.itemUpdate);
-            }
-            else {
+            } else {
                 worldUpdates.push(update.itemUpdate);
             }
             nodeUpdates.push(update.nodeUpdate);
@@ -308,30 +414,30 @@ class PerkNode extends PIXI.Container {
         try {
             const updated: string[] = [];
             const r = await ItemPTR2e.updateDocuments(worldUpdates);
-            if(r) updated.push(...r.map(u => u.id));
-            for(const pack in packUpdates) {
+            if (r) updated.push(...r.map((u) => u.id));
+            for (const pack in packUpdates) {
                 const p = game.packs.get(pack);
-                if(!p) continue;
-                const r = await ItemPTR2e.updateDocuments(packUpdates[pack], {pack});
-                if(r) updated.push(...r.map(u => u.id));
+                if (!p) continue;
+                const r = await ItemPTR2e.updateDocuments(packUpdates[pack], { pack });
+                if (r) updated.push(...r.map((u) => u.id));
             }
-            const {updates, failedUpdates} = (() => {
+            const { updates, failedUpdates } = (() => {
                 const updates = [];
                 const failedUpdates = [];
-                for(const nodeUpdate of nodeUpdates) {
-                    if(updated.includes(nodeUpdate.node.node.perk.id))  updates.push(nodeUpdate);
+                for (const nodeUpdate of nodeUpdates) {
+                    if (updated.includes(nodeUpdate.node.node.perk.id)) updates.push(nodeUpdate);
                     else failedUpdates.push(nodeUpdate);
                 }
-                return {updates, failedUpdates};
+                return { updates, failedUpdates };
             })();
             game.ptr.web.updateNewNodePositions(updates);
-            game.ptr.web.resetFailedUpdateNodePositions(failedUpdates.map(n => n.node));
+            game.ptr.web.resetFailedUpdateNodePositions(failedUpdates.map((n) => n.node));
         } catch {
-            game.ptr.web.resetFailedUpdateNodePositions(nodeUpdates.map(n => n.node));
+            game.ptr.web.resetFailedUpdateNodePositions(nodeUpdates.map((n) => n.node));
         }
 
         this.releaseControl();
-        for(const node of otherNodes) {
+        for (const node of otherNodes) {
             node.releaseControl();
         }
     }
@@ -360,7 +466,7 @@ class PerkNode extends PIXI.Container {
             .endFill();
     }
 
-    _drawBorder(borderColor = this.config.borderColor, borderWidth = this.config.borderWidth) {
+    _drawBorder(borderColor = this.borderColor, borderWidth = this.config.borderWidth) {
         this.border
             .clear()
             .lineStyle({ width: borderWidth, color: borderColor, alignment: 1 })
@@ -386,7 +492,7 @@ class PerkNode extends PIXI.Container {
     }
 
     public activate(mode: ValueOf<PerkEditState> = 1) {
-        this.state = mode;
+        this.editState = mode;
         this.config.borderColor = (() => {
             switch (mode) {
                 case 1:
@@ -400,7 +506,7 @@ class PerkNode extends PIXI.Container {
     }
 
     public deactivate() {
-        this.config.borderColor = this.node.perk.system.node.config?.borderColor || 0x000000;
+        this.config.borderColor = this.borderColor;
         this._drawBorder();
         return this;
     }
@@ -408,7 +514,7 @@ class PerkNode extends PIXI.Container {
     public control() {
         this.config.borderColor = 0xff9829;
         this.config.borderWidth = 3;
-        this.scale.set((this.node.perk.system.node.config?.scale ?? 1) * 1.2 || 1.2)
+        this.scale.set((this.node.perk.system.node.config?.scale ?? 1) * 1.2 || 1.2);
         this._drawBorder();
         game.ptr.web.controlled.push(this);
     }
@@ -417,7 +523,7 @@ class PerkNode extends PIXI.Container {
         this.config.borderColor = this.node.perk.system.node.config?.borderColor || 0x000000;
         this.config.borderWidth = this.node.perk.system.node.config?.borderWidth || 1;
         this._drawBorder();
-        this.scale.set(this.node.perk.system.node.config?.scale || 1)
+        this.scale.set(this.node.perk.system.node.config?.scale || 1);
         game.ptr.web.controlled = game.ptr.web.controlled.filter((node) => node !== this);
     }
 }
@@ -437,6 +543,15 @@ type PerkEditState = {
     connection: 2;
 };
 
+const PerkState = {
+    unavailable: 0,
+    connected: 1,
+    available: 2,
+    purchased: 3,
+} as const;
+
+type PerkPurchaseState = ValueOf<typeof PerkState>;
+
 interface PerkNode {
     config: PerkNodeConfig;
     node: PTRNode;
@@ -448,8 +563,10 @@ interface PerkNode {
 
     originalPosition: PIXI.Point | null;
 
-    state: ValueOf<PerkEditState>;
+    state: PerkPurchaseState;
+
+    editState: ValueOf<PerkEditState>;
 }
 
-export { PerkNode };
-export type { PerkNodeConfig, PerkEditState };
+export { PerkNode, PerkState };
+export type { PerkNodeConfig, PerkEditState, PerkPurchaseState };

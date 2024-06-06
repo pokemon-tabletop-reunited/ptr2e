@@ -1,0 +1,68 @@
+{
+    "folder": "Et2u8UoXSe2a17oq",
+    "name": "Condemn",
+    "type": "perk",
+    "_id": "vS6nmS3i2tg44GMv",
+    "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
+    "system": {
+        "actions": [
+            {
+                "name": "Condemn Action (#1)",
+                "slug": "condemn-action-1",
+                "description": "<p><span style=\"font-family: Arial,sans-serif\">You may spend 3PP to condemn a target within 5m as a simple action. This is considered an Attack with the [Social] trait. The target is afflicted with Frail 3 and Distracted 3.</span></p>",
+                "traits": [],
+                "type": "attack",
+                "range": {
+                    "target": "enemy",
+                    "distance": 5,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 3
+                },
+                "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
+                "types": [
+                    "untyped"
+                ],
+                "category": "physical"
+            }
+        ],
+        "slug": "condemn",
+        "description": "<p><span style=\"font-family: Arial,sans-serif\">You may spend 3PP to condemn a target within 5m as a complex action. This is considered an Attack with the [Social] trait. The target is afflicted with Frail 3 and Distracted 3.</span></p>",
+        "traits": [],
+        "prerequisites": [
+            "Intimidate"
+        ],
+        "cost": 3,
+        "design": {
+            "arena": "social",
+            "approach": "power",
+            "archetype": "Socialite"
+        },
+        "node": {
+            "i": -20,
+            "j": -49,
+            "connected": [
+                "underdogs-spirit-1",
+                "agile-style",
+                "aura-channeling",
+                "groomer",
+                "quick-and-the-dead",
+                "backpacker-4"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#800080",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "effects": []
+}

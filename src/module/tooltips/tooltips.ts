@@ -1,6 +1,7 @@
 import { ActorPTR2e } from "@actor";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } from "@chat";
 import { ActionPTR2e, AttackPTR2e } from "@data";
+import { ActiveEffectPTR2e } from "@effects";
 import { EffectPTR2e, ItemPTR2e, MovePTR2e } from "@item";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import Tagify from "@yaireo/tagify";
@@ -91,6 +92,10 @@ export default class TooltipsPTR2e {
                     return this._onDamageInfoTooltip();
                 case "skill":
                     return this._onSkillTooltip();
+                case "effect":
+                    return this._onEffectTooltip();
+                case "affliction":
+                    return this._onAfflictionTooltip();
             }
         }
 
@@ -161,8 +166,52 @@ export default class TooltipsPTR2e {
         return 2000;
     }
 
+    async _onEffectTooltip() {
+        const effectId = game.tooltip.element?.dataset.id;
+        if (!effectId) return false;
+
+        const parent = await fromUuid<ActorPTR2e>((game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset.parent);
+        if (!parent) return false;
+        
+        const effect = parent.effects.get(effectId);
+        if (!effect) return false;
+
+        this.tooltip.classList.add('effect');
+        await this._renderTooltip({
+            path: "systems/ptr2e/templates/items/embeds/effect.hbs",
+            data: { document: effect, fields: effect.schema.fields },
+            direction: game.tooltip.element?.dataset.tooltipDirection as
+                | TooltipDirections
+                | undefined,
+        });
+
+        return 2000;
+    }
+
+    async _onAfflictionTooltip() {
+        const afflictionId = game.tooltip.element?.dataset.affliction;
+        if (!afflictionId) return false;
+
+        const affliction = game.ptr.data.afflictions.get(afflictionId);
+        if (!affliction) return false;
+
+        const effect = await ActiveEffectPTR2e.fromStatusEffect(affliction.id);
+        effect.description = game.i18n.localize(affliction.description!);
+
+        this.tooltip.classList.add('effect');
+        await this._renderTooltip({
+            path: "systems/ptr2e/templates/items/embeds/effect.hbs",
+            data: { document: effect, fields: effect.schema.fields },
+            direction: game.tooltip.element?.dataset.tooltipDirection as
+                | TooltipDirections
+                | undefined,
+        });
+
+        return 2000;
+    }
+
     async _onActionTooltip() {
-        const attackSlug = game.tooltip.element?.dataset.slug;
+        const attackSlug = game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
         if (!attackSlug) return false;
 
         const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
@@ -229,7 +278,7 @@ export default class TooltipsPTR2e {
     }
 
     async _onAttackTooltip() {
-        const attackSlug = game.tooltip.element?.dataset.slug;
+        const attackSlug = game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
         if (!attackSlug) return false;
 
         const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
@@ -251,7 +300,7 @@ export default class TooltipsPTR2e {
         this.tooltip.classList.add("attack");
         await this._renderTooltip({
             path: "systems/ptr2e/templates/items/embeds/move.hbs",
-            data: { attack, move: parent, traits },
+            data: { attack, move: parent, attackTraits: traits },
             direction: game.tooltip.element?.dataset.tooltipDirection as
                 | TooltipDirections
                 | undefined,

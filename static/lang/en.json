@@ -217,8 +217,8 @@
                     "evasive": "Evasive"
                 },
                 "Descriptions": {
-                    "fainted": "When a creature's HP reaches and remains at 0, it is afflicted with Fainted. A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all [Major Condition], [Minor Condition], [Pseudo Condition], and [Stat Change] effects they possess. Fainted is cured when the afflicted creature's HP is greater than 0. The creature's Weary count increases by 1 whenever they are cured of Fainted.",
-                    "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has Weak while Burn is active. Fire-Type creatures cannot be Burned.",
+                    "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-condition], @Trait[minor-condition], @Trait[pseudo-affliction], and @Trait[stat-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
+                    "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has @affliction[weak] while Burn is active. @Trait[fire]-Type creatures cannot be Burned.",
                     "poison": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature also has Dull while Poison is active.",
                     "blight": "At the end of the afflicted creature’s Activation, it loses X Stacks of Blight, where X is 2<sup style='font-size: x-small;'># of Activations passed with Blight</sup> and takes a Tick of HP per Stack lost. The creature also has Dull while Blight is active. When a creature receives Blight, it loses the Poison Condition, with Blight gaining 33% of its remaining Poison Stacks as extra Stacks on Blight. When afflicted with Poisoned X while Blighted, the creature gains +1 to its Blight Stacks.",
                     "paralysis": "The afflicted creature's Base SPD is reduced by 50%, and the creature may only perform 1 Simple Action on its Activations.",
@@ -278,11 +278,11 @@
                     "resolved": "An afflicted creature takes 25% less damage from all attacks.",
                     "stormcast": "An afflicted creature deals 20% more damage with attacks that it shares a Type with, and the Range of its [Wind] attacks increases by 50%.",
                     "boosted": "An afflicted creature gains +1 stage to ATK, DEF, SPATK, SPDEF, and SPD.",
-                    "rapid": "while afflicted with Rapid, the creature may perform Complex Actions as Simple Actions, [Exhaust] Actions are performed as though they lack the Trait, and [Set Up] Actions set up and resolve on the same activation. The creature has its Initiative delayed by 60% after its Activation and gains Vulnerable 1.",
-                    "strong": "while afflicted with Strong, the Power of the creature's Attacks are increased by +20% and has its Initiative delayed by 20% after its Activation.",
-                    "agile": "while afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
-                    "precise": "while afflicted with Precise, the creature has +1 default ACC and has its Initiative delayed by 20% after its Activation.",
-                    "evasive": "while afflicted with Evasive, the creature has +1 default ACC and the Power of its Attacks are decreased by -20%."
+                    "rapid": "While afflicted with Rapid, the creature may perform Complex Actions as Simple Actions OR [Exhaust] Actions are performed as though they lack the Trait OR [Set Up] Actions set up and resolve on the same activation. The creature has its Initiative delayed by 60% after its Activation and gains Vulnerable 1.",
+                    "strong": "While afflicted with Strong, the Power of the creature's Attacks are increased by +20% and has its Initiative delayed by 20% after its Activation.",
+                    "agile": "While afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
+                    "precise": "While afflicted with Precise, the creature has +1 default ACC and has its Initiative delayed by 20% after its Activation.",
+                    "evasive": "While afflicted with Evasive, the creature has +1 default ACC and the Power of its Attacks are decreased by -20%."
                 }
             }
         },
@@ -414,6 +414,7 @@
                     "label": "Effects"
                 }
             },
+            "CreateItem": "Create Item",
             "KnownAttacks": {
                 "hint": "Drag & Drop moves onto the actor / known attack sheet to add them as available options.<br><br>Drag & Drop from the Known Attack's sheet onto the Actor's Attack Slots to assign moves to the slots!"
             },
@@ -751,7 +752,7 @@
             },
             "distance": {
                 "label": "Range Increment",
-                "hint": "The <a class=\"content-link\" draggable=\"true\" data-link=\"\" data-uuid=\"JournalEntry.DSQM9mLokwFDNUeH.JournalEntryPage.46riMQ1pGoYmrwmA\" data-id=\"46riMQ1pGoYmrwmA\" data-type=\"JournalEntryPage\" data-tooltip=\"Text Page\"><i class=\"fas fa-file-lines\"></i>RIP</a> distance of the action."
+                "hint": "The RIP distance of the action."
             },
             "unit": {
                 "label": "Unit",
@@ -760,6 +761,10 @@
             "activationCost": {
                 "label": "Action Cost",
                 "hint": "The action cost to activate the Action."
+            },
+            "free": {
+                "label": "Free Attack",
+                "hint": "Free Attacks do not take up Attack Slots and are always available."
             },
             "trigger": {
                 "label": "Trigger",
@@ -850,6 +855,16 @@
                 "master": {
                     "label": "Master Abilities",
                     "hint": "The Master Abilities the Pokemon can learn."
+                }
+            },
+            "inventoryPoints": {
+                "current": {
+                    "label": "Current",
+                    "hint": "The current inventory points of this actor, used for manual tracking of IP spendature."
+                },
+                "max": {
+                    "label": "Max",
+                    "hint": "The maximum inventory points this actor can have, based on their resources skill."
                 }
             },
             "clock": {
@@ -1221,7 +1236,11 @@
         "Actions": {
             "attack": {
                 "Label": "Attack Actions"
-            }
+            },
+            "CreateVariantLabel": "Create Variant",
+            "VariantOfLabel": "Open Original",
+            "DeleteVariantLabel": "Delete Variant",
+            "OpenItemLabel": "Open Item"
         },
         "UI": {
             "DevMode": {
@@ -1601,6 +1620,17 @@
                     "label": "Paradoxian Studies",
                     "hint": "This skill is used to study the biology of Paradox Pokemon."
                 }
+            }
+        },
+        "PokemonGeneration": {
+            "Progress": {
+                "Prefix": "PTR2E | Pkmn Generator | ",
+                "Step1": "Prompting User for Details...",
+                "Step2": "Determining Basic info...",
+                "Step3": "Creating Moves...",
+                "Step4": "Creating Abilities...",
+                "Step5": "Finding art...",
+                "Complete": "Pokemon Generation Complete!"
             }
         }
     }

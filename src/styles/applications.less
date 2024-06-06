@@ -8,6 +8,7 @@ body {
     --border-theme-color: var(--color-light-6);
     --color-theme-4: var(--color-light-4);
     --color-theme-3: var(--color-light-3);
+    --input-height: 1.5rem;
 
     &.theme-light {
         --appv2-background-flat: rgba(225, 222 , 210, 0.94);
@@ -21,18 +22,31 @@ body {
             color: var(--color-dark-6);
         }
     }
+
+    .standard-form, .application.sheet {
+        fieldset {
+            padding: 0.5rem;
+            gap: 0.75rem;
+        }
+
+        .form-group {
+            gap: 0.2rem;
+        }
+    }
 }
 
 .application .window-header .window-title {
     height: 100%;
 }
 
-.ptr2e.application .controls-dropdown.expanded {
+.ptr2e.application .controls-dropdown, .sheet.application .controls-dropdown {
     background: var(--appv2-background);
     box-shadow: unset;
-    border: 1px solid var(--border-theme-color);
     button {
         background: none;
+    }
+    &.expanded {
+        border: 1px solid var(--border-theme-color);
     }
 }
 
@@ -59,6 +73,7 @@ body {
 
         menu {
             gap: 0;
+            padding: 4px;
         }
 
         .editor-content,
@@ -73,6 +88,7 @@ body {
 
         &.minimized {
             min-width: unset;
+            min-height: unset;
         }
 
         background: var(--appv2-background);
@@ -158,6 +174,7 @@ body {
                     input {
                         width: 80%;
                         align-self: center;
+                        margin-top: 2px;
                     }
 
                     .hp-current,
@@ -265,12 +282,28 @@ body {
 
                 &[data-tab="inventory"] {
                     .scroll.inventory {
-                        grid-area: span 5 / span 3;
+                        grid-area: 1 / 1 / span 5 / span 3;
 
                         overflow-y: auto;
                         overflow-x: hidden;
                         height: 100%;
                         gap: 0;
+                    }
+
+                    .inventory-points {
+                        grid-area: 1 / 4 / span 2 / span 2;
+                        padding: 0.5rem 0.5rem 0 0;
+                        
+                        fieldset {
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+                            overflow: hidden;
+
+                            input {
+                                text-align: center;
+                            }
+                        }
                     }
 
                     header {
@@ -334,6 +367,18 @@ body {
 
                             &:last-child {
                                 border-radius: 0 0 4px 4px;
+                            }
+                        }
+
+                        .item-name {
+                            &.rarity-uncommon {
+                                color: #33a7ff;
+                            }
+                            &.rarity-rare {
+                                color: #f5c42e;
+                            }
+                            &.rarity-unique {
+                                color: #a526ff;
                             }
                         }
                     }
@@ -1248,6 +1293,22 @@ body {
                 }
 
                 &[data-tab="effects"] {
+
+                    fieldset.can-add {
+                        position: relative;
+        
+                        .add-control {
+                            position: absolute;
+                            top: -9px;
+                            right: -2px;
+                            background: var(--appv2-background);
+                            border: 1px solid var(--border-theme-color);
+                            padding: 2px;
+                            border-radius: 0 4px 0 4px;
+                            cursor: pointer;
+                        }
+                    }
+
                     ul.effect-list {
                         list-style: none;
                         margin: 0 0.5rem;
@@ -3539,15 +3600,16 @@ body {
     margin: 0 15px 10px 0;
     pointer-events: all;
 
-    border-radius: 0 8px 8px 0;
+    border-radius: 8px 8px 8px 0;
     border: 1px solid var(--border-theme-color);
-    border-left: unset;
 
     display: flex;
     flex-direction: column;
 
     word-wrap: break-word;
     width: 135px;
+
+    z-index: 71;
 
     &:has(template[data-application-part="info"]) {
         display: none !important;
@@ -3722,6 +3784,10 @@ body {
             
             }
         }
+    }
+
+    section.token-info .icon img {
+        border-radius: 8px 0 0 0;
     }
 
     section.token-info,

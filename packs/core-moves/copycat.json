@@ -1,45 +1,41 @@
 {
-  "name": "Copycat",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/normal_icon.png",
-  "system": {
-    "slug": "copycat",
-    "description": "Effect: The user freely uses the last attack the target used. The user can select a new target for the copied attack as needed.",
-    "traits": [],
-    "actions": [
-      {
+    "name": "Copycat",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/normal_icon.png",
+    "system": {
         "slug": "copycat",
-        "name": "Copycat",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "normal"
-        ],
         "description": "Effect: The user freely uses the last attack the target used. The user can select a new target for the copied attack as needed.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "C"
-  },
-  "_id": "7W4h4UABFbJIdi6o",
-  "effects": []
+        "traits": [
+            "danger-close"
+        ],
+        "actions": [
+            {
+                "slug": "copycat",
+                "name": "Copycat",
+                "type": "attack",
+                "traits": [
+                    "danger-close"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 5
+                },
+                "category": "status",
+                "accuracy": 100,
+                "types": [
+                    "normal"
+                ],
+                "description": "Effect: The user freely uses the last attack the target used. The user can select a new target for the copied attack as needed.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "grade": "C"
+    },
+    "_id": "7W4h4UABFbJIdi6o",
+    "effects": []
 }

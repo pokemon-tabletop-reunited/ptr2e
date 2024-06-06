@@ -1,4 +1,4 @@
-import { ActorPTR2e } from "@actor";
+import { ActorPTR2e, ActorSheetPTR2e } from "@actor";
 import { ItemPTR2e, SpeciesPTR2e } from "@item";
 
 export const DropCanvasData = {
@@ -16,7 +16,7 @@ export const DropCanvasData = {
                         });
                     })()
                     
-                    await ActorPTR2e.create({
+                    const actor = await ActorPTR2e.create({
                         name: item.name,
                         type: item.traits?.has("humanoid") ? "humanoid" : "pokemon",
                         folder: folder?.id,
@@ -24,6 +24,14 @@ export const DropCanvasData = {
                             species: (item as SpeciesPTR2e).toObject().system
                         }
                     })
+                    if(!actor || !canvas.scene) return;
+
+                    const x = Math.floor(drop.x / canvas.scene.grid.size) * canvas.scene.grid.size
+                    const y = Math.floor(drop.y / canvas.scene.grid.size) * canvas.scene.grid.size
+
+                    const tokenData = await actor.getTokenDocument({x,y});
+                    //@ts-expect-error
+                    await canvas.scene.createEmbeddedDocuments("Token", [tokenData]);
                 }
             }
         });
@@ -39,8 +47,8 @@ export const DropCanvasData = {
                 });
 
             const actor = dropTarget?.actor;
-            if (actor && data.type === "Item") {
-                actor.sheet.emulateItemDrop(data);
+            if (actor && ["Affliction", "Item", "ActiveEffect"].includes(data.type!)) {
+                (actor.sheet as unknown as ActorSheetPTR2e).emulateItemDrop(data);
                 return false; // Prevent modules from doing anything further
             }
 

@@ -1,53 +1,44 @@
 {
-  "name": "Feint Attack",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/dark_icon.png",
-  "system": {
-    "slug": "feint-attack",
-    "description": "",
-    "traits": [
-      "dash",
-      "contact",
-      "danger-close"
-    ],
-    "actions": [
-      {
+    "name": "Feint Attack",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/dark_icon.png",
+    "system": {
         "slug": "feint-attack",
-        "name": "Feint Attack",
-        "type": "attack",
         "traits": [
-          "dash",
-          "contact",
-          "danger-close"
+            "dash",
+            "contact",
+            "danger-close"
         ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "physical",
-        "power": 60,
-        "accuracy": null,
-        "types": [
-          "dark"
+        "actions": [
+            {
+                "slug": "feint-attack",
+                "name": "Feint Attack",
+                "type": "attack",
+                "traits": [
+                    "dash",
+                    "contact",
+                    "danger-close"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 5
+                },
+                "category": "physical",
+                "power": 60,
+                "accuracy": 100,
+                "types": [
+                    "dark"
+                ],
+                "img": "icons/svg/explosion.svg"
+            }
         ],
-        "description": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "B"
-  },
-  "_id": "AtQsvtYLtT919vzU",
-  "effects": []
+        "grade": "B"
+    },
+    "_id": "AtQsvtYLtT919vzU",
+    "effects": []
 }

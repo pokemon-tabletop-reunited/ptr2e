@@ -28,6 +28,7 @@ export default abstract class PerkSystem extends PerkExtension {
 
             prerequisites: new SetField(new fields.StringField(), {label: "PTR2E.FIELDS.prerequisites.label", hint: "PTR2E.FIELDS.prerequisites.hint"}),
             cost: new fields.NumberField({ required: true, initial: 1, label: "PTR2E.FIELDS.apCost.label", hint: "PTR2E.FIELDS.apCost.hint"}),
+            originSlug: new SlugField({required: true, nullable: true, initial: null}),
             
             design: new fields.SchemaField({
                 arena: new fields.StringField({required: true, nullable: true, initial: null, choices: ["physical", "mental", "social"].reduce<Record<string,string>>((acc, arena) => ({...acc, [arena]: arena}), {}), label: "PTR2E.FIELDS.design.arena.label", hint: "PTR2E.FIELDS.design.arena.hint"}),
@@ -89,6 +90,7 @@ export default abstract class PerkSystem extends PerkExtension {
                     borderWidth: 3,
                     scale: 1.6,
                 })
+                this.cost = 5;
                 break;
             }
             case "ranked": {
@@ -96,6 +98,15 @@ export default abstract class PerkSystem extends PerkExtension {
             }
         }
     }
+
+    override prepareDerivedData(): void {
+        super.prepareDerivedData();
+
+        if(this.parent.actor) {
+            this.parent.actor.system.advancement.advancementPoints.spent += this.cost;
+        }
+    }
+
 
     get visible() {
         if(game.user.isGM) {
@@ -145,7 +156,7 @@ export default abstract class PerkSystem extends PerkExtension {
     override _onCreate(data: object, options: object, userId: string): void {
         super._onCreate(data, options, userId);
 
-        if (game.ptr.perks.initialized) {
+        if (game.ptr.perks.initialized && !this.parent.actor) {
             game.ptr.perks.perks.set(this.slug, this.parent);
             if (game.ptr.web.actor) game.ptr.web.refresh({ nodeRefresh: true });
         }
@@ -164,6 +175,7 @@ type PerkSchema = {
         true
     >;
     cost: foundry.data.fields.NumberField<number, number, true, false, true>;
+    originSlug: SlugField<true, true, true>;
     design: foundry.data.fields.SchemaField<
         {
             arena: foundry.data.fields.StringField<string, string, true, true, true>;

@@ -15,6 +15,7 @@ import { SpeciesSystemModel } from "@item/data/index.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
+import natures from "@scripts/config/natures.ts";
 
 class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
     static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -180,6 +181,21 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 nullable: true,
                 initial: null,
             }),
+            shiny: new fields.BooleanField({ required: true, initial: false }),
+            nature: new fields.StringField({
+                required: true,
+                choices: Object.keys(natures).reduce<Record<keyof typeof natures, string>>((acc, key) => ({ ...acc, [key]: key }), {} as Record<keyof typeof natures, string>),
+                initial: "hardy",
+            }),
+            gender: new fields.StringField({
+                required: true,
+                choices: {
+                    "genderless": "genderless",
+                    "male": "male",
+                    "female": "female"
+                },
+                initial: "genderless" as "genderless" | "male" | "female",
+            }),
             slots: new fields.NumberField({
                 required: true,
                 initial: 6,
@@ -188,31 +204,52 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 label: "PTR2E.FIELDS.slots.label",
                 hint: "PTR2E.FIELDS.slots.hint",
             }),
+            inventoryPoints: new fields.SchemaField({
+                current: new fields.NumberField({
+                    required: true,
+                    initial: 0,
+                    min: 0,
+                    label: "PTR2E.FIELDS.inventoryPoints.current.label",
+                    hint: "PTR2E.FIELDS.inventoryPoints.current.hint",
+                }),
+            })
         };
     }
 
-    // static override validateJoint(data: SourceFromSchema<DataSchema>): void {
-    //     super.validateJoint(data);
-    //     //@ts-expect-error
-    //     for (const [key, skill] of Object.entries(data.skills) as [string, Skill][]) {
-    //         if (["luck", "resources"].includes(skill.slug) && skill.rvs !== null) {
-    //             throw new Error("Luck & Resources should not have RVs");
-    //         }
-    //         // if(skill.slug !== key) {
-    //         //     throw new Error("Skill key does not match slug");
-    //         // }
-    //     }
-    // }
+    protected override _initialize(options?: Record<string, unknown>): void {
+        super._initialize(options);
+
+        Object.defineProperty(this.advancement, "advancementPoints", {
+            value: {
+                total: 0,
+                spent: 0
+            },
+            writable: true,
+        });
+        if(this.advancement.advancementPoints.available === undefined) {
+            Object.defineProperty(this.advancement.advancementPoints, "available", {
+                get: () => this.advancement.advancementPoints.total - this.advancement.advancementPoints.spent
+            })
+        }
+    }
 
     override prepareBaseData(): void {
         super.prepareBaseData();
         this._initializeModifiers();
         this._prepareSpeciesData();
 
-        this.advancement.level = Math.floor(Math.cbrt(this.advancement.experience.current || 1));
-        this.advancement.experience.next = Math.pow(Math.min(this.advancement.level + 1, 100), 3);
-        this.advancement.experience.diff =
-            this.advancement.experience.next - this.advancement.experience.current;
+        if(this.parent.isHumanoid()) {
+            this.advancement.level = Math.floor(Math.cbrt(((this.advancement.experience.current || 1) * 4) / 5));
+            this.advancement.experience.next = Math.ceil((5 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 4)
+            this.advancement.experience.diff =
+                this.advancement.experience.next - this.advancement.experience.current;
+        }
+        else {
+            this.advancement.level = Math.floor(Math.cbrt(((this.advancement.experience.current || 1) * 6) / 3));
+            this.advancement.experience.next = Math.ceil((3 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 6)
+            this.advancement.experience.diff =
+                this.advancement.experience.next - this.advancement.experience.current;
+        }
 
         //TODO: Change humanoid to ACE trait exclusively
         const isAce = this.parent.isHumanoid() || this.traits.has("ace");
@@ -229,6 +266,10 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                 get: () => this.advancement.rvs.total - this.advancement.rvs.spent,
             });
         }
+
+        // Calculate Advancement Points total
+        this.advancement.advancementPoints.total = this.parent.isHumanoid() ? (19 + this.advancement.level) : (10 + Math.floor(this.advancement.level / 2));
+        this.advancement.advancementPoints.spent = 0;
 
         for (const k in this.attributes) {
             const key = k as keyof Attributes;
@@ -250,6 +291,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         this.health.max = this.attributes.hp.value;
 
         this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
+        this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
     }
 
     _initializeModifiers() {
@@ -407,6 +449,10 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
     advancement: AdvancementData;
     money: number;
     slots: number;
+    inventoryPoints: {
+        current: number,
+        max: number
+    }
 
     movement: Collection<Movement>;
 

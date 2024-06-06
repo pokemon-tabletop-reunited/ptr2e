@@ -132,7 +132,14 @@ interface AdvancementData {
     /** Calculated Field */
     level: number,
     /** Calculated Field */
-    advancementPoints: number,
+    advancementPoints: {
+        /** Calculated Field */
+        total: number,
+        /** Calculated Field */
+        available: number,
+        /** Calculated Field */
+        spent: number
+    },
     experience: {
         current: number,
         /** Calculated Field */

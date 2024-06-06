@@ -8,6 +8,7 @@ body {
   --border-theme-color: var(--color-light-6);
   --color-theme-4: var(--color-light-4);
   --color-theme-3: var(--color-light-3);
+  --input-height: 1.5rem;
 }
 body.theme-light {
   --appv2-background-flat: rgba(225, 222, 210, 0.94);
@@ -20,16 +21,30 @@ body.theme-light {
 body.theme-light .application textarea:read-only {
   color: var(--color-dark-6);
 }
+body .standard-form fieldset,
+body .application.sheet fieldset {
+  padding: 0.5rem;
+  gap: 0.75rem;
+}
+body .standard-form .form-group,
+body .application.sheet .form-group {
+  gap: 0.2rem;
+}
 .application .window-header .window-title {
   height: 100%;
 }
-.ptr2e.application .controls-dropdown.expanded {
+.ptr2e.application .controls-dropdown,
+.sheet.application .controls-dropdown {
   background: var(--appv2-background);
   box-shadow: unset;
-  border: 1px solid var(--border-theme-color);
 }
-.ptr2e.application .controls-dropdown.expanded button {
+.ptr2e.application .controls-dropdown button,
+.sheet.application .controls-dropdown button {
   background: none;
+}
+.ptr2e.application .controls-dropdown.expanded,
+.sheet.application .controls-dropdown.expanded {
+  border: 1px solid var(--border-theme-color);
 }
 .application.sheet multi-select .tags,
 .application.sheet string-tags .tags,
@@ -54,6 +69,7 @@ body.theme-light .application textarea:read-only {
 }
 .application.sheet prose-mirror menu {
   gap: 0;
+  padding: 4px;
 }
 .application.sheet prose-mirror .editor-content,
 .application.sheet prose-mirror .editor-container .editor-content {
@@ -66,6 +82,7 @@ body.theme-light .application textarea:read-only {
 }
 .application.sheet.actor.v2.minimized {
   min-width: unset;
+  min-height: unset;
 }
 .application.sheet.actor.v2 .window-content {
   display: grid;
@@ -129,6 +146,7 @@ body.theme-light .application textarea:read-only {
 .application.sheet.actor.v2 .window-content aside.sidebar .inputs input {
   width: 80%;
   align-self: center;
+  margin-top: 2px;
 }
 .application.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-current,
 .application.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-current,
@@ -216,11 +234,24 @@ body.theme-light .application textarea:read-only {
   font-weight: bold;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .scroll.inventory {
-  grid-area: span 5 / span 3;
+  grid-area: 1 / 1 / span 5 / span 3;
   overflow-y: auto;
   overflow-x: hidden;
   height: 100%;
   gap: 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points {
+  grid-area: 1 / 4 / span 2 / span 2;
+  padding: 0.5rem 0.5rem 0 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points fieldset {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points fieldset input {
+  text-align: center;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header {
   align-items: center;
@@ -275,6 +306,15 @@ body.theme-light .application textarea:read-only {
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li:last-child {
   border-radius: 0 0 4px 4px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name.rarity-uncommon {
+  color: #33a7ff;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name.rarity-rare {
+  color: #f5c42e;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name.rarity-unique {
+  color: #a526ff;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name {
@@ -1555,6 +1595,33 @@ body.theme-light .application textarea:read-only {
 .application.sheet.team-sheet .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab="overview"] .item-description {
   min-height: 150px;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.action-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add {
+  position: relative;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.action-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control {
+  position: absolute;
+  top: -9px;
+  right: -2px;
+  background: var(--appv2-background);
+  border: 1px solid var(--border-theme-color);
+  padding: 2px;
+  border-radius: 0 4px 0 4px;
+  cursor: pointer;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
@@ -3392,13 +3459,13 @@ body.theme-light .application textarea:read-only {
   color: var(--appv2-text-color);
   margin: 0 15px 10px 0;
   pointer-events: all;
-  border-radius: 0 8px 8px 0;
+  border-radius: 8px 8px 8px 0;
   border: 1px solid var(--border-theme-color);
-  border-left: unset;
   display: flex;
   flex-direction: column;
   word-wrap: break-word;
   width: 135px;
+  z-index: 71;
 }
 .token-panel:has(template[data-application-part="info"]) {
   display: none !important;
@@ -3599,6 +3666,9 @@ body.theme-light .application textarea:read-only {
 }
 .token-panel .tab.effect-tab .effect:last-child {
   border-radius: 0 0 8px 8px;
+}
+.token-panel section.token-info .icon img {
+  border-radius: 8px 0 0 0;
 }
 .token-panel section.token-info,
 .token-panel section.party {

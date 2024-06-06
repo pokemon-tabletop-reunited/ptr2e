@@ -15,14 +15,19 @@ class ImageResolver {
         if(!basePath.endsWith('*')) {
             basePath = `${basePath}*`;
         }
+        try {
+            const result = await FilePicker.browse('data', basePath, {
+                extensions: exts,
+                wildcard: true,
+            });
+            if(!result.files?.length) return null;
 
-        const result = await FilePicker.browse('data', basePath, {
-            extensions: exts,
-            wildcard: true,
-        });
-        if(!result.files?.length) return null;
-
-        return new ImageResolver(result.files);
+            return new ImageResolver(result.files);
+        }
+        catch (error) {
+            console.error(`PTR2E | ImageResolver | Error while creating ImageResolver`, error);
+            return new ImageResolver([]);
+        }
     }
 
     static async createFromSpeciesData(config: ImageSpeciesResolverConfig, speciesData: SpeciesImageData) {
@@ -65,7 +70,7 @@ class ImageResolver {
     findSpecies(config: ImageSpeciesResolverConfig) {
         const {dexId, shiny, forms} = config;
 
-        const baseNeedle = [...dexId.toString()];
+        const baseNeedle = [...Handlebars.helpers.lpad(dexId.toString(), 3, 0)];
         const formsNeedleSuffix = [...forms.flatMap(f => [...f])];
 
         function formMatch(result: string) {
@@ -169,10 +174,22 @@ interface ImageSpeciesResolverConfig {
 type SpeciesImageData = {
     data: {
         base: string;
+        extensions: string[];
+    }
+    suffixes: Record<string, string> | null;
+}
+
+type SpeciesImageDataSource = {
+    data: {
+        base: string;
         extensions?: string[];
     }
     suffixes?: Record<string, string>;
 }
 
+type ModuleSpeciesImageDataSource = SpeciesImageDataSource & {
+    _source: string
+}
+
 export { ImageResolver };
-export type { ImageSpeciesResolverConfig, SpeciesImageData };
+export type { ImageSpeciesResolverConfig, SpeciesImageData, SpeciesImageDataSource, ModuleSpeciesImageDataSource };

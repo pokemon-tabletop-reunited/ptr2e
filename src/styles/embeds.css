@@ -1,3 +1,7 @@
+span.trait span.tag {
+  cursor: help;
+  text-decoration: underline;
+}
 .sheet .tab.active.sheet-body div.embed {
   padding: 0.5rem;
   border: 1px solid var(--border-theme-color);
@@ -136,6 +140,75 @@ aside[role="tooltip"].weapon figure header h2,
 .chat-message .weapon-embed figure header h2 {
   border-bottom: unset;
   text-align: center;
+}
+aside[role="tooltip"].attack figure header h2.rarity-uncommon,
+aside[role="tooltip"].ability figure header h2.rarity-uncommon,
+aside[role="tooltip"].consumable figure header h2.rarity-uncommon,
+aside[role="tooltip"].container figure header h2.rarity-uncommon,
+aside[role="tooltip"].effect figure header h2.rarity-uncommon,
+aside[role="tooltip"].equipment figure header h2.rarity-uncommon,
+aside[role="tooltip"].gear figure header h2.rarity-uncommon,
+aside[role="tooltip"].perk figure header h2.rarity-uncommon,
+aside[role="tooltip"].species figure header h2.rarity-uncommon,
+aside[role="tooltip"].weapon figure header h2.rarity-uncommon,
+.chat-message .move-embed figure header h2.rarity-uncommon,
+.chat-message .effect-embed figure header h2.rarity-uncommon,
+.chat-message .ability-embed figure header h2.rarity-uncommon,
+.chat-message .consumable-embed figure header h2.rarity-uncommon,
+.chat-message .container-embed figure header h2.rarity-uncommon,
+.chat-message .effect-item-embed figure header h2.rarity-uncommon,
+.chat-message .equipment-embed figure header h2.rarity-uncommon,
+.chat-message .gear-embed figure header h2.rarity-uncommon,
+.chat-message .perk-embed figure header h2.rarity-uncommon,
+.chat-message .species-embed figure header h2.rarity-uncommon,
+.chat-message .weapon-embed figure header h2.rarity-uncommon {
+  color: #33a7ff;
+}
+aside[role="tooltip"].attack figure header h2.rarity-rare,
+aside[role="tooltip"].ability figure header h2.rarity-rare,
+aside[role="tooltip"].consumable figure header h2.rarity-rare,
+aside[role="tooltip"].container figure header h2.rarity-rare,
+aside[role="tooltip"].effect figure header h2.rarity-rare,
+aside[role="tooltip"].equipment figure header h2.rarity-rare,
+aside[role="tooltip"].gear figure header h2.rarity-rare,
+aside[role="tooltip"].perk figure header h2.rarity-rare,
+aside[role="tooltip"].species figure header h2.rarity-rare,
+aside[role="tooltip"].weapon figure header h2.rarity-rare,
+.chat-message .move-embed figure header h2.rarity-rare,
+.chat-message .effect-embed figure header h2.rarity-rare,
+.chat-message .ability-embed figure header h2.rarity-rare,
+.chat-message .consumable-embed figure header h2.rarity-rare,
+.chat-message .container-embed figure header h2.rarity-rare,
+.chat-message .effect-item-embed figure header h2.rarity-rare,
+.chat-message .equipment-embed figure header h2.rarity-rare,
+.chat-message .gear-embed figure header h2.rarity-rare,
+.chat-message .perk-embed figure header h2.rarity-rare,
+.chat-message .species-embed figure header h2.rarity-rare,
+.chat-message .weapon-embed figure header h2.rarity-rare {
+  color: #dfad12;
+}
+aside[role="tooltip"].attack figure header h2.rarity-unique,
+aside[role="tooltip"].ability figure header h2.rarity-unique,
+aside[role="tooltip"].consumable figure header h2.rarity-unique,
+aside[role="tooltip"].container figure header h2.rarity-unique,
+aside[role="tooltip"].effect figure header h2.rarity-unique,
+aside[role="tooltip"].equipment figure header h2.rarity-unique,
+aside[role="tooltip"].gear figure header h2.rarity-unique,
+aside[role="tooltip"].perk figure header h2.rarity-unique,
+aside[role="tooltip"].species figure header h2.rarity-unique,
+aside[role="tooltip"].weapon figure header h2.rarity-unique,
+.chat-message .move-embed figure header h2.rarity-unique,
+.chat-message .effect-embed figure header h2.rarity-unique,
+.chat-message .ability-embed figure header h2.rarity-unique,
+.chat-message .consumable-embed figure header h2.rarity-unique,
+.chat-message .container-embed figure header h2.rarity-unique,
+.chat-message .effect-item-embed figure header h2.rarity-unique,
+.chat-message .equipment-embed figure header h2.rarity-unique,
+.chat-message .gear-embed figure header h2.rarity-unique,
+.chat-message .perk-embed figure header h2.rarity-unique,
+.chat-message .species-embed figure header h2.rarity-unique,
+.chat-message .weapon-embed figure header h2.rarity-unique {
+  color: #a526ff;
 }
 aside[role="tooltip"].attack figure header.header,
 aside[role="tooltip"].ability figure header.header,
@@ -1046,21 +1119,63 @@ content.perk-embed .perk-info fieldset.prereqs li.none {
   list-style: none;
   font-style: italic;
 }
-aside[role="tooltip"].ability figure header.traits,
-aside[role="tooltip"].consumable figure header.traits,
-aside[role="tooltip"].container figure header.traits,
-aside[role="tooltip"].equipment figure header.traits,
-aside[role="tooltip"].gear figure header.traits,
-aside[role="tooltip"].perk figure header.traits,
-aside[role="tooltip"].species figure header.traits,
-aside[role="tooltip"].weapon figure header.traits {
+aside[role="tooltip"].ability figure header.rarity-uncommon,
+aside[role="tooltip"].consumable figure header.rarity-uncommon,
+aside[role="tooltip"].container figure header.rarity-uncommon,
+aside[role="tooltip"].equipment figure header.rarity-uncommon,
+aside[role="tooltip"].gear figure header.rarity-uncommon,
+aside[role="tooltip"].perk figure header.rarity-uncommon,
+aside[role="tooltip"].species figure header.rarity-uncommon,
+aside[role="tooltip"].weapon figure header.rarity-uncommon {
+  color: #33a7ff;
+}
+aside[role="tooltip"].ability figure header.rarity-rare,
+aside[role="tooltip"].consumable figure header.rarity-rare,
+aside[role="tooltip"].container figure header.rarity-rare,
+aside[role="tooltip"].equipment figure header.rarity-rare,
+aside[role="tooltip"].gear figure header.rarity-rare,
+aside[role="tooltip"].perk figure header.rarity-rare,
+aside[role="tooltip"].species figure header.rarity-rare,
+aside[role="tooltip"].weapon figure header.rarity-rare {
+  color: #f5c42e;
+}
+aside[role="tooltip"].ability figure header.rarity-unique,
+aside[role="tooltip"].consumable figure header.rarity-unique,
+aside[role="tooltip"].container figure header.rarity-unique,
+aside[role="tooltip"].equipment figure header.rarity-unique,
+aside[role="tooltip"].gear figure header.rarity-unique,
+aside[role="tooltip"].perk figure header.rarity-unique,
+aside[role="tooltip"].species figure header.rarity-unique,
+aside[role="tooltip"].weapon figure header.rarity-unique {
+  color: #a526ff;
+}
+aside[role="tooltip"].ability figure header .traits,
+aside[role="tooltip"].consumable figure header .traits,
+aside[role="tooltip"].container figure header .traits,
+aside[role="tooltip"].equipment figure header .traits,
+aside[role="tooltip"].gear figure header .traits,
+aside[role="tooltip"].perk figure header .traits,
+aside[role="tooltip"].species figure header .traits,
+aside[role="tooltip"].weapon figure header .traits {
   margin-bottom: 0.75rem;
+}
+aside[role="tooltip"].ability figure .content-link,
+aside[role="tooltip"].consumable figure .content-link,
+aside[role="tooltip"].container figure .content-link,
+aside[role="tooltip"].equipment figure .content-link,
+aside[role="tooltip"].gear figure .content-link,
+aside[role="tooltip"].perk figure .content-link,
+aside[role="tooltip"].species figure .content-link,
+aside[role="tooltip"].weapon figure .content-link {
+  --content-link-background: rgba(0, 0, 0, 0.1);
+  background: var(--content-link-background);
+}
+aside[role="tooltip"].effect .content-link {
+  --content-link-background: rgba(0, 0, 0, 0.1);
+  background: var(--content-link-background);
 }
 aside[role="tooltip"].effect .content-embed {
   margin: 0.5rem 0;
-}
-aside[role="tooltip"].effect .content-embed figcaption a.content-link {
-  color: black;
 }
 aside[role="tooltip"].effect .effect-embed {
   padding: 0.5rem;
@@ -1137,6 +1252,7 @@ content.attack-embed {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 content.attack-embed aside {
   display: flex;
@@ -1187,4 +1303,7 @@ content.attack-embed main section.attack-description {
 }
 content.attack-embed main section.attack-description article {
   min-height: 50px;
+}
+content.attack-embed content.attack-embed.variant {
+  flex: 0 0 100%;
 }

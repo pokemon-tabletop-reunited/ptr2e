@@ -229,7 +229,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         const checkContext: CheckRollContext & {contexts: Record<ActorUUID, CheckContext>} = {
             type: "attack-roll",
             identifier: args.identifier ?? `${this.item.slug}.${this.attack.slug}`,
-            action: args.action || this.label || this.attack.name,
+            action: args.action || this.attack.slug,
             title: args.title || this.label || this.attack.name,
             actor: context.self.actor,
             token: context.self.token,
@@ -241,6 +241,14 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
             damaging: args.damaging,
             createMessage: args.createMessage ?? true,
             skipDialog: args.skipDialog ?? targets.length === 0,
+            omittedSubrolls: (() => {
+                const ommited = new Set<"damage" | "crit" | "accuracy">();
+                if(this.attack.category === "status" || !this.attack.power) ommited.add("damage"); 
+                if(this.attack.category === "status") ommited.add("crit");
+                if(!this.attack.accuracy) ommited.add("accuracy");
+
+                return ommited;
+            })()
         }
         const check = new CheckModifier(
             this.parent.slug,

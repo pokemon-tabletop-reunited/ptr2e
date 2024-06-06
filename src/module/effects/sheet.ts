@@ -433,9 +433,10 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
     }
 
     override _onRender(
-        _context: foundry.applications.api.ApplicationRenderContext,
-        _options: foundry.applications.api.HandlebarsDocumentSheetConfiguration
+        context: foundry.applications.api.ApplicationRenderContext,
+        options: foundry.applications.api.HandlebarsDocumentSheetConfiguration
     ): void {
+        super._onRender(context, options);
         if (this.#editingChangeIndex === null && this.#rulesLastScrollTop) {
             const changesTab = htmlQuery(this.element, "[data-tab='changes']");
             if (changesTab) changesTab.scrollTop = this.#rulesLastScrollTop;

@@ -1,5 +1,7 @@
-import { EquipmentData } from "@data";
+import { EquipmentData, PTRCONSTS } from "@data";
 import { TemplateConstructor } from "./data-template.ts";
+import { getTypes } from "@scripts/config/effectiveness.ts";
+import { SlugField } from "../fields/slug-field.ts";
 
 /**
  * Extracted data properties from the Gear data model, so that they can be used in other data models that don't need the full Gear data model.
@@ -121,42 +123,29 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
 
                 cost: new fields.NumberField({
                     required: true,
-                    initial: 0,
-                    validate: (d) => (d as number) >= 0,
+                    nullable: true,
+                    initial: null,
+                    validate: (d) => d === null || (d as number) > 0,
                     label: "PTR2E.FIELDS.gear.cost.label",
                     hint: "PTR2E.FIELDS.gear.cost.hint",
                 }),
                 crafting: new fields.SchemaField({
                     skill: new fields.StringField({
-                        required: true,
-                        initial: "accounting",
+                        required: false,
+                        nullable: true,
+                        initial: null,
                         label: "PTR2E.FIELDS.gear.crafting.skill.label",
                         hint: "PTR2E.FIELDS.gear.crafting.skill.hint",
                     }),
-                    time: new fields.SchemaField({
-                        value: new fields.NumberField({
-                            required: true,
-                            initial: 1,
-                            validate: (d) => (d as number) >= 0,
-                            label: "PTR2E.FIELDS.gear.crafting.time.value.label",
-                            hint: "PTR2E.FIELDS.gear.crafting.time.value.hint",
-                        }),
-                        unit: new fields.StringField({
-                            required: true,
-                            initial: "hours",
-                            choices: [
-                                "seconds",
-                                "minutes",
-                                "hours",
-                                "days",
-                                "weeks",
-                                "months",
-                                "years",
-                            ].reduce<Record<string,string>>((acc, unit) => ({...acc, [unit]: unit}), {}),
-                            label: "PTR2E.FIELDS.gear.crafting.time.unit.label",
-                            hint: "PTR2E.FIELDS.gear.crafting.time.unit.hint",
-                        }),
+                    spans: new fields.NumberField({
+                        required: true,
+                        nullable: true,
+                        initial: null,
+                        validate: (d) => d === null || (d as number) > 0,
+                        label: "PTR2E.FIELDS.gear.crafting.spans.label",
+                        hint: "PTR2E.FIELDS.gear.crafting.spans.hint",
                     }),
+                    materials: new fields.SetField(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.gear.crafting.materials.label", hint: "PTR2E.FIELDS.gear.crafting.materials.hint"}),
                 }),
                 equipped: new fields.EmbeddedDataField(EquipmentData),
                 grade: new fields.StringField({
@@ -184,6 +173,32 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
                     ].reduce<Record<string,string>>((acc, grade) => ({...acc, [grade]: grade}), {}),
                     label: "PTR2E.FIELDS.gear.grade.label",
                     hint: "PTR2E.FIELDS.gear.grade.hint",
+                }),
+                fling: new fields.SchemaField({
+                    type: new fields.StringField({
+                        required: true,
+                        choices: getTypes().reduce<Record<string,string>>((acc, type) => ({...acc, [type]: type}), {}),
+                        initial: PTRCONSTS.Types.UNTYPED,
+                        label: "PTR2E.FIELDS.pokemonType.label",
+                        hint: "PTR2E.FIELDS.pokemonType.hint",
+                    }),
+                    power: new fields.NumberField({
+                        required: true,
+                        nullable: true,
+                        initial: null,
+                        min: 0,
+                        max: 250,
+                        label: "PTR2E.FIELDS.power.label",
+                        hint: "PTR2E.FIELDS.power.hint",
+                    }),
+                    accuracy: new fields.NumberField({
+                        required: true,
+                        nullable: false,
+                        min: 10,
+                        max: 100,
+                        label: "PTR2E.FIELDS.accuracy.label",
+                        hint: "PTR2E.FIELDS.accuracy.hint",
+                    }),
                 }),
                 quantity: new fields.NumberField({
                     required: true,

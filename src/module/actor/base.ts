@@ -1,6 +1,5 @@
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import {
-    ActorSheetPTR2e,
     ActorSynthetics,
     ActorSystemPTR2e,
     Attribute,
@@ -16,7 +15,7 @@ import FolderPTR2e from "@module/folder/document.ts";
 import { CombatantPTR2e, CombatPTR2e } from "@combat";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
-import { ItemPTR2e, ItemSystemsWithActions, MovePTR2e } from "@item";
+import { ItemPTR2e, ItemSystemsWithActions, PerkPTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
@@ -50,6 +49,13 @@ class ActorPTR2e<
 
     get actions() {
         return this._actions;
+    }
+
+    get perks(): Map<string, PerkPTR2e> {
+        return this._perks ?? (this._perks = (this.itemTypes.perk as PerkPTR2e[]).reduce((acc, perk) => {
+            acc.set(perk.system.originSlug ?? perk.slug, perk);
+            return acc;
+        }, new Map<string, PerkPTR2e>()));
     }
 
     get combatant(): CombatantPTR2e | null {
@@ -140,6 +146,7 @@ class ActorPTR2e<
         };
 
         this._party = null;
+        this._perks = null;
 
         this.rollOptions = new RollOptionManager(this);
 
@@ -204,19 +211,6 @@ class ActorPTR2e<
 
         for (const attack of this.actions.attack) {
             if (attack.free) continue;
-
-            const item = attack.item;
-            if (item.type === "move") {
-                const move = item as MovePTR2e;
-                const primaryAttack = move.system.attack;
-                if (
-                    primaryAttack.slug !== attack.slug &&
-                    primaryAttack.slot !== null &&
-                    this.attacks.actions[primaryAttack.slot]?.slug === primaryAttack.slug
-                ) {
-                    attack.free = true;
-                }
-            }
 
             if (attack.slot === null) {
                 this.attacks.available.push(attack);
@@ -403,18 +397,18 @@ class ActorPTR2e<
             ? this.calcStatTotal(this.system.attributes.def, isCrit)
             : this.calcStatTotal(this.system.attributes.spd, isCrit);
     }
-    getAttackStat(attack: { category: AttackPTR2e["category"] }, isCrit: boolean) {
+    getAttackStat(attack: { category: AttackPTR2e["category"] }) {
         return attack.category === "physical"
-            ? this.calcStatTotal(this.system.attributes.atk, isCrit)
-            : this.calcStatTotal(this.system.attributes.spa, isCrit);
+            ? this.calcStatTotal(this.system.attributes.atk, false)
+            : this.calcStatTotal(this.system.attributes.spa, false);
     }
 
     calcStatTotal(stat: Attribute, isCrit: boolean) {
         const stageModifier = () => {
-            const stage = Math.clamp(stat.stage, -6, 6);
+            const stage = Math.clamp(stat.stage, -6, isCrit ? 0 : 6);
             return stage > 0 ? (2 + stage) / 2 : 2 / (2 + Math.abs(stage));
         };
-        return isCrit ? stat.value : stat.value * stageModifier();
+        return stat.value * stageModifier();
     }
 
     async applyDamage(damage: number) {
@@ -451,6 +445,7 @@ class ActorPTR2e<
     }
 
     async onEndActivation() {
+        if(!(game.user === game.users.activeGM)) return;
         if (!this.synthetics.afflictions.data.length) return;
         const afflictions = this.synthetics.afflictions.data.reduce<{
             toDelete: string[];
@@ -901,18 +896,18 @@ class ActorPTR2e<
         if(changed.system?.health?.value !== undefined) {
             const fainted = this.effects.get("faintedcondition") !== undefined
             if(changed.system.health.value as number <= 0 && !fainted) {
-                changed.effects ??= [];
-                (changed.effects as ActiveEffectPTR2e['_source'][]).push((await ActiveEffectPTR2e.fromStatusEffect('dead')).toObject() as ActiveEffectPTR2e['_source']);
+                const effects: ActiveEffectPTR2e['_source'][] = [];
+                effects.push((await ActiveEffectPTR2e.fromStatusEffect('dead')).toObject() as ActiveEffectPTR2e['_source']);
 
-                const weary = this.effects.get("wearycondition00");
+                const weary = this.effects.get("wearycondition00") as ActiveEffectPTR2e<this> | undefined;
                 if(!weary) {
-                    (changed.effects as ActiveEffectPTR2e['_source'][]).push((await ActiveEffectPTR2e.fromStatusEffect('weary')).toObject() as ActiveEffectPTR2e['_source']);
+                    effects.push((await ActiveEffectPTR2e.fromStatusEffect('weary')).toObject() as ActiveEffectPTR2e['_source']);
                 }
                 else {
-                    const wearyData = weary.toObject() as ActiveEffectPTR2e['_source'];
-                    wearyData.system.stacks = wearyData.system.stacks + 1;
-                    (changed.effects as ActiveEffectPTR2e['_source'][]).push(wearyData);
+                    await weary.update({"system.stacks": weary.system.stacks + 1});
                 }
+
+                await this.createEmbeddedDocuments("ActiveEffect", effects, {keepId: true});
             }
             else if(changed.system.health.value as number > 0 && fainted) {
                 await this.deleteEmbeddedDocuments("ActiveEffect", ["faintedcondition"]);
@@ -983,8 +978,6 @@ interface ActorPTR2e<
 > extends Actor<TParent, TSystem> {
     get folder(): FolderPTR2e<ActorPTR2e<TSystem, null>> | null;
 
-    sheet: ActorSheetPTR2e;
-
     _party: ActorParty | null;
 
     health: {
@@ -994,6 +987,7 @@ interface ActorPTR2e<
     synthetics: ActorSynthetics;
 
     _actions: ActionsCollections;
+    _perks: Map<string, PerkPTR2e> | null;
 
     level: number;
 
@@ -1009,7 +1003,7 @@ interface ActorPTR2e<
 
     skills: Record<string, Statistic>;
 
-    get itemTypes(): Record<string, ItemPTR2e>;
+    get itemTypes(): Record<string, ItemPTR2e[]>;
 }
 
 type ActorFlags2e = ActorFlags & {

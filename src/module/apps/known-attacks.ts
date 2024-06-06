@@ -149,4 +149,24 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
             },
         });
     }
+
+    get actor() {
+        return this.document;
+    }
+
+    /** @override */
+    override _onFirstRender() {
+        if(!this.actor) return;
+        //@ts-expect-error
+        this.actor.apps[this.id] = this;
+    }
+
+    /* -------------------------------------------- */
+
+    /** @override */
+    override _onClose() {
+        if(!this.actor) return;
+        //@ts-expect-error
+        delete this.actor.apps[this.id];
+    }
 }

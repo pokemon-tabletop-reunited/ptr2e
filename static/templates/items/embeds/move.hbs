@@ -2,10 +2,26 @@
     <header class="header">
         <h2>{{attack.name}}</h2>
     </header>
-    {{#if traits}}
+    {{#if attackTraits}}
     <header class="traits">
-        <input type="text" class="traits ptr2e-tagify" value="{{json traits}}" data-dType="JSON" readonly/>
+        <input type="text" class="traits ptr2e-tagify" value="{{json attackTraits}}" data-dType="JSON" readonly/>
     </header>
     {{/if}}
     {{> move-body attack=attack fields=attack.schema.fields}}
+    {{#if variants}}
+        <fieldset>
+            <legend>Variants</legend>
+            {{#each variants as |variant|}}
+                <header class="header">
+                    <h2>{{variant.name}}</h2>
+                </header>
+                {{#if variant.traits}}
+                <header class="traits">
+                    <input type="text" class="traits ptr2e-tagify" value="{{json variant.traits}}" data-dType="JSON" readonly/>
+                </header>
+                {{/if}}
+                {{> move-body attack=variant fields=../attack.schema.fields}}
+            {{/each}}
+        </fieldset>
+    {{/if}}
 </figure>

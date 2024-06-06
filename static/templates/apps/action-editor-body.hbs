@@ -1,5 +1,19 @@
 <section class="action">
-    <form class="scroll">
+    <div class="scroll">
+        {{#if (eq action.type "attack")}}
+            <fieldset>
+                <legend>Attack</legend>
+                {{formField fields.types value=source.types localize=true}}
+                {{formField fields.category value=source.category localize=true}}
+                {{formField fields.power value=source.power localize=true}}
+                {{formField fields.accuracy value=source.accuracy localize=true}}
+                {{formField fields.free value=action.free localize=true}}
+            </fieldset>
+        {{/if}}
+        <fieldset>
+            <legend>Effect Description</legend>
+            {{formField fields.description enriched=enrichedDescription value=source.description localize=true}}
+        </fieldset>
         <fieldset>
             <legend>Range</legend>
             {{formField fields.range.fields.target value=source.range.target localize=true}}
@@ -14,14 +28,5 @@
             {{formField fields.cost.fields.delay value=source.cost.delay localize=true}}
             {{formField fields.cost.fields.priority value=source.cost.priority localize=true}}
         </fieldset>
-        {{#if (eq action.type "attack")}}
-            <fieldset>
-                <legend>Attack</legend>
-                {{formField fields.types value=source.types localize=true}}
-                {{formField fields.category value=source.category localize=true}}
-                {{formField fields.power value=source.power localize=true}}
-                {{formField fields.accuracy value=source.accuracy localize=true}}
-            </fieldset>
-        {{/if}}
-    </form>
+    </div>
 </section>

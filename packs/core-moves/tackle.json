@@ -1,54 +1,45 @@
 {
-  "name": "Tackle",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/normal_icon.png",
-  "system": {
-    "slug": "tackle",
-    "description": "",
-    "traits": [
-      "push-1",
-      "dash",
-      "basic",
-      "contact"
-    ],
-    "actions": [
-      {
+    "name": "Tackle",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/normal_icon.png",
+    "system": {
         "slug": "tackle",
-        "name": "Tackle",
-        "type": "attack",
         "traits": [
-          "push-1",
-          "dash",
-          "basic",
-          "contact"
+            "push-1",
+            "dash",
+            "basic",
+            "contact"
         ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "physical",
-        "power": 40,
-        "accuracy": 100,
-        "types": [
-          "normal"
+        "actions": [
+            {
+                "slug": "tackle",
+                "name": "Tackle",
+                "type": "attack",
+                "traits": [
+                    "push-1",
+                    "dash",
+                    "basic",
+                    "contact"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 1
+                },
+                "category": "physical",
+                "power": 40,
+                "accuracy": 100,
+                "types": [
+                    "normal"
+                ]
+            }
         ],
-        "description": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null
-  },
-  "_id": "fWOSmnI68Lct2LUn",
-  "effects": []
+        "grade": "E"
+    },
+    "_id": "fWOSmnI68Lct2LUn",
+    "effects": []
 }
