@@ -1,51 +1,42 @@
 {
-  "name": "Swift",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/normal_icon.png",
-  "system": {
-    "slug": "swift",
-    "description": "",
-    "traits": [
-      "blast-2",
-      "danger-close"
-    ],
-    "actions": [
-      {
+    "name": "Swift",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/normal_icon.png",
+    "system": {
         "slug": "swift",
-        "name": "Swift",
-        "type": "attack",
         "traits": [
-          "blast-2",
-          "danger-close"
+            "blast-2",
+            "danger-close"
         ],
-        "range": {
-          "target": "blast",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "special",
-        "power": 60,
-        "accuracy": null,
-        "types": [
-          "normal"
+        "actions": [
+            {
+                "slug": "swift",
+                "name": "Swift",
+                "type": "attack",
+                "traits": [
+                    "blast-2",
+                    "danger-close"
+                ],
+                "range": {
+                    "target": "blast",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 5
+                },
+                "category": "special",
+                "power": 60,
+                "accuracy": 100,
+                "types": [
+                    "normal"
+                ],
+                "img": "icons/svg/explosion.svg"
+            }
         ],
-        "description": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "B"
-  },
-  "_id": "6WFfTWkoMPozYk0g",
-  "effects": []
+        "grade": "B"
+    },
+    "_id": "6WFfTWkoMPozYk0g",
+    "effects": []
 }

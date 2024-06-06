@@ -1,51 +1,45 @@
 {
-  "name": "Morph",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/normal_icon.png",
-  "system": {
-    "slug": "morph",
-    "description": "Effect: The user freely uses Transform. If the selected target has species variant (such as a Regional Variant or Delta Species), the user may select that variant in place of the target's species.",
-    "traits": [
-      "move-locked",
-      "transform"
-    ],
-    "actions": [
-      {
+    "name": "Morph",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/normal_icon.png",
+    "system": {
         "slug": "morph",
-        "name": "Morph",
-        "type": "attack",
-        "traits": [
-          "move-locked",
-          "transform"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 20,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "normal"
-        ],
         "description": "Effect: The user freely uses Transform. If the selected target has species variant (such as a Regional Variant or Delta Species), the user may select that variant in place of the target's species.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "A"
-  },
-  "_id": "9mYf5eOUtE1hADNU",
-  "effects": []
+        "traits": [
+            "move-locked",
+            "transform",
+            "danger-close"
+        ],
+        "actions": [
+            {
+                "slug": "morph",
+                "name": "Morph",
+                "type": "attack",
+                "traits": [
+                    "move-locked",
+                    "transform",
+                    "danger-close"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 20,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 7
+                },
+                "category": "status",
+                "accuracy": 100,
+                "types": [
+                    "normal"
+                ],
+                "description": "Effect: The user freely uses Transform. If the selected target has species variant (such as a Regional Variant or Delta Species), the user may select that variant in place of the target's species.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "grade": "A"
+    },
+    "_id": "9mYf5eOUtE1hADNU",
+    "effects": []
 }
