@@ -1,53 +1,44 @@
 {
-  "name": "Magnet Bomb",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/steel_icon.png",
-  "system": {
-    "slug": "magnet-bomb",
-    "description": "",
-    "traits": [
-      "explode",
-      "blast-2",
-      "danger-close"
-    ],
-    "actions": [
-      {
+    "name": "Magnet Bomb",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/steel_icon.png",
+    "system": {
         "slug": "magnet-bomb",
-        "name": "Magnet Bomb",
-        "type": "attack",
         "traits": [
-          "explode",
-          "blast-2",
-          "danger-close"
+            "explode",
+            "blast-2",
+            "danger-close"
         ],
-        "range": {
-          "target": "blast",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "physical",
-        "power": 60,
-        "accuracy": null,
-        "types": [
-          "steel"
+        "actions": [
+            {
+                "slug": "magnet-bomb",
+                "name": "Magnet Bomb",
+                "type": "attack",
+                "traits": [
+                    "explode",
+                    "blast-2",
+                    "danger-close"
+                ],
+                "range": {
+                    "target": "blast",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 5
+                },
+                "category": "physical",
+                "power": 60,
+                "accuracy": 100,
+                "types": [
+                    "steel"
+                ],
+                "img": "icons/svg/explosion.svg"
+            }
         ],
-        "description": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "B"
-  },
-  "_id": "P7I7DE8UTKho7tzQ",
-  "effects": []
+        "grade": "B"
+    },
+    "_id": "P7I7DE8UTKho7tzQ",
+    "effects": []
 }

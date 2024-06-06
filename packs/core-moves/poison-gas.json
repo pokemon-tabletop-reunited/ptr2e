@@ -1,51 +1,42 @@
 {
-  "name": "Poison Gas",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/poison_icon.png",
-  "system": {
-    "slug": "poison-gas",
-    "description": "Effect: An Obscurring Cloud is created in the [Blast] area. Any creature that starts their activation in, or enters the Poison Gas becomes Poison 5.",
-    "traits": [
-      "hazard",
-      "blast-4"
-    ],
-    "actions": [
-      {
+    "name": "Poison Gas",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/poison_icon.png",
+    "system": {
         "slug": "poison-gas",
-        "name": "Poison Gas",
-        "type": "attack",
+        "description": "<p>Effect: An Obscurring Cloud is created in the [Blast] area. Any creature that starts their activation in, or enters the Poison Gas becomes Poison 5. The 10m range increment for this move is it's absolute maximum range.</p>",
         "traits": [
-          "hazard",
-          "blast-4"
+            "hazard",
+            "blast-4"
         ],
-        "range": {
-          "target": "blast",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "poison"
+        "actions": [
+            {
+                "slug": "poison-gas",
+                "name": "Poison Gas",
+                "type": "attack",
+                "traits": [
+                    "hazard",
+                    "blast-4"
+                ],
+                "range": {
+                    "target": "blast",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 5
+                },
+                "category": "status",
+                "types": [
+                    "poison"
+                ],
+                "description": "<p>Effect: An Obscurring Cloud is created in the [Blast] area. Any creature that starts their activation in, or enters the Poison Gas becomes Poison 5. The 10m range increment for this move is it's absolute maximum range.</p>",
+                "img": "icons/svg/explosion.svg"
+            }
         ],
-        "description": "Effect: An Obscurring Cloud is created in the [Blast] area. Any creature that starts their activation in, or enters the Poison Gas becomes Poison 5.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "C"
-  },
-  "_id": "1uSmoHF5veiMfJQI",
-  "effects": []
+        "grade": "C"
+    },
+    "_id": "1uSmoHF5veiMfJQI",
+    "effects": []
 }

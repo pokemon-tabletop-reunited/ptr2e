@@ -1,51 +1,45 @@
 {
-  "name": "Heal Pulse",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/psychic_icon.png",
-  "system": {
-    "slug": "heal-pulse",
-    "description": "Effect: The target heals 50% of its Max HP.",
-    "traits": [
-      "pulse",
-      "healing"
-    ],
-    "actions": [
-      {
+    "name": "Heal Pulse",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/psychic_icon.png",
+    "system": {
         "slug": "heal-pulse",
-        "name": "Heal Pulse",
-        "type": "attack",
-        "traits": [
-          "pulse",
-          "healing"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "psychic"
-        ],
         "description": "Effect: The target heals 50% of its Max HP.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "A"
-  },
-  "_id": "FW25qMGzpyq8edhE",
-  "effects": []
+        "traits": [
+            "pulse",
+            "healing",
+            "danger-close"
+        ],
+        "actions": [
+            {
+                "slug": "heal-pulse",
+                "name": "Heal Pulse",
+                "type": "attack",
+                "traits": [
+                    "pulse",
+                    "healing",
+                    "danger-close"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 7
+                },
+                "category": "status",
+                "accuracy": 100,
+                "types": [
+                    "psychic"
+                ],
+                "description": "Effect: The target heals 50% of its Max HP.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "grade": "A"
+    },
+    "_id": "FW25qMGzpyq8edhE",
+    "effects": []
 }

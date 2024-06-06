@@ -1,45 +1,42 @@
 {
-  "name": "Clear Smog",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/poison_icon.png",
-  "system": {
-    "slug": "clear-smog",
-    "description": "Effect: On hit, the target's Stat stage effects are removed.",
-    "traits": [],
-    "actions": [
-      {
+    "name": "Clear Smog",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/poison_icon.png",
+    "system": {
         "slug": "clear-smog",
-        "name": "Clear Smog",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "special",
-        "power": 50,
-        "accuracy": null,
-        "types": [
-          "poison"
-        ],
         "description": "Effect: On hit, the target's Stat stage effects are removed.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "B"
-  },
-  "_id": "DNa9t27HxnlAgXwO",
-  "effects": []
+        "traits": [
+            "danger-close"
+        ],
+        "actions": [
+            {
+                "slug": "clear-smog",
+                "name": "Clear Smog",
+                "type": "attack",
+                "traits": [
+                    "danger-close"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 6
+                },
+                "category": "special",
+                "power": 50,
+                "accuracy": 100,
+                "types": [
+                    "poison"
+                ],
+                "description": "Effect: On hit, the target's Stat stage effects are removed.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "grade": "B"
+    },
+    "_id": "DNa9t27HxnlAgXwO",
+    "effects": []
 }

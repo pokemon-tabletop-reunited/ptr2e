@@ -1,51 +1,42 @@
 {
-  "name": "Shock Wave",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/electric_icon.png",
-  "system": {
-    "slug": "shock-wave",
-    "description": "",
-    "traits": [
-      "ray",
-      "danger-close"
-    ],
-    "actions": [
-      {
+    "name": "Shock Wave",
+    "type": "move",
+    "img": "/systems/ptr2e/img/icons/electric_icon.png",
+    "system": {
         "slug": "shock-wave",
-        "name": "Shock Wave",
-        "type": "attack",
         "traits": [
-          "ray",
-          "danger-close"
+            "ray",
+            "danger-close"
         ],
-        "range": {
-          "target": "cone",
-          "distance": 3,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "special",
-        "power": 60,
-        "accuracy": null,
-        "types": [
-          "electric"
+        "actions": [
+            {
+                "slug": "shock-wave",
+                "name": "Shock Wave",
+                "type": "attack",
+                "traits": [
+                    "ray",
+                    "danger-close"
+                ],
+                "range": {
+                    "target": "cone",
+                    "distance": 3,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 5
+                },
+                "category": "special",
+                "power": 60,
+                "accuracy": 100,
+                "types": [
+                    "electric"
+                ],
+                "img": "icons/svg/explosion.svg"
+            }
         ],
-        "description": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "B"
-  },
-  "_id": "Jh0VT5oAXNgSBhaQ",
-  "effects": []
+        "grade": "B"
+    },
+    "_id": "Jh0VT5oAXNgSBhaQ",
+    "effects": []
 }
