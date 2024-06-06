@@ -16,6 +16,15 @@ class PerkWeb extends PIXI.Container {
         this.#active = node;
     }
 
+    get hudNode() {
+        return this.#activeHudNode;
+    }
+    set hudNode(node: PerkNode | null) {
+        this.#activeHudNode = node;
+        foundry.applications.instances.get("perk-web-hud")?.render({"parts": ["perk"]})
+    }
+
+    #activeHudNode: PerkNode | null = null;
     #active: PerkNode | null = null;
     // @ts-ignore
     #dragDrop: DragDrop;
@@ -100,7 +109,7 @@ class PerkWeb extends PIXI.Container {
         await this.draw();
 
         if (actor) {
-            actor.sheet.setPosition({ left: 20, top: 20 });
+            actor.sheet.setPosition({ left: 270, top: 20 });
             await actor.sheet.minimize();
         }
 

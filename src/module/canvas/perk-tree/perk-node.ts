@@ -64,44 +64,6 @@ class PerkNode extends PIXI.Container {
     }
     private _legal = true;
 
-    // get alphaLevel() {
-    //     return this.node.perk.system.hidden
-    //         ? 0.5
-    //         : (() => {
-    //               switch (this.state) {
-    //                   case PerkState.unavailable:
-    //                       return 0.6;
-    //                   case PerkState.connected:
-    //                       return 0.95;
-    //                   case PerkState.available:
-    //                       return 1;
-    //                   case PerkState.purchased:
-    //                       return 1;
-    //               }
-    //           })() ||
-    //               this.node.perk.system.node.config?.alpha ||
-    //               1;
-    // }
-
-    // get tintColor() {
-    //     return this.node.perk.system.hidden
-    //         ? 0x666666
-    //         : (() => {
-    //               switch (this.state) {
-    //                   case PerkState.unavailable:
-    //                       return 0x888888;
-    //                   case PerkState.connected:
-    //                       return 0xeeeeee;
-    //                   case PerkState.available:
-    //                       return 0x000000;
-    //                   case PerkState.purchased:
-    //                       return 0x000000;
-    //               }
-    //           })() ||
-    //               this.node.perk.system.node.config?.tint ||
-    //               0x000000;
-    // }
-
     get saturation() {
         return this.node.perk.system.hidden
             ? 0
@@ -218,7 +180,7 @@ class PerkNode extends PIXI.Container {
 
         this.addEventListener("pointerover", () => {
             hoverTimer = setTimeout(() => {
-                game.ptr.web.perkHUD.activate(this);
+                game.ptr.web.hudNode = this;
             }, 350);
         });
 
@@ -339,7 +301,7 @@ class PerkNode extends PIXI.Container {
 
     async _onClickLeft(_event: PIXI.FederatedPointerEvent) {
         if (!game.ptr.web.editMode) {
-            game.ptr.web.perkHUD.activate(this);
+            game.ptr.web.hudNode = this;
         } else {
             if (this.active) {
                 await this.savePosition();

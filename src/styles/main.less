@@ -13,49 +13,6 @@
     }
 }
 
-#perk-tree {
-    position: absolute;
-    z-index: calc(var(--z-index-window) - 1);
-}
-
-#perk-web-hud {
-    position: fixed;
-    width: 100%;
-    bottom: 50px;
-    justify-content: center;
-    pointer-events: none;
-    z-index: calc(var(--z-index-tooltip) - 2);
-    display: flex;
-
-    .hud {
-        pointer-events: all;
-        width: 100%;
-        max-width: 800px;
-        align-items: center;
-        padding: 0.5rem;
-        background: #111112;
-        color: white;
-        border-radius: 15px;
-        display: flex;
-
-        gap: 0.25rem;
-
-        &.editing {
-            background: #851a1a;
-        }
-    }
-}
-
-#perk-hud {
-    pointer-events: all;
-
-    footer {
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-    }
-}
-
 string-tags-ptr2e {
   display: flex;
   flex-wrap: wrap;

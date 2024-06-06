@@ -1,5 +1,13 @@
 # Pokemon Tabletop Reunited 2nd Edition
-TODO: Add full readme here
+Installing the system is incredibly easy, just plug the manifest URL into Foundry's System Install window:
+```
+https://2e.ptr.wiki/foundry/download?repo=ptr2e
+```
+
+Alongside this you'll likely want to install the basic sprite collection too (this is a Module not a System):
+```
+https://2e.ptr.wiki/foundry/download?repo=ptr2e-pokemon-sprite-collection
+```
 
 ## Contributing
 To install the project it's quite simple, first clone it to your local.
