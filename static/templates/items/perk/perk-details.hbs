@@ -17,12 +17,13 @@
             {{formField fields.design.fields.approach value=source.system.design.approach localize=true}}
             {{formField fields.design.fields.archetype value=source.system.design.archetype localize=true}}
         </fieldset>
+        {{#if debug}}
         <fieldset>
             <legend>
                 Node Configuration (DEBUG VALUES)
             </legend>
-            {{formField fields.node.fields.i value=source.system.node.i localize=true}}
-            {{formField fields.node.fields.j value=source.system.node.j localize=true}}
+            {{formField fields.node.fields.i value=source.system.node.i localize=true disabled=true}}
+            {{formField fields.node.fields.j value=source.system.node.j localize=true disabled=true}}
             {{formField fields.node.fields.hidden value=source.system.node.hidden localize=true}}
 
             {{formField fields.node.fields.connected value=source.system.node.connected localize=true}}
@@ -39,5 +40,6 @@
                 {{formField fields.node.fields.config.fields.scale value=source.system.node.config.scale localize=true}}
             </fieldset>
         </fieldset>
+        {{/if}}
     </div>
 </section>
