@@ -265,7 +265,15 @@ function maybeUuidStringToUuidEmbed(uuid: string) {
     return uuid;
 }
 
-
+/**
+ * Check if a key is present in a given object in a type safe way
+ *
+ * @param obj The object to check
+ * @param key The key to check
+ */
+function objectHasKey<O extends object>(obj: O, key: unknown): key is keyof O {
+    return (typeof key === "string" || typeof key === "number") && key in obj;
+}
 
 export {
     fontAwesomeIcon,
@@ -282,6 +290,7 @@ export {
     capitalize,
     SORTABLE_BASE_OPTIONS,
     maybeUuidStringToUuidEmbed,
+    objectHasKey
 }
 export type {
     FontAwesomeStyle,

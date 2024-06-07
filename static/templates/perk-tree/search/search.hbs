@@ -1,0 +1,50 @@
+<section>
+    <div class="search">
+        <input name="search" type="search" value="{{filterData.search.text}}" placeholder="Search..." />
+        <dl>
+            <dt>Sort by:</dt>
+            <dd>
+                <select name="order" class="order">
+                    {{selectOptions filterData.order.options selected=filterData.order.by}}
+                </select>
+                <a class="direction" data-type="alpha" data-direction="{{filterData.order.direction}}">
+                {{#if (eq filterData.order.direction "asc")}}
+                    {{#if (eq filterData.order.by "name")}}
+                        <i class="fa-solid fa-sort-alpha-up"></i>
+                        {{else}}
+                        <i class="fa-solid fa-sort-numeric-up"></i>
+                    {{/if}}
+                {{else}}
+                    {{#if (eq filterData.order.by "name")}}
+                        <i class="fa-solid fa-sort-alpha-down-alt"></i>
+                    {{else}}
+                        <i class="fa-solid fa-sort-numeric-down-alt"></i>
+                    {{/if}}
+                {{/if}}
+                </a>
+            </dd>
+        </dl>
+        {{#each filterData.selects as |selectData type|}}
+            <dl class="{{type}}">
+                <dt>{{localize selectData.label}}:</dt>
+                <dd>
+                    <select name="{{type}}">
+                        {{selectOptions selectData.options selected=selectData.selected localize=true}}
+                    </select>
+                </dd>
+            </dl>
+        {{/each}}
+    </div>
+    {{#each filterData.multiselects as |selectData type|}}
+        {{#if (gt selectData.options.length 0)}}
+            <div class="multiselect" data-filter-type="multiselects" data-filter-name="{{type}}">
+                <label>{{selectData.label}}</label>
+                <input class="tags perk-web-search" name="{{type}}" data-tagify-select="true" spellcheck="false" value="{{json selectData.selected}}" />
+                <div class="filter-conjunction">
+                    <label><input type="radio" name="{{type}}-filter-conjunction" value="and" {{#if (eq selectData.conjunction "and" )}} checked{{/if}}>All of the above</label>
+                    <label><input type="radio" name="{{type}}-filter-conjunction" value="or" {{#if (eq selectData.conjunction "or" )}} checked{{/if}}>Any of the above</label>
+                </div>
+            </div>
+        {{/if}}
+    {{/each}}
+</section>
