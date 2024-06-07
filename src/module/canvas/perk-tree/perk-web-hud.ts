@@ -34,10 +34,7 @@ export default class PerkWebHUD extends foundry.applications.api.HandlebarsAppli
                         return;
                     }
 
-                    await actor.createEmbeddedDocuments("Item", [node.perk.toObject()]);
-                    await game.ptr.web.refresh({nodeRefresh: true});
-                    game.ptr.web.hudNode = game.ptr.web.collection.get(`${node.position.i},${node.position.j}`)?.element ?? null;
-                    foundry.applications.instances.get("perk-web-hud")!.render({parts: ["actor","perk"]});
+                    await actor.createEmbeddedDocuments("Item", [node.perk.clone({system: {cost: node.perk.system.cost}})]);
                 },
             },
         },

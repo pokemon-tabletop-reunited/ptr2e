@@ -1,3 +1,4 @@
+import { PerkState } from "./perk-node.ts";
 import { PerkStore, PTRNode } from "./perks-store.ts";
 
 class PerkGraph {
@@ -28,7 +29,7 @@ class PerkGraph {
 
                 this.matrix[node.perk.slug].connections[innerNode.perk.slug] = {
                     entry: innerNode,
-                    value: node.connected.has(innerNode.perk.slug) ? innerNode.perk.system.cost : 0,
+                    value: node.connected.has(innerNode.perk.slug) ? Math.max(innerNode.perk.system.cost,1) : 0,
                 };
             }
         }
@@ -78,7 +79,6 @@ class PerkGraph {
         return currentCheapest && currentShortest ? new PerkWebPath({ shortest: currentShortest, cheapest: currentCheapest }) : null;
     }
 
-
     getPathToRoot(node: PTRNode, mode: ("shortest" | "cheapest")): Path | null {
         const func = mode === "shortest" ? this.getShortestPath : this.getCheapestPath;
 
@@ -100,6 +100,11 @@ class PerkGraph {
         const shortest = this.getShortestPath(node1, node2);
         const cheapest = this.getCheapestPath(node1, node2);
         return shortest && cheapest ? new PerkWebPath({ shortest, cheapest }) : null;
+    }
+
+    getPurchasedPath(node1: PTRNode, node2: PTRNode): Path | null {
+        const shortest = this.getShortestPath(node1, node2, true);
+        return shortest ?? null;
     }
 
     /**
@@ -179,7 +184,7 @@ class PerkGraph {
     /**
      * Use Dijkstra's algorithm to find the shortest path between two nodes
      */
-    getShortestPath(node1: PTRNode, node2: PTRNode): Path | null{
+    getShortestPath(node1: PTRNode, node2: PTRNode, purchasedOnly = false): Path | null{
         const startNode = this.matrix[node1.perk.slug];
         const endNode = this.matrix[node2.perk.slug];
         if(!startNode || !endNode) return null;
@@ -230,6 +235,7 @@ class PerkGraph {
                 if (visited[slug]) continue;
                 // If the connection value is 0, it means there is no connection.
                 if(connection.value === 0) continue;
+                if(purchasedOnly && connection.entry.state !== PerkState.purchased) continue;
 
                 // Calculate the cost to this node
                 const total = current.total + 1;

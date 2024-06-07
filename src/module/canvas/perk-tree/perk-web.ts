@@ -9,6 +9,7 @@ import { Path, PathStep } from "./perk-graph.ts";
 import { FederatedEvent, TilingSprite } from "pixi.js";
 import PerkWebSearch from "./perk-web-search.ts";
 import { Progress } from "src/util/progress.ts";
+import { debounceAsync } from "@utils";
 
 class PerkWeb extends PIXI.Container {
     get activeNode() {
@@ -19,10 +20,15 @@ class PerkWeb extends PIXI.Container {
     }
 
     get hudNode() {
-        return this.#activeHudNode;
+        if(!this.#activeHudNode) return null;
+        return this.collection.get(`${this.#activeHudNode.node.position.i},${this.#activeHudNode.node.position.j}`)?.element ?? null;
     }
     set hudNode(node: PerkNode | null) {
-        this.#activeHudNode?.removeSelectedFilter();
+        if(this.#activeHudNode) {
+            this.#activeHudNode?.removeSelectedFilter();
+            this.collection.get(`${this.#activeHudNode.node.position.i},${this.#activeHudNode.node.position.j}`)?.element?.removeSelectedFilter();
+        }
+
         this.#activeHudNode = node;
         this.#activeHudNode?.addSelectedFilter();
         foundry.applications.instances.get("perk-web-hud")?.render({"parts": ["perk"]})
@@ -112,6 +118,8 @@ class PerkWeb extends PIXI.Container {
 
     private readonly DEBUG = false;
 
+    public refresh = debounceAsync(this._refresh, 200);
+
     async open(actor?: ActorPTR2e, { resetView = true } = {}) {
         if (!actor && !this.actor) return this;
         this.actor = actor ?? null;
@@ -133,7 +141,7 @@ class PerkWeb extends PIXI.Container {
 
         this.pan(resetView ? { x: -2238, y: 0, scale: 0.1 } : {})
 
-        await this.refresh({nodeRefresh: true});
+        await this._refresh({nodeRefresh: true});
 
         canvas.stage.eventMode = "none";
         this.stage.eventMode = "static";
@@ -288,7 +296,7 @@ class PerkWeb extends PIXI.Container {
         }
     }
 
-    public async refresh({ nodeRefresh } = { nodeRefresh: false }) {
+    private async _refresh({ nodeRefresh } = { nodeRefresh: false }) {
         if(this.progress.counter === this.progress.steps) this.progress = new Progress({ steps: 5});
         this.progress.advance("Refreshing the HUD...")
 
@@ -319,6 +327,7 @@ class PerkWeb extends PIXI.Container {
         }
 
         if (!this.#drawn || nodeRefresh) this.alignHUD();
+        await this.controls.render({ parts: ["actor", "perk"] });
 
         this.progress.close("Perk Web is ready!")
 
@@ -493,7 +502,7 @@ class PerkWeb extends PIXI.Container {
                         for(const pack in packUpdates) {
                             await Item.updateDocuments(packUpdates[pack], {pack});
                         }
-                        return this.refresh({ nodeRefresh: true });
+                        return this._refresh({ nodeRefresh: true });
                     },
                 },
             });
@@ -510,7 +519,7 @@ class PerkWeb extends PIXI.Container {
             yes: {
                 callback: async () => {
                     await node.perk.update({ "system.node": { i: null, j: null } });
-                    return this.refresh({ nodeRefresh: true });
+                    return this._refresh({ nodeRefresh: true });
                 },
             },
         });
@@ -964,7 +973,7 @@ class PerkWeb extends PIXI.Container {
         await node.node.perk?.update({
             "system.node.hidden": !node.node.perk.system.hidden,
         });
-        return this.refresh({ nodeRefresh: true });
+        return this._refresh({ nodeRefresh: true });
     }
 
     public toggleEditMode() {
@@ -998,7 +1007,7 @@ class PerkWeb extends PIXI.Container {
             this.app.renderer.background.alpha = 0.35;
         }
         if (this.activeNode) this.deactivateNode();
-        return this.refresh({ nodeRefresh: true });
+        return this._refresh({ nodeRefresh: true });
     }
 
     private alignHUD() {
@@ -1059,7 +1068,7 @@ class PerkWeb extends PIXI.Container {
                         j,
                     },
                 });
-                return await this.refresh({ nodeRefresh: true });
+                return await this._refresh({ nodeRefresh: true });
             }
         }
         return this;

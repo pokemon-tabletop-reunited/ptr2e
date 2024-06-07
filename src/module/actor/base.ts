@@ -15,7 +15,7 @@ import FolderPTR2e from "@module/folder/document.ts";
 import { CombatantPTR2e, CombatPTR2e } from "@combat";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
-import { ItemPTR2e, ItemSystemsWithActions, PerkPTR2e } from "@item";
+import { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions, PerkPTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
@@ -49,6 +49,14 @@ class ActorPTR2e<
 
     get actions() {
         return this._actions;
+    }
+
+    get originalRoot(): PerkPTR2e | null {
+        return (this.itemTypes.perk as PerkPTR2e[]).find(p => p.system.cost === 0 && p.system.node.type === "root") ?? null;
+    }
+
+    get unconnectedRoots(): PerkPTR2e[] {
+        return (this.itemTypes.perk as PerkPTR2e[]).filter(p => p.system.cost === 5 && p.system.node.type === "root");
     }
 
     get perks(): Map<string, PerkPTR2e> {
@@ -915,6 +923,75 @@ class ActorPTR2e<
         }
 
         return super._preUpdate(changed, options, user);
+    }
+
+    protected override _onUpdate(
+        changed: DeepPartial<this["_source"]>,
+        options: any,
+        userId: string,
+    ): void {
+        super._onUpdate(changed, options, userId);
+        if(game.ptr.web.actor === this) game.ptr.web.refresh({nodeRefresh: true})
+    }
+
+    protected override async _onCreateDescendantDocuments(
+        parent: this,
+        collection: "effects" | "items",
+        documents: ActiveEffectPTR2e<this>[] | ItemPTR2e<ItemSystemPTR, this>[],
+        results: ActiveEffectPTR2e<this>['_source'][] | ItemPTR2e<ItemSystemPTR, this>['_source'][],
+        options: any,
+        userId: string
+    ) {
+        super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
+        if(game.ptr.web.actor === this) await game.ptr.web.refresh({nodeRefresh: true})
+        if(!this.unconnectedRoots.length) return;
+
+        function isEffect(collection: "effects" | "items", _documents: any[]): _documents is ActiveEffectPTR2e<typeof parent>[] {
+            return collection === "effects";
+        }
+        if(isEffect(collection, documents)) return;
+
+        const perks = documents.filter((d) => d.type === "perk") as PerkPTR2e[];
+        if(!perks.length) return;
+
+        const updates = [];
+        const originalRoot = this.originalRoot;
+        if(!originalRoot) throw new Error("No original root found.");
+        const originalRootNode = game.ptr.web.collection.getName(originalRoot.slug, {strict: true});
+        
+        for(const root of this.unconnectedRoots) {
+            const rootNode = game.ptr.web.collection.getName(root.slug, {strict: true});
+
+            const path = game.ptr.web.collection.graph.getPurchasedPath(originalRootNode, rootNode);
+            if(path) {
+                updates.push({_id: root.id, "system.cost": 1});
+            }
+        }
+        if(updates.length) await this.updateEmbeddedDocuments("Item", updates);
+    }
+
+    protected override _onDeleteDescendantDocuments(
+        parent: this,
+        collection: "effects" | "items",
+        documents: any[],
+        ids: string[],
+        options: any,
+        userId: string
+    ): void {
+        super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId)
+        if(game.ptr.web.actor === this) game.ptr.web.refresh({nodeRefresh: true})
+    }
+
+    protected override _onUpdateDescendantDocuments(
+        parent: this,
+        collection: "effects" | "items",
+        documents: ActiveEffectPTR2e<this>[] | ItemPTR2e<ItemSystemPTR, this>[],
+        changes: ActiveEffectPTR2e<this>['_source'][] | ItemPTR2e<ItemSystemPTR, this>['_source'][],
+        options: any,
+        userId: string
+    ): void {
+        super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId)
+        if(game.ptr.web.actor === this) game.ptr.web.refresh({nodeRefresh: true})
     }
 
     override async toggleStatusEffect(
