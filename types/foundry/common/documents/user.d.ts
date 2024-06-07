@@ -34,7 +34,7 @@ export default class BaseUser<TCharacter extends BaseActor<null> = BaseActor<nul
      * @param action The action to test
      * @return Does the user have the ability to perform this action?
      */
-    can(action: UserAction): boolean;
+    can(action: UserPermissionString): boolean;
 
     getUserLevel(user: this): DocumentOwnershipLevel;
 

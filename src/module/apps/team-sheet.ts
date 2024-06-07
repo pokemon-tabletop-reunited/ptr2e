@@ -18,6 +18,7 @@ class TeamSheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin
     static override DEFAULT_OPTIONS = fu.mergeObject(
         super.DEFAULT_OPTIONS,
         {
+            id: "{id}",
             classes: ["sheet", "team-sheet"],
             position: {
                 height: 600,

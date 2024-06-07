@@ -6,6 +6,11 @@ import { PTRHook } from "./data.ts";
 import { HTMLStringTagsElementPTR2e } from "@module/apps/string-tags.ts";
 import { initializeSettings } from "@scripts/settings.ts";
 import { default as enrichers} from "@scripts/ui/text-enrichers.ts";
+import { WelcomeTour } from "@module/tours/welcome.ts";
+import { FoldersTour } from "@module/tours/folders.ts";
+import { CharacterCreationTour } from "@module/tours/character-creation.ts";
+import { PerkWebTour } from "@module/tours/perk-web.ts";
+import { GeneratingPokemonTour } from "@module/tours/generating-pokemon.ts";
 
 export const Init: PTRHook = {
     listen() {
@@ -92,6 +97,22 @@ export const Init: PTRHook = {
             }
 
             initializeSettings();
+
+            // Register tours
+            (async () => {
+                try {
+                    game.tours.register("ptr2e", "welcome", await WelcomeTour.fromJSON("/systems/ptr2e/tours/welcome.json"));
+                    game.tours.register("ptr2e", "folders", await FoldersTour.fromJSON("/systems/ptr2e/tours/folders.json"));
+                    game.tours.register("ptr2e", "character-creation", await CharacterCreationTour.fromJSON("/systems/ptr2e/tours/character-creation.json"));
+                    game.tours.register("ptr2e", "perk-web", await PerkWebTour.fromJSON("/systems/ptr2e/tours/perk-web.json"));
+                    game.tours.register("ptr2e", "generating-pokemon", await GeneratingPokemonTour.fromJSON("/systems/ptr2e/tours/generating-pokemon.json"));
+                    // game.tours.register("ptr2e", "combat", await CombatTour.fromJSON("/systems/ptr2e/tours/combat.json"));
+                }
+                catch(err) {
+                    console.error(err);
+                }
+
+            })();
 
             window.customElements.define(HTMLStringTagsElementPTR2e.tagName, HTMLStringTagsElementPTR2e);
 
