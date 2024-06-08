@@ -3,6 +3,7 @@ import { GetSceneControlButtons } from "./scene-control-buttons.ts";
 import { PTRHook } from "./data.ts";
 import { SettingUpdated } from "./setting-updated.ts";
 import { DropCanvasData } from "./drop-canvas-data.ts";
+import { ChatContext } from "./chat-context.ts";
 
 export const PTRHooks = {
     listen() {
@@ -11,7 +12,8 @@ export const PTRHooks = {
             Init,
             GetSceneControlButtons,
             SettingUpdated,
-            DropCanvasData
+            DropCanvasData,
+            ChatContext
         ]
         for (const listener of listeners) listener.listen();
     }
