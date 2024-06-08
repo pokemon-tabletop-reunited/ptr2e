@@ -2,6 +2,7 @@ import { ActorPTR2e } from "@actor";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
 import FolderPTR2e from "@module/folder/document.ts";
+import { htmlQueryAll } from "@utils";
 
 export type ApplicationConfigurationExpanded = foundry.applications.api.ApplicationConfiguration & {
     dragDrop: DragDropConfiguration[];
@@ -443,6 +444,22 @@ export class ItemSheetV2Expanded<
 
         // Attach drag-and-drop handlers
         this._dragDropHandlers.forEach((handler) => handler.bind(this.element));
+
+        if (!this.isEditable) {
+            const content = this.element.querySelector('.window-content');
+            if (!content) return;
+
+            for(const input of ["INPUT", "SELECT", "TEXTAREA", "BUTTON"]) {
+                for(const element of content.getElementsByTagName(input)) {
+                    if(input === "TEXTAREA") (element as HTMLTextAreaElement).readOnly = true;
+                    else (element as HTMLInputElement).disabled = true;
+                }
+            }
+            for(const element of htmlQueryAll(content, ".item-controls a")) {
+                (element as HTMLButtonElement).disabled = true;
+                element.attributes.setNamedItem(document.createAttribute("disabled"));
+            }
+        }
     }
 
     /**
@@ -472,7 +489,7 @@ export class ItemSheetV2Expanded<
      * @protected
      */
     _canDragStart(_selector: string) {
-        return game.user.isGM;
+        return this.isEditable;
     }
 
     /* -------------------------------------------- */
@@ -484,7 +501,7 @@ export class ItemSheetV2Expanded<
      * @protected
      */
     _canDragDrop(_selector: string) {
-        return game.user.isGM;
+        return this.isEditable;
     }
 
     /* -------------------------------------------- */
@@ -494,7 +511,29 @@ export class ItemSheetV2Expanded<
      * @param {DragEvent} event       The originating DragEvent
      * @protected
      */
-    _onDragStart(_event: DragEvent) {}
+    _onDragStart(event: DragEvent) {
+        const li = event.currentTarget as HTMLElement;
+        if ("link" in (event.target as HTMLElement).dataset) return;
+
+        // Create drag data
+        let dragData;
+
+        // Owned Items
+        if (li.dataset.itemId) {
+            dragData = this.document?.toDragData();
+        }
+
+        // Active Effect
+        if (li.dataset.effectId) {
+            const effect = this.document.effects.get(li.dataset.effectId) as ActiveEffectPTR2e;
+            dragData = effect?.toDragData();
+        }
+
+        if (!dragData) return;
+
+        // Set data transfer
+        event.dataTransfer!.setData("text/plain", JSON.stringify(dragData));
+    }
 
     /* -------------------------------------------- */
 
@@ -512,5 +551,48 @@ export class ItemSheetV2Expanded<
      * @param {DragEvent} event       The originating DragEvent
      * @protected
      */
-    _onDrop(_event: DragEvent) {}
+    async _onDrop(event: DragEvent): Promise<void> {
+        event.preventDefault();
+        const data = TextEditor.getDragEventData<{ type: string }>(event);
+        const item = this.document;
+        const allowed = Hooks.call("dropItemSheetData", item, data, event);
+        if (allowed === false) return;
+
+        // Handle different data types
+        switch (data.type) {
+            case "ActiveEffect": {
+                this._onDropActiveEffect(event, data);
+                return;
+            }
+            case "Item": {
+                const item = await ItemPTR2e.fromDropData(data as any);
+                if (!item || item.type !== "effect") return;
+                const effects = item.effects.map((effect) => effect.toObject());
+                if (effects.length === 0) return;
+                ActiveEffectPTR2e.createDocuments(effects, { parent: this.document });
+                return;
+            }
+        }
+    }
+
+    async _onDropActiveEffect(_event: DragEvent, data: object) {
+        const effect = await ActiveEffectPTR2e.fromDropData(data);
+        if (!this.document.isOwner || !effect) return false;
+        if (effect.parent === this.document) return false;
+        return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.document });
+    }
+
+    protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {
+        event.preventDefault();
+        const { handler, closeOnSubmit } = config;
+        const element = (event.currentTarget ?? this.element) as HTMLFormElement
+
+        $(element).find("tags ~ input").each((_i, input) => {
+            if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
+        });
+
+        const formData = new FormDataExtended(element);
+        if (handler instanceof Function) await handler.call(this, event, element, formData);
+        if (closeOnSubmit) await this.close();
+    }
 }

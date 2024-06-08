@@ -414,6 +414,10 @@ class ActorPTR2e<
         return effects;
     }
 
+    get critStage() {
+        return this.system.battleStats.critRate.stage + (this.system.modifiers["crit"] ?? 0);
+    }
+
     get evasionStage() {
         return this.system.battleStats.evasion.stage + (this.system.modifiers["evasion"] ?? 0);
     }
@@ -705,6 +709,20 @@ class ActorPTR2e<
                     modifier: accuracyStages,
                     method: "stage",
                     type: "accuracy",
+                    appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
+                })
+            );
+        }
+
+        const critStages = context.self.actor.critStage;
+        if (critStages != 0) {
+            context.self.modifiers.push(
+                new ModifierPTR2e({
+                    slug: `crit-modifier-unicqi-${appliesTo ?? fu.randomID()}`,
+                    label: "PTR2E.Modifiers.crit",
+                    modifier: critStages,
+                    method: "stage",
+                    type: "crit",
                     appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
                 })
             );

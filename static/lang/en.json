@@ -40,7 +40,8 @@
             "specialAttack": "Special Attack Stat",
             "specialDefense": "Special Defense Stat",
             "speed": "Speed Stat",
-            "rip": "Range Increment Penalty"
+            "rip": "Range Increment Penalty",
+            "crit": "Crit Stages"
         },
         "Effect": {
             "FIELDS": {
@@ -157,6 +158,22 @@
                 "transfer": {
                     "label": "Transfer Effect?",
                     "hint": "Whether this effect should apply to the actor holding this item (checked), or the item itself (unchecked)."
+                }
+            },
+            "Fields": {
+                "duration": {
+                    "turns": {
+                        "label": "Affl. Duration (Activations)",
+                        "hint": "The number of activations this affliction will last before it is automatically deleted.\nLeave blank for afflictions that should persist indefinitely."
+                    },
+                    "startTurn": {
+                        "label": "Applied On Activation",
+                        "hint": "The Nth activation of the actor this affliction applies to, when the affliction was first applied.\nNote: Generally should not be edited."
+                    },
+                    "remaining": {
+                        "label": "Remaining Activations",
+                        "hint": "The number of activations remaining before this affliction expires and is removed."
+                    }
                 }
             },
             "Statuses": {

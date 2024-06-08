@@ -80,7 +80,7 @@
     <div class="perk-web-button">
         <button type="button" class="perk-web-button" data-action="open-perk-web">
             <i class="fas fa-sitemap"></i>
-            <label>{{localize "PTR2E.ActorSheet.Buttons.perkWeb"}}</label>
+            <label>{{localize "PTR2E.ActorSheet.Buttons.perkWeb"}} {{#if actor.system.advancement.advancementPoints.available}}<small class="ml-1 unspend">({{actor.system.advancement.advancementPoints.available}} Unspend!)</small>{{/if}}</label>
         </button>
     </div>
 </aside>

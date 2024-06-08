@@ -1,18 +1,25 @@
 import { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
-import { DocumentSheetConfiguration, DocumentSheetV2, Tab } from "./document.ts";
+import { DocumentSheetConfiguration, Tab } from "./document.ts";
 import Tagify from "@yaireo/tagify";
 import GithubManager from "@module/apps/github.ts";
 import { ActiveEffectPTR2e } from "@effects";
 import { ActionEditor } from "@module/apps/action-editor.ts";
+import { ItemSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
 
 export default class ItemSheetPTR2e<
     TSystem extends ItemSystemPTR,
-> extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<ItemPTR2e>) {
+> extends foundry.applications.api.HandlebarsApplicationMixin(ItemSheetV2Expanded) {
     static override DEFAULT_OPTIONS = fu.mergeObject(
         super.DEFAULT_OPTIONS,
         {
             classes: ["move-sheet"],
+            dragDrop: [
+                {
+                    dropSelector: ".window-content",
+                    dragSelector: ".effect-list .effect",
+                }
+            ],
             position: {
                 height: 500,
                 width: 550,
@@ -193,11 +200,6 @@ export default class ItemSheetPTR2e<
         return frame;
     }
 
-    override _attachFrameListeners(): void {
-        super._attachFrameListeners();
-        this.element.addEventListener("drop", this._onDrop.bind(this));
-    }
-
     override _attachPartListeners(
         partId: string,
         htmlElement: HTMLElement,
@@ -259,7 +261,7 @@ export default class ItemSheetPTR2e<
                 element.addEventListener("click", async (event) => {
                     const effectId = (
                         (event.currentTarget as HTMLElement)?.closest(".effect") as HTMLElement
-                    )?.dataset.id;
+                    )?.dataset.effectId;
                     if (!effectId) return;
                     return (
                         this.document.effects.get(effectId) as ActiveEffectPTR2e<ItemPTR2e<TSystem>>
@@ -271,7 +273,7 @@ export default class ItemSheetPTR2e<
                 element.addEventListener("click", async (event) => {
                     const effectId = (
                         (event.currentTarget as HTMLElement)?.closest(".effect") as HTMLElement
-                    )?.dataset.id;
+                    )?.dataset.effectId;
                     if (!effectId) return;
                     return (
                         this.document.effects.get(effectId) as ActiveEffectPTR2e<ItemPTR2e<TSystem>>
@@ -283,7 +285,7 @@ export default class ItemSheetPTR2e<
                 element.addEventListener("click", async (event) => {
                     const effectId = (
                         (event.currentTarget as HTMLElement)?.closest(".effect") as HTMLElement
-                    )?.dataset.id;
+                    )?.dataset.effectId;
                     const effect = this.document.effects.get(effectId!);
                     if (!effect) return;
 
@@ -401,7 +403,8 @@ export default class ItemSheetPTR2e<
         }
     }
 
-    override _onRender(): void {
+    override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
+        super._onRender(context, options);
         for (const stringTags of this.element.querySelectorAll<HTMLElement>("string-tags")) {
             const path = stringTags.getAttribute("name");
             const validate = (() => {
@@ -473,35 +476,6 @@ export default class ItemSheetPTR2e<
         _event: Event
     ) {
         return this.document.toChat();
-    }
-
-    async _onDrop(event: DragEvent): Promise<any> {
-        event.preventDefault();
-        const data = TextEditor.getDragEventData<{ type: string }>(event);
-        const item = this.document;
-        const allowed = Hooks.call("dropItemSheetData", item, data, event);
-        if (allowed === false) return;
-
-        // Handle different data types
-        switch (data.type) {
-            case "ActiveEffect": {
-                return this._onDropActiveEffect(event, data);
-            }
-            case "Item": {
-                const item = await ItemPTR2e.fromDropData(data as any);
-                if (!item || item.type !== "effect") return;
-                const effects = item.effects.map((effect) => effect.toObject());
-                if (effects.length === 0) return;
-                return ActiveEffectPTR2e.createDocuments(effects, { parent: this.document });
-            }
-        }
-    }
-
-    async _onDropActiveEffect(_event: DragEvent, data: object) {
-        const effect = await ActiveEffectPTR2e.fromDropData(data);
-        if (!this.document.isOwner || !effect) return false;
-        if (effect.target === this.document) return false;
-        return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.document });
     }
 
     protected async _onCreate(event: Event) {

@@ -240,7 +240,26 @@ body {
                     
                     button {
                         flex: 0 0 70%;
-                        height: 30px;
+                        height: min-content;
+                        line-height: 1.2rem;
+                        padding: 0.25rem 0.5rem;
+
+                        &:has(small.unspend) {
+                            @keyframes glow {
+                                from {
+                                    box-shadow: 0 0 5px -5px gold;
+                                }
+                                to {
+                                    box-shadow: 0 0 5px 5px gold;
+                                }
+                            }
+
+                            animation: glow 1s infinite alternate;
+                        }
+
+                        small.unspend {
+                            font-size: 10px;
+                        }
                     }
                 }
             }
