@@ -656,8 +656,7 @@
                 "ResetAV": "Reset to BaseAV"
             }
         },
-        "FIELDS": {
-            
+        "FIELDS": {    
             "consumable": {
                 "type": {
                     "label": "Type",
@@ -679,6 +678,10 @@
                         "label": "Max Charges",
                         "hint": "The maximum number of charges this consumable can have."
                     }
+                },
+                "modifier": {
+                    "label": "Capture Rate Modifier",
+                    "hint": "The Capture Rate Modifier of this Pokeball."
                 }
             },
             "gear": {
@@ -691,15 +694,13 @@
                         "label": "Crafting Skill",
                         "hint": "The skill required to craft this gear."
                     },
-                    "time": {
-                        "value": {
-                            "label": "Crafting Time",
-                            "hint": "The time it takes to craft this gear."
-                        },
-                        "unit": {
-                            "label": "Crafting Time Unit",
-                            "hint": "The unit of time it takes to craft this gear."
-                        }
+                    "spans": {
+                        "label": "Crafting Spans",
+                        "hint": "The number of spans required to craft this gear."
+                    },
+                    "materials": {
+                        "label": "Crafting Materials",
+                        "hint": "The materials required to craft this gear."
                     }
                 },
                 "equipped": {
@@ -714,6 +715,20 @@
                     "handsHeld": {
                         "label": "Hands Held",
                         "hint": "The number of hands this gear requires to hold."
+                    }
+                },
+                "fling": {
+                    "power": {
+                        "label": "Power",
+                        "hint": "What power Fling has when this gear is flung."
+                    },
+                    "accuracy": {
+                        "label": "Accuracy",
+                        "hint": "The accuracy of Fling when this gear is flung."
+                    },
+                    "pokemonType": {
+                        "label": "Fling's Elemental Type",
+                        "hint": "The Elemental Type of Fling when this gear is flung."
                     }
                 },
                 "grade": {
@@ -731,6 +746,20 @@
                     "uncommon": "Uncommon",
                     "rare": "Rare",
                     "unique": "Unique"
+                }
+            },
+            "weapon": {
+                "weaponType": {
+                    "label": "Weapon Type",
+                    "hint": "The type of weapon. (Temporary field)"
+                },
+                "weaponPp": {
+                    "label": "Weapon PP",
+                    "hint": "The PP of the weapon. (Temporary field)"
+                },
+                "weaponRange": {
+                    "label": "Weapon Range",
+                    "hint": "The range of the weapon. (Temporary field)"
                 }
             },
             "actions": {

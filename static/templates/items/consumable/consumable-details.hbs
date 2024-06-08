@@ -7,6 +7,9 @@
             {{formField fields.consumableType value=source.system.consumableType localize=true}}
             {{formField fields.charges.fields.value value=source.system.charges.value localize=true}}
             {{formField fields.charges.fields.max value=source.system.charges.max localize=true}}
+            {{#if (eq source.system.consumableType 'pokeball')}}
+                {{formField fields.modifier value=source.system.modifier localize=true}}
+            {{/if}}
 
             {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true localize=true}}
         </fieldset>

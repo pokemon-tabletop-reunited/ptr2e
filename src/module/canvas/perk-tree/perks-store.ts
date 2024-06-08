@@ -25,6 +25,7 @@ class PerkStore extends Collection<PTRNode> {
     private edges: Map<SluggedEdgeString, PIXI.Graphics>;
     private _graph: PerkGraph;
     private _rootNodes: PTRNode[] | null = null;
+    private missingConnections: Map<string, Set<string>> = new Map();
 
     get rootNodes() {
         return this._rootNodes ??= this.filter(node => node.perk.system.node.type === "root");
@@ -44,6 +45,7 @@ class PerkStore extends Collection<PTRNode> {
     async initialize(actor: Maybe<ActorPTR2e>) {
         this.clear();
         this.edges.clear();
+        this.missingConnections = new Map();
         this._rootNodes = null;
         const perkManager = await game.ptr.perks.initialize();
         let hasRoot = false;
@@ -87,7 +89,10 @@ class PerkStore extends Collection<PTRNode> {
      * @param manager 
      */
     updatePerkState(currentPerk: PerkPTR2e, actor: ActorPTR2e, manager: PerkManager)  {
-        for(const connected of new Set(currentPerk.system.node.connected)) {
+        const missingConnections = this.missingConnections.get(currentPerk.slug) ?? [];
+        const set = new Set([...currentPerk.system.node.connected, ...missingConnections]);
+
+        for(const connected of set) {
             const connectedPerk = manager.perks.get(connected);
             if(!connectedPerk || connectedPerk.system.node.i === null || connectedPerk.system.node.j === null) continue;
             const isRootPerk = connectedPerk.system.node.type === 'root';
@@ -121,7 +126,12 @@ class PerkStore extends Collection<PTRNode> {
             if(!connectedPerk || connectedPerk.system.node.i === null || connectedPerk.system.node.j === null) continue;
             
             const connectedNode = this.get(`${connectedPerk.system.node.i},${connectedPerk.system.node.j}`);
-            if(!connectedNode || connectedNode.state !== PerkState.purchased) continue;
+            if(!connectedNode) {
+                if(!this.missingConnections.has(connected)) this.missingConnections.set(connected, new Set([currentNode.perk.slug]));
+                else this.missingConnections.get(connected)!.add(currentNode.perk.slug);
+                continue;
+            }
+            if(connectedNode.state !== PerkState.purchased) continue;
 
             if(isRootNode) currentNode.perk.system.cost = connectedPerk.system.cost;
 
