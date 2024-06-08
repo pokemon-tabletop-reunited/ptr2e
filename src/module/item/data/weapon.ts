@@ -11,6 +11,16 @@ export default abstract class WeaponSystem extends GearSystem {
      */
     declare parent: WeaponPTR2e;
 
+    static override defineSchema(): foundry.data.fields.DataSchema {
+        const fields = foundry.data.fields;
+        return {
+            ...super.defineSchema(),
+            weaponType: new fields.StringField({ required: true, blank: true, initial: ""}),
+            weaponPp: new fields.NumberField({ required: true, initial: 0}),
+            weaponRange: new fields.StringField({ required: true, initial: ""}),
+        };
+    }
+
     override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
         const result = await super._preCreate(data, options, user);
         if (result === false) return false;

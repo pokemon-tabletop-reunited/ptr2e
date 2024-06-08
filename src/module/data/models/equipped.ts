@@ -25,6 +25,7 @@ class EquipmentData extends foundry.abstract.DataModel {
 interface EquipmentData extends foundry.abstract.DataModel {
     carryType: PTRCONSTS.CarryType;
     handsHeld: number;
+    slot: string;
 }
 
 export default EquipmentData;
