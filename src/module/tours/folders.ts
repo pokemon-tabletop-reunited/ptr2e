@@ -2,8 +2,9 @@ import { ActorPTR2e } from "@actor";
 import FolderPTR2e from "@module/folder/document.ts";
 import FolderConfigPTR2e from "@module/folder/sheet.ts";
 import { htmlQuery } from "@utils";
+import { PTRTour } from "./base.ts";
 
-export class FoldersTour extends Tour {
+export class FoldersTour extends PTRTour {
     protected override async _preStep(): Promise<void> {
         switch (this.currentStep?.id) {
             case "welcome":
@@ -93,12 +94,12 @@ export class FoldersTour extends Tour {
             if(dialog) dialog.close();
         }
 
-        super._postStep();
+        return await super._postStep();
     }
 
     override async complete(): Promise<void> {
         await this.cleanUp();
-        super.complete();
+        return await super.complete();
     }
 
     override exit() {

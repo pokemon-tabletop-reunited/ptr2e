@@ -1,5 +1,5 @@
 <section class="tab sheet-body {{tabs.actions.cssClass}}" data-tab="actions" data-group="sheet">
-    <nav class="sheet-tabs sub-tabs tabs">
+    <nav class="sheet-tabs sub-tabs tabs" data-group="actions">
         {{#each subtabs as |tab|}}
         <a class="{{tab.cssClass}}" data-action="tab" data-group="{{tab.group}}" data-tab="{{tab.id}}">
             <i class="{{tab.icon}}"></i>
@@ -23,7 +23,7 @@
                 {{/each}}
                 <a class="edit-movelist" data-action="edit-movelist">Known Attacks</a>
             </fieldset>
-            <fieldset>
+            <fieldset class="other">
                 <legend>Other Attacks</legend>
                 {{#each actor.actions.attack as |action|}}
                     {{#if action.free}}

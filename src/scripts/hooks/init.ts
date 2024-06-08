@@ -9,8 +9,8 @@ import { default as enrichers} from "@scripts/ui/text-enrichers.ts";
 import { WelcomeTour } from "@module/tours/welcome.ts";
 import { FoldersTour } from "@module/tours/folders.ts";
 import { CharacterCreationTour } from "@module/tours/character-creation.ts";
-import { PerkWebTour } from "@module/tours/perk-web.ts";
-import { GeneratingPokemonTour } from "@module/tours/generating-pokemon.ts";
+// import { PerkWebTour } from "@module/tours/perk-web.ts";
+// import { GeneratingPokemonTour } from "@module/tours/generating-pokemon.ts";
 
 export const Init: PTRHook = {
     listen() {
@@ -100,12 +100,20 @@ export const Init: PTRHook = {
 
             // Register tours
             (async () => {
+                // Monkeypatch the game.tooltip class to stop auto-dismissing tooltips
+                const original = game.tooltip.deactivate.bind(game.tooltip);
+                //@ts-expect-error
+                game.tooltip.deactivate = (force) => {
+                    if(Tour.tourInProgress && !force) return;
+                    original();
+                }
+
                 try {
                     game.tours.register("ptr2e", "welcome", await WelcomeTour.fromJSON("/systems/ptr2e/tours/welcome.json"));
                     game.tours.register("ptr2e", "folders", await FoldersTour.fromJSON("/systems/ptr2e/tours/folders.json"));
                     game.tours.register("ptr2e", "character-creation", await CharacterCreationTour.fromJSON("/systems/ptr2e/tours/character-creation.json"));
-                    game.tours.register("ptr2e", "perk-web", await PerkWebTour.fromJSON("/systems/ptr2e/tours/perk-web.json"));
-                    game.tours.register("ptr2e", "generating-pokemon", await GeneratingPokemonTour.fromJSON("/systems/ptr2e/tours/generating-pokemon.json"));
+                    // game.tours.register("ptr2e", "perk-web", await PerkWebTour.fromJSON("/systems/ptr2e/tours/perk-web.json"));
+                    // game.tours.register("ptr2e", "generating-pokemon", await GeneratingPokemonTour.fromJSON("/systems/ptr2e/tours/generating-pokemon.json"));
                     // game.tours.register("ptr2e", "combat", await CombatTour.fromJSON("/systems/ptr2e/tours/combat.json"));
                 }
                 catch(err) {

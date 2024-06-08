@@ -1722,10 +1722,89 @@
                 }
             },
             "characterCreation": {
-                "title": "Character Creation",
-                "description": "A walkthrough of the Character Creation process, to help you get started with your first character!",
+                "title": "Actor Sheet Walkthrough",
+                "description": "A walkthrough of the Character Sheet, to help you get started with making your first character!",
                 "steps": {
-
+                    "welcome": {
+                        "title": "Welcome to the Actor Sheet Walkthrough!",
+                        "content": "This tour will guide you through the Actor Sheet, where you can see all the details of your Characters and NPCs!\nLet's get started with the Character Overview!"
+                    },
+                    "overview": {
+                        "title": "Character Overview",
+                        "content": "On the overview tab you can see some basic details of your Character.\nAt the moment this tab comes pre-loaded with your favourite skill list, movement speeds, and stats.\nIn the future this page will be fully customizable, allowing you to add any information from any tab to this page as you wish!"
+                    },
+                    "favouriteSkills": {
+                        "title": "Favourite Skills",
+                        "content": "Any skills marked as Favourite will show up in the favourite list, for quick access and reference!\nFavourite skills also show in the Token Panel's 'Skills' Tab!"
+                    },
+                    "movement": {
+                        "title": "Movement",
+                        "content": "You can see your Character's Movement Speeds in the Movement Section.\nAt this point in time there is no automation for tracking speed, and so you will have to track this manually until it is added in a later build!"
+                    },
+                    "stats": {
+                        "title": "Stats",
+                        "content": "Over here you can see your stats radar, you can open up the editor by double clicking on the radar!"
+                    },
+                    "statsEditor": {
+                        "title": "Stats Editor",
+                        "content": "In the Stats Editor you can adjust your stats, and see how they affect your derived stats!\nHumanoids will be able to assign both their Base Stats and EVs, while Pokémon can only update their EVs."
+                    },
+                    "sidebar": {
+                        "title": "Sidebar",
+                        "content": "The Sidebar is available in every tab and shows you some basic details like your HP, PP, EXP and Combat Stages.\nYou can also access the Perk Web from here!"
+                    },
+                    "actions": {
+                        "title": "Actions",
+                        "content": "The Actions Tab is where you can find all the different Actions your Character can take.\nThis includes Attack Actions, Passives, Generic Actions, and more."
+                    },
+                    "attacks": {
+                        "title": "Attack Actions",
+                        "content": "Every Character can know an unlimited amount of Attacks! However, they may only have a maximum of 6 Attacks occuping their Attack Slots, which can be changed whenever you Camp through the 'Known Attacks' menu."
+                    },
+                    "knownAttacks": {
+                        "title": "Known Attacks",
+                        "content": "From here you can simply drag & drop the Attacks you want to use today into the right slot on the Actor Sheet, as well as manage which Attacks you know in general.\n'Free' Attacks, those that do not take up an Attack Slot, are not shown here."
+                    },
+                    "otherAttacks": {
+                        "title": "Other Attacks",
+                        "content": "Any Attack that doesn't take up an Attack Slot, show up here.\nThis currently also includes 'Move Variants', like the different types of Weather Ball, these will stay here until 'Move Variants' are fully implemented into the 'Roll Window'"
+                    },
+                    "genericActions": {
+                        "title": "Generic Actions",
+                        "content": "Besides the Combat Actions tab there are also the Downtime Actions and Generic Actions tab, some of these may be used in combat, but most are for out of combat use."
+                    },
+                    "inventory": {
+                        "title": "Inventory",
+                        "content": "The Inventory Tab is where you can see all the Items your Character is carrying.\nThis includes all the Items in their Backpack, as well as any Items they are Wearing or Holding.\nCurrently the inventory has an extremely basic implementation, and the appropriate sections will show up once you add items of their types to your sheet."
+                    },
+                    "inventoryPoints": {
+                        "title": "Inventory Points",
+                        "content": "You can see how many Inventory Points your Character has in the Inventory Points Section and track them!\nFor now, you will have to track these manually until we add automation for this in a later build!"
+                    },
+                    "skills": {
+                        "title": "Skills",
+                        "content": "The Skills Tab is where you can see all the Skills your Character knows.\nSkills can effectively be in 3 states, 'Favourited', 'Normal' and 'Hidden'.\nFavourite skills show at the top of the Skills list, as well as showing up in the 'Favourite Skills' component and Token Panel's 'Skills' tab.\nHidden Skills meanwhile aren't shown, you can use this to hide skills that aren't important to your settings, or that you doubt your character will ever use!\nYou can always unhide them using the 'Toggle Hidden Skills' button on the right-hand side."
+                    },
+                    "popoutSkills": {
+                        "title": "Popout Skills",
+                        "content": "A lot of components can be 'Popped Out', just like the Skills List!\nThis allows you to have multiple components that are on different tabs open at once, or even exclusively open a component in a new window and be able to close the Character Sheet!\nYou can do this by simply clicking the 'Popout' Icon in the top right corner of any component that supports this."
+                    },
+                    "editSkills": {
+                        "title": "Edit Skills",
+                        "content": "Whenever you have skill points to spend it'll be quite obvious by the glowing 'Open Skills Editor' button!\nClick it to open the Skills Editor and spend your points!"
+                    },
+                    "perks": {
+                        "title": "Perks",
+                        "content": "The Perks Tab is where you can see all the Perks your Character has, as well as any possible Abilities."
+                    },
+                    "traits": {
+                        "title": "Traits",
+                        "content": "Besides Perks & Abilities, you can also view any Traits your actor has here.\nYou can manually add more traits here simply by clicking on the bar and typing the required trait in.\nTraits are currently partially automated, for example any Traits from your Species will be added here. But any traits granted by Perks or other sources will have to be added manually for the foreseeable future."
+                    },
+                    "effects": {
+                        "title": "Effects",
+                        "content": "The Effects Tab is where you can see all the Effects your Character has.\nLike poor Tour-san here who is Fainted.\nAdding effects can be done either through Automation, through dragging in an Effect from the Foundry Sidebar or another Sheet, or through the right-click token-status menu.\nPlease note that currently the right-click token status menu shows *all* afflictions in the system, this will later be streamlined to only show those that are pertinent like Fainted, Paralyzed, etc."
+                    }
                 }
             },
             "perkWeb": {
