@@ -30,7 +30,8 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
             prerequisites: {
                 names: itemNames,
                 links: itemLinks,
-            }
+            },
+            debug: game.user.isGM && !!game.settings.get("ptr2e", "dev-mode"),
         }
     }
 

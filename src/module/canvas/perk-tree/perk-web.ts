@@ -7,6 +7,9 @@ import { PerkHUD } from "./perk-hud.ts";
 import { ItemPTR2e } from "@item";
 import { Path, PathStep } from "./perk-graph.ts";
 import { FederatedEvent, TilingSprite } from "pixi.js";
+import PerkWebSearch from "./perk-web-search.ts";
+import { Progress } from "src/util/progress.ts";
+import { debounceAsync } from "@utils";
 
 class PerkWeb extends PIXI.Container {
     get activeNode() {
@@ -17,10 +20,17 @@ class PerkWeb extends PIXI.Container {
     }
 
     get hudNode() {
-        return this.#activeHudNode;
+        if(!this.#activeHudNode) return null;
+        return this.collection.get(`${this.#activeHudNode.node.position.i},${this.#activeHudNode.node.position.j}`)?.element ?? null;
     }
     set hudNode(node: PerkNode | null) {
+        if(this.#activeHudNode) {
+            this.#activeHudNode?.removeSelectedFilter();
+            this.collection.get(`${this.#activeHudNode.node.position.i},${this.#activeHudNode.node.position.j}`)?.element?.removeSelectedFilter();
+        }
+
         this.#activeHudNode = node;
+        this.#activeHudNode?.addSelectedFilter();
         foundry.applications.instances.get("perk-web-hud")?.render({"parts": ["perk"]})
     }
 
@@ -79,6 +89,12 @@ class PerkWeb extends PIXI.Container {
             writable: false,
         });
 
+        // Setup controls
+        Object.defineProperty(this, "search", {
+            value: new PerkWebSearch({}),
+            writable: false,
+        });
+
         Object.defineProperty(this, "perkHUD", {
             value: new PerkHUD({}),
             writable: false,
@@ -102,18 +118,30 @@ class PerkWeb extends PIXI.Container {
 
     private readonly DEBUG = false;
 
+    public refresh = debounceAsync(this._refresh, 200);
+
     async open(actor?: ActorPTR2e, { resetView = true } = {}) {
         if (!actor && !this.actor) return this;
         this.actor = actor ?? null;
+
+        if(!this.#drawn) {
+            this.progress = new Progress({ steps: 10});
+            this.progress.advance("Opening Perk web...");
+        }
         
         await this.draw();
 
         if (actor) {
+            this.progress.advance("Hiding Actor sheet...");
             actor.sheet.setPosition({ left: 270, top: 20 });
             await actor.sheet.minimize();
+
+
         }
 
-        this.pan(resetView ? { x: -2238, y: 0, scale: 0.1 } : {}).refresh();
+        this.pan(resetView ? { x: -2238, y: 0, scale: 0.1 } : {})
+
+        await this._refresh({nodeRefresh: true});
 
         canvas.stage.eventMode = "none";
         this.stage.eventMode = "static";
@@ -127,6 +155,9 @@ class PerkWeb extends PIXI.Container {
     async close() {
         if (this.editMode) await this.toggleEditMode();
 
+        this.hudNode = null;
+        this.search.resetFilters();
+
         const actor = this.actor;
         this.actor = null;
         actor?.sheet.render(false);
@@ -135,6 +166,7 @@ class PerkWeb extends PIXI.Container {
         // Deactive UI
         this.perkHUD.clear();
         this.controls.close({ animate: false });
+        this.search.close({ animate: false })
 
         this.canvas.hidden = true;
         this.stage.eventMode = "none";
@@ -149,8 +181,7 @@ class PerkWeb extends PIXI.Container {
     private async draw() {
         if (this.#drawn) return;
 
-        // Load perks and initialize the collection
-        await this.collection.initialize(this.actor);
+        this.progress.advance("Setting the stage...")
 
         // Set the pivot point to the center of the viewport
         const { width, height } = this.app.renderer.screen;
@@ -160,6 +191,8 @@ class PerkWeb extends PIXI.Container {
         this.backgroundLayer = this.addChild(new PIXI.Container());
         this.foregroundLayer = this.addChild(new PIXI.Container());
         this.select = this.addChild(new PIXI.Graphics()) as PIXI.Graphics & { active: boolean };
+
+        this.progress.advance("Drawing the background...")
 
         this.background = this.backgroundLayer.addChild(await this._drawBackground());
 
@@ -174,11 +207,12 @@ class PerkWeb extends PIXI.Container {
         // Enable Interactivity
         this.enableInteractivity();
 
+        this.progress.advance("Drawing the HUD...")
+
         // Draw HUD
         await canvas.hud.render(true);
 
         // Draw initial cycle
-        this.refresh();
         this.#drawn = true;
 
         return this;
@@ -205,24 +239,6 @@ class PerkWeb extends PIXI.Container {
         background.y = -backgroundSize;
 
         return background;
-
-        // const background = new PIXI.Graphics();
-        // background
-        //     .beginFill(0x000000, 0.1)
-        //     .drawRect(
-        //         -backgroundSize,
-        //         -backgroundSize,
-        //         backgroundSize + backgroundSize,
-        //         backgroundSize + backgroundSize
-        //     )
-        //     .endFill();
-
-        // const sprite = background.addChild(new PIXI.Sprite());
-        // sprite.texture =
-        //     (getTexture("/ui/denim075.png") as PIXI.Texture) ??
-        //     ((await loadTexture("/ui/denim075.png")) as PIXI.Texture);
-
-        // return background;
     }
 
     protected _drawGrid() {
@@ -280,28 +296,30 @@ class PerkWeb extends PIXI.Container {
         }
     }
 
-    // private pan({ x, y, scale }: { x?: number; y?: number; scale?: number } = {}) {
-    //     x ??= this.stage.pivot.x;
-    //     y ??= this.stage.pivot.y;
-    //     scale ??= this.stage.scale.x;
-    //     this.stage.pivot.set(x, y);
-    //     this.stage.scale.set(scale, scale);
-    //     this.perkHUD.setPosition();
-    //     this.alignHUD();
+    private async _refresh({ nodeRefresh } = { nodeRefresh: false }) {
+        if(this.progress.counter === this.progress.steps) this.progress = new Progress({ steps: 5});
+        this.progress.advance("Refreshing the HUD...")
 
-    //     return this;
-    // }
-
-    public async refresh({ nodeRefresh } = { nodeRefresh: false }) {
         // Render the HUD
-        this.controls.render(true);
-
+        await this.controls.render(true);
+        
+        this.progress.advance("Refreshing Collection...")
         if (nodeRefresh) {
             this.nodes.removeChildren();
             this.edges.removeChildren();
             await this.collection.initialize(this.actor);
+            
+            this.progress.advance("Initializing Search...")
+            await this.search.refresh();
+        }
+        else {
+            this.progress.advance("Initializing Search...")
         }
 
+        await this.search.initialize();
+        this.search.render(true);
+
+        this.progress.advance("Drawing the nodes...")
         for (const node of this.collection) {
             if (nodeRefresh || !node.element) {
                 this._drawNode(node);
@@ -309,6 +327,9 @@ class PerkWeb extends PIXI.Container {
         }
 
         if (!this.#drawn || nodeRefresh) this.alignHUD();
+        await this.controls.render({ parts: ["actor", "perk"] });
+
+        this.progress.close("Perk Web is ready!")
 
         return this;
     }
@@ -481,7 +502,7 @@ class PerkWeb extends PIXI.Container {
                         for(const pack in packUpdates) {
                             await Item.updateDocuments(packUpdates[pack], {pack});
                         }
-                        return this.refresh({ nodeRefresh: true });
+                        return this._refresh({ nodeRefresh: true });
                     },
                 },
             });
@@ -498,7 +519,7 @@ class PerkWeb extends PIXI.Container {
             yes: {
                 callback: async () => {
                     await node.perk.update({ "system.node": { i: null, j: null } });
-                    return this.refresh({ nodeRefresh: true });
+                    return this._refresh({ nodeRefresh: true });
                 },
             },
         });
@@ -512,6 +533,11 @@ class PerkWeb extends PIXI.Container {
             });
         }
         return true;
+    }
+
+    public panToNode(node: PTRNode) {
+        const position = this.getHexPosition(node.position.i, node.position.j);
+        this.pan({ x: position.x, y: position.y, scale: 0.3 });
     }
 
     private onDragRightMove(event: {
@@ -947,7 +973,7 @@ class PerkWeb extends PIXI.Container {
         await node.node.perk?.update({
             "system.node.hidden": !node.node.perk.system.hidden,
         });
-        return this.refresh({ nodeRefresh: true });
+        return this._refresh({ nodeRefresh: true });
     }
 
     public toggleEditMode() {
@@ -960,7 +986,7 @@ class PerkWeb extends PIXI.Container {
                 const pack = game.packs.get("ptr2e.core-perks");
                 if (pack) {
                     pack.configure({ locked: false });
-                    pack.render(true, { top: 0, left: window.innerWidth - 310 - 350 });
+                    pack.render(true, { top: 0, left: window.innerWidth - 310 - 360 - 250});
                 }
             }
 
@@ -981,7 +1007,7 @@ class PerkWeb extends PIXI.Container {
             this.app.renderer.background.alpha = 0.35;
         }
         if (this.activeNode) this.deactivateNode();
-        return this.refresh({ nodeRefresh: true });
+        return this._refresh({ nodeRefresh: true });
     }
 
     private alignHUD() {
@@ -1042,7 +1068,7 @@ class PerkWeb extends PIXI.Container {
                         j,
                     },
                 });
-                return await this.refresh({ nodeRefresh: true });
+                return await this._refresh({ nodeRefresh: true });
             }
         }
         return this;
@@ -1105,6 +1131,7 @@ interface PerkWeb {
     stage: PIXI.Container;
     controls: PTRPerkTreeHUD;
     perkHUD: PerkHUD;
+    search: PerkWebSearch;
 
     backgroundLayer: PIXI.Container;
     foregroundLayer: PIXI.Container;
@@ -1123,6 +1150,8 @@ interface PerkWeb {
     editMode: boolean;
 
     controlled: PerkNode[];
+
+    progress: Progress
 }
 export type { CoordinateString };
 export default PerkWeb;

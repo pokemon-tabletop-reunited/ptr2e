@@ -24,6 +24,7 @@ type SkillMessageSchema = {
     slug: SlugField<true, false, false>;
     luckRoll: foundry.data.fields.JSONField<Rolled<CheckRoll>, true, true, false>;
     appliedLuck: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+    rerolled: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
 };
 
 abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
@@ -43,6 +44,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
             slug: new SlugField({ required: true }),
             luckRoll: new fields.JSONField({ required: true, nullable: true }),
             appliedLuck: new fields.BooleanField({ required: true, initial: false }),
+            rerolled: new fields.BooleanField({ required: true, initial: false }),
         };
     }
 
@@ -135,10 +137,11 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
                 luckRoll: context.luckRoll?.total,
                 appliedLuck: this._source.appliedLuck,
                 breakdown: context.roll.data.breakdown,
+                rerolled: this._source.rerolled,
             });
         })();
 
-        if(context.luckRoll) {
+        if (context.luckRoll) {
             context.label = "End of Day Luck Roll";
         }
 
@@ -149,6 +152,60 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
         html.find("button[data-action='increase-luck']").on("click", this.applyLuck.bind(this));
     }
 
+    public async reroll() {
+        if (this.rerolled) return;
+        if (!this.context?.actor) return;
+        if (!this.context?.roll) return;
+
+        const reroll = (await this.context.roll.clone().roll()) as Rolled<CheckRoll>;
+        await this.parent.update({ "system.roll": reroll.toJSON(), "system.rerolled": true });
+    }
+
+    get currentOrigin(): Promise<Maybe<ActorPTR2e>> {
+        return this.context?.actor?.uuid ? fromUuid<ActorPTR2e>(this.context.actor.uuid) : Promise.resolve(null);
+    }
+
+    public async applyLuckIncrease(number: number) {
+        if (!this.context?.roll) return;
+        if (!this.context.actor) return;
+        const currentResult = this.context.roll.total;
+        if ((currentResult - number) % 10 !== 0) {
+            ui.notifications.warn("Luck increases must be multiples of 10.");
+            return;
+        }
+
+        const actor = await this.currentOrigin;
+        if(!actor) return;
+
+        const luck = actor.system.skills.get("luck")!.total;
+        if (luck < number) {
+            ui.notifications.warn("You do not have enough Luck to apply this increase.");
+            return;
+        }
+
+        const skills = actor.system.skills.map((skill) => {
+            return skill.slug === "luck"
+                ? {
+                      ...skill,
+                      value: luck - number,
+                  }
+                : skill;
+        });
+        await actor.update({ "system.skills": skills });
+
+        ui.notifications.info(
+            `Successfully applied Luck to this roll, spending ${number} Luck from ${
+                this.context.actor.name
+            }. New total: ${actor.system.skills.get("luck")!.total}`
+        );
+
+        const roll = fu.duplicate(this.roll);
+        //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
+        roll.total -= number;
+
+        await this.parent.update({ "system.roll": roll });
+    }
+
     private async applyLuck() {
         if (this.appliedLuck) {
             ui.notifications.warn("You have already applied this luck increase.");
@@ -156,7 +213,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
         }
 
         if (!this.context?.actor) return;
-        if(!this.luckRoll?.total) return;
+        if (!this.luckRoll?.total) return;
 
         await this.context.actor.update({
             "system.skills": this.context.actor.system.skills.map((skill) => {
@@ -168,7 +225,11 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
                     : skill;
             }),
         });
-        ui.notifications.info(`Successfully applied Luck increase of ${this.luckRoll!.total} to ${this.context.actor.name}. New total: ${this.context.actor.system.skills.get('luck')!.total}`)
+        ui.notifications.info(
+            `Successfully applied Luck increase of ${this.luckRoll!.total} to ${
+                this.context.actor.name
+            }. New total: ${this.context.actor.system.skills.get("luck")!.total}`
+        );
 
         await this.parent.update({ "system.appliedLuck": true });
     }

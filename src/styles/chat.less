@@ -61,7 +61,7 @@
         }
     }
 
-    &.attack, &.skill {
+    &.attack, &.skill, &.capture {
         .message-content {
             padding: 0;
 
@@ -421,14 +421,110 @@
                 }
             }
 
-            .dos {
+            .reroll {
+                color: #714a03;
+                background: #f3daac;
+            }
+
+            .dos, .reroll {
                 font-weight: bold;
                 padding: 0.5rem;
                 border: 1px solid var(--border-theme-color);
                 border-radius: 8px;
                 margin-top: 0.25rem;
                 margin-bottom: 0;
+            }
+        }
+    }
 
+    &.capture {
+        section.results {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            gap: 5px;
+            height: 208px;
+
+            .accuracy, .crit, .shake {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+
+                opacity: 0;
+                animation: fadeInAnimation ease 2s;
+                animation-iteration-count: 1;
+                animation-fill-mode: forwards;
+            }
+
+            .accuracy {
+                animation-delay: 1.5s;
+            }
+            .crit {
+                animation-delay: 2.5s
+            }
+            .shake-1 {
+                animation-delay: 4s;
+            }
+            .shake-2 {
+                animation-delay: 6s;
+            }
+            .shake-3 {
+                animation-delay: 8s;
+            }
+            .shake-4 {
+                animation-delay: 10s;
+            }
+
+            label {
+                font-weight: bold;
+                flex: 0 0 40%;
+            }
+            span {
+                flex: 1;
+            }
+
+            header {
+                border-bottom: 1px solid var(--color-underline-header);
+                padding: 0.5rem 0;
+            }
+
+            footer.results {
+                font-size: 1rem;
+                font-weight: bold;
+                padding: 0.5rem 0;
+                border-top: 1px solid var(--color-underline-header);
+                margin-top: auto;
+
+                opacity: 0;
+                animation: fadeInAnimation ease 2s;
+                animation-iteration-count: 1;
+                animation-fill-mode: forwards;
+
+                &:has(.success) {
+                    color: #18520b;
+                    background: #18520b33;
+                }
+                &:has(.failure) {
+                    color: #aa0200;
+                    background: #aa020033;
+                }
+            }
+
+            .success {
+                color: #18520b;
+            }
+            .failure {
+                color: #aa0200;
+            }
+
+            @keyframes fadeInAnimation {
+                0% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
             }
         }
     }

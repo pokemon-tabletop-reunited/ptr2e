@@ -477,6 +477,8 @@ interface SpeciesSystem {
         spe: number;
     };
 
+    captureRate: number;
+
     /**
      * The typing of the effect.
      * @remarks

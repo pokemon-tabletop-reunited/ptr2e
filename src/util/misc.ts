@@ -10,10 +10,17 @@ const wordBoundary = String.raw`(?:${wordCharacter})(?=${nonWordCharacter})|(?:$
 const nonWordBoundary = String.raw`(?:${wordCharacter})(?=${wordCharacter})`;
 const lowerCaseLetter = String.raw`\p{Lowercase_Letter}`;
 const upperCaseLetter = String.raw`\p{Uppercase_Letter}`;
-const lowerCaseThenUpperCaseRE = new RegExp(`(${lowerCaseLetter})(${upperCaseLetter}${nonWordBoundary})`, "gu");
+const lowerCaseThenUpperCaseRE = new RegExp(
+    `(${lowerCaseLetter})(${upperCaseLetter}${nonWordBoundary})`,
+    "gu"
+);
 
-const nonWordCharacterHyphenOrSpaceRE = /[^-\p{White_Space}\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]/gu;
-const upperOrWordBoundariedLowerRE = new RegExp(`${upperCaseLetter}|(?:${wordBoundary})${lowerCaseLetter}`, "gu");
+const nonWordCharacterHyphenOrSpaceRE =
+    /[^-\p{White_Space}\p{Alphabetic}\p{Mark}\p{Decimal_Number}\p{Join_Control}]/gu;
+const upperOrWordBoundariedLowerRE = new RegExp(
+    `${upperCaseLetter}|(?:${wordBoundary})${lowerCaseLetter}`,
+    "gu"
+);
 
 /**
  * The system's sluggification algorithm for labels and other terms.
@@ -60,33 +67,52 @@ type SlugCamel = "dromedary" | "bactrian" | null;
 function formatSlug(slug: string): string;
 function formatSlug(slug: Maybe<string>): Maybe<string>;
 function formatSlug(slug: Maybe<string>) {
-    return capitalize(slug)?.replaceAll('-', ' ');
+    return capitalize(slug)?.replaceAll("-", " ");
 }
 
 function capitalize(input: string): string;
 function capitalize(input: Maybe<string>): Maybe<string>;
 function capitalize(input: Maybe<string>) {
-    if(!input) return input;
+    if (!input) return input;
     var i, j, str, lowers, uppers;
     str = input.replace(/([^\W_]+[^\s-]*) */g, function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
 
-    // Certain minor words should be left lowercase unless 
+    // Certain minor words should be left lowercase unless
     // they are the first or last words in the string
-    lowers = ['A', 'An', 'The', 'And', 'But', 'Or', 'For', 'Nor', 'As', 'At',
-        'By', 'For', 'From', 'In', 'Into', 'Near', 'Of', 'On', 'Onto', 'To', 'With'];
+    lowers = [
+        "A",
+        "An",
+        "The",
+        "And",
+        "But",
+        "Or",
+        "For",
+        "Nor",
+        "As",
+        "At",
+        "By",
+        "For",
+        "From",
+        "In",
+        "Into",
+        "Near",
+        "Of",
+        "On",
+        "Onto",
+        "To",
+        "With",
+    ];
     for (i = 0, j = lowers.length; i < j; i++)
-        str = str.replace(new RegExp('\\s' + lowers[i] + '\\s', 'g'),
-            function (txt) {
-                return txt.toLowerCase();
-            });
+        str = str.replace(new RegExp("\\s" + lowers[i] + "\\s", "g"), function (txt) {
+            return txt.toLowerCase();
+        });
 
     // Certain words such as initialisms or acronyms should be left uppercase
-    uppers = ['Id', 'Tv'];
+    uppers = ["Id", "Tv"];
     for (i = 0, j = uppers.length; i < j; i++)
-        str = str.replace(new RegExp('\\b' + uppers[i] + '\\b', 'g'),
-            uppers[i].toUpperCase());
+        str = str.replace(new RegExp("\\b" + uppers[i] + "\\b", "g"), uppers[i].toUpperCase());
 
     return str;
 }
@@ -126,7 +152,9 @@ function capitalize(input: Maybe<string>) {
 
 function isBracketedValue(value: unknown): value is BracketedValue {
     return (
-        R.isObject(value) && Array.isArray(value.brackets) && (typeof value.field === "string" || !("fields" in value))
+        R.isObject(value) &&
+        Array.isArray(value.brackets) &&
+        (typeof value.field === "string" || !("fields" in value))
     );
 }
 
@@ -135,7 +163,7 @@ type FontAwesomeStyle = "solid" | "regular" | "duotone";
 
 function fontAwesomeIcon(
     glyph: string,
-    { style = "solid", fixedWidth = false }: { style?: FontAwesomeStyle; fixedWidth?: boolean } = {},
+    { style = "solid", fixedWidth = false }: { style?: FontAwesomeStyle; fixedWidth?: boolean } = {}
 ): HTMLElement {
     const styleClass = `fa-${style}`;
     const glyphClass = glyph.startsWith("fa-") ? glyph : `fa-${glyph}`;
@@ -169,7 +197,9 @@ function isItemUUID(uuid: any) {
 }
 
 function isTokenUUID(uuid: any) {
-    return typeof uuid === "string" && /^Scene\.[A-Za-z0-9]{16}\.Token\.[A-Za-z0-9]{16}$/.test(uuid);
+    return (
+        typeof uuid === "string" && /^Scene\.[A-Za-z0-9]{16}\.Token\.[A-Za-z0-9]{16}$/.test(uuid)
+    );
 }
 
 function sortStringRecord(record: Record<string, string>) {
@@ -204,7 +234,10 @@ function sortStringRecord(record: Record<string, string>) {
 // }
 
 /** Check if a value is present in the provided array. Especially useful for checking against literal tuples */
-function tupleHasValue<const A extends readonly unknown[]>(array: A, value: unknown): value is A[number] {
+function tupleHasValue<const A extends readonly unknown[]>(
+    array: A,
+    value: unknown
+): value is A[number] {
     return array.includes(value);
 }
 
@@ -220,7 +253,10 @@ let intlNumberFormat: Intl.NumberFormat;
  * @param options.emptyStringZero If the value is zero, return an empty string
  * @param options.zeroIsNegative Treat zero as a negative value
  */
-function signedInteger(value: number, { emptyStringZero = false, zeroIsNegative = false } = {}): string {
+function signedInteger(
+    value: number,
+    { emptyStringZero = false, zeroIsNegative = false } = {}
+): string {
     if (value === 0 && emptyStringZero) return "";
     const nf = (intlNumberFormat ??= new Intl.NumberFormat(game.i18n.lang, {
         maximumFractionDigits: 0,
@@ -259,13 +295,43 @@ const SORTABLE_BASE_OPTIONS: Sortable.Options = {
  */
 function maybeUuidStringToUuidEmbed(uuid: string) {
     const result = uuid ? fu.parseUuid(uuid) : null;
-    if(result?.id) {
+    if (result?.id) {
         return `@UUID[${uuid}]`;
     }
     return uuid;
 }
 
+/**
+ * Check if a key is present in a given object in a type safe way
+ *
+ * @param obj The object to check
+ * @param key The key to check
+ */
+function objectHasKey<O extends object>(obj: O, key: unknown): key is keyof O {
+    return (typeof key === "string" || typeof key === "number") && key in obj;
+}
 
+/**
+ * Wrap a callback in a debounced timeout.
+ * Delay execution of the callback function until the function has not been called for delay milliseconds
+ * @param {Function} callback       A function to execute once the debounced threshold has been passed
+ * @param {number} delay            An amount of time in milliseconds to delay
+ * @return {Function}               A wrapped function which can be called to debounce execution
+ */
+function debounceAsync<T = any>(callback: () => T, delay: number): (...args: any[]) => Promise<T> {
+    let timeoutId: number | null = null;
+    return function (...args: any[]) {
+        return new Promise((resolve) => {
+            //@ts-expect-error
+            clearTimeout(timeoutId);
+            //@ts-expect-error
+            timeoutId = setTimeout(() => {
+                //@ts-expect-error
+                resolve(callback.apply(this, args));
+            }, delay);
+        });
+    };
+}
 
 export {
     fontAwesomeIcon,
@@ -282,8 +348,7 @@ export {
     capitalize,
     SORTABLE_BASE_OPTIONS,
     maybeUuidStringToUuidEmbed,
-}
-export type {
-    FontAwesomeStyle,
-    SlugCamel,
-}
+    objectHasKey,
+    debounceAsync,
+};
+export type { FontAwesomeStyle, SlugCamel };

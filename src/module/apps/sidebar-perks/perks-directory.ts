@@ -52,7 +52,7 @@ class PerkDirectory extends ItemDirectory<ItemPTR2e<ItemSystemPTR, null>> {
 
     override renderPopout() {
         const pop = this.createPopout();
-        pop.render(true, { top: 0, left: window.innerWidth - 310 });
+        pop.render(true, { top: 0, left: window.innerWidth - 310 - 250 });
     }
 }
 

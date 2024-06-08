@@ -6,13 +6,16 @@ import { AttackRollDataPTR2e } from "./attack-roll.ts";
 import { CheckContext } from "@system/data.ts";
 
 class CheckRoll extends Roll {
-    static createFromData(options: CheckRollDataPTR2e): CheckRoll {
-        const {formula, data} = CheckRoll.createFormula(options);
+    static createFromData(options: CheckRollDataPTR2e): CheckRoll | null {
+        const { formula, data } = CheckRoll.createFormula(options);
         return new CheckRoll(formula, data, options);
     }
 
-    static createFormula(options: CheckRollDataPTR2e): { formula: string; data: Record<string, unknown> } {
-        switch(options.type ?? "check") {
+    static createFormula(options: CheckRollDataPTR2e): {
+        formula: string;
+        data: Record<string, unknown>;
+    } {
+        switch (options.type ?? "check") {
             case "check":
                 return CheckRoll.createCheckFormula(options);
             case "attack-roll":
@@ -22,36 +25,47 @@ class CheckRoll extends Roll {
                 return CheckRoll.createSkillCheckFormula(options);
             case "luck-roll":
                 return { formula: "1d10", data: { type: "luck-roll" } };
+            case "pokeball-check":
+                return { formula: "1d100", data: { type: "pokeball-check" } };
         }
     }
 
-    static createSkillCheckFormula(options: CheckRollDataPTR2e): { formula: string; data: Record<string, unknown> } {
+    static createSkillCheckFormula(options: CheckRollDataPTR2e): {
+        formula: string;
+        data: Record<string, unknown>;
+    } {
         const formula = "1d100ms@modifier";
         const data = {
             modifier: options.totalModifier ?? 0,
             type: "skill-check",
-            breakdown: options.showBreakdown ? options.breakdown : null
+            breakdown: options.showBreakdown ? options.breakdown : null,
         };
 
         return { formula, data };
     }
 
-    static createCheckFormula(options: CheckRollDataPTR2e): { formula: string; data: Record<string, unknown> } {
+    static createCheckFormula(options: CheckRollDataPTR2e): {
+        formula: string;
+        data: Record<string, unknown>;
+    } {
         const formula = "1d100ms+modifier";
         const data = {
             modifier: options.totalModifier ?? 0,
             type: "check",
-            breakdown: options.showBreakdown ? options.breakdown : null
+            breakdown: options.showBreakdown ? options.breakdown : null,
         };
 
         return { formula, data };
     }
 
-    static createAttackRollFormula(options: CheckRollDataPTR2e): { formula: string; data: Record<string, unknown> } {
+    static createAttackRollFormula(options: CheckRollDataPTR2e): {
+        formula: string;
+        data: Record<string, unknown>;
+    } {
         const formula = "1d100";
         const data = {
             type: "attack-roll",
-            breakdown: options.showBreakdown ? options.breakdown : null
+            breakdown: options.showBreakdown ? options.breakdown : null,
         };
 
         return { formula, data };
@@ -85,32 +99,71 @@ interface CheckRollDataPTR2e extends RollDataPTR2e {
 
 type AttackRollResult = {
     rolls: {
-        accuracy: Rolled<CheckRoll> | null,
-        crit: Rolled<CheckRoll> | null,
-        damage: Rolled<CheckRoll> | null
-    },
+        accuracy: Rolled<CheckRoll> | null;
+        crit: Rolled<CheckRoll> | null;
+        damage: Rolled<CheckRoll> | null;
+    };
     degrees: {
-        accuracy: DegreeOfSuccess | null,
-        crit: DegreeOfSuccess | null,
-        damage: DegreeOfSuccess | null
-    },
-    options: AttackRollDataPTR2e,
-    context: CheckRollContext,
-    check: CheckModifier
-}
+        accuracy: DegreeOfSuccess | null;
+        crit: DegreeOfSuccess | null;
+        damage: DegreeOfSuccess | null;
+    };
+    options: AttackRollDataPTR2e;
+    context: CheckRollContext;
+    check: CheckModifier;
+};
 
-type CheckType = "check" | "attack-roll" | "skill-check" | "luck-roll" | "luck-check";
+type PokeballRollResults = {
+    rolls: {
+        accuracy: Rolled<CheckRoll> | null;
+        crit: Rolled<CheckRoll> | null;
+        shake1: Rolled<CheckRoll> | null;
+        shake2: Rolled<CheckRoll> | null;
+        shake3: Rolled<CheckRoll> | null;
+        shake4: Rolled<CheckRoll> | null;
+    };
+    degrees: {
+        accuracy: DegreeOfSuccess | null;
+        crit: DegreeOfSuccess | null;
+        shake1: DegreeOfSuccess | null;
+        shake2: DegreeOfSuccess | null;
+        shake3: DegreeOfSuccess | null;
+        shake4: DegreeOfSuccess | null;
+    };
+    options: CheckRollDataPTR2e;
+    context: CheckRollContext;
+    check: CheckModifier;
+};
+
+type CheckType = "check" | "attack-roll" | "skill-check" | "luck-roll" | "luck-check" | "pokeball-check";
 
 type CheckRollCallback = (
     roll: Rolled<CheckRoll>,
     outcome: number | null | undefined,
-    message: Maybe<ChatMessagePTR2e>,
+    message: Maybe<ChatMessagePTR2e>
 ) => Promise<void> | void;
 
 type AttackRollCallback = (
-    context: Omit<CheckRollContext, 'target' | 'targets'> & {contexts: Record<string, CheckContext>},
+    context: Omit<CheckRollContext, "target" | "targets"> & {
+        contexts: Record<string, CheckContext>;
+    },
     results: AttackRollResult[],
-    message: Maybe<ChatMessagePTR2e>,
+    message: Maybe<ChatMessagePTR2e>
 ) => Promise<void> | void;
 
-export { CheckRoll, type CheckRollDataPTR2e, type CheckType, type CheckRollCallback, type AttackRollCallback, type AttackRollResult}
+type PokeballRollCallback = (
+    context: CheckRollContext,
+    results: PokeballRollResults,
+    message: Maybe<ChatMessagePTR2e>
+) => Promise<void> | void;
+
+export { CheckRoll };
+export type {
+    CheckRollDataPTR2e,
+    CheckType,
+    CheckRollCallback,
+    AttackRollCallback,
+    AttackRollResult,
+    PokeballRollResults,
+    PokeballRollCallback,
+};

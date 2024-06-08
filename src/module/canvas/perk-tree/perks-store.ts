@@ -51,7 +51,12 @@ class PerkStore extends Collection<PTRNode> {
             if (perk.system.node && perk.system.node.i !== null && perk.system.node.j !== null) {
                 const connected = new Set(perk.system.node.connected);
                 const isRoot = perk.system.node.type === "root";
-                const state = actor?.perks.get(perk.slug) ? PerkState.purchased : PerkState.unavailable
+                const actorPerk = actor?.perks.get(perk.slug);
+                const state = actorPerk ? PerkState.purchased : PerkState.unavailable
+                if(isRoot) {
+                    if(actorPerk) perk.system.cost = actorPerk.system.cost;
+                    else perk.system.cost = 5;
+                }
 
                 this.set(`${perk.system.node.i},${perk.system.node.j}`, {
                     position: { i: perk.system.node.i, j: perk.system.node.j },
@@ -65,7 +70,9 @@ class PerkStore extends Collection<PTRNode> {
             }
         }
         for(const rootNode of this.filter(node => node.perk.system.node.type === "root")) {
-            if(rootNode.state === PerkState.unavailable && ((actor?.system.advancement.advancementPoints.available ?? 0) >= (hasRoot ? 5 : 1))) {
+            if(!hasRoot) rootNode.perk.system.cost = 0;
+
+            if(rootNode.state === PerkState.unavailable && ((actor?.system.advancement.advancementPoints.available ?? 0) >= rootNode.perk.system.cost)) {
                 rootNode.state = PerkState.available;
             }
             else if(rootNode.state === PerkState.unavailable) rootNode.state = PerkState.connected;
@@ -87,9 +94,11 @@ class PerkStore extends Collection<PTRNode> {
             
             const connectedNode = this.get(`${connectedPerk.system.node.i},${connectedPerk.system.node.j}`);
             if(!connectedNode || connectedNode.state !== PerkState.unavailable) continue;
+
+            if(isRootPerk) connectedPerk.system.cost = 1;
             
             //TODO: Implement proper prerequisite checking
-            if(actor.system.advancement.advancementPoints.available >= (isRootPerk ? 1 : connectedPerk.system.cost)) {
+            if(actor.system.advancement.advancementPoints.available >= connectedPerk.system.cost) {
                 connectedNode.state = PerkState.available;
                 continue;
             }
@@ -114,8 +123,10 @@ class PerkStore extends Collection<PTRNode> {
             const connectedNode = this.get(`${connectedPerk.system.node.i},${connectedPerk.system.node.j}`);
             if(!connectedNode || connectedNode.state !== PerkState.purchased) continue;
 
+            if(isRootNode) currentNode.perk.system.cost = connectedPerk.system.cost;
+
             //TODO: Implement proper prerequisite checking
-            if(actor && actor.system.advancement.advancementPoints.available >= (isRootNode ? 1 : currentNode.perk.system.cost)) {
+            if(actor && actor.system.advancement.advancementPoints.available >= currentNode.perk.system.cost) {
                 currentNode.state = PerkState.available;
             }
             else {

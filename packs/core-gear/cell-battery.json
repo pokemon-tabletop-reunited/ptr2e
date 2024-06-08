@@ -1,0 +1,88 @@
+{
+  "name": "Cell Battery",
+  "img": "/systems/ptr2e/img/icons/item_icon.webp",
+  "type": "equipment",
+  "system": {
+    "cost": 3,
+    "crafting": {
+      "skill": null,
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "slot": "belt",
+      "carryType": "stowed",
+      "handsHeld": null
+    },
+    "grade": "C",
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100
+    },
+    "rarity": "uncommon",
+    "traits": [
+      "combat",
+      "consumable"
+    ],
+    "actions": [
+      {
+        "name": "Cell Battery",
+        "slug": "cell-battery",
+        "type": "generic",
+        "description": "Trigger: The user is hit with an Electric-Type attack.\nEffect: The user gains +2 default ATK stages for the remainder of the combat.",
+        "img": "/systems/ptr2e/img/icons/item_icon.webp",
+        "traits": [
+          "Combat",
+          "Consumable"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "trigger": "The user is hit with an Electric-Type attack.",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
+      }
+    ],
+    "description": "Trigger: The user is hit with an Electric-Type attack.\nEffect: The user gains +2 default ATK stages for the remainder of the combat.",
+    "slug": null,
+    "container": null,
+    "quantity": 1,
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/item_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "_id": "AajxUMbxhpjhuMse",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.325",
+    "systemId": "ptr2e",
+    "systemVersion": "0.0.9",
+    "createdTime": 1717870146561,
+    "modifiedTime": 1717870146561,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!AajxUMbxhpjhuMse"
+}

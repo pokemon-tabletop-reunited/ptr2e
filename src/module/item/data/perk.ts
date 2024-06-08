@@ -90,7 +90,6 @@ export default abstract class PerkSystem extends PerkExtension {
                     borderWidth: 3,
                     scale: 1.6,
                 })
-                this.cost = 5;
                 break;
             }
             case "ranked": {
@@ -106,7 +105,6 @@ export default abstract class PerkSystem extends PerkExtension {
             this.parent.actor.system.advancement.advancementPoints.spent += this.cost;
         }
     }
-
 
     get visible() {
         if(game.user.isGM) {

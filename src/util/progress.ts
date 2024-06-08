@@ -7,6 +7,7 @@ export class Progress {
     steps: number;
     counter: number;
     label: string;
+    loader: HTMLElement;
 
     constructor({ steps = 1 } = {}) {
         this.steps = steps;
@@ -15,6 +16,7 @@ export class Progress {
     }
 
     advance(label: string) {
+        if(this.counter === this.steps) return;
         this.counter += 1;
         this.label = label;
         this.#updateUI();
@@ -29,13 +31,36 @@ export class Progress {
     }
 
     #updateUI() {
-        const $loader = $("#loading");
+        if(!this.loader) {
+            this.loader = document.createElement("div");
+            this.loader.id = "loading";
+
+            const loadingBar = document.createElement("div");
+            loadingBar.id = "loading-bar";
+
+            const context = document.createElement("label");
+            context.id = "context";
+            context.textContent = this.label;
+
+            const progress = document.createElement("label");
+            progress.id = "progress";
+
+            loadingBar.appendChild(context);
+            loadingBar.appendChild(progress);
+            this.loader.appendChild(loadingBar);
+
+            $("ol#notifications").prepend(this.loader);
+        }
+
+        const $loader = $(this.loader);
         if ($loader.length === 0) return;
         const pct = Math.clamp((100 * this.counter) / this.steps, 0, 100);
         $loader.find("#context").text(this.label);
         $loader.find("#loading-bar").css({ width: `${pct}%`, whiteSpace: "nowrap" });
         $loader.find("#progress").text(`${this.counter} / ${this.steps}`);
         $loader.css({ display: "block" });
-        if (this.counter === this.steps && !$loader.is(":hidden")) $loader.fadeOut(2000);
+        if (this.counter === this.steps && !$loader.is(":hidden")) {
+            $loader.fadeOut(2000, () => $loader.remove());
+        }
     }
 }

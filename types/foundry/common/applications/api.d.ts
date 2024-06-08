@@ -527,12 +527,7 @@ export class ApplicationV2<
     changeTab(
         tab: string,
         group: string,
-        {
-            event,
-            navElement,
-            force,
-            updatePosition,
-        }: { event?: Event; navElement?: HTMLElement; force: boolean; updatePosition: boolean }
+        options?: { event?: Event; navElement?: HTMLElement; force?: boolean; updatePosition?: boolean }
     ): void;
 
     /* -------------------------------------------- */

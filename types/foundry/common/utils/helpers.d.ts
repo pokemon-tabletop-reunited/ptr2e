@@ -272,6 +272,13 @@ export function randomID(length?: number): string;
 export function parseUuid(uuid: Maybe<string>, options?: { relative?: Maybe<ClientDocument> }): ResolvedUUID;
 
 /**
+ * A debugging function to test latency or timeouts by forcibly locking the thread for an amount of time.
+ * @param {number} ms        A number of milliseconds to lock
+ * @returns {Promise<void>}
+ */
+export function threadLock(ms: number): Promise<void>;
+
+/**
  * Log a compatibility warning which is filtered based on the client's defined compatibility settings.
  * @param message              The original warning or error message
  * @param [options={}]         Additional options which customize logging

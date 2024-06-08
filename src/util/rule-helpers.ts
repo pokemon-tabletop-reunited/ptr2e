@@ -1,5 +1,5 @@
 import { ActorPTR2e, ActorSynthetics } from "@actor";
-import { AttackPTR2e } from "@data";
+import { ActionPTR2e, AttackPTR2e } from "@data";
 import { BracketedValue, EffectSourcePTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
 import {
@@ -59,6 +59,7 @@ async function extractEphemeralEffects({
     target,
     item,
     attack,
+    action,
     domains,
     options,
 }: ExtractEphemeralEffectsParams): Promise<EffectSourcePTR2e[]> {
@@ -70,7 +71,7 @@ async function extractEphemeralEffects({
         effectsFrom.getRollOptions(domains),
         effectsTo.getSelfRollOptions(affects),
     ].flat();
-    const resolvables = { item, attack };
+    const resolvables = { item, attack, action };
     return (
         await Promise.all(
             domains
@@ -86,6 +87,7 @@ interface ExtractEphemeralEffectsParams {
     target: Maybe<ActorPTR2e>;
     item: ItemPTR2e | null;
     attack: AttackPTR2e | null;
+    action: ActionPTR2e | null;
     domains: string[];
     options: Set<string> | string[];
 }

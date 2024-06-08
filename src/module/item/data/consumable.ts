@@ -56,6 +56,7 @@ export default abstract class ConsumableSystem extends ConsumableExtension {
                 value: new fields.NumberField({ required: true, initial: 1, min: 0, step: 1, label: "PTR2E.FIELDS.consumable.charges.value.label", hint: "PTR2E.FIELDS.consumable.charges.value.hint"}),
                 max: new fields.NumberField({ required: true, initial: 1, min: 1, step: 1, label: "PTR2E.FIELDS.consumable.charges.max.label", hint: "PTR2E.FIELDS.consumable.charges.max.hint"}),
             }),
+            modifier: new fields.NumberField({required: true, nullable: true, initial: null})
         };
     }
 

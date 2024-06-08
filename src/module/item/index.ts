@@ -1,19 +1,20 @@
 /** @module item */
 import { ItemPTR2e } from "./document.ts";
 import * as data from "./data/index.ts";
+import { ActorPTR2e } from "@actor";
 
 // Items
-type AbilityPTR2e = ItemPTR2e<data.AbilitySystemModel>;
-type ConsumablePTR2e = ItemPTR2e<data.ConsumableSystemModel>;
-type ContainerPTR2e = ItemPTR2e<data.ContainerSystemModel>;
-type EquipmentPTR2e = ItemPTR2e<data.EquipmentSystemModel>;
-type GearPTR2e = ItemPTR2e<data.GearSystemModel>;
-type MovePTR2e = ItemPTR2e<data.MoveSystemModel>;
-type PerkPTR2e = ItemPTR2e<data.PerkSystemModel>;
-type SpeciesPTR2e = ItemPTR2e<data.SpeciesSystemModel>;
-type WeaponPTR2e = ItemPTR2e<data.WeaponSystemModel>;
+type AbilityPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.AbilitySystemModel, TParent>;
+type ConsumablePTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.ConsumableSystemModel, TParent>;
+type ContainerPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.ContainerSystemModel, TParent>;
+type EquipmentPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.EquipmentSystemModel, TParent>;
+type GearPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.GearSystemModel, TParent>;
+type MovePTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.MoveSystemModel, TParent>;
+type PerkPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.PerkSystemModel, TParent>;
+type SpeciesPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.SpeciesSystemModel, TParent>;
+type WeaponPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.WeaponSystemModel, TParent>;
 type PTUItem = ItemPTR2e;
-type EffectPTR2e = ItemPTR2e<data.EffectSystemModel>;
+type EffectPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.EffectSystemModel, TParent>;
 
 export type {
     AbilityPTR2e,

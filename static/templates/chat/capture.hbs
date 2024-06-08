@@ -1,0 +1,66 @@
+<header>
+    <div class="icon">
+        <img src="{{origin.img}}" alt="{{origin.name}}">
+    </div>
+    <h3>{{origin.name}}'s Capture Attempt{{#if target}} against {{target.name}}{{/if}}!</h3>
+    <div class="icon">
+        {{#if target}}
+            <img src="{{target.img}}" alt="{{target.name}}">
+        {{/if}}
+    </div>
+</header>
+<main>
+    <div class="collapse-button">
+        <button type="button" class="collapse-rolls" data-uuid="{{uuid}}">Show All Rolls</button>
+    </div>
+    <article class="collapsed">
+        {{#if rolls.accuracy}}{{{rolls.accuracy}}}{{/if}}
+        {{#if rolls.crit}}{{{rolls.crit}}}{{/if}}
+        {{#if rolls.shake1}}{{{rolls.shake1}}}{{/if}}
+        {{#if rolls.shake2}}{{{rolls.shake2}}}{{/if}}
+        {{#if rolls.shake3}}{{{rolls.shake3}}}{{/if}}
+        {{#if rolls.shake4}}{{{rolls.shake4}}}{{/if}}
+    </article>
+    <section class="results">
+        <header><label>Generating Results...</label></header>
+        <div class="accuracy">
+            <label>Accuracy Roll</label>{{#if state.accuracy}}<span class="success">Hits!</span>{{else}}<span class="failure"> Misses...</span>{{/if}}
+        </div>
+        {{#if state.accuracy}}
+            <div class="crit">
+                <label>Crit Roll</label>{{#if state.crit}}<span class="success">Critical Capture!</span>{{else}}<span class="failure"> No Crit...</span>{{/if}}
+            </div>
+            <div class="shake shake-1">
+                <label>Shake 1</label>{{#if state.shake1}}<span class="success">Shake...</span>{{else}}<span class="failure"> Break out!</span>{{/if}}
+            </div>
+            {{#unless state.crit}}
+                {{#if state.shake1}}
+                    <div class="shake shake-2">
+                        <label>Shake 2</label>{{#if state.shake2}}<span class="success">Shake...</span>{{else}}<span class="failure"> Break out!</span>{{/if}}
+                    </div>
+                    {{#if state.shake2}}
+                        <div class="shake shake-3">
+                            <label>Shake 3</label>{{#if state.shake3}}<span class="success">Shake...</span>{{else}}<span class="failure"> Break out!</span>{{/if}}
+                        </div>
+                        {{#if state.shake3}}
+                            <div class="shake shake-4">
+                                <label>Shake 4</label>{{#if state.shake4}}<span class="success">*Ding!*</span>{{else}}<span class="failure"> Break out!</span>{{/if}}
+                            </div>
+                        {{/if}}
+                    {{/if}}
+                {{/if}}
+            {{/unless}}
+        {{/if}}
+        <footer class="results" style="animation-delay: {{state.delay}}s">
+            {{#if state.accuracy}}
+                {{#if state.success}}
+                    <span class="success">Success! The Pokémon was captured!</span>
+                {{else}}
+                    <span class="failure">Failure! The Pokémon broke free!</span>
+                {{/if}}
+            {{else}}
+                <span class="failure">The Pokéball missed the Pokémon!</span>
+            {{/if}}
+        </footer>
+    </section>
+</main>

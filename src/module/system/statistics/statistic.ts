@@ -3,7 +3,7 @@ import { BaseStatistic } from "./base.ts";
 import { StatisticCheckData, StatisticData, StatisticDifficultyClassData } from "./data.ts";
 import { CheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
-import { AttackRollCallback, CheckRoll, CheckRollCallback, CheckType } from "@system/rolls/check-roll.ts";
+import { AttackRollCallback, CheckRoll, CheckRollCallback, CheckType, PokeballRollCallback } from "@system/rolls/check-roll.ts";
 import * as R from "remeda";
 import {
     extractModifierAdjustments,
@@ -334,7 +334,7 @@ interface BaseStatisticCheck<TRollParam, TRollResult, TParent extends Statistic 
     get breakdown(): string;
 }
 
-interface StatisticRollParameters<TCallback extends CheckRollCallback | AttackRollCallback = CheckRollCallback>{
+interface StatisticRollParameters<TCallback extends CheckRollCallback | AttackRollCallback | PokeballRollCallback = CheckRollCallback>{
     /** A string of some kind to identify the roll: will be included in `CheckRoll#options` */
     identifier?: string;
     /** The slug of an action of which this check is a constituent roll */

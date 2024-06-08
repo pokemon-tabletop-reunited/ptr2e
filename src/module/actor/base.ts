@@ -15,7 +15,7 @@ import FolderPTR2e from "@module/folder/document.ts";
 import { CombatantPTR2e, CombatPTR2e } from "@combat";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
-import { ItemPTR2e, ItemSystemsWithActions, PerkPTR2e } from "@item";
+import { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions, PerkPTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
@@ -51,11 +51,28 @@ class ActorPTR2e<
         return this._actions;
     }
 
+    get originalRoot(): PerkPTR2e | null {
+        return (
+            (this.itemTypes.perk as PerkPTR2e[]).find(
+                (p) => p.system.cost === 0 && p.system.node.type === "root"
+            ) ?? null
+        );
+    }
+
+    get unconnectedRoots(): PerkPTR2e[] {
+        return (this.itemTypes.perk as PerkPTR2e[]).filter(
+            (p) => p.system.cost === 5 && p.system.node.type === "root"
+        );
+    }
+
     get perks(): Map<string, PerkPTR2e> {
-        return this._perks ?? (this._perks = (this.itemTypes.perk as PerkPTR2e[]).reduce((acc, perk) => {
-            acc.set(perk.system.originSlug ?? perk.slug, perk);
-            return acc;
-        }, new Map<string, PerkPTR2e>()));
+        return (
+            this._perks ??
+            (this._perks = (this.itemTypes.perk as PerkPTR2e[]).reduce((acc, perk) => {
+                acc.set(perk.system.originSlug ?? perk.slug, perk);
+                return acc;
+            }, new Map<string, PerkPTR2e>()))
+        );
     }
 
     get combatant(): CombatantPTR2e | null {
@@ -75,6 +92,19 @@ class ActorPTR2e<
 
     get speed() {
         return this.system.attributes.spe.value;
+    }
+
+    get netStages() {
+        return (
+            this.system.attributes.atk.stage
+            + this.system.attributes.def.stage
+            + this.system.attributes.spa.stage
+            + this.system.attributes.spd.stage
+            + this.system.attributes.spe.stage
+            + this.system.battleStats.accuracy.stage
+            + this.system.battleStats.evasion.stage
+            + this.system.battleStats.critRate.stage
+        );
     }
 
     get party(): ActorParty | null {
@@ -445,7 +475,7 @@ class ActorPTR2e<
     }
 
     async onEndActivation() {
-        if(!(game.user === game.users.activeGM)) return;
+        if (!(game.user === game.users.activeGM)) return;
         if (!this.synthetics.afflictions.data.length) return;
         const afflictions = this.synthetics.afflictions.data.reduce<{
             toDelete: string[];
@@ -706,6 +736,7 @@ class ActorPTR2e<
             target: params.target?.actor ?? targetToken?.actor ?? null,
             item: params.item ?? null,
             attack: params.attack ?? null,
+            action: params.action ?? null,
             domains: params.domains,
             options: [...params.options, ...(params.item?.getRollOptions("item") ?? [])],
         });
@@ -732,10 +763,17 @@ class ActorPTR2e<
         const statistic = params.viewOnly
             ? params.statistic
             : (() => {
-                  const attack = selfActor.actions.attack.get(params.attack?.slug);
-                  if (!attack) return null;
-
-                  return attack.statistic?.check as Maybe<StatisticCheck>;
+                  if (params.attack) {
+                      const attack = selfActor.actions.attack.get(params.attack?.slug);
+                      if (!attack) return null;
+                      return attack.statistic?.check as Maybe<StatisticCheck>;
+                  } else if (params.action) {
+                      const action = selfActor.actions.get(params.action.slug);
+                      if (!action) return null;
+                      return (action as { statistic?: Statistic }).statistic
+                          ?.check as Maybe<StatisticCheck>;
+                  }
+                  return null;
               })() ?? params.statistic;
 
         const selfItem = ((): ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null => {
@@ -764,6 +802,7 @@ class ActorPTR2e<
 
         //TODO: Probably needs similar implementation to selfItem
         const selfAttack = params.attack;
+        const selfAction = params.action;
 
         const itemOptions = selfItem?.getRollOptions("item") ?? [];
         const actionTraits = R.uniq(
@@ -805,6 +844,7 @@ class ActorPTR2e<
             target: targetToken?.actor ?? null,
             item: selfItem,
             attack: params.attack ?? null,
+            action: params.action ?? null,
             domains: params.domains,
             options: [...params.options, ...itemOptions, ...targetRollOptions],
         });
@@ -828,7 +868,14 @@ class ActorPTR2e<
             ])
         );
 
-        const rangeIncrement = selfAttack ? selfAttack.getRangeIncrement(distance) : null;
+        const rangeIncrement = selfAttack
+            ? selfAttack.getRangeIncrement(distance)
+            : selfAction &&
+                "getRangeIncrement" in selfAction &&
+                selfAction.getRangeIncrement &&
+                typeof selfAction.getRangeIncrement === "function"
+              ? selfAction.getRangeIncrement(distance)
+              : null;
         if (rangeIncrement) rollOptions.add(`target:range-increment:${rangeIncrement}`);
 
         const self = {
@@ -837,6 +884,7 @@ class ActorPTR2e<
             statistic,
             item: selfItem,
             attack: selfAttack!,
+            action: selfAction!,
             modifiers: [],
         };
 
@@ -866,7 +914,7 @@ class ActorPTR2e<
             items: [fu.deepClone(this._source.items)].flat(),
             effects: [fu.deepClone(this._source.effects), applicableEffects].flat(),
             flags: { ptr2e: { rollOptions: { all: rollOptionsAll } } },
-        });
+        }, {keepId: true});
     }
 
     //TODO: Implement
@@ -892,29 +940,115 @@ class ActorPTR2e<
         if (options.fail === true) return false;
     }
 
-    protected override async _preUpdate(changed: DeepPartial<this["_source"]>, options: DocumentModificationContext<TParent>, user: User): Promise<boolean | void> {
-        if(changed.system?.health?.value !== undefined) {
-            const fainted = this.effects.get("faintedcondition") !== undefined
-            if(changed.system.health.value as number <= 0 && !fainted) {
-                const effects: ActiveEffectPTR2e['_source'][] = [];
-                effects.push((await ActiveEffectPTR2e.fromStatusEffect('dead')).toObject() as ActiveEffectPTR2e['_source']);
+    protected override async _preUpdate(
+        changed: DeepPartial<this["_source"]>,
+        options: DocumentModificationContext<TParent>,
+        user: User
+    ): Promise<boolean | void> {
+        if (changed.system?.health?.value !== undefined) {
+            const fainted = this.effects.get("faintedcondition") !== undefined;
+            if ((changed.system.health.value as number) <= 0 && !fainted) {
+                const effects: ActiveEffectPTR2e["_source"][] = [];
+                effects.push(
+                    (
+                        await ActiveEffectPTR2e.fromStatusEffect("dead")
+                    ).toObject() as ActiveEffectPTR2e["_source"]
+                );
 
-                const weary = this.effects.get("wearycondition00") as ActiveEffectPTR2e<this> | undefined;
-                if(!weary) {
-                    effects.push((await ActiveEffectPTR2e.fromStatusEffect('weary')).toObject() as ActiveEffectPTR2e['_source']);
-                }
-                else {
-                    await weary.update({"system.stacks": weary.system.stacks + 1});
+                const weary = this.effects.get("wearycondition00") as
+                    | ActiveEffectPTR2e<this>
+                    | undefined;
+                if (!weary) {
+                    effects.push(
+                        (
+                            await ActiveEffectPTR2e.fromStatusEffect("weary")
+                        ).toObject() as ActiveEffectPTR2e["_source"]
+                    );
+                } else {
+                    await weary.update({ "system.stacks": weary.system.stacks + 1 });
                 }
 
-                await this.createEmbeddedDocuments("ActiveEffect", effects, {keepId: true});
-            }
-            else if(changed.system.health.value as number > 0 && fainted) {
+                await this.createEmbeddedDocuments("ActiveEffect", effects, { keepId: true });
+            } else if ((changed.system.health.value as number) > 0 && fainted) {
                 await this.deleteEmbeddedDocuments("ActiveEffect", ["faintedcondition"]);
             }
         }
 
         return super._preUpdate(changed, options, user);
+    }
+
+    protected override _onUpdate(
+        changed: DeepPartial<this["_source"]>,
+        options: any,
+        userId: string
+    ): void {
+        super._onUpdate(changed, options, userId);
+        if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
+    }
+
+    protected override async _onCreateDescendantDocuments(
+        parent: this,
+        collection: "effects" | "items",
+        documents: ActiveEffectPTR2e<this>[] | ItemPTR2e<ItemSystemPTR, this>[],
+        results: ActiveEffectPTR2e<this>["_source"][] | ItemPTR2e<ItemSystemPTR, this>["_source"][],
+        options: any,
+        userId: string
+    ) {
+        super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
+        if (game.ptr.web.actor === this) await game.ptr.web.refresh({ nodeRefresh: true });
+        if (!this.unconnectedRoots.length) return;
+
+        function isEffect(
+            collection: "effects" | "items",
+            _documents: any[]
+        ): _documents is ActiveEffectPTR2e<typeof parent>[] {
+            return collection === "effects";
+        }
+        if (isEffect(collection, documents)) return;
+
+        const perks = documents.filter((d) => d.type === "perk") as PerkPTR2e[];
+        if (!perks.length) return;
+
+        const updates = [];
+        const originalRoot = this.originalRoot;
+        if (!originalRoot) throw new Error("No original root found.");
+        const originalRootNode = game.ptr.web.collection.getName(originalRoot.slug, {
+            strict: true,
+        });
+
+        for (const root of this.unconnectedRoots) {
+            const rootNode = game.ptr.web.collection.getName(root.slug, { strict: true });
+
+            const path = game.ptr.web.collection.graph.getPurchasedPath(originalRootNode, rootNode);
+            if (path) {
+                updates.push({ _id: root.id, "system.cost": 1 });
+            }
+        }
+        if (updates.length) await this.updateEmbeddedDocuments("Item", updates);
+    }
+
+    protected override _onDeleteDescendantDocuments(
+        parent: this,
+        collection: "effects" | "items",
+        documents: any[],
+        ids: string[],
+        options: any,
+        userId: string
+    ): void {
+        super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
+        if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
+    }
+
+    protected override _onUpdateDescendantDocuments(
+        parent: this,
+        collection: "effects" | "items",
+        documents: ActiveEffectPTR2e<this>[] | ItemPTR2e<ItemSystemPTR, this>[],
+        changes: ActiveEffectPTR2e<this>["_source"][] | ItemPTR2e<ItemSystemPTR, this>["_source"][],
+        options: any,
+        userId: string
+    ): void {
+        super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
+        if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
     }
 
     override async toggleStatusEffect(
@@ -940,17 +1074,17 @@ class ActorPTR2e<
             }
         }
 
-        if((status.system as ActiveEffectSystem['_source'])?.stacks) {
+        if ((status.system as ActiveEffectSystem["_source"])?.stacks) {
             const slug = sluggify(game.i18n.localize(status.name));
-            for(const id of existing) {
+            for (const id of existing) {
                 const effect = this.effects.get(id) as ActiveEffectPTR2e<this>;
-                if(effect.slug === slug) {
-                    if(overlay) {
-                        if(effect.system.stacks > 1) effect.update({"system.stacks": effect.system.stacks - 1});
+                if (effect.slug === slug) {
+                    if (overlay) {
+                        if (effect.system.stacks > 1)
+                            effect.update({ "system.stacks": effect.system.stacks - 1 });
                         else effect.delete();
-                    }
-                    else {
-                        effect.update({"system.stacks": effect.system.stacks + 1});
+                    } else {
+                        effect.update({ "system.stacks": effect.system.stacks + 1 });
                     }
                     return false;
                 }
@@ -968,7 +1102,7 @@ class ActorPTR2e<
         if (!active && active !== undefined) return;
         const effect = await ActiveEffectPTR2e.fromStatusEffect(statusId);
         if (overlay) effect.updateSource({ "flags.core.overlay": true });
-        return ActiveEffectPTR2e.create<any>(effect.toObject(), { parent: this, keepId: true })
+        return ActiveEffectPTR2e.create<any>(effect.toObject(), { parent: this, keepId: true });
     }
 }
 

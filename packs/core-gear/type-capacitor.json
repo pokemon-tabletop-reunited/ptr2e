@@ -1,0 +1,96 @@
+{
+  "name": "Type Capacitor",
+  "img": "/systems/ptr2e/img/icons/item_icon.webp",
+  "type": "equipment",
+  "system": {
+    "cost": 4,
+    "crafting": {
+      "skill": null,
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "slot": "held",
+      "carryType": "stowed",
+      "handsHeld": null
+    },
+    "grade": "C",
+    "fling": {
+      "type": "untyped",
+      "power": 50,
+      "accuracy": 100
+    },
+    "rarity": "rare",
+    "traits": [
+      "combat",
+      "held",
+      "pp-pool-20",
+      "consumable",
+      "held",
+      "type-fling"
+    ],
+    "actions": [
+      {
+        "name": "Type Capacitor",
+        "slug": "type-capacitor",
+        "type": "generic",
+        "description": "Trigger: The user declares an Attack that shares a <Type> with the item.\nEffect: This item's PP Pool can be expended in place of the user's PP for the triggering Attack. If the item does not have enough PP to spend for the Attack, the remaining cost is taken from the user.",
+        "img": "/systems/ptr2e/img/icons/item_icon.webp",
+        "traits": [
+          "Combat",
+          "Held",
+          "PP Pool 20",
+          "Consumable",
+          "Held",
+          "<Type>Fling"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "trigger": "The user declares an Attack that shares a <Type> with the item.",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null
+      }
+    ],
+    "description": "Trigger: The user declares an Attack that shares a <Type> with the item.\nEffect: This item's PP Pool can be expended in place of the user's PP for the triggering Attack. If the item does not have enough PP to spend for the Attack, the remaining cost is taken from the user.",
+    "slug": null,
+    "container": null,
+    "quantity": 1,
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/item_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "_id": "aqGQ9tLVXObfkpSW",
+  "effects": [],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "tXAZ3QUgjuwX4gdV": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.325",
+    "systemId": "ptr2e",
+    "systemVersion": "0.0.9",
+    "createdTime": 1717870146561,
+    "modifiedTime": 1717870146561,
+    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+  },
+  "_key": "!items!aqGQ9tLVXObfkpSW"
+}

@@ -18,6 +18,18 @@
     "ITEM.DeleteButton": "Delete",
     
     "PTR2E": {
+        "ChatContext": {
+            "RerollSkill": {
+                "label": "Push Your Luck! (Reroll)",
+                "title": "Are you sure you're Pushing Your Luck?",
+                "content": "You're about to reroll a skill check. Did you receive GM Permission?"
+            },
+            "SpendLuckSkill": {
+                "label": "Spend Luck to Increase DoS",
+                "title": "Are you sure you're Spending Luck?",
+                "content": "You're about to spend {amount} Luck to increase your Degree of Success."
+            }
+        },
         "Modifiers": {
             "power": "Attack Power",
             "accuracy": "Accuracy Stages",
@@ -545,9 +557,15 @@
             },
             "ChangeResources": {
                 "title": "Change Resources for {name}",
-                "content": "<content><div class='form-group'><label style='flex-basis: 30%;'>Current Value: {value}</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
+                "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Editing Resources</h3><p>this should only be done with explicit GM Permission!</p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Current Value: {value}</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
                 "submit": "Change Resources",
                 "warn": "Resource total for {name} cannot drop below 1."
+            },
+            "ChangeLuck": {
+                "title": "Change Luck for {name}",
+                "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Editing Luck</h3><p>this should only be done with explicit GM Permission!</p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Current Value: {value}</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
+                "submit": "Change Luck",
+                "warn": "Luck total for {name} cannot drop below 0."
             },
             "RollLuck": {
                 "title": "Reroll Luck for {name}",
@@ -1559,6 +1577,10 @@
             "science": {
                 "label": "Science",
                 "hint": "The Science group skill covers a number of fields, purchased separately. Examples include Astronomy, Biology, Botany, Chemistry, Cryptography, Forensics, Geology, Mathematics, Meteorology, Parapsychology, Pharmacy, Physics, Zoology. Pokémon-specific fields include Meganobiology, Terastology, Ultrology, Paradoxian Studies. The GM may add to or remove from this list as appropriate to their campaign. This skill represents specialized knowledge in a field and will generally rely upon either specific perks, or a situational application that the GM or Player must call for.",
+                "archeology": {
+                    "label": "Archeology",
+                    "hint": "This skill is used to study ancient things. This includes studying ruins, knowledge of past civilizations, and deciphering lost inscriptions."
+                },
                 "astronomy": {
                     "label": "Astronomy",
                     "hint": "This skill is used to study the stars and planets."
@@ -1638,6 +1660,184 @@
                 "Step4": "Creating Abilities...",
                 "Step5": "Finding art...",
                 "Complete": "Pokemon Generation Complete!"
+            }
+        },
+        "Tours": {
+            "welcome": {
+                "title": "Welcome to the PTR2e Alpha Test!",
+                "description": "This is a guided tour of the system to help you get started.",
+                "steps": {
+                    "welcome": {
+                        "title": "Welcome to the Alpha!",
+                        "content":"Thank you for participating in the Closed Alpha Test of Pokemon Tabletop Reunited: Evolved!\nThis is a \"tour\" to help get you started!"
+                    },
+                    "alpha": {
+                        "title": "Alpha Test",
+                        "content": "As you're aware the system both in Foundry and the ruleset are in Alpha.\nThis means that not only are you likely to run into Foundry Bugs, but you'll likely find things that are unfinished, or not quite as balanced as we'd like in the regular rules too!\nPlease keep this in mind while testing and provide feedback where you can!"
+                    },
+                    "discord": {
+                        "title": "Discord",
+                        "content": "The Discord is the primary place for communication and support for the system.\nYou can find the Discord <a href=\"https://discord.gg/ptrfvtt\">here</a>.\nIf you're not already in the Discord, please join and have whomever invited you to the Alpha let us know so we can give you the Alpha Tester role!"
+                    },
+                    "feedback": {
+                        "title": "Reporting Bugs, providing Feedback and Suggestions!",
+                        "content": "If you ever run into a bug, or have feedback or suggestions, please let us know!\nThere are a couple ways you can do so:<ul><li>On the discord post in #2e-alpha-feedback</li><li>Use one of the following commands on the Discord Server:<ul><li><code>/create-issue 2e</code></li><li><code>/bug-report 2e</code></li><li><code>/feature-request 2e</code></li></ul></li><li>Directly report things over on the <a href=\"https://github.com/pokemon-tabletop-reunited/ptr2e/issues\">Github</a></li></ul>"
+                    },
+                    "rules": {
+                        "title": "Finding the Rules",
+                        "content": "Currently the rules are not yet available in Foundry, so for the foreseeable future you will have to grab them from the <a href=\"https://2e.ptr.wiki/rules\">PTR2e Wiki</a>.\nThis page requires you to be logged in and have the Alpha Tester role to view.\nIf you don't have access please reach out in #2e-alpha on the Discord after having created a Wiki Account."
+                    },
+                    "style": {
+                        "title": "Style Tip!",
+                        "content": "Foundry has added build in support for Light vs Dark mode, and we're making use of this! Please check out the core Foundry Settings to set your preferred mode!"
+                    },
+                    "next": {
+                        "title": "Next Steps",
+                        "content": "We've included a bunch of Tours for you to use to learn more about the Foundry side of things.\nIf you ever need to check them out again, you can find them in Tour Management in the Settings Tab of the Sidebar."
+                    }
+                }
+            },
+            "folders": {
+                "title": "Folders",
+                "description": "Learn more about the PTR2e Unique; Team & Party Folders. There to upgrade your organisational needs!",
+                "steps": {
+                    "welcome": {
+                        "title": "Welcome to the Folders Tour!",
+                        "content": "This tour will guide you through the Team and Party Folders, unique to PTR2e!\nLets get started with creating a New Folder!"
+                    },
+                    "createDialog": {
+                        "title": "Creating a New Folder",
+                        "content": "While creating a Folder you can set up either a Team or a Party by dragging any Actor to the appropriate field.\nTeams are a collection of Actors, for example all your PCs or perhaps all the NPCs in a specific location.\nParties meanwhile are for a Trainer or Expedition Leader and their Pokémon."
+                    },
+                    "createParty": {
+                        "title": "Creating a Party",
+                        "content": "Dragging in an Actor onto the 'Owner' field will create a Party Folder for that actor, as can be seen here for Tour-san!\nParty Folders automatically display all their associated Actors within them once they've been created\nThis includes the owner and their direct Party Members\nAny other related Actors can be added in any (regular) Sub Folder, for example a 'Box' Folder for all the Pokémon in a PC's Box."
+                    },
+                    "openPartySheet": {
+                        "title": "Opening a Party Sheet",
+                        "content": "You can open a Party Sheet by clicking the 'Open Party Sheet' icon on a Party Folder.\nThis will show you all the details of the Party."
+                    },
+                    "openedPartySheet": {
+                        "title": "Opened Party Sheet",
+                        "content": "Here you can see the Party Sheet for Tour-san, including all their Party Members.\nIn the Parties' Tab you can see all the Parties owned by the Owner, and manage them from here. (Coming Soon!)"
+                    },
+                    "addPartyMembers": {
+                        "title": "Adding Party Members",
+                        "content": "You can add Party Members to a Party Folder by dragging in any Actor on top of the folder or it's 'Party' section in the Sidebar's Actor Tab. This will automatically add them to the Party Folder."
+                    },
+                    "createTeam": {
+                        "title": "Creating a Team",
+                        "content": "Dragging in an Actor onto the 'Team Members' field will create a Team Folder including that Actor, as you can see here for Tour-san and their Voltorb!\nThis won't directly move these actors into this folder, allowing you to keep track of any related Actors, like all PCs or all the NPCs in a specific location, without moving them around."
+                    },
+                    "openTeamSheet": {
+                        "title": "Opening a Team Sheet",
+                        "content": "You can open a Team Sheet by clicking the 'Open Team Sheet' icon on a Team Folder.\nThis will show you all the details of the Team, including all the Team Members."
+                    },
+                    "openedTeamSheet": {
+                        "title": "Opened Team Sheet",
+                        "content": "Here you can see the Team Sheet of which Tour-san and their Voltorb are part of.\nIn the Team's Parties Tab you can see all the Parties owned by Team Members, and manage them from here."
+                    }
+                }
+            },
+            "characterCreation": {
+                "title": "Actor Sheet Walkthrough",
+                "description": "A walkthrough of the Character Sheet, to help you get started with making your first character!",
+                "steps": {
+                    "welcome": {
+                        "title": "Welcome to the Actor Sheet Walkthrough!",
+                        "content": "This tour will guide you through the Actor Sheet, where you can see all the details of your Characters and NPCs!\nLet's get started with the Character Overview!"
+                    },
+                    "overview": {
+                        "title": "Character Overview",
+                        "content": "On the overview tab you can see some basic details of your Character.\nAt the moment this tab comes pre-loaded with your favourite skill list, movement speeds, and stats.\nIn the future this page will be fully customizable, allowing you to add any information from any tab to this page as you wish!"
+                    },
+                    "favouriteSkills": {
+                        "title": "Favourite Skills",
+                        "content": "Any skills marked as Favourite will show up in the favourite list, for quick access and reference!\nFavourite skills also show in the Token Panel's 'Skills' Tab!"
+                    },
+                    "movement": {
+                        "title": "Movement",
+                        "content": "You can see your Character's Movement Speeds in the Movement Section.\nAt this point in time there is no automation for tracking speed, and so you will have to track this manually until it is added in a later build!"
+                    },
+                    "stats": {
+                        "title": "Stats",
+                        "content": "Over here you can see your stats radar, you can open up the editor by double clicking on the radar!"
+                    },
+                    "statsEditor": {
+                        "title": "Stats Editor",
+                        "content": "In the Stats Editor you can adjust your stats, and see how they affect your derived stats!\nHumanoids will be able to assign both their Base Stats and EVs, while Pokémon can only update their EVs."
+                    },
+                    "sidebar": {
+                        "title": "Sidebar",
+                        "content": "The Sidebar is available in every tab and shows you some basic details like your HP, PP, EXP and Combat Stages.\nYou can also access the Perk Web from here!"
+                    },
+                    "actions": {
+                        "title": "Actions",
+                        "content": "The Actions Tab is where you can find all the different Actions your Character can take.\nThis includes Attack Actions, Passives, Generic Actions, and more."
+                    },
+                    "attacks": {
+                        "title": "Attack Actions",
+                        "content": "Every Character can know an unlimited amount of Attacks! However, they may only have a maximum of 6 Attacks occuping their Attack Slots, which can be changed whenever you Camp through the 'Known Attacks' menu."
+                    },
+                    "knownAttacks": {
+                        "title": "Known Attacks",
+                        "content": "From here you can simply drag & drop the Attacks you want to use today into the right slot on the Actor Sheet, as well as manage which Attacks you know in general.\n'Free' Attacks, those that do not take up an Attack Slot, are not shown here."
+                    },
+                    "otherAttacks": {
+                        "title": "Other Attacks",
+                        "content": "Any Attack that doesn't take up an Attack Slot, show up here.\nThis currently also includes 'Move Variants', like the different types of Weather Ball, these will stay here until 'Move Variants' are fully implemented into the 'Roll Window'"
+                    },
+                    "genericActions": {
+                        "title": "Generic Actions",
+                        "content": "Besides the Combat Actions tab there are also the Downtime Actions and Generic Actions tab, some of these may be used in combat, but most are for out of combat use."
+                    },
+                    "inventory": {
+                        "title": "Inventory",
+                        "content": "The Inventory Tab is where you can see all the Items your Character is carrying.\nThis includes all the Items in their Backpack, as well as any Items they are Wearing or Holding.\nCurrently the inventory has an extremely basic implementation, and the appropriate sections will show up once you add items of their types to your sheet."
+                    },
+                    "inventoryPoints": {
+                        "title": "Inventory Points",
+                        "content": "You can see how many Inventory Points your Character has in the Inventory Points Section and track them!\nFor now, you will have to track these manually until we add automation for this in a later build!"
+                    },
+                    "skills": {
+                        "title": "Skills",
+                        "content": "The Skills Tab is where you can see all the Skills your Character knows.\nSkills can effectively be in 3 states, 'Favourited', 'Normal' and 'Hidden'.\nFavourite skills show at the top of the Skills list, as well as showing up in the 'Favourite Skills' component and Token Panel's 'Skills' tab.\nHidden Skills meanwhile aren't shown, you can use this to hide skills that aren't important to your settings, or that you doubt your character will ever use!\nYou can always unhide them using the 'Toggle Hidden Skills' button on the right-hand side."
+                    },
+                    "popoutSkills": {
+                        "title": "Popout Skills",
+                        "content": "A lot of components can be 'Popped Out', just like the Skills List!\nThis allows you to have multiple components that are on different tabs open at once, or even exclusively open a component in a new window and be able to close the Character Sheet!\nYou can do this by simply clicking the 'Popout' Icon in the top right corner of any component that supports this."
+                    },
+                    "editSkills": {
+                        "title": "Edit Skills",
+                        "content": "Whenever you have skill points to spend it'll be quite obvious by the glowing 'Open Skills Editor' button!\nClick it to open the Skills Editor and spend your points!"
+                    },
+                    "perks": {
+                        "title": "Perks",
+                        "content": "The Perks Tab is where you can see all the Perks your Character has, as well as any possible Abilities."
+                    },
+                    "traits": {
+                        "title": "Traits",
+                        "content": "Besides Perks & Abilities, you can also view any Traits your actor has here.\nYou can manually add more traits here simply by clicking on the bar and typing the required trait in.\nTraits are currently partially automated, for example any Traits from your Species will be added here. But any traits granted by Perks or other sources will have to be added manually for the foreseeable future."
+                    },
+                    "effects": {
+                        "title": "Effects",
+                        "content": "The Effects Tab is where you can see all the Effects your Character has.\nLike poor Tour-san here who is Fainted.\nAdding effects can be done either through Automation, through dragging in an Effect from the Foundry Sidebar or another Sheet, or through the right-click token-status menu.\nPlease note that currently the right-click token status menu shows *all* afflictions in the system, this will later be streamlined to only show those that are pertinent like Fainted, Paralyzed, etc."
+                    }
+                }
+            },
+            "perkWeb": {
+                "title": "Perk Web",
+                "description": "The Perk Web is how you can see and purchase Perks for your Characters and NPCs! This tour will guide you on how to use it!",
+                "steps": {
+
+                }
+            },
+            "generatingPokemon": {
+                "title": "Quick-Generating Pokémon",
+                "description": "A Walkthrough on 'Dex Drag-In' a returning fan-favourite feature for quickly generating Pokémon!",
+                "steps": {
+
+                }
             }
         }
     }

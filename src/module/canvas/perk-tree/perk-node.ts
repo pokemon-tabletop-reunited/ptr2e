@@ -102,7 +102,7 @@ class PerkNode extends PIXI.Container {
         return this.node.perk.system.hidden
             ? 0x777777
             : (() => {
-                return null;
+                  return null;
                   switch (this.state) {
                       case PerkState.unavailable:
                           return 0xff0000;
@@ -142,16 +142,30 @@ class PerkNode extends PIXI.Container {
         // saturationFilter.saturate(this.saturation, false);
         // const brightnessFilter = new ColorMatrixFilter();
         // brightnessFilter.brightness(this.brightness, false);
-        const adjustmentFilter = new AdjustmentFilter({saturation: this.saturation, brightness: this.brightness})
-        
-        const connectedFilter = new GlowFilter({distance: 10, innerStrength: 1, color: 0xad3f3f, alpha: 0.7})
-        const availableFilter = new GlowFilter({distance: 15, innerStrength: 1, color: 0xffffff})
-        const purchasedFilter = new OutlineFilter(3, 0x9ce7a7, 1, 0.8)
+        const adjustmentFilter = new AdjustmentFilter({
+            saturation: this.saturation,
+            brightness: this.brightness,
+        });
+
+        const connectedFilter = new GlowFilter({
+            distance: 10,
+            innerStrength: 1,
+            color: 0xad3f3f,
+            alpha: 0.7,
+        });
+        const availableFilter = new GlowFilter({ distance: 15, innerStrength: 1, color: 0xffffff });
+        const purchasedFilter = new OutlineFilter(3, 0x9ce7a7, 1, 0.8);
 
         this.filters = [adjustmentFilter];
-        if(this.state === PerkState.connected) this.filters.push(connectedFilter);
-        if(this.state === PerkState.available) this.filters.push(availableFilter);
-        if(this.state === PerkState.purchased) this.filters.push(purchasedFilter);
+        if (this.state === PerkState.connected) this.filters.push(connectedFilter);
+        if (this.state === PerkState.available) this.filters.push(availableFilter);
+        if (this.state === PerkState.purchased) this.filters.push(purchasedFilter);
+        if (
+            game.ptr.web.hudNode?.node.position.i == this.node.position.i &&
+            game.ptr.web.hudNode?.node.position.j == this.node.position.j
+        ) {
+            this.addSelectedFilter();
+        }
 
         // Draw Icon Mask
         this._drawMask();
@@ -164,6 +178,18 @@ class PerkNode extends PIXI.Container {
 
         // Setup interactivity
         this._activateInteractivity();
+    }
+
+    addSelectedFilter() {
+        if(this.selectedFilter) return;
+        this.selectedFilter = new GlowFilter({ distance: 10, innerStrength: 1, color: 0x59b9df, alpha: 0.7 });
+        this.filters?.push(this.selectedFilter);
+    }
+
+    removeSelectedFilter() {
+        if(!this.selectedFilter || !this.filters?.length) return;
+        this.filters.splice(this.filters.indexOf(this.selectedFilter), 1);
+        this.selectedFilter = null;
     }
 
     redrawEdges() {
@@ -528,6 +554,8 @@ interface PerkNode {
     state: PerkPurchaseState;
 
     editState: ValueOf<PerkEditState>;
+
+    selectedFilter: GlowFilter | null;
 }
 
 export { PerkNode, PerkState };

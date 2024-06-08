@@ -1,7 +1,7 @@
 import { ApplicationV2Expanded } from "@module/apps/appv2-expanded.ts";
 import { PerkState } from "./perk-node.ts";
 
-export default class PerkTreeHUD extends foundry.applications.api.HandlebarsApplicationMixin(
+export default class PerkWebHUD extends foundry.applications.api.HandlebarsApplicationMixin(
     ApplicationV2Expanded
 ) {
     static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -9,7 +9,7 @@ export default class PerkTreeHUD extends foundry.applications.api.HandlebarsAppl
         {
             tag: "aside",
             id: "perk-web-hud",
-            classes: ["application","sheet"],
+            classes: ["application","sheet", "perk-hud"],
             window: {
                 frame: false,
                 positioned: false,
@@ -34,10 +34,7 @@ export default class PerkTreeHUD extends foundry.applications.api.HandlebarsAppl
                         return;
                     }
 
-                    await actor.createEmbeddedDocuments("Item", [node.perk.toObject()]);
-                    await game.ptr.web.refresh({nodeRefresh: true});
-                    game.ptr.web.hudNode = game.ptr.web.collection.get(`${node.position.i},${node.position.j}`)?.element ?? null;
-                    foundry.applications.instances.get("perk-web-hud")!.render({parts: ["actor","perk"]});
+                    await actor.createEmbeddedDocuments("Item", [node.perk.clone({system: {cost: node.perk.system.cost}})]);
                 },
             },
         },

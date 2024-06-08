@@ -26,6 +26,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             actions: {
                 "reset-skills": SkillsEditor.#onResetSkills,
                 "change-resources": SkillsEditor.#onChangeResources,
+                "change-luck": SkillsEditor.#onChangeLuck,
                 "roll-luck": SkillsEditor.#onRollLuck,
             },
         },
@@ -220,6 +221,62 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                                 ? {
                                       ...skill,
                                       rvs: (skill.rvs ?? 0) + value,
+                                  }
+                                : skill;
+                        }),
+                    });
+                    thisRef.render({});
+                },
+            },
+        });
+    }
+
+    static #onChangeLuck(this: SkillsEditor) {
+        const document = this.document;
+        const luck = document.system.skills.find((skill) => skill.slug === "luck");
+        if (!luck) return;
+
+        const thisRef = this;
+        foundry.applications.api.DialogV2.prompt({
+            window: {
+                title: game.i18n.format("PTR2E.SkillsEditor.ChangeLuck.title", {
+                    name: document.name,
+                }),
+            },
+            content: game.i18n.format("PTR2E.SkillsEditor.ChangeLuck.content", {
+                name: document.name,
+                value: luck.total,
+            }),
+            ok: {
+                action: "submit",
+                label: game.i18n.localize("PTR2E.SkillsEditor.ChangeLuck.submit"),
+                callback: async (event) => {
+                    const input = (event.currentTarget as HTMLInputElement).querySelector(
+                        "input"
+                    ) as HTMLInputElement;
+                    if (!input) return;
+
+                    const value = parseInt(input.value);
+                    if (isNaN(value) || !value) return;
+                    const luck = thisRef.skills.find((skill) => skill.slug === "luck")!;
+                    if (luck.value + value <= 0) {
+                        ui.notifications.warn(
+                            game.i18n.format("PTR2E.SkillsEditor.ChangeLuck.warn", {
+                                name: document.name,
+                            })
+                        );
+                        return;
+                    }
+
+                    thisRef.skills.find((skill) => skill.slug === "luck")!.value =
+                        (luck.value ?? 0) + value;
+
+                    await document.update({
+                        "system.skills": document.system.skills.map((skill) => {
+                            return skill.slug === "luck"
+                                ? {
+                                      ...skill,
+                                      value: (skill.value ?? 0) + value,
                                   }
                                 : skill;
                         }),

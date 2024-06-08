@@ -2267,6 +2267,7 @@ body {
 
             .thumbnail {
                 padding: 0.25rem;
+                min-width: 56px;
 
                 img {
                     border-radius: 50%;
@@ -2280,6 +2281,12 @@ body {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
+
+                .name {
+                    text-wrap: nowrap;
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
 
                 .level {
                     font-size: x-small;
@@ -2491,7 +2498,7 @@ body {
                     height: 100%;
 
                     display: grid;
-                    grid-template-columns: 1fr 1fr;
+                    grid-template-columns: 50% 50%;
                     grid-template-rows: 1fr 1fr;
                     grid-template-areas:
                         "title health"
