@@ -557,9 +557,15 @@
             },
             "ChangeResources": {
                 "title": "Change Resources for {name}",
-                "content": "<content><div class='form-group'><label style='flex-basis: 30%;'>Current Value: {value}</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
+                "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Editing Resources</h3><p>this should only be done with explicit GM Permission!</p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Current Value: {value}</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
                 "submit": "Change Resources",
                 "warn": "Resource total for {name} cannot drop below 1."
+            },
+            "ChangeLuck": {
+                "title": "Change Luck for {name}",
+                "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Editing Luck</h3><p>this should only be done with explicit GM Permission!</p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Current Value: {value}</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
+                "submit": "Change Luck",
+                "warn": "Luck total for {name} cannot drop below 0."
             },
             "RollLuck": {
                 "title": "Reroll Luck for {name}",
