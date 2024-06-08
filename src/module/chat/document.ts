@@ -3,7 +3,7 @@ import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CheckRollContext } from "@system/rolls/data.ts";
 import TypeDataModel from "types/foundry/common/abstract/type-data.js";
-import { AttackRollResult, CheckRoll } from "../system/rolls/check-roll.ts";
+import { AttackRollResult, CheckRoll, PokeballRollResults } from "../system/rolls/check-roll.ts";
 import AttackMessageSystem from "./models/attack.ts";
 
 class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends ChatMessage<TSchema> {
@@ -280,21 +280,61 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         });
     }
 
+    static createFromPokeballResults<TTypeDataModel extends TypeDataModel = TypeDataModel>(
+        context: CheckRollContext,
+        results: PokeballRollResults
+    ): Promise<ChatMessagePTR2e<TTypeDataModel> | undefined> {
+        const type = "capture";
+        
+        const system = {
+            rolls: {
+                accuracy: results.rolls.accuracy?.toJSON() ?? null,
+                crit: results.rolls.crit?.toJSON() ?? null,
+                shake1: results.rolls.shake1?.toJSON() ?? null,
+                shake2: results.rolls.shake2?.toJSON() ?? null,
+                shake3: results.rolls.shake3?.toJSON() ?? null,
+                shake4: results.rolls.shake4?.toJSON() ?? null,
+            },
+            origin: context.actor?.toJSON(),
+            slug: context.action ?? context.title ?? type,
+            target: context.target?.actor.uuid ?? null
+        };
+        // const rolls = Object.values(system.rolls).filter((r) => r); 
+
+        const speaker = ChatMessagePTR2e.getSpeaker({
+            actor: context.actor!,
+            token: context.token!,
+        });
+        const flavor = context.title ?? "";
+
+        //@ts-expect-error
+        return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({
+            type,
+            speaker,
+            flavor,
+            system,
+        });
+    }
+
     static async createFromResults(
         context: CheckRollContext & { notesList?: HTMLUListElement | null },
         results: AttackRollResult[],
         dataOnly: true
-    ): Promise<DeepPartial<ChatMessagePTR2e<AttackMessageSystem>> | undefined >;
+    ): Promise<DeepPartial<ChatMessagePTR2e<AttackMessageSystem>> | undefined>;
     static async createFromResults(
         context: CheckRollContext & { notesList?: HTMLUListElement | null },
         results: AttackRollResult[],
         dataOnly?: false
-    ): Promise<ChatMessagePTR2e<AttackMessageSystem> | undefined >;
+    ): Promise<ChatMessagePTR2e<AttackMessageSystem> | undefined>;
     static async createFromResults(
         context: CheckRollContext & { notesList?: HTMLUListElement | null },
         results: AttackRollResult[],
         dataOnly: boolean = false
-    ): Promise<ChatMessagePTR2e<AttackMessageSystem> | DeepPartial<ChatMessagePTR2e<AttackMessageSystem>> | undefined > {
+    ): Promise<
+        | ChatMessagePTR2e<AttackMessageSystem>
+        | DeepPartial<ChatMessagePTR2e<AttackMessageSystem>>
+        | undefined
+    > {
         if (!context.action) return;
         if (!context.actor) return;
 

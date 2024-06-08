@@ -9,6 +9,7 @@ const ActionTypes = {
     ATTACK: "attack",
     PASSIVE: "passive",
     GENERIC: "generic",
+    POKEBALL: "pokeball",
 } as const;
 
 const ActivationCost = {

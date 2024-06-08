@@ -65,6 +65,9 @@
             {{#each actor.actions.exploration as |action|}}
                 {{> action action=action direction="RIGHT"}}
             {{/each}}
+            {{#each actor.actions.pokeball as |action|}}
+                {{> action action=action direction="RIGHT"}}
+            {{/each}}
         </fieldset>
     </section>
 </section>

@@ -5,7 +5,7 @@ import { CheckDC } from "@system/rolls/degree-of-success.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { AttackPTR2e, Trait } from "@data";
+import { ActionPTR2e, AttackPTR2e, Trait } from "@data";
 import { RollNote } from "./notes.ts";
 import { AttackCheck } from "./statistics/attack.ts";
 
@@ -26,6 +26,8 @@ interface RollContextParams<
     target?: { actor?: ActorPTR2e | null; token?: TokenPTR2e | null } | null;
     /** The item being used in the attack or damage roll */
     item?: TItem;
+    /** The action being used for this check */
+    action?: ActionPTR2e;
     /** The attack being used in the attack or damage roll */
     attack?: AttackPTR2e;
     /** Domains from which to draw roll options */

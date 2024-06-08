@@ -110,9 +110,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                     if (!slug) return;
 
                     const action = this.actor.actions.get(slug);
-                    if (!action || !(action instanceof AttackPTR2e)) return;
-
-                    await action.roll();
+                    if (!action) return;
+                    if('rollable' in action && action.rollable === true) await (action as AttackPTR2e).roll();
                 },
                 "action-to-chat": ActorSheetPTRV2._onToChatAction,
                 "action-edit": ActorSheetPTRV2._onEditAction,
