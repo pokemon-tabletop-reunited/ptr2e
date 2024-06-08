@@ -21,8 +21,16 @@
                 Crafting
             </legend>
             {{formField fields.crafting.fields.skill value=source.system.crafting.skill localize=true}}
-            {{formField fields.crafting.fields.time.fields.value value=source.system.crafting.time.value localize=true}}
-            {{formField fields.crafting.fields.time.fields.unit value=source.system.crafting.time.unit localize=true}}
+            {{formField fields.crafting.fields.spans value=source.system.crafting.spans localize=true}}
+            {{formField fields.crafting.fields.materials value=source.system.crafting.materials localize=true}}
+        </fieldset>
+        <fieldset>
+            <legend>
+                Fling Stats
+            </legend>
+            {{formField fields.fling.fields.type value=source.system.fling.type localize=true}}
+            {{formField fields.fling.fields.power value=source.system.fling.power localize=true}}
+            {{formField fields.fling.fields.accuracy value=source.system.fling.accuracy localize=true}} 
         </fieldset>
         <fieldset>
             <legend>

@@ -15,9 +15,9 @@ export default abstract class WeaponSystem extends GearSystem {
         const fields = foundry.data.fields;
         return {
             ...super.defineSchema(),
-            weaponType: new fields.StringField({ required: true, blank: true, initial: ""}),
-            weaponPp: new fields.NumberField({ required: true, initial: 0}),
-            weaponRange: new fields.StringField({ required: true, initial: ""}),
+            weaponType: new fields.StringField({ required: true, blank: true, initial: "", label: "PTR2E.FIELDS.weapon.weaponType.label", hint: "PTR2E.FIELDS.weapon.weaponType.hint"}),
+            weaponPp: new fields.NumberField({ required: true, initial: 0, label: "PTR2E.FIELDS.weapon.weaponPp.label", hint: "PTR2E.FIELDS.weapon.weaponPp.hint"}),
+            weaponRange: new fields.StringField({ required: true, initial: "", label: "PTR2E.FIELDS.weapon.weaponRange.label", hint: "PTR2E.FIELDS.weapon.weaponRange.hint"}),
         };
     }
 
