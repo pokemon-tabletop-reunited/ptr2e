@@ -18,6 +18,7 @@ import { CheckContext } from "./data.ts";
 import { AttackModifierPopup } from "@module/apps/modifier-popup/attack-modifier-popup.ts";
 import { AttackRoll, AttackRollCreationData, AttackRollDataPTR2e } from "./rolls/attack-roll.ts";
 import { CaptureRoll, CaptureRollCreationData } from "./rolls/capture-roll.ts";
+import { ConsumableSystemModel } from "@item/data/index.ts";
 
 class CheckPTR2e {
     static async rollPokeball(
@@ -66,7 +67,7 @@ class CheckPTR2e {
 
         const data: CaptureRollCreationData = {
             check,
-            ballBonus: 1,
+            ballBonus: (context.item?.system instanceof ConsumableSystemModel && context.item.system.consumableType === "pokeball" ? context.item.system.modifier : 1) || 1,
             critBonus: 1,
             miscBonus: 1,
             target: context.target?.actor,

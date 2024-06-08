@@ -96,14 +96,14 @@ class ActorPTR2e<
 
     get netStages() {
         return (
-            this.system.attributes.atk.stage
-            + this.system.attributes.def.stage
-            + this.system.attributes.spa.stage
-            + this.system.attributes.spd.stage
-            + this.system.attributes.spe.stage
-            + this.system.battleStats.accuracy.stage
-            + this.system.battleStats.evasion.stage
-            + this.system.battleStats.critRate.stage
+            this.system.attributes.atk.stage +
+            this.system.attributes.def.stage +
+            this.system.attributes.spa.stage +
+            this.system.attributes.spd.stage +
+            this.system.attributes.spe.stage +
+            this.system.battleStats.accuracy.stage +
+            this.system.battleStats.evasion.stage +
+            this.system.battleStats.critRate.stage
         );
     }
 
@@ -785,7 +785,10 @@ class ActorPTR2e<
                 statistic &&
                 "item" in statistic &&
                 statistic.item instanceof ItemPTR2e &&
-                "actions" in statistic.item.system
+                ("actions" in statistic.item.system ||
+                    ("consumableType" in statistic.item.system &&
+                        statistic.item.system.consumableType &&
+                        statistic.item.system.consumableType === "pokeball"))
             ) {
                 return statistic.item as ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>;
             }
@@ -910,11 +913,14 @@ class ActorPTR2e<
         );
         const applicableEffects = ephemeralEffects.filter((effect) => !this.isImmuneTo(effect));
 
-        return this.clone({
-            items: [fu.deepClone(this._source.items)].flat(),
-            effects: [fu.deepClone(this._source.effects), applicableEffects].flat(),
-            flags: { ptr2e: { rollOptions: { all: rollOptionsAll } } },
-        }, {keepId: true});
+        return this.clone(
+            {
+                items: [fu.deepClone(this._source.items)].flat(),
+                effects: [fu.deepClone(this._source.effects), applicableEffects].flat(),
+                flags: { ptr2e: { rollOptions: { all: rollOptionsAll } } },
+            },
+            { keepId: true }
+        );
     }
 
     //TODO: Implement

@@ -131,6 +131,10 @@ class PokeballCheck<TParent extends PokeballStatistic = PokeballStatistic> imple
         return this.parent.actor;
     }
 
+    get item() {
+        return this.parent.item;
+    }
+
     createRollOptions(args: RollOptionConfig = {}): Set<string> {
         return this.parent.createRollOptions(this.domains, args);
     }

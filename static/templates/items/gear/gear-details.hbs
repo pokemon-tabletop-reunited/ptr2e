@@ -10,19 +10,13 @@
         </fieldset>
         <fieldset>
             <legend>
-                Quality & Value
-            </legend>
-            {{formField fields.cost value=source.system.cost localize=true}}
-            {{formField fields.grade value=source.system.grade localize=true}}
-            {{formField fields.rarity value=source.system.rarity localize=true}} 
-        </fieldset>
-        <fieldset>
-            <legend>
                 Crafting
             </legend>
             {{formField fields.crafting.fields.skill value=source.system.crafting.skill localize=true}}
             {{formField fields.crafting.fields.spans value=source.system.crafting.spans localize=true}}
             {{formField fields.crafting.fields.materials value=source.system.crafting.materials localize=true}}
+            {{formField fields.grade value=source.system.grade localize=true}}
+            {{formField fields.rarity value=source.system.rarity localize=true}} 
         </fieldset>
         <fieldset>
             <legend>

@@ -1,5 +1,5 @@
 import { ConsumablePTR2e } from "@item";
-import { HasContainer, HasDescription, HasEmbed, HasSlug, HasTraits } from "@module/data/index.ts";
+import { HasContainer, HasDescription, HasEmbed, HasGearData, HasSlug, HasTraits } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 
 const CONSUMABLE_TYPES = {
@@ -12,7 +12,7 @@ const CONSUMABLE_TYPES = {
     other:"PTR2E.FIELDS.consumable.type.other",
 } as const
 type ConsumableType = keyof typeof CONSUMABLE_TYPES;
-const ConsumableExtension = HasEmbed(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))), "consumable");
+const ConsumableExtension = HasEmbed(HasTraits(HasDescription(HasSlug(HasContainer(HasGearData(foundry.abstract.TypeDataModel))))), "consumable");
 
 /**
  * @category Item Data Models
@@ -37,6 +37,11 @@ export default abstract class ConsumableSystem extends ConsumableExtension {
     }
 
     /**
+     * The Capture Rate Modifier
+     */
+    abstract modifier: number | null;
+
+    /**
      * @internal
      */
     declare _source: InstanceType<typeof ConsumableExtension>['_source'] & {
@@ -56,7 +61,15 @@ export default abstract class ConsumableSystem extends ConsumableExtension {
                 value: new fields.NumberField({ required: true, initial: 1, min: 0, step: 1, label: "PTR2E.FIELDS.consumable.charges.value.label", hint: "PTR2E.FIELDS.consumable.charges.value.hint"}),
                 max: new fields.NumberField({ required: true, initial: 1, min: 1, step: 1, label: "PTR2E.FIELDS.consumable.charges.max.label", hint: "PTR2E.FIELDS.consumable.charges.max.hint"}),
             }),
-            modifier: new fields.NumberField({required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.consumable.modifier.label", hint: "PTR2E.FIELDS.consumable.modifier.hint"})
+            modifier: new fields.NumberField({required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.consumable.modifier.label", hint: "PTR2E.FIELDS.consumable.modifier.hint"}),
+            cost: new fields.NumberField({
+                required: true,
+                nullable: true,
+                initial: null,
+                validate: (d) => d === null || (d as number) > 0,
+                label: "PTR2E.FIELDS.consumable.cost.label",
+                hint: "PTR2E.FIELDS.consumable.cost.hint",
+            }),
         };
     }
 

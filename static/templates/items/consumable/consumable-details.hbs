@@ -5,12 +5,43 @@
                 Details
             </legend>
             {{formField fields.consumableType value=source.system.consumableType localize=true}}
-            {{formField fields.charges.fields.value value=source.system.charges.value localize=true}}
-            {{formField fields.charges.fields.max value=source.system.charges.max localize=true}}
+            {{formField fields.cost value=source.system.cost localize=true}}
             {{#if (eq source.system.consumableType 'pokeball')}}
                 {{formField fields.modifier value=source.system.modifier localize=true}}
             {{/if}}
-
+        </fieldset>
+        <fieldset>
+            <legend>
+                Current State
+            </legend>
+            {{formField fields.quantity value=source.system.quantity localize=true}}
+            {{formField fields.equipped.fields.carryType value=source.system.equipped.carryType localize=true}}
+            {{formField fields.equipped.fields.handsHeld value=source.system.equipped.handsHeld localize=true}}
+            {{formField fields.charges.fields.value value=source.system.charges.value localize=true}}
+            {{formField fields.charges.fields.max value=source.system.charges.max localize=true}}
+        </fieldset>
+        <fieldset>
+            <legend>
+                Crafting
+            </legend>
+            {{formField fields.crafting.fields.skill value=source.system.crafting.skill localize=true}}
+            {{formField fields.crafting.fields.spans value=source.system.crafting.spans localize=true}}
+            {{formField fields.crafting.fields.materials value=source.system.crafting.materials localize=true}}
+            {{formField fields.grade value=source.system.grade localize=true}}
+            {{formField fields.rarity value=source.system.rarity localize=true}} 
+        </fieldset>
+        <fieldset>
+            <legend>
+                Fling Stats
+            </legend>
+            {{formField fields.fling.fields.type value=source.system.fling.type localize=true}}
+            {{formField fields.fling.fields.power value=source.system.fling.power localize=true}}
+            {{formField fields.fling.fields.accuracy value=source.system.fling.accuracy localize=true}} 
+        </fieldset>
+        <fieldset>
+            <legend>
+                Description
+            </legend>
             {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true localize=true}}
         </fieldset>
     </div>

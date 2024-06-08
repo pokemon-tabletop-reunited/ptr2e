@@ -121,14 +121,6 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
             return {
                 ...super.defineSchema(),
 
-                cost: new fields.NumberField({
-                    required: true,
-                    nullable: true,
-                    initial: null,
-                    validate: (d) => d === null || (d as number) > 0,
-                    label: "PTR2E.FIELDS.gear.cost.label",
-                    hint: "PTR2E.FIELDS.gear.cost.hint",
-                }),
                 crafting: new fields.SchemaField({
                     skill: new fields.StringField({
                         required: false,
@@ -194,6 +186,7 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
                     accuracy: new fields.NumberField({
                         required: true,
                         nullable: false,
+                        initial: 100,
                         min: 10,
                         max: 100,
                         label: "PTR2E.FIELDS.gear.fling.accuracy.label",
