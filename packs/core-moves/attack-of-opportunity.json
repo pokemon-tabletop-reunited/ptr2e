@@ -1,48 +1,41 @@
 {
-  "name": "Attack of Opportunity",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/untyped_icon.png",
-  "system": {
-    "slug": "attack-of-opportunity",
-    "description": "Trigger: A creature within Physical Reach spends a Movement Score or uses a [Manipulate] action.\nEffect: You make a [Basic] attack against the triggering creature.",
-    "traits": [
-      "interrupt-1"
-    ],
-    "actions": [
-      {
+    "name": "Attack of Opportunity",
+    "type": "move",
+    "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+    "system": {
         "slug": "attack-of-opportunity",
-        "name": "Attack of Opportunity",
-        "type": "attack",
-        "traits": [
-          "interrupt-1"
-        ],
-        "range": {
-          "target": "self",
-          "distance": 0,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null,
-          "trigger": "A creature within Physical Reach spends a Movement Score or uses a [Manipulate] action."
-        },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "untyped"
-        ],
         "description": "Trigger: A creature within Physical Reach spends a Movement Score or uses a [Manipulate] action.\nEffect: You make a [Basic] attack against the triggering creature.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null
-  },
-  "_id": "onQ8IjGIE523XM7Z",
-  "effects": []
+        "traits": [
+            "interrupt-1",
+            "basic"
+        ],
+        "actions": [
+            {
+                "slug": "attack-of-opportunity",
+                "name": "Attack of Opportunity",
+                "type": "attack",
+                "traits": [
+                    "interrupt-1",
+                    "basic"
+                ],
+                "range": {
+                    "target": "self",
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "trigger": "A creature within Physical Reach spends a Movement Score or uses a [Manipulate] action."
+                },
+                "category": "status",
+                "types": [
+                    "untyped"
+                ],
+                "description": "Trigger: A creature within Physical Reach spends a Movement Score or uses a [Manipulate] action.\nEffect: You make a [Basic] attack against the triggering creature.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "grade": "E"
+    },
+    "_id": "onQ8IjGIE523XM7Z",
+    "effects": []
 }
