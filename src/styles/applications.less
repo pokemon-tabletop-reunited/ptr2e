@@ -1485,6 +1485,8 @@ body {
     }
 
     &.known-actions-sheet {
+        max-height: 450px;
+
         .info-tooltip {
             &:hover, &:focus {
                 box-shadow: unset;
@@ -1495,6 +1497,8 @@ body {
 
         .window-content {
             display: block;
+            overflow-y: scroll;
+            height: 100%;
         }
 
         article.known-attacks {
