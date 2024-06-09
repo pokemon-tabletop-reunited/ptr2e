@@ -19,45 +19,52 @@ function _registerPTRHelpers() {
     Handlebars.registerHelper(
         "getIcon",
         function (img: PokemonType | PokemonCategory, args: { hash: Record<string, string> }) {
-            if (
-                !Object.values(PTRCONSTS.Categories).includes(img as PokemonCategory) &&
-                !getTypes().includes(img as PokemonType)
-            )
-                return "<small>Incorrect img data provided</small>";
+            const isType = getTypes().includes(img as PokemonType);
+            const isCategory = Object.values(PTRCONSTS.Categories).includes(img as PokemonCategory);
+            if (!isType && !isCategory) return "<small>Incorrect img data provided</small>";
 
             const hash = args.hash;
             const direction: string = hash?.direction ?? "LEFT";
             const tooltip: string = hash?.tooltip ?? formatSlug(img);
             const classes: string = hash?.classes ?? "";
 
-            return `<img src="/systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`;
+            return isType
+                ? `<img src="/systems/ptr2e/img/svg/${img}_icon.svg" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`
+                : `<img src="/systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`;
         }
     );
 
-    Handlebars.registerHelper("iconFromUuid", function (uuid, args: {hash: Record<string, string>}) {
-        const doc = fromUuidSync(uuid);
-        const img = document.createElement("img");
-        for(const key in args.hash) {
-            img.setAttribute(key, args.hash[key]);
-        }
-        if (!doc) {
-            img.src = "/icons/svg/hazard.svg";
+    Handlebars.registerHelper(
+        "iconFromUuid",
+        function (uuid, args: { hash: Record<string, string> }) {
+            const doc = fromUuidSync(uuid);
+            const img = document.createElement("img");
+            for (const key in args.hash) {
+                img.setAttribute(key, args.hash[key]);
+            }
+            if (!doc) {
+                img.src = "/icons/svg/hazard.svg";
+                return img.outerHTML;
+            }
+
+            img.src = doc.img;
+            img.alt ||= doc.name;
             return img.outerHTML;
         }
-
-        img.src = doc.img;
-        img.alt ||= doc.name;
-        return img.outerHTML;
-    });
+    );
 
     Handlebars.registerHelper("formatIndex", function (index) {
         const num = Number(index);
-        if(isNaN(num)) return index;
-        switch(index) {
-            case 0: return "1st";
-            case 1: return "2nd";
-            case 2: return "3rd";
-            default: return `${num + 1}th`;
+        if (isNaN(num)) return index;
+        switch (index) {
+            case 0:
+                return "1st";
+            case 1:
+                return "2nd";
+            case 2:
+                return "3rd";
+            default:
+                return `${num + 1}th`;
         }
     });
 
@@ -100,42 +107,57 @@ function _registerPTRHelpers() {
                 classes: ["content-link", "broken"],
                 icon: "fas fa-unlink",
                 dataset: {},
-                attrs: {}
-            }).outerHTML
+                attrs: {},
+            }).outerHTML;
         }
 
         const ele = document.createElement("div");
         ele.innerText = doc.name!;
         const name = ele.innerHTML;
 
-        const {type, tooltip, icon} = ((): {tooltip: string, icon: string, type: string} => {
-            if(doc instanceof foundry.abstract.Document) {
+        const { type, tooltip, icon } = ((): { tooltip: string; icon: string; type: string } => {
+            if (doc instanceof foundry.abstract.Document) {
                 const documentConfig = CONFIG[doc.documentName as keyof typeof CONFIG];
                 const documentName = game.i18n.localize(`DOCUMENT.${doc.documentName}`);
 
-                if('type' in doc && typeof doc.type === 'string' && typeof documentConfig === 'object' && 'typeLabels' in documentConfig && 'sidebarIcon' in documentConfig) {
+                if (
+                    "type" in doc &&
+                    typeof doc.type === "string" &&
+                    typeof documentConfig === "object" &&
+                    "typeLabels" in documentConfig &&
+                    "sidebarIcon" in documentConfig
+                ) {
                     const typeLabel = documentConfig.typeLabels[doc.type];
                     const typeName = game.i18n.has(typeLabel) ? game.i18n.localize(typeLabel) : "";
-                    const tooltip = typeName ? game.i18n.format("DOCUMENT.TypePageFormat", {type: typeName, page: documentName}) : documentName;
+                    const tooltip = typeName
+                        ? game.i18n.format("DOCUMENT.TypePageFormat", {
+                              type: typeName,
+                              page: documentName,
+                          })
+                        : documentName;
                     const icon = documentConfig.typeIcons?.[doc.type] ?? documentConfig.sidebarIcon;
-                    return {tooltip, icon, type: doc.documentName};
+                    return { tooltip, icon, type: doc.documentName };
                 }
-                // @ts-expect-error
-                return {tooltip: documentName, icon: documentConfig.sidebarIcon, type: doc.documentName};
+                
+                return {
+                    tooltip: documentName, // @ts-expect-error
+                    icon: documentConfig.sidebarIcon,
+                    type: doc.documentName,
+                };
             }
-            
+
             const documentName = game.packs.get(doc.pack)?.documentName!;
             return {
                 tooltip: name,
                 type: documentName,
                 //@ts-expect-error
-                icon: CONFIG[documentName].sidebarIcon
-            }
+                icon: CONFIG[documentName].sidebarIcon,
+            };
         })();
 
         const data = {
             classes: ["content-link"],
-            attrs: {draggable: true as unknown as string},
+            attrs: { draggable: true as unknown as string },
             name,
             dataset: {
                 link: "",
@@ -145,15 +167,15 @@ function _registerPTRHelpers() {
                 id: uuid.id,
                 pack: doc.pack,
             },
-            icon
-        }
+            icon,
+        };
 
         return TextEditor.createAnchor(data).outerHTML;
     });
 }
 
 function _registerBasicHelpers() {
-    Handlebars.registerHelper("abs", value => Math.abs(Number(value)));
+    Handlebars.registerHelper("abs", (value) => Math.abs(Number(value)));
 
     Handlebars.registerHelper("getProperty", (obj, key) => fu.getProperty(obj, key));
 
@@ -295,9 +317,12 @@ function _registerBasicHelpers() {
         return { hash: { [key]: value } };
     });
 
-    Handlebars.registerHelper("json", function (context, args: {hash: {spaces: string | number}}) {
-        return JSON.stringify(context, null, Number(args?.hash?.spaces ?? 2));
-    });
+    Handlebars.registerHelper(
+        "json",
+        function (context, args: { hash: { spaces: string | number } }) {
+            return JSON.stringify(context, null, Number(args?.hash?.spaces ?? 2));
+        }
+    );
 
     const buildInEachHelper = Handlebars.helpers.each;
     Handlebars.registerHelper("each", function (context, options) {
@@ -335,7 +360,7 @@ function _registerBasicHelpers() {
 
             const map = context as Map<string, unknown>;
             const j = map.size;
-            for (const [key, value] of (map instanceof Collection ? map.entries() : map)) {
+            for (const [key, value] of map instanceof Collection ? map.entries() : map) {
                 execIteration(key, value, i++, i === j);
             }
         } else {
