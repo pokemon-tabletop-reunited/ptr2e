@@ -1,44 +1,40 @@
 {
-  "name": "Rush",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/untyped_icon.png",
-  "system": {
-    "slug": "rush",
-    "description": "Effect: Select a Movement Type that you possess. Make a Skill check for that Movement Type's associated Skill, and add 1 +1 per DoS to that Movement Score for the rest of the round.",
-    "traits": [],
-    "actions": [
-      {
+    "name": "Rush",
+    "type": "move",
+    "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+    "system": {
         "slug": "rush",
-        "name": "Rush",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "self",
-          "distance": 0,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "untyped"
-        ],
         "description": "Effect: Select a Movement Type that you possess. Make a Skill check for that Movement Type's associated Skill, and add 1 +1 per DoS to that Movement Score for the rest of the round.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null
-  },
-  "_id": "JgLLve8pmeAQFVcV",
-  "effects": []
+        "traits": [
+            "basic"
+        ],
+        "actions": [
+            {
+                "slug": "rush",
+                "name": "Rush",
+                "type": "attack",
+                "traits": [
+                    "basic"
+                ],
+                "range": {
+                    "target": "self",
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 1
+                },
+                "category": "status",
+                "types": [
+                    "untyped"
+                ],
+                "description": "Effect: Select a Movement Type that you possess. Make a Skill check for that Movement Type's associated Skill, and add 1 +1 per DoS to that Movement Score for the rest of the round.",
+                "free": true,
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "grade": "E"
+    },
+    "_id": "JgLLve8pmeAQFVcV",
+    "effects": []
 }
