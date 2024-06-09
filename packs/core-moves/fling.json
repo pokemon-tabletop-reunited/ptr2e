@@ -1,52 +1,46 @@
 {
-  "name": "Fling",
-  "type": "move",
-  "img": "/systems/ptr2e/img/icons/untyped_icon.png",
-  "system": {
-    "slug": "fling",
-    "description": "Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item. When using Fling with a Held creature:\nPower = 20 + (userLift / 4) + (thrownWC * 3)\nAccuracy = 75 + (userLift / 5) + userCatMod - (4 * thrownCatMod)\nRange = 8 + (userLift / 6) + userCatMod - (2* thrownCatMod)",
-    "traits": [
-      "adaptable",
-      "basic",
-      "fling"
-    ],
-    "actions": [
-      {
+    "name": "Fling",
+    "type": "move",
+    "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+    "system": {
         "slug": "fling",
-        "name": "Fling",
-        "type": "attack",
-        "traits": [
-          "adaptable",
-          "basic",
-          "fling"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "physical",
-        "power": 25,
-        "accuracy": 100,
-        "types": [
-          "untyped"
-        ],
         "description": "Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item. When using Fling with a Held creature:\nPower = 20 + (userLift / 4) + (thrownWC * 3)\nAccuracy = 75 + (userLift / 5) + userCatMod - (4 * thrownCatMod)\nRange = 8 + (userLift / 6) + userCatMod - (2* thrownCatMod)",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null
-  },
-  "_id": "Hd7hMOku5jpIcppt",
-  "effects": []
+        "traits": [
+            "adaptable",
+            "basic",
+            "fling"
+        ],
+        "actions": [
+            {
+                "slug": "fling",
+                "name": "Fling",
+                "type": "attack",
+                "traits": [
+                    "adaptable",
+                    "basic",
+                    "fling"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex"
+                },
+                "category": "physical",
+                "power": 25,
+                "accuracy": 100,
+                "types": [
+                    "untyped"
+                ],
+                "description": "Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item. When using Fling with a Held creature:\nPower = 20 + (userLift / 4) + (thrownWC * 3)\nAccuracy = 75 + (userLift / 5) + userCatMod - (4 * thrownCatMod)\nRange = 8 + (userLift / 6) + userCatMod - (2* thrownCatMod)",
+                "free": true,
+                "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
+            }
+        ],
+        "grade": "E"
+    },
+    "_id": "Hd7hMOku5jpIcppt",
+    "effects": []
 }
