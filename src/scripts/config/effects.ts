@@ -611,11 +611,11 @@ export const StatusEffects: StatusEffect[] = [
         system: {
             changes: [
                 {
-                    type: "apply-effect",
+                    type: "grant-effect",
                     value: "stuck",
                 },
                 {
-                    type: "apply-effect",
+                    type: "grant-effect",
                     value: "raised",
                 },
                 {
@@ -753,7 +753,7 @@ export const StatusEffects: StatusEffect[] = [
     },
     {
         id: "braced",
-        name: "PTR2E.Effect.Statuses.Labels.destined",
+        name: "PTR2E.Effect.Statuses.Labels.braced",
         img: "icons/svg/shield.svg",
         type: "passive",
         system: {
