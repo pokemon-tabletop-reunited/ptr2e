@@ -161,7 +161,7 @@ class JournalConverter {
                 if (parent) {
                     const path =
                         parent.path.replace(JournalConverter.extension, "") +
-                        "\\" +
+                        "/" +
                         metadata.slug +
                         JournalConverter.extension;
                     parent.pages.set(
@@ -197,7 +197,7 @@ class JournalConverter {
             for (const [slug, { title, markdown, metadata, parent }] of deferred) {
                 const parentPage = getPage(parent);
                 if (parentPage) {
-                    const path = parentPage.path.replace(JournalConverter.extension, "") + "\\" + slug + JournalConverter.extension;
+                    const path = parentPage.path.replace(JournalConverter.extension, "") + "/" + slug + JournalConverter.extension;
                     parentPage.pages.set(slug, new Page({ title, path, markdown, metadata }));
                     deferred.delete(slug);
                 }
