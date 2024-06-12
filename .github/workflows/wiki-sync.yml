@@ -1,0 +1,37 @@
+on:
+    workflow_dispatch:
+
+jobs:
+    wiki-sync:
+        runs-on: ubuntu-latest
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - name: Use Node.js 18.x
+              uses: actions/setup-node@v4
+              with:
+                  node-version: 18.x
+
+            - name: Checkout Wiki Git Repo
+              uses: actions/checkout@v4
+              with:
+                  repository: 'pokemon-tabletop-reunited/ptr2e-wiki'
+                  path: 'ptr2e-wiki'
+                  token: ${{ secrets.WIKI_PAT }}
+
+            - name: Create Wiki Pages
+              run: |
+                  npm ci
+                  npm run sync:wiki
+
+            - name: Setup git config
+              run: |
+                git config user.name "Wiki Sync Action"
+                git config user.email "ashe@soaringnetwork.com"
+
+            - name: Commit Changes if any
+              run: |
+                git add .
+                git commit -m "Sync Wiki Pages"
+                git push
