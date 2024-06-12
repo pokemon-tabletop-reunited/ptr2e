@@ -27,14 +27,11 @@ jobs:
                   npm ci
                   npm run sync:wiki
 
-            - name: Setup git config
+            - name: Git Push Wiki Pages
               run: |
                 cd ptr2e-wiki
                 git config user.name "Wiki Sync Action"
                 git config user.email "ashe@soaringnetwork.com"
-
-            - name: Commit Changes if any
-              run: |
                 git add .
                 git commit -m "Sync Wiki Pages"
                 git push
