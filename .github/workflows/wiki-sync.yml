@@ -1,9 +1,16 @@
 name: PTR2e Wiki Sync
 on:
+    workflow_run:
+        workflows: ["PTR2e CD"]
+        types:
+            - completed
+        branches:
+            - Stable
     workflow_dispatch:
 
 jobs:
     wiki-sync:
+        if: github.event.workflow_run.conclusion == 'success' || github.event_name == 'workflow_dispatch'
         runs-on: ubuntu-latest
 
         steps:
