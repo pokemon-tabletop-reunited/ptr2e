@@ -228,8 +228,9 @@ class Page {
 
     get wikiContent(): string {
         return `---\n${Object.entries(this.metadata)
+            .filter(([key]) => key !== "slug" && key !== "parent")
             .map(([key, value]) => `${key}: ${value}`)
-            .join("\n")}\n---\n\n${this.markdown}`;
+            .join("\n")}\n---\n\n# ${this.metadata.title}\n${this.markdown}`;
     }
 
     metadata: Record<string, string> = {};
