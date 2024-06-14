@@ -3,6 +3,17 @@ import path from "path";
 import url from "url";
 import { JournalConverter, Page, randomID } from "./lib/convert-journal.ts";
 import { CompendiumPack } from "./lib/compendium-pack.ts";
+import { 
+    abilityToMarkdown,
+    consumableToMarkdown,
+    effectToMarkdown,
+    gearToMarkdown,
+    equipmentToMarkdown,
+    moveToMarkdown,
+    perkToMarkdown,
+    speciesToMarkdown,
+    weaponToMarkdown
+ } from "./lib/convert-item.ts";
 
 export function WikiFilesToJournalEntry(_asJson: boolean = false) {
     const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
@@ -48,7 +59,7 @@ export function WikiFilesToJournalEntry(_asJson: boolean = false) {
     // return pack.save(_asJson);
 }
 
-function foundryJsonToWikiPages() {
+function foundryRulesJsonToWikiPages() {
     const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
     const packDataPath = path.resolve(__dirname, `../packs/core-rules`);
     const pack = CompendiumPack.loadJSON(packDataPath);
@@ -73,4 +84,52 @@ function foundryJsonToWikiPages() {
     }
 }
 
-foundryJsonToWikiPages();
+function foundryItemJsonToWikiPages() {
+    const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
+    const packsDataPath = path.resolve(__dirname, "../packs");
+    const packDirPaths = fs.readdirSync(packsDataPath).map((dirName) => path.resolve(__dirname, packsDataPath, dirName));
+
+    // Loads all packs into memory for the sake of making all document name/id mappings available
+    const packs = packDirPaths.map((p) => CompendiumPack.loadJSON(p));
+
+    for(const pack of packs) {
+        for(const itemJson of pack.data as SourceFromSchema<foundry.documents.ItemSchema>[]) {
+            const item = (() => {
+                switch(itemJson.type) {
+                    case "ability":
+                        return abilityToMarkdown(itemJson);
+                    case "consumable":
+                        return consumableToMarkdown(itemJson);
+                    case "effect":
+                        return effectToMarkdown(itemJson);
+                    case "equipment":
+                        return equipmentToMarkdown(itemJson);
+                    case "gear":
+                        return gearToMarkdown(itemJson);
+                    case "move":
+                        return moveToMarkdown(itemJson);
+                    case "perk":
+                        return perkToMarkdown(itemJson);
+                    case "species":
+                        return speciesToMarkdown(itemJson);
+                    case "weapon":
+                        return weaponToMarkdown(itemJson);
+                }
+                return null;
+            })();
+            if(!item) continue;
+
+            const page = `---\n${Object.entries(item.metadata)
+                .filter(([key]) => key !== "slug" && key !== "parent")
+                .map(([key, value]) => `${key}: ${value}`)
+                .join("\n")}\n---\n\n# ${item.metadata.title}\n${item.markdown}`;
+
+            const filePath = path.resolve(__dirname, `../ptr2e-wiki/${item.path}`);
+            fs.mkdirSync(path.dirname(filePath), { recursive: true });
+            fs.writeFileSync(filePath, page);
+        }
+    }
+}
+
+foundryItemJsonToWikiPages();
+foundryRulesJsonToWikiPages();

@@ -56,6 +56,7 @@ const BaseSkills = {
     electronics: { slug: "electronics" },
     engineering: { slug: "engineering" },
     "fast-talk": { slug: "fast-talk" },
+    flying: { slug: "flying" },
     handiwork: { slug: "handiwork" },
     history: { slug: "history" },
     husbandry: { slug: "husbandry" },
