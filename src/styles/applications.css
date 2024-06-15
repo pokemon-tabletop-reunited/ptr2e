@@ -194,19 +194,22 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content aside.sidebar .experience .level {
   grid-area: level;
 }
-.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button {
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button,
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown {
   display: flex;
   justify-content: center;
   flex: 1;
   align-items: center;
 }
-.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button {
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button,
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button {
   flex: 0 0 70%;
   height: min-content;
   line-height: 1.2rem;
   padding: 0.25rem 0.5rem;
 }
-.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button:has(small.unspend) {
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button:has(small.unspend),
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button:has(small.unspend) {
   animation: glow 1s infinite alternate;
 }
 @keyframes glow {
@@ -217,8 +220,29 @@ body .application.sheet .form-group {
     box-shadow: 0 0 5px 5px gold;
   }
 }
-.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button small.unspend {
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button small.unspend,
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button small.unspend {
   font-size: 10px;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown {
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown label {
+  color: var(--hint-text-color);
+  flex: 0 0 35%;
+  align-content: center;
+  text-align: left;
+  font-size: 12px;
+  padding-left: 1rem;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown select {
+  flex: 1 0 40%;
+  align-self: center;
+  align-content: center;
+  margin-right: 0.5rem;
+  height: min-content;
+  line-height: 1.2rem;
+  padding: 0.25rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active {
   grid-area: main;

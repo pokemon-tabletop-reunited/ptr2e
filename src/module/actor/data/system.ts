@@ -15,7 +15,7 @@ import { SpeciesSystemModel } from "@item/data/index.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
-import natures from "@scripts/config/natures.ts";
+import { natures } from "@scripts/config/natures.ts";
 
 class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
     static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -200,8 +200,9 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
             shiny: new fields.BooleanField({ required: true, initial: false }),
             nature: new fields.StringField({
                 required: true,
-                choices: Object.keys(natures).reduce<Record<keyof typeof natures, string>>((acc, key) => ({ ...acc, [key]: key }), {} as Record<keyof typeof natures, string>),
+                choices: natures,
                 initial: "hardy",
+                label: "PTR2E.FIELDS.nature.label",
             }),
             gender: new fields.StringField({
                 required: true,

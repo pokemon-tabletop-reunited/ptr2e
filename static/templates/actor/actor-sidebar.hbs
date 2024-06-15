@@ -87,6 +87,12 @@
             {{formInput fields.battleStats.fields.evasion.fields.stage value=actor.system.battleStats.evasion.stage disabled=true}}
         </div>
     </div>
+    <div class="nature-dropdown">
+        <label for="system.nature">{{localize fields.nature.label}}</label>
+        <select name="system.nature" id="system.nature" data-dtype="String">
+            {{selectOptions natures selected=actor.system.nature localize=true}}
+        </select>
+    </div>
     <div class="perk-web-button">
         <button type="button" class="perk-web-button" data-action="open-perk-web">
             <i class="fas fa-sitemap"></i>

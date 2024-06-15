@@ -24,6 +24,7 @@ import { AbilitiesComponent } from "./components/abilities-component.ts";
 import { StatsChart } from "./sheets/stats-chart.ts";
 import StatsForm from "./sheets/stats-form.ts";
 import { ActiveEffectPTR2e } from "@effects";
+import { natures } from "@scripts/config/natures.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     ActorSheetV2Expanded
@@ -316,6 +317,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             skills,
             hideHiddenSkills,
             shouldPerkFlash,
+            natures: natures
         };
     }
 
