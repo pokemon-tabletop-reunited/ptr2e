@@ -998,6 +998,16 @@ class ActorPTR2e<
             }
         }
 
+        if(changed.system?.advancement?.experience?.current !== undefined) {
+            const next = this.system.advancement.experience.next;
+            if(next && Number(changed.system.advancement.experience.current) >= next) {
+                changed.flags ??= {} //@ts-expect-error
+                changed.flags.ptr2e ??= {}; //@ts-expect-error
+                changed.flags.ptr2e.sheet ??= {}; //@ts-expect-error
+                changed.flags.ptr2e.sheet.perkFlash = true;
+            }
+        }
+
         return super._preUpdate(changed, options, user);
     }
 
@@ -1167,6 +1177,9 @@ interface ActorPTR2e<
 type ActorFlags2e = ActorFlags & {
     ptr2e: {
         rollOptions: RollOptions & {};
+        sheet?: {
+            perkFlash?: boolean;
+        };
     };
 };
 

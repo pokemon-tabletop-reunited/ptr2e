@@ -145,7 +145,7 @@ function consumableToMarkdown(consumable: any): MarkdownResult | null {
     };
 }
 
-function effectToMarkdown(effect: any): MarkdownResult | null {
+function effectToMarkdown(_effect: any): MarkdownResult | null {
     return null;
 }
 
