@@ -12,7 +12,9 @@ import {
     moveToMarkdown,
     perkToMarkdown,
     speciesToMarkdown,
-    weaponToMarkdown
+    weaponToMarkdown,
+    getMarkdownPath,
+    getCategory
  } from "./lib/convert-item.ts";
 
 export function WikiFilesToJournalEntry(_asJson: boolean = false) {
@@ -131,5 +133,30 @@ function foundryItemJsonToWikiPages() {
     }
 }
 
+function foundryTraitsJsonToWikiPages() {
+    const __dirname = url.fileURLToPath(new URL(".", import.meta.url));
+    const traitsDataPath = path.resolve(__dirname, `../static/traits.json`);
+    const traitsData = JSON.parse(fs.readFileSync(traitsDataPath, "utf-8"));
+
+    for(const traitData of traitsData) {
+        const related = traitData.related.map((t: string) => `- [[${t}]](/${getMarkdownPath({
+                type: "traits",
+                category: getCategory(t),
+                title: t,
+                extension: false,
+            })})`).join(", ");
+        const page = `---\ntitle: ${traitData.label}\ndescription: An auto-generated markdown file for the ${traitData.label} trait.\npublished: true\neditor: markdown\ntags: trait\n---\n\n# ${traitData.label}\n${traitData.description}${related ? `\n\n## Related Traits\n${related}` : ""}`;
+
+        const filePath = path.resolve(__dirname, `../ptr2e-wiki/${getMarkdownPath({
+            type: "traits",
+            category: getCategory(traitData.slug),
+            title: traitData.label,
+        })}`);
+        fs.mkdirSync(path.dirname(filePath), { recursive: true });
+        fs.writeFileSync(filePath, page);
+    }
+}
+
+foundryTraitsJsonToWikiPages();
 foundryItemJsonToWikiPages();
 foundryRulesJsonToWikiPages();

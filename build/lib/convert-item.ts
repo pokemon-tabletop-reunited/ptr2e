@@ -34,7 +34,7 @@ function getMarkdownPath({
     title,
     extension = true,
 }: {
-    type: "abilities" | "effects" | "items" | "moves" | "perks" | "species";
+    type: "abilities" | "effects" | "items" | "moves" | "perks" | "species" | "traits";
     subtype?: "consumables" | "equipment" | "gear" | "weapons";
     category: keyof typeof categories;
     title: string;
@@ -399,14 +399,14 @@ function speciesToMarkdown(species: any): MarkdownResult | null {
 
     const evolutions = "\n### Evolutions\n" + addEvolution(species.system.evolutions)
 
-    const moves = "\n### Moves\n####Level Up\n" 
+    const moves = "\n### Moves\n#### Level Up\n" 
         + (species.system.moves.levelUp?.map((move: any) => `- [${formatSlug(move.name)}](/${getMarkdownPath({
                 type: "moves",
                 category: getCategory(move.name),
                 title: move.name,
                 extension: false,
             })}) at level ${move.level}`).join("\n") ?? "")
-        + "\n\n####Tutor\n"
+        + "\n\n#### Tutor\n"
         + (species.system.moves.tutor?.map((move: any) => `- [${formatSlug(move.name)}](/${getMarkdownPath({
                 type: "moves",
                 category: getCategory(move.name),
@@ -478,5 +478,7 @@ export {
     perkToMarkdown,
     speciesToMarkdown,
     weaponToMarkdown,
+    getMarkdownPath,
+    getCategory,
     type MarkdownResult,
 };
