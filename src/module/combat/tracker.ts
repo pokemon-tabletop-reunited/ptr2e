@@ -1,4 +1,5 @@
 import { CombatPTR2e } from "@combat";
+import { htmlQuery } from "@utils";
 
 class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTracker<TEncounter> {
 
@@ -35,12 +36,14 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
                 const aCombatant = a === preview ? {
                     initiative: preview.initiative,
                     id: preview.id,
-                    actor: this.viewed!.combatants.get(preview.id)!.actor
+                    actor: this.viewed!.combatants.get(preview.id)!.actor,
+                    preview: true
                 } : this.viewed!.combatants.get(a.id)!;
                 const bCombatant = b === preview ? {
                     initiative: preview.initiative,
                     id: preview.id,
-                    actor: this.viewed!.combatants.get(preview.id)!.actor
+                    actor: this.viewed!.combatants.get(preview.id)!.actor,
+                    preview: true
                 } : this.viewed!.combatants.get(b.id)!;
                 return this.viewed!._sortCombatants(aCombatant, bCombatant);
             })
@@ -51,7 +54,7 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
 
     protected override _getEntryContextOptions(): EntryContextOption[] {
         const base = super._getEntryContextOptions();
-        const options = [];
+        const options: EntryContextOption[] = [];
         for (const option of base) {
             if (option.name === "COMBAT.CombatantClear") continue;
             if (option.name === "COMBAT.CombatantReroll") {
@@ -73,6 +76,40 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
             }
             options.push(option);
         }
+        options.push({
+            name: "PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.name",
+            icon: '<i class="fas fa-bolt"></i>',
+            condition: li => {
+                const combatant = this.viewed?.combatants.get(li.data("combatantId"));
+                return combatant?.type !== "round" && this.viewed?.combatant !== combatant;
+            },
+            callback: li => {
+                const combatant = this.viewed?.combatants.get(li.data("combatantId"));
+                if(!combatant) return;
+
+                foundry.applications.api.DialogV2.prompt({
+                    window: {
+                        title: game.i18n.format("PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.title", {name: combatant.name}),
+                    },
+                    content: game.i18n.format("PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.content", { current: combatant.system.avModifiers }),
+                    ok: {
+                        label: game.i18n.localize("PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.ok"),
+                        action: 'ok',
+                        callback: async (_event, target, element) => {
+                            const html = element ?? target;
+                            const value = htmlQuery<HTMLInputElement>(html, 'input[name="value"]')?.value;
+                            if(!value) return;
+
+                            const newValue = parseInt(value);
+                            if(isNaN(newValue)) return;
+
+                            const newModifiers = Math.clamp(combatant.system.avModifiers + newValue, -100, 100);
+                            combatant.update({ "system.avModifiers": newModifiers });
+                        }
+                    }
+                })
+            }
+        })
         return options;
     }
 }

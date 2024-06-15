@@ -274,7 +274,25 @@ class SpeciesSystem extends SpeciesExtension {
         this.moves.tutor = this.moves.tutor.sort((a, b) => a.name.localeCompare(b.name));
 
         this.size.sizeClass = (() => {
-            return 1;
+            const height = 1;
+            switch(true) {
+                case height < 0.3048:
+                    return 1;
+                case height < 0.6858:
+                    return 2;
+                case height < 1.3208:
+                    return 3;
+                case height < 3.048:
+                    return 4;
+                case height < 5.4864:
+                    return 5;
+                case height < 10.9728:
+                    return 6;
+                case height < 16.4592:
+                    return 7;
+                default:
+                    return 8;
+            }
         })();
         this.size.weightClass = (() => {
             switch(true) {

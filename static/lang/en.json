@@ -670,7 +670,13 @@
                 "Name": "Round"
             },
             "ContextMenu": {
-                "ResetAV": "Reset to BaseAV"
+                "ResetAV": "Reset to BaseAV",
+                "ApplyDelayOrAdvancement": {
+                    "name": "Apply Delay/Advancement",
+                    "title": "Apply Delay/Advancement to {name}?",
+                    "content": "<div class='form-group'><label><b>Current</b>: {current}%</label><div class='form-fields'><input name='value' type='number' value='0' min='-100' max='100'/></div><p class='hint'>Negative % is Advancement, Positive % is Delay</p></div>",
+                    "ok": "Apply Change"
+                }
             }
         },
         "FIELDS": {    

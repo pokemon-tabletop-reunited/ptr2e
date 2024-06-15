@@ -54,14 +54,14 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     _idToUpdateBaseInitiativeArray(ids: string[]): { _id: string; initiative: number }[] {
         return ids.flatMap((id) => {
             const combatant = this.combatants.get(id);
-            if (!combatant?.isOwner) return [];
-            return { _id: id, initiative: combatant.baseAV };
+            if (!combatant?.isOwner) return []; 
+            return { _id: id, initiative: combatant.baseAV, system: { avModifiers: 0} };
         });
     }
 
     public override _sortCombatants(
-        a: { initiative: number | null; id: string, actor: Actor<TokenDocument<Scene | null> | null> | null},
-        b: { initiative: number | null; id: string, actor: Actor<TokenDocument<Scene | null> | null> | null}
+        a: { initiative: number | null; id: string, actor: Actor<TokenDocument<Scene | null> | null> | null, preview?: boolean},
+        b: { initiative: number | null; id: string, actor: Actor<TokenDocument<Scene | null> | null> | null, preview?: boolean},
     ) {
         // Sort initiative ascending, then by speed descending, finally by speed stages ascending
         const resolveTie = (a: Maybe<ActorPTR2e>, b: Maybe<ActorPTR2e>) => {
@@ -76,6 +76,13 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
             const stagesB = b?.speedStage ?? 0;
             return stagesB - stagesA;
         };
+
+        // if(preview) {
+        //     const aCurrent = !a.preview && (this ?? game.combat)?.current?.combatantId === a.id;
+        //     const bCurrent = !b.preview && (this ?? game.combat)?.current?.combatantId === b.id;
+        //     if (aCurrent && !bCurrent) return -1;
+        //     if (bCurrent && !aCurrent) return 1;
+        // }
 
         const ia = Number.isNumeric(a.initiative) ? a.initiative! : -Infinity;
         const ib = Number.isNumeric(b.initiative) ? b.initiative! : -Infinity;
@@ -138,7 +145,10 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
             }
             throw new Error("No valid combatant found to take the next turn.");
         };
-        const next = getNext(turn);
+        const next = (() => {
+            if(turn > 0) return 0;
+            return getNext(turn);
+        })()
 
         const currentCombatant = this.combatant;
         const nextCombatant = this.turns[next];
