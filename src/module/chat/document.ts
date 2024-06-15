@@ -362,9 +362,9 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
                         r.context.target!.token?.actor?.uuid ?? r.context.target!.actor.uuid;
                     return json;
                 })(),
-                accuracy: r.rolls.accuracy!.toJSON(),
-                crit: r.rolls.crit!.toJSON(),
-                damage: r.rolls.damage!.toJSON(),
+                accuracy: r.rolls.accuracy?.toJSON() ?? null,
+                crit: r.rolls.crit?.toJSON() ?? null,
+                damage: r.rolls.damage?.toJSON() ?? null,
             })),
         };
 
