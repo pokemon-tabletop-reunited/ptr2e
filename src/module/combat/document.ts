@@ -5,9 +5,7 @@ import {
     CombatSystemPTR2e,
     RoundCombatantSystem,
 } from "@combat";
-import TypeDataModel from "types/foundry/common/abstract/type-data.js";
-import { CombatantSchema } from "types/foundry/common/documents/combatant.js";
-import { ActorPTR2e } from "@actor";
+import { ActorPTR2e} from "@actor";
 
 class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     get averageLevel(): number {
@@ -61,16 +59,22 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
         });
     }
 
-    override _sortCombatants(
-        a: CombatantPTR2e<this, TokenDocumentPTR2e | null>,
-        b: CombatantPTR2e<this, TokenDocumentPTR2e | null>
+    public override _sortCombatants(
+        a: { initiative: number | null; id: string, actor: Actor<TokenDocument<Scene | null> | null> | null},
+        b: { initiative: number | null; id: string, actor: Actor<TokenDocument<Scene | null> | null> | null}
     ) {
-        // Sort initiative ascending, then by speed descending
-        const resolveTie = () => {
+        // Sort initiative ascending, then by speed descending, finally by speed stages ascending
+        const resolveTie = (a: Maybe<ActorPTR2e>, b: Maybe<ActorPTR2e>) => {
             // Sort by speed descending
-            const speedA = a.actor?.speed ?? 0;
-            const speedB = b.actor?.speed ?? 0;
-            return speedB - speedA;
+            const speedA = a?.speed ?? 0;
+            const speedB = b?.speed ?? 0;
+            
+            if (speedA !== speedB) return speedB - speedA;
+
+            // Sort by speed stages ascending
+            const stagesA = a?.speedStage ?? 0;
+            const stagesB = b?.speedStage ?? 0;
+            return stagesB - stagesA;
         };
 
         const ia = Number.isNumeric(a.initiative) ? a.initiative! : -Infinity;
@@ -79,7 +83,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
         return typeof a.initiative === "number" &&
             typeof b.initiative === "number" &&
             a.initiative === b.initiative
-            ? resolveTie()
+            ? (resolveTie(a.actor as ActorPTR2e, b.actor as ActorPTR2e) || (a.id > b.id ? 1 : -1))
             : ia - ib || (a.id > b.id ? 1 : -1);
     }
 
@@ -294,8 +298,8 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     protected override _onCreateDescendantDocuments(
         parent: this,
         collection: "combatants",
-        documents: Combatant<this, TokenDocument<Scene | null> | null, TypeDataModel>[],
-        data: SourceFromSchema<CombatantSchema<string, TypeDataModel>>[],
+        documents: Combatant<this, TokenDocument<Scene | null> | null>[],
+        data: foundry.documents.CombatantSource<string, foundry.abstract.TypeDataModel>[],
         options: DocumentModificationContext<this>,
         userId: string
     ): void {
@@ -319,7 +323,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     protected override _onDeleteDescendantDocuments(
         parent: this,
         collection: "combatants",
-        documents: Combatant<this, TokenDocument<Scene | null> | null, TypeDataModel>[],
+        documents: Combatant<this, TokenDocument<Scene | null> | null, foundry.abstract.TypeDataModel>[],
         ids: string[],
         options: DocumentModificationContext<this>,
         userId: string

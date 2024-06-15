@@ -426,6 +426,10 @@ class ActorPTR2e<
         return this.system.battleStats.accuracy.stage + (this.system.modifiers["accuracy"] ?? 0);
     }
 
+    get speedStage() {
+        return this.system.attributes.spe.stage + (this.system.modifiers["speed"] ?? 0);
+    }
+
     getDefenseStat(attack: { category: AttackPTR2e["category"] }, isCrit: boolean) {
         return attack.category === "physical"
             ? this.calcStatTotal(this.system.attributes.def, isCrit)

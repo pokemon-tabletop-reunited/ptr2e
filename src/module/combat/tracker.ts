@@ -30,12 +30,20 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
         
         // Add the preview to the turns in the right initiative spot.
         if(preview) {
-            const index = data.turns.findLastIndex((t: {initiative: number | null}) => Number(t.initiative) < preview.initiative!);
-            if(index === -1) {
-                data.turns.push(preview);
-            } else {
-                data.turns.splice(index+1, 0, preview);
-            }
+            data.turns.push(preview);
+            data.turns = data.turns.sort((a,b) => {
+                const aCombatant = a === preview ? {
+                    initiative: preview.initiative,
+                    id: preview.id,
+                    actor: this.viewed!.combatants.get(preview.id)!.actor
+                } : this.viewed!.combatants.get(a.id)!;
+                const bCombatant = b === preview ? {
+                    initiative: preview.initiative,
+                    id: preview.id,
+                    actor: this.viewed!.combatants.get(preview.id)!.actor
+                } : this.viewed!.combatants.get(b.id)!;
+                return this.viewed!._sortCombatants(aCombatant, bCombatant);
+            })
         }
 
         return data;
