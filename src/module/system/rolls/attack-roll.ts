@@ -122,7 +122,7 @@ class AttackRoll extends CheckRoll {
     ): AccuracySuccessCategory {
         if (accuracy?.dice[0].values[0] === 100) return "fumble";
         const isHit = (accuracy?.total ?? 0) <= 0;
-        const isCrit = (crit?.total ?? 0) <= 0;
+        const isCrit = (crit?.total ?? 1) <= 0;
         return isHit ? (isCrit ? "critical" : "hit") : "miss";
     }
 

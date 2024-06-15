@@ -30,7 +30,7 @@
     <div class="target target-header">
         <div class="icon">Icon</div>
         <div class="status">Status</div>
-        <div class="damage">Damage</div>
+        <div class="damage">{{#if hasDamage}}Damage{{/if}}</div>
         <div class="apply"><button type="button" class="update-targets" data-tooltip="[Left Click] to add current selected/targeted actors<br>[Left Alt + Left Click] to overwrite targets with currently selected/targeted actors"><i class="fas fa-crosshairs"></i></button></div>
     </div> 
     {{#each results as |data uuid|}}

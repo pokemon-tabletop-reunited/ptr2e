@@ -247,7 +247,7 @@
                 },
                 "Descriptions": {
                     "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-condition], @Trait[minor-condition], @Trait[pseudo-affliction], and @Trait[stat-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
-                    "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has @affliction[weak] while Burn is active. @Trait[fire]-Type creatures cannot be Burned.",
+                    "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has @Affliction[weak] while Burn is active. @Trait[fire]-Type creatures cannot be Burned.",
                     "poison": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature also has Dull while Poison is active.",
                     "blight": "At the end of the afflicted creature’s Activation, it loses X Stacks of Blight, where X is 2<sup style='font-size: x-small;'># of Activations passed with Blight</sup> and takes a Tick of HP per Stack lost. The creature also has Dull while Blight is active. When a creature receives Blight, it loses the Poison Condition, with Blight gaining 33% of its remaining Poison Stacks as extra Stacks on Blight. When afflicted with Poisoned X while Blighted, the creature gains +1 to its Blight Stacks.",
                     "paralysis": "The afflicted creature's Base SPD is reduced by 50%, and the creature may only perform 1 Simple Action on its Activations.",
@@ -670,7 +670,13 @@
                 "Name": "Round"
             },
             "ContextMenu": {
-                "ResetAV": "Reset to BaseAV"
+                "ResetAV": "Reset to BaseAV",
+                "ApplyDelayOrAdvancement": {
+                    "name": "Apply Delay/Advancement",
+                    "title": "Apply Delay/Advancement to {name}?",
+                    "content": "<div class='form-group'><label><b>Current</b>: {current}%</label><div class='form-fields'><input name='value' type='number' value='0' min='-100' max='100'/></div><p class='hint'>Negative % is Advancement, Positive % is Delay</p></div>",
+                    "ok": "Apply Change"
+                }
             }
         },
         "FIELDS": {    
@@ -883,19 +889,19 @@
             "size": {
                 "category": {
                     "label": "Size Category",
-                    "hint": "The Size Category of the Pokemon."
+                    "hint": "The Size Category of the Creature."
                 },
                 "type": {
                     "label": "Measurement Type",
-                    "hint": "The Measurement Type of the Pokemon."
+                    "hint": "The Measurement Type of the Creature."
                 },
                 "height": {
                     "label": "Height",
-                    "hint": "The Height of the Pokemon in Meters."
+                    "hint": "The Height of the Creature in Meters."
                 },
                 "weight": {
                     "label": "Weight",
-                    "hint": "The Weight of the Pokemon in Kilos."
+                    "hint": "The Weight of the Creature in Kilos."
                 }
             },
             "genderRatio": {
@@ -1075,7 +1081,22 @@
                 "max": {
                     "label": "Max",
                     "hint": "The maximum health value of the actor."
+                },
+                "shield": {
+                    "short": "Shield",
+                    "value": {
+                        "label": "Current",
+                        "hint": "The shield value of the actor."
+                    },
+                    "max": {
+                        "label": "Max",
+                        "hint": "The maximum shield value of the actor."
+                    }
                 }
+            },
+            "nature": {
+                "label": "Nature",
+                "hint": "The nature of the actor."
             },
             "experience": {
                 "label": "Experience",

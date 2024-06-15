@@ -126,6 +126,13 @@ interface HealthData {
     temp: number,
     /** Calculated Field */
     percent: number,
+
+    shield: {
+        /** Shield Points */
+        value: number,
+        /** Shield Points */
+        max: number,
+    }
 }
 
 interface AdvancementData {

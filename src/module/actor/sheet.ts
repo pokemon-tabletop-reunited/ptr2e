@@ -24,6 +24,7 @@ import { AbilitiesComponent } from "./components/abilities-component.ts";
 import { StatsChart } from "./sheets/stats-chart.ts";
 import StatsForm from "./sheets/stats-form.ts";
 import { ActiveEffectPTR2e } from "@effects";
+import { natures } from "@scripts/config/natures.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     ActorSheetV2Expanded
@@ -94,7 +95,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                     }, {parent: this.document}) as SpeciesPTR2e;
                     sheet.render(true);
                 },
-                "open-perk-web": function (this: ActorSheetPTRV2) {
+                "open-perk-web": async function (this: ActorSheetPTRV2) {
+                    if([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash)) await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
                     game.ptr.web.open(this.actor);
                 },
                 "edit-movelist": function (this: ActorSheetPTRV2) {
@@ -301,6 +303,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         options?: foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>
     ) {
         const { skills, hideHiddenSkills } = SkillsComponent.prepareSkillsData(this.actor);
+        const shouldPerkFlash = this.actor.flags.ptr2e?.sheet?.perkFlash === false 
+            ? false
+            : this.actor.system.advancement.advancementPoints.available > 0;
 
         return {
             ...(await super._prepareContext(options)),
@@ -311,6 +316,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             tabs: this._getTabs(),
             skills,
             hideHiddenSkills,
+            shouldPerkFlash,
+            natures: natures
         };
     }
 

@@ -15,7 +15,7 @@ import { SpeciesSystemModel } from "@item/data/index.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
-import natures from "@scripts/config/natures.ts";
+import natureToStatArray, { natures } from "@scripts/config/natures.ts";
 
 class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
     static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -174,6 +174,22 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                     label: "PTR2E.FIELDS.health.max.label",
                     hint: "PTR2E.FIELDS.health.max.hint",
                 }),
+                shield: new fields.SchemaField({
+                    value: new fields.NumberField({
+                        required: true,
+                        initial: 0,
+                        validate: (d) => (d as number) >= 0,
+                        label: "PTR2E.FIELDS.health.shield.value.label",
+                        hint: "PTR2E.FIELDS.health.shield.value.hint",
+                    }),
+                    max: new fields.NumberField({
+                        required: true,
+                        initial: 0,
+                        validate: (d) => (d as number) >= 0,
+                        label: "PTR2E.FIELDS.health.shield.max.label",
+                        hint: "PTR2E.FIELDS.health.shield.max.hint",
+                    })
+                })
             }),
             money: new fields.NumberField({ required: true, initial: 0 }),
             species: new fields.SchemaField(SpeciesSystemModel.defineSchema(), {
@@ -184,8 +200,9 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
             shiny: new fields.BooleanField({ required: true, initial: false }),
             nature: new fields.StringField({
                 required: true,
-                choices: Object.keys(natures).reduce<Record<keyof typeof natures, string>>((acc, key) => ({ ...acc, [key]: key }), {} as Record<keyof typeof natures, string>),
+                choices: natures,
                 initial: "hardy",
+                label: "PTR2E.FIELDS.nature.label",
             }),
             gender: new fields.StringField({
                 required: true,
@@ -226,7 +243,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
             },
             writable: true,
         });
-        if(this.advancement.advancementPoints.available === undefined) {
+        if (this.advancement.advancementPoints.available === undefined) {
             Object.defineProperty(this.advancement.advancementPoints, "available", {
                 get: () => this.advancement.advancementPoints.total - this.advancement.advancementPoints.spent
             })
@@ -238,8 +255,8 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         this._initializeModifiers();
         this._prepareSpeciesData();
 
-        if(this.parent.isHumanoid()) {
-            this.advancement.level = Math.max(1,Math.floor(Math.cbrt(((this.advancement.experience.current || 1) * 4) / 5)));
+        if (this.parent.isHumanoid()) {
+            this.advancement.level = Math.max(1, Math.floor(Math.cbrt(((this.advancement.experience.current || 1) * 4) / 5)));
             this.advancement.experience.next = Math.ceil((5 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 4)
             this.advancement.experience.diff =
                 this.advancement.experience.next - this.advancement.experience.current;
@@ -339,7 +356,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         );
 
         // Every creature has a base overland of 3 at least.
-        if((Number(this.movement.get("overland")?.value) || 0) <= 3) {
+        if ((Number(this.movement.get("overland")?.value) || 0) <= 3) {
             this.movement.set("overland", { method: "overland", value: 3, type: "secondary" });
         }
     }
@@ -360,10 +377,17 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
     }
 
     _calculateStatTotal(stat: Attribute | Omit<Attribute, "stage">): number {
+        const nature = (() => {
+            const nature = natureToStatArray[this._source.nature as keyof typeof natureToStatArray];
+            if (!nature) return 1;
+            if (nature[0] == nature[1]) return 1;
+            if (stat.slug === nature[0]) return 1.1;
+            if (stat.slug === nature[1]) return 0.9;
+            return 1;
+        })();
+
         //TODO: Add these values, for now default to 1
-        const nature = 1,
-            sizeMod = 1,
-            level = this.advancement.level;
+        const level = this.advancement.level;
 
         if ("stage" in stat) {
             /** Calculate a stat that Isn't HP */
@@ -373,11 +397,14 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         }
 
         /** Calculate HP */
+        const bulkMod = Math.pow(1 + ((Math.sqrt(2) - 1) / (30 / Math.PI)), (this.species?.size.sizeClass || 1) - 1);
+        console.log(this.species?.size.sizeClass || 1, bulkMod);
+
         return Math.floor(
-            (Math.floor(((2 * stat.base + stat.ivs + stat.evs / 4) * level * sizeMod) / 100) +
+            (Math.floor(((2 * stat.base + stat.ivs + stat.evs / 4) * level * bulkMod) / 100) +
                 (Math.PI / 10 + Math.log(level + 9) / Math.PI) * level +
                 15) *
-                nature
+            nature
         );
     }
 

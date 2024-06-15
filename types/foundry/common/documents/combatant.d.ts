@@ -50,4 +50,4 @@ type CombatantSchema<TType extends string = string, TSystemSource extends object
     flags: fields.ObjectField<DocumentFlags>;
 };
 
-type CombatantSource = SourceFromSchema<CombatantSchema>;
+type CombatantSource<TType extends string = string, TSystemSource extends object = object> = SourceFromSchema<CombatantSchema<TType, TSystemSource>>;

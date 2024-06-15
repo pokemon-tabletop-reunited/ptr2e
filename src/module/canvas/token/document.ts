@@ -2,12 +2,35 @@ import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { TokenFlagsPTR2e } from "@module/canvas/token/data.ts";
 import { ScenePTR2e } from "../scene.ts";
+import { CombatantPTR2e, CombatPTR2e } from "@combat";
 
 class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
     get playersCanSeeName(): boolean {
         const anyoneCanSee: TokenDisplayMode[] = [CONST.TOKEN_DISPLAY_MODES.ALWAYS, CONST.TOKEN_DISPLAY_MODES.HOVER];
         const nameDisplayMode = this.displayName;
         return anyoneCanSee.includes(nameDisplayMode) || this.actor?.alliance === "party";
+    }
+
+    /**
+     * Whenever the token's actor delta changes, or the base actor changes, perform associated refreshes.
+     * @param {object} [update]                               The update delta.
+     * @param {Partial<DatabaseUpdateOperation>} [operation]  The database operation that was performed
+     * @protected
+     */
+    protected override _onRelatedUpdate(update: Record<string, unknown> = {}, options: DocumentModificationContext<null> = {}): void {
+        super._onRelatedUpdate(update, options);
+
+        // If the actor's speed combat stages are different from the token's combatant, update the combatant's speed stages
+        const combatant = this.combatant as CombatantPTR2e<CombatPTR2e> | null;
+        if(!combatant) return;
+        if(this.actor?.speedStage !== undefined && this.actor.speedStage !== combatant.system.avModifiersFromSpdStages) {
+            const appliedSpeedStagesPercent = Math.clamp(-combatant.system.avModifiersFromSpdStages * 15, -100, 100);
+            const newSpeedStagesPercent = Math.clamp(-this.actor.speedStage * 15, -100, 100);
+            const delta = newSpeedStagesPercent - appliedSpeedStagesPercent;
+            const modifiers = combatant.system.avModifiers + delta;
+            combatant.update({ "system.avModifiers": modifiers, "system.avModifiersFromSpdStages": this.actor.speedStage });
+            return
+        }
     }
 }
 

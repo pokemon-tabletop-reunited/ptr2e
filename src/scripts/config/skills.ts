@@ -115,7 +115,7 @@ const BaseSkills = {
     terastology: { slug: "terastology", group: "science" },
     ultrology: { slug: "ultrology", group: "science" },
     "paradoxian-studies": { slug: "paradoxian-studies", group: "science" },
-    "sleigh-of-hand": { slug: "sleigh-of-hand" },
+    "sleight-of-hand": { slug: "sleight-of-hand" },
     spot: { slug: "spot" },
     stealth: { slug: "stealth" },
     survival: { slug: "survival" },
