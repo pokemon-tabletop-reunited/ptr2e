@@ -119,7 +119,6 @@ class SpeciesSystem extends SpeciesExtension {
                     choices: getTypes().reduce<Record<string,string>>((acc, type) => ({...acc, [type]: type}), {}),
                     initial: PTRCONSTS.Types.UNTYPED,
                     label: "PTR2E.FIELDS.pokemonType.label",
-                    hint: "PTR2E.FIELDS.pokemonType.hint",
                 }),
                 {
                     initial: ["untyped"],
@@ -272,6 +271,130 @@ class SpeciesSystem extends SpeciesExtension {
             return a.name.localeCompare(b.name);
         });
         this.moves.tutor = this.moves.tutor.sort((a, b) => a.name.localeCompare(b.name));
+
+        this.size.sizeClass = (() => {
+            const height = this.size.height;
+            switch(this.size.type) {
+                case "height": {
+                    switch(true) {
+                        case height < 0.3048:
+                            return 1;
+                        case height < 0.6858:
+                            return 2;
+                        case height < 1.3208:
+                            return 3;
+                        case height < 3.048:
+                            return 4;
+                        case height < 5.4864:
+                            return 5;
+                        case height < 10.9728:
+                            return 6;
+                        case height < 16.4592:
+                            return 7;
+                        default:
+                            return 8;
+                    }
+                }
+                case "quad": {
+                    switch(true) {
+                        case height < 0.1512:
+                            return 1;
+                        case height < 0.3402:
+                            return 2;
+                        case height < 0.6551:
+                            return 3;
+                        case height < 1.5118:
+                            return 4;
+                        case height < 2.7213:
+                            return 5;
+                        case height < 5.4425:
+                            return 6;
+                        case height < 8.1638:
+                            return 7;
+                        default:
+                            return 8;
+                    }
+                }
+                case "length": {
+                    switch(true) {
+                        case height < 0.5279:
+                            return 1;
+                        case height < 1.1878:
+                            return 2;
+                        case height < 2.2877:
+                            return 3;
+                        case height < 5.2793:
+                            return 4;
+                        case height < 9.5027:
+                            return 5;
+                        case height < 19.0054:
+                            return 6;
+                        case height < 28.5082:
+                            return 7;
+                        default:
+                            return 8;
+                    }
+                }
+            }
+        })();
+        this.size.category = (() => {
+            switch(this.size.sizeClass) {
+                case 1:
+                    return "Diminutive";
+                case 2:
+                    return "Tiny";
+                case 3:
+                    return "Small";
+                case 4:
+                    return "Medium";
+                case 5:
+                    return "Large";
+                case 6:
+                    return "Huge";
+                case 7:
+                    return "Gigantic";
+                case 8:
+                    return "Titanic";
+                default:
+                    return "Max";
+            }
+        })();
+        this.size.weightClass = (() => {
+            switch(true) {
+                case this.size.weight < 10:
+                    return 1;
+                case this.size.weight < 20:
+                    return 2;
+                case this.size.weight < 30:
+                    return 3;
+                case this.size.weight < 40:
+                    return 4;
+                case this.size.weight < 55:
+                    return 5;
+                case this.size.weight < 70:
+                    return 6;
+                case this.size.weight < 85:
+                    return 7;
+                case this.size.weight < 100:
+                    return 8;
+                case this.size.weight < 120:
+                    return 9;
+                case this.size.weight < 145:
+                    return 10;
+                case this.size.weight < 190:
+                    return 11;
+                case this.size.weight < 240:
+                    return 12;
+                case this.size.weight < 305:
+                    return 13;
+                case this.size.weight < 350:
+                    return 14;
+                case this.size.weight < 410:
+                    return 15;
+                default:
+                    return 16;
+            }
+        })();
     }
 
     override async _preCreate(
@@ -488,10 +611,15 @@ interface SpeciesSystem {
     types: Set<PokemonType>;
 
     size: {
-        /** small, huge, medium etc. */
-        category: string;
         /** quadraped / height measurement */
-        type: string;
+        type: "height" | "quad" | "length";
+
+        height: number;
+        weight: number;
+
+        sizeClass: number;
+        weightClass: number;
+        category: "Diminutive" | "Tiny" | "Small" | "Medium" | "Large" | "Huge" | "Gigantic" | "Titanic" | "Max";
     };
 
     diet: string[];

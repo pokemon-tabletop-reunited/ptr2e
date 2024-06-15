@@ -32,27 +32,29 @@
             {{/if}}
         {{/with}}
     </main>
-    <header>
-        <small>Crit Roll</small>
-        {{#with accuracy.context}}
-            <h3>{{critRoll}} &le; {{critDC}}</h3>
-        {{/with}}
-    </header>
-    <main>
-        <figure>
-            <code>@critRoll &le; @critDC</code>
-        </figure>
-        {{#with accuracy.context}}
-            {{#if critRoll}}{{> variable label="PTR2E.Status.CritRoll.Label" hint="PTR2E.Status.CritRoll.Hint" value=critRoll}}{{/if}}
-            {{#if critDC}}{{> variable label="PTR2E.Status.CritDC.Label" hint="PTR2E.Status.CritDC.Hint" value=critDC}}{{/if}}
-            {{#if (isdefined critStages)}}{{> variable label="PTR2E.Status.CritStages.Label" hint="PTR2E.Status.CritStages.Hint" value=critStages}}{{/if}}
-        {{/with}}
-    </main>
-    <footer>
-        {{#unless (is accuracy.category "hit")}}{{> control id="hit" label="PTR2E.Status.ChangeToHit"}}{{/unless}}
-        {{#unless (is accuracy.category "critical")}}{{> control id="critical" label="PTR2E.Status.ChangeToCritical"}}{{/unless}}
-        {{#unless (or (is accuracy.category "miss") (is accuracy.category "fumble"))}}{{> control id="miss" label="PTR2E.Status.ChangeToMiss"}}{{/unless}}
-    </footer>
+    {{#if accuracy.context.critRoll}}
+        <header>
+            <small>Crit Roll</small>
+            {{#with accuracy.context}}
+                <h3>{{critRoll}} &le; {{critDC}}</h3>
+            {{/with}}
+        </header>
+        <main>
+            <figure>
+                <code>@critRoll &le; @critDC</code>
+            </figure>
+            {{#with accuracy.context}}
+                {{#if critRoll}}{{> variable label="PTR2E.Status.CritRoll.Label" hint="PTR2E.Status.CritRoll.Hint" value=critRoll}}{{/if}}
+                {{#if critDC}}{{> variable label="PTR2E.Status.CritDC.Label" hint="PTR2E.Status.CritDC.Hint" value=critDC}}{{/if}}
+                {{#if (isdefined critStages)}}{{> variable label="PTR2E.Status.CritStages.Label" hint="PTR2E.Status.CritStages.Hint" value=critStages}}{{/if}}
+            {{/with}}
+        </main>
+        <footer>
+            {{#unless (is accuracy.category "hit")}}{{> control id="hit" label="PTR2E.Status.ChangeToHit"}}{{/unless}}
+            {{#unless (is accuracy.category "critical")}}{{> control id="critical" label="PTR2E.Status.ChangeToCritical"}}{{/unless}}
+            {{#unless (or (is accuracy.category "miss") (is accuracy.category "fumble"))}}{{> control id="miss" label="PTR2E.Status.ChangeToMiss"}}{{/unless}}
+        </footer>
+    {{/if}}
 </content>
 
 {{#*inline "control"}}

@@ -1,0 +1,4228 @@
+/** Application V2 Styles **/
+body {
+  --appv2-background-flat: rgba(12, 11, 22, 0.94);
+  --appv2-background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  --appv2-background-alt: linear-gradient(to right, rgba(28, 25, 46, 0.5), rgba(24, 24, 34, 0.53));
+  --appv2-text-color: var(--color-light-1);
+  --hint-text-color: var(--color-light-5);
+  --border-theme-color: var(--color-light-6);
+  --color-theme-4: var(--color-light-4);
+  --color-theme-3: var(--color-light-3);
+  --input-height: 1.5rem;
+}
+body.theme-light {
+  --appv2-background-flat: rgba(225, 222, 210, 0.94);
+  --appv2-background: linear-gradient(to right, rgba(212, 210, 198, 0.93), rgba(240, 237, 223, 0.95));
+  --appv2-background-alt: linear-gradient(to right, rgba(240, 237, 223, 0.5), rgba(225, 222, 210, 0.53));
+  --appv2-text-color: var(--color-dark-1);
+  --hint-text-color: var(--color-dark-5);
+  --border-theme-color: var(--color-dark-6);
+}
+body.theme-light .application textarea:read-only {
+  color: var(--color-dark-6);
+}
+body .standard-form fieldset,
+body .application.sheet fieldset {
+  padding: 0.5rem;
+  gap: 0.75rem;
+}
+body .standard-form .form-group,
+body .application.sheet .form-group {
+  gap: 0.2rem;
+}
+.application .window-header .window-title {
+  height: 100%;
+}
+.ptr2e.application .controls-dropdown,
+.sheet.application .controls-dropdown {
+  background: var(--appv2-background);
+  box-shadow: unset;
+}
+.ptr2e.application .controls-dropdown button,
+.sheet.application .controls-dropdown button {
+  background: none;
+}
+.ptr2e.application .controls-dropdown.expanded,
+.sheet.application .controls-dropdown.expanded {
+  border: 1px solid var(--border-theme-color);
+}
+.application.sheet multi-select .tags,
+.application.sheet string-tags .tags,
+.application.sheet string-tags-ptr2e .tags {
+  flex-direction: column;
+  align-items: start;
+}
+.application.sheet multi-select .tags .tag,
+.application.sheet string-tags .tags .tag,
+.application.sheet string-tags-ptr2e .tags .tag {
+  font-size: var(--font-size-14);
+}
+.application.sheet multi-select .tags .tag:has(a.content-link),
+.application.sheet string-tags .tags .tag:has(a.content-link),
+.application.sheet string-tags-ptr2e .tags .tag:has(a.content-link) {
+  padding: 4px 0.25rem;
+}
+.application.sheet prose-mirror {
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  margin: 5px 0;
+}
+.application.sheet prose-mirror menu {
+  gap: 0;
+  padding: 4px;
+}
+.application.sheet prose-mirror .editor-content,
+.application.sheet prose-mirror .editor-container .editor-content {
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 {
+  min-width: 700px;
+  min-height: 660px;
+  background: var(--appv2-background);
+}
+.application.sheet.actor.v2.minimized {
+  min-width: unset;
+  min-height: unset;
+}
+.application.sheet.actor.v2 .window-content {
+  display: grid;
+  grid-template-columns: 22% 78%;
+  grid-template-rows: 65px auto;
+  grid-template-areas: "header nav" "sidebar main";
+}
+.application.sheet.actor.v2 .window-content aside.actor-header {
+  grid-area: header;
+  display: grid;
+  grid-template-columns: 64px auto;
+  grid-template-rows: auto;
+  border-bottom: 1px solid var(--border-theme-color);
+  border-right: 1px solid var(--border-theme-color);
+}
+.application.sheet.actor.v2 .window-content aside.actor-header img {
+  flex: 0 0 64px;
+  height: 64px;
+  border: unset;
+}
+.application.sheet.actor.v2 .window-content aside.actor-header .title {
+  flex: 1 0 auto;
+  margin: 0 0.5rem;
+  align-self: center;
+}
+.application.sheet.actor.v2 .window-content nav.tabs {
+  grid-area: nav;
+  border: unset;
+  border-bottom: 1px solid var(--border-theme-color);
+  justify-content: space-evenly;
+  font-size: 25px;
+  margin: 0;
+  padding: 0.5rem;
+  gap: unset;
+}
+.application.sheet.actor.v2 .window-content nav.tabs > [data-tab] {
+  padding: 8px;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar {
+  grid-area: sidebar;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-theme-color);
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.25rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs > div {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  color: var(--hint-text-color);
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs label {
+  font-size: 12px;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs input {
+  width: 80%;
+  align-self: center;
+  margin-top: 2px;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-current,
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-current,
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs .hp-max,
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs .pp-max,
+.application.sheet.actor.v2 .window-content aside.sidebar .inputs .stage {
+  flex: 0 1 auto;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .experience {
+  display: flex;
+  flex-direction: column;
+  padding: 0.25rem;
+  border-bottom: 1px solid var(--border-theme-color);
+  column-gap: 0.5rem;
+  row-gap: 0.25rem;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .experience > div {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  color: var(--hint-text-color);
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .experience label {
+  flex: 1 0 40%;
+  align-content: center;
+  text-align: left;
+  font-size: 12px;
+  padding-left: 1rem;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .experience input {
+  flex: 0 1 40%;
+  align-self: center;
+  align-content: center;
+  margin-right: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .experience .xp-current {
+  grid-area: xp-current;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .experience .xp-next {
+  grid-area: xp-next;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .experience .xp-diff {
+  grid-area: xp-diff;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .experience .level {
+  grid-area: level;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button,
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  align-items: center;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button,
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button {
+  flex: 0 0 70%;
+  height: min-content;
+  line-height: 1.2rem;
+  padding: 0.25rem 0.5rem;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button:has(small.unspend),
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button:has(small.unspend) {
+  animation: glow 1s infinite alternate;
+}
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px -5px gold;
+  }
+  to {
+    box-shadow: 0 0 5px 5px gold;
+  }
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button small.unspend,
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button small.unspend {
+  font-size: 10px;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown {
+  border-bottom: 1px solid var(--border-theme-color);
+  flex: 0;
+  padding: 0.25rem;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown label {
+  color: var(--hint-text-color);
+  flex: 0 0 35%;
+  align-content: center;
+  text-align: left;
+  font-size: 12px;
+  padding-left: 1rem;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown select {
+  flex: 1 0 40%;
+  align-self: center;
+  align-content: center;
+  margin-right: 0.5rem;
+  height: min-content;
+  line-height: 1.2rem;
+  padding: 0.25rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active {
+  grid-area: main;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  overflow: hidden;
+  height: 100%;
+}
+.application.sheet.actor.v2 .window-content .tab.active .scroll {
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.application.sheet.actor.v2 .window-content .tab.active fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  height: 100%;
+  background: var(--appv2-background);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+.application.sheet.actor.v2 .window-content .tab.active fieldset legend {
+  font-size: var(--font-size-15);
+  font-weight: bold;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .scroll.inventory {
+  grid-area: 1 / 1 / span 5 / span 3;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  gap: 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points {
+  grid-area: 1 / 4 / span 2 / span 2;
+  padding: 0.5rem 0.5rem 0 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points fieldset {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] .inventory-points fieldset input {
+  text-align: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header {
+  align-items: center;
+  background: var(--appv2-background);
+  color: var(--appv2-text-color);
+  display: flex;
+  justify-content: end;
+  font-size: 0.625rem;
+  letter-spacing: 0.05em;
+  line-height: 1;
+  margin-top: 0.375rem;
+  padding: 0.25rem 0;
+  text-rendering: optimizeLegibility;
+  text-transform: uppercase;
+  width: 100%;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 4px 4px 0 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header:first-child {
+  margin-top: 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name {
+  padding-left: 0.5rem;
+  font-size: 1.125rem !important;
+  text-transform: capitalize;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header > :last-child {
+  padding-right: 0.25rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items {
+  border: 1px solid var(--border-theme-color);
+  border-top: unset;
+  border-radius: 0 0 4px 4px;
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  width: 100%;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: unset;
+  padding: 2px 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li:nth-child(odd) {
+  background: var(--appv2-background);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items > li:last-child {
+  border-radius: 0 0 4px 4px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name.rarity-uncommon {
+  color: #33a7ff;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name.rarity-rare {
+  color: #f5c42e;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name.rarity-unique {
+  color: #a526ff;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name {
+  align-items: center;
+  display: flex;
+  flex: 2;
+  font-weight: 500;
+  font-size: 0.825rem;
+  gap: 0.25rem;
+  padding-right: 0.25rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name .item-image,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name .item-image {
+  display: flex;
+  flex: 0 0 1.75rem;
+  height: 1.75rem;
+  position: relative;
+  margin-left: 2px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-name .item-name,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-name .item-name {
+  font-weight: 500;
+  margin: auto auto auto 0;
+  padding: 0.125rem;
+  word-break: break-word;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-basis: 4.25rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity .decrease,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity .decrease,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity .increase,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity .increase {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+  width: 1.125rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity span,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity span {
+  min-width: 2ch;
+  text-align: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .item-controls,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .item-controls {
+  flex-basis: 4.75rem;
+  gap: 1px;
+  justify-content: end;
+  align-items: center;
+  display: flex;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] {
+  display: grid;
+  grid-template-areas: "subnav" "body";
+  grid-template-columns: unset;
+  grid-template-rows: 30px auto;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] nav.sub-tabs {
+  grid-area: subnav;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  font-size: 16px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] nav.sub-tabs a label {
+  margin-left: 5px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active {
+  grid-area: body;
+  display: grid;
+  grid-template-columns: 1fr 1fr 12px 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  padding: 0.5rem;
+  overflow: hidden;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.attacks {
+  grid-area: span 5 / span 2;
+  padding: 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.attacks fieldset {
+  margin-bottom: unset;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.attacks fieldset.slots {
+  position: relative;
+  height: min-content;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.attacks fieldset .edit-movelist {
+  position: absolute;
+  right: -2px;
+  top: -10px;
+  padding: 3px 5px;
+  background: var(--appv2-background);
+  border: 2px groove var(--border-theme-color);
+  border-radius: 0 8px 0 4px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.generic,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.attacks,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.camping {
+  grid-area: span 5 / span 2;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.exploration,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.passives,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.downtime {
+  grid-area: 1 / 4 / 6 / 6;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon .dice {
+  display: none;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon.rollable {
+  cursor: pointer;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon.rollable:hover .icon {
+  display: none;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon.rollable:hover .dice {
+  display: block;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-controls {
+  flex: 0 0 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  gap: 5px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component {
+  grid-area: span 5 / span 3;
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .scroll,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  gap: 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill-group {
+  height: unset;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group.hidden-skill .skill-group-label,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill-group.hidden-skill .skill-group-label {
+  filter: opacity(0.7);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group .skill-group-label,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill-group .skill-group-label {
+  margin-left: calc(16px + 0.25rem);
+  border-bottom: 1px solid var(--border-theme-color);
+  padding: 4px 0;
+  font-weight: bold;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group .skill,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill-group .skill {
+  padding-left: unset;
+  margin-left: calc(16px + 0.25rem);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-icon,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill .skill-icon {
+  flex: 0 0 16px;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-icon img,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill .skill-icon img {
+  border: unset;
+  filter: invert(1);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-name,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill .skill-name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-total,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill .skill-total {
+  flex: 0 0 80px;
+  text-align: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-controls,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill .skill-controls {
+  flex: 0 0 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  gap: 5px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill .skill-controls .item-control,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill .skill-controls .item-control {
+  flex: 0 0 18px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill.favourite,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill.favourite {
+  filter: brightness(1.5);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill.hidden-skill,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill.hidden-skill {
+  filter: opacity(0.7);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .divider,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .divider {
+  margin-top: 0.75rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list header.skill,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list header.skill {
+  border-bottom-width: 2px;
+  font-weight: bold;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options {
+  grid-area: 1 / 4 / 2 / 6;
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button:has(small.unspend),
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button:has(small.unspend) {
+  animation: glow 1s infinite alternate;
+}
+@keyframes glow {
+  from {
+    box-shadow: 0 0 5px -5px gold;
+  }
+  to {
+    box-shadow: 0 0 5px 5px gold;
+  }
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button small.unspend,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button small.unspend {
+  font-size: 10px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] {
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(7, 1fr);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component {
+  grid-area: 1 / 1 / span 4 / span 3;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside {
+  grid-area: 1 / 5 / span 4 / span 3;
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside fieldset {
+  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  border-radius: 8px;
+  border: 1px solid var(--border-theme-color);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] aside.stats-chart-aside fieldset canvas {
+  max-width: 100%;
+  max-height: 100%;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component {
+  grid-area: 5 / 1 / span 3 / span 3;
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component .movement {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component .movement label,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .movement-component .movement input {
+  flex: 0 0 45%;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] {
+  grid-template-columns: 1fr 5px 1fr;
+  grid-template-rows: min-content auto;
+  grid-template-areas: "traits traits traits" "perks . abilities";
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] aside.traits {
+  grid-area: traits;
+  min-height: calc(0.5rem + 38px);
+  padding: 0.25rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] aside.traits tags {
+  --tags-border-color: var(--border-theme-color);
+  --tag-bg: var(--color-theme-4);
+  --tag-hover: var(--color-theme-3);
+  width: 100%;
+  --tag-pad: 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] aside.traits tags .trait {
+  display: inline-flex;
+  padding: 0.25rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] aside.traits tags .trait .tag {
+  text-decoration: underline;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .perks-display {
+  grid-area: perks;
+  overflow: hidden;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display {
+  grid-area: abilities;
+  overflow: hidden;
+}
+.application.sheet.actor.v2 .window-content .tab.active .effects-display,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display {
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list {
+  list-style: none;
+  margin: 0 0.5rem;
+  padding: 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item {
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-theme-color);
+}
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item .item-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item .name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active .effects-display {
+  grid-area: span 5 / span 3;
+}
+.application.sheet.actor.v2 .window-content .can-popout {
+  position: relative;
+}
+.application.sheet.actor.v2 .window-content .can-popout .popout-control {
+  position: absolute;
+  top: -9px;
+  right: -2px;
+  background: var(--appv2-background);
+  border: 1px solid var(--border-theme-color);
+  padding: 2px;
+  border-radius: 0 4px 0 4px;
+  cursor: pointer;
+}
+.application.sheet.actor.popout {
+  background: var(--appv2-background);
+}
+.application.sheet.actor.popout .effects-display,
+.application.sheet.actor.popout .abilities-display,
+.application.sheet.actor.popout .perks-display {
+  padding: 0.5rem;
+  max-height: 600px;
+}
+.application.sheet.actor.popout .effects-display ul.effect-list,
+.application.sheet.actor.popout .abilities-display ul.effect-list,
+.application.sheet.actor.popout .perks-display ul.effect-list,
+.application.sheet.actor.popout .effects-display ul.perk-list,
+.application.sheet.actor.popout .abilities-display ul.perk-list,
+.application.sheet.actor.popout .perks-display ul.perk-list,
+.application.sheet.actor.popout .effects-display ul.ability-list,
+.application.sheet.actor.popout .abilities-display ul.ability-list,
+.application.sheet.actor.popout .perks-display ul.ability-list {
+  list-style: none;
+  margin: 0 0.5rem;
+  padding: 0;
+  max-height: 500px;
+}
+.application.sheet.actor.popout .effects-display ul.effect-list li.effect,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.effect,
+.application.sheet.actor.popout .perks-display ul.effect-list li.effect,
+.application.sheet.actor.popout .effects-display ul.perk-list li.effect,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.effect,
+.application.sheet.actor.popout .perks-display ul.perk-list li.effect,
+.application.sheet.actor.popout .effects-display ul.ability-list li.effect,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.effect,
+.application.sheet.actor.popout .perks-display ul.ability-list li.effect,
+.application.sheet.actor.popout .effects-display ul.effect-list li.item,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.item,
+.application.sheet.actor.popout .perks-display ul.effect-list li.item,
+.application.sheet.actor.popout .effects-display ul.perk-list li.item,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.item,
+.application.sheet.actor.popout .perks-display ul.perk-list li.item,
+.application.sheet.actor.popout .effects-display ul.ability-list li.item,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.item,
+.application.sheet.actor.popout .perks-display ul.ability-list li.item {
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 250px;
+  border: 1px solid var(--border-theme-color);
+}
+.application.sheet.actor.popout .effects-display ul.effect-list li.effect .effect-icon,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.effect .effect-icon,
+.application.sheet.actor.popout .perks-display ul.effect-list li.effect .effect-icon,
+.application.sheet.actor.popout .effects-display ul.perk-list li.effect .effect-icon,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.effect .effect-icon,
+.application.sheet.actor.popout .perks-display ul.perk-list li.effect .effect-icon,
+.application.sheet.actor.popout .effects-display ul.ability-list li.effect .effect-icon,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.effect .effect-icon,
+.application.sheet.actor.popout .perks-display ul.ability-list li.effect .effect-icon,
+.application.sheet.actor.popout .effects-display ul.effect-list li.item .effect-icon,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.item .effect-icon,
+.application.sheet.actor.popout .perks-display ul.effect-list li.item .effect-icon,
+.application.sheet.actor.popout .effects-display ul.perk-list li.item .effect-icon,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.item .effect-icon,
+.application.sheet.actor.popout .perks-display ul.perk-list li.item .effect-icon,
+.application.sheet.actor.popout .effects-display ul.ability-list li.item .effect-icon,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.item .effect-icon,
+.application.sheet.actor.popout .perks-display ul.ability-list li.item .effect-icon,
+.application.sheet.actor.popout .effects-display ul.effect-list li.effect .item-icon,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.effect .item-icon,
+.application.sheet.actor.popout .perks-display ul.effect-list li.effect .item-icon,
+.application.sheet.actor.popout .effects-display ul.perk-list li.effect .item-icon,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.effect .item-icon,
+.application.sheet.actor.popout .perks-display ul.perk-list li.effect .item-icon,
+.application.sheet.actor.popout .effects-display ul.ability-list li.effect .item-icon,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.effect .item-icon,
+.application.sheet.actor.popout .perks-display ul.ability-list li.effect .item-icon,
+.application.sheet.actor.popout .effects-display ul.effect-list li.item .item-icon,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.item .item-icon,
+.application.sheet.actor.popout .perks-display ul.effect-list li.item .item-icon,
+.application.sheet.actor.popout .effects-display ul.perk-list li.item .item-icon,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.item .item-icon,
+.application.sheet.actor.popout .perks-display ul.perk-list li.item .item-icon,
+.application.sheet.actor.popout .effects-display ul.ability-list li.item .item-icon,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.item .item-icon,
+.application.sheet.actor.popout .perks-display ul.ability-list li.item .item-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.application.sheet.actor.popout .effects-display ul.effect-list li.effect .name,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.effect .name,
+.application.sheet.actor.popout .perks-display ul.effect-list li.effect .name,
+.application.sheet.actor.popout .effects-display ul.perk-list li.effect .name,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.effect .name,
+.application.sheet.actor.popout .perks-display ul.perk-list li.effect .name,
+.application.sheet.actor.popout .effects-display ul.ability-list li.effect .name,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.effect .name,
+.application.sheet.actor.popout .perks-display ul.ability-list li.effect .name,
+.application.sheet.actor.popout .effects-display ul.effect-list li.item .name,
+.application.sheet.actor.popout .abilities-display ul.effect-list li.item .name,
+.application.sheet.actor.popout .perks-display ul.effect-list li.item .name,
+.application.sheet.actor.popout .effects-display ul.perk-list li.item .name,
+.application.sheet.actor.popout .abilities-display ul.perk-list li.item .name,
+.application.sheet.actor.popout .perks-display ul.perk-list li.item .name,
+.application.sheet.actor.popout .effects-display ul.ability-list li.item .name,
+.application.sheet.actor.popout .abilities-display ul.ability-list li.item .name,
+.application.sheet.actor.popout .perks-display ul.ability-list li.item .name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.application.sheet.actor.popout .scroll {
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  gap: 0;
+}
+.application.sheet.actor.popout .skill-component {
+  min-width: 330px;
+  max-height: 600px;
+  padding: 0.5rem;
+}
+.application.sheet.actor.popout .skill-component .skills {
+  max-height: calc(600px - 1rem);
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 0;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill-group {
+  height: unset;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill-group.hidden-skill .skill-group-label {
+  filter: opacity(0.7);
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill-group .skill-group-label {
+  margin-left: calc(16px + 0.25rem);
+  border-bottom: 1px solid var(--border-theme-color);
+  padding: 4px 0;
+  font-weight: bold;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill-group .skill {
+  padding-left: unset;
+  margin-left: calc(16px + 0.25rem);
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill .skill-icon {
+  flex: 0 0 16px;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill .skill-icon img {
+  border: unset;
+  filter: invert(1);
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill .skill-name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill .skill-total {
+  flex: 0 0 80px;
+  text-align: center;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill .skill-controls {
+  flex: 0 0 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  gap: 5px;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill .skill-controls .item-control {
+  flex: 0 0 18px;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill.favourite {
+  filter: brightness(1.5);
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .skill.hidden-skill {
+  filter: opacity(0.7);
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list .divider {
+  margin-top: 0.75rem;
+}
+.application.sheet.actor.popout .skill-component .skills .skill-list header.skill {
+  border-bottom-width: 2px;
+  font-weight: bold;
+}
+.application.sheet.actor.popout .movement-component {
+  padding: 0.5rem;
+}
+.application.sheet.actor.popout .movement-component .movement {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.application.sheet.actor.popout .movement-component .movement label,
+.application.sheet.actor.popout .movement-component .movement input {
+  flex: 0 0 45%;
+}
+.application.sheet.actor.popout fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  height: 100%;
+  background: var(--appv2-background);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+.application.sheet.actor.popout fieldset legend {
+  font-size: var(--font-size-15);
+  font-weight: bold;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base,
+.application.sheet.known-actions-sheet,
+.application.sheet.action-sheet,
+.application.sheet.move-sheet,
+.application.sheet.species-sheet,
+.application.sheet.party-sheet,
+.application.sheet.team-sheet,
+.application.sheet.active-effect-sheet {
+  background: var(--appv2-background);
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content,
+.application.sheet.known-actions-sheet .window-content,
+.application.sheet.action-sheet .window-content,
+.application.sheet.move-sheet .window-content,
+.application.sheet.species-sheet .window-content,
+.application.sheet.party-sheet .window-content,
+.application.sheet.team-sheet .window-content,
+.application.sheet.active-effect-sheet .window-content {
+  display: grid;
+  grid-template-columns: 45% 55%;
+  grid-template-rows: calc(1rem + 48px) min-content auto;
+  grid-template-areas: "header nav" "traits traits" "main main";
+  padding: 0;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header,
+.application.sheet.known-actions-sheet .window-content .sheet-header,
+.application.sheet.action-sheet .window-content .sheet-header,
+.application.sheet.move-sheet .window-content .sheet-header,
+.application.sheet.species-sheet .window-content .sheet-header,
+.application.sheet.party-sheet .window-content .sheet-header,
+.application.sheet.team-sheet .window-content .sheet-header,
+.application.sheet.active-effect-sheet .window-content .sheet-header {
+  grid-area: header;
+  padding: 0.5rem;
+  padding-right: 1rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header fieldset,
+.application.sheet.known-actions-sheet .window-content .sheet-header fieldset,
+.application.sheet.action-sheet .window-content .sheet-header fieldset,
+.application.sheet.move-sheet .window-content .sheet-header fieldset,
+.application.sheet.species-sheet .window-content .sheet-header fieldset,
+.application.sheet.party-sheet .window-content .sheet-header fieldset,
+.application.sheet.team-sheet .window-content .sheet-header fieldset,
+.application.sheet.active-effect-sheet .window-content .sheet-header fieldset {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header img,
+.application.sheet.known-actions-sheet .window-content .sheet-header img,
+.application.sheet.action-sheet .window-content .sheet-header img,
+.application.sheet.move-sheet .window-content .sheet-header img,
+.application.sheet.species-sheet .window-content .sheet-header img,
+.application.sheet.party-sheet .window-content .sheet-header img,
+.application.sheet.team-sheet .window-content .sheet-header img,
+.application.sheet.active-effect-sheet .window-content .sheet-header img {
+  flex: 0 0 48px;
+  height: 48px;
+  margin: 0 0.25rem;
+  border: unset;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header .title,
+.application.sheet.known-actions-sheet .window-content .sheet-header .title,
+.application.sheet.action-sheet .window-content .sheet-header .title,
+.application.sheet.move-sheet .window-content .sheet-header .title,
+.application.sheet.species-sheet .window-content .sheet-header .title,
+.application.sheet.party-sheet .window-content .sheet-header .title,
+.application.sheet.team-sheet .window-content .sheet-header .title,
+.application.sheet.active-effect-sheet .window-content .sheet-header .title {
+  font-size: 2.5rem;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content nav.tabs,
+.application.sheet.known-actions-sheet .window-content nav.tabs,
+.application.sheet.action-sheet .window-content nav.tabs,
+.application.sheet.move-sheet .window-content nav.tabs,
+.application.sheet.species-sheet .window-content nav.tabs,
+.application.sheet.party-sheet .window-content nav.tabs,
+.application.sheet.team-sheet .window-content nav.tabs,
+.application.sheet.active-effect-sheet .window-content nav.tabs {
+  grid-area: nav;
+  border: unset;
+  justify-content: space-evenly;
+  margin: 0;
+  padding: 0.5rem;
+  padding-left: 0;
+  border-bottom: 1px solid var(--border-theme-color);
+  border-left: 1px solid var(--border-theme-color);
+  gap: unset;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits,
+.application.sheet.known-actions-sheet .window-content aside.traits,
+.application.sheet.action-sheet .window-content aside.traits,
+.application.sheet.move-sheet .window-content aside.traits,
+.application.sheet.species-sheet .window-content aside.traits,
+.application.sheet.party-sheet .window-content aside.traits,
+.application.sheet.team-sheet .window-content aside.traits,
+.application.sheet.active-effect-sheet .window-content aside.traits {
+  grid-area: traits;
+  min-height: calc(0.5rem + 38px);
+  padding: 0.25rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits tags,
+.application.sheet.known-actions-sheet .window-content aside.traits tags,
+.application.sheet.action-sheet .window-content aside.traits tags,
+.application.sheet.move-sheet .window-content aside.traits tags,
+.application.sheet.species-sheet .window-content aside.traits tags,
+.application.sheet.party-sheet .window-content aside.traits tags,
+.application.sheet.team-sheet .window-content aside.traits tags,
+.application.sheet.active-effect-sheet .window-content aside.traits tags {
+  --tags-border-color: var(--border-theme-color);
+  --tag-bg: var(--color-theme-4);
+  --tag-hover: var(--color-theme-3);
+  width: 100%;
+  --tag-pad: 0;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits tags .trait,
+.application.sheet.known-actions-sheet .window-content aside.traits tags .trait,
+.application.sheet.action-sheet .window-content aside.traits tags .trait,
+.application.sheet.move-sheet .window-content aside.traits tags .trait,
+.application.sheet.species-sheet .window-content aside.traits tags .trait,
+.application.sheet.party-sheet .window-content aside.traits tags .trait,
+.application.sheet.team-sheet .window-content aside.traits tags .trait,
+.application.sheet.active-effect-sheet .window-content aside.traits tags .trait {
+  display: inline-flex;
+  padding: 0.25rem;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits tags .trait .tag,
+.application.sheet.known-actions-sheet .window-content aside.traits tags .trait .tag,
+.application.sheet.action-sheet .window-content aside.traits tags .trait .tag,
+.application.sheet.move-sheet .window-content aside.traits tags .trait .tag,
+.application.sheet.species-sheet .window-content aside.traits tags .trait .tag,
+.application.sheet.party-sheet .window-content aside.traits tags .trait .tag,
+.application.sheet.team-sheet .window-content aside.traits tags .trait .tag,
+.application.sheet.active-effect-sheet .window-content aside.traits tags .trait .tag {
+  text-decoration: underline;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab,
+.application.sheet.known-actions-sheet .window-content section.tab,
+.application.sheet.action-sheet .window-content section.tab,
+.application.sheet.move-sheet .window-content section.tab,
+.application.sheet.species-sheet .window-content section.tab,
+.application.sheet.party-sheet .window-content section.tab,
+.application.sheet.team-sheet .window-content section.tab,
+.application.sheet.active-effect-sheet .window-content section.tab {
+  grid-area: main;
+  height: 100%;
+  overflow: hidden;
+  padding: 1rem;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor .editor-content {
+  min-height: 200px;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 0.5rem;
+  padding: 0.5rem;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group {
+  justify-content: space-between;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label {
+  flex: 0 0 60%;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields {
+  flex: 0 0 35%;
+  text-align: center;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.25rem;
+  margin-top: 0.5rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls {
+  flex: 0 0 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill {
+  padding: 0.25rem;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 15px;
+  grid-column-gap: 0.5rem;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill.center {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill.center small {
+  color: var(--hint-text-color);
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group {
+  justify-content: space-between;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group label {
+  flex: 0 0 30%;
+  text-align: center;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields {
+  flex: 0 0 60%;
+  text-align: center;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .item-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill {
+  grid-template-columns: 30% auto 15px;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .move,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .move,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .move,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .move,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .move,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .move,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .move {
+  display: flex;
+  flex-direction: row;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.action-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.move-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.party-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.team-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .move .form-group {
+  flex: 1;
+  text-align: center;
+  margin: 0.25rem;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=attack],
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=attack],
+.application.sheet.action-sheet .window-content section.tab[data-tab=attack],
+.application.sheet.move-sheet .window-content section.tab[data-tab=attack],
+.application.sheet.species-sheet .window-content section.tab[data-tab=attack],
+.application.sheet.party-sheet .window-content section.tab[data-tab=attack],
+.application.sheet.team-sheet .window-content section.tab[data-tab=attack],
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=attack] {
+  padding: 0;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab form.scroll,
+.application.sheet.known-actions-sheet .window-content section.tab form.scroll,
+.application.sheet.action-sheet .window-content section.tab form.scroll,
+.application.sheet.move-sheet .window-content section.tab form.scroll,
+.application.sheet.species-sheet .window-content section.tab form.scroll,
+.application.sheet.party-sheet .window-content section.tab form.scroll,
+.application.sheet.team-sheet .window-content section.tab form.scroll,
+.application.sheet.active-effect-sheet .window-content section.tab form.scroll {
+  padding: 1rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions {
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
+.application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
+.application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 0.25rem;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
+.application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
+.application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name {
+  flex: 0 0 30%;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
+.application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
+.application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type {
+  flex: 0 0 30%;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
+.application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
+.application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
+.application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
+.application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
+.application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls {
+  flex: 0 0 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  gap: 5px;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.action-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.move-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.species-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.party-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.team-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="overview"] .item-description {
+  min-height: 150px;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.action-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add {
+  position: relative;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.action-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control {
+  position: absolute;
+  top: -9px;
+  right: -2px;
+  background: var(--appv2-background);
+  border: 1px solid var(--border-theme-color);
+  padding: 2px;
+  border-radius: 0 4px 0 4px;
+  cursor: pointer;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list {
+  list-style: none;
+  margin: 0 0.5rem;
+  padding: 0;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect {
+  padding: 0.5rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid var(--border-theme-color);
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base fieldset,
+.application.sheet.known-actions-sheet fieldset,
+.application.sheet.action-sheet fieldset,
+.application.sheet.move-sheet fieldset,
+.application.sheet.species-sheet fieldset,
+.application.sheet.party-sheet fieldset,
+.application.sheet.team-sheet fieldset,
+.application.sheet.active-effect-sheet fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base fieldset legend,
+.application.sheet.known-actions-sheet fieldset legend,
+.application.sheet.action-sheet fieldset legend,
+.application.sheet.move-sheet fieldset legend,
+.application.sheet.species-sheet fieldset legend,
+.application.sheet.party-sheet fieldset legend,
+.application.sheet.team-sheet fieldset legend,
+.application.sheet.active-effect-sheet fieldset legend {
+  font-size: var(--font-size-15);
+  font-weight: bold;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base .hint,
+.application.sheet.known-actions-sheet .hint,
+.application.sheet.action-sheet .hint,
+.application.sheet.move-sheet .hint,
+.application.sheet.species-sheet .hint,
+.application.sheet.party-sheet .hint,
+.application.sheet.team-sheet .hint,
+.application.sheet.active-effect-sheet .hint {
+  margin: 0;
+  font-size: var(--font-size-14);
+  color: var(--hint-text-color);
+  white-space: pre-line;
+  word-break: break-word;
+}
+.application.sheet.skill-sheet .application.sheet#perk-hud-base textarea,
+.application.sheet.known-actions-sheet textarea,
+.application.sheet.action-sheet textarea,
+.application.sheet.move-sheet textarea,
+.application.sheet.species-sheet textarea,
+.application.sheet.party-sheet textarea,
+.application.sheet.team-sheet textarea,
+.application.sheet.active-effect-sheet textarea {
+  resize: vertical;
+}
+.application.sheet.skill-sheet {
+  max-height: 750px;
+}
+.application.sheet.skill-sheet .skill-editor {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.application.sheet.skill-sheet .skill-editor .controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 0.5rem;
+  flex: 0 0 min-content;
+}
+.application.sheet.skill-sheet .skill-editor .controls .buttons {
+  flex: 0 0 35%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.application.sheet.skill-sheet .skill-editor .controls .points {
+  flex: 0 0 55%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.application.sheet.skill-sheet .skill-editor .controls .points label {
+  display: flex;
+  flex-direction: row;
+}
+.application.sheet.skill-sheet .skill-editor .controls .points label span {
+  margin-left: auto;
+  align-self: flex-end;
+}
+.application.sheet.skill-sheet .skill-editor .skills {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: hidden;
+  max-height: 520px;
+}
+.application.sheet.skill-sheet .skill-editor .skills div.skill,
+.application.sheet.skill-sheet .skill-editor .skills header.skill {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 0;
+  text-align: center;
+}
+.application.sheet.skill-sheet .skill-editor .skills div.skill label,
+.application.sheet.skill-sheet .skill-editor .skills header.skill label,
+.application.sheet.skill-sheet .skill-editor .skills div.skill input,
+.application.sheet.skill-sheet .skill-editor .skills header.skill input,
+.application.sheet.skill-sheet .skill-editor .skills div.skill button,
+.application.sheet.skill-sheet .skill-editor .skills header.skill button {
+  flex: 0 0 22%;
+  text-align: center;
+}
+.application.sheet.skill-sheet .skill-editor .skills header.skill {
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  margin-bottom: 0.25rem;
+}
+.application.sheet.skill-sheet fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  background: var(--appv2-background);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+.application.sheet.skill-sheet fieldset legend {
+  font-size: var(--font-size-15);
+  font-weight: bold;
+}
+.application.sheet.skill-sheet .scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+  height: 100%;
+}
+.application.sheet.known-actions-sheet {
+  max-height: 450px;
+}
+.application.sheet.known-actions-sheet .info-tooltip {
+  cursor: help;
+}
+.application.sheet.known-actions-sheet .info-tooltip:hover,
+.application.sheet.known-actions-sheet .info-tooltip:focus {
+  box-shadow: unset;
+  outline: unset;
+}
+.application.sheet.known-actions-sheet .window-content {
+  display: block;
+  overflow-y: scroll;
+  height: 100%;
+}
+.application.sheet.known-actions-sheet article.known-attacks {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.25rem;
+}
+.application.sheet.known-actions-sheet article.known-attacks .action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.known-actions-sheet article.known-attacks .action:last-child {
+  border-bottom: unset;
+}
+.application.sheet.known-actions-sheet article.known-attacks .action .action-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.application.sheet.known-actions-sheet article.known-attacks .action .action-icon .dice {
+  display: none;
+}
+.application.sheet.known-actions-sheet article.known-attacks .action .action-icon.rollable {
+  cursor: pointer;
+}
+.application.sheet.known-actions-sheet article.known-attacks .action .action-icon.rollable:hover .icon {
+  display: none;
+}
+.application.sheet.known-actions-sheet article.known-attacks .action .action-icon.rollable:hover .dice {
+  display: block;
+}
+.application.sheet.known-actions-sheet article.known-attacks .action .action-icon img {
+  border: unset;
+}
+.application.sheet.known-actions-sheet article.known-attacks .action .action-name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.application.sheet.known-actions-sheet article.known-attacks .action .action-controls {
+  flex: 0 0 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  gap: 5px;
+}
+.application.sheet.action-sheet .window-content {
+  grid-template-columns: unset;
+  grid-template-areas: "header" "traits" "main";
+}
+.application.sheet.action-sheet .window-content header.sheet-header {
+  gap: 10px;
+}
+.application.sheet.action-sheet .window-content section.action {
+  grid-area: main;
+  overflow: hidden;
+}
+.application.sheet.action-sheet .window-content section.action .scroll {
+  padding: 1rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+}
+.application.sheet#perk-hud-base header h2 {
+  flex: 1;
+  text-align: center;
+  padding-bottom: 0.25rem;
+}
+.application.sheet#perk-hud-base footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 0;
+}
+.application.sheet#perk-hud-base footer button {
+  flex: 0 0 30%;
+  margin: 0;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset {
+  flex: 1 0 48%;
+  min-width: 300px;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details],
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution],
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] {
+  padding: 0;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll {
+  padding: 1rem;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll h5,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll h5,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll h5 {
+  margin: 0;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.moves,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.moves {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves fieldset.level-up,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.moves fieldset.level-up,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.moves fieldset.level-up {
+  flex: 1 0 170px;
+  min-width: 370px;
+  max-width: 600px;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves fieldset.tutor,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.moves fieldset.tutor,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.moves fieldset.tutor {
+  flex: 1 0 220px;
+  min-width: 220px;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves fieldset.tutor .move,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.moves fieldset.tutor .move,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.moves fieldset.tutor .move {
+  flex: 1 0 48%;
+  min-width: calc(220px - 2rem);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves fieldset.dragover,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.moves fieldset.dragover,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.moves fieldset.dragover {
+  box-shadow: inset 0 0 30px var(--border-theme-color);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves fieldset.dragover > *,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.moves fieldset.dragover > *,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.moves fieldset.dragover > * {
+  filter: opacity(0.5) blur(1px);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves fieldset .move,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.moves fieldset .move,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.moves fieldset .move {
+  display: flex;
+  flex-direction: row;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves fieldset .move .form-group,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.moves fieldset .move .form-group,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.moves fieldset .move .form-group {
+  flex: 1;
+  text-align: center;
+  margin: 0.25rem;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.moves fieldset .move .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.moves fieldset .move .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.moves fieldset .move .item-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 0 0 40px;
+  margin-right: 5px;
+  gap: 8px;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions {
+  flex: 0 0 100%;
+  background: var(--appv2-background);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evos,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evos,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions.evos,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions.evos {
+  position: relative;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos.dragover,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evos.dragover,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evos.dragover,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions.evos.dragover,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions.evos.dragover {
+  box-shadow: inset 0 0 30px var(--border-theme-color);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos.dragover > *,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evos.dragover > *,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evos.dragover > *,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover > *,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions.evos.dragover > *,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions.evos.dragover > * {
+  filter: opacity(0.5) blur(2px);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos.dragover > .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evos.dragover > .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evos.dragover > .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover > .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions.evos.dragover > .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions.evos.dragover > .dragover-info {
+  display: flex;
+  filter: unset;
+  font-size: 1rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  top: -5px;
+  left: 0;
+  pointer-events: none;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos.dragover > .dragover-info p,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evos.dragover > .dragover-info p,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evos.dragover > .dragover-info p,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos.dragover > .dragover-info p,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions.evos.dragover > .dragover-info p,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions.evos.dragover > .dragover-info p {
+  background: #ebc99a;
+  padding: 0.5rem;
+  width: fit-content;
+  border-radius: 8px;
+  color: black;
+  font-style: italic;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evos .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evos .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evos .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions.evos .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions.evos .dragover-info,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions.evos .dragover-info {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  align-content: center;
+  text-align: center;
+  display: none;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution header {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  --img-size: 48px;
+  height: var(--img-size);
+  padding: 0 8px;
+  display: flex;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .icon,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution header .icon,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution header .icon {
+  flex: 0 0 var(--img-size);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .icon img,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution header .icon img,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution header .icon img {
+  height: var(--img-size);
+  width: var(--img-size);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .name,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution header .name,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution header .name {
+  padding-left: 0.5rem;
+  align-content: center;
+  flex: 1;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution header .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution header .item-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 0 0 48px;
+  margin-right: 10px;
+  gap: 5px;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution header span,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution header span,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution header span {
+  font-size: 0.75rem;
+  color: var(--hint-text-color);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution fieldset.methods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods .method,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution fieldset.methods .method {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  justify-content: space-between;
+  text-align: center;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method.header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods .method.header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution fieldset.methods .method.header {
+  font-weight: bold;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method select,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods .method select,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution fieldset.methods .method select {
+  text-align: center;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method .form-group,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods .method .form-group,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution fieldset.methods .method .form-group {
+  flex: 0 0 calc(31% - 0.25rem);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods .method .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods .method .item-controls,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution fieldset.methods .method .item-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 0 0 20px;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset.methods small,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset.methods small,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution fieldset.methods small {
+  align-self: center;
+  align-content: center;
+  text-align: center;
+  color: var(--hint-text-color);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution small,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution small,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution small {
+  color: lightgray;
+  font-style: italic;
+  text-align: center;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution span.evolutions-header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution span.evolutions-header,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution span.evolutions-header {
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-transform: capitalize;
+  padding-bottom: 0.25rem;
+  margin: 0 0.5rem;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution .hidden,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution .hidden,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution .hidden {
+  display: none;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution fieldset {
+  background: var(--appv2-background);
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution fieldset legend,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution fieldset legend,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution fieldset legend {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+.application.sheet.species-sheet .window-content section.tab[data-tab=details] div.scroll fieldset.evolutions .evolution.no-shadow,
+.application.sheet.species-sheet .window-content section.tab[data-tab=evolution] div.scroll fieldset.evolutions .evolution.no-shadow,
+.application.sheet.species-sheet .window-content section.tab[data-tab=moves] div.scroll fieldset.evolutions .evolution.no-shadow {
+  box-shadow: unset;
+}
+.application.sheet#traits-settings {
+  background: var(--appv2-background);
+}
+.application.sheet#traits-settings .window-content {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 44px auto 44px;
+  grid-template-areas: "header" "main" "footer";
+  padding: 0;
+}
+.application.sheet#traits-settings nav.tabs {
+  grid-area: header;
+  justify-content: space-evenly;
+  margin-top: 0;
+  border: unset;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet#traits-settings section.tab {
+  grid-area: main;
+  height: 100%;
+  overflow: hidden;
+}
+.application.sheet#traits-settings section.tab header {
+  padding: 0.25rem;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+.application.sheet#traits-settings section.tab article.traits.editable .form-group {
+  flex-wrap: nowrap;
+}
+.application.sheet#traits-settings section.tab article.traits.editable .form-group.header {
+  margin-bottom: 0.75rem;
+}
+.application.sheet#traits-settings section.tab article.traits.editable .form-group.header h5 {
+  margin: unset;
+}
+.application.sheet#traits-settings section.tab article.traits.editable .form-group label {
+  flex: 0 1 30%;
+}
+.application.sheet#traits-settings section.tab article.traits.editable .form-group div.form-fields {
+  flex: 0 1 60%;
+}
+.application.sheet#traits-settings section.tab article.traits.editable .form-group .trait-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex: 0 0 45px;
+}
+.application.sheet#traits-settings section.tab .form-group.center,
+.application.sheet#traits-settings section.tab .form-group .center {
+  text-align: center;
+}
+.application.sheet#traits-settings section.tab .form-group textarea {
+  resize: vertical;
+}
+.application.sheet#traits-settings .scroll {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100% - 1rem);
+  margin: 0.5rem;
+}
+.application.sheet#traits-settings footer {
+  grid-area: footer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  border-top: 1px solid var(--border-theme-color);
+}
+.application.sheet#traits-settings footer button {
+  flex: 0 0 48%;
+}
+.application.sheet#skills-settings {
+  background: var(--appv2-background);
+}
+.application.sheet#skills-settings .window-content {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 44px auto 44px;
+  grid-template-areas: "header" "main" "footer";
+  padding: 0;
+}
+.application.sheet#skills-settings nav.tabs {
+  grid-area: header;
+  justify-content: space-evenly;
+  margin-top: 0;
+  border: unset;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet#skills-settings section.tab {
+  grid-area: main;
+  height: 100%;
+  overflow: hidden;
+}
+.application.sheet#skills-settings section.tab header {
+  padding: 0.25rem;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+.application.sheet#skills-settings section.tab article.skills.editable .form-group {
+  flex-wrap: nowrap;
+}
+.application.sheet#skills-settings section.tab article.skills.editable .form-group.header {
+  margin-bottom: 0.75rem;
+}
+.application.sheet#skills-settings section.tab article.skills.editable .form-group.header h5 {
+  margin: unset;
+}
+.application.sheet#skills-settings section.tab article.skills.editable .form-group label {
+  flex: 1 1 30%;
+}
+.application.sheet#skills-settings section.tab article.skills.editable .form-group div.form-fields {
+  flex: 0 1 60%;
+}
+.application.sheet#skills-settings section.tab article.skills.editable .form-group .skill-controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex: 0 0 55px;
+  gap: 5px;
+}
+.application.sheet#skills-settings section.tab .form-group.center,
+.application.sheet#skills-settings section.tab .form-group .center {
+  text-align: center;
+}
+.application.sheet#skills-settings section.tab .form-group textarea {
+  resize: vertical;
+}
+.application.sheet#skills-settings .scroll {
+  overflow-y: scroll;
+  overflow-x: hidden;
+  height: calc(100% - 1rem);
+  margin: 0.5rem;
+}
+.application.sheet#skills-settings footer {
+  grid-area: footer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2px;
+  border-top: 1px solid var(--border-theme-color);
+}
+.application.sheet#skills-settings footer button {
+  flex: 0 0 48%;
+}
+.application.sheet.stats-form .window-content {
+  padding-top: 0.5rem;
+  display: grid;
+  grid-template-columns: 55% 45%;
+  grid-template-rows: 35% 65%;
+  grid-template-areas: "baseStats statsChart" "evStats statsChart";
+}
+.application.sheet.stats-form .window-content aside {
+  display: flex;
+}
+.application.sheet.stats-form .window-content aside form {
+  flex: 1;
+}
+.application.sheet.stats-form .window-content h1 {
+  font-size: 2rem;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] {
+  grid-area: baseStats;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form {
+  display: grid;
+  grid-template-columns: 30% 15% 40% 15%;
+  grid-template-rows: min-content 1fr 1fr 1fr;
+  grid-template-areas: "header header header header" "hpLabel hpValue spatkLabel spatkValue" "atkLabel atkValue spdefLabel spdefValue" "defLabel defValue spdLabel spdValue";
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label {
+  text-align: left;
+  align-self: center;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.hp {
+  grid-area: hpLabel;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.atk {
+  grid-area: atkLabel;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.def {
+  grid-area: defLabel;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spa {
+  grid-area: spatkLabel;
+  margin-left: 1rem;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spd {
+  grid-area: spdefLabel;
+  margin-left: 1rem;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spe {
+  grid-area: spdLabel;
+  margin-left: 1rem;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input {
+  text-align: center;
+  align-self: center;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.hp {
+  grid-area: hpValue;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.atk {
+  grid-area: atkValue;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.def {
+  grid-area: defValue;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spa {
+  grid-area: spatkValue;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spd {
+  grid-area: spdefValue;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spe {
+  grid-area: spdValue;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form h1 {
+  grid-area: header;
+  text-align: center;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input[type="submit"] {
+  grid-area: submit;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="evStats"] {
+  grid-area: evStats;
+  margin-top: 0.25rem;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form {
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form h1 {
+  margin: 0.5rem 0;
+  text-align: center;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form .form-group label {
+  flex: 0 0 100px;
+  line-height: 1.75rem;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="evStats"] form#ev-stats-form .form-group input {
+  flex: 1;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="statsChart"] {
+  grid-area: statsChart;
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.25rem;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="statsChart"] h1 {
+  text-align: center;
+}
+.application.sheet.stats-form .window-content aside[data-application-part="statsChart"] .stats-chart-aside {
+  align-items: center;
+  background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+  border-radius: 10px;
+  margin: 0.25rem;
+}
+.application.sheet.party-sheet .window-content {
+  grid-template-columns: unset;
+  grid-template-rows: 44px auto;
+  grid-template-areas: "nav" "main";
+}
+.application.sheet.party-sheet .window-content nav.tabs {
+  border: unset;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="overview"] {
+  padding: 0;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="overview"] .scroll {
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 35% 65%;
+  grid-template-areas: "owner" "party";
+}
+.application.sheet.party-sheet .party-member {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  --owner-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 80%, transparent);
+  --party-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 60%, transparent);
+}
+.application.sheet.party-sheet .party-member .thumbnail {
+  padding: 0.25rem;
+  min-width: 56px;
+}
+.application.sheet.party-sheet .party-member .thumbnail img {
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+  border: unset;
+}
+.application.sheet.party-sheet .party-member .title {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.application.sheet.party-sheet .party-member .title .name {
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.application.sheet.party-sheet .party-member .title .level {
+  font-size: x-small;
+  color: var(--color-text-light-primary);
+}
+.application.sheet.party-sheet header.party-member {
+  grid-area: owner;
+  background: var(--owner-background-color);
+  border-radius: 12px;
+  margin: 0.5rem 0.25rem;
+  padding: 0.25rem;
+}
+.application.sheet.party-sheet header.party-member .thumbnail {
+  flex: 0 0 calc(80px + 0.5rem);
+  padding: 0.5rem 0.5rem 0.5rem 0;
+}
+.application.sheet.party-sheet header.party-member .thumbnail img {
+  width: unset;
+  max-width: 100%;
+  height: auto;
+  object-fit: scale-down;
+}
+.application.sheet.party-sheet header.party-member main {
+  flex: 1;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 4fr 3fr 3fr;
+  grid-template-rows: 1fr 1fr;
+  column-gap: 0.5rem;
+  grid-template-areas: "title health pp" "types experience-label experience-value";
+}
+.application.sheet.party-sheet header.party-member main div.title,
+.application.sheet.party-sheet header.party-member main div.health,
+.application.sheet.party-sheet header.party-member main div.pp,
+.application.sheet.party-sheet header.party-member main div.experience {
+  margin: 2px;
+}
+.application.sheet.party-sheet header.party-member main .title {
+  grid-area: title;
+  justify-content: start;
+}
+.application.sheet.party-sheet header.party-member main .health {
+  grid-area: health;
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.party-sheet header.party-member main .health .details {
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.application.sheet.party-sheet header.party-member main .health .details span {
+  font-size: 12px;
+  color: var(--color-text-light-primary);
+}
+.application.sheet.party-sheet header.party-member main .health .details .divider {
+  margin: 0 0.25rem;
+}
+.application.sheet.party-sheet header.party-member main .pp {
+  grid-area: pp;
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.party-sheet header.party-member main .pp .details {
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.application.sheet.party-sheet header.party-member main .pp .details span {
+  font-size: 12px;
+  color: var(--color-text-light-primary);
+}
+.application.sheet.party-sheet header.party-member main .pp .details .divider {
+  margin: 0 0.25rem;
+}
+.application.sheet.party-sheet header.party-member main .types {
+  grid-area: types;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.application.sheet.party-sheet header.party-member main .types span {
+  flex: 0 0 38px;
+  height: 38px;
+  margin: 2px;
+}
+.application.sheet.party-sheet header.party-member main .types span img {
+  height: 38px;
+  width: 38px;
+  object-fit: scale-down;
+  border: unset;
+  border-radius: 50%;
+}
+.application.sheet.party-sheet header.party-member main .types:has(:nth-child(4)) span {
+  flex: 0 0 32px;
+  height: 32px;
+}
+.application.sheet.party-sheet header.party-member main .types:has(:nth-child(4)) span img {
+  height: 32px;
+  width: 32px;
+}
+.application.sheet.party-sheet header.party-member main .types:has(:nth-child(5)) span {
+  flex: 0 0 25px;
+  height: 25px;
+}
+.application.sheet.party-sheet header.party-member main .types:has(:nth-child(5)) span img {
+  height: 25px;
+  width: 25px;
+}
+.application.sheet.party-sheet header.party-member main .types:has( > :nth-child(6)) span {
+  flex: 0 0 20px;
+  height: 20px;
+}
+.application.sheet.party-sheet header.party-member main .types:has( > :nth-child(6)) span img {
+  height: 20px;
+  width: 20px;
+}
+.application.sheet.party-sheet header.party-member main .types:has( > :nth-child(13)) {
+  overflow-y: auto;
+}
+.application.sheet.party-sheet header.party-member main .types:has( > :nth-child(13)) span {
+  flex: 0 0 21px;
+  height: 21px;
+}
+.application.sheet.party-sheet header.party-member main .types:has( > :nth-child(13)) span img {
+  height: 21px;
+  width: 21px;
+}
+.application.sheet.party-sheet header.party-member main .experience {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+.application.sheet.party-sheet header.party-member main .experience.label {
+  grid-area: experience-label;
+}
+.application.sheet.party-sheet header.party-member main .experience.value {
+  grid-area: experience-value;
+  color: var(--color-text-light-primary);
+}
+.application.sheet.party-sheet main {
+  grid-area: party;
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  flex-wrap: wrap;
+  align-content: start;
+}
+.application.sheet.party-sheet main section.party-member {
+  flex: 0 0 48%;
+  max-width: 48%;
+  height: 70px;
+  margin: 0.25rem;
+  background: var(--party-background-color);
+  border-radius: 12px;
+}
+.application.sheet.party-sheet main section.party-member main {
+  flex: 1;
+  height: 100%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "title health" "types pp";
+}
+.application.sheet.party-sheet main section.party-member main div.title,
+.application.sheet.party-sheet main section.party-member main div.health,
+.application.sheet.party-sheet main section.party-member main div.pp {
+  margin: 2px;
+}
+.application.sheet.party-sheet main section.party-member main .title {
+  grid-area: title;
+  justify-content: end;
+}
+.application.sheet.party-sheet main section.party-member main .health {
+  grid-area: health;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  font-size: small;
+}
+.application.sheet.party-sheet main section.party-member main .health .details {
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.application.sheet.party-sheet main section.party-member main .health .details span {
+  font-size: x-small;
+  color: var(--color-text-light-primary);
+}
+.application.sheet.party-sheet main section.party-member main .health .details .divider {
+  margin: 0 0.25rem;
+}
+.application.sheet.party-sheet main section.party-member main .pp {
+  grid-area: pp;
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+}
+.application.sheet.party-sheet main section.party-member main .pp .details {
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.application.sheet.party-sheet main section.party-member main .pp .details span {
+  font-size: x-small;
+  color: var(--color-text-light-primary);
+}
+.application.sheet.party-sheet main section.party-member main .pp .details .divider {
+  margin: 0 0.25rem;
+}
+.application.sheet.party-sheet main section.party-member main .types {
+  grid-area: types;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  overflow: hidden;
+}
+.application.sheet.party-sheet main section.party-member main .types span {
+  flex: 0 0 28px;
+  height: 28px;
+  margin: 2px;
+}
+.application.sheet.party-sheet main section.party-member main .types span img {
+  height: 28px;
+  width: 28px;
+  object-fit: scale-down;
+  border: unset;
+  border-radius: 50%;
+}
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span {
+  flex: 0 0 24px;
+  height: 24px;
+}
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span img {
+  height: 24px;
+  width: 24px;
+}
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span {
+  flex: 0 0 17px;
+  height: 17px;
+}
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span img {
+  height: 17px;
+  width: 17px;
+}
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span {
+  flex: 0 0 13px;
+  height: 13px;
+}
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span img {
+  height: 13px;
+  width: 13px;
+}
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) {
+  overflow-y: auto;
+}
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span {
+  flex: 0 0 15px;
+  height: 15px;
+}
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span img {
+  height: 15px;
+  width: 15px;
+}
+.application.sheet.team-sheet .window-content {
+  grid-template-columns: unset;
+  grid-template-rows: 44px auto;
+  grid-template-areas: "nav" "main";
+}
+.application.sheet.team-sheet .window-content nav.tabs {
+  border: unset;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] {
+  padding: 0;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll {
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0.5rem;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main {
+  --owner-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 80%, transparent);
+  --party-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 60%, transparent);
+  --item-height: 110px;
+  height: var(--item-height);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section {
+  flex: 1;
+  display: flex;
+  background: var(--owner-background-color);
+  border-radius: 12px;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section .thumbnail {
+  align-self: center;
+  flex: 0 0 calc(70px + 1rem);
+  padding: 0.5rem 0.5rem 0.5rem 0.5rem;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section .thumbnail img {
+  max-width: 100%;
+  height: auto;
+  object-fit: scale-down;
+  border: unset;
+  border-radius: 50%;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main {
+  flex: 1;
+  height: 100%;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 0.5rem;
+  grid-template-areas: "title title" "health pp";
+  align-items: center;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--party-background-color);
+  clip-path: polygon(100% 0, 100% 0, 100% 100%, 80% 100%);
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .title {
+  grid-area: title;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .title .level {
+  font-size: x-small;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health {
+  grid-area: health;
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details {
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details span {
+  font-size: 12px;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .health .details .divider {
+  margin: 0 0.25rem;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp {
+  grid-area: pp;
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details {
+  margin-top: 0.1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details span {
+  font-size: 12px;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section main .pp .details .divider {
+  margin: 0 0.25rem;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside {
+  flex: 0 0 44%;
+  display: flex;
+  background: var(--party-background-color);
+  border-radius: 0 12px 12px 0;
+  padding: 0.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  row-gap: 4px;
+  grid-template-rows: calc(calc(var(--item-height) - 0.5rem) / 2 - 2px) calc(calc(var(--item-height) - 0.5rem) / 2 - 2px);
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside:has( > :nth-child(7)) {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside:has( > :nth-child(9)) {
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  overflow-y: auto;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside .thumbnail {
+  text-align: center;
+  width: 100%;
+  height: 100%;
+  padding: unset;
+}
+.application.sheet.team-sheet .window-content .tab[data-tab="overview"] .scroll main > section > aside .thumbnail img {
+  height: 100%;
+  width: auto;
+  object-fit: scale-down;
+  border: unset;
+  border-radius: 50%;
+}
+.application.sheet.folder-edit .standard-form {
+  gap: 0.25rem;
+}
+.application.sheet.folder-edit .standard-form fieldset {
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.application.sheet.folder-edit section.team-member {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+}
+.application.sheet.folder-edit section.team-member.empty {
+  justify-content: center;
+  height: 100px;
+  border: 1px dashed var(--border-theme-color);
+  border-radius: 8px;
+  color: var(--hint-text-color);
+  font-size: medium;
+  text-align: center;
+  white-space: pre-line;
+  word-break: break-word;
+}
+.application.sheet.folder-edit section.team-member .thumbnail {
+  flex: 0 0 48px;
+  height: 48px;
+  margin-right: 0.5rem;
+}
+.application.sheet.folder-edit section.team-member .thumbnail img {
+  border-radius: 50%;
+  height: 48px;
+  width: 48px;
+  border: unset;
+}
+.application.sheet.folder-edit section.team-member .title {
+  flex: 1;
+}
+.application.sheet.folder-edit section.team-member .dismiss {
+  flex: 0 0 20px;
+}
+.application.sheet .window-content .tab:has(div.scroll) {
+  padding: 0;
+}
+.application.sheet .window-content .tab div.scroll {
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0.5rem;
+}
+.application.sheet.active-effect-sheet .window-content {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  grid-template-rows: calc(1rem + 48px) auto;
+  grid-template-areas: "header tabs" "main main";
+}
+.application.sheet.active-effect-sheet .window-content header.sheet-header {
+  flex-wrap: nowrap;
+}
+.application.sheet.active-effect-sheet .window-content nav.tabs {
+  grid-area: tabs;
+}
+.application.sheet.active-effect-sheet .window-content .tab:has(div.scroll) {
+  padding: 0;
+}
+.application.sheet.active-effect-sheet .window-content .tab div.scroll {
+  padding: 1rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  gap: 0.5rem;
+}
+.application.sheet.active-effect-sheet .window-content .tab div.scroll .change-element-forms {
+  display: contents;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing {
+  display: contents;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing .item-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing .item-controls button {
+  flex: 0 0 30%;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .change-editing > .cm-editor {
+  flex: 1;
+  background-color: #ffffffdd;
+  color: #222224;
+  overflow: hidden;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change {
+  padding: unset;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid var(--border-theme-color);
+  padding: 0.25rem 0.5rem;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .drag-handle {
+  cursor: grab;
+  font-weight: normal;
+  margin-right: 0.375rem;
+  padding: 0.125rem;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .label {
+  flex: 0 0 40%;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .label .form-group label {
+  flex: 0 1 min-content;
+  margin-right: 0.5rem;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .type {
+  flex: 0 0 40%;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header .item-controls {
+  flex: 0 0 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 4px;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main {
+  padding: 0.25rem 0.5rem;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main textarea {
+  resize: vertical;
+  min-height: 86px;
+  padding: 0.5rem;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group label.short {
+  align-items: center;
+  display: Flex;
+  gap: 4px;
+  white-space: nowrap;
+  padding-right: 0.5rem;
+  flex: 0 0 80px;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .form-fields {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .form-fields .content-link {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: row;
+  align-items: center;
+  gap: 3px;
+  font-weight: 400;
+  padding: 2px 4px;
+  text-shadow: none !important;
+  line-height: 1.6em;
+  color: var(--color-cool-5);
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .form-fields .content-link img {
+  height: 16px;
+  width: 16px;
+  border: unset;
+  object-fit: scale-down;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .attached-input {
+  display: flex;
+  flex-direction: row;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .attached-input button {
+  border-radius: 4px 0 0 4px;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .attached-input input {
+  border-radius: 0 4px 4px 0;
+}
+.application.sheet.active-effect-sheet .window-content .tab .validation-failures {
+  background: rgba(214, 150, 0, 0.5);
+  border-radius: 4px;
+  margin: 0.5rem;
+}
+.application.sheet.active-effect-sheet .window-content .tab .validation-failures ul {
+  list-style: "\f071" outside;
+  padding: 0.25rem 0.25rem 0.25rem 1.5rem;
+  margin: 0;
+}
+.application.sheet.active-effect-sheet .window-content .tab .validation-failures ul li {
+  font-weight: 900;
+  font-family: var(--font-awesome);
+}
+.application.sheet.active-effect-sheet .window-content .tab .validation-failures ul li > span {
+  margin-left: 0.25rem;
+  font-weight: normal;
+  font-family: var(--font-primary);
+}
+.application.sheet.active-effect-sheet .window-content .tab .create-change {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+.application.sheet.active-effect-sheet .window-content .tab .create-change button {
+  flex: 0 0 30%;
+}
+.application.sheet.active-effect-sheet .window-content footer.sheet-footer {
+  all: unset;
+  grid-area: submit;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  height: 34px;
+  border-top: 1px solid var(--border-theme-color);
+}
+.application.sheet.active-effect-sheet .window-content footer.sheet-footer button {
+  flex: 0 0 48%;
+}
+.application.sheet.modifier-popup .window-content {
+  padding: 0.5rem;
+}
+.application.sheet.modifier-popup main {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+.application.sheet.modifier-popup main fieldset {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 1rem;
+  flex-wrap: nowrap;
+  height: 100%;
+  background: var(--appv2-background);
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+.application.sheet.modifier-popup main legend {
+  font-size: var(--font-size-15);
+  font-weight: bold;
+}
+.application.sheet.modifier-popup main header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.25rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup main header .label {
+  flex: 0 0 50%;
+}
+.application.sheet.modifier-popup main header .item-controls {
+  flex: 0 0 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 4px;
+}
+.application.sheet.modifier-popup main article {
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.modifier-popup main article section {
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.modifier-popup main.skill-challenge-rating article {
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  text-align: center;
+}
+.application.sheet.modifier-popup main.skill-challenge-rating article label {
+  flex: 0 0 40%;
+}
+.application.sheet.modifier-popup main.skill-challenge-rating article select {
+  flex: 0 0 55%;
+}
+.application.sheet.modifier-popup main .modifier {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.5rem 0.25rem;
+  text-align: center;
+}
+.application.sheet.modifier-popup main .modifier .mod {
+  flex: 0 0 40%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  padding: 0 0.5rem;
+}
+.application.sheet.modifier-popup main .modifier .value {
+  flex: 0 0 40%;
+}
+.application.sheet.modifier-popup main .modifier .exclude {
+  flex: 0 0 45px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.application.sheet.modifier-popup main .modifier .exclude input {
+  align-content: center;
+}
+.application.sheet.modifier-popup main .modifier.ignored input {
+  --checkbox-checked-color: #666;
+}
+.application.sheet.modifier-popup main div.modifier {
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup main div.modifier:last-child {
+  border-bottom: unset;
+}
+.application.sheet.modifier-popup main section.modifier-panel {
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup main footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.application.sheet.modifier-popup main footer button {
+  flex: 0 0 60%;
+}
+.application.sheet.modifier-popup.attack main {
+  padding: 0.5rem;
+  margin-bottom: 0;
+}
+.application.sheet.modifier-popup.attack main article .modifier,
+.application.sheet.modifier-popup.attack main header.modifier {
+  gap: 0.2rem;
+  flex-wrap: wrap;
+}
+.application.sheet.modifier-popup.attack main article .modifier .mod,
+.application.sheet.modifier-popup.attack main header.modifier .mod {
+  flex: 0 0 38%;
+}
+.application.sheet.modifier-popup.attack main article .modifier .type,
+.application.sheet.modifier-popup.attack main header.modifier .type {
+  flex: 0 0 32%;
+}
+.application.sheet.modifier-popup.attack main article .modifier .value,
+.application.sheet.modifier-popup.attack main header.modifier .value {
+  flex: 0 0 calc(30% - 52px - 0.6rem);
+}
+.application.sheet.modifier-popup.attack main article .modifier .exclude,
+.application.sheet.modifier-popup.attack main header.modifier .exclude {
+  flex: 0 0 50px;
+  overflow: hidden;
+}
+.application.sheet.modifier-popup.attack main article .modifier-panel .modifier {
+  flex: 0 0 30px;
+}
+.application.sheet.modifier-popup.attack main article .modifier-panel .modifier > * {
+  height: 30px;
+  align-content: center;
+  align-self: center;
+  align-items: center;
+}
+.application.sheet.modifier-popup.attack main article .modifier-panel .modifier .mod {
+  border-right: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup.attack main article .modifier-panel .modifier .type {
+  border-right: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup.attack main article .modifier-panel .modifier .value {
+  border-right: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup.attack main .appliesTo {
+  flex: 1;
+  text-align: start;
+  font-size: smaller;
+  border: 1px solid var(--border-theme-color);
+  border-top: 0;
+  border-radius: 0 0 8px 8px;
+  flex: 0 0 30px;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.application.sheet.modifier-popup.attack main .appliesTo > * {
+  padding: 3px;
+  height: 30px;
+}
+.application.sheet.modifier-popup.attack main .appliesTo:last-child {
+  margin-bottom: unset;
+}
+.application.sheet.modifier-popup.attack main .appliesTo .label {
+  flex: 0 0 65px;
+  text-align: center;
+  align-content: center;
+  font-weight: bold;
+  border-right: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup.attack main .appliesTo .avatars {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  overflow: hidden;
+  padding: 3px 0.5rem;
+  gap: 5px;
+}
+.application.sheet.modifier-popup.attack main .appliesTo .avatars span.avatar {
+  flex: 0 0 24px;
+  height: 24px;
+  width: 24px;
+  object-fit: scale-down;
+}
+.application.sheet.modifier-popup.attack main .appliesTo .avatars span.avatar.unapplicable {
+  position: relative;
+  /** Put a red slash from top left to bottom right over the avatar */
+}
+.application.sheet.modifier-popup.attack main .appliesTo .avatars span.avatar.unapplicable::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'%3e%3cline x1='0' y1='0' x2='100' y2='100' stroke-width='10' stroke='%23aa0200'/%3e%3c/svg%3e");
+}
+.application.sheet.modifier-popup.attack main .appliesTo .avatars span.avatar.unapplicable img {
+  filter: grayscale(1);
+}
+.application.sheet.modifier-popup.attack main .appliesTo .avatars span.avatar img {
+  height: 24px;
+  width: 24px;
+  object-fit: scale-down;
+  border: unset;
+  border-radius: 50%;
+}
+.application.sheet.modifier-popup.attack main .appliesTo .all {
+  flex: 0 0 calc(52px + 0.2rem);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap: 3px;
+  font-weight: bold;
+  border-left: 1px solid var(--border-theme-color);
+}
+.application.sheet.modifier-popup.attack main .appliesTo .all input[type='checkbox'] {
+  height: 14px;
+  width: 14px;
+  flex: 0 0 14px;
+  margin: 0;
+  align-content: center;
+  text-align: center;
+}
+.application.sheet.modifier-popup.attack main .appliesTo .all input[type='checkbox']::before {
+  font-size: 14px;
+}
+.application.sheet.modifier-popup.attack main .add-modifier-panel {
+  margin-top: 0.5rem;
+}
+.application.sheet.modifier-popup.attack main .add-modifier-panel .modifier {
+  padding: 0;
+}
+.application.sheet.modifier-popup.attack main header {
+  border: unset;
+  font-weight: bold;
+  margin-bottom: 0.25rem;
+  padding: 0.1rem 0;
+  margin: 0 1px;
+}
+.application.sheet.modifier-popup.attack main header .mod,
+.application.sheet.modifier-popup.attack main header .type,
+.application.sheet.modifier-popup.attack main header .value {
+  border-right: 1px solid transparent;
+}
+.application.sheet.modifier-popup.attack main .modifier-panel {
+  border: unset;
+}
+.application.sheet.modifier-popup.attack main .modifier-panel .modifier {
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px 8px 0 0;
+  padding: 0;
+}
+.application.sheet.modifier-popup.attack main .modifier-panel.avatar-scroll .appliesTo {
+  flex: 0 0 40px;
+}
+.application.sheet.modifier-popup.attack main .modifier-panel.avatar-scroll .appliesTo > * {
+  padding: 3px;
+  height: 40px;
+}
+.application.sheet.modifier-popup.attack main .modifier-panel.avatar-scroll .appliesTo .avatars {
+  overflow-x: auto;
+  scrollbar-width: thin;
+}
+.application.sheet.modifier-popup.attack main footer {
+  margin-top: 0.5rem;
+}
+.application.sheet input[type="color"] {
+  border-color: var(--color-input-border-color, #000);
+}
+.application .standard-form input[type="checkbox"] {
+  --checkbox-background-color: #3d343f;
+}
+.token-panel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  background: var(--appv2-background);
+  color: var(--appv2-text-color);
+  margin: 0 15px 10px 0;
+  pointer-events: all;
+  border-radius: 8px 8px 8px 0;
+  border: 1px solid var(--border-theme-color);
+  display: flex;
+  flex-direction: column;
+  word-wrap: break-word;
+  width: 135px;
+  z-index: 71;
+}
+.token-panel:has(template[data-application-part="info"]) {
+  display: none !important;
+}
+.token-panel .hidden {
+  display: none !important;
+}
+.token-panel nav.tabs {
+  order: 3;
+  flex-direction: column;
+}
+.token-panel nav.tabs a {
+  padding: 0.25rem;
+  background: var(--appv2-background);
+  border-top: 1px solid var(--border-theme-color);
+  width: 100%;
+}
+.token-panel nav.tabs a:first-child {
+  border-top: unset;
+}
+.token-panel nav.tabs a:last-child {
+  border-radius: 0 0 8px 0;
+}
+.token-panel .tab {
+  position: absolute;
+  right: 100%;
+  bottom: -1px;
+  background: var(--appv2-background);
+  border-radius: 8px 0px 0 8px;
+  border: 1px solid var(--border-theme-color);
+  min-width: 150px;
+}
+.token-panel .tab.action-tab.active,
+.token-panel .tab.skill-tab.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.token-panel .tab.action-tab .attack-item,
+.token-panel .tab.skill-tab .attack-item,
+.token-panel .tab.action-tab .action-item,
+.token-panel .tab.skill-tab .action-item,
+.token-panel .tab.action-tab .skill-item,
+.token-panel .tab.skill-tab .skill-item {
+  display: flex;
+  flex-direction: row;
+  background: var(--appv2-background);
+  border-top: 1px solid var(--border-theme-color);
+}
+.token-panel .tab.action-tab .attack-item .icon,
+.token-panel .tab.skill-tab .attack-item .icon,
+.token-panel .tab.action-tab .action-item .icon,
+.token-panel .tab.skill-tab .action-item .icon,
+.token-panel .tab.action-tab .skill-item .icon,
+.token-panel .tab.skill-tab .skill-item .icon {
+  flex: 0 0 32px;
+  height: 32px;
+  width: 32px;
+  align-self: center;
+  cursor: pointer;
+}
+.token-panel .tab.action-tab .attack-item .icon img,
+.token-panel .tab.skill-tab .attack-item .icon img,
+.token-panel .tab.action-tab .action-item .icon img,
+.token-panel .tab.skill-tab .action-item .icon img,
+.token-panel .tab.action-tab .skill-item .icon img,
+.token-panel .tab.skill-tab .skill-item .icon img {
+  border: unset;
+}
+.token-panel .tab.action-tab .attack-item .icon img.dice,
+.token-panel .tab.skill-tab .attack-item .icon img.dice,
+.token-panel .tab.action-tab .action-item .icon img.dice,
+.token-panel .tab.skill-tab .action-item .icon img.dice,
+.token-panel .tab.action-tab .skill-item .icon img.dice,
+.token-panel .tab.skill-tab .skill-item .icon img.dice {
+  display: none;
+}
+.token-panel .tab.action-tab .attack-item .icon:hover img,
+.token-panel .tab.skill-tab .attack-item .icon:hover img,
+.token-panel .tab.action-tab .action-item .icon:hover img,
+.token-panel .tab.skill-tab .action-item .icon:hover img,
+.token-panel .tab.action-tab .skill-item .icon:hover img,
+.token-panel .tab.skill-tab .skill-item .icon:hover img {
+  display: none;
+}
+.token-panel .tab.action-tab .attack-item .icon:hover img.dice,
+.token-panel .tab.skill-tab .attack-item .icon:hover img.dice,
+.token-panel .tab.action-tab .action-item .icon:hover img.dice,
+.token-panel .tab.skill-tab .action-item .icon:hover img.dice,
+.token-panel .tab.action-tab .skill-item .icon:hover img.dice,
+.token-panel .tab.skill-tab .skill-item .icon:hover img.dice {
+  display: unset;
+}
+.token-panel .tab.action-tab .attack-item .name,
+.token-panel .tab.skill-tab .attack-item .name,
+.token-panel .tab.action-tab .action-item .name,
+.token-panel .tab.skill-tab .action-item .name,
+.token-panel .tab.action-tab .skill-item .name,
+.token-panel .tab.skill-tab .skill-item .name {
+  flex: 1;
+  align-self: center;
+  text-align: center;
+  padding: 0.25rem;
+  min-width: 0;
+  text-overflow: ellipsis;
+}
+.token-panel .tab.action-tab .attack-item .name.small,
+.token-panel .tab.skill-tab .attack-item .name.small,
+.token-panel .tab.action-tab .action-item .name.small,
+.token-panel .tab.skill-tab .action-item .name.small,
+.token-panel .tab.action-tab .skill-item .name.small,
+.token-panel .tab.skill-tab .skill-item .name.small {
+  padding: 1rem;
+}
+.token-panel .tab.action-tab .attack-item:nth-child(odd),
+.token-panel .tab.skill-tab .attack-item:nth-child(odd),
+.token-panel .tab.action-tab .action-item:nth-child(odd),
+.token-panel .tab.skill-tab .action-item:nth-child(odd),
+.token-panel .tab.action-tab .skill-item:nth-child(odd),
+.token-panel .tab.skill-tab .skill-item:nth-child(odd) {
+  background: color-mix(in srgb, var(--appv2-background) 90%, transparent);
+}
+.token-panel .tab.action-tab .attack-item:first-child,
+.token-panel .tab.skill-tab .attack-item:first-child,
+.token-panel .tab.action-tab .action-item:first-child,
+.token-panel .tab.skill-tab .action-item:first-child,
+.token-panel .tab.action-tab .skill-item:first-child,
+.token-panel .tab.skill-tab .skill-item:first-child,
+.token-panel .tab.action-tab .attack-item:first-child img,
+.token-panel .tab.skill-tab .attack-item:first-child img,
+.token-panel .tab.action-tab .action-item:first-child img,
+.token-panel .tab.skill-tab .action-item:first-child img,
+.token-panel .tab.action-tab .skill-item:first-child img,
+.token-panel .tab.skill-tab .skill-item:first-child img {
+  border-top: unset;
+  border-radius: 8px 0 0 0;
+}
+.token-panel .tab.action-tab .attack-item:last-child,
+.token-panel .tab.skill-tab .attack-item:last-child,
+.token-panel .tab.action-tab .action-item:last-child,
+.token-panel .tab.skill-tab .action-item:last-child,
+.token-panel .tab.action-tab .skill-item:last-child,
+.token-panel .tab.skill-tab .skill-item:last-child,
+.token-panel .tab.action-tab .attack-item:last-child img,
+.token-panel .tab.skill-tab .attack-item:last-child img,
+.token-panel .tab.action-tab .action-item:last-child img,
+.token-panel .tab.skill-tab .action-item:last-child img,
+.token-panel .tab.action-tab .skill-item:last-child img,
+.token-panel .tab.skill-tab .skill-item:last-child img {
+  border-radius: 0 0 0 8px;
+}
+.token-panel .tab.action-tab .skill-item .icon,
+.token-panel .tab.skill-tab .skill-item .icon {
+  filter: invert(1);
+  height: 28px;
+  width: 28px;
+  flex: 0 0 28px;
+}
+.token-panel .tab.action-tab .skill-item .icon img,
+.token-panel .tab.skill-tab .skill-item .icon img {
+  display: unset !important;
+  margin-top: 2px;
+}
+.token-panel .tab.effect-tab.active {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.token-panel .tab.effect-tab .effect {
+  display: flex;
+  flex-direction: row;
+  background: var(--appv2-background);
+  border-top: 1px solid var(--border-theme-color);
+}
+.token-panel .tab.effect-tab .effect .icon {
+  flex: 0 0 32px;
+  height: 32px;
+  width: 32px;
+  align-self: center;
+}
+.token-panel .tab.effect-tab .effect .icon img {
+  border: unset;
+}
+.token-panel .tab.effect-tab .effect .name {
+  flex: 1;
+  align-self: center;
+  text-align: center;
+  padding: 0.25rem;
+  min-width: 0;
+  text-overflow: ellipsis;
+}
+.token-panel .tab.effect-tab .effect:nth-child(odd) {
+  background: color-mix(in srgb, var(--appv2-background) 90%, transparent);
+}
+.token-panel .tab.effect-tab .effect:first-child {
+  border-top: unset;
+  border-radius: 8px 8px 0 0;
+}
+.token-panel .tab.effect-tab .effect:last-child {
+  border-radius: 0 0 8px 8px;
+}
+.token-panel section.token-info .icon img {
+  border-radius: 8px 0 0 0;
+}
+.token-panel section.token-info,
+.token-panel section.party {
+  order: 1;
+  display: flex;
+  border-bottom: 1px solid var(--border-theme-color);
+  flex-wrap: wrap;
+}
+.token-panel section.token-info .icon,
+.token-panel section.party .icon {
+  flex: 0 0 48px;
+  height: 48px;
+  width: 48px;
+  align-self: center;
+}
+.token-panel section.token-info .icon img,
+.token-panel section.party .icon img {
+  border: unset;
+  height: 100%;
+}
+.token-panel section.token-info .name,
+.token-panel section.party .name {
+  flex: 1;
+  padding: 0.25rem;
+  text-align: center;
+  align-self: center;
+  min-width: 0;
+  max-height: 48px;
+  text-overflow: ellipsis;
+}
+.token-panel section.token-info .party-header,
+.token-panel section.party .party-header {
+  flex: 0 0 100%;
+  color: var(--hint-text-color);
+  font-size: 12px;
+  padding: 2px;
+  border-bottom: 1px solid var(--border-theme-color);
+  text-align: center;
+  align-self: center;
+}
+.token-panel section.token-info .owner,
+.token-panel section.party .owner {
+  flex: 0 0 100%;
+  display: flex;
+  border-bottom: 1px solid var(--border-theme-color);
+  font-size: 12px;
+}
+.token-panel section.token-info .owner .icon,
+.token-panel section.party .owner .icon {
+  flex: 0 0 32px;
+  height: 32px;
+  width: 32px;
+}
+.token-panel section.party {
+  order: 2;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: left;
+}
+.token-panel section.party .icon {
+  flex: 0 0 calc(100% / 3);
+  height: 42px;
+  width: 42px;
+}
+#perk-hud {
+  position: absolute;
+  min-width: 300px;
+  width: min-content;
+  max-width: 600px;
+  text-align: left;
+  padding: 1rem;
+  color: var(--appv2-text-color);
+  background: var(--appv2-background);
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  z-index: calc(var(--z-index-tooltip) - 1);
+  transform: scale(2.5);
+}
+#perk-hud a.content-link {
+  color: black;
+}
+#perk-hud header {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+#perk-hud footer {
+  margin-top: 0.5rem;
+  padding: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+/** Application V1 Styles **/
+.stats-chart-aside {
+  flex: 1;
+  position: relative;
+}
+.ptu-sheet header.explanation {
+  flex-grow: 0;
+  border-bottom: 1px solid #222224;
+}
+.ptu-sheet li {
+  margin-bottom: 0.25rem;
+}
+.ptu-sheet li.key-value {
+  margin-bottom: 0;
+}
+.ptu-sheet li.key-value > ul {
+  margin-bottom: 0.25rem;
+}
+.ptu-sheet span.key,
+.ptu-sheet summary {
+  font-weight: bold;
+}
+.ptu-sheet * {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+.ptr2e form .form-group {
+  margin: 0.25rem;
+  padding: 0.25rem;
+  border: 2px groove #fefefe;
+}
+.ptr2e .attack-action {
+  margin: 0.25rem;
+  padding: 0.25rem;
+  border: 2px groove #fefefe;
+}
+.ptr2e img {
+  border: unset;
+}
+.ptr2e.actor {
+  border-radius: 20px 20px 20px 20px;
+}
+.ptr2e.actor section {
+  padding: unset;
+  background: unset;
+}
+.ptr2e.actor form {
+  display: grid;
+  grid-template-columns: 112px auto;
+  grid-template-rows: 48px 36px auto;
+  grid-template-areas: "aside nav" "aside subnav" "aside main";
+  min-width: 0;
+  min-height: 0;
+  background: linear-gradient(to top, #3889adee, #346899ee);
+  border-radius: 0 0 20px 20px;
+}
+.ptr2e.actor form > * {
+  overflow: hidden;
+}
+.ptr2e.actor form nav.main-navigation {
+  grid-area: nav;
+  background: #93d8f1;
+}
+.ptr2e.actor form nav.main-navigation .tabs {
+  flex: 0 0 50%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}
+.ptr2e.actor form nav.main-navigation .tabs .item {
+  color: black;
+  margin: 0.25rem;
+  font-size: 18px;
+  height: 48px;
+  width: 48px;
+  background-size: 48px 48px;
+}
+.ptr2e.actor form nav.main-navigation .tabs .item.summary {
+  background-image: url("/systems/ptr2e/img/icons/nav/summary.webp");
+}
+.ptr2e.actor form nav.main-navigation .tabs .item.actions {
+  background-image: url("/systems/ptr2e/img/icons/nav/actions.webp");
+}
+.ptr2e.actor form nav.main-navigation .tabs .item.skills {
+  background-image: url("/systems/ptr2e/img/icons/nav/skills.webp");
+}
+.ptr2e.actor form nav.main-navigation .tabs .item.gear {
+  background-image: url("/systems/ptr2e/img/icons/nav/gear.webp");
+}
+.ptr2e.actor form nav.main-navigation .tabs .item.active {
+  filter: drop-shadow(1px 1px 2px var(--color-shadow-primary));
+}
+.ptr2e.actor form nav.sub-navigation {
+  grid-area: subnav;
+  background: #93d8f1ee;
+}
+.ptr2e.actor form nav {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.ptr2e.actor form aside {
+  grid-area: aside;
+  display: flex;
+  flex-direction: column;
+  background: #346899;
+}
+.ptr2e.actor form aside header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.ptr2e.actor form aside .party {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.ptr2e.actor form aside .party .party-member {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  box-shadow: inset 0 0 5px #222224;
+  border-radius: 5px;
+  position: relative;
+  margin: 0.2rem;
+}
+.ptr2e.actor form aside .party .party-member:after {
+  position: absolute;
+  width: 4px;
+  height: var(--health-percent);
+  background: black;
+  top: 0;
+  left: 0;
+  content: "";
+}
+.ptr2e.actor form aside .party .party-member .profile-img {
+  height: 80px;
+  width: 80px;
+  filter: drop-shadow(1px 1px 2px #222224);
+  border: none;
+  border-radius: 5px;
+  position: relative;
+}
+.ptr2e.actor form aside .party .party-member .profile-img.black {
+  border-left: 4px solid black;
+  background-color: #00000065;
+}
+.ptr2e.actor form aside .party .party-member .profile-img.darkred {
+  border-left: 4px solid #8b0000;
+  background-color: #8b000065;
+}
+.ptr2e.actor form aside .party .party-member .profile-img.red {
+  border-left: 4px solid red;
+  background-color: #ff000065;
+}
+.ptr2e.actor form aside .party .party-member .profile-img.orange {
+  border-left: 4px solid orange;
+  background-color: #ffa50065;
+}
+.ptr2e.actor form aside .party .party-member .profile-img.green {
+  border-left: 4px solid lime;
+  background-color: #00ff0065;
+}
+.ptr2e.actor form aside .party .party-member .profile-img.lime {
+  border-left: 4px solid green;
+  background-color: #00800065;
+}
+.ptr2e.actor form main {
+  grid-area: main;
+  display: flex;
+}
+.ptr2e.actor form main .tab[data-tab]:not(.active) {
+  display: none;
+}
+.ptr2e.actor form .main-grid {
+  flex: 1;
+  display: grid;
+  grid-template: repeat(5, 1fr) / repeat(5, 1fr);
+  grid-gap: 0.25rem;
+  min-width: 0;
+  min-height: 0;
+}
+.ptr2e.actor form .main-grid > * {
+  overflow: hidden;
+}
+.ptr2e.actor form .main-grid .stats-chart-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #346899;
+  border-radius: 10px;
+  margin: 0.25rem;
+}
+.ptr2e.actor form .main-grid .stats-chart-box.default-location {
+  grid-column: 4 / span 2;
+  grid-row: 1 / span 3;
+}
+.ptr2e.actor form .main-grid .movement {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #3889adee, #346899ee);
+  border-radius: 10px;
+  margin: 0.25rem;
+}
+.ptr2e.actor form .main-grid .movement.default-location {
+  grid-column: 4 / span 2;
+  grid-row: 4 / span 2;
+}
+.ptr2e.actor form .main-grid .skills {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background: #346899;
+  border-radius: 10px;
+  margin: 0.25rem;
+}
+.ptr2e.actor form .main-grid .skills.default-location {
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 5;
+}
+.ptr2e.actor form .main-grid .level-field,
+.ptr2e.actor form .main-grid .link-to-stats,
+.ptr2e.actor form .main-grid .typings {
+  grid-column: 4 / span 2;
+  grid-row: 1 / span 2;
+  background: #fefefe;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 1rem 0.5rem;
+  border-radius: 20px;
+}
+.ptr2e.actor form .main-grid .level-field h2,
+.ptr2e.actor form .main-grid .link-to-stats h2,
+.ptr2e.actor form .main-grid .typings h2,
+.ptr2e.actor form .main-grid .level-field h4,
+.ptr2e.actor form .main-grid .link-to-stats h4,
+.ptr2e.actor form .main-grid .typings h4 {
+  align-self: center;
+  margin: 0;
+  font-style: italic;
+}
+.ptr2e.actor form .main-grid .link-to-stats {
+  grid-row: 3 / span 1;
+  gap: 0.5rem;
+}
+.ptr2e.actor form .main-grid .typings {
+  grid-row: 4 / span 2;
+  gap: 0.5rem;
+}
+.ptr2e.actor form .main-grid .actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  background: #346899;
+  border-radius: 10px;
+  margin: 0.25rem;
+}
+.ptr2e.actor form .main-grid .actions.default-location {
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 5;
+}
+.ptr2e.actor form .main-grid .actions h2 {
+  text-align: center;
+  border-bottom: 1px solid #fefefeaa;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list {
+  list-style: none;
+  margin: 0 0.5rem;
+  padding: 0;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action {
+  padding: 0.5rem;
+  background: #3889adee;
+  border-radius: 5px;
+  color: #efefef;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action:nth-child(odd) {
+  background: #2f608dee;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon {
+  flex: 0 0 24px;
+  height: 24px;
+  width: 24px;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon .icon {
+  display: block;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon .dice {
+  display: none;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon.rollable:hover > .icon {
+  display: none;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .item-icon.rollable:hover > .dice {
+  display: block;
+  cursor: pointer;
+}
+.ptr2e.actor form .main-grid .actions ul.action-list li.action .name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.ptr2e.actor form .main-grid .gear {
+  display: flex;
+  flex-direction: column;
+  background: #fefefe;
+  border-radius: 10px;
+  margin: 0.25rem;
+  padding: 0.25rem;
+}
+.ptr2e.actor form .main-grid .gear.default-location {
+  grid-column: 1 / span 3;
+  grid-row: 1 / span 5;
+}
+.ptr2e .item-list {
+  width: 100%;
+  padding: 0 0.25em;
+}
+.ptr2e .item-list .item {
+  background: rgba(7, 7, 10, 0.2);
+  border-radius: 4px;
+  padding: 0.25rem 0;
+  margin: 0.25rem 0;
+  display: flex;
+  flex-direction: row;
+}
+.ptr2e .item-list .item:nth-child(odd) {
+  background: rgba(7, 7, 10, 0.1);
+}
+.ptr2e .item-list .item .item-icon {
+  flex: 0 0 32px;
+  height: 32px;
+  width: 32px;
+  object-fit: contain;
+  margin: 0 0.5rem;
+}
+.ptr2e .item-list .item .item-info {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.ptr2e .item-list .item .item-info .item-name {
+  flex: 1;
+}
+.ptr2e .item-list .item .item-info .item-name h4 {
+  margin: unset;
+}
+.ptr2e .item-list .item .item-info .item-controls {
+  flex: 0 0 44px;
+}
+.ptr2e .directory-item {
+  --mixed-background-color: color-mix(in srgb, var(--owner-folder-background, #346899) 40%, transparent);
+}
+.ptr2e .directory-item.party-header {
+  line-height: normal;
+  background: var(--owner-folder-background);
+  border: 3px solid var(--owner-folder-background) !important;
+  border-top: unset !important;
+}
+.ptr2e .directory-item.party-header .document-name {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  margin: unset;
+}
+.ptr2e .directory-item.party-header .document-name span {
+  color: var(--color-text-light-highlight);
+}
+.ptr2e .directory-item.document.owner,
+.ptr2e .directory-item.document.party,
+.ptr2e .directory-item.document.team {
+  background: var(--mixed-background-color);
+  border: 3px solid var(--owner-folder-background);
+}
+.ptr2e .directory-item.document.owner {
+  border-top: unset;
+}
+.ptr2e .directory-item.document.party,
+.ptr2e .directory-item.document.team {
+  border: unset;
+  border-left: 3px solid var(--owner-folder-background);
+  border-right: 3px solid var(--owner-folder-background);
+}
+.ptr2e .directory-item.document.party.last,
+.ptr2e .directory-item.document.team.last {
+  border-bottom: 3px solid var(--owner-folder-background);
+}
+.ptr2e .directory-item.document .entry-name.document-name {
+  line-height: normal;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ptr2e .directory-item.document .entry-name.document-name .actor-level {
+  font-size: x-small;
+  color: var(--color-text-light-primary);
+}

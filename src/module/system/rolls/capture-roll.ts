@@ -128,7 +128,7 @@ class CaptureRoll extends CheckRoll {
         return "floor(100 * pow((@catchRate / 255), (3/16)))";
     }
     static get critDcFormula() {
-        return "max((@catchRate * min(8, @caught / 75) * @bonus) / (357 / 10), 1)";
+        return "(@catchRate * min(8, @caught / 75) * @bonus) / (357 / 10) + 1";
     }
     static get catchRateFormula() {
         return "((3 * @hpMax - 2 * @hpCurrent) / (3 * @hpMax)) * @rate * @bonusBall * @bonusStatus * @bonusStage * @bonusLevel * @bonusMisc";

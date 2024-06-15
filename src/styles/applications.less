@@ -232,7 +232,7 @@ body {
                     }
                 }
 
-                .perk-web-button {
+                .perk-web-button, .nature-dropdown {
                     display: flex;
                     justify-content: center;
                     flex: 1;
@@ -260,6 +260,32 @@ body {
                         small.unspend {
                             font-size: 10px;
                         }
+                    }
+                }
+
+                .nature-dropdown {
+                    border-bottom: 1px solid var(--border-theme-color);
+                    flex: 0;
+                    padding: 0.25rem;
+
+                    label {
+                        color: var(--hint-text-color);
+                        flex: 0 0 35%;
+                        align-content: center;
+                        text-align: left;
+                        font-size: 12px;
+                        padding-left: 1rem;
+                    }
+
+                    select {
+                        flex: 1 0 40%;
+                        align-self: center;
+                        align-content: center;
+                        margin-right: 0.5rem;
+
+                        height: min-content;
+                        line-height: 1.2rem;
+                        padding: 0.25rem;
                     }
                 }
             }

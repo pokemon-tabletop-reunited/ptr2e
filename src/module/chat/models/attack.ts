@@ -172,6 +172,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             (this.context = {
                 origin: this.origin,
                 attack: this.attack,
+                hasDamage: this.results.some((result) => !!result.damage),
                 results: new Map<ActorUUID, AttackMessageRenderContextData>(
                     // @ts-expect-error - This is a valid operation
                     await Promise.all(
@@ -206,7 +207,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                                 context.accuracyRoll.context.accuracyRoll =
                                     result.accuracy.dice[0].values[0];
                                 context.accuracyRoll.context.critRoll =
-                                    result.crit!.dice[0].values[0];
+                                    result.crit?.dice[0].values[0];
                             }
                             return [result.target.uuid, context];
                         })
@@ -249,15 +250,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         if (!damage) return false;
 
         const damageApplied = await target.applyDamage(damage);
-
-        // @ts-ignore
-        return ChatMessage.create({
-            type: "damage-applied",
-            system: {
-                target: targetUuid,
-                damageApplied,
-            },
-        });
+        return damageApplied;
     }
 
     async updateTargets(event: JQuery.ClickEvent) {
@@ -330,6 +323,7 @@ interface AttackMessageSystem
 type AttackMessageRenderContext = {
     origin: ActorPTR2e;
     attack: AttackPTR2e;
+    hasDamage: boolean;
     results: Map<ActorUUID, AttackMessageRenderContextData>;
 };
 

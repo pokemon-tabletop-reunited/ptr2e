@@ -145,10 +145,24 @@
             <!-- Diet -->
             {{formField fields.diet value=source.system.diet localize=true}}
             <!-- Size -->
-            {{formField fields.size.fields.category value=source.system.size.category localize=true}}
+            {{formField fields.size.fields.height value=source.system.size.height localize=true}}
             {{formField fields.size.fields.type value=source.system.size.type localize=true}}
-            {{formField fields.size.fields.height value=source.system.size.height localize=true disabled=true}}
-            {{formField fields.size.fields.weight value=source.system.size.weight localize=true disabled=true}}
+            <div class="form-group">
+                <label>Size Class</label>
+                <div class="form-fields">
+                    <input type="text" name="system.size.sizeClass" value="{{item.system.size.sizeClass}}" disabled> {{log item.system.size}}
+                </div>
+                <p class="hint">The Size Class of the Creature.</p>
+            </div>
+            {{formField fields.size.fields.category value=source.system.size.category localize=true disabled=true}}
+            {{formField fields.size.fields.weight value=source.system.size.weight localize=true}}
+            <div class="form-group">
+                <label>Weight Class</label>
+                <div class="form-fields">
+                    <input type="text" name="system.size.weightClass" value="{{item.system.size.weightClass}}" disabled>
+                </div>
+                <p class="hint">The Weight Class of the Creature.</p>
+            </div>
             <!-- Gender Ratio -->
             {{formField fields.genderRatio value=source.system.genderRatio localize=true}}
             <!-- Egg Groups -->
