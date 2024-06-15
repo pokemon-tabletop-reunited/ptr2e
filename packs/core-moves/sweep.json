@@ -1,44 +1,40 @@
 {
-  "name": "Sweep",
-  "type": "move",
-  "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
-  "system": {
-    "slug": "sweep",
-    "description": "Effect: The user clears [Hazard] effects from an adjacent space.",
-    "traits": [],
-    "actions": [
-      {
+    "name": "Sweep",
+    "type": "move",
+    "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+    "system": {
         "slug": "sweep",
-        "name": "Sweep",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "self",
-          "distance": 0,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "untyped"
-        ],
         "description": "Effect: The user clears [Hazard] effects from an adjacent space.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null
-  },
-  "_id": "ypqvBMddHC2zIDib",
-  "effects": []
+        "traits": [
+            "basic"
+        ],
+        "actions": [
+            {
+                "slug": "sweep",
+                "name": "Sweep",
+                "type": "attack",
+                "traits": [
+                    "basic"
+                ],
+                "range": {
+                    "target": "self",
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 2
+                },
+                "category": "status",
+                "types": [
+                    "untyped"
+                ],
+                "description": "Effect: The user clears [Hazard] effects from an adjacent space.",
+                "free": true,
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "grade": "E"
+    },
+    "_id": "ypqvBMddHC2zIDib",
+    "effects": []
 }
