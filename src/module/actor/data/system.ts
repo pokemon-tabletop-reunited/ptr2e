@@ -15,7 +15,7 @@ import { SpeciesSystemModel } from "@item/data/index.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
-import { natures } from "@scripts/config/natures.ts";
+import natureToStatArray, { natures } from "@scripts/config/natures.ts";
 
 class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
     static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -377,9 +377,17 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
     }
 
     _calculateStatTotal(stat: Attribute | Omit<Attribute, "stage">): number {
+        const nature = (() => {
+            const nature = natureToStatArray[this._source.nature as keyof typeof natureToStatArray];
+            if (!nature) return 1;
+            if(nature[0] == nature[1]) return 1;
+            if(stat.slug === nature[0]) return 1.1;
+            if(stat.slug === nature[1]) return 0.9;
+            return 1;
+        })();
+
         //TODO: Add these values, for now default to 1
-        const nature = 1,
-            sizeMod = 1,
+        const sizeMod = 1,
             level = this.advancement.level;
 
         if ("stage" in stat) {

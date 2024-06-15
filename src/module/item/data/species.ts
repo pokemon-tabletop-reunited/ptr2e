@@ -272,6 +272,46 @@ class SpeciesSystem extends SpeciesExtension {
             return a.name.localeCompare(b.name);
         });
         this.moves.tutor = this.moves.tutor.sort((a, b) => a.name.localeCompare(b.name));
+
+        this.size.sizeClass = (() => {
+            return 1;
+        })();
+        this.size.weightClass = (() => {
+            switch(true) {
+                case this.size.weight < 10:
+                    return 1;
+                case this.size.weight < 20:
+                    return 2;
+                case this.size.weight < 30:
+                    return 3;
+                case this.size.weight < 40:
+                    return 4;
+                case this.size.weight < 55:
+                    return 5;
+                case this.size.weight < 70:
+                    return 6;
+                case this.size.weight < 85:
+                    return 7;
+                case this.size.weight < 100:
+                    return 8;
+                case this.size.weight < 120:
+                    return 9;
+                case this.size.weight < 145:
+                    return 10;
+                case this.size.weight < 190:
+                    return 11;
+                case this.size.weight < 240:
+                    return 12;
+                case this.size.weight < 305:
+                    return 13;
+                case this.size.weight < 350:
+                    return 14;
+                case this.size.weight < 410:
+                    return 15;
+                default:
+                    return 16;
+            }
+        })();
     }
 
     override async _preCreate(
@@ -492,6 +532,12 @@ interface SpeciesSystem {
         category: string;
         /** quadraped / height measurement */
         type: string;
+
+        height: number;
+        weight: number;
+
+        sizeClass: number;
+        weightClass: number;
     };
 
     diet: string[];
