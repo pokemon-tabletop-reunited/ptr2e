@@ -1,51 +1,44 @@
 {
-  "name": "Stomp",
-  "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
-  "system": {
-    "slug": "stomp",
-    "description": "",
-    "traits": [
-      "crushing",
-      "contact"
-    ],
-    "actions": [
-      {
+    "name": "Stomp",
+    "type": "move",
+    "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+    "system": {
         "slug": "stomp",
-        "name": "Stomp",
-        "type": "attack",
+        "description": "<p>Effect: On hit, the target has a 30% chance of being @Affliction[flinched] 5</p>",
         "traits": [
-          "crushing",
-          "contact"
+            "crushing",
+            "contact"
         ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "physical",
-        "power": 65,
-        "accuracy": 100,
-        "types": [
-          "normal"
+        "actions": [
+            {
+                "slug": "stomp",
+                "name": "Stomp",
+                "type": "attack",
+                "traits": [
+                    "crushing",
+                    "contact"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 5
+                },
+                "category": "physical",
+                "power": 65,
+                "accuracy": 100,
+                "types": [
+                    "normal"
+                ],
+                "description": "<p>Effect: On hit, the target has a 30% chance of being @Affliction[flinched] 5</p>",
+                "img": "icons/svg/explosion.svg"
+            }
         ],
-        "description": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "B"
-  },
-  "_id": "tj77FPyYNkBpjnd9",
-  "effects": []
+        "grade": "B"
+    },
+    "_id": "tj77FPyYNkBpjnd9",
+    "effects": []
 }

@@ -1,76 +1,60 @@
 {
-  "name": "Sprint",
-  "type": "perk",
-  "system": {
-    "prerequisites": [
-      "Running 30"
-    ],
-    "cost": 3,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Athleticism"
-    },
-    "description": "This perk gives you +2m per DoS on Rush, rather than +1m.",
-    "actions": [
-      {
-        "name": "Sprint",
-        "slug": "sprint",
-        "description": "This perk gives you +2m per DoS on Rush, rather than +1m.",
-        "cost": {
-          "activation": "free"
+    "name": "Sprint",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "Running 30 OR Flying 30 OR Swimming 30 OR Climbing 30"
+        ],
+        "cost": 3,
+        "design": {
+            "arena": "physical",
+            "approach": "power",
+            "archetype": "Athleticism"
         },
-        "type": "passive",
-        "traits": []
-      }
-    ],
-    "slug": "sprint",
-    "traits": [],
-    "node": {
-      "i": 7,
-      "j": 24,
-      "connected": [
-        "zigzagoon-class-sandwiches",
-        "root-4",
-        "adrenaline-rush",
-        "hit-run",
-        "strong-style"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#0000ff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    }
-  },
-  "_id": "vxp5hyhlVJozIaNR",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.vxp5hyhlVJozIaNR"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714919923693,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!vxp5hyhlVJozIaNR"
+        "description": "This perk gives you +2m per DoS on Rush, rather than +1m.",
+        "actions": [
+            {
+                "name": "Sprint",
+                "slug": "sprint",
+                "description": "This perk gives you +2m per DoS on Rush, rather than +1m.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": [],
+                "img": "icons/svg/explosion.svg",
+                "range": {
+                    "target": "enemy",
+                    "unit": "m"
+                }
+            }
+        ],
+        "slug": "sprint",
+        "traits": [],
+        "node": {
+            "i": 7,
+            "j": 24,
+            "connected": [
+                "zigzagoon-class-sandwiches",
+                "root-4",
+                "adrenaline-rush",
+                "hit-run",
+                "strong-style"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#0000ff",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+                "tint": "#ffffff",
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "vxp5hyhlVJozIaNR",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
 }
