@@ -449,8 +449,39 @@ class ActorPTR2e<
         return stat.value * stageModifier();
     }
 
-    async applyDamage(damage: number) {
-        const damageApplied = Math.min(damage || 0, this.system.health.value);
+    async applyDamage(damage: number, {silent, healShield} = {silent: false, healShield: false}) {
+        // Damage is applied to shield first, then health
+        // Shields cannot be healed
+        if(damage > 0 || healShield) {
+            const damageAppliedToShield = Math.min(damage || 0, this.system.health.shield.value);
+            if(this.system.health.shield.value > 0 && damageAppliedToShield === 0) return 0;
+            if(damageAppliedToShield > 0 || healShield) {
+                const isShieldBroken = this.system.health.shield.value - damageAppliedToShield <= 0;
+                await this.update({
+                    "system.health.shield.value": Math.max(
+                        this.system.health.shield.value - damage,
+                        0,
+                    ),
+                });
+                if(!silent) {
+                    //@ts-expect-error
+                    await ChatMessagePTR2e.create({
+                        type: "damage-applied",
+                        system: {
+                            notes: damage < 0
+                                ? [`Shield healed for ${Math.abs(damageAppliedToShield)} health`, `Shield remaining: ${this.system.health.shield.value}`]
+                                : [`Shield took ${damageAppliedToShield} damage`, isShieldBroken ? "Shield broken!" : `Shield remaining: ${this.system.health.shield.value}`],
+                            damageApplied: damageAppliedToShield,
+                            shieldApplied: true,
+                            target: this.uuid,
+                        },
+                    });
+                }
+                return damageAppliedToShield;
+            }
+        }
+
+        const damageApplied = Math.min((damage || 0), this.system.health.value);
         if (damageApplied === 0) return 0;
         await this.update({
             "system.health.value": Math.clamp(
@@ -459,7 +490,25 @@ class ActorPTR2e<
                 this.system.health.max
             ),
         });
+        if(!silent) {
+            //@ts-expect-error
+            await ChatMessagePTR2e.create({
+                type: "damage-applied",
+                system: {
+                    damageApplied: damageApplied,
+                    target: this.uuid,
+                },
+            });
+        }
         return damageApplied;
+    }
+
+    override async modifyTokenAttribute(attribute: string, value: number, isDelta?: boolean, isBar?: boolean): Promise<this> {
+        if(isDelta && value != 0 && (attribute === "health")) {
+            await this.applyDamage(value * -1);
+            return this;
+        }
+        return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
     }
 
     getEffectiveness(moveTypes: Set<PokemonType>) {
@@ -1012,6 +1061,15 @@ class ActorPTR2e<
             }
         }
 
+        if(changed.system?.health?.shield !== undefined) {
+            if(typeof changed.system.health.shield.value === "number" && changed.system.health.shield.value > this.system.health.shield.value) {
+                changed.system.health.shield.max ??= changed.system.health.shield.value;
+            }
+            else if(changed.system.health.shield.value === 0) {
+                changed.system.health.shield.max = 0;
+            }
+        }
+
         return super._preUpdate(changed, options, user);
     }
 
@@ -1021,6 +1079,7 @@ class ActorPTR2e<
         userId: string
     ): void {
         super._onUpdate(changed, options, userId);
+
         if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
     }
 

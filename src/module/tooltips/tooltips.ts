@@ -79,14 +79,14 @@ export default class TooltipsPTR2e {
                     return this._onTraitTooltip();
                 case "attack":
                     return this._onAttackTooltip();
-                case "action": 
+                case "action":
                     return this._onActionTooltip();
                 case "status":
                     return this._onStatusTooltip();
                 case "damage":
                     return this._onDamageTooltip();
                 case "content-link":
-                case "item": 
+                case "item":
                     return this._onContentLinkTooltip();
                 case "damage-info":
                     return this._onDamageInfoTooltip();
@@ -114,7 +114,9 @@ export default class TooltipsPTR2e {
         const data = game.ptr.data.traits.get(trait);
         if (!data) return false;
 
-        this.tooltip.innerHTML = `<h4 class="trait">[${data.label}]</h4><cntent>${data.description}</content>
+        this.tooltip.innerHTML = `<h4 class="trait">[${
+            data.label
+        }]</h4><cntent>${await TextEditor.enrichHTML(data.description)}</content>
         <div class="progress-circle">
             <svg width="20" height="20" viewBox="0 0 20 20" class="circular-progress">
                 <circle class="bg"></circle>
@@ -134,22 +136,27 @@ export default class TooltipsPTR2e {
         if (!skillSlug) return false;
 
         const skillGroup = game.tooltip.element?.dataset.group;
-        const localizeKey = skillGroup ? `PTR2E.Skills.${skillGroup}.${skillSlug}` : `PTR2E.Skills.${skillSlug}`;
+        const localizeKey = skillGroup
+            ? `PTR2E.Skills.${skillGroup}.${skillSlug}`
+            : `PTR2E.Skills.${skillSlug}`;
 
-        const {localizedContent, localizedLabel} = (() => {
+        const { localizedContent, localizedLabel } = await (async () => {
             const localizedContent = game.i18n.localize(`${localizeKey}.hint`);
             if (localizedContent === `${localizeKey}.hint`) {
                 const skill = game.ptr.data.skills.get(skillSlug) as CustomSkill;
                 return {
-                    localizedContent: skill?.description ?? null,
-                    localizedLabel: skill?.label ?? (Handlebars.helpers.formatSlug(skill.slug) || null)
+                    localizedContent: skill?.description
+                        ? await TextEditor.enrichHTML(skill.description)
+                        : null,
+                    localizedLabel:
+                        skill?.label ?? (Handlebars.helpers.formatSlug(skill.slug) || null),
                 };
             }
 
             const localizedLabel = game.i18n.localize(`${localizeKey}.label`);
-            return {localizedContent, localizedLabel};
+            return { localizedContent, localizedLabel };
         })();
-        if(localizedContent === null) return false;
+        if (localizedContent === null) return false;
 
         this.tooltip.innerHTML = `<h4 class="skill">${localizedLabel}</h4><content>${localizedContent}</content>
         <div class="progress-circle">
@@ -170,13 +177,15 @@ export default class TooltipsPTR2e {
         const effectId = game.tooltip.element?.dataset.id;
         if (!effectId) return false;
 
-        const parent = await fromUuid<ActorPTR2e>((game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset.parent);
+        const parent = await fromUuid<ActorPTR2e>(
+            (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset.parent
+        );
         if (!parent) return false;
-        
+
         const effect = parent.effects.get(effectId);
         if (!effect) return false;
 
-        this.tooltip.classList.add('effect');
+        this.tooltip.classList.add("effect");
         await this._renderTooltip({
             path: "systems/ptr2e/templates/items/embeds/effect.hbs",
             data: { document: effect, fields: effect.schema.fields },
@@ -196,9 +205,11 @@ export default class TooltipsPTR2e {
         if (!affliction) return false;
 
         const effect = await ActiveEffectPTR2e.fromStatusEffect(affliction.id);
-        effect.description = game.i18n.localize(affliction.description!);
+        effect.description = await TextEditor.enrichHTML(
+            game.i18n.localize(affliction.description!)
+        );
 
-        this.tooltip.classList.add('effect');
+        this.tooltip.classList.add("effect");
         await this._renderTooltip({
             path: "systems/ptr2e/templates/items/embeds/effect.hbs",
             data: { document: effect, fields: effect.schema.fields },
@@ -211,7 +222,8 @@ export default class TooltipsPTR2e {
     }
 
     async _onActionTooltip() {
-        const attackSlug = game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
+        const attackSlug =
+            game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
         if (!attackSlug) return false;
 
         const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
@@ -278,7 +290,8 @@ export default class TooltipsPTR2e {
     }
 
     async _onAttackTooltip() {
-        const attackSlug = game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
+        const attackSlug =
+            game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
         if (!attackSlug) return false;
 
         const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
@@ -463,7 +476,8 @@ export default class TooltipsPTR2e {
                 | undefined,
         });
 
-        for (const input of this.tooltip.querySelectorAll<HTMLInputElement>("input.ptr2e-tagify") ?? []) {
+        for (const input of this.tooltip.querySelectorAll<HTMLInputElement>("input.ptr2e-tagify") ??
+            []) {
             new Tagify(input, {
                 enforceWhitelist: true,
                 keepInvalidTags: false,
@@ -502,10 +516,14 @@ export default class TooltipsPTR2e {
     }
 
     async #createEffectItemTooltip(effect: EffectPTR2e) {
-        this.tooltip.classList.add('effect');
+        this.tooltip.classList.add("effect");
         await this._renderTooltip({
             path: `systems/ptr2e/templates/items/embeds/effect-item.hbs`,
-            data: { fields: effect.system.schema.fields, document: effect, effects: effect.effects.contents },
+            data: {
+                fields: effect.system.schema.fields,
+                document: effect,
+                effects: effect.effects.contents,
+            },
             direction: game.tooltip.element?.dataset.tooltipDirection as
                 | TooltipDirections
                 | undefined,

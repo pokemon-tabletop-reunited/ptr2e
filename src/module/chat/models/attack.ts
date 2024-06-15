@@ -250,15 +250,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         if (!damage) return false;
 
         const damageApplied = await target.applyDamage(damage);
-
-        // @ts-ignore
-        return ChatMessage.create({
-            type: "damage-applied",
-            system: {
-                target: targetUuid,
-                damageApplied,
-            },
-        });
+        return damageApplied;
     }
 
     async updateTargets(event: JQuery.ClickEvent) {

@@ -10,6 +10,16 @@
         </div>
     </div>
     <div class="inputs">
+        <div class="shield-current">
+            <label for="system.health.shield.value">{{localize fields.health.fields.shield.fields.value.label}} {{localize "PTR2E.FIELDS.health.shield.short"}}</label>
+            {{formInput fields.health.fields.shield.fields.value value=actor.system.health.shield.value localized=true}}
+        </div>
+        <div class="shield-max">
+            <label for="system.health.shield.max">{{localize fields.health.fields.shield.fields.max.label}} {{localize "PTR2E.FIELDS.health.shield.short"}}</label>
+            {{formInput fields.health.fields.shield.fields.max value=actor.system.health.shield.max localized=true disabled=true}}
+        </div>
+    </div>
+    <div class="inputs">
         <div class="pp-current">
             <label for="system.powerPoints.value">{{localize fields.powerPoints.fields.value.label}} {{localize "PTR2E.FIELDS.powerPoints.short"}}</label>
             {{formInput fields.powerPoints.fields.value value=actor.system.powerPoints.value localized=true}}

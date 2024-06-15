@@ -13,6 +13,10 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
      */
     abstract damageApplied: number;
     /**
+     * Whether the damage was applied to shield instead of health
+     */
+    abstract shieldApplied: boolean;
+    /**
      * Whether the damage was undone
      */
     abstract undone: boolean;
@@ -39,6 +43,7 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
         return {
             target: new fields.DocumentUUIDField({ required: true, type: 'Actor' }),
             damageApplied: new fields.NumberField({ required: true }),
+            shieldApplied: new fields.BooleanField({ required: true, initial: false }),
             undone: new fields.BooleanField({ required: true, initial: false }),
             notes: new fields.ArrayField(new fields.ArrayField(new fields.HTMLField({blank: false, nullable: false})), { required: true, initial: [] }),
         }
@@ -76,7 +81,7 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
         if (!this.target) return;
 
         await this.parent.update({ "system.undone": true });
-        await this.target.applyDamage(-this.damageApplied);
+        await this.target.applyDamage(-this.damageApplied, {silent: true, healShield: this.shieldApplied});
     }
 
     activateListeners(html: JQuery<HTMLElement>) {

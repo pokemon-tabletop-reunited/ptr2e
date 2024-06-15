@@ -174,6 +174,22 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
                     label: "PTR2E.FIELDS.health.max.label",
                     hint: "PTR2E.FIELDS.health.max.hint",
                 }),
+                shield: new fields.SchemaField({
+                    value: new fields.NumberField({
+                        required: true,
+                        initial: 0,
+                        validate: (d) => (d as number) >= 0,
+                        label: "PTR2E.FIELDS.health.shield.value.label",
+                        hint: "PTR2E.FIELDS.health.shield.value.hint",
+                    }),
+                    max: new fields.NumberField({
+                        required: true,
+                        initial: 0,
+                        validate: (d) => (d as number) >= 0,
+                        label: "PTR2E.FIELDS.health.shield.max.label",
+                        hint: "PTR2E.FIELDS.health.shield.max.hint",
+                    })
+                })
             }),
             money: new fields.NumberField({ required: true, initial: 0 }),
             species: new fields.SchemaField(SpeciesSystemModel.defineSchema(), {

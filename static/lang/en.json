@@ -247,7 +247,7 @@
                 },
                 "Descriptions": {
                     "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-condition], @Trait[minor-condition], @Trait[pseudo-affliction], and @Trait[stat-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
-                    "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has @affliction[weak] while Burn is active. @Trait[fire]-Type creatures cannot be Burned.",
+                    "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has @Affliction[weak] while Burn is active. @Trait[fire]-Type creatures cannot be Burned.",
                     "poison": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature also has Dull while Poison is active.",
                     "blight": "At the end of the afflicted creature’s Activation, it loses X Stacks of Blight, where X is 2<sup style='font-size: x-small;'># of Activations passed with Blight</sup> and takes a Tick of HP per Stack lost. The creature also has Dull while Blight is active. When a creature receives Blight, it loses the Poison Condition, with Blight gaining 33% of its remaining Poison Stacks as extra Stacks on Blight. When afflicted with Poisoned X while Blighted, the creature gains +1 to its Blight Stacks.",
                     "paralysis": "The afflicted creature's Base SPD is reduced by 50%, and the creature may only perform 1 Simple Action on its Activations.",
@@ -1075,6 +1075,17 @@
                 "max": {
                     "label": "Max",
                     "hint": "The maximum health value of the actor."
+                },
+                "shield": {
+                    "short": "Shield",
+                    "value": {
+                        "label": "Current",
+                        "hint": "The shield value of the actor."
+                    },
+                    "max": {
+                        "label": "Max",
+                        "hint": "The maximum shield value of the actor."
+                    }
                 }
             },
             "experience": {

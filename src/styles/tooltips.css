@@ -179,6 +179,9 @@ aside[role="tooltip"].damage-info .note figure {
   padding-bottom: 0.5rem;
   min-height: 20px;
 }
+aside[role="tooltip"].damage-info .note figure a.content-link {
+  background: var(--content-link-background);
+}
 aside[role="tooltip"].damage-info .note figure:first-child {
   padding-top: unset;
 }
@@ -186,7 +189,8 @@ aside[role="tooltip"].damage-info .note figure:last-child {
   padding: 0.5rem 0 0.25rem 0;
 }
 aside[role="tooltip"].damage-info .note figure.damage {
-  border-top: 1px solid var(--color-light-6);
+  padding: 0;
+  align-content: center;
 }
 aside[role="tooltip"] .attack-embed {
   min-width: 275px;
