@@ -248,7 +248,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
                 if(!this.attack.accuracy) ommited.add("accuracy");
 
                 return ommited;
-            })()
+            })(),
+            ppCost: this.attack.cost.powerPoints ?? 0
         }
         const check = new CheckModifier(
             this.parent.slug,

@@ -398,7 +398,6 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
 
         /** Calculate HP */
         const bulkMod = Math.pow(1 + ((Math.sqrt(2) - 1) / (30 / Math.PI)), (this.species?.size.sizeClass || 1) - 1);
-        console.log(this.species?.size.sizeClass || 1, bulkMod);
 
         return Math.floor(
             (Math.floor(((2 * stat.base + stat.ivs + stat.evs / 4) * level * bulkMod) / 100) +

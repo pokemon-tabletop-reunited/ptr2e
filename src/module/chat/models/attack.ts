@@ -52,6 +52,10 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                 "uuid",
                 { required: true, initial: [] }
             ),
+            pp: new fields.SchemaField({
+                spent: new fields.BooleanField({ required: true, initial: false }),
+                cost: new fields.NumberField({ required: true, initial: 0 }),
+            }),
         };
     }
 
@@ -63,6 +67,10 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         const roll = JSON.parse(rollJSON);
         if (!roll.evaluated)
             throw new Error(`Roll objects added to ChatMessage documents must be evaluated`);
+    }
+
+    get currentOrigin(): Promise<Maybe<ActorPTR2e>> {
+        return this.context?.origin?.uuid ? fromUuid<ActorPTR2e>(this.context.origin.uuid) : Promise.resolve(null);
     }
 
     override prepareBaseData(): void {
@@ -170,6 +178,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         const context: AttackMessageRenderContext =
             this.context ??
             (this.context = {
+                pp: this.pp,
                 origin: this.origin,
                 attack: this.attack,
                 hasDamage: this.results.some((result) => !!result.damage),
@@ -224,21 +233,49 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
         const overrides = fu.duplicate(this._source.overrides);
         const index = overrides.findIndex((override) => override.uuid === targetUuid);
-        if(index === -1) {
+        if (index === -1) {
             overrides.push({
                 value: status,
                 uuid: targetUuid,
             });
-        }
-        else {
+        } else {
             overrides[index].value = status;
         }
 
         return this.parent.update({
             system: {
-                overrides
+                overrides,
             },
         });
+    }
+
+    async spendPP() {
+        if (this.pp.spent) return false;
+
+        const pp = this.context?.pp;
+        if (!pp) return false;
+
+        const actor = await this.currentOrigin;
+        if (!actor) return false;
+
+        if (actor.system.powerPoints.value < pp.cost) {
+            ui.notifications.error("PTR2E.Attack.NotEnoughPP");
+            return false;
+        }
+
+        await this.parent.update({
+            system: {
+                pp: {
+                    spent: true,
+                },
+            },
+        });
+        await actor.update({
+            "system.powerPoints.value": actor.system.powerPoints.value - pp.cost,
+        })
+        ui.notifications.info(`You have ${actor.system.powerPoints.value} power points remaining. (Used ${pp.cost})`);
+
+        return true;
     }
 
     async applyDamage(targetUuid: ActorUUID) {
@@ -255,15 +292,18 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
     async updateTargets(event: JQuery.ClickEvent) {
         const targets = (() => {
-            const controlled = canvas.tokens.controlled.map(t => t.actor).filter(t => !!t) as ActorPTR2e[];
-            if(controlled.length) {
-                if(!(controlled.length === 1 && controlled[0].uuid === this.origin.uuid)) return controlled;
+            const controlled = canvas.tokens.controlled
+                .map((t) => t.actor)
+                .filter((t) => !!t) as ActorPTR2e[];
+            if (controlled.length) {
+                if (!(controlled.length === 1 && controlled[0].uuid === this.origin.uuid))
+                    return controlled;
             }
 
-            return [...game.user.targets].map(t => t.actor).filter(t => !!t) as ActorPTR2e[];
-        })()
-        if(!targets.length) return;
-        
+            return [...game.user.targets].map((t) => t.actor).filter((t) => !!t) as ActorPTR2e[];
+        })();
+        if (!targets.length) return;
+
         await this.attack.statistic?.check.roll({
             createMessage: false,
             targets,
@@ -278,9 +318,9 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                     accuracy: r.rolls.accuracy!.toJSON(),
                     crit: r.rolls.crit!.toJSON(),
                     damage: r.rolls.damage!.toJSON(),
-                }))
+                }));
 
-                if(event.altKey) {
+                if (event.altKey) {
                     this.parent.update({
                         system: {
                             results: newResults,
@@ -288,7 +328,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                     });
                     return;
                 }
-                
+
                 //@ts-expect-error
                 const updateResults = this._source.results.concat(newResults);
 
@@ -297,7 +337,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                         results: updateResults,
                     },
                 });
-            }
+            },
         });
     }
 
@@ -309,6 +349,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             this.applyDamage(targetUuid);
         });
         html.find(".update-targets").on("click", this.updateTargets.bind(this));
+        html.find("[data-action='consume-pp']").on("click", this.spendPP.bind(this));
     }
 }
 
@@ -318,13 +359,14 @@ interface AttackMessageSystem
     _source: SourceFromSchema<AttackMessageSchema>;
     attack: AttackPTR2e;
     context: Maybe<AttackMessageRenderContext>;
-    overrides: Collection<{value: AccuracySuccessCategory, uuid: ActorUUID}>;
+    overrides: Collection<{ value: AccuracySuccessCategory; uuid: ActorUUID }>;
 }
 type AttackMessageRenderContext = {
     origin: ActorPTR2e;
     attack: AttackPTR2e;
     hasDamage: boolean;
     results: Map<ActorUUID, AttackMessageRenderContextData>;
+    pp: ModelPropsFromSchema<PPSchema>;
 };
 
 type AttackMessageRenderContextData = {
@@ -353,17 +395,34 @@ type AttackMessageSchema = {
     >;
     overrides: CollectionField<
         foundry.data.fields.SchemaField<OverrideSchema>,
-        foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<OverrideSchema>>[],
-        foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<OverrideSchema>>[],
+        foundry.data.fields.SourcePropFromDataField<
+            foundry.data.fields.SchemaField<OverrideSchema>
+        >[],
+        foundry.data.fields.ModelPropFromDataField<
+            foundry.data.fields.SchemaField<OverrideSchema>
+        >[],
         true,
         false,
         true
+    >;
+    pp: foundry.data.fields.SchemaField<
+        PPSchema,
+        foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<PPSchema>>,
+        foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<PPSchema>>,
+        true,
+        false,
+        false
     >;
 };
 
 type OverrideSchema = {
     value: SlugField<true, false, false>;
     uuid: foundry.data.fields.DocumentUUIDField<"Actor", true, false, false>;
+};
+
+type PPSchema = {
+    spent: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+    cost: foundry.data.fields.NumberField<number, number, true, false, true>;
 };
 
 type ResultData = foundry.data.fields.ModelPropFromDataField<ResultSchema>;

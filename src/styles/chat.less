@@ -87,6 +87,28 @@
                         border: unset;
                         object-fit: scale-down;
                     }
+
+                    place-content: center;
+                    a[data-action="consume-pp"] {
+                        &.spent {
+                            color: #9e7d10;
+                        }
+
+                        &.unspent {
+                            color: #f8cf18;
+
+                            @keyframes glow-pp {
+                                from {
+                                    text-shadow: 0 0 1px black;
+                                }
+                                to {
+                                    text-shadow: 0 0 8px black;
+                                }
+                            }
+
+                            animation: glow-pp 1.5s infinite alternate;
+                        }
+                    }
                 }
 
                 h3 {

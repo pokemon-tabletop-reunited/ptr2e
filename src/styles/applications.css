@@ -3321,11 +3321,14 @@ body .application.sheet .form-group {
 .application.sheet.modifier-popup main footer {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: space-evenly;
   align-items: center;
 }
+.application.sheet.modifier-popup main footer .form-group {
+  flex: 0 0 50%;
+}
 .application.sheet.modifier-popup main footer button {
-  flex: 0 0 60%;
+  flex: 0 0 40%;
 }
 .application.sheet.modifier-popup.attack main {
   padding: 0.5rem;

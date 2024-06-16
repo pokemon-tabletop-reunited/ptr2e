@@ -3326,11 +3326,15 @@ body {
             footer {
                 display: flex;
                 flex-direction: row;
-                justify-content: center;
+                justify-content: space-evenly;
                 align-items: center;
 
+                .form-group {
+                    flex: 0 0 50%;
+                }
+
                 button {
-                    flex: 0 0 60%;
+                    flex: 0 0 40%;
                 }
             }
 

@@ -94,6 +94,10 @@ interface CheckRollContext extends BaseRollContext {
     isReroll?: boolean;
     /** Omitted Subrolls */
     omittedSubrolls?: Set<'accuracy' | 'crit' | 'damage'>;
+    /** PP Cost */
+    ppCost?: number;
+    /** Should PP be consumed */
+    consumePP?: boolean;
 }
 
 export type { AttackRollParams, BaseRollContext, CheckRollContext, DamageRollParams, RollParameters, RollData};

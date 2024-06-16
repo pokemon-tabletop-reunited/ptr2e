@@ -374,6 +374,17 @@ class CheckPTR2e {
             });
         }
 
+        if(context.ppCost && context.consumePP) {
+            const actor = game.actors.get(context.actor?.id);
+            if(actor) {
+                const pp = actor.system.powerPoints.value;
+                await actor.update({
+                    "system.powerPoints.value": pp - context.ppCost,
+                });
+                ui.notifications.info(`You have ${pp - context.ppCost} power points remaining. (Used ${context.ppCost})`);
+            }
+        }
+
         const message = await (() => {
             if (!context.createMessage) return null;
 

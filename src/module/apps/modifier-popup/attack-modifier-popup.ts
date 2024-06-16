@@ -33,6 +33,7 @@ export class AttackModifierPopup extends ModifierPopup {
 
     sharedModifiers: Collection<ModifierPTR2e>;
     targets: ActorUUID[];
+    ppCost: number | null;
 
     constructor(
         check: CheckModifier,
@@ -45,6 +46,7 @@ export class AttackModifierPopup extends ModifierPopup {
         super(check, context, options);
 
         this.targets = Object.keys(context.contexts) as ActorUUID[];
+        this.ppCost = context.ppCost ?? null;
 
         this.sharedModifiers = sharedModifiers;
         this.originallyEnabled = new Set(
@@ -64,7 +66,9 @@ export class AttackModifierPopup extends ModifierPopup {
                             ? "accuracy-stage"
                             : method === "flat"
                               ? "accuracy-flat"
-                              : "invalid";
+                              : method === "percentile"
+                                ? "accuracy-percentile"
+                                : "invalid";
                     case "crit":
                         return method === "stage" ? "crit-stage" : "invalid";
                     case "power":
@@ -79,10 +83,11 @@ export class AttackModifierPopup extends ModifierPopup {
             const sortOrder = {
                 "accuracy-stage": 1,
                 "accuracy-flat": 2,
-                "crit-stage": 3,
-                "power-percentile": 4,
-                "damage-percentile": 5,
-                invalid: 6,
+                "accuracy-percentile": 3,
+                "crit-stage": 4,
+                "power-percentile": 5,
+                "damage-percentile": 6,
+                invalid: 7,
             };
 
             const checkModifiers = this.check.modifiers.map((m) => {
@@ -186,6 +191,9 @@ export class AttackModifierPopup extends ModifierPopup {
             });
         })();
 
+        //TODO: Turn into game setting
+        const consumePP = this.ppCost ? true : false;
+
         return {
             modifiers,
             rollModes: CONFIG.Dice.rollModes,
@@ -194,6 +202,8 @@ export class AttackModifierPopup extends ModifierPopup {
                     ? game.settings.get("core", "rollMode")
                     : this.context.rollMode,
             avatarScroll: this.targets.length > 9,
+            consumePP,
+            ppCost: this.ppCost,
         };
     }
 
@@ -308,9 +318,14 @@ export class AttackModifierPopup extends ModifierPopup {
                 errors.push("Modifier value must not be zero.");
             }
             if (
-                !["accuracy-stage", "accuracy-flat", "crit-stage", "damage-percent", "power-percent"].includes(
-                    modifierType
-                )
+                ![
+                    "accuracy-stage",
+                    "accuracy-flat",
+                    "accuracy-percent",
+                    "crit-stage",
+                    "damage-percent",
+                    "power-percent",
+                ].includes(modifierType)
             ) {
                 errors.push("Invalid modifier type. Please select a valid modifier type.");
             }
@@ -328,6 +343,8 @@ export class AttackModifierPopup extends ModifierPopup {
                             return { method: "stage", type: "accuracy" };
                         case "accuracy-flat":
                             return { method: "flat", type: "accuracy" };
+                        case "accuracy-percent":
+                            return { method: "percentile", type: "accuracy" };
                         case "crit-stage":
                             return { method: "stage", type: "crit" };
                         case "damage-percent":
@@ -395,6 +412,9 @@ export class AttackModifierPopup extends ModifierPopup {
 
         const result = formData.object;
         const rollMode = result.rollMode as RollMode;
+
+        const consumePP = result["consume-pp"] == true;
+        this.context.consumePP = consumePP;
 
         this.resolve({ rollMode });
         this.promise = null;
