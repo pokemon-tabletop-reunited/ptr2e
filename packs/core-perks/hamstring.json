@@ -23,7 +23,7 @@
             }
         ],
         "slug": "hamstring",
-        "description": "<p>On a Critical Hit, you inflict -2 Speed Stages for 5 Activations.</p>",
+        "description": "<p>On a Critical Hit, you inflict -1 Speed Stages for 5 Activations.</p>",
         "traits": [],
         "prerequisites": [
             "None"
@@ -57,62 +57,5 @@
             "type": "normal"
         }
     },
-    "effects": [
-        {
-            "name": "Hamstring",
-            "img": "icons/svg/down.svg",
-            "type": "affliction",
-            "duration": {
-                "turns": 5,
-                "startTime": 1703098388,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "startRound": 1,
-                "startTurn": 0
-            },
-            "system": {
-                "changes": [
-                    {
-                        "type": "basic",
-                        "key": "system.attributes.spe.stage",
-                        "value": -2,
-                        "predicate": [],
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false
-                    }
-                ],
-                "formula": "",
-                "type": "damage",
-                "removeOnRecall": false,
-                "removeAfterCombat": true,
-                "traits": [],
-                "slug": null,
-                "stacks": 0,
-                "priority": 50
-            },
-            "description": "The afflicted creature’s default SPATK stages are reduced by 1.",
-            "statuses": [
-                "dull"
-            ],
-            "_id": "odIcRJI0tonoHoWY",
-            "disabled": false,
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": false,
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.327",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.1.5.2",
-                "createdTime": 1718630096488,
-                "modifiedTime": 1718630096488,
-                "lastModifiedBy": "y4EIjJlrc2eCclW7"
-            }
-        }
-    ]
+    "effects": []
 }
