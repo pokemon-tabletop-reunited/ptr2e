@@ -1,52 +1,44 @@
 {
-  "name": "High Horsepower",
-  "type": "move",
-  "img": "/systems/ptr2e/img/svg/ground_icon.svg",
-  "system": {
-    "slug": "high-horsepower",
-    "description": "",
-    "traits": [
-      "dash",
-      "push-2",
-      "contact"
-    ],
-    "actions": [
-      {
+    "name": "High Horsepower",
+    "type": "move",
+    "img": "/systems/ptr2e/img/svg/ground_icon.svg",
+    "system": {
         "slug": "high-horsepower",
-        "name": "High Horsepower",
-        "type": "attack",
         "traits": [
-          "dash",
-          "push-2",
-          "contact"
+            "dash",
+            "push-2",
+            "contact"
         ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 7,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "physical",
-        "power": 95,
-        "accuracy": 95,
-        "types": [
-          "ground"
+        "actions": [
+            {
+                "slug": "high-horsepower",
+                "name": "High Horsepower",
+                "type": "attack",
+                "traits": [
+                    "dash",
+                    "push-2",
+                    "contact"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 1,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 7
+                },
+                "category": "physical",
+                "power": 95,
+                "accuracy": 95,
+                "types": [
+                    "ground"
+                ],
+                "img": "icons/svg/explosion.svg"
+            }
         ],
-        "description": null,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null
-  },
-  "_id": "1NFV0iOtfQBklGoj",
-  "effects": []
+        "grade": "B"
+    },
+    "_id": "1NFV0iOtfQBklGoj",
+    "effects": []
 }
