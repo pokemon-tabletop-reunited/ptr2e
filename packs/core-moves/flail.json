@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "flail",
-    "description": "Effect: Flail's Power increases by +20 for every 10% of missing HP the user has, up to a maximum of 200.",
+    "description": "Effect: This attack's Power ranges based on how damaged the user is, ranging from 20 to 200.\n<blockquote>Damage Formula: Power = min(20, (200 x (UserMaxHP-UserCurrentHP)/UserMaxHP + 20))</blockquote>",
     "traits": [
       "contact"
     ],
@@ -34,7 +34,7 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: Flail's Power increases by +20 for every 10% of missing HP the user has, up to a maximum of 200.",
+        "description": "Effect: This attack's Power ranges based on how damaged the user is, ranging from 20 to 200.\n<blockquote>Damage Formula: Power = min(20, (200 x (UserMaxHP-UserCurrentHP)/UserMaxHP + 20))</blockquote>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
