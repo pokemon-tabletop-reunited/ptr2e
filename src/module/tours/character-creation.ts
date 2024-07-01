@@ -202,7 +202,7 @@ export class CharacterCreationTour extends PTRTour {
                             "name": "Fainted",
                             "img": "/systems/ptr2e/img/conditions/fainted.svg",
                             "type": "passive",
-                            "description": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-condition], @Trait[minor-condition], @Trait[pseudo-affliction], and @Trait[stat-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
+                            "description": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-condition], @Trait[minor-condition], @Trait[pseudo-affliction], and @Trait[stage-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
                             "system": {
                                 "changes": [],
                                 "removeOnRecall": false,

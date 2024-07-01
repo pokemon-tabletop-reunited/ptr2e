@@ -4,9 +4,10 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "fiesta",
-    "description": "Effect: 5 Treats are randomly scattered in the range of this move. A creature that ends their activation on a square with a Treat heals 6 Ticks of HP, and that Treat disappears.",
+    "description": "Effect: 5 Treats are randomly scattered on standing surfaces in the range of this attack. A creature that ends their activation on a square with a Treat heals 6 Ticks of HP, and that Treat disappears.",
     "traits": [
-      "hazard"
+      "hazard",
+      "healing"
     ],
     "actions": [
       {
@@ -14,11 +15,12 @@
         "name": "Fiesta",
         "type": "attack",
         "traits": [
-          "hazard"
+          "hazard",
+          "healing"
         ],
         "range": {
-          "target": "creature",
-          "distance": 5,
+          "target": "emanation",
+          "distance": 8,
           "unit": "m"
         },
         "cost": {
@@ -34,7 +36,7 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: 5 Treats are randomly scattered in the range of this move. A creature that ends their activation on a square with a Treat heals 6 Ticks of HP, and that Treat disappears.",
+        "description": "Effect: 5 Treats are randomly scattered on standing surfaces in the range of this move. A creature that ends their activation on a square with a Treat heals 6 Ticks of HP, and that Treat disappears.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

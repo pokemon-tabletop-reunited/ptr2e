@@ -1921,7 +1921,7 @@
         "slug": "earthbound",
         "label": "Earthbound",
         "related": [],
-        "description": "Hits all creatures in area of attack, so long as the area-of-effect affects surfaces/objects are connected or touching, so a creature sitting on a tree branch is hit if a creature on the ground below is targeted and the tree itself is in the affected area."
+        "description": "The attack/ability hits all creatures in area-of-effect, so long as the area-of-effect affects surfaces/objects are connected or touching, so a creature sitting on a tree branch is hit if a creature on the ground below is targeted and the tree itself is in the affected area. Attacks with this trait are one step more effective against creatures with the Grounded Affliction."
     },
     {
         "slug": "environ",
@@ -1963,7 +1963,7 @@
         "slug": "hazard",
         "label": "Hazard",
         "related": [],
-        "description": "Denotes if an attack/ability/effect creates or interacts with Hazards. Hazards are usually static objects occupying a single space on the ground or another surface that cause detrimental effects when a creature passes through that space."
+        "description": "Denotes if an attack/ability/effect creates or interacts with Hazards. Hazards are usually static objects occupying a single space on the ground or another surface that cause detrimental effects when a creature passes through that space. Hazards last the duration of a combat unless destroyed prematurely or otherwise specified in their source's effect."
     },
     {
         "slug": "healing",
@@ -2410,6 +2410,12 @@
         "description": "On hit, the user takes damage equal to 1/2 of the amount the attack deals to a creature."
     },
     {
+        "slug": "room",
+        "label": "Room",
+        "related": [],
+        "description": "Denotes if an attack/ability/effect interacts with Rooms. Rooms apply their effects to all creatures on the Field."
+    },
+    {
         "slug": "set-up",
         "label": "Set-Up",
         "related": [],
@@ -2473,7 +2479,7 @@
         "slug": "terrain",
         "label": "Terrain",
         "related": [],
-        "description": "Denotes if an attack/ability/effect interacts with Terrains."
+        "description": "Denotes if an attack/ability/effect interacts with Terrains. Terrains apply their effects to all creatures on the Field that are in contact with a surface, while creatures in the air or in a liquid (whether floating/ traversing naturally or by some other effect) are not affected."
     },
     {
         "slug": "transform",
@@ -2548,8 +2554,8 @@
         "description": "Denotes is an effect is a Pseudo Status Affliction. Pseudo Status Afflictions are more positive in nature, or break other conventions associated with Major and Minor Status Afflictions.\nSUBJECT TO CHANGE"
     },
     {
-        "slug": "stat-change",
-        "label": "Stat Change",
+        "slug": "stage-change",
+        "label": "Stage change",
         "related": [],
         "description": "Denotes if an effect alters a creature's Stat stages."
     },
@@ -2622,7 +2628,7 @@
         "slug": "dark",
         "label": "Dark",
         "related": [],
-        "description": "This represents the Dark Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle)."
+        "description": "This represents the Dark Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle). These creatures are unaffected by Status-category attacks or effects that possess [Priority X]."
     },
     {
         "slug": "dragon",
@@ -2634,7 +2640,7 @@
         "slug": "electric",
         "label": "Electric",
         "related": [],
-        "description": "This represents the Electric Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle)."
+        "description": "This represents the Electric Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle). These creatures cannot gain Paralysis and are immune to the negative effects of Electric-Type [Hazard] effects."
     },
     {
         "slug": "fairy",
@@ -2652,37 +2658,37 @@
         "slug": "fire",
         "label": "Fire",
         "related": [],
-        "description": "This represents the Fire Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle)."
+        "description": "This represents the Fire Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle). These creatures cannot gain Burn."
     },
     {
         "slug": "flying",
         "label": "Flying",
         "related": [],
-        "description": "This represents the Flying Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle). Flying-Type creatures lose their immunity to Ground-Type attacks that possess the [Contact], [Missile], [Ray], and/or [Pulse] Traits."
+        "description": "This represents the Flying Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle). Flying-Type creatures lose their immunity to Ground-Type attacks that possess the [Contact], [Missile], [Ray], and [Pulse] Traits, with these attacks instead dealing neutral damage, while [Earthbound] attacks are instead resisted."
     },
     {
         "slug": "ghost",
         "label": "Ghost",
         "related": [],
-        "description": "This represents the Ghost Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle)."
+        "description": "This represents the Ghost Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle). These creatures cannot gain Stuck."
     },
     {
         "slug": "grass",
         "label": "Grass",
         "related": [],
-        "description": "This represents the Grass Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle)."
+        "description": "This represents the Grass Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle). These creatures cannot gain Leech are unaffected by [Powder] attacks and effects."
     },
     {
         "slug": "ground",
         "label": "Ground",
         "related": [],
-        "description": "This represents the Ground Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle)."
+        "description": "This represents the Ground Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle). These creatures are immune to the negative effects of Dusty [Weather]."
     },
     {
         "slug": "ice",
         "label": "Ice",
         "related": [],
-        "description": "This represents the Ice Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle)."
+        "description": "This represents the Ice Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle). These creatures cannot gain Frozen and are immune to the negative effects of Ice-Type [Hazard] effects."
     },
     {
         "slug": "normal",
@@ -2700,7 +2706,7 @@
         "slug": "poison",
         "label": "Poison",
         "related": [],
-        "description": "This represents the Poison Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle)."
+        "description": "This represents the Poison Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle). These creatures cannot gain Poison or Blight and are immune to the negative effects of Poison-Type [Hazard] effects."
     },
     {
         "slug": "psychic",
@@ -2718,7 +2724,7 @@
         "slug": "steel",
         "label": "Steel",
         "related": [],
-        "description": "This represents the Steel Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle)."
+        "description": "This represents the Steel Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle). These creatures cannot gain Poison or Blight."
     },
     {
         "slug": "water",
