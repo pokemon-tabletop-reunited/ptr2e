@@ -97,7 +97,6 @@ const BaseSkills = {
     research: { slug: "research" },
     ride: { slug: "ride" },
     running: { slug: "running" },
-    archeology: { slug: "archeology", group: "science" },
     astronomy: { slug: "astronomy", group: "science" },
     biology: { slug: "biology", group: "science" },
     botany: { slug: "botany", group: "science" },
