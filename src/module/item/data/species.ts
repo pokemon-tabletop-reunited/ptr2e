@@ -317,19 +317,19 @@ class SpeciesSystem extends SpeciesExtension {
                 }
                 case "length": {
                     switch(true) {
-                        case height < 0.5279:
+                        case height < 0.5073:
                             return 1;
-                        case height < 1.1878:
+                        case height < 1.1413:
                             return 2;
-                        case height < 2.2877:
+                        case height < 2.1981:
                             return 3;
-                        case height < 5.2793:
+                        case height < 5.0725:
                             return 4;
-                        case height < 9.5027:
+                        case height < 9.1305:
                             return 5;
-                        case height < 19.0054:
+                        case height < 18.2611:
                             return 6;
-                        case height < 28.5082:
+                        case height < 27.3916:
                             return 7;
                         default:
                             return 8;
