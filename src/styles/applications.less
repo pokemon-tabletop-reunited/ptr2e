@@ -3023,6 +3023,56 @@ body {
                         border: 1px solid var(--border-theme-color);
                         border-radius: 8px;
 
+                        .attached-input {
+                            align-items: center;
+                            display: flex;
+                            flex: 2;
+                            justify-content: center;
+
+                            input {
+                                border-top-left-radius: 0;
+                                border-bottom-left-radius: 0;
+                                margin: 0;
+                                flex: 1;
+                            }
+                        }
+
+                        [data-action="add-bracket"] {
+                            flex: 0 0 auto;
+                        }
+
+                        .brackets {
+                            margin-left: 9.5em;
+                            .bracket {
+                                align-items: center;
+                                display: flex;
+                                gap: 4px;
+                                margin-bottom: 3px;
+
+                                .value {
+                                    flex: 1;
+                                }
+
+                                label {
+                                    align-items: center;
+                                    display: flex;
+                                    gap: 4px;
+                                    font-weight: 500;
+                                    white-space: nowrap;
+                                }
+                            }
+
+                            .range {
+                                display: flex;
+                                gap: 3px;
+                                align-items: center;
+
+                                input {
+                                    width: 40px;
+                                }
+                            }
+                        }
+
                         header {
                             display: flex;
                             justify-content: space-between;

@@ -3087,6 +3087,48 @@ body .application.sheet .form-group {
   border: 1px solid var(--border-theme-color);
   border-radius: 8px;
 }
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .attached-input {
+  align-items: center;
+  display: flex;
+  flex: 2;
+  justify-content: center;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .attached-input input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin: 0;
+  flex: 1;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change [data-action="add-bracket"] {
+  flex: 0 0 auto;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .brackets {
+  margin-left: 9.5em;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .brackets .bracket {
+  align-items: center;
+  display: flex;
+  gap: 4px;
+  margin-bottom: 3px;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .brackets .bracket .value {
+  flex: 1;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .brackets .bracket label {
+  align-items: center;
+  display: flex;
+  gap: 4px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .brackets .range {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .brackets .range input {
+  width: 40px;
+}
 .application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header {
   display: flex;
   justify-content: space-between;

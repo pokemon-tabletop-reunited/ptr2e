@@ -306,6 +306,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         }
 
         this.health.max = this.attributes.hp.value;
+        this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
         this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
         this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
