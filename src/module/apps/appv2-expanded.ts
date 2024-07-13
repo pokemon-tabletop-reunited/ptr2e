@@ -130,6 +130,11 @@ export class ActorSheetV2Expanded<
         this._dragDropHandlers = this._createDragDropHandlers();
     }
 
+    override get title() {
+        if ( !this.actor.isToken ) return this.actor.name;
+        return `[${game.i18n.localize(TokenDocument.metadata.label)}] ${this.actor.name}`;
+    }
+
     protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {
         event.preventDefault();
         const { handler, closeOnSubmit } = config;
