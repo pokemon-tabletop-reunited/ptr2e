@@ -1,45 +1,99 @@
 {
-  "name": "Bulk Up",
-  "type": "move",
-  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
-  "system": {
-    "slug": "bulk-up",
-    "description": "Effect: The user gains +1 ATK and DEF stages for 5 activations.",
-    "traits": [],
-    "actions": [
-      {
+    "name": "Bulk Up",
+    "type": "move",
+    "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+    "system": {
         "slug": "bulk-up",
-        "name": "Bulk Up",
-        "type": "attack",
-        "traits": [],
-        "range": {
-          "target": "self",
-          "distance": 0,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "simple",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "fighting"
-        ],
         "description": "Effect: The user gains +1 ATK and DEF stages for 5 activations.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "C"
-  },
-  "_id": "1FYJJI5p5AJhZMET",
-  "effects": []
+        "traits": [],
+        "actions": [
+            {
+                "slug": "bulk-up",
+                "name": "Bulk Up",
+                "type": "attack",
+                "traits": [],
+                "range": {
+                    "target": "self",
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "simple",
+                    "powerPoints": 5
+                },
+                "category": "status",
+                "types": [
+                    "fighting"
+                ],
+                "description": "Effect: The user gains +1 ATK and DEF stages for 5 activations.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "grade": "C"
+    },
+    "_id": "1FYJJI5p5AJhZMET",
+    "effects": [
+        {
+            "name": "Bulk Up",
+            "img": "icons/svg/downgrade.svg",
+            "type": "affliction",
+            "duration": {
+                "turns": 5,
+                "startTime": 1703098388,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "startRound": 1,
+                "startTurn": 0
+            },
+            "system": {
+                "changes": [
+                    {
+                        "type": "basic",
+                        "key": "system.attributes.atk.stage",
+                        "value": 1,
+                        "predicate": [],
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false
+                    },
+                    {
+                        "type": "basic",
+                        "key": "system.attributes.def.stage",
+                        "value": 1,
+                        "predicate": [],
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false
+                    }
+                ],
+                "formula": "",
+                "type": "damage",
+                "removeOnRecall": false,
+                "removeAfterCombat": true,
+                "traits": [],
+                "slug": null,
+                "stacks": 0,
+                "priority": 50
+            },
+            "description": "The afflicted creature’s default ATK stages are reduced by 1.",
+            "statuses": [],
+            "_id": "pMEMtVFbPh2kDdLy",
+            "disabled": false,
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": false,
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.327",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.1.5.2",
+                "createdTime": 1718630000702,
+                "modifiedTime": 1718630000702,
+                "lastModifiedBy": "y4EIjJlrc2eCclW7"
+            }
+        }
+    ]
 }
