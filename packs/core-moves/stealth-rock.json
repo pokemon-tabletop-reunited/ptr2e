@@ -4,9 +4,10 @@
   "img": "/systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "slug": "stealth-rock",
-    "description": "Effect: The user places 5 floating rock mine Hazards within Range. When a creature moves within 2m of a rock mine, it homes in on them and deals a Tick of Rock-Type damage.",
+    "description": "Effect: The user places 5 floating rock mine Hazards within Range. When a creature moves within 3m of a rock mine, it homes in on them and deals a Tick of Rock-Type damage.",
     "traits": [
-      "hazard"
+      "hazard",
+      "missile"
     ],
     "actions": [
       {
@@ -14,11 +15,12 @@
         "name": "Stealth Rock",
         "type": "attack",
         "traits": [
-          "hazard"
+          "hazard",
+          "missile"
         ],
         "range": {
-          "target": "creature",
-          "distance": 10,
+          "target": "emanation",
+          "distance": 8,
           "unit": "m"
         },
         "cost": {
@@ -34,7 +36,7 @@
         "types": [
           "rock"
         ],
-        "description": "Effect: The user places 5 floating rock mine Hazards within Range. When a creature moves within 2m of a rock mine, it homes in on them and deals a Tick of Rock-Type damage.",
+        "description": "Effect: The user places 5 floating rock mine Hazards within Range. When a creature moves within 3m of a rock mine, it homes in on them and deals a Tick of Rock-Type damage.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

@@ -246,7 +246,7 @@
                     "evasive": "Evasive"
                 },
                 "Descriptions": {
-                    "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-condition], @Trait[minor-condition], @Trait[pseudo-affliction], and @Trait[stat-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
+                    "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-condition], @Trait[minor-condition], @Trait[pseudo-affliction], and @Trait[stage-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
                     "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has @Affliction[weak] while Burn is active. @Trait[fire]-Type creatures cannot be Burned.",
                     "poison": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature also has Dull while Poison is active.",
                     "blight": "At the end of the afflicted creature’s Activation, it loses X Stacks of Blight, where X is 2<sup style='font-size: x-small;'># of Activations passed with Blight</sup> and takes a Tick of HP per Stack lost. The creature also has Dull while Blight is active. When a creature receives Blight, it loses the Poison Condition, with Blight gaining 33% of its remaining Poison Stacks as extra Stacks on Blight. When afflicted with Poisoned X while Blighted, the creature gains +1 to its Blight Stacks.",
@@ -273,19 +273,19 @@
                     "disabled":"One of the afflicted creature’s attacks cannot be used, under any circumstances. The move in question is determined by the source of the disabled effect, usually being “the last attack the target used.” If this would prevent them from using any attack, they may Struggle instead.",
                     "nullified":"One of the afflicted creature’s abilities is negated, and cannot be activated or benefited from. The ability in question is determined by the source of the nullification, usually determined randomly.",
                     "suppressed": "The afflicted creature spends 50% more PP on all actions that use PP.",
-                    "lifted": "the afflicted creature is held aloft, unable to act normally. The creature cannot use <Movement> other than [Teleport] while Lifted and is otherwise considered Stuck for the duration. A Lifted creature also suffers -6 EVA stages.",
+                    "lifted": "the afflicted creature is held aloft, unable to act normally. The creature cannot use <Movement> other than [Teleport] while Lifted and is otherwise considered Stuck and Raised for the duration. A Lifted creature also suffers -6 EVA stages.",
                     "raised": "While a creature is Raised, it is immune to attacks and effects with the [Earthbound] trait.",
                     "harden": "While under the effect of Harden, the afflicted creature’s [Contact] attacks have +20 Power, and their [Dash] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
-                    "sharpen": "While under the effect of Sharpen, the afflicted creature’s [Dash] attacks gain [Sharp], and their [Sharp] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
+                    "sharpen": "While under the effect of Sharpen, the afflicted creature’s [Contact] attacks gain [Sharp], and their [Sharp] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
                     "destined": "when the afflicted creature deals damage with a Damaging Attack to the source of Destined, the afflicted creature is inflicted with the same amount of damage.",
-                    "disguised": "The user is not easily recognized by sight. Any creature that attempts to see through Disguised must make a contested Psychology or Spot Hidden skill check against the Disguised creature’s Disguise skill, and upon success ignores any effects that require Disguised to be active.",
+                    "disguised": "The user is not easily recognized by sight. Any creature that attempts to see through Disguised must make a contested Psychology or Spot skill check against the Disguised creature’s Disguise skill, and upon success ignores any effects that require Disguised to be active.",
                     "braced": "while a creature is Braced, its default DEF and SPDEF stages are increased by +2 and its default ATK and SP.ATK stages are decreased by 1. Additionally, a Braced creature is immune to critical damage. A creature loses the Brace condition after it moves or makes an attack of its own accord.",
                     "duel": "while a creature is afflicted by Duel, the creature and the source of the condition have [Crit 2] on attacks they use against one another, and take and deal 33% less damage from/to creatures other than themselves. Pokémon afflicted with Duel or Pokemon that inflict Duel cannot leave battle or be switched out, except from the effects of attacks or abilities. If either the source or afflicted creature Faint or are otherwise removed from battle, the Duel condition is removed.",
                     "engulfed": "While a creature is afflicted with Engulfed, it is also considered to be Bound and Stuck. While Engulfed the afflicted creature cannot be targeted by Attacks, and it can only target the creature that has Engulfed it with Attacks, although these Attacks are resisted by two stages.",
                     "curled": "while Curled, a creature cannot use Held Items and has +1 default DEF stage. Additionally, moves with the [Curl] Trait have their Power doubled while their user is Curled.",
                     "chanted": "If an attack were to deal critical damage to a creature with Chanted, the attack instead deals damage as if it were not a Critical Hit.",
                     "choice-locked": "while Choice-Locked, a creature may only use the last attack or action it used.",
-                    "grounded": "While Grounded, creatures become unable to use their [Flying] movement, nor can they be Lifted or Raised. They are also subject to all active Terrain effects even if they had the [Hover] Trait.",
+                    "grounded": "While Grounded, creatures become unable to use their [Flight] movement, nor can they be Lifted or Raised and have those effects removed.",
                     "cursed": "While Cursed, an afflicted creature loses three ticks of HP at the end of each of their Activations.",
                     "true-sight": "The afflicted creature ignores invisibility and illusions.",
                     "shrink": "The afflicted creature’s Size Category is reduced by one.",
@@ -634,7 +634,7 @@
                 "Hint": "The speed of the actor.",
                 "Stage": {
                     "Label": "Spd Stages",
-                    "Hint": "The speed stages of the actor."
+                    "Hint": "The SPD stages of the actor."
                 }
             },
             "accuracy": {
@@ -1483,7 +1483,7 @@
             },
             "running": {
                 "label": "Running",
-                "hint": "The Running skill is for when overland or flying creatures gotta go fast. Use this skill to gain additional movement allowance after you've consumed all of yours in combat, or to participate in feats of speed during events such as a Pokeathlon"
+                "hint": "The Running skill is for when overland creatures gotta go fast. Use this skill to gain additional movement allowance after you've consumed all of yours in combat, or to participate in feats of speed during events such as a Pokeathlon"
             },
             "sleight-of-hand": {
                 "label": "Sleight of Hand",
@@ -1647,11 +1647,7 @@
             },
             "science": {
                 "label": "Science",
-                "hint": "The Science group skill covers a number of fields, purchased separately. Examples include Astronomy, Biology, Botany, Chemistry, Cryptography, Forensics, Geology, Mathematics, Meteorology, Parapsychology, Pharmacy, Physics, Zoology. Pokémon-specific fields include Meganobiology, Terastology, Ultrology, Paradoxian Studies. The GM may add to or remove from this list as appropriate to their campaign. This skill represents specialized knowledge in a field and will generally rely upon either specific perks, or a situational application that the GM or Player must call for.",
-                "archeology": {
-                    "label": "Archeology",
-                    "hint": "This skill is used to study ancient things. This includes studying ruins, knowledge of past civilizations, and deciphering lost inscriptions."
-                },
+                "hint": "The Science group skill covers a number of fields, purchased separately. Examples include Astronomy, Biology, Botany, Chemistry, Cryptography, Forensics, Geology, Mathematics, Meteorology, Parapsychology, Pharmacy, Physics, Zoology. Pokémon-specific fields include Megalobiology, Terastology, Ultrology, Paradoxian Studies. The GM may add to or remove from this list as appropriate to their campaign. This skill represents specialized knowledge in a field and will generally rely upon either specific perks, or a situational application that the GM or Player must call for.",
                 "astronomy": {
                     "label": "Astronomy",
                     "hint": "This skill is used to study the stars and planets."
@@ -1704,13 +1700,17 @@
                     "label": "Zoology",
                     "hint": "This skill is used to study animals."
                 },
-                "meganobiology": {
-                    "label": "Meganobiology",
-                    "hint": "This skill is used to study the biology of Mega Evolutions."
+                "eschatobiology": {
+                    "label": "Eschatobiology",
+                    "hint": "This skill is used to study the biology and mechanics governing Mega Evolution."
+                },
+                "megalobiology": {
+                    "label": "Megalobiology",
+                    "hint": "This skill is used to study the Dynamax Phenomenon."
                 },
                 "terastology": {
                     "label": "Terastology",
-                    "hint": "This skill is used to study the biology of Gigantamax forms."
+                    "hint": "This skill is used to study the Terastal Phenomenon."
                 },
                 "ultrology": {
                     "label": "Ultrology",

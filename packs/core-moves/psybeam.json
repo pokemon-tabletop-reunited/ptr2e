@@ -1,49 +1,42 @@
 {
-  "name": "Psybeam",
-  "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
-  "system": {
-    "slug": "psybeam",
-    "description": "Effect: On hit, the target has a 10% chance of becoming Confused 5.",
-    "traits": [
-      "ray"
-    ],
-    "actions": [
-      {
+    "name": "Psybeam",
+    "type": "move",
+    "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+    "system": {
         "slug": "psybeam",
-        "name": "Psybeam",
-        "type": "attack",
-        "traits": [
-          "ray"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 10,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
-        },
-        "category": "special",
-        "power": 65,
-        "accuracy": 100,
-        "types": [
-          "psychic"
-        ],
         "description": "Effect: On hit, the target has a 10% chance of becoming Confused 5.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
-      }
-    ],
-    "container": null,
-    "grade": "B"
-  },
-  "_id": "fzZL7wrQyLNrNwr6",
-  "effects": []
+        "traits": [
+            "ray"
+        ],
+        "actions": [
+            {
+                "slug": "psybeam",
+                "name": "Psybeam",
+                "type": "attack",
+                "traits": [
+                    "ray"
+                ],
+                "range": {
+                    "target": "creature",
+                    "distance": 10,
+                    "unit": "m"
+                },
+                "cost": {
+                    "activation": "complex",
+                    "powerPoints": 2
+                },
+                "category": "special",
+                "power": 65,
+                "accuracy": 100,
+                "types": [
+                    "psychic"
+                ],
+                "description": "Effect: On hit, the target has a 10% chance of becoming Confused 5.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "grade": "D"
+    },
+    "_id": "fzZL7wrQyLNrNwr6",
+    "effects": []
 }
