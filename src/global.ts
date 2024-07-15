@@ -14,6 +14,7 @@ import type EnJSON from "static/lang/en.json";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import TokenPanel from "@module/apps/token-panel.ts";
 import PerkWeb from "@module/canvas/perk-tree/perk-web.ts";
+import { remigrate } from "@system/remigrate.ts";
 
 interface GamePTR2e
     extends Game<
@@ -45,6 +46,9 @@ interface GamePTR2e
             panel: ClockPanel;
         };
         tokenPanel: TokenPanel;
+        system: {
+            remigrate: typeof remigrate;
+        }
     };
 }
 

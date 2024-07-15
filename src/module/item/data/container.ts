@@ -1,9 +1,9 @@
 import { ContainerPTR2e } from "@item";
-import { HasContainer, HasDescription, HasSlug, HasTraits, HasGearData, HasEmbed } from "@module/data/index.ts";
+import { HasContainer, HasDescription, HasSlug, HasTraits, HasGearData, HasEmbed, HasMigrations } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e } from "./system.ts";
 import { GearSystemSource } from "./gear.ts";
 
-const ContainerExtension = HasEmbed(HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel))))), "container");
+const ContainerExtension = HasEmbed(HasMigrations(HasGearData(HasTraits(HasDescription(HasSlug(HasContainer(foundry.abstract.TypeDataModel)))))), "container");
 
 /**
  * @category Item Data Models

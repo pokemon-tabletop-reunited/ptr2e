@@ -25,6 +25,11 @@ class ItemPTR2e<
         return super.sheet as ItemSheetPTR2e<this>;
     }
 
+    /** The recorded schema version of this item, updated after each data migration */
+    get schemaVersion(): number | null {
+        return Number(this.system._migration?.version) || null;
+    }
+
     protected override _initializeSource(
         data: object & { _stats: { systemId: string }; type: string },
         options?: DataModelConstructionOptions<TParent> | undefined

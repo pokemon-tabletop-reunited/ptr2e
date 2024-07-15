@@ -1,12 +1,12 @@
 import { PerkPTR2e } from "@item";
-import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed } from "@module/data/index.ts";
+import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed, HasMigrations } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { PerkNodeConfig } from "@module/canvas/perk-tree/perk-node.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { SetField } from "@module/data/fields/set-field.ts";
 
 const PerkExtension = HasEmbed(
-    HasTraits(HasDescription(HasSlug(HasActions(foundry.abstract.TypeDataModel)))),
+    HasTraits(HasMigrations(HasDescription(HasSlug(HasActions(foundry.abstract.TypeDataModel))))),
     "perk"
 );
 

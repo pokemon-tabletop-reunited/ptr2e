@@ -113,16 +113,16 @@ export default abstract class MoveSystem extends HasEmbed(
                 //@ts-expect-error
                 data.system.actions = [
                     {
-                        name: `${data.name} Attack`,
-                        slug: sluggify(`${data.name} Attack`),
+                        name: `${data.name}`,
+                        slug: sluggify(`${data.name}`),
                         type: "attack",
                     },
                 ];
                 this.parent.updateSource({ "system.actions": data.system.actions });
             } else if (!actions.some((action) => action.type === "attack")) {
                 data.system.actions.unshift({
-                    name: `${data.name} Attack`,
-                    slug: sluggify(`${data.name} Attack`),
+                    name: `${data.name}`,
+                    slug: sluggify(`${data.name}`),
                     type: "attack",
                 });
                 this.parent.updateSource({ "system.actions": data.system.actions });
@@ -131,7 +131,7 @@ export default abstract class MoveSystem extends HasEmbed(
 
         if (!data.img || data.img === "icons/svg/item-bag.svg") {
             this.parent.updateSource({
-                img: "/systems/ptr2e/img/icons/untyped_icon.png",
+                img: "/systems/ptr2e/img/svg/untyped_icon.svg",
             });
         }
 

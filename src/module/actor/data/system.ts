@@ -1,4 +1,4 @@
-import { HasTraits, PokemonType } from "@data";
+import { HasTraits, HasMigrations, PokemonType } from "@data";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { DataField, DataSchema } from "types/foundry/common/data/fields.js";
 import {
@@ -16,8 +16,9 @@ import { getInitialSkillList } from "@scripts/config/skills.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import natureToStatArray, { natures } from "@scripts/config/natures.ts";
+import { MigrationRecord } from "@module/data/mixins/has-migrations.ts";
 
-class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
+class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel)) {
     static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
 
     declare parent: ActorPTR2e<this>;
@@ -493,6 +494,8 @@ type Movement = { method: string; value: number; type: "primary" | "secondary" }
 type ActorSystemSchema = Record<string, DataField<JSONValue, unknown, boolean>> & {
     species: SpeciesSystemModel["_source"];
     traits: string[];
+
+    _migration: MigrationRecord;
 };
 
 export default ActorSystemPTR2e;

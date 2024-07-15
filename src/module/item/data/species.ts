@@ -1,5 +1,5 @@
 import { SpeciesPTR2e } from "@item";
-import { HasDescription, HasEmbed, HasSlug, HasTraits, PTRCONSTS } from "@module/data/index.ts";
+import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS } from "@module/data/index.ts";
 import { PokemonType } from "@data";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
@@ -10,7 +10,7 @@ import SkillPTR2e from "@module/data/models/skill.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 
 const SpeciesExtension = HasEmbed(
-    HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel))),
+    HasMigrations(HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel)))),
     "species"
 );
 

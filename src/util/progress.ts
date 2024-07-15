@@ -9,20 +9,25 @@ export class Progress {
     label: string;
     loader: HTMLElement;
 
-    constructor({ steps = 1 } = {}) {
+    constructor({ steps = 1 }: {steps?: number, label?: string} = {}) {
         this.steps = steps;
         this.counter = -1;
         this.label = "";
     }
 
-    advance(label: string) {
+    advance(label?: string | { by?: number; label?: string }) {
         if(this.counter === this.steps) return;
-        this.counter += 1;
-        this.label = label;
+        if (typeof label === "object") {
+            this.label = label.label || this.label;
+            this.counter += (label.by || 1);
+        } else {
+            this.counter += 1;
+            this.label = label || this.label;
+        }
         this.#updateUI();
     }
 
-    close(label: string) {
+    close(label?: string) {
         if (label) {
             this.label = label;
         }

@@ -107,6 +107,11 @@ class ActorPTR2e<
         );
     }
 
+    /** The recorded schema version of this actor, updated after each data migration */
+    get schemaVersion(): number | null {
+        return Number(this.system._migration?.version) || null;
+    }
+
     get party(): ActorParty | null {
         if (!this.folder) return null;
 
