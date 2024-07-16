@@ -27,7 +27,7 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
     }
 
     get remainingActivations() {
-        return this.parent.duration.remaining;
+        return this.stacks > 0 ? this.stacks : this.parent.duration.remaining;
     }
 
     public onEndActivation(): EndOfTurn {
@@ -40,7 +40,30 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
             // TODO: Implement this case
         }
 
-        const damage = this._calculateDamage();
+        const stacksToRemove = (() => {
+            if(this.slug.startsWith("blight")) {
+                const stacksToRemove = Math.min(this.stacks, Math.pow(2, this.parent.duration.turns! - this.parent.duration.remaining! - 1));
+                return stacksToRemove || 0;
+            }
+
+            return this.stacks > 1 ? 1 : 0;
+        })();
+        if(stacksToRemove) {
+            if(stacksToRemove === this.stacks) {
+                output.type = "delete";
+            }
+            else {
+                output.type = "update";
+
+                //@ts-expect-error
+                output.update = {
+                    _id: this.parent.id,
+                    "system.stacks": this.stacks - stacksToRemove,
+                }
+            }
+        }
+
+        const damage = this._calculateDamage(stacksToRemove);
         if (damage) {
             output.damage = damage;
         }
@@ -52,11 +75,21 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
      * Calculate the damage of the affliction
      * Returns a string of the damage formula
      */
-    protected _calculateDamage(): { formula: string; type: "damage" | "healing" } | void {
+    protected _calculateDamage(stacksToRemove: number): { formula: string; type: "damage" | "healing" } | void {
         if (!this.formula || !this.type) return;
 
+        const formula = Roll.replaceFormulaData(
+            this.formula,
+            {
+                effect: this.parent,
+                actor: this.parent.target,
+                stacksToRemove: stacksToRemove || 0,
+            },
+            { warn: false }
+        );
+
         return {
-            formula: this.formula,
+            formula,
             type: this.type,
         };
     }

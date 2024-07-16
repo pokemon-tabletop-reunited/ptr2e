@@ -69,9 +69,6 @@ export const StatusEffects: StatusEffect[] = [
         name: "PTR2E.Effect.Statuses.Labels.blight",
         img: "/systems/ptr2e/img/conditions/badly-poisoned.svg",
         type: "affliction",
-        duration: {
-            turns: 5,
-        },
         system: {
             changes: [
                 {
@@ -79,11 +76,12 @@ export const StatusEffects: StatusEffect[] = [
                     value: "dull",
                 },
             ],
-            formula: "(1/16 * (pow(2, (@effect.duration.turns - @effect.duration.remaining))))",
+            formula: "(1/16 * @stacksToRemove)",
             type: "damage",
             removeOnRecall: false,
             removeAfterCombat: true,
             traits: ["poison"],
+            stacks: 5
         },
         description: "PTR2E.Effect.Statuses.Descriptions.blight",
     },
