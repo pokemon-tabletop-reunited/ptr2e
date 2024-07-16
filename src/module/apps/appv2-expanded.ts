@@ -565,6 +565,10 @@ export class ItemSheetV2Expanded<
 
         // Handle different data types
         switch (data.type) {
+            case "Affliction": {
+                this._onDropAffliction(event, data);
+                return;
+            }
             case "ActiveEffect": {
                 this._onDropActiveEffect(event, data);
                 return;
@@ -578,6 +582,18 @@ export class ItemSheetV2Expanded<
                 return;
             }
         }
+    }
+
+    async _onDropAffliction(_event: DragEvent, data: object) {
+        if(!('id' in data && typeof data.id === 'string')) return false;
+
+        const affliction = game.ptr.data.afflictions.get(data.id);
+        if (!affliction) return false;
+
+        const effect = await ActiveEffectPTR2e.fromStatusEffect(affliction.id) as ActiveEffectPTR2e;
+        if(!effect) return false;
+
+        return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.document });
     }
 
     async _onDropActiveEffect(_event: DragEvent, data: object) {
