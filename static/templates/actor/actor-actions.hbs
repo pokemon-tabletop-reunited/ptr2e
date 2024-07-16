@@ -59,13 +59,13 @@
             {{#each actor.actions.generic as |action|}}
                 {{> action action=action direction="LEFT"}}
             {{/each}}
+            {{#each actor.actions.pokeball as |action|}}
+                {{> action action=action direction="RIGHT"}}
+            {{/each}}
         </fieldset>
         <fieldset class="exploration scroll">
             <legend>Exploration</legend>
             {{#each actor.actions.exploration as |action|}}
-                {{> action action=action direction="RIGHT"}}
-            {{/each}}
-            {{#each actor.actions.pokeball as |action|}}
                 {{> action action=action direction="RIGHT"}}
             {{/each}}
         </fieldset>
