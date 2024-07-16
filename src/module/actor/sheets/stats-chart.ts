@@ -87,7 +87,6 @@ export class StatsChart {
             return Math.ceil(max / 20) * 20;
         })();
 
-        // Sample data
         return {
             labels: [["HP", attributes.hp.value], ["ATK", attributes.atk.value], [attributes.def.value, "DEF"], [attributes.spe.value, "SPD"], [attributes.spd.value, "SP.DEF"], ["SP.ATK", attributes.spa.value]],
             datasets: [
