@@ -116,7 +116,7 @@ export default class TooltipsPTR2e {
 
         this.tooltip.innerHTML = `<h4 class="trait">[${
             data.label
-        }]</h4><cntent>${await TextEditor.enrichHTML(data.description)}</content>
+        }]</h4><content>${await TextEditor.enrichHTML(data.description)}</content>
         <div class="progress-circle">
             <svg width="20" height="20" viewBox="0 0 20 20" class="circular-progress">
                 <circle class="bg"></circle>
