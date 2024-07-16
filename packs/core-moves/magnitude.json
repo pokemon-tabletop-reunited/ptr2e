@@ -4,9 +4,10 @@
   "img": "/systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "magnitude",
-    "description": "Effect: This attack's Power is variable. When used, it has a 5% chance of having 10 Power, 10% of 30, 20% of 50, 30% of 70, 20% of 90, 10% of 110, and 5% of 150. If a target is Burrowed underground, Magnitude ignores range increment and the target's EVA stage increases. This attack's Power is then doubled against Burrowed targets.",
+    "description": "Effect: If a target is Burrowed underground, this attack ignores the target's EVA stage increasesand has its Damage doubled.",
     "traits": [
-      "earthbound"
+      "earthbound",
+      "10-strike"
     ],
     "actions": [
       {
@@ -14,11 +15,12 @@
         "name": "Magnitude",
         "type": "attack",
         "traits": [
-          "earthbound"
+          "earthbound",
+          "10-strike"
         ],
         "range": {
           "target": "emanation",
-          "distance": 6,
+          "distance": 5,
           "unit": "m"
         },
         "cost": {
@@ -29,12 +31,12 @@
           "trigger": null
         },
         "category": "physical",
-        "power": 10,
+        "power": 15,
         "accuracy": 100,
         "types": [
           "ground"
         ],
-        "description": "Effect: This attack's Power is variable. When used, it has a 5% chance of having 10 Power, 10% of 30, 20% of 50, 30% of 70, 20% of 90, 10% of 110, and 5% of 150. If a target is Burrowed underground, Magnitude ignores range increment and the target's EVA stage increases. This attack's Power is then doubled against Burrowed targets.",
+        "description": "Effect: If a target is Burrowed underground, this attack ignores the target's EVA stage increasesand has its Damage doubled.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

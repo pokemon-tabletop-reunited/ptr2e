@@ -1,5 +1,5 @@
 {
-  "name": "%lt;Type&gt Domain",
+  "name": "<Type> Domain",
   "type": "perk",
   "system": {
     "prerequisites": [
@@ -14,18 +14,22 @@
     "description": "You are able to tutor [Domain] abilities associated to your chosen %lt;Type&gt;. Only creatures that have your chosen %lt;Type&gt; can learn these abilties.",
     "actions": [
       {
-        "name": "%lt;Type&gt Domain",
+        "name": "<Type> Domain",
         "slug": "type-domain",
         "description": "You are able to tutor [Domain] abilities associated to your chosen %lt;Type&gt;. Only creatures that have your chosen %lt;Type&gt; can learn these abilties.",
         "cost": {
           "activation": "free"
         },
         "type": "passive",
-        "traits": []
+        "traits": [
+          "type"
+        ]
       }
     ],
     "slug": "type-domain",
-    "traits": [],
+    "traits": [
+      "type"
+    ],
     "node": {
       "i": -43,
       "j": -16,

@@ -4,9 +4,10 @@
   "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "seismic-toss",
-    "description": "Effect: The user deals flat damage equal to 1.5x their level to the target.",
+    "description": "<p>Effect: This attack deals flat damage based on the user's level.</p><blockquote><p>Damage Formula: Damage = 1.5 x UserLevel</p></blockquote>",
     "traits": [
-      "contact"
+      "contact",
+      "grapple"
     ],
     "actions": [
       {
@@ -14,7 +15,8 @@
         "name": "Seismic Toss",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "grapple"
         ],
         "range": {
           "target": "creature",
@@ -34,7 +36,7 @@
         "types": [
           "fighting"
         ],
-        "description": "Effect: The user deals flat damage equal to 1.5x their level to the target.",
+        "description": "<p>Effect: This attack deals flat damage based on the user's level.</p><blockquote><p>Damage Formula: Damage = 1.5 x UserLevel</p></blockquote>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
