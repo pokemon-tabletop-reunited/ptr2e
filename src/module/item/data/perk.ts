@@ -115,7 +115,7 @@ export default abstract class PerkSystem extends PerkExtension {
                 : true;
         }
 
-        if(!this.parent.visible) return false;
+        // if(!this.parent.visible) return false;
 
         return !this.hidden;
     }
