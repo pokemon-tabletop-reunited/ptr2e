@@ -25,6 +25,9 @@ import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { sluggify } from "@utils";
+import { preImportJSON } from "@module/data/doc-helper.ts";
+import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
+import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 
 type ActorParty = {
     owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -454,28 +457,42 @@ class ActorPTR2e<
         return stat.value * stageModifier();
     }
 
-    async applyDamage(damage: number, {silent, healShield} = {silent: false, healShield: false}) {
+    async applyDamage(
+        damage: number,
+        { silent, healShield } = { silent: false, healShield: false }
+    ) {
         // Damage is applied to shield first, then health
         // Shields cannot be healed
-        if(damage > 0 || healShield) {
+        if (damage > 0 || healShield) {
             const damageAppliedToShield = Math.min(damage || 0, this.system.health.shield.value);
-            if(this.system.health.shield.value > 0 && damageAppliedToShield === 0) return 0;
-            if(damageAppliedToShield > 0 || healShield) {
+            if (this.system.health.shield.value > 0 && damageAppliedToShield === 0) return 0;
+            if (damageAppliedToShield > 0 || healShield) {
                 const isShieldBroken = this.system.health.shield.value - damageAppliedToShield <= 0;
                 await this.update({
                     "system.health.shield.value": Math.max(
                         this.system.health.shield.value - damage,
-                        0,
+                        0
                     ),
                 });
-                if(!silent) {
+                if (!silent) {
                     //@ts-expect-error
                     await ChatMessagePTR2e.create({
                         type: "damage-applied",
                         system: {
-                            notes: damage < 0
-                                ? [`Shield healed for ${Math.abs(damageAppliedToShield)} health`, `Shield remaining: ${this.system.health.shield.value}`]
-                                : [`Shield took ${damageAppliedToShield} damage`, isShieldBroken ? "Shield broken!" : `Shield remaining: ${this.system.health.shield.value}`],
+                            notes:
+                                damage < 0
+                                    ? [
+                                          `Shield healed for ${Math.abs(
+                                              damageAppliedToShield
+                                          )} health`,
+                                          `Shield remaining: ${this.system.health.shield.value}`,
+                                      ]
+                                    : [
+                                          `Shield took ${damageAppliedToShield} damage`,
+                                          isShieldBroken
+                                              ? "Shield broken!"
+                                              : `Shield remaining: ${this.system.health.shield.value}`,
+                                      ],
                             damageApplied: damageAppliedToShield,
                             shieldApplied: true,
                             target: this.uuid,
@@ -486,7 +503,7 @@ class ActorPTR2e<
             }
         }
 
-        const damageApplied = Math.min((damage || 0), this.system.health.value);
+        const damageApplied = Math.min(damage || 0, this.system.health.value);
         if (damageApplied === 0) return 0;
         await this.update({
             "system.health.value": Math.clamp(
@@ -495,7 +512,7 @@ class ActorPTR2e<
                 this.system.health.max
             ),
         });
-        if(!silent) {
+        if (!silent) {
             //@ts-expect-error
             await ChatMessagePTR2e.create({
                 type: "damage-applied",
@@ -508,8 +525,13 @@ class ActorPTR2e<
         return damageApplied;
     }
 
-    override async modifyTokenAttribute(attribute: string, value: number, isDelta?: boolean, isBar?: boolean): Promise<this> {
-        if(isDelta && value != 0 && (attribute === "health")) {
+    override async modifyTokenAttribute(
+        attribute: string,
+        value: number,
+        isDelta?: boolean,
+        isBar?: boolean
+    ): Promise<this> {
+        if (isDelta && value != 0 && attribute === "health") {
             await this.applyDamage(value * -1);
             return this;
         }
@@ -1004,6 +1026,46 @@ class ActorPTR2e<
         return false;
     }
 
+    static override async createDocuments<TDocument extends foundry.abstract.Document>(
+        this: ConstructorOf<TDocument>,
+        data?: (TDocument | PreCreate<TDocument["_source"]>)[],
+        context?: DocumentModificationContext<TDocument["parent"]>
+    ): Promise<TDocument[]>;
+    static override async createDocuments(
+        data: (ActorPTR2e | PreCreate<ActorPTR2e["_source"]>)[] = [],
+        context: DocumentModificationContext<TokenDocumentPTR2e | null> = {}
+    ): Promise<Actor<TokenDocument<Scene | null> | null>[]> {
+        const sources = data.map((d) => (d instanceof ActorPTR2e ? d.toObject() : d));
+
+        for (const source of [...sources]) {
+            if (!["flags", "items", "system"].some((k) => k in source)) {
+                // The actor has no migratable data: set schema version and return early
+                source.system = {
+                    _migration: { version: MigrationRunnerBase.LATEST_SCHEMA_VERSION },
+                };
+            }
+            const lowestSchemaVersion = Math.min(
+                source.system?._migration?.version ?? MigrationRunnerBase.LATEST_SCHEMA_VERSION,
+                ...(source.items ?? []).map(
+                    (i) =>
+                        (i?.system as ItemSystemPTR)?._migration?.version ??
+                        MigrationRunnerBase.LATEST_SCHEMA_VERSION
+                )
+            );
+
+            const tokenDefaults = fu.deepClone(game.settings.get("core", "defaultToken"));
+            const actor = new this(fu.mergeObject({ prototypeToken: tokenDefaults }, source));
+            await MigrationRunner.ensureSchemaVersion(
+                actor,
+                MigrationList.constructFromVersion(lowestSchemaVersion)
+            );
+
+            sources.splice(sources.indexOf(source), 1, actor.toObject());
+        }
+
+        return super.createDocuments(sources, context);
+    }
+
     protected override _onEmbeddedDocumentChange(): void {
         super._onEmbeddedDocumentChange();
 
@@ -1056,21 +1118,23 @@ class ActorPTR2e<
             }
         }
 
-        if(changed.system?.advancement?.experience?.current !== undefined) {
+        if (changed.system?.advancement?.experience?.current !== undefined) {
             const next = this.system.advancement.experience.next;
-            if(next && Number(changed.system.advancement.experience.current) >= next) {
-                changed.flags ??= {} //@ts-expect-error
+            if (next && Number(changed.system.advancement.experience.current) >= next) {
+                changed.flags ??= {}; //@ts-expect-error
                 changed.flags.ptr2e ??= {}; //@ts-expect-error
                 changed.flags.ptr2e.sheet ??= {}; //@ts-expect-error
                 changed.flags.ptr2e.sheet.perkFlash = true;
             }
         }
 
-        if(changed.system?.health?.shield !== undefined) {
-            if(typeof changed.system.health.shield.value === "number" && changed.system.health.shield.value > this.system.health.shield.value) {
+        if (changed.system?.health?.shield !== undefined) {
+            if (
+                typeof changed.system.health.shield.value === "number" &&
+                changed.system.health.shield.value > this.system.health.shield.value
+            ) {
                 changed.system.health.shield.max ??= changed.system.health.shield.value;
-            }
-            else if(changed.system.health.shield.value === 0) {
+            } else if (changed.system.health.shield.value === 0) {
                 changed.system.health.shield.max = 0;
             }
         }
@@ -1205,6 +1269,12 @@ class ActorPTR2e<
         const effect = await ActiveEffectPTR2e.fromStatusEffect(statusId);
         if (overlay) effect.updateSource({ "flags.core.overlay": true });
         return ActiveEffectPTR2e.create<any>(effect.toObject(), { parent: this, keepId: true });
+    }
+
+    /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
+    override async importFromJSON(json: string): Promise<this> {
+        const processed = await preImportJSON(this, json);
+        return processed ? super.importFromJSON(processed) : this;
     }
 }
 

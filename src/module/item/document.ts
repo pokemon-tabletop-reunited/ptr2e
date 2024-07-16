@@ -7,6 +7,10 @@ import { ActionsCollections } from "@actor/actions.ts";
 import { SpeciesSystemModel } from "./data/index.ts";
 import ConsumableSystem from "./data/consumable.ts";
 import PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
+import { preImportJSON } from "@module/data/doc-helper.ts";
+import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
+import * as R from "remeda";
+import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 
 /**
  * @extends {PTRItemData}
@@ -153,8 +157,26 @@ class ItemPTR2e<
         this: ConstructorOf<TDocument>,
         data?: (TDocument | PreCreate<TDocument["_source"]>)[],
         context?: DocumentModificationContext<TDocument["parent"]>
-    ): Promise<TDocument[]> {
+    ): Promise<TDocument[]>;
+    static override async createDocuments<TDocument extends foundry.abstract.Document>(
+        data: (TDocument | PreCreate<TDocument["_source"]>)[] = [],
+        context: DocumentModificationContext<TDocument["parent"]> = {},
+    ): Promise<foundry.abstract.Document[]> {
         const sources = data?.map((d) => (d instanceof ItemPTR2e ? d.toObject() : d as PreCreate<ItemPTR2e["_source"]>)) ?? [];
+
+        // Migrate source in case of importing from an old compendium
+        for (const source of [...sources] as PreCreate<ItemPTR2e["_source"]>[]) {
+            if (R.isEmpty(R.pick(source, ["flags", "system"]))) {
+                // The item has no migratable data: set schema version and skip
+                const migrationSource = { _migration: { version: MigrationRunnerBase.LATEST_SCHEMA_VERSION } };
+                source.system = fu.mergeObject(source.system ?? {}, migrationSource);
+                continue;
+            }
+
+            const item = new CONFIG.Item.documentClass(source);
+            await MigrationRunner.ensureSchemaVersion(item, MigrationList.constructFromVersion(item.schemaVersion));
+            data.splice(data.indexOf(source as PreCreate<TDocument["_source"]>), 1, item.toObject() as unknown as PreCreate<TDocument["_source"]>);
+        }
 
         const actor = context?.parent as ActorPTR2e | null;
         if (!actor) return super.createDocuments<TDocument>(data, context);
@@ -247,6 +269,12 @@ class ItemPTR2e<
         this.updateSource(data);
         foundry.applications.instances.get(`SpeciesSheet-${this.uuid}`)?.render({});
         return undefined;
+    }
+
+    /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
+    override async importFromJSON(json: string): Promise<this> {
+        const processed = await preImportJSON(this, json);
+        return processed ? super.importFromJSON(processed) : this;
     }
 }
 
