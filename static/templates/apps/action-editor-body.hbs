@@ -10,6 +10,12 @@
                 {{formField fields.free value=action.free localize=true}}
             </fieldset>
         {{/if}}
+        {{#if (eq action.type "passive")}}
+            <fieldset>
+                <legend>Hide Passive?</legend>
+                {{formField fields.hidden value=source.hidden localize=true}}
+            </fieldset>
+        {{/if}}
         <fieldset>
             <legend>Effect Description</legend>
             {{formField fields.description enriched=enrichedDescription value=source.description localize=true}}

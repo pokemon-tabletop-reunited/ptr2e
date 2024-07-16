@@ -35,7 +35,9 @@
         <fieldset class="passives scroll">
             <legend>Passives</legend>
             {{#each actor.actions.passive as |action|}}
-                {{> action action=action direction="RIGHT"}}
+                {{#unless action.hidden}}
+                    {{> action action=action direction="RIGHT"}}
+                {{/unless}}
             {{/each}}
         </fieldset>
     </section>
