@@ -748,7 +748,17 @@ class ActorPTR2e<
         params: CheckContextParams<TStatistic, TItem>
     ): Promise<CheckContext<this, TStatistic, TItem>> {
         const context = await this.getRollContext(params);
-        const rangeIncrement = context.target?.rangeIncrement ?? null;
+
+        const omittedSubrolls: CheckContext['omittedSubrolls'] = new Set();
+
+        const rangeIncrement = (() => {
+            const rangeIncrement = context.target?.rangeIncrement ?? null;
+            if(rangeIncrement === -Infinity) {
+                omittedSubrolls.add("accuracy")
+                return null;
+            }
+            return rangeIncrement;
+        })();
 
         const appliesTo =
             context.target?.token?.actor?.uuid ??
@@ -808,7 +818,7 @@ class ActorPTR2e<
             );
         }
 
-        return { ...context };
+        return { ...context, omittedSubrolls};
     }
 
     protected getRollContext<

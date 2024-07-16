@@ -128,11 +128,17 @@ export default class AttackPTR2e extends ActionPTR2e {
 
     public getRangeIncrement(distance: number | null): number | null {
         if(distance === null || !this.range || !["ally", "enemy", "creature", "object"].includes(this.range.target)) return null;
+        const dangerClose = !!this.traits.get("danger-close");
 
         // TODO: Implement Reach
         if(this.range.distance <= 1) return distance >= 2 ? Infinity : 0;
         const increment = this.range.distance;
-        return Math.max(Math.ceil(distance / increment), 1) - 1;
+        
+        const rangeIncrement = Math.max(Math.ceil(distance / increment), 1) - 1;
+
+        return dangerClose 
+            ? rangeIncrement == 0 ? -Infinity : rangeIncrement - 1
+            : rangeIncrement;
     }
 }
 export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {

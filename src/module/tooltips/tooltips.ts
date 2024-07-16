@@ -375,6 +375,10 @@ export default class TooltipsPTR2e {
         if (!target) return false;
 
         const accuracy = target.accuracyRoll;
+        if(!accuracy) {
+            this.tooltip.innerHTML = "No accuracy roll - Auto hit!";
+            return false;
+        };
 
         this.tooltip.classList.add("status");
         await this._renderTooltip({
