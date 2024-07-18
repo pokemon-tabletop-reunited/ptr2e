@@ -1,4 +1,4 @@
-import ActiveEffectConfigPTR2e from "@module/effects/sheet.ts";
+import ActiveEffectConfig from "@module/effects/sheet.ts";
 import ChangeModel from "../change.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, isBracketedValue, isObject, tagify } from "@utils";
 import * as R from "remeda";
@@ -7,7 +7,7 @@ import { ItemPTR2e } from "@item";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 
 class ChangeForm<TChange extends ChangeModel = ChangeModel> {
-    declare sheet: ActiveEffectConfigPTR2e;
+    declare sheet: ActiveEffectConfig;
     declare index: number;
     declare change: TChange;
     declare source: TChange["_source"];
@@ -413,7 +413,7 @@ interface ChangeFormContext<TChange extends ChangeModel>
 }
 
 interface ChangeFormOptions<TChange extends ChangeModel = ChangeModel> {
-    sheet: ActiveEffectConfigPTR2e;
+    sheet: ActiveEffectConfig;
     index: number;
     change: TChange;
 }

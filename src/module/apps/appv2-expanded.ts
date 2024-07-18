@@ -2,7 +2,8 @@ import { ActorPTR2e } from "@actor";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
 import FolderPTR2e from "@module/folder/document.ts";
-import { htmlQueryAll } from "@utils";
+import { htmlQueryAll, sluggify } from "@utils";
+import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 
 export type ApplicationConfigurationExpanded = foundry.applications.api.ApplicationConfiguration & {
     dragDrop: DragDropConfiguration[];
@@ -135,6 +136,10 @@ export class ActorSheetV2Expanded<
         return `[${game.i18n.localize(TokenDocument.metadata.label)}] ${this.actor.name}`;
     }
 
+    get object() {
+        return this.document;
+    }
+
     protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {
         event.preventDefault();
         const { handler, closeOnSubmit } = config;
@@ -174,6 +179,26 @@ export class ActorSheetV2Expanded<
             };
             return new DragDrop(d);
         });
+    }
+
+    /**
+     * Add compatability with modules that add buttons to the header of the sheet using the AppV1 method
+     */
+    override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
+        const controls = super._getHeaderControls();
+
+        Hooks.callAll("getActorSheetHeaderButtons", this, controls);
+
+        for(const control of controls) {
+            if('onclick' in control) {
+                const slug = sluggify(control.label + ' ' + control.icon);
+                // @ts-ignore
+                this.options.actions[slug] = control.onclick;
+                control.action = slug;
+            }
+        }
+
+        return controls;
     }
 
     /**
@@ -438,6 +463,10 @@ export class ItemSheetV2Expanded<
 
     protected _dragDropHandlers: DragDrop[];
 
+    get object() {
+        return this.document;
+    }
+
     constructor(options: Partial<DocumentSheetConfigurationExpanded> = {}) {
         super(options);
 
@@ -485,6 +514,26 @@ export class ItemSheetV2Expanded<
             };
             return new DragDrop(d);
         });
+    }
+
+    /**
+     * Add compatability with modules that add buttons to the header of the sheet using the AppV1 method
+     */
+    override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
+        const controls = super._getHeaderControls();
+
+        Hooks.callAll("getActorSheetHeaderButtons", this, controls);
+
+        for(const control of controls) {
+            if('onclick' in control) {
+                const slug = sluggify(control.label + ' ' + control.icon);
+                // @ts-ignore
+                this.options.actions[slug] = control.onclick;
+                control.action = slug;
+            }
+        }
+
+        return controls;
     }
 
     /**

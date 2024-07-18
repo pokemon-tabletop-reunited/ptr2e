@@ -8,7 +8,7 @@ import { BasicChangeSystem, ChangeModelTypes } from "@data";
 import { CodeMirror } from "./codemirror.ts";
 import Sortable from "sortablejs";
 
-class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
+class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationMixin(
     DocumentSheetV2<ActiveEffectPTR2e>
 ) {
     static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -20,7 +20,7 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
                 height: "auto",
             },
             form: {
-                handler: ActiveEffectConfigPTR2e.#onSubmit,
+                handler: ActiveEffectConfig.#onSubmit,
                 closeOnSubmit: false,
                 submitOnChange: true,
             },
@@ -551,7 +551,7 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
     }
 
     static async #onSubmit(
-        this: ActiveEffectConfigPTR2e,
+        this: ActiveEffectConfig,
         event: SubmitEvent,
         form: HTMLFormElement,
         formData: FormDataExtended
@@ -565,4 +565,4 @@ class ActiveEffectConfigPTR2e extends foundry.applications.api.HandlebarsApplica
     }
 }
 
-export default ActiveEffectConfigPTR2e;
+export default ActiveEffectConfig;

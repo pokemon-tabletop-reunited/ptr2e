@@ -72,6 +72,7 @@ class CheckPTR2e {
             critBonus: 1,
             miscBonus: 1,
             target: context.target?.actor,
+            user: context.actor
         }
 
         const rolls: PokeballRollResults["rolls"] = await (async () => {
