@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": "icicle-crash",
-    "description": "Effect: On hit, the target becomes Grounded 5. and has a 30% chance of gaining Flinched 3.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "icicle-crash",
         "name": "Icicle Crash",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 6,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "cg9icfdvtuP3Jprn",
   "effects": []

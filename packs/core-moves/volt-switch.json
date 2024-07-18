@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "volt-switch",
-    "description": "Effect: On hit, the user may freely move themselves up to half of the Movement Score of their choice away from the target. If the user is an owned Pokémon, they may then immediately be returned their Poké Ball and another Pokémon may immediately be sent out in their place.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "volt-switch",
         "name": "Volt Switch",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 1,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "D"
   },
   "_id": "9fuUux417cvr9nFL",
   "effects": []

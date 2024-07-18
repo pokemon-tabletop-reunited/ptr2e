@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/shadow_icon.svg",
   "system": {
     "slug": "shadow-corruption",
-    "description": "Effect: On hit, the target has a 50% chance of gaining Poison 4, and a 50% chance of gaining @Affliction[burn] 4.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "shadow-corruption",
         "name": "Shadow Corruption",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 1,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "E"
   },
   "_id": "NVPL4V25PvYi04If",
   "effects": []

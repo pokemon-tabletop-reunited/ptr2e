@@ -1,42 +1,43 @@
 {
-    "name": "Psybeam",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
-    "system": {
+  "name": "Psybeam",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "slug": "psybeam",
+    "description": "",
+    "traits": [
+      "ray"
+    ],
+    "actions": [
+      {
         "slug": "psybeam",
-        "description": "Effect: On hit, the target has a 10% chance of becoming Confused 5.",
+        "name": "Psybeam",
+        "type": "attack",
         "traits": [
-            "ray"
+          "ray",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "psybeam",
-                "name": "Psybeam",
-                "type": "attack",
-                "traits": [
-                    "ray"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 10,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 2
-                },
-                "category": "special",
-                "power": 65,
-                "accuracy": 100,
-                "types": [
-                    "psychic"
-                ],
-                "description": "Effect: On hit, the target has a 10% chance of becoming Confused 5.",
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "category": "special",
+        "power": 65,
+        "accuracy": 100,
+        "types": [
+          "psychic"
         ],
-        "grade": "D"
-    },
-    "_id": "fzZL7wrQyLNrNwr6",
-    "effects": []
+        "description": "Effect: On hit, the target has a 10% chance of becoming Confused 5.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "D"
+  },
+  "_id": "fzZL7wrQyLNrNwr6",
+  "effects": []
 }

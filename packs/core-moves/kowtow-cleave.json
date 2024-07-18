@@ -1,44 +1,46 @@
 {
-    "name": "Kowtow Cleave",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/dark_icon.svg",
-    "system": {
+  "name": "Kowtow Cleave",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/dark_icon.svg",
+  "system": {
+    "slug": "kowtow-cleave",
+    "traits": [
+      "sharp",
+      "contact",
+      "danger-close"
+    ],
+    "actions": [
+      {
         "slug": "kowtow-cleave",
+        "name": "Kowtow Cleave",
+        "type": "attack",
         "traits": [
-            "sharp",
-            "contact",
-            "danger-close"
+          "sharp",
+          "contact",
+          "danger-close",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "kowtow-cleave",
-                "name": "Kowtow Cleave",
-                "type": "attack",
-                "traits": [
-                    "sharp",
-                    "contact",
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 7
-                },
-                "category": "physical",
-                "power": 85,
-                "accuracy": 100,
-                "types": [
-                    "dark"
-                ],
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "physical",
+        "power": 85,
+        "accuracy": 100,
+        "types": [
+          "dark"
         ],
-        "grade": "A"
-    },
-    "_id": "ZEfROnpUJBwEEWAt",
-    "effects": []
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "C",
+    "description": ""
+  },
+  "_id": "ZEfROnpUJBwEEWAt",
+  "effects": []
 }

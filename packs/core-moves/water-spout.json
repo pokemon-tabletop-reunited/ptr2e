@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "water-spout",
-    "description": "Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.\n<blockquote>Damage Formula: Power = max(1, 150 x UserCurrentHP/UserMaxHP)</blockquote>",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "water-spout",
         "name": "Water Spout",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "emanation",
           "distance": 3,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 9,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "A"
   },
   "_id": "ILPyd5fHvqNJt0rT",
   "effects": []

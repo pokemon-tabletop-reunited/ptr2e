@@ -1,47 +1,48 @@
 {
-    "name": "Electro Drift",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/electric_icon.svg",
-    "system": {
+  "name": "Electro Drift",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/electric_icon.svg",
+  "system": {
+    "slug": "electro-drift",
+    "description": "",
+    "traits": [
+      "legendary",
+      "smite",
+      "dash",
+      "contact"
+    ],
+    "actions": [
+      {
         "slug": "electro-drift",
-        "description": "<p>Effect: If Electro Drift deals Super Effective damage, its Power is increased by 50%. The user may freely relocate to any open space in range after resolution.</p>",
+        "name": "Electro Drift",
+        "type": "attack",
         "traits": [
-            "legendary",
-            "smite",
-            "dash",
-            "contact"
+          "legendary",
+          "smite",
+          "contact",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "electro-drift",
-                "name": "Electro Drift",
-                "type": "attack",
-                "traits": [
-                    "legendary",
-                    "smite",
-                    "contact"
-                ],
-                "range": {
-                    "target": "wide-line",
-                    "distance": 8,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 8
-                },
-                "category": "special",
-                "power": 100,
-                "accuracy": 100,
-                "types": [
-                    "electric"
-                ],
-                "description": "<p>Effect: If Electro Drift deals Super Effective damage, the its Power is increased by 50%. The user may freely relocate to any open space in range after resolution.</p>",
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "wide-line",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "electric"
         ],
-        "grade": "S"
-    },
-    "_id": "Ewy6qCginoydpHKm",
-    "effects": []
+        "description": "<p>Effect: If Electro Drift deals Super Effective damage, the its Power is increased by 50%. The user may freely relocate to any open space in range after resolution.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "B"
+  },
+  "_id": "Ewy6qCginoydpHKm",
+  "effects": []
 }

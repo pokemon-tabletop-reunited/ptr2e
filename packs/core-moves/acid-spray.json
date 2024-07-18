@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "acid-spray",
-    "description": "Effect: On hit, all valid targets lose -2 SPDEF stages for 5 activations.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "acid-spray",
         "name": "Acid Spray",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "cone",
           "distance": 3,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 6,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "_id": "UJQAawBIXG1irZiH",
   "effects": []

@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/shadow_icon.svg",
   "system": {
     "slug": "shadow-surge",
-    "description": "Effect: The user may freely move to any open square in Range.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "shadow-surge",
         "name": "Shadow Surge",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "wide-line",
           "distance": 4,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "CIz1Fn41ISohF6uG",
   "effects": []

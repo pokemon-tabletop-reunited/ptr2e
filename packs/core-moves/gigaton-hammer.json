@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "gigaton-hammer",
-    "description": "Effect: On hit, this attack cannot be used on consecutive activations. This attack will deal super effective damage to Steel-types.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "gigaton-hammer",
         "name": "Gigaton Hammer",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 1,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 7,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "A"
   },
   "_id": "r68HnnOPIiQeMqww",
   "effects": []

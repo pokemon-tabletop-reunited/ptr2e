@@ -1,44 +1,46 @@
 {
-    "name": "Feint Attack",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/dark_icon.svg",
-    "system": {
+  "name": "Feint Attack",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/dark_icon.svg",
+  "system": {
+    "slug": "feint-attack",
+    "traits": [
+      "dash",
+      "contact",
+      "danger-close"
+    ],
+    "actions": [
+      {
         "slug": "feint-attack",
+        "name": "Feint Attack",
+        "type": "attack",
         "traits": [
-            "dash",
-            "contact",
-            "danger-close"
+          "dash",
+          "contact",
+          "danger-close",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "feint-attack",
-                "name": "Feint Attack",
-                "type": "attack",
-                "traits": [
-                    "dash",
-                    "contact",
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 5
-                },
-                "category": "physical",
-                "power": 60,
-                "accuracy": 100,
-                "types": [
-                    "dark"
-                ],
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "dark"
         ],
-        "grade": "B"
-    },
-    "_id": "AtQsvtYLtT919vzU",
-    "effects": []
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "D",
+    "description": ""
+  },
+  "_id": "AtQsvtYLtT919vzU",
+  "effects": []
 }

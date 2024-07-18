@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": "freeze-dry",
-    "description": "Effect: On hit, the target has a 10% chance of gaining Freeze 5. This attack is Super Effective against the Water Type.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "freeze-dry",
         "name": "Freeze-Dry",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "_id": "y5H4C8WkE4feSmwt",
   "effects": []

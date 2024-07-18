@@ -1,44 +1,46 @@
 {
-    "name": "Magnet Bomb",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/steel_icon.svg",
-    "system": {
+  "name": "Magnet Bomb",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/steel_icon.svg",
+  "system": {
+    "slug": "magnet-bomb",
+    "traits": [
+      "explode",
+      "blast-2",
+      "danger-close"
+    ],
+    "actions": [
+      {
         "slug": "magnet-bomb",
+        "name": "Magnet Bomb",
+        "type": "attack",
         "traits": [
-            "explode",
-            "blast-2",
-            "danger-close"
+          "explode",
+          "blast-2",
+          "danger-close",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "magnet-bomb",
-                "name": "Magnet Bomb",
-                "type": "attack",
-                "traits": [
-                    "explode",
-                    "blast-2",
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "blast",
-                    "distance": 10,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 5
-                },
-                "category": "physical",
-                "power": 60,
-                "accuracy": 100,
-                "types": [
-                    "steel"
-                ],
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "steel"
         ],
-        "grade": "B"
-    },
-    "_id": "P7I7DE8UTKho7tzQ",
-    "effects": []
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "B",
+    "description": ""
+  },
+  "_id": "P7I7DE8UTKho7tzQ",
+  "effects": []
 }

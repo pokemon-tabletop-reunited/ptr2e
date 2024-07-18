@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": "powder-snow",
-    "description": "Effect: On hit, all valid targets have a 10% chance of gaining Frozen 5.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "powder-snow",
         "name": "Powder Snow",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "cone",
           "distance": 3,

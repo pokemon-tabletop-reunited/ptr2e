@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "lava-plume",
-    "description": "Effect: On hit, all valid targets have a 10% chance of gaining @Affliction[burn] 5.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "lava-plume",
         "name": "Lava Plume",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "emanation",
           "distance": 2,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null

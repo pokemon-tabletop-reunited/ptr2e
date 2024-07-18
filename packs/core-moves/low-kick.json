@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "low-kick",
-    "description": "Effect: This attack's Power is based on how heavy the target is, ranging from 20 to 140.\n<blockquote>Damage Formula: Power = max(140, min(20, TargetWC x 10)))</blockquote>",
+    "description": "",
     "traits": [
       "kick",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "kick",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "_id": "al2jzxSghEeNd7lw",
   "effects": []

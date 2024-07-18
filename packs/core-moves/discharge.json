@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "discharge",
-    "description": "Effect: On hit, all valid targets have a 20% chance of gaining Paralysis 5.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "discharge",
         "name": "Discharge",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "emanation",
           "distance": 3,

@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "barb-barrage",
-    "description": "Effect: On hit, the target has a 50% chance of gaining Poison 5. If the target has the Poison or Blight condition, this Attack's Power is doubled.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "barb-barrage",
         "name": "Barb Barrage",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,

@@ -1,46 +1,48 @@
 {
-    "name": "Aerial Ace",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/flying_icon.svg",
-    "system": {
+  "name": "Aerial Ace",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/flying_icon.svg",
+  "system": {
+    "slug": "aerial-ace",
+    "traits": [
+      "dash",
+      "sharp",
+      "contact",
+      "danger-close"
+    ],
+    "actions": [
+      {
         "slug": "aerial-ace",
+        "name": "Aerial Ace",
+        "type": "attack",
         "traits": [
-            "dash",
-            "sharp",
-            "contact",
-            "danger-close"
+          "dash",
+          "sharp",
+          "contact",
+          "danger-close",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "aerial-ace",
-                "name": "Aerial Ace",
-                "type": "attack",
-                "traits": [
-                    "dash",
-                    "sharp",
-                    "contact",
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 5
-                },
-                "category": "physical",
-                "power": 60,
-                "accuracy": 100,
-                "types": [
-                    "flying"
-                ],
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "flying"
         ],
-        "grade": "B"
-    },
-    "_id": "DBXIJAzomYlauA52",
-    "effects": []
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "D",
+    "description": ""
+  },
+  "_id": "DBXIJAzomYlauA52",
+  "effects": []
 }

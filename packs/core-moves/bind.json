@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "bind",
-    "description": "Effect: The user auto-succeeds on a Grapple Maneuver check against the targeton hit. While the target is Grappled, they take a Tick of HP damage at the end of each of their activations, and suffer a -20 to rolls to escape the Grapple.",
+    "description": "",
     "traits": [
       "contact"
     ],
@@ -14,7 +14,8 @@
         "name": "Bind",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 0,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "E"
   },
   "_id": "FmYMJamRwY1Ngj7j",
   "effects": []

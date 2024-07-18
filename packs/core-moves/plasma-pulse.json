@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "plasma-pulse",
-    "description": "Effect: This attack deals double damage to creatures that have Paralysis. On hit, all valid targets have a 10% chance to gain Paralysis 5.",
+    "description": "",
     "traits": [
       "pulse"
     ],
@@ -14,7 +14,8 @@
         "name": "Plasma Pulse",
         "type": "attack",
         "traits": [
-          "pulse"
+          "pulse",
+          "pp-updated"
         ],
         "range": {
           "target": "line",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 6,
           "delay": null,
           "priority": null,
           "trigger": null

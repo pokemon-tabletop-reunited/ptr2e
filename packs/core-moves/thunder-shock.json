@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "thunder-shock",
-    "description": "Effect: On hit, the target has a 10% chance of gaining Paralysis 5.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "thunder-shock",
         "name": "Thunder Shock",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null

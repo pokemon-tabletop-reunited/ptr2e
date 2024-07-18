@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "metal-claw",
-    "description": "Effect: On hit, the user has a 10% chance of increasing their ATK stage by +1 for 5 activations.",
+    "description": "",
     "traits": [
       "contact"
     ],
@@ -15,7 +15,8 @@
         "type": "attack",
         "traits": [
           "basic",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -24,7 +25,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
+          "powerPoints": 0,
           "delay": null,
           "priority": null,
           "trigger": null

@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "present",
-    "description": "Effect: When declaring this attack, this attack has a chance of changing properties until the end of the user's Activation. \n 40% chance: Nothing changes.\n30% chance: Power doubles.\n10% chance: Power triples.\n30% chance: Instead of dealing damage, the targets each heal 4 Ticks of HP.",
+    "description": "",
     "traits": [
       "blast-1",
       "healing"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "blast-1",
-          "healing"
+          "healing",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -43,7 +44,8 @@
         "slot": null
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "D"
   },
   "_id": "dTzHNqMNr83eSDwF",
   "effects": []

@@ -1,44 +1,45 @@
 {
-    "name": "Stomp",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/normal_icon.svg",
-    "system": {
+  "name": "Stomp",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "system": {
+    "slug": "stomp",
+    "description": "",
+    "traits": [
+      "crushing",
+      "contact"
+    ],
+    "actions": [
+      {
         "slug": "stomp",
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[flinched] 5</p>",
+        "name": "Stomp",
+        "type": "attack",
         "traits": [
-            "crushing",
-            "contact"
+          "crushing",
+          "contact",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "stomp",
-                "name": "Stomp",
-                "type": "attack",
-                "traits": [
-                    "crushing",
-                    "contact"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 5
-                },
-                "category": "physical",
-                "power": 65,
-                "accuracy": 100,
-                "types": [
-                    "normal"
-                ],
-                "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[flinched] 5</p>",
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "category": "physical",
+        "power": 65,
+        "accuracy": 100,
+        "types": [
+          "normal"
         ],
-        "grade": "B"
-    },
-    "_id": "tj77FPyYNkBpjnd9",
-    "effects": []
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[flinched] 5</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "E"
+  },
+  "_id": "tj77FPyYNkBpjnd9",
+  "effects": []
 }

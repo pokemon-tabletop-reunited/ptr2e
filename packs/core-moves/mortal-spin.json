@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "mortal-spin",
-    "description": "Effect: On hit, all valid targets gain Poison 5. The user ends the effects of any [Hazard] attack effects in range, and ends the effect of [Trap] attacks on themself.",
+    "description": "",
     "traits": [
       "contact"
     ],
@@ -14,7 +14,8 @@
         "name": "Mortal Spin",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null

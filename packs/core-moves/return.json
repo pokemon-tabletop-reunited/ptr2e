@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "return",
-    "description": "Effect: For every active ally in the user's own Team, Return's Power increases by 10, up to a maximum of 100 power.",
+    "description": "",
     "traits": [
       "contact"
     ],
@@ -14,7 +14,8 @@
         "name": "Return",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null

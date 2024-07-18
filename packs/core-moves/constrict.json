@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "constrict",
-    "description": "Effect: On hit, the target has a 20% chance of losing -1 SPD stages for 5 activations. If the Target is Grappled by the user, Constrict may be used as a Simple Action instead, and gains [Danger Close].",
+    "description": "",
     "traits": [
       "contact",
       "grapple"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "contact",
-          "grapple"
+          "grapple",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
+          "powerPoints": 0,
           "delay": null,
           "priority": null,
           "trigger": null

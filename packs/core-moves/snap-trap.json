@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": "snap-trap",
-    "description": "Effect: The user auto-succeeds on a Grapple Maneuver check against the target if Snap Trap hits. While the target is Grappled, they take a Tick of HP damage at the end of each of their activations.",
+    "description": "",
     "traits": [
       "trap",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "trap",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "D"
   },
   "_id": "WAqNZJ3vepYYIM0c",
   "effects": []

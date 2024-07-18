@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "extrasensory",
-    "description": "Effect: On hit, the target has a 10% chance of gaining Flinched 3.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "extrasensory",
         "name": "Extrasensory",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "_id": "YtgyracqZOtm0zXZ",
   "effects": []
