@@ -1,0 +1,59 @@
+{
+    "name": "Hit & Run",
+    "type": "perk",
+    "system": {
+        "prerequisites": [
+            "None"
+        ],
+        "cost": 1,
+        "design": {
+            "arena": "physical",
+            "approach": "finesse",
+            "archetype": "Combat"
+        },
+        "description": "You are able to leave melee without provoking any attacks after hitting an enemy.",
+        "actions": [
+            {
+                "name": "Hit & Run",
+                "slug": "hit-run",
+                "description": "You are able to leave melee without provoking any attacks after hitting an enemy.",
+                "cost": {
+                    "activation": "free"
+                },
+                "type": "passive",
+                "traits": [],
+                "img": "icons/svg/explosion.svg",
+                "range": {
+                    "target": "enemy",
+                    "unit": "m"
+                }
+            }
+        ],
+        "slug": "hit-run",
+        "traits": [],
+        "node": {
+            "i": -2,
+            "j": 23,
+            "connected": [
+                "sprint",
+                "root-4",
+                "zigzagoon-class-sandwiches",
+                "thug"
+            ],
+            "config": {
+                "alpha": null,
+                "backgroundColor": "#ff8000",
+                "borderColor": null,
+                "borderWidth": null,
+                "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+                "tint": null,
+                "scale": null
+            },
+            "hidden": false,
+            "type": "normal"
+        }
+    },
+    "_id": "1SjUYN4180BTBYCk",
+    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+    "effects": []
+}
