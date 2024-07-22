@@ -190,8 +190,12 @@ export class ActorSheetV2Expanded<
         Hooks.callAll("getActorSheetHeaderButtons", this, controls);
 
         for(const control of controls) {
-            if('onclick' in control) {
+            if('onclick' in control && !control.action) {
                 const slug = sluggify(control.label + ' ' + control.icon);
+                if(controls.filter(c => c.action == slug).length > 0) {
+                    controls.splice(controls.indexOf(control), 1);
+                    continue;
+                }
                 // @ts-ignore
                 this.options.actions[slug] = control.onclick;
                 control.action = slug;
@@ -525,8 +529,12 @@ export class ItemSheetV2Expanded<
         Hooks.callAll("getActorSheetHeaderButtons", this, controls);
 
         for(const control of controls) {
-            if('onclick' in control) {
+            if('onclick' in control && !control.action) {
                 const slug = sluggify(control.label + ' ' + control.icon);
+                if(controls.filter(c => c.action == slug).length > 0) {
+                    controls.splice(controls.indexOf(control), 1);
+                    continue;
+                }
                 // @ts-ignore
                 this.options.actions[slug] = control.onclick;
                 control.action = slug;

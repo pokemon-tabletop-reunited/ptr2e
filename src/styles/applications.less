@@ -537,7 +537,8 @@ body {
                                 }
                             }
                         }
-                        fieldset {
+
+                        fieldset, div.action-container {
                             display: flex;
                             flex-direction: column;
                             flex-wrap: nowrap;
@@ -561,6 +562,28 @@ body {
                                 display: flex;
                                 flex-direction: row;
                                 align-items: center;
+
+                                &.attack-styling {
+                                    padding: 4px;
+                                    border-radius: 8px;
+
+                                    .action-name {
+                                        flex: 1 0 auto;
+                                        text-align: center;
+                                        
+                                        display: flex;
+                                        span {
+                                            font-size: 13.5px;
+                                            max-height: 42px;
+                                            background: #0f0d18a3;
+                                            padding: 4px;
+                                            border-radius: 8px;
+                                            width: auto;
+                                            flex: 0 1 auto;
+                                            overflow: hidden;
+                                        }
+                                    }
+                                }
                                 
                                 .action-icon {
                                     flex: 0 0 28px;
@@ -594,6 +617,99 @@ body {
                                     align-items: center;
                                     margin-left: auto;
                                     gap: 5px;
+                                }
+                            }
+                        }
+
+                        .header {
+                            display: flex;
+                            flex-direction: row;
+                            justify-content: space-between;
+                            align-items: end;
+                            border-bottom: 1px solid var(--border-theme-color);
+                            margin: 0 0.5rem 0 0.5rem;
+
+                            .action-controls {
+                                display: flex;
+                                flex-direction: row;
+                                gap: 0.5rem;
+                            }
+
+                            .edit-movelist {
+                                padding: 3px 5px;
+                                background: var(--appv2-background);
+                                border: 2px groove var(--border-theme-color);
+                                border-radius: 0 0 8px 8px;
+                                border-top: unset;
+                                margin-bottom: auto;
+                            }
+                        }
+
+                        div.action-container {
+                            flex: 1;
+
+                            display: grid;
+                            grid-template-columns: 175px 175px;
+                            grid-auto-rows: 50px;
+
+                            overflow: visible;
+                            overflow-y: auto;
+                            padding: 0.5rem;
+
+                            &.slots {
+                                flex: 0 1 min-content;
+                            }
+
+                            .action {
+                                background: var(--appv2-background);
+                                padding: 4px;
+                                border-radius: 8px;
+
+                                display: grid;
+                                grid-template-columns: 30px auto 30px;
+
+                                .action-controls {
+                                    flex-direction: column;
+                                    flex-wrap: wrap;
+                                    max-height: 50px;
+                                }
+
+                                .action-name {
+                                    text-align: center;
+                                    place-self: center;
+                                }
+
+                                border: 1px solid var(--color-light-6);
+
+                                &.attack {
+                                    border: unset;
+                                }
+
+                                &.empty {
+                                    border: 1px solid var(--color-light-6);
+                                }
+                            }
+                        }
+
+                        &[data-tab="actionsCombat"] {
+                            display: flex;
+                            flex-direction: row;
+
+                            overflow-x: scroll;
+                            overflow-y: hidden;
+
+                            .action-column {
+                                display: flex;
+                                flex-direction: column;
+                                padding: 0 0.25rem;
+
+                                overflow: visible;
+                                gap: 0;
+
+                                border-right: 1px dashed var(--color-light-6);
+
+                                &:last-child {
+                                    border-right: unset;
                                 }
                             }
                         }

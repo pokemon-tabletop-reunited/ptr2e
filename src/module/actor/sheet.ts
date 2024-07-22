@@ -212,23 +212,59 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     };
 
     subtabs: Record<string, Tab> = {
-        actionsCombat: {
-            id: "actionsCombat",
+        // actionsCombat: {
+        //     id: "actionsCombat",
+        //     group: "actions",
+        //     icon: "fa-solid fa-burst",
+        //     label: "PTR2E.ActorSheet.Tabs.actions.combat.label",
+        // },
+        // actionsDowntime: {
+        //     id: "actionsDowntime",
+        //     group: "actions",
+        //     icon: "fa-solid fa-clock",
+        //     label: "PTR2E.ActorSheet.Tabs.actions.downtime.label",
+        // },
+        // actionsOther: {
+        //     id: "actionsOther",
+        //     group: "actions",
+        //     icon: "fa-solid fa-dice-d20",
+        //     label: "PTR2E.ActorSheet.Tabs.actions.other.label",
+        // },
+        slots: {
+            id: "slots",
             group: "actions",
             icon: "fa-solid fa-burst",
-            label: "PTR2E.ActorSheet.Tabs.actions.combat.label",
+            label: "Attacks",
         },
-        actionsDowntime: {
-            id: "actionsDowntime",
-            group: "actions",
-            icon: "fa-solid fa-clock",
-            label: "PTR2E.ActorSheet.Tabs.actions.downtime.label",
-        },
-        actionsOther: {
-            id: "actionsOther",
+        generic: {
+            id: "generic",
             group: "actions",
             icon: "fa-solid fa-dice-d20",
-            label: "PTR2E.ActorSheet.Tabs.actions.other.label",
+            label: "Generic Actions",
+        },
+        passives: {
+            id: "passives",
+            group: "actions",
+            icon: "fa-solid fa-star",
+            label: "Passives",
+        },
+        camping: {
+            id: "camping",
+            group: "actions",
+            icon: "fa-solid fa-campfire",
+            label: "Camping Activities",
+        },
+        downtime: {
+            id: "downtime",
+            group: "actions",
+            icon: "fa-solid fa-clock",
+            label: "Downtime Activities",
+        },
+        exploration: {
+            id: "exploration",
+            group: "actions",
+            icon: "fa-solid fa-magnifying-glass",
+            label: "Exploration Activities",
         },
     };
 
@@ -455,6 +491,16 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
         if (partId === "skills" || partId === "overview") {
             SkillsComponent.attachListeners(htmlElement, this.actor);
+        }
+
+        if(partId === "actions") {
+            for(const element of htmlQueryAll(htmlElement, ".tab[data-tab='actions'] .sub-tabs [data-scroll-anchor]")) {
+                element.addEventListener("click", (event) => {
+                    const anchor = (event.currentTarget as HTMLElement).dataset.scrollAnchor;
+                    const scrollElement = htmlQuery(htmlElement, `.tab[data-tab='actions'] .active .${anchor}`);
+                    if(scrollElement) scrollElement.scrollIntoView({ behavior: "smooth", inline: "center" });
+                });
+            }
         }
 
         if(partId === "inventory") {

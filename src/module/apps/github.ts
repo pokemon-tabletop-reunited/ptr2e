@@ -9,6 +9,7 @@ class GithubManager {
         species: "ptr2e.core-species",
         ability: "ptr2e.core-abilities",
         perk: "ptr2e.core-perks",
+        effect: "ptr2e.core-effects",
     } as const;
 
     static async getExistingItem<TDocument extends ItemPTR2e>(
