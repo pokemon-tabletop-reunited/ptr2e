@@ -336,7 +336,7 @@ export const StatusEffects: StatusEffect[] = [
             changes: [
                 {
                     type: "basic",
-                    key: "system.attributes.spd.stage",
+                    key: "system.attributes.spe.stage",
                     value: -1,
                     mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                 },
