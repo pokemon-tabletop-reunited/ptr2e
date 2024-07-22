@@ -1,57 +1,103 @@
 {
-  "name": "Blaze",
-  "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-  "system": {
-    "actions": [
-      {
-        "traits": [
-          "desperation-1-3",
-          "fire"
+    "name": "Blaze",
+    "type": "ability",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+        "actions": [
+            {
+                "traits": [
+                    "desperation-1-3",
+                    "fire"
+                ],
+                "name": "Blaze",
+                "slug": "blaze",
+                "type": "passive",
+                "cost": {
+                    "activation": "free"
+                },
+                "range": {
+                    "target": "self",
+                    "unit": "m"
+                },
+                "description": "Effect: The user's Fire-Type attacks gain 20% Power. When under 1/3 HP, this bonus increases to 50%.",
+                "img": "icons/svg/explosion.svg"
+            }
         ],
-        "name": "Blaze",
-        "slug": "blaze",
-        "type": "passive",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
-        },
-        "range": {
-          "target": "self",
-          "distance": 0,
-          "unit": "m"
-        },
-        "description": "Effect: The user's Fire-Type attacks gain 20% Power. When under 1/3 HP, this bonus increases to 50%."
-      }
-    ],
-    "description": "Effect: The user's Fire-Type attacks gain 20% Power. When under 1/3 HP, this bonus increases to 50%.",
-    "traits": [
-      "desperation-1-3",
-      "fire"
-    ],
-    "slug": null,
-    "container": null
-  },
-  "_id": "fOrAmM8cSQtNoklE",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!fOrAmM8cSQtNoklE"
+        "description": "Effect: The user's Fire-Type attacks gain 20% Power. When under 1/3 HP, this bonus increases to 50%.",
+        "traits": [
+            "desperation-1-3",
+            "fire"
+        ],
+        "slug": "blaze"
+    },
+    "_id": "fOrAmM8cSQtNoklE",
+    "effects": [
+        {
+            "name": "Blaze",
+            "type": "passive",
+            "_id": "regbzbL8OnHMO4l4",
+            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+            "system": {
+                "changes": [
+                    {
+                        "type": "percentile-modifier",
+                        "key": "fire-attack-power",
+                        "value": {
+                            "brackets": [
+                                {
+                                    "start": 34,
+                                    "end": 100,
+                                    "value": 20
+                                },
+                                {
+                                    "start": 0,
+                                    "end": 33,
+                                    "value": 50
+                                }
+                            ],
+                            "field": "actor|system.health.percent"
+                        },
+                        "predicate": [],
+                        "label": "Blaze",
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false,
+                        "hideIfDisabled": false
+                    }
+                ],
+                "slug": null,
+                "traits": [],
+                "removeAfterCombat": true,
+                "removeOnRecall": false,
+                "stacks": 0
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "description": "<p>Effect: The user's Fire-Type attacks gain 20% Power. When under 1/3 HP, this bonus increases to 50%.</p>",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.328",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.1.5.2",
+                "createdTime": 1720852336679,
+                "modifiedTime": 1720852365188,
+                "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+            }
+        }
+    ]
 }
