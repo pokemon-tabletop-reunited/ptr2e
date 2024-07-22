@@ -399,7 +399,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         }
 
         /** Calculate HP */
-        const bulkMod = Math.pow(1 + ((Math.sqrt(2) - 1) / (30 / Math.PI)), (this.species?.size.sizeClass || 1) - 1);
+        const bulkMod = Math.pow(1 + ((Math.sqrt(2) - 1) / (32 / 3)), (this.species?.size.sizeClass || 1) - 1);
 
         return Math.floor(
             (Math.floor(((2 * stat.base + stat.ivs + stat.evs / 4) * level * bulkMod) / 100) +
