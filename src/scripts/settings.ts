@@ -2,7 +2,6 @@ import { default as TypeEffectiveness } from "./config/effectiveness.ts";
 import { ClockDatabase } from "@data";
 import { SkillsSettingsMenu } from "@module/apps/skills.ts";
 import { TraitsSettingsMenu } from "@module/apps/traits.ts";
-import { MigrationRunner } from "@module/migration/index.ts";
 
 export function initializeSettings() {
 
