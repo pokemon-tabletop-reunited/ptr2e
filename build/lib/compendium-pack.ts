@@ -237,12 +237,10 @@ class CompendiumPack {
 
         docSource.flags ??= {};
         if (isActorSource(docSource)) {
-            docSource.effects = [];
             docSource.flags.core = { sourceId: this.#sourceIdOf(docSource._id ?? "", { docType: "Actor" }) };
         }
 
         if (isItemSource(docSource)) {
-            docSource.effects = [];
             docSource.flags.core = { sourceId: this.#sourceIdOf(docSource._id ?? "", { docType: "Item" }) };
             //@ts-ignore
             docSource.system.slug ??= sluggify(docSource.name);
