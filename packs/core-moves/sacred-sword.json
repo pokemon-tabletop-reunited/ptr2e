@@ -1,46 +1,48 @@
 {
-    "name": "Sacred Sword",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
-    "system": {
+  "name": "Sacred Sword",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+  "system": {
+    "slug": "sacred-sword",
+    "traits": [
+      "pass-3",
+      "sharp",
+      "contact",
+      "danger-close"
+    ],
+    "actions": [
+      {
         "slug": "sacred-sword",
+        "name": "Sacred Sword",
+        "type": "attack",
         "traits": [
-            "pass-3",
-            "sharp",
-            "contact",
-            "danger-close"
+          "pass-3",
+          "sharp",
+          "contact",
+          "danger-close",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "sacred-sword",
-                "name": "Sacred Sword",
-                "type": "attack",
-                "traits": [
-                    "pass-3",
-                    "sharp",
-                    "contact",
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 6
-                },
-                "category": "physical",
-                "power": 90,
-                "accuracy": 100,
-                "types": [
-                    "fighting"
-                ],
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "fighting"
         ],
-        "grade": "A"
-    },
-    "_id": "DCo1YEm46bRMBLbB",
-    "effects": []
+        "img": "/systems/ptr2e/img/svg/fighting_icon.svg"
+      }
+    ],
+    "grade": "B",
+    "description": ""
+  },
+  "_id": "DCo1YEm46bRMBLbB",
+  "effects": []
 }

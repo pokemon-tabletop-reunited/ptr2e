@@ -167,7 +167,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
         
         const actions = {
             passives: actor.actions.passive,
-            generic: actor.actions.generic,
+            generic: [...actor.actions.generic, ...actor.actions.pokeball],
             slots: Object.values(actor.attacks.actions),
             other: actor.actions.attack.filter(a => a.free),
         };

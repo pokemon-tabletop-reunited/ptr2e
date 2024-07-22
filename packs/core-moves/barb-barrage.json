@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "barb-barrage",
-    "description": "Effect: On hit, the target has a 50% chance of becoming Poison 5. If the target has the Poison or Blight condition, this Attack's Power is doubled.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "barb-barrage",
         "name": "Barb Barrage",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -30,7 +32,7 @@
         "types": [
           "poison"
         ],
-        "description": "Effect: On hit, the target has a 50% chance of becoming Poison 5. If the target has the Poison or Blight condition, this Attack's Power is doubled.",
+        "description": "Effect: On hit, the target has a 50% chance of gaining @Affliction[poison] 5. If the target has the @Affliction[poison] or @Affliction[blight] condition, this Attack's Power is doubled.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

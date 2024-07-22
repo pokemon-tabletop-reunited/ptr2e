@@ -1,42 +1,44 @@
 {
-    "name": "Shock Wave",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/electric_icon.svg",
-    "system": {
+  "name": "Shock Wave",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/electric_icon.svg",
+  "system": {
+    "slug": "shock-wave",
+    "traits": [
+      "ray",
+      "danger-close"
+    ],
+    "actions": [
+      {
         "slug": "shock-wave",
+        "name": "Shock Wave",
+        "type": "attack",
         "traits": [
-            "ray",
-            "danger-close"
+          "ray",
+          "danger-close",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "shock-wave",
-                "name": "Shock Wave",
-                "type": "attack",
-                "traits": [
-                    "ray",
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "cone",
-                    "distance": 3,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 5
-                },
-                "category": "special",
-                "power": 60,
-                "accuracy": 100,
-                "types": [
-                    "electric"
-                ],
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "electric"
         ],
-        "grade": "B"
-    },
-    "_id": "Jh0VT5oAXNgSBhaQ",
-    "effects": []
+        "img": "/systems/ptr2e/img/svg/electric_icon.svg"
+      }
+    ],
+    "grade": "C",
+    "description": ""
+  },
+  "_id": "Jh0VT5oAXNgSBhaQ",
+  "effects": []
 }

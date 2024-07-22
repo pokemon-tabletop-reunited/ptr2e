@@ -1,45 +1,47 @@
 {
-    "name": "Tackle",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/normal_icon.svg",
-    "system": {
+  "name": "Tackle",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "system": {
+    "slug": "tackle",
+    "traits": [
+      "push-1",
+      "dash",
+      "basic",
+      "contact"
+    ],
+    "actions": [
+      {
         "slug": "tackle",
+        "name": "Tackle",
+        "type": "attack",
         "traits": [
-            "push-1",
-            "dash",
-            "basic",
-            "contact"
+          "push-1",
+          "dash",
+          "basic",
+          "contact",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "tackle",
-                "name": "Tackle",
-                "type": "attack",
-                "traits": [
-                    "push-1",
-                    "dash",
-                    "basic",
-                    "contact"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 1
-                },
-                "category": "physical",
-                "power": 40,
-                "accuracy": 100,
-                "types": [
-                    "normal"
-                ]
-            }
-        ],
-        "grade": "E"
-    },
-    "_id": "fWOSmnI68Lct2LUn",
-    "effects": []
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ]
+      }
+    ],
+    "grade": "E",
+    "description": ""
+  },
+  "_id": "fWOSmnI68Lct2LUn",
+  "effects": []
 }

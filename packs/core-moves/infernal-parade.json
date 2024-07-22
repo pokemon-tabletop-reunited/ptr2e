@@ -4,22 +4,25 @@
   "img": "/systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "infernal-parade",
-    "description": "Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[burn] 5. If a target is already afflicted with Burn, this Attack's Power is doubled.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "infernal-parade",
         "name": "Infernal Parade",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "blast-1",
+          "pp-updated"
+        ],
         "range": {
-          "target": "wide-line",
-          "distance": 4,
+          "target": "blast",
+          "distance": 10,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 8,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -30,7 +33,7 @@
         "types": [
           "ghost"
         ],
-        "description": "Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[burn] 5. If a target is already afflicted with Burn, this Attack's Power is doubled.",
+        "description": "Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[burn] 5. If a target is already afflicted with a Major Affliction, this Attack's Power is doubled.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -38,7 +41,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "A"
   },
   "_id": "rDgo75tKgaNAcwVY",
   "effects": []

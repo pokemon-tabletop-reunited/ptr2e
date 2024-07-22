@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": "grassy-glide",
-    "description": "Effect: If the user is grounded on a Grassy square, they may use this attack as \"Priority 1\".",
+    "description": "",
     "traits": [
       "environ",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "environ",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,7 @@
         "types": [
           "grass"
         ],
-        "description": "Effect: If the user is grounded on a Grassy square, they may use this attack as \"Priority 1\".",
+        "description": "Effect: If the user is @Affliction[grounded] on a Grassy square, they may use this attack as \"Priority 1\".",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "E"
   },
   "_id": "fYErLjpYjYvlKV8H",
   "effects": []

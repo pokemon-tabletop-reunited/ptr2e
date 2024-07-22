@@ -4,12 +4,15 @@
   "img": "/systems/ptr2e/img/svg/nuclear_icon.svg",
   "system": {
     "slug": "quantum-leap",
-    "description": "Effect: Set-Up: The user becomes Transient 1, and ends their activation. While in this state, they have +6 EVA stages.\nResolution: On their next activation, the user freely moves up to twice the Movement Score of their choice and attacks with and resolves Quantum Leap. This attack ignores [Shield] effects.",
+    "description": "",
     "traits": [
       "legendary",
       "set-up",
       "crushing",
-      "contact"
+      "pierce",
+      "crit-2",
+      "contact",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -20,7 +23,10 @@
           "legendary",
           "set-up",
           "crushing",
-          "contact"
+          "pierce",
+          "crit-2",
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -29,7 +35,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -40,7 +46,7 @@
         "types": [
           "nuclear"
         ],
-        "description": "Effect: Set-Up: The user becomes Transient 1, and ends their activation. While in this state, they have +6 EVA stages.\nResolution: On their next activation, the user freely moves up to twice the Movement Score of their choice and attacks with and resolves Quantum Leap. This attack ignores [Shield] effects.",
+        "description": "Effect: Set-Up: The user gains @Affliction[transient] 1 and @Affliction[braced] 1 and ends their activation. \nResolution: On their next activation, the user freely moves up to twice the Movement Score of their choice, is cured of @Affliction[transient], and attacks with and resolves this attack.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -48,7 +54,7 @@
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "D"
   },
   "_id": "Br2ZtWmGWjb3XTSw",
   "effects": []

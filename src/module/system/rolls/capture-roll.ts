@@ -119,7 +119,7 @@ class CaptureRoll extends CheckRoll {
             bonusStage: new Roll(this.bonusStageFormula, {
                 netStages: data.target.netStages,
             }).evaluateSync().total,
-            bonusLevel: Math.max((36 - 2 * (data.target.level || 1)) / 10, 1),
+            bonusLevel: Math.pow(0.75, (data.target.level - (data.user?.level ?? 0) + 5) / 5 || 0), //Math.max((36 - 2 * (data.target.level || 1)) / 10, 1),
             bonusMisc: data.miscBonus || 1,
         }).evaluateSync();
     }
@@ -143,6 +143,7 @@ class CaptureRoll extends CheckRoll {
 
 type CaptureRollCreationData = {
     target: Maybe<ActorPTR2e>;
+    user: Maybe<ActorPTR2e>;
     ballBonus: number;
     miscBonus: number;
     critBonus: number;

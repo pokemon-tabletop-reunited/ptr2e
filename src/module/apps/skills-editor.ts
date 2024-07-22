@@ -1,4 +1,5 @@
-import { ActorPTR2e } from "@actor";
+import { ActorPTR2e, Skill } from "@actor";
+import { SkillsComponent } from "@actor/components/skills-component.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
 
@@ -58,31 +59,38 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     }
 
     resetSkills(): this["skills"] {
-        const skills = [];
-        for (const skill of this.document.system.skills) {
+        const {skills, hideHiddenSkills} = SkillsComponent.prepareSkillsData(this.document);
+
+        const convertSkill = (skill: Skill) => {
             if (game.i18n.has(`PTR2E.Skills.${skill.group ? `${skill.group}.${skill.slug}` : skill.slug}.label`)) {
                 const label = game.i18n.format(
                     `PTR2E.Skills.${
                         skill.group ? `${skill.group}.${skill.slug}` : skill.slug
                     }.label`
                 );
-                skills.push({
+                return [{
                     ...skill,
                     label,
                     investment: 0,
-                });
+                }];
             } else {
                 const skillData = game.ptr.data.skills.get(skill.slug);
                 if (skillData && game.ptr.data.skills.isCustomSkill(skillData)) {
-                    skills.push({
+                    return [{
                         ...skill,
                         label: skillData.label || Handlebars.helpers.formatSlug(skill.slug),
                         investment: 0,
-                    });
+                    }];
                 }
             }
+            return []
         }
-        return skills;
+        
+        return [
+            ...skills.favourites.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as (SkillPTR2e["_source"] & { label: string; investment: number })[]),
+            ...skills.normal.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as (SkillPTR2e["_source"] & { label: string; investment: number })[]),
+            ...(hideHiddenSkills ? [] : skills.hidden.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as (SkillPTR2e["_source"] & { label: string; investment: number })[])),
+        ]
     }
 
     override async _prepareContext() {
@@ -203,7 +211,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                     const value = parseInt(input.value);
                     if (isNaN(value) || !value) return;
                     const resources = thisRef.skills.find((skill) => skill.slug === "resources")!;
-                    if (resources.value + (resources.rvs ?? 0) + value < 10) {
+                    if (resources.value + (resources.rvs ?? 0) + value < 1) {
                         ui.notifications.warn(
                             game.i18n.format("PTR2E.SkillsEditor.ChangeResources.warn", {
                                 name: document.name,
@@ -365,7 +373,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             if (isNaN(investment) || !investment) continue;
 
             if(skill.slug === "resources" && investment < 0) resourceMod = investment; 
-            skill.rvs = Math.clamp((skill.rvs ?? 0) + investment, 0, maxInvestment);
+            skill.rvs = Math.clamp((skill.rvs ?? 0) + investment, skill.slug === "resources" ? -maxInvestment : 0, maxInvestment);
             delete data[skill.slug];
         }
 
@@ -381,7 +389,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             skills.push({
                 slug,
                 value: 1,
-                rvs: Math.clamp(investment, 0, maxInvestment),
+                rvs: Math.clamp(investment, slug === "resources" ? -maxInvestment : 0, maxInvestment),
                 favourite: skillData.favourite ?? false,
                 hidden: skillData.hidden ?? false,
                 group: skillData.group || undefined,

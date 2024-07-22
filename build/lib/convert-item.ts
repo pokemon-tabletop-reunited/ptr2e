@@ -134,7 +134,7 @@ function consumableToMarkdown(consumable: any): MarkdownResult | null {
         metadata,
         markdown: `- **Grade**: ${consumable.system.grade}\n- **Rarity**: ${
             consumable.system.rarity
-        }\n${flingString}\n${craftingString ? `${craftingString}\n` : ""}\n### Description\n${
+        }\n- **IP Cost**: ${consumable.system.cost}\n${flingString}\n${craftingString ? `${craftingString}\n` : ""}\n### Description\n${
             consumable.system.description
         }${
             actionStrings.length > 0

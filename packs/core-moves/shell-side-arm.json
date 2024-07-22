@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "shell-side-arm",
-    "description": "Effect: The user may use this attack as a 1m Physical Category attack without the [Missile] trait. On hit, the target has a 20% chance of gaining Poison 5.",
+    "description": "",
     "traits": [
       "missile"
     ],
@@ -14,7 +14,8 @@
         "name": "Shell Side Arm",
         "type": "attack",
         "traits": [
-          "missile"
+          "missile",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "poison"
         ],
-        "description": "Effect: The user may use this attack as a 1m Physical Category attack without the [Missile] trait. On hit, the target has a 20% chance of gaining Poison 5.",
+        "description": "Effect: The user may use this attack as a 1m Physical Category attack without the [Missile] trait. On hit, the target has a 20% chance of gaining @Affliction[poison] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "Tk1gco0MnXrf3Cdr",
   "effects": []

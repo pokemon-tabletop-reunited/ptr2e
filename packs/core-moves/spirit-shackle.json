@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "spirit-shackle",
-    "description": "Effect: On hit, the target becomes Bound 5. While Bound, the target cannot be switched out or flee.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "spirit-shackle",
         "name": "Spirit Shackle",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 12,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -30,7 +32,7 @@
         "types": [
           "ghost"
         ],
-        "description": "Effect: On hit, the target becomes Bound 5. While Bound, the target cannot be switched out or flee.",
+        "description": "Effect: On hit, the target becomes @Affliction[bound] 5. While @Affliction[bound], the target cannot be switched out or flee.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "lFRKkWcPGvZ3M7zk",
   "effects": []

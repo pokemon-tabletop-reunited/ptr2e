@@ -4,12 +4,13 @@
   "img": "/systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "shadow-force",
-    "description": "Effect: Set-Up: The user gains Invisible 1 and Transient 1, and ends their activation.\nResolution: On their next activation, the user freely moves up to two times the Movement Score of their choice and attacks with and resolves Shadow Force. This attack removes the effects of [Shield] attacks on the target before applying damage.",
+    "description": "",
     "traits": [
       "legendary",
       "set-up",
       "pass-4",
       "crushing",
+      "pierce",
       "contact"
     ],
     "actions": [
@@ -22,7 +23,9 @@
           "set-up",
           "pass-4",
           "crushing",
-          "contact"
+          "pierce",
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -31,7 +34,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 7,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -42,7 +45,7 @@
         "types": [
           "ghost"
         ],
-        "description": "Effect: Set-Up: The user gains Invisible 1 and Transient 1, and ends their activation.\nResolution: On their next activation, the user freely moves up to two times the Movement Score of their choice and attacks with and resolves Shadow Force. This attack removes the effects of [Shield] attacks on the target before applying damage.",
+        "description": "Effect: Set-Up: The user gains @Affliction[invisible] 1 and @Affliction[transient] 1, and ends their activation.\nResolution: On their next activation, the user freely moves up to two times the Movement Score of their choice, is cured of @Affliction[transient] and @Affliction[invisible], and then attacks with and resolves this attack.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -50,7 +53,7 @@
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "A"
   },
   "_id": "3FUbV3cOXazvisJ0",
   "effects": []

@@ -11,19 +11,24 @@ class SkillPTR2e extends foundry.abstract.DataModel {
             value: new fields.NumberField({
                 required: true,
                 initial: 1,
-                positive: true,
+                positive: true
             }),
-            // Luck & Resources do not use RVs
+            // Luck does not use RVs
             rvs: new fields.NumberField({
                 required: true,
                 nullable: true,
                 initial: 0,
-                min: 0,
             }),
             favourite: new fields.BooleanField({ required: true, initial: false }),
             hidden: new fields.BooleanField({ required: true, initial: false }),
             group: new SlugField({ required: false }),
         };
+    }
+
+    static override validateJoint(data: SourceFromSchema<SkillSchema>): void {
+        if ((data.rvs ?? 0) < 0 && !["resources"].includes(data.slug)) {
+            throw new Error("Skill value must be at least 1");
+        }
     }
 
     get actor() {

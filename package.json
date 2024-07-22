@@ -9,6 +9,7 @@
         "build:packs": "tsx ./build/build-packs.ts",
         "build:packs:json": "tsx ./build/build-packs.ts json",
         "sync:wiki": "tsx ./build/wiki-sync.ts",
+        "migration:one": "tsx ./build/manual-migrations/migration-attacking-pp-moves.ts",
         "clean": "tsx ./build/clean.ts",
         "watch": "npm run clean && npm run build:packs && vite build --watch --mode development",
         "hot": "vite serve",

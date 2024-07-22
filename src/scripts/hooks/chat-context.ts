@@ -12,7 +12,7 @@ export const ChatContext: PTRHook = {
                     condition: li => {
                         const message = game.messages.get(li.data("messageId"));
                         if(!message) return false;
-                        return ["skill"].includes(message.type) && !(message.system as SkillMessageSystem).rerolled;
+                        return ["skill"].includes(message.type) && !(message.system as SkillMessageSystem).rerolled && !(message.system as SkillMessageSystem).luckRoll;
                     },
                     callback: li => {
                         const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e<SkillMessageSystem>;
@@ -36,7 +36,7 @@ export const ChatContext: PTRHook = {
                     condition: li => {
                         const message = game.messages.get(li.data("messageId"));
                         if(!message) return false;
-                        return ["skill"].includes(message.type)
+                        return ["skill"].includes(message.type) && !(message.system as SkillMessageSystem).luckRoll;
                     },
                     callback: li => {
                         const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e<SkillMessageSystem>;

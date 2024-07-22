@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "burning-jealousy",
-    "description": "Effect: Oh hit, all valid targets with any positive stage stages become @Affliction[burn] 5.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "burning-jealousy",
         "name": "Burning Jealousy",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "cone",
           "distance": 3,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "9UgW97p2uziZK7Sl",
   "effects": []

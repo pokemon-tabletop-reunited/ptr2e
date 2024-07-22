@@ -2,8 +2,10 @@ import { default as TypeEffectiveness } from "./config/effectiveness.ts";
 import { ClockDatabase } from "@data";
 import { SkillsSettingsMenu } from "@module/apps/skills.ts";
 import { TraitsSettingsMenu } from "@module/apps/traits.ts";
+import { MigrationRunner } from "@module/migration/index.ts";
 
 export function initializeSettings() {
+
     game.settings.register("ptr2e", "pokemonTypes", {
         name: "PTR2E.Settings.PokemonTypes.Name",
         hint: "PTR2E.Settings.PokemonTypes.Hint",
@@ -92,6 +94,7 @@ export function initializeSettings() {
         ],
         onDown: (context) => game.ptr.web?.onUndo(context),
     });
+
     game.keybindings.register("ptr2e", "delete",{
         name: "PTR2E.Keybindings.Delete.Name",
         hint: "PTR2E.Keybindings.Delete.Hint",
@@ -102,5 +105,23 @@ export function initializeSettings() {
             }
         ],
         onDown: (context) => game.ptr.web?.onDelete(context),
+    });
+
+    game.settings.register("ptr2e", "worldSystemVersion", {
+        name: "World System Version",
+        scope: "world",
+        config: false,
+        default: game.system.version,
+        type: String,
+    });
+
+    game.settings.register("ptr2e", "worldSchemaVersion", {
+        name: "PTR2E.SETTINGS.WorldSchemaVersion.Name",
+        hint: "PTR2E.SETTINGS.WorldSchemaVersion.Hint",
+        scope: "world",
+        config: true,
+        default: MigrationRunner.LATEST_SCHEMA_VERSION,
+        type: Number,
+        requiresReload: true,
     });
 }

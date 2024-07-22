@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "pursuit",
-    "description": "The user can spend 2 PP use Pursuit as an [Interrupt 6] action, with the Trigger being \"A creature uses Movement or is being Switched out\". When using Pursuit this way, the user can freely move up to half of the Movement Type of their choice towards the target and then attacks with Pursuit, which has its Power doubled.",
+    "description": "",
     "traits": [
       "dash",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "dash",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 5,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "E"
   },
   "_id": "L4Q816PuV6qPq9mN",
   "effects": []

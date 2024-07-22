@@ -1,4 +1,4 @@
-import { ItemPTR2e, ItemSystemPTR, SpeciesPTR2e } from "@item";
+import { AbilityPTR2e, ItemPTR2e, ItemSystemPTR, SpeciesPTR2e } from "@item";
 import ActorPTR2e from "./base.ts";
 import { SpeciesDropSheet } from "./sheets/species-drop-sheet.ts";
 import { SpeciesSystemModel } from "@item/data/index.ts";
@@ -13,7 +13,10 @@ import Tagify from "@yaireo/tagify";
 import EquipmentSystem from "@item/data/equipment.ts";
 import ContainerSystem from "@item/data/container.ts";
 import { KnownActionsApp } from "@module/apps/known-attacks.ts";
-import { ActorSheetV2Expanded, DocumentSheetConfigurationExpanded } from "@module/apps/appv2-expanded.ts";
+import {
+    ActorSheetV2Expanded,
+    DocumentSheetConfigurationExpanded,
+} from "@module/apps/appv2-expanded.ts";
 import { ActionEditor } from "@module/apps/action-editor.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { SkillsComponent } from "./components/skills-component.ts";
@@ -25,6 +28,7 @@ import { StatsChart } from "./sheets/stats-chart.ts";
 import StatsForm from "./sheets/stats-form.ts";
 import { ActiveEffectPTR2e } from "@effects";
 import { natures } from "@scripts/config/natures.ts";
+import { AvailableAbilitiesApp } from "@module/apps/available-abilities.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
     ActorSheetV2Expanded
@@ -51,9 +55,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                         icon: "fas fa-paw",
                         label: "PTR2E.ActorSheet.Species",
                         action: "species-header",
-                        visible: true
-                    }
-                ]
+                        visible: true,
+                    },
+                ],
             },
             form: {
                 submitOnChange: true,
@@ -61,8 +65,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             dragDrop: [
                 {
                     dropSelector: ".window-content",
-                    dragSelector: "fieldset .item, fieldset .effect, fieldset .action, ul.items > li",
-                }
+                    dragSelector:
+                        "fieldset .item, fieldset .effect, fieldset .action, ul.items > li",
+                },
             ],
             actions: {
                 "species-header": async function (this: ActorSheetPTRV2, event: Event) {
@@ -83,24 +88,36 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                             this.actor.update({ "system.species": species });
                         }
                     });
-                    sheet.species = new CONFIG.Item.documentClass({
-                        _id: "actorSpeciesItem",
-                        name: species.slug
-                            ? Handlebars.helpers.formatSlug(species.slug)
-                            : this.actor.name,
-                        type: "species",
-                        img: this.actor.img,
-                        flags: { ptr2e: { disabled: !this.actor.system._source.species, virtual: true } },
-                        system: species.toObject(),
-                    }, {parent: this.document}) as SpeciesPTR2e;
+                    sheet.species = new CONFIG.Item.documentClass(
+                        {
+                            _id: "actorSpeciesItem",
+                            name: species.slug
+                                ? Handlebars.helpers.formatSlug(species.slug)
+                                : this.actor.name,
+                            type: "species",
+                            img: this.actor.img,
+                            flags: {
+                                ptr2e: {
+                                    disabled: !this.actor.system._source.species,
+                                    virtual: true,
+                                },
+                            },
+                            system: species.toObject(),
+                        },
+                        { parent: this.document }
+                    ) as SpeciesPTR2e;
                     sheet.render(true);
                 },
                 "open-perk-web": async function (this: ActorSheetPTRV2) {
-                    if([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash)) await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
+                    if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
+                        await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
                     game.ptr.web.open(this.actor);
                 },
                 "edit-movelist": function (this: ActorSheetPTRV2) {
                     new KnownActionsApp(this.actor).render(true);
+                },
+                "edit-abilitylist": function (this: ActorSheetPTRV2) {
+                    new AvailableAbilitiesApp(this.actor).render(true);
                 },
                 "roll-attack": async function (this: ActorSheetPTRV2, event: Event) {
                     const actionDiv = (event.target as HTMLElement).closest(
@@ -113,7 +130,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
                     const action = this.actor.actions.get(slug);
                     if (!action) return;
-                    if('rollable' in action && action.rollable === true) await (action as AttackPTR2e).roll();
+                    if ("rollable" in action && action.rollable === true)
+                        await (action as AttackPTR2e).roll();
                 },
                 "action-to-chat": ActorSheetPTRV2._onToChatAction,
                 "action-edit": ActorSheetPTRV2._onEditAction,
@@ -212,23 +230,59 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     };
 
     subtabs: Record<string, Tab> = {
-        actionsCombat: {
-            id: "actionsCombat",
+        // actionsCombat: {
+        //     id: "actionsCombat",
+        //     group: "actions",
+        //     icon: "fa-solid fa-burst",
+        //     label: "PTR2E.ActorSheet.Tabs.actions.combat.label",
+        // },
+        // actionsDowntime: {
+        //     id: "actionsDowntime",
+        //     group: "actions",
+        //     icon: "fa-solid fa-clock",
+        //     label: "PTR2E.ActorSheet.Tabs.actions.downtime.label",
+        // },
+        // actionsOther: {
+        //     id: "actionsOther",
+        //     group: "actions",
+        //     icon: "fa-solid fa-dice-d20",
+        //     label: "PTR2E.ActorSheet.Tabs.actions.other.label",
+        // },
+        slots: {
+            id: "slots",
             group: "actions",
             icon: "fa-solid fa-burst",
-            label: "PTR2E.ActorSheet.Tabs.actions.combat.label",
+            label: "Attacks",
         },
-        actionsDowntime: {
-            id: "actionsDowntime",
-            group: "actions",
-            icon: "fa-solid fa-clock",
-            label: "PTR2E.ActorSheet.Tabs.actions.downtime.label",
-        },
-        actionsOther: {
-            id: "actionsOther",
+        generic: {
+            id: "generic",
             group: "actions",
             icon: "fa-solid fa-dice-d20",
-            label: "PTR2E.ActorSheet.Tabs.actions.other.label",
+            label: "Generic Actions",
+        },
+        passives: {
+            id: "passives",
+            group: "actions",
+            icon: "fa-solid fa-star",
+            label: "Passives",
+        },
+        camping: {
+            id: "camping",
+            group: "actions",
+            icon: "fa-solid fa-campfire",
+            label: "Camping Activities",
+        },
+        downtime: {
+            id: "downtime",
+            group: "actions",
+            icon: "fa-solid fa-clock",
+            label: "Downtime Activities",
+        },
+        exploration: {
+            id: "exploration",
+            group: "actions",
+            icon: "fa-solid fa-magnifying-glass",
+            label: "Exploration Activities",
         },
     };
 
@@ -303,9 +357,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         options?: foundry.applications.api.HandlebarsDocumentSheetConfiguration<ActorPTR2e>
     ) {
         const { skills, hideHiddenSkills } = SkillsComponent.prepareSkillsData(this.actor);
-        const shouldPerkFlash = this.actor.flags.ptr2e?.sheet?.perkFlash === false 
-            ? false
-            : this.actor.system.advancement.advancementPoints.available > 0;
+        const shouldPerkFlash =
+            this.actor.flags.ptr2e?.sheet?.perkFlash === false
+                ? false
+                : this.actor.system.advancement.advancementPoints.available > 0;
 
         return {
             ...(await super._prepareContext(options)),
@@ -317,20 +372,29 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             skills,
             hideHiddenSkills,
             shouldPerkFlash,
-            natures: natures
+            natures: natures,
         };
     }
 
-    override async _preparePartContext(partId: string, context: foundry.applications.api.ApplicationRenderContext) {
-        if(partId === "overview") {
+    override async _preparePartContext(
+        partId: string,
+        context: foundry.applications.api.ApplicationRenderContext
+    ) {
+        if (partId === "overview") {
             context.movement = this.actor.system.movement.contents;
         }
 
-        if(partId === "inventory") {
+        if (partId === "inventory") {
             const inventory = (() => {
                 const inventory: Record<string, ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]> = {};
                 for (const item of this.actor.items) {
-                    const physicalItems = ["weapon", "gear", "consumable", "equipment", "container"];
+                    const physicalItems = [
+                        "weapon",
+                        "gear",
+                        "consumable",
+                        "equipment",
+                        "container",
+                    ];
                     function isTypeOfPhysicalItem(
                         item: Item
                     ): item is ItemPTR2e<
@@ -349,7 +413,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                         inventory[category].push(item);
                     }
                 }
-                for(const key of Object.keys(inventory)) {
+                for (const key of Object.keys(inventory)) {
                     inventory[key].sort((a, b) => a.sort - b.sort);
                 }
                 return inventory;
@@ -357,15 +421,15 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             context.inventory = inventory;
         }
 
-        if(partId === "actions") {
+        if (partId === "actions") {
             context.subtabs = this._getSubTabs();
         }
-        
-        if(partId === "effects") {
+
+        if (partId === "effects") {
             context.effects = this.actor.effects.contents;
         }
 
-        if(partId === "perks") {
+        if (partId === "perks") {
             const traits = (() => {
                 if ("traits" in this.document.system) {
                     const traits = [];
@@ -379,7 +443,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                 }
                 return [];
             })();
-    
+
             this.#allTraits = game.ptr.data.traits.map((trait) => ({
                 value: trait.slug,
                 label: trait.label,
@@ -423,30 +487,33 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             element.appendChild(div);
         }
 
-        if(partId === "header" && this.isEditable) {
+        if (partId === "header" && this.isEditable) {
             htmlQuery(htmlElement, "img[data-edit]")?.addEventListener("click", (event) => {
                 const imgElement = event.currentTarget as HTMLImageElement;
                 const attr = imgElement.dataset.edit;
                 const current = foundry.utils.getProperty<string | undefined>(this.actor, attr!);
-                const {img} = ActorPTR2e.getDefaultArtwork(this.actor.toObject()) ?? {};
+                const { img } = ActorPTR2e.getDefaultArtwork(this.actor.toObject()) ?? {};
                 const fp = new FilePicker({
                     current,
                     type: "image",
                     redirectToRoot: img ? [img] : [],
                     callback: (path: string) => {
                         imgElement.src = path;
-                        if(this.options.form?.submitOnChange) this.element.dispatchEvent(new Event("submit", { cancelable: true }));
+                        if (this.options.form?.submitOnChange)
+                            this.element.dispatchEvent(new Event("submit", { cancelable: true }));
                     },
                     top: this.position.top + 40,
                     left: this.position.left + 10,
-                })
+                });
                 fp.browse();
             });
         }
 
-        if(partId === "overview") {
+        if (partId === "overview") {
             this.statsChart.render();
-            htmlQuery(htmlElement, ".stats-chart")?.addEventListener("dblclick", () => new StatsForm({document: this.actor}).render(true));
+            htmlQuery(htmlElement, ".stats-chart")?.addEventListener("dblclick", () =>
+                new StatsForm({ document: this.actor }).render(true)
+            );
         }
 
         if (partId === "effects") {
@@ -457,69 +524,92 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             SkillsComponent.attachListeners(htmlElement, this.actor);
         }
 
+        if(partId === "actions") {
+            for(const element of htmlQueryAll(htmlElement, ".tab[data-tab='actions'] .sub-tabs [data-scroll-anchor]")) {
+                element.addEventListener("click", (event) => {
+                    const anchor = (event.currentTarget as HTMLElement).dataset.scrollAnchor;
+                    const scrollElement = htmlQuery(htmlElement, `.tab[data-tab='actions'] .active .${anchor}`);
+                    if(scrollElement) scrollElement.scrollIntoView({ behavior: "smooth", inline: "center" });
+                });
+            }
+        }
+
         if(partId === "inventory") {
             for (const element of htmlQueryAll(htmlElement, ".tab[data-tab='inventory'] .item-controls a[data-action=edit-item]")) {
                 element.addEventListener("click", async (event) => {
                     const itemId = (
-                        (event.currentTarget as HTMLElement)?.closest("[data-item-id]") as HTMLElement
+                        (event.currentTarget as HTMLElement)?.closest(
+                            "[data-item-id]"
+                        ) as HTMLElement
                     )?.dataset.itemId;
                     if (!itemId) return;
-                    return (
-                        this.document.items.get(itemId) as ItemPTR2e
-                    )?.sheet?.render(true);
-                });
-            }
-    
-            for (const element of htmlQueryAll(htmlElement, ".tab[data-tab='inventory'] .item-controls a[data-action=delete-item]")) {
-                element.addEventListener("click", async (event) => {
-                    const itemId = (
-                        (event.currentTarget as HTMLElement)?.closest("[data-item-id]") as HTMLElement
-                    )?.dataset.itemId;
-                    const item = this.document.items.get(itemId!);
-                    if (!item) return;
-    
-                    // Confirm the deletion unless the user is holding Shift
-                    return event.shiftKey ? item.delete() : foundry.applications.api.DialogV2.confirm({
-                        yes: {
-                            callback: () => item.delete(),
-                        },
-                        content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", {
-                            name: item.name,
-                        }),
-                        window: {
-                            title: game.i18n.format("PTR2E.Dialog.DeleteDocumentTitle", {
-                                name: item.name,
-                            }),
-                        },
-                    });
+                    return (this.document.items.get(itemId) as ItemPTR2e)?.sheet?.render(true);
                 });
             }
 
-            for(const element of htmlQueryAll(htmlElement, ".tab[data-tab='inventory'] .quantity a[data-action]")) {
+            for (const element of htmlQueryAll(
+                htmlElement,
+                ".tab[data-tab='inventory'] .item-controls a[data-action=delete-item]"
+            )) {
                 element.addEventListener("click", async (event) => {
                     const itemId = (
-                        (event.currentTarget as HTMLElement)?.closest("[data-item-id]") as HTMLElement
+                        (event.currentTarget as HTMLElement)?.closest(
+                            "[data-item-id]"
+                        ) as HTMLElement
+                    )?.dataset.itemId;
+                    const item = this.document.items.get(itemId!);
+                    if (!item) return;
+
+                    // Confirm the deletion unless the user is holding Shift
+                    return event.shiftKey
+                        ? item.delete()
+                        : foundry.applications.api.DialogV2.confirm({
+                              yes: {
+                                  callback: () => item.delete(),
+                              },
+                              content: game.i18n.format("PTR2E.Dialog.DeleteDocumentContent", {
+                                  name: item.name,
+                              }),
+                              window: {
+                                  title: game.i18n.format("PTR2E.Dialog.DeleteDocumentTitle", {
+                                      name: item.name,
+                                  }),
+                              },
+                          });
+                });
+            }
+
+            for (const element of htmlQueryAll(
+                htmlElement,
+                ".tab[data-tab='inventory'] .quantity a[data-action]"
+            )) {
+                element.addEventListener("click", async (event) => {
+                    const itemId = (
+                        (event.currentTarget as HTMLElement)?.closest(
+                            "[data-item-id]"
+                        ) as HTMLElement
                     )?.dataset.itemId;
                     const item = this.document.items.get(itemId!) as ItemPTR2e;
-                    if (!item || !('quantity' in item.system)) return;
-    
+                    if (!item || !("quantity" in item.system)) return;
+
                     const action = (event.currentTarget as HTMLElement)?.dataset.action;
                     const isShift = event.shiftKey;
                     const isCtrl = event.ctrlKey;
                     const amount = isCtrl ? 10 : isShift ? 5 : 1;
-                    switch(action) {
+                    switch (action) {
                         case "increase-quantity": {
                             item.update({ "system.quantity": item.system.quantity + amount });
                             break;
                         }
                         case "decrease-quantity": {
-                            item.update({ "system.quantity": Math.max(0, item.system.quantity - amount) });
+                            item.update({
+                                "system.quantity": Math.max(0, item.system.quantity - amount),
+                            });
                             break;
                         }
                     }
                 });
             }
-        
         }
 
         if (partId === "perks") {
@@ -571,7 +661,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         formData: FormDataExtended
     ): Record<string, unknown> {
         const submitData = formData.object;
-        
+
         if (
             "system.traits" in submitData &&
             submitData["system.traits"] &&
@@ -579,8 +669,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             Array.isArray(submitData["system.traits"])
         ) {
             // Traits are stored as an array of objects, but we only need the values
-            submitData["system.traits"] = submitData["system.traits"].map((trait: { value: string }) =>
-                sluggify(trait.value)
+            submitData["system.traits"] = submitData["system.traits"].map(
+                (trait: { value: string }) => sluggify(trait.value)
             );
         }
 
@@ -607,32 +697,60 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     override _onDragStart(event: DragEvent) {
         const target = event.currentTarget as HTMLElement;
-        if(!target.classList.contains("attack")) return super._onDragStart(event);
+        if (!target.classList.contains("attack")) return super._onDragStart(event);
 
         const actionSlug = target.dataset.slug;
-        if(!actionSlug) return;
+        if (!actionSlug) return;
 
         const action = this.document.actions.attack.get(actionSlug);
-        if(!action) return;
+        if (!action) return;
 
         // Create drag data
         const dragData = action.toDragData();
-        if(!dragData) return;
-    
+        if (!dragData) return;
+
         // Set data transfer
         event.dataTransfer!.setData("text/plain", JSON.stringify(dragData));
     }
 
-    override _onDrop(event: DragEvent) {
+    override async _onDrop(event: DragEvent) {
         const data: {
             type: string;
             action?: {
                 slug: string;
                 type: string;
             };
+            uuid?: string;
         } = TextEditor.getDragEventData(event);
-        if (!data.action?.slug) return super._onDrop(event);
 
+        if (data.uuid) {
+            const item = await fromUuid(data.uuid);
+            if (
+                item instanceof ItemPTR2e &&
+                item.type == "ability" &&
+                this.actor.items.get(item.id) === item
+            ) {
+                this._onDropAbility(event, item);
+                return;
+            }
+        }
+
+        if (!data.action?.slug) return super._onDrop(event);
+        //@ts-expect-error
+        this._onDropAction(event, data);
+        return;
+    }
+
+    _onDropAction(
+        event: DragEvent,
+        data: {
+            type: string;
+            action: {
+                slug: string;
+                type: string;
+            };
+        }
+    ) {
         const actionDiv = (event.target as HTMLElement).closest(
             ".action[data-slot]"
         ) as HTMLElement;
@@ -656,8 +774,28 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
         currentAction.update({ slot: null });
         action.update({ slot: slot });
+    }
 
-        return;
+    _onDropAbility(event: DragEvent, ability: AbilityPTR2e) {
+        const abilityDiv = (event.target as HTMLElement).closest(
+            ".action[data-slot]"
+        ) as HTMLElement;
+        if (!abilityDiv) return;
+
+        const slot = Number(abilityDiv.dataset.slot);
+        if (isNaN(slot)) return;
+
+        const currentAbility = this.actor.abilities.entries[slot];
+        if (!currentAbility) {
+            ability.update({ "system.slot": slot });
+            return;
+        }
+        if(currentAbility === ability) return;
+
+        this.actor.updateEmbeddedDocuments("Item", [
+            { _id: currentAbility.id, "system.slot": ability.system.slot ?? null },
+            { _id: ability.id, "system.slot": slot },
+        ]);
     }
 
     static async _onToChatAction(this: ActorSheetPTRV2, event: Event) {
@@ -745,15 +883,15 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         const type = (event.currentTarget as HTMLElement).dataset.type;
         if (!type) return;
 
-        switch(type) {
+        switch (type) {
             case "effect": {
-                return ActiveEffectPTR2e.createDialog({}, {parent: this.document});
+                return ActiveEffectPTR2e.createDialog({}, { parent: this.document });
             }
             default: {
                 const itemType = Item.TYPES.includes(type) ? type : null;
                 if (!itemType) return;
 
-                return ItemPTR2e.createDialog({}, {parent: this.document, types: [itemType]})
+                return ItemPTR2e.createDialog({}, { parent: this.document, types: [itemType] });
             }
         }
     }

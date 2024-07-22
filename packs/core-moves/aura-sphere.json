@@ -1,45 +1,47 @@
 {
-    "name": "Aura Sphere",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
-    "system": {
+  "name": "Aura Sphere",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+  "system": {
+    "slug": "aura-sphere",
+    "traits": [
+      "aura",
+      "missile",
+      "pulse",
+      "danger-close"
+    ],
+    "actions": [
+      {
         "slug": "aura-sphere",
+        "name": "Aura Sphere",
+        "type": "attack",
         "traits": [
-            "aura",
-            "missile",
-            "pulse",
-            "danger-close"
+          "aura",
+          "missile",
+          "pulse",
+          "danger-close",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "aura-sphere",
-                "name": "Aura Sphere",
-                "type": "attack",
-                "traits": [
-                    "aura",
-                    "missile",
-                    "pulse",
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 10,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 5
-                },
-                "category": "special",
-                "power": 80,
-                "accuracy": 100,
-                "types": [
-                    "fighting"
-                ]
-            }
-        ],
-        "grade": "B"
-    },
-    "_id": "dllQTGwUTEQpieyY",
-    "effects": []
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ]
+      }
+    ],
+    "grade": "B",
+    "description": ""
+  },
+  "_id": "dllQTGwUTEQpieyY",
+  "effects": []
 }

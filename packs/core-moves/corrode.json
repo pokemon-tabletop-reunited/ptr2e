@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "corrode",
-    "description": "Effect: This attack is Super Effective against the Steel Type.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "corrode",
         "name": "Corrode",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "x9vhahTaPpo9yqKO",
   "effects": []

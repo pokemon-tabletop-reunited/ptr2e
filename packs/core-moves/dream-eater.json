@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "dream-eater",
-    "description": "Effect: This attack may only be used on a Drowsying target. This attack does not awaken Drowsying creatures.",
+    "description": "",
     "traits": [
       "drain-1-2"
     ],
@@ -14,7 +14,8 @@
         "name": "Dream Eater",
         "type": "attack",
         "traits": [
-          "drain-1-2"
+          "drain-1-2",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "psychic"
         ],
-        "description": "Effect: This attack may only be used on a Drowsying target. This attack does not awaken Drowsying creatures.",
+        "description": "Effect: This attack may only be used on a @Affliction[drowsy]ing target. This attack does not awaken @Affliction[drowsy]ing creatures.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "RCAvbJMDz10ZckH2",
   "effects": []

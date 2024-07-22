@@ -4,9 +4,9 @@
   "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "brick-break",
-    "description": "Effect: On hit, the target's [Shield] effects are removed.",
     "traits": [
-      "contact"
+      "contact",
+      "pierce"
     ],
     "actions": [
       {
@@ -14,7 +14,9 @@
         "name": "Brick Break",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pierce",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +25,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +36,6 @@
         "types": [
           "fighting"
         ],
-        "description": "Effect: On hit, the target's [Shield] effects are removed.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +43,8 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C",
+    "description": ""
   },
   "_id": "FYerpWqIabPCHnDM",
   "effects": []

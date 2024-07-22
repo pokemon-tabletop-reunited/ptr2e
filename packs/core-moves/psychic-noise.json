@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "psychic-noise",
-    "description": "Effect: On hit, the target cannot recover HP from any source for 2 activations.",
+    "description": "",
     "traits": [
       "sonic"
     ],
@@ -14,7 +14,8 @@
         "name": "Psychic Noise",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "psychic"
         ],
-        "description": "Effect: On hit, the target cannot recover HP from any source for 2 activations.",
+        "description": "Effect: On hit, all valid targets have a 40% chance of gaining @Affliction[stunted] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

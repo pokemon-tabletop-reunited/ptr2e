@@ -1,41 +1,42 @@
 {
-    "name": "Rock Tomb",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/rock_icon.svg",
-    "system": {
+  "name": "Rock Tomb",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/rock_icon.svg",
+  "system": {
+    "slug": "rock-tomb",
+    "description": "",
+    "traits": [
+      "blast-2"
+    ],
+    "actions": [
+      {
         "slug": "rock-tomb",
-        "description": "Effect: On hit, all valid targets lose -1 SPD stage for 5 activations.",
+        "name": "Rock Tomb",
+        "type": "attack",
         "traits": [
-            "blast-2"
+          "blast-2",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "rock-tomb",
-                "name": "Rock Tomb",
-                "type": "attack",
-                "traits": [
-                    "blast-2"
-                ],
-                "range": {
-                    "target": "blast",
-                    "distance": 5,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 6
-                },
-                "category": "physical",
-                "power": 60,
-                "accuracy": 95,
-                "types": [
-                    "rock"
-                ],
-                "description": "Effect: On hit, all valid targets lose -1 SPD stage for 5 activations."
-            }
+        "range": {
+          "target": "blast",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 95,
+        "types": [
+          "rock"
         ],
-        "grade": "A"
-    },
-    "_id": "Tu2THeD8kqxjgkp0",
-    "effects": []
+        "description": "Effect: On hit, all valid targets lose -1 SPD stage for 5 activations."
+      }
+    ],
+    "grade": "C"
+  },
+  "_id": "Tu2THeD8kqxjgkp0",
+  "effects": []
 }

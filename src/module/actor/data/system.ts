@@ -1,4 +1,4 @@
-import { HasTraits, PokemonType } from "@data";
+import { HasTraits, HasMigrations, PokemonType } from "@data";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { DataField, DataSchema } from "types/foundry/common/data/fields.js";
 import {
@@ -16,8 +16,9 @@ import { getInitialSkillList } from "@scripts/config/skills.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import natureToStatArray, { natures } from "@scripts/config/natures.ts";
+import { MigrationRecord } from "@module/data/mixins/has-migrations.ts";
 
-class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
+class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel)) {
     static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
 
     declare parent: ActorPTR2e<this>;
@@ -306,6 +307,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         }
 
         this.health.max = this.attributes.hp.value;
+        this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
         this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
         this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
@@ -397,7 +399,7 @@ class ActorSystemPTR2e extends HasTraits(foundry.abstract.TypeDataModel) {
         }
 
         /** Calculate HP */
-        const bulkMod = Math.pow(1 + ((Math.sqrt(2) - 1) / (30 / Math.PI)), (this.species?.size.sizeClass || 1) - 1);
+        const bulkMod = Math.pow(1 + ((Math.sqrt(2) - 1) / (32 / 3)), (this.species?.size.sizeClass || 1) - 1);
 
         return Math.floor(
             (Math.floor(((2 * stat.base + stat.ivs + stat.evs / 4) * level * bulkMod) / 100) +
@@ -492,6 +494,8 @@ type Movement = { method: string; value: number; type: "primary" | "secondary" }
 type ActorSystemSchema = Record<string, DataField<JSONValue, unknown, boolean>> & {
     species: SpeciesSystemModel["_source"];
     traits: string[];
+
+    _migration: MigrationRecord;
 };
 
 export default ActorSystemPTR2e;

@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "eerie-spell",
-    "description": "Effect: The target loses 5 Ticks of PP.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "eerie-spell",
         "name": "Eerie Spell",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,

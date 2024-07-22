@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": "grav-apple",
-    "description": "Effect: On hit, the target loses -1 DEF stage for 5 activations.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "grav-apple",
         "name": "Grav Apple",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "DDJrd7nm13nv5uwY",
   "effects": []

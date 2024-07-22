@@ -1,20 +1,36 @@
 <div class="abilities-display">
-    <fieldset class="can-popout" data-component="abilities">
-        <legend>
-            Abilities
-        </legend>
-        <ul class="ability-list scroll">
-            {{#each abilities as |ability|}}
-                <li class="item ability" data-tooltip-direction="{{../direction}}" data-item-id="{{ability.id}}" data-uuid="{{ability.uuid}}" data-tooltip="{{ability.name}}">
-                    <div class="item-icon"><img src="{{ability.img}}" class="icon"></div>
-                    <span class="name">{{ability.name}}</span>
-                    <div class="item-controls">
-                        <a class="item-control item-to-chat" data-tooltip="Send Ability to chat"><i class="fas fa-external-link-alt"></i></a>
-                        <a class="item-control item-edit" data-tooltip="Edit Ability"><i class="fas fa-edit"></i></a>
-                        <a class="item-control item-delete" data-tooltip="Delete Ability"><i class="fas fa-trash"></i></a>
-                    </div>
-                </li>
-            {{/each}}
-        </ul>
+    <fieldset class="slots" data-component="abilities">
+        <legend>Ability Slots</legend>
+        {{#each actor.abilities.entries as |ability|}}
+            {{#if ability}}
+                {{> ability action=ability direction="LEFT" slot=@index}}
+            {{else}}
+                <div class="action empty" data-slot="{{@index}}">
+                    <div class="action-icon"></div>
+                    <span class="action-name">Available Ability Slot</span>
+                </div>
+            {{/if}}
+        {{/each}}
+        <a class="edit-abilitylist" data-action="edit-abilitylist">Available Abilities</a>
+    </fieldset>
+    <fieldset class="other scroll">
+        <legend>Other Abilities</legend>
+        {{#each actor.abilities.free as |ability|}}
+            {{> ability action=ability direction="LEFT"}}
+        {{/each}}
     </fieldset>
 </div>
+
+{{#*inline "ability"}}
+    <div class="{{action.type}} action item" data-tooltip-direction="{{direction}}" data-slug="{{action.slug}}" data-item-id="{{action.id}}" data-uuid="{{action.uuid}}" data-tooltip="{{action.name}}" {{#if (isdefined slot)}}data-slot="{{slot}}"{{/if}}>
+        <div class="action-icon"><img src="{{action.img}}" class="icon"></div>
+        <span class="action-name name">{{action.name}}</span>
+        <div class="action-controls item-controls">
+            <a class="item-control item-to-chat" data-tooltip="Send Ability to chat"><i class="fas fa-external-link-alt"></i></a>
+            <a class="item-control item-edit" data-tooltip="Edit Ability"><i class="fas fa-edit"></i></a>
+            {{#unless (isdefined slot)}}
+                <a class="item-control item-delete" data-tooltip="Delete Ability"><i class="fas fa-trash"></i></a>
+            {{/unless}}
+        </div>
+    </div>
+{{/inline}}

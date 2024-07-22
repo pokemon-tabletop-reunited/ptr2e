@@ -19,6 +19,7 @@ import { AttackModifierPopup } from "@module/apps/modifier-popup/attack-modifier
 import { AttackRoll, AttackRollCreationData, AttackRollDataPTR2e } from "./rolls/attack-roll.ts";
 import { CaptureRoll, CaptureRollCreationData } from "./rolls/capture-roll.ts";
 import { ConsumableSystemModel } from "@item/data/index.ts";
+import { ActorPTR2e } from "@actor";
 
 class CheckPTR2e {
     static async rollPokeball(
@@ -71,6 +72,7 @@ class CheckPTR2e {
             critBonus: 1,
             miscBonus: 1,
             target: context.target?.actor,
+            user: context.actor
         }
 
         const rolls: PokeballRollResults["rolls"] = await (async () => {
@@ -375,11 +377,11 @@ class CheckPTR2e {
         }
 
         if(context.ppCost && context.consumePP) {
-            const actor = game.actors.get(context.actor?.id);
+            const actor = await fromUuid<ActorPTR2e>(context.actor?.uuid) ?? game.actors.get(context.actor?.id);
             if(actor) {
                 const pp = actor.system.powerPoints.value;
                 await actor.update({
-                    "system.powerPoints.value": pp - context.ppCost,
+                    "system.powerPoints.value": Math.max(0, pp - context.ppCost),
                 });
                 ui.notifications.info(`You have ${pp - context.ppCost} power points remaining. (Used ${context.ppCost})`);
             }

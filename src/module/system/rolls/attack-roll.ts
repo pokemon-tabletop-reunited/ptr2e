@@ -62,7 +62,7 @@ class AttackRoll extends CheckRoll {
             if(stageBonus === -Infinity) return 0;
             if(options.outOfRange) return 0;
 
-            return Math.clamp(Math.floor((baseAccuracy + accuracyFlat) * stageBonus * accuracyPercent ?? 1), 1, 100);
+            return Math.clamp(Math.floor((baseAccuracy + accuracyFlat) * stageBonus * (accuracyPercent ?? 1) || 1), 1, 100);
         })(
             options.moveAccuracy,
             data.check.total?.accuracy ?? { flat: 0, stage: 0, percentile: 100},

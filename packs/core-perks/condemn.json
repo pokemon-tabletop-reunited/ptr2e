@@ -7,9 +7,9 @@
     "system": {
         "actions": [
             {
-                "name": "Condemn Action (#1)",
-                "slug": "condemn-action-1",
-                "description": "<p>You may spend 3PP to condemn a target within 5m as a simple action. This is considered an Attack with the [Social] trait. The target is afflicted with Frail 3 and Distracted 3.</p>",
+                "name": "Condemn",
+                "slug": "condemn-1",
+                "description": "You may spend 3PP to condemn a target within 5m as a Simple Action. This is considered an Attack with the [Social] trait, and may only be used once per Activation. The target is afflicted with Frail 3 and Distracted 3.",
                 "traits": [],
                 "type": "attack",
                 "range": {
@@ -29,10 +29,11 @@
             }
         ],
         "slug": "condemn",
-        "description": "<p>You may spend 3PP to condemn a target within 5m as a complex action. This is considered an Attack with the [Social] trait. The target is afflicted with Frail 3 and Distracted 3.</p>",
+        "description": "You may spend 3PP to condemn a target within 5m as a Simple Action. This is considered an Attack with the [Social] trait, and may only be used once per Activation. The target is afflicted with Frail 3 and Distracted 3.",
         "traits": [],
         "prerequisites": [
-            "Intimidate"
+            "Conversation 30",
+            "Psychology 30"
         ],
         "cost": 3,
         "design": {

@@ -1,42 +1,43 @@
 {
-    "name": "Clear Smog",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/poison_icon.svg",
-    "system": {
+  "name": "Clear Smog",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/poison_icon.svg",
+  "system": {
+    "slug": "clear-smog",
+    "description": "",
+    "traits": [
+      "danger-close"
+    ],
+    "actions": [
+      {
         "slug": "clear-smog",
-        "description": "Effect: On hit, the target's Stat stage effects are removed.",
+        "name": "Clear Smog",
+        "type": "attack",
         "traits": [
-            "danger-close"
+          "danger-close",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "clear-smog",
-                "name": "Clear Smog",
-                "type": "attack",
-                "traits": [
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 10,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 6
-                },
-                "category": "special",
-                "power": 50,
-                "accuracy": 100,
-                "types": [
-                    "poison"
-                ],
-                "description": "Effect: On hit, the target's Stat stage effects are removed.",
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "special",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "poison"
         ],
-        "grade": "B"
-    },
-    "_id": "DNa9t27HxnlAgXwO",
-    "effects": []
+        "description": "Effect: On hit, the target's Stat stage effects are removed.",
+        "img": "/systems/ptr2e/img/svg/poison_icon.svg"
+      }
+    ],
+    "grade": "C"
+  },
+  "_id": "DNa9t27HxnlAgXwO",
+  "effects": []
 }

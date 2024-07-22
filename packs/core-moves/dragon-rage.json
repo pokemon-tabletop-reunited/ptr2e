@@ -1,36 +1,39 @@
 {
-    "name": "Dragon Rage",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/dragon_icon.svg",
-    "system": {
+  "name": "Dragon Rage",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/dragon_icon.svg",
+  "system": {
+    "slug": "dragon-rage",
+    "description": "",
+    "traits": [],
+    "actions": [
+      {
         "slug": "dragon-rage",
-        "description": "<p>Effect: This attack deals 40 flat damage to the target's HP. This is not modified by the target's defenses or other effects.</p>",
-        "traits": [],
-        "actions": [
-            {
-                "slug": "dragon-rage",
-                "name": "Dragon Rage",
-                "type": "attack",
-                "traits": [],
-                "range": {
-                    "target": "creature",
-                    "distance": 10,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 7
-                },
-                "category": "special",
-                "accuracy": 100,
-                "types": [
-                    "dragon"
-                ],
-                "description": "<p>Effect: This attack deals 40 flat damage to the target's HP. This is not modified by the target's defenses or other effects.</p>"
-            }
+        "name": "Dragon Rage",
+        "type": "attack",
+        "traits": [
+          "pp-updated"
         ],
-        "grade": "B"
-    },
-    "_id": "PFcT7WCVrxW0GXub",
-    "effects": []
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "category": "special",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "dragon"
+        ],
+        "description": "Effect: This attack always deals neutral damage."
+      }
+    ],
+    "grade": "D"
+  },
+  "_id": "PFcT7WCVrxW0GXub",
+  "effects": []
 }

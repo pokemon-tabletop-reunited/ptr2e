@@ -2,6 +2,7 @@ import { TemplateConstructor } from './data-template.ts';
 import HasActions from './has-actions.ts';
 import HasContainer from './has-container.ts';
 import HasDescription from './has-description.ts';
+import HasMigrations from './has-migrations.ts';
 import HasSlug from './has-slug.ts';
 import HasTraits from './has-traits.ts';
 
@@ -16,7 +17,7 @@ import HasTraits from './has-traits.ts';
  * @group Mixins
  */
 export default function HasBase<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
-	abstract class TemplateClass extends HasContainer(HasDescription(HasActions(HasTraits(HasSlug(baseClass))))) {
+	abstract class TemplateClass extends HasMigrations(HasContainer(HasDescription(HasActions(HasTraits(HasSlug(baseClass)))))) {
 		// This is an empty class, but it's necessary to combine the properties of the other classes.
     }
 
