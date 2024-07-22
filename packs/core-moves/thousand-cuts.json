@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "thousand-cuts",
-    "description": "Effect: On hit, the target has a 10% chance of becoming Poison 5.",
+    "description": "",
     "traits": [
       "5-strike",
       "sharp",
@@ -18,7 +18,8 @@
         "traits": [
           "5-strike",
           "sharp",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,7 +28,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": -1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +39,7 @@
         "types": [
           "poison"
         ],
-        "description": "Effect: On hit, the target has a 10% chance of becoming Poison 5.",
+        "description": "Effect: On hit, the target has a 10% chance of gaining @Affliction[poison] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -46,7 +47,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "E"
   },
   "_id": "IlILvPalY9JdHvcQ",
   "effects": []

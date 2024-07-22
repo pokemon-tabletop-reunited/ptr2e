@@ -1,5 +1,5 @@
 import { ConsumablePTR2e } from "@item";
-import { HasContainer, HasDescription, HasEmbed, HasGearData, HasSlug, HasTraits } from "@module/data/index.ts";
+import { HasContainer, HasDescription, HasEmbed, HasGearData, HasMigrations, HasSlug, HasTraits } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 
 const CONSUMABLE_TYPES = {
@@ -12,7 +12,7 @@ const CONSUMABLE_TYPES = {
     other:"PTR2E.FIELDS.consumable.type.other",
 } as const
 type ConsumableType = keyof typeof CONSUMABLE_TYPES;
-const ConsumableExtension = HasEmbed(HasTraits(HasDescription(HasSlug(HasContainer(HasGearData(foundry.abstract.TypeDataModel))))), "consumable");
+const ConsumableExtension = HasEmbed(HasMigrations(HasTraits(HasDescription(HasSlug(HasContainer(HasGearData(foundry.abstract.TypeDataModel)))))), "consumable");
 
 /**
  * @category Item Data Models

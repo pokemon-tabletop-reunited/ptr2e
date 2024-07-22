@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "splash",
-    "description": "Effect: Before attacking, you may freely move 1m in any direction.",
+    "description": "",
     "traits": [
       "basic",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "basic",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1,
+          "powerPoints": -1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -43,7 +44,8 @@
         "slot": null
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "E"
   },
   "_id": "zsfPLAkIqk2KQaP7",
   "effects": []

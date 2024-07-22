@@ -18,9 +18,9 @@ class ActiveEffectPTR2e<
     }
 
     static override get schema() {
-        if ( this.hasOwnProperty("_schema") ) return this._schema!;
+        if (this.hasOwnProperty("_schema")) return this._schema!;
         const schema = new foundry.data.fields.SchemaField(Object.freeze(this.defineSchema()));
-        Object.defineProperty(this, "_schema", {value: schema, writable: false});
+        Object.defineProperty(this, "_schema", { value: schema, writable: false });
         return schema;
     }
 
@@ -52,11 +52,11 @@ class ActiveEffectPTR2e<
         this._name = this._source.name;
         Object.defineProperty(this, "name", {
             get: () =>
-                this.duration.remaining !== null && this.duration.remaining !== undefined
+                this.system.stacks > 1
+                ? `${this._name} ${this.system.stacks}`
+                : this.duration.remaining !== null && this.duration.remaining !== undefined
                     ? `${this._name} ${this.duration.remaining}`
-                    : this.system.stacks > 1
-                        ? `${this._name} ${this.system.stacks}`
-                        : this._name,
+                    : this._name,
             set: (value: string) => {
                 this._name = value;
             },
@@ -211,23 +211,33 @@ class ActiveEffectPTR2e<
         }
 
         const result = await super._preCreate(data, options, user);
-        if(result === false) return false;
-        
-        if (this.targetsActor() && data.duration?.turns && !data.duration.startTurn) {
+        if (result === false) return false;
+
+        if (this.targetsActor()) {
+            if (data.duration && data.system.stacks && data.system.stacks > 1) {
+                data.duration.turns = data.system.stacks;
+                this.updateSource({
+                    duration: {
+                        turns: data.system.stacks,
+                    },
+                });
+            }
+            if (data.duration?.turns && !data.duration.startTurn) {
+                this.updateSource({
+                    duration: {
+                        startTurn: this.parent.combatant?.system.activations ?? 0,
+                    },
+                });
+            }
+        }
+
+        if (data.description.startsWith("PTR2E.Effect.")) {
             this.updateSource({
-                duration: {
-                    startTurn: this.parent.combatant?.system.activations ?? 0,
-                },
+                description: game.i18n.localize(data.description),
             });
         }
 
-        if(data.description.startsWith("PTR2E.Effect.")) {
-            this.updateSource({
-                description: game.i18n.localize(data.description),
-            })
-        }
-
-        if(!data.img) this.updateSource({img: "/systems/ptr2e/img/icons/effect_icon.webp"});
+        if (!data.img) this.updateSource({ img: "/systems/ptr2e/img/icons/effect_icon.webp" });
 
         return result;
     }
@@ -321,9 +331,11 @@ class ActiveEffectPTR2e<
                     source._id = fu.randomID();
                 }
 
-                const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(e => e.slug === sluggify(source.name));
-                if(existing?.system.stacks) {
-                    existing.update({"system.stacks": existing.system.stacks + 1});
+                const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(
+                    (e) => e.slug === sluggify(source.name)
+                );
+                if (existing?.system.stacks) {
+                    existing.update({ "system.stacks": existing.system.stacks + 1 });
                     return [];
                 }
 

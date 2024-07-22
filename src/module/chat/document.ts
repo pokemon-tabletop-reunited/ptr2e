@@ -345,10 +345,18 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         const flavor = context.notesList ? context.notesList.innerHTML : context.title ?? "";
 
         const system: {
+            pp: {
+                spent: boolean;
+                cost: number;
+            };
             attackSlug: string;
             origin: Record<string, unknown>;
             results: Record<string, unknown>[];
         } = {
+            pp: {
+                spent: !!context.consumePP,
+                cost: context.ppCost ?? 0,
+            },
             attackSlug: context.action,
             origin: (() => {
                 const json: Record<string, unknown> = context.actor!.toJSON();

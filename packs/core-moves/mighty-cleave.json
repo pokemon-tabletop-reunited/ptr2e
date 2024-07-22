@@ -4,11 +4,11 @@
   "img": "/systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "slug": "mighty-cleave",
-    "description": "Effect: On hit, the target's [Shield] effects are removed.",
     "traits": [
       "legendary",
       "smite",
       "crushing",
+      "pierce",
       "contact"
     ],
     "actions": [
@@ -18,9 +18,10 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "smite",
           "crushing",
-          "contact"
+          "pierce",
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -29,7 +30,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -40,7 +41,6 @@
         "types": [
           "rock"
         ],
-        "description": "Effect: On hit, the target's [Shield] effects are removed.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -48,7 +48,8 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B",
+    "description": ""
   },
   "_id": "9v4PapRDvK5M97Rm",
   "effects": []

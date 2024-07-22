@@ -1,70 +1,51 @@
 {
-    "folder": "pyJa7NcmlTOD3PA4",
-    "name": "Jolt",
-    "type": "move",
-    "_id": "ZFVBztiqARJV7L1S",
-    "img": "systems/ptr2e/img/svg/electric_icon.svg",
-    "system": {
-        "slug": null,
+  "name": "Jolt",
+  "type": "move",
+  "_id": "ZFVBztiqARJV7L1S",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "system": {
+    "slug": null,
+    "traits": [
+      "basic",
+      "contact",
+      "pp-updated"
+    ],
+    "actions": [
+      {
+        "name": "Jolt Attack",
+        "slug": "jolt-attack",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
         "traits": [
-            "basic",
-            "contact"
+          "basic",
+          "contact",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "name": "Jolt Attack",
-                "slug": "jolt-attack",
-                "type": "attack",
-                "img": "icons/svg/explosion.svg",
-                "traits": [
-                    "basic",
-                    "contact"
-                ],
-                "range": {
-                    "target": "enemy",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 1,
-                    "delay": null,
-                    "priority": null,
-                    "trigger": ""
-                },
-                "variant": null,
-                "types": [
-                    "electric"
-                ],
-                "category": "physical",
-                "power": 30,
-                "accuracy": 100,
-                "contestType": "",
-                "contestEffect": "",
-                "free": false,
-                "slot": null,
-                "description": "<p>On hit, the target has a 30% chance of being Flinched 3.</p>"
-            }
+        "range": {
+          "target": "enemy",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": ""
+        },
+        "variant": null,
+        "types": [
+          "electric"
         ],
-        "description": "<p>Effect: On hit, the target has a 30% chance of being Flinched 3.</p>",
-        "container": null,
-        "grade": "E"
-    },
-    "effects": [],
-    "sort": 0,
-    "ownership": {
-        "default": 0,
-        "CYLdyr5mPSDmNpTp": 3
-    },
-    "flags": {},
-    "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "12.327",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.1.0",
-        "createdTime": 1717873475260,
-        "modifiedTime": 1717873904396,
-        "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-    }
+        "category": "physical",
+        "power": 30,
+        "accuracy": 100,
+        "description": "<p>On hit, the target has a 30% chance of gaining @Affliction[flinched] 3.</p>"
+      }
+    ],
+    "description": "",
+    "container": null,
+    "grade": "E"
+  },
+  "effects": []
 }

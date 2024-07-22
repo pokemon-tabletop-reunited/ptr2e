@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "mud-shot",
-    "description": "Effect: On hit, the target loses -1 SPD stage for 5 activations.",
+    "description": "",
     "traits": [
       "missile"
     ],
@@ -14,7 +14,8 @@
         "name": "Mud Shot",
         "type": "attack",
         "traits": [
-          "missile"
+          "missile",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -41,7 +42,8 @@
         "slot": null
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "D"
   },
   "_id": "rDnV5BfNxKyYAWam",
   "effects": []

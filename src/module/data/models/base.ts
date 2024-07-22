@@ -1,4 +1,4 @@
-import { ActionPTR2e, AttackPTR2e, BasicChangeSystem, RollOptionChangeSystem, FlatModifierChangeSystem, GrantItemChangeSystem, StageModifierSystem, PercentileModifierSystem, GrantEffectChangeSystem, EphemeralEffectChangeSystem } from "@data";
+import { ActionPTR2e, AttackPTR2e, PassivePTR2e, BasicChangeSystem, RollOptionChangeSystem, FlatModifierChangeSystem, GrantItemChangeSystem, StageModifierSystem, PercentileModifierSystem, GrantEffectChangeSystem, EphemeralEffectChangeSystem } from "@data";
 
 let changeTypes;
 export function ChangeModelTypes() {    
@@ -19,7 +19,7 @@ export function ActionModelTypes() {
     return actionTypes ??= Object.freeze({
         [ActionPTR2e.TYPE]: ActionPTR2e,
         [AttackPTR2e.TYPE]: AttackPTR2e,
-        "passive": ActionPTR2e,
+        [PassivePTR2e.TYPE]: PassivePTR2e,
         "exploration": ActionPTR2e,
         "downtime": ActionPTR2e,
         "camping": ActionPTR2e,

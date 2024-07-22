@@ -18,6 +18,7 @@
     "ITEM.DeleteButton": "Delete",
     
     "PTR2E": {
+        "OK": "Ok",
         "ChatContext": {
             "RerollSkill": {
                 "label": "Push Your Luck! (Reroll)",
@@ -29,6 +30,27 @@
                 "title": "Are you sure you're Spending Luck?",
                 "content": "You're about to spend {amount} Luck to increase your Degree of Success."
             }
+        },
+        "Migrations": {
+            "Finished": "PTR2E System Migration to version {version} completed!",
+            "OnlyGMCanUse": "Only a gamemaster can use this tool.",
+            "OutsideSchemaRange": "The specified range is outside the system's schema version range (between {minimum} and {maximum}).",
+            "Running": "Running system migration ...",
+            "Starting": "Applying PTR2E System Migration to version {version}. Please be patient and do not close your game or shut down your server.",
+            "Summary": {
+                "Documents": "Documents",
+                "HelpResources": "An unexpected error was encountered while migrating some actors or items. If you would like further assistance, feel free to report an issue at the <a href=\"https://github.com/pokemon-tabletop-reunited/ptr2e/issues\">system repository</a> or visit us on <a href=\"https://discord.gg/ptrfvtt\">Discord</a> for community support.",
+                "Migrated": "Migrated",
+                "Remigrate": "Remigrate",
+                "Title": "Migration Summary",
+                "Total": "Total",
+                "Troubleshoot": {
+                    "Hint": "Here you can run a remigration, which will attempt to automatically fix issues with actors and items.",
+                    "Title": "System Troubleshooting"
+                }
+            },
+            "Troubleshooting": "Troubleshooting",
+            "WorldNotReady": "Game world not ready: try again in a few seconds."
         },
         "Modifiers": {
             "power": "Attack Power",
@@ -246,11 +268,11 @@
                     "evasive": "Evasive"
                 },
                 "Descriptions": {
-                    "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-condition], @Trait[minor-condition], @Trait[pseudo-affliction], and @Trait[stat-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
+                    "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-condition], @Trait[minor-condition], @Trait[pseudo-affliction], and @Trait[stage-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
                     "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has @Affliction[weak] while Burn is active. @Trait[fire]-Type creatures cannot be Burned.",
                     "poison": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature also has Dull while Poison is active.",
                     "blight": "At the end of the afflicted creature’s Activation, it loses X Stacks of Blight, where X is 2<sup style='font-size: x-small;'># of Activations passed with Blight</sup> and takes a Tick of HP per Stack lost. The creature also has Dull while Blight is active. When a creature receives Blight, it loses the Poison Condition, with Blight gaining 33% of its remaining Poison Stacks as extra Stacks on Blight. When afflicted with Poisoned X while Blighted, the creature gains +1 to its Blight Stacks.",
-                    "paralysis": "The afflicted creature's Base SPD is reduced by 50%, and the creature may only perform 1 Simple Action on its Activations.",
+                    "paralysis": "The afflicted creature's SPD is reduced by 50%. The creature also has Slowed while Paralysis is active.",
                     "drowsy": "The Power of all of the afflicted creature's attacks is reduced by 33%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their Actions. The creature also has Distracted while Drowsy is active.",
                     "nightmares": "This condition can only be applied to Drowsy creatures. The Power of all of the afflicted creature's attacks is reduced by 50%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their actions. The creature loses a Tick of HP at the end of each of its Activations and is Distracted and Slowed while Nightmares is active. When a creature receives Nightmares, it loses the Drowsy Condition, and gains 33% of its remaining Drowsy Stacks onto Nightmares, and further Nightmares Stacks cannot be applied.",
                     "frozen": "The afflicted creature is unable to use actions (either during its Activations or as interrupts/reactions), but takes 33% less damage from all sources. The afflicted creature has Frail while Frozen is active, and has its Base SPD increased by 50%. Additional Frozen Stacks cannot be added while Frozen is on a creature.",
@@ -259,7 +281,7 @@
                     "dull": "The afflicted creature’s default SPATK stages are reduced by 1.",
                     "frail": "The afflicted creature's default DEF stages are reduced by 1.",
                     "distracted": "The afflicted creature's default SPDEF stages are reduced by 1.",
-                    "slowed": "The afflicted creature’s Movement is cut in half, rounding down (minimum 1), and their default SPD stages are reduced by 1.",
+                    "slowed": "The afflicted creature’s Movement Scores are reduced by 50%, rounding down (minimum 1).",
                     "blind": "The afflicted creature’s default ACC stages are reduced by 1.",
                     "vulnerable": "The afflicted creature’s default EVA stages are reduced by 1.",
                     "hindered": "The afflicted creature’s Skill DCs are reduced by -10.",
@@ -273,19 +295,19 @@
                     "disabled":"One of the afflicted creature’s attacks cannot be used, under any circumstances. The move in question is determined by the source of the disabled effect, usually being “the last attack the target used.” If this would prevent them from using any attack, they may Struggle instead.",
                     "nullified":"One of the afflicted creature’s abilities is negated, and cannot be activated or benefited from. The ability in question is determined by the source of the nullification, usually determined randomly.",
                     "suppressed": "The afflicted creature spends 50% more PP on all actions that use PP.",
-                    "lifted": "the afflicted creature is held aloft, unable to act normally. The creature cannot use <Movement> other than [Teleport] while Lifted and is otherwise considered Stuck for the duration. A Lifted creature also suffers -6 EVA stages.",
+                    "lifted": "the afflicted creature is held aloft, unable to act normally. The creature cannot use <Movement> other than [Teleport] while Lifted and is otherwise considered Stuck and Raised for the duration. A Lifted creature also suffers -6 EVA stages.",
                     "raised": "While a creature is Raised, it is immune to attacks and effects with the [Earthbound] trait.",
                     "harden": "While under the effect of Harden, the afflicted creature’s [Contact] attacks have +20 Power, and their [Dash] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
-                    "sharpen": "While under the effect of Sharpen, the afflicted creature’s [Dash] attacks gain [Sharp], and their [Sharp] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
+                    "sharpen": "While under the effect of Sharpen, the afflicted creature’s [Contact] attacks gain [Sharp], and their [Sharp] attacks gain [Crit 1] or have their [Crit X] increase by +1.",
                     "destined": "when the afflicted creature deals damage with a Damaging Attack to the source of Destined, the afflicted creature is inflicted with the same amount of damage.",
-                    "disguised": "The user is not easily recognized by sight. Any creature that attempts to see through Disguised must make a contested Psychology or Spot Hidden skill check against the Disguised creature’s Disguise skill, and upon success ignores any effects that require Disguised to be active.",
-                    "braced": "while a creature is Braced, its default DEF and SPDEF stages are increased by +2 and its default ATK and SP.ATK stages are decreased by 1. Additionally, a Braced creature is immune to critical damage. A creature loses the Brace condition after it moves or makes an attack of its own accord.",
-                    "duel": "while a creature is afflicted by Duel, the creature and the source of the condition have [Crit 2] on attacks they use against one another, and take and deal 33% less damage from/to creatures other than themselves. Pokémon afflicted with Duel or Pokemon that inflict Duel cannot leave battle or be switched out, except from the effects of attacks or abilities. If either the source or afflicted creature Faint or are otherwise removed from battle, the Duel condition is removed.",
+                    "disguised": "The user is not easily recognized by sight. Any creature that attempts to see through Disguised must make a contested Psychology or Spot skill check against the Disguised creature’s Disguise skill, and upon success ignores any effects that require Disguised to be active.",
+                    "braced": "while a creature is Braced, its default DEF and SPDEF stages are increased by +2 and its default ATK and SPATK stages are decreased by 1. Additionally, a Braced creature is immune to critical damage. A creature loses the Brace Affliction after it moves or makes an attack of its own accord.",
+                    "duel": "While a creature is afflicted with Duel, the creature and the source of the Affliction have [Crit 2] on attacks they use against one another, and take and deal 33% less damage from/to creatures other than themselves. Creatures afflicted with Duel and the source of the Duel are also Stuck. If either the source or afflicted creature Faint or are otherwise removed from battle, the Duel Affliction is removed.",
                     "engulfed": "While a creature is afflicted with Engulfed, it is also considered to be Bound and Stuck. While Engulfed the afflicted creature cannot be targeted by Attacks, and it can only target the creature that has Engulfed it with Attacks, although these Attacks are resisted by two stages.",
                     "curled": "while Curled, a creature cannot use Held Items and has +1 default DEF stage. Additionally, moves with the [Curl] Trait have their Power doubled while their user is Curled.",
                     "chanted": "If an attack were to deal critical damage to a creature with Chanted, the attack instead deals damage as if it were not a Critical Hit.",
-                    "choice-locked": "while Choice-Locked, a creature may only use the last attack or action it used.",
-                    "grounded": "While Grounded, creatures become unable to use their [Flying] movement, nor can they be Lifted or Raised. They are also subject to all active Terrain effects even if they had the [Hover] Trait.",
+                    "choice-locked": "While Choice-Locked, a creature may only use the last attack or action it used.",
+                    "grounded": "While Grounded, creatures become unable to use their [Flight] movement, nor can they be Lifted or Raised and have those effects removed.",
                     "cursed": "While Cursed, an afflicted creature loses three ticks of HP at the end of each of their Activations.",
                     "true-sight": "The afflicted creature ignores invisibility and illusions.",
                     "shrink": "The afflicted creature’s Size Category is reduced by one.",
@@ -295,18 +317,18 @@
                     "perish":"When a creature’s Perish count hits 0, the creature's HP is set to 0. Humans and ‘Ace’ creatures gain Weary 1 instead of losing HP when their Perish count is 0. The Perish condition is removed if a creature is switched out or leaves combat.",
                     "invisible":"The afflicted creature vanishes from sight, and cannot be detected by sight based vision or targeted by Attacks. In addition, the creature has +4 default EVA stages. Invisible ends when the creature uses an Attack, is hit by an Attack, by using a Free Action to end Invisible, or by the end conditions of the effect that granted Invisible. Any creature can perform an Intense Spot Check to ignore the effects of Invisible.",
                     "transient":"The afflicted creature, while still visible, is able to traverse through any material, as if it wasn’t even there. It may use any of its Movements to move through the air or any substance (as if it were always on or in the appropriate substance), ignoring any and all blocking terrain. The creature also possesses +6 default EVA stages. Creatures that make attacks or actions while Transient deal 75% less damage. The creature loses 5 PP per activation while Transient, and gains a Stack of Weary if it is out of PP while Transient.",
-                    "fear":"The afflicted creature suffers penalties based on how many Stacks of Fear they have. Fear applied from different sources have their own Stacks.<ul><li>1 - 2: They cannot willingly move towards the source of their Fear, and suffer -1 ACC stage when attacking the source of their Fear.</li><li>3+: During each Activation, they must move their full Movement away from the source of their Fear, and suffer -1 EVA stage against attacks made by the source of their Fear.</li></ul>",
+                    "fear":"The afflicted creature does 33% less damage to the source of the Fear affliction, and suffers -1 default ACC stage on attacks against them. Fear applied from different sources have their own Stacks.",
                     "stockpile":"While a creature has Stockpile, the default stages for DEF and SPDEF are increased by +1 for each Stack of Stockpile it possesses. Stockpile can have up to 3 Stacks.",
                     "leech":"The afflicted creature loses two Ticks of HP at the end of each of their Activations and the Source that applied Leech gains HP equal to the amount the afflicted creature lost.",
-                    "rebound":"damage inflicted on the afflicted creature by Physical or Special-Category attacks deals ¼ of the inflicted damage on the attacking creature.",
+                    "rebound":"Damage inflicted on the afflicted creature by Physical or Special-Category attacks deals ¼ of the inflicted damage on the attacking creature.",
                     "ringed":"when a creature with Ringed concludes an Activation, they heal a Tick of HP, with additional effects from appropriate weathers/terrains as described by the effect that granted Ringed.",
                     "enraged": "A creature may only use Physical- or Special-Category moves while it is Enraged.",
                     "charmed":"The afflicted creature believes the source of Infatuation is a dear friend or romantic interest. Afflicted creatures have a 50% chance of being unable to target the source of their infatuation with an attack, and have -2 stages of EVA against attacks from the source of their infatuation.",
                     "taunted": "The afflicted creature does 33% less damage to creatures other than the source of the Taunted condition. The afflicted creature cannot use Status-category attacks for the duration of Taunted.",
                     "grapple": "The afflicted creature possesses -1 default ACC and EVA and may only take Actions with the [Grapple] trait. Creatures that are not in control of a Grapple are also Bound. A creature in control of the Grapple can take a Free Action on their turn to end their participation in Grapple. The creature in control of the Grapple is treated as having the non-in-control creature(s) as being Mounted on itself.<br>If an afflicted creature is the only participant of a Grapple, they lose this condition.",
-                    "resolved": "An afflicted creature takes 25% less damage from all attacks.",
+                    "resolved": "An afflicted creature creature gains +1 default DEF and SPDEF stages.",
                     "stormcast": "An afflicted creature deals 20% more damage with attacks that it shares a Type with, and the Range of its [Wind] attacks increases by 50%.",
-                    "boosted": "An afflicted creature gains +1 stage to ATK, DEF, SPATK, SPDEF, and SPD.",
+                    "boosted": "An afflicted creature gains +1 default ATK and SPATK stages.",
                     "rapid": "While afflicted with Rapid, the creature may perform Complex Actions as Simple Actions OR [Exhaust] Actions are performed as though they lack the Trait OR [Set Up] Actions set up and resolve on the same activation. The creature has its Initiative delayed by 60% after its Activation and gains Vulnerable 1.",
                     "strong": "While afflicted with Strong, the Power of the creature's Attacks are increased by +20% and has its Initiative delayed by 20% after its Activation.",
                     "agile": "While afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
@@ -453,6 +475,9 @@
             "KnownAttacks": {
                 "hint": "Drag & Drop moves onto the actor / known attack sheet to add them as available options.<br><br>Drag & Drop from the Known Attack's sheet onto the Actor's Attack Slots to assign moves to the slots!"
             },
+            "AvailableAbilities": {
+                "hint": "Drag & Drop abilities onto the actor / available ability sheet to add them as available options.<br><br>Drag & Drop from the Available Abilities's sheet onto the Actor's Ability Slots to assign abilities to the slots!<br><br>You gain an Ability Slot at level 20, 50 and 80, whenever you gain an ability from your Species it must be slotted into a slot of the same tier or higher (f.e., you cannot put a Master ability in any but the last slot, but you can put a Basic ability in slot 3 (advanced) or 4 (master))<br><br>Meanwhile, any abilities learned through other sources can only ever be fitted in the 2nd or 3rd slots (basic & advanced)"
+            },
             "Buttons": {
                 "perkWeb": "Open Perk Web"
             },
@@ -565,6 +590,10 @@
                     "Title": "Delete Skill: {name}",
                     "Content": "Are you sure you want to delete the skill: {name}?"
                 }
+            },
+            "WorldSchemaVersion": {
+                "Name": "World Schema Version",
+                "Hint": "The version of the world schema. Don't change this unless you know what you're doing."
             }
         },
         "SkillsEditor": {
@@ -634,7 +663,7 @@
                 "Hint": "The speed of the actor.",
                 "Stage": {
                     "Label": "Spd Stages",
-                    "Hint": "The speed stages of the actor."
+                    "Hint": "The SPD stages of the actor."
                 }
             },
             "accuracy": {
@@ -738,6 +767,15 @@
                     "handsHeld": {
                         "label": "Hands Held",
                         "hint": "The number of hands this gear requires to hold."
+                    },
+                    "slot": {
+                        "label": "Carry Slot",
+                        "hint": "The type of slot this gear is carried in.",
+                        "accessory": "Accessory",
+                        "held": "Held",
+                        "worn": "Worn",
+                        "belt": "Belt",
+                        "backpack": "Backpack"
                     }
                 },
                 "fling": {
@@ -840,8 +878,8 @@
                 "hint": "The action cost to activate the Action."
             },
             "free": {
-                "label": "Free Attack",
-                "hint": "Free Attacks do not take up Attack Slots and are always available."
+                "label": "Free Entry",
+                "hint": "Free Entries do not take up Slots and are always available."
             },
             "trigger": {
                 "label": "Trigger",
@@ -1069,6 +1107,10 @@
                     "label": "Max",
                     "hint": "The maximum number of Power Points the Move can have."
                 }
+            },
+            "hidden": {
+                "label": "Hide from Action List",
+                "hint": "Hide this passive action from the action list, useful for things like static stat buffs."
             },
             "health": {
                 "label": "Health",
@@ -1483,7 +1525,7 @@
             },
             "running": {
                 "label": "Running",
-                "hint": "The Running skill is for when overland or flying creatures gotta go fast. Use this skill to gain additional movement allowance after you've consumed all of yours in combat, or to participate in feats of speed during events such as a Pokeathlon"
+                "hint": "The Running skill is for when overland creatures gotta go fast. Use this skill to gain additional movement allowance after you've consumed all of yours in combat, or to participate in feats of speed during events such as a Pokeathlon"
             },
             "sleight-of-hand": {
                 "label": "Sleight of Hand",
@@ -1647,11 +1689,7 @@
             },
             "science": {
                 "label": "Science",
-                "hint": "The Science group skill covers a number of fields, purchased separately. Examples include Astronomy, Biology, Botany, Chemistry, Cryptography, Forensics, Geology, Mathematics, Meteorology, Parapsychology, Pharmacy, Physics, Zoology. Pokémon-specific fields include Meganobiology, Terastology, Ultrology, Paradoxian Studies. The GM may add to or remove from this list as appropriate to their campaign. This skill represents specialized knowledge in a field and will generally rely upon either specific perks, or a situational application that the GM or Player must call for.",
-                "archeology": {
-                    "label": "Archeology",
-                    "hint": "This skill is used to study ancient things. This includes studying ruins, knowledge of past civilizations, and deciphering lost inscriptions."
-                },
+                "hint": "The Science group skill covers a number of fields, purchased separately. Examples include Astronomy, Biology, Botany, Chemistry, Cryptography, Forensics, Geology, Mathematics, Meteorology, Parapsychology, Pharmacy, Physics, Zoology. Pokémon-specific fields include Megalobiology, Terastology, Ultrology, Paradoxian Studies. The GM may add to or remove from this list as appropriate to their campaign. This skill represents specialized knowledge in a field and will generally rely upon either specific perks, or a situational application that the GM or Player must call for.",
                 "astronomy": {
                     "label": "Astronomy",
                     "hint": "This skill is used to study the stars and planets."
@@ -1704,13 +1742,17 @@
                     "label": "Zoology",
                     "hint": "This skill is used to study animals."
                 },
-                "meganobiology": {
-                    "label": "Meganobiology",
-                    "hint": "This skill is used to study the biology of Mega Evolutions."
+                "eschatobiology": {
+                    "label": "Eschatobiology",
+                    "hint": "This skill is used to study the biology and mechanics governing Mega Evolution."
+                },
+                "megalobiology": {
+                    "label": "Megalobiology",
+                    "hint": "This skill is used to study the Dynamax Phenomenon."
                 },
                 "terastology": {
                     "label": "Terastology",
-                    "hint": "This skill is used to study the biology of Gigantamax forms."
+                    "hint": "This skill is used to study the Terastal Phenomenon."
                 },
                 "ultrology": {
                     "label": "Ultrology",

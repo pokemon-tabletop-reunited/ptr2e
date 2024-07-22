@@ -1,111 +1,57 @@
 {
-    "name": "Bide",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/normal_icon.svg",
-    "system": {
+  "name": "Bide",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "system": {
+    "slug": "bide",
+    "description": "Effect: Set Up: the user gains @Affliction[marked] 6 and @Affliction[braced] 2.\nResolution: On the user's next Activation, they target a valid creature, dealing twice the damage they took since declaring Bide to the target. Bide gains [Danger Close].",
+    "traits": [
+      "defensive",
+      "draw-in",
+      "set-up",
+      "delay-2",
+      "danger-close"
+    ],
+    "actions": [
+      {
+        "name": "Bide",
         "slug": "bide",
-        "description": "Effect: Set Up: the user gains Marked 6, and +2 DEF and SPDEF stages for 2 activations.\nResolution: On the user's next Activation, they target a valid creature, dealing twice the damage they took since declaring Bide to the target. Bide gains [Danger Close].",
+        "type": "attack",
         "traits": [
-            "defensive",
-            "draw-in",
-            "set-up",
-            "danger-close"
+          "defensive",
+          "draw-in",
+          "set-up",
+          "delay-2",
+          "danger-close"
         ],
-        "actions": [
-            {
-                "slug": "bide",
-                "name": "Bide",
-                "type": "attack",
-                "traits": [
-                    "defensive",
-                    "draw-in",
-                    "set-up",
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 7,
-                    "priority": 1
-                },
-                "category": "physical",
-                "types": [
-                    "normal"
-                ],
-                "description": "Effect: Set Up: the user gains Marked 6, and +2 DEF and SPDEF stages for 2 activations.\nResolution: On the user's next Activation, they target a valid creature, dealing twice the damage they took since declaring Bide to the target. Bide gains [Danger Close].",
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": 2,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
         ],
-        "grade": "C"
-    },
-    "_id": "Do4KJ9riUaghCF4B",
-    "effects": [
-        {
-            "name": "Bide",
-            "type": "affliction",
-            "_id": "WFFiBV9pSW1x2fe6",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "basic",
-                        "key": "system.attributes.def.stage",
-                        "value": 2,
-                        "predicate": [],
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false
-                    },
-                    {
-                        "type": "basic",
-                        "key": "system.attributes.spd.stage",
-                        "value": 2,
-                        "predicate": [],
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": true,
-                "stacks": 0,
-                "priority": 50,
-                "formula": "",
-                "type": "damage"
-            },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": 2,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": false,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.327",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.1.5.2",
-                "createdTime": 1718629941884,
-                "modifiedTime": 1718629941884,
-                "lastModifiedBy": "y4EIjJlrc2eCclW7"
-            }
-        }
-    ]
+        "description": "Effect: Set Up: the user gains @Affliction[marked] 6 and @Affliction[braced] 2. \nResolution: On the user's next Activation, they target a valid creature, dealing twice the damage they took since declaring Bide to the target. Bide gains [Danger Close].",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "C"
+  },
+  "_id": "Do4KJ9riUaghCF4B",
+  "effects": []
 }

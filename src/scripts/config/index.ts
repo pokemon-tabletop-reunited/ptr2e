@@ -16,7 +16,7 @@ import { StatusEffects } from "./effects.ts";
 import FolderPTR2e from "@module/folder/document.ts";
 import ActorDirectoryPTR2e from "@actor/sidebar.ts";
 import FolderConfigPTR2e from "@module/folder/sheet.ts";
-import ActiveEffectConfigPTR2e from "@module/effects/sheet.ts";
+import ActiveEffectConfig from "@module/effects/sheet.ts";
 import PassiveActiveEffectSystem from "@module/effects/data/passive.ts";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
@@ -34,7 +34,7 @@ export const PTRCONFIG = {
             affliction: AfflictionActiveEffectSystem,
         },
         sheetClasses: {
-            effect: ActiveEffectConfigPTR2e,
+            effect: ActiveEffectConfig,
         }
     },
     Actor: {

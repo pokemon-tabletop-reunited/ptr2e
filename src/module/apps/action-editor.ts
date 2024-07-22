@@ -1,4 +1,3 @@
-import { ActionPTR2e } from "@data";
 import { ItemPTR2e, ItemSystemsWithActions } from "@item";
 import Tagify from "@yaireo/tagify";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
@@ -136,10 +135,9 @@ export class ActionEditor<
 
     document: TDocument;
     actionSlug: string;
-    private _action: ActionPTR2e | null = null;
 
     get action() {
-        return (this._action ??= this.document.system.actions.get(this.actionSlug) ?? null)!;
+        return this.document.system.actions.get(this.actionSlug)!;
     }
 
     override get title() {
@@ -205,9 +203,7 @@ export class ActionEditor<
                 sluggify(trait.value)
             );
         }
-        const action = this.action;
-        this._action = null;
-        await action.update(data);
+        await this.action.update(data);
    }
 
     override _attachPartListeners(
@@ -332,9 +328,17 @@ export class ActionEditor<
         return this.document.actor;
     }
 
+    get item() {
+        return this.document
+    }
+
     /** @override */
     override _onFirstRender() {
-        if(!this.actor) return;
+        if(!this.actor) {
+            //@ts-expect-error
+            this.item.apps[this.id] = this;
+            return;
+        }
         //@ts-expect-error
         this.actor.apps[this.id] = this;
     }
@@ -343,7 +347,11 @@ export class ActionEditor<
 
     /** @override */
     override _onClose() {
-        if(!this.actor) return;
+        if(!this.actor) {
+            //@ts-expect-error
+            delete this.item.apps[this.id];
+            return;
+        }
         //@ts-expect-error
         delete this.actor.apps[this.id];
     }

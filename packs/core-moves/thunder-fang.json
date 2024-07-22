@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "thunder-fang",
-    "description": "Effect: On hit, the target has a 10% chance of being Paralysis 4, and a 10% chance of becoming Flinched 4.",
+    "description": "",
     "traits": [
       "jaw",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "jaw",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,14 +37,15 @@
         "types": [
           "electric"
         ],
-        "description": "Effect: On hit, the target has a 10% chance of being Paralysis 4, and a 10% chance of becoming Flinched 4.",
+        "description": "Effect: On hit, the target has a 10% chance of gaining @Affliction[paralysis] 4, and a 10% chance of gaining @Affliction[flinched] 4.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "E"
   },
   "_id": "gADis21rh3UuejhI",
   "effects": []

@@ -4,9 +4,9 @@
   "img": "/systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "megahorn",
-    "description": "Effect: On hit, all [Shield] effects that the target is benefitting from are removed before applying damage.",
     "traits": [
       "horn",
+      "pierce",
       "contact"
     ],
     "actions": [
@@ -16,7 +16,9 @@
         "type": "attack",
         "traits": [
           "horn",
-          "contact"
+          "pierce",
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +27,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +38,6 @@
         "types": [
           "bug"
         ],
-        "description": "Effect: On hit, all [Shield] effects that the target is benefitting from are removed before applying damage.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +45,8 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B",
+    "description": ""
   },
   "_id": "fwZ7NiY8DCtMdfxo",
   "effects": []

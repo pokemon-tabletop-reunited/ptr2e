@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "gyro-ball",
-    "description": "Effect: Gyro Ball is more powerful the slower the user is compared to the target.\nGyro Ball's Power = min(150, (25*TargetSPD / UserSPD) + 1)",
+    "description": "",
     "traits": [
       "dash",
       "curl",
@@ -18,7 +18,8 @@
         "traits": [
           "dash",
           "curl",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,7 +28,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 7,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +39,7 @@
         "types": [
           "steel"
         ],
-        "description": "Effect: Gyro Ball is more powerful the slower the user is compared to the target.\nGyro Ball's Power = min(150, (25*TargetSPD / UserSPD) + 1)",
+        "description": "Effect: This attack is more powerful the slower the user is compared to the target ranging from 1 to 150.\n<blockquote>Damage Formula: Power = min(150, (25*TargetSPD / UserSPD) + 1)</blockquote>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -46,7 +47,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "A"
   },
   "_id": "ZmCAncW2sPcfZjR5",
   "effects": []

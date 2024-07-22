@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "bitter-malice",
-    "description": "Effect: On hit, the target's ATK stage is reduced by -1 for 5 activations.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "bitter-malice",
         "name": "Bitter Malice",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 8,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "SfdJasznDltMpR7q",
   "effects": []

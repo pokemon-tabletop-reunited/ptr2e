@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "dragon-breath",
-    "description": "Effect: On hit, all valid targets have a 30% chance of gaining Paralysis 5.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "dragon-breath",
         "name": "Dragon Breath",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "cone",
           "distance": 3,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -30,7 +32,7 @@
         "types": [
           "dragon"
         ],
-        "description": "Effect: On hit, all valid targets have a 30% chance of gaining Paralysis 5.",
+        "description": "Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[paralysis] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

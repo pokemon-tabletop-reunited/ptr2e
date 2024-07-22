@@ -3,7 +3,11 @@
         <img src="{{origin.img}}" alt="{{origin.name}}">
     </div>
     <h3>{{origin.name}}'s {{attack.name}}</h3>
-    <div class="icon"></div>
+    <div class="icon">
+        {{#if pp.cost}}
+            <a data-tooltip="{{#if pp.spent}}{{pp.cost}} PP has been spent.{{else}}Spend {{pp.cost}} PP?{{/if}}" data-action="consume-pp" class="{{#if pp.spent}}spent{{else}}unspent{{/if}}"><i class="fas fa-bolt"></i></a>
+        {{/if}}
+    </div>
 </header>
 <main>
     <div class="collapse-button">

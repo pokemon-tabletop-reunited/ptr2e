@@ -1,0 +1,544 @@
+.chat-message.message {
+  background: var(--user-color, #fefefe);
+  padding: 0;
+  color: #1e1e1e;
+  --color-underline-header: #6f6c66;
+}
+.chat-message.message.whisper {
+  background-color: #bcbcbc;
+}
+.chat-message.message.whisper header.message-header {
+  background-color: #bcbcbc;
+}
+.chat-message.message.whisper .message-content {
+  background-color: #dcdcdc;
+}
+.chat-message.message header.message-header {
+  color: whitesmoke;
+  text-shadow: 1px 1px 5px #1e1e1e;
+  padding: 0.25rem;
+  background-color: var(--user-color, #cdcdcd);
+  border-radius: 5px 5px 0 0;
+}
+.chat-message.message header.message-header .flavor-text {
+  font-style: italic;
+}
+.chat-message.message .message-content {
+  background-color: #fefefe;
+  padding: 0.25rem 0.5rem;
+  border-radius: 8px;
+}
+.chat-message.message.damage-applied .message-content {
+  padding: 0;
+}
+.chat-message.message.damage-applied .message-content > main {
+  display: flex;
+  flex-direction: row;
+  padding: 0.25rem 0.5rem;
+}
+.chat-message.message.damage-applied .message-content > main.undone {
+  text-decoration: line-through;
+}
+.chat-message.message.damage-applied .message-content > main p {
+  flex: 1;
+}
+.chat-message.message.damage-applied .message-content > main button {
+  flex: 0 0 50px;
+  padding: 0;
+}
+.chat-message.message.attack .message-content,
+.chat-message.message.skill .message-content,
+.chat-message.message.capture .message-content {
+  padding: 0;
+}
+.chat-message.message.attack .message-content > header,
+.chat-message.message.skill .message-content > header,
+.chat-message.message.capture .message-content > header {
+  background-color: #dedede;
+  border-bottom: 1px solid var(--color-underline-header);
+  text-align: center;
+  padding: 3px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 8px 8px 0 0;
+}
+.chat-message.message.attack .message-content > header .icon,
+.chat-message.message.skill .message-content > header .icon,
+.chat-message.message.capture .message-content > header .icon {
+  flex: 0 0 36px;
+  display: flex;
+  place-content: center;
+}
+.chat-message.message.attack .message-content > header .icon img,
+.chat-message.message.skill .message-content > header .icon img,
+.chat-message.message.capture .message-content > header .icon img {
+  width: 36px;
+  height: 36px;
+  border: unset;
+  object-fit: scale-down;
+}
+.chat-message.message.attack .message-content > header .icon a[data-action="consume-pp"].spent,
+.chat-message.message.skill .message-content > header .icon a[data-action="consume-pp"].spent,
+.chat-message.message.capture .message-content > header .icon a[data-action="consume-pp"].spent {
+  color: #9e7d10;
+}
+.chat-message.message.attack .message-content > header .icon a[data-action="consume-pp"].unspent,
+.chat-message.message.skill .message-content > header .icon a[data-action="consume-pp"].unspent,
+.chat-message.message.capture .message-content > header .icon a[data-action="consume-pp"].unspent {
+  color: #f8cf18;
+  animation: glow-pp 1.5s infinite alternate;
+}
+@keyframes glow-pp {
+  from {
+    text-shadow: 0 0 1px black;
+  }
+  to {
+    text-shadow: 0 0 8px black;
+  }
+}
+.chat-message.message.attack .message-content > header h3,
+.chat-message.message.skill .message-content > header h3,
+.chat-message.message.capture .message-content > header h3 {
+  border: unset;
+  padding: unset;
+  margin: unset;
+}
+.chat-message.message.attack .message-content > main,
+.chat-message.message.skill .message-content > main,
+.chat-message.message.capture .message-content > main {
+  display: flex;
+  flex-direction: column;
+}
+.chat-message.message.attack .message-content > main .collapse-button,
+.chat-message.message.skill .message-content > main .collapse-button,
+.chat-message.message.capture .message-content > main .collapse-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  align-items: center;
+}
+.chat-message.message.attack .message-content > main .collapse-button .collapse-rolls,
+.chat-message.message.skill .message-content > main .collapse-button .collapse-rolls,
+.chat-message.message.capture .message-content > main .collapse-button .collapse-rolls {
+  background-color: #eee;
+  cursor: pointer;
+  font-size: 15px;
+  border: none;
+  outline: none;
+  padding: 0 0.5rem;
+  border-bottom: 1px solid var(--color-underline-header);
+}
+.chat-message.message.attack .message-content > main .collapse-button .collapse-rolls:after,
+.chat-message.message.skill .message-content > main .collapse-button .collapse-rolls:after,
+.chat-message.message.capture .message-content > main .collapse-button .collapse-rolls:after {
+  content: "▶";
+  color: #2e2e2e;
+  font-size: 13px;
+  float: right;
+  margin-left: 5px;
+  width: 10px;
+}
+.chat-message.message.attack .message-content > main .collapse-button .collapse-rolls.expanded:after,
+.chat-message.message.skill .message-content > main .collapse-button .collapse-rolls.expanded:after,
+.chat-message.message.capture .message-content > main .collapse-button .collapse-rolls.expanded:after {
+  content: "▼";
+}
+.chat-message.message.attack .message-content > main > article,
+.chat-message.message.skill .message-content > main > article,
+.chat-message.message.capture .message-content > main > article {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.chat-message.message.attack .message-content > main > article.collapsed,
+.chat-message.message.skill .message-content > main > article.collapsed,
+.chat-message.message.capture .message-content > main > article.collapsed {
+  display: none;
+}
+.chat-message.message.attack .message-content > main > article > section,
+.chat-message.message.skill .message-content > main > article > section,
+.chat-message.message.capture .message-content > main > article > section {
+  flex: 1 0 50%;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--color-underline-header);
+}
+.chat-message.message.attack .message-content > main > article > section h3,
+.chat-message.message.skill .message-content > main > article > section h3,
+.chat-message.message.capture .message-content > main > article > section h3 {
+  text-align: center;
+  font-size: 1rem;
+}
+.chat-message.message.attack .message-content > main > article > section:nth-child(even),
+.chat-message.message.skill .message-content > main > article > section:nth-child(even),
+.chat-message.message.capture .message-content > main > article > section:nth-child(even) {
+  border-left: 1px solid var(--color-underline-header);
+  background-color: #fefefe;
+}
+.chat-message.message.attack .message-content > main > article > section:nth-child(odd),
+.chat-message.message.skill .message-content > main > article > section:nth-child(odd),
+.chat-message.message.capture .message-content > main > article > section:nth-child(odd) {
+  background-color: #fefefe;
+}
+.chat-message.message.attack .message-content > main > article > section .dice-roll .dice-formula,
+.chat-message.message.skill .message-content > main > article > section .dice-roll .dice-formula,
+.chat-message.message.capture .message-content > main > article > section .dice-roll .dice-formula,
+.chat-message.message.attack .message-content > main > article > section .dice-roll .dice-total,
+.chat-message.message.skill .message-content > main > article > section .dice-roll .dice-total,
+.chat-message.message.capture .message-content > main > article > section .dice-roll .dice-total {
+  border-radius: 10px;
+}
+.chat-message.message.attack .message-content > main > article > section .dice-roll .dice-tooltip.expanded,
+.chat-message.message.skill .message-content > main > article > section .dice-roll .dice-tooltip.expanded,
+.chat-message.message.capture .message-content > main > article > section .dice-roll .dice-tooltip.expanded {
+  padding: 0.25rem;
+  background-color: #dedede;
+  border-radius: 10px;
+  margin: 0.25rem 0;
+  text-align: center;
+}
+.chat-message.message.attack .message-content > main > article > section .dice-roll .dice-tooltip.expanded .part-header,
+.chat-message.message.skill .message-content > main > article > section .dice-roll .dice-tooltip.expanded .part-header,
+.chat-message.message.capture .message-content > main > article > section .dice-roll .dice-tooltip.expanded .part-header {
+  position: relative;
+}
+.chat-message.message.attack .message-content > main > article > section .dice-roll .dice-tooltip.expanded .part-header .part-total,
+.chat-message.message.skill .message-content > main > article > section .dice-roll .dice-tooltip.expanded .part-header .part-total,
+.chat-message.message.capture .message-content > main > article > section .dice-roll .dice-tooltip.expanded .part-header .part-total {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.chat-message.message.attack .message-content > main > article > section .dice-roll .dice-tooltip.expanded ol.dice-rolls,
+.chat-message.message.skill .message-content > main > article > section .dice-roll .dice-tooltip.expanded ol.dice-rolls,
+.chat-message.message.capture .message-content > main > article > section .dice-roll .dice-tooltip.expanded ol.dice-rolls {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.chat-message.message.attack .message-content > main > article > figure,
+.chat-message.message.skill .message-content > main > article > figure,
+.chat-message.message.capture .message-content > main > article > figure {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+.chat-message.message.attack .message-content > main > article > figure > header,
+.chat-message.message.skill .message-content > main > article > figure > header,
+.chat-message.message.capture .message-content > main > article > figure > header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 0.25rem;
+  background-color: #dedede;
+  border-bottom: 1px solid var(--color-underline-header);
+  border-radius: 0 0 10px 10px;
+}
+.chat-message.message.attack .message-content > main > article > figure > header .trait,
+.chat-message.message.skill .message-content > main > article > figure > header .trait,
+.chat-message.message.capture .message-content > main > article > figure > header .trait {
+  flex: 0 1 auto;
+  margin: 0 2px;
+}
+.chat-message.message.attack .message-content > main > article > figure > main,
+.chat-message.message.skill .message-content > main > article > figure > main,
+.chat-message.message.capture .message-content > main > article > figure > main {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.chat-message.message.attack .message-content > main > article > figure > main > aside,
+.chat-message.message.skill .message-content > main > article > figure > main > aside,
+.chat-message.message.capture .message-content > main > article > figure > main > aside {
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 44px;
+  margin: 0.25rem 0.25rem;
+  gap: 2px;
+}
+.chat-message.message.attack .message-content > main > article > figure > main > aside .icon,
+.chat-message.message.skill .message-content > main > article > figure > main > aside .icon,
+.chat-message.message.capture .message-content > main > article > figure > main > aside .icon {
+  border: unset;
+}
+.chat-message.message.attack .message-content > main > article > figure > main > article,
+.chat-message.message.skill .message-content > main > article > figure > main > article,
+.chat-message.message.capture .message-content > main > article > figure > main > article {
+  display: flex;
+  align-items: center;
+  flex: 1;
+}
+.chat-message.message.attack .message-content > main > article > figure > main > article.center,
+.chat-message.message.skill .message-content > main > article > figure > main > article.center,
+.chat-message.message.capture .message-content > main > article > figure > main > article.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.chat-message.message.attack .message-content > footer,
+.chat-message.message.skill .message-content > footer,
+.chat-message.message.capture .message-content > footer {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0 0 8px 8px;
+}
+.chat-message.message.attack .message-content > footer .target,
+.chat-message.message.skill .message-content > footer .target,
+.chat-message.message.capture .message-content > footer .target {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 3px;
+  height: 43px;
+  text-align: center;
+}
+.chat-message.message.attack .message-content > footer .target:nth-child(odd),
+.chat-message.message.skill .message-content > footer .target:nth-child(odd),
+.chat-message.message.capture .message-content > footer .target:nth-child(odd) {
+  background-color: #fefefe;
+  border-top: 1px solid var(--color-underline-header);
+  border-bottom: 1px solid var(--color-underline-header);
+}
+.chat-message.message.attack .message-content > footer .target:nth-child(even),
+.chat-message.message.skill .message-content > footer .target:nth-child(even),
+.chat-message.message.capture .message-content > footer .target:nth-child(even) {
+  background-color: #efefef;
+}
+.chat-message.message.attack .message-content > footer .target:first-child,
+.chat-message.message.skill .message-content > footer .target:first-child,
+.chat-message.message.capture .message-content > footer .target:first-child {
+  border-top: unset;
+  background-color: #dedede;
+}
+.chat-message.message.attack .message-content > footer .target:last-child,
+.chat-message.message.skill .message-content > footer .target:last-child,
+.chat-message.message.capture .message-content > footer .target:last-child {
+  border-radius: 0 0 8px 8px;
+}
+.chat-message.message.attack .message-content > footer .target .icon,
+.chat-message.message.skill .message-content > footer .target .icon,
+.chat-message.message.capture .message-content > footer .target .icon {
+  flex: 0 0 36px;
+  display: flex;
+  justify-content: center;
+}
+.chat-message.message.attack .message-content > footer .target .icon img,
+.chat-message.message.skill .message-content > footer .target .icon img,
+.chat-message.message.capture .message-content > footer .target .icon img {
+  width: 36px;
+  height: 36px;
+  border: unset;
+  object-fit: scale-down;
+}
+.chat-message.message.attack .message-content > footer .target .status,
+.chat-message.message.skill .message-content > footer .target .status,
+.chat-message.message.capture .message-content > footer .target .status {
+  margin-left: 0.25rem;
+  flex: 0 0 64px;
+}
+.chat-message.message.attack .message-content > footer .target .status i.fas,
+.chat-message.message.skill .message-content > footer .target .status i.fas,
+.chat-message.message.capture .message-content > footer .target .status i.fas {
+  font-size: 22px;
+}
+.chat-message.message.attack .message-content > footer .target .status i.fas.fa-certificate,
+.chat-message.message.skill .message-content > footer .target .status i.fas.fa-certificate,
+.chat-message.message.capture .message-content > footer .target .status i.fas.fa-certificate {
+  color: #1edf6e;
+}
+.chat-message.message.attack .message-content > footer .target .status i.fas.fa-crosshairs,
+.chat-message.message.skill .message-content > footer .target .status i.fas.fa-crosshairs,
+.chat-message.message.capture .message-content > footer .target .status i.fas.fa-crosshairs {
+  color: #14afdf;
+}
+.chat-message.message.attack .message-content > footer .target .status i.fas.fa-times-circle,
+.chat-message.message.skill .message-content > footer .target .status i.fas.fa-times-circle,
+.chat-message.message.capture .message-content > footer .target .status i.fas.fa-times-circle {
+  color: #f04e4e;
+}
+.chat-message.message.attack .message-content > footer .target .damage,
+.chat-message.message.skill .message-content > footer .target .damage,
+.chat-message.message.capture .message-content > footer .target .damage {
+  margin-left: 0.25rem;
+  flex: 1;
+}
+.chat-message.message.attack .message-content > footer .target .damage span,
+.chat-message.message.skill .message-content > footer .target .damage span,
+.chat-message.message.capture .message-content > footer .target .damage span {
+  font-size: 16px;
+}
+.chat-message.message.attack .message-content > footer .target .apply,
+.chat-message.message.skill .message-content > footer .target .apply,
+.chat-message.message.capture .message-content > footer .target .apply {
+  flex: 0 0 70px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.chat-message.message.attack .message-content > footer .target .apply button,
+.chat-message.message.skill .message-content > footer .target .apply button,
+.chat-message.message.capture .message-content > footer .target .apply button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 14px;
+  color: #1e1e1e;
+  padding: 0;
+}
+.chat-message.message.attack .message-content > footer .target .apply button.update-targets,
+.chat-message.message.skill .message-content > footer .target .apply button.update-targets,
+.chat-message.message.capture .message-content > footer .target .apply button.update-targets {
+  flex: 0 0 60%;
+  padding: 0.25rem;
+}
+.chat-message.message.attack .message-content > footer .target .apply button.update-targets i,
+.chat-message.message.skill .message-content > footer .target .apply button.update-targets i,
+.chat-message.message.capture .message-content > footer .target .apply button.update-targets i {
+  margin: 0;
+}
+.chat-message.message.skill .message-content header {
+  justify-content: flex-start;
+}
+.chat-message.message.skill .message-content header h3 {
+  text-wrap: pretty;
+  flex: 1;
+}
+.chat-message.message.skill main {
+  padding: 0.25rem;
+}
+.chat-message.message.skill footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+}
+.chat-message.message.skill footer p.luck-roll {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  padding: 0.25rem;
+}
+.chat-message.message.skill footer p.luck-roll button {
+  flex: 0 0 30%;
+}
+.chat-message.message.skill footer p.luck-roll button[disabled] {
+  filter: contrast(0.7);
+}
+.chat-message.message.skill .skill-roll.success .dos {
+  color: #18520b;
+  background: #18520b33;
+}
+.chat-message.message.skill .skill-roll.success .dice-roll .dice-total {
+  color: #18520b;
+}
+.chat-message.message.skill .skill-roll.failure .dos {
+  color: #aa0200;
+  background: #aa020033;
+}
+.chat-message.message.skill .skill-roll.failure .dice-roll .dice-total {
+  color: #aa0200;
+}
+.chat-message.message.skill .skill-roll .reroll {
+  color: #714a03;
+  background: #f3daac;
+}
+.chat-message.message.skill .skill-roll .dos,
+.chat-message.message.skill .skill-roll .reroll {
+  font-weight: bold;
+  padding: 0.5rem;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+.chat-message.message.capture section.results {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  gap: 5px;
+  height: 208px;
+}
+.chat-message.message.capture section.results .accuracy,
+.chat-message.message.capture section.results .crit,
+.chat-message.message.capture section.results .shake {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 0;
+  animation: fadeInAnimation ease 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+.chat-message.message.capture section.results .accuracy {
+  animation-delay: 1.5s;
+}
+.chat-message.message.capture section.results .crit {
+  animation-delay: 2.5s;
+}
+.chat-message.message.capture section.results .shake-1 {
+  animation-delay: 4s;
+}
+.chat-message.message.capture section.results .shake-2 {
+  animation-delay: 6s;
+}
+.chat-message.message.capture section.results .shake-3 {
+  animation-delay: 8s;
+}
+.chat-message.message.capture section.results .shake-4 {
+  animation-delay: 10s;
+}
+.chat-message.message.capture section.results label {
+  font-weight: bold;
+  flex: 0 0 40%;
+}
+.chat-message.message.capture section.results span {
+  flex: 1;
+}
+.chat-message.message.capture section.results header {
+  border-bottom: 1px solid var(--color-underline-header);
+  padding: 0.5rem 0;
+}
+.chat-message.message.capture section.results footer.results {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--color-underline-header);
+  margin-top: auto;
+  opacity: 0;
+  animation: fadeInAnimation ease 2s;
+  animation-iteration-count: 1;
+  animation-fill-mode: forwards;
+}
+.chat-message.message.capture section.results footer.results:has(.success) {
+  color: #18520b;
+  background: #18520b33;
+}
+.chat-message.message.capture section.results footer.results:has(.failure) {
+  color: #aa0200;
+  background: #aa020033;
+}
+.chat-message.message.capture section.results .success {
+  color: #18520b;
+}
+.chat-message.message.capture section.results .failure {
+  color: #aa0200;
+}
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

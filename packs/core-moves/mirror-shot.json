@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "mirror-shot",
-    "description": "Effect: On hit, the target has a 30% chance of losing -1 ACC stage for 5 activations.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "mirror-shot",
         "name": "Mirror Shot",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "E"
   },
   "_id": "vALidK8djNyae3c0",
   "effects": []

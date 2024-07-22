@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": "grass-knot",
-    "description": "Effect: Grass Knot's Power is dependent on the target's Weight Class: \n20 vs WC 1, 40 vs WC 2 & 3, 60 vs WC 4, 80 vs WC 5, 6, 7, 100 vs WC 8, 9, 10, and 120 vs WC 11+.",
+    "description": "",
     "traits": [
       "contact"
     ],
@@ -14,7 +14,8 @@
         "name": "Grass Knot",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -34,7 +35,7 @@
         "types": [
           "grass"
         ],
-        "description": "Effect: Grass Knot's Power is dependent on the target's Weight Class: \n20 vs WC 1, 40 vs WC 2 & 3, 60 vs WC 4, 80 vs WC 5, 6, 7, 100 vs WC 8, 9, 10, and 120 vs WC 11+.",
+        "description": "Effect: This attack's Power is based on how heavy the target is, ranging from 20 to 140.\n<blockquote>Damage Formula: Power = max(140, min(20, TargetWC x 10)))</blockquote>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "B"
   },
   "_id": "QUfozsylvlJ6LoVT",
   "effects": []

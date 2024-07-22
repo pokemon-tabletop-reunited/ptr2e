@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/flying_icon.svg",
   "system": {
     "slug": "sky-fall",
-    "description": "Effect: On hit, all valid targets have a 30% chance of being Paralysis 5.",
+    "description": "",
     "traits": [
       "dash",
       "pass-3"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "dash",
-          "pass-3"
+          "pass-3",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 7,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,7 @@
         "types": [
           "flying"
         ],
-        "description": "Effect: On hit, all valid targets have a 30% chance of being Paralysis 5.",
+        "description": "Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[paralysis] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "A"
   },
   "_id": "e1PMYoHlbRDJtC3v",
   "effects": []

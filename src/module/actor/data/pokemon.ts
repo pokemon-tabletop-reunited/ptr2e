@@ -265,9 +265,14 @@ class PokemonActorSystem extends ActorSystemPTR2e {
                 })
             );
 
+            let i = 0;
             return abilityItems.reduce(
                 (acc, ability) => {
-                    if (ability && ability instanceof ItemPTR2e) acc.push(ability.toObject());
+                    if (ability && ability instanceof ItemPTR2e) {
+                        const abilityData = ability.toObject();
+                        abilityData.system.slot = i++;
+                        acc.push(abilityData);
+                    }
                     return acc;
                 },
                 [] as AbilityPTR2e["_source"][]

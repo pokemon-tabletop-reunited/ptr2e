@@ -1,42 +1,45 @@
 {
-    "name": "Swift",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/normal_icon.svg",
-    "system": {
+  "name": "Swift",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "system": {
+    "slug": "swift",
+    "traits": [
+      "blast-2",
+      "danger-close",
+      "pp-updated"
+    ],
+    "actions": [
+      {
         "slug": "swift",
+        "name": "Swift",
+        "type": "attack",
         "traits": [
-            "blast-2",
-            "danger-close"
+          "blast-2",
+          "danger-close",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "swift",
-                "name": "Swift",
-                "type": "attack",
-                "traits": [
-                    "blast-2",
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "blast",
-                    "distance": 10,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 5
-                },
-                "category": "special",
-                "power": 60,
-                "accuracy": 100,
-                "types": [
-                    "normal"
-                ],
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "normal"
         ],
-        "grade": "B"
-    },
-    "_id": "6WFfTWkoMPozYk0g",
-    "effects": []
+        "img": "/systems/ptr2e/img/svg/normal_icon.svg"
+      }
+    ],
+    "grade": "B",
+    "description": ""
+  },
+  "_id": "6WFfTWkoMPozYk0g",
+  "effects": []
 }

@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "night-daze",
-    "description": "On hit, all valid targets have a 40% chance of losing -1 ACC stage for 5 activations. The user may freely move to any open square within Range.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "night-daze",
         "name": "Night Daze",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "wide-line",
           "distance": 5,

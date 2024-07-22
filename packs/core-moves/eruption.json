@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "eruption",
-    "description": "Effect: Eruption's Power is equal to: 150 x UserCurrentHP/UserMaxHP.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "eruption",
         "name": "Eruption",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "emanation",
           "distance": 3,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 9,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -30,7 +32,7 @@
         "types": [
           "fire"
         ],
-        "description": "Effect: Eruption's Power is equal to: 150 x UserCurrentHP/UserMaxHP.",
+        "description": "Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.\n<blockquote>Damage Formula: Power = max(1, 150 x UserCurrentHP/UserMaxHP)</blockquote>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "A"
   },
   "_id": "23Z3l1FUmOXJv9mx",
   "effects": []

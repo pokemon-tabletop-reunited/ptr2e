@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "venoshock",
-    "description": "Effect: If the target has the Poison or Blight condition, this attack's Power is doubled.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "venoshock",
         "name": "Venoshock",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -30,7 +32,7 @@
         "types": [
           "poison"
         ],
-        "description": "Effect: If the target has the Poison or Blight condition, this attack's Power is doubled.",
+        "description": "Effect: If the target has the @Affliction[poison] or @Affliction[blight] condition, this attack's Power is doubled.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "jZK67alNjuQdhesC",
   "effects": []

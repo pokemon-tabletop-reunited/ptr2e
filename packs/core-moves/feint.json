@@ -4,10 +4,10 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "feint",
-    "description": "Effect: On hit, all of the target's [Shield] effects are removed before damage is dealt.",
     "traits": [
       "dash",
       "priority-2",
+      "pierce",
       "contact"
     ],
     "actions": [
@@ -18,7 +18,9 @@
         "traits": [
           "dash",
           "priority-2",
-          "contact"
+          "contact",
+          "pierce",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,7 +29,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 7,
+          "powerPoints": 2,
           "delay": null,
           "priority": 2,
           "trigger": null
@@ -38,7 +40,6 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: On hit, all of the target's [Shield] effects are removed before damage is dealt.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -46,7 +47,8 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "D",
+    "description": ""
   },
   "_id": "PjOZd4TXRrr4PyHx",
   "effects": []

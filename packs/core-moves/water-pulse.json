@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "water-pulse",
-    "description": "Effect: On hit, the target has a 20% chance of being Confused 5.",
+    "description": "",
     "traits": [
       "pulse"
     ],
@@ -14,7 +14,8 @@
         "name": "Water Pulse",
         "type": "attack",
         "traits": [
-          "pulse"
+          "pulse",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "water"
         ],
-        "description": "Effect: On hit, the target has a 20% chance of being Confused 5.",
+        "description": "Effect: On hit, the target has a 20% chance of gaining @Affliction[confused] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "D"
   },
   "_id": "44KwwvaafrEiWrPY",
   "effects": []

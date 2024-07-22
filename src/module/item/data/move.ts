@@ -1,5 +1,5 @@
 import { MovePTR2e } from "@item";
-import { ActionPTR2e, AttackPTR2e, HasBase, HasEmbed } from "@module/data/index.ts";
+import { ActionPTR2e, AttackPTR2e, HasBase, HasEmbed, Trait } from "@module/data/index.ts";
 import { sluggify } from "@utils";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 
@@ -48,6 +48,35 @@ export default abstract class MoveSystem extends HasEmbed(
         };
     }
 
+    override get description(): string {
+        return this.attack.description ?? this._source.description ?? "";
+    }
+
+    override set description(_value: string) {
+    }
+
+    override get traits(): Collection<Trait> {
+        return this.attack.traits;
+    }
+
+    override set traits(_value: string[]) {
+    }
+
+    override get _traits(): Trait[] {
+        return this.attack.traits.contents;
+    }
+
+    override set _traits(_value: Trait[]) {
+    }
+
+    override prepareBaseData(): void {
+        super.prepareBaseData();
+        const primaryAction = this.attack;
+        if(primaryAction?.slug !== this.slug) {
+            console.warn(`Primary action slug does not match move slug. Move: ${this.slug}, Primary Action: ${primaryAction?.slug}`);
+        }
+    }
+
     override async toEmbed(
         _config: foundry.abstract.DocumentHTMLEmbedConfig,
         options: EnrichmentOptions = {}
@@ -84,16 +113,16 @@ export default abstract class MoveSystem extends HasEmbed(
                 //@ts-expect-error
                 data.system.actions = [
                     {
-                        name: `${data.name} Attack`,
-                        slug: sluggify(`${data.name} Attack`),
+                        name: `${data.name}`,
+                        slug: sluggify(`${data.name}`),
                         type: "attack",
                     },
                 ];
                 this.parent.updateSource({ "system.actions": data.system.actions });
             } else if (!actions.some((action) => action.type === "attack")) {
                 data.system.actions.unshift({
-                    name: `${data.name} Attack`,
-                    slug: sluggify(`${data.name} Attack`),
+                    name: `${data.name}`,
+                    slug: sluggify(`${data.name}`),
                     type: "attack",
                 });
                 this.parent.updateSource({ "system.actions": data.system.actions });
@@ -102,7 +131,7 @@ export default abstract class MoveSystem extends HasEmbed(
 
         if (!data.img || data.img === "icons/svg/item-bag.svg") {
             this.parent.updateSource({
-                img: "/systems/ptr2e/img/icons/untyped_icon.png",
+                img: "/systems/ptr2e/img/svg/untyped_icon.svg",
             });
         }
 
@@ -125,51 +154,47 @@ export default abstract class MoveSystem extends HasEmbed(
                 }
             }
         }
-        if (changed.system?.description !== undefined) {
-            //@ts-expect-error
-            const changedActions = changed.system?.actions as ActionPTR2e["_source"][];
-            if (changedActions?.length) {
-                const mainAttackIndex = changedActions.findIndex(
-                    (action) => action.type === "attack"
-                );
-                if (mainAttackIndex === -1) {
-                    return false;
-                }
-                changedActions[mainAttackIndex].description = changed.system.description as string;
-            } else {
-                const attacks = this._source.actions;
-                const mainAttackIndex = attacks.findIndex((action) => action.type === "attack");
-                if (mainAttackIndex === -1) {
-                    return false;
-                }
-                attacks[mainAttackIndex].description = changed.system.description as string;
-                //@ts-expect-error
-                changed.system.actions = attacks;
-            }
-        }
         if (changed.system?.traits !== undefined) {
             //@ts-expect-error
             const changedActions = changed.system?.actions as ActionPTR2e["_source"][];
             if (changedActions?.length) {
                 const mainAttackIndex = changedActions.findIndex(
-                    (action) => action.type === "attack"
-                );
+                    (action) => action.slug === this.slug
+                )
                 if (mainAttackIndex === -1) {
-                    return false;
+                    const retry = changedActions.findIndex((action) => action.type === "attack");
+                    if(retry === -1) {
+                        return false;
+                    }
+                    //@ts-expect-error
+                    changedActions[retry].traits = changed.system.traits;
                 }
-                //@ts-expect-error
-                changedActions[mainAttackIndex].traits = changed.system.traits;
+                else {
+                    //@ts-expect-error
+                    changedActions[mainAttackIndex].traits = changed.system.traits;
+                }
             } else {
-                const attacks = this._source.actions;
-                const mainAttackIndex = attacks.findIndex((action) => action.type === "attack");
+                const attacks = fu.duplicate(this._source.actions);
+                const mainAttackIndex = attacks.findIndex((action) => action.slug === this.slug);
                 if (mainAttackIndex === -1) {
-                    return false;
+                    const retry = attacks.findIndex((action) => action.type === "attack");
+                    if (retry === -1) {
+                        return false;
+                    }
+                    //@ts-expect-error
+                    attacks[retry].traits = changed.system.traits;
                 }
-                //@ts-expect-error
-                attacks[mainAttackIndex].traits = changed.system.traits;
+                else {
+                    //@ts-expect-error
+                    attacks[mainAttackIndex].traits = changed.system.traits;
+                }
                 //@ts-expect-error
                 changed.system.actions = attacks;
             }
+        }
+        if(changed.system) {
+            changed.system.description = "";
+            changed.system.traits = [];
         }
 
         return await super._preUpdate(changed, options, user);

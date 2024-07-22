@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "mud-tail",
-    "description": "Effect: On hit, the target is Slowed 5.",
+    "description": "",
     "traits": [
       "tail",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "tail",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,7 @@
         "types": [
           "ground"
         ],
-        "description": "Effect: On hit, the target is Slowed 5.",
+        "description": "Effect: On hit, the target is @Affliction[slowed] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "V8O8neYaAcnUKYEl",
   "effects": []

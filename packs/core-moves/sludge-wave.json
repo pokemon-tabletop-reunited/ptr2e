@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "sludge-wave",
-    "description": "Effect: On hit, all valid targets have a 10% chance of being Poison 5.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "sludge-wave",
         "name": "Sludge Wave",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "wide-line",
           "distance": 4,
@@ -30,7 +32,7 @@
         "types": [
           "poison"
         ],
-        "description": "Effect: On hit, all valid targets have a 10% chance of being Poison 5.",
+        "description": "Effect: On hit, all valid targets have a 10% chance of gaining @Affliction[poison] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

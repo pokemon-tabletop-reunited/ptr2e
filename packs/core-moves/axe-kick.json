@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "axe-kick",
-    "description": "Effect: On hit, the target has a 30% chance of becoming Confused 5.",
+    "description": "",
     "traits": [
       "crash-1-2",
       "kick",
@@ -18,7 +18,8 @@
         "traits": [
           "crash-1-2",
           "kick",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,7 +28,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +39,7 @@
         "types": [
           "fighting"
         ],
-        "description": "Effect: On hit, the target has a 30% chance of becoming Confused 5.",
+        "description": "Effect: On hit, the target has a 30% chance of gaining @Affliction[confused] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -46,7 +47,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "GDaJeFH4TTDmqMT2",
   "effects": []

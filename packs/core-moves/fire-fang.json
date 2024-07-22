@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "fire-fang",
-    "description": "Effect: On hit, the target target has a 10% chance of gaining @Affliction[burn] 4, and a 10% chance of being Flinched 4.",
+    "description": "",
     "traits": [
       "jaw",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "jaw",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,7 @@
         "types": [
           "fire"
         ],
-        "description": "Effect: On hit, the target target has a 10% chance of gaining @Affliction[burn] 4, and a 10% chance of being Flinched 4.",
+        "description": "Effect: On hit, the target target has a 10% chance of gaining @Affliction[burn] 4, and a 10% chance of gaining @Affliction[flinched] 4.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "E"
   },
   "_id": "pqZ5P3yI0bOu6Qni",
   "effects": []

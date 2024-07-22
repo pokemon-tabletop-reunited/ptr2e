@@ -42,10 +42,10 @@ class AttackRoll extends CheckRoll {
         const formula = "1d100ms@dc";
         const dc = ((
             baseAccuracy: number,
-            accuracyModifiers: { flat: number; stage: number },
+            accuracyModifiers: { flat: number; stage: number, percentile: number},
             evasionStage: number
         ) => {
-            const { flat: accuracyFlat, stage: accuracyStage } = accuracyModifiers;
+            const { flat: accuracyFlat, stage: accuracyStage, percentile: accuracyPercent } = accuracyModifiers;
             const stageBonus = (() => {
                 const accuracy = accuracyStage;
                 if(Math.abs(accuracy) === Infinity) return -Infinity;
@@ -54,16 +54,18 @@ class AttackRoll extends CheckRoll {
                 options.adjustedStages = stages;
                 return stages >= 0 ? (3 + stages) / 3 : 3 / (3 - stages);
             })();
+
             options.otherModifiers = accuracyFlat;
             options.stageModifier = stageBonus;
+            options.percentileModifier = accuracyPercent ?? 1
             
             if(stageBonus === -Infinity) return 0;
             if(options.outOfRange) return 0;
 
-            return Math.clamp(Math.floor((baseAccuracy + accuracyFlat) * stageBonus), 1, 100);
+            return Math.clamp(Math.floor((baseAccuracy + accuracyFlat) * stageBonus * (accuracyPercent ?? 1) || 1), 1, 100);
         })(
             options.moveAccuracy,
-            data.check.total?.accuracy ?? { flat: 0, stage: 0 },
+            data.check.total?.accuracy ?? { flat: 0, stage: 0, percentile: 100},
             data.check.total?.evasion?.stage ?? 0
         );
 

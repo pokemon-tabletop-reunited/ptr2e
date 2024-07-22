@@ -40,6 +40,7 @@
                 <select class="type add-modifier-type">
                     <option value="accuracy-stage">Accuracy Stage</option>
                     <option value="accuracy-flat">Accuracy Flat</option>
+                    <option value="accuracy-percent">Accuracy Percent</option>
                     <option value="crit-stage">Crit Stage</option>
                     <option value="power-percent">Power Percent</option>
                     <option value="damage-percent">Damage Percent</option>
@@ -49,7 +50,13 @@
             </div>
         </section>
     </article>
-    <footer clas="mt-3">
+    <footer clas="mt-3"> 
+        {{#if ppCost}}
+            <div class="form-group">
+                <input type="checkbox" {{#if consumePP}}checked{{/if}} name="consume-pp">
+                <label for="consume-pp">Consume {{ppCost}} PP?</label>
+            </div>
+        {{/if}}
         <button type="submit">Submit</button>
     </footer>
 </main>

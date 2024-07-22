@@ -116,6 +116,13 @@ class ActionPTR2e extends foundry.abstract.DataModel {
         return this.item.actions.get(this.variant) ?? null;
     }
 
+    get css(): { style: string; class: string;} {
+        return {
+            style: "",
+            class: ""
+        };
+    }
+
     prepareDerivedData() {
         this.traits = this._source.traits.reduce((acc: Collection<Trait>, traitSlug: string) => {
             const trait = game.ptr.data.traits.get(traitSlug);

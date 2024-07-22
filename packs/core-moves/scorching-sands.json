@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "scorching-sands",
-    "description": "Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[burn] 5.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "scorching-sands",
         "name": "Scorching Sands",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "cone",
           "distance": 3,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -37,7 +39,8 @@
         "slot": null
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "B"
   },
   "_id": "Xf06CuZXt5UrkSXH",
   "effects": []

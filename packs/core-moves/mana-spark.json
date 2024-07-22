@@ -1,72 +1,53 @@
 {
-    "folder": "pyJa7NcmlTOD3PA4",
-    "name": "Mana Spark",
-    "type": "move",
-    "_id": "hsw4D5WYThON2L3l",
-    "img": "systems/ptr2e/img/svg/fairy_icon.svg",
-    "system": {
-        "slug": null,
+  "name": "Mana Spark",
+  "type": "move",
+  "_id": "hsw4D5WYThON2L3l",
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "system": {
+    "slug": null,
+    "traits": [
+      "basic",
+      "aura",
+      "pulse",
+      "pp-updated"
+    ],
+    "actions": [
+      {
+        "name": "Mana Spark",
+        "slug": "mana-spark",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
         "traits": [
-            "basic",
-            "aura",
-            "pulse"
+          "basic",
+          "aura",
+          "pulse",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "name": "Mana Spark Attack",
-                "slug": "mana-spark-attack",
-                "type": "attack",
-                "img": "icons/svg/explosion.svg",
-                "traits": [
-                    "basic",
-                    "aura",
-                    "pulse"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 1,
-                    "delay": null,
-                    "priority": null,
-                    "trigger": ""
-                },
-                "variant": null,
-                "types": [
-                    "fairy"
-                ],
-                "category": "special",
-                "power": 50,
-                "accuracy": 90,
-                "contestType": "",
-                "contestEffect": "",
-                "free": false,
-                "slot": null,
-                "description": "<p>On hit, the user has a 10% chance of increasing their SPATK stage by +1 for 5 activations.</p>"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": ""
+        },
+        "variant": null,
+        "types": [
+          "fairy"
         ],
-        "description": "<p>On hit, the user has a 10% chance of increasing their SPATK stage by +1 for 5 activations.</p>",
-        "container": null,
-        "grade": "E"
-    },
-    "effects": [],
-    "sort": 0,
-    "ownership": {
-        "default": 0,
-        "CYLdyr5mPSDmNpTp": 3
-    },
-    "flags": {},
-    "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "12.327",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.1.0",
-        "createdTime": 1717874194407,
-        "modifiedTime": 1717876159340,
-        "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-    }
+        "category": "special",
+        "power": 50,
+        "accuracy": 90,
+        "description": "<p>On hit, the user has a 10% chance of increasing their SPATK stage by +1 for 5 activations.</p>"
+      }
+    ],
+    "description": "",
+    "container": null,
+    "grade": "E"
+  },
+  "effects": []
 }

@@ -1,44 +1,46 @@
 {
-    "name": "High Horsepower",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/ground_icon.svg",
-    "system": {
+  "name": "High Horsepower",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/ground_icon.svg",
+  "system": {
+    "slug": "high-horsepower",
+    "traits": [
+      "dash",
+      "push-2",
+      "contact"
+    ],
+    "actions": [
+      {
         "slug": "high-horsepower",
+        "name": "High Horsepower",
+        "type": "attack",
         "traits": [
-            "dash",
-            "push-2",
-            "contact"
+          "dash",
+          "push-2",
+          "contact",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "high-horsepower",
-                "name": "High Horsepower",
-                "type": "attack",
-                "traits": [
-                    "dash",
-                    "push-2",
-                    "contact"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 7
-                },
-                "category": "physical",
-                "power": 95,
-                "accuracy": 95,
-                "types": [
-                    "ground"
-                ],
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "physical",
+        "power": 95,
+        "accuracy": 95,
+        "types": [
+          "ground"
         ],
-        "grade": "B"
-    },
-    "_id": "1NFV0iOtfQBklGoj",
-    "effects": []
+        "img": "/systems/ptr2e/img/svg/ground_icon.svg"
+      }
+    ],
+    "grade": "B",
+    "description": ""
+  },
+  "_id": "1NFV0iOtfQBklGoj",
+  "effects": []
 }

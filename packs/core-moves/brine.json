@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "brine",
-    "description": "Effect: If the target's current Hit Points are less than 50% of their Max, this Attack's Power is instead 130.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "brine",
         "name": "Brine",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -30,7 +32,7 @@
         "types": [
           "water"
         ],
-        "description": "Effect: If the target's current Hit Points are less than 50% of their Max, this Attack's Power is instead 130.",
+        "description": "Effect: If the target's current Hit Points are less than 50% of their Max, this Attack's Power is doubled.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "COmJvGjfvJUIpmMZ",
   "effects": []

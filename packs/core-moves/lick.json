@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "lick",
-    "description": "Effect: On hit, the target has a 30% chance of gaining Paralysis 5.",
+    "description": "",
     "traits": [
       "basic",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "basic",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 1,
+          "powerPoints": 0,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,7 @@
         "types": [
           "ghost"
         ],
-        "description": "Effect: On hit, the target has a 30% chance of gaining Paralysis 5.",
+        "description": "Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
