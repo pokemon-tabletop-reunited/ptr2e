@@ -1,47 +1,48 @@
 {
-    "folder": "pyJa7NcmlTOD3PA4",
-    "name": "Flutter Jump",
-    "type": "move",
-    "_id": "4rXeFgQUWVDVDgCw",
-    "img": "systems/ptr2e/img/svg/fairy_icon.svg",
-    "system": {
+  "name": "Flutter Jump",
+  "type": "move",
+  "_id": "4rXeFgQUWVDVDgCw",
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "system": {
+    "slug": "flutter-jump",
+    "traits": [
+      "basic",
+      "contact",
+      "kick",
+      "pp-updated"
+    ],
+    "actions": [
+      {
+        "name": "Flutter Jump",
         "slug": "flutter-jump",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
         "traits": [
-            "basic",
-            "contact",
-            "kick"
+          "basic",
+          "contact",
+          "kick",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "name": "Flutter Jump",
-                "slug": "flutter-jump",
-                "type": "attack",
-                "img": "icons/svg/explosion.svg",
-                "traits": [
-                    "basic",
-                    "contact",
-                    "kick"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 1
-                },
-                "types": [
-                    "fairy"
-                ],
-                "category": "physical",
-                "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[flinched] 3.</p>",
-                "power": 30,
-                "accuracy": 100
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0
+        },
+        "types": [
+          "fairy"
         ],
-        "description": "",
-        "grade": "E"
-    },
-    "effects": []
+        "category": "physical",
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[flinched] 3.</p>",
+        "power": 30,
+        "accuracy": 100
+      }
+    ],
+    "description": "",
+    "grade": "E"
+  },
+  "effects": []
 }

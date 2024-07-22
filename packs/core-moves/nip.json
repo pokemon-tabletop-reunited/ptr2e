@@ -1,72 +1,53 @@
 {
-    "folder": "pyJa7NcmlTOD3PA4",
-    "name": "Nip",
-    "type": "move",
-    "_id": "WsHw5ht9DOJA2dwT",
-    "img": "systems/ptr2e/img/svg/normal_icon.svg",
-    "system": {
-        "slug": null,
+  "name": "Nip",
+  "type": "move",
+  "_id": "WsHw5ht9DOJA2dwT",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
+  "system": {
+    "slug": null,
+    "traits": [
+      "basic",
+      "contact",
+      "jaw",
+      "pp-updated"
+    ],
+    "actions": [
+      {
+        "name": "Nip",
+        "slug": "nip",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg",
         "traits": [
-            "basic",
-            "contact",
-            "jaw"
+          "basic",
+          "contact",
+          "jaw",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "name": "Nip",
-                "slug": "nip",
-                "type": "attack",
-                "img": "icons/svg/explosion.svg",
-                "traits": [
-                    "basic",
-                    "contact",
-                    "jaw"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 1,
-                    "delay": null,
-                    "priority": null,
-                    "trigger": ""
-                },
-                "variant": null,
-                "types": [
-                    "normal"
-                ],
-                "category": "physical",
-                "power": 30,
-                "accuracy": 100,
-                "contestType": "",
-                "contestEffect": "",
-                "free": false,
-                "slot": null,
-                "description": ""
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": ""
+        },
+        "variant": null,
+        "types": [
+          "normal"
         ],
-        "description": "",
-        "container": null,
-        "grade": "E"
-    },
-    "effects": [],
-    "sort": 0,
-    "ownership": {
-        "default": 0,
-        "CYLdyr5mPSDmNpTp": 3
-    },
-    "flags": {},
-    "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "12.327",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.1.0.1",
-        "createdTime": 1717874314980,
-        "modifiedTime": 1717876918347,
-        "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-    }
+        "category": "physical",
+        "power": 30,
+        "accuracy": 100,
+        "description": ""
+      }
+    ],
+    "description": "",
+    "container": null,
+    "grade": "E"
+  },
+  "effects": []
 }

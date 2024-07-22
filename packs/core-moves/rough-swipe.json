@@ -1,70 +1,51 @@
 {
-    "folder": "pyJa7NcmlTOD3PA4",
-    "name": "Rough Swipe",
-    "type": "move",
-    "_id": "xbNoVmgP8Xr6KpC5",
-    "img": "systems/ptr2e/img/svg/grass_icon.svg",
-    "system": {
-        "slug": null,
+  "name": "Rough Swipe",
+  "type": "move",
+  "_id": "xbNoVmgP8Xr6KpC5",
+  "img": "systems/ptr2e/img/svg/grass_icon.svg",
+  "system": {
+    "slug": null,
+    "traits": [
+      "basic",
+      "contact",
+      "pp-updated"
+    ],
+    "actions": [
+      {
+        "name": "Rough Swipe",
+        "slug": "rough-swipe",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/grass_icon.svg",
         "traits": [
-            "basic",
-            "contact"
+          "basic",
+          "contact",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "name": "Rough Swipe Attack",
-                "slug": "rough-swipe-attack",
-                "type": "attack",
-                "img": "icons/svg/explosion.svg",
-                "traits": [
-                    "basic",
-                    "contact"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 1,
-                    "delay": null,
-                    "priority": null,
-                    "trigger": ""
-                },
-                "variant": null,
-                "types": [
-                    "grass"
-                ],
-                "category": "physical",
-                "power": 30,
-                "accuracy": 90,
-                "contestType": "",
-                "contestEffect": "",
-                "free": false,
-                "slot": null,
-                "description": ""
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": ""
+        },
+        "variant": null,
+        "types": [
+          "grass"
         ],
-        "description": "<p>Effect: On hit, the target has a 30% chance of losing -1 DEF stage for 5 activations.</p>",
-        "container": null,
-        "grade": "E"
-    },
-    "effects": [],
-    "sort": 0,
-    "ownership": {
-        "default": 0,
-        "CYLdyr5mPSDmNpTp": 3
-    },
-    "flags": {},
-    "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "12.327",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.1.0.1",
-        "createdTime": 1717874270871,
-        "modifiedTime": 1717876790529,
-        "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-    }
+        "category": "physical",
+        "power": 30,
+        "accuracy": 100,
+        "description": "<p>Effect: On hit, the target has a 30% chance of losing -1 DEF stage for 5 activations.</p>"
+      }
+    ],
+    "description": "",
+    "container": null,
+    "grade": "E"
+  },
+  "effects": []
 }
