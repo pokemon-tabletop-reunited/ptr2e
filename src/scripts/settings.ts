@@ -120,7 +120,7 @@ export function initializeSettings() {
         hint: "PTR2E.SETTINGS.WorldSchemaVersion.Hint",
         scope: "world",
         config: true,
-        default: MigrationRunner.LATEST_SCHEMA_VERSION,
+        default: 0,
         type: Number,
         requiresReload: true,
     });

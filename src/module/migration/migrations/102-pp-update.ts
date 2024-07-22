@@ -10,7 +10,7 @@ export class Migration102PPUpdate extends MigrationBase {
     _map: Map<string, ItemPTR2e<MoveSystem>["_source"]> | null = null;
 
     async getMap() {
-        return this._map ?? await (async () => {
+        return this._map ?? (this._map = await (async () => {
             const entries = await game.packs.get("ptr2e.core-moves")?.getDocuments() as ItemPTR2e<MoveSystem>[];
             if(!entries) throw new Error("Could not find core moves pack.");
             return entries.reduce((map, entry) => {
@@ -18,7 +18,7 @@ export class Migration102PPUpdate extends MigrationBase {
                 map.set(slug, entry._source);
                 return map;
             }, new Map<string, ItemPTR2e<MoveSystem>["_source"]>());
-        })();
+        })());
     }
 
     isMoveItem(item: ItemPTR2e['_source']): item is ItemPTR2e<MoveSystem>['_source'] {
