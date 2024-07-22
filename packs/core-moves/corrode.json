@@ -1,19 +1,19 @@
 {
+  "folder": "PTzDJPvM7Mjj7e8k",
   "name": "Corrode",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/poison_icon.svg",
+  "_id": "IMvY0LoT5PWC8bJE",
+  "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
-    "slug": "corrode",
-    "description": "",
+    "slug": null,
     "traits": [],
     "actions": [
       {
-        "slug": "corrode",
-        "name": "Corrode",
+        "name": "Corrode Attack",
+        "slug": "corrode-attack",
         "type": "attack",
-        "traits": [
-          "pp-updated"
-        ],
+        "img": "icons/svg/explosion.svg",
+        "traits": [],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -21,27 +21,44 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
-          "trigger": null
+          "trigger": ""
         },
-        "category": "special",
-        "power": 70,
-        "accuracy": 100,
+        "variant": null,
         "types": [
           "poison"
         ],
-        "description": "Effect: This attack is Super Effective against the Steel Type.",
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
         "contestType": "",
         "contestEffect": "",
         "free": false,
-        "slot": null
+        "slot": null,
+        "description": "<p>Effect: The target gains Hindered 5. If the Hindered creature is Steel-Type, it can be damaged by the user's Poison-Type attacks.</p>"
       }
     ],
+    "description": "",
     "container": null,
-    "grade": "C"
+    "grade": "D"
   },
-  "_id": "x9vhahTaPpo9yqKO",
-  "effects": []
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "CYLdyr5mPSDmNpTp": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.328",
+    "systemId": "ptr2e",
+    "systemVersion": "0.10.0-alpha.1.5.2",
+    "createdTime": 1721256303918,
+    "modifiedTime": 1721256610304,
+    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
+  }
 }

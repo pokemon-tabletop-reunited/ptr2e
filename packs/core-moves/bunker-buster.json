@@ -1,0 +1,72 @@
+{
+  "folder": "PTzDJPvM7Mjj7e8k",
+  "name": "Bunker Buster",
+  "type": "move",
+  "_id": "NhuMc1zQyP4kM5QG",
+  "img": "systems/ptr2e/img/svg/rock_icon.svg",
+  "system": {
+    "slug": null,
+    "traits": [
+      "pierce",
+      "explode",
+      "missile"
+    ],
+    "actions": [
+      {
+        "name": "Bunker Buster Attack",
+        "slug": "bunker-buster-attack",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "pierce",
+          "explode",
+          "missile"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "The target has a [Shield] effect when this attack is declared."
+        },
+        "variant": null,
+        "types": [
+          "rock"
+        ],
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Trigger: The target has a [Shield] effect when this attack is declared.</p><p>Effect: This attack's Power is tripled, and on hit, the target gains Flinched 5.</p>"
+      }
+    ],
+    "description": "",
+    "container": null,
+    "grade": "A"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "CYLdyr5mPSDmNpTp": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.328",
+    "systemId": "ptr2e",
+    "systemVersion": "0.10.0-alpha.1.5.2",
+    "createdTime": 1721266070226,
+    "modifiedTime": 1721266974548,
+    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
+  }
+}
