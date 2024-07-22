@@ -813,6 +813,62 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display {
   grid-area: abilities;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset {
+  margin-bottom: unset;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset.slots {
+  position: relative;
+  height: min-content;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .edit-abilitylist {
+  position: absolute;
+  right: -2px;
+  top: -10px;
+  padding: 3px 5px;
+  background: var(--appv2-background);
+  border: 2px groove var(--border-theme-color);
+  border-radius: 0 8px 0 4px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-icon .dice {
+  display: none;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-icon.rollable {
+  cursor: pointer;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-icon.rollable:hover .icon {
+  display: none;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-icon.rollable:hover .dice {
+  display: block;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-controls {
+  flex: 0 0 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  gap: 5px;
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display,
@@ -1167,6 +1223,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base,
 .application.sheet.known-actions-sheet,
+.application.sheet.available-abilities-sheet,
 .application.sheet.action-sheet,
 .application.sheet.move-sheet,
 .application.sheet.species-sheet,
@@ -1177,6 +1234,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content,
 .application.sheet.known-actions-sheet .window-content,
+.application.sheet.available-abilities-sheet .window-content,
 .application.sheet.action-sheet .window-content,
 .application.sheet.move-sheet .window-content,
 .application.sheet.species-sheet .window-content,
@@ -1191,6 +1249,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header,
 .application.sheet.known-actions-sheet .window-content .sheet-header,
+.application.sheet.available-abilities-sheet .window-content .sheet-header,
 .application.sheet.action-sheet .window-content .sheet-header,
 .application.sheet.move-sheet .window-content .sheet-header,
 .application.sheet.species-sheet .window-content .sheet-header,
@@ -1204,6 +1263,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header fieldset,
 .application.sheet.known-actions-sheet .window-content .sheet-header fieldset,
+.application.sheet.available-abilities-sheet .window-content .sheet-header fieldset,
 .application.sheet.action-sheet .window-content .sheet-header fieldset,
 .application.sheet.move-sheet .window-content .sheet-header fieldset,
 .application.sheet.species-sheet .window-content .sheet-header fieldset,
@@ -1217,6 +1277,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header img,
 .application.sheet.known-actions-sheet .window-content .sheet-header img,
+.application.sheet.available-abilities-sheet .window-content .sheet-header img,
 .application.sheet.action-sheet .window-content .sheet-header img,
 .application.sheet.move-sheet .window-content .sheet-header img,
 .application.sheet.species-sheet .window-content .sheet-header img,
@@ -1230,6 +1291,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header .title,
 .application.sheet.known-actions-sheet .window-content .sheet-header .title,
+.application.sheet.available-abilities-sheet .window-content .sheet-header .title,
 .application.sheet.action-sheet .window-content .sheet-header .title,
 .application.sheet.move-sheet .window-content .sheet-header .title,
 .application.sheet.species-sheet .window-content .sheet-header .title,
@@ -1240,6 +1302,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content nav.tabs,
 .application.sheet.known-actions-sheet .window-content nav.tabs,
+.application.sheet.available-abilities-sheet .window-content nav.tabs,
 .application.sheet.action-sheet .window-content nav.tabs,
 .application.sheet.move-sheet .window-content nav.tabs,
 .application.sheet.species-sheet .window-content nav.tabs,
@@ -1258,6 +1321,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits,
 .application.sheet.known-actions-sheet .window-content aside.traits,
+.application.sheet.available-abilities-sheet .window-content aside.traits,
 .application.sheet.action-sheet .window-content aside.traits,
 .application.sheet.move-sheet .window-content aside.traits,
 .application.sheet.species-sheet .window-content aside.traits,
@@ -1271,6 +1335,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits tags,
 .application.sheet.known-actions-sheet .window-content aside.traits tags,
+.application.sheet.available-abilities-sheet .window-content aside.traits tags,
 .application.sheet.action-sheet .window-content aside.traits tags,
 .application.sheet.move-sheet .window-content aside.traits tags,
 .application.sheet.species-sheet .window-content aside.traits tags,
@@ -1285,6 +1350,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits tags .trait,
 .application.sheet.known-actions-sheet .window-content aside.traits tags .trait,
+.application.sheet.available-abilities-sheet .window-content aside.traits tags .trait,
 .application.sheet.action-sheet .window-content aside.traits tags .trait,
 .application.sheet.move-sheet .window-content aside.traits tags .trait,
 .application.sheet.species-sheet .window-content aside.traits tags .trait,
@@ -1296,6 +1362,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits tags .trait .tag,
 .application.sheet.known-actions-sheet .window-content aside.traits tags .trait .tag,
+.application.sheet.available-abilities-sheet .window-content aside.traits tags .trait .tag,
 .application.sheet.action-sheet .window-content aside.traits tags .trait .tag,
 .application.sheet.move-sheet .window-content aside.traits tags .trait .tag,
 .application.sheet.species-sheet .window-content aside.traits tags .trait .tag,
@@ -1306,6 +1373,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab,
 .application.sheet.known-actions-sheet .window-content section.tab,
+.application.sheet.available-abilities-sheet .window-content section.tab,
 .application.sheet.action-sheet .window-content section.tab,
 .application.sheet.move-sheet .window-content section.tab,
 .application.sheet.species-sheet .window-content section.tab,
@@ -1319,6 +1387,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .editor,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .editor,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .editor,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .editor,
@@ -1327,6 +1396,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
@@ -1337,6 +1407,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats,
@@ -1352,6 +1423,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
@@ -1362,6 +1434,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
@@ -1372,6 +1445,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
@@ -1383,6 +1457,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header,
@@ -1391,6 +1466,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header,
@@ -1407,6 +1483,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
@@ -1415,6 +1492,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
@@ -1429,6 +1507,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement,
@@ -1437,6 +1516,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
@@ -1452,6 +1532,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center,
@@ -1460,6 +1541,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center,
@@ -1473,6 +1555,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center small,
@@ -1481,6 +1564,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center small,
@@ -1491,6 +1575,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group,
@@ -1499,6 +1584,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group,
@@ -1509,6 +1595,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
@@ -1517,6 +1604,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
@@ -1528,6 +1616,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
@@ -1536,6 +1625,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
@@ -1547,6 +1637,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
@@ -1555,6 +1646,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
@@ -1568,6 +1660,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
@@ -1578,6 +1671,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .move,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .move,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .move,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .move,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .move,
@@ -1589,6 +1683,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .move .form-group,
@@ -1601,6 +1696,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=attack],
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=attack],
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=attack],
 .application.sheet.action-sheet .window-content section.tab[data-tab=attack],
 .application.sheet.move-sheet .window-content section.tab[data-tab=attack],
 .application.sheet.species-sheet .window-content section.tab[data-tab=attack],
@@ -1611,6 +1707,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab form.scroll,
 .application.sheet.known-actions-sheet .window-content section.tab form.scroll,
+.application.sheet.available-abilities-sheet .window-content section.tab form.scroll,
 .application.sheet.action-sheet .window-content section.tab form.scroll,
 .application.sheet.move-sheet .window-content section.tab form.scroll,
 .application.sheet.species-sheet .window-content section.tab form.scroll,
@@ -1624,6 +1721,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions,
@@ -1635,6 +1733,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
@@ -1647,6 +1746,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
@@ -1659,6 +1759,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
@@ -1667,6 +1768,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
@@ -1680,6 +1782,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
@@ -1688,6 +1791,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
@@ -1698,6 +1802,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
@@ -1706,6 +1811,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
@@ -1716,6 +1822,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
@@ -1724,6 +1831,7 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
@@ -1740,6 +1848,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.action-sheet .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.move-sheet .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.species-sheet .window-content section.tab[data-tab="overview"] .item-description,
@@ -1750,6 +1859,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.move-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.species-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
@@ -1760,6 +1870,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.move-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.species-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
@@ -1777,6 +1888,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
@@ -1789,6 +1901,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
@@ -1805,6 +1918,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
@@ -1817,6 +1931,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
@@ -1828,6 +1943,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base fieldset,
 .application.sheet.known-actions-sheet fieldset,
+.application.sheet.available-abilities-sheet fieldset,
 .application.sheet.action-sheet fieldset,
 .application.sheet.move-sheet fieldset,
 .application.sheet.species-sheet fieldset,
@@ -1845,6 +1961,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base fieldset legend,
 .application.sheet.known-actions-sheet fieldset legend,
+.application.sheet.available-abilities-sheet fieldset legend,
 .application.sheet.action-sheet fieldset legend,
 .application.sheet.move-sheet fieldset legend,
 .application.sheet.species-sheet fieldset legend,
@@ -1856,6 +1973,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .hint,
 .application.sheet.known-actions-sheet .hint,
+.application.sheet.available-abilities-sheet .hint,
 .application.sheet.action-sheet .hint,
 .application.sheet.move-sheet .hint,
 .application.sheet.species-sheet .hint,
@@ -1870,6 +1988,7 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base textarea,
 .application.sheet.known-actions-sheet textarea,
+.application.sheet.available-abilities-sheet textarea,
 .application.sheet.action-sheet textarea,
 .application.sheet.move-sheet textarea,
 .application.sheet.species-sheet textarea,
@@ -2023,6 +2142,74 @@ body .application.sheet .form-group {
   margin: 0 0.25rem;
 }
 .application.sheet.known-actions-sheet article.known-attacks .action .action-controls {
+  flex: 0 0 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  gap: 5px;
+}
+.application.sheet.available-abilities-sheet {
+  max-height: 450px;
+}
+.application.sheet.available-abilities-sheet .info-tooltip {
+  cursor: help;
+}
+.application.sheet.available-abilities-sheet .info-tooltip:hover,
+.application.sheet.available-abilities-sheet .info-tooltip:focus {
+  box-shadow: unset;
+  outline: unset;
+}
+.application.sheet.available-abilities-sheet .window-content {
+  display: block;
+  overflow-y: scroll;
+  height: 100%;
+  padding: 0;
+}
+.application.sheet.available-abilities-sheet article.available-abilities {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.25rem;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability:last-child {
+  border-bottom: unset;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-icon .dice {
+  display: none;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-icon.rollable {
+  cursor: pointer;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-icon.rollable:hover .icon {
+  display: none;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-icon.rollable:hover .dice {
+  display: block;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-icon img {
+  border: unset;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-controls {
   flex: 0 0 60px;
   display: flex;
   flex-direction: row;

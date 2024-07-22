@@ -15,7 +15,7 @@ import FolderPTR2e from "@module/folder/document.ts";
 import { CombatantPTR2e, CombatPTR2e } from "@combat";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { ChatMessagePTR2e } from "@chat";
-import { ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions, PerkPTR2e } from "@item";
+import { AbilityPTR2e, ItemPTR2e, ItemSystemPTR, ItemSystemsWithActions, PerkPTR2e } from "@item";
 import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
@@ -196,6 +196,13 @@ class ActorPTR2e<
             available: [],
         };
 
+        this.abilities = {
+            slots: 1,
+            entries: {},
+            available: [],
+            free: []
+        }
+
         super._initialize();
     }
 
@@ -261,6 +268,33 @@ class ActorPTR2e<
                 continue;
             }
             this.attacks.actions[attack.slot] = attack;
+        }
+
+        this.abilities.slots = this.level >= 80 ? 4 : this.level >= 50 ? 3 : this.level >= 20 ? 2 : 1;
+        this.abilities.entries = Array.fromRange(this.abilities.slots).reduce(
+            (acc, i) => ({ ...acc, [i]: null }),
+            {}
+        );
+        
+        for(const ability of this.itemTypes.ability as AbilityPTR2e[]) {
+            if(ability.system.free) {
+                this.abilities.free.push(ability);
+                continue;
+            };
+
+            if(ability.system.slot === null) {
+                this.abilities.available.push(ability);
+                continue;
+            }
+
+            if(this.abilities.entries[ability.system.slot] !== null) {
+                if(this.abilities.entries[ability.system.slot].slug !== ability.slug) {
+                    this.abilities.available.push(this.abilities.entries[ability.system.slot]);
+                }
+                continue;
+            }
+
+            this.abilities.entries[ability.system.slot] = ability;
         }
     }
 
@@ -1316,6 +1350,13 @@ interface ActorPTR2e<
         actions: Record<number, AttackPTR2e>;
         available: AttackPTR2e[];
     };
+
+    abilities: {
+        slots: 1 | 2 | 3 | 4;
+        entries: Record<number, AbilityPTR2e>;
+        available: AbilityPTR2e[];
+        free: AbilityPTR2e[];
+    }
 
     skills: Record<string, Statistic>;
 
