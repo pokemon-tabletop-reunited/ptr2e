@@ -3,7 +3,7 @@ import { TemplateConstructor } from './data-template.ts';
 import { ActionPTR2e } from '@data';
 import { ActionModelTypes } from '../models/base.ts';
 import { ActorPTR2e } from '@actor';
-import { ItemPTR2e } from '@item';
+import { AbilityPTR2e, ItemPTR2e } from '@item';
 import { CollectionField } from '../fields/collection-field.ts';
 
 /**
@@ -36,6 +36,12 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
 
             for(const action of this.actions) {
                 if(this.parent.actions.has(action.slug)) continue;
+
+                // If an ability isn't free or slotted in it should be ignored
+                if(this._isAbilityParent(this.parent)) {
+                    if(!this._isValidAbilityParent(this.parent)) continue;
+                }
+
                 action.prepareDerivedData();
                 this.parent.actions.set(action.slug, action);
             }
@@ -46,6 +52,14 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
                 parent instanceof ActorPTR2e ||
                 parent instanceof ItemPTR2e
             );
+        }
+
+        private _isAbilityParent(parent: ActorPTR2e | ItemPTR2e): parent is AbilityPTR2e {
+            return parent instanceof ItemPTR2e && parent.type === "ability";
+        }
+
+        private _isValidAbilityParent(parent: AbilityPTR2e) {
+            return parent.system.free || parent.system.slot !== null;
         }
 	}
 

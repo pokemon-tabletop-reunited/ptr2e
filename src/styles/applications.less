@@ -827,6 +827,80 @@ body {
                     .abilities-display {
                         grid-area: abilities;
                         overflow: hidden;
+
+                        display: flex;
+                        flex-direction: column;
+
+                        fieldset {
+                            margin-bottom: unset;
+
+                            &.slots {
+                                position: relative;
+                                height: min-content;
+                            }
+
+                            .edit-abilitylist {
+                                position: absolute;
+                                right: -2px;
+                                top: -10px;
+                                padding: 3px 5px;
+                                background: var(--appv2-background);
+                                border: 2px groove var(--border-theme-color);
+                                border-radius: 0 8px 0 4px;
+                            }
+
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+
+                            // .slots {
+                            //     display: flex;
+                            //     flex-direction: column;
+                            //     flex-wrap: nowrap;
+                            //     gap: 0.5rem;
+                            //     border-bottom: 1px solid var(--border-theme-color);
+                            // }
+
+                            .action {
+                                display: flex;
+                                flex-direction: row;
+                                align-items: center;
+                                
+                                .action-icon {
+                                    flex: 0 0 28px;
+                                    height: 28px;
+                                    width: 28px;
+                                    .dice {
+                                        display: none;
+                                    }
+                                    &.rollable {
+                                        cursor: pointer;
+
+                                        &:hover {
+                                            .icon {
+                                                display: none;
+                                            }
+                                            .dice {
+                                                display: block;
+                                            }
+                                        }
+                                    }
+                                }
+                                .action-name {
+                                    flex-grow: 1;
+                                    margin: 0 0.25rem;
+                                }
+                                .action-controls {
+                                    flex: 0 0 60px;
+                                    display: flex;
+                                    flex-direction: row;
+                                    justify-content: flex-end;
+                                    align-items: center;
+                                    margin-left: auto;
+                                    gap: 5px;
+                                }
+                            }
+                        }
                     }
                 }
 
@@ -1076,6 +1150,7 @@ body {
     &.skill-sheet
     &#perk-hud-base,
     &.known-actions-sheet,
+    &.available-abilities-sheet,
     &.action-sheet,
     &.move-sheet,
     &.species-sheet,
@@ -1575,6 +1650,84 @@ body {
                     margin: 0 0.25rem;
                 }
                 .action-controls {
+                    flex: 0 0 60px;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: flex-end;
+                    align-items: center;
+                    margin-left: auto;
+                    gap: 5px;
+                }
+            }
+        }
+    }
+
+    &.available-abilities-sheet {
+        max-height: 450px;
+
+        .info-tooltip {
+            &:hover, &:focus {
+                box-shadow: unset;
+                outline: unset;
+            }
+            cursor: help;
+        }
+
+        .window-content {
+            display: block;
+            overflow-y: scroll;
+            height: 100%;
+            padding: 0;
+        }
+
+        article.available-abilities {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding: 0 0.25rem;
+
+            .ability {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 4px 0;
+
+                border-bottom: 1px solid var(--border-theme-color);
+
+                &:last-child {
+                    border-bottom: unset;
+                }
+                
+                .ability-icon {
+                    flex: 0 0 28px;
+                    height: 28px;
+                    width: 28px;
+                    .dice {
+                        display: none;
+                    }
+                    &.rollable {
+                        cursor: pointer;
+
+                        &:hover {
+                            .icon {
+                                display: none;
+                            }
+                            .dice {
+                                display: block;
+                            }
+                        }
+                    }
+                    img {
+                        border:unset;
+                    }
+                }
+                .ability-name {
+                    flex-grow: 1;
+                    margin: 0 0.25rem;
+                }
+                .ability-controls {
                     flex: 0 0 60px;
                     display: flex;
                     flex-direction: row;

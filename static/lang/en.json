@@ -18,6 +18,7 @@
     "ITEM.DeleteButton": "Delete",
     
     "PTR2E": {
+        "OK": "Ok",
         "ChatContext": {
             "RerollSkill": {
                 "label": "Push Your Luck! (Reroll)",
@@ -474,6 +475,9 @@
             "KnownAttacks": {
                 "hint": "Drag & Drop moves onto the actor / known attack sheet to add them as available options.<br><br>Drag & Drop from the Known Attack's sheet onto the Actor's Attack Slots to assign moves to the slots!"
             },
+            "AvailableAbilities": {
+                "hint": "Drag & Drop abilities onto the actor / available ability sheet to add them as available options.<br><br>Drag & Drop from the Available Abilities's sheet onto the Actor's Ability Slots to assign abilities to the slots!<br><br>You gain an Ability Slot at level 20, 50 and 80, whenever you gain an ability from your Species it must be slotted into a slot of the same tier or higher (f.e., you cannot put a Master ability in any but the last slot, but you can put a Basic ability in slot 3 (advanced) or 4 (master))<br><br>Meanwhile, any abilities learned through other sources can only ever be fitted in the 2nd or 3rd slots (basic & advanced)"
+            },
             "Buttons": {
                 "perkWeb": "Open Perk Web"
             },
@@ -586,6 +590,10 @@
                     "Title": "Delete Skill: {name}",
                     "Content": "Are you sure you want to delete the skill: {name}?"
                 }
+            },
+            "WorldSchemaVersion": {
+                "Name": "World Schema Version",
+                "Hint": "The version of the world schema. Don't change this unless you know what you're doing."
             }
         },
         "SkillsEditor": {
@@ -870,8 +878,8 @@
                 "hint": "The action cost to activate the Action."
             },
             "free": {
-                "label": "Free Attack",
-                "hint": "Free Attacks do not take up Attack Slots and are always available."
+                "label": "Free Entry",
+                "hint": "Free Entries do not take up Slots and are always available."
             },
             "trigger": {
                 "label": "Trigger",
