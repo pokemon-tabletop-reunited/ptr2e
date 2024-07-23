@@ -430,6 +430,27 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
                 });
             }
         }
+
+        if (partId === "header" && this.isEditable) {
+          htmlQuery(htmlElement, "img[data-edit]")?.addEventListener("click", (event) => {
+              const imgElement = event.currentTarget as HTMLImageElement;
+              const attr = imgElement.dataset.edit;
+              const current = foundry.utils.getProperty<string | undefined>(this.document, attr!);
+              const fp = new FilePicker({
+                  current,
+                  type: "image",
+                  redirectToRoot: [],
+                  callback: (path: string) => {
+                      imgElement.src = path;
+                      if (this.options.form?.submitOnChange)
+                          this.element.dispatchEvent(new Event("submit", { cancelable: true }));
+                  },
+                  top: this.position.top + 40,
+                  left: this.position.left + 10,
+              });
+              fp.browse();
+          });
+      }
     }
 
     override _onRender(
