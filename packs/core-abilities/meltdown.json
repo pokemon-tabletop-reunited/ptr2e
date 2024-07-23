@@ -1,0 +1,107 @@
+{
+    "name": "Meltdown",
+    "type": "ability",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+        "actions": [
+            {
+                "traits": [
+                    "desperation-1-3",
+                    "nuclear"
+                ],
+                "name": "Meltdown",
+                "slug": "meltdown",
+                "type": "passive",
+                "cost": {
+                    "activation": "free"
+                },
+                "range": {
+                    "target": "self",
+                    "unit": "m"
+                },
+                "description": "Effect: The user's Nuclear-Type attacks gain 20% Power. When under 1/3 HP, this bonus increases to 50%.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "description": "Effect: The user's Nuclear-Type attacks gain 20% Power. When under 1/3 HP, this bonus increases to 50%.",
+        "traits": [
+            "desperation-1-3",
+            "nuclear"
+        ],
+        "slug": "meltdown",
+        "_migration": {
+            "version": null,
+            "previous": null
+        }
+    },
+    "_id": "syY6AXnJyG1ed4E8",
+    "effects": [
+        {
+            "name": "Meltdown",
+            "type": "passive",
+            "_id": "lIRkPcdwJ9glwGOo",
+            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+            "system": {
+                "changes": [
+                    {
+                        "type": "percentile-modifier",
+                        "key": "nuclear-attack-power",
+                        "value": {
+                            "brackets": [
+                                {
+                                    "start": 34,
+                                    "end": 100,
+                                    "value": 20
+                                },
+                                {
+                                    "start": 0,
+                                    "end": 33,
+                                    "value": 50
+                                }
+                            ],
+                            "field": "actor|system.health.percent"
+                        },
+                        "predicate": [],
+                        "label": "Meltdown",
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false,
+                        "hideIfDisabled": false
+                    }
+                ],
+                "slug": null,
+                "traits": [],
+                "removeAfterCombat": true,
+                "removeOnRecall": false,
+                "stacks": 0
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "description": "",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.329",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.2.0.3",
+                "createdTime": 1721733551533,
+                "modifiedTime": 1721733589094,
+                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+            }
+        }
+    ]
+}
