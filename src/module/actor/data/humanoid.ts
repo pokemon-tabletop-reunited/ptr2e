@@ -134,8 +134,8 @@ class HumanoidActorSystem extends ActorSystemPTR2e {
         return new SpeciesSystemModel(data);
     }
 
-    override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean }, user: User): Promise<boolean | void> {
-        //@ts-expect-error
+    override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean }, user: User){
+        //@ts-expect-error - Traits for actors aren't loaded in properly on source objects
         if(!this._source.traits?.length) {
             this.parent.updateSource({ "system.traits": ["humanoid", "underdog"] })
         }

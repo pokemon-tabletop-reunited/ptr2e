@@ -327,7 +327,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
             if (this.parent.isHumanoid()) {
                 this.species = HumanoidActorSystem.constructSpecies(this);
             } else {
-                let e = new Error("Species not set for non-humanoid actor");
+                const e = new Error("Species not set for non-humanoid actor");
                 (this.parent as ActorPTR2e).synthetics.preparationWarnings.add(e.message);
                 Hooks.onError("ActorSystemPTR2e#_prepareSpeciesData", e, {
                     data: this._source.species,
@@ -413,12 +413,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         data: this["parent"]["_source"],
         options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean },
         user: User
-    ): Promise<boolean | void> {
-        //@ts-expect-error
+    ) {
+        //@ts-expect-error - Traits for actors aren't loaded in properly on source objects
         if (this._source.traits.includes("humanoid") && this.parent.type === "pokemon") {
             this.parent.updateSource({ type: "humanoid" });
         }
-        //@ts-expect-error
+        //@ts-expect-error - Traits for actors aren't loaded in properly on source objects
         if (this._source.traits.includes("pokemon") && this.parent.type === "humanoid") {
             this.parent.updateSource({ type: "pokemon" });
         }
@@ -429,7 +429,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         changed: DeepPartial<this["parent"]["_source"]>,
         options: DocumentUpdateContext<this["parent"]["parent"]>,
         user: User
-    ): Promise<boolean | void> {
+    ) {
         if (changed.system?.traits) {
             const hasTrait = (trait: string) => {
                 if (changed.system!.traits instanceof Collection)
@@ -489,7 +489,7 @@ interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
     _source: SourceFromSchema<ActorSystemSchema>;
 }
 
-type Movement = { method: string; value: number; type: "primary" | "secondary" };
+interface Movement { method: string; value: number; type: "primary" | "secondary" }
 
 type ActorSystemSchema = Record<string, DataField<JSONValue, unknown, boolean>> & {
     species: SpeciesSystemModel["_source"];

@@ -73,4 +73,5 @@ export type RollOptions = {
     [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default interface RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {}

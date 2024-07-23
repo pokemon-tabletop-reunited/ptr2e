@@ -52,6 +52,7 @@ export default abstract class MoveSystem extends HasEmbed(
         return this.attack.description ?? this._source.description ?? "";
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     override set description(_value: string) {
     }
 
@@ -59,6 +60,7 @@ export default abstract class MoveSystem extends HasEmbed(
         return this.attack.traits;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     override set traits(_value: string[]) {
     }
 
@@ -66,6 +68,7 @@ export default abstract class MoveSystem extends HasEmbed(
         return this.attack.traits.contents;
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     override set _traits(_value: Trait[]) {
     }
 
@@ -101,7 +104,7 @@ export default abstract class MoveSystem extends HasEmbed(
         user: User
     ): Promise<boolean | void> {
         if (data.system === undefined) {
-            //@ts-expect-error
+            //@ts-expect-error - Actions on source is not a collection but an array
             data.system = { actions: [] };
         }
         if (data.system.actions instanceof Map) {
@@ -110,7 +113,7 @@ export default abstract class MoveSystem extends HasEmbed(
         if (Array.isArray(data.system.actions)) {
             const actions = data.system.actions as ActionPTR2e["_source"][];
             if (actions.length === 0) {
-                //@ts-expect-error
+                //@ts-expect-error - Actions on source is not a collection but an array
                 data.system.actions = [
                     {
                         name: `${data.name}`,
@@ -155,7 +158,7 @@ export default abstract class MoveSystem extends HasEmbed(
             }
         }
         if (changed.system?.traits !== undefined) {
-            //@ts-expect-error
+            //@ts-expect-error - Actions on source is not a collection but an array
             const changedActions = changed.system?.actions as ActionPTR2e["_source"][];
             if (changedActions?.length) {
                 const mainAttackIndex = changedActions.findIndex(
@@ -166,11 +169,11 @@ export default abstract class MoveSystem extends HasEmbed(
                     if(retry === -1) {
                         return false;
                     }
-                    //@ts-expect-error
+                    //@ts-expect-error - Traits on source objects are not a collection but an array
                     changedActions[retry].traits = changed.system.traits;
                 }
                 else {
-                    //@ts-expect-error
+                    //@ts-expect-error - Traits on source objects are not a collection but an array
                     changedActions[mainAttackIndex].traits = changed.system.traits;
                 }
             } else {
@@ -181,14 +184,14 @@ export default abstract class MoveSystem extends HasEmbed(
                     if (retry === -1) {
                         return false;
                     }
-                    //@ts-expect-error
+                    //@ts-expect-error - Traits on source objects are not a collection but an array
                     attacks[retry].traits = changed.system.traits;
                 }
                 else {
-                    //@ts-expect-error
+                    //@ts-expect-error - Traits on source objects are not a collection but an array
                     attacks[mainAttackIndex].traits = changed.system.traits;
                 }
-                //@ts-expect-error
+                //@ts-expect-error - Actions on source is not a collection but an array
                 changed.system.actions = attacks;
             }
         }

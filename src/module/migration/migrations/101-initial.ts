@@ -1,14 +1,13 @@
 import { ItemPTR2e } from "@item";
 import { MigrationBase } from "../base.ts"
-import { ActorPTR2e } from "@actor";
 import { sluggify } from "@utils";
 
 export class Migration101Initial extends MigrationBase {
     static override version = 0.101;
 
-    override async updateItem(source: ItemPTR2e["_source"], _actorSource?: ActorPTR2e["_source"]): Promise<void> {
+    override async updateItem(source: ItemPTR2e["_source"]): Promise<void> {
         if(source.img.startsWith("/systems/ptr2e/img/icons/") && source.img.endsWith(".png")) {
-            //@ts-expect-error
+            //@ts-expect-error - This is a properly formatted img path
             source.img = source.img.replace("/icons/", "/svg/").replace(".png", ".svg");
         }
 

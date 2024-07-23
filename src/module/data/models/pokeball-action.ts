@@ -9,6 +9,7 @@ export default class PokeballActionPTR2e extends ActionPTR2e {
 
     static override TYPE = "pokeball" as const;
 
+    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     get rollable(): boolean {
         return true;
     }
@@ -25,10 +26,12 @@ export default class PokeballActionPTR2e extends ActionPTR2e {
         this.statistic = this.prepareStatistic();
     }
 
+    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     get isMelee(): boolean {
         return false; // TODO: Implement
     }
 
+    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     get isRanged(): boolean {
         return true; // TODO: Implement
     }
