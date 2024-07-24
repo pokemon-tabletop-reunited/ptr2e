@@ -26,8 +26,8 @@ export const Init: PTRHook = {
             foundry.abstract.DataModel.defineSchema = () => ({});
 
             // Add actor() to window
-            /** @returns {Actor?} */
-            window.actor = function () {
+            //@ts-expect-error - Adding actor to window
+            window.actor = function (): Actor | null {
                 return canvas.tokens.controlled[0]?.actor;
             }
 
@@ -80,22 +80,21 @@ export const Init: PTRHook = {
             // Register custom sheets
             {
                 Actors.unregisterSheet("core", ActorSheet);
-                //@ts-ignore
+                //@ts-expect-error - Application V2 Compatability
                 Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: true })
-                //@ts-ignore
                 Actors.registerSheet("ptr2e", PTRCONFIG.Actor.sheetClasses["ptu-actor"], { types: ["ptu-actor"], makeDefault: true })
 
                 Items.unregisterSheet("core", ItemSheet);
                 for (const type in PTRCONFIG.Item.sheetClasses) {
                     const key = type as keyof typeof PTRCONFIG.Item.sheetClasses;
                     for (const sheet of PTRCONFIG.Item.sheetClasses[key]) {
-                        //@ts-ignore
+                        //@ts-expect-error - Application V2 Compatability
                         Items.registerSheet("ptr2e", sheet, { types: [type], makeDefault: true });
                     }
                 }
 
                 DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
-                // @ts-ignore
+                //@ts-expect-error - Application V2 Compatability
                 DocumentSheetConfig.registerSheet(ActiveEffect, "ptr2e", PTRCONFIG.ActiveEffect.sheetClasses.effect, { makeDefault: true });
             }
 
@@ -105,7 +104,7 @@ export const Init: PTRHook = {
             (async () => {
                 // Monkeypatch the game.tooltip class to stop auto-dismissing tooltips
                 const original = game.tooltip.deactivate.bind(game.tooltip);
-                //@ts-expect-error
+                //@ts-expect-error - Monkeypatching game.tooltip
                 game.tooltip.deactivate = (force) => {
                     if(Tour.tourInProgress && !force) return;
                     original();

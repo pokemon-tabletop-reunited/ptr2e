@@ -6,45 +6,47 @@ import { TemplateConstructor } from './data-template.ts';
  * @group Mixins
  */
 export default function HasContainer<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
-	abstract class TemplateClass extends baseClass {
+  abstract class TemplateClass extends baseClass {
+    static override defineSchema(): ContainerSchema {
+      const fields = foundry.data.fields;
 
-        /**
-         * The container that the item is in.
-         * @remarks
-         * This is the container that the item is in, if any.
-         * If the item is not in a container, this will be `null`.
-         */
-        abstract container: ContainerPTR2e | null;
+      return {
+        ...super.defineSchema(),
 
-		declare _source: InstanceType<typeof baseClass>['_source'] & {
-            container?: DocumentUUID | null;
+        container: new fields.DocumentUUIDField({ required: false, nullable: true, label: "PTR2E.FIELDS.container.label", hint: "PTR2E.FIELDS.container.hint" })
+      };
+    }
+
+    override prepareBaseData() {
+      super.prepareBaseData();
+      if (!this._source.container) return;
+
+      Object.defineProperty(
+        this,
+        "container",
+        {
+          value: fromUuidSync(this._source.container, this.parent as ClientDocument | null) as ContainerPTR2e | null,
+          writable: false,
+          enumerable: false,
         }
+      )
+    }
+  }
 
-		static override defineSchema(): foundry.data.fields.DataSchema {
-			const fields = foundry.data.fields;
+  interface TemplateClass extends ModelPropsFromSchema<ContainerSchema> {
+    /**
+   * The container that the item is in.
+   * @remarks
+   * This is the container that the item is in, if any.
+   * If the item is not in a container, this will be `null`.
+   */
+    container: ContainerPTR2e | null;
 
-			return {
-				...super.defineSchema(),
-                
-                container: new fields.DocumentUUIDField( { required: false, nullable: true, label: "PTR2E.FIELDS.container.label", hint: "PTR2E.FIELDS.container.hint"})
-			};
-		}
+    _source: SourceFromSchema<ContainerSchema>;
+  }
 
-		override prepareBaseData() {
-			super.prepareBaseData();
-			if(!this._source.container) return;
-			
-			Object.defineProperty(
-				this,
-				"container",
-				{
-					value: fromUuidSync(this._source.container, this.parent as ClientDocument | null) as ContainerPTR2e | null,
-					writable: false,
-					enumerable: false,
-				}
-			)
-		}
-	}
-
-	return TemplateClass;
+  return TemplateClass;
+}
+export interface ContainerSchema extends foundry.data.fields.DataSchema {
+  container: foundry.data.fields.DocumentUUIDField<foundry.abstract.Document, false, true, false>;
 }

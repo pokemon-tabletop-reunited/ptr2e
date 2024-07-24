@@ -29,15 +29,16 @@ import { preImportJSON } from "@module/data/doc-helper.ts";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 
-type ActorParty = {
+interface ActorParty {
     owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
     party: ActorPTR2e<ActorSystemPTR2e, null>[];
-};
+}
 
 class ActorPTR2e<
     TSystem extends ActorSystemPTR2e = ActorSystemPTR2e,
     TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
 > extends Actor<TParent, TSystem> {
+    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     get alliance(): string {
         return "";
     }
@@ -146,13 +147,14 @@ class ActorPTR2e<
     }
 
     protected override _initializeSource(
-        data: any,
+        data: Record<string, unknown>,
         options?: DataModelConstructionOptions<TParent> | undefined
     ): this["_source"] {
-        if (data?._stats?.systemId === "ptu") {
+
+        if (data && '_stats' in data && data._stats && typeof data._stats === 'object' && 'systemId' in data._stats && data._stats.systemId === "ptu") {
             data.type = "ptu-actor";
 
-            for (const item of data.items) {
+            for (const item of data.items as ItemPTR2e[]) {
                 if (item._stats.systemId === "ptu") {
                     item.type = "ptu-item";
                 }
@@ -316,7 +318,7 @@ class ActorPTR2e<
         const changes = [];
         // Afflictions don't always have changes, so we need to track them separately
         const afflictions: ActiveEffectPTR2e<ActorPTR2e, AfflictionActiveEffectSystem>[] = [];
-        for (const effect of this.allApplicableEffects() as Generator<
+        for (const effect of this.allApplicableEffects() as unknown as Generator<
             ActiveEffectPTR2e<ActorPTR2e>,
             void,
             void
@@ -416,7 +418,7 @@ class ActorPTR2e<
     getRollOptions(domains: string[] = []): string[] {
         const withAll = Array.from(new Set(["all", ...domains]));
         const { rollOptions } = this;
-        const toReturn: Set<string> = new Set();
+        const toReturn = new Set<string>();
 
         for (const domain of withAll) {
             for (const [option, value] of Object.entries(
@@ -509,7 +511,7 @@ class ActorPTR2e<
                     ),
                 });
                 if (!silent) {
-                    //@ts-expect-error
+                    //@ts-expect-error - Chat messages have not been properly defined yet
                     await ChatMessagePTR2e.create({
                         type: "damage-applied",
                         system: {
@@ -547,7 +549,7 @@ class ActorPTR2e<
             ),
         });
         if (!silent) {
-            //@ts-expect-error
+            //@ts-expect-error - Chat messages have not been properly defined yet
             await ChatMessagePTR2e.create({
                 type: "damage-applied",
                 system: {
@@ -598,12 +600,10 @@ class ActorPTR2e<
         const afflictions = this.synthetics.afflictions.data.reduce<{
             toDelete: string[];
             toUpdate: Partial<ActiveEffectPTR2e<ActorPTR2e>["_source"]>[];
-            groups: {
-                [key: number]: {
+            groups: Record<number, {
                     afflictions: { formula?: string; affliction: AfflictionActiveEffectSystem }[];
                     type?: "healing" | "damage" | "both";
-                };
-            };
+                }>;
         }>(
             (acc, affliction) => {
                 const result = affliction.onEndActivation();
@@ -653,6 +653,7 @@ class ActorPTR2e<
         let newHealth = this.system.health.value;
         const notes: string[][] = [];
 
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         for (const [_, group] of sortedGroups) {
             if (!group.type) continue;
             if (group.type === "healing" && newHealth === this.system.health.max) continue;
@@ -703,7 +704,7 @@ class ActorPTR2e<
         if (!fu.isEmpty(updates)) {
             await this.update(updates);
             if (newHealth !== oldHealth) {
-                //@ts-expect-error
+                //@ts-expect-error - Chat messages have not been properly defined yet
                 await ChatMessagePTR2e.create({
                     type: "damage-applied",
                     system: {
@@ -714,7 +715,7 @@ class ActorPTR2e<
                 });
             }
         } else if (notes.length > 0) {
-            //@ts-expect-error
+            //@ts-expect-error - Chat messages have not been properly defined yet
             await ChatMessagePTR2e.create({
                 type: "damage-applied",
                 system: {
@@ -776,7 +777,7 @@ class ActorPTR2e<
     }
 
     async getCheckContext<
-        TStatistic extends BaseStatisticCheck<any, any>,
+        TStatistic extends BaseStatisticCheck<unknown, unknown>,
         TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>,
     >(
         params: CheckContextParams<TStatistic, TItem>
@@ -856,7 +857,7 @@ class ActorPTR2e<
     }
 
     protected getRollContext<
-        TStatistic extends BaseStatisticCheck<any, any>,
+        TStatistic extends BaseStatisticCheck<unknown, unknown>,
         TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>,
     >(params: RollContextParams<TStatistic, TItem>): Promise<RollContext<this, TStatistic, TItem>>;
     protected async getRollContext(params: RollContextParams): Promise<RollContext<this>> {
@@ -1066,6 +1067,7 @@ class ActorPTR2e<
     }
 
     //TODO: Implement
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     isImmuneTo(_effect: EffectSourcePTR2e): boolean {
         return false;
     }
@@ -1165,9 +1167,9 @@ class ActorPTR2e<
         if (changed.system?.advancement?.experience?.current !== undefined) {
             const next = this.system.advancement.experience.next;
             if (next && Number(changed.system.advancement.experience.current) >= next) {
-                changed.flags ??= {}; //@ts-expect-error
-                changed.flags.ptr2e ??= {}; //@ts-expect-error
-                changed.flags.ptr2e.sheet ??= {}; //@ts-expect-error
+                changed.flags ??= {}; //@ts-expect-error - flags is not defined in the base class
+                changed.flags.ptr2e ??= {}; //@ts-expect-error - flags is not defined in the base class
+                changed.flags.ptr2e.sheet ??= {}; //@ts-expect-error - flags is not defined in the base class
                 changed.flags.ptr2e.sheet.perkFlash = true;
             }
         }
@@ -1188,7 +1190,7 @@ class ActorPTR2e<
 
     protected override _onUpdate(
         changed: DeepPartial<this["_source"]>,
-        options: any,
+        options: DocumentUpdateContext<TParent>,
         userId: string
     ): void {
         super._onUpdate(changed, options, userId);
@@ -1201,6 +1203,7 @@ class ActorPTR2e<
         collection: "effects" | "items",
         documents: ActiveEffectPTR2e<this>[] | ItemPTR2e<ItemSystemPTR, this>[],
         results: ActiveEffectPTR2e<this>["_source"][] | ItemPTR2e<ItemSystemPTR, this>["_source"][],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         options: any,
         userId: string
     ) {
@@ -1210,6 +1213,7 @@ class ActorPTR2e<
 
         function isEffect(
             collection: "effects" | "items",
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             _documents: any[]
         ): _documents is ActiveEffectPTR2e<typeof parent>[] {
             return collection === "effects";
@@ -1240,8 +1244,10 @@ class ActorPTR2e<
     protected override _onDeleteDescendantDocuments(
         parent: this,
         collection: "effects" | "items",
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         documents: any[],
         ids: string[],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         options: any,
         userId: string
     ): void {
@@ -1254,6 +1260,7 @@ class ActorPTR2e<
         collection: "effects" | "items",
         documents: ActiveEffectPTR2e<this>[] | ItemPTR2e<ItemSystemPTR, this>[],
         changes: ActiveEffectPTR2e<this>["_source"][] | ItemPTR2e<ItemSystemPTR, this>["_source"][],
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         options: any,
         userId: string
     ): void {
@@ -1264,6 +1271,7 @@ class ActorPTR2e<
     override async toggleStatusEffect(
         statusId: string,
         { active, overlay = false }: { active?: boolean; overlay?: boolean } = {}
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ): Promise<any> {
         const status = CONFIG.statusEffects.find((e) => e.id === statusId);
         if (!status)
@@ -1312,7 +1320,8 @@ class ActorPTR2e<
         if (!active && active !== undefined) return;
         const effect = await ActiveEffectPTR2e.fromStatusEffect(statusId);
         if (overlay) effect.updateSource({ "flags.core.overlay": true });
-        return ActiveEffectPTR2e.create<any>(effect.toObject(), { parent: this, keepId: true });
+        //@ts-expect-error - Active effects aren't typed properly yet
+        return ActiveEffectPTR2e.create(effect.toObject(), { parent: this, keepId: true });
     }
 
     /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */
@@ -1365,7 +1374,7 @@ interface ActorPTR2e<
 
 type ActorFlags2e = ActorFlags & {
     ptr2e: {
-        rollOptions: RollOptions & {};
+        rollOptions: RollOptions & object;
         sheet?: {
             perkFlash?: boolean;
         };

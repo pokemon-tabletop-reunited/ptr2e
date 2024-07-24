@@ -1,22 +1,20 @@
 import { HasTraits, HasMigrations, PokemonType } from "@data";
-import { getTypes } from "@scripts/config/effectiveness.ts";
-import { DataField, DataSchema } from "types/foundry/common/data/fields.js";
+import { getTypes, TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import {
     ActorPTR2e,
-    AdvancementData,
     Attribute,
     Attributes,
-    Biology,
-    HealthData,
     HumanoidActorSystem,
-    Stat,
 } from "@actor";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
-import natureToStatArray, { natures } from "@scripts/config/natures.ts";
-import { MigrationRecord } from "@module/data/mixins/has-migrations.ts";
+import natureToStatArray, { Nature, natures } from "@scripts/config/natures.ts";
+import { SlugField } from "@module/data/fields/slug-field.ts";
+import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
+import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
+import SpeciesSystem, { SpeciesSchema } from "@item/data/species.ts";
 
 class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel)) {
     static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -25,10 +23,13 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     modifiers: Record<string, number | undefined> = {};
 
-    static override defineSchema() {
+    static override defineSchema(): ActorSystemSchema {
         const fields = foundry.data.fields;
 
-        const getAttributeField = (slug: string, withStage = true) => {
+        function getAttributeField(slug: string, withStage?: boolean): AttributeSchema;
+        function getAttributeField(slug: string, withStage: true): AttributeSchema;
+        function getAttributeField(slug: string, withStage: false): Omit<AttributeSchema, "stage">;
+        function getAttributeField(slug: string, withStage = true): AttributeSchema | Omit<AttributeSchema, "stage"> {
             return {
                 ...getStatField(slug, withStage),
                 evs: new fields.NumberField({
@@ -53,9 +54,13 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
                 }),
             };
         };
-        const getStatField = (slug: string, withStage = true) => {
-            const output: DataSchema = {
-                slug: new fields.StringField({ required: true, initial: slug }),
+
+        function getStatField(slug: string, withStage?: boolean): StatSchema;
+        function getStatField(slug: string, withStage: true): StatSchema;
+        function getStatField(slug: string, withStage: false): Omit<StatSchema, "stage">;
+        function getStatField (slug: string, withStage = true): StatSchema | Omit<StatSchema, "stage">  {
+            const output: Partial<StatSchema> = {
+                slug: new SlugField({ required: true, initial: slug }),
             };
             if (withStage)
                 output.stage = new fields.NumberField({
@@ -65,11 +70,11 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
                     label: `PTR2E.Attributes.${slug}.Stage.Label`,
                     hint: `PTR2E.Attributes.${slug}.Stage.Hint`,
                 });
-            return output;
+            return output as StatSchema | Omit<StatSchema, "stage">;
         };
 
         return {
-            ...super.defineSchema(),
+            ...super.defineSchema() as MigrationSchema & TraitsSchema,
             advancement: new fields.SchemaField({
                 experience: new fields.SchemaField({
                     current: new fields.NumberField({
@@ -122,12 +127,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
             biology: new fields.ObjectField(),
             capabilities: new fields.ObjectField(),
             type: new fields.SchemaField({
-                types: new fields.SetField(
-                    new fields.StringField({
+                types: new fields.SetField<TypeField,foundry.data.fields.SourcePropFromDataField<TypeField>[],Set<foundry.data.fields.SourcePropFromDataField<TypeField>>,true,false,true>(
+                    new fields.StringField<keyof TypeEffectiveness, keyof TypeEffectiveness, true, false, true>({
                         required: true,
-                        choices: getTypes().reduce<Record<string, string>>(
+                        choices: getTypes().reduce<Record<PokemonType, string>>(
                             (acc, type) => ({ ...acc, [type]: type }),
-                            {}
+                            {} as Record<PokemonType, string>
                         ),
                         initial: "untyped",
                         label: "PTR2E.FIELDS.PokemonType.Label",
@@ -205,14 +210,14 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
                 initial: "hardy",
                 label: "PTR2E.FIELDS.nature.label",
             }),
-            gender: new fields.StringField({
+            gender: new fields.StringField<GenderOptions, GenderOptions, true, false, true>({
                 required: true,
                 choices: {
                     "genderless": "genderless",
                     "male": "male",
                     "female": "female"
                 },
-                initial: "genderless" as "genderless" | "male" | "female",
+                initial: "genderless"
             }),
             slots: new fields.NumberField({
                 required: true,
@@ -330,7 +335,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
                 const e = new Error("Species not set for non-humanoid actor");
                 (this.parent as ActorPTR2e).synthetics.preparationWarnings.add(e.message);
                 Hooks.onError("ActorSystemPTR2e#_prepareSpeciesData", e, {
-                    data: this._source.species,
+                    data: this._source.species ?? undefined,
                 });
                 return;
             }
@@ -414,15 +419,13 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean },
         user: User
     ) {
-        //@ts-expect-error - Traits for actors aren't loaded in properly on source objects
         if (this._source.traits.includes("humanoid") && this.parent.type === "pokemon") {
             this.parent.updateSource({ type: "humanoid" });
         }
-        //@ts-expect-error - Traits for actors aren't loaded in properly on source objects
         if (this._source.traits.includes("pokemon") && this.parent.type === "humanoid") {
             this.parent.updateSource({ type: "pokemon" });
         }
-        await super._preCreate(data, options, user);
+        return await super._preCreate(data, options, user);
     }
 
     override _preUpdate(
@@ -450,52 +453,152 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         }
 
         return super._preUpdate(changed, options, user);
+
+        this.skills
     }
 }
 
-interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
-    attributes: Attributes;
-    battleStats: {
-        evasion: Stat;
-        accuracy: Stat;
-        critRate: Stat;
+interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
+    attributes: ModelPropsFromSchema<AttributesSchema> & {
+        hp: Omit<Attribute, 'stage'>;
+        atk: Attribute;
+        def: Attribute;
+        spa: Attribute;
+        spd: Attribute;
+        spe: Attribute;
     };
-    skills: Collection<SkillPTR2e>;
-    /** Biological data */
-    biology: Biology;
-    /** Movement Capabilities */
+    // battleStats: {
+    //     evasion: Stat;
+    //     accuracy: Stat;
+    //     critRate: Stat;
+    // };
+    // skills: Collection<SkillPTR2e>;
+    // /** Biological data */
+    // biology: Biology;
+    // /** Movement Capabilities */
     type: {
         effectiveness: Record<PokemonType, number>;
         types: Set<PokemonType>;
     };
-    species: SpeciesSystemModel | null;
-    powerPoints: {
-        max: number;
-        value: number;
-    };
-    health: HealthData;
-    advancement: AdvancementData;
-    money: number;
-    slots: number;
-    inventoryPoints: {
-        current: number,
-        max: number
+    // species: SpeciesSystemModel | null;
+    // powerPoints: {
+    //     max: number;
+    //     value: number;
+    // };
+    // health: HealthData;
+    advancement: ModelPropsFromSchema<AdvancementSchema> & {
+        advancementPoints: {
+            total: number;
+            spent: number;
+            available: number;
+        };
+        rvs: {
+            total: number;
+            spent: number;
+            available: number;
+        };
     }
+    // money: number;
+    // slots: number;
+    // inventoryPoints: {
+    //     current: number,
+    //     max: number
+    // }
 
     movement: Collection<Movement>;
 
-    modifiers: Record<string, number | undefined>;
+    // modifiers: Record<string, number | undefined>;
 
     _source: SourceFromSchema<ActorSystemSchema>;
 }
 
 interface Movement { method: string; value: number; type: "primary" | "secondary" }
 
-type ActorSystemSchema = Record<string, DataField<JSONValue, unknown, boolean>> & {
-    species: SpeciesSystemModel["_source"];
-    traits: string[];
+interface ActorSystemSchema extends TraitsSchema, MigrationSchema, foundry.data.fields.DataSchema {
+  species: foundry.data.fields.SchemaField<SpeciesSchema, SourceFromSchema<SpeciesSchema>, SpeciesSystem, false, true, true>;
+  advancement: foundry.data.fields.SchemaField<AdvancementSchema, SourceFromSchema<AdvancementSchema>, ModelPropsFromSchema<AdvancementSchema>, true, false, false>;
+  attributes: foundry.data.fields.SchemaField<AttributesSchema, SourceFromSchema<AttributesSchema>, ModelPropsFromSchema<AttributesSchema>, true, false, false>;
+  battleStats: foundry.data.fields.SchemaField<BattleStatsSchema, SourceFromSchema<BattleStatsSchema>, ModelPropsFromSchema<BattleStatsSchema>, true, false, false>;
+  skills: CollectionField<foundry.data.fields.EmbeddedDataField<SkillPTR2e>>;
+  biology: foundry.data.fields.ObjectField<object, object, true, false, false>;
+  capabilities: foundry.data.fields.ObjectField<object, object, true, false, false>;
+  type: foundry.data.fields.SchemaField<TypeSchema, SourceFromSchema<TypeSchema>, ModelPropsFromSchema<TypeSchema>, true, false, false>;
+  powerPoints: foundry.data.fields.SchemaField<PowerPointsSchema, SourceFromSchema<PowerPointsSchema>, ModelPropsFromSchema<PowerPointsSchema>, true, false, false>;
+  health: foundry.data.fields.SchemaField<HealthSchema, SourceFromSchema<HealthSchema>, ModelPropsFromSchema<HealthSchema>, true, false, false>;
+  money: foundry.data.fields.NumberField<number, number, true, false, true>;
+  shiny: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+  nature: foundry.data.fields.StringField<Nature, Nature, true, false, true>;
+  gender: foundry.data.fields.StringField<GenderOptions, GenderOptions, true, false, true>;
+  slots: foundry.data.fields.NumberField<number, number, true, false, true>;
+  inventoryPoints: foundry.data.fields.SchemaField<InventoryPointsSchema, SourceFromSchema<InventoryPointsSchema>, ModelPropsFromSchema<InventoryPointsSchema>, true, false, false>;
+}
 
-    _migration: MigrationRecord;
-};
+interface AdvancementSchema extends foundry.data.fields.DataSchema {
+  experience: foundry.data.fields.SchemaField<ExperienceSchema, SourceFromSchema<ExperienceSchema>, ModelPropsFromSchema<ExperienceSchema>, true, false, false>;
+  level: foundry.data.fields.NumberField<number, number, true, false, true>;
+}
+
+interface ExperienceSchema extends foundry.data.fields.DataSchema {
+  current: foundry.data.fields.NumberField<number, number, true, false, true>;
+  next: foundry.data.fields.NumberField<number, number, true, false, true>;
+  diff: foundry.data.fields.NumberField<number, number, true, false, true>;
+}
+
+interface AttributesSchema extends foundry.data.fields.DataSchema {
+  hp: foundry.data.fields.SchemaField<Omit<AttributeSchema, 'stage'>, SourceFromSchema<Omit<AttributeSchema, 'stage'>>, ModelPropsFromSchema<Omit<AttributeSchema, 'stage'>>, true, false, false>;
+  atk: foundry.data.fields.SchemaField<AttributeSchema, SourceFromSchema<AttributeSchema>, ModelPropsFromSchema<AttributeSchema>, true, false, false>;
+  def: foundry.data.fields.SchemaField<AttributeSchema, SourceFromSchema<AttributeSchema>, ModelPropsFromSchema<AttributeSchema>, true, false, false>;
+  spa: foundry.data.fields.SchemaField<AttributeSchema, SourceFromSchema<AttributeSchema>, ModelPropsFromSchema<AttributeSchema>, true, false, false>;
+  spd: foundry.data.fields.SchemaField<AttributeSchema, SourceFromSchema<AttributeSchema>, ModelPropsFromSchema<AttributeSchema>, true, false, false>;
+  spe: foundry.data.fields.SchemaField<AttributeSchema, SourceFromSchema<AttributeSchema>, ModelPropsFromSchema<AttributeSchema>, true, false, false>;
+}
+
+interface AttributeSchema extends foundry.data.fields.DataSchema {
+  slug: SlugField<string, string, true, false, true>;
+  evs: foundry.data.fields.NumberField<number, number, true, false, true>;
+  ivs: foundry.data.fields.NumberField<number, number, true, false, true>;
+  base: foundry.data.fields.NumberField<number, number, true, false, true>;
+  stage: foundry.data.fields.NumberField<number, number, true, false, true>;
+}
+
+interface BattleStatsSchema extends foundry.data.fields.DataSchema {
+  evasion: foundry.data.fields.SchemaField<StatSchema, SourceFromSchema<StatSchema>, ModelPropsFromSchema<StatSchema>, true, false, false>;
+  accuracy: foundry.data.fields.SchemaField<StatSchema, SourceFromSchema<StatSchema>, ModelPropsFromSchema<StatSchema>, true, false, false>;
+  critRate: foundry.data.fields.SchemaField<StatSchema, SourceFromSchema<StatSchema>, ModelPropsFromSchema<StatSchema>, true, false, false>;
+}
+
+interface StatSchema extends foundry.data.fields.DataSchema {
+  slug: SlugField<string, string, true, false, true>;
+  stage: foundry.data.fields.NumberField<number, number, true, false, true>;
+}
+
+interface TypeSchema extends foundry.data.fields.DataSchema {
+  types: foundry.data.fields.SetField<TypeField, foundry.data.fields.SourcePropFromDataField<TypeField>[], Set<foundry.data.fields.SourcePropFromDataField<TypeField>>, true, false, true>;
+}
+
+type TypeField = foundry.data.fields.StringField<keyof TypeEffectiveness, keyof TypeEffectiveness, true, false, true>;
+
+interface PowerPointsSchema extends foundry.data.fields.DataSchema {
+  value: foundry.data.fields.NumberField<number, number, true, false, true>;
+  max: foundry.data.fields.NumberField<number, number, true, false, true>;
+}
+
+interface HealthSchema extends foundry.data.fields.DataSchema {
+  value: foundry.data.fields.NumberField<number, number, true, false, true>;
+  max: foundry.data.fields.NumberField<number, number, true, false, true>;
+  shield: foundry.data.fields.SchemaField<ShieldSchema, SourceFromSchema<ShieldSchema>, ModelPropsFromSchema<ShieldSchema>, true, false, false>;
+}
+
+interface ShieldSchema extends foundry.data.fields.DataSchema {
+  value: foundry.data.fields.NumberField<number, number, true, false, true>;
+  max: foundry.data.fields.NumberField<number, number, true, false, true>;
+}
+
+type GenderOptions = "genderless" | "male" | "female";
+
+interface InventoryPointsSchema extends foundry.data.fields.DataSchema {
+  current: foundry.data.fields.NumberField<number, number, true, false, true>;
+}
+
 
 export default ActorSystemPTR2e;

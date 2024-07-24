@@ -1,6 +1,6 @@
 import { ActorPTR2e } from "@actor";
 import { ItemSheetPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
-import { RollOptionManager, Trait } from "@data";
+import { ActionPTR2e, RollOptionManager, Trait } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemFlagsPTR2e } from "./data/system.ts";
 import { ActionsCollections } from "@actor/actions.ts";
@@ -110,7 +110,7 @@ class ItemPTR2e<
     }
 
     hasActions(): this is ItemPTR2e<ItemSystemsWithActions> {
-        return 'actions' in this.system && this.system.actions.size > 0;
+        return 'actions' in this.system && (this.system.actions as Collection<ActionPTR2e>).size > 0;
     }
 
     async toChat() {
@@ -131,8 +131,10 @@ class ItemPTR2e<
         let document: ActiveEffectPTR2e | null = null;
 
         // Case 1 - Data explicitly provided
-        if (data.data)
+        if (data.data) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             document = new CONFIG.ActiveEffect.documentClass(data.data as any) as ActiveEffectPTR2e;
+        }
         // Case 2 - UUID provided
         else if (data.uuid) document = await fromUuid(data.uuid);
 
@@ -211,10 +213,10 @@ class ItemPTR2e<
             types?: string[];
         } & Partial<FormApplicationOptions>,
     ): Promise<TDocument | null>{
-        let {parent, pack, ...options} = context;
+        const {parent, pack, ...options} = context;
 
         // Collect data
-        //@ts-expect-error
+        //@ts-expect-error - This is a valid string property
         const documentName = this.metadata.name;
         const types = context.perksOnly ? ["perk"] : game.documentTypes[documentName].filter(t => t !== CONST.BASE_DOCUMENT_TYPE && t !== "ptu-item");
         let collection: Items<ItemPTR2e<ItemSystemPTR, null>> | undefined;
@@ -223,7 +225,7 @@ class ItemPTR2e<
             else collection = game.collections.get(documentName);
         }
         const folders = collection?._formatFolderSelectOptions() ?? [];
-        //@ts-expect-error
+        //@ts-expect-error - This is a valid string property
         const label = context.perksOnly ? game.i18n.localize("TYPES.Item.perk") : game.i18n.localize(this.metadata.label);
         const title = game.i18n.format("DOCUMENT.Create", {type: label});
         // Render the document creation form
@@ -252,9 +254,9 @@ class ItemPTR2e<
                 foundry.utils.mergeObject(data, fd.object, {inplace: true});
                 if ( !data.folder ) delete data.folder;
                 if ( types.length === 1 ) data.type = types[0];
-                //@ts-expect-error
+                //@ts-expect-error - This is a valid string property
                 if ( !data.name?.trim() ) data.name = this.defaultName();
-                //@ts-expect-error
+                //@ts-expect-error - This is a valid string property
                 return this.implementation.create(data, {parent, pack, renderSheet: true});
             },
             rejectClose: false,

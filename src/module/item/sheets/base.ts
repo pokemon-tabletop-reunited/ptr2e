@@ -6,6 +6,7 @@ import GithubManager from "@module/apps/github.ts";
 import { ActiveEffectPTR2e } from "@effects";
 import { ActionEditor } from "@module/apps/action-editor.ts";
 import { ItemSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
+import { ActionPTR2e } from "@data";
 
 export default class ItemSheetPTR2e<
     TSystem extends ItemSystemPTR,
@@ -313,7 +314,7 @@ export default class ItemSheetPTR2e<
             const addButton = htmlElement.querySelector(".actions a[data-action='add-action']");
             addButton?.addEventListener("click", async () => {
                 if (!("actions" in this.document.system)) return;
-                const actions = this.document.system._source.actions ?? [];
+                const actions = this.document.system._source.actions as ActionPTR2e[] ?? [];
 
                 let num = actions.length + 1;
                 const action = {
@@ -324,12 +325,12 @@ export default class ItemSheetPTR2e<
                     type: "generic",
                 };
 
-                while (this.document.system.actions.has(action.slug)) {
+                while ((this.document.system.actions as Collection<ActionPTR2e>).has(action.slug)) {
                     action.name = `${this.document.name} Action (#${++num})`;
                     action.slug = sluggify(action.name);
                 }
 
-                // @ts-expect-error
+                // @ts-expect-error - Actions on source is not a collection but an array
                 actions.push(action);
                 this.document.update({ "system.actions": actions });
             });
@@ -341,7 +342,7 @@ export default class ItemSheetPTR2e<
                     if (!slug) return;
 
                     if (!("actions" in this.document.system)) return;
-                    const action = this.document.system.actions.get(slug);
+                    const action = (this.document.system.actions as Collection<ActionPTR2e>).get(slug);
                     if (!action) return;
 
                     switch (actionType) {
@@ -366,7 +367,7 @@ export default class ItemSheetPTR2e<
                                 yes: {
                                     callback: () => {
                                         if (!("actions" in document.system)) return;
-                                        const actions = document.system._source.actions.filter(
+                                        const actions = (document.system._source.actions as ActionPTR2e[]).filter(
                                             (a) => a.slug !== slug
                                         );
                                         document.update({ "system.actions": actions });
@@ -418,8 +419,9 @@ export default class ItemSheetPTR2e<
                     }
                     let current = this.document.system.schema.fields;
                     const pathParts = systemPath.slice(1);
+                    // eslint-disable-next-line @typescript-eslint/prefer-for-of
                     for (let i = 0; i < pathParts.length; i++) {
-                        let field = current[pathParts[i]] as
+                        const field = current[pathParts[i]] as
                             | foundry.data.fields.SetField<foundry.data.fields.StringField>
                             | foundry.data.fields.SchemaField<foundry.data.fields.DataSchema>;
                         if (!field) return;
@@ -436,16 +438,16 @@ export default class ItemSheetPTR2e<
                 return null;
             })();
 
-            // @ts-expect-error
-            let refresh = stringTags._refresh.bind(stringTags);
+            // @ts-expect-error - Monkey Patching
+            const refresh = stringTags._refresh.bind(stringTags);
 
-            // @ts-expect-error
+            // @ts-expect-error - Monkey Patching
             stringTags._refresh = () => {
                 refresh.call();
                 this.element.dispatchEvent(new Event("submit", { cancelable: true }));
             };
 
-            //@ts-expect-error
+            //@ts-expect-error - Monkey Patching
             stringTags._validateTag = (tag: string): boolean => {
                 if (validate) {
                     const result = validate(tag);
@@ -472,8 +474,7 @@ export default class ItemSheetPTR2e<
     }
 
     static async #toChat<TSystem extends ItemSystemPTR>(
-        this: ItemSheetPTR2e<TSystem>,
-        _event: Event
+        this: ItemSheetPTR2e<TSystem>
     ) {
         return this.document.toChat();
     }

@@ -6,7 +6,7 @@ import { TemplateConstructor } from './data-template.ts';
  */
 export default function HasDescription<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
     class TemplateClass extends baseClass {
-        static override defineSchema(): foundry.data.fields.DataSchema {
+        static override defineSchema(): DescriptionSchema {
             const fields = foundry.data.fields;
 
             return {
@@ -17,7 +17,7 @@ export default function HasDescription<BaseClass extends TemplateConstructor>(ba
         }
     }
 
-    interface TemplateClass {
+    interface TemplateClass extends ModelPropsFromSchema<DescriptionSchema> {
         /**
          * A description of the item.
          * @defaultValue `''`
@@ -27,10 +27,12 @@ export default function HasDescription<BaseClass extends TemplateConstructor>(ba
          */
         description: string;
 
-        _source: InstanceType<typeof baseClass>['_source'] & {
-            description: string;
-        }
+        _source: SourceFromSchema<DescriptionSchema>;
     }
 
     return TemplateClass;
+}
+
+export interface DescriptionSchema extends foundry.data.fields.DataSchema {
+    description: foundry.data.fields.HTMLField<string, string, true, false>;
 }

@@ -18,14 +18,14 @@ interface SkillMessageSystem
     } | null;
 }
 
-type SkillMessageSchema = {
+interface SkillMessageSchema extends foundry.data.fields.DataSchema {
     roll: foundry.data.fields.JSONField<Rolled<CheckRoll>, true, false, false>;
     origin: foundry.data.fields.JSONField<ActorPTR2e["_source"], true, false, false>;
-    slug: SlugField<true, false, false>;
+    slug: SlugField<string, string, true, false, false>;
     luckRoll: foundry.data.fields.JSONField<Rolled<CheckRoll>, true, true, false>;
     appliedLuck: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
     rerolled: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
-};
+}
 
 abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
     declare parent: ChatMessagePTR2e<SkillMessageSystem>;
@@ -110,7 +110,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
         };
     }
 
-    async getHTMLContent(_content: string) {
+    async getHTMLContent() {
         const context: this["context"] & Record<string, unknown> = this.context ?? {};
         context.degreeOfSuccess = context.roll
             ? context.roll.total > 0
@@ -122,7 +122,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
             context.degreeOfSuccess *= -1;
         }
 
-        context.rollHTML = await (async (isPrivate: boolean = false) => {
+        context.rollHTML = await (async (isPrivate = false) => {
             if (!context.roll) return "";
             const innerRollHTML = await context.roll.render({ isPrivate });
             const luckRollHTML = context.luckRoll

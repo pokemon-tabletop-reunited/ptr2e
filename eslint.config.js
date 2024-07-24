@@ -4,7 +4,7 @@ import tseslint from "typescript-eslint";
 
 export default [
   {
-    "plugins": ["html"]
+    "plugins": { "html": {} }
   },
   { files: ["**/*.{js,mjs,cjs,ts}"] },
   { files: ["**/*.js"], languageOptions: { sourceType: "script" } },
@@ -21,6 +21,7 @@ export default [
       "@typescript-eslint/no-unsafe-declaration-merging": "off",
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/no-invalid-void-type": "off",
+      "@typescript-eslint/no-dynamic-delete": "off",
     }
   },
   ...tseslint.configs.stylistic,

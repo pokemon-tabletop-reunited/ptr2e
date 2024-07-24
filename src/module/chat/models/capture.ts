@@ -35,8 +35,8 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
      * Validate that Rolls belonging to the ChatMessage document are valid
      * @param {string} rollJSON     The serialized Roll data
      */
-    static #validateRoll(rollJSON: any) {
-        const roll = JSON.parse(rollJSON);
+    static #validateRoll(rollJSON: unknown) {
+        const roll = JSON.parse(rollJSON as string);
         if (!roll.evaluated)
             throw new Error(`Roll objects added to ChatMessage documents must be evaluated`);
     }
@@ -48,8 +48,8 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
             if (!rollData) return null;
             try {
                 return Roll.fromJSON(rollData) as Rolled<CaptureRoll>;
-            } catch (error: any) {
-                Hooks.onError("CaptureMessageSystem#prepareBaseData", error, {
+            } catch (error: unknown) {
+                Hooks.onError("CaptureMessageSystem#prepareBaseData", error as Error, {
                     log: "error",
                 });
             }
@@ -62,8 +62,8 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
             const jsonData = (() => {
                 try {
                     return JSON.parse(actorData);
-                } catch (error: any) {
-                    Hooks.onError("CaptureMessageSystem#prepareBaseData", error, {
+                } catch (error: unknown) {
+                    Hooks.onError("CaptureMessageSystem#prepareBaseData", error as Error, {
                         log: "error",
                     });
                 }
@@ -75,8 +75,8 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
 
             try {
                 return ActorPTR2e.fromJSON(actorData) as ActorPTR2e;
-            } catch (error: any) {
-                Hooks.onError("CaptureMessageSystem#prepareBaseData", error, {
+            } catch (error: unknown) {
+                Hooks.onError("CaptureMessageSystem#prepareBaseData", error as Error, {
                     log: "error",
                 });
             }
@@ -96,7 +96,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
         };
     }
 
-    async getHTMLContent(_content: string) {
+    async getHTMLContent() {
         const renderRolls = async (isPrivate: boolean) => {
             const renderInnerRoll = async (roll: Rolled<CaptureRoll> | null, isPrivate: boolean) => {
                 return roll ? roll.render({ isPrivate }) : null;
@@ -212,7 +212,7 @@ interface CaptureMessageSystem
     context: Maybe<CaptureMessageRenderContext>;
     action: PokeballActionPTR2e;
 }
-type CaptureMessageRenderContext = {
+interface CaptureMessageRenderContext {
     origin: ActorPTR2e;
     action: PokeballActionPTR2e;
     rolls: {
@@ -236,9 +236,9 @@ type CaptureMessageRenderContext = {
     target: Maybe<ActorPTR2e>
 }
 
-type CaptureMessageSchema = {
+interface CaptureMessageSchema extends foundry.data.fields.DataSchema {
     origin: foundry.data.fields.JSONField<ActorPTR2e, true, false, false>;
-    slug: SlugField<true, false, false>;
+    slug: SlugField<string, string, true, false, false>;
     rolls: foundry.data.fields.SchemaField<
         RollsSchema,
         SourceFromSchema<RollsSchema>,
@@ -248,15 +248,15 @@ type CaptureMessageSchema = {
         true
     >;
     target: foundry.data.fields.DocumentUUIDField<string, true, true, false>;
-};
+}
 
-type RollsSchema = {
+interface RollsSchema extends foundry.data.fields.DataSchema {
     accuracy: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
     crit: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
     shake1: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
     shake2: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
     shake3: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
     shake4: foundry.data.fields.JSONField<Rolled<CaptureRoll>, true, true, false>;
-};
+}
 
 export default CaptureMessageSystem;

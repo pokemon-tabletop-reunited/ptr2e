@@ -1,6 +1,7 @@
-import { AbilityPTR2e } from "@item";
-import { HasBase, HasEmbed } from "@module/data/index.ts";
+import { AbilityPTR2e, ContainerPTR2e } from "@item";
+import { ActionPTR2e, HasBase, HasEmbed } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
+import { HasBaseSchema } from "@module/data/mixins/has-base.ts";
 
 /**
  * @category Item Data Models
@@ -16,7 +17,7 @@ export default abstract class AbilitySystem extends HasEmbed(HasBase(foundry.abs
   static override defineSchema(): AbilitySchema {
     const fields = foundry.data.fields;
     return {
-      ...super.defineSchema(),
+      ...super.defineSchema() as HasBaseSchema,
 
       free: new fields.BooleanField({
         required: true,
@@ -54,9 +55,14 @@ export default abstract class AbilitySystem extends HasEmbed(HasBase(foundry.abs
   }
 }
 
-export default interface AbilitySystem extends ModelPropsFromSchema<AbilitySchema> { }
+export default interface AbilitySystem extends ModelPropsFromSchema<AbilitySchema> { 
+  container: ContainerPTR2e | null;
+  actions: Collection<ActionPTR2e>;
 
-type AbilitySchema = {
+  _source: SourceFromSchema<AbilitySchema>;
+}
+
+interface AbilitySchema extends foundry.data.fields.DataSchema, HasBaseSchema {
   slot: foundry.data.fields.NumberField<number, number, true, true, true>;
   free: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
 }

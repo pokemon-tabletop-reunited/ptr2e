@@ -96,12 +96,13 @@ declare global {
         EffectsCanvasGroup
     >;
 
+    // eslint-disable-next-line @typescript-eslint/no-namespace
     namespace globalThis {
-        var game: GamePTR2e;
+        let game: GamePTR2e;
 
-        var fu: typeof foundry.utils;
+        let fu: typeof foundry.utils;
 
-        var ui: FoundryUI<
+        let ui: FoundryUI<
             ActorDirectory<ActorPTR2e<ActorSystemPTR2e, null>>,
             ItemDirectory<ItemPTR2e<ItemSystemPTR, null>>,
             ChatLog,
@@ -113,7 +114,7 @@ declare global {
 
         function getTexture(src: string): PIXI.Texture | PIXI.Spritesheet | null;
 
-        var actor: () => ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e<ScenePTR2e> | null> | null;
+        let actor: () => ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e<ScenePTR2e> | null> | null;
 
         let _maxZ: number;
     }

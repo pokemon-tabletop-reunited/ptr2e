@@ -63,8 +63,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
      * Validate that Rolls belonging to the ChatMessage document are valid
      * @param {string} rollJSON     The serialized Roll data
      */
-    static #validateRoll(rollJSON: any) {
-        const roll = JSON.parse(rollJSON);
+    static #validateRoll(rollJSON: unknown) {
+        const roll = JSON.parse(rollJSON as string);
         if (!roll.evaluated)
             throw new Error(`Roll objects added to ChatMessage documents must be evaluated`);
     }
@@ -80,8 +80,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             if (!rollData) return null;
             try {
                 return Roll.fromJSON(rollData) as Rolled<AttackRoll>;
-            } catch (error: any) {
-                Hooks.onError("AttackMessageSystem#prepareBaseData", error, {
+            } catch (error: unknown) {
+                Hooks.onError("AttackMessageSystem#prepareBaseData", error as Error, {
                     log: "error",
                 });
             }
@@ -94,8 +94,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             const jsonData = (() => {
                 try {
                     return JSON.parse(actorData);
-                } catch (error: any) {
-                    Hooks.onError("AttackMessageSystem#prepareBaseData", error, {
+                } catch (error: unknown) {
+                    Hooks.onError("AttackMessageSystem#prepareBaseData", error as Error, {
                         log: "error",
                     });
                 }
@@ -107,8 +107,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
             try {
                 return ActorPTR2e.fromJSON(actorData) as ActorPTR2e;
-            } catch (error: any) {
-                Hooks.onError("AttackMessageSystem#prepareBaseData", error, {
+            } catch (error: unknown) {
+                Hooks.onError("AttackMessageSystem#prepareBaseData", error as Error, {
                     log: "error",
                 });
             }
@@ -329,7 +329,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                     return;
                 }
 
-                //@ts-expect-error
+                //@ts-expect-error - asdfddddd
                 const updateResults = this._source.results.concat(newResults);
 
                 this.parent.update({
@@ -353,6 +353,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     }
 }
 
+// @ts-expect-error - This is a valid operation
 interface AttackMessageSystem
     extends foundry.abstract.TypeDataModel,
         ModelPropsFromSchema<AttackMessageSchema> {
@@ -361,15 +362,15 @@ interface AttackMessageSystem
     context: Maybe<AttackMessageRenderContext>;
     overrides: Collection<{ value: AccuracySuccessCategory; uuid: ActorUUID }>;
 }
-type AttackMessageRenderContext = {
+interface AttackMessageRenderContext {
     origin: ActorPTR2e;
     attack: AttackPTR2e;
     hasDamage: boolean;
     results: Map<ActorUUID, AttackMessageRenderContextData>;
     pp: ModelPropsFromSchema<PPSchema>;
-};
+}
 
-type AttackMessageRenderContextData = {
+interface AttackMessageRenderContextData {
     rolls: {
         accuracy: string | null;
         crit: string | null;
@@ -380,11 +381,11 @@ type AttackMessageRenderContextData = {
     damage?: number;
     damageRoll?: DamageCalc;
     accuracyRoll?: AccuracyCalc;
-};
+}
 
-type AttackMessageSchema = {
+interface AttackMessageSchema extends foundry.data.fields.DataSchema {
     origin: foundry.data.fields.JSONField<ActorPTR2e, true, false, false>;
-    attackSlug: SlugField<true, false, false>;
+    attackSlug: SlugField<string, string, true, false, false>;
     results: foundry.data.fields.ArrayField<
         ResultSchema,
         foundry.data.fields.SourcePropFromDataField<ResultSchema>[],
@@ -413,17 +414,17 @@ type AttackMessageSchema = {
         false,
         false
     >;
-};
+}
 
-type OverrideSchema = {
-    value: SlugField<true, false, false>;
+interface OverrideSchema extends foundry.data.fields.DataSchema {
+    value: SlugField<string, string, true, false, false>;
     uuid: foundry.data.fields.DocumentUUIDField<"Actor", true, false, false>;
-};
+}
 
-type PPSchema = {
+interface PPSchema extends foundry.data.fields.DataSchema {
     spent: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
     cost: foundry.data.fields.NumberField<number, number, true, false, true>;
-};
+}
 
 type ResultData = foundry.data.fields.ModelPropFromDataField<ResultSchema>;
 

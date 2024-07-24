@@ -191,14 +191,14 @@ export default class AttackPTR2e extends ActionPTR2e {
     }
 }
 export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {
-    update(
-        data: DeepPartial<SourceFromSchema<AttackSchema>> &
-            DeepPartial<SourceFromSchema<ActionSchema>>
-    ): Promise<this["item"]>;
-    prepareUpdate(
-        data: DeepPartial<SourceFromSchema<AttackSchema>> &
-            DeepPartial<SourceFromSchema<ActionSchema>>
-    ): (SourceFromSchema<ActionSchema> & SourceFromSchema<AttackSchema>)[];
+    // update(
+    //     data: DeepPartial<SourceFromSchema<AttackSchema>> &
+    //         DeepPartial<SourceFromSchema<ActionSchema>>
+    // ): Promise<this["item"]>;
+    // prepareUpdate(
+    //     data: DeepPartial<SourceFromSchema<AttackSchema>> &
+    //         DeepPartial<SourceFromSchema<ActionSchema>>
+    // ): (SourceFromSchema<ActionSchema> & SourceFromSchema<AttackSchema>)[];
 
     statistic: Maybe<AttackStatistic>;
 
