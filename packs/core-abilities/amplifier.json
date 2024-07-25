@@ -1,0 +1,88 @@
+{
+    "name": "Amplifier",
+    "type": "ability",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+        "actions": [
+            {
+                "traits": [],
+                "name": "Amplifier",
+                "slug": "amplifier",
+                "type": "passive",
+                "cost": {
+                    "activation": "free"
+                },
+                "range": {
+                    "target": "self",
+                    "unit": "m"
+                },
+                "description": "Effect: The user's [Sonic] attacks have 30% more Power and have their range increased by 50%.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "description": "Effect: The user's [Sonic] attacks have 30% more Power and have their range increased by 50%.",
+        "traits": [],
+        "slug": "amplifier",
+        "_migration": {
+            "version": null,
+            "previous": null
+        }
+    },
+    "folder": "0nG9TRDSwrmcTFwO",
+    "_id": "8GEZyBul46p9V0Fn",
+    "effects": [
+        {
+            "name": "Amplifier (Partial)",
+            "type": "passive",
+            "_id": "CX3EyE55W72ME7gi",
+            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+            "system": {
+                "changes": [
+                    {
+                        "type": "percentile-modifier",
+                        "key": "sonic-trait-attack-power",
+                        "value": 30,
+                        "predicate": [],
+                        "label": "Amplifier Power",
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false,
+                        "hideIfDisabled": false
+                    }
+                ],
+                "slug": null,
+                "traits": [],
+                "removeAfterCombat": true,
+                "removeOnRecall": false,
+                "stacks": 0
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "description": "",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": "Actor.zshgfm9Ey2yqW8eS.Item.vdWAkG4TbIs3apAy.ActiveEffect.l6pjnn54jiTqHOwt",
+                "duplicateSource": null,
+                "coreVersion": "12.329",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.2.0.3",
+                "createdTime": 1721934790549,
+                "modifiedTime": 1721934790549,
+                "lastModifiedBy": "y4EIjJlrc2eCclW7"
+            }
+        }
+    ]
+}
