@@ -4,7 +4,7 @@ import { AttackCheckModifier } from "@module/effects/modifiers.ts";
 import { ActorPTR2e } from "@actor";
 import { AccuracyContext, DamageCalc } from "@module/chat/models/data.ts";
 
-// @ts-expect-error
+// @ts-expect-error - This override is intentional
 class AttackRoll extends CheckRoll {
     constructor(formula: string, data: Record<string, unknown>, options: AttackRollDataPTR2e) {
         const type = options.attackType;
@@ -196,10 +196,10 @@ interface AttackRoll extends CheckRoll {
     attackType: "accuracy" | "crit" | "damage";
 }
 
-type AttackRollCreationData = {
+interface AttackRollCreationData {
     attack: AttackPTR2e;
     check: AttackCheckModifier;
-};
+}
 
 type AttackRollDataPTR2e = CheckRollDataPTR2e & {
     rip: boolean;

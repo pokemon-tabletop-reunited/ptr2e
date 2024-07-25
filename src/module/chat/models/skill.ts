@@ -52,8 +52,8 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
      * Validate that Rolls belonging to the ChatMessage document are valid
      * @param {string} rollJSON     The serialized Roll data
      */
-    static #validateRoll(rollJSON: any) {
-        const roll = JSON.parse(rollJSON);
+    static #validateRoll(rollJSON: unknown) {
+        const roll = JSON.parse(rollJSON as string);
         if (!roll.evaluated)
             throw new Error(`Roll objects added to ChatMessage documents must be evaluated`);
     }
@@ -64,8 +64,8 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
         let roll;
         try {
             roll = Roll.fromJSON(this._source.roll) as Rolled<CheckRoll>;
-        } catch (error: any) {
-            Hooks.onError("SkillMessageSystem#roll", error, { log: "error", data: this._source });
+        } catch (error) {
+            Hooks.onError("SkillMessageSystem#roll", error as Error, { log: "error", data: this._source });
         }
 
         let luckRoll;
@@ -73,8 +73,8 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
             if (this._source.luckRoll)
                 luckRoll = Roll.fromJSON(this._source.luckRoll) as Rolled<CheckRoll>;
             else luckRoll = null;
-        } catch (error: any) {
-            Hooks.onError("SkillMessageSystem#luckRoll", error, {
+        } catch (error) {
+            Hooks.onError("SkillMessageSystem#luckRoll", error as Error, {
                 log: "error",
                 data: this._source,
             });

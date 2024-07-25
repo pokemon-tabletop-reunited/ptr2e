@@ -25,8 +25,6 @@ export function partialSkillToSkill(partialSkill: Partial<SkillPTR2e['_source']>
     if (!partialSkill.slug) throw new Error("Partial Skill is missing slug");
     return fu.mergeObject(initial, partialSkill) as SkillPTR2e['_source'];
 }
-// @ts-ignore
-globalThis.partialSkillToSkill = partialSkillToSkill;
 
 const BaseSkills = {
     luck: {

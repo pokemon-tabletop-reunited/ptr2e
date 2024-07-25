@@ -28,6 +28,14 @@ export default [
   {
     rules: {
       "@typescript-eslint/no-empty-interface": "off",
+      "@typescript-eslint/no-extraneous-class": "off",
+      "@typescript-eslint/ban-ts-comment": ["error", {
+        "ts-expect-error": "allow-with-description",
+        "ts-ignore": true,
+        "ts-nocheck": false,
+        "ts-check": false,
+        minimumDescriptionLength: 10,
+      }],
     }
   }
 ];

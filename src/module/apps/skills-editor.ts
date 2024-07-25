@@ -151,7 +151,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
     static #onResetSkills(this: SkillsEditor) {
         const document = this.document;
-        const thisRef = this;
+    
         foundry.applications.api.DialogV2.confirm({
             window: {
                 title: game.i18n.format("PTR2E.SkillsEditor.ResetSkills.title", {
@@ -176,8 +176,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                             };
                         }),
                     });
-                    this.skills = thisRef.resetSkills();
-                    thisRef.render({});
+                    this.skills = this.resetSkills();
+                    this.render({});
                 },
             },
         });
@@ -188,7 +188,6 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         const resources = document.system.skills.find((skill) => skill.slug === "resources");
         if (!resources) return;
 
-        const thisRef = this;
         foundry.applications.api.DialogV2.prompt({
             window: {
                 title: game.i18n.format("PTR2E.SkillsEditor.ChangeResources.title", {
@@ -210,7 +209,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
                     const value = parseInt(input.value);
                     if (isNaN(value) || !value) return;
-                    const resources = thisRef.skills.find((skill) => skill.slug === "resources")!;
+                    const resources = this.skills.find((skill) => skill.slug === "resources")!;
                     if (resources.value + (resources.rvs ?? 0) + value < 1) {
                         ui.notifications.warn(
                             game.i18n.format("PTR2E.SkillsEditor.ChangeResources.warn", {
@@ -220,7 +219,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                         return;
                     }
 
-                    thisRef.skills.find((skill) => skill.slug === "resources")!.rvs =
+                    this.skills.find((skill) => skill.slug === "resources")!.rvs =
                         (resources.rvs ?? 0) + value;
 
                     await document.update({
@@ -233,7 +232,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                                 : skill;
                         }),
                     });
-                    thisRef.render({});
+                    this.render({});
                 },
             },
         });
@@ -244,7 +243,6 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         const luck = document.system.skills.find((skill) => skill.slug === "luck");
         if (!luck) return;
 
-        const thisRef = this;
         foundry.applications.api.DialogV2.prompt({
             window: {
                 title: game.i18n.format("PTR2E.SkillsEditor.ChangeLuck.title", {
@@ -266,7 +264,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
                     const value = parseInt(input.value);
                     if (isNaN(value) || !value) return;
-                    const luck = thisRef.skills.find((skill) => skill.slug === "luck")!;
+                    const luck = this.skills.find((skill) => skill.slug === "luck")!;
                     if (luck.value + value <= 0) {
                         ui.notifications.warn(
                             game.i18n.format("PTR2E.SkillsEditor.ChangeLuck.warn", {
@@ -276,7 +274,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                         return;
                     }
 
-                    thisRef.skills.find((skill) => skill.slug === "luck")!.value =
+                    this.skills.find((skill) => skill.slug === "luck")!.value =
                         (luck.value ?? 0) + value;
 
                     await document.update({
@@ -289,7 +287,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                                 : skill;
                         }),
                     });
-                    thisRef.render({});
+                    this.render({});
                 },
             },
         });
@@ -303,7 +301,6 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         const levelOne = this.document.system.advancement.level === 1;
         const isReroll =
             !levelOne || (levelOne && this.document.system.skills.get("luck")!.value! > 1);
-        const thisRef = this;
 
         const rollAndApplyLuck = async (isReroll = false) => {
             const roll = await new Roll("3d6 * 5").roll();
@@ -321,7 +318,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                 )}</p>`,
             });
 
-            thisRef.skills.find((skill) => skill.slug === "luck")!.value = roll.total;
+            this.skills.find((skill) => skill.slug === "luck")!.value = roll.total;
             await document.update({
                 "system.skills": document.system.skills.map((skill) => {
                     return skill.slug === "luck"
@@ -332,7 +329,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                         : skill;
                 }),
             });
-            thisRef.render({});
+            this.render({});
         };
 
         if (!isReroll) {

@@ -12,7 +12,7 @@ export default class GearSheet extends ItemSheetPTR2e<GearPTR2e["system"]> {
 
     static override readonly overviewTemplate= "systems/ptr2e/templates/items/gear/gear-overview.hbs";
     static override readonly detailsTemplate= "systems/ptr2e/templates/items/gear/gear-details.hbs";
-    override noActions: boolean = true;
+    override noActions = true;
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = 
         fu.mergeObject(super.PARTS, {

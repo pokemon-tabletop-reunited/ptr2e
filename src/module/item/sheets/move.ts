@@ -18,7 +18,7 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
         "systems/ptr2e/templates/items/move/move-overview.hbs";
     static override readonly detailsTemplate =
         "systems/ptr2e/templates/items/move/move-details.hbs";
-    override noActions: boolean = false;
+    override noActions = false;
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> =
         R.omit(fu.mergeObject(

@@ -204,9 +204,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
     }
 }
 
-interface CaptureMessageSystem
-    extends foundry.abstract.TypeDataModel,
-        ModelPropsFromSchema<CaptureMessageSchema> {
+interface CaptureMessageSystem extends ModelPropsFromSchema<CaptureMessageSchema> {
     _source: SourceFromSchema<CaptureMessageSchema>;
 
     context: Maybe<CaptureMessageRenderContext>;

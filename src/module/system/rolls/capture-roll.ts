@@ -124,30 +124,20 @@ class CaptureRoll extends CheckRoll {
         }).evaluateSync();
     }
 
-    static get shakeDcFormula() {
-        return "floor(100 * pow((@catchRate / 255), (3/16)))";
-    }
-    static get critDcFormula() {
-        return "(@catchRate * min(8, @caught / 75) * @bonus) / (357 / 10) + 1";
-    }
-    static get catchRateFormula() {
-        return "((3 * @hpMax - 2 * @hpCurrent) / (3 * @hpMax)) * @rate * @bonusBall * @bonusStatus * @bonusStage * @bonusLevel * @bonusMisc";
-    }
-    static get bonusStatusFormula() {
-        return "pow(1.225, @major) * pow(1.05, @minor)";
-    }
-    static get bonusStageFormula() {
-        return "pow(1.02, -@netStages)";
-    }
+    static readonly shakeDcFormula = "floor(100 * pow((@catchRate / 255), (3/16)))";
+    static readonly critDcFormula = "(@catchRate * min(8, @caught / 75) * @bonus) / (357 / 10) + 1";
+    static readonly catchRateFormula = "((3 * @hpMax - 2 * @hpCurrent) / (3 * @hpMax)) * @rate * @bonusBall * @bonusStatus * @bonusStage * @bonusLevel * @bonusMisc";
+    static readonly bonusStatusFormula = "pow(1.225, @major) * pow(1.05, @minor)";
+    static readonly bonusStageFormula = "pow(1.02, -@netStages)";
 }
 
-type CaptureRollCreationData = {
+interface CaptureRollCreationData {
     target: Maybe<ActorPTR2e>;
     user: Maybe<ActorPTR2e>;
     ballBonus: number;
     miscBonus: number;
     critBonus: number;
     check: AttackCheckModifier;
-};
+}
 
 export { CaptureRoll, type CaptureRollCreationData };

@@ -81,7 +81,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
             canDelete: game.user.isGM, // Only GM users are allowed to have the trash-bin icon in the chat log itself
             whisperTo: this.whisper
                 .map((u) => {
-                    let user = game.users.get(u);
+                    const user = game.users.get(u);
                     return user ? user.name : null;
                 })
                 .filterJoin(", "),
@@ -96,7 +96,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
 
         // Render the chat message
         const template = await renderTemplate(CONFIG.ChatMessage.template, messageData);
-        let html = $(template);
+        const html = $(template);
 
         // Set the message header color
         html.css("--user-color", `var(--user-color-${this.author.id})`);
@@ -271,7 +271,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         });
         const flavor = context.notesList ? context.notesList.innerHTML : context.title ?? "";
 
-        //@ts-expect-error
+        //@ts-expect-error - Chatmessages aren't typed properly yet
         return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({
             type,
             speaker,
@@ -307,7 +307,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         });
         const flavor = context.title ?? "";
 
-        //@ts-expect-error
+        //@ts-expect-error - Chatmessages aren't typed properly yet
         return ChatMessagePTR2e.create<ChatMessagePTR2e<TTypeDataModel>>({
             type,
             speaker,
@@ -329,7 +329,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     static async createFromResults(
         context: CheckRollContext & { notesList?: HTMLUListElement | null },
         results: AttackRollResult[],
-        dataOnly: boolean = false
+        dataOnly = false
     ): Promise<
         | ChatMessagePTR2e<AttackMessageSystem>
         | DeepPartial<ChatMessagePTR2e<AttackMessageSystem>>
@@ -390,6 +390,11 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
                   system,
               });
     }
+}
+
+interface ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> {
+  type: string;
+  system: TSchema;
 }
 
 export default ChatMessagePTR2e;

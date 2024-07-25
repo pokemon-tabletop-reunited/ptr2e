@@ -1,5 +1,5 @@
 /** Returns statistic dialog roll parameters based on held keys */
-type ParamsFromEvent = { skipDialog: boolean; rollMode?: RollMode | "roll" };
+interface ParamsFromEvent { skipDialog: boolean; rollMode?: RollMode | "roll" }
 
 function isRelevantEvent(
     event: Maybe<JQuery.TriggeredEvent | Event>,
@@ -10,7 +10,6 @@ function isRelevantEvent(
 /** Set roll mode and dialog skipping from a user's input */
 function eventToRollParams(
     event: Maybe<JQuery.TriggeredEvent | Event>,
-    _rollType: { type: "check" | "damage" },
 ): ParamsFromEvent {
     //TODO: Implement user setting
     // const key = rollType.type === "check" ? "showCheckDialogs" : "showDamageDialogs";

@@ -24,7 +24,7 @@ class Statistic extends BaseStatistic {
 
     config: RollOptionConfig;
 
-    #check?: BaseStatisticCheck<any, any, this>;
+    #check?: BaseStatisticCheck<unknown, unknown, this>;
 
     constructor(actor: ActorPTR2e, data: StatisticData, config: RollOptionConfig = {}) {
         data.modifiers ??= [];
@@ -58,7 +58,7 @@ class Statistic extends BaseStatistic {
         this.data.dc ??= { domains: [`${this.slug}-dc`] };
     }
 
-    get check(): BaseStatisticCheck<any, any, this> {
+    get check(): BaseStatisticCheck<unknown, unknown, this> {
         return (this.#check ??= new StatisticCheck(this, this.data, this.config));
     }
 

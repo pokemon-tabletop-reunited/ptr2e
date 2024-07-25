@@ -157,7 +157,7 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
     /** @override */
     override _onFirstRender() {
         if(!this.actor) return;
-        //@ts-expect-error
+        //@ts-expect-error - AppV1 Compatibility
         this.actor.apps[this.id] = this;
     }
 
@@ -166,7 +166,7 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
     /** @override */
     override _onClose() {
         if(!this.actor) return;
-        //@ts-expect-error
+        //@ts-expect-error - AppV1 Compatibility
         delete this.actor.apps[this.id];
     }
 }

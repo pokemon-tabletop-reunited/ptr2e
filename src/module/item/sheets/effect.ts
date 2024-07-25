@@ -12,7 +12,7 @@ export default class EffectSheet extends ItemSheetPTR2e<EffectPTR2e["system"]> {
 
     static override readonly overviewTemplate= "systems/ptr2e/templates/items/effect/effect-overview.hbs";
     static override readonly detailsTemplate= "systems/ptr2e/templates/items/effect/effect-details.hbs";
-    override noActions: boolean = true;
+    override noActions = true;
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = 
         fu.mergeObject(super.PARTS, {

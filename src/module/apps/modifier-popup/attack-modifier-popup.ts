@@ -209,8 +209,7 @@ export class AttackModifierPopup extends ModifierPopup {
 
     override _attachPartListeners(
         _partId: string,
-        htmlElement: HTMLElement,
-        _options: foundry.applications.api.HandlebarsRenderOptions
+        htmlElement: HTMLElement
     ): void {
         const getModifier = (collection?: string, slug?: string): Maybe<ModifierPTR2e> => {
             return !collection || !slug
@@ -422,10 +421,7 @@ export class AttackModifierPopup extends ModifierPopup {
     }
 }
 
-export type ModifierPopupResult = {
+export interface ModifierPopupResult {
     modifiers: ModifierPTR2e[];
     rollMode: RollMode;
-};
-
-// @ts-ignore
-globalThis.ModifierPopup = AttackModifierPopup;
+}

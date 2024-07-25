@@ -2,8 +2,7 @@ import { MockActor } from "./mocks/actor.ts";
 import { MockItem } from "./mocks/item.ts";
 import { MockToken } from "./mocks/token.ts";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
+// @ts-expect-error - global augmentation
 global.game = Object.freeze({
     settings: Object.freeze({
         get: (_module: string, settingKey: string) => {
@@ -34,7 +33,7 @@ global.game = Object.freeze({
 (global as any).Application = class {};
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 (global as any).Hooks = class {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unused-vars, @typescript-eslint/no-empty-function
     static on(..._args: any) {}
 };
 

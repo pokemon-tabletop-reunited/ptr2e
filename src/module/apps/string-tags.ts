@@ -1,7 +1,6 @@
 import { ItemPTR2e } from "@item";
-import { FormInputConfig } from "types/foundry/common/data/fields.js";
 
-type BackingData = {
+interface BackingData {
     value: string;
     label: string;
 };
@@ -11,7 +10,7 @@ export class HTMLStringTagsElementPTR2e extends foundry.applications.elements.HT
 > {
     declare _value: Set<BackingData>;
 
-    static override tagName: string = "string-tags-ptr2e";
+    static override tagName = "string-tags-ptr2e";
 
     /**
      * The button element to add a new tag.
@@ -37,8 +36,7 @@ export class HTMLStringTagsElementPTR2e extends foundry.applications.elements.HT
             try {
                 return initial ? JSON.parse(initial) : [];
             } catch (err) {
-                //@ts-expect-error
-                ui.notifications.error(err.message);
+                ui.notifications.error((err as Error).message);
                 return [];
             }
         })();
@@ -125,8 +123,8 @@ export class HTMLStringTagsElementPTR2e extends foundry.applications.elements.HT
         // Validate the proposed code
         try {
             this._validateTag(tag);
-        } catch (err: any) {
-            ui.notifications.error(err.message);
+        } catch (err: unknown) {
+            ui.notifications.error((err as Error).message);
             this.#input.value = "";
             return;
         }
@@ -143,8 +141,8 @@ export class HTMLStringTagsElementPTR2e extends foundry.applications.elements.HT
             const value = await this.toValue(tag, true, true);
             this._value.add(value);
             this.#input.value = "";
-        } catch (err: any) {
-            ui.notifications.error(err.message);
+        } catch (err: unknown) {
+            ui.notifications.error((err as Error).message);
             this.#input.value = "";
             return;
         }
@@ -225,7 +223,7 @@ export class HTMLStringTagsElementPTR2e extends foundry.applications.elements.HT
     }
 
     static override create(
-        config: FormInputConfig<Iterable<BackingData>>
+        config: foundry.data.fields.FormInputConfig<Iterable<BackingData>>
     ): HTMLStringTagsElementPTR2e {
         const tags = document.createElement(this.tagName);
         tags.setAttribute("name", config.name);

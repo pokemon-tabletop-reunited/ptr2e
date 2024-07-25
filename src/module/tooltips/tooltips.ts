@@ -34,7 +34,7 @@ export default class TooltipsPTR2e {
      * @param mutations - The mutations that occurred
      * @param _observer - The observer that triggered the mutations
      */
-    _onMutation(mutations: MutationRecord[], _observer: MutationObserver): any {
+    _onMutation(mutations: MutationRecord[]) {
         for (const { type, attributeName, oldValue } of mutations) {
             if (type === "attributes" && attributeName === "class") {
                 const diff = new Set(this.tooltip.classList).difference(
@@ -554,7 +554,7 @@ export default class TooltipsPTR2e {
         if (!entity) return false;
 
         switch (entity.type) {
-            case "move":
+            case "move": {
                 const move = entity as MovePTR2e;
                 const attack = move.system.attack;
                 if (!attack) return false;
@@ -562,6 +562,7 @@ export default class TooltipsPTR2e {
                 if (game.tooltip.element) game.tooltip.element.dataset.tooltipDirection ||= "LEFT";
 
                 return await this.#createAttackTooltip(attack);
+            }
             case "ability":
                 if (game.tooltip.element) game.tooltip.element.dataset.tooltipDirection ||= "LEFT";
                 return await this.#createItemTooltip(entity, "ability");
@@ -601,6 +602,7 @@ export default class TooltipsPTR2e {
         autoLock = true,
     }: {
         path: string;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         data: any;
         direction?: TooltipDirections;
         autoLock?: boolean;
@@ -694,7 +696,7 @@ export default class TooltipsPTR2e {
         // Assign styles
         for (const k of ["top", "right", "bottom", "left"]) {
             const v = position[k as keyof typeof position];
-            // @ts-ignore
+            // @ts-expect-error - This is a valid assignment
             style[k] = v ? `${v}px` : null;
         }
 

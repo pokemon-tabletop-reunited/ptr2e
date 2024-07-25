@@ -25,7 +25,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
         "systems/ptr2e/templates/items/species/species-overview.hbs";
     static override readonly detailsTemplate =
         "systems/ptr2e/templates/items/species/species-details.hbs";
-    override noActions: boolean = true;
+    override noActions = true;
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = R.omit(
         fu.mergeObject(

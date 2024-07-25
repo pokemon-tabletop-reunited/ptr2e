@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
+
 class Trait {
     static isValid(value: unknown): value is Trait {
         if(typeof value === 'string') {
