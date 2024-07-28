@@ -41,7 +41,6 @@ export class Migration102PPUpdate extends MigrationBase {
 
         primaryAction.cost.powerPoints = entryPrimaryAction.cost.powerPoints;
         primaryAction.traits = entryPrimaryAction.traits;
-        //@ts-expect-error - Type resolution fails here, but this is the correct assignment
         source.system.grade = entry.system.grade;
     }
 }

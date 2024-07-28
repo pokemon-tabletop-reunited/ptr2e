@@ -3,12 +3,14 @@ import { htmlQuery } from "@utils";
 
 class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTracker<TEncounter> {
 
+    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     override get template() {
         return 'systems/ptr2e/templates/sidebar/combat-tracker.hbs';
     }
 
     override async getData(options: CombatTrackerOptions): Promise<CombatTrackerData> {
-        const data = await super.getData(options) as CombatTrackerData & { [key: string]: any };
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const data = await super.getData(options) as CombatTrackerData & Record<string, any>;
         data.turns = data.turns.map((turn) => {
             const combatant = this.viewed?.combatants.get(turn.id);
             if(!combatant) return turn;

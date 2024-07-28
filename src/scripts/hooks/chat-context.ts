@@ -3,7 +3,7 @@ import { PTRHook } from "./data.ts";
 
 export const ChatContext: PTRHook = {
     listen: () => {
-        //@ts-expect-error
+        //@ts-expect-error - This is valid typing
         Hooks.on("getChatLogEntryContext", (chat: ChatLog, menuItems: ContextMenuEntry[]): void => {
             const options: ContextMenuEntry[] = [
                 {

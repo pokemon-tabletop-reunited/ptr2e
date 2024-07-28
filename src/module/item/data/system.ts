@@ -56,7 +56,7 @@ interface ItemGrantSource {
 
 type ItemGrantDeleteAction = "cascade" | "detach" | "restrict";
 
-type ItemSystemSource = {
+interface ItemSystemSource {
     /**
      * A slug for the item, derived from its name.
      * @defaultValue `slugify(this.name)`
@@ -100,7 +100,7 @@ type ItemSystemSource = {
     container?: DocumentUUID | null;
 
     _migration?: MigrationRecord;
-};
+}
 
 export type {
     BaseItemSourcePTR2e,

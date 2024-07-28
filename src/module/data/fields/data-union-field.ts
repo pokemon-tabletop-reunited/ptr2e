@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { DataModelValidationFailure } from "types/foundry/common/data/validation-failure.js";
 import { StrictArrayField } from "./strict-primitive-fields.ts";
 

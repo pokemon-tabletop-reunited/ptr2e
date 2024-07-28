@@ -15,9 +15,7 @@ class RoundCombatantSystem extends CombatantSystemPTR2e {
     /**
      * The Round always has a base AV of 100
      */
-    get baseAV() {
-        return 100;
-    }
+    readonly baseAV = 100;
 
     override _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
         if (changed.defeated) {
@@ -26,7 +24,7 @@ class RoundCombatantSystem extends CombatantSystemPTR2e {
         return super._preUpdate(changed, options, user);
     }
 
-    override _preDelete(_options: DocumentModificationContext<this["parent"]["parent"]>, _user: User): Promise<boolean | void> {
+    override _preDelete(): Promise<boolean | void> {
         return Promise.resolve(false);
     }
 }

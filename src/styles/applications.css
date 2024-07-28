@@ -584,6 +584,7 @@ body .application.sheet .form-group {
   border-radius: 8px;
   display: grid;
   grid-template-columns: 30px auto 30px;
+  overflow: hidden;
   border: 1px solid var(--color-light-6);
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action .action-controls {
@@ -594,6 +595,8 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action .action-name {
   text-align: center;
   place-self: center;
+  overflow: hidden;
+  text-wrap: pretty;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action.attack {
   border: unset;

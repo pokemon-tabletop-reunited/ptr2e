@@ -29,7 +29,7 @@ class LaxSchemaField<TDataSchema extends foundry.data.fields.DataSchema> extends
             const valueKeys = new Set(Object.keys(value));
             const missingKeys = new Set([...valueKeys].filter(key => !dataKeys.has(key)));
             for(const key of missingKeys) {
-                // @ts-ignore
+                // @ts-expect-error - This is a valid check
                 data[key] = value[key];
             }
         }

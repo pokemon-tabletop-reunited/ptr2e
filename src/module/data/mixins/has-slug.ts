@@ -8,7 +8,7 @@ import { sluggify } from '@utils';
  */
 export default function HasSlug<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
     class TemplateClass extends baseClass {
-        static override defineSchema(): foundry.data.fields.DataSchema {
+        static override defineSchema(): SlugSchema {
             return {
                 ...super.defineSchema(),
 
@@ -23,7 +23,7 @@ export default function HasSlug<BaseClass extends TemplateConstructor>(baseClass
         }
     }
 
-    interface TemplateClass {
+    interface TemplateClass extends ModelPropsFromSchema<SlugSchema> {
         /**
          * A slug for the item, derived from its name.
          * @defaultValue `slugify(this.name)`
@@ -39,10 +39,12 @@ export default function HasSlug<BaseClass extends TemplateConstructor>(baseClass
          */
         slug: string;
 
-        _source: InstanceType<typeof baseClass>['_source'] & {
-            slug: string;
-        };
+        _source: SourceFromSchema<SlugSchema>;
     }
 
     return TemplateClass;
+}
+
+export interface SlugSchema extends foundry.data.fields.DataSchema {
+    slug: SlugField<string, string, true, false, false>;
 }

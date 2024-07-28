@@ -598,12 +598,12 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                     const amount = isCtrl ? 10 : isShift ? 5 : 1;
                     switch (action) {
                         case "increase-quantity": {
-                            item.update({ "system.quantity": item.system.quantity + amount });
+                            item.update({ "system.quantity": item.system.quantity as number + amount });
                             break;
                         }
                         case "decrease-quantity": {
                             item.update({
-                                "system.quantity": Math.max(0, item.system.quantity - amount),
+                                "system.quantity": Math.max(0, item.system.quantity as number - amount),
                             });
                             break;
                         }
@@ -736,7 +736,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         }
 
         if (!data.action?.slug) return super._onDrop(event);
-        //@ts-expect-error
+        //@ts-expect-error - This is a custom method
         this._onDropAction(event, data);
         return;
     }

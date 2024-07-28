@@ -37,6 +37,8 @@ const natureToStatArray = {
     composed: ["hp", "hp"],
 };
 
+type Nature = keyof typeof natureToStatArray;
+
 const natures = Object.entries(natureToStatArray).reduce((acc, [nature, stats]) => {
     acc[nature] = `${nature.capitalize()} (+${stats[0]} -${stats[1]})`;
     return acc;
@@ -44,5 +46,6 @@ const natures = Object.entries(natureToStatArray).reduce((acc, [nature, stats]) 
 
 export default natureToStatArray;
 export {
-    natures
+    natures,
+    type Nature
 }

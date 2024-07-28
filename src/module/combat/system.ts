@@ -25,9 +25,9 @@ interface CombatSystem extends foundry.abstract.TypeDataModel, ModelPropsFromSch
     _source: SourceFromSchema<CombatSystemSchema>;
 }
 
-type CombatSystemSchema = {
+interface CombatSystemSchema extends foundry.data.fields.DataSchema {
     turn: foundry.data.fields.NumberField<number, number, true, false, true>;
     participants: foundry.data.fields.SetField<foundry.data.fields.DocumentUUIDField<string>, string[], Set<string>, true, false, true>;
-};
+}
 
 export default CombatSystem;

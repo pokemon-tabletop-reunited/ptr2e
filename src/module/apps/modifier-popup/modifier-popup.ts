@@ -245,9 +245,6 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
     }
 }
 
-export type ModifierPopupResult = {
+export interface ModifierPopupResult {
     rollMode: RollMode;
-};
-
-// @ts-ignore
-globalThis.ModifierPopup = ModifierPopup;
+}

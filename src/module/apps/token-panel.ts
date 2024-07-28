@@ -4,7 +4,6 @@ import { AttackPTR2e } from "@data";
 import { Tab } from "@item/sheets/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { htmlQuery, htmlQueryAll } from "@utils";
-import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 
 export default class TokenPanel extends foundry.applications.api.HandlebarsApplicationMixin(
     foundry.applications.api.ApplicationV2
@@ -158,7 +157,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
 
     override async _prepareContext(
         options?: foundry.applications.api.HandlebarsRenderOptions | undefined
-    ): Promise<Object> {
+    ) {
         const context = await super._prepareContext(options);
         if (!this.token) return context;
 
@@ -192,8 +191,7 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
 
     override _attachPartListeners(
         partId: string,
-        htmlElement: HTMLElement,
-        _options: HandlebarsRenderOptions
+        htmlElement: HTMLElement
     ): void {
         function registerActorEvents(element: HTMLElement) {
             let _clickActorTimeout: number | null = null;
@@ -331,12 +329,12 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
 
     updateAppListeners(token: TokenPTR2e | null) {
         if(this.token?.actor) {
-            //@ts-expect-error
+            //@ts-expect-error - AppV1 Compatibility
             delete this.token.actor.apps[this.id];
         }
 
         if(!token?.actor) return;
-        //@ts-expect-error
+        //@ts-expect-error - AppV1 Compatibility
         token.actor.apps[this.id] = this;
     }
 }

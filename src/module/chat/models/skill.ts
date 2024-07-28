@@ -18,14 +18,14 @@ interface SkillMessageSystem
     } | null;
 }
 
-type SkillMessageSchema = {
+interface SkillMessageSchema extends foundry.data.fields.DataSchema {
     roll: foundry.data.fields.JSONField<Rolled<CheckRoll>, true, false, false>;
     origin: foundry.data.fields.JSONField<ActorPTR2e["_source"], true, false, false>;
-    slug: SlugField<true, false, false>;
+    slug: SlugField<string, string, true, false, false>;
     luckRoll: foundry.data.fields.JSONField<Rolled<CheckRoll>, true, true, false>;
     appliedLuck: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
     rerolled: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
-};
+}
 
 abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
     declare parent: ChatMessagePTR2e<SkillMessageSystem>;
@@ -52,8 +52,8 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
      * Validate that Rolls belonging to the ChatMessage document are valid
      * @param {string} rollJSON     The serialized Roll data
      */
-    static #validateRoll(rollJSON: any) {
-        const roll = JSON.parse(rollJSON);
+    static #validateRoll(rollJSON: unknown) {
+        const roll = JSON.parse(rollJSON as string);
         if (!roll.evaluated)
             throw new Error(`Roll objects added to ChatMessage documents must be evaluated`);
     }
@@ -64,8 +64,8 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
         let roll;
         try {
             roll = Roll.fromJSON(this._source.roll) as Rolled<CheckRoll>;
-        } catch (error: any) {
-            Hooks.onError("SkillMessageSystem#roll", error, { log: "error", data: this._source });
+        } catch (error) {
+            Hooks.onError("SkillMessageSystem#roll", error as Error, { log: "error", data: this._source });
         }
 
         let luckRoll;
@@ -73,8 +73,8 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
             if (this._source.luckRoll)
                 luckRoll = Roll.fromJSON(this._source.luckRoll) as Rolled<CheckRoll>;
             else luckRoll = null;
-        } catch (error: any) {
-            Hooks.onError("SkillMessageSystem#luckRoll", error, {
+        } catch (error) {
+            Hooks.onError("SkillMessageSystem#luckRoll", error as Error, {
                 log: "error",
                 data: this._source,
             });
@@ -110,7 +110,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
         };
     }
 
-    async getHTMLContent(_content: string) {
+    async getHTMLContent() {
         const context: this["context"] & Record<string, unknown> = this.context ?? {};
         context.degreeOfSuccess = context.roll
             ? context.roll.total > 0
@@ -122,7 +122,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
             context.degreeOfSuccess *= -1;
         }
 
-        context.rollHTML = await (async (isPrivate: boolean = false) => {
+        context.rollHTML = await (async (isPrivate = false) => {
             if (!context.roll) return "";
             const innerRollHTML = await context.roll.render({ isPrivate });
             const luckRollHTML = context.luckRoll

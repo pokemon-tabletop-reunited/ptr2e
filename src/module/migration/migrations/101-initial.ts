@@ -1,6 +1,7 @@
 import { ItemPTR2e } from "@item";
 import { MigrationBase } from "../base.ts"
 import { sluggify } from "@utils";
+import { ActionPTR2e } from "@data";
 
 export class Migration101Initial extends MigrationBase {
     static override version = 0.101;
@@ -16,7 +17,7 @@ export class Migration101Initial extends MigrationBase {
 
         if(source.system.description) {
             const slug = source.system.slug || sluggify(source.name);
-            const primaryAction = source.system.actions.find(action => action.slug === slug) ?? source.system.actions.find(action => action.type === "attack");
+            const primaryAction = (source.system.actions as ActionPTR2e[]).find(action => action.slug === slug) ?? (source.system.actions as ActionPTR2e[]).find(action => action.type === "attack");
             if(!primaryAction) {
                 console.warn(`Item ${source.name} is missing a primary action.`);
                 return;

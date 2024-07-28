@@ -9,19 +9,15 @@ import { TemplateConstructor } from './data-template.ts';
  */
 export default function HasTraits<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
   abstract class TemplateClass extends baseClass {
-    declare _source: InstanceType<typeof baseClass>['_source'] & {
-      //TODO: Update this to Trait String
-      traits: Set<string>;
-    }
-
-    static override defineSchema(): foundry.data.fields.DataSchema {
+    static override defineSchema(): TraitsSchema {
       const fields = foundry.data.fields;
 
       return {
         ...super.defineSchema(),
 
-        //TODO: Add validation to Traits field
+        //@ts-expect-error - We are only using the SetField for data storage, but are initializing the property as a Collection
         traits: new fields.SetField(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.traits.label", hint: "PTR2E.FIELDS.traits.hint" })
+        // traits: new CollectionField(new SlugField(), "slug", { required: true, initial: [], label: "PTR2E.FIELDS.traits.label", hint: "PTR2E.FIELDS.traits.hint" })
       };
     }
 
@@ -53,20 +49,29 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
     }
   }
 
-  interface TemplateClass {
-    /**
-     * A record of traits that the item has.
-     * @remarks
-     * This is a record of traits that the item has, keyed by the trait's name.
-     * @example
-     * ```typescript
-     * const item = new ItemPTR2e({ name: 'Flashlight', "system.traits": ["light"] });
-     * console.log(item.system.traits); // { "light": TraitPTR2e }
-     * ```
-     */
+  interface TemplateClass extends ModelPropsFromSchema<TraitsSchema> {
+    // /**
+    //  * A record of traits that the item has.
+    //  * @remarks
+    //  * This is a record of traits that the item has, keyed by the trait's name.
+    //  * @example
+    //  * ```typescript
+    //  * const item = new ItemPTR2e({ name: 'Flashlight', "system.traits": ["light"] });
+    //  * console.log(item.system.traits); // { "light": TraitPTR2e }
+    //  * ```
+    //  */
     traits: Collection<Trait>
     _traits: Trait[];
-  }
+
+    _source: SourceFromSchema<TraitsSchema>
+  }  
 
   return TemplateClass;
 }
+
+export interface TraitsSchema extends foundry.data.fields.DataSchema {
+  //@ts-expect-error - We are only using the SetField for data storage, but are initializing the property as a Collection
+  traits: foundry.data.fields.SetField<TraitsField, foundry.data.fields.SourcePropFromDataField<TraitsField>[], Collection<Trait>, true, false, true>;
+}
+
+type TraitsField = SlugField<string, string, true, false, true>;

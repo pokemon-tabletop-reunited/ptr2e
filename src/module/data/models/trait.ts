@@ -1,3 +1,4 @@
+
 class Trait {
     static isValid(value: unknown): value is Trait {
         if(typeof value === 'string') {

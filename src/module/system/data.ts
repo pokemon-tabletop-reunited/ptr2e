@@ -10,14 +10,14 @@ import { RollNote } from "./notes.ts";
 import { AttackCheck } from "./statistics/attack.ts";
 
 interface CheckContextParams<
-    TStatistic extends BaseStatisticCheck<any, any> = StatisticCheck,
+    TStatistic extends BaseStatisticCheck<unknown, unknown> = StatisticCheck,
     TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null = ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null,
 > extends RollContextParams<TStatistic, TItem> {
 
 }
 
 interface RollContextParams<
-    TStatistic extends BaseStatisticCheck<any, any> | null = StatisticCheck  | null,
+    TStatistic extends BaseStatisticCheck<unknown, unknown> | null = StatisticCheck  | null,
     TItem extends ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null = ItemPTR2e<ItemSystemsWithActions, ActorPTR2e> | null,
 > {
     /** The statistic used for the roll */
@@ -44,7 +44,7 @@ interface RollContextParams<
 
 interface CheckContext<
     TActor extends ActorPTR2e = ActorPTR2e,
-    TStatistic extends BaseStatisticCheck<any, any> = StatisticCheck,
+    TStatistic extends BaseStatisticCheck<unknown, unknown> = StatisticCheck,
     TItem extends ItemPTR2e<ItemSystemPTR, ActorPTR2e> | null = ItemPTR2e<
         ItemSystemPTR,
         ActorPTR2e
@@ -60,7 +60,7 @@ interface CheckContext<
 /** Context for the attack or damage roll of a strike */
 interface RollContext<
     TActor extends ActorPTR2e,
-    TStatistic extends BaseStatisticCheck<any, any> | null = StatisticCheck | null,
+    TStatistic extends BaseStatisticCheck<unknown, unknown> | null = StatisticCheck | null,
     TItem extends ItemPTR2e<ItemSystemPTR, ActorPTR2e> | null = ItemPTR2e<
         ItemSystemPTR,
         ActorPTR2e
@@ -75,7 +75,7 @@ interface RollContext<
 
 interface AttackSelf<
     TActor extends ActorPTR2e,
-    TStatistic extends BaseStatisticCheck<any, any> | null = AttackCheck | null,
+    TStatistic extends BaseStatisticCheck<unknown, unknown> | null = AttackCheck | null,
     TItem extends ItemPTR2e<ItemSystemPTR, ActorPTR2e> | null = ItemPTR2e<
         ItemSystemPTR,
         ActorPTR2e

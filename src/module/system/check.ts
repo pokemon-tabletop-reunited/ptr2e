@@ -324,10 +324,10 @@ class CheckPTR2e {
                 damage: DegreeOfSuccess | null;
             } = {
                 accuracy: rolls.accuracy
-                    ? DegreeOfSuccess.create(rolls.accuracy, targetContext)
+                    ? DegreeOfSuccess.create(rolls.accuracy)
                     : null,
-                crit: rolls.crit ? DegreeOfSuccess.create(rolls.crit, targetContext) : null,
-                damage: rolls.damage ? DegreeOfSuccess.create(rolls.damage, targetContext) : null,
+                crit: rolls.crit ? DegreeOfSuccess.create(rolls.crit) : null,
+                damage: rolls.damage ? DegreeOfSuccess.create(rolls.damage) : null,
             };
 
             const notes =

@@ -25,7 +25,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
         "systems/ptr2e/templates/items/species/species-overview.hbs";
     static override readonly detailsTemplate =
         "systems/ptr2e/templates/items/species/species-details.hbs";
-    override noActions: boolean = true;
+    override noActions = true;
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = R.omit(
         fu.mergeObject(
@@ -134,7 +134,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
                                     document.system.movement[
                                         subField as keyof typeof document.system.movement
                                     ]
-                                );
+                                ) as { type: string; value: number }[];
                                 movementArr.push({ type: "", value: 0 });
                                 document.update({
                                     system: {
@@ -154,7 +154,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
                                     document.system.movement[
                                         subField as keyof typeof document.system.movement
                                     ]
-                                );
+                                ) as { type: string; value: number }[];
                                 movementArr.splice(parseInt(index ?? ""), 1);
                                 document.update({
                                     system: {
@@ -285,7 +285,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
             isSystem(data.system)
         ) {
             // Traits are stored as an array of objects, but we only need the values
-            // @ts-expect-error
+            // @ts-expect-error - traits is an array of objects, but we only need the values
             data.system.traits = data.system.traits.map((trait: { value: string }) =>
                 sluggify(trait.value)
             );
@@ -341,7 +341,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
         if (!field) return;
 
         const doc = this.document.toObject();
-        const evolutions: EvolutionData = doc.system.evolutions;
+        const evolutions: EvolutionData = doc.system.evolutions!;
         const methods = fu.getProperty<EvolutionData["methods"]>(doc, field) ?? [];
         methods.push({ type: "level", level: 20, operand: "and" });
         this.document.update({ "system.evolutions": evolutions });
@@ -353,7 +353,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
         if (!field || !index) return;
 
         const doc = this.document.toObject();
-        const evolutions: EvolutionData = doc.system.evolutions;
+        const evolutions: EvolutionData = doc.system.evolutions!;
         const methods = fu.getProperty<EvolutionData["methods"]>(doc, field) ?? [];
         methods.splice(parseInt(index), 1);
         this.document.update({ "system.evolutions": evolutions });
@@ -379,12 +379,22 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
                 name: item.name,
                 uuid: item.uuid,
                 methods: [],
-                evolutions: doc.system.evolutions.evolutions,
+                evolutions: doc.system.evolutions?.evolutions ?? [],
             };
             await this.document.update({ "system.evolutions": newEvo });
             return;
         }
-        const evolutions: EvolutionData["_source"][] = fu.getProperty(doc, path);
+        const evolutions: EvolutionData["_source"][] = fu.getProperty(doc, path) ?? (() => {
+            if(doc.system.evolutions === null) {
+                doc.system.evolutions = {
+                    name: doc.name,
+                    uuid: item.uuid,
+                    methods: [],
+                    evolutions: [],
+                } as unknown as EvolutionData;
+            }
+            return doc.system.evolutions.evolutions;
+        })();
         evolutions.push({
             name: item.name,
             uuid: item.uuid,
@@ -414,7 +424,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
             const i = levelUp.findIndex((move) => move.name === slug);
             const move = levelUp[i];
             if (!move) return;
-            tutor.push(R.omit(move, ["level"]));
+            tutor.push(R.omit(move, ["level"]) as { name: string; uuid: string, gen: string | null});
             levelUp.splice(i, 1);
         }
 
@@ -470,8 +480,10 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
         const doc = this.document.toObject();
         const moves = doc.system.moves;
         if (target.classList.contains("tutor")) {
+          //@ts-expect-error - Gen is not required.
             moves.tutor.push({ name: item.slug, uuid: item.uuid });
         } else {
+          //@ts-expect-error - Gen is not required.
             moves.levelUp.push({ name: item.slug, uuid: item.uuid, level: 0 });
         }
 

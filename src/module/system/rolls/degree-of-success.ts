@@ -1,4 +1,3 @@
-import { CheckContext } from "@system/data.ts";
 import { CheckRoll } from "./check-roll.ts";
 
 class DegreeOfSuccess {
@@ -39,8 +38,7 @@ class DegreeOfSuccess {
     }
 
     static create(
-        roll: Rolled<CheckRoll>,
-        _context?: CheckContext
+        roll: Rolled<CheckRoll>
     ): DegreeOfSuccess | null {
         // TODO: Implement
         const dos = new DegreeOfSuccess(roll);
@@ -49,7 +47,7 @@ class DegreeOfSuccess {
     }
 }
 
-type RollBrief = { dieValue: number; modifier: number };
+interface RollBrief { dieValue: number; modifier: number }
 
 interface CheckDC {
     slug?: string | null;

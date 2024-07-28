@@ -203,7 +203,7 @@ export class ActionEditor<
                 sluggify(trait.value)
             );
         }
-        await this.action.update(data);
+        await this.action.update(data as Record<string, JSONValue>);
    }
 
     override _attachPartListeners(
@@ -335,11 +335,11 @@ export class ActionEditor<
     /** @override */
     override _onFirstRender() {
         if(!this.actor) {
-            //@ts-expect-error
+            //@ts-expect-error - AppV2 Compatability
             this.item.apps[this.id] = this;
             return;
         }
-        //@ts-expect-error
+        //@ts-expect-error - AppV2 Compatability
         this.actor.apps[this.id] = this;
     }
 
@@ -348,11 +348,11 @@ export class ActionEditor<
     /** @override */
     override _onClose() {
         if(!this.actor) {
-            //@ts-expect-error
+            //@ts-expect-error - AppV2 Compatability
             delete this.item.apps[this.id];
             return;
         }
-        //@ts-expect-error
+        //@ts-expect-error - AppV2 Compatability
         delete this.actor.apps[this.id];
     }
 }

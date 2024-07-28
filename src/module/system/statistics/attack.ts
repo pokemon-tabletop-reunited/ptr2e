@@ -162,12 +162,13 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     get attack() {
         return this.parent.attack;
     }
+    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     get itemConsumesAmmo() {
         return false;
     }
 
     async roll(args: AttackRollParameters = {}): Promise<AttackRollResult['rolls'][] | null> {
-        const options: Set<string> = new Set(args.extraRollOptions ?? []);
+        const options = new Set<string>(args.extraRollOptions ?? []);
         //const consumeAmmo = args.consumeAmmo ?? this.itemConsumesAmmo;
         //TODO: If ammo is consumed, check if there is ammo to consume
 
@@ -217,6 +218,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
             currContext.notes = extractNotes(currContext.self.actor.synthetics.rollNotes, this.domains)
         }
         // TODO: Change 'false' here to game setting
+        // eslint-disable-next-line no-constant-condition
         if(!anyValidTargets && false) {
             ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.NoValidTargets"));
             return null;

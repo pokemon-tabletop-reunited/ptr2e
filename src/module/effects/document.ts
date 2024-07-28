@@ -113,7 +113,7 @@ class ActiveEffectPTR2e<
   override _requiresDurationUpdate() {
     const { _combatTime, type } = this.duration;
     if (type === "turns" && game.combat) {
-      //@ts-ignore
+      //@ts-expect-error - This is a private property
       const ct = this.parent?.combatant?.system.activations; //(game.combat as CombatPTR2e).system.turn;
       return ct !== _combatTime && !!(this.target as ActorPTR2e)?.inCombat;
     }
@@ -179,7 +179,7 @@ class ActiveEffectPTR2e<
     };
   }
 
-  toChat(): Promise<any> {
+  toChat(): Promise<unknown> {
     return ChatMessage.create({
       content: `<span>@Embed[${this.uuid} caption=false classes=no-tooltip]</span>`,
       speaker: ChatMessage.getSpeaker({
@@ -284,7 +284,7 @@ class ActiveEffectPTR2e<
       );
     };
 
-    let expanded = fu.expandObject(changed);
+    const expanded = fu.expandObject(changed);
     if (isValidChargesArray(expanded)) {
       parseChangePath(expanded as { changes: unknown[]; system?: unknown });
     } else if (isValidIndexPathObject(expanded)) {
@@ -368,7 +368,7 @@ class ActiveEffectPTR2e<
       }
     }
 
-    await ItemPTR2e.createDocuments(
+    await ItemPTR2e.createDocuments( //@ts-expect-error - this should not error
       outputItemSources,
       context as DocumentModificationContext<ActorPTR2e | null>
     );
@@ -378,6 +378,7 @@ class ActiveEffectPTR2e<
 }
 
 interface ActiveEffectPTR2e<
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null,
   TSystem extends ActiveEffectSystem = ActiveEffectSystem,
 > {

@@ -39,19 +39,16 @@ class SpeciesDropSheetV2 extends foundry.applications.api.HandlebarsApplicationM
     }
 
     static async #onSubmit(
-        this: SpeciesDropSheetV2,
-        _event: SubmitEvent | Event,
-        _form: HTMLFormElement,
-        _formData: FormDataExtended
+        this: SpeciesDropSheetV2
     ) {
         this.promise(this.species);
     }
 
-    promise: (value: unknown) => unknown;
+    promise: (value: ItemPTR2e<SpeciesSystemModel> | null) => void;
     species: ItemPTR2e<SpeciesSystemModel> | null;
 
     constructor(
-        promise: (value: unknown) => unknown,
+        promise: (value: ItemPTR2e<SpeciesSystemModel> | null) => void,
         options?: ApplicationConfigurationExpanded & { species: ItemPTR2e<SpeciesSystemModel> }
     ) {
         super(options);
@@ -66,7 +63,7 @@ class SpeciesDropSheetV2 extends foundry.applications.api.HandlebarsApplicationM
             : "Creating a Pokemon...";
     }
 
-    override async _prepareContext(): Promise<Object> {
+    override async _prepareContext(): Promise<object> {
         return {
             ...(await super._prepareContext()),
             species: this.species,

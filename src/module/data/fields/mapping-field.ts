@@ -1,5 +1,6 @@
 type MappingFieldInitialValueBuilder = (
     key?: string,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     initial?: any,
     existing?: Record<string, unknown>
 ) => object;
@@ -150,7 +151,7 @@ export class MappingField<
 
     /* -------------------------------------------- */
 
-    //@ts-expect-error
+    //@ts-expect-error - This is a valid check
     override _getField(path: string[]) {
         if (path.length === 0) return this;
         else if (path.length === 1) return this.model;

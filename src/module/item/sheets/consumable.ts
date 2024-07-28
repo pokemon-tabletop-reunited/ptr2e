@@ -12,7 +12,7 @@ export default class ConsumableSheet extends ItemSheetPTR2e<ConsumablePTR2e["sys
 
     static override readonly overviewTemplate= "systems/ptr2e/templates/items/consumable/consumable-overview.hbs";
     static override readonly detailsTemplate= "systems/ptr2e/templates/items/consumable/consumable-details.hbs";
-    override noActions: boolean = true;
+    override noActions = true;
 
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = 
         fu.mergeObject(super.PARTS, {

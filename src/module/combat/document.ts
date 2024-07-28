@@ -107,7 +107,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
             const updateData = this._prepareTurnUpdateData();
 
             Hooks.callAll("combatTurn", this, updateData, {
-                // @ts-ignore
+                // @ts-expect-error - This is a valid check
                 advanceTime: CONFIG.time.turnTime,
                 direction: 1,
             });
@@ -122,8 +122,8 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
             delete updateData.combatants;
             return this.update(updateData) as Promise<this>;
             // }
-        } catch (error: any) {
-            ui.notifications.error(error.message);
+        } catch (error: unknown) {
+            ui.notifications.error((error as Error).message);
         }
         return this;
     }
@@ -155,13 +155,11 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
 
         const updateData: Record<string, unknown> = { turn: 0 };
         if (this.turn === null) updateData.turn = 0;
-        const combatantUpdateData: {
-            [key: string]: {
+        const combatantUpdateData: Record<string, {
                 _id: string;
                 initiative: number;
                 system?: Partial<CombatantSystemPTR2e["_source"]>;
-            };
-        } = {};
+            }> = {};
 
         // Reduce everyone's initiative by the current combatant's initiative
         let initiativeReduction = nextCombatant.initiative ?? 0;
@@ -234,7 +232,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     /**
      * Exact copy of the original method, but with the call to this.update removed, as turns shouldn't advance.
      */
-    protected override async _manageTurnEvents(_adjustedTurn?: number | undefined): Promise<void> {
+    protected override async _manageTurnEvents(): Promise<void> {
         if (!game.users.activeGM?.isSelf) return;
 
         // Adjust the turn order before proceeding. Used for embedded document workflows

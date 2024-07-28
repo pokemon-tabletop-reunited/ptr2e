@@ -5,37 +5,6 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
     declare parent: ChatMessagePTR2e<DamageAppliedMessageSystem>;
 
     /**
-     * The target to which the damage was applied
-    */
-    abstract target: ActorPTR2e | null;
-    /**
-     * The applied damage
-     */
-    abstract damageApplied: number;
-    /**
-     * Whether the damage was applied to shield instead of health
-     */
-    abstract shieldApplied: boolean;
-    /**
-     * Whether the damage was undone
-     */
-    abstract undone: boolean;
-
-    /**
-     * Notes about the damage
-     */
-    abstract notes: string[];
-
-    _notesHTML: string | undefined;
-
-    declare _source: foundry.abstract.TypeDataModel['_source'] & {
-        target: string;
-        damageApplied: number;
-        undone: boolean;
-        notes: string[][];
-    }
-
-    /**
      * Define the schema for the DamageAppliedMessageSystem data model
      */
     static override defineSchema() {
@@ -50,8 +19,9 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
     }
 
     override prepareBaseData(): void {
+      
         this.target = (() => {
-            const actor = fromUuidSync(this._source.target) as ActorPTR2e | null;
+            const actor = fromUuidSync<ActorPTR2e>(this._source.target!);
             return actor;
         })();
 
@@ -72,7 +42,7 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
         this._notesHTML = notesElement.innerHTML;
     }
 
-    async getHTMLContent(_content: string) {
+    async getHTMLContent() {
         return renderTemplate('systems/ptr2e/templates/chat/damage-applied.hbs', this);
     }
 
@@ -87,6 +57,20 @@ abstract class DamageAppliedMessageSystem extends foundry.abstract.TypeDataModel
     activateListeners(html: JQuery<HTMLElement>) {
         html.find(".revert-damage").on('click', this.undoDamage.bind(this));
     }
+}
+
+interface DamageAppliedMessageSystem extends ModelPropsFromSchema<DamageAppliedMessageSchema> {
+  _source: SourceFromSchema<DamageAppliedMessageSchema>;
+
+  _notesHTML: string | undefined;
+}
+
+interface DamageAppliedMessageSchema extends foundry.data.fields.DataSchema {
+  target: foundry.data.fields.DocumentUUIDField<ActorPTR2e, true, true, false>;
+  damageApplied: foundry.data.fields.NumberField<number, number, true, false, false>;
+  shieldApplied: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+  undone: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+  notes: foundry.data.fields.ArrayField<foundry.data.fields.ArrayField<foundry.data.fields.HTMLField>>;
 }
 
 export default DamageAppliedMessageSystem
