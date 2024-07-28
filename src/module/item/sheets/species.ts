@@ -379,12 +379,22 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
                 name: item.name,
                 uuid: item.uuid,
                 methods: [],
-                evolutions: doc.system.evolutions!.evolutions,
+                evolutions: doc.system.evolutions?.evolutions ?? [],
             };
             await this.document.update({ "system.evolutions": newEvo });
             return;
         }
-        const evolutions: EvolutionData["_source"][] = fu.getProperty(doc, path);
+        const evolutions: EvolutionData["_source"][] = fu.getProperty(doc, path) ?? (() => {
+            if(doc.system.evolutions === null) {
+                doc.system.evolutions = {
+                    name: doc.name,
+                    uuid: item.uuid,
+                    methods: [],
+                    evolutions: [],
+                } as unknown as EvolutionData;
+            }
+            return doc.system.evolutions.evolutions;
+        })();
         evolutions.push({
             name: item.name,
             uuid: item.uuid,
