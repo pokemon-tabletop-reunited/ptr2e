@@ -58,7 +58,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
         this.check = check;
         this.context = context;
 
-        if(this.context.type != "luck-check" && !check.modifiers.find(s => s.slug === "challenge-rating")) {
+        if(!["luck-check", "attack-roll", "pokeball-check"].includes(this.context.type!) && !check.modifiers.find(s => s.slug === "challenge-rating")) {
             check.push(new ModifierPTR2e({ label: "Challenge Rating", modifier: 10, slug: "challenge-rating", hidden: true, method: 'flat'}));
         }
 

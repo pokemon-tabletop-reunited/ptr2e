@@ -186,6 +186,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
             traits: args.traits ?? this.item.traits,
         }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>;
 
+        // const extraModifiers = args.modifiers ?? [];
         const contexts: Record<ActorUUID, CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>> = {}
         let anyValidTargets = false;
         for(const target of targets) {
@@ -216,6 +217,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
             }
 
             currContext.notes = extractNotes(currContext.self.actor.synthetics.rollNotes, this.domains)
+
+            // extraModifiers.push(...currContext?.self.modifiers ?? []);
         }
         // TODO: Change 'false' here to game setting
         // eslint-disable-next-line no-constant-condition

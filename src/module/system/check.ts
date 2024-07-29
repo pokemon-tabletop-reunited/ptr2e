@@ -158,6 +158,7 @@ class CheckPTR2e {
             domains: context.domains,
             damaging: context.damaging,
             createMessage: context.createMessage,
+            modifiers: check.modifiers
         };
 
         const message = await (() => {
@@ -490,6 +491,7 @@ class CheckPTR2e {
             notesList?: HTMLUListElement | null;
         } = context;
         messageContext.notesList = notesList;
+        messageContext.modifiers = check.modifiers;
 
         const message: Maybe<ChatMessagePTR2e> = await (() => {
             if (!context.createMessage) return null;

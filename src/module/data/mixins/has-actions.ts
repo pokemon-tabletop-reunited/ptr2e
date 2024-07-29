@@ -55,6 +55,7 @@ export default function HasActions<BaseClass extends TemplateConstructor>(baseCl
     }
 
     private _isValidAbilityParent(parent: AbilityPTR2e) {
+      if(!parent.parent) return true;
       return parent.system.free || parent.system.slot !== null;
     }
   }

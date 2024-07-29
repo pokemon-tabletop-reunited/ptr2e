@@ -6,6 +6,10 @@ import { SlugField } from "@module/data/fields/slug-field.ts";
 import { AttackRoll } from "@system/rolls/attack-roll.ts";
 import { AccuracyCalc, DamageCalc } from "./data.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
+import * as R from "remeda";
+import { PredicateField } from "@system/predication/schema-data-fields.ts";
+import { UserVisibility } from "@scripts/ui/user-visibility.ts";
+import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 
 abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   declare parent: ChatMessagePTR2e<AttackMessageSystem>;
@@ -36,6 +40,31 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             nullable: true,
             validate: AttackMessageSystem.#validateRoll,
           }),
+          context: new fields.SchemaField({
+            check: new fields.SchemaField({
+              breakdown: new fields.StringField({ required: true, blank: true, initial: ""}),
+              slug: new SlugField({ required: true, blank: true, initial: "" }),
+              totalModifier: new fields.NumberField({ required: true, initial: 0 }),
+              totalModifiers: new fields.ObjectField({ required: true, initial: {} }),
+              _modifiers: new fields.ArrayField(new fields.ObjectField(), { required: true, initial: [] }),
+            }),
+            action: new fields.StringField({ required: true, blank: true, initial: "" }),
+            domains: new fields.ArrayField(new SlugField(), { required: true, initial: [] }),
+            notes: new fields.ArrayField(
+              new fields.SchemaField({
+                selector: new fields.StringField({ required: true, blank: true, initial: "" }),
+                title: new fields.StringField({ required: true, blank: true, initial: "" }),
+                text: new fields.StringField({ required: true, blank: true, initial: "" }),
+                predicate: new PredicateField({ required: true, initial: [] }),
+                outcome: new fields.ArrayField(new fields.NumberField(), { required: true, initial: [] }),
+                visibility: new fields.StringField({ required: true, initial: "all", choices: ["all", "gm", "owner", "none"] }),
+              }),
+              { required: true, initial: [] }
+            ),
+            title: new fields.StringField({ required: true, blank: true, initial: "" }),
+            type: new fields.StringField({ required: true, blank: true, initial: "" }),
+            options: new fields.ArrayField(new fields.StringField(), { required: true, initial: [] }),
+          })
         }),
         {
           required: true,
@@ -318,6 +347,11 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           accuracy: r.rolls.accuracy!.toJSON(),
           crit: r.rolls.crit!.toJSON(),
           damage: r.rolls.damage!.toJSON(),
+          context: {
+            check: r.check,
+            ...R.pick(r.context, ["action", "domains", "notes", "title", "type"]),
+            options: Array.from(r.context.options ?? [])
+          }
         }));
 
         if (event.altKey) {
@@ -329,8 +363,16 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           return;
         }
 
-        //@ts-expect-error - asdfddddd
-        const updateResults = this._source.results.concat(newResults);
+        const map = new Map<ActorUUID, typeof this._source.results>();
+        for (const result of this._source.results) {
+          const json = JSON.parse(result.target);
+          map.set(json.uuid as unknown as ActorUUID, result as unknown as typeof this._source.results);
+        }
+        for (const result of newResults) {
+          map.set(result.target.uuid as unknown as ActorUUID, result as unknown as typeof this._source.results);
+        }
+
+        const updateResults = Array.from(map.values());
 
         this.parent.update({
           system: {
@@ -430,19 +472,73 @@ type ResultSchema = foundry.data.fields.SchemaField<
     accuracy: foundry.data.fields.JSONField<Rolled<AttackRoll>, true, true, false>;
     crit: foundry.data.fields.JSONField<Rolled<AttackRoll>, true, true, false>;
     damage: foundry.data.fields.JSONField<Rolled<AttackRoll>, true, true, false>;
+    context: foundry.data.fields.SchemaField<
+      CheckContextSchema,
+      foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>,
+      foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>,
+      true, false, true>;
   },
   {
     target: string;
     accuracy: string | null;
     crit: string | null;
     damage: string | null;
+    context: foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>;
   },
   {
     target: ActorPTR2e;
     accuracy: Rolled<AttackRoll> | null;
     crit: Rolled<AttackRoll> | null;
     damage: Rolled<AttackRoll> | null;
+    context: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>;
   }
 >;
+
+interface CheckContextSchema extends foundry.data.fields.DataSchema {
+  check: foundry.data.fields.SchemaField<
+    CheckContextCheckSchema,
+    foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<CheckContextCheckSchema>>,
+    foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<CheckContextCheckSchema>>,
+    true,
+    false,
+    false
+  >;
+  action: foundry.data.fields.StringField<string, string, true, false, true>;
+  domains: foundry.data.fields.ArrayField<SlugField, string[], string[], true, false, true>;
+  notes: foundry.data.fields.ArrayField<
+    CheckContextRollNotesSchemaField, 
+    foundry.data.fields.SourcePropFromDataField<CheckContextRollNotesSchemaField>[],
+    foundry.data.fields.ModelPropFromDataField<CheckContextRollNotesSchemaField>[],
+    true, false, true>;
+  title: foundry.data.fields.StringField<string, string, true, false, true>;
+  type: foundry.data.fields.StringField<string, string, true, false, true>;
+  options: foundry.data.fields.ArrayField<foundry.data.fields.StringField, string[], string[], true, false, true>;
+}
+
+interface CheckContextCheckSchema extends foundry.data.fields.DataSchema {
+  breakdown: foundry.data.fields.StringField<string, string, true, false, true>;
+  slug: SlugField<string, string, true, false, true>;
+  totalModifier: foundry.data.fields.NumberField<number, number, true, false, true>;
+  totalModifiers: foundry.data.fields.ObjectField<object, object, true, false, true>;
+  _modifiers: foundry.data.fields.ArrayField<foundry.data.fields.ObjectField<ModifierPTR2e>, ModifierPTR2e[], ModifierPTR2e[], true, false, true>;
+}
+
+type CheckContextRollNotesSchemaField = foundry.data.fields.SchemaField<
+  CheckContextRollNoteSchema,
+  foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<CheckContextRollNoteSchema>>,
+  foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<CheckContextRollNoteSchema>>,
+  true,
+  false,
+  true
+>;
+
+interface CheckContextRollNoteSchema extends foundry.data.fields.DataSchema {
+  selector: foundry.data.fields.StringField<string, string, true, false, true>;
+  title: foundry.data.fields.StringField<string, string, true, false, true>;
+  text: foundry.data.fields.StringField<string, string, true, false, true>;
+  predicate: PredicateField<true, false, true>;
+  outcome: foundry.data.fields.ArrayField<foundry.data.fields.NumberField, number[], number[], true, false, true>;
+  visibility: foundry.data.fields.StringField<UserVisibility, UserVisibility, true, false, true>;
+}
 
 export default AttackMessageSystem;

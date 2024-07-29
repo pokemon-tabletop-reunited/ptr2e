@@ -6,6 +6,7 @@ import { ActorPTR2e } from "@actor";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CheckType } from "./check-roll.ts";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
+import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 
 interface RollData extends RollOptions {
     rollerId?: string;
@@ -98,6 +99,8 @@ interface CheckRollContext extends BaseRollContext {
     ppCost?: number;
     /** Should PP be consumed */
     consumePP?: boolean;
+    /** Modifier information to be stored on chat message object */
+    modifiers?: ModifierPTR2e[];
 }
 
 export type { AttackRollParams, BaseRollContext, CheckRollContext, DamageRollParams, RollParameters, RollData};

@@ -104,6 +104,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
      * Unimplemented feature; allows for the merging of override changes.
      * If this ends up being a requirement, add a new field to the schema and remove this getter.
      */
+    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     get merge() {
         return false;
     }
@@ -150,6 +151,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
         }
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public apply(_: ActorPTR2e, __?: string[] | Set<string>): unknown {
         throw new Error("The apply method must be implemented by the subclass");
     }
@@ -491,6 +493,7 @@ interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
     onDelete?(actorUpdates: Record<string, unknown>): void;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-namespace
 namespace ChangeModel {
     export interface PreCreateParams<T extends ChangeSource = ChangeSource> {
         /** The source partial of the rule element's parent effect to be created */

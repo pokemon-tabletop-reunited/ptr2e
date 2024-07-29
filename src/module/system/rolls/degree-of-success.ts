@@ -18,7 +18,8 @@ class DegreeOfSuccess {
             this.dieResult =
                 (roll.isDeterministic
                     ? roll.terms.find((t): t is NumericTerm => t instanceof NumericTerm)
-                    : roll.dice.find((d): d is Die => d instanceof Die && d.faces === 20)
+                    // @ts-expect-error - This namespace is not defined in the outdated types, but does exist in foundry v12
+                    : roll.dice.find((d): d is foundry.dice.terms.Die => d instanceof foundry.dice.terms.Die && d.faces === 20)
                 )?.total ?? 1;
             this.rollTotal = roll.total;
         } else {

@@ -215,6 +215,7 @@ class ActorPTR2e<
   override prepareData() {
     if (this.type === "ptu-actor") return super.prepareData();
 
+    // Todo: Add appropriate `self:` options to the rollOptions
     this.rollOptions.addOption("self", `type:${this.type}`);
 
     this.system.type.effectiveness = this._calculateEffectiveness();
@@ -435,7 +436,11 @@ class ActorPTR2e<
   getSelfRollOptions(prefix: "self" | "target" | "origin" = "self"): string[] {
     const { rollOptions } = this;
     return Object.keys(rollOptions.all).flatMap((o) =>
-      o.startsWith("self:") && rollOptions.all[o] ? o.replace(/^self/, prefix) : []
+      o.startsWith("self:") && rollOptions.all[o]
+        ? o.replace(/^self/, prefix)
+        : o.startsWith("trait:") && rollOptions.all[o]
+          ? `${prefix}:${o}`
+          : []
     );
   }
 

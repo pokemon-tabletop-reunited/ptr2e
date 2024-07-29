@@ -8,7 +8,7 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
         super.DEFAULT_OPTIONS,
         {
             tag: "aside",
-            classes: ["sheet known-actions-sheet"],
+            classes: ["sheet", "known-actions-sheet"],
             position: {
                 height: 'auto',
                 width: 230,

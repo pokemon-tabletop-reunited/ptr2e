@@ -286,7 +286,7 @@ class StatisticModifier {
     }
 
     /** Obtain the total modifier, optionally retesting predicates, and finally applying stacking rules. */
-    calculateTotal(rollOptions: Set<string> = new Set()): void {
+    calculateTotal(rollOptions = new Set<string>()): void {
         if (rollOptions.size > 0) {
             for (const modifier of this._modifiers) {
                 modifier.test(rollOptions);
@@ -308,7 +308,7 @@ function adjustModifiers(modifiers: ModifierPTR2e[], rollOptions: Set<string>): 
             continue;
         }
 
-        type ResolvedAdjustment = { value: number; relabel: string | null };
+        interface ResolvedAdjustment { value: number; relabel: string | null }
         const resolvedAdjustment = adjustments.reduce(
             (resolved: ResolvedAdjustment, adjustment) => {
                 const newValue = adjustment.getNewValue?.(resolved.value) ?? resolved.value;
@@ -370,7 +370,7 @@ class AttackCheckModifier extends CheckModifier {
         return this.totalModifiers;
     }
 
-    override calculateTotal(rollOptions: Set<string> = new Set()): void {
+    override calculateTotal(rollOptions = new Set<string>()): void {
         if (rollOptions.size > 0) {
             for (const modifier of this._modifiers) {
                 modifier.test(rollOptions);
@@ -427,8 +427,3 @@ export type {
     DeferredValue,
     DeferredPromise,
 };
-
-//@ts-ignore
-globalThis.ModifierPTR2e = ModifierPTR2e;
-//@ts-ignore
-globalThis.CheckModifier = CheckModifier;

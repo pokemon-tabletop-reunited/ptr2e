@@ -7,6 +7,7 @@ import ChangeModel from "./changes/change.ts";
 import { BasicChangeSystem, ChangeModelTypes } from "@data";
 import { CodeMirror } from "./codemirror.ts";
 import Sortable from "sortablejs";
+import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 
 class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationMixin(
   DocumentSheetV2<ActiveEffectPTR2e>
@@ -24,8 +25,24 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
         closeOnSubmit: false,
         submitOnChange: true,
       },
+      actions: {
+        "open-inspector": async function(this: ActiveEffectConfig, event: Event) {
+          event.preventDefault();
+          const inspector = new DataInspector(this.document);
+          inspector.render(true);
+        },
+      },
       window: {
         resizable: true,
+        controls: [
+          ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
+          {
+            icon: "fas fa-atom",
+            label: "PTR2E.ActorSheet.Inspector",
+            action: "open-inspector",
+            visible: true
+          }
+        ],
       },
     },
     { inplace: false }
@@ -296,6 +313,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
             this.state !== foundry.applications.api.ApplicationV2.RENDER_STATES.RENDERED
           )
             return;
+          // eslint-disable-next-line no-constant-binary-expression
           const index = Number(anchor.dataset.changeIndex ?? "NaN") ?? null;
           this.#editingChangeIndex = index;
           this.#rulesLastScrollTop = htmlElement.scrollTop ?? null;
