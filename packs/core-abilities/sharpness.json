@@ -1,0 +1,87 @@
+{
+    "name": "Sharpness",
+    "type": "ability",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+        "actions": [
+            {
+                "traits": [],
+                "name": "Sharpness",
+                "slug": "sharpness",
+                "type": "passive",
+                "cost": {
+                    "activation": "free"
+                },
+                "range": {
+                    "target": "self",
+                    "unit": "m"
+                },
+                "description": "Effect: All of the user's [Sharp] attacks have 30% increased power.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "description": "Effect: All of the user's [Sharp] attacks have 30% increased power.",
+        "traits": [],
+        "slug": "sharpness",
+        "_migration": {
+            "version": null,
+            "previous": null
+        }
+    },
+    "_id": "b0O4QQ7hMwau5ZcE",
+    "effects": [
+        {
+            "name": "Sharpness",
+            "type": "passive",
+            "_id": "wSrdhxjo8WLQODdF",
+            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+            "system": {
+                "changes": [
+                    {
+                        "type": "percentile-modifier",
+                        "key": "sharp-trait-attack-power",
+                        "value": 30,
+                        "predicate": [],
+                        "label": "Sharpness",
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false,
+                        "hideIfDisabled": false
+                    }
+                ],
+                "slug": null,
+                "traits": [],
+                "removeAfterCombat": true,
+                "removeOnRecall": false,
+                "stacks": 0
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "description": "",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.330",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.2.0.3",
+                "createdTime": 1722262187711,
+                "modifiedTime": 1722262208689,
+                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+            }
+        }
+    ]
+}
