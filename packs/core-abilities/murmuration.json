@@ -1,0 +1,95 @@
+{
+    "name": "Murmuration",
+    "type": "ability",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+        "actions": [
+            {
+                "traits": [
+                    "domain",
+                    "flying"
+                ],
+                "name": "Murmuration",
+                "slug": "murmuration",
+                "type": "passive",
+                "cost": {
+                    "activation": "free"
+                },
+                "range": {
+                    "target": "aura",
+                    "distance": 5,
+                    "unit": "m"
+                },
+                "description": "Effect: The user and all creatures within Range increase the Power of their Flying-Type attacks by 20%.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "description": "Effect: The user and all creatures within Range increase the Power of their Flying-Type attacks by 20%.",
+        "traits": [
+            "domain",
+            "flying",
+            "partial-automation"
+        ],
+        "slug": "murmuration",
+        "_migration": {
+            "version": null,
+            "previous": null
+        }
+    },
+    "_id": "ini1miVrQwDHvD2W",
+    "effects": [
+        {
+            "name": "Murmuration",
+            "type": "passive",
+            "_id": "mNF7x5y4TNrqDK1f",
+            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+            "system": {
+                "changes": [
+                    {
+                        "type": "percentile-modifier",
+                        "key": "flying-attack-power",
+                        "value": 20,
+                        "predicate": [],
+                        "label": "Murmuration",
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false,
+                        "hideIfDisabled": false
+                    }
+                ],
+                "slug": null,
+                "traits": [],
+                "removeAfterCombat": true,
+                "removeOnRecall": false,
+                "stacks": 0
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "description": "",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.330",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.2.0.3",
+                "createdTime": 1722260555927,
+                "modifiedTime": 1722260583465,
+                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+            }
+        }
+    ]
+}
