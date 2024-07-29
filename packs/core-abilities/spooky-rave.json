@@ -1,0 +1,95 @@
+{
+    "name": "Spooky Rave",
+    "type": "ability",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+        "actions": [
+            {
+                "traits": [
+                    "domain",
+                    "ghost"
+                ],
+                "name": "Spooky Rave",
+                "slug": "spooky-rave",
+                "type": "passive",
+                "cost": {
+                    "activation": "free"
+                },
+                "range": {
+                    "target": "aura",
+                    "distance": 5,
+                    "unit": "m"
+                },
+                "description": "Effect: The user and all creatures within Range increase the Power of their Ghost-Type attacks by 20%.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "description": "Effect: The user and all creatures within Range increase the Power of their Ghost-Type attacks by 20%.",
+        "traits": [
+            "domain",
+            "ghost",
+            "partial-automation"
+        ],
+        "slug": "spooky-rave",
+        "_migration": {
+            "version": null,
+            "previous": null
+        }
+    },
+    "_id": "0ioh3IBCKkmNBtgn",
+    "effects": [
+        {
+            "name": "Spooky Rave",
+            "type": "passive",
+            "_id": "6ffBMFbBC16F68L4",
+            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+            "system": {
+                "changes": [
+                    {
+                        "type": "percentile-modifier",
+                        "key": "ghost-attack-power",
+                        "value": 20,
+                        "predicate": [],
+                        "label": "Spooky Rave",
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false,
+                        "hideIfDisabled": false
+                    }
+                ],
+                "slug": null,
+                "traits": [],
+                "removeAfterCombat": true,
+                "removeOnRecall": false,
+                "stacks": 0
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "description": "",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.330",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.2.0.3",
+                "createdTime": 1722262545376,
+                "modifiedTime": 1722262567154,
+                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+            }
+        }
+    ]
+}
