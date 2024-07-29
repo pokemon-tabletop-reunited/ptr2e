@@ -1,0 +1,87 @@
+{
+    "name": "Raw Might",
+    "type": "ability",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+        "actions": [
+            {
+                "traits": [],
+                "name": "Raw Might",
+                "slug": "raw-might",
+                "type": "passive",
+                "cost": {
+                    "activation": "free"
+                },
+                "range": {
+                    "target": "self",
+                    "unit": "m"
+                },
+                "description": "Effect: The user's Special-category attacks have increased 25% power.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "description": "Effect: The user's Special-category attacks have increased 25% power.",
+        "traits": [],
+        "slug": "raw-might",
+        "_migration": {
+            "version": null,
+            "previous": null
+        }
+    },
+    "_id": "ghiixlqE2L93imKm",
+    "effects": [
+        {
+            "name": "Raw Might",
+            "type": "passive",
+            "_id": "5IS2G7QiqTiIkEIJ",
+            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+            "system": {
+                "changes": [
+                    {
+                        "type": "percentile-modifier",
+                        "key": "special-attack-power",
+                        "value": 25,
+                        "predicate": [],
+                        "label": "Raw Might",
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false,
+                        "hideIfDisabled": false
+                    }
+                ],
+                "slug": null,
+                "traits": [],
+                "removeAfterCombat": true,
+                "removeOnRecall": false,
+                "stacks": 0
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "description": "",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.330",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.2.0.3",
+                "createdTime": 1722261460464,
+                "modifiedTime": 1722261478124,
+                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+            }
+        }
+    ]
+}
