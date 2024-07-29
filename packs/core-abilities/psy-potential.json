@@ -1,0 +1,93 @@
+{
+    "name": "Psy Potential",
+    "type": "ability",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+        "actions": [
+            {
+                "traits": [
+                    "stab",
+                    "psychic"
+                ],
+                "name": "Psy Potential",
+                "slug": "psy-potential",
+                "type": "passive",
+                "cost": {
+                    "activation": "free"
+                },
+                "range": {
+                    "target": "self",
+                    "unit": "m"
+                },
+                "description": "Effect: Increases the Power of the user's Psychic-Type attacks by 50%.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "description": "Effect: Increases the Power of the user's Psychic-Type attacks by 50%.",
+        "traits": [
+            "stab",
+            "psychic"
+        ],
+        "slug": "psy-potential",
+        "_migration": {
+            "version": null,
+            "previous": null
+        }
+    },
+    "_id": "N9IczQ6bIDwXeunH",
+    "effects": [
+        {
+            "name": "Psy Potential",
+            "type": "passive",
+            "_id": "VBkZyJD9YIURhlcq",
+            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+            "system": {
+                "changes": [
+                    {
+                        "type": "percentile-modifier",
+                        "key": "psychic-attack-power",
+                        "value": 50,
+                        "predicate": [],
+                        "label": "Psy Potential",
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false,
+                        "hideIfDisabled": false
+                    }
+                ],
+                "slug": null,
+                "traits": [],
+                "removeAfterCombat": true,
+                "removeOnRecall": false,
+                "stacks": 0
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "description": "",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.330",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.2.0.3",
+                "createdTime": 1722261169921,
+                "modifiedTime": 1722261187218,
+                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+            }
+        }
+    ]
+}
