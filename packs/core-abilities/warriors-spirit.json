@@ -1,0 +1,95 @@
+{
+    "name": "Warrior's Spirit",
+    "type": "ability",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+        "actions": [
+            {
+                "traits": [
+                    "domain",
+                    "fighting"
+                ],
+                "name": "Warrior's Spirit",
+                "slug": "warriors-spirit",
+                "type": "passive",
+                "cost": {
+                    "activation": "free"
+                },
+                "range": {
+                    "target": "aura",
+                    "distance": 5,
+                    "unit": "m"
+                },
+                "description": "Effect: The user and all creatures within Range increase the Power of their Fighting-Type attacks by 20%.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "description": "Effect: The user and all creatures within Range increase the Power of their Fighting-Type attacks by 20%.",
+        "traits": [
+            "domain",
+            "fighting",
+            "partial-automation"
+        ],
+        "slug": "warriors-spirit",
+        "_migration": {
+            "version": null,
+            "previous": null
+        }
+    },
+    "_id": "3SpxDplfkWLzzpkN",
+    "effects": [
+        {
+            "name": "Warrior Spirit",
+            "type": "passive",
+            "_id": "DIcJa1URjKDcCKNg",
+            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+            "system": {
+                "changes": [
+                    {
+                        "type": "percentile-modifier",
+                        "key": "fighting-attack-power",
+                        "value": 20,
+                        "predicate": [],
+                        "label": "Warrior's Spirit",
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false,
+                        "hideIfDisabled": false
+                    }
+                ],
+                "slug": null,
+                "traits": [],
+                "removeAfterCombat": true,
+                "removeOnRecall": false,
+                "stacks": 0
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "description": "",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.330",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.2.0.3",
+                "createdTime": 1722263556425,
+                "modifiedTime": 1722263574929,
+                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+            }
+        }
+    ]
+}
