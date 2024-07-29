@@ -5,12 +5,14 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "connection"
+        ],
         "name": "Orbital Tide",
         "slug": "orbital-tide",
         "type": "generic",
         "cost": {
-          "activation": "simple",
+          "activation": "complex",
           "powerPoints": 4,
           "delay": null,
           "priority": null
@@ -20,10 +22,10 @@
           "distance": 5,
           "unit": "m"
         },
-        "description": "Effect: All creatures within Range gain @Affliction[grounded] 5."
+        "description": "Connection - Gravity.  Effect: All creatures within Range gain @Affliction[lifted] 5."
       }
     ],
-    "description": "Effect: All creatures within Range gain @Affliction[grounded] 5.",
+    "description": "Connection - Gravity.  Effect: All creatures within Range gain @Affliction[lifted] 5.",
     "traits": [],
     "slug": null,
     "container": null
