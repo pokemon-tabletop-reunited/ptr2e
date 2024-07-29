@@ -1,0 +1,95 @@
+{
+    "name": "Berserk",
+    "type": "ability",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+        "actions": [
+            {
+                "traits": [],
+                "name": "Berserk",
+                "slug": "berserk",
+                "type": "passive",
+                "cost": {
+                    "activation": "free"
+                },
+                "range": {
+                    "target": "self",
+                    "unit": "m"
+                },
+                "description": "Effect: While the user is at 50% HP or less, their default SPATK stage is increased by +1.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "description": "Effect: While the user is at 50% HP or less, their default SPATK stage is increased by +1.",
+        "traits": [],
+        "slug": "berserk",
+        "_migration": {
+            "version": null,
+            "previous": null
+        }
+    },
+    "_id": "Rr5rKSCR6mDu3W3K",
+    "effects": [
+        {
+            "name": "Berserk Ability",
+            "type": "passive",
+            "_id": "hjXRwwAJcUQFu1Ac",
+            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+            "system": {
+                "changes": [
+                    {
+                        "type": "basic",
+                        "key": "system.attributes.spa.stage",
+                        "value": {
+                            "brackets": [
+                                {
+                                    "start": 1,
+                                    "end": 50,
+                                    "value": 1
+                                }
+                            ],
+                            "field": "actor|system.health.percent"
+                        },
+                        "predicate": [],
+                        "label": "Berserk Ability",
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false
+                    }
+                ],
+                "slug": null,
+                "traits": [],
+                "removeAfterCombat": true,
+                "removeOnRecall": false,
+                "stacks": 0
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "description": "",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.330",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.2.0.3",
+                "createdTime": 1722258133211,
+                "modifiedTime": 1722258191666,
+                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+            }
+        }
+    ]
+}
