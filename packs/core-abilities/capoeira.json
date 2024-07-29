@@ -1,0 +1,89 @@
+{
+    "name": "Capoeira",
+    "type": "ability",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+        "actions": [
+            {
+                "traits": [],
+                "name": "Capoeira",
+                "slug": "capoeira",
+                "type": "passive",
+                "cost": {
+                    "activation": "free"
+                },
+                "range": {
+                    "target": "self",
+                    "unit": "m"
+                },
+                "description": "Effect: The user's [Kick] Attacks also have [Dance], and the user's [Dance] Attacks have their Power increased by 30%.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "description": "Effect: The user's [Kick] Attacks also have [Dance], and the user's [Dance] Attacks have their Power increased by 30%.",
+        "traits": [
+            "partial-automation"
+        ],
+        "slug": "capoeira",
+        "_migration": {
+            "version": null,
+            "previous": null
+        }
+    },
+    "_id": "ziFVuKuam7P7iQIP",
+    "effects": [
+        {
+            "name": "Capoeira",
+            "type": "passive",
+            "_id": "phFs1NCsfKsfenAU",
+            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+            "system": {
+                "changes": [
+                    {
+                        "type": "percentile-modifier",
+                        "key": "dance-trait-attack-power",
+                        "value": 30,
+                        "predicate": [],
+                        "label": "Capoeira",
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false,
+                        "hideIfDisabled": false
+                    }
+                ],
+                "slug": null,
+                "traits": [],
+                "removeAfterCombat": true,
+                "removeOnRecall": false,
+                "stacks": 0
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "description": "",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.330",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.2.0.3",
+                "createdTime": 1722258477245,
+                "modifiedTime": 1722258506869,
+                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+            }
+        }
+    ]
+}
