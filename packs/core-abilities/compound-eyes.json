@@ -1,0 +1,86 @@
+{
+    "name": "Compound Eyes",
+    "type": "ability",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+        "actions": [
+            {
+                "traits": [],
+                "name": "Compound Eyes",
+                "slug": "compound-eyes",
+                "type": "passive",
+                "cost": {
+                    "activation": "free"
+                },
+                "range": {
+                    "target": "self",
+                    "unit": "m"
+                },
+                "description": "Effect: The user's default ACC stage is +1.",
+                "img": "icons/svg/explosion.svg"
+            }
+        ],
+        "description": "Effect: The user's default ACC stage is +1.",
+        "traits": [],
+        "slug": "compound-eyes",
+        "_migration": {
+            "version": null,
+            "previous": null
+        }
+    },
+    "_id": "WYC1QdDzDLgkR9xq",
+    "effects": [
+        {
+            "name": "Compound Eyes",
+            "type": "passive",
+            "_id": "VJla1n1lwvqS9MZe",
+            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+            "system": {
+                "changes": [
+                    {
+                        "type": "basic",
+                        "key": "system.battleStats.accuracy.stage",
+                        "value": 1,
+                        "predicate": [],
+                        "label": "Compound Eyes",
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false
+                    }
+                ],
+                "slug": null,
+                "traits": [],
+                "removeAfterCombat": true,
+                "removeOnRecall": false,
+                "stacks": 0
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "description": "",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.330",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.2.0.3",
+                "createdTime": 1722258728841,
+                "modifiedTime": 1722258756583,
+                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+            }
+        }
+    ]
+}
