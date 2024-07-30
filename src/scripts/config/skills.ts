@@ -41,6 +41,7 @@ const BaseSkills = {
     accounting: { slug: "accounting" },
     acrobatics: { slug: "acrobatics" },
     appraise: { slug: "appraise" },
+    archaeology: { slug: "archaeology" },
     painting: { slug: "painting", group: "arts" },
     sculpting: { slug: "sculpting", group: "arts" },
     acting: { slug: "acting", group: "arts" },
