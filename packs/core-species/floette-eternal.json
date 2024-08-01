@@ -17,7 +17,7 @@
       "primary": [
         {
           "type": "flight",
-          "value": 99
+          "value": 5
         }
       ],
       "secondary": []
@@ -27,7 +27,11 @@
       "legendary",
       "plant-grower",
       "hover",
-      "legless"
+      "legless",
+      "sparkler",
+      "evil-touch",
+      "glow-1",
+      "fully-evolved"
     ],
     "abilities": {
       "starting": [
@@ -36,29 +40,37 @@
       ],
       "basic": [
         "plant-grower",
-        "fairy-dust"
+        "power-spot"
       ],
       "advanced": [
         "fae-spirit",
-        "chlorophyll"
+        "power-leech"
       ],
       "master": [
-        "sap-sipper",
-        "synchronize"
+        "mystic-power",
+        "protosynthesis"
       ]
     },
     "skills": [
       {
         "slug": "acrobatics",
-        "value": 90,
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
         "group": null
       },
       {
-        "slug": "all-base-stats",
-        "value": 1,
+        "slug": "archaeology",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "flower-arrangement",
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -66,7 +78,7 @@
       },
       {
         "slug": "climb",
-        "value": 90,
+        "value": 15,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -74,7 +86,31 @@
       },
       {
         "slug": "conversation",
-        "value": 90,
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "flight",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "history",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "husbandry",
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -82,7 +118,7 @@
       },
       {
         "slug": "lift",
-        "value": 90,
+        "value": 25,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -90,7 +126,7 @@
       },
       {
         "slug": "listen",
-        "value": 90,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -98,7 +134,7 @@
       },
       {
         "slug": "natural-world",
-        "value": 90,
+        "value": 60,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -106,15 +142,39 @@
       },
       {
         "slug": "navigate",
-        "value": 90,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
         "group": null
       },
       {
+        "slug": "negotiation",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "fairy",
+        "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
+        "slug": "legendary",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
         "slug": "spot",
-        "value": 90,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -122,7 +182,7 @@
       },
       {
         "slug": "stealth",
-        "value": 90,
+        "value": 60,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -130,7 +190,7 @@
       },
       {
         "slug": "survival",
-        "value": 90,
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -454,34 +514,7 @@
               "level": 19,
               "operand": "and"
             }
-          ],
-          "evolutions": [
-            {
-              "name": "florges",
-              "uuid": "Compendium.ptr2e.core-species.Item.aqOo8ZU8b6gxXgFQ",
-              "methods": [
-                {
-                  "type": "item",
-                  "item": "shiny-stone",
-                  "operand": "or",
-                  "held": false
-                }
-              ],
-              "evolutions": [],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              }
-            }
-          ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
+          ]
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.kKU9IyKbIjn2ZOl4"
