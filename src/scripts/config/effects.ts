@@ -29,8 +29,10 @@ export const StatusEffects: StatusEffect[] = [
         system: {
             changes: [
                 {
-                    type: "grant-effect",
-                    value: "weak",
+                    type: "basic",
+                    key: "system.attributes.atk.stage",
+                    value: -1,
+                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                 },
             ],
             formula: "1/16",
@@ -52,8 +54,10 @@ export const StatusEffects: StatusEffect[] = [
         system: {
             changes: [
                 {
-                    type: "grant-effect",
-                    value: "dull",
+                    type: "basic",
+                    key: "system.attributes.spa.stage",
+                    value: -1,
+                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                 },
             ],
             formula: "1/16",
@@ -72,8 +76,10 @@ export const StatusEffects: StatusEffect[] = [
         system: {
             changes: [
                 {
-                    type: "grant-effect",
-                    value: "dull",
+                    type: "basic",
+                    key: "system.attributes.spa.stage",
+                    value: -1,
+                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                 },
             ],
             formula: "(1/16 * @stacksToRemove)",
@@ -94,7 +100,17 @@ export const StatusEffects: StatusEffect[] = [
             turns: 5,
         },
         system: {
-            changes: [],
+            changes: [
+                {
+                    type: "percentile-modifier",
+                    key: "spd",
+                    value: -0.5,
+                },
+                {
+                    type: "grant-effect",
+                    value: "slowed",
+                },
+            ],
             formula: null,
             type: null,
             removeOnRecall: false,
@@ -119,8 +135,10 @@ export const StatusEffects: StatusEffect[] = [
                     value: -1 / 3,
                 },
                 {
-                    type: "grant-effect",
-                    value: "distracted",
+                    type: "basic",
+                    key: "system.attributes.spd.stage",
+                    value: -1,
+                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                 },
             ],
             formula: null,
@@ -147,8 +165,10 @@ export const StatusEffects: StatusEffect[] = [
                     value: -0.5,
                 },
                 {
-                    type: "grant-effect",
-                    value: "distracted",
+                    type: "basic",
+                    key: "system.attributes.spd.stage",
+                    value: -1,
+                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                 },
                 {
                     type: "grant-effect",
@@ -184,8 +204,10 @@ export const StatusEffects: StatusEffect[] = [
                 //     value: "uuid-here"
                 // },
                 {
-                    type: "grant-effect",
-                    value: "frail",
+                    type: "basic",
+                    key: "system.attributes.def.stage",
+                    value: -1,
+                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
                 },
                 {
                     type: "percentile-modifier",
@@ -225,106 +247,7 @@ export const StatusEffects: StatusEffect[] = [
         description: "PTR2E.Effect.Statuses.Descriptions.splinter",
     },
     {
-        id: "weak",
-        name: "PTR2E.Effect.Statuses.Labels.weak",
-        img: "icons/svg/downgrade.svg",
-        type: "affliction",
-        duration: {
-            turns: 5,
-        },
-        system: {
-            changes: [
-                {
-                    type: "basic",
-                    key: "system.attributes.atk.stage",
-                    value: -1,
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                },
-            ],
-            formula: null,
-            type: null,
-            removeOnRecall: false,
-            removeAfterCombat: true,
-            traits: [],
-        },
-        description: "PTR2E.Effect.Statuses.Descriptions.weak",
-    },
-    {
-        id: "dull",
-        name: "PTR2E.Effect.Statuses.Labels.dull",
-        img: "icons/svg/down.svg",
-        type: "affliction",
-        duration: {
-            turns: 5,
-        },
-        system: {
-            changes: [
-                {
-                    type: "basic",
-                    key: "system.attributes.spa.stage",
-                    value: -1,
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                },
-            ],
-            formula: null,
-            type: null,
-            removeOnRecall: false,
-            removeAfterCombat: true,
-            traits: [],
-        },
-        description: "PTR2E.Effect.Statuses.Descriptions.dull",
-    },
-    {
-        id: "frail",
-        name: "PTR2E.Effect.Statuses.Labels.frail",
-        img: "icons/svg/falling.svg",
-        type: "affliction",
-        duration: {
-            turns: 5,
-        },
-        system: {
-            changes: [
-                {
-                    type: "basic",
-                    key: "system.attributes.def.stage",
-                    value: -1,
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                },
-            ],
-            formula: null,
-            type: null,
-            removeOnRecall: false,
-            removeAfterCombat: true,
-            traits: [],
-        },
-        description: "PTR2E.Effect.Statuses.Descriptions.frail",
-    },
-    {
-        id: "distracted",
-        name: "PTR2E.Effect.Statuses.Labels.distracted",
-        img: "icons/svg/unconscious.svg",
-        type: "affliction",
-        duration: {
-            turns: 5,
-        },
-        system: {
-            changes: [
-                {
-                    type: "basic",
-                    key: "system.attributes.spd.stage",
-                    value: -1,
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                },
-            ],
-            formula: null,
-            type: null,
-            removeOnRecall: false,
-            removeAfterCombat: true,
-            traits: [],
-        },
-        description: "PTR2E.Effect.Statuses.Descriptions.distracted",
-    },
-    {
+        // To-do - make the effect half Movement Scores (minimum 1)
         id: "slowed",
         name: "PTR2E.Effect.Statuses.Labels.slowed",
         img: "/systems/ptr2e/img/conditions/slowed.svg",
@@ -334,12 +257,7 @@ export const StatusEffects: StatusEffect[] = [
         },
         system: {
             changes: [
-                {
-                    type: "basic",
-                    key: "system.attributes.spe.stage",
-                    value: -1,
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                },
+                {},
             ],
             formula: null,
             type: null,
@@ -373,31 +291,6 @@ export const StatusEffects: StatusEffect[] = [
             traits: [],
         },
         description: "PTR2E.Effect.Statuses.Descriptions.blind",
-    },
-    {
-        id: "vulnerable",
-        name: "PTR2E.Effect.Statuses.Labels.vulnerable",
-        img: "/systems/ptr2e/img/conditions/vulnerable.svg",
-        type: "affliction",
-        duration: {
-            turns: 5,
-        },
-        system: {
-            changes: [
-                {
-                    type: "basic",
-                    key: "system.battleStats.evasion.stage",
-                    value: -1,
-                    mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-                },
-            ],
-            formula: null,
-            type: null,
-            removeOnRecall: false,
-            removeAfterCombat: true,
-            traits: [],
-        },
-        description: "PTR2E.Effect.Statuses.Descriptions.vulnerable",
     },
     {
         id: "hindered",
