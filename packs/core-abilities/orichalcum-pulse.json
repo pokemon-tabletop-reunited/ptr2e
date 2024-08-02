@@ -7,6 +7,28 @@
       {
         "traits": [
           "legendary",
+          "dash"
+        ],
+        "name": "Orichalcum Pulse",
+        "slug": "orichalcum-pulse",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "The user declares Collision Course.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "user",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Effect: The triggering attack gains [Push 2], and the user gains +1 SPD stage for 7 Activations upon resolving the attack."
+      },
+      {
+        "traits": [
+          "legendary",
           "weather"
         ],
         "name": "Orichalcum Pulse",
@@ -24,13 +46,14 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: At the start of combat, or when the user switches in.\nEffect: The weather is changed to Sunny and remains while the user is active on the field. Additionally, the user's ATK increases by 33% while Sunny Weather is active. If the user uses Collision Course while in Sunny Weather, their SPD stage increases by +1 for 5 activations. If the user Faints or is switched out, the current active Sunny Weather lasts for 3 rounds."
+        "description": "Passive: While the user is present on the Field, the Weather is set to Sunny and remains Sunny while the user is active on the Field. While affected by Sunny Weather, the user's base ATK increases by +33%. If the user Faints or is switched out, the Sunny Weather set by the user lasts for 3 more rounds."
       }
     ],
-    "description": "Trigger: At the start of combat, or when the user switches in.\nEffect: The weather is changed to Sunny and remains while the user is active on the field. Additionally, the user's ATK increases by 33% while Sunny Weather is active. If the user uses Collision Course while in Sunny Weather, their SPD stage increases by +1 for 5 activations. If the user Faints or is switched out, the current active Sunny Weather lasts for 3 rounds.",
+    "description": "Trigger: The user declares Collision Course.\nEffect: The triggering attack gains [Push 2], and the user gains +1 SPD stage for 7 Activations upon resolving the attack.\nPassive: While the user is present on the Field, the Weather is set to Sunny and remains Sunny while the user is active on the Field. While affected by Sunny Weather, the user's base ATK increases by +33%. If the user Faints or is switched out, the Sunny Weather set by the user lasts for 3 more rounds..",
     "traits": [
       "legendary",
-      "weather"
+      "weather",
+      "dash"
     ],
     "slug": null,
     "container": null
