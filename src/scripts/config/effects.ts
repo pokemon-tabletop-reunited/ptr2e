@@ -1311,19 +1311,6 @@ export const StatusEffects: StatusEffect[] = [
         description: "PTR2E.Effect.Statuses.Descriptions.resolved",
     },
     {
-        id: "stormcast",
-        name: "PTR2E.Effect.Statuses.Labels.stormcast",
-        img: "icons/svg/lightning.svg",
-        type: "passive",
-        system: {
-            changes: [],
-            removeOnRecall: true,
-            removeAfterCombat: true,
-            traits: [],
-        },
-        description: "PTR2E.Effect.Statuses.Descriptions.stormcast",
-    },
-    {
         id: "boosted",
         name: "PTR2E.Effect.Statuses.Labels.boosted",
         img: "icons/svg/light.svg",
