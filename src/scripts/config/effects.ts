@@ -350,8 +350,8 @@ export const StatusEffects: StatusEffect[] = [
         description: "PTR2E.Effect.Statuses.Descriptions.slowed",
     },
     {
-        id: "blind",
-        name: "PTR2E.Effect.Statuses.Labels.blind",
+        id: "blinded",
+        name: "PTR2E.Effect.Statuses.Labels.blinded",
         img: "/systems/ptr2e/img/conditions/blindness.svg",
         type: "affliction",
         duration: {
