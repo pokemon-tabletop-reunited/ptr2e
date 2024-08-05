@@ -4,7 +4,7 @@
   "system": {
     "prerequisites": [
       "[Trainer] or [Expedition Leader]",
-      "Survival 40"
+      "Survival 35"
     ],
     "cost": 2,
     "design": {
@@ -12,18 +12,27 @@
       "approach": "resilience",
       "archetype": "Outdoorsman"
     },
-    "description": "Until the start of the next Round, the user possesses the Ability Overcoat.",
+    "description": "<p>Until the start of the next Round, the user is immune to effect damage and negative effects of active Terrains, Weathers, and Hazards. The user adds all [Terrain] Attacks to their Tutor List, learning 2 of them immediately upon taking this Perk.</p>",
     "actions": [
       {
         "name": "Hardy Trekker",
         "slug": "hardy-trekker",
-        "description": "Until the start of the next Round, the user possesses the Ability Overcoat.",
+        "type": "generic",
+        "traits": [
+          "environ"
+        ],
         "cost": {
           "activation": "free",
-          "powerPoints": 4
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null
         },
-        "type": "generic",
-        "traits": []
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Until the start of the next Round, the user is immune to effect damage and negative effects of active Terrains and Weathers.</p>"
       }
     ],
     "slug": "hardy-trekker",
