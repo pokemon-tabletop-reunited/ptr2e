@@ -9,11 +9,15 @@
             {
                 "name": "I'm With You!",
                 "slug": "im-with-you-action-1",
-                "description": "<p>As a Simple Action, select an ally. At the cost of 2PP, you may add 20% of your Attack or Special Attack to the corresponding stat on your ally's next attack, successful or otherwise.</p>",
-                "traits": [],
+                "description": "<p>The target gains @Affliction[boosted] 2.</p>",
+                "traits": [
+                    "interrupt-1",
+                    "social"
+                ],
                 "type": "generic",
                 "range": {
-                    "target": "enemy",
+                    "target": "ally",
+                    "distance": 10,
                     "unit": "m"
                 },
                 "cost": {
@@ -24,7 +28,7 @@
             }
         ],
         "slug": "im-with-you",
-        "description": "<p>As a Simple Action, select an ally. At the cost of 2PP, you may add 20% of your Attack or Special Attack to the corresponding stat on your ally's next attack, successful or otherwise.</p>",
+        "description": "<p>The target gains @Affliction[boosted] 2.</p>",
         "traits": [],
         "prerequisites": [
             "Conversation 30 or Arts (Music) 30"

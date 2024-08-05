@@ -12,23 +12,26 @@
             "approach": "power",
             "archetype": "Pack Leader"
         },
-        "description": "You give the order and designate an enemy. All Pack members within melee range of the enemy may immediately activate and attack without influencing the turn-order.",
+        "description": "<p>Effect: All Pack members that have the target within Reach may immediately use one Attack at [Interrupt 3].</p>",
         "actions": [
             {
                 "name": "Pile On!",
                 "slug": "pile-on",
-                "description": "You give the order and designate an enemy. All Pack members within melee range of the enemy may immediately activate and attack without influencing the turn-order.",
+                "description": "Effect: All Pack members that have the target within Reach may immediately use one Attack at [Interrupt 3].</p>",
                 "cost": {
                     "activation": "complex",
-                    "powerPoints": 7
+                    "powerPoints": 7,
+                    "delay": null,
+                    "priority": null
+                },
+                "range": {
+                    "target": "creature",
+                    "distance": 20,
+                    "unit": "m"
                 },
                 "type": "generic",
                 "traits": [],
-                "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-                "range": {
-                    "target": "enemy",
-                    "unit": "m"
-                }
+                "img": "/systems/ptr2e/img/icons/feat_icon.webp"
             }
         ],
         "slug": "pile-on",
