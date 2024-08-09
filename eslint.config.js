@@ -29,6 +29,7 @@ export default [
     rules: {
       "@typescript-eslint/no-empty-interface": "off",
       "@typescript-eslint/no-extraneous-class": "off",
+      "@typescript-eslint/class-literal-property-style": "off",
       "@typescript-eslint/ban-ts-comment": ["error", {
         "ts-expect-error": "allow-with-description",
         "ts-ignore": true,

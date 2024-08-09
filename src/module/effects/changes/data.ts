@@ -5,12 +5,12 @@ import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts"
 import { RuleValue } from "../data.ts";
 import { RawPredicate } from "@system/predication/predication.ts";
 
-type ChangeModelOptions = {
+interface ChangeModelOptions {
     parent: ActiveEffectSystem;
     strict?: boolean | undefined;
     sourceIndex?: number | undefined;
     suppressWarnings?: boolean | undefined;
-};
+}
 
 interface ResolveValueParams {
     evaluate?: boolean;
@@ -18,7 +18,7 @@ interface ResolveValueParams {
     warn?: boolean;
 }
 
-type ChangeSchema = {
+interface ChangeSchema extends foundry.data.fields.DataSchema {
     key: foundry.data.fields.StringField<string, string, true, false, true>
     value: ResolvableValueField<true, false, true>
     mode: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
@@ -31,7 +31,7 @@ type ChangeSchema = {
     ignored: foundry.data.fields.BooleanField;
 };
 
-type ChangeSource = {
+interface ChangeSource {
     key: string;
     value: RuleValue;
     mode: number;
@@ -40,7 +40,7 @@ type ChangeSource = {
     label?: string;
     predicate?: RawPredicate;
     ignored?: boolean;
-};
+}
 
 export type {
     ChangeModelOptions,

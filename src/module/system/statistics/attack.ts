@@ -216,7 +216,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
                 anyValidTargets = true;
             }
 
-            currContext.notes = extractNotes(currContext.self.actor.synthetics.rollNotes, this.domains)
+            currContext.notes = extractNotes(currContext.self.actor.synthetics.rollNotes, this.domains).filter(n => n.predicate.test(options))
 
             // extraModifiers.push(...currContext?.self.modifiers ?? []);
         }
@@ -227,7 +227,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
             return null;
         }
 
-        const notes = extractNotes(context.self.actor.synthetics.rollNotes, this.domains);
+        const notes = extractNotes(context.self.actor.synthetics.rollNotes, this.domains).filter(n => n.predicate.test(options));
 
         //TODO: Apply just-in-time roll options from changes
 

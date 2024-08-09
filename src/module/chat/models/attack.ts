@@ -10,6 +10,7 @@ import * as R from "remeda";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
+import { RollNote } from "@system/notes.ts";
 
 abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   declare parent: ChatMessagePTR2e<AttackMessageSystem>;
@@ -221,6 +222,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                 hit:
                   this.overrides.get(result.target.uuid)?.value ||
                   AttackRoll.successCategory(result.accuracy, result.crit),
+                notes: RollNote.notesToHTML(result.context.notes.map(n => new RollNote(n)))?.outerHTML
               };
               if (result.damage) {
                 const damage = result.damage.calculateDamageTotal({
@@ -419,6 +421,7 @@ interface AttackMessageRenderContextData {
   damage?: number;
   damageRoll?: DamageCalc;
   accuracyRoll?: AccuracyCalc;
+  notes: Maybe<string>;
 }
 
 interface AttackMessageSchema extends foundry.data.fields.DataSchema {
@@ -523,7 +526,7 @@ interface CheckContextCheckSchema extends foundry.data.fields.DataSchema {
   _modifiers: foundry.data.fields.ArrayField<foundry.data.fields.ObjectField<ModifierPTR2e>, ModifierPTR2e[], ModifierPTR2e[], true, false, true>;
 }
 
-type CheckContextRollNotesSchemaField = foundry.data.fields.SchemaField<
+export type CheckContextRollNotesSchemaField = foundry.data.fields.SchemaField<
   CheckContextRollNoteSchema,
   foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<CheckContextRollNoteSchema>>,
   foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<CheckContextRollNoteSchema>>,

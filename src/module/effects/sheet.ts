@@ -82,6 +82,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
 
   get editingChange(): ChangeModel["_source"] | null {
     if (this.#editingChangeIndex === null) return null;
+    // @ts-expect-error - This is a valid operation
     return this.document.changes[this.#editingChangeIndex] ?? null;
   }
 

@@ -156,7 +156,7 @@ class PokeballCheck<TParent extends PokeballStatistic = PokeballStatistic> imple
             target
         })
 
-        const notes = extractNotes(context.self.actor.synthetics.rollNotes, this.domains);
+        const notes = extractNotes(context.self.actor.synthetics.rollNotes, this.domains).filter(n => n.predicate.test(options));
 
         const checkContext: CheckRollContext = {
             type: "pokeball-check",

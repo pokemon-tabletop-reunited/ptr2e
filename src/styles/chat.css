@@ -145,6 +145,22 @@
 .chat-message.message.capture .message-content > main .collapse-button .collapse-rolls.expanded:after {
   content: "▼";
 }
+.chat-message.message.attack .message-content > main ul.notes,
+.chat-message.message.skill .message-content > main ul.notes,
+.chat-message.message.capture .message-content > main ul.notes {
+  list-style: none;
+  margin: 0.5rem;
+  background: var(--color-light-2);
+  color: var(--hint-text-color);
+  font-style: italic;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+}
+.chat-message.message.attack .message-content > main ul.notes .roll-note,
+.chat-message.message.skill .message-content > main ul.notes .roll-note,
+.chat-message.message.capture .message-content > main ul.notes .roll-note {
+  padding: 0.25rem;
+}
 .chat-message.message.attack .message-content > main > article,
 .chat-message.message.skill .message-content > main > article,
 .chat-message.message.capture .message-content > main > article {

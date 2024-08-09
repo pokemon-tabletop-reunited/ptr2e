@@ -204,7 +204,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
         }
         return data;
       })(),
-      target: this.target ? await fromUuid<ActorPTR2e>(this.target) : null
+      target: this.target ? await fromUuid<ActorPTR2e>(this.target) : null,
     });
 
     return renderTemplate("/systems/ptr2e/templates/chat/capture.hbs", context);

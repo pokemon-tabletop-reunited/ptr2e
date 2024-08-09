@@ -3,7 +3,10 @@ import { ChatMessagePTR2e } from "@chat";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
+import { RollNote } from "@system/notes.ts";
 import { CheckRoll } from "@system/rolls/check-roll.ts";
+import { CheckContextRollNotesSchemaField } from "./attack.ts";
+import { PredicateField } from "@system/predication/schema-data-fields.ts";
 
 interface SkillMessageSystem
   extends foundry.abstract.TypeDataModel,
@@ -41,6 +44,11 @@ interface SkillMessageContextSchema extends foundry.data.fields.DataSchema {
   modifiers: foundry.data.fields.ArrayField<foundry.data.fields.ObjectField<ModifierPTR2e>, ModifierPTR2e[], ModifierPTR2e[], true, false, true>;
   options: foundry.data.fields.ArrayField<foundry.data.fields.StringField, string[], string[], true, false, true>;
   type: foundry.data.fields.StringField<string, string, true, false, true>;
+  notes: foundry.data.fields.ArrayField<
+    CheckContextRollNotesSchemaField,
+    foundry.data.fields.SourcePropFromDataField<CheckContextRollNotesSchemaField>[],
+    foundry.data.fields.ModelPropFromDataField<CheckContextRollNotesSchemaField>[],
+    true, false, true>;
 }
 
 abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
@@ -66,7 +74,18 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
         domains: new fields.ArrayField(new SlugField(), { required: true, initial: [] }),
         type: new fields.StringField({ required: true, blank: true, initial: "" }),
         options: new fields.ArrayField(new fields.StringField(), { required: true, initial: [] }),
-      }, { required: true}),
+        notes: new fields.ArrayField(
+          new fields.SchemaField({
+            selector: new fields.StringField({ required: true, blank: true, initial: "" }),
+            title: new fields.StringField({ required: true, blank: true, initial: "" }),
+            text: new fields.StringField({ required: true, blank: true, initial: "" }),
+            predicate: new PredicateField({ required: true, initial: [] }),
+            outcome: new fields.ArrayField(new fields.NumberField(), { required: true, initial: [] }),
+            visibility: new fields.StringField({ required: true, initial: "all", choices: ["all", "gm", "owner", "none"] }),
+          }),
+          { required: true, initial: [] }
+        ),
+      }, { required: true }),
     };
   }
 
@@ -160,6 +179,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
         appliedLuck: this._source.appliedLuck,
         breakdown: context.roll.data.breakdown,
         rerolled: this._source.rerolled,
+        notes: RollNote.notesToHTML(this.result.notes.map(n => new RollNote(n)))?.outerHTML
       });
     })();
 

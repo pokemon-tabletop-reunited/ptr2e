@@ -27,7 +27,12 @@
             {{#each data.rolls.effects}}
                 {{{this}}}
             {{/each}}
-        </article>
+        </article>{{log data}}
+        {{#if data.notes}}
+            <section class="notes">
+                {{{notes}}}
+            </section>
+        {{/if}}
     {{/each}}
 </main>
 <footer>

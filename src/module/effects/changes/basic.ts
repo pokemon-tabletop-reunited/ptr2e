@@ -6,6 +6,7 @@ export default class BasicChangeSystem extends ChangeModel {
     static override TYPE = "basic";
 
     override apply(actor: ActorPTR2e, rollOptions?: string[] | Set<string> | null): void {
+        // eslint-disable-next-line @typescript-eslint/no-this-alias
         const change = this;
 
         if (change.ignored) return;
@@ -151,7 +152,7 @@ export default class BasicChangeSystem extends ChangeModel {
      */
     static _applyAdd(change: unknown, current: unknown): number | unknown | foundry.data.validation.DataModelValidationFailure {
         const isNumericAdd =
-            typeof change === "number" && (typeof current === "number" || typeof current === undefined || typeof current === null);
+            typeof change === "number" && (typeof current === "number" || typeof current === "undefined" || current === null);
         const isArrayAdd = Array.isArray(current) && current.every(e => typeof e === typeof change);
 
         if (isNumericAdd) {

@@ -278,7 +278,7 @@ class StatisticCheck<TParent extends Statistic = Statistic> implements BaseStati
 
         const options = this.createRollOptions({ ...args, origin, extraRollOptions });
         const notes = [
-            ...extractNotes(selfActor.synthetics.rollNotes, domains),
+            ...extractNotes(selfActor.synthetics.rollNotes, domains).filter(n => n.predicate.test(options)),
             ...(args.extraRollNotes ?? []),
         ];
 
