@@ -10,6 +10,11 @@ class GithubManager {
         ability: "ptr2e.core-abilities",
         perk: "ptr2e.core-perks",
         effect: "ptr2e.core-effects",
+        consumable: "ptr2e.core-gear",
+        container: "ptr2e.core-gear",
+        equipment: "ptr2e.core-gear",
+        gear: "ptr2e.core-gear",
+        weapon: "ptr2e.core-gear"
     } as const;
 
     static async getExistingItem<TDocument extends ItemPTR2e>(
