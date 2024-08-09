@@ -34,6 +34,7 @@
 .chat-message.message.damage-applied .message-content > main {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   padding: 0.25rem 0.5rem;
 }
 .chat-message.message.damage-applied .message-content > main.undone {
@@ -45,6 +46,19 @@
 .chat-message.message.damage-applied .message-content > main button {
   flex: 0 0 50px;
   padding: 0;
+}
+.chat-message.message.damage-applied .message-content > main .notes {
+  flex: 0 0 100%;
+  list-style: none;
+  margin: 0.5rem 0;
+  background: var(--color-light-2);
+  color: var(--hint-text-color);
+  font-style: italic;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+}
+.chat-message.message.damage-applied .message-content > main .notes .roll-note {
+  padding: 0.25rem;
 }
 .chat-message.message.attack .message-content,
 .chat-message.message.skill .message-content,

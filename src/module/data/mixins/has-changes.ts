@@ -1,7 +1,6 @@
 import { ChangeModelTypes } from '../models/base.ts';
 import { ChangeModel, ChangeSchema } from '@data';
 import { TemplateConstructor } from './data-template.ts';
-import { ModelPropFromDataField } from 'types/foundry/common/data/fields.js';
 
 /**
  * Adds changes property to target data model.
@@ -25,7 +24,6 @@ export default function HasChanges<BaseClass extends TemplateConstructor>(baseCl
 
 
   interface TemplateClass extends ModelPropsFromSchema<ChangesSchema> {
-    asdf: ModelPropFromDataField<ChangesField>;
     _source: SourceFromSchema<ChangesSchema>;
   }
 

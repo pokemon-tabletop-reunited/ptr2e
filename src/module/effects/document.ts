@@ -95,7 +95,7 @@ class ActiveEffectPTR2e<
       `${prefix}:${this.slug}`,
       `${prefix}:slug:${this.slug}`,
       ...granterOptions,
-      ...(this.parent?.getRollOptions() ?? []).map((o) => `${prefix}:${o}`),
+      ...(this.parent?.getRollOptions() ?? []).map((o) => `${prefix}:parent:${o}`),
       ...traitOptions.map((o) => `${prefix}:${o}`),
     ];
 

@@ -2,7 +2,7 @@ import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
 import { ApplicationV2Expanded } from "../appv2-expanded.ts";
 import { DataStructure } from "./data-handler.ts";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
-import { AttackMessageSystem, CaptureMessageSystem, ChatMessagePTR2e, SkillMessageSystem } from "@chat";
+import { AttackMessageSystem, CaptureMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
 import { TreeTypes } from "./data.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { htmlQuery, htmlQueryAll } from "@utils";
@@ -268,6 +268,20 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
     }
 
     if(doc.system instanceof SkillMessageSystem || doc.system instanceof CaptureMessageSystem) {
+      if(this.lastSearch.term !== this.searchTerm || this.fuzzyiness !== this.lastSearch.fuzzy) {
+        this._currentData = null;
+      }
+
+      context.entry = this._currentData ??= (() => {
+        this.tabs = {};
+        const result = fu.duplicate(doc.system.result);
+        const filteredOptions = this.filterOptions(result.options);
+        result.options = result.options.filter(o => filteredOptions.has(o)).sort((a, b) => a.localeCompare(b));
+        return result;
+      })();
+    }
+
+    if(doc.system instanceof DamageAppliedMessageSystem && doc.system.result) {
       if(this.lastSearch.term !== this.searchTerm || this.fuzzyiness !== this.lastSearch.fuzzy) {
         this._currentData = null;
       }

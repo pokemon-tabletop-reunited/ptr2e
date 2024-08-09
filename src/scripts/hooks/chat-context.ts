@@ -1,4 +1,4 @@
-import { ChatMessagePTR2e, SkillMessageSystem } from "@chat";
+import { ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
 import { PTRHook } from "./data.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 
@@ -75,7 +75,7 @@ export const ChatContext: PTRHook = {
                   condition: li => {
                       const message = game.messages.get(li.data("messageId"));
                       if(!message) return false;
-                      return ["attack", "skill", "capture"].includes(message.type);
+                      return ["attack", "skill", "capture"].includes(message.type) || (message.type === "damage-applied" && !!(message.system as DamageAppliedMessageSystem).result)
                   },
                   callback: li => {
                       const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e<SkillMessageSystem>;

@@ -604,6 +604,7 @@ class ActorPTR2e<
   async onEndActivation() {
     if (!(game.user === game.users.activeGM)) return;
     if (!this.synthetics.afflictions.data.length) return;
+    const rollNotes: {options: string[], domains: string[], html: string}[] = [];
     const afflictions = this.synthetics.afflictions.data.reduce<{
       toDelete: string[];
       toUpdate: Partial<ActiveEffectPTR2e<ActorPTR2e>["_source"]>[];
@@ -614,6 +615,7 @@ class ActorPTR2e<
     }>(
       (acc, affliction) => {
         const result = affliction.onEndActivation();
+        if(result.note) rollNotes.push(result.note);
         if (result.type === "delete") acc.toDelete.push(affliction.parent.id);
         else if (result.type === "update") acc.toUpdate.push(result.update);
         if (result.damage) {
@@ -716,8 +718,14 @@ class ActorPTR2e<
           type: "damage-applied",
           system: {
             notes,
+            rollNotes: rollNotes.map(note => note.html),
             damageApplied: oldHealth - newHealth,
             target: this.uuid,
+            result: {
+              type: "affliction-dot",
+              options: Array.from(new Set(rollNotes.flatMap(note => note.options))),
+              domains: Array.from(new Set(rollNotes.flatMap(note => note.domains))),
+            }
           },
         });
       }
@@ -727,9 +735,15 @@ class ActorPTR2e<
         type: "damage-applied",
         system: {
           notes,
+          rollNotes: rollNotes.map(note => note.html),
           damageApplied: 0,
           undone: true,
           target: this.uuid,
+          result: {
+            type: "affliction-dot",
+            options: Array.from(new Set(rollNotes.flatMap(note => note.options))),
+            domains: Array.from(new Set(rollNotes.flatMap(note => note.domains))),
+          }
         },
       });
     }
