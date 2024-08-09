@@ -233,6 +233,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
                     const update = fu.deepClone(existingSkill);
                     update.label = s.label ?? existingSkill.label;
                     update.slug = sluggify(s.label ?? existingSkill.label);
+                    update.group = sluggify(s.group ?? existingSkill.group!) || undefined;
                     update.description = s.description ?? existingSkill.description;
                     skills.set(update.slug, update);
                 }

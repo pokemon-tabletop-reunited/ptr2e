@@ -13,7 +13,7 @@ export function getAllSkillSlugs(): string[] {
  */
 export function getInitialSkillList(): SkillPTR2e['_source'][] {
     return Array.from(getAllSkillSlugs()).map((skill) => {
-        const baseValue = BaseSkills[skill];
+        const baseValue = game.ptr.data.skills.get(skill) ?? BaseSkills[skill];
         return partialSkillToSkill(baseValue ? baseValue : { slug: skill });
     });
 }

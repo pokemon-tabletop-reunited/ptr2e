@@ -140,7 +140,7 @@ class HumanoidActorSystem extends ActorSystemPTR2e {
         }
 
         if(!this._source.species) {
-            this.parent.updateSource({ "system.species": HumanoidActorSystem.constructSpecies(this) });
+            this.parent.updateSource({ "system.species": HumanoidActorSystem.constructSpecies(this).toObject() });
         }
 
         return await super._preCreate(data, options, user);

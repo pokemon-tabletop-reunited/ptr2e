@@ -12,6 +12,7 @@ import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { DescriptionSchema } from "@module/data/mixins/has-description.ts";
 import { SlugSchema } from "@module/data/mixins/has-slug.ts";
+import { getInitialSkillList } from "@scripts/config/skills.ts";
 
 const SpeciesExtension = HasEmbed(
   HasMigrations(HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel)))),
@@ -214,7 +215,9 @@ class SpeciesSystem extends SpeciesExtension {
           }
         ),
       }),
-      skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e)),
+      skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e), "slug", {
+        initial: getInitialSkillList,
+      }),
       moves: new fields.SchemaField({
         levelUp: new fields.ArrayField(getMoveField(true), { required: true, initial: [] }),
         tutor: new fields.ArrayField(getMoveField(false), { required: true, initial: [] }),
