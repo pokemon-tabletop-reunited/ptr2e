@@ -26,6 +26,13 @@ interface ActorSystemSchema extends TraitsSchema, MigrationSchema, foundry.data.
   gender: foundry.data.fields.StringField<GenderOptions, GenderOptions, true, false, true>;
   slots: foundry.data.fields.NumberField<number, number, true, false, true>;
   inventoryPoints: foundry.data.fields.SchemaField<InventoryPointsSchema, SourceFromSchema<InventoryPointsSchema>, ModelPropsFromSchema<InventoryPointsSchema>, true, false, false>;
+  party: foundry.data.fields.SchemaField<PartySchema, SourceFromSchema<PartySchema>, ModelPropsFromSchema<PartySchema>, true, false, false>;
+}
+
+interface PartySchema extends foundry.data.fields.DataSchema {
+  ownerOf: foundry.data.fields.DocumentIdField<string, false, false, false>;
+  partyMemberOf: foundry.data.fields.DocumentIdField<string, false, false, false>;
+  teamMemberOf: foundry.data.fields.ArrayField<foundry.data.fields.DocumentIdField<string, true, false, false>, string[], string[], true, false, true>;
 }
 
 interface AdvancementSchema extends foundry.data.fields.DataSchema {

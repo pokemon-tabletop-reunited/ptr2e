@@ -1182,6 +1182,13 @@ class ActorPTR2e<
     if (result === false) return false;
 
     if (options.fail === true) return false;
+
+    if(this.system.party.ownerOf) {
+      const folder = game.folders.get(this.system.party.ownerOf) as FolderPTR2e;
+      if(folder.owner) {
+        throw new Error("Cannot create an actor that owns a party folder already owned by another actor.");
+      }
+    }
   }
 
   protected override async _preUpdate(
@@ -1189,6 +1196,13 @@ class ActorPTR2e<
     options: DocumentModificationContext<TParent>,
     user: User
   ): Promise<boolean | void> {
+    if(changed.system?.party?.ownerOf) {
+      const folder = game.folders.get(changed.system.party.ownerOf as Maybe<string>) as FolderPTR2e;
+      if(folder?.owner) {
+        throw new Error("Cannot change the owner of a party folder to an actor that does not own it. Please remove the current party owner first.");
+      }
+    }
+
     if (changed.system?.health?.value !== undefined) {
       const fainted = this.effects.get("faintedcondition") !== undefined;
       if ((changed.system.health.value as number) <= 0 && !fainted) {
