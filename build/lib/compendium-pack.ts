@@ -214,7 +214,7 @@ class CompendiumPack {
             throw PackError(`Document contained in ${filePath} has no name.`);
         }
 
-        const filenameForm = sluggify(documentName).concat(".json");
+        const filenameForm = (documentName.startsWith("-") ? "-" : "") + sluggify(documentName).concat(".json");
         if (path.basename(filePath) !== filenameForm) {
             throw PackError(`Filename at ${filePath} does not reflect document name (should be ${filenameForm}).`);
         }
