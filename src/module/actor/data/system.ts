@@ -235,6 +235,11 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
                     label: "PTR2E.FIELDS.inventoryPoints.current.label",
                     hint: "PTR2E.FIELDS.inventoryPoints.current.hint",
                 }),
+            }),
+            party: new fields.SchemaField({
+              ownerOf: new fields.DocumentIdField({ required: false }),
+              partyMemberOf: new fields.DocumentIdField({ required: false }),
+              teamMemberOf: new fields.ArrayField(new fields.DocumentIdField(), { initial: [] }),
             })
         };
     }

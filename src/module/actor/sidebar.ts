@@ -175,48 +175,22 @@ export default class ActorDirectoryPTR2e<
     const actor = await fromUuid<TActor>(uuid);
     if (!actor) return super._handleDroppedEntry(target, data);
 
-    // Get the folder the Actor is currently in
-    const currentFolder = await (async () => {
-      if (typeof actor.folder === "string") {
-        return await fromUuid<FolderPTR2e<TActor>>(actor.folder);
-      }
-      if (actor.folder instanceof FolderPTR2e) {
-        return actor.folder;
-      }
-      return null;
-    })();
-
+    const party = actor.system.party;
     // If the Actor is the owner of the current Folder, do not allow it to be moved at all
-    if (currentFolder?.isFolderOwner(uuid)) {
-      console.warn("Cannot move a Party Owner to another folder.");
-      return;
-    }
-    // If the Actor is already part of a party, remove them from that party
-    if (currentFolder?.isInParty(uuid)) {
-      if (
-        currentFolder.id === targetFolder?.id &&
-        (target?.classList.contains("party") || target?.classList.contains("owner"))
-      ) {
-        return super._handleDroppedEntry(target, data);
-      }
-
-      await actor.update({ folder: null });
-
-      const update = currentFolder.party.filter((member) => member !== uuid);
-      await currentFolder.setFlag("ptr2e", "party", update);
-    }
-
-    // If the target was the owner of a Party, add the Actor to that Party
-    if (target?.classList.contains("party") || target?.classList.contains("owner")) {
-      if (!targetFolder) return;
-
-      await actor.update({ folder: targetFolder.id });
-
-      const update = targetFolder.party.concat(uuid);
-      await targetFolder.setFlag("ptr2e", "party", update);
+    if (party.ownerOf) {
+      ui.notifications.error("Cannot move a Party Owner to another folder.");
       return;
     }
 
+    // Prepare update data
+    const update = {
+      folder: targetFolder?.id,
+    } as Record<string, unknown>;
+
+    // If the target Folder is a party, update the party membership
+    if(targetFolder && targetFolder.owner) update["system.party.partyMemberOf"] = targetFolder.id;
+
+    await actor.update(update);
     return super._handleDroppedEntry(target, data);
   }
 }
