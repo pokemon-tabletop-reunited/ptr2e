@@ -9,24 +9,25 @@
             {
                 "name": "Suspicious Minds Action (#1)",
                 "slug": "suspicious-minds-action-1",
-                "description": "",
+                "description": "Effect: An additonal Stack is removed from the Affliction as if the creature ended their Activation again, proviking all of the pertinent end-of-Activation effects. This may be triggered a number of times on a creature per Affliction they possess, spending PP for each one.",
                 "traits": [],
                 "type": "generic",
                 "range": {
-                    "target": "enemy",
-                    "distance": 0,
+                    "target": "creature",
+                    "distance": 5,
                     "unit": "m"
                 },
                 "cost": {
-                    "activation": "simple",
-                    "powerPoints": 0,
+                    "activation": "free",
+                    "powerPoints": 2,
+                    "trigger": "A creature in range suffers effect damage from an Affliction due to a Stack being removed.",
                     "delay": null,
                     "priority": null
                 }
             }
         ],
         "slug": null,
-        "description": "<p>When a Damage Over Time condition triggers on an enemy, you may spend 3PP to make it trigger a second time. In the event that the creature is suffering from multiple Damage Over Time conditions, you may spend the 3PP per condition to tick each one of them a second time. This reduces the stacks of the condition as though the creature had taken another activation.</p>",
+        "description": "<p>Trigger: A creature in range suffers effect damage from an Affliction due to a Stack being removed. <br><br>Effect: An additonal Stack is removed from the Affliction as if the creature ended their Activation again, proviking all of the pertinent end-of-Activation effects. This may be triggered a number of times on a creature per Affliction they possess, spending PP for each one.</p>",
         "traits": [],
         "prerequisites": [
             "Fast Talk 40"

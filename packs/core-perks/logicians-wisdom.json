@@ -9,24 +9,25 @@
             {
                 "name": "Logician's Wisdom Action (#1)",
                 "slug": "logicians-wisdom-action-1",
-                "description": "<p>Costs 5PP to apply this Perk to a move. The move gains +10 Power per debuff on the target.</p>",
+                "description": "<p>Effect: The target takes +10% more Damage per [Major Affliction] and +5% more Damage per [Minor Affliction] they possess from the triggering attack.</p>",
                 "traits": [],
                 "type": "generic",
                 "range": {
                     "target": "enemy",
-                    "distance": 0,
+                    "trigger": "The user hits a target with a Physical- or Special-Category Attack.",
+                    "distance": 20,
                     "unit": "m"
                 },
                 "cost": {
-                    "activation": "simple",
-                    "powerPoints": 0,
+                    "activation": "free",
+                    "powerPoints": 5,
                     "delay": null,
                     "priority": null
                 }
             }
         ],
         "slug": null,
-        "description": "<p>Costs 5PP to apply this Perk to a move. The move gains +10 Power per debuff on the target.</p>",
+        "description": "<p>Trigger: The user declares a Physical- or Special-Category Attack.</p><p>Effect: The target takes +10% more Damage per [Major Affliction] and +5% more Damage per [Minor Affliction] they possess from the triggering attack.</p>",
         "traits": [],
         "prerequisites": [
             "None"

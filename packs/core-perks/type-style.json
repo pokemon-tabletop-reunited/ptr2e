@@ -11,18 +11,37 @@
       "approach": "power",
       "archetype": "Type Ace"
     },
-    "description": "The user spends 3 PP, targeting themself or an ally within 10m. The target adds this Perk's <Type> to the next Attack they declare, lasting until the Attack resolves.",
+    "description": "<p>The target adds this Action's [Type] to the next Attack they declare, lasting until the Attack resolves. The user may also be selected as a target for this Action.</p>",
     "actions": [
       {
         "name": "<Type> Style",
         "slug": "type-style",
-        "description": "The user spends 3 PP, targeting themself or an ally within 10m. The target adds this Perk's <Type> to the next Attack they declare, lasting until the Attack resolves.",
-        "type": "passive",
-        "traits": []
+        "description": "The target adds this Action's [Type] to the next Attack they declare, lasting until the Attack resolves. The user may also be selected as a target for this Action.</p>",
+        "type": "generic",
+        "traits": [
+          "social",
+          "command",
+          "type"
+        ],
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
       }
     ],
     "slug": "type-style",
-    "traits": [],
+    "traits": [
+      "social",
+      "command",
+      "type"
+    ],
     "node": {
       "i": -33,
       "j": -18,

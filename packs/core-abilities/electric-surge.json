@@ -25,12 +25,35 @@
           "unit": "m"
         },
         "description": "Trigger: The user uses Electric Terrain.\nEffect: Connection - Electric Terrain. Increase the number of rounds Electric Terrain persists by 2."
+      },
+      {
+        "traits": [
+          "terrain",
+          "connection",
+          "environ"
+        ],
+        "name": "Electric Surge",
+        "slug": "electric-surge",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "object",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "Passive: If a space within range possesses Electric Terrain, the user is affected by Electric Terrain."
       }
     ],
-    "description": "Trigger: The user uses Electric Terrain.\nEffect: Connection - Electric Terrain. Increase the number of rounds Electric Terrain persists by 2.",
+    "description": "Trigger: The user uses Electric Terrain.\nEffect: Connection - Electric Terrain. Increase the number of rounds Electric Terrain persists by 2.\nPassive: If a space within range possesses Electric Terrain, the user is affected by Electric Terrain.",
     "traits": [
       "terrain",
-      "connection"
+      "connection",
+      "environ"
     ],
     "slug": null,
     "container": null
