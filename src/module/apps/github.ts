@@ -29,7 +29,7 @@ class GithubManager {
             }
             const index = await pack.getIndex({ fields: ["system.slug"] });
             const existing = index.find(
-                (i) => item.slug === (i.system.slug || game.ptr.util.sluggify(i.name))
+                (i) => item.slug === (i.system?.slug || game.ptr.util.sluggify(i.name))
             );
             if (existing) return pack.getDocument(existing._id);
             return null;
@@ -196,6 +196,11 @@ class GithubManager {
                 ui.notifications.error("An unexpected error occured.");
                 return;
             }
+        }
+
+        if(existing.type == "effect" && existing.pack == "ptr2e.core-effects" && existing.folder?.id === "V4skAU6G3OH5fXgD") {
+          ui.notifications.error("You cannot commit the Core Afflictions to Github in this manner.");
+          return
         }
 
         const isPack = document === existing;
