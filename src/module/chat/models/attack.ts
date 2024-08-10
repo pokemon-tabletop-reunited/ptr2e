@@ -11,6 +11,7 @@ import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import { UserVisibility } from "@scripts/ui/user-visibility.ts";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
+import { ActiveEffectPTR2e } from "@effects";
 
 abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   declare parent: ChatMessagePTR2e<AttackMessageSystem>;
@@ -43,7 +44,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           }),
           context: new fields.SchemaField({
             check: new fields.SchemaField({
-              breakdown: new fields.StringField({ required: true, blank: true, initial: ""}),
+              breakdown: new fields.StringField({ required: true, blank: true, initial: "" }),
               slug: new SlugField({ required: true, blank: true, initial: "" }),
               totalModifier: new fields.NumberField({ required: true, initial: 0 }),
               totalModifiers: new fields.ObjectField({ required: true, initial: {} }),
@@ -65,7 +66,24 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             title: new fields.StringField({ required: true, blank: true, initial: "" }),
             type: new fields.StringField({ required: true, blank: true, initial: "" }),
             options: new fields.ArrayField(new fields.StringField(), { required: true, initial: [] }),
-          })
+          }),
+          effectRolls: new fields.SchemaField({
+            applied: new fields.BooleanField({ required: true, initial: false }),
+            target: new fields.ArrayField(new fields.SchemaField({
+              chance: new fields.NumberField({ required: true, min: 1, max: 100 }),
+              effect: new fields.DocumentUUIDField(),
+              label: new fields.StringField({ required: true, initial: ""}),
+              roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
+              success: new fields.BooleanField({ required: true, nullable: true, initial: null})
+            }), { required: true, initial: [] }),
+            origin: new fields.ArrayField(new fields.SchemaField({
+              chance: new fields.NumberField({ required: true, min: 1, max: 100 }),
+              effect: new fields.DocumentUUIDField(),
+              label: new fields.StringField({ required: true, initial: ""}),
+              roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
+              success: new fields.BooleanField({ required: true, nullable: true, initial: null})
+            }), { required: true, initial: [] }),
+          }, {required: true, nullable: true, initial: null}),
         }),
         {
           required: true,
@@ -86,6 +104,16 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         spent: new fields.BooleanField({ required: true, initial: false }),
         cost: new fields.NumberField({ required: true, initial: 0 }),
       }),
+      selfEffects: new fields.SchemaField({
+        applied: new fields.BooleanField({ required: true, initial: false }),
+        rolls: new fields.ArrayField(new fields.SchemaField({
+          chance: new fields.NumberField({ required: true, min: 1, max: 100 }),
+          effect: new fields.DocumentUUIDField(),
+          label: new fields.StringField({ required: true, initial: ""}),
+          roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
+          success: new fields.BooleanField({ required: true, nullable: true, initial: null})
+        }), { required: true, initial: [] }),
+      }, { required: true, nullable: true, initial: null })
     };
   }
 
@@ -152,7 +180,36 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       result.accuracy = fromRollData(source.accuracy);
       result.crit = fromRollData(source.crit);
       result.damage = fromRollData(source.damage);
+      if(source.effectRolls) {
+        result.effectRolls = {
+          applied: source.effectRolls.applied,
+          target: source.effectRolls.target.map((e) => ({
+            chance: e.chance,
+            effect: e.effect as ItemUUID,
+            label: e.label,
+            roll: fromRollData(e.roll),
+            success: e.success,
+          })),
+          origin: source.effectRolls.origin.map((e) => ({
+            chance: e.chance,
+            effect: e.effect as ItemUUID,
+            label: e.label,
+            roll: fromRollData(e.roll),
+            success: e.success,
+          })),
+        }
+      }
       result.target = fromActorData(source.target)!;
+    }
+
+    if(this.selfEffects) {
+      this.selfEffects.rolls = this._source.selfEffects!.rolls.map(e => ({
+        chance: e.chance,
+        effect: e.effect as ItemUUID,
+        label: e.label,
+        roll: fromRollData(e.roll),
+        success: e.success,
+      }))
     }
 
     this.origin = fromActorData(this._source.origin)!;
@@ -168,25 +225,25 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       );
   }
 
+  static async renderInnerRoll(roll: Rolled<Roll> | null, isPrivate: boolean)  {
+    return roll ? roll.render({ isPrivate }) : null;
+  };
+
   async getHTMLContent() {
     const renderRolls = async (data: ResultData, isPrivate: boolean) => {
-      const renderInnerRoll = async (roll: Rolled<AttackRoll> | null, isPrivate: boolean) => {
-        return roll ? roll.render({ isPrivate }) : null;
-      };
 
-      // TODO: Implement effect checks
       const rolls = {
         accuracy: await renderTemplate(
           "/systems/ptr2e/templates/chat/rolls/accuracy-check.hbs",
           {
-            inner: await renderInnerRoll(data.accuracy, isPrivate),
+            inner: await AttackMessageSystem.renderInnerRoll(data.accuracy, isPrivate),
             isPrivate,
             type: "accuracy",
             label: "PTR2E.Attack.AccuracyCheck",
           }
         ),
         crit: await renderTemplate("/systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
-          inner: await renderInnerRoll(data.crit, isPrivate),
+          inner: await AttackMessageSystem.renderInnerRoll(data.crit, isPrivate),
           isPrivate,
           type: "crit",
           label: "PTR2E.Attack.CritCheck",
@@ -194,13 +251,44 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         damage: await renderTemplate(
           "/systems/ptr2e/templates/chat/rolls/damage-randomness.hbs",
           {
-            inner: await renderInnerRoll(data.damage, isPrivate),
+            inner: await AttackMessageSystem.renderInnerRoll(data.damage, isPrivate),
             isPrivate,
             type: "damage",
             label: "PTR2E.Attack.DamageRandomness",
           }
         ),
+        effects: [] as string[],
       };
+      if(data.effectRolls) {
+        async function handleRoll(effectRoll: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>, target: "origin" | "target") {
+          const item = await fromUuid(effectRoll.effect);
+          if(!item) {
+            Hooks.onError("AttackMessageSystem#getHTMLContent", new Error(`Could not find item with uuid ${effectRoll.effect}`), { log: "error" });
+            return;
+          };
+          if(!effectRoll.roll) {
+            Hooks.onError("AttackMessageSystem#getHTMLContent", new Error(`Effect roll for ${item.name} is missing`), { log: "error" });
+            return;
+          }
+
+          rolls.effects.push(await renderTemplate(
+            "/systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
+            {
+              inner: await AttackMessageSystem.renderInnerRoll(effectRoll.roll, isPrivate),
+              isPrivate,
+              type: "effect",
+              label: `${effectRoll.label || item.name}${target === 'origin' ? ` (${target})` : ''}`,
+            }
+          ));
+        }
+
+        for(const effectRoll of data.effectRolls.target) {
+          await handleRoll(effectRoll, "target");
+        } 
+        for(const effectRoll of data.effectRolls.origin) {
+          await handleRoll(effectRoll, "origin");
+        }
+      }
 
       return rolls;
     };
@@ -212,6 +300,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         origin: this.origin,
         attack: this.attack,
         hasDamage: this.results.some((result) => !!result.damage),
+        hasEffect: this.results.some((result) => !!result.effectRolls),
         results: new Map<ActorUUID, AttackMessageRenderContextData>(
           // @ts-expect-error - This is a valid operation
           await Promise.all(
@@ -222,7 +311,15 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                 hit:
                   this.overrides.get(result.target.uuid)?.value ||
                   AttackRoll.successCategory(result.accuracy, result.crit),
-                notes: RollNote.notesToHTML(result.context.notes.map(n => new RollNote(n)))?.outerHTML
+                notes: RollNote.notesToHTML(result.context.notes.map(n => new RollNote(n)))?.outerHTML,
+                effect: result.effectRolls ? {
+                  some: true,
+                  applied: result.effectRolls.applied,
+                  effects: {
+                    origin: result.effectRolls.origin,
+                    target: result.effectRolls.target,
+                  }
+                } : { some: false, applied: false },
               };
               if (result.damage) {
                 const damage = result.damage.calculateDamageTotal({
@@ -253,6 +350,31 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             })
           )
         ),
+        selfEffectRolls: this.selfEffects ? await (async () => {
+          const rolls = [];
+          for(const roll of this.selfEffects!.rolls) {
+            const item = await fromUuid(roll.effect);
+            if(!item) {
+              Hooks.onError("AttackMessageSystem#getHTMLContent", new Error(`Could not find item with uuid ${roll.effect}`), { log: "error" });
+              continue;
+            };
+            if(!roll.roll) {
+              Hooks.onError("AttackMessageSystem#getHTMLContent", new Error(`Effect roll for ${item.name} is missing`), { log: "error" });
+              continue;
+            }
+
+            rolls.push(await renderTemplate(
+              "/systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
+              {
+                inner: await AttackMessageSystem.renderInnerRoll(roll.roll, false),
+                isPrivate: false,
+                type: "effect",
+                label: roll.label || item.name,
+              }
+            ));
+          }
+          return rolls;
+        })() : [],
       });
 
     return renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
@@ -309,16 +431,59 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     return true;
   }
 
-  async applyDamage(targetUuid: ActorUUID) {
+  async applyDamage(targetUuid: ActorUUID): Promise<false | number> {
     const result = this.context!.results.get(targetUuid);
     if (!result) return false;
 
-    const target = result.target;
-    const damage = result.damage;
-    if (!damage) return false;
+    async function applyEffects(target: ActorPTR2e, effects: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[]) {
+      if (!effects.length) return;
+      const toApply = await (async () => {
+        const toApply: ActiveEffectPTR2e['_source'][] = [];
+        for(const effectRoll of effects) {
+          if(effectRoll.success === null) {
+            effectRoll.success = (effectRoll.roll?.total ?? 1) <= 0
+          }
+          if(!effectRoll.success) continue;
 
-    const damageApplied = await target.applyDamage(damage);
-    return damageApplied;
+          const item = await fromUuid(effectRoll.effect);
+          if(!item) {
+            Hooks.onError("AttackMessageSystem#applyDamage", new Error(`Could not find item with uuid ${effectRoll.effect}`), { log: "error" });
+            continue;
+          };
+          if(item.type !== "effect") {
+            Hooks.onError("AttackMessageSystem#applyDamage", new Error(`Item with uuid ${effectRoll.effect} is not an effect`), { log: "error" });
+            continue;
+          }
+          
+          toApply.push(...item.toObject().effects as ActiveEffectPTR2e['_source'][]);
+        }
+        return toApply;
+      })();
+
+      if(toApply.length) {
+        await target.applyRollEffects(toApply);
+      }
+    }
+
+    return (await Promise.all([
+      (async () => {
+        const target = result.target;
+        const damage = result.damage;
+        if (!damage) return false;
+
+        const damageApplied = await target.applyDamage(damage);
+        return damageApplied;
+      })(),
+      (async (): Promise<void> => {
+        const target = result.target;
+        await applyEffects(target, result.effect.effects?.target ?? []);
+      })(),
+      (async (): Promise<void> => {
+        const target = await this.currentOrigin;
+        if (!target) return;
+        await applyEffects(target, result.effect.effects?.origin ?? []);
+      })(),
+    ]))[0];
   }
 
   async updateTargets(event: JQuery.ClickEvent) {
@@ -353,7 +518,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             check: r.check,
             ...R.pick(r.context, ["action", "domains", "notes", "title", "type"]),
             options: Array.from(r.context.options ?? [])
-          }
+          },
+          effectRolls: r.context.effectRolls ?? null
         }));
 
         if (event.altKey) {
@@ -406,8 +572,10 @@ interface AttackMessageRenderContext {
   origin: ActorPTR2e;
   attack: AttackPTR2e;
   hasDamage: boolean;
+  hasEffect: boolean;
   results: Map<ActorUUID, AttackMessageRenderContextData>;
   pp: ModelPropsFromSchema<PPSchema>;
+  selfEffectRolls: string[];
 }
 
 interface AttackMessageRenderContextData {
@@ -422,6 +590,14 @@ interface AttackMessageRenderContextData {
   damageRoll?: DamageCalc;
   accuracyRoll?: AccuracyCalc;
   notes: Maybe<string>;
+  effect: {
+    some: boolean;
+    applied: boolean;
+    effects?: {
+      origin: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[];
+      target: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[];
+    };
+  };
 }
 
 interface AttackMessageSchema extends foundry.data.fields.DataSchema {
@@ -455,6 +631,14 @@ interface AttackMessageSchema extends foundry.data.fields.DataSchema {
     false,
     false
   >;
+  selfEffects: foundry.data.fields.SchemaField<
+    SelfEffectsSchema,
+    foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<SelfEffectsSchema>>,
+    foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<SelfEffectsSchema>>,
+    true,
+    true,
+    true
+  >;
 }
 
 interface OverrideSchema extends foundry.data.fields.DataSchema {
@@ -480,6 +664,11 @@ type ResultSchema = foundry.data.fields.SchemaField<
       foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>,
       foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>,
       true, false, true>;
+    effectRolls: foundry.data.fields.SchemaField<
+      TargetEffectRollsSchema,
+      foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<TargetEffectRollsSchema>>,
+      foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<TargetEffectRollsSchema>>,
+      true, true, true>;
   },
   {
     target: string;
@@ -487,6 +676,7 @@ type ResultSchema = foundry.data.fields.SchemaField<
     crit: string | null;
     damage: string | null;
     context: foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>;
+    effectRolls: foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<TargetEffectRollsSchema>> | null;
   },
   {
     target: ActorPTR2e;
@@ -494,8 +684,23 @@ type ResultSchema = foundry.data.fields.SchemaField<
     crit: Rolled<AttackRoll> | null;
     damage: Rolled<AttackRoll> | null;
     context: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<CheckContextSchema>>;
+    effectRolls: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<TargetEffectRollsSchema>> | null;
   }
 >;
+
+interface TargetEffectRollsSchema extends foundry.data.fields.DataSchema {
+  applied: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+  target: foundry.data.fields.ArrayField<
+    foundry.data.fields.SchemaField<EffectRollsSchema>,
+    foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[],
+    foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[],
+    true, false, true>;
+  origin: foundry.data.fields.ArrayField<
+    foundry.data.fields.SchemaField<EffectRollsSchema>,
+    foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[],
+    foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[],
+    true, false, true>;
+}
 
 interface CheckContextSchema extends foundry.data.fields.DataSchema {
   check: foundry.data.fields.SchemaField<
@@ -509,7 +714,7 @@ interface CheckContextSchema extends foundry.data.fields.DataSchema {
   action: foundry.data.fields.StringField<string, string, true, false, true>;
   domains: foundry.data.fields.ArrayField<SlugField, string[], string[], true, false, true>;
   notes: foundry.data.fields.ArrayField<
-    CheckContextRollNotesSchemaField, 
+    CheckContextRollNotesSchemaField,
     foundry.data.fields.SourcePropFromDataField<CheckContextRollNotesSchemaField>[],
     foundry.data.fields.ModelPropFromDataField<CheckContextRollNotesSchemaField>[],
     true, false, true>;
@@ -542,6 +747,34 @@ interface CheckContextRollNoteSchema extends foundry.data.fields.DataSchema {
   predicate: PredicateField<true, false, true>;
   outcome: foundry.data.fields.ArrayField<foundry.data.fields.NumberField, number[], number[], true, false, true>;
   visibility: foundry.data.fields.StringField<UserVisibility, UserVisibility, true, false, true>;
+}
+
+interface SelfEffectsSchema extends foundry.data.fields.DataSchema {
+  applied: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+  rolls: foundry.data.fields.ArrayField<
+    SelfEffectRollsSchemaField,
+    foundry.data.fields.SourcePropFromDataField<SelfEffectRollsSchemaField>[],
+    foundry.data.fields.ModelPropFromDataField<SelfEffectRollsSchemaField>[],
+    true,
+    false,
+    true
+  >
+}
+
+type SelfEffectRollsSchemaField = foundry.data.fields.SchemaField<
+  EffectRollsSchema,
+  foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>,
+  foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>,
+  true,
+  false,
+  true>;
+
+interface EffectRollsSchema extends foundry.data.fields.DataSchema {
+  chance: foundry.data.fields.NumberField<number, number, true, false, false>;
+  effect: foundry.data.fields.DocumentUUIDField<ItemUUID, true, false, false>;
+  label: foundry.data.fields.StringField<string, string, true, false, true>;
+  roll: foundry.data.fields.JSONField<Rolled<Roll>, true, true, true>;
+  success: foundry.data.fields.BooleanField<boolean, boolean, true, true, true>;
 }
 
 export default AttackMessageSystem;

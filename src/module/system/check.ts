@@ -20,6 +20,7 @@ import { AttackRoll, AttackRollCreationData, AttackRollDataPTR2e } from "./rolls
 import { CaptureRoll, CaptureRollCreationData } from "./rolls/capture-roll.ts";
 import { ConsumableSystemModel } from "@item/data/index.ts";
 import { ActorPTR2e } from "@actor";
+import { ActiveEffectPTR2e } from "@effects";
 
 class CheckPTR2e {
     static async rollPokeball(
@@ -349,6 +350,13 @@ class CheckPTR2e {
                     }) ?? [];
             const notesList = RollNote.notesToHTML(notes);
 
+            for(const effectRoll of targetContext.effectRolls.origin) {
+              effectRoll.roll = await new Roll("1d100ms@dc", {dc: effectRoll.chance}).roll();
+            }
+            for(const effectRoll of targetContext.effectRolls.target) {
+              effectRoll.roll = await new Roll("1d100ms@dc", {dc: effectRoll.chance}).roll();
+            }
+
             const messageContext: CheckRollContext & {
                 notesList?: HTMLUListElement | null;
             } = {
@@ -366,6 +374,7 @@ class CheckPTR2e {
                 domains: context.domains,
                 damaging: context.damaging,
                 createMessage: context.createMessage,
+                effectRolls: targetContext.effectRolls
             };
 
             results.push({
@@ -388,6 +397,23 @@ class CheckPTR2e {
             }
         }
 
+        const effectsToApply: ActiveEffectPTR2e['_source'][] = [];
+        if(context.selfEffectRolls?.length) {
+          for(const effectRoll of context.selfEffectRolls) {
+            effectRoll.roll ??= await new Roll("1d100ms@dc", {dc: effectRoll.chance}).roll();
+            effectRoll.success = effectRoll.roll.total <= 0;
+            if(effectRoll.success) {
+              const item = await fromUuid(effectRoll.effect);
+              if(!item || item.type !== "effect") {
+                console.error(`Failed to find effect item with uuid ${effectRoll.effect}`);
+                continue;
+              }
+
+              effectsToApply.push(...item.toObject().effects as ActiveEffectPTR2e['_source'][]);
+            }
+          }
+        }
+
         const message = await (() => {
             if (!context.createMessage) return null;
 
@@ -408,6 +434,10 @@ class CheckPTR2e {
             await item.update({
                 "system.charges.value": (item as ConsumablePTR2e).system.charges.value - 1,
             });
+        }
+
+        if(effectsToApply.length) {
+          await context.actor?.applyRollEffects(effectsToApply);
         }
 
         return results.map((r) => r.rolls);

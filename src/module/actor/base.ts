@@ -20,7 +20,7 @@ import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
 import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
-import { extractEphemeralEffects } from "src/util/rule-helpers.ts";
+import { extractEffectRolls, extractEphemeralEffects } from "src/util/rule-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -172,6 +172,9 @@ class ActorPTR2e<
       ephemeralEffects: {},
       modifierAdjustments: { all: [], damage: [] },
       modifiers: { all: [], damage: [] },
+      afflictions: { data: [], ids: new Set() },
+      rollNotes: {},
+      effects: { },
       preparationWarnings: {
         add: (warning: string) => preparationWarnings.add(warning),
         flush: fu.debounce(() => {
@@ -181,8 +184,6 @@ class ActorPTR2e<
           preparationWarnings.clear();
         }, 10), // 10ms also handles separate module executions
       },
-      afflictions: { data: [], ids: new Set() },
-      rollNotes: {},
     };
 
     this._party = null;
@@ -1016,6 +1017,30 @@ class ActorPTR2e<
       options: [...params.options, ...itemOptions, ...targetRollOptions],
     });
 
+    const targetEffectRolls = await extractEffectRolls({
+      affects: "target",
+      origin: selfActor,
+      target: targetToken?.actor ?? null,
+      item: selfItem,
+      attack: params.attack ?? null,
+      action: params.action ?? null,
+      domains: params.domains,
+      options: [...params.options, ...itemOptions, ...targetRollOptions],
+      chanceModifier: 0
+    })
+
+    const targetOriginEffectRolls = await extractEffectRolls({
+      affects: "origin",
+      origin: selfActor,
+      target: targetToken?.actor ?? null,
+      item: selfItem,
+      attack: params.attack ?? null,
+      action: params.action ?? null,
+      domains: params.domains,
+      options: [...params.options, ...itemOptions, ...targetRollOptions],
+      chanceModifier: 0
+    })
+
     // Clone the actor to recalculate its AC with contextual roll options
     const targetActor = params.viewOnly
       ? null
@@ -1064,6 +1089,7 @@ class ActorPTR2e<
       self,
       target,
       traits: actionTraits,
+      effectRolls: {target: targetEffectRolls, origin: targetOriginEffectRolls},
     };
   }
 
@@ -1091,6 +1117,13 @@ class ActorPTR2e<
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isImmuneTo(_effect: EffectSourcePTR2e): boolean {
     return false;
+  }
+
+  async applyRollEffects(toApply: ActiveEffectPTR2e["_source"][]) {
+    const effects = await this.createEmbeddedDocuments("ActiveEffect", toApply) as ActiveEffectPTR2e[];
+    await ChatMessage.create({
+      content: `<p>Applied the following effects to @UUID[${this.uuid}]:</p><ul>` + effects.map(e => `<li>@UUID[${e.uuid}]</li>`).join("") + "</ul>"
+    })
   }
 
   static override async createDocuments<TDocument extends foundry.abstract.Document>(

@@ -1,4 +1,3 @@
-import { ActorPTR2e } from "@actor";
 import { GrantItemChangeSystem } from "@data";
 import { ItemPTR2e } from "@item";
 import ActiveEffectPTR2e from "../document.ts";
@@ -8,6 +7,7 @@ export default class GrantEffectChangeSystem extends GrantItemChangeSystem {
 
     static override defineSchema() {
         const schema = super.defineSchema();
+        // eslint-disable-next-line @typescript-eslint/no-empty-function
         schema.value.validate = () => {};
         schema.value.options.choices = CONFIG.PTR.statusEffects.reduce((choices, status) => {
             choices[status.id] = status.name;
@@ -16,7 +16,7 @@ export default class GrantEffectChangeSystem extends GrantItemChangeSystem {
         return schema;
     }
 
-    override apply(_actor: ActorPTR2e, _rollOptions?: string[] | Set<string> | null): void {
+    override apply(): void {
         // TODO: Implement createInMemoryCondition
     }
 

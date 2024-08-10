@@ -1,4 +1,4 @@
-import { ActorPTR2e } from "@actor";
+import { ActorPTR2e, EffectRollSource } from "@actor";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CheckRollContext } from "@system/rolls/data.ts";
@@ -366,6 +366,10 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       attackSlug: string;
       origin: Record<string, unknown>;
       results: Record<string, unknown>[];
+      selfEffects: {
+        applied: boolean;
+        rolls: EffectRollSource[];
+      } | null;
     } = {
       pp: {
         spent: !!context.consumePP,
@@ -391,17 +395,28 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
           check: r.check,
           ...R.pick(r.context, ["action", "domains", "notes", "title", "type"]),
           options: Array.from(r.context.options ?? [])
-        }
+        },
+        effectRolls: r.context.effectRolls ?? null
       })),
+      selfEffects: context.selfEffectRolls?.length ? {
+        applied: true,
+        rolls: await Promise.all(context.selfEffectRolls.map(async (r) => ({
+          chance: r.chance,
+          effect: r.effect,
+          label: r.label,
+          roll: r.roll ? r.roll.toJSON() : (await new Roll("1d100ms@dc", {dc: r.chance}).roll()).toJSON(),
+        })))
+      } : null
     };
 
+    // @ts-expect-error - Chatmessages aren't typed properly yet
     return dataOnly
       ? {
         type: "attack",
         speaker,
         flavor,
         system,
-      }
+      } // @ts-expect-error - Chatmessages aren't typed properly yet
       : ChatMessagePTR2e.create<ChatMessagePTR2e<AttackMessageSystem>>({
         type: "attack",
         speaker,

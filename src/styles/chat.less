@@ -106,6 +106,8 @@
                     }
 
                     place-content: center;
+                    gap: 4px;
+                    
                     a[data-action="consume-pp"] {
                         &.spent {
                             color: #9e7d10;
@@ -348,11 +350,11 @@
                         }
                     }
 
-                    .status {
+                    .status, .effect-rolls {
                         margin-left: 0.25rem;
-                        flex: 0 0 64px;
+                        flex: 0 0 50px;
 
-                        i.fas {
+                        i.fas, i.far {
                             font-size: 22px;
 
                             &.fa-certificate {
@@ -365,6 +367,10 @@
 
                             &.fa-times-circle {
                                 color: #f04e4e;
+                            }
+
+                            &.fa-star {
+                              color: goldenrod;
                             }
                         }
                     }
@@ -379,7 +385,7 @@
                     }
 
                     .apply {
-                        flex: 0 0 70px;
+                        flex: 0 0 60px;
                         display: flex;
                         justify-content: center;
                         align-items: center;

@@ -196,6 +196,55 @@ aside[role="tooltip"].damage-info .note figure.damage {
   padding: 0;
   align-content: center;
 }
+aside[role="tooltip"].effect-rolls content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+aside[role="tooltip"].effect-rolls content header {
+  margin: 0;
+  border-bottom: 1px solid var(--color-light-6);
+  width: 100%;
+}
+aside[role="tooltip"].effect-rolls content main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+aside[role="tooltip"].effect-rolls content main section.effect {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  align-items: center;
+}
+aside[role="tooltip"].effect-rolls content main section.effect small {
+  max-width: 120px;
+  flex: 1;
+}
+aside[role="tooltip"].effect-rolls content main section.effect .total {
+  flex: 0 0 35px;
+}
+aside[role="tooltip"].effect-rolls content main section.effect .total.fail {
+  text-shadow: 1px 1px #aa0200;
+}
+aside[role="tooltip"].effect-rolls content main section.effect .total.success {
+  text-shadow: 1px 1px #18520b;
+}
+aside[role="tooltip"].effect-rolls content main section.effect i {
+  flex: 0 0 25px;
+  text-align: center;
+  border: 1px solid;
+  border-radius: 8px;
+  padding: 0.25rem;
+  cursor: pointer;
+}
+aside[role="tooltip"].effect-rolls content main section.effect i.fail {
+  border-color: #aa0200 !important;
+}
+aside[role="tooltip"].effect-rolls content main section.effect i.success {
+  border-color: #18520b !important;
+}
 aside[role="tooltip"] .attack-embed {
   min-width: 275px;
 }

@@ -13,7 +13,7 @@ class DegreeOfSuccess {
     /** The total of the roll including modifiers */
     readonly rollTotal: number;
 
-    constructor(roll: Rolled<CheckRoll> | RollBrief) {
+    constructor(roll: Rolled<CheckRoll> | Rolled<Roll> | RollBrief) {
         if (roll instanceof Roll) {
             this.dieResult =
                 (roll.isDeterministic
@@ -39,7 +39,7 @@ class DegreeOfSuccess {
     }
 
     static create(
-        roll: Rolled<CheckRoll>
+        roll: Rolled<CheckRoll> | Rolled<Roll>
     ): DegreeOfSuccess | null {
         // TODO: Implement
         const dos = new DegreeOfSuccess(roll);
