@@ -12,18 +12,29 @@
       "approach": "power",
       "archetype": "Support"
     },
-    "description": "When an ally is reduced to below 1HP, you may activate this ability. They are instead reduced to 1HP, and do not gain a stack of Weary. After this, they then clear any Afflictions and recover 30% of their Max HP.",
+    "description": "<p>Trigger: An ally gains @Affliction[fainted].</p><p>Effect: The target is healed to 1HP, and is healed of one Stack of @Affliction[weary]. Then, the target is cleared of any [Major Afflictions] and [Minor Afflictions] and recover 5 Ticks of HP.</p>",
     "actions": [
       {
         "name": "Keep Fighting!",
         "slug": "keep-fighting",
-        "description": "When an ally is reduced to below 1HP, you may activate this ability. They are instead reduced to 1HP, and do not gain a stack of Weary. After this, they then clear any Afflictions and recover 30% of their Max HP.",
+        "description": "Effect: The target is healed to 1HP, and is healed of one Stack of @Affliction[weary]. Then, the target is cleared of any [Major Afflictions] and [Minor Afflictions] and recover 5 Ticks of HP.",
+        "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 10
+          "powerPoints": 10,
+          "trigger": "An ally gains @Affliction[fainted].",
+          "delay": null,
+          "priority": null
         },
-        "type": "generic",
-        "traits": []
+        "range": {
+          "target": "ally",
+          "distance": 10,
+          "unit": "m"
+        },
+        "traits": [
+          "interrupt-4",
+          "healing"
+        ]
       }
     ],
     "slug": "keep-fighting",

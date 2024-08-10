@@ -9,24 +9,28 @@
             {
                 "name": "Plus Ultra Action (#1)",
                 "slug": "plus-ultra-action-1",
-                "description": "<p>Trigger: You enter the Desperation State.<br><br>On entering the Desperation state, you become Boosted 5 and Resolved 5. This is a free-action interrupt costing 5PP.</p>",
-                "traits": [],
-                "type": "generic",
+                "description": "<p>Trigger: The user crosses the Desperation threshold.<br><br>Effect: The user gains @Affliction[boosted] 5 and @Affliction[resolved] 5.</p>",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 5,
+                    "trigger": "The user crosses the Desperation threshold.",
+                    "delay": null,
+                    "priority": null
+                },
                 "range": {
-                    "target": "enemy",
+                    "target": "self",
                     "distance": 0,
                     "unit": "m"
                 },
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 0,
-                    "delay": null,
-                    "priority": null
-                }
+                "traits": [
+                    "desperation-1-3",
+                    "interrupt-2"
+                ],
+                "type": "generic"
             }
         ],
         "slug": null,
-        "description": "<p>Trigger: You enter the Desperation State.<br><br>On entering the Desperation state, you become Boosted 5 and Resolved 5. This is a free-action interrupt costing 5PP.</p>",
+        "description": "<p>Trigger: The user crosses the Desperation threshold.<br><br>Effect: The user gains @Affliction[boosted] 5 and @Affliction[resolved] 5.</p>",
         "traits": [],
         "prerequisites": [
             "None"
