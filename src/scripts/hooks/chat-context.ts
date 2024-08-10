@@ -1,9 +1,11 @@
-import { ChatMessagePTR2e, SkillMessageSystem } from "@chat";
+import { ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
 import { PTRHook } from "./data.ts";
+import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 
 export const ChatContext: PTRHook = {
     listen: () => {
-        //@ts-expect-error
+        // Luck based rerolling
+        //@ts-expect-error - This is valid typing
         Hooks.on("getChatLogEntryContext", (chat: ChatLog, menuItems: ContextMenuEntry[]): void => {
             const options: ContextMenuEntry[] = [
                 {
@@ -62,5 +64,27 @@ export const ChatContext: PTRHook = {
             ]
             menuItems.push(...options);
         });
+
+        // Roll Inspector
+        //@ts-expect-error - This is valid typing
+        Hooks.on("getChatLogEntryContext", (chat: ChatLog, menuItems: ContextMenuEntry[]): void => {
+          const options: ContextMenuEntry[] = [
+              {
+                  name: "PTR2E.ChatContext.RollInspector.label",
+                  icon: '<i class="fas fa-magnifying-glass"></i>',
+                  condition: li => {
+                      const message = game.messages.get(li.data("messageId"));
+                      if(!message) return false;
+                      return ["attack", "skill", "capture"].includes(message.type) || (message.type === "damage-applied" && !!(message.system as DamageAppliedMessageSystem).result)
+                  },
+                  callback: li => {
+                      const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e<SkillMessageSystem>;
+                      if(!message) return;
+                      new DataInspector(message, { }).render(true);
+                  }
+              }
+          ]
+          menuItems.push(...options);
+      });
     }
 }

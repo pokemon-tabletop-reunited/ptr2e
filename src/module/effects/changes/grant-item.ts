@@ -64,7 +64,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
         };
     }
 
-    static override #validateUuid(value: unknown): void | foundry.data.validation.DataModelValidationFailure {
+    static #validateUuid(value: unknown): void | foundry.data.validation.DataModelValidationFailure {
         if (!UUIDUtils.isItemUUID(value)) {
             return new foundry.data.validation.DataModelValidationFailure({
                 invalidValue: value,
@@ -72,7 +72,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
                 unresolved: false
             });
         }
-        if(!fromUuidSync(value)) {
+        if(game.ready && !fromUuidSync(value)) {
             return new foundry.data.validation.DataModelValidationFailure({
                 invalidValue: value,
                 message: game.i18n.format("PTR2E.Effect.FIELDS.ChangeUuid.invalid.itemNotFound", {uuid: value}),
@@ -83,7 +83,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
     static ON_DELETE_ACTIONS = ["cascade", "detach", "restrict"] as const;
   
-    override apply(_actor: ActorPTR2e, _rollOptions?: string[] | Set<string> | null): void {
+    override apply(): void {
         if(!this.invalid) this.#createInMemoryCondition();
     }
 
@@ -256,6 +256,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
     }
 
     /** Apply preselected choices to the granted item's choices sets. */
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     #applyChoicePreselections(_grantedItem: ItemPTR2e): void {
         return;
         // const source = grantedItem._source;

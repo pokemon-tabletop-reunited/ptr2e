@@ -2,11 +2,12 @@ import { ActorPTR2e } from "@actor";
 import { ActorSystemPTR2e } from "./index.ts";
 import { SpeciesDropSheet } from "@actor/sheets/species-drop-sheet.ts";
 import { AbilityPTR2e, ItemPTR2e, MovePTR2e } from "@item";
-import { SpeciesSystemModel, SpeciesSystemSource } from "@item/data/index.ts";
+import { SpeciesSystemModel } from "@item/data/index.ts";
 import natureData from "@scripts/config/natures.ts";
 import { htmlQuery, ImageResolver, sluggify } from "@utils";
 import { AttackPTR2e } from "@data";
 import { Progress } from "src/util/progress.ts";
+import { LevelUpMoveSchema } from "@item/data/species.ts";
 
 class PokemonActorSystem extends ActorSystemPTR2e {
     declare parent: ActorPTR2e<this>;
@@ -17,9 +18,9 @@ class PokemonActorSystem extends ActorSystemPTR2e {
         data: this["parent"]["_source"],
         options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean },
         user: User
-    ): Promise<boolean | void> {
+    ) {
         if (!this._source.species) {
-            const promise = await new Promise((resolve, _reject) => {
+            const promise = await new Promise<ItemPTR2e<SpeciesSystemModel> | null>((resolve) => {
                 const app = new SpeciesDropSheet(resolve);
                 app.render(true);
             });
@@ -32,7 +33,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
                 if ((!data.img || data.img === "icons/svg/mystery-man.svg") && promise.img) {
                     this.parent.updateSource({ img: promise.img });
                 }
-                await this._preCreateGenerateSpeciesData(this._source.species);
+                await this._preCreateGenerateSpeciesData(this._source.species as unknown as NonNullable<this['_source']['species']>);
                 return true;
             }
 
@@ -41,10 +42,10 @@ class PokemonActorSystem extends ActorSystemPTR2e {
         }
         await this._preCreateGenerateSpeciesData(this._source.species);
 
-        await super._preCreate(data, options, user);
+        return await super._preCreate(data, options, user);
     }
 
-    async _preCreateGenerateSpeciesData(species: SpeciesSystemSource["system"]) {
+    async _preCreateGenerateSpeciesData(species: NonNullable<this['_source']['species']>) {
         const progress = new Progress({steps: 5});
         progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix")+game.i18n.localize("PTR2E.PokemonGeneration.Progress.Step1"));
 
@@ -130,7 +131,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
 
         progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix")+game.i18n.localize("PTR2E.PokemonGeneration.Progress.Step2"));
 
-        const evolution = await (async (): Promise<SpeciesSystemSource["system"]> => {
+        const evolution = await (async (): Promise<NonNullable<this['_source']['species']>> => {
             if (preventEvolution) return species;
             // TODO: Implement evolutions
             return species;
@@ -189,7 +190,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
                     stats[key as keyof typeof stats] = 0;
                     bag.addEntry(
                         key as keyof typeof stats,
-                        weighted ? evolution.stats[key as keyof typeof evolution.stats] : 1
+                        weighted ? evolution.stats[key as keyof typeof evolution.stats] as number : 1
                     );
                 }
 
@@ -215,7 +216,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
         progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix")+game.i18n.localize("PTR2E.PokemonGeneration.Progress.Step3"));
 
         const moves: MovePTR2e["_source"][] = await (async () => {
-            const levelUpMoves = species.moves.levelUp.filter((move) => move.level <= level);
+            const levelUpMoves = (species.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level);
 
             const moveItems = await Promise.all(
                 levelUpMoves.map(async (move) => fromUuid(move.uuid))

@@ -16,16 +16,24 @@
     "movement": {
       "primary": [
         {
-          "type": "overland",
-          "value": 8
+          "type": "flight",
+          "value": 12
         }
       ],
-      "secondary": []
+      "secondary": [
+        {
+          "type": "overland",
+          "value": 3
+        }
+      ]
     },
     "traits": [
       "pokemon",
       "time-traveller",
-      "telekinetic-4",
+      "telekinetic-8",
+      "psycher",
+      "underdog",
+      "fully-evolved",
       "hover"
     ],
     "abilities": {
@@ -33,22 +41,22 @@
         "ancient-idol"
       ],
       "basic": [
-        "wandering-spirit",
-        "disenchant"
+        "spirit-call",
+        "conditioning"
       ],
       "advanced": [
-        "conditioning",
-        "regression-field"
+        "ray-blaster",
+        "sand-veil"
       ],
       "master": [
-        "bad-luck",
-        "mega-launcher"
+        "simple",
+        "sand-force"
       ]
     },
     "skills": [
       {
         "slug": "acrobatics",
-        "value": 10,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -56,7 +64,7 @@
       },
       {
         "slug": "archaeology",
-        "value": 65,
+        "value": 60,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -64,7 +72,15 @@
       },
       {
         "slug": "climb",
-        "value": 5,
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "flying",
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -72,7 +88,7 @@
       },
       {
         "slug": "conversation",
-        "value": 55,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -80,7 +96,7 @@
       },
       {
         "slug": "intimidate",
-        "value": 45,
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -96,7 +112,7 @@
       },
       {
         "slug": "listen",
-        "value": 40,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -104,7 +120,7 @@
       },
       {
         "slug": "natural-world",
-        "value": 50,
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -120,7 +136,7 @@
       },
       {
         "slug": "negotiation",
-        "value": 55,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -135,12 +151,12 @@
         "group": "occult"
       },
       {
-        "slug": "running",
-        "value": 40,
+        "slug": "ghost",
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
-        "group": null
+        "group": "occult"
       },
       {
         "slug": "spot",
@@ -152,7 +168,7 @@
       },
       {
         "slug": "stealth",
-        "value": 30,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -160,7 +176,7 @@
       },
       {
         "slug": "survival",
-        "value": 45,
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,

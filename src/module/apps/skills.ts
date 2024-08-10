@@ -123,7 +123,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
             v.active = this.tabGroups[v.group] === v.id;
             v.cssClass = v.active ? "active" : "";
         }
-        return Object.fromEntries(Object.entries(this.tabs).filter(([k, _v]) => parts.includes(k)));
+        return Object.fromEntries(Object.entries(this.tabs).filter(([k]) => parts.includes(k)));
     }
 
     override async _prepareContext(options: HandlebarsRenderOptions) {
@@ -196,7 +196,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         }
     }
 
-    static override async #onSubmit(
+    static async #onSubmit(
         this: SkillsSettingsMenu,
         _event: SubmitEvent | Event,
         _form: HTMLFormElement,
@@ -233,6 +233,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
                     const update = fu.deepClone(existingSkill);
                     update.label = s.label ?? existingSkill.label;
                     update.slug = sluggify(s.label ?? existingSkill.label);
+                    update.group = sluggify(s.group ?? existingSkill.group!) || undefined;
                     update.description = s.description ?? existingSkill.description;
                     skills.set(update.slug, update);
                 }
@@ -266,7 +267,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         game.settings.set("ptr2e", "skills", Array.from(skills.values()));
     }
 
-    static override async #createSkill(this: SkillsSettingsMenu, _event: Event) {
+    static async #createSkill(this: SkillsSettingsMenu) {
         this.skills.push({
             label: "New Skill",
             description: "",
@@ -279,7 +280,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         this.render({parts: ["userSkills"]});
     }
 
-    static override async #deleteSkill(this: SkillsSettingsMenu, event: Event) {
+    static async #deleteSkill(this: SkillsSettingsMenu, event: Event) {
         if (!event.currentTarget) return;
 
         const { slug } = ((event.currentTarget as HTMLElement).closest(".form-group[data-slug]") as HTMLElement).dataset;
@@ -287,7 +288,6 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
 
         const index = this.skills.findIndex((s) => s.slug === slug);
         if (index === -1) return;   
-        const thisRef = this;
 
         foundry.applications.api.DialogV2.confirm({
             window: {
@@ -300,18 +300,18 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
                     if (index === -1) return;
             
                     this.skills.splice(index, 1);
-                    thisRef.render({parts: ["userSkills"]})
+                    this.render({parts: ["userSkills"]})
                 }
             }
         });
     }
 
-    static override async #favouriteSkill(this: SkillsSettingsMenu, event: Event) {
+    static async #favouriteSkill(this: SkillsSettingsMenu, event: Event) {
         if (!event.currentTarget) return;
 
         const formGroup = (event.currentTarget as HTMLElement).closest(".form-group[data-slug]") as HTMLElement;
 
-        const { slug } = formGroup?.dataset;
+        const { slug } = formGroup?.dataset ?? {};
         if (!slug) return;
 
         const index = this.skills.findIndex((s) => s.slug === slug);
@@ -321,7 +321,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         for(const input of inputs) {
             const key = input.name.split(".").pop();
             if(key && key in this.skills[index]) {
-                //@ts-expect-error
+                //@ts-expect-error - This is a custom skill
                 this.skills[index][key] = input.value ?? this.skills[index][key];
             }
         }
@@ -333,11 +333,11 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         this.render({});
     }
 
-    static override async #hideSkill(this: SkillsSettingsMenu, event: Event) {
+    static async #hideSkill(this: SkillsSettingsMenu, event: Event) {
         if (!event.currentTarget) return;
 
         const formGroup = (event.currentTarget as HTMLElement).closest(".form-group[data-slug]") as HTMLElement;
-        const { slug } = formGroup?.dataset;
+        const { slug } = formGroup?.dataset ?? {};
         if (!slug) return;
 
         const index = this.skills.findIndex((s) => s.slug === slug);
@@ -347,7 +347,7 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         for(const input of inputs) {
             const key = input.name.split(".").pop();
             if(key && key in this.skills[index]) {
-                //@ts-expect-error
+                //@ts-expect-error - This is a custom skill
                 this.skills[index][key] = input.value ?? this.skills[index][key];
             }
         }

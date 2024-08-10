@@ -1,4 +1,4 @@
-import { EquipmentData, PTRCONSTS } from "@data";
+import { EquipmentData, PokemonType, PTRCONSTS } from "@data";
 import { TemplateConstructor } from "./data-template.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "../fields/slug-field.ts";
@@ -9,113 +9,7 @@ import { SlugField } from "../fields/slug-field.ts";
  */
 export default function HasGearData<BaseClass extends TemplateConstructor>(baseClass: BaseClass) {
     abstract class TemplateClass extends baseClass {
-        /**
-         * The cost of the item.
-         * @defaultValue `0`
-         * @remarks
-         * This is the cost of the item in Poké.
-         * @example
-         * ```typescript
-         * const item = new ItemPTR2e({ name: 'Flashlight', "system.cost": 100 });
-         * console.log(item.system.cost); // 100
-         * ```
-         */
-        abstract cost: number;
-
-        /**
-         * The crafting skill and time required to create the item.
-         * @defaultValue `{ skill: 'accounting', time: { value: 1, unit: 'hours' } }`
-         * @remarks
-         * This is the skill and time required to create the item.
-         * @example
-         * ```typescript
-         * const item = new ItemPTR2e({ name: 'Flashlight', "system.crafting": { skill: 'crafting', time: { value: 1, unit: 'hours' } });
-         * console.log(item.system.crafting); // { skill: 'crafting', time: { value: 1, unit: 'hours' } }
-         * ```
-         */
-        abstract crafting: {
-            /**
-             * The skill required to craft the item.
-             * @see {@link Skill}
-             */
-            skill: string;
-            /**
-             * @Outdated - Property needs updating
-             */
-            time: {
-                value: number;
-                unit: string;
-            };
-        };
-
-        /**
-         * The equipment data for the item.
-         * @defaultValue `{carryType: 'stowed', handsHeld: null}`
-         * @remarks
-         * Tracks how the item is carried and how many hands are required to hold it.
-         * @example
-         * ```typescript
-         * const item = new ItemPTR2e({ name: 'Flashlight', "system.equipped": {carryType: 'held', handsHeld: 1} });
-         * console.log(item.system.equipped); // {carryType: 'held', handsHeld: 1}
-         * ```
-         */
-        abstract equipped: EquipmentData;
-
-        /**
-         * The grade of the item.
-         * @defaultValue `'E'`
-         * @remarks
-         * This is the grade of the item.
-         * @example
-         * ```typescript
-         * const item = new ItemPTR2e({ name: 'Flashlight', "system.grade": 'A' });
-         * console.log(item.system.grade); // 'A'
-         * ```
-         */
-        abstract grade: string;
-
-        /**
-         * The quantity of the item.
-         * @defaultValue `1`
-         * @remarks
-         * This is the quantity of the item.
-         * @example
-         * ```typescript
-         * const item = new ItemPTR2e({ name: 'Flashlight', "system.quantity": 5 });
-         * console.log(item.system.quantity); // 5
-         * ```
-         */
-        abstract quantity: number;
-
-        /**
-         * The rarity of the item.
-         * @defaultValue `'common'`
-         * @remarks
-         * This is the rarity of the item.
-         * @example
-         * ```typescript
-         * const item = new ItemPTR2e({ name: 'Flashlight', "system.rarity": 'rare' });
-         * console.log(item.system.rarity); // 'rare'
-         * ```
-         */
-        abstract rarity: string;
-
-        declare _source: InstanceType<typeof baseClass>["_source"] & {
-            cost: number;
-            crafting: {
-                skill: string;
-                time: {
-                    value: number;
-                    unit: string;
-                };
-            };
-            equipped: EquipmentData;
-            grade: string;
-            quantity: number;
-            rarity: string;
-        };
-
-        static override defineSchema(): foundry.data.fields.DataSchema {
+        static override defineSchema(): GearSchema {
             const fields = foundry.data.fields;
 
             return {
@@ -144,32 +38,14 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
                     required: true,
                     nullable: true,
                     initial: null,
-                    choices: [
-                        "E",
-                        "E+",
-                        "D-",
-                        "D",
-                        "D+",
-                        "C-",
-                        "C",
-                        "C+",
-                        "B-",
-                        "B",
-                        "B+",
-                        "A-",
-                        "A",
-                        "A+",
-                        "S-",
-                        "S",
-                        "S+",
-                    ].reduce<Record<string,string>>((acc, grade) => ({...acc, [grade]: grade}), {}),
+                    choices: grades.reduce<Record<GearGrade,string>>((acc, grade) => ({...acc, [grade]: grade}), {} as Record<GearGrade,string>),
                     label: "PTR2E.FIELDS.gear.grade.label",
                     hint: "PTR2E.FIELDS.gear.grade.hint",
                 }),
                 fling: new fields.SchemaField({
                     type: new fields.StringField({
                         required: true,
-                        choices: getTypes().reduce<Record<string,string>>((acc, type) => ({...acc, [type]: type}), {}),
+                        choices: getTypes().reduce<Record<PokemonType,string>>((acc, type) => ({...acc, [type]: type}), {} as Record<PokemonType,string>),
                         initial: PTRCONSTS.Types.UNTYPED,
                         label: "PTR2E.FIELDS.gear.fling.pokemonType.label",
                         hint: "PTR2E.FIELDS.gear.fling.pokemonType.hint",
@@ -216,5 +92,128 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
         }
     }
 
+    interface TemplateClass extends ModelPropsFromSchema<GearSchema> {
+      // /**
+      //    * The cost of the item.
+      //    * @defaultValue `0`
+      //    * @remarks
+      //    * This is the cost of the item in Poké.
+      //    * @example
+      //    * ```typescript
+      //    * const item = new ItemPTR2e({ name: 'Flashlight', "system.cost": 100 });
+      //    * console.log(item.system.cost); // 100
+      //    * ```
+      //    */
+      // cost: number;
+
+      // /**
+      //  * The crafting skill and time required to create the item.
+      //  * @defaultValue `{ skill: 'accounting', time: { value: 1, unit: 'hours' } }`
+      //  * @remarks
+      //  * This is the skill and time required to create the item.
+      //  * @example
+      //  * ```typescript
+      //  * const item = new ItemPTR2e({ name: 'Flashlight', "system.crafting": { skill: 'crafting', time: { value: 1, unit: 'hours' } });
+      //  * console.log(item.system.crafting); // { skill: 'crafting', time: { value: 1, unit: 'hours' } }
+      //  * ```
+      //  */
+      // crafting: {
+      //     /**
+      //      * The skill required to craft the item.
+      //      * @see {@link Skill}
+      //      */
+      //     skill: string;
+          
+      //     /**
+      //      * The number of spans required to craft the item.
+      //      */
+      //     spans: number;
+
+      //     /**
+      //      * The materials required to craft the item.
+      //      */
+      //     materials: Set<string>;
+      // };
+
+      // /**
+      //  * The equipment data for the item.
+      //  * @defaultValue `{carryType: 'stowed', handsHeld: null}`
+      //  * @remarks
+      //  * Tracks how the item is carried and how many hands are required to hold it.
+      //  * @example
+      //  * ```typescript
+      //  * const item = new ItemPTR2e({ name: 'Flashlight', "system.equipped": {carryType: 'held', handsHeld: 1} });
+      //  * console.log(item.system.equipped); // {carryType: 'held', handsHeld: 1}
+      //  * ```
+      //  */
+      // equipped: EquipmentData;
+
+      // /**
+      //  * The grade of the item.
+      //  * @defaultValue `'E'`
+      //  * @remarks
+      //  * This is the grade of the item.
+      //  * @example
+      //  * ```typescript
+      //  * const item = new ItemPTR2e({ name: 'Flashlight', "system.grade": 'A' });
+      //  * console.log(item.system.grade); // 'A'
+      //  * ```
+      //  */
+      // grade: GearGrade;
+
+      // /**
+      //  * The quantity of the item.
+      //  * @defaultValue `1`
+      //  * @remarks
+      //  * This is the quantity of the item.
+      //  * @example
+      //  * ```typescript
+      //  * const item = new ItemPTR2e({ name: 'Flashlight', "system.quantity": 5 });
+      //  * console.log(item.system.quantity); // 5
+      //  * ```
+      //  */
+      // quantity: number;
+
+      // /**
+      //  * The rarity of the item.
+      //  * @defaultValue `'common'`
+      //  * @remarks
+      //  * This is the rarity of the item.
+      //  * @example
+      //  * ```typescript
+      //  * const item = new ItemPTR2e({ name: 'Flashlight', "system.rarity": 'rare' });
+      //  * console.log(item.system.rarity); // 'rare'
+      //  * ```
+      //  */
+      // rarity: string;
+    }
+
     return TemplateClass;
 }
+
+export interface GearSchema extends foundry.data.fields.DataSchema {
+    // cost: foundry.data.fields.NumberField<number, number, true, true, true>;
+    crafting: foundry.data.fields.SchemaField<_CraftingSchema, SourceFromSchema<_CraftingSchema>, ModelPropsFromSchema<_CraftingSchema>>;
+    equipped: foundry.data.fields.EmbeddedDataField<EquipmentData>;
+    grade: foundry.data.fields.StringField<GearGrade, GearGrade, true, true, true>;
+    fling: foundry.data.fields.SchemaField<_FlingSchema, SourceFromSchema<_FlingSchema>, ModelPropsFromSchema<_FlingSchema>>;
+    quantity: foundry.data.fields.NumberField<number, number, true, false, true>;
+    rarity: foundry.data.fields.StringField<string, string, true, false, true>;
+}
+
+interface _CraftingSchema extends foundry.data.fields.DataSchema {
+    skill: foundry.data.fields.StringField<string, string, false, true, true>;
+    spans: foundry.data.fields.NumberField<number, number, true, true, true>;
+    materials: foundry.data.fields.SetField<MaterialsField, foundry.data.fields.SourcePropFromDataField<MaterialsField>[], Set<foundry.data.fields.SourcePropFromDataField<MaterialsField>>, true, false, true>;
+}
+
+type MaterialsField = SlugField<string, string, true, false, true>;
+
+interface _FlingSchema extends foundry.data.fields.DataSchema {
+    type: foundry.data.fields.StringField<PokemonType, PokemonType, true, true, true>;
+    power: foundry.data.fields.NumberField<number, number, true, true, true>;
+    accuracy: foundry.data.fields.NumberField<number, number, true, false, true>;
+}
+
+const grades = [ "E", "E+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+", "S-", "S", "S+" ] as const;
+export type GearGrade = typeof grades[number];

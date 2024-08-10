@@ -81,6 +81,41 @@ async function extractEphemeralEffects({
     ).flatMap((e) => e ?? []);
 }
 
+async function extractEffectRolls({
+  affects,
+  origin,
+  target,
+  item,
+  attack,
+  action,
+  domains,
+  options,
+  chanceModifier = 0
+}: Omit<ExtractEphemeralEffectsParams, 'affects'> & {affects: "self" | "origin" | "target", chanceModifier?: number}) {
+  if (!(origin && target)) return [];
+
+    const [effectsFrom, effectsTo] = affects === "target" ? [origin, target] : [target, origin];
+    const fullOptions = [
+        ...options,
+        effectsFrom.getRollOptions(domains),
+        effectsTo.getSelfRollOptions(affects),
+    ].flat();
+    const resolvables = { item, attack, action };
+    return (
+        await Promise.all(
+            domains
+                .flatMap((s) => (affects === 'origin' ? target : origin).synthetics.effects[s]?.[affects] ?? [])
+                .map((d) => d({ test: fullOptions, resolvables }))
+        )
+    ).flatMap((e) => {
+        if (e) {
+            e.chance = e.chance + chanceModifier;
+            return e;
+        }
+        return [];
+    });
+}
+
 interface ExtractEphemeralEffectsParams {
     affects: "target" | "origin";
     origin: ActorPTR2e | null;
@@ -171,4 +206,5 @@ export {
     extractNotes,
     extractEphemeralEffects,
     isBracketedValue,
+    extractEffectRolls,
 }

@@ -6,7 +6,8 @@
     "slug": "fell-stinger",
     "description": "",
     "traits": [
-      "contact"
+      "contact",
+      "horn"
     ],
     "actions": [
       {
@@ -15,7 +16,8 @@
         "type": "attack",
         "traits": [
           "contact",
-          "pp-updated"
+          "pp-updated",
+          "horn"
         ],
         "range": {
           "target": "creature",
@@ -35,7 +37,7 @@
         "types": [
           "bug"
         ],
-        "description": "Effect: If the target faints from damage by this attack, the user of this attack increases their ATK stage by +3 for 5 activations.",
+        "description": "Effect: If the target gains @Affliction[fainted] from damage by this attack, the user gains +3 ATK stages for 5 activations.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

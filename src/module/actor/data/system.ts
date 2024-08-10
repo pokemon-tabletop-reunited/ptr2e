@@ -1,22 +1,20 @@
 import { HasTraits, HasMigrations, PokemonType } from "@data";
-import { getTypes } from "@scripts/config/effectiveness.ts";
-import { DataField, DataSchema } from "types/foundry/common/data/fields.js";
+import { getTypes, TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import {
     ActorPTR2e,
-    AdvancementData,
     Attribute,
     Attributes,
-    Biology,
-    HealthData,
     HumanoidActorSystem,
-    Stat,
 } from "@actor";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import natureToStatArray, { natures } from "@scripts/config/natures.ts";
-import { MigrationRecord } from "@module/data/mixins/has-migrations.ts";
+import { SlugField } from "@module/data/fields/slug-field.ts";
+import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
+import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
+import { ActorSystemSchema, AttributeSchema, StatSchema, TypeField, GenderOptions, AttributesSchema, AdvancementSchema, Movement } from "./data.ts";
 
 class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel)) {
     static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -25,10 +23,13 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     modifiers: Record<string, number | undefined> = {};
 
-    static override defineSchema() {
+    static override defineSchema(): ActorSystemSchema {
         const fields = foundry.data.fields;
 
-        const getAttributeField = (slug: string, withStage = true) => {
+        function getAttributeField(slug: string, withStage?: boolean): AttributeSchema;
+        function getAttributeField(slug: string, withStage: true): AttributeSchema;
+        function getAttributeField(slug: string, withStage: false): Omit<AttributeSchema, "stage">;
+        function getAttributeField(slug: string, withStage = true): AttributeSchema | Omit<AttributeSchema, "stage"> {
             return {
                 ...getStatField(slug, withStage),
                 evs: new fields.NumberField({
@@ -53,9 +54,13 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
                 }),
             };
         };
-        const getStatField = (slug: string, withStage = true) => {
-            const output: DataSchema = {
-                slug: new fields.StringField({ required: true, initial: slug }),
+
+        function getStatField(slug: string, withStage?: boolean): StatSchema;
+        function getStatField(slug: string, withStage: true): StatSchema;
+        function getStatField(slug: string, withStage: false): Omit<StatSchema, "stage">;
+        function getStatField (slug: string, withStage = true): StatSchema | Omit<StatSchema, "stage">  {
+            const output: Partial<StatSchema> = {
+                slug: new SlugField({ required: true, initial: slug }),
             };
             if (withStage)
                 output.stage = new fields.NumberField({
@@ -65,11 +70,11 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
                     label: `PTR2E.Attributes.${slug}.Stage.Label`,
                     hint: `PTR2E.Attributes.${slug}.Stage.Hint`,
                 });
-            return output;
+            return output as StatSchema | Omit<StatSchema, "stage">;
         };
 
         return {
-            ...super.defineSchema(),
+            ...super.defineSchema() as MigrationSchema & TraitsSchema,
             advancement: new fields.SchemaField({
                 experience: new fields.SchemaField({
                     current: new fields.NumberField({
@@ -122,12 +127,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
             biology: new fields.ObjectField(),
             capabilities: new fields.ObjectField(),
             type: new fields.SchemaField({
-                types: new fields.SetField(
-                    new fields.StringField({
+                types: new fields.SetField<TypeField,foundry.data.fields.SourcePropFromDataField<TypeField>[],Set<foundry.data.fields.SourcePropFromDataField<TypeField>>,true,false,true>(
+                    new fields.StringField<keyof TypeEffectiveness, keyof TypeEffectiveness, true, false, true>({
                         required: true,
-                        choices: getTypes().reduce<Record<string, string>>(
+                        choices: getTypes().reduce<Record<PokemonType, string>>(
                             (acc, type) => ({ ...acc, [type]: type }),
-                            {}
+                            {} as Record<PokemonType, string>
                         ),
                         initial: "untyped",
                         label: "PTR2E.FIELDS.PokemonType.Label",
@@ -205,14 +210,14 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
                 initial: "hardy",
                 label: "PTR2E.FIELDS.nature.label",
             }),
-            gender: new fields.StringField({
+            gender: new fields.StringField<GenderOptions, GenderOptions, true, false, true>({
                 required: true,
                 choices: {
                     "genderless": "genderless",
                     "male": "male",
                     "female": "female"
                 },
-                initial: "genderless" as "genderless" | "male" | "female",
+                initial: "genderless"
             }),
             slots: new fields.NumberField({
                 required: true,
@@ -327,10 +332,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
             if (this.parent.isHumanoid()) {
                 this.species = HumanoidActorSystem.constructSpecies(this);
             } else {
-                let e = new Error("Species not set for non-humanoid actor");
+                const e = new Error("Species not set for non-humanoid actor");
                 (this.parent as ActorPTR2e).synthetics.preparationWarnings.add(e.message);
                 Hooks.onError("ActorSystemPTR2e#_prepareSpeciesData", e, {
-                    data: this._source.species,
+                    data: this._source.species ?? undefined,
                 });
                 return;
             }
@@ -394,17 +399,17 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         if ("stage" in stat) {
             /** Calculate a stat that Isn't HP */
             return Math.floor(
-                (Math.floor(((2 * stat.base + stat.ivs + stat.evs / 4) * level) / 100) + 5) * nature
+                (Math.floor(((2 * stat.base + stat.ivs + stat.evs / 4) * level) / 100) + 10) * nature
             );
         }
 
         /** Calculate HP */
-        const bulkMod = Math.pow(1 + ((Math.sqrt(2) - 1) / (32 / 3)), (this.species?.size.sizeClass || 1) - 1);
+        const bulkMod = Math.pow(1 + ((Math.sqrt(Math.E) - 1) / (Math.PI)^3), (this.species?.size.sizeClass || 1) - 1);
 
         return Math.floor(
             (Math.floor(((2 * stat.base + stat.ivs + stat.evs / 4) * level * bulkMod) / 100) +
                 (Math.PI / 10 + Math.log(level + 9) / Math.PI) * level +
-                15) *
+                20) *
             nature
         );
     }
@@ -413,23 +418,21 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         data: this["parent"]["_source"],
         options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean },
         user: User
-    ): Promise<boolean | void> {
-        //@ts-expect-error
+    ) {
         if (this._source.traits.includes("humanoid") && this.parent.type === "pokemon") {
             this.parent.updateSource({ type: "humanoid" });
         }
-        //@ts-expect-error
         if (this._source.traits.includes("pokemon") && this.parent.type === "humanoid") {
             this.parent.updateSource({ type: "pokemon" });
         }
-        await super._preCreate(data, options, user);
+        return await super._preCreate(data, options, user);
     }
 
     override _preUpdate(
         changed: DeepPartial<this["parent"]["_source"]>,
         options: DocumentUpdateContext<this["parent"]["parent"]>,
         user: User
-    ): Promise<boolean | void> {
+    ) {
         if (changed.system?.traits) {
             const hasTrait = (trait: string) => {
                 if (changed.system!.traits instanceof Collection)
@@ -450,52 +453,42 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         }
 
         return super._preUpdate(changed, options, user);
+
+        this.skills
     }
 }
 
-interface ActorSystemPTR2e extends foundry.abstract.TypeDataModel {
-    attributes: Attributes;
-    battleStats: {
-        evasion: Stat;
-        accuracy: Stat;
-        critRate: Stat;
+interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
+    attributes: ModelPropsFromSchema<AttributesSchema> & {
+        hp: Omit<Attribute, 'stage'>;
+        atk: Attribute;
+        def: Attribute;
+        spa: Attribute;
+        spd: Attribute;
+        spe: Attribute;
     };
-    skills: Collection<SkillPTR2e>;
-    /** Biological data */
-    biology: Biology;
-    /** Movement Capabilities */
+    
     type: {
         effectiveness: Record<PokemonType, number>;
         types: Set<PokemonType>;
     };
-    species: SpeciesSystemModel | null;
-    powerPoints: {
-        max: number;
-        value: number;
-    };
-    health: HealthData;
-    advancement: AdvancementData;
-    money: number;
-    slots: number;
-    inventoryPoints: {
-        current: number,
-        max: number
+    
+    advancement: ModelPropsFromSchema<AdvancementSchema> & {
+        advancementPoints: {
+            total: number;
+            spent: number;
+            available: number;
+        };
+        rvs: {
+            total: number;
+            spent: number;
+            available: number;
+        };
     }
 
     movement: Collection<Movement>;
 
-    modifiers: Record<string, number | undefined>;
-
     _source: SourceFromSchema<ActorSystemSchema>;
 }
-
-type Movement = { method: string; value: number; type: "primary" | "secondary" };
-
-type ActorSystemSchema = Record<string, DataField<JSONValue, unknown, boolean>> & {
-    species: SpeciesSystemModel["_source"];
-    traits: string[];
-
-    _migration: MigrationRecord;
-};
 
 export default ActorSystemPTR2e;

@@ -11,15 +11,23 @@
       "approach": "power",
       "archetype": "Combat"
     },
-    "description": "When you land a successful attack, you may spend the activation cost to give a Negative Combat Stage to the target in a stat of your choosing, for 3 of their Activations.",
+    "description": "<p>Trigger: You hit a creature with an attack.<br><br>Effect: The target loses -1 Stage in a Stat of the user's choice for 3 Activations..</p>",
     "actions": [
       {
         "name": "Thug",
         "slug": "thug",
-        "description": "When you land a successful attack, you may spend the activation cost to give a Negative Combat Stage to the target in a stat of your choosing, for 3 of their Activations.",
+        "description": "Effect: The target loses -1 Stage in a Stat of the user's choice for 3 Activations.",
         "cost": {
           "activation": "free",
-          "powerPoints": 3
+          "powerPoints": 2,
+          "trigger": "You hit a creature with an attack.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
         },
         "type": "generic",
         "traits": []

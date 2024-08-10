@@ -115,8 +115,8 @@ export function initializeSettings() {
     });
 
     game.settings.register("ptr2e", "worldSchemaVersion", {
-        name: "PTR2E.SETTINGS.WorldSchemaVersion.Name",
-        hint: "PTR2E.SETTINGS.WorldSchemaVersion.Hint",
+        name: "PTR2E.Settings.WorldSchemaVersion.Name",
+        hint: "PTR2E.Settings.WorldSchemaVersion.Hint",
         scope: "world",
         config: true,
         default: 0,

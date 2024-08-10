@@ -1,11 +1,11 @@
 import { AccuracySuccessCategory } from "@data";
 
-type AccuracyCalc = {
+interface AccuracyCalc {
     category: AccuracySuccessCategory;
     context: AccuracyContext;
 }
 
-type AccuracyContext = {
+interface AccuracyContext {
     moveAccuracy?: number | null;
     otherModifiers?: number;
     adjustedStages?: number;
@@ -26,7 +26,7 @@ type DamageCalc = {
     value: 0;
     context: DamageContext;
 }
-type DamageContext = {
+interface DamageContext {
     level: number;
     power: number;
     attack: number;

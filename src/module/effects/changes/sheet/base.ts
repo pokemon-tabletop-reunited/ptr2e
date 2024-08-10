@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import ActiveEffectConfig from "@module/effects/sheet.ts";
 import ChangeModel from "../change.ts";
 import { createHTMLElement, fontAwesomeIcon, htmlClosest, htmlQuery, htmlQueryAll, isBracketedValue, isObject, tagify } from "@utils";
@@ -167,7 +168,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
     async updateItem(updates: Partial<TChange["_source"]> | Record<string, unknown>): Promise<void> {
         const changes = this.effect.toObject().system.changes;
         const result = fu.mergeObject(this.source, updates, {performDeletions: true});
-        if(this.schema) {
+        if(this.schema) { //@ts-expect-error - This is valid
             cleanDataUsingSchema(this.schema.fields, result);
         }
         changes[this.index] = result as ChangeModel;
@@ -300,7 +301,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
         // Predicate is special cased as always json. Later on extend such parsing to more things
         cleanPredicate(source);
 
-        if (this.schema) {
+        if (this.schema) { //@ts-expect-error - This is valid
             cleanDataUsingSchema(this.schema.fields, source);
         }
 
@@ -392,12 +393,12 @@ function cleanPredicate(source: { predicate?: unknown }) {
     }
 }
 
-type ChangeTabData = {
+interface ChangeTabData {
     /** Valid tab names for this form */
     names: string[];
     /** The display style applied to active tabs */
     displayStyle: "block" | "flex" | "grid";
-};
+}
 
 interface ChangeFormContext<TChange extends ChangeModel>
     extends Omit<ChangeFormOptions<TChange>, "sheet"> {

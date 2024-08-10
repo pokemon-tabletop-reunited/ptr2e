@@ -1,0 +1,64 @@
+<aside class="settings">
+  <section class="main">
+    <div class="input-row mode" data-tooltip="{{localize "PTR2E.DataInspector.Data.Legend"}}" data-tooltip-direction="UP">
+      <label for="mode">{{localize "PTR2E.DataInspector.Mode"}}</label>
+      <select name="mode" class="type source-type">
+        {{#if isChatMessage}}<option value="roll" {{#if (is dataType "roll")}}selected{{/if}}>{{localize "PTR2E.DataInspector.Data.Roll"}}</option>{{/if}}
+        <option value="source" {{#if (is dataType "source")}}selected{{/if}}>{{localize "PTR2E.DataInspector.Data.Source"}}</option>
+        <option value="derived" {{#if (is dataType "derived")}}selected{{/if}}>{{localize "PTR2E.DataInspector.Data.Derived"}}</option>
+        <option value="rolldata" {{#if (is dataType "rolldata")}}selected{{/if}}>{{localize "PTR2E.DataInspector.Data.RollData"}}</option>
+        <option value="override" {{#if (is dataType "override")}}selected{{/if}}>{{localize "PTR2E.DataInspector.Data.Override"}}</option>
+        <option value="flags" {{#if (is dataType "flags")}}selected{{/if}}>{{localize "PTR2E.DataInspector.Data.Flags"}}</option>
+      </select>
+    </div>
+
+    {{#unless (is dataType "roll")}}
+      <div class="input-row" data-tooltip="PTR2E.DataInspector.PathHint" data-tooltip-direction="UP">
+        <label for="path">{{localize "PTR2E.DataInspector.Path"}}</label>
+        <input class="path" type="text" name="path" placeholder="{{localize "PTR2E.DataInspector.Path"}}" value="{{path}}">
+      </div>
+
+      <div class="input-row" data-tooltip="PTR2E.DataInspector.SearchHint" data-tooltip-direction="UP">
+        <label for="search">{{localize "PTR2E.DataInspector.Search"}}</label>
+        <input class="search" type="search" name="search" data-dtype="String" placeholder="{{localize "PTR2E.DataInspector.Filter"}}"
+          value="{{search}}" autofocus>
+      </div>
+
+      <div class="input-row search" data-tooltip="PTR2E.DataInspector.Settings.FuzzinessHint" data-tooltip-direction="UP">
+        <label for="fuzziness">{{localize "PTR2E.DataInspector.Settings.Fuzziness"}}</label>
+        <input type="range" name="fuzzyiness" data-dtype="Number" class="search-quality" min="0.2" max="0.95" step="0.05"
+          value="{{fuzzyiness}}">
+      </div>
+
+      <div class="input-row functions" data-tooltip="PTR2E.DataInspector.Settings.FunctionsHint" data-tooltip-direction="UP">
+        <label for="include-functions">{{localize "PTR2E.DataInspector.Settings.Functions"}}</label>
+        <input type="checkbox" name="include-functions" class="functions center-text" {{checked includeFunctions}}>
+      </div>
+    {{else}}
+      <div class="input-row" data-tooltip="PTR2E.DataInspector.OptionSearchHint" data-tooltip-direction="UP">
+        <label for="search">{{localize "PTR2E.DataInspector.OptionSearch"}}</label>
+        <input class="search" type="search" name="search" data-dtype="String" placeholder="{{localize "PTR2E.DataInspector.Filter"}}"
+          value="{{search}}" autofocus>
+      </div>
+
+      <div class="input-row search" data-tooltip="PTR2E.DataInspector.Settings.FuzzinessHint" data-tooltip-direction="UP">
+        <label for="fuzziness">{{localize "PTR2E.DataInspector.Settings.Fuzziness"}}</label>
+        <input type="range" name="fuzzyiness" data-dtype="Number" class="search-quality" min="0.2" max="0.95" step="0.05"
+          value="{{fuzzyiness}}">
+      </div>
+    {{/unless}}
+  </section>
+  {{#if (is dataType "roll")}}
+    {{#if tabs}}
+      <section class="tabs">
+        <div class="header">{{localize "PTR2E.DataInspector.TabsHeader"}}</div>
+        {{#each tabs as |tab|}}
+          <a class="{{tab.cssClass}}" data-action="tab" data-group="{{tab.group}}" data-tab="{{tab.id}}">
+            <i class="{{tab.icon}}"></i>
+            <label>{{{tab.label}}}</label>
+          </a>
+        {{/each}}
+      </section>
+    {{/if}}
+  {{/if}}
+</aside>

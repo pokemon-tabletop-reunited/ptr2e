@@ -60,7 +60,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         return {
             ...(await super._prepareContext()),
             stats: this.document.system.attributes,
-            fields: (this.document.system.schema.fields.attributes as any).fields,
+            fields: (this.document.system.schema.fields.attributes as foundry.data.fields.SchemaField<foundry.data.fields.DataSchema>).fields,
             evMaximums: evMaximums,
         }
     }
@@ -70,11 +70,11 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         const part = (this.constructor as typeof StatsForm).PARTS[partId];
 
         if (part.forms) {
-            for (const [selector, _handler] of Object.entries(part.forms)) {
+            for (const [selector] of Object.entries(part.forms)) {
                 const form = htmlElement.matches(selector) ? htmlElement : htmlElement.querySelector(selector);
                 if (!form) continue;
                 for (const element of form.querySelectorAll("input,select,textarea")) {
-                    element.addEventListener("change", (_event: Event) => form.dispatchEvent(new SubmitEvent("submit", {cancelable: true})));
+                    element.addEventListener("change", () => form.dispatchEvent(new SubmitEvent("submit", {cancelable: true})));
                 }
                 for (const range of form.querySelectorAll("input[type=range]")) {
                     range.addEventListener("input", this._onChangeRange.bind(this));
@@ -143,6 +143,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     }
 
     async #updateDocument(event: SubmitEvent, form: HTMLFormElement, formData: FormDataExtended) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const submitData = this._prepareSubmitData(event, form, formData) as any;
 
         if(submitData.system?.attributes && this.document.isHumanoid()) {
@@ -153,6 +154,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
             }, {} as Record<string, number>)
             if(submitData.system.attributes.spe.base && submitData.system.attributes.spe.base !== (this.document.system._source as unknown as {attributes: Attributes}).attributes.spe.base) {
                 submitData.system.species.movement = this.document.system.movement.contents;
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const overland = submitData.system.species.movement.find((m: any) => m.method === "overland")!
 
                 overland.value = Math.max(3, Math.floor(submitData.system.attributes.spe.base / 10));

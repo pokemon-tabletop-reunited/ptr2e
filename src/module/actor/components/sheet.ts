@@ -112,7 +112,7 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
 
     /** @override */
     override _onFirstRender() {
-        //@ts-expect-error
+        //@ts-expect-error - App v1 compatability
         this.actor.apps[this.id] = this;
     }
 
@@ -120,7 +120,7 @@ class ComponentPopout extends foundry.applications.api.HandlebarsApplicationMixi
 
     /** @override */
     override _onClose() {
-        //@ts-expect-error
+        //@ts-expect-error  - App v1 compatability
         delete this.actor.apps[this.id];
     }
 }

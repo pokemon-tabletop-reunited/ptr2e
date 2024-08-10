@@ -1,6 +1,9 @@
 import { ChangeModel, HasChanges, HasEmbed, HasSlug, HasTraits } from "@module/data/index.ts";
 import { ActiveEffectPTR2e } from "@effects";
 import { ActorPTR2e } from "@actor";
+import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
+import { SlugSchema } from "@module/data/mixins/has-slug.ts";
+import { ChangesSchema } from "@module/data/mixins/has-changes.ts";
 
 export default abstract class ActiveEffectSystem extends HasEmbed(
     HasTraits(HasSlug(HasChanges(foundry.abstract.TypeDataModel))),
@@ -13,7 +16,7 @@ export default abstract class ActiveEffectSystem extends HasEmbed(
     static override defineSchema(): ActiveEffectSystemSchema {
         const fields = foundry.data.fields;
         return {
-            ...super.defineSchema(),
+            ...super.defineSchema() as TraitsSchema & SlugSchema & ChangesSchema,
             removeAfterCombat: new fields.BooleanField({
                 required: true,
                 initial: true,
@@ -51,8 +54,8 @@ export default abstract class ActiveEffectSystem extends HasEmbed(
 export default interface ActiveEffectSystem
     extends ModelPropsFromSchema<ActiveEffectSystemSchema> {}
 
-export type ActiveEffectSystemSchema = {
+export interface ActiveEffectSystemSchema extends foundry.data.fields.DataSchema, TraitsSchema, SlugSchema, ChangesSchema {
     removeAfterCombat: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
     removeOnRecall: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
     stacks: foundry.data.fields.NumberField<number, number, true, false, true>;
-};
+}

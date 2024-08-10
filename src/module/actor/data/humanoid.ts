@@ -134,17 +134,16 @@ class HumanoidActorSystem extends ActorSystemPTR2e {
         return new SpeciesSystemModel(data);
     }
 
-    override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean }, user: User): Promise<boolean | void> {
-        //@ts-expect-error
+    override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean }, user: User){
         if(!this._source.traits?.length) {
             this.parent.updateSource({ "system.traits": ["humanoid", "underdog"] })
         }
 
         if(!this._source.species) {
-            this.parent.updateSource({ "system.species": HumanoidActorSystem.constructSpecies(this) });
+            this.parent.updateSource({ "system.species": HumanoidActorSystem.constructSpecies(this).toObject() });
         }
 
-        await super._preCreate(data, options, user);
+        return await super._preCreate(data, options, user);
     }
 }
 

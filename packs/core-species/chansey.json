@@ -20,12 +20,18 @@
           "value": 5
         }
       ],
-      "secondary": []
+      "secondary": [
+        {
+          "type": "swim",
+          "value": 3
+        }
+      ]
     },
     "traits": [
       "pokemon",
       "bipedal",
-      "underdog"
+      "underdog",
+      "healer"
     ],
     "abilities": {
       "starting": [
@@ -33,22 +39,22 @@
         "serene-grace"
       ],
       "basic": [
-        "friend-guard",
-        "fairy-aura"
+        "healer",
+        "benevolent-gift"
       ],
       "advanced": [
-        "healer",
+        "triage",
         "curious-medicine"
       ],
       "master": [
-        "triage",
+        "friend-guard",
         "self-sufficient"
       ]
     },
     "skills": [
       {
         "slug": "acrobatics",
-        "value": 25,
+        "value": 20,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -64,7 +70,7 @@
       },
       {
         "slug": "conversation",
-        "value": 45,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -72,7 +78,7 @@
       },
       {
         "slug": "husbandry",
-        "value": 50,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -80,7 +86,7 @@
       },
       {
         "slug": "lift",
-        "value": 35,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -88,7 +94,7 @@
       },
       {
         "slug": "listen",
-        "value": 40,
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -96,14 +102,6 @@
       },
       {
         "slug": "medicine",
-        "value": 60,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "natural-world",
         "value": 40,
         "rvs": 0,
         "favourite": false,
@@ -111,8 +109,16 @@
         "group": null
       },
       {
+        "slug": "natural-world",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "negotiation",
-        "value": 50,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -120,7 +126,7 @@
       },
       {
         "slug": "psychology",
-        "value": 45,
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -128,14 +134,6 @@
       },
       {
         "slug": "research",
-        "value": 45,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "resources",
         "value": 30,
         "rvs": 0,
         "favourite": false,
@@ -144,7 +142,7 @@
       },
       {
         "slug": "running",
-        "value": 40,
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -168,7 +166,15 @@
       },
       {
         "slug": "teaching",
-        "value": 40,
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 25,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -925,39 +931,33 @@
     ],
     "genderRatio": 8,
     "evolutions": {
-      "name": "rhyhorn",
+      "name": "chansey",
       "details": null,
       "evolutions": [
         {
-          "name": "rhydon",
-          "uuid": "Compendium.ptr2e.core-species.Item.7bhWOgrX8BaFk8T2",
+          "name": "chansey",
+          "uuid": "Compendium.ptr2e.core-species.Item.inXVND6bfUdY5ksv",
           "methods": [
             {
+              "type": "item",
+              "item": "oval-stone",
+              "operand": "or",
+              "held": false
+            },
+            {
               "type": "level",
-              "level": 42,
-              "operand": "and"
+              "level": 24,
+              "operand": "or"
             }
           ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          },
           "evolutions": [
             {
-              "name": "rhyperior",
-              "uuid": "Compendium.ptr2e.core-species.Item.vh6LElnAS6Yep8QZ",
+              "name": "blissey",
+              "uuid": "Compendium.ptr2e.core-species.Item.bWrd2kY80xae5vQY",
               "methods": [
                 {
-                  "type": "item",
-                  "item": "protector",
-                  "operand": "or",
-                  "held": false
-                },
-                {
                   "type": "level",
-                  "level": 50,
+                  "level": 38,
                   "operand": "or"
                 }
               ],
@@ -969,7 +969,13 @@
               },
               "evolutions": []
             }
-          ]
+          ],
+          "details": {
+            "gender": null,
+            "item": null,
+            "level": null,
+            "knownMove": null
+          }
         }
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.sMeP7oy9e1Xoo1YL"

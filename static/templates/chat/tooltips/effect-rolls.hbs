@@ -1,0 +1,30 @@
+<content data-target-uuid="{{targetUuid}}" data-message-id="{{messageId}}">
+  {{#if effects.target}}
+  <header>
+    <small>Effect Rolls to Target</small>
+  </header>
+  <main>
+    {{#each effects.target}}
+      {{> effect type="target"}}
+    {{/each}}
+  </main>
+  {{/if}}
+  {{#if effects.origin}}
+    <header>
+      <small>Effect Rolls to Source</small>
+    </header>
+    <main>
+      {{#each effects.origin}}
+        {{> effect type="origin"}}
+      {{/each}}
+    </main>
+  {{/if}}
+</content>
+
+{{#*inline "effect"}}
+  <section class="effect" data-index="{{@index}}" data-type="{{type}}">
+    <small>Effect Roll: {{label}}</small>
+    <span class="total {{#if (gt roll.total 0)}}fail{{else}}success{{/if}}">{{roll.total}}</span>
+    <i data-tooltip="Toggle Success" class="effect-roll-toggle fas {{#unless success}}fail fa-times{{else}}success fa-check{{/unless}}"></i>
+  </section>
+{{/inline}}

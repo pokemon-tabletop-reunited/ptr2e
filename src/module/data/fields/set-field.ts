@@ -24,21 +24,21 @@ export class SetField<
         const e = this.element;
 
         // Multi-Select Input
-        //@ts-expect-error
+        //@ts-expect-error - This is a valid check
         if (e.choices && !config.options) {
-            //@ts-expect-error
+            //@ts-expect-error - This is a valid check
             const choices = foundry.data.fields.StringField._getChoices(e.choices, {
-                //@ts-expect-error
+                //@ts-expect-error - This is a valid check
                 localize: config.localize,
             });
-            //@ts-expect-error
+            //@ts-expect-error - This is a valid check
             config.options = Object.entries(choices).map(([value, label]) => ({ value, label }));
         }
-        //@ts-expect-error
+        //@ts-expect-error - This is a valid check
         if (config.options) return foundry.applications.fields.createMultiSelectInput(config);
 
         // Arbitrary String Tags
-        //@ts-expect-error
+        //@ts-expect-error - This is a valid check
         if ( e instanceof foundry.data.fields.StringField ) return HTMLStringTagsElementPTR2e.create(config);
         throw new Error(`SetField#toInput is not supported for a ${e.constructor.name} element type`);
     }

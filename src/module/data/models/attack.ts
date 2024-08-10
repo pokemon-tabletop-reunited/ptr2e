@@ -152,10 +152,12 @@ export default class AttackPTR2e extends ActionPTR2e {
         this.statistic = this.prepareStatistic();
     }
 
+    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     get isMelee(): boolean {
         return false; // TODO: Implement
     }
 
+    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     get isRanged(): boolean {
         return false; // TODO: Implement
     }
@@ -189,21 +191,21 @@ export default class AttackPTR2e extends ActionPTR2e {
     }
 }
 export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {
-    update(
-        data: DeepPartial<SourceFromSchema<AttackSchema>> &
-            DeepPartial<SourceFromSchema<ActionSchema>>
-    ): Promise<this["item"]>;
-    prepareUpdate(
-        data: DeepPartial<SourceFromSchema<AttackSchema>> &
-            DeepPartial<SourceFromSchema<ActionSchema>>
-    ): (SourceFromSchema<ActionSchema> & SourceFromSchema<AttackSchema>)[];
+    // update(
+    //     data: DeepPartial<SourceFromSchema<AttackSchema>> &
+    //         DeepPartial<SourceFromSchema<ActionSchema>>
+    // ): Promise<this["item"]>;
+    // prepareUpdate(
+    //     data: DeepPartial<SourceFromSchema<AttackSchema>> &
+    //         DeepPartial<SourceFromSchema<ActionSchema>>
+    // ): (SourceFromSchema<ActionSchema> & SourceFromSchema<AttackSchema>)[];
 
     statistic: Maybe<AttackStatistic>;
 
     _source: SourceFromSchema<AttackSchema> & SourceFromSchema<ActionSchema>;
 }
 
-type AttackSchema = {
+interface AttackSchema extends foundry.data.fields.DataSchema {
     types: foundry.data.fields.SetField<
         foundry.data.fields.StringField<string, PokemonType, true, false, true>,
         PokemonType[],
@@ -219,4 +221,4 @@ type AttackSchema = {
     contestEffect: foundry.data.fields.StringField<string, string, true>;
     free: foundry.data.fields.BooleanField<boolean, boolean>;
     slot: foundry.data.fields.NumberField<number, number, true, true, true>;
-};
+}

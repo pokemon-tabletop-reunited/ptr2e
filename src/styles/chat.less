@@ -42,6 +42,7 @@
             >main {
                 display: flex;
                 flex-direction: row;
+                flex-wrap: wrap;
 
                 padding: 0.25rem 0.5rem;
 
@@ -56,6 +57,22 @@
                 button {
                     flex: 0 0 50px;
                     padding: 0;
+                }
+
+                .notes {
+                  flex: 0 0 100%;
+
+                  list-style: none;
+                  margin: 0.5rem 0;
+                  background: var(--color-light-2);
+                  color: var(--hint-text-color);
+                  font-style: italic;
+                  border: 1px solid var(--border-theme-color);
+                  border-radius: 8px;
+
+                  .roll-note {
+                    padding: 0.25rem;
+                  }
                 }
             }
         }
@@ -89,6 +106,8 @@
                     }
 
                     place-content: center;
+                    gap: 4px;
+                    
                     a[data-action="consume-pp"] {
                         &.spent {
                             color: #9e7d10;
@@ -150,6 +169,20 @@
                             content: "▼";
                         }
                     }
+                }
+
+                ul.notes {
+                  list-style: none;
+                  margin: 0.5rem;
+                  background: var(--color-light-2);
+                  color: var(--hint-text-color);
+                  font-style: italic;
+                  border: 1px solid var(--border-theme-color);
+                  border-radius: 8px;
+
+                  .roll-note {
+                    padding: 0.25rem;
+                  }
                 }
 
                 >article {
@@ -317,11 +350,11 @@
                         }
                     }
 
-                    .status {
+                    .status, .effect-rolls {
                         margin-left: 0.25rem;
-                        flex: 0 0 64px;
+                        flex: 0 0 50px;
 
-                        i.fas {
+                        i.fas, i.far {
                             font-size: 22px;
 
                             &.fa-certificate {
@@ -334,6 +367,10 @@
 
                             &.fa-times-circle {
                                 color: #f04e4e;
+                            }
+
+                            &.fa-star {
+                              color: goldenrod;
                             }
                         }
                     }
@@ -348,7 +385,7 @@
                     }
 
                     .apply {
-                        flex: 0 0 70px;
+                        flex: 0 0 60px;
                         display: flex;
                         justify-content: center;
                         align-items: center;

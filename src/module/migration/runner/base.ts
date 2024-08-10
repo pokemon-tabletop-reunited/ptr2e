@@ -43,7 +43,7 @@ export class MigrationRunnerBase {
             updated: [],
         };
 
-        const origSources: Map<string, ItemPTR2e['_source']> = new Map();
+        const origSources = new Map<string, ItemPTR2e['_source']>();
         for (const source of orig) {
             origSources.set(source._id!, source);
         }

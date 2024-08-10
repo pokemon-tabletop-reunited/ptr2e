@@ -4,6 +4,7 @@ import { getFilesRecursively, isObject, PackError, sluggify } from "./helpers.ts
 import { DBFolder, LevelDatabase } from "./level-database.ts";
 import { PackEntry } from "./types.ts";
 import coreIconsJSON from "../core-icons.json" assert { type: "json" };
+import { ItemSchema } from "types/foundry/common/documents/item.js";
 
 type ActorSourcePTR2e = Actor["_source"];
 type ItemSourcePTR2e = Item["_source"];
@@ -214,7 +215,7 @@ class CompendiumPack {
             throw PackError(`Document contained in ${filePath} has no name.`);
         }
 
-        const filenameForm = sluggify(documentName).concat(".json");
+        const filenameForm = (documentName.startsWith("-") ? "-" : "") + sluggify(documentName).concat(".json");
         if (path.basename(filePath) !== filenameForm) {
             throw PackError(`Filename at ${filePath} does not reflect document name (should be ${filenameForm}).`);
         }
@@ -224,7 +225,62 @@ class CompendiumPack {
     }
 
     finalizeAll(): PackEntry[] {
-        return this.data.map((d) => JSON.parse(this.#finalize(d)));
+        const results = this.data.map((d) => JSON.parse(this.#finalize(d)));
+        if(this.packId !== "core-effects") return results;
+        
+        // Add core status afflictions
+        const statusAfflictions = JSON.parse(fs.readFileSync("src/scripts/config/effects.json", "utf-8")) as StatusEffect[];
+        const translations = JSON.parse(fs.readFileSync("static/lang/en.json", "utf-8"));
+        const localize = (path: string, current: Record<string, unknown> = translations): string => { 
+          const result = (() => {
+            const parts = path.split(".");
+            const key = parts.shift()!;
+
+            const value = current[key];
+            if(parts.length === 0) return value as string;
+            else if (value) return localize(parts.join("."), value as Record<string, unknown>);
+            return value as string;
+          })();
+          if(!result) throw PackError(`Failed to localize ${path}`);
+          return result;
+        }
+
+        results.push(...statusAfflictions.map((d) => {
+          const name = localize(d.name);
+          const itemSource = {
+            name: name || "Unnamed Effect",
+            type: "effect",
+            img: d.img,
+            system: {},
+            effects: [
+              {
+                ...d,
+                name: name || "Unnamed Effect",
+                ...(d.description ? {description: localize(d.description)} : {}),
+              }
+            ],
+            folder: "V4skAU6G3OH5fXgD",
+          } as Partial<SourceFromSchema<ItemSchema>>;
+          if(d._id) itemSource._id = itemSource.effects![0]._id = d._id.substring(0, 12)+"item";
+          if(!itemSource._id) {
+            itemSource.effects![0]._id = (() => {
+              if(!d.id) throw PackError("Effect has no id");
+              let id = d.id.replace('-', '');
+              id = id.length > 16 ? id.substring(0, 16) : id;
+              let i = 0;
+              while(id.length < 16) {
+                id = id+"condition0000000"[i++];
+              }
+              return id;
+            })();
+            itemSource._id = itemSource.effects![0]._id.substring(0, 12)+"item";
+          }
+          itemSource.flags = {core: {sourceId: this.#sourceIdOf(itemSource._id ?? "", {docType: "Item"})}};
+          if(!isItemSource(itemSource as SourceFromSchema<ItemSchema>)) throw PackError("Failed to create item source");
+          return JSON.parse(this.#finalize(itemSource as SourceFromSchema<ItemSchema>));
+        }));
+
+        return results;
     }
 
     #finalize(docSource: PackEntry): string {
@@ -242,7 +298,7 @@ class CompendiumPack {
 
         if (isItemSource(docSource)) {
             docSource.flags.core = { sourceId: this.#sourceIdOf(docSource._id ?? "", { docType: "Item" }) };
-            //@ts-ignore
+            //@ts-expect-error - Slug exists on all documents
             docSource.system.slug ??= sluggify(docSource.name);
         }
 

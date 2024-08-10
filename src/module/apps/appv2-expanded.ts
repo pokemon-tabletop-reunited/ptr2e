@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ActorPTR2e } from "@actor";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
@@ -196,7 +198,7 @@ export class ActorSheetV2Expanded<
                     controls.splice(controls.indexOf(control), 1);
                     continue;
                 }
-                // @ts-ignore
+                // @ts-expect-error - Add AppV1 support for modules that use the old method
                 this.options.actions[slug] = control.onclick;
                 control.action = slug;
             }
@@ -535,7 +537,7 @@ export class ItemSheetV2Expanded<
                     controls.splice(controls.indexOf(control), 1);
                     continue;
                 }
-                // @ts-ignore
+                // @ts-expect-error - Add AppV1 support for modules that use the old method
                 this.options.actions[slug] = control.onclick;
                 control.action = slug;
             }
@@ -631,7 +633,7 @@ export class ItemSheetV2Expanded<
                 return;
             }
             case "Item": {
-                const item = await ItemPTR2e.fromDropData(data as any);
+                const item = await ItemPTR2e.fromDropData(data as DropCanvasData);
                 if (!item || item.type !== "effect") return;
                 const effects = item.effects.map((effect) => effect.toObject());
                 if (effects.length === 0) return;

@@ -3,7 +3,9 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Climate Change"
+      "Climate Controller",
+      "Level 40",
+      "Science (Meteorology) 50 OR (Survival 70 AND Occult Spiritual 70 AND Level 60)"
     ],
     "cost": 2,
     "design": {
@@ -11,17 +13,16 @@
       "approach": "finesse",
       "archetype": "Climatology"
     },
-    "description": "When a Weather created by you or an ally would expire, you can spend PP, multiplied by the Weather's Tier. The Weather is not dissipated and lasts for 2 more Rounds.",
+    "description": "<p>Weathers set by you last for +2 additional Rounds, and their numerical effects are increased by 30% (minimum 1).</p>",
     "actions": [
       {
         "name": "Perpetual Storm",
         "slug": "perpetual-storm",
-        "description": "When a Weather created by you or an ally would expire, you can spend PP, multiplied by the Weather's Tier. The Weather is not dissipated and lasts for 2 more Rounds.",
+        "description": "<p>Weathers set by you last for +2 additional Rounds, and their numerical effects are increased by 30% (minimum 1).</p>",
         "cost": {
-          "activation": "free",
-          "powerPoints": 3
+          "activation": "free"
         },
-        "type": "generic",
+        "type": "passive",
         "traits": []
       }
     ],

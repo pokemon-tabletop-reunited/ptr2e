@@ -206,21 +206,21 @@ class StatementValidator {
     }
 }
 
-type EqualTo = { eq: [string, string | number] };
-type GreaterThan = { gt: [string, string | number] };
-type GreaterThanEqualTo = { gte: [string, string | number] };
-type LessThan = { lt: [string, string | number] };
-type LessThanEqualTo = { lte: [string, string | number] };
+interface EqualTo { eq: [string, string | number] }
+interface GreaterThan { gt: [string, string | number] }
+interface GreaterThanEqualTo { gte: [string, string | number] }
+interface LessThan { lt: [string, string | number] }
+interface LessThanEqualTo { lte: [string, string | number] }
 type BinaryOperation = EqualTo | GreaterThan | GreaterThanEqualTo | LessThan | LessThanEqualTo;
 type Atom = string | BinaryOperation;
 
-type Conjunction = { and: PredicateStatement[] };
-type Disjunction = { or: PredicateStatement[] };
-type ExclusiveDisjunction = { xor: PredicateStatement[] };
-type Negation = { not: PredicateStatement };
-type AlternativeDenial = { nand: PredicateStatement[] };
-type JointDenial = { nor: PredicateStatement[] };
-type Conditional = { if: PredicateStatement; then: PredicateStatement };
+interface Conjunction { and: PredicateStatement[] }
+interface Disjunction { or: PredicateStatement[] }
+interface ExclusiveDisjunction { xor: PredicateStatement[] }
+interface Negation { not: PredicateStatement }
+interface AlternativeDenial { nand: PredicateStatement[] }
+interface JointDenial { nor: PredicateStatement[] }
+interface Conditional { if: PredicateStatement; then: PredicateStatement }
 type CompoundStatement =
     | Conjunction
     | Disjunction

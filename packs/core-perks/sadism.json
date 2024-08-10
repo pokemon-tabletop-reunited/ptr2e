@@ -9,24 +9,28 @@
             {
                 "name": "Sadism Action (#1)",
                 "slug": "sadism-action-1",
-                "description": "<p>When a creature (regardless of allegiance) within 5m of you suffers tick damage as a result of Damage Over Time Conditions, you may spend 5PP to restore a number of ticks of health equal to those lost by the target as a free-action interrupt.</p>",
-                "traits": [],
+                "description": "<p>Trigger: A creature within 5m of you suffers loses a Tick(s) of HP as effect damage from an Affliction.<br><br>Effect: You heal a number of Ticks of HP equal to the number of Ticks the triggering creature lost.</p>",
+                "traits": [
+                    "healing",
+                    "interrupt-2"
+                ],
                 "type": "generic",
                 "range": {
-                    "target": "enemy",
+                    "target": "self",
                     "distance": 0,
                     "unit": "m"
                 },
                 "cost": {
-                    "activation": "simple",
-                    "powerPoints": 0,
+                    "activation": "free",
+                    "powerPoints": 3,
+                    "trigger": "A creature within 5m of you suffers loses a Tick(s) of HP as effect damage from an Affliction.", 
                     "delay": null,
                     "priority": null
                 }
             }
         ],
         "slug": null,
-        "description": "<p>When a creature (regardless of allegiance) within 5m of you suffers tick damage as a result of Damage Over Time Conditions, you may spend 5PP to restore a number of ticks of health equal to those lost by the target as a free-action interrupt.</p>",
+        "description": "<p>Trigger: A creature within 5m of you suffers loses a Tick(s) of HP as effect damage from an Affliction.<br><br>Effect: You heal a number of Ticks of HP equal to the number of Ticks the triggering creature lost.</p>",
         "traits": [],
         "prerequisites": [
             "Intimidate 45"

@@ -1,0 +1,85 @@
+{{#unless (is dataType "roll") }}
+  <content class="main"> 
+    <section class="header">
+      <label class="key">{{localize "PTR2E.DataInspector.Key"}}</label>
+      <label class="value">{{localize "PTR2E.DataInspector.Value"}}</label>
+    </section>
+
+    <section class="content">
+      {{#if data.isEmpty}}
+        <p class="warning">{{localize "PTR2E.DataInspector.NoData"}}</p>
+      {{else}}
+        <ul class="data-list root">
+          {{#each data.children as |child|}}
+            {{~> entry child}}
+          {{/each}}
+        </ul>
+      {{/if}}
+    </section>
+  </content>
+  {{else}}
+  <content class="roll-inspector">
+    {{#if entries}}
+      {{#each entries as |roll|}}
+        <section class="tab {{lookup (lookup ../tabs roll.action) "cssClass"}}" data-tab="{{roll.action}}" data-group="targets">
+          {{~> roll roll}}
+        </section>
+      {{/each}}
+    {{/if}}
+    {{#if entry}}
+      {{~> roll entry}}
+    {{/if}}
+  </content>
+{{/unless}}
+
+{{#*inline "entry"}}
+  {{#unless hidden}}
+    <li data-key="{{key}}" data-path="{{path}}" data-depth="{{depth}}" data-children="{{children.length}}" style="--depth:{{depth}};" class="data-element {{type}}{{#if isDocument}} document{{/if}}{{#if isArray}} array{{/if}}{{#if expandable}}{{#if expanded}} expanded{{else}} collapsed{{/if}}{{/if}}">
+      <div class="details">
+        <h4 class="key" data-tooltip="{{key}}">{{#if inArray}}[{{@index}}]{{else}}{{key}}{{/if}}</h4>
+        <span class="value">{{{displayValue}}}</span>
+      </div>
+      {{~#if (and isContainer expanded)}}
+        <ul class="data-list">
+          {{#each children as |child|}}
+            {{~> entry child}}
+          {{/each}}
+        </ul>
+      {{/if}}
+    </li>
+  {{/unless}}
+{{/inline}}
+
+{{#*inline "roll"}}
+  <section class="domains">
+    <div class="type">Type: <input type="text" value="{{type}}" disabled/></div>
+    <div class="header" data-tooltip="Selectors & Domains are different names for the same thing" data-tooltip-direction="UP">Selectors / Domains</div>
+    <div class="domains">
+      {{#each domains as |domain|}}
+        <span class="domain" data-domain="{{domain}}">{{domain}}</span>
+      {{/each}}
+    </div>
+  </section>
+  <section class="options">
+    <div class="header">Roll Options</div>
+    <div class="search"></div>
+    <ul class="options">
+      {{#each options as |option|}}
+        <li class="option" data-option="{{option}}" data-tooltip="{{option}}">{{option}}</li>
+      {{/each}}
+    </ul>
+  </section>
+  <section class="modifiers">
+    <div class="header">Modifiers</div>
+    <ul class="modifiers">
+      {{#each modifiers as |modifier|}}
+        <li class="modifier">
+          <span class="label">{{modifier.label}}:</span>
+          <span class="value">{{#unless modifier.modifier}}+Infinity{{else}}{{#if (gte modifier.modifier 0)}}+{{/if}}{{modifier.modifier}}{{/unless}}</span>
+          <span class="type"><span>Type:</span><input type="text" value="{{modifier.type}}" disabled></span>
+          <span class="method"><span>Method:</span><input type="text" value="{{modifier.method}}" disabled></span>
+        </li>
+      {{/each}}
+    </ul>
+  </section>
+{{/inline}}

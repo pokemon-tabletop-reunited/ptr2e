@@ -1,57 +1,95 @@
 {
-  "name": "Capacitor",
-  "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-  "system": {
-    "actions": [
-      {
-        "traits": [
-          "domain",
-          "electric"
+    "name": "Capacitor",
+    "type": "ability",
+    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+    "system": {
+        "actions": [
+            {
+                "traits": [
+                    "domain",
+                    "electric"
+                ],
+                "name": "Capacitor",
+                "slug": "capacitor",
+                "type": "passive",
+                "cost": {
+                    "activation": "free"
+                },
+                "range": {
+                    "target": "aura",
+                    "distance": 5,
+                    "unit": "m"
+                },
+                "description": "Effect: The user and all creatures within Range increase the Power of their Electric-Type attacks by 20%.",
+                "img": "icons/svg/explosion.svg"
+            }
         ],
-        "name": "Capacitor",
+        "description": "Effect: The user and all creatures within Range increase the Power of their Electric-Type attacks by 20%.",
+        "traits": [
+            "domain",
+            "electric",
+            "partial-automation"
+        ],
         "slug": "capacitor",
-        "type": "passive",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
-        },
-        "range": {
-          "target": "aura",
-          "distance": 5,
-          "unit": "m"
-        },
-        "description": "Effect: The user and all creatures within Range increase the Power of their Electric-Type attacks by 20%."
-      }
-    ],
-    "description": "Effect: The user and all creatures within Range increase the Power of their Electric-Type attacks by 20%.",
-    "traits": [
-      "domain",
-      "electric"
-    ],
-    "slug": null,
-    "container": null
-  },
-  "_id": "1FIqa2nWBv5XjOtA",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!1FIqa2nWBv5XjOtA"
+        "_migration": {
+            "version": null,
+            "previous": null
+        }
+    },
+    "_id": "1FIqa2nWBv5XjOtA",
+    "effects": [
+        {
+            "name": "Capacitor",
+            "type": "passive",
+            "_id": "CfP38k9axooHAxbJ",
+            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+            "system": {
+                "changes": [
+                    {
+                        "type": "percentile-modifier",
+                        "key": "electric-attack-power",
+                        "value": 20,
+                        "predicate": [],
+                        "label": "Capacitor",
+                        "mode": 2,
+                        "priority": null,
+                        "ignored": false,
+                        "hideIfDisabled": false
+                    }
+                ],
+                "slug": null,
+                "traits": [],
+                "removeAfterCombat": true,
+                "removeOnRecall": false,
+                "stacks": 0
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "description": "",
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {},
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.330",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.2.0.3",
+                "createdTime": 1722258426157,
+                "modifiedTime": 1722258454032,
+                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+            }
+        }
+    ]
 }

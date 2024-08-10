@@ -1,224 +1,228 @@
 {
-  "name": "metapod",
-  "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
-  "system": {
-    "number": 11,
-    "size": {
-      "category": "small",
-      "type": "height",
-      "height": 0.7,
-      "weight": 9.9
-    },
-    "diet": [
-      "nullivore"
-    ],
-    "movement": {
-      "primary": [
-        {
-          "type": "overland",
-          "value": 3
+    "name": "metapod",
+    "type": "species",
+    "img": "/systems/ptr2e/img/icons/species_icon.webp",
+    "system": {
+        "number": 11,
+        "size": {
+            "category": "small",
+            "type": "height",
+            "height": 0.7,
+            "weight": 9.9
         },
-        {
-          "type": "threaded",
-          "value": 3
-        }
-      ],
-      "secondary": []
-    },
-    "traits": [
-      "pokemon",
-      "underdog",
-      "darkvision-15",
-      "wallclimber"
-    ],
-    "abilities": {
-      "starting": [
-        "shed-skin",
-        "shell-armor"
-      ],
-      "basic": [
-        "regenerator",
-        "stalwart"
-      ],
-      "advanced": [
-        "pollen-field",
-        "sturdy"
-      ],
-      "master": [
-        "overcoat",
-        "clear-body"
-      ]
-    },
-    "skills": [
-      {
-        "slug": "acrobatics",
-        "value": 30,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "climb",
-        "value": 70,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "conversation",
-        "value": 30,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "disguise",
-        "value": 40,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "listen",
-        "value": 60,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "natural-world",
-        "value": 50,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "navigate",
-        "value": 50,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "stealth",
-        "value": 70,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "survival",
-        "value": 50,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      }
-    ],
-    "slug": "",
-    "stats": {
-      "hp": 50,
-      "atk": 20,
-      "def": 55,
-      "spa": 25,
-      "spd": 25,
-      "spe": 30
-    },
-    "types": [
-      "bug"
-    ],
-    "moves": {
-      "tutor": [
-        {
-          "name": "string-shot",
-          "gen": "heartgold-soulsilver",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TijijTYIY2UOVWOn"
-        },
-        {
-          "name": "iron-defense",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.qSWTxI39iL7ivEVw"
-        },
-        {
-          "name": "bug-bite",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VWTUbiZH5inKfQn8"
-        },
-        {
-          "name": "electroweb",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DLoWCGaBlU23XnUI"
-        }
-      ],
-      "levelUp": [
-        {
-          "name": "harden",
-          "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.vKslOzFQFtNm1yzc"
-        }
-      ]
-    },
-    "captureRate": 120,
-    "eggGroups": [
-      "bug"
-    ],
-    "genderRatio": 4,
-    "evolutions": {
-      "name": "caterpie",
-      "details": null,
-      "evolutions": [
-        {
-          "name": "metapod",
-          "uuid": "Compendium.ptr2e.core-species.Item.DLpRR7pFa4VCgCpC",
-          "methods": [
-            {
-              "type": "level",
-              "level": 7,
-              "operand": "and"
-            }
-          ],
-          "evolutions": [
-            {
-              "name": "butterfree",
-              "uuid": "Compendium.ptr2e.core-species.Item.mKuandwsKyvBQnmG",
-              "methods": [
+        "diet": [
+            "nullivore"
+        ],
+        "movement": {
+            "primary": [
                 {
-                  "type": "level",
-                  "level": 10,
-                  "operand": "and"
+                    "type": "overland",
+                    "value": 3
+                },
+                {
+                    "type": "threaded",
+                    "value": 3
                 }
-              ],
-              "evolutions": [],
-              "details": {
-                "gender": null,
-                "item": null,
-                "level": null,
-                "knownMove": null
-              }
+            ],
+            "secondary": []
+        },
+        "traits": [
+            "pokemon",
+            "underdog",
+            "darkvision-15",
+            "wallclimber"
+        ],
+        "abilities": {
+            "starting": [
+                "shed-skin",
+                "shell-armor"
+            ],
+            "basic": [
+                "regenerator",
+                "stalwart"
+            ],
+            "advanced": [
+                "pollen-field",
+                "sturdy"
+            ],
+            "master": [
+                "overcoat",
+                "clear-body"
+            ]
+        },
+        "skills": [
+            {
+                "slug": "acrobatics",
+                "value": 30,
+                "rvs": 0,
+                "favourite": false,
+                "hidden": false,
+                "group": null
+            },
+            {
+                "slug": "climb",
+                "value": 60,
+                "rvs": 0,
+                "favourite": false,
+                "hidden": false,
+                "group": null
+            },
+            {
+                "slug": "conversation",
+                "value": 30,
+                "rvs": 0,
+                "favourite": false,
+                "hidden": false,
+                "group": null
+            },
+            {
+                "slug": "disguise",
+                "value": 40,
+                "rvs": 0,
+                "favourite": false,
+                "hidden": false,
+                "group": null
+            },
+            {
+                "slug": "listen",
+                "value": 60,
+                "rvs": 0,
+                "favourite": false,
+                "hidden": false,
+                "group": null
+            },
+            {
+                "slug": "natural-world",
+                "value": 50,
+                "rvs": 0,
+                "favourite": false,
+                "hidden": false,
+                "group": null
+            },
+            {
+                "slug": "navigate",
+                "value": 50,
+                "rvs": 0,
+                "favourite": false,
+                "hidden": false,
+                "group": null
+            },
+            {
+                "slug": "stealth",
+                "value": 60,
+                "rvs": 0,
+                "favourite": false,
+                "hidden": false,
+                "group": null
+            },
+            {
+                "slug": "survival",
+                "value": 50,
+                "rvs": 0,
+                "favourite": false,
+                "hidden": false,
+                "group": null
             }
-          ],
-          "details": {
-            "gender": null,
-            "item": null,
-            "level": null,
-            "knownMove": null
-          }
-        }
-      ],
-      "uuid": "Compendium.ptr2e.core-species.Item.DLpRR7pFa4VCgCpC"
-    }
-  },
-  "_id": "DLpRR7pFa4VCgCpC",
-  "effects": [],
-  "folder": null
+        ],
+        "stats": {
+            "hp": 50,
+            "atk": 20,
+            "def": 55,
+            "spa": 25,
+            "spd": 25,
+            "spe": 30
+        },
+        "types": [
+            "bug"
+        ],
+        "moves": {
+            "tutor": [
+                {
+                    "name": "bug-bite",
+                    "uuid": "Compendium.ptr2e.core-moves.Item.VWTUbiZH5inKfQn8",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "electroweb",
+                    "uuid": "Compendium.ptr2e.core-moves.Item.DLoWCGaBlU23XnUI",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "iron-defense",
+                    "uuid": "Compendium.ptr2e.core-moves.Item.qSWTxI39iL7ivEVw",
+                    "gen": "ultra-sun-ultra-moon"
+                },
+                {
+                    "name": "string-shot",
+                    "uuid": "Compendium.ptr2e.core-moves.Item.TijijTYIY2UOVWOn",
+                    "gen": "heartgold-soulsilver"
+                }
+            ],
+            "levelUp": [
+                {
+                    "name": "harden",
+                    "level": 1,
+                    "gen": "brilliant-diamond-and-shining-pearl",
+                    "uuid": "Compendium.ptr2e.core-moves.Item.vKslOzFQFtNm1yzc"
+                }
+            ]
+        },
+        "captureRate": 120,
+        "eggGroups": [
+            "bug"
+        ],
+        "genderRatio": 4,
+        "evolutions": {
+            "name": "caterpie",
+            "details": null,
+            "evolutions": [
+                {
+                    "name": "metapod",
+                    "uuid": "Compendium.ptr2e.core-species.Item.DLpRR7pFa4VCgCpC",
+                    "methods": [
+                        {
+                            "type": "level",
+                            "level": 7,
+                            "operand": "and"
+                        }
+                    ],
+                    "evolutions": [
+                        {
+                            "name": "butterfree",
+                            "uuid": "Compendium.ptr2e.core-species.Item.mKuandwsKyvBQnmG",
+                            "methods": [
+                                {
+                                    "type": "level",
+                                    "level": 10,
+                                    "operand": "and"
+                                }
+                            ],
+                            "evolutions": [],
+                            "details": {
+                                "gender": null,
+                                "item": null,
+                                "level": null,
+                                "knownMove": null
+                            }
+                        }
+                    ],
+                    "details": {
+                        "gender": null,
+                        "item": null,
+                        "level": null,
+                        "knownMove": null
+                    }
+                }
+            ],
+            "uuid": "Compendium.ptr2e.core-species.Item.DLpRR7pFa4VCgCpC",
+            "methods": []
+        },
+        "_migration": {
+            "version": null,
+            "previous": null
+        },
+        "habitats": []
+    },
+    "_id": "DLpRR7pFa4VCgCpC",
+    "effects": []
 }

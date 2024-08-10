@@ -46,11 +46,11 @@ export class DocumentSheetV2<TDocument extends foundry.abstract.Document> extend
     }
 }
 
-export type Tab = {
+export interface Tab {
     id: string;
     group: string;
     icon: string;
     label: string;
     active?: boolean;
     cssClass?: string;
-};
+}

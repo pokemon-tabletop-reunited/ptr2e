@@ -9,19 +9,27 @@
             {
                 "name": "Tubthumping Action (#1)",
                 "slug": "tubthumping-action-1",
-                "traits": [],
+                "traits": [
+                    "interrupt-2"
+                ],
                 "type": "generic",
+                "cost": {
+                    "activation": "free",
+                    "powerPoints": 5,
+                    "trigger": "The user gains @Affliction[fainted].",
+                    "delay": null,
+                    "priority": null
+                },
                 "range": {
-                    "target": "enemy",
+                    "target": "self",
+                    "distance": 0,
                     "unit": "m"
                 },
-                "cost": {
-                    "activation": "simple"
-                },
+                "description": "Effect: You heal 6 Ticks of HP, accruing a Stack of @Affliction[weary] as normal. If done on your own turn, this becomes a Complex Action.",
                 "img": "icons/svg/explosion.svg"
             }
         ],
-        "description": "<p>Trigger: You would be fainted.<br><br>On being fainted, gain a stack of Weary as normal. However, you may spend 5PP as a free-action interrupt to immediately restore yourself to 30% of your maximum HP and regain consciousness. If done on your own turn, this becomes a Complex Action.</p>",
+        "description": "<p>Trigger: The user gains @Affliction[fainted].<br><br>Effect: You heal 6 Ticks of HP, accruing a Stack of @Affliction[weary] as normal. If done on your own turn, this becomes a Complex Action.</p>",
         "traits": [],
         "prerequisites": [
             "I Get Knocked Down"

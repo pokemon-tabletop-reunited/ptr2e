@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/unified-signatures */
 import * as R from "remeda";
 
 /**  DOM helper functions that return HTMLElement(s) (or `null`) */

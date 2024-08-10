@@ -1,6 +1,5 @@
 import { ItemPTR2e } from "@item";
 import { MigrationBase } from "../base.ts"
-import { ActorPTR2e } from "@actor";
 import { sluggify } from "@utils";
 import MoveSystem from "@item/data/move.ts";
 
@@ -25,7 +24,7 @@ export class Migration102PPUpdate extends MigrationBase {
         return item.type === "move";
     }
 
-    override async updateItem(source: ItemPTR2e["_source"], _actorSource?: ActorPTR2e["_source"]): Promise<void> {
+    override async updateItem(source: ItemPTR2e["_source"]): Promise<void> {
         if(!this.isMoveItem(source)) return;
         if(!('actions' in source.system && source.system.actions)) return;
         const slug = source.system.slug || sluggify(source.name);
@@ -42,7 +41,6 @@ export class Migration102PPUpdate extends MigrationBase {
 
         primaryAction.cost.powerPoints = entryPrimaryAction.cost.powerPoints;
         primaryAction.traits = entryPrimaryAction.traits;
-        //@ts-expect-error
         source.system.grade = entry.system.grade;
     }
 }

@@ -74,14 +74,14 @@ function capitalize(input: string): string;
 function capitalize(input: Maybe<string>): Maybe<string>;
 function capitalize(input: Maybe<string>) {
     if (!input) return input;
-    var i, j, str, lowers, uppers;
+    let i, j, str;
     str = input.replace(/([^\W_]+[^\s-]*) */g, function (txt) {
         return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
 
     // Certain minor words should be left lowercase unless
     // they are the first or last words in the string
-    lowers = [
+    const lowers = [
         "A",
         "An",
         "The",
@@ -110,7 +110,7 @@ function capitalize(input: Maybe<string>) {
         });
 
     // Certain words such as initialisms or acronyms should be left uppercase
-    uppers = ["Id", "Tv"];
+    const uppers = ["Id", "Tv"];
     for (i = 0, j = uppers.length; i < j; i++)
         str = str.replace(new RegExp("\\b" + uppers[i] + "\\b", "g"), uppers[i].toUpperCase());
 
@@ -176,13 +176,14 @@ function fontAwesomeIcon(
 
 /** Short form of type and non-null check */
 function isObject<T extends object>(value: unknown): value is DeepPartial<T>;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function isObject<T extends object>(value: unknown): value is Record<string, unknown>;
 function isObject<T extends string>(value: unknown): value is { [K in T]?: unknown };
 function isObject(value: unknown): boolean {
     return typeof value === "object" && value !== null;
 }
 
-function isItemUUID(uuid: any) {
+function isItemUUID(uuid: unknown): uuid is ItemUUID {
     if (typeof uuid !== "string") return false;
     if (/^(?:Actor\.[a-zA-Z0-9]{16}\.)?Item\.[a-zA-Z0-9]{16}$/.test(uuid)) {
         return true;
@@ -196,7 +197,7 @@ function isItemUUID(uuid: any) {
     return pack?.documentName === "Item";
 }
 
-function isTokenUUID(uuid: any) {
+function isTokenUUID(uuid: unknown) {
     return (
         typeof uuid === "string" && /^Scene\.[A-Za-z0-9]{16}\.Token\.[A-Za-z0-9]{16}$/.test(uuid)
     );
@@ -318,15 +319,17 @@ function objectHasKey<O extends object>(obj: O, key: unknown): key is keyof O {
  * @param {number} delay            An amount of time in milliseconds to delay
  * @return {Function}               A wrapped function which can be called to debounce execution
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function debounceAsync<T = any>(callback: () => T, delay: number): (...args: any[]) => Promise<T> {
     let timeoutId: number | null = null;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return function (...args: any[]) {
         return new Promise((resolve) => {
-            //@ts-expect-error
+            //@ts-expect-error - This is a valid check
             clearTimeout(timeoutId);
-            //@ts-expect-error
+            //@ts-expect-error - This is a valid check
             timeoutId = setTimeout(() => {
-                //@ts-expect-error
+                //@ts-expect-error - This is a valid check
                 resolve(callback.apply(this, args));
             }, delay);
         });

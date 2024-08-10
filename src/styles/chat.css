@@ -34,6 +34,7 @@
 .chat-message.message.damage-applied .message-content > main {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   padding: 0.25rem 0.5rem;
 }
 .chat-message.message.damage-applied .message-content > main.undone {
@@ -45,6 +46,19 @@
 .chat-message.message.damage-applied .message-content > main button {
   flex: 0 0 50px;
   padding: 0;
+}
+.chat-message.message.damage-applied .message-content > main .notes {
+  flex: 0 0 100%;
+  list-style: none;
+  margin: 0.5rem 0;
+  background: var(--color-light-2);
+  color: var(--hint-text-color);
+  font-style: italic;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+}
+.chat-message.message.damage-applied .message-content > main .notes .roll-note {
+  padding: 0.25rem;
 }
 .chat-message.message.attack .message-content,
 .chat-message.message.skill .message-content,
@@ -70,6 +84,7 @@
   flex: 0 0 36px;
   display: flex;
   place-content: center;
+  gap: 4px;
 }
 .chat-message.message.attack .message-content > header .icon img,
 .chat-message.message.skill .message-content > header .icon img,
@@ -144,6 +159,22 @@
 .chat-message.message.skill .message-content > main .collapse-button .collapse-rolls.expanded:after,
 .chat-message.message.capture .message-content > main .collapse-button .collapse-rolls.expanded:after {
   content: "▼";
+}
+.chat-message.message.attack .message-content > main ul.notes,
+.chat-message.message.skill .message-content > main ul.notes,
+.chat-message.message.capture .message-content > main ul.notes {
+  list-style: none;
+  margin: 0.5rem;
+  background: var(--color-light-2);
+  color: var(--hint-text-color);
+  font-style: italic;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+}
+.chat-message.message.attack .message-content > main ul.notes .roll-note,
+.chat-message.message.skill .message-content > main ul.notes .roll-note,
+.chat-message.message.capture .message-content > main ul.notes .roll-note {
+  padding: 0.25rem;
 }
 .chat-message.message.attack .message-content > main > article,
 .chat-message.message.skill .message-content > main > article,
@@ -337,29 +368,82 @@
 }
 .chat-message.message.attack .message-content > footer .target .status,
 .chat-message.message.skill .message-content > footer .target .status,
-.chat-message.message.capture .message-content > footer .target .status {
+.chat-message.message.capture .message-content > footer .target .status,
+.chat-message.message.attack .message-content > footer .target .effect-rolls,
+.chat-message.message.skill .message-content > footer .target .effect-rolls,
+.chat-message.message.capture .message-content > footer .target .effect-rolls {
   margin-left: 0.25rem;
-  flex: 0 0 64px;
+  flex: 0 0 50px;
 }
 .chat-message.message.attack .message-content > footer .target .status i.fas,
 .chat-message.message.skill .message-content > footer .target .status i.fas,
-.chat-message.message.capture .message-content > footer .target .status i.fas {
+.chat-message.message.capture .message-content > footer .target .status i.fas,
+.chat-message.message.attack .message-content > footer .target .effect-rolls i.fas,
+.chat-message.message.skill .message-content > footer .target .effect-rolls i.fas,
+.chat-message.message.capture .message-content > footer .target .effect-rolls i.fas,
+.chat-message.message.attack .message-content > footer .target .status i.far,
+.chat-message.message.skill .message-content > footer .target .status i.far,
+.chat-message.message.capture .message-content > footer .target .status i.far,
+.chat-message.message.attack .message-content > footer .target .effect-rolls i.far,
+.chat-message.message.skill .message-content > footer .target .effect-rolls i.far,
+.chat-message.message.capture .message-content > footer .target .effect-rolls i.far {
   font-size: 22px;
 }
 .chat-message.message.attack .message-content > footer .target .status i.fas.fa-certificate,
 .chat-message.message.skill .message-content > footer .target .status i.fas.fa-certificate,
-.chat-message.message.capture .message-content > footer .target .status i.fas.fa-certificate {
+.chat-message.message.capture .message-content > footer .target .status i.fas.fa-certificate,
+.chat-message.message.attack .message-content > footer .target .effect-rolls i.fas.fa-certificate,
+.chat-message.message.skill .message-content > footer .target .effect-rolls i.fas.fa-certificate,
+.chat-message.message.capture .message-content > footer .target .effect-rolls i.fas.fa-certificate,
+.chat-message.message.attack .message-content > footer .target .status i.far.fa-certificate,
+.chat-message.message.skill .message-content > footer .target .status i.far.fa-certificate,
+.chat-message.message.capture .message-content > footer .target .status i.far.fa-certificate,
+.chat-message.message.attack .message-content > footer .target .effect-rolls i.far.fa-certificate,
+.chat-message.message.skill .message-content > footer .target .effect-rolls i.far.fa-certificate,
+.chat-message.message.capture .message-content > footer .target .effect-rolls i.far.fa-certificate {
   color: #1edf6e;
 }
 .chat-message.message.attack .message-content > footer .target .status i.fas.fa-crosshairs,
 .chat-message.message.skill .message-content > footer .target .status i.fas.fa-crosshairs,
-.chat-message.message.capture .message-content > footer .target .status i.fas.fa-crosshairs {
+.chat-message.message.capture .message-content > footer .target .status i.fas.fa-crosshairs,
+.chat-message.message.attack .message-content > footer .target .effect-rolls i.fas.fa-crosshairs,
+.chat-message.message.skill .message-content > footer .target .effect-rolls i.fas.fa-crosshairs,
+.chat-message.message.capture .message-content > footer .target .effect-rolls i.fas.fa-crosshairs,
+.chat-message.message.attack .message-content > footer .target .status i.far.fa-crosshairs,
+.chat-message.message.skill .message-content > footer .target .status i.far.fa-crosshairs,
+.chat-message.message.capture .message-content > footer .target .status i.far.fa-crosshairs,
+.chat-message.message.attack .message-content > footer .target .effect-rolls i.far.fa-crosshairs,
+.chat-message.message.skill .message-content > footer .target .effect-rolls i.far.fa-crosshairs,
+.chat-message.message.capture .message-content > footer .target .effect-rolls i.far.fa-crosshairs {
   color: #14afdf;
 }
 .chat-message.message.attack .message-content > footer .target .status i.fas.fa-times-circle,
 .chat-message.message.skill .message-content > footer .target .status i.fas.fa-times-circle,
-.chat-message.message.capture .message-content > footer .target .status i.fas.fa-times-circle {
+.chat-message.message.capture .message-content > footer .target .status i.fas.fa-times-circle,
+.chat-message.message.attack .message-content > footer .target .effect-rolls i.fas.fa-times-circle,
+.chat-message.message.skill .message-content > footer .target .effect-rolls i.fas.fa-times-circle,
+.chat-message.message.capture .message-content > footer .target .effect-rolls i.fas.fa-times-circle,
+.chat-message.message.attack .message-content > footer .target .status i.far.fa-times-circle,
+.chat-message.message.skill .message-content > footer .target .status i.far.fa-times-circle,
+.chat-message.message.capture .message-content > footer .target .status i.far.fa-times-circle,
+.chat-message.message.attack .message-content > footer .target .effect-rolls i.far.fa-times-circle,
+.chat-message.message.skill .message-content > footer .target .effect-rolls i.far.fa-times-circle,
+.chat-message.message.capture .message-content > footer .target .effect-rolls i.far.fa-times-circle {
   color: #f04e4e;
+}
+.chat-message.message.attack .message-content > footer .target .status i.fas.fa-star,
+.chat-message.message.skill .message-content > footer .target .status i.fas.fa-star,
+.chat-message.message.capture .message-content > footer .target .status i.fas.fa-star,
+.chat-message.message.attack .message-content > footer .target .effect-rolls i.fas.fa-star,
+.chat-message.message.skill .message-content > footer .target .effect-rolls i.fas.fa-star,
+.chat-message.message.capture .message-content > footer .target .effect-rolls i.fas.fa-star,
+.chat-message.message.attack .message-content > footer .target .status i.far.fa-star,
+.chat-message.message.skill .message-content > footer .target .status i.far.fa-star,
+.chat-message.message.capture .message-content > footer .target .status i.far.fa-star,
+.chat-message.message.attack .message-content > footer .target .effect-rolls i.far.fa-star,
+.chat-message.message.skill .message-content > footer .target .effect-rolls i.far.fa-star,
+.chat-message.message.capture .message-content > footer .target .effect-rolls i.far.fa-star {
+  color: goldenrod;
 }
 .chat-message.message.attack .message-content > footer .target .damage,
 .chat-message.message.skill .message-content > footer .target .damage,
@@ -375,7 +459,7 @@
 .chat-message.message.attack .message-content > footer .target .apply,
 .chat-message.message.skill .message-content > footer .target .apply,
 .chat-message.message.capture .message-content > footer .target .apply {
-  flex: 0 0 70px;
+  flex: 0 0 60px;
   display: flex;
   justify-content: center;
   align-items: center;
