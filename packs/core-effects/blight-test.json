@@ -1,0 +1,94 @@
+{
+    "name": "Blight test",
+    "type": "effect",
+    "img": "/systems/ptr2e/img/conditions/badly-poisoned.svg",
+    "effects": [
+        {
+            "name": "Blight",
+            "img": "/systems/ptr2e/img/conditions/badly-poisoned.svg",
+            "type": "affliction",
+            "system": {
+                "changes": [
+                    {
+                        "type": "basic",
+                        "key": "system.attributes.spa.stage",
+                        "value": -1,
+                        "mode": 2,
+                        "priority": null,
+                        "predicate": [],
+                        "ignored": false
+                    }
+                ],
+                "formula": "(1/16 * @stacksToRemove)",
+                "type": "damage",
+                "removeOnRecall": false,
+                "removeAfterCombat": true,
+                "traits": [
+                    "poison"
+                ],
+                "stacks": 5,
+                "slug": null,
+                "priority": 50
+            },
+            "description": "At the end of the afflicted creature’s Activation, it loses X Stacks of Blight, where X is 2<sup style=\"font-size:x-small\"># of Activations passed with Blight</sup> and takes a Tick of HP per Stack lost. The afflicted creature’s default SPATK stages are reduced by 1 while Blight is active. When a creature receives Blight, it loses the Poison Condition, with Blight gaining 33% of its remaining Poison Stacks as extra Stacks on Blight. When afflicted with Poisoned X while Blighted, the creature gains +1 to its Blight Stacks.",
+            "_id": "blightcondition0",
+            "_stats": {
+                "compendiumSource": null,
+                "duplicateSource": null,
+                "coreVersion": "12.329",
+                "systemId": "ptr2e",
+                "systemVersion": "0.10.0-alpha.2.1.0",
+                "createdTime": null,
+                "modifiedTime": null,
+                "lastModifiedBy": null
+            },
+            "disabled": false,
+            "duration": {
+                "startTime": null,
+                "seconds": null,
+                "combat": null,
+                "rounds": null,
+                "turns": null,
+                "startRound": null,
+                "startTurn": null
+            },
+            "origin": null,
+            "tint": "#ffffff",
+            "transfer": true,
+            "statuses": [],
+            "sort": 0,
+            "flags": {}
+        }
+    ],
+    "folder": null,
+    "_id": "26lSjW4L7wiiT22U",
+    "flags": {},
+    "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-effects.Item.blightcondititem",
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.1.0",
+        "createdTime": 1723300353170,
+        "modifiedTime": 1723300356378,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+    },
+    "system": {
+        "slug": null,
+        "description": "",
+        "_migration": {
+            "version": 0.103,
+            "previous": {
+                "schema": null,
+                "foundry": "12.329",
+                "system": "0.10.0-alpha.2.1.0"
+            }
+        },
+        "traits": []
+    },
+    "sort": 150000,
+    "ownership": {
+        "default": 0,
+        "tXAZ3QUgjuwX4gdV": 3
+    }
+}
