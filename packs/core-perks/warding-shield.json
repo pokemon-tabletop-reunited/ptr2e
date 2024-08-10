@@ -6,8 +6,8 @@
     "img": "systems/ptr2e/img/perk-icons/Combat.svg",
     "system": {
         "actions": [],
-        "slug": null,
-        "description": "<p>Effect chances targeting you whilst Shielded are reduced by -10%, to a minimum of 1%.</p>",
+        "slug": "warding-shield",
+        "description": "<p>Enemy effect rates targeting you whilst Shielded reduce their effect range by 10, to a minimum of 1. This only applies to secondary effects which would be directly detrimental to yourself, and does not impact chances for the enemy to self-buff.</p>",
         "traits": [],
         "prerequisites": [
             "Improved Shielding"
@@ -37,23 +37,11 @@
             },
             "hidden": false,
             "type": "normal"
+        },
+        "_migration": {
+            "version": null,
+            "previous": null
         }
     },
-    "effects": [],
-    "sort": 0,
-    "ownership": {
-        "default": 0,
-        "Kc3DOunCh3ClAeHS": 3
-    },
-    "flags": {},
-    "_stats": {
-        "compendiumSource": "Item.12pn6e6HTTFxyKjC",
-        "duplicateSource": null,
-        "coreVersion": "12.325",
-        "systemId": "ptr2e",
-        "systemVersion": "0.006",
-        "createdTime": 1717164231786,
-        "modifiedTime": 1717179733116,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-    }
+    "effects": []
 }
