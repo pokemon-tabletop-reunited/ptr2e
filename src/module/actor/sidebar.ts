@@ -188,7 +188,24 @@ export default class ActorDirectoryPTR2e<
     } as Record<string, unknown>;
 
     // If the target Folder is a party, update the party membership
-    if(targetFolder && targetFolder.owner) update["system.party.partyMemberOf"] = targetFolder.id;
+    if(targetFolder && targetFolder.owner) {
+      update["system.party.partyMemberOf"] = targetFolder.id;
+
+      const user = game.users.find((user) => user.character?.uuid === targetFolder.owner);
+      if(user) {
+        update['ownership'] = {[user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER};
+      }
+      else {
+        update["ownership"] = Object.keys(actor.ownership).reduce((acc, key) => ({ ...acc, [key]: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE }), {});
+      }
+    }
+    else {
+      update["system.party.partyMemberOf"] = undefined;
+
+      if(!targetFolder) {
+        update["ownership"] = Object.keys(actor.ownership).reduce((acc, key) => ({ ...acc, [key]: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE }), {});
+      }
+    }
 
     await actor.update(update);
     return super._handleDroppedEntry(target, data);

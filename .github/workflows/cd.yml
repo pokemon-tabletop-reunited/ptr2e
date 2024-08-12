@@ -25,6 +25,7 @@ jobs:
               run: |
                   npm ci
                   npm run build
+                  npm run build:packs:json
 
             - name: Update Manifest
               run: |
@@ -45,5 +46,5 @@ jobs:
                   draft: false
                   prerelease: false
                   token: ${{ secrets.GITHUB_TOKEN }}
-                  artifacts: "./dist/system.json,./dist/ptr2e.zip"
+                  artifacts: "./dist/system.json,./dist/ptr2e.zip,./dist/json-assets/packs/data.json"
                   tag: ${{ env.systemVersion }}
