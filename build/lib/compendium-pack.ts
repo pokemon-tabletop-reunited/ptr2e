@@ -355,6 +355,8 @@ class CompendiumPack {
         return this.data.length;
     }
 
+    static saveAsJSONMap = new Map<string, object>();
+
     async saveAsJSON(): Promise<number> {
         const outDir = path.resolve(process.cwd(), "json-assets/packs");
         if (!fs.lstatSync(outDir, { throwIfNoEntry: false })?.isDirectory()) {
@@ -366,7 +368,9 @@ class CompendiumPack {
         if (fs.existsSync(outFile)) {
             fs.rmSync(outFile, { force: true });
         }
-        fs.writeFileSync(outFile, JSON.stringify(this.finalizeAll()));
+        const data = this.finalizeAll();
+        fs.writeFileSync(outFile, JSON.stringify(data));
+        CompendiumPack.saveAsJSONMap.set(this.packId, data);
 
         // Save folders if available
         if (this.folders.length > 0) {
@@ -379,6 +383,27 @@ class CompendiumPack {
         console.log(`File "${this.packDir}.json" with ${this.data.length} entries created successfully.`);
 
         return this.data.length;
+    }
+
+    static saveAsJSON() {
+      if(this.saveAsJSONMap.size === 0) return false;
+      const outDir = path.resolve(process.cwd(), "json-assets/packs");
+      if (!fs.lstatSync(outDir, { throwIfNoEntry: false })?.isDirectory()) {
+          fs.mkdirSync(outDir, { recursive: true });
+      }
+
+      const filePath = path.resolve(outDir, "data.json");
+      if (fs.existsSync(filePath)) {
+          fs.rmSync(filePath, { force: true });
+      }
+
+      const data = Array.from(this.saveAsJSONMap.entries()).reduce((acc, [packId, packData]) => {
+        acc[packId] = packData;
+        return acc;
+      }, {} as Record<string, object>);
+      fs.writeFileSync(filePath, JSON.stringify(data));
+
+      return true;
     }
 
     #isDocumentSource(maybeDocSource: unknown): maybeDocSource is PackEntry {
