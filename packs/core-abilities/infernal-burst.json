@@ -1,88 +1,88 @@
 {
-    "name": "Infernal Burst",
-    "type": "ability",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "system": {
-        "actions": [
-            {
-                "traits": [],
-                "name": "Infernal Burst",
-                "slug": "infernal-burst",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "range": {
-                    "target": "self",
-                    "unit": "m"
-                },
-                "description": "Effect: The user's Fire-Type attacks have their power increased by 40% and gain [Recoil 1/8].",
-                "img": "icons/svg/explosion.svg"
-            }
-        ],
-        "description": "Effect: The user's Fire-Type attacks have their power increased by 40% and gain [Recoil 1/8].",
+  "name": "Infernal Burst",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [],
+        "name": "Infernal Burst",
         "slug": "infernal-burst",
-        "_migration": {
-            "version": null,
-            "previous": null
-        }
-    },
-    "folder": "0nG9TRDSwrmcTFwO",
-    "_id": "6BeCBEVGC7FZC8bi",
-    "effects": [
-        {
-            "name": "Infernal Burst Power",
-            "type": "passive",
-            "_id": "tAxACiCFnD5Csdue",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "percentile-modifier",
-                        "key": "fire-attack-power",
-                        "value": 40,
-                        "predicate": [],
-                        "label": "Infernal Burst",
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false,
-                        "hideIfDisabled": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": false,
-                "stacks": 0
-            },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": null,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": true,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.330",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.2.0.3",
-                "createdTime": 1722254085074,
-                "modifiedTime": 1722254107237,
-                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-            }
-        }
-    ]
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: The user's Fire-Type attacks have their power increased by 40% and gain [Recoil 1/8].",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user's Fire-Type attacks have their power increased by 40% and gain [Recoil 1/8].",
+    "traits": [],
+    "slug": "infernal-burst",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "folder": "0nG9TRDSwrmcTFwO",
+  "_id": "6BeCBEVGC7FZC8bi",
+  "effects": [
+    {
+      "name": "Infernal Burst Power",
+      "type": "passive",
+      "_id": "tAxACiCFnD5Csdue",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "fire-attack-power",
+            "value": 40,
+            "predicate": [],
+            "label": "Infernal Burst",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1722254085074,
+        "modifiedTime": 1722254107237,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

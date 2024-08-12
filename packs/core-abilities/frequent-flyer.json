@@ -1,92 +1,92 @@
 {
-    "name": "Frequent Flyer",
-    "type": "ability",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "system": {
-        "actions": [
-            {
-                "traits": [
-                    "stab",
-                    "flying"
-                ],
-                "name": "Frequent Flyer",
-                "slug": "frequent-flyer",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "range": {
-                    "target": "self",
-                    "unit": "m"
-                },
-                "description": "Effect: Increases the Power of the user's Flying-Type attacks by 50%.",
-                "img": "icons/svg/explosion.svg"
-            }
-        ],
-        "description": "Effect: Increases the Power of the user's Flying-Type attacks by 50%.",
+  "name": "Frequent Flyer",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "stab",
-            "flying"
+          "stab",
+          "flying"
         ],
+        "name": "Frequent Flyer",
         "slug": "frequent-flyer",
-        "_migration": {
-            "version": null,
-            "previous": null
-        }
-    },
-    "_id": "OQF9G4dWNb2VBr2L",
-    "effects": [
-        {
-            "name": "Frequent Flyer",
-            "type": "passive",
-            "_id": "S8rpOph1d4EEgr5Z",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "percentile-modifier",
-                        "key": "flying-attack-power",
-                        "value": 50,
-                        "predicate": [],
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false,
-                        "hideIfDisabled": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": false,
-                "stacks": 0
-            },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": null,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": true,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.330",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.2.0.3",
-                "createdTime": 1722259291163,
-                "modifiedTime": 1722259305961,
-                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-            }
-        }
-    ]
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: Increases the Power of the user's Flying-Type attacks by 50%.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: Increases the Power of the user's Flying-Type attacks by 50%.",
+    "traits": [
+      "stab",
+      "flying"
+    ],
+    "slug": "frequent-flyer",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "OQF9G4dWNb2VBr2L",
+  "effects": [
+    {
+      "name": "Frequent Flyer",
+      "type": "passive",
+      "_id": "S8rpOph1d4EEgr5Z",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "flying-attack-power",
+            "value": 50,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1722259291163,
+        "modifiedTime": 1722259305961,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

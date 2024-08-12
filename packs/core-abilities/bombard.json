@@ -1,87 +1,87 @@
 {
-    "name": "Bombard",
-    "type": "ability",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "system": {
-        "actions": [
-            {
-                "traits": [],
-                "name": "Bombard",
-                "slug": "bombard",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "range": {
-                    "target": "self",
-                    "unit": "m"
-                },
-                "description": "Effect: The user's [Explode] attacks gain +30% Power.",
-                "img": "icons/svg/explosion.svg"
-            }
-        ],
-        "description": "Effect: The user's [Explode] attacks gain +30% Power.",
+  "name": "Bombard",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [],
+        "name": "Bombard",
         "slug": "bombard",
-        "_migration": {
-            "version": null,
-            "previous": null
-        }
-    },
-    "_id": "ZJYQbiS4B6DrGCjD",
-    "effects": [
-        {
-            "name": "Bombard",
-            "type": "passive",
-            "_id": "P92utVvpYbAiNbTs",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "percentile-modifier",
-                        "key": "explode-trait-attack-power",
-                        "value": 30,
-                        "predicate": [],
-                        "label": "Bombard",
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false,
-                        "hideIfDisabled": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": false,
-                "stacks": 0
-            },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": null,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": true,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.330",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.2.0.3",
-                "createdTime": 1722258354728,
-                "modifiedTime": 1722258377341,
-                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-            }
-        }
-    ]
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: The user's [Explode] attacks gain +30% Power.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user's [Explode] attacks gain +30% Power.",
+    "traits": [],
+    "slug": "bombard",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "ZJYQbiS4B6DrGCjD",
+  "effects": [
+    {
+      "name": "Bombard",
+      "type": "passive",
+      "_id": "P92utVvpYbAiNbTs",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "explode-trait-attack-power",
+            "value": 30,
+            "predicate": [],
+            "label": "Bombard",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1722258354728,
+        "modifiedTime": 1722258377341,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

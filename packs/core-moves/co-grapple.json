@@ -1,45 +1,45 @@
 {
-    "name": "Co-Grapple",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
-    "system": {
+  "name": "Co-Grapple",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+  "system": {
+    "slug": "co-grapple",
+    "description": "Trigger: A creature within Range is targeted by Grab.\nEffect: The user joins the triggering rolls and checks, contributing their Size and WC to the side of their choice. If a @Affliction[grapple] is formed, the user also gains the @Affliction[grapple] Condition. \nThe user may join an ongoing @Affliction[grapple] as a Simple Action on their Activation with this Action.",
+    "traits": [
+      "basic",
+      "contact",
+      "interrupt-1"
+    ],
+    "actions": [
+      {
         "slug": "co-grapple",
-        "description": "Trigger: A creature within Range is targeted by Grab.\nEffect: The user joins the triggering rolls and checks, contributing their Size and WC to the side of their choice. If a @Affliction[grapple] is formed, the user also gains the @Affliction[grapple] Condition. \nThe user may join an ongoing @Affliction[grapple] as a Simple Action on their Activation with this Action.",
+        "name": "Co-Grapple",
+        "type": "attack",
         "traits": [
-            "basic",
-            "contact",
-            "interrupt-1"
+          "basic",
+          "contact",
+          "interrupt-1"
         ],
-        "actions": [
-            {
-                "slug": "co-grapple",
-                "name": "Co-Grapple",
-                "type": "attack",
-                "traits": [
-                    "basic",
-                    "contact",
-                    "interrupt-1"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "free",
-                    "trigger": "A creature within Range is targeted by Grab."
-                },
-                "category": "status",
-                "types": [
-                    "untyped"
-                ],
-                "description": "Trigger: A creature within Range is targeted by Grab.\nEffect: The user joins the triggering rolls and checks, contributing their Size and WC to the side of their choice. If a @Affliction[grapple] is formed, the user also gains the @Affliction[grapple] Condition. \nThe user may join an ongoing @Affliction[grapple] as a Simple Action on their Activation with this Action.",
-                "free": true,
-                "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "trigger": "A creature within Range is targeted by Grab."
+        },
+        "category": "status",
+        "types": [
+          "untyped"
         ],
-        "grade": "E"
-    },
-    "_id": "NJy3eYAmlcqfqIua",
-    "effects": []
+        "description": "Trigger: A creature within Range is targeted by Grab.\nEffect: The user joins the triggering rolls and checks, contributing their Size and WC to the side of their choice. If a @Affliction[grapple] is formed, the user also gains the @Affliction[grapple] Condition. \nThe user may join an ongoing @Affliction[grapple] as a Simple Action on their Activation with this Action.",
+        "free": true,
+        "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
+      }
+    ],
+    "grade": "E"
+  },
+  "_id": "NJy3eYAmlcqfqIua",
+  "effects": []
 }

@@ -1,108 +1,108 @@
 {
-    "name": "Phantom Body",
-    "type": "ability",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "system": {
-        "actions": [
-            {
-                "traits": [
-                    "innate",
-                    "defensive"
-                ],
-                "name": "Phantom Body",
-                "slug": "phantom-body",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "range": {
-                    "target": "self",
-                    "unit": "m"
-                },
-                "description": "Effect: Increases the Power of the user's Ghost-Type attacks by 50%.",
-                "img": "icons/svg/explosion.svg"
-            },
-            {
-                "traits": [
-                    "innate",
-                    "defensive"
-                ],
-                "name": "Phantom Body",
-                "slug": "phantom-body",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "description": "Passive: The user is also immune to the damage and effects of damaging Fighting-Type and Normal-Type attacks and uses the attack Curse as if a Ghost-Type.",
-                "img": "icons/svg/explosion.svg"
-            }
-        ],
-        "description": "Effect: Increases the Power of the user's Ghost-Type attacks by 50%. Passive: The user is also immune to the damage and effects of damaging Fighting-Type and Normal-Type attacks and uses the attack Curse as if a Ghost-Type.",
+  "name": "Phantom Body",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "innate",
-            "defensive",
-            "partial-automation"
+          "innate",
+          "defensive"
         ],
+        "name": "Phantom Body",
         "slug": "phantom-body",
-        "_migration": {
-            "version": null,
-            "previous": null
-        }
-    },
-    "_id": "vXvFp7PqPkhPr0zX",
-    "effects": [
-        {
-            "name": "Phantom Body",
-            "type": "passive",
-            "_id": "DZ3dg9QWa0onWQww",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "percentile-modifier",
-                        "key": "ghost-attack-power",
-                        "value": 50,
-                        "predicate": [],
-                        "label": "Phantom Body",
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false,
-                        "hideIfDisabled": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": false,
-                "stacks": 0
-            },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": null,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": true,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.330",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.2.0.3",
-                "createdTime": 1722260902553,
-                "modifiedTime": 1722260917843,
-                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-            }
-        }
-    ]
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: Increases the Power of the user's Ghost-Type attacks by 50%.",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "innate",
+          "defensive"
+        ],
+        "name": "Phantom Body",
+        "slug": "phantom-body",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "Passive: The user is also immune to the damage and effects of damaging Fighting-Type and Normal-Type attacks and uses the attack Curse as if a Ghost-Type.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: Increases the Power of the user's Ghost-Type attacks by 50%. Passive: The user is also immune to the damage and effects of damaging Fighting-Type and Normal-Type attacks and uses the attack Curse as if a Ghost-Type.",
+    "traits": [
+      "innate",
+      "defensive",
+      "partial-automation"
+    ],
+    "slug": "phantom-body",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "vXvFp7PqPkhPr0zX",
+  "effects": [
+    {
+      "name": "Phantom Body",
+      "type": "passive",
+      "_id": "DZ3dg9QWa0onWQww",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "ghost-attack-power",
+            "value": 50,
+            "predicate": [],
+            "label": "Phantom Body",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1722260902553,
+        "modifiedTime": 1722260917843,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

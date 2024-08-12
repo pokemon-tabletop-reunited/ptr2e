@@ -1,37 +1,37 @@
 {
-    "name": "Kinesis",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
-    "system": {
+  "name": "Kinesis",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "slug": "kinesis",
+    "description": "Effect: On hit, the target loses -1 ACC stage for 5 rounds.",
+    "traits": [],
+    "actions": [
+      {
         "slug": "kinesis",
-        "description": "Effect: On hit, the target loses -1 ACC stage for 5 rounds.",
+        "name": "Kinesis",
+        "type": "attack",
         "traits": [],
-        "actions": [
-            {
-                "slug": "kinesis",
-                "name": "Kinesis",
-                "type": "attack",
-                "traits": [],
-                "range": {
-                    "target": "creature",
-                    "distance": 5,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 3
-                },
-                "category": "status",
-                "accuracy": 80,
-                "types": [
-                    "psychic"
-                ],
-                "description": "Effect: On hit, the target loses -1 ACC stage for 5 rounds.",
-                "img": "/systems/ptr2e/img/svg/psychic_icon.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "category": "status",
+        "accuracy": 80,
+        "types": [
+          "psychic"
         ],
-        "grade": "C"
-    },
-    "_id": "VLJfuKp5E06V3uJ8",
-    "effects": []
+        "description": "Effect: On hit, the target loses -1 ACC stage for 5 rounds.",
+        "img": "/systems/ptr2e/img/svg/psychic_icon.svg"
+      }
+    ],
+    "grade": "C"
+  },
+  "_id": "VLJfuKp5E06V3uJ8",
+  "effects": []
 }

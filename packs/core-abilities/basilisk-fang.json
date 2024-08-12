@@ -1,105 +1,105 @@
 {
-    "name": "Basilisk Fang",
-    "type": "ability",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "system": {
-        "actions": [
-            {
-                "traits": [
-                    "innate"
-                ],
-                "name": "Basilisk Fang",
-                "slug": "basilisk-fang",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "range": {
-                    "target": "self",
-                    "unit": "m"
-                },
-                "description": "Effect: Increases the power of the user's Poison-Type attacks by 50%.",
-                "img": "icons/svg/explosion.svg"
-            },
-            {
-                "traits": [
-                    "innate"
-                ],
-                "name": "Basilisk Fang",
-                "slug": "basilisk-fang",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "description": "Passive: The user is also immune to the @Affliction[poison] and @Affliction[blight] Afflictions. Defensive.",
-                "img": "icons/svg/explosion.svg"
-            }
-        ],
-        "description": "Effect: Increases the power of the user's Poison-Type attacks by 50%. Passive: The user is also immune to the @Affliction[poison] and @Affliction[blight] Afflictions. Defensive.",
+  "name": "Basilisk Fang",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "innate",
-            "partial-automation"
+          "innate"
         ],
+        "name": "Basilisk Fang",
         "slug": "basilisk-fang",
-        "_migration": {
-            "version": null,
-            "previous": null
-        }
-    },
-    "_id": "jmbjnmA9ccfa8m7l",
-    "effects": [
-        {
-            "name": "Basilisk Fang",
-            "type": "passive",
-            "_id": "BxoxDfJDzXUg0FzN",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "percentile-modifier",
-                        "key": "poison-attack-power",
-                        "value": 50,
-                        "predicate": [],
-                        "label": "Basilisk Fang",
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false,
-                        "hideIfDisabled": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": false,
-                "stacks": 0
-            },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": null,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": true,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.330",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.2.0.3",
-                "createdTime": 1722258071093,
-                "modifiedTime": 1722258090670,
-                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-            }
-        }
-    ]
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: Increases the power of the user's Poison-Type attacks by 50%.",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "innate"
+        ],
+        "name": "Basilisk Fang",
+        "slug": "basilisk-fang",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "Passive: The user is also immune to the @Affliction[poison] and @Affliction[blight] Afflictions. Defensive.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: Increases the power of the user's Poison-Type attacks by 50%. Passive: The user is also immune to the @Affliction[poison] and @Affliction[blight] Afflictions. Defensive.",
+    "traits": [
+      "innate",
+      "partial-automation"
+    ],
+    "slug": "basilisk-fang",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "jmbjnmA9ccfa8m7l",
+  "effects": [
+    {
+      "name": "Basilisk Fang",
+      "type": "passive",
+      "_id": "BxoxDfJDzXUg0FzN",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "poison-attack-power",
+            "value": 50,
+            "predicate": [],
+            "label": "Basilisk Fang",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1722258071093,
+        "modifiedTime": 1722258090670,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

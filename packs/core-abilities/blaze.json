@@ -1,103 +1,103 @@
 {
-    "name": "Blaze",
-    "type": "ability",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "system": {
-        "actions": [
-            {
-                "traits": [
-                    "desperation-1-3",
-                    "fire"
-                ],
-                "name": "Blaze",
-                "slug": "blaze",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "range": {
-                    "target": "self",
-                    "unit": "m"
-                },
-                "description": "Effect: The user's Fire-Type attacks gain 20% Power. When the user meets the Desperation Conditon, this bonus increases to 50%.",
-                "img": "icons/svg/explosion.svg"
-            }
-        ],
-        "description": "Effect: The user's Fire-Type attacks gain 20% Power. When the user meets the Desperation Conditon, this bonus increases to 50%.",
+  "name": "Blaze",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "desperation-1-3",
-            "fire"
+          "desperation-1-3",
+          "fire"
         ],
-        "slug": "blaze"
-    },
-    "_id": "fOrAmM8cSQtNoklE",
-    "effects": [
-        {
-            "name": "Blaze",
-            "type": "passive",
-            "_id": "regbzbL8OnHMO4l4",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "percentile-modifier",
-                        "key": "fire-attack-power",
-                        "value": {
-                            "brackets": [
-                                {
-                                    "start": 34,
-                                    "end": 100,
-                                    "value": 20
-                                },
-                                {
-                                    "start": 0,
-                                    "end": 33,
-                                    "value": 50
-                                }
-                            ],
-                            "field": "actor|system.health.percent"
-                        },
-                        "predicate": [],
-                        "label": "Blaze",
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false,
-                        "hideIfDisabled": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": false,
-                "stacks": 0
+        "name": "Blaze",
+        "slug": "blaze",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: The user's Fire-Type attacks gain 20% Power. When the user meets the Desperation Conditon, this bonus increases to 50%.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user's Fire-Type attacks gain 20% Power. When the user meets the Desperation Conditon, this bonus increases to 50%.",
+    "traits": [
+      "desperation-1-3",
+      "fire"
+    ],
+    "slug": "blaze"
+  },
+  "_id": "fOrAmM8cSQtNoklE",
+  "effects": [
+    {
+      "name": "Blaze",
+      "type": "passive",
+      "_id": "regbzbL8OnHMO4l4",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "fire-attack-power",
+            "value": {
+              "brackets": [
+                {
+                  "start": 34,
+                  "end": 100,
+                  "value": 20
+                },
+                {
+                  "start": 0,
+                  "end": 33,
+                  "value": 50
+                }
+              ],
+              "field": "actor|system.health.percent"
             },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": null,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "<p>Effect: The user's Fire-Type attacks gain 20% Power. When the user meets the Desperation Conditon, this bonus increases to 50%.</p>",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": true,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.328",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.1.5.2",
-                "createdTime": 1720852336679,
-                "modifiedTime": 1720852365188,
-                "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-            }
-        }
-    ]
+            "predicate": [],
+            "label": "Blaze",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Effect: The user's Fire-Type attacks gain 20% Power. When the user meets the Desperation Conditon, this bonus increases to 50%.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.328",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.1.5.2",
+        "createdTime": 1720852336679,
+        "modifiedTime": 1720852365188,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ]
 }

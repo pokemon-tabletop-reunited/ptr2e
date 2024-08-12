@@ -1,95 +1,95 @@
 {
-    "name": "Think Tank",
-    "type": "ability",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "system": {
-        "actions": [
-            {
-                "traits": [
-                    "domain",
-                    "psychic"
-                ],
-                "name": "Think Tank",
-                "slug": "think-tank",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "range": {
-                    "target": "aura",
-                    "distance": 5,
-                    "unit": "m"
-                },
-                "description": "Effect: The user and all creatures within Range increase the Power of their Psychic-Type attacks by 20%.",
-                "img": "icons/svg/explosion.svg"
-            }
-        ],
-        "description": "Effect: The user and all creatures within Range increase the Power of their Psychic-Type attacks by 20%.",
+  "name": "Think Tank",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "domain",
-            "psychic",
-            "partial-automation"
+          "domain",
+          "psychic"
         ],
+        "name": "Think Tank",
         "slug": "think-tank",
-        "_migration": {
-            "version": null,
-            "previous": null
-        }
-    },
-    "_id": "PjpqInALyrcWNWit",
-    "effects": [
-        {
-            "name": "Think Tank",
-            "type": "passive",
-            "_id": "KiRKBMRD850mGyjj",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "percentile-modifier",
-                        "key": "psychic-attack-power",
-                        "value": 20,
-                        "predicate": [],
-                        "label": "Think Tank",
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false,
-                        "hideIfDisabled": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": false,
-                "stacks": 0
-            },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": null,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": true,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.330",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.2.0.3",
-                "createdTime": 1722262998960,
-                "modifiedTime": 1722263014545,
-                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-            }
-        }
-    ]
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "aura",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "Effect: The user and all creatures within Range increase the Power of their Psychic-Type attacks by 20%.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user and all creatures within Range increase the Power of their Psychic-Type attacks by 20%.",
+    "traits": [
+      "domain",
+      "psychic",
+      "partial-automation"
+    ],
+    "slug": "think-tank",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "PjpqInALyrcWNWit",
+  "effects": [
+    {
+      "name": "Think Tank",
+      "type": "passive",
+      "_id": "KiRKBMRD850mGyjj",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "psychic-attack-power",
+            "value": 20,
+            "predicate": [],
+            "label": "Think Tank",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1722262998960,
+        "modifiedTime": 1722263014545,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

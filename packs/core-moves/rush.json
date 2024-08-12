@@ -1,40 +1,40 @@
 {
-    "name": "Rush",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
-    "system": {
+  "name": "Rush",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+  "system": {
+    "slug": "rush",
+    "description": "Effect: The user selects a Movement Type they possess and make a Skill Check with that Movement Type's associated Skill. On a success, the +1 per 2 DoS to that Movement Score for the rest of the round. You may elect to spend up to 6 PP to increase the number of DoS by the number of PP spent.",
+    "traits": [
+      "basic"
+    ],
+    "actions": [
+      {
         "slug": "rush",
-        "description": "Effect: The user selects a Movement Type they possess and make a Skill Check with that Movement Type's associated Skill. On a success, the +1 per 2 DoS to that Movement Score for the rest of the round. You may elect to spend up to 6 PP to increase the number of DoS by the number of PP spent.",
+        "name": "Rush",
+        "type": "attack",
         "traits": [
-            "basic"
+          "basic"
         ],
-        "actions": [
-            {
-                "slug": "rush",
-                "name": "Rush",
-                "type": "attack",
-                "traits": [
-                    "basic"
-                ],
-                "range": {
-                    "target": "self",
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 0
-                },
-                "category": "status",
-                "types": [
-                    "untyped"
-                ],
-                "description": "Effect: Select a Movement Type that you possess. Make a Skill check for that Movement Type's associated Skill, and add 1 +2 per DoS to that Movement Score for the rest of the round.",
-                "free": true,
-                "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
-            }
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 0
+        },
+        "category": "status",
+        "types": [
+          "untyped"
         ],
-        "grade": "E"
-    },
-    "_id": "JgLLve8pmeAQFVcV",
-    "effects": []
+        "description": "Effect: Select a Movement Type that you possess. Make a Skill check for that Movement Type's associated Skill, and add 1 +2 per DoS to that Movement Score for the rest of the round.",
+        "free": true,
+        "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
+      }
+    ],
+    "grade": "E"
+  },
+  "_id": "JgLLve8pmeAQFVcV",
+  "effects": []
 }

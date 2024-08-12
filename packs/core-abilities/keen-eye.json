@@ -1,101 +1,101 @@
 {
-    "name": "Keen Eye",
-    "type": "ability",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "system": {
-        "actions": [
-            {
-                "traits": [],
-                "name": "Keen Eye",
-                "slug": "keen-eye",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "range": {
-                    "target": "self",
-                    "unit": "m"
-                },
-                "description": "Effect: When the user gains a positive ACC stage effect, the duration is increased by 1 activation.",
-                "img": "icons/svg/explosion.svg"
-            },
-            {
-                "traits": [],
-                "name": "Keen Eye",
-                "slug": "keen-eye",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "description": "Passive: The user is immune to negative ACC stage effects, and the user has +1 default ACC stage.",
-                "img": "icons/svg/explosion.svg"
-            }
-        ],
-        "description": "Effect: When the user gains a positive ACC stage effect, the duration is increased by 1 activation. Passive:  The user is immune to negative ACC stage effects, and the user has +1 default ACC stage.",
-        "traits": [
-            "partial-automation"
-        ],
+  "name": "Keen Eye",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Keen Eye",
         "slug": "keen-eye",
-        "_migration": {
-            "version": null,
-            "previous": null
-        }
-    },
-    "_id": "gKpQqu4fBVzUszbc",
-    "effects": [
-        {
-            "name": "Keen Eye (Partial)",
-            "type": "affliction",
-            "_id": "akP3gM39sFxAlRMQ",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "basic",
-                        "key": "system.battleStats.accuracy.stage",
-                        "value": 1,
-                        "predicate": [],
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": false,
-                "stacks": 0,
-                "priority": 50,
-                "formula": "",
-                "type": "damage"
-            },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": null,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": true,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": "Compendium.ptr2e.core-effects.Item.iv1l5qSwT9ykajV0.ActiveEffect.meYfTfOa9PesJCOa",
-                "duplicateSource": null,
-                "coreVersion": "12.330",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.2.0.3",
-                "createdTime": 1722029702249,
-                "modifiedTime": 1722029715014,
-                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-            }
-        }
-    ]
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: When the user gains a positive ACC stage effect, the duration is increased by 1 activation.",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [],
+        "name": "Keen Eye",
+        "slug": "keen-eye",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "Passive: The user is immune to negative ACC stage effects, and the user has +1 default ACC stage.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: When the user gains a positive ACC stage effect, the duration is increased by 1 activation. Passive:  The user is immune to negative ACC stage effects, and the user has +1 default ACC stage.",
+    "traits": [
+      "partial-automation"
+    ],
+    "slug": "keen-eye",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "gKpQqu4fBVzUszbc",
+  "effects": [
+    {
+      "name": "Keen Eye (Partial)",
+      "type": "affliction",
+      "_id": "akP3gM39sFxAlRMQ",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.accuracy.stage",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-effects.Item.iv1l5qSwT9ykajV0.ActiveEffect.meYfTfOa9PesJCOa",
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1722029702249,
+        "modifiedTime": 1722029715014,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

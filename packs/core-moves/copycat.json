@@ -1,41 +1,41 @@
 {
-    "name": "Copycat",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/normal_icon.svg",
-    "system": {
+  "name": "Copycat",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "system": {
+    "slug": "copycat",
+    "description": "Effect: The user freely uses the last attack the target used. The user can select a new target for the copied attack as needed.",
+    "traits": [
+      "danger-close"
+    ],
+    "actions": [
+      {
         "slug": "copycat",
-        "description": "Effect: The user freely uses the last attack the target used. The user can select a new target for the copied attack as needed.",
+        "name": "Copycat",
+        "type": "attack",
         "traits": [
-            "danger-close"
+          "danger-close"
         ],
-        "actions": [
-            {
-                "slug": "copycat",
-                "name": "Copycat",
-                "type": "attack",
-                "traits": [
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 10,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 5
-                },
-                "category": "status",
-                "accuracy": 100,
-                "types": [
-                    "normal"
-                ],
-                "description": "Effect: The user freely uses the last attack the target used. The user can select a new target for the copied attack as needed.",
-                "img": "/systems/ptr2e/img/svg/normal_icon.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "normal"
         ],
-        "grade": "C"
-    },
-    "_id": "7W4h4UABFbJIdi6o",
-    "effects": []
+        "description": "Effect: The user freely uses the last attack the target used. The user can select a new target for the copied attack as needed.",
+        "img": "/systems/ptr2e/img/svg/normal_icon.svg"
+      }
+    ],
+    "grade": "C"
+  },
+  "_id": "7W4h4UABFbJIdi6o",
+  "effects": []
 }

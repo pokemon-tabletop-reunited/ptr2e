@@ -1,88 +1,88 @@
 {
-    "name": "Wind Force",
-    "type": "ability",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "system": {
-        "actions": [
-            {
-                "traits": [],
-                "name": "Wind Force",
-                "slug": "wind-force",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "range": {
-                    "target": "self",
-                    "unit": "m"
-                },
-                "description": "Effect: The user's [Wind] attacks have 40% increased power.",
-                "img": "icons/svg/explosion.svg"
-            }
-        ],
-        "description": "Effect: The user's [Wind] attacks have 40% increased power.",
+  "name": "Wind Force",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [],
+        "name": "Wind Force",
         "slug": "wind-force",
-        "_migration": {
-            "version": null,
-            "previous": null
-        }
-    },
-    "folder": "0nG9TRDSwrmcTFwO",
-    "_id": "18X6UtdLAkUbVWrF",
-    "effects": [
-        {
-            "name": "Wind Force",
-            "type": "passive",
-            "_id": "S1g0TNtNWKADOIkX",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "percentile-modifier",
-                        "key": "wind-trait-attack-power",
-                        "value": 40,
-                        "predicate": [],
-                        "label": "Wind Force",
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false,
-                        "hideIfDisabled": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": false,
-                "stacks": 0
-            },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": null,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": true,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.330",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.2.0.3",
-                "createdTime": 1722257576709,
-                "modifiedTime": 1722257603434,
-                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-            }
-        }
-    ]
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: The user's [Wind] attacks have 40% increased power.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user's [Wind] attacks have 40% increased power.",
+    "traits": [],
+    "slug": "wind-force",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "folder": "0nG9TRDSwrmcTFwO",
+  "_id": "18X6UtdLAkUbVWrF",
+  "effects": [
+    {
+      "name": "Wind Force",
+      "type": "passive",
+      "_id": "S1g0TNtNWKADOIkX",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "wind-trait-attack-power",
+            "value": 40,
+            "predicate": [],
+            "label": "Wind Force",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1722257576709,
+        "modifiedTime": 1722257603434,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }
