@@ -1,44 +1,44 @@
 {
-    "name": "Use",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
-    "system": {
+  "name": "Use",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+  "system": {
+    "slug": "use",
+    "description": "Effect: You may activate 1 Item you have on your person or within your Physical Reach that you have access to. The Use action type changes depending on the items effect or location:\n\n- If the item is equpped to your Belt Slot, you can retrieve and use the item with 1 Simple Action.\n- If the item is currently stored in a container, the Use action requires 1 Simple Action to open the container, and 1 Simple Action to retrieve and use the item.",
+    "traits": [
+      "manipulate",
+      "contact",
+      "basic"
+    ],
+    "actions": [
+      {
         "slug": "use",
-        "description": "Effect: You may activate 1 Item you have on your person or within your Physical Reach that you have access to. The Use action type changes depending on the items effect or location:\n\n- If the item is equpped to your Belt Slot, you can retrieve and use the item with 1 Simple Action.\n- If the item is currently stored in a container, the Use action requires 1 Simple Action to open the container, and 1 Simple Action to retrieve and use the item.",
+        "name": "Use",
+        "type": "attack",
         "traits": [
-            "manipulate",
-            "contact",
-            "basic"
+          "manipulate",
+          "contact",
+          "basic"
         ],
-        "actions": [
-            {
-                "slug": "use",
-                "name": "Use",
-                "type": "attack",
-                "traits": [
-                    "manipulate",
-                    "contact",
-                    "basic"
-                ],
-                "range": {
-                    "target": "object",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple"
-                },
-                "category": "status",
-                "types": [
-                    "untyped"
-                ],
-                "description": "Effect: You may activate 1 Item you have on your person or within your Physical Reach that you have access to. The Use action type changes depending on the items effect or location:\n\n- If the item is equpped to your Belt Slot, you can retrieve and use the item with 1 Simple Action.\n- If the item is currently stored in a container, the Use action requires 1 Simple Action to open the container, and 1 Simple Action to retrieve and use the item.",
-                "free": true,
-                "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
-            }
+        "range": {
+          "target": "object",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple"
+        },
+        "category": "status",
+        "types": [
+          "untyped"
         ],
-        "grade": "E"
-    },
-    "_id": "NlcDvnyup6PzQIoK",
-    "effects": []
+        "description": "Effect: You may activate 1 Item you have on your person or within your Physical Reach that you have access to. The Use action type changes depending on the items effect or location:\n\n- If the item is equpped to your Belt Slot, you can retrieve and use the item with 1 Simple Action.\n- If the item is currently stored in a container, the Use action requires 1 Simple Action to open the container, and 1 Simple Action to retrieve and use the item.",
+        "free": true,
+        "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
+      }
+    ],
+    "grade": "E"
+  },
+  "_id": "NlcDvnyup6PzQIoK",
+  "effects": []
 }

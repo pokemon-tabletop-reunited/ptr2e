@@ -1,100 +1,100 @@
 {
-    "name": "Foundry",
-    "type": "ability",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "system": {
-        "actions": [
-            {
-                "traits": [],
-                "name": "Foundry",
-                "slug": "foundry",
-                "type": "passive",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 1,
-                    "trigger": "The user declares a Rock-Type attack."
-                },
-                "range": {
-                    "target": "self",
-                    "unit": "m"
-                },
-                "description": "Trigger: The user declares a Rock-Type attack.\nEffect: The triggering attack has its Type changed to Fire until the end of the user's Activation.",
-                "img": "icons/svg/explosion.svg"
-            },
-            {
-                "traits": [],
-                "name": "Foundry",
-                "slug": "foundry",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "description": "Passive: The user's Fire-Type attacks have their Power increased by 30%.",
-                "img": "icons/svg/explosion.svg"
-            }
-        ],
-        "description": "Trigger: The user declares a Rock-Type attack.\nEffect: The triggering attack has its Type changed to Fire until the end of the user's Activation. Passive: The user's Fire-Type attacks have their Power increased by 30%.",
+  "name": "Foundry",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [],
+        "name": "Foundry",
         "slug": "foundry",
-        "_migration": {
-            "version": null,
-            "previous": null
-        }
-    },
-    "folder": "0nG9TRDSwrmcTFwO",
-    "_id": "olGAnaAhIck8JvQh",
-    "effects": [
-        {
-            "name": "Foundry Passive",
-            "type": "passive",
-            "_id": "9Wf37rsETT7dZFQt",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "percentile-modifier",
-                        "key": "fire-attack-power",
-                        "value": 30,
-                        "predicate": [],
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false,
-                        "hideIfDisabled": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": false,
-                "stacks": 0
-            },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": null,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": true,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.330",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.2.0.3",
-                "createdTime": 1722253925790,
-                "modifiedTime": 1722253949070,
-                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-            }
-        }
-    ]
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1,
+          "trigger": "The user declares a Rock-Type attack."
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Trigger: The user declares a Rock-Type attack.\nEffect: The triggering attack has its Type changed to Fire until the end of the user's Activation.",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [],
+        "name": "Foundry",
+        "slug": "foundry",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "Passive: The user's Fire-Type attacks have their Power increased by 30%.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: The user declares a Rock-Type attack.\nEffect: The triggering attack has its Type changed to Fire until the end of the user's Activation. Passive: The user's Fire-Type attacks have their Power increased by 30%.",
+    "traits": [],
+    "slug": "foundry",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "folder": "0nG9TRDSwrmcTFwO",
+  "_id": "olGAnaAhIck8JvQh",
+  "effects": [
+    {
+      "name": "Foundry Passive",
+      "type": "passive",
+      "_id": "9Wf37rsETT7dZFQt",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "fire-attack-power",
+            "value": 30,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1722253925790,
+        "modifiedTime": 1722253949070,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

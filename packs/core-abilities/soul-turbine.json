@@ -1,93 +1,93 @@
 {
-    "name": "Soul Turbine",
-    "type": "ability",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "system": {
-        "actions": [
-            {
-                "traits": [
-                    "stab",
-                    "electric"
-                ],
-                "name": "Soul Turbine",
-                "slug": "soul-turbine",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "range": {
-                    "target": "self",
-                    "unit": "m"
-                },
-                "description": "Effect: Increases the Power of the user's Electric-Type attacks by 50%.",
-                "img": "icons/svg/explosion.svg"
-            }
-        ],
-        "description": "Effect: Increases the Power of the user's Electric-Type attacks by 50%.",
+  "name": "Soul Turbine",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "stab",
-            "electric"
+          "stab",
+          "electric"
         ],
+        "name": "Soul Turbine",
         "slug": "soul-turbine",
-        "_migration": {
-            "version": null,
-            "previous": null
-        }
-    },
-    "_id": "vQgz4qcpgr5hqb5p",
-    "effects": [
-        {
-            "name": "Soul Turbine",
-            "type": "passive",
-            "_id": "5T0EPgzTSyUozidb",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "percentile-modifier",
-                        "key": "electric-attack-power",
-                        "value": 50,
-                        "predicate": [],
-                        "label": "Soul Turbine",
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false,
-                        "hideIfDisabled": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": false,
-                "stacks": 0
-            },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": null,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": true,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.330",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.2.0.3",
-                "createdTime": 1722262461989,
-                "modifiedTime": 1722262482670,
-                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-            }
-        }
-    ]
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: Increases the Power of the user's Electric-Type attacks by 50%.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: Increases the Power of the user's Electric-Type attacks by 50%.",
+    "traits": [
+      "stab",
+      "electric"
+    ],
+    "slug": "soul-turbine",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "vQgz4qcpgr5hqb5p",
+  "effects": [
+    {
+      "name": "Soul Turbine",
+      "type": "passive",
+      "_id": "5T0EPgzTSyUozidb",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "electric-attack-power",
+            "value": 50,
+            "predicate": [],
+            "label": "Soul Turbine",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1722262461989,
+        "modifiedTime": 1722262482670,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

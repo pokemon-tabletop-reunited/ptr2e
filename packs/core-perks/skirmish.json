@@ -1,64 +1,64 @@
 {
-    "folder": "Et2u8UoXSe2a17oq",
-    "name": "Skirmish",
-    "type": "perk",
-    "_id": "lAzKGhCaE28Nk7gP",
-    "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
-    "system": {
-        "actions": [
-            {
-                "name": "Skirmish Action (#1)",
-                "slug": "skirmish-action-1",
-                "description": "<p>Trigger: Entering Combat<br><br>On entering combat, as a Free Action at [Interrupt 2], you may spend 1PP to gain +2 SPD stages for 5 activations. However, this buff will expire early in the event that you take damage.</p>",
-                "traits": [],
-                "type": "generic",
-                "range": {
-                    "target": "enemy",
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple"
-                },
-                "img": "icons/svg/explosion.svg"
-            }
-        ],
-        "slug": "skirmish",
-        "description": "<p>Trigger: Entering Combat<br><br>On entering combat, as a free action interrupt, you may spend 1PP to advance your first activation forward by 50%.</p>",
+  "folder": "Et2u8UoXSe2a17oq",
+  "name": "Skirmish",
+  "type": "perk",
+  "_id": "lAzKGhCaE28Nk7gP",
+  "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
+  "system": {
+    "actions": [
+      {
+        "name": "Skirmish Action (#1)",
+        "slug": "skirmish-action-1",
+        "description": "<p>Trigger: Entering Combat<br><br>On entering combat, as a Free Action at [Interrupt 2], you may spend 1PP to gain +2 SPD stages for 5 activations. However, this buff will expire early in the event that you take damage.</p>",
         "traits": [],
-        "prerequisites": [
-            "None"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "physical",
-            "approach": "finesse",
-            "archetype": "Hunter"
+        "type": "generic",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
         },
-        "node": {
-            "i": 16,
-            "j": -65,
-            "connected": [
-                "sight-beyond-sight",
-                "aura-haze",
-                "keep-fighting",
-                "tubthumping"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#ff0000",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Ninja.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
+        "cost": {
+          "activation": "simple"
         },
-        "_migration": {
-            "version": null,
-            "previous": null
-        }
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "slug": "skirmish",
+    "description": "<p>Trigger: Entering Combat<br><br>On entering combat, as a free action interrupt, you may spend 1PP to advance your first activation forward by 50%.</p>",
+    "traits": [],
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Hunter"
     },
-    "effects": []
+    "node": {
+      "i": 16,
+      "j": -65,
+      "connected": [
+        "sight-beyond-sight",
+        "aura-haze",
+        "keep-fighting",
+        "tubthumping"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ff0000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Ninja.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": []
 }

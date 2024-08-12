@@ -1,37 +1,37 @@
 {
-    "name": "Drop",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
-    "system": {
+  "name": "Drop",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+  "system": {
+    "slug": "drop",
+    "description": "Effect: You drop your currently equipped Held item on the space you are standing on. This frees up your Held Item Slot.",
+    "traits": [],
+    "actions": [
+      {
         "slug": "drop",
-        "description": "Effect: You drop your currently equipped Held item on the space you are standing on. This frees up your Held Item Slot.",
-        "traits": [],
-        "actions": [
-            {
-                "slug": "drop",
-                "name": "Drop",
-                "type": "attack",
-                "traits": [
-                    "basic"
-                ],
-                "range": {
-                    "target": "self",
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "free"
-                },
-                "category": "status",
-                "types": [
-                    "untyped"
-                ],
-                "description": "Effect: You drop your currently equipped Held item on the space you are standing on. This frees up your Held Item Slot.",
-                "free": true,
-                "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
-            }
+        "name": "Drop",
+        "type": "attack",
+        "traits": [
+          "basic"
         ],
-        "grade": "E"
-    },
-    "_id": "qbK1AQEOT6YkmKWG",
-    "effects": []
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free"
+        },
+        "category": "status",
+        "types": [
+          "untyped"
+        ],
+        "description": "Effect: You drop your currently equipped Held item on the space you are standing on. This frees up your Held Item Slot.",
+        "free": true,
+        "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
+      }
+    ],
+    "grade": "E"
+  },
+  "_id": "qbK1AQEOT6YkmKWG",
+  "effects": []
 }

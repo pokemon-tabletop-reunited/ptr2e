@@ -1,41 +1,41 @@
 {
-    "name": "Fake Tears",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/dark_icon.svg",
-    "system": {
+  "name": "Fake Tears",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/dark_icon.svg",
+  "system": {
+    "slug": "fake-tears",
+    "description": "On hit, the target's SPDEF stage is reduced by -2 for 5 activations.",
+    "traits": [
+      "social"
+    ],
+    "actions": [
+      {
         "slug": "fake-tears",
-        "description": "On hit, the target's SPDEF stage is reduced by -2 for 5 activations.",
+        "name": "Fake Tears",
+        "type": "attack",
         "traits": [
-            "social"
+          "social"
         ],
-        "actions": [
-            {
-                "slug": "fake-tears",
-                "name": "Fake Tears",
-                "type": "attack",
-                "traits": [
-                    "social"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 10,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 5
-                },
-                "category": "status",
-                "accuracy": 100,
-                "types": [
-                    "dark"
-                ],
-                "description": "On hit, the target's SPDEF stage is reduced by -2 for 5 activations.",
-                "img": "/systems/ptr2e/img/svg/dark_icon.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "dark"
         ],
-        "grade": "C"
-    },
-    "_id": "Aqr7QQnhxr1VN2Ot",
-    "effects": []
+        "description": "On hit, the target's SPDEF stage is reduced by -2 for 5 activations.",
+        "img": "/systems/ptr2e/img/svg/dark_icon.svg"
+      }
+    ],
+    "grade": "C"
+  },
+  "_id": "Aqr7QQnhxr1VN2Ot",
+  "effects": []
 }

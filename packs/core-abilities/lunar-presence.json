@@ -1,121 +1,121 @@
 {
-    "name": "Lunar Presence",
-    "type": "ability",
-    "img": "/systems/ptr2e/img/icons/ability_icon.webp",
-    "system": {
-        "actions": [
-            {
-                "traits": [
-                    "legendary",
-                    "connection"
-                ],
-                "name": "Lunar Presence",
-                "slug": "lunar-presence",
-                "type": "generic",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 4,
-                    "trigger": "The user declares Lunar Dance"
-                },
-                "range": {
-                    "target": "self",
-                    "unit": "m"
-                },
-                "description": "Trigger: The user declares Lunar Dance\nEffect: Connection - Lunar Dance. The creature targeted by the triggering attack gains @Affliction[boosted] 7.",
-                "img": "icons/svg/explosion.svg"
-            },
-            {
-                "traits": [
-                    "legendary",
-                    "connection"
-                ],
-                "name": "Lunar Presence",
-                "slug": "lunar-presence",
-                "type": "passive",
-                "cost": {
-                    "activation": "free"
-                },
-                "description": "Passive: The user's Dark- and Fairy-Type attacks deal 50% more damage, and the user benefits from Gloomy Weather.",
-                "img": "icons/svg/explosion.svg"
-            }
-        ],
-        "description": "Trigger: The user declares Lunar Dance\nEffect: Connection - Lunar Dance. The creature targeted by the triggering attack gains @Affliction[boosted] 7. Passive: The user's Dark- and Fairy-Type attacks deal 50% more damage, and the user benefits from Gloomy Weather.",
+  "name": "Lunar Presence",
+  "type": "ability",
+  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
         "traits": [
-            "legendary",
-            "connection",
-            "partial-automation"
+          "legendary",
+          "connection"
         ],
+        "name": "Lunar Presence",
         "slug": "lunar-presence",
-        "_migration": {
-            "version": null,
-            "previous": null
-        }
-    },
-    "_id": "csezEAgYi46ESzxC",
-    "effects": [
-        {
-            "name": "Lunar Presence Passive Power",
-            "type": "passive",
-            "_id": "Wjq5zwFVk1iokmyX",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "percentile-modifier",
-                        "key": "dark-attack-power",
-                        "value": 50,
-                        "predicate": [],
-                        "label": "Lunar Presence",
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false,
-                        "hideIfDisabled": false
-                    },
-                    {
-                        "type": "percentile-modifier",
-                        "key": "fairy-attack-power",
-                        "value": 50,
-                        "predicate": [],
-                        "label": "Lunar Presence",
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false,
-                        "hideIfDisabled": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": false,
-                "stacks": 0
-            },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": null,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": true,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.330",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.2.0.3",
-                "createdTime": 1722260005393,
-                "modifiedTime": 1722260063456,
-                "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-            }
-        }
-    ]
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "The user declares Lunar Dance"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Trigger: The user declares Lunar Dance\nEffect: Connection - Lunar Dance. The creature targeted by the triggering attack gains @Affliction[boosted] 7.",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "connection"
+        ],
+        "name": "Lunar Presence",
+        "slug": "lunar-presence",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "Passive: The user's Dark- and Fairy-Type attacks deal 50% more damage, and the user benefits from Gloomy Weather.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: The user declares Lunar Dance\nEffect: Connection - Lunar Dance. The creature targeted by the triggering attack gains @Affliction[boosted] 7. Passive: The user's Dark- and Fairy-Type attacks deal 50% more damage, and the user benefits from Gloomy Weather.",
+    "traits": [
+      "legendary",
+      "connection",
+      "partial-automation"
+    ],
+    "slug": "lunar-presence",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "csezEAgYi46ESzxC",
+  "effects": [
+    {
+      "name": "Lunar Presence Passive Power",
+      "type": "passive",
+      "_id": "Wjq5zwFVk1iokmyX",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "dark-attack-power",
+            "value": 50,
+            "predicate": [],
+            "label": "Lunar Presence",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "fairy-attack-power",
+            "value": 50,
+            "predicate": [],
+            "label": "Lunar Presence",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1722260005393,
+        "modifiedTime": 1722260063456,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

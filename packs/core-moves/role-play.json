@@ -1,40 +1,40 @@
 {
-    "name": "Role Play",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
-    "system": {
+  "name": "Role Play",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "slug": "role-play",
+    "description": "Effect: The user gains the target's Basic Ability for 5 activations. This cannot be used to gain an [Innate] ability.",
+    "traits": [
+      "danger-close"
+    ],
+    "actions": [
+      {
         "slug": "role-play",
-        "description": "Effect: The user gains the target's Basic Ability for 5 activations. This cannot be used to gain an [Innate] ability.",
+        "name": "Role Play",
+        "type": "attack",
         "traits": [
-            "danger-close"
+          "danger-close"
         ],
-        "actions": [
-            {
-                "slug": "role-play",
-                "name": "Role Play",
-                "type": "attack",
-                "traits": [
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 7
-                },
-                "category": "status",
-                "types": [
-                    "psychic"
-                ],
-                "description": "Effect: The user gains the target's Basic Ability for 5 activations. This cannot be used to gain an [Innate] ability.",
-                "img": "/systems/ptr2e/img/svg/psychic_icon.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 7
+        },
+        "category": "status",
+        "types": [
+          "psychic"
         ],
-        "grade": "A"
-    },
-    "_id": "EU3IH3pjOelFqVI9",
-    "effects": []
+        "description": "Effect: The user gains the target's Basic Ability for 5 activations. This cannot be used to gain an [Innate] ability.",
+        "img": "/systems/ptr2e/img/svg/psychic_icon.svg"
+      }
+    ],
+    "grade": "A"
+  },
+  "_id": "EU3IH3pjOelFqVI9",
+  "effects": []
 }
