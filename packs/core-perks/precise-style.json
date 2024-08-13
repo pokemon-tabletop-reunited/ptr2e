@@ -11,18 +11,39 @@
       "approach": "finesse",
       "archetype": "Support"
     },
-    "description": "<p>The target gains Precise 1.</p>",
+    "description": "<p>The target gains @Affliction[precise] 1.</p>",
     "actions": [
       {
-        "name": "Precise Style",
-        "slug": "precise-style",
-        "description": "<p>The target gains Precise 1.</p>",
+        "name": "Precise!",
+        "slug": "precise",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": null
         },
-        "type": "generic",
-        "traits": []
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "untyped"
+        ],
+        "description": "Effect: The target gains @Affliction[precise] 1.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "type": "attack"
       }
     ],
     "slug": "precise-style",
