@@ -383,9 +383,15 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
         for (const k in this.attributes) {
             const key = k as keyof Attributes;
-            if (this.species?.stats[key]) this.attributes[key].base = this.species.stats[key];
+            // if (this.species?.stats[key]) this.attributes[key].base = this.species.stats[key];
             this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
         }
+
+        this.health.max = this.attributes.hp.value;
+        this.health.percent = Math.round((this.health.value / this.health.max) * 100);
+
+        this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
+        this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
     }
 
     _calculateStatTotal(stat: Attribute | Omit<Attribute, "stage">): number {

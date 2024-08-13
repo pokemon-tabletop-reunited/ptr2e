@@ -370,7 +370,7 @@ class CompendiumPack {
         }
         const data = this.finalizeAll();
         fs.writeFileSync(outFile, JSON.stringify(data));
-        CompendiumPack.saveAsJSONMap.set(this.packId, data);
+        if(this.packId !== "core-rules") CompendiumPack.saveAsJSONMap.set(this.packId, data);
 
         // Save folders if available
         if (this.folders.length > 0) {
