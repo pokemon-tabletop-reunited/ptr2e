@@ -1180,7 +1180,7 @@ class ActorPTR2e<
   ): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
-
+    if (this.type === 'ptu-actor') throw new Error("PTU Actors cannot be created directly.");
     if (options.fail === true) return false;
 
     if(this.system.party.ownerOf) {

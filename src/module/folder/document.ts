@@ -27,16 +27,16 @@ class FolderPTR2e<
 
   get owner(): string {
     if (this.type !== "Actor") return '';
-    return this.contents.find(actor => (actor as unknown as ActorPTR2e).system.party.ownerOf == this.id)?.uuid ?? '';
+    return this.contents.find(actor => (actor as unknown as ActorPTR2e).system.party?.ownerOf == this.id)?.uuid ?? '';
   }
 
   get party() {
     if (this.type !== "Actor") return [];
-    return this.contents.filter(actor => (actor as unknown as ActorPTR2e).system.party.partyMemberOf ==this.id).map(actor => actor.uuid);
+    return this.contents.filter(actor => (actor as unknown as ActorPTR2e).system.party?.partyMemberOf ==this.id).map(actor => actor.uuid);
   }
 
   get team() {
-    return game.actors.filter(actor => (actor as unknown as ActorPTR2e).system.party.teamMemberOf.includes(this.id)).map(actor => actor.uuid);
+    return game.actors.filter(actor => (actor as unknown as ActorPTR2e).system.party?.teamMemberOf.includes(this.id)).map(actor => actor.uuid);
   }
 
   _partySet = new Set<string>();
