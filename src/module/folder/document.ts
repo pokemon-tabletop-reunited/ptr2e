@@ -36,7 +36,7 @@ class FolderPTR2e<
   }
 
   get team() {
-    return this.contents.filter(actor => (actor as unknown as ActorPTR2e).system.party.teamMemberOf.includes(this.id)).map(actor => actor.uuid);
+    return game.actors.filter(actor => (actor as unknown as ActorPTR2e).system.party.teamMemberOf.includes(this.id)).map(actor => actor.uuid);
   }
 
   _partySet = new Set<string>();
