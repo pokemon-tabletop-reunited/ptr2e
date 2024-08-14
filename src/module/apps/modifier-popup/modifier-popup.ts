@@ -237,7 +237,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
             return;
         }
         const result = formData.object;
-        const rollMode = result.rollMode as RollMode;
+        const rollMode = result.rollmode as RollMode;
 
         this.resolve({ rollMode });
         this.promise = null;

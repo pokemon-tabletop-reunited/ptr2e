@@ -286,7 +286,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       speaker,
       flavor,
       system,
-    });
+    }, {rollMode: context.rollMode});
   }
 
   static createFromPokeballResults<TTypeDataModel extends TypeDataModel = TypeDataModel>(
@@ -327,7 +327,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       speaker,
       flavor,
       system,
-    });
+    }, {rollMode: context.rollMode});
   }
 
   static async createFromResults(
@@ -422,7 +422,12 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         speaker,
         flavor,
         system,
-      });
+      }, {rollMode: context.rollMode});
+  }
+
+  override get isRoll(): boolean {
+    if(["attack","skill","capture"].includes(this.type)) return true;
+    return super.isRoll;
   }
 }
 
