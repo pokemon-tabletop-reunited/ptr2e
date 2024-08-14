@@ -132,8 +132,12 @@
             border-bottom: 1px solid var(--color-light-6);
 
             button {
-                &.purchase {
+                &.purchase, &.refund {
                     flex: 0 0 70%;
+                }
+
+                &.refund {
+                  border-color: #851a1a;
                 }
 
                 &.unavailable {
@@ -203,6 +207,8 @@
             border-radius: 6px;
 
             dl {
+              margin: 0.25em 0;
+
                 dt {
                     display: inline-block;
                     padding-left: 5px;
@@ -225,11 +231,19 @@
             }
         }
 
-        [data-filter-type="multiselects"] {
+        [data-filter-type="multiselects"], [data-filter-type="checkboxes"] {
             border: 1px solid var(--border-theme-color);
             border-radius: 6px;
             margin: 0.5rem;
             padding: 0.5rem;
+
+            dt {
+              width: 10%;
+            }
+    
+            dd {
+                width: 82%;
+            }
 
             .tags {
                 --readonly-striped: 0;

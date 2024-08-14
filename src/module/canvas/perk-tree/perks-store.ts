@@ -8,7 +8,7 @@ import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 
 type EdgeCoordinateString = `${CoordinateString}-${CoordinateString}`;
 
-type PTRNode = {
+interface PTRNode {
     position: {
         i: number;
         j: number;
@@ -17,7 +17,7 @@ type PTRNode = {
     perk: PerkPTR2e;
     connected: Set<string>;
     state: PerkPurchaseState;
-};
+}
 
 type SluggedEdgeString = `${string}-${string}`;
 
@@ -25,7 +25,7 @@ class PerkStore extends Collection<PTRNode> {
     private edges: Map<SluggedEdgeString, PIXI.Graphics>;
     private _graph: PerkGraph;
     private _rootNodes: PTRNode[] | null = null;
-    private missingConnections: Map<string, Set<string>> = new Map();
+    private missingConnections = new Map<string, Set<string>>();
 
     get rootNodes() {
         return this._rootNodes ??= this.filter(node => node.perk.system.node.type === "root");
@@ -169,13 +169,12 @@ class PerkStore extends Collection<PTRNode> {
         return super.get(ij);
     }
 
-    //@ts-expect-error
+    //@ts-expect-error - This is a valid override
     override has(ij: CoordinateString): boolean {
         return super.has(ij);
     }
 
     override getName(name: string, { strict }: { strict: true; }): PTRNode;
-    override getName(name: string, { strict }: { strict: false; }): PTRNode | undefined;
     override getName(name: string): PTRNode | undefined;
     override getName(name: string, { strict }: { strict?: boolean | undefined; } = {}): PTRNode | undefined {
         const entry = this.find((node) => node.perk?.slug === sluggify(name));
