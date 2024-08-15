@@ -1,6 +1,4 @@
 import { MovePTR2e } from "@item";
-import { AttackPTR2e } from "@data";
-// import { sluggify } from "@utils";
 import { Tab } from "./document.ts";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
@@ -102,9 +100,7 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
   }
 
   override async _prepareContext() {
-    const attack = this.document.actions.attack.values().next().value as
-      | AttackPTR2e
-      | undefined;
+    const attack = this.document.system.attack;
 
     return {
       ...(await super._prepareContext()),
