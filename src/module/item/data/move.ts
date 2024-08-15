@@ -110,6 +110,10 @@ export default abstract class MoveSystem extends HasEmbed(
       //@ts-expect-error - Actions on source is not a collection but an array
       data.system = { actions: [] };
     }
+    if(data.system.actions === undefined) {
+      //@ts-expect-error - Actions on source is not a collection but an array
+      data.system.actions = [];
+    }
     if (data.system.actions instanceof Map) {
       throw new Error("Actions must be an array.");
     }

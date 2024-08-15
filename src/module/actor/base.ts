@@ -1198,7 +1198,7 @@ class ActorPTR2e<
   ): Promise<boolean | void> {
     if(changed.system?.party?.ownerOf) {
       const folder = game.folders.get(changed.system.party.ownerOf as Maybe<string>) as FolderPTR2e;
-      if(folder?.owner) {
+      if(folder?.owner && folder.owner !== this.uuid) {
         throw new Error("Cannot change the owner of a party folder to an actor that does not own it. Please remove the current party owner first.");
       }
     }

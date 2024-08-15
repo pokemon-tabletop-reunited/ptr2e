@@ -193,7 +193,7 @@ export class CharacterCreationTour extends PTRTour {
                         {
                             "name": "Pokeball",
                             "type": "consumable",
-                            "img": "/systems/ptr2e/img/icons/item_icon.webp",
+                            "img": "/systems/ptr2e/img/icons/consumable_icon.webp",
                         }
                     ],
                     effects: [

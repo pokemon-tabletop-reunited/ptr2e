@@ -19,7 +19,7 @@ export default function HasIdentification<BaseClass extends TemplateConstructor>
                     status: new fields.StringField({ required: true, initial: PTRCONSTS.IdentificationStatuses.IDENTIFIED, choices: Object.values(PTRCONSTS.IdentificationStatuses) }),
                     unidentified: new fields.SchemaField({
                         name: new fields.StringField({ required: true, initial: "Unidentified Item" }),
-                        img: new fields.FilePathField({ required: true, categories: ["IMAGE"], initial: "systems/ptu/css/images/icons/item_icon.png" }),
+                        img: new fields.FilePathField({ required: true, categories: ["IMAGE"], initial: "systems/ptu/css/images/icons/gear_icon.png" }),
                         description: new fields.HTMLField({ required: true, initial: "<p>Unidentified Item</p>" }),
                     })
                 }),
@@ -58,7 +58,7 @@ export default function HasIdentification<BaseClass extends TemplateConstructor>
         //  *          status: 'unidentified'
         //  *          unidentified: {
         //  *             name: 'Unidentified Flashlight',
-        //  *             img: 'systems/ptu/css/images/icons/item_icon.png',
+        //  *             img: 'systems/ptu/css/images/icons/gear_icon.png',
         //  *             description: 'Unidentified Flashlight, it probably glows?'
         //  *         } 
         //  *      } 
@@ -88,7 +88,7 @@ export default function HasIdentification<BaseClass extends TemplateConstructor>
         //         name: string;
         //         /**
         //          * The image of the unidentified item.
-        //          * @defaultValue `'systems/ptu/css/images/icons/item_icon.png'`
+        //          * @defaultValue `'systems/ptu/css/images/icons/gear_icon.png'`
         //          */
         //         img: ImageFilePath;
         //         /**
