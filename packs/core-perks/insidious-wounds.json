@@ -7,27 +7,31 @@
   "system": {
     "actions": [
       {
-        "name": "Insidious Wounds Action (#1)",
-        "slug": "insidious-wounds-action-1",
-        "description": "<p>When you hit a target that has at least one Affliction that inflicts effect damage, you may spend 1PP per Affliction to immediately reduce the Stacks of those Afflictions as though the creature had taken another Activation, triggering those Afflictions as appropriate. </p>",
-        "traits": [],
+        "name": "Insidious Wounds Action",
+        "slug": "insidious-wounds",
+        "description": "<p>Trigger: The user hits a target that has at least one [Major Affliction] or [Minor Affliction] that inflicts effect damage.</p><p>Effect: The target has each of those Afflictions immediately reduce their Stacks  as though the creature had taken another Activation. This Action's PP Cost is multiplied by the number of Afflictions that are targeted.</p>",
+        "traits": [
+          "interrupt-1"
+        ],
         "type": "generic",
         "range": {
           "target": "creature",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 0,
+          "activation": "free",
+          "powerPoints": 1,
           "delay": null,
-          "priority": null
+          "priority": null,
+          "trigger": "The user hits a target that has at least one [Major Affliction] or [Minor Affliction] that inflicts effect damage."
         }
       }
     ],
     "slug": null,
     "description": "<p>When you hit a target that has at least one Affliction that inflicts effect damage, you may spend 1PP per Affliction to immediately reduce the Stacks of those Afflictions as though the creature had taken another Activation, triggering those Afflictions as appropriate. </p>",
-    "traits": [],
+    "traits": [
+      "interrupt-1"
+    ],
     "prerequisites": [
       "None"
     ],
