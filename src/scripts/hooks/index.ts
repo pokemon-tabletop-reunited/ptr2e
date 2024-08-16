@@ -4,6 +4,7 @@ import { PTRHook } from "./data.ts";
 import { SettingUpdated } from "./setting-updated.ts";
 import { DropCanvasData } from "./drop-canvas-data.ts";
 import { ChatContext } from "./chat-context.ts";
+import { GearColor } from "./gear-color.ts";
 
 export const PTRHooks = {
     listen() {
@@ -13,7 +14,8 @@ export const PTRHooks = {
             GetSceneControlButtons,
             SettingUpdated,
             DropCanvasData,
-            ChatContext
+            ChatContext,
+            GearColor
         ]
         for (const listener of listeners) listener.listen();
     }
