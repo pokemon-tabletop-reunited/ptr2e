@@ -3950,8 +3950,8 @@ body .application.sheet .form-group {
   --data-inspector-selected: #edcb8e;
   --data-inspector-details-separator: hsla(34, 17%, 36%, 0.25);
   --data-inspector-border-hover: hsla(13, 12%, 29%, 0.58);
-  --data-inspector-entry-not-in-source: #255e74;
-  --data-inspector-entry-not-in-rolldata: #64486a;
+  --data-inspector-entry-not-in-source: #0480ff;
+  --data-inspector-entry-not-in-rolldata: #bf5ed3;
   --data-inspector-entry-hover-shadow: hsla(16, 100%, 50%, 0.37);
   --data-inspector-entry-hover-background: hsla(80, 5%, 12%, 0.18);
   --data-inspector-entry-hover-boxshadow: hsla(27, 21%, 29%, 0.39);
@@ -3960,7 +3960,6 @@ body .application.sheet .form-group {
   --data-inspector-tooltip-children: indianred;
   --data-inspector-tooltip-length: indianred;
   --data-inspector-tooltip-background: #e7e1d9;
-  --data-inspector-tooltip-font: #444241;
   --data-inspector-tooltip-border: #8b8383;
   --data-inspector-tooltip-shadow: darkred;
 }
@@ -4141,22 +4140,22 @@ body .application.sheet .form-group {
   flex: 3;
   font-weight: bold;
 }
-.application.sheet.data-inspector .window-content content.main > .data {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list {
   height: 100%;
   overflow-y: scroll;
 }
-.application.sheet.data-inspector .window-content content.main > .data .warning {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list .warning {
   text-align: center;
 }
-.application.sheet.data-inspector .window-content content.main > .data.derived [data-path]:not(.in-source) .key,
-.application.sheet.data-inspector .window-content content.main > .data.rolldata [data-path]:not(.in-source) .key {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list.derived [data-path]:not(.in-source) .key,
+.application.sheet.data-inspector .window-content content.main section.content > .data-list.rolldata [data-path]:not(.in-source) .key {
   color: var(--data-inspector-entry-not-in-source);
 }
-.application.sheet.data-inspector .window-content content.main > .data.source [data-path]:not(.in-rolldata) .key {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list.source [data-path]:not(.in-rolldata) .key {
   color: var(--data-inspector-entry-not-in-rolldata);
 }
-.application.sheet.data-inspector .window-content content.main > .data .data-pools .absent.temporary,
-.application.sheet.data-inspector .window-content content.main > .data .data-pools .absent.source {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list .data-pools .absent.temporary,
+.application.sheet.data-inspector .window-content content.main section.content > .data-list .data-pools .absent.source {
   color: #c30808;
 }
 .application.sheet.data-inspector .window-content content.main > .header {

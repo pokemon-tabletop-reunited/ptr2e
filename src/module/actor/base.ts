@@ -229,7 +229,27 @@ class ActorPTR2e<
    * */
   override prepareBaseData() {
     if (this.type === "ptu-actor") return super.prepareBaseData();
-    return super.prepareBaseData();
+    super.prepareBaseData();
+
+    if(this.system.shield.value > 0) this.rollOptions.addOption("self", "state:shielded");
+    if(this.system.health.value <= Math.floor(this.system.health.max * 0.25)) {
+      this.rollOptions.addOption("self", "state:desperation-3-4");
+      this.rollOptions.addOption("self", "state:desperation-1-2");
+      this.rollOptions.addOption("self", "state:desperation-1-3");
+      this.rollOptions.addOption("self", "state:desperation-1-4");
+    }
+    else if(this.system.health.value <= Math.floor(this.system.health.max * (1/3))) {
+      this.rollOptions.addOption("self", "state:desperation-3-4");
+      this.rollOptions.addOption("self", "state:desperation-1-2");
+      this.rollOptions.addOption("self", "state:desperation-1-3");
+    }
+    else if(this.system.health.value <= Math.floor(this.system.health.max * 0.5)) {
+      this.rollOptions.addOption("self", "state:desperation-3-4");
+      this.rollOptions.addOption("self", "state:desperation-1-2");
+    }
+    else if(this.system.health.value <= Math.floor(this.system.health.max * 0.75)) {
+      this.rollOptions.addOption("self", "state:desperation-3-4");
+    }
   }
 
   /**
@@ -506,13 +526,13 @@ class ActorPTR2e<
     // Damage is applied to shield first, then health
     // Shields cannot be healed
     if (damage > 0 || healShield) {
-      const damageAppliedToShield = Math.min(damage || 0, this.system.health.shield.value);
-      if (this.system.health.shield.value > 0 && damageAppliedToShield === 0) return 0;
+      const damageAppliedToShield = Math.min(damage || 0, this.system.shield.value);
+      if (this.system.shield.value > 0 && damageAppliedToShield === 0) return 0;
       if (damageAppliedToShield > 0 || healShield) {
-        const isShieldBroken = this.system.health.shield.value - damageAppliedToShield <= 0;
+        const isShieldBroken = this.system.shield.value - damageAppliedToShield <= 0;
         await this.update({
-          "system.health.shield.value": Math.max(
-            this.system.health.shield.value - damage,
+          "system.shield.value": Math.max(
+            this.system.shield.value - damage,
             0
           ),
         });
@@ -528,13 +548,13 @@ class ActorPTR2e<
                       `Shield healed for ${Math.abs(
                         damageAppliedToShield
                       )} health`,
-                      `Shield remaining: ${this.system.health.shield.value}`,
+                      `Shield remaining: ${this.system.shield.value}`,
                     ]
                     : [
                       `Shield took ${damageAppliedToShield} damage`,
                       isShieldBroken
                         ? "Shield broken!"
-                        : `Shield remaining: ${this.system.health.shield.value}`,
+                        : `Shield remaining: ${this.system.shield.value}`,
                     ],
                 damageApplied: damageAppliedToShield,
                 shieldApplied: true,
@@ -1242,14 +1262,14 @@ class ActorPTR2e<
       }
     }
 
-    if (changed.system?.health?.shield !== undefined) {
+    if (changed.system?.shield !== undefined) {
       if (
-        typeof changed.system.health.shield.value === "number" &&
-        changed.system.health.shield.value > this.system.health.shield.value
+        typeof changed.system.shield.value === "number" &&
+        changed.system.shield.value > this.system.shield.value
       ) {
-        changed.system.health.shield.max ??= changed.system.health.shield.value;
-      } else if (changed.system.health.shield.value === 0) {
-        changed.system.health.shield.max = 0;
+        changed.system.shield.max ??= changed.system.shield.value;
+      } else if (changed.system.shield.value === 0) {
+        changed.system.shield.max = 0;
       }
     }
 

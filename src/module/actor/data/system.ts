@@ -1,4 +1,4 @@
-import { HasTraits, HasMigrations, PokemonType } from "@data";
+import { HasTraits, HasMigrations, PokemonType, ClockPTR2e } from "@data";
 import { getTypes, TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import {
   ActorPTR2e,
@@ -15,6 +15,7 @@ import { SlugField } from "@module/data/fields/slug-field.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { ActorSystemSchema, AttributeSchema, StatSchema, TypeField, GenderOptions, AttributesSchema, AdvancementSchema, Movement } from "./data.ts";
+import { addDataFieldMigration, sluggify } from "@utils";
 
 class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel)) {
   static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -180,21 +181,21 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           label: "PTR2E.FIELDS.health.max.label",
           hint: "PTR2E.FIELDS.health.max.hint",
         }),
-        shield: new fields.SchemaField({
-          value: new fields.NumberField({
-            required: true,
-            initial: 0,
-            validate: (d) => (d as number) >= 0,
-            label: "PTR2E.FIELDS.health.shield.value.label",
-            hint: "PTR2E.FIELDS.health.shield.value.hint",
-          }),
-          max: new fields.NumberField({
-            required: true,
-            initial: 0,
-            validate: (d) => (d as number) >= 0,
-            label: "PTR2E.FIELDS.health.shield.max.label",
-            hint: "PTR2E.FIELDS.health.shield.max.hint",
-          })
+      }),
+      shield: new fields.SchemaField({
+        value: new fields.NumberField({
+          required: true,
+          initial: 0,
+          validate: (d) => (d as number) >= 0,
+          label: "PTR2E.FIELDS.shield.value.label",
+          hint: "PTR2E.FIELDS.shield.value.hint",
+        }),
+        max: new fields.NumberField({
+          required: true,
+          initial: 0,
+          validate: (d) => (d as number) >= 0,
+          label: "PTR2E.FIELDS.shield.max.label",
+          hint: "PTR2E.FIELDS.shield.max.hint",
         })
       }),
       money: new fields.NumberField({ required: true, initial: 0 }),
@@ -240,8 +241,18 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         ownerOf: new fields.DocumentIdField({ required: false }),
         partyMemberOf: new fields.DocumentIdField({ required: false }),
         teamMemberOf: new fields.ArrayField(new fields.DocumentIdField(), { initial: [] }),
-      })
+      }),
+      clocks: new CollectionField(
+        new fields.EmbeddedDataField(ClockPTR2e),
+        "id",
+        { required: true, initial: [] }
+      ),
     };
+  }
+
+  static override migrateData(source: Record<string, unknown>) {
+    addDataFieldMigration(source, "health.shield", "shield");
+    return super.migrateData(source);
   }
 
   protected override _initialize(options?: Record<string, unknown>): void {
@@ -265,6 +276,16 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     super.prepareBaseData();
     this._initializeModifiers();
     this._prepareSpeciesData();
+
+    for(const clock of this.clocks.contents) {
+      const name = sluggify(clock.name);
+      this.parent.rollOptions.addOption("clocks", `${name}`)
+      this.parent.rollOptions.addOption("clocks", `${name}:value:${clock.value}`)
+      this.parent.rollOptions.addOption("clocks", `${name}:max:${clock.max}`)
+      this.parent.rollOptions.addOption("clocks", `${clock.id}`)
+      this.parent.rollOptions.addOption("clocks", `${clock.id}:value:${clock.value}`)
+      this.parent.rollOptions.addOption("clocks", `${clock.id}:max:${clock.max}`)
+    }
 
     if (this.parent.isHumanoid()) {
       this.advancement.level = Math.max(1, Math.floor(Math.cbrt(((this.advancement.experience.current || 1) * 4) / 5)));

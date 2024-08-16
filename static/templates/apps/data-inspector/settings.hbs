@@ -6,7 +6,7 @@
         {{#if isChatMessage}}<option value="roll" {{#if (is dataType "roll")}}selected{{/if}}>{{localize "PTR2E.DataInspector.Data.Roll"}}</option>{{/if}}
         <option value="source" {{#if (is dataType "source")}}selected{{/if}}>{{localize "PTR2E.DataInspector.Data.Source"}}</option>
         <option value="derived" {{#if (is dataType "derived")}}selected{{/if}}>{{localize "PTR2E.DataInspector.Data.Derived"}}</option>
-        <option value="rolldata" {{#if (is dataType "rolldata")}}selected{{/if}}>{{localize "PTR2E.DataInspector.Data.RollData"}}</option>
+        {{!-- <option value="rolldata" {{#if (is dataType "rolldata")}}selected{{/if}}>{{localize "PTR2E.DataInspector.Data.RollData"}}</option> --}}
         <option value="override" {{#if (is dataType "override")}}selected{{/if}}>{{localize "PTR2E.DataInspector.Data.Override"}}</option>
         <option value="flags" {{#if (is dataType "flags")}}selected{{/if}}>{{localize "PTR2E.DataInspector.Data.Flags"}}</option>
       </select>
