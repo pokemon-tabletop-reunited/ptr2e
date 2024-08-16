@@ -4,12 +4,47 @@
   "img": "/systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "pursuit",
-    "description": "",
+    "description": "The user can spend 3 PP use Pursuit as an [Interrupt 6] action, with the Trigger being \"A creature uses Movement to move 4m or more away from the user or attempts to leave Combat.\". When using this move this way, the user can freely move up to half of the Movement Type of their choice towards the target and then attacks with this attack, which has its Power doubled.",
     "traits": [
       "dash",
-      "contact"
+      "contact",
+      "interrupt-6"
     ],
     "actions": [
+      {
+        "slug": "pursuit-reaction",
+        "name": "Pursuit (Reaction)",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact",
+          "interrupt-6",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "A creature uses Movement to move 4m or more away from the user or attempts to leave Combat."
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "Trigger: A creature uses Movement to move 4m or more away from the user or attempts to leave Combat.</p><p>Effect: The user may freely move up to half of the Movement Type of their choice towards the target and then attacks with this attack.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
       {
         "slug": "pursuit",
         "name": "Pursuit",
@@ -26,7 +61,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
+          "powerPoints": 0,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -37,7 +72,7 @@
         "types": [
           "dark"
         ],
-        "description": "The user can spend 2 PP use Pursuit as an [Interrupt 6] action, with the Trigger being \"A creature uses Movement or is being Switched out\". When using Pursuit this way, the user can freely move up to half of the Movement Type of their choice towards the target and then attacks with Pursuit, which has its Power doubled.",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
