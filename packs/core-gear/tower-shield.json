@@ -21,14 +21,14 @@
       "handsHeld": null,
       "slot": "held"
     },
-    "grade": "E",
+    "grade": "B",
     "fling": {
       "type": "untyped",
-      "power": null,
-      "accuracy": 100
+      "power": 80,
+      "accuracy": 50
     },
     "quantity": 1,
-    "rarity": "common",
+    "rarity": "rare",
     "identification": {
       "misidentified": null,
       "status": "identified",
@@ -44,9 +44,61 @@
   },
   "_id": "Eh9jjCrSdMx9qzQp",
   "img": "/systems/ptr2e/img/icons/item_icon.webp",
-  "effects": [],
-  "folder": "J3IyL2hclx9IDHK8",
-  "sort": 200000,
+  "effects": [
+    {
+      "name": "Tower Shield Equipped",
+      "type": "passive",
+      "_id": "9xbqHxDDQZc9MLdv",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.evasion",
+            "value": 2,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Item.ChBTTn5Y92l3vopZ.ActiveEffect.vwCWilRNpvXznB84",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.1.6",
+        "createdTime": 1723846204281,
+        "modifiedTime": 1723846214912,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ],
+  "folder": "fRV0oKqcl8xQBNp0",
+  "sort": -100000,
   "ownership": {
     "default": 0,
     "IcBpMqhFuTck9VpX": 3
@@ -59,7 +111,7 @@
     "systemId": "ptr2e",
     "systemVersion": "0.10.0-alpha.2.1.6",
     "createdTime": 1723843829570,
-    "modifiedTime": 1723846173446,
+    "modifiedTime": 1724171997773,
     "lastModifiedBy": "IcBpMqhFuTck9VpX"
   }
 }
