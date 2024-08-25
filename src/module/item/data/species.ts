@@ -160,26 +160,22 @@ class SpeciesSystem extends SpeciesExtension {
         hint: "PTR2E.FIELDS.diet.hint",
       }),
       abilities: new fields.SchemaField({
-        starting: new fields.SetField(new SlugField({ blank: false }), {
-          required: true,
-          initial: [],
-          label: "PTR2E.FIELDS.abilities.starting.label",
-        }),
-        basic: new fields.SetField(new SlugField({ blank: false }), {
-          required: true,
-          initial: [],
-          label: "PTR2E.FIELDS.abilities.basic.label",
-        }),
-        advanced: new fields.SetField(new SlugField({ blank: false }), {
-          required: true,
-          initial: [],
-          label: "PTR2E.FIELDS.abilities.advanced.label",
-        }),
-        master: new fields.SetField(new SlugField({ blank: false }), {
-          required: true,
-          initial: [],
-          label: "PTR2E.FIELDS.abilities.master.label",
-        }),
+        starting: new fields.SetField(new fields.SchemaField({
+            slug: new SlugField({ blank: false }), 
+            uuid: new fields.DocumentUUIDField(),
+        }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.starting.label", },),
+        basic: new fields.SetField(new fields.SchemaField({
+            slug: new SlugField({ blank: false }), 
+            uuid: new fields.DocumentUUIDField(),
+        }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.basic.label", },),
+        advanced: new fields.SetField(new fields.SchemaField({
+            slug: new SlugField({ blank: false }), 
+            uuid: new fields.DocumentUUIDField(),
+        }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.advanced.label", },),
+        master: new fields.SetField(new fields.SchemaField({
+            slug: new SlugField({ blank: false }), 
+            uuid: new fields.DocumentUUIDField(),
+        }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.master.label", },),
       }),
       movement: new fields.SchemaField({
         primary: new fields.ArrayField(
@@ -688,10 +684,15 @@ interface SizeSchema extends foundry.data.fields.DataSchema {
 }
 
 interface AbilitySchema extends foundry.data.fields.DataSchema {
-  starting: foundry.data.fields.SetField<SlugField<string, string, true, false, true>, string[], Set<string>, true, false, true>;
-  basic: foundry.data.fields.SetField<SlugField<string, string, true, false, true>, string[], Set<string>, true, false, true>;
-  advanced: foundry.data.fields.SetField<SlugField<string, string, true, false, true>, string[], Set<string>, true, false, true>;
-  master: foundry.data.fields.SetField<SlugField<string, string, true, false, true>, string[], Set<string>, true, false, true>;
+  starting: foundry.data.fields.SetField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
+  basic: foundry.data.fields.SetField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;;
+  advanced: foundry.data.fields.SetField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;;
+  master: foundry.data.fields.SetField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;;
+}
+
+interface AbilityReferenceSchema extends foundry.data.fields.DataSchema {
+    slug: SlugField<string, string, true, false, true>,
+    uuid: foundry.data.fields.DocumentUUIDField<"Item", true, false, false>
 }
 
 interface MovementSchema extends foundry.data.fields.DataSchema {
