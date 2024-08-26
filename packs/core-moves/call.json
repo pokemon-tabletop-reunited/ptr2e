@@ -12,7 +12,7 @@
       {
         "slug": "call",
         "name": "Call!",
-        "type": "attack",
+        "type": "generic",
         "traits": [
           "command"
         ],
@@ -23,22 +23,10 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 1
         },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "untyped"
-        ],
-        "description": "Effect: The target loses 2 Stacks on @Affliction[drowsy], @Affliction[nightmares], @Affliction[confused], @Affliction[flinched], @Affliction[disabled], @Affliction[suppressed], @Affliction[enraged], @Affliction[charmed], @Affliction[fear], and @Affliction[taunted] conditions it possesses. A target afflicted with @Affliction[hyper-mode] is cured of @Affliction[hyper-mode].",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "Effect: The @Affliction[drowsy], @Affliction[nightmares], @Affliction[confused], @Affliction[flinched], @Affliction[disabled], @Affliction[suppressed], @Affliction[enraged], @Affliction[charmed], @Affliction[fear], and @Affliction[taunted] Afflictions the user is Afflicted with have their Stack counts reduced by 2. A target afflicted with @Affliction[hyper-mode] is cured of @Affliction[hyper-mode].",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "container": null
