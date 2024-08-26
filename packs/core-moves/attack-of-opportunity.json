@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "attack-of-opportunity",
-    "description": "Trigger: A creature within Physical Reach spends a Movement Score or uses a [Manipulate] action.\nEffect: You make a [Basic] attack against the triggering creature.",
+    "description": "<p>Trigger: A creature within the user's Reach uses Movement to leave the user's Reach, or that creature uses a [Manipulate] action.</p><p>Effect: The user spends 2PP and uses a [Contact] Attack on their Active List as a Free Action against the target before they leave the user's Reach, consuming PP as normal. Then, the user is @Affliction[flinched] 2.</p>",
     "traits": [
       "interrupt-1",
       "basic"
@@ -23,14 +23,17 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "trigger": "A creature within Physical Reach spends a Movement Score or uses a [Manipulate] action."
+          "activation": "free",
+          "trigger": "A creature within the user's Reach uses a Movement to leave the user's Reach, or that creature uses a [Manipulate] action.",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         },
         "category": "status",
         "types": [
           "untyped"
         ],
-        "description": "Trigger: A creature within Physical Reach spends a Movement Score or uses a [Manipulate] action.\nEffect: You make a [Basic] attack against the triggering creature.",
+        "description": "<p>Trigger: A creature within the user's Reach uses Movement to leave the user's Reach, or that creature uses a [Manipulate] action.</p><p>Effect: The user uses a [Contact] Attack on their Active List as a Free Action against the target before they leave the user's Reach, consuming PP as normal. Then, the user is @Affliction[flinched] 2.</p>",
         "free": true,
         "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
       }
