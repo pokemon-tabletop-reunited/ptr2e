@@ -220,7 +220,7 @@ export default abstract class MoveSystem extends HasEmbed(
       return action as unknown as AttackPTR2e;
     })();
 
-    if (!attack) throw new Error("No attack action found on this move.");
+    if (!attack) return this.actions.contents[0] as AttackPTR2e;//throw new Error("No attack action found on this move.");
     return attack;
   }
 }

@@ -1,9 +1,11 @@
 <content class="attack-embed">
     <aside>
+      {{#if attack.category}}
         {{{getIcon attack.category}}}
-        {{#each attack.types as |type|}}
-        {{{getIcon type}}}
-        {{/each}}
+      {{/if}}
+      {{#each attack.types as |type|}}
+      {{{getIcon type}}}
+      {{/each}}
     </aside>
     <main>
         <section class="attack-info">
