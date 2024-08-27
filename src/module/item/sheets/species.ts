@@ -4,7 +4,7 @@ import { SpeciesSystemSource } from "@item/data/index.ts";
 import { htmlQueryAll, sluggify } from "@utils";
 import { default as ItemSheetPTR2e } from "./base.ts";
 import * as R from "remeda";
-import { EvolutionData } from "@item/data/species.ts";
+import { AbilityReference, EvolutionData } from "@item/data/species.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { partialSkillToSkill } from "@scripts/config/skills.ts";
 
@@ -175,6 +175,33 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
                         }
                     }
                 });
+            }
+
+            // drag/drop abilities
+            const abilityFieldsets = htmlElement.querySelectorAll("fieldset.abilities");
+            htmlElement.addEventListener("dragover", (event) => {
+                event.preventDefault();
+                const target = (event.target as HTMLElement).closest("fieldset.abilities");
+                if (!target) return;
+
+                // Remove the dragover class from all fieldset.evos elements
+                abilityFieldsets.forEach((fieldset) => fieldset.classList.remove("dragover"));
+
+                // Add the dragover class to the current target
+                target.classList.add("dragover");
+            });
+
+            htmlElement.addEventListener("dragleave", (event) => {
+                const target = (event.target as HTMLElement).closest("fieldset.abilities");
+                const relatedTarget = event.relatedTarget as HTMLElement;
+                if (!target || target.contains(relatedTarget)) return;
+                target.classList.remove("dragover");
+            });
+
+            for (const dropTarget of abilityFieldsets) {
+                dropTarget.addEventListener("drop", (event) =>
+                    SpeciesSheet.#dropAbility.call(this, event as DragEvent)
+                );
             }
         }
         if (partId === "evolution") {
@@ -403,6 +430,43 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
         });
 
         await this.document.update({ "system.evolutions": doc.system.evolutions });
+        return;
+    }
+
+    static async #dropAbility(this: SpeciesSheet, event: DragEvent): Promise<void> {
+        event.preventDefault();
+        const target = (event.target as HTMLElement).closest("fieldset.abilities") as HTMLElement;
+        if (!target) return;
+        target.classList.remove("dragover");
+
+        const { path } = target.dataset;
+        if (!path) return;
+
+        const data = TextEditor.getDragEventData(event) as Record<string, string>;
+        if (data.type !== "Item" || !data.uuid) return;
+        const item = await fromUuid<ItemPTR2e>(data.uuid);
+        if (!item || !(item instanceof ItemPTR2e)) return;
+
+        // if the item isn't an ability, error
+        if (item.type !== "ability") {
+            return Promise.reject("You can only drop an ability item into an ability slot!")
+        }
+
+        const doc = this.document.toObject();
+        
+        const abilities: AbilityReference[] = fu.getProperty(doc, path) ?? [];
+        // check if the slug is not present
+        const existing = abilities.find((ability)=>ability.slug == item.slug);
+        if (!existing) {
+            abilities.push({
+                slug: item.slug,
+                uuid: item.uuid,
+            });
+        } else {
+            existing.uuid = item.uuid;
+        }
+
+        await this.document.update({ [path]: abilities });
         return;
     }
 

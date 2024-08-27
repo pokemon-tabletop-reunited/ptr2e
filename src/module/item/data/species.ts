@@ -160,19 +160,19 @@ class SpeciesSystem extends SpeciesExtension {
         hint: "PTR2E.FIELDS.diet.hint",
       }),
       abilities: new fields.SchemaField({
-        starting: new fields.SetField(new fields.SchemaField({
+        starting: new fields.ArrayField(new fields.SchemaField({
             slug: new SlugField({ blank: false }), 
             uuid: new fields.DocumentUUIDField(),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.starting.label", },),
-        basic: new fields.SetField(new fields.SchemaField({
+        basic: new fields.ArrayField(new fields.SchemaField({
             slug: new SlugField({ blank: false }), 
             uuid: new fields.DocumentUUIDField(),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.basic.label", },),
-        advanced: new fields.SetField(new fields.SchemaField({
+        advanced: new fields.ArrayField(new fields.SchemaField({
             slug: new SlugField({ blank: false }), 
             uuid: new fields.DocumentUUIDField(),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.advanced.label", },),
-        master: new fields.SetField(new fields.SchemaField({
+        master: new fields.ArrayField(new fields.SchemaField({
             slug: new SlugField({ blank: false }), 
             uuid: new fields.DocumentUUIDField(),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.master.label", },),
@@ -684,16 +684,18 @@ interface SizeSchema extends foundry.data.fields.DataSchema {
 }
 
 interface AbilitySchema extends foundry.data.fields.DataSchema {
-  starting: foundry.data.fields.SetField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
-  basic: foundry.data.fields.SetField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
-  advanced: foundry.data.fields.SetField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
-  master: foundry.data.fields.SetField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
+  starting: foundry.data.fields.ArrayField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
+  basic: foundry.data.fields.ArrayField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
+  advanced: foundry.data.fields.ArrayField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
+  master: foundry.data.fields.ArrayField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
 }
 
 interface AbilityReferenceSchema extends foundry.data.fields.DataSchema {
     slug: SlugField<string, string, true, false, true>,
     uuid: foundry.data.fields.DocumentUUIDField<"Item", true, false, false>
 }
+
+export type AbilityReference = Required<{ slug: string, uuid: string }>;
 
 interface MovementSchema extends foundry.data.fields.DataSchema {
   primary: foundry.data.fields.ArrayField<
