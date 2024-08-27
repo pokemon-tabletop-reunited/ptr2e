@@ -6,34 +6,31 @@
     "slug": "sweep",
     "description": "Effect: The user clears [Hazard] effects from an adjacent space.",
     "traits": [
-      "basic"
+      "basic",
+      "manipulate"
     ],
     "actions": [
       {
         "slug": "sweep",
         "name": "Sweep",
-        "type": "attack",
+        "type": "generic",
         "traits": [
-          "basic"
+          "basic",
+          "manipulate"
         ],
         "range": {
-          "target": "self",
+          "target": "object",
+          "distance": 1,
           "unit": "m"
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 0
         },
-        "category": "status",
-        "types": [
-          "untyped"
-        ],
         "description": "Effect: The user clears [Hazard] effects from an adjacent space.",
-        "free": true,
-        "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
+        "img": "icons/svg/explosion.svg"
       }
-    ],
-    "grade": "E"
+    ]
   },
   "_id": "ypqvBMddHC2zIDib",
   "effects": []

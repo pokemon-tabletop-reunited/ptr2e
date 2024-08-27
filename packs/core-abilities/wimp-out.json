@@ -6,7 +6,8 @@
     "actions": [
       {
         "traits": [
-          "defensive"
+          "defensive",
+          "desperation-1-2"
         ],
         "name": "Wimp Out",
         "slug": "wimp-out",
@@ -14,7 +15,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 0,
-          "trigger": "The user is hit by an attack that reduces their HP to 50% their Max HP or lower.",
+          "trigger": "An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.",
           "delay": null,
           "priority": null
         },
@@ -23,12 +24,13 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user is hit by an attack that reduces their HP to 50% their Max HP or lower.\nEffect: The user freely moves up to half their Movement Score away from the attacking creature. If the user is an owned Pokemon, they may Switch out from battle as a Free Action, allowing their trainer to Switch In a replacement as a Free Action."
+        "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user freely moves up to the Movement Score of their choice away from the attacking creature. If the user is an owned Pokemon, they may Switch out from battle as a Free Action, allowing their trainer to Switch In a replacement as a Free Action.</p>"
       }
     ],
-    "description": "Trigger: The user is hit by an attack that reduces their HP to 50% their Max HP or lower.\nEffect: The user freely moves up to half their Movement Score away from the attacking creature. If the user is an owned Pokemon, they may Switch out from battle as a Free Action, allowing their trainer to Switch In a replacement as a Free Action.",
+    "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user freely moves up to the Movement Score of their choice away from the attacking creature. If the user is an owned Pokemon, they may Switch out from battle as a Free Action, allowing their trainer to Switch In a replacement as a Free Action.</p>",
     "traits": [
-      "defensive"
+      "defensive",
+      "desperation-1-2"
     ],
     "slug": null,
     "container": null

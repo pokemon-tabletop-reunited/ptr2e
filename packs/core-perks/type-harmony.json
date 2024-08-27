@@ -7,19 +7,19 @@
   "system": {
     "actions": [
       {
-        "name": "Type Harmony Action (#1)",
-        "slug": "type-harmony-action-1",
+        "name": "Type Harmony",
+        "slug": "type-harmony",
         "description": "<p>You emit a 10m aura which gives creatures that share a type with you +10% Damage output. This aura costs 2PP to activate, plus a further 2PP per round to maintain, spent on your first activation of the round.</p>",
         "traits": [],
         "type": "generic",
         "range": {
-          "target": "enemy",
-          "distance": 0,
+          "target": "allied-aura",
+          "distance": 10,
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 0,
+          "activation": "free",
+          "powerPoints": 2,
           "delay": null,
           "priority": null
         }

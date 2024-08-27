@@ -4,10 +4,11 @@
   "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "breaking-hold",
-    "description": "",
+    "description": "<p>Trigger: Activated by an Effect (usually, Seizing the Moment).</p><p>Effect: On hit, the target has a 30% chance of losing -1 DEF stage for 5 Activations.</p>",
     "traits": [
       "adaptable",
-      "grapple"
+      "grapple",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -26,16 +27,17 @@
         },
         "cost": {
           "activation": "free",
-          "powerPoints": -1,
-          "trigger": "This attack is used as a result of Seizing the Moment."
+          "powerPoints": 1,
+          "trigger": "Activated by an Effect."
         },
         "category": "physical",
-        "power": 25,
+        "power": 50,
         "accuracy": 80,
         "types": [
           "untyped"
         ],
-        "description": "Trigger: This attack is used as a result of Seizing the Moment.\nEffect: this attack's PP cost becomes 1, its Power doubles, and has a 20% chance of causing the target to lose -1 DEF stage for 5 Activations on hit."
+        "description": "<p>Trigger: Activated by an Effect.</p><p>Effect: On hit, the target has a 30% chance of losing -1 DEF stage for 5 Activations.</p>",
+        "free": true
       }
     ],
     "grade": "E"

@@ -411,18 +411,18 @@
           "paralysis": "The afflicted creature's SPD is reduced by 50%. The creature also has Slowed while Paralysis is active.",
           "drowsy": "The Power of all of the afflicted creature's attacks is reduced by 33%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their Actions. The afflicted creature's default SPDEF stages are reduced by 1 while Drowsy is active.",
           "nightmares": "This affliction can only be applied to Drowsy creatures. The Power of all of the afflicted creature's attacks is reduced by 50%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their actions. The creature loses a Tick of HP at the end of each of its Activations and has their default SPDEF and ACC stages reduced by 1 while Nightmares is active. When a creature receives Nightmares, it loses the Drowsy Condition, and gains 33% of its remaining Drowsy Stacks onto Nightmares, and further Nightmares Stacks cannot be applied.",
-          "frozen": "The afflicted creature is unable to use actions (either during its Activations or as interrupts/reactions), but takes 33% less damage from all sources. The afflicted creature's default DEF stages are reduced by 1, and has its Base SPD increased by 50%. Additional Frozen Stacks cannot be added while Frozen is on a creature.",
+          "frozen": "The afflicted creature is unable to use actions (either during its Activations or as interrupts/reactions), but takes 33% less damage from all sources. The afflicted creature's default DEF stages are reduced by 1, and has its SPD increased by 50%. Additional Frozen Stacks cannot be added while Frozen is on a creature.",
           "splinter": "The afflicted creature loses a Tick of HP when they are damaged by a Physical- or Special-Category attack. The creature has Stunted while Splinter is active.",
           "slowed": "The afflicted creature’s Movement Scores are reduced by 50%, rounding down (minimum 1).",
-          "hindered": "The afflicted creature’s Skill DCs are reduced by -10.",
-          "stunted": "When the afflicted creature recovers HP, that amount is reduced by 2 Ticks (if the amount after this reduction becomes negative, the afflicted creature instead just doesn’t recover HP at all).",
+          "hindered": "The afflicted creature’s Skill DCs are reduced by -10. Hindered applied from different sources have their own Stacks.",
+          "stunted": "When the afflicted creature recovers HP, that amount is reduced by 2 Ticks (to a minimum of 0 HP healed).",
           "confused": "At the end of the afflicted creature's Activations, it has a 50% chance of using Fumble.",
           "flinched": "The creature's Activation is Delayed by their Flinched Stack Value (max 5) x 20%. A creature loses all Stacks of Flinched after its next Activation.",
           "hyper-mode": "While afflicted with Hyper Mode, the afflicted creature gains +20% to all of its Movement Scores, while dealing and taking 15% more damage. As well, the user’s Shadow-Type attacks gain [Crit 1], or have their [Crit X] value increase by +1. At the start of the afflicted creature’s Activations, it has:<ul><li>a 40% chance to act normally on that Activation.</li><li>a 25% chance to be Choice-Locked 1 to Shadow-Type attacks.</li><li>a 15% chance of ending its Activation and using Fumble.</li><li>a 15% chance of using Backlash.</li><li>a 5% chance to be cured of Hyper Mode.</li></ul>",
           "weary": "While a creature is Weary, its default ACC and EVA stages are based on its Weary value, X. Specifically, the default ACC and EVA stages are set to the negative sum of all X and all integers between 0 and X (Weary 1 sets the defaults to -1, 2 to -3, and 3 to -6). Weary is automatically increased by 1 when a creature Faints. When a creature has 4 or more Weary, it is unable to battle until they reduce their Weary. Weary cannot wear off on its own - a creature must deliberately Rest or consume Items such as Apples to remove Stacks of Weary.",
           "blinded": "The afflicted creature is unable to see, ocularly. The creature has their \"seeing-based\" vision options disabled (standard vision, Darkvision, X-Ray Vision, etc.) and can only perceive using their other senses (as listed in their Traits). If they do not have a way to see, or have someone guiding them, they are unable to target other creatures with Attacks or Actions.",
           "stuck": "While afflicted with Stuck, creatures may not leave the combat area. If the afflicted creature is an owned Pokemon, it cannot willingly switch out (or be switched out by another party). When a creature with the [Trainer] or [Ace] trait would gain the Stuck affliction; they instead gain Slowed X, rather than Stuck X.",
-          "bound": "The afflicted creature cannot willingly use any <Movement>. Stacks of Bound do not decrease at the end of a creature's Activation, instead the effect that applied Bound will provide a way of removing the Bound Condition.",
+          "bound": "The afflicted creature cannot willingly use any Movement. Stacks of Bound do not decrease at the end of a creature's Activation, instead the effect that applied Bound will provide a way of removing the Bound Condition.",
           "disabled": "One of the afflicted creature’s attacks cannot be used, under any circumstances. The move in question is determined by the source of the disabled effect, usually being “the last attack the target used.” If this would prevent them from using any attack, they may Struggle instead.",
           "nullified": "One of the afflicted creature’s abilities is negated, and cannot be activated or benefited from. The ability in question is determined by the source of the nullification, usually determined randomly.",
           "suppressed": "The afflicted creature spends 50% more PP on all actions that use PP.",
@@ -760,70 +760,70 @@
     "Attributes": {
       "hp": {
         "Label": "Hit Points",
-        "Hint": "The number of hit points the actor has."
+        "Hint": "The number of Hit Points (HP) the actor has."
       },
       "atk": {
         "Label": "Attack",
-        "Hint": "The attack bonus of the actor.",
+        "Hint": "The Attack (ATK) of the actor.",
         "Stage": {
-          "Label": "Atk Stages",
-          "Hint": "The attack stages of the actor."
+          "Label": "ATK Stages",
+          "Hint": "The ATK stages of the actor."
         }
       },
       "def": {
         "Label": "Defense",
-        "Hint": "The defense bonus of the actor.",
+        "Hint": "The Defense (DEF) of the actor.",
         "Stage": {
-          "Label": "Def Stages",
-          "Hint": "The defense stages of the actor."
+          "Label": "DEF Stages",
+          "Hint": "The DEF stages of the actor."
         }
       },
       "spa": {
         "Label": "Special Attack",
-        "Hint": "The special attack bonus of the actor.",
+        "Hint": "The Special Attack (SPATK) bonus of the actor.",
         "Stage": {
-          "Label": "SpAtk Stages",
-          "Hint": "The special attack stages of the actor."
+          "Label": "SPATK Stages",
+          "Hint": "The SPATK Stages of the actor."
         }
       },
       "spd": {
         "Label": "Special Defense",
-        "Hint": "The special defense bonus of the actor.",
+        "Hint": "The Special Defense (SPDEF) bonus of the actor.",
         "Stage": {
-          "Label": "SpDef Stages",
-          "Hint": "The special defense stages of the actor."
+          "Label": "SPDEF Stages",
+          "Hint": "The SPDEF Stages of the actor."
         }
       },
       "spe": {
         "Label": "Speed",
-        "Hint": "The speed of the actor.",
+        "Hint": "The Speed (SPD) of the actor.",
         "Stage": {
-          "Label": "Spd Stages",
-          "Hint": "The SPD stages of the actor."
+          "Label": "SPD Stages",
+          "Hint": "The SPD Stages of the actor."
         }
       },
       "accuracy": {
         "Label": "Accuracy",
-        "Hint": "The accuracy of the actor.",
+        "Hint": "The Accuracy (ACC) of the actor.",
         "Stage": {
-          "Label": "Acc Stages",
-          "Hint": "The accuracy stages of the actor."
+          "Label": "ACC Stages",
+          "Hint": "The ACC stages of the actor."
         }
       },
       "evasion": {
         "Label": "Evasion",
-        "Hint": "The evasion of the actor.",
+        "Hint": "The Evasion (EVA) of the actor.",
         "Stage": {
-          "Label": "Eva Stages",
-          "Hint": "The evasion stages of the actor."
+          "Label": "EVA Stages",
+          "Hint": "The EVA stages of the actor."
         }
       },
       "crit-rate": {
         "Label": "Critical Hit Rate",
-        "Hint": "The critical hit rate of the actor.",
+        "Hint": "The Critical Hit Rate (CRIT) of the actor.",
         "Stage": {
           "Label": "Crit Stages",
-          "Hint": "The critical hit rate stages of the actor."
+          "Hint": "The CRIT Stages of the actor."
         }
       }
     },
@@ -1439,20 +1439,20 @@
         "Hint": "The accuracy of the move."
       },
       "CritRoll": {
-        "Label": "Crit Roll",
-        "Hint": "The roll to determine if the attack crits."
+        "Label": "Critical Hit Roll",
+        "Hint": "The roll to determine if the attack is a Critical Hit."
       },
       "CritDC": {
-        "Label": "Crit DC",
-        "Hint": "The crit DC of this attack, calculated based on the attacker's crit stages."
+        "Label": "Critical Hit DC",
+        "Hint": "The Critical Hit DC of this attack, calculated based on the attacker's CRIT stages."
       },
       "AdjustedStages": {
         "Label": "Adjusted Stages",
         "Hint": "The combined accuracy stages of the attacker, and evasion stages of the defender. (max 6, min -6)"
       },
       "CritStages": {
-        "Label": "Crit Stages",
-        "Hint": "The Crit Stages applied to this attack (min 0, max 3)"
+        "Label": "CRIT Stages",
+        "Hint": "The CRIT Stages applied to this attack (min 0, max 4)"
       },
       "OtherModifiers": "Other Modifiers",
       "ChangeToCritical": "Make Crit",
@@ -1529,7 +1529,7 @@
     "Skills": {
       "luck": {
         "label": "Luck",
-        "hint": "Luck is your anime protagonist style plot armor. It gives the ability to manipulate a skill check, and a few other aspects of the game. Luck is a resource that only Player Characters and Aces have. At character creation, a player determines their initial luck by rolling 3d6 and multiplying the result by 5.<br><br>For more information, see the Luck section of the rulebook."
+        "hint": "Luck is representative of a \"cosmic karma\", one that guides a creature's favors and fortunes. Luck allows the manipulation of Skill Checks, and a few other aspects of the game. Luck is a resource that only Player Characters and Aces have, due to the \"plot importance\" these creatures tend to have, both in-game and out-of-game. At character creation, a Player determines their initial luck by rolling 3d6 and multiplying the result by 5.<br><br>For more information, see the Luck section of the Rules, under Skill Checks & Luck."
       },
       "accounting": {
         "label": "Accounting",
@@ -1553,7 +1553,7 @@
       },
       "climb": {
         "label": "Climb",
-        "hint": "This is a fairly straightforward skill. It governs the pace and aptitude for climbing."
+        "hint": "This is a fairly straightforward skill. It governs the pace and aptitude for climbing, and it what creatures use to Rush while burrowing."
       },
       "computers": {
         "label": "Computers",
@@ -1581,11 +1581,11 @@
       },
       "flying": {
         "label": "Flying",
-        "hint": "The Flying skill is used to Rush for flying movement."
+        "hint": "The Flying skill is used to Rush for Flying Movement, governing a creature's capacity for self-induced flight."
       },
       "handiwork": {
         "label": "Handiwork",
-        "hint": "The Handiwork skill covers various trades and crafts, mainly covering construction, woodworking, sewing, fletching, plumbing, and more! This ranges from broad knowledge of specific trades to specific capability in applying said knowledge, like in terms of Crafting."
+        "hint": "The Handiwork skill covers various trades and crafts, mainly covering construction, woodworking, sewing, fletching, plumbing, smithing, and more! This ranges from broad knowledge of specific trades to specific capability in applying said knowledge, like in terms of Crafting."
       },
       "history": {
         "label": "History",
@@ -1621,7 +1621,7 @@
       },
       "mechanics": {
         "label": "Mechanics",
-        "hint": "The purpose of the Mechanics skill is to perform mechanical repairs and upgrades to machines or devices, working with non-electrical components."
+        "hint": "This skill is to perform mechanical repairs and upgrades to machines or devices and working with simpler electrical components. These can range from repairing small gadgets, like flashlights, household appliances, traditional motor vehicles, factory machines, etc., but will likely not cover \"smart\" devices, like high-end smart phones, non-mechancal computers, or cyberpunk/sci-fi type \"bleeding edge\" devices and implements in more contemporary campaign settings."
       },
       "medicine": {
         "label": "Medicine",
@@ -1661,7 +1661,7 @@
       },
       "running": {
         "label": "Running",
-        "hint": "The Running skill is for when overland creatures gotta go fast. Use this skill to gain additional movement allowance after you've consumed all of yours in combat, or to participate in feats of speed during events such as a Pokeathlon"
+        "hint": "The Running skill is for when overland creatures gotta go fast. Use this skill to Rush using Overland Movement, or to participate in feats of speed during events such as a Pokeathlon."
       },
       "sleight-of-hand": {
         "label": "Sleight of Hand",
@@ -1677,15 +1677,15 @@
       },
       "survival": {
         "label": "Survival",
-        "hint": "This skill is used to find shelter and to seek out edible foods in the wilderness. It may be appropriate to use for field crafting of things like Rafts and temporary bridges."
+        "hint": "This skill is used to find shelter and to seek out edible foods in the wilderness. It may be appropriate to use for field crafting of things like rafts and temporary bridges, especially if you do not have a full handyman's or mechanic's toolset to tackle normally."
       },
       "swim": {
         "label": "Swim",
-        "hint": "The Swim skill covers all applications of the Acrobatics and Running skills but in the water. It also covers any checks that might be required in line with diving."
+        "hint": "The Swim skill covers all applications of the Acrobatics and Running skills but in the water, including using Rush. It also covers any checks that might be required in line with diving."
       },
       "teaching": {
         "label": "Teaching",
-        "hint": "The teaching skills is used to help instruct another in a skill with which you already possess. You may roll a Teaching check for any skill you have at rank 25 or higher. The target gains +10 per Degree of Success to their next check in the relevant skill."
+        "hint": "This skill is used to help instruct another creature in a skill or other knowledge you already possess. Used for more general Aid rolls and all varieties of Tutoring."
       },
       "track": {
         "label": "Track",
@@ -1728,7 +1728,7 @@
         "hint": "The Occult skills are actually several skills under one group, purchased separately. These are Psychic, Ghost, Dragon, Fairy, Spiritual, Legendary, Paradox. The skills cover knowledge about the topics they’re named for. GMs may wish to add more Occult knowledge as appropriate for their campaign setting.",
         "psychic": {
           "label": "Psychic",
-          "hint": "This skill is used to understand and use psychic powers."
+          "hint": "This skill is used to understand and use psychic powers, including using Rush while utilizing Teleport Movement."
         },
         "ghost": {
           "label": "Ghost",
@@ -1862,9 +1862,13 @@
           "label": "Meteorology",
           "hint": "This skill is used to study the weather."
         },
+        "palaeontology": {
+          "label": "Palaeontology",
+          "hint": "This skill is used to study ancient organisms and fossils."
+        },
         "parapsychology": {
           "label": "Parapsychology",
-          "hint": "This skill is used to study psychic phenomena."
+          "hint": "This skill is used to study psychic phenomena, and for using Rush while utilizing Teleport Movement."
         },
         "pharmacy": {
           "label": "Pharmacy",

@@ -16,7 +16,7 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
     get baseAV() {
         if (!this.actor) return Infinity;
         return Math.clamp(
-            Math.floor((500 * (1 + (Math.max(0, this.combat.averageLevel - 5) * 21) / 95)) / this.actor.speed),
+            Math.floor((500 * (1 + ((this.combat.averageLevel-1) * 21) / 90)) / this.actor.speed),
             33,
             100
         );
