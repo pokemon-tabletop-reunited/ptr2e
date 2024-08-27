@@ -35,21 +35,15 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
-        },
-        "variant": null
+          "activation": "complex"
+        }
       }
     ],
     "description": "Effect: The user's Physical-Category attacks deal 10% more damage.",
-    "slug": null,
-    "container": null,
+    "slug": "muscle-band",
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -59,26 +53,66 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "9rHsFeM38Ryk4684",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!9rHsFeM38Ryk4684"
+  "effects": [
+    {
+      "name": "Muscle Band",
+      "type": "passive",
+      "_id": "qDWJJegn6L2vd0mu",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "physical-attack-damage",
+            "value": 10,
+            "predicate": [],
+            "label": "Muscle Band",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Actor.tQ5GVHTl3rohItqN.Item.PEUn0C1nwvpcxX8J.ActiveEffect.qGQGG2KZu0vNusQf",
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.1.5",
+        "createdTime": 1723459017451,
+        "modifiedTime": 1723459017451,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }
