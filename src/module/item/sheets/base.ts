@@ -19,7 +19,7 @@ export default class ItemSheetPTR2e<
       dragDrop: [
         {
           dropSelector: ".window-content",
-          dragSelector: ".effect-list .effect",
+          dragSelector: ".effect-list .effect, .actions-list .action",
         }
       ],
       position: {

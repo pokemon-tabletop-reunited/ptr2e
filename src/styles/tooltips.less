@@ -309,6 +309,69 @@ aside[role="tooltip"] {
       }
     }
 
+    &.data-element {
+      box-shadow: 0 0 2px var(--data-inspector-tooltip-shadow);
+      background-color: var(--data-inspector-tooltip-background);
+      text-shadow: none;
+      border: 0.3px solid var(--data-inspector-tooltip-border);
+      border-radius: 0.5em;
+      border-bottom-left-radius: 0;
+
+      p:first-child {
+        margin-top: 0;
+      }
+
+      .path {
+        color: var(--data-inspector-tooltip-path);
+      }
+
+      .type {
+        color: var(--data-inspector-tooltip-type);
+      }
+
+      .children {
+        color: var(--data-inspector-tooltip-children);
+      }
+
+      .length {
+        color: var(--data-inspector-tooltip-length);
+      }
+
+      .in-data {
+        display: flex;
+        flex-direction: row;
+        gap: 1px;
+        place-content: center;
+        
+        .data-source {
+          display: flex;
+          flex-direction: column;
+          flex: 0;
+          gap: 3px;
+          align-items: center;
+
+          .header, .value {
+            justify-content: center;
+            flex: 0;
+            margin: 0;
+            padding: 0.1em 0.3em;
+            white-space: nowrap;
+            font-weight: var(--font-size-11, 8pt);
+          }
+
+          .header {
+            background-color: rgba(0, 0, 0, 0.1);
+            font-weight: bold;
+          }
+
+          .value {
+            overflow: unset;
+          }
+        }
+      }
+
+    }
+
     .attack-embed {
         min-width: 275px;
     }

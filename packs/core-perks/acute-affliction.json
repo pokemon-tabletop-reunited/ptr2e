@@ -8,22 +8,26 @@
     "actions": [
       {
         "name": "Acute Affliction",
-        "slug": "acute-affliction-action-1",
-        "description": "<p>Creatures suffering from Damage Over Time conditions you have inflicted suffer an additional -1 Combat Stage in both Defense and Special Defense.</p>",
+        "slug": "acute-affliction",
+        "description": "<p>Trigger: The target is afflicted with a [Major Affliction] the user caused.<p></p>Effect: The target's default DEF and SPDEF are reduced by -1.</p>",
         "traits": [],
-        "type": "passive",
+        "type": "generic",
         "range": {
-          "target": "enemy",
+          "target": "creature",
           "unit": "m"
         },
         "cost": {
-          "activation": "simple"
+          "activation": "free",
+          "powerPoints": 0,
+          "trigger": "The target is afflicted with a [Major Affliction] the user caused.",
+          "delay": null,
+          "priority": null
         },
         "img": "systems/ptr2e/img/perk-icons/Arcana.svg"
       }
     ],
     "slug": "acute-affliction",
-    "description": "<p>Creatures suffering from Damage Over Time conditions you have inflicted suffer an additional -1 Combat Stage in both Defense and Special Defense.</p>",
+    "description": "<p>Trigger: The target is afflicted with a [Major Affliction] the user caused.<p></p>Effect: The target's default DEF and SPDEF are reduced by -1.</p>",
     "traits": [],
     "prerequisites": [
       "Potent Afflictions"

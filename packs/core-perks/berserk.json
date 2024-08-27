@@ -11,12 +11,12 @@
       "approach": "power",
       "archetype": "Combat"
     },
-    "description": "<p>You gain +1 Attack Stage and +1 Special Attack Stage while @Affliction[enraged]. The duration of these stage increases is tied to the duration of your @Affliction[enraged] condition.</p>",
+    "description": "<p>While @Affliction[enraged], you have +1 default ATK and SPATK stage.</p>",
     "actions": [
       {
         "name": "Berserk",
         "slug": "berserk",
-        "description": "<p>You gain +1 Attack Stage and +1 Special Attack Stage while @Affliction[enraged]. The duration of these stage increases is tied to the duration of your @Affliction[enraged] condition.</p>",
+        "description": "<p>While @Affliction[enraged], you have +1 default ATK and SPATK stage.</p>",
         "cost": {
           "activation": "free"
         },
@@ -24,7 +24,7 @@
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "enemy",
+          "target": "self",
           "unit": "m"
         }
       }

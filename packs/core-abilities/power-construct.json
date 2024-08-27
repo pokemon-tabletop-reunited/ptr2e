@@ -8,15 +8,17 @@
         "traits": [
           "legendary",
           "forme-change",
-          "connection"
+          "connection",
+          "desperation-1-2",
+          "healing"
         ],
         "name": "Power Construct",
         "slug": "power-construct",
         "type": "generic",
         "cost": {
-          "activation": "simple",
+          "activation": "complex",
           "powerPoints": 4,
-          "trigger": "The user is reduced to 50% or fewer HP.",
+          "trigger": "The user crosses the [Desperation 1/2] threshold, and is not in their Complete Forme.",
           "delay": null,
           "priority": null
         },
@@ -25,13 +27,12 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user is reduced to 50% or fewer HP.\nEffect: Connection - Core Enforcer. The user transforms into their Complete Forme the rest of the combat, and recovers HP equal to 1/2 their Max HP after changing formes."
+        "description": "<p>Trigger: The user crosses the [Desperation 1/2] threshold, and is not in their Complete Forme.</p><p>Effect: Connection - Core Enforcer. The user transforms into their Complete Forme for the the rest of the Combat, gaining @Affliction[braced] 3 and recovering 8 Ticks of HP.</p>"
       },
       {
         "traits": [
           "legendary",
-          "forme-change",
-          "connection"
+          "healing"
         ],
         "name": "Power Construct",
         "slug": "power-construct",
@@ -43,14 +44,16 @@
           "priority": null
         },
         "range": null,
-        "description": "Passive: When the user uses Core Enforcer, they recover a Tick of HP."
+        "description": "Passive: When the user resolves Core Enforcer, they recover a Tick of HP."
       }
     ],
-    "description": "Trigger: The user is reduced to 50% or fewer HP.\nEffect: Connection - Core Enforcer. The user transforms into their Complete Forme the rest of the combat, and recovers HP equal to 1/2 their Max HP after changing formes. Passive: When the user uses Core Enforcer, they recover a Tick of HP.",
+    "description": "<p>Trigger: The user crosses the [Desperation 1/2] threshold, and is not in their Complete Forme.</p><p>Effect: Connection - Core Enforcer. The user transforms into their Complete Forme for the the rest of the Combat, gaining @Affliction[braced] 3 and recovering 8 Ticks of HP.</p><p><Passive: When the resolves Core Enforcer, they recover a Tick of HP./p>",
     "traits": [
       "legendary",
       "forme-change",
-      "connection"
+      "connection",
+      "desperation-1-2",
+      "healing"
     ],
     "slug": null,
     "container": null

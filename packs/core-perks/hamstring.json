@@ -7,23 +7,26 @@
   "system": {
     "actions": [
       {
-        "name": "Hamstring Action",
-        "slug": "hamstring-action-1",
-        "description": "<p>On a Critical Hit, the user's attacks inflict -2 SPD stages for 5 Activations.</p>",
+        "name": "Hamstring",
+        "slug": "hamstring",
+        "description": "<p>The user's attacks inflict -1 SPD stages for 5 Activations on Critical Hits.</p>",
         "traits": [],
         "type": "passive",
         "range": {
-          "target": "enemy",
+          "target": "creature",
           "unit": "m"
         },
         "cost": {
-          "activation": "simple"
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
         },
         "img": "systems/ptr2e/img/perk-icons/Hunting.svg"
       }
     ],
     "slug": "hamstring",
-    "description": "<p>On a Critical Hit, you inflict -1 Speed Stages for 5 Activations.</p>",
+    "description": "<p>OThe user's attacks inflict -1 SPD stages for 5 Activations on Critical Hits.</p>",
     "traits": [],
     "prerequisites": [
       "None"

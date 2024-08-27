@@ -7,23 +7,30 @@
   "system": {
     "actions": [
       {
-        "name": "Skirmish Action (#1)",
-        "slug": "skirmish-action-1",
-        "description": "<p>Trigger: Entering Combat<br><br>On entering combat, as a Free Action at [Interrupt 2], you may spend 1PP to gain +2 SPD stages for 5 activations. However, this buff will expire early in the event that you take damage.</p>",
-        "traits": [],
+        "name": "Skirmish",
+        "slug": "skirmish",
+        "description": "<p>The user gains +2 SPD stages for 5 Activations, or removed early if the user takes damage.</p>",
+        "traits": [
+          "interrupt-2"
+        ],
         "type": "generic",
-        "range": {
-          "target": "enemy",
-          "unit": "m"
-        },
         "cost": {
-          "activation": "simple"
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "The user enters Combat.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
         },
         "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "skirmish",
-    "description": "<p>Trigger: Entering Combat<br><br>On entering combat, as a free action interrupt, you may spend 1PP to advance your first activation forward by 50%.</p>",
+    "description": "<p>Upon entering combat, as a Free Action at [Interrupt 2], you may spend 2 PP to gain +2 SPD stages for 5 Activations, or until you take damage.</p>",
     "traits": [],
     "prerequisites": [
       "None"

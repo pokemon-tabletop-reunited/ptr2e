@@ -1,8 +1,10 @@
+import { ClockPTR2e } from "@data";
 import SpeciesSystem, { SpeciesSchema } from "@item/data/species.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
+import { ClockSchema } from "@module/data/models/clock.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import { Nature } from "@scripts/config/natures.ts";
@@ -20,6 +22,7 @@ interface ActorSystemSchema extends TraitsSchema, MigrationSchema, foundry.data.
   type: foundry.data.fields.SchemaField<TypeSchema, SourceFromSchema<TypeSchema>, ModelPropsFromSchema<TypeSchema>, true, false, false>;
   powerPoints: foundry.data.fields.SchemaField<PowerPointsSchema, SourceFromSchema<PowerPointsSchema>, ModelPropsFromSchema<PowerPointsSchema>, true, false, false>;
   health: foundry.data.fields.SchemaField<HealthSchema, SourceFromSchema<HealthSchema>, ModelPropsFromSchema<HealthSchema>, true, false, false>;
+  shield: foundry.data.fields.SchemaField<ShieldSchema, SourceFromSchema<ShieldSchema>, ModelPropsFromSchema<ShieldSchema>, true, false, false>;
   money: foundry.data.fields.NumberField<number, number, true, false, true>;
   shiny: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   nature: foundry.data.fields.StringField<Nature, Nature, true, false, true>;
@@ -27,6 +30,18 @@ interface ActorSystemSchema extends TraitsSchema, MigrationSchema, foundry.data.
   slots: foundry.data.fields.NumberField<number, number, true, false, true>;
   inventoryPoints: foundry.data.fields.SchemaField<InventoryPointsSchema, SourceFromSchema<InventoryPointsSchema>, ModelPropsFromSchema<InventoryPointsSchema>, true, false, false>;
   party: foundry.data.fields.SchemaField<PartySchema, SourceFromSchema<PartySchema>, ModelPropsFromSchema<PartySchema>, true, false, false>;
+  clocks: CollectionField<
+    foundry.data.fields.EmbeddedDataField<ClockPTR2e, true, false, true>,
+    SourceFromSchema<ClockSchema>[],
+    Collection<ClockPTR2e>,
+    true, false, true
+  >;
+  // clocks: foundry.data.fields.ArrayField<
+  //   foundry.data.fields.EmbeddedDataField<ClockPTR2e, true, false, true>,
+  //   SourceFromSchema<ClockSchema>[],
+  //   ModelPropsFromSchema<ClockSchema>[],
+  //   true, false, true
+  // >;
 }
 
 interface PartySchema extends foundry.data.fields.DataSchema {
@@ -88,7 +103,6 @@ interface PowerPointsSchema extends foundry.data.fields.DataSchema {
 interface HealthSchema extends foundry.data.fields.DataSchema {
   value: foundry.data.fields.NumberField<number, number, true, false, true>;
   max: foundry.data.fields.NumberField<number, number, true, false, true>;
-  shield: foundry.data.fields.SchemaField<ShieldSchema, SourceFromSchema<ShieldSchema>, ModelPropsFromSchema<ShieldSchema>, true, false, false>;
 }
 
 interface ShieldSchema extends foundry.data.fields.DataSchema {
