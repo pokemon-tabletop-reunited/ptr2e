@@ -254,6 +254,18 @@ class SpeciesSystem extends SpeciesExtension {
     };
   }
 
+  static override migrateData(source: Record<string, unknown>) {
+    // @ts-ignore-error
+    for (const abGroup of Object.keys(source.abilities)) {
+      // @ts-ignore-error
+      source.abilities[abGroup] = source.abilities[abGroup].map(g=>{
+        if (typeof g == "object") return g;
+        return { slug: g, uuid: null };
+      });
+    }
+    return super.migrateData(source);
+  }
+
   override prepareBaseData(): void {
     super.prepareBaseData();
 

@@ -20,16 +20,21 @@ export class Migration106AbilityUUIDs extends MigrationBase {
                 .get("ptr2e.core-abilities")!
                 .getDocuments()) as AbilityPTR2e[];
             this.abilitiesMap = new Map(
-                coreAbilities.map((ability) => [ability.slug, { slug: ability.slug, uuid: ability.uuid }])
+                coreAbilities.map((ability) => [ability.system.slug, { slug: ability.system.slug, uuid: ability.uuid }])
             );
         }
 
         // convert slugs to {slug,uuid}
         const abilities = source.system.abilities;
         for (const category of Object.keys(abilities)) {
-            abilities[category] = Object.values(abilities[category] as []).map((slug)=>{
-                if (typeof(slug) == "object") return slug;
-                return foundry.utils.deepClone(this.abilitiesMap![slug]);
+            abilities[category] = Object.values(abilities[category] as []).map(({slug, uuid})=>{
+                if (uuid) {
+                    return { slug, uuid }
+                };
+                if (!(this.abilitiesMap?.has(slug) ?? false)) {
+                    return { slug, uuid };
+                }
+                return foundry.utils.deepClone(this.abilitiesMap!.get(slug));
             });
         }
 
