@@ -37,12 +37,12 @@ const BaseSkillGroups = {
     "occult-group": { slug: "occult-group", points: 20 },
     "performance-group": { slug: "performance-group", points: 20 },
     "pilot-group": { slug: "pilot-group", points: 20 },
-    "cars-group": { slug: "cars-group", parentGroup: "pilot", points: 20 },
-    "aircraft-group": { slug: "aircraft-group", parentGroup: "pilot", points: 20 },
+    "cars-group": { slug: "cars-group", parentGroup: "pilot-group", points: 20 },
+    "aircraft-group": { slug: "aircraft-group", parentGroup: "pilot-group", points: 20 },
     "science-group": { slug: "science-group", points: 20 },
-    "biology-group": { slug: "biology-group", parentGroup: "science", points: 20 },
-    "chemistry-group": { slug: "chemistry-group", parentGroup: "science", points: 20 },
-    "mathematics-group": { slug: "mathematics-group", parentGroup: "science", points: 20 },
+    "biology-group": { slug: "biology-group", parentGroup: "science-group", points: 20 },
+    "chemistry-group": { slug: "chemistry-group", parentGroup: "science-group", points: 20 },
+    "mathematics-group": { slug: "mathematics-group", parentGroup: "science-group", points: 20 },
 } as Record<string, Partial<Omit<SkillGroup, 'slug' | 'points'>> & Required<Pick<SkillGroup, 'slug' | 'points'>>>;
 
 export default BaseSkillGroups;
