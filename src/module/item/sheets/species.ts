@@ -203,6 +203,11 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
                     SpeciesSheet.#dropAbility.call(this, event as DragEvent)
                 );
             }
+
+            const abilityRemoveButtons = htmlElement.querySelectorAll("fieldset.abilities a.remove");
+            for (const element of abilityRemoveButtons) {
+                element.addEventListener("click", SpeciesSheet.#deleteAbility.bind(this));
+            }
         }
         if (partId === "evolution") {
             for (const element of htmlQueryAll(htmlElement, ".evolution a[data-action]")) {
@@ -467,6 +472,29 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
         }
 
         await this.document.update({ [path]: abilities });
+        return;
+    }
+
+    static async #deleteAbility(this: SpeciesSheet, event: Event): Promise<void> {
+        event.preventDefault();
+
+        const tag = (event.target as HTMLElement).closest(".tag") as HTMLElement;
+        if (!tag) return;
+
+        const { key } = tag.dataset;
+        if (!key) return;
+        
+        const target = (event.target as HTMLElement).closest("fieldset.abilities") as HTMLElement;
+        if (!target) return;
+
+        const { path } = target.dataset;
+        if (!path) return;
+
+        const doc = this.document.toObject();
+        const abilities: AbilityReference[] = fu.getProperty(doc, path) ?? [];
+        const filteredAbilities = abilities.filter((ability)=>ability.slug != key);
+
+        await this.document.update({ [path]: filteredAbilities });
         return;
     }
 
