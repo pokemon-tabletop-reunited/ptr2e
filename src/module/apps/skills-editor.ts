@@ -140,7 +140,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             // get inherited values from groups
             let bonusFromGroups = 0;
             for (const group of game.ptr.data.skillGroups.groupChainFromSkill(skill)) {
-                bonusFromGroups += this.skillGroups.find((g)=>g.slug == group.slug)?.rvs ?? 0;
+                const editorGroup = this.skillGroups.find((g)=>g.slug == group.slug)
+                bonusFromGroups += (editorGroup?.rvs ?? 0) + (editorGroup?.investment ?? 0);
             }
             return {
                 ...skill,
