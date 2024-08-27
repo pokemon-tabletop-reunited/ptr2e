@@ -19,7 +19,7 @@ export default class ItemSheetPTR2e<
       dragDrop: [
         {
           dropSelector: ".window-content",
-          dragSelector: ".effect-list .effect",
+          dragSelector: ".effect-list .effect, .actions-list .action",
         }
       ],
       position: {
@@ -153,7 +153,7 @@ export default class ItemSheetPTR2e<
       return [];
     })();
 
-    this.#allTraits = game.ptr.data.traits.map((trait) => ({
+    this.#allTraits ??= game.ptr.data.traits.map((trait) => ({
       value: trait.slug,
       label: trait.label,
     }));

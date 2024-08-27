@@ -4,6 +4,7 @@ class StubModel {
   schema = {};
   modelProvider = {};
   _source = {};
+  parent = {};
 }
 
 const ignoreDataModelParts = Object.freeze(Object.getOwnPropertyNames(new StubModel()));

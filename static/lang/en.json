@@ -17,6 +17,12 @@
   "ITEM.AddButton": "Add",
   "ITEM.DeleteButton": "Delete",
   "PTR2E": {
+    "Actor": {
+      "Plural": "Actors"
+    },
+    "Item": {
+      "Plural": "Items"
+    },
     "DataInspector": {
       "DataButton": "Data",
       "Instructions": "<p>The Data Inspector for Documents will show you all the available fields based on the <em>Mode</em> you have selected, most modes show the data located in the `system` property.</p><p>Left click to expand an entry.</p><p>Right click a <em>key</em> to copy path to clipboard,</p><p>right click a <em>value</em> to copy that value to clipboard.</p><br><p>The Data Inspector for Chat Messages will show you info about the rolls in those messages</p><p>Right click a <em>domain</em> or <em>option</em> to copy that value to clipboard.</p>",
@@ -650,7 +656,8 @@
         "CreateItem": "Create Item",
         "EditItem": "Edit Item",
         "DeleteItem": "Delete Item"
-      }
+      },
+      "Unspent": "{num} Unspent"
     },
     "ActorSidebar": {
       "Party": {
@@ -674,6 +681,10 @@
       "DevMode": {
         "Name": "Developer Mode",
         "Hint": "Enable developer mode, this will allow you to commit changes to the Github repository."
+      },
+      "PlayerFolderCreatePermission": {
+        "Name": "Player Folder Creation",
+        "Hint": "Allow the ability for players to create folders from the Party Sheet."
       },
       "Traits": {
         "Name": "Traits Settings",
@@ -1100,7 +1111,7 @@
       "inventoryPoints": {
         "current": {
           "label": "Current",
-          "hint": "The current inventory points of this actor, used for manual tracking of IP spendature."
+          "hint": "The current inventory points of this actor, used for manual tracking of IP expenditure."
         },
         "max": {
           "label": "Max",
@@ -1248,17 +1259,17 @@
         "max": {
           "label": "Max",
           "hint": "The maximum health value of the actor."
+        }
+      },
+      "shield": {
+        "short": "Shield",
+        "value": {
+          "label": "Current",
+          "hint": "The shield value of the actor."
         },
-        "shield": {
-          "short": "Shield",
-          "value": {
-            "label": "Current",
-            "hint": "The shield value of the actor."
-          },
-          "max": {
-            "label": "Max",
-            "hint": "The maximum shield value of the actor."
-          }
+        "max": {
+          "label": "Max",
+          "hint": "The maximum shield value of the actor."
         }
       },
       "nature": {
@@ -1382,7 +1393,7 @@
           "label": "Overview"
         },
         "party": {
-          "label": "Party"
+          "label": "Organize Party/Boxes"
         }
       }
     },

@@ -172,6 +172,15 @@ function _registerPTRHelpers() {
 
         return TextEditor.createAnchor(data).outerHTML;
     });
+
+    Handlebars.registerHelper("sortFolder", function(folder: Folder) {
+      if(!(folder instanceof Folder)) return folder;
+
+      switch(folder.sorting) {
+        case "a": return folder.contents.sort((a, b) => a.name.localeCompare(b.name));
+        case "m": return folder.contents.sort((a,b) => a.sort - b.sort);
+      }
+    })
 }
 
 function _registerBasicHelpers() {
