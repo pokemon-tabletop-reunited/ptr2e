@@ -7,8 +7,7 @@
     "description": "Trigger: The user is targeted by a damaging attack that is not a Priority attack. \nEffect: The triggering attack fails to hit the user, and additional attacks that hit you also fail to hit the user until their next activation. attacks failing to hit the user do not activate on-miss effects. If a attack targeting the user would make contact misses due to Burning Bulwark, the attacker is @Affliction[burn] 5.",
     "traits": [
       "shield",
-      "exhaust",
-      "legendary",
+      "paradox",
       "interrupt-4"
     ],
     "actions": [
@@ -18,8 +17,7 @@
         "type": "attack",
         "traits": [
           "shield",
-          "exhaust",
-          "legendary",
+          "paradox",
           "interrupt-4"
         ],
         "range": {
@@ -29,10 +27,10 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
-          "trigger": "The user is targeted by a damaging attack that is not a Priority attack."
+          "trigger": "The user is targeted by a damaging attack that lacks[Interrupt X]."
         },
         "category": "status",
         "power": null,
@@ -40,7 +38,7 @@
         "types": [
           "fire"
         ],
-        "description": "Trigger: The user is targeted by a damaging attack that is not a Priority attack. \nEffect: The triggering attack fails to hit the user, and additional attacks that hit you also fail to hit the user until their next activation. attacks failing to hit the user do not activate on-miss effects. If a attack targeting the user would make contact misses due to Burning Bulwark, the attacker is @Affliction[burn] 5.",
+        "description": "Trigger: The user is targeted by a damaging attack that lacks[Interrupt X]. \nEffect: The triggering attack fails to hit the user, and additional attacks that would hit the user also fail to hit until the user's next activation. Attacks failing to hit the user do not activate on-resolution effects. If this attack protects the user from a [Contact] attack, the attacker gains @Affliction[burn] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

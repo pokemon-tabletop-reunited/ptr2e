@@ -1,0 +1,46 @@
+{
+  "name": "Ready!",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+  "system": {
+    "slug": "ready",
+    "description": "Effect: The user spends 1 PP, selecting an Attack or Action on their Active List, and has their next Activation is delayed 50%. Until the user's next Activation, the selected Action gains [Interrupt 1], and the user specifies a Trigger for it to possess. The Trigger can be as general as “anything that enters the Action's range will be targeted and attacked” or more specific as needed. On meeting the Trigger, the user may use the se'ected Attack or Action as a Free Action, consuming PP as normal.",
+    "traits": [
+      "defensive",
+      "command",
+      "basic"
+    ],
+    "actions": [
+      {
+        "slug": "ready",
+        "name": "Ready!",
+        "type": "attack",
+        "traits": [
+          "defensive",
+          "command",
+          "basic"
+        ],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
+        },
+        "category": "status",
+        "types": [
+          "untyped"
+        ],
+        "description": "Effect: The user selects an Attack or Action on their Active List, and the user's next Acivation is delayed 50%. Until the user's next Activation, the selected Action gains [Interrupt 1], and the user specifies a Trigger for it to possess. The Trigger can be as general as “anything that enters the Action's range will be targeted and attacked” or more specific as needed. On meeting the Trigger, the user may use the selected Attack or Action as a Free Action, consuming PP as normal.",
+        "free": true,
+        "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
+      }
+    ],
+    "grade": "E"
+  },
+  "_id": "cC6ztf3e3FGShqEc",
+  "effects": []
+}

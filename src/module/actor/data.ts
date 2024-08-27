@@ -74,13 +74,13 @@ interface Stat {
   stage: number
 }
 
-type PTRSkill = string | ArtSkill | OccultSkill | PerformanceSkill | PilotingSkills | ScienceSkills | "accounting" | "acrobatics" | "appraise" | "archaeology" | "aura-sense" | "climb" | "computers" | "conversation" | "credit-rating" | "disguise" | "electronics" | "engineering" | "fast-talk" | "history" | "husbandry" | "intimidate" | "leadership" | "legal" | "lift" | "listen" | "locksmith" | "mechanics" | "medicine" | "natural-world" | "navigate" | "negotiation" | "psychology" | "read-lips" | "research" | "ride" | "running" | "sleight-of-hand" | "spot-hidden" | "stealth" | "survival" | "swim" | "teaching" | "track" | "luck";
+type PTRSkill = string | ArtSkill | OccultSkill | PerformanceSkill | PilotingSkills | ScienceSkills | "accounting" | "acrobatics" | "appraise" | "archaeology" | "aura-sense" | "climb" | "computers" | "conversation" | "disguise" | "electronics" | "engineering" | "fast-talk" | "handiwork" | "history" | "husbandry" | "intimidate" | "leadership" | "legal" | "lift" | "listen" | "locksmith" | "mechanics" | "medicine" | "natural-world" | "navigate" | "negotiation" | "psychology" | "read-lips" | "research" | "resources" | "ride" | "running" | "sleight-of-hand" | "spot-hidden" | "stealth" | "survival" | "swim" | "teaching" | "track" | "luck";
 
-type ArtSkill = "flower-arrangement" | "poetry" | "calligraphy" | "painting" | "songwriting" | "digital-art" | "bonzai";
-type OccultSkill = "psychic" | "ghosts" | "fairies" | "spiritual" | "legendaries";
+type ArtSkill = "painting" | "sculpting" | "acting" | "dancing" | "singing" | "flower-arrangement" | "writing";
+type OccultSkill = "psychic" | "ghost" | "dragon" | "fairy" | "spiritual" | "legendary" | "paradox";
 type PerformanceSkill = "cool" | "cute" | "beautiful" | "tough" | "smart";
 type PilotingSkills = "bike" | "small-motor-vehicles" | "cars" | "utility-vehicles" | "military-ground-vehicles" | "walkers" | "aircraft" | "aerospace-vehicles" | "watercraft";
-type ScienceSkills = "astronomy" | "biology" | "botany" | "chemistry" | "cryptography" | "forensics" | "geology" | "mathematics" | "meteorology" | "parapsychology" | "pharmacy" | "physics" | "zoology"
+type ScienceSkills = "astronomy" | "biology" | "botany" | "chemistry" | "cryptography" | "forensics" | "geology" | "mathematics" | "meteorology" | "palaeontology" | "parapsychology" | "pharmacy" | "physics" | "zoology" | "eschatobiology" | "megalobiology" | "terastology" | "ultrology" | "paradoxian-studies"
 
 interface Skills {
   [slug: string]: Skill,
