@@ -4,7 +4,6 @@ import { ActorPTR2e } from "@actor";
 import { ActionPTR2e } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
-import FolderPTR2e from "@module/folder/document.ts";
 import { htmlQueryAll, sluggify } from "@utils";
 import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 
@@ -382,7 +381,7 @@ export class ActorSheetV2Expanded<
    */
   async _onDropFolder(event: DragEvent, data: object) {
     if (!this.actor.isOwner) return [];
-    const folder = (await FolderPTR2e.fromDropData(data)) as Folder | FolderPTR2e;
+    const folder = (await Folder.fromDropData(data)) as Folder;
     if (folder.type !== "Item") return [];
     const droppedItemData = await Promise.all(
       folder.contents.map(async (item) => {

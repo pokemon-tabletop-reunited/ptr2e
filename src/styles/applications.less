@@ -2551,6 +2551,11 @@ body {
     }
 
     &.party-sheet {
+      &:not(.minimized) {
+        min-width: 528px;
+        min-height: 465px;
+      }
+
         .window-content {
             grid-template-columns: unset;
             grid-template-rows: 44px auto;
@@ -2582,9 +2587,164 @@ body {
                         "party";
                 }
             }
+            &[data-tab="party"] {
+              padding: 0;
+
+              .scroll {
+                padding: 1rem;
+                overflow-y: hidden;
+                overflow-x: hidden;
+                height: 100%;
+
+                display: flex;
+                flex-direction: row;
+                gap: 0.5rem;
+
+                --folder-color-mixed: color-mix(in srgb, var(--folder-color, #4d4d4daa) 60%, transparent);
+
+                header {
+                  padding: 6px;
+                  line-height: 24px;
+                  background: var(--folder-color, black);
+                  text-shadow: 0px 0px 3px var(--color-shadow-dark);
+
+                  h3 {
+                    margin: 0;
+                    color: var(--color-text-light-highlight);
+                    font-size: var(--font-size-16);
+                    line-height: 24px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                  }
+                }
+
+                main.boxes {
+                  flex: 1;
+
+                  display: flex;
+                  flex-direction: column;
+                  flex-wrap: nowrap;
+
+                  overflow: hidden;
+
+                  .content {
+                    overflow-x: hidden;
+                    overflow-y: scroll;
+
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                    border: 6px solid var(--folder-color, black);
+                    border-right: unset;
+                    border-top: unset;
+                    border-radius: 0 0 8px 8px;
+
+                    --folder-color-mixed: color-mix(in srgb, var(--folder-color, #4d4d4daa) 60%, transparent);
+                    flex: 1;
+                    background: var(--folder-color-mixed);
+                    scrollbar-color: var(--folder-color, black) var(--folder-color-mixed, black);
+                  }
+
+                  header.controls {
+                    display: flex;
+                    align-items: center;
+                    border-radius: 8px 8px 0 0;
+                    
+                    h3 {
+                      flex: 1;
+                    }
+
+                    button {
+                      flex: 0 0 120px;
+                    }
+                  }
+
+                  article.box {
+                    --folder-color-mixed: color-mix(in srgb, var(--folder-color, #4d4d4daa) 60%, transparent);
+
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+
+                    header.box-header {
+                      flex: 0;
+                      position: sticky;
+                      top: 0;
+                      background: var(--folder-color, black);
+                    }
+                  }
+                }
+
+                .contents {
+                  display: flex;
+                  flex-direction: row;
+                  flex-wrap: wrap;
+                  overflow-y: auto;
+                  overflow-x: hidden;
+                  background: var(--folder-color-mixed);
+
+                  border: 4px solid var(--folder-color, black);
+                  border-top: unset;
+                }
+
+                article.box {
+                  min-width: 206px;
+
+                  section.box-item {
+                    flex: 1 1 190px;
+                    min-width: 190px;
+                    max-width: 270px;
+                    margin: 0;
+                    border-radius: unset;
+                    max-width: unset;
+                    background: unset;
+
+                    &.empty {
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: center;
+                      height: 40px;
+                      background: url(/ui/denim075.png);
+                      font-style: italic;
+                    }
+                  }
+                }
+
+                article.party {
+                  flex: 0 0 220px;
+                  width: 220px;
+                  flex-direction: column;
+                  flex-wrap: nowrap;
+
+                  header {
+                    flex: 0;
+                    border-radius: 8px 8px 0 0;
+                  }
+                  
+                  .contents {
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                    border-bottom: 6px solid var(--folder-color, black);
+                    border-left: 6px solid var(--folder-color, black);
+                    // border-right: 6px solid var(--folder-color, black);
+                    flex: 1;
+                    overflow-y: scroll;
+                    scrollbar-color: var(--folder-color, black) var(--folder-color-mixed, black);
+                    border-radius: 0 0 8px 8px;
+                  }
+
+                  section.party-member {
+                    min-width: 200px;
+                    margin: 0;
+                    border-radius: unset;
+                    flex: 0;
+                    background: unset;
+                  }
+                }
+              }
+            }
         }
 
-        .party-member {
+        .party-member, .box-item {
             display: flex;
             flex-direction: row;
             align-items: center;
@@ -2802,7 +2962,7 @@ body {
             }
         }
 
-        main {
+        main, article.party, article.box {
             grid-area: party;
 
             display: flex;
@@ -2811,7 +2971,7 @@ body {
             flex-wrap: wrap;
             align-content: start;
 
-            section.party-member {
+            section.party-member, section.box-item {
                 flex: 0 0 48%;
                 max-width: 48%;
                 height: 70px;
@@ -2968,6 +3128,41 @@ body {
                     }
                 }
             }
+        }
+
+        article.party, article.box {
+          header.party-header, header.box-header {
+            flex: 1 0 100%;
+          }
+
+          section.party-member, section.box-item {
+            height: 40px;
+            flex: 1;
+            min-width: 200px;
+
+            .thumbnail {
+              min-width: 40px;
+              height: 40px;
+
+              img {
+                height: 32px;
+                width: 32px;
+              }
+            }
+
+            main {
+              grid-template-rows: 1fr;
+              grid-template-areas: "title types";
+
+              .title {
+                justify-content: center;
+              }
+
+              .types {
+                justify-content: center;
+              }
+            }
+          }
         }
     }
 

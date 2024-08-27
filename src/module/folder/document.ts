@@ -30,16 +30,52 @@ class FolderPTR2e<
     return this.contents.find(actor => (actor as unknown as ActorPTR2e).system.party?.ownerOf == this.id)?.uuid ?? '';
   }
 
+  get ownerActor(): ActorPTR2e | null {
+    if (this.type !== "Actor") return null;
+    return this.contents.find(actor => (actor as unknown as ActorPTR2e).system.party?.ownerOf == this.id) as unknown as ActorPTR2e | null;
+  }
+
+  get userFromAvatarIfOwner(): User | null {
+    const owner = this.ownerActor;
+    if (!owner) return null;
+    return game.users.find(user => user.character?.uuid === owner.uuid) ?? null;
+  }
+
   get party() {
     if (this.type !== "Actor") return [];
-    return this.contents.filter(actor => (actor as unknown as ActorPTR2e).system.party?.partyMemberOf ==this.id).map(actor => actor.uuid);
+    return this.contents.filter(actor => (actor as unknown as ActorPTR2e).system.party?.partyMemberOf == this.id).map(actor => actor.uuid);
   }
 
   get team() {
     return game.actors.filter(actor => (actor as unknown as ActorPTR2e).system.party?.teamMemberOf.includes(this.id)).map(actor => actor.uuid);
   }
 
+  get safeColor() {
+    return typeof this.color === "string"
+      ? this.color
+      : //@ts-expect-error - This property exists
+      this.color?.css ?? "#000000"
+  }
+
   _partySet = new Set<string>();
+
+  /**
+   * The array of the Document instances which are contained within this Folder,
+   * unless it's a Folder inside a Compendium pack, in which case it's the array
+   * of objects inside the index of the pack that are contained in this Folder.
+   * @type {(ClientDocument|object)[]}
+   */
+  override get contents() {
+    if ( this._contents ) return this._contents;
+    if ( this.pack ) return game.packs.get(this.pack)!.index.filter(d => d.folder === this.id ) as TDocument[];
+    return this.documentCollection?.filter(d => d.folder === this) ?? [];
+  }
+
+  override set contents(value: TDocument[]) {
+    this._contents = value;
+  }
+
+  private _contents: TDocument[] | null = null;
 
   isInParty(uuid: string) {
     return this._partySet.has(uuid);
@@ -52,7 +88,12 @@ class FolderPTR2e<
   override prepareBaseData(): void {
     super.prepareBaseData();
 
-    this._partySet = new Set(this.party);
+    try {
+      this._partySet = new Set(this.party);
+    }
+    catch {
+      this._partySet = new Set();
+    }
 
     this._prepareOwnerData();
     this._preparePartyData();
@@ -116,7 +157,7 @@ class FolderPTR2e<
         },
         data
       ),
-      { pack: options.pack }
+      { pack: options.pack}
     );
     return new Promise((resolve) => {
       options.resolve = resolve;

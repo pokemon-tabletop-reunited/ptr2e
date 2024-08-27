@@ -2,6 +2,7 @@ import { DocumentSheetConfiguration, DocumentSheetV2 } from "@item/sheets/docume
 import FolderPTR2e from "./document.ts";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/api.js";
 import { ActorPTR2e } from "@actor";
+import { SocketRequestData } from "@scripts/hooks/socket.ts";
 
 class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
   DocumentSheetV2<FolderPTR2e>
@@ -22,6 +23,14 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     },
     { inplace: false }
   );
+
+  override get isEditable() {
+    return true;
+  }
+
+  override get isVisible() {
+    return true;
+  }
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     base: {
@@ -174,6 +183,54 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     formData: FormDataExtended
   ) {
     event.preventDefault();
+    if(!game.user.isGM) {
+      if(!game.users.activeGM) {
+        ui.notifications.error("Oops! A GM must be online to process this request.");
+        // Throw error so that the form doesn't close
+        throw new Error("No GM is currently online.");
+      }
+      const id = fu.randomID();
+
+      const timeout = setTimeout(() => {
+        ui.notifications.error("Request timed out. Please try again later.");
+        game.socket.off("system.ptr2e", listener);
+      }, 5000);
+
+      const listener = (data: SocketRequestData) => {
+        if (typeof data !== 'object' || !('request' in data)) return;
+        if(data.id !== id && ["acknowledge","acknowledgeFailure"].includes(data.request)) return;
+
+        ui.notifications.remove(notifId);
+        if(data.request === "acknowledgeFailure") ui.notifications.error(data.message || "GM failed to process request.");
+        else ui.notifications.info(data.message || "GM successfully processed request.");
+        game.socket.off("system.ptr2e", listener);
+        clearTimeout(timeout);
+
+        if ("resolve" in this.options && typeof this.options.resolve === "function") {
+          this.options.resolve(game.folders.get(data.documentId));
+        }
+      }
+
+      const data = {
+        request: "folderCreateOrUpdate",
+        data: fu.mergeObject(formData.object, this.document.id ? { _id: this.document.id } : {
+          source: (() => {
+            const source = this.document.toObject()
+            const merged = fu.mergeObject(source, formData.object, { inplace: false });
+            if (!merged.name) merged.name = source.name;
+            return merged;
+          })(),
+          pack: this.document.pack
+        }),
+        id
+      }
+
+      game.socket.on("system.ptr2e", listener);
+      game.socket.emit("system.ptr2e", data)
+      const notifId = ui.notifications.info("Sending request to GM...");
+      return;
+    }
+
     const data = formData.object as { name?: string } & Record<string, unknown>;
     const folder = await (async () => {
       if (!data.name?.trim()) data.name = Folder.defaultName();

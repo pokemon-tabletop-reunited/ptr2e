@@ -200,13 +200,13 @@ declare global {
      * @returns The Document or its index entry if it resides in a Compendium, otherwise null.
      * @throws If the uuid resolves to a Document that cannot be retrieved synchronously.
      */
-    function fromUuidSync(uuid: ItemUUID, relative?: Maybe<ClientDocument>): Item | CompendiumIndexData | null;
+    function fromUuidSync(uuid: Maybe<ItemUUID>, relative?: Maybe<ClientDocument>): Item | CompendiumIndexData | null;
     function fromUuidSync<TDocument extends WorldDocument>(
-        uuid: WorldDocumentUUID<TDocument>,
+        uuid: Maybe<WorldDocumentUUID<TDocument>>,
         relative?: Maybe<ClientDocument>,
     ): TDocument | null;
     function fromUuidSync<TDocument extends ClientDocument | CompendiumIndexData>(
-        uuid: string,
+        uuid: Maybe<string>,
         relative?: Maybe<ClientDocument>,
     ): TDocument | null;
 

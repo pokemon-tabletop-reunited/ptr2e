@@ -34,6 +34,15 @@ export function initializeSettings() {
         default: true,
     });
 
+    game.settings.register("ptr2e", "player-folder-create-permission", {
+      name: "PTR2E.Settings.PlayerFolderCreatePermission.Name",
+      hint: "PTR2E.Settings.PlayerFolderCreatePermission.Hint",
+      scope: "world",
+      config: true,
+      type: Boolean,
+      default: true,
+  });
+
     game.settings.register("ptr2e", "traits", {
         name: "PTR2E.Settings.Traits.Name",
         hint: "PTR2E.Settings.Traits.Hint",
