@@ -28,7 +28,7 @@ export class Migration106AbilityUUIDs extends MigrationBase {
         const abilities = source.system.abilities;
         for (const category of Object.keys(abilities)) {
             abilities[category] = Object.values(abilities[category] as []).map((slug)=>{
-                if (typeof(slug) == "object")
+                if (typeof(slug) == "object") return slug;
                 return foundry.utils.deepClone(this.abilitiesMap![slug]);
             });
         }
