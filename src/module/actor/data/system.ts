@@ -8,8 +8,10 @@ import {
 } from "@actor";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
+import { getInitialSkillGroupList } from "@scripts/config/skill-groups.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
+import SkillGroupPTR2e from "@module/data/models/skill-group.ts";
 import natureToStatArray, { natures } from "@scripts/config/natures.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
@@ -123,6 +125,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       }),
       skills: new CollectionField(new fields.EmbeddedDataField(SkillPTR2e), "slug", {
         initial: getInitialSkillList,
+      }),
+      skillGroups: new CollectionField(new fields.EmbeddedDataField(SkillGroupPTR2e), "slug", {
+        initial: getInitialSkillGroupList,
       }),
       biology: new fields.ObjectField(),
       capabilities: new fields.ObjectField(),
@@ -302,6 +307,17 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       const key = k as keyof Attributes;
       if (this.species?.stats[key]) this.attributes[key].base = this.species.stats[key];
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
+    }
+
+    for (const group of this.skillGroups) {
+      group.prepareBaseData();
+    }
+    for (const group of game.ptr.data.skillGroups) {
+      if (!this.skillGroups.has(group.slug)) {
+        const newGroup = new SkillGroupPTR2e(fu.duplicate(group), { parent: this });
+        newGroup.prepareBaseData();
+        this.skillGroups.set(newGroup.slug, newGroup);
+      }
     }
 
     for (const skill of this.skills) {

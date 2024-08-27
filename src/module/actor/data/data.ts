@@ -4,6 +4,7 @@ import { SlugField } from "@module/data/fields/slug-field.ts";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
+import SkillGroupPTR2e from "@module/data/models/skill-group.ts";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import { Nature } from "@scripts/config/natures.ts";
 
@@ -15,6 +16,7 @@ interface ActorSystemSchema extends TraitsSchema, MigrationSchema, foundry.data.
   attributes: foundry.data.fields.SchemaField<AttributesSchema, SourceFromSchema<AttributesSchema>, ModelPropsFromSchema<AttributesSchema>, true, false, false>;
   battleStats: foundry.data.fields.SchemaField<BattleStatsSchema, SourceFromSchema<BattleStatsSchema>, ModelPropsFromSchema<BattleStatsSchema>, true, false, false>;
   skills: CollectionField<foundry.data.fields.EmbeddedDataField<SkillPTR2e>>;
+  skillGroups: CollectionField<foundry.data.fields.EmbeddedDataField<SkillGroupPTR2e>>;
   biology: foundry.data.fields.ObjectField<object, object, true, false, false>;
   capabilities: foundry.data.fields.ObjectField<object, object, true, false, false>;
   type: foundry.data.fields.SchemaField<TypeSchema, SourceFromSchema<TypeSchema>, ModelPropsFromSchema<TypeSchema>, true, false, false>;

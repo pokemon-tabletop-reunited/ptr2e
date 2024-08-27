@@ -1,7 +1,7 @@
 import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
 import TooltipsPTR2e from "@module/tooltips/tooltips.ts";
 import { ImageResolver, sluggify } from "@utils";
-import { ArtMapCollection, ClockDatabase, SkillsCollection, TraitsCollection } from "@data";
+import { ArtMapCollection, ClockDatabase, SkillsCollection, SkillGroupsCollection, TraitsCollection } from "@data";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import { Pokedex } from "pokeapi-js-wrapper";
 import { UUIDUtils } from "src/util/uuid.ts";
@@ -28,6 +28,7 @@ const GamePTR = {
             data: {
                 traits: TraitsCollection.create(),
                 skills: SkillsCollection.create(),
+                skillGroups: SkillGroupsCollection.create(),
                 artMap: ArtMapCollection.create(),
                 afflictions: new Map(CONFIG.statusEffects.map(se => [se.id, se]))
             },

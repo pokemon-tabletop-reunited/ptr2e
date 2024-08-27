@@ -385,9 +385,7 @@ class ActorPTR2e<
       ].flat();
 
       const label = (() => {
-        const baseKey = skill.group
-          ? `PTR2E.Skills.${skill.group}.${skill.slug}`
-          : `PTR2E.Skills.${skill.slug}`;
+        const baseKey = `PTR2E.Skills.${skill.slug}`;
         if (game.i18n.has(baseKey + ".label"))
           return game.i18n.localize(baseKey + ".label");
         const customSkill = game.ptr.data.skills.get(skill.slug) as CustomSkill;
@@ -1436,6 +1434,7 @@ interface ActorPTR2e<
   }
 
   skills: Record<string, Statistic>;
+  skillGroups: Record<string, Statistic>;
 
   get itemTypes(): Record<string, ItemPTR2e[]>;
 }

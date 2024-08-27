@@ -22,6 +22,7 @@ import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { default as Skills } from "./skills.ts";
+import { default as SkillGroups } from "./skill-groups.ts";
 import { CheckRoll } from "@system/rolls/check-roll.ts";
 import { AttackRoll } from "@system/rolls/attack-roll.ts";
 import { CaptureRoll } from "@system/rolls/capture-roll.ts";
@@ -141,6 +142,7 @@ export const PTRCONFIG = {
     data: {
         traits: Traits,
         skills: Skills,
+        skillGroups: SkillGroups,
     },
     statusEffects: StatusEffects,
     specialStatusEffects: {

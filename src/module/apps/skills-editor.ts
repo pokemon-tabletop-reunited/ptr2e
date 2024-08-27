@@ -1,5 +1,6 @@
 import { ActorPTR2e, Skill } from "@actor";
 import { SkillsComponent } from "@actor/components/skills-component.ts";
+import SkillGroupPTR2e from "@module/data/models/skill-group.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
 
@@ -43,6 +44,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
     document: ActorPTR2e;
     skills: (SkillPTR2e["_source"] & { label: string; investment: number })[];
+    skillGroups: (SkillGroupPTR2e["_source"] & { label: string; investment: number, minInvestment: number, maxInvestment: number })[];
 
     override get title() {
         return `${this.document.name}'s Skills Editor`;
@@ -56,18 +58,15 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         super(options);
         this.document = document;
         this.skills = this.resetSkills();
+        this.skillGroups = this.resetSkillGroups();
     }
 
     resetSkills(): this["skills"] {
         const {skills, hideHiddenSkills} = SkillsComponent.prepareSkillsData(this.document);
 
         const convertSkill = (skill: Skill) => {
-            if (game.i18n.has(`PTR2E.Skills.${skill.group ? `${skill.group}.${skill.slug}` : skill.slug}.label`)) {
-                const label = game.i18n.format(
-                    `PTR2E.Skills.${
-                        skill.group ? `${skill.group}.${skill.slug}` : skill.slug
-                    }.label`
-                );
+            if (game.i18n.has(`PTR2E.Skills.${skill.slug}.label`)) {
+                const label = game.i18n.format(`PTR2E.Skills.${skill.slug}.label`);
                 return [{
                     ...skill,
                     label,
@@ -93,6 +92,21 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         ]
     }
 
+    resetSkillGroups(): this["skillGroups"] {
+        const { skillGroups } =  SkillsComponent.prepareSkillGroupsData(this.document);
+        const convertSkillGroup = (group: SkillGroupPTR2e) => {
+            const label = game.i18n.format(`PTR2E.Skills.${group.slug}.label`);
+            return {
+                ...group,
+                label,
+                investment: 0,
+                minInvestment: -(group.rvs ?? 0),
+                maxInvestment: group.points - (group.rvs ?? 0),
+            }
+        }
+        return skillGroups.map(convertSkillGroup) as unknown as (SkillGroupPTR2e["_source"] & { label: string, investment: number, minInvestment: number, maxInvestment: number })[];
+    }
+
     override async _prepareContext() {
         const points: {
             total: number;
@@ -105,6 +119,9 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                 for (const skill of this.skills) {
                     spent += skill.investment;
                 }
+                for (const group of this.skillGroups) {
+                    spent += group.investment;
+                }
                 return spent;
             })(),
         };
@@ -112,9 +129,28 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         const levelOne = this.document.system.advancement.level === 1;
         const maxInvestment = Math.clamp(points.available,0, levelOne ? 90 : 100);
 
+        const groupsWithSkillsVisible = new Set(this.skillGroups.filter(group=>(group.rvs ?? 0) + group.investment == group.points).map(group=>group.slug));
+
+        // remove skills that should be hidden by groups!
+        const modifiableSkills = foundry.utils.deepClone(this.skills).filter((skill)=>{
+            const skillInGroups = game.ptr.data.skillGroups.groupChainFromSkill(skill);
+            return skillInGroups.length == 0 || skillInGroups.every((group)=>groupsWithSkillsVisible.has(group.slug));
+        });
+
+        // remove groups that should be hidden by parent groups!
+        const modifiableGroups = foundry.utils.deepClone(this.skillGroups).filter((group)=>{
+            return !group.parentGroup || groupsWithSkillsVisible.has(group.parentGroup);
+        }).map((group)=>{
+            return {
+                ...group,
+                maxInvestment: Math.min(group.maxInvestment!, maxInvestment),
+            }
+        });
+
         return {
             document: this.document,
-            skills: this.skills,
+            skills: modifiableSkills,
+            skillGroups: modifiableGroups,
             points,
             maxInvestment,
             isReroll:
@@ -130,8 +166,11 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     ): void {
         super._attachPartListeners(partId, htmlElement, options);
 
-        for (const input of htmlQueryAll(htmlElement, "skill input")) {
+        for (const input of htmlQueryAll(htmlElement, ".skill input")) {
             input.addEventListener("change", this.#onSkillChange.bind(this));
+        }
+        for (const input of htmlQueryAll(htmlElement, ".skill-group input")) {
+            input.addEventListener("change", this.#onSkillGroupChange.bind(this));
         }
     }
 
@@ -146,6 +185,20 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         if (!skill) return;
 
         skill.investment = value;
+        this.render({});
+    }
+
+    #onSkillGroupChange(event: Event) {
+        const input = event.currentTarget as HTMLInputElement;
+        const slug = input.dataset.slug;
+        if (!slug) return;
+        const value = parseInt(input.value);
+        if (isNaN(value)) return;
+
+        const group = this.skillGroups.find((group) => group.slug === slug);
+        if (!group) return;
+
+        group.investment = value;
         this.render({});
     }
 
@@ -175,8 +228,15 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                                 rvs: 0,
                             };
                         }),
+                        "system.skillGroups": document.system.skillGroups.map((group) => {
+                            return {
+                                ...group,
+                                rvs: 0,
+                            }
+                        }),
                     });
                     this.skills = this.resetSkills();
+                    this.skillGroups = this.resetSkillGroups();
                     this.render({});
                 },
             },
@@ -360,7 +420,19 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     ) {
         const data = fu.expandObject<Record<string, { investment: string }>>(formData.object);
         const skills = this.document.system.toObject().skills as SkillPTR2e["_source"][];
+        const skillGroups = this.document.system.toObject().skillGroups as SkillGroupPTR2e["_source"][];
         const maxInvestment = this.document.system.advancement.level === 1 ? 90 : 100;
+
+
+        for (const group of skillGroups) {
+            const groupData = data[group.slug];
+            if (!groupData) continue;
+            const investment = parseInt(groupData.investment);
+            if (isNaN(investment) || !investment) continue;
+
+            group.rvs = Math.clamp((group.rvs ?? 0) + investment, 0, group.points);
+            delete data[group.slug];
+        }
 
         let resourceMod = 0;
         for (const skill of skills) {
@@ -368,6 +440,14 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             if (!skillData) continue;
             const investment = parseInt(skillData.investment);
             if (isNaN(investment) || !investment) continue;
+
+            // check if this skill is not allowed to be pointed
+            const skillGroup = skillGroups.find(group=>group.slug == skill.group);
+            if (skillGroup && (skillGroup!.rvs ?? 0) < skillGroup.points) {
+                // remove all points
+                skill.rvs = 0;
+                delete data[skill.slug];
+            }
 
             if(skill.slug === "resources" && investment < 0) resourceMod = investment; 
             skill.rvs = Math.clamp((skill.rvs ?? 0) + investment, skill.slug === "resources" ? -maxInvestment : 0, maxInvestment);
@@ -404,6 +484,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
         await this.document.update({
             "system.skills": skills,
+            "system.skillGroups": skillGroups,
         });
     }
 }

@@ -19,6 +19,14 @@
                 <label>Current Investment</label>
                 <label>Apply Investment</label>
             </header>
+            {{#each skillGroups}}
+                <div class="skill-group">
+                    <label class="skill-group" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{parentGroup}}" data-tooltip="{{slug}}">{{label}}</label>
+                    <label>{{value}}</label>
+                    <label>{{rvs}}</label>
+                    <input name="{{slug}}.investment" type="number" min="{{minInvestment}}" max="{{maxInvestment}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
+                </div>
+            {{/each}}
             {{#each skills}}
                 <div class="skill">
                     <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}</label>

@@ -66,6 +66,8 @@ class SkillsComponent extends ActorComponent {
             };
         })();
 
+        // consider: should we hide skills hidden by a group?
+
         const hideHiddenSkills = (() => {
             const appSettings = game.user.getFlag("ptr2e", "appSettings") as Record<string, Record<string, unknown>>;
             const appId = `ActorSheetPTRV2-${actor.uuid.replaceAll(".", "-")}`;
@@ -78,6 +80,14 @@ class SkillsComponent extends ActorComponent {
         return {
             skills,
             hideHiddenSkills,
+        };
+    }
+
+    static prepareSkillGroupsData(actor: ActorPTR2e) {
+        return {
+            skillGroups: actor.system.skillGroups.contents.sort((a, b) =>
+                a.slug.localeCompare(b.slug)
+            )
         };
     }
 

@@ -136,10 +136,7 @@ export default class TooltipsPTR2e {
     const skillSlug = game.tooltip.element?.dataset.slug;
     if (!skillSlug) return false;
 
-    const skillGroup = game.tooltip.element?.dataset.group;
-    const localizeKey = skillGroup
-      ? `PTR2E.Skills.${skillGroup}.${skillSlug}`
-      : `PTR2E.Skills.${skillSlug}`;
+    const localizeKey = `PTR2E.Skills.${skillSlug}`;
 
     const { localizedContent, localizedLabel } = await (async () => {
       const localizedContent = game.i18n.localize(`${localizeKey}.hint`);

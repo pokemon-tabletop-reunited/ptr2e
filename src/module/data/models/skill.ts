@@ -40,8 +40,13 @@ class SkillPTR2e extends foundry.abstract.DataModel {
     if (speciesTrait && this.value <= 1) {
       this.value = speciesTrait.value;
     }
+    // get inherited values from groups
+    this.bonusFromGroups = 0;
+    for (const group of game.ptr.data.skillGroups.groupChainFromSkill(this)) {
+      this.bonusFromGroups += this.parent.skillGroups.get(group.slug)?.rvs ?? 0;
+    }
 
-    this.total = this.value + (this.rvs ?? 0);
+    this.total = this.value + this.bonusFromGroups + (this.rvs ?? 0);
     if ((this.rvs ?? 0) > 0 && this.parent.advancement?.rvs?.total && !["luck", "resources"].includes(this.slug)) {
       this.parent.advancement.rvs.spent += this.rvs!;
     }
@@ -67,6 +72,7 @@ class SkillPTR2e extends foundry.abstract.DataModel {
 interface SkillPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<SkillSchema> {
   _source: SourceFromSchema<SkillSchema>;
 
+  bonusFromGroups: number;
   total: number;
 }
 
