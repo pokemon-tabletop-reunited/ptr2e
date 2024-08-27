@@ -3,6 +3,7 @@ import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } fro
 import { ActionPTR2e, AttackPTR2e } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { EffectPTR2e, ItemPTR2e, MovePTR2e } from "@item";
+import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import Tagify from "@yaireo/tagify";
 
@@ -98,6 +99,8 @@ export default class TooltipsPTR2e {
           return this._onAfflictionTooltip();
         case "effect-rolls":
           return this._onEffectRollsTooltip();
+        case "data-element":
+          return this._onDataElementTooltip();
       }
     }
 
@@ -541,6 +544,52 @@ export default class TooltipsPTR2e {
         game.tooltip.dismissLockedTooltips();
       });
     }
+
+    return 500;
+  }
+
+  async _onDataElementTooltip() {
+    const element = game.tooltip.element;
+    if (!element) return false;
+
+    const dataInspectorElement = element.closest(".application.data-inspector")
+    if(!dataInspectorElement) return false;
+    
+    const path = element.dataset.path;
+    if(!path) return false;
+
+    const dataInspectorApp = foundry.applications.instances.get(dataInspectorElement.id) as DataInspector | undefined;
+    if(!dataInspectorApp) return false;
+
+    const entry = dataInspectorApp.root.getAtPath(path);
+    if(!entry) return false;
+
+    const data = {
+      path: entry.path,
+      type: entry.type,
+      documentId: entry.documentId,
+      isContainer: entry.isContainer(),
+      children: entry.children.length,
+      isString: entry.isString(),
+      length: entry.isString() ? entry.value.length : null,
+      inData: {
+        derived: {
+          label: "PTR2E.DataInspector.Data.Derived",
+          present: entry.inDerivedData
+        },
+        source: {
+          label: "PTR2E.DataInspector.Data.Source",
+          present: entry.inSourceData
+        }
+      }
+    }
+
+    this.tooltip.classList.add("data-element");
+    await this._renderTooltip({
+      path: "systems/ptr2e/templates/apps/data-inspector/tooltip.hbs",
+      data,
+      direction: TooltipManager.TOOLTIP_DIRECTIONS.UP,
+    });
 
     return 500;
   }

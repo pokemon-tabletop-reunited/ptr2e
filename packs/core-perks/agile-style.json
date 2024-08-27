@@ -11,18 +11,39 @@
       "approach": "finesse",
       "archetype": "Support"
     },
-    "description": "<p>The target gains Agile 1.</p>",
+    "description": "<p>The target gains @Affliction[agile] 1.</p>",
     "actions": [
       {
-        "name": "Agile Style",
-        "slug": "agile-style",
-        "description": "<p>The target gains Agile 1.</p>",
+        "name": "Agile!",
+        "slug": "agile",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": null
         },
-        "type": "generic",
-        "traits": []
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "untyped"
+        ],
+        "description": "Effect: The target gains @Affliction[agile] 1.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "type": "attack"
       }
     ],
     "slug": "agile-style",

@@ -32,6 +32,8 @@ declare global {
         recursive?: boolean;
         /** Whether to delete all documents of a given type, regardless of the array of ids provided. Only used during a delete operation. */
         deleteAll?: boolean;
+        deleteSubfolders?: boolean;
+        deleteContents?: boolean;
     }
 
     type DocumentUpdateContext<TParent extends Document | null> = Omit<

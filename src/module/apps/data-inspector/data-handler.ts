@@ -241,7 +241,7 @@ class DataStructure {
       if (this.root.treetype === "rolldata") return true;
       if (!this.root._rollData) return false;
       try {
-        return fu.hasProperty(this.root._rollData, this.path);
+        return fu.hasProperty(this.root._rollData, this.path) || fu.hasProperty({system: this.root._rollData}, this.key);
       }
       catch {
         return false;
@@ -255,7 +255,7 @@ class DataStructure {
       if (this.root.treetype === "source") return true;
       if (!this.root._sourceData) return false;
       try {
-        return fu.hasProperty(this.root._sourceData, this.path);
+        return fu.hasProperty(this.root._sourceData, this.path) || fu.hasProperty({system: this.root._sourceData}, this.path);
       }
       catch {
         return false;
@@ -269,7 +269,7 @@ class DataStructure {
       if (this.root.treetype === "derived") return true;
       if (!this.root._derivedData) return false;
       try {
-        return fu.hasProperty(this.root._derivedData, this.path);
+        return fu.hasProperty(this.root._derivedData, this.path) || fu.hasProperty({system: this.root._derivedData}, this.path);
       }
       catch {
         return false;
@@ -282,7 +282,7 @@ class DataStructure {
     return this._inTemporary ??= (() => {
       if (!this.root._temporaryData) return false;
       try {
-        return fu.hasProperty(this.root._temporaryData, this.path);
+        return fu.hasProperty(this.root._temporaryData, this.path) || fu.hasProperty({system: this.root._temporaryData}, this.path);
       }
       catch {
         return false;
@@ -329,6 +329,7 @@ class DataStructure {
     if (this.isObject() || this.isModel() || this.isCustom()) {
       const allKeys = [], rvg = [], rvf = [];
       const props = Object.getOwnPropertyNames(this.value).filter(k => {
+        if(k.startsWith('_')) return false;
         if (this.isModel()) return !ignoreDataModelParts.includes(k);
         return true;
       })
@@ -400,8 +401,20 @@ class DataStructure {
     return this.children;
   }
 
-  static recurse(sourceData: any, key: string, path: string, type: TreeTypes, { includeFunctions = false, document }: { includeFunctions?: boolean, document?: foundry.abstract.Document } = {}): { root: DataStructure, all: Record<string, DataStructure>, count: number, depth: number } {
+  static recurse(
+    sourceData: any, 
+    key: string, 
+    path: string, 
+    type: TreeTypes, 
+    { includeFunctions = false, document }: { includeFunctions?: boolean, document?: foundry.abstract.Document } = {}, 
+    {_sourceData, _derivedData, _rollData, _overides, _temporaryData}: { _sourceData?: object, _derivedData?: object, _rollData?: object, _overides?: object, _temporaryData?: object } = {}
+  ): { root: DataStructure, all: Record<string, DataStructure>, count: number, depth: number } {
     const dt = new DataStructure({ key, path: key, value: sourceData, parent: null, treeType: type, depth: 0 });
+    dt._sourceData = _sourceData;
+    dt._derivedData = _derivedData;
+    dt._rollData = _rollData;
+    dt._overides = _overides;
+    dt._temporaryData = _temporaryData;
     dt.includeFunctions = includeFunctions;
     dt.document = document;
 
@@ -605,7 +618,7 @@ class DataStructure {
 
     // return extra + `<label class="value basic ${this.type} ${this.isNullish() ? 'empty' : this.isBigString() ? 'big' : ''} ${this.css}">${this.formattedValue}</label>` + (extra.length ? '</div>' : '');
 
-    return `<label class="value basic ${this.type} ${this.isNullish() ? 'empty' : this.isBigString() ? 'big' : ''} ${this.css}" data-tooltip="${this.formattedValue}">${this.formattedValue}</label>`;
+    return `<label class="value basic ${this.type} ${this.isNullish() ? 'empty' : this.isBigString() ? 'big' : ''} ${this.css}">${this.formattedValue}</label>`;
   }
 
   get toCopy(): string {
