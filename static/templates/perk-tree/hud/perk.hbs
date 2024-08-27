@@ -16,9 +16,15 @@
                 {{> perk-body}}
             </figure>
             <footer>
-                <button class="purchase {{#unless purchasable}}unavailable{{/unless}}" data-action="purchase" {{#unless purchasable}}disabled{{/unless}}>
-                    <i class="fas fa-sack-dollar"></i> Purchase Perk ({{document.system.cost}} AP)
-                </button>
+                {{#unless (is state 3)}}
+                  <button class="purchase {{#unless purchasable}}unavailable{{/unless}}" data-action="purchase" {{#unless purchasable}}disabled{{/unless}}>
+                      <i class="fas fa-sack-dollar"></i> Purchase Perk ({{document.system.cost}} AP)
+                  </button>
+                {{else}}
+                  <button class="refund" data-action="refund">
+                      <i class="fas fa-sack-dollar"></i> Refund Perk ({{document.system.cost}} AP)
+                  </button>
+                {{/unless}}
             </footer>
         {{/if}}
     {{/with}}

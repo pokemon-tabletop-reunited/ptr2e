@@ -30,6 +30,9 @@ import { ActiveEffectPTR2e } from "@effects";
 import { natures } from "@scripts/config/natures.ts";
 import { AvailableAbilitiesApp } from "@module/apps/available-abilities.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
+import Clock from "@module/data/models/clock.ts";
+import ClockEditor from "@module/apps/clocks/clock-editor.ts";
+import Sortable from "sortablejs";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
@@ -176,6 +179,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           const skill = this.actor.system.skills.get("luck")!;
           await skill.endOfDayLuckRoll();
         },
+        "add-clock": ActorSheetPTRV2.#onAddClock,
       },
     },
     { inplace: false }
@@ -396,6 +400,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       context.movement = this.actor.system.movement.contents;
     }
 
+    if (partId === "clocks") {
+      context.clocks = game.user.isGM ? this.document.system.clocks.contents : this.document.system.clocks.contents.filter(c => !c.private);
+    }
+
     if (partId === "inventory") {
       const inventory = (() => {
         const inventory: Record<string, ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]> = {};
@@ -544,6 +552,128 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           if (scrollElement) scrollElement.scrollIntoView({ behavior: "smooth", inline: "center" });
         });
       }
+    }
+
+    if (partId === "clocks") {
+      for (const clock of htmlElement.querySelectorAll(".clock")) {
+        clock.addEventListener("click", (event) => {
+          event.preventDefault();
+          const id = (event.target as HTMLElement)
+            .closest("[data-id]")
+            ?.getAttribute("data-id");
+          const clock = this.document.system.clocks.get(id as string);
+          if (!clock) return;
+
+          const clocks = fu.duplicate(this.document.system._source.clocks);
+          const index = clocks.findIndex((c) => c.id === clock.id);
+          if(index === -1) return;
+          clocks[index].value = clock.value >= clock.max ? 0 : clock.value + 1;
+
+          return this.document.update({ "system.clocks": clocks });
+        });
+        clock.addEventListener("contextmenu", (event) => {
+          event.preventDefault();
+          const id = (event.target as HTMLElement)
+            .closest("[data-id]")
+            ?.getAttribute("data-id");
+          const clock = this.document.system.clocks.get(id as string);
+          if (!clock) return;
+
+          const clocks = fu.duplicate(this.document.system._source.clocks);
+          const index = clocks.findIndex((c) => c.id === clock.id);
+          if(index === -1) return;
+          clocks[index].value = clock.value <= 0 ? clock.max : clock.value - 1;
+
+          return this.document.update({ "system.clocks": clocks });
+        });
+      }
+      for (const editButton of htmlElement.querySelectorAll("[data-action=edit-clock]")) {
+        editButton.addEventListener("click", async (event) => {
+          event.preventDefault();
+          const id = (event.target as HTMLElement)
+            .closest("[data-id]")
+            ?.getAttribute("data-id");
+          const clock = this.document.system.clocks.get(id as string);
+          if (!clock) return;
+
+          return ActorSheetPTRV2.#onAddClock.bind(this)(event, clock);
+        });
+      }
+      for (const deleteButton of htmlElement.querySelectorAll("[data-action=delete-clock]")) {
+        deleteButton.addEventListener("click", async (event) => {
+          event.preventDefault();
+          const id = (event.target as HTMLElement)
+            .closest("[data-id]")
+            ?.getAttribute("data-id");
+          const clock = this.document.system.clocks.get(id as string);
+          if (!clock) return;
+
+          return await foundry.applications.api.DialogV2.prompt({
+            buttons: [
+              {
+                action: "ok",
+                label: game.i18n.localize("PTR2E.Clocks.Global.Delete.Confirm"),
+                icon: "fas fa-trash",
+                callback: async () => {
+                  const clocks = fu.duplicate(this.document.system._source.clocks);
+                  const index = clocks.findIndex((c) => c.id === clock.id);
+                  if(index === -1) return;
+                  clocks.splice(index, 1);
+
+                  return this.document.update({ "system.clocks": clocks });
+                },
+              },
+              {
+                action: "cancel",
+                label: game.i18n.localize("PTR2E.Clocks.Global.Delete.Cancel"),
+                icon: "fas fa-times",
+              },
+            ],
+            content: `<p>${game.i18n.format("PTR2E.Clocks.Global.Delete.Message", {
+              label: clock.label,
+            })}</p>`,
+            window: {
+              title: game.i18n.localize("PTR2E.Clocks.Global.Delete.Title"),
+            },
+          });
+        });
+      }
+
+      const element = htmlElement.querySelector(".clock-list");
+      if (element)
+        new Sortable(element as HTMLElement, {
+          animation: 200,
+          direction: "vertical",
+          draggable: ".clock-entry",
+          dragClass: "drag-preview",
+          ghostClass: "drag-gap",
+          onEnd: (event) => {
+            const id = event.item.dataset.id!;
+            const clock = this.document.system.clocks.get(id);
+            if (!clock) return;
+            const newIndex = event.newDraggableIndex;
+            if (newIndex === undefined) return;
+            const clocks = this.document.system.clocks.contents;
+            const targetClock = clocks[newIndex];
+            if (!targetClock) return;
+
+            // Don't sort on self
+            if (clock.sort === targetClock.sort) return;
+            const sortUpdates = SortingHelpers.performIntegerSort(clock, {
+              target: targetClock,
+              siblings: clocks,
+            });
+
+            const clocksData = fu.duplicate(this.document.system._source.clocks);
+            for (const update of sortUpdates) {
+              const index = clocksData.findIndex((c) => c.id === update.target.id);
+              if (index === -1) continue;
+              clocksData[index].sort = update.update.sort;
+            }
+
+            return this.document.update({ "system.clocks": clocksData });
+          },
+        });
     }
 
     if (partId === "inventory") {
@@ -916,6 +1046,11 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     }
     return;
   }
+
+  static #onAddClock(this: ActorSheetPTRV2, event: Event, clock?: Clock) {
+    event.preventDefault();
+    return new ClockEditor({}, clock instanceof Clock ? clock : new Clock({}, {parent: this.document.system})).render(true);
+}
 }
 
 export default ActorSheetPTRV2;

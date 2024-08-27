@@ -245,6 +245,58 @@ aside[role="tooltip"].effect-rolls content main section.effect i.fail {
 aside[role="tooltip"].effect-rolls content main section.effect i.success {
   border-color: #18520b !important;
 }
+aside[role="tooltip"].data-element {
+  box-shadow: 0 0 2px var(--data-inspector-tooltip-shadow);
+  background-color: var(--data-inspector-tooltip-background);
+  text-shadow: none;
+  border: 0.3px solid var(--data-inspector-tooltip-border);
+  border-radius: 0.5em;
+  border-bottom-left-radius: 0;
+}
+aside[role="tooltip"].data-element p:first-child {
+  margin-top: 0;
+}
+aside[role="tooltip"].data-element .path {
+  color: var(--data-inspector-tooltip-path);
+}
+aside[role="tooltip"].data-element .type {
+  color: var(--data-inspector-tooltip-type);
+}
+aside[role="tooltip"].data-element .children {
+  color: var(--data-inspector-tooltip-children);
+}
+aside[role="tooltip"].data-element .length {
+  color: var(--data-inspector-tooltip-length);
+}
+aside[role="tooltip"].data-element .in-data {
+  display: flex;
+  flex-direction: row;
+  gap: 1px;
+  place-content: center;
+}
+aside[role="tooltip"].data-element .in-data .data-source {
+  display: flex;
+  flex-direction: column;
+  flex: 0;
+  gap: 3px;
+  align-items: center;
+}
+aside[role="tooltip"].data-element .in-data .data-source .header,
+aside[role="tooltip"].data-element .in-data .data-source .value {
+  justify-content: center;
+  flex: 0;
+  margin: 0;
+  padding: 0.1em 0.3em;
+  white-space: nowrap;
+  font-weight: var(--font-size-11, 8pt);
+}
+aside[role="tooltip"].data-element .in-data .data-source .header {
+  background-color: rgba(0, 0, 0, 0.1);
+  font-weight: bold;
+}
+aside[role="tooltip"].data-element .in-data .data-source .value {
+  overflow: unset;
+}
 aside[role="tooltip"] .attack-embed {
   min-width: 275px;
 }

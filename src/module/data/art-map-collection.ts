@@ -91,6 +91,7 @@ export default class PTR2eArtMaps extends Collection<SpeciesImageData> {
             data: {
                 base: source.data.base.trim(),
                 extensions: source.data.extensions ?? [],
+                random: source.data.random ?? false,
             },
             suffixes: source.suffixes ?? null,
         };

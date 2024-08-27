@@ -9,9 +9,46 @@
     "traits": [
       "dash",
       "missile",
-      "legendary"
+      "legendary",
+      "interrupt-6"
     ],
     "actions": [
+      {
+        "name": "Seeking Spectre (Reaction)",
+        "slug": "seeking-spectre-reaction",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "dash",
+          "missile",
+          "legendary",
+          "interrupt-6"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": "A creature uses Movement to move 4m or more away from the user or attempts to leave Combat."
+        },
+        "variant": null,
+        "types": [
+          "ghost"
+        ],
+        "category": "special",
+        "power": 140,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Trigger: A creature uses Movement to move 4m or more away from the user or attempts to leave Combat.</p><p>Effect: The user may freely move up to half of the Movement Type of their choice towards the target and then attacks with this attack.</p>"
+      },
       {
         "name": "Seeking Spectre",
         "slug": "seeking-spectre",
@@ -29,7 +66,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": ""
@@ -45,10 +82,10 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: The user can spend 3 additional PP to use this attack as an [Interrupt 6] action, with the Trigger being \"A creature uses Movement to move 4m or more away from the user or is being Switched out\". Upon declaring this attack with this Trigger, the user can freely move up to half of the Movement Type of their choice towards the target and then attacks with this attack, which has its Power doubled.</p>"
+        "description": ""
       }
     ],
-    "description": "",
+    "description": "<p>Effect: The user can spend 3 additional PP to use this attack as an [Interrupt 6] action, with the Trigger being \"A creature uses Movement to move 4m or more away from the user or attempts to leave Combat\". Upon declaring this attack with this Trigger, the user can freely move up to half of the Movement Type of their choice towards the target and then attacks with this attack, which has its Power doubled.</p>",
     "container": null,
     "grade": "B"
   },

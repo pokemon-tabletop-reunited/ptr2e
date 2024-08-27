@@ -156,15 +156,15 @@ export default class ActorDirectoryPTR2e<
 
   protected override async _handleDroppedEntry(
     target: HTMLElement,
-    data: DropCanvasData<string, object>
+    data: DropCanvasData<string, object> & { targetFolderUuid?: string, noParty?: boolean }
   ): Promise<void> {
-    const { uuid, type } = data;
+    const { uuid, type, targetFolderUuid, noParty} = data;
     // If the dropped data is not an Actor, defer to the parent class
     if (!uuid || type != "Actor") return super._handleDroppedEntry(target, data);
 
     // Get target Folder Document
     const closestFolder = target?.closest<HTMLElement>(".folder");
-    const targetFolder = await fromUuid<FolderPTR2e<TActor>>(closestFolder?.dataset.uuid);
+    const targetFolder = await fromUuid<FolderPTR2e<TActor>>(closestFolder?.dataset.uuid ?? targetFolderUuid);
 
     // If the dropped Actor is already in the target Folder, do nothing
     if (targetFolder?.isFolderOwner(uuid)) {
@@ -188,26 +188,29 @@ export default class ActorDirectoryPTR2e<
     } as Record<string, unknown>;
 
     // If the target Folder is a party, update the party membership
-    if(targetFolder && targetFolder.owner) {
+    if(targetFolder && noParty !== true && targetFolder.owner) {
       update["system.party.partyMemberOf"] = targetFolder.id;
 
       const user = game.users.find((user) => user.character?.uuid === targetFolder.owner);
       if(user) {
         update['ownership'] = {[user.id]: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER, default: CONST.DOCUMENT_OWNERSHIP_LEVELS.OBSERVER};
       }
-      else {
+      else if(game.user.isGM) {
         update["ownership"] = Object.keys(actor.ownership).reduce((acc, key) => ({ ...acc, [key]: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE }), {});
       }
     }
     else {
       update["system.party.partyMemberOf"] = undefined;
 
-      if(!targetFolder) {
+      if(!targetFolder && game.user.isGM) {
         update["ownership"] = Object.keys(actor.ownership).reduce((acc, key) => ({ ...acc, [key]: CONST.DOCUMENT_OWNERSHIP_LEVELS.NONE }), {});
       }
     }
 
     await actor.update(update);
+    // If this is coming from the party sheet through a player account, don't handle the drop twice
+    if(targetFolderUuid && !target) return;
+
     return super._handleDroppedEntry(target, data);
   }
 }

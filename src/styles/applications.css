@@ -208,8 +208,8 @@ body .application.sheet .form-group {
   line-height: 1.2rem;
   padding: 0.25rem 0.5rem;
 }
-.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button:has(small.unspend),
-.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button:has(small.unspend) {
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button:has(small.unspent),
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button:has(small.unspent) {
   animation: glow 1s infinite alternate;
 }
 @keyframes glow {
@@ -220,8 +220,8 @@ body .application.sheet .form-group {
     box-shadow: 0 0 5px 5px gold;
   }
 }
-.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button small.unspend,
-.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button small.unspend {
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button small.unspent,
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button small.unspent {
   font-size: 10px;
 }
 .application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown {
@@ -729,8 +729,8 @@ body .application.sheet .form-group {
   grid-area: 1 / 4 / 2 / 6;
   padding: 0.5rem;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button:has(small.unspend),
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button:has(small.unspend) {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button:has(small.unspent),
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button:has(small.unspent) {
   animation: glow 1s infinite alternate;
 }
 @keyframes glow {
@@ -741,8 +741,8 @@ body .application.sheet .form-group {
     box-shadow: 0 0 5px 5px gold;
   }
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button small.unspend,
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button small.unspend {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button small.unspent,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button small.unspent {
   font-size: 10px;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] {
@@ -2888,6 +2888,10 @@ body .application.sheet .form-group {
   background: var(--appv2-background-flat);
   border-radius: 5px;
 }
+.application.sheet.party-sheet:not(.minimized) {
+  min-width: 528px;
+  min-height: 465px;
+}
 .application.sheet.party-sheet .window-content {
   grid-template-columns: unset;
   grid-template-rows: 44px auto;
@@ -2909,34 +2913,168 @@ body .application.sheet .form-group {
   grid-template-rows: 35% 65%;
   grid-template-areas: "owner" "party";
 }
-.application.sheet.party-sheet .party-member {
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] {
+  padding: 0;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll {
+  padding: 1rem;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  --folder-color-mixed: color-mix(in srgb, var(--folder-color, #4d4d4daa) 60%, transparent);
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll header {
+  padding: 6px;
+  line-height: 24px;
+  background: var(--folder-color, black);
+  text-shadow: 0px 0px 3px var(--color-shadow-dark);
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll header h3 {
+  margin: 0;
+  color: var(--color-text-light-highlight);
+  font-size: var(--font-size-16);
+  line-height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes .content {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  border: 6px solid var(--folder-color, black);
+  border-right: unset;
+  border-top: unset;
+  border-radius: 0 0 8px 8px;
+  --folder-color-mixed: color-mix(in srgb, var(--folder-color, #4d4d4daa) 60%, transparent);
+  flex: 1;
+  background: var(--folder-color-mixed);
+  scrollbar-color: var(--folder-color, black) var(--folder-color-mixed, black);
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes header.controls {
+  display: flex;
+  align-items: center;
+  border-radius: 8px 8px 0 0;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes header.controls h3 {
+  flex: 1;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes header.controls button {
+  flex: 0 0 120px;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes article.box {
+  --folder-color-mixed: color-mix(in srgb, var(--folder-color, #4d4d4daa) 60%, transparent);
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes article.box header.box-header {
+  flex: 0;
+  position: sticky;
+  top: 0;
+  background: var(--folder-color, black);
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll .contents {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--folder-color-mixed);
+  border: 4px solid var(--folder-color, black);
+  border-top: unset;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.box {
+  min-width: 206px;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.box section.box-item {
+  flex: 1 1 190px;
+  min-width: 190px;
+  max-width: 270px;
+  margin: 0;
+  border-radius: unset;
+  max-width: unset;
+  background: unset;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.box section.box-item.empty {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 40px;
+  background: url(/ui/denim075.png);
+  font-style: italic;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.party {
+  flex: 0 0 220px;
+  width: 220px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.party header {
+  flex: 0;
+  border-radius: 8px 8px 0 0;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.party .contents {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  border-bottom: 6px solid var(--folder-color, black);
+  border-left: 6px solid var(--folder-color, black);
+  flex: 1;
+  overflow-y: scroll;
+  scrollbar-color: var(--folder-color, black) var(--folder-color-mixed, black);
+  border-radius: 0 0 8px 8px;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.party section.party-member {
+  min-width: 200px;
+  margin: 0;
+  border-radius: unset;
+  flex: 0;
+  background: unset;
+}
+.application.sheet.party-sheet .party-member,
+.application.sheet.party-sheet .box-item {
   display: flex;
   flex-direction: row;
   align-items: center;
   --owner-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 80%, transparent);
   --party-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 60%, transparent);
 }
-.application.sheet.party-sheet .party-member .thumbnail {
+.application.sheet.party-sheet .party-member .thumbnail,
+.application.sheet.party-sheet .box-item .thumbnail {
   padding: 0.25rem;
   min-width: 56px;
 }
-.application.sheet.party-sheet .party-member .thumbnail img {
+.application.sheet.party-sheet .party-member .thumbnail img,
+.application.sheet.party-sheet .box-item .thumbnail img {
   border-radius: 50%;
   height: 48px;
   width: 48px;
   border: unset;
 }
-.application.sheet.party-sheet .party-member .title {
+.application.sheet.party-sheet .party-member .title,
+.application.sheet.party-sheet .box-item .title {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.application.sheet.party-sheet .party-member .title .name {
+.application.sheet.party-sheet .party-member .title .name,
+.application.sheet.party-sheet .box-item .title .name {
   text-wrap: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.application.sheet.party-sheet .party-member .title .level {
+.application.sheet.party-sheet .party-member .title .level,
+.application.sheet.party-sheet .box-item .title .level {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
@@ -3078,7 +3216,9 @@ body .application.sheet .form-group {
   grid-area: experience-value;
   color: var(--color-text-light-primary);
 }
-.application.sheet.party-sheet main {
+.application.sheet.party-sheet main,
+.application.sheet.party-sheet article.party,
+.application.sheet.party-sheet article.box {
   grid-area: party;
   display: flex;
   flex-direction: row;
@@ -3086,7 +3226,12 @@ body .application.sheet .form-group {
   flex-wrap: wrap;
   align-content: start;
 }
-.application.sheet.party-sheet main section.party-member {
+.application.sheet.party-sheet main section.party-member,
+.application.sheet.party-sheet article.party section.party-member,
+.application.sheet.party-sheet article.box section.party-member,
+.application.sheet.party-sheet main section.box-item,
+.application.sheet.party-sheet article.party section.box-item,
+.application.sheet.party-sheet article.box section.box-item {
   flex: 0 0 48%;
   max-width: 48%;
   height: 70px;
@@ -3094,7 +3239,12 @@ body .application.sheet .form-group {
   background: var(--party-background-color);
   border-radius: 12px;
 }
-.application.sheet.party-sheet main section.party-member main {
+.application.sheet.party-sheet main section.party-member main,
+.application.sheet.party-sheet article.party section.party-member main,
+.application.sheet.party-sheet article.box section.party-member main,
+.application.sheet.party-sheet main section.box-item main,
+.application.sheet.party-sheet article.party section.box-item main,
+.application.sheet.party-sheet article.box section.box-item main {
   flex: 1;
   height: 100%;
   display: grid;
@@ -3103,54 +3253,119 @@ body .application.sheet .form-group {
   grid-template-areas: "title health" "types pp";
 }
 .application.sheet.party-sheet main section.party-member main div.title,
+.application.sheet.party-sheet article.party section.party-member main div.title,
+.application.sheet.party-sheet article.box section.party-member main div.title,
+.application.sheet.party-sheet main section.box-item main div.title,
+.application.sheet.party-sheet article.party section.box-item main div.title,
+.application.sheet.party-sheet article.box section.box-item main div.title,
 .application.sheet.party-sheet main section.party-member main div.health,
-.application.sheet.party-sheet main section.party-member main div.pp {
+.application.sheet.party-sheet article.party section.party-member main div.health,
+.application.sheet.party-sheet article.box section.party-member main div.health,
+.application.sheet.party-sheet main section.box-item main div.health,
+.application.sheet.party-sheet article.party section.box-item main div.health,
+.application.sheet.party-sheet article.box section.box-item main div.health,
+.application.sheet.party-sheet main section.party-member main div.pp,
+.application.sheet.party-sheet article.party section.party-member main div.pp,
+.application.sheet.party-sheet article.box section.party-member main div.pp,
+.application.sheet.party-sheet main section.box-item main div.pp,
+.application.sheet.party-sheet article.party section.box-item main div.pp,
+.application.sheet.party-sheet article.box section.box-item main div.pp {
   margin: 2px;
 }
-.application.sheet.party-sheet main section.party-member main .title {
+.application.sheet.party-sheet main section.party-member main .title,
+.application.sheet.party-sheet article.party section.party-member main .title,
+.application.sheet.party-sheet article.box section.party-member main .title,
+.application.sheet.party-sheet main section.box-item main .title,
+.application.sheet.party-sheet article.party section.box-item main .title,
+.application.sheet.party-sheet article.box section.box-item main .title {
   grid-area: title;
   justify-content: end;
 }
-.application.sheet.party-sheet main section.party-member main .health {
+.application.sheet.party-sheet main section.party-member main .health,
+.application.sheet.party-sheet article.party section.party-member main .health,
+.application.sheet.party-sheet article.box section.party-member main .health,
+.application.sheet.party-sheet main section.box-item main .health,
+.application.sheet.party-sheet article.party section.box-item main .health,
+.application.sheet.party-sheet article.box section.box-item main .health {
   grid-area: health;
   display: flex;
   flex-direction: column;
   justify-content: end;
   font-size: small;
 }
-.application.sheet.party-sheet main section.party-member main .health .details {
+.application.sheet.party-sheet main section.party-member main .health .details,
+.application.sheet.party-sheet article.party section.party-member main .health .details,
+.application.sheet.party-sheet article.box section.party-member main .health .details,
+.application.sheet.party-sheet main section.box-item main .health .details,
+.application.sheet.party-sheet article.party section.box-item main .health .details,
+.application.sheet.party-sheet article.box section.box-item main .health .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.application.sheet.party-sheet main section.party-member main .health .details span {
+.application.sheet.party-sheet main section.party-member main .health .details span,
+.application.sheet.party-sheet article.party section.party-member main .health .details span,
+.application.sheet.party-sheet article.box section.party-member main .health .details span,
+.application.sheet.party-sheet main section.box-item main .health .details span,
+.application.sheet.party-sheet article.party section.box-item main .health .details span,
+.application.sheet.party-sheet article.box section.box-item main .health .details span {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
-.application.sheet.party-sheet main section.party-member main .health .details .divider {
+.application.sheet.party-sheet main section.party-member main .health .details .divider,
+.application.sheet.party-sheet article.party section.party-member main .health .details .divider,
+.application.sheet.party-sheet article.box section.party-member main .health .details .divider,
+.application.sheet.party-sheet main section.box-item main .health .details .divider,
+.application.sheet.party-sheet article.party section.box-item main .health .details .divider,
+.application.sheet.party-sheet article.box section.box-item main .health .details .divider {
   margin: 0 0.25rem;
 }
-.application.sheet.party-sheet main section.party-member main .pp {
+.application.sheet.party-sheet main section.party-member main .pp,
+.application.sheet.party-sheet article.party section.party-member main .pp,
+.application.sheet.party-sheet article.box section.party-member main .pp,
+.application.sheet.party-sheet main section.box-item main .pp,
+.application.sheet.party-sheet article.party section.box-item main .pp,
+.application.sheet.party-sheet article.box section.box-item main .pp {
   grid-area: pp;
   display: flex;
   flex-direction: column;
   font-size: small;
 }
-.application.sheet.party-sheet main section.party-member main .pp .details {
+.application.sheet.party-sheet main section.party-member main .pp .details,
+.application.sheet.party-sheet article.party section.party-member main .pp .details,
+.application.sheet.party-sheet article.box section.party-member main .pp .details,
+.application.sheet.party-sheet main section.box-item main .pp .details,
+.application.sheet.party-sheet article.party section.box-item main .pp .details,
+.application.sheet.party-sheet article.box section.box-item main .pp .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.application.sheet.party-sheet main section.party-member main .pp .details span {
+.application.sheet.party-sheet main section.party-member main .pp .details span,
+.application.sheet.party-sheet article.party section.party-member main .pp .details span,
+.application.sheet.party-sheet article.box section.party-member main .pp .details span,
+.application.sheet.party-sheet main section.box-item main .pp .details span,
+.application.sheet.party-sheet article.party section.box-item main .pp .details span,
+.application.sheet.party-sheet article.box section.box-item main .pp .details span {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
-.application.sheet.party-sheet main section.party-member main .pp .details .divider {
+.application.sheet.party-sheet main section.party-member main .pp .details .divider,
+.application.sheet.party-sheet article.party section.party-member main .pp .details .divider,
+.application.sheet.party-sheet article.box section.party-member main .pp .details .divider,
+.application.sheet.party-sheet main section.box-item main .pp .details .divider,
+.application.sheet.party-sheet article.party section.box-item main .pp .details .divider,
+.application.sheet.party-sheet article.box section.box-item main .pp .details .divider {
   margin: 0 0.25rem;
 }
-.application.sheet.party-sheet main section.party-member main .types {
+.application.sheet.party-sheet main section.party-member main .types,
+.application.sheet.party-sheet article.party section.party-member main .types,
+.application.sheet.party-sheet article.box section.party-member main .types,
+.application.sheet.party-sheet main section.box-item main .types,
+.application.sheet.party-sheet article.party section.box-item main .types,
+.application.sheet.party-sheet article.box section.box-item main .types {
   grid-area: types;
   display: flex;
   flex-direction: row;
@@ -3158,52 +3373,154 @@ body .application.sheet .form-group {
   align-items: center;
   overflow: hidden;
 }
-.application.sheet.party-sheet main section.party-member main .types span {
+.application.sheet.party-sheet main section.party-member main .types span,
+.application.sheet.party-sheet article.party section.party-member main .types span,
+.application.sheet.party-sheet article.box section.party-member main .types span,
+.application.sheet.party-sheet main section.box-item main .types span,
+.application.sheet.party-sheet article.party section.box-item main .types span,
+.application.sheet.party-sheet article.box section.box-item main .types span {
   flex: 0 0 28px;
   height: 28px;
   margin: 2px;
 }
-.application.sheet.party-sheet main section.party-member main .types span img {
+.application.sheet.party-sheet main section.party-member main .types span img,
+.application.sheet.party-sheet article.party section.party-member main .types span img,
+.application.sheet.party-sheet article.box section.party-member main .types span img,
+.application.sheet.party-sheet main section.box-item main .types span img,
+.application.sheet.party-sheet article.party section.box-item main .types span img,
+.application.sheet.party-sheet article.box section.box-item main .types span img {
   height: 28px;
   width: 28px;
   object-fit: scale-down;
   border: unset;
   border-radius: 50%;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(3)) span {
   flex: 0 0 24px;
   height: 24px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(3)) span img {
   height: 24px;
   width: 24px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(4)) span {
   flex: 0 0 17px;
   height: 17px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(4)) span img {
   height: 17px;
   width: 17px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(5)) span {
   flex: 0 0 13px;
   height: 13px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(5)) span img {
   height: 13px;
   width: 13px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)),
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(11)),
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(11)),
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(11)),
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(11)),
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(11)) {
   overflow-y: auto;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(11)) span {
   flex: 0 0 15px;
   height: 15px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(11)) span img {
   height: 15px;
   width: 15px;
+}
+.application.sheet.party-sheet article.party header.party-header,
+.application.sheet.party-sheet article.box header.party-header,
+.application.sheet.party-sheet article.party header.box-header,
+.application.sheet.party-sheet article.box header.box-header {
+  flex: 1 0 100%;
+}
+.application.sheet.party-sheet article.party section.party-member,
+.application.sheet.party-sheet article.box section.party-member,
+.application.sheet.party-sheet article.party section.box-item,
+.application.sheet.party-sheet article.box section.box-item {
+  height: 40px;
+  flex: 1;
+  min-width: 200px;
+}
+.application.sheet.party-sheet article.party section.party-member .thumbnail,
+.application.sheet.party-sheet article.box section.party-member .thumbnail,
+.application.sheet.party-sheet article.party section.box-item .thumbnail,
+.application.sheet.party-sheet article.box section.box-item .thumbnail {
+  min-width: 40px;
+  height: 40px;
+}
+.application.sheet.party-sheet article.party section.party-member .thumbnail img,
+.application.sheet.party-sheet article.box section.party-member .thumbnail img,
+.application.sheet.party-sheet article.party section.box-item .thumbnail img,
+.application.sheet.party-sheet article.box section.box-item .thumbnail img {
+  height: 32px;
+  width: 32px;
+}
+.application.sheet.party-sheet article.party section.party-member main,
+.application.sheet.party-sheet article.box section.party-member main,
+.application.sheet.party-sheet article.party section.box-item main,
+.application.sheet.party-sheet article.box section.box-item main {
+  grid-template-rows: 1fr;
+  grid-template-areas: "title types";
+}
+.application.sheet.party-sheet article.party section.party-member main .title,
+.application.sheet.party-sheet article.box section.party-member main .title,
+.application.sheet.party-sheet article.party section.box-item main .title,
+.application.sheet.party-sheet article.box section.box-item main .title {
+  justify-content: center;
+}
+.application.sheet.party-sheet article.party section.party-member main .types,
+.application.sheet.party-sheet article.box section.party-member main .types,
+.application.sheet.party-sheet article.party section.box-item main .types,
+.application.sheet.party-sheet article.box section.box-item main .types {
+  justify-content: center;
 }
 .application.sheet.team-sheet .window-content {
   grid-template-columns: unset;
@@ -3688,6 +4005,28 @@ body .application.sheet .form-group {
 .application.sheet.modifier-popup main.skill-challenge-rating article select {
   flex: 0 0 55%;
 }
+.application.sheet.modifier-popup main .roll-mode-panel {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: space-between;
+  white-space: nowrap;
+  gap: 8px;
+}
+.application.sheet.modifier-popup main .roll-mode-panel label {
+  display: flex;
+  align-items: center;
+}
+.application.sheet.modifier-popup main .roll-mode-panel .roll-mode {
+  flex: 1;
+}
+.application.sheet.modifier-popup main .roll-mode-panel .roll-mode select {
+  border-radius: 2px;
+  cursor: pointer;
+  height: 1.5em;
+  margin-left: 8px;
+  width: 100%;
+}
 .application.sheet.modifier-popup main .modifier {
   display: flex;
   flex-direction: row;
@@ -3928,8 +4267,8 @@ body .application.sheet .form-group {
   --data-inspector-selected: #edcb8e;
   --data-inspector-details-separator: hsla(34, 17%, 36%, 0.25);
   --data-inspector-border-hover: hsla(13, 12%, 29%, 0.58);
-  --data-inspector-entry-not-in-source: #255e74;
-  --data-inspector-entry-not-in-rolldata: #64486a;
+  --data-inspector-entry-not-in-source: #0480ff;
+  --data-inspector-entry-not-in-rolldata: #bf5ed3;
   --data-inspector-entry-hover-shadow: hsla(16, 100%, 50%, 0.37);
   --data-inspector-entry-hover-background: hsla(80, 5%, 12%, 0.18);
   --data-inspector-entry-hover-boxshadow: hsla(27, 21%, 29%, 0.39);
@@ -3938,7 +4277,6 @@ body .application.sheet .form-group {
   --data-inspector-tooltip-children: indianred;
   --data-inspector-tooltip-length: indianred;
   --data-inspector-tooltip-background: #e7e1d9;
-  --data-inspector-tooltip-font: #444241;
   --data-inspector-tooltip-border: #8b8383;
   --data-inspector-tooltip-shadow: darkred;
 }
@@ -4119,22 +4457,22 @@ body .application.sheet .form-group {
   flex: 3;
   font-weight: bold;
 }
-.application.sheet.data-inspector .window-content content.main > .data {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list {
   height: 100%;
   overflow-y: scroll;
 }
-.application.sheet.data-inspector .window-content content.main > .data .warning {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list .warning {
   text-align: center;
 }
-.application.sheet.data-inspector .window-content content.main > .data.derived [data-path]:not(.in-source) .key,
-.application.sheet.data-inspector .window-content content.main > .data.rolldata [data-path]:not(.in-source) .key {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list.derived [data-path]:not(.in-source) .key,
+.application.sheet.data-inspector .window-content content.main section.content > .data-list.rolldata [data-path]:not(.in-source) .key {
   color: var(--data-inspector-entry-not-in-source);
 }
-.application.sheet.data-inspector .window-content content.main > .data.source [data-path]:not(.in-rolldata) .key {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list.source [data-path]:not(.in-rolldata) .key {
   color: var(--data-inspector-entry-not-in-rolldata);
 }
-.application.sheet.data-inspector .window-content content.main > .data .data-pools .absent.temporary,
-.application.sheet.data-inspector .window-content content.main > .data .data-pools .absent.source {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list .data-pools .absent.temporary,
+.application.sheet.data-inspector .window-content content.main section.content > .data-list .data-pools .absent.source {
   color: #c30808;
 }
 .application.sheet.data-inspector .window-content content.main > .header {
@@ -5258,4 +5596,13 @@ body .application.sheet .form-group {
 .ptr2e .directory-item.document .entry-name.document-name .actor-level {
   font-size: x-small;
   color: var(--color-text-light-primary);
+}
+.directory-item.document .entry-name.document-name.rarity-uncommon {
+  color: #33a7ff;
+}
+.directory-item.document .entry-name.document-name.rarity-rare {
+  color: #f5c42e;
+}
+.directory-item.document .entry-name.document-name.rarity-unique {
+  color: #a526ff;
 }

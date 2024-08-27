@@ -51,8 +51,7 @@ export class MigrationRunner extends MigrationRunnerBase {
         const DocumentClass = collection.documentClass;
         const pack = "metadata" in collection ? collection.metadata.id : null;
         const updateGroup: TDocument["_source"][] = [];
-        // Have familiars go last so that their data migration and re-preparation happen after their master's
-        for (const document of collection.contents.sort((a) => (a.type === "familiar" ? 1 : -1))) {
+        for (const document of collection.contents) {
             if (updateGroup.length === 100) {
                 try {
                     await DocumentClass.updateDocuments(updateGroup, { noHook: true, pack });
