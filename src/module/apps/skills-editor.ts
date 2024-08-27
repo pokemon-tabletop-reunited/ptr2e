@@ -44,7 +44,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
     document: ActorPTR2e;
     skills: (SkillPTR2e["_source"] & { label: string; investment: number })[];
-    skillGroups: (SkillGroupPTR2e["_source"] & { label: string; investment: number, minInvestment: number, maxInvestment: number })[];
+    skillGroups: (SkillGroupPTR2e["_source"] & { label: string; investment: number })[];
 
     override get title() {
         return `${this.document.name}'s Skills Editor`;
@@ -100,11 +100,11 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                 ...group,
                 label,
                 investment: 0,
-                minInvestment: -(group.rvs ?? 0),
-                maxInvestment: group.points - (group.rvs ?? 0),
+                // minInvestment: -(group.rvs ?? 0),
+                // maxInvestment: group.points - (group.rvs ?? 0),
             }
         }
-        return skillGroups.map(convertSkillGroup) as unknown as (SkillGroupPTR2e["_source"] & { label: string, investment: number, minInvestment: number, maxInvestment: number })[];
+        return skillGroups.map(convertSkillGroup) as unknown as (SkillGroupPTR2e["_source"] & { label: string, investment: number})[];
     }
 
     override async _prepareContext() {
@@ -127,23 +127,37 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         };
         points.available = points.total - points.spent;
         const levelOne = this.document.system.advancement.level === 1;
-        const maxInvestment = Math.clamp(points.available,0, levelOne ? 90 : 100);
+        const maxTotalInvestment = levelOne ? 90 : 100;
 
         const groupsWithSkillsVisible = new Set(this.skillGroups.filter(group=>(group.rvs ?? 0) + group.investment == group.points).map(group=>group.slug));
 
         // remove skills that should be hidden by groups!
+        // also assign minInvestment and maxInvestment
         const modifiableSkills = foundry.utils.deepClone(this.skills).filter((skill)=>{
             const skillInGroups = game.ptr.data.skillGroups.groupChainFromSkill(skill);
             return skillInGroups.length == 0 || skillInGroups.every((group)=>groupsWithSkillsVisible.has(group.slug));
+        }).map((skill)=>{
+            // get inherited values from groups
+            let bonusFromGroups = 0;
+            for (const group of game.ptr.data.skillGroups.groupChainFromSkill(skill)) {
+                bonusFromGroups += this.skillGroups.find((g)=>g.slug == group.slug)?.rvs ?? 0;
+            }
+            return {
+                ...skill,
+                minInvestment: -(skill.rvs ?? 0),
+                maxInvestment: Math.clamp(maxTotalInvestment - (skill.rvs ?? 0) - (bonusFromGroups), 0, points.available! + skill.investment),
+            }
         });
 
         // remove groups that should be hidden by parent groups!
+        // also assign minInvestment and maxInvestment
         const modifiableGroups = foundry.utils.deepClone(this.skillGroups).filter((group)=>{
             return !group.parentGroup || groupsWithSkillsVisible.has(group.parentGroup);
         }).map((group)=>{
             return {
                 ...group,
-                maxInvestment: Math.min(group.maxInvestment!, maxInvestment),
+                minInvestment: -(group.rvs ?? 0),
+                maxInvestment: Math.clamp(group.points - (group.rvs ?? 0 + group.investment), 0, Math.clamp(points.available! + group.investment, 0, maxTotalInvestment)),
             }
         });
 
@@ -152,7 +166,6 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             skills: modifiableSkills,
             skillGroups: modifiableGroups,
             points,
-            maxInvestment,
             isReroll:
                 !levelOne || (levelOne && this.document.system.skills.get("luck")!.value! > 1),
             levelOne,
@@ -436,18 +449,19 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
         let resourceMod = 0;
         for (const skill of skills) {
-            const skillData = data[skill.slug];
-            if (!skillData) continue;
-            const investment = parseInt(skillData.investment);
-            if (isNaN(investment) || !investment) continue;
-
             // check if this skill is not allowed to be pointed
             const skillGroup = skillGroups.find(group=>group.slug == skill.group);
             if (skillGroup && (skillGroup!.rvs ?? 0) < skillGroup.points) {
                 // remove all points
                 skill.rvs = 0;
                 delete data[skill.slug];
+                continue;
             }
+
+            const skillData = data[skill.slug];
+            if (!skillData) continue;
+            const investment = parseInt(skillData.investment);
+            if (isNaN(investment) || !investment) continue;
 
             if(skill.slug === "resources" && investment < 0) resourceMod = investment; 
             skill.rvs = Math.clamp((skill.rvs ?? 0) + investment, skill.slug === "resources" ? -maxInvestment : 0, maxInvestment);

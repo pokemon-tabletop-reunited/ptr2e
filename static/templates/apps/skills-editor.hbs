@@ -38,7 +38,7 @@
                         {{#if (and (eq this.slug "resources") (not @root.levelOne true))}}
                             <label></label>
                         {{else}}
-                            <input name="{{slug}}.investment" type="number" max="{{@root.maxInvestment}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
+                            <input name="{{slug}}.investment" type="number" min="{{minInvestment}}" max="{{maxInvestment}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
                         {{/if}}
                     {{/if}}
                 </div>
