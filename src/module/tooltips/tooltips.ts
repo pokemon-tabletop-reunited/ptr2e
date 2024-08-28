@@ -93,6 +93,8 @@ export default class TooltipsPTR2e {
           return this._onDamageInfoTooltip();
         case "skill":
           return this._onSkillTooltip();
+        case "skill-group":
+          return this._onSkillTooltip();
         case "effect":
           return this._onEffectTooltip();
         case "affliction":
