@@ -141,7 +141,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         const groupsWithSkillsVisible = new Set(this.skillGroups.filter(group=>(group.rvs ?? 0) + group.investment >= group.points).map(group=>group.slug));
 
         // remove skills that should be hidden by groups!
-        // also assign minInvestment and maxInvestment
+        // also assign minInvestment, maxInvestment, and bonusFromGroups
         const modifiableSkills = foundry.utils.deepClone(this.skills).filter((skill)=>{
             const skillInGroups = game.ptr.data.skillGroups.groupChainFromSkill(skill);
             return skillInGroups.length == 0 || skillInGroups.every((group)=>groupsWithSkillsVisible.has(group.slug));
@@ -156,18 +156,25 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                 ...skill,
                 minInvestment: -(skill.rvs ?? 0),
                 maxInvestment: Math.clamp(maxTotalInvestment - (skill.rvs ?? 0) - (bonusFromGroups), 0, points.available! + skill.investment),
+                bonusFromGroups,
             }
         });
 
         // remove groups that should be hidden by parent groups!
-        // also assign minInvestment and maxInvestment
+        // also assign minInvestment, maxInvestment, and bonusFromGroups
         const modifiableGroups = foundry.utils.deepClone(this.skillGroups).filter((group)=>{
             return !group.parentGroup || groupsWithSkillsVisible.has(group.parentGroup);
         }).map((group)=>{
+            let bonusFromGroups = - ((group.rvs ?? 0) + (group.investment ?? 0));
+            for (const parentGroup of game.ptr.data.skillGroups.groupChain(group)) {
+                const editorGroup = this.skillGroups.find((g)=>g.slug == parentGroup.slug)
+                bonusFromGroups += (editorGroup?.rvs ?? 0) + (editorGroup?.investment ?? 0);
+            }
             return {
                 ...group,
                 minInvestment: -(group.rvs ?? 0),
                 maxInvestment: Math.clamp(group.points - (group.rvs ?? 0 + group.investment), 0, Math.clamp(points.available! + group.investment, 0, maxTotalInvestment)),
+                bonusFromGroups,
             }
         });
 
@@ -506,7 +513,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             group.rvs = Math.clamp((group.rvs ?? 0) + investment, 0, group.points);
             delete data[group.slug];
         }
-        
+
         // check for groups that are no longer allowed to be pointed
         for (const group of skillGroups) {
             const ancestors = game.ptr.data.skillGroups.groupChain(group).slice(1);

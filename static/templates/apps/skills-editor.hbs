@@ -51,7 +51,7 @@
 <div class="skill depth-{{depth}}">
     <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}</label>
     <label>{{value}}</label>
-    <label>{{rvs}}</label>
+    <label>{{rvs}}{{#if bonusFromGroups}} (+{{bonusFromGroups}}){{/if}}</label>
     {{#if (eq this.slug "luck")}}
         <button type="button" data-action="roll-luck">{{#if @root.isReroll}}Reroll{{else}}Roll{{/if}} Luck</button>
     {{else}}
@@ -68,7 +68,7 @@
 <div class="skill-group depth-{{depth}}">
     <label class="skill-group" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{parentGroup}}" data-tooltip="{{slug}}">{{label}} Skills</label>
     <label>{{value}}</label>
-    <label>{{rvs}}</label>
+    <label>{{rvs}}{{#if bonusFromGroups}} (+{{bonusFromGroups}}){{/if}}</label>
     <input name="{{slug}}.investment" type="number" min="{{minInvestment}}" max="{{maxInvestment}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
 </div>
 {{#each skills}}
