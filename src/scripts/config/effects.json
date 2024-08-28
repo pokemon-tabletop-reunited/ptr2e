@@ -698,7 +698,32 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "crit-stage",
+          "value": 2,
+          "predicate": [],
+          "label": "Duel - targeting Duel partner",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
+        },
+        {
+          "type": "percentile-modifier",
+          "key": "attack-power",
+          "value": 50,
+          "predicate": [],
+          "label": "Duel - targeting Duel partner",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
+        },
+        {
+          "type": "percentile-modifier",
+          "key": "all-damage",
+          "value": -0.3333333333333333
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -1018,7 +1043,28 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "attack-power",
+          "value": -33,
+          "predicate": [],
+          "label": "Fear - targeting Source",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
+        },
+        {
+          "type": "basic",
+          "key": "system.battleStats.accuracy.stage",
+          "value": 1,
+          "predicate": [],
+          "label": "Fear - targeting Source",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -1150,7 +1196,18 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "attack-power",
+          "value": -33,
+          "predicate": [],
+          "label": "Taunt - not targeting Source",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -1191,7 +1248,20 @@
     "img": "icons/svg/fire-shield.svg",
     "type": "passive",
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.def.stage",
+          "value": 1,
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spd.stage",
+          "value": 1,
+          "mode": 2
+        }
+      ],
       "removeOnRecall": false,
       "removeAfterCombat": true,
       "traits": []
@@ -1213,25 +1283,7 @@
         },
         {
           "type": "basic",
-          "key": "system.attributes.def.stage",
-          "value": 1,
-          "mode": 2
-        },
-        {
-          "type": "basic",
           "key": "system.attributes.spa.stage",
-          "value": 1,
-          "mode": 2
-        },
-        {
-          "type": "basic",
-          "key": "system.attributes.spd.stage",
-          "value": 1,
-          "mode": 2
-        },
-        {
-          "type": "basic",
-          "key": "system.attributes.spe.stage",
           "value": 1,
           "mode": 2
         }
@@ -1261,7 +1313,18 @@
     "img": "icons/svg/statue.svg",
     "type": "passive",
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "attack-power",
+          "value": 20,
+          "predicate": [],
+          "label": "Strong",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
+        }
+      ],
       "removeOnRecall": true,
       "removeAfterCombat": true,
       "traits": []
@@ -1274,7 +1337,18 @@
     "img": "icons/svg/thrust.svg",
     "type": "passive",
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "attack-power",
+          "value": -20,
+          "predicate": [],
+          "label": "Agile",
+          "mode": 2,
+          "priority": null,
+          "ignored": false
+        }
+      ],
       "removeOnRecall": true,
       "removeAfterCombat": true,
       "traits": []
@@ -1287,7 +1361,14 @@
     "img": "icons/svg/sun.svg",
     "type": "passive",
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.accuracy.stage",
+          "value": 1,
+          "mode": 2
+        }
+      ],
       "removeOnRecall": true,
       "removeAfterCombat": true,
       "traits": []
@@ -1300,7 +1381,14 @@
     "img": "icons/svg/upgrade.svg",
     "type": "passive",
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.evasion.stage",
+          "value": 1,
+          "mode": 2
+        }
+      ],
       "removeOnRecall": true,
       "removeAfterCombat": true,
       "traits": []
