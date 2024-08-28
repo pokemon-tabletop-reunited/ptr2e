@@ -67,17 +67,14 @@ class SkillsComponent extends ActorComponent {
                     }
                 }
 
-
-                const populateSkillsAndGroupsField = function (skillCategory:SkillSubCategory) {
-                    const depth = game.ptr.data.skillGroups.groupChain(game.ptr.data.skillGroups.get(skillCategory.slug)).length;
-                    const sc = skillCategory.subcategories.map(s=>({...s, isGroup: true, depth }));
-                    skillCategory.skillsAndGroups = [
-                        ...skillCategory.skills.map(s=>({...s, isGroup: false, depth })),
+                for (const subCategory of Object.values(categoryFlat)) {
+                    const depth = game.ptr.data.skillGroups.groupChain(game.ptr.data.skillGroups.get(subCategory.slug)).length;
+                    const sc = subCategory.subcategories.map(s=>({slug: s.slug!, subcategory: s, isGroup: true, depth }));
+                    subCategory.skillsAndGroups = [
+                        ...subCategory.skills.map(s=>({slug: s.slug!, skill: s, isGroup: false, depth })),
                         ...sc
                     ].sort((a, b) => (a?.slug ?? "").localeCompare(b?.slug ?? ""));
-                    sc.forEach(populateSkillsAndGroupsField);
-                }
-                populateSkillsAndGroupsField(categoryFlat["none"]);
+                };
             }
 
             const sortAndCombineGroups = function (category:SkillCategory) {
@@ -210,8 +207,8 @@ class FavouriteSkillsComponent extends SkillsComponent {
     override renderFrame(): void {}
 }
 
-type SkillSubCategory = { label: string | null; slug: string | null; skills: Skill[]; subcategories: SkillSubCategory[]; skillsAndGroups: SkillOrSubCategory[]};
-type SkillOrSubCategory = (Skill | SkillSubCategory) & { isGroup?: boolean, depth?: number; };
+export type SkillSubCategory = { label: string | null; slug: string | null; skills: Skill[]; subcategories: SkillSubCategory[]; skillsAndGroups: SkillOrSubCategory[]};
+export type SkillOrSubCategory = { slug: string, skill?: Skill; subcategory?: SkillSubCategory; isGroup?: boolean, depth?: number; };
 export type SkillCategory = { none: SkillSubCategory } & Record<string, SkillSubCategory>;
 
 

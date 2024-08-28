@@ -1,5 +1,5 @@
 import { ActorPTR2e, Skill } from "@actor";
-import { SkillCategory, SkillsComponent } from "@actor/components/skills-component.ts";
+import { SkillsComponent, SkillSubCategory } from "@actor/components/skills-component.ts";
 import SkillGroupPTR2e from "@module/data/models/skill-group.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
@@ -64,7 +64,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     resetSkills(): this["skills"] {
         const {skills, hideHiddenSkills} = SkillsComponent.prepareSkillsData(this.document);
 
-        const convertSkill = (skill: (Skill|SkillCategory)) => {
+        const convertSkill = (skill: Skill) => {
             if (game.i18n.has(`PTR2E.Skills.${skill.slug}.label`)) {
                 const label = game.i18n.format(`PTR2E.Skills.${skill.slug}.label`);
                 return [{
@@ -73,7 +73,6 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                     investment: 0,
                 }];
             } else {
-                // @ts-expect-error TODO remove
                 const skillData = game.ptr.data.skills.get(skill?.slug);
                 if (skillData && game.ptr.data.skills.isCustomSkill(skillData)) {
                     return [{
@@ -85,12 +84,21 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             }
             return []
         }
+
+        const getSkillsRecursively = function (skillCategory:SkillSubCategory): Skill[] {
+            const retrieved = [...skillCategory.skills];
+            for (const subCategory of skillCategory.subcategories) {
+                retrieved.push(...getSkillsRecursively(subCategory))
+            }
+            return retrieved;
+        }
         
         return [
-            ...skills.favourites.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as (SkillPTR2e["_source"] & { label: string; investment: number })[]),
-            ...skills.normal.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as (SkillPTR2e["_source"] & { label: string; investment: number })[]),
-            ...(hideHiddenSkills ? [] : skills.hidden.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as (SkillPTR2e["_source"] & { label: string; investment: number })[])),
-        ]
+            ...skills.favourites.flatMap(getSkillsRecursively).flatMap(convertSkill),
+            ...skills.normal.flatMap(getSkillsRecursively).flatMap(convertSkill),
+            ...(hideHiddenSkills ? [] : 
+                skills.hidden.flatMap(getSkillsRecursively).flatMap(convertSkill)),
+        ] as unknown as this["skills"];
     }
 
     resetSkillGroups(): this["skillGroups"] {
