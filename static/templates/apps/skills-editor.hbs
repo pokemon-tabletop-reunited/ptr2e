@@ -19,29 +19,26 @@
                 <label>Current Investment</label>
                 <label>Apply Investment</label>
             </header>
-            {{#each skillGroups}}
-                <div class="skill-group">
-                    <label class="skill-group" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{parentGroup}}" data-tooltip="{{slug}}">{{label}}</label>
-                    <label>{{value}}</label>
-                    <label>{{rvs}}</label>
-                    <input name="{{slug}}.investment" type="number" min="{{minInvestment}}" max="{{maxInvestment}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
-                </div>
-            {{/each}}
+            {{!-- Luck --}}
+            <div class="skill">
+                <label class="skill" data-tooltip-direction="LEFT" data-slug="{{luck.slug}}" data-group="{{luck.group}}" data-tooltip="{{luck.slug}}">{{luck.label}}</label>
+                <label>{{luck.value}}</label>
+                <label>{{luck.rvs}}</label>
+                <button type="button" data-action="roll-luck">{{#if @root.isReroll}}Reroll{{else}}Roll{{/if}} Luck</button>
+            </div>
+            {{!-- Resources --}}
+            <div class="skill">
+                <label class="skill" data-tooltip-direction="LEFT" data-slug="{{resources.slug}}" data-group="{{resources.group}}" data-tooltip="{{resources.slug}}">{{resources.label}}</label>
+                <label>{{resources.value}}</label>
+                <label>{{resources.rvs}}</label>
+                {{#if (not @root.levelOne true)}}
+                    <label></label>
+                {{else}}
+                    <input name="{{resources.slug}}.investment" type="number" min="{{resources.minInvestment}}" max="{{resources.maxInvestment}}" value="{{resources.investment}}" data-slug="{{resources.slug}}" step="1"/>
+                {{/if}}
+            </div>
             {{#each skills}}
-                <div class="skill">
-                    <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}</label>
-                    <label>{{value}}</label>
-                    <label>{{rvs}}</label>
-                    {{#if (eq this.slug "luck")}}
-                        <button type="button" data-action="roll-luck">{{#if @root.isReroll}}Reroll{{else}}Roll{{/if}} Luck</button>
-                    {{else}}
-                        {{#if (and (eq this.slug "resources") (not @root.levelOne true))}}
-                            <label></label>
-                        {{else}}
-                            <input name="{{slug}}.investment" type="number" min="{{minInvestment}}" max="{{maxInvestment}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
-                        {{/if}}
-                    {{/if}}
-                </div>
+                {{> skillOrGroup}}
             {{/each}}
         </div>
     </fieldset>
@@ -49,3 +46,40 @@
         <button type="submit">Apply Investment</button>
     </footer>
 </section>
+
+{{#*inline "skill"}}
+<div class="skill depth-{{depth}}">
+    <label class="skill" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{group}}" data-tooltip="{{slug}}">{{label}}</label>
+    <label>{{value}}</label>
+    <label>{{rvs}}</label>
+    {{#if (eq this.slug "luck")}}
+        <button type="button" data-action="roll-luck">{{#if @root.isReroll}}Reroll{{else}}Roll{{/if}} Luck</button>
+    {{else}}
+        {{#if (and (eq this.slug "resources") (not @root.levelOne true))}}
+            <label></label>
+        {{else}}
+            <input name="{{slug}}.investment" type="number" min="{{minInvestment}}" max="{{maxInvestment}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
+        {{/if}}
+    {{/if}}
+</div>
+{{/inline}}
+
+{{#*inline "skillGroup"}}
+<div class="skill-group depth-{{depth}}">
+    <label class="skill-group" data-tooltip-direction="LEFT" data-slug="{{slug}}" data-group="{{parentGroup}}" data-tooltip="{{slug}}">{{label}} Skills</label>
+    <label>{{value}}</label>
+    <label>{{rvs}}</label>
+    <input name="{{slug}}.investment" type="number" min="{{minInvestment}}" max="{{maxInvestment}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
+</div>
+{{#each skills}}
+    {{> skillOrGroup}}
+{{/each}}
+{{/inline}}
+
+{{#*inline "skillOrGroup"}}
+{{#if isGroup}}
+    {{> skillGroup}}
+{{else}}
+    {{> skill}}
+{{/if}}
+{{/inline}}

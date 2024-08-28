@@ -129,7 +129,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         const levelOne = this.document.system.advancement.level === 1;
         const maxTotalInvestment = levelOne ? 90 : 100;
 
-        const groupsWithSkillsVisible = new Set(this.skillGroups.filter(group=>(group.rvs ?? 0) + group.investment == group.points).map(group=>group.slug));
+        const groupsWithSkillsVisible = new Set(this.skillGroups.filter(group=>(group.rvs ?? 0) + group.investment >= group.points).map(group=>group.slug));
 
         // remove skills that should be hidden by groups!
         // also assign minInvestment and maxInvestment
@@ -162,10 +162,60 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             }
         });
 
+        // re-group and sort skills and skill-groups
+        const { skills, resources, luck } = (()=>{
+            const groupsWithSkills = modifiableGroups.map((g)=>{
+                return {
+                    ...g,
+                    isGroup: true,
+                    skills: [] as any[],
+                }
+            })
+            const groupsAndSkills = [] as any[];
+            for (const group of groupsWithSkills) {
+                const containingGroup = groupsWithSkills.find((g)=>g.slug == group.parentGroup);
+                if (containingGroup) {
+                    containingGroup.skills.push(group);
+                } else {
+                    groupsAndSkills.push(group);
+                }
+            }
+            for (const skill of modifiableSkills) {
+                const containingGroup = groupsWithSkills.find((g)=>g.slug == skill.group);
+                if (containingGroup) {
+                    containingGroup.skills.push(skill);
+                } else {
+                    groupsAndSkills.push(skill);
+                }
+            }
+            // pull resources and luck out
+            const resources = groupsAndSkills.splice(groupsAndSkills.findIndex((s)=>s.slug == "resources"))?.[0];
+            const luck = groupsAndSkills.splice(groupsAndSkills.findIndex((s)=>s.slug == "luck"))?.[0];
+            // sort the rest!
+            groupsWithSkills.forEach((group)=>group.skills.sort((a, b) => a.label.localeCompare(b.label)));
+            groupsAndSkills.sort((a, b) => a.label.localeCompare(b.label));
+            // assign depth to all
+            const assignDepth = function (depth:number) {
+                return function (g:any) {
+                    g.depth = depth;
+                    if (g.skills) {
+                        g.skills.forEach(assignDepth(depth+1));
+                    }
+                }
+            };
+            groupsAndSkills.forEach(assignDepth(0))
+            return {
+                skills: groupsAndSkills,
+                resources,
+                luck,
+            };
+        })();
+
         return {
             document: this.document,
-            skills: modifiableSkills,
-            skillGroups: modifiableGroups,
+            luck,
+            resources,
+            skills,
             points,
             isReroll:
                 !levelOne || (levelOne && this.document.system.skills.get("luck")!.value! > 1),

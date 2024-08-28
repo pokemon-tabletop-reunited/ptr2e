@@ -1671,9 +1671,20 @@ body {
                         flex: 0 0 22%;
                         text-align: center;
                     }
-                }
-                div.skill-group {
-                    border-bottom: 1px solid var(--border-theme-color);
+                    :first-child {
+                        text-align: left;
+                        justify-self: left;
+                        margin-left: 0.5em;
+                    }
+                    &.depth-1 :first-child {
+                        margin-left: 1.5em;
+                    }
+                    &.depth-2 :first-child {
+                        margin-left: 2.5em;
+                    }
+                    &.depth-3 :first-child {
+                        margin-left: 3.5em;
+                    }
                 }
                 header.skill {
                     border: 1px solid var(--border-theme-color);
