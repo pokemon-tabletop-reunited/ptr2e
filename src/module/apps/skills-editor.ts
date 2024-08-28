@@ -506,6 +506,14 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             group.rvs = Math.clamp((group.rvs ?? 0) + investment, 0, group.points);
             delete data[group.slug];
         }
+        
+        // check for groups that are no longer allowed to be pointed
+        for (const group of skillGroups) {
+            const ancestors = game.ptr.data.skillGroups.groupChain(group).slice(1);
+            if (ancestors.some(ancestor=>(skillGroups.find(group=>group.slug == ancestor.slug)?.rvs ?? 0) < ancestor.points)) {
+                group.rvs = 0;
+            }
+        }
 
         let resourceMod = 0;
         for (const skill of skills) {
