@@ -184,10 +184,10 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                 return {
                     ...g,
                     isGroup: true,
-                    skills: [] as any[],
+                    skills: [] as GroupAndSkill[],
                 }
             })
-            const groupsAndSkills = [] as any[];
+            const groupsAndSkills: GroupAndSkill[] = [];
             for (const group of groupsWithSkills) {
                 const containingGroup = groupsWithSkills.find((g)=>g.slug == group.parentGroup);
                 if (containingGroup) {
@@ -205,8 +205,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                 }
             }
             // pull resources and luck out
-            const resources = groupsAndSkills.splice(groupsAndSkills.findIndex((s)=>s.slug == "resources"))?.[0];
-            const luck = groupsAndSkills.splice(groupsAndSkills.findIndex((s)=>s.slug == "luck"))?.[0];
+            const resources = groupsAndSkills.splice(groupsAndSkills.findIndex((s)=>s.slug == "resources"), 1)?.[0];
+            const luck = groupsAndSkills.splice(groupsAndSkills.findIndex((s)=>s.slug == "luck"), 1)?.[0];
             // sort the rest!
             groupsWithSkills.forEach((group)=>group.skills.sort((a, b) => a.label.localeCompare(b.label)));
             groupsAndSkills.sort((a, b) => a.label.localeCompare(b.label));
@@ -576,4 +576,18 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             "system.skillGroups": skillGroups,
         });
     }
-}
+};
+
+
+type GroupAndSkill = {
+    minInvestment: number;
+    maxInvestment: number;
+    bonusFromGroups: number;
+    slug: string;
+    parentGroup?: string | undefined;
+    points?: number;
+    rvs: number | null;
+    value: number;
+    label: string;
+    investment: number;
+};
