@@ -1,5 +1,5 @@
 import { ActorPTR2e, Skill } from "@actor";
-import { SkillsComponent } from "@actor/components/skills-component.ts";
+import { SkillCategory, SkillsComponent } from "@actor/components/skills-component.ts";
 import SkillGroupPTR2e from "@module/data/models/skill-group.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
@@ -64,7 +64,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     resetSkills(): this["skills"] {
         const {skills, hideHiddenSkills} = SkillsComponent.prepareSkillsData(this.document);
 
-        const convertSkill = (skill: Skill) => {
+        const convertSkill = (skill: (Skill|SkillCategory)) => {
             if (game.i18n.has(`PTR2E.Skills.${skill.slug}.label`)) {
                 const label = game.i18n.format(`PTR2E.Skills.${skill.slug}.label`);
                 return [{
@@ -73,7 +73,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                     investment: 0,
                 }];
             } else {
-                const skillData = game.ptr.data.skills.get(skill.slug);
+                // @ts-expect-error TODO remove
+                const skillData = game.ptr.data.skills.get(skill?.slug);
                 if (skillData && game.ptr.data.skills.isCustomSkill(skillData)) {
                     return [{
                         ...skill,

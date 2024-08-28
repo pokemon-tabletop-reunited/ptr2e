@@ -13,7 +13,8 @@ export default class PTR2eSkillGroups extends Collection<SkillGroup> {
         return new PTR2eSkillGroups().refresh();
     }
 
-    groupChain(group: SkillGroup): Array<SkillGroup> {
+    groupChain(group: SkillGroup | undefined): Array<SkillGroup> {
+        if (!group) return [];
         const chain = [group]
         while (chain[chain.length-1].parentGroup) {
             const nextInChain = this.get(chain[chain.length-1].parentGroup); 

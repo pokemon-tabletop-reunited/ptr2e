@@ -653,7 +653,6 @@ body .application.sheet .form-group {
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group .skill-group-label,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill-group .skill-group-label {
-  margin-left: calc(16px + 0.25rem);
   border-bottom: 1px solid var(--border-theme-color);
   padding: 4px 0;
   font-weight: bold;
@@ -661,7 +660,6 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill-group .skill,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill-group .skill {
   padding-left: unset;
-  margin-left: calc(16px + 0.25rem);
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .skill,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .skill {
@@ -723,6 +721,38 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list header.skill {
   border-bottom-width: 2px;
   font-weight: bold;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .depth-0,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .depth-0 {
+  margin-left: 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .depth-0.skill-group-label,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .depth-0.skill-group-label {
+  margin-left: calc(16px + 0.25rem);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .depth-1,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .depth-1 {
+  margin-left: calc(16px + 0.25rem);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .depth-1.skill-group-label,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .depth-1.skill-group-label {
+  margin-left: calc(32px + 0.25rem);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .depth-2,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .depth-2 {
+  margin-left: calc(32px + 0.25rem);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .depth-2.skill-group-label,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .depth-2.skill-group-label {
+  margin-left: calc(48px + 0.25rem);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .depth-3,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .depth-3 {
+  margin-left: calc(48px + 0.25rem);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component .skills .skill-list .depth-3.skill-group-label,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component .skills .skill-list .depth-3.skill-group-label {
+  margin-left: calc(64px + 0.25rem);
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options {

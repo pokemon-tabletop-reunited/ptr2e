@@ -9,47 +9,14 @@
                 <div class="skill-controls{{#if favouriteOnly}} hidden{{/if}}"></div>
             </header>
             {{#each skills.favourites as |group|}}
-                {{#if group.label}}
-                    <div class="skill-group">
-                        <div class="skill-group-label skill" data-tooltip-direction="LEFT" data-tooltip="{{group.label}}" data-slug="{{group.label}}">{{localize (concat (concat "PTR2E.Skills." group.label) ".label")}} {{localize "PTR2E.ActorSystem.FIELDS.skills.label"}}</div>
-                        {{#each group.skills as |skill|}}
-                            {{> skill skill=skill direction="LEFT" favouriteOnly=../../favouriteOnly}}
-                        {{/each}}
-                    </div>
-                {{else}}
-                    {{#each group.skills as |skill|}}
-                        {{> skill skill=skill direction="LEFT" favouriteOnly=../../favouriteOnly}}
-                    {{/each}}
-                {{/if}}
+                {{> group group=group favouriteOnly=../favouriteOnly}}
             {{/each}}
             {{#unless favouriteOnly}}
                 {{#each skills.normal as |group|}}
-                    {{#if group.label}}
-                        <div class="skill-group">
-                            <div class="skill-group-label skill" data-tooltip-direction="LEFT" data-tooltip="{{group.label}}" data-slug="{{group.label}}">{{localize (concat (concat "PTR2E.Skills." group.label) ".label")}} {{localize "PTR2E.ActorSystem.FIELDS.skills.label"}}</div>
-                            {{#each group.skills as |skill|}}
-                                {{> skill skill=skill direction="LEFT"}}
-                            {{/each}}
-                        </div>
-                    {{else}}
-                        {{#each group.skills as |skill|}}
-                            {{> skill skill=skill direction="LEFT"}}
-                        {{/each}}
-                    {{/if}}
+                    {{> group group=group}}
                 {{/each}}
                 {{#each skills.hidden as |group|}}
-                    {{#if group.label}}
-                        <div class="skill-group hidden-skill{{#if @root.hideHiddenSkills}} hidden{{/if}}">
-                            <div class="skill-group-label skill" data-tooltip-direction="LEFT" data-tooltip="{{group.label}}" data-slug="{{group.label}}">{{localize (concat (concat "PTR2E.Skills." group.label) ".label")}} {{localize "PTR2E.ActorSystem.FIELDS.skills.label"}}</div>
-                            {{#each group.skills as |skill|}}
-                                {{> skill skill=skill direction="LEFT" hidden=@root.hideHiddenSkills}}
-                            {{/each}}
-                        </div>
-                    {{else}}
-                        {{#each group.skills as |skill|}}
-                            {{> skill skill=skill direction="LEFT" hidden=@root.hideHiddenSkills}}
-                        {{/each}}
-                    {{/if}}
+                    {{> group group=group hidden=@root.hideHiddenSkills}}
                 {{/each}}
             {{/unless}}
         </div>
@@ -57,7 +24,7 @@
 </div>
 
 {{#*inline "skill"}}
-    <div class="skill {{skill.slug}}{{#if skill.favourite}} favourite{{/if}}{{#if hidden}} hidden{{/if}}{{#if skill.hidden}} hidden-skill{{/if}}" data-tooltip-direction="{{direction}}" data-slug="{{skill.slug}}" data-group="{{skill.group}}" data-tooltip="{{formatSlug skill.slug}}">
+    <div class="skill {{skill.slug}}{{#if skill.favourite}} favourite{{/if}}{{#if hidden}} hidden{{/if}}{{#if skill.hidden}} hidden-skill{{/if}} depth-{{skill.depth}}" data-tooltip-direction="{{direction}}" data-slug="{{skill.slug}}" data-group="{{skill.group}}" data-tooltip="{{formatSlug skill.slug}}">
         <div class="skill-icon rollable">
             <img class="dice" src="/icons/dice/d10black.svg" data-tooltip="Roll {{formatSlug skill.slug}}">
         </div>
@@ -77,4 +44,27 @@
             {{/if}}
         </div>
     </div>
+{{/inline}}
+
+{{#*inline "group"}}
+{{#if group.label}}
+    <div class="skill-group">
+        <div class="skill-group-label skill depth-{{group.depth}}" data-tooltip-direction="LEFT" data-tooltip="{{group.label}}" data-slug="{{group.label}}">{{localize (concat (concat "PTR2E.Skills." group.label) ".label")}} {{localize "PTR2E.ActorSystem.FIELDS.skills.label"}}</div>
+        {{#each group.skillsAndGroups as |skillOrCategory|}}
+            {{#if skillOrCategory.isGroup}}
+            {{> group group=skillOrCategory direction="LEFT" favouriteOnly=../favouriteOnly hidden=../hidden}}
+            {{else}}
+            {{> skill skill=skillOrCategory direction="LEFT" favouriteOnly=../favouriteOnly hidden=../hidden}}
+            {{/if}}
+        {{/each}}
+    </div>
+{{else}}
+    {{#each group.skillsAndGroups as |skillOrCategory|}}
+        {{#if skillOrCategory.isGroup}}
+        {{> group group=skillOrCategory direction="LEFT" favouriteOnly=../favouriteOnly hidden=../hidden}}
+        {{else}}
+        {{> skill skill=skillOrCategory direction="LEFT" favouriteOnly=../favouriteOnly hidden=../hidden}}
+        {{/if}}
+    {{/each}}
+{{/if}}
 {{/inline}}

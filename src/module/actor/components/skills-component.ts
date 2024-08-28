@@ -30,43 +30,68 @@ class SkillsComponent extends ActorComponent {
 
     static prepareSkillsData(actor: ActorPTR2e) {
         const skills = (() => {
-            const favouriteGroups: SkillCategory = { none: { label: null, skills: [] } };
-            const hiddenGroups: SkillCategory = { none: { label: null, skills: [] } };
-            const normalGroups: SkillCategory = { none: { label: null, skills: [] } };
+            const favouriteGroups: SkillCategory = { none: { label: null, slug: null, skills: [], subcategories: [], skillsAndGroups: [] } };
+            const hiddenGroups: SkillCategory = { none: { label: null, slug: null, skills: [], subcategories: [], skillsAndGroups: [] } };
+            const normalGroups: SkillCategory = { none: { label: null, slug: null, skills: [], subcategories: [], skillsAndGroups: [] } };
 
             for (const skill of actor.system.skills.contents.sort((a, b) =>
                 a.slug.localeCompare(b.slug)
             )) {
-                if (skill.favourite) {
-                    const group = skill.group || "none";
-                    if (!favouriteGroups[group])
-                        favouriteGroups[group] = { label: group, skills: [] };
-                    favouriteGroups[group].skills.push(skill);
-                } else if (skill.hidden) {
-                    const group = skill.group || "none";
-                    if (!hiddenGroups[group]) hiddenGroups[group] = { label: group, skills: [] };
-                    hiddenGroups[group].skills.push(skill);
-                } else {
-                    const group = skill.group || "none";
+                const category = (()=>{
+                    if (skill.favourite) {
+                        return favouriteGroups;
+                    } else if (skill.hidden) {
+                        return hiddenGroups;
+                    }
+                    return normalGroups;
+                })();
 
-                    if (!normalGroups[group]) normalGroups[group] = { label: group, skills: [] };
-                    normalGroups[group].skills.push(skill);
-                }
+                const groups = game.ptr.data.skillGroups.groupChainFromSkill(skill).map(g=>g.slug);
+                groups.push("none");
+                for (const group of groups)
+                    if (!category[group])
+                        category[group] = { label: group, slug: group, skills: [], subcategories: [], skillsAndGroups: [] };
+                category[groups[0]].skills.push(skill);
             }
+            // group inheritance
+            const allCategories = [favouriteGroups, hiddenGroups, normalGroups]
+            for (const category of allCategories) {
+                const categoryFlat = {...category};
+                for (const [ groupSlug, skillCategory ] of Object.entries(category).sort((a, b) => a[0].localeCompare(b[0]))) {
+                    if (groupSlug == "none") continue;
+                    const group = game.ptr.data.skillGroups.get(groupSlug);
+                    const parentGroup = categoryFlat[group?.parentGroup ?? "none"];
+                    if (parentGroup) {
+                        parentGroup.subcategories.push(skillCategory);
+                        delete category[groupSlug];
+                    }
+                }
+
+
+                const populateSkillsAndGroupsField = function (skillCategory:SkillSubCategory) {
+                    const depth = game.ptr.data.skillGroups.groupChain(game.ptr.data.skillGroups.get(skillCategory.slug)).length;
+                    const sc = skillCategory.subcategories.map(s=>({...s, isGroup: true, depth }));
+                    skillCategory.skillsAndGroups = [
+                        ...skillCategory.skills.map(s=>({...s, isGroup: false, depth })),
+                        ...sc
+                    ].sort((a, b) => (a?.slug ?? "").localeCompare(b?.slug ?? ""));
+                    sc.forEach(populateSkillsAndGroupsField);
+                }
+                populateSkillsAndGroupsField(categoryFlat["none"]);
+            }
+
+            const sortAndCombineGroups = function (category:SkillCategory) {
+                return Object.entries(category)
+                .sort((a, b) => a[0].localeCompare(b[0]))
+                .map(([, v]) => v);
+            };
+
             return {
-                favourites: Object.entries(favouriteGroups)
-                    .sort((a, b) => a[0].localeCompare(b[0]))
-                    .map(([, v]) => v),
-                hidden: Object.entries(hiddenGroups)
-                    .sort((a, b) => a[0].localeCompare(b[0]))
-                    .map(([, v]) => v),
-                normal: Object.entries(normalGroups)
-                    .sort((a, b) => a[0].localeCompare(b[0]))
-                    .map(([, v]) => v),
+                favourites: sortAndCombineGroups(favouriteGroups),
+                hidden: sortAndCombineGroups(hiddenGroups),
+                normal: sortAndCombineGroups(normalGroups),
             };
         })();
-
-        // consider: should we hide skills hidden by a group?
 
         const hideHiddenSkills = (() => {
             const appSettings = game.user.getFlag("ptr2e", "appSettings") as Record<string, Record<string, unknown>>;
@@ -185,10 +210,9 @@ class FavouriteSkillsComponent extends SkillsComponent {
     override renderFrame(): void {}
 }
 
-type SkillCategory = { none: { label: null; skills: Skill[] } } & Record<
-    string,
-    { label: string | null; skills: Skill[] }
->;
+type SkillSubCategory = { label: string | null; slug: string | null; skills: Skill[]; subcategories: SkillSubCategory[]; skillsAndGroups: SkillOrSubCategory[]};
+type SkillOrSubCategory = (Skill | SkillSubCategory) & { isGroup?: boolean, depth?: number; };
+export type SkillCategory = { none: SkillSubCategory } & Record<string, SkillSubCategory>;
 
 
 export { SkillsComponent, FavouriteSkillsComponent }

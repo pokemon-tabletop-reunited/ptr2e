@@ -749,7 +749,7 @@ body {
                                     }
 
                                     .skill-group-label {
-                                        margin-left: calc(16px + 0.25rem);
+                                        // margin-left: calc(16px + 0.25rem);
                                         border-bottom: 1px solid var(--border-theme-color);
                                         padding: 4px 0;
                                         font-weight: bold;
@@ -757,7 +757,7 @@ body {
                                     
                                     .skill {
                                         padding-left: unset;
-                                        margin-left: calc(16px + 0.25rem);
+                                        // margin-left: calc(16px + 0.25rem);
                                     }    
                                 }
     
@@ -826,6 +826,31 @@ body {
                                 header.skill {
                                     border-bottom-width: 2px;
                                     font-weight: bold;
+                                }
+
+                                .depth-0 {
+                                    margin-left: 0;
+                                    &.skill-group-label {
+                                        margin-left: calc(16px + 0.25rem);
+                                    }
+                                }
+                                .depth-1 {
+                                    margin-left: calc(16px + 0.25rem);
+                                    &.skill-group-label {
+                                        margin-left: calc(32px + 0.25rem);
+                                    }
+                                }
+                                .depth-2 {
+                                    margin-left: calc(32px + 0.25rem);
+                                    &.skill-group-label {
+                                        margin-left: calc(48px + 0.25rem);
+                                    }
+                                }
+                                .depth-3 {
+                                    margin-left: calc(48px + 0.25rem);
+                                    &.skill-group-label {
+                                        margin-left: calc(64px + 0.25rem);
+                                    }
                                 }
                             }
                         }
