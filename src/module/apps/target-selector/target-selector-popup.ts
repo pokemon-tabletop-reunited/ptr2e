@@ -40,6 +40,10 @@ export class TargetSelectorPopup extends foundry.applications.api.HandlebarsAppl
         this.targets = targets;
     }
 
+    override get title() {
+        return "Choose Target";
+    }
+
     override async _prepareContext(): Promise<Record<string, unknown>> {
         return {
             targets: this.targets

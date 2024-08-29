@@ -565,13 +565,11 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
   
 
   public async applyLuckIncrease(number: number, target: ActorUUID) {
-    console.log("applyLuckIncrease", this, number, target);
     const results = fu.duplicate(this.parent.system.results);
     const currentResult = results[this.parent.system.results.findIndex(r=>r.target.uuid == target)];
     if (!currentResult || !currentResult.accuracy) return;
     const accuracy = currentResult.accuracy;
 
-    console.log("Fake adding", number, "to", target, "::", currentResult);
     if ((accuracy.total - number) % 10 !== 0) {
       ui.notifications.warn("Luck increases must result in a multiple of 10.");
       return;

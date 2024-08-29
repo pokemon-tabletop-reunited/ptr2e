@@ -93,12 +93,11 @@ export const ChatContext: PTRHook = {
                                     uuid: r.target.uuid,
                                     name: r.target.name,
                                     img: r.target.img,
-                                    description: `Requires ${amount} of luck spent!`,
+                                    description: game.i18n.format("PTR2E.ChatContext.SpendLuckSkill.requires", { amount }),
                                 };
                             }), {}).wait().then(targetUuid=>message.system.results.find(r=>r.target.uuid == targetUuid));
                         })().then((finalized)=>{
                             if (!finalized) return;
-                            console.log("selected", finalized);
                             const currentResult = finalized.accuracy?.total ?? 0;
 
                             // Get the amount required to get to the next increment of -10, or 0 if the current result is above 0.
@@ -114,8 +113,7 @@ export const ChatContext: PTRHook = {
                                     }
                                 }
                             });
-                        })
-                        
+                        });
                     }
                 }
             ]

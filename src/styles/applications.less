@@ -4185,6 +4185,31 @@ body {
         }
     }
 
+    &.target-selector-popup {
+        .available-targets {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+
+            .target {
+                display: flex;
+                align-items: center;
+                gap: 5px;
+                border: 1px solid var(--border-theme-color);
+                border-radius: 5px;
+
+                &:hover {
+                    box-shadow: 0px 0px 5px var(--color-shadow-primary);
+                }
+                img {
+                    width: 36px;
+                    height: 36px;
+                    border: none;
+                }
+            }
+        }
+    }
+
     input[type="color"] {
         border-color: var(--color-input-border-color, #000);
     }
