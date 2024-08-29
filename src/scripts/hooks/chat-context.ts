@@ -1,6 +1,7 @@
-import { ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
+import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
 import { PTRHook } from "./data.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
+import { TargetSelectorPopup } from "@module/apps/target-selector/target-selector-popup.ts";
 
 export const ChatContext: PTRHook = {
     listen: () => {
@@ -59,6 +60,62 @@ export const ChatContext: PTRHook = {
                                 }
                             }
                         });
+                    }
+                },
+                {
+                    name: "PTR2E.ChatContext.SpendLuckSkill.label",
+                    icon: '<i class="fas fa-dice"></i>',
+                    condition: li => {
+                        const message = game.messages.get(li.data("messageId"));
+                        if(!message) return false;
+                        return ["attack"].includes(message.type);
+                    },
+                    callback: li => {
+                        const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e<AttackMessageSystem>;
+                        if(!message) return;
+                        // check if there are no targets (and bail early)
+                        const numTargets = message.system.results.length;
+                        if (numTargets == 0) {
+                            ui.notifications.error("There are no rolls to apply a luck increase to!");
+                            return;
+                        }
+                        // check if there is exactly one relevant target (if there is, no need to disambiguate)
+                        (async ()=>{
+                            if (numTargets == 1) {
+                                return message.system.results[0];
+                            }
+                            // get the target from a dialog
+
+                            return new TargetSelectorPopup(message.system.results.map(r=>{
+                                const currentResult = r.accuracy?.total ?? 0;
+                                const amount = Math.abs((currentResult > 0 ? 0 : Math.ceil(currentResult / -10) * -10 ) - currentResult) || 10;
+                                return {
+                                    uuid: r.target.uuid,
+                                    name: r.target.name,
+                                    img: r.target.img,
+                                    description: `Requires ${amount} of luck spent!`,
+                                };
+                            }), {}).wait().then(targetUuid=>message.system.results.find(r=>r.target.uuid == targetUuid));
+                        })().then((finalized)=>{
+                            if (!finalized) return;
+                            console.log("selected", finalized);
+                            const currentResult = finalized.accuracy?.total ?? 0;
+
+                            // Get the amount required to get to the next increment of -10, or 0 if the current result is above 0.
+                            const amount = Math.abs((currentResult > 0 ? 0 : Math.ceil(currentResult / -10) * -10 ) - currentResult) || 10
+                            foundry.applications.api.DialogV2.confirm({
+                                window: {
+                                    title: "PTR2E.ChatContext.SpendLuckSkill.title",
+                                },
+                                content: game.i18n.format("PTR2E.ChatContext.SpendLuckSkill.content", { amount }),
+                                yes: {
+                                    callback: async () => {
+                                        await message.system.applyLuckIncrease(amount, finalized.target.uuid as ActorUUID);
+                                    }
+                                }
+                            });
+                        })
+                        
                     }
                 }
             ]

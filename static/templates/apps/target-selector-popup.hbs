@@ -1,0 +1,19 @@
+<main>
+    <article class="available-targets">
+        {{#each targets as |target|}}
+            {{> target target=target direction="RIGHT"}}
+        {{/each}}
+    </article>
+</main>
+
+{{#*inline "target"}}
+    <div class="target" data-tooltip-direction="{{direction}}" data-uuid="{{target.uuid}}" data-tooltip="{{target.name}}">
+        <div class="target-icon">
+            <img class="icon" src="{{target.img}}"/>
+        </div>
+        <span class="ability-name">{{target.name}}</span>
+        {{#if target.description}}
+        <p>{{target.description}}</p>
+        {{/if}}
+    </div>
+{{/inline}}

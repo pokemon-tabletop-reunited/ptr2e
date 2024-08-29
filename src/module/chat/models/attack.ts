@@ -561,6 +561,51 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     html.find(".update-targets").on("click", this.updateTargets.bind(this));
     html.find("[data-action='consume-pp']").on("click", this.spendPP.bind(this));
   }
+
+  
+
+  public async applyLuckIncrease(number: number, target: ActorUUID) {
+    console.log("applyLuckIncrease", this, number, target);
+    const results = fu.duplicate(this.parent.system.results);
+    const currentResult = results[this.parent.system.results.findIndex(r=>r.target.uuid == target)];
+    if (!currentResult || !currentResult.accuracy) return;
+    const accuracy = currentResult.accuracy;
+
+    console.log("Fake adding", number, "to", target, "::", currentResult);
+    if ((accuracy.total - number) % 10 !== 0) {
+      ui.notifications.warn("Luck increases must result in a multiple of 10.");
+      return;
+    }
+
+    const actor = await this.currentOrigin;
+    if (!actor) return;
+
+    const luck = actor.system.skills.get("luck")!.total;
+    if (luck < number) {
+      ui.notifications.warn("You do not have enough Luck to apply this increase.");
+      return;
+    }
+
+    const skills = actor.system.skills.map((skill) => {
+      return skill.slug === "luck"
+        ? {
+          ...skill,
+          value: luck - number,
+        }
+        : skill;
+    });
+    await actor.update({ "system.skills": skills });
+
+    ui.notifications.info(
+      `Successfully applied Luck to this roll, spending ${number} Luck from ${actor.name
+      }. New total: ${actor.system.skills.get("luck")!.total}`
+    );
+
+    //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
+    accuracy.total -= number;
+
+    await this.parent.update({ "system.results": results });
+  }
 }
 
 interface AttackMessageSystem extends ModelPropsFromSchema<AttackMessageSchema> {
