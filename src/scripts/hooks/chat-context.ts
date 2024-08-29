@@ -1,4 +1,4 @@
-import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
+import { AttackMessageSystem, CaptureMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, SkillMessageSystem } from "@chat";
 import { PTRHook } from "./data.ts";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import { TargetSelectorPopup } from "@module/apps/target-selector/target-selector-popup.ts";
@@ -115,7 +115,36 @@ export const ChatContext: PTRHook = {
                             });
                         });
                     }
-                }
+                },
+                {
+                    name: "PTR2E.ChatContext.SpendLuckSkill.label",
+                    icon: '<i class="fas fa-dice"></i>',
+                    condition: li => {
+                        const message = game.messages.get(li.data("messageId"));
+                        if(!message) return false;
+                        return ["capture"].includes(message.type);
+                    },
+                    callback: li => {
+                        const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e<CaptureMessageSystem>;
+                        if(!message) return;
+                        const currentResult = message.system.rolls.accuracy?.total;
+                        if(currentResult === undefined) return;
+
+                        // Get the amount required to get to the next increment of -10, or 0 if the current result is above 0.
+                        const amount = Math.abs((currentResult > 0 ? 0 : Math.ceil(currentResult / -10) * -10 ) - currentResult) || 10
+                        foundry.applications.api.DialogV2.confirm({
+                            window: {
+                                title: "PTR2E.ChatContext.SpendLuckSkill.title",
+                            },
+                            content: game.i18n.format("PTR2E.ChatContext.SpendLuckSkill.content", { amount }),
+                            yes: {
+                                callback: async () => {
+                                    await message.system.applyLuckIncrease(amount);
+                                }
+                            }
+                        });
+                    }
+                },
             ]
             menuItems.push(...options);
         });
