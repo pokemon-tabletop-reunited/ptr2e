@@ -700,9 +700,10 @@
     "system": {
       "changes": [
         {
-          "type": "crit-stage",
+          "type": "stage-modifier",
+          "key": "all-crit",
           "value": 2,
-          "predicate": [],
+          "predicate": ["manual"],
           "label": "Duel - targeting Duel partner",
           "mode": 2,
           "priority": null,
@@ -712,7 +713,7 @@
           "type": "percentile-modifier",
           "key": "attack-power",
           "value": 50,
-          "predicate": [],
+          "predicate": ["manual"],
           "label": "Duel - targeting Duel partner",
           "mode": 2,
           "priority": null,
