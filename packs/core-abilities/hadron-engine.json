@@ -7,6 +7,28 @@
       {
         "traits": [
           "legendary",
+          "dash"
+        ],
+        "name": "Hadron Engine",
+        "slug": "hadron-engine",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "The user resolves Electro Drift.",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "user",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Effect: The user freely relocates itself to a space within the range of the triggering attack, and gains +1 SPD stage for 7 Activations."
+      },
+      {
+        "traits": [
+          "legendary",
           "terrain"
         ],
         "name": "Hadron Engine",
@@ -15,7 +37,6 @@
         "cost": {
           "activation": "free",
           "powerPoints": 0,
-          "trigger": "At the start of combat, or when the user switches in.",
           "delay": null,
           "priority": null
         },
@@ -24,13 +45,14 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: At the start of combat, or when the user switches in.\nEffect: The terrain is changed to Electric Terrain and remains Electric Terrain while the user is active on the field. Additionally, the user's Base SPATK stat increases by 33% while Electric Terrain is active. If the user uses Electro Drift while on Electric Terrain, their SPD stage increases by +1 for 5 activations. If the user Faints or is switched out, current active Electric Terrain lasts 5 rounds."
+        "description": "Passive: While the user is present on the Field, the Terrain is set to Electric Terrain and remains Electric Terrain while the user is active on the Field. While affected by Electric Terrain, the user's base SPATK increases by +30%. If the user gains @Affliction[fainted] or is switched out, the Electric Terrain set by the user lasts for 3 more rounds. The user is always considered to be affected by Electric Terrain if it is active anywhere on the Field."
       }
     ],
-    "description": "Trigger: At the start of combat, or when the user switches in.\nEffect: The terrain is changed to Electric Terrain and remains Electric Terrain while the user is active on the field. Additionally, the user's Base SPATK stat increases by 33% while Electric Terrain is active. If the user uses Electro Drift while on Electric Terrain, their SPD stage increases by +1 for 5 activations. If the user Faints or is switched out, current active Electric Terrain lasts 5 rounds.",
+    "description": "Trigger: The user resolves Electro Drift.\nEffect: The user relocates itself to a square within the range of the triggering attack, and gains +1 SPD stage for 7 Activations.\nPassive: While the user is present on the Field, the Terrain is set to Electric Terrain and remains Electric Terrain while the user is active on the field. While affected by Electric Terrain, the user's base SPATK increases by +30%. If the user gains @Affliction[fainted] or is switched out, the Electric Terrain set by the user lasts for 3 more rounds. The user is always considered to be affected by Electric Terrain if it is active anywhere on the Field.",
     "traits": [
       "legendary",
-      "terrain"
+      "terrain",
+      "dash"
     ],
     "slug": null,
     "container": null

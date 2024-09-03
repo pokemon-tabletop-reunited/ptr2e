@@ -11,18 +11,37 @@
       "approach": "power",
       "archetype": "Type Ace"
     },
-    "description": "The user (or targeted ally) adds the <type> of the style to the damage traits of their next move. This costs an additional 50% of the PP that the move would normally consume.</type>",
+    "description": "<p>The target adds this Action's [Type] to the next Attack they declare, lasting until the Attack resolves. The user may also be selected as a target for this Action.</p>",
     "actions": [
       {
         "name": "<Type> Style",
         "slug": "type-style",
-        "description": "The user (or targeted ally) adds the <Type> of the style to the damage traits of their next move. This costs an additional 50% of the PP that the move would normally consume.",
-        "type": "passive",
-        "traits": []
+        "description": "The target adds this Action's [Type] to the next Attack they declare, lasting until the Attack resolves. The user may also be selected as a target for this Action.</p>",
+        "type": "generic",
+        "traits": [
+          "social",
+          "command",
+          "type"
+        ],
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        }
       }
     ],
     "slug": "type-style",
-    "traits": [],
+    "traits": [
+      "social",
+      "command",
+      "type"
+    ],
     "node": {
       "i": -33,
       "j": -18,

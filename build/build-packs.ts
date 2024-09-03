@@ -11,6 +11,9 @@ const packDirPaths = fs.readdirSync(packsDataPath).map((dirName) => path.resolve
 // Loads all packs into memory for the sake of making all document name/id mappings available
 const packs = packDirPaths.map((p) => CompendiumPack.loadJSON(p));
 const documentCounts = await Promise.all(packs.map((p) => p.save(asJson)));
+if(asJson) {
+  console.log(CompendiumPack.saveAsJSON() ? "Successfully combined all packs as data.json." : "Failed to save combined packs as data.json.");
+}
 const total = documentCounts.reduce((total, c) => total + c, 0);
 
 if (documentCounts.length > 0) {

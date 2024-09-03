@@ -6,8 +6,8 @@
     "actions": [
       {
         "traits": [
-          "connection",
-          "terrain"
+          "terrain",
+          "connection"
         ],
         "name": "Misty Surge",
         "slug": "misty-surge",
@@ -20,17 +20,40 @@
           "priority": null
         },
         "range": {
-          "target": "field",
+          "target": "self",
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user uses Misty Terrain.\nEffect: Connection - Misty Terrain. The number of rounds Misty Terrain persists is increased by +2."
+        "description": "Trigger: The user uses Misty Terrain.\nEffect: Connection - Misty Terrain. Increase the number of rounds Misty Terrain persists by 2."
+      },
+      {
+        "traits": [
+          "terrain",
+          "connection",
+          "environ"
+        ],
+        "name": "Misty Surge",
+        "slug": "misty-surge",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "object",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "Passive: If a space within range possesses Misty Terrain, the user is affected by Misty Terrain."
       }
     ],
-    "description": "Trigger: The user uses Misty Terrain.\nEffect: Connection - Misty Terrain. The number of rounds Misty Terrain persists is increased by +2.",
+    "description": "Trigger: The user uses Misty Terrain.\nEffect: Connection - Misty Terrain. Increase the number of rounds Misty Terrain persists by 2.\nPassive: If a space within range possesses Misty Terrain, the user is affected by Misty Terrain.",
     "traits": [
+      "terrain",
       "connection",
-      "terrain"
+      "environ"
     ],
     "slug": null,
     "container": null

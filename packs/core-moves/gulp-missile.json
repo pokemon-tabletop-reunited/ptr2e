@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "gulp-missile",
-    "description": "Effect: When the user has an Engulfed creature equipped as a [Stash] item, they can launch the Engulfed creature as part of Gulp Missile. When the Engulfed creature is launched, this Attack's Power doubles, the Attack's Type changes to a Type possessed by the launched creature, and the launched creature takes the damage of the attack, resisted two steps. When launching a Engulfed creature, Gulp Missile has a 20% chance to reduce the target's DEF stage by -1 on hit, a 20% chance to reduce SPDEF stage by -1 on hit, and a 20% chance to inflict Paralysis 5 on hit.",
+    "description": "",
     "traits": [
       "missile"
     ],
@@ -14,7 +14,8 @@
         "name": "Gulp Missile",
         "type": "attack",
         "traits": [
-          "missile"
+          "missile",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "water"
         ],
-        "description": "When the user has an Engulfed creature equipped as a [Stash] item, they can launch the Engulfed creature as part of Gulp Missile. When the Engulfed creature is launched, this Attack's Power doubles, the Attack's Type changes to a Type possessed by the launched creature, and the launched creature takes the damage of the attack, resisted two steps. When launching a Engulfed creature, Gulp Missile has a 20% chance to reduce the target's DEF stage by -1 on hit, a 20% chance to reduce SPDEF stage by -1 on hit, and a 20% chance to inflict Paralysis 5 on hit.",
+        "description": "When the user has an @Affliction[engulfed] creature equipped as a [Stash] item, they can launch the @Affliction[engulfed] creature as part of Gulp Missile. When the @Affliction[engulfed] creature is launched, this Attack's Power doubles, the Attack's Type changes to a Type possessed by the launched creature, and the launched creature takes the damage of the attack, resisted two steps. When launching a @Affliction[engulfed] creature, Gulp Missile has a 20% chance to reduce the target's DEF stage by -1 on hit, a 20% chance to reduce SPDEF stage by -1 on hit, and a 20% chance to inflict @Affliction[paralysis] 5 on hit.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "B"
   },
   "_id": "YIcOap0TZ9OgW9wP",
   "effects": []

@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "hold-back",
-    "description": "Effect: The target cannot fall below 1 HP by damage from Hold Back.",
+    "description": "",
     "traits": [
       "basic",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "basic",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -24,8 +25,8 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 2,
+          "activation": "complex",
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null

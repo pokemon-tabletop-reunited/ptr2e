@@ -83,7 +83,7 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
             v.active = this.tabGroups[v.group] === v.id;
             v.cssClass = v.active ? "active" : "";
         }
-        return Object.fromEntries(Object.entries(this.tabs).filter(([k, _v]) => parts.includes(k)));
+        return Object.fromEntries(Object.entries(this.tabs).filter(([k]) => parts.includes(k)));
     }
 
     override async _prepareContext(options: HandlebarsRenderOptions) {
@@ -127,7 +127,7 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         }
     }
 
-    static override async #onSubmit(this: TraitsSettingsMenu, _event: SubmitEvent | Event, _form: HTMLFormElement, formData: FormDataExtended) {
+    static async #onSubmit(this: TraitsSettingsMenu, _event: SubmitEvent | Event, _form: HTMLFormElement, formData: FormDataExtended) {
         const traitsData = fu.expandObject<{trait?: Record<string, Partial<Trait>>}>(formData.object).trait ?? {};
 
         const traits = new Map<string, Trait>();
@@ -158,7 +158,7 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         game.settings.set("ptr2e", "traits", Array.from(traits.values()));
     }
 
-    static override async #createTrait(this: TraitsSettingsMenu, _event: Event) {
+    static async #createTrait(this: TraitsSettingsMenu) {
         const element = this.element.querySelector<HTMLElement>("article.traits.editable");
         if(!element) {
             return;
@@ -184,7 +184,7 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
         $(element).find(`.form-group[data-index="${count}"] .trait-delete`).on("click", TraitsSettingsMenu.#deleteTrait.bind(this));
     }
 
-    static override async #deleteTrait(this: TraitsSettingsMenu, event: Event) {
+    static async #deleteTrait(this: TraitsSettingsMenu, event: Event) {
         if(!event.currentTarget) {
             return;
         }

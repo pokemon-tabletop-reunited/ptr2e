@@ -30,7 +30,7 @@ export const DropCanvasData = {
                     const y = Math.floor(drop.y / canvas.scene.grid.size) * canvas.scene.grid.size
 
                     const tokenData = await actor.getTokenDocument({x,y});
-                    //@ts-expect-error
+                    //@ts-expect-error - This is valid token data
                     await canvas.scene.createEmbeddedDocuments("Token", [tokenData]);
                 }
             }

@@ -1,0 +1,72 @@
+{
+  "folder": "PTzDJPvM7Mjj7e8k",
+  "name": "Dirty Trick",
+  "type": "move",
+  "_id": "lR3Agvw0pZLHAAW4",
+  "img": "systems/ptr2e/img/svg/ground_icon.svg",
+  "system": {
+    "slug": null,
+    "traits": [
+      "dash",
+      "interrupt-1",
+      "contact"
+    ],
+    "actions": [
+      {
+        "name": "Dirty Trick",
+        "slug": "dirty-trick",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "dash",
+          "interrupt-1",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": 1,
+          "trigger": "You are targeted by a Physical- or Special-Category Attack."
+        },
+        "variant": null,
+        "types": [
+          "ground"
+        ],
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Trigger: You are targeted by a Physical- or Special-Category Attack.</p><p>Effect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with this Attack. If the target gains @Affliction[fainted] due to damage from this Attack, the triggering attack fails.</p>"
+      }
+    ],
+    "description": "",
+    "container": null,
+    "grade": "C"
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "CYLdyr5mPSDmNpTp": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.328",
+    "systemId": "ptr2e",
+    "systemVersion": "0.10.0-alpha.1.5.2",
+    "createdTime": 1720798421636,
+    "modifiedTime": 1720798571137,
+    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
+  }
+}

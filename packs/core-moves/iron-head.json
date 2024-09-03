@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "iron-head",
-    "description": "Effect: On hit, the target has a 30% chance of gaining Flinched 2.",
+    "description": "",
     "traits": [
       "dash",
       "push-2",
@@ -18,7 +18,8 @@
         "traits": [
           "dash",
           "push-2",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,7 +28,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +39,7 @@
         "types": [
           "steel"
         ],
-        "description": "Effect: On hit, the target has a 30% chance of gaining Flinched 2.",
+        "description": "Effect: On hit, the target has a 30% chance of gaining @Affliction[flinched] 2.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

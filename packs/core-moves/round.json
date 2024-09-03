@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "round",
-    "description": "Effect: If another creature uses Round, you may use Round as a Priority 1 action with 120 Power immediately after the triggering creature's activation.",
+    "description": "",
     "traits": [
       "sonic"
     ],
@@ -14,7 +14,8 @@
         "name": "Round",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: If another creature uses Round, you may use Round as a Priority 1 action with 120 Power immediately after the triggering creature's activation.",
+        "description": "Effect: After another creature resolves Round, you may use Round as an [Interrupt 1] action, with its Power doubled.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

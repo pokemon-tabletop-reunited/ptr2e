@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": "needle-arm",
-    "description": "Effect: On hit, the target has a 30% chance of gaining Flinched 5.",
+    "description": "",
     "traits": [
       "crushing",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "crushing",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,7 @@
         "types": [
           "grass"
         ],
-        "description": "Effect: On hit, the target has a 30% chance of gaining Flinched 5.",
+        "description": "Effect: On hit, the target has a 30% chance of gaining @Affliction[flinched] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "E"
   },
   "_id": "x4u1OPhedtM8DpwL",
   "effects": []

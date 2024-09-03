@@ -1,58 +1,42 @@
 {
-    "folder": "Et2u8UoXSe2a17oq",
-    "name": "Metamove: Empower",
-    "type": "perk",
-    "_id": "kWP9dtMYwCCChXIn",
-    "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
-    "system": {
-        "actions": [],
-        "slug": null,
-        "description": "<p>You may increase the power of your move. Gain 10 Power per additional 2PP spent on the move for the explicit purpose of Empower.</p>",
-        "traits": [],
-        "prerequisites": [],
-        "cost": 3,
-        "design": {
-            "arena": "physical",
-            "approach": "power",
-            "archetype": "Metamove"
-        },
-        "node": {
-            "i": 16,
-            "j": -3,
-            "connected": [
-                "thug",
-                "strong-style",
-                "fearsome-defense",
-                "weak-spot"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#000000",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "folder": "Et2u8UoXSe2a17oq",
+  "name": "Metamove: Empower",
+  "type": "perk",
+  "_id": "kWP9dtMYwCCChXIn",
+  "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+  "system": {
+    "actions": [],
+    "slug": "metamove-empower",
+    "description": "<p>Spend X PP, up to 10. The triggering Attack gains +5*X Power until it is resolved.</p>",
+    "traits": [],
+    "prerequisites": [],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Metamove"
     },
-    "effects": [],
-    "sort": 0,
-    "ownership": {
-        "default": 0,
-        "Kc3DOunCh3ClAeHS": 3
-    },
-    "flags": {},
-    "_stats": {
-        "compendiumSource": "Item.kWP9dtMYwCCChXIn",
-        "duplicateSource": null,
-        "coreVersion": "12.325",
-        "systemId": "ptr2e",
-        "systemVersion": "0.006",
-        "createdTime": 1717163074225,
-        "modifiedTime": 1717179751894,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+    "node": {
+      "i": 16,
+      "j": -3,
+      "connected": [
+        "thug",
+        "strong-style",
+        "fearsome-defense",
+        "weak-spot"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#000000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
     }
+  },
+  "effects": []
 }

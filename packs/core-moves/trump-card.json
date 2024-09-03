@@ -1,44 +1,45 @@
 {
-    "name": "Trump Card",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/normal_icon.svg",
-    "system": {
+  "name": "Trump Card",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "system": {
+    "slug": "trump-card",
+    "description": "",
+    "traits": [
+      "contact",
+      "danger-close"
+    ],
+    "actions": [
+      {
         "slug": "trump-card",
-        "description": "Effect: This attack's Power ranges based on how much PP the user has remaining, ranging from 40 to 200.\n<blockquote>Damage Formula: Power = min(40, (200 x (UserMaxPP-UserCurrentPP) / UserMaxPP + 40))</blockquote>",
+        "name": "Trump Card",
+        "type": "attack",
         "traits": [
-            "contact",
-            "danger-close"
+          "contact",
+          "danger-close",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "trump-card",
-                "name": "Trump Card",
-                "type": "attack",
-                "traits": [
-                    "contact",
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 8
-                },
-                "category": "special",
-                "power": 40,
-                "accuracy": 100,
-                "types": [
-                    "normal"
-                ],
-                "description": "Effect: Trump Card's Power increases by 5 for every 1 PP lower than the Max PP the user has, up to a maximum of 200 power.",
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 10
+        },
+        "category": "special",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "normal"
         ],
-        "grade": "A"
-    },
-    "_id": "Z8InvSwboNkkZu7d",
-    "effects": []
+        "description": "Effect: Trump Card's Power increases by 5 for every 1 PP lower than the Max PP the user has, up to a maximum of 200 power.",
+        "img": "/systems/ptr2e/img/svg/normal_icon.svg"
+      }
+    ],
+    "grade": "A"
+  },
+  "_id": "Z8InvSwboNkkZu7d",
+  "effects": []
 }

@@ -1,50 +1,51 @@
 {
-    "name": "Tachyon Cutter",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/steel_icon.svg",
-    "system": {
+  "name": "Tachyon Cutter",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/steel_icon.svg",
+  "system": {
+    "slug": "tachyon-cutter",
+    "traits": [
+      "paradox",
+      "2-strike",
+      "sharp",
+      "crit-1",
+      "danger-close",
+      "pp-updated"
+    ],
+    "actions": [
+      {
         "slug": "tachyon-cutter",
+        "name": "Tachyon Cutter",
+        "type": "attack",
         "traits": [
-            "legendary",
-            "2-strike",
-            "sharp",
-            "crit-1",
-            "contact",
-            "danger-close"
+          "paradox",
+          "2-strike",
+          "sharp",
+          "crit-1",
+          "danger-close",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "tachyon-cutter",
-                "name": "Tachyon Cutter",
-                "type": "attack",
-                "traits": [
-                    "legendary",
-                    "2-strike",
-                    "sharp",
-                    "crit-1",
-                    "contact",
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 5,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 7
-                },
-                "category": "special",
-                "power": 50,
-                "accuracy": 100,
-                "types": [
-                    "steel"
-                ],
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "special",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "steel"
         ],
-        "grade": "A"
-    },
-    "_id": "VqJRpzwJ7FALtUMB",
-    "effects": []
+        "img": "/systems/ptr2e/img/svg/steel_icon.svg"
+      }
+    ],
+    "grade": "C",
+    "description": ""
+  },
+  "_id": "VqJRpzwJ7FALtUMB",
+  "effects": []
 }

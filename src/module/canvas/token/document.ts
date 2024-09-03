@@ -5,6 +5,12 @@ import { ScenePTR2e } from "../scene.ts";
 import { CombatantPTR2e, CombatPTR2e } from "@combat";
 
 class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
+
+    /** This should be in Foundry core, but ... */
+    get scene(): this["parent"] {
+        return this.parent;
+    }
+
     get playersCanSeeName(): boolean {
         const anyoneCanSee: TokenDisplayMode[] = [CONST.TOKEN_DISPLAY_MODES.ALWAYS, CONST.TOKEN_DISPLAY_MODES.HOVER];
         const nameDisplayMode = this.displayName;

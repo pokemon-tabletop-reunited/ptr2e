@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "last-respects",
-    "description": "Effect: This Attack's Power increases by +50 for every allied creature that has Fainted this battle, up to a maximum power of 200.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "last-respects",
         "name": "Last Respects",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 1,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 9,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -30,7 +32,7 @@
         "types": [
           "ghost"
         ],
-        "description": "Effect: This Attack's Power increases by +50 for every allied creature that has Fainted this battle, up to a maximum power of 200.",
+        "description": "Effect: This Attack's Power increases by +50 for every allied creature that has @Affliction[fainted] this battle, up to a maximum power of 200.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

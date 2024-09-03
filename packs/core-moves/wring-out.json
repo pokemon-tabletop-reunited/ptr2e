@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "wring-out",
-    "description": "Effect: This attack's Power varies based on how healthy the target is, ranging from 1 to 120.\n<blockquote>Damage Formula: Power = max(1, 120 x TargetCurrentHP/TargetMaxHP)</blockquote>",
+    "description": "",
     "traits": [
       "contact"
     ],
@@ -14,7 +14,8 @@
         "name": "Wring Out",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "B"
   },
   "_id": "WrAGwJ8mgGwA4SHb",
   "effects": []

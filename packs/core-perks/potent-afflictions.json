@@ -1,60 +1,60 @@
 {
-    "folder": "Et2u8UoXSe2a17oq",
-    "name": "Potent Afflictions",
-    "type": "perk",
-    "_id": "ofBZWpThTejItqqB",
-    "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
-    "system": {
-        "actions": [
-            {
-                "name": "Potent Afflictions",
-                "slug": "potent-afflictions-action-1",
-                "description": "<p>Your Damage Over Time afflictions that you personally inflict deal +1 tick each time that they trigger.</p>",
-                "traits": [],
-                "type": "passive",
-                "range": {
-                    "target": "enemy",
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple"
-                },
-                "img": "systems/ptr2e/img/perk-icons/Arcana.svg"
-            }
-        ],
+  "folder": "Et2u8UoXSe2a17oq",
+  "name": "Potent Afflictions",
+  "type": "perk",
+  "_id": "ofBZWpThTejItqqB",
+  "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+  "system": {
+    "actions": [
+      {
+        "name": "Potent Afflictions",
         "slug": "potent-afflictions",
-        "description": "<p>Your Damage Over Time afflictions that you personally inflict deal +1 tick each time that they trigger.</p>",
+        "description": "<p>When a creature takes effect damage from an Affliction you inflicted, they take an additional Tick of damage.</p>",
         "traits": [],
-        "prerequisites": [
-            "Science (Chemistry) or Occult (Psychic) 60"
-        ],
-        "cost": 5,
-        "design": {
-            "arena": "mental",
-            "approach": "finesse",
-            "archetype": "Affliction"
+        "type": "passive",
+        "range": {
+          "target": "creature",
+          "unit": "m"
         },
-        "node": {
-            "i": -67,
-            "j": 3,
-            "connected": [
-                "acute-affliction",
-                "potent-venom",
-                "venomous",
-                "brittle-ice"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#808080",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+        "cost": {
+          "activation": "simple"
+        },
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg"
+      }
+    ],
+    "slug": "potent-afflictions",
+    "description": "<p>When a creature takes effect damage from an Affliction you inflicted, they take an additional Tick of damage.</p>",
+    "traits": [],
+    "prerequisites": [
+      "Science (Chemistry) or Occult (Psychic) 60"
+    ],
+    "cost": 5,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "Affliction"
     },
-    "effects": []
+    "node": {
+      "i": -67,
+      "j": 3,
+      "connected": [
+        "acute-affliction",
+        "potent-venom",
+        "venomous",
+        "brittle-ice"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#808080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "effects": []
 }

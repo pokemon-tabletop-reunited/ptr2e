@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/shadow_icon.svg",
   "system": {
     "slug": "shadow-shave",
-    "description": "Effect: The target cannot fall below 1 HP by damage from this Attack.",
+    "description": "",
     "traits": [
       "sharp",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "sharp",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -24,8 +25,8 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 1,
+          "activation": "complex",
+          "powerPoints": 0,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "E"
   },
   "_id": "7UijKUHK9fjJfmh7",
   "effects": []

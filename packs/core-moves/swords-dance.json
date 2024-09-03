@@ -18,32 +18,77 @@
         ],
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "normal"
         ],
         "description": "Effect: The user raises their ATK stages by +2 for 5 activations.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "/systems/ptr2e/img/svg/normal_icon.svg"
       }
     ],
-    "container": null,
     "grade": "C"
   },
   "_id": "DfeVcS4PIWcHqut8",
-  "effects": []
+  "effects": [
+    {
+      "name": "Swords Dance",
+      "img": "icons/svg/down.svg",
+      "type": "affliction",
+      "duration": {
+        "turns": 5,
+        "startTime": 1703098388,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "startRound": 1,
+        "startTurn": 0
+      },
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.stage",
+            "value": 2,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "formula": "",
+        "type": "damage",
+        "removeOnRecall": false,
+        "removeAfterCombat": true,
+        "traits": [],
+        "slug": null,
+        "stacks": 0,
+        "priority": 50
+      },
+      "description": "The afflicted creature’s default SPATK stages are reduced by 1.",
+      "statuses": [],
+      "_id": "m4TnGrODsVuLi0lM",
+      "disabled": false,
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": false,
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.327",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.1.5.2",
+        "createdTime": 1718630215519,
+        "modifiedTime": 1718630215519,
+        "lastModifiedBy": "y4EIjJlrc2eCclW7"
+      }
+    }
+  ]
 }

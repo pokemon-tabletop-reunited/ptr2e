@@ -1,4 +1,5 @@
 import { ActionPTR2e } from "@data";
+import { MigrationRecord } from "@module/data/mixins/has-migrations.ts";
 import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
 
 type ItemType =
@@ -55,7 +56,7 @@ interface ItemGrantSource {
 
 type ItemGrantDeleteAction = "cascade" | "detach" | "restrict";
 
-type ItemSystemSource = {
+interface ItemSystemSource {
     /**
      * A slug for the item, derived from its name.
      * @defaultValue `slugify(this.name)`
@@ -97,7 +98,9 @@ type ItemSystemSource = {
      * If the item is not in a container, this will be `null`.
      */
     container?: DocumentUUID | null;
-};
+
+    _migration?: MigrationRecord;
+}
 
 export type {
     BaseItemSourcePTR2e,

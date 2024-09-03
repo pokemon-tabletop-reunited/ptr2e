@@ -4,9 +4,10 @@
   "img": "/systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "fell-stinger",
-    "description": "Effect: If the target faints from damage by this attack, the user of this attack increases their ATK stage by +3 for 5 activations.",
+    "description": "",
     "traits": [
-      "contact"
+      "contact",
+      "horn"
     ],
     "actions": [
       {
@@ -14,7 +15,9 @@
         "name": "Fell Stinger",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated",
+          "horn"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +37,7 @@
         "types": [
           "bug"
         ],
-        "description": "Effect: If the target faints from damage by this attack, the user of this attack increases their ATK stage by +3 for 5 activations.",
+        "description": "Effect: If the target gains @Affliction[fainted] from damage by this attack, the user gains +3 ATK stages for 5 activations.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "E"
   },
   "_id": "b6n3iHXg9sRpCtEl",
   "effects": []

@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "fury-cutter",
-    "description": "Effect: For each consecutive time this attack hits after the first, Fury Cutter's Power doubles, up to a maximum base Power of 160. Fury Cutter's Power resets if the user is switched out, fainted, combat ends or an item is used on the user.",
+    "description": "",
     "traits": [
       "sharp",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "sharp",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -24,8 +25,8 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 5,
+          "activation": "complex",
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,7 @@
         "types": [
           "bug"
         ],
-        "description": "Effect: For each consecutive time this attack hits after the first, Fury Cutter's Power doubles, up to a maximum base Power of 160. Fury Cutter's Power resets if the user is switched out, fainted, combat ends or an item is used on the user.",
+        "description": "Effect: For each consecutive time this attack hits after the first, Fury Cutter's Power doubles, up to a maximum base Power of 160. Fury Cutter's Power resets if the user is switched out, @Affliction[fainted], combat ends or an item is used on the user.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

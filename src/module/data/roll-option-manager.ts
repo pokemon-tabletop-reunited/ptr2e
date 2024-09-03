@@ -1,5 +1,6 @@
 import { ActorPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
+import Trait from "./models/trait.ts";
 
 export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {
     #initialized = false;
@@ -42,14 +43,19 @@ export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {
         }
     }
 
+    public addTrait(trait: Maybe<Trait>) {
+        if (!trait) return;
+        this.addOption("trait", trait.slug);
+    }
+
     initialize() {
         if (this.#initialized) return this.options;
 
         if (!this.document.flags.ptr2e)
             this.document.flags.ptr2e = {
-                rollOptions: { all: {}, item: {}, effect: {}, self: {} },
+                rollOptions: { all: {}, item: {}, effect: {}, self: {}, trait: {}, clocks: {} },
             };
-        else this.document.flags.ptr2e.rollOptions = { all: {}, item: {}, effect: {}, self: {} };
+        else this.document.flags.ptr2e.rollOptions = { all: {}, item: {}, effect: {}, self: {}, trait: {}, clocks: {} };
 
         this.#initialized = true;
 
@@ -61,9 +67,12 @@ export const RollOptionDomains = {
     item: "item",
     effect: "effect",
     self: "self",
+    trait: "trait",
+    clocks: "clocks",
 };
 export type RollOptions = {
     [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default interface RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {}

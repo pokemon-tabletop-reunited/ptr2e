@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { sluggify } from "./helpers.ts";
 
 const categories = {
@@ -46,7 +49,18 @@ function getMarkdownPath({
     return path;
 }
 
-function traitsToTags(traits: string[]): string {
+function traitsToTags(traits: string[], actions: any[]): string {
+    if (!traits) {
+        if (actions?.length > 0) {
+            if (actions[0].traits?.length > 0) {
+                return actions[0].traits
+                    .map((t: string) => t.trim())
+                    .filter((s: string) => s)
+                    .join(", ");
+            }
+        }
+        return "";
+    }
     return traits
         .map((t) => t.trim())
         .filter((s) => s)
@@ -94,7 +108,7 @@ function abilityToMarkdown(ability: any): MarkdownResult {
         description: `An auto-generated markdown file for the ${ability.name} ability.`,
         published: "true",
         editor: "markdown",
-        tags: traitsToTags(ability.system.traits),
+        tags: traitsToTags(ability.system.traits, ability.system.actions),
     };
 
     const actionStrings = actionsToActionsStrings(ability.system.actions);
@@ -120,7 +134,7 @@ function consumableToMarkdown(consumable: any): MarkdownResult | null {
         description: `An auto-generated markdown file for the ${consumable.name} consumable item.`,
         published: "true",
         editor: "markdown",
-        tags: traitsToTags(consumable.system.traits),
+        tags: traitsToTags(consumable.system.traits, consumable.system.actions),
     };
 
     const actionStrings = actionsToActionsStrings(consumable.system.actions);
@@ -134,9 +148,9 @@ function consumableToMarkdown(consumable: any): MarkdownResult | null {
         metadata,
         markdown: `- **Grade**: ${consumable.system.grade}\n- **Rarity**: ${
             consumable.system.rarity
-        }\n${flingString}\n${craftingString ? `${craftingString}\n` : ""}\n### Description\n${
-            consumable.system.description
-        }${
+        }\n- **IP Cost**: ${consumable.system.cost}\n${flingString}\n${
+            craftingString ? `${craftingString}\n` : ""
+        }\n### Description\n${consumable.system.description}${
             actionStrings.length > 0
                 ? `\n\n## Consumable Actions\n${actionStrings.join("\n\n")}`
                 : ""
@@ -161,7 +175,7 @@ function equipmentToMarkdown(equipment: any): MarkdownResult {
         description: `An auto-generated markdown file for the ${equipment.name} equipment item.`,
         published: "true",
         editor: "markdown",
-        tags: traitsToTags(equipment.system.traits),
+        tags: traitsToTags(equipment.system.traits, equipment.system.actions),
     };
 
     const actionStrings = actionsToActionsStrings(equipment.system.actions);
@@ -198,7 +212,7 @@ function gearToMarkdown(gear: any): MarkdownResult {
         description: `An auto-generated markdown file for the ${gear.name} gear item.`,
         published: "true",
         editor: "markdown",
-        tags: traitsToTags(gear.system.traits),
+        tags: traitsToTags(gear.system.traits, gear.system.actions),
     };
 
     const actionStrings = actionsToActionsStrings(gear.system.actions);
@@ -230,7 +244,7 @@ function moveToMarkdown(move: any): MarkdownResult | null {
         description: `An auto-generated markdown file for the ${move.name} move.`,
         published: "true",
         editor: "markdown",
-        tags: traitsToTags(move.system.traits),
+        tags: traitsToTags(move.system.traits, move.system.actions),
     };
 
     const action = move.system.actions[0];
@@ -269,7 +283,7 @@ function moveToMarkdown(move: any): MarkdownResult | null {
             action.range.target
         }\n- **Range Increment**: ${action.range.distance}m\n- **Action Cost**: ${
             action.cost.activation
-        }\n- **PP Cost**: ${action.cost.powerPoints}\n\n### Effect\n${move.system.description}${
+        }\n- **PP Cost**: ${action.cost.powerPoints}\n\n### Effect\n${action.description}${
             actionStrings.length > 0 ? `\n## Other Move Actions\n${actionStrings.join("\n\n")}` : ""
         }`,
         path,
@@ -287,7 +301,7 @@ function perkToMarkdown(perk: any): MarkdownResult | null {
         description: `An auto-generated markdown file for the ${perk.name} perk.`,
         published: "true",
         editor: "markdown",
-        tags: traitsToTags(perk.system.traits),
+        tags: traitsToTags(perk.system.traits, perk.system.actions),
     };
 
     const actionStrings = actionsToActionsStrings(perk.system.actions);
@@ -326,7 +340,7 @@ function speciesToMarkdown(species: any): MarkdownResult | null {
         description: `An auto-generated markdown file for the ${species.name} species.`,
         published: "true",
         editor: "markdown",
-        tags: traitsToTags(species.system.traits),
+        tags: traitsToTags(species.system.traits, species.system.actions),
     };
 
     const baseStats = `\n### Base Stats\n${Object.entries(species.system.stats).reduce(
@@ -373,46 +387,67 @@ function speciesToMarkdown(species: any): MarkdownResult | null {
     const addEvolution = (evolution: any): string => {
         let result = "";
 
-        if(evolution.name) {
+        if (evolution.name) {
             result += `- [${formatSlug(evolution.name)}](/${getMarkdownPath({
                 type: "species",
                 category: getCategory(evolution.name),
                 title: evolution.name,
                 extension: false,
-                })})\n${evolution.methods?.length > 0 ? `${evolution.methods.map((method: any) => {
-                    switch(method.type) {
-                        case "level": return `\t- **Level**: ${method.level}\n`;
-                        case "item": return `\t- **Item**: ${method.item}${method.held ? ` (Held)` : ''}\n`;
-                        case "gender": return `\t- **Gender**: ${method.gender}\n`;
-                        case "move": return `\t- **Move**: ${method.move}\n`;
-                    }
-                    return "";
-                })}` : ''}`;
+            })})\n${
+                evolution.methods?.length > 0
+                    ? `${evolution.methods.map((method: any) => {
+                          switch (method.type) {
+                              case "level":
+                                  return `\t- **Level**: ${method.level}\n`;
+                              case "item":
+                                  return `\t- **Item**: ${method.item}${
+                                      method.held ? ` (Held)` : ""
+                                  }\n`;
+                              case "gender":
+                                  return `\t- **Gender**: ${method.gender}\n`;
+                              case "move":
+                                  return `\t- **Move**: ${method.move}\n`;
+                          }
+                          return "";
+                      })}`
+                    : ""
+            }`;
         }
 
-        for(const evo of evolution.evolutions ?? []) {
-            result += addEvolution(evo)
+        for (const evo of evolution.evolutions ?? []) {
+            result += addEvolution(evo);
         }
 
         return result;
-    }
+    };
 
-    const evolutions = "\n### Evolutions\n" + addEvolution(species.system.evolutions)
+    const evolutions = "\n### Evolutions\n" + addEvolution(species.system.evolutions);
 
-    const moves = "\n### Moves\n#### Level Up\n" 
-        + (species.system.moves.levelUp?.map((move: any) => `- [${formatSlug(move.name)}](/${getMarkdownPath({
-                type: "moves",
-                category: getCategory(move.name),
-                title: move.name,
-                extension: false,
-            })}) at level ${move.level}`).join("\n") ?? "")
-        + "\n\n#### Tutor\n"
-        + (species.system.moves.tutor?.map((move: any) => `- [${formatSlug(move.name)}](/${getMarkdownPath({
-                type: "moves",
-                category: getCategory(move.name),
-                title: move.name,
-                extension: false,
-            })})`).join("\n") ?? "")
+    const moves =
+        "\n### Moves\n#### Level Up\n" +
+        (species.system.moves.levelUp
+            ?.map(
+                (move: any) =>
+                    `- [${formatSlug(move.name)}](/${getMarkdownPath({
+                        type: "moves",
+                        category: getCategory(move.name),
+                        title: move.name,
+                        extension: false,
+                    })}) at level ${move.level}`
+            )
+            .join("\n") ?? "") +
+        "\n\n#### Tutor\n" +
+        (species.system.moves.tutor
+            ?.map(
+                (move: any) =>
+                    `- [${formatSlug(move.name)}](/${getMarkdownPath({
+                        type: "moves",
+                        category: getCategory(move.name),
+                        title: move.name,
+                        extension: false,
+                    })})`
+            )
+            .join("\n") ?? "");
 
     return {
         metadata,
@@ -433,7 +468,7 @@ function weaponToMarkdown(weapon: any): MarkdownResult {
         description: `An auto-generated markdown file for the ${weapon.name} weapon item.`,
         published: "true",
         editor: "markdown",
-        tags: traitsToTags(weapon.system.traits),
+        tags: traitsToTags(weapon.system.traits, weapon.system.actions),
     };
 
     const actionStrings = actionsToActionsStrings(weapon.system.actions);
@@ -454,19 +489,19 @@ function weaponToMarkdown(weapon: any): MarkdownResult {
     };
 }
 
-type MarkdownResult = {
+interface MarkdownResult {
     metadata: MetaData;
     markdown: string;
     path: string;
-};
+}
 
-type MetaData = {
+interface MetaData {
     title: string;
     description: string;
     published: "true";
     tags: string;
     editor: string;
-};
+}
 
 export {
     abilityToMarkdown,

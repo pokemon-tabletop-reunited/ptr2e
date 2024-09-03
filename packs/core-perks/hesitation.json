@@ -1,60 +1,60 @@
 {
-    "name": "Hesitation",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "Intimidate 40"
-        ],
-        "cost": 3,
-        "design": {
-            "arena": "social",
-            "approach": "power",
-            "archetype": "Combat"
-        },
-        "description": "You hit an opponent with a Move that has the [Social] trait. After spending the activation cost, the target hesitates and increases their AV by 20 until their next activation.",
-        "actions": [
-            {
-                "name": "Hesitation",
-                "slug": "hesitation",
-                "description": "You hit an opponent with a Move that has the [Social] trait. After spending the activation cost, the target hesitates and increases their AV by 20 until their next activation.",
-                "cost": {
-                    "activation": "free",
-                    "powerPoints": 4
-                },
-                "type": "passive",
-                "traits": [],
-                "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-                "range": {
-                    "target": "enemy",
-                    "unit": "m"
-                }
-            }
-        ],
-        "slug": "hesitation",
-        "traits": [],
-        "node": {
-            "i": 19,
-            "j": -13,
-            "connected": [
-                "you-belong-to-me",
-                "thug",
-                "fearsome-defense",
-                "unreasonable"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#8000ff",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
-                "tint": "#ffffff",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Hesitation",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Intimidate 40"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "Combat"
     },
-    "_id": "qslC7XqAQJZt0lxR",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": []
+    "description": "<p>You hit an opponent with a [Social] Action. After spending the activation cost, the target gains Flinched 3.</p>",
+    "actions": [
+      {
+        "name": "Hesitation",
+        "slug": "hesitation",
+        "description": "<p>You hit an opponent with a [Social] Action. After spending the activation cost, the target gains Flinched 3.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "hesitation",
+    "traits": [],
+    "node": {
+      "i": 19,
+      "j": -13,
+      "connected": [
+        "you-belong-to-me",
+        "thug",
+        "fearsome-defense",
+        "unreasonable"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#8000ff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "qslC7XqAQJZt0lxR",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": []
 }

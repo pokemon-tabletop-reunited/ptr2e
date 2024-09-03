@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "snore",
-    "description": "Effect: Snore can only be used while affected by the Drowsy condition. On hit, all valid targets have a 30% chance of gaining Flinched 5.",
+    "description": "",
     "traits": [
       "sonic"
     ],
@@ -14,7 +14,8 @@
         "name": "Snore",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -22,8 +23,8 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 3,
+          "activation": "complex",
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: Snore can only be used while affected by the Drowsy condition. On hit, all valid targets have a 30% chance of gaining Flinched 5.",
+        "description": "Effect: Snore can only be used while affected by the @Affliction[drowsy] condition. On hit, all valid targets have a 30% chance of gaining @Affliction[flinched] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "_id": "4XGhnE4bWGYPKRxO",
   "effects": []

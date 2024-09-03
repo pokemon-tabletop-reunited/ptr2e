@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "engulf",
-    "description": "Effect: All [Hazard] and [Shield] attack effects in Range are cleared, as are the Leech and Bound conditions.",
+    "description": "",
     "traits": [
       "move-locked",
       "exhaust"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "move-locked",
-          "exhaust"
+          "exhaust",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,7 @@
         "types": [
           "ghost"
         ],
-        "description": "Effect: All [Hazard] and [Shield] attack effects in Range are cleared, as are the Leech and Bound conditions.",
+        "description": "Effect: All [Hazard] and [Shield] attack effects in Range are cleared, as are the @Affliction[leech] and @Affliction[bound] conditions.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "C"
   },
   "_id": "v7DeY7cPLe5xLE9Y",
   "effects": []

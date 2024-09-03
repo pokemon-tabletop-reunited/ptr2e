@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "power-trip",
-    "description": "Effect: This attack's Power increases based on the totals of the user's Stat Stages, increasing if a Stat's total stages are positive.\n<blockquote>Damage Formula: Power = 20 + 20 x (max(0,ATKStages)+max(0,DEFStages)+max(0,SPATKStages)+max(0,SPDEFStages)+max(0,SPDStages)+max(0,ACCStages)+max(0,EVAStages))</blockquote>",
+    "description": "",
     "traits": [
       "dash",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "dash",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null

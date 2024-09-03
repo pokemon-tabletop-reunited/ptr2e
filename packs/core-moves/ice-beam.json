@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": "ice-beam",
-    "description": "Effect: On hit, the target has a 10% chance of gaining Frozen 5.",
+    "description": "",
     "traits": [
       "ray"
     ],
@@ -14,7 +14,8 @@
         "name": "Ice Beam",
         "type": "attack",
         "traits": [
-          "ray"
+          "ray",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "ice"
         ],
-        "description": "Effect: On hit, the target has a 10% chance of gaining Frozen 5.",
+        "description": "Effect: On hit, the target has a 10% chance of gaining @Affliction[frozen] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "vyh3c4td7WZqIt5O",
   "effects": []

@@ -8,9 +8,7 @@ import { SlugField } from "../fields/slug-field.ts";
 class ActionPTR2e extends foundry.abstract.DataModel {
     static TYPE: ActionType = "generic" as const;
 
-    static get baseImg(): ImageFilePath {
-        return "icons/svg/explosion.svg";
-    }
+    static readonly baseImg = "icons/svg/explosion.svg";
 
     static override defineSchema(): ActionSchema {
         const fields = foundry.data.fields;
@@ -116,6 +114,13 @@ class ActionPTR2e extends foundry.abstract.DataModel {
         return this.item.actions.get(this.variant) ?? null;
     }
 
+    get css(): { style: string; class: string;} {
+        return {
+            style: "",
+            class: ""
+        };
+    }
+
     prepareDerivedData() {
         this.traits = this._source.traits.reduce((acc: Collection<Trait>, traitSlug: string) => {
             const trait = game.ptr.data.traits.get(traitSlug);
@@ -156,26 +161,26 @@ class ActionPTR2e extends foundry.abstract.DataModel {
 
     prepareUpdate(data: DeepPartial<SourceFromSchema<ActionSchema>>) {
         const currentActions = this.item.system.toObject().actions;
-        let actionIndex = currentActions.findIndex((a) => a.slug === this.slug);
+        const actionIndex = currentActions.findIndex((a) => a.slug === this.slug);
         fu.mergeObject(currentActions[actionIndex], data);
         return currentActions;
     }
 
     toChat() {
         return this.item.toChat();
+        
     }
 }
 interface ActionPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<ActionSchema> {
     _source: SourceFromSchema<ActionSchema>;
-    traits: Collection<Trait>;
 }
 
-export type ActionSchema = {
-    slug: SlugField<true, false, false>
+export interface ActionSchema extends foundry.data.fields.DataSchema {
+    slug: SlugField<string, string, true, false, false>
     name: foundry.data.fields.StringField<string, string, true, false, true>;
     description: foundry.data.fields.HTMLField<string, string, false, true>;
     img: foundry.data.fields.FilePathField<ImageFilePath, string, true, false, true>;
-    traits: CollectionField<foundry.data.fields.StringField>;
+    traits: CollectionField<foundry.data.fields.StringField, string[], Collection<Trait>>;
     type: foundry.data.fields.StringField<string, ActionType, true, false, true>;
     range: foundry.data.fields.EmbeddedDataField<RangePTR2e, false, true>;
     cost: foundry.data.fields.SchemaField<{
@@ -197,7 +202,7 @@ export type ActionSchema = {
         delay: Delay;
         priority: Priority;  
     }>;
-    variant: SlugField<false>;
+    variant: SlugField<string, string, false>;
 }
 
 export default ActionPTR2e;

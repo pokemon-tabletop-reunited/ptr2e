@@ -4,10 +4,10 @@
   "img": "/systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "thunderclap",
-    "description": "Trigger: You are targeted by a Physical- or Special-Category Attack. \nEffect: The user can freely move up to half of the Movement Score of their choice towards the target and then attack with Thunderclap. If the target Faints due to damage from this move, the triggering attack fails.",
+    "description": "<p>Trigger: The user is targeted by a Physical- or Special-Category Attack.</p><p>Effect: The user can spend 2 extra PP to declare this attack at [Interrupt 2]. The user then may freely move up to half of the Movement Score of their choice towards the target and then attack with this attack. If the target gains @Affliction[fainted] due to damage from this move, the triggering attack fails.</p>",
     "traits": [
-      "legendary",
-      "smite",
+      "paradox",
+      "priority-2",
       "interrupt-2",
       "contact"
     ],
@@ -17,10 +17,9 @@
         "name": "Thunderclap",
         "type": "attack",
         "traits": [
-          "legendary",
-          "smite",
-          "interrupt-2",
-          "contact"
+          "paradox",
+          "priority-2",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -29,10 +28,9 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 3,
           "delay": null,
-          "priority": null,
-          "trigger": "You are targeted by a Physical- or Special-Category Attack."
+          "priority": 2
         },
         "category": "special",
         "power": 70,
@@ -40,7 +38,40 @@
         "types": [
           "electric"
         ],
-        "description": "Trigger: You are targeted by a Physical- or Special-Category Attack. \nEffect: The user can freely move up to half of the Movement Score of their choice towards the target and then attack with Thunderclap. If the target Faints due to damage from this move, the triggering attack fails.",
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "thunderclap-reaction",
+        "name": "Thunderclap (Reaction)",
+        "type": "attack",
+        "traits": [
+          "paradox",
+          "interrupt-2",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user is targeted by a Physical- or Special-Category Attack."
+        },
+        "category": "special",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Trigger: The user is targeted by a Physical- or Special-Category Attack.</p><p>Effect: The user can freely move up to half of the Movement Score of their choice towards the target and then attacks with this attack. If the target gains @Affliction[fainted] due to damage from this move, the triggering attack fails.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -48,7 +79,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "D"
   },
   "_id": "FDjbkSUzYBcM1pax",
   "effects": []

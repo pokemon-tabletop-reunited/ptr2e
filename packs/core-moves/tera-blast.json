@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "tera-blast",
-    "description": "Effect: Tera Blast uses the higher of the user's ATK or SPATK stat for damage calculation. If the user is currently Terastalized, Tera Blast's damage type changes to match the user's Tera Type.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "tera-blast",
         "name": "Tera Blast",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "wide-line",
           "distance": 5,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -30,14 +32,15 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: Tera Blast uses the higher of the user's ATK or SPATK stat for damage calculation. If the user is currently Terastalized, Tera Blast's damage type changes to match the user's Tera Type.",
+        "description": "Effect: Tera Blast uses the higher of the user's ATK or SPATK stat for damage calculation. If the user is currently Terastallized, Tera Blast's damage type changes to match the user's Tera Type.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "B"
   },
   "_id": "13ujOwTEjKRN9bpE",
   "effects": []

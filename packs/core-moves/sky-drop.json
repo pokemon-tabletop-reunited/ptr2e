@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/flying_icon.svg",
   "system": {
     "slug": "sky-drop",
-    "description": "Effect: Set-Up: The user Grapples the target and freely moves themself and the target up to the user's Overland or Flight Score into the air, and ends their activation. While in this state, both have +4 EVA stages.\nResolution: On the user's next activation, the user freely moves up to their Overland or Flying Score and slams the target to the ground, inflicting Grounded 5 and resolving this attack's damage. Creatures WC 12 or higher are unaffected by Sky Drop.",
+    "description": "",
     "traits": [
       "set-up",
       "defensive",
@@ -22,7 +22,8 @@
           "defensive",
           "trap",
           "crushing",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -31,7 +32,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -42,7 +43,7 @@
         "types": [
           "flying"
         ],
-        "description": "Effect: Set-Up: The user Grapples the target and freely moves themself and the target up to the user's Overland or Flight Score into the air, and ends their activation. While in this state, both have +4 EVA stages.\nResolution: On the user's next activation, the user freely moves up to their Overland or Flying Score and slams the target to the ground, inflicting Grounded 5 and resolving this attack's damage. Creatures WC 12 or higher are unaffected by Sky Drop.",
+        "description": "Effect: Set-Up: The user @Affliction[grapple]s the target and freely moves themself and the target up to the user's Overland or Flight Score into the air, and ends their activation. While in this state, both have +4 EVA stages.\nResolution: On the user's next activation, the user freely Moves up to their Overland or Flying Score and slams the target to the ground, inflicting @Affliction[grounded] 5 and resolving this attack's damage. Creatures WC 12 or higher are unaffected by Sky Drop.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -50,7 +51,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "XaLPWItIKMR0jrc3",
   "effects": []

@@ -10,17 +10,14 @@
         "slug": "keen-eye",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: When the user gains a positive ACC stage effect, the duration is increased by 1 activation."
+        "description": "Effect: When the user gains a positive ACC stage effect, the duration is increased by 1 activation.",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [],
@@ -28,38 +25,77 @@
         "slug": "keen-eye",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "range": null,
-        "description": "Passive: The user is immune to negative ACC stage effects, and the user has +1 default ACC stage."
+        "description": "Passive: The user is immune to negative ACC stage effects, and the user has +1 default ACC stage.",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Effect: When the user gains a positive ACC stage effect, the duration is increased by 1 activation. Passive:  The user is immune to negative ACC stage effects, and the user has +1 default ACC stage.",
-    "traits": [],
-    "slug": null,
-    "container": null
+    "traits": [
+      "partial-automation"
+    ],
+    "slug": "keen-eye",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "gKpQqu4fBVzUszbc",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!gKpQqu4fBVzUszbc"
+  "effects": [
+    {
+      "name": "Keen Eye (Partial)",
+      "type": "affliction",
+      "_id": "akP3gM39sFxAlRMQ",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.accuracy.stage",
+            "value": 1,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-effects.Item.iv1l5qSwT9ykajV0.ActiveEffect.meYfTfOa9PesJCOa",
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1722029702249,
+        "modifiedTime": 1722029715014,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

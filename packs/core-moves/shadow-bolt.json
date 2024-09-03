@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/shadow_icon.svg",
   "system": {
     "slug": "shadow-bolt",
-    "description": "Effect: On hit, the target has a 10% chance of gaining Paralysis 5.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "shadow-bolt",
         "name": "Shadow Bolt",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 10,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -30,7 +32,7 @@
         "types": [
           "shadow"
         ],
-        "description": "Effect: On hit, the target has a 10% chance of gaining Paralysis 5.",
+        "description": "Effect: On hit, the target has a 10% chance of gaining @Affliction[paralysis] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "9QeNvziOB80xdTut",
   "effects": []

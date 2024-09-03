@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ItemPTR2e } from "@item";
 import PerkWeb from "./perk-web.ts";
 import { PTRNode } from "./perks-store.ts";
@@ -516,7 +517,7 @@ class PerkNode extends PIXI.Container {
     }
 }
 
-type PerkNodeConfig = {
+interface PerkNodeConfig {
     alpha: number;
     backgroundColor: number;
     borderColor: number;
@@ -524,12 +525,12 @@ type PerkNodeConfig = {
     texture: FilePath;
     tint: number;
     scale: number;
-};
+}
 
-type PerkEditState = {
+interface PerkEditState {
     position: 1;
     connection: 2;
-};
+}
 
 const PerkState = {
     unavailable: 0,

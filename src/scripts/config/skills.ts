@@ -13,7 +13,7 @@ export function getAllSkillSlugs(): string[] {
  */
 export function getInitialSkillList(): SkillPTR2e['_source'][] {
     return Array.from(getAllSkillSlugs()).map((skill) => {
-        const baseValue = BaseSkills[skill];
+        const baseValue = game.ptr.data.skills.get(skill) ?? BaseSkills[skill];
         return partialSkillToSkill(baseValue ? baseValue : { slug: skill });
     });
 }
@@ -25,8 +25,6 @@ export function partialSkillToSkill(partialSkill: Partial<SkillPTR2e['_source']>
     if (!partialSkill.slug) throw new Error("Partial Skill is missing slug");
     return fu.mergeObject(initial, partialSkill) as SkillPTR2e['_source'];
 }
-// @ts-ignore
-globalThis.partialSkillToSkill = partialSkillToSkill;
 
 const BaseSkills = {
     luck: {
@@ -41,6 +39,7 @@ const BaseSkills = {
     accounting: { slug: "accounting" },
     acrobatics: { slug: "acrobatics" },
     appraise: { slug: "appraise" },
+    archaeology: { slug: "archaeology" },
     painting: { slug: "painting", group: "arts" },
     sculpting: { slug: "sculpting", group: "arts" },
     acting: { slug: "acting", group: "arts" },

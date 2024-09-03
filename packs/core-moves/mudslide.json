@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "mudslide",
-    "description": "Effect: On hit, all valid targets have a 20% chance to lose -1 ACC stage for 5 activations.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "mudslide",
         "name": "Mudslide",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "wide-line",
           "distance": 5,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "tGIh7MjDiedBx6kH",
   "effects": []

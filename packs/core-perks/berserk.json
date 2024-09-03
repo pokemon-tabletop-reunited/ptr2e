@@ -1,125 +1,125 @@
 {
-    "name": "Berserk",
-    "type": "perk",
-    "system": {
-        "prerequisites": [
-            "None"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "physical",
-            "approach": "power",
-            "archetype": "Combat"
-        },
-        "description": "You gain +1 Attack Stage and +1 Special Attack Stage while Enraged. The duration of these stage increases is tied to the duration of your Enraged condition.",
-        "actions": [
-            {
-                "name": "Berserk",
-                "slug": "berserk",
-                "description": "You gain +1 Attack Stage and +1 Special Attack Stage while Enraged. The duration of these stage increases is tied to the duration of your Enraged condition.",
-                "cost": {
-                    "activation": "free"
-                },
-                "type": "passive",
-                "traits": [],
-                "img": "icons/svg/explosion.svg",
-                "range": {
-                    "target": "enemy",
-                    "unit": "m"
-                }
-            }
-        ],
-        "slug": "berserk",
-        "traits": [],
-        "node": {
-            "i": 58,
-            "j": -73,
-            "connected": [
-                "ultraviolet",
-                "frenzied-assault",
-                "backpacker-1",
-                "berserker",
-                "hear-no-bell"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#8000ff",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-                "tint": null,
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+  "name": "Berserk",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Combat"
     },
-    "_id": "ZPro1HlauzutizPK",
-    "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-    "effects": [
-        {
-            "name": "Berserk",
-            "type": "passive",
-            "_id": "ztQj8SwTmtq4JuDu",
-            "img": "/systems/ptr2e/img/icons/effect_icon.webp",
-            "system": {
-                "changes": [
-                    {
-                        "type": "basic",
-                        "key": "system.attributes.atk.stage",
-                        "value": 1,
-                        "predicate": [
-                            "effect:affliction:enraged"
-                        ],
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false
-                    },
-                    {
-                        "type": "basic",
-                        "key": "system.attributes.spa.stage",
-                        "value": 1,
-                        "predicate": [
-                            "effect:affliction:enraged"
-                        ],
-                        "mode": 2,
-                        "priority": null,
-                        "ignored": false
-                    }
-                ],
-                "slug": null,
-                "traits": [],
-                "removeAfterCombat": true,
-                "removeOnRecall": false,
-                "stacks": 0
-            },
-            "disabled": false,
-            "duration": {
-                "startTime": null,
-                "seconds": null,
-                "combat": null,
-                "rounds": null,
-                "turns": null,
-                "startRound": null,
-                "startTurn": null
-            },
-            "description": "<p>You gain +1 Attack Stage and +1 Special Attack Stage while Enraged. The duration of these stage increases is tied to the duration of your Enraged condition.</p>",
-            "origin": null,
-            "tint": "#ffffff",
-            "transfer": true,
-            "statuses": [],
-            "sort": 0,
-            "flags": {},
-            "_stats": {
-                "compendiumSource": null,
-                "duplicateSource": null,
-                "coreVersion": "12.327",
-                "systemId": "ptr2e",
-                "systemVersion": "0.10.0-alpha.1.0.2",
-                "createdTime": 1717881461029,
-                "modifiedTime": 1717881565680,
-                "lastModifiedBy": "01onCaJSVMVOgMDI"
-            }
+    "description": "<p>While @Affliction[enraged], you have +1 default ATK and SPATK stage.</p>",
+    "actions": [
+      {
+        "name": "Berserk",
+        "slug": "berserk",
+        "description": "<p>While @Affliction[enraged], you have +1 default ATK and SPATK stage.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "self",
+          "unit": "m"
         }
-    ]
+      }
+    ],
+    "slug": "berserk",
+    "traits": [],
+    "node": {
+      "i": 58,
+      "j": -73,
+      "connected": [
+        "ultraviolet",
+        "frenzied-assault",
+        "backpacker-1",
+        "berserker",
+        "hear-no-bell"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#8000ff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "ZPro1HlauzutizPK",
+  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [
+    {
+      "name": "Berserk",
+      "type": "passive",
+      "_id": "X0pgAzlk6JSzm5vf",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.stage",
+            "value": 1,
+            "predicate": [
+              "effect:affliction:enraged"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spa.stage",
+            "value": 1,
+            "predicate": [
+              "effect:affliction:enraged"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>You gain +1 Attack Stage and +1 Special Attack Stage while @Affliction[enraged]. The duration of these stage increases is tied to the duration of your @Affliction[enraged] condition.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Actor.lTDYTENRcyqC9loP.Item.fBZuao5DcF2ei4Sn.ActiveEffect.ztQj8SwTmtq4JuDu",
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.1.5.2",
+        "createdTime": 1721641583642,
+        "modifiedTime": 1721641583642,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

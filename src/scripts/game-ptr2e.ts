@@ -9,10 +9,15 @@ import TokenPanel from "@module/apps/token-panel.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import PerkWeb from "@module/canvas/perk-tree/perk-web.ts";
 import {TextEnricher} from "./ui/text-enrichers.ts";
+import { remigrate } from "@system/remigrate.ts";
+import { DataStructure } from "@module/apps/data-inspector/data-handler.ts";
 
 const GamePTR = {
     onInit() {
         const initData = {
+            api: {
+              DataStructure
+            },
             web: new PerkWeb(),
             util: {
                 sluggify,
@@ -25,6 +30,9 @@ const GamePTR = {
                 skills: SkillsCollection.create(),
                 artMap: ArtMapCollection.create(),
                 afflictions: new Map(CONFIG.statusEffects.map(se => [se.id, se]))
+            },
+            system: {
+                remigrate: remigrate
             },
             perks: new PerkManager(),
             tooltips: new TooltipsPTR2e(),

@@ -4,11 +4,12 @@
   "img": "/systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "twineedle",
-    "description": "Effect: On hit, the target has a 20% of gaining Poison 5.",
+    "description": "",
     "traits": [
       "2-strike",
       "sharp",
-      "horn"
+      "horn",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -18,7 +19,8 @@
         "traits": [
           "2-strike",
           "sharp",
-          "horn"
+          "horn",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,7 +29,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
         "types": [
           "bug"
         ],
-        "description": "Effect: On hit, the target has a 20% of gaining Poison 5.",
+        "description": "Effect: On hit, the target has a 20% chance of gaining @Affliction[poison] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -46,7 +48,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "E"
   },
   "_id": "rLMUMSSHkXGIqGab",
   "effects": []

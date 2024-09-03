@@ -72,6 +72,18 @@
         "description": "This creature possesses twelve heads. Only used for the Multi-headed Ability.\nSUBJECT TO CHANGE"
     },
     {
+        "slug": "trainer",
+        "label": "Trainer",
+        "related": [],
+        "description": "A Pokémon Trainer is a person who catches, trains, cares for, and battles with Pokémon. Generally, Trainers possess multiple Pokémon, and interact with their world in unique, significant ways. In most settings, Trainers have their Pokémon with them at all times, with some manner to capture and store them, keeping them out of harm's way and keeping a small stable of Pokémon available at any given time, know as their Team."
+    },
+    {
+        "slug": "expedition-leader",
+        "label": "Expedition Leader",
+        "related": [],
+        "description": "Expedition Leaders, usually Aces, command an Exploration Team. Depending on the campaign setup, either every player is an Expedition Leader, with their own Teams, or the rest form the members of one player's Team. In a Mystery Dungeon setting, Expedition Leaders have fairly wide authority and varied specializations and goals from one another, pursing their own goals either with their own Team, or as part of (or possibly leading outright) an Explorer or Rescue Guild."
+    },
+    {
         "slug": "ace",
         "label": "Ace",
         "related": [],
@@ -822,7 +834,7 @@
         "slug": "mega-stone-conversion",
         "label": "Mega Stone Conversion",
         "related": [],
-        "description": "This creature may pour their dense life energy into evolution stones, embuing them with the power of Mega Evolution. As a Crafting Project, the user (Challenging, Occult: Legendary) may craft a Mega Stone, matching a <Type> the [Evolution] item possesses and <Species> of a Mega Evolution-elligible creature nearby it. Otherwise, the creature may choose to craft a Mega Stone, the <Species> selected from all elligible creatures of any <Type> the item possesses.\nSUBJECT TO CHANGE"
+        "description": "This creature may pour their dense life energy into evolution stones, embuing them with the power of Mega Evolution. As a Crafting Project, the user (Challenging, Occult: Legendary) may craft a Mega Stone, matching a %lt;Type&gt the [Evolution] item possesses and <Species> of a Mega Evolution-elligible creature nearby it. Otherwise, the creature may choose to craft a Mega Stone, the <Species> selected from all elligible creatures of any %lt;Type&gt the item possesses.\nSUBJECT TO CHANGE"
     },
     {
         "slug": "memory-eraser",
@@ -905,7 +917,7 @@
         "slug": "original-one",
         "label": "Original One",
         "related": [],
-        "description": "This creature is capable of incredibly powerful feats such as bringing back things that it once destroyed, making certain things vanish into thin air, halting time, splitting itself in two, and overturning the very laws of nature. The user may use its Science (All) skill in place of any other Skill."
+        "description": "This creature is capable of incredibly powerful feats such as bringing back things that it once destroyed, making certain things vanish into thin air, halting time, splitting itself in two, and overturning the very laws of nature. The user may use its Handiwork skill in place of any other Skill."
     },
     {
         "slug": "pack-leader",
@@ -1366,7 +1378,7 @@
         "slug": "weathervane",
         "label": "Weathervane",
         "related": [],
-        "description": "The creature changes Forme depending on the most recent Weather, changing <Type> and granting the appropriate <Adaptable Type> Trait.\nSUBJECT TO CHANGE"
+        "description": "The creature changes Forme depending on the most recent Weather, changing %lt;Type&gt and granting the appropriate <Adaptable Type> Trait.\nSUBJECT TO CHANGE"
     },
     {
         "slug": "wielder",
@@ -1403,7 +1415,7 @@
         "slug": "z-crystal-creation",
         "label": "Z Crystal Creation",
         "related": [],
-        "description": "The creature's body can shed prismatic shards that are capable of drawing, storing, and unleashing massive quanities of energy. As a Crafting Project, the user (Challenging, Occult: Legendary) or the creature that's responsible for them (Hard Husbandry) can craft a Z-Crystal or Z-Power-Crystal, matching the <Type> of a creature nearby it or with the <Type> and <Species> of a creature nearby it in the case of a Z-Power-Crystal. Otherwise, a variant of either variety of Crystal is rolled and generated randomly."
+        "description": "The creature's body can shed prismatic shards that are capable of drawing, storing, and unleashing massive quanities of energy. As a Crafting Project, the user (Challenging, Occult: Legendary) or the creature that's responsible for them (Hard Husbandry) can craft a Z-Crystal or Z-Power-Crystal, matching the %lt;Type&gt of a creature nearby it or with the %lt;Type&gt and <Species> of a creature nearby it in the case of a Z-Power-Crystal. Otherwise, a variant of either variety of Crystal is rolled and generated randomly."
     },
     {
         "slug": "tera-power",
@@ -1559,121 +1571,121 @@
         "slug": "x-strike",
         "label": "X-Strike",
         "related": [],
-        "description": "Denotes if an action hits multiple times. Attacks with X<5 rolls the attack (Accuracy and Damage) X times against up to X targets of the user's choice, with on-hit and resolution effects proccing each time. Attacks with X>5 rolls the Accuracy check against one target, then multiplies the Base Power of the attack by 1+d(X-1), damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Denotes if an action hits multiple times. Attacks with X<5 roll the attack (Accuracy and Damage) X times, each against a valid target of the user's choice. Attacks with X>5 roll a single Accuracy and Damage roll against one target, emulating a number of quick successive hits equal to 1+d(X-1). The result of the damage roll is multiplied by this result. On-hit effects are triggered on each hit made, and while resolution effects only occur once at the very end."
     },
     {
         "slug": "2-strike",
         "label": "2-Strike",
         "related": [],
-        "description": "Rolls the attack (Accuracy and Damage) 2 times against up to 2 targets of the user's choice, with on-hit and resolution effects proccing each time."
+        "description": "Rolls the attack (Accuracy and Damage) 2 times against valid target(s), with on-hit effects triggering on each hit, and resolution effects activating after the final rolled attack."
     },
     {
         "slug": "3-strike",
         "label": "3-Strike",
         "related": [],
-        "description": "Rolls the attack (Accuracy and Damage) 3 times against up to 3 targets of the user's choice, with on-hit and resolution effects proccing each time."
+        "description": "Rolls the attack (Accuracy and Damage) 3 times against valid target(s), with on-hit effects triggering on each hit, and resolution effects activating after the final rolled attack."
     },
     {
         "slug": "4-strike",
         "label": "4-Strike",
         "related": [],
-        "description": "Rolls the attack (Accuracy and Damage) 4 times against up to 4 targets of the user's choice, with on-hit and resolution effects proccing each time."
+        "description": "Rolls the attack (Accuracy and Damage) 4 times against valid target(s), with on-hit effects triggering on each hit, and resolution effects activating after the final rolled attack."
     },
     {
         "slug": "5-strike",
         "label": "5-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d4. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d4times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "6-strike",
         "label": "6-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d5. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d5times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "7-strike",
         "label": "7-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d6. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d6times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "8-strike",
         "label": "8-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d7. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d7times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "9-strike",
         "label": "9-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d8. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d8times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "10-strike",
         "label": "10-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d9. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d9times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "11-strike",
         "label": "11-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d10. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d10times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "12-strike",
         "label": "12-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d11. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d11times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "13-strike",
         "label": "13-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d12. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d12times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "14-strike",
         "label": "14-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d13. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d13times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "15-strike",
         "label": "15-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d14. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d14times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "16-strike",
         "label": "16-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d15. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d15times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "17-strike",
         "label": "17-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d16. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d16times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "18-strike",
         "label": "18-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d18. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d18times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "19-strike",
         "label": "19-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d18. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d18times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "20-strike",
         "label": "20-Strike",
         "related": [],
-        "description": "Rolls the attack's Accuracy check against one target, then multiplies the Base Power of the attack by 1+d19. damaging the target with that changed Power, and inflicting on-hit and resolution effects once."
+        "description": "Rolls the attack's Accuracy check against one target, effectively hitting the target 1+d19times. The attack's Damage Roll is multipled by the rolled number of hits, triggering on-hit effects per hit and resolution effects only once."
     },
     {
         "slug": "adaptable",
@@ -1963,7 +1975,7 @@
         "slug": "hazard",
         "label": "Hazard",
         "related": [],
-        "description": "Denotes if an attack/ability/effect creates or interacts with Hazards. Hazards are usually static objects occupying a single space on the ground or another surface that cause detrimental effects when a creature passes through that space. Hazards last the duration of a combat unless destroyed prematurely or otherwise specified in their source's effect."
+        "description": "Denotes if an attack/ability/effect creates or interacts with Hazards. Hazards are usually static objects occupying a single space on the ground or another surface that cause detrimental effects when a creature passes through that space. Hazards last the duration of a combat unless destroyed prematurely or otherwise specified in their source's effect.\nOne such effect that can remove Hazards prematurely is the @UUID[Compendium.ptr2e.core-moves.Item.ypqvBMddHC2zIDib]{Sweep Action}"
     },
     {
         "slug": "healing",
@@ -2410,6 +2422,12 @@
         "description": "On hit, the user takes damage equal to 1/2 of the amount the attack deals to a creature."
     },
     {
+        "slug": "recoil-1",
+        "label": "Recoil 1",
+        "related": [],
+        "description": "On hit, the user takes damage equal to the full amount the attack deals to a creature."
+    },
+    {
         "slug": "room",
         "label": "Room",
         "related": [],
@@ -2444,12 +2462,6 @@
         "label": "Sky",
         "related": [],
         "description": "The attack's area of effect extends vertically, up to the nearest ceiling and down to the nearest surface (max 20m each direction)"
-    },
-    {
-        "slug": "smite",
-        "label": "Smite",
-        "related": [],
-        "description": "When this attack misses a creature, it deals damage to the target as if it was resisted one step further, and doesn't activate any of its on hit effects."
     },
     {
         "slug": "social",
@@ -2491,7 +2503,7 @@
         "slug": "trap",
         "label": "Trap",
         "related": [],
-        "description": "Denotes if an attack/ability/effect traps creatures, usually via the Bound or Stuck afflictions."
+        "description": "Denotes if an attack/ability/effect traps creatures, usually via the Bound Affliction."
     },
     {
         "slug": "unreliable",
@@ -2658,7 +2670,7 @@
         "slug": "fire",
         "label": "Fire",
         "related": [],
-        "description": "This represents the Fire Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle). These creatures cannot gain Burn."
+        "description": "This represents the Fire Type. When on creatures, it grants access to the Type's Tutor List. When on Items, it confers the Type to the Item's Fling characteristics and to the @trait[adaptable] Actions provided by the Item (including the user's own Struggle). These creatures cannot gain @Affliction[burn]."
     },
     {
         "slug": "flying",
@@ -2754,31 +2766,37 @@
         "slug": "type-shift",
         "label": "Type Shift",
         "related": [],
-        "description": "Denotes if an Ability can change Attack's Type to the <Type> Trait the Ability possesses."
+        "description": "Denotes if an Ability can change Attack's Type to the %lt;Type&gt Trait the Ability possesses."
     },
     {
         "slug": "domain",
         "label": "Domain",
         "related": [],
-        "description": "Denotes if an Ability provides an Offensive or Allied Aura, based on the Ability's <Type> Trait.."
+        "description": "Denotes if an Ability provides an Offensive or Allied Aura, based on the Ability's %lt;Type&gt Trait.."
     },
     {
         "slug": "hunter",
         "label": "Hunter",
         "related": [],
-        "description": "Denotes if an Ability provides the user with the capability of doing extra damage to creatures of the <Type> Trait this Ability possesses."
+        "description": "Denotes if an Ability provides the user with the capability of doing extra damage to creatures of the %lt;Type&gt Trait this Ability possesses."
     },
     {
         "slug": "stab",
         "label": "STAB",
         "related": [],
-        "description": "Denotes if an Ability provides a 50% boost to Attacks of a given <Type> Trait, akin to the Same Type Attack Bonus."
+        "description": "Denotes if an Ability provides a 50% boost to Attacks of a given %lt;Type&gt Trait, akin to the Same Type Attack Bonus."
     },
     {
         "slug": "strategist",
         "label": "Strategist",
         "related": [],
-        "description": "Denotes if an Ability provides a unique effect to Attacks and Actions that share the <Type> Trait this Ability possesses."
+        "description": "Denotes if an Ability provides a unique effect to Attacks and Actions that share the %lt;Type&gt Trait this Ability possesses."
+    },
+    {
+        "slug": "pp-pool",
+        "label": "PP Pool",
+        "related": [],
+        "description": ""
     },
     {
         "slug": "switch-grip",
@@ -2850,6 +2868,12 @@
         "slug": "closed-heart",
         "label": "Closed-Heart",
         "related": [],
-        "description": "Creatures with this Trait possess a heart that's been forcefully closed, gaining the following changes:\n1) +50% SPD\n2) The Extra Abilities \"Hyper Agressive\" and \"Coldhearted\"\n3) +1 Active List Slot\n4) Access to the [Shadow] <Type> Learnlist\n5) The Anguish Skill (100 by default) and its associated mechanics\n6) Are susceptible to the \"Hyper Mode\" Affliction\n7) Cannot undergo Evolution or other miscellaneous transformations\n8. Placed onto a slower EXP Track, based on their Species"
+        "description": "Creatures with this Trait possess a heart that's been forcefully closed, gaining the following changes:\n1) +50% SPD\n2) The Extra Abilities \"Hyper Agressive\" and \"Coldhearted\"\n3) +1 Active List Slot\n4) Access to the [Shadow] %lt;Type&gt Learnlist\n5) The Anguish Skill (100 by default) and its associated mechanics\n6) Are susceptible to the \"Hyper Mode\" Affliction\n7) Cannot undergo Evolution or other miscellaneous transformations\n8. Placed onto a slower EXP Track, based on their Species"
+    },
+    {
+        "slug": "pp-updated",
+        "label": "PP Updated",
+        "related": [],
+        "description": "This action has had it's PP Errata'd, any action lacking this trait still has to undergo the PP Errata.\nOnce all actions have been errata'd this trait will be removed."
     }
 ]

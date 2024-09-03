@@ -4,10 +4,9 @@
   "img": "/systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "thousand-arrows",
-    "description": "Effect: On hit, all valid targets gain Grounded 6.",
+    "description": "",
     "traits": [
       "legendary",
-      "smite",
       "blast-4"
     ],
     "actions": [
@@ -17,8 +16,8 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "smite",
-          "blast-4"
+          "blast-4",
+          "pp-updated"
         ],
         "range": {
           "target": "blast",
@@ -27,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 11,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,14 +37,15 @@
         "types": [
           "ground"
         ],
-        "description": "Effect: On hit, all valid targets gain Grounded 6.",
+        "description": "Effect: On hit, all valid targets gain @Affliction[grounded] 6.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "A"
   },
   "_id": "vumSKI9yBl7aXSdj",
   "effects": []

@@ -4,7 +4,8 @@
   "system": {
     "prerequisites": [
       "Climatologist",
-      "Science (Meteorology) 60"
+      "Science (Meteorology) 40 OR (Survival 55 AND Occult Spiritual 55)",
+      "Level 20"
     ],
     "cost": 3,
     "design": {
@@ -12,18 +13,21 @@
       "approach": "finesse",
       "archetype": "Climatology"
     },
-    "description": "When you use a [Weather] Attack to set a Tier 1 Weather, you can spend PP to set the Weather at Tier 2. You may learn [Weather] Attacks.",
+    "description": "<p>When a [Weather] effect ends or you enter Combat, you may use a [Weather] Attack as an [Interrupt 4] Free Action. The user learns 2 [Weather] Attacks from their Tutor List, and they do not need to meet the Grade requirements for these Attacks.</p>",
     "actions": [
       {
         "name": "Climate Change",
         "slug": "climate-change",
-        "description": "When you use a [Weather] Attack to set a Tier 1 Weather, you can spend PP to set the Weather at Tier 2. You may learn [Weather] Attacks.",
+        "description": "<p>When a [Weather] effect ends or you enter Combat, you may use a [Weather] Attack as an [Interrupt 4] Free Action.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 5
+          "powerPoints": 3
         },
         "type": "generic",
-        "traits": []
+        "traits": [
+          "environ",
+          "weather"
+        ]
       }
     ],
     "slug": "climate-change",

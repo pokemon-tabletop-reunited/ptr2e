@@ -14,6 +14,7 @@ import type EnJSON from "static/lang/en.json";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import TokenPanel from "@module/apps/token-panel.ts";
 import PerkWeb from "@module/canvas/perk-tree/perk-web.ts";
+import { remigrate } from "@system/remigrate.ts";
 
 interface GamePTR2e
     extends Game<
@@ -45,6 +46,9 @@ interface GamePTR2e
             panel: ClockPanel;
         };
         tokenPanel: TokenPanel;
+        system: {
+            remigrate: typeof remigrate;
+        }
     };
 }
 
@@ -92,12 +96,13 @@ declare global {
         EffectsCanvasGroup
     >;
 
+    // eslint-disable-next-line @typescript-eslint/no-namespace
     namespace globalThis {
-        var game: GamePTR2e;
+        let game: GamePTR2e;
 
-        var fu: typeof foundry.utils;
+        let fu: typeof foundry.utils;
 
-        var ui: FoundryUI<
+        let ui: FoundryUI<
             ActorDirectory<ActorPTR2e<ActorSystemPTR2e, null>>,
             ItemDirectory<ItemPTR2e<ItemSystemPTR, null>>,
             ChatLog,
@@ -109,7 +114,7 @@ declare global {
 
         function getTexture(src: string): PIXI.Texture | PIXI.Spritesheet | null;
 
-        var actor: () => ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e<ScenePTR2e> | null> | null;
+        let actor: () => ActorPTR2e<ActorSystemPTR2e, TokenDocumentPTR2e<ScenePTR2e> | null> | null;
 
         let _maxZ: number;
     }

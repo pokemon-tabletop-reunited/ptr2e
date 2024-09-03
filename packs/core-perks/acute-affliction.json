@@ -1,61 +1,65 @@
 {
-    "folder": "Et2u8UoXSe2a17oq",
-    "name": "Acute Affliction",
-    "type": "perk",
-    "_id": "IuAGcFJ6q6zCVXdm",
-    "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
-    "system": {
-        "actions": [
-            {
-                "name": "Acute Affliction",
-                "slug": "acute-affliction-action-1",
-                "description": "<p>Creatures suffering from Damage Over Time conditions you have inflicted suffer an additional -1 Combat Stage in both Defense and Special Defense.</p>",
-                "traits": [],
-                "type": "passive",
-                "range": {
-                    "target": "enemy",
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple"
-                },
-                "img": "systems/ptr2e/img/perk-icons/Arcana.svg"
-            }
-        ],
+  "folder": "Et2u8UoXSe2a17oq",
+  "name": "Acute Affliction",
+  "type": "perk",
+  "_id": "IuAGcFJ6q6zCVXdm",
+  "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
+  "system": {
+    "actions": [
+      {
+        "name": "Acute Affliction",
         "slug": "acute-affliction",
-        "description": "<p>Creatures suffering from Damage Over Time conditions you have inflicted suffer an additional -1 Combat Stage in both Defense and Special Defense.</p>",
+        "description": "<p>Trigger: The target is afflicted with a [Major Affliction] the user caused.<p></p>Effect: The target's default DEF and SPDEF are reduced by -1.</p>",
         "traits": [],
-        "prerequisites": [
-            "Potent Afflictions"
-        ],
-        "cost": 5,
-        "design": {
-            "arena": "mental",
-            "approach": "power",
-            "archetype": ""
+        "type": "generic",
+        "range": {
+          "target": "creature",
+          "unit": "m"
         },
-        "node": {
-            "i": -73,
-            "j": 2,
-            "connected": [
-                "potent-venom",
-                "venomous",
-                "potent-afflictions",
-                "cryogenics",
-                "stage-vampirism"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#ffffff",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
-                "tint": "#000000",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
-        }
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "trigger": "The target is afflicted with a [Major Affliction] the user caused.",
+          "delay": null,
+          "priority": null
+        },
+        "img": "systems/ptr2e/img/perk-icons/Arcana.svg"
+      }
+    ],
+    "slug": "acute-affliction",
+    "description": "<p>Trigger: The target is afflicted with a [Major Affliction] the user caused.<p></p>Effect: The target's default DEF and SPDEF are reduced by -1.</p>",
+    "traits": [],
+    "prerequisites": [
+      "Potent Afflictions"
+    ],
+    "cost": 5,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": ""
     },
-    "effects": []
+    "node": {
+      "i": -73,
+      "j": 2,
+      "connected": [
+        "potent-venom",
+        "venomous",
+        "potent-afflictions",
+        "cryogenics",
+        "stage-vampirism"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ffffff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Arcana.svg",
+        "tint": "#000000",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "effects": []
 }

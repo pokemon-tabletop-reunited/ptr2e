@@ -66,7 +66,7 @@ export default abstract class CombatantSystemPTR2e extends foundry.abstract.Type
         const speedStageModifier = Math.clamp(-speedStages * 15, -100, 100);
 
         if (changed.system?.activationsHad !== undefined || changed.initiative == this.baseAV) {
-            //@ts-expect-error
+            //@ts-expect-error - This is a valid check
             changed.system ??= {};
             changed.system.avModifiers = speedStageModifier;
             changed.system.avModifiersFromSpdStages = speedStages;
@@ -104,8 +104,8 @@ export default interface CombatantSystemPTR2e
     _source: SourceFromSchema<CombatantSystemSchema>;
 }
 
-type CombatantSystemSchema = {
+interface CombatantSystemSchema extends foundry.data.fields.DataSchema {
     activationsHad: foundry.data.fields.NumberField<number, number, true, false, true>;
     avModifiers: foundry.data.fields.NumberField<number, number, true, false, true>;
     avModifiersFromSpdStages: foundry.data.fields.NumberField<number, number, true, false, true>;
-};
+}

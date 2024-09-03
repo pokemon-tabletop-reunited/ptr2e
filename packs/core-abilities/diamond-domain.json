@@ -14,7 +14,7 @@
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 1,
+          "powerPoints": 2,
           "trigger": "The user is affected by Misty Terrain and declares Diamond Storm.",
           "delay": null,
           "priority": null
@@ -24,10 +24,30 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user is affected by Misty Terrain and declares Diamond Storm.\nEffect: Connection - Diamond Storm. The user can choose to use Diamond Storm at a Range of \"9m Cone\" until the end of their Activation.\nPassive - While Misty Terrain is present, the user's Diamond Storm also causes the user to have a 33% chance of raising their SPDEF stage by +1 for 8 activations, and the user and all allies within a 10m Burst are always affected by Misty Terrain, and have the Ability Clear Body."
+        "description": "Connection - Diamond Storm. Effect: The triggering attack's Range is set to \"6m Cone\" until the end of their Activation."
+      },
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Diamond Domain",
+        "slug": "diamond-domain",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "allied-aura",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "While affected by Misty Terrain, the user's Diamond Storm also causes the user to have a 33% chance of raising their SPDEF stage by +1 for 8 activations, and the user and their allies possess the Ability Clear Body. The user and all allies within Range are always under the effects of Misty Terrain."
       }
     ],
-    "description": "Trigger: The user is affected by Misty Terrain and declares Diamond Storm.\nEffect: Connection - Diamond Storm. The user can choose to use Diamond Storm at a Range of \"9m Cone\" until the end of their Activation.\nPassive - While Misty Terrain is present, the user's Diamond Storm also causes the user to have a 33% chance of raising their SPDEF stage by +1 for 8 activations, and the user and all allies within a 10m Burst are always affected by Misty Terrain, and have the Ability Clear Body.",
+    "description": "Trigger: The user is affected by Misty Terrain and declares Diamond Storm.\nEffect: Connection - Diamond Storm. The user can choose to use Diamond Storm at a Range of \"9m Cone\" until the end of their Activation.\nPassive: While affected by Misty Terrain, the user's Diamond Storm also causes the user to have a 33% chance of raising their SPDEF stage by +1 for 8 activations, and the user and their allies possess the Ability Clear Body. The user and all allies within Range are always under the effects of Misty Terrain.",
     "traits": [
       "legendary",
       "connection"

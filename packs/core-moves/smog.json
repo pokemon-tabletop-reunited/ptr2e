@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "smog",
-    "description": "Effect: On hit, all valid targets have a 40% chance of gaining Poison 5.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "smog",
         "name": "Smog",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "emanation",
           "distance": 3,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -30,7 +32,7 @@
         "types": [
           "poison"
         ],
-        "description": "Effect: On hit, all valid targets have a 40% chance of gaining Poison 5.",
+        "description": "Effect: On hit, all valid targets have a 40% chance of gaining @Affliction[poison] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -38,7 +40,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "D"
   },
   "_id": "ulGuHCWnNMSf5PVO",
   "effects": []

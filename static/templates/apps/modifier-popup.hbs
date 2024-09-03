@@ -40,6 +40,24 @@
             </article>
         </fieldset>
     {{/if}}
+    <fieldset class="roll-mode-panel">
+      <legend>Roll Mode</legend>
+        <label class="roll-mode">
+            {{!-- {{localize "PTR2E.RollModeLabel"}} --}}
+            <select name="rollmode">
+                {{#select rollMode}}
+                    {{#each rollModes as |label key|}}
+                        <option value="{{key}}">{{localize label}}</option>
+                    {{/each}}
+                {{/select}}
+            </select>
+        </label>
+        {{!-- <label data-tooltip="PTR2E.Roll.Dialog.ShowDefaultHint">
+            {{localize "PTR2E.Roll.Dialog.ShowDefault"}}
+            <input data-action="change-show-default" type="checkbox" {{checked showCheckDialogs}} />
+        </label> --}}
+    </fieldset>
+    <hr/>
     <footer clas="mt-3">
         <button type="submit">Submit</button>
     </footer>

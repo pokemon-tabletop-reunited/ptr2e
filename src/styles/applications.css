@@ -208,8 +208,8 @@ body .application.sheet .form-group {
   line-height: 1.2rem;
   padding: 0.25rem 0.5rem;
 }
-.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button:has(small.unspend),
-.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button:has(small.unspend) {
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button:has(small.unspent),
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button:has(small.unspent) {
   animation: glow 1s infinite alternate;
 }
 @keyframes glow {
@@ -220,8 +220,8 @@ body .application.sheet .form-group {
     box-shadow: 0 0 5px 5px gold;
   }
 }
-.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button small.unspend,
-.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button small.unspend {
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button small.unspent,
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button small.unspent {
   font-size: 10px;
 }
 .application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown {
@@ -458,48 +458,85 @@ body .application.sheet .form-group {
   border: 2px groove var(--border-theme-color);
   border-radius: 0 8px 0 4px;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.generic,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container.generic,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.attacks,
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.camping {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container.attacks,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.camping,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container.camping {
   grid-area: span 5 / span 2;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.exploration,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container.exploration,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.passives,
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.downtime {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container.passives,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset.downtime,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container.downtime {
   grid-area: 1 / 4 / 6 / 6;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action.attack-styling,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action.attack-styling {
+  padding: 4px;
+  border-radius: 8px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action.attack-styling .action-name,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action.attack-styling .action-name {
+  flex: 1 0 auto;
+  text-align: center;
+  display: flex;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action.attack-styling .action-name span,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action.attack-styling .action-name span {
+  font-size: 13.5px;
+  max-height: 42px;
+  background: #0f0d18a3;
+  padding: 4px;
+  border-radius: 8px;
+  width: auto;
+  flex: 0 1 auto;
+  overflow: hidden;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action .action-icon {
   flex: 0 0 28px;
   height: 28px;
   width: 28px;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon .dice {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon .dice,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action .action-icon .dice {
   display: none;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon.rollable {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon.rollable,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action .action-icon.rollable {
   cursor: pointer;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon.rollable:hover .icon {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon.rollable:hover .icon,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action .action-icon.rollable:hover .icon {
   display: none;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon.rollable:hover .dice {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-icon.rollable:hover .dice,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action .action-icon.rollable:hover .dice {
   display: block;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-name {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-name,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action .action-name {
   flex-grow: 1;
   margin: 0 0.25rem;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-controls {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active fieldset .action .action-controls,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action .action-controls {
   flex: 0 0 60px;
   display: flex;
   flex-direction: row;
@@ -507,6 +544,82 @@ body .application.sheet .form-group {
   align-items: center;
   margin-left: auto;
   gap: 5px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active .header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: end;
+  border-bottom: 1px solid var(--border-theme-color);
+  margin: 0 0.5rem 0 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active .header .action-controls {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active .header .edit-movelist {
+  padding: 3px 5px;
+  background: var(--appv2-background);
+  border: 2px groove var(--border-theme-color);
+  border-radius: 0 0 8px 8px;
+  border-top: unset;
+  margin-bottom: auto;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 175px 175px;
+  grid-auto-rows: 50px;
+  overflow: visible;
+  overflow-y: auto;
+  padding: 0.5rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container.slots {
+  flex: 0 1 min-content;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action {
+  background: var(--appv2-background);
+  padding: 4px;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 30px auto 30px;
+  overflow: hidden;
+  border: 1px solid var(--color-light-6);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action .action-controls {
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 50px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action .action-name {
+  text-align: center;
+  place-self: center;
+  overflow: hidden;
+  text-wrap: pretty;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action.attack {
+  border: unset;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active div.action-container .action.empty {
+  border: 1px solid var(--color-light-6);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active[data-tab="actionsCombat"] {
+  display: flex;
+  flex-direction: row;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active[data-tab="actionsCombat"] .action-column {
+  display: flex;
+  flex-direction: column;
+  padding: 0 0.25rem;
+  overflow: visible;
+  gap: 0;
+  border-right: 1px dashed var(--color-light-6);
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active[data-tab="actionsCombat"] .action-column:last-child {
+  border-right: unset;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-component,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-component {
@@ -616,8 +729,8 @@ body .application.sheet .form-group {
   grid-area: 1 / 4 / 2 / 6;
   padding: 0.5rem;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button:has(small.unspend),
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button:has(small.unspend) {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button:has(small.unspent),
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button:has(small.unspent) {
   animation: glow 1s infinite alternate;
 }
 @keyframes glow {
@@ -628,8 +741,8 @@ body .application.sheet .form-group {
     box-shadow: 0 0 5px 5px gold;
   }
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button small.unspend,
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button small.unspend {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button small.unspent,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button small.unspent {
   font-size: 10px;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] {
@@ -703,6 +816,62 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display {
   grid-area: abilities;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset {
+  margin-bottom: unset;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset.slots {
+  position: relative;
+  height: min-content;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .edit-abilitylist {
+  position: absolute;
+  right: -2px;
+  top: -10px;
+  padding: 3px 5px;
+  background: var(--appv2-background);
+  border: 2px groove var(--border-theme-color);
+  border-radius: 0 8px 0 4px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-icon .dice {
+  display: none;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-icon.rollable {
+  cursor: pointer;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-icon.rollable:hover .icon {
+  display: none;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-icon.rollable:hover .dice {
+  display: block;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="perks"] .abilities-display fieldset .action .action-controls {
+  flex: 0 0 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  gap: 5px;
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display,
@@ -1057,21 +1226,25 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base,
 .application.sheet.known-actions-sheet,
+.application.sheet.available-abilities-sheet,
 .application.sheet.action-sheet,
 .application.sheet.move-sheet,
 .application.sheet.species-sheet,
 .application.sheet.party-sheet,
 .application.sheet.team-sheet,
+.application.sheet.data-inspector,
 .application.sheet.active-effect-sheet {
   background: var(--appv2-background);
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content,
 .application.sheet.known-actions-sheet .window-content,
+.application.sheet.available-abilities-sheet .window-content,
 .application.sheet.action-sheet .window-content,
 .application.sheet.move-sheet .window-content,
 .application.sheet.species-sheet .window-content,
 .application.sheet.party-sheet .window-content,
 .application.sheet.team-sheet .window-content,
+.application.sheet.data-inspector .window-content,
 .application.sheet.active-effect-sheet .window-content {
   display: grid;
   grid-template-columns: 45% 55%;
@@ -1081,11 +1254,13 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header,
 .application.sheet.known-actions-sheet .window-content .sheet-header,
+.application.sheet.available-abilities-sheet .window-content .sheet-header,
 .application.sheet.action-sheet .window-content .sheet-header,
 .application.sheet.move-sheet .window-content .sheet-header,
 .application.sheet.species-sheet .window-content .sheet-header,
 .application.sheet.party-sheet .window-content .sheet-header,
 .application.sheet.team-sheet .window-content .sheet-header,
+.application.sheet.data-inspector .window-content .sheet-header,
 .application.sheet.active-effect-sheet .window-content .sheet-header {
   grid-area: header;
   padding: 0.5rem;
@@ -1094,11 +1269,13 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header fieldset,
 .application.sheet.known-actions-sheet .window-content .sheet-header fieldset,
+.application.sheet.available-abilities-sheet .window-content .sheet-header fieldset,
 .application.sheet.action-sheet .window-content .sheet-header fieldset,
 .application.sheet.move-sheet .window-content .sheet-header fieldset,
 .application.sheet.species-sheet .window-content .sheet-header fieldset,
 .application.sheet.party-sheet .window-content .sheet-header fieldset,
 .application.sheet.team-sheet .window-content .sheet-header fieldset,
+.application.sheet.data-inspector .window-content .sheet-header fieldset,
 .application.sheet.active-effect-sheet .window-content .sheet-header fieldset {
   display: flex;
   flex-direction: row;
@@ -1107,11 +1284,13 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header img,
 .application.sheet.known-actions-sheet .window-content .sheet-header img,
+.application.sheet.available-abilities-sheet .window-content .sheet-header img,
 .application.sheet.action-sheet .window-content .sheet-header img,
 .application.sheet.move-sheet .window-content .sheet-header img,
 .application.sheet.species-sheet .window-content .sheet-header img,
 .application.sheet.party-sheet .window-content .sheet-header img,
 .application.sheet.team-sheet .window-content .sheet-header img,
+.application.sheet.data-inspector .window-content .sheet-header img,
 .application.sheet.active-effect-sheet .window-content .sheet-header img {
   flex: 0 0 48px;
   height: 48px;
@@ -1120,21 +1299,25 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header .title,
 .application.sheet.known-actions-sheet .window-content .sheet-header .title,
+.application.sheet.available-abilities-sheet .window-content .sheet-header .title,
 .application.sheet.action-sheet .window-content .sheet-header .title,
 .application.sheet.move-sheet .window-content .sheet-header .title,
 .application.sheet.species-sheet .window-content .sheet-header .title,
 .application.sheet.party-sheet .window-content .sheet-header .title,
 .application.sheet.team-sheet .window-content .sheet-header .title,
+.application.sheet.data-inspector .window-content .sheet-header .title,
 .application.sheet.active-effect-sheet .window-content .sheet-header .title {
   font-size: 2.5rem;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content nav.tabs,
 .application.sheet.known-actions-sheet .window-content nav.tabs,
+.application.sheet.available-abilities-sheet .window-content nav.tabs,
 .application.sheet.action-sheet .window-content nav.tabs,
 .application.sheet.move-sheet .window-content nav.tabs,
 .application.sheet.species-sheet .window-content nav.tabs,
 .application.sheet.party-sheet .window-content nav.tabs,
 .application.sheet.team-sheet .window-content nav.tabs,
+.application.sheet.data-inspector .window-content nav.tabs,
 .application.sheet.active-effect-sheet .window-content nav.tabs {
   grid-area: nav;
   border: unset;
@@ -1148,11 +1331,13 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits,
 .application.sheet.known-actions-sheet .window-content aside.traits,
+.application.sheet.available-abilities-sheet .window-content aside.traits,
 .application.sheet.action-sheet .window-content aside.traits,
 .application.sheet.move-sheet .window-content aside.traits,
 .application.sheet.species-sheet .window-content aside.traits,
 .application.sheet.party-sheet .window-content aside.traits,
 .application.sheet.team-sheet .window-content aside.traits,
+.application.sheet.data-inspector .window-content aside.traits,
 .application.sheet.active-effect-sheet .window-content aside.traits {
   grid-area: traits;
   min-height: calc(0.5rem + 38px);
@@ -1161,11 +1346,13 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits tags,
 .application.sheet.known-actions-sheet .window-content aside.traits tags,
+.application.sheet.available-abilities-sheet .window-content aside.traits tags,
 .application.sheet.action-sheet .window-content aside.traits tags,
 .application.sheet.move-sheet .window-content aside.traits tags,
 .application.sheet.species-sheet .window-content aside.traits tags,
 .application.sheet.party-sheet .window-content aside.traits tags,
 .application.sheet.team-sheet .window-content aside.traits tags,
+.application.sheet.data-inspector .window-content aside.traits tags,
 .application.sheet.active-effect-sheet .window-content aside.traits tags {
   --tags-border-color: var(--border-theme-color);
   --tag-bg: var(--color-theme-4);
@@ -1175,32 +1362,38 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits tags .trait,
 .application.sheet.known-actions-sheet .window-content aside.traits tags .trait,
+.application.sheet.available-abilities-sheet .window-content aside.traits tags .trait,
 .application.sheet.action-sheet .window-content aside.traits tags .trait,
 .application.sheet.move-sheet .window-content aside.traits tags .trait,
 .application.sheet.species-sheet .window-content aside.traits tags .trait,
 .application.sheet.party-sheet .window-content aside.traits tags .trait,
 .application.sheet.team-sheet .window-content aside.traits tags .trait,
+.application.sheet.data-inspector .window-content aside.traits tags .trait,
 .application.sheet.active-effect-sheet .window-content aside.traits tags .trait {
   display: inline-flex;
   padding: 0.25rem;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits tags .trait .tag,
 .application.sheet.known-actions-sheet .window-content aside.traits tags .trait .tag,
+.application.sheet.available-abilities-sheet .window-content aside.traits tags .trait .tag,
 .application.sheet.action-sheet .window-content aside.traits tags .trait .tag,
 .application.sheet.move-sheet .window-content aside.traits tags .trait .tag,
 .application.sheet.species-sheet .window-content aside.traits tags .trait .tag,
 .application.sheet.party-sheet .window-content aside.traits tags .trait .tag,
 .application.sheet.team-sheet .window-content aside.traits tags .trait .tag,
+.application.sheet.data-inspector .window-content aside.traits tags .trait .tag,
 .application.sheet.active-effect-sheet .window-content aside.traits tags .trait .tag {
   text-decoration: underline;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab,
 .application.sheet.known-actions-sheet .window-content section.tab,
+.application.sheet.available-abilities-sheet .window-content section.tab,
 .application.sheet.action-sheet .window-content section.tab,
 .application.sheet.move-sheet .window-content section.tab,
 .application.sheet.species-sheet .window-content section.tab,
 .application.sheet.party-sheet .window-content section.tab,
 .application.sheet.team-sheet .window-content section.tab,
+.application.sheet.data-inspector .window-content section.tab,
 .application.sheet.active-effect-sheet .window-content section.tab {
   grid-area: main;
   height: 100%;
@@ -1209,29 +1402,35 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .editor,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .editor,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .editor,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .editor,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .editor,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .editor,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .editor,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor .editor-content {
   min-height: 200px;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1242,50 +1441,60 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group {
   justify-content: space-between;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label {
   flex: 0 0 60%;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields {
   flex: 0 0 35%;
   text-align: center;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats-header {
   display: flex;
   flex-direction: row;
@@ -1297,19 +1506,23 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls {
   flex: 0 0 45px;
   display: flex;
@@ -1319,19 +1532,23 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .skill,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill {
   padding: 0.25rem;
   border: 1px solid var(--border-theme-color);
@@ -1342,19 +1559,23 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill.center {
   display: flex;
   flex-direction: row;
@@ -1363,93 +1584,113 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill.center small {
   color: var(--hint-text-color);
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group {
   justify-content: space-between;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group label {
   flex: 0 0 30%;
   text-align: center;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields {
   flex: 0 0 60%;
   text-align: center;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill .item-controls {
   display: flex;
   flex-direction: row;
@@ -1458,32 +1699,38 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .skill,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .skill,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .skill {
   grid-template-columns: 30% auto 15px;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .move,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .move,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .move,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .move,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .move,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .move,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .move,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .move,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .move {
   display: flex;
   flex-direction: row;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.move-sheet .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.species-sheet .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.party-sheet .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.team-sheet .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.data-inspector .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .move .form-group {
   flex: 1;
   text-align: center;
@@ -1491,21 +1738,25 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=attack],
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=attack],
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=attack],
 .application.sheet.action-sheet .window-content section.tab[data-tab=attack],
 .application.sheet.move-sheet .window-content section.tab[data-tab=attack],
 .application.sheet.species-sheet .window-content section.tab[data-tab=attack],
 .application.sheet.party-sheet .window-content section.tab[data-tab=attack],
 .application.sheet.team-sheet .window-content section.tab[data-tab=attack],
+.application.sheet.data-inspector .window-content section.tab[data-tab=attack],
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=attack] {
   padding: 0;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab form.scroll,
 .application.sheet.known-actions-sheet .window-content section.tab form.scroll,
+.application.sheet.available-abilities-sheet .window-content section.tab form.scroll,
 .application.sheet.action-sheet .window-content section.tab form.scroll,
 .application.sheet.move-sheet .window-content section.tab form.scroll,
 .application.sheet.species-sheet .window-content section.tab form.scroll,
 .application.sheet.party-sheet .window-content section.tab form.scroll,
 .application.sheet.team-sheet .window-content section.tab form.scroll,
+.application.sheet.data-inspector .window-content section.tab form.scroll,
 .application.sheet.active-effect-sheet .window-content section.tab form.scroll {
   padding: 1rem;
   overflow-y: scroll;
@@ -1514,22 +1765,26 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions {
   display: flex;
   flex-direction: column;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
+.application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list {
   display: flex;
   flex-direction: column;
@@ -1537,11 +1792,13 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header {
   font-weight: bold;
   margin-bottom: 0.5rem;
@@ -1549,19 +1806,23 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
+.application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action {
   display: flex;
   flex-direction: row;
@@ -1570,55 +1831,67 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
+.application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
+.application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name {
   flex: 0 0 30%;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
+.application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
+.application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type {
   flex: 0 0 30%;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
+.application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.move-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.species-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.party-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.team-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
+.application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls {
   flex: 0 0 60px;
   display: flex;
@@ -1630,31 +1903,37 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.action-sheet .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.move-sheet .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.species-sheet .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.party-sheet .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.team-sheet .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.data-inspector .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab="overview"] .item-description {
   min-height: 150px;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.move-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.species-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.party-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.team-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.data-inspector .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add {
   position: relative;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.move-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.species-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.party-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.team-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.data-inspector .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control {
   position: absolute;
   top: -9px;
@@ -1667,11 +1946,13 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.data-inspector .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list {
   list-style: none;
   margin: 0 0.5rem;
@@ -1679,11 +1960,13 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.data-inspector .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect {
   padding: 0.5rem;
   border-radius: 5px;
@@ -1695,11 +1978,13 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.data-inspector .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon {
   flex: 0 0 28px;
   height: 28px;
@@ -1707,22 +1992,26 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.move-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.species-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.data-inspector .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name {
   flex-grow: 1;
   margin: 0 0.25rem;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base fieldset,
 .application.sheet.known-actions-sheet fieldset,
+.application.sheet.available-abilities-sheet fieldset,
 .application.sheet.action-sheet fieldset,
 .application.sheet.move-sheet fieldset,
 .application.sheet.species-sheet fieldset,
 .application.sheet.party-sheet fieldset,
 .application.sheet.team-sheet fieldset,
+.application.sheet.data-inspector fieldset,
 .application.sheet.active-effect-sheet fieldset {
   padding: 1rem;
   display: flex;
@@ -1735,22 +2024,26 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base fieldset legend,
 .application.sheet.known-actions-sheet fieldset legend,
+.application.sheet.available-abilities-sheet fieldset legend,
 .application.sheet.action-sheet fieldset legend,
 .application.sheet.move-sheet fieldset legend,
 .application.sheet.species-sheet fieldset legend,
 .application.sheet.party-sheet fieldset legend,
 .application.sheet.team-sheet fieldset legend,
+.application.sheet.data-inspector fieldset legend,
 .application.sheet.active-effect-sheet fieldset legend {
   font-size: var(--font-size-15);
   font-weight: bold;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .hint,
 .application.sheet.known-actions-sheet .hint,
+.application.sheet.available-abilities-sheet .hint,
 .application.sheet.action-sheet .hint,
 .application.sheet.move-sheet .hint,
 .application.sheet.species-sheet .hint,
 .application.sheet.party-sheet .hint,
 .application.sheet.team-sheet .hint,
+.application.sheet.data-inspector .hint,
 .application.sheet.active-effect-sheet .hint {
   margin: 0;
   font-size: var(--font-size-14);
@@ -1760,11 +2053,13 @@ body .application.sheet .form-group {
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base textarea,
 .application.sheet.known-actions-sheet textarea,
+.application.sheet.available-abilities-sheet textarea,
 .application.sheet.action-sheet textarea,
 .application.sheet.move-sheet textarea,
 .application.sheet.species-sheet textarea,
 .application.sheet.party-sheet textarea,
 .application.sheet.team-sheet textarea,
+.application.sheet.data-inspector textarea,
 .application.sheet.active-effect-sheet textarea {
   resize: vertical;
 }
@@ -1852,7 +2147,7 @@ body .application.sheet .form-group {
 .application.sheet.skill-sheet .scroll {
   overflow-x: hidden;
   overflow-y: auto;
-  height: 100%;
+  height: calc(100% - 2rem);
 }
 .application.sheet.known-actions-sheet {
   max-height: 450px;
@@ -1913,6 +2208,74 @@ body .application.sheet .form-group {
   margin: 0 0.25rem;
 }
 .application.sheet.known-actions-sheet article.known-attacks .action .action-controls {
+  flex: 0 0 60px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  margin-left: auto;
+  gap: 5px;
+}
+.application.sheet.available-abilities-sheet {
+  max-height: 450px;
+}
+.application.sheet.available-abilities-sheet .info-tooltip {
+  cursor: help;
+}
+.application.sheet.available-abilities-sheet .info-tooltip:hover,
+.application.sheet.available-abilities-sheet .info-tooltip:focus {
+  box-shadow: unset;
+  outline: unset;
+}
+.application.sheet.available-abilities-sheet .window-content {
+  display: block;
+  overflow-y: scroll;
+  height: 100%;
+  padding: 0;
+}
+.application.sheet.available-abilities-sheet article.available-abilities {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 0.25rem;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability:last-child {
+  border-bottom: unset;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-icon {
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-icon .dice {
+  display: none;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-icon.rollable {
+  cursor: pointer;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-icon.rollable:hover .icon {
+  display: none;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-icon.rollable:hover .dice {
+  display: block;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-icon img {
+  border: unset;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.application.sheet.available-abilities-sheet article.available-abilities .ability .ability-controls {
   flex: 0 0 60px;
   display: flex;
   flex-direction: row;
@@ -2521,6 +2884,14 @@ body .application.sheet .form-group {
   border-radius: 10px;
   margin: 0.25rem;
 }
+.application.sheet.stats-form .window-content aside[data-application-part="statsChart"] .stats-chart-aside .legend {
+  background: var(--appv2-background-flat);
+  border-radius: 5px;
+}
+.application.sheet.party-sheet:not(.minimized) {
+  min-width: 528px;
+  min-height: 465px;
+}
 .application.sheet.party-sheet .window-content {
   grid-template-columns: unset;
   grid-template-rows: 44px auto;
@@ -2542,34 +2913,168 @@ body .application.sheet .form-group {
   grid-template-rows: 35% 65%;
   grid-template-areas: "owner" "party";
 }
-.application.sheet.party-sheet .party-member {
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] {
+  padding: 0;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll {
+  padding: 1rem;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  --folder-color-mixed: color-mix(in srgb, var(--folder-color, #4d4d4daa) 60%, transparent);
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll header {
+  padding: 6px;
+  line-height: 24px;
+  background: var(--folder-color, black);
+  text-shadow: 0px 0px 3px var(--color-shadow-dark);
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll header h3 {
+  margin: 0;
+  color: var(--color-text-light-highlight);
+  font-size: var(--font-size-16);
+  line-height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes .content {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  border: 6px solid var(--folder-color, black);
+  border-right: unset;
+  border-top: unset;
+  border-radius: 0 0 8px 8px;
+  --folder-color-mixed: color-mix(in srgb, var(--folder-color, #4d4d4daa) 60%, transparent);
+  flex: 1;
+  background: var(--folder-color-mixed);
+  scrollbar-color: var(--folder-color, black) var(--folder-color-mixed, black);
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes header.controls {
+  display: flex;
+  align-items: center;
+  border-radius: 8px 8px 0 0;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes header.controls h3 {
+  flex: 1;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes header.controls button {
+  flex: 0 0 120px;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes article.box {
+  --folder-color-mixed: color-mix(in srgb, var(--folder-color, #4d4d4daa) 60%, transparent);
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes article.box header.box-header {
+  flex: 0;
+  position: sticky;
+  top: 0;
+  background: var(--folder-color, black);
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll .contents {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--folder-color-mixed);
+  border: 4px solid var(--folder-color, black);
+  border-top: unset;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.box {
+  min-width: 206px;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.box section.box-item {
+  flex: 1 1 190px;
+  min-width: 190px;
+  max-width: 270px;
+  margin: 0;
+  border-radius: unset;
+  max-width: unset;
+  background: unset;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.box section.box-item.empty {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 40px;
+  background: url(/ui/denim075.png);
+  font-style: italic;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.party {
+  flex: 0 0 220px;
+  width: 220px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.party header {
+  flex: 0;
+  border-radius: 8px 8px 0 0;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.party .contents {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  border-bottom: 6px solid var(--folder-color, black);
+  border-left: 6px solid var(--folder-color, black);
+  flex: 1;
+  overflow-y: scroll;
+  scrollbar-color: var(--folder-color, black) var(--folder-color-mixed, black);
+  border-radius: 0 0 8px 8px;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.party section.party-member {
+  min-width: 200px;
+  margin: 0;
+  border-radius: unset;
+  flex: 0;
+  background: unset;
+}
+.application.sheet.party-sheet .party-member,
+.application.sheet.party-sheet .box-item {
   display: flex;
   flex-direction: row;
   align-items: center;
   --owner-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 80%, transparent);
   --party-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 60%, transparent);
 }
-.application.sheet.party-sheet .party-member .thumbnail {
+.application.sheet.party-sheet .party-member .thumbnail,
+.application.sheet.party-sheet .box-item .thumbnail {
   padding: 0.25rem;
   min-width: 56px;
 }
-.application.sheet.party-sheet .party-member .thumbnail img {
+.application.sheet.party-sheet .party-member .thumbnail img,
+.application.sheet.party-sheet .box-item .thumbnail img {
   border-radius: 50%;
   height: 48px;
   width: 48px;
   border: unset;
 }
-.application.sheet.party-sheet .party-member .title {
+.application.sheet.party-sheet .party-member .title,
+.application.sheet.party-sheet .box-item .title {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.application.sheet.party-sheet .party-member .title .name {
+.application.sheet.party-sheet .party-member .title .name,
+.application.sheet.party-sheet .box-item .title .name {
   text-wrap: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.application.sheet.party-sheet .party-member .title .level {
+.application.sheet.party-sheet .party-member .title .level,
+.application.sheet.party-sheet .box-item .title .level {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
@@ -2711,7 +3216,9 @@ body .application.sheet .form-group {
   grid-area: experience-value;
   color: var(--color-text-light-primary);
 }
-.application.sheet.party-sheet main {
+.application.sheet.party-sheet main,
+.application.sheet.party-sheet article.party,
+.application.sheet.party-sheet article.box {
   grid-area: party;
   display: flex;
   flex-direction: row;
@@ -2719,7 +3226,12 @@ body .application.sheet .form-group {
   flex-wrap: wrap;
   align-content: start;
 }
-.application.sheet.party-sheet main section.party-member {
+.application.sheet.party-sheet main section.party-member,
+.application.sheet.party-sheet article.party section.party-member,
+.application.sheet.party-sheet article.box section.party-member,
+.application.sheet.party-sheet main section.box-item,
+.application.sheet.party-sheet article.party section.box-item,
+.application.sheet.party-sheet article.box section.box-item {
   flex: 0 0 48%;
   max-width: 48%;
   height: 70px;
@@ -2727,7 +3239,12 @@ body .application.sheet .form-group {
   background: var(--party-background-color);
   border-radius: 12px;
 }
-.application.sheet.party-sheet main section.party-member main {
+.application.sheet.party-sheet main section.party-member main,
+.application.sheet.party-sheet article.party section.party-member main,
+.application.sheet.party-sheet article.box section.party-member main,
+.application.sheet.party-sheet main section.box-item main,
+.application.sheet.party-sheet article.party section.box-item main,
+.application.sheet.party-sheet article.box section.box-item main {
   flex: 1;
   height: 100%;
   display: grid;
@@ -2736,54 +3253,119 @@ body .application.sheet .form-group {
   grid-template-areas: "title health" "types pp";
 }
 .application.sheet.party-sheet main section.party-member main div.title,
+.application.sheet.party-sheet article.party section.party-member main div.title,
+.application.sheet.party-sheet article.box section.party-member main div.title,
+.application.sheet.party-sheet main section.box-item main div.title,
+.application.sheet.party-sheet article.party section.box-item main div.title,
+.application.sheet.party-sheet article.box section.box-item main div.title,
 .application.sheet.party-sheet main section.party-member main div.health,
-.application.sheet.party-sheet main section.party-member main div.pp {
+.application.sheet.party-sheet article.party section.party-member main div.health,
+.application.sheet.party-sheet article.box section.party-member main div.health,
+.application.sheet.party-sheet main section.box-item main div.health,
+.application.sheet.party-sheet article.party section.box-item main div.health,
+.application.sheet.party-sheet article.box section.box-item main div.health,
+.application.sheet.party-sheet main section.party-member main div.pp,
+.application.sheet.party-sheet article.party section.party-member main div.pp,
+.application.sheet.party-sheet article.box section.party-member main div.pp,
+.application.sheet.party-sheet main section.box-item main div.pp,
+.application.sheet.party-sheet article.party section.box-item main div.pp,
+.application.sheet.party-sheet article.box section.box-item main div.pp {
   margin: 2px;
 }
-.application.sheet.party-sheet main section.party-member main .title {
+.application.sheet.party-sheet main section.party-member main .title,
+.application.sheet.party-sheet article.party section.party-member main .title,
+.application.sheet.party-sheet article.box section.party-member main .title,
+.application.sheet.party-sheet main section.box-item main .title,
+.application.sheet.party-sheet article.party section.box-item main .title,
+.application.sheet.party-sheet article.box section.box-item main .title {
   grid-area: title;
   justify-content: end;
 }
-.application.sheet.party-sheet main section.party-member main .health {
+.application.sheet.party-sheet main section.party-member main .health,
+.application.sheet.party-sheet article.party section.party-member main .health,
+.application.sheet.party-sheet article.box section.party-member main .health,
+.application.sheet.party-sheet main section.box-item main .health,
+.application.sheet.party-sheet article.party section.box-item main .health,
+.application.sheet.party-sheet article.box section.box-item main .health {
   grid-area: health;
   display: flex;
   flex-direction: column;
   justify-content: end;
   font-size: small;
 }
-.application.sheet.party-sheet main section.party-member main .health .details {
+.application.sheet.party-sheet main section.party-member main .health .details,
+.application.sheet.party-sheet article.party section.party-member main .health .details,
+.application.sheet.party-sheet article.box section.party-member main .health .details,
+.application.sheet.party-sheet main section.box-item main .health .details,
+.application.sheet.party-sheet article.party section.box-item main .health .details,
+.application.sheet.party-sheet article.box section.box-item main .health .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.application.sheet.party-sheet main section.party-member main .health .details span {
+.application.sheet.party-sheet main section.party-member main .health .details span,
+.application.sheet.party-sheet article.party section.party-member main .health .details span,
+.application.sheet.party-sheet article.box section.party-member main .health .details span,
+.application.sheet.party-sheet main section.box-item main .health .details span,
+.application.sheet.party-sheet article.party section.box-item main .health .details span,
+.application.sheet.party-sheet article.box section.box-item main .health .details span {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
-.application.sheet.party-sheet main section.party-member main .health .details .divider {
+.application.sheet.party-sheet main section.party-member main .health .details .divider,
+.application.sheet.party-sheet article.party section.party-member main .health .details .divider,
+.application.sheet.party-sheet article.box section.party-member main .health .details .divider,
+.application.sheet.party-sheet main section.box-item main .health .details .divider,
+.application.sheet.party-sheet article.party section.box-item main .health .details .divider,
+.application.sheet.party-sheet article.box section.box-item main .health .details .divider {
   margin: 0 0.25rem;
 }
-.application.sheet.party-sheet main section.party-member main .pp {
+.application.sheet.party-sheet main section.party-member main .pp,
+.application.sheet.party-sheet article.party section.party-member main .pp,
+.application.sheet.party-sheet article.box section.party-member main .pp,
+.application.sheet.party-sheet main section.box-item main .pp,
+.application.sheet.party-sheet article.party section.box-item main .pp,
+.application.sheet.party-sheet article.box section.box-item main .pp {
   grid-area: pp;
   display: flex;
   flex-direction: column;
   font-size: small;
 }
-.application.sheet.party-sheet main section.party-member main .pp .details {
+.application.sheet.party-sheet main section.party-member main .pp .details,
+.application.sheet.party-sheet article.party section.party-member main .pp .details,
+.application.sheet.party-sheet article.box section.party-member main .pp .details,
+.application.sheet.party-sheet main section.box-item main .pp .details,
+.application.sheet.party-sheet article.party section.box-item main .pp .details,
+.application.sheet.party-sheet article.box section.box-item main .pp .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.application.sheet.party-sheet main section.party-member main .pp .details span {
+.application.sheet.party-sheet main section.party-member main .pp .details span,
+.application.sheet.party-sheet article.party section.party-member main .pp .details span,
+.application.sheet.party-sheet article.box section.party-member main .pp .details span,
+.application.sheet.party-sheet main section.box-item main .pp .details span,
+.application.sheet.party-sheet article.party section.box-item main .pp .details span,
+.application.sheet.party-sheet article.box section.box-item main .pp .details span {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
-.application.sheet.party-sheet main section.party-member main .pp .details .divider {
+.application.sheet.party-sheet main section.party-member main .pp .details .divider,
+.application.sheet.party-sheet article.party section.party-member main .pp .details .divider,
+.application.sheet.party-sheet article.box section.party-member main .pp .details .divider,
+.application.sheet.party-sheet main section.box-item main .pp .details .divider,
+.application.sheet.party-sheet article.party section.box-item main .pp .details .divider,
+.application.sheet.party-sheet article.box section.box-item main .pp .details .divider {
   margin: 0 0.25rem;
 }
-.application.sheet.party-sheet main section.party-member main .types {
+.application.sheet.party-sheet main section.party-member main .types,
+.application.sheet.party-sheet article.party section.party-member main .types,
+.application.sheet.party-sheet article.box section.party-member main .types,
+.application.sheet.party-sheet main section.box-item main .types,
+.application.sheet.party-sheet article.party section.box-item main .types,
+.application.sheet.party-sheet article.box section.box-item main .types {
   grid-area: types;
   display: flex;
   flex-direction: row;
@@ -2791,52 +3373,154 @@ body .application.sheet .form-group {
   align-items: center;
   overflow: hidden;
 }
-.application.sheet.party-sheet main section.party-member main .types span {
+.application.sheet.party-sheet main section.party-member main .types span,
+.application.sheet.party-sheet article.party section.party-member main .types span,
+.application.sheet.party-sheet article.box section.party-member main .types span,
+.application.sheet.party-sheet main section.box-item main .types span,
+.application.sheet.party-sheet article.party section.box-item main .types span,
+.application.sheet.party-sheet article.box section.box-item main .types span {
   flex: 0 0 28px;
   height: 28px;
   margin: 2px;
 }
-.application.sheet.party-sheet main section.party-member main .types span img {
+.application.sheet.party-sheet main section.party-member main .types span img,
+.application.sheet.party-sheet article.party section.party-member main .types span img,
+.application.sheet.party-sheet article.box section.party-member main .types span img,
+.application.sheet.party-sheet main section.box-item main .types span img,
+.application.sheet.party-sheet article.party section.box-item main .types span img,
+.application.sheet.party-sheet article.box section.box-item main .types span img {
   height: 28px;
   width: 28px;
   object-fit: scale-down;
   border: unset;
   border-radius: 50%;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(3)) span {
   flex: 0 0 24px;
   height: 24px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(3)) span img {
   height: 24px;
   width: 24px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(4)) span {
   flex: 0 0 17px;
   height: 17px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(4)) span img {
   height: 17px;
   width: 17px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(5)) span {
   flex: 0 0 13px;
   height: 13px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(5)) span img {
   height: 13px;
   width: 13px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)),
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(11)),
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(11)),
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(11)),
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(11)),
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(11)) {
   overflow-y: auto;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(11)) span {
   flex: 0 0 15px;
   height: 15px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(11)) span img {
   height: 15px;
   width: 15px;
+}
+.application.sheet.party-sheet article.party header.party-header,
+.application.sheet.party-sheet article.box header.party-header,
+.application.sheet.party-sheet article.party header.box-header,
+.application.sheet.party-sheet article.box header.box-header {
+  flex: 1 0 100%;
+}
+.application.sheet.party-sheet article.party section.party-member,
+.application.sheet.party-sheet article.box section.party-member,
+.application.sheet.party-sheet article.party section.box-item,
+.application.sheet.party-sheet article.box section.box-item {
+  height: 40px;
+  flex: 1;
+  min-width: 200px;
+}
+.application.sheet.party-sheet article.party section.party-member .thumbnail,
+.application.sheet.party-sheet article.box section.party-member .thumbnail,
+.application.sheet.party-sheet article.party section.box-item .thumbnail,
+.application.sheet.party-sheet article.box section.box-item .thumbnail {
+  min-width: 40px;
+  height: 40px;
+}
+.application.sheet.party-sheet article.party section.party-member .thumbnail img,
+.application.sheet.party-sheet article.box section.party-member .thumbnail img,
+.application.sheet.party-sheet article.party section.box-item .thumbnail img,
+.application.sheet.party-sheet article.box section.box-item .thumbnail img {
+  height: 32px;
+  width: 32px;
+}
+.application.sheet.party-sheet article.party section.party-member main,
+.application.sheet.party-sheet article.box section.party-member main,
+.application.sheet.party-sheet article.party section.box-item main,
+.application.sheet.party-sheet article.box section.box-item main {
+  grid-template-rows: 1fr;
+  grid-template-areas: "title types";
+}
+.application.sheet.party-sheet article.party section.party-member main .title,
+.application.sheet.party-sheet article.box section.party-member main .title,
+.application.sheet.party-sheet article.party section.box-item main .title,
+.application.sheet.party-sheet article.box section.box-item main .title {
+  justify-content: center;
+}
+.application.sheet.party-sheet article.party section.party-member main .types,
+.application.sheet.party-sheet article.box section.party-member main .types,
+.application.sheet.party-sheet article.party section.box-item main .types,
+.application.sheet.party-sheet article.box section.box-item main .types {
+  justify-content: center;
 }
 .application.sheet.team-sheet .window-content {
   grid-template-columns: unset;
@@ -3087,6 +3771,48 @@ body .application.sheet .form-group {
   border: 1px solid var(--border-theme-color);
   border-radius: 8px;
 }
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .attached-input {
+  align-items: center;
+  display: flex;
+  flex: 2;
+  justify-content: center;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .attached-input input {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin: 0;
+  flex: 1;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change [data-action="add-bracket"] {
+  flex: 0 0 auto;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .brackets {
+  margin-left: 9.5em;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .brackets .bracket {
+  align-items: center;
+  display: flex;
+  gap: 4px;
+  margin-bottom: 3px;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .brackets .bracket .value {
+  flex: 1;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .brackets .bracket label {
+  align-items: center;
+  display: flex;
+  gap: 4px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .brackets .range {
+  display: flex;
+  gap: 3px;
+  align-items: center;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change .brackets .range input {
+  width: 40px;
+}
 .application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change header {
   display: flex;
   justify-content: space-between;
@@ -3278,6 +4004,28 @@ body .application.sheet .form-group {
 }
 .application.sheet.modifier-popup main.skill-challenge-rating article select {
   flex: 0 0 55%;
+}
+.application.sheet.modifier-popup main .roll-mode-panel {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: space-between;
+  white-space: nowrap;
+  gap: 8px;
+}
+.application.sheet.modifier-popup main .roll-mode-panel label {
+  display: flex;
+  align-items: center;
+}
+.application.sheet.modifier-popup main .roll-mode-panel .roll-mode {
+  flex: 1;
+}
+.application.sheet.modifier-popup main .roll-mode-panel .roll-mode select {
+  border-radius: 2px;
+  cursor: pointer;
+  height: 1.5em;
+  margin-left: 8px;
+  width: 100%;
 }
 .application.sheet.modifier-popup main .modifier {
   display: flex;
@@ -3504,6 +4252,622 @@ body .application.sheet .form-group {
 .application.sheet input[type="color"] {
   border-color: var(--color-input-border-color, #000);
 }
+.application.sheet.data-inspector {
+  --data-inspector-entry-type-boolean: #4e8be8;
+  --data-inspector-entry-type-empty: #c90000;
+  --data-inspector-entry-type-number: #c759fe;
+  --data-inspector-entry-type-function: #5e5858;
+  --data-inspector-entry-type-string: #94b45e;
+  --data-inspector-entry-type-model: #d200ff;
+  --data-inspector-entry-nondefault-data: #ffa5a5;
+  --data-inspector-header-background: var(--appv2-background);
+  --data-inspector-header-font: #f3eeee;
+  --data-inspector-search-good-match: hsla(46, 100%, 50%, 0.25);
+  --data-inspector-search-decent-match: hsla(197, 71%, 73%, 0.1);
+  --data-inspector-selected: #edcb8e;
+  --data-inspector-details-separator: hsla(34, 17%, 36%, 0.25);
+  --data-inspector-border-hover: hsla(13, 12%, 29%, 0.58);
+  --data-inspector-entry-not-in-source: #0480ff;
+  --data-inspector-entry-not-in-rolldata: #bf5ed3;
+  --data-inspector-entry-hover-shadow: hsla(16, 100%, 50%, 0.37);
+  --data-inspector-entry-hover-background: hsla(80, 5%, 12%, 0.18);
+  --data-inspector-entry-hover-boxshadow: hsla(27, 21%, 29%, 0.39);
+  --data-inspector-tooltip-path: darkseagreen;
+  --data-inspector-tooltip-type: indianred;
+  --data-inspector-tooltip-children: indianred;
+  --data-inspector-tooltip-length: indianred;
+  --data-inspector-tooltip-background: #e7e1d9;
+  --data-inspector-tooltip-border: #8b8383;
+  --data-inspector-tooltip-shadow: darkred;
+}
+.application.sheet.data-inspector:not(.minimized) {
+  min-width: 520px;
+  min-height: 380px;
+}
+.application.sheet.data-inspector .window-content {
+  grid-template-columns: 30% auto;
+  grid-template-rows: 4em auto;
+  grid-template-areas: "target main" "settings main";
+  gap: 0.5rem;
+  padding: 0.25rem;
+  overflow: hidden;
+}
+.application.sheet.data-inspector .window-content header {
+  display: grid;
+  grid-template-columns: 3fr minmax(min-content, 1fr);
+  grid-template-rows: min-content;
+  gap: 3px;
+  grid-area: header;
+}
+.application.sheet.data-inspector .window-content header .main {
+  display: grid;
+  grid-template-columns: min-content auto;
+  gap: 3px;
+  align-items: center;
+  height: min-content;
+  flex: 1;
+}
+.application.sheet.data-inspector .window-content header .main label {
+  display: contents;
+}
+.application.sheet.data-inspector .window-content header .path-box,
+.application.sheet.data-inspector .window-content header .search-box {
+  display: flex;
+  gap: 3px;
+  flex: 0;
+  align-items: center;
+}
+.application.sheet.data-inspector .window-content header .settings {
+  display: flex;
+  flex-direction: column;
+  flex: 0;
+  gap: 3px;
+  align-items: center;
+}
+.application.sheet.data-inspector .window-content header .settings label {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.3rem;
+  align-items: center;
+}
+.application.sheet.data-inspector .window-content header .settings > h4 {
+  grid-column: span 2;
+  font-variant: small-caps;
+  margin: 0;
+  text-align: center;
+}
+.application.sheet.data-inspector .window-content header .settings input[type=checkbox] {
+  margin: 0 5px;
+  height: 16px;
+  width: 16px;
+}
+.application.sheet.data-inspector .window-content header .settings select {
+  line-height: 1;
+  height: unset;
+  width: min-content;
+}
+.application.sheet.data-inspector .window-content header .main,
+.application.sheet.data-inspector .window-content header .settings {
+  border: 1px solid rgba(106, 89, 78, 0.36078431);
+  border-radius: 5px;
+  padding: 3px;
+  background-color: rgba(137, 122, 112, 0.10980392);
+  height: 100%;
+}
+.application.sheet.data-inspector .window-content aside.target {
+  grid-area: target;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5em;
+  padding: 0.5em;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  background: var(--appv2-background);
+}
+.application.sheet.data-inspector .window-content aside.target .header {
+  flex: 1;
+  text-align: center;
+  font-weight: bold;
+  align-content: center;
+}
+.application.sheet.data-inspector .window-content aside.target img {
+  flex: 0 0 48px;
+  height: 48px;
+  width: 48px;
+  object-fit: scale-down;
+  border: unset;
+  align-self: center;
+}
+.application.sheet.data-inspector .window-content aside.settings {
+  grid-area: settings;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  padding: 0.5em;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  background: var(--appv2-background);
+  overflow: hidden;
+}
+.application.sheet.data-inspector .window-content aside.settings section.main,
+.application.sheet.data-inspector .window-content aside.settings section.settings {
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.data-inspector .window-content aside.settings section.main .input-row,
+.application.sheet.data-inspector .window-content aside.settings section.settings .input-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+.application.sheet.data-inspector .window-content aside.settings section.main .input-row label,
+.application.sheet.data-inspector .window-content aside.settings section.settings .input-row label {
+  flex: 0 0 4.2em;
+  place-self: center;
+}
+.application.sheet.data-inspector .window-content aside.settings section.main .input-row input,
+.application.sheet.data-inspector .window-content aside.settings section.settings .input-row input,
+.application.sheet.data-inspector .window-content aside.settings section.main .input-row select,
+.application.sheet.data-inspector .window-content aside.settings section.settings .input-row select {
+  flex: 1;
+}
+.application.sheet.data-inspector .window-content aside.settings .search input {
+  padding: 0 0.25rem;
+}
+.application.sheet.data-inspector .window-content aside.settings .search::after {
+  all: unset;
+}
+.application.sheet.data-inspector .window-content aside.settings section.tabs {
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.5rem 0;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  background: var(--appv2-background);
+  overflow-y: auto;
+}
+.application.sheet.data-inspector .window-content aside.settings section.tabs .header {
+  font-weight: bold;
+  font-size: 1.1em;
+  margin-bottom: 0.25rem;
+}
+.application.sheet.data-inspector .window-content aside.settings section.tabs a[data-action='tab'] {
+  padding: 0.3em;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  background: var(--appv2-background-alt);
+}
+.application.sheet.data-inspector .window-content aside.settings section.tabs a[data-action='tab'] small {
+  font-size: xx-small;
+}
+.application.sheet.data-inspector .window-content content.main {
+  overflow: hidden;
+}
+.application.sheet.data-inspector .window-content content.main .type {
+  display: flex;
+  white-space: nowrap;
+  gap: 0.25em;
+}
+.application.sheet.data-inspector .window-content content.main .type label {
+  flex: 1;
+}
+.application.sheet.data-inspector .window-content content.main .type .value {
+  flex: 3;
+  font-weight: bold;
+}
+.application.sheet.data-inspector .window-content content.main section.content > .data-list {
+  height: 100%;
+  overflow-y: scroll;
+}
+.application.sheet.data-inspector .window-content content.main section.content > .data-list .warning {
+  text-align: center;
+}
+.application.sheet.data-inspector .window-content content.main section.content > .data-list.derived [data-path]:not(.in-source) .key,
+.application.sheet.data-inspector .window-content content.main section.content > .data-list.rolldata [data-path]:not(.in-source) .key {
+  color: var(--data-inspector-entry-not-in-source);
+}
+.application.sheet.data-inspector .window-content content.main section.content > .data-list.source [data-path]:not(.in-rolldata) .key {
+  color: var(--data-inspector-entry-not-in-rolldata);
+}
+.application.sheet.data-inspector .window-content content.main section.content > .data-list .data-pools .absent.temporary,
+.application.sheet.data-inspector .window-content content.main section.content > .data-list .data-pools .absent.source {
+  color: #c30808;
+}
+.application.sheet.data-inspector .window-content content.main > .header {
+  display: flex;
+  line-height: 1.5em;
+  align-items: center;
+  background-color: var(--data-inspector-header-background);
+  color: var(--data-inspector-header-font);
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.application.sheet.data-inspector .window-content content.main > .data .key,
+.application.sheet.data-inspector .window-content content.main > .header .key {
+  padding-left: 1em;
+  flex: 0 0 11em;
+}
+.application.sheet.data-inspector .window-content content.main > .data .value,
+.application.sheet.data-inspector .window-content content.main > .header .value {
+  flex: 0 0 17em;
+}
+.application.sheet.data-inspector .window-content content.main > .data .data-pools,
+.application.sheet.data-inspector .window-content content.main > .header .data-pools {
+  display: inline-flex;
+  flex: 0 4em;
+  gap: 1px;
+  justify-content: center;
+}
+.application.sheet.data-inspector .window-content content.main > .data .data-pools .pool,
+.application.sheet.data-inspector .window-content content.main > .header .data-pools .pool {
+  flex: 0 1em;
+  text-align: center;
+}
+.application.sheet.data-inspector .window-content content.main ul {
+  flex: 1 100%;
+  background: var(--appv2-background-alt);
+  font-size: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.application.sheet.data-inspector .window-content content.main ul > li {
+  padding-left: 0.7em;
+}
+.application.sheet.data-inspector .window-content content.main ul.root > li {
+  padding-left: 0;
+}
+.application.sheet.data-inspector .window-content content.main ul > li:nth-child(2n+1) {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+.application.sheet.data-inspector .window-content content.main ul > li:nth-child(2n+0) {
+  background-color: transparent;
+}
+.application.sheet.data-inspector .window-content content.main ul > li.data-element.not-in-temporary .key {
+  text-shadow: 0 0 3px var(--data-inspector-entry-nondefault-data);
+}
+.application.sheet.data-inspector .window-content content.main ul .note {
+  padding-left: 2em;
+  font-size: 9pt;
+  flex: 0;
+}
+.application.sheet.data-inspector .window-content content.main ul .details {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.application.sheet.data-inspector .window-content content.main ul .details .extended-value {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value-details {
+  flex: 1 100%;
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value,
+.application.sheet.data-inspector .window-content content.main ul .details .value-details {
+  flex: 0 17em;
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 17em;
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value.container {
+  font-style: italic;
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value.function {
+  font-style: italic;
+  color: var(--data-inspector-entry-type-function);
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value.string {
+  color: var(--data-inspector-entry-type-string);
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value.string::after,
+.application.sheet.data-inspector .window-content content.main ul .details .value.string::before {
+  content: '"';
+  opacity: 0.4;
+  color: unset;
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value.boolean {
+  color: var(--data-inspector-entry-type-boolean);
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value.boolean.true:before {
+  content: '🗹 ';
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value.boolean.false:before {
+  content: '☐ ';
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value.number {
+  font-style: italic;
+  color: var(--data-inspector-entry-type-number);
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value.empty {
+  color: var(--data-inspector-entry-type-empty);
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value.recursion {
+  font-style: italic;
+  color: var(--data-inspector-entry-type-empty);
+  cursor: pointer;
+}
+.application.sheet.data-inspector .window-content content.main ul .details .value.model {
+  color: var(--data-inspector-entry-type-model);
+  opacity: 1;
+}
+.application.sheet.data-inspector .window-content content.main ul .details h4 {
+  flex: 0 1 11em;
+  margin: 0;
+  padding: 0;
+  line-height: 1.2;
+  font-size: 14px;
+  text-overflow: ellipsis;
+  text-wrap: nowrap;
+  max-width: 11em;
+  overflow: hidden;
+}
+.application.sheet.data-inspector .window-content content.main ul .details:hover {
+  text-shadow: 0 0 5px var(--data-inspector-entry-hover-shadow);
+  background-color: var(--data-inspector-entry-hover-background);
+  box-shadow: 0 0 3px var(--data-inspector-entry-hover-boxshadow);
+}
+.application.sheet.data-inspector .window-content content.main ul li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  line-height: 1;
+  position: relative;
+}
+.application.sheet.data-inspector .window-content content.main ul li > ul.data-list {
+  border: 1px solid var(--border-theme-color);
+  border-right: none;
+  border-radius: 0.7em 0 0 0.7em;
+  padding: 0.2em 0;
+}
+.application.sheet.data-inspector .window-content content.main ul li:hover > ul.data-list {
+  background: var(--appv2-background);
+}
+.application.sheet.data-inspector .window-content content.main ul li .details {
+  flex: 1;
+}
+.application.sheet.data-inspector .window-content content.main ul li:before {
+  content: " = ";
+  white-space: pre;
+  flex: 0 1em;
+  opacity: 0.4;
+}
+.application.sheet.data-inspector .window-content content.main ul li.expanded:before {
+  content: " - ";
+  opacity: unset;
+}
+.application.sheet.data-inspector .window-content content.main ul li.expanded:not(.empty) > .details {
+  border-bottom: 1px solid var(--data-inspector-details-separator);
+}
+.application.sheet.data-inspector .window-content content.main ul li.empty {
+  opacity: 0.6;
+}
+.application.sheet.data-inspector .window-content content.main ul li.empty .value.empty.string:before,
+.application.sheet.data-inspector .window-content content.main ul li.empty .value.empty.string:after {
+  opacity: unset;
+}
+.application.sheet.data-inspector .window-content content.main ul li.collapsed:before {
+  content: " + ";
+  opacity: unset;
+}
+.application.sheet.data-inspector .window-content content.main ul li.collapsed ul {
+  display: none;
+}
+.application.sheet.data-inspector .window-content content.main ul li.document,
+.application.sheet.data-inspector .window-content content.main ul li.function .application.sheet.data-inspector .window-content content.main ul li.getter {
+  color: var(--data-inspector-entry-nondefault-data);
+}
+.application.sheet.data-inspector .window-content content.main ul li.document:before,
+.application.sheet.data-inspector .window-content content.main ul li.function .application.sheet.data-inspector .window-content content.main ul li.getter:before {
+  content: "~ ";
+}
+.application.sheet.data-inspector .window-content content.main ul li.getter .value:hover {
+  color: black;
+  text-shadow: 0 0 15px red;
+}
+.application.sheet.data-inspector .window-content content.main ul li[data-path]:hover {
+  opacity: unset;
+}
+.application.sheet.data-inspector .window-content content.main ul li[data-match-quality=good] {
+  background-color: var(--data-inspector-search-good-match);
+}
+.application.sheet.data-inspector .window-content content.main ul li[data-match-quality=decent] {
+  background-color: var(--data-inspector-search-decent-match);
+}
+.application.sheet.data-inspector .window-content content.main ul li[data-match-quality=bad].value {
+  display: none;
+}
+.application.sheet.data-inspector .window-content content.main ul li.hide {
+  display: none;
+}
+.application.sheet.data-inspector .window-content content.main ul li.data-element.selected {
+  background-color: var(--data-inspector-selected);
+}
+.application.sheet.data-inspector .window-content content.main ul li .value[data-id]:hover {
+  color: black;
+  opacity: unset;
+}
+.application.sheet.data-inspector .window-content content.main footer {
+  display: flex;
+  flex-flow: row;
+  gap: 3px;
+}
+.application.sheet.data-inspector .window-content content.main footer > .footnote {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.application.sheet.data-inspector .window-content content.main footer > .footnote > label,
+.application.sheet.data-inspector .window-content content.main footer > .footnote > span {
+  padding: 1px 3px;
+}
+.application.sheet.data-inspector .window-content content.main > ul {
+  border: none;
+  border-right: 1px solid rgba(88, 74, 63, 0.14901961);
+}
+.application.sheet.data-inspector .window-content content.main,
+.application.sheet.data-inspector .window-content content.roll-inspector {
+  grid-area: main;
+  padding: 0.5em;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  background: var(--appv2-background);
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector:has(section.tab) {
+  display: contents;
+  border: unset;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active {
+  padding: unset;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: min-content auto;
+  grid-template-areas: "domains domains" "options modifiers";
+  gap: 0.5rem;
+  overflow: hidden;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section {
+  padding: 0.5em;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  background: var(--appv2-background);
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section .header,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section .header {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.domains,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.domains {
+  grid-area: domains;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.domains .type,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.domains .type {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.domains .type input,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.domains .type input {
+  flex: 1;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.domains .domains,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.domains .domains {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.1rem;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.domains .domains .domain,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.domains .domains .domain {
+  background: var(--appv2-background-alt);
+  border: 1px solid var(--border-theme-color);
+  padding: 0.2rem;
+  border-radius: 8px;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.options,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.options {
+  grid-area: options;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.options ul.options,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.options ul.options {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.options ul.options .option,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.options ul.options .option {
+  overflow: hidden;
+  text-wrap: nowrap;
+  text-overflow: ellipsis;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.modifiers,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.modifiers {
+  grid-area: modifiers;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.modifiers ul.modifiers,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.modifiers ul.modifiers {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow-y: auto;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.modifiers ul.modifiers .modifier,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.modifiers ul.modifiers .modifier {
+  padding: 0.5em;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 8px;
+  background: var(--appv2-background);
+  margin: 0.25rem 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  align-items: center;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.modifiers ul.modifiers .modifier .label,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.modifiers ul.modifiers .modifier .label {
+  font-weight: bold;
+  flex: 0 0 min-content;
+  text-wrap: nowrap;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.modifiers ul.modifiers .modifier .value,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.modifiers ul.modifiers .modifier .value {
+  font-style: italic;
+  flex: 1 0 auto;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.modifiers ul.modifiers .modifier .type,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.modifiers ul.modifiers .modifier .type,
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.modifiers ul.modifiers .modifier .method,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.modifiers ul.modifiers .modifier .method {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.modifiers ul.modifiers .modifier .type span,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.modifiers ul.modifiers .modifier .type span,
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.modifiers ul.modifiers .modifier .method span,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.modifiers ul.modifiers .modifier .method span {
+  flex: 0 0 30%;
+}
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.modifiers ul.modifiers .modifier .type input,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.modifiers ul.modifiers .modifier .type input,
+.application.sheet.data-inspector .window-content content.roll-inspector > section.tab.active section.modifiers ul.modifiers .modifier .method input,
+.application.sheet.data-inspector .window-content content.roll-inspector:not(:has(section.tab)) section.modifiers ul.modifiers .modifier .method input {
+  flex: 1;
+}
+.application.sheet.data-inspector .window-content section.content {
+  display: flex;
+  flex: 1;
+  overflow: auto;
+}
 .application .standard-form input[type="checkbox"] {
   --checkbox-background-color: #3d343f;
 }
@@ -3568,6 +4932,7 @@ body .application.sheet .form-group {
 .token-panel .tab.skill-tab .skill-item {
   display: flex;
   flex-direction: row;
+  max-width: 150px;
   background: var(--appv2-background);
   border-top: 1px solid var(--border-theme-color);
 }
@@ -3627,6 +4992,8 @@ body .application.sheet .form-group {
   padding: 0.25rem;
   min-width: 0;
   text-overflow: ellipsis;
+  text-wrap: nowrap;
+  overflow: hidden;
 }
 .token-panel .tab.action-tab .attack-item .name.small,
 .token-panel .tab.skill-tab .attack-item .name.small,
@@ -3731,6 +5098,7 @@ body .application.sheet .form-group {
   order: 1;
   display: flex;
   border-bottom: 1px solid var(--border-theme-color);
+  overflow: hidden;
   flex-wrap: wrap;
 }
 .token-panel section.token-info .icon,
@@ -4228,4 +5596,13 @@ body .application.sheet .form-group {
 .ptr2e .directory-item.document .entry-name.document-name .actor-level {
   font-size: x-small;
   color: var(--color-text-light-primary);
+}
+.directory-item.document .entry-name.document-name.rarity-uncommon {
+  color: #33a7ff;
+}
+.directory-item.document .entry-name.document-name.rarity-rare {
+  color: #f5c42e;
+}
+.directory-item.document .entry-name.document-name.rarity-unique {
+  color: #a526ff;
 }

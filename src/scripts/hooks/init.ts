@@ -9,6 +9,9 @@ import { default as enrichers} from "@scripts/ui/text-enrichers.ts";
 import { WelcomeTour } from "@module/tours/welcome.ts";
 import { FoldersTour } from "@module/tours/folders.ts";
 import { CharacterCreationTour } from "@module/tours/character-creation.ts";
+import { storeInitialWorldVersions } from "@scripts/store-versions.ts";
+import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
+import { MigrationSummary } from "@module/apps/migration-summary.ts";
 // import { PerkWebTour } from "@module/tours/perk-web.ts";
 // import { GeneratingPokemonTour } from "@module/tours/generating-pokemon.ts";
 
@@ -23,8 +26,8 @@ export const Init: PTRHook = {
             foundry.abstract.DataModel.defineSchema = () => ({});
 
             // Add actor() to window
-            /** @returns {Actor?} */
-            window.actor = function () {
+            //@ts-expect-error - Adding actor to window
+            window.actor = function (): Actor | null {
                 return canvas.tokens.controlled[0]?.actor;
             }
 
@@ -77,22 +80,21 @@ export const Init: PTRHook = {
             // Register custom sheets
             {
                 Actors.unregisterSheet("core", ActorSheet);
-                //@ts-ignore
+                //@ts-expect-error - Application V2 Compatability
                 Actors.registerSheet("ptr2e", ActorSheetPTR2e, { types: ["humanoid", "pokemon"], makeDefault: true })
-                //@ts-ignore
                 Actors.registerSheet("ptr2e", PTRCONFIG.Actor.sheetClasses["ptu-actor"], { types: ["ptu-actor"], makeDefault: true })
 
                 Items.unregisterSheet("core", ItemSheet);
                 for (const type in PTRCONFIG.Item.sheetClasses) {
                     const key = type as keyof typeof PTRCONFIG.Item.sheetClasses;
                     for (const sheet of PTRCONFIG.Item.sheetClasses[key]) {
-                        //@ts-ignore
+                        //@ts-expect-error - Application V2 Compatability
                         Items.registerSheet("ptr2e", sheet, { types: [type], makeDefault: true });
                     }
                 }
 
                 DocumentSheetConfig.unregisterSheet(ActiveEffect, "core", ActiveEffectConfig);
-                // @ts-ignore
+                //@ts-expect-error - Application V2 Compatability
                 DocumentSheetConfig.registerSheet(ActiveEffect, "ptr2e", PTRCONFIG.ActiveEffect.sheetClasses.effect, { makeDefault: true });
             }
 
@@ -102,7 +104,7 @@ export const Init: PTRHook = {
             (async () => {
                 // Monkeypatch the game.tooltip class to stop auto-dismissing tooltips
                 const original = game.tooltip.deactivate.bind(game.tooltip);
-                //@ts-expect-error
+                //@ts-expect-error - Monkeypatching game.tooltip
                 game.tooltip.deactivate = (force) => {
                     if(Tour.tourInProgress && !force) return;
                     original();
@@ -144,6 +146,56 @@ export const Init: PTRHook = {
             console.log('PTR 2e | Ready');
             // Add ready code here
             GamePTR.onReady();
+
+            // Determine whether a system migration is required and feasible
+            const currentVersion = game.settings.get("ptr2e", "worldSchemaVersion") as number;
+
+            // Save the current world schema version if hasn't before.
+            storeInitialWorldVersions().then(async () => {
+                // Ensure only a single GM will run migrations if multiple are logged in
+                if (game.user !== game.users.activeGM) return;
+
+                // Perform migrations, if any
+                const migrationRunner = new MigrationRunner(MigrationList.constructFromVersion(currentVersion));
+                if (migrationRunner.needsMigration()) {
+                    if (currentVersion && currentVersion < MigrationRunner.MINIMUM_SAFE_VERSION) {
+                        ui.notifications.error(
+                            `Your PTR2E system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.`,
+                            { permanent: true },
+                        );
+                    }
+                    await migrationRunner.runMigration();
+                    new MigrationSummary().render(true);
+                }
+
+                // Update the world system version
+                const previous = game.settings.get("ptr2e", "worldSystemVersion") as string;
+                const current = game.system.version;
+                if (fu.isNewerVersion(current, previous)) {
+                    await game.settings.set("ptr2e", "worldSystemVersion", current);
+                }
+
+                // These modules claim compatibility with V12 but are abandoned
+                const abandonedModules = new Set<string>([]);
+
+                // Nag the GM for running unmaintained modules
+                const subV10Modules = game.modules.filter(
+                    (m) =>
+                        m.active &&
+                        (m.esmodules.size > 0 || m.scripts.size > 0) &&
+                        // Foundry does not enforce the presence of `Module#compatibility.verified`, but modules
+                        // without it will also not be listed in the package manager. Skip warning those without it in
+                        // case they were made for private use.
+                        !!m.compatibility.verified &&
+                        (abandonedModules.has(m.id) || !fu.isNewerVersion(m.compatibility.verified, "10.312")),
+                );
+
+                for (const badModule of subV10Modules) {
+                    const message = game.i18n.format("PTR2E.ErrorMessage.SubV9Module", { module: badModule.title });
+                    ui.notifications.warn(message);
+                    console.warn(message);
+                }
+            });
         })
     }
 }

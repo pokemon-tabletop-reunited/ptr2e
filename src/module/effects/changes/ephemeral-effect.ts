@@ -21,7 +21,7 @@ export default class EphemeralEffectChangeSystem extends ChangeModel {
         };
     }
 
-    static override #validateUuid(
+    static #validateUuid(
         value: unknown
     ): void | foundry.data.validation.DataModelValidationFailure {
         if (!UUIDUtils.isItemUUID(value)) {
@@ -31,7 +31,7 @@ export default class EphemeralEffectChangeSystem extends ChangeModel {
                 unresolved: false,
             });
         }
-        if (!fromUuidSync(value)) {
+        if (game.ready && !fromUuidSync(value)) {
             return new foundry.data.validation.DataModelValidationFailure({
                 invalidValue: value,
                 message: game.i18n.format("PTR2E.Effect.FIELDS.ChangeUuid.invalid.itemNotFound", {

@@ -1,12 +1,14 @@
 {
   "name": "Hidden Power",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "hidden-power",
-    "description": "Effect: Hidden Power is treated as being super-effective against the target, and doubly super-effective if the target possesses at least 2 Types.",
+    "description": "",
     "traits": [
-      "move-locked"
+      "move-locked",
+      "pp-updated",
+      "pulse"
     ],
     "actions": [
       {
@@ -14,16 +16,18 @@
         "name": "Hidden Power",
         "type": "attack",
         "traits": [
-          "move-locked"
+          "move-locked",
+          "pp-updated",
+          "pulse"
         ],
         "range": {
           "target": "creature",
-          "distance": 10,
+          "distance": 5,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +38,7 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: Hidden Power is treated as being super-effective against the target, and doubly super-effective if the target possesses at least 2 Types.",
+        "description": "Effect: When the user learns this Attack, this Attack's Type permanently changes to a random Type.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +46,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "_id": "1lkeVmjLt8Vp0izT",
   "effects": []

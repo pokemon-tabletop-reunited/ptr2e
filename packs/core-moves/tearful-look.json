@@ -1,43 +1,43 @@
 {
-    "name": "Tearful Look",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/normal_icon.svg",
-    "system": {
+  "name": "Tearful Look",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "system": {
+    "slug": "tearful-look",
+    "description": "Effect: The target loses -1 ATK and SPATK stages for 5 activations.",
+    "traits": [
+      "social",
+      "danger-close"
+    ],
+    "actions": [
+      {
         "slug": "tearful-look",
-        "description": "Effect: The target loses -1 ATK and SPATK stages for 5 activations.",
+        "name": "Tearful Look",
+        "type": "attack",
         "traits": [
-            "social",
-            "danger-close"
+          "social",
+          "danger-close"
         ],
-        "actions": [
-            {
-                "slug": "tearful-look",
-                "name": "Tearful Look",
-                "type": "attack",
-                "traits": [
-                    "social",
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 8,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 5
-                },
-                "category": "status",
-                "accuracy": 100,
-                "types": [
-                    "normal"
-                ],
-                "description": "Effect: The target loses -1 ATK and SPATK stages for 5 activations.",
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "normal"
         ],
-        "grade": "C"
-    },
-    "_id": "DgEOXYgxvDKzfttF",
-    "effects": []
+        "description": "Effect: The target loses -1 ATK and SPATK stages for 5 activations.",
+        "img": "/systems/ptr2e/img/svg/normal_icon.svg"
+      }
+    ],
+    "grade": "C"
+  },
+  "_id": "DgEOXYgxvDKzfttF",
+  "effects": []
 }

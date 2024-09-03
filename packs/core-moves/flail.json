@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "flail",
-    "description": "Effect: This attack's Power ranges based on how damaged the user is, ranging from 20 to 200.\n<blockquote>Damage Formula: Power = min(20, (200 x (UserMaxHP-UserCurrentHP)/UserMaxHP + 20))</blockquote>",
+    "description": "",
     "traits": [
       "contact"
     ],
@@ -14,7 +14,8 @@
         "name": "Flail",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 9,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "A"
   },
   "_id": "CW44Gzlj9fY26pGh",
   "effects": []

@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "waterfall",
-    "description": "Effect: On hit, all valid targets have a 20% chance of gaining Flinched 2.",
+    "description": "",
     "traits": [
       "contact",
       "pass-2"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "contact",
-          "pass-2"
+          "pass-2",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,7 @@
         "types": [
           "water"
         ],
-        "description": "Effect: On hit, all valid targets have a 20% chance of gaining Flinched 2.",
+        "description": "Effect: On hit, all valid targets have a 20% chance of gaining @Affliction[flinched] 2.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "_id": "C8ricUjRzb7sX101",
   "effects": []

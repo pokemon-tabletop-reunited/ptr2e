@@ -15,6 +15,29 @@
         "slug": "teraform-zero",
         "type": "generic",
         "cost": {
+          "activation": "simple",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Effect: All current [Weather] and [Terrain] effects end. Creatures on the field that have undergone a Phenomenal Transformation other than Terastallization have those Transformations ended."
+      },
+      {
+        "traits": [
+          "environ",
+          "transform",
+          "phenomenon",
+          "legendary"
+        ],
+        "name": "Teraform Zero",
+        "slug": "teraform-zero",
+        "type": "generic",
+        "cost": {
           "activation": "free",
           "powerPoints": 0,
           "trigger": "The user gains this ability.",
@@ -26,10 +49,10 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user gains this ability.\nEffect: All current [Weather] and [Terrain] effects end. Creatures on the field that have undergone a Phenomenal Transformation other than Terastalization have those Transformations ended. The user may spend 8 PP as a Simple Action to activate this Ability, ignoring this Ability's Trigger."
+        "description": "Trigger: The user gains this ability.\nEffect: All current [Weather] and [Terrain] effects end. Creatures on the field that have undergone a Phenomenal Transformation other than Terastallization have those Transformations ended."
       }
     ],
-    "description": "Trigger: The user gains this ability.\nEffect: All current [Weather] and [Terrain] effects end. Creatures on the field that have undergone a Phenomenal Transformation other than Terastalization have those Transformations ended. The user may spend 8 PP as a Simple Action to activate this Ability, ignoring this Ability's Trigger.",
+    "description": "Trigger: The user gains this ability.\nEffect: All current [Weather] and [Terrain] effects end. Creatures on the field that have undergone a Phenomenal Transformation other than Terastallization have those Transformations ended. The user may spend PP as a Simple Action to activate this Ability, ignoring the normal Trigger.",
     "traits": [
       "environ",
       "transform",

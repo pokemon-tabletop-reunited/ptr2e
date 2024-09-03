@@ -5,14 +5,16 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "defensive"
+        ],
         "name": "Anticipation",
         "slug": "anticipation",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
-          "trigger": "At battle start or when user is switched in.",
+          "powerPoints": 2,
+          "trigger": "The user is targeted with an Attack that has a Base Power of 100 or more (after the X-Strike roll to determine number of hits), or an Attack that would be super-effective against it.",
           "delay": null,
           "priority": null
         },
@@ -21,10 +23,10 @@
           "distance": 20,
           "unit": "m"
         },
-        "description": "Trigger: At battle start or when user is switched in.\nEffect: The user knows the highest Power attack on the target's Active List. The user takes half damage from this attack for the duration of the combat, until switched out, or Fainted."
+        "description": "Trigger: The user is targeted with an Attack that has a Base Power of 100 or more (after the X-Strike roll to determine number of hits), or an Attack that would be super-effective against it.\nEffect: The user is treated as having +3 EVA against the triggering Attack."
       }
     ],
-    "description": "Trigger: At battle start or when user is switched in.\nEffect: The user knows the highest Power attack on the target's Active List. The user takes half damage from this attack for the duration of the combat, until switched out, or Fainted.",
+    "description": "Trigger: The user is targeted with an Attack that has a Base Power of 100 or more (after the X-Strike roll to determine number of hits), or an Attack that would be super-effective against it.\nEffect: The user is treated as having +3 EVA against the triggering Attack.",
     "traits": [],
     "slug": null,
     "container": null

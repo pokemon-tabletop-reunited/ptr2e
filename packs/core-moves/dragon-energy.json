@@ -4,10 +4,9 @@
   "img": "/systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "dragon-energy",
-    "description": "Effect: This attack's Power ranges based on how healthy the user is, ranging from 1 to 150.\n<blockquote>Damage Formula: Power = max(1, 150 x UserCurrentHP/UserMaxHP)</blockquote>",
+    "description": "",
     "traits": [
       "legendary",
-      "smite",
       "pulse"
     ],
     "actions": [
@@ -17,8 +16,8 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "smite",
-          "pulse"
+          "pulse",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
@@ -27,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 10,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -46,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "A"
   },
   "_id": "xf2NuI372VOQGVIL",
   "effects": []

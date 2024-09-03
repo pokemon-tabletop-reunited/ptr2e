@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "thief",
-    "description": "On hit, the user steals the target's equipped Acessory item or one Belt item and equips it on themself. If the user already has an equipped Accessory or Belt item, the stolen item is dropped on the ground in a square adjacent to the target.",
+    "description": "",
     "traits": [
       "contact"
     ],
@@ -14,7 +14,8 @@
         "name": "Thief",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "C"
+    "grade": "D"
   },
   "_id": "jxorjVcjferdaDBc",
   "effects": []

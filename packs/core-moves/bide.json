@@ -4,17 +4,18 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "bide",
-    "description": "Effect: Set Up: the user gains Marked 6 and Braced 2.\nResolution: On the user's next Activation, they target a valid creature, dealing twice the damage they took since declaring Bide to the target. Bide gains [Danger Close].",
+    "description": "Effect: Set Up: the user gains @Affliction[marked] 6 and @Affliction[braced] 2.\nResolution: On the user's next Activation, they target a valid creature, dealing twice the damage they took since declaring Bide to the target.",
     "traits": [
       "defensive",
       "draw-in",
       "set-up",
+      "delay-2",
       "danger-close"
     ],
     "actions": [
       {
-        "slug": "bide",
         "name": "Bide",
+        "slug": "bide",
         "type": "attack",
         "traits": [
           "defensive",
@@ -41,7 +42,7 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: Set Up: the user gains Marked 6 and Braced 2. \nResolution: On the user's next Activation, they target a valid creature, dealing twice the damage they took since declaring Bide to the target. Bide gains [Danger Close].",
+        "description": "Effect: Set Up: the user gains @Affliction[marked] 6 and @Affliction[braced] 2. \nResolution: On the user's next Activation, they target a valid creature, dealing twice the damage they took since declaring Bide to the target.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

@@ -19,14 +19,35 @@
           "priority": null
         },
         "range": {
+          "target": "object",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "Effect: If a space within range possesses Electric Terrain, the user is affected by Electric Terrain."
+      },
+      {
+        "traits": [
+          "aura",
+          "environ"
+        ],
+        "name": "Quark Drive",
+        "slug": "quark-drive",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
           "target": "self",
           "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: While Electric Terrain is active, the user's highest Stat, excluding HP, is increased by 30%, or 50% if the stat is SPD. This is before [Stage Change] effects, Afflictions and Items. If the user has an equipped Booster Energy, Quark Drive can be activated for 5 activations once per combat."
+        "description": "Effect: While the user is affected by Electric Terrain, the user's highest Stat, excluding HP, is increased by +30%, or +50% if the stat is SPD. This is before [Stage Change] effects, Afflictions and Items. If the user has an equipped Booster Energy, Quark Drive can be activated for 5 activations once per combat."
       }
     ],
-    "description": "Effect: While Electric Terrain is active, the user's highest Stat, excluding HP, is increased by 30%, or 50% if the stat is SPD. This is before [Stage Change] effects, Afflictions and Items. If the user has an equipped Booster Energy, Quark Drive can be activated for 5 activations once per combat.",
+    "description": "Effect: While the user is affected by Electric Terrain, the user's highest Stat, excluding HP, is increased by +30%, or +50% if the stat is SPD. This is before [Stage Change] effects, Afflictions and Items. If the user has an equipped Booster Energy, Quark Drive can be activated for 5 activations once per combat.",
     "traits": [
       "aura",
       "environ"

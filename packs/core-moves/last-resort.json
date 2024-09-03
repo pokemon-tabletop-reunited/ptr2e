@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "last-resort",
-    "description": "Effect: Last Resort fails if the user has not used every other attack on its Active List at least once this combat. If the user switches out or is Fainted this effect resets. If Last Resort is the only attack on the active attack list, it fails when used.",
+    "description": "",
     "traits": [
       "contact"
     ],
@@ -14,7 +14,8 @@
         "name": "Last Resort",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,14 +35,15 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: Last Resort fails if the user has not used every other attack on its Active List at least once this combat. If the user switches out or is Fainted this effect resets. If Last Resort is the only attack on the active attack list, it fails when used.",
+        "description": "Effect: Last Resort fails if the user has not used every other attack on its Active List at least once this combat. If the user switches out or is @Affliction[fainted] this effect resets. If Last Resort is the only attack on the active attack list, it fails when used.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "B"
   },
   "_id": "3k7xwStdRVYtvJM4",
   "effects": []

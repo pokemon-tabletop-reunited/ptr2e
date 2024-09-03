@@ -1,44 +1,44 @@
 {
-    "name": "Me First",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/normal_icon.svg",
-    "system": {
+  "name": "Me First",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "system": {
+    "slug": "me-first",
+    "description": "Trigger: The target declares a damaging attack. \nEffect: The user copies the triggering attack and uses it on the attacker with 50% increased power.",
+    "traits": [
+      "interrupt-2",
+      "danger-close"
+    ],
+    "actions": [
+      {
         "slug": "me-first",
-        "description": "Trigger: The target declares a damaging attack. \nEffect: The user copies the triggering attack and uses it on the attacker with 50% increased power.",
+        "name": "Me First",
+        "type": "attack",
         "traits": [
-            "interrupt-2",
-            "danger-close"
+          "interrupt-2",
+          "danger-close"
         ],
-        "actions": [
-            {
-                "slug": "me-first",
-                "name": "Me First",
-                "type": "attack",
-                "traits": [
-                    "interrupt-2",
-                    "danger-close"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 10,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 5,
-                    "trigger": "The target declares a damaging attack."
-                },
-                "category": "status",
-                "accuracy": 100,
-                "types": [
-                    "normal"
-                ],
-                "description": "Trigger: The target declares a damaging attack. \nEffect: The user copies the triggering attack and uses it on the attacker with 50% increased power.",
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "trigger": "The target declares a damaging attack."
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "normal"
         ],
-        "grade": "D"
-    },
-    "_id": "FV5yzcRqoUnixDvC",
-    "effects": []
+        "description": "Trigger: The target declares a damaging attack. \nEffect: The user copies the triggering attack and uses it on the attacker with 50% increased power.",
+        "img": "/systems/ptr2e/img/svg/normal_icon.svg"
+      }
+    ],
+    "grade": "D"
+  },
+  "_id": "FV5yzcRqoUnixDvC",
+  "effects": []
 }

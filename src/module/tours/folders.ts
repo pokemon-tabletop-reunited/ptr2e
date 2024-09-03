@@ -6,76 +6,77 @@ import { PTRTour } from "./base.ts";
 
 export class FoldersTour extends PTRTour {
     protected override async _preStep(): Promise<void> {
-        switch (this.currentStep?.id) {
-            case "welcome":
-                ui.sidebar.activateTab("actors");
-                break;
-            case "create-dialog": {
-                ui.sidebar.activateTab("actors");
-                await this.createDialog();
-                break;
-            }
-            case "create-party": {
-                ui.sidebar.activateTab("actors");
+      return;
+      // switch (this.currentStep?.id) {
+      //     case "welcome":
+      //         ui.sidebar.activateTab("actors");
+      //         break;
+      //     case "create-dialog": {
+      //         ui.sidebar.activateTab("actors");
+      //         await this.createDialog();
+      //         break;
+      //     }
+      //     case "create-party": {
+      //         ui.sidebar.activateTab("actors");
 
-                const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
+      //         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
 
-                const dialog = await this.openTourSanDialog(folder);
+      //         const dialog = await this.openTourSanDialog(folder);
 
-                await FolderConfigPTR2e._updateFolder(dialog.document, { "flags.ptr2e.owner": tourSan.uuid, "flags.ptr2e.party": [tourSanVoltorb.uuid], "flags.ptr2e.team": [] });
-                await dialog.render({parts: ["members"]})
-                await this.delay(250);
-                htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']")?.classList.remove("collapsed");
-                break;
-            }
-            case "open-party-sheet": {
-                ui.sidebar.activateTab("actors");
+      //         await FolderConfigPTR2e._updateFolder(dialog.document, { "flags.ptr2e.owner": tourSan.uuid, "flags.ptr2e.party": [tourSanVoltorb.uuid], "flags.ptr2e.team": [] });
+      //         await dialog.render({parts: ["members"]})
+      //         await this.delay(250);
+      //         htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']")?.classList.remove("collapsed");
+      //         break;
+      //     }
+      //     case "open-party-sheet": {
+      //         ui.sidebar.activateTab("actors");
 
-                const {folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-                await FolderConfigPTR2e._updateFolder(folder, { "flags.ptr2e.owner": tourSan.uuid, "flags.ptr2e.party": [tourSanVoltorb.uuid], "flags.ptr2e.team": [] });
-                await this.delay(250);
-                break;
-            }
-            case "opened-party-sheet": {
-                ui.sidebar.activateTab("actors");
+      //         const {folder, tourSan, tourSanVoltorb } = await this.getDocuments();
+      //         await FolderConfigPTR2e._updateFolder(folder, { "flags.ptr2e.owner": tourSan.uuid, "flags.ptr2e.party": [tourSanVoltorb.uuid], "flags.ptr2e.team": [] });
+      //         await this.delay(250);
+      //         break;
+      //     }
+      //     case "opened-party-sheet": {
+      //         ui.sidebar.activateTab("actors");
 
-                const {folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-                await FolderConfigPTR2e._updateFolder(folder, { "flags.ptr2e.owner": tourSan.uuid, "flags.ptr2e.party": [tourSanVoltorb.uuid], "flags.ptr2e.team": [] });
-                await folder.renderPartySheet();
-                await this.delay(250);
-                break;
-            }
-            case "create-team": {
-                ui.sidebar.activateTab("actors");
-                
-                const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
+      //         const {folder, tourSan, tourSanVoltorb } = await this.getDocuments();
+      //         await FolderConfigPTR2e._updateFolder(folder, { "flags.ptr2e.owner": tourSan.uuid, "flags.ptr2e.party": [tourSanVoltorb.uuid], "flags.ptr2e.team": [] });
+      //         await folder.renderPartySheet();
+      //         await this.delay(250);
+      //         break;
+      //     }
+      //     case "create-team": {
+      //         ui.sidebar.activateTab("actors");
+              
+      //         const { folder, tourSan, tourSanVoltorb } = await this.getDocuments();
 
-                const dialog = await this.openTourSanDialog(folder);
+      //         const dialog = await this.openTourSanDialog(folder);
 
-                await FolderConfigPTR2e._updateFolder(dialog.document, { "flags.ptr2e.owner": null, "flags.ptr2e.party": [], "flags.ptr2e.team": [tourSan.uuid, tourSanVoltorb.uuid] });
-                await dialog.render({parts: ["members"]})
-                await this.delay(250);
-                htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']")?.classList.remove("collapsed");
-                break;
-            }
-            case "open-team-sheet": {
-                ui.sidebar.activateTab("actors");
+      //         await FolderConfigPTR2e._updateFolder(dialog.document, { "flags.ptr2e.owner": null, "flags.ptr2e.party": [], "flags.ptr2e.team": [tourSan.uuid, tourSanVoltorb.uuid] });
+      //         await dialog.render({parts: ["members"]})
+      //         await this.delay(250);
+      //         htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']")?.classList.remove("collapsed");
+      //         break;
+      //     }
+      //     case "open-team-sheet": {
+      //         ui.sidebar.activateTab("actors");
 
-                const {folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-                await FolderConfigPTR2e._updateFolder(folder, { "flags.ptr2e.owner": null, "flags.ptr2e.party": [], "flags.ptr2e.team": [tourSan.uuid, tourSanVoltorb.uuid] });
-                await this.delay(250);
-                break;
-            }
-            case "opened-team-sheet": {
-                ui.sidebar.activateTab("actors");
+      //         const {folder, tourSan, tourSanVoltorb } = await this.getDocuments();
+      //         await FolderConfigPTR2e._updateFolder(folder, { "flags.ptr2e.owner": null, "flags.ptr2e.party": [], "flags.ptr2e.team": [tourSan.uuid, tourSanVoltorb.uuid] });
+      //         await this.delay(250);
+      //         break;
+      //     }
+      //     case "opened-team-sheet": {
+      //         ui.sidebar.activateTab("actors");
 
-                const {folder, tourSan, tourSanVoltorb } = await this.getDocuments();
-                await FolderConfigPTR2e._updateFolder(folder, { "flags.ptr2e.owner": null, "flags.ptr2e.party": [], "flags.ptr2e.team": [tourSan.uuid, tourSanVoltorb.uuid] });
-                await folder.renderTeamSheet();
-                await this.delay(250);
-                break;
-            }
-        }
+      //         const {folder, tourSan, tourSanVoltorb } = await this.getDocuments();
+      //         await FolderConfigPTR2e._updateFolder(folder, { "flags.ptr2e.owner": null, "flags.ptr2e.party": [], "flags.ptr2e.team": [tourSan.uuid, tourSanVoltorb.uuid] });
+      //         await folder.renderTeamSheet();
+      //         await this.delay(250);
+      //         break;
+      //     }
+      // }
     }
 
     protected override async _postStep(): Promise<void> {
@@ -159,7 +160,7 @@ export class FoldersTour extends PTRTour {
         return data;
     }
 
-    private createDialog() {
+    protected createDialog() {
         CONFIG.PTR.Folder.documentClass.createDialog(
             { type: "Actor" },
             {
@@ -178,7 +179,7 @@ export class FoldersTour extends PTRTour {
         if(dialog) dialog.close();
     }
 
-    private openTourSanDialog(folder: FolderPTR2e = game.folders.get("toursantmpfolder") as FolderPTR2e){
+    protected openTourSanDialog(folder: FolderPTR2e = game.folders.get("toursantmpfolder") as FolderPTR2e){
         const li = htmlQuery(document.body, "li.folder[data-folder-id='toursantmpfolder']");
         const r = li?.getBoundingClientRect();
         const context = r ? {document: folder, position: {top: r.top, left: r.left - FolderConfigPTR2e.DEFAULT_OPTIONS.position.width - 10}} : {document: folder};

@@ -1,46 +1,48 @@
 {
-    "name": "Smart Strike",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/steel_icon.svg",
-    "system": {
+  "name": "Smart Strike",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/steel_icon.svg",
+  "system": {
+    "slug": "smart-strike",
+    "traits": [
+      "dash",
+      "contact",
+      "danger-close",
+      "horn"
+    ],
+    "actions": [
+      {
         "slug": "smart-strike",
+        "name": "Smart Strike",
+        "type": "attack",
         "traits": [
-            "dash",
-            "contact",
-            "danger-close",
-            "horn"
+          "dash",
+          "contact",
+          "danger-close",
+          "horn",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "smart-strike",
-                "name": "Smart Strike",
-                "type": "attack",
-                "traits": [
-                    "dash",
-                    "contact",
-                    "danger-close",
-                    "horn"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex",
-                    "powerPoints": 7
-                },
-                "category": "physical",
-                "power": 70,
-                "accuracy": 100,
-                "types": [
-                    "steel"
-                ],
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "steel"
         ],
-        "grade": "A"
-    },
-    "_id": "7BsYdZi4uUJ6verF",
-    "effects": []
+        "img": "/systems/ptr2e/img/svg/steel_icon.svg"
+      }
+    ],
+    "grade": "C",
+    "description": ""
+  },
+  "_id": "7BsYdZi4uUJ6verF",
+  "effects": []
 }

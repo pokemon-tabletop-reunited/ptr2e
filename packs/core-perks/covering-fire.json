@@ -1,80 +1,80 @@
 {
-    "folder": "Et2u8UoXSe2a17oq",
-    "name": "Covering Fire",
-    "type": "perk",
-    "_id": "ZFWJ0Nf1xNYr2LxT",
-    "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
-    "system": {
-        "actions": [
-            {
-                "name": "Covering Fire Action (#1)",
-                "slug": "covering-fire-action-1",
-                "description": "<p>As a complex action costing 2PP, when wielding a Ranged Weapon, you may provide Covering Fire. Set up a Covering Fire Clock with 3 Spans. You and your allies may tick a span on this clock to claim Light Cover (or Heavy Cover if already in Light Cover) from incoming ranged attacks. The Covering Fire effect ends when either the clock is filled, or your next activation begins.</p>",
-                "traits": [],
-                "type": "generic",
-                "range": {
-                    "target": "enemy",
-                    "distance": 0,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 0,
-                    "delay": null,
-                    "priority": null
-                }
-            }
-        ],
-        "slug": null,
-        "description": "<p>As a complex action costing 2PP, when wielding a Ranged Weapon, you may provide Covering Fire. Set up a Covering Fire Clock with 3 Spans. You and your allies may tick a span on this clock to claim Light Cover (or Heavy Cover if already in Light Cover) from incoming ranged attacks. The Covering Fire effect ends when either the clock is filled, or your next activation begins.</p>",
+  "folder": "Et2u8UoXSe2a17oq",
+  "name": "Covering Fire",
+  "type": "perk",
+  "_id": "ZFWJ0Nf1xNYr2LxT",
+  "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
+  "system": {
+    "actions": [
+      {
+        "name": "Covering Fire",
+        "slug": "covering-fire",
+        "description": "<p>Using a Ranged Weapon, the user may provide Covering Fire and delay their next Activation by 20%. Set up a Covering Fire Clock with 3 Spans. The user and their allies may tick a Span on this Clock to claim Light Cover (or Heavy Cover if already in Light Cover) from incoming non-[Contact] attacks. The Covering Fire effect ends when either the clock is filled, or the user's next Activation begins.</p>",
         "traits": [],
-        "prerequisites": [
-            "[Wielder]"
-        ],
-        "cost": 2,
-        "design": {
-            "arena": "physical",
-            "approach": "finesse",
-            "archetype": "Gunslinger"
+        "type": "generic",
+        "range": {
+          "target": "object",
+          "distance": 0,
+          "unit": "m"
         },
-        "node": {
-            "i": 29,
-            "j": -70,
-            "connected": [
-                "emergency-retreat",
-                "keep-fighting",
-                "improved-overland-5",
-                "magic-armour-style",
-                "tubthumping"
-            ],
-            "config": {
-                "alpha": null,
-                "backgroundColor": "#808080",
-                "borderColor": null,
-                "borderWidth": null,
-                "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-                "tint": "#000000",
-                "scale": null
-            },
-            "hidden": false,
-            "type": "normal"
+        "cost": {
+          "activation": "compplex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
         }
+      }
+    ],
+    "slug": null,
+    "description": "<p>As a Complex Action costing 2PP, the user uses a Ranged Weapon to provide Covering Fire, delayling their next Activation by 20%. Set up a Covering Fire Clock with 3 Spans. The user and their allies may tick a Span on this Clock to claim Light Cover (or Heavy Cover if already in Light Cover) from incoming non-[Contact] attacks. The Covering Fire effect ends when either the clock is filled, or the user's next Activation begins.</p>",
+    "traits": [],
+    "prerequisites": [
+      "[Wielder]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Gunslinger"
     },
-    "effects": [],
-    "sort": 600000,
-    "ownership": {
-        "default": 0,
-        "Kc3DOunCh3ClAeHS": 3
-    },
-    "flags": {},
-    "_stats": {
-        "compendiumSource": "Item.ZFWJ0Nf1xNYr2LxT",
-        "duplicateSource": null,
-        "coreVersion": "12.325",
-        "systemId": "ptr2e",
-        "systemVersion": "0.006",
-        "createdTime": 1717149945026,
-        "modifiedTime": 1717179722982,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+    "node": {
+      "i": 29,
+      "j": -70,
+      "connected": [
+        "emergency-retreat",
+        "keep-fighting",
+        "improved-overland-5",
+        "magic-armour-style",
+        "tubthumping"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#808080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+        "tint": "#000000",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
     }
+  },
+  "effects": [],
+  "sort": 600000,
+  "ownership": {
+    "default": 0,
+    "Kc3DOunCh3ClAeHS": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": "Item.ZFWJ0Nf1xNYr2LxT",
+    "duplicateSource": null,
+    "coreVersion": "12.325",
+    "systemId": "ptr2e",
+    "systemVersion": "0.006",
+    "createdTime": 1717149945026,
+    "modifiedTime": 1717179722982,
+    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+  }
 }

@@ -5,14 +5,16 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "healing"
+        ],
         "name": "Natural Cure",
         "slug": "natural-cure",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
-          "trigger": "The user is switched out or combat ends while the user is not Fainted.",
+          "powerPoints": 2,
+          "trigger": "A new Round begins and the user is not @Affliction[fainted].",
           "delay": null,
           "priority": null
         },
@@ -21,11 +23,13 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user is switched out or combat ends while the user is not Fainted.\nEffect: The user is cured of all Major Status Afflictions affecting them."
+        "description": "Trigger: A new Round begins and the user is not @Affliction[fainted].\nEffect: The user is cured of the Major Status Affliction they possess with the highest Stack amount (if there are more than one, with the same amount, the user chooses which one to remove)."
       }
     ],
-    "description": "Trigger: The user is switched out or combat ends while the user is not Fainted.\nEffect: The user is cured of all Major Status Afflictions affecting them.",
-    "traits": [],
+    "description": "Trigger: A new Round begins and the user is not @Affliction[fainted].\nEffect: The user is cured of the Major Status Affliction they possess with the highest Stack amount (if there are more than one, with the same amount, the user chooses which one to remove).",
+    "traits": [
+      "healing"
+    ],
     "slug": null,
     "container": null
   },

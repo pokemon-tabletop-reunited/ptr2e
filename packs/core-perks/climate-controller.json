@@ -4,25 +4,37 @@
   "system": {
     "prerequisites": [
       "Climate Change",
-      "Leadership 35"
+      "Level 25"
     ],
-    "cost": 2,
+    "cost": 3,
     "design": {
       "arena": "social",
       "approach": "finesse",
       "archetype": "Climatology"
     },
-    "description": "Your Pokemon may select Climate Change as a Perk, with the Prerequisites instead being \"Level 30\".",
+    "description": "<p>Trigger: A [Weather] Effect the user created is removed by either expiring or due to the effect of an Attack or Ability (but not Intense Weather).<br><br> Effect: The user may use a [Weather] Attack or Ability as a Free Action at [Interrupt 3], if able. If the cancelling effect and its source lack [Legendary], the source creature gains @Affliction[suppressed] 5 and the source Attack/Ability is @Affliction[disabled] 5 or @Affliction[nullified] 5.</p>",
     "actions": [
       {
         "name": "Climate Controller",
         "slug": "climate-controller",
-        "description": "Your Pokemon may select Climate Change as a Perk, with the Prerequisites instead being \"Level 30\".",
+        "description": "<p>Effect: The user may use a [Weather] Attack or Ability as a Free Action at [Interrupt 3], if able. If the cancelling effect and its source lack [Legendary], the source creature gains @Affliction[suppressed] 5 and the source Attack/Ability is @Affliction[disabled] 5 or @Affliction[nullified] 5.</p>",
         "cost": {
-          "activation": "free"
+          "activation": "complex",
+          "powerPoints": 6,
+          "trigger": "A [Weather] Effect you created would be removed by either expiring or due to the effect of an Attack or Ability (but not Intense Weather).",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
         },
         "type": "passive",
-        "traits": []
+        "traits": [
+          "environ",
+          "weather"
+        ]
       }
     ],
     "slug": "climate-controller",

@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/flying_icon.svg",
   "system": {
     "slug": "air-slash",
-    "description": "Effect: On hit, the target has a 30% chance of gaining Flinched 2.",
+    "description": "",
     "traits": [
       "sharp"
     ],
@@ -14,7 +14,8 @@
         "name": "Air Slash",
         "type": "attack",
         "traits": [
-          "sharp"
+          "sharp",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "flying"
         ],
-        "description": "Effect: On hit, the target has a 30% chance of gaining Flinched 2.",
+        "description": "Effect: On hit, the target has a 30% chance of gaining @Affliction[flinched] 2.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "_id": "lxpXiXqapEF8GFPC",
   "effects": []

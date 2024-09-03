@@ -32,7 +32,7 @@ export class ActionsCollections extends Collection<ActionPTR2e> {
 
         //Add the action to the appropriate collection, as well as the main collection
         super.set(slug, value);
-        this[value.type].set(slug, value as any);
+        this[value.type].set(slug, value as AttackPTR2e);
 
         return this;
     }

@@ -1,37 +1,37 @@
 {
-    "name": "Skill Swap",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
-    "system": {
+  "name": "Skill Swap",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "slug": "skill-swap",
+    "description": "Effect: The user and target swap Basic Abilities for 5 activations.  This cannot be used to gain or remove an [Innate] ability.",
+    "traits": [],
+    "actions": [
+      {
         "slug": "skill-swap",
-        "description": "Effect: The user and target swap Basic Abilities for 5 activations.  This cannot be used to gain or remove an [Innate] ability.",
+        "name": "Skill Swap",
+        "type": "attack",
         "traits": [],
-        "actions": [
-            {
-                "slug": "skill-swap",
-                "name": "Skill Swap",
-                "type": "attack",
-                "traits": [],
-                "range": {
-                    "target": "creature",
-                    "distance": 10,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 7
-                },
-                "category": "status",
-                "accuracy": 100,
-                "types": [
-                    "psychic"
-                ],
-                "description": "Effect: The user and target swap Basic Abilities for 5 activations.  This cannot be used to gain or remove an [Innate] ability.",
-                "img": "icons/svg/explosion.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 7
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "psychic"
         ],
-        "grade": "A"
-    },
-    "_id": "2gooJhVn8eYC22DW",
-    "effects": []
+        "description": "Effect: The user and target swap Basic Abilities for 5 activations.  This cannot be used to gain or remove an [Innate] ability.",
+        "img": "/systems/ptr2e/img/svg/psychic_icon.svg"
+      }
+    ],
+    "grade": "A"
+  },
+  "_id": "2gooJhVn8eYC22DW",
+  "effects": []
 }

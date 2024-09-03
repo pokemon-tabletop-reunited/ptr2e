@@ -4,26 +4,25 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "uproar",
-    "description": "Effect: On use, the user must use Uproar their next 5 activations, spending no additional PP. Any creatures with the Drowsy condition in Uproar's burst are cured of Drowsy.",
-    "traits": [
-      "sonic"
-    ],
+    "description": "",
+    "traits": [],
     "actions": [
       {
         "slug": "uproar",
         "name": "Uproar",
         "type": "attack",
         "traits": [
-          "sonic"
+          "sonic",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
-          "distance": 4,
+          "distance": 2,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,14 +33,14 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: On use, the user must use Uproar their next 5 activations, spending no additional PP. Any creatures with the Drowsy condition in Uproar's burst are cured of Drowsy.",
+        "description": "Effect: The user gains @Affliction[choice-locked] 4. While @Affliction[choice-locked], the user does not consume PP. All creatures within 10m of the user are cured of @Affliction[drowsy].",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
       }
     ],
-    "container": null
+    "grade": "B"
   },
   "_id": "f5q2H8moR4lM7prx",
   "effects": []

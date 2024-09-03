@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": "mountain-gale",
-    "description": "Effect: On hit, the target has a 30% chance of gaining Flinched 3.",
+    "description": "",
     "traits": [
       "wind"
     ],
@@ -14,7 +14,8 @@
         "name": "Mountain Gale",
         "type": "attack",
         "traits": [
-          "wind"
+          "wind",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,7 +35,7 @@
         "types": [
           "ice"
         ],
-        "description": "Effect: On hit, the target has a 30% chance of gaining Flinched 3.",
+        "description": "Effect: On hit, the target has a 30% chance of gaining @Affliction[flinched] 3.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "aptXXQJhUr2dbvd6",
   "effects": []

@@ -11,21 +11,25 @@
       "approach": "finesse",
       "archetype": "Type Ace"
     },
-    "description": "You are able to tutor [Domain] abilities associated to your chosen <type>. Only creatures that have your chosen <type> can learn these abilties.</type></type>",
+    "description": "<p>You are able to tutor [Domain] abilities associated to your chosen <Type>. Only creatures that have your chosen <Type> can learn these abilties.</p>",
     "actions": [
       {
         "name": "<Type> Domain",
         "slug": "type-domain",
-        "description": "You are able to tutor [Domain] abilities associated to your chosen <Type>. Only creatures that have your chosen <Type> can learn these abilties.",
+        "description": "<p>You are able to tutor [Domain] abilities associated to your chosen <Type>. Only creatures that have your chosen <Type> can learn these abilties.</p>",
         "cost": {
           "activation": "free"
         },
         "type": "passive",
-        "traits": []
+        "traits": [
+          "type"
+        ]
       }
     ],
     "slug": "type-domain",
-    "traits": [],
+    "traits": [
+      "type"
+    ],
     "node": {
       "i": -43,
       "j": -16,

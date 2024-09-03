@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "flame-burst",
-    "description": "Effect: On hit, all creatures adjacent to the target take a Tick of HP damage. This effect is considered be an [Explode] effect.",
+    "description": "",
     "traits": [
       "missile"
     ],
@@ -14,7 +14,8 @@
         "name": "Flame Burst",
         "type": "attack",
         "traits": [
-          "missile"
+          "missile",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "_id": "sLhx0Ks1iQn4qY1h",
   "effects": []

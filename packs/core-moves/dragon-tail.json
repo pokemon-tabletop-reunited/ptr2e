@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "dragon-tail",
-    "description": "Effect: All valid targets are pushed away from the user. If all valid targets collide with Blocking Terrain or another creature, they take 1/8 of their Max HP as Typeless damage. If all valid targets are knocked off a ledge and fall at least 1m, they take 1/8 of their Max HP as Typeless damage as well as any applicable fall damage.",
+    "description": "",
     "traits": [
       "dash",
       "push-6",
@@ -22,7 +22,8 @@
           "push-6",
           "delay-3",
           "contact",
-          "tail"
+          "tail",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -31,7 +32,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 4,
           "delay": 3,
           "priority": null,
           "trigger": null
@@ -50,7 +51,7 @@
       }
     ],
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "_id": "pC7JVCKU8zZFfpns",
   "effects": []

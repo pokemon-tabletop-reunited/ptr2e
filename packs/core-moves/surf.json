@@ -4,14 +4,16 @@
   "img": "/systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "surf",
-    "description": "Effect: The user may freely relocate themself to any open square in Range. This Attack's Power is doubled against Swimming targets.",
+    "description": "",
     "traits": [],
     "actions": [
       {
         "slug": "surf",
         "name": "Surf",
         "type": "attack",
-        "traits": [],
+        "traits": [
+          "pp-updated"
+        ],
         "range": {
           "target": "wide-line",
           "distance": 5,
@@ -19,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 10,
           "delay": null,
           "priority": null,
           "trigger": null

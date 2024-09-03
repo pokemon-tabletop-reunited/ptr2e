@@ -2,7 +2,10 @@ import type { AbstractSublevel } from "abstract-level";
 import { ClassicLevel, type DatabaseOptions } from "classic-level";
 import * as R from "remeda";
 import type { JournalEntryPageSchema } from "types/foundry/common/documents/journal-entry-page.d.ts";
-import type { TableResultSource } from "types/foundry/common/documents/module.d.ts";
+import type {
+    ActiveEffectSource,
+    TableResultSource,
+} from "types/foundry/common/documents/module.d.ts";
 import systemJSON from "../../static/system.json" assert { type: "json" };
 import { PackError } from "./helpers.ts";
 import { PackEntry } from "./types.ts";
@@ -10,7 +13,7 @@ import { ItemSourcePTR2e } from "./compendium-pack.ts";
 import { tupleHasValue } from "./helpers.ts";
 
 const DB_KEYS = ["actors", "items", "journal", "macros", "tables"] as const;
-const EMBEDDED_KEYS = ["items", "pages", "results"] as const;
+const EMBEDDED_KEYS = ["items", "pages", "results", "effects"] as const;
 
 class LevelDatabase extends ClassicLevel<string, DBEntry> {
     #dbkey: DBKey;
@@ -34,7 +37,7 @@ class LevelDatabase extends ClassicLevel<string, DBEntry> {
         if (this.#embeddedKey) {
             this.#embeddedDb = this.sublevel(
                 `${this.#dbkey}.${this.#embeddedKey}`,
-                dbOptions,
+                dbOptions
             ) as unknown as Sublevel<EmbeddedEntry>;
         }
     }
@@ -48,6 +51,7 @@ class LevelDatabase extends ClassicLevel<string, DBEntry> {
         for (const source of docSources) {
             if (this.#embeddedKey) {
                 const embeddedDocs = source[this.#embeddedKey];
+
                 if (Array.isArray(embeddedDocs)) {
                     for (let i = 0; i < embeddedDocs.length; i++) {
                         const doc = embeddedDocs[i];
@@ -81,7 +85,7 @@ class LevelDatabase extends ClassicLevel<string, DBEntry> {
             const embeddedKey = this.#embeddedKey;
             if (embeddedKey && source[embeddedKey] && this.#embeddedDb) {
                 const embeddedDocs = await this.#embeddedDb.getMany(
-                    source[embeddedKey]?.map((embeddedId) => `${docId}.${embeddedId}`) ?? [],
+                    source[embeddedKey]?.map((embeddedId) => `${docId}.${embeddedId}`) ?? []
                 );
                 source[embeddedKey] = R.compact(embeddedDocs);
             }
@@ -99,7 +103,7 @@ class LevelDatabase extends ClassicLevel<string, DBEntry> {
             folders: R.sortBy(
                 folders,
                 (f) => f.sort,
-                (f) => f.name,
+                (f) => f.name
             ),
         };
     }
@@ -108,7 +112,7 @@ class LevelDatabase extends ClassicLevel<string, DBEntry> {
         const metadata = systemJSON.packs.find((p) => p.path.endsWith(packName));
         if (!metadata) {
             throw PackError(
-                `Error generating dbKeys: Compendium ${packName} has no metadata in the local system.json file.`,
+                `Error generating dbKeys: Compendium ${packName} has no metadata in the local system.json file.`
             );
         }
 
@@ -131,6 +135,8 @@ class LevelDatabase extends ClassicLevel<string, DBEntry> {
             switch (dbKey) {
                 case "actors":
                     return "items";
+                case "items":
+                    return "effects";
                 case "journal":
                     return "pages";
                 case "tables":
@@ -146,14 +152,24 @@ class LevelDatabase extends ClassicLevel<string, DBEntry> {
 type DBKey = (typeof DB_KEYS)[number];
 type EmbeddedKey = (typeof EMBEDDED_KEYS)[number];
 
-type Sublevel<T> = AbstractSublevel<ClassicLevel<string, T>, string | Buffer | Uint8Array, string, T>;
+type Sublevel<T> = AbstractSublevel<
+    ClassicLevel<string, T>,
+    string | Buffer | Uint8Array,
+    string,
+    T
+>;
 
-type EmbeddedEntry = ItemSourcePTR2e | SourceFromSchema<JournalEntryPageSchema> | TableResultSource;
-type DBEntry = Omit<PackEntry, "pages" | "items" | "results"> & {
+type EmbeddedEntry =
+    | ItemSourcePTR2e
+    | SourceFromSchema<JournalEntryPageSchema>
+    | TableResultSource
+    | ActiveEffectSource;
+type DBEntry = Omit<PackEntry, "pages" | "items" | "results" | "effects"> & {
     folder?: string | null;
     items?: (EmbeddedEntry | string)[];
     pages?: (EmbeddedEntry | string)[];
     results?: (EmbeddedEntry | string)[];
+    effects?: (EmbeddedEntry | string)[];
 };
 
 interface DBFolder {

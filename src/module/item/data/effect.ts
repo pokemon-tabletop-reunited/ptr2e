@@ -1,6 +1,6 @@
 import { ActorPTR2e } from "@actor";
 import { EffectPTR2e } from "@item";
-import { HasDescription, HasEmbed, HasSlug, HasTraits } from "@module/data/index.ts";
+import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { ActiveEffectPTR2e } from "@effects";
 
@@ -9,7 +9,7 @@ import { ActiveEffectPTR2e } from "@effects";
  * @extends {HasBase}
  * @extends {foundry.abstract.TypeDataModel}
  */
-export default abstract class EffectSystem extends HasEmbed(HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel))), "effect-item") {
+export default abstract class EffectSystem extends HasEmbed(HasTraits(HasMigrations(HasDescription(HasSlug(foundry.abstract.TypeDataModel)))), "effect-item") {
     /**
      * @internal
      */

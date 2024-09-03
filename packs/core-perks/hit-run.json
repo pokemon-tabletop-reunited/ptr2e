@@ -5,23 +5,28 @@
     "prerequisites": [
       "None"
     ],
-    "cost": 2,
+    "cost": 1,
     "design": {
       "arena": "physical",
       "approach": "finesse",
       "archetype": "Combat"
     },
-    "description": "You are able to leave melee without provoking any attacks after hitting an enemy.",
+    "description": "<p>After resolving an Attack, you cannot be targeted with [Interrupt X] Actions until the end of your Activation.</p>",
     "actions": [
       {
         "name": "Hit & Run",
         "slug": "hit-run",
-        "description": "You are able to leave melee without provoking any attacks after hitting an enemy.",
+        "description": "<p>After resolving an Attack, the user cannot be targeted with [Interrupt X] Actions until the end of their Activation.</p>",
         "cost": {
           "activation": "free"
         },
         "type": "passive",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        }
       }
     ],
     "slug": "hit-run",
@@ -50,26 +55,5 @@
   },
   "_id": "1SjUYN4180BTBYCk",
   "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.1SjUYN4180BTBYCk"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714917642631,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!1SjUYN4180BTBYCk"
+  "effects": []
 }

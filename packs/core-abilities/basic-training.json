@@ -13,17 +13,14 @@
         "slug": "basic-training",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: Increases the Power of the user's Normal-Type attacks by 50%."
+        "description": "Effect: Increases the Power of the user's Normal-Type attacks by 50%.",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Effect: Increases the Power of the user's Normal-Type attacks by 50%.",
@@ -31,27 +28,65 @@
       "stab",
       "normal"
     ],
-    "slug": null,
-    "container": null
+    "slug": "basic-training",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "BWXrqjtty70TluZ6",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!BWXrqjtty70TluZ6"
+  "effects": [
+    {
+      "name": "Basic Training",
+      "type": "passive",
+      "_id": "yKyOgcnDVWTbAFy6",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "normal-attack-power",
+            "value": 50,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": 1722257986824,
+        "modifiedTime": 1722258010867,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

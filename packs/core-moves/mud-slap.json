@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "mud-slap",
-    "description": "Effect: On hit, all valid targets lose -1 ACC stage for 5 activations.",
+    "description": "",
     "traits": [
       "basic"
     ],
@@ -14,7 +14,8 @@
         "name": "Mud Slap",
         "type": "attack",
         "traits": [
-          "basic"
+          "basic",
+          "pp-updated"
         ],
         "range": {
           "target": "cone",
@@ -22,8 +23,8 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 1,
+          "activation": "complex",
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -42,7 +43,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "C"
   },
   "_id": "cS5v7i8RPSXni7Cn",
   "effects": []

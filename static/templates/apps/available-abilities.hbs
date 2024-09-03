@@ -1,0 +1,22 @@
+<article class="available-abilities">
+    {{#each abilities as |ability|}}
+        {{> ability ability=ability direction="RIGHT"}}
+    {{/each}}
+</article>
+
+{{#*inline "ability"}}
+    <div class="ability" data-tooltip-direction="{{direction}}" data-id="{{ability.id}}" data-tooltip="{{ability.name}}">
+        <div class="ability-icon">
+            <img class="icon" src="{{ability.img}}"/>
+        </div>
+        <span class="ability-name">{{ability.name}}</span>
+        <div class="ability-controls item-controls">
+            <a class="item-control item-edit" data-tooltip-direction="UP" data-tooltip="Edit ability" data-type="ability" data-action="ability-edit">
+                <i class="fas fa-edit"></i>
+            </a>
+            <a class="item-control item-delete" data-tooltip-direction="UP" data-tooltip="Delete ability" data-type="ability" data-action="ability-delete">
+                <i class="fas fa-trash"></i>
+            </a>
+        </div>
+    </div>
+{{/inline}}

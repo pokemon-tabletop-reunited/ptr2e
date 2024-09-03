@@ -14,43 +14,60 @@
         "cost": {
           "activation": "free",
           "powerPoints": 6,
-          "trigger": "The user is hit by a [Contact] attack.",
-          "delay": null,
-          "priority": null
+          "trigger": "The user is hit by a [Contact] attack."
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The user takes no damage from the triggering attack and is unaffected by the triggering attack's effect."
+        "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The user takes no damage from the triggering attack and is unaffected by the triggering attack's effect.",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "name": "Parry Action (#2)",
+        "slug": "parry-action-2",
+        "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The user takes no damage from the triggering attack and is unaffected by the triggering attack's effect.",
+        "traits": [
+          "defensive"
+        ],
+        "type": "generic",
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple"
+        }
+      },
+      {
+        "name": "Parry Action (#3)",
+        "slug": "parry-action-3",
+        "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The user takes no damage from the triggering attack and is unaffected by the triggering attack's effect.",
+        "traits": [
+          "defensive"
+        ],
+        "type": "generic",
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple"
+        }
       }
     ],
-    "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The user takes no damage from the triggering attack and is unaffected by the triggering attack's effect.",
+    "description": "<p>Trigger: The user is hit by a [Contact] attack. Effect: The user takes no damage from the triggering attack and is unaffected by the triggering attack's effect. This costs 6PP to activate.</p>",
     "traits": [
       "defensive"
     ],
-    "slug": null,
-    "container": null
+    "slug": "parry",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "XDh6j0c8zGFV4aDx",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!XDh6j0c8zGFV4aDx"
+  "effects": []
 }

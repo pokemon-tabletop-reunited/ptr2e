@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 class MappedArrayField<TElementField extends foundry.data.fields.DataField> extends foundry.data.fields.ArrayField<TElementField> {
     /**
      * The field that is used as the key for the map.

@@ -4,9 +4,12 @@
     </div>
     <h3>{{origin.name}}'s {{attack.name}}</h3>
     <div class="icon">
-        {{#if pp.cost}}
-            <a data-tooltip="{{#if pp.spent}}{{pp.cost}} PP has been spent.{{else}}Spend {{pp.cost}} PP?{{/if}}" data-action="consume-pp" class="{{#if pp.spent}}spent{{else}}unspent{{/if}}"><i class="fas fa-bolt"></i></a>
-        {{/if}}
+      {{#if selfEffectRolls}}
+        <a data-tooltip="Applicable Self Effects have been applied"><i class="fas fa-star" style="color: #10759e;"></i></a>
+      {{/if}}
+      {{#if pp.cost}}
+        <a data-tooltip="{{#if pp.spent}}{{pp.cost}} PP has been spent.{{else}}Spend {{pp.cost}} PP?{{/if}}" data-action="consume-pp" class="{{#if pp.spent}}spent{{else}}unspent{{/if}}"><i class="fas fa-bolt"></i></a>
+      {{/if}}
     </div>
 </header>
 <main>
@@ -28,13 +31,33 @@
                 {{{this}}}
             {{/each}}
         </article>
+        {{#if data.notes}}
+            <section class="notes">
+                {{{notes}}}
+            </section>
+        {{/if}}
     {{/each}}
+    {{#if selfEffectRolls}}
+       <div class="collapse-button">
+          <button type="button" class="collapse-rolls">Show Self Effect Rolls</button>
+      </div>
+      <article class="collapsed">
+        {{#each selfEffectRolls}}{{{this}}}{{/each}}
+      </article>
+    {{/if}}
 </main>
 <footer>
     <div class="target target-header">
         <div class="icon">Icon</div>
         <div class="status">Status</div>
-        <div class="damage">{{#if hasDamage}}Damage{{/if}}</div>
+        {{#if (and hasDamage hasEffect)}}
+            <div class="damage">Damage</div>
+            <div class="effect-rolls">Effect</div>
+        {{else if hasEffect}}
+            <div class="effect-rolls">Effect</div>
+        {{else}}
+            <div class="damage">Damage</div>
+        {{/if}}
         <div class="apply"><button type="button" class="update-targets" data-tooltip="[Left Click] to add current selected/targeted actors<br>[Left Alt + Left Click] to overwrite targets with currently selected/targeted actors"><i class="fas fa-crosshairs"></i></button></div>
     </div> 
     {{#each results as |data uuid|}}
@@ -47,9 +70,22 @@
                 <i class="fas fa-{{#if (is this "hit")}}certificate{{else if (is this "critical")}}crosshairs{{else}}times-circle{{/if}}"></i>
             </div>
             {{/with}}
-            <div class="damage" data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT">
-                <span>{{data.damage}}</span>
-            </div>
+            {{#if (and @root.hasDamage @root.hasEffect)}}
+                <div class="damage" data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT">
+                    <span>{{data.damage}}</span>
+                </div>
+                <div class="effect-rolls" data-tooltip="target-effect-rolls" data-tooltip-direction="LEFT">
+                  <i class="{{#if data.effect.some}}fas{{else}}far{{/if}} fa-star"></i>
+                </div>
+            {{else if @root.hasEffect}}
+                <div class="effect-rolls" data-tooltip="target-effect-rolls" data-tooltip-direction="LEFT">
+                  <i class="{{#if data.effect.some}}fas{{else}}far{{/if}} fa-star"></i>
+                </div>
+            {{else}}
+                <div class="damage" data-tooltip="{{data.damage}}" data-tooltip-direction="LEFT">
+                    <span>{{data.damage}}</span>
+                </div>
+            {{/if}}
             <div class="apply">
                 <button type="button" class="apply-damage"><i class="fas fa-bolt"></i>{{localize "PTR2E.Damage.Apply"}}</button>
             </div>

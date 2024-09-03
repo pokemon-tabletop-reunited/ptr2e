@@ -17,7 +17,10 @@ export default class AttackPTR2e extends ActionPTR2e {
             types: new fields.SetField(
                 new fields.StringField({
                     required: true,
-                    choices: getTypes().reduce<Record<string,string>>((acc, type) => ({...acc, [type]: type}), {}),
+                    choices: getTypes().reduce<Record<string, string>>(
+                        (acc, type) => ({ ...acc, [type]: type }),
+                        {}
+                    ),
                     initial: PTRCONSTS.Types.UNTYPED,
                     label: "PTR2E.FIELDS.pokemonType.label",
                     hint: "PTR2E.FIELDS.pokemonType.hint",
@@ -34,7 +37,10 @@ export default class AttackPTR2e extends ActionPTR2e {
             ),
             category: new fields.StringField({
                 required: true,
-                choices: Object.values(PTRCONSTS.Categories).reduce<Record<string,string>>((acc, category) => ({...acc, [category]: category}), {}),
+                choices: Object.values(PTRCONSTS.Categories).reduce<Record<string, string>>(
+                    (acc, category) => ({ ...acc, [category]: category }),
+                    {}
+                ),
                 initial: PTRCONSTS.Categories.PHYSICAL,
                 label: "PTR2E.FIELDS.pokemonCategory.label",
                 hint: "PTR2E.FIELDS.pokemonCategory.hint",
@@ -81,6 +87,37 @@ export default class AttackPTR2e extends ActionPTR2e {
         // if (category !== "status" && !power) throw new Error("Physical and special moves must have a power value.");
     }
 
+    override get css() {
+        const categorySize = this.types.size > 1 ? "66%" : "50%";
+        const typeSizes = this.types.size > 1 ? 66 / this.types.size : 50;
+        const gradient = `linear-gradient(120deg, ${Array.from(this.types)
+            .flatMap((t, i) => {
+                if (i === 0) return [`var(--${t}-color)`, `var(--${t}-color) ${typeSizes}%`];
+                return [
+                    `var(--${t}-color) ${typeSizes * i}%`,
+                    `var(--${t}-color) ${typeSizes * (i + 1)}%`,
+                ];
+            })
+            .join(` , `)}, var(--${this.category}-color) ${categorySize})`;
+
+        // const typeSizes = this.types.size > 1 ? 100 / this.types.size : 100;
+        // const gradient = `linear-gradient(120deg, ${Array.from(this.types)
+        //     .flatMap((t, i) => {
+        //         if (i === 0) return [`var(--${t}-color)`, `var(--${t}-color) ${typeSizes}%`];
+        //         return [
+        //             `var(--${t}-color) ${typeSizes * i}%`,
+        //             `var(--${t}-color) ${typeSizes * (i + 1)}%`,
+        //         ];
+        //     })
+        //     .join(` , `)})`;
+
+        return {
+            style: `background: ${gradient};`,
+            // style: `background: ${gradient}; border: 4px ridge var(--${this.category}-color); padding: 0px;`,
+            class: "attack-styling",
+        };
+    }
+
     // TODO: This should add any relevant modifiers
     get stab(): 0 | 1 | 1.5 {
         if (!this.actor) return 0;
@@ -105,17 +142,22 @@ export default class AttackPTR2e extends ActionPTR2e {
     override prepareDerivedData(): void {
         super.prepareDerivedData();
 
-        if(this.item.type === "move" && (this.item as MovePTR2e).system.attack.slug !== this.slug) {
+        if (
+            this.item.type === "move" &&
+            (this.item as MovePTR2e).system.attack.slug !== this.slug
+        ) {
             this.free = true;
         }
 
         this.statistic = this.prepareStatistic();
     }
 
+    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     get isMelee(): boolean {
         return false; // TODO: Implement
     }
 
+    // eslint-disable-next-line @typescript-eslint/class-literal-property-style
     get isRanged(): boolean {
         return false; // TODO: Implement
     }
@@ -127,30 +169,43 @@ export default class AttackPTR2e extends ActionPTR2e {
     }
 
     public getRangeIncrement(distance: number | null): number | null {
-        if(distance === null || !this.range || !["ally", "enemy", "creature", "object"].includes(this.range.target)) return null;
+        if (
+            distance === null ||
+            !this.range ||
+            !["ally", "enemy", "creature", "object"].includes(this.range.target)
+        )
+            return null;
+        const dangerClose = !!this.traits.get("danger-close");
 
         // TODO: Implement Reach
-        if(this.range.distance <= 1) return distance >= 2 ? Infinity : 0;
+        if (this.range.distance <= 1) return distance >= 2 ? Infinity : 0;
         const increment = this.range.distance;
-        return Math.max(Math.ceil(distance / increment), 1) - 1;
+
+        const rangeIncrement = Math.max(Math.ceil(distance / increment), 1) - 1;
+
+        return dangerClose
+            ? rangeIncrement == 0
+                ? -Infinity
+                : rangeIncrement - 1
+            : rangeIncrement;
     }
 }
 export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {
-    update(
-        data: DeepPartial<SourceFromSchema<AttackSchema>> &
-            DeepPartial<SourceFromSchema<ActionSchema>>
-    ): Promise<this["item"]>;
-    prepareUpdate(
-        data: DeepPartial<SourceFromSchema<AttackSchema>> &
-            DeepPartial<SourceFromSchema<ActionSchema>>
-    ): (SourceFromSchema<ActionSchema> & SourceFromSchema<AttackSchema>)[];
+    // update(
+    //     data: DeepPartial<SourceFromSchema<AttackSchema>> &
+    //         DeepPartial<SourceFromSchema<ActionSchema>>
+    // ): Promise<this["item"]>;
+    // prepareUpdate(
+    //     data: DeepPartial<SourceFromSchema<AttackSchema>> &
+    //         DeepPartial<SourceFromSchema<ActionSchema>>
+    // ): (SourceFromSchema<ActionSchema> & SourceFromSchema<AttackSchema>)[];
 
     statistic: Maybe<AttackStatistic>;
 
     _source: SourceFromSchema<AttackSchema> & SourceFromSchema<ActionSchema>;
 }
 
-type AttackSchema = {
+interface AttackSchema extends foundry.data.fields.DataSchema {
     types: foundry.data.fields.SetField<
         foundry.data.fields.StringField<string, PokemonType, true, false, true>,
         PokemonType[],
@@ -166,4 +221,4 @@ type AttackSchema = {
     contestEffect: foundry.data.fields.StringField<string, string, true>;
     free: foundry.data.fields.BooleanField<boolean, boolean>;
     slot: foundry.data.fields.NumberField<number, number, true, true, true>;
-};
+}

@@ -171,18 +171,20 @@ interface ImageSpeciesResolverConfig {
  * }
  * ```
  */
-type SpeciesImageData = {
+interface SpeciesImageData {
     data: {
         base: string;
         extensions: string[];
+        random: boolean;
     }
     suffixes: Record<string, string> | null;
 }
 
-type SpeciesImageDataSource = {
+interface SpeciesImageDataSource {
     data: {
         base: string;
         extensions?: string[];
+        random: boolean;
     }
     suffixes?: Record<string, string>;
 }

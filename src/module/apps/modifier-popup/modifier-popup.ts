@@ -58,7 +58,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
         this.check = check;
         this.context = context;
 
-        if(this.context.type != "luck-check" && !check.modifiers.find(s => s.slug === "challenge-rating")) {
+        if(!["luck-check", "attack-roll", "pokeball-check"].includes(this.context.type!) && !check.modifiers.find(s => s.slug === "challenge-rating")) {
             check.push(new ModifierPTR2e({ label: "Challenge Rating", modifier: 10, slug: "challenge-rating", hidden: true, method: 'flat'}));
         }
 
@@ -237,7 +237,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
             return;
         }
         const result = formData.object;
-        const rollMode = result.rollMode as RollMode;
+        const rollMode = result.rollmode as RollMode;
 
         this.resolve({ rollMode });
         this.promise = null;
@@ -245,9 +245,6 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
     }
 }
 
-export type ModifierPopupResult = {
+export interface ModifierPopupResult {
     rollMode: RollMode;
-};
-
-// @ts-ignore
-globalThis.ModifierPopup = ModifierPopup;
+}

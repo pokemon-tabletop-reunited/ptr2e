@@ -9,7 +9,7 @@ class SkillsComponent extends ActorComponent {
     static override TOOLTIP = "PTR2E.ActorSheet.Components.Skills.tooltip";
 
     static override ACTIONS = {
-        "toggle-hidden-skills": async function (this: SkillsComponent, _event: Event) {
+        "toggle-hidden-skills": async function (this: SkillsComponent) {
             const appSettings = fu.duplicate(game.user.getFlag("ptr2e", "appSettings") ?? {}) as Record<string, Record<string, unknown>>;
             const appId = `ActorSheetPTRV2-${this.actor.uuid.replaceAll(".", "-")}`;
             if (!appSettings[appId]) appSettings[appId] = {hideHiddenSkills: true};
@@ -171,6 +171,7 @@ class FavouriteSkillsComponent extends SkillsComponent {
     }
 
     // Don't add the toggle button
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
     override renderFrame(): void {}
 }
 

@@ -1,44 +1,47 @@
 {
-    "name": "Struggle",
-    "type": "move",
-    "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
-    "system": {
+  "name": "Struggle",
+  "type": "move",
+  "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+  "system": {
+    "slug": "struggle",
+    "traits": [
+      "adaptable",
+      "basic"
+    ],
+    "actions": [
+      {
         "slug": "struggle",
+        "name": "Struggle",
+        "type": "attack",
         "traits": [
-            "adaptable",
-            "basic"
+          "adaptable",
+          "basic",
+          "grapple",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "slug": "struggle",
-                "name": "Struggle",
-                "type": "attack",
-                "traits": [
-                    "adaptable",
-                    "basic",
-                    "grapple"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 1,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "complex"
-                },
-                "category": "physical",
-                "power": 25,
-                "accuracy": 100,
-                "types": [
-                    "untyped"
-                ],
-                "description": "null",
-                "free": true,
-                "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
-            }
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0
+        },
+        "category": "physical",
+        "power": 25,
+        "accuracy": 100,
+        "types": [
+          "untyped"
         ],
-        "grade": "E"
-    },
-    "_id": "2auzRoLQdOoHai2q",
-    "effects": []
+        "description": "null",
+        "free": true,
+        "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
+      }
+    ],
+    "grade": "E",
+    "description": ""
+  },
+  "_id": "2auzRoLQdOoHai2q",
+  "effects": []
 }

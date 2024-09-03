@@ -11,18 +11,39 @@
       "approach": "finesse",
       "archetype": "Support"
     },
-    "description": "The target gains Rapid 1.",
+    "description": "<p>The target gains @Affliction[rapid] 1.</p>",
     "actions": [
       {
-        "name": "Rapid Style",
-        "slug": "rapid-style",
-        "description": "The target gains Rapid 1.",
+        "name": "Rapid!",
+        "slug": "rapid",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": null
         },
-        "type": "generic",
-        "traits": []
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "untyped"
+        ],
+        "description": "Effect: The target gains @Affliction[strong] 1.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "type": "attack"
       }
     ],
     "slug": "rapid-style",

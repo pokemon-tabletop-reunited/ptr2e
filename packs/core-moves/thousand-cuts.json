@@ -4,11 +4,12 @@
   "img": "/systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "thousand-cuts",
-    "description": "Effect: On hit, the target has a 10% chance of gaining Poison 5.",
+    "description": "",
     "traits": [
-      "5-strike",
+      "10-strike",
       "sharp",
-      "contact"
+      "contact",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -16,9 +17,10 @@
         "name": "Thousand Cuts",
         "type": "attack",
         "traits": [
-          "5-strike",
+          "10-strike",
           "sharp",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,7 +29,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +40,7 @@
         "types": [
           "poison"
         ],
-        "description": "Effect: On hit, the target has a 10% chance of gaining Poison 5.",
+        "description": "Effect: On hit, the target has a 10% chance of gaining @Affliction[poison] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

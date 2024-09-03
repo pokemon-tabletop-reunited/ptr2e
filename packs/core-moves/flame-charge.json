@@ -4,12 +4,7 @@
   "img": "/systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "flame-charge",
-    "description": "Effect: On hit, the user gains +1 SPD stage for 5 activations.",
-    "traits": [
-      "dash",
-      "defrost",
-      "contact"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "flame-charge",
@@ -18,7 +13,8 @@
         "traits": [
           "dash",
           "defrost",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -27,26 +23,23 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
-        "category": "special",
+        "category": "physical",
         "power": 50,
         "accuracy": 100,
         "types": [
           "fire"
         ],
-        "description": "Effect: On hit, the user gains +1 SPD stage for 5 activations.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, the user gains +1 SPD stage for 5 activations.</p>",
+        "img": "/systems/ptr2e/img/svg/fire_icon.svg"
       }
     ],
-    "container": null,
-    "grade": "C"
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "DNuGwSn0HKhGRujH",
   "effects": []

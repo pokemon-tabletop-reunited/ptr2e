@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { PTUActor } from "@actor";
 import { PTUItem } from "@item";
 import { ItemSheetOptions } from "@item/sheet.ts";
@@ -94,8 +95,6 @@ export default class PTUSheet extends DocumentSheet {
     }
 
     protected override async _onSubmit(
-        _event: Event,
-        _options?: OnSubmitFormOptions | undefined
     ): Promise<false | Record<string, unknown>> {
         return false;
     }

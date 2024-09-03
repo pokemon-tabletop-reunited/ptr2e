@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "retaliate",
-    "description": "Effect: If an ally has Fainted this round, Retaliate's Power is doubled.",
+    "description": "",
     "traits": [
       "contact"
     ],
@@ -14,7 +14,8 @@
         "name": "Retaliate",
         "type": "attack",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,14 +35,15 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: If an ally has Fainted this round, Retaliate's Power is doubled.",
+        "description": "Effect: If an ally has @Affliction[fainted] this round, Retaliate's Power is doubled.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
       }
     ],
-    "container": null
+    "container": null,
+    "grade": "B"
   },
   "_id": "lDDtcDz9efyRjTjZ",
   "effects": []

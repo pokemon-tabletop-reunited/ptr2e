@@ -1,70 +1,51 @@
 {
-    "folder": "pyJa7NcmlTOD3PA4",
-    "name": "Dazzle",
-    "type": "move",
-    "_id": "FoYdphQ2kzwlorh9",
-    "img": "systems/ptr2e/img/svg/fairy_icon.svg",
-    "system": {
-        "slug": null,
+  "name": "Dazzle",
+  "type": "move",
+  "_id": "FoYdphQ2kzwlorh9",
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "system": {
+    "slug": null,
+    "traits": [
+      "basic",
+      "social",
+      "pp-updated"
+    ],
+    "actions": [
+      {
+        "name": "Dazzle",
+        "slug": "dazzle",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
         "traits": [
-            "basic",
-            "social"
+          "basic",
+          "social",
+          "pp-updated"
         ],
-        "actions": [
-            {
-                "name": "Dazzle Attack",
-                "slug": "dazzle-attack",
-                "type": "attack",
-                "img": "icons/svg/explosion.svg",
-                "traits": [
-                    "basic",
-                    "social"
-                ],
-                "range": {
-                    "target": "creature",
-                    "distance": 6,
-                    "unit": "m"
-                },
-                "cost": {
-                    "activation": "simple",
-                    "powerPoints": 1,
-                    "delay": null,
-                    "priority": null,
-                    "trigger": ""
-                },
-                "variant": null,
-                "types": [
-                    "fairy"
-                ],
-                "category": "special",
-                "power": 40,
-                "accuracy": 100,
-                "contestType": "",
-                "contestEffect": "",
-                "free": false,
-                "slot": null,
-                "description": ""
-            }
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": ""
+        },
+        "variant": null,
+        "types": [
+          "fairy"
         ],
-        "description": "",
-        "container": null,
-        "grade": "E"
-    },
-    "effects": [],
-    "sort": 0,
-    "ownership": {
-        "default": 0,
-        "CYLdyr5mPSDmNpTp": 3
-    },
-    "flags": {},
-    "_stats": {
-        "compendiumSource": null,
-        "duplicateSource": null,
-        "coreVersion": "12.327",
-        "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.1.0",
-        "createdTime": 1717874108124,
-        "modifiedTime": 1717874545800,
-        "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-    }
+        "category": "special",
+        "power": 40,
+        "accuracy": 100,
+        "description": ""
+      }
+    ],
+    "description": "",
+    "container": null,
+    "grade": "E"
+  },
+  "effects": []
 }

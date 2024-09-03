@@ -1,14 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ActionPTR2e } from "@data";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
 import { DocumentSheetV2 } from "@item/sheets/document.ts";
 import { isObject } from "@utils";
-
 class GithubManager {
     static VALID_DOCUMENT_TYPES: Record<string, string> = {
         move: "ptr2e.core-moves",
         species: "ptr2e.core-species",
         ability: "ptr2e.core-abilities",
         perk: "ptr2e.core-perks",
+        effect: "ptr2e.core-effects",
+        consumable: "ptr2e.core-gear",
+        container: "ptr2e.core-gear",
+        equipment: "ptr2e.core-gear",
+        gear: "ptr2e.core-gear",
+        weapon: "ptr2e.core-gear"
     } as const;
 
     static async getExistingItem<TDocument extends ItemPTR2e>(
@@ -23,7 +29,7 @@ class GithubManager {
             }
             const index = await pack.getIndex({ fields: ["system.slug"] });
             const existing = index.find(
-                (i) => item.slug === (i.system.slug || game.ptr.util.sluggify(i.name))
+                (i) => item.slug === (i.system?.slug || game.ptr.util.sluggify(i.name))
             );
             if (existing) return pack.getDocument(existing._id);
             return null;
@@ -94,7 +100,7 @@ class GithubManager {
     ) {
         const data: Record<string, any> = fu.mergeObject(packItem, diff, { inplace: false });
         if('actions' in packItem.system && diff.system?.actions !== undefined) {
-            const actions = data.system.actions = packItem.system.actions as unknown as Array<ActionPTR2e>;
+            const actions = data.system.actions = packItem.system.actions as unknown as ActionPTR2e[];
             for(const [key, action] of Object.entries<ActionPTR2e>(diff.system.actions)) {
                 const index = parseInt(key);
                 if(actions[index]) {
@@ -165,7 +171,6 @@ class GithubManager {
 
     static async commitItemToGithub<TDocument extends ItemPTR2e>(
         this: DocumentSheetV2<TDocument>,
-        _event: Event
     ) {
         const document = this.document;
 
@@ -191,6 +196,11 @@ class GithubManager {
                 ui.notifications.error("An unexpected error occured.");
                 return;
             }
+        }
+
+        if(existing.type == "effect" && existing.pack == "ptr2e.core-effects" && existing.folder?.id === "V4skAU6G3OH5fXgD") {
+          ui.notifications.error("You cannot commit the Core Afflictions to Github in this manner.");
+          return
         }
 
         const isPack = document === existing;

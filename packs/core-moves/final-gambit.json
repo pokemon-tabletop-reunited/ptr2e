@@ -4,17 +4,15 @@
   "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "final-gambit",
-    "description": "Effect: The user reduces its HP to zero, dealing the amount that was lost to the target.",
-    "traits": [
-      
-    ],
+    "description": "",
+    "traits": [],
     "actions": [
       {
         "slug": "final-gambit",
         "name": "Final Gambit",
         "type": "attack",
         "traits": [
-          
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -23,7 +21,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 0,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,11 +32,7 @@
         "types": [
           "fighting"
         ],
-        "description": "Effect: The user reduces its HP to zero, dealing the amount that was lost to the target.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "Effect: The user reduces its HP and PP to zero, dealing flat damage equal to the amount that was lost to the target."
       }
     ],
     "container": null,

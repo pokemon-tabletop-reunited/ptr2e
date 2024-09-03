@@ -4,7 +4,7 @@
   "img": "/systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "clamp",
-    "description": "Effect: The user auto-succeeds on a Grapple Maneuver check against the target if Clamp hits. The Target becomes Bound 5. While the target is Bound, they take a Tick of HP damage at the end of each of their activations.\n\nIf either the Grappled or Bound condition ends, the target loses the other condition.",
+    "description": "",
     "traits": [
       "trap",
       "contact"
@@ -16,7 +16,8 @@
         "type": "attack",
         "traits": [
           "trap",
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -25,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -36,7 +37,7 @@
         "types": [
           "water"
         ],
-        "description": "Effect: The user auto-succeeds on a Grapple Maneuver check against the target if Clamp hits. The Target becomes Bound 5. While the target is Bound, they take a Tick of HP damage at the end of each of their activations.\n\nIf either the Grappled or Bound condition ends, the target loses the other condition.",
+        "description": "Effect: The user auto-succeeds on a @Affliction[grapple] Maneuver check against the target if Clamp hits. The Target becomes @Affliction[bound] 5. While the target is @Affliction[bound], they take a Tick of HP damage at the end of each of their activations.\n\nIf either the @Affliction[grapple] or @Affliction[bound] condition ends, the target loses the other condition.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -44,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "E"
   },
   "_id": "YJfBFCQHnhiqSGas",
   "effects": []

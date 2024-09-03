@@ -4,9 +4,8 @@
   "img": "/systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "slug": "blizzard",
-    "description": "Effect: On hit, the target has a 10% chance of gaining Frozen 5. In Snow Weather, Blizzard always hits.",
+    "description": "",
     "traits": [
-      "smite",
       "environ",
       "wind"
     ],
@@ -16,9 +15,9 @@
         "name": "Blizzard",
         "type": "attack",
         "traits": [
-          "smite",
           "environ",
-          "wind"
+          "wind",
+          "pp-updated"
         ],
         "range": {
           "target": "wide-line",
@@ -27,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,7 +37,7 @@
         "types": [
           "ice"
         ],
-        "description": "Effect: On hit, the target has a 10% chance of gaining Frozen 5. In Snow Weather, Blizzard always hits.",
+        "description": "Effect: On hit, the target has a 10% chance of gaining @Affliction[frozen] 5. In Snow Weather, Blizzard always hits.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -46,7 +45,7 @@
       }
     ],
     "container": null,
-    "grade": "S"
+    "grade": "B"
   },
   "_id": "pMSwY3ECWqqasF1a",
   "effects": []

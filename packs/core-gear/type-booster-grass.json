@@ -1,0 +1,135 @@
+{
+  "name": "Type Booster (Grass)",
+  "img": "/systems/ptr2e/img/icons/equipment_icon.webp",
+  "type": "equipment",
+  "system": {
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "slot": "accessory",
+      "carryType": "stowed",
+      "handsHeld": null
+    },
+    "grade": "E",
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100
+    },
+    "rarity": "uncommon",
+    "traits": [
+      "combat",
+      "type"
+    ],
+    "actions": [
+      {
+        "name": "Type Booster",
+        "slug": "type-booster",
+        "type": "passive",
+        "description": "Effect: Increases the Power and Accuracy of <Type> attacks by 10%.",
+        "img": "/systems/ptr2e/img/icons/item_icon.webp",
+        "traits": [
+          "Combat",
+          "<Type>"
+        ],
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex"
+        }
+      }
+    ],
+    "description": "Effect: Increases the Power and Accuracy of <Type> attacks by 10%.",
+    "slug": "type-booster",
+    "quantity": 1,
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/item_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "_migration": {
+      "version": 0.104,
+      "previous": {
+        "schema": 0.103,
+        "foundry": "12.330",
+        "system": "0.10.0-alpha.2.1.2"
+      }
+    }
+  },
+  "_id": "JhU4x5wZQlVuqvfx",
+  "effects": [
+    {
+      "name": "Type Booster (Grass)",
+      "type": "passive",
+      "_id": "OffnJ8w7dHvoRJ2p",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "grass-attack-power",
+            "value": 10,
+            "predicate": [],
+            "label": "Type Booster (Grass) Power",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "grass-attack-accuracy",
+            "value": 10,
+            "predicate": [],
+            "label": "Type Booster (Grass) Accuracy",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.1.5",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ]
+}

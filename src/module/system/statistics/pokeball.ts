@@ -140,7 +140,7 @@ class PokeballCheck<TParent extends PokeballStatistic = PokeballStatistic> imple
     }
 
     async roll(args: StatisticRollParameters<PokeballRollCallback> = {}): Promise<PokeballRollResults | null> {
-        const options: Set<string> = new Set(args.extraRollOptions ?? []);
+        const options = new Set<string>(args.extraRollOptions ?? []);
 
         const target: {actor: ActorPTR2e, token?: TokenPTR2e} = (() => {
             if(args.targets) return args.targets.map(t => ({actor: t, token: t.token?.object as TokenPTR2e}));
@@ -156,7 +156,7 @@ class PokeballCheck<TParent extends PokeballStatistic = PokeballStatistic> imple
             target
         })
 
-        const notes = extractNotes(context.self.actor.synthetics.rollNotes, this.domains);
+        const notes = extractNotes(context.self.actor.synthetics.rollNotes, this.domains).filter(n => n.predicate.test(options));
 
         const checkContext: CheckRollContext = {
             type: "pokeball-check",
