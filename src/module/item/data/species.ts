@@ -1,5 +1,5 @@
 import { SpeciesPTR2e } from "@item";
-import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS } from "@module/data/index.ts";
+import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS, Trait } from "@module/data/index.ts";
 import { PokemonType } from "@data";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
@@ -393,6 +393,20 @@ class SpeciesSystem extends SpeciesExtension {
           return 16;
       }
     })();
+
+    // update traits
+    // remove traits that would be auto-added
+    Object.values(PTRCONSTS.Types).forEach(ptype=>{
+      if (this.traits.find(t=>t.slug == ptype)) {
+        this.traits.delete(ptype);
+      }
+    });
+
+    for (const ptype of this.types) {
+      if (!this.traits.find(t=>t.slug == ptype) && Trait.isValid(ptype)) {
+        this.addTraitFromSlug(ptype);
+      }
+    }
   }
 
   override async _preCreate(
