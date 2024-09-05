@@ -61,7 +61,7 @@ export default class ItemSheetPTR2e<
   static readonly detailsTemplate: string = "";
   readonly noActions: boolean = false;
 
-  #allTraits: { value: string; label: string }[] | undefined;
+  #allTraits: { value: string; label: string, virtual?: boolean }[] | undefined;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     header: {
@@ -146,6 +146,7 @@ export default class ItemSheetPTR2e<
           traits.push({
             value: trait.slug,
             label: trait.label,
+            virtual: trait.virtual ?? false,
           });
         }
         return traits;
@@ -156,6 +157,7 @@ export default class ItemSheetPTR2e<
     this.#allTraits ??= game.ptr.data.traits.map((trait) => ({
       value: trait.slug,
       label: trait.label,
+      virtual: false,
     }));
 
     const effects = this.document.effects.contents;
@@ -248,11 +250,12 @@ export default class ItemSheetPTR2e<
           },
           templates: {
             tag: function (tagData): string {
+              const isRemovable = tagData.virtual ? "" : `<x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>`;
               return `
                             <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
                 tagData
               )}>
-                            <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                            ${isRemovable}
                             <div>
                                 <span class='tagify__tag-text'>
                                     <span class="trait" data-tooltip-direction="UP" data-trait="${tagData.value

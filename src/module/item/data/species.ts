@@ -404,7 +404,7 @@ class SpeciesSystem extends SpeciesExtension {
 
     for (const ptype of this.types) {
       if (!this.traits.find(t=>t.slug == ptype) && Trait.isValid(ptype)) {
-        this.addTraitFromSlug(ptype);
+        this.addTraitFromSlug(ptype, true);
       }
     }
   }

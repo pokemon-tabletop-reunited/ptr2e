@@ -21,7 +21,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
       };
     }
 
-    addTraitFromSlug(traitSlug: string) {
+    addTraitFromSlug(traitSlug: string, virtual?: boolean) {
       const rollOptionManager = (() => {
         if (!(this.parent instanceof ActorPTR2e)) return null;
         return this.parent.rollOptions;
@@ -29,13 +29,16 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
 
       const trait = game.ptr.data.traits.get(traitSlug)
       if (trait) {
-        this.traits.set(traitSlug, trait);
+        this.traits.set(traitSlug, {
+          ...trait,
+          virtual: virtual ?? trait.virtual ?? false,
+        });
         this._traits.push(trait);
       }
       else {
         console.debug(`Could not find trait with slug ${traitSlug}`);
         console.debug("TODO: Remove this functionality and add a migration to remove invalid traits.")
-        this.traits.set(traitSlug, { label: Handlebars.helpers.formatSlug(traitSlug), description: '', slug: traitSlug, related: [] });
+        this.traits.set(traitSlug, { label: Handlebars.helpers.formatSlug(traitSlug), description: '', slug: traitSlug, related: [], virtual: virtual ?? false });
       }
       if (rollOptionManager) {
         rollOptionManager.addTrait(this.traits.get(traitSlug));
@@ -47,7 +50,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
 
       this._traits = [];
       this.traits = new Collection<Trait>();
-      this._source.traits.forEach(this.addTraitFromSlug.bind(this));
+      this._source.traits.forEach(t=>this.addTraitFromSlug(t, false));
     }
   }
 
