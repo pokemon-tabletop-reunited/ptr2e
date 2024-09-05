@@ -13,9 +13,9 @@ class RoundCombatantSystem extends CombatantSystemPTR2e {
     }
 
     /**
-     * The Round always has a base AV of 100
+     * The Round always has a base AV of 150
      */
-    readonly baseAV = 100;
+    readonly baseAV = 150;
 
     override _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
         if (changed.defeated) {

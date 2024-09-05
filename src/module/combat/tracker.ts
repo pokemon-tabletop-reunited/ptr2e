@@ -15,6 +15,8 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
             const combatant = this.viewed?.combatants.get(turn.id);
             if(!combatant) return turn;
             turn.type = combatant?.type;
+            //@ts-expect-error - dopn't care
+            turn.resource = combatant.actor?.system.attributes.spe.value ?? 0;
             return turn;
         })
 
@@ -93,7 +95,7 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
                     window: {
                         title: game.i18n.format("PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.title", {name: combatant.name}),
                     },
-                    content: game.i18n.format("PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.content", { current: combatant.system.avModifiers }),
+                    content: game.i18n.format("PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.content", { current: +(combatant.system.advanceDelayPercent * 100).toFixed(2), max: +(-150/combatant.baseAV * 100).toFixed(2) }),
                     ok: {
                         label: game.i18n.localize("PTR2E.Combat.ContextMenu.ApplyDelayOrAdvancement.ok"),
                         action: 'ok',
@@ -105,8 +107,7 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
                             const newValue = parseInt(value);
                             if(isNaN(newValue)) return;
 
-                            const newModifiers = Math.clamp(combatant.system.avModifiers + newValue, -100, 100);
-                            combatant.update({ "system.avModifiers": newModifiers });
+                            await combatant.system.applyAdvancementDelay(Math.clamp(newValue / 100, -3, 1));
                         }
                     }
                 })
