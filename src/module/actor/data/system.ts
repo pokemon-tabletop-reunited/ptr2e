@@ -373,10 +373,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     // Add species traits to actor traits
     for (const trait of this.species.traits.values()) {
-      this.traits.set(trait.slug, {
-        ...trait,
-        virtual: true,
-      });
+      if (!this.traits.has(trait.slug)) {
+        this.traits.set(trait.slug, {
+          ...trait,
+          virtual: true,
+        });
+      }
     }
 
     this.movement = new Collection(
