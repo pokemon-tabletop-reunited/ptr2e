@@ -394,9 +394,9 @@ class SpeciesSystem extends SpeciesExtension {
       }
     })();
 
-    // update traits
+    // update traits with pokemon types
     for (const ptype of this.types) {
-      if (!this.traits.find(t=>t.slug == ptype) && Trait.isValid(ptype)) {
+      if (!this.traits.has(ptype) && Trait.isValid(ptype) && ptype != "untyped") {
         this.addTraitFromSlug(ptype, true);
       }
     }
