@@ -395,17 +395,14 @@ class SpeciesSystem extends SpeciesExtension {
     })();
 
     // update traits
-    // remove traits that would be auto-added
-    Object.values(PTRCONSTS.Types).forEach(ptype=>{
-      if (this.traits.find(t=>t.slug == ptype)) {
-        this.traits.delete(ptype);
-      }
-    });
-
     for (const ptype of this.types) {
       if (!this.traits.find(t=>t.slug == ptype) && Trait.isValid(ptype)) {
         this.addTraitFromSlug(ptype, true);
       }
+    }
+    // check if the species is an underdog
+    if (Object.values(this.stats).reduce((a:unknown, b:unknown)=>(a as number) + (b as number), 0) as number < 510) {
+      this.addTraitFromSlug("underdog", true);
     }
   }
 
