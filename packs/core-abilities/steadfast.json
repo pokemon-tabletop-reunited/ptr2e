@@ -5,13 +5,17 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "defensive",
+          "interrupt-1"
+        ],
         "name": "Steadfast",
         "slug": "steadfast",
         "type": "passive",
         "cost": {
           "activation": "free",
           "powerPoints": 0,
+          "trigger": "The user becomes Flinched.",
           "delay": null,
           "priority": null
         },
@@ -20,11 +24,14 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: While the user is @Affliction[flinched], their default SPD stage is increased by +2."
+        "description": "<p>Trigger: The user becomes Flinched.</p><pEffect: The user gains +1 SPD stage for 3 Activations.</p>"
       }
     ],
-    "description": "Effect: While the user is @Affliction[flinched], their default SPD stage is increased by +2.",
-    "traits": [],
+    "description": "<p>Trigger: The user becomes Flinched.</p><pEffect: The user gains +1 SPD stage for 3 Activations.</p>",
+    "traits": [
+      "defensive",
+      "interrupt-1"
+    ],
     "slug": null,
     "container": null
   },

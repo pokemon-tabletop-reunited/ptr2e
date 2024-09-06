@@ -7,11 +7,13 @@
       {
         "traits": [
           "legendary",
-          "connection",
-          "defensive"
+          "defensive",
+          "interrupt-7",
+          "flinch-5",
+          "stage-change"
         ],
-        "name": "Corridors of Time",
-        "slug": "corridors-of-time",
+        "name": "Corridors of Time (Reaction)",
+        "slug": "corridors-of-time-reaction",
         "type": "generic",
         "cost": {
           "activation": "simple",
@@ -25,14 +27,42 @@
           "distance": 20,
           "unit": "m"
         },
-        "description": "Trigger: The user would be affected by a declared Action, Attack, or Ability.\nEffect: Connection - Roar of Time. The triggering effect does not affect the user, and effect's source is @Affliction[flinched] 5. Then user gains +6 EVA for 2 activations. When the user declares an Action or Ability that consumes at least one Simple Action, the user may spend 4 PP to reduce number of Simple Actions that Action consumes by 1 ([Exhaust] Actions instead just lose [Exhaust]) until the end of their Activation."
+        "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: The user targets the source of Triggering effect, causing them to Flinch. The user is unaffected by the Triggering effect, and then user gains +6 EVA for 2 activations.</p>"
+      },
+      {
+        "traits": [
+          "legendary",
+          "connection",
+          "interrupt-7",
+          "priority-5"
+        ],
+        "name": "Corridors of Time (Action)",
+        "slug": "corridors-of-time-action",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "The user declares an Action or Ability that consumes at least one Simple Action.",
+          "delay": null,
+          "priority": 5
+        },
+        "range": {
+          "target": "self",
+          "distance": "",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares an Action or Ability that consumes at least one Simple Action.</p><p>Effect: Connection - Roar of Time. The number of Simple Actions the Triggering Action consumes are reduced by 1 ([Exhaust] Actions instead just lose [Exhaust])."
       }
     ],
-    "description": "Trigger: The user would be affected by a declared Action, Attack, or Ability.\nEffect: Connection - Roar of Time. The triggering effect does not affect the user, and effect's source is @Affliction[flinched] 5. Then user gains +6 EVA for 2 activations. When the user declares an Action or Ability that consumes at least one Simple Action, the user may spend 4 PP to reduce number of Simple Actions that Action consumes by 1 ([Exhaust] Actions instead just lose [Exhaust]) until the end of their Activation.",
+    "description": "Trigger: The user would be affected by a declared Action, Attack, or Ability.\nEffect: Connection - Roar of Time. The triggering effect does not affect the user, and effect's source is @Affliction[flinched] 5. Then user gains +6 EVA for 2 activations. When the user declares an Action or Ability that consumes at least one Simple Action, the user may spend 4 PP to reduce the number of Simple Actions that Action consumes by 1 ([Exhaust] Actions instead just lose [Exhaust]).",
     "traits": [
       "legendary",
       "connection",
-      "defensive"
+      "defensive",
+      "interrupt-7",
+      "priority-5",
+      "flinch-5",
+      "stage-change"
     ],
     "slug": null,
     "container": null
