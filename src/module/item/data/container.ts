@@ -35,7 +35,7 @@ export default abstract class ContainerSystem extends ContainerExtension {
 
         if(!data.img || data.img === "icons/svg/item-bag.svg") {
             this.parent.updateSource({
-                img: "/systems/ptr2e/img/icons/consumable_icon.webp"
+                img: "systems/ptr2e/img/icons/consumable_icon.webp"
             })
         }
     }

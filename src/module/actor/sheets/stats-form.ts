@@ -26,21 +26,21 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         baseStats: {
             id: "baseStats",
-            template: "/systems/ptr2e/templates/actor/stats-form-parts/base-stats-form.hbs",
+            template: "systems/ptr2e/templates/actor/stats-form-parts/base-stats-form.hbs",
             forms: {
                 "#base-stats-form": {handler: StatsForm.#onSubmitBaseStatsForm }
             }
         },
         evStats: {
             id: "evStats",
-            template: "/systems/ptr2e/templates/actor/stats-form-parts/ev-stats-form.hbs",
+            template: "systems/ptr2e/templates/actor/stats-form-parts/ev-stats-form.hbs",
             forms: {
                 "#ev-stats-form": {handler: StatsForm.#onSubmitEvStatsForm }
             }
         },
         statsChart: {
             id: "statsChart",
-            template: "/systems/ptr2e/templates/actor/stats-form-parts/stats-chart.hbs",
+            template: "systems/ptr2e/templates/actor/stats-form-parts/stats-chart.hbs",
         }
     }
 

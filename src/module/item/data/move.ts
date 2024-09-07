@@ -141,7 +141,7 @@ export default abstract class MoveSystem extends HasEmbed(
 
     if (!data.img || data.img === "icons/svg/item-bag.svg") {
       this.parent.updateSource({
-        img: "/systems/ptr2e/img/svg/untyped_icon.svg",
+        img: "systems/ptr2e/img/svg/untyped_icon.svg",
       });
     }
 

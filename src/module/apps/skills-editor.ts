@@ -37,7 +37,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         skills: {
             id: "skills",
-            template: "/systems/ptr2e/templates/apps/skills-editor.hbs",
+            template: "systems/ptr2e/templates/apps/skills-editor.hbs",
         },
     };
 

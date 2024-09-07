@@ -137,7 +137,7 @@
     <div class="{{action.type}} action {{#if action.css.class}}{{action.css.class}}{{/if}}" data-tooltip-direction="{{direction}}" data-slug="{{action.slug}}" data-item-id="{{action.item.id}}" data-parent="{{action.item.uuid}}" data-tooltip="{{action.name}}" {{#if (isdefined slot)}}data-slot="{{slot}}"{{/if}} {{#if action.css.style}}style="{{action.css.style}}"{{/if}}>
         <div class="action-icon {{#if action.rollable}}rollable{{/if}}" {{#if action.rollable}}data-action="roll-attack"{{/if}} >
             <img class="icon" src="{{action.img}}"/>
-            <img class="dice" src="/icons/svg/d20.svg" data-tooltip="Roll {{action.name}}">
+            <img class="dice" src="icons/svg/d20.svg" data-tooltip="Roll {{action.name}}">
         </div>
         <span class="action-name">{{#if (eq action.type "attack")}}<span>{{action.name}}</span>{{else}}{{action.name}}{{/if}}</span>
         <div class="action-controls item-controls">

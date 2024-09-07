@@ -41,22 +41,22 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     // header: {
     //   id: "header",
-    //   template: "/systems/ptr2e/templates/apps/data-inspector/header.hbs",
+    //   template: "systems/ptr2e/templates/apps/data-inspector/header.hbs",
     //   scrollable: [],
     // },
     target: {
       id: "target",
-      template: "/systems/ptr2e/templates/apps/data-inspector/target.hbs",
+      template: "systems/ptr2e/templates/apps/data-inspector/target.hbs",
       scrollable: [],
     },
     settings: {
       id: "settings",
-      template: "/systems/ptr2e/templates/apps/data-inspector/settings.hbs",
+      template: "systems/ptr2e/templates/apps/data-inspector/settings.hbs",
       scrollable: [".scroll"],
     },
     content: {
       id: "content",
-      template: "/systems/ptr2e/templates/apps/data-inspector/content.hbs",
+      template: "systems/ptr2e/templates/apps/data-inspector/content.hbs",
       scrollable: ["section.content", "section.options", "section.modifiers", "section.tabs"],
     },
   };

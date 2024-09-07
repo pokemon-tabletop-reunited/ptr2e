@@ -66,15 +66,15 @@ export default class ItemSheetPTR2e<
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     header: {
       id: "header",
-      template: "/systems/ptr2e/templates/items/parts/item-header.hbs",
+      template: "systems/ptr2e/templates/items/parts/item-header.hbs",
     },
     tabs: {
       id: "tabs",
-      template: "/systems/ptr2e/templates/items/parts/item-tabs.hbs",
+      template: "systems/ptr2e/templates/items/parts/item-tabs.hbs",
     },
     traits: {
       id: "traits",
-      template: "/systems/ptr2e/templates/items/parts/item-traits.hbs",
+      template: "systems/ptr2e/templates/items/parts/item-traits.hbs",
     },
     overview: {
       id: "overview",
@@ -88,12 +88,12 @@ export default class ItemSheetPTR2e<
     },
     actions: {
       id: "actions",
-      template: "/systems/ptr2e/templates/items/parts/item-actions.hbs",
+      template: "systems/ptr2e/templates/items/parts/item-actions.hbs",
       scrollable: [".scroll"],
     },
     effects: {
       id: "effects",
-      template: "/systems/ptr2e/templates/items/parts/item-effects.hbs",
+      template: "systems/ptr2e/templates/items/parts/item-effects.hbs",
       scrollable: [".scroll"],
     },
   };
