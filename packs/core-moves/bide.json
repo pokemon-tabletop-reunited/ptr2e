@@ -4,12 +4,11 @@
   "img": "/systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "bide",
-    "description": "Effect: Set Up: the user gains @Affliction[marked] 6 and @Affliction[braced] 2.\nResolution: On the user's next Activation, they target a valid creature, dealing twice the damage they took since declaring Bide to the target.",
+    "description": "Effect: Set Up: the user gains @Affliction[marked] 6 and @Affliction[braced] 2. The user's next Initiative is delayed 30%. \nResolution: On the user's next Activation, they target a valid creature, dealing twice the damage they took since declaring Bide to the target.",
     "traits": [
       "defensive",
       "draw-in",
       "set-up",
-      "delay-2",
       "danger-close"
     ],
     "actions": [
@@ -21,7 +20,6 @@
           "defensive",
           "draw-in",
           "set-up",
-          "delay-2",
           "danger-close"
         ],
         "range": {
@@ -31,8 +29,8 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
-          "delay": 2,
+          "powerPoints": 6,
+          "delay": null,
           "priority": null,
           "trigger": null
         },
@@ -42,7 +40,7 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: Set Up: the user gains @Affliction[marked] 6 and @Affliction[braced] 2. \nResolution: On the user's next Activation, they target a valid creature, dealing twice the damage they took since declaring Bide to the target.",
+        "description": "Effect: Set Up: the user gains @Affliction[marked] 6 and @Affliction[braced] 2.  The user's next Initiative is delayed 30%. \nResolution: On the user's next Activation, they target a valid creature, dealing twice the damage they took since declaring Bide to the target.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
