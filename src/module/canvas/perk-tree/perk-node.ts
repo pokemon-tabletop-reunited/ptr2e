@@ -350,7 +350,6 @@ class PerkNode extends PIXI.Container {
                     ui.notifications.error("You are unable to currently purchase this perk.");
                     return;
                 }
-                node.state = PerkState.purchased;
                 await actor.createEmbeddedDocuments("Item", [node.perk.clone({ system: { cost: node.perk.system.cost } })]);
                 this.wasClicked = false;
             }
