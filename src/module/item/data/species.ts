@@ -254,11 +254,9 @@ class SpeciesSystem extends SpeciesExtension {
     };
   }
 
-  static override migrateData(source: Record<string, unknown>) {
-    // @ts-ignore-error
+  static override migrateData(source: SpeciesSystem['_source']) {
     for (const abGroup of Object.keys(source.abilities)) {
-      // @ts-ignore-error
-      source.abilities[abGroup] = source.abilities[abGroup].map(g=>{
+      source.abilities[abGroup] = (source.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g=>{
         if (typeof g == "object") return g;
         return { slug: g, uuid: null };
       });
@@ -702,7 +700,7 @@ interface AbilitySchema extends foundry.data.fields.DataSchema {
   master: foundry.data.fields.ArrayField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
 }
 
-interface AbilityReferenceSchema extends foundry.data.fields.DataSchema {
+export interface AbilityReferenceSchema extends foundry.data.fields.DataSchema {
     slug: SlugField<string, string, true, false, true>,
     uuid: foundry.data.fields.DocumentUUIDField<"Item", true, false, false>
 }

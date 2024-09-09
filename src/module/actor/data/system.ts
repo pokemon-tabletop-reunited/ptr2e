@@ -16,6 +16,7 @@ import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { ActorSystemSchema, AttributeSchema, StatSchema, TypeField, GenderOptions, AttributesSchema, AdvancementSchema, Movement } from "./data.ts";
 import { addDataFieldMigration, sluggify } from "@utils";
+import { AbilityReferenceSchema } from "@item/data/species.ts";
 
 class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel)) {
   static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -250,8 +251,20 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     };
   }
 
-  static override migrateData(source: Record<string, unknown>) {
+  static override migrateData(source: ActorSystemPTR2e["_source"]) {
+    // Migrate the `health.shield` field to the new `shield` field
     addDataFieldMigration(source, "health.shield", "shield");
+
+    // Migrate species Abilities data to the new format
+    if(source.species) {
+      for (const abGroup of Object.keys(source.species.abilities)) {
+        source.species.abilities[abGroup] = (source.species.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g=>{
+          if (typeof g == "object") return g;
+          return { slug: g, uuid: null };
+        });
+      }
+    }
+
     return super.migrateData(source);
   }
 
