@@ -180,25 +180,25 @@
             <!-- Starting -->
             <div class="form-group">
                 <label>Starting Abilities</label>
-                {{> abilityGroup abilities=source.system.abilities.starting path="system.abilities.starting"}}
+                {{> abilityGroup abilities=abilities.starting path="system.abilities.starting"}}
             </div>
 
             <!-- Basic -->
             <div class="form-group">
                 <label>Basic Abilities</label>
-                {{> abilityGroup abilities=source.system.abilities.basic path="system.abilities.basic"}}
+                {{> abilityGroup abilities=abilities.basic path="system.abilities.basic"}}
             </div>
 
             <!-- Advanced -->
             <div class="form-group">
                 <label>Advanced Abilities</label>
-                {{> abilityGroup abilities=source.system.abilities.advanced path="system.abilities.advanced"}}
+                {{> abilityGroup abilities=abilities.advanced path="system.abilities.advanced"}}
             </div>
 
             <!-- Master -->
             <div class="form-group">
                 <label>Master Abilities</label>
-                {{> abilityGroup abilities=source.system.abilities.master path="system.abilities.master"}}
+                {{> abilityGroup abilities=abilities.master path="system.abilities.master"}}
             </div>
         </fieldset>
     </div>
@@ -209,8 +209,8 @@
     <div class="tags input-element-tags">
     {{#each abilities}}
         {{!-- TODO: add a "label" field instead of just using the slug? --}}
-        <div class="tag" data-key="{{slug}}"><span>{{localize slug}}</span><a class="remove fa-solid fa-times"
-                data-tooltip="Remove Tag" aria-label="Remove Tag"></a></div>
+        <div class="tag" data-key="{{slug}}">{{{contentLink}}}<a class="remove fa-solid fa-times"
+                data-tooltip="Remove Tag" aria-label="Remove Tag"></a></div> 
     {{/each}}
     </div>
 </fieldset>

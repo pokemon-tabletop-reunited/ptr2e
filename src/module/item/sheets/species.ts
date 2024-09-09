@@ -4,7 +4,7 @@ import { SpeciesSystemSource } from "@item/data/index.ts";
 import { htmlQueryAll, sluggify } from "@utils";
 import { default as ItemSheetPTR2e } from "./base.ts";
 import * as R from "remeda";
-import { AbilityReference, EvolutionData } from "@item/data/species.ts";
+import { AbilityReference, AbilityReferenceSchema, EvolutionData } from "@item/data/species.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { partialSkillToSkill } from "@scripts/config/skills.ts";
 
@@ -77,36 +77,18 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
             label: "PTR2E.SpeciesSheet.Tabs.moves.label",
         },
     };
-
-    // override changeTab(
-    //     tab: string,
-    //     group: string,
-    //     {
-    //         event,
-    //         navElement,
-    //         force = false,
-    //         updatePosition = true,
-    //     }: { event?: Event; navElement?: HTMLElement; force: boolean; updatePosition: boolean } = {
-    //         force: false,
-    //         updatePosition: true,
-    //     }
-    // ): void {
-    //     super.changeTab(tab, group, { event, navElement, force, updatePosition });
-    //     if (!updatePosition) return;
-
-    //     if (tab === "details") {
-    //         this.setPosition({ height: 1000, width: 870 });
-    //     } else {
-    //         this.setPosition({ height: 500, width: 550 });
-    //     }
-    // }
-
+    
     override async _prepareContext() {
         return {
             ...(await super._prepareContext()),
             copyPresent:
                 !!SpeciesSheet.copyInfo &&
                 SpeciesSheet.copyInfo !== this.document.system.evolutions,
+            abilities: Object.keys(this.document.system.abilities).reduce((acc, key) => {
+              const category = this.document._source.system.abilities[key]! as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[];
+              acc[key] = category.map(ability => ({slug: ability.slug, contentLink: Handlebars.helpers.asContentLink(ability.uuid)}));
+              return acc;
+            }, {} as Record<string, {slug: string, contentLink: string}[]>)
         };
     }
 
@@ -184,7 +166,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
                 const target = (event.target as HTMLElement).closest("fieldset.abilities");
                 if (!target) return;
 
-                // Remove the dragover class from all fieldset.evos elements
+                // Remove the dragover class from all fieldset.abilities elements
                 abilityFieldsets.forEach((fieldset) => fieldset.classList.remove("dragover"));
 
                 // Add the dragover class to the current target
