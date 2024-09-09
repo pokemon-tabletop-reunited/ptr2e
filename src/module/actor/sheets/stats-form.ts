@@ -73,12 +73,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
             for (const [selector] of Object.entries(part.forms)) {
                 const form = htmlElement.matches(selector) ? htmlElement : htmlElement.querySelector(selector);
                 if (!form) continue;
-                for (const element of form.querySelectorAll("input[type=number]")) {
-                    for (const listener of ["keyup", "losefocus"]) {
-                        element.addEventListener(listener, () => form.dispatchEvent(new SubmitEvent("submit", {cancelable: true})));
-                    }
-                }
-                for (const element of form.querySelectorAll("input[type=range],select,textarea")) {
+                for (const element of form.querySelectorAll("input,select,textarea")) {
                     element.addEventListener("change", () => form.dispatchEvent(new SubmitEvent("submit", {cancelable: true})));
                 }
                 for (const range of form.querySelectorAll("input[type=range]")) {
