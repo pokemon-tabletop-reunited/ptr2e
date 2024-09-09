@@ -3,6 +3,9 @@ import { SkillsComponent } from "@actor/components/skills-component.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
 
+
+type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: number; max: number; min: number };
+
 export class SkillsEditor extends foundry.applications.api.HandlebarsApplicationMixin(
     foundry.applications.api.ApplicationV2
 ) {
@@ -42,7 +45,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     };
 
     document: ActorPTR2e;
-    skills: (SkillPTR2e["_source"] & { label: string; investment: number })[];
+    skills: SkillBeingEdited[];
 
     override get title() {
         return `${this.document.name}'s Skills Editor`;
@@ -59,6 +62,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     }
 
     resetSkills(): this["skills"] {
+        const levelOne = this.document.system.advancement.level === 1;
         const {skills, hideHiddenSkills} = SkillsComponent.prepareSkillsData(this.document);
 
         const convertSkill = (skill: Skill) => {
@@ -72,6 +76,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                     ...skill,
                     label,
                     investment: 0,
+                    max: (levelOne ? 90 : 100) - (skill?.rvs ?? 0),
+                    min: -(skill?.rvs ?? 0),
                 }];
             } else {
                 const skillData = game.ptr.data.skills.get(skill.slug);
@@ -80,6 +86,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                         ...skill,
                         label: skillData.label || Handlebars.helpers.formatSlug(skill.slug),
                         investment: 0,
+                        max: (levelOne ? 90 : 100) - (skill?.rvs ?? 0),
+                        min: -(skill?.rvs ?? 0),
                     }];
                 }
             }
@@ -87,9 +95,9 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         }
         
         return [
-            ...skills.favourites.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as (SkillPTR2e["_source"] & { label: string; investment: number })[]),
-            ...skills.normal.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as (SkillPTR2e["_source"] & { label: string; investment: number })[]),
-            ...(hideHiddenSkills ? [] : skills.hidden.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as (SkillPTR2e["_source"] & { label: string; investment: number })[])),
+            ...skills.favourites.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as SkillBeingEdited[]),
+            ...skills.normal.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as SkillBeingEdited[]),
+            ...(hideHiddenSkills ? [] : skills.hidden.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as SkillBeingEdited[])),
         ]
     }
 
@@ -110,13 +118,17 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         };
         points.available = points.total - points.spent;
         const levelOne = this.document.system.advancement.level === 1;
-        const maxInvestment = Math.clamp(points.available,0, levelOne ? 90 : 100);
+
+        // clamp the max to not exceed the available points
+        const skills = this.skills.map((s)=>({
+            ...s,
+            max: Math.min(s.max, s.investment + points.available!),
+        }))
 
         return {
             document: this.document,
-            skills: this.skills,
+            skills,
             points,
-            maxInvestment,
             isReroll:
                 !levelOne || (levelOne && this.document.system.skills.get("luck")!.value! > 1),
             levelOne,
@@ -130,8 +142,9 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     ): void {
         super._attachPartListeners(partId, htmlElement, options);
 
-        for (const input of htmlQueryAll(htmlElement, "skill input")) {
-            input.addEventListener("change", this.#onSkillChange.bind(this));
+        for (const input of htmlQueryAll(htmlElement, ".skill input")) {
+            input.addEventListener("keyup", this.#onSkillChange.bind(this));
+            input.addEventListener("losefocus", this.#onSkillChange.bind(this));
         }
     }
 
