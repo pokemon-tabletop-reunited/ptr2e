@@ -70,16 +70,16 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     tabs: {
       id: "tabs",
-      template: "/systems/ptr2e/templates/items/parts/item-tabs.hbs",
+      template: "systems/ptr2e/templates/items/parts/item-tabs.hbs",
     },
     overview: {
       id: "overview",
-      template: "/systems/ptr2e/templates/apps/party/overview.hbs",
+      template: "systems/ptr2e/templates/apps/party/overview.hbs",
       scrollable: [".scroll"]
     },
     party: {
       id: "party",
-      template: "/systems/ptr2e/templates/apps/party/party.hbs",
+      template: "systems/ptr2e/templates/apps/party/party.hbs",
       scrollable: ["main.boxes .content", "article.party .contents"],
     },
   };

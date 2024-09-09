@@ -1,7 +1,7 @@
 {
   "name": "unown",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 201,
     "size": {
@@ -34,19 +34,33 @@
     ],
     "abilities": {
       "starting": [
-        "runes-of-power"
+        {
+          "slug": "runes-of-power"
+        }
       ],
       "basic": [
-        "power-leech",
-        "potent-might"
+        {
+          "slug": "power-leech"
+        },
+        {
+          "slug": "potent-might"
+        }
       ],
       "advanced": [
-        "feedback",
-        "magic-guard"
+        {
+          "slug": "feedback"
+        },
+        {
+          "slug": "magic-guard"
+        }
       ],
       "master": [
-        "mystic-power",
-        "magic-bounce"
+        {
+          "slug": "mystic-power"
+        },
+        {
+          "slug": "magic-bounce"
+        }
       ]
     },
     "skills": [
@@ -179,7 +193,7 @@
         "group": null
       }
     ],
-    "slug": "",
+    "slug": "unown",
     "stats": {
       "hp": 48,
       "atk": 72,
@@ -205,8 +219,7 @@
         {
           "name": "hidden-power",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.1lkeVmjLt8Vp0izT"
+          "gen": "brilliant-diamond-and-shining-pearl"
         }
       ]
     }

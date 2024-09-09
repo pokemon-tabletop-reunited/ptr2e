@@ -1,12 +1,14 @@
 {
   "name": "Snore",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "snore",
     "description": "",
     "traits": [
-      "sonic"
+      "sonic",
+      "flinch-chance-4",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -15,6 +17,7 @@
         "type": "attack",
         "traits": [
           "sonic",
+          "flinch-chance-4",
           "pp-updated"
         ],
         "range": {
@@ -35,7 +38,7 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: Snore can only be used while affected by the @Affliction[drowsy] condition. On hit, all valid targets have a 30% chance of gaining @Affliction[flinched] 5.",
+        "description": "Effect: Snore can only be used while affected by the @Affliction[drowsy] condition. On hit, all valid targets have a 30% chance of being Flinched.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

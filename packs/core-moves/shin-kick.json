@@ -1,14 +1,16 @@
 {
   "name": "Shin Kick",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/dark_icon.svg",
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "shin-kick",
     "description": "",
     "traits": [
       "contact",
       "kick",
-      "priority-2"
+      "priority-2",
+      "flinch-chance-3",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -19,6 +21,7 @@
           "contact",
           "kick",
           "priority-2",
+          "flinch-chance-3",
           "pp-updated"
         ],
         "range": {
@@ -39,7 +42,7 @@
         "types": [
           "dark"
         ],
-        "description": "Effect: On hit, the target has a 30% chance to be @Affliction[flinched] 5.",
+        "description": "Effect: On hit, the target has a 30% chance of being Flinched.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

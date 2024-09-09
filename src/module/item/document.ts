@@ -274,7 +274,7 @@ class ItemPTR2e<
   override async update(data: Record<string, unknown>, context?: DocumentModificationContext<TParent> | undefined): Promise<this | undefined> {
     if (!(this.system instanceof SpeciesSystemModel && this.system.virtual) && !this.flags.ptr2e.virtual) return super.update(data, context);
 
-    await this.actor?.update({ "system.species": data.system });
+    await this.actor?.update({ "system.species": fu.expandObject(data).system });
     this.updateSource(data);
     foundry.applications.instances.get(`SpeciesSheet-${this.uuid}`)?.render({});
     return undefined;

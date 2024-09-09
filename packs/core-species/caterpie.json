@@ -1,7 +1,7 @@
 {
   "name": "caterpie",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 10,
     "size": {
@@ -41,20 +41,36 @@
     ],
     "abilities": {
       "starting": [
-        "shield-dust",
-        "run-away"
+        {
+          "slug": "shield-dust"
+        },
+        {
+          "slug": "run-away"
+        }
       ],
       "basic": [
-        "unnerve",
-        "stench"
+        {
+          "slug": "unnerve"
+        },
+        {
+          "slug": "stench"
+        }
       ],
       "advanced": [
-        "suction-cups",
-        "anticipation"
+        {
+          "slug": "suction-cups"
+        },
+        {
+          "slug": "anticipation"
+        }
       ],
       "master": [
-        "gluttony",
-        "coward"
+        {
+          "slug": "gluttony"
+        },
+        {
+          "slug": "coward"
+        }
       ]
     },
     "skills": [
@@ -155,7 +171,7 @@
         "group": null
       }
     ],
-    "slug": "",
+    "slug": "caterpie",
     "stats": {
       "hp": 45,
       "atk": 30,
@@ -171,33 +187,28 @@
       "tutor": [
         {
           "name": "snore",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.4XGhnE4bWGYPKRxO"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "electroweb",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DLoWCGaBlU23XnUI"
+          "gen": "ultra-sun-ultra-moon"
         }
       ],
       "levelUp": [
         {
           "name": "tackle",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.fWOSmnI68Lct2LUn"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "string-shot",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TijijTYIY2UOVWOn"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "bug-bite",
           "level": 9,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VWTUbiZH5inKfQn8"
+          "gen": "brilliant-diamond-and-shining-pearl"
         }
       ]
     },

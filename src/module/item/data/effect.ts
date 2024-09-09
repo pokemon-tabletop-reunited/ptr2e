@@ -38,7 +38,7 @@ export default abstract class EffectSystem extends HasEmbed(HasTraits(HasMigrati
 
         if (!data.img || data.img === "icons/svg/item-bag.svg") {
             this.parent.updateSource({
-                img: "/systems/ptr2e/img/icons/effect_icon.webp",
+                img: "systems/ptr2e/img/icons/effect_icon.webp",
             });
         }
     }

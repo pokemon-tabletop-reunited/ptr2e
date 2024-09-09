@@ -1,6 +1,6 @@
 {
   "name": "cosmog",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "type": "species",
   "system": {
     "types": [
@@ -19,14 +19,12 @@
         {
           "name": "teleport",
           "level": 1,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.D70apP7vVf1aEVVr"
+          "gen": "scarlet-violet"
         },
         {
           "name": "splash",
           "level": 1,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.zsfPLAkIqk2KQaP7"
+          "gen": "scarlet-violet"
         }
       ],
       "tutor": []
@@ -118,19 +116,33 @@
     ],
     "abilities": {
       "starting": [
-        "beast-boost"
+        {
+          "slug": "beast-boost"
+        }
       ],
       "basic": [
-        "unaware",
-        "magic-bounce"
+        {
+          "slug": "unaware"
+        },
+        {
+          "slug": "magic-bounce"
+        }
       ],
       "advanced": [
-        "sturdy",
-        "magic-guard"
+        {
+          "slug": "sturdy"
+        },
+        {
+          "slug": "magic-guard"
+        }
       ],
       "master": [
-        "full-metal-body",
-        "shadow-shield"
+        {
+          "slug": "full-metal-body"
+        },
+        {
+          "slug": "shadow-shield"
+        }
       ]
     },
     "movement": {

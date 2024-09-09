@@ -29,7 +29,7 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
         },
         // attack: {
         //     id: "attack",
-        //     template: "/systems/ptr2e/templates/items/move/move-attack.hbs",
+        //     template: "systems/ptr2e/templates/items/move/move-attack.hbs",
         //     scrollable: [".scroll"],
         //     forms: {
         //         "#attack": {

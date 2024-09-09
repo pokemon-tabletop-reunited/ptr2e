@@ -4,7 +4,7 @@ import ChangeForm, { ChangeFormContext } from "./base.ts";
 
 class GrantItemForm extends ChangeForm<GrantItemChangeSystem> {
     override get template() {
-        return "/systems/ptr2e/templates/effects/changes/grant-item.hbs";
+        return "systems/ptr2e/templates/effects/changes/grant-item.hbs";
     }
 
     override async _prepareContext() {

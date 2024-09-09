@@ -1,13 +1,14 @@
 {
   "name": "Shock & Awe",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/ghost_icon.svg",
+  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "shock-awe",
     "description": "",
     "traits": [
       "2-strike",
       "social",
+      "flinch-chance-2",
       "pp-updated"
     ],
     "actions": [
@@ -18,6 +19,7 @@
         "traits": [
           "2-strike",
           "social",
+          "flinch-chance-2",
           "pp-updated"
         ],
         "range": {
@@ -38,7 +40,7 @@
         "types": [
           "ghost"
         ],
-        "description": "Effect: On hit, the target has a 20% chance of gaining @Affliction[flinched] 3, and a 20% chance of gaining @Affliction[fear] 5.",
+        "description": "Effect: On hit, the target has a 20% chance of being Flinched, and a 20% chance of gaining @Affliction[fear] 5.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

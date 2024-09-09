@@ -27,26 +27,26 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         header: {
             id: "header",
-            template: "/systems/ptr2e/templates/apps/settings/traits-settings-header.hbs"
+            template: "systems/ptr2e/templates/apps/settings/traits-settings-header.hbs"
         },
         systemTraits: {
             id: "system-traits",
-            template: "/systems/ptr2e/templates/apps/settings/traits-settings.hbs",
+            template: "systems/ptr2e/templates/apps/settings/traits-settings.hbs",
             scrollable: [".scroll"]
         },
         userTraits: {
             id: "user-traits",
-            template: "/systems/ptr2e/templates/apps/settings/traits-settings.hbs",
+            template: "systems/ptr2e/templates/apps/settings/traits-settings.hbs",
             scrollable: [".scroll"]
         },
         moduleTraits: {
             id: "module-traits",
-            template: "/systems/ptr2e/templates/apps/settings/traits-settings.hbs",
+            template: "systems/ptr2e/templates/apps/settings/traits-settings.hbs",
             scrollable: [".scroll"]
         },
         footer: {
             id: "footer",
-            template: "/systems/ptr2e/templates/apps/settings/traits-settings-footer.hbs",
+            template: "systems/ptr2e/templates/apps/settings/traits-settings-footer.hbs",
         },
     }
 

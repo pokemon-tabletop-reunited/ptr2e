@@ -1,14 +1,16 @@
 {
   "name": "Dragon Rush",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/dragon_icon.svg",
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "dragon-rush",
     "description": "",
     "traits": [
       "crushing",
       "pass-3",
-      "contact"
+      "contact",
+      "flinch-chance-3",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -19,6 +21,7 @@
           "crushing",
           "pass-3",
           "contact",
+          "flinch-chance-3",
           "pp-updated"
         ],
         "range": {
@@ -39,7 +42,7 @@
         "types": [
           "dragon"
         ],
-        "description": "Effect: On hit, the target has a 20% chance of gaining @Affliction[flinched] 3.",
+        "description": "Effect: On hit, the target has a 20% chance of being Flinched.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

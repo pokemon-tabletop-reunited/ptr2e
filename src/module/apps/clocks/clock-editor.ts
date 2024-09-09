@@ -40,7 +40,7 @@ export default class ClockEditor extends foundry.applications.api.HandlebarsAppl
   static override PARTS = {
     clocks: {
       id: "clocks",
-      template: "/systems/ptr2e/templates/apps/clocks/clock-editor.hbs",
+      template: "systems/ptr2e/templates/apps/clocks/clock-editor.hbs",
     },
   };
 
