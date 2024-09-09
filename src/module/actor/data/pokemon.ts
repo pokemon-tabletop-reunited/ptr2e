@@ -28,7 +28,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
             if (promise instanceof ItemPTR2e && promise.system instanceof SpeciesSystemModel) {
                 this.updateSource({ species: promise.toObject().system });
                 if (data.name.includes(game.i18n.localize("TYPES.Actor.pokemon"))) {
-                    this.parent.updateSource({ name: promise.name });
+                    this.parent.updateSource({ name: Handlebars.helpers.formatSlug(sluggify(promise.name)) });
                 }
                 if ((!data.img || data.img === "icons/svg/mystery-man.svg") && promise.img) {
                     this.parent.updateSource({ img: promise.img });
@@ -307,7 +307,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
 
         const foundryDefaultTokenSettings = game.settings.get("core", "defaultToken");
         this.parent.updateSource({
-            name: Handlebars.helpers.formatSlug(evolution.slug || sluggify(this.parent.name)),
+            name: this.parent.name || Handlebars.helpers.formatSlug(evolution.slug),
             img,
             system: {
                 attributes: stats,
