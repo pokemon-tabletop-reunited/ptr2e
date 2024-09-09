@@ -40,6 +40,9 @@ class PerkNode extends PIXI.Container {
 
         // Determine state
         this.state = node.state;
+
+        // Whether the note was clicked in the last 200 ms
+        this.wasClicked = false;
     }
 
     get active() {
@@ -329,6 +332,28 @@ class PerkNode extends PIXI.Container {
     async _onClickLeft(_event: PIXI.FederatedPointerEvent) {
         if (!game.ptr.web.editMode) {
             game.ptr.web.hudNode = this;
+
+            if (!this.wasClicked) {
+                // I don't love having to do this, but it looks like the detail field doesn't actually get populated on these events
+                this.wasClicked = true;
+                setInterval(()=>{this.wasClicked = false}, 500);
+            } else {
+                const node = this?.node;
+                const actor = game.ptr.web.actor;
+                if (!node || !actor) return;
+
+                if (node.state !== PerkState.available) {
+                    if (node.state === PerkState.purchased) {
+                        ui.notifications.error("You've already purchased this perk!");
+                        return;
+                    }
+                    ui.notifications.error("You are unable to currently purchase this perk.");
+                    return;
+                }
+                node.state = PerkState.purchased;
+                await actor.createEmbeddedDocuments("Item", [node.perk.clone({ system: { cost: node.perk.system.cost } })]);
+                this.wasClicked = false;
+            }
         } else {
             if (this.active) {
                 await this.savePosition();
@@ -553,6 +578,8 @@ interface PerkNode {
     originalPosition: PIXI.Point | null;
 
     state: PerkPurchaseState;
+
+    wasClicked: boolean;
 
     editState: ValueOf<PerkEditState>;
 
