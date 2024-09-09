@@ -59,6 +59,18 @@ class CompendiumPack {
       Macro: new Map(),
       RollTable: new Map(),
     };
+  static #idsToEntry: {
+    [K in Extract<CompendiumDocumentType, "Actor" | "Item" | "JournalEntry" | "Macro" | "RollTable">]: Map<
+      string,
+      Map<string, PackEntry>
+    >;
+  } & Record<string, Map<string, Map<string, PackEntry>> | undefined> = {
+      Actor: new Map(),
+      Item: new Map(),
+      JournalEntry: new Map(),
+      Macro: new Map(),
+      RollTable: new Map(),
+    };
 
   static #packsMetadata = JSON.parse(fs.readFileSync("static/system.json", "utf-8")).packs as PackMetadata[];
 
@@ -67,6 +79,7 @@ class CompendiumPack {
     compendium:
       /@Compendium\[ptr2e\.(?<packName>[^.]+)\.(?<docType>Actor|JournalEntry|Item|Macro|RollTable)\.(?<docName>[^\]]+)\]\{?/g,
     uuid: /@UUID\[Compendium\.ptr2e\.(?<packName>[^.]+)\.(?<docType>Actor|JournalEntry|Item|Macro|RollTable)\.(?<docName>[^\]]+)\]\{?/g,
+    uuidLink: /"Compendium\.ptr2e\.(?<packName>[^.]+)\.(?<docType>Actor|JournalEntry|Item|Macro|RollTable)\.(?<docName>[^"]+)"/gm,
   };
 
   constructor(packDir: string, parsedData: unknown[], parsedFolders: unknown[]) {
@@ -97,6 +110,12 @@ class CompendiumPack {
       throw PackError(`Compendium ${this.packId} (${packDir}) was not found.`);
     }
 
+    CompendiumPack.#idsToEntry[this.documentType]?.set(this.packId, new Map());
+    const packEntryMap = CompendiumPack.#idsToEntry[this.documentType]?.get(this.packId);
+    if (!packEntryMap) {
+      throw PackError(`Compendium ${this.packId} (${packDir}) was not found.`);
+    }
+
     parsedData.sort((a, b) => {
       if (a._id === b._id) {
         throw PackError(`_id collision in ${this.packId}: ${a._id}`);
@@ -109,6 +128,7 @@ class CompendiumPack {
     for (const docSource of this.data) {
       // Populate CompendiumPack.namesToIds for later conversion of compendium links
       packMap.set(docSource.name, docSource._id ?? "");
+      packEntryMap.set(docSource._id ?? docSource.name, docSource);
 
       // Check img paths
       if ("img" in docSource && typeof docSource.img === "string") {
@@ -297,7 +317,7 @@ class CompendiumPack {
 
   #finalize(docSource: PackEntry): string {
     // Replace all compendium documents linked by name to links by ID
-    const stringified = JSON.stringify(docSource);
+    const stringified = JSON.stringify(docSource, null, 2);
     const worldItemLink = CompendiumPack.LINK_PATTERNS.world.exec(stringified);
     if (worldItemLink !== null) {
       throw PackError(`${docSource.name} (${this.packId}) has a link to a world item: ${worldItemLink[0]}`);
@@ -312,6 +332,29 @@ class CompendiumPack {
       docSource.flags.core = { sourceId: this.#sourceIdOf(docSource._id ?? "", { docType: "Item" }) };
       //@ts-expect-error - Slug exists on all documents
       docSource.system.slug ??= sluggify(docSource.name);
+
+      if(docSource.type === "species") {
+        ((system) => {
+          const abilities = system.abilities
+          for(const key of Object.keys(abilities)) {
+            const category = system.abilities[key];
+            for(const ability of category) {
+              if(!ability.uuid) {
+                throw PackError(`Species ${docSource.name} (${docSource._id}) has an ability without a uuid: ${ability.slug}`);
+              }
+              const abilitySource = CompendiumPack.#idsToEntry["Item"]?.get("core-abilities")?.get(ability.uuid.split(".").pop()!);
+              if(abilitySource === undefined) {
+                throw PackError(`Failed to find ability ${ability.uuid.split(".").pop()} in ${this.packId}`);
+              }
+              if(sluggify(abilitySource.name) !== ability.slug) {
+                throw PackError(`Species ${docSource.name} (${docSource._id}) has a mismatched ability slug: ${ability.slug} !== ${sluggify(abilitySource.name)} for ${ability.uuid}`);
+              }
+            }
+          }
+        })(docSource.system as {
+          abilities: Record<string, {slug: string, uuid: string}[]>;
+        });
+      }
     }
 
     const replace = (match: string, packId: string, docType: string, docName: string): string => {
