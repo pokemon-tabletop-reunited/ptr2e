@@ -774,12 +774,11 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           },
           templates: {
             tag: function (tagData): string {
-              const isRemovable = tagData.virtual ? "" : `<x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>`;
               return `
                             <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
                 tagData
               )}>
-                            ${isRemovable}
+                            ${tagData.virtual ? "" : `<x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>`}
                             <div>
                                 <span class='tagify__tag-text'>
                                     <span class="trait" data-tooltip-direction="UP" data-trait="${tagData.value
