@@ -339,6 +339,10 @@ class CompendiumPack {
           for(const key of Object.keys(abilities)) {
             const category = system.abilities[key];
             for(const ability of category) {
+              // UUID shouldn't be manually set
+              if(ability.uuid) { 
+                throw PackError(`Ability '${ability.slug}' in species '${docSource.name}' has a manually set UUID, which is not allowed`);
+              }
               const abilitySource = CompendiumPack.#namesToIds["Item"]?.get("core-abilities")?.get(ability.slug);
               if(abilitySource === undefined) {
                 throw PackError(`Failed to find ability '${ability.slug}' in pack 'core-abilities' for species '${docSource.name}'`);
@@ -356,6 +360,11 @@ class CompendiumPack {
           for(const key in moves) {
             const moveCategory = moves[key];
             for(const move of moveCategory) {
+              // UUID shouldn't be manually set
+              if(move.uuid) { 
+                throw PackError(`Move '${move.name}' in species '${docSource.name}' has a manually set UUID, which is not allowed`);
+              }
+
               const moveSource = CompendiumPack.#namesToIds["Item"]?.get("core-moves")?.get(sluggify(move.name));
               if(moveSource === undefined) {
                 throw PackError(`Failed to find move '${move.name}' in pack 'core-moves' for species '${docSource.name}'`);
