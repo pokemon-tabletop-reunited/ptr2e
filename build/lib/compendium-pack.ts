@@ -127,7 +127,7 @@ class CompendiumPack {
 
     for (const docSource of this.data) {
       // Populate CompendiumPack.namesToIds for later conversion of compendium links
-      packMap.set(docSource.name, docSource._id ?? "");
+      packMap.set(sluggify(docSource.name), docSource._id ?? "");
       packEntryMap.set(docSource._id ?? docSource.name, docSource);
 
       // Check img paths
@@ -339,16 +339,12 @@ class CompendiumPack {
           for(const key of Object.keys(abilities)) {
             const category = system.abilities[key];
             for(const ability of category) {
-              if(!ability.uuid) {
-                throw PackError(`Species ${docSource.name} (${docSource._id}) has an ability without a uuid: ${ability.slug}`);
-              }
-              const abilitySource = CompendiumPack.#idsToEntry["Item"]?.get("core-abilities")?.get(ability.uuid.split(".").pop()!);
+              const abilitySource = CompendiumPack.#namesToIds["Item"]?.get("core-abilities")?.get(ability.slug);
               if(abilitySource === undefined) {
-                throw PackError(`Failed to find ability ${ability.uuid.split(".").pop()} in ${this.packId}`);
+                throw PackError(`Failed to find ability '${ability.slug}' in pack 'core-abilities'`);
               }
-              if(sluggify(abilitySource.name) !== ability.slug) {
-                throw PackError(`Species ${docSource.name} (${docSource._id}) has a mismatched ability slug: ${ability.slug} !== ${sluggify(abilitySource.name)} for ${ability.uuid}`);
-              }
+              
+              ability.uuid = `Compendium.ptr2e.core-abilities.Item.${abilitySource}`;
             }
           }
         })(docSource.system as {
@@ -360,15 +356,15 @@ class CompendiumPack {
     const replace = (match: string, packId: string, docType: string, docName: string): string => {
       if (match.includes("JournalEntryPage")) return match;
 
+      const idsToSource = CompendiumPack.#idsToEntry[docType]?.get(packId);
       const namesToIds = CompendiumPack.#namesToIds[docType]?.get(packId);
       const link = match.replace(/\{$/, "");
       if (namesToIds === undefined) {
         throw PackError(`${docSource.name} (${this.packId}) has a bad pack reference: ${link}`);
       }
 
-      const documentId: string | undefined = namesToIds.get(docName);
+      const documentId: string | undefined = namesToIds.get(sluggify(docName)) || idsToSource?.get(docName)?._id || undefined;
       if (documentId === undefined) {
-        return match;
         throw PackError(`${docSource.name} (${this.packId}) has broken link to ${docName}: ${match}`);
       }
       const sourceId = this.#sourceIdOf(documentId, { packId, docType });
