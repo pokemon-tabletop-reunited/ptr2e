@@ -32,7 +32,7 @@ export default class ClockPanel extends foundry.applications.api.HandlebarsAppli
   static override PARTS = {
     clocks: {
       id: "clocks",
-      template: "/systems/ptr2e/templates/apps/clocks/clock-panel.hbs",
+      template: "systems/ptr2e/templates/apps/clocks/clock-panel.hbs",
     },
   };
 

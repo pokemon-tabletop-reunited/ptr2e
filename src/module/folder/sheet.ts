@@ -35,15 +35,15 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     base: {
       id: "base",
-      template: "/systems/ptr2e/templates/folder/folder-edit.hbs",
+      template: "systems/ptr2e/templates/folder/folder-edit.hbs",
     },
     members: {
       id: "members",
-      template: "/systems/ptr2e/templates/folder/folder-members.hbs",
+      template: "systems/ptr2e/templates/folder/folder-members.hbs",
     },
     submit: {
       id: "submit",
-      template: "/systems/ptr2e/templates/folder/folder-submit.hbs",
+      template: "systems/ptr2e/templates/folder/folder-submit.hbs",
     },
   };
 

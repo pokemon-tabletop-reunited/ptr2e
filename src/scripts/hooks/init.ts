@@ -111,12 +111,12 @@ export const Init: PTRHook = {
                 }
 
                 try {
-                    game.tours.register("ptr2e", "welcome", await WelcomeTour.fromJSON("/systems/ptr2e/tours/welcome.json"));
-                    game.tours.register("ptr2e", "folders", await FoldersTour.fromJSON("/systems/ptr2e/tours/folders.json"));
-                    game.tours.register("ptr2e", "character-creation", await CharacterCreationTour.fromJSON("/systems/ptr2e/tours/character-creation.json"));
-                    // game.tours.register("ptr2e", "perk-web", await PerkWebTour.fromJSON("/systems/ptr2e/tours/perk-web.json"));
-                    // game.tours.register("ptr2e", "generating-pokemon", await GeneratingPokemonTour.fromJSON("/systems/ptr2e/tours/generating-pokemon.json"));
-                    // game.tours.register("ptr2e", "combat", await CombatTour.fromJSON("/systems/ptr2e/tours/combat.json"));
+                    game.tours.register("ptr2e", "welcome", await WelcomeTour.fromJSON("systems/ptr2e/tours/welcome.json"));
+                    game.tours.register("ptr2e", "folders", await FoldersTour.fromJSON("systems/ptr2e/tours/folders.json"));
+                    game.tours.register("ptr2e", "character-creation", await CharacterCreationTour.fromJSON("systems/ptr2e/tours/character-creation.json"));
+                    // game.tours.register("ptr2e", "perk-web", await PerkWebTour.fromJSON("systems/ptr2e/tours/perk-web.json"));
+                    // game.tours.register("ptr2e", "generating-pokemon", await GeneratingPokemonTour.fromJSON("systems/ptr2e/tours/generating-pokemon.json"));
+                    // game.tours.register("ptr2e", "combat", await CombatTour.fromJSON("systems/ptr2e/tours/combat.json"));
                 }
                 catch(err) {
                     console.error(err);

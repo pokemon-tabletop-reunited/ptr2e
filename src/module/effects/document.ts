@@ -237,7 +237,7 @@ class ActiveEffectPTR2e<
       });
     }
 
-    if (!data.img) this.updateSource({ img: "/systems/ptr2e/img/icons/effect_icon.webp" });
+    if (!data.img) this.updateSource({ img: "systems/ptr2e/img/icons/effect_icon.webp" });
 
     return result;
   }
