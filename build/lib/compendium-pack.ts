@@ -341,7 +341,7 @@ class CompendiumPack {
             for(const ability of category) {
               const abilitySource = CompendiumPack.#namesToIds["Item"]?.get("core-abilities")?.get(ability.slug);
               if(abilitySource === undefined) {
-                throw PackError(`Failed to find ability '${ability.slug}' in pack 'core-abilities'`);
+                throw PackError(`Failed to find ability '${ability.slug}' in pack 'core-abilities' for species '${docSource.name}'`);
               }
               
               ability.uuid = `Compendium.ptr2e.core-abilities.Item.${abilitySource}`;
@@ -349,6 +349,24 @@ class CompendiumPack {
           }
         })(docSource.system as {
           abilities: Record<string, {slug: string, uuid: string}[]>;
+        });
+
+        ((system) => {
+          const moves = system.moves
+          for(const key in moves) {
+            const moveCategory = moves[key];
+            for(const move of moveCategory) {
+              const moveSource = CompendiumPack.#namesToIds["Item"]?.get("core-moves")?.get(sluggify(move.name));
+              if(moveSource === undefined) {
+                throw PackError(`Failed to find move '${move.name}' in pack 'core-moves' for species '${docSource.name}'`);
+              }
+              
+              move.uuid = `Compendium.ptr2e.core-moves.Item.${moveSource}`;
+            }
+          }
+          
+        })(docSource.system as {
+          moves: Record<string, {name: string, uuid: string, gen?: string, level?: number}[]>;
         });
       }
     }
