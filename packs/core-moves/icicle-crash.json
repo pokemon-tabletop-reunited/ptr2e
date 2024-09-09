@@ -5,13 +5,17 @@
   "system": {
     "slug": "icicle-crash",
     "description": "",
-    "traits": [],
+    "traits": [
+      "flinch-chance-3",
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "icicle-crash",
         "name": "Icicle Crash",
         "type": "attack",
         "traits": [
+          "flinch-chance-3",
           "pp-updated"
         ],
         "range": {
@@ -32,7 +36,7 @@
         "types": [
           "ice"
         ],
-        "description": "Effect: On hit, the target becomes @Affliction[grounded] 5. and has a 30% chance of gaining @Affliction[flinched] 3.",
+        "description": "Effect: On hit, the target becomes @Affliction[grounded] 5. and has a 30% chance of being Flinched.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

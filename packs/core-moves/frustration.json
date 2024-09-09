@@ -6,12 +6,45 @@
     "slug": "frustration",
     "description": "",
     "traits": [
-      "contact"
+      "contact",
+      "pp-updated"
     ],
     "actions": [
       {
         "slug": "frustration",
         "name": "Frustration",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "frustration-empowered",
+        "name": "Frustration (Empowered)",
         "type": "attack",
         "traits": [
           "contact",
@@ -30,15 +63,15 @@
           "trigger": null
         },
         "category": "physical",
-        "power": 50,
+        "power": 100,
         "accuracy": 100,
         "types": [
           "normal"
         ],
-        "description": "Effect: If the user is @Affliction[enraged], @Affliction[confused] or @Affliction[flinched], Frustration's Power is 100.",
+        "description": "Effect: This Attack may only be used if the user is @Affliction[enraged], @Affliction[confused], @Affliction[taunted], or @Affliction[suppressed].",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "free": true,
         "slot": null
       }
     ],

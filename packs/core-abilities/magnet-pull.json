@@ -6,6 +6,26 @@
     "actions": [
       {
         "traits": [
+          "environ"
+        ],
+        "name": "Magnet Pull",
+        "slug": "magnet-pull",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "object",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "Effect: If a space within range possesses Electric Terrain, the user is affected by Electric Terrain."
+      },
+      {
+        "traits": [
           "friendly"
         ],
         "name": "Magnet Pull",
@@ -25,7 +45,7 @@
         "description": "Effect: Steel-Type creatures in range are @Affliction[stuck], @Affliction[slowed], @Affliction[stunted], and @Affliction[hindered]."
       }
     ],
-    "description": "Effect: Steel-Type creatures in range are @Affliction[stuck], @Affliction[slowed], @Affliction[stunted], and @Affliction[hindered].",
+    "description": "Effect: Steel-Type creatures in range are @Affliction[stuck], @Affliction[slowed], @Affliction[stunted], and @Affliction[hindered]. If a space within range possesses Electric Terrain, the user is affected by Electric Terrain.",
     "traits": [
       "friendly"
     ],

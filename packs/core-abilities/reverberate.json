@@ -5,7 +5,11 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "defensive",
+          "interrupt-2",
+          "flinch-3"
+        ],
         "name": "Reverberate",
         "slug": "reverberate",
         "type": "generic",
@@ -18,14 +22,18 @@
         },
         "range": {
           "target": "creature",
-          "distance": 5,
+          "distance": 8,
           "unit": "m"
         },
-        "description": "Trigger: The user is targeted by a [Sonic] attack.\nEffect: If the triggering attack is either a Physical or Special-Category attack, it gains [Recoil 1/4] (or has its [Recoil X] increased by +1/4). If the triggering attack is Status-Category the triggering creature is afflicted with @Affliction[flinched] 3."
+        "description": "<p>Trigger: The user is targeted by a [Sonic] attack.</p><p>Effect: If the triggering attack is either a Physical or Special-Category attack, it gains [Recoil 1/4] (or has its [Recoil X] increased by +1/4). If the triggering attack is Status-Category the triggering creature is Flinched."
       }
     ],
     "description": "Trigger: The user is targeted by a [Sonic] attack.\nEffect: If the triggering attack is either a Physical or Special-Category attack, it gains [Recoil 1/4] (or has its [Recoil X] increased by +1/4). If the triggering attack is Status-Category the triggering creature is afflicted with @Affliction[flinched] 3.",
-    "traits": [],
+    "traits": [
+      "defensive",
+      "interrupt-2",
+      "flinch-3"
+    ],
     "slug": null,
     "container": null
   },

@@ -5,14 +5,16 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "flinch-chance-3",
+          "stage-change"
+        ],
         "name": "Loud Bang",
         "slug": "loud-bang",
-        "type": "generic",
+        "type": "passive",
         "cost": {
           "activation": "free",
           "powerPoints": 0,
-          "trigger": "A foe is hit by the user's [Sonic] attack",
           "delay": null,
           "priority": null
         },
@@ -21,11 +23,14 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: A foe is hit by the user's [Sonic] attack\nEffect: The affected foe has a 30% chance to be @Affliction[flinched] 5 and lose -1 EVA stage for 5 Activations."
+        "description": "<p>Effect: The user's Sonic Attacks have a 30% to chance to cause target(s) to Flinch and lose -1 EVA stage for 5 Activations.</p>"
       }
     ],
-    "description": "Trigger: A foe is hit by the user's [Sonic] attack\nEffect: The affected foe has a 30% chance to be @Affliction[flinched] 5 and lose -1 EVA stage for 5 Activations.",
-    "traits": [],
+    "description": "<p>Effect: The user's Sonic Attacks have a 30% to chance to cause target(s) to Flinch and lose -1 EVA stage for 5 Activations.</p>",
+    "traits": [
+      "flinch-chance-3",
+      "stage-change"
+    ],
     "slug": null,
     "container": null
   },
