@@ -287,8 +287,7 @@ export default class SpeciesSheet extends ItemSheetPTR2e<SpeciesPTR2e["system"]>
             return (
                 typeof system === "object" &&
                 system !== null &&
-                "traits" in system &&
-                "abilities" in system
+                "traits" in system
             );
         }
 

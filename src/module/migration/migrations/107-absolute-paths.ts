@@ -2,8 +2,8 @@ import { ItemPTR2e } from "@item";
 import { ActorPTR2e } from "@actor";
 import { MigrationBase } from "../base.ts"
 
-export class Migration106AbsolutePaths extends MigrationBase {
-  static override version = 0.106;
+export class Migration107AbsolutePaths extends MigrationBase {
+  static override version = 0.107;
 
   override async updateItem(source: ItemPTR2e["_source"]): Promise<void> {
     if (source.img.startsWith('/')) {
