@@ -12,8 +12,6 @@ import { LevelUpMoveSchema } from "@item/data/species.ts";
 class PokemonActorSystem extends ActorSystemPTR2e {
     declare parent: ActorPTR2e<this>;
 
-    static abilitiesMap: Map<string, AbilityPTR2e> | null = null;
-
     override async _preCreate(
         data: this["parent"]["_source"],
         options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean },
@@ -247,22 +245,11 @@ class PokemonActorSystem extends ActorSystemPTR2e {
             if (level >= 50) sets.push(species.abilities.advanced);
             if (level >= 80) sets.push(species.abilities.master);
 
-            // TODO: Remove this once we have implemented Ability UUIDs
-            if (PokemonActorSystem.abilitiesMap === null) {
-                const coreAbilities = (await game.packs
-                    .get("ptr2e.core-abilities")!
-                    .getDocuments()) as AbilityPTR2e[];
-                PokemonActorSystem.abilitiesMap = new Map(
-                    coreAbilities.map((ability) => [ability.slug, ability])
-                );
-            }
-
             const abilityItems = await Promise.all(
                 sets.map((set) => {
                     // Pick one random ability from this set
                     const ability = set[Math.floor(Math.random() * set.length)];
-                    // TODO: Implement Ability UUIDs
-                    return PokemonActorSystem.abilitiesMap!.get(ability);
+                    return fromUuid(ability?.uuid);
                 })
             );
 
