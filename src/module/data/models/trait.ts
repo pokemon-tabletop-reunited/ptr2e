@@ -16,6 +16,7 @@ interface Trait {
     label: string,
     related: string[],
     description: string,
+    virtual?: boolean
 }
 
 // interface Keyword {
