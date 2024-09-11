@@ -5,34 +5,52 @@
   "system": {
     "actions": [
       {
-        "types": [
-          "untyped"
-        ],
-        "category": "status",
         "free": true,
         "traits": [
           "manipulate",
           "basic"
         ],
-        "name": "Send Out",
-        "slug": "send-out",
-        "description": "Trigger: A new combat begins.\nEffect: You may use this Action once as a Free Action, gaining [Interrupt 4] for this use of the Action.\nTargeting a creature whom the user is responsible for that is currently not in combat, the user may, using the method of their choosing, bring that creature into the combat.\nMost commonly, this is used with releasing creatures stored in Balls, who may be sent out within 5m from the user, or 2m from a spot that the user Flings the Ball at.",
+        "name": "Send Out (Combat Start)",
+        "slug": "send-out-combat-start",
+        "description": "<p>Effect: Using the method of their choosing, the user brings the targeted creature from their Team into combat.<br>Most commonly, this is used with releasing creatures stored in Balls, who may be sent out within 5m from the user, or 2m from a spot that the user Flings the Ball at.</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
-        "type": "attack",
+        "type": "generic",
         "range": {
           "target": "ally",
           "unit": "m"
         },
         "cost": {
           "activation": "simple",
-          "trigger": "A new combat begins."
+          "powerpoints": 0
+        }
+      },
+      {
+        "free": true,
+        "traits": [
+          "manipulate",
+          "basic"
+        ],
+        "name": "Send Out (Combat Start)",
+        "slug": "send-out-combat-start",
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: Using the method of their choosing, the user brings the targeted creature from their Team into combat.<br>Most commonly, this is used with releasing creatures stored in Balls, who may be sent out within 5m from the user, or 2m from a spot that the user Flings the Ball at.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "generic",
+        "range": {
+          "target": "ally",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerpoints": 0,
+          "trigger": "The user enters combat."
         }
       }
     ],
     "grade": "E",
-    "description": "Trigger: A new combat begins.\nEffect: You may use this Action once as a Free Action, gaining [Interrupt 4] for this use of the Action.\nTargeting a creature whom the user is responsible for that is currently not in combat, the user may, using the method of their choosing, bring that creature into the combat.\nMost commonly, this is used with releasing creatures stored in Balls, who may be sent out within 5m from the user, or 2m from a spot that the user Flings the Ball at.",
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Using the method of their choosing, the user brings the targeted creature from their Team into combat. This can be done as a Simple Action on the user's Activation after the user has entered Combat.<br>Most commonly, this is used with releasing creatures stored in Balls, who may be sent out within 5m from the user, or 2m from a spot that the user Flings the Ball at.</p>",
     "traits": [
       "manipulate",
+      "interrupt-4",
       "basic"
     ],
     "slug": "send-out"

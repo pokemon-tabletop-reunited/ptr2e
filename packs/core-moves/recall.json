@@ -5,10 +5,26 @@
   "system": {
     "actions": [
       {
-        "types": [
-          "untyped"
+        "free": true,
+        "traits": [
+          "manipulate",
+          "basic"
         ],
-        "category": "status",
+        "name": "Recall (Fainted)",
+        "slug": "recall-fainted",
+        "description": "<p>Trigger: The target is @Affliction[fainted].</p><p>Effect: Using the method of their choosing, the user takes a creature from their Team out of combat.<br>Most commonly, this is used with recalling creatures normally stored in Balls, who may recalled so long as the target is within line-of-sight of the user (and the Ball's recall emitter).</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "generic",
+        "range": {
+          "target": "ally",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "trigger": "The target is @Affliction[fainted]."
+        }
+      },
+      {
         "free": true,
         "traits": [
           "manipulate",
@@ -16,21 +32,20 @@
         ],
         "name": "Recall",
         "slug": "recall",
-        "description": "Trigger: The target is @Affliction[fainted].\nEffect: This Action instead becomes a Free Action.\nTargeting a creature whom the user is responsible for that is currently in combat, the user may, using the method of their choosing, take that creature out of combat.\nMost commonly, this is used with recalling creatures normally stored in Balls, who may recalled so long as the target is within line-of-sight of the user (and the Ball's recall emitter).",
+        "description": "<p>Effect: Using the method of their choosing, the user takes a creature from their Team out of combat.<br>Most commonly, this is used with recalling creatures normally stored in Balls, who may recalled so long as the target is within line-of-sight of the user (and the Ball's recall emitter).</p>",
         "img": "systems/ptr2e/img/svg/untyped_icon.svg",
-        "type": "attack",
+        "type": "generic",
         "range": {
           "target": "ally",
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "trigger": "The target is @Affliction[fainted]."
+          "activation": "simple"
         }
       }
     ],
     "grade": "E",
-    "description": "Trigger: The target is @Affliction[fainted].\nEffect: This Action instead becomes a Free Action.\nTargeting a creature whom the user is responsible for that is currently in combat, the user may, using the method of their choosing, take that creature out of combat.\nMost commonly, this is used with recalling creatures normally stored in Balls, who may recalled so long as the target is within line-of-sight of the user (and the Ball's recall emitter).",
+    "description": "<p>Trigger: The target is @Affliction[fainted].</p><p>Effect: Using the method of their choosing, the user takes a creature from their Team out of combat as a Free Action. Normally, this may be used on a non-@Affliction[fainted]target as a Simple Action.<br>Most commonly, this is used with recalling creatures normally stored in Balls, who may recalled so long as the target is within line-of-sight of the user (and the Ball's recall emitter).</p>",
     "traits": [
       "manipulate",
       "basic"
