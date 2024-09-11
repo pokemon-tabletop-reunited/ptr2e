@@ -4871,6 +4871,115 @@ body .application.sheet .form-group {
   flex: 1;
   overflow: auto;
 }
+.application.sheet.choice-set-prompt .window-content h3 {
+  display: flex;
+  justify-content: center;
+}
+.application.sheet.choice-set-prompt .window-content button,
+.application.sheet.choice-set-prompt .window-content select {
+  display: flex;
+  margin: var(--space-4) auto;
+}
+.application.sheet.choice-set-prompt .window-content .choices {
+  justify-items: center;
+  margin: auto;
+  max-width: max-content;
+}
+.application.sheet.choice-set-prompt .window-content .choices.select-menu {
+  min-width: 18em;
+}
+.application.sheet.choice-set-prompt .window-content .choices.select-menu tags {
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 3px;
+  height: 2rem;
+  width: 100%;
+}
+.application.sheet.choice-set-prompt .window-content .choices.select-menu tags .tagify__input {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 0;
+}
+.application.sheet.choice-set-prompt .window-content .choices button,
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone {
+  cursor: pointer;
+  max-width: 100%;
+}
+.application.sheet.choice-set-prompt .window-content .choices button:not(.with-image),
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone:not(.with-image) {
+  min-width: 120px;
+  justify-content: center;
+}
+.application.sheet.choice-set-prompt .window-content .choices button.with-image,
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone.with-image {
+  align-items: center;
+}
+.application.sheet.choice-set-prompt .window-content .choices button.with-image img,
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone.with-image img {
+  border: 1px solid #444;
+  height: 1.6em;
+  margin-right: 0.5em;
+}
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons .choice {
+  align-items: center;
+  display: flex;
+  gap: 0.5em;
+  width: 100%;
+}
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons .choice.select {
+  margin-bottom: 0.5rem;
+}
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons .choice a.item-info {
+  align-items: center;
+  border: 1px solid var(--color-text-light-primary);
+  border-radius: 2px;
+  display: flex;
+  height: var(--font-size-20);
+  justify-content: center;
+  min-width: var(--font-size-20);
+}
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons .choice a.item-info.disabled {
+  color: var(--color-disabled);
+  cursor: default;
+}
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons .choice a.item-info.disabled:hover,
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons .choice a.item-info.disabled:active {
+  text-shadow: none;
+}
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone {
+  border: 1px solid var(--color-border-light-primary);
+  border-radius: 3px;
+  color: var(--color-text-dark-2);
+  cursor: default;
+  display: flex;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-14);
+  line-height: 1.75rem;
+  padding: var(--space-1) var(--space-6);
+}
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone i {
+  align-items: center;
+  border: 1px solid var(--color-text-light-4);
+  border-radius: 2px;
+  display: flex;
+  height: 1.6em;
+  justify-content: center;
+  margin-right: 0.5em;
+  width: 1.6em;
+}
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone i:after {
+  font-size: var(--font-size-20);
+}
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone span {
+  color: var(--text-dark);
+  flex: 1;
+}
 .application .standard-form input[type="checkbox"] {
   --checkbox-background-color: #3d343f;
 }

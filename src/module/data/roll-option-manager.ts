@@ -32,7 +32,7 @@ export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {
     ) {
         this.initialize();
         this.options[domain][option] = value;
-        if (domain !== "all") {
+        if (!["all", "change-selections"].includes(domain)) {
             this.options.all[`${domain}:${option}`] = value;
         }
         if (addToParent && this.document instanceof ItemPTR2e && this.document.actor) {
@@ -53,9 +53,9 @@ export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {
 
         if (!this.document.flags.ptr2e)
             this.document.flags.ptr2e = {
-                rollOptions: { all: {}, item: {}, effect: {}, self: {}, trait: {}, clocks: {} },
+                rollOptions: { all: {}, item: {}, effect: {}, self: {}, trait: {}, clocks: {}, "change-selections": {} },
             };
-        else this.document.flags.ptr2e.rollOptions = { all: {}, item: {}, effect: {}, self: {}, trait: {}, clocks: {} };
+        else this.document.flags.ptr2e.rollOptions = { all: {}, item: {}, effect: {}, self: {}, trait: {}, clocks: {}, "change-selections": {} };
 
         this.#initialized = true;
 
@@ -69,6 +69,7 @@ export const RollOptionDomains = {
     self: "self",
     trait: "trait",
     clocks: "clocks",
+    "change-selections": "change-selections",
 };
 export type RollOptions = {
     [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
