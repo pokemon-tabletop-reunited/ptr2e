@@ -1,0 +1,103 @@
+{
+  "name": "Rock Tomb",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/rock_icon.svg",
+  "system": {
+    "slug": "rock-tomb",
+    "traits": [
+      "blast-2"
+    ],
+    "actions": [
+      {
+        "slug": "rock-tomb",
+        "name": "Rock Tomb",
+        "type": "attack",
+        "traits": [
+          "blast-2",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 95,
+        "types": [
+          "rock"
+        ],
+        "description": "Effect: On hit, all valid targets lose -1 SPD stage for 5 activations.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "Tu2THeD8kqxjgkp0",
+  "effects": [
+    {
+      "name": "Rock Tomb",
+      "type": "affliction",
+      "_id": "GbRN0qDhuKlubCjg",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "rock-tomb-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.HLAV9dhz632Rfp1K",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.2.1",
+        "createdTime": 1726151536522,
+        "modifiedTime": 1726151556185,
+        "lastModifiedBy": "kwBsHDVcAxdQpMPC"
+      }
+    }
+  ]
+}
