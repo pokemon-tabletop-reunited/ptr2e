@@ -1,0 +1,103 @@
+{
+  "name": "Poison Sting",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/poison_icon.svg",
+  "system": {
+    "slug": "poison-sting",
+    "traits": [
+      "basic"
+    ],
+    "actions": [
+      {
+        "slug": "poison-sting",
+        "name": "Poison Sting",
+        "type": "attack",
+        "traits": [
+          "basic",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "category": "physical",
+        "power": 15,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: On hit, the target has a 30% chance of gaining @Affliction[poison] 5.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "lvu3DNk1KLVjzOvw",
+  "effects": [
+    {
+      "name": "Poison Sting",
+      "type": "affliction",
+      "_id": "2feTZNN9Cpdh9HaK",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "poison-sting-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.2.1",
+        "createdTime": 1726149455695,
+        "modifiedTime": 1726149476687,
+        "lastModifiedBy": "kwBsHDVcAxdQpMPC"
+      }
+    }
+  ]
+}
