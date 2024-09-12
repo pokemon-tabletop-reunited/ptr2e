@@ -1,0 +1,103 @@
+{
+  "folder": "PTzDJPvM7Mjj7e8k",
+  "name": "Rockdust",
+  "type": "move",
+  "_id": "ZGO02pAKs4BGdUtH",
+  "img": "systems/ptr2e/img/svg/rock_icon.svg",
+  "system": {
+    "slug": "rockdust",
+    "traits": [
+      "powder"
+    ],
+    "actions": [
+      {
+        "name": "Rockdust",
+        "slug": "rockdust",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "powder"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "rock"
+        ],
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "description": "<p>Effect: On hit, all valid targets have a 10% chance of losing -1 ACC stage for 5 activations.</p>"
+      }
+    ],
+    "grade": "D",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Rockdust",
+      "type": "affliction",
+      "_id": "yZ9VnQUchM9Lp14I",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "rockdust-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.wA5oCsgHmZLcHHSn",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.ZGO02pAKs4BGdUtH.ActiveEffect.yZ9VnQUchM9Lp14I",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.2.1",
+        "createdTime": 1726155780689,
+        "modifiedTime": 1726155797049,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
