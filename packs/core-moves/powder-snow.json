@@ -1,0 +1,100 @@
+{
+  "name": "Powder Snow",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "system": {
+    "slug": "powder-snow",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "powder-snow",
+        "name": "Powder Snow",
+        "type": "attack",
+        "traits": [
+          "pp-updated"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "category": "special",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "ice"
+        ],
+        "description": "Effect: On hit, all valid targets have a 10% chance of gaining @Affliction[frozen] 5.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "R7n7v7gSWe3NrB3I",
+  "effects": [
+    {
+      "name": "Powder Snow",
+      "type": "affliction",
+      "_id": "EyBwChhAH9sy7JEs",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "powder-snow-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.2.1",
+        "createdTime": 1726143492772,
+        "modifiedTime": 1726143510966,
+        "lastModifiedBy": "kwBsHDVcAxdQpMPC"
+      }
+    }
+  ]
+}
