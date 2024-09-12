@@ -1,0 +1,100 @@
+{
+  "name": "Acid Spray",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/poison_icon.svg",
+  "system": {
+    "slug": "acid-spray",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "acid-spray",
+        "name": "Acid Spray",
+        "type": "attack",
+        "traits": [
+          "pp-updated"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "special",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "Effect: On hit, all valid targets lose -2 SPDEF stages for 5 activations.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "UJQAawBIXG1irZiH",
+  "effects": [
+    {
+      "name": "Acid Spray",
+      "type": "affliction",
+      "_id": "EQKM6lwoXBGReDR8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "acid-spray-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.PYz1Z32uiXoulkW2",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.2.1",
+        "createdTime": 1726141678786,
+        "modifiedTime": 1726141737884,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
+}
