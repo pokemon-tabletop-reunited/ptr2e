@@ -17,7 +17,11 @@
       "primary": [
         {
           "type": "overland",
-          "value": 15
+          "value": 10
+        },
+        {
+          "type": "teleport",
+          "value": 10
         }
       ],
       "secondary": [
@@ -30,9 +34,12 @@
     "traits": [
       "pokemon",
       "bipedal",
-      "darkvision-15",
       "heater",
       "firestarter",
+      "psycher",
+      "telepath",
+      "teleporter",
+      "telekinetic-12",
       "fully-evolved"
     ],
     "abilities": {
@@ -46,7 +53,7 @@
       ],
       "basic": [
         {
-          "slug": "synchronize"
+          "slug": "forewarn"
         },
         {
           "slug": "magic-guard"
@@ -57,15 +64,15 @@
           "slug": "pyromancy"
         },
         {
-          "slug": "run-away"
+          "slug": "gifted-mind"
         }
       ],
       "master": [
         {
-          "slug": "gifted-mind"
+          "slug": "psychic-surge"
         },
         {
-          "slug": "magic-bounce"
+          "slug": "equinox"
         }
       ]
     },
@@ -80,7 +87,7 @@
       },
       {
         "slug": "climb",
-        "value": 35,
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -88,7 +95,15 @@
       },
       {
         "slug": "conversation",
-        "value": 60,
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "fast-talk",
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -104,7 +119,7 @@
       },
       {
         "slug": "listen",
-        "value": 60,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -112,30 +127,6 @@
       },
       {
         "slug": "natural-world",
-        "value": 50,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "navigate",
-        "value": 45,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "spiritual",
-        "value": 70,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
-      },
-      {
-        "slug": "running",
         "value": 40,
         "rvs": 0,
         "favourite": false,
@@ -143,7 +134,15 @@
         "group": null
       },
       {
-        "slug": "spot",
+        "slug": "navigate",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "negotiation",
         "value": 55,
         "rvs": 0,
         "favourite": false,
@@ -151,7 +150,23 @@
         "group": null
       },
       {
-        "slug": "stealth",
+        "slug": "psychic",
+        "value": 60,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
+        "slug": "spiritual",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
+        "slug": "running",
         "value": 35,
         "rvs": 0,
         "favourite": false,
@@ -159,8 +174,32 @@
         "group": null
       },
       {
-        "slug": "survival",
+        "slug": "spot",
         "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "stealth",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "survival",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
