@@ -261,11 +261,9 @@
       "pokemon",
       "breathless",
       "construct",
-      "heater",
-      "hover",
       "rapid",
       "underdog",
-      "venomous"
+      "natural-steel"
     ],
     "diet": [
       "terravore"
@@ -273,18 +271,15 @@
     "abilities": {
       "starting": [
         {
-          "slug": "rattled"
+          "slug": "feisty"
         }
       ],
       "basic": [
         {
+          "slug": "rattled"
+        },
+        {
           "slug": "overcoat"
-        },
-        {
-          "slug": "slow-start"
-        },
-        {
-          "slug": "energetic"
         }
       ],
       "advanced": [
@@ -292,7 +287,7 @@
           "slug": "motor-drive"
         },
         {
-          "slug": "spark-plug"
+          "slug": "rock-head"
         }
       ],
       "master": [
@@ -300,18 +295,23 @@
           "slug": "speed-force"
         },
         {
-          "slug": "steam-engine"
+          "slug": "energetic"
         }
       ]
     },
     "movement": {
       "primary": [
         {
-          "type": "flight",
+          "type": "overland",
           "value": 7
         }
       ],
-      "secondary": []
+      "secondary": [
+        {
+          "type": "swim",
+          "value": 3
+        }
+      ]
     },
     "skills": [
       {
@@ -323,8 +323,24 @@
         "group": null
       },
       {
+        "slug": "climb",
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "conversation",
-        "value": 20,
+        "value": 15,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "fast-talk",
+        "value": 15,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -340,7 +356,7 @@
       },
       {
         "slug": "lift",
-        "value": 45,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -348,7 +364,7 @@
       },
       {
         "slug": "listen",
-        "value": 30,
+        "value": 25,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -356,7 +372,7 @@
       },
       {
         "slug": "natural-world",
-        "value": 30,
+        "value": 25,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -379,8 +395,8 @@
         "group": null
       },
       {
-        "slug": "pilot-small",
-        "value": 45,
+        "slug": "small-motor-vehicles",
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -396,7 +412,7 @@
       },
       {
         "slug": "spot",
-        "value": 20,
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -412,7 +428,23 @@
       },
       {
         "slug": "survival",
-        "value": 25,
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 10,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "track",
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
