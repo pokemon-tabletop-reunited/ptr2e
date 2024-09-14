@@ -5,9 +5,30 @@
   "_id": "7jgu6qfPzvZDS5lZ",
   "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
   "system": {
-    "actions": [],
+    "actions": [
+      {
+        "name": "Metamove: Dirty Trick",
+        "slug": "metamove-dirty-trick",
+        "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: On hit, the Triggering Attack causes all valid targets to be Flinched and they lose -1 EVA for 5 Activations.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "The user's declares an attack."
+        },
+        "type": "generic",
+        "traits": [
+          "social",
+          "flinch-3"
+        ],
+        "img": "systems/ptr2e/img/icons/feat_icon.webp",
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        }
+      }
+    ],
     "slug": "metamove-dirty-trick",
-    "description": "<p>You may spend an additional 4PP to have the triggering Attack inflict Flinched 2 and cause affected creatures lose -1 EVA for 5 Activations.</p>",
+    "description": "<p>When declaring an Attack, the user may spend 4PP to have that Attack inflict Flinched 2 and cause affected creatures lose -1 EVA for 5 Activations if it hits.</p>",
     "traits": [],
     "prerequisites": [],
     "cost": 1,

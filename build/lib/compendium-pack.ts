@@ -127,7 +127,7 @@ class CompendiumPack {
 
     for (const docSource of this.data) {
       // Populate CompendiumPack.namesToIds for later conversion of compendium links
-      packMap.set(docSource.name, docSource._id ?? "");
+      packMap.set(sluggify(docSource.name), docSource._id ?? "");
       packEntryMap.set(docSource._id ?? docSource.name, docSource);
 
       // Check img paths
@@ -339,20 +339,43 @@ class CompendiumPack {
           for(const key of Object.keys(abilities)) {
             const category = system.abilities[key];
             for(const ability of category) {
-              if(!ability.uuid) {
-                throw PackError(`Species ${docSource.name} (${docSource._id}) has an ability without a uuid: ${ability.slug}`);
+              // UUID shouldn't be manually set
+              if(ability.uuid) { 
+                throw PackError(`Ability '${ability.slug}' in species '${docSource.name}' has a manually set UUID, which is not allowed`);
               }
-              const abilitySource = CompendiumPack.#idsToEntry["Item"]?.get("core-abilities")?.get(ability.uuid.split(".").pop()!);
+              const abilitySource = CompendiumPack.#namesToIds["Item"]?.get("core-abilities")?.get(ability.slug);
               if(abilitySource === undefined) {
-                throw PackError(`Failed to find ability ${ability.uuid.split(".").pop()} in ${this.packId}`);
+                throw PackError(`Failed to find ability '${ability.slug}' in pack 'core-abilities' for species '${docSource.name}'`);
               }
-              if(sluggify(abilitySource.name) !== ability.slug) {
-                throw PackError(`Species ${docSource.name} (${docSource._id}) has a mismatched ability slug: ${ability.slug} !== ${sluggify(abilitySource.name)} for ${ability.uuid}`);
-              }
+              
+              ability.uuid = `Compendium.ptr2e.core-abilities.Item.${abilitySource}`;
             }
           }
         })(docSource.system as {
           abilities: Record<string, {slug: string, uuid: string}[]>;
+        });
+
+        ((system) => {
+          const moves = system.moves
+          for(const key in moves) {
+            const moveCategory = moves[key];
+            for(const move of moveCategory) {
+              // UUID shouldn't be manually set
+              if(move.uuid) { 
+                throw PackError(`Move '${move.name}' in species '${docSource.name}' has a manually set UUID, which is not allowed`);
+              }
+
+              const moveSource = CompendiumPack.#namesToIds["Item"]?.get("core-moves")?.get(sluggify(move.name));
+              if(moveSource === undefined) {
+                throw PackError(`Failed to find move '${move.name}' in pack 'core-moves' for species '${docSource.name}'`);
+              }
+              
+              move.uuid = `Compendium.ptr2e.core-moves.Item.${moveSource}`;
+            }
+          }
+          
+        })(docSource.system as {
+          moves: Record<string, {name: string, uuid: string, gen?: string, level?: number}[]>;
         });
       }
     }
@@ -360,15 +383,15 @@ class CompendiumPack {
     const replace = (match: string, packId: string, docType: string, docName: string): string => {
       if (match.includes("JournalEntryPage")) return match;
 
+      const idsToSource = CompendiumPack.#idsToEntry[docType]?.get(packId);
       const namesToIds = CompendiumPack.#namesToIds[docType]?.get(packId);
       const link = match.replace(/\{$/, "");
       if (namesToIds === undefined) {
         throw PackError(`${docSource.name} (${this.packId}) has a bad pack reference: ${link}`);
       }
 
-      const documentId: string | undefined = namesToIds.get(docName);
+      const documentId: string | undefined = namesToIds.get(sluggify(docName)) || idsToSource?.get(docName)?._id || undefined;
       if (documentId === undefined) {
-        return match;
         throw PackError(`${docSource.name} (${this.packId}) has broken link to ${docName}: ${match}`);
       }
       const sourceId = this.#sourceIdOf(documentId, { packId, docType });

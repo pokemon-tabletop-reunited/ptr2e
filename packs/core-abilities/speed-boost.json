@@ -5,7 +5,9 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "stage-change"
+        ],
         "name": "Speed Boost",
         "slug": "speed-boost",
         "type": "passive",
@@ -20,11 +22,33 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: When using the Rush action, the amount of extra Movement the user gains is doubled."
+        "description": "Effect: At the end of the Round, the user gains +1 SPD stage for 5 Activations."
+      },
+      {
+        "traits": [
+          "stage-change"
+        ],
+        "name": "Speed Boost (Active)",
+        "slug": "speed-boost-active",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Effect: The user gains +1 SPD stage for 5 Activations."
       }
     ],
-    "description": "Effect: When using the Rush action, the amount of extra Movement the user gains is doubled.",
-    "traits": [],
+    "description": "Effect: At the end of the Round, the user gains +1 SPD stage for 5 Activations. As a Simple Action for 3 PP, the user can gain +1 SPD stage for 5 Activations.",
+    "traits": [
+      "stage-change"
+    ],
     "slug": null,
     "container": null
   },

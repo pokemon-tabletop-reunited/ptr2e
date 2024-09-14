@@ -1,0 +1,100 @@
+{
+  "folder": "Et2u8UoXSe2a17oq",
+  "name": "Assault Armor Style",
+  "type": "perk",
+  "_id": "HasC6KRu6H2GCIGr",
+  "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+  "system": {
+    "actions": [
+      {
+        "name": "Assault Armor!",
+        "slug": "assault-armor",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "description": "Effect: The target may use DEF in place of their ATK when using a Physical-Category Attack for 1 Activation.",
+        "type": "generic"
+      },
+      {
+        "name": "Assault Armor! (Self)",
+        "slug": "assault-armor-self",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "description": "Effect: The user may use DEF in place of their ATK when using a Physical-Category Attack until the end of their next Activation.",
+        "type": "generic"
+      }
+    ],
+    "slug": null,
+    "description": "<p>Simple Action, 2 PP cost. Target self or allied creature. The affected creature may use DEF in place of their SPDEF when using a Physical-Category Attack until the end of their next full Activation.</p>",
+    "traits": [],
+    "prerequisites": [
+      "Leadership 45"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Tactician"
+    },
+    "node": {
+      "i": 37,
+      "j": -18,
+      "connected": [
+        "fearsome-defense",
+        "synchronised-takedown",
+        "pile-on",
+        "you-belong-to-me",
+        "metamove-bullseye"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#808080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Kc3DOunCh3ClAeHS": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": "Item.HasC6KRu6H2GCIGr",
+    "duplicateSource": null,
+    "coreVersion": "12.325",
+    "systemId": "ptr2e",
+    "systemVersion": "0.006",
+    "createdTime": 1717154487598,
+    "modifiedTime": 1717178693823,
+    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+  }
+}

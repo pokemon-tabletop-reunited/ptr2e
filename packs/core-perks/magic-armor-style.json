@@ -1,0 +1,101 @@
+{
+  "folder": "Et2u8UoXSe2a17oq",
+  "name": "Magic Armor Style",
+  "type": "perk",
+  "_id": "tXq3fwEuJwbnZk9m",
+  "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+  "system": {
+    "actions": [
+      {
+        "name": "Magic Armor!",
+        "slug": "magic-armor",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "description": "Effect: The target may use SPDEF in place of their SPATK when using a Special-Category Attack for 1 Activation.",
+        "type": "generic"
+      },
+
+      {
+        "name": "Magic Armor! (Self)",
+        "slug": "magic-armor-self",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "description": "Effect: The user may use SPDEF in place of their SPATK when using a Special-Category Attack until the end of their next Activation.",
+        "type": "generic"
+      }
+    ],
+    "slug": null,
+    "description": "<p>Simple Action, 2 PP cost. Target self or allied creature. The affected creature may use SPDEF in place of their SPATK when using a Special-Category Attack until the end of their next full Activation.</p>",
+    "traits": [],
+    "prerequisites": [
+      "Leadership 45"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "Tactician"
+    },
+    "node": {
+      "i": 23,
+      "j": -78,
+      "connected": [
+        "aura-user",
+        "root-2",
+        "improved-overland-5",
+        "covering-fire",
+        "tubthumping"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#0000ff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "effects": [],
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "Kc3DOunCh3ClAeHS": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": "Item.tXq3fwEuJwbnZk9m",
+    "duplicateSource": null,
+    "coreVersion": "12.325",
+    "systemId": "ptr2e",
+    "systemVersion": "0.006",
+    "createdTime": 1717154613162,
+    "modifiedTime": 1717179721971,
+    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+  }
+}
