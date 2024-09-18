@@ -6,7 +6,9 @@
     "slug": "gulp-missile",
     "description": "",
     "traits": [
-      "missile"
+      "missile",
+      "adaptable",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -24,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -35,10 +37,43 @@
         "types": [
           "water"
         ],
-        "description": "When the user has an @Affliction[engulfed] creature equipped as a [Stash] item, they can launch the @Affliction[engulfed] creature as part of Gulp Missile. When the @Affliction[engulfed] creature is launched, this Attack's Power doubles, the Attack's Type changes to a Type possessed by the launched creature, and the launched creature takes the damage of the attack, resisted two steps. When launching a @Affliction[engulfed] creature, Gulp Missile has a 20% chance to reduce the target's DEF stage by -1 on hit, a 20% chance to reduce SPDEF stage by -1 on hit, and a 20% chance to inflict @Affliction[paralysis] 5 on hit.",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "gulp-missile-engulfed",
+        "name": "Gulp Missile (Engulfed)",
+        "type": "attack",
+        "traits": [
+          "missile",
+          "adaptable",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "<p>Effect: The user launches their equipped @Affliction[engulfed] creature as part of this Attack, and may change the Type of this attack to a Type possessed by the launched creature. On hit, the target and the launched creature have a 20% chance to lose -1 DEF stage for 5 Activations, a 20% chance to lose -1 SPDEF stage for 5 Activations, and a 20% chance to gain @Affliction[paralysis] 5. The damage the launched creature takes from this attack is reduced by 2/3.</p><p>Requirement: The user has an @Affliction[engulfed] creature equipped as a [Stash] item.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
         "slot": null
       }
     ],
