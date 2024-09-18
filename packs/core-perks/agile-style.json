@@ -27,23 +27,29 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 1
         },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "untyped"
-        ],
         "description": "Effect: The target gains @Affliction[agile] 1.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "type": "attack"
+        "type": "generic"
+      },
+      {
+        "name": "Agile! (Self)",
+        "slug": "agile-self",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1
+        },
+        "description": "Effect: The target gains @Affliction[agile] 2.",
+        "type": "generic"
       }
     ],
     "slug": "agile-style",
@@ -72,7 +78,7 @@
     }
   },
   "_id": "9bYyVaMgkigTKOc7",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
   "effects": [],
   "flags": {
     "core": {

@@ -1,7 +1,7 @@
 {
   "name": "braixen",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 654,
     "size": {
@@ -17,7 +17,7 @@
       "primary": [
         {
           "type": "overland",
-          "value": 10
+          "value": 7
         }
       ],
       "secondary": [
@@ -30,27 +30,43 @@
     "traits": [
       "pokemon",
       "bipedal",
-      "darkvision-15",
       "firestarter",
       "heater",
+      "telekinetic-4",
       "underdog"
     ],
     "abilities": {
       "starting": [
-        "blaze",
-        "magician"
+        {
+          "slug": "blaze"
+        },
+        {
+          "slug": "magician"
+        }
       ],
       "basic": [
-        "synchronize",
-        "magic-guard"
+        {
+          "slug": "forewarn"
+        },
+        {
+          "slug": "magic-guard"
+        }
       ],
       "advanced": [
-        "pyromancy",
-        "runaway"
+        {
+          "slug": "pyromancy"
+        },
+        {
+          "slug": "gifted-mind"
+        }
       ],
       "master": [
-        "gifted-mind",
-        "magic-bounce"
+        {
+          "slug": "psychic-surge"
+        },
+        {
+          "slug": "equinox"
+        }
       ]
     },
     "skills": [
@@ -64,14 +80,6 @@
       },
       {
         "slug": "climb",
-        "value": 30,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "conversation",
         "value": 25,
         "rvs": 0,
         "favourite": false,
@@ -79,8 +87,24 @@
         "group": null
       },
       {
+        "slug": "conversation",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "fast-talk",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "lift",
-        "value": 30,
+        "value": 20,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -111,8 +135,24 @@
         "group": null
       },
       {
+        "slug": "negotiation",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "psychic",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": "occult"
+      },
+      {
         "slug": "spiritual",
-        "value": 35,
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -120,7 +160,7 @@
       },
       {
         "slug": "running",
-        "value": 35,
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -128,7 +168,7 @@
       },
       {
         "slug": "spot",
-        "value": 35,
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -136,7 +176,7 @@
       },
       {
         "slug": "stealth",
-        "value": 25,
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -149,9 +189,17 @@
         "favourite": false,
         "hidden": false,
         "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 30,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
       }
     ],
-    "slug": "",
+    "slug": "braixen",
     "stats": {
       "hp": 59,
       "atk": 59,
@@ -168,445 +216,360 @@
         {
           "name": "scratch",
           "level": 1,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.rpka3XlZLzOViXR7"
+          "gen": "scarlet-violet"
         },
         {
           "name": "tail-whip",
           "level": 1,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.60GKZUiIya2OrzTV"
+          "gen": "scarlet-violet"
         },
         {
           "name": "ember",
           "level": 1,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.8TyLPn3KFFCL3XMX"
+          "gen": "scarlet-violet"
         },
         {
           "name": "howl",
           "level": 11,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.GiLR7xemzKdrCnl3"
+          "gen": "scarlet-violet"
         },
         {
           "name": "flame-charge",
           "level": 14,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DNuGwSn0HKhGRujH"
+          "gen": "scarlet-violet"
         },
         {
           "name": "psybeam",
           "level": 18,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.fzZL7wrQyLNrNwr6"
+          "gen": "scarlet-violet"
         },
         {
           "name": "fire-spin",
           "level": 22,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TrpZl57SnSzKKmk2"
+          "gen": "scarlet-violet"
         },
         {
           "name": "light-screen",
           "level": 28,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.gSRNdRZt5vRCzqwM"
+          "gen": "scarlet-violet"
         },
         {
           "name": "lucky-chant",
           "level": 28,
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.pvSrkb1IPMPpXQb4"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "psyshock",
           "level": 36,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Q5XRmC7JtOuEulXK"
+          "gen": "scarlet-violet"
         },
         {
           "name": "flamethrower",
           "level": 41,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.HofZ9eBu5GFYm7dv"
+          "gen": "scarlet-violet"
         },
         {
           "name": "will-o-wisp",
           "level": 45,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.AfTVZGWr1oMGtrp0"
+          "gen": "scarlet-violet"
         },
         {
           "name": "psychic",
           "level": 49,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.NO3wo8dZeZsPzeW5"
+          "gen": "scarlet-violet"
         },
         {
           "name": "sunny-day",
           "level": 52,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.oZFYMEJhZ3CZSNEZ"
+          "gen": "scarlet-violet"
         },
         {
           "name": "magic-room",
           "level": 56,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.gdIWeMET7kMAXPVT"
+          "gen": "scarlet-violet"
         },
         {
           "name": "fire-blast",
           "level": 59,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.fBRzQlD7QDmYlCf8"
+          "gen": "scarlet-violet"
         }
       ],
       "tutor": [
         {
           "name": "hypnosis",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.s4q86Yo0UJilvVI0"
+          "gen": "scarlet-violet"
         },
         {
           "name": "heat-wave",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.pM6pHXcYjEz69oV8"
+          "gen": "scarlet-violet"
         },
         {
           "name": "wish",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.0mfq7wAjGYBPrmiN"
+          "gen": "scarlet-violet"
         },
         {
           "name": "copycat",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.7W4h4UABFbJIdi6o"
+          "gen": "scarlet-violet"
         },
         {
           "name": "fire-punch",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Tn34XXwrRkHgqkDu"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "thunder-punch",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.j9uR5n2AYXHaz3yh"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "low-kick",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.al2jzxSghEeNd7lw"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "snore",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.4XGhnE4bWGYPKRxO"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "iron-tail",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.usTWonZuyDMsTeNu"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "trick",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.yuidnFaSykzqkQQi"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "magic-coat",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.5QUcls8d1cgv81hY"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "recycle",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.zUA5pxTsvJsGHhEk"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "skill-swap",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.2gooJhVn8eYC22DW"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "snatch",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.8U5CdSY2okR90rh4"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "covet",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.6dqYz1hDJNunBl49"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "shock-wave",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Jh0VT5oAXNgSBhaQ"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "zen-headbutt",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.cTCWHk9SbPBiQOvB"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "wonder-room",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.j3UosZnsKaoJuyd4"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "telekinesis",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.oy17I3xve1QTEPyv"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "foul-play",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.7J7thNHadmUVmeq6"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "ally-switch",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.GFHmsvlYP7sgp7em"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "fire-pledge",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.HENA3QFqcUUf9RbX"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "laser-focus",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.783co7i5n9s15xpq"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "cut",
-          "gen": "omega-ruby-alpha-sapphire",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TkmsrwP0c6jUPCih"
+          "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "take-down",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.uO99VTvrh96awdWK"
+          "gen": "scarlet-violet"
         },
         {
           "name": "solar-beam",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Gp7VqdWhp2x8pjhw"
+          "gen": "scarlet-violet"
         },
         {
           "name": "toxic",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.oTSFbF32HX101PTb"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "agility",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.eZle1R3DPcxpNL97"
+          "gen": "scarlet-violet"
         },
         {
           "name": "double-team",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.187bZlHjZF5QH7np"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "swift",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.6WFfTWkoMPozYk0g"
+          "gen": "scarlet-violet"
         },
         {
           "name": "dream-eater",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.RCAvbJMDz10ZckH2"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "rest",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DEsVXTtV0dDFdodn"
+          "gen": "scarlet-violet"
         },
         {
           "name": "substitute",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.wlCtO7DEZMMbEwcn"
+          "gen": "scarlet-violet"
         },
         {
           "name": "thief",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.jxorjVcjferdaDBc"
+          "gen": "scarlet-violet"
         },
         {
           "name": "protect",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DwzmkHqd28xR3P3c"
+          "gen": "scarlet-violet"
         },
         {
           "name": "mud-slap",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.cS5v7i8RPSXni7Cn"
+          "gen": "scarlet-violet"
         },
         {
           "name": "endure",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.eEQiYEm2y7wkcKnx"
+          "gen": "scarlet-violet"
         },
         {
           "name": "charm",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.qz5m0G6pBtTputPs"
+          "gen": "scarlet-violet"
         },
         {
           "name": "swagger",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.wYGAvakAQaDex43K"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "attract",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.uqx2cfO9G5hlv2OC"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "sleep-talk",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.lmpvIU1s0odo4fmQ"
+          "gen": "scarlet-violet"
         },
         {
           "name": "return",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VdmiwxXnqCd8WAkU"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "frustration",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.mFqcA84HvScXVSuG"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "safeguard",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.X2ZRPMlCRzbcEwOS"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "encore",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.ZxIubCcCNv3MnafK"
+          "gen": "scarlet-violet"
         },
         {
           "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.1lkeVmjLt8Vp0izT"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "rain-dance",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.tILTZn18N9r8H7cs"
+          "gen": "scarlet-violet"
         },
         {
           "name": "psych-up",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.njJgZlAMca8B6KvI"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "facade",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.eEIG8jgmrxWgRVMz"
+          "gen": "scarlet-violet"
         },
         {
           "name": "helping-hand",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.losiXPVUcTy72boW"
+          "gen": "scarlet-violet"
         },
         {
           "name": "imprison",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.rCxhEEmJLIJ90L1g"
+          "gen": "scarlet-violet"
         },
         {
           "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire",
-          "uuid": "Compendium.ptr2e.core-moves.Item.HwHgkAbouiM0y3Li"
+          "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "overheat",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.1YuSHdlx3r8g5RJ3"
+          "gen": "scarlet-violet"
         },
         {
           "name": "mud-shot",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.rDnV5BfNxKyYAWam"
+          "gen": "scarlet-violet"
         },
         {
           "name": "calm-mind",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.XPfOUOl8Rqh5hFIj"
+          "gen": "scarlet-violet"
         },
         {
           "name": "embargo",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.9dEqQGUDJ3L0OTpc"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "flare-blitz",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.8TqSwaN9MTmQI8X4"
+          "gen": "scarlet-violet"
         },
         {
           "name": "trick-room",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.0o8uUraEHLc4mDq4"
+          "gen": "scarlet-violet"
         },
         {
           "name": "grass-knot",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.QUfozsylvlJ6LoVT"
+          "gen": "scarlet-violet"
         },
         {
           "name": "round",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Sk06NeMcS1RTMcjo"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "echoed-voice",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.HH6HljL6RxmB1N2n"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "stored-power",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.7Mhbg8HQUtPGaWSg"
+          "gen": "scarlet-violet"
         },
         {
           "name": "incinerate",
-          "gen": "omega-ruby-alpha-sapphire",
-          "uuid": "Compendium.ptr2e.core-moves.Item.kYqzFbMNoZ9sOVs0"
+          "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "work-up",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Zsg9MXOaKH3vAb6q"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "confide",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.NoHd6SBeivDS66M1"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "power-up-punch",
-          "gen": "omega-ruby-alpha-sapphire",
-          "uuid": "Compendium.ptr2e.core-moves.Item.D6UF5H6BHQoiOLMK"
+          "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "psychic-terrain",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.McNMuaosHAbgfV8b"
+          "gen": "scarlet-violet"
         },
         {
           "name": "burning-jealousy",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.9UgW97p2uziZK7Sl"
+          "gen": "scarlet-violet"
         },
         {
           "name": "tera-blast",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.13ujOwTEjKRN9bpE"
+          "gen": "scarlet-violet"
         }
       ]
     },

@@ -1,10 +1,10 @@
 {
   "name": "King's Shield",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/steel_icon.svg",
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "kings-shield",
-    "description": "Trigger: You are hit by a Physical or Special damaging move.\nEffect: The triggering attack fails to hit you, and additional attacks that hit you also fail to hit you until your next activation, or when the round ends, whichever is first. attacks failing to hit you do not activate on-miss effects. If any of these attacks are [Contact] attacks, that attack's user loses -2 ATK stages for 5 activations.",
+    "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The triggering attack fails to hit the user, and additional attacks also fail to hit until the user's next activation, or when the round ends, whichever is first. Attacks failing to hit this way do not activate their secondary effects. If the triggering Attack has [Contact], the attacker loses -2 ATK stages for 5 Activations.</p>",
     "traits": [
       "shield",
       "exhaust",
@@ -30,7 +30,7 @@
           "powerPoints": 7,
           "delay": null,
           "priority": null,
-          "trigger": "You are hit by a Physical or Special damaging move."
+          "trigger": "<p>The user is targeted by an Attack.</p>"
         },
         "category": "status",
         "power": null,
@@ -38,7 +38,7 @@
         "types": [
           "steel"
         ],
-        "description": "Trigger: You are hit by a Physical or Special damaging move.\nEffect: The triggering attack fails to hit you, and additional attacks that hit you also fail to hit you until your next activation, or when the round ends, whichever is first. attacks failing to hit you do not activate on-miss effects. If any of these attacks are [Contact] attacks, that attack's user loses -2 ATK stages for 5 activations.",
+        "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The triggering attack fails to hit the user, and additional attacks also fail to hit until the user's next activation, or when the round ends, whichever is first. Attacks failing to hit this way do not activate their secondary effects. If the triggering Attack has [Contact], the attacker loses -2 ATK stages for 5 Activations.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

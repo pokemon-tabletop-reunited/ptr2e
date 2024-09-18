@@ -1,7 +1,7 @@
 {
   "name": "burmy",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 412,
     "size": {
@@ -30,20 +30,36 @@
     ],
     "abilities": {
       "starting": [
-        "overcoat",
-        "oblivious"
+        {
+          "slug": "overcoat"
+        },
+        {
+          "slug": "oblivious"
+        }
       ],
       "basic": [
-        "shed-skin",
-        "run-away"
+        {
+          "slug": "shed-skin"
+        },
+        {
+          "slug": "run-away"
+        }
       ],
       "advanced": [
-        "stamina",
-        "harvest"
+        {
+          "slug": "stamina"
+        },
+        {
+          "slug": "harvest"
+        }
       ],
       "master": [
-        "symbiosis",
-        "opportunist"
+        {
+          "slug": "symbiosis"
+        },
+        {
+          "slug": "opportunist"
+        }
       ]
     },
     "skills": [
@@ -167,31 +183,26 @@
       "levelUp": [
         {
           "name": "protect",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DwzmkHqd28xR3P3c",
           "gen": "brilliant-diamond-and-shining-pearl",
           "level": 1
         },
         {
           "name": "tackle",
-          "uuid": "Compendium.ptr2e.core-moves.Item.fWOSmnI68Lct2LUn",
           "gen": "brilliant-diamond-and-shining-pearl",
           "level": 10
         },
         {
           "name": "bug-bite",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VWTUbiZH5inKfQn8",
           "gen": "brilliant-diamond-and-shining-pearl",
           "level": 15
         },
         {
           "name": "hidden-power",
-          "uuid": "Compendium.ptr2e.core-moves.Item.1lkeVmjLt8Vp0izT",
           "gen": "ultra-sun-ultra-moon",
           "level": 20
         },
         {
           "name": "string-shot",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TijijTYIY2UOVWOn",
           "gen": "brilliant-diamond-and-shining-pearl",
           "level": 20
         }
@@ -199,12 +210,10 @@
       "tutor": [
         {
           "name": "electroweb",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DLoWCGaBlU23XnUI",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "snore",
-          "uuid": "Compendium.ptr2e.core-moves.Item.4XGhnE4bWGYPKRxO",
           "gen": "ultra-sun-ultra-moon"
         }
       ]
@@ -318,7 +327,8 @@
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "slug": "burmy"
   },
   "_id": "kmFRu6lAhtEfASJy",
   "effects": []

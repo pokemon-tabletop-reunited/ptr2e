@@ -23,7 +23,7 @@ export class AttackModifierPopup extends ModifierPopup {
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         modifiers: {
             id: "modifiers",
-            template: "/systems/ptr2e/templates/apps/attack-modifier-popup.hbs",
+            template: "systems/ptr2e/templates/apps/attack-modifier-popup.hbs",
         },
     };
 

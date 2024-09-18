@@ -1,7 +1,7 @@
 {
   "name": "wurmple",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 265,
     "size": {
@@ -36,20 +36,36 @@
     ],
     "abilities": {
       "starting": [
-        "shield-dust",
-        "run-away"
+        {
+          "slug": "shield-dust"
+        },
+        {
+          "slug": "run-away"
+        }
       ],
       "basic": [
-        "suction-cups",
-        "sap-sipper"
+        {
+          "slug": "suction-cups"
+        },
+        {
+          "slug": "sap-sipper"
+        }
       ],
       "advanced": [
-        "poison-point",
-        "gluttony"
+        {
+          "slug": "poison-point"
+        },
+        {
+          "slug": "gluttony"
+        }
       ],
       "master": [
-        "huge-power",
-        "pure-power"
+        {
+          "slug": "huge-power"
+        },
+        {
+          "slug": "pure-power"
+        }
       ]
     },
     "skills": [
@@ -150,7 +166,7 @@
         "group": null
       }
     ],
-    "slug": "",
+    "slug": "wurmple",
     "stats": {
       "hp": 45,
       "atk": 45,
@@ -166,39 +182,33 @@
       "tutor": [
         {
           "name": "snore",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.4XGhnE4bWGYPKRxO"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "electroweb",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DLoWCGaBlU23XnUI"
+          "gen": "ultra-sun-ultra-moon"
         }
       ],
       "levelUp": [
         {
           "name": "tackle",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.fWOSmnI68Lct2LUn"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "string-shot",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TijijTYIY2UOVWOn"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "poison-sting",
           "level": 5,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.lvu3DNk1KLVjzOvw"
+          "gen": "brilliant-diamond-and-shining-pearl"
         },
         {
           "name": "bug-bite",
           "level": 15,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VWTUbiZH5inKfQn8"
+          "gen": "brilliant-diamond-and-shining-pearl"
         }
       ]
     },

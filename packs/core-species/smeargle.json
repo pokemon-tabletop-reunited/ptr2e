@@ -1,7 +1,7 @@
 {
   "name": "smeargle",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 235,
     "size": {
@@ -34,20 +34,36 @@
     ],
     "abilities": {
       "starting": [
-        "own-tempo",
-        "technician"
+        {
+          "slug": "own-tempo"
+        },
+        {
+          "slug": "technician"
+        }
       ],
       "basic": [
-        "moody",
-        "adaptability"
+        {
+          "slug": "moody"
+        },
+        {
+          "slug": "adaptability"
+        }
       ],
       "advanced": [
-        "skill-link",
-        "quick-draw"
+        {
+          "slug": "skill-link"
+        },
+        {
+          "slug": "quick-draw"
+        }
       ],
       "master": [
-        "simple",
-        "prankster"
+        {
+          "slug": "simple"
+        },
+        {
+          "slug": "prankster"
+        }
       ]
     },
     "skills": [
@@ -188,7 +204,7 @@
         "group": null
       }
     ],
-    "slug": "",
+    "slug": "smeargle",
     "stats": {
       "hp": 55,
       "atk": 20,
@@ -215,8 +231,7 @@
         {
           "name": "sketch",
           "level": 1,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.wxoELV5tLA5axoVc"
+          "gen": "scarlet-violet"
         }
       ]
     }

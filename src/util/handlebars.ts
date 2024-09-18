@@ -29,8 +29,8 @@ function _registerPTRHelpers() {
             const classes: string = hash?.classes ?? "";
 
             return isType
-                ? `<img src="/systems/ptr2e/img/svg/${img}_icon.svg" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`
-                : `<img src="/systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`;
+                ? `<img src="systems/ptr2e/img/svg/${img}_icon.svg" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`
+                : `<img src="systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`;
         }
     );
 
@@ -43,7 +43,7 @@ function _registerPTRHelpers() {
                 img.setAttribute(key, args.hash[key]);
             }
             if (!doc) {
-                img.src = "/icons/svg/hazard.svg";
+                img.src = "icons/svg/hazard.svg";
                 return img.outerHTML;
             }
 

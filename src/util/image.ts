@@ -158,7 +158,7 @@ interface ImageSpeciesResolverConfig {
  * const sample: Record<string, SpeciesImageData> = {
  *  "rotom": {
  *      "data": {
- *          "base": "/systems/ptu/static/images/sprites/479",
+ *          "base": "systems/ptu/static/images/sprites/479",
  *          "extensions": [".webp"],
  *      },
  *      "suffixes": {

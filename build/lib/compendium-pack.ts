@@ -59,6 +59,18 @@ class CompendiumPack {
       Macro: new Map(),
       RollTable: new Map(),
     };
+  static #idsToEntry: {
+    [K in Extract<CompendiumDocumentType, "Actor" | "Item" | "JournalEntry" | "Macro" | "RollTable">]: Map<
+      string,
+      Map<string, PackEntry>
+    >;
+  } & Record<string, Map<string, Map<string, PackEntry>> | undefined> = {
+      Actor: new Map(),
+      Item: new Map(),
+      JournalEntry: new Map(),
+      Macro: new Map(),
+      RollTable: new Map(),
+    };
 
   static #packsMetadata = JSON.parse(fs.readFileSync("static/system.json", "utf-8")).packs as PackMetadata[];
 
@@ -67,6 +79,7 @@ class CompendiumPack {
     compendium:
       /@Compendium\[ptr2e\.(?<packName>[^.]+)\.(?<docType>Actor|JournalEntry|Item|Macro|RollTable)\.(?<docName>[^\]]+)\]\{?/g,
     uuid: /@UUID\[Compendium\.ptr2e\.(?<packName>[^.]+)\.(?<docType>Actor|JournalEntry|Item|Macro|RollTable)\.(?<docName>[^\]]+)\]\{?/g,
+    uuidLink: /"Compendium\.ptr2e\.(?<packName>[^.]+)\.(?<docType>Actor|JournalEntry|Item|Macro|RollTable)\.(?<docName>[^"]+)"/gm,
   };
 
   constructor(packDir: string, parsedData: unknown[], parsedFolders: unknown[]) {
@@ -97,6 +110,12 @@ class CompendiumPack {
       throw PackError(`Compendium ${this.packId} (${packDir}) was not found.`);
     }
 
+    CompendiumPack.#idsToEntry[this.documentType]?.set(this.packId, new Map());
+    const packEntryMap = CompendiumPack.#idsToEntry[this.documentType]?.get(this.packId);
+    if (!packEntryMap) {
+      throw PackError(`Compendium ${this.packId} (${packDir}) was not found.`);
+    }
+
     parsedData.sort((a, b) => {
       if (a._id === b._id) {
         throw PackError(`_id collision in ${this.packId}: ${a._id}`);
@@ -108,7 +127,8 @@ class CompendiumPack {
 
     for (const docSource of this.data) {
       // Populate CompendiumPack.namesToIds for later conversion of compendium links
-      packMap.set(docSource.name, docSource._id ?? "");
+      packMap.set(sluggify(docSource.name), docSource._id ?? "");
+      packEntryMap.set(docSource._id ?? docSource.name, docSource);
 
       // Check img paths
       if ("img" in docSource && typeof docSource.img === "string") {
@@ -297,7 +317,7 @@ class CompendiumPack {
 
   #finalize(docSource: PackEntry): string {
     // Replace all compendium documents linked by name to links by ID
-    const stringified = JSON.stringify(docSource);
+    const stringified = JSON.stringify(docSource, null, 2);
     const worldItemLink = CompendiumPack.LINK_PATTERNS.world.exec(stringified);
     if (worldItemLink !== null) {
       throw PackError(`${docSource.name} (${this.packId}) has a link to a world item: ${worldItemLink[0]}`);
@@ -312,20 +332,66 @@ class CompendiumPack {
       docSource.flags.core = { sourceId: this.#sourceIdOf(docSource._id ?? "", { docType: "Item" }) };
       //@ts-expect-error - Slug exists on all documents
       docSource.system.slug ??= sluggify(docSource.name);
+
+      if(docSource.type === "species") {
+        ((system) => {
+          const abilities = system.abilities
+          for(const key of Object.keys(abilities)) {
+            const category = system.abilities[key];
+            for(const ability of category) {
+              // UUID shouldn't be manually set
+              if(ability.uuid) { 
+                throw PackError(`Ability '${ability.slug}' in species '${docSource.name}' has a manually set UUID, which is not allowed`);
+              }
+              const abilitySource = CompendiumPack.#namesToIds["Item"]?.get("core-abilities")?.get(ability.slug);
+              if(abilitySource === undefined) {
+                throw PackError(`Failed to find ability '${ability.slug}' in pack 'core-abilities' for species '${docSource.name}'`);
+              }
+              
+              ability.uuid = `Compendium.ptr2e.core-abilities.Item.${abilitySource}`;
+            }
+          }
+        })(docSource.system as {
+          abilities: Record<string, {slug: string, uuid: string}[]>;
+        });
+
+        ((system) => {
+          const moves = system.moves
+          for(const key in moves) {
+            const moveCategory = moves[key];
+            for(const move of moveCategory) {
+              // UUID shouldn't be manually set
+              if(move.uuid) { 
+                throw PackError(`Move '${move.name}' in species '${docSource.name}' has a manually set UUID, which is not allowed`);
+              }
+
+              const moveSource = CompendiumPack.#namesToIds["Item"]?.get("core-moves")?.get(sluggify(move.name));
+              if(moveSource === undefined) {
+                throw PackError(`Failed to find move '${move.name}' in pack 'core-moves' for species '${docSource.name}'`);
+              }
+              
+              move.uuid = `Compendium.ptr2e.core-moves.Item.${moveSource}`;
+            }
+          }
+          
+        })(docSource.system as {
+          moves: Record<string, {name: string, uuid: string, gen?: string, level?: number}[]>;
+        });
+      }
     }
 
     const replace = (match: string, packId: string, docType: string, docName: string): string => {
       if (match.includes("JournalEntryPage")) return match;
 
+      const idsToSource = CompendiumPack.#idsToEntry[docType]?.get(packId);
       const namesToIds = CompendiumPack.#namesToIds[docType]?.get(packId);
       const link = match.replace(/\{$/, "");
       if (namesToIds === undefined) {
         throw PackError(`${docSource.name} (${this.packId}) has a bad pack reference: ${link}`);
       }
 
-      const documentId: string | undefined = namesToIds.get(docName);
+      const documentId: string | undefined = namesToIds.get(sluggify(docName)) || idsToSource?.get(docName)?._id || undefined;
       if (documentId === undefined) {
-        return match;
         throw PackError(`${docSource.name} (${this.packId}) has broken link to ${docName}: ${match}`);
       }
       const sourceId = this.#sourceIdOf(documentId, { packId, docType });

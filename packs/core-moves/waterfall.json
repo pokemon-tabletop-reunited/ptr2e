@@ -1,13 +1,15 @@
 {
   "name": "Waterfall",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/water_icon.svg",
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "waterfall",
     "description": "",
     "traits": [
       "contact",
-      "pass-2"
+      "pass-2",
+      "flinch-chance-2",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -17,6 +19,7 @@
         "traits": [
           "contact",
           "pass-2",
+          "flinch-chance-2",
           "pp-updated"
         ],
         "range": {
@@ -37,7 +40,7 @@
         "types": [
           "water"
         ],
-        "description": "Effect: On hit, all valid targets have a 20% chance of gaining @Affliction[flinched] 2.",
+        "description": "<p>Effect: On hit, all valid targets have a 20% chance of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

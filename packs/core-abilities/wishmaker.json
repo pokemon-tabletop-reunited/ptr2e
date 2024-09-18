@@ -1,7 +1,7 @@
 {
   "name": "Wishmaker",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
   "system": {
     "actions": [
       {
@@ -13,7 +13,7 @@
         "slug": "wishmaker",
         "type": "generic",
         "cost": {
-          "activation": "simple",
+          "activation": "complex",
           "powerPoints": 5,
           "trigger": "The user resolves Wish.",
           "delay": null,
@@ -24,12 +24,11 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user resolves Wish.\nEffect: Connection - Wish. The user selections to utilize one of the following effects to utilize in place of Wish's normal Resolution effect:\n- The target is healed 12 Ticks of HP, and creatures allied to the target in a 5m Burst of the target are healed 4 Ticks of HP.\n- The target gains +3 stages to a Stat of the target's choice, and creatures allied to the target in a 2m Burst of the target gain +1 stage in that Stat, all for 7 Activations.\n- The target is cured of all its Status Afflictions (except @Affliction[weary]), and creatures allied to the target in a 4m Burst of the target are healed of 1 random Status Affliction they possess.\n- The target is loses 1 @Affliction[weary] and regains 20% of its max PP, minimum 20, and creatures allied to the target in a Burst 3 of the target regain 10 PP.\n- The target loses 4 Ticks of HP, and creatures not allied to the target in a 5m Burst of the target lose 10 Ticks of HP."
+        "description": "<p>Trigger: The user resolves Wish.</p><p>Effect: Connection - Wish. The user selections to utilize one of the following effects to utilize in place of Wish's normal Resolution effect:<ul><li>The target is healed 12 Ticks of HP, and creatures allied to the target in a 5m Burst of the target are healed 4 Ticks of HP.</li><li>The target gains +3 Stages to a Stat of the target's choice, and creatures allied to the target in a 2m Burst of the target gain +1 Stage in that Stat, all for 7 Activations.</li><li>The target is cured of all its Status Afflictions (except @Affliction[weary]), and creatures allied to the target in a 4m Burst of the target are healed of 1 random Status Affliction they possess.</li><li>The target loses 1 @Affliction[weary] and regains 20% of its max PP, minimum 20, and creatures allied to the target in a Burst 3 of the target regain 10 PP.</li><li>The target loses 4 Ticks of HP, and creatures not allied to the target in a 5m Burst of the target lose 10 Ticks of HP.</li>This Action's Activation Cost is taken from the user's next Activation.</p>"
       },
       {
         "traits": [
-          "legendary",
-          "connection"
+          "legendary"
         ],
         "name": "Wishmaker",
         "slug": "wishmaker",
@@ -44,7 +43,7 @@
         "description": "Passive: The user possesses the Comatose Ability."
       }
     ],
-    "description": "Trigger: The user resolves Wish.\nEffect: Connection - Wish. The user selections to utilize one of the following effects to utilize in place of Wish's normal Resolution effect:\n- The target is healed 12 Ticks of HP, and creatures allied to the target in a 5m Burst of the target are healed 4 Ticks of HP.\n- The target gains +3 stages to a Stat of the target's choice, and creatures allied to the target in a 2m Burst of the target gain +1 stage in that Stat, all for 7 Activations.\n- The target is cured of all its Status Afflictions (except @Affliction[weary]), and creatures allied to the target in a 4m Burst of the target are healed of 1 random Status Affliction they possess.\n- The target is loses 1 @Affliction[weary] and regains 20% of its max PP, minimum 20, and creatures allied to the target in a Burst 3 of the target regain 10 PP.\n- The target loses 4 Ticks of HP, and creatures not allied to the target in a 5m Burst of the target lose 10 Ticks of HP.\nPassive: The user possesses the Comatose Ability.",
+    "description": "<p>Trigger: The user resolves Wish.</p><p>Effect: Connection - Wish. The user selections to utilize one of the following effects to utilize in place of Wish's normal Resolution effect:<ul><li>The target is healed 12 Ticks of HP, and creatures allied to the target in a 5m Burst of the target are healed 4 Ticks of HP.</li><li>The target gains +3 Stages to a Stat of the target's choice, and creatures allied to the target in a 2m Burst of the target gain +1 Stage in that Stat, all for 7 Activations.</li><li>The target is cured of all its Status Afflictions (except @Affliction[weary]), and creatures allied to the target in a 4m Burst of the target are healed of 1 random Status Affliction they possess.</li><li>The target loses 1 @Affliction[weary] and regains 20% of its max PP, minimum 20, and creatures allied to the target in a Burst 3 of the target regain 10 PP.</li><li>The target loses 4 Ticks of HP, and creatures not allied to the target in a 5m Burst of the target lose 10 Ticks of HP.</li>This Action's Activation Cost is taken from the user's next Activation.</p><p>Passive: The user possesses the Comatose Ability.</p",
     "traits": [
       "legendary",
       "connection"

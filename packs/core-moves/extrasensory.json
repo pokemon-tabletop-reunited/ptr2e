@@ -1,17 +1,21 @@
 {
   "name": "Extrasensory",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "extrasensory",
     "description": "",
-    "traits": [],
+    "traits": [
+      "flinch-chance-3",
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "extrasensory",
         "name": "Extrasensory",
         "type": "attack",
         "traits": [
+          "flinch-chance-3",
           "pp-updated"
         ],
         "range": {
@@ -32,7 +36,7 @@
         "types": [
           "psychic"
         ],
-        "description": "Effect: On hit, the target has a 10% chance of gaining @Affliction[flinched] 3.",
+        "description": "<p>Effect: On hit, the target has a 10% chance of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

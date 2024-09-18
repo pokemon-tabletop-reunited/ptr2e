@@ -27,23 +27,29 @@
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
-        "category": "status",
-        "power": null,
-        "accuracy": null,
-        "types": [
-          "untyped"
+        "description": "Effect: The target gains @Affliction[rapid] 1.",
+        "type": "generic"
+      },
+      {
+        "name": "Rapid! (Self)",
+        "slug": "rapid-self",
+        "traits": [
+          "command",
+          "style"
         ],
-        "description": "Effect: The target gains @Affliction[strong] 1.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "type": "attack"
+        "range": {
+          "target": "self",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "description": "Effect: The target gains @Affliction[rapid] 2.",
+        "type": "generic"
       }
     ],
     "slug": "rapid-style",
@@ -72,7 +78,7 @@
     }
   },
   "_id": "jJJ6DaJCklHa5x2X",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
   "effects": [],
   "flags": {
     "core": {

@@ -1,13 +1,15 @@
 {
   "name": "Fire Fang",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fire_icon.svg",
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "fire-fang",
     "description": "",
     "traits": [
       "jaw",
-      "contact"
+      "contact",
+      "flinch-chance-4",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -17,6 +19,7 @@
         "traits": [
           "jaw",
           "contact",
+          "flinch-chance-4",
           "pp-updated"
         ],
         "range": {
@@ -37,7 +40,7 @@
         "types": [
           "fire"
         ],
-        "description": "Effect: On hit, the target target has a 10% chance of gaining @Affliction[burn] 4, and a 10% chance of gaining @Affliction[flinched] 4.",
+        "description": "<p>Effect: On hit, the target target has a 10% chance of gaining @Affliction[burn] 4, and a 10% chance of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

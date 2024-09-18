@@ -1,31 +1,31 @@
 {
   "name": "Adrenaline",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "desperation-1-2"
+        ],
         "name": "Adrenaline",
         "slug": "adrenaline",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "trigger": "The user's current HP is lower than 1/2 of their Max HP.",
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user's current HP is lower than 1/2 of their Max HP.\nEffect: The user's SPD stat is increased by 50%."
+        "description": "Effect: While the user meets the [Desperation 1/2] Condition, their SPD stat is increased by 50%."
       }
     ],
-    "description": "Trigger: The user's current HP is lower than 1/2 of their Max HP.\nEffect: The user's SPD stat is increased by 50%.",
-    "traits": [],
+    "description": "Effect: While the user meets the [Desperation 1/2] Condition, their SPD stat is increased by 50%.",
+    "traits": [
+      "desperation-1-2"
+    ],
     "slug": null,
     "container": null
   },

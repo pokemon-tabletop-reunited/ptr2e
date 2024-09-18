@@ -1,13 +1,12 @@
 {
   "name": "Baneful Bunker",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/poison_icon.svg",
+  "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "baneful-bunker",
-    "description": "Trigger: You are targeted by an Attack.\nEffect: The triggering attack fails to hit you, and additional attacks that hit you also fail to hit you until your next activation, or when the round ends, whichever is first. Attacks failing to hit you do not activate on-miss effects. If the triggering Attack has [Contact], the attacker gains @Affliction[poison] 3.",
+    "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The triggering attack fails to hit the user, and additional attacks also fail to hit until the user's next activation, or when the round ends, whichever is first. Attacks failing to hit this way do not activate their secondary effects. If the triggering Attack has [Contact], the attacker gains @Affliction[poison] 3.</p>",
     "traits": [
       "shield",
-      "exhaust",
       "interrupt-4"
     ],
     "actions": [
@@ -17,7 +16,6 @@
         "type": "attack",
         "traits": [
           "shield",
-          "exhaust",
           "interrupt-4"
         ],
         "range": {
@@ -30,7 +28,7 @@
           "powerPoints": 7,
           "delay": null,
           "priority": null,
-          "trigger": "You are targeted by an Attack."
+          "trigger": "<p>The user is targeted by an Attack.</p>"
         },
         "category": "status",
         "power": null,
@@ -38,7 +36,7 @@
         "types": [
           "poison"
         ],
-        "description": "Trigger: You are targeted by an Attack.\nEffect: The triggering attack fails to hit you, and additional attacks that hit you also fail to hit you until your next activation, or when the round ends, whichever is first. Attacks failing to hit you do not activate on-miss effects. If the triggering Attack has [Contact], the attacker gains @Affliction[poison] 3.",
+        "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The triggering attack fails to hit the user, and additional attacks also fail to hit until the user's next activation, or when the round ends, whichever is first. Attacks failing to hit this way do not activate their secondary effects. If the triggering Attack has [Contact], the attacker gains @Affliction[poison] 3.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

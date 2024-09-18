@@ -34,7 +34,7 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         actions: {
             id: "actions",
-            template: "/systems/ptr2e/templates/apps/known-attacks.hbs",
+            template: "systems/ptr2e/templates/apps/known-attacks.hbs",
             scrollable: [".scroll"],
         },
     };

@@ -49,7 +49,7 @@ export default abstract class AbilitySystem extends HasEmbed(HasBase(foundry.abs
 
     if (!data.img || data.img === "icons/svg/item-bag.svg") {
       this.parent.updateSource({
-        img: "/systems/ptr2e/img/icons/ability_icon.webp"
+        img: "systems/ptr2e/img/icons/ability_icon.webp"
       })
     }
   }

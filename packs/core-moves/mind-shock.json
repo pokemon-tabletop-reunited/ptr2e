@@ -6,14 +6,20 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": null,
-    "traits": [],
+    "traits": [
+      "flinch-chance-3",
+      "pp-updated"
+    ],
     "actions": [
       {
         "name": "Mind Shock",
         "slug": "mind-shock",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "flinch-chance-3",
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 5,
@@ -23,8 +29,7 @@
           "activation": "complex",
           "powerPoints": 3,
           "delay": null,
-          "priority": null,
-          "trigger": ""
+          "priority": null
         },
         "variant": null,
         "types": [
@@ -37,7 +42,7 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: On hit, the target has a 20% chance of gaining Flinched 3.</p>"
+        "description": "<p>Effect: On hit, the target has a 20% chance of being Flinched.</p>"
       }
     ],
     "description": "",

@@ -9,7 +9,7 @@
       {
         "name": "Weak Spot",
         "slug": "weak-spot",
-        "description": "<p>Connection - Focus Energy.</p>",
+        "description": "<p>Connection - Focus Energy. The user learns Laser Focus.</p>",
         "traits": [],
         "type": "passive",
         "range": {
@@ -23,10 +23,71 @@
           "delay": null,
           "priority": null
         }
+      },
+      {
+        "slug": "focus-energy",
+        "name": "Focus Energy",
+        "type": "attack",
+        "traits": [
+          "aura"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The user's gain +1 CRIT stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true
+      },
+      {
+        "slug": "laser-focus",
+        "name": "Laser Focus",
+        "type": "attack",
+        "traits": [
+          "aura"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The user gains +4 CRIT stages for 2 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
       }
     ],
     "slug": null,
-    "description": "<p>Connection - Focus Energy.</p>",
+    "description": "<p>Connection - Focus Energy. The user learns Laser Focus.</p>",
     "traits": [],
     "prerequisites": [
       "Move Known: Focus Energy"
