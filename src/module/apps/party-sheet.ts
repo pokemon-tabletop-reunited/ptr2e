@@ -6,6 +6,7 @@ import {
   ApplicationV2Expanded,
 } from "./appv2-expanded.ts";
 import FolderConfigPTR2e from "@module/folder/sheet.ts";
+import { RestApp } from "@module/apps/rest.ts";
 
 class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
   ApplicationV2Expanded
@@ -31,6 +32,15 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
       },
       window: {
         resizable: true,
+        controls: [
+          ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
+          {
+            icon: "fas fa-heart-circle-plus",
+            label: "PTR2E.ActorSheet.Rest",
+            action: "rest",
+            visible: true,
+          }
+        ]
       },
       dragDrop: [
         {
@@ -61,7 +71,15 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
               this.render({ parts: ["party"] });
             }
           });
-        }
+        },
+        "rest": async function (this: PartySheetPTR2e) {
+          const restParticipants: ActorPTR2e[] = await this.party();
+          const owner = await this.owner();
+          if (owner as ActorPTR2e) {
+            restParticipants.unshift(owner as unknown as ActorPTR2e);
+          }
+          new RestApp(restParticipants).render(true);
+        },
       }
     },
     { inplace: false }
@@ -121,15 +139,24 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
     return options as ApplicationConfigurationExpanded;
   }
 
-  override async _prepareContext() {
-    const owner = this.folder.owner ? await fromUuid(this.folder.owner) : null;
-    if (!owner) throw new Error("Owner not found for party sheet");
+  async owner(): Promise<ActorPTR2e | null> {
+    return this.folder.owner ? await fromUuid(this.folder.owner) : null;
+  }
 
+  async party(): Promise<ActorPTR2e[]> {
     const party: ActorPTR2e[] = [];
     for (const memberUuid of this.folder.party) {
       const actor = await fromUuid<ActorPTR2e>(memberUuid);
       if (actor) party.push(actor);
     }
+    return party;
+  }
+
+  override async _prepareContext() {
+    const owner = await this.owner();
+    if (!owner) throw new Error("Owner not found for party sheet");
+
+    const party: ActorPTR2e[] = await this.party();
 
     const nonParty: ActorPTR2e[] = [];
     for(const actor of this.folder.contents) {

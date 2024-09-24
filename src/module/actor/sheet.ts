@@ -13,6 +13,7 @@ import Tagify from "@yaireo/tagify";
 import EquipmentSystem from "@item/data/equipment.ts";
 import ContainerSystem from "@item/data/container.ts";
 import { KnownActionsApp } from "@module/apps/known-attacks.ts";
+import { RestApp } from "@module/apps/rest.ts";
 import {
   ActorSheetV2Expanded,
   DocumentSheetConfigurationExpanded,
@@ -66,6 +67,12 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             label: "PTR2E.ActorSheet.Inspector",
             action: "open-inspector",
             visible: true
+          },
+          {
+            icon: "fas fa-heart-circle-plus",
+            label: "PTR2E.ActorSheet.Rest",
+            action: "rest",
+            visible: true,
           }
         ],
       },
@@ -178,6 +185,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         "luck-roll": async function (this: ActorSheetPTRV2) {
           const skill = this.actor.system.skills.get("luck")!;
           await skill.endOfDayLuckRoll();
+        },
+        "rest": function (this: ActorSheetPTRV2) {
+          new RestApp([this.actor]).render(true);
         },
         "add-clock": ActorSheetPTRV2.#onAddClock,
       },

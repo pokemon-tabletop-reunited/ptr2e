@@ -1358,7 +1358,7 @@ class ActorPTR2e<
 
   override async toggleStatusEffect(
     statusId: string,
-    { active, overlay = false }: { active?: boolean; overlay?: boolean } = {}
+    { active, overlay = false, all = false, }: { active?: boolean; overlay?: boolean; all?: boolean } = {}
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
     const status = CONFIG.statusEffects.find((e) => e.id === statusId);
@@ -1386,7 +1386,7 @@ class ActorPTR2e<
         const effect = this.effects.get(id) as ActiveEffectPTR2e<this>;
         if (effect.slug === slug) {
           if (overlay) {
-            if (effect.system.stacks > 1)
+            if (!all && effect.system.stacks > 1)
               effect.update({ "system.stacks": effect.system.stacks - 1 });
             else effect.delete();
           } else {
@@ -1410,6 +1410,27 @@ class ActorPTR2e<
     if (overlay) effect.updateSource({ "flags.core.overlay": true });
     //@ts-expect-error - Active effects aren't typed properly yet
     return ActiveEffectPTR2e.create(effect.toObject(), { parent: this, keepId: true });
+  }
+
+  async heal({ fractionToHeal=1.0, removeWeary=true, removeExposure=false, removeAllStacks=false } : { fractionToHeal?: number, removeWeary?: boolean; removeExposure?: boolean; removeAllStacks?: boolean } = {}): Promise<void> {
+    const health = Math.clamp(
+      (this.system.health?.value ?? 0) + Math.floor((this.system.health?.max ?? 0) * fractionToHeal),
+      0,
+      this.system.health?.max ?? 0);
+    await this.update({
+      "system.health.value": health,
+      "system.powerPoints.value": this.system.powerPoints?.max ?? 0,
+      // "system.shield.value": this.system.shield?.max ?? 0,
+    });
+
+    // remove exposure
+    if (removeExposure) {
+      // TODO: when exposure is implemented?
+    }
+
+    if (removeWeary) {// TODO: not when exposure is still up
+      await this.toggleStatusEffect("weary", { active: false, all: removeAllStacks, overlay: true });
+    }
   }
 
   /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */

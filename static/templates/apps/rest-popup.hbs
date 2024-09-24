@@ -1,0 +1,29 @@
+<section class="heal-popup">
+    <fieldset class="restType">
+        <span>
+            <label for="{{id}}-restType-camp">{{localize "PTR2E.Rest.Camp.label"}}</label>
+            <input type="radio" id="{{id}}-restType-camp" name="restType" value="camp" {{#if (eq restType "camp" )}}checked{{/if}} />
+        </span>
+
+        <span>
+            <label for="{{id}}-restType-center">{{localize "PTR2E.Rest.PkmnCenter.label"}}</label>
+            <input type="radio" id="{{id}}-restType-center" name="restType" value="center" {{#if (eq restType "center" )}}checked{{/if}} />
+        </span>
+    </fieldset>
+
+    {{!-- Party --}}
+    <div class="party-apply">
+    {{#each party}}
+        <img class="icon" src="{{img}}" data-tooltip-direction="DOWN" data-tooltip="{{name}}" />
+    {{/each}}
+    </div>
+
+    <fieldset class="camp-settings">
+        <label for="{{id}}-fractionToHeal">{{localize "PTR2E.Rest.HealthRestoration.label"}}</label>
+        <input class="fractionToHeal" id="{{id}}-fractionToHeal" name="fractionToHeal" value="{{fractionToHeal}}" min="0" max="1" step="0.25" />
+    </fieldset>
+
+    <footer class="controls">
+        <button type="submit">Submit</button>
+    </footer>
+</section>
