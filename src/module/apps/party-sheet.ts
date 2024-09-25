@@ -78,7 +78,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
           if (owner as ActorPTR2e) {
             restParticipants.unshift(owner as unknown as ActorPTR2e);
           }
-          new RestApp(restParticipants).render(true);
+          new RestApp(this.folder.name, restParticipants).render(true);
         },
       }
     },

@@ -18,10 +18,12 @@
     {{/each}}
     </div>
 
+    {{#if (eq restType "camp" )}}
     <fieldset class="camp-settings">
         <label for="{{id}}-fractionToHeal">{{localize "PTR2E.Rest.HealthRestoration.label"}}</label>
-        <input class="fractionToHeal" id="{{id}}-fractionToHeal" name="fractionToHeal" value="{{fractionToHeal}}" min="0" max="1" step="0.25" />
+        <input class="fractionToHeal" id="{{id}}-fractionToHeal" type="number" name="fractionToHeal" value="{{fractionToHeal}}" min="0" max="100" step="25" />
     </fieldset>
+    {{/if}}
 
     <footer class="controls">
         <button type="submit">Submit</button>
