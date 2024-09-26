@@ -1,7 +1,13 @@
-<article class="available-targets">
+<article>
+    {{#if hint}}
+    <p>{{localize hint}}</p>
+    {{/if}}
+    <fieldset class="available-targets">
+        <legend>Target</legend>
     {{#each targets as |target|}}
         {{> target target=target direction="RIGHT"}}
     {{/each}}
+    </fieldset>
 </article>
 
 {{#*inline "target"}}
