@@ -26,7 +26,7 @@ export class TargetSelectorPopup extends foundry.applications.api.HandlebarsAppl
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         modifiers: {
             id: "modifiers",
-            template: "/systems/ptr2e/templates/apps/target-selector-popup.hbs",
+            template: "systems/ptr2e/templates/apps/target-selector-popup.hbs",
         },
     };
 
