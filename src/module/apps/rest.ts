@@ -115,7 +115,7 @@ export class RestApp extends foundry.applications.api.HandlebarsApplicationMixin
         const healOptions = {
             fractionToHeal: 1.0,
             removeWeary: true,
-            removeExposure: false,
+            removeExposed: false,
             removeAllStacks: false,
         };
 
@@ -124,7 +124,7 @@ export class RestApp extends foundry.applications.api.HandlebarsApplicationMixin
                 healOptions.fractionToHeal = (data.fractionToHeal as unknown as number) / 100;
                 break;
             case "center":
-                healOptions.removeExposure = true;
+                healOptions.removeExposed = true;
                 healOptions.removeAllStacks = true;
                 break;
         }

@@ -1412,7 +1412,29 @@ class ActorPTR2e<
     return ActiveEffectPTR2e.create(effect.toObject(), { parent: this, keepId: true });
   }
 
-  async heal({ fractionToHeal=1.0, removeWeary=true, removeExposure=false, removeAllStacks=false } : { fractionToHeal?: number, removeWeary?: boolean; removeExposure?: boolean; removeAllStacks?: boolean } = {}): Promise<void> {
+  hasStatus(statusId: string): boolean {
+    const status = CONFIG.statusEffects.find((e) => e.id === statusId);
+    if (!status)
+      throw new Error(`Invalid status ID "${statusId}" provided to ActorPTR2e#hasStatus`);
+
+    // Find the effect with the static _id of the status effect
+    if (status._id) {
+      const effect = this.effects.get(status._id);
+      if (effect) return true;
+    }
+
+    // If no static _id, find all single-status effects that have this status
+    else {
+      for (const effect of this.effects) {
+        const statuses = effect.statuses;
+        if (statuses.has(status.id)) return true;
+      }
+    }
+    return false;
+  };
+
+
+  async heal({ fractionToHeal=1.0, removeWeary=true, removeExposed=false, removeAllStacks=false } : { fractionToHeal?: number, removeWeary?: boolean; removeExposed?: boolean; removeAllStacks?: boolean } = {}): Promise<void> {
     const health = Math.clamp(
       (this.system.health?.value ?? 0) + Math.floor((this.system.health?.max ?? 0) * fractionToHeal),
       0,
@@ -1424,11 +1446,12 @@ class ActorPTR2e<
     });
 
     // remove exposure
-    if (removeExposure) {
-      // TODO: when exposure is implemented?
+    if (removeExposed) {
+      await this.toggleStatusEffect("exposed", { active: false, all: removeAllStacks, overlay: true });
     }
 
-    if (removeWeary) {// TODO: not when exposure is still up
+    // remove weary
+    if (!this.hasStatus("exposed") && removeWeary) {
       await this.toggleStatusEffect("weary", { active: false, all: removeAllStacks, overlay: true });
     }
   }
