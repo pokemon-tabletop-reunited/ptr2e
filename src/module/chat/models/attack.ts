@@ -292,7 +292,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
       return rolls;
     };
-
+    console.log("this.context before ctx set", this.context, this.results);
     const context: AttackMessageRenderContext =
       this.context ??
       (this.context = {
@@ -377,6 +377,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         })() : [],
       });
 
+    console.log("context", context, this.results, this.overrides);
     return renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
   }
 
@@ -564,20 +565,16 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
   
 
-  public async applyLuckIncrease(number: number, target: ActorUUID) {
+  public async applyLuckIncrease(targetUuid: ActorUUID) {
     const results = fu.duplicate(this.parent.system.results);
-    const currentResult = results[this.parent.system.results.findIndex(r=>r.target.uuid == target)];
+    const currentResult = results[this.parent.system.results.findIndex(r=>r.target.uuid == targetUuid)];
     if (!currentResult || !currentResult.accuracy) return;
     const accuracy = currentResult.accuracy;
-
-    if ((accuracy.total - number) % 10 !== 0) {
-      ui.notifications.warn("Luck increases must result in a multiple of 10.");
-      return;
-    }
 
     const actor = await this.currentOrigin;
     if (!actor) return;
 
+    const number = accuracy.total;
     const luck = actor.system.skills.get("luck")!.total;
     if (luck < number) {
       ui.notifications.warn("You do not have enough Luck to apply this increase.");
@@ -594,13 +591,14 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     });
     await actor.update({ "system.skills": skills });
 
-    ui.notifications.info(
-      `Successfully applied Luck to this roll, spending ${number} Luck from ${actor.name
-      }. New total: ${actor.system.skills.get("luck")!.total}`
-    );
+    ui.notifications.info(game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
+      amount: number,
+      actor: actor.name,
+      total: actor.system.skills.get("luck")!.total
+    }));
 
     //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
-    accuracy.total -= number;
+    accuracy.total = 0;
 
     await this.parent.update({ "system.results": results });
   }

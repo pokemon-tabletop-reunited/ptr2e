@@ -31,22 +31,29 @@ export class TargetSelectorPopup extends foundry.applications.api.HandlebarsAppl
     };
 
     targets: { uuid: string; name: string; img: string; description?: string }[];
+    #title: string;
+    #hint: string;
+    
 
     constructor(
         targets: { uuid: string; name: string; img: string; description?: string }[],
+        { title = "", hint = "" } : { title?: string; hint?: string; },
         options: Partial<foundry.applications.api.ApplicationConfiguration> = {}
     ) {
         super(options);
         this.targets = targets;
+        this.#title = title;
+        this.#hint = hint;
     }
 
     override get title() {
-        return "Choose Target";
+        return this.#title == "" ? "Choose Target" : game.i18n.localize(this.#title);
     }
 
     override async _prepareContext(): Promise<Record<string, unknown>> {
         return {
-            targets: this.targets
+            targets: this.targets,
+            hint: this.#hint,
         };
     }
 
