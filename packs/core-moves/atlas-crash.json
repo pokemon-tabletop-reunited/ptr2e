@@ -1,7 +1,7 @@
 {
   "name": "Atlas Crash",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/rock_icon.svg",
+  "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "slug": "atlas-crash",
     "description": "",
@@ -9,7 +9,9 @@
       "recoil-1-2",
       "crushing",
       "dash",
-      "legendary"
+      "legendary",
+      "flinch-5",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -21,6 +23,7 @@
           "crushing",
           "dash",
           "legendary",
+          "flinch-5",
           "pp-updated"
         ],
         "range": {
@@ -41,7 +44,7 @@
         "types": [
           "rock"
         ],
-        "description": "Effect: On hit, the target becomes @Affliction[flinched] 7 and @Affliction[confused] 7.",
+        "description": "Effect: On hit, the target becomes Flinched and gains @Affliction[confused] 7.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

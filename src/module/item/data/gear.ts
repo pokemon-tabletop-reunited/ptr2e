@@ -11,7 +11,7 @@ export default abstract class GearSystem extends HasEmbed(HasIdentification(HasG
 
         if(!data.img || data.img === "icons/svg/item-bag.svg") {
             this.parent.updateSource({
-                img: "/systems/ptr2e/img/icons/gear_icon.webp"
+                img: "systems/ptr2e/img/icons/gear_icon.webp"
             })
         }
         return result;

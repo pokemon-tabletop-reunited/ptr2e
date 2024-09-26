@@ -6,14 +6,20 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": null,
-    "traits": [],
+    "traits": [
+      "flinch-chance-2",
+      "pp-updated"
+    ],
     "actions": [
       {
         "name": "Psy Dunk",
         "slug": "psy-dunk",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [],
+        "traits": [
+          "flinch-chance-2",
+          "pp-updated"
+        ],
         "range": {
           "target": "creature",
           "distance": 6,
@@ -37,7 +43,7 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: On hit, the target gains @Affliction[grounded] 5. and has a 30% chance of gaining Flinched 3.</p>"
+        "description": "<p>Effect: On hit, the target gains @Affliction[grounded] 5 and has a 30% chance of being Flinched.</p>"
       }
     ],
     "description": "",

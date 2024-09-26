@@ -33,7 +33,7 @@ export class AvailableAbilitiesApp extends foundry.applications.api.HandlebarsAp
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         actions: {
             id: "actions",
-            template: "/systems/ptr2e/templates/apps/available-abilities.hbs",
+            template: "systems/ptr2e/templates/apps/available-abilities.hbs",
             scrollable: [".scroll"],
         },
     };

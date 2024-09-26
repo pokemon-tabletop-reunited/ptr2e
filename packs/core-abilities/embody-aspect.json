@@ -1,13 +1,13 @@
 {
   "name": "Embody Aspect",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
   "system": {
     "actions": [
       {
         "traits": [
           "aura",
-          "defensive",
+          "connection",
           "legendary"
         ],
         "name": "Embody Aspect",
@@ -24,13 +24,111 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: Connection - Ivy Cudgel. While the user has a specific [Oni Mask] item equipped in a [Worn] slot, they gain the following benefits:\n- Teal Mask: the user possesses Defiant and Antitoxin as Extra Abilities and has its Tera Type replaced with Grass. While the user is Terastallized, they have +1 default SPD stage.\n- Wellspring Mask: the user possesses Water Absorb and Seaweed as Extra Abilities, gains the Water Type, may use Ivy Cudgel as Water Type, and has its Tera Type replaced with Water. While the user is Terastallized, they have +1 default SPDEF stage.\n- Hearthflame Mask: the user possesses Mold Breaker and Flaming Soul as Extra Abilities. gains the Fire  Type, may use Ivy Cudgel as Fire Type, and has its Tera Type replaced with Fire. While the user is Terastallized, they have +1 default ATK stage.\n- Cornerstone Mask: the user possesses Sturdy and Solid Rock as Extra Abilities, gains the Rock Type, may use Ivy Cudgel as Rock Type, and has its Tera Type replaced with Rock. While the user is Terastallized, they have +1 default DEF stage."
+        "description": "Effect: Connection - Ivy Cudgel. While the user has a specific [Oni Mask] item equipped in a [Worn] slot, they gain benefits from that specific [Oni Mask], providing Extra Abilities, altering the user's Tera Type, modifying the user's Ivy Cudgel, and providing a bonus to the user while they are Terastallized."
+      },
+      {
+        "traits": [
+          "aura",
+          "defensive",
+          "phenomenon",
+          "legendary"
+        ],
+        "name": "Embodied Teal",
+        "slug": "embody-aspect-teal",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "While the user has the Teal Mask equipped in a [Worn] slot."
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Effect: The user possesses Defiant and Antitoxin as Extra Abilities and has its Tera Type replaced with [Grass]. While the user is Terastallized, they have +1 default SPD stage."
+      },
+      {
+        "traits": [
+          "aura",
+          "defensive",
+          "phenomenon",
+          "legendary"
+        ],
+        "name": "Embodied Wellspring",
+        "slug": "embody-aspect-wellspring",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "While the user has the Wellspring Mask equipped in a [Worn] slot."
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Effect: The user possesses Water Absorb and Seaweed as Extra Abilities, gains the Water Type, may use Ivy Cudgel as Water-Type, and has its Tera Type replaced with Water. While the user is Terastallized, they have +1 default SPDEF stage."
+      },
+      {
+        "traits": [
+          "aura",
+          "defensive",
+          "phenomenon",
+          "legendary"
+        ],
+        "name": "Embodied Hearthflame",
+        "slug": "embody-aspect-hearthflame",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "While the user has the Wellspring Mask equipped in a [Worn] slot."
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Effect: The user possesses Mold Breaker and Flaming Soul as Extra Abilities. gains the Fire  Type, may use Ivy Cudgel as Fire Type, and has its Tera Type replaced with Fire. While the user is Terastallized, they have +1 default ATK stage."
+      },
+      {
+        "traits": [
+          "aura",
+          "defensive",
+          "phenomenon",
+          "legendary"
+        ],
+        "name": "Embodied Cornerstone",
+        "slug": "embody-aspect-cornerstone",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "While the user has the Cornerstone Mask equipped in a [Worn] slot."
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Effect: The user possesses Sturdy and Solid Rock as Extra Abilities, gains the Rock Type, may use Ivy Cudgel as Rock Type, and has its Tera Type replaced with Rock. While the user is Terastallized, they have +1 default DEF stage."
       }
     ],
     "description": "Effect: Connection - Ivy Cudgel. While the user has a specific [Oni Mask] item equipped in a [Worn] slot, they gain the following benefits:\n- Teal Mask: the user possesses Defiant and Antitoxin as Extra Abilities and has its Tera Type replaced with Grass. While the user is Terastallized, they have +1 default SPD stage.\n- Wellspring Mask: the user possesses Water Absorb and Seaweed as Extra Abilities, gains the Water Type, may use Ivy Cudgel as Water Type, and has its Tera Type replaced with Water. While the user is Terastallized, they have +1 default SPDEF stage.\n- Hearthflame Mask: the user possesses Mold Breaker and Flaming Soul as Extra Abilities. gains the Fire  Type, may use Ivy Cudgel as Fire Type, and has its Tera Type replaced with Fire. While the user is Terastallized, they have +1 default ATK stage.\n- Cornerstone Mask: the user possesses Sturdy and Solid Rock as Extra Abilities, gains the Rock Type, may use Ivy Cudgel as Rock Type, and has its Tera Type replaced with Rock. While the user is Terastallized, they have +1 default DEF stage.",
     "traits": [
       "aura",
       "defensive",
+      "connection",
+      "phenomenon",
       "legendary"
     ],
     "slug": null,

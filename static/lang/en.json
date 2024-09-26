@@ -356,7 +356,6 @@
           "hindered": "Hindered",
           "stunted": "Stunted",
           "confused": "Confused",
-          "flinched": "Flinched",
           "hyper-mode": "Hyper Mode",
           "weary": "Weary",
           "blinded": "Blinded",
@@ -418,7 +417,6 @@
           "hindered": "The afflicted creature’s Skill DCs are reduced by -10. Hindered applied from different sources have their own Stacks.",
           "stunted": "When the afflicted creature recovers HP, that amount is reduced by 2 Ticks (to a minimum of 0 HP healed).",
           "confused": "At the end of the afflicted creature's Activations, it has a 50% chance of using Fumble.",
-          "flinched": "The creature's Activation is Delayed by their Flinched Stack Value (max 5) x 20%. A creature loses all Stacks of Flinched after its next Activation.",
           "hyper-mode": "While afflicted with Hyper Mode, the afflicted creature gains +20% to all of its Movement Scores, while dealing and taking 15% more damage. As well, the user’s Shadow-Type attacks gain [Crit 1], or have their [Crit X] value increase by +1. At the start of the afflicted creature’s Activations, it has:<ul><li>a 40% chance to act normally on that Activation.</li><li>a 25% chance to be Choice-Locked 1 to Shadow-Type attacks.</li><li>a 15% chance of ending its Activation and using Fumble.</li><li>a 15% chance of using Backlash.</li><li>a 5% chance to be cured of Hyper Mode.</li></ul>",
           "weary": "While a creature is Weary, its default ACC and EVA stages are based on its Weary value, X. Specifically, the default ACC and EVA stages are set to the negative sum of all X and all integers between 0 and X (Weary 1 sets the defaults to -1, 2 to -3, and 3 to -6). Weary is automatically increased by 1 when a creature Faints. When a creature has 4 or more Weary, it is unable to battle until they reduce their Weary. Weary cannot wear off on its own - a creature must deliberately Rest or consume Items such as Apples to remove Stacks of Weary.",
           "blinded": "The afflicted creature is unable to see, ocularly. The creature has their \"seeing-based\" vision options disabled (standard vision, Darkvision, X-Ray Vision, etc.) and can only perceive using their other senses (as listed in their Traits). If they do not have a way to see, or have someone guiding them, they are unable to target other creatures with Attacks or Actions.",
@@ -840,7 +838,7 @@
         "ApplyDelayOrAdvancement": {
           "name": "Apply Delay/Advancement",
           "title": "Apply Delay/Advancement to {name}?",
-          "content": "<div class='form-group'><label><b>Current</b>: {current}%</label><div class='form-fields'><input name='value' type='number' value='0' min='-100' max='100'/></div><p class='hint'>Negative % is Advancement, Positive % is Delay</p></div>",
+          "content": "<div class='form-group'><label><b>Current</b>: {current}%</label><div class='form-fields'><input name='value' type='number' value='0' min='-100' max='100'/></div><p class='hint'>Max delay for this actor is {max}% </p><p class='hint'>Negative % is Delay, Positive % is Advancement</p></div>",
           "ok": "Apply Change"
         }
       }

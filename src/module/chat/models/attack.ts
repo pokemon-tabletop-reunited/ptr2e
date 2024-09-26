@@ -234,7 +234,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
       const rolls = {
         accuracy: await renderTemplate(
-          "/systems/ptr2e/templates/chat/rolls/accuracy-check.hbs",
+          "systems/ptr2e/templates/chat/rolls/accuracy-check.hbs",
           {
             inner: await AttackMessageSystem.renderInnerRoll(data.accuracy, isPrivate),
             isPrivate,
@@ -242,14 +242,14 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             label: "PTR2E.Attack.AccuracyCheck",
           }
         ),
-        crit: await renderTemplate("/systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
+        crit: await renderTemplate("systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
           inner: await AttackMessageSystem.renderInnerRoll(data.crit, isPrivate),
           isPrivate,
           type: "crit",
           label: "PTR2E.Attack.CritCheck",
         }),
         damage: await renderTemplate(
-          "/systems/ptr2e/templates/chat/rolls/damage-randomness.hbs",
+          "systems/ptr2e/templates/chat/rolls/damage-randomness.hbs",
           {
             inner: await AttackMessageSystem.renderInnerRoll(data.damage, isPrivate),
             isPrivate,
@@ -272,7 +272,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           }
 
           rolls.effects.push(await renderTemplate(
-            "/systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
+            "systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
             {
               inner: await AttackMessageSystem.renderInnerRoll(effectRoll.roll, isPrivate),
               isPrivate,
@@ -364,7 +364,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             }
 
             rolls.push(await renderTemplate(
-              "/systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
+              "systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
               {
                 inner: await AttackMessageSystem.renderInnerRoll(roll.roll, false),
                 isPrivate: false,

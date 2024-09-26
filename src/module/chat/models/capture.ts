@@ -116,7 +116,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
       // TODO: Implement effect checks
       const rolls = {
         accuracy: await renderTemplate(
-          "/systems/ptr2e/templates/chat/rolls/accuracy-check.hbs",
+          "systems/ptr2e/templates/chat/rolls/accuracy-check.hbs",
           {
             inner: await renderInnerRoll(this.rolls.accuracy, isPrivate),
             isPrivate,
@@ -124,14 +124,14 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
             label: "PTR2E.Capture.AccuracyCheck",
           }
         ),
-        crit: await renderTemplate("/systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
+        crit: await renderTemplate("systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
           inner: await renderInnerRoll(this.rolls.crit, isPrivate),
           isPrivate,
           type: "crit",
           label: "PTR2E.Capture.CritCheck",
         }),
         shake1: await renderTemplate(
-          "/systems/ptr2e/templates/chat/rolls/shake-check.hbs",
+          "systems/ptr2e/templates/chat/rolls/shake-check.hbs",
           {
             inner: await renderInnerRoll(this.rolls.shake1, isPrivate),
             isPrivate,
@@ -140,7 +140,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
           }
         ),
         shake2: await renderTemplate(
-          "/systems/ptr2e/templates/chat/rolls/shake-check.hbs",
+          "systems/ptr2e/templates/chat/rolls/shake-check.hbs",
           {
             inner: await renderInnerRoll(this.rolls.shake2, isPrivate),
             isPrivate,
@@ -149,7 +149,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
           }
         ),
         shake3: await renderTemplate(
-          "/systems/ptr2e/templates/chat/rolls/shake-check.hbs",
+          "systems/ptr2e/templates/chat/rolls/shake-check.hbs",
           {
             inner: await renderInnerRoll(this.rolls.shake3, isPrivate),
             isPrivate,
@@ -158,7 +158,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
           }
         ),
         shake4: await renderTemplate(
-          "/systems/ptr2e/templates/chat/rolls/shake-check.hbs",
+          "systems/ptr2e/templates/chat/rolls/shake-check.hbs",
           {
             inner: await renderInnerRoll(this.rolls.shake4, isPrivate),
             isPrivate,
@@ -211,7 +211,7 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
       target: this.target ? await fromUuid<ActorPTR2e>(this.target) : null,
     });
 
-    return renderTemplate("/systems/ptr2e/templates/chat/capture.hbs", context);
+    return renderTemplate("systems/ptr2e/templates/chat/capture.hbs", context);
   }
 
   public async applyLuckIncrease(number: number) {

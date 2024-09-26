@@ -51,25 +51,25 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     header: {
       id: "header",
-      template: "/systems/ptr2e/templates/items/parts/item-header.hbs",
+      template: "systems/ptr2e/templates/items/parts/item-header.hbs",
     },
     tabs: {
       id: "tabs",
-      template: "/systems/ptr2e/templates/items/parts/item-tabs.hbs",
+      template: "systems/ptr2e/templates/items/parts/item-tabs.hbs",
     },
     overview: {
       id: "overview",
-      template: "/systems/ptr2e/templates/effects/effect-overview.hbs",
+      template: "systems/ptr2e/templates/effects/effect-overview.hbs",
       scrollable: [".scroll"],
     },
     details: {
       id: "details",
-      template: "/systems/ptr2e/templates/effects/effect-details.hbs",
+      template: "systems/ptr2e/templates/effects/effect-details.hbs",
       scrollable: [".scroll"],
     },
     changes: {
       id: "changes",
-      template: "/systems/ptr2e/templates/effects/effect-changes.hbs",
+      template: "systems/ptr2e/templates/effects/effect-changes.hbs",
       scrollable: [".scroll"],
     },
   };
@@ -170,7 +170,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
     }));
 
     const source = this.document.toObject();
-    if (!source.img) source.img = "/systems/ptr2e/img/icons/effect_icon.webp";
+    if (!source.img) source.img = "systems/ptr2e/img/icons/effect_icon.webp";
 
     this.#createChangeForms();
 

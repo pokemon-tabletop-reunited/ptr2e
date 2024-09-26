@@ -16,6 +16,7 @@ import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { ActorSystemSchema, AttributeSchema, StatSchema, TypeField, GenderOptions, AttributesSchema, AdvancementSchema, Movement } from "./data.ts";
 import { addDataFieldMigration, sluggify } from "@utils";
+import { AbilityReferenceSchema } from "@item/data/species.ts";
 
 class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeDataModel)) {
   static LOCALIZATION_PREFIXES = ["PTR2E.ActorSystem"];
@@ -250,8 +251,20 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     };
   }
 
-  static override migrateData(source: Record<string, unknown>) {
+  static override migrateData(source: ActorSystemPTR2e["_source"]) {
+    // Migrate the `health.shield` field to the new `shield` field
     addDataFieldMigration(source, "health.shield", "shield");
+
+    // Migrate species Abilities data to the new format
+    if(source.species) {
+      for (const abGroup of Object.keys(source.species.abilities)) {
+        source.species.abilities[abGroup] = (source.species.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g=>{
+          if (typeof g == "object") return g;
+          return { slug: g, uuid: null };
+        });
+      }
+    }
+
     return super.migrateData(source);
   }
 
@@ -373,7 +386,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     // Add species traits to actor traits
     for (const trait of this.species.traits.values()) {
-      this.traits.set(trait.slug, trait);
+      if (!this.traits.has(trait.slug)) {
+        this.traits.set(trait.slug, {
+          ...trait,
+          virtual: true,
+        });
+      }
     }
 
     for (const type of this.species.types.values()) {
@@ -444,7 +462,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
 
     /** Calculate HP */
-    const bulkMod = Math.pow(1 + ((Math.exp(0.5) - 1) / Math.pow(Math.PI, 3)), (this.species?.size.sizeClass || 1) - 1);
+    const bulkMod = Math.pow(1 + ((Math.exp(1) - 1) / Math.pow(Math.PI, 3)), (this.species?.size.sizeClass || 1) - 1);
 
     return Math.floor(
       (Math.floor(((2 * stat.base + stat.ivs + stat.evs / 4) * level * bulkMod) / 100) +

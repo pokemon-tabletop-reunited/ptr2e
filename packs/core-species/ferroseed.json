@@ -1,7 +1,7 @@
 {
   "name": "ferroseed",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 597,
     "size": {
@@ -30,20 +30,36 @@
     ],
     "abilities": {
       "starting": [
-        "iron-barbs",
-        "anticipation"
+        {
+          "slug": "iron-barbs"
+        },
+        {
+          "slug": "anticipation"
+        }
       ],
       "basic": [
-        "bulletproof",
-        "battle-armor"
+        {
+          "slug": "bulletproof"
+        },
+        {
+          "slug": "battle-armor"
+        }
       ],
       "advanced": [
-        "juggernaut",
-        "lets-roll"
+        {
+          "slug": "juggernaut"
+        },
+        {
+          "slug": "lets-roll"
+        }
       ],
       "master": [
-        "fort-knox",
-        "aftermath"
+        {
+          "slug": "fort-knox"
+        },
+        {
+          "slug": "aftermath"
+        }
       ]
     },
     "skills": [
@@ -144,91 +160,76 @@
       "levelUp": [
         {
           "name": "harden",
-          "uuid": "Compendium.ptr2e.core-moves.Item.vKslOzFQFtNm1yzc",
           "gen": "sword-shield",
           "level": 1
         },
         {
           "name": "tackle",
-          "uuid": "Compendium.ptr2e.core-moves.Item.fWOSmnI68Lct2LUn",
           "gen": "sword-shield",
           "level": 1
         },
         {
           "name": "metal-claw",
-          "uuid": "Compendium.ptr2e.core-moves.Item.uMgZVwOGoiOk6PzS",
           "gen": "sword-shield",
           "level": 5
         },
         {
           "name": "rollout",
-          "uuid": "Compendium.ptr2e.core-moves.Item.bFF1KeeCZw3IjRHQ",
           "gen": "ultra-sun-ultra-moon",
           "level": 6
         },
         {
           "name": "pin-missile",
-          "uuid": "Compendium.ptr2e.core-moves.Item.4uIJNlY5BXDQ7VcT",
           "gen": "sword-shield",
           "level": 10
         },
         {
           "name": "ingrain",
-          "uuid": "Compendium.ptr2e.core-moves.Item.IzcXu3gzpaJ8vcr1",
           "gen": "sword-shield",
           "level": 15
         },
         {
           "name": "flash-cannon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Sc8CMZoeWD0vlQKZ",
           "gen": "sword-shield",
           "level": 20
         },
         {
           "name": "iron-head",
-          "uuid": "Compendium.ptr2e.core-moves.Item.0rhyfVFsZ1asQIwv",
           "gen": "sword-shield",
           "level": 25
         },
         {
           "name": "mirror-shot",
-          "uuid": "Compendium.ptr2e.core-moves.Item.vALidK8djNyae3c0",
           "gen": "ultra-sun-ultra-moon",
           "level": 30
         },
         {
           "name": "self-destruct",
-          "uuid": "Compendium.ptr2e.core-moves.Item.mooOpgSzALgXclFp",
           "gen": "sword-shield",
           "level": 30
         },
         {
           "name": "iron-defense",
-          "uuid": "Compendium.ptr2e.core-moves.Item.qSWTxI39iL7ivEVw",
           "gen": "sword-shield",
           "level": 35
         },
         {
           "name": "curse",
-          "uuid": "Compendium.ptr2e.core-moves.Item.vB1IfCQSX6XsFLxj",
           "gen": "sword-shield",
           "level": 41
         },
         {
           "name": "gyro-ball",
-          "uuid": "Compendium.ptr2e.core-moves.Item.ZmCAncW2sPcfZjR5",
           "gen": "sword-shield",
           "level": 45
         },
         {
           "name": "payback",
-          "uuid": "Compendium.ptr2e.core-moves.Item.IWtQyZKNtwfpsM1d",
           "gen": "ultra-sun-ultra-moon",
           "level": 47
         },
         {
           "name": "explosion",
-          "uuid": "Compendium.ptr2e.core-moves.Item.91GiwIW0SyPOsG2f",
           "gen": "sword-shield",
           "level": 50
         }
@@ -236,227 +237,182 @@
       "tutor": [
         {
           "name": "acid-spray",
-          "uuid": "Compendium.ptr2e.core-moves.Item.UJQAawBIXG1irZiH",
           "gen": "sword-shield"
         },
         {
           "name": "assurance",
-          "uuid": "Compendium.ptr2e.core-moves.Item.tvN34FsPsiy2u5U6",
           "gen": "sword-shield"
         },
         {
           "name": "attract",
-          "uuid": "Compendium.ptr2e.core-moves.Item.uqx2cfO9G5hlv2OC",
           "gen": "sword-shield"
         },
         {
           "name": "bullet-seed",
-          "uuid": "Compendium.ptr2e.core-moves.Item.2YEbEFu2qPjs32tF",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "confide",
-          "uuid": "Compendium.ptr2e.core-moves.Item.NoHd6SBeivDS66M1",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "double-team",
-          "uuid": "Compendium.ptr2e.core-moves.Item.187bZlHjZF5QH7np",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "endeavor",
-          "uuid": "Compendium.ptr2e.core-moves.Item.KQAFaapoBxfiS3me",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "endure",
-          "uuid": "Compendium.ptr2e.core-moves.Item.eEQiYEm2y7wkcKnx",
           "gen": "sword-shield"
         },
         {
           "name": "energy-ball",
-          "uuid": "Compendium.ptr2e.core-moves.Item.3CZZrDIgUZGEod8O",
           "gen": "sword-shield"
         },
         {
           "name": "facade",
-          "uuid": "Compendium.ptr2e.core-moves.Item.eEIG8jgmrxWgRVMz",
           "gen": "sword-shield"
         },
         {
           "name": "flash",
-          "uuid": "Compendium.ptr2e.core-moves.Item.pJPWknmqWT9VussR",
           "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "frustration",
-          "uuid": "Compendium.ptr2e.core-moves.Item.mFqcA84HvScXVSuG",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "giga-drain",
-          "uuid": "Compendium.ptr2e.core-moves.Item.L2gBdhkIuvmwPPGW",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "gravity",
-          "uuid": "Compendium.ptr2e.core-moves.Item.EGfHyGHlkgY53oIO",
           "gen": "sword-shield"
         },
         {
           "name": "hidden-power",
-          "uuid": "Compendium.ptr2e.core-moves.Item.1lkeVmjLt8Vp0izT",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "hone-claws",
-          "uuid": "Compendium.ptr2e.core-moves.Item.ACTyejrBHHBe0sJV",
           "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "knock-off",
-          "uuid": "Compendium.ptr2e.core-moves.Item.z284lye0vzrzlKdX",
           "gen": "sword-shield"
         },
         {
           "name": "leech-seed",
-          "uuid": "Compendium.ptr2e.core-moves.Item.2LTnEFDRe24I7AQT",
           "gen": "sword-shield"
         },
         {
           "name": "magnet-rise",
-          "uuid": "Compendium.ptr2e.core-moves.Item.hFYqkcoA1BddDKvk",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "nature-power",
-          "uuid": "Compendium.ptr2e.core-moves.Item.zNGnd5dQ9BbLgpiH",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "poison-jab",
-          "uuid": "Compendium.ptr2e.core-moves.Item.4wFEqQDdZyWTRHRL",
           "gen": "sword-shield"
         },
         {
           "name": "protect",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DwzmkHqd28xR3P3c",
           "gen": "sword-shield"
         },
         {
           "name": "rest",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DEsVXTtV0dDFdodn",
           "gen": "sword-shield"
         },
         {
           "name": "return",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VdmiwxXnqCd8WAkU",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "revenge",
-          "uuid": "Compendium.ptr2e.core-moves.Item.5xhsqbWOJO8k23Pa",
           "gen": "sword-shield"
         },
         {
           "name": "rock-climb",
-          "uuid": "Compendium.ptr2e.core-moves.Item.SJLdQyoY9zBtoCTR",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "rock-polish",
-          "uuid": "Compendium.ptr2e.core-moves.Item.gl9grdDol5tujgPd",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "rock-smash",
-          "uuid": "Compendium.ptr2e.core-moves.Item.x8owJfS8Dnlj3Wbe",
           "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "round",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Sk06NeMcS1RTMcjo",
           "gen": "sword-shield"
         },
         {
           "name": "secret-power",
-          "uuid": "Compendium.ptr2e.core-moves.Item.HwHgkAbouiM0y3Li",
           "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "seed-bomb",
-          "uuid": "Compendium.ptr2e.core-moves.Item.q9sildb5889bVvuB",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "sleep-talk",
-          "uuid": "Compendium.ptr2e.core-moves.Item.lmpvIU1s0odo4fmQ",
           "gen": "black-2-white-2"
         },
         {
           "name": "snore",
-          "uuid": "Compendium.ptr2e.core-moves.Item.4XGhnE4bWGYPKRxO",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "solar-beam",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Gp7VqdWhp2x8pjhw",
           "gen": "sword-shield"
         },
         {
           "name": "spikes",
-          "uuid": "Compendium.ptr2e.core-moves.Item.sPdy5PU5itGhlL6e",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "stealth-rock",
-          "uuid": "Compendium.ptr2e.core-moves.Item.JSSINn7yRN0wXMZ2",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "steel-beam",
-          "uuid": "Compendium.ptr2e.core-moves.Item.5Srn3lfprE15Xo10",
           "gen": "sword-shield"
         },
         {
           "name": "steel-roller",
-          "uuid": "Compendium.ptr2e.core-moves.Item.f1owTUALsuAOxqFj",
           "gen": "sword-shield"
         },
         {
           "name": "substitute",
-          "uuid": "Compendium.ptr2e.core-moves.Item.wlCtO7DEZMMbEwcn",
           "gen": "sword-shield"
         },
         {
           "name": "sunny-day",
-          "uuid": "Compendium.ptr2e.core-moves.Item.oZFYMEJhZ3CZSNEZ",
           "gen": "sword-shield"
         },
         {
           "name": "swagger",
-          "uuid": "Compendium.ptr2e.core-moves.Item.wYGAvakAQaDex43K",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "thunder-wave",
-          "uuid": "Compendium.ptr2e.core-moves.Item.dXkwy782GsUD2C2k",
           "gen": "sword-shield"
         },
         {
           "name": "thunderbolt",
-          "uuid": "Compendium.ptr2e.core-moves.Item.7WSf5Om7cSiqh7nR",
           "gen": "sword-shield"
         },
         {
           "name": "toxic",
-          "uuid": "Compendium.ptr2e.core-moves.Item.oTSFbF32HX101PTb",
           "gen": "sword-shield"
         },
         {
           "name": "worry-seed",
-          "uuid": "Compendium.ptr2e.core-moves.Item.qmEhCoFXhJCORuB1",
           "gen": "ultra-sun-ultra-moon"
         }
       ]
@@ -493,7 +449,8 @@
       ],
       "uuid": "Compendium.ptr2e.core-species.Item.tKbgThnzHZV3gwYZ",
       "methods": []
-    }
+    },
+    "slug": "ferroseed"
   },
   "_id": "tKbgThnzHZV3gwYZ",
   "effects": []

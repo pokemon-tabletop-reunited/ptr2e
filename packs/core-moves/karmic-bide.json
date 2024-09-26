@@ -1,15 +1,14 @@
 {
   "name": "Karmic Bide",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "bide",
-    "description": "Effect: Set Up: the user gains @Affliction[braced] 2, and allied creatures within 10m of the user gain @Affliction[marked] 3. \nResolution: On the user's next Activation, they deal twice the total damage the @Affliction[marked] allies took since the user declared this attack, evenly split amongst all valid targets.",
+    "description": "Effect: Set Up: the user gains @Affliction[braced] 2, and allied creatures within 10m of the user gain @Affliction[marked] 3. The user's next Initiative is delayed 30%. \nResolution: On the user's next Activation, they deal twice the total damage the @Affliction[marked] allies took since the user declared this attack, evenly split amongst all valid targets.",
     "traits": [
       "defensive",
       "draw-in",
       "set-up",
-      "delay-2",
       "danger-close"
     ],
     "actions": [
@@ -20,7 +19,6 @@
         "traits": [
           "defensive",
           "set-up",
-          "delay-2",
           "danger-close",
           "friendly"
         ],
@@ -32,7 +30,7 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 7,
-          "delay": 2,
+          "delay": null,
           "priority": null,
           "trigger": null
         },
@@ -42,7 +40,7 @@
         "types": [
           "psychic"
         ],
-        "description": "Effect: Set Up: the user gains @Affliction[braced] 2, and allied creatures within 10m of the user gain @Affliction[marked] 3. \nResolution: On the user's next Activation, they deal twice the total damage the @Affliction[marked] allies took since the user declared this attack, evenly split amongst all valid targets.",
+        "description": "Effect: Set Up: the user gains @Affliction[braced] 2, and allied creatures within 10m of the user gain @Affliction[marked] 3. The user's next Initiative is delayed 30%. \nResolution: On the user's next Activation, they deal twice the total damage the @Affliction[marked] allies took since the user declared this attack, evenly split amongst all valid targets.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

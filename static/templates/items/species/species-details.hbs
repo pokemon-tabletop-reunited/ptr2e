@@ -174,14 +174,44 @@
             <legend>
                 Abilities
             </legend>
+            {{!-- Starting --}}
+            
+
             <!-- Starting -->
-            {{formField fields.abilities.fields.starting value=source.system.abilities.starting localize=true}}
+            <div class="form-group">
+                <label>Starting Abilities</label>
+                {{> abilityGroup abilities=abilities.starting path="system.abilities.starting"}}
+            </div>
+
             <!-- Basic -->
-            {{formField fields.abilities.fields.basic value=source.system.abilities.basic localize=true}}
+            <div class="form-group">
+                <label>Basic Abilities</label>
+                {{> abilityGroup abilities=abilities.basic path="system.abilities.basic"}}
+            </div>
+
             <!-- Advanced -->
-            {{formField fields.abilities.fields.advanced value=source.system.abilities.advanced localize=true}}
+            <div class="form-group">
+                <label>Advanced Abilities</label>
+                {{> abilityGroup abilities=abilities.advanced path="system.abilities.advanced"}}
+            </div>
+
             <!-- Master -->
-            {{formField fields.abilities.fields.master value=source.system.abilities.master localize=true}}
+            <div class="form-group">
+                <label>Master Abilities</label>
+                {{> abilityGroup abilities=abilities.master path="system.abilities.master"}}
+            </div>
         </fieldset>
     </div>
 </section>
+
+{{#*inline "abilityGroup"}}
+<fieldset class="abilities" data-path="{{path}}">
+    <div class="tags input-element-tags">
+    {{#each abilities}}
+        {{!-- TODO: add a "label" field instead of just using the slug? --}}
+        <div class="tag" data-key="{{slug}}">{{{contentLink}}}<a class="remove fa-solid fa-times"
+                data-tooltip="Remove Tag" aria-label="Remove Tag"></a></div> 
+    {{/each}}
+    </div>
+</fieldset>
+{{/inline}}

@@ -120,15 +120,15 @@ export class ActionEditor<
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         header: {
             id: "header",
-            template: "/systems/ptr2e/templates/apps/action-editor-header.hbs",
+            template: "systems/ptr2e/templates/apps/action-editor-header.hbs",
         },
         traits: {
             id: "traits",
-            template: "/systems/ptr2e/templates/apps/action-editor-traits.hbs",
+            template: "systems/ptr2e/templates/apps/action-editor-traits.hbs",
         },
         action: {
             id: "action",
-            template: "/systems/ptr2e/templates/apps/action-editor-body.hbs",
+            template: "systems/ptr2e/templates/apps/action-editor-body.hbs",
             scrollable: [".scroll"],
         },
     };

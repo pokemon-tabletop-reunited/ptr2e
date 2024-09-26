@@ -55,7 +55,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
         return ids.flatMap((id) => {
             const combatant = this.combatants.get(id);
             if (!combatant?.isOwner) return []; 
-            return { _id: id, initiative: combatant.baseAV, system: { avModifiers: 0} };
+            return { _id: id, initiative: combatant.baseAV, system: { advanceDelayPercent: 0} };
         });
     }
 
@@ -265,7 +265,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
 
     async resetEncounter(): Promise<this | undefined> {
         const inits = this._idToUpdateBaseInitiativeArray(this.combatants.map((c) => c.id)).map(
-            (u) => ({ ...u, system: { activationsHad: 0 } })
+            (u) => ({ ...u, system: { activationsHad: 0, advanceDelayPercent: 0} })
         );
         const updateData = {
             round: 0,
@@ -296,7 +296,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
             name: game.i18n.localize("PTR2E.Combat.Round.Name"),
             img: "icons/svg/clockwork.svg",
             type: "round",
-            initiative: 100,
+            initiative: 150,
         }, { parent: this});
         const combatants = this.combatants.map((c) => c.toObject());
         combatants.push(round.toObject());
@@ -317,15 +317,15 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
         const inits = this._idToUpdateBaseInitiativeArray(
             this.round === 0 ? this.combatants.map((c) => c.id) : documents.map((c) => c._id!)
         );
-        this.updateEmbeddedDocuments("Combatant", inits);
-
-        const participants = new Set(
-            [
-                ...this.system.participants,
-                ...this.combatants.map((c) => c.actor?.uuid ?? c.token?.uuid ?? []),
-            ].flat()
-        );
-        this.update({ "system.participants": participants });
+        this.updateEmbeddedDocuments("Combatant", inits).then(() => {
+          const participants = new Set(
+              [
+                  ...this.system.participants,
+                  ...this.combatants.map((c) => c.actor?.uuid ?? c.token?.uuid ?? []),
+              ].flat()
+          );
+          this.update({ "system.participants": participants });
+      });
     }
 
     protected override _onDeleteDescendantDocuments(

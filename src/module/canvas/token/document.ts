@@ -3,6 +3,8 @@ import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { TokenFlagsPTR2e } from "@module/canvas/token/data.ts";
 import { ScenePTR2e } from "../scene.ts";
 import { CombatantPTR2e, CombatPTR2e } from "@combat";
+// TODO: Fix circular dependency when imported from @combat
+import CharacterCombatantSystem from "../../combat/combatant/models/character.ts";
 
 class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
 
@@ -28,14 +30,13 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
 
         // If the actor's speed combat stages are different from the token's combatant, update the combatant's speed stages
         const combatant = this.combatant as CombatantPTR2e<CombatPTR2e> | null;
-        if(!combatant) return;
-        if(this.actor?.speedStage !== undefined && this.actor.speedStage !== combatant.system.avModifiersFromSpdStages) {
-            const appliedSpeedStagesPercent = Math.clamp(-combatant.system.avModifiersFromSpdStages * 15, -100, 100);
-            const newSpeedStagesPercent = Math.clamp(-this.actor.speedStage * 15, -100, 100);
-            const delta = newSpeedStagesPercent - appliedSpeedStagesPercent;
-            const modifiers = combatant.system.avModifiers + delta;
-            combatant.update({ "system.avModifiers": modifiers, "system.avModifiersFromSpdStages": this.actor.speedStage });
-            return
+        if(!combatant || !(combatant.system instanceof CharacterCombatantSystem)) return;
+        if(this.actor?.speedStage !== undefined && this.actor.speedStage !== combatant.system.speedStages) {
+          const previous = combatant.system.previousBaseAV;
+          const initiativeChange = combatant.system.calculateInitiativeChange(previous, combatant.system.baseAV);
+          if(initiativeChange !== 0) {
+            combatant.update({ initiative: initiativeChange });
+          }
         }
     }
 }
