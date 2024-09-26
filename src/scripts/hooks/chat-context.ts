@@ -39,66 +39,43 @@ export const ChatContext: PTRHook = {
                     condition: li => {
                         const message = game.messages.get(li.data("messageId"));
                         if(!message) return false;
-                        return ["skill"].includes(message.type) && !(message.system as SkillMessageSystem).luckRoll;
+
+                        if (["skill"].includes(message.type)) return !(message.system as SkillMessageSystem).luckRoll;
+                        if (["capture"].includes(message.type)) return true;
+                        if (["attack"].includes(message.type)) return true;
+
+                        return false;
                     },
                     callback: li => {
-                        const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e<SkillMessageSystem>;
+                        const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e;
                         if(!message) return;
-                        const currentResult = message.system.context?.roll?.total;
-                        if(currentResult === undefined) return;
 
-                        // Get the amount required to get to the next increment of -10, or 0 if the current result is above 0.
-                        const amount = Math.abs((currentResult > 0 ? 0 : Math.ceil(currentResult / -10) * -10 ) - currentResult) || 10
-                        foundry.applications.api.DialogV2.confirm({
-                            window: {
-                                title: "PTR2E.ChatContext.SpendLuckSkill.title",
-                            },
-                            content: game.i18n.format("PTR2E.ChatContext.SpendLuckSkill.content", { amount }),
-                            yes: {
-                                callback: async () => {
-                                    await message.system.applyLuckIncrease(amount);
+                        // skill
+                        if (message.type == "skill") {
+                            const chatMessage = message as ChatMessagePTR2e<SkillMessageSystem>;
+
+                            const currentResult = chatMessage.system.context?.roll?.total;
+                            if(currentResult === undefined) return;
+    
+                            // Get the amount required to get to the next increment of -10, or 0 if the current result is above 0.
+                            const amount = Math.abs((currentResult > 0 ? 0 : Math.ceil(currentResult / -10) * -10 ) - currentResult) || 10
+                            foundry.applications.api.DialogV2.confirm({
+                                window: {
+                                    title: "PTR2E.ChatContext.SpendLuckSkill.title",
+                                },
+                                content: game.i18n.format("PTR2E.ChatContext.SpendLuckSkill.content", { amount }),
+                                yes: {
+                                    callback: async () => {
+                                        await chatMessage.system.applyLuckIncrease(amount);
+                                    }
                                 }
-                            }
-                        });
-                    }
-                },
-                {
-                    name: "PTR2E.ChatContext.SpendLuckSkill.label",
-                    icon: '<i class="fas fa-dice"></i>',
-                    condition: li => {
-                        const message = game.messages.get(li.data("messageId"));
-                        if(!message) return false;
-                        return ["attack"].includes(message.type);
-                    },
-                    callback: li => {
-                        const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e<AttackMessageSystem>;
-                        if(!message) return;
-                        // check if there are no targets (and bail early)
-                        const numTargets = message.system.results.length;
-                        if (numTargets == 0) {
-                            ui.notifications.error("There are no rolls to apply a luck increase to!");
-                            return;
+                            });
                         }
-                        // check if there is exactly one relevant target (if there is, no need to disambiguate)
-                        (async ()=>{
-                            if (numTargets == 1) {
-                                return message.system.results[0];
-                            }
-                            // get the target from a dialog
+                        else if (message.type == "capture") {
+                            const captureMessage = message as ChatMessagePTR2e<CaptureMessageSystem>;
 
-                            return new TargetSelectorPopup(message.system.results.map(r=>{
-                                const currentResult = r.accuracy?.total ?? 0;
-                                const amount = Math.abs((currentResult > 0 ? 0 : Math.ceil(currentResult / -10) * -10 ) - currentResult) || 10;
-                                return {
-                                    uuid: r.target.uuid,
-                                    name: r.target.name,
-                                    img: r.target.img,
-                                    description: game.i18n.format("PTR2E.ChatContext.SpendLuckSkill.requires", { amount }),
-                                };
-                            }), {}).wait().then(targetUuid=>message.system.results.find(r=>r.target.uuid == targetUuid));
-                        })().then((finalized)=>{
-                            if (!finalized) return;
-                            const currentResult = finalized.accuracy?.total ?? 0;
+                            const currentResult = captureMessage.system.rolls.accuracy?.total;
+                            if(currentResult === undefined) return;
 
                             // Get the amount required to get to the next increment of -10, or 0 if the current result is above 0.
                             const amount = Math.abs((currentResult > 0 ? 0 : Math.ceil(currentResult / -10) * -10 ) - currentResult) || 10
@@ -109,40 +86,55 @@ export const ChatContext: PTRHook = {
                                 content: game.i18n.format("PTR2E.ChatContext.SpendLuckSkill.content", { amount }),
                                 yes: {
                                     callback: async () => {
-                                        await message.system.applyLuckIncrease(amount, finalized.target.uuid as ActorUUID);
+                                        await captureMessage.system.applyLuckIncrease(amount);
                                     }
                                 }
                             });
-                        });
-                    }
-                },
-                {
-                    name: "PTR2E.ChatContext.SpendLuckSkill.label",
-                    icon: '<i class="fas fa-dice"></i>',
-                    condition: li => {
-                        const message = game.messages.get(li.data("messageId"));
-                        if(!message) return false;
-                        return ["capture"].includes(message.type);
-                    },
-                    callback: li => {
-                        const message = game.messages.get(li.data("messageId")) as ChatMessagePTR2e<CaptureMessageSystem>;
-                        if(!message) return;
-                        const currentResult = message.system.rolls.accuracy?.total;
-                        if(currentResult === undefined) return;
-
-                        // Get the amount required to get to the next increment of -10, or 0 if the current result is above 0.
-                        const amount = Math.abs((currentResult > 0 ? 0 : Math.ceil(currentResult / -10) * -10 ) - currentResult) || 10
-                        foundry.applications.api.DialogV2.confirm({
-                            window: {
-                                title: "PTR2E.ChatContext.SpendLuckSkill.title",
-                            },
-                            content: game.i18n.format("PTR2E.ChatContext.SpendLuckSkill.content", { amount }),
-                            yes: {
-                                callback: async () => {
-                                    await message.system.applyLuckIncrease(amount);
-                                }
+                        }
+                        else if (message.type == "attack") {
+                            const attackMessage = message as ChatMessagePTR2e<AttackMessageSystem>;
+                            // check if there are no targets (and bail early)
+                            const numTargets = attackMessage.system.results.length;
+                            if (numTargets == 0) {
+                                ui.notifications.error("There are no rolls to apply a luck increase to!");
+                                return;
                             }
-                        });
+                            // check if there is exactly one relevant target (if there is, no need to disambiguate)
+                            (async ()=>{
+                                if (numTargets == 1) {
+                                    return attackMessage.system.results[0];
+                                }
+                                // get the target from a dialog
+
+                                return new TargetSelectorPopup(attackMessage.system.results.map(r=>{
+                                    const currentResult = r.accuracy?.total ?? 0;
+                                    const amount = Math.abs((currentResult > 0 ? 0 : Math.ceil(currentResult / -10) * -10 ) - currentResult) || 10;
+                                    return {
+                                        uuid: r.target.uuid,
+                                        name: r.target.name,
+                                        img: r.target.img,
+                                        description: game.i18n.format("PTR2E.ChatContext.SpendLuckSkill.requires", { amount }),
+                                    };
+                                }), {}).wait().then(targetUuid=>attackMessage.system.results.find(r=>r.target.uuid == targetUuid));
+                            })().then((finalized)=>{
+                                if (!finalized) return;
+                                const currentResult = finalized.accuracy?.total ?? 0;
+
+                                // Get the amount required to get to the next increment of -10, or 0 if the current result is above 0.
+                                const amount = Math.abs((currentResult > 0 ? 0 : Math.ceil(currentResult / -10) * -10 ) - currentResult) || 10
+                                foundry.applications.api.DialogV2.confirm({
+                                    window: {
+                                        title: "PTR2E.ChatContext.SpendLuckSkill.title",
+                                    },
+                                    content: game.i18n.format("PTR2E.ChatContext.SpendLuckSkill.content", { amount }),
+                                    yes: {
+                                        callback: async () => {
+                                            await attackMessage.system.applyLuckIncrease(amount, finalized.target.uuid as ActorUUID);
+                                        }
+                                    }
+                                });
+                            });
+                        }
                     }
                 },
             ]
