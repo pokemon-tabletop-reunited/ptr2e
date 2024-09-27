@@ -3,7 +3,7 @@ import ChangeForm from "./base.ts";
 
 class RollOptionForm extends ChangeForm<RollOptionChangeSystem> {
     override get template() {
-        return "/systems/ptr2e/templates/effects/changes/roll-option.hbs";
+        return "systems/ptr2e/templates/effects/changes/roll-option.hbs";
     }
 }
 

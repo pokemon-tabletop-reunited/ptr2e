@@ -1,12 +1,14 @@
 {
   "name": "Bone Club",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/ground_icon.svg",
+  "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "bone-club",
     "description": "",
     "traits": [
-      "bone"
+      "bone",
+      "flinch-chance-4",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -15,6 +17,7 @@
         "type": "attack",
         "traits": [
           "bone",
+          "flinch-chance-4",
           "pp-updated"
         ],
         "range": {
@@ -35,7 +38,7 @@
         "types": [
           "ground"
         ],
-        "description": "Effect: On hit, the target has a 10% chance of gaining @Affliction[flinched] 4.",
+        "description": "Effect: On hit, the target has a 10% chance of being Flinched.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

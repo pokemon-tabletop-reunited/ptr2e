@@ -1,13 +1,14 @@
 {
   "name": "Expanding Force",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "expanding-force",
     "description": "",
     "traits": [
       "environ",
-      "push-2"
+      "push-1",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -15,18 +16,17 @@
         "name": "Expanding Force",
         "type": "attack",
         "traits": [
-          "environ",
-          "push-2",
+          "push-1",
           "pp-updated"
         ],
         "range": {
           "target": "emanation",
-          "distance": 3,
+          "distance": 1,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -37,7 +37,40 @@
         "types": [
           "psychic"
         ],
-        "description": "Effect: While the user is affected by Psychic Terrain.",
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "expanding-force-empowered",
+        "name": "Expanding Force (Empowered)",
+        "type": "attack",
+        "traits": [
+          "environ",
+          "push-3",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": "While the user is affected by Psychic Terrain."
+        },
+        "category": "special",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,

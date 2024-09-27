@@ -47,39 +47,39 @@ export default class TokenPanel extends foundry.applications.api.HandlebarsAppli
     static override PARTS = {
         info: {
             id: "info",
-            template: "/systems/ptr2e/templates/apps/token-panel/info.hbs",
+            template: "systems/ptr2e/templates/apps/token-panel/info.hbs",
         },
         party: {
             id: "party",
-            template: "/systems/ptr2e/templates/apps/token-panel/party.hbs",
+            template: "systems/ptr2e/templates/apps/token-panel/party.hbs",
         },
         nav: {
             id: "nav",
-            template: "/systems/ptr2e/templates/apps/token-panel/nav.hbs",
+            template: "systems/ptr2e/templates/apps/token-panel/nav.hbs",
         },
         "attack-slots": {
             id: "attack-slots",
-            template: "/systems/ptr2e/templates/apps/token-panel/attack-slots.hbs",
+            template: "systems/ptr2e/templates/apps/token-panel/attack-slots.hbs",
         },
         "other-attacks": {
             id: "other-attacks",
-            template: "/systems/ptr2e/templates/apps/token-panel/attack-other.hbs",
+            template: "systems/ptr2e/templates/apps/token-panel/attack-other.hbs",
         },
         passives: {
             id: "passives",
-            template: "/systems/ptr2e/templates/apps/token-panel/passives.hbs",
+            template: "systems/ptr2e/templates/apps/token-panel/passives.hbs",
         },
         generic: {
             id: "generic",
-            template: "/systems/ptr2e/templates/apps/token-panel/generic-actions.hbs",
+            template: "systems/ptr2e/templates/apps/token-panel/generic-actions.hbs",
         },
         skills: {
             id: "skills",
-            template: "/systems/ptr2e/templates/apps/token-panel/favourite-skills.hbs",
+            template: "systems/ptr2e/templates/apps/token-panel/favourite-skills.hbs",
         },
         effects: {
             id: "effects",
-            template: "/systems/ptr2e/templates/apps/token-panel/effects.hbs",
+            template: "systems/ptr2e/templates/apps/token-panel/effects.hbs",
         }
     };
 

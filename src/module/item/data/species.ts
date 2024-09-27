@@ -1,5 +1,5 @@
 import { SpeciesPTR2e } from "@item";
-import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS } from "@module/data/index.ts";
+import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS, Trait } from "@module/data/index.ts";
 import { PokemonType } from "@data";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
@@ -160,26 +160,22 @@ class SpeciesSystem extends SpeciesExtension {
         hint: "PTR2E.FIELDS.diet.hint",
       }),
       abilities: new fields.SchemaField({
-        starting: new fields.SetField(new SlugField({ blank: false }), {
-          required: true,
-          initial: [],
-          label: "PTR2E.FIELDS.abilities.starting.label",
-        }),
-        basic: new fields.SetField(new SlugField({ blank: false }), {
-          required: true,
-          initial: [],
-          label: "PTR2E.FIELDS.abilities.basic.label",
-        }),
-        advanced: new fields.SetField(new SlugField({ blank: false }), {
-          required: true,
-          initial: [],
-          label: "PTR2E.FIELDS.abilities.advanced.label",
-        }),
-        master: new fields.SetField(new SlugField({ blank: false }), {
-          required: true,
-          initial: [],
-          label: "PTR2E.FIELDS.abilities.master.label",
-        }),
+        starting: new fields.ArrayField(new fields.SchemaField({
+            slug: new SlugField({ blank: false }), 
+            uuid: new fields.DocumentUUIDField(),
+        }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.starting.label", },),
+        basic: new fields.ArrayField(new fields.SchemaField({
+            slug: new SlugField({ blank: false }), 
+            uuid: new fields.DocumentUUIDField(),
+        }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.basic.label", },),
+        advanced: new fields.ArrayField(new fields.SchemaField({
+            slug: new SlugField({ blank: false }), 
+            uuid: new fields.DocumentUUIDField(),
+        }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.advanced.label", },),
+        master: new fields.ArrayField(new fields.SchemaField({
+            slug: new SlugField({ blank: false }), 
+            uuid: new fields.DocumentUUIDField(),
+        }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.master.label", },),
       }),
       movement: new fields.SchemaField({
         primary: new fields.ArrayField(
@@ -256,6 +252,16 @@ class SpeciesSystem extends SpeciesExtension {
         initial: null,
       }),
     };
+  }
+
+  static override migrateData(source: SpeciesSystem['_source']) {
+    for (const abGroup of Object.keys(source.abilities)) {
+      source.abilities[abGroup] = (source.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g=>{
+        if (typeof g == "object") return g;
+        return { slug: g, uuid: null };
+      });
+    }
+    return super.migrateData(source);
   }
 
   override prepareBaseData(): void {
@@ -393,6 +399,17 @@ class SpeciesSystem extends SpeciesExtension {
           return 16;
       }
     })();
+
+    // update traits with pokemon types
+    for (const ptype of this.types) {
+      if (!this.traits.has(ptype) && Trait.isValid(ptype) && ptype != "untyped") {
+        this.addTraitFromSlug(ptype, true);
+      }
+    }
+    // check if the species is an underdog
+    if (Object.values(this.stats).reduce((a:unknown, b:unknown)=>(a as number) + (b as number), 0) as number < 510) {
+      this.addTraitFromSlug("underdog", true);
+    }
   }
 
   override async _preCreate(
@@ -405,7 +422,7 @@ class SpeciesSystem extends SpeciesExtension {
 
     if (!data.img || data.img === "icons/svg/item-bag.svg") {
       this.parent.updateSource({
-        img: "/systems/ptr2e/img/icons/species_icon.webp",
+        img: "systems/ptr2e/img/icons/species_icon.webp",
       });
     }
   }
@@ -688,11 +705,18 @@ interface SizeSchema extends foundry.data.fields.DataSchema {
 }
 
 interface AbilitySchema extends foundry.data.fields.DataSchema {
-  starting: foundry.data.fields.SetField<SlugField<string, string, true, false, true>, string[], Set<string>, true, false, true>;
-  basic: foundry.data.fields.SetField<SlugField<string, string, true, false, true>, string[], Set<string>, true, false, true>;
-  advanced: foundry.data.fields.SetField<SlugField<string, string, true, false, true>, string[], Set<string>, true, false, true>;
-  master: foundry.data.fields.SetField<SlugField<string, string, true, false, true>, string[], Set<string>, true, false, true>;
+  starting: foundry.data.fields.ArrayField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
+  basic: foundry.data.fields.ArrayField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
+  advanced: foundry.data.fields.ArrayField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
+  master: foundry.data.fields.ArrayField<foundry.data.fields.SchemaField<AbilityReferenceSchema>, foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[], Set<foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>>, true, false, true>;
 }
+
+export interface AbilityReferenceSchema extends foundry.data.fields.DataSchema {
+    slug: SlugField<string, string, true, false, true>,
+    uuid: foundry.data.fields.DocumentUUIDField<"Item", true, false, false>
+}
+
+export type AbilityReference = Required<{ slug: string, uuid: string }>;
 
 interface MovementSchema extends foundry.data.fields.DataSchema {
   primary: foundry.data.fields.ArrayField<

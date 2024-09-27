@@ -1,13 +1,15 @@
 {
   "name": "Aqua Fang",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/water_icon.svg",
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "aqua-fang",
     "description": "",
     "traits": [
       "jaw",
-      "contact"
+      "contact",
+      "flinch-chance-4",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -17,6 +19,7 @@
         "traits": [
           "jaw",
           "contact",
+          "flinch-chance-4",
           "pp-updated"
         ],
         "range": {
@@ -37,7 +40,7 @@
         "types": [
           "water"
         ],
-        "description": "Effect: On hit, the target has a 10% chance to becomed @Affliction[flinched] 2, and a 10% chance to lose -1 SPD for 5 activations.",
+        "description": "Effect: On hit, the target has a 10% chance of being Flinched, and a 10% chance to lose -1 SPD for 5 activations.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

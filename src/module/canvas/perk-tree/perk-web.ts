@@ -227,8 +227,8 @@ class PerkWeb extends PIXI.Container {
 
         // Load the texture
         const texture =
-            (getTexture("/ui/denim.png") as PIXI.Texture) ??
-            ((await loadTexture("/ui/denim.png")) as PIXI.Texture);
+            (getTexture("ui/denim.png") as PIXI.Texture) ??
+            ((await loadTexture("ui/denim.png")) as PIXI.Texture);
 
         // Create a tiling sprite with the texture
         const background = new TilingSprite(texture, backgroundSize * 2, backgroundSize * 2);

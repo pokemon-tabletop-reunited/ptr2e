@@ -1,7 +1,7 @@
 {
   "name": "metapod",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 11,
     "size": {
@@ -34,20 +34,36 @@
     ],
     "abilities": {
       "starting": [
-        "shed-skin",
-        "shell-armor"
+        {
+          "slug": "shed-skin"
+        },
+        {
+          "slug": "shell-armor"
+        }
       ],
       "basic": [
-        "regenerator",
-        "stalwart"
+        {
+          "slug": "regenerator"
+        },
+        {
+          "slug": "stalwart"
+        }
       ],
       "advanced": [
-        "pollen-field",
-        "sturdy"
+        {
+          "slug": "pollen-field"
+        },
+        {
+          "slug": "sturdy"
+        }
       ],
       "master": [
-        "overcoat",
-        "clear-body"
+        {
+          "slug": "overcoat"
+        },
+        {
+          "slug": "clear-body"
+        }
       ]
     },
     "skills": [
@@ -139,22 +155,18 @@
       "tutor": [
         {
           "name": "bug-bite",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VWTUbiZH5inKfQn8",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "electroweb",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DLoWCGaBlU23XnUI",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "iron-defense",
-          "uuid": "Compendium.ptr2e.core-moves.Item.qSWTxI39iL7ivEVw",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "string-shot",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TijijTYIY2UOVWOn",
           "gen": "heartgold-soulsilver"
         }
       ],
@@ -162,8 +174,7 @@
         {
           "name": "harden",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.vKslOzFQFtNm1yzc"
+          "gen": "brilliant-diamond-and-shining-pearl"
         }
       ]
     },
@@ -221,7 +232,8 @@
       "version": null,
       "previous": null
     },
-    "habitats": []
+    "habitats": [],
+    "slug": "metapod"
   },
   "_id": "DLpRR7pFa4VCgCpC",
   "effects": []

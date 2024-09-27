@@ -40,7 +40,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         skills: {
             id: "skills",
-            template: "/systems/ptr2e/templates/apps/skills-editor.hbs",
+            template: "systems/ptr2e/templates/apps/skills-editor.hbs",
         },
     };
 
@@ -143,8 +143,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         super._attachPartListeners(partId, htmlElement, options);
 
         for (const input of htmlQueryAll(htmlElement, ".skill input")) {
-            input.addEventListener("keyup", this.#onSkillChange.bind(this));
-            input.addEventListener("losefocus", this.#onSkillChange.bind(this));
+            input.addEventListener("change", this.#onSkillChange.bind(this));
         }
     }
 

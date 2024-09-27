@@ -21,7 +21,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
     #activeTab: Maybe<string> = null;
 
     get template() {
-        return "/systems/ptr2e/templates/effects/changes/base.hbs";
+        return "systems/ptr2e/templates/effects/changes/base.hbs";
     }
 
     /** Base proprety path for the contained change */
@@ -126,7 +126,7 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
     async render(): Promise<string> {
         const context = await this._prepareContext();
         context.template = await renderTemplate(this.template, context)
-        return renderTemplate("/systems/ptr2e/templates/effects/changes/partials/outer.hbs", context);
+        return renderTemplate("systems/ptr2e/templates/effects/changes/partials/outer.hbs", context);
     }
 
     /**

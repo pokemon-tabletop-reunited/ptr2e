@@ -1,12 +1,14 @@
 {
   "name": "Headbutt",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "headbutt",
     "description": "",
     "traits": [
-      "contact"
+      "contact",
+      "flinch-chance-2",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -15,6 +17,7 @@
         "type": "attack",
         "traits": [
           "contact",
+          "flinch-chance-2",
           "pp-updated"
         ],
         "range": {
@@ -35,7 +38,7 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: On hit, the target has a 30% chance of gaining @Affliction[flinched] 2.",
+        "description": "Effect: On hit, the target has a 30% chance of being Flinched.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

@@ -1,7 +1,7 @@
 {
   "name": "combee",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 415,
     "size": {
@@ -32,18 +32,30 @@
     ],
     "abilities": {
       "starting": [
-        "hustle"
+        {
+          "slug": "hustle"
+        }
       ],
       "basic": [
-        "angry-buzz",
-        "pollen-field"
+        {
+          "slug": "angry-buzz"
+        },
+        {
+          "slug": "pollen-field"
+        }
       ],
       "advanced": [
-        "multi-headed",
-        "regenerator"
+        {
+          "slug": "multi-headed"
+        },
+        {
+          "slug": "regenerator"
+        }
       ],
       "master": [
-        "power-leech"
+        {
+          "slug": "power-leech"
+        }
       ]
     },
     "skills": [
@@ -160,31 +172,26 @@
       "levelUp": [
         {
           "name": "bug-bite",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VWTUbiZH5inKfQn8",
           "gen": "scarlet-violet",
           "level": 1
         },
         {
           "name": "gust",
-          "uuid": "Compendium.ptr2e.core-moves.Item.dsM61qr3wCapgeHF",
           "gen": "scarlet-violet",
           "level": 1
         },
         {
           "name": "struggle-bug",
-          "uuid": "Compendium.ptr2e.core-moves.Item.leKdbO5Q2dbC0bTl",
           "gen": "scarlet-violet",
           "level": 1
         },
         {
           "name": "sweet-scent",
-          "uuid": "Compendium.ptr2e.core-moves.Item.zA5XW7baWLv7XUqt",
           "gen": "scarlet-violet",
           "level": 1
         },
         {
           "name": "bug-buzz",
-          "uuid": "Compendium.ptr2e.core-moves.Item.RO4Yx0d7iPMLlmFN",
           "gen": "ultra-sun-ultra-moon",
           "level": 29
         }
@@ -192,67 +199,54 @@
       "tutor": [
         {
           "name": "air-cutter",
-          "uuid": "Compendium.ptr2e.core-moves.Item.tzBM2qbr1HMhMd35",
           "gen": "heartgold-soulsilver"
         },
         {
           "name": "dual-wingbeat",
-          "uuid": "Compendium.ptr2e.core-moves.Item.zf1mgWF9psVUe4uK",
           "gen": "sword-shield"
         },
         {
           "name": "endeavor",
-          "uuid": "Compendium.ptr2e.core-moves.Item.KQAFaapoBxfiS3me",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "lunge",
-          "uuid": "Compendium.ptr2e.core-moves.Item.NZ9YbAGse8EPFlG6",
           "gen": "scarlet-violet"
         },
         {
           "name": "mud-slap",
-          "uuid": "Compendium.ptr2e.core-moves.Item.cS5v7i8RPSXni7Cn",
           "gen": "heartgold-soulsilver"
         },
         {
           "name": "ominous-wind",
-          "uuid": "Compendium.ptr2e.core-moves.Item.ldbAbUuyzZpiYKDh",
           "gen": "heartgold-soulsilver"
         },
         {
           "name": "skitter-smack",
-          "uuid": "Compendium.ptr2e.core-moves.Item.gxhNlns100h709Oq",
           "gen": "scarlet-violet"
         },
         {
           "name": "sleep-talk",
-          "uuid": "Compendium.ptr2e.core-moves.Item.lmpvIU1s0odo4fmQ",
           "gen": "scarlet-violet"
         },
         {
           "name": "snore",
-          "uuid": "Compendium.ptr2e.core-moves.Item.4XGhnE4bWGYPKRxO",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "string-shot",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TijijTYIY2UOVWOn",
           "gen": "heartgold-soulsilver"
         },
         {
           "name": "swift",
-          "uuid": "Compendium.ptr2e.core-moves.Item.6WFfTWkoMPozYk0g",
           "gen": "heartgold-soulsilver"
         },
         {
           "name": "tailwind",
-          "uuid": "Compendium.ptr2e.core-moves.Item.u9S8zbICHVUBS1Gx",
           "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "tera-blast",
-          "uuid": "Compendium.ptr2e.core-moves.Item.13ujOwTEjKRN9bpE",
           "gen": "scarlet-violet"
         }
       ]
@@ -297,7 +291,8 @@
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "slug": "combee"
   },
   "_id": "v9agBcB1ewBRiDPX",
   "effects": []

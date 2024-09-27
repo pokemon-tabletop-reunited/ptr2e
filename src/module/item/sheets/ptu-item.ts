@@ -6,7 +6,7 @@ import { ItemSheetOptions } from "@item/sheet.ts";
 export default class PTUSheet extends DocumentSheet {
     static override get defaultOptions() {
         const options = super.defaultOptions;
-        options.template = "/systems/ptr2e/templates/ptu-conversion.hbs";
+        options.template = "systems/ptr2e/templates/ptu-conversion.hbs";
         options.width = 580;
         options.height = 680;
         options.classes.push("ptu-sheet");
