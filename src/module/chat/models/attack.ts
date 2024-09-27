@@ -292,7 +292,6 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
       return rolls;
     };
-    console.log("this.context before ctx set", this.context, this.results);
     const context: AttackMessageRenderContext =
       this.context ??
       (this.context = {
@@ -377,7 +376,6 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         })() : [],
       });
 
-    console.log("context", context, this.results, this.overrides);
     return renderTemplate("systems/ptr2e/templates/chat/attack.hbs", context);
   }
 
