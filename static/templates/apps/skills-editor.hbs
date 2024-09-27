@@ -38,6 +38,13 @@
         </div>
     </fieldset>
     <footer class="controls">
+        {{#if (gt points.available "-1")}}
         <button type="submit">Apply Investment</button>
+        {{else}}
+        {{#if showOverrideSubmit}}
+        <button type="submit" formnovalidate="formnovalidate">Override Restrictions and Apply</button>
+        {{/if}}
+        <p>You do not have enough points to allocate this.</p>
+        {{/if}}
     </footer>
 </section>

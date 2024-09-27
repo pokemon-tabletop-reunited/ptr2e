@@ -132,6 +132,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             isReroll:
                 !levelOne || (levelOne && this.document.system.skills.get("luck")!.value! > 1),
             levelOne,
+            showOverrideSubmit: game?.user?.isGM ?? false,
         };
     }
 
