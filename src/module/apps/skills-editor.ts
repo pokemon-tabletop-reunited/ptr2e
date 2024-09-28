@@ -163,8 +163,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         if (!skill) return;
 
         skill.investment = value;
-        const scrollTop = this.element.querySelector(".scroll")?.scrollTop;
         // get scroll location
+        const scrollTop = this.element.querySelector(".scroll")?.scrollTop;
         this.render({}).then(()=>{
             // set the scroll location
             if (!scrollTop) return;
