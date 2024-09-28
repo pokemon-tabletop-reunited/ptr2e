@@ -122,7 +122,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         // clamp the max to not exceed the available points
         const skills = this.skills.map((s)=>({
             ...s,
-            max: Math.min(s.max, s.investment + points.available!),
+            max: Math.max(s.min, Math.min(s.max, s.investment + points.available!)),
         }))
 
         // check if this configuration is valid, and can pass validation
