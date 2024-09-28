@@ -39,12 +39,12 @@
     </fieldset>
     <footer class="controls">
         {{#if valid}}
-        <button type="submit">Apply Investment</button>
+        <button type="submit">{{localize "PTR2E.SkillsEditor.Apply.apply"}}</button>
         {{else}}
         {{#if showOverrideSubmit}}
-        <button type="submit" formnovalidate="formnovalidate">Override Restrictions and Apply</button>
+        <button type="submit" formnovalidate="formnovalidate">{{localize "PTR2E.SkillsEditor.Apply.override"}}</button>
         {{/if}}
-        <p>You do not have enough points to allocate this.</p>
+        <p>{{localize "PTR2E.SkillsEditor.Apply.fail"}}</p>
         {{/if}}
     </footer>
 </section>
