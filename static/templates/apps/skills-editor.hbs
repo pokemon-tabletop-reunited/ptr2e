@@ -38,7 +38,7 @@
         </div>
     </fieldset>
     <footer class="controls">
-        {{#if (gt points.available "-1")}}
+        {{#if valid}}
         <button type="submit">Apply Investment</button>
         {{else}}
         {{#if showOverrideSubmit}}

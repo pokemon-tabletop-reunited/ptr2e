@@ -125,6 +125,9 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             max: Math.min(s.max, s.investment + points.available!),
         }))
 
+        // check if this configuration is valid, and can pass validation
+        const valid = points.available >= 0 && !skills.some((skill)=>skill.investment < skill.min || skill.investment > skill.max);
+
         return {
             document: this.document,
             skills,
@@ -132,6 +135,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             isReroll:
                 !levelOne || (levelOne && this.document.system.skills.get("luck")!.value! > 1),
             levelOne,
+            valid,
             showOverrideSubmit: game?.user?.isGM ?? false,
         };
     }
