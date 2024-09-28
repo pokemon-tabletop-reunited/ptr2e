@@ -163,7 +163,15 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         if (!skill) return;
 
         skill.investment = value;
-        this.render({});
+        const scrollTop = this.element.querySelector(".scroll")?.scrollTop;
+        // get scroll location
+        this.render({}).then(()=>{
+            // set the scroll location
+            if (!scrollTop) return;
+            const scroll = this.element.querySelector(".scroll");
+            if (!scroll) return;
+            scroll.scrollTop = scrollTop;
+        });
     }
 
     static #onResetSkills(this: SkillsEditor) {
