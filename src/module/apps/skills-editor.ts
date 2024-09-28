@@ -371,9 +371,13 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         _form: HTMLFormElement,
         formData: FormDataExtended
     ) {
+        console.log("SkillsEditor.#onSubmit(", this, _event, _form, formData);
+
         const data = fu.expandObject<Record<string, { investment: string }>>(formData.object);
         const skills = this.document.system.toObject().skills as SkillPTR2e["_source"][];
         const maxInvestment = this.document.system.advancement.level === 1 ? 90 : 100;
+
+        const avoidValidation = !!((_event as SubmitEvent)?.submitter?.getAttribute("formnovalidate"));
 
         let resourceMod = 0;
         for (const skill of skills) {
@@ -382,8 +386,12 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             const investment = parseInt(skillData.investment);
             if (isNaN(investment) || !investment) continue;
 
-            if(skill.slug === "resources" && investment < 0) resourceMod = investment; 
-            skill.rvs = Math.clamp((skill.rvs ?? 0) + investment, skill.slug === "resources" ? -maxInvestment : 0, maxInvestment);
+            if(skill.slug === "resources" && investment < 0) resourceMod = investment;
+            if (avoidValidation) {
+                skill.rvs = (skill.rvs ?? 0) + investment;
+            } else {
+                skill.rvs = Math.clamp((skill.rvs ?? 0) + investment, skill.slug === "resources" ? -maxInvestment : 0, maxInvestment);
+            }
             delete data[skill.slug];
         }
 
@@ -396,10 +404,12 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
             if(slug === "resources" && investment < 0) resourceMod = investment;
 
+            const rvs = avoidValidation ? investment : Math.clamp(investment, slug === "resources" ? -maxInvestment : 0, maxInvestment);
+
             skills.push({
                 slug,
                 value: 1,
-                rvs: Math.clamp(investment, slug === "resources" ? -maxInvestment : 0, maxInvestment),
+                rvs,
                 favourite: skillData.favourite ?? false,
                 hidden: skillData.hidden ?? false,
                 group: skillData.group || undefined,
