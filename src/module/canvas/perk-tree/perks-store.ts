@@ -49,6 +49,8 @@ class PerkStore extends Collection<PTRNode> {
         this._rootNodes = null;
         const perkManager = await game.ptr.perks.initialize();
         let hasRoot = false;
+        const allPerks = [];
+        const purchasedPerks = []
         for (const perk of perkManager.perks.values()) {
             if (perk.system.node && perk.system.node.i !== null && perk.system.node.j !== null) {
                 const connected = new Set(perk.system.node.connected);
@@ -66,11 +68,15 @@ class PerkStore extends Collection<PTRNode> {
                     connected,
                     state
                 });
-                if(state === PerkState.purchased) this.updatePerkState(perk, actor!, perkManager);
-                if(state === PerkState.unavailable) this.tryUpdatePerkState(this.get(`${perk.system.node.i},${perk.system.node.j}`)!, actor, perkManager);
+                allPerks.push(perk);
+                if(state === PerkState.purchased) purchasedPerks.push(perk);
                 if(isRoot && state === PerkState.purchased) hasRoot = true;
             }
         }
+
+        allPerks.forEach((perk)=>this.addMissingPerkConnections(perk, perkManager));
+        purchasedPerks.forEach((perk)=>this.updatePerkState(perk, actor!, perkManager));
+
         for(const rootNode of this.filter(node => node.perk.system.node.type === "root")) {
             if(!hasRoot) rootNode.perk.system.cost = 0;
 
@@ -118,33 +124,27 @@ class PerkStore extends Collection<PTRNode> {
      * @param actor 
      * @param manager 
      */
-    tryUpdatePerkState(currentNode: PTRNode, actor: Maybe<ActorPTR2e>, manager: PerkManager) {
-        const isRootNode = currentNode.perk.system.node.type === "root"
-
-        for(const connected of new Set(currentNode.connected)) {
+    addMissingPerkConnections(currentPerk: PerkPTR2e, manager: PerkManager) {
+        if (!currentPerk?.system?.node?.connected) return;
+      
+        const isRootNode = currentPerk.system.node.type === "root";
+      
+        for(const connected of new Set(currentPerk.system.node?.connected ?? [])) {
             const connectedPerk = manager.perks.get(connected);
             if(!connectedPerk || connectedPerk.system.node.i === null || connectedPerk.system.node.j === null) continue;
             
             const connectedNode = this.get(`${connectedPerk.system.node.i},${connectedPerk.system.node.j}`);
-            if(!connectedNode) {
-                if(!this.missingConnections.has(connected)) this.missingConnections.set(connected, new Set([currentNode.perk.slug]));
-                else this.missingConnections.get(connected)!.add(currentNode.perk.slug);
+            if(!connectedNode) continue;
+            if(connectedNode && !(connectedNode?.connected ?? new Set()).has(currentPerk.system.slug)) {
+                if(!this.missingConnections.has(connected)) this.missingConnections.set(connected, new Set([currentPerk.slug]));
+                else this.missingConnections.get(connected)!.add(currentPerk.slug);
                 continue;
             }
             if(connectedNode.state !== PerkState.purchased) continue;
-
-            if(isRootNode) currentNode.perk.system.cost = connectedPerk.system.cost;
-
-            //TODO: Implement proper prerequisite checking
-            if(actor && actor.system.advancement.advancementPoints.available >= currentNode.perk.system.cost) {
-                currentNode.state = PerkState.available;
-            }
-            else {
-                currentNode.state = PerkState.connected;
-            }
-            break;
+      
+            if(isRootNode) currentPerk.system.cost = connectedPerk.system.cost;
         }
-    }
+      }
 
     getEdge(node1: PTRNode, node2: PTRNode): PIXI.Graphics | null {
         return (
