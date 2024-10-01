@@ -15,7 +15,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     static override DEFAULT_OPTIONS = fu.mergeObject(super.DEFAULT_OPTIONS, {
         classes: ["stats-form"],
         position: {
-            height: 600,
+            height: 620,
             width: 700,
         },
         form: {
