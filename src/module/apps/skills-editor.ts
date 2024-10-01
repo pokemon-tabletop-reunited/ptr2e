@@ -383,8 +383,6 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         _form: HTMLFormElement,
         formData: FormDataExtended
     ) {
-        console.log("SkillsEditor.#onSubmit(", this, _event, _form, formData);
-
         const data = fu.expandObject<Record<string, { investment: string }>>(formData.object);
         const skills = this.document.system.toObject().skills as SkillPTR2e["_source"][];
         const maxInvestment = this.document.system.advancement.level === 1 ? 90 : 100;
