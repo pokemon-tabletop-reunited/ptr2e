@@ -15,7 +15,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     static override DEFAULT_OPTIONS = fu.mergeObject(super.DEFAULT_OPTIONS, {
         classes: ["stats-form"],
         position: {
-            height: 500,
+            height: 600,
             width: 700,
         },
         form: {
@@ -56,12 +56,15 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     }
 
     override async _prepareContext() {
+        const baseMaximums = this._calcBaseMaximums(this.document.system.attributes);
+        console.log(baseMaximums);
         const evMaximums = this._calcEVMaximums(this.document.system.attributes);
         return {
             ...(await super._prepareContext()),
             stats: this.document.system.attributes,
             fields: (this.document.system.schema.fields.attributes as foundry.data.fields.SchemaField<foundry.data.fields.DataSchema>).fields,
-            evMaximums: evMaximums,
+            baseMaximums,
+            evMaximums,
         }
     }
 
@@ -76,8 +79,11 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
                 for (const element of form.querySelectorAll("input,select,textarea")) {
                     element.addEventListener("change", () => form.dispatchEvent(new SubmitEvent("submit", {cancelable: true})));
                 }
-                for (const range of form.querySelectorAll("input[type=range]")) {
-                    range.addEventListener("input", this._onChangeRange.bind(this));
+                for (const range of form.querySelectorAll("#base-stats-form input[type=range]")) {
+                    range.addEventListener("input", this._onChangeBaseRange.bind(this));
+                }
+                for (const range of form.querySelectorAll("#ev-stats-form input[type=range]")) {
+                    range.addEventListener("input", this._onChangeEVRange.bind(this));
                 }
             }
         }
@@ -88,6 +94,32 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         if (options.parts?.includes("statsChart")) {
             this._statsChart.render();
         }
+    }
+
+    _calcBaseMaximums(stats: Attributes) {
+        const BASE_MIN = 40;
+        const result = {
+            total: 0
+        } as Record<keyof Attributes, number> & { total: number };
+        for (const k in stats) {
+            const key = k as keyof Attributes;
+            result[key] = this.#calcBaseMaximum(key, stats);
+            result.total += Math.max(stats[key].base - BASE_MIN, 0);
+        }
+
+        return result;
+    }
+
+    #calcBaseMaximum(stat: keyof Attributes, stats: Attributes) {
+        const BASE_MIN = 40;
+        const BASE_MAX = 90;
+        const BASE_POINTS = 110;
+        let total = 0;
+        for (const k in stats) {
+            const otherKey = k as keyof Attributes;
+            if (otherKey !== stat) total += Math.max(stats[otherKey].base - BASE_MIN, 0);
+        }
+        return Math.min(BASE_MAX, BASE_POINTS + BASE_MIN - total);
     }
 
     _calcEVMaximums(stats: Attributes) {
@@ -112,7 +144,22 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         return Math.min(200, 508 - total);
     }
 
-    _onChangeRange(event: Event) {
+    _onChangeBaseRange(event: Event) {
+        const field = (event.currentTarget as HTMLInputElement).parentElement?.querySelector(".range-value");
+        if (field) {
+            if (field.tagName === "INPUT") (field as HTMLInputElement).value = (event.target as HTMLInputElement).value;
+            else (field as HTMLElement).innerHTML = (event.target as HTMLInputElement).value;
+        }
+
+        const rangeInput = event.target as HTMLInputElement;
+        const key = rangeInput.name.replaceAll("system.", "").replaceAll("attributes.", "").replaceAll(".base", "") as keyof Attributes;
+        const attributes = fu.duplicate(this.document.system.attributes);
+        attributes[key].base = parseInt(rangeInput.value);
+        const max = this.#calcBaseMaximum(key, attributes);
+        rangeInput.max = max.toString();
+    }
+
+    _onChangeEVRange(event: Event) {
         const field = (event.currentTarget as HTMLInputElement).parentElement?.querySelector(".range-value");
         if (field) {
             if (field.tagName === "INPUT") (field as HTMLInputElement).value = (event.target as HTMLInputElement).value;
@@ -130,7 +177,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     static async #onSubmitBaseStatsForm(this: StatsForm, event: SubmitEvent | Event, form: HTMLFormElement, formData: FormDataExtended) {
         event.preventDefault();
         await this.#updateDocument(event as SubmitEvent, form, formData);
-        this.render({parts: ["statsChart"]});
+        this.render({parts: ["statsChart", "baseStats"]});
     }
 
     /**

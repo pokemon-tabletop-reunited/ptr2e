@@ -2403,7 +2403,7 @@ body {
 
             display: grid;
             grid-template-columns: 55% 45%;
-            grid-template-rows: 35% 65%;
+            grid-template-rows: 1fr 1fr;
             grid-template-areas:
                 "baseStats statsChart"
                 "evStats statsChart";
@@ -2424,83 +2424,21 @@ body {
                 grid-area: baseStats;
 
                 form#base-stats-form {
-                    display: grid;
-                    grid-template-columns: 30% 15% 40% 15%;
-                    grid-template-rows: min-content 1fr 1fr 1fr;
-                    grid-template-areas:
-                        "header header header header"
-                        "hpLabel hpValue spatkLabel spatkValue"
-                        "atkLabel atkValue spdefLabel spdefValue"
-                        "defLabel defValue spdLabel spdValue";
+                    display: flex;
+                    flex-direction: column;
 
                     label {
                         text-align: left;
                         align-self: center;
-
-                        &.hp {
-                            grid-area: hpLabel;
-                        }
-
-                        &.atk {
-                            grid-area: atkLabel;
-                        }
-
-                        &.def {
-                            grid-area: defLabel;
-                        }
-
-                        &.spa {
-                            grid-area: spatkLabel;
-                            margin-left: 1rem;
-                        }
-
-                        &.spd {
-                            grid-area: spdefLabel;
-                            margin-left: 1rem;
-                        }
-
-                        &.spe {
-                            grid-area: spdLabel;
-                            margin-left: 1rem;
-                        }
                     }
 
                     input {
                         text-align: center;
                         align-self: center;
-
-                        &.hp {
-                            grid-area: hpValue;
-                        }
-
-                        &.atk {
-                            grid-area: atkValue;
-                        }
-
-                        &.def {
-                            grid-area: defValue;
-                        }
-
-                        &.spa {
-                            grid-area: spatkValue;
-                        }
-
-                        &.spd {
-                            grid-area: spdefValue;
-                        }
-
-                        &.spe {
-                            grid-area: spdValue;
-                        }
                     }
 
                     h1 {
-                        grid-area: header;
                         text-align: center;
-                    }
-
-                    input[type="submit"] {
-                        grid-area: submit;
                     }
                 }
             }
