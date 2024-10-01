@@ -354,6 +354,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
     this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
+    this.inventoryPoints.bonus = 0;
   }
 
   _initializeModifiers() {
@@ -439,7 +440,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
     this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
-    this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
+    this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10) + (this.inventoryPoints.bonus as number);
   }
 
   _calculateStatTotal(stat: Attribute | Omit<Attribute, "stage">): number {
