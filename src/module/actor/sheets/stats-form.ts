@@ -60,7 +60,6 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
 
     override async _prepareContext() {
         const baseMaximums = this._calcBaseMaximums(this.document.system.attributes);
-        console.log(baseMaximums);
         const evMaximums = this._calcEVMaximums(this.document.system.attributes);
         return {
             ...(await super._prepareContext()),
