@@ -7,7 +7,10 @@
     "description": "<p>Effect: The user moves up to their Burrow or Overland Score. The surfaces in spaces the user passed through and those in the spaces adjacent to those are all Tilled and have other Hazards in those spaces removed. When beginning their Activation on a Tilled surface, Grass Type creatures gain +1 ATK and SPATK stage for 3 activations. If Grassy Terrain is active in a Tilled space, the stage increase is increased to +2, and Grass Type creatures heal an additional Tick of HP from Grassy Terrain's effect while in an affected Tilled space.</p>",
     "traits": [
       "earthbound",
-      "environ"
+      "environ",
+      "hazard",
+      "field",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -17,7 +20,9 @@
         "traits": [
           "earthbound",
           "environ",
-          "hazard"
+          "hazard",
+          "field",
+          "pp-updated"
         ],
         "range": {
           "target": "object",
