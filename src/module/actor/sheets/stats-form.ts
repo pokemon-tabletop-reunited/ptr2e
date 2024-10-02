@@ -2,6 +2,7 @@ import { StatsChart } from "./stats-chart.ts";
 import { Attributes, ActorPTR2e } from "@actor";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { DocumentSheetConfiguration } from "@item/sheets/document.ts";
+import { debounceAsync } from "@utils";
 
 export default class StatsForm extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2<ActorPTR2e, foundry.applications.api.HandlebarsDocumentSheetConfiguration>) {
 
@@ -28,14 +29,16 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
             id: "baseStats",
             template: "systems/ptr2e/templates/actor/stats-form-parts/base-stats-form.hbs",
             forms: {
-                "#base-stats-form": {handler: StatsForm.#onSubmitBaseStatsForm }
+                // @ts-expect-error - This is valid
+                "#base-stats-form": {handler: debounceAsync(StatsForm.#onSubmitBaseStatsForm, 200) }
             }
         },
         evStats: {
             id: "evStats",
             template: "systems/ptr2e/templates/actor/stats-form-parts/ev-stats-form.hbs",
             forms: {
-                "#ev-stats-form": {handler: StatsForm.#onSubmitEvStatsForm }
+                // @ts-expect-error - This is valid
+                "#ev-stats-form": {handler: debounceAsync(StatsForm.#onSubmitEvStatsForm, 200) }
             }
         },
         statsChart: {
@@ -80,10 +83,10 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
                     element.addEventListener("change", () => form.dispatchEvent(new SubmitEvent("submit", {cancelable: true})));
                 }
                 for (const range of form.querySelectorAll("#base-stats-form input[type=range]")) {
-                    range.addEventListener("input", this._onChangeBaseRange.bind(this));
+                    range.addEventListener("input", this.onChangeBaseRange);
                 }
                 for (const range of form.querySelectorAll("#ev-stats-form input[type=range]")) {
-                    range.addEventListener("input", this._onChangeEVRange.bind(this));
+                    range.addEventListener("input", this.onChangeEVRange);
                 }
             }
         }
@@ -159,6 +162,9 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         rangeInput.max = max.toString();
     }
 
+    //@ts-expect-error - This is valid
+    private onChangeBaseRange = debounceAsync(this._onChangeBaseRange.bind(this), 200);
+
     _onChangeEVRange(event: Event) {
         const field = (event.currentTarget as HTMLInputElement).parentElement?.querySelector(".range-value");
         if (field) {
@@ -173,6 +179,9 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         const max = this.#calcEvMaximum(key, attributes);
         rangeInput.max = max.toString();
     }
+
+    //@ts-expect-error - This is valid
+    private onChangeEVRange = debounceAsync(this._onChangeEVRange.bind(this), 200);
 
     static async #onSubmitBaseStatsForm(this: StatsForm, event: SubmitEvent | Event, form: HTMLFormElement, formData: FormDataExtended) {
         event.preventDefault();
