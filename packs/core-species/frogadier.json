@@ -1,7 +1,7 @@
 {
   "name": "frogadier",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 657,
     "size": {
@@ -17,44 +17,61 @@
       "primary": [
         {
           "type": "overland",
-          "value": 13
-        }
-      ],
-      "secondary": [
+          "value": 10
+        },
         {
           "type": "swim",
-          "value": 9
+          "value": 10
         }
-      ]
+      ],
+      "secondary": []
     },
     "traits": [
       "pokemon",
+      "underdog",
       "mud-runner",
       "bipedal",
-      "natural-swimmer"
+      "wallclimber",
+      "fountain"
     ],
     "abilities": {
       "starting": [
-        "torrent",
-        "protean"
+        {
+          "slug": "torrent"
+        },
+        {
+          "slug": "protean"
+        }
       ],
       "basic": [
-        "covert",
-        "anticipation"
+        {
+          "slug": "limber"
+        },
+        {
+          "slug": "long-reach"
+        }
       ],
       "advanced": [
-        "limber",
-        "damp"
+        {
+          "slug": "damp"
+        },
+        {
+          "slug": "anticipation"
+        }
       ],
       "master": [
-        "low-blow",
-        "opportunist"
+        {
+          "slug": "low-blow"
+        },
+        {
+          "slug": "water-veil"
+        }
       ]
     },
     "skills": [
       {
         "slug": "acrobatics",
-        "value": 25,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -62,22 +79,6 @@
       },
       {
         "slug": "climb",
-        "value": 25,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "conversation",
-        "value": 10,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "disguise",
         "value": 35,
         "rvs": 0,
         "favourite": false,
@@ -85,8 +86,32 @@
         "group": null
       },
       {
+        "slug": "conversation",
+        "value": 20,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "disguise",
+        "value": 25,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "fast-talk",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "lift",
-        "value": 15,
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -94,7 +119,7 @@
       },
       {
         "slug": "listen",
-        "value": 20,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -102,7 +127,7 @@
       },
       {
         "slug": "natural-world",
-        "value": 25,
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -110,7 +135,7 @@
       },
       {
         "slug": "navigate",
-        "value": 15,
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -118,7 +143,7 @@
       },
       {
         "slug": "running",
-        "value": 20,
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -126,7 +151,7 @@
       },
       {
         "slug": "sleight-of-hand",
-        "value": 30,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -134,7 +159,7 @@
       },
       {
         "slug": "spot",
-        "value": 25,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -142,7 +167,7 @@
       },
       {
         "slug": "stealth",
-        "value": 30,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -150,14 +175,30 @@
       },
       {
         "slug": "survival",
-        "value": 25,
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "track",
+        "value": 30,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
         "group": null
       }
     ],
-    "slug": "",
+    "slug": "frogadier",
     "stats": {
       "hp": 54,
       "atk": 63,
@@ -174,404 +215,327 @@
         {
           "name": "pound",
           "level": 1,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.hNMpftRedPFspJlH"
+          "gen": "scarlet-violet"
         },
         {
           "name": "growl",
           "level": 1,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.j42qPlBO6UlbdaV6"
+          "gen": "scarlet-violet"
         },
         {
           "name": "water-gun",
           "level": 1,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VtnAhpadCcYuPWPK"
+          "gen": "scarlet-violet"
         },
         {
           "name": "bubble",
           "level": 5,
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.HUlQklA9AdqWFii9"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "quick-attack",
           "level": 8,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.D7s1YrVm8EIkyQa2"
+          "gen": "scarlet-violet"
         },
         {
           "name": "lick",
           "level": 10,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Qdsf2xwSPLu5qbWK"
+          "gen": "scarlet-violet"
         },
         {
           "name": "water-pulse",
           "level": 14,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.44KwwvaafrEiWrPY"
+          "gen": "scarlet-violet"
         },
         {
           "name": "smokescreen",
           "level": 19,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.pYNVsTCmUw7oWhRg"
+          "gen": "scarlet-violet"
         },
         {
           "name": "round",
           "level": 23,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Sk06NeMcS1RTMcjo"
+          "gen": "scarlet-violet"
         },
         {
           "name": "fling",
           "level": 28,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Hd7hMOku5jpIcppt"
+          "gen": "scarlet-violet"
         },
         {
           "name": "smack-down",
           "level": 33,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Oe8RUc2NyOogqMD3"
+          "gen": "scarlet-violet"
         },
         {
           "name": "substitute",
           "level": 40,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.wlCtO7DEZMMbEwcn"
+          "gen": "scarlet-violet"
         },
         {
           "name": "bounce",
           "level": 45,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.g76rxtBqkhKFROds"
+          "gen": "scarlet-violet"
         },
         {
           "name": "double-team",
           "level": 50,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.187bZlHjZF5QH7np"
+          "gen": "scarlet-violet"
         },
         {
           "name": "hydro-pump",
           "level": 56,
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.fK1Auf8fdnd5qLCw"
+          "gen": "scarlet-violet"
         }
       ],
       "tutor": [
         {
           "name": "counter",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TzmxWMEVbUTipXGX"
+          "gen": "scarlet-violet"
         },
         {
           "name": "spikes",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.sPdy5PU5itGhlL6e"
+          "gen": "scarlet-violet"
         },
         {
           "name": "toxic-spikes",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.ZPdwItj91QOBjAgC"
+          "gen": "scarlet-violet"
         },
         {
           "name": "switcheroo",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.RcjOhuX3C05aas2b"
+          "gen": "scarlet-violet"
         },
         {
           "name": "retaliate",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.lDDtcDz9efyRjTjZ"
+          "gen": "scarlet-violet"
         },
         {
           "name": "ice-punch",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Y4swIcPTHvLab8Ev"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "low-kick",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.al2jzxSghEeNd7lw"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "snore",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.4XGhnE4bWGYPKRxO"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "spite",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.K2lzFMHQ5Ey3bnzZ"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "icy-wind",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.YoLEpica6f4PLgWO"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "role-play",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.EU3IH3pjOelFqVI9"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "snatch",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.8U5CdSY2okR90rh4"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "gunk-shot",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.YbvoZLameUtUOaJT"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "water-pledge",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.41TblFQ1JlK6gNUd"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "swords-dance",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DfeVcS4PIWcHqut8"
+          "gen": "scarlet-violet"
         },
         {
           "name": "cut",
-          "gen": "omega-ruby-alpha-sapphire",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TkmsrwP0c6jUPCih"
+          "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "take-down",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.uO99VTvrh96awdWK"
+          "gen": "scarlet-violet"
         },
         {
           "name": "surf",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.wGUb0OCzpxaRB31M"
+          "gen": "scarlet-violet"
         },
         {
           "name": "ice-beam",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.vyh3c4td7WZqIt5O"
+          "gen": "scarlet-violet"
         },
         {
           "name": "blizzard",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.pMSwY3ECWqqasF1a"
+          "gen": "scarlet-violet"
         },
         {
           "name": "strength",
-          "gen": "omega-ruby-alpha-sapphire",
-          "uuid": "Compendium.ptr2e.core-moves.Item.gU4QELaIWUt3fRjo"
+          "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "dig",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.90a4UOjXNVJQEjSy"
+          "gen": "scarlet-violet"
         },
         {
           "name": "toxic",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.oTSFbF32HX101PTb"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "waterfall",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.C8ricUjRzb7sX101"
+          "gen": "scarlet-violet"
         },
         {
           "name": "swift",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.6WFfTWkoMPozYk0g"
+          "gen": "scarlet-violet"
         },
         {
           "name": "rest",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DEsVXTtV0dDFdodn"
+          "gen": "scarlet-violet"
         },
         {
           "name": "rock-slide",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.MqMBovlAYBOtthn3"
+          "gen": "scarlet-violet"
         },
         {
           "name": "thief",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.jxorjVcjferdaDBc"
+          "gen": "scarlet-violet"
         },
         {
           "name": "protect",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DwzmkHqd28xR3P3c"
+          "gen": "scarlet-violet"
         },
         {
           "name": "mud-slap",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.cS5v7i8RPSXni7Cn"
+          "gen": "scarlet-violet"
         },
         {
           "name": "endure",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.eEQiYEm2y7wkcKnx"
+          "gen": "scarlet-violet"
         },
         {
           "name": "false-swipe",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.flkctHlLzHAYEjSy"
+          "gen": "scarlet-violet"
         },
         {
           "name": "swagger",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.wYGAvakAQaDex43K"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "attract",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.uqx2cfO9G5hlv2OC"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "sleep-talk",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.lmpvIU1s0odo4fmQ"
+          "gen": "scarlet-violet"
         },
         {
           "name": "return",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VdmiwxXnqCd8WAkU"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "frustration",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.mFqcA84HvScXVSuG"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.1lkeVmjLt8Vp0izT"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "rain-dance",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.tILTZn18N9r8H7cs"
+          "gen": "scarlet-violet"
         },
         {
           "name": "rock-smash",
-          "gen": "omega-ruby-alpha-sapphire",
-          "uuid": "Compendium.ptr2e.core-moves.Item.x8owJfS8Dnlj3Wbe"
+          "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "facade",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.eEIG8jgmrxWgRVMz"
+          "gen": "scarlet-violet"
         },
         {
           "name": "taunt",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.IB5iMsqBlnOZpPM9"
+          "gen": "scarlet-violet"
         },
         {
           "name": "helping-hand",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.losiXPVUcTy72boW"
+          "gen": "scarlet-violet"
         },
         {
           "name": "secret-power",
-          "gen": "omega-ruby-alpha-sapphire",
-          "uuid": "Compendium.ptr2e.core-moves.Item.HwHgkAbouiM0y3Li"
+          "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "dive",
-          "gen": "omega-ruby-alpha-sapphire",
-          "uuid": "Compendium.ptr2e.core-moves.Item.G4SRScedf5uS7s1I"
+          "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "rock-tomb",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Tu2THeD8kqxjgkp0"
+          "gen": "scarlet-violet"
         },
         {
           "name": "aerial-ace",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DBXIJAzomYlauA52"
+          "gen": "scarlet-violet"
         },
         {
           "name": "mud-shot",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.rDnV5BfNxKyYAWam"
+          "gen": "scarlet-violet"
         },
         {
           "name": "u-turn",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DTnhRJBYhTBapjIK"
+          "gen": "scarlet-violet"
         },
         {
           "name": "dark-pulse",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.b0lJe38pFiac5Fo4"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "grass-knot",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.QUfozsylvlJ6LoVT"
+          "gen": "scarlet-violet"
         },
         {
           "name": "echoed-voice",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.HH6HljL6RxmB1N2n"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "scald",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.AJkZffOTAegPVug6"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "acrobatics",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.UjHMbt9e98EuLulz"
+          "gen": "scarlet-violet"
         },
         {
           "name": "work-up",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.Zsg9MXOaKH3vAb6q"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "confide",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.NoHd6SBeivDS66M1"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "power-up-punch",
-          "gen": "omega-ruby-alpha-sapphire",
-          "uuid": "Compendium.ptr2e.core-moves.Item.D6UF5H6BHQoiOLMK"
+          "gen": "omega-ruby-alpha-sapphire"
         },
         {
           "name": "liquidation",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.BfUObup9N2OI7UHa"
+          "gen": "scarlet-violet"
         },
         {
           "name": "tera-blast",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.13ujOwTEjKRN9bpE"
+          "gen": "scarlet-violet"
         },
         {
           "name": "snowscape",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.KQ8pNG4ebggQwd8k"
+          "gen": "scarlet-violet"
         },
         {
           "name": "trailblaze",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.ppPiOCMGpvFlkLLe"
+          "gen": "scarlet-violet"
         },
         {
           "name": "chilling-water",
-          "gen": "scarlet-violet",
-          "uuid": "Compendium.ptr2e.core-moves.Item.wCl2DW4GEEuJ6CGv"
+          "gen": "scarlet-violet"
         }
       ]
     },

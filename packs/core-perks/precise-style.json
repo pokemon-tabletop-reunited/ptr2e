@@ -11,18 +11,45 @@
       "approach": "finesse",
       "archetype": "Support"
     },
-    "description": "<p>The target gains Precise 1.</p>",
+    "description": "<p>The target gains @Affliction[precise] 1.</p>",
     "actions": [
       {
-        "name": "Precise Style",
-        "slug": "precise-style",
-        "description": "<p>The target gains Precise 1.</p>",
+        "name": "Precise!",
+        "slug": "precise",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 1
         },
-        "type": "generic",
-        "traits": []
+        "description": "Effect: The target gains @Affliction[precise] 1.",
+        "type": "generic"
+      },
+      {
+        "name": "Precise! (Self)",
+        "slug": "precise-self",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1
+        },
+        "description": "Effect: The target gains @Affliction[precise] 2.",
+        "type": "generic"
       }
     ],
     "slug": "precise-style",
@@ -49,7 +76,7 @@
     }
   },
   "_id": "bj0EK3ur1N9ULr4A",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
   "effects": [],
   "flags": {
     "core": {

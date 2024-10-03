@@ -1,13 +1,14 @@
 {
   "name": "Fumble",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "fumble",
     "description": "",
     "traits": [
       "basic",
-      "danger-close"
+      "danger-close",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -29,7 +30,7 @@
           "powerPoints": 0,
           "delay": null,
           "priority": null,
-          "trigger": "Activated by a Condition"
+          "trigger": "<p>Activated by an Effect.</p>"
         },
         "category": "physical",
         "power": 40,
@@ -37,10 +38,10 @@
         "types": [
           "untyped"
         ],
-        "description": "Trigger: Activated by a Condition",
+        "description": "<p>Trigger: Activated by an Effect.</p>",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "free": true,
         "slot": null
       }
     ],

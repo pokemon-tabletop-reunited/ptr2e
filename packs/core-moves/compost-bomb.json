@@ -8,7 +8,8 @@
     "slug": null,
     "traits": [
       "explode",
-      "blast-1"
+      "blast-1",
+      "flinch-chance-3"
     ],
     "actions": [
       {
@@ -18,7 +19,8 @@
         "img": "icons/svg/explosion.svg",
         "traits": [
           "explode",
-          "blast-1"
+          "blast-1",
+          "flinch-chance-3"
         ],
         "range": {
           "target": "blast",
@@ -29,8 +31,7 @@
           "activation": "complex",
           "powerPoints": 7,
           "delay": null,
-          "priority": null,
-          "trigger": ""
+          "priority": null
         },
         "variant": null,
         "types": [
@@ -43,7 +44,41 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: If the user has consumed a [Food] item this battle, this Attack's Power doubles, its [Blast X] increases by +1, and this Attack's chance to inflict Flinched increases by +10. On hit, all valid targets have a 10% chance of being Flinched 3.</p>"
+        "description": "<p>Effect: On hit, all valid targets have a 10% chance of being Flinched.</p>"
+      },
+      {
+        "name": "Compost Bomb (Boosted)",
+        "slug": "compost-bomb-boosted",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "explode",
+          "blast-2",
+          "flinch-chance-3"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null,
+        "types": [
+          "grass"
+        ],
+        "category": "special",
+        "power": 140,
+        "accuracy": 90,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Effect: On hit, all valid targets have a 20% chance of being Flinched. This variant can only be used if the user has consumed a [Food] item this battle.</p>"
       }
     ],
     "description": "",

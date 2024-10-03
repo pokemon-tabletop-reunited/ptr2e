@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { ItemPTR2e } from "@item";
 import PerkWeb from "./perk-web.ts";
 import { PTRNode } from "./perks-store.ts";
@@ -39,6 +40,9 @@ class PerkNode extends PIXI.Container {
 
         // Determine state
         this.state = node.state;
+
+        // Whether the note was clicked in the last 200 ms
+        this.wasClicked = false;
     }
 
     get active() {
@@ -328,6 +332,28 @@ class PerkNode extends PIXI.Container {
     async _onClickLeft(_event: PIXI.FederatedPointerEvent) {
         if (!game.ptr.web.editMode) {
             game.ptr.web.hudNode = this;
+
+            if (!this.wasClicked) {
+                // I don't love having to do this, but it looks like the detail field doesn't actually get populated on these events
+                this.wasClicked = true;
+                setInterval(()=>{this.wasClicked = false}, 500);
+            } else {
+                const node = this?.node;
+                const actor = game.ptr.web.actor;
+                if (!node || !actor) return;
+
+                if (node.state !== PerkState.available) {
+                    if (node.state === PerkState.purchased) {
+                        ui.notifications.error("You've already purchased this perk!");
+                        return;
+                    }
+                    ui.notifications.error("You are unable to currently purchase this perk.");
+                    return;
+                }
+                // @ts-expect-error
+                await game.ptr.web.controls.options.actions.purchase();
+                this.wasClicked = false;
+            }
         } else {
             if (this.active) {
                 await this.savePosition();
@@ -516,7 +542,7 @@ class PerkNode extends PIXI.Container {
     }
 }
 
-type PerkNodeConfig = {
+interface PerkNodeConfig {
     alpha: number;
     backgroundColor: number;
     borderColor: number;
@@ -524,12 +550,12 @@ type PerkNodeConfig = {
     texture: FilePath;
     tint: number;
     scale: number;
-};
+}
 
-type PerkEditState = {
+interface PerkEditState {
     position: 1;
     connection: 2;
-};
+}
 
 const PerkState = {
     unavailable: 0,
@@ -552,6 +578,8 @@ interface PerkNode {
     originalPosition: PIXI.Point | null;
 
     state: PerkPurchaseState;
+
+    wasClicked: boolean;
 
     editState: ValueOf<PerkEditState>;
 

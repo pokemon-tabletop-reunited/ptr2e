@@ -11,18 +11,25 @@
       "approach": "finesse",
       "archetype": "Juggler"
     },
-    "description": "<p>Quick Switch changes a Switch from a Complex Action to a Simple Action at the cost of 2PP.</p>",
+    "description": "<p>At the cost of 2PP and done across a Simple Action, the user Recalls a creature and selects that or another creature on their Team, freely using Send Out to bring that creature into Combat.</p>",
     "actions": [
       {
         "name": "Quick Switch",
         "slug": "quick-switch",
-        "description": "<p>Quick Switch changes a Switch from a Complex Action to a Simple Action at the cost of 2PP.</p>",
+        "description": "The user freely uses Recall on the creature, and freely uses Send Out targeting an elligible creature from their Team.",
         "cost": {
           "activation": "simple",
           "powerPoints": 2
         },
+        "range": {
+          "target": "ally",
+          "unit": "m"
+        },
         "type": "generic",
-        "traits": []
+        "traits": [
+          "manipulate",
+          "basic"
+        ]
       }
     ],
     "slug": "quick-switch",
@@ -48,7 +55,7 @@
     }
   },
   "_id": "kGNc0h7Xs3dmXRjt",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
   "effects": [],
   "flags": {
     "core": {

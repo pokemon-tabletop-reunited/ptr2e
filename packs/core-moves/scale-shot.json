@@ -1,13 +1,13 @@
 {
   "name": "Scale Shot",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/dragon_icon.svg",
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "scale-shot",
-    "description": "",
     "traits": [
       "5-strike",
-      "missile"
+      "missile",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -26,18 +26,18 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
         },
         "category": "physical",
-        "power": 20,
+        "power": 25,
         "accuracy": 90,
         "types": [
           "dragon"
         ],
-        "description": "Effect: On hit, the user's SPD stage is increased by +1 and DEF stage is lowered by -1 for 5 activations.",
+        "description": "<p>Effect: On hit, user gains +1 SPD stage and loses -1 DEF stage for 5 activations.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -45,8 +45,76 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "B"
   },
   "_id": "m4BjyUal9hOngSNS",
-  "effects": []
+  "effects": [
+    {
+      "name": "Scale Shot",
+      "type": "affliction",
+      "_id": "9jLByQyC1iWRR8Ol",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "scale-shot-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "scale-shot-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.2.1",
+        "createdTime": 1726153837557,
+        "modifiedTime": 1726153897841,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

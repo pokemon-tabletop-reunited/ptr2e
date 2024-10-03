@@ -1,11 +1,13 @@
 {
   "name": "Stench",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "flinch-chance-4"
+        ],
         "name": "Stench",
         "slug": "stench",
         "type": "passive",
@@ -18,14 +20,16 @@
         },
         "range": {
           "target": "creature",
-          "distance": 5,
+          "distance": "",
           "unit": "m"
         },
-        "description": "Trigger: The user hits with a Physical or Special-Category attack.\nEffect: The target has a 10% chance to become @Affliction[flinched] 5."
+        "description": "<p>Trigger: The user hits target(s) with a Physical or Special-Category attack.</p><p>Effect: All valid target(s) has a 10% chance to be Flinched.</p>"
       }
     ],
-    "description": "Trigger: The user hits with a Physical or Special-Category attack.\nEffect: The target has a 10% chance to become @Affliction[flinched] 5.",
-    "traits": [],
+    "description": "<p>Trigger: The user hits target(s) with a Physical or Special-Category attack.</p><p>Effect: All valid target(s) has a 10% chance to be Flinched.</p>",
+    "traits": [
+      "flinch-chance-4"
+    ],
     "slug": null,
     "container": null
   },

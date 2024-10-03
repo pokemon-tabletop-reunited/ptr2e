@@ -1,6 +1,6 @@
 {
   "name": "TM - <Attack Name>",
-  "img": "/systems/ptr2e/img/icons/item_icon.webp",
+  "img": "systems/ptr2e/img/icons/consumable_icon.webp",
   "type": "consumable",
   "system": {
     "cost": null,
@@ -8,7 +8,9 @@
       "skill": null,
       "spans": null,
       "materials": [
-        "1x-blank-tm-knowledge-instructions-of-an-attack-1x-type-gem-of-the-attacks-type"
+        "1x Blank TM",
+        "1x Type Gem matching the Attack's Type",
+        "User Knows the Attack, or possesses instructions of the Attack"
       ]
     },
     "equipped": {
@@ -24,11 +26,12 @@
     },
     "rarity": "rare",
     "traits": [
-      "consumable",
-      "attack-name-type-held",
+      "attack-name",
+      "type",
+      "held",
       "fling"
     ],
-    "description": "Upon creation, this item is imbued with the Attack used to craft it, and can be consumed to teach an elligible creature the Attack. The Attack is selected for <Attack Name>, this item's Grade is set the the Grade above the Attack's Grade, and its Type overrides this item's %lt;Type&gt;, which changes its Fling Type.",
+    "description": "<p>Upon creation, this item is imbued with the designated Attack, and can be consumed to teach an elligible creature the Attack. The Attack is selected for <Attack Name>, this item's Grade is set the the Grade above the Attack's Grade, and its Type overrides this item's <Type>, which changes its Fling Type.</p>",
     "quantity": 1,
     "container": null,
     "slug": null,
@@ -41,7 +44,7 @@
   },
   "_id": "M0D5GpmGd9FeCjDG",
   "effects": [],
-  "folder": null,
+  "folder": "V4skAU6G3OH5fXab",
   "sort": 0,
   "ownership": {
     "default": 0,

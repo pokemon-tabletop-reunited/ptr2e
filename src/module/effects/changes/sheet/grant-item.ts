@@ -4,15 +4,15 @@ import ChangeForm, { ChangeFormContext } from "./base.ts";
 
 class GrantItemForm extends ChangeForm<GrantItemChangeSystem> {
     override get template() {
-        return "/systems/ptr2e/templates/effects/changes/grant-item.hbs";
+        return "systems/ptr2e/templates/effects/changes/grant-item.hbs";
     }
 
     override async _prepareContext() {
         const context: ChangeFormContext<GrantItemChangeSystem> & {
             granted?: ClientDocument | null;
         } = await super._prepareContext();
-        const uuid = this.change.uuid ? String(this.change.uuid) : null;
-        context.granted = uuid ? await fromUuid(uuid) : null;
+        const item = await this.change.getItem();
+        context.granted = item ?? null;
         return context;
     }
 

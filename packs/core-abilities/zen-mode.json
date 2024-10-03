@@ -1,13 +1,14 @@
 {
   "name": "Zen Mode",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
   "system": {
     "actions": [
       {
         "traits": [
           "defensive",
           "forme-change",
+          "desperation-1-2",
           "innate"
         ],
         "name": "Zen Mode",
@@ -15,8 +16,8 @@
         "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
-          "trigger": "The user is reduced to 50% or fewer HP.",
+          "powerPoints": 2,
+          "trigger": "Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.",
           "delay": null,
           "priority": null
         },
@@ -25,10 +26,10 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user is reduced to 50% or fewer HP.\nEffect: The user changes to Zen forme. While in Zen Forme, the user resists all incoming damage by 1 step."
+        "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user changes to Zen Forme. While in Zen Forme, the user takes 50% less damage from all sources.</p>"
       }
     ],
-    "description": "Trigger: The user is reduced to 50% or fewer HP.\nEffect: The user changes to Zen forme. While in Zen Forme, the user resists all incoming damage by 1 step.",
+    "description": "T<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user changes to Zen Forme. While in Zen Forme, the user takes 50% less damage from all sources.</p>",
     "traits": [
       "defensive",
       "forme-change",

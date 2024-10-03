@@ -11,18 +11,45 @@
       "approach": "power",
       "archetype": "Support"
     },
-    "description": "<p>The target gains Strong 1.</p>",
+    "description": "<p>The target gains @Affliction[strong] 1.</p>",
     "actions": [
       {
-        "name": "Strong Style",
-        "slug": "strong-style",
-        "description": "<p>The target gains Strong 1.</p>",
+        "name": "Strong!",
+        "slug": "strong",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 1
         },
-        "type": "generic",
-        "traits": []
+        "description": "Effect: The target gains @Affliction[strong] 1.",
+        "type": "generic"
+      },
+      {
+        "name": "Strong! (Self)",
+        "slug": "strong-self",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1
+        },
+        "description": "Effect: The target gains @Affliction[strong] 2.",
+        "type": "generic"
       }
     ],
     "slug": "strong-style",
@@ -50,7 +77,7 @@
     }
   },
   "_id": "hUR6oZAwJlNWX6WG",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
   "effects": [],
   "flags": {
     "core": {

@@ -1,15 +1,10 @@
 {
   "name": "Flame Charge",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fire_icon.svg",
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "flame-charge",
-    "description": "",
-    "traits": [
-      "dash",
-      "defrost",
-      "contact"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "flame-charge",
@@ -28,27 +23,81 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 2
         },
-        "category": "special",
+        "category": "physical",
         "power": 50,
         "accuracy": 100,
         "types": [
           "fire"
         ],
-        "description": "Effect: On hit, the user gains +1 SPD stage for 5 activations.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, the user gains +1 SPD stage for 5 activations.</p>",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg"
       }
     ],
-    "container": null,
-    "grade": "E"
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "DNuGwSn0HKhGRujH",
-  "effects": []
+  "effects": [
+    {
+      "name": "Flame Charge",
+      "type": "affliction",
+      "_id": "ZGQdgn5ZUJcc6CNt",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "flame-charge-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.2.1",
+        "createdTime": 1726142792628,
+        "modifiedTime": 1726142825212,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

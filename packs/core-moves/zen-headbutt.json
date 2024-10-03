@@ -1,13 +1,16 @@
 {
   "name": "Zen Headbutt",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "zen-headbutt",
     "description": "",
     "traits": [
       "dash",
-      "contact"
+      "contact",
+      "flinch-chance-2",
+      "field",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -17,6 +20,8 @@
         "traits": [
           "dash",
           "contact",
+          "flinch-chance-2",
+          "field",
           "pp-updated"
         ],
         "range": {
@@ -37,7 +42,7 @@
         "types": [
           "psychic"
         ],
-        "description": "Effect: On hit, the target has a 20% chance of gaining @Affliction[flinched] 2.",
+        "description": "<p>Effect: On hit, the target has a 20% chance of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

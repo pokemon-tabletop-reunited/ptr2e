@@ -28,6 +28,12 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
         resizable: true,
       },
       dragDrop: [{ dragSelector: null, dropSelector: ".window-content" }],
+      actions: {
+        refresh: function (this: DataInspector) {
+          this.resetCache()
+          this.render(true);
+        }
+      }
     },
     { inplace: false }
   );
@@ -35,22 +41,22 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     // header: {
     //   id: "header",
-    //   template: "/systems/ptr2e/templates/apps/data-inspector/header.hbs",
+    //   template: "systems/ptr2e/templates/apps/data-inspector/header.hbs",
     //   scrollable: [],
     // },
     target: {
       id: "target",
-      template: "/systems/ptr2e/templates/apps/data-inspector/target.hbs",
+      template: "systems/ptr2e/templates/apps/data-inspector/target.hbs",
       scrollable: [],
     },
     settings: {
       id: "settings",
-      template: "/systems/ptr2e/templates/apps/data-inspector/settings.hbs",
+      template: "systems/ptr2e/templates/apps/data-inspector/settings.hbs",
       scrollable: [".scroll"],
     },
     content: {
       id: "content",
-      template: "/systems/ptr2e/templates/apps/data-inspector/content.hbs",
+      template: "systems/ptr2e/templates/apps/data-inspector/content.hbs",
       scrollable: ["section.content", "section.options", "section.modifiers", "section.tabs"],
     },
   };
@@ -101,14 +107,14 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
     options.id = `data-inspector-${document.uuid}`;
     super(options);
     this.document = document;
-    if(this.document instanceof ChatMessagePTR2e) this.mode = "roll";
+    if (this.document instanceof ChatMessagePTR2e) this.mode = "roll";
   }
 
   override get title() {
     const title = ["Data Inspector"]
     if ('actor' in this.document && this.document.actor) title.push(this.document.actor.name + "'s");
     if ('name' in this.document) title.push(this.document.name);
-    else if(this.document instanceof ChatMessagePTR2e) {
+    else if (this.document instanceof ChatMessagePTR2e) {
       switch (true) {
         case this.document.system instanceof AttackMessageSystem: title.push("Attack Roll"); break;
         case this.document.system instanceof SkillMessageSystem: title.push("Skill Roll"); break;
@@ -134,7 +140,10 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
       }
       case "rolldata": {
         if (!('getRollData' in document)) return { data: {}, path: '' };
-        if (this.rollData == null) this.rollData = document.getRollData() as Record<string, unknown>;
+        if (this.rollData == null) {
+          this.rollData = document.getRollData() as Record<string, unknown>;
+          if(this.rollData.actor) this.rollData = fu.duplicate(this.rollData.actor as Record<string, unknown>);
+        }
         return { data: this.rollData, path: '' };
       }
       case "source": {
@@ -203,14 +212,14 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
       this.temporaryData = doc.toObject();
     }
 
-    context.rollData = this.getDataVariant(doc, 'rolldata').data;
-    context.sourceData = this.getDataVariant(doc, 'source').data;
-    context.derivedData = this.getDataVariant(doc, 'derived').data;
-    if (isActor) context.overrideData = this.getDataVariant(doc, 'override').data;
+    const _rollData = context.rollData = this.getDataVariant(doc, 'rolldata').data;
+    const _sourceData = context.sourceData = this.getDataVariant(doc, 'source').data;
+    const _derivedData = context.derivedData = this.getDataVariant(doc, 'derived').data;
+    const _overrideData = isActor ? (context.overrideData = this.getDataVariant(doc, 'override').data) : undefined
     context.flagData = this.getDataVariant(doc, 'flags').data;
 
-    const { data: docData, path: basePath } = this.getDataVariant(doc, this.mode);    
-    
+    const { data: docData, path: basePath } = this.getDataVariant(doc, this.mode);
+
     context.isRollData = this.mode === 'rolldata';
     context.isSourceData = this.mode === 'source';
     context.isDerivedData = this.mode === 'derived';
@@ -218,7 +227,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
     context.search = this.searchTerm;
     context.path = this._path;
 
-    const { root, count, depth, all } = this.cachedResults[this.mode] ??= DataStructure.recurse(docData, basePath, basePath, this.mode, { includeFunctions: this.includeFunctions, document: doc });
+    const { root, count, depth, all } = this.cachedResults[this.mode] ??= DataStructure.recurse(docData, basePath, basePath, this.mode, { includeFunctions: this.includeFunctions, document: doc }, { _sourceData, _rollData, _derivedData, _overides: _overrideData });
     context.data = this.root = (this._path ? (root.getAtPath(this._path) ?? root) : root);
     if (this.searchTerm && (this.searchTerm !== this.lastSearch.term || this.fuzzyiness !== this.lastSearch.fuzzy)) {
       this.root.filterChildren(this.searchTerm, all, this.fuzzyiness);
@@ -237,8 +246,8 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
   _prepareContextRollInspector(context: Record<string, unknown>) {
     const doc = this.document;
 
-    if(doc.system instanceof AttackMessageSystem) {
-      if(this.lastSearch.term !== this.searchTerm || this.fuzzyiness !== this.lastSearch.fuzzy) {
+    if (doc.system instanceof AttackMessageSystem) {
+      if (this.lastSearch.term !== this.searchTerm || this.fuzzyiness !== this.lastSearch.fuzzy) {
         this._currentData = null;
       }
 
@@ -246,7 +255,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
         this.tabs = {};
         const results = doc.system.results.map(r => {
           const context = fu.duplicate(r.context);
-          const {name, uuid} = r.target ?? {uuid: context.action};
+          const { name, uuid } = r.target ?? { uuid: context.action };
           const id = name ? r.target.token ? r.target.token.id : r.target.id : null;
           const filteredOptions = this.filterOptions(context.options);
           context.options = context.options.filter(o => filteredOptions.has(o)).sort((a, b) => a.localeCompare(b));
@@ -260,15 +269,15 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
           }
           return context;
         });
-        if(!this.tabs[this.tabGroups["targets"]]) this.tabGroups["targets"] = results.at(0)?.action ?? "";
+        if (!this.tabs[this.tabGroups["targets"]]) this.tabGroups["targets"] = results.at(0)?.action ?? "";
         return results;
       })()
 
       context.tabs = this._getTabs();
     }
 
-    if(doc.system instanceof SkillMessageSystem || doc.system instanceof CaptureMessageSystem) {
-      if(this.lastSearch.term !== this.searchTerm || this.fuzzyiness !== this.lastSearch.fuzzy) {
+    if (doc.system instanceof SkillMessageSystem || doc.system instanceof CaptureMessageSystem) {
+      if (this.lastSearch.term !== this.searchTerm || this.fuzzyiness !== this.lastSearch.fuzzy) {
         this._currentData = null;
       }
 
@@ -281,8 +290,8 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
       })();
     }
 
-    if(doc.system instanceof DamageAppliedMessageSystem && doc.system.result) {
-      if(this.lastSearch.term !== this.searchTerm || this.fuzzyiness !== this.lastSearch.fuzzy) {
+    if (doc.system instanceof DamageAppliedMessageSystem && doc.system.result) {
+      if (this.lastSearch.term !== this.searchTerm || this.fuzzyiness !== this.lastSearch.fuzzy) {
         this._currentData = null;
       }
 
@@ -307,7 +316,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
   }
 
   filterOptions(options: string[]): Set<string> {
-    if(!this.searchTerm || this.searchTerm.length <= 3) return new Set(options);
+    if (!this.searchTerm || this.searchTerm.length <= 3) return new Set(options);
 
     const search = new MiniSearch({ fields: ["id"], searchOptions: { fuzzy: this.fuzzyiness } });
     search.addAll(options.map(o => ({ id: o })));
@@ -474,7 +483,7 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
       for (const entry of htmlQueryAll(htmlElement, "[data-option],[data-domain]")) {
         entry.addEventListener("contextmenu", () => {
           const value = entry.dataset.option || entry.dataset.domain;
-          if(!value) return;
+          if (!value) return;
 
           game.clipboard.copyPlainText(value)
             .then(() => ui.notifications.info(game.i18n.format('PTR2E.DataInspector.Info.CopyRollInfo', { value, type: entry.dataset.option ? "Option" : "Selector" })));
@@ -513,11 +522,17 @@ class DataInspector extends foundry.applications.api.HandlebarsApplicationMixin(
   override async _renderFrame(options: foundry.applications.api.HandlebarsRenderOptions) {
     const frame = await super._renderFrame(options);
 
-    // Add send to chat button
+    // Add info button
     const infoLabel = game.i18n.localize("PTR2E.DataInspector.Instructions");
     const info = `<button type="button" class="header-control fa-solid fa-circle-question info-tooltip" 
                             data-tooltip="${infoLabel}" aria-label="${infoLabel}" data-tooltip-direction="UP"></button>`;
     this.window.controls.insertAdjacentHTML("afterend", info);
+
+    // Add refresh button
+    const refreshLabel = game.i18n.localize("PTR2E.DataInspector.Refresh");
+    const refresh = `<button type="button" data-action="refresh" class="header-control fa-solid fa-sync" 
+                            data-tooltip="${refreshLabel}" aria-label="${refreshLabel}" data-tooltip-direction="UP"></button>`;
+    this.window.controls.insertAdjacentHTML("afterend", refresh);
 
     return frame;
   }

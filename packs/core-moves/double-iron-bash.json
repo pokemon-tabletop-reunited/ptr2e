@@ -1,16 +1,18 @@
 {
   "name": "Double Iron Bash",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/steel_icon.svg",
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "double-iron-bash",
-    "description": "",
+    "description": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>",
     "traits": [
       "legendary",
       "2-strike",
       "punch",
       "crushing",
-      "contact"
+      "contact",
+      "flinch-chance-3",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -23,6 +25,7 @@
           "punch",
           "crushing",
           "contact",
+          "flinch-chance-3",
           "pp-updated"
         ],
         "range": {
@@ -32,7 +35,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -43,7 +46,7 @@
         "types": [
           "steel"
         ],
-        "description": "Effect: On hit. the target has a 30% chance of gaining @Affliction[flinched] 3.",
+        "description": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -51,7 +54,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "D"
   },
   "_id": "nFd5TtfVgdTWk1Bp",
   "effects": []

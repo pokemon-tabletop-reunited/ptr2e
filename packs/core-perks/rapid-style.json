@@ -11,18 +11,45 @@
       "approach": "finesse",
       "archetype": "Support"
     },
-    "description": "<p>The target gains Rapid 1.</p>",
+    "description": "<p>The target gains @Affliction[rapid] 1.</p>",
     "actions": [
       {
-        "name": "Rapid Style",
-        "slug": "rapid-style",
-        "description": "<p>The target gains Rapid 1</p>",
+        "name": "Rapid!",
+        "slug": "rapid",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
         "cost": {
           "activation": "simple",
           "powerPoints": 2
         },
-        "type": "generic",
-        "traits": []
+        "description": "Effect: The target gains @Affliction[rapid] 1.",
+        "type": "generic"
+      },
+      {
+        "name": "Rapid! (Self)",
+        "slug": "rapid-self",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "description": "Effect: The target gains @Affliction[rapid] 2.",
+        "type": "generic"
       }
     ],
     "slug": "rapid-style",
@@ -51,7 +78,7 @@
     }
   },
   "_id": "jJJ6DaJCklHa5x2X",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
   "effects": [],
   "flags": {
     "core": {

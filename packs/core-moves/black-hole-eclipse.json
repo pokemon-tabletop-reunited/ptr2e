@@ -1,13 +1,14 @@
 {
   "name": "Black Hole Eclipse",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/dark_icon.svg",
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "black-hole-eclipse",
-    "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal\nEffect: On hit, all valid targets have a 30% chance of gaining @Affliction[flinched] 3.\nRequirement: [Dark] Z-Crystal as an Accessory Item and a Dark-Type attack on the user's Active List.",
+    "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 50% chance of being Flinched.</p><p>Requirement: [Dark] Z-Crystal as an Accessory Item and a Dark-Type attack on the user's Active List.</p>",
     "traits": [
       "zenith",
-      "blast-5"
+      "blast-5",
+      "flinch-chance-3"
     ],
     "actions": [
       {
@@ -16,7 +17,8 @@
         "type": "attack",
         "traits": [
           "zenith",
-          "blast-5"
+          "blast-5",
+          "flinch-chance-3"
         ],
         "range": {
           "target": "blast",
@@ -28,7 +30,7 @@
           "powerPoints": 0,
           "delay": null,
           "priority": null,
-          "trigger": "User's partner uses Z-Pose! and triggers the appropriate Z-Crystal"
+          "trigger": "<p>User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p>"
         },
         "category": "physical",
         "power": 180,
@@ -36,39 +38,7 @@
         "types": [
           "dark"
         ],
-        "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal\nEffect: On hit, all valid targets have a 30% chance of gaining @Affliction[flinched] 3.\nRequirement: [Dark] Z-Crystal as an Accessory Item and a Dark-Type attack on the user's Active List.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": true,
-        "slot": null
-      },
-      {
-        "slug": "black-hole-eclipse",
-        "name": "Black Hole Eclipse",
-        "type": "attack",
-        "traits": [
-          "zenith",
-          "blast-5"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 15,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null,
-          "trigger": "User's partner uses Z-Pose! and triggers the appropriate Z-Crystal"
-        },
-        "category": "special",
-        "power": 180,
-        "accuracy": 100,
-        "types": [
-          "dark"
-        ],
-        "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal\nEffect: On hit, all valid targets have a 30% chance of gaining @Affliction[flinched] 3.\nRequirement: [Dark] Z-Crystal as an Accessory Item and a Dark-Type attack on the user's Active List.",
+        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 50% chance of being Flinched.</p><p>Requirement: [Dark] Z-Crystal as an Accessory Item and a Dark-Type attack on the user's Active List.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": true,

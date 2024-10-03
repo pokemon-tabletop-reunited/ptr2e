@@ -1,14 +1,16 @@
 {
   "name": "Combat Torque",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "combat-torque",
     "description": "",
     "traits": [
       "dash",
-      "pass-3",
-      "contact"
+      "pass-4",
+      "crash-1-2",
+      "contact",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -17,7 +19,8 @@
         "type": "attack",
         "traits": [
           "dash",
-          "pass-3",
+          "pass-4",
+          "crash-1-2",
           "contact",
           "pp-updated"
         ],
@@ -34,12 +37,12 @@
           "trigger": null
         },
         "category": "physical",
-        "power": 80,
+        "power": 100,
         "accuracy": 100,
         "types": [
           "fighting"
         ],
-        "description": "Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5.",
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

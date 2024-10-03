@@ -9,14 +9,14 @@
     "design": {
       "arena": "physical",
       "approach": "power",
-      "archetype": "Combat"
+      "archetype": "Berserker"
     },
-    "description": "<p>You gain +1 Attack Stage and +1 Special Attack Stage while @Affliction[enraged]. The duration of these stage increases is tied to the duration of your @Affliction[enraged] condition.</p>",
+    "description": "<p>While @Affliction[enraged], you have +1 default ATK and SPATK stage.</p>",
     "actions": [
       {
         "name": "Berserk",
         "slug": "berserk",
-        "description": "<p>You gain +1 Attack Stage and +1 Special Attack Stage while @Affliction[enraged]. The duration of these stage increases is tied to the duration of your @Affliction[enraged] condition.</p>",
+        "description": "<p>While @Affliction[enraged], you have +1 default ATK and SPATK stage.</p>",
         "cost": {
           "activation": "free"
         },
@@ -24,7 +24,7 @@
         "traits": [],
         "img": "icons/svg/explosion.svg",
         "range": {
-          "target": "enemy",
+          "target": "self",
           "unit": "m"
         }
       }
@@ -55,13 +55,13 @@
     }
   },
   "_id": "ZPro1HlauzutizPK",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
   "effects": [
     {
       "name": "Berserk",
       "type": "passive",
       "_id": "X0pgAzlk6JSzm5vf",
-      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {

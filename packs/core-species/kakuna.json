@@ -1,7 +1,7 @@
 {
   "name": "kakuna",
   "type": "species",
-  "img": "/systems/ptr2e/img/icons/species_icon.webp",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
   "system": {
     "number": 14,
     "size": {
@@ -36,20 +36,36 @@
     ],
     "abilities": {
       "starting": [
-        "shed-skin",
-        "shell-armor"
+        {
+          "slug": "shed-skin"
+        },
+        {
+          "slug": "shell-armor"
+        }
       ],
       "basic": [
-        "poison-point",
-        "stalwart"
+        {
+          "slug": "poison-point"
+        },
+        {
+          "slug": "stalwart"
+        }
       ],
       "advanced": [
-        "angry-buzz",
-        "sturdy"
+        {
+          "slug": "angry-buzz"
+        },
+        {
+          "slug": "sturdy"
+        }
       ],
       "master": [
-        "overcoat",
-        "clear-body"
+        {
+          "slug": "overcoat"
+        },
+        {
+          "slug": "clear-body"
+        }
       ]
     },
     "skills": [
@@ -142,7 +158,7 @@
         "group": null
       }
     ],
-    "slug": "",
+    "slug": "kakuna",
     "stats": {
       "hp": 45,
       "atk": 25,
@@ -159,31 +175,26 @@
       "tutor": [
         {
           "name": "string-shot",
-          "gen": "heartgold-soulsilver",
-          "uuid": "Compendium.ptr2e.core-moves.Item.TijijTYIY2UOVWOn"
+          "gen": "heartgold-soulsilver"
         },
         {
           "name": "iron-defense",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.qSWTxI39iL7ivEVw"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "bug-bite",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.VWTUbiZH5inKfQn8"
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "electroweb",
-          "gen": "ultra-sun-ultra-moon",
-          "uuid": "Compendium.ptr2e.core-moves.Item.DLoWCGaBlU23XnUI"
+          "gen": "ultra-sun-ultra-moon"
         }
       ],
       "levelUp": [
         {
           "name": "harden",
           "level": 1,
-          "gen": "brilliant-diamond-and-shining-pearl",
-          "uuid": "Compendium.ptr2e.core-moves.Item.vKslOzFQFtNm1yzc"
+          "gen": "brilliant-diamond-and-shining-pearl"
         }
       ]
     },

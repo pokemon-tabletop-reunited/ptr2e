@@ -8,6 +8,7 @@
     "traits": [
       "basic",
       "contact",
+      "flinch-chance-2",
       "pp-updated"
     ],
     "actions": [
@@ -19,10 +20,11 @@
         "traits": [
           "basic",
           "contact",
+          "flinch-chance-2",
           "pp-updated"
         ],
         "range": {
-          "target": "enemy",
+          "target": "creature",
           "distance": 1,
           "unit": "m"
         },
@@ -30,8 +32,7 @@
           "activation": "complex",
           "powerPoints": 0,
           "delay": null,
-          "priority": null,
-          "trigger": ""
+          "priority": null
         },
         "variant": null,
         "types": [
@@ -40,7 +41,7 @@
         "category": "physical",
         "power": 30,
         "accuracy": 100,
-        "description": "<p>On hit, the target has a 30% chance of gaining @Affliction[flinched] 3.</p>"
+        "description": "<p>On hit, the target has a 10% chance of being Flinched.</p>"
       }
     ],
     "description": "",

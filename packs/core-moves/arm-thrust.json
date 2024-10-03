@@ -1,14 +1,15 @@
 {
   "name": "Arm Thrust",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/fighting_icon.svg",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "arm-thrust",
     "description": "",
     "traits": [
       "5-strike",
       "contact",
-      "punch"
+      "punch",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -28,7 +29,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": -1,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null

@@ -62,6 +62,9 @@ body .application.sheet .form-group {
 .application.sheet string-tags-ptr2e .tags .tag:has(a.content-link) {
   padding: 4px 0.25rem;
 }
+.application.sheet .input-element-tags .tag a.content-link {
+  border: unset;
+}
 .application.sheet prose-mirror {
   border: 1px solid var(--border-theme-color);
   border-radius: 8px;
@@ -208,8 +211,8 @@ body .application.sheet .form-group {
   line-height: 1.2rem;
   padding: 0.25rem 0.5rem;
 }
-.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button:has(small.unspend),
-.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button:has(small.unspend) {
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button:has(small.unspent),
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button:has(small.unspent) {
   animation: glow 1s infinite alternate;
 }
 @keyframes glow {
@@ -220,8 +223,8 @@ body .application.sheet .form-group {
     box-shadow: 0 0 5px 5px gold;
   }
 }
-.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button small.unspend,
-.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button small.unspend {
+.application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button small.unspent,
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button small.unspent {
   font-size: 10px;
 }
 .application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown {
@@ -729,8 +732,8 @@ body .application.sheet .form-group {
   grid-area: 1 / 4 / 2 / 6;
   padding: 0.5rem;
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button:has(small.unspend),
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button:has(small.unspend) {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button:has(small.unspent),
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button:has(small.unspent) {
   animation: glow 1s infinite alternate;
 }
 @keyframes glow {
@@ -741,8 +744,8 @@ body .application.sheet .form-group {
     box-shadow: 0 0 5px 5px gold;
   }
 }
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button small.unspend,
-.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button small.unspend {
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="skills"] .skill-options button small.unspent,
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] .skill-options button small.unspent {
   font-size: 10px;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="overview"] {
@@ -1225,6 +1228,7 @@ body .application.sheet .form-group {
   font-weight: bold;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base,
+.application.sheet.pick-a-thing-prompt,
 .application.sheet.known-actions-sheet,
 .application.sheet.available-abilities-sheet,
 .application.sheet.action-sheet,
@@ -1237,6 +1241,7 @@ body .application.sheet .form-group {
   background: var(--appv2-background);
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content,
+.application.sheet.pick-a-thing-prompt .window-content,
 .application.sheet.known-actions-sheet .window-content,
 .application.sheet.available-abilities-sheet .window-content,
 .application.sheet.action-sheet .window-content,
@@ -1253,6 +1258,7 @@ body .application.sheet .form-group {
   padding: 0;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header,
+.application.sheet.pick-a-thing-prompt .window-content .sheet-header,
 .application.sheet.known-actions-sheet .window-content .sheet-header,
 .application.sheet.available-abilities-sheet .window-content .sheet-header,
 .application.sheet.action-sheet .window-content .sheet-header,
@@ -1268,6 +1274,7 @@ body .application.sheet .form-group {
   border-bottom: 1px solid var(--border-theme-color);
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header fieldset,
+.application.sheet.pick-a-thing-prompt .window-content .sheet-header fieldset,
 .application.sheet.known-actions-sheet .window-content .sheet-header fieldset,
 .application.sheet.available-abilities-sheet .window-content .sheet-header fieldset,
 .application.sheet.action-sheet .window-content .sheet-header fieldset,
@@ -1283,6 +1290,7 @@ body .application.sheet .form-group {
   justify-content: center;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header img,
+.application.sheet.pick-a-thing-prompt .window-content .sheet-header img,
 .application.sheet.known-actions-sheet .window-content .sheet-header img,
 .application.sheet.available-abilities-sheet .window-content .sheet-header img,
 .application.sheet.action-sheet .window-content .sheet-header img,
@@ -1298,6 +1306,7 @@ body .application.sheet .form-group {
   border: unset;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content .sheet-header .title,
+.application.sheet.pick-a-thing-prompt .window-content .sheet-header .title,
 .application.sheet.known-actions-sheet .window-content .sheet-header .title,
 .application.sheet.available-abilities-sheet .window-content .sheet-header .title,
 .application.sheet.action-sheet .window-content .sheet-header .title,
@@ -1310,6 +1319,7 @@ body .application.sheet .form-group {
   font-size: 2.5rem;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content nav.tabs,
+.application.sheet.pick-a-thing-prompt .window-content nav.tabs,
 .application.sheet.known-actions-sheet .window-content nav.tabs,
 .application.sheet.available-abilities-sheet .window-content nav.tabs,
 .application.sheet.action-sheet .window-content nav.tabs,
@@ -1330,6 +1340,7 @@ body .application.sheet .form-group {
   gap: unset;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits,
+.application.sheet.pick-a-thing-prompt .window-content aside.traits,
 .application.sheet.known-actions-sheet .window-content aside.traits,
 .application.sheet.available-abilities-sheet .window-content aside.traits,
 .application.sheet.action-sheet .window-content aside.traits,
@@ -1345,6 +1356,7 @@ body .application.sheet .form-group {
   border-bottom: 1px solid var(--border-theme-color);
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits tags,
+.application.sheet.pick-a-thing-prompt .window-content aside.traits tags,
 .application.sheet.known-actions-sheet .window-content aside.traits tags,
 .application.sheet.available-abilities-sheet .window-content aside.traits tags,
 .application.sheet.action-sheet .window-content aside.traits tags,
@@ -1361,6 +1373,7 @@ body .application.sheet .form-group {
   --tag-pad: 0;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits tags .trait,
+.application.sheet.pick-a-thing-prompt .window-content aside.traits tags .trait,
 .application.sheet.known-actions-sheet .window-content aside.traits tags .trait,
 .application.sheet.available-abilities-sheet .window-content aside.traits tags .trait,
 .application.sheet.action-sheet .window-content aside.traits tags .trait,
@@ -1374,6 +1387,7 @@ body .application.sheet .form-group {
   padding: 0.25rem;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content aside.traits tags .trait .tag,
+.application.sheet.pick-a-thing-prompt .window-content aside.traits tags .trait .tag,
 .application.sheet.known-actions-sheet .window-content aside.traits tags .trait .tag,
 .application.sheet.available-abilities-sheet .window-content aside.traits tags .trait .tag,
 .application.sheet.action-sheet .window-content aside.traits tags .trait .tag,
@@ -1386,6 +1400,7 @@ body .application.sheet .form-group {
   text-decoration: underline;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab,
+.application.sheet.pick-a-thing-prompt .window-content section.tab,
 .application.sheet.known-actions-sheet .window-content section.tab,
 .application.sheet.available-abilities-sheet .window-content section.tab,
 .application.sheet.action-sheet .window-content section.tab,
@@ -1401,6 +1416,7 @@ body .application.sheet .form-group {
   padding: 1rem;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .editor,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .editor,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .editor,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .editor,
@@ -1411,6 +1427,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=details] .editor,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .editor,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .editor .editor-content,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .editor .editor-content,
@@ -1423,6 +1440,7 @@ body .application.sheet .form-group {
   min-height: 200px;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats,
@@ -1440,6 +1458,7 @@ body .application.sheet .form-group {
   border-radius: 8px;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats .form-group,
@@ -1452,6 +1471,7 @@ body .application.sheet .form-group {
   justify-content: space-between;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group label,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats .form-group label,
@@ -1464,6 +1484,7 @@ body .application.sheet .form-group {
   flex: 0 0 60%;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats .form-group .form-fields,
@@ -1477,6 +1498,7 @@ body .application.sheet .form-group {
   text-align: center;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement-header,
@@ -1487,6 +1509,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats-header,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats-header,
@@ -1505,6 +1528,7 @@ body .application.sheet .form-group {
   border-bottom: 1px solid var(--border-theme-color);
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement-header .item-controls,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
@@ -1515,6 +1539,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement-header .item-controls,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .base-stats-header .item-controls,
@@ -1531,6 +1556,7 @@ body .application.sheet .form-group {
   align-items: center;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .movement,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement,
@@ -1541,6 +1567,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .skill,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill,
@@ -1558,6 +1585,7 @@ body .application.sheet .form-group {
   grid-column-gap: 0.5rem;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement.center,
@@ -1568,6 +1596,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill.center,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill.center,
@@ -1583,6 +1612,7 @@ body .application.sheet .form-group {
   align-items: center;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement.center small,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement.center small,
@@ -1593,6 +1623,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement.center small,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill.center small,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill.center small,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill.center small,
@@ -1605,6 +1636,7 @@ body .application.sheet .form-group {
   color: var(--hint-text-color);
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .form-group,
@@ -1615,6 +1647,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill .form-group,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .form-group,
@@ -1627,6 +1660,7 @@ body .application.sheet .form-group {
   justify-content: space-between;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group label,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
@@ -1637,6 +1671,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group label,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group label,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .form-group label,
@@ -1650,6 +1685,7 @@ body .application.sheet .form-group {
   text-align: center;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
@@ -1660,6 +1696,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .form-group .form-fields,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .form-group .form-fields,
@@ -1673,6 +1710,7 @@ body .application.sheet .form-group {
   text-align: center;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .movement .item-controls,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
@@ -1683,6 +1721,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=details] .movement .item-controls,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill .item-controls,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill .item-controls,
@@ -1698,6 +1737,7 @@ body .application.sheet .form-group {
   align-items: center;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .skill,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .skill,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .skill,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .skill,
@@ -1710,6 +1750,7 @@ body .application.sheet .form-group {
   grid-template-columns: 30% auto 15px;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .move,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .move,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .move,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .move,
@@ -1723,6 +1764,7 @@ body .application.sheet .form-group {
   flex-direction: row;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=details] .move .form-group,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=details] .move .form-group,
 .application.sheet.action-sheet .window-content section.tab[data-tab=details] .move .form-group,
@@ -1737,6 +1779,7 @@ body .application.sheet .form-group {
   margin: 0.25rem;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=attack],
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=attack],
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=attack],
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=attack],
 .application.sheet.action-sheet .window-content section.tab[data-tab=attack],
@@ -1749,6 +1792,7 @@ body .application.sheet .form-group {
   padding: 0;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab form.scroll,
+.application.sheet.pick-a-thing-prompt .window-content section.tab form.scroll,
 .application.sheet.known-actions-sheet .window-content section.tab form.scroll,
 .application.sheet.available-abilities-sheet .window-content section.tab form.scroll,
 .application.sheet.action-sheet .window-content section.tab form.scroll,
@@ -1764,6 +1808,7 @@ body .application.sheet .form-group {
   height: 100%;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions,
@@ -1777,6 +1822,7 @@ body .application.sheet .form-group {
   flex-direction: column;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list,
@@ -1791,6 +1837,7 @@ body .application.sheet .form-group {
   gap: 0.5rem;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
@@ -1805,6 +1852,7 @@ body .application.sheet .form-group {
   border-bottom: 1px solid var(--border-theme-color);
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
@@ -1815,6 +1863,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action,
@@ -1830,6 +1879,7 @@ body .application.sheet .form-group {
   padding: 0.25rem;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
@@ -1840,6 +1890,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-name,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-name,
@@ -1852,6 +1903,7 @@ body .application.sheet .form-group {
   flex: 0 0 30%;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
@@ -1862,6 +1914,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .action-type,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .action-type,
@@ -1874,6 +1927,7 @@ body .application.sheet .form-group {
   flex: 0 0 30%;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
@@ -1884,6 +1938,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.active-effect-sheet .window-content section.tab[data-tab=actions].active .actions .actions-header .item-controls,
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
 .application.sheet.action-sheet .window-content section.tab[data-tab=actions].active .actions .actions-list .action .item-controls,
@@ -1902,6 +1957,7 @@ body .application.sheet .form-group {
   gap: 5px;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="overview"] .item-description,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab="overview"] .item-description,
 .application.sheet.action-sheet .window-content section.tab[data-tab="overview"] .item-description,
@@ -1914,6 +1970,7 @@ body .application.sheet .form-group {
   min-height: 150px;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
@@ -1926,6 +1983,7 @@ body .application.sheet .form-group {
   position: relative;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
@@ -1945,6 +2003,7 @@ body .application.sheet .form-group {
   cursor: pointer;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
@@ -1959,6 +2018,7 @@ body .application.sheet .form-group {
   padding: 0;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
@@ -1977,6 +2037,7 @@ body .application.sheet .form-group {
   border: 1px solid var(--border-theme-color);
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
@@ -1991,6 +2052,7 @@ body .application.sheet .form-group {
   width: 28px;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.known-actions-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.available-abilities-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.action-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
@@ -2004,6 +2066,7 @@ body .application.sheet .form-group {
   margin: 0 0.25rem;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base fieldset,
+.application.sheet.pick-a-thing-prompt fieldset,
 .application.sheet.known-actions-sheet fieldset,
 .application.sheet.available-abilities-sheet fieldset,
 .application.sheet.action-sheet fieldset,
@@ -2023,6 +2086,7 @@ body .application.sheet .form-group {
   border-color: var(--border-theme-color);
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base fieldset legend,
+.application.sheet.pick-a-thing-prompt fieldset legend,
 .application.sheet.known-actions-sheet fieldset legend,
 .application.sheet.available-abilities-sheet fieldset legend,
 .application.sheet.action-sheet fieldset legend,
@@ -2036,6 +2100,7 @@ body .application.sheet .form-group {
   font-weight: bold;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base .hint,
+.application.sheet.pick-a-thing-prompt .hint,
 .application.sheet.known-actions-sheet .hint,
 .application.sheet.available-abilities-sheet .hint,
 .application.sheet.action-sheet .hint,
@@ -2052,6 +2117,7 @@ body .application.sheet .form-group {
   word-break: break-word;
 }
 .application.sheet.skill-sheet .application.sheet#perk-hud-base textarea,
+.application.sheet.pick-a-thing-prompt textarea,
 .application.sheet.known-actions-sheet textarea,
 .application.sheet.available-abilities-sheet textarea,
 .application.sheet.action-sheet textarea,
@@ -2775,7 +2841,7 @@ body .application.sheet .form-group {
   padding-top: 0.5rem;
   display: grid;
   grid-template-columns: 55% 45%;
-  grid-template-rows: 35% 65%;
+  grid-template-rows: 1fr 1fr;
   grid-template-areas: "baseStats statsChart" "evStats statsChart";
 }
 .application.sheet.stats-form .window-content aside {
@@ -2791,64 +2857,19 @@ body .application.sheet .form-group {
   grid-area: baseStats;
 }
 .application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form {
-  display: grid;
-  grid-template-columns: 30% 15% 40% 15%;
-  grid-template-rows: min-content 1fr 1fr 1fr;
-  grid-template-areas: "header header header header" "hpLabel hpValue spatkLabel spatkValue" "atkLabel atkValue spdefLabel spdefValue" "defLabel defValue spdLabel spdValue";
+  display: flex;
+  flex-direction: column;
 }
 .application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label {
   text-align: left;
   align-self: center;
 }
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.hp {
-  grid-area: hpLabel;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.atk {
-  grid-area: atkLabel;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.def {
-  grid-area: defLabel;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spa {
-  grid-area: spatkLabel;
-  margin-left: 1rem;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spd {
-  grid-area: spdefLabel;
-  margin-left: 1rem;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spe {
-  grid-area: spdLabel;
-  margin-left: 1rem;
-}
 .application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input {
   text-align: center;
   align-self: center;
 }
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.hp {
-  grid-area: hpValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.atk {
-  grid-area: atkValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.def {
-  grid-area: defValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spa {
-  grid-area: spatkValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spd {
-  grid-area: spdefValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spe {
-  grid-area: spdValue;
-}
 .application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form h1 {
-  grid-area: header;
   text-align: center;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input[type="submit"] {
-  grid-area: submit;
 }
 .application.sheet.stats-form .window-content aside[data-application-part="evStats"] {
   grid-area: evStats;
@@ -2888,6 +2909,10 @@ body .application.sheet .form-group {
   background: var(--appv2-background-flat);
   border-radius: 5px;
 }
+.application.sheet.party-sheet:not(.minimized) {
+  min-width: 528px;
+  min-height: 465px;
+}
 .application.sheet.party-sheet .window-content {
   grid-template-columns: unset;
   grid-template-rows: 44px auto;
@@ -2909,34 +2934,168 @@ body .application.sheet .form-group {
   grid-template-rows: 35% 65%;
   grid-template-areas: "owner" "party";
 }
-.application.sheet.party-sheet .party-member {
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] {
+  padding: 0;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll {
+  padding: 1rem;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  --folder-color-mixed: color-mix(in srgb, var(--folder-color, #4d4d4daa) 60%, transparent);
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll header {
+  padding: 6px;
+  line-height: 24px;
+  background: var(--folder-color, black);
+  text-shadow: 0px 0px 3px var(--color-shadow-dark);
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll header h3 {
+  margin: 0;
+  color: var(--color-text-light-highlight);
+  font-size: var(--font-size-16);
+  line-height: 24px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes .content {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  border: 6px solid var(--folder-color, black);
+  border-right: unset;
+  border-top: unset;
+  border-radius: 0 0 8px 8px;
+  --folder-color-mixed: color-mix(in srgb, var(--folder-color, #4d4d4daa) 60%, transparent);
+  flex: 1;
+  background: var(--folder-color-mixed);
+  scrollbar-color: var(--folder-color, black) var(--folder-color-mixed, black);
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes header.controls {
+  display: flex;
+  align-items: center;
+  border-radius: 8px 8px 0 0;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes header.controls h3 {
+  flex: 1;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes header.controls button {
+  flex: 0 0 120px;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes article.box {
+  --folder-color-mixed: color-mix(in srgb, var(--folder-color, #4d4d4daa) 60%, transparent);
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll main.boxes article.box header.box-header {
+  flex: 0;
+  position: sticky;
+  top: 0;
+  background: var(--folder-color, black);
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll .contents {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--folder-color-mixed);
+  border: 4px solid var(--folder-color, black);
+  border-top: unset;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.box {
+  min-width: 206px;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.box section.box-item {
+  flex: 1 1 190px;
+  min-width: 190px;
+  max-width: 270px;
+  margin: 0;
+  border-radius: unset;
+  max-width: unset;
+  background: unset;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.box section.box-item.empty {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 40px;
+  background: url(/ui/denim075.png);
+  font-style: italic;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.party {
+  flex: 0 0 220px;
+  width: 220px;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.party header {
+  flex: 0;
+  border-radius: 8px 8px 0 0;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.party .contents {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  border-bottom: 6px solid var(--folder-color, black);
+  border-left: 6px solid var(--folder-color, black);
+  flex: 1;
+  overflow-y: scroll;
+  scrollbar-color: var(--folder-color, black) var(--folder-color-mixed, black);
+  border-radius: 0 0 8px 8px;
+}
+.application.sheet.party-sheet .window-content .tab[data-tab="party"] .scroll article.party section.party-member {
+  min-width: 200px;
+  margin: 0;
+  border-radius: unset;
+  flex: 0;
+  background: unset;
+}
+.application.sheet.party-sheet .party-member,
+.application.sheet.party-sheet .box-item {
   display: flex;
   flex-direction: row;
   align-items: center;
   --owner-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 80%, transparent);
   --party-background-color: color-mix(in srgb, var(--owner-folder-background, #4d4d4daa) 60%, transparent);
 }
-.application.sheet.party-sheet .party-member .thumbnail {
+.application.sheet.party-sheet .party-member .thumbnail,
+.application.sheet.party-sheet .box-item .thumbnail {
   padding: 0.25rem;
   min-width: 56px;
 }
-.application.sheet.party-sheet .party-member .thumbnail img {
+.application.sheet.party-sheet .party-member .thumbnail img,
+.application.sheet.party-sheet .box-item .thumbnail img {
   border-radius: 50%;
   height: 48px;
   width: 48px;
   border: unset;
 }
-.application.sheet.party-sheet .party-member .title {
+.application.sheet.party-sheet .party-member .title,
+.application.sheet.party-sheet .box-item .title {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.application.sheet.party-sheet .party-member .title .name {
+.application.sheet.party-sheet .party-member .title .name,
+.application.sheet.party-sheet .box-item .title .name {
   text-wrap: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.application.sheet.party-sheet .party-member .title .level {
+.application.sheet.party-sheet .party-member .title .level,
+.application.sheet.party-sheet .box-item .title .level {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
@@ -3078,7 +3237,9 @@ body .application.sheet .form-group {
   grid-area: experience-value;
   color: var(--color-text-light-primary);
 }
-.application.sheet.party-sheet main {
+.application.sheet.party-sheet main,
+.application.sheet.party-sheet article.party,
+.application.sheet.party-sheet article.box {
   grid-area: party;
   display: flex;
   flex-direction: row;
@@ -3086,7 +3247,12 @@ body .application.sheet .form-group {
   flex-wrap: wrap;
   align-content: start;
 }
-.application.sheet.party-sheet main section.party-member {
+.application.sheet.party-sheet main section.party-member,
+.application.sheet.party-sheet article.party section.party-member,
+.application.sheet.party-sheet article.box section.party-member,
+.application.sheet.party-sheet main section.box-item,
+.application.sheet.party-sheet article.party section.box-item,
+.application.sheet.party-sheet article.box section.box-item {
   flex: 0 0 48%;
   max-width: 48%;
   height: 70px;
@@ -3094,7 +3260,12 @@ body .application.sheet .form-group {
   background: var(--party-background-color);
   border-radius: 12px;
 }
-.application.sheet.party-sheet main section.party-member main {
+.application.sheet.party-sheet main section.party-member main,
+.application.sheet.party-sheet article.party section.party-member main,
+.application.sheet.party-sheet article.box section.party-member main,
+.application.sheet.party-sheet main section.box-item main,
+.application.sheet.party-sheet article.party section.box-item main,
+.application.sheet.party-sheet article.box section.box-item main {
   flex: 1;
   height: 100%;
   display: grid;
@@ -3103,54 +3274,119 @@ body .application.sheet .form-group {
   grid-template-areas: "title health" "types pp";
 }
 .application.sheet.party-sheet main section.party-member main div.title,
+.application.sheet.party-sheet article.party section.party-member main div.title,
+.application.sheet.party-sheet article.box section.party-member main div.title,
+.application.sheet.party-sheet main section.box-item main div.title,
+.application.sheet.party-sheet article.party section.box-item main div.title,
+.application.sheet.party-sheet article.box section.box-item main div.title,
 .application.sheet.party-sheet main section.party-member main div.health,
-.application.sheet.party-sheet main section.party-member main div.pp {
+.application.sheet.party-sheet article.party section.party-member main div.health,
+.application.sheet.party-sheet article.box section.party-member main div.health,
+.application.sheet.party-sheet main section.box-item main div.health,
+.application.sheet.party-sheet article.party section.box-item main div.health,
+.application.sheet.party-sheet article.box section.box-item main div.health,
+.application.sheet.party-sheet main section.party-member main div.pp,
+.application.sheet.party-sheet article.party section.party-member main div.pp,
+.application.sheet.party-sheet article.box section.party-member main div.pp,
+.application.sheet.party-sheet main section.box-item main div.pp,
+.application.sheet.party-sheet article.party section.box-item main div.pp,
+.application.sheet.party-sheet article.box section.box-item main div.pp {
   margin: 2px;
 }
-.application.sheet.party-sheet main section.party-member main .title {
+.application.sheet.party-sheet main section.party-member main .title,
+.application.sheet.party-sheet article.party section.party-member main .title,
+.application.sheet.party-sheet article.box section.party-member main .title,
+.application.sheet.party-sheet main section.box-item main .title,
+.application.sheet.party-sheet article.party section.box-item main .title,
+.application.sheet.party-sheet article.box section.box-item main .title {
   grid-area: title;
   justify-content: end;
 }
-.application.sheet.party-sheet main section.party-member main .health {
+.application.sheet.party-sheet main section.party-member main .health,
+.application.sheet.party-sheet article.party section.party-member main .health,
+.application.sheet.party-sheet article.box section.party-member main .health,
+.application.sheet.party-sheet main section.box-item main .health,
+.application.sheet.party-sheet article.party section.box-item main .health,
+.application.sheet.party-sheet article.box section.box-item main .health {
   grid-area: health;
   display: flex;
   flex-direction: column;
   justify-content: end;
   font-size: small;
 }
-.application.sheet.party-sheet main section.party-member main .health .details {
+.application.sheet.party-sheet main section.party-member main .health .details,
+.application.sheet.party-sheet article.party section.party-member main .health .details,
+.application.sheet.party-sheet article.box section.party-member main .health .details,
+.application.sheet.party-sheet main section.box-item main .health .details,
+.application.sheet.party-sheet article.party section.box-item main .health .details,
+.application.sheet.party-sheet article.box section.box-item main .health .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.application.sheet.party-sheet main section.party-member main .health .details span {
+.application.sheet.party-sheet main section.party-member main .health .details span,
+.application.sheet.party-sheet article.party section.party-member main .health .details span,
+.application.sheet.party-sheet article.box section.party-member main .health .details span,
+.application.sheet.party-sheet main section.box-item main .health .details span,
+.application.sheet.party-sheet article.party section.box-item main .health .details span,
+.application.sheet.party-sheet article.box section.box-item main .health .details span {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
-.application.sheet.party-sheet main section.party-member main .health .details .divider {
+.application.sheet.party-sheet main section.party-member main .health .details .divider,
+.application.sheet.party-sheet article.party section.party-member main .health .details .divider,
+.application.sheet.party-sheet article.box section.party-member main .health .details .divider,
+.application.sheet.party-sheet main section.box-item main .health .details .divider,
+.application.sheet.party-sheet article.party section.box-item main .health .details .divider,
+.application.sheet.party-sheet article.box section.box-item main .health .details .divider {
   margin: 0 0.25rem;
 }
-.application.sheet.party-sheet main section.party-member main .pp {
+.application.sheet.party-sheet main section.party-member main .pp,
+.application.sheet.party-sheet article.party section.party-member main .pp,
+.application.sheet.party-sheet article.box section.party-member main .pp,
+.application.sheet.party-sheet main section.box-item main .pp,
+.application.sheet.party-sheet article.party section.box-item main .pp,
+.application.sheet.party-sheet article.box section.box-item main .pp {
   grid-area: pp;
   display: flex;
   flex-direction: column;
   font-size: small;
 }
-.application.sheet.party-sheet main section.party-member main .pp .details {
+.application.sheet.party-sheet main section.party-member main .pp .details,
+.application.sheet.party-sheet article.party section.party-member main .pp .details,
+.application.sheet.party-sheet article.box section.party-member main .pp .details,
+.application.sheet.party-sheet main section.box-item main .pp .details,
+.application.sheet.party-sheet article.party section.box-item main .pp .details,
+.application.sheet.party-sheet article.box section.box-item main .pp .details {
   margin-top: 0.1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.application.sheet.party-sheet main section.party-member main .pp .details span {
+.application.sheet.party-sheet main section.party-member main .pp .details span,
+.application.sheet.party-sheet article.party section.party-member main .pp .details span,
+.application.sheet.party-sheet article.box section.party-member main .pp .details span,
+.application.sheet.party-sheet main section.box-item main .pp .details span,
+.application.sheet.party-sheet article.party section.box-item main .pp .details span,
+.application.sheet.party-sheet article.box section.box-item main .pp .details span {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
-.application.sheet.party-sheet main section.party-member main .pp .details .divider {
+.application.sheet.party-sheet main section.party-member main .pp .details .divider,
+.application.sheet.party-sheet article.party section.party-member main .pp .details .divider,
+.application.sheet.party-sheet article.box section.party-member main .pp .details .divider,
+.application.sheet.party-sheet main section.box-item main .pp .details .divider,
+.application.sheet.party-sheet article.party section.box-item main .pp .details .divider,
+.application.sheet.party-sheet article.box section.box-item main .pp .details .divider {
   margin: 0 0.25rem;
 }
-.application.sheet.party-sheet main section.party-member main .types {
+.application.sheet.party-sheet main section.party-member main .types,
+.application.sheet.party-sheet article.party section.party-member main .types,
+.application.sheet.party-sheet article.box section.party-member main .types,
+.application.sheet.party-sheet main section.box-item main .types,
+.application.sheet.party-sheet article.party section.box-item main .types,
+.application.sheet.party-sheet article.box section.box-item main .types {
   grid-area: types;
   display: flex;
   flex-direction: row;
@@ -3158,52 +3394,154 @@ body .application.sheet .form-group {
   align-items: center;
   overflow: hidden;
 }
-.application.sheet.party-sheet main section.party-member main .types span {
+.application.sheet.party-sheet main section.party-member main .types span,
+.application.sheet.party-sheet article.party section.party-member main .types span,
+.application.sheet.party-sheet article.box section.party-member main .types span,
+.application.sheet.party-sheet main section.box-item main .types span,
+.application.sheet.party-sheet article.party section.box-item main .types span,
+.application.sheet.party-sheet article.box section.box-item main .types span {
   flex: 0 0 28px;
   height: 28px;
   margin: 2px;
 }
-.application.sheet.party-sheet main section.party-member main .types span img {
+.application.sheet.party-sheet main section.party-member main .types span img,
+.application.sheet.party-sheet article.party section.party-member main .types span img,
+.application.sheet.party-sheet article.box section.party-member main .types span img,
+.application.sheet.party-sheet main section.box-item main .types span img,
+.application.sheet.party-sheet article.party section.box-item main .types span img,
+.application.sheet.party-sheet article.box section.box-item main .types span img {
   height: 28px;
   width: 28px;
   object-fit: scale-down;
   border: unset;
   border-radius: 50%;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(3)) span,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(3)) span {
   flex: 0 0 24px;
   height: 24px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(3)) span img,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(3)) span img {
   height: 24px;
   width: 24px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(4)) span,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(4)) span {
   flex: 0 0 17px;
   height: 17px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(4)) span img,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(4)) span img {
   height: 17px;
   width: 17px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(5)) span,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(5)) span {
   flex: 0 0 13px;
   height: 13px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(5)) span img,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(5)) span img {
   height: 13px;
   width: 13px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)),
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(11)),
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(11)),
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(11)),
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(11)),
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(11)) {
   overflow-y: auto;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(11)) span,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(11)) span {
   flex: 0 0 15px;
   height: 15px;
 }
-.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span img {
+.application.sheet.party-sheet main section.party-member main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet article.party section.party-member main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet article.box section.party-member main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet main section.box-item main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet article.party section.box-item main .types:has(:nth-child(11)) span img,
+.application.sheet.party-sheet article.box section.box-item main .types:has(:nth-child(11)) span img {
   height: 15px;
   width: 15px;
+}
+.application.sheet.party-sheet article.party header.party-header,
+.application.sheet.party-sheet article.box header.party-header,
+.application.sheet.party-sheet article.party header.box-header,
+.application.sheet.party-sheet article.box header.box-header {
+  flex: 1 0 100%;
+}
+.application.sheet.party-sheet article.party section.party-member,
+.application.sheet.party-sheet article.box section.party-member,
+.application.sheet.party-sheet article.party section.box-item,
+.application.sheet.party-sheet article.box section.box-item {
+  height: 40px;
+  flex: 1;
+  min-width: 200px;
+}
+.application.sheet.party-sheet article.party section.party-member .thumbnail,
+.application.sheet.party-sheet article.box section.party-member .thumbnail,
+.application.sheet.party-sheet article.party section.box-item .thumbnail,
+.application.sheet.party-sheet article.box section.box-item .thumbnail {
+  min-width: 40px;
+  height: 40px;
+}
+.application.sheet.party-sheet article.party section.party-member .thumbnail img,
+.application.sheet.party-sheet article.box section.party-member .thumbnail img,
+.application.sheet.party-sheet article.party section.box-item .thumbnail img,
+.application.sheet.party-sheet article.box section.box-item .thumbnail img {
+  height: 32px;
+  width: 32px;
+}
+.application.sheet.party-sheet article.party section.party-member main,
+.application.sheet.party-sheet article.box section.party-member main,
+.application.sheet.party-sheet article.party section.box-item main,
+.application.sheet.party-sheet article.box section.box-item main {
+  grid-template-rows: 1fr;
+  grid-template-areas: "title types";
+}
+.application.sheet.party-sheet article.party section.party-member main .title,
+.application.sheet.party-sheet article.box section.party-member main .title,
+.application.sheet.party-sheet article.party section.box-item main .title,
+.application.sheet.party-sheet article.box section.box-item main .title {
+  justify-content: center;
+}
+.application.sheet.party-sheet article.party section.party-member main .types,
+.application.sheet.party-sheet article.box section.party-member main .types,
+.application.sheet.party-sheet article.party section.box-item main .types,
+.application.sheet.party-sheet article.box section.box-item main .types {
+  justify-content: center;
 }
 .application.sheet.team-sheet .window-content {
   grid-template-columns: unset;
@@ -3688,6 +4026,28 @@ body .application.sheet .form-group {
 .application.sheet.modifier-popup main.skill-challenge-rating article select {
   flex: 0 0 55%;
 }
+.application.sheet.modifier-popup main .roll-mode-panel {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: space-between;
+  white-space: nowrap;
+  gap: 8px;
+}
+.application.sheet.modifier-popup main .roll-mode-panel label {
+  display: flex;
+  align-items: center;
+}
+.application.sheet.modifier-popup main .roll-mode-panel .roll-mode {
+  flex: 1;
+}
+.application.sheet.modifier-popup main .roll-mode-panel .roll-mode select {
+  border-radius: 2px;
+  cursor: pointer;
+  height: 1.5em;
+  margin-left: 8px;
+  width: 100%;
+}
 .application.sheet.modifier-popup main .modifier {
   display: flex;
   flex-direction: row;
@@ -3910,6 +4270,43 @@ body .application.sheet .form-group {
 .application.sheet.modifier-popup.attack main footer {
   margin-top: 0.5rem;
 }
+.application.sheet.target-selector-popup .window-content {
+  padding: 0.5rem;
+}
+.application.sheet.target-selector-popup .available-targets {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.application.sheet.target-selector-popup .available-targets .target {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 5px;
+  padding: 0.25rem;
+}
+.application.sheet.target-selector-popup .available-targets .target:hover {
+  box-shadow: 0px 0px 5px var(--color-shadow-primary);
+}
+.application.sheet.target-selector-popup .available-targets .target img {
+  width: 36px;
+  height: 36px;
+  border: none;
+}
+.application.sheet.target-selector-popup fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+.application.sheet.pick-a-thing-prompt .window-content {
+  display: flex;
+}
 .application.sheet input[type="color"] {
   border-color: var(--color-input-border-color, #000);
 }
@@ -3928,8 +4325,8 @@ body .application.sheet .form-group {
   --data-inspector-selected: #edcb8e;
   --data-inspector-details-separator: hsla(34, 17%, 36%, 0.25);
   --data-inspector-border-hover: hsla(13, 12%, 29%, 0.58);
-  --data-inspector-entry-not-in-source: #255e74;
-  --data-inspector-entry-not-in-rolldata: #64486a;
+  --data-inspector-entry-not-in-source: #0480ff;
+  --data-inspector-entry-not-in-rolldata: #bf5ed3;
   --data-inspector-entry-hover-shadow: hsla(16, 100%, 50%, 0.37);
   --data-inspector-entry-hover-background: hsla(80, 5%, 12%, 0.18);
   --data-inspector-entry-hover-boxshadow: hsla(27, 21%, 29%, 0.39);
@@ -3938,7 +4335,6 @@ body .application.sheet .form-group {
   --data-inspector-tooltip-children: indianred;
   --data-inspector-tooltip-length: indianred;
   --data-inspector-tooltip-background: #e7e1d9;
-  --data-inspector-tooltip-font: #444241;
   --data-inspector-tooltip-border: #8b8383;
   --data-inspector-tooltip-shadow: darkred;
 }
@@ -4119,22 +4515,22 @@ body .application.sheet .form-group {
   flex: 3;
   font-weight: bold;
 }
-.application.sheet.data-inspector .window-content content.main > .data {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list {
   height: 100%;
   overflow-y: scroll;
 }
-.application.sheet.data-inspector .window-content content.main > .data .warning {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list .warning {
   text-align: center;
 }
-.application.sheet.data-inspector .window-content content.main > .data.derived [data-path]:not(.in-source) .key,
-.application.sheet.data-inspector .window-content content.main > .data.rolldata [data-path]:not(.in-source) .key {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list.derived [data-path]:not(.in-source) .key,
+.application.sheet.data-inspector .window-content content.main section.content > .data-list.rolldata [data-path]:not(.in-source) .key {
   color: var(--data-inspector-entry-not-in-source);
 }
-.application.sheet.data-inspector .window-content content.main > .data.source [data-path]:not(.in-rolldata) .key {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list.source [data-path]:not(.in-rolldata) .key {
   color: var(--data-inspector-entry-not-in-rolldata);
 }
-.application.sheet.data-inspector .window-content content.main > .data .data-pools .absent.temporary,
-.application.sheet.data-inspector .window-content content.main > .data .data-pools .absent.source {
+.application.sheet.data-inspector .window-content content.main section.content > .data-list .data-pools .absent.temporary,
+.application.sheet.data-inspector .window-content content.main section.content > .data-list .data-pools .absent.source {
   color: #c30808;
 }
 .application.sheet.data-inspector .window-content content.main > .header {
@@ -4529,6 +4925,122 @@ body .application.sheet .form-group {
   display: flex;
   flex: 1;
   overflow: auto;
+}
+.application.sheet.choice-set-prompt .window-content h3 {
+  display: flex;
+  justify-content: center;
+}
+.application.sheet.choice-set-prompt .window-content button,
+.application.sheet.choice-set-prompt .window-content select {
+  display: flex;
+  margin: var(--space-4) auto;
+}
+.application.sheet.choice-set-prompt .window-content .choices {
+  justify-items: center;
+  margin: auto;
+  max-width: max-content;
+  margin-bottom: 0.5rem;
+}
+.application.sheet.choice-set-prompt .window-content .choices.select-menu {
+  min-width: 18em;
+  padding: 0.5rem;
+  margin-bottom: 0;
+}
+.application.sheet.choice-set-prompt .window-content .choices.select-menu tags {
+  background-color: rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--color-border-light-tertiary);
+  border-radius: 3px;
+  height: 2rem;
+  width: 100%;
+}
+.application.sheet.choice-set-prompt .window-content .choices.select-menu tags .tagify__input {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  margin: 0;
+}
+.application.sheet.choice-set-prompt .window-content .choices button,
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone {
+  cursor: pointer;
+  max-width: 100%;
+}
+.application.sheet.choice-set-prompt .window-content .choices button:not(.with-image),
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone:not(.with-image) {
+  min-width: 120px;
+  justify-content: center;
+}
+.application.sheet.choice-set-prompt .window-content .choices button.with-image,
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone.with-image {
+  align-items: center;
+  justify-content: start;
+  padding-left: 0;
+}
+.application.sheet.choice-set-prompt .window-content .choices button.with-image img,
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone.with-image img {
+  border: 1px solid #444;
+  height: 32px;
+  margin-right: 0.5em;
+}
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons .choice {
+  align-items: center;
+  display: flex;
+  gap: 0.5em;
+  width: 100%;
+  min-width: 170px;
+}
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons .choice.select {
+  margin-bottom: 0.5rem;
+}
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons .choice a.item-info {
+  align-items: center;
+  border: 1px solid var(--color-light-5);
+  border-radius: 4px;
+  display: flex;
+  height: var(--font-size-20);
+  justify-content: center;
+  min-width: var(--font-size-20);
+}
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons .choice a.item-info.disabled {
+  color: var(--color-disabled);
+  cursor: default;
+}
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons .choice a.item-info.disabled:hover,
+.application.sheet.choice-set-prompt .window-content .choices .choice-buttons .choice a.item-info.disabled:active {
+  text-shadow: none;
+}
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone {
+  border: 1px solid var(--color-border-light-primary);
+  border-radius: 3px;
+  color: var(--color-text-dark-2);
+  cursor: default;
+  display: flex;
+  font-family: var(--font-primary);
+  font-size: var(--font-size-14);
+  line-height: 1.75rem;
+  padding: var(--space-1) var(--space-6);
+}
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone i {
+  align-items: center;
+  border: 1px solid var(--color-text-light-4);
+  border-radius: 2px;
+  display: flex;
+  height: 1.6em;
+  justify-content: center;
+  margin-right: 0.5em;
+  width: 1.6em;
+}
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone i:after {
+  font-size: var(--font-size-20);
+}
+.application.sheet.choice-set-prompt .window-content .choices .drop-zone span {
+  color: var(--text-dark);
+  flex: 1;
 }
 .application .standard-form input[type="checkbox"] {
   --checkbox-background-color: #3d343f;
@@ -4929,16 +5441,16 @@ body .application.sheet .form-group {
   background-size: 48px 48px;
 }
 .ptr2e.actor form nav.main-navigation .tabs .item.summary {
-  background-image: url("/systems/ptr2e/img/icons/nav/summary.webp");
+  background-image: url("systems/ptr2e/img/icons/nav/summary.webp");
 }
 .ptr2e.actor form nav.main-navigation .tabs .item.actions {
-  background-image: url("/systems/ptr2e/img/icons/nav/actions.webp");
+  background-image: url("systems/ptr2e/img/icons/nav/actions.webp");
 }
 .ptr2e.actor form nav.main-navigation .tabs .item.skills {
-  background-image: url("/systems/ptr2e/img/icons/nav/skills.webp");
+  background-image: url("systems/ptr2e/img/icons/nav/skills.webp");
 }
 .ptr2e.actor form nav.main-navigation .tabs .item.gear {
-  background-image: url("/systems/ptr2e/img/icons/nav/gear.webp");
+  background-image: url("systems/ptr2e/img/icons/nav/gear.webp");
 }
 .ptr2e.actor form nav.main-navigation .tabs .item.active {
   filter: drop-shadow(1px 1px 2px var(--color-shadow-primary));
@@ -5258,4 +5770,13 @@ body .application.sheet .form-group {
 .ptr2e .directory-item.document .entry-name.document-name .actor-level {
   font-size: x-small;
   color: var(--color-text-light-primary);
+}
+.directory-item.document .entry-name.document-name.rarity-uncommon {
+  color: #33a7ff;
+}
+.directory-item.document .entry-name.document-name.rarity-rare {
+  color: #f5c42e;
+}
+.directory-item.document .entry-name.document-name.rarity-unique {
+  color: #a526ff;
 }

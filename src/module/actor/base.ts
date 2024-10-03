@@ -38,6 +38,9 @@ class ActorPTR2e<
   TSystem extends ActorSystemPTR2e = ActorSystemPTR2e,
   TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
 > extends Actor<TParent, TSystem> {
+  /** Has this document completed `DataModel` initialization? */
+  declare initialized: boolean;
+
   // eslint-disable-next-line @typescript-eslint/class-literal-property-style
   get alliance(): string {
     return "";
@@ -167,6 +170,7 @@ class ActorPTR2e<
    * Step 1 - Copies data from source object to instance attributes
    * */
   override _initialize() {
+    this.initialized = false;
     const preparationWarnings = new Set<string>();
     this.synthetics = {
       ephemeralEffects: {},
@@ -214,6 +218,7 @@ class ActorPTR2e<
    * The work done by this method should be idempotent. There are situations in which prepareData may be called more than once.
    * */
   override prepareData() {
+    if(this.initialized) return;
     if (this.type === "ptu-actor") return super.prepareData();
 
     // Todo: Add appropriate `self:` options to the rollOptions
@@ -221,6 +226,7 @@ class ActorPTR2e<
 
     this.system.type.effectiveness = this._calculateEffectiveness();
 
+    this.initialized = true;
     super.prepareData();
   }
 
@@ -229,7 +235,27 @@ class ActorPTR2e<
    * */
   override prepareBaseData() {
     if (this.type === "ptu-actor") return super.prepareBaseData();
-    return super.prepareBaseData();
+    super.prepareBaseData();
+
+    if(this.system.shield.value > 0) this.rollOptions.addOption("self", "state:shielded");
+    if(this.system.health.value <= Math.floor(this.system.health.max * 0.25)) {
+      this.rollOptions.addOption("self", "state:desperation-3-4");
+      this.rollOptions.addOption("self", "state:desperation-1-2");
+      this.rollOptions.addOption("self", "state:desperation-1-3");
+      this.rollOptions.addOption("self", "state:desperation-1-4");
+    }
+    else if(this.system.health.value <= Math.floor(this.system.health.max * (1/3))) {
+      this.rollOptions.addOption("self", "state:desperation-3-4");
+      this.rollOptions.addOption("self", "state:desperation-1-2");
+      this.rollOptions.addOption("self", "state:desperation-1-3");
+    }
+    else if(this.system.health.value <= Math.floor(this.system.health.max * 0.5)) {
+      this.rollOptions.addOption("self", "state:desperation-3-4");
+      this.rollOptions.addOption("self", "state:desperation-1-2");
+    }
+    else if(this.system.health.value <= Math.floor(this.system.health.max * 0.75)) {
+      this.rollOptions.addOption("self", "state:desperation-3-4");
+    }
   }
 
   /**
@@ -506,13 +532,13 @@ class ActorPTR2e<
     // Damage is applied to shield first, then health
     // Shields cannot be healed
     if (damage > 0 || healShield) {
-      const damageAppliedToShield = Math.min(damage || 0, this.system.health.shield.value);
-      if (this.system.health.shield.value > 0 && damageAppliedToShield === 0) return 0;
+      const damageAppliedToShield = Math.min(damage || 0, this.system.shield.value);
+      if (this.system.shield.value > 0 && damageAppliedToShield === 0) return 0;
       if (damageAppliedToShield > 0 || healShield) {
-        const isShieldBroken = this.system.health.shield.value - damageAppliedToShield <= 0;
+        const isShieldBroken = this.system.shield.value - damageAppliedToShield <= 0;
         await this.update({
-          "system.health.shield.value": Math.max(
-            this.system.health.shield.value - damage,
+          "system.shield.value": Math.max(
+            this.system.shield.value - damage,
             0
           ),
         });
@@ -528,13 +554,13 @@ class ActorPTR2e<
                       `Shield healed for ${Math.abs(
                         damageAppliedToShield
                       )} health`,
-                      `Shield remaining: ${this.system.health.shield.value}`,
+                      `Shield remaining: ${this.system.shield.value}`,
                     ]
                     : [
                       `Shield took ${damageAppliedToShield} damage`,
                       isShieldBroken
                         ? "Shield broken!"
-                        : `Shield remaining: ${this.system.health.shield.value}`,
+                        : `Shield remaining: ${this.system.shield.value}`,
                     ],
                 damageApplied: damageAppliedToShield,
                 shieldApplied: true,
@@ -1166,6 +1192,16 @@ class ActorPTR2e<
     return super.createDocuments(sources, context);
   }
 
+  static override async createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: { parent?: TDocument["parent"]; pack?: Collection<TDocument> | null; types?: string[] } & Partial<FormApplicationOptions>): Promise<TDocument | null>;
+  static override async createDialog(data: Record<string, unknown> = {}, context: { parent?: TokenDocumentPTR2e | null; pack?: Collection<ActorPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions> = {}) {
+    if(!Array.isArray(context.types)) context.types = this.TYPES.filter(t => t !== "ptu-actor");
+    else {
+      if(context.types.length) context.types = context.types.filter(t => t !== "ptu-actor");
+      else context.types = this.TYPES.filter(t => t !== "ptu-actor");
+    }
+    return super.createDialog(data, context);
+  }
+
   protected override _onEmbeddedDocumentChange(): void {
     super._onEmbeddedDocumentChange();
 
@@ -1180,7 +1216,7 @@ class ActorPTR2e<
   ): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
-
+    if (this.type === 'ptu-actor') throw new Error("PTU Actors cannot be created directly.");
     if (options.fail === true) return false;
 
     if(this.system.party.ownerOf) {
@@ -1198,7 +1234,7 @@ class ActorPTR2e<
   ): Promise<boolean | void> {
     if(changed.system?.party?.ownerOf) {
       const folder = game.folders.get(changed.system.party.ownerOf as Maybe<string>) as FolderPTR2e;
-      if(folder?.owner) {
+      if(folder?.owner && folder.owner !== this.uuid) {
         throw new Error("Cannot change the owner of a party folder to an actor that does not own it. Please remove the current party owner first.");
       }
     }
@@ -1242,14 +1278,14 @@ class ActorPTR2e<
       }
     }
 
-    if (changed.system?.health?.shield !== undefined) {
+    if (changed.system?.shield !== undefined) {
       if (
-        typeof changed.system.health.shield.value === "number" &&
-        changed.system.health.shield.value > this.system.health.shield.value
+        typeof changed.system.shield.value === "number" &&
+        changed.system.shield.value > this.system.shield.value
       ) {
-        changed.system.health.shield.max ??= changed.system.health.shield.value;
-      } else if (changed.system.health.shield.value === 0) {
-        changed.system.health.shield.max = 0;
+        changed.system.shield.max ??= changed.system.shield.value;
+      } else if (changed.system.shield.value === 0) {
+        changed.system.shield.max = 0;
       }
     }
 

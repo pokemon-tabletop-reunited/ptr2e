@@ -11,6 +11,7 @@ import { preImportJSON } from "@module/data/doc-helper.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import * as R from "remeda";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
+import { processGrantDeletions } from "@module/effects/changes/grant-item.ts";
 
 /**
  * @extends {PTRItemData}
@@ -19,7 +20,8 @@ class ItemPTR2e<
   TSystem extends ItemSystemPTR = ItemSystemPTR,
   TParent extends ActorPTR2e | null = ActorPTR2e | null,
 > extends Item<TParent, TSystem> {
-  declare grantedBy: ItemPTR2e | ActiveEffectPTR2e | null;
+  /** Has this document completed `DataModel` initialization? */
+  declare initialized: boolean;
 
   declare sourceId: string;
 
@@ -32,6 +34,12 @@ class ItemPTR2e<
   /** The recorded schema version of this item, updated after each data migration */
   get schemaVersion(): number | null {
     return Number(this.system._migration?.version) || null;
+  }
+
+  get grantedBy(): ItemPTR2e | ActiveEffectPTR2e | null {
+    return (this.actor?.items.get(this.flags.ptr2e.grantedBy?.id ?? "") as Maybe<ItemPTR2e>)
+      ?? (this.actor?.effects.get(this.flags.ptr2e.grantedBy?.id ?? "") as Maybe<ActiveEffectPTR2e>)
+      ?? null;
   }
 
   protected override _initializeSource(
@@ -82,12 +90,29 @@ class ItemPTR2e<
 
   override getRollData(): Record<string, unknown> {
     const rollData: Record<string, unknown> = { item: this };
-    if(this.parent instanceof ActorPTR2e) rollData.actor = this.parent;
+    if (this.parent instanceof ActorPTR2e) rollData.actor = this.parent;
     return rollData;
   }
 
   get actions() {
     return this._actions;
+  }
+
+  protected override _initialize(options?: Record<string, unknown>): void {
+    this.initialized = false;
+    super._initialize(options);
+  }
+
+  /**
+   * Never prepare data except as part of `DataModel` initialization. If embedded, don't prepare data if the parent is
+   * not yet initialized. See https://github.com/foundryvtt/foundryvtt/issues/7987
+   */
+  override prepareData(): void {
+    if (this.initialized) return;
+    if (!this.parent || this.parent.initialized) {
+      this.initialized = true;
+      super.prepareData();
+    }
   }
 
   override prepareBaseData() {
@@ -97,6 +122,7 @@ class ItemPTR2e<
     this.rollOptions = new RollOptionManager(this);
 
     this.rollOptions.addOption("item", `type:${this.type}`, { addToParent: false });
+    this.flags.ptr2e.itemGrants ??= {};
 
     super.prepareBaseData();
   }
@@ -274,7 +300,7 @@ class ItemPTR2e<
   override async update(data: Record<string, unknown>, context?: DocumentModificationContext<TParent> | undefined): Promise<this | undefined> {
     if (!(this.system instanceof SpeciesSystemModel && this.system.virtual) && !this.flags.ptr2e.virtual) return super.update(data, context);
 
-    await this.actor?.update({ "system.species": data.system });
+    await this.actor?.update({ "system.species": fu.expandObject(data).system });
     this.updateSource(data);
     foundry.applications.instances.get(`SpeciesSheet-${this.uuid}`)?.render({});
     return undefined;
@@ -284,6 +310,44 @@ class ItemPTR2e<
   override async importFromJSON(json: string): Promise<this> {
     const processed = await preImportJSON(this, json);
     return processed ? super.importFromJSON(processed) : this;
+  }
+
+  static override async deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]> & {pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[]}): Promise<TDocument[]>;
+  static override async deleteDocuments(ids: string[] = [], context: DocumentModificationContext<ActorPTR2e | null> & {pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[]} = {}): Promise<foundry.abstract.Document[]> {
+    ids = Array.from(new Set(ids));
+    const actor = context.parent;
+    if(actor) {
+      const items = ids.flatMap(id => actor.items.get(id) ?? []) as ItemPTR2e<ItemSystemPTR, ActorPTR2e>[];
+      const effects = context.pendingEffects ? [...context.pendingEffects] : [] as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[];
+
+      // TODO: Logic for container deletion
+
+      // Run Change Model pre-delete callbacks
+      for(const item of [...items]) {
+        if(item.effects.size) {
+          for(const effect of item.effects) {
+            for(const change of (effect as ActiveEffectPTR2e).changes) {
+              await change.preDelete?.({pendingItems: items, context});
+            }
+
+            await processGrantDeletions(effect as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects)
+          }
+        }
+        else {
+          if(item.grantedBy && item.grantedBy instanceof ActiveEffectPTR2e) {
+            await processGrantDeletions(item.grantedBy as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects);
+          }
+        }
+      }
+      if(effects.length) {
+        const effectIds = Array.from(new Set(effects.map(e => e.id))).filter(id => actor.effects.has(id) && !context.pendingEffects?.find(e => e.id === id));
+        if(effectIds.length) {
+          await ActiveEffectPTR2e.deleteDocuments(effectIds, {pendingItems: items, parent: actor});
+        }
+      }
+      ids = Array.from(new Set(items.map(i => i.id))).filter(id => actor.items.has(id));
+    }
+    return super.deleteDocuments(ids, context);
   }
 }
 

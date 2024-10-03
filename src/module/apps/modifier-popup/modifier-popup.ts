@@ -26,7 +26,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         modifiers: {
             id: "modifiers",
-            template: "/systems/ptr2e/templates/apps/modifier-popup.hbs",
+            template: "systems/ptr2e/templates/apps/modifier-popup.hbs",
         },
     };
 
@@ -237,7 +237,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
             return;
         }
         const result = formData.object;
-        const rollMode = result.rollMode as RollMode;
+        const rollMode = result.rollmode as RollMode;
 
         this.resolve({ rollMode });
         this.promise = null;

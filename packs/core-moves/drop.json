@@ -1,36 +1,35 @@
 {
   "name": "Drop",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/untyped_icon.svg",
+  "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "drop",
-    "description": "Effect: You drop your currently equipped Held item on the space you are standing on. This frees up your Held Item Slot.",
-    "traits": [],
+    "description": "<p>Effect: The user drops a currently equipped Held item into the space they they are occupying. This frees up the user's Held Item Slot.</p>",
+    "traits": [
+      "manipulate",
+      "contact"
+    ],
     "actions": [
       {
         "slug": "drop",
         "name": "Drop",
-        "type": "attack",
+        "type": "generic",
         "traits": [
-          "basic"
+          "manipulate",
+          "contact"
         ],
         "range": {
           "target": "self",
+          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "free"
         },
-        "category": "status",
-        "types": [
-          "untyped"
-        ],
-        "description": "Effect: You drop your currently equipped Held item on the space you are standing on. This frees up your Held Item Slot.",
-        "free": true,
-        "img": "/systems/ptr2e/img/svg/untyped_icon.svg"
+        "description": "<p>Effect: The user drops a currently equipped Held item into the space they they are occupying. This frees up the user's Held Item Slot.</p>",
+        "img": "icons/svg/explosion.svg"
       }
-    ],
-    "grade": "E"
+    ]
   },
   "_id": "qbK1AQEOT6YkmKWG",
   "effects": []

@@ -1,10 +1,9 @@
 {
   "name": "Psybeam",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/psychic_icon.svg",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "psybeam",
-    "description": "",
     "traits": [
       "ray",
       "pp-updated"
@@ -33,12 +32,73 @@
         "types": [
           "psychic"
         ],
-        "description": "Effect: On hit, the target has a 10% chance of becoming @Affliction[confused] 5.",
-        "img": "/systems/ptr2e/img/svg/psychic_icon.svg"
+        "description": "<p>Effect: On hit, the target has a 10% chance of becoming @Affliction[confused] 5.</p>",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg"
       }
     ],
-    "grade": "D"
+    "grade": "D",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "fzZL7wrQyLNrNwr6",
-  "effects": []
+  "effects": [
+    {
+      "name": "Psybeam",
+      "type": "affliction",
+      "_id": "HgXyVpdRMd4vJt3Y",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "psybeam-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage"
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.2.1",
+        "createdTime": 1726143117595,
+        "modifiedTime": 1726143139360,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

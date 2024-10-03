@@ -1,16 +1,16 @@
 {
   "name": "Wise Glasses",
-  "img": "/systems/ptr2e/img/icons/item_icon.webp",
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
       "slot": "accessory",
-      "carryType": "stowed",
+      "carryType": "worn",
       "handsHeld": null
     },
     "grade": "B",
@@ -29,7 +29,7 @@
         "slug": "wise-glasses",
         "type": "passive",
         "description": "Effect: The user's Special-Category attacks deal 10% more damage.",
-        "img": "/systems/ptr2e/img/icons/item_icon.webp",
+        "img": "systems/ptr2e/img/icons/equipment_icon.webp",
         "traits": [
           "Combat"
         ],
@@ -44,11 +44,12 @@
           "delay": null,
           "priority": null
         },
-        "variant": null
+        "variant": null,
+        "hidden": false
       }
     ],
     "description": "Effect: The user's Special-Category attacks deal 10% more damage.",
-    "slug": null,
+    "slug": "wise-glasses",
     "container": null,
     "quantity": 1,
     "identification": {
@@ -59,26 +60,89 @@
         "img": "systems/ptu/css/images/icons/item_icon.png",
         "description": "<p>Unidentified Item</p>"
       }
+    },
+    "_migration": {
+      "version": 0.103,
+      "previous": {
+        "schema": null,
+        "foundry": "12.329",
+        "system": "0.10.0-alpha.2.0.2"
+      }
     }
   },
-  "_id": "7joi62wx19VP0B5G",
-  "effects": [],
+  "effects": [
+    {
+      "name": "Wise Glasses",
+      "type": "passive",
+      "_id": "LuvHUkJ3j5mtWvat",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "special-attack-damage",
+            "value": 10,
+            "predicate": [],
+            "label": "Wise Glasses",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
   "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-gear.Item.3qgC6UrcEyocS6cu"
+    },
+    "exportSource": {
+      "world": "pokemon-mystery-dungeon-shrouded-kingdoms",
+      "system": "ptr2e",
+      "coreVersion": "12.330",
+      "systemVersion": "0.10.0-alpha.2.0.3"
+    }
   },
-  "flags": {},
   "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
+    "coreVersion": "12.329",
     "systemId": "ptr2e",
-    "systemVersion": "0.0.0-alpha.1.0",
-    "createdTime": 1717878484297,
-    "modifiedTime": 1717878484297,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!7joi62wx19VP0B5G"
+    "systemVersion": "0.10.0-alpha.2.0.3",
+    "createdTime": 1721752635597,
+    "modifiedTime": 1721752635597,
+    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+  }
 }

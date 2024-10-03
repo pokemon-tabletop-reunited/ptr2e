@@ -7,26 +7,87 @@
   "system": {
     "actions": [
       {
-        "name": "Weak Spot Action (#1)",
-        "slug": "weak-spot-action-1",
-        "description": "<p>Connection - Focus Energy.</p>",
+        "name": "Weak Spot",
+        "slug": "weak-spot",
+        "description": "<p>Connection - Focus Energy. The user learns Laser Focus.</p>",
         "traits": [],
-        "type": "generic",
+        "type": "passive",
         "range": {
-          "target": "enemy",
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        }
+      },
+      {
+        "slug": "focus-energy",
+        "name": "Focus Energy",
+        "type": "attack",
+        "traits": [
+          "aura"
+        ],
+        "range": {
+          "target": "creature",
           "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 0,
+          "powerPoints": 3,
           "delay": null,
-          "priority": null
-        }
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The user's gain +1 CRIT stage for 5 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true
+      },
+      {
+        "slug": "laser-focus",
+        "name": "Laser Focus",
+        "type": "attack",
+        "traits": [
+          "aura"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "Effect: The user gains +4 CRIT stages for 2 activations.",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
       }
     ],
     "slug": null,
-    "description": "<p>Connection - Focus Energy.</p>",
+    "description": "<p>Connection - Focus Energy. The user learns Laser Focus.</p>",
     "traits": [],
     "prerequisites": [
       "Move Known: Focus Energy"

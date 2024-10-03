@@ -11,21 +11,25 @@
       "approach": "power",
       "archetype": "Combat"
     },
-    "description": "<p>You hit an opponent with a [Social] Action. After spending the activation cost, the target gains Flinched 3.</p>",
+    "description": "<p>When the user hits a creature with a [Social] Action,they may spend 2 PP to cause to the target to be Flinched 3. For multiple targets, you must spend 2 PP to affect each target</p>",
     "actions": [
       {
         "name": "Hesitation",
         "slug": "hesitation",
-        "description": "<p>You hit an opponent with a [Social] Action. After spending the activation cost, the target gains Flinched 3.</p>",
+        "description": "<p>Trigger: The user's hits a creature with a [Social] Action.</p><p>Effect: The target is Flinched.</p>",
         "cost": {
           "activation": "free",
-          "powerPoints": 4
+          "powerPoints": 2,
+          "trigger": "The user's hits a creature with a [Social] Action."
         },
-        "type": "passive",
-        "traits": [],
-        "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+        "type": "generic",
+        "traits": [
+          "social",
+          "flinch-3"
+        ],
+        "img": "systems/ptr2e/img/icons/feat_icon.webp",
         "range": {
-          "target": "enemy",
+          "target": "creature",
           "unit": "m"
         }
       }
@@ -55,6 +59,6 @@
     }
   },
   "_id": "qslC7XqAQJZt0lxR",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
   "effects": []
 }

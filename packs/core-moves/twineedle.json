@@ -1,14 +1,15 @@
 {
   "name": "Twineedle",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/bug_icon.svg",
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "twineedle",
     "description": "",
     "traits": [
       "2-strike",
       "sharp",
-      "horn"
+      "horn",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -28,7 +29,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -39,7 +40,7 @@
         "types": [
           "bug"
         ],
-        "description": "Effect: On hit, the target has a 20% of gaining @Affliction[poison] 5.",
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[poison] 5.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

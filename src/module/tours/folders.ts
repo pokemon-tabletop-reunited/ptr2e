@@ -141,7 +141,7 @@ export class FoldersTour extends PTRTour {
                 return game.actors.get("toursantempactor") as ActorPTR2e ?? CONFIG.PTR.Actor.documentClass.create({
                     name: "Tour-san",
                     type: "humanoid",
-                    img: "/systems/ptr2e/img/tour-san.png",
+                    img: "systems/ptr2e/img/tour-san.png",
                     _id: "toursantempactor",
                     folder: "toursantmpfolder",
                 },  { keepId: true });
@@ -150,7 +150,7 @@ export class FoldersTour extends PTRTour {
                 return game.actors.get("toursanstvoltorb") as ActorPTR2e ?? CONFIG.PTR.Actor.documentClass.create({
                     name: "Tour-san's Voltorb",
                     type: "humanoid",
-                    img: "/systems/ptr2e/img/tour-san-voltorb.webp",
+                    img: "systems/ptr2e/img/tour-san-voltorb.webp",
                     _id: "toursanstvoltorb",
                     folder: "toursantmpfolder",
                 },  { keepId: true });

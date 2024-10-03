@@ -36,26 +36,26 @@ class SkillsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
     static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
         header: {
             id: "header",
-            template: "/systems/ptr2e/templates/apps/settings/skills-settings-header.hbs",
+            template: "systems/ptr2e/templates/apps/settings/skills-settings-header.hbs",
         },
         systemSkills: {
             id: "system-skills",
-            template: "/systems/ptr2e/templates/apps/settings/skills-settings.hbs",
+            template: "systems/ptr2e/templates/apps/settings/skills-settings.hbs",
             scrollable: [".scroll"],
         },
         userSkills: {
             id: "user-skills",
-            template: "/systems/ptr2e/templates/apps/settings/skills-settings.hbs",
+            template: "systems/ptr2e/templates/apps/settings/skills-settings.hbs",
             scrollable: [".scroll"],
         },
         moduleSkills: {
             id: "module-skills",
-            template: "/systems/ptr2e/templates/apps/settings/skills-settings.hbs",
+            template: "systems/ptr2e/templates/apps/settings/skills-settings.hbs",
             scrollable: [".scroll"],
         },
         footer: {
             id: "footer",
-            template: "/systems/ptr2e/templates/apps/settings/skills-settings-footer.hbs",
+            template: "systems/ptr2e/templates/apps/settings/skills-settings-footer.hbs",
         },
     };
 

@@ -1,17 +1,18 @@
 {
   "name": "Liquid Voice",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
   "system": {
     "actions": [
       {
         "traits": [],
         "name": "Liquid Voice",
         "slug": "liquid-voice",
-        "type": "passive",
+        "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
+          "powerPoints": 1,
+          "trigger": "The declares a [Sonic] attack.",
           "delay": null,
           "priority": null
         },
@@ -20,10 +21,10 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: Any [Sonic] attack the user knows has its original type changed to Water-Type."
+        "description": "Trigger: The declares a [Sonic] attack.\nEffect: The user changes that attack's Type to Water-Type until their next Activation."
       }
     ],
-    "description": "Effect: Any [Sonic] attack the user knows has its original type changed to Water-Type.",
+    "description": "Trigger: The declares a [Sonic] attack.\nEffect: The user changes that attack's Type to Water-Type until their next Activation.",
     "traits": [],
     "slug": null,
     "container": null

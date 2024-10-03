@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { sluggify } from "./helpers.ts";
 
 const categories = {
@@ -280,7 +283,7 @@ function moveToMarkdown(move: any): MarkdownResult | null {
             action.range.target
         }\n- **Range Increment**: ${action.range.distance}m\n- **Action Cost**: ${
             action.cost.activation
-        }\n- **PP Cost**: ${action.cost.powerPoints}\n\n### Effect\n${move.system.description}${
+        }\n- **PP Cost**: ${action.cost.powerPoints}\n\n### Effect\n${action.description}${
             actionStrings.length > 0 ? `\n## Other Move Actions\n${actionStrings.join("\n\n")}` : ""
         }`,
         path,
@@ -486,19 +489,19 @@ function weaponToMarkdown(weapon: any): MarkdownResult {
     };
 }
 
-type MarkdownResult = {
+interface MarkdownResult {
     metadata: MetaData;
     markdown: string;
     path: string;
-};
+}
 
-type MetaData = {
+interface MetaData {
     title: string;
     description: string;
     published: "true";
     tags: string;
     editor: string;
-};
+}
 
 export {
     abilityToMarkdown,

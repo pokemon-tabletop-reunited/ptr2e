@@ -5,7 +5,7 @@
             <legend>{{localize "PTR2E.ActorSystem.FIELDS.skills.options"}}</legend>
 
             <button type="button" class="toggle-hidden-skills" title="Toggle Hidden Skills" data-action="toggle-hidden-skills"><i class="fas fa-eye-slash"></i> {{localize "PTR2E.ActorSystem.FIELDS.skills.toggleHidden"}}</button>
-            <button type="button" class="edit-skills" data-action="edit-skills" title="Edit Skills"><i class="fas fa-edit"></i> {{localize "PTR2E.ActorSystem.FIELDS.skills.editSkills"}} {{#if actor.system.advancement.rvs.available}}<small class="ml-1 unspend">({{actor.system.advancement.rvs.available}} Unspend!)</small>{{/if}}</button>
+            <button type="button" class="edit-skills" data-action="edit-skills" title="Edit Skills"><i class="fas fa-edit"></i> {{localize "PTR2E.ActorSystem.FIELDS.skills.editSkills"}} {{#if actor.system.advancement.rvs.available}}<small class="ml-1 unspent">({{localize "PTR2E.ActorSheet.Unspent" num=actor.system.advancement.rvs.available}})</small>{{/if}}</button>
             <button type="button" class="luck-roll" data-action="luck-roll" title="End of Day Luck Roll"><i class="fas fa-dice-d10"></i> {{localize "PTR2E.ActorSystem.FIELDS.skills.luckRoll"}}</button>
         </fieldset>
     </div>
@@ -14,7 +14,7 @@
 {{#*inline "skill"}}
     <div class="skill {{skill.slug}}{{#if skill.favourite}} favourite{{/if}}{{#if hidden}} hidden{{/if}}{{#if skill.hidden}} hidden-skill{{/if}}" data-tooltip-direction="{{direction}}" data-slug="{{skill.slug}}" data-group="{{skill.group}}" data-tooltip="{{formatSlug skill.slug}}">
         <div class="skill-icon rollable">
-            <img class="dice" src="/icons/dice/d10black.svg" data-tooltip="Roll {{formatSlug skill.slug}}">
+            <img class="dice" src="icons/dice/d10black.svg" data-tooltip="Roll {{formatSlug skill.slug}}">
         </div>
         <span class="skill-name">{{formatSlug skill.slug}}</span>
         <span class="skill-total">{{skill.total}}</span>

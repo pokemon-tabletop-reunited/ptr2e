@@ -1,8 +1,9 @@
 import { ActorPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
 import Trait from "./models/trait.ts";
+import { ActiveEffectPTR2e } from "@effects";
 
-export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {
+export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e | ActiveEffectPTR2e> {
     #initialized = false;
 
     private get options(): RollOptions {
@@ -32,7 +33,7 @@ export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {
     ) {
         this.initialize();
         this.options[domain][option] = value;
-        if (domain !== "all") {
+        if (!["all", "change-selections"].includes(domain)) {
             this.options.all[`${domain}:${option}`] = value;
         }
         if (addToParent && this.document instanceof ItemPTR2e && this.document.actor) {
@@ -53,9 +54,9 @@ export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {
 
         if (!this.document.flags.ptr2e)
             this.document.flags.ptr2e = {
-                rollOptions: { all: {}, item: {}, effect: {}, self: {}, trait: {} },
+                rollOptions: { all: {}, item: {}, effect: {}, self: {}, trait: {}, clocks: {}, "change-selections": {} },
             };
-        else this.document.flags.ptr2e.rollOptions = { all: {}, item: {}, effect: {}, self: {}, trait: {} };
+        else this.document.flags.ptr2e.rollOptions = { all: {}, item: {}, effect: {}, self: {}, trait: {}, clocks: {}, "change-selections": {} };
 
         this.#initialized = true;
 
@@ -67,11 +68,13 @@ export const RollOptionDomains = {
     item: "item",
     effect: "effect",
     self: "self",
-    trait: "trait"
+    trait: "trait",
+    clocks: "clocks",
+    "change-selections": "change-selections",
 };
 export type RollOptions = {
     [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default interface RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {}
+export default interface RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e | ActiveEffectPTR2e> {}

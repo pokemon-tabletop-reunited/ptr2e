@@ -1,13 +1,15 @@
 {
   "name": "Strength",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "strength",
     "description": "",
     "traits": [
       "push-2",
-      "contact"
+      "contact",
+      "field",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -17,6 +19,7 @@
         "traits": [
           "push-2",
           "contact",
+          "field",
           "pp-updated"
         ],
         "range": {
@@ -37,7 +40,7 @@
         "types": [
           "normal"
         ],
-        "description": "Effect: On hit, the user may freely Move 2m towards the target as a Free Action after Pushing them.",
+        "description": "<p>Effect: On hit, the user may freely Move 2m towards the target as a Free Action after Pushing them.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

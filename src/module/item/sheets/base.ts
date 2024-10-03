@@ -19,7 +19,7 @@ export default class ItemSheetPTR2e<
       dragDrop: [
         {
           dropSelector: ".window-content",
-          dragSelector: ".effect-list .effect",
+          dragSelector: ".effect-list .effect, .actions-list .action",
         }
       ],
       position: {
@@ -61,20 +61,20 @@ export default class ItemSheetPTR2e<
   static readonly detailsTemplate: string = "";
   readonly noActions: boolean = false;
 
-  #allTraits: { value: string; label: string }[] | undefined;
+  #allTraits: { value: string; label: string, virtual?: boolean }[] | undefined;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     header: {
       id: "header",
-      template: "/systems/ptr2e/templates/items/parts/item-header.hbs",
+      template: "systems/ptr2e/templates/items/parts/item-header.hbs",
     },
     tabs: {
       id: "tabs",
-      template: "/systems/ptr2e/templates/items/parts/item-tabs.hbs",
+      template: "systems/ptr2e/templates/items/parts/item-tabs.hbs",
     },
     traits: {
       id: "traits",
-      template: "/systems/ptr2e/templates/items/parts/item-traits.hbs",
+      template: "systems/ptr2e/templates/items/parts/item-traits.hbs",
     },
     overview: {
       id: "overview",
@@ -88,12 +88,12 @@ export default class ItemSheetPTR2e<
     },
     actions: {
       id: "actions",
-      template: "/systems/ptr2e/templates/items/parts/item-actions.hbs",
+      template: "systems/ptr2e/templates/items/parts/item-actions.hbs",
       scrollable: [".scroll"],
     },
     effects: {
       id: "effects",
-      template: "/systems/ptr2e/templates/items/parts/item-effects.hbs",
+      template: "systems/ptr2e/templates/items/parts/item-effects.hbs",
       scrollable: [".scroll"],
     },
   };
@@ -146,6 +146,7 @@ export default class ItemSheetPTR2e<
           traits.push({
             value: trait.slug,
             label: trait.label,
+            virtual: trait.virtual ?? false,
           });
         }
         return traits;
@@ -153,9 +154,10 @@ export default class ItemSheetPTR2e<
       return [];
     })();
 
-    this.#allTraits = game.ptr.data.traits.map((trait) => ({
+    this.#allTraits ??= game.ptr.data.traits.map((trait) => ({
       value: trait.slug,
       label: trait.label,
+      virtual: false,
     }));
 
     const effects = this.document.effects.contents;
@@ -252,7 +254,7 @@ export default class ItemSheetPTR2e<
                             <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
                 tagData
               )}>
-                            <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                            ${tagData.virtual ? "" : `<x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>`}
                             <div>
                                 <span class='tagify__tag-text'>
                                     <span class="trait" data-tooltip-direction="UP" data-trait="${tagData.value

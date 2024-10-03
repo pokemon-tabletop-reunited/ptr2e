@@ -1,14 +1,16 @@
 {
   "name": "Iron Head",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/steel_icon.svg",
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "iron-head",
     "description": "",
     "traits": [
       "dash",
       "push-2",
-      "contact"
+      "flinch-chance-2",
+      "contact",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -18,6 +20,7 @@
         "traits": [
           "dash",
           "push-2",
+          "flinch-chance-2",
           "contact",
           "pp-updated"
         ],
@@ -39,7 +42,7 @@
         "types": [
           "steel"
         ],
-        "description": "Effect: On hit, the target has a 30% chance of gaining @Affliction[flinched] 2.",
+        "description": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

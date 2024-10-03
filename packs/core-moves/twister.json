@@ -1,14 +1,16 @@
 {
   "name": "Twister",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/dragon_icon.svg",
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "twister",
     "description": "",
     "traits": [
       "sky",
       "wind",
-      "blast-3"
+      "flinch-chance-2",
+      "blast-3",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -18,6 +20,7 @@
         "traits": [
           "sky",
           "wind",
+          "flinch-chance-2",
           "blast-3",
           "pp-updated"
         ],
@@ -39,7 +42,7 @@
         "types": [
           "dragon"
         ],
-        "description": "Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[flinched] 2.",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

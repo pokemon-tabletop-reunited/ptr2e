@@ -1,18 +1,20 @@
 {
   "name": "Anger Shell",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "desperation-1-2"
+        ],
         "name": "Anger Shell",
         "slug": "anger-shell",
         "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
-          "trigger": "The user falls to 50% HP or lower as a result of an attack.",
+          "powerPoints": 1,
+          "trigger": "An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.",
           "delay": null,
           "priority": null
         },
@@ -21,11 +23,13 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user falls to 50% HP or lower as a result of an attack.\nEffect: The user gains +1 ATK, SPATK, and SPD stages and loses -1 DEF and SPDEF stages for 5 activations."
+        "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.<p></p>Effect: The user gains +1 ATK, SPATK, and SPD stages and loses -1 DEF and SPDEF stages for 5 activations.</p>"
       }
     ],
-    "description": "Trigger: The user falls to 50% HP or lower as a result of an attack.\nEffect: The user gains +1 ATK, SPATK, and SPD stages and loses -1 DEF and SPDEF stages for 5 activations.",
-    "traits": [],
+    "description": "<p>Trigger: The user drops below 50% HP due to damage from a Physical- or Special-Category Attack.<p></p>Effect: The user gains +1 ATK, SPATK, and SPD stages and loses -1 DEF and SPDEF stages for 5 activations.</p>",
+    "traits": [
+      "desperation-1-2"
+    ],
     "slug": null,
     "container": null
   },

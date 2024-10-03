@@ -1,13 +1,14 @@
 {
   "name": "Bonemerang",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/ground_icon.svg",
+  "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "bonemerang",
     "description": "",
     "traits": [
       "2-strike",
-      "bone"
+      "bone",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -21,12 +22,12 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 5,
+          "distance": 8,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -45,7 +46,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "C"
   },
   "_id": "BuLj8HMf31VqGeCa",
   "effects": []

@@ -110,6 +110,10 @@ export default abstract class MoveSystem extends HasEmbed(
       //@ts-expect-error - Actions on source is not a collection but an array
       data.system = { actions: [] };
     }
+    if(data.system.actions === undefined) {
+      //@ts-expect-error - Actions on source is not a collection but an array
+      data.system.actions = [];
+    }
     if (data.system.actions instanceof Map) {
       throw new Error("Actions must be an array.");
     }
@@ -137,7 +141,7 @@ export default abstract class MoveSystem extends HasEmbed(
 
     if (!data.img || data.img === "icons/svg/item-bag.svg") {
       this.parent.updateSource({
-        img: "/systems/ptr2e/img/svg/untyped_icon.svg",
+        img: "systems/ptr2e/img/svg/untyped_icon.svg",
       });
     }
 
@@ -216,7 +220,7 @@ export default abstract class MoveSystem extends HasEmbed(
       return action as unknown as AttackPTR2e;
     })();
 
-    if (!attack) throw new Error("No attack action found on this move.");
+    if (!attack) return this.actions.contents[0] as AttackPTR2e;//throw new Error("No attack action found on this move.");
     return attack;
   }
 }

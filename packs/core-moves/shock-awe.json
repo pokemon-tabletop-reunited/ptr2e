@@ -1,13 +1,15 @@
 {
   "name": "Shock & Awe",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/ghost_icon.svg",
+  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "shock-awe",
     "description": "",
     "traits": [
       "2-strike",
-      "social"
+      "social",
+      "flinch-chance-2",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -17,6 +19,7 @@
         "traits": [
           "2-strike",
           "social",
+          "flinch-chance-2",
           "pp-updated"
         ],
         "range": {
@@ -26,18 +29,18 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
         },
         "category": "special",
-        "power": 30,
-        "accuracy": 95,
+        "power": 35,
+        "accuracy": 85,
         "types": [
           "ghost"
         ],
-        "description": "Effect: On hit, the target has a 10% chance of gaining @Affliction[flinched] 3, and a 10% chance of gaining @Affliction[fear] 5.",
+        "description": "<p>Effect: On hit, the target has a 20% chance of being Flinched, and a 20% chance of gaining @Affliction[fear] 5.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -45,7 +48,7 @@
       }
     ],
     "container": null,
-    "grade": "E"
+    "grade": "D"
   },
   "_id": "I5B0mFAtNLeLyq30",
   "effects": []

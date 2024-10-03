@@ -35,6 +35,24 @@
             </dl>
         {{/each}}
     </div>
+    {{#each filterData.checkboxes as |checkbox name|}}
+        <div class="filtercontainer" data-filter-type="checkboxes" data-filter-name="{{name}}">
+            <div class="title">
+                <h3>{{localize checkbox.label}}</h3>
+                {{#if checkbox.selected.length}}
+                    <button type="button" data-action="clear-filter" {{#if (not checkbox.isExpanded)}}style="display: none;"{{/if}}>{{localize "PTR2E.BrowserClearFilter"}}</button>
+                {{/if}}
+            </div>
+            <dl {{#if (not checkbox.isExpanded)}}style="display: none;"{{/if}}>
+                {{#each checkbox.options as |option type|}}
+                    <label>
+                        <dt><input type="checkbox" name="{{type}}" {{checked option.selected}} /></dt>
+                        <dd>{{localize option.label}}</dd>
+                    </label>
+                {{/each}}
+            </dl>
+        </div>
+    {{/each}}
     {{#each filterData.multiselects as |selectData type|}}
         {{#if (gt selectData.options.length 0)}}
             <div class="multiselect" data-filter-type="multiselects" data-filter-name="{{type}}">

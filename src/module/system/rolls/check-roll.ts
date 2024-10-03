@@ -24,7 +24,7 @@ class CheckRoll extends Roll {
             case "luck-check":
                 return CheckRoll.createSkillCheckFormula(options);
             case "luck-roll":
-                return { formula: "1d10", data: { type: "luck-roll" } };
+                return { formula: "1d6+4", data: { type: "luck-roll" } };
             case "pokeball-check":
                 return { formula: "1d100", data: { type: "pokeball-check" } };
         }
