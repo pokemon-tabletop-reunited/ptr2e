@@ -1,16 +1,16 @@
 {
   "name": "Wise Glasses",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "/systems/ptr2e/img/icons/item_icon.webp",
   "type": "equipment",
   "system": {
     "crafting": {
-      "skill": null,
+      "skill": "",
       "spans": null,
       "materials": []
     },
     "equipped": {
       "slot": "accessory",
-      "carryType": "stowed",
+      "carryType": "worn",
       "handsHeld": null
     },
     "grade": "B",
@@ -29,21 +29,28 @@
         "slug": "wise-glasses",
         "type": "passive",
         "description": "Effect: The user's Special-Category attacks deal 10% more damage.",
-        "img": "systems/ptr2e/img/icons/item_icon.webp",
+        "img": "/systems/ptr2e/img/icons/item_icon.webp",
         "traits": [
           "Combat"
         ],
         "range": {
           "target": "creature",
+          "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex"
-        }
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "description": "Effect: The user's Special-Category attacks deal 10% more damage.",
     "slug": "wise-glasses",
+    "container": null,
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -55,17 +62,20 @@
       }
     },
     "_migration": {
-      "version": null,
-      "previous": null
+      "version": 0.103,
+      "previous": {
+        "schema": null,
+        "foundry": "12.329",
+        "system": "0.10.0-alpha.2.0.2"
+      }
     }
   },
-  "_id": "7joi62wx19VP0B5G",
   "effects": [
     {
       "name": "Wise Glasses",
       "type": "passive",
-      "_id": "tZvpnH3uPMIGmcFb",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "_id": "LuvHUkJ3j5mtWvat",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
@@ -104,15 +114,35 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "compendiumSource": "Item.zr3IRu4mUTyb4s0P.ActiveEffect.LuvHUkJ3j5mtWvat",
+        "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.330",
+        "coreVersion": "12.329",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.1.5",
-        "createdTime": 1723459115210,
-        "modifiedTime": 1723459115210,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     }
-  ]
+  ],
+  "folder": null,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-gear.Item.3qgC6UrcEyocS6cu"
+    },
+    "exportSource": {
+      "world": "pokemon-mystery-dungeon-shrouded-kingdoms",
+      "system": "ptr2e",
+      "coreVersion": "12.330",
+      "systemVersion": "0.10.0-alpha.2.0.3"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.329",
+    "systemId": "ptr2e",
+    "systemVersion": "0.10.0-alpha.2.0.3",
+    "createdTime": 1721752635597,
+    "modifiedTime": 1721752635597,
+    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+  }
 }

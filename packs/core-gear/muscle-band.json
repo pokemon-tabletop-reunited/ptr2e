@@ -1,6 +1,6 @@
 {
   "name": "Muscle Band",
-  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "img": "/systems/ptr2e/img/icons/item_icon.webp",
   "type": "equipment",
   "system": {
     "crafting": {
@@ -29,21 +29,28 @@
         "slug": "muscle-band",
         "type": "passive",
         "description": "Effect: The user's Physical-Category attacks deal 10% more damage.",
-        "img": "systems/ptr2e/img/icons/item_icon.webp",
+        "img": "/systems/ptr2e/img/icons/item_icon.webp",
         "traits": [
           "Combat"
         ],
         "range": {
           "target": "creature",
+          "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "complex"
-        }
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null,
+        "hidden": false
       }
     ],
     "description": "Effect: The user's Physical-Category attacks deal 10% more damage.",
     "slug": "muscle-band",
+    "container": null,
     "quantity": 1,
     "identification": {
       "misidentified": null,
@@ -55,17 +62,20 @@
       }
     },
     "_migration": {
-      "version": null,
-      "previous": null
+      "version": 0.103,
+      "previous": {
+        "schema": null,
+        "foundry": "12.329",
+        "system": "0.10.0-alpha.2.0.2"
+      }
     }
   },
-  "_id": "9rHsFeM38Ryk4684",
   "effects": [
     {
       "name": "Muscle Band",
       "type": "passive",
-      "_id": "qDWJJegn6L2vd0mu",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "_id": "qGQGG2KZu0vNusQf",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
@@ -106,13 +116,33 @@
       "_stats": {
         "compendiumSource": "Actor.tQ5GVHTl3rohItqN.Item.PEUn0C1nwvpcxX8J.ActiveEffect.qGQGG2KZu0vNusQf",
         "duplicateSource": null,
-        "coreVersion": "12.330",
+        "coreVersion": "12.329",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.1.5",
-        "createdTime": 1723459017451,
-        "modifiedTime": 1723459017451,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
       }
     }
-  ]
+  ],
+  "folder": null,
+  "flags": {
+    "core": {
+      "sourceId": "Compendium.ptr2e.core-gear.Item.Y1TeUFBDY0aWrxT6"
+    },
+    "exportSource": {
+      "world": "pokemon-mystery-dungeon-shrouded-kingdoms",
+      "system": "ptr2e",
+      "coreVersion": "12.330",
+      "systemVersion": "0.10.0-alpha.2.0.3"
+    }
+  },
+  "_stats": {
+    "coreVersion": "12.329",
+    "systemId": "ptr2e",
+    "systemVersion": "0.10.0-alpha.2.0.3",
+    "createdTime": 1721752622420,
+    "modifiedTime": 1721752622420,
+    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+  }
 }

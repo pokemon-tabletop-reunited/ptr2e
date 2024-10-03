@@ -5,13 +5,15 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "connection"
+        ],
         "name": "Cheap Tactics",
         "slug": "cheap-tactics",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
+          "powerPoints": 0,
           "trigger": "The user enters battle, or emerges from stealth.",
           "delay": null,
           "priority": null
@@ -21,11 +23,13 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user enters battle, or emerges from stealth.\nEffect: Connection - Scratch. The user freely uses Scratch."
+        "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Scratch. The user gains +2 CRIT stages for 2 Activations. Then, the user freely moves up to and using the Movement Score of their choice, and uses Scratch.</p>"
       }
     ],
-    "description": "Trigger: The user enters battle, or emerges from stealth.\nEffect: Connection - Scratch. The user freely uses Scratch.",
-    "traits": [],
+    "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Scratch. The user gains +2 CRIT stages for 2 Activations. Then, the user freely moves up to and using the Movement Score of their choice, and uses Scratch.</p>",
+    "traits": [
+      "connection"
+    ],
     "slug": null,
     "container": null
   },

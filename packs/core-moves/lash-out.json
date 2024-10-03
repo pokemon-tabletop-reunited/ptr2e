@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "lash-out",
-    "description": "",
+    "description": "<p>Effect: If the received negative stages before the use of this attack this round, Lash Out's Power is doubled.</p>",
     "traits": [
       "contact"
     ],
@@ -24,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -35,7 +35,39 @@
         "types": [
           "dark"
         ],
-        "description": "If the received negative stages before the use of this attack this round, Lash Out's Power is doubled.",
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "lash-out-empowered",
+        "name": "Lash Out (Empowered)",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "trigger": "<p>The user has received negative stages this round.</p>",
+          "delay": null,
+          "priority": null
+        },
+        "category": "physical",
+        "power": 150,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "<p>Trigger: The user has received negative stages this round.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

@@ -1487,5 +1487,33 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.evasive"
+  },
+  {
+    "id": "gambit",
+    "name": "PTR2E.Effect.Statuses.Labels.gambit",
+    "img": "icons/svg/upgrade.svg",
+    "type": "passive",
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.acc.stage",
+          "value": -1,
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.battleStats.critRate.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.evasive"
   }
 ]
