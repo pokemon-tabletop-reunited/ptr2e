@@ -6,7 +6,7 @@ import {
   EmbeddedDataField,
 } from "types/foundry/common/data/fields.js";
 import { ItemAlteration } from "../alterations/item.ts";
-import { ItemPTR2e, ItemSourcePTR2e } from "@item";
+import { ItemPTR2e, ItemSourcePTR2e, ItemSystemPTR } from "@item";
 import { isObject, sluggify, tupleHasValue } from "@utils";
 import ActiveEffectPTR2e from "../document.ts";
 import { EffectSourcePTR2e } from "@effects";
@@ -65,7 +65,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
   }
 
   static #validateUuid(value: unknown): void | foundry.data.validation.DataModelValidationFailure {
-    if (/{(actor|item|change|effect)\|(.*?)}/g.test(value+'')) return;
+    if (/{(actor|item|change|effect)\|(.*?)}/g.test(value + '')) return;
     if (!UUIDUtils.isItemUUID(value)) {
       return new foundry.data.validation.DataModelValidationFailure({
         invalidValue: value,
@@ -185,7 +185,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
     }
 
     const tempGranted = new ItemPTR2e(fu.deepClone(grantedSource), { parent: this.actor });
-    tempGranted.grantedBy = this.effect;
+    // tempGranted.grantedBy = this.effect;
 
     // TODO: Check for immunity and bail if a match
 
@@ -288,7 +288,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
     const grantedBy = {
       id: granter._id,
       // The on-delete action determines what will happen to the granted item when the granter is deleted:
-      // Default to "cascade" (delete the granted item) unless the granted item is physical.
+      // Default to "cascade" (delete the granted item).
       onDelete:
         this.onDeleteActions?.granter ?? "cascade",
     };
@@ -380,4 +380,73 @@ interface GrantItemSource extends ChangeSource {
 interface OnDeleteActions {
   granter: ItemGrantDeleteAction;
   grantee: ItemGrantDeleteAction;
+}
+
+export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item: Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, pendingItems: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[], pendingEffects: ActiveEffectPTR2e[]): Promise<void> {
+  const actor = effect.targetsActor() ? effect.parent : (effect.parent as ItemPTR2e<ItemSystemPTR, ActorPTR2e>).actor;
+
+  const granter = actor.effects.get((item ? item.flags.ptr2e.grantedBy?.id : effect.flags.ptr2e.grantedBy?.id) ?? "") as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>;
+  const parentGrant = Object.values(granter?.flags.ptr2e.itemGrants ?? {}).find(g => g.id === effect.id || g.id === item?.id);
+  const grants = Object.values(effect.flags.ptr2e.itemGrants);
+
+  // Handle deletion restrictions, aborting early if found in either this item's granter or any of its grants
+  if (granter && parentGrant?.onDelete === "restrict" && !pendingEffects.includes(granter)) {
+    ui.notifications.warn(game.i18n.format("PTR2E.UI.Warnings.GrantItem.RemovalPrevented", { item: item?.name ?? effect.name, preventer: granter.name }));
+    if (item) pendingItems.splice(pendingItems.indexOf(item), 1);
+    else pendingEffects.splice(pendingEffects.indexOf(effect), 1);
+    return;
+  }
+
+  for (const grant of grants) {
+    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e);
+    if (grantee?.flags.ptr2e.grantedBy?.id !== effect.id) continue;
+
+    // @ts-expect-error - Checks will succeed.
+    if (grantee.flags.ptr2e.grantedBy.onDelete === "restrict" && !(pendingItems.includes(grantee) || pendingEffects.includes(grantee))) {
+      ui.notifications.warn(game.i18n.format("PTR2E.UI.Warnings.GrantItem.RemovalPrevented", { item: item?.name ?? effect.name, preventer: grantee.name }));
+      if (item) pendingItems.splice(pendingItems.indexOf(item), 1);
+      else pendingEffects.splice(pendingEffects.indexOf(effect), 1);
+      return;
+    }
+  }
+
+  // Handle deletion cascades, pushing additional items onto the `pendingItems` array
+  if (granter && parentGrant?.onDelete === "cascade" && !pendingEffects.includes(granter)) {
+    pendingEffects.push(granter);
+    await processGrantDeletions(granter, item, pendingItems, pendingEffects);
+  }
+
+  for (const grant of grants) {
+    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e);
+    if (grantee?.flags.ptr2e.grantedBy?.id !== effect.id) continue;
+
+    // @ts-expect-error - Checks will succeed.
+    if (grantee.flags.ptr2e.grantedBy.onDelete === "cascade" && !(pendingItems.includes(grantee) || pendingEffects.includes(grantee))) {
+      if (grantee instanceof ItemPTR2e) {
+        pendingItems.push(grantee);
+        await processGrantDeletions(effect, grantee, pendingItems, pendingEffects);
+      }
+      if (grantee instanceof ActiveEffectPTR2e) {
+        pendingEffects.push(grantee);
+        await processGrantDeletions(grantee as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, pendingItems, pendingEffects);
+      }
+    }
+  }
+
+  // Finally, handle detachments, removing the grant data from granters `itemGrants` object
+  const [key] = Object.entries(granter?.flags.ptr2e.itemGrants ?? {}).find(([, g]) => g === parentGrant) ?? [null];
+  if (granter && key && !pendingEffects.includes(granter)) {
+    await granter.update({ [`flags.ptr2e.itemGrants.-=${key}`]: null }, { render: false });
+  }
+
+  for (const grant of grants) {
+    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e);
+    if (grantee?.flags.ptr2e.grantedBy?.id !== effect.id) continue;
+
+    // Unset the grant flag and leave the granted item on the actor
+    // @ts-expect-error - Checks will succeed.
+    if (grantee.flags.ptr2e.grantedBy.onDelete === "detach" && !(pendingItems.includes(grantee) || pendingEffects.includes(grantee))) {
+      await grantee.update({ "flags.ptr2e.-=grantedBy": null }, { render: false });
+    }
+  }
 }

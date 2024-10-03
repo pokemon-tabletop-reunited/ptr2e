@@ -1276,6 +1276,7 @@ body {
 
     &.skill-sheet
     &#perk-hud-base,
+    &.pick-a-thing-prompt,
     &.known-actions-sheet,
     &.available-abilities-sheet,
     &.action-sheet,
@@ -4172,6 +4173,12 @@ body {
       }
     }
 
+    &.pick-a-thing-prompt {
+      .window-content {
+        display: flex;
+      }
+    }
+
     input[type="color"] {
         border-color: var(--color-input-border-color, #000);
     }
@@ -4891,9 +4898,12 @@ body {
           justify-items: center;
           margin: auto;
           max-width: max-content;
+          margin-bottom: 0.5rem;
   
           &.select-menu {
               min-width: 18em;
+              padding: 0.5rem;
+              margin-bottom: 0;
   
               tags {
                   background-color: rgba(0, 0, 0, 0.05);
@@ -4923,10 +4933,12 @@ body {
   
               &.with-image {
                   align-items: center;
+                  justify-content: start;
+                  padding-left: 0;
   
                   img {
                       border: 1px solid #444;
-                      height: 1.6em;
+                      height: 32px;
                       margin-right: 0.5em;
                   }
               }
@@ -4936,12 +4948,14 @@ body {
               align-items: center;
               display: flex;
               flex-direction: column;
+              gap: 0.25rem;
   
               .choice {
                   align-items: center;
                   display: flex;
                   gap: 0.5em;
                   width: 100%;
+                  min-width: 170px;
   
                   &.select {
                       margin-bottom: 0.5rem;
@@ -4949,8 +4963,8 @@ body {
   
                   a.item-info {
                       align-items: center;
-                      border: 1px solid var(--color-text-light-primary);
-                      border-radius: 2px;
+                      border: 1px solid var(--color-light-5);
+                      border-radius: 4px;
                       display: flex;
                       height: var(--font-size-20);
                       justify-content: center;

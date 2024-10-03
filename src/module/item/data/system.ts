@@ -24,7 +24,7 @@ type BaseItemSourcePTR2e<
 interface ItemFlagsPTR2e extends foundry.documents.ItemFlags {
     ptr2e: {
         choiceSelections: Record<string, string | number | object | null>;
-        itemGrants: Record<string, ItemGrantData>;
+        //itemGrants: Record<string, ItemGrantData>;
         grantedBy: ItemGrantData | null;
         rollOptions: {
             [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;

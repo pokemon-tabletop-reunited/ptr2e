@@ -1,11 +1,13 @@
 import { ActorPTR2e } from "@actor";
-import { ItemPTR2e, ItemSourcePTR2e } from "@item";
+import { ItemPTR2e, ItemSourcePTR2e, ItemSystemPTR } from "@item";
 import { ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { ChangeModel, Trait } from "@data";
 import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
 import { CombatPTR2e } from "@combat";
 import { sluggify } from "@utils";
 import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
+import { ItemGrantData } from "@item/data/system.ts";
+import { processGrantDeletions } from "./changes/grant-item.ts";
 class ActiveEffectPTR2e<
   TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null,
   TSystem extends ActiveEffectSystem = ActiveEffectSystem,
@@ -402,6 +404,34 @@ class ActiveEffectPTR2e<
     // Create the effects
     return super.createDocuments(outputEffectSources, context) as Promise<ActiveEffectPTR2e[]>;
   }
+
+  static override async deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]> & {pendingItems?: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]}): Promise<TDocument[]>;
+  static override async deleteDocuments(ids: string[] = [], context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null> & {pendingItems?: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]} = {}): Promise<foundry.abstract.Document[]> {
+    ids = Array.from(new Set(ids));
+    const actor = context.parent instanceof ActorPTR2e ? context.parent : null;
+    if(actor) {
+      const effects = ids.flatMap(id => actor.effects.get(id) ?? []) as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[];
+      const items = context.pendingItems ? [...context.pendingItems] : [] as ItemPTR2e<ItemSystemPTR, ActorPTR2e>[];
+
+      // Run Change Model pre-delete callbacks
+      for(const effect of effects) {
+        for(const change of effect.changes) {
+          await change.preDelete?.({ pendingItems: items, context });
+        }
+
+        await processGrantDeletions(effect, null, items, effects);
+      }
+
+      if(items.length) {
+        const itemIds = Array.from(new Set(items.map(i => i.id))).filter(id => actor.items.has(id) && !context.pendingItems?.find(i => i.id === id));
+        if(itemIds.length) {
+          await ItemPTR2e.deleteDocuments(itemIds, { pendingEffects: effects, parent: actor});
+        }
+      }
+      ids = Array.from(new Set(effects.map(i => i.id))).filter(id => actor.effects.has(id));
+    }
+    return super.deleteDocuments(ids, context);
+  }
 }
 
 interface ActiveEffectPTR2e<
@@ -414,6 +444,8 @@ interface ActiveEffectPTR2e<
 
   flags: DocumentFlags & {
     ptr2e: {
+      itemGrants: Record<string, ItemGrantData>;
+      grantedBy: ItemGrantData | null;
       choiceSelections: Record<string, string | number | object | null>;
       rollOptions: {
         [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;

@@ -522,7 +522,7 @@ namespace ChangeModel {
     /** All items pending deletion in a `ItemPTR2e.deleteDocuments` call */
     pendingItems: ItemPTR2e[];
     /** The context object from the `ItemPTR2e.deleteDocuments` call */
-    context: DocumentModificationContext<ActorPTR2e | null>;
+    context: DocumentModificationContext<ActorPTR2e | null> | DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>;
   }
 
   export interface AfterRollParams { }
