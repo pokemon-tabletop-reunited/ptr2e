@@ -2,6 +2,7 @@ import { ActorPTR2e, Skill } from "@actor";
 import { SkillsComponent } from "@actor/components/skills-component.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
+import { ApplicationRenderOptions } from "types/foundry/common/applications/api.js";
 
 
 type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: number; max: number; min: number };
@@ -140,6 +141,17 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         };
     }
 
+    override async render(options: boolean | ApplicationRenderOptions, _options?: ApplicationRenderOptions): Promise<this> {
+        const scrollTop = this.element?.querySelector(".scroll")?.scrollTop;
+        const renderResult = await super.render(options, _options);
+        // set the scroll location
+        if (scrollTop) {
+            const scroll = this.element.querySelector(".scroll");
+            if (scroll !== null) scroll.scrollTop = scrollTop;
+        }
+        return renderResult;
+    }
+
     override _attachPartListeners(
         partId: string,
         htmlElement: HTMLElement,
@@ -163,15 +175,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         if (!skill) return;
 
         skill.investment = value;
-        // get scroll location
-        const scrollTop = this.element.querySelector(".scroll")?.scrollTop;
-        this.render({}).then(()=>{
-            // set the scroll location
-            if (!scrollTop) return;
-            const scroll = this.element.querySelector(".scroll");
-            if (!scroll) return;
-            scroll.scrollTop = scrollTop;
-        });
+        this.render({});
     }
 
     static #onResetSkills(this: SkillsEditor) {
