@@ -189,7 +189,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     return this.id.replaceAll(".", "-");
   }
 
-  #allTraits: { value: string; label: string }[] | undefined;
+  #allTraits: { value: string; label: string, virtual: boolean }[] | undefined;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     header: {
@@ -397,7 +397,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     context: foundry.applications.api.ApplicationRenderContext
   ) {
     if (partId === "overview") {
-      context.movement = this.actor.system.movement.contents;
+      context.movement = Object.values(this.actor.system.movement);
     }
 
     if (partId === "clocks") {
@@ -457,6 +457,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             traits.push({
               value: trait.slug,
               label: trait.label,
+              virtual: trait.virtual,
             });
           }
           return traits;
@@ -467,6 +468,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       this.#allTraits = game.ptr.data.traits.map((trait) => ({
         value: trait.slug,
         label: trait.label,
+        virtual: false,
       }));
 
       context.traits = traits;
@@ -776,7 +778,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                             <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
                 tagData
               )}>
-                            <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                            ${tagData.virtual ? "" : `<x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>`}
                             <div>
                                 <span class='tagify__tag-text'>
                                     <span class="trait" data-tooltip-direction="UP" data-trait="${tagData.value
@@ -808,7 +810,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       Array.isArray(submitData["system.traits"])
     ) {
       // Traits are stored as an array of objects, but we only need the values
-      submitData["system.traits"] = submitData["system.traits"].map(
+      submitData["system.traits"] = submitData["system.traits"].filter(t => !t.virtual).map(
         (trait: { value: string }) => sluggify(trait.value)
       );
     }

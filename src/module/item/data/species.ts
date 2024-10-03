@@ -1,5 +1,5 @@
 import { SpeciesPTR2e } from "@item";
-import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS } from "@module/data/index.ts";
+import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS, Trait } from "@module/data/index.ts";
 import { PokemonType } from "@data";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
@@ -399,6 +399,17 @@ class SpeciesSystem extends SpeciesExtension {
           return 16;
       }
     })();
+
+    // update traits with pokemon types
+    for (const ptype of this.types) {
+      if (!this.traits.has(ptype) && Trait.isValid(ptype) && ptype != "untyped") {
+        this.addTraitFromSlug(ptype, true);
+      }
+    }
+    // check if the species is an underdog
+    if (Object.values(this.stats).reduce((a:unknown, b:unknown)=>(a as number) + (b as number), 0) as number < 510) {
+      this.addTraitFromSlug("underdog", true);
+    }
   }
 
   override async _preCreate(

@@ -1089,6 +1089,10 @@ export class DocumentTypeField<
     constructor(documentClass: ConstructorOf<TDocument>, options?: StringFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>, context?: DataFieldOptions<TSourceProp, TRequired, TNullable, THasInitial>);
 }
 
+export class AnyField extends DataField {
+    protected override _cast(value: unknown): unknown;
+}
+
 /** A subclass of `ObjectField` which supports a system-level data object. */
 export class TypeDataField<
     TSourceProp extends object = object,

@@ -235,16 +235,15 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
           source[key] = this.resolveInjectedProperties(value, { warn });
         }
       }
-
       return source;
     } else if (typeof source === "string") {
       return source.replace(
-        /{(actor|item|rule)\|(.*?)}/g,
+        /{(actor|item|change|effect)\|(.*?)}/g,
         (_match, key: string, prop: string) => {
           const data =
-            key === "rule"
+            key === "change"
               ? this
-              : key === "actor" || key === "item"
+              : key === "actor" || key === "item" || key === "effect"
                 ? this[key]
                 : this.effect;
           const value = fu.getProperty(data ?? {}, prop);
@@ -401,6 +400,12 @@ interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
   value: string | number;
 
   /**
+   * Some Change Models require parents data to be initialized before they can be initialized. This method is called
+   * after the parent effect has been initialized to finalize the initialization of the change model
+   */
+  prepareData?(): void;
+
+  /**
    * Run between Actor#applyActiveEffects and Actor#prepareDerivedData. Generally limited to ActiveEffect-Like
    * elements
    */
@@ -517,7 +522,7 @@ namespace ChangeModel {
     /** All items pending deletion in a `ItemPTR2e.deleteDocuments` call */
     pendingItems: ItemPTR2e[];
     /** The context object from the `ItemPTR2e.deleteDocuments` call */
-    context: DocumentModificationContext<ActorPTR2e | null>;
+    context: DocumentModificationContext<ActorPTR2e | null> | DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>;
   }
 
   export interface AfterRollParams { }

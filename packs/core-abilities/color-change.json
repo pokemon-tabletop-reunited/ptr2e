@@ -23,7 +23,7 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user is damaged by an attack.\nEffect: Your Type changes to match the Type of the triggering attack."
+        "description": "<p>Trigger: The user is damaged by an attack.</p><p>Effect: The user's Type changes to match the Type of the triggering attack.</p>"
       },
       {
         "traits": [
@@ -38,11 +38,15 @@
           "delay": null,
           "priority": null
         },
-        "range": null,
-        "description": "Passive: Your Stealth skill checks have one more degree of success."
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Passive: The user's Stealth skill checks have +1 DoS."
       }
     ],
-    "description": "Trigger: The user is damaged by an attack.\nEffect: Your Type changes to match the Type of the triggering attack. Passive: Your Stealth skill checks have one more degree of success.",
+    "description": "<p>Trigger: The user is damaged by an attack.</p><p>Effect: The user's Type changes to match the Type of the triggering attack.</p><p>Passive: The user's Stealth skill checks have +1 DoS.</p>",
     "traits": [
       "defensive"
     ],

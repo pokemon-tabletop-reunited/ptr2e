@@ -16,14 +16,18 @@
     "movement": {
       "primary": [
         {
-          "type": "flight",
-          "value": 10
+          "type": "overland",
+          "value": 7
+        },
+        {
+          "type": "swim",
+          "value": 7
         }
       ],
       "secondary": [
         {
-          "type": "overland",
-          "value": 7
+          "type": "flight",
+          "value": 4
         }
       ]
     },
@@ -42,20 +46,20 @@
           "slug": "scrappy"
         },
         {
-          "slug": "friend-guard"
+          "slug": "steadfast"
         }
       ],
       "basic": [
         {
-          "slug": "intimidate"
+          "slug": "hyper-cutter"
         },
         {
-          "slug": "steadfast"
+          "slug": "friend-guard"
         }
       ],
       "advanced": [
         {
-          "slug": "rampage"
+          "slug": "moxie"
         },
         {
           "slug": "keen-edge"
@@ -63,7 +67,7 @@
       ],
       "master": [
         {
-          "slug": "pure-power"
+          "slug": "rampage"
         },
         {
           "slug": "sniper"
@@ -73,7 +77,15 @@
     "skills": [
       {
         "slug": "acrobatics",
-        "value": 55,
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "climb",
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -81,7 +93,7 @@
       },
       {
         "slug": "conversation",
-        "value": 45,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -96,15 +108,15 @@
         "group": null
       },
       {
-        "slug": "intimidate",
-        "value": 60,
+        "slug": "flying",
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
         "group": null
       },
       {
-        "slug": "leadership",
+        "slug": "intimidate",
         "value": 55,
         "rvs": 0,
         "favourite": false,
@@ -112,8 +124,16 @@
         "group": null
       },
       {
+        "slug": "leadership",
+        "value": 45,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "lift",
-        "value": 60,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -145,7 +165,7 @@
       },
       {
         "slug": "negotiation",
-        "value": 60,
+        "value": 40,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -169,7 +189,7 @@
       },
       {
         "slug": "spot",
-        "value": 60,
+        "value": 55,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -193,7 +213,7 @@
       },
       {
         "slug": "swim",
-        "value": 60,
+        "value": 50,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
