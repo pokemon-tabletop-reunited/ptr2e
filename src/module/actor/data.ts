@@ -91,7 +91,7 @@ interface Skills {
 interface Skill {
   /** Skill Key */
   slug: PTRSkill,
-  /** Skill Total Value */
+  /** Skill Base Value */
   value: number,
   /** Refinement Values invested in this skill */
   rvs: number | null,
