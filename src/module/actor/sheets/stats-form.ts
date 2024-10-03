@@ -153,7 +153,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
                 return acc;
             }, {} as Record<string, number>)
             if(submitData.system.attributes.spe.base && submitData.system.attributes.spe.base !== (this.document.system._source as unknown as {attributes: Attributes}).attributes.spe.base) {
-                submitData.system.species.movement = this.document.system.movement.contents;
+                submitData.system.species.movement = Object.values(this.document.system.movement);
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 const overland = submitData.system.species.movement.find((m: any) => m.method === "overland")!
 

@@ -401,16 +401,14 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         this.type.types.delete("untyped");
     }
 
-    this.movement = new Collection(
-      [
-        this.species.movement.primary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "primary" }]),
-        this.species.movement.secondary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "secondary" }])
-      ].flat()
-    );
+    this.movement = Object.fromEntries([
+      ...this.species.movement.primary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "primary" }]),
+      ...this.species.movement.secondary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "secondary" }])
+    ]);
 
     // Every creature has a base overland of 3 at least.
-    if ((Number(this.movement.get("overland")?.value) || 0) <= 3) {
-      this.movement.set("overland", { method: "overland", value: 3, type: "secondary" });
+    if ((Number(this.movement["overland"]?.value) || 0) <= 3) {
+      this.movement["overland"] = { method: "overland", value: 3, type: "secondary" };
     }
   }
 
@@ -545,7 +543,7 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
     };
   }
 
-  movement: Collection<Movement>;
+  movement: Record<string, Movement>;
 
   _source: SourceFromSchema<ActorSystemSchema>;
 }
