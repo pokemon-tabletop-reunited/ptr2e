@@ -292,7 +292,6 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
       return rolls;
     };
-
     const context: AttackMessageRenderContext =
       this.context ??
       (this.context = {
@@ -560,6 +559,46 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     });
     html.find(".update-targets").on("click", this.updateTargets.bind(this));
     html.find("[data-action='consume-pp']").on("click", this.spendPP.bind(this));
+  }
+
+  
+
+  public async applyLuckIncrease(targetUuid: ActorUUID) {
+    const results = fu.duplicate(this.parent.system.results);
+    const currentResult = results[this.parent.system.results.findIndex(r=>r.target.uuid == targetUuid)];
+    if (!currentResult || !currentResult.accuracy) return;
+    const accuracy = currentResult.accuracy;
+
+    const actor = await this.currentOrigin;
+    if (!actor) return;
+
+    const number = accuracy.total;
+    const luck = actor.system.skills.get("luck")!.total;
+    if (luck < number) {
+      ui.notifications.warn("You do not have enough Luck to apply this increase.");
+      return;
+    }
+
+    const skills = actor.system.skills.map((skill) => {
+      return skill.slug === "luck"
+        ? {
+          ...skill,
+          value: luck - number,
+        }
+        : skill;
+    });
+    await actor.update({ "system.skills": skills });
+
+    ui.notifications.info(game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
+      amount: number,
+      actor: actor.name,
+      total: actor.system.skills.get("luck")!.total
+    }));
+
+    //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
+    accuracy.total = 0;
+
+    await this.parent.update({ "system.results": results });
   }
 }
 

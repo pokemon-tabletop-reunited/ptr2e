@@ -23,6 +23,21 @@
     "Item": {
       "Plural": "Items"
     },
+    
+    "ChoiceSetPrompt": {
+      "Decline": "Decline",
+      "DragHomebrewItem": "Drag a homebrew item here if using one instead of the above options.",
+      "HomebrewItem": "Homebrew Item",
+      "ViewItem": {
+        "Tooltip": "View Item",
+        "Disabled": "Selected choice has no item sheet"
+      },
+      "NoLabel": "No",
+      "Prompt": "Make a selection.",
+      "SaveLabel": "Save",
+      "SkillLabel": "Skill",
+      "YesLabel": "Yes"
+    },
     "DataInspector": {
       "DataButton": "Data",
       "Instructions": "<p>The Data Inspector for Documents will show you all the available fields based on the <em>Mode</em> you have selected, most modes show the data located in the `system` property.</p><p>Left click to expand an entry.</p><p>Right click a <em>key</em> to copy path to clipboard,</p><p>right click a <em>value</em> to copy that value to clipboard.</p><br><p>The Data Inspector for Chat Messages will show you info about the rolls in those messages</p><p>Right click a <em>domain</em> or <em>option</em> to copy that value to clipboard.</p>",
@@ -150,7 +165,17 @@
       "SpendLuckSkill": {
         "label": "Spend Luck to Increase DoS",
         "title": "Are you sure you're Spending Luck?",
-        "content": "You're about to spend {amount} Luck to increase your Degree of Success."
+        "requires": "Requires {amount} points of luck spent!",
+        "content": "You're about to spend {amount} Luck to increase your Degree of Success.",
+        "spent": "Successfully applied Luck to this roll, spending {amount} Luck from {actor}. New total: {total}"
+      },
+      "SpendLuckAttack": {
+        "label": "Spend Luck to Hit",
+        "hint": "Select the target for whom you'd like to spend luck to turn this miss into a hit",
+        "title": "Are you sure you're Spending Luck?",
+        "requires": "(Requires {amount} points of Luck)",
+        "content": "You're about to spend {amount} Luck to hit.",
+        "spent": "Successfully applied Luck to this roll, spending {amount} Luck from {actor}. New total: {total}"
       },
       "RollInspector": {
         "label": "Open Roll Inspector"
@@ -1518,11 +1543,24 @@
         },
         "Name": "Developer Mode",
         "Hint": "Enable developer mode."
+      },
+      "Warnings": {
+        "GrantItem": {
+          "RemovalPrevented": "Removal of {item} is prevented by {preventer}."
+        }
       }
     },
     "Dialog": {
       "DeleteDocumentContent": "Are you sure you want to delete: {name}?",
-      "DeleteDocumentTitle": "Delete {name}?"
+      "DeleteDocumentTitle": "Delete {name}?",
+      "DeleteAction": {
+        "Title": "Delete?",
+        "Content": "Are you sure you want to delete: {name}?"
+      },
+      "TargetSelector": {
+        "Target": "Target",
+        "Pick": "Pick {target}"
+      }
     },
     "Skills": {
       "luck": {

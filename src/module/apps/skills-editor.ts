@@ -130,7 +130,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     ): void {
         super._attachPartListeners(partId, htmlElement, options);
 
-        for (const input of htmlQueryAll(htmlElement, "skill input")) {
+        for (const input of htmlQueryAll(htmlElement, ".skill input")) {
             input.addEventListener("change", this.#onSkillChange.bind(this));
         }
     }

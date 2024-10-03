@@ -1276,6 +1276,7 @@ body {
 
     &.skill-sheet
     &#perk-hud-base,
+    &.pick-a-thing-prompt,
     &.known-actions-sheet,
     &.available-abilities-sheet,
     &.action-sheet,
@@ -2403,7 +2404,7 @@ body {
 
             display: grid;
             grid-template-columns: 55% 45%;
-            grid-template-rows: 35% 65%;
+            grid-template-rows: 1fr 1fr;
             grid-template-areas:
                 "baseStats statsChart"
                 "evStats statsChart";
@@ -2424,83 +2425,21 @@ body {
                 grid-area: baseStats;
 
                 form#base-stats-form {
-                    display: grid;
-                    grid-template-columns: 30% 15% 40% 15%;
-                    grid-template-rows: min-content 1fr 1fr 1fr;
-                    grid-template-areas:
-                        "header header header header"
-                        "hpLabel hpValue spatkLabel spatkValue"
-                        "atkLabel atkValue spdefLabel spdefValue"
-                        "defLabel defValue spdLabel spdValue";
+                    display: flex;
+                    flex-direction: column;
 
                     label {
                         text-align: left;
                         align-self: center;
-
-                        &.hp {
-                            grid-area: hpLabel;
-                        }
-
-                        &.atk {
-                            grid-area: atkLabel;
-                        }
-
-                        &.def {
-                            grid-area: defLabel;
-                        }
-
-                        &.spa {
-                            grid-area: spatkLabel;
-                            margin-left: 1rem;
-                        }
-
-                        &.spd {
-                            grid-area: spdefLabel;
-                            margin-left: 1rem;
-                        }
-
-                        &.spe {
-                            grid-area: spdLabel;
-                            margin-left: 1rem;
-                        }
                     }
 
                     input {
                         text-align: center;
                         align-self: center;
-
-                        &.hp {
-                            grid-area: hpValue;
-                        }
-
-                        &.atk {
-                            grid-area: atkValue;
-                        }
-
-                        &.def {
-                            grid-area: defValue;
-                        }
-
-                        &.spa {
-                            grid-area: spatkValue;
-                        }
-
-                        &.spd {
-                            grid-area: spdefValue;
-                        }
-
-                        &.spe {
-                            grid-area: spdValue;
-                        }
                     }
 
                     h1 {
-                        grid-area: header;
                         text-align: center;
-                    }
-
-                    input[type="submit"] {
-                        grid-area: submit;
                     }
                 }
             }
@@ -4193,6 +4132,53 @@ body {
         }
     }
 
+    &.target-selector-popup {
+      .window-content {
+        padding: 0.5rem;
+      }
+
+      .available-targets {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+
+          .target {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              border: 1px solid var(--border-theme-color);
+              border-radius: 5px;
+              padding: 0.25rem;
+
+              &:hover {
+                  box-shadow: 0px 0px 5px var(--color-shadow-primary);
+              }
+              img {
+                  width: 36px;
+                  height: 36px;
+                  border: none;
+              }
+          }
+      }
+
+      fieldset {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        border-radius: 8px;
+        border-color: var(--border-theme-color);
+      }
+    }
+
+    &.pick-a-thing-prompt {
+      .window-content {
+        display: flex;
+      }
+    }
+
     input[type="color"] {
         border-color: var(--color-input-border-color, #000);
     }
@@ -4895,6 +4881,142 @@ body {
         }
       }
     }
+
+    &.choice-set-prompt .window-content {
+      h3 {
+          display: flex;
+          justify-content: center;
+      }
+  
+      button,
+      select {
+          display: flex;
+          margin: var(--space-4) auto;
+      }
+  
+      .choices {
+          justify-items: center;
+          margin: auto;
+          max-width: max-content;
+          margin-bottom: 0.5rem;
+  
+          &.select-menu {
+              min-width: 18em;
+              padding: 0.5rem;
+              margin-bottom: 0;
+  
+              tags {
+                  background-color: rgba(0, 0, 0, 0.05);
+                  border: 1px solid var(--color-border-light-tertiary);
+                  border-radius: 3px;
+                  height: 2rem;
+                  width: 100%;
+  
+                  .tagify__input {
+                      align-items: center;
+                      display: flex;
+                      height: 100%;
+                      margin: 0;
+                  }
+              }
+          }
+  
+          button,
+          .drop-zone {
+              cursor: pointer;
+              max-width: 100%;
+  
+              &:not(.with-image) {
+                  min-width: 120px;
+                  justify-content: center;
+              }
+  
+              &.with-image {
+                  align-items: center;
+                  justify-content: start;
+                  padding-left: 0;
+  
+                  img {
+                      border: 1px solid #444;
+                      height: 32px;
+                      margin-right: 0.5em;
+                  }
+              }
+          }
+  
+          .choice-buttons {
+              align-items: center;
+              display: flex;
+              flex-direction: column;
+              gap: 0.25rem;
+  
+              .choice {
+                  align-items: center;
+                  display: flex;
+                  gap: 0.5em;
+                  width: 100%;
+                  min-width: 170px;
+  
+                  &.select {
+                      margin-bottom: 0.5rem;
+                  }
+  
+                  a.item-info {
+                      align-items: center;
+                      border: 1px solid var(--color-light-5);
+                      border-radius: 4px;
+                      display: flex;
+                      height: var(--font-size-20);
+                      justify-content: center;
+                      min-width: var(--font-size-20);
+  
+                      &.disabled {
+                          color: var(--color-disabled);
+                          cursor: default;
+  
+                          &:hover,
+                          &:active {
+                              text-shadow: none;
+                          }
+                      }
+                  }
+              }
+          }
+  
+          .drop-zone {
+              border: 1px solid var(--color-border-light-primary);
+              border-radius: 3px;
+              color: var(--color-text-dark-2);
+              cursor: default;
+              display: flex;
+              font-family: var(--font-primary);
+              font-size: var(--font-size-14);
+              line-height: 1.75rem;
+              padding: var(--space-1) var(--space-6);
+  
+              i {
+                  align-items: center;
+                  border: 1px solid var(--color-text-light-4);
+                  border-radius: 2px;
+                  display: flex;
+                  height: 1.6em;
+                  justify-content: center;
+                  margin-right: 0.5em;
+                  width: 1.6em;
+  
+                  &:after {
+                      font-size: var(--font-size-20);
+                  }
+              }
+  
+              span {
+                  color: var(--text-dark);
+                  flex: 1;
+              }
+          }
+      }
+  }
+  
 }
 
 .application {
