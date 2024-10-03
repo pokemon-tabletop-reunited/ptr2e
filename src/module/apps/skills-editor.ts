@@ -127,7 +127,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         }))
 
         // check if this configuration is valid, and can pass validation
-        const valid = points.available >= 0 && !skills.some((skill)=>skill.investment < skill.min || skill.investment > skill.max);
+        const valid = points.available >= 0 && !skills.some((skill)=>(skill.slug === "resources" ? (skill.investment <= -skill.value) : (skill.investment < skill.min)) || skill.investment > skill.max);
 
         return {
             document: this.document,
