@@ -48,6 +48,10 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
       throw new Error(`Roll objects added to ChatMessage documents must be evaluated`);
   }
 
+  get currentOrigin(): Promise<Maybe<ActorPTR2e>> {
+    return this.context?.origin?.uuid ? fromUuid<ActorPTR2e>(this.context.origin.uuid) : Promise.resolve(null);
+  }
+
   override prepareBaseData(): void {
     this.context = null;
 
@@ -208,6 +212,45 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
     });
 
     return renderTemplate("systems/ptr2e/templates/chat/capture.hbs", context);
+  }
+
+  public async applyLuckIncrease(number: number) {
+    const roll = fu.duplicate(this.parent.system.rolls.accuracy);
+    if (roll == undefined) return;
+    const currentResult = roll.total;
+    if ((currentResult - number) % 10 !== 0) {
+      ui.notifications.warn("Luck increases must be multiples of 10.");
+      return;
+    }
+
+    const actor = await this.currentOrigin;
+    if (!actor) return;
+
+    const luck = actor.system.skills.get("luck")!.total;
+    if (luck < number) {
+      ui.notifications.warn("You do not have enough Luck to apply this increase.");
+      return;
+    }
+
+    const skills = actor.system.skills.map((skill) => {
+      return skill.slug === "luck"
+        ? {
+          ...skill,
+          value: luck - number,
+        }
+        : skill;
+    });
+    await actor.update({ "system.skills": skills });
+
+    ui.notifications.info(
+      `Successfully applied Luck to this roll, spending ${number} Luck from ${actor.name
+      }. New total: ${actor.system.skills.get("luck")!.total}`
+    );
+
+    //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
+    roll.total -= number;
+
+    await this.parent.update({ "system.rolls.accuracy": roll });
   }
 }
 
