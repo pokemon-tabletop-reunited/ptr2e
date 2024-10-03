@@ -150,7 +150,17 @@
       "SpendLuckSkill": {
         "label": "Spend Luck to Increase DoS",
         "title": "Are you sure you're Spending Luck?",
-        "content": "You're about to spend {amount} Luck to increase your Degree of Success."
+        "requires": "Requires {amount} points of luck spent!",
+        "content": "You're about to spend {amount} Luck to increase your Degree of Success.",
+        "spent": "Successfully applied Luck to this roll, spending {amount} Luck from {actor}. New total: {total}"
+      },
+      "SpendLuckAttack": {
+        "label": "Spend Luck to Hit",
+        "hint": "Select the target for whom you'd like to spend luck to turn this miss into a hit",
+        "title": "Are you sure you're Spending Luck?",
+        "requires": "(Requires {amount} points of Luck)",
+        "content": "You're about to spend {amount} Luck to hit.",
+        "spent": "Successfully applied Luck to this roll, spending {amount} Luck from {actor}. New total: {total}"
       },
       "RollInspector": {
         "label": "Open Roll Inspector"
@@ -1526,6 +1536,10 @@
       "DeleteAction": {
         "Title": "Delete?",
         "Content": "Are you sure you want to delete: {name}?"
+      },
+      "TargetSelector": {
+        "Target": "Target",
+        "Pick": "Pick {target}"
       }
     },
     "Skills": {
