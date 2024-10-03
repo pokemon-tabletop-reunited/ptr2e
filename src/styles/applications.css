@@ -2778,7 +2778,7 @@ body .application.sheet .form-group {
   padding-top: 0.5rem;
   display: grid;
   grid-template-columns: 55% 45%;
-  grid-template-rows: 35% 65%;
+  grid-template-rows: 1fr 1fr;
   grid-template-areas: "baseStats statsChart" "evStats statsChart";
 }
 .application.sheet.stats-form .window-content aside {
@@ -2794,64 +2794,19 @@ body .application.sheet .form-group {
   grid-area: baseStats;
 }
 .application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form {
-  display: grid;
-  grid-template-columns: 30% 15% 40% 15%;
-  grid-template-rows: min-content 1fr 1fr 1fr;
-  grid-template-areas: "header header header header" "hpLabel hpValue spatkLabel spatkValue" "atkLabel atkValue spdefLabel spdefValue" "defLabel defValue spdLabel spdValue";
+  display: flex;
+  flex-direction: column;
 }
 .application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label {
   text-align: left;
   align-self: center;
 }
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.hp {
-  grid-area: hpLabel;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.atk {
-  grid-area: atkLabel;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.def {
-  grid-area: defLabel;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spa {
-  grid-area: spatkLabel;
-  margin-left: 1rem;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spd {
-  grid-area: spdefLabel;
-  margin-left: 1rem;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spe {
-  grid-area: spdLabel;
-  margin-left: 1rem;
-}
 .application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input {
   text-align: center;
   align-self: center;
 }
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.hp {
-  grid-area: hpValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.atk {
-  grid-area: atkValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.def {
-  grid-area: defValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spa {
-  grid-area: spatkValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spd {
-  grid-area: spdefValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spe {
-  grid-area: spdValue;
-}
 .application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form h1 {
-  grid-area: header;
   text-align: center;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input[type="submit"] {
-  grid-area: submit;
 }
 .application.sheet.stats-form .window-content aside[data-application-part="evStats"] {
   grid-area: evStats;
@@ -4251,6 +4206,40 @@ body .application.sheet .form-group {
 }
 .application.sheet.modifier-popup.attack main footer {
   margin-top: 0.5rem;
+}
+.application.sheet.target-selector-popup .window-content {
+  padding: 0.5rem;
+}
+.application.sheet.target-selector-popup .available-targets {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.application.sheet.target-selector-popup .available-targets .target {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 5px;
+  padding: 0.25rem;
+}
+.application.sheet.target-selector-popup .available-targets .target:hover {
+  box-shadow: 0px 0px 5px var(--color-shadow-primary);
+}
+.application.sheet.target-selector-popup .available-targets .target img {
+  width: 36px;
+  height: 36px;
+  border: none;
+}
+.application.sheet.target-selector-popup fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
 }
 .application.sheet input[type="color"] {
   border-color: var(--color-input-border-color, #000);
