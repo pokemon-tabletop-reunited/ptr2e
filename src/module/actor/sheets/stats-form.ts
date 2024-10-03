@@ -2,6 +2,7 @@ import { StatsChart } from "./stats-chart.ts";
 import { Attributes, ActorPTR2e } from "@actor";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { DocumentSheetConfiguration } from "@item/sheets/document.ts";
+import { debounceAsync } from "@utils";
 
 export default class StatsForm extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.DocumentSheetV2<ActorPTR2e, foundry.applications.api.HandlebarsDocumentSheetConfiguration>) {
 
@@ -15,7 +16,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     static override DEFAULT_OPTIONS = fu.mergeObject(super.DEFAULT_OPTIONS, {
         classes: ["stats-form"],
         position: {
-            height: 500,
+            height: 620,
             width: 700,
         },
         form: {
@@ -28,14 +29,16 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
             id: "baseStats",
             template: "systems/ptr2e/templates/actor/stats-form-parts/base-stats-form.hbs",
             forms: {
-                "#base-stats-form": {handler: StatsForm.#onSubmitBaseStatsForm }
+                // @ts-expect-error - This is valid
+                "#base-stats-form": {handler: debounceAsync(StatsForm.#onSubmitBaseStatsForm, 200) }
             }
         },
         evStats: {
             id: "evStats",
             template: "systems/ptr2e/templates/actor/stats-form-parts/ev-stats-form.hbs",
             forms: {
-                "#ev-stats-form": {handler: StatsForm.#onSubmitEvStatsForm }
+                // @ts-expect-error - This is valid
+                "#ev-stats-form": {handler: debounceAsync(StatsForm.#onSubmitEvStatsForm, 200) }
             }
         },
         statsChart: {
@@ -56,12 +59,14 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     }
 
     override async _prepareContext() {
+        const baseMaximums = this._calcBaseMaximums(this.document.system.attributes);
         const evMaximums = this._calcEVMaximums(this.document.system.attributes);
         return {
             ...(await super._prepareContext()),
             stats: this.document.system.attributes,
             fields: (this.document.system.schema.fields.attributes as foundry.data.fields.SchemaField<foundry.data.fields.DataSchema>).fields,
-            evMaximums: evMaximums,
+            baseMaximums,
+            evMaximums,
         }
     }
 
@@ -76,8 +81,11 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
                 for (const element of form.querySelectorAll("input,select,textarea")) {
                     element.addEventListener("change", () => form.dispatchEvent(new SubmitEvent("submit", {cancelable: true})));
                 }
-                for (const range of form.querySelectorAll("input[type=range]")) {
-                    range.addEventListener("input", this._onChangeRange.bind(this));
+                for (const range of form.querySelectorAll("#base-stats-form input[type=range]")) {
+                    range.addEventListener("input", this.onChangeBaseRange);
+                }
+                for (const range of form.querySelectorAll("#ev-stats-form input[type=range]")) {
+                    range.addEventListener("input", this.onChangeEVRange);
                 }
             }
         }
@@ -88,6 +96,32 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         if (options.parts?.includes("statsChart")) {
             this._statsChart.render();
         }
+    }
+
+    _calcBaseMaximums(stats: Attributes) {
+        const BASE_MIN = 40;
+        const result = {
+            total: 0
+        } as Record<keyof Attributes, number> & { total: number };
+        for (const k in stats) {
+            const key = k as keyof Attributes;
+            result[key] = this.#calcBaseMaximum(key, stats);
+            result.total += Math.max(stats[key].base - BASE_MIN, 0);
+        }
+
+        return result;
+    }
+
+    #calcBaseMaximum(stat: keyof Attributes, stats: Attributes) {
+        const BASE_MIN = 40;
+        const BASE_MAX = 90;
+        const BASE_POINTS = 110;
+        let total = 0;
+        for (const k in stats) {
+            const otherKey = k as keyof Attributes;
+            if (otherKey !== stat) total += Math.max(stats[otherKey].base - BASE_MIN, 0);
+        }
+        return Math.min(BASE_MAX, BASE_POINTS + BASE_MIN - total);
     }
 
     _calcEVMaximums(stats: Attributes) {
@@ -112,7 +146,25 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         return Math.min(200, 508 - total);
     }
 
-    _onChangeRange(event: Event) {
+    _onChangeBaseRange(event: Event) {
+        const field = (event.currentTarget as HTMLInputElement).parentElement?.querySelector(".range-value");
+        if (field) {
+            if (field.tagName === "INPUT") (field as HTMLInputElement).value = (event.target as HTMLInputElement).value;
+            else (field as HTMLElement).innerHTML = (event.target as HTMLInputElement).value;
+        }
+
+        const rangeInput = event.target as HTMLInputElement;
+        const key = rangeInput.name.replaceAll("system.", "").replaceAll("attributes.", "").replaceAll(".base", "") as keyof Attributes;
+        const attributes = fu.duplicate(this.document.system.attributes);
+        attributes[key].base = parseInt(rangeInput.value);
+        const max = this.#calcBaseMaximum(key, attributes);
+        rangeInput.max = max.toString();
+    }
+
+    //@ts-expect-error - This is valid
+    private onChangeBaseRange = debounceAsync(this._onChangeBaseRange.bind(this), 200);
+
+    _onChangeEVRange(event: Event) {
         const field = (event.currentTarget as HTMLInputElement).parentElement?.querySelector(".range-value");
         if (field) {
             if (field.tagName === "INPUT") (field as HTMLInputElement).value = (event.target as HTMLInputElement).value;
@@ -127,10 +179,13 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         rangeInput.max = max.toString();
     }
 
+    //@ts-expect-error - This is valid
+    private onChangeEVRange = debounceAsync(this._onChangeEVRange.bind(this), 200);
+
     static async #onSubmitBaseStatsForm(this: StatsForm, event: SubmitEvent | Event, form: HTMLFormElement, formData: FormDataExtended) {
         event.preventDefault();
         await this.#updateDocument(event as SubmitEvent, form, formData);
-        this.render({parts: ["statsChart"]});
+        this.render({parts: ["statsChart", "baseStats"]});
     }
 
     /**

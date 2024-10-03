@@ -2778,7 +2778,7 @@ body .application.sheet .form-group {
   padding-top: 0.5rem;
   display: grid;
   grid-template-columns: 55% 45%;
-  grid-template-rows: 35% 65%;
+  grid-template-rows: 1fr 1fr;
   grid-template-areas: "baseStats statsChart" "evStats statsChart";
 }
 .application.sheet.stats-form .window-content aside {
@@ -2794,64 +2794,19 @@ body .application.sheet .form-group {
   grid-area: baseStats;
 }
 .application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form {
-  display: grid;
-  grid-template-columns: 30% 15% 40% 15%;
-  grid-template-rows: min-content 1fr 1fr 1fr;
-  grid-template-areas: "header header header header" "hpLabel hpValue spatkLabel spatkValue" "atkLabel atkValue spdefLabel spdefValue" "defLabel defValue spdLabel spdValue";
+  display: flex;
+  flex-direction: column;
 }
 .application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label {
   text-align: left;
   align-self: center;
 }
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.hp {
-  grid-area: hpLabel;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.atk {
-  grid-area: atkLabel;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.def {
-  grid-area: defLabel;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spa {
-  grid-area: spatkLabel;
-  margin-left: 1rem;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spd {
-  grid-area: spdefLabel;
-  margin-left: 1rem;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form label.spe {
-  grid-area: spdLabel;
-  margin-left: 1rem;
-}
 .application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input {
   text-align: center;
   align-self: center;
 }
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.hp {
-  grid-area: hpValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.atk {
-  grid-area: atkValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.def {
-  grid-area: defValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spa {
-  grid-area: spatkValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spd {
-  grid-area: spdefValue;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input.spe {
-  grid-area: spdValue;
-}
 .application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form h1 {
-  grid-area: header;
   text-align: center;
-}
-.application.sheet.stats-form .window-content aside[data-application-part="baseStats"] form#base-stats-form input[type="submit"] {
-  grid-area: submit;
 }
 .application.sheet.stats-form .window-content aside[data-application-part="evStats"] {
   grid-area: evStats;
