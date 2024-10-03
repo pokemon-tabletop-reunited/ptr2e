@@ -1,0 +1,94 @@
+{
+  "name": "Cute Charm",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Cute Charm",
+        "slug": "cute-charm",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "The user is hit by a [Contact] attack."
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The triggering creature has a 30% chance of gaining @Affliction[charmed] 5.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The triggering creature has a 30% chance of gaining @Affliction[charmed] 5.",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "cute-charm",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "B11xHNehbKeFoCs2",
+  "effects": [
+    {
+      "name": "Cute Charm",
+      "type": "passive",
+      "_id": "YwQz51rDg6H7XqYI",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.charmedcondiitem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "origin",
+            "label": "Cute Charm",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Actor.1sUabDeO8unVN2QL.Item.B11xHNehbKeFoCs2.ActiveEffect.QP6XeyuiTYn5ME7I",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.0",
+        "createdTime": 1727983792919,
+        "modifiedTime": 1727983792919,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
+}
