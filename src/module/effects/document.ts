@@ -5,10 +5,14 @@ import { ChangeModel, Trait } from "@data";
 import { ActiveEffectSchema } from "types/foundry/common/documents/active-effect.js";
 import { CombatPTR2e } from "@combat";
 import { sluggify } from "@utils";
+import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
 class ActiveEffectPTR2e<
   TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null,
   TSystem extends ActiveEffectSystem = ActiveEffectSystem,
 > extends ActiveEffect<TParent, TSystem> {
+  /** Has this document completed `DataModel` initialization? */
+  declare initialized: boolean;
+
   static LOCALIZATION_PREFIXES = ["PTR2E.Effect"];
 
   declare grantedBy: ItemPTR2e | null;
@@ -46,8 +50,31 @@ class ActiveEffectPTR2e<
     return this.duration.remaining === 0;
   }
 
+  protected override _initialize(options?: Record<string, unknown>): void {
+    this.initialized = false;
+    super._initialize(options);
+  }
+
+  /**
+     * Never prepare data except as part of `DataModel` initialization. If embedded, don't prepare data if the parent is
+     * not yet initialized. See https://github.com/foundryvtt/foundryvtt/issues/7987
+     */
+  override prepareData(): void {
+    if (this.initialized) return;
+    if (!this.parent || this.parent.initialized) {
+      this.initialized = true;
+      super.prepareData();
+
+      for(const change of this.changes) {
+        change.prepareData?.();
+      }
+    }
+  }
+
   override prepareBaseData(): void {
     super.prepareBaseData();
+
+    this.flags.ptr2e = fu.mergeObject(this.flags.ptr2e ?? {}, { choiceSelections: {}})
 
     this._name = this._source.name;
     Object.defineProperty(this, "name", {
@@ -384,6 +411,15 @@ interface ActiveEffectPTR2e<
 > {
   constructor: typeof ActiveEffectPTR2e;
   readonly _source: foundry.documents.ActiveEffectSource<string, TSystem>;
+
+  flags: DocumentFlags & {
+    ptr2e: {
+      choiceSelections: Record<string, string | number | object | null>;
+      rollOptions: {
+        [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
+      }
+    };
+  }
 
   _name: string;
 }

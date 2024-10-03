@@ -1,9 +1,8 @@
 import { ChangeModel, ChangeModelOptions, ChangeSchema } from "@data";
-import { ItemType } from "@item/data/system.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { DataUnionField } from "@module/data/fields/data-union-field.ts";
 import { StrictArrayField, StrictBooleanField, StrictObjectField, StrictStringField } from "@module/data/fields/strict-primitive-fields.ts";
-import { Predicate, RawPredicate } from "@system/predication/predication.ts";
+import { Predicate } from "@system/predication/predication.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 import { sluggify } from "@utils";
 import * as R from "remeda"
@@ -13,6 +12,8 @@ import { ItemPTR2e, ItemSystemPTR } from "@item";
 import { ActorPTR2e } from "@actor";
 
 export default class ChoiceSetChangeSystem extends ChangeModel {
+  static override TYPE = "choice-set";
+
   declare choices: UninflatedChoiceSet;
   declare flag: string;
   declare allowedDrops: AllowedDropsData | null;
@@ -36,23 +37,37 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
       typeof source.selection === "string" || typeof source.selection === "number" || R.isObject(source.selection)
         ? source.selection
         : null;
+  }
 
-    if (R.isObject(this.choices) && !Array.isArray(this.choices) && !("filter" in this.choices)) {
-      this.choices.predicate = new Predicate(this.choices.predicate ?? [])
+  override prepareData(): void {
+    if(this.item) {
+      this.item.flags.ptr2e.choiceSelections ??= {};
+      this.item.flags.ptr2e.choiceSelections[this.flag] = this.selection;
     }
 
-    // Assign the selection to a flag on the parent item so that it may be referenced by other choice models on
-    // the same item. If a roll option is specified, assign that as well.
-    this.item?.rollOptions.addOption("change-selections", this.rollOption);
     if (this.selection !== null) {
       this.setRollOption(this.selection);
-    } else if (!this.allowNoSelection && this.test()) {
+    } else if (!this.allowNoSelection && this.test(null, true)) {
       // Disable this and all other change models on the effect until a selection is made
       this.ignored = true;
       for (const change of this.effect.changes) {
         change.ignored = true;
       }
     }
+  }
+
+  /**
+   *  Due to prepareData running after DataModel initialization, the property of `ignore` is set, which causes `this.test` to always fail.
+   *  Since during `this.prepareData` we need to check if the change should be ignored, we need to override `this.test` to ignore the `ignore` property.
+   */
+  override test(options?: Iterable<string> | null, ignoreIgnore = false): boolean {
+    if(ignoreIgnore && this.ignored) {
+      this.ignored = false;
+      const result = super.test(options);
+      this.ignored = true;
+      return result;
+    }
+    return super.test(options);
   }
 
   static override defineSchema(): ChoiceSetSchema {
@@ -70,10 +85,9 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
             false,
             false
           >(new StrictObjectField<PickableThing>({ required: true, nullable: false, initial: undefined })),
-          new StrictObjectField<ChoiceSetObject>({ required: true, nullable: false, initial: undefined }),
           new StrictStringField<string, string, true, false, false>({ required: true, nullable: false, initial: undefined, }),
         ],
-        { required: true, nullable: false, initial: undefined }
+        { required: true, nullable: false, initial: [] }
       ),
       prompt: new fields.StringField({
         required: false,
@@ -98,28 +112,21 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
       flag: new fields.StringField({ required: false, blank: false, nullable: false, initial: undefined }),
       rollOption: new fields.StringField({ required: false, blank: false, nullable: true, initial: null }),
       allowNoSelection: new StrictBooleanField({ required: false, nullable: false, initial: undefined }),
+      selection: new fields.AnyField({ required: false, nullable: true }),
     }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   override apply(): void { }
 
-  override async preCreate({ changeSource, effectSource, pendingItems, context }: ChangeModel.PreCreateParams<ChoiceSetSource>): Promise<void> {
+  override async preCreate({ changeSource, effectSource }: ChangeModel.PreCreateParams<ChoiceSetSource>): Promise<void> {
     const rollOptions = new Set([this.actor?.getRollOptions() ?? [], this.item?.getRollOptions() ?? []].flat());
     const predicate = this.resolveInjectedProperties(this.predicate);
     if (!predicate.test(rollOptions)) return;
 
-    if (R.isObject(this.choices)) {
-      if ("ownedItems" in this.choices && this.choices.ownedItems && !this.choices.types?.length) {
-        console.warn("ChoiceSetChangeSystem#preCreate | `ownedItems` was true but no `types` were specified");
-        changeSource.ignored = true;
-        return;
-      }
-    }
-
     this.setDefaultFlag(changeSource);
 
-    const inflatedChoices = await this.inflateChoices(rollOptions, pendingItems);
+    const inflatedChoices = await this.inflateChoices(rollOptions);
 
     const selection = this.getPreselection() ?? (await new ChoiceSetPrompt({
       prompt: this.prompt,
@@ -135,19 +142,108 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
 
     changeSource.selection = selection.value;
 
-    // if(this.adjustName && this.item) {
-    //   const itemName = this.item.name;
-    //   const label = game.i18n.localize(selection.label);
-    //   if(this.adjustName === true) {
-        // const newName = `${itemName} (${label})`;
-        // // Deduplicate if parenthetical is already present
-        // const pattern = ((): RegExp => {
-        //   const escaped = RegExp.escape(label);
-        //   return new RegExp(`\\(${escaped}\\) \\(${escaped}\\)$`);
-        // })();
-        // this.item.update({ name: newName.replace(pattern, `(${label})`) });
-    //   }
-    // }
+    if(this.adjustName) {
+      const effectName = effectSource.name;
+      const label = game.i18n.localize(selection.label);
+      if(this.adjustName === true) {
+        const newName = `${effectName} (${label})`;
+        // Deduplicate if parenthetical is already present
+        const pattern = ((): RegExp => {
+          const escaped = RegExp.escape(label);
+          return new RegExp(`\\(${escaped}\\) \\(${escaped}\\)$`);
+        })();
+        effectSource.name = newName.replace(pattern, `(${label})`);
+      }
+      else {
+        effectSource.name = game.i18n.format(this.adjustName, {
+          [this.flag]: game.i18n.localize(selection.label),
+        })
+      }
+    }
+    
+    this.effect.flags.ptr2e.choiceSelections ??= {};
+    this.effect.flags.ptr2e.choiceSelections[this.flag] = selection.value;
+
+    
+    this.setRollOption(changeSource.selection);
+
+    for (const change of this.effect?.system?.changes ?? []) {
+      // Now that a selection is made, other rule elements can be set back to unignored
+      change.ignored = false;
+    }
+  }
+
+  /**
+   * If an array was passed, localize & sort the labels and return. If a string, look it up in CONFIG.PF2E and
+   * create an array of choices.
+   * @param rollOptions  A set of actor roll options to for use in predicate testing
+   * @param pendingItems Items passed to #queryCompendium for checking max takability of feats
+   * @returns The array of choices to present to the user
+   */
+  async inflateChoices(rollOptions: Set<string>): Promise<PickableThing[]> {
+    const choices: PickableThing<string | number | object>[] = Array.isArray(this.choices)
+      ? this.choicesFromArray(this.choices, rollOptions) // Static choices from CM constructor data
+      : typeof this.choices === "string"
+        ? this.choicesFromPath(this.choices)
+        : [];
+
+    interface ItemChoice extends PickableThing<string> {
+      value: ItemUUID;
+    }
+
+    // If every choice is an item UUID, get the label and images from those items
+    const choicesAreUUIDs = choices.every((c): c is ItemChoice => UUIDUtils.isItemUUID(c.value));
+    if (choicesAreUUIDs) {
+      const itemChoices = await UUIDUtils.fromUUIDs(choices.map(c => c.value));
+      for (let i = 0; i < choices.length; i++) {
+        const item = itemChoices[i];
+        if (item instanceof ItemPTR2e) {
+          choices[i].label = item.name;
+          choices[i].img = item.img;
+        }
+      }
+      this.containsItems = true;
+    }
+
+    try {
+      const choiceData = choices.map(c => ({
+        value: c.value,
+        label: game.i18n.localize(c.label),
+        img: c.img,
+      }))
+
+      // Only sort if the choices were generated via compendium query or actor data
+      if (!Array.isArray(this.choices)) {
+        choiceData.sort((a, b) => a.label.localeCompare(b.label));
+      }
+      return choiceData;
+    }
+    catch {
+      return [];
+    }
+  }
+
+  private choicesFromArray(choices: PickableThing[], actorRollOptions: Set<string>): PickableThing[] {
+    return choices.filter((c) =>
+      this.resolveInjectedProperties(new Predicate(c.predicate ?? [])).test(actorRollOptions),
+    );
+  }
+
+  private choicesFromPath(path: string): PickableThing<string>[] {
+    const choiceObject: unknown = fu.getProperty(CONFIG.PTR, path) ?? fu.getProperty(this.actor ?? {}, path) ?? {};
+    if (
+      Array.isArray(choiceObject) &&
+      choiceObject.every((c) => R.isObject<{ value: string }>(c) && typeof c.value === "string")
+    ) {
+      return choiceObject;
+    } else if (R.isObject(choiceObject) && Object.values(choiceObject).every((c) => typeof c === "string")) {
+      return Object.entries(choiceObject).map(([value, label]) => ({
+        value,
+        label: String(label),
+      }));
+    }
+
+    return [];
   }
 
   private setDefaultFlag(source: ChoiceSetChangeSystem | ChoiceSetSource): string {
@@ -159,16 +255,18 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
   }
 
   private setRollOption(selection: unknown): void {
-    if (!this.actor) return;
     if (!(this.rollOption && (typeof selection === "string" || typeof selection === "number"))) return;
 
     // If the selection was a UUID, the roll option had its suffix appended at item creation
     const suffix = UUIDUtils.isItemUUID(selection) ? "" : `:${selection}`;
-    this.actor.rollOptions.addOption("all", `${this.rollOption}${suffix}`);
+    this.effect.flags.ptr2e.choiceSelections ??= {};
+    this.effect.flags.ptr2e.choiceSelections[this.rollOption] = selection;
+    this.actor?.rollOptions.addOption("all", `${this.rollOption}${suffix}`);
   }
 
   private getPreselection(): PickableThing | null {
-    
+    const choice = Array.isArray(this.choices) ? this.choices.find(c => R.equals(c.value, this.selection)) : null;
+    return choice ?? null;
   }
 }
 
@@ -184,15 +282,14 @@ type ChoiceSetSource = SourceFromSchema<ChoiceSetSchema> & {
 interface ChoiceSetSchema extends ChangeSchema {
   /**
    * The options from which the user can choose. If a string is provided, it is treated as a reference to a record in
-   * `CONFIG.PF2E`, and the `PromptChoice` array is composed from its entries.
+   * `CONFIG.PTR2E`, and the `PromptChoice` array is composed from its entries.
    */
   choices: DataUnionField<
     | StrictArrayField<StrictObjectField<PickableThing>, PickableThing[], PickableThing[], true, false, false>
-    | StrictObjectField<ChoiceSetObject>
     | StrictStringField<string, string, true, false, false>,
     true,
     false,
-    false
+    true
   >;
   /** The prompt to present in the ChoiceSet application window */
   prompt: foundry.data.fields.StringField<string, string, false, false, true>;
@@ -221,6 +318,7 @@ interface ChoiceSetSchema extends ChangeSchema {
   >;
   /** Allow the user to make no selection without suppressing all other rule elements on the parent item */
   allowNoSelection: StrictBooleanField<false, false, false>;
+  selection: foundry.data.fields.AnyField;
 };
 
 interface AllowedDropsSchema extends foundry.data.fields.DataSchema {
@@ -230,62 +328,10 @@ interface AllowedDropsSchema extends foundry.data.fields.DataSchema {
 
 type AllowedDropsData = ModelPropsFromSchema<AllowedDropsSchema>;
 
-type ChoiceSetObject = ChoiceSetOwnedItems | ChoiceSetAttacks | ChoiceSetPackQuery;
-type UninflatedChoiceSet = string | PickableThing[] | ChoiceSetObject;
-
-// interface ChoiceSetSource {
-//   flag?: unknown;
-//   prompt?: unknown;
-//   selection?: unknown;
-//   adjustName?: unknown;
-//   recordSlug?: unknown;
-//   allowedDrops?: unknown;
-//   allowNoSelection?: unknown;
-//   rollOption?: unknown;
-// }
-
-interface ChoiceSetOwnedItems {
-  /** Whether the choices should pull from items on the actor. */
-  ownedItems: boolean;
-  /** Whether the choices should include handwraps of mighty blows in addition to weapons */
-  includeHandwraps?: boolean;
-  /** The filter to apply the actor's own weapons/unarmed attacks */
-  predicate: RawPredicate;
-  attacks?: never;
-  unarmedAttacks?: never;
-  types: (ItemType | "physical")[];
-}
-
-interface ChoiceSetAttacks {
-  /** Include all attacks, limited by predicate */
-  attacks?: boolean;
-  /** Include only unarmed attacks as the basis of the choices */
-  unarmedAttacks?: boolean;
-  /** The filter to apply the actor's own weapons/unarmed attacks */
-  predicate: RawPredicate;
-  ownedItems?: never;
-}
-
-interface ChoiceSetPackQuery {
-  /** A system item type: defaults to "feat" */
-  itemType?: ItemType;
-  /** An optional pack to restrict the search to */
-  pack?: boolean;
-  /** A predicate used to filter items constructed from index data */
-  filter: RawPredicate;
-  /** Use the item slugs as values instead of their UUIDs */
-  slugsAsValues?: boolean;
-  ownedItems?: never;
-  attacks?: never;
-  unarmedAttacks?: never;
-}
+type UninflatedChoiceSet = string | PickableThing[]
 
 export type {
   AllowedDropsData,
-  ChoiceSetAttacks,
-  ChoiceSetObject,
-  ChoiceSetOwnedItems,
-  ChoiceSetPackQuery,
   ChoiceSetSchema,
   ChoiceSetSource,
   UninflatedChoiceSet,

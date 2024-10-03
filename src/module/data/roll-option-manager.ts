@@ -1,8 +1,9 @@
 import { ActorPTR2e } from "@actor";
 import { ItemPTR2e } from "@item";
 import Trait from "./models/trait.ts";
+import { ActiveEffectPTR2e } from "@effects";
 
-export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {
+export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e | ActiveEffectPTR2e> {
     #initialized = false;
 
     private get options(): RollOptions {
@@ -76,4 +77,4 @@ export type RollOptions = {
 };
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default interface RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e> {}
+export default interface RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e | ActiveEffectPTR2e> {}

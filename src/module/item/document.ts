@@ -19,6 +19,9 @@ class ItemPTR2e<
   TSystem extends ItemSystemPTR = ItemSystemPTR,
   TParent extends ActorPTR2e | null = ActorPTR2e | null,
 > extends Item<TParent, TSystem> {
+  /** Has this document completed `DataModel` initialization? */
+  declare initialized: boolean;
+
   declare grantedBy: ItemPTR2e | ActiveEffectPTR2e | null;
 
   declare sourceId: string;
@@ -82,12 +85,29 @@ class ItemPTR2e<
 
   override getRollData(): Record<string, unknown> {
     const rollData: Record<string, unknown> = { item: this };
-    if(this.parent instanceof ActorPTR2e) rollData.actor = this.parent;
+    if (this.parent instanceof ActorPTR2e) rollData.actor = this.parent;
     return rollData;
   }
 
   get actions() {
     return this._actions;
+  }
+
+  protected override _initialize(options?: Record<string, unknown>): void {
+    this.initialized = false;
+    super._initialize(options);
+  }
+
+  /**
+   * Never prepare data except as part of `DataModel` initialization. If embedded, don't prepare data if the parent is
+   * not yet initialized. See https://github.com/foundryvtt/foundryvtt/issues/7987
+   */
+  override prepareData(): void {
+    if (this.initialized) return;
+    if (!this.parent || this.parent.initialized) {
+      this.initialized = true;
+      super.prepareData();
+    }
   }
 
   override prepareBaseData() {
