@@ -5,7 +5,9 @@
                 <legend>Attack</legend>
                 {{formField fields.types value=source.types localize=true}}
                 {{formField fields.category value=source.category localize=true}}
-                {{formField fields.power value=source.power localize=true}}
+                {{#unless (is source.category "status")}}
+                  {{formField fields.power value=source.power localize=true}}
+                {{/unless}}
                 {{formField fields.accuracy value=source.accuracy localize=true}}
                 {{formField fields.free value=action.free localize=true}}
             </fieldset>
