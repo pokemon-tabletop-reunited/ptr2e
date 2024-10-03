@@ -4194,28 +4194,44 @@ body {
     }
 
     &.target-selector-popup {
-        .available-targets {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
+      .window-content {
+        padding: 0.5rem;
+      }
 
-            .target {
-                display: flex;
-                align-items: center;
-                gap: 5px;
-                border: 1px solid var(--border-theme-color);
-                border-radius: 5px;
+      .available-targets {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
 
-                &:hover {
-                    box-shadow: 0px 0px 5px var(--color-shadow-primary);
-                }
-                img {
-                    width: 36px;
-                    height: 36px;
-                    border: none;
-                }
-            }
-        }
+          .target {
+              display: flex;
+              align-items: center;
+              gap: 5px;
+              border: 1px solid var(--border-theme-color);
+              border-radius: 5px;
+              padding: 0.25rem;
+
+              &:hover {
+                  box-shadow: 0px 0px 5px var(--color-shadow-primary);
+              }
+              img {
+                  width: 36px;
+                  height: 36px;
+                  border: none;
+              }
+          }
+      }
+
+      fieldset {
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        margin-bottom: 0.5rem;
+        border-radius: 8px;
+        border-color: var(--border-theme-color);
+      }
     }
 
     input[type="color"] {

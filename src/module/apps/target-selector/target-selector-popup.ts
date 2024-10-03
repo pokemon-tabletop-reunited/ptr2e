@@ -33,11 +33,10 @@ export class TargetSelectorPopup extends foundry.applications.api.HandlebarsAppl
     targets: { uuid: string; name: string; img: string; description?: string }[];
     #title: string;
     #hint: string;
-    
 
     constructor(
         targets: { uuid: string; name: string; img: string; description?: string }[],
-        { title = "", hint = "" } : { title?: string; hint?: string; },
+        { title = "PTR2E.ChatContext.SpendLuckAttack.label", hint = "PTR2E.ChatContext.SpendLuckAttack.hint" } : { title?: string; hint?: string; } = {},
         options: Partial<foundry.applications.api.ApplicationConfiguration> = {}
     ) {
         super(options);
