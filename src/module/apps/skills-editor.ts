@@ -77,7 +77,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                     ...skill,
                     label,
                     investment: 0,
-                    max: (levelOne ? 90 : 100) - (skill?.rvs ?? 0),
+                    max: 70 - (skill?.rvs ?? 0),
                     min: -(skill?.rvs ?? 0),
                 }];
             } else {
