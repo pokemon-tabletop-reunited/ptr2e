@@ -63,7 +63,6 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     }
 
     resetSkills(): this["skills"] {
-        const levelOne = this.document.system.advancement.level === 1;
         const {skills, hideHiddenSkills} = SkillsComponent.prepareSkillsData(this.document);
 
         const convertSkill = (skill: Skill) => {
