@@ -8,7 +8,8 @@
     "traits": [
       "dash",
       "contact",
-      "dance"
+      "dance",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -39,10 +40,45 @@
         "types": [
           "flying"
         ],
-        "description": "Effect: If the user has no equipped items, Acrobatics' Power is doubled.",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "acrobatics-unburdened",
+        "name": "Acrobatics (Unburdened)",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact",
+          "dance",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 110,
+        "accuracy": 100,
+        "types": [
+          "flying"
+        ],
+        "description": "<p>Effect: This attack may only be used if the user has no Held or Belt items.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "acrobatics",
+        "free": true,
         "slot": null
       }
     ],

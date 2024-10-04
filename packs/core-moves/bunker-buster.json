@@ -1,5 +1,4 @@
 {
-  "folder": "PTzDJPvM7Mjj7e8k",
   "name": "Bunker Buster",
   "type": "move",
   "_id": "NhuMc1zQyP4kM5QG",
@@ -31,12 +30,48 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
-          "trigger": "The target has a [Shield] effect when this attack is declared."
+          "trigger": ""
         },
-        "variant": null,
+        "variant": "bunker-buster",
+        "types": [
+          "rock"
+        ],
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": ""
+      },
+      {
+        "name": "Bunker Buster (Shield)",
+        "slug": "bunker-buster-shield",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "pierce",
+          "explode",
+          "missile",
+          "flinch-5"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The target has a [Shield] effect when this attack is declared.</p>"
+        },
+        "variant": "bunker-buster",
         "types": [
           "rock"
         ],
@@ -52,7 +87,7 @@
     ],
     "description": "",
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "effects": [],
   "sort": 0,

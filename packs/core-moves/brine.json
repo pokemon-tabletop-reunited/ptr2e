@@ -23,8 +23,7 @@
           "activation": "complex",
           "powerPoints": 5,
           "delay": null,
-          "priority": null,
-          "trigger": null
+          "priority": null
         },
         "category": "special",
         "power": 65,
@@ -32,7 +31,38 @@
         "types": [
           "water"
         ],
-        "description": "Effect: If the target's current Hit Points are less than 50% of their Max, this Attack's Power is doubled.",
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "brine-vulnerable",
+        "name": "Brine (Vulnerable)",
+        "type": "attack",
+        "traits": [
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Target's current HP is less than or equal to 50% of their Max HP.</p>"
+        },
+        "category": "special",
+        "power": 130,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "<p>Trigger: Target's current HP is less than or equal to 50% of their Max HP.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

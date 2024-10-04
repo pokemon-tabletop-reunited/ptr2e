@@ -1,5 +1,4 @@
 {
-  "folder": "PTzDJPvM7Mjj7e8k",
   "name": "Ashburn",
   "type": "move",
   "_id": "cOd1Ss6RXCpNhxHP",
@@ -21,10 +20,9 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 5,
           "delay": null,
-          "priority": null,
-          "trigger": ""
+          "priority": null
         },
         "variant": null,
         "types": [
@@ -37,12 +35,43 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: If the target has @Affliction[burn] , this Attack's Power is doubled.</p>"
+        "description": ""
+      },
+      {
+        "name": "Ashburn (Burned)",
+        "slug": "ashburn-burned",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "The target has @Affliction[burn]."
+        },
+        "variant": "ashburn",
+        "types": [
+          "fire"
+        ],
+        "category": "special",
+        "power": 130,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Trigger: The target has @Affliction[burn].</p>"
       }
     ],
     "description": "",
     "container": null,
-    "grade": "A"
+    "grade": "B"
   },
   "effects": [],
   "sort": 0,

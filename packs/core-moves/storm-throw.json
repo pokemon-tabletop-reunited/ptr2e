@@ -7,9 +7,9 @@
     "description": "",
     "traits": [
       "crit-4",
-      "push-2",
-      "contact",
-      "grapple"
+      "push-4",
+      "grapple",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -18,8 +18,7 @@
         "type": "attack",
         "traits": [
           "crit-4",
-          "push-2",
-          "contact",
+          "push-4",
           "grapple",
           "pp-updated"
         ],
@@ -32,8 +31,7 @@
           "activation": "complex",
           "powerPoints": 4,
           "delay": null,
-          "priority": null,
-          "trigger": "The user is in control of a @Affliction[grapple]."
+          "priority": null
         },
         "category": "physical",
         "power": 60,
@@ -41,7 +39,7 @@
         "types": [
           "fighting"
         ],
-        "description": "Trigger: The user is in control of a @Affliction[grapple].\nEffect: This attack gains [Danger Close], and has its [Push X] increased by +2. If the user is not in control of a @Affliction[grapple], this attack cannot be declared.",
+        "description": "<p>Effect: On hit, the target loses @Affliction[grapple] if applicable and is Pushed.",
         "contestType": "",
         "contestEffect": "",
         "free": false,

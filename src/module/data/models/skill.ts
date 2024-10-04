@@ -40,6 +40,9 @@ class SkillPTR2e extends foundry.abstract.DataModel {
     if (speciesTrait && this.value <= 1) {
       this.value = speciesTrait.value;
     }
+    if(speciesTrait && this.slug === "resources") {
+      if(speciesTrait?.value > this.value) this.value = speciesTrait.value;
+    }
 
     this.total = this.value + (this.rvs ?? 0);
     if ((this.rvs ?? 0) > 0 && this.parent.advancement?.rvs?.total && !["luck", "resources"].includes(this.slug)) {

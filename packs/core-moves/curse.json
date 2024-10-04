@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "curse",
-    "description": "Effect: If the user is a Ghost-type creature, the sacrifice HP equal to 1/2 their Max HP and select one other creature on the field. The targeted creature is @Affliction[cursed] 6. \n\nIf the user is not a Ghost-typed creature, they raise their ATK stage and DEF by +1 and reduce their SPD stage by -1 for 5 activations instead.",
+    "description": "<p>Effect: If the user is a Ghost-type creature, they sacrifice HP equal to 50% their Max HP and select one other creature on the field. The targeted creature is @Affliction[cursed] 6.</p><p>If the user is not a Ghost-typed creature, they raise their ATK stage and DEF by +1 and reduce their SPD stage by -1 for 5 activations instead.</p>",
     "traits": [],
     "actions": [
       {
@@ -30,10 +30,40 @@
         "types": [
           "ghost"
         ],
-        "description": "Effect: If the user is a Ghost-type creature, the sacrifice HP equal to 1/2 their Max HP and select one other creature on the field. The targeted creature is @Affliction[cursed] 6. \n\nIf the user is not a Ghost-typed creature, they raise their ATK stage and DEF by +1 and reduce their SPD stage by -1 for 5 activations instead.",
+        "description": "<p>Effect: The user gains +1 ATK and DEF stage and -1 SPD stage for 5 activations.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "curse-ghost",
+        "name": "Curse (Ghost)",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "The user possesses the [Ghost] Type and has more than 50% of its HP remaining."
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "ghost"
+        ],
+        "description": "<p>Trigger: The user possesses the [Ghost] Type and has more than 50% of its HP remaining.</p><p>Effect: The user sacrifices HP equal to 50% of their Max HP. The targeted creature is @Affliction[cursed] 6.</p><p>If the user is not a Ghost-typed creature, they raise their ATK stage and DEF by +1 and reduce their SPD stage by -1 for 5 activations instead.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "curse",
+        "free": true,
         "slot": null
       }
     ],

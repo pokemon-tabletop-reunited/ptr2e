@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "payback",
-    "description": "",
+    "description": "<p>Effect: If user has been hit by a Physical- or Special-Category Attack this round, this attack's Power is doubled.</p>",
     "traits": [
       "contact"
     ],
@@ -24,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -35,10 +35,43 @@
         "types": [
           "dark"
         ],
-        "description": "If the user was hit by a damaging attack before the the use of this attack this round, Payback's Power is doubled.",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "payback-empowered",
+        "name": "Payback (Empowered)",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user has been hit by a Physical- or Special-Category Attack this round.</p>"
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "<p>Trigger: The user has been hit by a Physical- or Special-Category Attack this round.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "payback",
+        "free": true,
         "slot": null
       }
     ],

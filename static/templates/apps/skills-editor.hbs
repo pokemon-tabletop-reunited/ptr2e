@@ -30,7 +30,7 @@
                         {{#if (and (eq this.slug "resources") (not @root.levelOne true))}}
                             <label></label>
                         {{else}}
-                            <input name="{{slug}}.investment" type="number" max="{{@root.maxInvestment}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
+                            <input name="{{slug}}.investment" type="number" min="{{min}}" max="{{max}}" value="{{investment}}" data-slug="{{slug}}" step="1"/>
                         {{/if}}
                     {{/if}}
                 </div>
@@ -38,6 +38,13 @@
         </div>
     </fieldset>
     <footer class="controls">
-        <button type="submit">Apply Investment</button>
+        {{#if valid}}
+        <button type="submit">{{localize "PTR2E.SkillsEditor.Apply.apply"}}</button>
+        {{else}}
+        {{#if showOverrideSubmit}}
+        <button type="submit" formnovalidate="formnovalidate">{{localize "PTR2E.SkillsEditor.Apply.override"}}</button>
+        {{/if}}
+        <p>{{localize "PTR2E.SkillsEditor.Apply.fail"}}</p>
+        {{/if}}
     </footer>
 </section>

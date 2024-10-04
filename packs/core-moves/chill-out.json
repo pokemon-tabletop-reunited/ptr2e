@@ -1,5 +1,4 @@
 {
-  "folder": "PTzDJPvM7Mjj7e8k",
   "name": "Chill Out",
   "type": "move",
   "_id": "ATin7GkQR5amxAP4",
@@ -15,9 +14,7 @@
         "slug": "chill-out",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [
-          "environ"
-        ],
+        "traits": [],
         "range": {
           "target": "emanation",
           "distance": 2,
@@ -27,8 +24,7 @@
           "activation": "complex",
           "powerPoints": 9,
           "delay": null,
-          "priority": null,
-          "trigger": ""
+          "priority": null
         },
         "variant": null,
         "types": [
@@ -41,10 +37,42 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: On hit, all legal targets lose -1 ATK and SPD stages for 5 activations. If there is Snowy Weather, they are decreased by -2 for 7 activations instead.</p>"
+        "description": "<p>Effect: On hit, all legal targets lose -1 ATK and SPD stages for 5 activations.</p>"
+      },
+      {
+        "name": "Chill Out (Snowy)",
+        "slug": "chill-out-snowy",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "environ"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null,
+        "types": [
+          "ice"
+        ],
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Effect: On hit, all legal targets lose -2 ATK and SPD stages for 7 activations."
       }
     ],
-    "description": "",
+    "description": "<p>Effect: On hit, all legal targets lose -1 ATK and SPD stages for 5 activations. If there is Snowy Weather, they are decreased by -2 for 7 activations instead.</p>",
     "container": null,
     "grade": "A"
   },

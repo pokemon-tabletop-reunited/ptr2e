@@ -363,6 +363,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       evasion: 0,
       rvs: 0,
       advancementPoints: 0,
+      inventoryPoints: 0,
     };
   }
 
@@ -386,7 +387,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     // Add species traits to actor traits
     for (const trait of this.species.traits.values()) {
-      this.traits.set(trait.slug, trait);
+      if (!this.traits.has(trait.slug)) {
+        this.traits.set(trait.slug, {
+          ...trait,
+          virtual: true,
+        });
+      }
     }
 
     for (const type of this.species.types.values()) {
@@ -395,16 +401,14 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         this.type.types.delete("untyped");
     }
 
-    this.movement = new Collection(
-      [
-        this.species.movement.primary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "primary" }]),
-        this.species.movement.secondary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "secondary" }])
-      ].flat()
-    );
+    this.movement = Object.fromEntries([
+      ...this.species.movement.primary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "primary" }]),
+      ...this.species.movement.secondary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "secondary" }])
+    ]);
 
     // Every creature has a base overland of 3 at least.
-    if ((Number(this.movement.get("overland")?.value) || 0) <= 3) {
-      this.movement.set("overland", { method: "overland", value: 3, type: "secondary" });
+    if ((Number(this.movement["overland"]?.value) || 0) <= 3) {
+      this.movement["overland"] = { method: "overland", value: 3, type: "secondary" };
     }
   }
 
@@ -434,7 +438,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
     this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
-    this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
+    this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10) + (this.modifiers.inventoryPoints ?? 0);
   }
 
   _calculateStatTotal(stat: Attribute | Omit<Attribute, "stage">): number {
@@ -539,7 +543,7 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
     };
   }
 
-  movement: Collection<Movement>;
+  movement: Record<string, Movement>;
 
   _source: SourceFromSchema<ActorSystemSchema>;
 }

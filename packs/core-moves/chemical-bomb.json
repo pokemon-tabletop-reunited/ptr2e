@@ -1,5 +1,4 @@
 {
-  "folder": "PTzDJPvM7Mjj7e8k",
   "name": "Chemical Bomb",
   "type": "move",
   "_id": "oFc4st3EDC06T5pj",
@@ -31,8 +30,7 @@
           "activation": "complex",
           "powerPoints": 4,
           "delay": null,
-          "priority": null,
-          "trigger": ""
+          "priority": null
         },
         "variant": null,
         "types": [
@@ -45,7 +43,43 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[poison]ed 5. If Smoggy Weather is active, this attack gains [Danger Close]. </p>"
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[poison] 5.</p>"
+      },
+      {
+        "name": "Chemical Bomb (Smoggy)",
+        "slug": "chemical-bomb-smoggy",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "sky",
+          "environ",
+          "danger-close",
+          "explode"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>While Smoogy Weather is present.</p>"
+        },
+        "variant": "chemical-bomb",
+        "types": [
+          "poison"
+        ],
+        "category": "special",
+        "power": 110,
+        "accuracy": 70,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Trigger: While Smoogy Weather is present.</p><p>Effect: On hit, the target has a 30% chance of gaining @Affliction[poison] 5.</p>"
       }
     ],
     "description": "",

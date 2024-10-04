@@ -274,42 +274,6 @@ export class ActionEditor<
         }
     }
 
-    // override async _renderFrame(options: foundry.applications.api.HandlebarsRenderOptions) {
-    //     const frame = await super._renderFrame(options);
-
-    //     // Add send to chat button
-    //     const toChatLabel = game.i18n.localize("PTR2E.ItemSheet.SendToChatLabel");
-    //     const toChat = `<button type="button" class="header-control fa-solid fa-arrow-up-right-from-square" data-action="toChat"
-    //                             data-tooltip="${toChatLabel}" aria-label="${toChatLabel}"></button>`;
-    //     this.window.controls.insertAdjacentHTML("afterend", toChat);
-
-    //     // Add send to chat button
-    //     const openItemLabel = game.i18n.localize("PTR2E.Actions.OpenItemLabel");
-    //     const openItem = `<button type="button" class="header-control fa-solid fa-suitcase" data-action="toChat"
-    //                             data-tooltip="${openItemLabel}" aria-label="${openItemLabel}"></button>`;
-    //     this.window.controls.insertAdjacentHTML("afterend", openItem);
-
-    //     // Add send to chat button
-    //     const createVariantLabel = game.i18n.localize("PTR2E.Actions.CreateVariantLabel");
-    //     const createVariant = `<button type="button" class="header-control fa-solid fa-plus" data-action="createVariant"
-    //                             data-tooltip="${createVariantLabel}" aria-label="${createVariantLabel}"></button>`;
-    //     this.window.controls.insertAdjacentHTML("afterend", createVariant);
-
-    //     if(this.action.variant) {
-    //         const variantOfLabel = game.i18n.localize("PTR2E.Actions.VariantOfLabel");
-    //         const variantOfButton = `<button type="button" class="header-control fa-solid fa-arrow-down-to-square" data-action="openOriginal"
-    //                                 data-tooltip="${variantOfLabel}" aria-label="${variantOfLabel}"></button>`;
-    //         this.window.controls.insertAdjacentHTML("afterend", variantOfButton);
-
-    //         const deleteVariantLabel = game.i18n.localize("PTR2E.Actions.DeleteVariantLabel");
-    //         const deleteVariantButton = `<button type="button" class="header-control fa-solid fa-trash" data-action="deleteVariant"
-    //                                 data-tooltip="${deleteVariantLabel}" aria-label="${deleteVariantLabel}"></button>`;
-    //         this.window.controls.insertAdjacentHTML("afterend", deleteVariantButton);
-    //     }
-        
-    //     return frame;
-    // }
-
     protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {
         event.preventDefault();
         const { handler, closeOnSubmit } = config;

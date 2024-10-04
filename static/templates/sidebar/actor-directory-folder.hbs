@@ -4,23 +4,23 @@
     <h3 class="noborder"><i class="fas fa-folder-open fa-fw"></i>{{folder.name}}</h3>
 
     {{#if node.team}}
-    <a class="create-button open-team">
+    <a class="create-button open-team" data-tooltip="Open Team Sheet">
         <i class="fas fa-users"></i>
     </a>
     {{/if}}
     {{#if node.owner}}
-    <a class="create-button open-party">
+    <a class="create-button open-party" data-tooltip="Open Party Sheet">
         <i class="fas fa-user-group"></i>
     </a>
     {{/if}}
     {{#if @root.canCreateFolder}}
-    <a class="create-button create-folder">
+    <a class="create-button create-folder" data-tooltip="Create Nested Folder">
       <i class="{{@root.folderIcon}}"></i>
       <i class="fas fa-plus"></i>
     </a>
     {{/if}}
     {{#if @root.canCreateEntry}}
-    <a class="create-button create-entry">
+    <a class="create-button create-entry" data-tooltip="Create Actor in Folder">
       <i class="{{@root.sidebarIcon}}"></i>
       <i class="fas fa-plus"></i>
     </a>

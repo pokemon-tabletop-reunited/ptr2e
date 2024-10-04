@@ -2,6 +2,10 @@ import { ActorPTR2e, Skill } from "@actor";
 import { SkillsComponent } from "@actor/components/skills-component.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { htmlQueryAll } from "@utils";
+import { ApplicationRenderOptions } from "types/foundry/common/applications/api.js";
+
+
+type SkillBeingEdited = SkillPTR2e["_source"] & { label: string; investment: number; max: number; min: number };
 
 export class SkillsEditor extends foundry.applications.api.HandlebarsApplicationMixin(
     foundry.applications.api.ApplicationV2
@@ -42,7 +46,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     };
 
     document: ActorPTR2e;
-    skills: (SkillPTR2e["_source"] & { label: string; investment: number })[];
+    skills: SkillBeingEdited[];
 
     override get title() {
         return `${this.document.name}'s Skills Editor`;
@@ -72,6 +76,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                     ...skill,
                     label,
                     investment: 0,
+                    max: 70 - (skill?.rvs ?? 0),
+                    min: -(skill?.rvs ?? 0),
                 }];
             } else {
                 const skillData = game.ptr.data.skills.get(skill.slug);
@@ -80,6 +86,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                         ...skill,
                         label: skillData.label || Handlebars.helpers.formatSlug(skill.slug),
                         investment: 0,
+                        max: 70 - (skill?.rvs ?? 0),
+                        min: -(skill?.rvs ?? 0),
                     }];
                 }
             }
@@ -87,9 +95,9 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         }
         
         return [
-            ...skills.favourites.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as (SkillPTR2e["_source"] & { label: string; investment: number })[]),
-            ...skills.normal.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as (SkillPTR2e["_source"] & { label: string; investment: number })[]),
-            ...(hideHiddenSkills ? [] : skills.hidden.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as (SkillPTR2e["_source"] & { label: string; investment: number })[])),
+            ...skills.favourites.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as SkillBeingEdited[]),
+            ...skills.normal.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as SkillBeingEdited[]),
+            ...(hideHiddenSkills ? [] : skills.hidden.flatMap((group) => group.skills.flatMap(convertSkill) as unknown as SkillBeingEdited[])),
         ]
     }
 
@@ -110,17 +118,37 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         };
         points.available = points.total - points.spent;
         const levelOne = this.document.system.advancement.level === 1;
-        const maxInvestment = Math.clamp(points.available,0, levelOne ? 90 : 100);
+
+        // clamp the max to not exceed the available points
+        const skills = this.skills.map((s)=>({
+            ...s,
+            max: Math.max(s.min, Math.min(s.max, s.investment + points.available!)),
+        }))
+
+        // check if this configuration is valid, and can pass validation
+        const valid = points.available >= 0 && !skills.some((skill)=>(skill.slug === "resources" ? (skill.investment <= -skill.value) : (skill.investment < skill.min)) || skill.investment > skill.max);
 
         return {
             document: this.document,
-            skills: this.skills,
+            skills,
             points,
-            maxInvestment,
             isReroll:
                 !levelOne || (levelOne && this.document.system.skills.get("luck")!.value! > 1),
             levelOne,
+            valid,
+            showOverrideSubmit: game?.user?.isGM ?? false,
         };
+    }
+
+    override async render(options: boolean | ApplicationRenderOptions, _options?: ApplicationRenderOptions): Promise<this> {
+        const scrollTop = this.element?.querySelector(".scroll")?.scrollTop;
+        const renderResult = await super.render(options, _options);
+        // set the scroll location
+        if (scrollTop) {
+            const scroll = this.element.querySelector(".scroll");
+            if (scroll !== null) scroll.scrollTop = scrollTop;
+        }
+        return renderResult;
     }
 
     override _attachPartListeners(
@@ -130,7 +158,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     ): void {
         super._attachPartListeners(partId, htmlElement, options);
 
-        for (const input of htmlQueryAll(htmlElement, "skill input")) {
+        for (const input of htmlQueryAll(htmlElement, ".skill input")) {
             input.addEventListener("change", this.#onSkillChange.bind(this));
         }
     }
@@ -362,6 +390,8 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
         const skills = this.document.system.toObject().skills as SkillPTR2e["_source"][];
         const maxInvestment = this.document.system.advancement.level === 1 ? 90 : 100;
 
+        const avoidValidation = !!((_event as SubmitEvent)?.submitter?.getAttribute("formnovalidate"));
+
         let resourceMod = 0;
         for (const skill of skills) {
             const skillData = data[skill.slug];
@@ -369,8 +399,12 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             const investment = parseInt(skillData.investment);
             if (isNaN(investment) || !investment) continue;
 
-            if(skill.slug === "resources" && investment < 0) resourceMod = investment; 
-            skill.rvs = Math.clamp((skill.rvs ?? 0) + investment, skill.slug === "resources" ? -maxInvestment : 0, maxInvestment);
+            if(skill.slug === "resources" && investment < 0) resourceMod = investment;
+            if (avoidValidation) {
+                skill.rvs = (skill.rvs ?? 0) + investment;
+            } else {
+                skill.rvs = Math.clamp((skill.rvs ?? 0) + investment, skill.slug === "resources" ? -maxInvestment : 0, maxInvestment);
+            }
             delete data[skill.slug];
         }
 
@@ -383,10 +417,12 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
 
             if(slug === "resources" && investment < 0) resourceMod = investment;
 
+            const rvs = avoidValidation ? investment : Math.clamp(investment, slug === "resources" ? -maxInvestment : 0, maxInvestment);
+
             skills.push({
                 slug,
                 value: 1,
-                rvs: Math.clamp(investment, slug === "resources" ? -maxInvestment : 0, maxInvestment),
+                rvs,
                 favourite: skillData.favourite ?? false,
                 hidden: skillData.hidden ?? false,
                 group: skillData.group || undefined,

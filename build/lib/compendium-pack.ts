@@ -126,6 +126,9 @@ class CompendiumPack {
     this.data = parsedData;
 
     for (const docSource of this.data) {
+      if(!docSource._id) {
+        throw PackError(`Document source in ${this.packId} has no _id: ${docSource.name}`);
+      }
       // Populate CompendiumPack.namesToIds for later conversion of compendium links
       packMap.set(sluggify(docSource.name), docSource._id ?? "");
       packEntryMap.set(docSource._id ?? docSource.name, docSource);
@@ -334,6 +337,10 @@ class CompendiumPack {
       docSource.system.slug ??= sluggify(docSource.name);
 
       if(docSource.type === "species") {
+        if((docSource.system as {slug: string}).slug !== sluggify(docSource.name) && ((docSource.system as {slug: string}).slug + '-' + sluggify(((docSource.system as {form?: string}).form ?? ""))) !== sluggify(docSource.name)) {
+          throw PackError(`Species '${docSource.name}' has a slug (or lack-thereof) that doesn't match its name '${(docSource.system as {slug: string}).slug}'`);
+        }
+
         ((system) => {
           const abilities = system.abilities
           for(const key of Object.keys(abilities)) {

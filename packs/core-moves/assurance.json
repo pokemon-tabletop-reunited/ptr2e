@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "assurance",
-    "description": "",
+    "description": "<p>Effect: If the target has taken damage previously this round, Assurance's Power is doubled.</p>",
     "traits": [
       "dash",
       "contact"
@@ -26,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -37,10 +37,44 @@
         "types": [
           "dark"
         ],
-        "description": "If the target has taken damage previously this round, Assurance's Power is doubled.",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "assurance-empowered",
+        "name": "Assurance (Empowered)",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The target has taken damage previously this round.</p>"
+        },
+        "category": "physical",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "<p>Trigger: The target has taken damage previously this round.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "variant": "assurance",
         "slot": null
       }
     ],

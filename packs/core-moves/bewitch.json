@@ -1,5 +1,4 @@
 {
-  "folder": "PTzDJPvM7Mjj7e8k",
   "name": "Bewitch",
   "type": "move",
   "_id": "Wh7nWwzI4J1tdBFD",
@@ -23,8 +22,7 @@
           "activation": "complex",
           "powerPoints": 4,
           "delay": null,
-          "priority": null,
-          "trigger": ""
+          "priority": null
         },
         "variant": null,
         "types": [
@@ -37,7 +35,38 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: This Attack's Power is doubled if the target is afflicted with a Major Status Affliction.</p>"
+        "description": ""
+      },
+      {
+        "name": "Bewitch (Afflicted)",
+        "slug": "bewitch-afflicted",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 7,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The target has a [Major Affliction].</p>"
+        },
+        "variant": "bewitch",
+        "types": [
+          "fairy"
+        ],
+        "category": "special",
+        "power": 110,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Trigger: The target has a [Major Affliction].</p>"
       }
     ],
     "description": "",

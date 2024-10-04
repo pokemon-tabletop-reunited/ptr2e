@@ -1,5 +1,4 @@
 {
-  "folder": "PTzDJPvM7Mjj7e8k",
   "name": "Crystallize",
   "type": "move",
   "_id": "9YPfb2tkInYHqaOE",
@@ -27,8 +26,7 @@
           "activation": "complex",
           "powerPoints": 4,
           "delay": null,
-          "priority": null,
-          "trigger": ""
+          "priority": null
         },
         "variant": null,
         "types": [
@@ -42,9 +40,42 @@
         "free": false,
         "slot": null,
         "description": "<p>Effect: The user's DEF and SPDEF stages increase by +1 for 5 activations. If there is Dusty Weather, DEF and SPDEF stages are increased by +2 for 7 activations instead.</p>"
+      },
+      {
+        "name": "Crystallize (Dusty)",
+        "slug": "crystallize-dusty",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "environ"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Dusty Weather is present.</p>"
+        },
+        "variant": "crystallize",
+        "types": [
+          "rock"
+        ],
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Trigger: Dusty Weather is present.</p><p>Effect: The user's DEF and SPDEF stages increase by +2 for 7 activations.</p>"
       }
     ],
-    "description": "",
+    "description": "<p>Effect: The user's DEF and SPDEF stages increase by +1 for 5 activations. If there is Dusty Weather, DEF and SPDEF stages are increased by +2 for 7 activations instead.</p>",
     "container": null,
     "grade": "B"
   },
