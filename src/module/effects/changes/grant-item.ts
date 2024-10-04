@@ -387,7 +387,7 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e
 
   const granter = actor.effects.get((item ? item.flags.ptr2e.grantedBy?.id : effect.flags.ptr2e.grantedBy?.id) ?? "") as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>;
   const parentGrant = Object.values(granter?.flags.ptr2e.itemGrants ?? {}).find(g => g.id === effect.id || g.id === item?.id);
-  const grants = Object.values(effect.flags.ptr2e.itemGrants);
+  const grants = Object.values(effect.flags.ptr2e.itemGrants ?? {});
 
   // Handle deletion restrictions, aborting early if found in either this item's granter or any of its grants
   if (granter && parentGrant?.onDelete === "restrict" && !pendingEffects.includes(granter)) {
