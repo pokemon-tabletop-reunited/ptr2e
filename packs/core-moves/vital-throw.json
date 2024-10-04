@@ -30,10 +30,9 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
+          "powerPoints": 3,
           "delay": 1,
-          "priority": null,
-          "trigger": "<p>The user is in control of a @Affliction[grapple].</p>"
+          "priority": null
         },
         "category": "physical",
         "power": 70,
@@ -41,15 +40,51 @@
         "types": [
           "fighting"
         ],
-        "description": "<p>Trigger: The user is in control of a @Affliction[grapple].</p><p>Effect: This attack has its [Push X] increased by +4, and loses its [Delay X].</p>",
+        "description": "<p>Effect: If the user is not in control of a Grapple while they possess @Affliction[grapple], this attack cannot be declared.</p>",
         "contestType": "",
         "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "vital-throw-grapple",
+        "name": "Vital Throw (Grapple)",
+        "type": "attack",
+        "traits": [
+          "push-2",
+          "contact",
+          "flinch-5",
+          "grapple",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user is in control of a Grapple, and the target is also in the same Grapple.</p>"
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": null,
+        "types": [
+          "fighting"
+        ],
+        "description": "<p>Trigger: The user is in control of a Grapple, and the target is also in the same Grapple.</p><p>Effect: On hit, the target is Flinched and cured of @Affliction[grapple].</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "vital-throw",
         "free": false,
         "slot": null
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "C"
   },
   "_id": "tNXN4HCcmKCZO3Ju",
   "effects": []

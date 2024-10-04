@@ -18,7 +18,40 @@
         "type": "attack",
         "traits": [
           "crit-4",
-          "push-2",
+          "push-3",
+          "grapple",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "storm-throw-grapple",
+        "name": "Storm Throw (Grapple)",
+        "type": "attack",
+        "traits": [
+          "crit-4",
+          "push-6",
           "contact",
           "grapple",
           "pp-updated"
@@ -33,7 +66,7 @@
           "powerPoints": 4,
           "delay": null,
           "priority": null,
-          "trigger": "<p>The user is in control of a @Affliction[grapple].</p>"
+          "trigger": "<p>The user is in control of a Grapple, and the target is also in the same Grapple.</p>"
         },
         "category": "physical",
         "power": 60,
@@ -41,9 +74,10 @@
         "types": [
           "fighting"
         ],
-        "description": "<p>Trigger: The user is in control of a @Affliction[grapple].</p><p>Effect: This attack gains [Danger Close], and has its [Push X] increased by +2. If the user is not in control of a @Affliction[grapple], this attack cannot be declared.</p>",
+        "description": "<p>Trigger: The user is in control of a Grapple, and the target is also in the same Grapple.</p><p>Effect: On hit, the target is cured of @Affliction[grapple]. If the user is not in control of a Grapple while they possess @Affliction[grapple], this attack cannot be declared.</p>",
         "contestType": "",
         "contestEffect": "",
+        "variant": "storm-throw",
         "free": false,
         "slot": null
       }
