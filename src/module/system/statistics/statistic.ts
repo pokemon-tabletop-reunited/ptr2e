@@ -88,7 +88,7 @@ class Statistic extends BaseStatistic {
             // Special cases, traits that modify the action itself universally
             // This might change once we've better decided how derivative traits will work
             const traits: string[] =
-                ("traits" in item.system ? item.system.traits.map((s) => s.slug) : []) ?? [];
+                ("traits" in item.system ? item.system.traits!.map((s) => s.slug) : []) ?? [];
             if (traits.includes("attack")) {
                 rollOptions.push("trait:attack");
             }

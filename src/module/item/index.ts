@@ -5,6 +5,7 @@ import { ActorPTR2e } from "@actor";
 
 // Items
 type AbilityPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.AbilitySystemModel, TParent>;
+type BlueprintPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.BlueprintSystemModel, TParent>;
 type ConsumablePTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.ConsumableSystemModel, TParent>;
 type ContainerPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.ContainerSystemModel, TParent>;
 type EquipmentPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.EquipmentSystemModel, TParent>;
@@ -18,6 +19,7 @@ type EffectPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPT
 
 export type {
     AbilityPTR2e,
+    BlueprintPTR2e,
     ConsumablePTR2e,
     ContainerPTR2e,
     EquipmentPTR2e,
@@ -32,6 +34,7 @@ export type {
 
 export type ItemSystemPTR =
     | data.AbilitySystemModel
+    | data.BlueprintSystemModel
     | data.ConsumableSystemModel
     | data.ContainerSystemModel
     | data.EquipmentSystemModel
@@ -52,6 +55,7 @@ export type ItemSystemsWithActions =
 
 export type ItemSourcePTR2e =
     | data.AbilitySystemSource
+    | data.BlueprintSystemSource
     | data.ConsumableSystemSource
     | data.ContainerSystemSource
     | data.EquipmentSystemSource

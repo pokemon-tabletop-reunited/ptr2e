@@ -1,5 +1,6 @@
 /** @module data/models/items */
 export { default as AbilitySystemModel } from "./ability.ts";
+export { default as BlueprintSystemModel } from "./blueprint.ts";
 export { default as ConsumableSystemModel } from "./consumable.ts";
 export { default as ContainerSystemModel } from "./container.ts";
 export { default as EquipmentSystemModel } from "./equipment.ts";
@@ -11,6 +12,7 @@ export { default as WeaponSystemModel } from "./weapon.ts";
 export { default as EffectSystemModel } from "./effect.ts";
 
 export type { AbilitySource as AbilitySystemSource } from "./ability.ts";
+export type { BlueprintSource as BlueprintSystemSource } from "./blueprint.ts";
 export type { ConsumableSource as ConsumableSystemSource } from "./consumable.ts";
 export type { ContainerSource as ContainerSystemSource } from "./container.ts";
 export type { EquipmentSource as EquipmentSystemSource } from "./equipment.ts";
