@@ -7,9 +7,9 @@
     "description": "",
     "traits": [
       "crit-4",
-      "push-2",
-      "contact",
-      "grapple"
+      "push-4",
+      "grapple",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -18,7 +18,7 @@
         "type": "attack",
         "traits": [
           "crit-4",
-          "push-3",
+          "push-4",
           "grapple",
           "pp-updated"
         ],
@@ -39,45 +39,9 @@
         "types": [
           "fighting"
         ],
-        "description": "",
+        "description": "<p>Effect: On hit, the target loses @Affliction[grapple] if applicable and is Pushed.",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
-        "slot": null
-      },
-      {
-        "slug": "storm-throw-grapple",
-        "name": "Storm Throw (Grapple)",
-        "type": "attack",
-        "traits": [
-          "crit-4",
-          "push-6",
-          "contact",
-          "grapple",
-          "pp-updated"
-        ],
-        "range": {
-          "target": "creature",
-          "distance": 1,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": "<p>The user is in control of a Grapple, and the target is also in the same Grapple.</p>"
-        },
-        "category": "physical",
-        "power": 60,
-        "accuracy": 100,
-        "types": [
-          "fighting"
-        ],
-        "description": "<p>Trigger: The user is in control of a Grapple, and the target is also in the same Grapple.</p><p>Effect: On hit, the target is cured of @Affliction[grapple]. If the user is not in control of a Grapple while they possess @Affliction[grapple], this attack cannot be declared.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "variant": "storm-throw",
         "free": false,
         "slot": null
       }
