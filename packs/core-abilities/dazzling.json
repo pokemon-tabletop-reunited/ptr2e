@@ -14,15 +14,16 @@
         "cost": {
           "activation": "free",
           "powerPoints": 0,
+          "trigger": "<p>Trigger: A creature within range uses a [Priority X] or [Interrupt X] action.</p><p>Effect: The triggering creature loses -1 ACC for 3 Activations and loses 1 PP if it was a [Priority X] action, and 2 PP if it was an [Interrupt X] action.</p>",
           "delay": null,
           "priority": null
         },
         "range": {
-          "target": "field",
-          "distance": 0,
+          "target": "aura",
+          "distance": 10,
           "unit": "m"
         },
-        "description": "Effect: Other creatures' [Interrupt X] Actions cannot be declared on the user's activations."
+        "description": "<p>Trigger: A creature within range uses a [Priority X] or [Interrupt X] action.</p><p>Effect: The triggering creature loses -1 ACC for 3 Activations and loses 1 PP if it was a [Priority X] action, and 2 PP if it was an [Interrupt X] action.</p>"
       }
     ],
     "description": "Effect: Other creatures' [Interrupt X] Actions cannot be declared on the user's activations.",
