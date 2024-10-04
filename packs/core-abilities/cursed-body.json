@@ -1,0 +1,94 @@
+{
+  "name": "Cursed Body",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Cursed Body",
+        "slug": "cursed-body",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "The user is hit by a [Contact] attack."
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The triggering creature has a 30% chance for the triggering attack to become @Affliction[disabled] 5.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The triggering creature has a 30% chance for the triggering attack to become @Affliction[disabled] 5.",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "cursed-body",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "rIKiInEzes5D9bVC",
+  "effects": [
+    {
+      "name": "Cursed Body",
+      "type": "passive",
+      "_id": "XY6xNmH2zLB5wCXL",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.disabledconditem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "origin",
+            "label": "Cursed Body",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.1",
+        "createdTime": 1728037747318,
+        "modifiedTime": 1728037779561,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
