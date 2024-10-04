@@ -135,7 +135,7 @@ class PerkStore extends Collection<PTRNode> {
             
             const connectedNode = this.get(`${connectedPerk.system.node.i},${connectedPerk.system.node.j}`);
             if(!connectedNode) continue;
-            if(connectedNode.connected?.has(currentPerk.system.slug)) {
+            if(!connectedNode.connected?.has(currentPerk.system.slug)) {
                 if(!this.missingConnections.has(connected)) this.missingConnections.set(connected, new Set([currentPerk.slug]));
                 else this.missingConnections.get(connected)!.add(currentPerk.slug);
                 continue;
