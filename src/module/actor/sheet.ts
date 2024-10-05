@@ -407,7 +407,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     context: foundry.applications.api.ApplicationRenderContext
   ) {
     if (partId === "overview") {
-      context.movement = this.actor.system.movement.contents;
+      context.movement = Object.values(this.actor.system.movement);
     }
 
     if (partId === "clocks") {

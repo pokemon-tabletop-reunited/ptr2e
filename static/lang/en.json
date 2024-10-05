@@ -23,6 +23,21 @@
     "Item": {
       "Plural": "Items"
     },
+    
+    "ChoiceSetPrompt": {
+      "Decline": "Decline",
+      "DragHomebrewItem": "Drag a homebrew item here if using one instead of the above options.",
+      "HomebrewItem": "Homebrew Item",
+      "ViewItem": {
+        "Tooltip": "View Item",
+        "Disabled": "Selected choice has no item sheet"
+      },
+      "NoLabel": "No",
+      "Prompt": "Make a selection.",
+      "SaveLabel": "Save",
+      "SkillLabel": "Skill",
+      "YesLabel": "Yes"
+    },
     "DataInspector": {
       "DataButton": "Data",
       "Instructions": "<p>The Data Inspector for Documents will show you all the available fields based on the <em>Mode</em> you have selected, most modes show the data located in the `system` property.</p><p>Left click to expand an entry.</p><p>Right click a <em>key</em> to copy path to clipboard,</p><p>right click a <em>value</em> to copy that value to clipboard.</p><br><p>The Data Inspector for Chat Messages will show you info about the rolls in those messages</p><p>Right click a <em>domain</em> or <em>option</em> to copy that value to clipboard.</p>",
@@ -150,7 +165,17 @@
       "SpendLuckSkill": {
         "label": "Spend Luck to Increase DoS",
         "title": "Are you sure you're Spending Luck?",
-        "content": "You're about to spend {amount} Luck to increase your Degree of Success."
+        "requires": "Requires {amount} points of luck spent!",
+        "content": "You're about to spend {amount} Luck to increase your Degree of Success.",
+        "spent": "Successfully applied Luck to this roll, spending {amount} Luck from {actor}. New total: {total}"
+      },
+      "SpendLuckAttack": {
+        "label": "Spend Luck to Hit",
+        "hint": "Select the target for whom you'd like to spend luck to turn this miss into a hit",
+        "title": "Are you sure you're Spending Luck?",
+        "requires": "(Requires {amount} points of Luck)",
+        "content": "You're about to spend {amount} Luck to hit.",
+        "spent": "Successfully applied Luck to this roll, spending {amount} Luck from {actor}. New total: {total}"
       },
       "RollInspector": {
         "label": "Open Roll Inspector"
@@ -401,7 +426,8 @@
           "strong": "Strong",
           "agile": "Agile",
           "precise": "Precise",
-          "evasive": "Evasive"
+          "evasive": "Evasive",
+          "gambit": "Gambit"
         },
         "Descriptions": {
           "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-affliction], @Trait[minor-affliction], @Trait[pseudo-affliction], and @Trait[stage-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
@@ -459,11 +485,12 @@
           "grapple": "The afflicted creature possesses -1 default ACC and EVA and may only take Actions with the [Grapple] trait. Creatures that are not in control of a Grapple are also Bound. A creature in control of the Grapple can take a Free Action on their turn to end their participation in Grapple. The creature in control of the Grapple is treated as having the non-in-control creature(s) as being Mounted on itself.<br>If an afflicted creature is the only participant of a Grapple, they lose this affliction.",
           "resolved": "An afflicted creature creature gains +1 default DEF and SPDEF stages.",
           "boosted": "An afflicted creature gains +1 default ATK and SPATK stages.",
-          "rapid": "While afflicted with Rapid, the creature may perform Complex Actions as Simple Actions OR [Exhaust] Actions are performed as though they lack the Trait OR [Set Up] Actions set up and resolve on the same activation. The creature has its Initiative delayed by 60% after its Activation and loses -1 EVA stage for 2 Activations.",
+          "rapid": "A creature afflicted with Rapid may perform Complex Actions as Simple Actions OR [Exhaust] Actions are performed as though they lack the Trait OR [Set Up] Actions set up and resolve on the same activation, spending 50% more PP on all Actions (minimum +2). The creature has its Initiative delayed by 60% after its Activation and loses -1 EVA stages for 3 Activations.",
           "strong": "While afflicted with Strong, the Power of the creature's Attacks are increased by +20% and has its Initiative delayed by 20% after its Activation.",
           "agile": "While afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
           "precise": "While afflicted with Precise, the creature has +1 default ACC and has its Initiative delayed by 20% after its Activation.",
-          "evasive": "While afflicted with Evasive, the creature has +1 default ACC and the Power of its Attacks are decreased by -20%."
+          "evasive": "While afflicted with Evasive, the creature has +1 default ACC and the Power of its Attacks are decreased by -20%.",
+          "gambit": "While afflicted with Gambit, the creature has +2 default CRIT and -1 default ACC."
         }
       }
     },
@@ -770,6 +797,11 @@
         "roll": "{name}'s Luck Roll!",
         "reroll": "{name} just <b style='color: #aa0200;' data-tooltip-direction='UP' data-tooltip='Rerolling your luck may only be done with explicit permission from the GM!'>Rerolled</b> their Luck!!",
         "result": "The new score of {result} has been applied to their Luck Skill."
+      },
+      "Apply": {
+        "apply": "Apply Investment",
+        "override": "Override Restrictions and Apply",
+        "fail": "You have entered an invalid configuration of skills."
       }
     },
     "Attributes": {
@@ -1535,11 +1567,24 @@
         },
         "Name": "Developer Mode",
         "Hint": "Enable developer mode."
+      },
+      "Warnings": {
+        "GrantItem": {
+          "RemovalPrevented": "Removal of {item} is prevented by {preventer}."
+        }
       }
     },
     "Dialog": {
       "DeleteDocumentContent": "Are you sure you want to delete: {name}?",
-      "DeleteDocumentTitle": "Delete {name}?"
+      "DeleteDocumentTitle": "Delete {name}?",
+      "DeleteAction": {
+        "Title": "Delete?",
+        "Content": "Are you sure you want to delete: {name}?"
+      },
+      "TargetSelector": {
+        "Target": "Target",
+        "Pick": "Pick {target}"
+      }
     },
     "Skills": {
       "luck": {

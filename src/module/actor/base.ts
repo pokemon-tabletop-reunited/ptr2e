@@ -38,6 +38,9 @@ class ActorPTR2e<
   TSystem extends ActorSystemPTR2e = ActorSystemPTR2e,
   TParent extends TokenDocumentPTR2e | null = TokenDocumentPTR2e | null,
 > extends Actor<TParent, TSystem> {
+  /** Has this document completed `DataModel` initialization? */
+  declare initialized: boolean;
+
   // eslint-disable-next-line @typescript-eslint/class-literal-property-style
   get alliance(): string {
     return "";
@@ -167,6 +170,7 @@ class ActorPTR2e<
    * Step 1 - Copies data from source object to instance attributes
    * */
   override _initialize() {
+    this.initialized = false;
     const preparationWarnings = new Set<string>();
     this.synthetics = {
       ephemeralEffects: {},
@@ -214,6 +218,7 @@ class ActorPTR2e<
    * The work done by this method should be idempotent. There are situations in which prepareData may be called more than once.
    * */
   override prepareData() {
+    if(this.initialized) return;
     if (this.type === "ptu-actor") return super.prepareData();
 
     // Todo: Add appropriate `self:` options to the rollOptions
@@ -221,6 +226,7 @@ class ActorPTR2e<
 
     this.system.type.effectiveness = this._calculateEffectiveness();
 
+    this.initialized = true;
     super.prepareData();
   }
 
@@ -1184,6 +1190,16 @@ class ActorPTR2e<
     }
 
     return super.createDocuments(sources, context);
+  }
+
+  static override async createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: { parent?: TDocument["parent"]; pack?: Collection<TDocument> | null; types?: string[] } & Partial<FormApplicationOptions>): Promise<TDocument | null>;
+  static override async createDialog(data: Record<string, unknown> = {}, context: { parent?: TokenDocumentPTR2e | null; pack?: Collection<ActorPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions> = {}) {
+    if(!Array.isArray(context.types)) context.types = this.TYPES.filter(t => t !== "ptu-actor");
+    else {
+      if(context.types.length) context.types = context.types.filter(t => t !== "ptu-actor");
+      else context.types = this.TYPES.filter(t => t !== "ptu-actor");
+    }
+    return super.createDialog(data, context);
   }
 
   protected override _onEmbeddedDocumentChange(): void {
