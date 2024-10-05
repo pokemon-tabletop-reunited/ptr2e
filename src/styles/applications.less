@@ -5867,6 +5867,13 @@ body {
     }
 
     &.rest-sheet {
+        section > * {
+            margin-bottom: 1rem;
+        }
+        section > *:last-child {
+            margin-bottom: unset;
+        }
+
         .restType {
             display: flex;
             justify-content: space-between;
@@ -5876,6 +5883,7 @@ body {
             display: flex;
             width: 100%;
             overflow-x: auto;
+            justify-content: space-evenly;
 
             img {
                 width: 40px;

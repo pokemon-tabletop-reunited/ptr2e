@@ -5771,6 +5771,12 @@ body .application.sheet .form-group {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
+.ptr2e.rest-sheet section > * {
+  margin-bottom: 1rem;
+}
+.ptr2e.rest-sheet section > *:last-child {
+  margin-bottom: unset;
+}
 .ptr2e.rest-sheet .restType {
   display: flex;
   justify-content: space-between;
@@ -5779,6 +5785,7 @@ body .application.sheet .form-group {
   display: flex;
   width: 100%;
   overflow-x: auto;
+  justify-content: space-evenly;
 }
 .ptr2e.rest-sheet .party-apply img {
   width: 40px;
