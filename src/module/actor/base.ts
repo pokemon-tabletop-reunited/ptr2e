@@ -1458,8 +1458,17 @@ class ActorPTR2e<
     await this.update({
       "system.health.value": health,
       "system.powerPoints.value": this.system.powerPoints?.max ?? 0,
-      // "system.shield.value": this.system.shield?.max ?? 0,
     });
+
+    // remove effects
+    const applicable = this.effects.filter(
+      (s) => (s as ActiveEffectPTR2e<this>).system.removeAfterCombat || (s as ActiveEffectPTR2e<this>).system.removeOnRecall
+    );
+    await this.deleteEmbeddedDocuments(
+      "ActiveEffect",
+      applicable.map((s) => s.id)
+    );
+
 
     // remove exposure
     if (removeExposed) {
