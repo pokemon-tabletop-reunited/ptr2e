@@ -187,7 +187,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           await skill.endOfDayLuckRoll();
         },
         "rest": function (this: ActorSheetPTRV2) {
-          new RestApp(this.document.name, [this.actor]).render(true);
+          const toHeal = this.actor?.party ? [this.actor.party.owner!, ...(this.actor.party.party ?? [])] : [this.actor];
+          new RestApp(this.document.name, toHeal).render(true);
         },
         "add-clock": ActorSheetPTRV2.#onAddClock,
       },
