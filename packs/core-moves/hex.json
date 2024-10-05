@@ -4,8 +4,10 @@
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "hex",
-    "description": "",
-    "traits": [],
+    "description": "<p>Effect: This Attack's Power is doubled if the target possesses a [Major Affliction].</p>",
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "hex",
@@ -32,11 +34,44 @@
         "types": [
           "ghost"
         ],
-        "description": "<p>Effect: This Attack's Power is doubled if the target is afflicted with a Major Status Condition.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "name": "Hex (Afflicted)",
+        "slug": "hex-afflicted",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The target has a [Major Affliction].</p>"
+        },
+        "variant": "hex",
+        "types": [
+          "ghost"
+        ],
+        "category": "special",
+        "power": 130,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Trigger: The target has a [Major Affliction].</p>"
       }
     ],
     "container": null,

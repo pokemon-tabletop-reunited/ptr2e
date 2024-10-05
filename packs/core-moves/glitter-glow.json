@@ -46,9 +46,41 @@
         "free": false,
         "slot": null,
         "description": "<p>Effect: If this attack hits an allied creature, that creature recovers HP equal to half the user's Max HP instead of taking damage.</p>"
+      },
+      {
+        "name": "Glitter Glow (Ally)",
+        "slug": "glitter-glow-ally",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "healing",
+          "blast-1",
+          "powder",
+          "missile"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "variant": "glitter-glow",
+        "types": [
+          "fairy"
+        ],
+        "category": "status",
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Effect: The target recovers HP equal to half the user's Max HP. This effect only applies to allied creatures.</p>"
       }
     ],
-    "description": "",
+    "description": "<p>Effect: If this attack hits an allied creature, that creature recovers HP equal to half the user's Max HP instead of taking damage.</p>",
     "container": null,
     "grade": "B"
   },

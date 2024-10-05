@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "facade",
-    "description": "",
+    "description": "<p>Effect: If the user is afflicted with a [Major Affliction], this Attack's Power doubles.</p>",
     "traits": [
       "contact"
     ],
@@ -24,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -35,10 +35,43 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: If the user is afflicted with a Major Status Condition, Facade's Power doubles.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "facade-afflicted",
+        "name": "Facade (Afflicted)",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user possesses a [Major Affliction].</p>"
+        },
+        "category": "physical",
+        "power": 140,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user possesses a [Major Affliction].</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "facade",
+        "free": true,
         "slot": null
       }
     ],

@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
     "slug": "grassy-glide",
-    "description": "",
+    "description": "<p>Effect: If the user is affected by Grassy Terrain, they may use this attack as this attack gains [Priority 2].</p>",
     "traits": [
       "environ",
       "contact",
@@ -38,10 +38,45 @@
         "types": [
           "grass"
         ],
-        "description": "<p>Effect: If the user is affected by Grassy Terrain, they may use this attack as this attack gains [Priority 2].</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "grassy-glide-terrain",
+        "name": "Grassy Glide (Terrain)",
+        "type": "attack",
+        "traits": [
+          "environ",
+          "contact",
+          "priority-2",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": 2,
+          "trigger": "While the user is affected by Grassy Terrain."
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "grass"
+        ],
+        "description": "<p>Trigger: While the user is affected by Grassy Terrain.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "grassy-glide",
+        "free": true,
         "slot": null
       }
     ],

@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/flying_icon.svg",
   "system": {
     "slug": "hurricane",
-    "description": "",
+    "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[confused] 5. If Rainy or Windy Weather is active, Hurricane gains [Danger Close]. If Sunny Weather is active, Hurricane's Accuracy is 50.</p>",
     "traits": [
       "wind",
       "sky",
@@ -41,7 +41,78 @@
         "types": [
           "flying"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[confused] 5. If Rainy or Windy Weather is active, Hurricane gains [Danger Close]. If Sunny Weather is active, Hurricane's Accuracy is 50.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[confused] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "hurricane-stormy",
+        "name": "Hurricane (Stormy)",
+        "type": "attack",
+        "traits": [
+          "wind",
+          "sky",
+          "blast-4",
+          "environ",
+          "danger-close",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Rainy or Windy Weather is present.</p>"
+        },
+        "category": "special",
+        "power": 110,
+        "accuracy": 100,
+        "types": [
+          "flying"
+        ],
+        "description": "<p>Trigger: Rainy or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[confused] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "hurricane-sunny",
+        "name": "Hurricane (Sunny)",
+        "type": "attack",
+        "traits": [
+          "wind",
+          "sky",
+          "blast-4",
+          "environ",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Sunny Weather is present.</p>"
+        },
+        "category": "special",
+        "power": 110,
+        "accuracy": 50,
+        "types": [
+          "flying"
+        ],
+        "description": "<p>Trigger: Sunny Weather is present.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[confused] 5.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
