@@ -49,7 +49,7 @@ export class RestApp extends foundry.applications.api.HandlebarsApplicationMixin
     fractionToHeal: number;
 
     constructor(name: string, documents: ActorPTR2e[], options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
-        options.id = `rest-${documents[0].id}`; // TODO better than this
+        options.id = `rest-${foundry.utils.randomID()}`;
         super(options);
         this.name = name;
         this.documents = documents;
