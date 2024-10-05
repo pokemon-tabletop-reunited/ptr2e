@@ -32,6 +32,7 @@ export default interface BlueprintSystem extends ModelPropsFromSchema<BlueprintS
 
 interface BlueprintSchema extends foundry.data.fields.DataSchema, MigrationSchema {
   id: foundry.data.fields.DocumentIdField<string, true, false, true>;
+  blueprints: CollectionField<foundry.data.fields.EmbeddedDataField<Blueprint>>;
 }
 
 export type BlueprintSource = BaseItemSourcePTR2e<"blueprint", BlueprintSystemSource>;
