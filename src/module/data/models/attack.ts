@@ -129,13 +129,7 @@ export default class AttackPTR2e extends ActionPTR2e {
         : 1;
   }
 
-  get rollable(): boolean {
-    return this.accuracy !== null || this.power !== null;
-  }
-
   async roll(args?: AttackStatisticRollParameters) {
-    if (!this.rollable) return false;
-
     return this.statistic!.check.roll(args);
   }
 
