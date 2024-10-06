@@ -6,6 +6,7 @@ export default function getTrackableAttributes() {
     const common = {
       bar: ["health", "powerPoints", "shield"],
       value: [
+        "health.percent",
         ...["atk", "def", "hp", "spa", "spd", "spe"].map(attribute => [
             `attributes.${attribute}.value`,
             `attributes.${attribute}.stage`
