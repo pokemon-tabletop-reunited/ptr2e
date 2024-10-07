@@ -4,9 +4,10 @@
   "_id": "b2wmiBlUnQSHayUN",
   "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "ice-drill",
     "traits": [
-      "contact"
+      "contact",
+      "horn"
     ],
     "actions": [
       {
@@ -15,7 +16,8 @@
         "type": "attack",
         "img": "icons/svg/explosion.svg",
         "traits": [
-          "contact"
+          "contact",
+          "horn"
         ],
         "range": {
           "target": "creature",
@@ -39,10 +41,44 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: If the target has @Affliction[frozen], this attack's Power doubles and the target is cured of @Affliction[frozen].</p>"
+        "description": ""
+      },
+      {
+        "slug": "ice-drill-frozen",
+        "name": "Ice Drill (Frozen)",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "flinch-5",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The target has @Affliction[frozen].</p>"
+        },
+        "category": "physical",
+        "power": 140,
+        "accuracy": 100,
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Trigger: The target has @Affliction[frozen].<p>Effect: On resolution, the target is cured of @Affliction[frozen], and is Flinched.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "ice-drill",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "",
+    "description": "<p>Trigger: The target has @Affliction[frozen].<p>Effect: This attack's Power is doubled. On resolution, the target is cured of @Affliction[frozen], and is Flinched.</p>",
     "container": null,
     "grade": "B"
   },

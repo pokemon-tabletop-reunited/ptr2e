@@ -42,9 +42,43 @@
         "free": false,
         "slot": null,
         "description": "<p>Effect: On hit, the target loses -2 ATK, SPATK, and SPD stages for 5 activations if they were in the Set-Up phase of a [Set-Up] Attack.</p>"
+      },
+      {
+        "name": "Lariat (Primed Target)",
+        "slug": "lariat-primed-target",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "contact",
+          "dash"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The target is in the Set-Up phase of a [Set-Up] Action.</p>"
+        },
+        "variant": "lariat",
+        "types": [
+          "fighting"
+        ],
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>The target is in the Set-Up phase of a [Set-Up] Action.</p><p>Effect: On hit, the target loses -2 ATK, SPATK, and SPD stages for 5 activations.</p>"
       }
     ],
-    "description": "",
+    "description": "Effect: On hit, the target loses -2 ATK, SPATK, and SPD stages for 5 activations if they were in the Set-Up phase of a [Set-Up] Action.</p>",
     "container": null,
     "grade": "A"
   },

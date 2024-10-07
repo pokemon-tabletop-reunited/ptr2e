@@ -10,39 +10,72 @@
     ],
     "actions": [
       {
-        "name": "Kinetic Quake",
         "slug": "kinetic-quake",
+        "name": "Kinetic Quake",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
         "traits": [
-          "earthbound"
+          "earthbound",
+          "pp-updated"
         ],
         "range": {
           "target": "emanation",
-          "distance": 4,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
           "powerPoints": 11,
           "delay": null,
-          "priority": null
+          "priority": null,
+          "trigger": null
         },
-        "variant": null,
+        "category": "physical",
+        "power": 75,
+        "accuracy": 100,
         "types": [
           "psychic"
         ],
-        "category": "special",
-        "power": 75,
-        "accuracy": 100,
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
-        "slot": null,
-        "description": "<p>Effect: If a target is Burrowing, this attack ignores the target's EVA stage increases and has its Power doubled.</p>"
+        "slot": null
+      },
+      {
+        "slug": "kinetic-quake-burrowing",
+        "name": "Kinetic Quake (Burrowing)",
+        "type": "attack",
+        "traits": [
+          "earthbound",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Valid target(s) is Burrowing.</p>"
+        },
+        "category": "physical",
+        "power": 150,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Trigger: Valid target(s) is Burrowing.</p><p>Effect: This attack ignores the target's EVA stage increases.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "varant": "kinetic-quake",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "",
+    "description": "<p>Effect: If a target is Burrowing, this Attack ignores the target's EVA stage increases and has its Power doubled.</p>",
     "container": null,
     "grade": "A"
   },
