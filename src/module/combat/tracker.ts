@@ -15,7 +15,6 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
             const combatant = this.viewed?.combatants.get(turn.id);
             if(!combatant) return turn;
             turn.type = combatant?.type;
-            // turn.resource = combatant.actor?.system.attributes.spe.value ?? 0;
             return turn;
         })
 
