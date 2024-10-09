@@ -111,7 +111,7 @@ export const PTRCONFIG = {
         },
         sheetClasses: {
             ability: [sheets.AbilitySheetPTR2e],
-            blueprint: [],
+            blueprint: [sheets.BlueprintSheetPTR2e],
             consumable: [sheets.ConsumableSheetPTR2e],
             container: [sheets.ContainerSheetPTR2e],
             effect: [sheets.EffectSheetPTR2e],
