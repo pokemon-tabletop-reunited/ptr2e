@@ -5865,6 +5865,48 @@ body {
             }
         }
     }
+
+    &.rest-sheet {
+      .window-content {
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+
+      section.heal-popup {
+        display: contents;
+      }
+
+      fieldset {
+        padding: 1rem;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        border-radius: 8px;
+        border-color: var(--border-theme-color);
+      }
+
+      .restType {
+        display: flex;
+        justify-content: space-evenly;
+      }
+
+      .party-apply {
+        display: flex;
+        width: 100%;
+        overflow-x: auto;
+        justify-content: start;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+  }
 }
 
 .directory-item.document .entry-name.document-name {
