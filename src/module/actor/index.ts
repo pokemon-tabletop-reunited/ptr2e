@@ -13,6 +13,3 @@ export * from "./data/index.ts";
 
 // Other Data Models
 export type * from "./data.ts";
-
-// Other Data Models
-export {default as getTrackableAttributes} from "./initialization.ts";

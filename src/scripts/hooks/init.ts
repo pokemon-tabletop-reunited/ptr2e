@@ -1,4 +1,4 @@
-import { ActorSheetPTR2e, getTrackableAttributes } from "@actor";
+import { ActorSheetPTR2e } from "@actor";
 import { PTRCONFIG } from "@scripts/config/index.ts";
 import { GamePTR } from "@scripts/game-ptr2e.ts";
 import { HandlebarTemplates, registerHandlebarsHelpers } from "@utils";
@@ -46,7 +46,7 @@ export const Init: PTRHook = {
             CONFIG.Actor.documentClass = PTRCONFIG.Actor.documentClass;
             CONFIG.Actor.dataModels = PTRCONFIG.Actor.dataModels;
             // @ts-expect-error this definitely exists
-            CONFIG.Actor.trackableAttributes = getTrackableAttributes();
+            CONFIG.Actor.trackableAttributes = PTRCONFIG.Token.trackableAttributes
             CONFIG.ChatMessage.documentClass = PTRCONFIG.ChatMessage.documentClass;
             CONFIG.ChatMessage.dataModels = PTRCONFIG.ChatMessage.dataModels;
             CONFIG.Combat.documentClass = PTRCONFIG.Combat.documentClass;
