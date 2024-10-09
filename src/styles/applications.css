@@ -5771,30 +5771,39 @@ body .application.sheet .form-group {
   font-size: x-small;
   color: var(--color-text-light-primary);
 }
-.ptr2e.rest-sheet section > * {
-  margin-bottom: 1rem;
+.ptr2e.rest-sheet .window-content {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
-.ptr2e.rest-sheet section > *:last-child {
-  margin-bottom: unset;
+.ptr2e.rest-sheet section.heal-popup {
+  display: contents;
+}
+.ptr2e.rest-sheet fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
 }
 .ptr2e.rest-sheet .restType {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 .ptr2e.rest-sheet .party-apply {
   display: flex;
   width: 100%;
-  justify-content: space-evenly;
-  gap: 5px;
   overflow-x: auto;
+  justify-content: start;
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 .ptr2e.rest-sheet .party-apply img {
   width: 40px;
   height: 40px;
-}
-.ptr2e.rest-sheet .camp-settings {
-  display: grid;
-  grid-template-columns: auto auto;
 }
 .directory-item.document .entry-name.document-name.rarity-uncommon {
   color: #33a7ff;

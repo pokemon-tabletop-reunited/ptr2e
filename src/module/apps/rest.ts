@@ -10,27 +10,17 @@ export class RestApp extends foundry.applications.api.HandlebarsApplicationMixin
             classes: ["ptr2e", "sheet", "rest-sheet"],
             position: {
                 height: 'auto',
-                width: 330,
+                width: 325,
             },
             window: {
                 minimizable: true,
-                resizable: true,
+                resizable: false,
             },
-            // dragDrop: [
-            //     {
-            //         dragSelector: ".action",
-            //         dropSelector: ".window-content",
-            //     }
-            // ],
             form: {
                 submitOnChange: false,
                 closeOnSubmit: true,
                 handler: RestApp.#onSubmit,
             },
-            actions: {
-                // "action-edit": KnownActionsApp._onEditAction,
-                // "action-delete": KnownActionsApp._onDeleteAction,
-            }
         },
         { inplace: false }
     );
@@ -49,7 +39,7 @@ export class RestApp extends foundry.applications.api.HandlebarsApplicationMixin
     fractionToHeal: number;
 
     constructor(name: string, documents: ActorPTR2e[], options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
-        options.id = `rest-${foundry.utils.randomID()}`;
+        options.id = `rest-${documents.length ? documents[0].id || fu.randomID() : fu.randomID()}`;
         super(options);
         this.name = name;
         this.documents = documents;
@@ -129,7 +119,12 @@ export class RestApp extends foundry.applications.api.HandlebarsApplicationMixin
                 break;
         }
 
+        const notification = ui.notifications.info(game.i18n.localize("PTR2E.Rest.Notifications.Info"));
+
         await Promise.all(this.documents.map(d=>d.heal(healOptions)));
+
+        ui.notifications.remove(notification);
+        ui.notifications.info(game.i18n.localize("PTR2E.Rest.Notifications.Success"));
     }
 
 }

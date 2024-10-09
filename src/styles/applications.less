@@ -5867,37 +5867,46 @@ body {
     }
 
     &.rest-sheet {
-        section > * {
-            margin-bottom: 1rem;
-        }
-        section > *:last-child {
-            margin-bottom: unset;
-        }
+      .window-content {
+        padding: 0.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
 
-        .restType {
-            display: flex;
-            justify-content: space-between;
-        }
+      section.heal-popup {
+        display: contents;
+      }
 
-        .party-apply {
-            display: flex;
-            width: 100%;
-            overflow-x: auto;
-            justify-content: space-evenly;
-            gap: 5px;
-            overflow-x: auto;
+      fieldset {
+        padding: 1rem;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+        border-radius: 8px;
+        border-color: var(--border-theme-color);
+      }
 
-            img {
-                width: 40px;
-                height: 40px;
-            }
-        }
+      .restType {
+        display: flex;
+        justify-content: space-evenly;
+      }
 
-        .camp-settings {
-            display: grid;
-            grid-template-columns: auto auto;
+      .party-apply {
+        display: flex;
+        width: 100%;
+        overflow-x: auto;
+        justify-content: start;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+
+        img {
+          width: 40px;
+          height: 40px;
         }
-    }
+      }
+  }
 }
 
 .directory-item.document .entry-name.document-name {

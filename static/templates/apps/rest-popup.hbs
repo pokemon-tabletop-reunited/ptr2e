@@ -12,18 +12,20 @@
     </fieldset>
 
     {{!-- Party --}}
-    <div class="party-apply">
+    <fieldset class="party-apply">
     {{#each party}}
         <img class="icon" src="{{img}}" data-tooltip-direction="DOWN" data-tooltip="{{name}}" />
     {{/each}}
-    </div>
+    </fieldset>
 
     {{#if (eq restType "camp" )}}
     <fieldset class="camp-settings">
         <legend>Camp Settings</legend>
-        <div>
+        <div class="form-group w-100">
             <label for="{{id}}-fractionToHeal">{{localize "PTR2E.Rest.HealthRestoration.label"}}</label>
-            <input class="fractionToHeal" id="{{id}}-fractionToHeal" type="number" name="fractionToHeal" value="{{fractionToHeal}}" min="0" max="100" />
+            <div class="form-fields">
+              <input class="fractionToHeal" id="{{id}}-fractionToHeal" type="number" name="fractionToHeal" value="{{fractionToHeal}}" min="0" max="100" />
+            </div>
         </div>
     </fieldset>
     {{/if}}
