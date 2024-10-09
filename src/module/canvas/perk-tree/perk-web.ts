@@ -45,6 +45,8 @@ class PerkWeb extends PIXI.Container {
         node: PerkNode;
     } | null = null;
 
+    #panOrigin: { origin: { x: number; y: number }; page: { x: number; y: number } };
+
     constructor() {
         super();
 
@@ -434,6 +436,7 @@ class PerkWeb extends PIXI.Container {
                 }
                 return;
             },
+            dragRightStart: this.onDragRightStart,
             dragRightMove: this.onDragRightMove,
             dragLeftStart: this.onDragLeftStart,
             dragLeftMove: this.onDragLeftMove,
@@ -540,19 +543,35 @@ class PerkWeb extends PIXI.Container {
         this.pan({ x: position.x, y: position.y, scale: 0.3 });
     }
 
-    private onDragRightMove(event: {
-        interactionData: {
-            origin: { x: number; y: number };
-            destination: { x: number; y: number };
-        };
+    private onDragRightStart(event: {
+        pageX: number,
+        pageY: number
     }) {
-        const DRAG_SPEED_MODIFIER = 0.8;
-        const { origin, destination } = event.interactionData;
-        const dx = destination.x - origin.x;
-        const dy = destination.y - origin.y;
+        const { pageX, pageY } = event;
+        this.#panOrigin = {
+            origin: {
+                x: this.stage.pivot.x,
+                y: this.stage.pivot.y
+            },
+            page: {
+                x: pageX,
+                y: pageY
+            }
+        };
+    }
+
+    private onDragRightMove(event: {
+        pageX: number,
+        pageY: number
+    }) {
+        const DRAG_SPEED_MODIFIER = 1 / this.stage.scale.x;
+        const { pageX, pageY } = event;
+
+        const dx = (pageX - this.#panOrigin.page.x) * DRAG_SPEED_MODIFIER;
+        const dy = (pageY - this.#panOrigin.page.y) * DRAG_SPEED_MODIFIER;
         this.pan({
-            x: this.stage.pivot.x - dx * DRAG_SPEED_MODIFIER,
-            y: this.stage.pivot.y - dy * DRAG_SPEED_MODIFIER,
+            x: this.#panOrigin.origin.x - dx,
+            y: this.#panOrigin.origin.y - dy,
         });
     }
 
