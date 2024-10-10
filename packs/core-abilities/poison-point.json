@@ -1,0 +1,94 @@
+{
+  "name": "Poison Point",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Poison Point",
+        "slug": "poison-point",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "The user is hit by a [Contact] attack."
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The triggering creature has a 30% chance of gaining @Affliction[poison] 5.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The triggering creature has a 30% chance of gaining @Affliction[poison] 5.",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "poison-point",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "C5bFrbElBGmp1UM0",
+  "effects": [
+    {
+      "name": "Poison Point",
+      "type": "passive",
+      "_id": "0efF8mQEwChdquCA",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "origin",
+            "label": "poison point",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": true,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.2",
+        "createdTime": 1728560920502,
+        "modifiedTime": 1728560965219,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
+}
