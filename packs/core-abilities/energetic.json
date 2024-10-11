@@ -1,0 +1,116 @@
+{
+  "name": "Energetic",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Energetic",
+        "slug": "energetic",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: While at Full HP, the user's default SPD and EVA stages are +1.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: While at Full HP, the user's default SPD and EVA stages are +1.",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "energetic",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "5cbjxwsrT3t4GQGi",
+  "effects": [
+    {
+      "name": "Energetic",
+      "type": "passive",
+      "_id": "OXQcdygyuhQROUhO",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.spe.stage",
+            "value": {
+              "brackets": [
+                {
+                  "start": 100,
+                  "end": 100,
+                  "value": 1
+                }
+              ],
+              "field": "actor|system.health.percent"
+            },
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.battleStats.evasion.stage",
+            "value": {
+              "brackets": [
+                {
+                  "start": 100,
+                  "end": 100,
+                  "value": 1
+                }
+              ],
+              "field": "actor|system.health.percent"
+            },
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.2",
+        "createdTime": 1728635314920,
+        "modifiedTime": 1728635516210,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
+}
