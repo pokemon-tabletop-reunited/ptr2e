@@ -4,8 +4,10 @@
   "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "order-up",
-    "description": "",
-    "traits": [],
+    "description": "<p>Effect: If the user is controlled by Tastugiri's Commander ability, this attack raises a Stat stage by +1 for 5 activations on hit, depending on Tatsugiri's forme:<ul><li>Curly Form - ATK<.li><li>Droopy Forme - DEF</li><li>Stretchy Forme - SPD</li></ul></p>",
+    "traits": [
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "order-up",
@@ -23,8 +25,7 @@
           "activation": "complex",
           "powerPoints": 3,
           "delay": null,
-          "priority": null,
-          "trigger": null
+          "priority": null
         },
         "category": "physical",
         "power": 80,
@@ -32,15 +33,47 @@
         "types": [
           "dragon"
         ],
-        "description": "<p>Effect: If the user is gaining controlled by Tastugiri's Commander ability, this attack raises a Stat stage by +1 for 5 activations on hit, depending on Tatsugiri's forme:</p><p>Curly Form - ATK</p><p>Droopy Forme - DEF</p><p>Stretchy Forme - SPD",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "slug": "order-up-tatsu",
+        "name": "Order Up (Tatsu)",
+        "type": "attack",
+        "traits": [
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user has a creature with the Commander ability equipped.</p>"
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "dragon"
+        ],
+        "description": "<p>The user has a creature with the Commander ability equipped.</p><p>Effect: On hit, the user gains by +1 stage for 5 activations, depending on the equipped creature's forme:<ul><li>Curly Form - ATK<.li><li>Droopy Forme - DEF</li><li>Stretchy Forme - SPD</li></ul></p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "order-up",
+        "free": true,
+        "slot": null
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "C"
   },
   "_id": "3WWJw8YZWfYReCCs",
   "effects": []

@@ -4,9 +4,10 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "smelling-salts",
-    "description": "",
+    "description": "<p>Trigger: The target has @Affliction[paralysis].</p><p>Effect: This attack's Power is doubled. On resolution, the target is cured of @Affliction[paralysis], and is Flinched.</p>",
     "traits": [
-      "contact"
+      "flinch-5",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -24,7 +25,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 2,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -35,10 +36,43 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: If the target has @Affliction[paralysis], Smelling Salts has 140 power. A target that has @Affliction[paralysis] is cured of @Affliction[paralysis] after Smelling Salts resolves.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "smelling-salts-paralyzed",
+        "name": "Smelling Salts (Paralyzed)",
+        "type": "attack",
+        "traits": [
+          "flinch-5",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The target has @Affliction[paralysis].</p>"
+        },
+        "category": "physical",
+        "power": 140,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The target has @Affliction[paralysis]..</p><p>Effect: On resolution, the target is cured of The target has @Affliction[paralysis], and is Flinched.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "smelling-salts",
+        "free": true,
         "slot": null
       }
     ],

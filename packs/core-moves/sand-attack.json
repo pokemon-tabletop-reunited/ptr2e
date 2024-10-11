@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "sand-attack",
-    "description": "<p>Effect: On hit, all valid targets lose -1 ACC stage for 5 activations. If Sandy Weather is active, the target loses -2 ACC stages for 5 activations instead.</p>",
+    "description": "<p>Effect: On hit, all valid targets lose -1 ACC stage for 5 activations. If Dusty Weather is active, the target loses -2 ACC stages for 5 activations instead.</p>",
     "traits": [
       "environ"
     ],
@@ -22,8 +22,8 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 6,
+          "activation": "complex",
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -34,10 +34,42 @@
         "types": [
           "ground"
         ],
-        "description": "<p>Effect: On hit, all valid targets lose -1 ACC stage for 5 activations. If Sandy Weather is active, the target loses -2 ACC stages for 5 activations instead.</p>",
+        "description": "<p>Effect: On hit, all valid targets lose -1 ACC stage for 5 activations.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "sand-attack-dusty",
+        "name": "Sand Attack (Dusty)",
+        "type": "attack",
+        "traits": [
+          "environ"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Trigger: Dusty Weather is present.</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Trigger: Dusty Weather is present.</p><p>Effect: On hit, all valid targets lose -2 ACC stage for 5 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "sand-attack",
+        "free": true,
         "slot": null
       }
     ],

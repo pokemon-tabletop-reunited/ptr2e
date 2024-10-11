@@ -18,13 +18,13 @@
           "powder"
         ],
         "range": {
-          "target": "cone",
-          "distance": 3,
+          "target": "emanation",
+          "distance": 1,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
+          "powerPoints": 10,
           "delay": null,
           "priority": null
         },
@@ -39,12 +39,140 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[poison]ed 5 and having their SPDEF decreased by -1 for 5 activations. The user gains @Affliction[choice-locked] 3. While @Affliction[choice-locked], the user does not consume PP. Each successive use of this attack increases its effect chance by a flat 10%, and the effect chance is reset to 10% if it misses or there is not a valid target.</p>"
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[poison] 5 and having their SPDEF decreased by -1 for 5 activations. The user gains @Affliction[choice-locked] 5.</p><p>While @Affliction[choice-locked], the user does not consume PP when using this attack, and each declaration of this attack that results in at least one hit target increases the attack's effect chance by +10%, its range by +1, and Accuracy reduced by -5.</p><p>The user is cured of @Affliction[choice-locked] if they miss all valid targets with this attack, or if there are no valid targets for it to select. Upon being cured of @Affliction[choice-locked], this attack's effect chance is reset to 10%, its range reset to 1, and Accuracy reset to 90.</p>"
+      },
+      {
+        "name": "Superspread 1",
+        "slug": "superspread-1",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "powder"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "superspread",
+        "types": [
+          "poison"
+        ],
+        "category": "special",
+        "power": 50,
+        "accuracy": 85,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[poison] 5 and having their SPDEF decreased by -1 for 5 activations.</p><p>While @Affliction[choice-locked], the user does not consume PP when using this attack, and each declaration of this attack that results in at least one hit target increases the attack's effect chance by +10%, its range by +1, and Accuracy reduced by -5.</p><p>The user is cured of @Affliction[choice-locked] if they miss all valid targets with this attack, or if there are no valid targets for it to select. Upon being cured of @Affliction[choice-locked], this attack's effect chance is reset to 10%, its range reset to 1, and Accuracy reset to 90.</p>"
+      },
+      {
+        "name": "Superspread 2",
+        "slug": "superspread-2",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "powder"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "superspread",
+        "types": [
+          "poison"
+        ],
+        "category": "special",
+        "power": 50,
+        "accuracy": 80,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[poison] 5 and having their SPDEF decreased by -1 for 5 activations.</p><p>While @Affliction[choice-locked], the user does not consume PP when using this attack, and each declaration of this attack that results in at least one hit target increases the attack's effect chance by +10%, its range by +1, and Accuracy reduced by -5.</p><p>The user is cured of @Affliction[choice-locked] if they miss all valid targets with this attack, or if there are no valid targets for it to select. Upon being cured of @Affliction[choice-locked], this attack's effect chance is reset to 10%, its range reset to 1, and Accuracy reset to 90.</p>"
+      },
+      {
+        "name": "Superspread 3",
+        "slug": "superspread-3",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "powder"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "superspread",
+        "types": [
+          "poison"
+        ],
+        "category": "special",
+        "power": 50,
+        "accuracy": 75,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Effect: On hit, the target has a 40% chance of gaining @Affliction[poison] 5 and having their SPDEF decreased by -1 for 5 activations.</p><p>While @Affliction[choice-locked], the user does not consume PP when using this attack, and each declaration of this attack that results in at least one hit target increases the attack's effect chance by +10%, its range by +1, and Accuracy reduced by -5.</p><p>The user is cured of @Affliction[choice-locked] if they miss all valid targets with this attack, or if there are no valid targets for it to select. Upon being cured of @Affliction[choice-locked], this attack's effect chance is reset to 10%, its range reset to 1, and Accuracy reset to 90.</p>"
+      },
+      {
+        "name": "Superspread 4",
+        "slug": "superspread-4",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "powder"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "superspread",
+        "types": [
+          "poison"
+        ],
+        "category": "special",
+        "power": 50,
+        "accuracy": 70,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[poison] 5 and having their SPDEF decreased by -1 for 5 activations.</p><p>While @Affliction[choice-locked], the user does not consume PP when using this attack, and each declaration of this attack that results in at least one hit target increases the attack's effect chance by +10%, its range by +1, and Accuracy reduced by -5.</p><p>The user is cured of @Affliction[choice-locked] if they miss all valid targets with this attack, or if there are no valid targets for it to select. Upon being cured of @Affliction[choice-locked], this attack's effect chance is reset to 10%, its range reset to 1, and Accuracy reset to 90.</p>"
       }
     ],
-    "description": "",
+    "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[poison] 5 and having their SPDEF decreased by -1 for 5 activations. The user gains @Affliction[choice-locked] 5.</p><p>While @Affliction[choice-locked], the user does not consume PP when using this attack, and each declaration of this attack that results in at least one hit target increases the attack's effect chance by +10%, its range by +1, and Accuracy reduced by -5.</p><p>The user is cured of @Affliction[choice-locked] if they miss all valid targets with this attack, or if there are no valid targets for it to select. Upon being cured of @Affliction[choice-locked], this attack's effect chance is reset to 10%, its range reset to 1, and Accuracy reset to 90.</p>",
     "container": null,
-    "grade": "B"
+    "grade": "A"
   },
   "effects": [],
   "sort": 0,

@@ -4,7 +4,7 @@
   "_id": "OnCQoc5p4Jou9B8j",
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "scorched-earth",
     "traits": [
       "environ",
       "earthbound"
@@ -21,12 +21,12 @@
         ],
         "range": {
           "target": "cone",
-          "distance": 2,
+          "distance": 3,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
+          "powerPoints": 3,
           "delay": null,
           "priority": null
         },
@@ -41,12 +41,46 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: If Scorched Terrain is active, this Attack's range changes to <q>Wide Line 5.\"</p>"
+        "description": "<p>Effect: If Scorched Terrain is active, this Attack's range changes to <q>Wide Line 5.</q></p>"
+      },
+      {
+        "name": "Scorched Earth (Scorched)",
+        "slug": "scorched-earth-scorched",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "environ",
+          "earthbound"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Trigger: The user is affected by Scorched Terrain.</p>"
+        },
+        "variant": "scorched-earth",
+        "types": [
+          "fire"
+        ],
+        "category": "special",
+        "power": 60,
+        "accuracy": 95,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Trigger: The user is affected by Scorched Terrain.</p>"
       }
     ],
-    "description": "",
+    "description": "<p>Effect: If the user is affected by Scorched Terrain, this Attack's range changes to <q>Wide Line 5.</q></p>",
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "effects": [],
   "sort": 9100000,

@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "stomping-tantrum",
-    "description": "",
+    "description": "<p>Effect: If the user missed or failed with an attack since the start of their last Activation, this attack's Power is doubled.</p>",
     "traits": [
       "contact",
       "crushing"
@@ -26,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 6,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -37,10 +37,44 @@
         "types": [
           "ground"
         ],
-        "description": "<p>Effect: If the user's last used attack resulted in a miss or failed on the user's previous activation, Stomping Tantrum's Power is doubled.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "stomping-tantrum",
+        "name": "Stomping Tantrum",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "crushing",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user missed or failed with an attack since their last Activation.</p>"
+        },
+        "category": "physical",
+        "power": 150,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Trigger: The user missed or failed with an attack since their last Activation.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "stomping-tantrum",
+        "free": true,
         "slot": null
       }
     ],
