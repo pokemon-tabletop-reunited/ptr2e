@@ -1,0 +1,94 @@
+{
+  "name": "Conundrum",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Conundrum",
+        "slug": "conundrum",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "The user is hit with a [Contact] attack."
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "Trigger: The user is hit with a [Contact] attack.\nEffect: The attacking creature has a 30% chance of gaining @Affliction[confused] 5.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: The user is hit with a [Contact] attack.\nEffect: The attacking creature has a 30% chance of gaining @Affliction[confused] 5.",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "conundrum",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "PGSMbE2lN3u4j9wP",
+  "effects": [
+    {
+      "name": "Conundrum",
+      "type": "passive",
+      "_id": "s7ugx6hHJbg4SVCZ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "origin",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.2",
+        "createdTime": 1728599422002,
+        "modifiedTime": 1728635635603,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
+}
