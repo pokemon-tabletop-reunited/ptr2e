@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "thunder",
-    "description": "",
+    "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5. If Rainy Weather is active, this attack gains [Danger Close].</p>",
     "traits": [
       "sky",
       "environ"
@@ -41,6 +41,41 @@
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "thunder-rainy",
+        "name": "Thunder (Rainy)",
+        "type": "attack",
+        "traits": [
+          "sky",
+          "environ",
+          "danger-close",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 110,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5. If Rainy Weather is active, this attack gains [Danger Close].</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "thunder",
+        "free": true,
         "slot": null
       }
     ],

@@ -35,6 +35,38 @@
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "slug": "toxic-poison-type",
+        "name": "Toxic (Posion-Type)",
+        "type": "attack",
+        "traits": [
+          "danger-close"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user has the Poison Type.</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Trigger: The user has the Poison Type.</p><p>Effect: The target gains @Affliction[blight] 8.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "toxic",
+        "free": true,
+        "slot": null
       }
     ],
     "container": null,

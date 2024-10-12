@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "work-up",
-    "description": "<p>Effect: The user raises their ATK and SPATK stages by +1 for 5 activations. If the user is @Affliction[enraged], Work Up may be used as a Simple Action instead.</p>",
+    "description": "<p>Effect: The user raises their ATK and SPATK stages by +1 for 5 activations. If the user is @Affliction[enraged], Work Up can be used, ignoring the normal effects of @Affliction[enraged], as a Simple Action.</p>",
     "traits": [],
     "actions": [
       {
@@ -30,7 +30,36 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The user raises their ATK and SPATK stages by +1 for 5 activations. If the user is @Affliction[enraged], Work Up may be used as a Simple Action instead.</p>",
+        "description": "<p>Effect: The user raises their ATK and SPATK stages by +1 for 5 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "work-up-enraged",
+        "name": "Work Up (Enraged)",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user is @Affliction[enraged].</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: TThe user is @Affliction[enraged].</p><p>Effect: The user gains +1 ATK and SPATK stages for 5 activations.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
