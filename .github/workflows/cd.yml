@@ -36,7 +36,7 @@ jobs:
             - name: Zip Files
               uses: montudor/action-zip@v1
               with:
-                  args: zip -qq -r ./dist/ptr2e.zip ./dist/*
+                  args: zip -qq -r ./dist/ptr2e.zip . -i ./dist/*
 
             - name: Create Version Release
               id: create_version_release
