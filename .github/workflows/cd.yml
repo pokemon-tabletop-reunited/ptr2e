@@ -34,11 +34,8 @@ jobs:
                   echo "systemVersion=$SYSTEM_VERSION" >> $GITHUB_ENV
 
             - name: Zip Files
-              uses: thedoctor0/zip-release@0.7.6
-              with:
-                  type: zip
-                  filename: ptr2e.zip
-                  directory: dist
+              run: |
+                  zip -r -9 ptr2e.zip dist
 
             - name: Create Version Release
               id: create_version_release
