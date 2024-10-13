@@ -14,9 +14,7 @@
         "slug": "final-gasp",
         "type": "attack",
         "img": "icons/svg/explosion.svg",
-        "traits": [
-          "desperation-1-3"
-        ],
+        "traits": [],
         "range": {
           "target": "self",
           "distance": 0,
@@ -39,10 +37,43 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: The user gains @Affliction[stuck] 5, @Affliction[splinter] 5, and @Affliction[perish] 5. The user then gains +1 ATK, DEF, SPATK, SPDEF, SPD, ACC, EVA stages for 5 Activations. If the user meets the Depseration Trigger, they gain +2 stages instead of +1.</p>"
+        "description": "<p>Effect: The user gains @Affliction[stuck] 5, @Affliction[splinter] 5, and @Affliction[perish] 5. The user then gains +1 ATK, DEF, SPATK, SPDEF, SPD, ACC, EVA stages for 5 Activations."
+      },
+      {
+        "name": "Final Gasp (Desperate)",
+        "slug": "final-gasp-desperate",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "desperation-1-3"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>User meets the [Desperation 1/3] condition.</p>"
+        },
+        "variant": "final-gasp",
+        "types": [
+          "normal"
+        ],
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Trigger: User meets the [Desperation 1/3] condition.</p><p>Effect: The user gains @Affliction[stuck] 5, @Affliction[splinter] 5, and @Affliction[perish] 5. The user then gains +2 ATK, DEF, SPATK, SPDEF, SPD, ACC, EVA stages for 5 Activations./p>"
       }
     ],
-    "description": "",
+    "description": "<p>Effect: The user gains @Affliction[stuck] 5, @Affliction[splinter] 5, and @Affliction[perish] 5. The user then gains +1 ATK, DEF, SPATK, SPDEF, SPD, ACC, EVA stages for 5 Activations. If the user meets the [Desperation 1/3] Condition, they gain +2 stages instead of +1.</p>",
     "container": null,
     "grade": "A"
   },

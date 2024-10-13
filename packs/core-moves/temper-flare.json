@@ -24,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 7,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -35,10 +35,43 @@
         "types": [
           "fire"
         ],
-        "description": "<p>Effect: If the user's last used Attack resulted in a miss or failed on the user's previous activation, Temper Flare's Power is doubled.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "temper-flare-reprisal",
+        "name": "Temper Flare (Reprisal)",
+        "type": "attack",
+        "traits": [
+          "defrost",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user missed or failed with an attack since their last Activation.</p>"
+        },
+        "category": "special",
+        "power": 150,
+        "accuracy": 100,
+        "types": [
+          "fire"
+        ],
+        "description": "<p>Trigger: The user missed or failed with an attack since their last Activation.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "temper-flare",
+        "free": true,
         "slot": null
       }
     ],

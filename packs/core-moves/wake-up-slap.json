@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "wake-up-slap",
-    "description": "",
+    "description": "<p>Trigger: The target has @Affliction[drowsy] or @Affliction[nightmares].</p><p>Effect: This attack's Power is doubled. On resolution, the target is cured of @Affliction[drowsy] and @Affliction[nightmares], and is Flinched.",
     "traits": [
       "contact",
       "flinch-5",
@@ -37,7 +37,7 @@
         "types": [
           "fighting"
         ],
-        "description": "<p>Effect: If the target has the @Affliction[drowsy] or @Affliction[nightmares] condition, this Attack's Power doubles and the target is cured of @Affliction[drowsy] or @Affliction[nightmares] on hit, with the target being Flinched 5.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -62,7 +62,7 @@
           "powerPoints": 5,
           "delay": null,
           "priority": null,
-          "trigger": null
+          "trigger": "<p>The target has @Affliction[drowsy] or @Affliction[nightmares].</p>"
         },
         "category": "physical",
         "power": 140,
@@ -70,9 +70,10 @@
         "types": [
           "fighting"
         ],
-        "description": "<p>Effect: On hit, the target is cured of @Affliction[drowsy] or @Affliction[nightmares] on hit, and the target is Flinched.</p><p>Restriction: This attack may only be used on a creature that is afflicted with @Affliction[drowsy] or @Affliction[nightmares].</p>",
+        "description": "<p>Trigger: The target has @Affliction[drowsy] or @Affliction[nightmares].</p><p>Effect: On resolution, the target is cured of @Affliction[drowsy] and @Affliction[nightmares], and is Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
+        "variant": "wake-up-slap",
         "free": true,
         "slot": null
       }

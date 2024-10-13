@@ -23,8 +23,8 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "simple",
-          "powerPoints": 0,
+          "activation": "complex",
+          "powerPoints": 5,
           "delay": null,
           "priority": null
         },
@@ -40,9 +40,42 @@
         "free": false,
         "slot": null,
         "description": "<p>Effect: This Attack's Power is doubled if the target is afflicted with @Affliction[splinter].</p>"
+      },
+      {
+        "name": "Sandblast (Splinter)",
+        "slug": "sandblast-splinter",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "missile"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Trigger: The target has @Affliction[splinter].</p>"
+        },
+        "types": [
+          "ground"
+        ],
+        "category": "physical",
+        "power": 130,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "sandblast",
+        "free": true,
+        "slot": null,
+        "description": "<p>Trigger: The target has @Affliction[splinter].</p>"
       }
     ],
-    "description": "",
+    "description": "<p>Effect: This Attack's Power is doubled if the target is afflicted with @Affliction[splinter].</p>",
     "container": null,
     "grade": "B"
   },

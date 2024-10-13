@@ -5,13 +5,17 @@
   "system": {
     "slug": "barb-barrage",
     "description": "",
-    "traits": [],
+    "traits": [
+      "missile",
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "barb-barrage",
         "name": "Barb Barrage",
         "type": "attack",
         "traits": [
+          "missile",
           "pp-updated"
         ],
         "range": {
@@ -21,7 +25,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 7,
+          "powerPoints": 6,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -32,10 +36,43 @@
         "types": [
           "poison"
         ],
-        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[poison] 5. If the target has the @Affliction[poison] or @Affliction[blight] condition, this Attack's Power is doubled.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "barb-barrage-poisoned",
+        "name": "Barb Barrage (Poisoned)",
+        "type": "attack",
+        "traits": [
+          "missile",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": "The target has @Affliction[poison] or @Affliction[blight]."
+        },
+        "category": "physical",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Trigger: The target has @Affliction[poison] or @Affliction[blight].</p><p>Effect: On hit, the target has a 50% chance of gaining @Affliction[poison] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "barb-barrage",
+        "free": true,
         "slot": null
       }
     ],

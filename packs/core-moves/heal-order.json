@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "heal-order",
-    "description": "<p>Effect: The user recovers HP equal to 1/4 their Max HP. If there is at least one allied Bug-typed creature on the field this healing is increased by 1/4 for each allied Bug-typed creature. Healing cannot exceed 100% Max HP",
+    "description": "<p>Effect: The user recovers 8 Ticks of HP. If there are two more more Bug-Type allies on the Field, the user recovers 12 Ticks of HP and gains @Affliction[ringed] 5.</p>",
     "traits": [
       "healing",
       "dance"
@@ -36,10 +36,42 @@
         "types": [
           "bug"
         ],
-        "description": "<p>Effect: The user recovers HP equal to 1/4 their Max HP. If there is at least one allied Bug-typed creature on the field this healing is increased by 1/4 for each allied Bug-typed creature. Healing cannot exceed 100% Max HP",
+        "description": "<p>Effect: The user recovers 8 Ticks of HP.",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "heal-order-allies",
+        "name": "Heal Order (Allies)",
+        "type": "attack",
+        "traits": [
+          "dance"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "Two or more Bug-Type allies are present on the Field."
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "bug"
+        ],
+        "description": "<p>Trigger: Two or more Bug-Type allies are present on the Field.</p><p>Effect: The user recovers 12 Ticks of HP and gains @Affliction[ringed] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "heal-order",
+        "free": true,
         "slot": null
       }
     ],

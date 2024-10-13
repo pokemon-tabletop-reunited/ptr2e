@@ -4,8 +4,11 @@
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
     "slug": "infernal-parade",
-    "description": "",
-    "traits": [],
+    "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[burn] 5. If a target is already afflicted with a [Major Affliction] when they are hit with this attack, this Attack's Power is doubled.</p>",
+    "traits": [
+      "blast-1",
+      "pp-updated"
+    ],
     "actions": [
       {
         "slug": "infernal-parade",
@@ -33,10 +36,43 @@
         "types": [
           "ghost"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[burn] 5. If a target is already afflicted with a Major Affliction, this Attack's Power is doubled.</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[burn] 5.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "infernal-parade",
+        "name": "Infernal Parade",
+        "type": "attack",
+        "traits": [
+          "blast-1",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": "A target possesses a [Major Affliction]."
+        },
+        "category": "special",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "ghost"
+        ],
+        "description": "<p>A target possesses a [Major Affliction].</p><p>Effect: On hit, the valid target(s) have a 30% chance of gaining @Affliction[burn] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "infernal-parade",
+        "free": true,
         "slot": null
       }
     ],

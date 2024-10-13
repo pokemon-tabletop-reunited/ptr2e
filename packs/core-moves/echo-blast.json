@@ -41,10 +41,45 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: If the target was hit with an [Sonic] attack since the user's previous Activation, this Attack gains [Danger Close] and has its Power double.</p>"
+        "description": ""
+      },
+      {
+        "name": "Echo Blast (Echoing)",
+        "slug": "echo-blast-echoing",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "delay-2",
+          "danger-close",
+          "sonic"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": 2,
+          "priority": null,
+          "trigger": "<p>Target has been hit with a [Sonic] Attack since the user's last Activation.</p>"
+        },
+        "variant": "echo-blast",
+        "types": [
+          "normal"
+        ],
+        "category": "special",
+        "power": 130,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Trigger: Target has been hit with a [Sonic] Attack since the user's last Activation.</p>"
       }
     ],
-    "description": "",
+    "description": "<p>Effect: If the target was hit with an [Sonic] attack since the user's previous Activation, this Attack gains [Danger Close] and has its Power double.</p>",
     "container": null,
     "grade": "B"
   },

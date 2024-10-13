@@ -32,12 +32,44 @@
         "power": null,
         "accuracy": 100,
         "types": [
-          "normal"
+          "fairy"
         ],
-        "description": "<p>Effect: The target’s loses -2 SPATK stages for 5 activations. If the target is @Affliction[charmed], they lose -3 SPATK stages for 5 activations instead.</p>",
+        "description": "<p>Effect: On hit, the target loses -2 SPATK stages for 5 activations.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "captivate-charmed",
+        "name": "captivate (Charmed)",
+        "type": "attack",
+        "traits": [
+          "social"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Target has @Affliction[charmed].</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "fairy"
+        ],
+        "description": "<p>Trigger: Target has @Affliction[charmed].</p><p>Effect: On hit, the target loses -3 SPATK stages for 7 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "captivate",
+        "free": true,
         "slot": null
       }
     ],

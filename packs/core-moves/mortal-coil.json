@@ -4,9 +4,11 @@
   "_id": "0T55y3gUn0wEkIxw",
   "img": "systems/ptr2e/img/svg/ghost_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "mortal-coil",
     "traits": [
-      "contact"
+      "contact",
+      "flinch-5",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -24,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
+          "powerPoints": 2,
           "delay": null,
           "priority": null
         },
@@ -39,7 +41,42 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: If the target is @Affliction[cursed], this attack's Power is doubled. A @Affliction[cursed] target is cured of Curse after this attack resolves.</p>"
+        "description": ""
+      },
+      {
+        "name": "Mortal Coil (Cursed)",
+        "slug": "mortal-coil-cursed",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "contact",
+          "flinch-5",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The target has @Affliction[cursed].</p>"
+        },
+        "variant": "mortal-coil",
+        "types": [
+          "ghost"
+        ],
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Trigger: The target has @Affliction[cursed].</p><p>Effect: Effect: On resolution, the target is cured of @Affliction[crused] and is Flinched.</p>"
       }
     ],
     "description": "",

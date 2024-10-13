@@ -12,41 +12,114 @@
     ],
     "actions": [
       {
-        "name": "Scirocco",
         "slug": "scirocco",
+        "name": "Scirocco",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
         "traits": [
-          "sky",
           "wind",
-          "environ"
+          "sky",
+          "blast-4",
+          "environ",
+          "pp-updated"
         ],
         "range": {
-          "target": "creature",
+          "target": "blast",
           "distance": 10,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 11,
           "delay": null,
-          "priority": null
+          "priority": null,
+          "trigger": null
         },
-        "variant": null,
-        "types": [
-          "ground"
-        ],
         "category": "special",
         "power": 110,
         "accuracy": 70,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[confused] 5.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
-        "slot": null,
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[splinter] 5. If Dusty Weather is active, this attack gains [Danger Close]. </p>"
+        "slot": null
+      },
+      {
+        "slug": "scirocco-stormy",
+        "name": "Scirocco (Stormy)",
+        "type": "attack",
+        "traits": [
+          "wind",
+          "sky",
+          "blast-4",
+          "environ",
+          "danger-close",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Dusty or Windy Weather is present.</p>"
+        },
+        "category": "special",
+        "power": 110,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Trigger: Dusty or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[confused] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "scirocco",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "scirocco-snowy",
+        "name": "Scirocco (Snowy)",
+        "type": "attack",
+        "traits": [
+          "wind",
+          "sky",
+          "blast-4",
+          "environ",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Snowy Weather is present.</p>"
+        },
+        "category": "special",
+        "power": 110,
+        "accuracy": 50,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Trigger: Snowy Weather is present.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[confused] 5.</p>",
+        "contestType": "",
+        "variant": "scirocco",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "",
+    "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[confused] 5. If Dusty or Windy Weather is active, this attack gains [Danger Close]. If Snowy Weather is active, this attack's Accuracy is 50.</p>",
     "container": null,
     "grade": "B"
   },

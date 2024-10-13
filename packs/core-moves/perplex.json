@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "perplex",
-    "description": "",
+    "description": "<p>Effect: If the target is @Affliction[confused], this Attack's Power is doubled.</p>",
     "traits": [],
     "actions": [
       {
@@ -37,6 +37,37 @@
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "slug": "perplex-confused",
+        "name": "Perplex (Confused)",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "The target has @Affliction[confused]."
+        },
+        "variant": "perplex",
+        "types": [
+          "psychic"
+        ],
+        "category": "special",
+        "power": 130,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Trigger: The target has @Affliction[confused].</p>"
       }
     ],
     "container": null,

@@ -13,20 +13,20 @@
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
-          "trigger": "The user, or an allied creature within 8m of you, is targeted by a [Priority X] Action.",
+          "powerPoints": 2,
+          "trigger": "A [Priority X] or [Interrupt X] Attack is declared, targeting the user or an ally in Range.",
           "delay": null,
           "priority": null
         },
         "range": {
-          "target": "creature",
-          "distance": 8,
+          "target": "aura",
+          "distance": 6,
           "unit": "m"
         },
-        "description": "Trigger: The user, or an allied creature within 8m of you, is targeted by a [Priority X] Action.\nEffect: The triggering [Priority X] action in Range fails to hit the user or an ally. Actions failing to hit do not activate on-miss effects."
+        "description": "<p>A [Priority X] or [Interrupt X] Attack is declared, targeting the user or an ally in Range.</p><p>Effect: The triggering Attack fails.</p>"
       }
     ],
-    "description": "Trigger: The user, or an allied creature within 8m of you, is targeted by a [Priority X] Action.\nEffect: The triggering [Priority X] action in Range fails to hit the user or an ally. Actions failing to hit do not activate on-miss effects.",
+    "description": "<p>A [Priority X] or [Interrupt X] Attack is declared, targeting the user or an ally in Range.</p><p>Effect: The triggering Attack fails.</p>.",
     "traits": [
       "defensive"
     ],
