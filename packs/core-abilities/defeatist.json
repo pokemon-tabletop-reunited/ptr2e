@@ -12,43 +12,157 @@
         "slug": "defeatist",
         "type": "generic",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "trigger": null,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: While the user meets the [Desperation 1/2] Condition, their Base ATK and SPATK are reduced by 50% and their Base DEF, SPDEF, and SPD are increased by 50%."
+        "description": "Effect: While the user meets the [Desperation 1/2] Condition, their Base ATK and SPATK are reduced by 50% and their Base DEF, SPDEF, and SPD are increased by 50%.",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "ffect: While the user meets the [Desperation 1/2] Condition, their Base ATK and SPATK are reduced by 50% and their Base DEF, SPDEF, and SPD are increased by 50%.",
     "traits": [],
-    "slug": null,
-    "container": null
+    "slug": "defeatist",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "UEoQx5XPkgzgPFtU",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!UEoQx5XPkgzgPFtU"
+  "effects": [
+    {
+      "name": "Defeatist",
+      "type": "passive",
+      "_id": "qISNKnU7vNXCSZa7",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.base",
+            "value": {
+              "brackets": [
+                {
+                  "start": 1,
+                  "end": 50,
+                  "value": 0.5
+                }
+              ],
+              "field": "actor|system.health.percent"
+            },
+            "predicate": [],
+            "mode": 1,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spa.base",
+            "value": {
+              "brackets": [
+                {
+                  "start": 1,
+                  "end": 50,
+                  "value": 0.5
+                }
+              ],
+              "field": "actor|system.health.percent"
+            },
+            "mode": 1,
+            "predicate": [],
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.def.base",
+            "value": {
+              "brackets": [
+                {
+                  "start": 1,
+                  "end": 50,
+                  "value": 1.5
+                }
+              ],
+              "field": "actor|system.health.percent"
+            },
+            "mode": 1,
+            "predicate": [],
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spd.base",
+            "value": {
+              "brackets": [
+                {
+                  "start": 1,
+                  "end": 50,
+                  "value": 1.5
+                }
+              ],
+              "field": "actor|system.health.percent"
+            },
+            "mode": 1,
+            "predicate": [],
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spe.base",
+            "value": {
+              "brackets": [
+                {
+                  "start": 1,
+                  "end": 50,
+                  "value": 1.5
+                }
+              ],
+              "field": "actor|system.health.percent"
+            },
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.2",
+        "createdTime": 1728600798829,
+        "modifiedTime": 1728635895627,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }
