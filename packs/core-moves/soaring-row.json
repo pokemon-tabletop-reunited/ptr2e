@@ -18,8 +18,7 @@
         "img": "icons/svg/explosion.svg",
         "traits": [
           "contact",
-          "pass-2",
-          "delay-1"
+          "pass-2"
         ],
         "range": {
           "target": "creature",
@@ -43,7 +42,42 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: The user may freely move up to twice their Flight Score into the air upon declaring this attack. If the target is in the Set-Up phase of Bounce, Fly, Sky Attack, or Sky Drop then this attack gains [Danger Close]. The user does not take damage from falling until their next Activation.</p>"
+        "description": "<p>Effect: The user may freely move up to twice their Flight Score into the air upon declaring this attack. The user does not take damage from falling until their next Activation.</p>"
+      },
+      {
+        "name": "Soaring Row (Sky)",
+        "slug": "soaring-row-sky",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "contact",
+          "pass-2",
+          "danger-close"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Target in Flight and in the Set Up phase of an attack.</p>"
+        },
+        "variant": "soaring-row",
+        "types": [
+          "flying"
+        ],
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Trigger: Target in Flight and in the Set Up phase of an attack.</p><p>Effect: The user may freely move up to twice their Flight Score into the air upon declaring this attack. The user does not take damage from falling until their next Activation.</p>"
       }
     ],
     "description": "",

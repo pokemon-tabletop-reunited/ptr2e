@@ -4,12 +4,13 @@
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "sandsear-storm",
-    "description": "",
+    "description": "<p>Effect: On hit, all valid targets have a 30% of gaining @Affliction[burn] 7. If Sandy or Windy Weather are active, this attack gains [Danger Close].</p>",
     "traits": [
       "legendary",
       "blast-4",
       "environ",
-      "wind"
+      "wind",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -19,7 +20,6 @@
         "traits": [
           "legendary",
           "blast-4",
-          "environ",
           "wind",
           "pp-updated"
         ],
@@ -41,10 +41,47 @@
         "types": [
           "ground"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 20% of gaining @Affliction[burn] 7. If Sandy or Windy Weather are active, this attack gains [Danger Close].</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "sandsear-storm-blowing",
+        "name": "Sandsear Storm (Blowing)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "wind",
+          "blast-4",
+          "environ",
+          "danger-close",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": "Dusty or Windy Weather Weather is present."
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<pTrigger: Dusty or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 30% of gaining @Affliction[burn] 7.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "sandsear-storm",
+        "free": true,
         "slot": null
       }
     ],

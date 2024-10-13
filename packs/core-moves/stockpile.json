@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "stockpile",
-    "description": "<p>Effect: [Linked Attack: Spit Up][Linked Attack: Swallow]</p><p>The user gains 1 @Affliction[stockpile] Stack for 5 activations. A @Affliction[stockpile] Stack raises the user's DEF and SPDEF stage by +1. The user may only have a maximum of 3 @Affliction[stockpile] Stacks at a time.</p>",
+    "description": "<p>Effect:The user gains 1 @Affliction[stockpile] Stack for 5 activations. A @Affliction[stockpile] Stack raises the user's DEF and SPDEF stage by +1. The user may only have a maximum of 3 @Affliction[stockpile] Stacks at a time.</p><p>The user gains Swallow and Spit Up as Free Attacks while they have Stockpile in their Active List.</p>",
     "traits": [
       "defensive"
     ],
@@ -23,7 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 1,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -38,6 +38,207 @@
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "swallow-1",
+        "name": "Swallow-1",
+        "type": "attack",
+        "traits": [
+          "healing",
+          "linked"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user has exactly 1 Stack of @Affliction[stockpile].</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user has exactly 1 Stack of @Affliction[stockpile].</p><p>Effect: The user spends all @Affliction[stockpile] Stacks to heal 6 Ticks of HP.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "stockpile",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "swallow-2",
+        "name": "Swallow-2",
+        "type": "attack",
+        "traits": [
+          "healing",
+          "linked"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user has exactly 2 Stacks of @Affliction[stockpile].</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user has exactly 2 Stacks of @Affliction[stockpile].</p><p>Effect: The user spends all @Affliction[stockpile] Stacks to heal 12 Ticks of HP.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "stockpile",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "swallow-3",
+        "name": "Swallow-3",
+        "type": "attack",
+        "traits": [
+          "healing",
+          "linked"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user has exactly 3 Stacks of @Affliction[stockpile].</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user has exactly 3 Stacks of @Affliction[stockpile].</p><p>Effect: The user spends all @Affliction[stockpile] Stacks to heal 16 Ticks of HP.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "stockpile",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "spit-up-1",
+        "name": "Spit Up 1",
+        "type": "attack",
+        "traits": [
+          "blast-2",
+          "linked",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user has exactly 1 Stack of @Affliction[stockpile].</p>"
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user has exactly 1 Stack of @Affliction[stockpile].</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "swallow",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "spit-up-2",
+        "name": "Spit Up 2",
+        "type": "attack",
+        "traits": [
+          "blast-2",
+          "linked",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user has exactly 2 Stacks of @Affliction[stockpile].</p>"
+        },
+        "category": "special",
+        "power": 200,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user has exactly 2 Stacks of @Affliction[stockpile].</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "swallow",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "spit-up-3",
+        "name": "Spit Up 3",
+        "type": "attack",
+        "traits": [
+          "blast-2",
+          "linked",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user has exactly 3 Stacks of @Affliction[stockpile].</p>"
+        },
+        "category": "special",
+        "power": 300,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user has exactly 3 Stacks of @Affliction[stockpile].</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "swallow",
+        "free": true,
         "slot": null
       }
     ],

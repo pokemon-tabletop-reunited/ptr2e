@@ -44,6 +44,41 @@
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "slug": "vise-grip-grapple",
+        "name": "Vise Grip (Grapple)",
+        "type": "attack",
+        "traits": [
+          "crushing",
+          "contact",
+          "grapple",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 55,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: If the Target is @Affliction[grapple] by the user, Vise Grip gains [Danger Close].</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "vise-grip",
+        "free": true,
+        "slot": null
       }
     ],
     "container": null,

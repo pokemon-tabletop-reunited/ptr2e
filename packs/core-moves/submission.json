@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "submission",
-    "description": "",
+    "description": "<p>Effect: If the user and target are in the same @Affliction[grapple], this attack gains [Danger Close], and has its Power increase +50%.</p>",
     "traits": [
       "recoil-1-4",
       "contact",
@@ -28,7 +28,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -39,10 +39,45 @@
         "types": [
           "fighting"
         ],
-        "description": "<p>Effect: If the user and target are in the same @Affliction[grapple], this attack gains [Danger Close], and has its Power increase +25%.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "submission",
+        "name": "Submission",
+        "type": "attack",
+        "traits": [
+          "recoil-1-4",
+          "contact",
+          "grapple",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "submission",
+        "free": true,
         "slot": null
       }
     ],

@@ -4,9 +4,10 @@
   "_id": "DrobmpKV7dlHeCpu",
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "aloe-palm",
     "traits": [
-      "contact"
+      "contact",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -15,7 +16,8 @@
         "type": "attack",
         "img": "icons/svg/explosion.svg",
         "traits": [
-          "contact"
+          "contact",
+          "pp-updated"
         ],
         "range": {
           "target": "creature",
@@ -24,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
+          "powerPoints": 2,
           "delay": null,
           "priority": null
         },
@@ -39,12 +41,47 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: If the target has @Affliction[burn] , this attack's Power is doubled and the target is cured of @Affliction[burn]  after the attack resolves.</p>"
+        "description": ""
+      },
+      {
+        "name": "Aloe Palm (Burned)",
+        "slug": "aloe-palm-burned",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "contact",
+          "flinch-5",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The target has @Affliction[burn].</p>"
+        },
+        "variant": "aloe-palm",
+        "types": [
+          "grass"
+        ],
+        "category": "physical",
+        "power": 140,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Trigger: The target has @Affliction[burn].</p><p>Effect: On resolution, the target is cured of @Affliction[burn], and is Flinched.</p>"
       }
     ],
     "description": "",
     "container": null,
-    "grade": "B"
+    "grade": "D"
   },
   "effects": [],
   "sort": 0,

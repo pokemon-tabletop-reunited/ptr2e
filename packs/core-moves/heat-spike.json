@@ -4,7 +4,7 @@
   "_id": "7chNkzYXefJ5PmBA",
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "heat-spike",
     "traits": [
       "environ"
     ],
@@ -39,10 +39,43 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: On hit, all legal targets lose -1 ATK and SPATK stages for 5 activations. If there is Sunny Weather, they are decreased by -2 for 7 activations instead.</p>"
+        "description": "<p>Effect: On hit, all legal targets lose -1 ATK and SPATK stages for 5 activations.</p>"
+      },
+      {
+        "name": "Heat Spike (Sunny)",
+        "slug": "heat-spike-sunny",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "environ"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Sunny Weather is present.</p>"
+        },
+        "variant": null,
+        "types": [
+          "fire"
+        ],
+        "category": "status",
+        "power": null,
+        "accuracy": 90,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Trigger: Sunny Weather is present.</p><p>Effect: On hit, all legal targets lose -2 ATK and SPATK stages for 7 activations.</p>"
       }
     ],
-    "description": "",
+    "description": "<p>Effect: On hit, all legal targets lose -1 ATK and SPATK stages for 5 activations. If there is Sunny Weather, they are decreased by -2 for 7 activations instead.</p>",
     "container": null,
     "grade": "C"
   },

@@ -8,8 +8,10 @@
     "traits": [
       "legendary",
       "wind",
-      "blast-5",
-      "environ"
+      "blast-4",
+      "environ",
+      "flinch-chance-5",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -19,8 +21,8 @@
         "traits": [
           "legendary",
           "wind",
-          "blast-5",
-          "environ",
+          "flinch-chance-5",
+          "blast-4",
           "pp-updated"
         ],
         "range": {
@@ -41,9 +43,47 @@
         "types": [
           "flying"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[frozen] 5. If Snow or Windy Weather is active, this attack gains [Danger Close].</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 60% chance of being Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "bleakwind-storm-blowing",
+        "name": "Bleakwind Storm (Blowing)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "wind",
+          "blast-4",
+          "flinch-chance-5",
+          "environ",
+          "danger-close",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": "Snowy or Windy Weather is present."
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "flying"
+        ],
+        "description": "<pTrigger: Snowy or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 60% chance of being Flinched.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "bleakwind-storm",
         "free": false,
         "slot": null
       }

@@ -66,15 +66,19 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
     }
 
     private readonly challengeRatings = {
-        trivial: "Trivial +40",
-        easy: "Easy +30",
-        simple: "Simple +20",
-        average: "Average +10",
-        challenging: "Challenging +0",
-        difficult: "Difficult -10",
-        hard: "Hard -20",
-        intense: "Intense -30",
-        nighImpossible: "Nigh Impossible -40",
+        effortless: "Effortless +640",
+        trivial: "Trivial +30",
+        easy: "Easy +40",
+        simple: "Simple +30",
+        routine: "Routine +20",
+        ordinary: "Ordinary +10",
+        demanding: "Demanding +0",
+        taxing: "Taxing -10",
+        challenging: "Challenging -20",
+        difficult: "Difficult -30",
+        intense: "Intense -40",
+        insane: "Insane -50",
+        impossible: "Impossible -60",
     } as const;
 
     override async _prepareContext(): Promise<Record<string, unknown>> {
@@ -82,16 +86,20 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
             if(this.context.type === "luck-check") return null;
             const value = this.check.modifiers.find(s => s.slug === "challenge-rating")?.value;
             switch(value) {
-                case 40: return "trivial";
-                case 30: return "easy";
-                case 20: return "simple";
-                case 10: return "average";
-                case 0: return "challenging";
-                case -10: return "difficult";
-                case -20: return "hard";
-                case -30: return "intense";
-                case -40: return "nighImpossible";
-                default: return "average";
+                case 60: return "effortless";
+                case 50: return "trivial";
+                case 40: return "easy";
+                case 30: return "simple";
+                case 20: return "routine";
+                case 10: return "ordinary";
+                case 0: return "demanding";
+                case -10: return "taxing";
+                case -20: return "challenging";
+                case -30: return "difficult";
+                case -40: return "intense";
+                case -50: return "insane";
+                case -60: return "impossible";
+                default: return "ordinary";
             }
         })();
 
@@ -167,26 +175,20 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
 
             challengeRatingModifier.modifier = (() => {
                 switch (challengeRating) {
-                    case "trivial":
-                        return 40;
-                    case "easy":
-                        return 30;
-                    case "simple":
-                        return 20;
-                    case "average":
-                        return 10;
-                    case "challenging":
-                        return 0;
-                    case "difficult":
-                        return -10;
-                    case "hard":
-                        return -20;
-                    case "intense":
-                        return -30;
-                    case "nighImpossible":
-                        return -40;
-                    default:
-                        throw Error("Unexpected challenge rating");
+                    case "effortless": return 60;
+                    case "trivial": return 50;
+                    case "easy": return 40;
+                    case "simple": return 30;
+                    case "routine": return 20;
+                    case "ordinary": return 10;
+                    case "demanding": return 0;
+                    case "taxing": return -10;
+                    case "challenging": return -20;
+                    case "difficult": return -30;
+                    case "intense": return -40;
+                    case "insane": return -50;
+                    case "impossible": return -60;
+                    default: throw Error("Unexpected challenge rating");
                 }
             })()
             this.check.calculateTotal();

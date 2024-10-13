@@ -6,10 +6,12 @@
     "slug": "vital-throw",
     "description": "",
     "traits": [
-      "push-2",
+      "push-3",
       "delay-1",
       "contact",
-      "grapple"
+      "flinch-4",
+      "grapple",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -17,9 +19,10 @@
         "name": "Vital Throw",
         "type": "attack",
         "traits": [
-          "push-2",
+          "push-3",
           "delay-1",
           "contact",
+          "flinch-4",
           "grapple",
           "pp-updated"
         ],
@@ -30,10 +33,9 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
+          "powerPoints": 3,
           "delay": 1,
-          "priority": null,
-          "trigger": "<p>The user is in control of a @Affliction[grapple].</p>"
+          "priority": null
         },
         "category": "physical",
         "power": 70,
@@ -41,7 +43,7 @@
         "types": [
           "fighting"
         ],
-        "description": "<p>Trigger: The user is in control of a @Affliction[grapple].</p><p>Effect: This attack has its [Push X] increased by +4, and loses its [Delay X].</p>",
+        "description": "<p>Effect: On hit, the target loses @Affliction[grapple] if applicable, is Pushed, and is Flinched.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
@@ -49,7 +51,7 @@
       }
     ],
     "container": null,
-    "grade": "D"
+    "grade": "C"
   },
   "_id": "tNXN4HCcmKCZO3Ju",
   "effects": []
