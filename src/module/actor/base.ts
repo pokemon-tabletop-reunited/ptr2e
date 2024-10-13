@@ -1374,7 +1374,7 @@ class ActorPTR2e<
 
   override async toggleStatusEffect(
     statusId: string,
-    { active, overlay = false }: { active?: boolean; overlay?: boolean } = {}
+    { active, overlay = false, all = false, }: { active?: boolean; overlay?: boolean; all?: boolean } = {}
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ): Promise<any> {
     const status = CONFIG.statusEffects.find((e) => e.id === statusId);
@@ -1402,7 +1402,7 @@ class ActorPTR2e<
         const effect = this.effects.get(id) as ActiveEffectPTR2e<this>;
         if (effect.slug === slug) {
           if (overlay) {
-            if (effect.system.stacks > 1)
+            if (!all && effect.system.stacks > 1)
               effect.update({ "system.stacks": effect.system.stacks - 1 });
             else effect.delete();
           } else {
@@ -1426,6 +1426,59 @@ class ActorPTR2e<
     if (overlay) effect.updateSource({ "flags.core.overlay": true });
     //@ts-expect-error - Active effects aren't typed properly yet
     return ActiveEffectPTR2e.create(effect.toObject(), { parent: this, keepId: true });
+  }
+
+  hasStatus(statusId: string): boolean {
+    const status = CONFIG.statusEffects.find((e) => e.id === statusId);
+    if (!status)
+      throw new Error(`Invalid status ID "${statusId}" provided to ActorPTR2e#hasStatus`);
+
+    // Find the effect with the static _id of the status effect
+    if (status._id) {
+      const effect = this.effects.get(status._id);
+      if (effect) return true;
+    }
+
+    // If no static _id, find all single-status effects that have this status
+    else {
+      for (const effect of this.effects) {
+        const statuses = effect.statuses;
+        if (statuses.has(status.id)) return true;
+      }
+    }
+    return false;
+  };
+
+
+  async heal({ fractionToHeal=1.0, removeWeary=true, removeExposed=false, removeAllStacks=false } : { fractionToHeal?: number, removeWeary?: boolean; removeExposed?: boolean; removeAllStacks?: boolean } = {}): Promise<void> {
+    const health = Math.clamp(
+      (this.system.health?.value ?? 0) + Math.floor((this.system.health?.max ?? 0) * fractionToHeal),
+      0,
+      this.system.health?.max ?? 0);
+    await this.update({
+      "system.health.value": health,
+      "system.powerPoints.value": this.system.powerPoints?.max ?? 0,
+    });
+
+    // remove effects
+    const applicable = this.effects.filter(
+      (s) => (s as ActiveEffectPTR2e<this>).system.removeAfterCombat || (s as ActiveEffectPTR2e<this>).system.removeOnRecall
+    );
+    await this.deleteEmbeddedDocuments(
+      "ActiveEffect",
+      applicable.map((s) => s.id)
+    );
+
+
+    // remove exposure
+    if (removeExposed) {
+      await this.toggleStatusEffect("exposed", { active: false, all: removeAllStacks, overlay: true });
+    }
+
+    // remove weary
+    if (!this.hasStatus("exposed") && removeWeary) {
+      await this.toggleStatusEffect("weary", { active: false, all: removeAllStacks, overlay: true });
+    }
   }
 
   /** Assess and pre-process this JSON data, ensuring it's importable and fully migrated */

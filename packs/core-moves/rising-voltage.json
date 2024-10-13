@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "rising-voltage",
-    "description": "",
+    "description": "<p>Effect: If the user is affected by Electric Terrain, this Attack's Power is doubled.</p>",
     "traits": [
       "earthbound",
       "environ"
@@ -26,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
+          "powerPoints": 5,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -37,10 +37,44 @@
         "types": [
           "electric"
         ],
-        "description": "<p>Effect: If Electric Terrain is active, this Attack's Power is doubled.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "rising-voltage-terrain",
+        "name": "Rising Voltage (Terrain)",
+        "type": "attack",
+        "traits": [
+          "earthbound",
+          "environ",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user is affected by Electric Terrain.</p>"
+        },
+        "category": "special",
+        "power": 140,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Trigger: The user is affected by Electric Terrain.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "rising-voltage",
+        "free": true,
         "slot": null
       }
     ],

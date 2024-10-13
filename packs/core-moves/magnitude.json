@@ -38,7 +38,36 @@
         "types": [
           "ground"
         ],
-        "description": "<p>Effect: If a target is Burrowed underground, this attack ignores the target's EVA stage increasesand has its Damage doubled.</p>"
+        "description": ""
+      },
+      {
+        "slug": "magnitude-burrowing",
+        "name": "Magnitude (Burrowing)",
+        "type": "attack",
+        "traits": [
+          "earthbound",
+          "10-strike",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 10,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Valid target(s) is Burrowing.</p>"
+        },
+        "category": "physical",
+        "power": 30,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Trigger: Valid target(s) is Burrowing.</p><p>Effect: This attack ignores the target's EVA stage increases.</p>"
       }
     ],
     "container": null,

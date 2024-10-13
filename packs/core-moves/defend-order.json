@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "system": {
     "slug": "defend-order",
-    "description": "<p>Effect: The user increases their DEF stage and SPDEF stage by +1 for 5 activations. If there is at least one allied Bug-typed creature on the field, the stage increases by an additional +1 per allied Bug-typed creature, up to a maximum of +3 total increase.</p>",
+    "description": "<p>Effect: The user gains +1 DEF and SPDEF stage for 5 activations. If there are two more more Bug-Type allies on the Field, the user also gains @Affliction[resolved] 5.</p>",
     "traits": [
       "dance"
     ],
@@ -34,10 +34,42 @@
         "types": [
           "bug"
         ],
-        "description": "<p>Effect: The user increases their DEF stage and SPDEF stage by +1 for 5 activations. If there is at least one allied Bug-typed creature on the field, the stage increases by an additional +1 per allied Bug-typed creature, up to a maximum of +3 total increase.</p>",
+        "description": "<p>Effect: The user gains +1 DEF and SPDEF stage for 5 activations.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "defend-order-allies",
+        "name": "Defend Order (Allies)",
+        "type": "attack",
+        "traits": [
+          "dance"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "Two or more Bug-Type allies are present on the Field."
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "bug"
+        ],
+        "description": "<p>Trigger: Two or more Bug-Type allies are present on the Field.</p><p>Effect: The user gains +1 DEF and SPDEF stage for 5 activations and gains @Affliction[resolved] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "defend-order",
+        "free": true,
         "slot": null
       }
     ],

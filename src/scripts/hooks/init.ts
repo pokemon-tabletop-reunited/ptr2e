@@ -45,6 +45,8 @@ export const Init: PTRHook = {
             CONFIG.ActiveEffect.legacyTransferral = false;
             CONFIG.Actor.documentClass = PTRCONFIG.Actor.documentClass;
             CONFIG.Actor.dataModels = PTRCONFIG.Actor.dataModels;
+            // @ts-expect-error this definitely exists
+            CONFIG.Actor.trackableAttributes = PTRCONFIG.Token.trackableAttributes
             CONFIG.ChatMessage.documentClass = PTRCONFIG.ChatMessage.documentClass;
             CONFIG.ChatMessage.dataModels = PTRCONFIG.ChatMessage.dataModels;
             CONFIG.Combat.documentClass = PTRCONFIG.Combat.documentClass;
