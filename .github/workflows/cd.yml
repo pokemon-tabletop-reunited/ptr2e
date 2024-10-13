@@ -33,10 +33,12 @@ jobs:
                   perl -pi -E "s|latest/download/ptr2e\\.zip|download/$SYSTEM_VERSION/ptr2e.zip|" dist/system.json
                   echo "systemVersion=$SYSTEM_VERSION" >> $GITHUB_ENV
 
-            - name: Zip Files
+            - name: Setup Zip
               uses: montudor/action-zip@v1
-              with:
-                  args: zip -qq -r ptr2e.zip dist
+
+            - name: Zip Files
+              working-directory: ./dist
+              run: zip -qq -r ./ptr2e.zip ./*
 
             - name: Create Version Release
               id: create_version_release
@@ -47,5 +49,5 @@ jobs:
                   draft: false
                   prerelease: false
                   token: ${{ secrets.GITHUB_TOKEN }}
-                  artifacts: "./dist/system.json,./ptr2e.zip,./json-assets/packs/data.json"
+                  artifacts: "./dist/system.json,./dist/ptr2e.zip,./json-assets/packs/data.json"
                   tag: ${{ env.systemVersion }}
