@@ -1,0 +1,52 @@
+{
+  "name": "Spit Up",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
+  "system": {
+    "slug": "spit-up",
+    "description": "",
+    "traits": [
+      "blast-2",
+      "linked"
+    ],
+    "actions": [
+      {
+        "slug": "spit-up",
+        "name": "Spit Up",
+        "type": "attack",
+        "traits": [
+          "blast-2",
+          "linked",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: Can only be used if the user possesses have at least 1 @Affliction[stockpile] stack. The user spends all @Affliction[stockpile] stacks to attack, with this attack's Power being multiplied by the number of @Affliction[stockpile] stacks spent.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      }
+    ],
+    "container": null,
+    "grade": "A"
+  },
+  "_id": "bvxUFjuI098DSb9E",
+  "effects": []
+}
