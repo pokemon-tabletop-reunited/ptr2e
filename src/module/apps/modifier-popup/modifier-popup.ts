@@ -66,8 +66,8 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
     }
 
     private readonly challengeRatings = {
-        effortless: "Effortless +640",
-        trivial: "Trivial +30",
+        effortless: "Effortless +60",
+        trivial: "Trivial +50",
         easy: "Easy +40",
         simple: "Simple +30",
         routine: "Routine +20",

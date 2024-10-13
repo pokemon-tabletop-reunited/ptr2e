@@ -34,8 +34,9 @@ jobs:
                   echo "systemVersion=$SYSTEM_VERSION" >> $GITHUB_ENV
 
             - name: Zip Files
-              working-directory: ./dist
-              run: zip -r ./ptr2e.zip ./*
+              uses: montudor/action-zip@v1
+              with:
+                  args: zip -qq -r ptr2e.zip dist
 
             - name: Create Version Release
               id: create_version_release
