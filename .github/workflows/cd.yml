@@ -21,6 +21,9 @@ jobs:
               with:
                   node-version: 18.x
 
+            - name: Install 7-Zip
+              run: sudo apt-get install -y p7zip-full
+
             - name: Build
               run: |
                   npm ci
@@ -35,7 +38,7 @@ jobs:
 
             - name: Zip Files
               run: |
-                  zip -r -9 ptr2e.zip dist
+                  7z a -tzip ptr2e.zip dist
 
             - name: Create Version Release
               id: create_version_release
