@@ -238,56 +238,23 @@ class ActorPTR2e<
     super.prepareBaseData();
 
     if(this.system.shield.value > 0) this.rollOptions.addOption("self", "state:shielded");
-    if(this.system.health.value < Math.floor(this.system.health.max * 0.25)) {
+    if(this.system.health.value <= Math.floor(this.system.health.max * 0.25)) {
       this.rollOptions.addOption("self", "state:desperation-3-4");
       this.rollOptions.addOption("self", "state:desperation-1-2");
       this.rollOptions.addOption("self", "state:desperation-1-3");
       this.rollOptions.addOption("self", "state:desperation-1-4");
     }
-    else if(this.system.health.value = Math.floor(this.system.health.max * 0.25)) {
+    else if(this.system.health.value <= Math.floor(this.system.health.max * (1/3))) {
       this.rollOptions.addOption("self", "state:desperation-3-4");
       this.rollOptions.addOption("self", "state:desperation-1-2");
       this.rollOptions.addOption("self", "state:desperation-1-3");
-      this.rollOptions.addOption("self", "state:desperation-1-4");
-      this.rollOptions.addOption("self", "state:intrepid-1-4");
     }
-    else if(this.system.health.value < Math.floor(this.system.health.max * (1/3))) {
+    else if(this.system.health.value <= Math.floor(this.system.health.max * 0.5)) {
       this.rollOptions.addOption("self", "state:desperation-3-4");
       this.rollOptions.addOption("self", "state:desperation-1-2");
-      this.rollOptions.addOption("self", "state:desperation-1-3");
-      this.rollOptions.addOption("self", "state:intrepid-1-4");
     }
-    else if(this.system.health.value = Math.floor(this.system.health.max * (1/3))) {
+    else if(this.system.health.value <= Math.floor(this.system.health.max * 0.75)) {
       this.rollOptions.addOption("self", "state:desperation-3-4");
-      this.rollOptions.addOption("self", "state:desperation-1-2");
-      this.rollOptions.addOption("self", "state:desperation-1-3");
-      this.rollOptions.addOption("self", "state:intrepid-1-3");
-      this.rollOptions.addOption("self", "state:intrepid-1-4");
-    }
-    else if(this.system.health.value < Math.floor(this.system.health.max * 0.5)) {
-      this.rollOptions.addOption("self", "state:desperation-3-4");
-      this.rollOptions.addOption("self", "state:desperation-1-2");
-      this.rollOptions.addOption("self", "state:intrepid-1-3");
-      this.rollOptions.addOption("self", "state:intrepid-1-4");
-    }
-    else if(this.system.health.value = Math.floor(this.system.health.max * 0.5)) {
-      this.rollOptions.addOption("self", "state:desperation-3-4");
-      this.rollOptions.addOption("self", "state:desperation-1-2");
-      this.rollOptions.addOption("self", "state:intrepid-1-2");
-      this.rollOptions.addOption("self", "state:intrepid-1-3");
-      this.rollOptions.addOption("self", "state:intrepid-1-4");
-    }
-    else if(this.system.health.value < Math.floor(this.system.health.max * 0.75)) {
-      this.rollOptions.addOption("self", "state:desperation-3-4");
-      this.rollOptions.addOption("self", "state:intrepid-1-2");
-      this.rollOptions.addOption("self", "state:intrepid-1-3");
-      this.rollOptions.addOption("self", "state:intrepid-1-4");
-    }
-    else if(this.system.health.value >= Math.floor(this.system.health.max * 0.75)) {
-      this.rollOptions.addOption("self", "state:intrepid-3-4");
-      this.rollOptions.addOption("self", "state:intrepid-1-2");
-      this.rollOptions.addOption("self", "state:intrepid-1-3");
-      this.rollOptions.addOption("self", "state:intrepid-1-4");
     }
   }
 
