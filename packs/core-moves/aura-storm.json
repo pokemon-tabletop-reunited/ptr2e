@@ -1,0 +1,105 @@
+{
+  "name": "Aura Storm",
+  "type": "move",
+  "_id": "Oloonyqp6ZSHZ50Z",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+  "system": {
+    "slug": "aura-storm",
+    "traits": [
+      "aura",
+      "pulse",
+      "blast-3",
+      "delay-2"
+    ],
+    "actions": [
+      {
+        "name": "Aura Storm",
+        "slug": "aura-storm",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "aura",
+          "pulse",
+          "blast-3",
+          "delay-2"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "fighting"
+        ],
+        "category": "special",
+        "power": 130,
+        "accuracy": 70,
+        "description": "<p>Effect: On resolution, the user loses -2 SPATK stage for 5 activations.</p>"
+      }
+    ],
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Aura Storm",
+      "type": "passive",
+      "_id": "63L7EixEvZHnkjam",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "aura-storm-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.EYmp1DeE1Lwzi0D1",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729168318613,
+        "modifiedTime": 1729168356650,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
