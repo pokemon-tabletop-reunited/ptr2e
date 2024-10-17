@@ -1,0 +1,103 @@
+{
+  "folder": "Et2u8UoXSe2a17oq",
+  "name": "Backpacker 1",
+  "type": "perk",
+  "_id": "VrNeav68NYWBJGuo",
+  "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
+  "system": {
+    "actions": [],
+    "slug": "backpacker-1",
+    "description": "<p>Increase your Inventory Point (IP) reservoir by 2.</p>",
+    "traits": [],
+    "prerequisites": [
+      "Resources 30"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Backpacker"
+    },
+    "node": {
+      "i": 47,
+      "j": -72,
+      "connected": [
+        "emergency-retreat",
+        "mobilize",
+        "ultraviolet",
+        "berserk",
+        "berserker",
+        "desperate-strike",
+        "i-get-knocked-down"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#408080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Backpacker",
+      "type": "passive",
+      "_id": "okWzVpubgGqDryhJ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.modifiers.inventoryPoints",
+            "value": 2,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729174922170,
+        "modifiedTime": 1729175404315,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
