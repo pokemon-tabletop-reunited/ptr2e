@@ -1,0 +1,97 @@
+{
+  "name": "Blossom Blast",
+  "type": "move",
+  "_id": "JqKqCFtxFcZapiSf",
+  "img": "systems/ptr2e/img/svg/grass_icon.svg",
+  "system": {
+    "slug": "blossom-blast",
+    "traits": [],
+    "actions": [
+      {
+        "name": "Blossom Blast",
+        "slug": "blossom-blast",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "blast-3"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9
+        },
+        "types": [
+          "grass"
+        ],
+        "category": "physical",
+        "power": 120,
+        "accuracy": 80,
+        "description": "<p>Effect: On hit, all valid targets have a 20% chance of losing -1 EVA stage for 5 Activations.</p>"
+      }
+    ],
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Blossom Blast",
+      "type": "passive",
+      "_id": "3fiSHog6HgMpZ6ah",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "blossom-blast-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.hIE6W3Y5E9CyHiTy",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729171644923,
+        "modifiedTime": 1729171732483,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
