@@ -10,20 +10,23 @@
         "slug": "run-away",
         "type": "generic",
         "cost": {
-          "activation": "simple",
+          "activation": "free",
           "powerPoints": 1,
           "delay": null,
-          "priority": null
+          "priority": null,
+          "trigger": "<p>The user is declares Rush or to escape from a @Affliction[grapple].</p>"
         },
         "range": {
           "target": "self",
           "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: The uses the Sprint action."
+        "description": "<p>Trigger: The user is declares Rush or to escape from a @Affliction[grapple].</p><p>Effect: The DC on the roll increases by +20.</p>"
       },
       {
-        "traits": [],
+        "traits": [
+          "defensive"
+        ],
         "name": "Run Away",
         "slug": "run-away",
         "type": "passive",
@@ -34,11 +37,13 @@
           "priority": null
         },
         "range": null,
-        "description": "Passive: The user is immune to the @Affliction[bound] Affliction."
+        "description": "<p>Passive: The user is immune to @Affliction[bound] and @Affliction[stuck].</p>"
       }
     ],
-    "description": "Effect: The uses the Sprint action. Passive: The user is immune to the @Affliction[bound] Affliction.",
-    "traits": [],
+    "description": "<p>Trigger: The user is declares Rush or to escape from a @Affliction[grapple].</p><p>Effect: The DC on the roll increases by +20.</p><p>Passive: The user is immune to @Affliction[bound] and @Affliction[stuck].</p>",
+    "traits": [
+      "defensive"
+    ],
     "slug": null,
     "container": null
   },
