@@ -1,0 +1,114 @@
+{
+  "name": "Improved Burrow 1",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "A Burrow Movement Allowance",
+      "Climb 20 + 10 x (# of Improved Burrow Perks already obtained)"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Mobility"
+    },
+    "description": "<p>Improve your Burrow Movement Allowance by 2.</p>",
+    "actions": [
+      {
+        "name": "Improved Burrow 1",
+        "slug": "improved-burrow-1",
+        "description": "<p>Improve your Burrow Movement Allowance by 2.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "improved-burrow-1",
+    "traits": [],
+    "node": {
+      "i": -65,
+      "j": 41,
+      "connected": [
+        "shovel-hands",
+        "root-6"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#804000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "QmK7pugsgkpdnaHA",
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [
+    {
+      "name": "Improved Burrow",
+      "type": "passive",
+      "_id": "A9U7GVQynow9u1zj",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.movement.burrow.value",
+            "value": 2,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729187749803,
+        "modifiedTime": 1729187756184,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
+}
