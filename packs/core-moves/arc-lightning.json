@@ -1,0 +1,99 @@
+{
+  "name": "Arc Lightning",
+  "type": "move",
+  "_id": "ySSwKtbPwbNDexgM",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "system": {
+    "slug": "arc-lightning",
+    "traits": [
+      "blast-4"
+    ],
+    "actions": [
+      {
+        "name": "Arc Lightning",
+        "slug": "arc-lightning",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "blast-4"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "electric"
+        ],
+        "category": "special",
+        "power": 50,
+        "accuracy": 100,
+        "description": "<p>Effect: On hit, all valid targets have a 10% chance of gaining @Affliction[paralysis] 5.</p>"
+      }
+    ],
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Arc Lightning",
+      "type": "passive",
+      "_id": "UpMZgep9L9yYUm8B",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "arc-lightning-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729166556757,
+        "modifiedTime": 1729166589896,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
