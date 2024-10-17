@@ -1,0 +1,90 @@
+{
+  "name": "Agile Style",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Leadership 25"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Support"
+    },
+    "description": "<p>The target gains @Affliction[agile] 1.</p>",
+    "actions": [
+      {
+        "name": "Agile!",
+        "slug": "agile",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1
+        },
+        "description": "Effect: The target gains @Affliction[agile] 1.",
+        "type": "generic",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "name": "Agile! (Self)",
+        "slug": "agile-self",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1
+        },
+        "description": "Effect: The target gains @Affliction[agile] 2.",
+        "type": "generic",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "slug": "agile-style",
+    "traits": [
+      "command"
+    ],
+    "node": {
+      "i": -23,
+      "j": -57,
+      "connected": [
+        "acrobat",
+        "improved-overland-2",
+        "root-1",
+        "parkour",
+        "groomer"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ffff00",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "tint": "#141414",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "9bYyVaMgkigTKOc7",
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": []
+}
