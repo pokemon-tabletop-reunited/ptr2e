@@ -1,0 +1,48 @@
+{
+  "name": "Blaster Knuckle",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+  "system": {
+    "slug": "blaster-knuckle",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "blaster-knuckle",
+        "name": "Blaster Knuckle",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "pass-4",
+          "explode",
+          "defrost",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 85,
+        "types": [
+          "fighting",
+          "fire"
+        ],
+        "description": "<p>Effect: This attack is considered to be both Fighting and Fire Type.</p>",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg"
+      }
+    ],
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "a6B03X7ci0Ta4bSS",
+  "effects": []
+}
