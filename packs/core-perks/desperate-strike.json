@@ -1,0 +1,122 @@
+{
+  "folder": "Et2u8UoXSe2a17oq",
+  "name": "Desperate Strike",
+  "type": "perk",
+  "_id": "ht3HkOzyZoTFLuAn",
+  "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+  "system": {
+    "actions": [
+      {
+        "name": "Desperate Strike",
+        "slug": "desperate-strike",
+        "description": "<p>You gain +1 default CRIT while you meet the [Desperation 1/3] Condition.</p>",
+        "traits": [
+          "desperation-1-3"
+        ],
+        "type": "generic",
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple"
+        },
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "slug": "desperate-strike",
+    "description": "<p>You gain +1 default CRIT while you meet the [Desperation 1/3] Condition.</p>",
+    "traits": [
+      "desperation-1-3"
+    ],
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Destroyer"
+    },
+    "node": {
+      "i": 49,
+      "j": -63,
+      "connected": [
+        "mobilize",
+        "backpacker-1",
+        "ultraviolet"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ff0000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Desperate Strike",
+      "type": "passive",
+      "_id": "TUSllBHC1CzTQ8NY",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.critRate.stage",
+            "value": 1,
+            "predicate": [
+              "self:state:desperation-1-3"
+            ],
+            "label": "Desperate Strike",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729176443677,
+        "modifiedTime": 1729176601297,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
