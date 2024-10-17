@@ -1,0 +1,100 @@
+{
+  "name": "Blizzard",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "system": {
+    "slug": "blizzard",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "blizzard",
+        "name": "Blizzard",
+        "type": "attack",
+        "traits": [
+          "environ",
+          "wind",
+          "pp-updated",
+          "partial-automation"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "special",
+        "power": 110,
+        "accuracy": 70,
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frozen] 5. In Snow Weather, Blizzard always hits.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "pMSwY3ECWqqasF1a",
+  "effects": [
+    {
+      "name": "Blizzard (Partial)",
+      "type": "passive",
+      "_id": "v8SdEBHDOMMD52H4",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "blizzard-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729171571064,
+        "modifiedTime": 1729171594283,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
