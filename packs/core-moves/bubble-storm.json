@@ -1,0 +1,99 @@
+{
+  "name": "Bubble Storm",
+  "type": "move",
+  "_id": "IancatghBK4ezIBP",
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
+  "system": {
+    "slug": "bubble-storm",
+    "traits": [
+      "missile"
+    ],
+    "actions": [
+      {
+        "name": "Bubble Storm",
+        "slug": "bubble-storm",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "missile"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "water"
+        ],
+        "category": "special",
+        "power": 55,
+        "accuracy": 90,
+        "description": "<p>Effect: On hit, all valid targets have a 10% chance of losing -2 SPD stages for 5 activations.</p>"
+      }
+    ],
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Bubble Storm",
+      "type": "passive",
+      "_id": "f7Ag9V6DaI00Vq5F",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "bubble-storm-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.9FlxAAlUW2PrKOd0",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729172394912,
+        "modifiedTime": 1729172433901,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
