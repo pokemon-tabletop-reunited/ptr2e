@@ -26,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 8,
+          "powerPoints": 7,
           "delay": null,
           "priority": null
         },
@@ -41,10 +41,44 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: If the target has a Major Affliction, this attack's Power is doubled, and the target is cured of their Major Afflictions after this attack resolves.</p>"
+        "description": "<p>Effect: If the target has a [Major Affliction], this attack's Power is doubled, and the target is cured of their Major Afflictions after this attack resolves.</p>"
+      },
+      {
+        "name": "Purifying Wave",
+        "slug": "purifying-wave",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "legendary",
+          "pulse"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Valid target(s) have a [Major Affliction].</p>"
+        },
+        "variant": null,
+        "types": [
+          "fairy"
+        ],
+        "category": "special",
+        "power": 140,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null,
+        "description": "<p>Valid target(s) have a [Major Affliction].</p><p>Effect: On resolution, valid targets are cured of their [Major Affliction]s.</p>"
       }
     ],
-    "description": "",
+    "description": "<p>Effect: If a target has a [Major Affliction], this attack's Power is doubled, and that target is cured of their [Major Affliction]s after this attack resolves.</p>",
     "container": null,
     "grade": "A"
   },

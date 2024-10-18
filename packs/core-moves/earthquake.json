@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/ground_icon.svg",
   "system": {
     "slug": "earthquake",
-    "description": "",
+    "description": "<p>Effect: If a target is Burrowing, this Attack ignores the target's EVA stage increases and has its Power doubled.</p>",
     "traits": [
       "earthbound",
       "pp-updated"
@@ -36,10 +36,43 @@
         "types": [
           "ground"
         ],
-        "description": "<p>Effect: If a target is Burrowing, Earthquake ignores range increment and the target's EVA stage increases. Additionally, Earthquake's Power is doubled against Burrowed targets.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "earthquake-burrowing",
+        "name": "Earthquake (Burrowing)",
+        "type": "attack",
+        "traits": [
+          "earthbound",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 15,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Valid target(s) is Burrowing.</p>"
+        },
+        "category": "physical",
+        "power": 200,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Trigger: Valid target(s) is Burrowing.</p><p>Effect: This attack ignores the target's EVA stage increases.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "varant": "earthquake",
+        "free": true,
         "slot": null
       }
     ],

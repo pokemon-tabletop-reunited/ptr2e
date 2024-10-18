@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "focus-punch",
-    "description": "",
+    "description": "<p>Effect: If the user is hit by at least one Physical or Special attack after the declaration and before the resolution of this attack, its Power is reduced by half.</p>",
     "traits": [
       "punch",
       "delay-3",
@@ -40,6 +40,40 @@
           "fighting"
         ],
         "description": "<p>Effect: If the user is hit by at least one Physical or Special attack after the declaration and before the resolution of Focus Punch, Focus Punch's Power is reduced by half.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "focus-punch-unfocused",
+        "name": "Focus Punch (Unfocused)",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "delay-3",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": 3,
+          "priority": null,
+          "trigger": "<p>The user was hit by at least one Physical or Special attack after the declaration and before the resolution of Focus Punch.</p>"
+        },
+        "category": "physical",
+        "power": 75,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "<p>Trigger: The user was hit by at least one Physical or Special attack after the declaration and before the resolution of Focus Punch.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,

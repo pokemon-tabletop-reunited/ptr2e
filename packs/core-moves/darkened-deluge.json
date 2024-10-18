@@ -41,10 +41,44 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: If Gloomy Weather is active, this Attack's Range is doubled.</p>"
+        "description": ""
+      },
+      {
+        "name": "Darkened Deluge (Gloomy)",
+        "slug": "darkened-deluge-gloomy",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "environ",
+          "wind"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "Gloomy Weather is present."
+        },
+        "variant": "darkened-deluge",
+        "types": [
+          "dark"
+        ],
+        "category": "special",
+        "power": 70,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Trigger: Gloomy Weather is present.</p>"
       }
     ],
-    "description": "",
+    "description": "<p>Effect: If Gloomy Weather is present, this Attack's Range is doubled.</p>",
     "container": null,
     "grade": "B"
   },

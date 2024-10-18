@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "springtide-storm",
-    "description": "",
+    "description": "<p>Effect: On hit, all valid targets have a 30% chance of losing -1 ATK stage for 5 activations. If Gloomy or Windy Weather are active, this attack gains [Danger Close].</p",
     "traits": [
       "legendary",
       "friendly",
@@ -20,9 +20,8 @@
         "traits": [
           "legendary",
           "friendly",
-          "blast-5",
+          "blast-4",
           "wind",
-          "environ",
           "pp-updated"
         ],
         "range": {
@@ -43,10 +42,47 @@
         "types": [
           "fairy"
         ],
-        "description": "<p>Effect: On hit, all valid targets have a 30% chance of losing -1 ATK stage for 5 activations. If New Moon or Windy Weather is active, this attack gains [Danger Close].</p>",
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of losing -1 ATK stage for 5 activations.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "springtide-storm-blowing",
+        "name": "Springtide Storm (Blowing)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "wind",
+          "blast-4",
+          "environ",
+          "danger-close",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "delay": null,
+          "priority": null,
+          "trigger": "Gloomy or Windy Weather Weather is present."
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "fairy"
+        ],
+        "description": "<pTrigger: Gloomy or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 30% chance of losing -1 ATK stage for 7 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "springtide-storm",
+        "free": true,
         "slot": null
       }
     ],

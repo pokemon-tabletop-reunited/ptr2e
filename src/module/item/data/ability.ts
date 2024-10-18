@@ -36,9 +36,9 @@ export default abstract class AbilitySystem extends HasEmbed(HasBase(foundry.abs
   }
 
   override prepareBaseData(): void {
-    if (!this.free && this.slot === null) {
-      this.parent.effects.map(e => e.disabled = true);
-    }
+    // if (!this.free && this.slot === null) {
+    //   this.parent.effects.map(e => e.disabled = true);
+    // }
 
     super.prepareBaseData();
   }

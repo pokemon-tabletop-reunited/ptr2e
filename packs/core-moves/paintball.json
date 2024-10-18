@@ -45,10 +45,46 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: If the user has a Held Item that is associated with a specific Type, Paintball's Type changes to match that of the Held item.</p>"
+        "description": ""
+      },
+      {
+        "name": "Paintball (Dyed)",
+        "slug": "paintball-dyed",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "missile",
+          "3-strike",
+          "adaptable",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>An item in the user's [Held] or [Accessory] slots has a &lt;Type&gt;.</p>"
+        },
+        "variant": "paint-ball",
+        "types": [
+          "typeless"
+        ],
+        "category": "special",
+        "power": 35,
+        "accuracy": 95,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": "<p>Trigger: <p>The an item in the user's [Held] or [Accessory] slots has a &lt;Type&gt;.</p><p>Effect: This attack's Type changes to match that of one of the item(s).</p>"
       }
     ],
-    "description": "",
+    "description": "<p>Effect: If the user has an equipped [Held] or [Accessory] Item that is associated with a specific Type, this attack's Type changes to match the &lt;Type&gt; of one of the item(s).</p>",
     "container": null,
     "grade": "C"
   },

@@ -79,6 +79,15 @@ export default class AttackPTR2e extends ActionPTR2e {
     };
   }
 
+  get isFree(): boolean {
+    if(!this.variant) return this.free;
+    
+    const original = (this.original as AttackPTR2e);
+    if(original.free) return true;
+    if(original.slot !== null && this.actor?.attacks.actions[original.slot] == original) return true;
+    return false;
+  }
+
   static override validateJoint(data: AttackPTR2e["_source"]) {
     const category = data.category as PokemonCategory;
     const power = data.power as number;
@@ -135,7 +144,6 @@ export default class AttackPTR2e extends ActionPTR2e {
 
   async roll(args?: AttackStatisticRollParameters) {
     if (!this.rollable) return false;
-
     return this.statistic!.check.roll(args);
   }
 
@@ -193,10 +201,10 @@ export default class AttackPTR2e extends ActionPTR2e {
   override prepareUpdate(data: DeepPartial<SourceFromSchema<ActionSchema>>): ActionPTR2e[] {
     const currentActions = super.prepareUpdate(data);
 
-    for(const action of currentActions) {
-      if(action.type !== "attack") continue;
+    for (const action of currentActions) {
+      if (action.type !== "attack") continue;
       const attack = action as AttackPTR2e;
-      if(attack.category === "status") {
+      if (attack.category === "status") {
         attack.power = null;
       }
     }

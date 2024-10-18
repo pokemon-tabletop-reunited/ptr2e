@@ -13,6 +13,7 @@ import Tagify from "@yaireo/tagify";
 import EquipmentSystem from "@item/data/equipment.ts";
 import ContainerSystem from "@item/data/container.ts";
 import { KnownActionsApp } from "@module/apps/known-attacks.ts";
+import { RestApp } from "@module/apps/rest.ts";
 import {
   ActorSheetV2Expanded,
   DocumentSheetConfigurationExpanded,
@@ -33,6 +34,8 @@ import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import Clock from "@module/data/models/clock.ts";
 import ClockEditor from "@module/apps/clocks/clock-editor.ts";
 import Sortable from "sortablejs";
+import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
+import PartySheetPTR2e from "@module/apps/party-sheet.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
@@ -66,7 +69,19 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             label: "PTR2E.ActorSheet.Inspector",
             action: "open-inspector",
             visible: true
-          }
+          },
+          {
+            icon: "fas fa-heart-circle-plus",
+            label: "PTR2E.ActorSheet.Rest",
+            action: "rest",
+            visible: true,
+          },
+          {
+            icon: "fas fa-user-group",
+            label: "PTR2E.ActorSheet.PartySheet",
+            action: "open-party-sheet",
+            visible: true,
+          },
         ],
       },
       form: {
@@ -128,6 +143,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
           game.ptr.web.open(this.actor);
         },
+        "open-party-sheet": async function (this: ActorSheetPTRV2) {
+          if (!this.actor.party) return;
+          new PartySheetPTR2e({folder: this.actor.folder!}).render(true);
+        },
         "edit-movelist": function (this: ActorSheetPTRV2) {
           new KnownActionsApp(this.actor).render(true);
         },
@@ -178,6 +197,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         "luck-roll": async function (this: ActorSheetPTRV2) {
           const skill = this.actor.system.skills.get("luck")!;
           await skill.endOfDayLuckRoll();
+        },
+        "rest": function (this: ActorSheetPTRV2) {
+          const toHeal = this.actor?.party ? [this.actor.party.owner!, ...(this.actor.party.party ?? [])] : [this.actor];
+          new RestApp(this.document.name, toHeal).render(true);
         },
         "add-clock": ActorSheetPTRV2.#onAddClock,
       },
@@ -794,6 +817,14 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         });
       }
     }
+  }
+
+  override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
+    const controls = fu.duplicate(super._getHeaderControls());
+
+    if(!this.actor.party) controls.findSplice(c => c.action === "open-party-sheet")
+
+    return controls;
   }
 
   override _prepareSubmitData(

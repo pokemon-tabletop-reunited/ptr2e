@@ -12,6 +12,7 @@
   "TYPES.Item.perk": "Perk",
   "TYPES.Item.species": "Species",
   "TYPES.Item.weapon": "Weapon",
+  "TYPES.Item.blueprint": "Blueprint",
   "TYPES.ActiveEffect.passive": "Passive Effect",
   "TYPES.ActiveEffect.affliction": "Affliction",
   "ITEM.AddButton": "Add",
@@ -23,7 +24,22 @@
     "Item": {
       "Plural": "Items"
     },
-    
+    "Blueprint": {
+      "FIELDS": {
+        "species": {
+          "label": "Species",
+          "hint": "A Species, Actor or Rolltable (containing Species or Actors) UUID."
+        },
+        "level": {
+          "label": "Level",
+          "hint": "The level must be a positive integer, a range in the format `a-b`, a Rolltable UUID or blank (random)."
+        },
+        "nature": {
+          "label": "Nature",
+          "hint": "The nature must be a valid nature, a UUID to a Rolltable or blank (random)."
+        }
+      }
+    },
     "ChoiceSetPrompt": {
       "Decline": "Decline",
       "DragHomebrewItem": "Drag a homebrew item here if using one instead of the above options.",
@@ -221,6 +237,7 @@
           "label": "Type",
           "hint": "The type of change.",
           "basic": "AE-Like",
+          "choice-set": "Choice Set",
           "flat-modifier": "Flat Modifier",
           "stage-modifier": "Stage Modifier",
           "percentile-modifier": "Percentile Modifier",
@@ -382,6 +399,7 @@
           "confused": "Confused",
           "hyper-mode": "Hyper Mode",
           "weary": "Weary",
+          "exposed": "Exposed",
           "blinded": "Blinded",
           "stuck": "Stuck",
           "bound": "Bound",
@@ -444,6 +462,7 @@
           "confused": "At the end of the afflicted creature's Activations, it has a 50% chance of using Fumble.",
           "hyper-mode": "While afflicted with Hyper Mode, the afflicted creature gains +20% to all of its Movement Scores, while dealing and taking 15% more damage. As well, the user’s Shadow-Type attacks gain [Crit 1], or have their [Crit X] value increase by +1. At the start of the afflicted creature’s Activations, it has:<ul><li>a 40% chance to act normally on that Activation.</li><li>a 25% chance to be Choice-Locked 1 to Shadow-Type attacks.</li><li>a 15% chance of ending its Activation and using Fumble.</li><li>a 15% chance of using Backlash.</li><li>a 5% chance to be cured of Hyper Mode.</li></ul>",
           "weary": "While a creature is Weary, its default ACC and EVA stages are based on its Weary value, X. Specifically, the default ACC and EVA stages are set to the negative sum of all X and all integers between 0 and X (Weary 1 sets the defaults to -1, 2 to -3, and 3 to -6). Weary is automatically increased by 1 when a creature Faints. When a creature has 4 or more Weary, it is unable to battle until they reduce their Weary. Weary cannot wear off on its own - a creature must deliberately Rest or consume Items such as Apples to remove Stacks of Weary.",
+          "exposed": "While a creature is Exposed, its Weary status cannot be removed by Resting.",
           "blinded": "The afflicted creature is unable to see, ocularly. The creature has their \"seeing-based\" vision options disabled (standard vision, Darkvision, X-Ray Vision, etc.) and can only perceive using their other senses (as listed in their Traits). If they do not have a way to see, or have someone guiding them, they are unable to target other creatures with Attacks or Actions.",
           "stuck": "While afflicted with Stuck, creatures may not leave the combat area. If the afflicted creature is an owned Pokemon, it cannot willingly switch out (or be switched out by another party). When a creature with the [Trainer] or [Ace] trait would gain the Stuck affliction; they instead gain Slowed X, rather than Stuck X.",
           "bound": "The afflicted creature cannot willingly use any Movement. Stacks of Bound do not decrease at the end of a creature's Activation, instead the effect that applied Bound will provide a way of removing the Bound Condition.",
@@ -589,6 +608,8 @@
       "StatsFormTitle": "Stats Manager",
       "Species": "Species Editor",
       "Inspector": "Open Data Inspector",
+      "Rest": "Rest & Relaxation",
+      "PartySheet": "Open Party Sheet",
       "Tabs": {
         "overview": {
           "label": "Overview"
@@ -687,6 +708,24 @@
     "ActorSidebar": {
       "Party": {
         "Label": "{name}'s Party"
+      }
+    },
+    "Rest": {
+      "Camp": {
+        "label": "Camp",
+        "hint": ""
+      },
+      "PkmnCenter": {
+        "label": "Pokémon Center",
+        "hint": ""
+      },
+      "HealthRestoration": {
+        "label": "% HP Restored",
+        "hint": ""
+      },
+      "Notifications": {
+        "Success": "Resting applied successfully",
+        "Info": "Resting..."
       }
     },
     "Folder": {
@@ -1950,12 +1989,10 @@
     "PokemonGeneration": {
       "Progress": {
         "Prefix": "PTR2E | Pkmn Generator | ",
-        "Step1": "Prompting User for Details...",
-        "Step2": "Determining Basic info...",
-        "Step3": "Creating Moves...",
-        "Step4": "Creating Abilities...",
-        "Step5": "Finding art...",
-        "Complete": "Pokemon Generation Complete!"
+        "Step": "Preparing Actor Data for {name}...",
+        "GenerationStep": "Creating all prepared Actors...",
+        "TokenGenerationStep": "Creating Tokens for all Generated Actors...",
+        "Complete": "Actor Generation Complete!"
       }
     },
     "Tours": {

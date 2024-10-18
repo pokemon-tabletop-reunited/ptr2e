@@ -4,11 +4,11 @@
   "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "earthbreaker",
-    "description": "",
+    "description": "<p>Effect: If the user on a surface (via @Affliction[grounded] or otherwise), they may use this attack as an Emanation. When used this way, this Attack ignores the EVA stage increases of valid targets that are Burrowed into that surface. This attack is super effective against the Ground Type.</p>",
     "traits": [
       "legendary",
-      "pass-3",
-      "contact"
+      "contact",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -17,7 +17,6 @@
         "type": "attack",
         "traits": [
           "legendary",
-          "pass-3",
           "contact",
           "pp-updated"
         ],
@@ -39,10 +38,78 @@
         "types": [
           "steel"
         ],
-        "description": "<p>Effect: If a target is Burrowed underground, Earthmover ignores range increment and the target's EVA stage increases.  This attack is Super Effective against the Ground Type.</p>",
+        "description": "<p>Effect: This attack is super effective against the Ground Type.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "earthbreaker-surface",
+        "name": "Earthbreaker (Surface)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "earthbound",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "User is touching a surface."
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "description": "<p>Trigger: User is touching a surface.</p><p>Effect: This Attack is super effective against the Ground Type.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "earthbreaker",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "earthbreaker-surface-burrow",
+        "name": "Earthbreaker (Surface+Burrow)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "earthbound",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "User is touching a surface and a valid target is Burrowed into that surface."
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "description": "<p>Trigger: User is touching a surface and a valid target is Burrowed into that surface.</p><p>Effect: This Attack ignores valid targets' EVA stage increases and is super effective against the Ground Type.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "earthbreaker",
+        "free": true,
         "slot": null
       }
     ],

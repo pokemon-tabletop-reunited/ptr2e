@@ -39,10 +39,42 @@
         "contestEffect": "",
         "free": false,
         "slot": null,
-        "description": "<p>Effect: If the target's current Hit Points are less than 50% of their Max, this Attack's Power is doubled.</p>"
+        "description": ""
+      },
+      {
+        "slug": "sand-grind-vulnerable",
+        "name": "Sand Grind (Vulnerable)",
+        "type": "attack",
+        "traits": [
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Target's current HP is less than or equal to 50% of their Max HP.</p>"
+        },
+        "category": "physical",
+        "power": 130,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "<p>Trigger: Target's current HP is less than or equal to 50% of their Max HP.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "sand-grind",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "",
+    "description": "<p>Effect: If the target's current Hit Points are less than 50% of their Max, this Attack's Power is doubled.</p>",
     "container": null,
     "grade": "B"
   },

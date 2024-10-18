@@ -10,7 +10,7 @@ import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { BasicChangeSystem, ChangeModel } from "@data";
 import { ActiveEffectPTR2e } from "@module/effects/index.ts";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem, SkillMessageSystem, CaptureMessageSystem } from "@module/chat/index.ts";
-import Traits from "static/traits.json";
+import Traits from "static/traits.json" assert { type: "json" };
 import ItemDirectoryPTR2e from "@item/sidebar.ts";
 import { StatusEffects } from "./effects.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -25,6 +25,7 @@ import { default as Skills } from "./skills.ts";
 import { CheckRoll } from "@system/rolls/check-roll.ts";
 import { AttackRoll } from "@system/rolls/attack-roll.ts";
 import { CaptureRoll } from "@system/rolls/capture-roll.ts";
+import trackableAttributes from "./trackable-token-attributes.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -97,6 +98,7 @@ export const PTRCONFIG = {
         documentClass: ItemPTR2e,
         dataModels: {
             ability: data.AbilitySystemModel,
+            blueprint: data.BlueprintSystemModel,
             consumable: data.ConsumableSystemModel,
             container: data.ContainerSystemModel,
             effect: data.EffectSystemModel,
@@ -109,6 +111,7 @@ export const PTRCONFIG = {
         },
         sheetClasses: {
             ability: [sheets.AbilitySheetPTR2e],
+            blueprint: [sheets.BlueprintSheetPTR2e],
             consumable: [sheets.ConsumableSheetPTR2e],
             container: [sheets.ContainerSheetPTR2e],
             effect: [sheets.EffectSheetPTR2e],
@@ -127,7 +130,8 @@ export const PTRCONFIG = {
     },
     Token: {
         documentClass: TokenDocumentPTR2e,
-        objectClass: TokenPTR2e
+        objectClass: TokenPTR2e,
+        trackableAttributes
     },
     Scene: {
         documentClass: ScenePTR2e,

@@ -23,4 +23,7 @@
             </fieldset>
         </section>
     </content>
+    {{#each actions}}
+      {{> action-embed action=action}}
+    {{/each}}
 </figure>

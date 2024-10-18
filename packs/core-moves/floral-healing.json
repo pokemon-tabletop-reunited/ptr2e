@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "floral-healing",
-    "description": "<p>Effect: The target recovers HP equal to 1/2 their Max HP. If Grassy Terrain is active, this Attack's instead heals 2/3 the target's Max HP.</p>",
+    "description": "<p>Effect: The target recovers 8 Ticks of HP. If Grassy Terrain is present, the target instead recovers 11 Ticks of HP and gains @Affliction[chanted] 5.</p>",
     "traits": [
       "healing",
       "environ"
@@ -15,8 +15,7 @@
         "name": "Floral Healing",
         "type": "attack",
         "traits": [
-          "healing",
-          "environ"
+          "healing"
         ],
         "range": {
           "target": "creature",
@@ -36,10 +35,43 @@
         "types": [
           "fairy"
         ],
-        "description": "<p>Effect: The target recovers HP equal to 1/2 their Max HP. If Grassy Terrain is active, this Attack's instead heals 2/3 the target's Max HP.</p>",
+        "description": "<p>Effect: The target recovers HP 8 Ticks of HP.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "floral-healing-grassy",
+        "name": "Floral Healing (Grassy)",
+        "type": "attack",
+        "traits": [
+          "healing",
+          "environ"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Grassy Terrain is present.</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "fairy"
+        ],
+        "description": "<p>Trigger: Grassy Terrain is present.</p><p>Effect: The target recovers 11 Ticks of HP and gains @Affliction[chanted] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "floral-healing",
+        "free": true,
         "slot": null
       }
     ],

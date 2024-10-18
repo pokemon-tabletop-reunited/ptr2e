@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "fusion-bolt",
-    "description": "",
+    "description": "<p>Effect: If Fusion Flare was used by another creature during the current or previous round, this attack is stronger.</p>",
     "traits": [
       "legendary"
     ],
@@ -18,7 +18,7 @@
           "pp-updated"
         ],
         "range": {
-          "target": "line",
+          "target": "wide-line",
           "distance": 8,
           "unit": "m"
         },
@@ -29,16 +29,49 @@
           "priority": null,
           "trigger": null
         },
-        "category": "special",
+        "category": "physical",
         "power": 100,
         "accuracy": 100,
         "types": [
           "electric"
         ],
-        "description": "<p>Effect: If Fusion Flare was used by another creature during the current or previous round, Fusion Bolt has its Power doubled.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },      
+      {
+        "slug": "fusion-bolt-overdrive",
+        "name": "Fusion Bolt (Overdrive)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 12,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Fusion Flare was used by another creature during the current or previous round.</p>"
+        },
+        "category": "physical",
+        "power": 200,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Trigger: Fusion Flare was used by another creature during the current or previous round.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "variant": "fusion-bolt",
         "slot": null
       }
     ],

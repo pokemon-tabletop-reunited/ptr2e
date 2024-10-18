@@ -16,36 +16,83 @@
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: While the user meets the [Desperation 1/2] Condition, their SPD stat is increased by 50%."
+        "description": "Effect: While the user meets the [Desperation 1/2] Condition, their SPD stat is increased by 50%.",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Effect: While the user meets the [Desperation 1/2] Condition, their SPD stat is increased by 50%.",
     "traits": [
       "desperation-1-2"
     ],
-    "slug": null,
-    "container": null
+    "slug": "adrenaline",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "kDYV4gKQkqKP04Mf",
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!kDYV4gKQkqKP04Mf"
+  "effects": [
+    {
+      "name": "Adrenaline",
+      "type": "passive",
+      "_id": "HiauYnS5CVgTdQRY",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.spd",
+            "value": {
+              "brackets": [
+                {
+                  "start": 1,
+                  "end": 50,
+                  "value": 1.5
+                }
+              ],
+              "field": "actor|system.health.percent"
+            },
+            "predicate": [],
+            "mode": 1,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.2",
+        "createdTime": 1728597568105,
+        "modifiedTime": 1728635592802,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

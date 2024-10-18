@@ -35,6 +35,7 @@ export default class PerkWebHUD extends foundry.applications.api.HandlebarsAppli
             return;
           }
 
+          node.state = PerkState.purchased;
           await actor.createEmbeddedDocuments("Item", [node.perk.clone({ system: { cost: node.perk.system.cost } })]);
         },
         refund: async() => {
@@ -96,7 +97,12 @@ export default class PerkWebHUD extends foundry.applications.api.HandlebarsAppli
         fields,
         traits,
         purchasable,
-        state: node?.state
+        state: node?.state,
+        actions: node?.perk?.system?.actions?.map(action => ({
+          action,
+          traits: action.traits.map(trait => ({ value: trait.slug, label: trait.label })),
+          fields: action.schema.fields,
+        }))
       }
     };
   }

@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/water_icon.svg",
   "system": {
     "slug": "depth-charge",
-    "description": "",
+    "description": "<p>Effect: This attack's Range is tripled if targeting submerged spaces. This attack ignores the valid Swimming targets' EVA stage increases and has its Power doubled against them.</p>",
     "traits": [
       "blast-2",
       "explode"
@@ -37,10 +37,44 @@
         "types": [
           "water"
         ],
-        "description": "<p>Effect: If a target is Swimming, Depth Charge ignores range increment and the target's EVA stage increases. Depth Charge's Power is doubled against Swimming targets.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "depth-charge-submerged",
+        "name": "Depth Charge (Submerged)",
+        "type": "attack",
+        "traits": [
+          "blast-2",
+          "explode",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": "Target location is submerged, and valid targets are Swimming."
+        },
+        "category": "special",
+        "power": 140,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "<p>Trigger: Target location is submerged, and valid targets are Swimming.</p><p>Effect: This Attack ignores valid targets' EVA stage increases.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "depth-charge",
+        "free": true,
         "slot": null
       }
     ],

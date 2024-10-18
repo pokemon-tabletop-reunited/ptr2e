@@ -15,7 +15,19 @@ export default function HasEmbed<BaseClass extends TemplateConstructor>(baseClas
                 return [];
             })();
 
-            const enrichedEffect = await TextEditor.enrichHTML(await renderTemplate(`systems/ptr2e/templates/items/embeds/${type}.hbs`, {...additionalProperties, document: this.parent, fields: this.schema.fields, traits}), options);
+            const actions = (() => {
+              if('actions' in this && this.actions instanceof Collection) return this.actions.map(a => {
+                const action = a as Record<string, unknown>;
+                return {
+                  action,
+                  traits: "traits" in action && (Array.isArray(action.traits) || action.traits instanceof Collection) ? action.traits.map(trait => ({value: trait.slug, label: trait.label})) : [],
+                  fields: "schema" in action && action.schema && typeof action.schema === 'object' && 'fields' in action.schema ? action.schema.fields : {}
+                }
+              });
+              return [];
+            })();
+
+            const enrichedEffect = await TextEditor.enrichHTML(await renderTemplate(`systems/ptr2e/templates/items/embeds/${type}.hbs`, {...additionalProperties, document: this.parent, fields: this.schema.fields, traits, actions}), options);
             const container = document.createElement("div");
             container.classList.add("embed",`${type}-embed`);
             container.innerHTML = enrichedEffect;

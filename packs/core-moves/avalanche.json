@@ -15,7 +15,7 @@
         "name": "Avalanche",
         "type": "attack",
         "traits": [
-          "pass-2",
+          "pass-3",
           "contact",
           "pp-updated"
         ],
@@ -26,7 +26,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 4,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -37,10 +37,44 @@
         "types": [
           "ice"
         ],
-        "description": "<p>Effect: If the user has been damaged by an Attack since its last activation, this Attack's Power doubles.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "avalanche-reprisal",
+        "name": "Avalanche (Reprisal)",
+        "type": "attack",
+        "traits": [
+          "pass-3",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user has been damaged by an Attack since its last Activation.</p>"
+        },
+        "category": "physical",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Trigger: The user has been damaged by an Attack since its last Activation.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "avalanche",
+        "free": true,
         "slot": null
       }
     ],

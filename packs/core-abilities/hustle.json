@@ -10,42 +10,99 @@
         "slug": "hustle",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: The user's Base ATK and SPATK are increased by 50%. The user's default ACC is decreased by -1."
+        "description": "Effect: The user's Base ATK and SPATK are increased by 50%. The user's default ACC is decreased by -1.",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Effect: The user's Base ATK and SPATK are increased by 50%. The user's default ACC is decreased by -1.",
     "traits": [],
-    "slug": null,
-    "container": null
+    "slug": "hustle",
+    "_migration": {
+      "version": 0.107,
+      "previous": {
+        "schema": null,
+        "foundry": "12.330",
+        "system": "0.10.0-alpha.2.4.3"
+      }
+    },
+    "slot": 1
   },
   "_id": "lAcCSoZ34eDzVLmb",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!lAcCSoZ34eDzVLmb"
+  "effects": [
+    {
+      "name": "Hustle",
+      "type": "passive",
+      "_id": "vcKXzRYr57Eojf6k",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.base",
+            "value": 1.5,
+            "mode": 1,
+            "predicate": [],
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spa.base",
+            "value": 1.5,
+            "predicate": [],
+            "mode": 1,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.battleStats.accuracy.stage",
+            "value": -1,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Item.0jBY6YLp9X1ODEhn.ActiveEffect.vcKXzRYr57Eojf6k",
+        "duplicateSource": null,
+        "coreVersion": "12.330",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1728944049730,
+        "modifiedTime": 1728945603078,
+        "lastModifiedBy": "4L126XNVDYjDoGPs"
+      }
+    }
+  ]
 }

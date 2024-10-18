@@ -4,12 +4,13 @@
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "moonblast",
-    "description": "",
+    "description": "<p>Effect: On hit, all target have a 30% chance of losing -1 ATK stage for 5 activations. If Gloomy Weather is active, this attack gains [Danger Close].</p>",
     "traits": [
       "pulse",
       "blast-2",
       "friendly",
-      "environ"
+      "environ",
+      "pp-updated"
     ],
     "actions": [
       {
@@ -20,7 +21,6 @@
           "pulse",
           "blast-2",
           "friendly",
-          "environ",
           "pp-updated"
         ],
         "range": {
@@ -41,7 +41,43 @@
         "types": [
           "fairy"
         ],
-        "description": "<p>Effect: On hit, all target have a 30% chance of losing -1 ATK stage for 5 activations. If Gloomy Weather is active, this attack gains [Danger Close].</p>",
+        "description": "<p>Effect: On hit, all target have a 30% chance of losing -1 ATK stage for 5 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "moonblast",
+        "name": "Moonblast",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "blast-2",
+          "friendly",
+          "danger-close",
+          "environ",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "Trigger: Gloomy Weather is active."
+        },
+        "category": "special",
+        "power": 95,
+        "accuracy": 100,
+        "types": [
+          "fairy"
+        ],
+        "description": "<p>Trigger: Gloomy Weather is active.</p><p>Effect: On hit, all target have a 30% chance of losing -1 ATK stage for 5 activations.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
