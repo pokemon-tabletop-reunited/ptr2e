@@ -1,0 +1,17 @@
+<section class="standard-form">
+  {{#if blueprint}}
+    <fieldset class="species">
+      <legend>Species</legend>
+      {{formField fields.species value=blueprint._source.species localize=true}}
+      {{formField fields.level value=blueprint._source.level localize=true}}
+      {{formField fields.nature value=blueprint._source.nature localize=true}}
+    </fieldset>
+  {{else}}
+    <div class="empty">
+      <span class="name">No Blueprint has been selected, please select one from the side</span>
+    </div>
+  {{/if}}
+  <div class="footer">
+    <button>Generate Actor(s)</button>
+  </div>
+</section>

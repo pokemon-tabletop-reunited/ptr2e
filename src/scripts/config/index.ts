@@ -98,6 +98,7 @@ export const PTRCONFIG = {
         documentClass: ItemPTR2e,
         dataModels: {
             ability: data.AbilitySystemModel,
+            blueprint: data.BlueprintSystemModel,
             consumable: data.ConsumableSystemModel,
             container: data.ContainerSystemModel,
             effect: data.EffectSystemModel,
@@ -110,6 +111,7 @@ export const PTRCONFIG = {
         },
         sheetClasses: {
             ability: [sheets.AbilitySheetPTR2e],
+            blueprint: [sheets.BlueprintSheetPTR2e],
             consumable: [sheets.ConsumableSheetPTR2e],
             container: [sheets.ContainerSheetPTR2e],
             effect: [sheets.EffectSheetPTR2e],

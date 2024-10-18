@@ -1,3 +1,4 @@
+/* eslint-disable no-fallthrough */
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import {
   ActorSynthetics,
@@ -238,23 +239,36 @@ class ActorPTR2e<
     super.prepareBaseData();
 
     if(this.system.shield.value > 0) this.rollOptions.addOption("self", "state:shielded");
-    if(this.system.health.value <= Math.floor(this.system.health.max * 0.25)) {
-      this.rollOptions.addOption("self", "state:desperation-3-4");
-      this.rollOptions.addOption("self", "state:desperation-1-2");
-      this.rollOptions.addOption("self", "state:desperation-1-3");
-      this.rollOptions.addOption("self", "state:desperation-1-4");
+    switch(true) {
+      case this.system.health.value <= Math.floor(this.system.health.max * 0.25): {
+        this.rollOptions.addOption("self", "state:desperation-1-4");
+      }
+      case this.system.health.value <= Math.floor(this.system.health.max * (1/3)): {
+        this.rollOptions.addOption("self", "state:desperation-1-3");
+      }
+      case this.system.health.value <= Math.floor(this.system.health.max * 0.5): {
+        this.rollOptions.addOption("self", "state:desperation-1-2");
+      }
+      case this.system.health.value <= Math.floor(this.system.health.max * 0.75): {
+        this.rollOptions.addOption("self", "state:desperation-3-4");
+      }
     }
-    else if(this.system.health.value <= Math.floor(this.system.health.max * (1/3))) {
-      this.rollOptions.addOption("self", "state:desperation-3-4");
-      this.rollOptions.addOption("self", "state:desperation-1-2");
-      this.rollOptions.addOption("self", "state:desperation-1-3");
-    }
-    else if(this.system.health.value <= Math.floor(this.system.health.max * 0.5)) {
-      this.rollOptions.addOption("self", "state:desperation-3-4");
-      this.rollOptions.addOption("self", "state:desperation-1-2");
-    }
-    else if(this.system.health.value <= Math.floor(this.system.health.max * 0.75)) {
-      this.rollOptions.addOption("self", "state:desperation-3-4");
+    switch(true) {
+      case this.system.health.value == this.system.health.max: {
+        this.rollOptions.addOption("self", "state:healthy");
+      }
+      case this.system.health.value >= Math.floor(this.system.health.max * 0.75): {
+        this.rollOptions.addOption("self", "state:intrepid-3-4");
+      }
+      case this.system.health.value >= Math.floor(this.system.health.max * 0.5): {
+        this.rollOptions.addOption("self", "state:intrepid-1-2");
+      }
+      case this.system.health.value >= Math.floor(this.system.health.max * (1/3)): {
+        this.rollOptions.addOption("self", "state:intrepid-1-3");
+      }
+      case this.system.health.value >= Math.floor(this.system.health.max * 0.25): {
+        this.rollOptions.addOption("self", "state:intrepid-1-4");
+      }
     }
   }
 
@@ -369,7 +383,7 @@ class ActorPTR2e<
 
     // Apply all changes
     for (const change of changes) {
-      change.effect.apply(this, change);
+      change.effect.apply(this, change.clone());
     }
     for (const affliction of afflictions) {
       affliction.system.apply(this);

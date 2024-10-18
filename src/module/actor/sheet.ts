@@ -34,6 +34,8 @@ import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import Clock from "@module/data/models/clock.ts";
 import ClockEditor from "@module/apps/clocks/clock-editor.ts";
 import Sortable from "sortablejs";
+import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
+import PartySheetPTR2e from "@module/apps/party-sheet.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
@@ -73,7 +75,13 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             label: "PTR2E.ActorSheet.Rest",
             action: "rest",
             visible: true,
-          }
+          },
+          {
+            icon: "fas fa-user-group",
+            label: "PTR2E.ActorSheet.PartySheet",
+            action: "open-party-sheet",
+            visible: true,
+          },
         ],
       },
       form: {
@@ -134,6 +142,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           if ([true, undefined].includes(this.actor.flags.ptr2e?.sheet?.perkFlash))
             await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
           game.ptr.web.open(this.actor);
+        },
+        "open-party-sheet": async function (this: ActorSheetPTRV2) {
+          if (!this.actor.party) return;
+          new PartySheetPTR2e({folder: this.actor.folder!}).render(true);
         },
         "edit-movelist": function (this: ActorSheetPTRV2) {
           new KnownActionsApp(this.actor).render(true);
@@ -805,6 +817,14 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         });
       }
     }
+  }
+
+  override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
+    const controls = fu.duplicate(super._getHeaderControls());
+
+    if(!this.actor.party) controls.findSplice(c => c.action === "open-party-sheet")
+
+    return controls;
   }
 
   override _prepareSubmitData(

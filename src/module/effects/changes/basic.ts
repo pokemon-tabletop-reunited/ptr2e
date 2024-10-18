@@ -208,7 +208,7 @@ export default class BasicChangeSystem extends ChangeModel {
         if (typeof change !== "number") {
             return new foundry.data.validation.DataModelValidationFailure({ message: `Invalid value \`${change}\` for mode ${upgrade ? "Upgrade" : "Downgrade"}, value must be a number.`, invalidValue: change, fallback: false });
         }
-        if (!(typeof current === "number" || current === undefined)) {
+        if (!(typeof current === "number" || current === undefined || current === null)) {
             return new foundry.data.validation.DataModelValidationFailure({ message: `Unable to apply mode ${upgrade ? "Upgrade" : "Downgrade"} on \`${current}\`. This is likely due to an invalid Key.`,invalidValue: current, fallback: false });
         }
 
