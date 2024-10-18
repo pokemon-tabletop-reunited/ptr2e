@@ -2,8 +2,13 @@ import { CollectionField } from "../fields/collection-field.ts";
 import { Nature, natures } from "@scripts/config/natures.ts";
 import { RecursiveEmbeddedDataField } from "../fields/recursive-embedded-data-field.ts";
 import { SlugField } from "../fields/slug-field.ts";
+import { ItemPTR2e } from "@item";
+import SpeciesSystem from "@item/data/species.ts";
+import { ActorPTR2e } from "@actor";
 
 class Blueprint extends foundry.abstract.DataModel {
+  static LOCALIZATION_PREFIXES = ["PTR2E.Blueprint"];
+
   static override defineSchema(recursion = 0): foundry.data.fields.DataSchema {
     const fields = foundry.data.fields;
 
@@ -35,8 +40,10 @@ class Blueprint extends foundry.abstract.DataModel {
       species: new fields.DocumentUUIDField({
         required: true, nullable: true, initial: null, embedded: false, validate: (value) => {
           const uuid = fu.parseUuid(String(value));
-          return uuid && (uuid.documentType === "RollTable" || uuid.documentType === "Item");
-        }, validationError: "The species must be a valid (Species) Item or Rolltable UUID or null."
+          return uuid && (uuid.documentType === "RollTable" || uuid.documentType === "Item" || uuid.documentType === "Actor");
+        }, validationError: "The species must be a valid (Species) Item, Actor, Rolltable UUID or null.",
+        label: "PTR2E.Blueprint.FIELDS.species.label",
+        hint: "PTR2E.Blueprint.FIELDS.species.hint"
       }),
       level: new fields.StringField({
         required: true, initial: null, nullable: true, trim: true, blank: false, validate: (value) => {
@@ -67,7 +74,9 @@ class Blueprint extends foundry.abstract.DataModel {
           }
 
           return false;
-        }, validationError: "The level must be a positive integer, a range in the format `a-b`, a Rolltable UUID or null."
+        }, validationError: "The level must be a positive integer, a range in the format `a-b`, a Rolltable UUID or null.",
+        label: "PTR2E.Blueprint.FIELDS.level.label",
+        hint: "PTR2E.Blueprint.FIELDS.level.hint"
       }),
       nature: new fields.StringField({
         required: true, initial: null, nullable: true, blank: false, trim: true, validate: (value) => {
@@ -87,10 +96,13 @@ class Blueprint extends foundry.abstract.DataModel {
           }
 
           return false;
-        }, validationError: "The nature must be a valid nature, a UUID to a Rolltable or null."
+        }, validationError: "The nature must be a valid nature, a UUID to a Rolltable or null.",
+        label: "PTR2E.Blueprint.FIELDS.nature.label",
+        hint: "PTR2E.Blueprint.FIELDS.nature.hint"
+        
       }),
       evs: new fields.SchemaField({
-        uuid: new fields.DocumentUUIDField({ required: false, nullable: false, embedded: false, type: "RollTable", initial: undefined}),
+        uuid: new fields.DocumentUUIDField({ required: false, nullable: false, embedded: false, type: "RollTable", initial: undefined }),
         bst: new fields.BooleanField({ required: true, nullable: false, initial: false }),
         percent: new fields.NumberField({ required: false, nullable: false, initial: undefined, min: 0, max: 100, validationError: "The BST Randomness Percentage must be a positive integer between 0 and 100." }),
         hp: new fields.StringField({ required: false, initial: undefined, nullable: false, blank: true, trim: true, validate: evsValidation, validationError: "HP EV must be a positive integer between 0 and 200, or a range in the format `a-b`. " }),
@@ -136,6 +148,8 @@ class Blueprint extends foundry.abstract.DataModel {
           chance: new fields.NumberField({ required: false, nullable: false, initial: 50, min: 0, max: 100, validationError: "The chance must be a positive integer between 0 and 100." }),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.master.label", },),
       }),
+      owner: new fields.BooleanField({ required: true, initial: false, nullable: false, label: "PTR2E.FIELDS.owner.label", hint: "PTR2E.FIELDS.owner.hint" }),
+      sort: new fields.NumberField({ required: true, initial: 0, nullable: false }),
       ...(
         recursion < 2
           ? { children: new CollectionField(new RecursiveEmbeddedDataField(this, {}, { recursion }), "id") }
@@ -148,9 +162,30 @@ class Blueprint extends foundry.abstract.DataModel {
     console.log("intellisense func")
 
   }
+
+  preparedAsyncData = false;
+
+  async prepareAsyncData(): Promise<void> {
+    if (this.preparedAsyncData) return;
+
+    // const type = fu.parseUuid(this._source.species).documentType;
+
+    const doc = await fromUuid<ItemPTR2e<SpeciesSystem> | RollTable | ActorPTR2e>(this._source.species);
+
+    const { name, img } = doc ?? { name: "Invalid UUID", img: "icons/svg/hazard.svg" };
+
+    this.name = name;
+    this.img = img;
+
+
+    this.preparedAsyncData = true;
+  }
 }
 
 interface Blueprint extends foundry.abstract.DataModel, ModelPropsFromSchema<BlueprintSchema> {
+  name: string;
+  img: ImageFilePath | null;
+
   _source: SourceFromSchema<BlueprintSchema>;
 }
 
@@ -163,6 +198,8 @@ interface BlueprintSchema extends foundry.data.fields.DataSchema {
   evs: foundry.data.fields.SchemaField<EVSSchema, SourceFromSchema<EVSSchema>, ModelPropsFromSchema<EVSSchema>>;
   skills: foundry.data.fields.SchemaField<SkillsSchema, SourceFromSchema<SkillsSchema>, ModelPropsFromSchema<SkillsSchema>>;
   abilities: foundry.data.fields.SchemaField<AbilitiesSchema, SourceFromSchema<AbilitiesSchema>, ModelPropsFromSchema<AbilitiesSchema>>;
+  owner: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+  sort: foundry.data.fields.NumberField<number, number, true, false, true>;
 }
 
 interface EVSSchema extends foundry.data.fields.DataSchema {
@@ -178,7 +215,7 @@ interface EVSSchema extends foundry.data.fields.DataSchema {
 
 interface SkillsSchema extends foundry.data.fields.DataSchema {
   data: foundry.data.fields.ArrayField<
-    foundry.data.fields.SchemaField<SkillSchema>, 
+    foundry.data.fields.SchemaField<SkillSchema>,
     foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<SkillSchema>>[],
     foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<SkillSchema>>[],
     true, false, true

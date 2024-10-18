@@ -1,0 +1,28 @@
+<aside>
+  {{!-- {{#unless (eq type "team")}} --}}
+    <section class="main">
+      {{#if team.owner}}
+        {{> avatar img=team.owner.img name=team.owner.name id=team.owner.id}}
+      {{else}}
+        <div class="avatar empty">
+          <span class="name">No Party lead</span>
+        </div>
+      {{/if}}
+    </section>
+  {{!-- {{/unless}} --}}
+  <section class="team">
+    {{#each team.members}}
+      {{> avatar }}
+    {{/each}}
+  </section>
+  <section class="footer">
+    <span>Drop Species/Rolltable here to add a new creature.</span>
+  </section>
+</aside>
+
+{{#*inline "avatar"}}
+  <div class="blueprint avatar" data-blueprint-id="{{id}}">
+    <img src="{{img}}" alt="{{name}}">
+    <span class="name">{{name}}</span>
+  </div>
+{{/inline}}

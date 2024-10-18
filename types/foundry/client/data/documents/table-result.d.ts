@@ -10,6 +10,8 @@ declare global {
         /** A path reference to the icon image used to represent this result */
         get icon(): string;
 
+        type: ValueOf<typeof CONST.TABLE_RESULT_TYPES>
+
         /**
          * Prepare a string representation for the result which (if possible) will be a dynamic link or otherwise plain
          * text
