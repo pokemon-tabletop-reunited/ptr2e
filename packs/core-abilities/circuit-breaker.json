@@ -1,0 +1,95 @@
+{
+  "name": "Circuit Breaker",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "hunter",
+          "electric"
+        ],
+        "name": "Circuit Breaker",
+        "slug": "circuit-breaker",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: The user's attacks deal 50% more damage to Electric-Type creatures.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user's attacks deal 50% more damage to Electric-Type creatures.",
+    "traits": [
+      "hunter",
+      "electric"
+    ],
+    "slug": "circuit-breaker",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "4Z45Kvu6jz1wp56P",
+  "effects": [
+    {
+      "name": "Circuit Breaker",
+      "type": "passive",
+      "_id": "ze96hzn36gL7N6H1",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "attack-damage",
+            "value": 50,
+            "predicate": [
+              "target:trait:electric"
+            ],
+            "label": "Circuit Breaker",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729292047819,
+        "modifiedTime": 1729292079481,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
