@@ -71,8 +71,13 @@ export class DocumentSheetV2<TDocument extends foundry.abstract.Document> extend
         }
       }
       for (const element of htmlQueryAll(content, ".item-controls a")) {
+        if(element.classList.contains("effect-edit") || element.dataset.action == "edit-action") continue;
         (element as HTMLButtonElement).disabled = true;
         element.attributes.setNamedItem(document.createAttribute("disabled"));
+      }
+      for(const element of htmlQueryAll(content, "tags.tagify")) {
+        (element as HTMLInputElement).readOnly = true;
+        element.attributes.setNamedItem(document.createAttribute("readOnly"));
       }
     }
     // Attach drag-and-drop handlers
