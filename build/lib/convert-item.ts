@@ -320,7 +320,7 @@ function perkToMarkdown(perk: any): MarkdownResult | null {
 
     return {
         metadata,
-        markdown: `- **AP Cost**: ${perk.system.cost}\n- **Connections**: ${connections.join(
+        markdown: `- **Prerequisites**: ${perk.system.prerequisites?.join(", ")}\n- **AP Cost**: ${perk.system.cost}\n- **Connections**: ${connections.join(
             ", "
         )}\n\n### Effect\n${perk.system.description}${
             actionStrings.length > 0 ? `\n\n## Perk Actions\n${actionStrings.join("\n\n")}` : ""
