@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "echoed-voice",
-    "description": "",
+    "description": "<p>Effect: This attack's Power increases by +40 and its Cone range increases by +1m each time this attack has been used by any creature before the end of the round, up to a maximum of 200 Power and 6m Cone.</p>",
     "traits": [
       "sonic"
     ],
@@ -24,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -35,15 +35,147 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: This attack's Power increases by +40 and its Cone range increases by +1m each time this attack has been used by any creature before the end of the round, up to a maximum of 200 Power and 6m Cone.</p>",
+        "description": "",
         "contestType": "",
         "contestEffect": "",
         "free": false,
         "slot": null
+      },
+      {
+        "slug": "echoed-voice-1st-echo",
+        "name": "Echoed Voice (1st Echo)",
+        "type": "attack",
+        "traits": [
+          "sonic",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>A creature has resolved Echoed Voice this Round.</p>"
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: A creature has resolved Echoed Voice this Round.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "echoed-voice",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "echoed-voice-2nd-echo",
+        "name": "Echoed Voice (2nd Echo)",
+        "type": "attack",
+        "traits": [
+          "sonic",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>A creature has resolved Echoed Voice (1st Echo) this Round.</p>"
+        },
+        "category": "special",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: A creature has resolved Echoed Voice (1st Echo) this Round.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "echoed-voice",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "echoed-voice-3rd-echo",
+        "name": "Echoed Voice (3rd Echo)",
+        "type": "attack",
+        "traits": [
+          "sonic",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>A creature has resolved Echoed Voice (2nd Echo) this Round.</p>"
+        },
+        "category": "special",
+        "power": 160,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: A creature has resolved Echoed Voice (2nd Echo) this Round.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "echoed-voice",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "echoed-voice-full-blast",
+        "name": "Echoed Voice (Full Blast)",
+        "type": "attack",
+        "traits": [
+          "sonic",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>A creature has resolved Echoed Voice (3rd Echo) this Round.</p>"
+        },
+        "category": "special",
+        "power": 200,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: A creature has resolved Echoed Voice (3rd Echo) this Round.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "echoed-voice",
+        "free": true,
+        "slot": null
       }
     ],
     "container": null,
-    "grade": "B"
+    "grade": "C"
   },
   "_id": "HH6HljL6RxmB1N2n",
   "effects": []

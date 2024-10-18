@@ -96,7 +96,7 @@
         "poison",
         "major-affliction"
       ],
-      "stacks": 5
+      "stacks": 8
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.blight"
   },
@@ -112,14 +112,17 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.spe.stage",
-          "value": -1,
-          "mode": 2
+          "key": "system.attributes.spe.base",
+          "value": 0.5,
+          "predicate": [],
+          "mode": 1,
+          "priority": null,
+          "ignored": false
         },
         {
           "type": "grant-effect",
           "value": "slowed"
-        }
+        }        
       ],
       "formula": null,
       "type": null,
@@ -461,7 +464,7 @@
     "id": "bound",
     "name": "PTR2E.Effect.Statuses.Labels.bound",
     "img": "icons/svg/aura.svg",
-    "type": "passive",
+    "type": "affliction",
     "system": {
       "changes": [],
       "traits": [
@@ -746,17 +749,6 @@
           "type": "stage-modifier",
           "key": "all-crit",
           "value": 2,
-          "predicate": [],
-          "label": "Duel - targeting Duel partner",
-          "mode": 2,
-          "priority": null,
-          "ignored": false
-        },
-        {
-          "type": "percentile-modifier",
-          "key": "attack-power",
-          "value": 50,
-          "predicate": [],
           "label": "Duel - targeting Duel partner",
           "mode": 2,
           "priority": null,
@@ -767,7 +759,11 @@
           "key": "all-damage",
           "label": "Duel - non-Duel target",
           "value": -33.33
-        }
+        },
+        {
+          "type": "grant-effect",
+          "value": "stuck"
+        }        
       ],
       "formula": null,
       "type": null,
@@ -1339,7 +1335,10 @@
     "id": "resolved",
     "name": "PTR2E.Effect.Statuses.Labels.resolved",
     "img": "icons/svg/fire-shield.svg",
-    "type": "passive",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
     "system": {
       "changes": [
         {
@@ -1367,7 +1366,10 @@
     "id": "boosted",
     "name": "PTR2E.Effect.Statuses.Labels.boosted",
     "img": "icons/svg/light.svg",
-    "type": "passive",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
     "system": {
       "changes": [
         {
@@ -1395,7 +1397,10 @@
     "id": "rapid",
     "name": "PTR2E.Effect.Statuses.Labels.rapid",
     "img": "icons/svg/wingfoot.svg",
-    "type": "passive",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
     "system": {
       "changes": [],
       "removeOnRecall": true,
@@ -1410,7 +1415,10 @@
     "id": "strong",
     "name": "PTR2E.Effect.Statuses.Labels.strong",
     "img": "icons/svg/statue.svg",
-    "type": "passive",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
     "system": {
       "changes": [
         {
@@ -1436,7 +1444,10 @@
     "id": "agile",
     "name": "PTR2E.Effect.Statuses.Labels.agile",
     "img": "icons/svg/thrust.svg",
-    "type": "passive",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
     "system": {
       "changes": [
         {
@@ -1462,7 +1473,10 @@
     "id": "precise",
     "name": "PTR2E.Effect.Statuses.Labels.precise",
     "img": "icons/svg/sun.svg",
-    "type": "passive",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
     "system": {
       "changes": [
         {
@@ -1484,7 +1498,10 @@
     "id": "evasive",
     "name": "PTR2E.Effect.Statuses.Labels.evasive",
     "img": "icons/svg/upgrade.svg",
-    "type": "passive",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
     "system": {
       "changes": [
         {
@@ -1506,7 +1523,10 @@
     "id": "gambit",
     "name": "PTR2E.Effect.Statuses.Labels.gambit",
     "img": "icons/svg/upgrade.svg",
-    "type": "passive",
+    "type": "affliction",
+    "duration": {
+      "turns": 2
+    },
     "system": {
       "changes": [
         {
@@ -1518,7 +1538,7 @@
         {
           "type": "basic",
           "key": "system.battleStats.critRate.stage",
-          "value": -1,
+          "value": 2,
           "mode": 2
         }
       ],
