@@ -4,7 +4,7 @@
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "round",
-    "description": "<p>Effect: If another creature on the Field has resolved this attack during the current Round, this attack's Power is doubled and its Range increases.</p>",
+    "description": "<p>Effect: When another creature on the Field resolves this attack, the user may declare this attack as an Interrupt, attacking with doubled Power and increased Range.</p>",
     "traits": [
       "sonic"
     ],
@@ -18,13 +18,13 @@
           "pp-updated"
         ],
         "range": {
-          "target": "cone",
-          "distance": 3,
+          "target": "emanation",
+          "distance": 1,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
           "trigger": null
@@ -47,19 +47,20 @@
         "type": "attack",
         "traits": [
           "sonic",
+          "interrupt-1",
           "pp-updated"
         ],
         "range": {
-          "target": "cone",
-          "distance": 5,
+          "target": "emanation",
+          "distance": 3,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
+          "powerPoints": 3,
           "delay": null,
           "priority": null,
-          "trigger": "<p>Another creature on the Field has resolved this attack during the current Round.</p>"
+          "trigger": "<p>Another creature on the Field resolves Round or Round (Double).</p>"
         },
         "category": "special",
         "power": 120,
@@ -67,7 +68,7 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Trigger: Another creature on the Field has resolved this attack during the current Round.</p>",
+        "description": "<p>Another creature on the Field resolves Round or Round (Double).</p>",
         "contestType": "",
         "contestEffect": "",
         "variant": "round",

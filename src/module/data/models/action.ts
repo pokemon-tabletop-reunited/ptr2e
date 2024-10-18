@@ -113,7 +113,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     if (!this.variant) return null;
     return this.item.actions.get(this.variant) ?? null;
   }
-
+  
   get css(): { style: string; class: string; } {
     return {
       style: "",

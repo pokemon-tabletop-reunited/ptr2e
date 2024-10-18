@@ -11,3 +11,4 @@ export { default as WeaponSheetPTR2e } from "./weapon.ts";
 export { default as PTUSheet } from "./ptu-item.ts";
 export { default as ItemSheetPTR2e } from "./base.ts";
 export { default as EffectSheetPTR2e } from "./effect.ts";
+export { default as BlueprintSheetPTR2e } from "./blueprint.ts";

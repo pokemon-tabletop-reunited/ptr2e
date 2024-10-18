@@ -1,7 +1,7 @@
 import { ActorPTR2e } from "@actor";
-import { ItemSheetPTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
+import { ItemSheetPTR2e, ItemSourcePTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
 import { ActionPTR2e, RollOptionManager, Trait } from "@data";
-import { ActiveEffectPTR2e } from "@effects";
+import { ActiveEffectPTR2e, EffectSourcePTR2e } from "@effects";
 import { ItemFlagsPTR2e } from "./data/system.ts";
 import { ActionsCollections } from "@actor/actions.ts";
 import { SpeciesSystemModel } from "./data/index.ts";
@@ -228,8 +228,54 @@ class ItemPTR2e<
         return [];
       }
     }
+    
+    async function processSources(sources: ItemSourcePTR2e[]) {
+      const outputItemSources: ItemSourcePTR2e[] = [];
 
-    return super.createDocuments<TDocument>(data, context);
+      for (const source of sources) {
+        if (!source.effects?.length) continue;
+        const item = new CONFIG.Item.documentClass(source as ItemPTR2e["_source"], { parent: actor }) as ItemPTR2e;
+        const effects = source.effects.map((e: unknown) => new CONFIG.ActiveEffect.documentClass(e as ActiveEffectPTR2e["_source"], { parent: item }) as ActiveEffectPTR2e);
+
+        // Process effect preCreate changes for all effects that are going to be added
+        // This may add additional effects or items (such as via GrantItem)
+
+        const outputEffectSources: EffectSourcePTR2e[] = effects.map((e) => e._source as EffectSourcePTR2e);
+
+        for (const effect of effects) {
+          const effectSource = effect._source as EffectSourcePTR2e;
+          const changes = effect.system.changes ?? [];
+
+          for (const change of changes) {
+            const changeSource = change._source;
+            await change.preCreate?.({
+              effectSource,
+              changeSource,
+              pendingEffects: outputEffectSources,
+              pendingItems: outputItemSources,
+              tempItems: [],
+              context: {}
+            })
+          }
+        }
+
+        source.effects = outputEffectSources;
+      }
+
+      return outputItemSources;
+    }
+     
+    const outputItemSources = await processSources(sources as ItemSourcePTR2e[]);
+
+    if (!(context.keepId || context.keepEmbeddedIds)) {
+      for (const source of sources) {
+        source._id = fu.randomID();
+      }
+      context.keepEmbeddedIds = true;
+      context.keepId = true;
+    }
+
+    return super.createDocuments<TDocument>(sources.concat(outputItemSources) as PreCreate<TDocument["_source"]>[], context);
   }
 
   /**
@@ -312,37 +358,37 @@ class ItemPTR2e<
     return processed ? super.importFromJSON(processed) : this;
   }
 
-  static override async deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]> & {pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[]}): Promise<TDocument[]>;
-  static override async deleteDocuments(ids: string[] = [], context: DocumentModificationContext<ActorPTR2e | null> & {pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[]} = {}): Promise<foundry.abstract.Document[]> {
+  static override async deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]> & { pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[] }): Promise<TDocument[]>;
+  static override async deleteDocuments(ids: string[] = [], context: DocumentModificationContext<ActorPTR2e | null> & { pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[] } = {}): Promise<foundry.abstract.Document[]> {
     ids = Array.from(new Set(ids));
     const actor = context.parent;
-    if(actor) {
+    if (actor) {
       const items = ids.flatMap(id => actor.items.get(id) ?? []) as ItemPTR2e<ItemSystemPTR, ActorPTR2e>[];
       const effects = context.pendingEffects ? [...context.pendingEffects] : [] as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[];
 
       // TODO: Logic for container deletion
 
       // Run Change Model pre-delete callbacks
-      for(const item of [...items]) {
-        if(item.effects.size) {
-          for(const effect of item.effects) {
-            for(const change of (effect as ActiveEffectPTR2e).changes) {
-              await change.preDelete?.({pendingItems: items, context});
+      for (const item of [...items]) {
+        if (item.effects.size) {
+          for (const effect of item.effects) {
+            for (const change of (effect as ActiveEffectPTR2e).changes) {
+              await change.preDelete?.({ pendingItems: items, context });
             }
 
             await processGrantDeletions(effect as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects)
           }
         }
         else {
-          if(item.grantedBy && item.grantedBy instanceof ActiveEffectPTR2e) {
+          if (item.grantedBy && item.grantedBy instanceof ActiveEffectPTR2e) {
             await processGrantDeletions(item.grantedBy as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects);
           }
         }
       }
-      if(effects.length) {
+      if (effects.length) {
         const effectIds = Array.from(new Set(effects.map(e => e.id))).filter(id => actor.effects.has(id) && !context.pendingEffects?.find(e => e.id === id));
-        if(effectIds.length) {
-          await ActiveEffectPTR2e.deleteDocuments(effectIds, {pendingItems: items, parent: actor});
+        if (effectIds.length) {
+          await ActiveEffectPTR2e.deleteDocuments(effectIds, { pendingItems: items, parent: actor });
         }
       }
       ids = Array.from(new Set(items.map(i => i.id))).filter(id => actor.items.has(id));

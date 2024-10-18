@@ -140,7 +140,7 @@ export default class ItemSheetPTR2e<
 
   override async _prepareContext() {
     const traits = (() => {
-      if ("traits" in this.document.system) {
+      if ("traits" in this.document.system && this.document.system.traits) {
         const traits = [];
         for (const trait of this.document.system.traits) {
           traits.push({

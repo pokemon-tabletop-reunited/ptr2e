@@ -30,7 +30,8 @@
           "powerPoints": 1
         },
         "description": "Effect: The target gains @Affliction[evasive] 1.",
-        "type": "generic"
+        "type": "generic",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "name": "Evasive! (Self)",
@@ -41,7 +42,6 @@
         ],
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
@@ -49,11 +49,14 @@
           "powerPoints": 1
         },
         "description": "Effect: The target gains @Affliction[evasive] 2.",
-        "type": "generic"
+        "type": "generic",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "evasive-style",
-    "traits": [],
+    "traits": [
+      "command"
+    ],
     "node": {
       "i": 5,
       "j": -86,
@@ -74,30 +77,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "DejTHLN3FViZzzeE",
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.DejTHLN3FViZzzeE"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920529293,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!DejTHLN3FViZzzeE"
+  "effects": []
 }

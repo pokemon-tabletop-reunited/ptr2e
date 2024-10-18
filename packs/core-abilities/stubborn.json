@@ -12,43 +12,87 @@
         "slug": "stubborn",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Effect: While the user meets the [Desperation 1/2] Condition, the user's ATK Stat is increased by 50%.</p>"
+        "description": "<p>Effect: While the user meets the [Desperation 1/2] Condition, the user's ATK Stat is increased by 50%.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Effect: While the user meets the [Desperation 1/2] Condition, the user's ATK Stat is increased by 50%.</p>",
     "traits": [
       "desperation-1-2"
     ],
-    "slug": null,
-    "container": null
+    "slug": "stubborn",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "3dPT8q5a6qkcXhNM",
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!3dPT8q5a6qkcXhNM"
+  "effects": [
+    {
+      "name": "Stubborn",
+      "type": "passive",
+      "_id": "mQ7VB0n20AbEdJF0",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk",
+            "value": {
+              "brackets": [
+                {
+                  "start": 1,
+                  "end": 50,
+                  "value": 1.5
+                }
+              ],
+              "field": "actor|system.health.percent"
+            },
+            "mode": 1,
+            "predicate": [],
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1728935479729,
+        "modifiedTime": 1728935558126,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

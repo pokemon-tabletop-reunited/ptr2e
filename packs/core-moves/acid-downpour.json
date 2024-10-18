@@ -4,10 +4,7 @@
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
     "slug": "acid-downpour",
-    "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[poison] 5.</p><p>Requirement: [Poison] Z-Crystal as an Accessory Item and a Poison-Type attack on the user's Active List.</p>",
-    "traits": [
-      "zenith"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "acid-downpour",
@@ -23,9 +20,6 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p>"
         },
         "category": "physical",
@@ -35,14 +29,70 @@
           "poison"
         ],
         "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[poison] 5.</p><p>Requirement: [Poison] Z-Crystal as an Accessory Item and a Poison-Type attack on the user's Active List.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "grade": "E"
   },
   "_id": "sa3BXQkz6DnQXTYW",
-  "effects": []
+  "effects": [
+    {
+      "name": "Acid Downpour",
+      "type": "passive",
+      "_id": "xBwRoys2yAI3WDAY",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "acid-downpour-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729162119150,
+        "modifiedTime": 1729162251601,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

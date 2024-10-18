@@ -97,7 +97,12 @@ export default class PerkWebHUD extends foundry.applications.api.HandlebarsAppli
         fields,
         traits,
         purchasable,
-        state: node?.state
+        state: node?.state,
+        actions: node?.perk?.system?.actions?.map(action => ({
+          action,
+          traits: action.traits.map(trait => ({ value: trait.slug, label: trait.label })),
+          fields: action.schema.fields,
+        }))
       }
     };
   }

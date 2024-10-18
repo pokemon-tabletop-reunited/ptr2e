@@ -317,7 +317,7 @@ export class ApplicationV2<
      *                                                      ApplicationV1#render signature.
      * @returns {Promise<ApplicationV2>}            A Promise which resolves to the rendered Application instance
      */
-    render(options: boolean | TRenderOptions, _options?: TRenderOptions): Promise<this>;
+    render(options: boolean | Partial<TRenderOptions>, _options?: TRenderOptions): Promise<this>;
 
     /* -------------------------------------------- */
 

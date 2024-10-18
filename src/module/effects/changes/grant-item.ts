@@ -383,7 +383,7 @@ interface OnDeleteActions {
 }
 
 export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item: Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, pendingItems: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[], pendingEffects: ActiveEffectPTR2e[]): Promise<void> {
-  const actor = effect.targetsActor() ? effect.parent : (effect.parent as ItemPTR2e<ItemSystemPTR, ActorPTR2e>).actor;
+  const actor = effect.targetsActor() ? effect.target : (effect.parent as ItemPTR2e<ItemSystemPTR, ActorPTR2e>).actor;
 
   const granter = actor.effects.get((item ? item.flags.ptr2e.grantedBy?.id : effect.flags.ptr2e.grantedBy?.id) ?? "") as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>;
   const parentGrant = Object.values(granter?.flags.ptr2e.itemGrants ?? {}).find(g => g.id === effect.id || g.id === item?.id);
@@ -398,7 +398,7 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e
   }
 
   for (const grant of grants) {
-    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e);
+    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e) ?? (item?.effects.get(grant.id) as ActiveEffectPTR2e);
     if (grantee?.flags.ptr2e.grantedBy?.id !== effect.id) continue;
 
     // @ts-expect-error - Checks will succeed.
@@ -417,7 +417,7 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e
   }
 
   for (const grant of grants) {
-    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e);
+    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e) ?? (item?.effects.get(grant.id) as ActiveEffectPTR2e);
     if (grantee?.flags.ptr2e.grantedBy?.id !== effect.id) continue;
 
     // @ts-expect-error - Checks will succeed.
@@ -440,7 +440,7 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e
   }
 
   for (const grant of grants) {
-    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e);
+    const grantee = (actor.items.get(grant.id) as Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>) ?? (actor.effects.get(grant.id) as ActiveEffectPTR2e) ?? (item?.effects.get(grant.id) as ActiveEffectPTR2e);
     if (grantee?.flags.ptr2e.grantedBy?.id !== effect.id) continue;
 
     // Unset the grant flag and leave the granted item on the actor
