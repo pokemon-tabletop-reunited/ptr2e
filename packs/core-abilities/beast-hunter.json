@@ -1,0 +1,95 @@
+{
+  "name": "Beast Hunter",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "hunter",
+          "normal"
+        ],
+        "name": "Beast Hunter",
+        "slug": "beast-hunter",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: The user's attacks deal 50% more damage to Normal-Type creatures.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user's attacks deal 50% more damage to Normal-Type creatures.",
+    "traits": [
+      "hunter",
+      "normal"
+    ],
+    "slug": "beast-hunter",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "gsGfi4g0xeQVNpRm",
+  "effects": [
+    {
+      "name": "Beast Hunter",
+      "type": "passive",
+      "_id": "qiTRPLF9oDopHMvX",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "attack-damage",
+            "value": 50,
+            "predicate": [
+              "target:trait:normal"
+            ],
+            "label": "Beast Hunter",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729291595717,
+        "modifiedTime": 1729291625073,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
