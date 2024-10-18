@@ -5042,6 +5042,104 @@ body .application.sheet .form-group {
   color: var(--text-dark);
   flex: 1;
 }
+.application.sheet.blueprint .window-content {
+  padding: 0;
+  display: grid;
+  grid-template-columns: 20% auto;
+}
+.application.sheet.blueprint fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+.application.sheet.blueprint aside[data-application-part="side"] {
+  padding: 0.25rem;
+  border-right: 1px solid var(--border-theme-color);
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.blueprint aside[data-application-part="side"] section {
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.blueprint aside[data-application-part="side"] section .avatar {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+  flex: 0 0 calc(36px + 0.25rem);
+  padding: 0.25rem 0;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.blueprint aside[data-application-part="side"] section .avatar.drag-preview,
+.application.sheet.blueprint aside[data-application-part="side"] section .avatar:last-child {
+  border-bottom: unset;
+}
+.application.sheet.blueprint aside[data-application-part="side"] section .avatar img {
+  flex: 0 0 36px;
+  height: 36px;
+  width: 36px;
+  object-fit: scale-down;
+  border: unset;
+  align-self: center;
+}
+.application.sheet.blueprint aside[data-application-part="side"] section .avatar.empty {
+  width: 100%;
+}
+.application.sheet.blueprint aside[data-application-part="side"] section .avatar.empty span.name {
+  font-style: italic;
+}
+.application.sheet.blueprint aside[data-application-part="side"] section .avatar span.name {
+  flex: 1;
+  text-align: center;
+}
+.application.sheet.blueprint aside[data-application-part="side"] section.main {
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid var(--border-theme-color);
+  position: relative;
+}
+.application.sheet.blueprint aside[data-application-part="side"] section.main .avatar {
+  min-height: 48px;
+}
+.application.sheet.blueprint aside[data-application-part="side"] section.main .avatar img {
+  flex: 0 0 48px;
+  height: 48px;
+  width: 48px;
+  object-fit: scale-down;
+  border: unset;
+  align-self: center;
+}
+.application.sheet.blueprint aside[data-application-part="side"] section.team {
+  overflow: auto;
+  flex: 1 1 0;
+}
+.application.sheet.blueprint aside[data-application-part="side"] section.footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border-theme-color);
+  padding-top: 0.25rem;
+}
+.application.sheet.blueprint aside[data-application-part="side"] section.footer span {
+  text-align: center;
+  font-style: italic;
+  font-size: small;
+}
+.application.sheet.blueprint section[data-application-part="main"] {
+  padding: 0.5rem;
+}
+.application.sheet.blueprint section[data-application-part="main"] .footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.application.sheet.blueprint section[data-application-part="main"] .footer button {
+  flex: 0 0 30%;
+}
 .application .standard-form input[type="checkbox"] {
   --checkbox-background-color: #3d343f;
 }

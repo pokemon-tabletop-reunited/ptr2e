@@ -369,7 +369,7 @@ class ActorPTR2e<
 
     // Apply all changes
     for (const change of changes) {
-      change.effect.apply(this, change);
+      change.effect.apply(this, change.clone());
     }
     for (const affliction of afflictions) {
       affliction.system.apply(this);

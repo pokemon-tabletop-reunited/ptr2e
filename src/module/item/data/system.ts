@@ -4,6 +4,7 @@ import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
 
 type ItemType =
     | "ability"
+    | "blueprint"
     | "consumable"
     | "container"
     | "effect"
