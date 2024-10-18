@@ -4,7 +4,7 @@
   "_id": "IUAdsck8n65uFtIr",
   "img": "systems/ptr2e/img/svg/grass_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "allure",
     "traits": [
       "friendly",
       "priority-2"
@@ -27,42 +27,86 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 5,
-          "delay": null,
           "priority": 2
         },
-        "variant": null,
         "types": [
           "grass"
         ],
         "category": "status",
-        "power": null,
         "accuracy": 90,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
         "description": "<p>Effect: All valid targets are @Affliction[taunted] 5 and @Affliction[charmed] 5.</p>"
       }
     ],
-    "description": "",
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.328",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.5.2",
-    "createdTime": 1720809169909,
-    "modifiedTime": 1720809607935,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Allure",
+      "type": "passive",
+      "_id": "b5sh6agi3uCagjaa",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "allure-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.tauntedcondiitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "allure-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.charmedcondiitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729164751085,
+        "modifiedTime": 1729164861905,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

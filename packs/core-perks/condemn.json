@@ -10,7 +10,9 @@
         "name": "Condemn",
         "slug": "condemn-1",
         "description": "<p>You may spend 3PP to condemn a target within 5m as a Simple Action. This is considered an Attack with the [Social] trait, and may only be used once per Activation. The target loses -1 DEF and SPDEF stages for 3 Activations.</p>",
-        "traits": [],
+        "traits": [
+          "social"
+        ],
         "type": "attack",
         "range": {
           "target": "creature",
@@ -25,12 +27,15 @@
         "types": [
           "untyped"
         ],
-        "category": "physical"
+        "category": "physical",
+        "accuracy": 100
       }
     ],
     "slug": "condemn",
     "description": "<p>You may spend 3PP to condemn a target within 5m as a Simple Action. This is considered an Attack with the [Social] trait, and may only be used once per Activation. The target loses -1 DEF and SPDEF stages for 3 Activations.</p>",
-    "traits": [],
+    "traits": [
+      "social"
+    ],
     "prerequisites": [
       "Conversation 30",
       "Psychology 30"
@@ -63,6 +68,10 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "effects": []

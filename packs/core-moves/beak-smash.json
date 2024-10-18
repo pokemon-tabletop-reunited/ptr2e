@@ -4,7 +4,7 @@
   "_id": "Khoz32xXscQk7coq",
   "img": "systems/ptr2e/img/svg/flying_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "beak-smash",
     "traits": [
       "crushing",
       "contact"
@@ -26,43 +26,76 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "powerPoints": 3
         },
-        "variant": null,
         "types": [
           "flying"
         ],
         "category": "physical",
         "power": 85,
         "accuracy": 90,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
         "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[splinter] 5.</p>"
       }
     ],
-    "description": "",
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 1000000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1719597107843,
-    "modifiedTime": 1719971994938,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Beak Smash",
+      "type": "passive",
+      "_id": "9fmW2Gb4madAS0j4",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "beak-smash-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729170082496,
+        "modifiedTime": 1729170110131,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

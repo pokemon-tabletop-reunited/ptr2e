@@ -4,7 +4,6 @@
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
   "system": {
     "slug": "blaze-kick",
-    "description": "",
     "traits": [
       "kick",
       "crit-1",
@@ -28,10 +27,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "physical",
         "power": 85,
@@ -40,15 +36,69 @@
           "fire"
         ],
         "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[burn] 5.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "gArkopcQviud9bHg",
-  "effects": []
+  "effects": [
+    {
+      "name": "Blaze Kick",
+      "type": "passive",
+      "_id": "gdDInaKOBd6zc2wr",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "blaze-kick-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729171262553,
+        "modifiedTime": 1729171295624,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

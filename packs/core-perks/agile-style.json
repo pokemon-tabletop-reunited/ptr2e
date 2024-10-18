@@ -30,7 +30,8 @@
           "powerPoints": 1
         },
         "description": "Effect: The target gains @Affliction[agile] 1.",
-        "type": "generic"
+        "type": "generic",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "name": "Agile! (Self)",
@@ -41,7 +42,6 @@
         ],
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
@@ -49,11 +49,14 @@
           "powerPoints": 1
         },
         "description": "Effect: The target gains @Affliction[agile] 2.",
-        "type": "generic"
+        "type": "generic",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "agile-style",
-    "traits": [],
+    "traits": [
+      "command"
+    ],
     "node": {
       "i": -23,
       "j": -57,
@@ -75,30 +78,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "9bYyVaMgkigTKOc7",
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.9bYyVaMgkigTKOc7"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920307010,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!9bYyVaMgkigTKOc7"
+  "effects": []
 }

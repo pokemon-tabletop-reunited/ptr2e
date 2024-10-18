@@ -4,7 +4,6 @@
   "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "slug": "ancient-power",
-    "description": "",
     "traits": [],
     "actions": [
       {
@@ -21,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "special",
         "power": 60,
@@ -33,15 +29,69 @@
           "rock"
         ],
         "description": "<p>Effect: After this attack resolves, the user has a 10% chance of gaining +1 ATK, DEF, SPATK, SPDEF and SPD stage for 5 activations.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "12C8q5imCTlohajn",
-  "effects": []
+  "effects": [
+    {
+      "name": "Ancient Power",
+      "type": "passive",
+      "_id": "10MXGMu9EH5m3hy7",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "ancient-power-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.rMNLqloV5nLmCLrZ",
+            "predicate": [],
+            "chance": 10,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729165951274,
+        "modifiedTime": 1729165986831,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

@@ -26,7 +26,8 @@
         "range": {
           "target": "self",
           "unit": "m"
-        }
+        },
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "improved-overland-3",
@@ -51,9 +52,65 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "n1LzpGDj2SyqyLS4",
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": []
+  "effects": [
+    {
+      "name": "Improved Overland",
+      "type": "passive",
+      "_id": "8kocPdxiq4mXvbM6",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.movement.overland.value",
+            "value": 2,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Actor.zzmajvZtYY3MnEp5.Item.pWRJu6d1FvCFfOOO.ActiveEffect.evt0BhlYhiMcSDwC",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729182336985,
+        "modifiedTime": 1729182336985,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

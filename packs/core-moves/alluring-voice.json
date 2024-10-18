@@ -4,7 +4,6 @@
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "alluring-voice",
-    "description": "",
     "traits": [
       "sonic"
     ],
@@ -24,10 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "special",
         "power": 80,
@@ -36,10 +32,7 @@
           "fairy"
         ],
         "description": "<p>Effect: If the target has received a stage effect that has raised at least one of its stages since the user's last activation, the target is @Affliction[confused] 5.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       },
       {
         "slug": "alluring-voice-booster",
@@ -56,10 +49,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "special",
         "power": 80,
@@ -68,15 +58,69 @@
           "fairy"
         ],
         "description": "<p>Effect:On hit, the target is @Affliction[confused] 5.  This attack may only be used if the target has received a stage effect that has raised at least one of its stages since the user's last Activation.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "7cBto2sa0EtOT7zB",
-  "effects": []
+  "effects": [
+    {
+      "name": "Alluring Voice (Booster)",
+      "type": "passive",
+      "_id": "BdBCMUUEJ5icbitB",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "alluring-voice-booster-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729164934856,
+        "modifiedTime": 1729164971743,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

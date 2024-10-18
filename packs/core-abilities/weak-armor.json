@@ -12,41 +12,89 @@
         "cost": {
           "activation": "free",
           "powerPoints": 1,
-          "trigger": "The user is hit by a Physical-Category attack.",
-          "delay": null,
-          "priority": null
+          "trigger": "The user is hit by a Physical-Category attack."
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user is hit by a Physical-Category attack. \nEffect: The user loses -1 DEF stage and gains +1 SPD stage for 5 activations."
+        "description": "Trigger: The user is hit by a Physical-Category attack. \nEffect: The user loses -1 DEF stage and gains +1 SPD stage for 5 activations.",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Trigger: The user is hit by a Physical-Category attack. \nEffect: The user loses -1 DEF stage and gains +1 SPD stage for 5 activations.",
     "traits": [],
-    "slug": null,
-    "container": null
+    "slug": "weak-armor",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "NlLmGi66S7A0TTjg",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!NlLmGi66S7A0TTjg"
+  "effects": [
+    {
+      "name": "Weak Armor",
+      "type": "passive",
+      "_id": "52m7GUThCrwSyo4e",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "physical-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.bdYCJcqjMNqTpJJQ",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "physical-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729246091402,
+        "modifiedTime": 1729246157575,
+        "lastModifiedBy": "kwBsHDVcAxdQpMPC"
+      }
+    }
+  ]
 }

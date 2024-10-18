@@ -21,7 +21,12 @@
           "activation": "free"
         },
         "type": "passive",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "slug": "acrobat",
@@ -47,30 +52,69 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "MDkJ0KhnAvqw0v3J",
   "img": "systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.MDkJ0KhnAvqw0v3J"
+  "effects": [
+    {
+      "name": "Acrobat",
+      "type": "passive",
+      "_id": "n57YCl0DLkpYbOm2",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "acrobatics-check",
+            "value": 10,
+            "predicate": [
+              "Manual"
+            ],
+            "label": "Running Start?",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729174484032,
+        "modifiedTime": 1729174565254,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
     }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920527631,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!MDkJ0KhnAvqw0v3J"
+  ]
 }
