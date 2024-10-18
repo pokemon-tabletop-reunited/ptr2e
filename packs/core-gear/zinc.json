@@ -1,0 +1,134 @@
+{
+  "name": "Zinc",
+  "type": "consumable",
+  "system": {
+    "crafting": {
+      "skill": "medicine",
+      "spans": 5,
+      "materials": [
+        "3x-grepa-berry",
+        "2x-balm-mushrooms",
+        "5x-grade-c-berries"
+      ]
+    },
+    "equipped": {
+      "slot": "belt",
+      "carryType": "stowed",
+      "handsHeld": null
+    },
+    "grade": "S",
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100
+    },
+    "rarity": "rare",
+    "consumableType": "restorative",
+    "traits": [
+      "held",
+      "restorative",
+      "consumable",
+      "natural",
+      "empowering"
+    ],
+    "description": "The target gains +1 SPDEF IV.",
+    "quantity": 6,
+    "slug": "zinc",
+    "charges": {
+      "value": 1,
+      "max": 1
+    },
+    "_migration": {
+      "version": 0.107,
+      "previous": {
+        "schema": null,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.2.4.2"
+      }
+    }
+  },
+  "_id": "H4EBNmV2mMyvTBi9",
+  "effects": [
+    {
+      "name": "+1 SpDef IV",
+      "type": "passive",
+      "_id": "yySo4M3GM8JWCtX9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.spd.ivs",
+            "value": {
+              "brackets": [
+                {
+                  "start": 1,
+                  "end": 1,
+                  "value": 1
+                },
+                {
+                  "start": 2,
+                  "end": 2,
+                  "value": 2
+                },
+                {
+                  "start": 3,
+                  "end": 3,
+                  "value": 3
+                },
+                {
+                  "start": 4,
+                  "end": 4,
+                  "value": 4
+                },
+                {
+                  "start": 5,
+                  "end": 999,
+                  "value": 5
+                }
+              ],
+              "field": "item|system.quantity"
+            },
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": 0,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.2",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXab"
+}
