@@ -6,6 +6,7 @@ import { HandlebarsRenderOptions } from "types/foundry/common/applications/handl
 import { htmlQuery } from "@utils";
 import Sortable from "sortablejs";
 import { SpeciesSystemModel } from "@item/data/index.ts";
+import { ActorPTR2e } from "@actor";
 
 export default class BlueprintSheet extends foundry.applications.api.HandlebarsApplicationMixin(DocumentSheetV2<ItemPTR2e<BlueprintSystem>>) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -41,8 +42,16 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
     },
   };
 
-  constructor(options: foundry.applications.api.DocumentSheetConfiguration) {
+  constructor(options: foundry.applications.api.DocumentSheetConfiguration & {
+    generation?: {
+      x: number,
+      y: number,
+      temporary: boolean,
+      canvas: Canvas,
+    }
+  }) {
     super(options);
+    this.generation = options.generation ?? null;
 
     this.prepareTeamData();
   }
@@ -51,6 +60,13 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
     return this.document.system;
   }
 
+  generation: {
+    x: number,
+    y: number,
+    temporary: boolean
+    canvas: Canvas,
+    parent?: ActorPTR2e,
+  } | null = null;
   selection: string | null = null
   team: {
     owner: Blueprint | null,
@@ -108,7 +124,8 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
       team: this.team,
       type: this.team.owner ? "party" : this.team.members.length > 1 ? "team" : "individual",
       blueprint: this.selected,
-      fields: Blueprint.schema.fields
+      fields: Blueprint.schema.fields,
+      isGenerator: !!this.generation,
     };
   }
 
@@ -130,6 +147,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           doc?.sheet?.render(true);
         })
         element.addEventListener("contextmenu", async (event) => {
+          if (this.generation) return;
           const id = ((event.target as HTMLElement).closest("[data-blueprint-id]") as HTMLElement)?.dataset.blueprintId;
           if (!id) return;
 
@@ -154,6 +172,8 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
           });
         });
       });
+
+      if (this.generation) return;
 
       const ownerElement = htmlQuery(htmlElement, "section.main");
       if (ownerElement) {
@@ -318,6 +338,24 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
 
           return item;
         }
+        case "Actor": {
+          const actor = await fromUuid<ActorPTR2e>(data.uuid);
+          if (!actor) {
+            ui.notifications.error("The dropped actor could not be found");
+            return;
+          }
+
+          if (this.generation) {
+            this.generation.parent = actor;
+            if(!this.team) return null;
+            // @ts-expect-error - Mock for UI purposes.
+            this.team.owner = {name: actor.name, img: actor.img};
+            this.render({ parts: ["side"] });
+            return null;
+          }
+
+          return actor;
+        }
       }
       return null;
     })();
@@ -329,8 +367,47 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
   }
 
   static async #onSubmit(
-    this: BlueprintSheet
+    this: BlueprintSheet,
+    event: SubmitEvent | Event,
+    form: HTMLFormElement,
+    formData: FormDataExtended
   ) {
-    console.log("Submit");
+    console.log("Submit", event, form, formData);
+
+    const closeAndGenerate = event.type === "submit";
+
+    // If this isn't a temporary generation, update the current selected blueprint based on form data
+    if (!this.generation?.temporary && this.selected) {
+      const updateData = fu.duplicate(formData.object);
+      for (const key in updateData) {
+        if (updateData[key] === "") {
+          delete updateData[key];
+        }
+      }
+      await this.blueprint.updateChildren([{
+        _id: this.selected.id,
+        ...updateData
+      }]);
+    }
+
+    if (!closeAndGenerate) return;
+
+    if (this.generation?.temporary) {
+      const blueprint = this.selected;
+      if (!blueprint) return;
+
+      const updateData = fu.duplicate(formData.object);
+      for (const key in updateData) {
+        if (updateData[key] === "") {
+          delete updateData[key];
+        }
+      }
+      fu.mergeObject(blueprint, updateData, { inplace: true });
+    }
+
+    const generation = this.generation ? {...this.generation, team: !this.team?.owner && (this.team?.members?.length ?? 0) > 1} : null;
+
+    this.blueprint.generate(generation);
+    this.close();
   }
 }

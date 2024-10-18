@@ -176,7 +176,7 @@ class Blueprint extends foundry.abstract.DataModel {
 
     this.name = name;
     this.img = img;
-
+    this.doc = doc;
 
     this.preparedAsyncData = true;
   }
@@ -185,6 +185,7 @@ class Blueprint extends foundry.abstract.DataModel {
 interface Blueprint extends foundry.abstract.DataModel, ModelPropsFromSchema<BlueprintSchema> {
   name: string;
   img: ImageFilePath | null;
+  doc: ItemPTR2e<SpeciesSystem> | RollTable | ActorPTR2e | null;
 
   _source: SourceFromSchema<BlueprintSchema>;
 }
@@ -193,8 +194,8 @@ interface BlueprintSchema extends foundry.data.fields.DataSchema {
   id: foundry.data.fields.DocumentIdField<string, true, false, true>;
   children: CollectionField<foundry.data.fields.SchemaField<BlueprintSchema>>;
   species: foundry.data.fields.DocumentUUIDField<SpeciesBlueprint, true, true, true>;
-  level: foundry.data.fields.StringField<LevelBlueprint, true, true, false, true>;
-  nature: foundry.data.fields.StringField<NatureBlueprint, true, true, false, true>;
+  level: foundry.data.fields.StringField<LevelBlueprint, LevelBlueprint, true, true, true>;
+  nature: foundry.data.fields.StringField<NatureBlueprint, NatureBlueprint, true, true, true>;
   evs: foundry.data.fields.SchemaField<EVSSchema, SourceFromSchema<EVSSchema>, ModelPropsFromSchema<EVSSchema>>;
   skills: foundry.data.fields.SchemaField<SkillsSchema, SourceFromSchema<SkillsSchema>, ModelPropsFromSchema<SkillsSchema>>;
   abilities: foundry.data.fields.SchemaField<AbilitiesSchema, SourceFromSchema<AbilitiesSchema>, ModelPropsFromSchema<AbilitiesSchema>>;

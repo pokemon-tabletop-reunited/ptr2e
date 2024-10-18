@@ -11,6 +11,9 @@ declare global {
         get icon(): string;
 
         type: ValueOf<typeof CONST.TABLE_RESULT_TYPES>
+        documentCollection?: string;
+        documentId?: string;
+        text?: string;
 
         /**
          * Prepare a string representation for the result which (if possible) will be a dynamic link or otherwise plain

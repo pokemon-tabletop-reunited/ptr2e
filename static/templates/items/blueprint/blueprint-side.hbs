@@ -15,9 +15,11 @@
       {{> avatar }}
     {{/each}}
   </section>
+  {{#unless isGenerator}}
   <section class="footer">
     <span>Drop Species/Rolltable here to add a new creature.</span>
   </section>
+  {{/unless}}
 </aside>
 
 {{#*inline "avatar"}}
