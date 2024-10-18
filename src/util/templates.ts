@@ -2,6 +2,7 @@ export class HandlebarTemplates {
     static templates = Object.freeze({
         "stats-chart": "systems/ptr2e/templates/partials/stats-chart.hbs",
         "attack-embed": "systems/ptr2e/templates/partials/attack-embed.hbs",
+        "action-embed": "systems/ptr2e/templates/items/embeds/action.hbs",
         "effect-traits": "systems/ptr2e/templates/partials/effect-traits.hbs",
         "trait-partial": "systems/ptr2e/templates/partials/trait.hbs",
         // All Item Sheet Embeds

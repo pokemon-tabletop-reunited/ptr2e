@@ -16,7 +16,6 @@
                 <legend>
                     Quality & Value
                 </legend>
-                <label for="cost">{{localize fields.cost.label}}</label> <span>{{document.system.cost}} IP</span>
                 <label for="grade">{{localize fields.grade.label}}</label> <span>{{document.system.grade}}</span>
                 <label for="rarity">{{localize fields.rarity.label}}</label> <span>{{document.system.rarity}}</span>
             </fieldset>
@@ -40,4 +39,7 @@
             </fieldset>
         </section>
     </content>
+    {{#each actions}}
+      {{> action-embed action=action}}
+    {{/each}}
 </figure>

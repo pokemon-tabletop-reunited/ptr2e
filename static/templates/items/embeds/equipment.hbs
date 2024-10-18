@@ -21,7 +21,6 @@
                 <legend>
                     Quality & Value
                 </legend>
-                <label for="cost">{{localize fields.cost.label}}</label> <span>{{document.system.cost}} IP</span>
                 <label for="grade">{{localize fields.grade.label}}</label> <span>{{document.system.grade}}</span>
                 <label for="rarity">{{localize fields.rarity.label}}</label> <span>{{document.system.rarity}}</span>
             </fieldset>
@@ -30,8 +29,8 @@
                     Crafting
                 </legend>
                 <label for="crafting.skill">{{localize fields.crafting.fields.skill.label}}</label> <span>{{document.system.crafting.skill}}</span>
-                <label for="crafting.time.value">{{localize fields.crafting.fields.time.fields.value.label}}</label> <span>{{document.system.crafting.time.value}}</span>
-                <label for="crafting.time.unit">{{localize fields.crafting.fields.time.fields.unit.label}}</label> <span>{{document.system.crafting.time.unit}}</span>
+                <label for="crafting.spans">{{localize fields.crafting.fields.spans.label}}</label> <span>{{document.system.crafting.spans}}</span>
+                <label for="crafting.materials">{{localize fields.crafting.fields.materials.label}}</label> <span>{{#each document.system.crafting.materials}}{{this}}{{#unless @last}}, {{/unless}}{{/each}}</span>
             </fieldset>
         </section>
         <section class="item-description">
@@ -49,4 +48,7 @@
             </fieldset>
         </section>
     </content>
+    {{#each actions}}
+      {{> action-embed action=action}}
+    {{/each}}
 </figure>
