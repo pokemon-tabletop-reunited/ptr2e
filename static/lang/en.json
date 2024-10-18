@@ -12,6 +12,7 @@
   "TYPES.Item.perk": "Perk",
   "TYPES.Item.species": "Species",
   "TYPES.Item.weapon": "Weapon",
+  "TYPES.Item.blueprint": "Blueprint",
   "TYPES.ActiveEffect.passive": "Passive Effect",
   "TYPES.ActiveEffect.affliction": "Affliction",
   "ITEM.AddButton": "Add",
@@ -23,7 +24,22 @@
     "Item": {
       "Plural": "Items"
     },
-    
+    "Blueprint": {
+      "FIELDS": {
+        "species": {
+          "label": "Species",
+          "hint": "A Species, Actor or Rolltable (containing Species or Actors) UUID."
+        },
+        "level": {
+          "label": "Level",
+          "hint": "The level must be a positive integer, a range in the format `a-b`, a Rolltable UUID or blank (random)."
+        },
+        "nature": {
+          "label": "Nature",
+          "hint": "The nature must be a valid nature, a UUID to a Rolltable or blank (random)."
+        }
+      }
+    },
     "ChoiceSetPrompt": {
       "Decline": "Decline",
       "DragHomebrewItem": "Drag a homebrew item here if using one instead of the above options.",
@@ -221,6 +237,7 @@
           "label": "Type",
           "hint": "The type of change.",
           "basic": "AE-Like",
+          "choice-set": "Choice Set",
           "flat-modifier": "Flat Modifier",
           "stage-modifier": "Stage Modifier",
           "percentile-modifier": "Percentile Modifier",
@@ -592,6 +609,7 @@
       "Species": "Species Editor",
       "Inspector": "Open Data Inspector",
       "Rest": "Rest & Relaxation",
+      "PartySheet": "Open Party Sheet",
       "Tabs": {
         "overview": {
           "label": "Overview"
@@ -1971,12 +1989,10 @@
     "PokemonGeneration": {
       "Progress": {
         "Prefix": "PTR2E | Pkmn Generator | ",
-        "Step1": "Prompting User for Details...",
-        "Step2": "Determining Basic info...",
-        "Step3": "Creating Moves...",
-        "Step4": "Creating Abilities...",
-        "Step5": "Finding art...",
-        "Complete": "Pokemon Generation Complete!"
+        "Step": "Preparing Actor Data for {name}...",
+        "GenerationStep": "Creating all prepared Actors...",
+        "TokenGenerationStep": "Creating Tokens for all Generated Actors...",
+        "Complete": "Actor Generation Complete!"
       }
     },
     "Tours": {

@@ -91,6 +91,15 @@
   border: 1px solid var(--color-light-6);
   border-radius: 8px;
 }
+.perk-hud section[data-application-part="perk"] figure header {
+  margin-bottom: 0.25rem;
+}
+.perk-hud section[data-application-part="perk"] figure header h2 {
+  margin-bottom: 0.25rem;
+}
+.perk-hud section[data-application-part="perk"] figure header.traits {
+  margin: 0.25rem 0;
+}
 .perk-hud section[data-application-part="perk"] figure .perk-embed {
   border: unset;
   border-radius: unset;
@@ -102,6 +111,18 @@
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+.perk-hud section[data-application-part="perk"] figure figure fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+.perk-hud section[data-application-part="perk"] figure figure fieldset p {
+  margin: 0;
 }
 .perk-hud section[data-application-part="perk"] footer {
   display: flex;

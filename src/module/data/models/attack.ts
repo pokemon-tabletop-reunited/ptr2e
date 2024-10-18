@@ -79,6 +79,15 @@ export default class AttackPTR2e extends ActionPTR2e {
     };
   }
 
+  get isFree(): boolean {
+    if(!this.variant) return this.free;
+    
+    const original = (this.original as AttackPTR2e);
+    if(original.free) return true;
+    if(original.slot !== null && this.actor?.attacks.actions[original.slot] == original) return true;
+    return false;
+  }
+
   static override validateJoint(data: AttackPTR2e["_source"]) {
     const category = data.category as PokemonCategory;
     const power = data.power as number;

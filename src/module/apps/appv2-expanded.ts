@@ -496,8 +496,13 @@ export class ItemSheetV2Expanded<
         }
       }
       for (const element of htmlQueryAll(content, ".item-controls a")) {
+        if(element.classList.contains("effect-edit") || element.dataset.action == "edit-action") continue;
         (element as HTMLButtonElement).disabled = true;
         element.attributes.setNamedItem(document.createAttribute("disabled"));
+      }
+      for(const element of htmlQueryAll(content, "tags.tagify")) {
+        (element as HTMLInputElement).readOnly = true;
+        element.attributes.setNamedItem(document.createAttribute("readOnly"));
       }
     }
   }

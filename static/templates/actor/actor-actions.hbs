@@ -38,7 +38,7 @@
             </div>
             <div class="action-container other-attacks other scroll">
                 {{#each actor.actions.attack as |action|}}
-                    {{#if action.free}}
+                    {{#if action.isFree}}
                         {{> action action=action direction="LEFT"}}
                     {{/if}}
                 {{/each}}
