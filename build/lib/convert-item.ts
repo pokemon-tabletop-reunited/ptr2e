@@ -72,7 +72,7 @@ function actionsToActionsStrings(actions: any[]): string[] {
         actions
             ?.map((action: any) =>
                 action
-                    ? `- **Type**: ${formatSlug(action.type)}\n${
+                    ? `### ${action.name}\n- **Type**: ${formatSlug(action.type)}\n${
                           action.types ? `- **Types**: ${action.types}\n` : ""
                       }${action.category ? `- **Category**: ${action.category}\n` : ""}${
                           action.power ? `- **Power**: ${action.power}\n` : ""
@@ -116,7 +116,7 @@ function abilityToMarkdown(ability: any): MarkdownResult {
     return {
         metadata,
         markdown: `\n\n### Effect\n${ability.system.description}${
-            actionStrings.length > 0 ? `\n\n## Ability Actions\n${actionStrings.join("\n\n")}` : ""
+            actionStrings.length > 0 ? `\n\n## Ability Actions\n${actionStrings.join("\n\n\n")}` : ""
         }`,
         path,
     };
@@ -152,7 +152,7 @@ function consumableToMarkdown(consumable: any): MarkdownResult | null {
             craftingString ? `${craftingString}\n` : ""
         }\n### Description\n${consumable.system.description}${
             actionStrings.length > 0
-                ? `\n\n## Consumable Actions\n${actionStrings.join("\n\n")}`
+                ? `\n\n## Consumable Actions\n${actionStrings.join("\n\n\n")}`
                 : ""
         }`,
         path,
@@ -193,7 +193,7 @@ function equipmentToMarkdown(equipment: any): MarkdownResult {
             equipment.system.description
         }${
             actionStrings.length > 0
-                ? `\n\n## Equipment Actions\n${actionStrings.join("\n\n")}`
+                ? `\n\n## Equipment Actions\n${actionStrings.join("\n\n\n")}`
                 : ""
         }`,
         path,
@@ -228,7 +228,7 @@ function gearToMarkdown(gear: any): MarkdownResult {
             gear.system.rarity
         }\n${flingString}\n${craftingString ? `${craftingString}\n` : ""}\n### Description\n${
             gear.system.description
-        }${actionStrings.length > 0 ? `\n\n## Gear Actions\n${actionStrings.join("\n\n")}` : ""}`,
+        }${actionStrings.length > 0 ? `\n\n## Gear Actions\n${actionStrings.join("\n\n\n")}` : ""}`,
         path,
     };
 }
@@ -323,7 +323,7 @@ function perkToMarkdown(perk: any): MarkdownResult | null {
         markdown: `- **Prerequisites**: ${perk.system.prerequisites?.join(", ")}\n- **AP Cost**: ${perk.system.cost}\n- **Connections**: ${connections.join(
             ", "
         )}\n\n### Effect\n${perk.system.description}${
-            actionStrings.length > 0 ? `\n\n## Perk Actions\n${actionStrings.join("\n\n")}` : ""
+            actionStrings.length > 0 ? `\n\n## Perk Actions\n${actionStrings.join("\n\n\n")}` : ""
         }`,
         path,
     };
@@ -370,7 +370,12 @@ function speciesToMarkdown(species: any): MarkdownResult | null {
         Object.entries(species.system.abilities).reduce<string>( //@ts-expect-error
             (acc, [type, abilities]: [string, string[]]) => {
                 return `${acc}#### ${capitalize(type)}\n${abilities
-                    .map((a: any) => `- ${a}`)
+                    .map((a: any) => `- [${formatSlug(a?.slug)}](/${getMarkdownPath({
+                      type: "abilities",
+                      category: getCategory(a?.slug),
+                      title: a?.slug,
+                      extension: false,
+                    })})`)
                     .join("\n")}\n`;
             },
             ""
@@ -484,7 +489,7 @@ function weaponToMarkdown(weapon: any): MarkdownResult {
             weapon.system.rarity
         }\n${flingString}\n${craftingString ? `${craftingString}\n` : ""}\n### Description\n${
             weapon.system.description
-        }${actionStrings.length > 0 ? `\n\n## Weapon Actions\n${actionStrings.join("\n\n")}` : ""}`,
+        }${actionStrings.length > 0 ? `\n\n## Weapon Actions\n${actionStrings.join("\n\n\n")}` : ""}`,
         path,
     };
 }
