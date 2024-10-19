@@ -103,6 +103,12 @@ export default class TooltipsPTR2e {
           return this._onDataElementTooltip();
       }
     }
+    if(game.tooltip.element?.getAttribute("data-tooltip")) {
+      switch(game.tooltip.element?.getAttribute("data-tooltip")) {
+        case "range-tooltip": 
+          return this._onRangeTooltip();
+      }
+    }
 
     return false;
   }
@@ -396,6 +402,19 @@ export default class TooltipsPTR2e {
         game.tooltip.dismissLockedTooltips();
       });
     }
+
+    return 500;
+  }
+
+  async _onRangeTooltip() {
+    const element = game.tooltip.element;
+    if (!element) return false;
+
+    const range = (element as HTMLSelectElement).value ?? element.dataset.rangeValue;
+    if (!range) return false;
+
+    this.tooltip.innerHTML = await TextEditor.enrichHTML(game.i18n.localize(`PTR2E.Ranges.${range}`));
+    requestAnimationFrame(() => this._positionTooltip(game.tooltip.element?.dataset.tooltipDirection as TooltipDirections | undefined || TooltipManager.TOOLTIP_DIRECTIONS.DOWN));
 
     return 500;
   }

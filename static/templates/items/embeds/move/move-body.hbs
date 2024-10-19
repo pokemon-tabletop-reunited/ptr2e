@@ -35,7 +35,7 @@
 
             <fieldset class="range">
                 <label for="range.target">{{localize fields.range.fields.target.label}}</label>
-                <span>{{formatSlug attack.range.target}}</span>
+                <span data-tooltip="range-tooltip" data-range-value="{{attack.range.target}}">{{formatSlug attack.range.target}}</span>
                 <label for="range.distance">{{localize fields.range.fields.distance.label}}</label>
                 <span>{{attack.range.distance}}m</span>
             </fieldset>

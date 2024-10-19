@@ -186,6 +186,7 @@ export class ActionEditor<
       fields: this.action.schema.fields,
       traits,
       enrichedDescription: await TextEditor.enrichHTML(this.action.description),
+      rangeData: {tooltip: "range-tooltip", range: this.action?.range?.target},
     };
   }
 
@@ -324,6 +325,11 @@ export class ActionEditor<
         element.attributes.setNamedItem(document.createAttribute("readOnly"));
       }
     }
+    // else {
+    //   for (const element of htmlQueryAll(this.element, "select[name='range.target']")) {
+    //     element.tooltip
+    //   }
+    // }
   }
 
   /** @override */
