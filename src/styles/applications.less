@@ -50,6 +50,10 @@ body {
     }
 }
 
+.application prose-mirror {
+  min-height: 200px;
+}
+
 .application.sheet {
     multi-select, string-tags, string-tags-ptr2e {
         .tags {
@@ -1374,12 +1378,6 @@ body {
                 padding: 1rem;
 
                 &[data-tab=details] {
-
-                    .editor,
-                    .editor .editor-content {
-                        min-height: 200px;
-                    }
-
                     .base-stats {
                         display: grid;
                         grid-template-columns: 1fr 1fr;
@@ -3398,7 +3396,7 @@ body {
               p {
                 text-align: center;
               }
-              
+
               .center {
                 display: flex;
                 flex-direction: row;
