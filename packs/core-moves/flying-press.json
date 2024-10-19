@@ -1,0 +1,46 @@
+{
+  "name": "Flying Press",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+  "system": {
+    "slug": "flying-press",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "flying-press",
+        "name": "Flying Press",
+        "type": "attack",
+        "traits": [
+          "crushing",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "fighting",
+          "flying"
+        ],
+        "description": "<p>Effect: This attack is considered to be both Fighting and Flying Type.</p>",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg"
+      }
+    ],
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "2Udm3YgdsJBQ3WNF",
+  "effects": []
+}
