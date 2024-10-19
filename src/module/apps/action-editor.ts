@@ -2,6 +2,7 @@ import { ItemPTR2e, ItemSystemsWithActions } from "@item";
 import Tagify from "@yaireo/tagify";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
+import { Trait } from "@data";
 
 export class ActionEditor<
   TDocument extends ItemPTR2e<ItemSystemsWithActions>,
@@ -115,7 +116,7 @@ export class ActionEditor<
     { inplace: false }
   );
 
-  #allTraits: { value: string; label: string }[] | undefined;
+  #allTraits: { value: string; label: string, type?: Trait["type"] }[] | undefined;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     header: {
@@ -170,6 +171,7 @@ export class ActionEditor<
           traits.push({
             value: trait.slug,
             label: trait.label,
+            type: trait.type,
           });
         }
         return traits;
@@ -177,7 +179,7 @@ export class ActionEditor<
       return [];
     })();
 
-    this.#allTraits = game.ptr.data.traits.map((trait) => ({ value: trait.slug, label: trait.label }));
+    this.#allTraits = game.ptr.data.traits.map((trait) => ({ value: trait.slug, label: trait.label, type: trait.type }));
 
     return {
       document: this.document,
@@ -253,7 +255,7 @@ export class ActionEditor<
               return `
                             <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
                 tagData
-              )}>
+              )}style="${Trait.bgColors[tagData.type || "default"] ? `--tag-bg: ${Trait.bgColors[tagData.type || "default"]!["bg"]}; --tag-hover: ${Trait.bgColors[tagData.type || "default"]!["hover"]}; --tag-border-color: ${Trait.bgColors[tagData.type || "default"]!["border"]};` : ""}">
                             <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
                             <div>
                                 <span class='tagify__tag-text'>

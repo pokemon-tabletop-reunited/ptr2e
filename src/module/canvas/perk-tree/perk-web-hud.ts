@@ -1,6 +1,7 @@
 import { ApplicationV2Expanded } from "@module/apps/appv2-expanded.ts";
 import { PerkState } from "./perk-node.ts";
 import Tagify from "@yaireo/tagify";
+import { Trait } from "@data";
 
 export default class PerkWebHUD extends foundry.applications.api.HandlebarsApplicationMixin(
   ApplicationV2Expanded
@@ -80,12 +81,13 @@ export default class PerkWebHUD extends foundry.applications.api.HandlebarsAppli
   override async _prepareContext() {
     const node = game.ptr.web.hudNode?.node;
     const fields = node?.perk.system.schema.fields;
-    const traits = node?.perk.system.traits.map((trait) => ({ value: trait.slug, label: trait.label }));
+    const traits = node?.perk.system.traits.map((trait) => ({ value: trait.slug, label: trait.label, type: trait.type }));
     const purchasable = node?.state === PerkState.available;
 
     this.#allTraits = game.ptr.data.traits.map((trait) => ({
       value: trait.slug,
       label: trait.label,
+      type: trait.type,
     }));
 
     return {
@@ -107,7 +109,7 @@ export default class PerkWebHUD extends foundry.applications.api.HandlebarsAppli
     };
   }
 
-  #allTraits: { value: string; label: string }[] | undefined;
+  #allTraits: { value: string; label: string, type?: Trait["type"] }[] | undefined;
 
   override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
@@ -130,7 +132,7 @@ export default class PerkWebHUD extends foundry.applications.api.HandlebarsAppli
               return `
                             <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
                 tagData
-              )}>
+              )}style="${Trait.bgColors[tagData.type || "default"] ? `--tag-bg: ${Trait.bgColors[tagData.type || "default"]!["bg"]}; --tag-hover: ${Trait.bgColors[tagData.type || "default"]!["hover"]}; --tag-border-color: ${Trait.bgColors[tagData.type || "default"]!["border"]};` : ""}">
                             <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
                             <div>
                                 <span class='tagify__tag-text'>

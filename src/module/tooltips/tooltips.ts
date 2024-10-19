@@ -1,6 +1,6 @@
 import { ActorPTR2e } from "@actor";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } from "@chat";
-import { ActionPTR2e, AttackPTR2e } from "@data";
+import { ActionPTR2e, AttackPTR2e, Trait } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
 import { EffectPTR2e, ItemPTR2e, MovePTR2e } from "@item";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
@@ -250,7 +250,7 @@ export default class TooltipsPTR2e {
   }
 
   async #createActionTooltip(action: ActionPTR2e) {
-    const traits = action.traits.map((t) => ({ value: t.slug, label: t.label }));
+    const traits = action.traits.map((t) => ({ value: t.slug, label: t.label, type: t.type }));
 
     this.tooltip.classList.add("attack");
     await this._renderTooltip({
@@ -276,7 +276,7 @@ export default class TooltipsPTR2e {
             return `
                         <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
               tagData
-            )}>
+            )}style="${Trait.bgColors[tagData.type || "default"] ? `--tag-bg: ${Trait.bgColors[tagData.type || "default"]!["bg"]}; --tag-hover: ${Trait.bgColors[tagData.type || "default"]!["hover"]}; --tag-border-color: ${Trait.bgColors[tagData.type || "default"]!["border"]};` : ""}">
                         <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
                         <div>
                             <span class='tagify__tag-text'>
@@ -315,7 +315,7 @@ export default class TooltipsPTR2e {
   }
 
   async #createAttackTooltip(attack: AttackPTR2e) {
-    const traits = attack.traits.map((t) => ({ value: t.slug, label: t.label }));
+    const traits = attack.traits.map((t) => ({ value: t.slug, label: t.label, type: t.type }));
 
     this.tooltip.classList.add("attack");
     await this._renderTooltip({
@@ -341,7 +341,7 @@ export default class TooltipsPTR2e {
             return `
                         <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
               tagData
-            )}>
+            )}style="${Trait.bgColors[tagData.type || "default"] ? `--tag-bg: ${Trait.bgColors[tagData.type || "default"]!["bg"]}; --tag-hover: ${Trait.bgColors[tagData.type || "default"]!["hover"]}; --tag-border-color: ${Trait.bgColors[tagData.type || "default"]!["border"]};` : ""}">
                         <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
                         <div>
                             <span class='tagify__tag-text'>
@@ -620,6 +620,7 @@ export default class TooltipsPTR2e {
     const traits = [...(perk.traits?.values() ?? [])].map((t) => ({
       value: t.slug,
       label: t.label,
+      type: t.type
     }));
 
     this.tooltip.classList.add(type);
@@ -647,7 +648,7 @@ export default class TooltipsPTR2e {
             return `
                         <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
               tagData
-            )}>
+            )}style="${Trait.bgColors[tagData.type || "default"] ? `--tag-bg: ${Trait.bgColors[tagData.type || "default"]!["bg"]}; --tag-hover: ${Trait.bgColors[tagData.type || "default"]!["hover"]}; --tag-border-color: ${Trait.bgColors[tagData.type || "default"]!["border"]};` : ""}">
                         <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
                         <div>
                             <span class='tagify__tag-text'>
