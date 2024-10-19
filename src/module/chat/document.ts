@@ -400,12 +400,16 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       })),
       selfEffects: context.selfEffectRolls?.length ? {
         applied: true,
-        rolls: await Promise.all(context.selfEffectRolls.map(async (r) => ({
-          chance: r.chance,
-          effect: r.effect,
-          label: r.label,
-          roll: r.roll ? r.roll.toJSON() : (await new Roll("1d100ms@dc", {dc: r.chance}).roll()).toJSON(),
-        })))
+        rolls: await Promise.all(context.selfEffectRolls.map(async (r) => {
+          const roll = r.roll ? r.roll : (await new Roll("1d100ms@dc", {dc: r.chance}).roll())
+          return {
+            chance: r.chance,
+            effect: r.effect,
+            label: r.label,
+            roll: roll.toJSON(),
+            success: roll.total <= 0
+          }
+        }))
       } : null
     };
 
