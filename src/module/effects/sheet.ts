@@ -4,10 +4,11 @@ import { CHANGE_FORMS, ChangeForm, ChangeFormOptions } from "./changes/sheet/ind
 import * as R from "remeda";
 import { htmlQuery, htmlQueryAll, sluggify, SORTABLE_BASE_OPTIONS } from "@utils";
 import ChangeModel from "./changes/change.ts";
-import { BasicChangeSystem, ChangeModelTypes } from "@data";
+import { BasicChangeSystem, ChangeModelTypes, Trait } from "@data";
 import { CodeMirror } from "./codemirror.ts";
 import Sortable from "sortablejs";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
+import Tagify from "@yaireo/tagify";
 
 class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationMixin(
   DocumentSheetV2<ActiveEffectPTR2e>
@@ -55,6 +56,8 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
     },
     { inplace: false }
   );
+
+  #allTraits: { value: string; label: string, virtual: boolean, type?: Trait["type"] }[] | undefined;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     header: {
@@ -190,6 +193,30 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       });
     }
 
+    const traits  = (() => {
+      if ("traits" in this.document.system) {
+        const traits = [];
+        for (const trait of this.document.system.traits) {
+          traits.push({
+            value: trait.slug,
+            label: trait.label,
+            virtual: trait.virtual,
+            type: trait.type,
+          });
+        }
+        return traits;
+      }
+      return [];
+    })();
+
+    this.#allTraits = game.ptr.data.traits.map((trait) => ({
+      value: trait.slug,
+      label: trait.label,
+      virtual: false,
+      type: trait.type,
+    }));
+
+
     return {
       ...context,
       tabs: this._getTabs(),
@@ -218,6 +245,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       ),
       fields: this.document.schema.fields,
       system: this.document.system,
+      traits
     };
   }
 
@@ -248,6 +276,40 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
             "--color-input-border-color",
             colorElement.value
           );
+        });
+      }
+
+      for (const input of htmlElement.querySelectorAll<HTMLInputElement>(
+        "input.ptr2e-tagify"
+      )) {
+        new Tagify(input, {
+          enforceWhitelist: false,
+          keepInvalidTags: false,
+          editTags: false,
+          tagTextProp: "label",
+          dropdown: {
+            enabled: 0,
+            mapValueTo: "label",
+          },
+          templates: {
+            tag: function (tagData): string {
+              return `
+                            <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
+                tagData
+              )} style="${Trait.bgColors[tagData.type || "default"] ? `--tag-bg: ${Trait.bgColors[tagData.type || "default"]!["bg"]}; --tag-hover: ${Trait.bgColors[tagData.type || "default"]!["hover"]}; --tag-border-color: ${Trait.bgColors[tagData.type || "default"]!["border"]};` : ""}">
+                            ${tagData.virtual ? "" : `<x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>`}
+                            <div>
+                                <span class='tagify__tag-text'>
+                                    <span class="trait" data-tooltip-direction="UP" data-trait="${tagData.value
+                }" data-tooltip="${tagData.label
+                }"><span>[</span><span class="tag">${tagData.label
+                }</span><span>]</span></span>
+                                </span>
+                            </div>
+                            `;
+            },
+          },
+          whitelist: this.#allTraits,
         });
       }
     }
