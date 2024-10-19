@@ -3593,8 +3593,6 @@ body {
                                         text-shadow: none !important;
                                         line-height: 1.6em;
 
-                                        color: var(--color-cool-5);
-
                                         img {
                                             height: 16px;
                                             width: 16px;
@@ -3619,6 +3617,33 @@ body {
                             }
                         }
 
+                        fieldset.alterations {
+                          min-height: 30px;
+                          padding: 0.5rem;
+                          
+                          .header {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: end;
+                            justify-content: end;
+                          }
+
+                          .item-control {
+                            flex: 0 0 min-content;
+                            text-wrap: nowrap;
+                          }
+
+                          .alteration {
+                            padding: 0.5rem;
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+                            gap: 0.25rem;
+                            margin-bottom: 0.5rem;
+                            border-radius: 8px;
+                            border: 1px solid var(--border-theme-color);
+                          }
+                        }
                     }
                 }
 

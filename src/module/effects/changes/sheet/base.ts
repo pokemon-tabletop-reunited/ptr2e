@@ -291,6 +291,11 @@ class ChangeForm<TChange extends ChangeModel = ChangeModel> {
             return;
         }
 
+        if('alterations' in source && !!source.alterations && !Array.isArray(source.alterations)) {
+          //@ts-expect-error - I mean it's quite clear the property is here if we're in this block...
+          source.alterations = Object.values(source.alterations);
+        }
+
         source = fu.mergeObject(this.source, source, {inplace: false});
 
         // Prevent wheel events on the sliders from spamming updates

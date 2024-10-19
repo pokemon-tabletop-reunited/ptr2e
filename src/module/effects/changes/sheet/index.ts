@@ -15,6 +15,8 @@ import RollNoteChangeSystem from "../roll-note.ts";
 import RollNoteForm from "./roll-note.ts";
 import RollEffectChangeSystem from "../effect-roll.ts";
 import RollEffectForm from "./effect-roll.ts";
+import GrantEffectChangeSystem from "../grant-effect.ts";
+import GrantEffectForm from "./grant-effect.ts";
 
 const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [FlatModifierChangeSystem.TYPE]: FlatModifierForm,
@@ -22,6 +24,7 @@ const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [PercentileModifierSystem.TYPE]: PercentileModifierForm,
     [RollOptionChangeSystem.TYPE]: RollOptionForm,
     [GrantItemChangeSystem.TYPE]: GrantItemForm,
+    [GrantEffectChangeSystem.TYPE]: GrantEffectForm,
     [BasicChangeSystem.TYPE]: AELikeModifierForm,
     [RollNoteChangeSystem.TYPE]: RollNoteForm,
     [RollEffectChangeSystem.TYPE]: RollEffectForm,

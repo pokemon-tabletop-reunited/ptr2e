@@ -3896,7 +3896,6 @@ body .application.sheet .form-group {
   padding: 2px 4px;
   text-shadow: none !important;
   line-height: 1.6em;
-  color: var(--color-cool-5);
 }
 .application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .form-fields .content-link img {
   height: 16px;
@@ -3913,6 +3912,30 @@ body .application.sheet .form-group {
 }
 .application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change main .form-group .attached-input input {
   border-radius: 0 4px 4px 0;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change fieldset.alterations {
+  min-height: 30px;
+  padding: 0.5rem;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change fieldset.alterations .header {
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  justify-content: end;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change fieldset.alterations .item-control {
+  flex: 0 0 min-content;
+  text-wrap: nowrap;
+}
+.application.sheet.active-effect-sheet .window-content .tab[data-tab="changes"] .effect-change fieldset.alterations .alteration {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.25rem;
+  margin-bottom: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-theme-color);
 }
 .application.sheet.active-effect-sheet .window-content .tab .validation-failures {
   background: rgba(214, 150, 0, 0.5);
