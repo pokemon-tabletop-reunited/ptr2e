@@ -195,7 +195,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       action: this.attack,
       domains: this.domains,
       options,
-      chanceModifier: 0
+      chanceModifier: (Number(this.actor.system?.modifiers?.effectChance) || 0),
+      hasSenerenGrace: this.actor.rollOptions?.all?.["special:serene-grace"] ?? false
     });
 
     // const extraModifiers = args.modifiers ?? [];

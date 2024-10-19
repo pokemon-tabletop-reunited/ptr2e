@@ -1,4 +1,4 @@
-import { ActorPTR2e, ActorSynthetics } from "@actor";
+import { ActorPTR2e, ActorSynthetics, EffectRoll } from "@actor";
 import { ActionPTR2e, AttackPTR2e } from "@data";
 import { BracketedValue, EffectSourcePTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
@@ -90,8 +90,9 @@ async function extractEffectRolls({
   action,
   domains,
   options,
-  chanceModifier = 0
-}: Omit<ExtractEphemeralEffectsParams, 'affects'> & {affects: "self" | "origin" | "target", chanceModifier?: number}) {
+  chanceModifier = 0,
+  hasSenerenGrace = false,
+}: Omit<ExtractEphemeralEffectsParams, 'affects'> & {affects: "self" | "origin" | "target", chanceModifier?: number, hasSenerenGrace?: boolean}): Promise<EffectRoll[]> {
   if (!(origin && target)) return [];
 
     const [effectsFrom, effectsTo] = affects === "target" ? [origin, target] : [target, origin];
@@ -101,7 +102,8 @@ async function extractEffectRolls({
         effectsTo.getSelfRollOptions(affects),
     ].flat();
     const resolvables = { item, attack, action };
-    return (
+    const effectTargets = new Map<string, EffectRoll>();
+    const effectRolls = (
         await Promise.all(
             domains
                 .flatMap((s) => (affects === 'origin' ? target : origin).synthetics.effects[s]?.[affects] ?? [])
@@ -113,7 +115,37 @@ async function extractEffectRolls({
             return e;
         }
         return [];
-    });
+    }).reduce((acc, val): EffectRoll[] => {
+      const inMap = effectTargets.get(val.effect);
+      if(!inMap) {
+        effectTargets.set(val.effect, val);
+        return [...acc, val];
+      }
+      if(inMap) {
+        inMap.chance += val.chance;
+      }
+      return acc;
+    }, [] as EffectRoll[]);
+
+    const effectIncreases = (
+      await Promise.all(
+        domains
+                .flatMap((s) => (affects === 'origin' ? target : origin).synthetics.effects[s+"-effect-chance"]?.[affects] ?? [])
+                .map((d) => d({ test: fullOptions, resolvables }))
+      )
+    ).flatMap(e => e ? e : []);
+
+    for(const effectIncrease of effectIncreases) {
+      const inMap = effectTargets.get(effectIncrease.effect);
+      if(inMap) {
+        inMap.chance += effectIncrease.chance;
+      }
+    }
+    
+    return hasSenerenGrace ? effectRolls.map(e => {
+      e.chance += e.chance;
+      return e;
+    }) : effectRolls;
 }
 
 interface ExtractEphemeralEffectsParams {

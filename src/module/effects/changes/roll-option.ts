@@ -14,7 +14,7 @@ export default class RollOptionChangeSystem extends ChangeModel {
     }
 
     override apply(actor: ActorPTR2e): void {
-        actor.rollOptions.addOption(this.domain, this.key);
+        actor.rollOptions.addOption(this.domain, this.value+"");
     }
 }
 

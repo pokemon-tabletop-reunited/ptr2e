@@ -1066,7 +1066,8 @@ class ActorPTR2e<
       action: params.action ?? null,
       domains: params.domains,
       options: [...params.options, ...itemOptions, ...targetRollOptions],
-      chanceModifier: 0
+      chanceModifier: (Number(selfActor.system?.modifiers?.effectChance) || 0),
+      hasSenerenGrace: selfActor?.rollOptions?.all?.["special:serene-grace"] ?? false,
     })
 
     const targetOriginEffectRolls = await extractEffectRolls({
@@ -1078,7 +1079,8 @@ class ActorPTR2e<
       action: params.action ?? null,
       domains: params.domains,
       options: [...params.options, ...itemOptions, ...targetRollOptions],
-      chanceModifier: 0
+      chanceModifier: (Number(targetToken?.actor?.system?.modifiers?.effectChance) || 0),
+      hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
     })
 
     // Clone the actor to recalculate its AC with contextual roll options

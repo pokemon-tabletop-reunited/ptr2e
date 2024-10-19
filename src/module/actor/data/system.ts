@@ -368,6 +368,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       rvs: 0,
       advancementPoints: 0,
       inventoryPoints: 0,
+      effectChance: 0,
     };
   }
 
