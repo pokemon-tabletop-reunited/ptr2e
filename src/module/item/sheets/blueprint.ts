@@ -369,11 +369,9 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
   static async #onSubmit(
     this: BlueprintSheet,
     event: SubmitEvent | Event,
-    form: HTMLFormElement,
+    _form: HTMLFormElement,
     formData: FormDataExtended
   ) {
-    console.log("Submit", event, form, formData);
-
     const closeAndGenerate = event.type === "submit";
 
     // If this isn't a temporary generation, update the current selected blueprint based on form data

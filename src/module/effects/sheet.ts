@@ -26,11 +26,19 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
         submitOnChange: true,
       },
       actions: {
-        "open-inspector": async function(this: ActiveEffectConfig, event: Event) {
+        "open-inspector": async function (this: ActiveEffectConfig, event: Event) {
           event.preventDefault();
           const inspector = new DataInspector(this.document);
           inspector.render(true);
         },
+        "convert-to-affliction": async function (this: ActiveEffectConfig, event: Event) {
+          event.preventDefault();
+          const newEffect = this.document.clone({ type: "affliction" }, { keepId: true });
+          const parent = this.document.parent;
+          await this.document.delete();
+          const docs = await ActiveEffectPTR2e.createDocuments([newEffect], {keepId: true, parent});
+          docs?.at(0)?.sheet?.render(true);
+        }
       },
       window: {
         resizable: true,
