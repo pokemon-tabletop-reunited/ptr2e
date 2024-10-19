@@ -459,7 +459,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       const data = {
         name: Handlebars.helpers.formatSlug(evolution.slug) || blueprint.name,
         img,
-        type: "pokemon",
+        type: evolution?.traits?.includes("humanoid") ? "humanoid" : "pokemon",
         folder: options.folder?.id,
         ownership: options.parent ? options.parent.ownership : {},
         system: {

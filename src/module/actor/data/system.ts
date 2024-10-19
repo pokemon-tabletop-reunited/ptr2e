@@ -50,9 +50,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           validate: (d) => (d as number) >= 0,
         }),
         base: new fields.NumberField({
-          required: true,
-          initial: 40,
-          validate: (d) => (d as number) >= 1,
+          required: false,
+          initial: undefined,
+          validate: (d) => d === undefined || (d as number) >= 1,
         }),
       };
     };
@@ -334,7 +334,11 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     for (const k in this.attributes) {
       const key = k as keyof Attributes;
-      if (this.species?.stats[key]) this.attributes[key].base = this.species.stats[key];
+      if (this.species?.stats[key]) {
+        if(this.parent.isHumanoid()) this.attributes[key].base ??= this.species.stats[key];
+        else this.attributes[key].base = this.species.stats[key];
+      }
+      if(this.attributes[key].base === undefined) this.attributes[key].base = 40;
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
     }
 

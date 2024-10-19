@@ -59,15 +59,18 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     }
 
     override async _prepareContext() {
-        const baseMaximums = this._calcBaseMaximums(this.document.system.attributes);
-        const evMaximums = this._calcEVMaximums(this.document.system.attributes);
-        return {
-            ...(await super._prepareContext()),
-            stats: this.document.system.attributes,
-            fields: (this.document.system.schema.fields.attributes as foundry.data.fields.SchemaField<foundry.data.fields.DataSchema>).fields,
-            baseMaximums,
-            evMaximums,
-        }
+      const speciesBaseStats = (this.document.system._source.species as Maybe<SpeciesSystemModel['_source']>)?.stats;
+
+      const baseMaximums = this._calcBaseMaximums(this.document.system.attributes, speciesBaseStats);
+      const evMaximums = this._calcEVMaximums(this.document.system.attributes);
+      return {
+          ...(await super._prepareContext()),
+          stats: this.document.system.attributes,
+          fields: (this.document.system.schema.fields.attributes as foundry.data.fields.SchemaField<foundry.data.fields.DataSchema>).fields,
+          baseMaximums,
+          evMaximums,
+          speciesBaseStats
+      }
     }
 
     override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: DocumentSheetConfiguration<ActorPTR2e>): void {
@@ -98,30 +101,31 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
         }
     }
 
-    _calcBaseMaximums(stats: Attributes) {
+    _calcBaseMaximums(stats: Attributes, speciesStats?: Record<keyof Attributes, number>) {
         const BASE_MIN = 40;
         const result = {
             total: 0
         } as Record<keyof Attributes, number> & { total: number };
         for (const k in stats) {
             const key = k as keyof Attributes;
-            result[key] = this.#calcBaseMaximum(key, stats);
-            result.total += Math.max(stats[key].base - BASE_MIN, 0);
+            const base = speciesStats?.[key] || BASE_MIN;
+            result[key] = this.#calcBaseMaximum(key, stats, speciesStats);
+            result.total += Math.max(stats[key].base - base, 0);
         }
 
         return result;
     }
 
-    #calcBaseMaximum(stat: keyof Attributes, stats: Attributes) {
-        const BASE_MIN = 40;
-        const BASE_MAX = 90;
+    #calcBaseMaximum(stat: keyof Attributes, stats: Attributes, speciesStats?: Record<keyof Attributes, number>) {
+        const baseMin = speciesStats?.[stat] || 40;
+        const baseMax = baseMin >= 90 ? baseMin : 90;
         const BASE_POINTS = 110;
         let total = 0;
         for (const k in stats) {
             const otherKey = k as keyof Attributes;
-            if (otherKey !== stat) total += Math.max(stats[otherKey].base - BASE_MIN, 0);
+            if (otherKey !== stat) total += Math.max(stats[otherKey].base - (speciesStats?.[otherKey] || baseMin), 0);
         }
-        return Math.min(BASE_MAX, BASE_POINTS + BASE_MIN - total);
+        return Math.min(baseMax, BASE_POINTS + baseMin - total);
     }
 
     _calcEVMaximums(stats: Attributes) {
@@ -147,7 +151,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     }
 
     _onChangeBaseRange(event: Event) {
-        const field = (event.currentTarget as HTMLInputElement).parentElement?.querySelector(".range-value");
+        const field = ((event.currentTarget ?? event.target) as HTMLInputElement).parentElement?.querySelector(".range-value");
         if (field) {
             if (field.tagName === "INPUT") (field as HTMLInputElement).value = (event.target as HTMLInputElement).value;
             else (field as HTMLElement).innerHTML = (event.target as HTMLInputElement).value;
@@ -165,7 +169,7 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
     private onChangeBaseRange = debounceAsync(this._onChangeBaseRange.bind(this), 200);
 
     _onChangeEVRange(event: Event) {
-        const field = (event.currentTarget as HTMLInputElement).parentElement?.querySelector(".range-value");
+        const field = ((event.currentTarget ?? event.target) as HTMLInputElement).parentElement?.querySelector(".range-value");
         if (field) {
             if (field.tagName === "INPUT") (field as HTMLInputElement).value = (event.target as HTMLInputElement).value;
             else (field as HTMLElement).innerHTML = (event.target as HTMLInputElement).value;
@@ -203,10 +207,10 @@ export default class StatsForm extends foundry.applications.api.HandlebarsApplic
 
         if(submitData.system?.attributes && this.document.isHumanoid()) {
             submitData.system!.species ??= {};
-            submitData.system.species.stats = Object.entries(submitData.system.attributes).reduce((acc, [key, value]) => {
-                acc[key] = (value as {base: number}).base;
-                return acc;
-            }, {} as Record<string, number>)
+            // submitData.system.species.stats = Object.entries(submitData.system.attributes).reduce((acc, [key, value]) => {
+            //     acc[key] = (value as {base: number}).base;
+            //     return acc;
+            // }, {} as Record<string, number>)
             if(submitData.system.attributes.spe.base && submitData.system.attributes.spe.base !== (this.document.system._source as unknown as {attributes: Attributes}).attributes.spe.base) {
                 submitData.system.species.movement = Object.values(this.document.system.movement);
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
