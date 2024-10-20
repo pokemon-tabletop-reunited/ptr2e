@@ -8,10 +8,6 @@ function toCM(number: number) {
     return `${number}%`;
 }
 
-function actorLevel(actor: ActorPTR2e) {
-    return actor?.system?.advancement?.level ?? 1;
-}
-
 export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
     static override DEFAULT_OPTIONS = foundry.utils.mergeObject(
         super.DEFAULT_OPTIONS,
@@ -142,7 +138,7 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
     }
 
     get level() {
-        return (Math.ceil(this.documents.reduce((l, d) => l + actorLevel(d), 0)) ?? 1) / this.documents.length;
+        return (Math.ceil(this.documents.reduce((l, d) => l + d.system.advancement.level, 0)) ?? 1) / this.documents.length;
     }
 
     get ber() {
@@ -193,7 +189,7 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
         // apply CR
         calculatedExp *= (1 + (cr / 100));
         // apply F_band
-        calculatedExp *= Math.pow((2 * apl + 10) / (apl + actorLevel(actor) + 10), ExpApp.F_BAND);
+        calculatedExp *= Math.pow((2 * apl + 10) / (apl + actor.system.advancement.level + 10), ExpApp.F_BAND);
         // apply party modifier
         if (!actor.party) {
             calculatedExp *= ExpApp.NON_PARTY_MODIFIER;
@@ -262,14 +258,14 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
             return docs;
         })();
 
-        console.log("apply to all", toApply);
-
         const notification = ui.notifications.info(game.i18n.localize("PTR2E.XP.Notifications.Info"));
 
         await Promise.all(toApply.map((d) => {
-            const pendingXp = (d.getFlag("ptr2e", "pendingXp") ?? 0) as number;
+            const existingXp = d.system.advancement.experience.current;
             const expAward = ExpApp.calculateExpAward(d, ber, cm, apl);
-            return d.setFlag("ptr2e", "pendingXp", pendingXp + expAward);
+            return d.update({
+                "system.advancement.experience.current": existingXp + expAward,
+            });
         }))
 
         ui.notifications.remove(notification);
