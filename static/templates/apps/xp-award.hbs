@@ -1,0 +1,76 @@
+<section class="xp-popup">
+    {{!-- Party Leaders --}}
+    <fieldset class="party-apply">
+        <legend>Applies to</legend>
+        <div class="actor-scroll">
+        {{#each party}}
+            <img class="icon" src="{{img}}" data-tooltip-direction="DOWN" data-tooltip="{{name}}" />
+        {{/each}}
+        </div>
+        {{#if noteAppliesTo}}
+        <p class="note">{{noteAppliesTo}}</p>
+        {{/if}}
+    </fieldset>
+
+    <fieldset class="prospective-circumstance-modifiers">
+        <legend>Circumstance Modifiers</legend>
+        <details class="Custom form-group w-100" data-group="Custom">
+            <summary>Custom</summary>
+            <ul>
+                <li class="cm form-group">
+                    <div class="form-fields">
+                        <input class="customCircumstanceLabel label" id="{{id}}-customCircumstanceLabel" type="text" name="customCircumstanceLabel" placeholder="Custom Circumstance" />
+                        <input class="customCircumstanceBonus bonus" id="{{id}}-customCircumstanceBonus" type="number" name="customCircumstanceBonus" value="30" />
+                        <button type="button" class="add addCustomCircumstance">+</button>
+                    </div>
+                </li>
+            </ul>
+        </details>
+        {{!-- TODO iterate --}}
+        {{#each exampleCircumstanceModifiers as | group label |}}
+        <details class="{{label}} form-group w-100" data-group={{label}}"">
+            <summary>{{label}}</summary>
+            <ul>
+                {{#each group as |mod|}}
+                <li class="cm" {{#if mod.hint}}data-tooltip="{{mod.hint}}" data-tooltip-direction="RIGHT"{{/if}}>
+                    <span class="label">{{mod.label}}</span>
+                    <span class="bonus">{{mod.bonus}}</span>
+                    <button type="button" class="add" data-modifier-key="{{mod.key}}">+</button>
+                </li>
+                {{/each}}
+            </ul>
+        </details>
+        {{/each}}
+    </fieldset>
+
+    <fieldset class="applied-circumstance-modifiers">
+        <legend>Applied Modifiers ({{modifierLabel}})</legend>
+        {{#each cm as |mod idx|}}
+        <div class="cm">
+            <span class="label">{{mod.label}}</span>
+            <span class="bonus">{{mod.bonus}}</span>
+            <button type="button" class="remove" data-modifier-idx="{{idx}}">-</button>
+        </div>
+        {{/each}}
+    </fieldset>
+
+    <fieldset class="xp">
+        <legend>XP Award</legend>
+        <div class="xp-ber form-group w-100">
+            <label>{{localize "PTR2E.XP.BER.label"}}</label>
+            <div class="form-fields">
+                <input type="number" name="ber" value="{{ber}}" disabled="disabled" />
+            </div>
+        </div>
+        <div class="xp-cm form-group w-100">
+            <label>{{localize "PTR2E.XP.Circumstance.Total.label"}}</label>
+            <div class="form-fields">
+                <input type="number" name="modifier" value="{{modifier}}" disabled="disabled" />
+            </div>
+        </div>
+    </fieldset>
+
+    <footer class="controls">
+        <button type="submit">Submit</button>
+    </footer>
+</section>

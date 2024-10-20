@@ -22,10 +22,13 @@ import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { default as Skills } from "./skills.ts";
+import { default as CircumstanceModifiers } from "./circumstance-modifiers.ts";
 import { CheckRoll } from "@system/rolls/check-roll.ts";
 import { AttackRoll } from "@system/rolls/attack-roll.ts";
 import { CaptureRoll } from "@system/rolls/capture-roll.ts";
 import trackableAttributes from "./trackable-token-attributes.ts";
+import { RestApp } from "@module/apps/rest.ts";
+import { ExpApp } from "@module/apps/exp.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -37,6 +40,10 @@ export const PTRCONFIG = {
         sheetClasses: {
             effect: ActiveEffectConfig,
         }
+    },
+    Applications: {
+        RestApp,
+        ExpApp,
     },
     Actor: {
         documentClass: ActorPTR2e,
@@ -145,6 +152,7 @@ export const PTRCONFIG = {
     data: {
         traits: Traits,
         skills: Skills,
+        circumstanceModifiers: CircumstanceModifiers,
     },
     statusEffects: StatusEffects,
     specialStatusEffects: {
