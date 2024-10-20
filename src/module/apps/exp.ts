@@ -2,6 +2,7 @@ import { ActorPTR2e } from "@actor";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { htmlQueryAll } from "@utils";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/api.js";
+import { EvolutionData } from "@item/data/species.ts";
 
 function toCM(number: number) {
     if (number >= 0) return `+${number}%`;
@@ -41,6 +42,7 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
 
     static F_BAND = 2.5;
     static NON_PARTY_MODIFIER = 1 / 4;
+    static UNEVOLVED_BONUS = 1.2;
 
     name;
     documents;
@@ -194,8 +196,39 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
         if (!actor.party) {
             calculatedExp *= ExpApp.NON_PARTY_MODIFIER;
         }
-        // TODO: apply bonus_ue
+        // apply bonus_ue
+        if (ExpApp.shouldGetUnevolvedBonus(actor)) {
+            calculatedExp *= ExpApp.UNEVOLVED_BONUS;
+        }
         return Math.floor(calculatedExp);
+    }
+
+    static shouldGetUnevolvedBonus(actor: ActorPTR2e): boolean {
+        if (!actor?.system?.species) return false;
+
+        const current = (() => {
+            const currentEvolution = (evos: EvolutionData[]): EvolutionData | null => {
+                for (const evo of evos) {
+                    if (evo.name === actor.system.species!.slug) {
+                        return evo;
+                    }
+                    const subEvo = currentEvolution(evo.evolutions || []);
+                    if (subEvo) return subEvo;
+                }
+                return null;
+            }
+            if (actor.system.species!.evolutions) return currentEvolution([actor.system.species!.evolutions]);
+            return null;
+        })();
+        if (!current) return false; // no evolutions
+        // check all the possible evolutions from here to see if we can evolve
+        for (const evo of (current.evolutions || [])) {
+            if (!evo.methods) return true; // no prerequisites to evolve!
+            if (evo.methods.length !== 1) continue; // we only care about level-only prerequisites right now
+            // TODO: implement more complex evolution prerequisite checking, and use it here.
+            if (evo.methods[0].type === "level" && evo.methods[0].level <= actor.system.advancement.level) return true;
+        }
+        return false;
     }
 
     static #addCustomCM(this: ExpApp) {
