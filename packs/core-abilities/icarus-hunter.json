@@ -1,0 +1,95 @@
+{
+  "name": "Icarus Hunter",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "hunter",
+          "flying"
+        ],
+        "name": "Icarus Hunter",
+        "slug": "icarus-hunter",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: The user's attacks deal 50% more damage to Flying-Type creatures.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user's attacks deal 50% more damage to Flying-Type creatures.",
+    "traits": [
+      "hunter",
+      "flying"
+    ],
+    "slug": "icarus-hunter",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "VHmdsjzr8GgTZj74",
+  "effects": [
+    {
+      "name": "Icarus Hunter",
+      "type": "passive",
+      "_id": "x3tphWtltINIjP1H",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "attack-damage",
+            "value": 50,
+            "predicate": [
+              "target:trait:flying"
+            ],
+            "label": "Icarus Hunter",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729467541504,
+        "modifiedTime": 1729467573278,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
