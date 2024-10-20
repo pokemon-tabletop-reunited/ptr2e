@@ -6064,7 +6064,64 @@ body {
           height: 40px;
         }
       }
-  }
+    }
+
+    &.xp-sheet {
+        .xp-popup {
+            gap: 0.5rem;
+            display: flex;
+            flex-direction: column;
+
+            .actor-scroll {
+                display: flex;
+                width: 100%;
+                overflow-x: auto;
+                justify-content: start;
+                gap: 0.5rem;
+                flex-wrap: wrap;
+
+                img {
+                width: 40px;
+                height: 40px;
+                }
+            }
+
+            .party-apply .note {
+                opacity: 0.8;
+                margin-bottom: 0;
+                font-style: italic;
+            }
+
+            .prospective-circumstance-modifiers {
+                max-height: 300px;
+                overflow-y: auto;
+            }
+            .applied-circumstance-modifiers {
+                max-height: 200px;
+                overflow-y: auto;
+            }
+
+            .cm {
+                display: flex;
+                gap: 0.5rem;
+                width: 100%;
+                .label {
+                    flex: 1;
+                }
+                .bonus {
+                    flex: 0;
+                }
+                input.bonus {
+                    min-width: 4em;
+                }
+                button {
+                    width: 20px;
+                    height: 20px;
+                    flex: 0;
+                }
+            }
+        }
+    }
 }
 
 .directory-item.document .entry-name.document-name {
