@@ -47,20 +47,23 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
     name;
     documents;
     circumstances;
+    applyMode;
 
-    constructor(name: string, documents: ActorPTR2e[], options: Partial<foundry.applications.api.ApplicationConfiguration> = {}) {
+    constructor(name: string, documents: ActorPTR2e[], options: Partial<foundry.applications.api.ApplicationConfiguration & { applyMode?: string }> = {}) {
         options.id = `exp-${documents.length ? documents[0].id || fu.randomID() : fu.randomID()}`;
         super(options);
         this.name = name;
         this.documents = documents;
-        this.circumstances = [];
 
+        this.circumstances = [];
         if (this.level < 10) {
             this.circumstances.push({
                 label: "Baby's First Steps",
                 bonus: 100,
             })
-        }
+        };
+
+        this.applyMode = options.applyMode ?? game.settings.get("ptr2e", "expMode");
     }
 
     override async _prepareContext() {
@@ -99,10 +102,7 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
         const modifier = this.modifier;
         const modifierLabel = toCM(modifier);
 
-        const noteAppliesTo = (() => {
-            const applyMode = game.settings.get("ptr2e", "expMode");
-            return game.i18n.localize(`PTR2E.XP.ApplyMode.${applyMode}.hint`);
-        })();
+        const noteAppliesTo = game.i18n.localize(`PTR2E.XP.ApplyMode.${this.applyMode}.hint`);
 
         return {
             id: this.options.id,
@@ -265,14 +265,13 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
         const apl = this.level;
 
         const toApply = (() => {
-            const applyMode = game.settings.get("ptr2e", "expMode");
             let docs = new Set(this.documents) as Set<ActorPTR2e>;
 
             // only give exp to the individuals indicated in the dialog
-            if (applyMode === "individual") return docs;
+            if (this.applyMode === "individual") return docs;
 
             // give exp to the individuals in the dialog and their party members
-            if (applyMode === "party") {
+            if (this.applyMode === "party") {
                 for (const owner of this.documents) {
                     const party = owner.party;
                     if (!party) continue;
