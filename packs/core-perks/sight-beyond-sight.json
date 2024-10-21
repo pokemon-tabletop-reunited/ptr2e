@@ -1,0 +1,62 @@
+{
+  "name": "Sight Beyond Sight",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Aura Sense 40"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "Aura"
+    },
+    "description": "<p>You are able to tap into your Aura powers to see without the use of your eyes. You gain the [Blindsense 10] trait.</p>",
+    "actions": [
+      {
+        "name": "Sight Beyond Sight",
+        "slug": "sight-beyond-sight",
+        "description": "<p>You are able to tap into your Aura powers to see without the use of your eyes. You gain the [Blindsense 10] trait.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "sight-beyond-sight",
+    "traits": [],
+    "node": {
+      "i": 8,
+      "j": -63,
+      "connected": [
+        "aura-dampening",
+        "aura-empathy",
+        "shift-consciousness-aura"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ffffff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+        "tint": "#8000ff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "pqVd47faROt2qSBR",
+  "img": "systems/ptr2e/img/perk-icons/Aura.svg",
+  "effects": []
+}
