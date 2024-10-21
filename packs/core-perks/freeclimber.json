@@ -1,0 +1,64 @@
+{
+  "name": "Freeclimber",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Climb 45"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Athleticism"
+    },
+    "description": "<p>You are able to climb without suffering penalties due to lack of equipment.</p>",
+    "actions": [
+      {
+        "name": "Freeclimber",
+        "slug": "freeclimber",
+        "description": "<p>You are able to climb without suffering penalties due to lack of equipment.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "freeclimber",
+    "traits": [],
+    "node": {
+      "i": 3,
+      "j": -77,
+      "connected": [
+        "aura-user",
+        "evasive-style",
+        "parkour",
+        "acrobat",
+        "shielding-aura"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#004000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "sAukVqClITEpjQE3",
+  "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
+  "effects": []
+}
