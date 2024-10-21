@@ -1,0 +1,65 @@
+{
+  "name": "Scholar",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Research 25"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Knowledge"
+    },
+    "description": "<p>You gain access to the Research Camp Action. You may not know something then and there in the moment, but with enough dedication and the right resources, you will find out eventually.</p>",
+    "actions": [
+      {
+        "name": "Scholar",
+        "slug": "scholar",
+        "description": "<p>You gain access to the Research Camp Action. You may not know something then and there in the moment, but with enough dedication and the right resources, you will find out eventually.</p>",
+        "cost": {
+          "activation": "complex"
+        },
+        "type": "camping",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "scholar",
+    "traits": [],
+    "node": {
+      "i": -56,
+      "j": -27,
+      "connected": [
+        "root-1",
+        "forensic-accountant",
+        "climatologist",
+        "palaeontologist",
+        "type-tutoring",
+        "type-specialty"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#808080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "KEvYjwxJ3bWLCknR",
+  "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+  "effects": []
+}
