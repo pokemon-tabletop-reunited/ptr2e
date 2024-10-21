@@ -1,0 +1,65 @@
+{
+  "name": "Adrenaline Rush",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Level 30"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Combat"
+    },
+    "description": "<p>Your will to live allows you to keep going when things seem bleak. When meeting the [Desperation 1/3] Condition, you may spend 4 PP to gain  3 as a Free Action.</p>",
+    "actions": [
+      {
+        "name": "Adrenaline Rush",
+        "slug": "adrenaline-rush",
+        "description": "<p>Your will to live allows you to keep going when things seem bleak. When meeting the [Desperation 1/3] Condition, you may spend 4 PP to gain @Affliction[resolved] 3 as a Free Action.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4
+        },
+        "type": "generic",
+        "traits": [
+          "desperation-1-3"
+        ],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "adrenaline-rush",
+    "traits": [],
+    "node": {
+      "i": 13,
+      "j": 7,
+      "connected": [
+        "fearsome-defense",
+        "sprint",
+        "fighting-fit"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#008000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+        "tint": "#000000",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "1uzQwRPq1YMLDk8L",
+  "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+  "effects": []
+}
