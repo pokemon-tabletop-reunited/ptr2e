@@ -1,0 +1,29 @@
+{{formField fields.mode value=change.mode localize=true name=(concat basePath ".mode")}}
+
+<div class="form-group">
+    <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeProperty.label"}}</label>
+    <div class="form-fields">
+        <input type="text" name="{{basePath}}.property" value="{{change.property}}"/>
+    </div>
+</div>
+
+<div class="form-group">
+    <label class="short">{{localize fields.value.label}}</label>
+    <div class="form-fields">
+        {{{form.resolvableValue "value" hideButton=true}}}
+
+        {{{form.resolvableAddBracket "value"}}}
+    </div>
+</div>
+
+{{{form.resolvableBrackets "value"}}}
+
+<div class="form-group">
+    <label class="short">{{localize fields.predicate.label}}</label>
+    <input type="text" name="{{basePath}}.predicate" value="{{json change.predicate spaces=0}}" />
+</div>
+
+<div class="form-group">
+    <label class="short">{{localize fields.definition.label}}</label>
+    <input type="text" name="{{basePath}}.definition" value="{{json change.definition spaces=0}}" />
+</div>

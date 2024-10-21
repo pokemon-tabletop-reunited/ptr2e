@@ -181,6 +181,7 @@ class ActorPTR2e<
       rollNotes: {},
       effects: {},
       toggles: [],
+      attackAdjustments: [],
       preparationWarnings: {
         add: (warning: string) => preparationWarnings.add(warning),
         flush: fu.debounce(() => {
@@ -1028,13 +1029,29 @@ class ActorPTR2e<
     })();
 
     //TODO: Probably needs similar implementation to selfItem
-    const selfAttack = params.attack;
+    const selfAttack = params.attack?.clone();
+    selfAttack?.prepareDerivedData();
     const selfAction = params.action;
 
     const itemOptions = selfItem?.getRollOptions("item") ?? [];
-    const actionTraits = R.uniq(
-      params.traits?.map((t) => (typeof t === "string" ? t : t.slug)) ?? []
-    );
+
+    if(selfAttack) {
+      for(const adjustment of selfActor.synthetics.attackAdjustments) {
+        adjustment.adjustAttack?.(selfAttack, itemOptions);
+      }
+    }
+
+    const actionTraits = (() => {
+      const traits = params.traits?.map((t) => (typeof t === "string" ? t : t.slug)) ?? [];
+
+      if(selfAttack) {
+        for(const adjustment of selfActor.synthetics.attackAdjustments) {
+          adjustment.adjustTraits?.(selfAttack, traits, itemOptions);
+        }
+      }
+
+      return R.uniq(traits).sort();
+    })();
 
     // Calculate distance and range increment, set as a roll option
     const distance = selfToken && targetToken ? selfToken.distanceTo(targetToken) : 0;

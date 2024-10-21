@@ -1,4 +1,4 @@
-import { ActionPTR2e, AttackPTR2e, PassivePTR2e, BasicChangeSystem, RollOptionChangeSystem, FlatModifierChangeSystem, GrantItemChangeSystem, StageModifierSystem, PercentileModifierSystem, GrantEffectChangeSystem, EphemeralEffectChangeSystem, RollNoteChangeSystem, EffectRollChangeSystem, ChoiceSetChangeSystem, AddTraitChangeSystem, RemoveTraitChangeSystem } from "@data";
+import { ActionPTR2e, AttackPTR2e, PassivePTR2e, BasicChangeSystem, RollOptionChangeSystem, FlatModifierChangeSystem, GrantItemChangeSystem, StageModifierSystem, PercentileModifierSystem, GrantEffectChangeSystem, EphemeralEffectChangeSystem, RollNoteChangeSystem, EffectRollChangeSystem, ChoiceSetChangeSystem, AddTraitChangeSystem, RemoveTraitChangeSystem, AlterAttackChangeSystem } from "@data";
 
 let changeTypes;
 export function ChangeModelTypes() {
@@ -15,7 +15,8 @@ export function ChangeModelTypes() {
     [EffectRollChangeSystem.TYPE]: EffectRollChangeSystem,
     [ChoiceSetChangeSystem.TYPE]: ChoiceSetChangeSystem,
     [AddTraitChangeSystem.TYPE]: AddTraitChangeSystem,
-    [RemoveTraitChangeSystem.TYPE]: RemoveTraitChangeSystem
+    [RemoveTraitChangeSystem.TYPE]: RemoveTraitChangeSystem,
+    [AlterAttackChangeSystem.TYPE]: AlterAttackChangeSystem,
   });
 }
 

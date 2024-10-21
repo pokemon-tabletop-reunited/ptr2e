@@ -23,6 +23,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     const fields = foundry.data.fields;
     return {
       origin: new fields.JSONField({ required: true }),
+      attack: new fields.JSONField({ required: false }),
       attackSlug: new SlugField(),
       results: new fields.ArrayField(
         new fields.SchemaField({
@@ -214,7 +215,33 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
     this.origin = fromActorData(this._source.origin)!;
 
-    this.attack = this.origin.actions.attack.get(this._source.attackSlug) as AttackPTR2e;
+    this.attack = ((): AttackPTR2e => {
+      if (!this._source.attack) return this.origin.actions.attack.get(this._source.attackSlug) as AttackPTR2e;
+      const jsonData = (() => {
+        try {
+          return JSON.parse(this._source.attack);
+        } catch (error: unknown) {
+          Hooks.onError("AttackMessageSystem#prepareBaseData", error as Error, {
+            log: "error",
+          });
+        }
+      })();
+      if (!jsonData) return {} as AttackPTR2e;
+
+      try {
+        const attack = AttackPTR2e.fromJSON(this._source.attack) as AttackPTR2e;
+        const sourceItem = this.origin.actions.attack.get(this._source.attackSlug)?.item;
+        const clonedAttack = attack && sourceItem ? attack.clone({}, { parent: sourceItem }) : attack;
+        clonedAttack.prepareDerivedData();
+        return clonedAttack;
+      } catch (error: unknown) {
+        Hooks.onError("AttackMessageSystem#prepareBaseData", error as Error, {
+          log: "error",
+        });
+      }
+      return {} as AttackPTR2e;
+    })() ?? {};
+
     if (!this.attackSlug)
       Hooks.onError(
         "AttackMessageSystem#attack",
@@ -650,6 +677,7 @@ interface AttackMessageRenderContextData {
 
 interface AttackMessageSchema extends foundry.data.fields.DataSchema {
   origin: foundry.data.fields.JSONField<ActorPTR2e, true, false, false>;
+  attack: foundry.data.fields.JSONField<AttackPTR2e, false, false, false>;
   attackSlug: SlugField<string, string, true, false, false>;
   results: foundry.data.fields.ArrayField<
     ResultSchema,

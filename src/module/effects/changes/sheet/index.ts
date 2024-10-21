@@ -21,6 +21,8 @@ import AddTraitChangeSystem from "../add-trait.ts";
 import AddTraitForm from "./add-trait.ts";
 import RemoveTraitChangeSystem from "../remove-trait.ts";
 import RemoveTraitForm from "./remove-trait.ts";
+// import AlterAttackChangeSystem from "../alter-attack.ts";
+// import AlterAttackForm from "./alter-attack.ts";
 
 const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [FlatModifierChangeSystem.TYPE]: FlatModifierForm,
@@ -34,6 +36,7 @@ const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [RollEffectChangeSystem.TYPE]: RollEffectForm,
     [AddTraitChangeSystem.TYPE]: AddTraitForm,
     [RemoveTraitChangeSystem.TYPE]: RemoveTraitForm,
+    // [AlterAttackChangeSystem.TYPE]: AlterActionForm,
 };
 
 export { CHANGE_FORMS, ChangeForm}

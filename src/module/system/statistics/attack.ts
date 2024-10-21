@@ -182,6 +182,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       attack: this.attack,
       domains: this.domains,
       statistic: this,
+      item: this.item,
       options,
       traits: args.traits ?? this.item.traits,
     }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>;
@@ -246,9 +247,10 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
 
     const checkContext: CheckRollContext & { contexts: Record<ActorUUID, CheckContext> } = {
       type: "attack-roll",
-      identifier: args.identifier ?? `${this.item.slug}.${this.attack.slug}`,
-      action: args.action || this.attack.slug,
-      title: args.title || this.label || this.attack.name,
+      identifier: args.identifier ?? `${context.self.item.slug}.${context.self.attack.slug}`,
+      action: args.action || context.self.attack.slug,
+      attack: context.self.attack,
+      title: args.title || this.label || context.self.attack.name,
       actor: context.self.actor,
       token: context.self.token,
       item: context.self.item,
@@ -261,13 +263,13 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       skipDialog: args.skipDialog ?? targets.length === 0,
       omittedSubrolls: (() => {
         const ommited = new Set<"damage" | "crit" | "accuracy">();
-        if (this.attack.category === "status" || !this.attack.power) ommited.add("damage");
-        if (this.attack.category === "status") ommited.add("crit");
-        if (!this.attack.accuracy) ommited.add("accuracy");
+        if (context.self.attack.category === "status" || !context.self.attack.power) ommited.add("damage");
+        if (context.self.attack.category === "status") ommited.add("crit");
+        if (!context.self.attack.accuracy) ommited.add("accuracy");
 
         return ommited;
       })(),
-      ppCost: this.attack.cost.powerPoints ?? 0,
+      ppCost: context.self.attack.cost.powerPoints ?? 0,
       selfEffectRolls
     }
     const check = new CheckModifier(

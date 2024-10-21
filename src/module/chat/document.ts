@@ -363,6 +363,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         spent: boolean;
         cost: number;
       };
+      attack?: Record<string, unknown>;
       attackSlug: string;
       origin: Record<string, unknown>;
       results: Record<string, unknown>[];
@@ -375,6 +376,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         spent: !!context.consumePP,
         cost: context.ppCost ?? 0,
       },
+      attack: context.attack?.toJSON() as Record<string, unknown> ?? undefined,
       attackSlug: context.action,
       origin: (() => {
         const json: Record<string, unknown> = context.actor!.toJSON();
