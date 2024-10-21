@@ -1,0 +1,63 @@
+{
+  "name": "Powerlifter",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Lift 35"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Athleticism"
+    },
+    "description": "<p>You have trained your muscles for great weights, and gain +10 on skill checks made with the Lift against targets larger than yourself.</p>",
+    "actions": [
+      {
+        "name": "Powerlifter",
+        "slug": "powerlifter",
+        "description": "<p>You have trained your muscles for great weights, and gain +10 on skill checks made with the Lift against targets larger than yourself.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "powerlifter",
+    "traits": [],
+    "node": {
+      "i": -77,
+      "j": 68,
+      "connected": [
+        "stonecunning",
+        "shovel-hands",
+        "root-5",
+        "draconic-imitation"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "bSM1oq0xt7kx6hLX",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+  "effects": []
+}
