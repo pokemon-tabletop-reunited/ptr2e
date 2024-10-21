@@ -1,0 +1,89 @@
+{
+  "name": "Overcharge",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Overcharge",
+        "slug": "overcharge",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: The user's Electric-Type attacks deal double damage against Electric Type creatures.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user's Electric-Type attacks deal double damage against Electric Type creatures.",
+    "traits": [],
+    "slug": "overcharge",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "rvSbd5HXkt1jZm0a",
+  "effects": [
+    {
+      "name": "Overcharge",
+      "type": "passive",
+      "_id": "9F8thE5yqixZPqNz",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "electric-attack-damage",
+            "value": 100,
+            "predicate": [
+              "target:trait:electric"
+            ],
+            "label": "Overcharge",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729469153118,
+        "modifiedTime": 1729469199469,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
