@@ -1,0 +1,63 @@
+{
+  "name": "Nurturing Shoots",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Grass]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "[Grass]"
+    },
+    "description": "<p>You gain the [Plant Grower] trait.</p>",
+    "actions": [
+      {
+        "name": "Nurturing Shoots",
+        "slug": "nurturing-shoots",
+        "description": "<p>You gain the [Plant Grower] trait.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "nurturing-shoots",
+    "traits": [],
+    "node": {
+      "i": -68,
+      "j": -9,
+      "connected": [
+        "hobby-gardener",
+        "one-with-the-green",
+        "type-embodiment-type",
+        "climatologist"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/grass_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "cAm1mX4AkuIz2hi1",
+  "img": "systems/ptr2e/img/svg/grass_icon.svg",
+  "effects": []
+}
