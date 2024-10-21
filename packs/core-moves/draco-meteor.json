@@ -1,0 +1,101 @@
+{
+  "name": "Draco Meteor",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+  "system": {
+    "slug": "draco-meteor",
+    "traits": [
+      "blast-3",
+      "pp-updated"
+    ],
+    "actions": [
+      {
+        "slug": "draco-meteor",
+        "name": "Draco Meteor",
+        "type": "attack",
+        "traits": [
+          "blast-3",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 130,
+        "accuracy": 90,
+        "types": [
+          "dragon"
+        ],
+        "description": "<p>Effect: On hit, the user loses -2 SPATK stage for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "P265RrFzk5qtekq3",
+  "effects": [
+    {
+      "name": "Draco Meteor",
+      "type": "passive",
+      "_id": "RtjTVG6kmvrdVqPc",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "draco-meteor-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.EYmp1DeE1Lwzi0D1",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729539345720,
+        "modifiedTime": 1729539372745,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
