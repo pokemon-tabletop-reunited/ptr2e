@@ -1,0 +1,95 @@
+{
+  "name": "Shadow Cladding",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "strategist",
+          "shadow"
+        ],
+        "name": "Shadow Cladding",
+        "slug": "shadow-cladding",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1,
+          "trigger": "The user resolves a Shadow-Type attack"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Trigger: The user resolves a Shadow-Type attack\nEffect: The user gains @Affliction[resolved] 2.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: The user resolves a Shadow-Type attack\nEffect: The user gains @Affliction[resolved] 2.",
+    "traits": [
+      "strategist",
+      "shadow"
+    ],
+    "slug": "shadow-cladding",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "e50SqGfMifBSEze6",
+  "effects": [
+    {
+      "name": "Shadow Cladding",
+      "type": "passive",
+      "_id": "a5qtP39qzSIsC51f",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "shadow-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729470710767,
+        "modifiedTime": 1729470736306,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
