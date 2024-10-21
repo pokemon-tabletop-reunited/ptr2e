@@ -1,0 +1,63 @@
+{
+  "name": "Soothing Aura",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Aura Sense 60",
+      "Aura Bonding"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "Aura"
+    },
+    "description": "<p>You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked. Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.</p>",
+    "actions": [
+      {
+        "name": "Soothing Aura",
+        "slug": "soothing-aura",
+        "description": "<p>You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked. Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.</p>",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "soothing-aura",
+    "traits": [],
+    "node": {
+      "i": -3,
+      "j": -56,
+      "connected": [
+        "aura-bonding",
+        "aura-projection"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#008000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+        "tint": "#151515",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "6m9rPR0KNKTQ2B40",
+  "img": "systems/ptr2e/img/perk-icons/Aura.svg",
+  "effects": []
+}
