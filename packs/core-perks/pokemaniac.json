@@ -1,0 +1,62 @@
+{
+  "name": "Pokemaniac",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Science (Zoology) 40"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "Knowledge"
+    },
+    "description": "<p>You may make a Science (Zoology) roll to identify the pokemon's level and traits.</p>",
+    "actions": [
+      {
+        "name": "Pokemaniac",
+        "slug": "pokemaniac",
+        "description": "<p>You may make a Science (Zoology) roll to identify the pokemon's level and traits.</p>",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "pokemaniac",
+    "traits": [],
+    "node": {
+      "i": -45,
+      "j": -36,
+      "connected": [
+        "palaeontologist",
+        "root-1"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#008000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "C1x4SbzpolXcgEWH",
+  "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+  "effects": []
+}
