@@ -1,0 +1,65 @@
+{
+  "name": "Expert Ball Crafting",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Electronics 70",
+      "Advanced Ball Crafting"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Crafting"
+    },
+    "description": "<p>You learn the Ultra Ball recipe.</p>",
+    "actions": [
+      {
+        "name": "Expert Ball Crafting",
+        "slug": "expert-ball-crafting",
+        "description": "<p>You learn the Ultra Ball recipe.</p>",
+        "cost": {
+          "activation": "complex"
+        },
+        "type": "camping",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "expert-ball-crafting",
+    "traits": [],
+    "node": {
+      "i": -54,
+      "j": 42,
+      "connected": [
+        "dimensional-balls",
+        "weighted-ball-expertise",
+        "type-ball-specs",
+        "hunting-ball-expertise",
+        "weather-capture-specs"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
+        "tint": "#f4f4f0",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "MxXMqYFlUWVnNouK",
+  "img": "systems/ptr2e/img/perk-icons/Crafting.svg",
+  "effects": []
+}
