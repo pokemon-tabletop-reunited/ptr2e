@@ -1,0 +1,63 @@
+{
+  "name": "Stonecunning",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Ground] or [Rock]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "[Ground]"
+    },
+    "description": "<p>You gain the [Tremorsense 20] trait.</p>",
+    "actions": [
+      {
+        "name": "Stonecunning",
+        "slug": "stonecunning",
+        "description": "<p>You gain the [Tremorsense 20] trait.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "stonecunning",
+    "traits": [],
+    "node": {
+      "i": -78,
+      "j": 56,
+      "connected": [
+        "root-6",
+        "gemcutter",
+        "shovel-hands",
+        "powerlifter"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/rock_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "lTOiK3AutkgbMo7J",
+  "img": "systems/ptr2e/img/svg/rock_icon.svg",
+  "effects": []
+}
