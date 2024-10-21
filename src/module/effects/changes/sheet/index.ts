@@ -17,6 +17,10 @@ import RollEffectChangeSystem from "../effect-roll.ts";
 import RollEffectForm from "./effect-roll.ts";
 import GrantEffectChangeSystem from "../grant-effect.ts";
 import GrantEffectForm from "./grant-effect.ts";
+import AddTraitChangeSystem from "../add-trait.ts";
+import AddTraitForm from "./add-trait.ts";
+import RemoveTraitChangeSystem from "../remove-trait.ts";
+import RemoveTraitForm from "./remove-trait.ts";
 
 const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [FlatModifierChangeSystem.TYPE]: FlatModifierForm,
@@ -28,6 +32,8 @@ const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [BasicChangeSystem.TYPE]: AELikeModifierForm,
     [RollNoteChangeSystem.TYPE]: RollNoteForm,
     [RollEffectChangeSystem.TYPE]: RollEffectForm,
+    [AddTraitChangeSystem.TYPE]: AddTraitForm,
+    [RemoveTraitChangeSystem.TYPE]: RemoveTraitForm,
 };
 
 export { CHANGE_FORMS, ChangeForm}

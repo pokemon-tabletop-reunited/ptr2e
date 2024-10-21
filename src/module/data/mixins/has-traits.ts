@@ -2,6 +2,7 @@ import { ActorPTR2e } from '@actor';
 import { SlugField } from '../fields/slug-field.ts';
 import Trait from '../models/trait.ts';
 import { TemplateConstructor } from './data-template.ts';
+import SystemTraitsCollection from '../system-traits-collection.ts';
 
 /**
  * Adds traits property to target data model.
@@ -48,7 +49,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
       super.prepareBaseData();
 
       this._traits = [];
-      this.traits = new Collection<Trait>();
+      this.traits = new SystemTraitsCollection();
       this._source.traits.forEach(t => this.addTraitFromSlug(t, false));
     }
   }
@@ -64,7 +65,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
     //  * console.log(item.system.traits); // { "light": TraitPTR2e }
     //  * ```
     //  */
-    traits: Collection<Trait>
+    traits: SystemTraitsCollection
     _traits: Trait[];
 
     _source: SourceFromSchema<TraitsSchema>
@@ -75,7 +76,7 @@ export default function HasTraits<BaseClass extends TemplateConstructor>(baseCla
 
 export interface TraitsSchema extends foundry.data.fields.DataSchema {
   //@ts-expect-error - We are only using the SetField for data storage, but are initializing the property as a Collection
-  traits: foundry.data.fields.SetField<TraitsField, foundry.data.fields.SourcePropFromDataField<TraitsField>[], Collection<Trait>, true, false, true>;
+  traits: foundry.data.fields.SetField<TraitsField, foundry.data.fields.SourcePropFromDataField<TraitsField>[], SystemTraitsCollection, true, false, true>;
 }
 
 type TraitsField = SlugField<string, string, true, false, true>;

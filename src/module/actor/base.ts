@@ -1324,6 +1324,27 @@ class ActorPTR2e<
       }
     }
 
+    if(changed.system?.traits !== undefined && this.system?.traits?.suppressedTraits?.size) {
+      if(changed.system.traits instanceof Set) {
+        //@ts-expect-error - During an update this should be an array
+        changed.system.traits = Array.from(changed.system.traits);
+      }
+      else if(!Array.isArray(changed.system.traits)) {
+        //@ts-expect-error - During an update this should be an array
+        if(changed.system.traits instanceof Collection) changed.system.traits = [...changed.system.traits];
+        //@ts-expect-error - During an update this should be an array
+        else changed.system.traits = [];
+      }
+
+      const suppressedTraits = this.system.traits.suppressedTraits;
+      const sourceTraits = this.system._source.traits;
+      const intersection = sourceTraits.filter(trait => suppressedTraits.has(trait));
+      if(intersection.length) {
+        //@ts-expect-error - During an update this should be an array
+        changed.system.traits = Array.from(new Set([...changed.system.traits, ...intersection]))
+      }
+    }
+
     return super._preUpdate(changed, options, user);
   }
 

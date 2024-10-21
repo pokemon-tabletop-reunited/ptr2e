@@ -3,6 +3,7 @@ import { ActionPTR2e, AttackPTR2e, HasBase, HasEmbed, Trait } from "@module/data
 import { sluggify } from "@utils";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { HasBaseSchema } from "@module/data/mixins/has-base.ts";
+import SystemTraitsCollection from "@module/data/system-traits-collection.ts";
 
 /**
  * @category Item Data Models
@@ -57,7 +58,7 @@ export default abstract class MoveSystem extends HasEmbed(
   override set description(_value: string) {
   }
 
-  override get traits(): Collection<Trait> {
+  override get traits(): SystemTraitsCollection<Trait> {
     return this.attack.traits;
   }
 

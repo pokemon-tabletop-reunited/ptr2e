@@ -4,6 +4,7 @@ import { PTRCONSTS, ActionType, ActionCost, Delay, Priority, Trait } from "@data
 import { RangePTR2e } from "@data";
 import { CollectionField } from "../fields/collection-field.ts";
 import { SlugField } from "../fields/slug-field.ts";
+import SystemTraitsCollection from "../system-traits-collection.ts";
 
 class ActionPTR2e extends foundry.abstract.DataModel {
   static TYPE: ActionType = "generic" as const;
@@ -122,13 +123,13 @@ class ActionPTR2e extends foundry.abstract.DataModel {
   }
 
   prepareDerivedData() {
-    this.traits = this._source.traits.reduce((acc: Collection<Trait>, traitSlug: string) => {
+    this.traits = this._source.traits.reduce((acc: SystemTraitsCollection<Trait>, traitSlug: string) => {
       const trait = game.ptr.data.traits.get(traitSlug);
       if (trait) {
         acc.set(traitSlug, trait);
       }
       return acc;
-    }, new Collection());
+    }, new SystemTraitsCollection());
 
     if (this.img === ActionPTR2e.baseImg && this.item.img !== this.item.constructor.implementation.DEFAULT_ICON) {
       this.img = this.item.img;
@@ -180,7 +181,7 @@ export interface ActionSchema extends foundry.data.fields.DataSchema {
   name: foundry.data.fields.StringField<string, string, true, false, true>;
   description: foundry.data.fields.HTMLField<string, string, false, true>;
   img: foundry.data.fields.FilePathField<ImageFilePath, string, true, false, true>;
-  traits: CollectionField<foundry.data.fields.StringField, string[], Collection<Trait>>;
+  traits: CollectionField<foundry.data.fields.StringField, string[], SystemTraitsCollection<Trait>>;
   type: foundry.data.fields.StringField<string, ActionType, true, false, true>;
   range: foundry.data.fields.EmbeddedDataField<RangePTR2e, false, true>;
   cost: foundry.data.fields.SchemaField<{
