@@ -1,0 +1,66 @@
+{
+  "name": "Sprint",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Running 30 OR Flying 30 OR Swimming 30 OR Climbing 30"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Athleticism"
+    },
+    "description": "<p>Trigger: The user declares Rush.<br><br>Effect: The user doubles the amount of Movement Score gained with the triggering Rush, and if they only move in a straight line with that Rush, they gain an additional +3 to that Movement Score.</p>",
+    "actions": [
+      {
+        "name": "Sprint",
+        "slug": "sprint",
+        "description": "Effect: The user doubles the amount of Movement Score gained with the triggering Rush, and if they only move in a straight line with that Rush, they gain an additional +3 to that Movement Score.",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "The user declares Rush."
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "slug": "sprint",
+    "traits": [],
+    "node": {
+      "i": 7,
+      "j": 24,
+      "connected": [
+        "zigzagoon-class-sandwiches",
+        "root-4",
+        "adrenaline-rush",
+        "hit-run",
+        "strong-style"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#0000ff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "vxp5hyhlVJozIaNR",
+  "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
+  "effects": []
+}
