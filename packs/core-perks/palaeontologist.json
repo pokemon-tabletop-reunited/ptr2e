@@ -1,0 +1,62 @@
+{
+  "name": "Palaeontologist",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Science (Palaeontology) 35",
+      "TWO OF: Archaeology 25, Science (Biology) 25, Science (Bontany) 25, Science (Geology) 25, Science (Zoology) 25"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "Palaeontology"
+    },
+    "description": "<p>You gain +20 on rolls to identify Fossils (Pokemon or otherwise) and operate Reanimation Machines or similar mechanisms (including as part of the \"Revival\" Downtime Action).</p>",
+    "actions": [
+      {
+        "name": "Palaeontologist",
+        "slug": "palaeontologist",
+        "description": "<p>You gain +20 on rolls to identify Fossils (Pokemon or otherwise) and operate Reanimation Machines or similar mechanisms (including as part of the \"Revival\" Downtime Action).</p>",
+        "cost": {
+          "activation": "complex"
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "palaeontologist",
+    "traits": [],
+    "node": {
+      "i": -49,
+      "j": -30,
+      "connected": [
+        "pokemaniac",
+        "scholar"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#804000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "mP80n30afHnRChhO",
+  "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+  "effects": []
+}
