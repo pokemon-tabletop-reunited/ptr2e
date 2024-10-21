@@ -1,0 +1,100 @@
+{
+  "name": "Toxic Boost",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Toxic Boost",
+        "slug": "toxic-boost",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: While the user is affected by @Affliction[poison] or @Affliction[blight], the power of their Physical-category attacks is increased by 50%",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: While the user is affected by @Affliction[poison] or @Affliction[blight], the power of their Physical-category attacks is increased by 50%",
+    "traits": [],
+    "slug": "toxic-boost",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "wWL50DiZjzkJykJc",
+  "effects": [
+    {
+      "name": "Toxic Boost",
+      "type": "passive",
+      "_id": "eiIc0o5ywJ7txG1I",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "physical-attack-power",
+            "value": 50,
+            "predicate": [
+              "effect:affliction:poison"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "physical-attack-power",
+            "value": 50,
+            "predicate": [
+              "effect:affliction:blight"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729496036860,
+        "modifiedTime": 1729496102777,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
