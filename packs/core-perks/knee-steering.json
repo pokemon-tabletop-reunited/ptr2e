@@ -1,0 +1,63 @@
+{
+  "name": "Knee Steering",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Riding 35"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "Cavalier"
+    },
+    "description": "<p>You may steer a mount without using one of your hands, freeing that hand up to use for other activities.</p>",
+    "actions": [
+      {
+        "name": "Knee Steering",
+        "slug": "knee-steering",
+        "description": "<p>You may steer a mount without using one of your hands, freeing that hand up to use for other activities.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "knee-steering",
+    "traits": [],
+    "node": {
+      "i": -5,
+      "j": 59,
+      "connected": [
+        "trained-rider",
+        "trained-wielder",
+        "urge-mount",
+        "lean-in"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#800000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "3RFfXmRoL4xcwHWr",
+  "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",
+  "effects": []
+}
