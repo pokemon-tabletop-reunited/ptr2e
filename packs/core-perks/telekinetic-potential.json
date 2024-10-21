@@ -1,0 +1,65 @@
+{
+  "name": "Telekinetic Potential",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Psychic]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "[Psychic]"
+    },
+    "description": "<p>You gain the [Telekinetic 2] trait.</p>",
+    "actions": [
+      {
+        "name": "Telekinetic Potential",
+        "slug": "telekinetic-potential",
+        "description": "<p>You gain the [Telekinetic 2] trait.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "telekinetic-potential",
+    "traits": [],
+    "node": {
+      "i": -100,
+      "j": 41,
+      "connected": [
+        "root-6",
+        "type-embodiment-type",
+        "drifter",
+        "conceal-mind",
+        "psychoportation",
+        "improved-flight-1"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "d152HgMF55iaUMiu",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "effects": []
+}
