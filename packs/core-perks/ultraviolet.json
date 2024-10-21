@@ -1,0 +1,63 @@
+{
+  "name": "Ultraviolet",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Shadow]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "Shadow"
+    },
+    "description": "<p>You gain @Affliction[hyper-mode] 5.</p>",
+    "actions": [
+      {
+        "name": "Ultraviolet",
+        "slug": "ultraviolet",
+        "description": "<p>You gain @Affliction[hyper-mode] 5.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "ultraviolet",
+    "traits": [],
+    "node": {
+      "i": 56,
+      "j": -67,
+      "connected": [
+        "berserk",
+        "frenzied-assault",
+        "fiendish-provocation"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "7DDMgeaNgSRsWevs",
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+  "effects": []
+}
