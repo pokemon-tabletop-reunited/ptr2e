@@ -1,0 +1,62 @@
+{
+  "name": "Cyclist",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Riding 25"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Athleticism"
+    },
+    "description": "<p>When riding a [Cycle], your Overland Movement Allowance increases by +3, and you may use Take Down as if it were on your Active List. When riding a [Rotom Device] [Cycle] you get access to Wild Charge instead of Take Down.</p>",
+    "actions": [
+      {
+        "name": "Cyclist",
+        "slug": "cyclist",
+        "description": "<p>When riding a [Cycle], your Overland Movement Allowance increases by +3, and you may use Take Down as if it were on your Active List. When riding a [Rotom Device] [Cycle] you get access to Wild Charge instead of Take Down.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "cyclist",
+    "traits": [],
+    "node": {
+      "i": 41,
+      "j": -91,
+      "connected": [
+        "root-2",
+        "emergency-retreat",
+        "improved-overland-5"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#e4db1b",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/item-icons/acro%20bike.webp",
+        "tint": "#121212",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "AFU1teCNRoIixS3n",
+  "img": "systems/ptr2e/img/item-icons/acro%20bike.webp",
+  "effects": []
+}
