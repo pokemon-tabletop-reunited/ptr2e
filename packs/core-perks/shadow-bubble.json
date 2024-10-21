@@ -1,0 +1,65 @@
+{
+  "name": "Shadow Bubble",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Dark]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "[Dark]"
+    },
+    "description": "<p>You create a 3m radius bubble of Darkness aroud you. You are considered to have 3 stages of Cover versus Ranged Attacks for 3 Activations.</p>",
+    "actions": [
+      {
+        "name": "Shadow Bubble",
+        "slug": "shadow-bubble",
+        "description": "<p>You create a 3m radius bubble of Darkness aroud you. You are considered to have 3 stages of Cover versus Ranged Attacks for 3 Activations.</p>",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "shadow-bubble",
+    "traits": [],
+    "node": {
+      "i": 17,
+      "j": 22,
+      "connected": [
+        "incognito",
+        "type-embodiment-type-2",
+        "root-4",
+        "mightyena-tactic",
+        "night-eyes"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/dark_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "A182pJvsuUmdsxeR",
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "effects": []
+}
