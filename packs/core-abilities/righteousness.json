@@ -1,0 +1,94 @@
+{
+  "name": "Righteousness",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "hunter",
+          "dark"
+        ],
+        "name": "Righteousness",
+        "slug": "righteousness",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: The user's attacks deal 50% more damage to Dark-Type creatures.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user's attacks deal 50% more damage to Dark-Type creatures.",
+    "traits": [
+      "hunter",
+      "dark"
+    ],
+    "slug": "righteousness",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "ih7pxG44Cb4nWIHB",
+  "effects": [
+    {
+      "name": "Righteousness",
+      "type": "passive",
+      "_id": "8j4NZd6jo4uL9nPG",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "attack-damage",
+            "value": 50,
+            "predicate": [
+              "target:trait:dark"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729470167472,
+        "modifiedTime": 1729470191659,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
