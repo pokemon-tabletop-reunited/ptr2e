@@ -1,0 +1,63 @@
+{
+  "name": "Dead To Rights",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Combat"
+    },
+    "description": "<p>The next time you declare a non-[Contact] Attack against a foe without Cover, you gain +3 ACC and +2 CRIT Stages for 1 Activation.</p>",
+    "actions": [
+      {
+        "name": "Dead To Rights",
+        "slug": "dead-to-rights",
+        "description": "<p>The next time you declare a non-[Contact] Attack against a foe without Cover, you gain +3 ACC and +2 CRIT Stages for 1 Activation.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 10
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "dead-to-rights",
+    "traits": [],
+    "node": {
+      "i": -36,
+      "j": 93,
+      "connected": [
+        "down-the-sights",
+        "rapid-fire-style-1",
+        "dead-eye"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ff0080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+        "tint": "#0f0f0f",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "7Uhx4SiJFnFrbhB6",
+  "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+  "effects": []
+}
