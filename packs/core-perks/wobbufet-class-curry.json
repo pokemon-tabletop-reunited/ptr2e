@@ -1,0 +1,63 @@
+{
+  "name": "Wobbufet-Class Curry",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Husbandry 20",
+      "Koffing-Class Curry"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "Chef"
+    },
+    "description": "<p>You are able to make Wobbufet-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP. After making a Wobbufet-class Curry, roll a d100. On a 1-5, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",
+    "actions": [
+      {
+        "name": "Wobbufet-Class Curry",
+        "slug": "wobbufet-class-curry",
+        "description": "<p>You are able to make Wobbufet-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP. After making a Wobbufet-class Curry, roll a d100. On a 1-5, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",
+        "cost": {
+          "activation": "complex"
+        },
+        "type": "camping",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "wobbufet-class-curry",
+    "traits": [],
+    "node": {
+      "i": -64,
+      "j": 29,
+      "connected": [
+        "koffing-class-curry",
+        "milcery-class-curry",
+        "capture-ace-1"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#0000ff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "zS4XK397CZcVrZxu",
+  "img": "systems/ptr2e/img/perk-icons/Chef.svg",
+  "effects": []
+}
