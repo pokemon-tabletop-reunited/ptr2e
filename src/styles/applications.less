@@ -1035,7 +1035,7 @@ body {
                     }
                 }
 
-                .effects-display, .perks-display, .abilities-display {
+                .effects-display, .perks-display, .abilities-display, .toggles-display {
                     padding: 0.5rem;
 
                     ul.effect-list, ul.perk-list, ul.ability-list {
@@ -1070,6 +1070,44 @@ body {
                 .effects-display {
                     grid-area: span 5 / span 3;
                 }
+
+                .toggles-display {
+                  grid-area: 1 / 4 / span 5 / span 2;
+
+                  ul.toggles-list {
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    flex-flow: column wrap;
+                    list-style: none;
+
+                    > li {
+                      align-items: center;
+                      display: flex;
+                      width: 100%;
+
+                      label {
+                        align-items: center;
+                        display: flex;
+                        width: 100%;
+
+                        input {
+                          margin: 0 0.25rem 0 0;
+                          padding: 0;
+                        }
+
+                        span {
+                          flex: 1;
+                        }
+
+                        select {
+                          margin-left: 0.25em;
+                          flex: 0 0 50%;
+                        }
+                      }
+                    }
+                  }
+                }
             }
 
             .can-popout {
@@ -1091,6 +1129,45 @@ body {
 
     &.actor.popout {
         background: var(--appv2-background);
+
+        .toggles-display {
+          padding: 0.5rem;
+          max-height: 600px;
+
+          ul.toggles-list {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-flow: column wrap;
+            list-style: none;
+
+            > li {
+              align-items: center;
+              display: flex;
+              width: 100%;
+
+              label {
+                align-items: center;
+                display: flex;
+                width: 100%;
+
+                input {
+                  margin: 0 0.25rem 0 0;
+                  padding: 0;
+                }
+
+                span {
+                  flex: 1;
+                }
+
+                select {
+                  margin-left: 0.25em;
+                  flex: 0 0 50%;
+                }
+              }
+            }
+          }
+        }
 
         .effects-display, .abilities-display, .perks-display {
             padding: 0.5rem;

@@ -881,18 +881,22 @@ body .application.sheet .form-group {
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display,
-.application.sheet.actor.v2 .window-content .tab.active .abilities-display {
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display {
   padding: 0.5rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.effect-list,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.perk-list,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list,
-.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list {
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.ability-list {
   list-style: none;
   margin: 0 0.5rem;
   padding: 0;
@@ -900,21 +904,27 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.effect,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.effect-list li.effect,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.effect,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.effect,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.perk-list li.effect,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.effect,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.effect,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.effect,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.ability-list li.effect,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.item,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.item,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.effect-list li.item,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.item,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.item,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.perk-list li.item,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.item,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.item,
-.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item {
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.ability-list li.item {
   padding: 0.5rem;
   border-radius: 5px;
   display: flex;
@@ -926,39 +936,51 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.effect .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.effect-list li.effect .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.effect .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.effect .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.perk-list li.effect .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.effect .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.effect .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.effect .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.ability-list li.effect .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.item .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.item .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.effect-list li.item .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.item .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.item .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.perk-list li.item .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.item .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.item .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item .effect-icon,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.ability-list li.item .effect-icon,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.effect .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.effect-list li.effect .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.effect .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.effect .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.perk-list li.effect .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.effect .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.effect .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.effect .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.ability-list li.effect .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.item .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.item .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.effect-list li.item .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.item .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.item .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.perk-list li.item .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.item .item-icon,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.item .item-icon,
-.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item .item-icon {
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item .item-icon,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.ability-list li.item .item-icon {
   flex: 0 0 28px;
   height: 28px;
   width: 28px;
@@ -966,26 +988,63 @@ body .application.sheet .form-group {
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.effect .name,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.effect .name,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.effect-list li.effect .name,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.effect .name,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.effect .name,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.perk-list li.effect .name,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.effect .name,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.effect .name,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.effect .name,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.ability-list li.effect .name,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.effect-list li.item .name,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.effect-list li.item .name,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.effect-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.effect-list li.item .name,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.perk-list li.item .name,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.perk-list li.item .name,
 .application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.perk-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.perk-list li.item .name,
 .application.sheet.actor.v2 .window-content .tab.active .effects-display ul.ability-list li.item .name,
 .application.sheet.actor.v2 .window-content .tab.active .perks-display ul.ability-list li.item .name,
-.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item .name {
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display ul.ability-list li.item .name,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.ability-list li.item .name {
   flex-grow: 1;
   margin: 0 0.25rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active .effects-display {
   grid-area: span 5 / span 3;
+}
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display {
+  grid-area: 1 / 4 / span 5 / span 2;
+}
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.toggles-list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: column wrap;
+  list-style: none;
+}
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.toggles-list > li {
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.toggles-list > li label {
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.toggles-list > li label input {
+  margin: 0 0.25rem 0 0;
+  padding: 0;
+}
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.toggles-list > li label span {
+  flex: 1;
+}
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display ul.toggles-list > li label select {
+  margin-left: 0.25em;
+  flex: 0 0 50%;
 }
 .application.sheet.actor.v2 .window-content .can-popout {
   position: relative;
@@ -1002,6 +1061,38 @@ body .application.sheet .form-group {
 }
 .application.sheet.actor.popout {
   background: var(--appv2-background);
+}
+.application.sheet.actor.popout .toggles-display {
+  padding: 0.5rem;
+  max-height: 600px;
+}
+.application.sheet.actor.popout .toggles-display ul.toggles-list {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-flow: column wrap;
+  list-style: none;
+}
+.application.sheet.actor.popout .toggles-display ul.toggles-list > li {
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+.application.sheet.actor.popout .toggles-display ul.toggles-list > li label {
+  align-items: center;
+  display: flex;
+  width: 100%;
+}
+.application.sheet.actor.popout .toggles-display ul.toggles-list > li label input {
+  margin: 0 0.25rem 0 0;
+  padding: 0;
+}
+.application.sheet.actor.popout .toggles-display ul.toggles-list > li label span {
+  flex: 1;
+}
+.application.sheet.actor.popout .toggles-display ul.toggles-list > li label select {
+  margin-left: 0.25em;
+  flex: 0 0 50%;
 }
 .application.sheet.actor.popout .effects-display,
 .application.sheet.actor.popout .abilities-display,

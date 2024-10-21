@@ -36,6 +36,7 @@ import ClockEditor from "@module/apps/clocks/clock-editor.ts";
 import Sortable from "sortablejs";
 import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 import PartySheetPTR2e from "@module/apps/party-sheet.ts";
+import { ToggleComponent } from "./components/toggle-component.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
@@ -470,6 +471,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     if (partId === "effects") {
       context.effects = this.actor.effects.contents;
+      context.toggles = this.actor.synthetics.toggles;
     }
 
     if (partId === "perks") {
@@ -565,6 +567,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     if (partId === "effects") {
       EffectComponent.attachListeners(htmlElement, this.actor);
+      ToggleComponent.attachListeners(htmlElement, this.actor);
     }
 
     if (partId === "skills" || partId === "overview") {

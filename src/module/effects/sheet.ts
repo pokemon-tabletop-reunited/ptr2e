@@ -318,6 +318,9 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       for (const anchor of htmlQueryAll(htmlElement, "button[data-action=add-change]")) {
         anchor.addEventListener("click", async (event) => {
           event.preventDefault();
+          $(this.element).find("tags ~ input").each((_i, input) => {
+            if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
+          });
           const formData = new FormDataExtended(this.element);
           const data = this._prepareSubmitData(
             event as unknown as SubmitEvent,
@@ -342,6 +345,9 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
         select.addEventListener("change", async (event) => {
           event.preventDefault();
           event.stopPropagation();
+          $(this.element).find("tags ~ input").each((_i, input) => {
+            if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
+          });
           const formData = new FormDataExtended(this.element);
 
           // Manually update the JSON data with the new type if it doesn't exist
@@ -394,6 +400,9 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
 
       for (const anchor of htmlQueryAll(htmlElement, "a.remove-change")) {
         anchor.addEventListener("click", async (event) => {
+          $(this.element).find("tags ~ input").each((_i, input) => {
+            if ((input as HTMLInputElement).value === "") (input as HTMLInputElement).value = "[]";
+          });
           const formData = new FormDataExtended(this.element);
           const data = this._prepareSubmitData(
             event as unknown as SubmitEvent,

@@ -114,7 +114,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
   public async getItem(key: string = this.resolveInjectedProperties(this.uuid)): Promise<Maybe<ClientDocument>> {
     try {
-      return (await fromUuid(key))?.clone() ?? null
+      return (await fromUuid(key+""))?.clone() ?? null
     } catch (error) {
       console.error(error);
       return null;

@@ -315,6 +315,25 @@
           "label": "Predicate",
           "hint": "The predicate of the change."
         },
+        "ChangeDisabledIf": {
+          "label": "Disabled If Predicate",
+          "hint": "Disables the toggle checkbox if the predicate is true."
+        },
+        "ChangeToggleable": {
+          "label": "Toggleable",
+          "hint": "Whether this Roll Option is toggleable."
+        },
+        "ChangeAlwaysActive": {
+          "label": "Always Active",
+          "hint": "Whether this Roll Option toggle should always be checked. Useful for toggles with Sub Options."
+        },
+        "ChangeCount": {
+          "label": "Countable",
+          "hint": "Whether this Roll Option is countable: it will have a numeric value counting how many effects added this option."
+        },
+        "ChangeOption": {
+          "label": "Option"
+        },
         "priority": {
           "label": "Priority",
           "hint": "Affliction's are applied in batches based on their priority, from lowest to highest.\nThe system keeps all healing affliction at priority 0, and all damaging afflictions at priority 30, and in-between those numbers special cases are handled.\n\nFor homebrew content we recommend using these same numbers if your affliction is meant to be applied in the same batch as the system afflictions."
@@ -673,6 +692,9 @@
         "EffectComponent": {
           "title": "{actor}'s Effects"
         },
+        "ToggleComponent": {
+          "title": "{actor}'s Toggles"
+        },
         "SkillsComponent": {
           "title": "{actor}'s Skills"
         },
@@ -691,6 +713,10 @@
         "Effects": {
           "title": "{actor}'s Effects",
           "tooltip": "Popout Effects"
+        },
+        "Toggles": {
+          "title": "{actor}'s Toggles",
+          "tooltip": "Popout Toggles"
         },
         "Skills": {
           "title": "{actor}'s Skills",

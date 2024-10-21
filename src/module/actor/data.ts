@@ -45,6 +45,20 @@ interface ActorSynthetics {
   afflictions: { data: AfflictionActiveEffectSystem[], ids: Set<string> };
   rollNotes: Record<string, RollNote[]>;
   effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[]}>;
+  toggles: RollOptionToggle[];
+}
+
+export interface RollOptionToggle {
+  /** The ID of the effect with a change model for this toggle */
+  effectId: string;
+  label: string;
+  placement: string;
+  domain: string;
+  option: string;
+  suboptions: { label: string; selected: boolean }[];
+  alwaysActive: boolean;
+  checked: boolean;
+  enabled: boolean;
 }
 
 interface Attributes {
