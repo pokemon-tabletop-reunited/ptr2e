@@ -1,0 +1,63 @@
+{
+  "name": "Trained Rider",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Riding 20"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Cavalier"
+    },
+    "description": "<p>You may mount a Pokemon using a Simple Action instead of a Complex Action. You are able to mount under duress without requiring a check.</p>",
+    "actions": [
+      {
+        "name": "Trained Rider",
+        "slug": "trained-rider",
+        "description": "<p>You may mount a Pokemon using a Simple Action instead of a Complex Action. You are able to mount under duress without requiring a check.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "trained-rider",
+    "traits": [],
+    "node": {
+      "i": 5,
+      "j": 47,
+      "connected": [
+        "root-4",
+        "knee-steering",
+        "urge-mount",
+        "lean-in"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#008000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Cavalier.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "swPSWUmbRn3KwvyI",
+  "img": "systems/ptr2e/img/perk-icons/Cavalier.svg",
+  "effects": []
+}
