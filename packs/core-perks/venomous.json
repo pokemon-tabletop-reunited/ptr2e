@@ -1,0 +1,63 @@
+{
+  "name": "Venomous",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Poison]"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "[Poison]"
+    },
+    "description": "<p>You gain the [Venomous] Trait.</p>",
+    "actions": [
+      {
+        "name": "Venomous",
+        "slug": "venomous",
+        "description": "<p>You gain the [Venomous] Trait.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "venomous",
+    "traits": [],
+    "node": {
+      "i": -77,
+      "j": 17,
+      "connected": [
+        "improved-threaded-1",
+        "potent-venom",
+        "type-embodiment-type",
+        "improved-overland-4"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/poison_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "hvuakkloMFHGmBMe",
+  "img": "systems/ptr2e/img/svg/poison_icon.svg",
+  "effects": []
+}
