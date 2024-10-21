@@ -1,0 +1,64 @@
+{
+  "name": "Parkour",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Acrobatics 45"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Athleticism"
+    },
+    "description": "<p>When your Movement would take you into an obstacle that could reasonably be traversed within your Overland Movement Allowance, you may make a Hard (-20) Acrobatics check to temporarily grant yourself [Wallclimber] during that movement. If you have not returned to stable ground before your activation ends, you immediately fall.</p>",
+    "actions": [
+      {
+        "name": "Parkour",
+        "slug": "parkour",
+        "description": "<p>When your Movement would take you into an obstacle that could reasonably be traversed within your Overland Movement Allowance, you may make a Hard (-20) Acrobatics check to temporarily grant yourself [Wallclimber] during that movement. If you have not returned to stable ground before your activation ends, you immediately fall.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "parkour",
+    "traits": [],
+    "node": {
+      "i": -12,
+      "j": -71,
+      "connected": [
+        "freeclimber",
+        "improved-overland-2",
+        "acrobat",
+        "evasive-style",
+        "agile-style"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#0000ff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "95OUHWV4eEI4I3Fe",
+  "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
+  "effects": []
+}
