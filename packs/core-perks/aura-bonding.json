@@ -1,0 +1,65 @@
+{
+  "name": "Aura Bonding",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Aura Sense 35",
+      "Aura Empathy",
+      "Aura Projection"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "Aura"
+    },
+    "description": "<p>You may substitute Aura Sense in place of the Conversation skill when interacting with creatures that the GM deems to be receptive.</p>",
+    "actions": [
+      {
+        "name": "Aura Bonding",
+        "slug": "aura-bonding",
+        "description": "<p>You may substitute Aura Sense in place of the Conversation skill when interacting with creatures that the GM deems to be receptive.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "aura-bonding",
+    "traits": [],
+    "node": {
+      "i": 3,
+      "j": -56,
+      "connected": [
+        "aura-empathy",
+        "soothing-aura",
+        "shift-consciousness-aura",
+        "keep-fighting"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#0000ff",
+        "borderColor": null,
+        "borderWidth": 0,
+        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "UfdaseGwkBOgrqbz",
+  "img": "systems/ptr2e/img/perk-icons/Aura.svg",
+  "effects": []
+}
