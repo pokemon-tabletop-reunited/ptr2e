@@ -1,0 +1,69 @@
+{
+  "name": "Trained Wielder",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Lack a Wielding slot."
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Gear"
+    },
+    "description": "<p>Gain a Wielded Item Slot.</p>",
+    "actions": [
+      {
+        "name": "Trained Wielder",
+        "slug": "trained-wielder",
+        "description": "<p>Gain a Wielded Item Slot.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "trained-wielder",
+    "traits": [],
+    "node": {
+      "i": -28,
+      "j": 70,
+      "connected": [
+        "dual-wielder",
+        "blacksmith",
+        "knee-steering",
+        "fisherman",
+        "lethal-restraint",
+        "bug-catcher",
+        "improved-overland-1",
+        "secret-ninja-tools",
+        "down-the-sights",
+        "rapid-fire-style-1"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#808080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+        "tint": "#080808",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "Noilrz4vhlRIcrO3",
+  "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
+  "effects": []
+}
