@@ -1,0 +1,89 @@
+{
+  "name": "Pianissimo",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Pianissimo",
+        "slug": "pianissimo",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: The user's [Sonic] attacks have a 30% chance of inflicting @Affliction[confused] 5. Anytime an attack of the user's would increase or decrease a creature's Combat Stages excluding their own, the triggering number is doubled.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user's [Sonic] attacks have a 30% chance of inflicting @Affliction[confused] 5. Anytime an attack of the user's would increase or decrease a creature's Combat Stages excluding their own, the triggering number is doubled.",
+    "traits": [
+      "partial-automation"
+    ],
+    "slug": "pianissimo",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "dXiivzK1BguxyL5K",
+  "effects": [
+    {
+      "name": "Pianissimo",
+      "type": "passive",
+      "_id": "dp1gTdRDI46hQ5nH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "sonic-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729469347936,
+        "modifiedTime": 1729469370920,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
