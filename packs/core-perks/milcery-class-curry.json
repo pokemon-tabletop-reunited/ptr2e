@@ -1,0 +1,63 @@
+{
+  "name": "Milcery-Class Curry",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Husbandry 40",
+      "Wobbufet-Class Curry"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "Chef"
+    },
+    "description": "<p>You are able to make Milcery-class Curries as a Camp Action. One of these Curries restores 75% of the party's max HP. After making a Milcery-class Curry, roll a d100. On a 1-15, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",
+    "actions": [
+      {
+        "name": "Milcery-Class Curry",
+        "slug": "milcery-class-curry",
+        "description": "<p>You are able to make Milcery-class Curries as a Camp Action. One of these Curries restores 75% of the party's max HP. After making a Milcery-class Curry, roll a d100. On a 1-15, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",
+        "cost": {
+          "activation": "complex"
+        },
+        "type": "camping",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "milcery-class-curry",
+    "traits": [],
+    "node": {
+      "i": -56,
+      "j": 23,
+      "connected": [
+        "wobbufet-class-curry",
+        "copperajah-class-curry",
+        "charizard-class-curry"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ffff80",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
+        "tint": "#161616",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "lH0NeWlnJsfFdTvf",
+  "img": "systems/ptr2e/img/perk-icons/Chef.svg",
+  "effects": []
+}
