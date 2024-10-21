@@ -1,0 +1,62 @@
+{
+  "name": "Hobby Gardener",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Natural World 20"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Botany"
+    },
+    "description": "<p>You understand the basics of caring for and propagating plants. You've even managed to keep a house plant alive for several weeks. You can grow Grade E plants as a Camp Action.</p>",
+    "actions": [
+      {
+        "name": "Hobby Gardener",
+        "slug": "hobby-gardener",
+        "description": "<p>You understand the basics of caring for and propagating plants. You've even managed to keep a house plant alive for several weeks. You can grow Grade E plants as a Camp Action.</p>",
+        "cost": {
+          "activation": "complex"
+        },
+        "type": "camping",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "hobby-gardener",
+    "traits": [],
+    "node": {
+      "i": -42,
+      "j": -29,
+      "connected": [
+        "root-1",
+        "breeder",
+        "nurturing-shoots"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#008000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "GwAsdCjwvx72W8Um",
+  "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
+  "effects": []
+}
