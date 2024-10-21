@@ -1,0 +1,65 @@
+{
+  "name": "Rapid Fire Style 1",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Combat"
+    },
+    "description": "<p>Your next non-[Contact] Attack gains the [2-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced to 80% of its default value. If it already had [X-Strike], that value increases by +2.</p>",
+    "actions": [
+      {
+        "name": "Rapid Fire Style 1",
+        "slug": "rapid-fire-style-1",
+        "description": "<p>Your next non-[Contact] Attack gains the [2-Strike] trait, if it didn't already have [X-Strike], and has its Power reduced to 80% of its default value. If it already had [X-Strike], that value increases by +2.</p>",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "rapid-fire-style-1",
+    "traits": [],
+    "node": {
+      "i": -30,
+      "j": 81,
+      "connected": [
+        "trained-wielder",
+        "down-the-sights",
+        "root-5",
+        "rapid-fire-style-2",
+        "dead-to-rights"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#0000ff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "4FH3vIN3aJLVe0x0",
+  "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+  "effects": []
+}
