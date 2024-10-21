@@ -1,0 +1,130 @@
+{
+  "name": "Chill Out",
+  "type": "move",
+  "_id": "ATin7GkQR5amxAP4",
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "system": {
+    "slug": "chill-out",
+    "traits": [
+      "environ"
+    ],
+    "actions": [
+      {
+        "name": "Chill Out",
+        "slug": "chill-out",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [],
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9
+        },
+        "types": [
+          "ice"
+        ],
+        "category": "status",
+        "description": "<p>Effect: On hit, all legal targets lose -1 ATK and SPD stages for 5 activations.</p>"
+      },
+      {
+        "name": "Chill Out (Snowy)",
+        "slug": "chill-out-snowy",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "environ"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 9
+        },
+        "types": [
+          "ice"
+        ],
+        "category": "status",
+        "description": "<p>Effect: On hit, all legal targets lose -2 ATK and SPD stages for 7 activations."
+      }
+    ],
+    "description": "<p>Effect: On hit, all legal targets lose -1 ATK and SPD stages for 5 activations. If there is Snowy Weather, they are decreased by -2 for 7 activations instead.</p>",
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Chill Out",
+      "type": "passive",
+      "_id": "ghrue0G37MduVICw",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "chill-out-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.ikCAv5w4iNfHHqaE",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "chill-out-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.HLAV9dhz632Rfp1K",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729532267704,
+        "modifiedTime": 1729532319249,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
