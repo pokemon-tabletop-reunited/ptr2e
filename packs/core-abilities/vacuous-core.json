@@ -1,0 +1,150 @@
+{
+  "name": "Vacuous Core",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Vacuous Core",
+        "slug": "vacuous-core",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "The user declares Glaciate, Freeze Shock, or Ice Burn."
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Trigger: The user declares Glaciate, Freeze Shock, or Ice Burn.\nEffect: The triggering attack inflicts @Affliction[frozen] 5 on all valid targets on hit. If the triggering attack was Freeze Shock or Ice Burn, the attack causes all valid targets to lose -1 ACC stage for 5 Activations.",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Vacuous Core",
+        "slug": "vacuous-core",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "Passive: if the user is White Kyurem, they gain the Turboblaze Ability as an Extra Ability. If the user is Black Kyurem, they gain the Teravolt Ability as an Extra Ability.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: The user declares Glaciate, Freeze Shock, or Ice Burn.\nEffect: The triggering attack inflicts @Affliction[frozen] 5 on all valid targets on hit. If the triggering attack was Freeze Shock or Ice Burn, the attack causes all valid targets to lose -1 ACC stage for 5 Activations. Passive: if the user is White Kyurem, they gain the Turboblaze Ability as an Extra Ability. If the user is Black Kyurem, they gain the Teravolt Ability as an Extra Ability.",
+    "traits": [
+      "legendary"
+    ],
+    "slug": "vacuous-core",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "BRmVL3K49GinN08X",
+  "effects": [
+    {
+      "name": "Vacuous Core",
+      "type": "passive",
+      "_id": "XqiHACexRkQoVAQz",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "glaciate-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "freeze-shock-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "ice-burn-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "freeze-shock-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.wA5oCsgHmZLcHHSn",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "ice-burn-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.wA5oCsgHmZLcHHSn",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729495505099,
+        "modifiedTime": 1729495635200,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
