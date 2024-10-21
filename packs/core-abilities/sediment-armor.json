@@ -1,0 +1,95 @@
+{
+  "name": "Sediment Armor",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "strategist",
+          "ground"
+        ],
+        "name": "Sediment Armor",
+        "slug": "sediment-armor",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1,
+          "trigger": "The user resolves a Ground-Type attack"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Trigger: The user resolves a Ground-Type attack\nEffect: The user gains @Affliction[resolved] 2.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: The user resolves a Ground-Type attack\nEffect: The user gains @Affliction[resolved] 2.",
+    "traits": [
+      "strategist",
+      "ground"
+    ],
+    "slug": "sediment-armor",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "oBJ0un1HW7fVupi4",
+  "effects": [
+    {
+      "name": "Sediment Armor",
+      "type": "passive",
+      "_id": "1h1MLpTiKRXQn93K",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "ground-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729470492774,
+        "modifiedTime": 1729470514731,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
