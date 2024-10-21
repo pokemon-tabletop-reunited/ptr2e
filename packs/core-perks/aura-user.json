@@ -1,0 +1,67 @@
+{
+  "name": "Aura User",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Aura Sense 20"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Aura"
+    },
+    "description": "<p>You gain [Aura User].</p>",
+    "actions": [
+      {
+        "name": "Aura User",
+        "slug": "aura-user",
+        "description": "<p>You gain [Aura User].</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "aura-user",
+    "traits": [],
+    "node": {
+      "i": 15,
+      "j": -79,
+      "connected": [
+        "root-2",
+        "aura-haze",
+        "freeclimber",
+        "evasive-style",
+        "shielding-aura",
+        "aura-empathy",
+        "aura-dampening",
+        "keep-fighting"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#bcf0d8",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+        "tint": "#18af68",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "ft8sIBRLOGVjp70g",
+  "img": "systems/ptr2e/img/perk-icons/Aura.svg",
+  "effects": []
+}
