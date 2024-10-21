@@ -1,0 +1,63 @@
+{
+  "name": "Improved Teleportation 1",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "A Teleportation Movement Allowance",
+      "Occult (Psychic) 40 + 5 x (# of Improved Teleportation Perks already obtained)"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "Mobility"
+    },
+    "description": "<p>Improve your Teleportation Movement Allowance by 2.</p>",
+    "actions": [
+      {
+        "name": "Improved Teleportation 1",
+        "slug": "improved-teleportation-1",
+        "description": "<p>Improve your Teleportation Movement Allowance by 2.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "improved-teleportation-1",
+    "traits": [],
+    "node": {
+      "i": -106,
+      "j": 50,
+      "connected": [
+        "root-6",
+        "psychoportation",
+        "long-range-psychoportation"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "7f24boNPqznIhjiv",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "effects": []
+}
