@@ -1,0 +1,64 @@
+{
+  "name": "Aura Dampening",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Aura Sense 30"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "Aura"
+    },
+    "description": "<p>You are able to dampen your Aura, making it difficult to read your moods and intentions. You may spend the 2 PP cost as an [Interrupt 3] Free Action when someone attempts to probe your Aura using Aura Empathy to inflict a -20 penalty to any triggering Aura Sense check.</p>",
+    "actions": [
+      {
+        "name": "Aura Dampening",
+        "slug": "aura-dampening",
+        "description": "<p>You are able to dampen your Aura, making it difficult to read your moods and intentions. You may spend the 2 PP cost as an [Interrupt 3] Free Action when someone attempts to probe your Aura using Aura Empathy to inflict a -20 penalty to any triggering Aura Sense check.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "aura-dampening",
+    "traits": [],
+    "node": {
+      "i": 8,
+      "j": -67,
+      "connected": [
+        "aura-haze",
+        "aura-user",
+        "aura-empathy",
+        "sight-beyond-sight"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#808000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "3j8tXm6MJWi1JKsH",
+  "img": "systems/ptr2e/img/perk-icons/Aura.svg",
+  "effects": []
+}
