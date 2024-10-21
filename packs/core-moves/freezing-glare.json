@@ -1,0 +1,45 @@
+{
+  "name": "Freezing Glare",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "slug": "freezing-glare",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "freezing-glare",
+        "name": "Freezing Glare",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "psychic",
+          "ice"
+        ],
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frozen] 5. This attack is both Ice and Psychic Type.</p>",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg"
+      }
+    ],
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "p6CRPedtiA7nzBuH",
+  "effects": []
+}
