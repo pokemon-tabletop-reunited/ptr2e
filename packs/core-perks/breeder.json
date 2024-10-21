@@ -1,0 +1,64 @@
+{
+  "name": "Breeder",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Husbandry 25"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "social",
+      "approach": "resilience",
+      "archetype": "Breeding"
+    },
+    "description": "<p>You understand the fundamentals of Pokemon Egg Groups and behaviour well enough to breed Pokemon. You may undertake the Breeding Camp Action to perform a Husbandry skill check and produce an Egg.</p>",
+    "actions": [
+      {
+        "name": "Breeder",
+        "slug": "breeder",
+        "description": "<p>You understand the fundamentals of Pokemon Egg Groups and behaviour well enough to breed Pokemon. You may undertake the Breeding Camp Action to perform a Husbandry skill check and produce an Egg.</p>",
+        "cost": {
+          "activation": "complex"
+        },
+        "type": "camping",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "breeder",
+    "traits": [],
+    "node": {
+      "i": -28,
+      "j": -39,
+      "connected": [
+        "root-1",
+        "shiny-mutation",
+        "underdogs-spirit-1",
+        "groomer",
+        "hobby-gardener"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ffff00",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+        "tint": "#151515",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "Cb1xb08jFdxHHVae",
+  "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
+  "effects": []
+}
