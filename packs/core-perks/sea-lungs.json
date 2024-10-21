@@ -1,0 +1,61 @@
+{
+  "name": "Sea Lungs",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Water]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "[Water]"
+    },
+    "description": "<p>You gain the [Gilled] trait.</p>",
+    "actions": [
+      {
+        "name": "Sea Lungs",
+        "slug": "sea-lungs",
+        "description": "<p>You gain the [Gilled] trait.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "sea-lungs",
+    "traits": [],
+    "node": {
+      "i": -40,
+      "j": -50,
+      "connected": [
+        "swimming-lessons",
+        "improved-swim-1"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/water_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "fl85sOpDz50eIHOw",
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
+  "effects": []
+}
