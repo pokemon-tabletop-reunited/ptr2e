@@ -1,0 +1,105 @@
+{
+  "name": "Turtle Strategy",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Turtle Strategy",
+        "slug": "turtle-strategy",
+        "type": "generic",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: The user's Base DEF and SPDEF are increased by 35%. Whenever the user uses an attack, that attack is @Affliction[disabled] 5.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user's Base DEF and SPDEF are increased by 35%. Whenever the user uses an attack, that attack is @Affliction[disabled] 5.",
+    "traits": [],
+    "slug": "turtle-strategy",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "BR1FBCBRv37RdoMG",
+  "effects": [
+    {
+      "name": "Turtle Strategy",
+      "type": "passive",
+      "_id": "Etqc2WHpqpeayXG2",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.def.base",
+            "value": 1.35,
+            "mode": 1,
+            "predicate": [],
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spd.base",
+            "value": 1.35,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.disabledconditem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729495253125,
+        "modifiedTime": 1729495342135,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
