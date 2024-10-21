@@ -1,0 +1,67 @@
+{
+  "name": "Hardy Trekker",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Trainer] or [Expedition Leader]",
+      "Survival 35"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Outdoorsman"
+    },
+    "description": "<p>Until the start of the next Round, the user is immune to effect damage and negative effects of active Terrains, Weathers, and Hazards. The user adds all [Terrain] Attacks to their Tutor List, learning 2 of them immediately upon taking this Perk.</p>",
+    "actions": [
+      {
+        "name": "Hardy Trekker",
+        "slug": "hardy-trekker",
+        "type": "generic",
+        "traits": [
+          "environ"
+        ],
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Until the start of the next Round, the user is immune to effect damage and negative effects of active Terrains and Weathers.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "slug": "hardy-trekker",
+    "traits": [],
+    "node": {
+      "i": -44,
+      "j": -61,
+      "connected": [
+        "weathered",
+        "swimming-lessons",
+        "improved-overland-2",
+        "improved-swim-1"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#808080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "iOlwna5vtQnrFxtc",
+  "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
+  "effects": []
+}
