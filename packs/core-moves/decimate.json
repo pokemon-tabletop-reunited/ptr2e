@@ -1,0 +1,101 @@
+{
+  "name": "Decimate",
+  "type": "move",
+  "_id": "W9xhtexpOAbunFlR",
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "system": {
+    "slug": "decimate",
+    "traits": [
+      "crushing",
+      "contact"
+    ],
+    "actions": [
+      {
+        "name": "Decimate",
+        "slug": "decimate",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "crushing",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "types": [
+          "dark"
+        ],
+        "category": "physical",
+        "power": 100,
+        "accuracy": 90,
+        "description": "<p>Effect: On hit, the target has a 10% chance of losing -3 DEF stages for 5 activations.</p>"
+      }
+    ],
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Decimate",
+      "type": "passive",
+      "_id": "bGlIfsEKVHfwt1LY",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "decimate-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.IMkv0gbwXcgkXfCJ",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729538606228,
+        "modifiedTime": 1729538635602,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
