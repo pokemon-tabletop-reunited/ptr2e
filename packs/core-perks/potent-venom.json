@@ -1,0 +1,62 @@
+{
+  "name": "Potent Venom",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Poison]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "[Poison]"
+    },
+    "description": "<p>Your attacks that have a chance to inflict @Affliction[poison] have that chance increase by +20%. Additionally, your Struggle and Weapon attacks gain a 10% chance to inflict @Affliction[poison] on hit.</p>",
+    "actions": [
+      {
+        "name": "Potent Venom",
+        "slug": "potent-venom",
+        "description": "<p>Your attacks that have a chance to inflict @Affliction[poison] have that chance increase by +20%. Additionally, your Struggle and Weapon attacks gain a 10% chance to inflict @Affliction[poison] on hit.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "potent-venom",
+    "traits": [],
+    "node": {
+      "i": -66,
+      "j": 8,
+      "connected": [
+        "venomous",
+        "one-with-the-green",
+        "improved-overland-4"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/poison_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "TaUuAKRcosusMkC9",
+  "img": "systems/ptr2e/img/svg/poison_icon.svg",
+  "effects": []
+}
