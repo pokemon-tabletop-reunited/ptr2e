@@ -1,0 +1,98 @@
+{
+  "name": "Snake Venom",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Snake Venom",
+        "slug": "snake-venom",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: The user's [Contact] attacks have a 20% to inflict @Affliction[poison] 5 and a 20% chance to inflict @Affliction[paralysis] 5.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user's [Contact] attacks have a 20% to inflict @Affliction[poison] 5 and a 20% chance to inflict @Affliction[paralysis] 5.",
+    "traits": [],
+    "slug": "snake-venom",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "QNiFiqx1FEzX2gEs",
+  "effects": [
+    {
+      "name": "Snake Venom",
+      "type": "passive",
+      "_id": "1WdGzHjpcBEZp7xu",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729471045104,
+        "modifiedTime": 1729471103513,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
