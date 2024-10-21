@@ -1,0 +1,85 @@
+{
+  "name": "Potent Might",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Potent Might",
+        "slug": "potent-might",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: Doubles the user's Base SPATK.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: Doubles the user's Base SPATK.",
+    "traits": [],
+    "slug": "potent-might",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "3mYE91CP0oIOFp8R",
+  "effects": [
+    {
+      "name": "Potent Might",
+      "type": "passive",
+      "_id": "Hsw2cPkwP3y2p3EZ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.spa.base",
+            "value": 2,
+            "mode": 1,
+            "predicate": [],
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729469642806,
+        "modifiedTime": 1729469678607,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
