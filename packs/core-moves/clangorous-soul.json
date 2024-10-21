@@ -1,0 +1,42 @@
+{
+  "name": "Clangorous Soul",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
+  "system": {
+    "slug": "clangorous-soul",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "clangorous-soul",
+        "name": "Clangorous Soul",
+        "type": "attack",
+        "traits": [
+          "sonic",
+          "dance"
+        ],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8,
+          "trigger": "<p>The user's HP is greater than 1/3 of their Max HP.</p>"
+        },
+        "category": "status",
+        "types": [
+          "dragon"
+        ],
+        "description": "<p>Trigger: The user's HP is greater than 1/3 of their Max HP.</p><p>Effect: The user sacrifices HP equal to 1/3 of their Max HP and gains Omniboost for 5 activations.</p>",
+        "img": "systems/ptr2e/img/svg/dragon_icon.svg"
+      }
+    ],
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "7ZxR9WSOKK72mxC5",
+  "effects": []
+}
