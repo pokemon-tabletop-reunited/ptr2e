@@ -1,0 +1,63 @@
+{
+  "name": "Dead Eye",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 4,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Combat"
+    },
+    "description": "<p>Trigger: You hit with a damaging, non-Critical, non-[Contact] Attack. The attack becomes a Critical Hit.</p>",
+    "actions": [
+      {
+        "name": "Dead Eye",
+        "slug": "dead-eye",
+        "description": "<p>Trigger: You hit with a damaging, non-Critical, non-[Contact] Attack. The attack becomes a Critical Hit.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 5
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "dead-eye",
+    "traits": [],
+    "node": {
+      "i": -43,
+      "j": 95,
+      "connected": [
+        "down-the-sights",
+        "dead-to-rights",
+        "precise-style"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#0000ff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "XwBEo0SPEQ5UtA0l",
+  "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+  "effects": []
+}
