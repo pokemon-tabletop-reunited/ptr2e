@@ -1,0 +1,65 @@
+{
+  "name": "Quick Switch",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Trainer]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "Juggler"
+    },
+    "description": "<p>At the cost of 2PP and done across a Simple Action, the user Recalls a creature and selects that or another creature on their Team, freely using Send Out to bring that creature into Combat.</p>",
+    "actions": [
+      {
+        "name": "Quick Switch",
+        "slug": "quick-switch",
+        "description": "The user freely uses Recall on the creature, and freely uses Send Out targeting an elligible creature from their Team.",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "ally",
+          "unit": "m"
+        },
+        "type": "generic",
+        "traits": [
+          "manipulate",
+          "basic"
+        ],
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "slug": "quick-switch",
+    "traits": [],
+    "node": {
+      "i": 23,
+      "j": -41,
+      "connected": [
+        "tactician",
+        "rapid-style"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ff8000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
+        "tint": "#151515",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "kGNc0h7Xs3dmXRjt",
+  "img": "systems/ptr2e/img/perk-icons/Juggler.svg",
+  "effects": []
+}
