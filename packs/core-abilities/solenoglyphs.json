@@ -1,0 +1,89 @@
+{
+  "name": "Solenoglyphs",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Solenoglyphs",
+        "slug": "solenoglyphs",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "The user declares a [Jaw] attack."
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Trigger: The user declares a [Jaw] attack.\nEffect: The triggering attack has a +30% chance to inflict @Affliction[poison] 5. Attacks that did not previously have a chance to inflict @Affliction[poison] 5 have a 30% of causing @Affliction[poison] 5.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: The user declares a [Jaw] attack.\nEffect: The triggering attack has a +30% chance to inflict @Affliction[poison] 5. Attacks that did not previously have a chance to inflict @Affliction[poison] 5 have a 30% of causing @Affliction[poison] 5.",
+    "traits": [],
+    "slug": "solenoglyphs",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "Xvihs0n8hpt9nyeo",
+  "effects": [
+    {
+      "name": "Solenoglyphs",
+      "type": "passive",
+      "_id": "tASAFEsoQESYpRR3",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "jaw-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.poisoncondititem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729495889842,
+        "modifiedTime": 1729495922515,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
