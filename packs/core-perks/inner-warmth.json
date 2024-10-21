@@ -1,0 +1,63 @@
+{
+  "name": "Inner Warmth",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Fire]"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "[Fire]"
+    },
+    "description": "<p>You gain the [Heater] trait.</p>",
+    "actions": [
+      {
+        "name": "Inner Warmth",
+        "slug": "inner-warmth",
+        "description": "<p>You gain the [Heater] trait.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "inner-warmth",
+    "traits": [],
+    "node": {
+      "i": 10,
+      "j": 39,
+      "connected": [
+        "type-embodiment-type-2",
+        "root-4",
+        "intense-heat",
+        "firefly"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/fire_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "vgrtXLOiip6DrtUb",
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "effects": []
+}
