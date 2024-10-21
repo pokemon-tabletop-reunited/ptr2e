@@ -1,0 +1,66 @@
+{
+  "name": "Shadow Guide",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Trainer] or [Expedition Leader]",
+      "Psychology 30"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "Shadow"
+    },
+    "description": "<p>[Closed Heart] creatures that you are responsible for may gain XP, level up, learn new moves and evolve as normal.</p>",
+    "actions": [
+      {
+        "name": "Shadow Guide",
+        "slug": "shadow-guide",
+        "description": "<p>[Closed Heart] creatures that you are responsible for may gain XP, level up, learn new moves and evolve as normal.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "shadow-guide",
+    "traits": [],
+    "node": {
+      "i": 59,
+      "j": -56,
+      "connected": [
+        "root-3",
+        "dark-clarity",
+        "fiendish-provocation",
+        "silver-bullet",
+        "open-your-heart",
+        "deep-breaths"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "hqj8DQgk8QnBPehy",
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+  "effects": []
+}
