@@ -1,0 +1,64 @@
+{
+  "name": "<Stat> Specialist",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Leadership 40",
+      "[Trainer] or [Expedition Leader]"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Stat Ace"
+    },
+    "description": "<p>Creatures considered to be under your command or ownership (i.e. owned pokemon, expedition team members, human NPC underlings) gain the <Stat Specialist> keyword, which becomes the relevant Stat Specialist trait. You yourself also gain this trait.</p>",
+    "actions": [
+      {
+        "name": "<Stat> Specialist",
+        "slug": "stat-specialist",
+        "description": "Creatures considered to be under your command or ownership (i.e. owned pokemon, expedition team members, human NPC underlings) gain the <Stat Specialist> keyword, which becomes the relevant Stat Specialist trait. You yourself also gain this trait.",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "stat-specialist",
+    "traits": [],
+    "node": {
+      "i": 16,
+      "j": -42,
+      "connected": [
+        "stat-iv-booster-1",
+        "tactician",
+        "rapid-style",
+        "keep-fighting"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "DUzi1e72sbfcLQU1",
+  "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
+  "effects": []
+}
