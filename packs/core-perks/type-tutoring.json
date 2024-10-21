@@ -1,0 +1,65 @@
+{
+  "name": "<Type> Tutoring",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Teaching 30"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "Type Ace"
+    },
+    "description": "<p>You are able to Tutor Attacks from the <Type> Tutor List as if you knew them already yourself, up to your Grade.</p>",
+    "actions": [
+      {
+        "name": "<Type> Tutoring",
+        "slug": "type-tutoring",
+        "description": "<p>You are able to Tutor Attacks from the <Type> Tutor List as if you knew them already yourself, up to your Grade.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "type-tutoring",
+    "traits": [],
+    "node": {
+      "i": -36,
+      "j": -26,
+      "connected": [
+        "root-1",
+        "type-domain",
+        "type-specialty",
+        "underdogs-spirit-1",
+        "scholar",
+        "type-style"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "w40qBGGPJR3HimcE",
+  "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
+  "effects": []
+}
