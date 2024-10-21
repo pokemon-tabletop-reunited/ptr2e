@@ -1,0 +1,60 @@
+{
+  "name": "Dual Wielder",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Have a Wielded Item Slot"
+    ],
+    "cost": 4,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Gear"
+    },
+    "description": "<p>Gain a second Wielded Item Slot.</p>",
+    "actions": [
+      {
+        "name": "Dual Wielder",
+        "slug": "dual-wielder",
+        "description": "<p>Gain a second Wielded Item Slot.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "dual-wielder",
+    "traits": [],
+    "node": {
+      "i": -26,
+      "j": 77,
+      "connected": [
+        "trained-wielder"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "QioUEl6UBFclZvzG",
+  "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
+  "effects": []
+}
