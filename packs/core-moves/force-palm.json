@@ -1,0 +1,106 @@
+{
+  "name": "Force Palm",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+  "system": {
+    "slug": "force-palm",
+    "traits": [
+      "push-1",
+      "pulse",
+      "contact",
+      "aura"
+    ],
+    "actions": [
+      {
+        "slug": "force-palm",
+        "name": "Force Palm",
+        "type": "attack",
+        "traits": [
+          "push-1",
+          "pulse",
+          "contact",
+          "aura",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[paralysis] 5.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "7eWAp2IGkSaGo0e0",
+  "effects": [
+    {
+      "name": "Force Palm",
+      "type": "passive",
+      "_id": "xLqzZcHDECxIjzTn",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "force-palm-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729545183618,
+        "modifiedTime": 1729545207482,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
