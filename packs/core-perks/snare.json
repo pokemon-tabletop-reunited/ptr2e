@@ -1,0 +1,63 @@
+{
+  "name": "Snare",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Track 20"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "Capture"
+    },
+    "description": "<p>You gain +1 Capture Power against [Pokemon] that have been entangled in a Net or on a Fishing Line.</p>",
+    "actions": [
+      {
+        "name": "Snare",
+        "slug": "snare",
+        "description": "<p>You gain +1 Capture Power against [Pokemon] that have been entangled in a Net or on a Fishing Line.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "snare",
+    "traits": [],
+    "node": {
+      "i": -40,
+      "j": 68,
+      "connected": [
+        "blacksmith",
+        "fisherman",
+        "bug-catcher",
+        "capture-ace-2"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#808080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
+        "tint": "#0d0d0d",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "tw7DjZ6QkzrExVJA",
+  "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
+  "effects": []
+}
