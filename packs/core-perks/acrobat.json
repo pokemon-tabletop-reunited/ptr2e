@@ -1,0 +1,120 @@
+{
+  "name": "Acrobat",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Acrobatics 30"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Athleticism"
+    },
+    "description": "<p>You gain a +10 to Acrobatics checks when benefitting from a running start.</p>",
+    "actions": [
+      {
+        "name": "Acrobat",
+        "slug": "acrobat",
+        "description": "<p>You gain a +10 to Acrobatics checks when benefitting from a running start.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "acrobat",
+    "traits": [],
+    "node": {
+      "i": -9,
+      "j": -67,
+      "connected": [
+        "freeclimber",
+        "improved-overland-2",
+        "parkour",
+        "shielding-aura",
+        "agile-style"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#004080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "MDkJ0KhnAvqw0v3J",
+  "img": "systems/ptr2e/img/perk-icons/Exploration.svg",
+  "effects": [
+    {
+      "name": "Acrobat",
+      "type": "passive",
+      "_id": "n57YCl0DLkpYbOm2",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "acrobatics-check",
+            "value": 10,
+            "predicate": [
+              "Manual"
+            ],
+            "label": "Running Start?",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.3",
+        "createdTime": 1729174484032,
+        "modifiedTime": 1729174565254,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
