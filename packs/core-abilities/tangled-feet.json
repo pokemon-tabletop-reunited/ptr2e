@@ -1,0 +1,91 @@
+{
+  "name": "Tangled Feet",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Tangled Feet",
+        "slug": "tangled-feet",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: If the user is @Affliction[confused], their default EVA is +2.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: If the user is @Affliction[confused], their default EVA is +2.",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "tangled-feet",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "9KGZj5uqHbTOaoab",
+  "effects": [
+    {
+      "name": "Tangled Feet",
+      "type": "passive",
+      "_id": "Os7WHOPYgwdSwjbx",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.evasion.stage",
+            "value": 2,
+            "predicate": [
+              "effect:affliction:confused"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729494464983,
+        "modifiedTime": 1729494525921,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
