@@ -1,0 +1,65 @@
+{
+  "name": "Type Specialty",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "social",
+      "approach": "finesse",
+      "archetype": "Type Ace"
+    },
+    "description": "<p>You gain +10 to social interaction Skill Tests when interacting with Pokemon of your preferred type. The cost on this scales with each additional type chosen.</p>",
+    "actions": [
+      {
+        "name": "Type Specialty",
+        "slug": "type-specialty",
+        "description": "<p>You gain +10 to social interaction Skill Tests when interacting with Pokemon of your preferred type. The cost on this scales with each additional type chosen.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "type-specialty",
+    "traits": [],
+    "node": {
+      "i": -50,
+      "j": -17,
+      "connected": [
+        "root-1",
+        "type-domain",
+        "type-tutoring",
+        "type-embodiment-type",
+        "scholar",
+        "improved-overland-4"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#c0c0c0",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "7M9EE1mHIJeoAWhp",
+  "img": "systems/ptr2e/img/perk-icons/Socialite.svg",
+  "effects": []
+}
