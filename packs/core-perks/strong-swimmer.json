@@ -1,0 +1,61 @@
+{
+  "name": "Strong Swimmer",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Swim 30"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Athleticism"
+    },
+    "description": "<p>You are able to hold your breath for longer, and manage your air more carefully while diving. Increase the size of your Breath clock while swimming by 2 Spans.</p>",
+    "actions": [
+      {
+        "name": "Strong Swimmer",
+        "slug": "strong-swimmer",
+        "description": "<p>You are able to hold your breath for longer, and manage your air more carefully while diving. Increase the size of your Breath clock while swimming by 2 Spans.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "strong-swimmer",
+    "traits": [],
+    "node": {
+      "i": -42,
+      "j": -55,
+      "connected": [
+        "improved-swim-1",
+        "swimming-lessons"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/water_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "8biTrHnT6nNeO3in",
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
+  "effects": []
+}
