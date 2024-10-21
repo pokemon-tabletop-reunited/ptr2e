@@ -1,0 +1,62 @@
+{
+  "name": "Belt Expansion 2",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Belt Expansion 1",
+      "Human"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Gear"
+    },
+    "description": "<p>Add an additional Belt slot.</p>",
+    "actions": [
+      {
+        "name": "Belt Expansion 2",
+        "slug": "belt-expansion-2",
+        "description": "<p>Add an additional Belt slot.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "belt-expansion-2",
+    "traits": [],
+    "node": {
+      "i": -9,
+      "j": 69,
+      "connected": [
+        "belt-expansion-1",
+        "belt-expansion-3"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#800000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "sJ1B6djHXWc4F5Ez",
+  "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
+  "effects": []
+}
