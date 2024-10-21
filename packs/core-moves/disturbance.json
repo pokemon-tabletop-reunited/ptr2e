@@ -1,0 +1,98 @@
+{
+  "name": "Disturbance",
+  "type": "move",
+  "_id": "Oy8yo8Avimo2OxjJ",
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "system": {
+    "slug": "disturbance",
+    "traits": [
+      "social"
+    ],
+    "actions": [
+      {
+        "name": "Disturbance",
+        "slug": "disturbance",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "social"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "dark"
+        ],
+        "category": "status",
+        "accuracy": 75,
+        "description": "<p>Effect: On hit, the target loses -3 SPATK stage for 5 activations.</p>"
+      }
+    ],
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Disturbance",
+      "type": "passive",
+      "_id": "USSrFBF8wjFg0jGe",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "disturbance-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.EeFUiCOkrY4ePf1d",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729539130592,
+        "modifiedTime": 1729539153027,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
