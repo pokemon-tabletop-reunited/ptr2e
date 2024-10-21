@@ -1,0 +1,86 @@
+{
+  "name": "Precise Style",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Leadership 30"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "Support"
+    },
+    "description": "<p>The target gains @Affliction[precise] 1.</p>",
+    "actions": [
+      {
+        "name": "Precise!",
+        "slug": "precise",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1
+        },
+        "description": "Effect: The target gains @Affliction[precise] 1.",
+        "type": "generic",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "name": "Precise! (Self)",
+        "slug": "precise-self",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1
+        },
+        "description": "Effect: The target gains @Affliction[precise] 2.",
+        "type": "generic",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "slug": "precise-style",
+    "traits": [],
+    "node": {
+      "i": -53,
+      "j": 96,
+      "connected": [
+        "down-the-sights",
+        "dead-eye",
+        "root-5"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#80ffff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "tint": "#161616",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "bj0EK3ur1N9ULr4A",
+  "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+  "effects": []
+}
