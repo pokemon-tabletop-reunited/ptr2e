@@ -1,0 +1,91 @@
+{
+  "name": "Chemical Burn",
+  "type": "move",
+  "_id": "U94QNaJRzulZFgSX",
+  "img": "systems/ptr2e/img/svg/poison_icon.svg",
+  "system": {
+    "slug": "chemical-burn",
+    "traits": [],
+    "actions": [
+      {
+        "name": "Chemical Burn",
+        "slug": "chemical-burn",
+        "type": "attack",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex"
+        },
+        "types": [
+          "poison"
+        ],
+        "category": "physical",
+        "description": "<p>Effect: On hit, the target has a 50% chance of gaining Burn 5.</p>"
+      }
+    ],
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Chemical Burn",
+      "type": "passive",
+      "_id": "cUAwYDxOra2PW3Dt",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "chemical-burn-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "predicate": [],
+            "chance": 50,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729531816716,
+        "modifiedTime": 1729531840403,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
