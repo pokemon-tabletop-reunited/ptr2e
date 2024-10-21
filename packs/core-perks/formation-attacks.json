@@ -1,0 +1,61 @@
+{
+  "name": "Formation Attacks",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Conversation 25",
+      "[Pack Mon]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "Pack Mon"
+    },
+    "description": "<p>When within Reach of a creature, you gain +1 ACC on Attacks against that creature for every other Pack Member that is also within Reach of that creature.</p>",
+    "actions": [
+      {
+        "name": "Formation Attacks",
+        "slug": "formation-attacks",
+        "description": "<p>When within Reach of a creature, you gain +1 ACC on Attacks against that creature for every other Pack Member that is also within Reach of that creature.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "formation-attacks",
+    "traits": [],
+    "node": {
+      "i": 57,
+      "j": -38,
+      "connected": [
+        "pack-mon"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#8080ff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "zW2fOBtO1e0LEv2K",
+  "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
+  "effects": []
+}
