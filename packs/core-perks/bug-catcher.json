@@ -1,0 +1,65 @@
+{
+  "name": "Bug Catcher",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Stealth 20",
+      "Survival 20"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Capture"
+    },
+    "description": "<p>You are skilled with the use of a hand-held net. You may choose to remove [Contact] from your Actions that inflict @Affliction[grapple].</p>",
+    "actions": [
+      {
+        "name": "Bug Catcher",
+        "slug": "bug-catcher",
+        "description": "<p>You are skilled with the use of a hand-held net. You may choose to remove [Contact] from your Actions that inflict @Affliction[grapple].</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "bug-catcher",
+    "traits": [],
+    "node": {
+      "i": -38,
+      "j": 74,
+      "connected": [
+        "lethal-restraint",
+        "trained-wielder",
+        "curveball-technique",
+        "fisherman",
+        "snare"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#008000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
+        "tint": "#808000",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "3sJf4zRNNWz0vn4n",
+  "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
+  "effects": []
+}
