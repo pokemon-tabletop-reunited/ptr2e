@@ -1,0 +1,62 @@
+{
+  "name": "Underdog's Spirit 5",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Underdog's Spirit 4",
+      "level 35"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Underdog"
+    },
+    "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
+    "actions": [
+      {
+        "name": "Underdog's Spirit 5",
+        "slug": "underdogs-spirit-5",
+        "description": "<p>Gain +20 to a Combat Stat that is not HP, up to the Underdog BST Cap. This stat cannot be selected again for future Underdog's Spirit Ranks.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "underdogs-spirit-5",
+    "traits": [],
+    "node": {
+      "i": -13,
+      "j": -36,
+      "connected": [
+        "underdogs-spirit-6",
+        "underdogs-spirit-4"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ffffff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Breeder.svg",
+        "tint": "#0b0b0b",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "uE8kihRl4Faw49iL",
+  "img": "systems/ptr2e/img/perk-icons/Breeder.svg",
+  "effects": []
+}
