@@ -1,0 +1,99 @@
+{
+  "name": "Energy Drain",
+  "type": "move",
+  "_id": "ndw1HdRqs2t1Asgu",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "slug": "energy-drain",
+    "traits": [
+      "drain-1-4"
+    ],
+    "actions": [
+      {
+        "name": "Energy Drain",
+        "slug": "energy-drain",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "drain-1-4"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "types": [
+          "psychic"
+        ],
+        "category": "special",
+        "power": 110,
+        "accuracy": 85,
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining  @Affliction[suppressed] 5.</p>"
+      }
+    ],
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Energy Drain",
+      "type": "passive",
+      "_id": "Nr8kGQwHAxFUWC9p",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "energy-drain-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.suppressedcoitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729541598949,
+        "modifiedTime": 1729541626118,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
