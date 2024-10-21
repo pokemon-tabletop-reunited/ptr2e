@@ -1,0 +1,51 @@
+{
+  "name": "Fiery Wrath",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "system": {
+    "slug": "fiery-wrath",
+    "traits": [
+      "legendary",
+      "blast-3",
+      "flinch-chance-4",
+      "pp-updated"
+    ],
+    "actions": [
+      {
+        "slug": "fiery-wrath",
+        "name": "Fiery Wrath",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "blast-3",
+          "flinch-chance-4",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 12,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "special",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "<p>Effect: On hit, all valid targets have a 20% chance of being Flinched. This attack is considered to be both Dark- and Fire-Type.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "lqvZbIwEB8U1BDSY",
+  "effects": []
+}
