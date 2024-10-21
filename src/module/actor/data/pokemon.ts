@@ -1,47 +1,78 @@
 import { ActorPTR2e } from "@actor";
 import { ActorSystemPTR2e } from "./index.ts";
-// import { SpeciesDropSheet } from "@actor/sheets/species-drop-sheet.ts";
-// import { AbilityPTR2e, ItemPTR2e, MovePTR2e } from "@item";
-// import { SpeciesSystemModel } from "@item/data/index.ts";
-// import natureData from "@scripts/config/natures.ts";
-// import { htmlQuery, ImageResolver, sluggify } from "@utils";
-// import { AttackPTR2e } from "@data";
-// import { Progress } from "src/util/progress.ts";
-// import { LevelUpMoveSchema } from "@item/data/species.ts";
+import { SpeciesDropSheet } from "@actor/sheets/species-drop-sheet.ts";
+import { ItemPTR2e } from "@item";
+import { BlueprintSystemModel, SpeciesSystemModel } from "@item/data/index.ts";
+import { BlueprintSheetPTR2e } from "@item/sheets/index.ts";
 
 class PokemonActorSystem extends ActorSystemPTR2e {
-    declare parent: ActorPTR2e<this>;
+  declare parent: ActorPTR2e<this>;
 
-    override async _preCreate(
-        data: this["parent"]["_source"],
-        options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean },
-        user: User
-    ) {
-        // if (!this._source.species) {
-        //     const promise = await new Promise<ItemPTR2e<SpeciesSystemModel> | null>((resolve) => {
-        //         const app = new SpeciesDropSheet(resolve);
-        //         app.render(true);
-        //     });
+  override async _preCreate(
+    data: this["parent"]["_source"],
+    options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean },
+    user: User
+  ) {
+    if (!this._source.species) {
+      const promise = await new Promise<ItemPTR2e<SpeciesSystemModel> | null>((resolve) => {
+        const app = new SpeciesDropSheet(resolve);
+        app.render(true);
+      });
 
-        //     if (promise instanceof ItemPTR2e && promise.system instanceof SpeciesSystemModel) {
-        //         this.updateSource({ species: promise.toObject().system });
-        //         if (data.name.includes(game.i18n.localize("TYPES.Actor.pokemon"))) {
-        //             this.parent.updateSource({ name: Handlebars.helpers.formatSlug(sluggify(promise.name)) });
-        //         }
-        //         if ((!data.img || data.img === "icons/svg/mystery-man.svg") && promise.img) {
-        //             this.parent.updateSource({ img: promise.img });
-        //         }
-        //         await this._preCreateGenerateSpeciesData(this._source.species as unknown as NonNullable<this['_source']['species']>);
-        //         return true;
-        //     }
+      if (promise instanceof ItemPTR2e && promise.system instanceof SpeciesSystemModel) {
+        const blueprint = await ItemPTR2e.create<ItemPTR2e<BlueprintSystemModel, null>>(
+          {
+            name: promise.name,
+            type: "blueprint",
+            system: {
+              blueprints: [{
+                species: promise.uuid,
+              }]
+            }
+          },
+          {
+            temporary: true
+          }
+        );
+        if(!blueprint) {
+          options.fail = true;
+          return false;
+        }
 
-        //     options.fail = true;
-        //     return false;
-        // }
-        // await this._preCreateGenerateSpeciesData(this._source.species);
+        //@ts-expect-error - This is a valid document.
+        const generatedData = await new BlueprintSheetPTR2e({
+          document: blueprint,
+          generation: {
+            x: 0,
+            y: 0,
+            canvas,
+            temporary: true
+          }
+        }).dataOnly();
 
-        return await super._preCreate(data, options, user);
+        // const generatedData = await blueprint.system.generate(null, true);
+        if (!generatedData) {
+          options.fail = true;
+          return false;
+        }
+
+        const source = this.parent.toObject();
+        const update = fu.mergeObject(source, generatedData[0], { inplace: false });
+        this.parent.updateSource(update);
+
+        if (!data.name.includes(game.i18n.localize("TYPES.Actor.pokemon"))) {
+          this.parent.updateSource({ name: data.name });
+        }
+
+        return true;
+      }
+
+      options.fail = true;
+      return false;
     }
+
+    return await super._preCreate(data, options, user);
+  }
 }
 
 export default PokemonActorSystem;

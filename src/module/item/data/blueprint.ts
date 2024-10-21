@@ -84,10 +84,10 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     folder?: FolderPTR2e | null;
     parent?: ActorPTR2e;
     team: boolean;
-  } | null) {
+  } | null, dataOnly = false) {
     // Safe generate
     try {
-      return await this._generate(options);
+      return await this._generate(options, dataOnly);
     }
     catch (error) {
       ui.notifications.error("An error occurred while generating Pokemon from Blueprint");
@@ -102,8 +102,12 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     folder?: FolderPTR2e | null;
     parent?: ActorPTR2e;
     team: boolean;
-  } | null) {
-    if (!canvas.scene) return void ui.notifications.warn("Cannot generate Actors from Blueprint without an active scene");
+  } | null, dataOnly: boolean): Promise<Partial<ActorPTR2e['_source']>[] | void> {
+    if (!canvas.scene && !dataOnly) return void ui.notifications.warn("Cannot generate Actors from Blueprint without an active scene");
+
+    if(dataOnly && !options) {
+      options = {} as unknown as typeof options;
+    }
 
     // If no options, then we're generating from a blueprint window instead of a drag-and-drop
     // Thus ask for a location where to spawn the Actor(s)
@@ -150,7 +154,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     const hasOwner = !!owner;
 
     // Find or Create a folder as necessary
-    if (!options.folder?.id) {
+    if (!options.folder?.id && !dataOnly) {
       options.folder = await (async () => {
         const folderName = hasOwner ? `${owner.name}'s Party` : canvas.scene!.name;
 
@@ -494,10 +498,15 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         }, { inplace: false }),
       } as unknown as Partial<ActorPTR2e['_source']>;
       const actor = new ActorPTR2e(data);
-      data.system!.health = {value: actor.system.health.max, max: actor.system.health.max};
-      data.system!.powerPoints = {value: actor.system.powerPoints.max, max: actor.system.powerPoints.max};
+      data.system!.health = { value: actor.system.health.max, max: actor.system.health.max };
+      data.system!.powerPoints = { value: actor.system.powerPoints.max, max: actor.system.powerPoints.max };
 
       toBeCreated.push(data);
+    }
+
+    if (dataOnly) {
+      progress.close(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.Complete"));
+      return toBeCreated;
     }
 
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.GenerationStep"));

@@ -515,8 +515,6 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
 
     return super._preUpdate(changed, options, user);
-
-    this.skills
   }
 }
 
