@@ -1,0 +1,172 @@
+{
+  "name": "Hurricane",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/flying_icon.svg",
+  "system": {
+    "slug": "hurricane",
+    "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[confused] 5. If Rainy or Windy Weather is active, this attack gains [Danger Close]. If Sunny Weather is active, this attack's Accuracy is 50.</p>",
+    "traits": [
+      "wind",
+      "sky",
+      "blast-4",
+      "environ"
+    ],
+    "actions": [
+      {
+        "slug": "hurricane",
+        "name": "Hurricane",
+        "type": "attack",
+        "traits": [
+          "wind",
+          "sky",
+          "blast-4",
+          "environ",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11
+        },
+        "category": "special",
+        "power": 110,
+        "accuracy": 70,
+        "types": [
+          "flying"
+        ],
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[confused] 5.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "hurricane-stormy",
+        "name": "Hurricane (Stormy)",
+        "type": "attack",
+        "traits": [
+          "wind",
+          "sky",
+          "blast-4",
+          "environ",
+          "danger-close",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "trigger": "<p>Rainy or Windy Weather is present.</p>"
+        },
+        "category": "special",
+        "power": 110,
+        "accuracy": 100,
+        "types": [
+          "flying"
+        ],
+        "description": "<p>Trigger: Rainy or Windy Weather is present.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[confused] 5.</p>",
+        "variant": "hurricane",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "hurricane-sunny",
+        "name": "Hurricane (Sunny)",
+        "type": "attack",
+        "traits": [
+          "wind",
+          "sky",
+          "blast-4",
+          "environ",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "trigger": "<p>Sunny Weather is present.</p>"
+        },
+        "category": "special",
+        "power": 110,
+        "accuracy": 50,
+        "types": [
+          "flying"
+        ],
+        "description": "<p>Trigger: Sunny Weather is present.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[confused] 5.</p>",
+        "variant": "hurricane",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "dcZCfNmzzkDymeBa",
+  "effects": [
+    {
+      "name": "Hurricane",
+      "type": "passive",
+      "_id": "HSyNq6mK7EvqweVH",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "hurricane-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729553120107,
+        "modifiedTime": 1729553179807,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
