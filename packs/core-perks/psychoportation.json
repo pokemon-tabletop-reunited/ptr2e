@@ -1,0 +1,63 @@
+{
+  "name": "Psychoportation",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Psychic]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "power",
+      "archetype": "[Psychic]"
+    },
+    "description": "<p>You gain the [Teleporter] trait. Additionally, you gain a Teleport Movement Allowance equal to that of your highest Primary Movement Score.</p>",
+    "actions": [
+      {
+        "name": "Psychoportation",
+        "slug": "psychoportation",
+        "description": "<p>You gain the [Teleporter] trait. Additionally, you gain a Teleport Movement Allowance equal to that of your highest Primary Movement Score.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "psychoportation",
+    "traits": [],
+    "node": {
+      "i": -106,
+      "j": 46,
+      "connected": [
+        "improved-teleportation-1",
+        "telekinetic-potential",
+        "long-range-psychoportation",
+        "improved-flight-1"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "362jA0jsfgTgKKiE",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "effects": []
+}
