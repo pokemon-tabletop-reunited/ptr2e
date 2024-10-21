@@ -1,0 +1,63 @@
+{
+  "name": "Fisherman",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Track 20"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Capture"
+    },
+    "description": "<p>You gain +10 on Skill Checks used as part of a fishing activity.</p>",
+    "actions": [
+      {
+        "name": "Fisherman",
+        "slug": "fisherman",
+        "description": "<p>You gain +10 on Skill Checks used as part of a fishing activity.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "fisherman",
+    "traits": [],
+    "node": {
+      "i": -47,
+      "j": 74,
+      "connected": [
+        "curveball-technique",
+        "trained-wielder",
+        "bug-catcher",
+        "snare"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#004080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Hunting.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "T4Odoci05syU7G8r",
+  "img": "systems/ptr2e/img/perk-icons/Hunting.svg",
+  "effects": []
+}
