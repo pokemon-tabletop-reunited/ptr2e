@@ -1,0 +1,68 @@
+{
+  "name": "Fiendish Provocation",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Trainer] or [Expedition Leader]",
+      "Intimidate 40"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "Shadow"
+    },
+    "description": "<p>The target [Closed Heart] creature gains @Affliction[hyper-mode] 5.</p>",
+    "actions": [
+      {
+        "name": "Fiendish Provocation",
+        "slug": "fiendish-provocation",
+        "description": "<p>The target [Closed Heart] creature gains @Affliction[hyper-mode] 5.</p>",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "slug": "fiendish-provocation",
+    "traits": [],
+    "node": {
+      "i": 48,
+      "j": -47,
+      "connected": [
+        "shadow-guide",
+        "you-belong-to-me",
+        "root-3",
+        "silver-bullet",
+        "frenzied-assault",
+        "ultraviolet"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/shadow_icon.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "bf8a76v0PxvOgJaF",
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+  "effects": []
+}
