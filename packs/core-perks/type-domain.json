@@ -1,0 +1,66 @@
+{
+  "name": "<Type> Domain",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Teaching 50"
+    ],
+    "cost": 4,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "Type Ace"
+    },
+    "description": "<p>You are able to tutor [Domain] abilities associated to your chosen <Type>. Only creatures that have your chosen <Type> can learn these abilties.</p>",
+    "actions": [
+      {
+        "name": "<Type> Domain",
+        "slug": "type-domain",
+        "description": "<p>You are able to tutor [Domain] abilities associated to your chosen <Type>. Only creatures that have your chosen <Type> can learn these abilties.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [
+          "type"
+        ],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "type-domain",
+    "traits": [
+      "type"
+    ],
+    "node": {
+      "i": -43,
+      "j": -16,
+      "connected": [
+        "type-style",
+        "type-tutoring",
+        "type-specialty"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Trainer.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "aMMwSJntCErBGbQZ",
+  "img": "systems/ptr2e/img/perk-icons/Trainer.svg",
+  "effects": []
+}
