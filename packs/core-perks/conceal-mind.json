@@ -1,0 +1,64 @@
+{
+  "name": "Conceal Mind",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Telepath]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "[Psychic]"
+    },
+    "description": "<p>You may hide your mind's presence as an [Interrupt 4] Simple Action in response to an incoming telepathic sweep of the area. You automatically become aware of any telepaths who are actively searching for minds.</p>",
+    "actions": [
+      {
+        "name": "Conceal Mind",
+        "slug": "conceal-mind",
+        "description": "<p>You may hide your mind's presence as an [Interrupt 4] Simple Action in response to an incoming telepathic sweep of the area. You automatically become aware of any telepaths who are actively searching for minds.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "conceal-mind",
+    "traits": [],
+    "node": {
+      "i": -103,
+      "j": 54,
+      "connected": [
+        "telepathic-potential",
+        "detect-minds",
+        "telekinetic-potential",
+        "hypnotic-suggestion"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#400000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "x43vlmG7j09l1BGN",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "effects": []
+}
