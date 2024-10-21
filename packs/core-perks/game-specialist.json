@@ -1,0 +1,64 @@
+{
+  "name": "Game Specialist",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Great Hunter",
+      "THREE OF: Track 60, Listen 50, Navigate 40, Spot 50, Survival 40, Stealth 50",
+      "6 or More \"Hunter\" Archetype Perks",
+      "DOES NOT HAVE: Trophy Bagger"
+    ],
+    "cost": 4,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Hunter"
+    },
+    "description": "<p>The user’s Attacks have +1 ACC against creatures that are smaller than itself. The user adds Game Hunter to their Known Abilities List.</p>",
+    "actions": [
+      {
+        "name": "Game Specialist",
+        "slug": "game-specialist",
+        "description": "<p>The user’s Attacks have +1 ACC against creatures that are smaller than itself. The user adds Game Hunter to their Known Abilities List.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "game-specialist",
+    "traits": [],
+    "node": {
+      "i": -49,
+      "j": -30,
+      "connected": [
+        "pokemaniac",
+        "scholar"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#804000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Hunting.svg",
+        "tint": "#ffffff",
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "kZRq2LwzKTWC56PO",
+  "img": "systems/ptr2e/img/perk-icons/Hunting.svg",
+  "effects": []
+}
