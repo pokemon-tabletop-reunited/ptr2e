@@ -1,0 +1,61 @@
+{
+  "name": "Spectral Stalker",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Ghost]"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "[Ghost]"
+    },
+    "description": "<p>Gain the [Shadow Meld] trait.</p>",
+    "actions": [
+      {
+        "name": "Spectral Stalker",
+        "slug": "spectral-stalker",
+        "description": "<p>Gain the [Shadow Meld] trait.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "spectral-stalker",
+    "traits": [],
+    "node": {
+      "i": 17,
+      "j": 26,
+      "connected": [
+        "walking-dead",
+        "root-4"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/ghost_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "fdBGG8e0iPzaYfbD",
+  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+  "effects": []
+}
