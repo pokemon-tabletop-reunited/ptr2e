@@ -1,0 +1,95 @@
+{
+  "name": "Tidal Ring",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "strategist",
+          "water"
+        ],
+        "name": "Tidal Ring",
+        "slug": "tidal-ring",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1,
+          "trigger": "The user resolves a Water-Type attack"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Trigger: The user resolves a Water-Type attack\nEffect: The user gains @Affliction[resolved] 2.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: The user resolves a Water-Type attack\nEffect: The user gains @Affliction[resolved] 2.",
+    "traits": [
+      "strategist",
+      "water"
+    ],
+    "slug": "tidal-ring",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "vB4RIbdqcuM4Keas",
+  "effects": [
+    {
+      "name": "Tidal Ring",
+      "type": "passive",
+      "_id": "UvUwjpGzRlMJ0RNo",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "water-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729494831754,
+        "modifiedTime": 1729494854970,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
