@@ -95,6 +95,15 @@ export function initializeSettings() {
         default: "party",
     });
 
+    game.settings.register("ptr2e", "expCircumstanceModifiers", {
+        name: "PTR2E.Settings.ExpCircumstanceModifiers.Name",
+        hint: "PTR2E.Settings.ExpCircumstanceModifiers.Hint",
+        scope: "world",
+        config: false,
+        type: Array,
+        default: [],
+    });
+
     game.settings.register("ptr2e", "artmap", {
         name: "PTR2E.Settings.ArtMap.Name",
         hint: "PTR2E.Settings.ArtMap.Hint",
