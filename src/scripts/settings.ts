@@ -90,7 +90,8 @@ export function initializeSettings() {
         choices: {
             "individual": "Individual",
             "party": "Party",
-            "all": "All"
+            "all": "All (Reduced for Boxed Pokemon)",
+            "allfull": "All (Full XP)"
         },
         default: "party",
     });

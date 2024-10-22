@@ -225,14 +225,14 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
         return contents;
     }
 
-    static calculateExpAward(actor: ActorPTR2e, ber: number, cr: number, apl: number) {
+    calculateExpAward(actor: ActorPTR2e, ber: number, cr: number, apl: number) {
         let calculatedExp = ber;
         // apply CR
         calculatedExp *= (1 + (cr / 100));
         // apply F_band
         calculatedExp *= Math.pow((2 * apl + 10) / (apl + actor.system.advancement.level + 10), ExpApp.F_BAND);
         // apply party modifier
-        if (!actor.party) {
+        if (!actor.party && this.applyMode !== "allfull") {
             calculatedExp *= ExpApp.NON_PARTY_MODIFIER;
         }
         // apply bonus_ue
@@ -322,7 +322,7 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
         const notification = ui.notifications.info(game.i18n.localize("PTR2E.XP.Notifications.Info"));
 
         await Promise.all(toApply.map(async (appliedExp) => {
-            const expAward = ExpApp.calculateExpAward(appliedExp.actor, ber, cm, apl);
+            const expAward = this.calculateExpAward(appliedExp.actor, ber, cm, apl);
             await appliedExp.actor.update({
                 "system.advancement.experience.current": appliedExp.old.experience + expAward,
             });
