@@ -290,7 +290,9 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
         const button = event.currentTarget;
         // @ts-expect-error
         const cmIdx = button.dataset.modifierIdx;
-        game.settings.set("ptr2e", "expCircumstanceModifiers", this.circumstances.splice(cmIdx, 1)).then(()=>this.render(false));
+        const circumstances = this.circumstances;
+        circumstances.splice(cmIdx, 1);
+        game.settings.set("ptr2e", "expCircumstanceModifiers", circumstances).then(()=>this.render(false));
     }
 
     static async #onSubmit(this: ExpApp) {
