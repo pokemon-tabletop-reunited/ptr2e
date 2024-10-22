@@ -4,14 +4,14 @@
   "_id": "IMvY0LoT5PWC8bJE",
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "corrode",
     "traits": [],
     "actions": [
       {
         "name": "Corrode",
         "slug": "corrode",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/poison_icon.svg",
         "traits": [],
         "range": {
           "target": "creature",
@@ -20,43 +20,75 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "powerPoints": 2
         },
-        "variant": null,
         "types": [
           "poison"
         ],
         "category": "status",
-        "power": null,
         "accuracy": 100,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: The target gains @Affliction[hindered] 5. If the @Affliction[hindered] creature is Steel-Type, it can be damaged by the user's Poison-Type attacks.</p>"
+        "description": "<p>Effect: The target suffers -1 Defense and -1 Special Defense stage. If the target creature is Steel-Type, it can be damaged by the user's Poison-Type attacks.</p>"
       }
     ],
-    "description": "",
-    "container": null,
-    "grade": "D"
+    "grade": "D",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.328",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.5.2",
-    "createdTime": 1721256303918,
-    "modifiedTime": 1721256610304,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Corrode",
+      "type": "passive",
+      "_id": "PU7gVIGaW1NfxWBo",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729540891128,
+        "modifiedTime": 1729540903529,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }
