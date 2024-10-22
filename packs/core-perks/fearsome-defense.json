@@ -11,18 +11,23 @@
       "approach": "resilience",
       "archetype": "Combat"
     },
-    "description": "You may intercept an attack intended for an ally as an at [Interrupt 2] by spending the activation cost. On doing so, resist the incoming attack by one step, and inflict the @Affliction[fear] condition on the target for 5 activations.",
+    "description": "<p>You may intercept an attack intended for an ally as an [Interrupt 2] by spending the activation cost. On doing so, resist the incoming attack by one step, and inflict the @Affliction[fear] condition on the target for 5 activations. If you also have the Look Out perk, this is improved to a Free Action. You may opt to intercept as a free action in those circumstances without the added benefits of Fearsome Defense if you choose not to spend the activation cost.</p>",
     "actions": [
       {
         "name": "Fearsome Defense",
         "slug": "fearsome-defense",
-        "description": "You may intercept an attack intended for an ally as an at [Interrupt 2] by spending the activation cost. On doing so, resist the incoming attack by one step, and inflict the @Affliction[fear] condition on the target for 5 activations.",
+        "description": "<p>You may intercept an attack intended for an ally as an at [Interrupt 2] by spending the activation cost. On doing so, resist the incoming attack by one step, and inflict the @Affliction[fear] condition on the target for 5 activations.</p>",
         "cost": {
-          "activation": "free",
+          "activation": "simple",
           "powerPoints": 5
         },
         "type": "generic",
-        "traits": []
+        "traits": [],
+        "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "slug": "fearsome-defense",
@@ -49,30 +54,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "NZYWCU5mxwxlvkhh",
-  "img": "systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.NZYWCU5mxwxlvkhh"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920336361,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!NZYWCU5mxwxlvkhh"
+  "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+  "effects": []
 }

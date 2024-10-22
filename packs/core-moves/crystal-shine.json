@@ -4,7 +4,7 @@
   "_id": "vLoli8T5CAKj9RIj",
   "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "crystal-shine",
     "traits": [
       "ray",
       "pulse"
@@ -26,43 +26,76 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null
+          "powerPoints": 5
         },
-        "variant": null,
         "types": [
           "rock"
         ],
         "category": "special",
         "power": 130,
         "accuracy": 85,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
         "description": "<p>Effect: On resolution, the user loses -2 SPATK stages for 5 activations.</p>"
       }
     ],
-    "description": "",
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.328",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.5.2",
-    "createdTime": 1721267328850,
-    "modifiedTime": 1721267595091,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Crystal Shine",
+      "type": "passive",
+      "_id": "xwKl4moGT6vml7eA",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "crystal-shine-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.EYmp1DeE1Lwzi0D1",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729537943965,
+        "modifiedTime": 1729537969899,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

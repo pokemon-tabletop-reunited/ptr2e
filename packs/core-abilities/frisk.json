@@ -11,17 +11,15 @@
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
-          "trigger": "The user successfully hits with a [Contact] attack.",
-          "delay": null,
-          "priority": null
+          "trigger": "The user successfully hits with a [Contact] attack."
         },
         "range": {
           "target": "creature",
           "distance": 1,
           "unit": "m"
         },
-        "description": "Trigger: The user successfully hits with a [Contact] attack.\nEffect: The user learns of one item the attack target has equipped, including details about the item and amount if applicable."
+        "description": "Trigger: The user successfully hits with a [Contact] attack.\nEffect: The user learns of one item the attack target has equipped, including details about the item and amount if applicable.",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [],
@@ -29,38 +27,74 @@
         "slug": "frisk",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "range": null,
-        "description": "Passive: The user gains +10 to their Sleight of Hand."
+        "description": "Passive: The user gains +10 to their Sleight of Hand.",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Trigger: The user successfully hits with a [Contact] attack.\nEffect: The user learns of one item the attack target has equipped, including details about the item and amount if applicable. Passive: The user gains +10 to their Sleight of Hand.",
     "traits": [],
-    "slug": null,
-    "container": null
+    "slug": "frisk",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "m3G3abHjeyxhULLM",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!m3G3abHjeyxhULLM"
+  "effects": [
+    {
+      "name": "Frisk Passive",
+      "type": "passive",
+      "_id": "EhMbi4LWYpA3IVUh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "sleight-of-hand-check",
+            "value": 10,
+            "predicate": [],
+            "label": "Frisk",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729417497118,
+        "modifiedTime": 1729417508518,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

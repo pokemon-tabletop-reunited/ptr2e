@@ -4,7 +4,7 @@
   "_id": "wirv9632jLaUTePt",
   "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "chord-strike",
     "traits": [
       "sonic",
       "contact"
@@ -26,43 +26,76 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 1,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1
         },
-        "variant": null,
         "types": [
           "normal"
         ],
         "category": "physical",
         "power": 80,
         "accuracy": 90,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
         "description": "<p>Effect: On hit, the target has a 20% chance of being @Affliction[confused] 5.</p>"
       }
     ],
-    "description": "",
-    "container": null,
-    "grade": "E"
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.328",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.5.2",
-    "createdTime": 1720813635389,
-    "modifiedTime": 1720813737305,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Chord Strike",
+      "type": "passive",
+      "_id": "t6OzWmRKHgojlWmp",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "chord-strike-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.confusedconditem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729532410294,
+        "modifiedTime": 1729532443018,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

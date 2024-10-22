@@ -12,17 +12,14 @@
         "slug": "dragonfire",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: The user's Fire-Type attacks deal 50% more damage to Dragon-Type Pokemon."
+        "description": "Effect: The user's Fire-Type attacks deal 50% more damage to Dragon-Type Pokemon.",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [
@@ -32,40 +29,89 @@
         "slug": "dragonfire",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
-        "range": null,
-        "description": "Passive: Increases the power of the user's Dragon-Type attacks by 50%."
+        "description": "Passive: Increases the power of the user's Dragon-Type attacks by 50%.",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Effect: The user's Fire-Type attacks deal 50% more damage to Dragon-Type Pokemon. Passive: Increases the power of the user's Dragon-Type attacks by 50%.",
     "traits": [
       "innate"
     ],
-    "slug": null,
-    "container": null
+    "slug": "dragonfire",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "jBMvn0QG8kX6yOuq",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!jBMvn0QG8kX6yOuq"
+  "effects": [
+    {
+      "name": "Dragonfire",
+      "type": "passive",
+      "_id": "uYdjLy7fVpBEnNE4",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "dragon-attack-power",
+            "value": 50,
+            "predicate": [],
+            "label": "Dragonfire (Dragon)",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "percentile-modifier",
+            "key": "fire-attack-damage",
+            "value": 50,
+            "predicate": [
+              "target:trait:dragon"
+            ],
+            "label": "Dragonfire (Fire)",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729416006006,
+        "modifiedTime": 1729416095990,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }
