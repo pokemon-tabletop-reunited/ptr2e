@@ -286,7 +286,10 @@ class CompendiumPack {
         name: name || "Unnamed Effect",
         type: "effect",
         img: d.img,
-        system: {},
+        system: {
+          ...((d.system as {traits?: []})?.traits ? { traits: (d.system as {traits?: []})?.traits } : {}),
+          ...(d.description ? { description: localize(d.description) } : {}),
+        },
         effects: [
           {
             ...d,
