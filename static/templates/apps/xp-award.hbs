@@ -7,8 +7,15 @@
             <img class="icon" src="{{img}}" data-tooltip-direction="DOWN" data-tooltip="{{name}}" />
         {{/each}}
         </div>
-        {{#if noteAppliesTo}}
-        <p class="note">{{noteAppliesTo}}</p>
+        {{#if additionalAppliesTo}}
+        <details class="subordinate-party-apply">
+            <summary class="note">{{noteAppliesTo}}</summary>
+            <div class="actor-scroll">
+            {{#each additionalAppliesTo}}
+                <img class="icon" src="{{img}}" data-tooltip-direction="DOWN" data-tooltip="{{name}}" />
+            {{/each}}
+            </div>
+        </details>
         {{/if}}
     </fieldset>
 

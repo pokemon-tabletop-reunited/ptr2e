@@ -101,11 +101,17 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
         const modifierLabel = toCM(modifier);
 
         const noteAppliesTo = game.i18n.localize(`PTR2E.XP.ApplyMode.${this.applyMode}.hint`);
+        const additionalAppliesTo = this.appliesTo.difference(new Set(this.documents)).map(a => ({
+            img: a.img,
+            name: a.name,
+            uuid: a.uuid,
+        }));
 
         return {
             id: this.options.id,
             party,
             noteAppliesTo,
+            additionalAppliesTo,
             modifier,
             modifierLabel,
             cm,
@@ -152,6 +158,32 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
 
     get modifier() {
         return this.circumstances.reduce((m, c) => m + (c.bonus ?? 0), 0);
+    }
+
+    get appliesTo() {
+        let docs = new Set(this.documents) as Set<ActorPTR2e>;
+
+        // only give exp to the individuals indicated in the dialog
+        if (this.applyMode === "individual") return docs;
+
+        // give exp to the individuals in the dialog and their party members
+        if (this.applyMode === "party") {
+            for (const owner of this.documents) {
+                const party = owner.party;
+                if (!party) continue;
+                for (const partyMember of party.party) {
+                    docs.add(partyMember);
+                }
+            }
+            return docs;
+        }
+
+        // give exp to the individuals in the dialog and all their owned pokemon
+        for (const owner of this.documents) {
+            if (owner?.folder?.owner == "") continue;
+            docs = docs.union(ExpApp.getNestedFolderContents(owner.folder as Folder)) as Set<ActorPTR2e>;
+        }
+        return docs;
     }
 
     override async render(options: boolean | HandlebarsRenderOptions, _options?: HandlebarsRenderOptions) {
@@ -266,31 +298,7 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
         const cm = this.modifier;
         const apl = this.level;
 
-        const toApply = (() => {
-            let docs = new Set(this.documents) as Set<ActorPTR2e>;
-
-            // only give exp to the individuals indicated in the dialog
-            if (this.applyMode === "individual") return docs;
-
-            // give exp to the individuals in the dialog and their party members
-            if (this.applyMode === "party") {
-                for (const owner of this.documents) {
-                    const party = owner.party;
-                    if (!party) continue;
-                    for (const partyMember of party.party) {
-                        docs.add(partyMember);
-                    }
-                }
-                return docs;
-            }
-
-            // give exp to the individuals in the dialog and all their owned pokemon
-            for (const owner of this.documents) {
-                if (owner?.folder?.owner == "") continue;
-                docs = docs.union(ExpApp.getNestedFolderContents(owner.folder as Folder)) as Set<ActorPTR2e>;
-            }
-            return docs;
-        })();
+        const toApply = this.appliesTo;
 
         const notification = ui.notifications.info(game.i18n.localize("PTR2E.XP.Notifications.Info"));
 
