@@ -243,7 +243,11 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     rollJson.data = roll.data;
     const system: Record<string, unknown> = {
       roll: rollJson,
-      origin: context.actor?.toJSON(),
+      origin: (() => {
+        const json: Record<string, unknown> = context.actor!.toJSON();
+        json.uuid = context.token?.actor?.uuid ?? context.actor!.uuid;
+        return json;
+      })(),
       slug: context.action ?? context.title ?? type,
       luckRoll: null,
     };
