@@ -246,7 +246,10 @@
           "grant-effect": "Grant Effect",
           "ephemeral-effect": "Ephemeral Effect",
           "roll-note": "Roll Note",
-          "roll-effect": "Roll Effect"
+          "roll-effect": "Roll Effect",
+          "add-trait": "Add Trait",
+          "remove-trait": "Remove Trait",
+          "alter-attack": "Alter Attack"
         },
         "ChangeLabel": {
           "label": "Label",
@@ -303,9 +306,39 @@
           "label": "Allow Duplicate",
           "hint": "Whether to allow duplicates of this item."
         },
+        "ChangeAffliction": {
+          "label": "Affliction",
+          "hint": "The affliction to apply."
+        },
+        "ChangeReplaceSelf": {
+          "label": "Replace Self",
+          "hint": "Whether to replace this item/effect with the granted item/effect"
+        },
         "ChangePredicate": {
           "label": "Predicate",
           "hint": "The predicate of the change."
+        },
+        "ChangeDisabledIf": {
+          "label": "Disabled If Predicate",
+          "hint": "Disables the toggle checkbox if the predicate is true."
+        },
+        "ChangeToggleable": {
+          "label": "Toggleable",
+          "hint": "Whether this Roll Option is toggleable."
+        },
+        "ChangeAlwaysActive": {
+          "label": "Always Active",
+          "hint": "Whether this Roll Option toggle should always be checked. Useful for toggles with Sub Options."
+        },
+        "ChangeCount": {
+          "label": "Countable",
+          "hint": "Whether this Roll Option is countable: it will have a numeric value counting how many effects added this option."
+        },
+        "ChangeOption": {
+          "label": "Option"
+        },
+        "ChangeTrait": {
+          "label": "Trait"
         },
         "priority": {
           "label": "Priority",
@@ -366,6 +399,7 @@
           "hint": "Whether this effect should apply to the actor holding this item (checked), or the item itself (unchecked)."
         }
       },
+      "TurnIntoAffliction": "This effect doesn't have a duration since it's a Passive Effect.<br>Would you like to turn it into an Affliction?",
       "Fields": {
         "duration": {
           "turns": {
@@ -444,11 +478,14 @@
           "agile": "Agile",
           "precise": "Precise",
           "evasive": "Evasive",
-          "gambit": "Gambit"
+          "gambit": "Gambit",
+          "frostbite": "Frostbite",
+          "stoked": "Stoked",
+          "charged": "Charged"
         },
         "Descriptions": {
           "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-affliction], @Trait[minor-affliction], @Trait[pseudo-affliction], and @Trait[stage-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
-          "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has their default ATK stages are reduced by 1 while Burn is active.",
+          "burn": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has their default ATK stages reduced by 1 while Burn is active.",
           "poison": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The afflicted creature’s default SPATK stages are reduced by 1 while Poison is active.",
           "blight": "At the end of the afflicted creature’s Activation, it loses X Stacks of Blight, where X is 2<sup style='font-size: x-small;'># of Activations passed with Blight</sup> and takes a Tick of HP per Stack lost. The afflicted creature’s default SPATK stages are reduced by 1 while Blight is active. When a creature receives Blight, it loses the Poison Condition, with Blight gaining 33% of its remaining Poison Stacks as extra Stacks on Blight. When afflicted with Poisoned X while Blighted, the creature gains +1 to its Blight Stacks.",
           "paralysis": "The afflicted creature's SPD is reduced by 50%. The creature also has Slowed while Paralysis is active.",
@@ -507,7 +544,10 @@
           "agile": "While afflicted with Agile, Power of the creature's Attacks are decreased by -20% and has its Initiative advanced by 20% after its Activation.",
           "precise": "While afflicted with Precise, the creature has +1 default ACC and has its Initiative delayed by 20% after its Activation.",
           "evasive": "While afflicted with Evasive, the creature has +1 default ACC and the Power of its Attacks are decreased by -20%.",
-          "gambit": "While afflicted with Gambit, the creature has +2 default CRIT and -1 default ACC."
+          "gambit": "While afflicted with Gambit, the creature has +2 default CRIT and -1 default ACC.",
+          "frostbite": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has their default SPA stages reduced by 1 while Frostbite is active.",
+          "stoked": "While afflicted with Stoked, the creature's next damaging @Trait[Fire] Attack has +100% Power",
+          "charged": "While afflicted with Stoked, the creature's next damaging @Trait[Electric] Attack has +100% Power"
         }
       }
     },
@@ -664,6 +704,9 @@
         "EffectComponent": {
           "title": "{actor}'s Effects"
         },
+        "ToggleComponent": {
+          "title": "{actor}'s Toggles"
+        },
         "SkillsComponent": {
           "title": "{actor}'s Skills"
         },
@@ -682,6 +725,10 @@
         "Effects": {
           "title": "{actor}'s Effects",
           "tooltip": "Popout Effects"
+        },
+        "Toggles": {
+          "title": "{actor}'s Toggles",
+          "tooltip": "Popout Toggles"
         },
         "Skills": {
           "title": "{actor}'s Skills",
@@ -803,13 +850,13 @@
       },
       "ChangeResources": {
         "title": "Change Resources for {name}",
-        "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Editing Resources</h3><p>this should only be done with explicit GM Permission!</p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Current Value: {value}</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
+        "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Editing Resources</h3><p>this should only be done with explicit GM Permission!</p><p style='text-align: center;'>Current Value: {value}</p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Modify by</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
         "submit": "Change Resources",
         "warn": "Resource total for {name} cannot drop below 1."
       },
       "ChangeLuck": {
         "title": "Change Luck for {name}",
-        "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Editing Luck</h3><p>this should only be done with explicit GM Permission!</p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Current Value: {value}</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
+        "content": "<header style='color: var(--hint-text-color);'><h3 style='color: var(--hint-text-color); margin-bottom: 0; text-align: center; border-bottom: unset;'>Modifying Luck</h3><p>this should only be done with explicit GM Permission!</p><p style='text-align: center;'>Current Value: {value}</p></header><content><div class='form-group'><label style='flex-basis: 30%;'>Modify by</label><div class='form-fields'><input style='text-align: center;' type='number' value='0' step='1'/></div></div></content>",
         "submit": "Change Luck",
         "warn": "Luck total for {name} cannot drop below 0."
       },
@@ -1365,6 +1412,10 @@
       "level": {
         "label": "Level",
         "hint": "The level of the actor."
+      },
+      "preventEvolution": {
+        "label": "Prevent Evolution",
+        "hint": "Prevent this species from evolving during generation regardless of their level."
       }
     },
     "ItemSheet": {
@@ -2168,6 +2219,22 @@
         "description": "A Walkthrough on 'Dex Drag-In' a returning fan-favourite feature for quickly generating Pokémon!",
         "steps": {}
       }
+    },
+    "Ranges": {
+      "self": "Affects the character using this Action.",
+      "ally": "Affects one Ally within Range",
+      "enemy": "Affects one Enemy within Range",
+      "creature": "Affects one Creature within Range",
+      "object": "Affects one Object within Range",
+      "blast": "Choose one space within RIP 1, the Blast radius is a X.5m radius circle/sphere, centered on the selected space, where X is the value of the [Blast X] trait on this Action.",
+      "cone": "Using the Foundry Cone tool, draw a cone from the center of the character token using this Action, with a length equal to the RIP plus the distance from the center of the character token to the edge of the token.<br><br>For example, a Medium creature w/ cone 3 would draw a cone 3.5m long, while a Large creature would draw one 4.0m long.",
+      "line": "A 1m wide line that is RIP long, starting from the center of the character token using this Action.",
+      "wide-line": "A wide line is similar to a regular line, except for its just as wide as the width of the character token using this Action, minimum 2m wide.",
+      "emanation": "An emanation is a RIP meter radius circle centered on the character token using this Action.",
+      "field": "Field targets every creature in the current combat.",
+      "aura": "An Aura is an Emanation that persists around the character token using this Action.",
+      "allied-aura": "An Allied Aura is an Aura that only affects allies.",
+      "enemy-aura": "An Enemy Aura is an Aura that only affects enemies."
     }
   }
 }

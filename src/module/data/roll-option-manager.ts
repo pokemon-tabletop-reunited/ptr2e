@@ -44,6 +44,12 @@ export default class RollOptionManager<TParent extends ActorPTR2e | ItemPTR2e | 
         }
     }
 
+    public removeOption(domain: keyof RollOptions, option: string) {
+      this.initialize();
+      delete this.options[domain][option];
+      delete this.options.all[`${domain}:${option}`];
+    }
+
     public addTrait(trait: Maybe<Trait>) {
         if (!trait) return;
         this.addOption("trait", trait.slug);

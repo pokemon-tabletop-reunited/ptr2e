@@ -50,6 +50,10 @@ body {
     }
 }
 
+.application prose-mirror {
+  min-height: 200px;
+}
+
 .application.sheet {
     multi-select, string-tags, string-tags-ptr2e {
         .tags {
@@ -1031,7 +1035,7 @@ body {
                     }
                 }
 
-                .effects-display, .perks-display, .abilities-display {
+                .effects-display, .perks-display, .abilities-display, .toggles-display {
                     padding: 0.5rem;
 
                     ul.effect-list, ul.perk-list, ul.ability-list {
@@ -1066,6 +1070,44 @@ body {
                 .effects-display {
                     grid-area: span 5 / span 3;
                 }
+
+                .toggles-display {
+                  grid-area: 1 / 4 / span 5 / span 2;
+
+                  ul.toggles-list {
+                    margin: 0;
+                    padding: 0;
+                    display: flex;
+                    flex-flow: column wrap;
+                    list-style: none;
+
+                    > li {
+                      align-items: center;
+                      display: flex;
+                      width: 100%;
+
+                      label {
+                        align-items: center;
+                        display: flex;
+                        width: 100%;
+
+                        input {
+                          margin: 0 0.25rem 0 0;
+                          padding: 0;
+                        }
+
+                        span {
+                          flex: 1;
+                        }
+
+                        select {
+                          margin-left: 0.25em;
+                          flex: 0 0 50%;
+                        }
+                      }
+                    }
+                  }
+                }
             }
 
             .can-popout {
@@ -1087,6 +1129,45 @@ body {
 
     &.actor.popout {
         background: var(--appv2-background);
+
+        .toggles-display {
+          padding: 0.5rem;
+          max-height: 600px;
+
+          ul.toggles-list {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-flow: column wrap;
+            list-style: none;
+
+            > li {
+              align-items: center;
+              display: flex;
+              width: 100%;
+
+              label {
+                align-items: center;
+                display: flex;
+                width: 100%;
+
+                input {
+                  margin: 0 0.25rem 0 0;
+                  padding: 0;
+                }
+
+                span {
+                  flex: 1;
+                }
+
+                select {
+                  margin-left: 0.25em;
+                  flex: 0 0 50%;
+                }
+              }
+            }
+          }
+        }
 
         .effects-display, .abilities-display, .perks-display {
             padding: 0.5rem;
@@ -1374,12 +1455,6 @@ body {
                 padding: 1rem;
 
                 &[data-tab=details] {
-
-                    .editor,
-                    .editor .editor-content {
-                        min-height: 200px;
-                    }
-
                     .base-stats {
                         display: grid;
                         grid-template-columns: 1fr 1fr;
@@ -3394,6 +3469,24 @@ body {
                 grid-area: tabs;
             }
 
+            .turn-to-affliction {
+              p {
+                text-align: center;
+              }
+
+              .center {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                margin-top: 0.25rem;
+                
+                button {
+                  flex: 0 0 60%;
+                }
+              }
+            }
+
             .tab {
                 &:has(div.scroll) {
                     padding: 0;
@@ -3577,8 +3670,6 @@ body {
                                         text-shadow: none !important;
                                         line-height: 1.6em;
 
-                                        color: var(--color-cool-5);
-
                                         img {
                                             height: 16px;
                                             width: 16px;
@@ -3603,6 +3694,33 @@ body {
                             }
                         }
 
+                        fieldset.alterations {
+                          min-height: 30px;
+                          padding: 0.5rem;
+                          
+                          .header {
+                            display: flex;
+                            flex-direction: row;
+                            align-items: end;
+                            justify-content: end;
+                          }
+
+                          .item-control {
+                            flex: 0 0 min-content;
+                            text-wrap: nowrap;
+                          }
+
+                          .alteration {
+                            padding: 0.5rem;
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+                            gap: 0.25rem;
+                            margin-bottom: 0.5rem;
+                            border-radius: 8px;
+                            border: 1px solid var(--border-theme-color);
+                          }
+                        }
                     }
                 }
 

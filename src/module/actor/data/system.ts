@@ -50,9 +50,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           validate: (d) => (d as number) >= 0,
         }),
         base: new fields.NumberField({
-          required: true,
-          initial: 40,
-          validate: (d) => (d as number) >= 1,
+          required: false,
+          initial: undefined,
+          validate: (d) => d === undefined || (d as number) >= 1,
         }),
       };
     };
@@ -285,6 +285,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
   }
 
+  getLevel(experience: number = this.advancement.experience.current): number {
+    return this.parent.isHumanoid() ? Math.max(1, Math.floor(Math.cbrt(((experience || 1) * 4) / 5))) : Math.max(1, Math.floor(Math.cbrt(((experience || 1) * 6) / 3)));
+  }
+
   override prepareBaseData(): void {
     super.prepareBaseData();
     this._initializeModifiers();
@@ -300,14 +304,13 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       this.parent.rollOptions.addOption("clocks", `${clock.id}:max:${clock.max}`)
     }
 
+    this.advancement.level = this.getLevel();
     if (this.parent.isHumanoid()) {
-      this.advancement.level = Math.max(1, Math.floor(Math.cbrt(((this.advancement.experience.current || 1) * 4) / 5)));
       this.advancement.experience.next = Math.ceil((5 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 4)
       this.advancement.experience.diff =
         this.advancement.experience.next - this.advancement.experience.current;
     }
     else {
-      this.advancement.level = Math.max(1, Math.floor(Math.cbrt(((this.advancement.experience.current || 1) * 6) / 3)));
       this.advancement.experience.next = Math.ceil((3 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 6)
       this.advancement.experience.diff =
         this.advancement.experience.next - this.advancement.experience.current;
@@ -334,7 +337,11 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     for (const k in this.attributes) {
       const key = k as keyof Attributes;
-      if (this.species?.stats[key]) this.attributes[key].base = this.species.stats[key];
+      if (this.species?.stats[key]) {
+        if(this.parent.isHumanoid()) this.attributes[key].base ??= this.species.stats[key];
+        else this.attributes[key].base = this.species.stats[key];
+      }
+      if(this.attributes[key].base === undefined) this.attributes[key].base = 40;
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
     }
 
@@ -364,6 +371,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       rvs: 0,
       advancementPoints: 0,
       inventoryPoints: 0,
+      effectChance: 0,
     };
   }
 
@@ -510,8 +518,6 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
 
     return super._preUpdate(changed, options, user);
-
-    this.skills
   }
 }
 

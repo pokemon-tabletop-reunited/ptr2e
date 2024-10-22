@@ -61,6 +61,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
       allowDuplicate: new fields.BooleanField({ initial: true, label: "PTR2E.Effect.FIELDS.ChangeAllowDuplicate.label" }),
       alterations: new fields.ArrayField(new fields.EmbeddedDataField(ItemAlteration)),
       track: new fields.BooleanField(),
+      replaceSelf: new fields.BooleanField({label: "PTR2E.Effect.FIELDS.ChangeReplaceSelf.label"}),
     };
   }
 
@@ -113,7 +114,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
   public async getItem(key: string = this.resolveInjectedProperties(this.uuid)): Promise<Maybe<ClientDocument>> {
     try {
-      return (await fromUuid(key))?.clone() ?? null
+      return (await fromUuid(key+""))?.clone() ?? null
     } catch (error) {
       console.error(error);
       return null;
@@ -123,7 +124,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
   override async preCreate(args: ChangeModel.PreCreateParams<ChangeSource>): Promise<void> {
     if (this.inMemoryOnly || this.invalid || !this.actor) return;
 
-    const { effectSource, pendingItems, context } = args;
+    const { effectSource, pendingItems, context, pendingEffects } = args;
     const changeSource: GrantItemSource = args.changeSource;
 
     const uuid = this.resolveInjectedProperties(this.uuid);
@@ -204,6 +205,11 @@ export default class GrantItemChangeSystem extends ChangeModel {
     this.#trackItem(tempGranted);
 
     // Add to pending items before running pre-creates to preserve creation order
+    if(this.replaceSelf) {
+      pendingEffects.findSplice(i => i._id === this.effect._id);
+      pendingItems.findSplice(i => i._id === this.effect.parent?._id);
+    }
+    
     pendingItems.push(grantedSource as ItemSourcePTR2e);
 
     // Run the granted item's preCreate callbacks unless this is a pre-actor-update reevaluation
@@ -366,6 +372,8 @@ type GrantItemSchema = ChangeSchema & {
    * options, which are added to the `all` domain.
    */
   track: BooleanField<boolean, boolean, false, false, false>;
+  /** Replace the granting item with the granted item*/
+  replaceSelf: BooleanField<boolean, boolean, false, false, false>;
 };
 
 interface GrantItemSource extends ChangeSource {

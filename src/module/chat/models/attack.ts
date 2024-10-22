@@ -23,6 +23,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     const fields = foundry.data.fields;
     return {
       origin: new fields.JSONField({ required: true }),
+      attack: new fields.JSONField({ required: false }),
       attackSlug: new SlugField(),
       results: new fields.ArrayField(
         new fields.SchemaField({
@@ -72,18 +73,18 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             target: new fields.ArrayField(new fields.SchemaField({
               chance: new fields.NumberField({ required: true, min: 1, max: 100 }),
               effect: new fields.DocumentUUIDField(),
-              label: new fields.StringField({ required: true, initial: ""}),
+              label: new fields.StringField({ required: true, initial: "" }),
               roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
-              success: new fields.BooleanField({ required: true, nullable: true, initial: null})
+              success: new fields.BooleanField({ required: true, nullable: true, initial: null })
             }), { required: true, initial: [] }),
             origin: new fields.ArrayField(new fields.SchemaField({
               chance: new fields.NumberField({ required: true, min: 1, max: 100 }),
               effect: new fields.DocumentUUIDField(),
-              label: new fields.StringField({ required: true, initial: ""}),
+              label: new fields.StringField({ required: true, initial: "" }),
               roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
-              success: new fields.BooleanField({ required: true, nullable: true, initial: null})
+              success: new fields.BooleanField({ required: true, nullable: true, initial: null })
             }), { required: true, initial: [] }),
-          }, {required: true, nullable: true, initial: null}),
+          }, { required: true, nullable: true, initial: null }),
         }),
         {
           required: true,
@@ -109,9 +110,9 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         rolls: new fields.ArrayField(new fields.SchemaField({
           chance: new fields.NumberField({ required: true, min: 1, max: 100 }),
           effect: new fields.DocumentUUIDField(),
-          label: new fields.StringField({ required: true, initial: ""}),
+          label: new fields.StringField({ required: true, initial: "" }),
           roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
-          success: new fields.BooleanField({ required: true, nullable: true, initial: null})
+          success: new fields.BooleanField({ required: true, nullable: true, initial: null })
         }), { required: true, initial: [] }),
       }, { required: true, nullable: true, initial: null })
     };
@@ -180,7 +181,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       result.accuracy = fromRollData(source.accuracy);
       result.crit = fromRollData(source.crit);
       result.damage = fromRollData(source.damage);
-      if(source.effectRolls) {
+      if (source.effectRolls) {
         result.effectRolls = {
           applied: source.effectRolls.applied,
           target: source.effectRolls.target.map((e) => ({
@@ -202,7 +203,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       result.target = fromActorData(source.target)!;
     }
 
-    if(this.selfEffects) {
+    if (this.selfEffects) {
       this.selfEffects.rolls = this._source.selfEffects!.rolls.map(e => ({
         chance: e.chance,
         effect: e.effect as ItemUUID,
@@ -214,7 +215,33 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
 
     this.origin = fromActorData(this._source.origin)!;
 
-    this.attack = this.origin.actions.attack.get(this._source.attackSlug) as AttackPTR2e;
+    this.attack = ((): AttackPTR2e => {
+      if (!this._source.attack) return this.origin.actions.attack.get(this._source.attackSlug) as AttackPTR2e;
+      const jsonData = (() => {
+        try {
+          return JSON.parse(this._source.attack);
+        } catch (error: unknown) {
+          Hooks.onError("AttackMessageSystem#prepareBaseData", error as Error, {
+            log: "error",
+          });
+        }
+      })();
+      if (!jsonData) return {} as AttackPTR2e;
+
+      try {
+        const attack = AttackPTR2e.fromJSON(this._source.attack) as AttackPTR2e;
+        const sourceItem = this.origin.actions.attack.get(this._source.attackSlug)?.item;
+        const clonedAttack = attack && sourceItem ? attack.clone({}, { parent: sourceItem }) : attack;
+        clonedAttack.prepareDerivedData();
+        return clonedAttack;
+      } catch (error: unknown) {
+        Hooks.onError("AttackMessageSystem#prepareBaseData", error as Error, {
+          log: "error",
+        });
+      }
+      return {} as AttackPTR2e;
+    })() ?? {};
+
     if (!this.attackSlug)
       Hooks.onError(
         "AttackMessageSystem#attack",
@@ -225,25 +252,34 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       );
   }
 
-  static async renderInnerRoll(roll: Rolled<Roll> | null, isPrivate: boolean)  {
-    return roll ? roll.render({ isPrivate }) : null;
+  static async renderInnerRoll(roll: Rolled<Roll> | null, isPrivate: boolean, success: boolean | null) {
+    if (!roll) return null;
+
+    const rollHtmlString = await roll.render({ isPrivate });
+    if (success === null) return rollHtmlString;
+
+    const rollHtml = $(rollHtmlString);
+    $(rollHtml).find("ol.dice-rolls li.roll").addClass(success ? "success" : "failure");
+
+    return rollHtml[0].outerHTML;
   };
 
   async getHTMLContent() {
     const renderRolls = async (data: ResultData, isPrivate: boolean) => {
+      const result = this.overrides.get(data.target.uuid)?.value || AttackRoll.successCategory(data.accuracy, data.crit);
 
       const rolls = {
         accuracy: await renderTemplate(
           "systems/ptr2e/templates/chat/rolls/accuracy-check.hbs",
           {
-            inner: await AttackMessageSystem.renderInnerRoll(data.accuracy, isPrivate),
+            inner: await AttackMessageSystem.renderInnerRoll(data.accuracy, isPrivate, ["hit", "critical"].includes(result)),
             isPrivate,
             type: "accuracy",
             label: "PTR2E.Attack.AccuracyCheck",
           }
         ),
         crit: await renderTemplate("systems/ptr2e/templates/chat/rolls/crit-check.hbs", {
-          inner: await AttackMessageSystem.renderInnerRoll(data.crit, isPrivate),
+          inner: await AttackMessageSystem.renderInnerRoll(data.crit, isPrivate, result === "critical"),
           isPrivate,
           type: "crit",
           label: "PTR2E.Attack.CritCheck",
@@ -251,7 +287,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         damage: await renderTemplate(
           "systems/ptr2e/templates/chat/rolls/damage-randomness.hbs",
           {
-            inner: await AttackMessageSystem.renderInnerRoll(data.damage, isPrivate),
+            inner: await AttackMessageSystem.renderInnerRoll(data.damage, isPrivate, null),
             isPrivate,
             type: "damage",
             label: "PTR2E.Attack.DamageRandomness",
@@ -259,14 +295,14 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         ),
         effects: [] as string[],
       };
-      if(data.effectRolls) {
+      if (data.effectRolls) {
         async function handleRoll(effectRoll: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>, target: "origin" | "target") {
           const item = await fromUuid(effectRoll.effect);
-          if(!item) {
+          if (!item) {
             Hooks.onError("AttackMessageSystem#getHTMLContent", new Error(`Could not find item with uuid ${effectRoll.effect}`), { log: "error" });
             return;
           };
-          if(!effectRoll.roll) {
+          if (!effectRoll.roll) {
             Hooks.onError("AttackMessageSystem#getHTMLContent", new Error(`Effect roll for ${item.name} is missing`), { log: "error" });
             return;
           }
@@ -274,7 +310,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           rolls.effects.push(await renderTemplate(
             "systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
             {
-              inner: await AttackMessageSystem.renderInnerRoll(effectRoll.roll, isPrivate),
+              inner: await AttackMessageSystem.renderInnerRoll(effectRoll.roll, isPrivate, effectRoll.success),
               isPrivate,
               type: "effect",
               label: `${effectRoll.label || item.name}${target === 'origin' ? ` (${target})` : ''}`,
@@ -282,10 +318,10 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           ));
         }
 
-        for(const effectRoll of data.effectRolls.target) {
+        for (const effectRoll of data.effectRolls.target) {
           await handleRoll(effectRoll, "target");
-        } 
-        for(const effectRoll of data.effectRolls.origin) {
+        }
+        for (const effectRoll of data.effectRolls.origin) {
           await handleRoll(effectRoll, "origin");
         }
       }
@@ -351,13 +387,13 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         ),
         selfEffectRolls: this.selfEffects ? await (async () => {
           const rolls = [];
-          for(const roll of this.selfEffects!.rolls) {
+          for (const roll of this.selfEffects!.rolls) {
             const item = await fromUuid(roll.effect);
-            if(!item) {
+            if (!item) {
               Hooks.onError("AttackMessageSystem#getHTMLContent", new Error(`Could not find item with uuid ${roll.effect}`), { log: "error" });
               continue;
             };
-            if(!roll.roll) {
+            if (!roll.roll) {
               Hooks.onError("AttackMessageSystem#getHTMLContent", new Error(`Effect roll for ${item.name} is missing`), { log: "error" });
               continue;
             }
@@ -365,7 +401,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             rolls.push(await renderTemplate(
               "systems/ptr2e/templates/chat/rolls/effect-roll.hbs",
               {
-                inner: await AttackMessageSystem.renderInnerRoll(roll.roll, false),
+                inner: await AttackMessageSystem.renderInnerRoll(roll.roll, false, roll.success),
                 isPrivate: false,
                 type: "effect",
                 label: roll.label || item.name,
@@ -438,28 +474,28 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       if (!effects.length) return;
       const toApply = await (async () => {
         const toApply: ActiveEffectPTR2e['_source'][] = [];
-        for(const effectRoll of effects) {
-          if(effectRoll.success === null) {
+        for (const effectRoll of effects) {
+          if (effectRoll.success === null) {
             effectRoll.success = (effectRoll.roll?.total ?? 1) <= 0
           }
-          if(!effectRoll.success) continue;
+          if (!effectRoll.success) continue;
 
           const item = await fromUuid(effectRoll.effect);
-          if(!item) {
+          if (!item) {
             Hooks.onError("AttackMessageSystem#applyDamage", new Error(`Could not find item with uuid ${effectRoll.effect}`), { log: "error" });
             continue;
           };
-          if(item.type !== "effect") {
+          if (item.type !== "effect") {
             Hooks.onError("AttackMessageSystem#applyDamage", new Error(`Item with uuid ${effectRoll.effect} is not an effect`), { log: "error" });
             continue;
           }
-          
+
           toApply.push(...item.toObject().effects as ActiveEffectPTR2e['_source'][]);
         }
         return toApply;
       })();
 
-      if(toApply.length) {
+      if (toApply.length) {
         await target.applyRollEffects(toApply);
       }
     }
@@ -561,11 +597,11 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     html.find("[data-action='consume-pp']").on("click", this.spendPP.bind(this));
   }
 
-  
+
 
   public async applyLuckIncrease(targetUuid: ActorUUID) {
     const results = fu.duplicate(this.parent.system.results);
-    const currentResult = results[this.parent.system.results.findIndex(r=>r.target.uuid == targetUuid)];
+    const currentResult = results[this.parent.system.results.findIndex(r => r.target.uuid == targetUuid)];
     if (!currentResult || !currentResult.accuracy) return;
     const accuracy = currentResult.accuracy;
 
@@ -641,6 +677,7 @@ interface AttackMessageRenderContextData {
 
 interface AttackMessageSchema extends foundry.data.fields.DataSchema {
   origin: foundry.data.fields.JSONField<ActorPTR2e, true, false, false>;
+  attack: foundry.data.fields.JSONField<AttackPTR2e, false, false, false>;
   attackSlug: SlugField<string, string, true, false, false>;
   results: foundry.data.fields.ArrayField<
     ResultSchema,

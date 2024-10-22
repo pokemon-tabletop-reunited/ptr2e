@@ -4,7 +4,11 @@
         {{#each stats as |value key|}}
             <div class="form-group {{key}}">
                 <label for="{{concat "system.attributes." key ".base"}}">{{localize (concat "PTR2E.Attributes." key ".Label")}}</label>
-                {{rangePicker name=(concat "system.attributes." key ".base") value=value.base min=40 max=(lookup ../baseMaximums key) step=1}}
+                {{#if (lookup ../speciesBaseStats key)}}
+                  {{rangePicker name=(concat "system.attributes." key ".base") value=value.base min=(lookup ../speciesBaseStats key) max=(lookup ../baseMaximums key) step=1}}
+                {{else}}
+                  {{rangePicker name=(concat "system.attributes." key ".base") value=value.base min=40 max=(lookup ../baseMaximums key) step=1}}
+                {{/if}}
             </div>
         {{/each}}
         <div class="form-group">

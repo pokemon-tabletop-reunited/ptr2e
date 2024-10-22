@@ -1,7 +1,7 @@
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { CheckDC } from "./degree-of-success.ts";
 import { RollNote, RollNoteSource } from "@system/notes.ts";
-import { Trait } from "@data";
+import { AttackPTR2e, Trait } from "@data";
 import { ActorPTR2e, EffectRoll } from "@actor";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CheckType } from "./check-roll.ts";
@@ -75,6 +75,8 @@ interface CheckRollContext extends BaseRollContext {
     identifier?: Maybe<string>;
     /** The slug of an action, of which this roll is a workflow component */
     action?: Maybe<string>;
+    /** The (virtual) attack data */
+    attack?: AttackPTR2e;
     /** Targeting data for the check, if applicable */
     targets?: RollTarget[] | null;
     /** The actor which initiated this roll. */

@@ -149,7 +149,7 @@ class CompendiumPack {
             throw PackError(msg);
           }
 
-          const isCoreIconPath = coreIcons.has(imgPath) || imgPath.includes("systems/ptr2e/img/item-icons/")
+          const isCoreIconPath = coreIcons.has(imgPath) || imgPath.includes("systems/ptr2e/img/item-icons/") || imgPath.includes("icons/svg/")
           const repoImgPath = path.resolve(
             process.cwd(),
             "static",
@@ -286,7 +286,10 @@ class CompendiumPack {
         name: name || "Unnamed Effect",
         type: "effect",
         img: d.img,
-        system: {},
+        system: {
+          ...((d.system as {traits?: []})?.traits ? { traits: (d.system as {traits?: []})?.traits } : {}),
+          ...(d.description ? { description: localize(d.description) } : {}),
+        },
         effects: [
           {
             ...d,

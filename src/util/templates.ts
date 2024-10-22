@@ -12,6 +12,7 @@ export class HandlebarTemplates {
 
         // All Actor Sheet Components
         "actor-effect-component": "systems/ptr2e/templates/actor/components/actor-effect-component.hbs",
+        "actor-toggle-component": "systems/ptr2e/templates/actor/components/actor-toggle-component.hbs",
         "actor-skills-component": "systems/ptr2e/templates/actor/components/actor-skills-component.hbs",
         "actor-perks-component": "systems/ptr2e/templates/actor/components/actor-perks-component.hbs",
         "actor-abilities-component": "systems/ptr2e/templates/actor/components/actor-abilities-component.hbs",

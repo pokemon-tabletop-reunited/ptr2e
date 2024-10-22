@@ -1,10 +1,9 @@
-import GrantItemChangeSystem from "../grant-item.ts";
-import ChangeForm from "./base.ts";
+import GrantItemForm from "./grant-item.ts";
 
-class GrantItemForm extends ChangeForm<GrantItemChangeSystem> {
-    override get template() {
-        return "systems/ptr2e/templates/effects/changes/grant-effect.hbs";
-    }
+class GrantEffectForm extends GrantItemForm {
+  override get template() {
+    return "systems/ptr2e/templates/effects/changes/grant-effect.hbs";
+  }
 }
 
-export default GrantItemForm;
+export default GrantEffectForm;

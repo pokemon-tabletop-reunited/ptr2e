@@ -1,0 +1,25 @@
+<div class="toggles-display">
+  <fieldset class="can-popout" data-component="toggles">
+    <legend>
+      Toggles
+    </legend>
+    <ul class="toggles-list scroll">
+      {{#each toggles as |toggle idx|}}
+        <li class="{{#unless toggle.alwaysActive}} item{{/unless}}" data-effect-id="{{toggle.effectId}}"
+          data-domain="{{toggle.domain}}" data-option="{{toggle.option}}" data-placement="{{toggle.placement}}">
+          <label>
+            <input type="checkbox" data-action="toggle-roll-option" {{#if (or toggle.alwaysActive (eq toggle.enabled false))}}disabled{{/if}} {{checked toggle.checked}} />
+            <span{{#if (not (or toggle.checked toggle.enabled))}} class="unchecked-disabled" {{/if}}>{{localize toggle.label}}</span>
+              {{#if toggle.suboptions}}
+                <select {{#if (eq toggle.suboptions.length 1)}}disabled="disabled" {{else}}data-action="set-suboption"{{/if}}>
+                  {{#each toggle.suboptions as |suboption|}}
+                  <option value="{{suboption.value}}" {{#if suboption.selected}} selected{{/if}}>{{localize suboption.label}}</option>
+                  {{/each}}
+                </select>
+              {{/if}}
+          </label>
+        </li>
+      {{/each}}
+    </ul>
+  </fieldset>
+</div>

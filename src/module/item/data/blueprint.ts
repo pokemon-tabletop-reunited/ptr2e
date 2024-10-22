@@ -9,7 +9,7 @@ import { ActorPTR2e } from "@actor";
 import { Progress } from "src/util/progress.ts";
 import FolderPTR2e from "@module/folder/document.ts";
 import natureToStatArray from "@scripts/config/natures.ts";
-import { LevelUpMoveSchema } from "./species.ts";
+import SpeciesSystem, { EvolutionData, LevelUpMoveSchema } from "./species.ts";
 import { AbilityPTR2e, MovePTR2e } from "@item";
 import { ImageResolver, sluggify } from "@utils";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
@@ -84,10 +84,10 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     folder?: FolderPTR2e | null;
     parent?: ActorPTR2e;
     team: boolean;
-  } | null) {
+  } | null, dataOnly = false) {
     // Safe generate
     try {
-      return await this._generate(options);
+      return await this._generate(options, dataOnly);
     }
     catch (error) {
       ui.notifications.error("An error occurred while generating Pokemon from Blueprint");
@@ -102,8 +102,12 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     folder?: FolderPTR2e | null;
     parent?: ActorPTR2e;
     team: boolean;
-  } | null) {
-    if (!canvas.scene) return void ui.notifications.warn("Cannot generate Actors from Blueprint without an active scene");
+  } | null, dataOnly: boolean): Promise<Partial<ActorPTR2e['_source']>[] | void> {
+    if (!canvas.scene && !dataOnly) return void ui.notifications.warn("Cannot generate Actors from Blueprint without an active scene");
+
+    if(dataOnly && !options) {
+      options = {} as unknown as typeof options;
+    }
 
     // If no options, then we're generating from a blueprint window instead of a drag-and-drop
     // Thus ask for a location where to spawn the Actor(s)
@@ -150,7 +154,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     const hasOwner = !!owner;
 
     // Find or Create a folder as necessary
-    if (!options.folder?.id) {
+    if (!options.folder?.id && !dataOnly) {
       options.folder = await (async () => {
         const folderName = hasOwner ? `${owner.name}'s Party` : canvas.scene!.name;
 
@@ -266,14 +270,14 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         // Get nature from rolltable result, or static value
 
         // If nature ain't set, generate a random one
-        if (!blueprint.nature) return this.randomFromList(Object.keys(natureToStatArray));
+        if (!blueprint.nature) return randomFromList(Object.keys(natureToStatArray));
 
         // If nature is a valid string, return it
         if (typeof blueprint.nature === "string" && Object.keys(natureToStatArray).includes(blueprint.nature.toLowerCase())) return blueprint.nature.toLowerCase();
 
         // If nature is a rolltable, draw a result
         const table = await fromUuid<RollTable>(blueprint.nature);
-        if (!table || !(table instanceof RollTable)) return this.randomFromList(Object.keys(natureToStatArray));
+        if (!table || !(table instanceof RollTable)) return randomFromList(Object.keys(natureToStatArray));
 
         const tableResult = await table.drawMany(3, { displayChat: false });
         for (const result of tableResult.results) {
@@ -283,13 +287,13 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         }
 
         // If no valid result is found, generate a random nature
-        return this.randomFromList(Object.keys(natureToStatArray));
+        return randomFromList(Object.keys(natureToStatArray));
       })();
 
       // TODO: Implement these options
       const { shinyChance, preventEvolution, linkToken } = {
         shinyChance: 1,
-        preventEvolution: false,
+        preventEvolution: blueprint.preventEvolution ?? false,
         linkToken: false,
       }
 
@@ -303,12 +307,55 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       const evolution = await (async (): Promise<NonNullable<SpeciesSystemModel['_source']>> => {
         if (preventEvolution) return species;
-        // TODO: Implement evolutions
-        return species;
+
+        function getEvolution(evolution: EvolutionData): EvolutionData {
+          if (!evolution?.evolutions) return evolution;
+          
+          const evolutions = evolution.evolutions.filter((e) => {
+            const andCases = e.methods.filter(m => m.operand === "and");
+            const orCases = e.methods.filter(m => m.operand === "or");
+
+            function validateEvolution(method: typeof e['methods'][number]): boolean {
+              switch(method.type) {
+                case "level": {
+                  return level >= method.level;
+                }
+                case "item": {
+                  return false;
+                }
+                case "move": {
+                  return false; //TODO: Implement move evolutions
+                }
+                case "gender": {
+                  return gender === method.gender;
+                }
+              }
+            }
+
+            return andCases.length && orCases.length
+              ? andCases.every(validateEvolution) && orCases.some(validateEvolution)
+              : andCases.length
+                ? andCases.every(validateEvolution)
+                : orCases.length
+                  ? orCases.some(validateEvolution)
+                  : false;
+          });
+          
+          if(!evolutions.length) return evolution;
+          if(evolutions.length > 1) {
+            // Pick a random evolution path to follow
+            return getEvolution(randomFromList(evolutions));
+          }
+          return getEvolution(evolutions[0]);
+        }
+        const evolution = getEvolution(species.evolutions as unknown as EvolutionData)
+        if(!evolution?.uuid) return species;
+
+        return (await fromUuid<ItemPTR2e<SpeciesSystem>>(evolution.uuid))?.system?.toObject() ?? species;
       })();
 
       const size = (() => {
-        switch (species.size.category) {
+        switch (evolution.size.category) {
           case "max":
             return { width: 6, height: 6 };
           case "titanic":
@@ -333,7 +380,10 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       // TODO: Add stat settings
       const stats = (() => {
-        const randomPoints = Math.ceil(Math.random() * 508 * 0.25);
+        const randomPoints = (() => {
+          const points = Math.ceil(Math.random() * 508 * 0.25);
+          return points % 4 === 0 ? points : points + (4 - (points % 4));
+        })()
 
         class weightedBag<T> {
           entries: { entry: T; weight: number }[] = [];
@@ -360,8 +410,8 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
             );
           }
 
-          for (let i = 0; i < points; i++) {
-            stats[bag.get()]++;
+          for (let i = 0; i < points; i += 4) {
+            stats[bag.get()]+=4;
           }
           return stats;
         };
@@ -380,7 +430,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       })();
 
       const moves: MovePTR2e["_source"][] = await (async () => {
-        const levelUpMoves = (species.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level);
+        const levelUpMoves = (evolution.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level);
 
         const moveItems = await Promise.all(
           levelUpMoves.map(async (move) => fromUuid(move.uuid))
@@ -404,10 +454,10 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       })();
 
       const abilities: AbilityPTR2e["_source"][] = await (async () => {
-        const sets = [species.abilities.starting];
-        if (level >= 20) sets.push(species.abilities.basic);
-        if (level >= 50) sets.push(species.abilities.advanced);
-        if (level >= 80) sets.push(species.abilities.master);
+        const sets = [evolution.abilities.starting];
+        if (level >= 20) sets.push(evolution.abilities.basic);
+        if (level >= 50) sets.push(evolution.abilities.advanced);
+        if (level >= 80) sets.push(evolution.abilities.master);
 
         const abilityItems = await Promise.all(
           sets.map((set) => {
@@ -459,7 +509,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       const data = {
         name: Handlebars.helpers.formatSlug(evolution.slug) || blueprint.name,
         img,
-        type: "pokemon",
+        type: evolution?.traits?.includes("humanoid") ? "humanoid" : "pokemon",
         folder: options.folder?.id,
         ownership: options.parent ? options.parent.ownership : {},
         system: {
@@ -494,10 +544,15 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         }, { inplace: false }),
       } as unknown as Partial<ActorPTR2e['_source']>;
       const actor = new ActorPTR2e(data);
-      data.system!.health = {value: actor.system.health.max, max: actor.system.health.max};
-      data.system!.powerPoints = {value: actor.system.powerPoints.max, max: actor.system.powerPoints.max};
+      data.system!.health = { value: actor.system.health.max, max: actor.system.health.max };
+      data.system!.powerPoints = { value: actor.system.powerPoints.max, max: actor.system.powerPoints.max };
 
       toBeCreated.push(data);
+    }
+
+    if (dataOnly) {
+      progress.close(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.Complete"));
+      return toBeCreated;
     }
 
     progress.advance(game.i18n.localize("PTR2E.PokemonGeneration.Progress.Prefix") + game.i18n.localize("PTR2E.PokemonGeneration.Progress.GenerationStep"));
@@ -534,9 +589,10 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
     );
   }
 
-  randomFromList<T>(list: T[]): T {
-    return list[Math.floor(Math.random() * list.length)];
-  }
+}
+
+function randomFromList<T>(list: T[]): T {
+  return list[Math.floor(Math.random() * list.length)];
 }
 
 export default interface BlueprintSystem extends ModelPropsFromSchema<BlueprintSchema> {

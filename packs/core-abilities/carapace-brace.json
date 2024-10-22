@@ -15,16 +15,14 @@
         "cost": {
           "activation": "free",
           "powerPoints": 1,
-          "trigger": "The user resolves a Bug-Type attack",
-          "delay": null,
-          "priority": null
+          "trigger": "The user resolves a Bug-Type attack"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user resolves a Bug-Type attack\nEffect: The user gains @Affliction[resolved] 2."
+        "description": "Trigger: The user resolves a Bug-Type attack\nEffect: The user gains @Affliction[resolved] 2.",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Trigger: The user resolves a Bug-Type attack\nEffect: The user gains @Affliction[resolved] 2.",
@@ -32,27 +30,66 @@
       "strategist",
       "bug"
     ],
-    "slug": null,
-    "container": null
+    "slug": "carapace-brace",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "tjpnZ5lQ7zFQaMnb",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!tjpnZ5lQ7zFQaMnb"
+  "effects": [
+    {
+      "name": "Carapace Brace",
+      "type": "passive",
+      "_id": "sFP6Z27aiKCRY0HJ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "bug-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.resolvedconditem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729291824628,
+        "modifiedTime": 1729291857861,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

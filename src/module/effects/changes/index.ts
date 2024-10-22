@@ -10,5 +10,8 @@ export { default as EphemeralEffectChangeSystem } from "./ephemeral-effect.ts";
 export { default as RollNoteChangeSystem } from "./roll-note.ts";
 export { default as EffectRollChangeSystem } from "./effect-roll.ts";
 export { default as ChoiceSetChangeSystem } from "./choice-set/change-model.ts";
+export { default as AddTraitChangeSystem } from "./add-trait.ts";
+export { default as RemoveTraitChangeSystem } from "./remove-trait.ts";
+export { default as AlterAttackChangeSystem } from "./alter-attack.ts";
 export type * from "./choice-set/change-model.ts";
 export type * from "./data.ts";

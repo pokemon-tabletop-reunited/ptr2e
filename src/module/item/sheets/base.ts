@@ -6,7 +6,7 @@ import GithubManager from "@module/apps/github.ts";
 import { ActiveEffectPTR2e } from "@effects";
 import { ActionEditor } from "@module/apps/action-editor.ts";
 import { ItemSheetV2Expanded } from "@module/apps/appv2-expanded.ts";
-import { ActionPTR2e } from "@data";
+import { ActionPTR2e, Trait } from "@data";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 
 export default class ItemSheetPTR2e<
@@ -61,7 +61,7 @@ export default class ItemSheetPTR2e<
   static readonly detailsTemplate: string = "";
   readonly noActions: boolean = false;
 
-  #allTraits: { value: string; label: string, virtual?: boolean }[] | undefined;
+  #allTraits: { value: string; label: string, virtual?: boolean, type?: Trait["type"] }[] | undefined;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     header: {
@@ -147,6 +147,7 @@ export default class ItemSheetPTR2e<
             value: trait.slug,
             label: trait.label,
             virtual: trait.virtual ?? false,
+            type: trait.type,
           });
         }
         return traits;
@@ -158,6 +159,7 @@ export default class ItemSheetPTR2e<
       value: trait.slug,
       label: trait.label,
       virtual: false,
+      type: trait.type,
     }));
 
     const effects = this.document.effects.contents;
@@ -253,7 +255,7 @@ export default class ItemSheetPTR2e<
               return `
                             <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
                 tagData
-              )}>
+              )}style="${Trait.bgColors[tagData.type || "default"] ? `--tag-bg: ${Trait.bgColors[tagData.type || "default"]!["bg"]}; --tag-hover: ${Trait.bgColors[tagData.type || "default"]!["hover"]}; --tag-border-color: ${Trait.bgColors[tagData.type || "default"]!["border"]};` : ""}">
                             ${tagData.virtual ? "" : `<x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>`}
                             <div>
                                 <span class='tagify__tag-text'>

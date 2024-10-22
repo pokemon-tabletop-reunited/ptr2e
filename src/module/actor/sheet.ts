@@ -22,7 +22,7 @@ import { ActionEditor } from "@module/apps/action-editor.ts";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { SkillsComponent } from "./components/skills-component.ts";
 import { SkillsEditor } from "@module/apps/skills-editor.ts";
-import { AttackPTR2e } from "@data";
+import { AttackPTR2e, Trait } from "@data";
 import { PerksComponent } from "./components/perks-component.ts";
 import { AbilitiesComponent } from "./components/abilities-component.ts";
 import { StatsChart } from "./sheets/stats-chart.ts";
@@ -36,6 +36,7 @@ import ClockEditor from "@module/apps/clocks/clock-editor.ts";
 import Sortable from "sortablejs";
 import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 import PartySheetPTR2e from "@module/apps/party-sheet.ts";
+import { ToggleComponent } from "./components/toggle-component.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
@@ -212,7 +213,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     return this.id.replaceAll(".", "-");
   }
 
-  #allTraits: { value: string; label: string, virtual: boolean }[] | undefined;
+  #allTraits: { value: string; label: string, virtual: boolean, type?: Trait["type"] }[] | undefined;
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
     header: {
@@ -470,6 +471,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     if (partId === "effects") {
       context.effects = this.actor.effects.contents;
+      context.toggles = this.actor.synthetics.toggles;
     }
 
     if (partId === "perks") {
@@ -481,6 +483,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
               value: trait.slug,
               label: trait.label,
               virtual: trait.virtual,
+              type: trait.type,
             });
           }
           return traits;
@@ -492,6 +495,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         value: trait.slug,
         label: trait.label,
         virtual: false,
+        type: trait.type,
       }));
 
       context.traits = traits;
@@ -563,6 +567,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     if (partId === "effects") {
       EffectComponent.attachListeners(htmlElement, this.actor);
+      ToggleComponent.attachListeners(htmlElement, this.actor);
     }
 
     if (partId === "skills" || partId === "overview") {
@@ -800,7 +805,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
               return `
                             <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
                 tagData
-              )}>
+              )} style="${Trait.bgColors[tagData.type || "default"] ? `--tag-bg: ${Trait.bgColors[tagData.type || "default"]!["bg"]}; --tag-hover: ${Trait.bgColors[tagData.type || "default"]!["hover"]}; --tag-border-color: ${Trait.bgColors[tagData.type || "default"]!["border"]};` : ""}">
                             ${tagData.virtual ? "" : `<x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>`}
                             <div>
                                 <span class='tagify__tag-text'>

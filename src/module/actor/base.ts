@@ -9,7 +9,7 @@ import {
 } from "@actor";
 import { ActiveEffectPTR2e, ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import { AttackPTR2e, PokemonType, RollOptionManager } from "@data";
+import { AttackPTR2e, PokemonType, RollOptionChangeSystem, RollOptionManager } from "@data";
 import { ActorFlags } from "types/foundry/common/documents/actor.js";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -29,6 +29,7 @@ import { sluggify } from "@utils";
 import { preImportJSON } from "@module/data/doc-helper.ts";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
+import MoveSystem from "@item/data/move.ts";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -179,7 +180,9 @@ class ActorPTR2e<
       modifiers: { all: [], damage: [] },
       afflictions: { data: [], ids: new Set() },
       rollNotes: {},
-      effects: { },
+      effects: {},
+      toggles: [],
+      attackAdjustments: [],
       preparationWarnings: {
         add: (warning: string) => preparationWarnings.add(warning),
         flush: fu.debounce(() => {
@@ -219,7 +222,7 @@ class ActorPTR2e<
    * The work done by this method should be idempotent. There are situations in which prepareData may be called more than once.
    * */
   override prepareData() {
-    if(this.initialized) return;
+    if (this.initialized) return;
     if (this.type === "ptu-actor") return super.prepareData();
 
     // Todo: Add appropriate `self:` options to the rollOptions
@@ -238,12 +241,12 @@ class ActorPTR2e<
     if (this.type === "ptu-actor") return super.prepareBaseData();
     super.prepareBaseData();
 
-    if(this.system.shield.value > 0) this.rollOptions.addOption("self", "state:shielded");
-    switch(true) {
+    if (this.system.shield.value > 0) this.rollOptions.addOption("self", "state:shielded");
+    switch (true) {
       case this.system.health.value <= Math.floor(this.system.health.max * 0.25): {
         this.rollOptions.addOption("self", "state:desperation-1-4");
       }
-      case this.system.health.value <= Math.floor(this.system.health.max * (1/3)): {
+      case this.system.health.value <= Math.floor(this.system.health.max * (1 / 3)): {
         this.rollOptions.addOption("self", "state:desperation-1-3");
       }
       case this.system.health.value <= Math.floor(this.system.health.max * 0.5): {
@@ -253,7 +256,7 @@ class ActorPTR2e<
         this.rollOptions.addOption("self", "state:desperation-3-4");
       }
     }
-    switch(true) {
+    switch (true) {
       case this.system.health.value == this.system.health.max: {
         this.rollOptions.addOption("self", "state:healthy");
       }
@@ -263,7 +266,7 @@ class ActorPTR2e<
       case this.system.health.value >= Math.floor(this.system.health.max * 0.5): {
         this.rollOptions.addOption("self", "state:intrepid-1-2");
       }
-      case this.system.health.value >= Math.floor(this.system.health.max * (1/3)): {
+      case this.system.health.value >= Math.floor(this.system.health.max * (1 / 3)): {
         this.rollOptions.addOption("self", "state:intrepid-1-3");
       }
       case this.system.health.value >= Math.floor(this.system.health.max * 0.25): {
@@ -609,6 +612,24 @@ class ActorPTR2e<
     return damageApplied;
   }
 
+  /** Toggle the provided roll option (swapping it from true to false or vice versa). */
+  async toggleRollOption(
+    domain: string,
+    option: string,
+    effectId: string | null = null,
+    value?: boolean,
+    suboption: string | null = null,
+  ): Promise<boolean | null> {
+    if (!(typeof effectId === "string")) return null;
+
+    const effect = this.effects.get(effectId, { strict: true });
+    const change = effect.changes.find(
+      (c): c is RollOptionChangeSystem =>
+        c instanceof RollOptionChangeSystem && c.domain === domain && c.option === option,
+    );
+    return change?.toggle(value, suboption) ?? null;
+  }
+
   override async modifyTokenAttribute(
     attribute: string,
     value: number,
@@ -645,7 +666,7 @@ class ActorPTR2e<
   async onEndActivation() {
     if (!(game.user === game.users.activeGM)) return;
     if (!this.synthetics.afflictions.data.length) return;
-    const rollNotes: {options: string[], domains: string[], html: string}[] = [];
+    const rollNotes: { options: string[], domains: string[], html: string }[] = [];
     const afflictions = this.synthetics.afflictions.data.reduce<{
       toDelete: string[];
       toUpdate: Partial<ActiveEffectPTR2e<ActorPTR2e>["_source"]>[];
@@ -656,7 +677,7 @@ class ActorPTR2e<
     }>(
       (acc, affliction) => {
         const result = affliction.onEndActivation();
-        if(result.note) rollNotes.push(result.note);
+        if (result.note) rollNotes.push(result.note);
         if (result.type === "delete") acc.toDelete.push(affliction.parent.id);
         else if (result.type === "update") acc.toUpdate.push(result.update);
         if (result.damage) {
@@ -1009,13 +1030,29 @@ class ActorPTR2e<
     })();
 
     //TODO: Probably needs similar implementation to selfItem
-    const selfAttack = params.attack;
+    const selfAttack = params.attack?.clone();
+    selfAttack?.prepareDerivedData();
     const selfAction = params.action;
 
     const itemOptions = selfItem?.getRollOptions("item") ?? [];
-    const actionTraits = R.uniq(
-      params.traits?.map((t) => (typeof t === "string" ? t : t.slug)) ?? []
-    );
+
+    if(selfAttack) {
+      for(const adjustment of selfActor.synthetics.attackAdjustments) {
+        adjustment.adjustAttack?.(selfAttack, itemOptions);
+      }
+    }
+
+    const actionTraits = (() => {
+      const traits = params.traits?.map((t) => (typeof t === "string" ? t : t.slug)) ?? [];
+
+      if(selfAttack) {
+        for(const adjustment of selfActor.synthetics.attackAdjustments) {
+          adjustment.adjustTraits?.(selfAttack, traits, itemOptions);
+        }
+      }
+
+      return R.uniq(traits).sort();
+    })();
 
     // Calculate distance and range increment, set as a roll option
     const distance = selfToken && targetToken ? selfToken.distanceTo(targetToken) : 0;
@@ -1066,7 +1103,8 @@ class ActorPTR2e<
       action: params.action ?? null,
       domains: params.domains,
       options: [...params.options, ...itemOptions, ...targetRollOptions],
-      chanceModifier: 0
+      chanceModifier: (Number(selfActor.system?.modifiers?.effectChance) || 0),
+      hasSenerenGrace: selfActor?.rollOptions?.all?.["special:serene-grace"] ?? false,
     })
 
     const targetOriginEffectRolls = await extractEffectRolls({
@@ -1078,7 +1116,8 @@ class ActorPTR2e<
       action: params.action ?? null,
       domains: params.domains,
       options: [...params.options, ...itemOptions, ...targetRollOptions],
-      chanceModifier: 0
+      chanceModifier: (Number(targetToken?.actor?.system?.modifiers?.effectChance) || 0),
+      hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
     })
 
     // Clone the actor to recalculate its AC with contextual roll options
@@ -1129,7 +1168,7 @@ class ActorPTR2e<
       self,
       target,
       traits: actionTraits,
-      effectRolls: {target: targetEffectRolls, origin: targetOriginEffectRolls},
+      effectRolls: { target: targetEffectRolls, origin: targetOriginEffectRolls },
     };
   }
 
@@ -1208,9 +1247,9 @@ class ActorPTR2e<
 
   static override async createDialog<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, data?: Record<string, unknown>, context?: { parent?: TDocument["parent"]; pack?: Collection<TDocument> | null; types?: string[] } & Partial<FormApplicationOptions>): Promise<TDocument | null>;
   static override async createDialog(data: Record<string, unknown> = {}, context: { parent?: TokenDocumentPTR2e | null; pack?: Collection<ActorPTR2e> | null; types?: string[] } & Partial<FormApplicationOptions> = {}) {
-    if(!Array.isArray(context.types)) context.types = this.TYPES.filter(t => t !== "ptu-actor");
+    if (!Array.isArray(context.types)) context.types = this.TYPES.filter(t => t !== "ptu-actor");
     else {
-      if(context.types.length) context.types = context.types.filter(t => t !== "ptu-actor");
+      if (context.types.length) context.types = context.types.filter(t => t !== "ptu-actor");
       else context.types = this.TYPES.filter(t => t !== "ptu-actor");
     }
     return super.createDialog(data, context);
@@ -1233,9 +1272,9 @@ class ActorPTR2e<
     if (this.type === 'ptu-actor') throw new Error("PTU Actors cannot be created directly.");
     if (options.fail === true) return false;
 
-    if(this.system.party.ownerOf) {
+    if (this.system.party.ownerOf) {
       const folder = game.folders.get(this.system.party.ownerOf) as FolderPTR2e;
-      if(folder.owner) {
+      if (folder.owner) {
         throw new Error("Cannot create an actor that owns a party folder already owned by another actor.");
       }
     }
@@ -1246,9 +1285,9 @@ class ActorPTR2e<
     options: DocumentModificationContext<TParent>,
     user: User
   ): Promise<boolean | void> {
-    if(changed.system?.party?.ownerOf) {
+    if (changed.system?.party?.ownerOf) {
       const folder = game.folders.get(changed.system.party.ownerOf as Maybe<string>) as FolderPTR2e;
-      if(folder?.owner && folder.owner !== this.uuid) {
+      if (folder?.owner && folder.owner !== this.uuid) {
         throw new Error("Cannot change the owner of a party folder to an actor that does not own it. Please remove the current party owner first.");
       }
     }
@@ -1301,6 +1340,48 @@ class ActorPTR2e<
       } else if (changed.system.shield.value === 0) {
         changed.system.shield.max = 0;
       }
+    }
+
+    if(changed.system?.traits !== undefined && this.system?.traits?.suppressedTraits?.size) {
+      if(changed.system.traits instanceof Set) {
+        //@ts-expect-error - During an update this should be an array
+        changed.system.traits = Array.from(changed.system.traits);
+      }
+      else if(!Array.isArray(changed.system.traits)) {
+        //@ts-expect-error - During an update this should be an array
+        if(changed.system.traits instanceof Collection) changed.system.traits = [...changed.system.traits];
+        //@ts-expect-error - During an update this should be an array
+        else changed.system.traits = [];
+      }
+
+      const suppressedTraits = this.system.traits.suppressedTraits;
+      const sourceTraits = this.system._source.traits;
+      const intersection = sourceTraits.filter(trait => suppressedTraits.has(trait));
+      if(intersection.length) {
+        //@ts-expect-error - During an update this should be an array
+        changed.system.traits = Array.from(new Set([...changed.system.traits, ...intersection]))
+      }
+    }
+
+    if(changed.system?.advancement?.experience?.current !== undefined) {
+      if(this.system.species?.moves?.levelUp?.length) {
+        // Check if level-up occurs
+        const newExperience = Number(changed.system.advancement.experience.current);
+        const nextExperienceThreshold = this.system.advancement.experience.next;
+        if(nextExperienceThreshold && newExperience >= nextExperienceThreshold) {          
+          const level = this.system.getLevel(newExperience);
+          const currentLevel = this.system.advancement.level;
+          
+          const newMoves = this.system.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
+          if(newMoves.length) {
+            const moves = (await Promise.all(newMoves.map(move => fromUuid<ItemPTR2e<MoveSystem>>(move.uuid)))).flatMap(move => move ?? []);
+            changed.items ??= [];
+            //@ts-expect-error - Asserted that this is an Array.
+            changed.items.push(...moves.map(move => move.toObject()));
+          }
+        }
+      }
+
     }
 
     return super._preUpdate(changed, options, user);
@@ -1464,7 +1545,7 @@ class ActorPTR2e<
   };
 
 
-  async heal({ fractionToHeal=1.0, removeWeary=true, removeExposed=false, removeAllStacks=false } : { fractionToHeal?: number, removeWeary?: boolean; removeExposed?: boolean; removeAllStacks?: boolean } = {}): Promise<void> {
+  async heal({ fractionToHeal = 1.0, removeWeary = true, removeExposed = false, removeAllStacks = false }: { fractionToHeal?: number, removeWeary?: boolean; removeExposed?: boolean; removeAllStacks?: boolean } = {}): Promise<void> {
     const health = Math.clamp(
       (this.system.health?.value ?? 0) + Math.floor((this.system.health?.max ?? 0) * fractionToHeal),
       0,

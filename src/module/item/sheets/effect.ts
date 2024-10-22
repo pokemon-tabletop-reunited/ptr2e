@@ -5,7 +5,7 @@ export default class EffectSheet extends ItemSheetPTR2e<EffectPTR2e["system"]> {
     static override DEFAULT_OPTIONS = fu.mergeObject(
         super.DEFAULT_OPTIONS,
         {
-            classes: ["ability-sheet"],
+            classes: ["effect-sheet"],
         },
         { inplace: false }
     );

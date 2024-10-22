@@ -25,9 +25,6 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p>"
         },
         "category": "physical",
@@ -37,14 +34,70 @@
           "electric"
         ],
         "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[paralysis] 5. Upon resolving this attack, the user freely uses Electric Terrain.</p><p>Requirement: [Electric] Z-Crystal as an Accessory Item and an Electric-Type attack on the user's Active List.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "grade": "E"
   },
   "_id": "XgUqQZ4AhjbG9slp",
-  "effects": []
+  "effects": [
+    {
+      "name": "Gigavolt Havoc",
+      "type": "passive",
+      "_id": "0ogMct9DQaaRL34n",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "gigavolt-havoc-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729547795652,
+        "modifiedTime": 1729547817946,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

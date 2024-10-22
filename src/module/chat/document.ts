@@ -243,7 +243,11 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     rollJson.data = roll.data;
     const system: Record<string, unknown> = {
       roll: rollJson,
-      origin: context.actor?.toJSON(),
+      origin: (() => {
+        const json: Record<string, unknown> = context.actor!.toJSON();
+        json.uuid = context.token?.actor?.uuid ?? context.actor!.uuid;
+        return json;
+      })(),
       slug: context.action ?? context.title ?? type,
       luckRoll: null,
     };
@@ -363,6 +367,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         spent: boolean;
         cost: number;
       };
+      attack?: Record<string, unknown>;
       attackSlug: string;
       origin: Record<string, unknown>;
       results: Record<string, unknown>[];
@@ -375,6 +380,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         spent: !!context.consumePP,
         cost: context.ppCost ?? 0,
       },
+      attack: context.attack?.toJSON() as Record<string, unknown> ?? undefined,
       attackSlug: context.action,
       origin: (() => {
         const json: Record<string, unknown> = context.actor!.toJSON();
@@ -400,12 +406,16 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       })),
       selfEffects: context.selfEffectRolls?.length ? {
         applied: true,
-        rolls: await Promise.all(context.selfEffectRolls.map(async (r) => ({
-          chance: r.chance,
-          effect: r.effect,
-          label: r.label,
-          roll: r.roll ? r.roll.toJSON() : (await new Roll("1d100ms@dc", {dc: r.chance}).roll()).toJSON(),
-        })))
+        rolls: await Promise.all(context.selfEffectRolls.map(async (r) => {
+          const roll = r.roll ? r.roll : (await new Roll("1d100ms@dc", {dc: r.chance}).roll())
+          return {
+            chance: r.chance,
+            effect: r.effect,
+            label: r.label,
+            roll: roll.toJSON(),
+            success: roll.total <= 0
+          }
+        }))
       } : null
     };
 

@@ -352,9 +352,11 @@ class CheckPTR2e {
 
             for(const effectRoll of targetContext.effectRolls.origin) {
               effectRoll.roll = await new Roll("1d100ms@dc", {dc: effectRoll.chance}).roll();
+              effectRoll.success = effectRoll.roll.total <= 0;
             }
             for(const effectRoll of targetContext.effectRolls.target) {
               effectRoll.roll = await new Roll("1d100ms@dc", {dc: effectRoll.chance}).roll();
+              effectRoll.success = effectRoll.roll.total <= 0;
             }
 
             const messageContext: CheckRollContext & {

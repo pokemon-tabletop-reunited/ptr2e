@@ -6,10 +6,51 @@
 </div>
 
 <div class="form-group">
-    <label class="short">{{localize fields.value.label}}</label>
+    <label class="short">{{localize "PTR2E.Effect.FIELDS.ChangeOption.label"}}</label>
     <div class="form-fields">
         <input type="text" name="{{basePath}}.value" value="{{change.value}}" />
     </div>
+</div>
+
+<div class="form-group">
+    <label for="{{fieldIdPrefix}}toggleable" data-tooltip="{{localize fields.toggleable.hint}}">{{localize fields.toggleable.label}}</label>
+    <div class="form-fields">
+        <input
+            type="checkbox"
+            name="{{basePath}}.toggleable"
+            id="{{fieldIdPrefix}}toggleable"
+            {{checked change.toggleable}}
+        />
+    </div>
+    <p class="hint">{{localize fields.toggleable.hint}}</p>
+</div>
+
+{{#if change.toggleable}}
+<div class="form-group">
+    <label for="{{fieldIdPrefix}}always-active" data-tooltip="{{localize fields.alwaysActive.hint}}">{{localize fields.alwaysActive.label}}</label>
+    <div class="form-fields">
+        <input
+            type="checkbox"
+            name="{{basePath}}.alwaysActive"
+            id="{{fieldIdPrefix}}always-active"
+            {{checked change.alwaysActive}}
+        />
+    </div>
+    <p class="hint">{{localize fields.alwaysActive.hint}}</p>
+</div>
+{{/if}}
+
+<div class="form-group">
+    <label for="{{fieldIdPrefix}}count" data-tooltip="{{localize fields.count.hint}}">{{localize fields.count.label}}</label>
+    <div class="form-fields">
+        <input
+            type="checkbox"
+            name="{{basePath}}.count"
+            id="{{fieldIdPrefix}}count"
+            {{checked change.count}}
+        />
+    </div>
+    <p class="hint">{{localize fields.count.hint}}</p>
 </div>
 
 <div class="form-group">

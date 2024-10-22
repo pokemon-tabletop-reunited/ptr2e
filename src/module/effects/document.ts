@@ -67,7 +67,7 @@ class ActiveEffectPTR2e<
       this.initialized = true;
       super.prepareData();
 
-      for(const change of this.changes) {
+      for (const change of this.changes) {
         change.prepareData?.();
       }
     }
@@ -76,7 +76,7 @@ class ActiveEffectPTR2e<
   override prepareBaseData(): void {
     super.prepareBaseData();
 
-    this.flags.ptr2e = fu.mergeObject(this.flags.ptr2e ?? {}, { choiceSelections: {}})
+    this.flags.ptr2e = fu.mergeObject(this.flags.ptr2e ?? {}, { choiceSelections: {} })
 
     this._name = this._source.name;
     Object.defineProperty(this, "name", {
@@ -364,7 +364,7 @@ class ActiveEffectPTR2e<
           (e) => e.slug === sluggify(source.name)
         );
         if (existing?.system.stacks) {
-          existing.update({ "system.stacks": existing.system.stacks + 1 });
+          existing.update({ "system.stacks": existing.system.stacks + (source.system?.stacks || 1) });
           return [];
         }
 
@@ -405,27 +405,27 @@ class ActiveEffectPTR2e<
     return super.createDocuments(outputEffectSources, context) as Promise<ActiveEffectPTR2e[]>;
   }
 
-  static override async deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]> & {pendingItems?: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]}): Promise<TDocument[]>;
-  static override async deleteDocuments(ids: string[] = [], context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null> & {pendingItems?: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[]} = {}): Promise<foundry.abstract.Document[]> {
+  static override async deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]> & { pendingItems?: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[] }): Promise<TDocument[]>;
+  static override async deleteDocuments(ids: string[] = [], context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null> & { pendingItems?: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[] } = {}): Promise<foundry.abstract.Document[]> {
     ids = Array.from(new Set(ids));
     const actor = context.parent instanceof ActorPTR2e ? context.parent : null;
-    if(actor) {
+    if (actor) {
       const effects = ids.flatMap(id => actor.effects.get(id) ?? []) as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[];
       const items = context.pendingItems ? [...context.pendingItems] : [] as ItemPTR2e<ItemSystemPTR, ActorPTR2e>[];
 
       // Run Change Model pre-delete callbacks
-      for(const effect of effects) {
-        for(const change of effect.changes) {
+      for (const effect of effects) {
+        for (const change of effect.changes) {
           await change.preDelete?.({ pendingItems: items, context });
         }
 
         await processGrantDeletions(effect, null, items, effects);
       }
 
-      if(items.length) {
+      if (items.length) {
         const itemIds = Array.from(new Set(items.map(i => i.id))).filter(id => actor.items.has(id) && !context.pendingItems?.find(i => i.id === id));
-        if(itemIds.length) {
-          await ItemPTR2e.deleteDocuments(itemIds, { pendingEffects: effects, parent: actor});
+        if (itemIds.length) {
+          await ItemPTR2e.deleteDocuments(itemIds, { pendingEffects: effects, parent: actor });
         }
       }
       ids = Array.from(new Set(effects.map(i => i.id))).filter(id => actor.effects.has(id));

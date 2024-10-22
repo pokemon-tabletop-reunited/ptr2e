@@ -20,14 +20,15 @@ export default class GrantEffectChangeSystem extends GrantItemChangeSystem {
         // TODO: Implement createInMemoryCondition
     }
 
-    override async getItem(key: string): Promise<Maybe<ItemPTR2e>> {
+    override async getItem(key: string = this.resolveInjectedProperties(this.uuid)): Promise<Maybe<ItemPTR2e>> {
         try {
             const effect = await ActiveEffectPTR2e.fromStatusEffect(key)
             
             return new ItemPTR2e({
                 name: effect.name,
                 type: "effect",
-                effects: [effect.toObject()]
+                effects: [effect.toObject()],
+                img: effect.img || "icons/svg/item-bag.svg"
             })
         }
         catch (error) {

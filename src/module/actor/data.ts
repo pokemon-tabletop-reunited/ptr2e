@@ -1,4 +1,4 @@
-import { DistanceUnit, Trait, WeightUnit } from "@data";
+import { AttackPTR2e, DistanceUnit, Trait, WeightUnit } from "@data";
 import { EffectSourcePTR2e } from "@effects";
 import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { DeferredPromise, DeferredValue, DeferredValueParams, ModifierAdjustment, ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -45,6 +45,28 @@ interface ActorSynthetics {
   afflictions: { data: AfflictionActiveEffectSystem[], ids: Set<string> };
   rollNotes: Record<string, RollNote[]>;
   effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[]}>;
+  toggles: RollOptionToggle[];
+  attackAdjustments: AttackAdjustment[];
+}
+
+export interface RollOptionToggle {
+  /** The ID of the effect with a change model for this toggle */
+  effectId: string;
+  label: string;
+  placement: string;
+  domain: string;
+  option: string;
+  suboptions: { label: string; selected: boolean }[];
+  alwaysActive: boolean;
+  checked: boolean;
+  enabled: boolean;
+}
+
+export interface AttackAdjustment {
+  adjustAttack?: (
+      attack: AttackPTR2e, options: string[]
+  ) => void;
+  adjustTraits?: (attack: AttackPTR2e, traits: string[], options: string[]) => void;
 }
 
 interface Attributes {

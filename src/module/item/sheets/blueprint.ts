@@ -2,7 +2,6 @@ import { ItemPTR2e } from "@item/document.ts";
 import { DocumentSheetV2 } from "./document.ts";
 import BlueprintSystem from "@item/data/blueprint.ts";
 import { Blueprint } from "@module/data/models/blueprint.ts";
-import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 import { htmlQuery } from "@utils";
 import Sortable from "sortablejs";
 import { SpeciesSystemModel } from "@item/data/index.ts";
@@ -48,7 +47,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
       y: number,
       temporary: boolean,
       canvas: Canvas,
-    }
+    },
   }) {
     super(options);
     this.generation = options.generation ?? null;
@@ -129,7 +128,7 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
     };
   }
 
-  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: HandlebarsRenderOptions): void {
+  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
 
     if (partId === "side") {
@@ -369,11 +368,9 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
   static async #onSubmit(
     this: BlueprintSheet,
     event: SubmitEvent | Event,
-    form: HTMLFormElement,
+    _form: HTMLFormElement,
     formData: FormDataExtended
   ) {
-    console.log("Submit", event, form, formData);
-
     const closeAndGenerate = event.type === "submit";
 
     // If this isn't a temporary generation, update the current selected blueprint based on form data
@@ -407,7 +404,29 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
 
     const generation = this.generation ? {...this.generation, team: !this.team?.owner && (this.team?.members?.length ?? 0) > 1} : null;
 
-    this.blueprint.generate(generation);
+    const result = this._dataOnly ? this.blueprint.generate(null, true) : this.blueprint.generate(generation);
+    if(this._dataOnly) {
+      this.resolve(result);
+      this._dataOnly = false;
+    }
     this.close();
+  }
+
+  override _onClose(options: foundry.applications.api.HandlebarsRenderOptions): void {
+    super._onClose(options);
+    if (this._dataOnly) {
+      this.resolve();
+    }
+  }
+
+  private _dataOnly = false;
+  private resolve: (value: void | PromiseLike<Partial<ActorPTR2e['_source']>[] | void>) => void;
+
+  async dataOnly(): Promise<Partial<ActorPTR2e['_source']>[] | void> {
+    return new Promise((resolve) => {
+      this._dataOnly = true;
+      this.resolve = resolve;
+      this.render(true);
+    })
   }
 }
