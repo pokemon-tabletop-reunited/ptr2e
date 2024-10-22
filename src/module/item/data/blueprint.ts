@@ -337,7 +337,10 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       // TODO: Add stat settings
       const stats = (() => {
-        const randomPoints = Math.ceil(Math.random() * 508 * 0.25);
+        const randomPoints = (() => {
+          const points = Math.ceil(Math.random() * 508 * 0.25);
+          return points % 4 === 0 ? points : points + (4 - (points % 4));
+        })()
 
         class weightedBag<T> {
           entries: { entry: T; weight: number }[] = [];
@@ -364,8 +367,8 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
             );
           }
 
-          for (let i = 0; i < points; i++) {
-            stats[bag.get()]++;
+          for (let i = 0; i < points; i += 4) {
+            stats[bag.get()]+=4;
           }
           return stats;
         };
