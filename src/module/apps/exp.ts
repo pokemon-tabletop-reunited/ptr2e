@@ -48,15 +48,20 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
     name;
     documents;
     applyMode;
+    #localCircumstances: CircumstanceModifier[];
 
-    constructor(name: string, documents: ActorPTR2e[], options: Partial<foundry.applications.api.ApplicationConfiguration & { applyMode?: string }> = {}) {
+    constructor(name: string, documents: ActorPTR2e[], options: Partial<foundry.applications.api.ApplicationConfiguration & { applyMode?: string; globalCircumstances?: boolean }> = {}) {
         options.id = `exp-${documents.length ? documents[0].id || fu.randomID() : fu.randomID()}`;
         super(options);
         this.name = name;
         this.documents = documents;
 
+        if (!options.globalCircumstances) {
+            this.#localCircumstances = fu.deepClone(game.settings.get("ptr2e", "expCircumstanceModifiers")) as CircumstanceModifier[];
+        }
+
         if (this.level < 10 && !this.circumstances.find(cm=>cm.label === "Baby's First Steps")) {
-            game.settings.set("ptr2e", "expCircumstanceModifiers", [...this.circumstances, {
+            this.setCircumstances([...this.circumstances, {
                 label: "Baby's First Steps",
                 bonus: 100,
             }])
@@ -88,7 +93,7 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
                 bonus: toCM(val.bonus),
                 sort: val.bonus,
             }
-            for (const category of val.groups) {
+            for (const category of (val?.groups ?? [])) {
                 exampleCircumstanceModifiers[category] ??= [] as CmInTemplate[];
                 exampleCircumstanceModifiers[category].push(cmVal);
             }
@@ -145,7 +150,17 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
     }
 
     get circumstances() {
-        return game.settings.get("ptr2e", "expCircumstanceModifiers") as CircumstanceModifier[];
+        if (!this.#localCircumstances)
+            return game.settings.get("ptr2e", "expCircumstanceModifiers") as CircumstanceModifier[];
+        return this.#localCircumstances;
+    }
+
+    async setCircumstances(newCircumstances: CircumstanceModifier[]) {
+        if (!this.#localCircumstances) {
+            await game.settings.set("ptr2e", "expCircumstanceModifiers", newCircumstances);
+        } else {
+            this.#localCircumstances = newCircumstances;
+        }
     }
 
     get level() {
@@ -181,7 +196,7 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
 
         // give exp to the individuals in the dialog and all their owned pokemon
         for (const owner of this.documents) {
-            if (owner?.folder?.owner == "") continue;
+            if (!owner?.folder?.owner) continue;
             docs = docs.union(ExpApp.getNestedFolderContents(owner.folder as Folder)) as Set<ActorPTR2e>;
         }
         return docs;
@@ -271,7 +286,7 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
         const cmBonus = parseInt((this.element.querySelector(".prospective-circumstance-modifiers .customCircumstanceBonus") as HTMLInputElement)?.value);
         if (isNaN(cmBonus)) return;
 
-        game.settings.set("ptr2e", "expCircumstanceModifiers", [...this.circumstances, {
+        this.setCircumstances([...this.circumstances, {
             label: cmLabel,
             bonus: cmBonus,
         }]).then(()=>this.render(false));
@@ -281,7 +296,7 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
         const button = event.currentTarget;
         // @ts-expect-error
         const cmKey = button.dataset.modifierKey;
-        game.settings.set("ptr2e", "expCircumstanceModifiers", [
+        this.setCircumstances([
             ...this.circumstances,
             CONFIG.PTR.data.circumstanceModifiers[cmKey]
         ]).then(()=>this.render(false));
@@ -293,7 +308,7 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
         const cmIdx = button.dataset.modifierIdx;
         const circumstances = this.circumstances;
         circumstances.splice(cmIdx, 1);
-        game.settings.set("ptr2e", "expCircumstanceModifiers", circumstances).then(()=>this.render(false));
+        this.setCircumstances(circumstances).then(()=>this.render(false));
     }
 
     static async #onSubmit(this: ExpApp) {
@@ -325,7 +340,7 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
             appliedExp.new.experience = Math.floor(appliedExp.old.experience + expAward);
             appliedExp.new.level = appliedExp.actor.system.advancement.level;
         }))
-        await game.settings.set("ptr2e", "expCircumstanceModifiers", []);
+        await this.setCircumstances([]);
 
         ui.notifications.remove(notification);
         ui.notifications.info(game.i18n.localize("PTR2E.XP.Notifications.Success"));
@@ -343,4 +358,4 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
 };
 
 
-export type CircumstanceModifier = { bonus: number; label: string; groups: string[], hint?: string };
+export type CircumstanceModifier = { bonus: number; label: string; groups?: string[], hint?: string };
