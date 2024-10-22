@@ -245,6 +245,34 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.frozen"
   },
   {
+    "id": "frostbite",
+    "name": "PTR2E.Effect.Statuses.Labels.frostbite",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.spa.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "ice",
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.frostbite"
+  },
+  {
     "id": "splinter",
     "name": "PTR2E.Effect.Statuses.Labels.splinter",
     "img": "icons/svg/oak.svg",
@@ -1549,5 +1577,57 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.evasive"
+  },
+  {
+    "id": "stoked",
+    "name": "PTR2E.Effect.Statuses.Labels.stoked",
+    "img": "systems/ptr2e/img/svg/fire_icon.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 1
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "fire-attack-power",
+          "value": 100,
+          "mode": 2
+        }
+      ],
+      "removeOnRecall": true,
+      "removeAfterCombat": true,
+      "traits": [
+        "fire",
+        "pseudo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.stoked"
+  },
+  {
+    "id": "charged",
+    "name": "PTR2E.Effect.Statuses.Labels.charged",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 1
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "percentile-modifier",
+          "key": "electric-attack-power",
+          "value": 100,
+          "mode": 2
+        }
+      ],
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "electric",
+        "psuedo-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.charged"
   }
 ]
