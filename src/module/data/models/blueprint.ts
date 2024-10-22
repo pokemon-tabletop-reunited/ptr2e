@@ -150,6 +150,7 @@ class Blueprint extends foundry.abstract.DataModel {
       }),
       owner: new fields.BooleanField({ required: true, initial: false, nullable: false, label: "PTR2E.FIELDS.owner.label", hint: "PTR2E.FIELDS.owner.hint" }),
       sort: new fields.NumberField({ required: true, initial: 0, nullable: false }),
+      preventEvolution: new fields.BooleanField({ required: true, initial: false, nullable: false, label: "PTR2E.FIELDS.preventEvolution.label", hint: "PTR2E.FIELDS.preventEvolution.hint" }),
       ...(
         recursion < 2
           ? { children: new CollectionField(new RecursiveEmbeddedDataField(this, {}, { recursion }), "id") }
@@ -201,6 +202,7 @@ interface BlueprintSchema extends foundry.data.fields.DataSchema {
   abilities: foundry.data.fields.SchemaField<AbilitiesSchema, SourceFromSchema<AbilitiesSchema>, ModelPropsFromSchema<AbilitiesSchema>>;
   owner: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
   sort: foundry.data.fields.NumberField<number, number, true, false, true>;
+  preventEvolution: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
 }
 
 interface EVSSchema extends foundry.data.fields.DataSchema {
