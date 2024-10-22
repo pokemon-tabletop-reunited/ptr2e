@@ -48,17 +48,12 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
     name;
     documents;
     applyMode;
-    #localCircumstances: CircumstanceModifier[];
 
     constructor(name: string, documents: ActorPTR2e[], options: Partial<foundry.applications.api.ApplicationConfiguration & { applyMode?: string; globalCircumstances?: boolean }> = {}) {
         options.id = `exp-${documents.length ? documents[0].id || fu.randomID() : fu.randomID()}`;
         super(options);
         this.name = name;
         this.documents = documents;
-
-        if (!options.globalCircumstances) {
-            this.#localCircumstances = fu.deepClone(game.settings.get("ptr2e", "expCircumstanceModifiers")) as CircumstanceModifier[];
-        }
 
         if (this.level < 10 && !this.circumstances.find(cm=>cm.label === "Baby's First Steps")) {
             this.setCircumstances([...this.circumstances, {
@@ -150,17 +145,11 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
     }
 
     get circumstances() {
-        if (!this.#localCircumstances)
-            return game.settings.get("ptr2e", "expCircumstanceModifiers") as CircumstanceModifier[];
-        return this.#localCircumstances;
+        return game.settings.get("ptr2e", "expCircumstanceModifiers") as CircumstanceModifier[];
     }
 
     async setCircumstances(newCircumstances: CircumstanceModifier[]) {
-        if (!this.#localCircumstances) {
-            await game.settings.set("ptr2e", "expCircumstanceModifiers", newCircumstances);
-        } else {
-            this.#localCircumstances = newCircumstances;
-        }
+        await game.settings.set("ptr2e", "expCircumstanceModifiers", newCircumstances);
     }
 
     get level() {
