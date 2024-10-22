@@ -29,6 +29,7 @@ import { sluggify } from "@utils";
 import { preImportJSON } from "@module/data/doc-helper.ts";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
+import MoveSystem from "@item/data/move.ts";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -1360,6 +1361,27 @@ class ActorPTR2e<
         //@ts-expect-error - During an update this should be an array
         changed.system.traits = Array.from(new Set([...changed.system.traits, ...intersection]))
       }
+    }
+
+    if(changed.system?.advancement?.experience?.current !== undefined) {
+      if(this.system.species?.moves?.levelUp?.length) {
+        // Check if level-up occurs
+        const newExperience = Number(changed.system.advancement.experience.current);
+        const nextExperienceThreshold = this.system.advancement.experience.next;
+        if(nextExperienceThreshold && newExperience >= nextExperienceThreshold) {          
+          const level = this.system.getLevel(newExperience);
+          const currentLevel = this.system.advancement.level;
+          
+          const newMoves = this.system.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
+          if(newMoves.length) {
+            const moves = (await Promise.all(newMoves.map(move => fromUuid<ItemPTR2e<MoveSystem>>(move.uuid)))).flatMap(move => move ?? []);
+            changed.items ??= [];
+            //@ts-expect-error - Asserted that this is an Array.
+            changed.items.push(...moves.map(move => move.toObject()));
+          }
+        }
+      }
+
     }
 
     return super._preUpdate(changed, options, user);
