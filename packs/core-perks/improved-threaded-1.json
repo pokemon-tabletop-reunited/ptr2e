@@ -3,7 +3,9 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "A Threaded Movement Allowance"
+      "An Threaded Movement Allowance",
+      "Running 25 + 5 x (# of Improved Threaded Perks already obtained)",
+      "Acrobatics 25 + 5 x (# of Improved Threaded Perks already obtained)"
     ],
     "cost": 1,
     "design": {
@@ -21,7 +23,12 @@
           "activation": "free"
         },
         "type": "passive",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "slug": "improved-threaded-1",
@@ -46,30 +53,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "OluRtmzPHj9OgOXc",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.OluRtmzPHj9OgOXc"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714922099766,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!OluRtmzPHj9OgOXc"
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
+  "effects": []
 }

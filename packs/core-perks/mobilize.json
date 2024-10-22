@@ -11,22 +11,34 @@
       "approach": "finesse",
       "archetype": "Support"
     },
-    "description": "<p>Allies influenced by this Command cannot provoke Attacks by moving.</p>",
+    "description": "<p>The user spends 4 PP as a Simple Action. Allied creatures within 8m cannot have [Interrupt X] Actions or Abilities triggered their by their Movement for 2 Activations.</p>",
     "actions": [
       {
         "name": "Mobilize",
         "slug": "mobilize",
-        "description": "<p>Allies influenced by this Command cannot provoke Attacks by moving.</p>",
+        "description": "<p>Allied creatures in range cannot have [Interrupt X] Actions or Abilities triggered their by their Movement for 2 Activations.</p>",
+        "range": {
+          "target": "emanation",
+          "distance": 8,
+          "unit": "m"
+        },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 4
         },
         "type": "generic",
-        "traits": []
+        "traits": [
+          "command",
+          "social"
+        ],
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "mobilize",
-    "traits": [],
+    "traits": [
+      "command",
+      "social"
+    ],
     "node": {
       "i": 46,
       "j": -56,
@@ -47,30 +59,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "EhfPkS23yRI8VENp",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.EhfPkS23yRI8VENp"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920514975,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!EhfPkS23yRI8VENp"
+  "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
+  "effects": []
 }

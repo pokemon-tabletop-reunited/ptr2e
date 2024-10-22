@@ -3,7 +3,8 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "A Teleportation Movement Allowance"
+      "A Teleportation Movement Allowance",
+      "Occult (Psychic) 40 + 5 x (# of Improved Teleportation Perks already obtained)"
     ],
     "cost": 1,
     "design": {
@@ -23,9 +24,10 @@
         "type": "passive",
         "traits": [],
         "range": {
-          "target": "enemy",
+          "target": "self",
           "unit": "m"
-        }
+        },
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "improved-teleportation-5",
@@ -45,9 +47,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "EtzCxainwYmiswsV",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "effects": []
 }

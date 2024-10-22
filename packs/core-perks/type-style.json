@@ -16,7 +16,7 @@
       {
         "name": "<Type> Style",
         "slug": "type-style",
-        "description": "The target adds this Action's [Type] to the next Attack they declare, lasting until the Attack resolves. The user may also be selected as a target for this Action.</p>",
+        "description": "<p>The target adds this Action's [Type] to the next Attack they declare, lasting until the Attack resolves. The user may also be selected as a target for this Action.</p>",
         "type": "generic",
         "traits": [
           "social",
@@ -24,16 +24,15 @@
           "type"
         ],
         "cost": {
-          "activation": "free",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null
+          "activation": "simple",
+          "powerPoints": 2
         },
         "range": {
           "target": "creature",
           "distance": 10,
           "unit": "m"
-        }
+        },
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "type-style",
@@ -60,30 +59,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "rf1amQ8FoBlQka5c",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.rf1amQ8FoBlQka5c"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920894552,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!rf1amQ8FoBlQka5c"
+  "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+  "effects": []
 }

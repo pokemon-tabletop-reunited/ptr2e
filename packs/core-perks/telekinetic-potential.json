@@ -11,17 +11,22 @@
       "approach": "power",
       "archetype": "[Psychic]"
     },
-    "description": "<p>You gain the [Telekinetic] trait.</p>",
+    "description": "<p>You gain the [Telekinetic 2] trait.</p>",
     "actions": [
       {
         "name": "Telekinetic Potential",
         "slug": "telekinetic-potential",
-        "description": "<p>You gain the [Telekinetic] trait.</p>",
+        "description": "<p>You gain the [Telekinetic 2] trait.</p>",
         "cost": {
           "activation": "free"
         },
         "type": "passive",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "slug": "telekinetic-potential",
@@ -48,30 +53,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "d152HgMF55iaUMiu",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.d152HgMF55iaUMiu"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714921928123,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!d152HgMF55iaUMiu"
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "effects": []
 }

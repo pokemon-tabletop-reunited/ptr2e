@@ -1,0 +1,62 @@
+{
+  "name": "Magnetize",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Electric]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "[Electric]"
+    },
+    "description": "<p>You may stick to magnetic surfaces and gain the ability to move freely along them using your Overland Movement Allowance. This effect lasts until the beginning of your next Activation, at which point - provided you are conscious - you may take this action again before falling.</p>",
+    "actions": [
+      {
+        "name": "Magnetize",
+        "slug": "magnetize",
+        "description": "<p>You may stick to magnetic surfaces and gain the ability to move freely along them using your Overland Movement Allowance. This effect lasts until the beginning of your next Activation, at which point - provided you are conscious - you may take this action again before falling.</p>",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1
+        },
+        "type": "generic",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "magnetize",
+    "traits": [],
+    "node": {
+      "i": -92,
+      "j": 39,
+      "connected": [
+        "type-embodiment-type",
+        "root-6"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/electric_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "Vi8F4LxUvMqrhrHD",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "effects": []
+}

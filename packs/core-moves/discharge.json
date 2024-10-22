@@ -1,10 +1,9 @@
 {
   "name": "Discharge",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/electric_icon.svg",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
     "slug": "discharge",
-    "description": "",
     "traits": [],
     "actions": [
       {
@@ -21,10 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 6
         },
         "category": "special",
         "power": 80,
@@ -32,16 +28,70 @@
         "types": [
           "electric"
         ],
-        "description": "Effect: On hit, all valid targets have a 20% chance of gaining @Affliction[paralysis] 5.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, all valid targets have a 20% chance of gaining @Affliction[paralysis] 5.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "HIIaoOIx7R5UKxYO",
-  "effects": []
+  "effects": [
+    {
+      "name": "Discharge",
+      "type": "passive",
+      "_id": "EBiVVapCmQ6YP3mi",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "discharge-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729539078950,
+        "modifiedTime": 1729539105143,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

@@ -4,7 +4,7 @@
   "_id": "ZS2z5VhUzvkG9OOk",
   "img": "systems/ptr2e/img/svg/poison_icon.svg",
   "system": {
-    "slug": null,
+    "slug": "elixir-field",
     "traits": [
       "earthbound",
       "pp-updated"
@@ -25,10 +25,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": ""
+          "powerPoints": 4
         },
         "types": [
           "poison"
@@ -36,13 +33,69 @@
         "category": "physical",
         "power": 70,
         "accuracy": 95,
-        "description": "Effect: After this attack resolves, the user has a 10% chance of gaining ATK, DEF, SPATK, SPDEF and SPD stage by 1 for 5 activations.",
+        "description": "<p>Effect: After this attack resolves, the user has a 10% chance of gaining ATK, DEF, SPATK, SPDEF and SPD stage by 1 for 5 activations.</p>",
         "img": "systems/ptr2e/img/svg/poison_icon.svg"
       }
     ],
-    "description": "",
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Elixir Field",
+      "type": "passive",
+      "_id": "WdL0s8UDCeBrQiMI",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "elixir-field-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.rMNLqloV5nLmCLrZ",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729541410440,
+        "modifiedTime": 1729541439483,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

@@ -13,7 +13,7 @@
       "approach": "finesse",
       "archetype": "Climatology"
     },
-    "description": "<p>When a [Weather] effect ends or you enter Combat, you may use a [Weather] Attack as an [Interrupt 4] Free Action. The user learns 2 [Weather] Attacks from their Tutor List.</p>",
+    "description": "<p>When a [Weather] effect ends or you enter Combat, you may use a [Weather] Attack as an [Interrupt 4] Free Action. The user learns 2 [Weather] Attacks from their Tutor List, and they do not need to meet the Grade requirements for these Attacks.</p>",
     "actions": [
       {
         "name": "Climate Change",
@@ -27,7 +27,12 @@
         "traits": [
           "environ",
           "weather"
-        ]
+        ],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "slug": "climate-change",
@@ -50,30 +55,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "c9lZiSYxUivRPn2p",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.c9lZiSYxUivRPn2p"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920947588,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!c9lZiSYxUivRPn2p"
+  "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+  "effects": []
 }

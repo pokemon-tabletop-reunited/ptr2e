@@ -12,14 +12,22 @@
       "approach": "power",
       "archetype": "Shadow"
     },
-    "description": "<p>You can apply Styles and other Command Actions to [Closed Heart] creatures normally, even if they are in Hyper Mode. This Perk's PP cost is made in addition to the normal cost of a Style and/or Command Action and only applies when the target is in Hyper Mode.</p>",
+    "description": "<p>You can apply Styles and other Command Actions to [Closed Heart] creatures normally, even if they are in @Affliction[hyper-mode]. This Perk's PP cost is made in addition to the normal cost of a Style and/or Command Action and only applies when the target is in @Affliction[hyper-mode].</p>",
     "actions": [
       {
         "name": "Dark Clarity",
         "slug": "dark-clarity",
-        "description": "<p>You can apply Styles and other Command Actions to [Closed Heart] creatures normally, even if they are in Hyper Mode. This Perk's PP cost is made in addition to the normal cost of a Style and/or Command Action and only applies when the target is in Hyper Mode.</p>",
+        "description": "<p>You can apply Styles and other Command Actions to [Closed Heart] creatures normally, even if they are in @Affliction[hyper-mode]. This Perk's PP cost is made in addition to the normal cost of a Style and/or Command Action and only applies when the target is in @Affliction[hyper-mode].</p>",
         "type": "passive",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple"
+        }
       }
     ],
     "slug": "dark-clarity",
@@ -36,36 +44,19 @@
         "backgroundColor": "#121212",
         "borderColor": null,
         "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+        "texture": "systems/ptr2e/img/svg/shadow_icon.svg",
         "tint": "#ffffff",
         "scale": null
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "dClCBlhuOD49szkG",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.dClCBlhuOD49szkG"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920454315,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!dClCBlhuOD49szkG"
+  "img": "systems/ptr2e/img/svg/shadow_icon.svg",
+  "effects": []
 }

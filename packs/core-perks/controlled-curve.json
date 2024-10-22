@@ -16,7 +16,7 @@
       {
         "name": "Controlled Curve",
         "slug": "controlled-curve",
-        "description": "<p>Your Fling move may not reduce a Pokemon to less than 1 HP when utilising a [PokeBall] item.</p>",
+        "description": "<p>When using Fling with a [PokeBall] item, you may prevent the attack from lowering a Pokemon below 1 HP.</p>",
         "cost": {
           "activation": "free",
           "powerPoints": 1
@@ -24,9 +24,10 @@
         "type": "generic",
         "traits": [],
         "range": {
-          "target": "enemy",
+          "target": "self",
           "unit": "m"
-        }
+        },
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "controlled-curve",
@@ -50,30 +51,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "YxpE00r5vbxyBmsV",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.YxpE00r5vbxyBmsV"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714916804538,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!YxpE00r5vbxyBmsV"
+  "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
+  "effects": []
 }

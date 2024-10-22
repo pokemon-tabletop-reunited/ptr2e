@@ -1,7 +1,7 @@
 {
   "name": "Douse",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
   "system": {
     "actions": [
       {
@@ -13,17 +13,14 @@
         "slug": "douse",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: The user's attacks deal 50% more damage to Fire-Type creatures."
+        "description": "Effect: The user's attacks deal 50% more damage to Fire-Type creatures.",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Effect: The user's attacks deal 50% more damage to Fire-Type creatures.",
@@ -31,27 +28,68 @@
       "hunter",
       "fire"
     ],
-    "slug": null,
-    "container": null
+    "slug": "douse",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "hSrFC24XJSdqxOwo",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!hSrFC24XJSdqxOwo"
+  "effects": [
+    {
+      "name": "Douse",
+      "type": "passive",
+      "_id": "FmDlAx9eCts27UFd",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "attack-damage",
+            "value": 50,
+            "predicate": [
+              "target:trait:fire"
+            ],
+            "label": "Douse",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729415846025,
+        "modifiedTime": 1729415887295,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

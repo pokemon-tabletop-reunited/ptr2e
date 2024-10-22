@@ -1,10 +1,10 @@
 {
   "name": "Devastating Drake",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/dragon_icon.svg",
+  "img": "systems/ptr2e/img/svg/dragon_icon.svg",
   "system": {
     "slug": "devastating-drake",
-    "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal\nEffect: On hit, all valid targets have a 30% chance of gaining @Affliction[splinter] 5.\nRequirement: [Dragon] Z-Crystal as an Accessory Item and a Dragon-Type attack on the user's Active List.",
+    "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[splinter] 5.</p><p>Requirement: [Dragon] Z-Crystal as an Accessory Item and a Dragon-Type attack on the user's Active List.</p>",
     "traits": [
       "zenith",
       "blast-2",
@@ -27,10 +27,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null,
-          "trigger": "User's partner uses Z-Pose! and triggers the appropriate Z-Crystal"
+          "trigger": "<p>User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p>"
         },
         "category": "physical",
         "power": 180,
@@ -38,48 +35,71 @@
         "types": [
           "dragon"
         ],
-        "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal\nEffect: On hit, all valid targets have a 30% chance of gaining @Affliction[splinter] 5.\nRequirement: [Dragon] Z-Crystal as an Accessory Item and a Dragon-Type attack on the user's Active List.",
-        "contestType": "",
-        "contestEffect": "",
+        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal.</p><p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[splinter] 5.</p><p>Requirement: [Dragon] Z-Crystal as an Accessory Item and a Dragon-Type attack on the user's Active List.</p>",
         "free": true,
-        "slot": null
-      },
-      {
-        "slug": "devastating-drake",
-        "name": "Devastating Drake",
-        "type": "attack",
-        "traits": [
-          "zenith",
-          "blast-2",
-          "sky"
-        ],
-        "range": {
-          "target": "blast",
-          "distance": 25,
-          "unit": "m"
-        },
-        "cost": {
-          "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null,
-          "trigger": "User's partner uses Z-Pose! and triggers the appropriate Z-Crystal"
-        },
-        "category": "special",
-        "power": 180,
-        "accuracy": 100,
-        "types": [
-          "dragon"
-        ],
-        "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Crystal\nEffect: On hit, all valid targets have a 30% chance of gaining @Affliction[splinter] 5.\nRequirement: [Dragon] Z-Crystal as an Accessory Item and a Dragon-Type attack on the user's Active List.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "grade": "E"
   },
   "_id": "sY14kmyNGtCQGTrN",
-  "effects": []
+  "effects": [
+    {
+      "name": "Devastating Drake",
+      "type": "passive",
+      "_id": "BnP7ubjvMqkUnyXP",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "devastating-drake-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729538802363,
+        "modifiedTime": 1729538835467,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

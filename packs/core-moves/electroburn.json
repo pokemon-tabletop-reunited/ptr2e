@@ -1,20 +1,17 @@
 {
-  "folder": "PTzDJPvM7Mjj7e8k",
   "name": "Electroburn",
   "type": "move",
   "_id": "ww6edyhA67Br8BSD",
   "img": "systems/ptr2e/img/svg/electric_icon.svg",
   "system": {
-    "slug": null,
-    "traits": [
-      "contact"
-    ],
+    "slug": "electroburn",
+    "traits": [],
     "actions": [
       {
         "name": "Electroburn",
         "slug": "electroburn",
         "type": "attack",
-        "img": "icons/svg/explosion.svg",
+        "img": "systems/ptr2e/img/svg/electric_icon.svg",
         "traits": [
           "contact"
         ],
@@ -25,44 +22,88 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null,
-          "trigger": ""
+          "powerPoints": 2
         },
-        "variant": null,
         "types": [
-          "electric"
+          "electric",
+          "fire"
         ],
         "category": "physical",
         "power": 80,
         "accuracy": 90,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[paralysis] 5, and a 20% chance of gaining @Affliction[burn]  5.</p>"
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[paralysis] 5, and a 20% chance of gaining @Affliction[burn] 5. This attack is both Electric and Fire.</p>"
       }
     ],
-    "description": "",
-    "container": null,
-    "grade": "D"
+    "grade": "D",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
-  "effects": [],
-  "sort": 3100000,
-  "ownership": {
-    "default": 0,
-    "CYLdyr5mPSDmNpTp": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.327",
-    "systemId": "ptr2e",
-    "systemVersion": "0.10.0-alpha.1.0.4",
-    "createdTime": 1718741980322,
-    "modifiedTime": 1719971994938,
-    "lastModifiedBy": "CYLdyr5mPSDmNpTp"
-  }
+  "effects": [
+    {
+      "name": "Electroburn",
+      "type": "passive",
+      "_id": "6L747ckNdtFUT5QX",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "electroburn-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "electroburn-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729541224979,
+        "modifiedTime": 1729541298219,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

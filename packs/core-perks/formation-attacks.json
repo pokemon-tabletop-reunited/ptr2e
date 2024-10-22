@@ -12,17 +12,22 @@
       "approach": "finesse",
       "archetype": "Pack Mon"
     },
-    "description": "<p>When within Reach of a creature, you gain +1 ACC on Attacks against creature for other Pack member that is also within Reach of that creature.</p>",
+    "description": "<p>When within Reach of a creature, you gain +1 ACC on Attacks against that creature for every other Pack Member that is also within Reach of that creature.</p>",
     "actions": [
       {
         "name": "Formation Attacks",
         "slug": "formation-attacks",
-        "description": "<p>When within Reach of a creature, you gain +1 ACC on Attacks against creature for other Pack member that is also within Reach of that creature.</p>",
+        "description": "<p>When within Reach of a creature, you gain +1 ACC on Attacks against that creature for every other Pack Member that is also within Reach of that creature.</p>",
         "cost": {
           "activation": "free"
         },
         "type": "passive",
-        "traits": []
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "slug": "formation-attacks",
@@ -44,30 +49,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "zW2fOBtO1e0LEv2K",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.zW2fOBtO1e0LEv2K"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714919946879,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!zW2fOBtO1e0LEv2K"
+  "img": "systems/ptr2e/img/perk-icons/Tactician.svg",
+  "effects": []
 }

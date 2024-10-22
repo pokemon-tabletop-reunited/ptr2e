@@ -1,7 +1,7 @@
 {
   "name": "Fae Hunter",
   "type": "ability",
-  "img": "/systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
   "system": {
     "actions": [
       {
@@ -13,17 +13,14 @@
         "slug": "fae-hunter",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: The user's attacks deal 50% more damage to Fairy-Type creatures."
+        "description": "Effect: The user's attacks deal 50% more damage to Fairy-Type creatures.",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Effect: The user's attacks deal 50% more damage to Fairy-Type creatures.",
@@ -31,27 +28,68 @@
       "hunter",
       "fairy"
     ],
-    "slug": null,
-    "container": null
+    "slug": "fae-hunter",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "QyxsFutdyckQ1ZLh",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!QyxsFutdyckQ1ZLh"
+  "effects": [
+    {
+      "name": "Fae Hunter",
+      "type": "passive",
+      "_id": "XQa2sovTlzXTszP1",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "attack-damage",
+            "value": 50,
+            "predicate": [
+              "target:trait:fairy"
+            ],
+            "label": "Fae Hunter",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729290897161,
+        "modifiedTime": 1729290950630,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

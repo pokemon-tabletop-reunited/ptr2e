@@ -18,10 +18,15 @@
         "slug": "aura-empathy",
         "description": "<p>You have a knack for reading the auras of others, allowing you to understand their moods and potentially pick up some surface thoughts. (Skill check may be required)</p>",
         "cost": {
-          "activation": "simple"
+          "activation": "free"
         },
-        "type": "generic",
-        "traits": []
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "slug": "aura-empathy",
@@ -47,30 +52,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "0oopLlKDWl1rf2Sm",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.0oopLlKDWl1rf2Sm"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714920527631,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!0oopLlKDWl1rf2Sm"
+  "img": "systems/ptr2e/img/perk-icons/Aura.svg",
+  "effects": []
 }

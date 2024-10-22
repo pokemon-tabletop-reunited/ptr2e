@@ -1,10 +1,10 @@
 {
   "name": "Horizonfilling Hammer",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/steel_icon.svg",
+  "img": "systems/ptr2e/img/svg/steel_icon.svg",
   "system": {
     "slug": "horizonfilling-hammer",
-    "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal\nEffect: On hit, all valid targets are @Affliction[grounded] 5.\nRequirement: [Tinkaton] Z-Power-Crystal as an Accessory Item and Gigaton Hammer on the user's Active List.",
+    "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p><p>Effect: On hit, all valid targets are @Affliction[grounded] 5.</p><p>Requirement: [Tinkaton] Z-Power-Crystal as an Accessory Item and Gigaton Hammer on the user's Active List.</p>",
     "traits": [
       "zenith",
       "move-locked",
@@ -29,10 +29,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null,
-          "trigger": "User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal"
+          "trigger": "<p>User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p>"
         },
         "category": "physical",
         "power": 190,
@@ -40,15 +37,71 @@
         "types": [
           "steel"
         ],
-        "description": "Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal\nEffect: On hit, all valid targets are @Affliction[grounded] 5.\nRequirement: [Tinkaton] Z-Power-Crystal as an Accessory Item and Gigaton Hammer on the user's Active List.",
-        "contestType": "",
-        "contestEffect": "",
+        "description": "<p>Trigger: User's partner uses Z-Pose! and triggers the appropriate Z-Power-Crystal.</p><p>Effect: On hit, all valid targets are @Affliction[grounded] 5.</p><p>Requirement: [Tinkaton] Z-Power-Crystal as an Accessory Item and Gigaton Hammer on the user's Active List.</p>",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null
+    "_migration": {
+      "version": null,
+      "previous": null
+    },
+    "grade": "E"
   },
   "_id": "3YV7SrI9KU76X4il",
-  "effects": []
+  "effects": [
+    {
+      "name": "Horizonfilling Hammer",
+      "type": "passive",
+      "_id": "bzNhRXAYWViy29id",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "horizonfilling-hammer-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.groundedconditem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729552913301,
+        "modifiedTime": 1729552941329,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

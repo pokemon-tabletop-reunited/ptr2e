@@ -3,7 +3,9 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "A Threaded Movement Allowance"
+      "An Threaded Movement Allowance",
+      "Running 25 + 5 x (# of Improved Threaded Perks already obtained)",
+      "Acrobatics 25 + 5 x (# of Improved Threaded Perks already obtained)"
     ],
     "cost": 1,
     "design": {
@@ -23,9 +25,10 @@
         "type": "passive",
         "traits": [],
         "range": {
-          "target": "enemy",
+          "target": "self",
           "unit": "m"
-        }
+        },
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "improved-threaded-3",
@@ -45,9 +48,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "6Axt1ewf39H3Jxmr",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
   "effects": []
 }

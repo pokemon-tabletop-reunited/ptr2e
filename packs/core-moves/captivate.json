@@ -1,10 +1,10 @@
 {
   "name": "Captivate",
   "type": "move",
-  "img": "/systems/ptr2e/img/svg/normal_icon.svg",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
   "system": {
     "slug": "captivate",
-    "description": "Effect: The target’s loses -2 SPATK stages for 5 activations. If the target is @Affliction[charmed], they lose -3 SPATK stages for 5 activations instead.",
+    "description": "<p>Effect: The target’s loses -2 SPATK stages for 5 activations. If the target is @Affliction[charmed], they lose -3 SPATK stages for 5 activations instead.</p>",
     "traits": [
       "social"
     ],
@@ -23,27 +23,104 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "status",
-        "power": null,
         "accuracy": 100,
         "types": [
-          "normal"
+          "fairy"
         ],
-        "description": "Effect: The target’s loses -2 SPATK stages for 5 activations. If the target is @Affliction[charmed], they lose -3 SPATK stages for 5 activations instead.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, the target loses -2 SPATK stages for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "captivate-charmed",
+        "name": "captivate (Charmed)",
+        "type": "attack",
+        "traits": [
+          "social"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "trigger": "<p>Target has @Affliction[charmed].</p>"
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "fairy"
+        ],
+        "description": "<p>Trigger: Target has @Affliction[charmed].</p><p>Effect: On hit, the target loses -3 SPATK stages for 7 activations.</p>",
+        "variant": "captivate",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "C"
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "GXpk100WcRqqN0vX",
-  "effects": []
+  "effects": [
+    {
+      "name": "Captivate",
+      "type": "passive",
+      "_id": "eNjm03IV6pnRF0BU",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "captivate-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.EYmp1DeE1Lwzi0D1",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1729527645906,
+        "modifiedTime": 1729527678105,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

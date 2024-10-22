@@ -11,18 +11,46 @@
       "approach": "finesse",
       "archetype": "Support"
     },
-    "description": "<p>The target gains Precise 1.</p>",
+    "description": "<p>The target gains @Affliction[precise] 1.</p>",
     "actions": [
       {
-        "name": "Precise Style",
-        "slug": "precise-style",
-        "description": "<p>The target gains Precise 1.</p>",
+        "name": "Precise!",
+        "slug": "precise",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
         "cost": {
           "activation": "simple",
-          "powerPoints": 2
+          "powerPoints": 1
         },
+        "description": "Effect: The target gains @Affliction[precise] 1.",
         "type": "generic",
-        "traits": []
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "name": "Precise! (Self)",
+        "slug": "precise-self",
+        "traits": [
+          "command",
+          "style"
+        ],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1
+        },
+        "description": "Effect: The target gains @Affliction[precise] 2.",
+        "type": "generic",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "precise-style",
@@ -46,30 +74,13 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "bj0EK3ur1N9ULr4A",
-  "img": "/systems/ptr2e/img/icons/feat_icon.webp",
-  "effects": [],
-  "flags": {
-    "core": {
-      "sourceId": "Compendium.ptr2e.core-perks.Item.bj0EK3ur1N9ULr4A"
-    }
-  },
-  "_stats": {
-    "coreVersion": "12.321",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": null,
-    "modifiedTime": 1714922220971,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV",
-    "compendiumSource": null,
-    "duplicateSource": null
-  },
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0
-  },
-  "_key": "!items!bj0EK3ur1N9ULr4A"
+  "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+  "effects": []
 }
