@@ -65,6 +65,7 @@ class AttackStatistic extends Statistic {
         ...attack.types.map((t) => `${t}-attack`),
         `${attack.slug}-attack`,
         `${item.id}-attack`,
+        ...(attack?.power ? ["damaging-attack"] : []),
       ].flat()
     );
 
