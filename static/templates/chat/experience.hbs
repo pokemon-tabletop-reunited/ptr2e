@@ -1,5 +1,5 @@
 <main {{#if undone}}class="undone" {{/if}}>
-    <p>Awarded {{expBase}} to {{actorCount}} actors!</p>
+    <p>Awarded {{expBase}} experience to {{actorCount}} actors!</p>
 
     <div class="collapse-button">
         <button type="button" class="collapse-rolls">Show Modifiers</button>
@@ -20,7 +20,14 @@
         {{#each expAppliedActors}}
         <div class="awarded-exp">
             <img class="icon" src="{{actor.img}}" data-tooltip-direction="LEFT" data-tooltip="{{actor.name}}" />
-            <span>{{old.level}} [{{old.experience}}] &rarr; {{new.level}} [{{new.experience}}] {{#if levelGain}}(Level Up! +{{levelGain}}){{/if}}</span>
+            <div class="text">
+                <div class="exp">
+                    <span class="old">{{localize "PTR2E.XP.Level" level=old.level}} [{{old.experience}}]</span>
+                    <span class="sep">&rarr;</span>
+                    <span class="new">{{localize "PTR2E.XP.Level" level=new.level}} [{{new.experience}}]</span>
+                </div>
+                {{#if levelGain}}<span class="gain-level">({{localize "PTR2E.XP.LevelUp" diff=levelGain}})</span>{{/if}}
+            </div>
         </div>
         {{/each}}
     </article>
