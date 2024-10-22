@@ -76,12 +76,6 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             visible: true,
           },
           {
-            icon: "fas fa-award",
-            label: "PTR2E.ActorSheet.AwardXP",
-            action: "award-xp",
-            visible: true,
-          },
-          {
             icon: "fas fa-user-group",
             label: "PTR2E.ActorSheet.PartySheet",
             action: "open-party-sheet",
@@ -206,9 +200,6 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         "rest": function (this: ActorSheetPTRV2) {
           const toHeal = this.actor?.party ? [this.actor.party.owner!, ...(this.actor.party.party ?? [])] : [this.actor];
           new CONFIG.PTR.Applications.RestApp(this.document.name, toHeal).render(true);
-        },
-        "award-xp": function (this: ActorSheetPTRV2) {
-          new CONFIG.PTR.Applications.ExpApp(this.document.name, [this.actor]).render(true);
         },
         "add-clock": ActorSheetPTRV2.#onAddClock,
       },

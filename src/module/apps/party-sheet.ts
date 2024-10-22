@@ -39,12 +39,6 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
             action: "rest",
             visible: true,
           },
-          {
-            icon: "fas fa-award",
-            label: "PTR2E.ActorSheet.AwardXP",
-            action: "award-xp",
-            visible: true,
-          }
         ]
       },
       dragDrop: [
@@ -84,12 +78,6 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
             restParticipants.unshift(owner as unknown as ActorPTR2e);
           }
           new CONFIG.PTR.Applications.RestApp(this.folder.name, restParticipants).render(true);
-        },
-        "award-xp": async function (this: PartySheetPTR2e) {
-          const owner = await this.owner();
-          if (owner as ActorPTR2e) {
-            new CONFIG.PTR.Applications.ExpApp(this.folder.name, [owner!]).render(true);
-          }
         },
       }
     },
