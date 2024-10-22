@@ -587,4 +587,27 @@
             }
         }
     }
+
+    &.experience {
+        .modifiers {
+            display: none;
+            flex-direction: column;
+        }
+        .awarded-to {
+            display: none;
+            flex-direction: column;
+
+            .awarded-exp {
+                display: flex;
+                align-items: center;
+                gap: 1em;
+                --img-size: 32px;
+                .icon {
+                    height: var(--img-size);
+                    width: var(--img-size);
+                    border: none;
+                }
+            }
+        }
+    }
 }

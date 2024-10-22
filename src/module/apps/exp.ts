@@ -3,6 +3,7 @@ import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { htmlQueryAll } from "@utils";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/api.js";
 import { EvolutionData } from "@item/data/species.ts";
+import { ChatMessagePTR2e } from "@chat";
 
 function toCM(number: number) {
     if (number >= 0) return `+${number}%`;
@@ -300,21 +301,44 @@ export class ExpApp extends foundry.applications.api.HandlebarsApplicationMixin(
         const cm = this.modifier;
         const apl = this.level;
 
-        const toApply = this.appliesTo;
+        const toApply = this.appliesTo.map(doc=>({
+            uuid: doc.uuid,
+            old: {
+                experience: Math.floor(doc.system.advancement.experience.current),
+                level: doc.system.advancement.level,
+            },
+            new: {
+                experience: Math.floor(doc.system.advancement.experience.current),
+                level: doc.system.advancement.level,
+            },
+            actor: doc,
+        }));
+        const modifiers = this.circumstances;
 
         const notification = ui.notifications.info(game.i18n.localize("PTR2E.XP.Notifications.Info"));
 
-        await Promise.all(toApply.map((d) => {
-            const existingXp = d.system.advancement.experience.current;
-            const expAward = ExpApp.calculateExpAward(d, ber, cm, apl);
-            return d.update({
-                "system.advancement.experience.current": existingXp + expAward,
+        await Promise.all(toApply.map(async (appliedExp) => {
+            const expAward = ExpApp.calculateExpAward(appliedExp.actor, ber, cm, apl);
+            await appliedExp.actor.update({
+                "system.advancement.experience.current": appliedExp.old.experience + expAward,
             });
+            appliedExp.new.experience = Math.floor(appliedExp.old.experience + expAward);
+            appliedExp.new.level = appliedExp.actor.system.advancement.level;
         }))
         await game.settings.set("ptr2e", "expCircumstanceModifiers", []);
 
         ui.notifications.remove(notification);
         ui.notifications.info(game.i18n.localize("PTR2E.XP.Notifications.Success"));
+
+        //@ts-expect-error - Chat messages have not been properly defined yet
+        await ChatMessagePTR2e.create({
+            type: "experience",
+            system: {
+                expBase: ber * (1 + (cm / 100)),
+                expApplied: toApply,
+                modifiers,
+            },
+        });
     }
 };
 

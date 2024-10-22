@@ -9,7 +9,7 @@ import { MeasuredTemplatePTR2e } from "@module/canvas/measured-template.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { BasicChangeSystem, ChangeModel } from "@data";
 import { ActiveEffectPTR2e } from "@module/effects/index.ts";
-import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem, SkillMessageSystem, CaptureMessageSystem } from "@module/chat/index.ts";
+import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem, SkillMessageSystem, CaptureMessageSystem, ExperienceMessageSystem } from "@module/chat/index.ts";
 import Traits from "static/traits.json" assert { type: "json" };
 import ItemDirectoryPTR2e from "@item/sidebar.ts";
 import { StatusEffects } from "./effects.ts";
@@ -67,6 +67,7 @@ export const PTRCONFIG = {
         dataModels: {
             item: ItemMessageSystem,
             attack: AttackMessageSystem,
+            experience: ExperienceMessageSystem,
             "damage-applied": DamageAppliedMessageSystem,
             skill: SkillMessageSystem,
             capture: CaptureMessageSystem

@@ -626,3 +626,22 @@
     opacity: 1;
   }
 }
+.chat-message.message.experience .modifiers {
+  display: none;
+  flex-direction: column;
+}
+.chat-message.message.experience .awarded-to {
+  display: none;
+  flex-direction: column;
+}
+.chat-message.message.experience .awarded-to .awarded-exp {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  --img-size: 32px;
+}
+.chat-message.message.experience .awarded-to .awarded-exp .icon {
+  height: var(--img-size);
+  width: var(--img-size);
+  border: none;
+}
