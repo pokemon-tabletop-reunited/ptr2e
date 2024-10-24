@@ -1,0 +1,71 @@
+{
+  "name": "<Type> Style",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "Leadership 35"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "social",
+      "approach": "power",
+      "archetype": "Type Ace"
+    },
+    "description": "<p>The target adds this Action's [Type] to the next Attack they declare, lasting until the Attack resolves. The user may also be selected as a target for this Action.</p>",
+    "actions": [
+      {
+        "name": "<Type> Style",
+        "slug": "type-style",
+        "description": "<p>The target adds this Action's [Type] to the next Attack they declare, lasting until the Attack resolves. The user may also be selected as a target for this Action.</p>",
+        "type": "generic",
+        "traits": [
+          "social",
+          "command",
+          "type"
+        ],
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "slug": "type-style",
+    "traits": [
+      "social",
+      "command",
+      "type"
+    ],
+    "node": {
+      "i": -33,
+      "j": -18,
+      "connected": [
+        "type-domain",
+        "type-tutoring"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "rf1amQ8FoBlQka5c",
+  "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+  "effects": []
+}
