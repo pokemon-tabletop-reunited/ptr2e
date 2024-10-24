@@ -177,10 +177,10 @@ class CheckPTR2e {
             item &&
             item.type === "consumable" &&
             item.actor.items.has(item.id) &&
-            (item as ConsumablePTR2e).system.charges.value > 0
+            (item as ConsumablePTR2e).system.quantity > 0
         ) {
             await item.update({
-                "system.charges.value": (item as ConsumablePTR2e).system.charges.value - 1,
+                "system.quantity": (item as ConsumablePTR2e).system.quantity - 1,
             });
         }
 
@@ -431,10 +431,10 @@ class CheckPTR2e {
             item &&
             item.type === "consumable" &&
             item.actor.items.has(item.id) &&
-            (item as ConsumablePTR2e).system.charges.value > 0
+            (item as ConsumablePTR2e).system.quantity > 0
         ) {
             await item.update({
-                "system.charges.value": (item as ConsumablePTR2e).system.charges.value - 1,
+                "system.quantity": (item as ConsumablePTR2e).system.quantity - 1,
             });
         }
 
@@ -540,10 +540,10 @@ class CheckPTR2e {
             item &&
             item.type === "consumable" &&
             item.actor.items.has(item.id) &&
-            (item as ConsumablePTR2e).system.charges.value > 0
+            (item as ConsumablePTR2e).system.quantity > 0
         ) {
             await item.update({
-                "system.charges.value": (item as ConsumablePTR2e).system.charges.value - 1,
+                "system.quantity": (item as ConsumablePTR2e).system.quantity - 1,
             });
         }
 
