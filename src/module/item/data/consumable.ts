@@ -1,5 +1,5 @@
 import { ContainerPTR2e } from "@item";
-import { HasContainer, HasDescription, HasEmbed, HasGearData, HasMigrations, HasSlug, HasTraits } from "@module/data/index.ts";
+import { HasContainer, HasDescription, HasEmbed, HasGearData, HasMigrations, HasSlug, HasTraits, Trait } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
@@ -84,6 +84,18 @@ export default abstract class ConsumableSystem extends ConsumableExtension {
       this.parent.updateSource({
         img: "systems/ptr2e/img/icons/consumable_icon.webp"
       })
+    }
+  }
+  
+  override prepareBaseData() {
+    super.prepareBaseData();
+
+    // Add stack value if greater than 1
+    if (this.stack! > 1) {
+      const stackTraitSlug = `stack-${this.stack}`;
+      if (Trait.isValid(stackTraitSlug) && !this.traits.has(stackTraitSlug)) {
+        this.addTraitFromSlug(stackTraitSlug, true);
+      }
     }
   }
 }
