@@ -63,10 +63,7 @@ export default abstract class ConsumableSystem extends ConsumableExtension {
     return {
       ...super.defineSchema() as ConsumableSystemSchemaExtension,
       consumableType: new fields.StringField({ required: true, initial: "other", choices: CONSUMABLE_TYPES, label: "PTR2E.FIELDS.consumable.type.label", hint: "PTR2E.FIELDS.consumable.type.hint" }),
-      charges: new fields.SchemaField({
-        value: new fields.NumberField({ required: true, initial: 1, min: 0, step: 1, label: "PTR2E.FIELDS.consumable.charges.value.label", hint: "PTR2E.FIELDS.consumable.charges.value.hint" }),
-        max: new fields.NumberField({ required: true, initial: 1, min: 1, step: 1, label: "PTR2E.FIELDS.consumable.charges.max.label", hint: "PTR2E.FIELDS.consumable.charges.max.hint" }),
-      }),
+      stack: new fields.NumberField({ required: true, initial: 1, min: 1, step: 1, label: "PTR2E.FIELDS.consumable.stack.label", hint: "PTR2E.FIELDS.consumable.stack.hint" }),
       modifier: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.consumable.modifier.label", hint: "PTR2E.FIELDS.consumable.modifier.hint" }),
       cost: new fields.NumberField({
         required: true,
@@ -77,10 +74,6 @@ export default abstract class ConsumableSystem extends ConsumableExtension {
         hint: "PTR2E.FIELDS.consumable.cost.hint",
       }),
     };
-  }
-
-  static override validateJoint(data: ConsumableSystem['_source']) {
-    if (data.charges.value > data.charges.max) throw new Error("PTR2E.Errors.ChargesValueGreaterThanMax");
   }
 
   override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
@@ -103,16 +96,7 @@ export default interface ConsumableSystem extends ModelPropsFromSchema<Consumabl
 
 interface ConsumableSystemSchema extends foundry.data.fields.DataSchema, ConsumableSystemSchemaExtension {
   consumableType: foundry.data.fields.StringField<string, ConsumableType, true, false, true>;
-  charges: foundry.data.fields.SchemaField<{
-    value: foundry.data.fields.NumberField<number, number, true, false, true>;
-    max: foundry.data.fields.NumberField<number, number, true, false, true>;
-  }, {
-    value: number;
-    max: number;
-  }, {
-    value: number;
-    max: number;
-  }, true, false, true>;
+  stack: foundry.data.fields.NumberField<number, number, true, true, true>;
   modifier: foundry.data.fields.NumberField<number, number, true, true, true>;
   cost: foundry.data.fields.NumberField<number, number, true, true, true>;
 }
