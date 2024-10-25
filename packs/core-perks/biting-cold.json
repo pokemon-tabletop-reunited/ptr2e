@@ -1,0 +1,96 @@
+{
+  "name": "Biting Cold",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.107,
+      "previous": null
+    },
+    "actions": [],
+    "description": "<p>Passive: Your ice-type attacks have a 30% chance to inflict the Frostbite condition.</p>",
+    "traits": [],
+    "prerequisites": [
+      "[Ice]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": ""
+    },
+    "node": {
+      "i": null,
+      "j": null,
+      "connected": [],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": null,
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "effects": [
+    {
+      "name": "Biting Cold",
+      "type": "passive",
+      "_id": "ROAw6SVZuniYSQr4",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "ice-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.1.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "XekPJ58Ak2uObq6y"
+}
