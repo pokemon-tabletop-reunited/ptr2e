@@ -1,0 +1,96 @@
+{
+  "name": "Salted Wounds",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.107,
+      "previous": null
+    },
+    "actions": [],
+    "description": "<p>You are well versed in preventing wounds from healing properly, ensuring that they sting for far longer.<br><br>Passive: Your Dark-type attacks gain +20% chance to inflict the Stunted condition.</p>",
+    "traits": [],
+    "prerequisites": [
+      "[Dark]"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "mental",
+      "approach": "finesse",
+      "archetype": "Dark"
+    },
+    "node": {
+      "i": null,
+      "j": null,
+      "connected": [],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": null,
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "effects": [
+    {
+      "name": "Salted Wounds",
+      "type": "passive",
+      "_id": "RGPQ83VkCMploY5D",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "dark-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.stuntedcondiitem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.1.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "LpspqIt2dDEZfutt"
+}
