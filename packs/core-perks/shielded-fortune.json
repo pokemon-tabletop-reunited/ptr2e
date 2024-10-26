@@ -1,0 +1,102 @@
+{
+  "folder": "Et2u8UoXSe2a17oq",
+  "name": "Shielded Fortune",
+  "type": "perk",
+  "_id": "D1QCKKrT1mEcaRK2",
+  "img": "systems/ptr2e/img/perk-icons/Combat.svg",
+  "system": {
+    "actions": [],
+    "slug": "shielded-fortune",
+    "description": "<p>You gain +1 default CRIT while you have Shields.</p>",
+    "traits": [],
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 3,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "Tank"
+    },
+    "node": {
+      "i": 36,
+      "j": -104,
+      "connected": [
+        "improved-shielding",
+        "punishment-ward",
+        "root-2",
+        "superlative-shields"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#408080",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Shielded Fortune",
+      "type": "passive",
+      "_id": "ugRbKwSW0EdJx8s8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.critRate.stage",
+            "value": 1,
+            "predicate": [
+              "self:state:shielded"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.D1QCKKrT1mEcaRK2.ActiveEffect.ugRbKwSW0EdJx8s8",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.1.0",
+        "createdTime": 1729979534307,
+        "modifiedTime": 1729979652584,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
