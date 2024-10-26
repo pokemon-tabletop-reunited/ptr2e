@@ -5,11 +5,7 @@
   "img": "systems/ptr2e/img/svg/fairy_icon.svg",
   "system": {
     "slug": "lively-dance",
-    "traits": [
-      "dance",
-      "friendly",
-      "pp-updated"
-    ],
+    "traits": [],
     "actions": [
       {
         "name": "Lively Dance",
@@ -35,21 +31,26 @@
         "category": "physical",
         "power": 70,
         "accuracy": 95,
-        "description": "<p>Effect: After this attack resolves, the user has a 10% chance of gaining ATK, DEF, SPATK, SPDEF and SPD stage by 1 for 5 activations.</p>",
-        "img": "systems/ptr2e/img/svg/fairy_icon.svg"
+        "description": "Effect: After this attack resolves, the user has a 10% chance of gaining ATK, DEF, SPATK, SPDEF and SPD stage by 1 for 5 activations.",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+        "slot": 4
       }
     ],
     "grade": "C",
     "_migration": {
-      "version": null,
-      "previous": null
+      "version": 0.107,
+      "previous": {
+        "schema": null,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.2.2.1"
+      }
     }
   },
   "effects": [
     {
       "name": "Lively Dance",
       "type": "passive",
-      "_id": "nuBVTHBPdPvBVtsZ",
+      "_id": "d8qdefB6w83xIR1H",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
@@ -94,8 +95,8 @@
         "coreVersion": "12.331",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.1.0",
-        "createdTime": 1729181005417,
-        "modifiedTime": 1729978739405,
+        "createdTime": 1729181047479,
+        "modifiedTime": 1729978767990,
         "lastModifiedBy": "Kc3DOunCh3ClAeHS"
       }
     }
