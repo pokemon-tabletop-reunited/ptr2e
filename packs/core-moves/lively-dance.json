@@ -1,0 +1,103 @@
+{
+  "name": "Lively Dance",
+  "type": "move",
+  "_id": "P8IlCKkcVw0RxvOz",
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "system": {
+    "slug": "lively-dance",
+    "traits": [
+      "dance",
+      "friendly",
+      "pp-updated"
+    ],
+    "actions": [
+      {
+        "name": "Lively Dance",
+        "slug": "lively-dance",
+        "type": "attack",
+        "traits": [
+          "dance",
+          "friendly",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "types": [
+          "fairy"
+        ],
+        "category": "physical",
+        "power": 70,
+        "accuracy": 95,
+        "description": "<p>Effect: After this attack resolves, the user has a 10% chance of gaining ATK, DEF, SPATK, SPDEF and SPD stage by 1 for 5 activations.</p>",
+        "img": "systems/ptr2e/img/svg/fairy_icon.svg"
+      }
+    ],
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Lively Dance",
+      "type": "passive",
+      "_id": "nuBVTHBPdPvBVtsZ",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "lively-dance-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.rMNLqloV5nLmCLrZ",
+            "predicate": [],
+            "chance": 10,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-moves.Item.P8IlCKkcVw0RxvOz.ActiveEffect.nuBVTHBPdPvBVtsZ",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.1.0",
+        "createdTime": 1729181005417,
+        "modifiedTime": 1729978739405,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
