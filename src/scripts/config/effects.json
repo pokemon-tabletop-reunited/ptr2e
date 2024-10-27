@@ -222,15 +222,18 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.def.stage",
+          "key": "system.battleStats.evasion.stage",
           "value": -1,
           "mode": 2
         },
         {
           "type": "basic",
-          "key": "system.attributes.spe.stage",
-          "value": 1,
-          "mode": 2
+          "key": "system.attributes.spe.base",
+          "value": 1.5,
+          "predicate": [],
+          "mode": 1,
+          "priority": null,
+          "ignored": false
         }
       ],
       "formula": null,
@@ -256,7 +259,7 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.spa.stage",
+          "key": "system.attributes.def.stage",
           "value": -1,
           "mode": 2
         }
@@ -267,7 +270,7 @@
       "removeAfterCombat": true,
       "traits": [
         "ice",
-        "minor-affliction"
+        "major-affliction"
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.frostbite"

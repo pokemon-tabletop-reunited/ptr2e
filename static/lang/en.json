@@ -491,7 +491,7 @@
           "paralysis": "The afflicted creature's SPD is reduced by 50%. The creature also has Slowed while Paralysis is active.",
           "drowsy": "The Power of all of the afflicted creature's attacks is reduced by 33%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their Actions. The afflicted creature's default SPDEF stages are reduced by 1 while Drowsy is active.",
           "nightmares": "This affliction can only be applied to Drowsy creatures. The Power of all of the afflicted creature's attacks is reduced by 50%, and the creature cannot utilize the [Priority X] or [Interrupt X] capabilities of their actions. The creature loses a Tick of HP at the end of each of its Activations and has their default SPDEF and ACC stages reduced by 1 while Nightmares is active. When a creature receives Nightmares, it loses the Drowsy Condition, and gains 33% of its remaining Drowsy Stacks onto Nightmares, and further Nightmares Stacks cannot be applied.",
-          "frozen": "The afflicted creature is unable to use actions (either during its Activations or as interrupts/reactions), but takes 33% less damage from all sources. The afflicted creature's default DEF stages are reduced by 1, and has its SPD increased by 50%. Additional Frozen Stacks cannot be added while Frozen is on a creature.",
+          "frozen": "The afflicted creature is unable to use actions (either during its Activations or as interrupts/reactions), but takes 33% less damage from all sources. The afflicted creature's default EVA stages are reduced by 1, and has its SPD increased by 50%. Additional Frozen Stacks cannot be added while Frozen is on a creature. Each time a creature ticks down a Stack of Frozen, they gain two Stacks of Frostbite.",
           "splinter": "The afflicted creature loses a Tick of HP when they are damaged by a Physical- or Special-Category attack. The creature has Stunted while Splinter is active.",
           "slowed": "The afflicted creature’s Movement Scores are reduced by 50%, rounding down (minimum 1).",
           "hindered": "The afflicted creature’s Skill DCs are reduced by -10. Hindered applied from different sources have their own Stacks.",
@@ -546,8 +546,8 @@
           "evasive": "While afflicted with Evasive, the creature has +1 default ACC and the Power of its Attacks are decreased by -20%.",
           "gambit": "While afflicted with Gambit, the creature has +2 default CRIT and -1 default ACC.",
           "frostbite": "The afflicted creature loses a Tick of HP at the end of each of their Activations. The creature has their default SPA stages reduced by 1 while Frostbite is active.",
-          "stoked": "While afflicted with Stoked, the creature's next damaging @Trait[Fire] Attack has +100% Power",
-          "charged": "While afflicted with Stoked, the creature's next damaging @Trait[Electric] Attack has +100% Power"
+          "stoked": "While afflicted with Stoked, the creature's next damaging @Trait[Fire] Attack has +100% Power.",
+          "charged": "While afflicted with Stoked, the creature's next damaging @Trait[Electric] Attack has +100% Power."
         }
       }
     },
