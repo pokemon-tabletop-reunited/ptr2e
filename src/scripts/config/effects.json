@@ -505,6 +505,98 @@
     "description": "PTR2E.Effect.Statuses.Descriptions.bound"
   },
   {
+    "id": "drowning",
+    "name": "PTR2E.Effect.Statuses.Labels.drowning",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "grant-effect",
+          "value": "suppressed"
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spd.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "water",
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.drowning"
+  },
+  {
+    "id": "infested",
+    "name": "PTR2E.Effect.Statuses.Labels.infested",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "grant-effect",
+          "value": "hindered"
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.def.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "water",
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.infested"
+  },
+  {
+    "id": "wind-shear",
+    "name": "PTR2E.Effect.Statuses.Labels.wind-shear",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.accuracy.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "flying",
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.wind-shear"
+  },
+  {
     "id": "disabled",
     "name": "PTR2E.Effect.Statuses.Labels.disabled",
     "img": "systems/ptr2e/img/conditions/disabled.svg",
@@ -1579,7 +1671,7 @@
         "pseudo-affliction"
       ]
     },
-    "description": "PTR2E.Effect.Statuses.Descriptions.evasive"
+    "description": "PTR2E.Effect.Statuses.Descriptions.gambit"
   },
   {
     "id": "stoked",
