@@ -67,6 +67,60 @@ function traitsToTags(traits: string[], actions: any[]): string {
         .join(", ");
 }
 
+function traitsToTraitsList(traits: string[], actions: any[]): string {
+  if(!traits || traits.length === 0) {
+    if(actions?.length > 0) {
+      if(actions[0].traits?.length> 0) {
+        traits = actions[0].traits;
+      }
+      else return "";
+    }
+    else return "";
+  }
+  return traits
+    .map(t => t.trim())
+    .filter(s => s)
+    .map(t => `- [${formatSlug(t)}](https://2e.ptr.wiki/${getMarkdownPath({
+      type: "traits",
+      category: getCategory(t),
+      title: t,
+      extension: false
+    })})`)
+    .join("\n");
+}
+
+function replaceAtLinks(entireMessage: string): string {
+  if(!entireMessage) return "";
+
+  if(entireMessage.match(TraitEnricher)) {
+    entireMessage = entireMessage.replace(TraitEnricher, (match, type, slug, _, label) => {
+      return `[${label ?? formatSlug(slug)}](https://2e.ptr.wiki/${getMarkdownPath({
+        type: "traits",
+        category: getCategory(slug),
+        title: slug,
+        extension: false
+      })})`;
+    });
+  }
+
+  if(entireMessage.match(AfflictionEnricher)) {
+    entireMessage = entireMessage.replace(AfflictionEnricher, (match, type, slug, _, label) => {
+      // return `[${label ?? formatSlug(slug)}](https://2e.ptr.wiki/${getMarkdownPath({
+      //   type: "effects",
+      //   category: getCategory(slug),
+      //   title: slug,
+      //   extension: false
+      // })})`;
+      return label ?? formatSlug(slug);
+    });
+  }
+
+  return entireMessage;
+}
+
+const TraitEnricher = /@(?<type>Trait)\[(?<slug>[-a-z]+)(\s+)?](?:{(?<label>[^}]+)})?/gi;
+const AfflictionEnricher = /@(?<type>Affliction)\[(?<slug>[-a-z]+)(\s+)?](?:{(?<label>[^}]+)})?/gi;
+
 function actionsToActionsStrings(actions: any[]): string[] {
     return (
         actions
@@ -112,10 +166,11 @@ function abilityToMarkdown(ability: any): MarkdownResult {
     };
 
     const actionStrings = actionsToActionsStrings(ability.system.actions);
+    const traitsString = traitsToTraitsList(ability.system.traits, ability.system.actions);
 
     return {
         metadata,
-        markdown: `\n\n### Effect\n${ability.system.description}${
+        markdown: `\n\n${traitsString ? `### Traits\n${traitsString}\n\n` : ""}### Effect\n${ability.system.description}${
             actionStrings.length > 0 ? `\n\n## Ability Actions\n${actionStrings.join("\n\n\n")}` : ""
         }`,
         path,
@@ -143,6 +198,7 @@ function consumableToMarkdown(consumable: any): MarkdownResult | null {
         consumable.system.crafting?.skill && consumable.system.crafting.spans
             ? `\n### Crafting\n- **Skill**: ${consumable.system.crafting.skill}\n- **Time**: ${consumable.system.crafting.spans} spans\n- **Materials**: ${consumable.system.crafting.materials}`
             : "";
+    const traitsString = traitsToTraitsList(consumable.system.traits, consumable.system.actions);
 
     return {
         metadata,
@@ -150,7 +206,7 @@ function consumableToMarkdown(consumable: any): MarkdownResult | null {
             consumable.system.rarity
         }\n- **IP Cost**: ${consumable.system.cost}\n${flingString}\n${
             craftingString ? `${craftingString}\n` : ""
-        }\n### Description\n${consumable.system.description}${
+        }\n${traitsString ? `### Traits\n${traitsString}\n\n` : ""}### Description\n${consumable.system.description}${
             actionStrings.length > 0
                 ? `\n\n## Consumable Actions\n${actionStrings.join("\n\n\n")}`
                 : ""
@@ -184,12 +240,13 @@ function equipmentToMarkdown(equipment: any): MarkdownResult {
         equipment.system.crafting?.skill && equipment.system.crafting.spans
             ? `\n### Crafting\n- **Skill**: ${equipment.system.crafting.skill}\n- **Time**: ${equipment.system.crafting.spans} spans\n- **Materials**: ${equipment.system.crafting.materials}`
             : "";
+    const traitsString = traitsToTraitsList(equipment.system.traits, equipment.system.actions);
 
     return {
         metadata,
         markdown: `- **Grade**: ${equipment.system.grade}\n- **Rarity**: ${
             equipment.system.rarity
-        }\n${flingString}\n${craftingString ? `${craftingString}\n` : ""}\n### Description\n${
+        }\n${flingString}\n${craftingString ? `${craftingString}\n` : ""}\n${traitsString ? `### Traits\n${traitsString}\n\n` : ""}### Description\n${
             equipment.system.description
         }${
             actionStrings.length > 0
@@ -221,12 +278,13 @@ function gearToMarkdown(gear: any): MarkdownResult {
         gear.system.crafting?.skill && gear.system.crafting.spans
             ? `\n### Crafting\n- **Skill**: ${gear.system.crafting.skill}\n- **Time**: ${gear.system.crafting.spans} spans\n- **Materials**: ${gear.system.crafting.materials}`
             : "";
+    const traitsString = traitsToTraitsList(gear.system.traits, gear.system.actions);
 
     return {
         metadata,
         markdown: `- **Grade**: ${gear.system.grade}\n- **Rarity**: ${
             gear.system.rarity
-        }\n${flingString}\n${craftingString ? `${craftingString}\n` : ""}\n### Description\n${
+        }\n${flingString}\n${craftingString ? `${craftingString}\n` : ""}\n${traitsString ? `### Traits\n${traitsString}\n\n` : ""}### Description\n${
             gear.system.description
         }${actionStrings.length > 0 ? `\n\n## Gear Actions\n${actionStrings.join("\n\n\n")}` : ""}`,
         path,
@@ -275,6 +333,8 @@ function moveToMarkdown(move: any): MarkdownResult | null {
         )
         .filter((a: string) => a);
 
+    const traitsString = traitsToTraitsList(move.system.traits, move.system.actions);
+
     return {
         metadata,
         markdown: `- **Types**: ${action.types}\n- **Category**: ${action.category}\n- **Power**: ${
@@ -283,7 +343,7 @@ function moveToMarkdown(move: any): MarkdownResult | null {
             action.range.target
         }\n- **Range Increment**: ${action.range.distance}m\n- **Action Cost**: ${
             action.cost.activation
-        }\n- **PP Cost**: ${action.cost.powerPoints}\n\n### Effect\n${action.description}${
+        }\n- **PP Cost**: ${action.cost.powerPoints}\n\n${traitsString ? `### Traits\n${traitsString}\n\n` : ""}### Effect\n${action.description}${
             actionStrings.length > 0 ? `\n## Other Move Actions\n${actionStrings.join("\n\n")}` : ""
         }`,
         path,
@@ -305,6 +365,7 @@ function perkToMarkdown(perk: any): MarkdownResult | null {
     };
 
     const actionStrings = actionsToActionsStrings(perk.system.actions);
+    const traitsString = traitsToTraitsList(perk.system.traits, perk.system.actions);
 
     const connections = [];
     for (const connection of perk.system.node?.connected ?? []) {
@@ -322,7 +383,7 @@ function perkToMarkdown(perk: any): MarkdownResult | null {
         metadata,
         markdown: `- **Prerequisites**: ${perk.system.prerequisites?.join(", ")}\n- **AP Cost**: ${perk.system.cost}\n- **Connections**: ${connections.join(
             ", "
-        )}\n\n### Effect\n${perk.system.description}${
+        )}\n\n${traitsString ? `### Traits\n${traitsString}\n\n` : ""}### Effect\n${perk.system.description}${
             actionStrings.length > 0 ? `\n\n## Perk Actions\n${actionStrings.join("\n\n\n")}` : ""
         }`,
         path,
@@ -454,9 +515,11 @@ function speciesToMarkdown(species: any): MarkdownResult | null {
             )
             .join("\n") ?? "");
 
+    const traitsString = traitsToTraitsList(species.system.traits, []);
+
     return {
         metadata,
-        markdown: `${baseStats}${movements}${baseInfo}${skills}${abilities}${evolutions}${moves}`,
+        markdown: `${baseStats}${movements}${baseInfo}${traitsString ? `\n### Traits\n${traitsString}\n\n` : ""}${skills}${abilities}${evolutions}${moves}`,
         path,
     };
 }
@@ -483,11 +546,13 @@ function weaponToMarkdown(weapon: any): MarkdownResult {
             ? `\n### Crafting\n- **Skill**: ${weapon.system.crafting.skill}\n- **Time**: ${weapon.system.crafting.spans} spans\n- **Materials**: ${weapon.system.crafting.materials}`
             : "";
 
+    const traitsString = traitsToTraitsList(weapon.system.traits, weapon.system.actions);
+
     return {
         metadata,
         markdown: `- **Grade**: ${weapon.system.grade}\n- **Rarity**: ${
             weapon.system.rarity
-        }\n${flingString}\n${craftingString ? `${craftingString}\n` : ""}\n### Description\n${
+        }\n${flingString}\n${craftingString ? `${craftingString}\n` : ""}\n${traitsString ? `### Traits\n${traitsString}\n\n` : ""}### Description\n${
             weapon.system.description
         }${actionStrings.length > 0 ? `\n\n## Weapon Actions\n${actionStrings.join("\n\n\n")}` : ""}`,
         path,
@@ -520,5 +585,6 @@ export {
     weaponToMarkdown,
     getMarkdownPath,
     getCategory,
+    replaceAtLinks,
     type MarkdownResult,
 };
