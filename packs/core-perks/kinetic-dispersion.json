@@ -13,7 +13,7 @@
         "slug": "kinetic-dispersion-action-1",
         "description": "<p>Trigger: The user is damaged by a Physical damaging attack.</p><p>Effect: The directs and enhances the strength of the triggering Attack, dealing twice the amount of damage the was dealt by the triggering attack to all creatures in Range (this is not modified by the target's DEF or other effects).</p>",
         "traits": [],
-        "type": "generic",
+        "type": "attack",
         "img": "systems/ptr2e/img/svg/fighting_icon.svg",
         "range": {
           "target": "emanation",
@@ -24,7 +24,12 @@
           "activation": "complex",
           "powerPoints": 5,
           "trigger": "The user is damaged by a Physical damaging attack."
-        }
+        },
+        "types": [
+          "fighting"
+        ],
+        "category": "physical",
+        "free": true
       }
     ],
     "description": "<p>The user learns the Move Tenkan. Counter and Tenkan become Connected.</p>",
@@ -53,10 +58,10 @@
       },
       "hidden": false,
       "type": "normal"
-    }
+    },
+    "slug": "kinetic-dispersion"
   },
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "effects": [],
-  "flags": {},
   "_id": "3V5NjQw7ytHQmxw7"
 }
