@@ -1,0 +1,40 @@
+{
+  "name": "Pickpocket",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "connection"
+        ],
+        "name": "Pickpocket",
+        "slug": "pickpocket",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "The user uses Thief."
+        },
+        "range": {
+          "target": "object",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "Trigger: The user uses Thief.\nEffect: Connection - Thief. When using the attack Thief, the user can steel the target's Held Item. Items stolen with Thief are now added to the user's inventory instead of gaining dropped on the ground if the user's Equipment Slots are full. If the user is an owned Pokemon, the user freely uses Fling with 0 Power to throw the item towards their Trainer.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user uses Thief. Effect: Connection - Thief. When using the attack Thief, the user can steal the target's Held Item. Items stolen with Thief are now added to the user's inventory instead of gaining dropped on the ground if the user's Equipment Slots are full. If the user is an owned Pokemon, the user freely uses Fling with 0 Power to throw the item towards their Trainer.</p>",
+    "traits": [
+      "connection"
+    ],
+    "slug": "pickpocket",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "RbNW8PmXowslwwP3",
+  "effects": []
+}
