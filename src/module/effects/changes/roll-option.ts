@@ -156,6 +156,10 @@ export default class RollOptionChangeSystem extends ChangeModel {
         enabled: true,
       };
 
+      if(actor.synthetics.toggles.some(t => t.domain == toggle.domain && t.option == toggle.option)) {
+        return;
+      }
+
       if (this.disabledIf) {
         const rollOptions = actor.getRollOptions([this.domain]);
         toggle.enabled = !this.disabledIf.test(rollOptions);
@@ -182,11 +186,12 @@ export default class RollOptionChangeSystem extends ChangeModel {
       actor.rollOptions.addOption(this.domain, fullOption);
       // Also set option without the suboption appended
       actor.rollOptions.addOption(this.domain, baseOption);
-    } else {
-      actor.rollOptions.removeOption(this.domain, fullOption);
-      // Also remove option without the suboption appended
-      actor.rollOptions.removeOption(this.domain, baseOption);
-    }
+    } 
+    // else {
+    //   actor.rollOptions.removeOption(this.domain, fullOption);
+    //   // Also remove option without the suboption appended
+    //   actor.rollOptions.removeOption(this.domain, baseOption);
+    // }
   }
 
   private setFlag(value: boolean): void {
