@@ -29,13 +29,9 @@
           "activation": "simple",
           "powerPoints": 1
         },
-        "category": "status",
-        "types": [
-          "untyped"
-        ],
-        "description": "Effect: The target gains @Affliction[gambit] 1.",
-        "type": "attack",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The target gains @Affliction[gambit] 1.</p>",
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg"
       },
       {
         "name": "Gambit! (Self)",
@@ -52,13 +48,9 @@
           "activation": "simple",
           "powerPoints": 1
         },
-        "category": "status",
-        "types": [
-          "untyped"
-        ],
-        "description": "Effect: The target gains @Affliction[gambit] 2.",
-        "type": "attack",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Effect: The target gains @Affliction[gambit] 2.</p>",
+        "type": "generic",
+        "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg"
       }
     ],
     "slug": "gambit-style",
@@ -66,9 +58,14 @@
       "command"
     ],
     "node": {
-      "i": 5,
-      "j": -86,
-      "connected": [],
+      "i": -20,
+      "j": -71,
+      "connected": [
+        "improved-overland-2",
+        "agile-style",
+        "parkour",
+        "quick-and-the-dead"
+      ],
       "config": {
         "alpha": null,
         "backgroundColor": "#004080",

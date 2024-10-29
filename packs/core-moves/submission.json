@@ -4,12 +4,7 @@
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "submission",
-    "description": "<p>Effect: If the user and target are in the same @Affliction[grapple], this attack gains [Danger Close], and has its Power increase +50%.</p>",
-    "traits": [
-      "recoil-1-4",
-      "contact",
-      "grapple"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "submission",
@@ -28,22 +23,15 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "physical",
-        "power": 80,
-        "accuracy": 80,
+        "power": 120,
+        "accuracy": 100,
         "types": [
           "fighting"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg"
       },
       {
         "slug": "submission-grappling",
@@ -63,8 +51,6 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 4,
-          "delay": null,
-          "priority": null,
           "trigger": "<p>The user is in control of a Grapple.</p>"
         },
         "category": "physical",
@@ -74,15 +60,16 @@
           "fighting"
         ],
         "description": "<p>Trigger: The user is in control of a Grapple.</p>",
-        "contestType": "",
-        "contestEffect": "",
         "variant": "submission",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "Eet56V4kfBEqWFgk",
   "effects": []
