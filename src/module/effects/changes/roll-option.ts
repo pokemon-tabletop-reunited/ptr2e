@@ -145,7 +145,7 @@ export default class RollOptionChangeSystem extends ChangeModel {
       }
 
       const toggle: RollOptionToggle = {
-        effectId: this.effect.id,
+        effectUuid: this.effect.uuid,
         label: this.getReducedLabel(),
         placement: this.placement ?? "effects",
         domain: this.domain,
@@ -155,6 +155,10 @@ export default class RollOptionChangeSystem extends ChangeModel {
         checked: false,
         enabled: true,
       };
+
+      if(actor.synthetics.toggles.some(t => t.domain == toggle.domain && t.option == toggle.option)) {
+        return;
+      }
 
       if (this.disabledIf) {
         const rollOptions = actor.getRollOptions([this.domain]);
@@ -182,11 +186,12 @@ export default class RollOptionChangeSystem extends ChangeModel {
       actor.rollOptions.addOption(this.domain, fullOption);
       // Also set option without the suboption appended
       actor.rollOptions.addOption(this.domain, baseOption);
-    } else {
-      actor.rollOptions.removeOption(this.domain, fullOption);
-      // Also remove option without the suboption appended
-      actor.rollOptions.removeOption(this.domain, baseOption);
-    }
+    } 
+    // else {
+    //   actor.rollOptions.removeOption(this.domain, fullOption);
+    //   // Also remove option without the suboption appended
+    //   actor.rollOptions.removeOption(this.domain, baseOption);
+    // }
   }
 
   private setFlag(value: boolean): void {

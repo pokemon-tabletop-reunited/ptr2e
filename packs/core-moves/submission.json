@@ -4,12 +4,7 @@
   "img": "systems/ptr2e/img/svg/fighting_icon.svg",
   "system": {
     "slug": "submission",
-    "description": "<p>Effect: If the user and target are in the same @Affliction[grapple], this attack gains [Danger Close], and has its Power increase +50%.</p>",
-    "traits": [
-      "recoil-1-4",
-      "contact",
-      "grapple"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "submission",
@@ -28,26 +23,19 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "physical",
-        "power": 80,
-        "accuracy": 80,
+        "power": 120,
+        "accuracy": 100,
         "types": [
           "fighting"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg"
       },
       {
-        "slug": "submission",
-        "name": "Submission",
+        "slug": "submission-grappling",
+        "name": "Submission (Grappling)",
         "type": "attack",
         "traits": [
           "recoil-1-4",
@@ -63,9 +51,7 @@
         "cost": {
           "activation": "complex",
           "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "trigger": "<p>The user is in control of a Grapple.</p>"
         },
         "category": "physical",
         "power": 120,
@@ -73,16 +59,17 @@
         "types": [
           "fighting"
         ],
-        "description": "",
-        "contestType": "",
-        "contestEffect": "",
+        "description": "<p>Trigger: The user is in control of a Grapple.</p>",
         "variant": "submission",
         "free": true,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "Eet56V4kfBEqWFgk",
   "effects": []

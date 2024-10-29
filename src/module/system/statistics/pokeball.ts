@@ -165,7 +165,7 @@ class PokeballCheck<TParent extends PokeballStatistic = PokeballStatistic> imple
             title: args.title || this.label || this.parent.action.name,
             actor: context.self.actor,
             token: context.self.token,
-            item: context.self.item,
+            item: context.self.item ?? this.item,
             target: context.target,
             options: context.options,
             notes,

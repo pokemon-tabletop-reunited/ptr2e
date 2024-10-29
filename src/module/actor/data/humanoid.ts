@@ -143,6 +143,13 @@ class HumanoidActorSystem extends ActorSystemPTR2e {
             this.parent.updateSource({ "system.species": HumanoidActorSystem.constructSpecies(this).toObject() });
         }
 
+        if(this.health?.max && this.health?.value !== this.health?.max) {
+          this.parent.updateSource({"system.health.value": this.health.max});
+        }
+        if(this.powerPoints?.max && this.powerPoints?.value !== this.powerPoints?.max) {
+          this.parent.updateSource({"system.powerPoints.value": this.powerPoints.max});
+        }
+
         return await super._preCreate(data, options, user);
     }
 }

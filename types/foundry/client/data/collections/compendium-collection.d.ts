@@ -189,7 +189,7 @@ declare global {
     function fromUuid(uuid: Maybe<TokenDocumentUUID>, relative?: Maybe<ClientDocument>): Promise<TokenDocument<Scene> | null>;
     function fromUuid<TDocument extends ClientDocument>(
         uuid: Maybe<string>,
-        relative?: Maybe<ClientDocument>,
+        options?: {relative?: Maybe<ClientDocument>},
     ): Promise<TDocument | null>;
 
     /**

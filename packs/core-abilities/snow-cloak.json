@@ -13,17 +13,14 @@
         "slug": "snow-cloak",
         "type": "passive",
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: While Snowy Weather is active, the user has +1 default EVA. The user is considered Ice Type for the effects of Snowy Weather."
+        "description": "Effect: While Snowy Weather is active, the user has +1 default EVA. The user is considered Ice Type for the effects of Snowy Weather.",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "Effect: While Snowy Weather is active, the user has +1 default EVA. The user is considered Ice Type for the effects of Snowy Weather.",
@@ -31,27 +28,87 @@
       "environ",
       "defensive"
     ],
-    "slug": null,
-    "container": null
+    "slug": "snow-cloak",
+    "_migration": {
+      "version": 0.107,
+      "previous": {
+        "schema": null,
+        "foundry": "12.329",
+        "system": "0.10.0-alpha.3.0.0"
+      }
+    },
+    "slot": 1
   },
   "_id": "dnKczVUT14Kp8vjB",
-  "effects": [],
-  "folder": null,
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "tXAZ3QUgjuwX4gdV": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.324",
-    "systemId": "ptr2e",
-    "systemVersion": "0.005",
-    "createdTime": 1716919240454,
-    "modifiedTime": 1716919240454,
-    "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
-  },
-  "_key": "!items!dnKczVUT14Kp8vjB"
+  "effects": [
+    {
+      "name": "Snow Cloak",
+      "type": "passive",
+      "_id": "tWgSdhloRhfwJyYS",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "weather:snowy",
+            "predicate": [],
+            "domain": "all",
+            "toggleable": true,
+            "count": false,
+            "state": true,
+            "label": "In Snowy Weather?",
+            "alwaysActive": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": []
+          },
+          {
+            "type": "basic",
+            "key": "system.battleStats.evasion.stage",
+            "value": 1,
+            "predicate": [
+              "weather:snowy"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.0.0",
+        "createdTime": 1730213276790,
+        "modifiedTime": 1730213358828,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ]
 }

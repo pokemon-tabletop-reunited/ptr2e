@@ -616,14 +616,14 @@ class ActorPTR2e<
   async toggleRollOption(
     domain: string,
     option: string,
-    effectId: string | null = null,
+    effectUuid: string | null = null,
     value?: boolean,
     suboption: string | null = null,
   ): Promise<boolean | null> {
-    if (!(typeof effectId === "string")) return null;
+    if (!(typeof effectUuid === "string")) return null;
 
-    const effect = this.effects.get(effectId, { strict: true });
-    const change = effect.changes.find(
+    const effect = await fromUuid<ActiveEffectPTR2e>(effectUuid, { relative: this as Actor });
+    const change = effect?.changes.find(
       (c): c is RollOptionChangeSystem =>
         c instanceof RollOptionChangeSystem && c.domain === domain && c.option === option,
     );
@@ -1036,8 +1036,8 @@ class ActorPTR2e<
 
     const itemOptions = selfItem?.getRollOptions("item") ?? [];
 
-    if(selfAttack) {
-      for(const adjustment of selfActor.synthetics.attackAdjustments) {
+    if (selfAttack) {
+      for (const adjustment of selfActor.synthetics.attackAdjustments) {
         adjustment.adjustAttack?.(selfAttack, itemOptions);
       }
     }
@@ -1045,8 +1045,8 @@ class ActorPTR2e<
     const actionTraits = (() => {
       const traits = params.traits?.map((t) => (typeof t === "string" ? t : t.slug)) ?? [];
 
-      if(selfAttack) {
-        for(const adjustment of selfActor.synthetics.attackAdjustments) {
+      if (selfAttack) {
+        for (const adjustment of selfActor.synthetics.attackAdjustments) {
           adjustment.adjustTraits?.(selfAttack, traits, itemOptions);
         }
       }
@@ -1342,14 +1342,14 @@ class ActorPTR2e<
       }
     }
 
-    if(changed.system?.traits !== undefined && this.system?.traits?.suppressedTraits?.size) {
-      if(changed.system.traits instanceof Set) {
+    if (changed.system?.traits !== undefined && this.system?.traits?.suppressedTraits?.size) {
+      if (changed.system.traits instanceof Set) {
         //@ts-expect-error - During an update this should be an array
         changed.system.traits = Array.from(changed.system.traits);
       }
-      else if(!Array.isArray(changed.system.traits)) {
+      else if (!Array.isArray(changed.system.traits)) {
         //@ts-expect-error - During an update this should be an array
-        if(changed.system.traits instanceof Collection) changed.system.traits = [...changed.system.traits];
+        if (changed.system.traits instanceof Collection) changed.system.traits = [...changed.system.traits];
         //@ts-expect-error - During an update this should be an array
         else changed.system.traits = [];
       }
@@ -1357,23 +1357,23 @@ class ActorPTR2e<
       const suppressedTraits = this.system.traits.suppressedTraits;
       const sourceTraits = this.system._source.traits;
       const intersection = sourceTraits.filter(trait => suppressedTraits.has(trait));
-      if(intersection.length) {
+      if (intersection.length) {
         //@ts-expect-error - During an update this should be an array
         changed.system.traits = Array.from(new Set([...changed.system.traits, ...intersection]))
       }
     }
 
-    if(changed.system?.advancement?.experience?.current !== undefined) {
-      if(this.system.species?.moves?.levelUp?.length) {
+    if (changed.system?.advancement?.experience?.current !== undefined) {
+      if (this.system.species?.moves?.levelUp?.length) {
         // Check if level-up occurs
         const newExperience = Number(changed.system.advancement.experience.current);
         const nextExperienceThreshold = this.system.advancement.experience.next;
-        if(nextExperienceThreshold && newExperience >= nextExperienceThreshold) {          
+        if (nextExperienceThreshold && newExperience >= nextExperienceThreshold) {
           const level = this.system.getLevel(newExperience);
           const currentLevel = this.system.advancement.level;
-          
+
           const newMoves = this.system.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
-          if(newMoves.length) {
+          if (newMoves.length) {
             const moves = (await Promise.all(newMoves.map(move => fromUuid<ItemPTR2e<MoveSystem>>(move.uuid)))).flatMap(move => move ?? []);
             changed.items ??= [];
             //@ts-expect-error - Asserted that this is an Array.

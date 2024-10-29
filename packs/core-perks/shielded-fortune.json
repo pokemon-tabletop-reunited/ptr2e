@@ -6,7 +6,7 @@
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
   "system": {
     "actions": [],
-    "slug": null,
+    "slug": "shielded-fortune",
     "description": "<p>You gain +1 default CRIT while you have Shields.</p>",
     "traits": [],
     "prerequisites": [
@@ -38,23 +38,65 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
-  "effects": [],
-  "sort": 2400000,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.D1QCKKrT1mEcaRK2",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717153581078,
-    "modifiedTime": 1717179630871,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": [
+    {
+      "name": "Shielded Fortune",
+      "type": "passive",
+      "_id": "ugRbKwSW0EdJx8s8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.critRate.stage",
+            "value": 1,
+            "predicate": [
+              "self:state:shielded"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.D1QCKKrT1mEcaRK2.ActiveEffect.ugRbKwSW0EdJx8s8",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.1.0",
+        "createdTime": 1729979534307,
+        "modifiedTime": 1729979652584,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

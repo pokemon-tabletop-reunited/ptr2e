@@ -5,7 +5,7 @@
     </legend>
     <ul class="toggles-list scroll">
       {{#each toggles as |toggle idx|}}
-        <li class="{{#unless toggle.alwaysActive}} item{{/unless}}" data-effect-id="{{toggle.effectId}}"
+        <li class="{{#unless toggle.alwaysActive}} item{{/unless}}" data-effect-uuid="{{toggle.effectUuid}}"
           data-domain="{{toggle.domain}}" data-option="{{toggle.option}}" data-placement="{{toggle.placement}}">
           <label>
             <input type="checkbox" data-action="toggle-roll-option" {{#if (or toggle.alwaysActive (eq toggle.enabled false))}}disabled{{/if}} {{checked toggle.checked}} />

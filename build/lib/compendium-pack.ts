@@ -490,6 +490,12 @@ class CompendiumPack {
       acc[packId] = packData;
       return acc;
     }, {} as Record<string, object>);
+
+    // Add traits data
+    const traitsDataPath = path.resolve(process.cwd(), `static/traits.json`);
+    const traits = JSON.parse(fs.readFileSync(traitsDataPath, "utf-8"));
+    data["core-traits"] = traits;
+
     fs.writeFileSync(filePath, JSON.stringify(data));
 
     return true;
