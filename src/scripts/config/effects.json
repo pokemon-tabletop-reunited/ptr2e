@@ -222,15 +222,18 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.def.stage",
+          "key": "system.battleStats.evasion.stage",
           "value": -1,
           "mode": 2
         },
         {
           "type": "basic",
-          "key": "system.attributes.spe.stage",
-          "value": 1,
-          "mode": 2
+          "key": "system.attributes.spe.base",
+          "value": 1.5,
+          "predicate": [],
+          "mode": 1,
+          "priority": null,
+          "ignored": false
         }
       ],
       "formula": null,
@@ -256,7 +259,7 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.spa.stage",
+          "key": "system.attributes.def.stage",
           "value": -1,
           "mode": 2
         }
@@ -267,7 +270,7 @@
       "removeAfterCombat": true,
       "traits": [
         "ice",
-        "minor-affliction"
+        "major-affliction"
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.frostbite"
@@ -500,6 +503,98 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.bound"
+  },
+  {
+    "id": "drowning",
+    "name": "PTR2E.Effect.Statuses.Labels.drowning",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "grant-effect",
+          "value": "suppressed"
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spd.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "water",
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.drowning"
+  },
+  {
+    "id": "infested",
+    "name": "PTR2E.Effect.Statuses.Labels.infested",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "grant-effect",
+          "value": "hindered"
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.def.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "water",
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.infested"
+  },
+  {
+    "id": "wind-shear",
+    "name": "PTR2E.Effect.Statuses.Labels.wind-shear",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.battleStats.accuracy.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "flying",
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.wind-shear"
   },
   {
     "id": "disabled",
@@ -951,7 +1046,7 @@
     },
     "system": {
       "changes": [],
-      "formula": "3/16",
+      "formula": "1/4",
       "type": "damage",
       "removeOnRecall": false,
       "removeAfterCombat": true,
@@ -1576,7 +1671,7 @@
         "pseudo-affliction"
       ]
     },
-    "description": "PTR2E.Effect.Statuses.Descriptions.evasive"
+    "description": "PTR2E.Effect.Statuses.Descriptions.gambit"
   },
   {
     "id": "stoked",
