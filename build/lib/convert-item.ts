@@ -93,7 +93,7 @@ function replaceAtLinks(entireMessage: string): string {
   if(!entireMessage) return "";
 
   if(entireMessage.match(TraitEnricher)) {
-    entireMessage = entireMessage.replace(TraitEnricher, (match, type, slug, _, label) => {
+    entireMessage = entireMessage.replace(TraitEnricher, (_match, _type, slug, _, label) => {
       return `[${label ?? formatSlug(slug)}](https://2e.ptr.wiki/${getMarkdownPath({
         type: "traits",
         category: getCategory(slug),
@@ -104,7 +104,7 @@ function replaceAtLinks(entireMessage: string): string {
   }
 
   if(entireMessage.match(AfflictionEnricher)) {
-    entireMessage = entireMessage.replace(AfflictionEnricher, (match, type, slug, _, label) => {
+    entireMessage = entireMessage.replace(AfflictionEnricher, (_match, _type, slug, _, label) => {
       // return `[${label ?? formatSlug(slug)}](https://2e.ptr.wiki/${getMarkdownPath({
       //   type: "effects",
       //   category: getCategory(slug),
