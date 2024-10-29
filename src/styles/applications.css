@@ -407,6 +407,12 @@ body .application.sheet .form-group {
   text-align: center;
   width: 1.125rem;
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity .decrease[disabled],
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity .decrease[disabled],
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity .increase[disabled],
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity .increase[disabled] {
+  opacity: 0.5;
+}
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] header .quantity span,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="inventory"] ul.items .quantity span {
   min-width: 2ch;
