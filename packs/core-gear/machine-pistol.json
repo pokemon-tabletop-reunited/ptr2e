@@ -25,53 +25,119 @@
       "fling",
       "firearm",
       "reload",
-      "switch-grip",
       "steel",
-      "pp-pool-15"
+      "pp-pool-25"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 40,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "readied"
+        ],
         "name": "Machine Pistol",
         "slug": "machine-pistol",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Machine Pistol, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Switch-Grip",
-          "Steel",
-          "PP Pool 15"
-        ],
         "range": {
           "target": "creature",
-          "distance": 0,
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 24,
+        "accuracy": 85,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "readied",
+          "7-strike"
+        ],
+        "name": "Machine Pistol (Auto)",
+        "slug": "machine-pistol-auto",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "machine-pistol",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 55,
+        "accuracy": 80,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "dash",
+          "priority-1"
+        ],
+        "name": "Machine Pistol (Hip Fire)",
+        "slug": "machine-pistol-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "wide-line",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "machine-pistol",
+        "contestType": "",
+        "contestEffect": "",
         "slot": null
       }
     ],
-    "description": "Effect: The user may use the Attack Machine Pistol, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "",
     "weaponType": "untyped",
-    "weaponPp": 15,
-    "weaponRange": "Creature",
+    "weaponPp": 25,
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,

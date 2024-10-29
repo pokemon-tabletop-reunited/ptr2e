@@ -17,7 +17,7 @@
     "fling": {
       "type": "steel",
       "power": 50,
-      "accuracy": 100
+      "accuracy": 95
     },
     "rarity": "rare",
     "traits": [
@@ -32,41 +32,109 @@
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 65,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "readied"
+        ],
         "name": "Semi-Auto Shotgun",
         "slug": "semi-auto-shotgun",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Semi-Auto Shotgun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Two-Handed",
-          "Shouldered",
-          "Steel",
-          "PP Pool 10"
-        ],
         "range": {
-          "target": "creature",
-          "distance": 0,
+          "target": "wide-line",
+          "distance": 6,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 145,
+        "accuracy": 75,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "readied"
+        ],
+        "name": "Semi-Auto Shotgun (Breaching Shots)",
+        "slug": "semi-auto-shotgun-breaching-shots",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "wide-line",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "semi-auto-shotgun",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 65,
+        "accuracy": 80,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "dash",
+          "priority-1"
+        ],
+        "name": "Semi-Auto Shotgun (Hip Fire)",
+        "slug": "semi-auto-shotgun-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "cone",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": 1
+        },
+        "variant": "semi-auto-shotgun",
+        "contestType": "",
+        "contestEffect": "",
         "slot": null
       }
     ],

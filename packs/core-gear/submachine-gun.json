@@ -17,7 +17,7 @@
     "fling": {
       "type": "steel",
       "power": 50,
-      "accuracy": 100
+      "accuracy": 95
     },
     "rarity": "rare",
     "traits": [
@@ -25,54 +25,151 @@
       "fling",
       "firearm",
       "reload",
-      "switch-grip",
-      "shouldered",
       "steel",
-      "pp-pool-18"
+      "pp-pool-35"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 45,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "readied"
+        ],
         "name": "Submachine Gun",
         "slug": "submachine-gun",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Submachine Gun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Switch-Grip",
-          "Shouldered",
-          "Steel",
-          "PP Pool 18"
-        ],
         "range": {
           "target": "creature",
-          "distance": 0,
+          "distance": 12,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 95,
+        "accuracy": 85,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "readied"
+        ],
+        "name": "Submachine Gun (Burst)",
+        "slug": "submachine-gun-burst",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "submachine-gun",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 70,
+        "accuracy": 80,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "readied"
+        ],
+        "name": "Submachine Gun (Spray)",
+        "slug": "submachine-gun-spray",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "cone",
+          "distance": 7,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 13,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "submachine-gun",
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 60,
+        "accuracy": 70,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "dash",
+          "priority-1"
+        ],
+        "name": "Submachine Gun (Hip Fire)",
+        "slug": "submachine-gun-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "wide-line",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "submachine-gun",
+        "contestType": "",
+        "contestEffect": "",
         "slot": null
       }
     ],
     "description": "Effect: The user may use the Attack Submachine Gun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
     "weaponType": "untyped",
-    "weaponPp": 18,
+    "weaponPp": 35,
     "weaponRange": "Creature",
     "slug": null,
     "container": null,

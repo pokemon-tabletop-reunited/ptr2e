@@ -17,7 +17,7 @@
     "fling": {
       "type": "steel",
       "power": 50,
-      "accuracy": 100
+      "accuracy": 95
     },
     "rarity": "uncommon",
     "traits": [
@@ -25,48 +25,114 @@
       "fling",
       "firearm",
       "reload",
-      "two-handed",
-      "shouldered",
       "steel",
       "pp-pool-10"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 60,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "readied",
+          "missile"
+        ],
         "name": "Lever-Action Rifle",
         "slug": "lever-action-rifle",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Lever-Action Rifle, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Two-Handed",
-          "Shouldered",
-          "Steel",
-          "PP Pool 10"
-        ],
         "range": {
           "target": "creature",
-          "distance": 0,
+          "distance": 18,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 45,
+        "accuracy": 90,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "readied",
+          "missile",
+          "3-strike"
+        ],
+        "name": "Lever-Action Rifle (Snap Shot)",
+        "slug": "lever-action-rifle-snap-shot",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 14,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "lever-action-rifle",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 60,
+        "accuracy": 80,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "readied",
+          "missile"
+        ],
+        "name": "Lever-Action Rifle (Hip Fire)",
+        "slug": "lever-action-rifle-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "lever-action-rifle",
+        "contestType": "",
+        "contestEffect": "",
         "slot": null
       }
     ],

@@ -17,7 +17,7 @@
     "fling": {
       "type": "steel",
       "power": 50,
-      "accuracy": 100
+      "accuracy": 95
     },
     "rarity": "uncommon",
     "traits": [
@@ -25,55 +25,157 @@
       "fling",
       "firearm",
       "reload",
-      "two-handed",
-      "shouldered",
       "steel",
       "pp-pool-2"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 80,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "readied"
+        ],
         "name": "Break-Action Shotgun",
         "slug": "break-action-shotgun",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Break-Action Shotgun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Two-Handed",
-          "Shouldered",
-          "Steel",
-          "PP Pool 2"
-        ],
         "range": {
-          "target": "creature",
-          "distance": 0,
+          "target": "wide-line",
+          "distance": 8,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 135,
+        "accuracy": 90,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "readied"
+        ],
+        "name": "Break-Action Shotgun (Double)",
+        "slug": "break-action-shotgun-double",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "wide-line",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "break-action-shotgun",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 80,
+        "accuracy": 75,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "dash",
+          "priority-1"
+        ],
+        "name": "Break-Action Shotgun (Hip Fire)",
+        "slug": "break-action-shotgun-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "cone",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": 1
+        },
+        "variant": "break-action-shotgun",
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 135,
+        "accuracy": 70,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "dash",
+          "priority-1"
+        ],
+        "name": "Break-Action Shotgun (Double Hip Fire)",
+        "slug": "break-action-shotgun-double-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "cone",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": 1
+        },
+        "variant": "break-action-shotgun",
+        "contestType": "",
+        "contestEffect": "",
         "slot": null
       }
     ],
-    "description": "Effect: The user may use the Attack Break-Action Shotgun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "",
     "weaponType": "untyped",
     "weaponPp": 2,
-    "weaponRange": "Cone",
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,

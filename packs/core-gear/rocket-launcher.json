@@ -15,9 +15,9 @@
     },
     "grade": "A",
     "fling": {
-      "type": "fire",
+      "type": "steel",
       "power": 80,
-      "accuracy": 100
+      "accuracy": 90
     },
     "rarity": "rare",
     "traits": [
@@ -25,57 +25,52 @@
       "fling",
       "firearm",
       "reload",
-      "two-handed",
-      "shouldered",
-      "readied",
-      "fire",
-      "pp-pool-4"
+      "steel",
+      "pp-pool-1"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 120,
+        "accuracy": 80,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "explode",
+          "readied",
+          "two-handed",
+          "blast-1",
+          "flinch-3"
+        ],
         "name": "Rocket Launcher",
         "slug": "rocket-launcher",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF. On resolution, the user is Flinched.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Rocket Launcher, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Two-Handed",
-          "Shouldered",
-          "Readied",
-          "Fire",
-          "PP Pool 4"
-        ],
         "range": {
-          "target": "creature",
-          "distance": 0,
+          "target": "blast",
+          "distance": 62,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
-        "types": [
-          "untyped"
-        ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
         "contestType": "",
         "contestEffect": "",
-        "free": false,
         "slot": null
       }
     ],
-    "description": "Effect: The user may use the Attack Rocket Launcher, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "",
     "weaponType": "untyped",
-    "weaponPp": 4,
-    "weaponRange": "Blast",
+    "weaponPp": 1,
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,
