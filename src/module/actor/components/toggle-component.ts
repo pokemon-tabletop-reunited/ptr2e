@@ -18,13 +18,13 @@ class ToggleComponent extends ActorComponent {
     static attachListeners(htmlElement: HTMLElement, actor: ActorPTR2e) {
         for (const togglesSection of htmlQueryAll(htmlElement, "ul.toggles-list")) {
           togglesSection.addEventListener("change", (event) => {
-              const toggleRow = htmlClosest(event.target, "[data-effect-id][data-domain][data-option]");
+              const toggleRow = htmlClosest(event.target, "[data-effect-uuid][data-domain][data-option]");
               const checkbox = htmlQuery<HTMLInputElement>(toggleRow, "input[data-action=toggle-roll-option]");
               const suboptionsSelect = htmlQuery<HTMLSelectElement>(toggleRow, "select[data-action=set-suboption");
-              const { domain, option, effectId } = toggleRow?.dataset ?? {};
+              const { domain, option, effectUuid } = toggleRow?.dataset ?? {};
               const suboption = suboptionsSelect?.value ?? null;
               if (checkbox && domain && option) {
-                  actor.toggleRollOption(domain, option, effectId ?? null, checkbox.checked, suboption);
+                  actor.toggleRollOption(domain, option, effectUuid ?? null, checkbox.checked, suboption);
               }
           });
       }

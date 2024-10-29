@@ -51,7 +51,7 @@ interface ActorSynthetics {
 
 export interface RollOptionToggle {
   /** The ID of the effect with a change model for this toggle */
-  effectId: string;
+  effectUuid: string;
   label: string;
   placement: string;
   domain: string;

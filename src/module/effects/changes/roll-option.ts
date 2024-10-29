@@ -145,7 +145,7 @@ export default class RollOptionChangeSystem extends ChangeModel {
       }
 
       const toggle: RollOptionToggle = {
-        effectId: this.effect.id,
+        effectUuid: this.effect.uuid,
         label: this.getReducedLabel(),
         placement: this.placement ?? "effects",
         domain: this.domain,
