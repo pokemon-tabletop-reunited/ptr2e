@@ -24,7 +24,7 @@
                     <div class="quantity">
                         <a class="decrease" data-action="decrease-quantity" title="[Click] Decrease by 1<br>[Shift-Click] Decrease by 5<br>[Control-Click] Decrease by 10" draggable="false">–</a>
                         <span>{{this.system.quantity}}</span>
-                        <a class="increase" data-action="increase-quantity" title="[Click] Increase by 1<br>[Shift-Click] Increase by 5<br>[Control-Click] Increase by 10" draggable="false">+</a>
+                        <a class="increase" data-action="increase-quantity" title="[Click] Increase by 1<br>[Shift-Click] Increase by 5<br>[Control-Click] Increase by 10" draggable="false" {{#if (isdefined this.system.stack)}}{{#unless (lt this.system.quantity this.system.stack)}} disabled="disabled"{{/unless}}{{/if}}>+</a>
                     </div>
                     {{/if}}
                     <div class="item-controls">

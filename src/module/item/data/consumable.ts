@@ -1,5 +1,5 @@
 import { ContainerPTR2e } from "@item";
-import { HasContainer, HasDescription, HasEmbed, HasGearData, HasMigrations, HasSlug, HasTraits } from "@module/data/index.ts";
+import { HasContainer, HasDescription, HasEmbed, HasGearData, HasMigrations, HasSlug, HasTraits, Trait } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
@@ -63,10 +63,7 @@ export default abstract class ConsumableSystem extends ConsumableExtension {
     return {
       ...super.defineSchema() as ConsumableSystemSchemaExtension,
       consumableType: new fields.StringField({ required: true, initial: "other", choices: CONSUMABLE_TYPES, label: "PTR2E.FIELDS.consumable.type.label", hint: "PTR2E.FIELDS.consumable.type.hint" }),
-      charges: new fields.SchemaField({
-        value: new fields.NumberField({ required: true, initial: 1, min: 0, step: 1, label: "PTR2E.FIELDS.consumable.charges.value.label", hint: "PTR2E.FIELDS.consumable.charges.value.hint" }),
-        max: new fields.NumberField({ required: true, initial: 1, min: 1, step: 1, label: "PTR2E.FIELDS.consumable.charges.max.label", hint: "PTR2E.FIELDS.consumable.charges.max.hint" }),
-      }),
+      stack: new fields.NumberField({ required: true, initial: 1, min: 1, step: 1, label: "PTR2E.FIELDS.consumable.stack.label", hint: "PTR2E.FIELDS.consumable.stack.hint" }),
       modifier: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.consumable.modifier.label", hint: "PTR2E.FIELDS.consumable.modifier.hint" }),
       cost: new fields.NumberField({
         required: true,
@@ -79,10 +76,6 @@ export default abstract class ConsumableSystem extends ConsumableExtension {
     };
   }
 
-  static override validateJoint(data: ConsumableSystem['_source']) {
-    if (data.charges.value > data.charges.max) throw new Error("PTR2E.Errors.ChargesValueGreaterThanMax");
-  }
-
   override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;
@@ -91,6 +84,18 @@ export default abstract class ConsumableSystem extends ConsumableExtension {
       this.parent.updateSource({
         img: "systems/ptr2e/img/icons/consumable_icon.webp"
       })
+    }
+  }
+  
+  override prepareBaseData() {
+    super.prepareBaseData();
+
+    // Add stack value if greater than 1
+    if (this.stack! > 1) {
+      const stackTraitSlug = `stack-${this.stack}`;
+      if (Trait.isValid(stackTraitSlug) && !this.traits.has(stackTraitSlug)) {
+        this.addTraitFromSlug(stackTraitSlug, true);
+      }
     }
   }
 }
@@ -103,16 +108,7 @@ export default interface ConsumableSystem extends ModelPropsFromSchema<Consumabl
 
 interface ConsumableSystemSchema extends foundry.data.fields.DataSchema, ConsumableSystemSchemaExtension {
   consumableType: foundry.data.fields.StringField<string, ConsumableType, true, false, true>;
-  charges: foundry.data.fields.SchemaField<{
-    value: foundry.data.fields.NumberField<number, number, true, false, true>;
-    max: foundry.data.fields.NumberField<number, number, true, false, true>;
-  }, {
-    value: number;
-    max: number;
-  }, {
-    value: number;
-    max: number;
-  }, true, false, true>;
+  stack: foundry.data.fields.NumberField<number, number, true, true, true>;
   modifier: foundry.data.fields.NumberField<number, number, true, true, true>;
   cost: foundry.data.fields.NumberField<number, number, true, true, true>;
 }

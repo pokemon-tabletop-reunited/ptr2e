@@ -775,7 +775,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             }
             case "decrease-quantity": {
               item.update({
-                "system.quantity": Math.max(0, item.system.quantity as number - amount),
+                "system.quantity": Math.max(0, Math.min(item.system.quantity as number - amount, item.system.stack as number ?? Number.MAX_SAFE_INTEGER)),
               });
               break;
             }

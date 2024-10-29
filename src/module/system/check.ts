@@ -177,11 +177,16 @@ class CheckPTR2e {
             item &&
             item.type === "consumable" &&
             item.actor.items.has(item.id) &&
-            (item as ConsumablePTR2e).system.charges.value > 0
+            (item as ConsumablePTR2e).system.quantity > 0
         ) {
-            await item.update({
-                "system.charges.value": (item as ConsumablePTR2e).system.charges.value - 1,
-            });
+            const newQuantity = (item as ConsumablePTR2e).system.quantity - 1;
+            if (newQuantity > 0) {
+                await item.update({
+                    "system.quantity": newQuantity,
+                });
+            } else {
+                await item.delete();
+            }
         }
 
         return results;
@@ -431,11 +436,16 @@ class CheckPTR2e {
             item &&
             item.type === "consumable" &&
             item.actor.items.has(item.id) &&
-            (item as ConsumablePTR2e).system.charges.value > 0
+            (item as ConsumablePTR2e).system.quantity > 0
         ) {
-            await item.update({
-                "system.charges.value": (item as ConsumablePTR2e).system.charges.value - 1,
-            });
+            const newQuantity = (item as ConsumablePTR2e).system.quantity - 1;
+            if (newQuantity > 0) {
+                await item.update({
+                    "system.quantity": newQuantity,
+                });
+            } else {
+                await item.delete();
+            }
         }
 
         if(effectsToApply.length) {
@@ -540,11 +550,16 @@ class CheckPTR2e {
             item &&
             item.type === "consumable" &&
             item.actor.items.has(item.id) &&
-            (item as ConsumablePTR2e).system.charges.value > 0
+            (item as ConsumablePTR2e).system.quantity > 0
         ) {
-            await item.update({
-                "system.charges.value": (item as ConsumablePTR2e).system.charges.value - 1,
-            });
+            const newQuantity = (item as ConsumablePTR2e).system.quantity - 1;
+            if (newQuantity > 0) {
+                await item.update({
+                    "system.quantity": newQuantity,
+                });
+            } else {
+                await item.delete();
+            }
         }
 
         return roll;
