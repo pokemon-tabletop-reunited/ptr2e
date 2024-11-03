@@ -156,7 +156,7 @@ class ActorPTR2e<
   }
 
   get luck(): number {
-    return this.isAce ? this.system.skills.get("luck")!.total : 0;
+    return this.isAce ? Math.max(this.system.skills.get("luck")!.total - 1, 0) : 0;
   }
 
   get spendableLuck(): number {
@@ -176,10 +176,10 @@ class ActorPTR2e<
       const skills = this.system.toObject().skills;
       const luckSkill = skills.find((skill) => skill.slug === "luck");
       if(!luckSkill) return [];
-      luckSkill.value = Math.max(luck - amount, 1);
+      luckSkill.value = Math.max(luck - amount, 0) + 1;
 
       amount -= luck;
-      notifications.push({name: this.name, amount: luck - luckSkill.value, leftover: luckSkill.value});
+      notifications.push({name: this.name, amount: luck + 1 - luckSkill.value, leftover: luckSkill.value});
       pendingUpdates.push({ _id: this.id, "system.skills": skills });
     }
     if (amount <= 0) {
