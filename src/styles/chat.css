@@ -626,3 +626,45 @@
     opacity: 1;
   }
 }
+.chat-message.message.experience .modifiers {
+  display: none;
+  flex-direction: column;
+  gap: 0.25em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.chat-message.message.experience .modifiers .circumstance-modifier {
+  display: flex;
+  justify-content: space-between;
+}
+.chat-message.message.experience .awarded-to {
+  display: none;
+  flex-direction: column;
+  gap: 0.25em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.chat-message.message.experience .awarded-to .awarded-exp {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  --img-size: 32px;
+}
+.chat-message.message.experience .awarded-to .awarded-exp .icon {
+  height: var(--img-size);
+  width: var(--img-size);
+  border: none;
+}
+.chat-message.message.experience .awarded-to .awarded-exp .text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.chat-message.message.experience .awarded-to .awarded-exp .text .exp {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}

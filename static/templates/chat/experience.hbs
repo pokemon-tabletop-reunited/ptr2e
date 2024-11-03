@@ -1,0 +1,40 @@
+<main {{#if undone}}class="undone" {{/if}}>
+    <p>Awarded {{expBase}} experience!</p>
+
+    <div class="collapse-button">
+        <button type="button" class="collapse-rolls">Show Modifiers</button>
+    </div>
+    <article class="modifiers collapse-rolls collapsed">
+        {{#each modifiers}}
+        <div class="circumstance-modifier">
+            <span>{{label}}</span>
+            <span>{{bonus}}</span>
+        </div>
+        {{/each}}
+    </article>
+
+    <div class="collapse-button">
+        <button type="button" class="collapse-rolls">Show Actors</button>
+    </div>
+    <article class="awarded-to collapse-rolls collapsed">
+        {{#each expAppliedActors}}
+        <div class="awarded-exp">
+            <img class="icon" src="{{actor.img}}" data-tooltip-direction="LEFT" data-tooltip="{{actor.name}}" />
+            <div class="text">
+                <div class="exp">
+                    <span class="old">{{localize "PTR2E.XP.Level" level=old.level}} [{{old.experience}}]</span>
+                    <span class="sep">&rarr;</span>
+                    <span class="new">{{localize "PTR2E.XP.Level" level=new.level}} [{{new.experience}}]</span>
+                </div>
+                {{#if levelGain}}<span class="gain-level">({{localize "PTR2E.XP.LevelUp" diff=levelGain}})</span>{{/if}}
+            </div>
+        </div>
+        {{/each}}
+    </article>
+
+    {{#if rollNotes}}
+    <section class="notes">
+        {{{rollNotes}}}
+    </section>
+    {{/if}}
+</main>

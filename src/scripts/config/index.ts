@@ -9,7 +9,7 @@ import { MeasuredTemplatePTR2e } from "@module/canvas/measured-template.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { BasicChangeSystem, ChangeModel } from "@data";
 import { ActiveEffectPTR2e } from "@module/effects/index.ts";
-import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem, SkillMessageSystem, CaptureMessageSystem } from "@module/chat/index.ts";
+import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem, ItemMessageSystem, SkillMessageSystem, CaptureMessageSystem, ExperienceMessageSystem } from "@module/chat/index.ts";
 import Traits from "static/traits.json" assert { type: "json" };
 import ItemDirectoryPTR2e from "@item/sidebar.ts";
 import { StatusEffects } from "./effects.ts";
@@ -22,10 +22,13 @@ import AfflictionActiveEffectSystem from "@module/effects/data/affliction.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { default as Skills } from "./skills.ts";
+import { default as CircumstanceModifiers } from "./circumstance-modifiers.ts";
 import { CheckRoll } from "@system/rolls/check-roll.ts";
 import { AttackRoll } from "@system/rolls/attack-roll.ts";
 import { CaptureRoll } from "@system/rolls/capture-roll.ts";
 import trackableAttributes from "./trackable-token-attributes.ts";
+import { RestApp } from "@module/apps/rest.ts";
+import { ExpApp } from "@module/apps/exp.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -37,6 +40,10 @@ export const PTRCONFIG = {
         sheetClasses: {
             effect: ActiveEffectConfig,
         }
+    },
+    Applications: {
+        RestApp,
+        ExpApp,
     },
     Actor: {
         documentClass: ActorPTR2e,
@@ -60,6 +67,7 @@ export const PTRCONFIG = {
         dataModels: {
             item: ItemMessageSystem,
             attack: AttackMessageSystem,
+            experience: ExperienceMessageSystem,
             "damage-applied": DamageAppliedMessageSystem,
             skill: SkillMessageSystem,
             capture: CaptureMessageSystem
@@ -145,6 +153,7 @@ export const PTRCONFIG = {
     data: {
         traits: Traits,
         skills: Skills,
+        circumstanceModifiers: CircumstanceModifiers,
     },
     statusEffects: StatusEffects,
     specialStatusEffects: {

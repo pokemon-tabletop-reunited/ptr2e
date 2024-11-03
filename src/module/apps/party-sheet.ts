@@ -6,7 +6,6 @@ import {
   ApplicationV2Expanded,
 } from "./appv2-expanded.ts";
 import FolderConfigPTR2e from "@module/folder/sheet.ts";
-import { RestApp } from "@module/apps/rest.ts";
 
 class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixin(
   ApplicationV2Expanded
@@ -39,7 +38,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
             label: "PTR2E.ActorSheet.Rest",
             action: "rest",
             visible: true,
-          }
+          },
         ]
       },
       dragDrop: [
@@ -78,7 +77,7 @@ class PartySheetPTR2e extends foundry.applications.api.HandlebarsApplicationMixi
           if (owner as ActorPTR2e) {
             restParticipants.unshift(owner as unknown as ActorPTR2e);
           }
-          new RestApp(this.folder.name, restParticipants).render(true);
+          new CONFIG.PTR.Applications.RestApp(this.folder.name, restParticipants).render(true);
         },
       }
     },

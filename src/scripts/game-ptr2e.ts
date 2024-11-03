@@ -40,7 +40,8 @@ const GamePTR = {
                 db: ClockDatabase,
                 panel: new ClockPanel({ id: "ptr2e-clock-panel" }),
             },
-            tokenPanel: new TokenPanel(null, { id: "ptr2e-token-panel" })
+            tokenPanel: new TokenPanel(null, { id: "ptr2e-token-panel" }),
+            playerCharacters: async ()=> game.users.filter(u => !u.isGM).map(u => u.character),
         };
 
         // Add reference for 'fainted' to the 'dead' condition

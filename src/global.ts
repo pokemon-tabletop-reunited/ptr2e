@@ -49,6 +49,7 @@ interface GamePTR2e
         system: {
             remigrate: typeof remigrate;
         }
+        playerCharacters: Function;
     };
 }
 

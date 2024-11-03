@@ -81,6 +81,30 @@ export function initializeSettings() {
         restricted: true,
     });
 
+    game.settings.register("ptr2e", "expMode", {
+        name: "PTR2E.Settings.ExpMode.Name",
+        hint: "PTR2E.Settings.ExpMode.Hint",
+        scope: "world",
+        config: true,
+        type: String,
+        choices: {
+            "individual": "Individual",
+            "party": "Party",
+            "all": "All (Reduced for Boxed Pokemon)",
+            "allfull": "All (Full XP)"
+        },
+        default: "party",
+    });
+
+    game.settings.register("ptr2e", "expCircumstanceModifiers", {
+        name: "PTR2E.Settings.ExpCircumstanceModifiers.Name",
+        hint: "PTR2E.Settings.ExpCircumstanceModifiers.Hint",
+        scope: "world",
+        config: false,
+        type: Array,
+        default: [],
+    });
+
     game.settings.register("ptr2e", "artmap", {
         name: "PTR2E.Settings.ArtMap.Name",
         hint: "PTR2E.Settings.ArtMap.Hint",
