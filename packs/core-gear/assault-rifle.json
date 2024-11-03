@@ -17,7 +17,7 @@
     "fling": {
       "type": "steel",
       "power": 50,
-      "accuracy": 100
+      "accuracy": 95
     },
     "rarity": "rare",
     "traits": [
@@ -25,55 +25,157 @@
       "fling",
       "firearm",
       "reload",
-      "switch-grip",
-      "shouldered",
       "steel",
       "pp-pool-18"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 55,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "readied",
+          "missile"
+        ],
         "name": "Assault Rifle",
         "slug": "assault-rifle",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Assault Rifle, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Switch-Grip",
-          "Shouldered",
-          "Steel",
-          "PP Pool 18"
-        ],
         "range": {
           "target": "creature",
-          "distance": 0,
+          "distance": 21,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1,
+          "priority": null,
+          "delay": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 95,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "readied",
+          "missile"
+        ],
+        "name": "Assault Rifle (Burst)",
+        "slug": "assault-rifle-burst",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 21,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "priority": null,
+          "delay": null
+        },
+        "variant": "assault-rifle",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 32,
+        "accuracy": 85,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "4-strike",
+          "readied",
+          "missile"
+        ],
+        "name": "Assault Rifle (Auto)",
+        "slug": "assault-rifle-auto",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "priority": null,
+          "delay": null
+        },
+        "variant": "assault-rifle",
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 65,
+        "accuracy": 75,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "dash",
+          "missile"
+        ],
+        "name": "Assault Rifle (Hip Fire)",
+        "slug": "assault-rifle-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "wide-line",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "priority": null,
+          "delay": null
+        },
+        "variant": "assault-rifle",
+        "contestType": "",
+        "contestEffect": "",
         "slot": null
       }
+      
     ],
-    "description": "Effect: The user may use the Attack Assault Rifle, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "",
     "weaponType": "untyped",
     "weaponPp": 18,
-    "weaponRange": "Creature",
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,

@@ -371,8 +371,9 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           case "small":
             return { width: 0.75, height: 0.75 };
           case "tiny":
-          case "diminutive":
             return { width: 0.5, height: 0.5 };
+          case "diminutive":
+            return { width: 0.25, height: 0.25 };
           default:
             return { width: 1, height: 1 };
         }

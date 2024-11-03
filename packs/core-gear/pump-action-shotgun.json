@@ -32,48 +32,115 @@
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 70,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "readied"
+        ],
         "name": "Pump-Action Shotgun",
         "slug": "pump-action-shotgun",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Pump-Action Shotgun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Two-Handed",
-          "Shouldered",
-          "Steel",
-          "PP Pool 8"
-        ],
         "range": {
-          "target": "creature",
-          "distance": 0,
+          "target": "wide-line",
+          "distance": 7,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 150,
+        "accuracy": 85,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "readied"
+        ],
+        "name": "Pump-Action Shotgun (Slam Trigger)",
+        "slug": "pump-action-shotgun-slam-trigger",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF. </p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "wide-line",
+          "distance": 7,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "pump-action-shotgun",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 70,
+        "accuracy": 70,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "priority-1"
+        ],
+        "name": "Pump-Action Shotgun (Hip Fire)",
+        "slug": "pump-action-shotgun-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF. </p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "cone",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": 1
+        },
+        "variant": "pump-action-shotgun",
+        "contestType": "",
+        "contestEffect": "",
         "slot": null
       }
     ],
-    "description": "Effect: The user may use the Attack Pump-Action Shotgun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "",
     "weaponType": "untyped",
     "weaponPp": 8,
-    "weaponRange": "Cone",
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,

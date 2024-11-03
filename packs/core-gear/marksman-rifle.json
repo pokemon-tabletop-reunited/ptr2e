@@ -32,48 +32,80 @@
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 70,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "readied",
+          "missile"
+        ],
         "name": "Marksman Rifle",
         "slug": "marksman-rifle",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Marksman Rifle, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Two-Handed",
-          "Shouldered",
-          "Steel",
-          "PP Pool 10"
-        ],
         "range": {
           "target": "creature",
-          "distance": 0,
+          "distance": 40,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 110,
+        "accuracy": 100,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "readied",
+          "missile"
+        ],
+        "name": "Marksman Rifle (Pinpoint Shot)",
+        "slug": "marksman-rifle-pinpoint-shot",
+        "description": "<p>Effect: Set-Up: The user gains +2 CRIT stages for 2 Activations, and ends their Activation.</p><p>Resolution: On their next activation, they attack with and resolve this Attack. This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 55,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "marksman-rifle",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
         "slot": null
       }
     ],
-    "description": "Effect: The user may use the Attack Marksman Rifle, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "",
     "weaponType": "untyped",
     "weaponPp": 10,
-    "weaponRange": "Creature",
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,

@@ -25,55 +25,119 @@
       "fling",
       "firearm",
       "reload",
-      "two-handed",
-      "shouldered",
       "steel",
       "pp-pool-6"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 65,
+        "accuracy": 90,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "readied"
+        ],
         "name": "Lever-Action Shotgun",
         "slug": "lever-action-shotgun",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Lever-Action Shotgun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Two-Handed",
-          "Shouldered",
-          "Steel",
-          "PP Pool 6"
-        ],
         "range": {
-          "target": "creature",
-          "distance": 0,
+          "target": "wide-line",
+          "distance": 7,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 135,
+        "accuracy": 80,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "readied",
+          "priority-1"
+        ],
+        "name": "Lever-Action Shotgun (Quick Shot)",
+        "slug": "lever-action-shotgun-quick-shot",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "wide-line",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": 1
+        },
+        "variant": "lever-action-shotgun",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 65,
+        "accuracy": 80,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "dash",
+          "priority-1"
+        ],
+        "name": "Lever-Action Shotgun (Hip Fire)",
+        "slug": "lever-action-shotgun-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": 1
+        },
+        "variant": "lever-action-shotgun",
+        "contestType": "",
+        "contestEffect": "",
         "slot": null
       }
     ],
-    "description": "Effect: The user may use the Attack Lever-Action Shotgun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "",
     "weaponType": "untyped",
     "weaponPp": 6,
-    "weaponRange": "Cone",
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,
