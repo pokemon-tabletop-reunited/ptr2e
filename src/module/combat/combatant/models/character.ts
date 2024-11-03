@@ -25,7 +25,7 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
   private _speedStages = 0;
   private _baseAV = 0;
 
-  get baseAV() {
+  override get baseAV() {
     this.speedStages = this.actor?.speedStage ?? 0;
     return this._baseAV = CharacterCombatantSystem.calculateBaseAV(this.actor, this.combat);
   }

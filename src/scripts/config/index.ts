@@ -1,6 +1,6 @@
 
 import { ActorPTR2e, ActorSheetPTR2e, HumanoidActorSystem, PokemonActorSystem } from "@actor";
-import { CharacterCombatantSystem, CombatPTR2e, CombatSystemPTR2e, CombatTrackerPTR2e, CombatantPTR2e, RoundCombatantSystem } from "@combat";
+import { SummonCombatantSystem, CharacterCombatantSystem, CombatPTR2e, CombatSystemPTR2e, CombatTrackerPTR2e, CombatantPTR2e, RoundCombatantSystem } from "@combat";
 import { ItemPTR2e, data, sheets } from "@item";
 import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
 import { SquareGridPTR2e } from "@module/canvas/grid.ts";
@@ -75,7 +75,8 @@ export const PTRCONFIG = {
         documentClass: CombatantPTR2e,
         dataModels: {
             character: CharacterCombatantSystem,
-            round: RoundCombatantSystem
+            round: RoundCombatantSystem,
+            summon: SummonCombatantSystem
         },
     },
     Dice: {
@@ -108,6 +109,7 @@ export const PTRCONFIG = {
             perk: data.PerkSystemModel,
             species: data.SpeciesSystemModel,
             weapon: data.WeaponSystemModel,
+            summon: data.SummonSystemModel
         },
         sheetClasses: {
             ability: [sheets.AbilitySheetPTR2e],
