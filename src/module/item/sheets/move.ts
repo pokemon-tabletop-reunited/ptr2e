@@ -115,6 +115,8 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
     const archetypes = new Set([...((await game.packs.get("ptr2e.core-perks")?.getIndex({ fields: ["system.design.archetype"] })) ?? []).map(p=>p?.system?.design?.archetype)].filter(a=>!!a && !typeSlugs.includes(sluggify(a))));
 
     const allTutorLists = [
+      { label: "Universal", value: { slug: "", sourceType: "universal" } },
+      
       // type traits (technically just traits, but we'll sort them differently)
       ...Object.values(Types).map(t=>({ label: `Type: ${t.titleCase()}`, value: { slug: t, sourceType: "trait" }, group: "Types" })),
 
