@@ -160,21 +160,20 @@ class ActorPTR2e<
   }
 
   get spendableLuck(): number {
-    const actorsLuck = this.luck;
-    const owner = this.party?.owner;
-    if (!owner || owner == this) return actorsLuck;
-    return actorsLuck + owner.spendableLuck;
+    return (!this.party?.owner || this.party?.owner == this) 
+        ? this.luck 
+        : this.luck + owner.spendableLuck;
   }
 
-  async spendLuck(amount: number): Promise<boolean> {
-    if (amount < 0) return false; // no "spending" a negative amount of luck
-    if (amount > this.spendableLuck) return false;
-
-    const pendingSelfUpdate: Record<string, unknown> = {};
-
+  async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = []): Promise<boolean> {
+    // no "spending" a negative amount of luck
+    if (amount < 0) return false; 
+    // If we can't afford it, don't spend it.
+    if (amount > this.spendableLuck) return false; 
+ 
     const luck = this.luck;
-    if (luck > 0) {
-      const skills = this.system.skills.map((skill) => {
+    if(luck > 0) {
+        const skills = this.system.skills.map((skill) => {
         return skill.slug === "luck"
           ? {
             ...skill,
@@ -182,24 +181,20 @@ class ActorPTR2e<
           }
           : skill;
       });
-      pendingSelfUpdate["system.skills"] = skills;
       amount -= luck;
+      pendingUpdates.push({_id: this.id, "system.skills": skills});
     }
-    if (amount <= 0) {
-      await this.update(pendingSelfUpdate);
-      return true;
-    }
-
+    if(amount <= 0) {
+         if(pendingUpdates.length) await Actor.updateDocuments(pendingUpdates);
+         return true;
+     }
+      
     // we need to spend it from our owner, if we have one
     const owner = this.party?.owner;
     if (!owner || owner == this) return false;
-
-    const parentSpentLuck = owner.spendLuck(amount);
-    if (!parentSpentLuck) return false;
-
-    await this.update(pendingSelfUpdate);
-    return true;
-  }
+    
+    return await owner.spendLuck(amount, pendingUpdates);
+    }
 
   protected override _initializeSource(
     data: Record<string, unknown>,
