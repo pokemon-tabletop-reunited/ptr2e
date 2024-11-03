@@ -4,6 +4,7 @@ import { sluggify } from "@utils";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { HasBaseSchema } from "@module/data/mixins/has-base.ts";
 import SystemTraitsCollection from "@module/data/system-traits-collection.ts";
+import { SlugField } from "@module/data/fields/slug-field.ts";
 
 /**
  * @category Item Data Models
@@ -47,6 +48,7 @@ export default abstract class MoveSystem extends HasEmbed(
           "S+",
         ].reduce((acc, grade) => ({ ...acc, [grade]: grade }), {}),
       }),
+      tutorLists: new fields.SetField(new SlugField({ required: true, nullable: false })),
     };
   }
 
@@ -233,8 +235,11 @@ export default interface MoveSystem extends ModelPropsFromSchema<MoveSystemSchem
   _source: SourceFromSchema<MoveSystemSchema>;
 }
 
+type TutorSlug = SlugField<string, string, true, false, true>;
+
 interface MoveSystemSchema extends foundry.data.fields.DataSchema, HasBaseSchema {
   grade: foundry.data.fields.StringField<string, string, true, false, true>;
+  tutorLists: foundry.data.fields.SetField<TutorSlug, foundry.data.fields.SourcePropFromDataField<TutorSlug>[], Set<foundry.data.fields.SourcePropFromDataField<TutorSlug>>, true, false, true>;
 }
 
 export type MoveSource = BaseItemSourcePTR2e<"move", MoveSystemSource>;
