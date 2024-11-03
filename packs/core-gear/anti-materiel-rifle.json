@@ -17,7 +17,7 @@
     "fling": {
       "type": "steel",
       "power": 80,
-      "accuracy": 100
+      "accuracy": 90
     },
     "rarity": "rare",
     "traits": [
@@ -25,57 +25,85 @@
       "fling",
       "firearm",
       "reload",
-      "two-handed",
-      "shouldered",
-      "readied",
       "steel",
-      "pp-pool-3"
+      "pp-pool-4"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 135,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "two-handed",
+          "readied",
+          "flinch-3"
+        ],
         "name": "Anti-Materiel Rifle",
         "slug": "anti-materiel-rifle",
+        "description": "<p>Effect: Set-Up: The user gains @Affliction[braced], and ends their Activation.</p><p>Resolution: On their next activation, they attack with and resolve this Attack, and are Flinched. This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Anti-Materiel Rifle, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Two-Handed",
-          "Shouldered",
-          "Readied",
-          "Steel",
-          "PP Pool 3"
-        ],
         "range": {
           "target": "creature",
-          "distance": 0,
+          "distance": 35,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 135,
+        "accuracy": 50,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile"
+        ],
+        "name": "Anti-Materiel Rifle (Hip Fire)",
+        "slug": "anti-materiel-rifle-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": 1,
+          "priority": null
+        },
+        "variant": null,
         "contestType": "",
         "contestEffect": "",
-        "free": false,
         "slot": null
       }
     ],
     "description": "Effect: The user may use the Attack Anti-Materiel Rifle, drawing upon this item's PP Pool or the user's PP to use the Attack.",
     "weaponType": "untyped",
-    "weaponPp": 3,
-    "weaponRange": "Creature",
+    "weaponPp": 4,
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,

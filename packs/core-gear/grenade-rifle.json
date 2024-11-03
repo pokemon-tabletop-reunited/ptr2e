@@ -15,9 +15,9 @@
     },
     "grade": "D",
     "fling": {
-      "type": "fire",
+      "type": "steel",
       "power": 50,
-      "accuracy": 100
+      "accuracy": 95
     },
     "rarity": "rare",
     "traits": [
@@ -25,48 +25,43 @@
       "fling",
       "firearm",
       "reload",
-      "two-handed",
-      "shouldered",
-      "fire",
-      "pp-pool-4"
+      "steel",
+      "pp-pool-1"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 70,
+        "accuracy": 90,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "explode",
+          "blast-4"
+        ],
         "name": "Grenade Rifle",
         "slug": "grenade-rifle",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Grenade Rifle, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Two-Handed",
-          "Shouldered",
-          "Fire",
-          "PP Pool 4"
-        ],
         "range": {
-          "target": "creature",
-          "distance": 0,
+          "target": "blast",
+          "distance": 20,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
-        "types": [
-          "untyped"
-        ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
         "contestType": "",
         "contestEffect": "",
-        "free": false,
         "slot": null
       }
     ],

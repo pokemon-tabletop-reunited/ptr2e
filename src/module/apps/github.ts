@@ -149,6 +149,22 @@ class GithubManager {
             }
         }
 
+        if(data.system.abilities) {
+          for(const key in data.system.abilities) {
+            for(const ability of data.system.abilities[key]) {
+              if(ability.uuid) delete ability.uuid;
+            }
+          }
+        }
+
+        if(data.system.moves) {
+          for(const key in data.system.moves) {
+            for(const move of data.system.moves[key]) {
+              if(move.uuid) delete move.uuid;
+            }
+          }
+        }
+
         console.debug(`PTR2e | GithubManager#prepareUpdateData - Prepared data for update:`, data);
 
         // Check if valid document

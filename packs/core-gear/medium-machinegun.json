@@ -16,8 +16,8 @@
     "grade": "B",
     "fling": {
       "type": "steel",
-      "power": 60,
-      "accuracy": 100
+      "power": 65,
+      "accuracy": 95
     },
     "rarity": "rare",
     "traits": [
@@ -25,57 +25,158 @@
       "fling",
       "firearm",
       "reload",
-      "two-handed",
-      "shouldered",
       "readied",
       "steel",
-      "pp-pool-15"
+      "pp-pool-24"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 55,
+        "accuracy": 90,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "readied"
+        ],
         "name": "Medium Machinegun",
         "slug": "medium-machinegun",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Medium Machinegun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Two-Handed",
-          "Shouldered",
-          "Readied",
-          "Steel",
-          "PP Pool 15"
-        ],
         "range": {
           "target": "creature",
-          "distance": 0,
+          "distance": 34,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 105,
+        "accuracy": 85,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "readied"
+        ],
+        "name": "Medium Machinegun (Burst)",
+        "slug": "medium-machinegun-burst",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 34,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "medium-machinegun",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 30,
+        "accuracy": 80,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "set-up",
+          "10-strike",
+          "readied",
+          "flinch-3"
+        ],
+        "name": "Medium Machinegun (Salvo)",
+        "slug": "medium-machinegun-salvo",
+        "description": "<p>Effect: Set-Up: The user gains @Affliction[braced], and ends their Activation.</p><p>Resolution: On their next activation, they attack with and resolve this Attack, and are Flinched. This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 27,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 10,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "medium-machinegun",
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 85,
+        "accuracy": 65,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile"
+        ],
+        "name": "Medium Machinegun (Hip Fire)",
+        "slug": "medium-machinegun-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "wide-line",
+          "distance": 9,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "medium-machinegun",
+        "contestType": "",
+        "contestEffect": "",
         "slot": null
       }
     ],
-    "description": "Effect: The user may use the Attack Medium Machinegun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "",
     "weaponType": "untyped",
-    "weaponPp": 15,
-    "weaponRange": "Creature",
+    "weaponPp": 24,
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,

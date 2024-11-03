@@ -25,55 +25,118 @@
       "fling",
       "firearm",
       "reload",
-      "one-handed",
-      "concealable",
       "steel",
       "pp-pool-15"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 45,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "readied"
+        ],
         "name": "Auto Pistol",
         "slug": "auto-pistol",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Auto Pistol, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "One-Handed",
-          "Concealable",
-          "Steel",
-          "PP Pool 15"
-        ],
         "range": {
           "target": "creature",
-          "distance": 0,
+          "distance": 7,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 70,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "readied"
+        ],
+        "name": "Auto Pistol (Double Tap)",
+        "slug": "auto-pistol-double-tap",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 7,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "auto-pistol",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 45,
+        "accuracy": 75,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "priority-1",
+          "dash"
+        ],
+        "name": "Auto Pistol (Hip Fire)",
+        "slug": "auto-pistol-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": 1
+        },
+        "variant": "auto-p",
+        "contestType": "",
+        "contestEffect": "",
         "slot": null
       }
     ],
-    "description": "Effect: The user may use the Attack Auto Pistol, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "",
     "weaponType": "untyped",
     "weaponPp": 15,
-    "weaponRange": "Creature",
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,

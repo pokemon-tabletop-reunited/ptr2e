@@ -372,6 +372,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       advancementPoints: 0,
       inventoryPoints: 0,
       effectChance: 0,
+      hpMultiplier: 1,
+      atkMultiplier: 1,
+      defMultiplier: 1,
+      spaMultiplier: 1,
+      spdMultiplier: 1,
+      speMultiplier: 1,
     };
   }
 
@@ -440,6 +446,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       const key = k as keyof Attributes;
       // if (this.species?.stats[key]) this.attributes[key].base = this.species.stats[key];
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
+      const modifier = this.modifiers[`${key}Multiplier`];
+      if(modifier && !isNaN(modifier) && modifier !== 1) {
+        this.attributes[key].value = Math.round(this.attributes[key].value * Number(modifier));
+      }
     }
 
     this.health.max = this.attributes.hp.value;

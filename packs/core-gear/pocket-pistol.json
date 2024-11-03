@@ -32,48 +32,81 @@
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 35,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "missile",
+          "readied"
+        ],
         "name": "Pocket Pistol",
         "slug": "pocket-pistol",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Pocket Pistol, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "One-Handed",
-          "Concealable",
-          "Steel",
-          "PP Pool 4"
-        ],
         "range": {
           "target": "creature",
-          "distance": 0,
+          "distance": 3,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 35,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "interrupt-2",
+          "contact",
+          "crit-2",
+          "missile"
+        ],
+        "name": "Pocket Pistol (Palmed Shot)",
+        "slug": "pocket-pistol-palmed-shot",
+        "description": "<p>Trigger: The user hits with and resolves a @Trait[contact] Attack.</p><p>Effect: The user attacks the hit creature with this Attacks. This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user hits with and resolves a @Trait[contact] Attack.</p>"
+        },
+        "variant": "pocket-pistol",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
         "slot": null
       }
     ],
-    "description": "Effect: The user may use the Attack Pocket Pistol, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "",
     "weaponType": "untyped",
     "weaponPp": 4,
-    "weaponRange": "Creature",
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,
