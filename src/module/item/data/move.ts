@@ -48,7 +48,11 @@ export default abstract class MoveSystem extends HasEmbed(
           "S+",
         ].reduce((acc, grade) => ({ ...acc, [grade]: grade }), {}),
       }),
-      tutorLists: new fields.SetField(new SlugField({ required: true, nullable: false })),
+      // @ts-expect-error
+      tutorLists: new fields.ArrayField<TutorField, foundry.data.fields.SourcePropFromDataField<TutorField>[], foundry.data.fields.SourcePropFromDataField<TutorField>[]>(new fields.SchemaField({
+        slug: new SlugField({ required: true, nullable: false }),
+        sourceType: new fields.StringField({ required: true}),
+      })),
     };
   }
 
@@ -237,10 +241,16 @@ export default interface MoveSystem extends ModelPropsFromSchema<MoveSystemSchem
 
 type TutorSlug = SlugField<string, string, true, false, true>;
 
+interface TutorField extends foundry.data.fields.DataField {
+  slug: TutorSlug;
+  sourceType: foundry.data.fields.StringField<string, string, true, false, false>;
+}
+
 interface MoveSystemSchema extends foundry.data.fields.DataSchema, HasBaseSchema {
   grade: foundry.data.fields.StringField<string, string, true, false, true>;
-  tutorLists: foundry.data.fields.SetField<TutorSlug, foundry.data.fields.SourcePropFromDataField<TutorSlug>[], Set<foundry.data.fields.SourcePropFromDataField<TutorSlug>>, true, false, true>;
+  tutorLists: foundry.data.fields.ArrayField<TutorField, foundry.data.fields.SourcePropFromDataField<TutorField>[], foundry.data.fields.SourcePropFromDataField<TutorField>[], true, false, true>;
 }
+
 
 export type MoveSource = BaseItemSourcePTR2e<"move", MoveSystemSource>;
 

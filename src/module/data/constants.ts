@@ -86,6 +86,26 @@ const Types = {
     UNTYPED: "untyped",
 } as const;
 
+const EggGroups = {
+  INDETERMINATE: "indeterminate",
+  NOEGGS: "no-eggs",
+  MONSTER: "monster",
+  PLANT: "plant",
+  BUG: "bug",
+  FLYING: "flying",
+  HUMANSHAPE: "humanshape",
+  GROUND: "ground",
+  WATER1: "water1",
+  DRAGON: "dragon",
+  WATER2: "water2",
+  FAIRY: "fairy",
+  MINERAL: "mineral",
+  WATER3: "water3",
+  FIELD: "field",
+  DITTO: "ditto",
+  AMORPHOUS: "amorphous",
+} as const;
+
 const ContestTypes = {
     COOL: "cool",
     CUTE: "cute",
@@ -132,10 +152,11 @@ export {
     WeightUnits,
     Categories,
     Types,
+    EggGroups,
     ContestTypes,
     CarryTypes,
     IdentificationStatuses,
-    AccuracySuccessCategories
+    AccuracySuccessCategories,
 }
 
 export type {

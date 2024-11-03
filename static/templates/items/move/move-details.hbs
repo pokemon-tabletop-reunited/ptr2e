@@ -4,7 +4,15 @@
             Details
         </legend>
         {{formField fields.grade value=source.system.grade}}
-        {{formField fields.tutorLists value=source.system.tutorLists}}
+        {{!-- {{formField fields.tutorLists value=source.system.tutorLists}} --}}
+        <div class="form-group">
+            <label>Tutor Lists</label>
+            <div class="form-fields">
+                <multi-select name="tutorLists">
+                    {{selectOptions allTutorLists selected=tutorLists localize=true}}
+                </multi-select>
+            </div>
+        </div>
         {{!-- {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true localize=true}} --}}
     </fieldset>
 </section>
