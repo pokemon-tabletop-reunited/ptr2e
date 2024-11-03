@@ -156,45 +156,43 @@ class ActorPTR2e<
   }
 
   get luck(): number {
-    return this.isAce ? this.system.skills.get("luck")!.total : 0;  
+    return this.isAce ? this.system.skills.get("luck")!.total : 0;
   }
 
   get spendableLuck(): number {
-    return (!this.party?.owner || this.party?.owner == this) 
-        ? this.luck 
-        : this.luck + owner.spendableLuck;
+    return (!this.party?.owner || this.party?.owner == this)
+      ? this.luck
+      : this.luck + this.party.owner.luck;
   }
 
-  async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = []): Promise<boolean> {
+  async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = [], notifications: {name: string, amount: number, leftover: number}[] = []): Promise<{name: string, amount: number, leftover: number}[]> {
     // no "spending" a negative amount of luck
-    if (amount < 0) return false; 
+    if (amount < 0) return [];
     // If we can't afford it, don't spend it.
-    if (amount > this.spendableLuck) return false; 
- 
+    if (amount > this.spendableLuck) return [];
+
     const luck = this.luck;
-    if(luck > 0) {
-        const skills = this.system.skills.map((skill) => {
-        return skill.slug === "luck"
-          ? {
-            ...skill,
-            value: Math.max(luck - amount, 0),
-          }
-          : skill;
-      });
+    if (luck > 0) {
+      const skills = this.system.toObject().skills;
+      const luckSkill = skills.find((skill) => skill.slug === "luck");
+      if(!luckSkill) return [];
+      luckSkill.value = Math.max(luck - amount, 1);
+
       amount -= luck;
-      pendingUpdates.push({_id: this.id, "system.skills": skills});
+      notifications.push({name: this.name, amount: luck - luckSkill.value, leftover: luckSkill.value});
+      pendingUpdates.push({ _id: this.id, "system.skills": skills });
     }
-    if(amount <= 0) {
-         if(pendingUpdates.length) await Actor.updateDocuments(pendingUpdates);
-         return true;
-     }
-      
+    if (amount <= 0) {
+      if (pendingUpdates.length) await Actor.updateDocuments(pendingUpdates);
+      return notifications;
+    }
+
     // we need to spend it from our owner, if we have one
     const owner = this.party?.owner;
-    if (!owner || owner == this) return false;
-    
-    return await owner.spendLuck(amount, pendingUpdates);
-    }
+    if (!owner || owner == this) return [];
+
+    return await owner.spendLuck(amount, pendingUpdates, notifications);
+  }
 
   protected override _initializeSource(
     data: Record<string, unknown>,

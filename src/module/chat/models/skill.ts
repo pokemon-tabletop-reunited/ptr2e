@@ -226,14 +226,12 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
     }
 
     const spent = await actor.spendLuck(number);
-    if (!spent) {
-      ui.notifications.warn("Could not spend enough luck to apply this increase.");
+    if (!spent?.length) {
+      ui.notifications.warn("Something went wrong while trying to apply Luck!");
       return;
     }
 
-    ui.notifications.info(
-      `Successfully applied Luck to this roll!`
-    );
+    ui.notifications.info(`Luck spent: ${spent.map(s => `${s.name} (Used ${s.amount}, leftover: ${s.leftover})`).join(", ")}`);
 
     const roll = fu.duplicate(this.roll);
     //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
