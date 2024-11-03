@@ -151,6 +151,52 @@ class ActorPTR2e<
     })());
   }
 
+  get luck(): number {
+    return this.system.traits.has("ace") ? this.system.skills.get("luck")!.total : 0;  
+  }
+
+  get spendableLuck(): number {
+    const actorsLuck = this.luck;
+    const owner = this.party?.owner;
+    if (!owner || owner == this) return actorsLuck;
+    return actorsLuck + owner.spendableLuck;
+  }
+
+  async spendLuck(amount: number): Promise<boolean> {
+    if (amount < 0) return false; // no "spending" a negative amount of luck
+    if (amount > this.spendableLuck) return false;
+
+    const pendingSelfUpdate: Record<string, unknown> = {};
+
+    const luck = this.luck;
+    if (luck > 0) {
+      const skills = this.system.skills.map((skill) => {
+        return skill.slug === "luck"
+          ? {
+            ...skill,
+            value: Math.max(luck - amount, 0),
+          }
+          : skill;
+      });
+      pendingSelfUpdate["system.skills"] = skills;
+      amount -= luck;
+    }
+    if (amount <= 0) {
+      await this.update(pendingSelfUpdate);
+      return true;
+    }
+
+    // we need to spend it from our owner, if we have one
+    const owner = this.party?.owner;
+    if (!owner || owner == this) return false;
+
+    const parentSpentLuck = owner.spendLuck(amount);
+    if (!parentSpentLuck) return false;
+
+    await this.update(pendingSelfUpdate);
+    return true;
+  }
+
   protected override _initializeSource(
     data: Record<string, unknown>,
     options?: DataModelConstructionOptions<TParent> | undefined
