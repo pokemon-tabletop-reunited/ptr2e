@@ -17,7 +17,7 @@
     "fling": {
       "type": "steel",
       "power": 60,
-      "accuracy": 100
+      "accuracy": 95
     },
     "rarity": "rare",
     "traits": [
@@ -25,55 +25,157 @@
       "fling",
       "firearm",
       "reload",
-      "two-handed",
-      "shouldered",
       "steel",
-      "pp-pool-24"
+      "pp-pool-30"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 40,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "readied"
+        ],
         "name": "Light Machinegun",
         "slug": "light-machinegun",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Light Machinegun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Two-Handed",
-          "Shouldered",
-          "Steel",
-          "PP Pool 24"
-        ],
         "range": {
           "target": "creature",
-          "distance": 0,
+          "distance": 30,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 100,
+        "accuracy": 90,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "readied",
+          "flinch-2"
+        ],
+        "name": "Light Machinegun (Burst)",
+        "slug": "light-machinegun-burst",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 30,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "light-machinegun-",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 20,
+        "accuracy": 85,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile",
+          "set-up",
+          "12-strike",
+          "readied"
+        ],
+        "name": "Light Machinegun (Salvo)",
+        "slug": "light-machinegun-salvo",
+        "description": "<p>Effect: Set-Up: The user gains @Affliction[braced], and ends their Activation.</p><p>Resolution: On their next activation, they attack with and resolve this Attack, and are Flinched. This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 24,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 12,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "light-machinegun",
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 60,
+        "accuracy": 70,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "missile"
+        ],
+        "name": "Light Machinegun (Hip Fire)",
+        "slug": "light-machinegun-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "wide-line",
+          "distance": 9,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "light-machinegun",
+        "contestType": "",
+        "contestEffect": "",
         "slot": null
       }
     ],
-    "description": "Effect: The user may use the Attack Light Machinegun, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "",
     "weaponType": "untyped",
-    "weaponPp": 24,
-    "weaponRange": "Creature",
+    "weaponPp": 30,
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,
