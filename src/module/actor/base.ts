@@ -151,8 +151,12 @@ class ActorPTR2e<
     })());
   }
 
+  get isAce(): boolean {
+    return this.system.traits.has("ace");
+  }
+
   get luck(): number {
-    return this.system.traits.has("ace") ? this.system.skills.get("luck")!.total : 0;  
+    return this.isAce ? this.system.skills.get("luck")!.total : 0;  
   }
 
   get spendableLuck(): number {
