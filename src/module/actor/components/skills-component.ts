@@ -37,10 +37,10 @@ class SkillsComponent extends ActorComponent {
             for (const skill of actor.system.skills.contents.sort((a, b) =>
                 a.slug.localeCompare(b.slug)
             )) {
-                // set luck and resources as hidden for non-[Ace]s
-                if (["luck", "resources"].includes(skill.slug) && !actor.isAce) {
-                    skill.hidden = true;
-                }
+                // Do not add Luck for non-[Ace]s
+                if(skill.slug === "luck" && !actor.isAce) continue;
+                // Do not add Resources for non-[Ace]s that do not have the Resources skill from their Species
+                if(skill.slug === "resources" && !actor.isAce && (actor.system.species?.skills.get("resources")?.value ?? 0) <= 1) continue;
 
                 if (skill.favourite) {
                     const group = skill.group || "none";
