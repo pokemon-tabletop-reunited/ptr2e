@@ -26,6 +26,8 @@ import { CheckRoll } from "@system/rolls/check-roll.ts";
 import { AttackRoll } from "@system/rolls/attack-roll.ts";
 import { CaptureRoll } from "@system/rolls/capture-roll.ts";
 import trackableAttributes from "./trackable-token-attributes.ts";
+import { RestApp } from "@module/apps/rest.ts";
+import { TutorListsApp } from "@module/apps/tutor-lists.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -48,6 +50,10 @@ export const PTRCONFIG = {
             character: ActorSheetPTR2e,
             "ptu-actor": sheets.PTUSheet,
         },
+    },
+    Applications: {
+        RestApp,
+        TutorListsApp,
     },
     Change: {
         documentClass: ChangeModel,

@@ -239,10 +239,8 @@ export default interface MoveSystem extends ModelPropsFromSchema<MoveSystemSchem
   _source: SourceFromSchema<MoveSystemSchema>;
 }
 
-type TutorSlug = SlugField<string, string, true, false, true>;
-
 interface TutorField extends foundry.data.fields.DataField {
-  slug: TutorSlug;
+  slug: SlugField<string, string, true, false, true>;
   sourceType: foundry.data.fields.StringField<string, string, true, false, false>;
 }
 

@@ -1,3 +1,5 @@
+// main: index.less
+
 /** Application V2 Styles **/
 body {
     --appv2-background-flat: rgba(12,11,22, 0.94);
@@ -1864,6 +1866,22 @@ body {
                     align-items: center;
                     margin-left: auto;
                     gap: 5px;
+                }
+            }
+        }
+    }
+
+    &.tutor-lists-sheet {
+        .tutorable-moves {
+            max-height: 600px;
+            overflow: auto;
+
+            .move {
+                align-items: center;
+                display: flex;
+                .move-icon {
+                    height: 25px;
+                    width: 25px;
                 }
             }
         }

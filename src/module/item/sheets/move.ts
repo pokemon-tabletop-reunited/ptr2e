@@ -3,7 +3,6 @@ import { Tab } from "./document.ts";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 import { Types, EggGroups } from "../../data/constants.ts";
-import { sluggify } from "@utils";
 
 export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -105,26 +104,21 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
   override async _prepareContext() {
     const attack = this.document.system.attack;
 
-    // TODO: some of this really ought to be improved. We shouldn't have to
-    // crawl the compendium to get valid values for some of these things,
-    // at least, not every time.
+    // TODO: rip most of this out, replace it with a custom input that doesn't have validation
+    // Validation isn't worth it here, I think.
 
     const typeSlugs = (Object.values(Types) as unknown as string[]);
 
     const abilities = (await game.packs.get("ptr2e.core-abilities")?.getIndex({ fields: ["name", "system.slug"] })) ?? [];
-    const archetypes = new Set([...((await game.packs.get("ptr2e.core-perks")?.getIndex({ fields: ["system.design.archetype"] })) ?? []).map(p=>p?.system?.design?.archetype)].filter(a=>!!a && !typeSlugs.includes(sluggify(a))));
 
     const allTutorLists = [
-      { label: "Universal", value: { slug: "", sourceType: "universal" } },
+      { label: "Universal", value: { slug: "universal", sourceType: "universal" } },
       
       // type traits (technically just traits, but we'll sort them differently)
       ...Object.values(Types).map(t=>({ label: `Type: ${t.titleCase()}`, value: { slug: t, sourceType: "trait" }, group: "Types" })),
 
       // egg groups
       ...Object.values(EggGroups).map(e=>({ label: `Egg Group: ${e.titleCase()}`, value: { slug: e, sourceType: "egg" }, group: "Egg Groups" })),
-
-      // archetype perks
-      ...archetypes.map(a=>({ label: `Archetype: ${a}`, value: { slug: sluggify(a), sourceType: "archetype" }, group: "Archetypes" })),
       
       // traits
       ...game.ptr.data.traits
