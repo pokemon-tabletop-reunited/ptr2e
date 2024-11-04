@@ -152,6 +152,12 @@ export const PTRCONFIG = {
         traits: Traits,
         skills: Skills,
     },
+    references: {
+        tutoring: {
+            uuid: "Compendium.ptr2e.core-rules.JournalEntry.GxFi9xM5vjCEUUfN.JournalEntryPage.5h5yrfycU36ioaBR",
+            hash: "tutoring",
+        }
+    },
     statusEffects: StatusEffects,
     specialStatusEffects: {
         "DEFEATED": "dead",

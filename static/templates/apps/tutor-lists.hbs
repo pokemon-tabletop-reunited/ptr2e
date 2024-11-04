@@ -1,6 +1,9 @@
 <article class="tutor-lists">
-    <fieldset>
-
+    <fieldset class="toggles">
+        <legend>Tutor List Sources</legend>
+        {{#each toggles as |toggle|}}
+            {{> toggles toggle=toggle}}
+        {{/each}}
     </fieldset>
     <fieldset class="tutorable-moves">
         <legend>Tutorable Moves</legend>
@@ -17,4 +20,8 @@
         </div>
         <span class="move-name">{{move.name}}</span>
     </div>
+{{/inline}}
+
+{{#*inline "toggles"}}
+    <div data-slug="{{toggle.slug}}" class="toggle {{#if toggle.enabled}}on{{else}}off{{/if}}">{{toggle.label}}</div>
 {{/inline}}

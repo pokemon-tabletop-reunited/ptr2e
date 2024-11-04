@@ -13,7 +13,7 @@ export class TutorListsApp extends foundry.applications.api.HandlebarsApplicatio
       classes: ["sheet", "tutor-lists-sheet"],
       position: {
         height: 'auto',
-        width: 230,
+        width: 460,
       },
       window: {
         minimizable: true,
@@ -25,14 +25,23 @@ export class TutorListsApp extends foundry.applications.api.HandlebarsApplicatio
           dropSelector: ".window-content",
         }
       ],
-      actions: {}
+      actions: {
+        "open-tutor-reference": ()=>{
+            const tutoringLink = CONFIG.PTR.references.tutoring;
+            fromUuid(tutoringLink.uuid).then(page=>{
+                if (!page) return;
+                // @ts-ignore
+                page.parent!.sheet.render(true, {pageId: page.id, anchor: tutoringLink.hash});
+            });
+        }
+      }
     },
     { inplace: false }
   );
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
-    actions: {
-      id: "actions",
+    list: {
+      id: "list",
       template: "systems/ptr2e/templates/apps/tutor-lists.hbs",
       scrollable: [".scroll"],
     },
@@ -40,6 +49,7 @@ export class TutorListsApp extends foundry.applications.api.HandlebarsApplicatio
 
   document: ActorPTR2e;
   _tutorMoves: Record<string, PartialItem>;
+  _toggles: Record<string, TutorListButton>;
 
   override get title() {
     return `${this.document.name}'s Tutorable Moves`;
@@ -52,6 +62,7 @@ export class TutorListsApp extends foundry.applications.api.HandlebarsApplicatio
 
     // populate _tutorMoves
     this.tutorMoves();
+    this.toggles();
   }
 
   get isEditable() {
@@ -98,7 +109,7 @@ export class TutorListsApp extends foundry.applications.api.HandlebarsApplicatio
 //     this.document.createEmbeddedDocuments("Item", [item.toObject()]);
 //   }
 
-  hasTutorList(tutorList: any): boolean {
+  hasTutorList(tutorList: TutorList): boolean {
     switch (tutorList!.sourceType) {
         case "universal": return true;
         case "trait": return this.document.system.traits.has(tutorList.slug);
@@ -108,10 +119,14 @@ export class TutorListsApp extends foundry.applications.api.HandlebarsApplicatio
     return false;
   }
 
-  canTutor(move: any): boolean {
+  tutorFromSpecies(move: any): boolean {
     if (this.document.system.species?.moves.levelUp.find(m=>m.uuid === move.uuid)) return true;
     if (this.document.system.species?.moves.tutor.find(m=>m.uuid === move.uuid)) return true;
-    return move?.system?.tutorLists?.some?.((t:any)=>this.hasTutorList(t));
+    return false;
+  }
+
+  canTutor(move: any): boolean {
+    return this.tutorFromSpecies(move) || move?.system?.tutorLists?.some?.((t:any)=>this.hasTutorList(t));
   }
 
   async tutorMoves(): Promise<Record<string, PartialItem>>{
@@ -127,14 +142,83 @@ export class TutorListsApp extends foundry.applications.api.HandlebarsApplicatio
     })();
   }
 
+  async toggles(): Promise<Record<string, TutorListButton>> {
+    return this._toggles ??= await (async ()=>{
+        const speciesSlug = this.document.system.species?.slug ?? "unknown-species"
+        const toggles = {
+            [speciesSlug]: {
+                slug: speciesSlug,
+                label: this.document.system.species?.parent?.name ?? "Species",
+                tutorList: { slug: "", sourceType: "species" },
+                enabled: true
+            },
+        } as Record<string, TutorListButton>;
+        const tutorMoves = await this.tutorMoves();
+        for (const move of Object.values(tutorMoves)) {
+            for (const tutorList of ((move?.system?.tutorLists ?? []) as TutorList[])) {
+                if (!!tutorList && this.hasTutorList(tutorList)) {
+                    const slug = `${tutorList.sourceType}:${tutorList.slug}`;
+                    const label = (()=>{
+                        if (tutorList.sourceType == "universal")
+                            return "Universal";
+                        if (tutorList.sourceType == "trait")
+                            return `[${game.ptr.data.traits.get(tutorList.slug)?.label ?? tutorList.slug.titleCase()}]`;
+                        return `${tutorList.sourceType?.titleCase?.()}: ${tutorList.slug?.titleCase?.()}`;
+                    })();
+                    toggles[slug] = {
+                        slug,
+                        label,
+                        tutorList,
+                        enabled: true
+                    };
+                }
+            }
+        }
+        return toggles;
+    })();
+  }
+
+  async filteredMoves(): Promise<Record<string, PartialItem>> {
+    const tutorMoves = await this.tutorMoves();
+    const toggles = await this.toggles();
+    const moves = {} as Record<string, PartialItem>;
+    for (const toggle of Object.values(toggles)) {
+        if (!toggle.enabled) continue;
+        if (toggle.tutorList.sourceType == "species") {
+            Object.entries(tutorMoves).forEach(([moveSlug, tm])=>{
+                if (!(moveSlug in moves) && this.tutorFromSpecies(tm)) moves[moveSlug] = tm;
+            })
+            continue;
+        }
+        Object.entries(tutorMoves).forEach(([moveSlug, tm])=>{
+            if (moveSlug in moves) return;
+            // @ts-ignore
+            if (tm?.system?.tutorLists?.find?.(tl=>tl.slug === toggle.tutorList.slug && tl.sourceType === toggle.tutorList.sourceType)) moves[moveSlug] = tm;
+        })
+    }
+
+    return moves;
+  }
+
+  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
+    super._attachPartListeners(partId, htmlElement, options);
+    if (partId === "list") {
+        for (const toggle of htmlElement.querySelectorAll(".toggle")) {
+            toggle.addEventListener("click", this._onToggle.bind(this));
+        }
+    }
+  }
+
   override async _prepareContext() {
     // const attacks = this.document.actions.attack.filter(action => !action.free);
 
-    const tutorMoves = await this.tutorMoves();
+    const toggles = await this.toggles();
+    const moves = await this.filteredMoves();
 
     return {
       document: this.document,
-      moves: tutorMoves,
+      toggles,
+      moves,
     };
   }
 
@@ -142,13 +226,22 @@ export class TutorListsApp extends foundry.applications.api.HandlebarsApplicatio
     const frame = await super._renderFrame(options);
 
     // Add send to chat button
-    const infoLabel = game.i18n.localize("PTR2E.ActorSheet.KnownAttacks.hint");
-    const info = `<button type="button" class="header-control fa-solid fa-circle-question info-tooltip" 
+    const infoLabel = game.i18n.localize("PTR2E.ActorSheet.TutorLists.hint");
+    const info = `<button class="header-control fa-solid fa-circle-question info-tooltip tutoring-reference"
+                                data-action="open-tutor-reference" 
                                 data-tooltip="${infoLabel}" aria-label="${infoLabel}" data-tooltip-direction="UP"></button>`;
     this.window.controls.insertAdjacentHTML("afterend", info);
-
-
+    
     return frame;
+  }
+
+  protected _onToggle(event: Event) {
+    const toggleSlug = (event.target as HTMLElement)?.dataset?.slug;
+    if (!toggleSlug) return;
+    const toggle = this._toggles[toggleSlug];
+    if (!toggle) return;
+    toggle.enabled = !toggle.enabled;
+    this.render({});
   }
 
 //   protected static async _onEditAction(this: KnownActionsApp, event: Event) {
@@ -212,3 +305,6 @@ export class TutorListsApp extends foundry.applications.api.HandlebarsApplicatio
 
 
 type PartialItem = { name: string; uuid: string, system: Pick<MoveSystemModel, 'slug' | 'grade' | 'tutorLists'> } 
+type TutorList = { slug: string; sourceType: string };
+type TutorListButton = { slug: string; label: string; tutorList: TutorList; enabled: boolean; };
+

@@ -2358,17 +2358,62 @@ body .application.sheet .form-group {
   margin-left: auto;
   gap: 5px;
 }
+.application.sheet.tutor-lists-sheet .toggles {
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  column-gap: 0.5em;
+  row-gap: 0.2em;
+}
+.application.sheet.tutor-lists-sheet .toggles .toggle {
+  --toggle-color: black;
+  --toggle-background: var(--color-theme-4);
+  --toggle-background-hover: var(--color-theme-3);
+  border: solid 1px var(--border-theme-color);
+  color: var(--toggle-color);
+  background: var(--toggle-background);
+  border-radius: 5px;
+  padding: 0.5em;
+  padding-top: 0.1em;
+  padding-bottom: 0.1em;
+}
+.application.sheet.tutor-lists-sheet .toggles .toggle:hover {
+  background: var(--toggle-background-hover);
+}
+.application.sheet.tutor-lists-sheet .toggles .toggle.off {
+  border-style: dashed;
+  --toggle-background: transparent;
+  --toggle-color: var(--color-text-primary);
+}
+.application.sheet.tutor-lists-sheet .toggles .toggle.off:hover {
+  --toggle-color: black;
+}
 .application.sheet.tutor-lists-sheet .tutorable-moves {
   max-height: 600px;
   overflow: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  row-gap: 0;
 }
 .application.sheet.tutor-lists-sheet .tutorable-moves .move {
-  align-items: center;
   display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid var(--border-theme-color);
 }
 .application.sheet.tutor-lists-sheet .tutorable-moves .move .move-icon {
-  height: 25px;
-  width: 25px;
+  flex: 0 0 28px;
+  height: 28px;
+  width: 28px;
+}
+.application.sheet.tutor-lists-sheet .tutorable-moves .move .move-name {
+  flex-grow: 1;
+  margin: 0 0.25rem;
+}
+.application.sheet.tutor-lists-sheet .tutorable-moves .move:last-child {
+  border-bottom: unset;
 }
 .application.sheet.available-abilities-sheet {
   max-height: 450px;

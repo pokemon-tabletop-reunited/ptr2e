@@ -1,5 +1,3 @@
-// main: index.less
-
 /** Application V2 Styles **/
 body {
     --appv2-background-flat: rgba(12,11,22, 0.94);
@@ -1872,16 +1870,63 @@ body {
     }
 
     &.tutor-lists-sheet {
+        .toggles {
+            display: flex;
+            width: 100%;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            column-gap: 0.5em;
+            row-gap: 0.2em;
+
+            .toggle {
+                --toggle-color: black;
+                --toggle-background: var(--color-theme-4);
+                --toggle-background-hover: var(--color-theme-3);
+
+                border: solid 1px var(--border-theme-color);
+                color: var(--toggle-color);
+                background: var(--toggle-background);
+                border-radius: 5px;
+                padding: 0.5em;
+                padding-top: 0.1em;
+                padding-bottom: 0.1em;
+                &:hover {
+                    background: var(--toggle-background-hover);
+                }
+                &.off {
+                    border-style: dashed;
+                    --toggle-background: transparent;
+                    --toggle-color: var(--color-text-primary);
+                    &:hover {
+                        --toggle-color: black;
+                    }
+                }
+            }
+        }
         .tutorable-moves {
             max-height: 600px;
             overflow: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            row-gap: 0;
 
             .move {
-                align-items: center;
                 display: flex;
+                flex-direction: row;
+                align-items: center;
+                padding: 4px 0;
+                border-bottom: 1px solid var(--border-theme-color);
                 .move-icon {
-                    height: 25px;
-                    width: 25px;
+                    flex: 0 0 28px;
+                    height: 28px;
+                    width: 28px;
+                }
+                .move-name {
+                    flex-grow: 1;
+                    margin: 0 0.25rem;
+                }
+                &:last-child {
+                    border-bottom: unset;
                 }
             }
         }
