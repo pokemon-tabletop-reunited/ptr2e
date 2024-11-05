@@ -83,6 +83,10 @@ export default class AttackPTR2e extends ActionPTR2e {
     if(!this.variant) return this.free;
     
     const original = (this.original as AttackPTR2e);
+    if(!original) {
+      console.warn(`The attack '${this.name}' is set as a variant of '${this.variant}', but it does not exist!`);
+      return false;
+    }
     if(original.free) return true;
     if(original.slot !== null && this.actor?.attacks.actions[original.slot] == original) return true;
     return false;
