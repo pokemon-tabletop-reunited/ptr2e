@@ -2016,6 +2016,18 @@ body {
         }
     }
 
+    &.move-sheet {
+        .tutor-list {
+            display: grid;
+            grid-template-columns: auto auto auto;
+            grid-template-rows: auto auto;
+
+            .input-element-tags {
+                grid-column: 1 / 4;
+            }
+        }
+    }
+
     &.action-sheet {
         .window-content {
             grid-template-columns: unset;

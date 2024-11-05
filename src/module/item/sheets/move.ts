@@ -1,8 +1,6 @@
 import { MovePTR2e } from "@item";
-import { Tab } from "./document.ts";
+import { DocumentSheetConfiguration, Tab } from "./document.ts";
 import { default as ItemSheetPTR2e } from "./base.ts";
-
-import { Types, EggGroups } from "../../data/constants.ts";
 
 export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -104,33 +102,17 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
   override async _prepareContext() {
     const attack = this.document.system.attack;
 
-    // TODO: rip most of this out, replace it with a custom input that doesn't have validation
-    // Validation isn't worth it here, I think.
-
-    const typeSlugs = (Object.values(Types) as unknown as string[]);
-
-    const abilities = (await game.packs.get("ptr2e.core-abilities")?.getIndex({ fields: ["name", "system.slug"] })) ?? [];
-
-    const allTutorLists = [
-      { label: "Universal", value: { slug: "universal", sourceType: "universal" } },
-      
-      // type traits (technically just traits, but we'll sort them differently)
-      ...Object.values(Types).map(t=>({ label: `Type: ${t.titleCase()}`, value: { slug: t, sourceType: "trait" }, group: "Types" })),
-
-      // egg groups
-      ...Object.values(EggGroups).map(e=>({ label: `Egg Group: ${e.titleCase()}`, value: { slug: e, sourceType: "egg" }, group: "Egg Groups" })),
-      
-      // traits
-      ...game.ptr.data.traits
-        .filter(t=>!typeSlugs.includes(t.slug))
-        .map(t=>({ label: `Trait: ${t.label}`, value: { slug: t.slug, sourceType: "trait" }, group: "Traits" })),
-      
-      // all the abilities
-      ...abilities.map(a=>({ label: `Ability: ${a.name}`, value: { slug: a?.system?.slug, sourceType: "ability" }, group: "Abilities" })),
-    ];
-    // @ts-ignore
-    allTutorLists.forEach(tl=>tl.value = JSON.stringify(tl.value, ["slug", "sourceType"]));
-    const tutorLists = this.document.system.tutorLists.map(tl=>JSON.stringify(tl, ["slug", "sourceType"]));
+    const tutorLists = (this.document.system.tutorLists as { slug: string; sourceType: string }[]).map(tl=>({
+      slug: tl.slug,
+      sourceType: tl.sourceType,
+      label: (()=>{
+          if (tl.sourceType == "universal")
+              return "Universal";
+          if (tl.sourceType == "trait")
+              return `[${game.ptr.data.traits.get(tl.slug)?.label ?? tl.slug.titleCase()}]`;
+          return `${tl.sourceType?.titleCase?.()}: ${tl.slug?.titleCase?.()}`;
+      })(),
+    }));
 
     return {
       ...(await super._prepareContext()),
@@ -141,8 +123,56 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
         enrichedDescription: await TextEditor.enrichHTML(attack?.description ?? null),
       },
       tutorLists,
-      allTutorLists,
     };
+  }
+
+  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: DocumentSheetConfiguration<MovePTR2e>): void {
+    super._attachPartListeners(partId, htmlElement, options);
+    if (partId === "details") {
+      const tagAdd = htmlElement.querySelector(".tutor-list button.add")!;
+      tagAdd.addEventListener("click", this._addTutorList.bind(this));
+
+      for (const tagRemove of htmlElement.querySelectorAll(".tutor-list .input-element-tags .remove")) {
+        tagRemove.addEventListener("click", this._removeTutorList.bind(this));
+      }
+    }
+  }
+
+  _addTutorList(event: Event) {
+    const tutorListEl = (event.target as HTMLElement)?.parentElement;
+    if (!tutorListEl) return;
+    const sourceType = (tutorListEl.querySelector(".tutor-list-source-type") as HTMLSelectElement)?.value;
+    const slug = (tutorListEl.querySelector(".tutor-list-slug") as HTMLInputElement)?.value;
+    if (!sourceType || (!slug && sourceType !== "universal")) return;
+    const tutorList = fu.deepClone(this.document.system.tutorLists) as { slug: string; sourceType: string }[];
+    if (sourceType === "universal") {
+      if (!tutorList.find(tl=>tl.sourceType == "universal")) {
+        tutorList.push({ slug: "universal", sourceType: "universal" });
+        this.document.update({
+          "system.tutorLists": tutorList,
+        });
+      }
+      return;
+    }
+
+    // add
+    if (!tutorList.find(tl=>tl.sourceType == sourceType && tl.slug == slug)) {
+      tutorList.push({ slug, sourceType });
+      this.document.update({
+        "system.tutorLists": tutorList,
+      });
+    }
+  }
+
+  _removeTutorList(event: Event) {
+    const tag = (event.target as HTMLElement)?.parentElement;
+    const slug = tag?.dataset?.slug;
+    const sourceType = tag?.dataset?.sourceType;
+    if (!slug || !sourceType) return;
+    this.document.update({
+      // @ts-ignore
+      "system.tutorLists": this.document.system.tutorLists.filter(tl=>tl.slug !== slug || tl.sourceType !== sourceType),
+    }).then(()=>this.render({}));
   }
 
   override _prepareSubmitData(
