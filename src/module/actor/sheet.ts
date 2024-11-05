@@ -148,6 +148,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           if (!this.actor.party) return;
           new PartySheetPTR2e({folder: this.actor.folder!}).render(true);
         },
+        "open-tutorlist": function (this: ActorSheetPTRV2) {
+          new CONFIG.PTR.Applications.TutorListsApp(this.actor).render(true);
+        },
         "edit-movelist": function (this: ActorSheetPTRV2) {
           new KnownActionsApp(this.actor).render(true);
         },

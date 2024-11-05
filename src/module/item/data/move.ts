@@ -1,5 +1,5 @@
 import { ContainerPTR2e, MovePTR2e } from "@item";
-import { ActionPTR2e, AttackPTR2e, HasBase, HasEmbed, Trait } from "@module/data/index.ts";
+import { ActionPTR2e, AttackPTR2e, PTRCONSTS, HasBase, HasEmbed, Trait } from "@module/data/index.ts";
 import { sluggify } from "@utils";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { HasBaseSchema } from "@module/data/mixins/has-base.ts";
@@ -28,25 +28,7 @@ export default abstract class MoveSystem extends HasEmbed(
       grade: new fields.StringField({
         required: true,
         initial: "E",
-        choices: [
-          "E",
-          "E+",
-          "D-",
-          "D",
-          "D+",
-          "C-",
-          "C",
-          "C+",
-          "B-",
-          "B",
-          "B+",
-          "A-",
-          "A",
-          "A+",
-          "S-",
-          "S",
-          "S+",
-        ].reduce((acc, grade) => ({ ...acc, [grade]: grade }), {}),
+        choices: PTRCONSTS.Grades.reduce((acc, grade) => ({ ...acc, [grade]: grade }), {}),
       }),
       // @ts-expect-error
       tutorLists: new fields.ArrayField<TutorField, foundry.data.fields.SourcePropFromDataField<TutorField>[], foundry.data.fields.SourcePropFromDataField<TutorField>[]>(new fields.SchemaField({

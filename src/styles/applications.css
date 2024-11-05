@@ -564,12 +564,17 @@ body .application.sheet .form-group {
   align-items: end;
   border-bottom: 1px solid var(--border-theme-color);
   margin: 0 0.5rem 0 0.5rem;
+  column-gap: 0.5rem;
 }
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active .header .action-controls {
   display: flex;
   flex-direction: row;
   gap: 0.5rem;
 }
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active .header p {
+  flex: 1;
+}
+.application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active .header .open-tutorlist,
 .application.sheet.actor.v2 .window-content .tab.active[data-tab="actions"] section.active .header .edit-movelist {
   padding: 3px 5px;
   background: var(--appv2-background);

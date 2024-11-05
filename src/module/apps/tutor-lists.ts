@@ -3,6 +3,7 @@ import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { ItemPTR2e } from "@item";
 // import MoveSystem from "@item/data/move.ts";
 import { MoveSystemModel } from "@item/data/index.ts";
+import { PTRCONSTS } from "@data";
 // import { ActionEditor } from "./action-editor.ts";
 
 export class TutorListsApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
@@ -136,6 +137,9 @@ export class TutorListsApp extends foundry.applications.api.HandlebarsApplicatio
 
         return tutorableMoves.reduce((tm, m)=>{
             if (!m) return tm;
+            m.system ??= {}
+            m.system.grade ??= "E";
+            m.system.tutorLists ??= [];
             tm[(m as unknown as PartialItem).system.slug] = m as unknown as PartialItem;
             return tm;
         }, {} as Record<string, PartialItem>);
@@ -178,7 +182,7 @@ export class TutorListsApp extends foundry.applications.api.HandlebarsApplicatio
     })();
   }
 
-  async filteredMoves(): Promise<Record<string, PartialItem>> {
+  async filteredMoves(): Promise<PartialItem[]> {
     const tutorMoves = await this.tutorMoves();
     const toggles = await this.toggles();
     const moves = {} as Record<string, PartialItem>;
@@ -186,18 +190,24 @@ export class TutorListsApp extends foundry.applications.api.HandlebarsApplicatio
         if (!toggle.enabled) continue;
         if (toggle.tutorList.sourceType == "species") {
             Object.entries(tutorMoves).forEach(([moveSlug, tm])=>{
-                if (!(moveSlug in moves) && this.tutorFromSpecies(tm)) moves[moveSlug] = tm;
+                if (!(moveSlug in moves) && this.tutorFromSpecies(tm))
+                    moves[moveSlug] = tm;
             })
             continue;
         }
         Object.entries(tutorMoves).forEach(([moveSlug, tm])=>{
-            if (moveSlug in moves) return;
+            if (moveSlug in moves)
+                return;
             // @ts-ignore
-            if (tm?.system?.tutorLists?.find?.(tl=>tl.slug === toggle.tutorList.slug && tl.sourceType === toggle.tutorList.sourceType)) moves[moveSlug] = tm;
+            if (tm?.system?.tutorLists?.find?.(tl=>tl.slug === toggle.tutorList.slug && tl.sourceType === toggle.tutorList.sourceType))
+                moves[moveSlug] = tm;
         })
     }
 
-    return moves;
+    // @ts-ignore
+    const sortedMoves = Object.values(moves).sort((a, b)=> PTRCONSTS.Grades.indexOf(a.system.grade) - PTRCONSTS.Grades.indexOf(b.system.grade));
+
+    return sortedMoves;
   }
 
   override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
