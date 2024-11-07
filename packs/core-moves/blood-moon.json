@@ -1,0 +1,44 @@
+{
+  "name": "Blood Moon",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
+  "system": {
+    "slug": "blood-moon",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "blood-moon",
+        "name": "Blood Moon",
+        "type": "attack",
+        "traits": [
+          "ray",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 140,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: On hit, this attack cannot be used on consecutive activations. In Gloomy Weather, this attack may be used on consecutive activations.</p>",
+        "img": "systems/ptr2e/img/svg/normal_icon.svg"
+      }
+    ],
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "wAKGWpcbGtd89ReA",
+  "effects": []
+}
