@@ -1,0 +1,130 @@
+{
+  "name": "Light Ball",
+  "img": "systems/ptr2e/img/item-icons/light ball.webp",
+  "type": "equipment",
+  "system": {
+    "crafting": {
+      "skill": null,
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "slot": "accessory",
+      "carryType": "stowed",
+      "handsHeld": null
+    },
+    "grade": "B",
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100
+    },
+    "rarity": "rare",
+    "traits": [
+      "combat",
+      "pichu",
+      "pikachu"
+    ],
+    "actions": [
+      {
+        "name": "Light Ball",
+        "slug": "light-ball",
+        "type": "generic",
+        "description": "Effect: The user has their Base ATK and SPATK are increased by 100%.",
+        "traits": [
+          "Combat",
+          "Pichu",
+          "Pikachu"
+        ],
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex"
+        },
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user has their Base ATK and SPATK are increased by 100%.",
+    "slug": "light-ball",
+    "quantity": 1,
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/item_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "vLE9wUHRZVCjdZVE",
+  "effects": [
+    {
+      "name": "Light Ball",
+      "type": "passive",
+      "_id": "8wVD6FM0JneO7jO5",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.base",
+            "value": 2,
+            "predicate": [],
+            "mode": 1,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spa.base",
+            "value": 2,
+            "predicate": [],
+            "mode": 1,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Actor.QyGHXr8k3wOw7gE9.Item.oKZtJIYnhjKMpYaT.ActiveEffect.ishJFjMT0Y4zJ1ll",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.2.0",
+        "createdTime": 1731023050767,
+        "modifiedTime": 1731023050767,
+        "lastModifiedBy": "NGSbEbIP7O7ThFIb"
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXad"
+}
