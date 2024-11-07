@@ -1,0 +1,94 @@
+{
+  "name": "Static",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Static",
+        "slug": "static",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "The user is hit by a [Contact] attack."
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The triggering creature has a 30% chance of gaining @Affliction[paralysis] 5.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The triggering creature has a 30% chance of gaining @Affliction[paralysis] 5.",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "static",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "WNpGnjZkiWLOta0C",
+  "effects": [
+    {
+      "name": "Static",
+      "type": "passive",
+      "_id": "amTeXo2Mw27PeAd9",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.paralysisconitem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "origin",
+            "label": "Static",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.4.1",
+        "createdTime": 1727997780861,
+        "modifiedTime": 1731018279973,
+        "lastModifiedBy": "NGSbEbIP7O7ThFIb"
+      }
+    }
+  ]
+}
