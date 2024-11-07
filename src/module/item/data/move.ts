@@ -1,9 +1,10 @@
 import { ContainerPTR2e, MovePTR2e } from "@item";
-import { ActionPTR2e, AttackPTR2e, HasBase, HasEmbed, Trait } from "@module/data/index.ts";
+import { ActionPTR2e, AttackPTR2e, PTRCONSTS, HasBase, HasEmbed, Trait } from "@module/data/index.ts";
 import { sluggify } from "@utils";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { HasBaseSchema } from "@module/data/mixins/has-base.ts";
 import SystemTraitsCollection from "@module/data/system-traits-collection.ts";
+import { SlugField } from "@module/data/fields/slug-field.ts";
 
 /**
  * @category Item Data Models
@@ -27,26 +28,13 @@ export default abstract class MoveSystem extends HasEmbed(
       grade: new fields.StringField({
         required: true,
         initial: "E",
-        choices: [
-          "E",
-          "E+",
-          "D-",
-          "D",
-          "D+",
-          "C-",
-          "C",
-          "C+",
-          "B-",
-          "B",
-          "B+",
-          "A-",
-          "A",
-          "A+",
-          "S-",
-          "S",
-          "S+",
-        ].reduce((acc, grade) => ({ ...acc, [grade]: grade }), {}),
+        choices: PTRCONSTS.Grades.reduce((acc, grade) => ({ ...acc, [grade]: grade }), {}),
       }),
+      // @ts-expect-error
+      tutorLists: new fields.ArrayField<TutorField, foundry.data.fields.SourcePropFromDataField<TutorField>[], foundry.data.fields.SourcePropFromDataField<TutorField>[]>(new fields.SchemaField({
+        slug: new SlugField({ required: true, nullable: false }),
+        sourceType: new fields.StringField({ required: true}),
+      })),
     };
   }
 
@@ -233,9 +221,16 @@ export default interface MoveSystem extends ModelPropsFromSchema<MoveSystemSchem
   _source: SourceFromSchema<MoveSystemSchema>;
 }
 
+interface TutorField extends foundry.data.fields.DataField {
+  slug: SlugField<string, string, true, false, true>;
+  sourceType: foundry.data.fields.StringField<string, string, true, false, false>;
+}
+
 interface MoveSystemSchema extends foundry.data.fields.DataSchema, HasBaseSchema {
   grade: foundry.data.fields.StringField<string, string, true, false, true>;
+  tutorLists: foundry.data.fields.ArrayField<TutorField, foundry.data.fields.SourcePropFromDataField<TutorField>[], foundry.data.fields.SourcePropFromDataField<TutorField>[], true, false, true>;
 }
+
 
 export type MoveSource = BaseItemSourcePTR2e<"move", MoveSystemSource>;
 

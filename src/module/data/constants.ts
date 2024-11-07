@@ -94,6 +94,26 @@ const ContestTypes = {
     SMART: "smart"
 } as const;
 
+const Grades = [
+    "E",
+    "E+",
+    "D-",
+    "D",
+    "D+",
+    "C-",
+    "C",
+    "C+",
+    "B-",
+    "B",
+    "B+",
+    "A-",
+    "A",
+    "A+",
+    "S-",
+    "S",
+    "S+"
+] as const;
+
 type PokemonCategory = typeof Categories[keyof typeof Categories];
 type PokemonType = typeof Types[keyof typeof Types];
 type ContestType = typeof ContestTypes[keyof typeof ContestTypes];
@@ -133,9 +153,10 @@ export {
     Categories,
     Types,
     ContestTypes,
+    Grades,
     CarryTypes,
     IdentificationStatuses,
-    AccuracySuccessCategories
+    AccuracySuccessCategories,
 }
 
 export type {

@@ -4,6 +4,28 @@
             Details
         </legend>
         {{formField fields.grade value=source.system.grade}}
+        {{!-- {{formField fields.tutorLists value=source.system.tutorLists}} --}}
+        <div class="form-group">
+            <label>Tutor Lists</label>
+            <div class="form-fields tutor-list">
+                <div class="tags input-element-tags">
+                {{#each tutorLists as |tl|}}
+                    <div class="tag" data-slug="{{tl.slug}}" data-source-type="{{tl.sourceType}}">
+                        <span>{{tl.label}}</span>
+                        <a class="remove fa-solid fa-times" data-tooltip="Remove Tag" aria-label="Remove Tag"></a>
+                    </div>
+                {{/each}}
+                </div>
+                <select class="tutor-list-source-type">
+                    <option value="trait">Trait</option>
+                    <option value="egg">Egg Group</option>
+                    <option value="ability">Ability</option>
+                    <option value="universal">Universal</option>
+                </select>
+                <input type="text" class="tutor-list-slug">
+                <button type="button" class="icon fa-solid fa-tag add" data-tooltip="ELEMENTS.TAGS.Add" aria-label="Add Tag"></button>
+            </div>
+        </div>
         {{!-- {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true localize=true}} --}}
     </fieldset>
 </section>

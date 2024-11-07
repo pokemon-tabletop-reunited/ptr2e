@@ -1,5 +1,5 @@
 import { MovePTR2e } from "@item";
-import { Tab } from "./document.ts";
+import { DocumentSheetConfiguration, Tab } from "./document.ts";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
@@ -102,6 +102,18 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
   override async _prepareContext() {
     const attack = this.document.system.attack;
 
+    const tutorLists = (this.document.system.tutorLists as { slug: string; sourceType: string }[]).map(tl=>({
+      slug: tl.slug,
+      sourceType: tl.sourceType,
+      label: (()=>{
+          if (tl.sourceType == "universal")
+              return "Universal";
+          if (tl.sourceType == "trait")
+              return `[${game.ptr.data.traits.get(tl.slug)?.label ?? tl.slug.titleCase()}]`;
+          return `${tl.sourceType?.titleCase?.()}: ${tl.slug?.titleCase?.()}`;
+      })(),
+    }));
+
     return {
       ...(await super._prepareContext()),
       attack: {
@@ -110,7 +122,80 @@ export default class MoveSheet extends ItemSheetPTR2e<MovePTR2e["system"]> {
         fields: attack?.schema.fields,
         enrichedDescription: await TextEditor.enrichHTML(attack?.description ?? null),
       },
+      tutorLists,
     };
+  }
+
+  override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: DocumentSheetConfiguration<MovePTR2e>): void {
+    super._attachPartListeners(partId, htmlElement, options);
+    if (partId === "details") {
+      const tagAdd = htmlElement.querySelector(".tutor-list button.add")!;
+      tagAdd.addEventListener("click", this._addTutorList.bind(this));
+
+      for (const tagRemove of htmlElement.querySelectorAll(".tutor-list .input-element-tags .remove")) {
+        tagRemove.addEventListener("click", this._removeTutorList.bind(this));
+      }
+    }
+  }
+
+  _addTutorList(event: Event) {
+    const tutorListEl = (event.target as HTMLElement)?.parentElement;
+    if (!tutorListEl) return;
+    const sourceType = (tutorListEl.querySelector(".tutor-list-source-type") as HTMLSelectElement)?.value;
+    const slug = (tutorListEl.querySelector(".tutor-list-slug") as HTMLInputElement)?.value;
+    if (!sourceType || (!slug && sourceType !== "universal")) return;
+    const tutorList = fu.deepClone(this.document.system.tutorLists) as { slug: string; sourceType: string }[];
+    if (sourceType === "universal") {
+      if (!tutorList.find(tl=>tl.sourceType == "universal")) {
+        tutorList.push({ slug: "universal", sourceType: "universal" });
+        this.document.update({
+          "system.tutorLists": tutorList,
+        });
+      }
+      return;
+    }
+
+    // add
+    if (!tutorList.find(tl=>tl.sourceType == sourceType && tl.slug == slug)) {
+      tutorList.push({ slug, sourceType });
+      this.document.update({
+        "system.tutorLists": tutorList,
+      });
+    }
+  }
+
+  _removeTutorList(event: Event) {
+    const tag = (event.target as HTMLElement)?.parentElement;
+    const slug = tag?.dataset?.slug;
+    const sourceType = tag?.dataset?.sourceType;
+    if (!slug || !sourceType) return;
+    this.document.update({
+      // @ts-ignore
+      "system.tutorLists": this.document.system.tutorLists.filter(tl=>tl.slug !== slug || tl.sourceType !== sourceType),
+    }).then(()=>this.render({}));
+  }
+
+  override _prepareSubmitData(
+    event: SubmitEvent,
+    form: HTMLFormElement,
+    formData: FormDataExtended
+  ): Record<string, unknown> {
+    const submitData = formData.object;
+
+    if (
+      "tutorLists" in submitData &&
+      submitData["tutorLists"] &&
+      typeof submitData["tutorLists"] === "object" &&
+      Array.isArray(submitData["tutorLists"])
+    ) {
+      // tutorList entries are stored as an array of objects, not an array of strings
+      submitData["system.tutorLists"] = submitData["tutorLists"].map(
+        (tutorList: string) => JSON.parse(tutorList)
+      );
+      delete submitData["tutorLists"];
+    }
+
+    return super._prepareSubmitData(event, form, formData);
   }
 
   // static async _submitAttack(
