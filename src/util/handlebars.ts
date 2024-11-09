@@ -1,6 +1,7 @@
 import { PTRCONSTS, PokemonCategory, PokemonType } from "@data";
 import { capitalize, formatSlug } from "./misc.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
+import * as R from "remeda";
 
 export function registerHandlebarsHelpers() {
     _registerBasicHelpers();
@@ -251,7 +252,7 @@ function _registerBasicHelpers() {
         return a || b;
     });
     Handlebars.registerHelper("not", function (a, b = false) {
-        return a != b;
+      return R.isPlainObject(b) ? !a : a != b;
     });
     Handlebars.registerHelper("divide", (value1, value2) => Number(value1) / Number(value2));
     Handlebars.registerHelper("multiply", (value1, value2) => Number(value1) * Number(value2));

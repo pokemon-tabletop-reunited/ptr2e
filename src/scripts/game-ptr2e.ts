@@ -11,6 +11,7 @@ import PerkWeb from "@module/canvas/perk-tree/perk-web.ts";
 import {TextEnricher} from "./ui/text-enrichers.ts";
 import { remigrate } from "@system/remigrate.ts";
 import { DataStructure } from "@module/apps/data-inspector/data-handler.ts";
+import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
 
 const GamePTR = {
     onInit() {
@@ -73,6 +74,8 @@ const GamePTR = {
 
         // Initialize the art map collection.
         game.ptr.data.artMap.refresh();
+        
+        game.ptr.compendiumBrowser = new CompendiumBrowser();
     },
 };
 

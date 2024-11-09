@@ -132,4 +132,32 @@ export function initializeSettings() {
         type: Number,
         requiresReload: true,
     });
+
+    game.settings.register("ptr2e", "compendiumBrowserPacks", {
+      name: "PTR2E.SETTINGS.CompendiumBrowserPacks.Name",
+      hint: "PTR2E.SETTINGS.CompendiumBrowserPacks.Hint",
+      default: {},
+      type: Object,
+      scope: "world",
+      onChange: () => {
+          game.ptr.compendiumBrowser.initCompendiumList();
+      },
+  });
+
+  game.settings.register("ptr2e", "compendiumBrowserSources", {
+      name: "PTR2E.SETTINGS.compendiumBrowserSources.Name",
+      hint: "PTR2E.SETTINGS.compendiumBrowserSources.Hint",
+      default: {
+          ignoreAsGM: true,
+          showEmptySources: true,
+          showUnknownSources: true,
+          sources: {},
+      },
+      type: Object,
+      scope: "world",
+      onChange: () => {
+          game.ptr.compendiumBrowser.packLoader.reset();
+          game.ptr.compendiumBrowser.initCompendiumList();
+      },
+  });
 }

@@ -19,7 +19,7 @@ class UUIDUtils {
         }
 
         // Retrieve all remaining documents
-        return R.compact(await Promise.all(uuids.map(uuid => fromUuid(uuid))));
+        return R.filter(await Promise.all(uuids.map(uuid => fromUuid(uuid))), R.isTruthy);
     }
 
     static isItemUUID(uuid: unknown): uuid is ItemUUID {

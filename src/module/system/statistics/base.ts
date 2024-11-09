@@ -24,7 +24,7 @@ abstract class BaseStatistic {
         this.slug = data.slug;
         this.label = game.i18n.localize(data.label).trim();
         this.data = { ...data };
-        this.domains = R.uniq((data.domains ??= []));
+        this.domains = R.unique((data.domains ??= []));
         const modifiers = [
             data.modifiers ?? [],
             extractModifiers(this.actor.synthetics, this.domains, data.defferedValueParams),

@@ -1,0 +1,8 @@
+<nav class="sheet-tabs tabs" data-group="tabs">
+  {{#each tabs as |tab|}}
+    <a class="{{tab.cssClass}}" data-action="tab" data-group="{{tab.group}}" data-tab="{{tab.id}}" data-tooltip="{{localize tab.label}}">
+        <i class="{{tab.icon}}"></i>
+        <label>{{localize tab.label}}</label>
+    </a>
+    {{/each}}
+</nav>

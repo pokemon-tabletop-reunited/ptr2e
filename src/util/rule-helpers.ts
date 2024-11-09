@@ -178,7 +178,7 @@ interface ExtractEphemeralEffectsParams {
 
 function isBracketedValue(value: unknown): value is BracketedValue {
     return (
-        R.isObject(value) &&
+        R.isPlainObject(value) &&
         Array.isArray(value.brackets) &&
         (typeof value.field === "string" || !("fields" in value))
     );

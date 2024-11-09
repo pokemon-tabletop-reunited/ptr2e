@@ -165,7 +165,7 @@ class ActorPTR2e<
       : this.luck + this.party.owner.luck;
   }
 
-  async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = [], notifications: {name: string, amount: number, leftover: number}[] = []): Promise<{name: string, amount: number, leftover: number}[]> {
+  async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = [], notifications: { name: string, amount: number, leftover: number }[] = []): Promise<{ name: string, amount: number, leftover: number }[]> {
     // no "spending" a negative amount of luck
     if (amount < 0) return [];
     // If we can't afford it, don't spend it.
@@ -175,11 +175,11 @@ class ActorPTR2e<
     if (luck > 0) {
       const skills = this.system.toObject().skills;
       const luckSkill = skills.find((skill) => skill.slug === "luck");
-      if(!luckSkill) return [];
+      if (!luckSkill) return [];
       luckSkill.value = Math.max(luck - amount, 1);
 
       amount -= luck;
-      notifications.push({name: this.name, amount: luck - luckSkill.value, leftover: luckSkill.value});
+      notifications.push({ name: this.name, amount: luck - luckSkill.value, leftover: luckSkill.value });
       pendingUpdates.push({ _id: this.id, "system.skills": skills });
     }
     if (amount <= 0) {
@@ -1018,11 +1018,11 @@ class ActorPTR2e<
       params.viewOnly || !targetToken?.actor
         ? this
         : this.getContextualClone(
-          R.compact([
+          [
             ...Array.from(params.options),
             ...targetToken.actor.getSelfRollOptions("target"),
             ...initialActionOptions,
-          ]),
+          ].filter(R.isTruthy),
           originEphemeralEffects
         );
 
@@ -1094,7 +1094,7 @@ class ActorPTR2e<
         }
       }
 
-      return R.uniq(traits).sort();
+      return R.unique(traits).sort();
     })();
 
     // Calculate distance and range increment, set as a roll option
@@ -1106,13 +1106,12 @@ class ActorPTR2e<
 
     const originRollOptions =
       selfToken && targetToken
-        ? R.compact(
-          R.uniq([
-            ...selfActor.getSelfRollOptions("origin"),
-            ...actionTraits.map((t) => `origin:action:trait:${t}`),
-            ...(originDistance ? [originDistance] : []),
-          ])
-        )
+        ?
+        R.unique([
+          ...selfActor.getSelfRollOptions("origin"),
+          ...actionTraits.map((t) => `origin:action:trait:${t}`),
+          ...(originDistance ? [originDistance] : []),
+        ]).filter(R.isTruthy)
         : [];
 
     // Target roll options
@@ -1167,19 +1166,19 @@ class ActorPTR2e<
     const targetActor = params.viewOnly
       ? null
       : (params.target?.actor ?? targetToken?.actor)?.getContextualClone(
-        R.compact([...params.options, ...itemOptions, ...originRollOptions]),
+        [...params.options, ...itemOptions, ...originRollOptions].filter(R.isTruthy),
         targetEphemeralEffects
       ) ?? null;
 
     const rollOptions = new Set(
-      R.compact([
+      [
         ...params.options,
         ...selfActor.getRollOptions(params.domains),
         ...(targetActor ? getTargetRollOptions(targetActor) : targetRollOptions),
         ...actionTraits.map((t) => `self:action:trait:${t}`),
         ...itemOptions,
         ...(targetDistance ? [targetDistance] : []),
-      ])
+      ].filter(R.isTruthy)
     );
 
     const rangeIncrement = selfAttack

@@ -152,7 +152,7 @@ function capitalize(input: Maybe<string>) {
 
 function isBracketedValue(value: unknown): value is BracketedValue {
   return (
-    R.isObject(value) &&
+    R.isPlainObject(value) &&
     Array.isArray(value.brackets) &&
     (typeof value.field === "string" || !("fields" in value))
   );
@@ -172,6 +172,17 @@ function fontAwesomeIcon(
   if (fixedWidth) icon.classList.add("fa-fw");
 
   return icon;
+}
+
+/** Check if an element is present in the provided set. Especially useful for checking against literal sets */
+function setHasElement<T extends Set<unknown>>(set: T, value: unknown): value is SetElement<T> {
+  return set.has(value);
+}
+
+/** Create a localization function with a prefixed localization object path */
+function localizer(prefix: string): (...args: Parameters<Localization["format"]>) => string {
+  return (...[suffix, formatArgs]: Parameters<Localization["format"]>) =>
+    formatArgs ? game.i18n.format(`${prefix}.${suffix}`, formatArgs) : game.i18n.localize(`${prefix}.${suffix}`);
 }
 
 /** Short form of type and non-null check */
@@ -375,5 +386,7 @@ export {
   objectHasKey,
   debounceAsync,
   _addDataFieldMigration as addDataFieldMigration,
+  localizer,
+  setHasElement,
 };
 export type { FontAwesomeStyle, SlugCamel };
