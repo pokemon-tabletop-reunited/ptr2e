@@ -5,6 +5,7 @@ import { CompendiumBrowserTab } from "./base.ts";
 import { CompendiumBrowserIndexData, MoveFilters } from "./data.ts";
 import { ActionPTR2e, AttackPTR2e, PTRCONSTS } from "@data";
 import { unique } from "remeda";
+import { formatSlug } from "@utils";
 
 export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
   tabName: ContentTabName = "move"
@@ -12,7 +13,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
   templatePath = "systems/ptr2e/templates/apps/compendium-browser/tabs/move.hbs";
 
   override searchFields = ["name", "description"];
-  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "category", "grade", "power", "accuracy"];
+  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "category", "grade", "power", "accuracy", "types", "cost", "range", "target"];
 
   constructor(browser: CompendiumBrowser) {
     super(browser);
@@ -27,6 +28,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
     const moves: CompendiumBrowserIndexData[] = [];
     const indexFields = ["img", "system.description", "system.traits", "system.actions", "system.grade"];
     const allTraits = new Set<string>();
+    let maxRange = 10;
 
     for await (const { pack, index } of this.browser.packLoader.loadPacks(
       "Item",
@@ -35,7 +37,7 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
     )) {
       debug(`${pack.metadata.label} - ${index.size} entries found`);
       for (const moveData of index) {
-        if(moveData.type !== "move") continue;
+        if (moveData.type !== "move") continue;
 
         moveData.filters = {};
 
@@ -46,9 +48,9 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
 
         const attack = (() => {
           const attack = moveData.system.actions.find((action: ActionPTR2e) => action.type === "attack") as AttackPTR2e;
-          if(!attack) {
+          if (!attack) {
             const action = moveData.system.actions[0];
-            if(!action) {
+            if (!action) {
               console.warn(`PTR2e | Compendium Browser | Move Tab | ${pack.metadata.label} | ${moveData.name} does not have an action.`);
               return null;
             }
@@ -57,12 +59,16 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
           }
           return attack;
         })() as AttackPTR2e;
-        if(!attack) continue;
+        if (!attack) continue;
 
         const traits = unique<string[]>([...(moveData.system.traits ?? []), ...(attack.traits ?? []), ...(attack.types ?? [])]);
 
-        for(const trait of traits) {
+        for (const trait of traits) {
           allTraits.add(trait);
+        }
+
+        if (!isNaN(Number(attack.range?.distance))) {
+          maxRange = Math.max(maxRange, Number(attack.range!.distance));
         }
 
         moves.push({
@@ -75,7 +81,11 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
           grade: moveData.system.grade,
           category: attack.category,
           power: attack.power,
-          accuracy: attack.accuracy
+          accuracy: attack.accuracy,
+          types: attack.types ?? [],
+          range: Number(attack.range?.distance) || null,
+          target: attack.range?.target,
+          cost: attack.cost?.activation
         })
       }
     }
@@ -88,16 +98,23 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
       acc[grade] = grade;
       return acc;
     }, {} as Record<string, string>));
+    this.filterData.checkboxes.target.options = this.generateCheckboxOptions(Object.values(PTRCONSTS.TargetOptions).reduce<Record<string,string>>((acc, target) => ({...acc, [target]: formatSlug(target)}), {}));
     this.filterData.selects.category.options = Object.values(PTRCONSTS.Categories).reduce<Record<string, string>>(
       (acc, category) => ({ ...acc, [category]: category }),
       {}
     )
+    this.filterData.selects.cost.options = {
+      "simple": game.i18n.localize("PTR2E.CompendiumBrowser.Filters.ActionCost.Simple"),
+      "complex": game.i18n.localize("PTR2E.CompendiumBrowser.Filters.ActionCost.Complex"),
+      "free": game.i18n.localize("PTR2E.CompendiumBrowser.Filters.ActionCost.Free")
+    }
     this.filterData.multiselects.traits.options = this.generateMultiselectOptions(allTraits.reduce((acc, trait) => {
       const traitData = game.ptr.data.traits.get(trait);
       if (!traitData) return acc;
       acc[traitData.slug] = traitData.label;
       return acc;
     }, {} as Record<string, string>));
+    this.filterData.sliders.range.values.upperLimit = this.filterData.sliders.range.values.max = maxRange;
 
     debug("Finished loading data");
   }
@@ -106,29 +123,45 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
     const { checkboxes, selects, multiselects, sliders } = this.filterData;
 
     // Grade
-    if(checkboxes.grade.selected.length && !checkboxes.grade.selected.includes(entry.grade)) return false;
+    if (checkboxes.grade.selected.length && !checkboxes.grade.selected.includes(entry.grade)) return false;
 
     // Category
-    if(selects.category.selected.length && selects.category.selected !== entry.category) return false;
+    if (selects.category.selected.length && selects.category.selected !== entry.category) return false;
+
+    // Cost
+    if (selects.cost.selected.length && selects.cost.selected !== entry.cost) return false;
+
+    // Target
+    if (checkboxes.target.selected.length && !checkboxes.target.selected.includes(entry.target)) return false;
 
     // Power
-    if(sliders.power.values.min === 0) {
-      if(!(entry.power === undefined || entry.power === null)) {
-        if(!(entry.power >= sliders.power.values.min && entry.power <= sliders.power.values.max)) return false;
+    if (sliders.power.values.min === 0) {
+      if (!(entry.power === undefined || entry.power === null)) {
+        if (!(entry.power >= sliders.power.values.min && entry.power <= sliders.power.values.max)) return false;
       }
     }
     else {
-      if(!(entry.power >= sliders.power.values.min && entry.power <= sliders.power.values.max)) return false;
+      if (!(entry.power >= sliders.power.values.min && entry.power <= sliders.power.values.max)) return false;
     }
 
     // Accuracy
-    if(sliders.accuracy.values.min === 0) {
-      if(!(entry.accuracy === undefined || entry.accuracy === null)) {
-        if(!(entry.accuracy >= sliders.accuracy.values.min && entry.accuracy <= sliders.accuracy.values.max)) return false;
+    if (sliders.accuracy.values.min === 0) {
+      if (!(entry.accuracy === undefined || entry.accuracy === null)) {
+        if (!(entry.accuracy >= sliders.accuracy.values.min && entry.accuracy <= sliders.accuracy.values.max)) return false;
       }
     }
     else {
-      if(!(entry.accuracy >= sliders.accuracy.values.min && entry.accuracy <= sliders.accuracy.values.max)) return false;
+      if (!(entry.accuracy >= sliders.accuracy.values.min && entry.accuracy <= sliders.accuracy.values.max)) return false;
+    }
+
+    // Range
+    if (sliders.range.values.min === 0) {
+      if (!(entry.range === undefined || entry.range === null)) {
+        if (!(entry.range >= sliders.range.values.min && entry.range <= sliders.range.values.max)) return false;
+      }
+    }
+    else {
+      if (!(entry.range >= sliders.range.values.min && entry.range <= sliders.range.values.max)) return false;
     }
 
     // Traits
@@ -145,11 +178,22 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
           options: {},
           selected: [],
           isExpanded: false
+        },
+        target: {
+          label: "PTR2E.CompendiumBrowser.Filters.Target",
+          options: {},
+          selected: [],
+          isExpanded: false
         }
       },
       selects: {
         category: {
           label: "PTR2E.CompendiumBrowser.Filters.Category",
+          options: {},
+          selected: ""
+        },
+        cost: {
+          label: "PTR2E.CompendiumBrowser.Filters.ActionCost.Label",
           options: {},
           selected: ""
         }
@@ -183,6 +227,17 @@ export class CompendiumBrowserMoveTab extends CompendiumBrowserTab {
             min: 0,
             max: 100,
             step: 5
+          }
+        },
+        range: {
+          label: "PTR2E.CompendiumBrowser.Filters.Range",
+          isExpanded: false,
+          values: {
+            lowerLimit: 0,
+            upperLimit: 10,
+            min: 0,
+            max: 10,
+            step: 1
           }
         }
       },

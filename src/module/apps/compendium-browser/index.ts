@@ -6,7 +6,7 @@ import { PackLoader } from "./loader.ts";
 import { Tab } from "@item/sheets/document.ts";
 import { ItemType } from "@item/data/system.ts";
 import * as R from "remeda";
-import { BrowserFilter, CheckboxData, RangesInputData, RenderResultListOptions, SliderData } from "./tabs/data.ts";
+import { BrowserFilter, CheckboxData, RangesInputData, RenderResultListOptions, SelectData, SliderData } from "./tabs/data.ts";
 import Tagify from "@yaireo/tagify";
 import noUiSlider from "nouislider";
 
@@ -25,11 +25,12 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
         minimizable: true,
         resizable: true,
         controls: [
-          {
-            label: "PTR2E.ItemSheet.SendToChatLabel",
-            icon: "fas fa-arrow-up-right-from-square",
-            action: "toChat"
-          },
+          // TODO: Add button to Open Settings
+          // {
+          //   label: "PTR2E.ItemSheet.SendToChatLabel",
+          //   icon: "fas fa-arrow-up-right-from-square",
+          //   action: "toChat"
+          // },
         ]
       },
       actions: {
@@ -49,12 +50,12 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     controls: {
       id: "controls",
       template: "systems/ptr2e/templates/apps/compendium-browser/controls.hbs",
-      scrollable: [".scroll", ".control-area"]
+      scrollable: [".controls"]
     },
     content: {
       id: "content",
       template: "systems/ptr2e/templates/apps/compendium-browser/content.hbs",
-      scrollable: [".scroll", ".content-area"],
+      scrollable: [".result-list"],
     },
   };
 
@@ -316,6 +317,23 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
             this.#clearScrollLimit(true);
           });
         }
+
+        if(currentTab.isOfType("species", "move")) {
+          const selects = currentTab.filterData.selects;
+          if (selects) {
+            const selectElements = sortContainer.querySelectorAll<HTMLSelectElement>("select[name]");
+            for(const select of selectElements) {
+              const filterName = select.getAttribute("name");
+              if (objectHasKey(selects, filterName)) {
+                const data = selects[filterName] as SelectData;
+                select.addEventListener("change", () => {
+                  data.selected = select.value;
+                  this.render({ parts: ["controls", "content"] });
+                });
+              }
+            }
+          }
+        }
       }
 
       // Clear all filters button
@@ -574,7 +592,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
           const currentValue = currentTab.scrollLimit;
           const maxValue = currentTab.totalItemCount ?? 0;
           if (currentValue < maxValue) {
-            currentTab.scrollLimit = Math.clamp(currentValue + 100, 100, maxValue);
+            currentTab.scrollLimit = Math.clamp(currentValue + 50, 50, maxValue);
             this.#renderResultList({ list, start: currentValue });
           }
         }

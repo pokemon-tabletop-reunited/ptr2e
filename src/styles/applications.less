@@ -2491,6 +2491,7 @@ body {
 
       [data-application-part="header"] {
         grid-area: header;
+        border-left: unset;
       }
       [data-application-part="controls"] {
         grid-area: controls;
@@ -2504,7 +2505,7 @@ body {
         display: block;
         min-width: 320px;
         width: 320px;
-        padding-right: 5px;
+        padding: 0 5px;
         overflow: auto;
 
         h3 {
@@ -2909,10 +2910,21 @@ body {
             height: 36px;
             width: 36px;
             margin-right: 5px;
+
+            img {
+              border: unset;
+            }
           }
 
           .name {
             flex: 1;
+          }
+
+          .grade, .cost {
+            flex: 0 0 min-content;
+            text-wrap: nowrap;
+            padding-right: 0.5rem;
+            color: var(--color-text-primary);
           }
         }
       }
@@ -6589,7 +6601,7 @@ body {
   }
 }
 
-.directory-item.document .entry-name.document-name {
+.directory-item.document .entry-name.document-name, ul.item-list.result-list li.item {
   &.rarity-uncommon {
     color: #33a7ff;
   }

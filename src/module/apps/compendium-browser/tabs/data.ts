@@ -67,27 +67,30 @@ interface AbilityFilters extends BaseFilterData {
 }
 
 interface GearFilters extends BaseFilterData {
-  checkboxes: Record<"type" | "rarity" | "grade", CheckboxData>;
+  checkboxes: Record<"type" | "rarity" | "grade" | "flingType" | "carrySlot", CheckboxData>;
   multiselects: {
     traits: MultiselectData<string>;
   };
   sliders: {
     cost: SliderData;
+    power: SliderData;
+    accuracy: SliderData;
   };
 }
 
 interface MoveFilters extends BaseFilterData {
-  checkboxes: Record<"grade", CheckboxData>;
-  selects: Record<"category", SelectData>;
+  checkboxes: Record<"grade" | "target", CheckboxData>;
+  selects: Record<"category" | "cost", SelectData>;
   multiselects: {
     traits: MultiselectData<string>;
   };
-  sliders: Record<"power" | "accuracy", SliderData>;
+  sliders: Record<"power" | "accuracy" | "range", SliderData>;
 }
 
 interface PerkFilters extends BaseFilterData {
   multiselects: {
     traits: MultiselectData<string>;
+    prerequisites: MultiselectData<string>;
   };
   sliders: {
     apCost: SliderData;
@@ -95,6 +98,7 @@ interface PerkFilters extends BaseFilterData {
 }
 
 interface SpeciesFilters extends BaseFilterData {
+  selects: Record<"loadSpeciesImages", SelectData>;
   checkboxes: Record<"skills", CheckboxData>;
   multiselects: Record<"traits" | "eggGroups", MultiselectData<string>>;
   // ranges: Record<"baseStatTotal", RangesInputData>;
@@ -126,6 +130,7 @@ export type {
   MultiselectData,
   RangesInputData,
   RenderResultListOptions,
+  SelectData,
   SliderData,
   AbilityFilters,
   GearFilters,

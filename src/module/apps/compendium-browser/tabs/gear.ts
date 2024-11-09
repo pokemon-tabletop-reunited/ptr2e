@@ -3,6 +3,7 @@ import { ContentTabName } from "../data.ts";
 import { CompendiumBrowser } from "../index.ts";
 import { CompendiumBrowserTab } from "./base.ts";
 import { CompendiumBrowserIndexData, GearFilters } from "./data.ts";
+import { formatSlug } from "@utils";
 
 export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
   tabName: ContentTabName = "gear"
@@ -10,7 +11,7 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
   templatePath = "systems/ptr2e/templates/apps/compendium-browser/tabs/gear.hbs";
 
   override searchFields = ["name", "description"];
-  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "rarity", "grade", "cost"];
+  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "rarity", "grade", "cost", "fling", "slot"];
 
   constructor(browser: CompendiumBrowser) {
     super(browser);
@@ -23,8 +24,9 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
     const debug = (msg: string, ...params: unknown[]) => console.debug(`PTR2e | Compendium Browser | Gear Tab | ${msg}`, params);
     debug("Stated loading data");
     const gear: CompendiumBrowserIndexData[] = [];
-    const indexFields = ["img", "system.description", "system.traits", "system.rarity", "system.grade", "system.cost"];
+    const indexFields = ["img", "system.description", "system.traits", "system.rarity", "system.grade", "system.cost", "system.fling", "system.equipped.slot"];
     const traits = new Set<string>();
+    const flingTypes = new Set<string>();
     let highestIpCost = 10;
 
     for await (const { pack, index } of this.browser.packLoader.loadPacks(
@@ -48,6 +50,10 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
         }
         if(gearData.system.cost > highestIpCost) highestIpCost = gearData.system.cost;
 
+        if(gearData.system.fling?.type) {
+          flingTypes.add(gearData.system.fling.type);
+        }
+
         gear.push({
           name: gearData.name,
           img: gearData.img,
@@ -57,7 +63,9 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
           description: gearData.system.description,
           rarity: gearData.system.rarity,
           grade: gearData.system.grade,
-          cost: gearData.system.cost
+          cost: gearData.system.cost,
+          fling: gearData.system.fling,
+          slot: gearData.system.equipped?.slot
         })
       }
     }
@@ -82,6 +90,17 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
       acc[grade] = grade;
       return acc;
     }, {} as Record<string, string>));
+    this.filterData.checkboxes.flingType.options = this.generateCheckboxOptions(flingTypes.reduce((acc, type) => {
+      acc[type] = formatSlug(type);
+      return acc;
+    }, {} as Record<string, string>));
+    this.filterData.checkboxes.carrySlot.options = this.generateCheckboxOptions({
+      held: "PTR2E.FIELDS.gear.equipped.slot.held",
+      worn: "PTR2E.FIELDS.gear.equipped.slot.worn",
+      accessory: "PTR2E.FIELDS.gear.equipped.slot.accessory",
+      belt: "PTR2E.FIELDS.gear.equipped.slot.belt",
+      backpack: "PTR2E.FIELDS.gear.equipped.slot.backpack"
+    });
     this.filterData.multiselects.traits.options = this.generateMultiselectOptions(traits.reduce((acc, trait) => {
       const traitData = game.ptr.data.traits.get(trait);
       if (!traitData) return acc;
@@ -115,6 +134,29 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
       if(!(entry.cost >= sliders.cost.values.min && entry.cost <= sliders.cost.values.max)) return false;
     }
 
+    // Fling Type
+    if(checkboxes.flingType.selected.length && !checkboxes.flingType.selected.includes(entry.fling?.type)) return false;
+
+    // Fling Power
+    if(sliders.power.values.min === 0) {
+      if(!(entry.fling?.power === undefined || entry.fling?.power === null)) {
+        if(!(entry.fling?.power >= sliders.power.values.min && entry.fling?.power <= sliders.power.values.max)) return false;
+      }
+    }
+    else {
+      if(!(entry.fling?.power >= sliders.power.values.min && entry.fling?.power <= sliders.power.values.max)) return false;
+    }
+
+    // Fling Accuracy
+    if(sliders.accuracy.values.min === 0) {
+      if(!(entry.fling?.accuracy === undefined || entry.fling?.accuracy === null)) {
+        if(!(entry.fling?.accuracy >= sliders.accuracy.values.min && entry.fling?.accuracy <= sliders.accuracy.values.max)) return false;
+      }
+    }
+    else {
+      if(!(entry.fling?.accuracy >= sliders.accuracy.values.min && entry.fling?.accuracy <= sliders.accuracy.values.max)) return false;
+    }
+
     // Traits
     if (!this.filterTraits(entry.traits, multiselects.traits.selected, multiselects.traits.conjunction)) return false;
 
@@ -128,7 +170,7 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
           label: "PTR2E.CompendiumBrowser.Filters.Type",
           options: {},
           selected: [],
-          isExpanded: false
+          isExpanded: true
         },
         rarity: {
           label: "PTR2E.CompendiumBrowser.Filters.Rarity",
@@ -138,6 +180,18 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
         },
         grade: {
           label: "PTR2E.CompendiumBrowser.Filters.Grade",
+          options: {},
+          selected: [],
+          isExpanded: false
+        },
+        carrySlot: {
+          label: "PTR2E.CompendiumBrowser.Filters.CarrySlot",
+          options: {},
+          selected: [],
+          isExpanded: false
+        },
+        flingType: {
+          label: "PTR2E.CompendiumBrowser.Filters.FlingType",
           options: {},
           selected: [],
           isExpanded: false
@@ -161,6 +215,28 @@ export class CompendiumBrowserGearTab extends CompendiumBrowserTab {
             min: 0,
             max: 12,
             step: 1
+          }
+        },
+        power: {
+          label: "PTR2E.CompendiumBrowser.Filters.FlingPower",
+          isExpanded: false,
+          values: {
+            lowerLimit: 0,
+            upperLimit: 250,
+            min: 0,
+            max: 250,
+            step: 5
+          }
+        },
+        accuracy: {
+          label: "PTR2E.CompendiumBrowser.Filters.FlingAccuracy",
+          isExpanded: false,
+          values: {
+            lowerLimit: 0,
+            upperLimit: 100,
+            min: 0,
+            max: 100,
+            step: 5
           }
         }
       },

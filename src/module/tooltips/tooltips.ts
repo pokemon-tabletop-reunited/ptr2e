@@ -689,7 +689,7 @@ export default class TooltipsPTR2e {
     const element = game.tooltip.element;
     if (!element) return false;
 
-    const uuid = element.dataset.uuid;
+    const uuid = element.dataset.uuid || element.dataset.entryUuid;
     if (!uuid) return false;
 
     const entityType = element.dataset.type;

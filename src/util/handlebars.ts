@@ -30,8 +30,8 @@ function _registerPTRHelpers() {
             const classes: string = hash?.classes ?? "";
 
             return isType
-                ? `<img src="systems/ptr2e/img/svg/${img}_icon.svg" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`
-                : `<img src="systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`;
+                ? `<img src="systems/ptr2e/img/svg/${img}_icon.svg" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" loading="lazy"/>`
+                : `<img src="systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" loading="lazy"/>`;
         }
     );
 
@@ -190,8 +190,8 @@ function _registerBasicHelpers() {
     Handlebars.registerHelper("getProperty", (obj, key) => fu.getProperty(obj, key));
 
     Handlebars.registerHelper("concat", function () {
-        var outStr = "";
-        for (var arg in arguments) {
+        let outStr = "";
+        for (const arg in arguments) {
             if (typeof arguments[arg] != "object") {
                 outStr += arguments[arg];
             }

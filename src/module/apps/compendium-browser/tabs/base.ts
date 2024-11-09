@@ -164,15 +164,15 @@ export abstract class CompendiumBrowserTab {
     return true;
   }
 
-  async renderResults(start: number): Promise<HTMLLIElement[]> {
+  async renderResults(start: number, fn?: (entries: CompendiumBrowserIndexData[]) => Promise<CompendiumBrowserIndexData[]>): Promise<HTMLLIElement[]> {
     if (!this.templatePath) {
       throw Error(`Tab "${this.tabName}" has no valid template path.`);
     }
-    const indexData = this.getIndexData(start);
+    const indexData = fn ? await fn(this.getIndexData(start)) : this.getIndexData(start);;
     const liElements: HTMLLIElement[] = [];
     for (const entry of indexData) {
       const htmlString = await renderTemplate(this.templatePath, {
-        entry,
+        entry: entry,
         filterData: this.filterData,
       });
       const html = this.#domParser.parseFromString(htmlString, "text/html");

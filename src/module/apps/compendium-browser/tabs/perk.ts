@@ -9,7 +9,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
   templatePath = "systems/ptr2e/templates/apps/compendium-browser/tabs/perk.hbs";
 
   override searchFields = ["name", "description"];
-  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "cost"];
+  override storeFields = ["type", "name", "img", "uuid", "traits", "description", "cost", "prerequisites"];
 
   constructor(browser: CompendiumBrowser) {
     super(browser);
@@ -22,8 +22,9 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
     const debug = (msg: string, ...params: unknown[]) => console.debug(`PTR2e | Compendium Browser | Perk Tab | ${msg}`, params);
     debug("Stated loading data");
     const perks: CompendiumBrowserIndexData[] = [];
-    const indexFields = ["img", "system.description", "system.traits", "system.cost"];
+    const indexFields = ["img", "system.description", "system.traits", "system.cost", "system.prerequisites"];
     const traits = new Set<string>();
+    const prerequisites = new Set<string>();
 
     for await (const { pack, index } of this.browser.packLoader.loadPacks(
       "Item",
@@ -45,6 +46,10 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
           traits.add(trait);
         }
 
+        for(const prereq of perkData.system.prerequisites ?? []) {
+          prerequisites.add(prereq);
+        }
+
         perks.push({
           name: perkData.name,
           img: perkData.img,
@@ -52,7 +57,8 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
           type: perkData.type,
           traits: perkData.system.traits,
           description: perkData.system.description,
-          cost: perkData.system.cost
+          cost: perkData.system.cost,
+          prerequisites: perkData.system.prerequisites ?? []
         })
       }
     }
@@ -67,6 +73,7 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
       acc[traitData.slug] = traitData.label;
       return acc;
     }, {} as Record<string, string>));
+    this.filterData.multiselects.prerequisites.options = this.generateMultiselectOptions(prerequisites.reduce((acc, prereq) => ({...acc, [prereq]: prereq}), {} as Record<string, string>));
 
     debug("Finished loading data");
   }
@@ -80,6 +87,9 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
     // Traits
     if (!this.filterTraits(entry.traits, multiselects.traits.selected, multiselects.traits.conjunction)) return false;
 
+    // Prerequisites
+    if (!this.filterTraits(entry.prerequisites, multiselects.prerequisites.selected, multiselects.prerequisites.conjunction)) return false;
+
     return true;
   }
 
@@ -89,6 +99,12 @@ export class CompendiumBrowserPerkTab extends CompendiumBrowserTab {
         traits: {
           conjunction: "and",
           label: "PTR2E.CompendiumBrowser.Filters.Traits",
+          options: [],
+          selected: []
+        },
+        prerequisites: {
+          conjunction: "and",
+          label: "PTR2E.CompendiumBrowser.Filters.Prerequisites",
           options: [],
           selected: []
         }

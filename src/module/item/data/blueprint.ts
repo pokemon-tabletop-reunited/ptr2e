@@ -355,24 +355,25 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       })();
 
       const size = (() => {
-        switch (evolution.size.category) {
-          case "max":
+        const size = SpeciesSystem.getSpeciesSize(evolution.size.height, evolution.size.type as "height" | "quad" | "length");
+        switch (size.sizeCategory) {
+          case "Max":
             return { width: 6, height: 6 };
-          case "titanic":
+          case "Titanic":
             return { width: 5, height: 5 };
-          case "gigantic":
+          case "Gigantic":
             return { width: 4, height: 4 };
-          case "huge":
+          case "Huge":
             return { width: 3, height: 3 };
-          case "large":
+          case "Large":
             return { width: 2, height: 2 };
-          case "medium":
+          case "Medium":
             return { width: 1, height: 1 };
-          case "small":
+          case "Small":
             return { width: 0.75, height: 0.75 };
-          case "tiny":
+          case "Tiny":
             return { width: 0.5, height: 0.5 };
-          case "diminutive":
+          case "Diminutive":
             return { width: 0.25, height: 0.25 };
           default:
             return { width: 1, height: 1 };

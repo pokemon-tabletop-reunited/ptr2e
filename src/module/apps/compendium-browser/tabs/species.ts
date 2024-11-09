@@ -3,13 +3,14 @@ import { CompendiumBrowser } from "../index.ts";
 import { CompendiumBrowserTab } from "./base.ts";
 import { SpeciesFilters, CompendiumBrowserIndexData } from "./data.ts";
 import * as R from "remeda";
-import { formatSlug } from "@utils";
+import { formatSlug, ImageResolver, sluggify } from "@utils";
 import SkillPTR2e from "@module/data/models/skill.ts";
 
 export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
   tabName: ContentTabName = "species"
   filterData: SpeciesFilters;
   templatePath = "systems/ptr2e/templates/apps/compendium-browser/tabs/species.hbs";
+  override scrollLimit = 50;
 
   override searchFields = ["name", "number"];
   override storeFields = ["type", "name", "img", "uuid", "number", "traits", "skills", "eggGroups", "moves"];
@@ -25,7 +26,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
     const debug = (msg: string, ...params: unknown[]) => console.debug(`PTR2e | Compendium Browser | Species Tab | ${msg}`, params);
     debug("Stated loading data");
     const species: CompendiumBrowserIndexData[] = [];
-    const indexFields = ["img", "system.number", "system.types", "system.traits", "system.moves", "system.skills", "system.eggGroups"];
+    const indexFields = ["img", "system.number", "system.types", "system.traits", "system.moves", "system.skills", "system.eggGroups", "system.form"];
     const eggGroups = new Set<string>();
     const allTraits = new Set<string>();
 
@@ -40,7 +41,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
 
         speciesData.filters = {};
 
-        if (!this.hasAllIndexFields(speciesData, indexFields)) {
+        if (!this.hasAllIndexFields(speciesData, ["img", "system.number", "system.types", "system.traits", "system.moves", "system.skills", "system.eggGroups"])) {
           console.warn(`PTR2e | Compendium Browser | Species Tab | ${pack.metadata.label} | ${speciesData.name} does not have all required data fields.`);
           continue;
         }
@@ -51,7 +52,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
 
         const traits = R.unique<string[]>([...(speciesData.system.traits ?? []), ...(speciesData.system.types ?? [])]);
 
-        for(const trait of traits) {
+        for (const trait of traits) {
           allTraits.add(trait);
         }
 
@@ -73,6 +74,10 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
     this.indexData = species;
 
     // Set Filters
+    this.filterData.selects.loadSpeciesImages.options = {
+      // no: game.i18n.localize("PTR2E.CompendiumBrowser.Filters.LoadSpeciesImages.No"),
+      yes: game.i18n.localize("PTR2E.CompendiumBrowser.Filters.LoadSpeciesImages.Yes")
+    }
     this.filterData.checkboxes.skills.options = this.generateCheckboxOptions(game.ptr.data.skills.reduce((acc, skill) => {
       acc[skill.slug] = formatSlug(skill.slug);
       return acc;
@@ -91,14 +96,41 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
     debug("Finished loading data");
   }
 
+  override renderResults(start: number): Promise<HTMLLIElement[]> {
+    return super.renderResults(start, async (entries) => {
+      if(this.filterData.selects.loadSpeciesImages.selected !== "yes") return entries;
+      return await Promise.all(
+        entries.map(async (entry) => {
+          const img = await (async () => {
+            if (!["icons/svg/mystery-man.svg", "systems/ptr2e/img/icons/species_icon.webp"].includes(entry.img)) return entry.img;
+            const config = game.ptr.data.artMap.get(sluggify(entry.name));
+            if (!config) return entry.img;
+            const resolver = await ImageResolver.createFromSpeciesData(
+              {
+                dexId: entry.number,
+                shiny: false,
+                forms: entry.form ? [entry.form] : [],
+              },
+              config
+            );
+            return resolver?.result || entry.img || "icons/svg/mystery-man.svg";
+          })();
+          return {
+            ...entry,
+            img
+          }
+        }));
+    });
+  }
+
   protected override filterIndexData(entry: CompendiumBrowserIndexData): boolean {
     const { checkboxes, multiselects } = this.filterData;
 
     // Skills
-    if(!checkboxes.skills.selected.every(skill => !!entry.skills[skill])) return false;
-    
+    if (!checkboxes.skills.selected.every(skill => !!entry.skills[skill])) return false;
+
     // Egg Groups
-    if(!this.filterTraits(entry.eggGroups, multiselects.eggGroups.selected, multiselects.eggGroups.conjunction)) return false;
+    if (!this.filterTraits(entry.eggGroups, multiselects.eggGroups.selected, multiselects.eggGroups.conjunction)) return false;
 
     // Traits
     if (!this.filterTraits(entry.traits, multiselects.traits.selected, multiselects.traits.conjunction)) return false;
@@ -115,7 +147,14 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
           selected: [],
           isExpanded: false
         }
-      },      
+      },
+      selects: {
+        loadSpeciesImages: {
+          label: "PTR2E.CompendiumBrowser.Filters.LoadSpeciesImages.Label",
+          options: {},
+          selected: ""
+        }
+      },
       multiselects: {
         traits: {
           conjunction: "and",
