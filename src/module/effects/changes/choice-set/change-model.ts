@@ -34,7 +34,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
 
     this.flag = this.setDefaultFlag(this);
     this.selection =
-      typeof source.selection === "string" || typeof source.selection === "number" || R.isObject(source.selection)
+      typeof source.selection === "string" || typeof source.selection === "number" || R.isPlainObject(source.selection)
         ? source.selection
         : null;
   }
@@ -233,10 +233,10 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
     const choiceObject: unknown = fu.getProperty(CONFIG.PTR, path) ?? fu.getProperty(this.actor ?? {}, path) ?? {};
     if (
       Array.isArray(choiceObject) &&
-      choiceObject.every((c) => R.isObject<{ value: string }>(c) && typeof c.value === "string")
+      choiceObject.every((c) => R.isPlainObject<{ value: string }>(c) && typeof c.value === "string")
     ) {
       return choiceObject;
-    } else if (R.isObject(choiceObject) && Object.values(choiceObject).every((c) => typeof c === "string")) {
+    } else if (R.isPlainObject(choiceObject) && Object.values(choiceObject).every((c) => typeof c === "string")) {
       return Object.entries(choiceObject).map(([value, label]) => ({
         value,
         label: String(label),
@@ -265,7 +265,7 @@ export default class ChoiceSetChangeSystem extends ChangeModel {
   }
 
   private getPreselection(): PickableThing | null {
-    const choice = Array.isArray(this.choices) ? this.choices.find(c => R.equals(c.value, this.selection)) : null;
+    const choice = Array.isArray(this.choices) ? this.choices.find(c => R.isDeepEqual(c.value, this.selection)) : null;
     return choice ?? null;
   }
 }

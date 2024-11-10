@@ -161,10 +161,10 @@ class ModifierPTR2e implements RawModifier {
     getRollOptions(): string[] {
         const options = (["slug","value"] as const).map(p => `${this.kind}:${p}:{${this[p]}}`);
 
-        const damageKinds = R.compact([
+        const damageKinds = R.filter([
             this.domains.some((d) => /\bdamage$/.test(d)) ? "damage" : null,
             this.domains.some((d) => /\bhealing$/.test(d)) ? "healing" : null,
-        ]);
+        ], R.isTruthy);
 
         for(const kind of damageKinds) {
             options.push(kind);
@@ -353,7 +353,7 @@ class CheckModifier extends StatisticModifier {
         const baseModifiers = statistic.modifiers
             .filter((modifier: unknown) => {
                 if (modifier instanceof ModifierPTR2e) return true;
-                if (R.isObject(modifier) && "slug" in modifier && typeof modifier.slug === "string") {
+                if (R.isPlainObject(modifier) && "slug" in modifier && typeof modifier.slug === "string") {
                     ui.notifications.error(`Unsupported modifier object (slug: ${modifier.slug}) passed`);
                 }
                 return false;

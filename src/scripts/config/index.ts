@@ -2,7 +2,7 @@
 import { ActorPTR2e, ActorSheetPTR2e, HumanoidActorSystem, PokemonActorSystem } from "@actor";
 import { CharacterCombatantSystem, CombatPTR2e, CombatSystemPTR2e, CombatTrackerPTR2e, CombatantPTR2e, RoundCombatantSystem } from "@combat";
 import { ItemPTR2e, data, sheets } from "@item";
-import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
+import { PerkDirectory } from "@module/apps/sidebar/perks-directory.ts";
 import { SquareGridPTR2e } from "@module/canvas/grid.ts";
 import { TemplateLayerPTR2e } from "@module/canvas/layer/template.ts";
 import { MeasuredTemplatePTR2e } from "@module/canvas/measured-template.ts";
@@ -26,6 +26,7 @@ import { CheckRoll } from "@system/rolls/check-roll.ts";
 import { AttackRoll } from "@system/rolls/attack-roll.ts";
 import { CaptureRoll } from "@system/rolls/capture-roll.ts";
 import trackableAttributes from "./trackable-token-attributes.ts";
+import { CompendiumDirectoryPTR2e } from "@module/apps/sidebar/compendium-directory.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -140,7 +141,8 @@ export const PTRCONFIG = {
         perks: PerkDirectory,
         combat: CombatTrackerPTR2e,
         items: ItemDirectoryPTR2e,
-        actors: ActorDirectoryPTR2e
+        actors: ActorDirectoryPTR2e,
+        compendium: CompendiumDirectoryPTR2e
     },
     data: {
         traits: Traits,

@@ -161,20 +161,20 @@ class SpeciesSystem extends SpeciesExtension {
       }),
       abilities: new fields.SchemaField({
         starting: new fields.ArrayField(new fields.SchemaField({
-            slug: new SlugField({ blank: false }), 
-            uuid: new fields.DocumentUUIDField(),
+          slug: new SlugField({ blank: false }),
+          uuid: new fields.DocumentUUIDField(),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.starting.label", },),
         basic: new fields.ArrayField(new fields.SchemaField({
-            slug: new SlugField({ blank: false }), 
-            uuid: new fields.DocumentUUIDField(),
+          slug: new SlugField({ blank: false }),
+          uuid: new fields.DocumentUUIDField(),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.basic.label", },),
         advanced: new fields.ArrayField(new fields.SchemaField({
-            slug: new SlugField({ blank: false }), 
-            uuid: new fields.DocumentUUIDField(),
+          slug: new SlugField({ blank: false }),
+          uuid: new fields.DocumentUUIDField(),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.advanced.label", },),
         master: new fields.ArrayField(new fields.SchemaField({
-            slug: new SlugField({ blank: false }), 
-            uuid: new fields.DocumentUUIDField(),
+          slug: new SlugField({ blank: false }),
+          uuid: new fields.DocumentUUIDField(),
         }), { required: true, initial: [], label: "PTR2E.FIELDS.abilities.master.label", },),
       }),
       movement: new fields.SchemaField({
@@ -256,7 +256,7 @@ class SpeciesSystem extends SpeciesExtension {
 
   static override migrateData(source: SpeciesSystem['_source']) {
     for (const abGroup of Object.keys(source.abilities)) {
-      source.abilities[abGroup] = (source.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g=>{
+      source.abilities[abGroup] = (source.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g => {
         if (typeof g == "object") return g;
         return { slug: g, uuid: null };
       });
@@ -264,19 +264,9 @@ class SpeciesSystem extends SpeciesExtension {
     return super.migrateData(source);
   }
 
-  override prepareBaseData(): void {
-    super.prepareBaseData();
-
-    this.moves.levelUp = this.moves.levelUp.sort((a, b) => {
-      const levelDifference = a.level - b.level;
-      if (levelDifference !== 0) return levelDifference;
-      return a.name.localeCompare(b.name);
-    });
-    this.moves.tutor = this.moves.tutor.sort((a, b) => a.name.localeCompare(b.name));
-
-    this.size.sizeClass = (() => {
-      const height = this.size.height;
-      switch (this.size.type) {
+  public static getSpeciesSize(height: number, type: "height" | "quad" | "length"): { sizeClass: number; sizeCategory: "Diminutive" | "Tiny" | "Small" | "Medium" | "Large" | "Huge" | "Gigantic" | "Titanic" | "Max"; } {
+    const sizeClass = (() => {
+      switch (type) {
         case "height": {
           switch (true) {
             case height < 0.3048:
@@ -341,8 +331,8 @@ class SpeciesSystem extends SpeciesExtension {
           return 8;
       }
     })();
-    this.size.category = (() => {
-      switch (this.size.sizeClass) {
+    const sizeCategory = (() => {
+      switch (sizeClass) {
         case 1:
           return "Diminutive";
         case 2:
@@ -363,6 +353,24 @@ class SpeciesSystem extends SpeciesExtension {
           return "Max";
       }
     })();
+    return { sizeClass, sizeCategory };
+  }
+
+  override prepareBaseData(): void {
+    super.prepareBaseData();
+
+    this.moves.levelUp = this.moves.levelUp.sort((a, b) => {
+      const levelDifference = a.level - b.level;
+      if (levelDifference !== 0) return levelDifference;
+      return a.name.localeCompare(b.name);
+    });
+    this.moves.tutor = this.moves.tutor.sort((a, b) => a.name.localeCompare(b.name));
+
+    const { sizeClass, sizeCategory } = SpeciesSystem.getSpeciesSize(this.size.height, this.size.type as "height" | "quad" | "length");
+
+    this.size.sizeClass = sizeClass
+    this.size.category = sizeCategory;
+
     this.size.weightClass = (() => {
       switch (true) {
         case this.size.weight < 10:
@@ -407,7 +415,7 @@ class SpeciesSystem extends SpeciesExtension {
       }
     }
     // check if the species is an underdog
-    if (Object.values(this.stats).reduce((a:unknown, b:unknown)=>(a as number) + (b as number), 0) as number < 510) {
+    if (Object.values(this.stats).reduce((a: unknown, b: unknown) => (a as number) + (b as number), 0) as number < 510) {
       this.addTraitFromSlug("underdog", true);
     }
   }
@@ -712,8 +720,8 @@ interface AbilitySchema extends foundry.data.fields.DataSchema {
 }
 
 export interface AbilityReferenceSchema extends foundry.data.fields.DataSchema {
-    slug: SlugField<string, string, true, false, true>,
-    uuid: foundry.data.fields.DocumentUUIDField<"Item", true, false, false>
+  slug: SlugField<string, string, true, false, true>,
+  uuid: foundry.data.fields.DocumentUUIDField<"Item", true, false, false>
 }
 
 export type AbilityReference = Required<{ slug: string, uuid: string }>;

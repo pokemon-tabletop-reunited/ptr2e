@@ -150,7 +150,7 @@ class AttackAlteration extends foundry.abstract.DataModel<ChangeModel> {
       for (let i = 0; i < source.length; i++) {
         source[i] = this.resolveInjectedProperties(source[i], { warn });
       }
-    } else if (R.isObject(source)) {
+    } else if (R.isPlainObject(source)) {
       for (const [key, value] of Object.entries(source)) {
         if (typeof value === "string" || isObject(value)) {
           source[key] = this.resolveInjectedProperties(value, { warn });

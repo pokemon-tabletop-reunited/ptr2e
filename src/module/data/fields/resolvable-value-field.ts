@@ -29,7 +29,7 @@ class ResolvableValueField<
 
         if (isObject<BracketedValue>(value) && "brackets" in value) {
             value.field ||= "actor|level";
-            const brackets = (value.brackets = R.compact(Object.values(value.brackets ?? {})));
+            const brackets = (value.brackets = R.filter(Object.values(value.brackets ?? {}), R.isTruthy));
             for (const bracket of brackets) {
                 if (bracket.start === null) delete bracket.start;
                 if (bracket.end === null) delete bracket.end;

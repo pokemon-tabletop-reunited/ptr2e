@@ -78,6 +78,7 @@ export const Init: PTRHook = {
 
             CONFIG.ui.items = PTRCONFIG.ui.items;
             CONFIG.ui.actors = PTRCONFIG.ui.actors;
+            CONFIG.ui.compendium = PTRCONFIG.ui.compendium;
 
             // Register custom sheets
             {

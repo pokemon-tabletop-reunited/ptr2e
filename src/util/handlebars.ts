@@ -1,6 +1,7 @@
 import { PTRCONSTS, PokemonCategory, PokemonType } from "@data";
 import { capitalize, formatSlug } from "./misc.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
+import * as R from "remeda";
 
 export function registerHandlebarsHelpers() {
     _registerBasicHelpers();
@@ -29,8 +30,8 @@ function _registerPTRHelpers() {
             const classes: string = hash?.classes ?? "";
 
             return isType
-                ? `<img src="systems/ptr2e/img/svg/${img}_icon.svg" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`
-                : `<img src="systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" />`;
+                ? `<img src="systems/ptr2e/img/svg/${img}_icon.svg" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" loading="lazy"/>`
+                : `<img src="systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" loading="lazy"/>`;
         }
     );
 
@@ -189,8 +190,8 @@ function _registerBasicHelpers() {
     Handlebars.registerHelper("getProperty", (obj, key) => fu.getProperty(obj, key));
 
     Handlebars.registerHelper("concat", function () {
-        var outStr = "";
-        for (var arg in arguments) {
+        let outStr = "";
+        for (const arg in arguments) {
             if (typeof arguments[arg] != "object") {
                 outStr += arguments[arg];
             }
@@ -251,7 +252,7 @@ function _registerBasicHelpers() {
         return a || b;
     });
     Handlebars.registerHelper("not", function (a, b = false) {
-        return a != b;
+      return R.isPlainObject(b) ? !a : a != b;
     });
     Handlebars.registerHelper("divide", (value1, value2) => Number(value1) / Number(value2));
     Handlebars.registerHelper("multiply", (value1, value2) => Number(value1) * Number(value2));
