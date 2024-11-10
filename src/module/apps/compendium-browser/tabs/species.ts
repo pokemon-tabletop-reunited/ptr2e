@@ -29,6 +29,8 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
     const indexFields = ["img", "system.number", "system.types", "system.traits", "system.moves", "system.skills", "system.eggGroups", "system.form"];
     const eggGroups = new Set<string>();
     const allTraits = new Set<string>();
+    const tutorMoves = new Set<string>();
+    const levelUpMoves = new Set<string>();
 
     for await (const { pack, index } of this.browser.packLoader.loadPacks(
       "Item",
@@ -56,6 +58,21 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
           allTraits.add(trait);
         }
 
+        const moves = {
+          level: [],
+          tutor: []
+        } as Record<string, string[]>;
+
+        for(const move of speciesData.system.moves?.levelUp ?? []) {
+          moves.level.push(move.name);
+          levelUpMoves.add(move.name);
+        }
+
+        for(const move of speciesData.system.moves?.tutor ?? []) {
+          moves.tutor.push(move.name);
+          tutorMoves.add(move.name);
+        }
+
         species.push({
           name: speciesData.name,
           img: speciesData.img,
@@ -65,7 +82,7 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
           number: speciesData.system.number,
           skills: speciesData.system.skills ? R.fromEntries(speciesData.system.skills.map((skill: SkillPTR2e) => [skill.slug, skill.value])) : [],
           eggGroups: speciesData.system.eggGroups,
-          moves: speciesData.system.moves
+          moves
         })
       }
     }
@@ -84,6 +101,14 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
     }, {} as Record<string, string>));
     this.filterData.multiselects.eggGroups.options = this.generateMultiselectOptions(Array.from(eggGroups).reduce((acc, eggGroup) => {
       acc[eggGroup] = formatSlug(eggGroup);
+      return acc;
+    }, {} as Record<string, string>));
+    this.filterData.multiselects.tutorMoves.options = this.generateMultiselectOptions(Array.from(tutorMoves).reduce((acc, move) => {
+      acc[move] = formatSlug(move);
+      return acc;
+    }, {} as Record<string, string>));
+    this.filterData.multiselects.levelUpMoves.options = this.generateMultiselectOptions(Array.from(levelUpMoves).reduce((acc, move) => {
+      acc[move] = formatSlug(move);
       return acc;
     }, {} as Record<string, string>));
     this.filterData.multiselects.traits.options = this.generateMultiselectOptions(allTraits.reduce((acc, trait) => {
@@ -132,6 +157,12 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
     // Egg Groups
     if (!this.filterTraits(entry.eggGroups, multiselects.eggGroups.selected, multiselects.eggGroups.conjunction)) return false;
 
+    // Level Up Moves
+    if (!this.filterTraits(entry.moves.level, multiselects.levelUpMoves.selected, multiselects.levelUpMoves.conjunction)) return false;
+
+    // Tutor Moves
+    if (!this.filterTraits(entry.moves.tutor, multiselects.tutorMoves.selected, multiselects.tutorMoves.conjunction)) return false;
+
     // Traits
     if (!this.filterTraits(entry.traits, multiselects.traits.selected, multiselects.traits.conjunction)) return false;
 
@@ -165,6 +196,18 @@ export class CompendiumBrowserSpeciesTab extends CompendiumBrowserTab {
         eggGroups: {
           conjunction: "and",
           label: "PTR2E.CompendiumBrowser.Filters.EggGroups",
+          options: [],
+          selected: []
+        },
+        levelUpMoves: {
+          conjunction: "and",
+          label: "PTR2E.CompendiumBrowser.Filters.LevelUpMoves",
+          options: [],
+          selected: []
+        },
+        tutorMoves: {
+          conjunction: "and",
+          label: "PTR2E.CompendiumBrowser.Filters.TutorMoves",
           options: [],
           selected: []
         }

@@ -100,7 +100,7 @@ interface PerkFilters extends BaseFilterData {
 interface SpeciesFilters extends BaseFilterData {
   selects: Record<"loadSpeciesImages", SelectData>;
   checkboxes: Record<"skills", CheckboxData>;
-  multiselects: Record<"traits" | "eggGroups", MultiselectData<string>>;
+  multiselects: Record<"traits" | "eggGroups" | "levelUpMoves" | "tutorMoves", MultiselectData<string>>;
   // ranges: Record<"baseStatTotal", RangesInputData>;
   // sliders: Record<"height" | "weight", SliderData>;
 }
