@@ -3,46 +3,46 @@ import { ActionPTR2e, AttackPTR2e } from "@data";
 import { BracketedValue, EffectSourcePTR2e } from "@effects";
 import { ItemPTR2e } from "@item";
 import {
-    DeferredValueParams,
-    ModifierAdjustment,
-    ModifierPTR2e,
+  DeferredValueParams,
+  ModifierAdjustment,
+  ModifierPTR2e,
 } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
 import * as R from "remeda";
 
 /** Extracts a list of all cloned modifiers across all given keys in a single list. */
 function extractModifiers(
-    synthetics: Pick<ActorSynthetics, "modifierAdjustments" | "modifiers">,
-    selectors: string[],
-    options: DeferredValueParams = {}
+  synthetics: Pick<ActorSynthetics, "modifierAdjustments" | "modifiers">,
+  selectors: string[],
+  options: DeferredValueParams = {}
 ): ModifierPTR2e[] {
-    const { modifierAdjustments, modifiers: syntheticModifiers } = synthetics;
-    const modifiers = Array.from(new Set(selectors))
-        .flatMap((s) => syntheticModifiers[s] ?? [])
-        .flatMap((d) => d(options) ?? []);
-    for (const modifier of modifiers) {
-        modifier.adjustments = extractModifierAdjustments(
-            modifierAdjustments,
-            selectors,
-            modifier.slug
-        );
-    }
+  const { modifierAdjustments, modifiers: syntheticModifiers } = synthetics;
+  const modifiers = Array.from(new Set(selectors))
+    .flatMap((s) => syntheticModifiers[s] ?? [])
+    .flatMap((d) => d(options) ?? []);
+  for (const modifier of modifiers) {
+    modifier.adjustments = extractModifierAdjustments(
+      modifierAdjustments,
+      selectors,
+      modifier.slug
+    );
+  }
 
-    return modifiers;
+  return modifiers;
 }
 
 function extractModifierAdjustments(
-    adjustmentsRecord: ActorSynthetics["modifierAdjustments"],
-    selectors: string[],
-    slug: string
+  adjustmentsRecord: ActorSynthetics["modifierAdjustments"],
+  selectors: string[],
+  slug: string
 ): ModifierAdjustment[] {
-    const adjustments = Array.from(new Set(selectors.flatMap((s) => adjustmentsRecord[s] ?? [])));
-    return adjustments.filter((a) => [slug, null].includes(a.slug));
+  const adjustments = Array.from(new Set(selectors.flatMap((s) => adjustmentsRecord[s] ?? [])));
+  return adjustments.filter((a) => [slug, null].includes(a.slug));
 }
 
 /** Extracts a list of all cloned notes across all given keys in a single list. */
 function extractNotes(rollNotes: Record<string, RollNote[]>, selectors: string[]): RollNote[] {
-    return selectors.flatMap((s) => (rollNotes[s] ?? []).map((n) => n.clone()));
+  return selectors.flatMap((s) => (rollNotes[s] ?? []).map((n) => n.clone()));
 }
 
 // function extractDamageDice(
@@ -54,31 +54,31 @@ function extractNotes(rollNotes: Record<string, RollNote[]>, selectors: string[]
 // }
 
 async function extractEphemeralEffects({
-    affects,
-    origin,
-    target,
-    item,
-    attack,
-    action,
-    domains,
-    options,
+  affects,
+  origin,
+  target,
+  item,
+  attack,
+  action,
+  domains,
+  options,
 }: ExtractEphemeralEffectsParams): Promise<EffectSourcePTR2e[]> {
-    if (!(origin && target)) return [];
+  if (!(origin && target)) return [];
 
-    const [effectsFrom, effectsTo] = affects === "target" ? [origin, target] : [target, origin];
-    const fullOptions = [
-        ...options,
-        effectsFrom.getRollOptions(domains),
-        effectsTo.getSelfRollOptions(affects),
-    ].flat();
-    const resolvables = { item, attack, action };
-    return (
-        await Promise.all(
-            domains
-                .flatMap((s) => effectsFrom.synthetics.ephemeralEffects[s]?.[affects] ?? [])
-                .map((d) => d({ test: fullOptions, resolvables }))
-        )
-    ).flatMap((e) => e ?? []);
+  const [effectsFrom, effectsTo] = affects === "target" ? [origin, target] : [target, origin];
+  const fullOptions = [
+    ...options,
+    effectsFrom.getRollOptions(domains),
+    effectsTo.getSelfRollOptions(affects),
+  ].flat();
+  const resolvables = { item, attack, action };
+  return (
+    await Promise.all(
+      domains
+        .flatMap((s) => effectsFrom.synthetics.ephemeralEffects[s]?.[affects] ?? [])
+        .map((d) => d({ test: fullOptions, resolvables }))
+    )
+  ).flatMap((e) => e ?? []);
 }
 
 async function extractEffectRolls({
@@ -92,71 +92,77 @@ async function extractEffectRolls({
   options,
   chanceModifier = 0,
   hasSenerenGrace = false,
-}: Omit<ExtractEphemeralEffectsParams, 'affects'> & {affects: "self" | "origin" | "target", chanceModifier?: number, hasSenerenGrace?: boolean}): Promise<EffectRoll[]> {
+}: Omit<ExtractEphemeralEffectsParams, 'affects'> & { affects: "self" | "origin" | "target", chanceModifier?: number, hasSenerenGrace?: boolean }): Promise<EffectRoll[]> {
   if (!(origin && target)) return [];
 
-    const [effectsFrom, effectsTo] = affects === "target" ? [origin, target] : [target, origin];
-    const fullOptions = [
-        ...options,
-        effectsFrom.getRollOptions(domains),
-        effectsTo.getSelfRollOptions(affects),
-    ].flat();
-    const resolvables = { item, attack, action };
-    const effectTargets = new Map<string, EffectRoll>();
-    const effectRolls = (
-        await Promise.all(
-            domains
-                .flatMap((s) => (affects === 'origin' ? target : origin).synthetics.effects[s]?.[affects] ?? [])
-                .map((d) => d({ test: fullOptions, resolvables }))
-        )
-    ).flatMap((e) => {
-        if (e) {
-            e.chance = e.chance + chanceModifier;
-            return e;
-        }
-        return [];
-    }).reduce((acc, val): EffectRoll[] => {
-      const inMap = effectTargets.get(val.effect);
-      if(!inMap) {
-        effectTargets.set(val.effect, val);
-        return [...acc, val];
-      }
-      if(inMap) {
-        inMap.chance += val.chance;
-      }
-      return acc;
-    }, [] as EffectRoll[]);
-
-    const effectIncreases = (
-      await Promise.all(
-        domains
-                .flatMap((s) => (affects === 'origin' ? target : origin).synthetics.effects[s+"-effect-chance"]?.[affects] ?? [])
-                .map((d) => d({ test: fullOptions, resolvables }))
-      )
-    ).flatMap(e => e ? e : []);
-
-    for(const effectIncrease of effectIncreases) {
-      const inMap = effectTargets.get(effectIncrease.effect);
-      if(inMap) {
-        inMap.chance += effectIncrease.chance;
-      }
-    }
-    
-    return hasSenerenGrace ? effectRolls.map(e => {
-      e.chance += e.chance;
+  const [effectsFrom, effectsTo] = affects === "target" ? [origin, target] : [target, origin];
+  const fullOptions = [
+    ...options,
+    effectsFrom.getRollOptions(domains),
+    effectsTo.getSelfRollOptions(affects),
+  ].flat();
+  const resolvables = { item, attack, action };
+  const effectTargets = new Map<string, EffectRoll>();
+  const effectRolls = (
+    await Promise.all(
+      domains
+        .flatMap((s) => (affects === 'origin' ? target : origin).synthetics.effects[s]?.[affects] ?? [])
+        .map((d) => d({ test: fullOptions, resolvables }))
+    )
+  ).flatMap((e) => {
+    if (e) {
+      e.chance = e.chance + chanceModifier;
       return e;
-    }) : effectRolls;
+    }
+    return [];
+  }).reduce((acc, val): EffectRoll[] => {
+    const inMap = effectTargets.get(val.effect + (val.critOnly ? '-crit' : ''));
+    const sameType = inMap?.critOnly === val.critOnly;
+    if (!inMap) {
+      effectTargets.set(val.effect + (val.critOnly ? '-crit' : ''), val);
+      return [...acc, val];
+    }
+    if (inMap && sameType) {
+      inMap.chance += val.chance;
+    }
+    return acc;
+  }, [] as EffectRoll[]);
+
+  const effectIncreases = (
+    await Promise.all(
+      domains
+        .flatMap((s) => (affects === 'origin' ? target : origin).synthetics.effects[s + "-effect-chance"]?.[affects] ?? [])
+        .map((d) => d({ test: fullOptions, resolvables }))
+    )
+  ).flatMap(e => e ? e : []);
+
+  for (const effectIncrease of effectIncreases) {
+    const inMap = effectTargets.get(effectIncrease.effect);
+    if (inMap) {
+      inMap.chance += effectIncrease.chance;
+    }
+  }
+
+  return (hasSenerenGrace ? effectRolls.map(e => {
+    e.chance += e.chance;
+    return e;
+  }) : effectRolls).map(e => {
+    if(e.effect.endsWith("-crit")) {
+      e.effect = e.effect.slice(0, -5) as ItemUUID;
+    } 
+    return e;
+  });
 }
 
 interface ExtractEphemeralEffectsParams {
-    affects: "target" | "origin";
-    origin: ActorPTR2e | null;
-    target: Maybe<ActorPTR2e>;
-    item: ItemPTR2e | null;
-    attack: AttackPTR2e | null;
-    action: ActionPTR2e | null;
-    domains: string[];
-    options: Set<string> | string[];
+  affects: "target" | "origin";
+  origin: ActorPTR2e | null;
+  target: Maybe<ActorPTR2e>;
+  item: ItemPTR2e | null;
+  attack: AttackPTR2e | null;
+  action: ActionPTR2e | null;
+  domains: string[];
+  options: Set<string> | string[];
 }
 
 // function extractRollSubstitutions(
@@ -177,11 +183,11 @@ interface ExtractEphemeralEffectsParams {
 // }
 
 function isBracketedValue(value: unknown): value is BracketedValue {
-    return (
-        R.isPlainObject(value) &&
-        Array.isArray(value.brackets) &&
-        (typeof value.field === "string" || !("fields" in value))
-    );
+  return (
+    R.isPlainObject(value) &&
+    Array.isArray(value.brackets) &&
+    (typeof value.field === "string" || !("fields" in value))
+  );
 }
 
 // async function processPreUpdateActorHooks(
@@ -233,10 +239,10 @@ function isBracketedValue(value: unknown): value is BracketedValue {
 // }
 
 export {
-    extractModifiers,
-    extractModifierAdjustments,
-    extractNotes,
-    extractEphemeralEffects,
-    isBracketedValue,
-    extractEffectRolls,
+  extractModifiers,
+  extractModifierAdjustments,
+  extractNotes,
+  extractEphemeralEffects,
+  isBracketedValue,
+  extractEffectRolls,
 }

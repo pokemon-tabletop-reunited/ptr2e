@@ -457,11 +457,11 @@ class ActorPTR2e<
       }
     }
     const typeImmunities = Object.keys(this.rollOptions.getFromDomain("immunities") ?? {}).filter(o => o.startsWith("type:"));
-    for(const immunity of typeImmunities) {
+    for (const immunity of typeImmunities) {
       const type = immunity.split(":")[1] as PokemonType;
       effectiveness[type] = 0;
     }
-    
+
     return effectiveness;
   }
 
@@ -1243,25 +1243,53 @@ class ActorPTR2e<
   isImmuneToEffect(data: ActiveEffectPTR2e | ActiveEffectPTR2e['_source']): boolean {
     const effect = data instanceof ActiveEffectPTR2e ? data : new ActiveEffectPTR2e(data);
     const immunities = this.rollOptions.getFromDomain("immunities");
-    if(Object.keys(immunities).length === 0) return false;
-    if(effect.traits.has("ignore-immunity")) return false;
+    if (Object.keys(immunities).length === 0) return false;
+    if (effect.traits.has("ignore-immunity")) return false;
 
-    if(effect.traits.has("major-affliction") || effect.traits.has("minor-affliction")) {
+    if (effect.traits.has("major-affliction") || effect.traits.has("minor-affliction")) {
       const name = effect.slug === "burn" ? "burned" : effect.slug;
-      if(immunities[`affliction:${name}`] && !effect.traits.has(`ignore-immunity-${name}`)) return true;
+      if (immunities[`affliction:${name}`] && !effect.traits.has(`ignore-immunity-${name}`)) return true;
     }
 
-    for(const trait of effect.traits) {
-      if(immunities[`trait:${trait}`] && !effect.traits.has(`ignore-immunity-${trait}`)) return true;
+    for (const trait of effect.traits) {
+      if (immunities[`trait:${trait}`] && !effect.traits.has(`ignore-immunity-${trait}`)) return true;
     }
 
     return false;
   }
 
   async applyRollEffects(toApply: ActiveEffectPTR2e["_source"][]) {
+    const oldEffects = this.effects.filter(e => e.type === "affliction").map(e => e.clone({}, { keepId: true })) as unknown as ActiveEffectPTR2e[];
     const effects = await this.createEmbeddedDocuments("ActiveEffect", toApply) as ActiveEffectPTR2e[];
+
+    const { notApplied, stacksUpdated } = toApply.reduce((acc, e) => {
+      const effect = new ActiveEffectPTR2e(e);
+      if (effects.some(ae => ae.slug === effect.slug)) {
+        return acc;
+      }
+      const oldEffect = oldEffects.find(oe => oe.slug === effect.slug)
+      if (oldEffect) {
+        acc.stacksUpdated.push(oldEffect.uuid);
+      } else {
+        acc.notApplied.push(effect);
+      }
+      return acc;
+    }, { notApplied: [] as ActiveEffectPTR2e[], stacksUpdated: [] as string[] });
+
     await ChatMessage.create({
-      content: `<p>Applied the following effects to @UUID[${this.uuid}]:</p><ul>` + effects.map(e => `<li>@UUID[${e.uuid}]</li>`).join("") + "</ul>"
+      content: effects.length
+        ? `<p>Applied the following effects to @UUID[${this.uuid}]:</p><ul>` + effects.map(e => `<li>@UUID[${e.uuid}]</li>`).join("") + "</ul>"
+        : ""
+        + (
+          stacksUpdated.length
+            ? `<p>The following effects their duration/stacks were updated on @UUID[${this.uuid}]:</p><ul>` + stacksUpdated.map(e => `<li>@UUID[${e}]</li>`).join("") + "</ul>"
+            : ""
+        )
+        + (
+          notApplied.length
+            ? `<p>The following effects could not be applied to @UUID[${this.uuid}] due to immunities</p><ul>` + notApplied.map(e => `<li>${e.name}</li>`).join("") + "</ul>"
+            : ""
+        )
     })
   }
 

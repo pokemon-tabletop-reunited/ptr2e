@@ -5842,6 +5842,22 @@ body .application.sheet .form-group {
   background: var(--appv2-background);
   border-top: 1px solid var(--border-theme-color);
 }
+.token-panel .tab.action-tab .attack-item:first-child .icon img,
+.token-panel .tab.skill-tab .attack-item:first-child .icon img,
+.token-panel .tab.action-tab .action-item:first-child .icon img,
+.token-panel .tab.skill-tab .action-item:first-child .icon img,
+.token-panel .tab.action-tab .skill-item:first-child .icon img,
+.token-panel .tab.skill-tab .skill-item:first-child .icon img {
+  border-radius: 8px 0 0 0;
+}
+.token-panel .tab.action-tab .attack-item:last-child .icon img,
+.token-panel .tab.skill-tab .attack-item:last-child .icon img,
+.token-panel .tab.action-tab .action-item:last-child .icon img,
+.token-panel .tab.skill-tab .action-item:last-child .icon img,
+.token-panel .tab.action-tab .skill-item:last-child .icon img,
+.token-panel .tab.skill-tab .skill-item:last-child .icon img {
+  border-radius: 0 8px 0 0;
+}
 .token-panel .tab.action-tab .attack-item .icon,
 .token-panel .tab.skill-tab .attack-item .icon,
 .token-panel .tab.action-tab .action-item .icon,
@@ -5969,13 +5985,19 @@ body .application.sheet .form-group {
   background: var(--appv2-background);
   border-top: 1px solid var(--border-theme-color);
 }
-.token-panel .tab.effect-tab .effect .icon {
+.token-panel .tab.effect-tab .effect:first-child .effect-icon img {
+  border-radius: 8px 0 0 0;
+}
+.token-panel .tab.effect-tab .effect:last-child .effect-icon img {
+  border-radius: 0 8px 0 0;
+}
+.token-panel .tab.effect-tab .effect .effect-icon {
   flex: 0 0 32px;
   height: 32px;
   width: 32px;
   align-self: center;
 }
-.token-panel .tab.effect-tab .effect .icon img {
+.token-panel .tab.effect-tab .effect .effect-icon img {
   border: unset;
 }
 .token-panel .tab.effect-tab .effect .name {
@@ -6062,6 +6084,9 @@ body .application.sheet .form-group {
   flex: 0 0 calc(100% / 3);
   height: 42px;
   width: 42px;
+}
+.token-panel img {
+  border: unset;
 }
 #perk-hud {
   position: absolute;
