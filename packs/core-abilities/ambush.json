@@ -12,7 +12,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 4,
-          "trigger": "The user enters battle, or emerges from stealth.",
+          "trigger": "<p>The user enters battle, or emerges from stealth.</p>",
           "delay": null,
           "priority": null
         },
@@ -21,11 +21,48 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user enters battle, or emerges from stealth.\nEffect: Connection - Fake Out. The user gains +4 CRIT stages for 2 activations."
+        "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: The user gains +4 CRIT stages for 2 activations.</p>"
+      },
+      {
+        "slug": "fake-out",
+        "name": "Fake Out",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "priority-3",
+          "contact",
+          "flinch-5",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": 3,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: On hit, the target is Flinched.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: The user enters battle, or emerges from stealth.\nEffect: Connection - Fake Out. The user gains +4 CRIT stages for 2 activations.",
-    "traits": [],
+    "description": "<p>Trigger: The user enters battle, or emerges from stealth.<p></p>Effect: Connection - Fake Out. The user gains +4 CRIT stages for 2 activations.</p>",
+    "traits": [
+      "connection"
+    ],
     "slug": null,
     "container": null
   },

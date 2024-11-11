@@ -9,12 +9,12 @@
           "environ"
         ],
         "name": "Wind Power",
-        "slug": "wind-power",
+        "slug": "wind-power-trigger",
         "type": "generic",
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "The user is hit by a [Wind] attack.",
+          "trigger": "<p>Trigger: The user is hit by a [Wind] attack.</p>",
           "delay": null,
           "priority": null
         },
@@ -23,14 +23,14 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user is hit by a [Wind] attack.\nEffect: The user's next Electric-Type attack has double Power."
+        "description": "<p>Trigger: The user is hit by a [Wind] attack.</p><p>Effect: The user gains @Affliction[charged] 1.<p>"
       },
       {
         "traits": [
           "environ"
         ],
         "name": "Wind Power",
-        "slug": "wind-power",
+        "slug": "wind-power-passive",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -39,7 +39,7 @@
           "priority": null
         },
         "range": null,
-        "description": "Passive: While Windy Weather is active, the user's Electric-Type attacks have double Power. The trigger effect of this ability cannot be activated if the user is utilizing the Passive effect."
+        "description": "Passive: While Windy Weather is active, the user's Electric-Type attacks have double Power. The trigger effect of this ability cannot be activated if the user is utilizing this effect."
       }
     ],
     "description": "Trigger: The user is hit by a [Wind] attack.\nEffect: The user's next Electric-Type attack has double Power. Passive: While Windy Weather is active, the user's Electric-Type attacks have double Power. The trigger effect of this ability cannot be activated if the user is utilizing the Passive effect.",

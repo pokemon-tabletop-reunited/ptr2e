@@ -641,7 +641,7 @@ interface SpeciesSystem extends ModelPropsFromSchema<SpeciesSchema> {
   // types: Set<PokemonType>;
 
   // size: {
-  //     /** quadraped / height measurement */
+  //     /** quadruped / height measurement */
   //     type: "height" | "quad" | "length";
 
   //     height: number;
