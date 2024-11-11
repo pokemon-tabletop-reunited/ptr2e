@@ -277,8 +277,8 @@ export class ActorSheetV2Expanded<
    * @param {DragEvent} event       The originating DragEvent
    * @protected
    */
-  async _onDrop(event: DragEvent) {
-    const data: { type: string } = TextEditor.getDragEventData(event);
+  async _onDrop(event: DragEvent, upstreamData?: {type: string}) {
+    const data: { type: string } = upstreamData ?? TextEditor.getDragEventData(event);
     const actor = this.actor;
     const allowed = Hooks.call("dropActorSheetData", actor, this, data);
     if (allowed === false) return;

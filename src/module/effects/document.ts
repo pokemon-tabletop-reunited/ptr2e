@@ -373,7 +373,7 @@ class ActiveEffectPTR2e<
             existing.update({ "system.stacks": existing.system.stacks + (source.system?.stacks || 1) });
             return [];
           }
-          if(existing?.duration.turns) {
+          if(source.type == 'affliction' && existing?.duration.turns) {
             existing.update({ "duration.turns": existing.duration.turns + (source.duration?.turns || 1) });
             return [];
           }
