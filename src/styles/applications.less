@@ -1719,6 +1719,47 @@ body {
         padding: 1rem;
         overflow: hidden;
 
+        header {
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+
+          .actor {
+            display: flex;
+            border: 1px solid var(--border-theme-color);
+            border-radius: 8px;
+            padding: 0.25rem;
+            justify-content: center;
+            align-items: center;
+
+            img {
+              height: 48px;
+              width: 48px;
+              flex: 0 0 48px;
+            }
+
+            span {
+              display: flex;
+              flex-wrap: wrap;
+              align-items: center;
+              justify-content: center;
+              flex: 1;
+              gap: 0.1rem;
+            }
+
+            p {
+              text-align: center;
+              text-wrap: pretty;
+              flex: 1;
+            }
+
+            a[data-action] {
+              flex: 0 0 12px;
+              text-align: center;
+            }
+          }
+        }
+
         nav.scroll {
           padding-top: 0.5rem;
           padding-right: 0.25rem;

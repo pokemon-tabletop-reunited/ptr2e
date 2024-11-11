@@ -34,7 +34,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
         ]
       },
       actions: {
-        tutorList: () => game.ptr.tutorList.render(true)
+        tutorList: () => game.ptr.tutorList.render({ force:true, actor: null})
       }
     },
     { inplace: false }

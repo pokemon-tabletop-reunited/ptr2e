@@ -10,7 +10,7 @@ export class SettingsSidebarPTR2e extends Settings {
 
     const button = event.currentTarget as HTMLElement;
     switch (button.dataset.action) {
-      case "tutor-list": return void game.ptr.tutorList.render(true);
+      case "tutor-list": return void game.ptr.tutorList.render({force: true, actor: null});
       case "compendium-browser": return void game.ptr.compendiumBrowser.render(true);
     }
 

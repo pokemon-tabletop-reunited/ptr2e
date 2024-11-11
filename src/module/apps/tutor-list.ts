@@ -1,6 +1,7 @@
-import { formatSlug } from "@utils";
+import { formatSlug, sluggify } from "@utils";
 import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
+import { ActorPTR2e } from "@actor";
 
 export class TutorListApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -16,6 +17,10 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
         title: "PTR2E.TutorList",
         minimizable: true,
         resizable: true,
+      },
+      dragDrop: [{ dragSelector: null, dropSelector: '.window-content' }],
+      actions: {
+        "clear": function (this: TutorListApp) { this.render({ actor: null, parts: ["aside", "list"] }) },
       }
     },
     { inplace: false }
@@ -37,6 +42,7 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
   };
 
   filter: SearchFilter;
+  actor: ActorPTR2e | null = null;
   currentTab = "";
 
   constructor(options?: Partial<ApplicationConfigurationExpanded>) {
@@ -49,10 +55,17 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     });
   }
 
+  override render(options: boolean | Partial<HandlebarsRenderOptions & { actor: ActorPTR2e | null }>, _options?: (HandlebarsRenderOptions & { actor?: ActorPTR2e | null }) | undefined): Promise<this> {
+    this.actor = options === true ? _options?.actor ?? null : options ? options.actor ?? _options?.actor ?? null : null;
+    return super.render(options, _options);
+  }
+
   override _prepareContext(options?: foundry.applications.api.HandlebarsRenderOptions | undefined) {
+    const lists = game.ptr.data.tutorList.list;
+
     return {
       ...super._prepareContext(options),
-      lists: game.ptr.data.tutorList.list.map(list => ({
+      lists: (this.actor ? this.filterList() : lists).map(list => ({
         slug: list.slug,
         title: list.type !== "universal" ? `${formatSlug(list.slug)} (${list.type === 'egg' ? 'Egg Group' : formatSlug(list.type)})` : formatSlug(list.slug),
         hidden: this.currentTab !== "" ? this.currentTab !== list.id : false,
@@ -62,8 +75,37 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
           uuid: move.uuid
         }))
       })),
-      tab: this.currentTab
+      tab: this.currentTab,
+      actor: this.actor
     }
+  }
+
+  filterList() {
+    const actor = this.actor;
+    const tutorList = game.ptr.data.tutorList;
+    if (!actor) return tutorList.list;
+
+    const resultLists = [tutorList.get("universal-universal")!];
+
+    for (const trait of actor.traits) {
+      const list = tutorList.getType(trait.slug, "trait");
+      if (list) resultLists.push(list);
+    }
+
+    for (const ability of Object.keys(actor.rollOptions.getFromDomain("item")).reduce((acc, val) => {
+      if (val.startsWith("ability:")) acc.push(val.slice(8));
+      return acc;
+    }, [] as string[])) {
+      const list = tutorList.getType(ability, "ability");
+      if (list) resultLists.push(list);
+    }
+
+    for (const eggGroup of actor.system.species?.eggGroups ?? []) {
+      const list = tutorList.getType(sluggify(eggGroup), "egg");
+      if (list) resultLists
+    }
+
+    return resultLists;
   }
 
   override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: HandlebarsRenderOptions): void {
@@ -75,11 +117,11 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
         tab.addEventListener("click", event => {
           event.preventDefault();
           this.currentTab = tab.dataset.tab ?? "";
-          if(this.currentTab === "") {
+          if (this.currentTab === "") {
             const input = htmlElement.querySelector<HTMLInputElement>("input[name='filter']")
-            if(input) input.value = "";
+            if (input) input.value = "";
           }
-          this.render({ parts: ["aside", "list"] });
+          this.render({ actor: this.actor, parts: ["aside", "list"] });
         });
       });
     }
@@ -99,10 +141,24 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
     }
 
     // Hide lists that don't match the query
-    if(!this.currentTab) {
+    if (!this.currentTab) {
       for (const section of this.element.querySelectorAll<HTMLElement>("main section.tutor-list")) {
         section.classList.toggle("hidden", !!query && !visibleLists.has(section.dataset.tab));
       }
     }
   }
+
+  override async _onDrop(event: DragEvent) {
+    event.preventDefault();
+    const data: { uuid: string, type: string } = TextEditor.getDragEventData(event);
+    if (data.type !== "Actor" || !data.uuid) return;
+
+    const actor = await fromUuid<ActorPTR2e>(data.uuid);
+    if (!actor) return;
+    this.render({ actor, parts: ["aside", "list"] });
+  }
+}
+
+export interface TutorListApp {
+  constructor: typeof TutorListApp;
 }

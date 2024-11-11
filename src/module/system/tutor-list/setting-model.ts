@@ -28,6 +28,10 @@ export class TutorListSettings extends foundry.abstract.DataModel {
     return this.list.filter(tutor => tutor.slug === slug);
   }
 
+  getType(slug: string, type: this["list"]['contents'][number]["type"]) {
+    return this.get(`${slug}-${type}`);
+  }
+
   static async initializeAndMigrate() {
     const tutorList = game.settings.get("ptr2e", "tutorListData");
 
