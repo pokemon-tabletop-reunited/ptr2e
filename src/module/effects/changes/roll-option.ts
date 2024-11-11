@@ -1,5 +1,5 @@
 import { ActorPTR2e, RollOptionToggle } from "@actor";
-import { ChangeModel, ChangeSchema } from "@data";
+import { ChangeModel, ChangeModelOptions, ChangeSchema, ChangeSource } from "@data";
 import ResolvableValueField from "@module/data/fields/resolvable-value-field.ts";
 import { StrictStringField } from "@module/data/fields/strict-primitive-fields.ts";
 import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
@@ -8,6 +8,12 @@ import { isObject, sluggify } from "@utils";
 
 export default class RollOptionChangeSystem extends ChangeModel {
   static override TYPE = "roll-option";
+
+  constructor(source: ChangeSource, options: ChangeModelOptions) {
+    super(source, options);
+
+    this.priority ??= -1;
+  }
 
   static override defineSchema() {
     const fields = foundry.data.fields;

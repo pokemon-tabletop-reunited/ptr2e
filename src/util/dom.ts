@@ -36,7 +36,7 @@ function createHTMLElement<K extends keyof HTMLElementTagNameMap>(
     const element = document.createElement(nodeName);
     if (classes.length > 0) element.classList.add(...classes);
 
-    for (const [key, value] of Object.entries(dataset).filter(([, v]) => !R.isNil(v))) {
+    for (const [key, value] of Object.entries(dataset).filter(([, v]) => !R.isNullish(v))) {
         element.dataset[key] = String(value);
     }
 
@@ -110,7 +110,7 @@ function htmlClosest(child: MaybeHTML, selectors: string): HTMLElement | null {
 /** Create a reasonably specific selector for an HTML element */
 function htmlSelectorFor(element: HTMLElement): string {
     const nodeName = element.nodeName.toLowerCase();
-    const classes = R.compact(element.className.split(" "));
+    const classes = R.filter(element.className.split(" "), R.isTruthy);
     const classesString = classes.length > 0 ? `.${classes.join(".")}` : "";
     const datasetEntries = Object.entries(element.dataset).map(([k, v]) => [
         k.replace(/([A-Z])/g, "-$1").toLowerCase(),

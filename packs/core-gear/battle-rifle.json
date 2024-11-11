@@ -17,7 +17,7 @@
     "fling": {
       "type": "steel",
       "power": 60,
-      "accuracy": 100
+      "accuracy": 95
     },
     "rarity": "rare",
     "traits": [
@@ -25,55 +25,120 @@
       "fling",
       "firearm",
       "reload",
-      "two-handed",
-      "shouldered",
       "steel",
       "pp-pool-10"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 60,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "readied",
+          "missile"
+        ],
         "name": "Battle Rifle",
         "slug": "battle-rifle",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Battle Rifle, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Two-Handed",
-          "Shouldered",
-          "Steel",
-          "PP Pool 10"
-        ],
         "range": {
           "target": "creature",
-          "distance": 0,
+          "distance": 35,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
+          "powerPoints": 1,
           "delay": null,
           "priority": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 115,
+        "accuracy": 85,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "readied",
+          "missile"
+        ],
+        "name": "Battle Rifle (Auto)",
+        "slug": "battle-rifle-auto",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 28,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "battle-rifle",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 60,
+        "accuracy": 75,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "dash",
+          "missile"
+        ],
+        "name": "Battle Rifle (Hip Fire)",
+        "slug": "battle-rifle-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null
+        },
+        "variant": "battle-rifle",
+        "contestType": "",
+        "contestEffect": "",
         "slot": null
       }
     ],
-    "description": "Effect: The user may use the Attack Battle Rifle, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "",
     "weaponType": "untyped",
     "weaponPp": 10,
-    "weaponRange": "Creature",
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,

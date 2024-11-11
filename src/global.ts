@@ -2,7 +2,7 @@ import { ActorPTR2e, ActorSystemPTR2e } from "@actor";
 import { CombatPTR2e, CombatantPTR2e, CombatTrackerPTR2e } from "@combat";
 import { ItemPTR2e, ItemSystemPTR } from "@item";
 import { PerkManager } from "@module/apps/perk-manager/perk-manager.ts";
-import { PerkDirectory } from "@module/apps/sidebar-perks/perks-directory.ts";
+import { PerkDirectory } from "@module/apps/sidebar/perks-directory.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
@@ -15,6 +15,10 @@ import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import TokenPanel from "@module/apps/token-panel.ts";
 import PerkWeb from "@module/canvas/perk-tree/perk-web.ts";
 import { remigrate } from "@system/remigrate.ts";
+import { CompendiumBrowserSettings, CompendiumBrowserSources } from "@module/apps/compendium-browser/data.ts";
+import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
+import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
+import { TutorListApp } from "@module/apps/tutor-list.ts";
 
 interface GamePTR2e
     extends Game<
@@ -33,11 +37,13 @@ interface GamePTR2e
             sluggify: typeof sluggify;
             image: ImageResolver;
         };
+        compendiumBrowser: CompendiumBrowser;
         data: {
             traits: TraitsCollection;
             skills: SkillsCollection;
             artMap: ArtMapCollection;
             afflictions: Map<string, StatusEffect>;
+            tutorList: TutorListSettings;
         };
         perks: PerkManager;
         tooltips: TooltipsPTR2e;
@@ -46,6 +52,7 @@ interface GamePTR2e
             panel: ClockPanel;
         };
         tokenPanel: TokenPanel;
+        tutorList: TutorListApp;
         system: {
             remigrate: typeof remigrate;
         }
@@ -95,6 +102,12 @@ declare global {
         TokenPTR2e<TokenDocumentPTR2e<ScenePTR2e>>,
         EffectsCanvasGroup
     >;
+
+    interface ClientSettings {
+      get(module: "ptr2e", key: "compendiumBrowserSources"): CompendiumBrowserSources
+      get(module: "ptr2e", key: "compendiumBrowserPacks"): CompendiumBrowserSettings
+      get(module: "ptr2e", key: "tutorListData"): TutorListSettings
+    }
 
     // eslint-disable-next-line @typescript-eslint/no-namespace
     namespace globalThis {

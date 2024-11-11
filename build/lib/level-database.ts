@@ -44,7 +44,7 @@ class LevelDatabase extends ClassicLevel<string, DBEntry> {
 
     async createPack(docSources: DBEntry[], folders: DBFolder[]): Promise<void> {
         const isDoc = (source: unknown): source is EmbeddedEntry => {
-            return R.isObject(source) && "_id" in source;
+            return R.isPlainObject(source) && "_id" in source;
         };
         const docBatch = this.#documentDb.batch();
         const embeddedBatch = this.#embeddedDb?.batch();
@@ -87,12 +87,13 @@ class LevelDatabase extends ClassicLevel<string, DBEntry> {
                 const embeddedDocs = await this.#embeddedDb.getMany(
                     source[embeddedKey]?.map((embeddedId) => `${docId}.${embeddedId}`) ?? []
                 );
-                source[embeddedKey] = R.compact(embeddedDocs);
+                source[embeddedKey] = R.filter(embeddedDocs, R.isTruthy);
             }
             packSources.push(source as PackEntry);
         }
 
         const folders: DBFolder[] = [];
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         for await (const [_key, folder] of this.#foldersDb.iterator()) {
             folders.push(folder);
         }

@@ -219,26 +219,19 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
     const actor = await this.currentOrigin;
     if (!actor) return;
 
-    const luck = actor.system.skills.get("luck")!.total;
+    const luck = actor.spendableLuck;
     if (luck < number) {
       ui.notifications.warn("You do not have enough Luck to apply this increase.");
       return;
     }
 
-    const skills = actor.system.skills.map((skill) => {
-      return skill.slug === "luck"
-        ? {
-          ...skill,
-          value: luck - number,
-        }
-        : skill;
-    });
-    await actor.update({ "system.skills": skills });
+    const spent = await actor.spendLuck(number);
+    if (!spent?.length) {
+      ui.notifications.warn("Something went wrong while trying to apply Luck!");
+      return;
+    }
 
-    ui.notifications.info(
-      `Successfully applied Luck to this roll, spending ${number} Luck from ${this.context.actor.name
-      }. New total: ${actor.system.skills.get("luck")!.total}`
-    );
+    ui.notifications.info(`Luck spent: ${spent.map(s => `${s.name} (Used ${s.amount}, leftover: ${s.leftover})`).join(", ")}`);
 
     const roll = fu.duplicate(this.roll);
     //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.

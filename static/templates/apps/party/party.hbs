@@ -2,7 +2,7 @@
   <div class="scroll" {{#if folder.color}}style="--folder-color: {{folder.color.css}};"{{/if}}>
     <article class="party" data-folder-id="party">
       <header class="party-header" style="padding: 9px;">
-        <h3 class="party-title noborder" style="padding-left: 3px;">Party</h3>
+        <h3 class="party-title noborder" style="padding-left: 3px;">{{localize PTR2E.PartySheet.PartyLabel}}</h3>
       </header>
       <div class="contents">
         {{#each party}}
@@ -13,7 +13,7 @@
               <main>
                   <div class="title">
                       <span class="name">{{this.name}}</span>
-                      <span class="level">Level {{this.system.advancement.level}}</span>
+                      <span class="level">{{localize PTR2E.FIELDS.level.label}} {{this.system.advancement.level}}</span>
                   </div>
                   <div class="types">
                       {{#each this.system.type.types as |type|}}
@@ -27,9 +27,9 @@
     </article>
     <main class="boxes" data-folder-id="{{folder.id}}">
       <header class="controls">
-        <h3 class="noborder">Boxes</h3>
+        <h3 class="noborder">{{localize PTR2E.PartySheet.Boxes}}</h3>
         <button class="create-folder" title="Create Folder" data-action="create-folder" {{#if disableButton}}disabled{{/if}}>
-          <i class="fas fa-folder-plus"></i> Create Folder
+          <i class="fas fa-folder-plus"></i> {{localize PTR2E.PartySheet.CreateFolder}}
         </button>
       </header>
       <div class="content">
@@ -60,7 +60,7 @@
                 {{/if}}
               {{else}}
                 <section class="box-item empty">
-                  <p>Empty box...</p>
+                  <p>{{localize PTR2E.PartySheet.EmptyBox}}</p>
                 </section>
               {{/each}}
             </div>
@@ -69,7 +69,7 @@
         {{#if nonParty}}
           <article class="box" {{#unless (is folder.safeColor "#000000")}}style="--folder-color: {{folder.safeColor}}"{{/unless}} data-color="{{folder.safeColor}}">
             <header class="box-header">
-              <h3 class="box-title noborder">Root Folder</h3>
+              <h3 class="box-title noborder">{{localize PTR2E.PartySheet.RootFolder}}</h3>
             </header>
             <div class="contents">
               {{#each nonParty as |actor|}}
@@ -81,7 +81,7 @@
                     <main>
                       <div class="title">
                         <span class="name">{{actor.name}}</span>
-                        <span class="level">Level {{actor.system.advancement.level}}</span>
+                        <span class="level">{{localize PTR2E.FIELDS.level.label}} {{actor.system.advancement.level}}</span>
                       </div>
                       <div class="types">
                         {{#each actor.system.type.types as |type|}}
@@ -93,7 +93,7 @@
                 {{/if}}
               {{else}}
                 <section class="box-item empty">
-                  <p>Empty box...</p>
+                  <p>{{localize PTR2E.PartySheet.EmptyBox}}</p>
                 </section>
               {{/each}}
             </div>

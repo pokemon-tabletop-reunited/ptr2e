@@ -638,7 +638,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
       // If we find a match, delete it so that we don't use the same form for two different Changes
       const FormClass = CHANGE_FORMS[change.type] ?? ChangeForm;
       const existing = previousForms.find(
-        (form) => R.equals(form.source, change) && form.constructor.name === FormClass.name
+        (form) => R.isDeepEqual(form.source, change as unknown as typeof form['source']) && form.constructor.name === FormClass.name
       );
       if (existing) {
         previousForms.splice(previousForms.indexOf(existing), 1);

@@ -25,55 +25,123 @@
       "fling",
       "firearm",
       "reload",
-      "two-handed",
-      "shouldered",
       "steel",
       "pp-pool-12"
     ],
     "actions": [
       {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 50,
+        "accuracy": 95,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "readied",
+          "missile"
+        ],
         "name": "Semi-Auto Rifle",
         "slug": "semi-auto-rifle",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
         "type": "attack",
-        "description": "Effect: The user may use the Attack Semi-Auto Rifle, drawing upon this item's PP Pool or the user's PP to use the Attack.",
-        "traits": [
-          "Weapon",
-          "Fling",
-          "Firearm",
-          "Reload",
-          "Two-Handed",
-          "Shouldered",
-          "Steel",
-          "PP Pool 12"
-        ],
         "range": {
           "target": "creature",
-          "distance": 0,
+          "distance": 28,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "powerPoints": 1,
+          "priority": null,
+          "delay": null
         },
         "variant": null,
+        "contestType": "",
+        "contestEffect": "",
+        "slot": null
+      },
+      {
         "types": [
           "untyped"
         ],
-        "category": "physical",
-        "power": null,
-        "accuracy": null,
+        "category": "special",
+        "power": 45,
+        "accuracy": 85,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "readied",
+          "missile",
+          "3-strike",
+          "priority-1"
+        ],
+        "name": "Semi-Auto Rifle (Snap Shot)",
+        "slug": "semi-auto-rifle-snap-shot",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 21,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "priority": 1,
+          "delay": null
+        },
+        "variant": "semi-auto-rifle",
         "contestType": "",
         "contestEffect": "",
-        "free": false,
+        "slot": null
+      },
+      {
+        "types": [
+          "untyped"
+        ],
+        "category": "special",
+        "power": 50,
+        "accuracy": 80,
+        "free": true,
+        "traits": [
+          "load-adaptive",
+          "two-handed",
+          "dash",
+          "missile",
+          "priority-1"
+        ],
+        "name": "Semi-Auto Rifle (Hip Fire)",
+        "slug": "semi-auto-rifle-hip-fire",
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+        "type": "attack",
+        "range": {
+          "target": "creature",
+          "distance": 12,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "priority": 1,
+          "delay": null
+        },
+        "variant": "semi-auto-rifle",
+        "contestType": "",
+        "contestEffect": "",
         "slot": null
       }
     ],
-    "description": "Effect: The user may use the Attack Semi-Auto Rifle, drawing upon this item's PP Pool or the user's PP to use the Attack.",
+    "description": "",
     "weaponType": "untyped",
     "weaponPp": 12,
-    "weaponRange": "Creature",
+    "weaponRange": "",
     "slug": null,
     "container": null,
     "quantity": 1,

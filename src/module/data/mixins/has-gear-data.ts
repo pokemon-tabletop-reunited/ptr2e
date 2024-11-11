@@ -215,5 +215,5 @@ interface _FlingSchema extends foundry.data.fields.DataSchema {
   accuracy: foundry.data.fields.NumberField<number, number, true, false, true>;
 }
 
-const grades = ["E", "E+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+", "S-", "S", "S+"] as const;
+export const grades = ["E", "E+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+", "S-", "S", "S+"] as const;
 export type GearGrade = typeof grades[number];

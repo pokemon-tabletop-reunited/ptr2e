@@ -54,7 +54,7 @@ class AttackStatistic extends Statistic {
     const itemTraits = item.traits!;
     const meleeOrRanged = attack.isMelee ? "melee" : "ranged";
 
-    data.domains = data.check!.domains = R.uniq(
+    data.domains = data.check!.domains = R.unique(
       [
         `all`,
         `check`,
@@ -118,7 +118,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
 
     data.check.domains = Array.from(new Set(data.check.domains ?? []));
-    this.domains = R.uniq(R.compact([data.domains, data.check.domains].flat()));
+    this.domains = R.unique(R.filter([data.domains, data.check.domains].flat(), R.isTruthy));
 
     this.label = data.check?.label
       ? game.i18n.localize(data.check.label) || this.parent.label

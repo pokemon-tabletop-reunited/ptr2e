@@ -181,7 +181,7 @@ class StatisticCheck<TParent extends Statistic = Statistic> implements BaseStati
         this.type = data.check?.type ?? "check";
         data.check = fu.mergeObject(data.check ?? {}, { type: this.type });
 
-        const checkDomains = new Set(R.compact(["check", data.check.domains].flat()));
+        const checkDomains = new Set(R.filter(["check", data.check.domains].flat(), R.isTruthy));
         if (this.type === "attack-roll") {
             checkDomains.add("attack");
             checkDomains.add(`${this.parent.slug}-attack`);
@@ -190,7 +190,7 @@ class StatisticCheck<TParent extends Statistic = Statistic> implements BaseStati
         }
 
         data.check.domains = Array.from(checkDomains);
-        this.domains = R.uniq(R.compact([data.domains, data.check.domains].flat()));
+        this.domains = R.unique(R.filter([data.domains, data.check.domains].flat(), R.isTruthy));
 
         this.label = data.check?.label
             ? game.i18n.localize(data.check.label) || this.parent.label
@@ -265,16 +265,16 @@ class StatisticCheck<TParent extends Statistic = Statistic> implements BaseStati
                 };
             }) ?? null;
 
-        const extraModifiers = R.compact([args.modifiers, rollContext?.self.modifiers].flat());
+        const extraModifiers = R.filter([args.modifiers, rollContext?.self.modifiers].flat(), R.isTruthy);
 
-        const extraRollOptions = R.compact([
+        const extraRollOptions = R.filter([
             ...(args.extraRollOptions ?? []),
             ...(rollContext?.options ?? []),
             `check:statistic:${this.parent.slug}`,
             `check:type:${this.type.replace(/-check$/, "")}`,
             args.slug ? `check:slug:${args.slug}` : null,
             this.parent.base ? `check:statistic:base:${this.parent.base.slug}` : null,
-        ]);
+        ], R.isTruthy);
 
         const options = this.createRollOptions({ ...args, origin, extraRollOptions });
         const notes = [
