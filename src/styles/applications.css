@@ -2327,6 +2327,47 @@ body .application.sheet .form-group {
 .application.sheet.active-effect-sheet textarea {
   resize: vertical;
 }
+.application.sheet.default-sheet .scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.application.sheet.tutor-list .window-content {
+  display: grid;
+  grid-template-columns: 40% 60%;
+  grid-template-rows: 1fr;
+}
+.application.sheet.tutor-list aside {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  overflow: hidden;
+}
+.application.sheet.tutor-list aside nav.scroll {
+  padding-top: 0.5rem;
+  padding-right: 0.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.application.sheet.tutor-list aside nav.scroll a {
+  padding: 0.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-theme-color);
+  text-align: center;
+}
+.application.sheet.tutor-list aside nav.scroll a.active {
+  background: var(--hint-text-color);
+}
+.application.sheet.tutor-list main {
+  padding: 1rem;
+  border-left: 1px solid var(--border-theme-color);
+}
+.application.sheet.tutor-list main h3 {
+  border-color: var(--border-theme-color);
+}
+.application.sheet.tutor-list main ul li {
+  margin-bottom: 0.35rem;
+}
 .application.sheet.skill-sheet {
   max-height: 750px;
 }

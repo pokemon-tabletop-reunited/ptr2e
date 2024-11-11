@@ -1699,6 +1699,60 @@ body {
         }
     }
 
+    &.default-sheet {
+      .scroll {
+        overflow-x: hidden;
+        overflow-y: auto;
+      }
+    }
+
+    &.tutor-list {
+      .window-content {
+        display: grid;
+        grid-template-columns: 40% 60%;
+        grid-template-rows: 1fr;
+      }
+
+      aside {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        overflow: hidden;
+
+        nav.scroll {
+          padding-top: 0.5rem;
+          padding-right: 0.25rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.25rem;
+
+          a {
+            padding: 0.25rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-theme-color);
+            text-align: center;
+
+            &.active {
+              background: var(--hint-text-color);
+            }
+          }
+        }
+      }
+
+      main {
+        padding: 1rem;
+        border-left: 1px solid var(--border-theme-color);
+
+        h3 {
+          border-color: var(--border-theme-color);
+        }
+
+        ul li {
+          margin-bottom: 0.35rem;
+        }
+      }
+    }
+
     &.skill-sheet {
         max-height: 750px;
 

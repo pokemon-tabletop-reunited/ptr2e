@@ -18,6 +18,7 @@ import { remigrate } from "@system/remigrate.ts";
 import { CompendiumBrowserSettings, CompendiumBrowserSources } from "@module/apps/compendium-browser/data.ts";
 import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
+import { TutorListApp } from "@module/apps/tutor-list.ts";
 
 interface GamePTR2e
     extends Game<
@@ -51,6 +52,7 @@ interface GamePTR2e
             panel: ClockPanel;
         };
         tokenPanel: TokenPanel;
+        tutorList: TutorListApp;
         system: {
             remigrate: typeof remigrate;
         }

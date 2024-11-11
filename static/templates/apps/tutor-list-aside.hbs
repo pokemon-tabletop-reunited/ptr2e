@@ -1,0 +1,15 @@
+<aside>
+  <header>
+    <input name="filter" type="search" placeholder="Filter" value="">
+  </header>
+  <nav class="scroll tutor-list-options">
+    <a class="item{{#if (eq tab "")}} active{{/if}}" data-tab="">
+      All
+    </a>
+    {{#each lists as |list|}}
+      <a class="item list-tab{{#if (eq @root.tab list.slug)}} active{{/if}}" data-tab="{{list.slug}}">
+        {{list.title}}
+      </a>
+    {{/each}}
+  </nav>
+</aside>

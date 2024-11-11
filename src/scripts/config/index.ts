@@ -27,6 +27,7 @@ import { AttackRoll } from "@system/rolls/attack-roll.ts";
 import { CaptureRoll } from "@system/rolls/capture-roll.ts";
 import trackableAttributes from "./trackable-token-attributes.ts";
 import { CompendiumDirectoryPTR2e } from "@module/apps/sidebar/compendium-directory.ts";
+import { SettingsSidebarPTR2e } from "@module/apps/sidebar/settings.ts";
 
 export const PTRCONFIG = {
     ActiveEffect: {
@@ -142,7 +143,8 @@ export const PTRCONFIG = {
         combat: CombatTrackerPTR2e,
         items: ItemDirectoryPTR2e,
         actors: ActorDirectoryPTR2e,
-        compendium: CompendiumDirectoryPTR2e
+        compendium: CompendiumDirectoryPTR2e,
+        settings: SettingsSidebarPTR2e
     },
     data: {
         traits: Traits,

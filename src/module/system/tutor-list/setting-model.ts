@@ -14,7 +14,7 @@ export class TutorListSettings extends foundry.abstract.DataModel {
           slug: new SlugField({required: true, nullable: false}),
           // Type of trait or Ability
           type: new foundry.data.fields.StringField({
-            choices: ["trait", "ability", "universal"],
+            choices: ["trait", "egg", "ability", "universal"],
             initial: "trait",
             required: true,
             nullable: false,
@@ -107,9 +107,9 @@ interface TutorListSettingsSchema extends foundry.data.fields.DataSchema {
   >;
 }
 
-interface _TutorListSettingsSchema extends foundry.data.fields.DataSchema {
+export interface _TutorListSettingsSchema extends foundry.data.fields.DataSchema {
   slug: SlugField<string, string, true, false, false>,
-  type: foundry.data.fields.StringField<"trait" | "ability" | "universal", "trait" | "ability" | "universal", true, false, true>,
+  type: foundry.data.fields.StringField<"trait" | "ability" | "egg" | "universal", "trait" | "ability" | "egg" | "universal", true, false, true>,
   moves: CollectionField<
     foundry.data.fields.SchemaField<_MoveSchema>,
     SourceFromSchema<_MoveSchema>[],

@@ -13,6 +13,7 @@ import { remigrate } from "@system/remigrate.ts";
 import { DataStructure } from "@module/apps/data-inspector/data-handler.ts";
 import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
+import { TutorListApp } from "@module/apps/tutor-list.ts";
 
 const GamePTR = {
   onInit() {
@@ -42,7 +43,8 @@ const GamePTR = {
         db: ClockDatabase,
         panel: new ClockPanel({ id: "ptr2e-clock-panel" }),
       },
-      tokenPanel: new TokenPanel(null, { id: "ptr2e-token-panel" })
+      tokenPanel: new TokenPanel(null, { id: "ptr2e-token-panel" }),
+      tutorList: new TutorListApp({id: "ptr2e-tutor-list"}),
     };
 
     // Add reference for 'fainted' to the 'dead' condition

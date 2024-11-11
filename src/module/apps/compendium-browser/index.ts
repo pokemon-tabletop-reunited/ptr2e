@@ -246,14 +246,18 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     return R.unique(this.dataTabsList.flatMap((t) => this.loadedPacks(t))).sort();
   }
 
-  // override _getHeaderControls(): foundry.applications.api.ApplicationHeaderControlsEntry[] {
-  //   const controls = super._getHeaderControls();
-  //   for (const control of controls) {
-  //     if (!['deleteVariant', 'openOriginal'].includes(control.action)) continue;
-  //     control.visible = !!this.action.variant
-  //   }
-  //   return controls;
-  // }
+  override async _renderFrame(options: foundry.applications.api.HandlebarsRenderOptions): Promise<HTMLElement> {
+    const frame = await super._renderFrame(options);
+
+    // Add send to chat button
+    const openTutorList = game.i18n.localize("PTR2E.OpenTutorList");
+    const tutorList = `<button type="button" class="header-control fa-solid fa-list" data-action="tutorList"
+                                data-tooltip="${openTutorList}" aria-label="${openTutorList}"></button>`;
+    this.window.controls.insertAdjacentHTML("afterend", tutorList);
+
+    return frame;
+  }
+
 
   override async _prepareContext() {
     const activeTab = this.activeTab;

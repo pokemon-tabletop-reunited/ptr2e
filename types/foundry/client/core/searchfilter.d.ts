@@ -43,9 +43,9 @@ declare class SearchFilter {
     }?: {
         inputSelector: string;
         contentSelector: string;
-        initial: string;
-        callback: () => void;
-        delay: number;
+        initial?: string;
+        callback: (() => void) | ((event: KeyboardEvent, query: string, rgx: RegExp, html: HTMLElement) => void);
+        delay?: number;
     });
 
     bind(html: HTMLElement): void;
