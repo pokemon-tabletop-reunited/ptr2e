@@ -10,11 +10,11 @@
           "connection"
         ],
         "name": "Blinding One",
-        "slug": "blinding-one",
+        "slug": "blinding-one-active",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 8,
+          "powerPoints": 5,
           "delay": null,
           "priority": null
         },
@@ -23,15 +23,14 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: Connection - Prismatic Laser. For the rest of the user's Activation, Prismatic Laser changes to Prismatic Beams."
+        "description": "<p>Effect: For the rest of the user's Activation, Prismatic Laser changes to Prismatic Beams.</p>"
       },
       {
         "traits": [
-          "legendary",
-          "connection"
+          "legendary"
         ],
         "name": "Blinding One",
-        "slug": "blinding-one",
+        "slug": "blinding-one-passive",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -40,7 +39,113 @@
           "priority": null
         },
         "range": null,
-        "description": "Passive: the user gains the Perforate and Radiance Abilities. When the user deactivates its Ultra Burst and changes Formes, this Ability is replaced with Prism Armor."
+        "description": "<p>Passive: the user gains the Perforate and Radiance Abilities. When the user deactivates its Ultra Burst and changes Formes, this Ability is replaced with Prism Armor.</p>"
+      },
+      {
+        "traits": [],
+        "name": "Radiance",
+        "slug": "radiance",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "aura",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "Effect: Allies within Range of the user take 25% less damage from Dark-Type attacks. Dark-Type Status-Category attacks fail to activate within Range."
+      },
+      {
+        "traits": [],
+        "name": "Perforate",
+        "slug": "perforate",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "Effect: Attacks that the user gains STAB on are resisted one step less. These attacks that a target would normally be immune to are instead resisted one step."
+      },
+      {
+        "name": "Prismatic Beams",
+        "slug": "prismatic-beams",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "ray",
+          "legendary",
+          "4-strike",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null,
+        "types": [
+          "psychic"
+        ],
+        "category": "special",
+        "power": 28,
+        "accuracy": 90,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": ""
+      },
+      {
+        "name": "Prismatic Laser",
+        "slug": "prismatic-laser",
+        "type": "attack",
+        "img": "icons/svg/explosion.svg",
+        "traits": [
+          "ray",
+          "legendary",
+          "exhaust",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null
+        },
+        "variant": null,
+        "types": [
+          "psychic"
+        ],
+        "category": "special",
+        "power": 160,
+        "accuracy": 100,
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null,
+        "description": ""
       }
     ],
     "description": "Effect: Connection - Prismatic Laser. For the rest of the user's Activation, For the rest of the user's Activation, Prismatic Laser changes to Prismatic Beams. Passive: the user gains the Perforate and Radiance Abilities. When the user deactivates its Ultra Burst and changes Formes, this Ability is replaced with Prism Armor.",

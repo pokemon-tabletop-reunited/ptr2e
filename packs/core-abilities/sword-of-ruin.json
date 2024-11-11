@@ -24,10 +24,41 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: Connection - Ruination. All other creatures have their DEF stat reduced by 25%. This reduction happens before any [Stage Change] effects."
+        "description": "<p>Effect: All other creatures have their DEF stat reduced by 25%. This reduction happens before any [Stage Change] effects.</p>"
+      },
+      {
+        "slug": "ruination",
+        "name": "Ruination",
+        "type": "attack",
+        "traits": [
+          "legendary"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": null,
+        "accuracy": 90,
+        "types": [
+          "dark"
+        ],
+        "description": "<p>Effect: On hit, all valid target's HP is cut in half. This attack always deals a minimum of 1 HP in damage.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Effect: Connection - Ruination. All other creatures have their DEF stat reduced by 25%. This reduction happens before any [Stage Change] effects.",
+    "description": "<p>Effect: Connection - Ruination. All other creatures have their DEF stat reduced by 25%. This reduction happens before any [Stage Change] effects.</p>",
     "traits": [
       "legendary",
       "aura",

@@ -25,6 +25,35 @@
           "unit": "m"
         },
         "description": "Trigger: The user is hit by a Fire-Type attack.\nEffect: Connection - Stoke. The user takes no damage from the triggering attack and is not affected by the triggering attack's effect. Then, the user freely uses Stoke."
+      },
+      {
+        "slug": "stoke",
+        "name": "Stoke",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "fire"
+        ],
+        "description": "<p>Effect: The user gains @Affliction[stoked] 1 and +1 SPD stage 5 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
     "description": "Trigger: The user is hit by a Fire-Type attack.\nEffect: Connection - Stoke. The user takes no damage from the triggering attack and is not affected by the triggering attack's effect. Then, the user freely uses Stoke.",

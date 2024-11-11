@@ -15,7 +15,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "The user is hit by a Physical or Special-category attack.",
+          "trigger": "The user is hit by a Physical or Special-Category Attack.",
           "delay": null,
           "priority": null
         },
@@ -24,10 +24,39 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user is hit by a Physical or Special-category attack. \nEffect: Connection - Charge. The user freely uses Charge."
+        "description": "Trigger: The user is hit by a Physical or Special-Category Attack. \nEffect: Connection - Charge. The user freely uses Charge."
+      },
+      {
+        "slug": "charge",
+        "name": "Charge",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Effect: The user gains @Affliction[charged] 1 and +1 SPDEF stage 5 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: The user is hit by a Physical or Special-category attack. \nEffect: Connection - Charge. The user freely uses Charge.",
+    "description": "Trigger: The user is hit by a Physical or Special-Category Attack. \nEffect: Connection - Charge. The user freely uses Charge.",
     "traits": [
       "defensive",
       "connection"

@@ -28,9 +28,14 @@
     ],
     "slug": "chlorophyll",
     "_migration": {
-      "version": null,
-      "previous": null
-    }
+      "version": 0.108,
+      "previous": {
+        "schema": null,
+        "foundry": "12.329",
+        "system": "0.10.0-alpha.3.2.0"
+      }
+    },
+    "slot": 1
   },
   "_id": "8RkpxP9VcH6mzSEM",
   "effects": [
@@ -50,15 +55,15 @@
             "toggleable": true,
             "count": false,
             "alwaysActive": false,
+            "state": true,
             "mode": 2,
             "priority": null,
             "ignored": false,
-            "suboptions": [],
-            "state": false
+            "suboptions": []
           },
           {
             "type": "basic",
-            "key": "system.attributes.spe.value",
+            "key": "system.modifiers.speMultiplier",
             "value": 2,
             "mode": 1,
             "predicate": [
@@ -76,13 +81,13 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
+        "startTime": 0,
         "seconds": null,
         "combat": null,
         "rounds": null,
         "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "startRound": 8,
+        "startTurn": 0
       },
       "description": "",
       "origin": null,
@@ -94,12 +99,12 @@
       "_stats": {
         "compendiumSource": "Compendium.ptr2e.core-abilities.Item.8RkpxP9VcH6mzSEM.ActiveEffect.f9fyv7wQDAApxsnp",
         "duplicateSource": null,
-        "coreVersion": "12.331",
+        "coreVersion": "12.329",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.3.2.0",
-        "createdTime": 1730337122837,
-        "modifiedTime": 1730337403702,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "createdTime": null,
+        "modifiedTime": 1730629510330,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
       }
     }
   ]
