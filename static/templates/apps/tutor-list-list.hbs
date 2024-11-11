@@ -1,7 +1,7 @@
 <main>
   <div class="scroll">
     {{#each lists as |list|}}
-    <section class="tutor-list{{#if list.hidden}} hidden{{/if}}" data-tab="{{list.slug}}">
+    <section class="tutor-list{{#if list.hidden}} hidden{{/if}}" data-tab="{{list.id}}">
       <h3>{{list.title}}</h3>
       <ul>
         {{#each list.moves as |move|}}

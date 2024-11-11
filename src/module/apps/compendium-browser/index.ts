@@ -34,9 +34,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
         ]
       },
       actions: {
-        // toChat: function toChat<TDocument extends ItemPTR2e<ItemSystemsWithActions>>(this: ActionEditor<TDocument>) {
-        //   this.document.toChat();
-        // }
+        tutorList: () => game.ptr.tutorList.render(true)
       }
     },
     { inplace: false }

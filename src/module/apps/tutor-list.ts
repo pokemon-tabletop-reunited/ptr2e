@@ -9,8 +9,8 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
       tag: "div",
       classes: ["sheet", "tutor-list", "default-sheet"],
       position: {
-        height: 780,
-        width: 500,
+        height: 680,
+        width: 550,
       },
       window: {
         title: "PTR2E.TutorList",
@@ -54,8 +54,8 @@ export class TutorListApp extends foundry.applications.api.HandlebarsApplication
       ...super._prepareContext(options),
       lists: game.ptr.data.tutorList.list.map(list => ({
         slug: list.slug,
-        title: formatSlug(list.slug),
-        hidden: this.currentTab !== "" ? this.currentTab !== list.slug : false,
+        title: list.type !== "universal" ? `${formatSlug(list.slug)} (${list.type === 'egg' ? 'Egg Group' : formatSlug(list.type)})` : formatSlug(list.slug),
+        hidden: this.currentTab !== "" ? this.currentTab !== list.id : false,
         moves: list.moves.map(move => ({
           slug: move.slug,
           title: formatSlug(move.slug),

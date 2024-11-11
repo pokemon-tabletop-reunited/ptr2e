@@ -8,27 +8,7 @@ export const TutorListVersion = 1 as const;
 export class TutorListSettings extends foundry.abstract.DataModel {
   static override defineSchema(): TutorListSettingsSchema {
     return {
-      list: new CollectionField(
-        new foundry.data.fields.SchemaField({
-          // Slug of trait or Ability Name
-          slug: new SlugField({required: true, nullable: false}),
-          // Type of trait or Ability
-          type: new foundry.data.fields.StringField({
-            choices: ["trait", "egg", "ability", "universal"],
-            initial: "trait",
-            required: true,
-            nullable: false,
-          }),
-          moves: new CollectionField(
-            new foundry.data.fields.SchemaField({
-              // Slug of move
-              slug: new SlugField({required: true, nullable: false}),
-              // Uuid of move
-              uuid: new foundry.data.fields.StringField(),
-            })
-          ),
-        })
-      ),
+      list: new CollectionField(new foundry.data.fields.EmbeddedDataField(TutorListSchema), "id"),
       _migration: new foundry.data.fields.SchemaField({
         version: new foundry.data.fields.NumberField({ required: true, nullable: true, initial: null }),
         previous: new foundry.data.fields.SchemaField({
@@ -40,31 +20,39 @@ export class TutorListSettings extends foundry.abstract.DataModel {
     }
   }
 
+  get(id: string) {
+    return this.list.get(id);
+  }
+
+  getName(slug: string) {
+    return this.list.filter(tutor => tutor.slug === slug);
+  }
+
   static async initializeAndMigrate() {
     const tutorList = game.settings.get("ptr2e", "tutorListData");
-    
+
     // Migrate Tutor List
-    if(fu.isNewerVersion(TutorListVersion, tutorList._migration?.version ?? 0)) {
+    if (fu.isNewerVersion(TutorListVersion, tutorList._migration?.version ?? 0)) {
       const moveIndex = await game.packs.get("ptr2e.core-moves")!.getIndex();
       const moveMap = new Map<string, string>();
-      for(const move of moveIndex) {
+      for (const move of moveIndex) {
         moveMap.set(sluggify(move.name), move.uuid);
       }
-      
+
       const tutorData = [];
       // Initialize Tutor List
-      for(const data of TutorListData) {
+      for (const data of TutorListData) {
         const tutor = {
           ...data,
-          moves: [] as {slug: string, uuid: string}[]
+          moves: [] as { slug: string, uuid: string }[]
         };
-        for(const move of data.moves) {
+        for (const move of data.moves) {
           const uuid = moveMap.get(move);
-          if(!uuid) {
+          if (!uuid) {
             console.warn(`Unable to load ${move} for Tutor List ${data.slug} (${data.type}). Skipping...`);
             continue;
           }
-          tutor.moves.push({slug: move, uuid});
+          tutor.moves.push({ slug: move, uuid });
         }
         tutorData.push(tutor);
       }
@@ -88,11 +76,43 @@ export interface TutorListSettings extends foundry.abstract.DataModel, ModelProp
   _source: SourceFromSchema<TutorListSettingsSchema>;
 }
 
+class TutorListSchema extends foundry.abstract.DataModel {
+  static override defineSchema() {
+    return {
+      // Slug of trait or Ability Name
+      slug: new SlugField({ required: true, nullable: false }),
+      // Type of trait or Ability
+      type: new foundry.data.fields.StringField({
+        choices: ["trait", "egg", "ability", "universal"],
+        initial: "trait",
+        required: true,
+        nullable: false,
+      }),
+      moves: new CollectionField(
+        new foundry.data.fields.SchemaField({
+          // Slug of move
+          slug: new SlugField({ required: true, nullable: false }),
+          // Uuid of move
+          uuid: new foundry.data.fields.StringField(),
+        })
+      ),
+    };
+  }
+
+  get id() {
+    return `${this.slug}-${this.type}`;
+  }
+}
+
+interface TutorListSchema extends foundry.abstract.DataModel, ModelPropsFromSchema<_TutorListSettingsSchema> {
+  _source: SourceFromSchema<_TutorListSettingsSchema>;
+}
+
 interface TutorListSettingsSchema extends foundry.data.fields.DataSchema {
   list: CollectionField<
-    foundry.data.fields.SchemaField<_TutorListSettingsSchema>,
+    foundry.data.fields.EmbeddedDataField<TutorListSchema>,
     SourceFromSchema<_TutorListSettingsSchema>[],
-    Collection<ModelPropsFromSchema<_TutorListSettingsSchema>>,
+    Collection<TutorListSchema>,
     true,
     false,
     true

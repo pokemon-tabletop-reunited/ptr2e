@@ -7,7 +7,7 @@
       All
     </a>
     {{#each lists as |list|}}
-      <a class="item list-tab{{#if (eq @root.tab list.slug)}} active{{/if}}" data-tab="{{list.slug}}">
+      <a class="item list-tab{{#if (eq @root.tab list.id)}} active{{/if}}" data-tab="{{list.id}}">
         {{list.title}}
       </a>
     {{/each}}
