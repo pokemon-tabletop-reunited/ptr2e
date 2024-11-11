@@ -921,7 +921,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       }
     }
 
-    if (!data.action?.slug) return super._onDrop(event);
+    if (!data.action?.slug) return super._onDrop(event, data);
     //@ts-expect-error - This is a custom method
     this._onDropAction(event, data);
     return;

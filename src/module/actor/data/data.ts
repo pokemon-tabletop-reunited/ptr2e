@@ -36,12 +36,7 @@ interface ActorSystemSchema extends TraitsSchema, MigrationSchema, foundry.data.
     Collection<ClockPTR2e>,
     true, false, true
   >;
-  // clocks: foundry.data.fields.ArrayField<
-  //   foundry.data.fields.EmbeddedDataField<ClockPTR2e, true, false, true>,
-  //   SourceFromSchema<ClockSchema>[],
-  //   ModelPropsFromSchema<ClockSchema>[],
-  //   true, false, true
-  // >;
+  immunities: foundry.data.fields.SetField<SlugField, string[], Set<string>, true, false, true>;
 }
 
 interface PartySchema extends foundry.data.fields.DataSchema {

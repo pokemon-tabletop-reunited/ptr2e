@@ -156,6 +156,9 @@ class AttackRoll extends CheckRoll {
         const attackStat = origin.getAttackStat(attack);
         const defenseStat = target.getDefenseStat(attack, isCritHit);
 
+        // Check for Sniper
+        const hasSniper = origin.rollOptions.getFromDomain("item")["ability:sniper:active"];
+
         // Type effectiveness
         const typeEffectiveness = target.getEffectiveness(attack.types);
 
@@ -169,7 +172,7 @@ class AttackRoll extends CheckRoll {
             attack: attackStat,
             defense: defenseStat,
             targets: isMultiTarget ? 0.75 : 1,
-            critical: isCritHit ? 1.5 : 1,
+            critical: isCritHit ? hasSniper ? 2 : 1.5 : 1,
             random: damageRoll,
             stab: attack.stab,
             type: typeEffectiveness,

@@ -53,8 +53,15 @@ export default class EffectRollChangeSystem extends ChangeModel {
   override apply(actor: ActorPTR2e): void {
     if (!this.actor) return;
 
-    const selector = this.resolveInjectedProperties(this.selector);
-    const defferedEffect = this.#createDeferredEffectRoll();
+    const {selector, isCrit} = (() => {
+      const selector = this.resolveInjectedProperties(this.selector)
+      const isCrit = selector.endsWith("-crit");
+      return {
+        selector: isCrit ? selector.slice(0, -5) : selector,
+        isCrit,
+      }
+    })();
+    const defferedEffect = this.#createDeferredEffectRoll(isCrit);
     const synthetics = (actor.synthetics.effects[selector] ??= {
       self: [],
       target: [],
@@ -63,11 +70,11 @@ export default class EffectRollChangeSystem extends ChangeModel {
     synthetics[this.affects].push(defferedEffect);
   }
 
-  #createDeferredEffectRoll(): DeferredEffectRoll {
+  #createDeferredEffectRoll(isCrit = false): DeferredEffectRoll {
     return async (params: DeferredValueParams = {}): Promise<EffectRoll | null> => {
       if (!this.actor) return null;
       if (!this.test(params.test ?? this.actor.getRollOptions())) return null;
-
+      
       const uuid = this.resolveInjectedProperties(this.uuid);
       if (!UUIDUtils.isItemUUID(uuid)) {
         this.failValidation(`"${uuid}" does not look like a UUID`);
@@ -83,6 +90,7 @@ export default class EffectRollChangeSystem extends ChangeModel {
         effect: effect.uuid,
         chance: this.chance,
         label: this.label,
+        critOnly: isCrit,
       };
     }
   }

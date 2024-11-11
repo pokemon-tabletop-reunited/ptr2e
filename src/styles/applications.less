@@ -1359,7 +1359,6 @@ body {
     }
 
     &.default-sheet,
-    &.skill-sheet,
     &#perk-hud-base,
     &.pick-a-thing-prompt,
     &.known-actions-sheet,
@@ -5886,32 +5885,40 @@ body {
                 flex-direction: row;
                 max-width: 150px;
 
+                &:first-child .icon img {
+                  border-radius: 8px 0 0 0;
+                }
+
+                &:last-child .icon img {
+                  border-radius: 0 8px 0 0;
+                }
+
                 .icon {
-                    flex: 0 0 32px;
-                    height: 32px;
-                    width: 32px;
-                    align-self: center;
+                  flex: 0 0 32px;
+                  height: 32px;
+                  width: 32px;
+                  align-self: center;
 
-                    cursor: pointer;
+                  cursor: pointer;
 
+                  img {
+                      border: unset;
+
+                      &.dice {
+                          display: none;
+                      }
+                  }
+
+                  &:hover {
                     img {
-                        border: unset;
-
+                        display: none;
+  
                         &.dice {
-                            display: none;
+                            display: unset;
                         }
+  
                     }
-
-                    &:hover {
-                        img {
-                            display: none;
-
-                            &.dice {
-                                display: unset;
-                            }
-
-                        }
-                    }
+                  }
                 }
 
                 .name {
@@ -5972,7 +5979,15 @@ body {
                 display: flex;
                 flex-direction: row;
 
-                .icon {
+                &:first-child .effect-icon img {
+                  border-radius: 8px 0 0 0;
+                }
+
+                &:last-child .effect-icon img {
+                  border-radius: 0 8px 0 0;
+                }
+
+                .effect-icon {
                     flex: 0 0 32px;
                     height: 32px;
                     width: 32px;
@@ -6087,6 +6102,10 @@ body {
             height: 42px;
             width: 42px;
         }
+    }
+
+    img {
+      border: unset;
     }
 }
 

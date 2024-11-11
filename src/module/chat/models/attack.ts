@@ -75,14 +75,16 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
               effect: new fields.DocumentUUIDField(),
               label: new fields.StringField({ required: true, initial: "" }),
               roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
-              success: new fields.BooleanField({ required: true, nullable: true, initial: null })
+              success: new fields.BooleanField({ required: true, nullable: true, initial: null }),
+              critOnly: new fields.BooleanField({ required: true, initial: false })
             }), { required: true, initial: [] }),
             origin: new fields.ArrayField(new fields.SchemaField({
               chance: new fields.NumberField({ required: true, min: 1, max: 100 }),
               effect: new fields.DocumentUUIDField(),
               label: new fields.StringField({ required: true, initial: "" }),
               roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
-              success: new fields.BooleanField({ required: true, nullable: true, initial: null })
+              success: new fields.BooleanField({ required: true, nullable: true, initial: null }),
+              critOnly: new fields.BooleanField({ required: true, initial: false })
             }), { required: true, initial: [] }),
           }, { required: true, nullable: true, initial: null }),
         }),
@@ -112,7 +114,8 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           effect: new fields.DocumentUUIDField(),
           label: new fields.StringField({ required: true, initial: "" }),
           roll: new fields.JSONField({ required: true, nullable: true, initial: null }),
-          success: new fields.BooleanField({ required: true, nullable: true, initial: null })
+          success: new fields.BooleanField({ required: true, nullable: true, initial: null }),
+          critOnly: new fields.BooleanField({ required: true, initial: false }),
         }), { required: true, initial: [] }),
       }, { required: true, nullable: true, initial: null })
     };
@@ -190,6 +193,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             label: e.label,
             roll: fromRollData(e.roll),
             success: e.success,
+            critOnly: e.critOnly,
           })),
           origin: source.effectRolls.origin.map((e) => ({
             chance: e.chance,
@@ -197,6 +201,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
             label: e.label,
             roll: fromRollData(e.roll),
             success: e.success,
+            critOnly: e.critOnly,
           })),
         }
       }
@@ -210,6 +215,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         label: e.label,
         roll: fromRollData(e.roll),
         success: e.success,
+        critOnly: e.critOnly,
       }))
     }
 
@@ -470,7 +476,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     const result = this.context!.results.get(targetUuid);
     if (!result) return false;
 
-    async function applyEffects(target: ActorPTR2e, effects: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[]) {
+    async function applyEffects(target: ActorPTR2e, effects: foundry.data.fields.ModelPropFromDataField<foundry.data.fields.SchemaField<EffectRollsSchema>>[], isCrit = false) {
       if (!effects.length) return;
       const toApply = await (async () => {
         const toApply: ActiveEffectPTR2e['_source'][] = [];
@@ -478,7 +484,9 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
           if (effectRoll.success === null) {
             effectRoll.success = (effectRoll.roll?.total ?? 1) <= 0
           }
+          if(!isCrit && effectRoll.critOnly) continue;
           if (!effectRoll.success) continue;
+
 
           const item = await fromUuid(effectRoll.effect);
           if (!item) {
@@ -511,12 +519,12 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
       })(),
       (async (): Promise<void> => {
         const target = result.target;
-        await applyEffects(target, result.effect.effects?.target ?? []);
+        await applyEffects(target, result.effect.effects?.target ?? [], result.hit === "critical");
       })(),
       (async (): Promise<void> => {
         const target = await this.currentOrigin;
         if (!target) return;
-        await applyEffects(target, result.effect.effects?.origin ?? []);
+        await applyEffects(target, result.effect.effects?.origin ?? [], result.hit === "critical");
       })(),
     ]))[0];
   }
@@ -851,6 +859,7 @@ interface EffectRollsSchema extends foundry.data.fields.DataSchema {
   label: foundry.data.fields.StringField<string, string, true, false, true>;
   roll: foundry.data.fields.JSONField<Rolled<Roll>, true, true, true>;
   success: foundry.data.fields.BooleanField<boolean, boolean, true, true, true>;
+  critOnly: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
 }
 
 export default AttackMessageSystem;
