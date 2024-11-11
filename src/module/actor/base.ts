@@ -456,6 +456,12 @@ class ActorPTR2e<
         effectiveness[typeKey] *= types[type].effectiveness[typeKey];
       }
     }
+    const typeImmunities = Object.keys(this.rollOptions.getFromDomain("immunities") ?? {}).filter(o => o.startsWith("type:"));
+    for(const immunity of typeImmunities) {
+      const type = immunity.split(":")[1] as PokemonType;
+      effectiveness[type] = 0;
+    }
+    
     return effectiveness;
   }
 
@@ -1222,7 +1228,7 @@ class ActorPTR2e<
       (options: Record<string, boolean>, option: string) => ({ ...options, [option]: true }),
       {}
     );
-    const applicableEffects = ephemeralEffects.filter((effect) => !this.isImmuneTo(effect));
+    const applicableEffects = ephemeralEffects.filter((effect) => !this.isImmuneToEffect(effect));
 
     return this.clone(
       {
@@ -1234,9 +1240,21 @@ class ActorPTR2e<
     );
   }
 
-  //TODO: Implement
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  isImmuneTo(_effect: EffectSourcePTR2e): boolean {
+  isImmuneToEffect(data: ActiveEffectPTR2e | ActiveEffectPTR2e['_source']): boolean {
+    const effect = data instanceof ActiveEffectPTR2e ? data : new ActiveEffectPTR2e(data);
+    const immunities = this.rollOptions.getFromDomain("immunities");
+    if(Object.keys(immunities).length === 0) return false;
+    if(effect.traits.has("ignore-immunity")) return false;
+
+    if(effect.traits.has("major-affliction") || effect.traits.has("minor-affliction")) {
+      const name = effect.slug === "burn" ? "burned" : effect.slug;
+      if(immunities[`affliction:${name}`] && !effect.traits.has(`ignore-immunity-${name}`)) return true;
+    }
+
+    for(const trait of effect.traits) {
+      if(immunities[`trait:${trait}`] && !effect.traits.has(`ignore-immunity-${trait}`)) return true;
+    }
+
     return false;
   }
 
