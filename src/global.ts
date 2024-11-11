@@ -17,6 +17,7 @@ import PerkWeb from "@module/canvas/perk-tree/perk-web.ts";
 import { remigrate } from "@system/remigrate.ts";
 import { CompendiumBrowserSettings, CompendiumBrowserSources } from "@module/apps/compendium-browser/data.ts";
 import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
+import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 
 interface GamePTR2e
     extends Game<
@@ -41,6 +42,7 @@ interface GamePTR2e
             skills: SkillsCollection;
             artMap: ArtMapCollection;
             afflictions: Map<string, StatusEffect>;
+            tutorList: TutorListSettings;
         };
         perks: PerkManager;
         tooltips: TooltipsPTR2e;
@@ -102,6 +104,7 @@ declare global {
     interface ClientSettings {
       get(module: "ptr2e", key: "compendiumBrowserSources"): CompendiumBrowserSources
       get(module: "ptr2e", key: "compendiumBrowserPacks"): CompendiumBrowserSettings
+      get(module: "ptr2e", key: "tutorListData"): TutorListSettings
     }
 
     // eslint-disable-next-line @typescript-eslint/no-namespace
