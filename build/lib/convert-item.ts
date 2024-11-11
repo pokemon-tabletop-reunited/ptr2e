@@ -37,13 +37,13 @@ function getMarkdownPath({
     title,
     extension = true,
 }: {
-    type: "abilities" | "effects" | "items" | "moves" | "perks" | "species" | "traits";
-    subtype?: "consumables" | "equipment" | "gear" | "weapons";
-    category: keyof typeof categories;
+    type: "abilities" | "effects" | "items" | "moves" | "perks" | "species" | "traits" | "lists";
+    subtype?: "consumables" | "equipment" | "gear" | "weapons" | "tutor";
+    category?: keyof typeof categories;
     title: string;
     extension?: boolean;
 }): string {
-    const path = `${type}/${subtype ? `${subtype}/` : ""}${category}/${sluggify(title)}${
+    const path = `${type}/${subtype ? `${subtype}/` : ""}${category ? `${category}/` : ""}${sluggify(title)}${
         extension ? ".md" : ""
     }`;
     return path;
@@ -559,6 +559,40 @@ function weaponToMarkdown(weapon: any): MarkdownResult {
     };
 }
 
+function tutorListToMarkdown(data: {
+  slug: string;
+  type: string;
+  moves: string[];
+}): MarkdownResult {
+  const path = getMarkdownPath({
+    type: "lists",
+    subtype: "tutor",
+    title: data.slug,
+  });
+  const metadata: MetaData = {
+    title: formatSlug(data.slug),
+    description: `An auto-generated markdown file for the ${data.slug} tutor list.`,
+    published: "true",
+    editor: "markdown",
+    tags: `tutor list, move, ${data.slug}, ${data.type}`,
+  };
+
+  const markdown = data.moves.length ? data.moves.map(move => 
+    `- [${formatSlug(move)}](/${getMarkdownPath({
+      type: "moves",
+      category: getCategory(move),
+      title: move,
+      extension: false
+    })})`
+  ).join("\n") : `This tutor list is planned, but no moves have been added yet!`;
+
+  return {
+    metadata,
+    path,
+    markdown
+  }
+}
+
 interface MarkdownResult {
     metadata: MetaData;
     markdown: string;
@@ -582,6 +616,7 @@ export {
     moveToMarkdown,
     perkToMarkdown,
     speciesToMarkdown,
+    tutorListToMarkdown,
     weaponToMarkdown,
     getMarkdownPath,
     getCategory,
