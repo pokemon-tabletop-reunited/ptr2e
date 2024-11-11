@@ -1,0 +1,137 @@
+{
+  "name": "Hivemark",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.108,
+      "previous": null
+    },
+    "actions": [
+      {
+        "name": "Hivemark Action (#1)",
+        "slug": "hivemark-action-1",
+        "description": "<p>Passive: Your Bug-Type Moves gain a +20% chance to inflict Infested 5.</p>",
+        "traits": [],
+        "type": "passive",
+        "img": "systems/ptr2e/img/svg/bug_icon.svg",
+        "range": {
+          "target": "enemy",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": ""
+        },
+        "variant": null,
+        "hidden": true
+      }
+    ],
+    "slug": null,
+    "description": "<p>Passive: Your Bug-Type Moves gain a +20% chance to inflict Infested 5.</p>",
+    "traits": [],
+    "prerequisites": [
+      "[Bug]"
+    ],
+    "cost": 2,
+    "originSlug": null,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": ""
+    },
+    "node": {
+      "i": null,
+      "j": null,
+      "connected": [],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": null,
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "_id": "o8JKgkDzgMMay8Co",
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
+  "effects": [
+    {
+      "name": "Hivemark",
+      "type": "passive",
+      "_id": "xt11UeCVjAoBmK4z",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "bug-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.infestedconditem",
+            "predicate": [],
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.2.0",
+        "createdTime": 1731105131277,
+        "modifiedTime": 1731105155513,
+        "lastModifiedBy": "wRgL6u6KEJDBDQIE"
+      }
+    }
+  ],
+  "folder": null,
+  "sort": 0,
+  "ownership": {
+    "default": 0,
+    "wRgL6u6KEJDBDQIE": 3
+  },
+  "flags": {},
+  "_stats": {
+    "compendiumSource": null,
+    "duplicateSource": null,
+    "coreVersion": "12.331",
+    "systemId": "ptr2e",
+    "systemVersion": "0.10.0-alpha.3.2.0",
+    "createdTime": 1731104694958,
+    "modifiedTime": 1731105123121,
+    "lastModifiedBy": "wRgL6u6KEJDBDQIE"
+  }
+}
