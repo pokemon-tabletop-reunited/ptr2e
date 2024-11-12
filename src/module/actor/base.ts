@@ -685,6 +685,10 @@ class ActorPTR2e<
     isDelta?: boolean,
     isBar?: boolean
   ): Promise<this> {
+    if(attribute === "health") {
+      if(value >= 0) value = Math.floor(value);
+      if(value < 0) value = Math.ceil(value);
+    }
     if (isDelta && value != 0 && attribute === "health") {
       await this.applyDamage(value * -1);
       return this;
