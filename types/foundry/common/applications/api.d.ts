@@ -411,7 +411,7 @@ export class ApplicationV2<
      * @param {ApplicationRenderOptions} options      Options provided at render-time
      * @protected
      */
-    _updateFrame(options: TRenderOptions): void;
+    _updateFrame(options: Pick<TRenderOptions, 'window'>): void;
 
     /* -------------------------------------------- */
 
@@ -865,7 +865,7 @@ export type DialogV2Options = Partial<ApplicationConfiguration & DialogV2Configu
 export class DialogV2 extends ApplicationV2<DialogV2Configuration> {
     static prompt<TReturn>(
         options: Omit<DialogV2Configuration, keyof ApplicationConfiguration | "submit"> &
-            Partial<ApplicationConfiguration>
+            Partial<ApplicationConfiguration> & Partial<Pick<DialogV2Configuration, "submit">>
     ): Promise<TReturn>;
 
     /**
