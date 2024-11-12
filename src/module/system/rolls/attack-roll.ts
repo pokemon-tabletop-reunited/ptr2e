@@ -113,7 +113,8 @@ class AttackRoll extends CheckRoll {
         if (basePower === null) return null;
 
         const powerModifier = data.check.total?.power?.percentile ?? 1;
-        const power = Math.max(1, Math.floor(basePower * powerModifier));
+        const powerFlatModifier = data.check.total?.power?.flat ?? 0;
+        const power = Math.max(1, Math.floor(basePower * powerModifier) + powerFlatModifier);
         options.power = power;
         options.damageMod = data.check.total?.damage?.percentile ?? 1;
 
@@ -165,6 +166,9 @@ class AttackRoll extends CheckRoll {
         // Other modifiers
         const otherModifier = this.options.damageMod ?? 1;
 
+        // Flat damage modifier
+        const flatDamage = this.options.flatDamage ?? 0;
+
         // Calculate the damage
         const context = {
             level: origin.level,
@@ -177,9 +181,10 @@ class AttackRoll extends CheckRoll {
             stab: attack.stab,
             type: typeEffectiveness,
             other: otherModifier,
+            flatDamage: flatDamage,
         };
         const roll = new Roll(
-            "((((((2 * @level) / 5) + 2) * @power * (@attack / (@defense * (4 / 3)))) / 50) + 2) * @targets * @critical * ((100 - @random) / 100) * @stab * @type * @other",
+            "((((((2 * @level) / 5) + 2) * @power * (@attack / (@defense * (4 / 3)))) / 50) + 2 + @flatDamage) * @targets * @critical * ((100 - @random) / 100) * @stab * @type * @other",
             context
         ).evaluateSync();
 
@@ -212,6 +217,7 @@ type AttackRollDataPTR2e = CheckRollDataPTR2e & {
     power?: number;
     damageMod?: number;
     outOfRange: boolean;
+    flatDamage?: number
 } & AccuracyContext
 
 export { AttackRoll, type AttackRollDataPTR2e, type AttackRollCreationData };
