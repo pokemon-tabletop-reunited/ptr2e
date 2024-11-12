@@ -160,16 +160,19 @@ class ActorPTR2e<
   }
 
   get spendableLuck(): number {
-    return (!this.party?.owner || this.party?.owner == this)
-      ? this.luck
-      : this.luck + this.party.owner.luck;
+    return Math.max(
+      (
+        (!this.party?.owner || this.party?.owner == this)
+          ? this.luck
+          : this.luck + this.party.owner.luck
+      ) ?? 0 - 1, 0)
   }
 
   async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = [], notifications: { name: string, amount: number, leftover: number }[] = []): Promise<{ name: string, amount: number, leftover: number }[]> {
     // no "spending" a negative amount of luck
     if (amount < 0) return [];
     // If we can't afford it, don't spend it.
-    if (amount > this.spendableLuck) return [];
+    if (amount > this.spendableLuck || this.spendableLuck - amount <= 0) return [];
 
     const luck = this.luck;
     if (luck > 0) {
@@ -685,9 +688,9 @@ class ActorPTR2e<
     isDelta?: boolean,
     isBar?: boolean
   ): Promise<this> {
-    if(attribute === "health") {
-      if(value >= 0) value = Math.floor(value);
-      if(value < 0) value = Math.ceil(value);
+    if (attribute === "health") {
+      if (value >= 0) value = Math.floor(value);
+      if (value < 0) value = Math.ceil(value);
     }
     if (isDelta && value != 0 && attribute === "health") {
       await this.applyDamage(value * -1);
