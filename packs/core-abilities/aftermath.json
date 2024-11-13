@@ -23,7 +23,7 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user gains @Affliction[fainted].</p><p>Effect: The user freely uses Self-Destruct.</p>"
+        "description": "<p>Trigger: The user gains @Affliction[fainted].</p><p>Effect: The user freely uses Self-Destruct. The user cannot use this in response to gaining @Affliction[fainted] from setting its own HP to 0.</p>"
       },
       {
         "slug": "self-destruct",
@@ -91,7 +91,7 @@
         "slot": null
       }
     ],
-    "description": "<p>Trigger: The user gains @Affliction[fainted].</p><p>Effect: Connection - Self-Destruct. The user freely uses Self-Destruct. When using Self-Destruct (separately from this Ability's Trigger Affliction), the user may spend an additional 4 PP to instead take damage equal to 1/2 their Max HP on resolving Self-Destruct instead of Fainting.</p>",
+    "description": "<p>Trigger: The user gains @Affliction[fainted].</p><p>Effect: Connection - Self-Destruct. The user freely uses Self-Destruct. The user cannot use this in response to gaining @Affliction[fainted] from setting its own HP to 0. When using Self-Destruct (separately from this Ability's Trigger Affliction), the user may spend an additional 4 PP to instead take damage equal to 1/2 their Max HP on resolving Self-Destruct instead of Fainting.</p>",
     "traits": [
       "explode",
       "connection"
