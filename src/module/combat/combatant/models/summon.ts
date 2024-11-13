@@ -53,7 +53,7 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
       messages.push(game.i18n.localize("PTR2E.Combat.Summon.Messages.HasActions"));
       messages.push("<ul>")
       for(const action of this.item.system.actions) {
-        messages.push(game.i18n.format("PTR2E.Combat.Summon.Messages.Action", {name: action.name}));
+        messages.push(game.i18n.format("PTR2E.Combat.Summon.Messages.Action", {name: action.link}));
       }
       messages.push("</ul>")
     }

@@ -6,7 +6,7 @@ import TypeDataModel from "types/foundry/common/abstract/type-data.js";
 import { AttackRollResult, CheckRoll, PokeballRollResults } from "../system/rolls/check-roll.ts";
 import AttackMessageSystem from "./models/attack.ts";
 import * as R from "remeda";
-import { ItemPTR2e } from "@item";
+import { ItemPTR2e, SummonPTR2e } from "@item";
 import { AttackPTR2e } from "@data";
 import { CombatantPTR2e } from "@combat";
 
@@ -138,7 +138,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       const action = item?.actions?.get(actionSlug);
       if (!(action?.type === "attack" && action.summon)) return void ui.notifications.error("Action not found on item.");
 
-      const summonItem = await fromUuid<ItemPTR2e>((action as AttackPTR2e).summon);
+      const summonItem = await fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
       if (!summonItem) return void ui.notifications.error("Summon not found on action.");
 
       const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
