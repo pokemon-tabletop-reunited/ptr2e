@@ -76,6 +76,14 @@ export default class AttackPTR2e extends ActionPTR2e {
         label: "PTR2E.FIELDS.slot.label",
         hint: "PTR2E.FIELDS.slot.hint",
       }),
+      summon: new fields.DocumentUUIDField({
+        required: true,
+        nullable: true,
+        initial: null,
+        label: "PTR2E.FIELDS.summon.label",
+        hint: "PTR2E.FIELDS.summon.hint",
+        type: "Item"
+      })
     };
   }
 
@@ -233,4 +241,5 @@ interface AttackSchema extends foundry.data.fields.DataSchema {
   contestEffect: foundry.data.fields.StringField<string, string, true>;
   free: foundry.data.fields.BooleanField<boolean, boolean>;
   slot: foundry.data.fields.NumberField<number, number, true, true, true>;
+  summon: foundry.data.fields.DocumentUUIDField<string>;
 }

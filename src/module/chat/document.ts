@@ -6,6 +6,9 @@ import TypeDataModel from "types/foundry/common/abstract/type-data.js";
 import { AttackRollResult, CheckRoll, PokeballRollResults } from "../system/rolls/check-roll.ts";
 import AttackMessageSystem from "./models/attack.ts";
 import * as R from "remeda";
+import { ItemPTR2e } from "@item";
+import { AttackPTR2e } from "@data";
+import { CombatantPTR2e } from "@combat";
 
 class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends ChatMessage<TSchema> {
   /** Get the actor associated with this chat message */
@@ -119,8 +122,40 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       "activateListeners" in this.system &&
       this.system &&
       typeof this.system.activateListeners === "function"
-    )
+    ) {
       this.system.activateListeners(html);
+    }
+
+    // Summon Button
+    html.find("button.create-summon").on("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (!game.combat) return void ui.notifications.error("You must be in combat to summon a creature.");
+
+      const { itemUuid, attack: actionSlug } = event.currentTarget.dataset;
+      const item = await fromUuid<ItemPTR2e>(itemUuid);
+      const action = item?.actions?.get(actionSlug);
+      if (!(action?.type === "attack" && action.summon)) return void ui.notifications.error("Action not found on item.");
+
+      const summonItem = await fromUuid<ItemPTR2e>((action as AttackPTR2e).summon);
+      if (!summonItem) return void ui.notifications.error("Summon not found on action.");
+
+      const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
+        name: summonItem.name,
+        type: "summon",
+        system: {
+          owner: item?.actor?.uuid ?? null,
+          item: { ...summonItem.toObject(), uuid: itemUuid }
+        }
+      }])
+
+      if (!combatants.length) return void ui.notifications.error("Failed to create summon.");
+
+      ChatMessage.create({
+        content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
+      });
+    });
 
     html.find(".dice-roll").on("click", (event) => {
       event.preventDefault();
@@ -270,7 +305,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       type = "skill";
     }
 
-    if(type == "skill") {
+    if (type == "skill") {
       system.result = {
         modifiers: context.modifiers,
         ...R.pick(context, ["action", "domains", "notes", "title", "type"]),
@@ -290,7 +325,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       speaker,
       flavor,
       system,
-    }, {rollMode: context.rollMode});
+    }, { rollMode: context.rollMode });
   }
 
   static createFromPokeballResults<TTypeDataModel extends TypeDataModel = TypeDataModel>(
@@ -331,7 +366,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       speaker,
       flavor,
       system,
-    }, {rollMode: context.rollMode});
+    }, { rollMode: context.rollMode });
   }
 
   static async createFromResults(
@@ -407,7 +442,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       selfEffects: context.selfEffectRolls?.length ? {
         applied: true,
         rolls: await Promise.all(context.selfEffectRolls.map(async (r) => {
-          const roll = r.roll ? r.roll : (await new Roll("1d100ms@dc", {dc: r.chance}).roll())
+          const roll = r.roll ? r.roll : (await new Roll("1d100ms@dc", { dc: r.chance }).roll())
           return {
             chance: r.chance,
             effect: r.effect,
@@ -433,11 +468,11 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         speaker,
         flavor,
         system,
-      }, {rollMode: context.rollMode});
+      }, { rollMode: context.rollMode });
   }
 
   override get isRoll(): boolean {
-    if(["attack","skill","capture"].includes(this.type)) return true;
+    if (["attack", "skill", "capture"].includes(this.type)) return true;
     return super.isRoll;
   }
 }

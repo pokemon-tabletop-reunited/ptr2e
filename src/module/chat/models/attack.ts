@@ -605,8 +605,6 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     html.find("[data-action='consume-pp']").on("click", this.spendPP.bind(this));
   }
 
-
-
   public async applyLuckIncrease(targetUuid: ActorUUID) {
     const results = fu.duplicate(this.parent.system.results);
     const currentResult = results[this.parent.system.results.findIndex(r => r.target.uuid == targetUuid)];
