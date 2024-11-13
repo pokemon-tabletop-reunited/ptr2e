@@ -24,7 +24,8 @@ class CollectionField<
 
     if (Array.isArray(value)) {
       return value.reduce((acc: Collection<TElementField>, element) => {
-        acc.set((element as unknown as Record<string, string>)[this.keyField], this.element.initialize(element, model, options) as TElementField);
+        const initializedElement = this.element.initialize(element, model, options) as TElementField;
+        acc.set((element as unknown as Record<string, string>)[this.keyField] ?? (initializedElement as unknown as Record<string, string>)[this.keyField], initializedElement);
         return acc;
       }, new Collection());
     }

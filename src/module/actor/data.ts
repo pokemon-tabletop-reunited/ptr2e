@@ -16,6 +16,7 @@ export interface EffectRoll {
   label: string;
   roll?: Rolled<Roll>;
   success?: boolean;
+  critOnly?: boolean;
   [key: string]: unknown;
 }
 

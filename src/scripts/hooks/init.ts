@@ -37,7 +37,6 @@ export const Init: PTRHook = {
 
             // Set custom combat settings
             CONFIG.ui.combat = PTRCONFIG.ui.combat
-            CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
 
             // Define custom Entity classes
             CONFIG.ActiveEffect.documentClass = PTRCONFIG.ActiveEffect.documentClass;
@@ -78,6 +77,9 @@ export const Init: PTRHook = {
 
             CONFIG.ui.items = PTRCONFIG.ui.items;
             CONFIG.ui.actors = PTRCONFIG.ui.actors;
+            CONFIG.ui.compendium = PTRCONFIG.ui.compendium;
+            CONFIG.ui.perksTab = PTRCONFIG.ui.perks;
+            CONFIG.ui.settings = PTRCONFIG.ui.settings;
 
             // Register custom sheets
             {

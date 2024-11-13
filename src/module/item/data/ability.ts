@@ -35,12 +35,12 @@ export default abstract class AbilitySystem extends HasEmbed(HasBase(foundry.abs
     };
   }
 
-  override prepareBaseData(): void {
-    // if (!this.free && this.slot === null) {
-    //   this.parent.effects.map(e => e.disabled = true);
-    // }
+  override prepareDerivedData(): void {
+    if (this.free || this.slot !== null) {
+      this.parent.rollOptions.addOption("item", `${this.parent.type}:${this.parent.slug}:active`);
+    }
 
-    super.prepareBaseData();
+    super.prepareDerivedData();
   }
 
   override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {

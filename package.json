@@ -15,6 +15,7 @@
         "migration:three": "tsx ./build/manual-migrations/migration-icons.ts",
         "migration:four": "tsx ./build/manual-migrations/capture-rate.ts",
         "migration:five": "tsx ./build/manual-migrations/fix-evolution-uuids.ts",
+        "migration:six": "tsx ./build/manual-migrations/add-move-grades.ts",
         "clean": "tsx ./build/clean.ts",
         "watch": "npm run clean && npm run build:packs && vite build --watch --mode development",
         "hot": "vite serve",
@@ -89,7 +90,8 @@
         "minisearch": "^6.3.0",
         "pixi-filters": "^5.3.0",
         "pokeapi-js-wrapper": "^1.2.4",
-        "remeda": "^1.40.0",
-        "sortablejs": "^1.15.2"
+        "remeda": "^2.16.0",
+        "sortablejs": "^1.15.2",
+        "nouislider": "^15.8.1"
     }
 }

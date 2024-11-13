@@ -160,26 +160,29 @@ class ActorPTR2e<
   }
 
   get spendableLuck(): number {
-    return (!this.party?.owner || this.party?.owner == this)
-      ? this.luck
-      : this.luck + this.party.owner.luck;
+    return Math.max(
+      (
+        (!this.party?.owner || this.party?.owner == this)
+          ? this.luck
+          : this.luck + this.party.owner.luck
+      ) ?? 0 - 1, 0)
   }
 
-  async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = [], notifications: {name: string, amount: number, leftover: number}[] = []): Promise<{name: string, amount: number, leftover: number}[]> {
+  async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = [], notifications: { name: string, amount: number, leftover: number }[] = []): Promise<{ name: string, amount: number, leftover: number }[]> {
     // no "spending" a negative amount of luck
     if (amount < 0) return [];
     // If we can't afford it, don't spend it.
-    if (amount > this.spendableLuck) return [];
+    if (amount > this.spendableLuck || this.spendableLuck - amount <= 0) return [];
 
     const luck = this.luck;
     if (luck > 0) {
       const skills = this.system.toObject().skills;
       const luckSkill = skills.find((skill) => skill.slug === "luck");
-      if(!luckSkill) return [];
+      if (!luckSkill) return [];
       luckSkill.value = Math.max(luck - amount, 1);
 
       amount -= luck;
-      notifications.push({name: this.name, amount: luck - luckSkill.value, leftover: luckSkill.value});
+      notifications.push({ name: this.name, amount: luck - luckSkill.value, leftover: luckSkill.value });
       pendingUpdates.push({ _id: this.id, "system.skills": skills });
     }
     if (amount <= 0) {
@@ -456,6 +459,12 @@ class ActorPTR2e<
         effectiveness[typeKey] *= types[type].effectiveness[typeKey];
       }
     }
+    const typeImmunities = Object.keys(this.rollOptions.getFromDomain("immunities") ?? {}).filter(o => o.startsWith("type:"));
+    for (const immunity of typeImmunities) {
+      const type = immunity.split(":")[1] as PokemonType;
+      effectiveness[type] = 0;
+    }
+
     return effectiveness;
   }
 
@@ -679,6 +688,10 @@ class ActorPTR2e<
     isDelta?: boolean,
     isBar?: boolean
   ): Promise<this> {
+    if (attribute === "health") {
+      if (value >= 0) value = Math.floor(value);
+      if (value < 0) value = Math.ceil(value);
+    }
     if (isDelta && value != 0 && attribute === "health") {
       await this.applyDamage(value * -1);
       return this;
@@ -1018,11 +1031,11 @@ class ActorPTR2e<
       params.viewOnly || !targetToken?.actor
         ? this
         : this.getContextualClone(
-          R.compact([
+          [
             ...Array.from(params.options),
             ...targetToken.actor.getSelfRollOptions("target"),
             ...initialActionOptions,
-          ]),
+          ].filter(R.isTruthy),
           originEphemeralEffects
         );
 
@@ -1094,7 +1107,7 @@ class ActorPTR2e<
         }
       }
 
-      return R.uniq(traits).sort();
+      return R.unique(traits).sort();
     })();
 
     // Calculate distance and range increment, set as a roll option
@@ -1106,13 +1119,12 @@ class ActorPTR2e<
 
     const originRollOptions =
       selfToken && targetToken
-        ? R.compact(
-          R.uniq([
-            ...selfActor.getSelfRollOptions("origin"),
-            ...actionTraits.map((t) => `origin:action:trait:${t}`),
-            ...(originDistance ? [originDistance] : []),
-          ])
-        )
+        ?
+        R.unique([
+          ...selfActor.getSelfRollOptions("origin"),
+          ...actionTraits.map((t) => `origin:action:trait:${t}`),
+          ...(originDistance ? [originDistance] : []),
+        ]).filter(R.isTruthy)
         : [];
 
     // Target roll options
@@ -1167,19 +1179,19 @@ class ActorPTR2e<
     const targetActor = params.viewOnly
       ? null
       : (params.target?.actor ?? targetToken?.actor)?.getContextualClone(
-        R.compact([...params.options, ...itemOptions, ...originRollOptions]),
+        [...params.options, ...itemOptions, ...originRollOptions].filter(R.isTruthy),
         targetEphemeralEffects
       ) ?? null;
 
     const rollOptions = new Set(
-      R.compact([
+      [
         ...params.options,
         ...selfActor.getRollOptions(params.domains),
         ...(targetActor ? getTargetRollOptions(targetActor) : targetRollOptions),
         ...actionTraits.map((t) => `self:action:trait:${t}`),
         ...itemOptions,
         ...(targetDistance ? [targetDistance] : []),
-      ])
+      ].filter(R.isTruthy)
     );
 
     const rangeIncrement = selfAttack
@@ -1223,7 +1235,7 @@ class ActorPTR2e<
       (options: Record<string, boolean>, option: string) => ({ ...options, [option]: true }),
       {}
     );
-    const applicableEffects = ephemeralEffects.filter((effect) => !this.isImmuneTo(effect));
+    const applicableEffects = ephemeralEffects.filter((effect) => !this.isImmuneToEffect(effect));
 
     return this.clone(
       {
@@ -1235,16 +1247,56 @@ class ActorPTR2e<
     );
   }
 
-  //TODO: Implement
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  isImmuneTo(_effect: EffectSourcePTR2e): boolean {
+  isImmuneToEffect(data: ActiveEffectPTR2e | ActiveEffectPTR2e['_source']): boolean {
+    const effect = data instanceof ActiveEffectPTR2e ? data : new ActiveEffectPTR2e(data);
+    const immunities = this.rollOptions.getFromDomain("immunities");
+    if (Object.keys(immunities).length === 0) return false;
+    if (effect.traits.has("ignore-immunity")) return false;
+
+    if (effect.traits.has("major-affliction") || effect.traits.has("minor-affliction")) {
+      const name = effect.slug === "burn" ? "burned" : effect.slug;
+      if (immunities[`affliction:${name}`] && !effect.traits.has(`ignore-immunity-${name}`)) return true;
+    }
+
+    for (const trait of effect.traits) {
+      if (immunities[`trait:${trait}`] && !effect.traits.has(`ignore-immunity-${trait}`)) return true;
+    }
+
     return false;
   }
 
   async applyRollEffects(toApply: ActiveEffectPTR2e["_source"][]) {
+    const oldEffects = this.effects.filter(e => e.type === "affliction").map(e => e.clone({}, { keepId: true })) as unknown as ActiveEffectPTR2e[];
     const effects = await this.createEmbeddedDocuments("ActiveEffect", toApply) as ActiveEffectPTR2e[];
+
+    const { notApplied, stacksUpdated } = toApply.reduce((acc, e) => {
+      const effect = new ActiveEffectPTR2e(e);
+      if (effects.some(ae => ae.slug === effect.slug)) {
+        return acc;
+      }
+      const oldEffect = oldEffects.find(oe => oe.slug === effect.slug)
+      if (oldEffect) {
+        acc.stacksUpdated.push(oldEffect.uuid);
+      } else {
+        acc.notApplied.push(effect);
+      }
+      return acc;
+    }, { notApplied: [] as ActiveEffectPTR2e[], stacksUpdated: [] as string[] });
+
     await ChatMessage.create({
-      content: `<p>Applied the following effects to @UUID[${this.uuid}]:</p><ul>` + effects.map(e => `<li>@UUID[${e.uuid}]</li>`).join("") + "</ul>"
+      content: effects.length
+        ? `<p>Applied the following effects to @UUID[${this.uuid}]:</p><ul>` + effects.map(e => `<li>@UUID[${e.uuid}]</li>`).join("") + "</ul>"
+        : ""
+        + (
+          stacksUpdated.length
+            ? `<p>The following effects their duration/stacks were updated on @UUID[${this.uuid}]:</p><ul>` + stacksUpdated.map(e => `<li>@UUID[${e}]</li>`).join("") + "</ul>"
+            : ""
+        )
+        + (
+          notApplied.length
+            ? `<p>The following effects could not be applied to @UUID[${this.uuid}] due to immunities</p><ul>` + notApplied.map(e => `<li>${e.name}</li>`).join("") + "</ul>"
+            : ""
+        )
     })
   }
 

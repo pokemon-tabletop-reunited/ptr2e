@@ -18,6 +18,14 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
       },
       window: {
         resizable: true,
+        controls: [
+          {
+            action: "rename",
+            icon: "fas fa-edit",
+            label: "PTR2E.Rename",
+            visible: true
+          }
+        ]
       },
       form: {
         submitOnChange: true,
@@ -25,6 +33,25 @@ export default class BlueprintSheet extends foundry.applications.api.HandlebarsA
         handler: this.#onSubmit,
       },
       dragDrop: [{ dropSelector: "aside" }],
+      actions: {
+        "rename": async function (this: BlueprintSheet) {
+          const name = this.document.name;
+          const dialog = await foundry.applications.api.DialogV2.prompt<string>({
+            window: {title: game.i18n.localize("PTR2E.Dialog.RenameDocumentTitle")},
+            content: `<p>${game.i18n.localize("PTR2E.Dialog.RenameDocumentContent")}</p><input type="text" name="name" value="${name}">`,
+            ok: {
+              action: "ok",
+              label: "Confirm",
+              callback: (_event, _button, dialog) => {
+                return dialog?.querySelector<HTMLInputElement>("input[name='name']")?.value ?? name
+              }
+            }
+          })
+          if(!dialog || name == dialog) return;
+          await this.document.update({name: dialog});
+          if(this.rendered) this._updateFrame({window: {title: this.title}});
+        }
+      },
       tag: "form",
     },
     { inplace: false }

@@ -12,7 +12,7 @@
                     </a>
                 </div>
             </div>
-            <div class="actions-list">
+            <div class="actions-list" data-parent="{{item.uuid}}">
                 {{#each item.actions as |action|}}
                     {{> action action=action}}
                 {{/each}}
@@ -22,7 +22,7 @@
 </section>
 
 {{#*inline "action"}}
-    <div class="action" data-action="{{action.slug}}">
+    <div class="{{action.type}} action" data-action="{{action.slug}}" data-tooltip="{{action.slug}}" data-tooltip-direction="LEFT">
         <div class="action-name">{{action.name}}</div>
         <div class="action-type">{{action.type}}</div>
         <div class="action-controls item-controls">

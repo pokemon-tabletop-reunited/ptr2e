@@ -783,7 +783,7 @@
     "slug": "legendary",
     "label": "Legendary",
     "related": [],
-    "description": "Indicates this creature is a Legendary creature."
+    "description": "Indicates this creature is a Legendary creature. Abilities with this Trait are also considered to be Innate."
   },
   {
     "slug": "lifesense-x",
@@ -1834,11 +1834,6 @@
     "description": "Denotes if an attack or ability utilizes a bone or ossified item or appendage."
   },
   {
-    "slug": "burrow",
-    "label": "Burrow",
-    "related": []
-  },
-  {
     "slug": "contact",
     "label": "Contact",
     "related": [],
@@ -2601,7 +2596,7 @@
     "slug": "shield",
     "label": "Shield",
     "related": [],
-    "description": "Denotes if an attack/ability/effect provides a shielding function."
+    "description": "Denotes if an attack/ability/effect provides a shielding function. The HP-like mechanic of Shields is considered to possess this Trait."
   },
   {
     "slug": "shrink",
@@ -3061,5 +3056,12 @@
     "label": "PP Updated",
     "related": [],
     "description": "This action has had it's PP Errata'd, any action lacking this trait still has to undergo the PP Errata.\nOnce all actions have been errata'd this trait will be removed."
+  },
+  {
+    "slug": "ignore-immunity",
+    "label": "Ignore Immunity",
+    "related": [],
+    "description": "<p>Denotes if an Effect should ignore an actor's Immunity. This trait ignores all Actor based immunities while applying an effect.</p><p>If you want to be more specific, you can add a custom [Ignore Immunity X] trait, such as [Ignore Immunity Poison] to denote that the effect ignores Poison Immunity.</p>",
+    "type": "automated"
   }
 ]

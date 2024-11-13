@@ -258,6 +258,11 @@ class ActiveEffectPTR2e<
           },
         });
       }
+
+      if (this.target.isImmuneToEffect(this)) {
+        ui.notifications.warn(game.i18n.format("PTR2E.Effect.Immune", { effect: this.name, target: this.target.name }));
+        return false;
+      }
     }
 
     if (data.description.startsWith("PTR2E.Effect.")) {
@@ -360,12 +365,21 @@ class ActiveEffectPTR2e<
           source._id = fu.randomID();
         }
 
-        const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(
-          (e) => e.slug === sluggify(source.name)
-        );
-        if (existing?.system.stacks) {
-          existing.update({ "system.stacks": existing.system.stacks + (source.system?.stacks || 1) });
-          return [];
+        if (source.flags?.ptr2e?.stacks !== false) {
+          const existing = (parent.effects.contents as ActiveEffectPTR2e[]).find(
+            (e) => e.slug === sluggify(source.name)
+          );
+          if (existing?.system.stacks) {
+            existing.update({ "system.stacks": existing.system.stacks + (source.system?.stacks || 1) });
+            return [];
+          }
+          if ((
+            (source.system?.traits as string[])?.includes("major-affliction")
+            || (source.system?.traits as string[])?.includes("minor-affliction")
+          ) && existing?.duration.turns) {
+            existing.update({ "duration.turns": existing.duration.turns + (source.duration?.turns || 1) });
+            return [];
+          }
         }
 
         return new this(source, { parent });

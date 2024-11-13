@@ -17,7 +17,9 @@
   "TYPES.ActiveEffect.affliction": "Affliction",
   "ITEM.AddButton": "Add",
   "ITEM.DeleteButton": "Delete",
+  "SETTINGS.TutorList": "Manage Tutor Lists",
   "PTR2E": {
+    "Rename": "Rename",
     "Actor": {
       "Plural": "Actors"
     },
@@ -40,6 +42,67 @@
         }
       }
     },
+    "CompendiumBrowser": {
+      "Title": "Compendium Browser",
+      "SearchPlaceholder": "Search for items...",
+      "SortByLabel": "Sort By",
+      "ClearFilters": "Clear Filters",
+      "FilterConjunction": {
+        "AndLabel": "And",
+        "OrLabel": "Or"
+      },
+      "Tabs": {
+        "Ability": "Abilities",
+        "Gear": "Gear",
+        "Move": "Moves",
+        "Perk": "Perks",
+        "Species": "Species"
+      },
+      "Filters": {
+        "Type": "Item Subtype",
+        "FlingType": "Fling Typing",
+        "Traits": "Traits",
+        "Rarity": "Rarity",
+        "Grade": "Grade",
+        "Cost": "IP Cost",
+        "ApCost": "AP Cost",
+        "EggGroups": "Egg Groups",
+        "Category": "Category",
+        "Power": "Power",
+        "FlingPower": "Fling Power",
+        "Accuracy": "Accuracy",
+        "FlingAccuracy": "Fling Accuracy",
+        "CarrySlot": "Carry Slot",
+        "Skills": "Skills",
+        "Target": "Target",
+        "Range": "Range",
+        "Prerequisites": "Prerequisites",
+        "LevelUpMoves": "Level Up Moves",
+        "TutorMoves": "Tutor Moves",
+        "Sort": {
+          "Name": "Name",
+          "Number": "Number"
+        },
+        "LoadSpeciesImages": {
+          "Label": "Load Species Images",
+          "No": "No",
+          "Yes": "Yes (Will slow down loading)"
+        },
+        "ActionCost": {
+          "Label": "Activation Cost",
+          "Simple": "Simple",
+          "Complex": "Complex",
+          "Free": "Free"
+        }
+      }
+    },
+    "TutorList": "Tutor List",
+    "OpenTutorList": "Open Tutor List",
+    "ProgressBar": {
+      "LoadingPack": "Loading compendium: {pack}",
+      "LoadingComplete": "Finished loading compendium data."
+    },
+    "BrowserWarnPackNotLoaded": "The pack '{pack}' was unable to load.",
     "ChoiceSetPrompt": {
       "Decline": "Decline",
       "DragHomebrewItem": "Drag a homebrew item here if using one instead of the above options.",
@@ -232,6 +295,7 @@
       "crit": "Crit Stages"
     },
     "Effect": {
+      "Immune": "{target} is Immune to {effect}. No effect was applied.",
       "FIELDS": {
         "ChangeType": {
           "label": "Type",
@@ -534,7 +598,7 @@
           "unlucky": "While Unlucky, a creature cannot utilize its Luck.",
           "perish": "When a creature’s Perish count hits 0, the creature's HP is set to 0. Humans and ‘Ace’ creatures gain Weary 1 instead of losing HP when their Perish count is 0. The Perish affliction is removed if a creature is switched out or leaves combat.",
           "invisible": "The afflicted creature vanishes from sight, and cannot be detected by sight based vision or targeted by Attacks. In addition, the creature has +4 default EVA stages. Invisible ends when the creature uses an Attack, is hit by an Attack, by using a Free Action to end Invisible, or by the end conditions of the effect that granted Invisible. Any creature can perform an Intense Spot Check to ignore the effects of Invisible.",
-          "transient": "The afflicted creature, while still visible, is able to traverse through any material, as if it wasn’t even there. It may use any of its Movements to move through the air or any substance (as if it were always on or in the appropriate substance), ignoring any and all blocking terrain. The creature also possesses +6 default EVA stages. Creatures that make attacks or actions while Transient deal 75% less damage. The creature loses 5 PP per activation while Transient, and gains a Stack of Weary if it is out of PP while Transient.",
+          "transient": "The afflicted creature, while still visible, is able to traverse through any material, as if it wasn’t even there. It may use any of its Movements to move through the air or any substance (as if it were always on or in the appropriate substance), ignoring any and all blocking terrain. The creature also possesses +6 default EVA stages. Afflicted creatures deal 75% less damage and take 50% less damage. The creature loses 2 PP per activation while Transient, and gains a Stack of Weary if it is out of PP while Transient.",
           "fear": "The afflicted creature does 33% less damage to the source of the Fear affliction, and suffers -1 default ACC stage on attacks against them. Fear applied from different sources have their own Stacks.",
           "stockpile": "While a creature has Stockpile, the default stages for DEF and SPDEF are increased by +1 for each Stack of Stockpile it possesses. Stockpile can have up to 3 Stacks.",
           "leech": "The afflicted creature loses two Ticks of HP at the end of each of their Activations and the Source that applied Leech gains HP equal to the amount the afflicted creature lost.",
@@ -553,7 +617,7 @@
           "evasive": "While afflicted with Evasive, the creature has +1 default EVA and the Power of its Attacks are decreased by -20%.",
           "gambit": "While afflicted with Gambit, the creature has +2 default CRIT and -1 default ACC.",
           "stoked": "While afflicted with Stoked, the creature's next damaging @Trait[Fire] Attack has +100% Power.",
-          "charged": "While afflicted with Stoked, the creature's next damaging @Trait[Electric] Attack has +100% Power."
+          "charged": "While afflicted with Charged, the creature's next damaging @Trait[Electric] Attack has +100% Power."
         }
       }
     },
@@ -1515,7 +1579,12 @@
         "party": {
           "label": "Organize Party/Boxes"
         }
-      }
+      },
+      "PartyLabel": "Party",
+      "Boxes": "Boxes",
+      "CreateFolder": "Create Folder",
+      "EmptyBox": "Empty box...",
+      "RootFolder": "Root Folder"
     },
     "TeamSheet": {
       "Tabs": {
@@ -1621,6 +1690,10 @@
       "other": {
         "Label": "Other",
         "Hint": "Other damage modifiers."
+      },
+      "flatDamage": {
+        "Label": "Flat Damage",
+        "Hint": "Flat damage bonus or penalty."
       }
     },
     "Actions": {
@@ -1657,7 +1730,9 @@
       "TargetSelector": {
         "Target": "Target",
         "Pick": "Pick {target}"
-      }
+      },
+      "RenameDocumentTitle": "Rename Blueprint",
+      "RenameDocumentContent": "Enter the new name for this blueprint."
     },
     "Skills": {
       "luck": {

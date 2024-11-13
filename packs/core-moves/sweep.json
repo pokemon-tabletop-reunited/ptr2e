@@ -4,10 +4,11 @@
   "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "sweep",
-    "description": "<p>Effect: The user clears [Hazard] effects from an adjacent space.</p>",
+    "description": "<p>Effect: The user clears [Hazard] effects from a space within their Reach.</p>",
     "traits": [
       "basic",
-      "manipulate"
+      "manipulate",
+      "contact"
     ],
     "actions": [
       {
@@ -16,7 +17,8 @@
         "type": "generic",
         "traits": [
           "basic",
-          "manipulate"
+          "manipulate",
+          "contact"
         ],
         "range": {
           "target": "object",
@@ -27,10 +29,11 @@
           "activation": "simple",
           "powerPoints": 0
         },
-        "description": "<p>Effect: The user clears [Hazard] effects from an adjacent space.</p>",
+        "description": "<p>Effect: The user clears [Hazard] effects from a space within their Reach.</p>",
         "img": "icons/svg/explosion.svg"
       }
-    ]
+    ],
+    "grade": "E"
   },
   "_id": "ypqvBMddHC2zIDib",
   "effects": []

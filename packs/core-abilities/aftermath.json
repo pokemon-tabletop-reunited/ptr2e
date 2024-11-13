@@ -6,8 +6,7 @@
     "actions": [
       {
         "traits": [
-          "explode",
-          "connection"
+          "explode"
         ],
         "name": "Aftermath",
         "slug": "aftermath",
@@ -15,7 +14,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 0,
-          "trigger": "The user gains @Affliction[fainted].",
+          "trigger": "<p>The user gains @Affliction[fainted].</p>",
           "delay": null,
           "priority": null
         },
@@ -24,10 +23,75 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user gains @Affliction[fainted].\nEffect: Connection - Self-Destruct. The user freely uses Self-Destruct. When using Self-Destruct (separately from this Ability's Trigger Affliction), the user may spend an additional 2 PP to instead take damage equal to 1/2 their Max HP on resolving Self-Destruct instead of Fainting."
+        "description": "<p>Trigger: The user gains @Affliction[fainted].</p><p>Effect: The user freely uses Self-Destruct.</p>"
+      },
+      {
+        "slug": "self-destruct",
+        "name": "Self-Destruct",
+        "type": "attack",
+        "traits": [
+          "explode",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 200,
+        "accuracy": 90,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user's HP becomes 0 on attack resolution.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "self-destruct-restrained",
+        "name": "Self-Destruct (Restrained)",
+        "type": "attack",
+        "traits": [
+          "explode",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 15,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 200,
+        "accuracy": 90,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user loses 8 Ticks of HP.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "self-destruct",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: The user gains @Affliction[fainted].\nEffect: Connection - Self-Destruct. The user freely uses Self-Destruct. When using Self-Destruct (separately from this Ability's Trigger Affliction), the user may spend an additional 2 PP to instead take damage equal to 1/2 their Max HP on resolving Self-Destruct instead of Fainting.",
+    "description": "Trigger: The user gains @Affliction[fainted].\nEffect: Connection - Self-Destruct. The user freely uses Self-Destruct. When using Self-Destruct (separately from this Ability's Trigger Affliction), the user may spend an additional 4 PP to instead take damage equal to 1/2 their Max HP on resolving Self-Destruct instead of Fainting.",
     "traits": [
       "explode",
       "connection"

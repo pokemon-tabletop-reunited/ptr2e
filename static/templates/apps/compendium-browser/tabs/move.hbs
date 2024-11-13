@@ -1,0 +1,20 @@
+<li class="item flexrow" data-entry-uuid="{{entry.uuid}}" data-type="Item" data-tooltip="{{entry.name}}">
+    <div class="image">
+    {{#if entry.category}}
+      {{{getIcon entry.category}}}
+    {{else}}
+      <img src="{{entry.img}}" alt="{{entry.name}}" loading="lazy" />
+    {{/if}}
+    </div>
+    {{#each entry.types as |type|}}
+      <div class="image">
+        {{{getIcon type}}}
+      </div>
+    {{/each}}
+    <div class="name">
+      <a class="item-link">{{entry.name}}</a>
+    </div>
+    <div class="grade">
+      Grade: <b>{{entry.grade}}</b>
+    </div>
+</li>

@@ -65,7 +65,7 @@
     <div class="form-group">
         <label>{{localize label}}:</label>
         <div class="form-fields">
-            {{#if division}}{{log value value2}}
+            {{#if division}}
                 {{#if (gte value 0)}} 
                     <span>{{numberFormat value2 decimals=2}} ({{add value division}} / {{division}})</span>
                 {{else}}

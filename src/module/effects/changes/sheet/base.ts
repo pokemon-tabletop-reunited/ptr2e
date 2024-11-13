@@ -328,8 +328,8 @@ function cleanDataUsingSchema(schema: Record<string, foundry.data.fields.DataFie
         if(field.options.required ?? ('element' in field ? (field as {element: foundry.data.fields.DataField})?.element?.options.required : false)) return false;
         const initialValue = typeof field.initial === "function" ? field.initial(data) : field.initial;
         const valueRaw = data[key];
-        const value = R.isObject(valueRaw) && R.isObject(initialValue) ? { ...initialValue, ...valueRaw } : valueRaw;
-        const isInitial = R.equals(initialValue, value);
+        const value = R.isPlainObject(valueRaw) && R.isPlainObject(initialValue) ? { ...initialValue, ...valueRaw } : valueRaw;
+        const isInitial = R.isDeepEqual(initialValue, value);
         if (isInitial) delete data[key];
         return !(key in data);
     };
@@ -345,7 +345,7 @@ function cleanDataUsingSchema(schema: Record<string, foundry.data.fields.DataFie
 
         if ("fields" in field) {
             const value = data[key];
-            if (R.isObject(value)) {
+            if (R.isPlainObject(value)) {
                 cleanDataUsingSchema(field.fields as Record<string, foundry.data.fields.DataField>, value);
                 deleteIfInitial(key, field);
                 continue;
@@ -357,7 +357,7 @@ function cleanDataUsingSchema(schema: Record<string, foundry.data.fields.DataFie
             if (Array.isArray(value)) {
                 // Recursively clean schema fields inside an array
                 for (const data of value) {
-                    if (R.isObject(data)) {
+                    if (R.isPlainObject(data)) {
                         if (data.predicate) {
                             cleanPredicate(data);
                         }
