@@ -1,6 +1,7 @@
 import { BracketedValue, RuleValue } from "@module/effects/data.ts";
 import { isObject } from "@utils";
 import * as R from "remeda";
+import { FormInputConfig } from "types/foundry/common/data/fields.js";
 
 class ResolvableValueField<
     TRequired extends boolean,
@@ -38,6 +39,10 @@ class ResolvableValueField<
         }
 
         return value;
+    }
+
+    override _toInput(config: FormInputConfig): HTMLElement | HTMLCollection {
+      return foundry.data.fields.StringField.prototype._toInput.bind(this)(config);
     }
 }
 

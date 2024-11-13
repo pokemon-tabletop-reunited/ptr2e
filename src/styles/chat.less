@@ -587,4 +587,43 @@
             }
         }
     }
+
+    &.combat {
+      border: none;
+      border-radius: 0px;
+      background: unset;
+      padding: 0pc 5px;
+      margin: 0px;
+      box-shadow: none;
+      border-bottom: 1px solid #e9d7a1;
+
+      .message-header {
+        .message-sender {
+          display: none;
+        }
+
+        time {
+          display: none;
+        }
+
+        .flavor-text {
+          color: #f0f0e0;
+          flex: 1 1 auto;
+        }
+        .message-metadata {
+          flex: 1 1 auto;
+        }
+
+        .message-delete {
+          color: #4b4a44;
+        }
+
+        flex-direction: row-reverse;
+        background: transparent;
+      }
+
+      .message-content {
+        display: none;
+      }
+    }
 }

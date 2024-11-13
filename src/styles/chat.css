@@ -626,3 +626,35 @@
     opacity: 1;
   }
 }
+.chat-message.message.combat {
+  border: none;
+  border-radius: 0px;
+  background: unset;
+  padding: 0pc 5px;
+  margin: 0px;
+  box-shadow: none;
+  border-bottom: 1px solid #e9d7a1;
+}
+.chat-message.message.combat .message-header {
+  flex-direction: row-reverse;
+  background: transparent;
+}
+.chat-message.message.combat .message-header .message-sender {
+  display: none;
+}
+.chat-message.message.combat .message-header time {
+  display: none;
+}
+.chat-message.message.combat .message-header .flavor-text {
+  color: #f0f0e0;
+  flex: 1 1 auto;
+}
+.chat-message.message.combat .message-header .message-metadata {
+  flex: 1 1 auto;
+}
+.chat-message.message.combat .message-header .message-delete {
+  color: #4b4a44;
+}
+.chat-message.message.combat .message-content {
+  display: none;
+}

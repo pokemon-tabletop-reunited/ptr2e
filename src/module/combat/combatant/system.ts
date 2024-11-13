@@ -3,6 +3,10 @@ import CombatantPTR2e from "./document.ts";
 export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel {
   declare parent: CombatantPTR2e;
 
+  get combat() {
+    return this.parent.encounter;
+  }
+
   get baseAV(): number {
     throw new Error("CombatantSystemPTR2e#baseAV must be implemented by a subclass");
   }
@@ -66,6 +70,13 @@ export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel
       0,
       150
     );
+  }
+
+  /**
+   * Overridden by subclasses to perform actions when the combatant's turn starts
+   */
+  async onStartActivation() {
+    return;
   }
 
   override async _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {

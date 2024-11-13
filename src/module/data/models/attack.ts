@@ -6,9 +6,9 @@ import { AttackStatisticRollParameters } from "@system/statistics/statistic.ts";
 import { MovePTR2e } from "@item";
 
 export default class AttackPTR2e extends ActionPTR2e {
-  declare type: "attack";
+  declare type: "attack" | "summon";
 
-  static override TYPE = "attack" as const;
+  static override TYPE: "attack" | "summon" = "attack" as const;
 
   static override defineSchema(): AttackSchema & ActionSchema {
     const fields = foundry.data.fields;
@@ -97,7 +97,6 @@ export default class AttackPTR2e extends ActionPTR2e {
     const power = data.power as number;
     if (category === "status" && power)
       throw new Error("Status moves cannot have a power value.");
-    // if (category !== "status" && !power) throw new Error("Physical and special moves must have a power value.");
   }
 
   override get css() {
@@ -113,20 +112,8 @@ export default class AttackPTR2e extends ActionPTR2e {
       })
       .join(` , `)}, var(--${this.category}-color) ${categorySize})`;
 
-    // const typeSizes = this.types.size > 1 ? 100 / this.types.size : 100;
-    // const gradient = `linear-gradient(120deg, ${Array.from(this.types)
-    //     .flatMap((t, i) => {
-    //         if (i === 0) return [`var(--${t}-color)`, `var(--${t}-color) ${typeSizes}%`];
-    //         return [
-    //             `var(--${t}-color) ${typeSizes * i}%`,
-    //             `var(--${t}-color) ${typeSizes * (i + 1)}%`,
-    //         ];
-    //     })
-    //     .join(` , `)})`;
-
     return {
       style: `background: ${gradient};`,
-      // style: `background: ${gradient}; border: 4px ridge var(--${this.category}-color); padding: 0px;`,
       class: "attack-styling",
     };
   }

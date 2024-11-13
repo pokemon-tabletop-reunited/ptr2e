@@ -7,6 +7,7 @@ import { ActionsSchema } from "@module/data/mixins/has-actions.ts";
 import { SlugSchema } from "@module/data/mixins/has-slug.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import HasDescription, { DescriptionSchema } from "@module/data/mixins/has-description.ts";
+import { ActorPTR2e } from "@actor";
 
 /**
  * @category Item Data Models
@@ -26,8 +27,9 @@ export default abstract class SummonSystem extends HasEmbed(
     const fields = foundry.data.fields;
     return {
       ...super.defineSchema() as HasBaseSchema,      
-      baseAV: new fields.NumberField({required: true, initial: 0, nullable: false, min: 0}),
-      duration: new fields.NumberField({required: true, initial: 1, nullable: false, min: 1}),
+      baseAV: new fields.NumberField({required: true, initial: 0, nullable: false, min: 0, label: "PTR2E.FIELDS.baseAV.label", hint: "PTR2E.FIELDS.baseAV.hint"}),
+      duration: new fields.NumberField({required: true, initial: 1, nullable: false, min: 1, label: "PTR2E.FIELDS.duration.label", hint: "PTR2E.FIELDS.duration.hint"}),
+      owner: new fields.DocumentUUIDField({required: true, nullable: true, initial: null}),
     };
   }
 
@@ -45,6 +47,10 @@ export default abstract class SummonSystem extends HasEmbed(
       })
     }
   }
+
+  get actor(): ActorPTR2e | null {
+    return this.owner;
+  }
 }
 
 export default interface SummonSystem extends ModelPropsFromSchema<SummonSchema> {
@@ -56,6 +62,7 @@ export default interface SummonSystem extends ModelPropsFromSchema<SummonSchema>
 interface SummonSchema extends foundry.data.fields.DataSchema, DescriptionSchema, TraitsSchema, SlugSchema, MigrationSchema, ActionsSchema {
   baseAV: foundry.data.fields.NumberField<number, number, true, false, true>;
   duration: foundry.data.fields.NumberField<number, number, true, false, true>;
+  owner: foundry.data.fields.DocumentUUIDField<ActorPTR2e>;
 }
 
 export type SummonSource = BaseItemSourcePTR2e<"summon", SummonSystemSource>;

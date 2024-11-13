@@ -23,32 +23,34 @@ class AttackStatistic extends Statistic {
 
   #check: AttackCheck<this> | null = null;
 
-  constructor(attack: AttackPTR2e) {
+  constructor(attack: AttackPTR2e, data: AttackStatisticData = {
+    slug: attack.slug,
+    label: attack.name,
+    check: {
+      type: "attack-roll"
+    },
+    defferedValueParams: {
+      resolvables: {
+        attack
+      },
+      injectables: {
+        attack
+      }
+    },
+    modifiers: [],
+    domains: [],
+    rollOptions: []
+  }) {
     const { actor, item } = attack;
     if (!actor) throw Error("Attack must have an actor for Statistic to be created.");
 
-    const data: AttackStatisticData = {
-      slug: attack.slug,
-      label: attack.name,
-      check: {
-        type: "attack-roll"
-      },
-      defferedValueParams: {
-        resolvables: {
-          attack,
-          actor: actor,
-          item: item,
-        },
-        injectables: {
-          attack,
-          actor: actor,
-          item: item,
-        }
-      },
-      modifiers: [],
-      domains: [],
-      rollOptions: []
-    };
+    if(!data.defferedValueParams) data.defferedValueParams = { resolvables: {}, injectables: {} };
+    if(!data.defferedValueParams.resolvables) data.defferedValueParams.resolvables = {};
+    if(!data.defferedValueParams.injectables) data.defferedValueParams.injectables = {};
+    data.defferedValueParams.resolvables.actor ??= actor;
+    data.defferedValueParams.injectables.actor ??= actor;
+    data.defferedValueParams.resolvables.item ??= item;
+    data.defferedValueParams.injectables.item ??= item;
 
     const itemRollOptions = item.getRollOptions("item");
     const itemTraits = item.traits!;
@@ -58,19 +60,20 @@ class AttackStatistic extends Statistic {
       [
         `all`,
         `check`,
-        `attack`,
-        `${meleeOrRanged}-attack`,
-        `${attack.category}-attack`,
-        attack.traits.map((t) => `${t.slug}-trait-attack`),
-        ...attack.types.map((t) => `${t}-attack`),
-        `${attack.slug}-attack`,
-        `${item.id}-attack`,
-        ...(attack?.power ? ["damaging-attack"] : []),
+        `${attack.type}`,
+        `${meleeOrRanged}-${attack.type}`,
+        `${attack.category}-${attack.type}`,
+        attack.traits.map((t) => `${t.slug}-trait-${attack.type}`),
+        ...attack.types.map((t) => `${t}-${attack.type}`),
+        `${attack.slug}-${attack.type}`,
+        `${item.id}-${attack.type}`,
+        ...(attack?.power ? [`damaging-${attack.type}`] : []),
+        ...(data.domains ?? [])
       ].flat()
     );
 
     // Power and category based Modifiers
-    if (attack.category !== "status") {
+    if (attack.category !== "status" && !data.modifiers.length) {
       if (typeof attack.power === "number") {
         data.modifiers.push(
           new ModifierPTR2e({

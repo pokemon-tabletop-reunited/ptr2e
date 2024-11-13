@@ -10,10 +10,6 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
     return this.parent.actor;
   }
 
-  get combat() {
-    return this.parent.encounter;
-  }
-
   get speedStages() {
     return this._speedStages;
   }

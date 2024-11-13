@@ -477,6 +477,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   }
 
   _calculateStatTotal(stat: Attribute | Omit<Attribute, "stage">): number {
+    // Shedinja HP is always 1
+    if(stat.base === 1) return 1;
+
     const nature = (() => {
       const nature = natureToStatArray[this._source.nature as keyof typeof natureToStatArray];
       if (!nature) return 1;

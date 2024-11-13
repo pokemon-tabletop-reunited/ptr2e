@@ -5,6 +5,7 @@ import { RangePTR2e } from "@data";
 import { CollectionField } from "../fields/collection-field.ts";
 import { SlugField } from "../fields/slug-field.ts";
 import SystemTraitsCollection from "../system-traits-collection.ts";
+import SummonSystem from "@item/data/summon.ts";
 
 class ActionPTR2e extends foundry.abstract.DataModel {
   static TYPE: ActionType = "generic" as const;
@@ -96,6 +97,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
 
   get actor(): ActorPTR2e | null {
     if (this.parent?.parent instanceof ActorPTR2e) return this.parent.parent;
+    if(this.parent instanceof SummonSystem) return this.parent.actor;
     if (
       this.parent?.parent instanceof ItemPTR2e &&
       this.parent.parent.actor instanceof ActorPTR2e
@@ -174,6 +176,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
 }
 interface ActionPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<ActionSchema> {
   _source: SourceFromSchema<ActionSchema>;
+  get schema(): foundry.data.fields.SchemaField<ActionSchema>;
 }
 
 export interface ActionSchema extends foundry.data.fields.DataSchema {

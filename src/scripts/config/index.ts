@@ -64,7 +64,8 @@ export const PTRCONFIG = {
             attack: AttackMessageSystem,
             "damage-applied": DamageAppliedMessageSystem,
             skill: SkillMessageSystem,
-            capture: CaptureMessageSystem
+            capture: CaptureMessageSystem,
+            combat: foundry.abstract.TypeDataModel
         }
     },
     Combat: {
@@ -125,6 +126,7 @@ export const PTRCONFIG = {
             perk: [sheets.PerkSheetPTR2e],
             species: [sheets.SpeciesSheetPTR2e],
             weapon: [sheets.WeaponSheetPTR2e],
+            summon: [sheets.SummonSheetPTR2e],
             "ptu-item": [sheets.PTUSheet],
         },
     },

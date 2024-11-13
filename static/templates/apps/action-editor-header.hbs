@@ -1,5 +1,10 @@
 <header class="sheet-header flexrow">
     <img class="profile" src="{{action.img}}" alt="{{document.name}}" data-edit="img">
     {{formInput fields.name value=source.name placeholder="Action Name" class="title"}}
-    {{formInput fields.type value=source.type class="action-type"}}
+    {{!-- {{formInput fields.type value=source.type class="action-type"}} --}}
+    <select name="type" class="action-type">
+      {{#each typeOptions as |slug label|}}
+        <option value="{{slug}}" {{#if (is @root.action.type slug)}}selected{{/if}}>{{label}}</option>
+      {{/each}}
+    </select>
 </header>

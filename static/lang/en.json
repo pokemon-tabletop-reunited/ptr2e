@@ -1017,8 +1017,21 @@
       "Combatant": {
         "InitiativeNotZeroOrNull": "Initiative must be a number that is 0 or more."
       },
+      "Messages": {
+        "Activation": "Start of {name}'s Activation",
+        "Round": "Start of Round {round}",
+        "End": "End of Combat"
+      },
       "Round": {
         "Name": "Round"
+      },
+      "Summon": {
+        "Messages": {
+          "HasActions": "<p>Resolves actions in the following order...</p>",
+          "Action": "<li>{name}</li>",
+          "NoActions": "<p>Has no actions to resolve!</p>",
+          "LastActivation": "<p><u>Will expire after this activation!</u></p>"
+        }
       },
       "ContextMenu": {
         "ResetAV": "Reset to BaseAV",
@@ -1480,6 +1493,30 @@
       "preventEvolution": {
         "label": "Prevent Evolution",
         "hint": "Prevent this species from evolving during generation regardless of their level."
+      },
+      "duration": {
+        "label": "Duration",
+        "hint": "The amount of activations this Summon gets before dissipating."
+      },
+      "baseAV": {
+        "label": "Base AV",
+        "hint": "The base AV of the Summon."
+      },
+      "damageType": {
+        "label": "Damage Type",
+        "hint": "Whether this attack deals Power based damage or has an alternative flat formula."
+      },
+      "attackStat": {
+        "label": "Attack Stat",
+        "hint": "The stat used to calculate the damage of this attack, you can use either a direct value, 'owner' to denote it should use the appropriate attacking stat from the Summon's owner, or an injected value (e.g. '@actor.system.attributes.atk.value')."
+      },
+      "targetType": {
+        "label": "Summon Target Type",
+        "hint": "Whom should be targeted by this Attack, if this is 'Target', it will use the currently targeted token as the target based on when the summon is made, if it is 'Owner', it will use the owner of the summon as the target."
+      },
+      "targetUuid": {
+        "label": "Summon Target UUID",
+        "hint": "The UUID of the target token, generally this should be left unset as it will be automatically set when the summon is made."
       }
     },
     "ItemSheet": {

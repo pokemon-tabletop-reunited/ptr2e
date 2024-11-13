@@ -10,6 +10,7 @@ const ActionTypes = {
     PASSIVE: "passive",
     GENERIC: "generic",
     POKEBALL: "pokeball",
+    SUMMON: "summon",
 } as const;
 
 const ActivationCost = {
