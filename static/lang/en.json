@@ -1506,6 +1506,10 @@
         "label": "Damage Type",
         "hint": "Whether this attack deals Power based damage or has an alternative flat formula."
       },
+      "damageFormula": {
+        "label": "Damage Formula",
+        "hint": "This field follows the same logic as the 'Formula' field on Afflictions."
+      },
       "attackStat": {
         "label": "Attack Stat",
         "hint": "The stat used to calculate the damage of this attack, you can use either a direct value, 'owner' to denote it should use the appropriate attacking stat from the Summon's owner, or an injected value (e.g. '@actor.system.attributes.atk.value')."
@@ -1517,6 +1521,10 @@
       "targetUuid": {
         "label": "Summon Target UUID",
         "hint": "The UUID of the target token, generally this should be left unset as it will be automatically set when the summon is made."
+      },
+      "summon": {
+        "label": "Summon",
+        "hint": "The Summon that this attack is associated with."
       }
     },
     "ItemSheet": {
