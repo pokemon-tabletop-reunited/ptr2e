@@ -96,6 +96,18 @@ class AfflictionActiveEffectSystem extends ActiveEffectSystem {
   protected _calculateDamage(stacksToRemove: number): { formula: string; type: "damage" | "healing" } | void {
     if (!this.formula || !this.type) return;
 
+    if(this.type === 'damage' && this.parent.targetsActor()) {
+      const immunities = this.parent.target.rollOptions.getFromDomain("immunities");
+      
+      const isImmune = this.parent.target.isImmuneToEffect(this.parent) 
+        || (
+          (immunities[`damage:indirect`] || immunities[`damage:affliction:${this.parent.slug}`])
+          && !this.parent.traits.has("ignore-immunity") && !this.parent.traits.has(`ignore-immunity:${this.parent.slug}`)
+        )
+      
+      if(isImmune) return;
+    }
+
     const formula = Roll.replaceFormulaData(
       this.formula,
       {

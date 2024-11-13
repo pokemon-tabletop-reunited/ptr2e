@@ -413,7 +413,8 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
             effect: r.effect,
             label: r.label,
             roll: roll.toJSON(),
-            success: roll.total <= 0
+            success: roll.total <= 0,
+            critOnly: r.critOnly
           }
         }))
       } : null

@@ -248,6 +248,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         "id",
         { required: true, initial: [] }
       ),
+      immunities: new fields.SetField(new SlugField(), { required: true, initial: [] }),
     };
   }
 
@@ -457,6 +458,22 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
     this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10) + (this.modifiers.inventoryPoints ?? 0);
+
+    // Apply type based immunities
+    if(this.type.types.has("poison") || this.type.types.has("steel")) {
+      this.parent.rollOptions.addOption("immunities", "affliction:poison");
+      this.parent.rollOptions.addOption("immunities", "affliction:blight");
+    }
+    if(this.type.types.has("fire")) {
+      this.parent.rollOptions.addOption("immunities", "affliction:burn");
+    }
+    if(this.type.types.has("ice")) {
+      this.parent.rollOptions.addOption("immunities", "affliction:frozen");
+      this.parent.rollOptions.addOption("immunities", "affliction:frostbite");
+    }
+    if(this.type.types.has("electric")) {
+      this.parent.rollOptions.addOption("immunities", "affliction:paralysis");
+    }
   }
 
   _calculateStatTotal(stat: Attribute | Omit<Attribute, "stage">): number {
