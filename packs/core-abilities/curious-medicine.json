@@ -5,12 +5,10 @@
   "system": {
     "actions": [
       {
-        "traits": [
-          "connection"
-        ],
+        "traits": [],
         "name": "Curious Medicine",
         "slug": "curious-medicine",
-        "type": "passive",
+        "type": "generic",
         "cost": {
           "activation": "free",
           "powerPoints": 0,
@@ -23,10 +21,99 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is switched into combat.</p><p>Effect: Connection - Haze. The user freely uses Haze. Whenever user uses Haze, they can 2 PP to have either 1) the user and its allies or 2) foes be excluded from Haze's effect.</p>"
+        "description": "<p>Trigger: The user is switched into combat.</p><p>Effect: The user freely uses Haze.</p>"
+      },
+      {
+        "slug": "haze",
+        "name": "Haze",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Effect: The Stat Stages of all creatures in the combat are reset to their default values.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "haze-allies",
+        "name": "Haze (Allies)",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Effect: The Stat Stages of all allied creatures in the combat are reset to their default values.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "variant": "haze",
+        "slot": null
+      },
+      {
+        "slug": "haze-foes",
+        "name": "Haze (Foes)",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Effect: The stage of all enemy creatures in the combat are reset to their default values.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "variant": "haze",
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: The user is switched into combat.</p><p>Effect: Connection - Haze. The user freely uses Haze. Whenever user uses Haze, they can 2 PP to have either 1) the user and its allies or 2) foes be excluded from Haze's effect.</p>",
+    "description": "<p>Trigger: The user is switched into combat.</p><p>Effect: Connection - Haze. The user freely uses Haze. Whenever the user uses Haze, they can 2 PP to have either 1) the user and its allies or 2) foes be excluded from Haze's effect.</p>",
     "traits": [
       "connection"
     ],

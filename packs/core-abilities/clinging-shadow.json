@@ -8,15 +8,15 @@
         "traits": [
           "legendary",
           "connection",
-          "delay-2"
+          "flinch-3"
         ],
         "name": "Clinging Shadow",
         "slug": "clinging-shadow",
         "type": "generic",
         "cost": {
           "activation": "complex",
-          "powerPoints": 3,
-          "delay": 2,
+          "powerPoints": 2,
+          "delay": null,
           "priority": null
         },
         "range": {
@@ -24,10 +24,44 @@
           "distance": 13,
           "unit": "m"
         },
-        "description": "<p>Effect: Connection - Phantom Force. The user gains @Affliction[transient] 1 and @Affliction[invisible] 1, and relocates itself to an open space within 2m of the target. Until the user's next Activation, they freely move with the target as the target itself moves.</p>"
+        "description": "<p>The user gains @Affliction[transient] 2 and @Affliction[invisible] 2, and relocates itself to an open space within 2m of the target. The user is then Flinched. Until the user's next Activation, they freely move with the target as the target itself moves.</p>"
+      },
+      {
+        "slug": "phantom-force",
+        "name": "Phantom Force",
+        "type": "attack",
+        "traits": [
+          "set-up",
+          "crushing",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "ghost"
+        ],
+        "description": "<p>Effect: Set-Up: The user gains @Affliction[invisible] 1, and ends their activation.</p><p>Resolution: On their next activation, the user freely Moves up to one-and-a-half times the Movement Score of their choice and attacks with and resolve Phantom Force. This attack ignores the effects of [Shield] attacks when applying damage.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Effect: Connection - Phantom Force. The user gains @Affliction[transient] 1 and @Affliction[invisible] 1, and relocates itself to an open space within 2m of the target. Until the user's next Activation, they freely move with the target as the target itself moves.</p>",
+    "description": "<p>Effect: Connection - Phantom Force. The user gains @Affliction[transient] 2 and @Affliction[invisible] 2, and relocates itself to an open space within 2m of the target. The user is then Flinched. Until the user's next Activation, they freely move with the target as the target itself moves.</p>",
     "traits": [
       "legendary",
       "connection",

@@ -23,10 +23,78 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Scratch. The user gains +2 CRIT stages for 2 Activations. Then, the user freely moves up to and using the Movement Score of their choice, and uses Scratch.</p>"
+        "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p>The user gains +2 CRIT stages for 2 Activations. Then, the user freely moves up to and using the Movement Score of their choice, and uses Scratch.</p>"
+      },
+      {
+        "slug": "scratch",
+        "name": "Scratch",
+        "type": "attack",
+        "traits": [
+          "sharp",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "scratch-first-strike",
+        "name": "Scratch (First Strike)",
+        "type": "attack",
+        "traits": [
+          "sharp",
+          "contact",
+          "pass-4",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Activated by an Ability's effect.</p>"
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: Activated by an Ability's effect.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "scratch",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Scratch. The user gains +2 CRIT stages for 2 Activations. Then, the user freely moves up to and using the Movement Score of their choice, and uses Scratch.</p>",
+    "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Scratch. The user gains +2 CRIT stages for 2 Activations. Then, the user freely moves up to and using the Movement Score of their choice, and uses Scratch (First Strike).</p>",
     "traits": [
       "connection"
     ],

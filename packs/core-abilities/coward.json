@@ -23,7 +23,40 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: At the start of combat or when switched in.</p><p>Effect: Connection - Protect. The user freely uses Protect.</p>"
+        "description": "<p>Trigger: At the start of combat or when switched in.</p><p>Effect: The user freely uses Protect.</p>"
+      },
+      {
+        "slug": "protect",
+        "name": "Protect",
+        "type": "attack",
+        "traits": [
+          "shield",
+          "exhaust",
+          "interrupt-4"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user is targeted by a Physical- or Special-Category Attack.</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user is targeted by a Physical- or Special-Category Attack.</p><p>Effect: The triggering attack fails, and additional attacks that target the user also fail until the user's next activation. Attacks failing to hit do not deal damage, activate secondary effects, or activate on-miss effects.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
     "description": "<p>Trigger: At the start of combat or when switched in.</p><p>Effect: Connection - Protect. The user freely uses Protect.</p>",

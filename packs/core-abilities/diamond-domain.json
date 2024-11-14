@@ -5,33 +5,68 @@
   "system": {
     "actions": [
       {
+        "slug": "diamond-storm",
+        "name": "Diamond Storm",
+        "type": "attack",
         "traits": [
           "legendary",
-          "connection"
+          "sharp",
+          "pp-updated"
         ],
-        "name": "Diamond Domain",
-        "slug": "diamond-domain",
-        "type": "generic",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 2,
-          "trigger": "<p>The user is affected by Misty Terrain and declares Diamond Storm.</p>",
-          "delay": null,
-          "priority": null
-        },
         "range": {
-          "target": "self",
-          "distance": 0,
+          "target": "emanation",
+          "distance": 4,
           "unit": "m"
         },
-        "description": "Connection - Diamond Storm. Effect: The triggering attack's Range is set to \"6m Cone\" until the end of their Activation.</p>"
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "rock"
+        ],
+        "description": "<p>Effect: After this attack resolves, the user has a 33% chance of raising their DEF stage by +1 for 8 activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "diamond-storm-misty",
+        "name": "Diamond Storm (Misty)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "sharp",
+          "environ",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "rock"
+        ],
+        "variant": "diamond-storm",
+        "free": true,
+        "description": "<p>The user is affected by Misty Terrain.</p><p>Effect: After this attack resolves, the user has a 33% chance of raising their DEF stage by +1 for 8 activations.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [
           "legendary"
         ],
         "name": "Diamond Domain",
-        "slug": "diamond-domain",
+        "slug": "diamond-domain-passive",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -44,10 +79,10 @@
           "distance": 10,
           "unit": "m"
         },
-        "description": "While affected by Misty Terrain, the user's Diamond Storm also causes the user to have a 33% chance of raising their SPDEF stage by +1 for 8 Activations, and the user and their allies possess the Ability Clear Body. The user and all allies within Range are always under the effects of Misty Terrain.</p>"
+        "description": "<p>While affected by Misty Terrain, the user's Diamond Storm also causes the user to have a 33% chance of raising their SPDEF stage by +1 for 8 Activations, and the user and their allies possess the Ability Clear Body. The user and all allies within Range are always under the effects of Misty Terrain.</p>"
       }
     ],
-    "description": "<p>Trigger: The user is affected by Misty Terrain and declares Diamond Storm.</p><p>Effect: Connection - Diamond Storm. The user can choose to use Diamond Storm at a Range of \"9m Cone\" until the end of their Activation.</p><p>Passive: While affected by Misty Terrain, the user's Diamond Storm also causes the user to have a 33% chance of raising their SPDEF stage by +1 for 8 Activations, and the user and their allies possess the Ability Clear Body. The user and all allies within Range are always under the effects of Misty Terrain.</p>",
+    "description": "<p>Trigger: The user is affected by Misty Terrain and declares Diamond Storm.</p><p>Effect: Connection - Diamond Storm. The user can choose to use Diamond Storm at a Range of \"6m Cone\" until the end of their Activation.</p><p>Passive: While affected by Misty Terrain, the user's Diamond Storm also causes the user to have a 33% chance of raising their SPDEF stage by +1 for 8 Activations, and the user and their allies possess the Ability Clear Body. The user and all allies within Range are always under the effects of Misty Terrain.</p>",
     "traits": [
       "legendary",
       "connection"

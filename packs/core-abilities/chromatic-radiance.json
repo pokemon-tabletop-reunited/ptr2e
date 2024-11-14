@@ -6,17 +6,16 @@
     "actions": [
       {
         "traits": [
-          "connection",
           "legendary",
           "environ"
         ],
         "name": "Chromatic Radiance",
-        "slug": "chromatic-radiance",
-        "type": "passive",
+        "slug": "chromatic-radiance-active",
+        "type": "generic",
         "cost": {
           "activation": "free",
           "powerPoints": 0,
-          "trigger": null,
+          "trigger": "<p>The user resolves a Fire-Type attack, and Sunny Weather is present.</p>",
           "delay": null,
           "priority": null
         },
@@ -25,10 +24,99 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Connection - Sacred Fire.  Effect: When using a Fire-Type attack while Sunny Weather is active, the user recovers 3 ticks of HP. Any time the user recovers HP, allies within 10m recover a Tick of HP, which is doubled in Sunny Weather.</p>"
+        "description": "<p>Trigger: The user resolves a Fire-Type attack, and Sunny Weather is present.</p><p>Effect: The user recovers 3 Ticks of HP.</p>"
+      },
+      {
+        "traits": [
+          "legendary",
+          "environ"
+        ],
+        "name": "Chromatic Radiance",
+        "slug": "chromatic-radiance-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "trigger": "<p>The user recovers HP.</p>",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "allied-aura",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user recovers HP.</p><p>Effect: Allies within Range recover a Tick of HP. In Sunny Weather, this Ability triggers a second time.</p>"
+      },
+      {
+        "slug": "sacred-fire",
+        "name": "Sacred Fire",
+        "type": "attack",
+        "traits": [
+          "defrost",
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "fire"
+        ],
+        "description": "<p>Effect: On hit, all valid targets have a 50% chance of gaining @Affliction[burn] 7.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "sacred-fire-burned",
+        "name": "Sacred Fire (Burned)",
+        "type": "attack",
+        "traits": [
+          "defrost",
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Valid target(s) have @Affliction[burn].</p>"
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "fire"
+        ],
+        "description": "<p>Trigger: Valid target(s) have @Affliction[burn].</p><p>Effect: On hit, all valid targets have a 50% chance of gaining @Affliction[burn] 7 and a 50% chance of gaining @Affliction[splinter] 7.",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "sacred-fire",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Connection - Sacred Fire.  Effect: When using a Fire-Type attack while Sunny Weather is active, the user recovers 3 ticks of HP. Any time the user recovers HP, allies within 10m recover a Tick of HP, which is doubled in Sunny Weather.</p>",
+    "description": "<p> Effect: Connection - Sacred Fire. When using a Fire-Type attack while Sunny Weather is active, the user recovers 3 Ticks of HP. Any time the user recovers HP, allies within 10m recover a Tick of HP, which is doubled in Sunny Weather.</p>",
     "traits": [
       "connection",
       "legendary",

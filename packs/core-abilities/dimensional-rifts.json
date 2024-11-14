@@ -10,12 +10,12 @@
           "connection"
         ],
         "name": "Dimensional Rifts",
-        "slug": "dimensional-rifts",
+        "slug": "dimensional-rifts-active",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 4,
-          "trigger": "<p>The user declares Hyperspace Hole or Hyperspace Fury.</p>",
+          "powerPoints": 3,
+          "trigger": "<p>The user declares Hyperspace Hole.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,7 +24,142 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user declares Hyperspace Hole or Hyperspace Fury.</p><p>Effect: Connection - Hyperspace Hole. The user can leave behind a Rift after resolving Hyperspace Hole. At the end of a round, the user freely uses Metronome, originating its effect from the Rift, on a nearby target chosen by the user. The Rift lasts for 3 Rounds. When declaring Hyperspace Fury, the user can give the attack [Blast 3], or alternatively spend an additional 6 PP to change its Range to \"12m Burst\" and give it [Exhaust] for the rest of the user's Activation.</p>"
+        "description": "<p>Trigger: The user declares Hyperspace Hole.</p><p>Effect: The user leaves behind a Rift after resolving the triggering attack. At the end of a round, the user freely uses Metronome for each active Rift, originating its effect from a Rift that has not had a Metronome resolved through it, on a nearby target chosen by the user. A Rift lasts for 3 Rounds."
+      },
+      {
+        "slug": "hyperspace-hole",
+        "name": "Hyperspace Hole",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "danger-close",
+          "pierce",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user is in its Confined Forme.</p>"
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Trigger: The user is in its Confined Forme.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "hyperspace-fury",
+        "name": "Hyperspace Fury",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "crushing",
+          "punch",
+          "danger-close",
+          "pierce",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "trigger": "<p>The user is in its Unbound Forme.</p>"
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "free": true,
+        "description": "<p>The user is in its Unbound Forme.</p><p>Effect: On hit, the user loses -1 DEF stage for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "hyperspace-fury-unbound",
+        "name": "Hyperspace Fury (Unbound)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "crushing",
+          "punch",
+          "blast-3",
+          "pierce",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "trigger": "<p>The user is in its Unbound Forme.</p>"
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "free": true,
+        "variant": "hyperspace-fury",
+        "description": "<p>The user is in its Unbound Forme.</p><p>Effect: On resolution, the user loses -1 DEF stage for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "hyperspace-fury-all-out",
+        "name": "Hyperspace Fury (All-Out)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "crushing",
+          "punch",
+          "exhaust",
+          "pierce",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 7,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "trigger": "<p>The user is in its Unbound Forme.</p>"
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "free": true,
+        "variant": "hyperspace-fury",
+        "description": "<p>The user is in its Unbound Forme.</p><p>Effect: On resolution, the user loses -1 DEF stage for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "traits": [
@@ -44,7 +179,7 @@
         "description": "Passive: The user can choose to originate their attacks (other than Hyperspace Hole and Hyperspace Fury) any space within 10m of the user, and any such spaces can be treated as the user's space for originating Abilities (such as Magician). When in Unbound Forme, the user's Hyperspace Hole is replaced with Hyperspace Fury.</p>"
       }
     ],
-    "description": "<p>Trigger: The user declares Hyperspace Hole or Hyperspace Fury.</p><p>Effect: Connection - Hyperspace Hole. The user can leave behind a Rift after resolving Hyperspace Hole. At the end of a round, the user freely uses Metronome, originating its effect from the Rift, on a nearby target chosen by the user. The Rift lasts for 3 Rounds. When declaring Hyperspace Fury, the user can give the attack [Blast 3], or alternatively spend an additional 6 PP to change its Range to \"12m Burst\" and give it [Exhaust] for the rest of the user's Activation.</p><p>Passive: The user can choose to originate their attacks (other than Hyperspace Hole and Hyperspace Fury) any space within 10m of the user, and any such spaces can be treated as the user's space for originating Abilities (such as Magician). When in Unbound Forme, the user's Hyperspace Hole is replaced with Hyperspace Fury.</p>",
+    "description": "<p>Trigger: The user declares Hyperspace Hole or Hyperspace Fury.</p><p>Effect: Connection - Hyperspace Hole. At the end of a round, the user freely uses Metronome for each active Rift, originating its effect from a Rift that has not had a Metronome resolved through it, on a nearby target chosen by the user. A Rift lasts for 3 Rounds. When declaring Hyperspace Fury, the user can use Hyperspace Fury (Unbound) and Hyperspace Fury (All-Out).</p><p>Passive: The user can choose to originate their attacks (other than Hyperspace Hole and Hyperspace Fury) any space within 10m of the user, and any such spaces can be treated as the user's space for originating Abilities (such as Magician). When in Unbound Forme, the user's Hyperspace Hole is replaced with Hyperspace Fury.</p>",
     "traits": [
       "legendary",
       "connection"

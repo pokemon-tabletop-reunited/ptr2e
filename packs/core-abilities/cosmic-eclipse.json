@@ -9,12 +9,12 @@
           "legendary"
         ],
         "name": "Cosmic Eclipse",
-        "slug": "cosmic-eclipse",
+        "slug": "cosmic-eclipse-active",
         "type": "generic",
         "cost": {
           "activation": "free",
           "powerPoints": 3,
-          "trigger": "<p>The user declares Moongeist Beam",
+          "trigger": "<p>The user declares Moongeist Beam.</p>",
           "delay": null,
           "priority": null
         },
@@ -23,14 +23,14 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user declares Moongeist Beam</p><p>Effect: Connection - Moongeist Beam. The triggering attack has a 33% chance of inflicting @Affliction[cursed] 3 to valid targets on hit.</p>"
+        "description": "<p>Trigger: The user declares Moongeist Beam</p><p>Effect: The triggering attack has a 33% chance of inflicting @Affliction[cursed] 3 to valid targets on hit.</p>"
       },
       {
         "traits": [
           "legendary"
         ],
         "name": "Cosmic Eclipse",
-        "slug": "cosmic-eclipse",
+        "slug": "cosmic-eclipse-passive",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -40,6 +40,39 @@
         },
         "range": null,
         "description": "Passive: The user's Ghost-Type attacks can hit Normal-Type creatures.</p>"
+      },
+      {
+        "slug": "moongeist-beam",
+        "name": "Moongeist Beam",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "ray",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "ghost"
+        ],
+        "description": "<p>Effect: This attack is unaffected by the abilities of other creatures.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
     "description": "<p>Trigger: The user declares Moongeist Beam</p><p>Effect: Connection - Moongeist Beam. The triggering attack has a 33% chance of inflicting @Affliction[cursed] 3 to valid targets on hit. Passive: The user's Ghost-Type attacks can hit Normal-Type creatures.</p>",

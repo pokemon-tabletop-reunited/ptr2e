@@ -23,7 +23,36 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: At the start of combat or when the user is switched in.</p><p>Effect: Connection - Coil. The user's Coil gains [Priority 3] until the start of their next Activation, and the user freely uses Coil.</p>"
+        "description": "<p>Trigger: At the start of combat or when the user is switched in.</p><p>Effect:The user's Coil gains [Priority 3] until the start of their next Activation, and the user freely uses Coil.</p>"
+      },
+      {
+        "slug": "coil",
+        "name": "Coil",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Effect: The user's ATK stage, DEF stage and ACC stage are increased by +1 for 5 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
     "description": "<p>Trigger: At the start of combat or when the user is switched in.</p><p>Effect: Connection - Coil. The user's Coil gains [Priority 3] until the start of their next Activation, and the user freely uses Coil.</p>",

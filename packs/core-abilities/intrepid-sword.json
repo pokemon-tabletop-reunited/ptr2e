@@ -23,7 +23,7 @@
           "distance": 10,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user hits a creature that possess a higher CatMod than the user with Behemoth Blade.</p><p>Effect: Connection - Iron Head. The triggering creature gains @Affliction[fear] 7, and the user gains @Affliction[chanted] 7.</p>"
+        "description": "<p>Trigger: The user hits a creature that possess a higher CatMod than the user with Behemoth Blade.</p><p>Effect: The triggering creature gains @Affliction[fear] 7, and the user gains @Affliction[chanted] 7.</p>"
       },
       {
         "traits": [
@@ -40,6 +40,113 @@
         },
         "range": null,
         "description": "Passive: When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Blade for the remainder of the combat. The user's default ATK stage is +1.</p>"
+      },
+      {
+        "slug": "iron-head",
+        "name": "Iron Head",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "push-2",
+          "flinch-chance-2",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "description": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "behemoth-blade",
+        "name": "Behemoth Blade",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "pass-4",
+          "sharp",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "iron-head",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "behemoth-blade-giant",
+        "name": "Behemoth Blade (Giant)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "pass-4",
+          "sharp",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": "The target is Dynamaxed."
+        },
+        "category": "physical",
+        "power": 200,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "description": "<p>Trigger: The target is Dynamaxed.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "variant": "behemoth-blade",
+        "slot": null
       }
     ],
     "description": "<p>Trigger: The user hits a creature that possess a higher CatMod than the user with Behemoth Blade.</p><p>Effect: Connection - Iron Head. The triggering creature gains @Affliction[fear] 7, and the user gains @Affliction[chanted] 7. Passive:  When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Blade for the remainder of the combat. The user's default ATK stage is +1.</p>",

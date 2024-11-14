@@ -25,7 +25,42 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user declares an attack.</p><p>Effect: Connection - Plasma Fists. The triggering attack has its Power increase by 40%, and it gains [Recoil 1/6] until the end of the user's Activation. While the user meets the [Desperation 1/3] Condition, this bonus increases to 70%.</p>"
+        "description": "<p>Trigger: The user declares an attack.</p><p>Effect: The triggering attack has its Power increase by 40%, and it gains [Recoil 1/6] until the end of the user's Activation. While the user meets the [Desperation 1/3] Condition, this bonus increases to 70%.</p>"
+      },
+      {
+        "slug": "plasma-fists",
+        "name": "Plasma Fists",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "dash",
+          "legendary",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Effect: On hit, all of the the user's Normal Type attacks become Electric Type for 5 Activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
       }
     ],
     "description": "<p>Trigger: The user declares an attack.</p><p>Effect: Connection - Plasma Fists. The triggering attack has its Power increase by 40%, and it gains [Recoil 1/6] until the end of the user's Activation. While the user meets the [Desperation 1/3] Condition, this bonus increases to 70%.</p>",
