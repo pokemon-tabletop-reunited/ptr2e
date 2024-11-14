@@ -25,10 +25,43 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: Connection - U-Turn. The user freely Moves up to half of a Movement Score of their choice, and freely attacks a valid target with U-Turn.<.p>"
+        "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user freely Moves up to half of a Movement Score of their choice, and freely attacks a valid target with U-Turn.</p>"
+      },
+      {
+        "slug": "u-turn",
+        "name": "U-Turn",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 70,
+        "accuracy": 100,
+        "types": [
+          "bug"
+        ],
+        "description": "<p>Effect: On hit, the user may freely move themselves up to half of the Movement Score of their choice away from the target. If the user is an owned Pokémon, they may then immediately be returned their Poké Ball and another Pokémon may immediately be sent out in their place.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: Connection - U-Turn. The user freely Moves up to half of a Movement Score of their choice, and freely attacks a valid target with U-Turn.<.p>",
+    "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: Connection - U-Turn. The user freely Moves up to half of a Movement Score of their choice, and freely attacks a valid target with U-Turn.</p>",
     "traits": [
       "defensive",
       "connection",

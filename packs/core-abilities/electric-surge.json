@@ -24,7 +24,7 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user uses Electric Terrain.</p><p>Effect: Connection - Electric Terrain. Increase the number of rounds Electric Terrain persists by 2.</p>"
+        "description": "<p>Trigger: The user uses Electric Terrain.</p><p>Effect: Increase the number of rounds Electric Terrain persists by 2.</p>"
       },
       {
         "traits": [
@@ -47,6 +47,37 @@
           "unit": "m"
         },
         "description": "Passive: If a space within range possesses Electric Terrain, the user is affected by Electric Terrain.</p>"
+      },
+      {
+        "slug": "electric-terrain",
+        "name": "Electric Terrain",
+        "type": "attack",
+        "traits": [
+          "terrain"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Effect: The Terrain type is set to Electric Terrain for 3 rounds.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
     "description": "<p>Trigger: The user uses Electric Terrain.</p><p>Effect: Connection - Electric Terrain. Increase the number of rounds Electric Terrain persists by 2.</p><p>Passive: If a space within range possesses Electric Terrain, the user is affected by Electric Terrain.</p>",
