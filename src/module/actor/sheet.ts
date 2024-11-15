@@ -66,16 +66,16 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             visible: true,
           },
           {
+            icon: "fas fa-cog",
+            label: "PTR2E.ActorSheet.Settings.Title",
+            action: "open-settings",
+            visible: true,
+          },
+          {
             icon: "fas fa-atom",
             label: "PTR2E.ActorSheet.Inspector",
             action: "open-inspector",
             visible: true
-          },
-          {
-            icon: "fas fa-heart-circle-plus",
-            label: "PTR2E.ActorSheet.Rest",
-            action: "rest",
-            visible: true,
           },
           {
             icon: "fas fa-user-group",
@@ -88,7 +88,13 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             label: "PTR2E.OpenTutorList",
             action: "open-tutor-list",
             visible: true,
-          }
+          },
+          {
+            icon: "fas fa-heart-circle-plus",
+            label: "PTR2E.ActorSheet.Rest",
+            action: "rest",
+            visible: true,
+          },
         ],
       },
       form: {
@@ -212,6 +218,46 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         "add-clock": ActorSheetPTRV2.#onAddClock,
         "open-tutor-list": function (this: ActorSheetPTRV2) {
           game.ptr.tutorList.render({ force: true, actor: this.actor });
+        },
+        "open-settings": function (this: ActorSheetPTRV2) {
+          const alliance =
+            this.actor._source.system.details?.alliance === null ? "neutral" : (this.actor._source.system.details?.alliance || "default");
+          const defaultValue = game.i18n.localize(
+            this.actor.hasPlayerOwner
+              ? "PTR2E.ActorSheet.Alliance.Party"
+              : "PTR2E.ActorSheet.Alliance.Opposition",
+          );
+
+          const allianceOptions = {
+            default: game.i18n.format("PTR2E.ActorSheet.Alliance.Default", { alliance: defaultValue }),
+            opposition: "PTR2E.ActorSheet.Alliance.Opposition",
+            party: "PTR2E.ActorSheet.Alliance.Party",
+            neutral: "PTR2E.ActorSheet.Alliance.Neutral",
+          };
+
+          return void foundry.applications.api.DialogV2.prompt({
+            content: `<p>${game.i18n.localize("PTR2E.ActorSheet.Settings.Content")}</p>
+            <div class="form-group"><label>${game.i18n.localize("PTR2E.FIELDS.details.alliance.label")}</label><div class="form-fields"><select name="system.details.alliance">
+            ${Object.entries(allianceOptions).map(([key, value]) => `<option value="${key}" ${key === alliance ? "selected" : ""}>${game.i18n.localize(value)}</option>`).join("")}
+            </select></div></div>`,
+            window: { title: game.i18n.localize("PTR2E.ActorSheet.Settings.Title") },
+            ok: {
+              label: game.i18n.localize("PTR2E.ActorSheet.Settings.Save"),
+              action: "ok",
+              callback: async (_event, target, element) => {
+                const html = element ?? target;
+                const value = htmlQuery<HTMLInputElement>(html, '[name="system.details.alliance"]')?.value;
+                return void this.actor.update(
+                  value === "default"
+                    ? { "system.details.alliance": '' }
+                    : value === "neutral"
+                      ? { "system.details.alliance": null }
+                      : { "system.details.alliance": value },
+                );
+              }
+            },
+            rejectClose: false
+          });
         }
       },
     },

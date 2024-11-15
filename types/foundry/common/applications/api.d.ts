@@ -847,6 +847,7 @@ type DialogV2Configuration = {
     ok?: DialogV2Button;
     content: string;
     submit: (...args: any[]) => Promise<void>;
+    rejectClose?: boolean;
 } & ApplicationConfiguration;
 
 type DialogV2Button = {

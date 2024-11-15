@@ -208,12 +208,14 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const contexts: Record<ActorUUID, CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>> = {}
     let anyValidTargets = false;
     for (const target of targets) {
+      const allyOrEnemy = this.actor.isAllyOf(target.actor) ? "ally" : this.actor.isEnemyOf(target.actor) ? "enemy" : "neutral";
+
       const currContext = contexts[target.actor.uuid] = await this.actor.getCheckContext({
         attack: this.attack,
         domains: this.domains,
         statistic: this,
         target: target,
-        options,
+        options: new Set([...options, `origin:${allyOrEnemy}`]),
         traits: args.traits ?? this.item.traits,
       }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
 
