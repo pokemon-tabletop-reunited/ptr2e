@@ -108,7 +108,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     return null;
   }
 
-  get item(): ItemPTR2e<ItemSystemsWithActions> {
+  get item(): ItemPTR2e<ItemSystemsWithActions>  {
     if (this.parent instanceof ItemPTR2e) return this.parent;
     if (this.parent?.parent instanceof ItemPTR2e) return this.parent.parent;
     throw new Error("Action is not a child of an item");
@@ -131,7 +131,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
   }
 
   get link(): string {
-    return `@UUID[${this.uuid}]`;
+    return `@UUID[${this.uuid}]{${this.name}}`;
   }
 
   get documentName(): string {

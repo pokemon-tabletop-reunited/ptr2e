@@ -459,11 +459,12 @@ export default class TooltipsPTR2e {
     if (!target) return false;
 
     const damage = target.damageRoll;
+    const isFlatDamage = !!damage?.context["health.max"];
 
     this.tooltip.classList.add("damage");
     await this._renderTooltip({
       path: "systems/ptr2e/templates/chat/tooltips/damage.hbs",
-      data: { target, damage },
+      data: { target, damage, isFlatDamage },
       direction: game.tooltip.element?.dataset.tooltipDirection as
         | TooltipDirections
         | undefined,

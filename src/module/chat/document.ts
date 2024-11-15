@@ -146,7 +146,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         type: "summon",
         system: {
           owner: item?.actor?.uuid ?? null,
-          item: { ...summonItem.toObject(), uuid: itemUuid }
+          item: { ...summonItem.clone({"system.owner": item?.actor?.uuid ?? null}).toObject(), uuid: summonItem.uuid }
         }
       }])
 
@@ -405,6 +405,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       attack?: Record<string, unknown>;
       attackSlug: string;
       origin: Record<string, unknown>;
+      originItem?: Record<string, unknown>;
       results: Record<string, unknown>[];
       selfEffects: {
         applied: boolean;
@@ -454,6 +455,7 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         }))
       } : null
     };
+    if(context.attack?.type === "summon") system.originItem = context.item?.toJSON();
 
     // @ts-expect-error - Chatmessages aren't typed properly yet
     return dataOnly ? { type: "attack", speaker, flavor, system, }

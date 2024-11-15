@@ -40,6 +40,12 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
     this.item = (() => {
       if (!this._source.item) return null;
       try {
+        const jsonData = JSON.parse(this._source.item);
+        if(jsonData.uuid) {
+          const item = fromUuidSync<SummonPTR2e>(jsonData.uuid);
+          if(item) return item.clone(jsonData.system.owner ? {"system.owner": jsonData.system.owner} : {}, {keepId: true});
+        }
+
         return ItemPTR2e.fromJSON(this._source.item) as SummonPTR2e;
       }
       catch (error: unknown) {
@@ -79,7 +85,11 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
     for (const action of this.item?.system.actions ?? []) {
       if (action.type !== "summon") continue;
 
-      await (action as SummonAttackPTR2e).execute(this);
+      const result = await (action as SummonAttackPTR2e).execute(this, this.combat.combatants.contents);
+      // Result is only 'False' if no owner was found and thus the attack couldn't be resolved
+      if(result === false) {
+        console.warn(`Summon ${this.name} failed to execute action ${action.name} because no owner was found.`);
+      }
     }
 
     return;

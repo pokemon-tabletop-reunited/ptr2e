@@ -1,4 +1,4 @@
-import { AttackPTR2e } from "@data";
+import { AttackPTR2e, SummonAttackPTR2e } from "@data";
 import { AttackStatisticRollParameters, BaseStatisticCheck, RollOptionConfig, Statistic } from "./statistic.ts";
 import { StatisticData } from "./data.ts";
 import * as R from "remeda";
@@ -272,6 +272,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         if (context.self.attack.category === "status" || !context.self.attack.power) ommited.add("damage");
         if (context.self.attack.category === "status") ommited.add("crit");
         if (!context.self.attack.accuracy) ommited.add("accuracy");
+        if(context.self.attack instanceof SummonAttackPTR2e && context.self.attack.damageType === "flat") ommited.add("crit");
 
         return ommited;
       })(),

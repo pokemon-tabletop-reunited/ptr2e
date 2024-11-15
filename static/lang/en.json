@@ -1521,7 +1521,7 @@
       },
       "damageFormula": {
         "label": "Damage Formula",
-        "hint": "This field follows the same logic as the 'Formula' field on Afflictions."
+        "hint": "You have access to @actor referring to the actor taking damage, as well as the shorthand @health.max and @health.current. For example, 1 tick of damage would be: '@health.max * (1/16)'"
       },
       "attackStat": {
         "label": "Attack Stat",
@@ -1758,6 +1758,16 @@
       "flatDamage": {
         "Label": "Flat Damage",
         "Hint": "Flat damage bonus or penalty."
+      },
+      "health": {
+        "max": {
+          "Label": "Max Health",
+          "Hint": "The maximum health of the defender."
+        },
+        "current": {
+          "Label": "Current Health",
+          "Hint": "The current health of the defender."
+        }
       }
     },
     "Actions": {

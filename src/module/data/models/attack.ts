@@ -4,6 +4,7 @@ import { ActionSchema } from "./action.ts";
 import { AttackStatistic } from "@system/statistics/attack.ts";
 import { AttackStatisticRollParameters } from "@system/statistics/statistic.ts";
 import { MovePTR2e } from "@item";
+import { ActorPTR2e } from "@actor";
 
 export default class AttackPTR2e extends ActionPTR2e {
   declare type: "attack" | "summon";
@@ -128,7 +129,7 @@ export default class AttackPTR2e extends ActionPTR2e {
 
   // TODO: This should add any relevant modifiers
   get stab(): 0 | 1 | 1.5 {
-    if (!this.actor) return 0;
+    if (!this.actor) return 1;
     const intersection = this.actor.system.type.types.intersection(this.types);
     return intersection.size === 1 && this.types.has(PTRCONSTS.Types.UNTYPED)
       ? 1
@@ -139,6 +140,10 @@ export default class AttackPTR2e extends ActionPTR2e {
 
   get rollable(): boolean {
     return this.accuracy !== null || this.power !== null;
+  }
+
+  getAttackStat(actor: Maybe<ActorPTR2e> = this.actor): number {
+    return actor?.getAttackStat(this) ?? 0;
   }
 
   async roll(args?: AttackStatisticRollParameters) {

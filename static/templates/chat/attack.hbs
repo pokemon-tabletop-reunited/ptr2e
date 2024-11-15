@@ -20,22 +20,24 @@
         {{> effect-traits traits=attack.traits attack=attack}}
     </article>
     {{#each results as |data uuid|}}
-        <div class="collapse-button">
-            <button type="button" class="collapse-rolls" data-uuid="{{uuid}}">Show Rolls for {{data.target.name}}</button>
-        </div>
-        <article class="collapsed">
-            {{#if data.rolls.accuracy}}{{{data.rolls.accuracy}}}{{/if}}
-            {{#if data.rolls.crit}}{{{data.rolls.crit}}}{{/if}}
-            {{#if data.rolls.damage}}{{{data.rolls.damage}}}{{/if}}
-            {{#each data.rolls.effects}}
-                {{{this}}}
-            {{/each}}
-        </article>
-        {{#if data.notes}}
-            <section class="notes">
-                {{{notes}}}
-            </section>
-        {{/if}}
+      {{#unless data.rolls.none}}
+          <div class="collapse-button">
+              <button type="button" class="collapse-rolls" data-uuid="{{uuid}}">Show Rolls for {{data.target.name}}</button>
+          </div>
+          <article class="collapsed">
+              {{#if data.rolls.accuracy}}{{{data.rolls.accuracy}}}{{/if}}
+              {{#if data.rolls.crit}}{{{data.rolls.crit}}}{{/if}}
+              {{#if data.rolls.damage}}{{{data.rolls.damage}}}{{/if}}
+              {{#each data.rolls.effects}}
+                  {{{this}}}
+              {{/each}}
+          </article>
+          {{#if data.notes}}
+              <section class="notes">
+                  {{{notes}}}
+              </section>
+          {{/if}}
+      {{/unless}}
     {{/each}}
     {{#if selfEffectRolls}}
        <div class="collapse-button">
