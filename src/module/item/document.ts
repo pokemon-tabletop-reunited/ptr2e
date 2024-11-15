@@ -395,6 +395,11 @@ class ItemPTR2e<
     }
     return super.deleteDocuments(ids, context);
   }
+
+  override getEmbeddedCollection(embeddedName: string) {
+    if(embeddedName === "Actions" && this.hasActions()) return this.actions as unknown as ReturnType<Item["getEmbeddedCollection"]>;
+    return super.getEmbeddedCollection(embeddedName);
+  }
 }
 
 interface ItemPTR2e<

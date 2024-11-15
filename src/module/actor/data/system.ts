@@ -249,6 +249,20 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         { required: true, initial: [] }
       ),
       immunities: new fields.SetField(new SlugField(), { required: true, initial: [] }),
+      details: new fields.SchemaField({
+        alliance: new fields.StringField({
+          choices: {
+            "party": "party",
+            "opposition": "opposition"
+          },
+          required: true,
+          nullable: true,
+          initial: "",
+          blank: true,
+          label: "PTR2E.FIELDS.details.alliance.label",
+          hint: "PTR2E.FIELDS.details.alliance.hint",
+        })
+      })
     };
   }
 
@@ -257,9 +271,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     addDataFieldMigration(source, "health.shield", "shield");
 
     // Migrate species Abilities data to the new format
-    if(source.species) {
+    if (source.species) {
       for (const abGroup of Object.keys(source.species.abilities)) {
-        source.species.abilities[abGroup] = (source.species.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g=>{
+        source.species.abilities[abGroup] = (source.species.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g => {
           if (typeof g == "object") return g;
           return { slug: g, uuid: null };
         });
@@ -295,7 +309,13 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this._initializeModifiers();
     this._prepareSpeciesData();
 
-    for(const clock of this.clocks.contents) {
+    this.details.alliance = ["party", "opposition", null].includes(this.details.alliance as string)
+      ? this.details.alliance
+      : this.parent.hasPlayerOwner
+        ? "party"
+        : "opposition";
+
+    for (const clock of this.clocks.contents) {
       const name = sluggify(clock.name);
       this.parent.rollOptions.addOption("clocks", `${name}`)
       this.parent.rollOptions.addOption("clocks", `${name}:value:${clock.value}`)
@@ -339,10 +359,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     for (const k in this.attributes) {
       const key = k as keyof Attributes;
       if (this.species?.stats[key]) {
-        if(this.parent.isHumanoid()) this.attributes[key].base ??= this.species.stats[key];
+        if (this.parent.isHumanoid()) this.attributes[key].base ??= this.species.stats[key];
         else this.attributes[key].base = this.species.stats[key];
       }
-      if(this.attributes[key].base === undefined) this.attributes[key].base = 40;
+      if (this.attributes[key].base === undefined) this.attributes[key].base = 40;
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
     }
 
@@ -448,7 +468,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       // if (this.species?.stats[key]) this.attributes[key].base = this.species.stats[key];
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
       const modifier = this.modifiers[`${key}Multiplier`];
-      if(modifier && !isNaN(modifier) && modifier !== 1) {
+      if (modifier && !isNaN(modifier) && modifier !== 1) {
         this.attributes[key].value = Math.round(this.attributes[key].value * Number(modifier));
       }
     }
@@ -460,23 +480,26 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10) + (this.modifiers.inventoryPoints ?? 0);
 
     // Apply type based immunities
-    if(this.type.types.has("poison") || this.type.types.has("steel")) {
+    if (this.type.types.has("poison") || this.type.types.has("steel")) {
       this.parent.rollOptions.addOption("immunities", "affliction:poison");
       this.parent.rollOptions.addOption("immunities", "affliction:blight");
     }
-    if(this.type.types.has("fire")) {
+    if (this.type.types.has("fire")) {
       this.parent.rollOptions.addOption("immunities", "affliction:burn");
     }
-    if(this.type.types.has("ice")) {
+    if (this.type.types.has("ice")) {
       this.parent.rollOptions.addOption("immunities", "affliction:frozen");
       this.parent.rollOptions.addOption("immunities", "affliction:frostbite");
     }
-    if(this.type.types.has("electric")) {
+    if (this.type.types.has("electric")) {
       this.parent.rollOptions.addOption("immunities", "affliction:paralysis");
     }
   }
 
   _calculateStatTotal(stat: Attribute | Omit<Attribute, "stage">): number {
+    // Shedinja HP is always 1
+    if (stat.base === 1) return 1;
+
     const nature = (() => {
       const nature = natureToStatArray[this._source.nature as keyof typeof natureToStatArray];
       if (!nature) return 1;
@@ -574,6 +597,10 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
       spent: number;
       available: number;
     };
+  }
+
+  details: {
+    alliance: "party" | "opposition" | null | undefined;
   }
 
   movement: Record<string, Movement>;

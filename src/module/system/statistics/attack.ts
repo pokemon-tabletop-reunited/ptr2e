@@ -1,4 +1,4 @@
-import { AttackPTR2e } from "@data";
+import { AttackPTR2e, SummonAttackPTR2e } from "@data";
 import { AttackStatisticRollParameters, BaseStatisticCheck, RollOptionConfig, Statistic } from "./statistic.ts";
 import { StatisticData } from "./data.ts";
 import * as R from "remeda";
@@ -23,32 +23,34 @@ class AttackStatistic extends Statistic {
 
   #check: AttackCheck<this> | null = null;
 
-  constructor(attack: AttackPTR2e) {
+  constructor(attack: AttackPTR2e, data: AttackStatisticData = {
+    slug: attack.slug,
+    label: attack.name,
+    check: {
+      type: "attack-roll"
+    },
+    defferedValueParams: {
+      resolvables: {
+        attack
+      },
+      injectables: {
+        attack
+      }
+    },
+    modifiers: [],
+    domains: [],
+    rollOptions: []
+  }) {
     const { actor, item } = attack;
     if (!actor) throw Error("Attack must have an actor for Statistic to be created.");
 
-    const data: AttackStatisticData = {
-      slug: attack.slug,
-      label: attack.name,
-      check: {
-        type: "attack-roll"
-      },
-      defferedValueParams: {
-        resolvables: {
-          attack,
-          actor: actor,
-          item: item,
-        },
-        injectables: {
-          attack,
-          actor: actor,
-          item: item,
-        }
-      },
-      modifiers: [],
-      domains: [],
-      rollOptions: []
-    };
+    if(!data.defferedValueParams) data.defferedValueParams = { resolvables: {}, injectables: {} };
+    if(!data.defferedValueParams.resolvables) data.defferedValueParams.resolvables = {};
+    if(!data.defferedValueParams.injectables) data.defferedValueParams.injectables = {};
+    data.defferedValueParams.resolvables.actor ??= actor;
+    data.defferedValueParams.injectables.actor ??= actor;
+    data.defferedValueParams.resolvables.item ??= item;
+    data.defferedValueParams.injectables.item ??= item;
 
     const itemRollOptions = item.getRollOptions("item");
     const itemTraits = item.traits!;
@@ -58,19 +60,20 @@ class AttackStatistic extends Statistic {
       [
         `all`,
         `check`,
-        `attack`,
-        `${meleeOrRanged}-attack`,
-        `${attack.category}-attack`,
-        attack.traits.map((t) => `${t.slug}-trait-attack`),
-        ...attack.types.map((t) => `${t}-attack`),
-        `${attack.slug}-attack`,
-        `${item.id}-attack`,
-        ...(attack?.power ? ["damaging-attack"] : []),
+        `${attack.type}`,
+        `${meleeOrRanged}-${attack.type}`,
+        `${attack.category}-${attack.type}`,
+        attack.traits.map((t) => `${t.slug}-trait-${attack.type}`),
+        ...attack.types.map((t) => `${t}-${attack.type}`),
+        `${attack.slug}-${attack.type}`,
+        `${item.id}-${attack.type}`,
+        ...(attack?.power ? [`damaging-${attack.type}`] : []),
+        ...(data.domains ?? [])
       ].flat()
     );
 
     // Power and category based Modifiers
-    if (attack.category !== "status") {
+    if (attack.category !== "status" && !data.modifiers.length) {
       if (typeof attack.power === "number") {
         data.modifiers.push(
           new ModifierPTR2e({
@@ -205,12 +208,14 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const contexts: Record<ActorUUID, CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>> = {}
     let anyValidTargets = false;
     for (const target of targets) {
+      const allyOrEnemy = this.actor.isAllyOf(target.actor) ? "ally" : this.actor.isEnemyOf(target.actor) ? "enemy" : "neutral";
+
       const currContext = contexts[target.actor.uuid] = await this.actor.getCheckContext({
         attack: this.attack,
         domains: this.domains,
         statistic: this,
         target: target,
-        options,
+        options: new Set([...options, `origin:${allyOrEnemy}`]),
         traits: args.traits ?? this.item.traits,
       }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
 
@@ -267,6 +272,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         if (context.self.attack.category === "status" || !context.self.attack.power) ommited.add("damage");
         if (context.self.attack.category === "status") ommited.add("crit");
         if (!context.self.attack.accuracy) ommited.add("accuracy");
+        if(context.self.attack instanceof SummonAttackPTR2e && context.self.attack.damageType === "flat") ommited.add("crit");
 
         return ommited;
       })(),

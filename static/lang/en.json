@@ -13,8 +13,10 @@
   "TYPES.Item.species": "Species",
   "TYPES.Item.weapon": "Weapon",
   "TYPES.Item.blueprint": "Blueprint",
+  "TYPES.Item.summon": "Summon",
   "TYPES.ActiveEffect.passive": "Passive Effect",
   "TYPES.ActiveEffect.affliction": "Affliction",
+  "TYPES.ActiveEffect.summon": "Summon Effect",
   "ITEM.AddButton": "Add",
   "ITEM.DeleteButton": "Delete",
   "SETTINGS.TutorList": "Manage Tutor Lists",
@@ -820,7 +822,18 @@
         "EditItem": "Edit Item",
         "DeleteItem": "Delete Item"
       },
-      "Unspent": "{num} Unspent"
+      "Unspent": "{num} Unspent",
+      "Settings": {
+        "Content": "Other Action Settings can be found here.",
+        "Title": "Actor Settings",
+        "Save": "Save Settings"
+      },
+      "Alliance": {
+        "Default": "Ownership Default ({alliance})",
+        "Party": "Party",
+        "Opposition": "Opposition",
+        "Neutral": "Neutral"
+      }
     },
     "ActorSidebar": {
       "Party": {
@@ -1017,8 +1030,21 @@
       "Combatant": {
         "InitiativeNotZeroOrNull": "Initiative must be a number that is 0 or more."
       },
+      "Messages": {
+        "Activation": "Start of {name}'s Activation",
+        "Round": "Start of Round {round}",
+        "End": "End of Combat"
+      },
       "Round": {
         "Name": "Round"
+      },
+      "Summon": {
+        "Messages": {
+          "HasActions": "<p>Resolves actions in the following order...</p>",
+          "Action": "<li>{name}</li>",
+          "NoActions": "<p>Has no actions to resolve!</p>",
+          "LastActivation": "<p><u>Will expire after this activation!</u></p>"
+        }
       },
       "ContextMenu": {
         "ResetAV": "Reset to BaseAV",
@@ -1480,6 +1506,44 @@
       "preventEvolution": {
         "label": "Prevent Evolution",
         "hint": "Prevent this species from evolving during generation regardless of their level."
+      },
+      "duration": {
+        "label": "Duration",
+        "hint": "The amount of activations this Summon gets before dissipating."
+      },
+      "baseAV": {
+        "label": "Base AV",
+        "hint": "The base AV of the Summon."
+      },
+      "damageType": {
+        "label": "Damage Type",
+        "hint": "Whether this attack deals Power based damage or has an alternative flat formula."
+      },
+      "damageFormula": {
+        "label": "Damage Formula",
+        "hint": "You have access to @actor referring to the actor taking damage, as well as the shorthand @health.max and @health.current. For example, 1 tick of damage would be: '@health.max * (1/16)'"
+      },
+      "attackStat": {
+        "label": "Attack Stat",
+        "hint": "The stat used to calculate the damage of this attack, you can use either a direct value, 'owner' to denote it should use the appropriate attacking stat from the Summon's owner, or an injected value (e.g. '@actor.system.attributes.atk.value')."
+      },
+      "targetType": {
+        "label": "Summon Target Type",
+        "hint": "Whom should be targeted, if this is 'Target', it will use the currently targeted token as the target based on when the summon is made, if it is 'Owner', it will use the owner of the summon as the target."
+      },
+      "targetUuid": {
+        "label": "Summon Target UUID",
+        "hint": "The UUID of the target token, generally this should be left unset as it will be automatically set when the summon is made."
+      },
+      "summon": {
+        "label": "Summon",
+        "hint": "UUID of the Summon Item, which should be summoned when taking this Action."
+      },
+      "details": {
+        "alliance": {
+          "label": "Alliance",
+          "hint": "The Allegiance of the actor."
+        }
       }
     },
     "ItemSheet": {
@@ -1694,6 +1758,16 @@
       "flatDamage": {
         "Label": "Flat Damage",
         "Hint": "Flat damage bonus or penalty."
+      },
+      "health": {
+        "max": {
+          "Label": "Max Health",
+          "Hint": "The maximum health of the defender."
+        },
+        "current": {
+          "Label": "Current Health",
+          "Hint": "The current health of the defender."
+        }
       }
     },
     "Actions": {

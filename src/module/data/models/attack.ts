@@ -4,11 +4,12 @@ import { ActionSchema } from "./action.ts";
 import { AttackStatistic } from "@system/statistics/attack.ts";
 import { AttackStatisticRollParameters } from "@system/statistics/statistic.ts";
 import { MovePTR2e } from "@item";
+import { ActorPTR2e } from "@actor";
 
 export default class AttackPTR2e extends ActionPTR2e {
-  declare type: "attack";
+  declare type: "attack" | "summon";
 
-  static override TYPE = "attack" as const;
+  static override TYPE: "attack" | "summon" = "attack" as const;
 
   static override defineSchema(): AttackSchema & ActionSchema {
     const fields = foundry.data.fields;
@@ -76,6 +77,14 @@ export default class AttackPTR2e extends ActionPTR2e {
         label: "PTR2E.FIELDS.slot.label",
         hint: "PTR2E.FIELDS.slot.hint",
       }),
+      summon: new fields.DocumentUUIDField({
+        required: true,
+        nullable: true,
+        initial: null,
+        label: "PTR2E.FIELDS.summon.label",
+        hint: "PTR2E.FIELDS.summon.hint",
+        type: "Item"
+      })
     };
   }
 
@@ -97,7 +106,6 @@ export default class AttackPTR2e extends ActionPTR2e {
     const power = data.power as number;
     if (category === "status" && power)
       throw new Error("Status moves cannot have a power value.");
-    // if (category !== "status" && !power) throw new Error("Physical and special moves must have a power value.");
   }
 
   override get css() {
@@ -113,27 +121,15 @@ export default class AttackPTR2e extends ActionPTR2e {
       })
       .join(` , `)}, var(--${this.category}-color) ${categorySize})`;
 
-    // const typeSizes = this.types.size > 1 ? 100 / this.types.size : 100;
-    // const gradient = `linear-gradient(120deg, ${Array.from(this.types)
-    //     .flatMap((t, i) => {
-    //         if (i === 0) return [`var(--${t}-color)`, `var(--${t}-color) ${typeSizes}%`];
-    //         return [
-    //             `var(--${t}-color) ${typeSizes * i}%`,
-    //             `var(--${t}-color) ${typeSizes * (i + 1)}%`,
-    //         ];
-    //     })
-    //     .join(` , `)})`;
-
     return {
       style: `background: ${gradient};`,
-      // style: `background: ${gradient}; border: 4px ridge var(--${this.category}-color); padding: 0px;`,
       class: "attack-styling",
     };
   }
 
   // TODO: This should add any relevant modifiers
   get stab(): 0 | 1 | 1.5 {
-    if (!this.actor) return 0;
+    if (!this.actor) return 1;
     const intersection = this.actor.system.type.types.intersection(this.types);
     return intersection.size === 1 && this.types.has(PTRCONSTS.Types.UNTYPED)
       ? 1
@@ -144,6 +140,10 @@ export default class AttackPTR2e extends ActionPTR2e {
 
   get rollable(): boolean {
     return this.accuracy !== null || this.power !== null;
+  }
+
+  getAttackStat(actor: Maybe<ActorPTR2e> = this.actor): number {
+    return actor?.getAttackStat(this) ?? 0;
   }
 
   async roll(args?: AttackStatisticRollParameters) {
@@ -246,4 +246,5 @@ interface AttackSchema extends foundry.data.fields.DataSchema {
   contestEffect: foundry.data.fields.StringField<string, string, true>;
   free: foundry.data.fields.BooleanField<boolean, boolean>;
   slot: foundry.data.fields.NumberField<number, number, true, true, true>;
+  summon: foundry.data.fields.DocumentUUIDField<string>;
 }

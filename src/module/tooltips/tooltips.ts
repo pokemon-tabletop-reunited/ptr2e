@@ -103,9 +103,9 @@ export default class TooltipsPTR2e {
           return this._onDataElementTooltip();
       }
     }
-    if(game.tooltip.element?.getAttribute("data-tooltip")) {
-      switch(game.tooltip.element?.getAttribute("data-tooltip")) {
-        case "range-tooltip": 
+    if (game.tooltip.element?.getAttribute("data-tooltip")) {
+      switch (game.tooltip.element?.getAttribute("data-tooltip")) {
+        case "range-tooltip":
           return this._onRangeTooltip();
       }
     }
@@ -232,19 +232,30 @@ export default class TooltipsPTR2e {
   }
 
   async _onActionTooltip() {
-    const attackSlug =
-      game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
-    if (!attackSlug) return false;
+    const oldMethod = await ( async () => {
+      const attackSlug =
+        game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
+      if (!attackSlug) return false;
 
-    const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
-      .parent;
-    if (!parentUuid) return false;
+      const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
+        .parent;
+      if (!parentUuid) return false;
 
-    const parent = (await fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
-    if (!parent) return false;
+      const parent = (await fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
+      if (!parent) return false;
 
-    const attack = parent.actions.get(attackSlug) as ActionPTR2e | undefined;
-    if (!attack) return false;
+      const attack = parent.actions.get(attackSlug) as ActionPTR2e | undefined;
+      if (!attack) return false;
+
+      return await this.#createActionTooltip(attack);
+    })();
+    if(oldMethod !== false) return oldMethod;
+
+    const attackUuid = game.tooltip.element?.dataset.uuid;
+    if (!attackUuid) return false;
+
+    const attack = (await fromUuid(attackUuid)) as unknown as ActionPTR2e | undefined;
+    if (!(attack instanceof ActionPTR2e)) return false;
 
     return await this.#createActionTooltip(attack);
   }
@@ -297,19 +308,30 @@ export default class TooltipsPTR2e {
   }
 
   async _onAttackTooltip() {
-    const attackSlug =
-      game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
-    if (!attackSlug) return false;
+    const oldMethod = await ( async () => {
+      const attackSlug =
+        game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
+      if (!attackSlug) return false;
 
-    const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
-      .parent;
-    if (!parentUuid) return false;
+      const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
+        .parent;
+      if (!parentUuid) return false;
 
-    const parent = (await fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
-    if (!parent) return false;
+      const parent = (await fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
+      if (!parent) return false;
 
-    const attack = parent.actions.attack!.get(attackSlug) as AttackPTR2e | undefined;
-    if (!attack) return false;
+      const attack = parent.actions.attack!.get(attackSlug) as AttackPTR2e | undefined;
+      if (!attack) return false;
+
+      return await this.#createAttackTooltip(attack);
+    })();
+    if(oldMethod !== false) return oldMethod;
+
+    const attackUuid = game.tooltip.element?.dataset.uuid;
+    if (!attackUuid) return false;
+
+    const attack = (await fromUuid(attackUuid)) as unknown as AttackPTR2e | undefined;
+    if (!(attack instanceof AttackPTR2e)) return false;
 
     return await this.#createAttackTooltip(attack);
   }
@@ -437,11 +459,12 @@ export default class TooltipsPTR2e {
     if (!target) return false;
 
     const damage = target.damageRoll;
+    const isFlatDamage = !!damage?.context["health.max"];
 
     this.tooltip.classList.add("damage");
     await this._renderTooltip({
       path: "systems/ptr2e/templates/chat/tooltips/damage.hbs",
-      data: { target, damage },
+      data: { target, damage, isFlatDamage },
       direction: game.tooltip.element?.dataset.tooltipDirection as
         | TooltipDirections
         | undefined,
@@ -575,16 +598,16 @@ export default class TooltipsPTR2e {
     if (!element) return false;
 
     const dataInspectorElement = element.closest(".application.data-inspector")
-    if(!dataInspectorElement) return false;
-    
+    if (!dataInspectorElement) return false;
+
     const path = element.dataset.path;
-    if(!path) return false;
+    if (!path) return false;
 
     const dataInspectorApp = foundry.applications.instances.get(dataInspectorElement.id) as DataInspector | undefined;
-    if(!dataInspectorApp) return false;
+    if (!dataInspectorApp) return false;
 
     const entry = dataInspectorApp.root.getAtPath(path);
-    if(!entry) return false;
+    if (!entry) return false;
 
     const data = {
       path: entry.path,
