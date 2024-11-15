@@ -72,9 +72,9 @@ export class AttackModifierPopup extends ModifierPopup {
                     case "crit":
                         return method === "stage" ? "crit-stage" : "invalid";
                     case "power":
-                        return method === "percentile" ? "power-percentile" : "invalid";
+                        return method === "percentile" ? "power-percentile" : method === "flat" ? "power-flat" : "invalid";
                     case "damage":
-                        return method === "percentile" ? "damage-percentile" : "invalid";
+                        return method === "percentile" ? "damage-percentile" : method === "flat" ? "damage-flat" : "invalid";
                     default:
                         return "invalid";
                 }
@@ -86,8 +86,10 @@ export class AttackModifierPopup extends ModifierPopup {
                 "accuracy-percentile": 3,
                 "crit-stage": 4,
                 "power-percentile": 5,
-                "damage-percentile": 6,
-                invalid: 7,
+                "power-flat": 6,
+                "damage-percentile": 7,
+                "damage-flat": 8,
+                invalid: 9,
             };
 
             const checkModifiers = this.check.modifiers.map((m) => {
@@ -322,8 +324,10 @@ export class AttackModifierPopup extends ModifierPopup {
                     "accuracy-flat",
                     "accuracy-percent",
                     "crit-stage",
-                    "damage-percent",
                     "power-percent",
+                    "power-flat",
+                    "damage-percent",
+                    "damage-flat",
                 ].includes(modifierType)
             ) {
                 errors.push("Invalid modifier type. Please select a valid modifier type.");
@@ -346,10 +350,14 @@ export class AttackModifierPopup extends ModifierPopup {
                             return { method: "percentile", type: "accuracy" };
                         case "crit-stage":
                             return { method: "stage", type: "crit" };
-                        case "damage-percent":
-                            return { method: "percentile", type: "damage" };
                         case "power-percent":
                             return { method: "percentile", type: "power" };
+                        case "power-flat":
+                            return { method: "flat", type: "power" };
+                        case "damage-percent":
+                            return { method: "percentile", type: "damage" };
+                        case "damage-flat":
+                            return { method: "flat", type: "damage" };
                     }
                     return {};
                 })(modifierType);

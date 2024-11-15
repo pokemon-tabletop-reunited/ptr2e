@@ -66,16 +66,16 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             visible: true,
           },
           {
+            icon: "fas fa-cog",
+            label: "PTR2E.ActorSheet.Settings.Title",
+            action: "open-settings",
+            visible: true,
+          },
+          {
             icon: "fas fa-atom",
             label: "PTR2E.ActorSheet.Inspector",
             action: "open-inspector",
             visible: true
-          },
-          {
-            icon: "fas fa-heart-circle-plus",
-            label: "PTR2E.ActorSheet.Rest",
-            action: "rest",
-            visible: true,
           },
           {
             icon: "fas fa-user-group",
@@ -88,7 +88,13 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             label: "PTR2E.OpenTutorList",
             action: "open-tutor-list",
             visible: true,
-          }
+          },
+          {
+            icon: "fas fa-heart-circle-plus",
+            label: "PTR2E.ActorSheet.Rest",
+            action: "rest",
+            visible: true,
+          },
         ],
       },
       form: {
@@ -152,7 +158,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         },
         "open-party-sheet": async function (this: ActorSheetPTRV2) {
           if (!this.actor.party) return;
-          new PartySheetPTR2e({folder: this.actor.folder!}).render(true);
+          new PartySheetPTR2e({ folder: this.actor.folder! }).render(true);
         },
         "edit-movelist": function (this: ActorSheetPTRV2) {
           new KnownActionsApp(this.actor).render(true);
@@ -211,7 +217,47 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         },
         "add-clock": ActorSheetPTRV2.#onAddClock,
         "open-tutor-list": function (this: ActorSheetPTRV2) {
-          game.ptr.tutorList.render({ force:true, actor: this.actor });
+          game.ptr.tutorList.render({ force: true, actor: this.actor });
+        },
+        "open-settings": function (this: ActorSheetPTRV2) {
+          const alliance =
+            this.actor._source.system.details?.alliance === null ? "neutral" : (this.actor._source.system.details?.alliance || "default");
+          const defaultValue = game.i18n.localize(
+            this.actor.hasPlayerOwner
+              ? "PTR2E.ActorSheet.Alliance.Party"
+              : "PTR2E.ActorSheet.Alliance.Opposition",
+          );
+
+          const allianceOptions = {
+            default: game.i18n.format("PTR2E.ActorSheet.Alliance.Default", { alliance: defaultValue }),
+            opposition: "PTR2E.ActorSheet.Alliance.Opposition",
+            party: "PTR2E.ActorSheet.Alliance.Party",
+            neutral: "PTR2E.ActorSheet.Alliance.Neutral",
+          };
+
+          return void foundry.applications.api.DialogV2.prompt({
+            content: `<p>${game.i18n.localize("PTR2E.ActorSheet.Settings.Content")}</p>
+            <div class="form-group"><label>${game.i18n.localize("PTR2E.FIELDS.details.alliance.label")}</label><div class="form-fields"><select name="system.details.alliance">
+            ${Object.entries(allianceOptions).map(([key, value]) => `<option value="${key}" ${key === alliance ? "selected" : ""}>${game.i18n.localize(value)}</option>`).join("")}
+            </select></div></div>`,
+            window: { title: game.i18n.localize("PTR2E.ActorSheet.Settings.Title") },
+            ok: {
+              label: game.i18n.localize("PTR2E.ActorSheet.Settings.Save"),
+              action: "ok",
+              callback: async (_event, target, element) => {
+                const html = element ?? target;
+                const value = htmlQuery<HTMLInputElement>(html, '[name="system.details.alliance"]')?.value;
+                return void this.actor.update(
+                  value === "default"
+                    ? { "system.details.alliance": '' }
+                    : value === "neutral"
+                      ? { "system.details.alliance": null }
+                      : { "system.details.alliance": value },
+                );
+              }
+            },
+            rejectClose: false
+          });
         }
       },
     },
@@ -605,7 +651,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
           const clocks = fu.duplicate(this.document.system._source.clocks);
           const index = clocks.findIndex((c) => c.id === clock.id);
-          if(index === -1) return;
+          if (index === -1) return;
           clocks[index].value = clock.value >= clock.max ? 0 : clock.value + 1;
 
           return this.document.update({ "system.clocks": clocks });
@@ -620,7 +666,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
           const clocks = fu.duplicate(this.document.system._source.clocks);
           const index = clocks.findIndex((c) => c.id === clock.id);
-          if(index === -1) return;
+          if (index === -1) return;
           clocks[index].value = clock.value <= 0 ? clock.max : clock.value - 1;
 
           return this.document.update({ "system.clocks": clocks });
@@ -656,7 +702,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                 callback: async () => {
                   const clocks = fu.duplicate(this.document.system._source.clocks);
                   const index = clocks.findIndex((c) => c.id === clock.id);
-                  if(index === -1) return;
+                  if (index === -1) return;
                   clocks.splice(index, 1);
 
                   return this.document.update({ "system.clocks": clocks });
@@ -836,7 +882,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
     const controls = fu.duplicate(super._getHeaderControls());
 
-    if(!this.actor.party) controls.findSplice(c => c.action === "open-party-sheet")
+    if (!this.actor.party) controls.findSplice(c => c.action === "open-party-sheet")
 
     return controls;
   }
@@ -1071,7 +1117,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     switch (type) {
       case "effect": {
-        return ActiveEffectPTR2e.createDialog({}, { parent: this.document });
+        return ActiveEffectPTR2e.createDialog({}, { parent: this.document, types: ActiveEffectPTR2e.TYPES.filter(s => s != "summon") });
       }
       default: {
         const itemType = Item.TYPES.includes(type) ? type : null;
@@ -1096,8 +1142,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
   static #onAddClock(this: ActorSheetPTRV2, event: Event, clock?: Clock) {
     event.preventDefault();
-    return new ClockEditor({}, clock instanceof Clock ? clock : new Clock({}, {parent: this.document.system})).render(true);
-}
+    return new ClockEditor({}, clock instanceof Clock ? clock : new Clock({}, { parent: this.document.system })).render(true);
+  }
 }
 
 export default ActorSheetPTRV2;

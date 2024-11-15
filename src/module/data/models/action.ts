@@ -5,6 +5,9 @@ import { RangePTR2e } from "@data";
 import { CollectionField } from "../fields/collection-field.ts";
 import { SlugField } from "../fields/slug-field.ts";
 import SystemTraitsCollection from "../system-traits-collection.ts";
+import SummonSystem from "@item/data/summon.ts";
+import { ActionEditor } from "@module/apps/action-editor.ts";
+import { formatSlug } from "@utils";
 
 class ActionPTR2e extends foundry.abstract.DataModel {
   static TYPE: ActionType = "generic" as const;
@@ -96,6 +99,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
 
   get actor(): ActorPTR2e | null {
     if (this.parent?.parent instanceof ActorPTR2e) return this.parent.parent;
+    if (this.parent instanceof SummonSystem) return this.parent.actor;
     if (
       this.parent?.parent instanceof ItemPTR2e &&
       this.parent.parent.actor instanceof ActorPTR2e
@@ -104,7 +108,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     return null;
   }
 
-  get item(): ItemPTR2e<ItemSystemsWithActions> {
+  get item(): ItemPTR2e<ItemSystemsWithActions>  {
     if (this.parent instanceof ItemPTR2e) return this.parent;
     if (this.parent?.parent instanceof ItemPTR2e) return this.parent.parent;
     throw new Error("Action is not a child of an item");
@@ -114,12 +118,70 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     if (!this.variant) return null;
     return this.item.actions.get(this.variant) ?? null;
   }
-  
+
   get css(): { style: string; class: string; } {
     return {
       style: "",
       class: ""
     };
+  }
+
+  get uuid(): string {
+    return `${this.item.uuid}.Actions.${this.slug}`
+  }
+
+  get link(): string {
+    return `@UUID[${this.uuid}]{${this.name}}`;
+  }
+
+  get documentName(): string {
+    return "Action";
+  }
+
+  /**
+     * Create a content link for this Document.
+     * @param [options] Additional options to configure how the link is constructed.
+     * @param [options.attrs]   Attributes to set on the link.
+     * @param [options.dataset] Custom data- attributes to set on the link.
+     * @param [options.classes] Classes to add to the link.
+     * @param [options.name]    A name to use for the Document, if different from the Document's name.
+     * @param [options.icon]    A font-awesome icon class to use as the icon, if different to the Document's configured sidebarIcon.
+     */
+  toAnchor(options: {
+    attrs?: Record<string, string>;
+    dataset?: Record<string, string>;
+    classes?: string[];
+    name?: string;
+    icon?: string;
+  } = {}): HTMLAnchorElement {
+    let {attrs = {}, dataset = {} as Record<string, string>, name} = options;
+    const {classes = [], icon} = options;
+    // Build dataset
+    const documentName = `${formatSlug(this.type)} ${this.name}`;
+    const anchorIcon = icon ?? "fas fa-link";
+    if ( !classes.includes("content-link") ) classes.unshift("content-link");
+    attrs = foundry.utils.mergeObject({ draggable: "true" }, attrs);
+    dataset = foundry.utils.mergeObject({
+      link: "",
+      uuid: this.uuid,
+      id: this.id,
+      type: this.documentName,
+      pack: this.pack,
+      tooltip: documentName,
+      "tooltipDirection": "LEFT"
+    }, dataset);
+
+    classes.unshift("action", this.type);
+
+    name ??= this.name;
+    return TextEditor.createAnchor({ attrs, dataset, name, classes, icon: anchorIcon });
+  }
+
+  _onClickDocumentLink() {
+    return new ActionEditor(
+      this.item as ItemPTR2e<ItemSystemsWithActions>,
+      this.slug
+    ).render(true);
   }
 
   prepareDerivedData() {
@@ -174,6 +236,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
 }
 interface ActionPTR2e extends foundry.abstract.DataModel, ModelPropsFromSchema<ActionSchema> {
   _source: SourceFromSchema<ActionSchema>;
+  get schema(): foundry.data.fields.SchemaField<ActionSchema>;
 }
 
 export interface ActionSchema extends foundry.data.fields.DataSchema {

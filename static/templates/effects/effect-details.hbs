@@ -17,20 +17,33 @@
       {{formField system.schema.fields.formula value=data.system.formula localize=true}}
 
       {{formField system.schema.fields.type value=data.system.type localize=true}}
-    {{else}}
+    {{else if (is data.type "passive")}}
       <div class="turn-to-affliction">
         <p class="hint">{{{localize "PTR2E.Effect.TurnIntoAffliction"}}}</p>
         <div class="center">
           <button type="button" data-action="convert-to-affliction">Transform into Affliction</button>
         </div>     
       </div>
+    {{else if (is data.type "summon")}}
+      {{formField system.schema.fields.targetType value=data.system.targetType localize=true}}
+      {{#if (is data.system.targetType "target")}}
+        {{formField system.schema.fields.targetUuid value=data.system.targetUuid localize=true}}
+      {{/if}}
+
+      {{formField system.schema.fields.priority value=data.system.priority localize=true}}
+
+      {{formField system.schema.fields.formula value=data.system.formula localize=true}}
+
+      {{formField system.schema.fields.type value=data.system.type localize=true}}
     {{/if}}
 
     {{#if (gt data.system.stacks 0)}}
       {{formField system.schema.fields.stacks value=data.system.stacks localize=true}}
     {{/if}}
 
-    {{formField system.schema.fields.removeAfterCombat value=data.system.removeAfterCombat localize=true}}
-    {{formField system.schema.fields.removeOnRecall value=data.system.removeOnRecall localize=true}}
+    {{#unless (is data.type "summon")}}
+      {{formField system.schema.fields.removeAfterCombat value=data.system.removeAfterCombat localize=true}}
+      {{formField system.schema.fields.removeOnRecall value=data.system.removeOnRecall localize=true}}
+    {{/unless}}
   </div>
 </section>

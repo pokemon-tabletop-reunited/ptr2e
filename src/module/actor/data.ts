@@ -26,6 +26,7 @@ export interface EffectRollSource {
   label: string;
   roll: RollJSON | null;
   success?: boolean;
+  critOnly?: boolean;
   [key: string]: unknown;
 }
 

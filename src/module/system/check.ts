@@ -304,6 +304,7 @@ class CheckPTR2e {
                 attack: targetContext.self.attack,
                 rip: !!targetContext.target?.rangeIncrement,
                 outOfRange: !!targetContext.outOfRange,
+                flatDamage: targetCheck.total.damage?.flat ?? 0
             };
 
             const rolls: {

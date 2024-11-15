@@ -12,6 +12,27 @@
                 {{formField fields.free value=action.free localize=true}}
             </fieldset>
         {{/if}}
+        {{#if (eq action.type "summon")}}
+          <fieldset>
+            <legend>Summon Attack</legend>
+            {{formField fields.types value=source.types localize=true}}
+            {{formField fields.category value=source.category localize=true}}
+            {{#unless (is source.category "status")}}
+              {{formField fields.damageType value=source.damageType localize=true}}
+              {{#unless (is source.damageType "flat")}}
+                {{formField fields.power value=source.power localize=true}}
+                {{formField fields.attackStat value=source.attackStat localize=true}}
+                {{else}}
+                {{formField fields.damageFormula value=source.damageFormula localize=true}}
+              {{/unless}}
+            {{/unless}}
+            {{formField fields.accuracy value=source.accuracy localize=true}}
+            {{formField fields.targetType value=source.targetType localize=true}}
+            {{#if (is source.targetType "target")}}
+              {{formField fields.targetUuid value=source.targetUuid localize=true}}
+            {{/if}}
+          </fieldset>
+        {{/if}}
         {{#if (eq action.type "passive")}}
             <fieldset>
                 <legend>Hide Passive?</legend>
@@ -22,19 +43,26 @@
             <legend>Effect Description</legend>
             {{formField fields.description enriched=enrichedDescription value=source.description localize=true}}
         </fieldset>
-        <fieldset>
-            <legend>Range</legend>
-            {{formField fields.range.fields.target value=source.range.target localize=true dataset=rangeData}}
-            {{formField fields.range.fields.distance value=source.range.distance localize=true}}
-            {{!-- {{formField fields.range.fields.unit value=source.range.unit localize=true}} --}}
-        </fieldset>
-        <fieldset>
-            <legend>Cost</legend>
-            {{formField fields.cost.fields.activation value=source.cost.activation localize=true}}
-            {{formField fields.cost.fields.powerPoints value=source.cost.powerPoints localize=true}}
-            {{formField fields.cost.fields.trigger value=source.cost.trigger localize=true}}
-            {{formField fields.cost.fields.delay value=source.cost.delay localize=true}}
-            {{formField fields.cost.fields.priority value=source.cost.priority localize=true}}
-        </fieldset>
+        {{#unless (eq action.type "summon")}}
+          <fieldset>
+              <legend>Range</legend>
+                {{formField fields.range.fields.target value=source.range.target localize=true dataset=rangeData}}
+                {{formField fields.range.fields.distance value=source.range.distance localize=true}}
+          </fieldset>
+          <fieldset>
+              <legend>Cost</legend>
+              {{formField fields.cost.fields.activation value=source.cost.activation localize=true}}
+              {{formField fields.cost.fields.powerPoints value=source.cost.powerPoints localize=true}}
+              {{formField fields.cost.fields.trigger value=source.cost.trigger localize=true}}
+              {{formField fields.cost.fields.delay value=source.cost.delay localize=true}}
+              {{formField fields.cost.fields.priority value=source.cost.priority localize=true}}
+          </fieldset>
+          {{#if (is source.category "status")}}
+          <fieldset>
+            <legend>Summon</legend>
+            {{formField fields.summon value=source.summon localize=true}}
+          </fieldset>
+          {{/if}}
+        {{/unless}}
     </div>
 </section>

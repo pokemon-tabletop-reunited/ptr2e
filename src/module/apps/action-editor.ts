@@ -3,6 +3,7 @@ import Tagify from "@yaireo/tagify";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { Trait } from "@data";
+import * as R from "remeda";
 
 export class ActionEditor<
   TDocument extends ItemPTR2e<ItemSystemsWithActions>,
@@ -180,6 +181,7 @@ export class ActionEditor<
     })();
 
     this.#allTraits = game.ptr.data.traits.map((trait) => ({ value: trait.slug, label: trait.label, type: trait.type }));
+    const typeOptions = this.action.schema.fields.type.options.choices as Record<string, string>;
 
     return {
       document: this.document,
@@ -189,6 +191,7 @@ export class ActionEditor<
       traits,
       enrichedDescription: await TextEditor.enrichHTML(this.action.description),
       rangeData: {tooltip: "range-tooltip", range: this.action?.range?.target},
+      typeOptions: this.action.item.type === "summon" ? R.pick(typeOptions, ["summon", "generic"]) : R.omit(typeOptions, ["summon"]),
     };
   }
 

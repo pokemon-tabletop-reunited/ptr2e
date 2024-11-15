@@ -43,11 +43,6 @@ class ActorPTR2e<
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
 
-  // eslint-disable-next-line @typescript-eslint/class-literal-property-style
-  get alliance(): string {
-    return "";
-  }
-
   get traits() {
     return this.system.traits;
   }
@@ -155,43 +150,21 @@ class ActorPTR2e<
     return this.system.traits.has("ace");
   }
 
+  get alliance() {
+    return this.system.details.alliance;
+  }
+
   get luck(): number {
     return this.isAce ? this.system.skills.get("luck")!.total : 0;
   }
 
   get spendableLuck(): number {
-    return (!this.party?.owner || this.party?.owner == this)
-      ? this.luck
-      : this.luck + this.party.owner.luck;
-  }
-
-  async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = [], notifications: { name: string, amount: number, leftover: number }[] = []): Promise<{ name: string, amount: number, leftover: number }[]> {
-    // no "spending" a negative amount of luck
-    if (amount < 0) return [];
-    // If we can't afford it, don't spend it.
-    if (amount > this.spendableLuck) return [];
-
-    const luck = this.luck;
-    if (luck > 0) {
-      const skills = this.system.toObject().skills;
-      const luckSkill = skills.find((skill) => skill.slug === "luck");
-      if (!luckSkill) return [];
-      luckSkill.value = Math.max(luck - amount, 1);
-
-      amount -= luck;
-      notifications.push({ name: this.name, amount: luck - luckSkill.value, leftover: luckSkill.value });
-      pendingUpdates.push({ _id: this.id, "system.skills": skills });
-    }
-    if (amount <= 0) {
-      if (pendingUpdates.length) await Actor.updateDocuments(pendingUpdates);
-      return notifications;
-    }
-
-    // we need to spend it from our owner, if we have one
-    const owner = this.party?.owner;
-    if (!owner || owner == this) return [];
-
-    return await owner.spendLuck(amount, pendingUpdates, notifications);
+    return Math.max(
+      (
+        (!this.party?.owner || this.party?.owner == this)
+          ? this.luck
+          : this.luck + this.party.owner.luck
+      ) ?? 0 - 1, 0)
   }
 
   protected override _initializeSource(
@@ -445,6 +418,23 @@ class ActorPTR2e<
     }
   }
 
+  override *allApplicableEffects(): Generator<ActiveEffectPTR2e<this>> {
+    if(game.ready) {
+      const combatant = this.combatant;
+      if(combatant) {
+        const summons = combatant.parent?.summons;
+        if(summons?.length) {
+          for(const summon of summons) {
+            for(const effect of summon.system.getApplicableEffects(this)) {
+              yield new ActiveEffectPTR2e(effect.toObject(), {parent: this}) as ActiveEffectPTR2e<this>;
+            }
+          }
+        }
+      }
+    }
+    yield* super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>
+  }
+
   _calculateEffectiveness(): Record<PokemonType, number> {
     const types = game.settings.get("ptr2e", "pokemonTypes") as TypeEffectiveness;
     const effectiveness = {} as Record<PokemonType, number>;
@@ -685,6 +675,10 @@ class ActorPTR2e<
     isDelta?: boolean,
     isBar?: boolean
   ): Promise<this> {
+    if (attribute === "health") {
+      if (value >= 0) value = Math.floor(value);
+      if (value < 0) value = Math.ceil(value);
+    }
     if (isDelta && value != 0 && attribute === "health") {
       await this.applyDamage(value * -1);
       return this;
@@ -710,6 +704,43 @@ class ActorPTR2e<
 
   hasEmbeddedSpecies(): boolean {
     return !!this.system._source.species;
+  }
+
+  isAllyOf(actor: ActorPTR2e): boolean {
+    return this.alliance !== null && this !== actor && this.alliance === actor.alliance;
+  }
+
+  isEnemyOf(actor: ActorPTR2e): boolean {
+    return this.alliance !== null && actor.alliance !== null && this.alliance !== actor.alliance;
+  }
+
+  async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = [], notifications: { name: string, amount: number, leftover: number }[] = []): Promise<{ name: string, amount: number, leftover: number }[]> {
+    // no "spending" a negative amount of luck
+    if (amount < 0) return [];
+    // If we can't afford it, don't spend it.
+    if (amount > this.spendableLuck || this.spendableLuck - amount <= 0) return [];
+
+    const luck = this.luck;
+    if (luck > 0) {
+      const skills = this.system.toObject().skills;
+      const luckSkill = skills.find((skill) => skill.slug === "luck");
+      if (!luckSkill) return [];
+      luckSkill.value = Math.max(luck - amount, 1);
+
+      amount -= luck;
+      notifications.push({ name: this.name, amount: luck - luckSkill.value, leftover: luckSkill.value });
+      pendingUpdates.push({ _id: this.id, "system.skills": skills });
+    }
+    if (amount <= 0) {
+      if (pendingUpdates.length) await Actor.updateDocuments(pendingUpdates);
+      return notifications;
+    }
+
+    // we need to spend it from our owner, if we have one
+    const owner = this.party?.owner;
+    if (!owner || owner == this) return [];
+
+    return await owner.spendLuck(amount, pendingUpdates, notifications);
   }
 
   async onEndActivation() {

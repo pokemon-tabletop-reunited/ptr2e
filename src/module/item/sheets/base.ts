@@ -502,7 +502,7 @@ export default class ItemSheetPTR2e<
     // Items only support effects
     if (type !== "effect") return;
 
-    return ActiveEffectPTR2e.createDialog({}, { parent: this.document });
+    return ActiveEffectPTR2e.createDialog({}, { parent: this.document, types: ActiveEffectPTR2e.TYPES.filter(s => s != "summon") });
   }
 }
 

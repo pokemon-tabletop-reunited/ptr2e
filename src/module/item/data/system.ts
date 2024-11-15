@@ -13,7 +13,8 @@ type ItemType =
     | "move"
     | "perk"
     | "species"
-    | "weapon";
+    | "weapon"
+    | "summon";
 
 type BaseItemSourcePTR2e<
     TType extends ItemType,

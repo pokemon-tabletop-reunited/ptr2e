@@ -54,5 +54,10 @@
                 {{/if}}
             </fieldset>
         </section>
+        {{#if attack.summon}}
+          <section class="attack-summon mt-2">
+            <button class="create-summon" data-item-uuid="{{@root.document.uuid}}" data-attack="{{attack.slug}}" data-tooltip="Add Summon to Combat (GM Only)" {{#unless (isGm)}}disabled{{/unless}}>Create Summon</button>
+          </section>
+        {{/if}}
     </main>
 </content> 
