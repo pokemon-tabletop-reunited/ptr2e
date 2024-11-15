@@ -29,7 +29,7 @@ export default abstract class SummonSystem extends HasEmbed(
       ...super.defineSchema() as HasBaseSchema,      
       baseAV: new fields.NumberField({required: true, initial: 0, nullable: false, min: 0, label: "PTR2E.FIELDS.baseAV.label", hint: "PTR2E.FIELDS.baseAV.hint"}),
       duration: new fields.NumberField({required: true, initial: 1, nullable: false, min: 1, label: "PTR2E.FIELDS.duration.label", hint: "PTR2E.FIELDS.duration.hint"}),
-      owner: new fields.DocumentUUIDField({required: true, nullable: true, initial: null}),
+      owner: new fields.DocumentUUIDField({required: true, nullable: true, initial: null, type: "Actor"}),
     };
   }
 
@@ -49,7 +49,7 @@ export default abstract class SummonSystem extends HasEmbed(
   }
 
   get actor(): ActorPTR2e | null {
-    return this.owner;
+    return fromUuidSync<ActorPTR2e>(this.owner);
   }
 }
 
@@ -62,7 +62,7 @@ export default interface SummonSystem extends ModelPropsFromSchema<SummonSchema>
 interface SummonSchema extends foundry.data.fields.DataSchema, DescriptionSchema, TraitsSchema, SlugSchema, MigrationSchema, ActionsSchema {
   baseAV: foundry.data.fields.NumberField<number, number, true, false, true>;
   duration: foundry.data.fields.NumberField<number, number, true, false, true>;
-  owner: foundry.data.fields.DocumentUUIDField<ActorPTR2e>;
+  owner: foundry.data.fields.DocumentUUIDField<string>;
 }
 
 export type SummonSource = BaseItemSourcePTR2e<"summon", SummonSystemSource>;

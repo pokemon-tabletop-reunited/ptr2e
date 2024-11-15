@@ -17,6 +17,10 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
       }, 0) / ((this.combatants.size - 1) || 1));
   }
 
+  get summons(): CombatantPTR2e<this, null, SummonCombatantSystem>[] {
+    return this.combatants.filter((c) => c.type === "summon") as CombatantPTR2e<this, null, SummonCombatantSystem>[];
+  }
+
   get roundCombatant(): CombatantPTR2e<this, null, RoundCombatantSystem> {
     return this.combatants.get(RoundCombatantSystem.id) as CombatantPTR2e<
       this,
@@ -101,7 +105,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     updateData.round = 1;
     Hooks.callAll("combatStart", this, updateData);
     const result = await this.update(updateData);
-    if(result) {
+    if (result) {
       await ChatMessage.create({
         type: "combat",
         flavor: game.i18n.format("PTR2E.Combat.Messages.Round", { round: updateData.round }),
@@ -131,7 +135,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
       delete updateData.combatants;
       const result = await this.update(updateData);
       if (result) {
-        if(updateData.round) await ChatMessage.create({
+        if (updateData.round) await ChatMessage.create({
           type: "combat",
           flavor: game.i18n.format("PTR2E.Combat.Messages.Round", { round: updateData.round }),
         });
@@ -381,12 +385,12 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     super._onUpdate(changed, options, userId);
 
     const toDelete = [];
-    for(const combatant of (this.combatants?.filter(c => c.type === "summon") ?? []) as CombatantPTR2e<this, null, SummonCombatantSystem>[]) {
-      if(combatant.system.activationsHad >= combatant.system.duration) {
+    for (const combatant of (this.combatants?.filter(c => c.type === "summon") ?? []) as CombatantPTR2e<this, null, SummonCombatantSystem>[]) {
+      if (combatant.system.activationsHad >= combatant.system.duration) {
         toDelete.push(combatant.id);
       }
     }
-    if(toDelete.length) {
+    if (toDelete.length) {
       this.deleteEmbeddedDocuments("Combatant", toDelete);
     }
   }

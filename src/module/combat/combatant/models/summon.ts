@@ -1,6 +1,10 @@
 import { CombatantPTR2e, CombatantSystemPTR2e } from "@combat";
 import { CombatantSystemSchema } from "../system.ts";
 import { ItemPTR2e, SummonPTR2e } from "@item";
+import { SummonAttackPTR2e } from "@data";
+import { ActorPTR2e } from "@actor";
+import { ActiveEffectPTR2e } from "@effects";
+import SummonActiveEffectSystem from "@module/effects/data/summon.ts";
 
 class SummonCombatantSystem extends CombatantSystemPTR2e {
   declare parent: CombatantPTR2e
@@ -65,18 +69,83 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
       messages.push(game.i18n.localize("PTR2E.Combat.Summon.Messages.LastActivation"));
     }
 
-    ChatMessage.create({
+    await ChatMessage.create({
       speaker: {
         alias: this.name,
       },
       content: messages.join(""),
     })
 
+    for(const action of this.item?.system.actions ?? []) {
+      if(action.type !== "summon") continue;
+
+      await (action as SummonAttackPTR2e).execute(this);
+    }
+
     return;
   }
 
   onEndActivation() {
     return;
+  }
+
+  /**
+   * Returns summon effects that should be applied to the actor, based on the conditions of the summon.
+   */
+  getApplicableEffects(actor: ActorPTR2e) {
+    const item = this.item;
+    if(!item) return [];
+    const effects = item.effects;
+    if(!effects?.size) return [];
+
+    const applicableEffects: ActiveEffectPTR2e<null, SummonActiveEffectSystem>[] = [];
+    for(const effect of effects.contents as unknown as ActiveEffectPTR2e<null, SummonActiveEffectSystem>[]) {
+      switch(effect.system.targetType) {
+        case "ally": {
+          //TODO: Implement
+          applicableEffects.push(effect);
+          break;
+        }
+        case "enemy": {
+          //TODO: Implement
+          applicableEffects.push(effect);
+          break;
+        }
+        case "target": {
+          if(!effect.system.targetUuid) {
+            applicableEffects.push(effect);
+            break;
+          }
+          if(effect.system.targetUuid === actor.uuid) {
+            applicableEffects.push(effect);
+          }
+          break;
+        }
+        case "owner": {
+          if(this.owner === actor.uuid) {
+            applicableEffects.push(effect);
+          }
+          break;
+        }
+        case "all":
+        default: {
+          applicableEffects.push(effect);
+          break;
+        }
+      }
+    }
+    return applicableEffects;
+  }
+
+  notifyActorsOfEffectsIfApplicable(combatants: CombatantPTR2e[] = this.combat.combatants.contents) {
+    const item = this.item;
+    if(!item) return;
+    const effects = item.effects;
+    if(!effects?.size) return;
+
+    for(const combatant of combatants) {
+      if(combatant.actor) combatant.actor.reset();
+    }
   }
 
   override async _preCreate(data: this["parent"]["_source"], options: DocumentModificationContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
@@ -119,6 +188,11 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
     return super._preDelete(_options, _user);
   }
 
+  override _onCreate(data: object, options: object, userId: string): void {
+    super._onCreate(data, options, userId);
+    this.notifyActorsOfEffectsIfApplicable()
+  }
+
   override _onUpdate(changed: object, options: object, userId: string): void {
     super._onUpdate(changed, options, userId);
     if (
@@ -131,6 +205,11 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
       this.onEndActivation();
     }
   }
+
+  override _onDelete(options: object, userId: string): void {
+    super._onDelete(options, userId);
+    this.notifyActorsOfEffectsIfApplicable()
+  }
 }
 
 interface SummonCombatantSystem extends CombatantSystemPTR2e, ModelPropsFromSchema<SummonCombatantSchema> {
@@ -138,7 +217,6 @@ interface SummonCombatantSystem extends CombatantSystemPTR2e, ModelPropsFromSche
 }
 
 interface SummonCombatantSchema extends CombatantSystemSchema {
-  
   owner: foundry.data.fields.DocumentUUIDField<string, true, true, false>;
   item: foundry.data.fields.JSONField<SummonPTR2e | null, true, false, false>;
 }

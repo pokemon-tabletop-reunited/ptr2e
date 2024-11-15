@@ -3,6 +3,7 @@ import ResolvableValueField from "../fields/resolvable-value-field.ts";
 import { AttackStatistic } from "@system/statistics/attack.ts";
 import { SummonStatistic } from "@system/statistics/summon.ts";
 import ActionPTR2e, { ActionSchema } from "./action.ts";
+import { SummonCombatantSystem } from "@combat";
 export default class SummonActionPTR2e extends AttackPTR2e {
   declare type: "summon";
 
@@ -27,7 +28,8 @@ export default class SummonActionPTR2e extends AttackPTR2e {
         nullable: true,
         initial: null,
         label: "PTR2E.FIELDS.targetUuid.label",
-        hint: "PTR2E.FIELDS.targetUuid.hint"
+        hint: "PTR2E.FIELDS.targetUuid.hint",
+        type: "Actor"
       }),
       damageType: new fields.StringField({
         required: true,
@@ -64,6 +66,10 @@ export default class SummonActionPTR2e extends AttackPTR2e {
     if (!force && this.statistic) return this.statistic;
     if (!this.actor) return null;
     return new SummonStatistic(this);
+  }
+
+  async execute(combatant: SummonCombatantSystem) {
+    console.log(combatant);
   }
 
   override prepareUpdate(data: DeepPartial<SourceFromSchema<ActionSchema>>): ActionPTR2e[] {

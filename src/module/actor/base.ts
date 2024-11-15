@@ -448,6 +448,23 @@ class ActorPTR2e<
     }
   }
 
+  override *allApplicableEffects(): Generator<ActiveEffectPTR2e<this>> {
+    if(game.ready) {
+      const combatant = this.combatant;
+      if(combatant) {
+        const summons = combatant.parent?.summons;
+        if(summons?.length) {
+          for(const summon of summons) {
+            for(const effect of summon.system.getApplicableEffects(this)) {
+              yield new ActiveEffectPTR2e(effect.toObject(), {parent: this}) as ActiveEffectPTR2e<this>;
+            }
+          }
+        }
+      }
+    }
+    yield* super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>
+  }
+
   _calculateEffectiveness(): Record<PokemonType, number> {
     const types = game.settings.get("ptr2e", "pokemonTypes") as TypeEffectiveness;
     const effectiveness = {} as Record<PokemonType, number>;

@@ -14,6 +14,7 @@ class ActiveEffectPTR2e<
 > extends ActiveEffect<TParent, TSystem> {
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
+  declare static TYPES: string[];
 
   static LOCALIZATION_PREFIXES = ["PTR2E.Effect"];
 

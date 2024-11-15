@@ -456,13 +456,8 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
     };
 
     // @ts-expect-error - Chatmessages aren't typed properly yet
-    return dataOnly
-      ? {
-        type: "attack",
-        speaker,
-        flavor,
-        system,
-      } // @ts-expect-error - Chatmessages aren't typed properly yet
+    return dataOnly ? { type: "attack", speaker, flavor, system, }
+      // @ts-expect-error - Chatmessages aren't typed properly yet
       : ChatMessagePTR2e.create<ChatMessagePTR2e<AttackMessageSystem>>({
         type: "attack",
         speaker,

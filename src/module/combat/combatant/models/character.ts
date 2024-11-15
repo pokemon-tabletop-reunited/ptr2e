@@ -88,12 +88,31 @@ class CharacterCombatantSystem extends CombatantSystemPTR2e {
     return compressed * (max - min) + min;
   }
 
+  handleSummonEffects() {
+    const summons = this.combat?.summons;
+    if(!summons?.length) return;
+
+    for(const summon of summons) {
+      summon.system.notifyActorsOfEffectsIfApplicable([this.parent]);
+    }
+  }
+
   override _preDelete(
     _options: DocumentModificationContext<this["parent"]["parent"]>,
     _user: User
   ): Promise<boolean | void> {
     if (this.combat.combatant?.id === this.parent.id) return Promise.resolve(false);
     return super._preDelete(_options, _user);
+  }
+
+  override _onCreate(data: object, options: object, userId: string): void {
+    super._onCreate(data, options, userId);
+    this.handleSummonEffects();
+  }
+
+  override _onDelete(options: object, userId: string): void {
+    super._onDelete(options, userId);
+    this.handleSummonEffects();
   }
 }
 

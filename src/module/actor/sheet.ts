@@ -152,7 +152,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         },
         "open-party-sheet": async function (this: ActorSheetPTRV2) {
           if (!this.actor.party) return;
-          new PartySheetPTR2e({folder: this.actor.folder!}).render(true);
+          new PartySheetPTR2e({ folder: this.actor.folder! }).render(true);
         },
         "edit-movelist": function (this: ActorSheetPTRV2) {
           new KnownActionsApp(this.actor).render(true);
@@ -211,7 +211,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
         },
         "add-clock": ActorSheetPTRV2.#onAddClock,
         "open-tutor-list": function (this: ActorSheetPTRV2) {
-          game.ptr.tutorList.render({ force:true, actor: this.actor });
+          game.ptr.tutorList.render({ force: true, actor: this.actor });
         }
       },
     },
@@ -605,7 +605,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
           const clocks = fu.duplicate(this.document.system._source.clocks);
           const index = clocks.findIndex((c) => c.id === clock.id);
-          if(index === -1) return;
+          if (index === -1) return;
           clocks[index].value = clock.value >= clock.max ? 0 : clock.value + 1;
 
           return this.document.update({ "system.clocks": clocks });
@@ -620,7 +620,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
           const clocks = fu.duplicate(this.document.system._source.clocks);
           const index = clocks.findIndex((c) => c.id === clock.id);
-          if(index === -1) return;
+          if (index === -1) return;
           clocks[index].value = clock.value <= 0 ? clock.max : clock.value - 1;
 
           return this.document.update({ "system.clocks": clocks });
@@ -656,7 +656,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
                 callback: async () => {
                   const clocks = fu.duplicate(this.document.system._source.clocks);
                   const index = clocks.findIndex((c) => c.id === clock.id);
-                  if(index === -1) return;
+                  if (index === -1) return;
                   clocks.splice(index, 1);
 
                   return this.document.update({ "system.clocks": clocks });
@@ -836,7 +836,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   override _getHeaderControls(): ApplicationHeaderControlsEntry[] {
     const controls = fu.duplicate(super._getHeaderControls());
 
-    if(!this.actor.party) controls.findSplice(c => c.action === "open-party-sheet")
+    if (!this.actor.party) controls.findSplice(c => c.action === "open-party-sheet")
 
     return controls;
   }
@@ -1071,7 +1071,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
     switch (type) {
       case "effect": {
-        return ActiveEffectPTR2e.createDialog({}, { parent: this.document });
+        return ActiveEffectPTR2e.createDialog({}, { parent: this.document, types: ActiveEffectPTR2e.TYPES.filter(s => s != "summon") });
       }
       default: {
         const itemType = Item.TYPES.includes(type) ? type : null;
@@ -1096,8 +1096,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
 
   static #onAddClock(this: ActorSheetPTRV2, event: Event, clock?: Clock) {
     event.preventDefault();
-    return new ClockEditor({}, clock instanceof Clock ? clock : new Clock({}, {parent: this.document.system})).render(true);
-}
+    return new ClockEditor({}, clock instanceof Clock ? clock : new Clock({}, { parent: this.document.system })).render(true);
+  }
 }
 
 export default ActorSheetPTRV2;
