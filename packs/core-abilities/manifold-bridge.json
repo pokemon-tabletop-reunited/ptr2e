@@ -7,11 +7,10 @@
       {
         "traits": [
           "legendary",
-          "connection",
           "defensive"
         ],
         "name": "Manifold Bridge",
-        "slug": "manifold-bridge",
+        "slug": "manifold-bridge-defensive",
         "type": "generic",
         "cost": {
           "activation": "simple",
@@ -25,10 +24,66 @@
           "distance": 20,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Spacial Rend. The triggering effect does not affect the user, and the target is relocated 30-WC metres in the direction of the user's choice. When the user declares the use of an Action or Ability with a target other then Self, the user may spend 6 PP, the user freely Teleports to a spot within 8m of a target.</p>"
+        "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: The triggering effect does not affect the user, and the target is relocated 30-WC metres in the direction of the user's choice.</p>"
+      },
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Tensor Contraction",
+        "slug": "tensor-contraction",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 4,
+          "trigger": "<p>The user declares the use of an Action or Ability with a target other then Self.</p>",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares the use of an Action or Ability with a target other then Self.</p><p>Effect: The user freely moves, using Teleport Movement, to a spot within 8m of a target in Range.</p>"
+      },
+      {
+        "slug": "spacial-rend",
+        "name": "Spacial Rend",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "crit-2",
+          "sharp",
+          "blast-3",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "dragon"
+        ],
+        "description": "<p>Effect: On hit, non-[Legendary] targets are @Affliction[lifted] 3. The user may spend 4 PP to have this attack lose [Blast 6] and change its Range to <q>15m Wide Line<q> until their next Activation.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Spacial Rend. The triggering effect does not affect the user, and the target is relocated 30-WC metres in the direction of the user's choice. When the user declares the use of an Action or Ability with a target other then Self, the user may spend 6 PP, the user freely Teleports to a spot within 8m of a target.</p>",
+    "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Spacial Rend. The triggering effect does not affect the user, and the target is relocated 30-WC metres in the direction of the user's choice. When the user declares the use of an Action or Ability with a target other then Self, the user may use Tensor Contraction.</p>",
     "traits": [
       "legendary",
       "connection",

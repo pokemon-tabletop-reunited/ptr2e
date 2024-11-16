@@ -14,37 +14,44 @@
         "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
-          "trigger": "<p>The user uses Foresight.</p>",
-          "delay": null,
-          "priority": null
-        },
-        "range": {
-          "target": "aura",
-          "distance": 0,
-          "unit": "m"
-        },
-        "description": "<p>Trigger: The user uses Foresight.</p><p>Effect: Connection - Foresight. The user's Normal and Fighting-Type attacks do not miss when attacking Ghost-Type creatures while affected by @Affliction[true-sight] granted by the triggering Foresight.</p>"
-      },
-      {
-        "traits": [
-          "aura",
-          "connection"
-        ],
-        "name": "Mind's Eye",
-        "slug": "minds-eye",
-        "type": "passive",
-        "cost": {
-          "activation": "free",
           "powerPoints": 0,
           "delay": null,
           "priority": null
         },
         "range": null,
-        "description": "Passive: While the user is affected by @Affliction[true-sight], their Normal and Fighting-Type attacks deal Super Effective damage to Ghost-Type creatures.</p>"
+        "description": "<p>Effect: While the user is affected with @Affliction[true-sight], their Normal and Fighting-Type attacks and gain [Danger Close] and deal Super Effective damage to Ghost-Type creatures.</p>"
+      },
+      {
+        "slug": "foresight",
+        "name": "Foresight",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user gains @Affliction[true-sight] 3 and can hit Ghost-Type creatures with Normal-Type and Fighting Type attacks while they have @Affliction[true-sight].</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: The user uses Foresight.</p><p>Effect: Connection - Foresight. The user's Normal and Fighting-Type attacks do not miss when attacking Ghost-Type creatures while affected by @Affliction[true-sight] granted by the triggering Foresight. Passive: While the user is affected by @Affliction[true-sight], their Normal and Fighting-Type attacks deal Super Effective damage to Ghost-Type creatures.</p>",
+    "description": "<p>Effect: Connection - Foresight. While the user is affected with @Affliction[true-sight], their Normal and Fighting-Type attacks and gain [Danger Close] and deal Super Effective damage to Ghost-Type creatures.</p>",
     "traits": [
       "aura",
       "connection"
