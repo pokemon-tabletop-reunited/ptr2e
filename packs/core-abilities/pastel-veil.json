@@ -1,0 +1,112 @@
+{
+  "name": "Pastel Veil",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "aura"
+        ],
+        "name": "Pastel Veil",
+        "slug": "pastel-veil",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "allied-aura",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "Effect: The user is immune to the @Affliction[poison] and @Affliction[blight] Afflictions. Allied creatures in range have their @Affliction[poison] and @Affliction[blight] Affliction duration reduce by 2 at the end of each of their activations instead of 1.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user is immune to the @Affliction[poison] and @Affliction[blight] Afflictions. Allied creatures in range have their @Affliction[poison] and @Affliction[blight] Affliction duration reduce by 2 at the end of each of their activations instead of 1.",
+    "traits": [
+      "defensive",
+      "aura",
+      "partial-automation"
+    ],
+    "slug": "pastel-veil",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "WLcv6UB9iIqy9cqA",
+  "effects": [
+    {
+      "name": "Pastel Veil (Self)",
+      "type": "passive",
+      "_id": "JTCDgKr2HiACpxHy",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "affliction:poison",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "affliction:blight",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Actor.1e5Mp4QgdlNuEFFZ.Item.4r7cKBlAskl6BKGH.ActiveEffect.rkpaii85X6efwPcl",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.4.1",
+        "createdTime": 1731719151810,
+        "modifiedTime": 1731719151810,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
