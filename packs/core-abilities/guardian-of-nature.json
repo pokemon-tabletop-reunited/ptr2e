@@ -15,7 +15,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 4,
-          "trigger": "<p>The user declares Nature's Madness",
+          "trigger": "<p>The user declares Nature's Madness.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,7 +24,7 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user declares Nature's Madness</p><p>Effect: Connection - Nature's Madness. The user and any allies of the user's choice affected a [Terrain] created by the user gain +1 DEF and SPDEF for 3 Activations.</p>"
+        "description": "<p>Trigger: The user declares Nature's Madness.</p><p>Effect: The user and any allies of the user's choice affected a [Terrain] created by the user gain +1 DEF and SPDEF for 3 Activations.</p>"
       },
       {
         "traits": [
@@ -47,9 +47,41 @@
           "unit": "m"
         },
         "description": "Passive: If a space within range possesses a Terrain with a Type that matches one of the user's Types, the user is affected by that Terrain.</p>"
+      },
+      {
+        "slug": "natures-madness",
+        "name": "Nature's Madness",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "blast-3"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": null,
+        "accuracy": 90,
+        "types": [
+          "fairy"
+        ],
+        "description": "<p>Effect: On hit, all valid targets have their current HP cut in half. This attack always deals a minimum of 1 HP in damage.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: The user declares Nature's Madness</p><p>Effect: Connection - Nature's Madness. The user and any allies of the user's choice within a [Terrain] created by the user gain +1 DEF and SPDEF for 3 Activations.</p><p>Passive: If a space within range possesses a Terrain with a Type that matches one of the user's Types, the user is affected by that Terrain.</p>",
+    "description": "<p>Trigger: The user declares Nature's Madness.</p><p>Effect: Connection - Nature's Madness. The user and any allies of the user's choice within a [Terrain] created by the user gain +1 DEF and SPDEF for 3 Activations.</p><p>Passive: If a space within range possesses a Terrain with a Type that matches one of the user's Types, the user is affected by that Terrain.</p>",
     "traits": [
       "legendary",
       "connection"

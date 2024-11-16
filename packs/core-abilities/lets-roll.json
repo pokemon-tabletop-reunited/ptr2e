@@ -23,26 +23,68 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: At the start of combat or when the user is switched in.</p><p>Effect: Connection - Defense Curl. The user freely uses Defense Curl.</p>"
+        "description": "<p>Trigger: At the start of combat or when the user is switched in.</p><p>Effect: The user freely uses Defense Curl and may also spend 4 additional PP to instead use Defense Curl (Rolled).</p>"
       },
       {
-        "traits": [
-          "connection"
-        ],
-        "name": "Let's Roll",
-        "slug": "lets-roll",
-        "type": "passive",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+        "slug": "defense-curl",
+        "name": "Defense Curl",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
         },
-        "range": null,
-        "description": "Passive: When using Defense Curl, the user can spend 2 PP to increase the duration of @Affliction[curled] Affliction by 3.</p>"
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user gains @Affliction[curled] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "defense-curl-rolled",
+        "name": "Defense Curl (Rolled)",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user gains @Affliction[curled] 9 and +1 SPD stages for 5 Activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: At the start of combat or when the user is switched in.</p><p>Effect: Connection - Defense Curl. The user freely uses Defense Curl. Passive: When using Defense Curl, the user can spend 2 PP to increase the duration of @Affliction[curled] Affliction by 3.</p>",
+    "description": "<p>Trigger: At the start of combat or when the user is switched in.</p><p>Effect: Connection - Defense Curl. The user freely uses Defense Curl and may also spend 4 additional PP to use Defense Curl (Rolled).</p>",
     "traits": [
       "connection"
     ],

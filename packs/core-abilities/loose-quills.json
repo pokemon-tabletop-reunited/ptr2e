@@ -23,10 +23,75 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: Connection - Spikes. The user has a 50% chance to freely use Spikes.</p>"
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user has a 50% chance to freely use Loose Spikes.</p>"
+      },
+      {
+        "slug": "spikes",
+        "name": "Spikes",
+        "type": "attack",
+        "traits": [
+          "hazard",
+          "blast-4"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Effect: Sharp spikes are scattered in the [Blast X] area on standing surfaces. A creature that starts an Activation on a surface containing the Hazard takes a Tick of HP damage. A creature that moves through through a space touching a surface containing the Hazard takes a Tick of HP damage for every meter they travel. If a creature moves at least 3m through the Hazard this way during one Round, they lose another 4 Tick of HP.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "loose-spikes",
+        "name": "Loose Spikes",
+        "type": "attack",
+        "traits": [
+          "hazard",
+          "blast-2"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Effect: Sharp spikes are scattered in the [Blast X] area on standing surfaces. A creature that starts an Activation on a surface containing the Hazard takes a Tick of HP damage. A creature that moves through through a space touching a surface containing the Hazard takes a Tick of HP damage for every meter they travel. If a creature moves at least 3m through the Hazard this way during one Round, they lose another 4 Tick of HP.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "spikes",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: Connection - Spikes. The user has a 50% chance to freely use Spikes.</p>",
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: Connection - Spikes. The user has a 50% chance to freely use Loose Spikes.</p>",
     "traits": [
       "connection"
     ],

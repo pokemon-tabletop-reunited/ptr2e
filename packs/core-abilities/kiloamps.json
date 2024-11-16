@@ -12,29 +12,6 @@
         ],
         "name": "Kiloamps",
         "slug": "kiloamps",
-        "type": "generic",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 2,
-          "trigger": "<p>The user declares Thunder Cage.</p>",
-          "delay": null,
-          "priority": null
-        },
-        "range": {
-          "target": "self",
-          "distance": 0,
-          "unit": "m"
-        },
-        "description": "<p>Trigger: The user declares Thunder Cage.</p><p>Effect: Connection - Thunder Cage. The triggering attack gains [Blast 3] until the user's next Activation.</p>"
-      },
-      {
-        "traits": [
-          "legendary",
-          "aura",
-          "connection"
-        ],
-        "name": "Kiloamps",
-        "slug": "kiloamps",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -44,9 +21,76 @@
         },
         "range": null,
         "description": "Passive: The user's Electric-Type attacks can hit Ground-Type creatures.</p>"
+      },
+      {
+        "slug": "thunder-cage",
+        "name": "Thunder Cage",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "trap",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 15,
+        "accuracy": 90,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Effect: On hit, the target becomes @Affliction[bound] 5. While @Affliction[bound], the target and any creatures within 3m of the @Affliction[bound] creature take a Tick of HP damage at the end of their activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "thunder-cage-kiloamped",
+        "name": "Thunder Cage (Kiloamped)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "trap",
+          "blast-3",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 15,
+        "accuracy": 90,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Effect: On hit, the target becomes @Affliction[bound] 5. While @Affliction[bound], the target and any creatures within 3m of the @Affliction[bound] creature take a Tick of HP damage at the end of their activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: The user declares Thunder Cage.</p><p>Effect: Connection - Thunder Cage. The triggering attack gains [Blast 3] until the user's next Activation. Passive: The user's Electric-Type attacks can hit Ground-Type creatures.</p>",
+    "description": "<p>Trigger: The user declares Thunder Cage.</p><p>Effect: Connection - Thunder Cage. The user spends 2 PP and causes triggering attack gains [Blast 3] until the user's next Activation. Passive: The user's Electric-Type attacks can hit Ground-Type creatures.</p>",
     "traits": [
       "legendary",
       "aura",

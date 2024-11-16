@@ -6,40 +6,83 @@
     "actions": [
       {
         "traits": [
-          "legendary",
-          "connection"
+          "legendary"
         ],
         "name": "Lunar Presence",
-        "slug": "lunar-presence",
-        "type": "generic",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 4,
-          "trigger": "<p>The user declares Lunar Dance"
-        },
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "description": "<p>Trigger: The user declares Lunar Dance</p><p>Effect: Connection - Lunar Dance. The creature targeted by the triggering attack gains @Affliction[boosted] 7.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "traits": [
-          "legendary",
-          "connection"
-        ],
-        "name": "Lunar Presence",
-        "slug": "lunar-presence",
+        "slug": "lunar-presence-passive",
         "type": "passive",
         "cost": {
           "activation": "free"
         },
-        "description": "Passive: The user's Dark- and Fairy-Type attacks deal 50% more damage, and the user benefits from Gloomy Weather.</p>",
+        "description": "<p>Passive: The user's Dark- and Fairy-Type attacks deal 50% more damage, and the user is considered to be Fairy-Type for the effects of Gloomy Weather.</p>",
         "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "lunar-dance",
+        "name": "Lunar Dance",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "dance"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: The user reduces their HP to 0 and gains @Affliction[fainted]. After the user gains @Affliction[fainted], the Target recovers all of its HP and PP, and is cured of all Status Conditions. If the user is an owned Pokemon and their Trainer has another Pokemon that is not @Affliction[fainted] in a Poke Ball, that Pokemon may be designated the target of this Attack.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "lunar-dance-full",
+        "name": "Lunar Dance (Full)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "dance"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 10,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: The user reduces their HP to 0 and gains @Affliction[fainted]. After the user gains @Affliction[fainted], the Target recovers all of its HP and PP, is cured of all Status Afflictions, and gains @Affliction[boosted] 7. If the user is an owned Pokemon and their Trainer has another Pokemon that is not @Affliction[fainted] in a Poke Ball, that Pokemon may be designated the target of this Attack.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: The user declares Lunar Dance</p><p>Effect: Connection - Lunar Dance. The creature targeted by the triggering attack gains @Affliction[boosted] 7. Passive: The user's Dark- and Fairy-Type attacks deal 50% more damage, and the user benefits from Gloomy Weather.</p>",
+    "description": "<p>Trigger: The user declares Lunar Dance</p><p>Effect: Connection - Lunar Dance. The creature targeted by the triggering attack gains @Affliction[boosted] 7. Passive: The user's Dark- and Fairy-Type attacks deal 50% more damage, and the user is considered to be Fairy-Type for the effects of Gloomy Weather.</p>",
     "traits": [
       "legendary",
       "connection",

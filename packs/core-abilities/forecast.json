@@ -12,29 +12,6 @@
         ],
         "name": "Forecast",
         "slug": "forecast",
-        "type": "generic",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 2,
-          "trigger": "<p>The user declares Weather Ball.</p>",
-          "delay": null,
-          "priority": null
-        },
-        "range": {
-          "target": "self",
-          "distance": 0,
-          "unit": "m"
-        },
-        "description": "<p>Trigger: The user declares Weather Ball.</p><p>Effect: Connection - Weather Ball.  The user adds [Blast 3] to the triggering attack for the rest of their Activation.</p>"
-      },
-      {
-        "traits": [
-          "connection",
-          "environ",
-          "forme-change"
-        ],
-        "name": "Forecast",
-        "slug": "forecast",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -44,6 +21,218 @@
         },
         "range": null,
         "description": "Passive: The user's Stats increase by 20% while a [Weather] is present, and 40% while an Intense [Weather] is present. The user's Forme changes to match one of the current active [Weather]s (user's choice whenever a Weather is set, returning to its normal Forme in Clear Weather.</p>"
+      },
+      {
+        "slug": "weather-ball",
+        "name": "Weather Ball",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile",
+          "environ",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "weather-ball-weather",
+        "name": "Weather Ball (Weather)",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile",
+          "environ",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "weather-ball",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "weather-ball-intense-weather",
+        "name": "Weather Ball (Intense Weather)",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile",
+          "environ",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 150,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "weather-ball",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "weather-ball-casted",
+        "name": "Weather Ball (Casted)",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile",
+          "environ",
+          "blast-3",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "",
+        "variant": "weather-ball",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "weather-ball-weather-casted",
+        "name": "Weather Ball (Weather Casted)",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile",
+          "environ",
+          "blast-3",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "weather-ball",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "weather-ball-intense-weather-casted",
+        "name": "Weather Ball (Intense Weather Casted)",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile",
+          "environ",
+          "blast-3",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 150,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "weather-ball",
+        "free": true,
+        "slot": null
       }
     ],
     "description": "<p>Trigger: The user declares Weather Ball.</p><p>Effect: Connection - Weather Ball.  The user adds [Blast 3] to the triggering attack for the rest of their Activation. Passive: The user's Stats increase by 20% while a [Weather] is present, and 40% while an Intense [Weather] is present. The user's Forme changes to match one of the current active [Weather]s (user's choice whenever a Weather is set, returning to its normal Forme in Clear Weather.</p>",

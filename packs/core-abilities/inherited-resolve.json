@@ -12,7 +12,7 @@
           "desperation-1-2"
         ],
         "name": "Inherited Resolve",
-        "slug": "inherited-resolve",
+        "slug": "inherited-resolve-desperation",
         "type": "generic",
         "cost": {
           "activation": "free",
@@ -26,7 +26,7 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user crosses the threshold to meet the [Desperation 1/2] Condition.</p><p>Effect: Connection - Secret Sword. The user transforms into its Resolute Forme.</p>"
+        "description": "<p>Trigger: The user crosses the threshold to meet the [Desperation 1/2] Condition.</p><p>Effect: The user transforms into its Resolute Forme.</p>"
       },
       {
         "traits": [
@@ -55,7 +55,7 @@
           "forme-change"
         ],
         "name": "Inherited Resolve",
-        "slug": "inherited-resolve",
+        "slug": "inherited-resolve-passive",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -65,6 +65,40 @@
         },
         "range": null,
         "description": "<p>Passive: While in Resolute Forme, the user may use its [Sharp] and [Horn] attacks as Special-Category attacks, the user's Reach increases by +1, and the user takes 15% less damage from all sources. When the user gains @Affliction[fainted] it transforms into its Ordinary Forme.</p>"
+      },
+      {
+        "slug": "secret-sword",
+        "name": "Secret Sword",
+        "type": "attack",
+        "traits": [
+          "pass-4",
+          "sharp",
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 85,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "<p>Effect: This Attack's damage is calculated using the target's DEF.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
     "description": "<p>Trigger: The user crosses the threshold to meet the [Desperation 1/2] Condition.</p><p>Effect: Connection - Secret Sword. The user transforms into its Resolute Forme. The user may spend 4 PP as a Simple Action to enter its Resolute Forme, or may do so as an Exploration Action.</p><p>Passive: While in Resolute Forme, the user may use its [Sharp] and [Horn] attacks as Special-Category attacks, the user's Reach increases by +1, and the user takes 15% less damage from all sources. When the user gains @Affliction[fainted] it transforms into its Ordinary Forme.</p>",

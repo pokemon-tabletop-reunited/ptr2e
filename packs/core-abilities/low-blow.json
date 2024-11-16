@@ -23,10 +23,67 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Feint Attack. The the user freely moves up to and using the Movement Score of their choice, and uses Feint Attack, which has [Flinch 3] until resolved.</p>"
+        "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: The the user freely moves up to and using the Movement Score of their choice, and uses Feint Attack (Dastardly).</p>"
+      },
+      {
+        "slug": "feint-attack",
+        "name": "Feint Attack",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact",
+          "danger-close",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "img": "systems/ptr2e/img/svg/dark_icon.svg"
+      },
+      {
+        "slug": "feint-attack-dastardly",
+        "name": "Feint Attack (Dastardly)",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "contact",
+          "danger-close",
+          "flinch-3",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "trigger": "<p>Activated by an Effect.</p>"
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "<p>Trigger: Activated by an Effect.</p>",
+        "img": "systems/ptr2e/img/svg/dark_icon.svg"
       }
     ],
-    "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Feint Attack. The the user freely moves up to and using the Movement Score of their choice, and uses Feint Attack, which has [Flinch 3] until resolved.</p",
+    "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Feint Attack. The the user freely moves up to and using the Movement Score of their choice, and uses Feint Attack (Dastardly).</p",
     "traits": [
       "connection"
     ],
