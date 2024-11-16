@@ -105,7 +105,7 @@ const BaseSkills = {
     geology: { slug: "geology", group: "science" },
     mathematics: { slug: "mathematics", group: "science" },
     meteorology: { slug: "meteorology", group: "science" },
-    paleontology: { slug: "paleontology", group: "science" },
+    palaeontology: { slug: "palaeontology", group: "science" },
     parapsychology: { slug: "parapsychology", group: "science" },
     pharmacy: { slug: "pharmacy", group: "science" },
     physics: { slug: "physics", group: "science" },
