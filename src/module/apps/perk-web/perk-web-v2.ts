@@ -1,54 +1,120 @@
-import { ApplicationRenderContext } from "types/foundry/common/applications/api.js";
-import { HandlebarsRenderOptions } from "types/foundry/common/applications/handlebars-application.ts";
 import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "../appv2-expanded.ts";
 import { ActorPTR2e } from "@actor";
 import { PerkPTR2e } from "@item";
 
-export class PerkWebbApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
+export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
     super.DEFAULT_OPTIONS,
     {
-      tag: "div",
-      classes: ["sheet", "perk-web-app", "default-sheet"],
-      position: {
-        height: 720,
-        width: 1280,
-      },
+      id: "perk-web-app",
+      tag: "article",
+      classes: ["sheet", "perk-web-app", "perk-hud", "default-sheet", "application"],
       window: {
-        title: "PTR2E.PerkWebApp",
-        minimizable: true,
-        resizable: true,
+        title: "PTR2E.PerkWebApp.Title",
+        frame: false,
+        positioned: false,
+        minimizable: false,
+        resizable: false,
         controls: [{
           action: "toggle-edit-mode",
           label: "PTR2E.ToggleEditMode",
           icon: "fas fa-edit",
         }]
       },
-      dragDrop: [{ dragSelector: null, dropSelector: '.window-content main' }],
+      dragDrop: [{ dragSelector: ".perk", dropSelector: `[data-application-part="web"]` }],
       actions: {
-        "toggle-edit-mode": function (this: PerkWebbApp) { this.editMode = !this.editMode; this.render({ parts: ['web'] }); }
+        "toggle-edit-mode": function (this: PerkWebApp) { this.editMode = !this.editMode; this.render({ parts: ['web'] }); },
+        "close-hud": function (this: PerkWebApp) { this.close();}
       }
     },
     { inplace: false }
   );
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> = {
+    hudHeader: {
+      id: "hudHeader",
+      template: "systems/ptr2e/templates/perk-tree/hud/header.hbs",
+      classes: ["hud"]
+    },
+    hudActor: {
+      id: "hudActor",
+      template: "systems/ptr2e/templates/perk-tree/hud/actor.hbs",
+      classes: ["hud"]
+    },
+    hudPerk: {
+      id: "hudPerk",
+      template: "systems/ptr2e/templates/perk-tree/hud/perk.hbs",
+      classes: ["hud"]
+    },
+    hudControls: {
+      id: "hudControls",
+      template: "systems/ptr2e/templates/perk-tree/hud/controls.hbs",
+      classes: ["hud"]
+    },
     web: {
       id: "web",
       template: "systems/ptr2e/templates/apps/perk-web/web.hbs",
     },
+    searchHeader: {
+      id: "searchHeader",
+      template: "systems/ptr2e/templates/perk-tree/search/header.hbs",
+      classes: ["search"]
+    },
+    search: {
+      id: "search",
+      template: "systems/ptr2e/templates/perk-tree/search/search.hbs",
+      classes: ["search"]
+    },
+    searchResults: {
+      id: "searchResults",
+      template: "systems/ptr2e/templates/perk-tree/search/results.hbs",
+      classes: ["search"]
+    }
   };
 
+  static STOP_WORDS = new Set([
+    "a",
+    "an",
+    "and",
+    "are",
+    "as",
+    "at",
+    "be",
+    "by",
+    "for",
+    "from",
+    "has",
+    "he",
+    "in",
+    "is",
+    "it",
+    "its",
+    "of",
+    "on",
+    "that",
+    "the",
+    "to",
+    "was",
+    "were",
+    "will",
+    "with",
+    "th",
+  ]);
+
   actor: ActorPTR2e | null = null;
-  currentWeb = "";
+  currentPerk: PerkPTR2e | null = null;
   editMode = false;
+  zoomLevels = [0.4, 0.65, 1, 1.3, 1.65] as const;
+
+  _perkStore = new Map<string, PerkPTR2e>();
+  _onScroll: () => void | null;
+  _lineCache = new Map<string, SVGLineElement>();
+  _zoomAmount: this['zoomLevels'][number] = 1;
 
   constructor(actor: ActorPTR2e, options?: Partial<ApplicationConfigurationExpanded>) {
     super(options);
     this.actor = actor;
   }
-
-  _perkStore = new Map<string, PerkPTR2e>();
 
   override async _prepareContext(options?: foundry.applications.api.HandlebarsRenderOptions | undefined) {
     const maxRow = 250;
@@ -71,8 +137,8 @@ export class PerkWebbApp extends foundry.applications.api.HandlebarsApplicationM
     const grid: GridEntry[] = [];
     for (let i = 1; i < maxRow; i++) {
       for (let j = 1; j < maxCol; j++) {
-        const relativeI = i - 120;
-        const relativeJ = j - 120;
+        const relativeI = i;
+        const relativeJ = j;
         const perk = this._perkStore.get(`${relativeI}-${relativeJ}`);
         if (perk) {
           grid.push({ name: perk.name, img: perk.system.node.config?.texture ?? perk.img, i, j });
@@ -86,7 +152,9 @@ export class PerkWebbApp extends foundry.applications.api.HandlebarsApplicationM
     return {
       ...super._prepareContext(options),
       grid,
-      // editMode: this.editMode,
+      actor: this.actor,
+      perk: { document: this.currentPerk },
+      filterData: null
     }
   }
 
@@ -94,129 +162,66 @@ export class PerkWebbApp extends foundry.applications.api.HandlebarsApplicationM
     super._attachPartListeners(partId, htmlElement, options);
   }
 
-  timer: number | null = null;
-
-  override _preRender(context: ApplicationRenderContext, options: HandlebarsRenderOptions): Promise<void> {
-    this.timer = performance.now();
-    return super._preRender(context, options);
-  }
-
-  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: HandlebarsRenderOptions): void {
+  override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
     super._onRender(context, options);
-    const timer = performance.now();
-    if (this.timer) ui.notifications.info(`Rendered in ${timer - this.timer}ms`);
-    this.timer = null;
 
     this.renderSVG();
-
-    ui.notifications.info(`Rendered edit-mode in ${performance.now() - timer}ms`);
-    console.log(this);
-  }
-
-  _onScroll: () => void | null;
-
-  get zoomLevel() {
-    return this.zoomAmount;
   }
 
   renderSVG() {
-    const element = this.element.querySelector<HTMLElement>(".window-content main");
+    const element = this.element.querySelector<HTMLElement>(`[data-application-part="web"]`);
     if (!element) return;
 
-    const existing = element.querySelector<HTMLElement>("svg");
-    if (existing) {
-      // if (this._onScroll) element.removeEventListener("scroll", this._onScroll);
-      const zoom = this.zoomLevel;
-      const bounding = element.getBoundingClientRect();
-      const elementRect = { x: bounding.x, y: bounding.y, width: bounding.width, height: bounding.height };
-      const scroll = { x: element.scrollLeft, y: element.scrollTop };
+    const existing = element.querySelector<SVGSVGElement>("svg");
+    const svg = existing ?? document.createElementNS("http://www.w3.org/2000/svg", "svg");
 
-      const elements = element.querySelectorAll<HTMLElement>(".perk-grid .perk:not(.empty)");
-      const elementMap = new Map<string, HTMLElement>();
-      for (const el of elements) {
-        const { i, j } = el.dataset;
-        if (!i || !j) continue;
-        elementMap.set(`${Number(i) - 120}-${Number(j) - 120}`, el);
-      }
-      
-      for(const el of elements) {
-        const perkKey = `${Number(el.dataset.i) - 120}-${Number(el.dataset.j) - 120}`;
-        const perk = this._perkStore.get(perkKey);
-        if (!perk) continue;
-
-        const perkRect = el.getBoundingClientRect();
-        const connected = perk.system.node.connected;
-        for(const connection of connected) {
-          const connectedPerk = game.ptr.perks.get(connection);
-          if (!connectedPerk) continue;
-
-          const connectedKey = `${connectedPerk.system.node.i}-${connectedPerk.system.node.j}`;
-          const connectedElement = elementMap.get(connectedKey);
-          if (!connectedElement) continue;
-
-          const line = this._cache.get(`${perkKey}-${connectedKey}`);
-          if (!line) continue;
-
-          const connectedRect = connectedElement.getBoundingClientRect();
-          const x1 = (((perkRect.x + scroll.x) * zoom) + ((perkRect.width * zoom) / 2) - (elementRect.x * zoom));
-          const y1 = (((perkRect.y + scroll.y) * zoom) + ((perkRect.height * zoom) / 2) - (elementRect.y * zoom));
-          const x2 = (((connectedRect.x + scroll.x) * zoom) + ((connectedRect.width * zoom) / 2) - (elementRect.x * zoom));
-          const y2 = (((connectedRect.y + scroll.y) * zoom) + ((connectedRect.height * zoom) / 2) - (elementRect.y * zoom));
-
-          line.setAttribute("x1", x1.toString());
-          line.setAttribute("y1", y1.toString());
-          line.setAttribute("x2", x2.toString());
-          line.setAttribute("y2", y2.toString());
-          line.setAttribute("stroke-width", (2.5 * zoom * zoom).toString());
-        }
-      }
-
-      return void this._onScroll?.()
-    }
-    const zoom = this.zoomLevel;
-    const svgCanvas = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svgCanvas.setAttribute("width", "100%");
-    svgCanvas.setAttribute("height", "100%");
+    const zoom = this._zoomAmount;
     const bounding = element.getBoundingClientRect();
     const elementRect = { x: bounding.x, y: bounding.y, width: bounding.width, height: bounding.height };
     const scroll = { x: element.scrollLeft, y: element.scrollTop };
-    
 
-    svgCanvas.setAttribute("viewBox", `0 0 ${elementRect.width} ${elementRect.height}`);
-    // if (existing) existing.replaceWith(svgCanvas)
-    // else 
-    element.appendChild(svgCanvas);
-    this._cache.clear();
+    if (!existing) {
+      svg.setAttribute("width", "100%");
+      svg.setAttribute("height", "100%");
+      svg.setAttribute("viewBox", `0 0 ${elementRect.width} ${elementRect.height}`);
+      element.appendChild(svg);
+      this._lineCache.clear();
+    }
 
-    const elements = element.querySelectorAll<HTMLElement>(".perk-grid .perk:not(.empty)");
+    const elements = element.querySelectorAll<HTMLElement>(".perk-grid .perk");
     const elementMap = new Map<string, HTMLElement>();
     for (const el of elements) {
       const { i, j } = el.dataset;
       if (!i || !j) continue;
-      elementMap.set(`${Number(i) - 120}-${Number(j) - 120}`, el);
+      elementMap.set(`${Number(i)}-${Number(j)}`, el);
     }
+
     const madeConnections = new Set<string>();
+
     for (const el of elements) {
-      const perkKey = `${Number(el.dataset.i) - 120}-${Number(el.dataset.j) - 120}`;
+      const perkKey = `${Number(el.dataset.i)}-${Number(el.dataset.j)}`;
       const perk = this._perkStore.get(perkKey);
       if (!perk) continue;
 
       const perkRect = el.getBoundingClientRect();
-
       const connected = perk.system.node.connected;
+
       for (const connection of connected) {
         const connectedPerk = game.ptr.perks.get(connection);
         if (!connectedPerk) continue;
 
         const connectedKey = `${connectedPerk.system.node.i}-${connectedPerk.system.node.j}`;
-        if (madeConnections.has(`${perkKey}-${connectedKey}`)) continue;
+        if (!existing) {
+          if (madeConnections.has(`${perkKey}-${connectedKey}`)) continue;
+        }
 
         const connectedElement = elementMap.get(connectedKey);
         if (!connectedElement) continue;
 
-        const connectedRect = connectedElement.getBoundingClientRect();
+        const line = existing ? this._lineCache.get(`${perkKey}-${connectedKey}`) : document.createElementNS("http://www.w3.org/2000/svg", "line");
+        if (!line) continue;
 
-        const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        const connectedRect = connectedElement.getBoundingClientRect();
         const x1 = (((perkRect.x + scroll.x) * zoom) + ((perkRect.width * zoom) / 2) - (elementRect.x * zoom));
         const y1 = (((perkRect.y + scroll.y) * zoom) + ((perkRect.height * zoom) / 2) - (elementRect.y * zoom));
         const x2 = (((connectedRect.x + scroll.x) * zoom) + ((connectedRect.width * zoom) / 2) - (elementRect.x * zoom));
@@ -228,25 +233,28 @@ export class PerkWebbApp extends foundry.applications.api.HandlebarsApplicationM
         line.setAttribute("y2", y2.toString());
         line.setAttribute("stroke", "white");
         line.setAttribute("stroke-width", (2.5 * zoom * zoom).toString());
-        svgCanvas.appendChild(line);
-        this._cache.set(`${perkKey}-${connectedKey}`, line);
-        this._cache.set(`${connectedKey}-${perkKey}`, line);
+        if (existing) continue;
+
+        svg.appendChild(line);
+        this._lineCache.set(`${perkKey}-${connectedKey}`, line);
+        this._lineCache.set(`${connectedKey}-${perkKey}`, line);
         madeConnections.add(`${perkKey}-${connectedKey}`);
         madeConnections.add(`${connectedKey}-${perkKey}`);
       }
     }
 
+    if (existing) return void this._onScroll?.();
+
     const onScroll = () => {
       const bounding = element.getBoundingClientRect();
 
       // const inverseMod = 1 / zoom;
-      const width = bounding.width * this.zoomLevel;
-      const height = bounding.height * this.zoomLevel;
-      const scrollY = element.scrollTop * this.zoomLevel;
-      const scrollX = element.scrollLeft * this.zoomLevel;
+      const width = bounding.width * this._zoomAmount;
+      const height = bounding.height * this._zoomAmount;
+      const scrollY = element.scrollTop * this._zoomAmount;
+      const scrollX = element.scrollLeft * this._zoomAmount;
 
-      svgCanvas.setAttribute("viewBox", `${scrollX} ${scrollY} ${width} ${height}`);
-
+      svg.setAttribute("viewBox", `${scrollX} ${scrollY} ${width} ${height}`);
     }
 
     this._onScroll = onScroll;
@@ -256,10 +264,9 @@ export class PerkWebbApp extends foundry.applications.api.HandlebarsApplicationM
     this.attachElementListeners(element);
   }
 
-  _cache = new Map<string, SVGLineElement>();
-
   attachElementListeners(element: HTMLElement) {
     let isDown = false;
+    let isMoving = false;
     let startX: number;
     let startY: number;
     let scrollLeft: number = element.scrollLeft;
@@ -278,18 +285,25 @@ export class PerkWebbApp extends foundry.applications.api.HandlebarsApplicationM
       startY = e.pageY - element.offsetTop;
       scrollLeft = element.scrollLeft;
       scrollTop = element.scrollTop;
+
+      element.style.cursor = this._zoomAmount === this.zoomLevels.at(-1) ? "unset" : "zoom-out";
     })
 
     element.addEventListener("mouseleave", () => {
       isDown = false;
+      isMoving = false;
+      element.style.cursor = this._zoomAmount === this.zoomLevels[0] ? "unset" : "zoom-in";
     });
 
     element.addEventListener("mouseup", () => {
       isDown = false;
+      element.style.cursor = this._zoomAmount === this.zoomLevels[0] ? "unset" : "zoom-in";
+      setTimeout(() => { isMoving = false }, 50);
     });
 
     element.addEventListener("mousemove", (e) => {
       if (!isDown) return;
+      isMoving = true;
       e.preventDefault();
       const x = e.pageX - element.offsetLeft;
       const y = e.pageY - element.offsetTop;
@@ -300,35 +314,58 @@ export class PerkWebbApp extends foundry.applications.api.HandlebarsApplicationM
       element.scrollLeft = left;
       element.scrollTop = top;
 
+      element.style.cursor = "move";
+
       element.onscroll = () => {
         element.scrollTo(left, top);
       }
     });
 
-    let currentZoom = this.zoomLevel;
+    element.addEventListener("click", (e) => {
+      if (e.target != element) return;
+      e.preventDefault();
 
-    element.addEventListener("wheel", (ev) => {
-      ev.preventDefault();
-      // Max zoom out is 0.35
-      // Max zoom in is 3.0
-      const newZoom = Math.clamp(ev.deltaY > 0 ? currentZoom - 0.05 : currentZoom + 0.05, 0.35, 3.0);
-      if (newZoom === currentZoom) return;
-      this.zoomAmount = currentZoom = newZoom;
-      this.debounce();
+      const currentZoomLevel = this.zoomLevels.indexOf(this._zoomAmount);
+      if (currentZoomLevel === -1) return this.zoom(1);
+
+      const nextZoomLevel = Math.max(0, currentZoomLevel + 1);
+      if (nextZoomLevel === currentZoomLevel) return;
+
+      this.zoom(this.zoomLevels[nextZoomLevel]);
+    })
+
+    element.addEventListener("contextmenu", (e) => {
+      if (isMoving) return;
+      if (e.target != element) return;
+      e.preventDefault();
+
+      const currentZoomLevel = this.zoomLevels.indexOf(this._zoomAmount);
+      if (currentZoomLevel === -1) return this.zoom(1);
+
+      const nextZoomLevel = Math.max(0, currentZoomLevel - 1);
+      if (nextZoomLevel === currentZoomLevel) return;
+
+      this.zoom(this.zoomLevels[nextZoomLevel]);
     });
   }
 
-  debounce = fu.debounce(this.zoom.bind(this), 100);
+  zoom(zoom = this._zoomAmount) {
+    const grid = this.element.querySelector<HTMLElement>(".perk-grid");
+    const main = this.element.querySelector<HTMLElement>(`[data-application-part="web"]`);
+    if (!grid || !main) return;
+    this._zoomAmount = zoom;
+
+    grid.style.transform = `scale(${zoom})`;
+    this.renderSVG()
+  }
 
   override _onDrop(event: DragEvent): void {
-    console.log(event, event.currentTarget, event.target);
-
     const element = this.element;
     const grid = element.querySelector<HTMLElement>(".perk-grid");
     if (!grid) return;
 
     const bounding = grid.getBoundingClientRect();
-    const zoom = this.zoomLevel
+    const zoom = this._zoomAmount
     const x = event.clientX - bounding.x;
     const y = event.clientY - bounding.y;
 
@@ -336,7 +373,7 @@ export class PerkWebbApp extends foundry.applications.api.HandlebarsApplicationM
       for (let i = 0; i <= 250; i++) {
         const r = i * (48 * zoom) + ((i - 1) * (16 * zoom * 1.5))
         if (r > number) {
-          return i - 120;
+          return i;
         }
       }
       return 0;
@@ -352,27 +389,8 @@ export class PerkWebbApp extends foundry.applications.api.HandlebarsApplicationM
     }
     console.log("Perk found at", i, j, perk);
   }
-
-  zoomAmount = 1;
-
-  zoom(zoom = this.zoomAmount) {
-    const grid = this.element.querySelector<HTMLElement>(".perk-grid");
-    const main = this.element.querySelector<HTMLElement>(".window-content main");
-    if (!grid || !main) return;
-    this.zoomAmount = zoom;
-
-    console.count("Zooming: " + zoom);
-
-    grid.style.transform = `scale(${zoom})`;
-    setTimeout(() => {
-      this.renderSVG()
-    }, 500);
-  }
 }
 
-export interface PerkWebbApp {
-  constructor: typeof PerkWebbApp;
+export interface PerkWebApp {
+  constructor: typeof PerkWebApp;
 }
-
-//@ts-expect-error - Monkey patching the global window to add the PerkWebbApp class
-window.PerkWebbApp = PerkWebbApp;

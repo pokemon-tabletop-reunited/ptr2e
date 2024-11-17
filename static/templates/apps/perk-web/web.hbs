@@ -1,4 +1,4 @@
-<main>
+<main style="cursor: zoom-in;">
   <section class="perk-grid {{#if editMode}}edit-mode{{/if}}">
     {{#each grid as |perk|}}
       {{#if perk.name}}
@@ -10,10 +10,6 @@
         >
           <img src="{{perk.img}}" alt="{{perk.name}}" title="{{perk.name}}" loading="lazy"/>
         </div>
-      {{else}}
-        {{!-- <div class="perk empty" data-i="{{perk.i}}" data-j="{{perk.j}}"
-          style="grid-area: {{perk.i}} / {{perk.j}} / span 1 / span 1;"
-        ></div> --}}
       {{/if}}
     {{/each}}
   </section>

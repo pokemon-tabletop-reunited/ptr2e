@@ -37,7 +37,7 @@ import Sortable from "sortablejs";
 import { ApplicationHeaderControlsEntry } from "types/foundry/common/applications/api.js";
 import PartySheetPTR2e from "@module/apps/party-sheet.ts";
 import { ToggleComponent } from "./components/toggle-component.ts";
-import { PerkWebbApp } from "@module/apps/perk-web/perk-web-v2.ts";
+import { PerkWebApp } from "@module/apps/perk-web/perk-web-v2.ts";
 
 class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixin(
   ActorSheetV2Expanded
@@ -157,7 +157,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
           //   await this.actor.setFlag("ptr2e", "sheet.perkFlash", false);
           // game.ptr.web.open(this.actor);
 
-          const app = new PerkWebbApp(this.actor);
+          const app = new PerkWebApp(this.actor);
           app.render(true);
         },
         "open-party-sheet": async function (this: ActorSheetPTRV2) {

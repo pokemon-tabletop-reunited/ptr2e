@@ -6513,15 +6513,176 @@ ul.item-list.result-list li.item.rarity-rare {
 ul.item-list.result-list li.item.rarity-unique {
   color: #a526ff;
 }
-.application.sheet.perk-web-app .window-content {
-  display: flex;
+#perk-web-app {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  color: white;
+  display: grid;
   overflow: hidden;
+  grid-template-areas: "hudHeader web searchHeader" "hudActor web search" "hudPerk web searchResults" "hudControls web searchResults";
+  grid-template-columns: 250px 1fr 250px;
+  grid-template-rows: 33px 100px 1fr min-content;
+  --appv2-background-opaque: linear-gradient(to right, #07070a, #13111f);
 }
-.application.sheet.perk-web-app .window-content main {
+#perk-web-app .hud {
+  border-right: 1px solid var(--border-theme-color);
+  background: var(--appv2-background-opaque);
+  z-index: 3;
+}
+#perk-web-app .search {
+  border-left: 1px solid var(--border-theme-color);
+  background: var(--appv2-background-opaque);
+  z-index: 3;
+}
+#perk-web-app [data-application-part="hudHeader"] {
+  grid-area: hudHeader;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+#perk-web-app [data-application-part="hudHeader"] .header-text {
+  flex: 1;
+  text-align: center;
+  align-content: center;
+  border-left: 1px solid var(--border-theme-color);
+  border-right: 1px solid var(--border-theme-color);
+  padding: 0.25rem;
+  font-size: 1rem;
+}
+#perk-web-app [data-application-part="hudHeader"] .item-controls {
+  flex: 0 0 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem;
+}
+#perk-web-app [data-application-part="hudActor"] {
+  grid-area: hudActor;
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+#perk-web-app [data-application-part="hudActor"] aside {
+  flex: 0 0 40%;
+}
+#perk-web-app [data-application-part="hudActor"] aside img {
+  height: 100%;
+  border-radius: 0px;
+  object-fit: contain;
+}
+#perk-web-app [data-application-part="hudActor"] main {
+  flex: 0 0 60%;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+  justify-content: center;
+}
+#perk-web-app [data-application-part="hudActor"] main label {
+  font-size: 13.5px;
+}
+#perk-web-app [data-application-part="hudActor"] main input {
+  width: 75%;
+}
+#perk-web-app [data-application-part="hudPerk"] {
+  grid-area: hudPerk;
+}
+#perk-web-app [data-application-part="hudPerk"] h2 {
+  font-family: inherit;
+  font-size: 1.25rem;
+}
+#perk-web-app [data-application-part="hudPerk"] .perk-header {
+  border-bottom: 1px solid var(--color-light-6);
+  padding: 0.5rem 0;
+}
+#perk-web-app [data-application-part="hudPerk"] .perk-header h2 {
+  border-bottom: unset;
+  text-align: center;
+  margin-bottom: 0;
+  font-size: 1rem;
+}
+#perk-web-app [data-application-part="hudPerk"] figure {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  border: 1px solid var(--color-light-6);
+  border-radius: 8px;
+}
+#perk-web-app [data-application-part="hudPerk"] figure header {
+  margin-bottom: 0.25rem;
+}
+#perk-web-app [data-application-part="hudPerk"] figure header h2 {
+  margin-bottom: 0.25rem;
+}
+#perk-web-app [data-application-part="hudPerk"] figure header.traits {
+  margin: 0.25rem 0;
+}
+#perk-web-app [data-application-part="hudPerk"] figure .perk-embed {
+  border: unset;
+  border-radius: unset;
+  background: unset;
+  display: contents;
+}
+#perk-web-app [data-application-part="hudPerk"] figure .perk-embed main {
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+#perk-web-app [data-application-part="hudPerk"] figure figure fieldset {
+  padding: 1rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  border-radius: 8px;
+  border-color: var(--border-theme-color);
+}
+#perk-web-app [data-application-part="hudPerk"] figure figure fieldset p {
+  margin: 0;
+}
+#perk-web-app [data-application-part="hudPerk"] footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0.5rem 0;
+  border-top: 1px solid var(--color-light-6);
+  border-bottom: 1px solid var(--color-light-6);
+}
+#perk-web-app [data-application-part="hudPerk"] footer button.purchase,
+#perk-web-app [data-application-part="hudPerk"] footer button.refund {
+  flex: 0 0 70%;
+}
+#perk-web-app [data-application-part="hudPerk"] footer button.refund {
+  border-color: #851a1a;
+}
+#perk-web-app [data-application-part="hudPerk"] footer button.unavailable {
+  filter: grayscale(100%);
+  cursor: not-allowed;
+}
+#perk-web-app [data-application-part="hudControls"] {
+  grid-area: hudControls;
+  padding: 0.5rem;
+  color: white;
+  border-radius: 15px 0 0 15px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+#perk-web-app [data-application-part="hudControls"].editing {
+  background: #851a1a;
+}
+#perk-web-app [data-application-part="hudControls"] button {
+  flex-basis: 60%;
+  line-height: 1.5rem;
+}
+#perk-web-app [data-application-part="web"] {
+  grid-area: web;
   display: flex;
   overflow: auto;
 }
-.application.sheet.perk-web-app .window-content main svg {
+#perk-web-app [data-application-part="web"] svg {
   position: absolute;
   top: 0;
   left: 0;
@@ -6530,26 +6691,132 @@ ul.item-list.result-list li.item.rarity-unique {
   pointer-events: none;
   z-index: 1;
 }
-.application.sheet.perk-web-app .window-content main svg line {
-  translate: x1 0.5s ease, x2 0.5s ease, y1 0.5s ease, y2 0.5s ease, stroke-width 0.5s ease;
-}
-.application.sheet.perk-web-app .window-content main section.perk-grid {
+#perk-web-app [data-application-part="web"] section.perk-grid {
   display: grid;
   grid-template-columns: repeat(250, 48px);
   grid-template-rows: repeat(250, 48px);
   gap: 1.5rem;
   z-index: 2;
-  transition: transform 0.5s ease-in-out;
 }
-.application.sheet.perk-web-app .window-content main section.perk-grid .perk {
+#perk-web-app [data-application-part="web"] section.perk-grid .perk {
   height: 48px;
   width: 48px;
-  border: 1px solid;
+  border: 1px solid var(--border-theme-color);
+  cursor: pointer;
+  background: var(--appv2-background-opaque);
 }
-.application.sheet.perk-web-app .window-content main section.perk-grid .perk.empty {
-  display: none;
+#perk-web-app [data-application-part="web"] section.perk-grid .perk img {
+  border: unset;
 }
-.application.sheet.perk-web-app .window-content main section.perk-grid.edit-mode .perk.empty {
-  display: block;
+#perk-web-app [data-application-part="web"] section.perk-grid.edit-mode .perk.empty {
   border: dashed;
+}
+#perk-web-app [data-application-part="searchHeader"] {
+  grid-area: searchHeader;
+}
+#perk-web-app [data-application-part="searchHeader"] .header-text {
+  border: unset;
+}
+#perk-web-app [data-application-part="search"] {
+  grid-area: search;
+}
+#perk-web-app [data-application-part="search"] .search {
+  margin: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border-theme-color);
+  border-radius: 6px;
+}
+#perk-web-app [data-application-part="search"] .search dl {
+  margin: 0.25em 0;
+}
+#perk-web-app [data-application-part="search"] .search dl dt {
+  display: inline-block;
+  padding-left: 5px;
+  font-weight: bold;
+}
+#perk-web-app [data-application-part="search"] .search dl dd {
+  display: inline-block;
+  text-transform: capitalize;
+  padding-left: 5px;
+  margin: 3px 0;
+}
+#perk-web-app [data-application-part="search"] .search dl dd select {
+  margin-left: 0.5em;
+  width: 8.5em;
+}
+#perk-web-app [data-application-part="search"] .search dl a.direction {
+  padding: 2px;
+}
+#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"],
+#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] {
+  border: 1px solid var(--border-theme-color);
+  border-radius: 6px;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"] dt,
+#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] dt {
+  width: 10%;
+}
+#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"] dd,
+#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] dd {
+  width: 82%;
+}
+#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"] .tags,
+#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] .tags {
+  --readonly-striped: 0;
+  border: none;
+  gap: 0;
+  padding: 0;
+}
+#perk-web-app [data-application-part="search"] [data-filter-type="multiselects"] .filter-conjunction,
+#perk-web-app [data-application-part="search"] [data-filter-type="checkboxes"] .filter-conjunction {
+  font-size: 12px;
+}
+#perk-web-app [data-application-part="searchResults"] {
+  grid-area: searchResults;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+#perk-web-app [data-application-part="searchResults"] header {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+#perk-web-app [data-application-part="searchResults"] header .results {
+  flex: 1;
+  text-align: center;
+  align-content: center;
+  border-top: 1px solid var(--border-theme-color);
+  padding: 0.5rem 0.5rem 0 0.5rem;
+}
+#perk-web-app [data-application-part="searchResults"] header .perk {
+  padding-top: 0;
+}
+#perk-web-app [data-application-part="searchResults"] ul.result-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  overflow: auto;
+}
+#perk-web-app [data-application-part="searchResults"] .perk {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+#perk-web-app [data-application-part="searchResults"] .perk .perk-name {
+  flex: 1;
+}
+#perk-web-app [data-application-part="searchResults"] .perk .perk-cost {
+  flex: 0 0 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
