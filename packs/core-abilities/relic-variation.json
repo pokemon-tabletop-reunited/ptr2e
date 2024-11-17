@@ -24,7 +24,7 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user resolves Relic Dance</p><p>Effect: Connection - Relic Dance. The user transforms into its Aria Forme. The user may also change Formes as either a Simple Action (4 PP), or as a Downtime Action.</p>"
+        "description": "<p>Trigger: The user resolves Relic Dance</p><p>Effect: The user transforms into its Aria Forme. The user may also change Formes as either a Simple Action (4 PP), or as a Downtime Action.</p>"
       },
       {
         "traits": [
@@ -42,6 +42,76 @@
         },
         "range": null,
         "description": "Passive: The user possesses the Abilities - Capoeira and Benevolent Gift"
+      },
+      {
+        "slug": "relic-dance",
+        "name": "Relic Dance",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "dance",
+          "pass-6",
+          "push-2",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 75,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[splinter] 7 and @Affliction[confused] 7.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "traits": [],
+        "name": "Capoeira",
+        "slug": "capoeira",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "free": true,
+        "description": "<p>Effect: The user's [Kick] Attacks also have [Dance], and the user's [Dance] Attacks have their Power increased by 30%.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [],
+        "name": "Benevolent Gift",
+        "slug": "benevolent-gift",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "free": true,
+        "description": "<p>Effect: The duration of effects caused or created by the user is increased by 2.</p>"
       }
     ],
     "description": "<p>Trigger: The user resolves Relic Dance</p><p>Effect: Connection - Relic Dance. The user transforms into its Aria Forme. The user may also change Formes as either a Simple Action (4 PP), or as a Downtime Action. Passive: The user possesses the Abilities - Capoeira and Benevolent Gift",

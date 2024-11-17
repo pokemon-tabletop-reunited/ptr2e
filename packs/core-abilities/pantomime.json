@@ -23,7 +23,36 @@
           "distance": 10,
           "unit": "m"
         },
-        "description": "<p>Trigger: A creature resolves an attack.</p><p>Effect: Connection - Mimic. The user freely uses Mimic on the triggering creature.</p>"
+        "description": "<p>Trigger: A creature resolves an attack.</p><p>Effect: The user freely uses Mimic on the triggering creature.</p>"
+      },
+      {
+        "slug": "mimic",
+        "name": "Mimic",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: Mimic copies the last attack the target used, and the attack is added to the user's Active List until the end of combat, the user switches out or the user gains @Affliction[fainted]. Mimic cannot be used if the user has a copied attack on its Active List.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
     "description": "<p>Trigger: A creature resolves an attack.</p><p>Effect: Connection - Mimic. The user freely uses Mimic on the triggering creature.</p>",

@@ -6,8 +6,7 @@
     "actions": [
       {
         "traits": [
-          "paradox",
-          "connection"
+          "paradox"
         ],
         "name": "Nonlocality Mechanism",
         "slug": "nonlocality-mechanism",
@@ -27,8 +26,7 @@
       },
       {
         "traits": [
-          "paradox",
-          "connection"
+          "paradox"
         ],
         "name": "Nonlocality Mechanism",
         "slug": "nonlocality-mechanism",
@@ -44,7 +42,64 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Effect: Connection - Sacred Sword. The user deals 30% more damage to creatures that possess Types that are super-effective against any of the user's Types, and the user may use Sacred Sword as a Psychic-Type attack.</p>"
+        "description": "<p>Effect: The user deals 30% more damage to creatures that possess Types that are super-effective against any of the user's Types, and the user may use Sacred Sword as a Psychic-Type attack.</p>"
+      },
+      {
+        "slug": "sacred-sword",
+        "name": "Sacred Sword",
+        "type": "attack",
+        "traits": [
+          "pass-3",
+          "sharp",
+          "contact",
+          "danger-close",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "free": true
+      },
+      {
+        "slug": "sacred-sword-nonlocal",
+        "name": "Sacred Sword (Nonlocal)",
+        "type": "attack",
+        "traits": [
+          "sharp",
+          "danger-close",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "variant": "sacred-sword",
+        "free": true
       }
     ],
     "description": "<p>Effect: Connection - Sacred Sword. For 3 PP as a Free Action, the next [Sharp] attack used by the user has its target change to Wide Line, its range to 8, and loses [Contact] and [Pass X] until the attack resolves.</p><p>Passive: The user deals 30% more damage to creatures that possess Types that are super-effective against any of the user's Types, and the user may use Sacred Sword as a Psychic-Type attack.</p>",

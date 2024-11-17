@@ -11,7 +11,7 @@
           "forme-change"
         ],
         "name": "Phantom Devicer",
-        "slug": "phantom-devicer",
+        "slug": "phantom-devicer-active",
         "type": "generic",
         "cost": {
           "activation": "complex",
@@ -25,7 +25,7 @@
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is adjacent to an unoccupied appliance.</p><p>Effect: Connection: Thunder Shock. The user possesses the triggering object, changing Forme as appropriate.  They can spend 2 PP as a Complex Action to exit an appliance, changing into their base Forme. This can be separately done as an Exploration Action without consuming PP. When in a separate Forme, the user's Connected Thunder Shock is swapped for an appropriate Attack based on the Forme:</p><p>- Heat: Overheat</p><p>- Wash: Hydro Pump</p><p>- Frost: Blizzard</p><p>- Fan: Hurricane</p><p>- Mow: Leaf Storm"
+        "description": "<p>Trigger: The user is adjacent to an unoccupied appliance.</p><p>Effect: The user possesses the triggering object, changing Forme as appropriate.  They can spend 2 PP as a Complex Action to exit an appliance, changing into their base Forme. This can be separately done as an Exploration Action without consuming PP. When in a separate Forme, the user's Connected Thunder Shock is swapped for an appropriate Attack based on the Forme:</p><p>- Heat: Overheat</p><p>- Wash: Hydro Pump</p><p>- Frost: Blizzard</p><p>- Fan: Hurricane</p><p>- Mow: Leaf Storm"
       },
       {
         "traits": [
@@ -34,7 +34,7 @@
           "forme-change"
         ],
         "name": "Phantom Devicer",
-        "slug": "phantom-devicer",
+        "slug": "phantom-devicer-passive",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -43,7 +43,54 @@
           "priority": null
         },
         "range": null,
-        "description": "Passive: While in their base Forme, the user also has the Ability Static. While in another Forme due to possessing an appliance, they instead have the Ability Ectobiologist.</p>"
+        "description": "<p>Passive: While in their base Forme, the user also has the Ability Static. While in another Forme due to possessing an appliance, they instead have the Ability Ectobiologist.</p>"
+      },
+      {
+        "slug": "thunder-shock",
+        "name": "Thunder Shock",
+        "type": "attack",
+        "traits": [
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "category": "special",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[paralysis] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Static",
+        "slug": "static",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user is hit by a [Contact] attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature has a 30% chance of gaining @Affliction[paralysis] 5.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "description": "<p>Trigger: The user is adjacent to an unoccupied appliance.</p><p>Effect: Connection: Thunder Shock. The user possesses the triggering object, changing Forme as appropriate.  They can spend 2 PP as a Complex Action to exit an appliance, changing into their base Forme. This can be separately done as an Exploration Action without consuming PP. When in a separate Forme, the user's Connected Thunder Shock is swapped for an appropriate Attack based on the Forme:</p><p>- Heat: Overheat</p><p>- Wash: Hydro Pump</p><p>- Frost: Blizzard</p><p>- Fan: Hurricane</p><p>- Mow: Leaf Storm</p><p>Passive: While in their base Forme, the user also has the Ability Static. While in another Forme due to possessing an appliance, they instead have the Ability Ectobiologist.</p>",

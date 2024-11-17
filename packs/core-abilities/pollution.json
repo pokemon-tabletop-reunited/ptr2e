@@ -24,10 +24,41 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user creates Smoggy Weather.</p><p>Effect: Connection - Smog. The triggering effect's duration is increased by +2.</p>"
+        "description": "<p>Trigger: The user creates Smoggy Weather.</p><p>Effect: The triggering effect's duration is increased by +2.</p>"
+      },
+      {
+        "slug": "acid-rain",
+        "name": "Acid Rain",
+        "type": "attack",
+        "traits": [
+          "weather"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Effect: The weather becomes Smoggy for 3 rounds.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: The user creates Smoggy Weather.</p><p>Effect: Connection - Smog. The triggering effect's duration is increased by +2.</p>",
+    "description": "<p>Trigger: The user creates Smoggy Weather.</p><p>Effect: Connection - Acid Rain. The triggering effect's duration is increased by +2.</p>",
     "traits": [
       "connection",
       "weather"
