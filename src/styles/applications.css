@@ -6521,8 +6521,8 @@ ul.item-list.result-list li.item.rarity-unique {
   display: grid;
   overflow: hidden;
   grid-template-areas: "hudHeader web searchHeader" "hudActor web search" "hudPerk web searchResults" "hudControls web searchResults";
-  grid-template-columns: 250px 1fr 250px;
-  grid-template-rows: 33px 100px 1fr min-content;
+  grid-template-columns: 250px minmax(0, 1fr) 250px;
+  grid-template-rows: 33px 100px minmax(0, 1fr) min-content;
   --appv2-background-opaque: linear-gradient(to right, #07070a, #13111f);
 }
 #perk-web-app .hud {
@@ -6587,6 +6587,7 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 #perk-web-app [data-application-part="hudPerk"] {
   grid-area: hudPerk;
+  overflow: auto;
 }
 #perk-web-app [data-application-part="hudPerk"] h2 {
   font-family: inherit;
@@ -6664,7 +6665,8 @@ ul.item-list.result-list li.item.rarity-unique {
   grid-area: hudControls;
   padding: 0.5rem;
   color: white;
-  border-radius: 15px 0 0 15px;
+  border-top: 1px solid var(--border-theme-color);
+  border-radius: 0;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;

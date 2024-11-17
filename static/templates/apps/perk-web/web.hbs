@@ -1,5 +1,5 @@
 <main style="cursor: zoom-in;">
-  <section class="perk-grid {{#if editMode}}edit-mode{{/if}}">
+  <section class="perk-grid {{#if editMode}}edit-mode{{/if}}" style="transform: scale({{zoom}});">
     {{#each grid as |perk|}}
       {{#if perk.name}}
         <div class="perk"

@@ -1,6 +1,8 @@
 import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "../appv2-expanded.ts";
 import { ActorPTR2e } from "@actor";
+import { Trait } from "@data";
 import { PerkPTR2e } from "@item";
+import Tagify from "@yaireo/tagify";
 
 export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -104,12 +106,12 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   actor: ActorPTR2e | null = null;
   currentPerk: PerkPTR2e | null = null;
   editMode = false;
-  zoomLevels = [0.4, 0.65, 1, 1.3, 1.65] as const;
+  zoomLevels = [0.2, 0.4, 0.65, 1, 1.3, 1.65] as const;
 
   _perkStore = new Map<string, PerkPTR2e>();
   _onScroll: () => void | null;
   _lineCache = new Map<string, SVGLineElement>();
-  _zoomAmount: this['zoomLevels'][number] = 1;
+  _zoomAmount: this['zoomLevels'][number] = 0.2;
 
   constructor(actor: ActorPTR2e, options?: Partial<ApplicationConfigurationExpanded>) {
     super(options);
@@ -149,17 +151,84 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       }
     }
 
+    this.#allTraits = game.ptr.data.traits.map((trait) => ({
+      value: trait.slug,
+      label: trait.label,
+      type: trait.type,
+    }));
+
     return {
       ...super._prepareContext(options),
       grid,
       actor: this.actor,
-      perk: { document: this.currentPerk },
-      filterData: null
+      perk: { 
+        document: this.currentPerk, 
+        fields: this.currentPerk?.system.schema.fields,
+        traits: this.currentPerk?.system.traits.map((trait) => ({ value: trait.slug, label: trait.label, type: trait.type })),
+        actions: this.currentPerk?.system?.actions?.map(action => ({
+          action,
+          traits: action.traits.map(trait => ({ value: trait.slug, label: trait.label })),
+          fields: action.schema.fields,
+        }))
+      },
+      filterData: null,
+      zoom: this._zoomAmount
     }
   }
 
+  #allTraits: { value: string; label: string, type?: Trait["type"] }[] | undefined;
+
   override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
+
+    if(partId === "web") {
+      const perks = htmlElement.querySelectorAll<HTMLElement>(".perk")
+      for (const perk of perks) {
+        perk.addEventListener("click", (event) => {
+          event.preventDefault();
+          const { i, j } = perk.dataset;
+          if (!i || !j) return;
+          const perkKey = `${Number(i)}-${Number(j)}`;
+          this.currentPerk = this._perkStore.get(perkKey) ?? null;
+          this.render({ parts: ["hudPerk"] });
+        });
+      }
+    }
+    if(partId === 'hudPerk') {
+      for (const input of htmlElement.querySelectorAll<HTMLInputElement>(
+        "input.ptr2e-tagify"
+      )) {
+        new Tagify(input, {
+          enforceWhitelist: false,
+          keepInvalidTags: false,
+          editTags: false,
+          tagTextProp: "label",
+          dropdown: {
+            enabled: 0,
+            mapValueTo: "label",
+          },
+          templates: {
+            tag: function (tagData): string {
+              return `
+                            <tag contenteditable="false" spellcheck="false" tabindex="-1" class="tagify__tag" ${this.getAttributes(
+                tagData
+              )}style="${Trait.bgColors[tagData.type || "default"] ? `--tag-bg: ${Trait.bgColors[tagData.type || "default"]!["bg"]}; --tag-hover: ${Trait.bgColors[tagData.type || "default"]!["hover"]}; --tag-border-color: ${Trait.bgColors[tagData.type || "default"]!["border"]};` : ""}">
+                            <x title="" class="tagify__tag__removeBtn" role="button" aria-label="remove tag"></x>
+                            <div>
+                                <span class='tagify__tag-text'>
+                                    <span class="trait" data-tooltip-direction="UP" data-trait="${tagData.value
+                }" data-tooltip="${tagData.label
+                }"><span>[</span><span class="tag">${tagData.label
+                }</span><span>]</span></span>
+                                </span>
+                            </div>
+                            `;
+            },
+          },
+          whitelist: this.#allTraits,
+        });
+      }
+    }
   }
 
   override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
