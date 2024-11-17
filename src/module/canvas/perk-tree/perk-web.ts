@@ -127,8 +127,9 @@ class PerkWeb extends PIXI.Container {
         this.actor = actor ?? null;
 
         if(!this.#drawn) {
-            this.progress = new Progress({ steps: 10});
-            this.progress.advance("Opening Perk web...");
+          this.timer = performance.now();
+          this.progress = new Progress({ steps: 10});
+          this.progress.advance("Opening Perk web...");
         }
         
         await this.draw();
@@ -299,6 +300,7 @@ class PerkWeb extends PIXI.Container {
     }
 
     private async _refresh({ nodeRefresh } = { nodeRefresh: false }) {
+        if(!this.timer) this.timer = performance.now();
         if(this.progress.counter === this.progress.steps) this.progress = new Progress({ steps: 5});
         this.progress.advance("Refreshing the HUD...")
 
@@ -332,6 +334,8 @@ class PerkWeb extends PIXI.Container {
         await this.controls.render({ parts: ["actor", "perk"] });
 
         this.progress.close("Perk Web is ready!")
+        ui.notifications.info(`Perk Web is ready! (${(performance.now() - this.timer).toFixed(2)}ms)`);
+        this.timer = null;
 
         return this;
     }
@@ -1171,6 +1175,7 @@ interface PerkWeb {
     controlled: PerkNode[];
 
     progress: Progress
+    timer: number | null;
 }
 export type { CoordinateString };
 export default PerkWeb;

@@ -6513,3 +6513,43 @@ ul.item-list.result-list li.item.rarity-rare {
 ul.item-list.result-list li.item.rarity-unique {
   color: #a526ff;
 }
+.application.sheet.perk-web-app .window-content {
+  display: flex;
+  overflow: hidden;
+}
+.application.sheet.perk-web-app .window-content main {
+  display: flex;
+  overflow: auto;
+}
+.application.sheet.perk-web-app .window-content main svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+.application.sheet.perk-web-app .window-content main svg line {
+  translate: x1 0.5s ease, x2 0.5s ease, y1 0.5s ease, y2 0.5s ease, stroke-width 0.5s ease;
+}
+.application.sheet.perk-web-app .window-content main section.perk-grid {
+  display: grid;
+  grid-template-columns: repeat(250, 48px);
+  grid-template-rows: repeat(250, 48px);
+  gap: 1.5rem;
+  z-index: 2;
+  transition: transform 0.5s ease-in-out;
+}
+.application.sheet.perk-web-app .window-content main section.perk-grid .perk {
+  height: 48px;
+  width: 48px;
+  border: 1px solid;
+}
+.application.sheet.perk-web-app .window-content main section.perk-grid .perk.empty {
+  display: none;
+}
+.application.sheet.perk-web-app .window-content main section.perk-grid.edit-mode .perk.empty {
+  display: block;
+  border: dashed;
+}
