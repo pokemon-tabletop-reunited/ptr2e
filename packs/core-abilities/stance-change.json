@@ -6,16 +6,35 @@
     "actions": [
       {
         "traits": [
-          "connection",
-          "forme-change",
-          "innate"
+          "forme-change"
         ],
-        "name": "Stance Change",
-        "slug": "stance-change",
+        "name": "Stance Change (Defense)",
+        "slug": "stance-change-defense",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 1,
+          "powerPoints": 0,
+          "trigger": "<p>The user declares a Status-Category attack.</p>",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares a Status-Category attack.</p><p>Effect: The user changes to Shield Forme.</p>"
+      },
+      {
+        "traits": [
+          "forme-change"
+        ],
+        "name": "Stance Change (Offense)",
+        "slug": "stance-change-offense",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
           "trigger": "<p>The user declares a Physical or Special-Category attack.</p>",
           "delay": null,
           "priority": null
@@ -25,7 +44,7 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user declares a Physical or Special-Category attack.</p><p>Effect: Connection - King's Shield. The user changes to Blade Forme before attacking.</p>"
+        "description": "<p>Trigger: The user declares a Physical or Special-Category attack.</p><p>Effect: The user changes to Blade Forme.</p>"
       },
       {
         "traits": [
@@ -34,7 +53,7 @@
           "innate"
         ],
         "name": "Stance Change",
-        "slug": "stance-change",
+        "slug": "stance-change-passive",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -43,10 +62,75 @@
           "priority": null
         },
         "range": null,
-        "description": "Passive: The user starts combat in Shield Forme.  When using King's Shield, the user can spend an additional 4 AP to increase their DEF and SPDEF by +1 for 5 Activations.</p>"
+        "description": "Passive: The user starts combat in Shield Forme.</p>"
+      },
+      {
+        "slug": "kings-shield",
+        "name": "King's Shield",
+        "type": "attack",
+        "traits": [
+          "shield",
+          "interrupt-4"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user is targeted by an Attack.</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "steel"
+        ],
+        "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The triggering attack fails to hit the user, and additional attacks also fail to hit until the user's next activation, or when the round ends, whichever is first. Attacks failing to hit this way do not activate their secondary effects. If the triggering Attack has [Contact], the attacker loses -2 ATK stages for 5 Activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "kings-shield-supreme",
+        "name": "King's Shield (Supreme)",
+        "type": "attack",
+        "traits": [
+          "shield",
+          "interrupt-4"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user is targeted by an Attack.</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "steel"
+        ],
+        "description": "<p>Trigger: The user is targeted by an Attack.</p><p>Effect: The triggering attack fails to hit the user, and additional attacks also fail to hit until the user's next activation, or when the round ends, whichever is first. Attacks failing to hit this way do not activate their secondary effects. If the triggering Attack has [Contact], the attacker loses -2 ATK stages for 5 Activations. The user gains +1 DEF and SPDEF Stage for 5 Activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "variant": "kings-shield",
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: The user declares a Physical or Special-Category attack.</p><p>Effect: Connection - King's Shield. The user changes to Blade Forme before attacking. Passive: The user starts combat in Shield Forme.  When using King's Shield, the user can spend an additional 4 AP to increase their DEF and SPDEF by +1 for 5 Activations.</p>",
+    "description": "<p>Effect: Connection - King's Shield. The user changes to Blade Forme when declaring a Physical- or Special-Category attack and changes to Shield Forme when declaring a Status-Category attack.  When using King's Shield, the user can spend an additional 4 AP to gains +1 DEF and SPDEF Stage for 5 Activations.</p><p>Passive: The user starts combat in Shield Forme.</p>",
     "traits": [
       "connection",
       "forme-change",

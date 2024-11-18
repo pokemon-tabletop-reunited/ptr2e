@@ -6,9 +6,7 @@
     "actions": [
       {
         "traits": [
-          "forme-change",
-          "innate",
-          "connection"
+          "forme-change"
         ],
         "name": "Zero to Hero",
         "slug": "zero-to-hero",
@@ -16,7 +14,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 0,
-          "trigger": "<p>The user successfully uses Flip Turn and Switches Out.</p>",
+          "trigger": "<p>The user resolves Flip Turn and Switches Out.</p>",
           "delay": null,
           "priority": null
         },
@@ -25,10 +23,52 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user successfully uses Flip Turn and Switches Out.</p><p>Effect: Connection - Flip Turn. The user transforms into their Hero Forme until the end of combat or when the user gains @Affliction[fainted]. When using Flip Turn, the user can spend an additional 4 PP to transform into their Hero Forme for 3 Activations. Zero to Hero cannot activate if the user is @Affliction[weary].</p>"
+        "description": "<p>Trigger: The user successfully uses Flip Turn and Switches Out.</p><p>Effect: The user transforms into their Hero Forme until the end of combat or when the user gains @Affliction[fainted]. When using Flip Turn, the user can spend an additional 4 PP to transform into their Hero Forme for 3 Activations. Zero to Hero cannot activate if the user is @Affliction[weary].</p>"
+      },
+      {
+        "traits": [
+          "forme-change"
+        ],
+        "name": "Zero to Hero (Henshin)",
+        "slug": "zero-to-hero-henshin",
+        "type": "generic",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "trigger": "<p>The user does not have @Affliction[weary].</p>",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user does not have @Affliction[weary].</p><p>Effect: The user enters their Hero Forme for 5 Activations.</p>"
+      },
+      {
+        "traits": [
+          "forme-change",
+          "exhaust"
+        ],
+        "name": "Zero to Hero (Henshin Weary)",
+        "slug": "zero-to-hero-henshin-weary",
+        "type": "generic",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user enters their Hero Forme for 5 Activations.</p>"
       }
     ],
-    "description": "<p>Trigger: The user successfully uses Flip Turn and Switches Out.</p><p>Effect: Connection - Flip Turn. The user transforms into their Hero Forme until the end of combat or when the user gains @Affliction[fainted]. When using Flip Turn, the user can spend an additional 4 PP to transform into their Hero Forme for 3 Activations. Zero to Hero cannot activate if the user is @Affliction[weary].</p>",
+    "description": "<p>Trigger: The user successfully uses Flip Turn and Switches Out.</p><p>Effect: Connection - Flip Turn. The user transforms into their Hero Forme until the end of combat or when the user gains @Affliction[fainted]. The user can spend an 4 PP to transform into their Hero Forme for 5 Activations as a Complex Action. This effect costs 2 more PP and gains [Exhaust] if the user has @Affliction[weary].</p>",
     "traits": [
       "forme-change",
       "innate",

@@ -14,8 +14,8 @@
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 3,
-          "trigger": "<p>The user is hit by an attack.</p>",
+          "powerPoints": 4,
+          "trigger": "<p>The user would hit by an attack.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,10 +24,132 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit by an attack.</p><p>Effect: Connection - Sand Attack. The user freely uses Sand Attack on the attacking creature, and then the triggering attack is rerolled. The rerolled attack does not cost additional PP nor can it trigger Sand Spit again. When using Sand Attack, the user can spend an additional 2 PP to have it deal Ground-Type damage with 25 power.</p>"
+        "description": "<p>Trigger: The user would be hit by an attack.</p><p>Effect: The user freely uses Sand Attack or Sand Attack (Dusty) on the attacking creature, and then the triggering attack is rerolled. The rerolled attack does not cost additional PP nor can it trigger this Ability again.</p>"
+      },
+      {
+        "slug": "sand-attack",
+        "name": "Sand Attack",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Effect: On hit, all valid targets lose -1 ACC stage for 5 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
+      },
+      {
+        "slug": "sand-attack-dusty",
+        "name": "Sand Attack (Dusty)",
+        "type": "attack",
+        "traits": [
+          "environ"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Dusty Weather is present.</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Trigger: Dusty Weather is present.</p><p>Effect: On hit, all valid targets lose -2 ACC stage for 5 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "sand-attack",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "sand-attack-sand-spit",
+        "name": "Sand Attack (Sand Spit)",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null
+        },
+        "category": "physical",
+        "power": 25,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Effect: On hit, all valid targets lose -1 ACC stage for 5 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "sand-attack",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "sand-attack-sand-spit-dusty",
+        "name": "Sand Attack (Sand Spit Dusty)",
+        "type": "attack",
+        "traits": [
+          "environ"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Dusty Weather is present.</p>"
+        },
+        "category": "physical",
+        "power": 25,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Trigger: Dusty Weather is present.</p><p>Effect: On hit, all valid targets lose -2 ACC stage for 5 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "sand-attack",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: The user is hit by an attack.</p><p>Effect: Connection - Sand Attack. The user freely uses Sand Attack on the attacking creature, and then the triggering attack is rerolled. The rerolled attack does not cost additional PP nor can it trigger Sand Spit again. When using Sand Attack, the user can spend an additional 2 PP to have it deal Ground-Type damage with 25 power.</p>",
+    "description": "<p>Trigger: The user would hit by an attack.</p><p>Effect: Connection - Sand Attack. The user freely uses Sand Attack or Sand Attack (Dusty) on the attacking creature, and then the triggering attack is rerolled. The rerolled attack does not cost additional PP nor can it trigger this Ability again. When using Sand Attack, the user can spend an additional 2 PP to use it as a 25 Power Physical-Category Attack.</p>",
     "traits": [
       "connection",
       "defensive"

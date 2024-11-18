@@ -6,16 +6,16 @@
     "actions": [
       {
         "traits": [
-          "connection",
-          "defensive"
+          "defensive",
+          "interrupt-3"
         ],
         "name": "Shell Shield",
         "slug": "shell-shield",
         "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
-          "trigger": "<p>An adjacent ally creature is hit with a Physical or Special-Category Attack",
+          "powerPoints": 4,
+          "trigger": "<p>An adjacent ally creature is hit with a Physical or Special-Category Attack.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,10 +24,39 @@
           "distance": 1,
           "unit": "m"
         },
-        "description": "<p>Trigger: An adjacent ally creature is hit with a Physical or Special-Category Attack</p><p>Effect: Connection - Withdraw. The user and triggering ally swap positions and the user may use Withdraw as an [Interrupt 2] before resolving the damage of the triggering attack.</p>"
+        "description": "<p>Trigger: An adjacent ally creature targeted with a Physical or Special-Category Attack.</p><p>Effect: The user freely uses Withdraw and then Intercept, designating the triggering ally as their target.</p>"
+      },
+      {
+        "slug": "withdraw",
+        "name": "Withdraw",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "water"
+        ],
+        "description": "<p>Effect: The user gains +1 DEF stage for 5 activations.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: An adjacent ally creature is hit with a Physical or Special-Category Attack</p><p>Effect: Connection - Withdraw. The user and triggering ally swap positions and the user may use Withdraw as an [Interrupt 2] before resolving the damage of the triggering attack.</p>",
+    "description": "<p>Trigger: An adjacent ally creature targeted with a Physical or Special-Category Attack.</p><p>Effect: Connection - Withdraw. The user freely uses Withdraw and then Intercept, designating the triggering ally as their target.</p>",
     "traits": [
       "connection",
       "defensive"

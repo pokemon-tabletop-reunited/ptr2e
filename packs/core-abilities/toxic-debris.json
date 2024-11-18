@@ -10,8 +10,8 @@
           "hazard",
           "connection"
         ],
-        "name": "Toxic Debris",
-        "slug": "toxic-debris",
+        "name": "Toxic Debris (Reaction)",
+        "slug": "toxic-debris-reaction",
         "type": "generic",
         "cost": {
           "activation": "free",
@@ -25,28 +25,63 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit by a Physical-Category Attack.</p><p>Effect: Connection - Toxic Spikes. The user freely uses Toxic Spikes.</p>"
+        "description": "<p>Trigger: The user is hit by a Physical-Category Attack.</p><p>Effect: The user freely uses Toxic Spikes.</p>"
       },
       {
         "traits": [
-          "defensive",
-          "hazard",
-          "connection"
+          "hazard"
         ],
-        "name": "Toxic Debris",
-        "slug": "toxic-debris",
+        "name": "Toxic Debris (Immediate)",
+        "slug": "toxic-debris-immediate",
         "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 0,
+          "powerPoints": 2,
+          "trigger": "<p>The user resolves Toxic Spikes.</p>",
           "delay": null,
           "priority": null
         },
-        "range": null,
-        "description": "Passive: When using Toxic Spikes, the user can spend an additional 2 PP to have the Hazard's effect immediately apply to creatures in the [Blast X] area.</p>"
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user resolves Toxic Spikes.</p><p>Effect: All creatures occupying spaces shared by the triggering-attack's hazards gain @Affliction[poison] 1.</p>"
+      },
+      {
+        "slug": "toxic-spikes",
+        "name": "Toxic Spikes",
+        "type": "attack",
+        "traits": [
+          "hazard",
+          "blast-4"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Effect: Poison tipped spikes are spread over the [Blast X] area on standing surfaces. A creature that starts an Activation on a surface containing the Hazard gains @Affliction[poison] 1. A creature that moves through through a space touching a surface containing the Hazard gain @Affliction[poison] 1 for each square travelled. After gaining 4 Stacks of @Affliction[poison] this way during the same Round, the creature's @Affliction[poison] Affliction becomes @Affliction[blight].</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: The user is hit by a Physical-Category Attack.</p><p>Effect: Connection - Toxic Spikes. The user freely uses Toxic Spikes. Passive: When using Toxic Spikes, the user can spend an additional 2 PP to have the Hazard's effect immediately apply to creatures in the [Blast X] area.</p>",
+    "description": "<p>Trigger: The user is hit by a Physical-Category Attack.</p><p>Effect: Connection - Toxic Spikes. The user freely uses Toxic Spikes. Passive: When using Toxic Spikes, the user can spend an additional 2 PP to have creatures occupying spaces shared by the triggering-attack's hazards gain @Affliction[poison] 1.</p>",
     "traits": [
       "defensive",
       "connection"

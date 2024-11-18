@@ -6,7 +6,7 @@
     "actions": [
       {
         "traits": [
-          "connection"
+          "interrupt-1"
         ],
         "name": "Singer",
         "slug": "singer",
@@ -23,10 +23,37 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: A creature on the field (other than the user) uses a [Sonic] attack</p><p>Effect: Connection - Sing. The user freely uses the triggering attack as if it was on the user's Active List, selecting new targets as needed.</p>"
+        "description": "<p>Trigger: A creature on the field (other than the user) uses a [Sonic] attack</p><p>Effect: The user uses the triggering attack as if it was on the user's Active List as a Free Action, selecting new targets as needed.</p>"
+      },
+      {
+        "slug": "sing",
+        "name": "Sing",
+        "type": "attack",
+        "traits": [
+          "sonic"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "status",
+        "accuracy": 55,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: On hit, all valid targets gain @Affliction[drowsy] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: A creature on the field (other than the user) uses a [Sonic] attack</p><p>Effect: Connection - Sing. The user freely uses the triggering attack as if it was on the user's Active List, selecting new targets as needed.</p>",
+    "description": "<p>Trigger: A creature on the field (other than the user) uses a [Sonic] attack</p><p>Effect: Connection - Sing. The user uses the triggering attack as if it was on the user's Active List as a Free Action, selecting new targets as needed.</p>",
     "traits": [
       "connection"
     ],

@@ -7,16 +7,15 @@
       {
         "traits": [
           "defensive",
-          "hazard",
-          "connection"
+          "hazard"
         ],
         "name": "White Smoke",
         "slug": "white-smoke",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
-          "trigger": "<p>A negative stage effect is applied to the user",
+          "powerPoints": 5,
+          "trigger": "<p>A negative stage effect is applied to the user.</p>",
           "delay": null,
           "priority": null
         },
@@ -25,10 +24,42 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: A negative stage effect is applied to the user</p><p>Effect: Connection - Smokescreen. The user freely uses Smokescreen with the blast centered on themselves. Then, the triggering effect is cured. Smokescreen Hazards created by the user do not affect the user or their allies.</p>"
+        "description": "<p>Trigger: A negative stage effect is applied to the user.</p><p>Effect: The user freely uses Smokescreen centered on itself. Then, the triggering effect is cured.</p>"
+      },
+      {
+        "slug": "smokescreen",
+        "name": "Smokescreen",
+        "type": "attack",
+        "traits": [
+          "hazard",
+          "blast-3"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: An Obscurring Cloud is created in the [Blast X] area for 5 rounds. An enemy creature that starts their activation in or enters a space containing an Obscurring Cloud Hazard gains @Affliction[blinded] 2.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: A negative stage effect is applied to the user</p><p>Effect: Connection - Smokescreen. The user freely uses Smokescreen with the blast centered on themselves. Then, the triggering effect is cured. Smokescreen Hazards created by the user do not affect the user or their allies.</p>",
+    "description": "<p>Trigger: A negative stage effect is applied to the user</p><p>Effect: Connection - Smokescreen. The user freely uses Smokescreen centered on itself. Then, the triggering effect is cured.</p><p>Passive: Smokescreen Hazards created by the user do not affect the user or their allies.</p>",
     "traits": [
       "defensive",
       "hazard",
