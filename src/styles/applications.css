@@ -4545,6 +4545,41 @@ body .application.sheet .form-group {
   height: 100%;
   overflow: hidden;
 }
+.application.sheet.modifier-popup main .variants select {
+  --option-height: 1.5rem;
+  min-height: calc(var(--option-height) * 2.8);
+  align-content: center;
+  overflow: hidden;
+}
+.application.sheet.modifier-popup main .variants select[size="3"] {
+  min-height: calc(var(--option-height) * 4);
+  overflow: auto;
+}
+.application.sheet.modifier-popup main .variants select option {
+  position: relative;
+  padding-left: 2rem;
+  height: calc(var(--option-height) + 2px);
+  align-content: center;
+  border: 1px solid var(--border-theme-color);
+  margin: 3px 0;
+  border-radius: 8px;
+}
+.application.sheet.modifier-popup main .variants select option::before {
+  content: '';
+  position: absolute;
+  height: var(--option-height);
+  width: var(--option-height);
+  left: 0;
+  top: 0;
+  background: var(--image-url, transparent);
+  background-size: contain;
+  border-radius: 7px 0 0 7px;
+}
+.application.sheet.modifier-popup main .variants select option:checked {
+  font-weight: bold;
+  color: var(--input-text-color);
+  background: rgba(0, 0, 0, 0.35);
+}
 .application.sheet.modifier-popup main fieldset {
   display: flex;
   flex-direction: column;

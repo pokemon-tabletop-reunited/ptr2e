@@ -17,6 +17,7 @@ import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { CheckContext, RollTarget } from "../data.ts";
 import { CheckRollContext } from "@system/rolls/data.ts";
 import { CheckPTR2e } from "../check.ts";
+import { AttackModifierPopup } from "@module/apps/modifier-popup/attack-modifier-popup.ts";
 
 class Statistic extends BaseStatistic {
     /** The `Statistic` from which this one was derived (set by `Statistic#extend`), or otherwise `null`. */
@@ -386,7 +387,9 @@ interface StatisticRollParameters<TCallback extends CheckRollCallback | AttackRo
 }
 
 interface AttackStatisticRollParameters extends StatisticRollParameters<AttackRollCallback> {
-    consumeAmmo?: boolean 
+  consumeAmmo?: boolean 
+  variants?: string[]
+  modifierDialog?: AttackModifierPopup
 }
 
 interface CheckDCReference {

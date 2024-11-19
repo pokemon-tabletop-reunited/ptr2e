@@ -127,6 +127,11 @@ export default class AttackPTR2e extends ActionPTR2e {
     };
   }
 
+  get variants(): string[] {
+    if(this.variant) return this.actor?.actions.attack.get(this.variant)?.variants ?? [];
+    return this.actor?.actions.attack.filter(a => a.variant == this.slug).map(a => a.slug) ?? [];
+  }
+
   // TODO: This should add any relevant modifiers
   get stab(): 0 | 1 | 1.5 {
     if (!this.actor) return 1;
