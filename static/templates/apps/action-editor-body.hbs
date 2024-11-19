@@ -9,7 +9,21 @@
                   {{formField fields.power value=source.power localize=true}}
                 {{/unless}}
                 {{formField fields.accuracy value=source.accuracy localize=true}}
-                {{formField fields.free value=action.free localize=true}}
+                {{formField fields.free value=source.free localize=true}}
+                {{#if variants}}
+                  <div class="form-group">
+                    <label>{{localize fields.defaultVariant.label}}</label>
+                    <div class="form-fields">
+                      <select name="defaultVariant">
+                        <option value=""></option>
+                        {{#each variants as |variant|}}
+                          <option value="{{variant.slug}}" {{#if (eq variant.slug ../source.defaultVariant)}}selected{{/if}}>{{variant.name}}</option>
+                        {{/each}}
+                      </select>
+                    </div>
+                    <p class="hint">{{localize fields.defaultVariant.hint}}</p>
+                  </div>
+                {{/if}}
             </fieldset>
         {{/if}}
         {{#if (eq action.type "summon")}}

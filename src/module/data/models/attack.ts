@@ -3,8 +3,10 @@ import { getTypes } from "@scripts/config/effectiveness.ts";
 import { ActionSchema } from "./action.ts";
 import { AttackStatistic } from "@system/statistics/attack.ts";
 import { AttackStatisticRollParameters } from "@system/statistics/statistic.ts";
-import { MovePTR2e } from "@item";
+// import { MovePTR2e } from "@item";
 import { ActorPTR2e } from "@actor";
+import { SlugField } from "../fields/slug-field.ts";
+import { AttackRollResult } from "@system/rolls/check-roll.ts";
 
 export default class AttackPTR2e extends ActionPTR2e {
   declare type: "attack" | "summon";
@@ -84,21 +86,19 @@ export default class AttackPTR2e extends ActionPTR2e {
         label: "PTR2E.FIELDS.summon.label",
         hint: "PTR2E.FIELDS.summon.hint",
         type: "Item"
-      })
+      }),
+      defaultVariant: new SlugField({ 
+        required: true, 
+        nullable: true, 
+        initial: null,
+        label: "PTR2E.FIELDS.defaultVariant.label",
+        hint: "PTR2E.FIELDS.defaultVariant.hint"
+      }),
     };
   }
 
   get isFree(): boolean {
-    if(!this.variant) return this.free;
-    
-    const original = (this.original as AttackPTR2e);
-    if(!original) {
-      console.warn(`The attack '${this.name}' is set as a variant of '${this.variant}', but it does not exist!`);
-      return false;
-    }
-    if(original.free) return true;
-    if(original.slot !== null && this.actor?.attacks.actions[original.slot] == original) return true;
-    return false;
+    return this.free;
   }
 
   static override validateJoint(data: AttackPTR2e["_source"]) {
@@ -127,6 +127,10 @@ export default class AttackPTR2e extends ActionPTR2e {
     };
   }
 
+  get hasVariants(): boolean {
+    return this.variants.length > 0;
+  }
+
   get variants(): string[] {
     if(this.variant) return this.actor?.actions.attack.get(this.variant)?.variants ?? [];
     return this.actor?.actions.attack.filter(a => a.variant == this.slug).map(a => a.slug) ?? [];
@@ -151,20 +155,17 @@ export default class AttackPTR2e extends ActionPTR2e {
     return actor?.getAttackStat(this) ?? 0;
   }
 
-  async roll(args?: AttackStatisticRollParameters) {
+  async roll(args?: AttackStatisticRollParameters): Promise<AttackRollResult['rolls'][] | null | false> {
     if (!this.rollable) return false;
+    if(!args?.modifierDialog && !this.variant && this.defaultVariant) {
+      const variant = this.actor?.actions.attack.get(this.defaultVariant);
+      if(variant) return variant.roll(args);
+    } 
     return this.statistic!.check.roll(args);
   }
 
   override prepareDerivedData(): void {
     super.prepareDerivedData();
-
-    if (
-      this.item.type === "move" &&
-      (this.item as MovePTR2e).system.attack.slug !== this.slug
-    ) {
-      this.free = true;
-    }
 
     this.statistic = this.prepareStatistic();
   }
@@ -252,4 +253,5 @@ interface AttackSchema extends foundry.data.fields.DataSchema {
   free: foundry.data.fields.BooleanField<boolean, boolean>;
   slot: foundry.data.fields.NumberField<number, number, true, true, true>;
   summon: foundry.data.fields.DocumentUUIDField<string>;
+  defaultVariant: SlugField<string, string, true, true, true>;
 }
