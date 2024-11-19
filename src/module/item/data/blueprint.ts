@@ -484,7 +484,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       })();
 
       const items = (() => {
-        const items = [];
+        const items: Record<string, unknown>[] = [];
         if (moves.length) items.push(...moves);
         if (abilities.length) items.push(...abilities);
         return items;
@@ -503,6 +503,16 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         );
         return resolver?.result || "icons/svg/mystery-man.svg";
       })();
+
+      // Add species item
+      items.push({
+        name: evolution.slug ? Handlebars.helpers.formatSlug(evolution.slug) : evolution.name,
+        type: 'species',
+        img: img,
+        system: evolution,
+        _id: "actorspeciesitem"
+      })
+
       //TODO: Decouple this.
       const tokenImage = img;
 
@@ -524,7 +534,6 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           },
           nature,
           gender,
-          species: evolution,
           party: {
             ownerOf: blueprint.owner ? options.folder?.id : undefined,
             partyMemberOf: hasOwner ? blueprint.owner ? null : options.folder?.id : null,

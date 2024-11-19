@@ -345,3 +345,6 @@ export class MigrationRunner extends MigrationRunnerBase {
         await game.settings.set("ptr2e", "worldSchemaVersion", schemaVersion.latest);
     }
 }
+
+//@ts-expect-error - temporary
+window.MigrationRunner = MigrationRunner;

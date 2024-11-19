@@ -216,18 +216,18 @@ class ItemPTR2e<
     const actor = context?.parent as ActorPTR2e | null;
     if (!actor) return super.createDocuments<TDocument>(data, context);
 
-    const specialTypes = ["species"];
+    // const specialTypes = ["species"];
 
-    for (const source of sources) {
-      if (specialTypes.includes(source.type as string)) {
-        switch (source.type) {
-          case "species": {
-            return [];
-          }
-        }
-        return [];
-      }
-    }
+    // for (const source of sources) {
+    //   if (specialTypes.includes(source.type as string)) {
+    //     switch (source.type) {
+    //       case "species": {
+    //         return [];
+    //       }
+    //     }
+    //     return [];
+    //   }
+    // }
     
     async function processSources(sources: ItemSourcePTR2e[]) {
       const outputItemSources: ItemSourcePTR2e[] = [];
@@ -346,7 +346,7 @@ class ItemPTR2e<
   override async update(data: Record<string, unknown>, context?: DocumentModificationContext<TParent> | undefined): Promise<this | undefined> {
     if (!(this.system instanceof SpeciesSystemModel && this.system.virtual) && !this.flags.ptr2e.virtual) return super.update(data, context);
 
-    await this.actor?.update({ "system.species": fu.expandObject(data).system });
+    await this.actor?.updateEmbeddedDocuments("Item", [{ _id: "actorspeciesitem", "system.species": fu.expandObject(data).system }]);
     this.updateSource(data);
     foundry.applications.instances.get(`SpeciesSheet-${this.uuid}`)?.render({});
     return undefined;

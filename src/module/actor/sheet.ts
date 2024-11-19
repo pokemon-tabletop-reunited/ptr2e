@@ -110,7 +110,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       actions: {
         "species-header": async function (this: ActorSheetPTRV2, event: Event) {
           event.preventDefault();
-          const species = this.actor.system.species!;
+          const species = this.actor.species!;
           const sheet = new SpeciesDropSheet((item) => {
             if (!item) return;
             if (
@@ -123,27 +123,11 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             if (item.slug !== species.slug) {
               const species = item.toObject().system;
               species.slug ||= sluggify(item.name);
-              this.actor.update({ "system.species": species });
+              this.actor.items.get("actorspeciesitem")?.update({"system": species});
             }
           });
-          sheet.species = new CONFIG.Item.documentClass(
-            {
-              _id: "actorSpeciesItem",
-              name: species.slug
-                ? Handlebars.helpers.formatSlug(species.slug)
-                : this.actor.name,
-              type: "species",
-              img: this.actor.img,
-              flags: {
-                ptr2e: {
-                  disabled: !this.actor.system._source.species,
-                  virtual: true,
-                },
-              },
-              system: species.toObject(),
-            },
-            { parent: this.document }
-          ) as SpeciesPTR2e;
+          sheet.species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e
+          if(!sheet.species) return void ui.notifications.error("PTR2E | Actor does not have a species item. Please run Migration 0.109.");
           sheet.render(true);
         },
         "open-inspector": async function (this: ActorSheetPTRV2, event: Event) {

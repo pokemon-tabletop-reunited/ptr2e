@@ -30,6 +30,7 @@ import { preImportJSON } from "@module/data/doc-helper.ts";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import MoveSystem from "@item/data/move.ts";
+import SpeciesSystem from "@item/data/species.ts";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -109,6 +110,10 @@ class ActorPTR2e<
       this.system.battleStats.evasion.stage +
       this.system.battleStats.critRate.stage
     );
+  }
+
+  get species() {
+    return this._species ??= (this.items.get("actorspeciesitem")?.system as Maybe<SpeciesSystem>) ?? this.system.species ?? null;
   }
 
   /** The recorded schema version of this actor, updated after each data migration */
@@ -212,6 +217,7 @@ class ActorPTR2e<
 
     this._party = null;
     this._perks = null;
+    this._species = null;
 
     this.rollOptions = new RollOptionManager(this);
 
@@ -296,7 +302,7 @@ class ActorPTR2e<
    * */
   override prepareEmbeddedDocuments() {
     if (this.type === "ptu-actor") return super.prepareEmbeddedDocuments();
-    return super.prepareEmbeddedDocuments();
+    super.prepareEmbeddedDocuments();
   }
 
   /**
@@ -456,6 +462,9 @@ class ActorPTR2e<
    */
   override applyActiveEffects() {
     if (this.type === "ptu-actor") return;
+    // First finish preparing embedded documents based on System Information
+    this.system.prepareEmbeddedDocuments();
+
     this.statuses ??= new Set();
 
     // Identify which special statuses had been active
@@ -790,10 +799,6 @@ class ActorPTR2e<
 
   isPokemon(): this is ActorPTR2e<PokemonActorSystem> {
     return this.type === "pokemon";
-  }
-
-  hasEmbeddedSpecies(): boolean {
-    return !!this.system._source.species;
   }
 
   isAllyOf(actor: ActorPTR2e): boolean {
@@ -1496,7 +1501,7 @@ class ActorPTR2e<
   ): Promise<boolean | void> {
     if (changed.system?.party?.ownerOf) {
       const folder = game.folders.get(changed.system.party.ownerOf as Maybe<string>) as FolderPTR2e;
-      if (folder?.owner && folder.owner !== this.uuid) {
+      if (folder?.owner && !this.uuid?.endsWith(folder.owner)) {
         throw new Error("Cannot change the owner of a party folder to an actor that does not own it. Please remove the current party owner first.");
       }
     }
@@ -1573,7 +1578,7 @@ class ActorPTR2e<
     }
 
     if (changed.system?.advancement?.experience?.current !== undefined) {
-      if (this.system.species?.moves?.levelUp?.length) {
+      if (this.species?.moves?.levelUp?.length) {
         // Check if level-up occurs
         const newExperience = Number(changed.system.advancement.experience.current);
         const nextExperienceThreshold = this.system.advancement.experience.next;
@@ -1581,7 +1586,7 @@ class ActorPTR2e<
           const level = this.system.getLevel(newExperience);
           const currentLevel = this.system.advancement.level;
 
-          const newMoves = this.system.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
+          const newMoves = this.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
           if (newMoves.length) {
             const moves = (await Promise.all(newMoves.map(move => fromUuid<ItemPTR2e<MoveSystem>>(move.uuid)))).flatMap(move => move ?? []);
             changed.items ??= [];
@@ -1829,6 +1834,7 @@ interface ActorPTR2e<
   }
 
   skills: Record<string, Statistic>;
+  _species: SpeciesSystem | null;
 
   get itemTypes(): Record<string, ItemPTR2e[]>;
 

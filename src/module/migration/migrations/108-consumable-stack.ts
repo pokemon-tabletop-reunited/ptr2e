@@ -13,7 +13,7 @@ export class Migration108ConsumableStack extends MigrationBase {
         .filter((t: string)=>t.match(/^stack-[0-9]+$/))
         .map((t: string)=>parseInt(t.substring(6)))
         .filter((stack)=>!isNaN(stack))
-        // @ts-expect-error
+        // @ts-expect-error - This is valid
         .reduce(Math.max, 1)
     if (stackValue > 1) {
         source.system.stack = stackValue;

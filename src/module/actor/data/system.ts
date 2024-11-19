@@ -4,7 +4,6 @@ import {
   ActorPTR2e,
   Attribute,
   Attributes,
-  HumanoidActorSystem,
 } from "@actor";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
@@ -271,7 +270,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     addDataFieldMigration(source, "health.shield", "shield");
 
     // Migrate species Abilities data to the new format
-    if (source.species) {
+    if (source.species?.abilities) {
       for (const abGroup of Object.keys(source.species.abilities)) {
         source.species.abilities[abGroup] = (source.species.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g => {
           if (typeof g == "object") return g;
@@ -307,7 +306,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   override prepareBaseData(): void {
     super.prepareBaseData();
     this._initializeModifiers();
-    this._prepareSpeciesData();
+    // this._prepareSpeciesData();
 
     this.details.alliance = ["party", "opposition", null].includes(this.details.alliance as string)
       ? this.details.alliance
@@ -356,27 +355,6 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.advancement.advancementPoints.total = this.parent.isHumanoid() ? (19 + this.advancement.level) : (10 + Math.floor(this.advancement.level / 2));
     this.advancement.advancementPoints.spent = 0;
 
-    for (const k in this.attributes) {
-      const key = k as keyof Attributes;
-      if (this.species?.stats[key]) {
-        if (this.parent.isHumanoid()) this.attributes[key].base ??= this.species.stats[key];
-        else this.attributes[key].base = this.species.stats[key];
-      }
-      if (this.attributes[key].base === undefined) this.attributes[key].base = 40;
-      this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
-    }
-
-    for (const skill of this.skills) {
-      skill.prepareBaseData();
-    }
-    for (const skill of game.ptr.data.skills) {
-      if (!this.skills.has(skill.slug)) {
-        const newSkill = new SkillPTR2e(fu.duplicate(skill), { parent: this });
-        newSkill.prepareBaseData();
-        this.skills.set(newSkill.slug, newSkill);
-      }
-    }
-
     this.health.max = this.attributes.hp.value;
     this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
@@ -403,25 +381,11 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   }
 
   _prepareSpeciesData() {
-    // If the species is not set, they are a humanoid, construct species data for Humanoids.
-    if (!this._source.species) {
-      if (this.parent.isHumanoid()) {
-        this.species = HumanoidActorSystem.constructSpecies(this);
-      } else {
-        const e = new Error("Species not set for non-humanoid actor");
-        (this.parent as ActorPTR2e).synthetics.preparationWarnings.add(e.message);
-        Hooks.onError("ActorSystemPTR2e#_prepareSpeciesData", e, {
-          data: this._source.species ?? undefined,
-        });
-        return;
-      }
-    } else {
-      this.species = new SpeciesSystemModel(this._source.species, { parent: this.parent, virtual: true });
-    }
-    this.species.prepareBaseData();
+    if(!this.parent.species?.prepareBaseData) return;
+    this.parent.species.prepareBaseData();
 
     // Add species traits to actor traits
-    for (const trait of this.species.traits.values()) {
+    for (const trait of this.parent.species.traits.values()) {
       if (!this.traits.has(trait.slug)) {
         this.traits.set(trait.slug, {
           ...trait,
@@ -430,15 +394,15 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       }
     }
 
-    for (const type of this.species.types.values()) {
+    for (const type of this.parent.species.types.values()) {
       this.type.types.add(type);
       if (this.type.types.size > 1 && this.type.types.has("untyped"))
         this.type.types.delete("untyped");
     }
 
     this.movement = Object.fromEntries([
-      ...this.species.movement.primary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "primary" }]),
-      ...this.species.movement.secondary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "secondary" }])
+      ...this.parent.species.movement.primary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "primary" }]),
+      ...this.parent.species.movement.secondary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "secondary" }])
     ]);
 
     // Every creature has a base overland of 3 at least.
@@ -447,9 +411,36 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
   }
 
+  prepareEmbeddedDocuments(): void {
+    this._prepareSpeciesData();
+
+    // Prepare any 'Base' data that (may) need Species Info
+    for (const k in this.attributes) {
+      const key = k as keyof Attributes;
+      if (this.parent.species?.stats[key]) {
+        if(this.parent.isHumanoid()) this.attributes[key].base ??= this.parent.species.stats[key];
+        if(this.parent.isPokemon()) this.attributes[key].base = this.parent.species.stats[key];
+      }
+      if (this.attributes[key].base === undefined) this.attributes[key].base = 40;
+      this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
+    }
+
+    for (const skill of this.skills) {
+      skill.prepareBaseData();
+    }
+    for (const skill of game.ptr.data.skills) {
+      if (!this.skills.has(skill.slug)) {
+        const newSkill = new SkillPTR2e(fu.duplicate(skill), { parent: this });
+        newSkill.prepareBaseData();
+        this.skills.set(newSkill.slug, newSkill);
+      }
+    }
+  }
+
   override prepareDerivedData(): void {
     super.prepareDerivedData();
     this.species?.prepareDerivedData?.();
+    this.parent.species?.prepareDerivedData?.();
 
     // Calculate bonus RVs if applicable
     const isAce = this.traits.has("ace");
@@ -465,7 +456,6 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     for (const k in this.attributes) {
       const key = k as keyof Attributes;
-      // if (this.species?.stats[key]) this.attributes[key].base = this.species.stats[key];
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
       const modifier = this.modifiers[`${key}Multiplier`];
       if (modifier && !isNaN(modifier) && modifier !== 1) {
@@ -519,7 +509,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
 
     /** Calculate HP */
-    const bulkMod = Math.pow(1 + ((Math.exp(1) - 1) / Math.pow(Math.PI, 3)), (this.species?.size.sizeClass || 1) - 1);
+    const bulkMod = Math.pow(1 + ((Math.exp(1) - 1) / Math.pow(Math.PI, 3)), (this.parent.species?.size.sizeClass || 1) - 1);
 
     return Math.floor(
       (Math.floor(((2 * stat.base + stat.ivs + stat.evs / 4) * level * bulkMod) / 100) +
