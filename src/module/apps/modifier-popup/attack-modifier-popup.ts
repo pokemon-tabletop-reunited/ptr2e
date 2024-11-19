@@ -221,7 +221,7 @@ export class AttackModifierPopup extends ModifierPopup {
         }  
       }
 
-      const variants = Array.from(variantMap.values());
+      const variants = Array.from(variantMap.values()).sort((a, b) => a.label.localeCompare(b.label));
       if(!original) {
         const original = this.context.actor.actions.attack.get(variants[0].slug)!.original as AttackPTR2e;
         if(!original) return null;

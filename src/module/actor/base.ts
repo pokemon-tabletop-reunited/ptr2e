@@ -366,9 +366,9 @@ class ActorPTR2e<
 
   generateFlingAttack() {
     function getFlingAttack(
-      {name, slug, power = 25, accuracy = 100, types = ["untyped"], free = false, variant = true, description = ""}: 
-      {name?: string, slug?: string, power?: number, accuracy?: number, types?: DeepPartial<AttackPTR2e['_source']['types']>, free?: boolean, variant?: boolean, description?: string}
-      = {name: "", slug: "", power: 25, accuracy: 100, types: ["untyped"], free: false, variant: true, description: ""}
+      {name, slug, power = 25, accuracy = 100, types = ["untyped"], free = false, variant = true, description = "", id=""}: 
+      {name?: string, slug?: string, power?: number, accuracy?: number, types?: DeepPartial<AttackPTR2e['_source']['types']>, free?: boolean, variant?: boolean, description?: string, id?: string}
+      = {name: "", slug: "", power: 25, accuracy: 100, types: ["untyped"], free: false, variant: true, description: "", id:""}
     ): DeepPartial<AttackPTR2e['_source']> {
       return {
         slug: `fling${name?.length ? `-${slug}` : ""}`,
@@ -396,7 +396,8 @@ class ActorPTR2e<
         description: description ? description : "<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item. When using Fling utilizing a Held creature, Fling's Power and Accuracy are as follows:</p><blockquote>Power = 20 + (userLift / 4) + (thrownWC * 3)<br>Accuracy = 75 + (userLift / 5) + userCatMod - (4 * thrownCatMod)<br>Range = 8 + (userLift / 6) + userCatMod - (2* thrownCatMod)</blockquote>",
         variant: variant ? "fling" : null,
         free,
-        img: "systems/ptr2e/img/svg/untyped_icon.svg"
+        img: "systems/ptr2e/img/svg/untyped_icon.svg",
+        ...(id ? { flingItemId: id } : {})
       }
     }
     const data = {
@@ -426,12 +427,13 @@ class ActorPTR2e<
       if(!["consumable", "equipment", "gear", "weapon"].includes(item.type)) continue;
       if(!item.system.fling) continue;
       if(itemNames.has(item.slug)) continue;
+      if(item.system.quantity !== undefined && typeof item.system.quantity === 'number' && item.system.quantity <= 0) continue;
       itemNames.add(item.slug);
 
       const flingData = item.system.fling as { power: number, accuracy: number, type: PokemonType, hide: boolean };
       if(flingData.hide) continue;
 
-      data.system.actions.push(getFlingAttack({name: item.name, slug: item.slug, power: flingData.power, accuracy: flingData.accuracy, types: [flingData.type],
+      data.system.actions.push(getFlingAttack({name: item.name, slug: item.slug, power: flingData.power, accuracy: flingData.accuracy, types: [flingData.type], id: item.id,
         description: `<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item.</p><p>This fling variant is based on ${item.link}</p>`
       }));
     }

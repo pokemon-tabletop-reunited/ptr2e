@@ -99,6 +99,13 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
     }
 
     override prepareDerivedData(): void {
+      super.prepareDerivedData();
+
+      // Pokeballs should never be hidden from fling dialog
+      if('consumableType' in this && this.consumableType == "pokeball") {
+        this.fling.hide = false;
+        return;
+      }
       // If the fling 'hide' mode is not set, and the values are the default fling values, set 'hide' to true
       if(this.fling?.hide === null && (!this.fling.power || this.fling.power === 25) && (!this.fling.accuracy || this.fling.accuracy === 100) && (!this.fling.type || this.fling.type === PTRCONSTS.Types.UNTYPED)) {
         this.fling.hide = true;

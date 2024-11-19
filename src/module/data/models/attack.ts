@@ -94,6 +94,13 @@ export default class AttackPTR2e extends ActionPTR2e {
         label: "PTR2E.FIELDS.defaultVariant.label",
         hint: "PTR2E.FIELDS.defaultVariant.hint"
       }),
+      flingItemId: new foundry.data.fields.StringField({
+        required: true,
+        nullable: true,
+        initial: null,
+        label: "PTR2E.FIELDS.flingItemId.label",
+        hint: "PTR2E.FIELDS.flingItemId.hint",
+      })
     };
   }
 
@@ -254,4 +261,5 @@ interface AttackSchema extends foundry.data.fields.DataSchema {
   slot: foundry.data.fields.NumberField<number, number, true, true, true>;
   summon: foundry.data.fields.DocumentUUIDField<string>;
   defaultVariant: SlugField<string, string, true, true, true>;
+  flingItemId: foundry.data.fields.StringField<string, string, true, true, true>;
 }

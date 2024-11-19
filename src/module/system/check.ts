@@ -1,5 +1,5 @@
 import { ChatMessagePTR2e } from "@chat";
-import { ConsumablePTR2e } from "@item";
+import { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithFlingStats } from "@item";
 import { ModifierPopup } from "@module/apps/modifier-popup/modifier-popup.ts";
 import { AttackCheckModifier, CheckModifier, ModifierPTR2e } from "@module/effects/modifiers.ts";
 import { RollNote } from "@system/notes.ts";
@@ -459,6 +459,24 @@ class CheckPTR2e {
         await item.delete();
       }
     }
+
+    if(!context.isReroll && context.action?.startsWith("fling")) {
+        const fling = context.actor?.actions.attack.get(context.action);
+        if(fling?.flingItemId) {
+          const flingItem = context.actor?.items.get(fling.flingItemId) as Maybe<ItemPTR2e<ItemSystemsWithFlingStats>>;
+          if(flingItem) {
+            if(flingItem.system.quantity >= 1) {
+              await flingItem.update({ "system.quantity": flingItem.system.quantity - 1 });
+              ui.notifications.info(game.i18n.format("PTR2E.AttackWarning.FlingItemConsumed", { name: flingItem.name, quantity: flingItem.system.quantity }));
+            }
+            //TODO: Add setting for auto-delete.
+            // else {
+            //   await flingItem.delete();
+            //   ui.notifications.info(game.i18n.format("PTR2E.AttackWarning.FlingItemDestroyed", { name: flingItem.name }));
+            // }
+          }
+        }
+      }
 
     if (effectsToApply.length) {
       await context.actor?.applyRollEffects(effectsToApply);

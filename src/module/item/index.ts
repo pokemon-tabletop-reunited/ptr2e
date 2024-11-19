@@ -57,6 +57,12 @@ export type ItemSystemsWithActions =
     | data.WeaponSystemModel
     | data.SummonSystemModel;
 
+export type ItemSystemsWithFlingStats =
+    | data.ConsumableSystemModel
+    | data.EquipmentSystemModel
+    | data.GearSystemModel
+    | data.WeaponSystemModel;
+
 export type ItemSourcePTR2e =
     | data.AbilitySystemSource
     | data.BlueprintSystemSource
