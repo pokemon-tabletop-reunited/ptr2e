@@ -359,6 +359,94 @@ class ActorPTR2e<
 
       this.abilities.entries[ability.system.slot] = ability;
     }
+
+    // Create Fling Action
+    this.generateFlingAttack();
+  }
+
+  generateFlingAttack() {
+    function getFlingAttack(
+      {name, slug, power = 25, accuracy = 100, types = ["untyped"], free = false, variant = true, description = ""}: 
+      {name?: string, slug?: string, power?: number, accuracy?: number, types?: DeepPartial<AttackPTR2e['_source']['types']>, free?: boolean, variant?: boolean, description?: string}
+      = {name: "", slug: "", power: 25, accuracy: 100, types: ["untyped"], free: false, variant: true, description: ""}
+    ): DeepPartial<AttackPTR2e['_source']> {
+      return {
+        slug: `fling${name?.length ? `-${slug}` : ""}`,
+        name: `Fling${name?.length ? ` (${name})` : ""}`,
+        type: "attack",
+        traits: [
+          "adaptable",
+          "basic",
+          "fling",
+          "pp-updated"
+        ],
+        range: {
+          target: "creature",
+          distance: 10,
+          unit: "m"
+        },
+        cost: {
+          activation: "complex",
+          powerPoints: 0
+        },
+        category: "physical",
+        power: power || 25,
+        accuracy: accuracy || 100,
+        types: types?.length ? types : ["untyped"],
+        description: description ? description : "<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item. When using Fling utilizing a Held creature, Fling's Power and Accuracy are as follows:</p><blockquote>Power = 20 + (userLift / 4) + (thrownWC * 3)<br>Accuracy = 75 + (userLift / 5) + userCatMod - (4 * thrownCatMod)<br>Range = 8 + (userLift / 6) + userCatMod - (2* thrownCatMod)</blockquote>",
+        variant: variant ? "fling" : null,
+        free,
+        img: "systems/ptr2e/img/svg/untyped_icon.svg"
+      }
+    }
+    const data = {
+      "name": "Fling",
+      "type": "move",
+      "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+      "system": {
+        "slug": "fling",
+        "description": "<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item. When using Fling utilizing a Held creature, Fling's Power and Accuracy are as follows:</p><blockquote>Power = 20 + (userLift / 4) + (thrownWC * 3)<br>Accuracy = 75 + (userLift / 5) + userCatMod - (4 * thrownCatMod)<br>Range = 8 + (userLift / 6) + userCatMod - (2* thrownCatMod)</blockquote>",
+        "traits": [
+          "adaptable",
+          "basic",
+          "fling"
+        ],
+        "actions": [getFlingAttack({
+          free: true,
+          variant: false
+        })],
+        "grade": "E"
+      },
+      "_id": "flingattackitem0",
+      "effects": []
+    };
+    
+    const itemNames = new Set<string>();
+    for(const item of this.items?.contents as unknown as ItemPTR2e[]) {
+      if(!["consumable", "equipment", "gear", "weapon"].includes(item.type)) continue;
+      if(!item.system.fling) continue;
+      if(itemNames.has(item.slug)) continue;
+      itemNames.add(item.slug);
+
+      const flingData = item.system.fling as { power: number, accuracy: number, type: PokemonType, hide: boolean };
+      if(flingData.hide) continue;
+
+      data.system.actions.push(getFlingAttack({name: item.name, slug: item.slug, power: flingData.power, accuracy: flingData.accuracy, types: [flingData.type],
+        description: `<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item.</p><p>This fling variant is based on ${item.link}</p>`
+      }));
+    }
+
+    const existing = this.items.get(data._id) as Maybe<ItemPTR2e<MoveSystem, this>>;
+    if(existing) {
+      existing.updateSource(data);
+      existing.reset();
+      this.fling = existing;
+    }
+    else {
+      this.fling = new ItemPTR2e(data, { parent: this });
+    }
+
+    this.items.set(this.fling.id, this.fling);
   }
 
   /**
@@ -419,14 +507,14 @@ class ActorPTR2e<
   }
 
   override *allApplicableEffects(): Generator<ActiveEffectPTR2e<this>> {
-    if(game.ready) {
+    if (game.ready) {
       const combatant = this.combatant;
-      if(combatant) {
+      if (combatant) {
         const summons = combatant.parent?.summons;
-        if(summons?.length) {
-          for(const summon of summons) {
-            for(const effect of summon.system.getApplicableEffects(this)) {
-              yield new ActiveEffectPTR2e(effect.toObject(), {parent: this}) as ActiveEffectPTR2e<this>;
+        if (summons?.length) {
+          for (const summon of summons) {
+            for (const effect of summon.system.getApplicableEffects(this)) {
+              yield new ActiveEffectPTR2e(effect.toObject(), { parent: this }) as ActiveEffectPTR2e<this>;
             }
           }
         }
@@ -1741,6 +1829,8 @@ interface ActorPTR2e<
   skills: Record<string, Statistic>;
 
   get itemTypes(): Record<string, ItemPTR2e[]>;
+
+  fling: ItemPTR2e<MoveSystem, this>;
 }
 
 type ActorFlags2e = ActorFlags & {

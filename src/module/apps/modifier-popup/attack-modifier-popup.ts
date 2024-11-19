@@ -227,7 +227,7 @@ export class AttackModifierPopup extends ModifierPopup {
         if(!original) return null;
         variants.unshift({
           slug: original.slug,
-          label: `${original.name} (Original)`,
+          label: original.slug === 'fling' ? `${original.name} (No Item)` :`${original.name} (Original)`,
           category: original.category,
           uuid: original.uuid,
           ...(!selected ? {selected: true} : {})
