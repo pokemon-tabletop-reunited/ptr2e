@@ -9,8 +9,27 @@
           "healing"
         ],
         "name": "Cheek Pouch",
-        "slug": "cheek-pouch",
-        "type": "passive",
+        "slug": "cheek-pouch-active",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user consumes a [Food] item.</p>"
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user consumes a [Food] item.</p><p>Effect: The user recovers 5 Ticks of HP in addition to the [Food] item's effect.</p>"
+      },
+      {
+        "traits": [],
+        "name": "Cheek Pouch",
+        "slug": "cheek-pouch-passive",
+        "type": "generic",
         "cost": {
           "activation": "free",
           "powerPoints": 0,
@@ -22,10 +41,10 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Effect: Whenever the user consumes a [Food] item, they recover 5 Ticks of HP in addition to the [Food] item's effect.</p>"
+        "description": "<p>Effect: The user possesses an additional [Stash] Slot.</p>"
       }
     ],
-    "description": "<p>Effect: Whenever the user consumes a [Food] item, they recover 5 Ticks of HP in addition to the [Food] item's effect.</p>",
+    "description": "<p>Effect: Whenever the user consumes a [Food] item, they recover 5 Ticks of HP in addition to the [Food] item's effect.</p><p>Passive: The user possesses an additional [Stash] Slot.</p>",
     "traits": [
       "healing"
     ],
