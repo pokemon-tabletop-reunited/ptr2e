@@ -7,14 +7,15 @@
       {
         "traits": [
           "legendary",
-          "defensive"
+          "defensive",
+          "interrupt-5"
         ],
         "name": "Event Horizon",
         "slug": "event-horizon",
         "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
+          "powerPoints": 3,
           "trigger": "<p>The user is hit with a [Contact] attack.</p>"
         },
         "range": {
@@ -22,11 +23,11 @@
           "distance": 10,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user is hit with a [Contact] attack.</p><p>Effect: The attacker gains Trapped 5.</p>",
+        "description": "<p>Trigger: The user is hit with a [Contact] attack.</p><p>Effect: The attacker gains @Affliction[stuck] 5, @Affliction[stuck] 5, and @Affliction[splinter]5.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Trigger: The user is hit with a [Contact] attack.</p><p>Effect: The attacker gains Trapped 5.</p>",
+    "description": "<p>Trigger: The user is hit with a [Contact] attack.</p><p>Effect: The attacker gains @Affliction[stuck] 5 and @Affliction[splinter]5.</p>",
     "traits": [
       "legendary",
       "defensive"
@@ -50,6 +51,17 @@
             "type": "roll-effect",
             "key": "contact-trait-attack",
             "value": "Compendium.ptr2e.core-effects.Item.stuckconditiitem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "origin",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.splinterconditem",
             "predicate": [],
             "chance": 100,
             "affects": "origin",

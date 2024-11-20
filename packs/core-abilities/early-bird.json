@@ -5,9 +5,30 @@
   "system": {
     "actions": [
       {
+        "traits": [
+          "interrupt-1"
+        ],
+        "name": "Early Bird",
+        "slug": "early-bird-active",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user loses the  the @Affliction[drowsy] Affliction.</p>"
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user loses the  the @Affliction[drowsy] Affliction.</p><p>Effect: The user freely move 4m using the Movement Score of its choice.</p>"
+      },
+      {
         "traits": [],
         "name": "Early Bird",
-        "slug": "early-bird",
+        "slug": "early-bird-passive",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -23,7 +44,7 @@
         "description": "<p>Effect: The user's @Affliction[drowsy] Affliction ticks down one extra Stack per Activation. When the user loses the @Affliction[drowsy] Affliction, it may freely move 4m of a Movement speed of its choice.</p>"
       }
     ],
-    "description": "<p>Effect: The user's @Affliction[drowsy] Affliction ticks down one extra Stack per Activation. When the user loses the @Affliction[drowsy] Affliction, it may freely move 4m of a Movement speed of its choice.</p>",
+    "description": "<p>Effect: The user's @Affliction[drowsy] Affliction ticks down one extra Stack per Activation. When the user loses the @Affliction[drowsy] Affliction, it may freely move 4m using the Movement Score of its choice.</p>",
     "traits": [],
     "slug": null,
     "container": null

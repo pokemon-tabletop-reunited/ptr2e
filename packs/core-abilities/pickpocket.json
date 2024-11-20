@@ -5,26 +5,6 @@
   "system": {
     "actions": [
       {
-        "traits": [
-          "connection"
-        ],
-        "name": "Pickpocket",
-        "slug": "pickpocket",
-        "type": "generic",
-        "cost": {
-          "activation": "free",
-          "powerPoints": 2,
-          "trigger": "<p>The user uses Thief.</p>"
-        },
-        "range": {
-          "target": "object",
-          "distance": 1,
-          "unit": "m"
-        },
-        "description": "<p>Trigger: The user uses Thief.</p><p>Effect: Items stolen with Thief are now added to the user's inventory instead of being dropped on the ground if the user's Equipment Slots are full. If the user is an owned Pokemon, the user freely uses Fling with 0 Power to throw the item towards their Trainer.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
         "slug": "thief",
         "name": "Thief",
         "type": "attack",
@@ -55,9 +35,42 @@
         "contestEffect": "",
         "free": true,
         "slot": null
+      },
+      {
+        "slug": "thief-pickpocket",
+        "name": "Thief (Pickpocket)",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "<p>Effect: On hit, the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bewstow the item to an allied creature.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "thief",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "<p>Trigger: The user uses Thief. Effect: Connection - Thief. Items stolen with Thief are now added to the user's inventory instead of being dropped on the ground if the user's Equipment Slots are full. If the user is an owned Pokemon, the user freely uses Fling with 0 Power to throw the item towards their Trainer.</p>",
+    "description": "<p>Effect: Connection - Thief. On hitting with Thief (Pickpocket), the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bewstow the item to an allied creature.</p>",
     "traits": [
       "connection"
     ],
