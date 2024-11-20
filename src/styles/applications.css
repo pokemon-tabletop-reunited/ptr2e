@@ -201,21 +201,24 @@ body .application.sheet .form-group {
   grid-area: level;
 }
 .application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button,
-.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown {
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown,
+.application.sheet.actor.v2 .window-content aside.sidebar .species-link {
   display: flex;
   justify-content: center;
   flex: 1;
   align-items: center;
 }
 .application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button,
-.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button {
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button,
+.application.sheet.actor.v2 .window-content aside.sidebar .species-link button {
   flex: 0 0 70%;
   height: min-content;
   line-height: 1.2rem;
   padding: 0.25rem 0.5rem;
 }
 .application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button:has(small.unspent),
-.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button:has(small.unspent) {
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button:has(small.unspent),
+.application.sheet.actor.v2 .window-content aside.sidebar .species-link button:has(small.unspent) {
   animation: glow 1s infinite alternate;
 }
 @keyframes glow {
@@ -227,15 +230,18 @@ body .application.sheet .form-group {
   }
 }
 .application.sheet.actor.v2 .window-content aside.sidebar .perk-web-button button small.unspent,
-.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button small.unspent {
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown button small.unspent,
+.application.sheet.actor.v2 .window-content aside.sidebar .species-link button small.unspent {
   font-size: 10px;
 }
-.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown {
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown,
+.application.sheet.actor.v2 .window-content aside.sidebar .species-link {
   border-bottom: 1px solid var(--border-theme-color);
   flex: 0;
-  padding: 0.25rem;
+  padding: 0.35rem;
 }
-.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown label {
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown label,
+.application.sheet.actor.v2 .window-content aside.sidebar .species-link label {
   color: var(--hint-text-color);
   flex: 0 0 35%;
   align-content: center;
@@ -243,7 +249,8 @@ body .application.sheet .form-group {
   font-size: 12px;
   padding-left: 1rem;
 }
-.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown select {
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown select,
+.application.sheet.actor.v2 .window-content aside.sidebar .species-link select {
   flex: 1 0 40%;
   align-self: center;
   align-content: center;
@@ -251,6 +258,13 @@ body .application.sheet .form-group {
   height: min-content;
   line-height: 1.2rem;
   padding: 0.25rem;
+}
+.application.sheet.actor.v2 .window-content aside.sidebar .nature-dropdown span.species,
+.application.sheet.actor.v2 .window-content aside.sidebar .species-link span.species {
+  flex: 1 0 40%;
+  align-self: center;
+  align-content: center;
+  text-align: center;
 }
 .application.sheet.actor.v2 .window-content .tab.active {
   grid-area: main;

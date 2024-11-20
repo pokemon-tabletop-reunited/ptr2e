@@ -1,7 +1,5 @@
 import { AbilityPTR2e, ItemPTR2e, ItemSystemPTR, SpeciesPTR2e } from "@item";
 import ActorPTR2e from "./base.ts";
-import { SpeciesDropSheet } from "./sheets/species-drop-sheet.ts";
-import { SpeciesSystemModel } from "@item/data/index.ts";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { Tab } from "@item/sheets/document.ts";
 import { ActorComponentKey, ActorComponents, ComponentPopout } from "./components/sheet.ts";
@@ -53,18 +51,12 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       classes: ["ptr2e", "sheet", "actor", "v2"],
       position: {
         width: 900,
-        height: 660,
+        height: 680,
       },
       window: {
         resizable: true,
         controls: [
           ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
-          {
-            icon: "fas fa-paw",
-            label: "PTR2E.ActorSheet.Species",
-            action: "species-header",
-            visible: true,
-          },
           {
             icon: "fas fa-cog",
             label: "PTR2E.ActorSheet.Settings.Title",
@@ -110,25 +102,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       actions: {
         "species-header": async function (this: ActorSheetPTRV2, event: Event) {
           event.preventDefault();
-          const species = this.actor.species!;
-          const sheet = new SpeciesDropSheet((item) => {
-            if (!item) return;
-            if (
-              !(
-                item instanceof CONFIG.Item.documentClass &&
-                item.system instanceof SpeciesSystemModel
-              )
-            )
-              return;
-            if (item.slug !== species.slug) {
-              const species = item.toObject().system;
-              species.slug ||= sluggify(item.name);
-              this.actor.items.get("actorspeciesitem")?.update({"system": species});
-            }
-          });
-          sheet.species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e
-          if(!sheet.species) return void ui.notifications.error("PTR2E | Actor does not have a species item. Please run Migration 0.109.");
-          sheet.render(true);
+          const species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
+          if(!species) return;
+          species.sheet.render(true);
         },
         "open-inspector": async function (this: ActorSheetPTRV2, event: Event) {
           event.preventDefault();
@@ -461,6 +437,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   ) {
     if (partId === "overview") {
       context.movement = Object.values(this.actor.system.movement);
+    }
+
+    if (partId === "sidebar") {
+      context.species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
     }
 
     if (partId === "clocks") {

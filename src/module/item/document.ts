@@ -224,18 +224,22 @@ class ItemPTR2e<
     const actor = context?.parent as ActorPTR2e | null;
     if (!actor) return super.createDocuments<TDocument>(data, context);
 
-    // const specialTypes = ["species"];
+    const specialTypes = ["species"];
 
-    // for (const source of sources) {
-    //   if (specialTypes.includes(source.type as string)) {
-    //     switch (source.type) {
-    //       case "species": {
-    //         return [];
-    //       }
-    //     }
-    //     return [];
-    //   }
-    // }
+    for (const source of sources) {
+      if (specialTypes.includes(source.type as string)) {
+        switch (source.type) {
+          case "species": {
+            const speciesItem = actor.items.get("actorspeciesitem") as ItemPTR2e<ItemSystemPTR, ActorPTR2e>;
+            if (speciesItem) {
+              await speciesItem.update({ "system": source.system });
+              return [];
+            }
+          }
+        }
+        return [];
+      }
+    }
     
     async function processSources(sources: ItemSourcePTR2e[]) {
       const outputItemSources: ItemSourcePTR2e[] = [];
@@ -368,7 +372,7 @@ class ItemPTR2e<
 
   static override async deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]> & { pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[] }): Promise<TDocument[]>;
   static override async deleteDocuments(ids: string[] = [], context: DocumentModificationContext<ActorPTR2e | null> & { pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[] } = {}): Promise<foundry.abstract.Document[]> {
-    ids = Array.from(new Set(ids));
+    ids = Array.from(new Set(ids)).filter(id => id !== "actorspeciesitem");
     const actor = context.parent;
     if (actor) {
       const items = ids.flatMap(id => actor.items.get(id) ?? []) as ItemPTR2e<ItemSystemPTR, ActorPTR2e>[];
