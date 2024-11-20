@@ -9,7 +9,7 @@ import {
 } from "@actor";
 import { ActiveEffectPTR2e, ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import { AttackPTR2e, PokemonType, RollOptionChangeSystem, RollOptionManager } from "@data";
+import { ActionPTR2e, AttackPTR2e, PokemonType, RollOptionChangeSystem, RollOptionManager } from "@data";
 import { ActorFlags } from "types/foundry/common/documents/actor.js";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -31,6 +31,8 @@ import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import MoveSystem from "@item/data/move.ts";
 import SpeciesSystem from "@item/data/species.ts";
+import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
+import { ActionUUID } from "src/util/uuid.ts";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -262,6 +264,20 @@ class ActorPTR2e<
   override prepareBaseData() {
     if (this.type === "ptu-actor") return super.prepareBaseData();
     super.prepareBaseData();
+
+    //@ts-expect-error - The getter needs to be added afterwards.
+    this.flags.ptr2e.disableActionOptions = {
+      collection: new Collection(),
+      disabled: []
+    }
+    Object.defineProperty(this.flags.ptr2e.disableActionOptions, "options", {
+      get: () => {
+        return this.flags.ptr2e.disableActionOptions!.collection.filter(action => {
+          if(!(action instanceof AttackPTR2e)) return true;
+          return action.free ? true : action.slot ? this.attacks.actions[action.slot] === action : action.free;
+        }).map(action => ({value: action.uuid}));
+      }
+    });
 
     if (this.system.shield.value > 0) this.rollOptions.addOption("self", "state:shielded");
     switch (true) {
@@ -1847,6 +1863,11 @@ type ActorFlags2e = ActorFlags & {
     sheet?: {
       perkFlash?: boolean;
     };
+    disableActionOptions?: {
+      collection: Collection<ActionPTR2e>;
+      get options(): PickableThing[];
+      disabled: ActionUUID[];
+    }
   };
 };
 

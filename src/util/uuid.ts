@@ -26,6 +26,10 @@ class UUIDUtils {
         return typeof uuid === "string" && fu.parseUuid(uuid).documentType === "Item";
     }
 
+    static isActionUUID(uuid: unknown): uuid is ActionUUID {
+      return typeof uuid === "string" && fu.parseUuid(uuid).type === "Actions";
+  }
+
     static isCompendiumUUID(uuid: unknown): uuid is CompendiumUUID {
         return typeof uuid === "string" && fu.parseUuid(uuid).collection instanceof CompendiumCollection;
     }
@@ -37,4 +41,7 @@ class UUIDUtils {
     }
 }
 
-export { UUIDUtils };
+type EmbeddedActionUUID = `Actions.${string}`;
+type ActionUUID = `${EmbeddedItemUUID}.${EmbeddedActionUUID}` | `${WorldItemUUID}.${EmbeddedActionUUID}` | `${CompendiumItemUUID}.${EmbeddedActionUUID}`;
+
+export { UUIDUtils, type ActionUUID};

@@ -12,6 +12,7 @@ import { extractEffectRolls, extractModifierAdjustments, extractModifiers, extra
 import { CheckRollContext } from "@system/rolls/data.ts";
 import { CheckPTR2e } from "@system/check.ts";
 import { AttackModifierPopup } from "@module/apps/modifier-popup/attack-modifier-popup.ts";
+import { ActionUUID } from "src/util/uuid.ts";
 
 type AttackStatisticData = StatisticData & Required<Pick<StatisticData, "defferedValueParams" | 'modifiers' | 'domains' | 'rollOptions'>>;
 type AttackRollParameters = AttackStatisticRollParameters
@@ -195,6 +196,11 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       traits: args.traits ?? this.item.traits,
     }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>;
 
+    if(context.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
+      ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", {name: this.attack.name}));
+      return null;
+    }
+
     const selfEffectRolls = await extractEffectRolls({
       affects: "self",
       origin: this.actor,
@@ -222,6 +228,11 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         options: new Set([...options, `origin:${allyOrEnemy}`]),
         traits: args.traits ?? this.item.traits,
       }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
+
+      if(currContext.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
+        ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", {name: this.attack.name}));
+        return null;
+      }
 
       if (this.attack.isRanged && typeof currContext.target?.rangeIncrement === "number") {
         const rip = currContext.target!.rangeIncrement!;
