@@ -1374,7 +1374,7 @@ body {
 
         .window-content {
             display: grid;
-            grid-template-columns: 45% 55%;
+            grid-template-columns: 40% 60%;
             grid-template-rows: calc(1rem + 48px) min-content auto;
             grid-template-areas:
                 "header nav"
@@ -1619,7 +1619,7 @@ body {
                     }
                 }
 
-                &[data-tab="effects"] {
+                &[data-tab="effects"], &[data-tab="forms"] {
 
                     fieldset.can-add {
                         position: relative;
@@ -4004,6 +4004,8 @@ body {
     }
 
     &.active-effect-sheet {
+      gap: 0;
+      
         .window-content {
             display: grid;
             grid-template-columns: 35% 65%;

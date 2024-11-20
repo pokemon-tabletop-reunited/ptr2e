@@ -17,6 +17,7 @@
   "TYPES.ActiveEffect.passive": "Passive Effect",
   "TYPES.ActiveEffect.affliction": "Affliction",
   "TYPES.ActiveEffect.summon": "Summon Effect",
+  "TYPES.ActiveEffect.form": "Forme",
   "ITEM.AddButton": "Add",
   "ITEM.DeleteButton": "Delete",
   "SETTINGS.TutorList": "Manage Tutor Lists",
@@ -467,6 +468,16 @@
         "transfer": {
           "label": "Transfer Effect?",
           "hint": "Whether this effect should apply to the actor holding this item (checked), or the item itself (unchecked)."
+        },
+        "trigger": {
+          "label": "Trigger",
+          "hint": "Whether this Forme should automatically apply or be manually toggled.",
+          "manual": "Manual",
+          "automatic": "Automatic"
+        },
+        "conditions": {
+          "label": "Conditions",
+          "hint": "The conditions under which this Forme can be activated."
         }
       },
       "TurnIntoAffliction": "This effect doesn't have a duration since it's a Passive Effect.<br>Would you like to turn it into an Affliction?",
@@ -637,7 +648,15 @@
         },
         "changes": {
           "label": "Changes"
+        },
+        "effects": {
+          "label": "Effects"
         }
+      },
+      "Conditions": {
+        "weather": "Active Weather",
+        "item": "Equipped Item",
+        "ability": "Equipped Ability"
       },
       "ChangeEditor": {
         "General": {
@@ -1591,6 +1610,9 @@
         },
         "moves": {
           "label": "Moves"
+        },
+        "forms": {
+          "label": "Forms"
         }
       },
       "SendToChatLabel": "Send to Chat",

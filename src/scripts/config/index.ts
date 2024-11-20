@@ -29,6 +29,8 @@ import trackableAttributes from "./trackable-token-attributes.ts";
 import { CompendiumDirectoryPTR2e } from "@module/apps/sidebar/compendium-directory.ts";
 import { SettingsSidebarPTR2e } from "@module/apps/sidebar/settings.ts";
 import SummonActiveEffectSystem from "@module/effects/data/summon.ts";
+import FormActiveEffectSystem from "@module/effects/data/form.ts";
+import { FormConfigSheet } from "@module/effects/form-sheet.ts";
 
 export const PTRCONFIG = {
   ActiveEffect: {
@@ -36,10 +38,12 @@ export const PTRCONFIG = {
     dataModels: {
       passive: PassiveActiveEffectSystem,
       affliction: AfflictionActiveEffectSystem,
-      summon: SummonActiveEffectSystem
+      summon: SummonActiveEffectSystem,
+      form: FormActiveEffectSystem
     },
     sheetClasses: {
       effect: ActiveEffectConfig,
+      form: FormConfigSheet
     }
   },
   Actor: {

@@ -572,7 +572,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
     };
 
     if (data.system?.changes) {
-      const changes = this.document.toObject().system.changes as ChangeModel["_source"][];
+      const changes = this.document.clone().system.changes as ChangeModel["_source"][];
       for (const changeSection of htmlQueryAll(this.element, ".effect-change[data-idx]")) {
         const idx = Number(changeSection.dataset.idx);
         const changeForm = this.#changeForms[idx];
@@ -619,7 +619,7 @@ class ActiveEffectConfig extends foundry.applications.api.HandlebarsApplicationM
   }
 
   #createChangeForms(): void {
-    const changes = this.document.toObject().system.changes;
+    const changes = this.document.clone().system.changes;
     const previousForms = [...this.#changeForms];
 
     // First pass, create options, and then look for exact matches of data and reuse those forms

@@ -1354,7 +1354,7 @@ body .application.sheet .form-group {
 .application.sheet.data-inspector .window-content,
 .application.sheet.active-effect-sheet .window-content {
   display: grid;
-  grid-template-columns: 45% 55%;
+  grid-template-columns: 40% 60%;
   grid-template-rows: calc(1rem + 48px) min-content auto;
   grid-template-areas: "header nav" "traits traits" "main main";
   padding: 0;
@@ -2107,7 +2107,19 @@ body .application.sheet .form-group {
 .application.sheet.party-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.team-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
 .application.sheet.data-inspector .window-content section.tab[data-tab="effects"] fieldset.can-add,
-.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add {
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add,
+.application.sheet.default-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab="forms"] fieldset.can-add,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab="forms"] fieldset.can-add,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add,
+.application.sheet.action-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add,
+.application.sheet.move-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add,
+.application.sheet.species-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add,
+.application.sheet.party-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add,
+.application.sheet.team-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add,
+.application.sheet.data-inspector .window-content section.tab[data-tab="forms"] fieldset.can-add,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add {
   position: relative;
 }
 .application.sheet.default-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
@@ -2121,7 +2133,19 @@ body .application.sheet .form-group {
 .application.sheet.party-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.team-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
 .application.sheet.data-inspector .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
-.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control {
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] fieldset.can-add .add-control,
+.application.sheet.default-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add .add-control,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab="forms"] fieldset.can-add .add-control,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab="forms"] fieldset.can-add .add-control,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add .add-control,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add .add-control,
+.application.sheet.action-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add .add-control,
+.application.sheet.move-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add .add-control,
+.application.sheet.species-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add .add-control,
+.application.sheet.party-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add .add-control,
+.application.sheet.team-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add .add-control,
+.application.sheet.data-inspector .window-content section.tab[data-tab="forms"] fieldset.can-add .add-control,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="forms"] fieldset.can-add .add-control {
   position: absolute;
   top: -9px;
   right: -2px;
@@ -2142,7 +2166,19 @@ body .application.sheet .form-group {
 .application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
 .application.sheet.data-inspector .window-content section.tab[data-tab="effects"] ul.effect-list,
-.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list {
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list,
+.application.sheet.default-sheet .window-content section.tab[data-tab="forms"] ul.effect-list,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab="forms"] ul.effect-list,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab="forms"] ul.effect-list,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="forms"] ul.effect-list,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="forms"] ul.effect-list,
+.application.sheet.action-sheet .window-content section.tab[data-tab="forms"] ul.effect-list,
+.application.sheet.move-sheet .window-content section.tab[data-tab="forms"] ul.effect-list,
+.application.sheet.species-sheet .window-content section.tab[data-tab="forms"] ul.effect-list,
+.application.sheet.party-sheet .window-content section.tab[data-tab="forms"] ul.effect-list,
+.application.sheet.team-sheet .window-content section.tab[data-tab="forms"] ul.effect-list,
+.application.sheet.data-inspector .window-content section.tab[data-tab="forms"] ul.effect-list,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="forms"] ul.effect-list {
   list-style: none;
   margin: 0 0.5rem;
   padding: 0;
@@ -2158,7 +2194,19 @@ body .application.sheet .form-group {
 .application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
 .application.sheet.data-inspector .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
-.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect {
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect,
+.application.sheet.default-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab="forms"] ul.effect-list li.effect,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab="forms"] ul.effect-list li.effect,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect,
+.application.sheet.action-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect,
+.application.sheet.move-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect,
+.application.sheet.species-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect,
+.application.sheet.party-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect,
+.application.sheet.team-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect,
+.application.sheet.data-inspector .window-content section.tab[data-tab="forms"] ul.effect-list li.effect,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect {
   padding: 0.5rem;
   border-radius: 5px;
   display: flex;
@@ -2178,7 +2226,19 @@ body .application.sheet .form-group {
 .application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
 .application.sheet.data-inspector .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
-.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon {
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .effect-icon,
+.application.sheet.default-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .effect-icon,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .effect-icon,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .effect-icon,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .effect-icon,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .effect-icon,
+.application.sheet.action-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .effect-icon,
+.application.sheet.move-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .effect-icon,
+.application.sheet.species-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .effect-icon,
+.application.sheet.party-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .effect-icon,
+.application.sheet.team-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .effect-icon,
+.application.sheet.data-inspector .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .effect-icon,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .effect-icon {
   flex: 0 0 28px;
   height: 28px;
   width: 28px;
@@ -2194,7 +2254,19 @@ body .application.sheet .form-group {
 .application.sheet.party-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.team-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
 .application.sheet.data-inspector .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
-.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name {
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="effects"] ul.effect-list li.effect .name,
+.application.sheet.default-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .name,
+.application.sheet#perk-hud-base .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .name,
+.application.sheet.pick-a-thing-prompt .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .name,
+.application.sheet.known-actions-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .name,
+.application.sheet.available-abilities-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .name,
+.application.sheet.action-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .name,
+.application.sheet.move-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .name,
+.application.sheet.species-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .name,
+.application.sheet.party-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .name,
+.application.sheet.team-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .name,
+.application.sheet.data-inspector .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .name,
+.application.sheet.active-effect-sheet .window-content section.tab[data-tab="forms"] ul.effect-list li.effect .name {
   flex-grow: 1;
   margin: 0 0.25rem;
 }
@@ -4276,6 +4348,9 @@ body .application.sheet .form-group {
   flex-direction: column;
   justify-content: start;
   gap: 0.5rem;
+}
+.application.sheet.active-effect-sheet {
+  gap: 0;
 }
 .application.sheet.active-effect-sheet .window-content {
   display: grid;

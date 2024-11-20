@@ -1,6 +1,6 @@
 import { ActorPTR2e } from "@actor";
 import { ItemSheetPTR2e, ItemSourcePTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
-import { ActionPTR2e, RollOptionManager, Trait } from "@data";
+import { ActionPTR2e, EquipmentData, RollOptionManager, Trait } from "@data";
 import { ActiveEffectPTR2e, EffectSourcePTR2e } from "@effects";
 import { ItemFlagsPTR2e } from "./data/system.ts";
 import { ActionsCollections } from "@actor/actions.ts";
@@ -76,13 +76,21 @@ class ItemPTR2e<
         .map((o) => `${prefix}:${o}`) ?? []
       : [];
 
+    const gearOptions = 'equipped' in this.system 
+    ? [
+      `${this.slug}:${(this.system.equipped as EquipmentData).carryType}`,
+      ...(["held", "worn"].includes((this.system.equipped as EquipmentData).carryType) ? `${this.slug}:equipped`: [])
+    ]
+    : [] as string[];
+
     const options = [
       `${prefix}:id:${this.id}`,
       `${prefix}:${this.slug}`,
       `${prefix}:slug:${this.slug}`,
       ...granterOptions,
-      ...(this.parent?.getRollOptions() ?? []).map((o) => `${prefix}:${o}`),
+      ...(this.parent?.getRollOptions() ?? []).map((o) => `actor:${o}`),
       ...traitOptions.map((o) => `${prefix}:${o}`),
+      ...gearOptions.map((o) => `${prefix}:${o}`),
     ];
 
     return options;
