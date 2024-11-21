@@ -1,0 +1,131 @@
+{
+  "name": "Muscle Band",
+  "_id": "Y1TeUFBDY0aWrxT6",
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "type": "equipment",
+  "system": {
+    "crafting": {
+      "skill": null,
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "slot": "accessory",
+      "carryType": "stowed",
+      "handsHeld": null
+    },
+    "grade": "B",
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100
+    },
+    "rarity": "uncommon",
+    "traits": [
+      "combat"
+    ],
+    "actions": [
+      {
+        "name": "Muscle Band",
+        "slug": "muscle-band",
+        "type": "passive",
+        "description": "Effect: The user's Physical-Category attacks deal 10% more damage.",
+        "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+        "traits": [
+          "Combat"
+        ],
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex"
+        }
+      }
+    ],
+    "description": "Effect: The user's Physical-Category attacks deal 10% more damage.",
+    "slug": "muscle-band",
+    "quantity": 1,
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/item_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "_migration": {
+      "version": 0.103,
+      "previous": {
+        "schema": null,
+        "foundry": "12.329",
+        "system": "0.10.0-alpha.2.0.2"
+      }
+    }
+  },
+  "effects": [
+    {
+      "name": "Muscle Band",
+      "type": "passive",
+      "_id": "qGQGG2KZu0vNusQf",
+      "img": "/systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "physical-attack-damage",
+            "value": 10,
+            "predicate": [],
+            "label": "Muscle Band",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Actor.tQ5GVHTl3rohItqN.Item.PEUn0C1nwvpcxX8J.ActiveEffect.qGQGG2KZu0vNusQf",
+        "duplicateSource": null,
+        "coreVersion": "12.329",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.2.0.3",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXad",
+  "flags": {
+    "exportSource": {
+      "world": "pokemon-mystery-dungeon-shrouded-kingdoms",
+      "system": "ptr2e",
+      "coreVersion": "12.330",
+      "systemVersion": "0.10.0-alpha.2.0.3"
+    }
+  }
+}
