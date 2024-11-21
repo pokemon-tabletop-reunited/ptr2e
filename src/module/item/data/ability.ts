@@ -35,6 +35,10 @@ export default abstract class AbilitySystem extends HasEmbed(HasBase(foundry.abs
     };
   }
 
+  get isSuppressed(): boolean {
+    return this.suppress ?? false;
+  }
+
   override prepareDerivedData(): void {
     if (this.free || this.slot !== null) {
       this.parent.rollOptions.addOption("item", `${this.parent.type}:${this.parent.slug}:active`);
@@ -58,6 +62,8 @@ export default abstract class AbilitySystem extends HasEmbed(HasBase(foundry.abs
 export default interface AbilitySystem extends ModelPropsFromSchema<AbilitySchema> { 
   container: ContainerPTR2e | null;
   actions: Collection<ActionPTR2e>;
+
+  suppress?: boolean;
 
   _source: SourceFromSchema<AbilitySchema>;
 }

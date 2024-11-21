@@ -638,7 +638,18 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "choice-set",
+          "choices": "nullifiableAbilities",
+          "adjustName": true,
+          "rollOption": "nullified"
+        },
+        {
+          "type": "suppress-ability",
+          "key": "{effect|flags.ptr2e.choiceSelections.nullified}"
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,

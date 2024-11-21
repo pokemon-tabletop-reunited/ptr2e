@@ -1032,6 +1032,13 @@ body .application.sheet .form-group {
   flex-grow: 1;
   margin: 0 0.25rem;
 }
+.application.sheet.actor.v2 .window-content .tab.active .effects-display .suppressed,
+.application.sheet.actor.v2 .window-content .tab.active .perks-display .suppressed,
+.application.sheet.actor.v2 .window-content .tab.active .abilities-display .suppressed,
+.application.sheet.actor.v2 .window-content .tab.active .toggles-display .suppressed {
+  filter: contrast(0.55);
+  font-style: italic;
+}
 .application.sheet.actor.v2 .window-content .tab.active .effects-display {
   grid-area: span 5 / span 3;
 }

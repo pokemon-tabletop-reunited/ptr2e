@@ -174,6 +174,15 @@ class ActorPTR2e<
       ) ?? 0 - 1, 0)
   }
 
+  get nullifiableAbilities(): PickableThing[] {
+    //@ts-expect-error - UUID only is valid.
+    return this.itemTypes?.ability
+    ?.filter(ability => !ability.system.isSuppressed && (ability.system.free || ability.system.slot !== null))
+    .map(ability => ({
+      value: ability.uuid
+    })) ?? [];
+  }
+
   protected override _initializeSource(
     data: Record<string, unknown>,
     options?: DataModelConstructionOptions<TParent> | undefined

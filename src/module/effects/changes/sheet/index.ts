@@ -1,5 +1,6 @@
 import BasicChangeSystem from "../basic.ts";
 import FlatModifierChangeSystem from "../flat-modifier.ts";
+import EphemeralModifierChangeSystem from "../ephemeral-modifier.ts";
 import GrantItemChangeSystem from "../grant-item.ts";
 import PercentileModifierSystem from "../percentile-modifier.ts";
 import RollOptionChangeSystem from "../roll-option.ts";
@@ -21,7 +22,8 @@ import AddTraitChangeSystem from "../add-trait.ts";
 import AddTraitForm from "./add-trait.ts";
 import RemoveTraitChangeSystem from "../remove-trait.ts";
 import RemoveTraitForm from "./remove-trait.ts";
-import { EphemeralModifierChangeSystem } from "@data";
+import SuppresAbilityChangeSystem from "../suppress-ability.ts";
+import SuppresAbilityForm from "./suppress-ability.ts";
 // import AlterAttackChangeSystem from "../alter-attack.ts";
 // import AlterAttackForm from "./alter-attack.ts";
 
@@ -38,6 +40,7 @@ const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [RollEffectChangeSystem.TYPE]: RollEffectForm,
     [AddTraitChangeSystem.TYPE]: AddTraitForm,
     [RemoveTraitChangeSystem.TYPE]: RemoveTraitForm,
+    [SuppresAbilityChangeSystem.TYPE]: SuppresAbilityForm,
     // [AlterAttackChangeSystem.TYPE]: AlterActionForm,
 };
 

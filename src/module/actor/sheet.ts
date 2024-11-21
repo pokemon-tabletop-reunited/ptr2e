@@ -978,6 +978,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     ) as HTMLElement;
     if (!abilityDiv) return;
 
+    if(ability.system.isSuppressed) return void ui.notifications.warn("This ability is suppressed and cannot be re-assigned.");
+
     const slot = Number(abilityDiv.dataset.slot);
     if (isNaN(slot)) return;
 
@@ -987,6 +989,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       return;
     }
     if (currentAbility === ability) return;
+
+    if(currentAbility.system.isSuppressed) return void ui.notifications.warn("That slot is filled with a suppressed ability which cannot be re-assigned");
 
     this.actor.updateEmbeddedDocuments("Item", [
       { _id: currentAbility.id, "system.slot": ability.system.slot ?? null },

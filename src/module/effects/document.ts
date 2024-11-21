@@ -8,6 +8,7 @@ import { sluggify } from "@utils";
 import { RollOptionDomains } from "@module/data/roll-option-manager.ts";
 import { ItemGrantData } from "@item/data/system.ts";
 import { processGrantDeletions } from "./changes/grant-item.ts";
+import { AbilitySystemModel } from "@item/data/index.ts";
 class ActiveEffectPTR2e<
   TParent extends ActorPTR2e | ItemPTR2e | null = ActorPTR2e | ItemPTR2e | null,
   TSystem extends ActiveEffectSystem = ActiveEffectSystem,
@@ -102,6 +103,9 @@ class ActiveEffectPTR2e<
   }
 
   override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
+    if(this.parent instanceof ItemPTR2e && this.parent && this.parent.system instanceof AbilitySystemModel) {
+      if(this.parent.system.suppress) return;
+    }
     return this.system.apply(actor, change, options);
   }
 

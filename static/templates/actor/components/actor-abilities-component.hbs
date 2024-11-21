@@ -22,7 +22,7 @@
 </div>
 
 {{#*inline "ability"}}
-    <div class="{{action.type}} action item" data-tooltip-direction="{{direction}}" data-slug="{{action.slug}}" data-item-id="{{action.id}}" data-uuid="{{action.uuid}}" data-tooltip="{{action.name}}" {{#if (isdefined slot)}}data-slot="{{slot}}"{{/if}}>
+    <div class="{{action.type}} item action {{#if action.system.isSuppressed}}suppressed{{/if}}" data-tooltip-direction="{{direction}}" data-slug="{{action.slug}}" data-item-id="{{action.id}}" data-uuid="{{action.uuid}}" data-tooltip="{{action.name}}" {{#if (isdefined slot)}}data-slot="{{slot}}"{{/if}}>
         <div class="action-icon"><img src="{{action.img}}" class="icon"></div>
         <span class="action-name name">{{action.name}}</span>
         <div class="action-controls item-controls">
