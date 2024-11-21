@@ -24,7 +24,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 6
+          "powerPoints": 8
         },
         "types": [
           "ice"
@@ -32,7 +32,7 @@
         "category": "special",
         "power": 130,
         "accuracy": 90,
-        "description": "<p>Effect: On hit, the user loses -2 SPATK Stages for 5 activations.</p>"
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[frostbite] 5. On resolution, the user loses -2 SPATK Stages for 5 Activations.</p>"
       }
     ],
     "grade": "E",
@@ -56,6 +56,17 @@
             "predicate": [],
             "chance": 100,
             "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "howling-blaster-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "predicate": [],
+            "chance": 30,
+            "affects": "origin",
             "mode": 2,
             "priority": null,
             "ignored": false

@@ -32,7 +32,7 @@
         "category": "special",
         "power": 65,
         "accuracy": 100,
-        "description": "<p>Effect: On hit, the target has a 30% chance of gaining @Affliction[frozen] 5.</p>"
+        "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[frostbite] 5 and a 20% chance of gaining @Affliction[fear] 5.</p>"
       }
     ],
     "grade": "C",
@@ -52,9 +52,20 @@
           {
             "type": "roll-effect",
             "key": "cold-terror-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
             "predicate": [],
-            "chance": 30,
+            "chance": 20,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "contact-trait-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.fearconditioitem",
+            "predicate": [],
+            "chance": 20,
             "affects": "target",
             "mode": 2,
             "priority": null,

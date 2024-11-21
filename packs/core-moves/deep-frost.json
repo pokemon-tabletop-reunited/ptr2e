@@ -20,7 +20,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2
+          "powerPoints": 3
         },
         "types": [
           "ice"
@@ -28,7 +28,7 @@
         "category": "special",
         "power": 50,
         "accuracy": 100,
-        "description": "<p>Effect: On hit, the target loses -1 ATK Stage for 5 activations.</p>"
+        "description": "<p>Effect: On hit, the target loses -1 ATK Stage for 5 activations and gains @Affliction[frostbite] 5.</p>"
       }
     ],
     "grade": "D",
@@ -49,6 +49,17 @@
             "type": "roll-effect",
             "key": "deep-frost-attack",
             "value": "Compendium.ptr2e.core-effects.Item.ikCAv5w4iNfHHqaE",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "deep-frost-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
             "predicate": [],
             "chance": 100,
             "affects": "target",
