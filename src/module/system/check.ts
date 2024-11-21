@@ -409,6 +409,12 @@ class CheckPTR2e {
       const actor = await fromUuid<ActorPTR2e>(context.actor?.uuid) ?? game.actors.get(context.actor?.id);
       if (actor) {
         const pp = actor.system.powerPoints.value;
+
+        if (pp < context.ppCost) {
+          ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.UnableToAct", {action: context.attack?.name ?? context.action ?? ""}) + game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: context.ppCost, current: pp }));
+          return null;
+        }
+
         await actor.update({
           "system.powerPoints.value": Math.max(0, pp - context.ppCost),
         });

@@ -239,6 +239,8 @@ export class AttackModifierPopup extends ModifierPopup {
     //TODO: Turn into game setting
     const consumePP = this.ppCost ? true : false;
 
+    const isNoRollStatus = this.context.attack && this.context.attack.category === "status" && !this.context.attack.power && !this.context.attack.accuracy;
+
     return {
       modifiers,
       rollModes: CONFIG.Dice.rollModes,
@@ -249,7 +251,8 @@ export class AttackModifierPopup extends ModifierPopup {
       avatarScroll: this.targets.length > 9,
       consumePP,
       ppCost: this.ppCost,
-      variants
+      variants,
+      isNoRollStatus
     };
   }
 

@@ -292,12 +292,14 @@
                                 display: flex;
                                 align-items: center;
                                 flex: 1;
+                                place-content: center;
+                                flex-direction: column;
 
                                 &.center {
-                                    display: flex;
-                                    justify-content: center;
-                                    align-items: center;
-                                    text-align: center;
+                                  display: flex;
+                                  justify-content: center;
+                                  align-items: center;
+                                  text-align: center;
                                 }
                             }
                         }
@@ -352,7 +354,7 @@
 
                     .status, .effect-rolls {
                         margin-left: 0.25rem;
-                        flex: 0 0 50px;
+                        flex: 0 0 55px;
 
                         i.fas, i.far {
                             font-size: 22px;
@@ -377,7 +379,7 @@
 
                     .damage {
                         margin-left: 0.25rem;
-                        flex: 1;
+                        flex: 0 0 55px;
 
                         span {
                             font-size: 16px;
@@ -385,7 +387,7 @@
                     }
 
                     .apply {
-                        flex: 0 0 60px;
+                        flex: 1 0 60px;
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -397,6 +399,10 @@
                             font-size: 14px;
                             color: #1e1e1e;
                             padding: 0;
+
+                            &[disabled] {
+                              filter: contrast(0.7);
+                            }
 
                             &.update-targets {
                                 flex: 0 0 60%;

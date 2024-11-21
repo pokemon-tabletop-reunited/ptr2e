@@ -361,7 +361,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
         origin: this.origin,
         attack: this.attack,
         hasDamage: summonAttack?.damageType === "flat" ? true : this.results.some((result) => !!result.damage),
-        hasEffect: this.results.some((result) => !!result.effectRolls),
+        hasEffect: this.results.some((result) => result.effectRolls?.origin.length || result.effectRolls?.target.length),
         results: new Map<ActorUUID, AttackMessageRenderContextData>(
           // @ts-expect-error - This is a valid operation
           await Promise.all(
@@ -480,7 +480,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     if (!actor) return false;
 
     if (actor.system.powerPoints.value < pp.cost) {
-      ui.notifications.error("PTR2E.Attack.NotEnoughPP");
+      ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: pp.cost, current: actor.system.powerPoints.value }));
       return false;
     }
 

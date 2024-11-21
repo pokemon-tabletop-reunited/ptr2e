@@ -155,7 +155,7 @@ export default class AttackPTR2e extends ActionPTR2e {
   }
 
   get rollable(): boolean {
-    return this.accuracy !== null || this.power !== null;
+    return true//this.accuracy !== null || this.power !== null;
   }
 
   getAttackStat(actor: Maybe<ActorPTR2e> = this.actor): number {
