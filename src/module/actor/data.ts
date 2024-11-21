@@ -47,9 +47,15 @@ interface ActorSynthetics {
   };
   afflictions: { data: AfflictionActiveEffectSystem[], ids: Set<string> };
   rollNotes: Record<string, RollNote[]>;
-  effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[]}>;
+  effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[] }>;
   toggles: RollOptionToggle[];
   attackAdjustments: AttackAdjustment[];
+  tokenOverrides: DeepPartial<Pick<TokenDocument['_source'], "light" | "name">> & {
+    alpha?: number | null;
+    texture?:
+    | { src: ImageFilePath | VideoFilePath; tint?: Color | null }
+    | { src: ImageFilePath | VideoFilePath; tint?: Color | null; scaleX: number; scaleY: number };
+  };
 }
 
 export interface RollOptionToggle {
@@ -67,7 +73,7 @@ export interface RollOptionToggle {
 
 export interface AttackAdjustment {
   adjustAttack?: (
-      attack: AttackPTR2e, options: string[]
+    attack: AttackPTR2e, options: string[]
   ) => void;
   adjustTraits?: (attack: AttackPTR2e, traits: string[], options: string[]) => void;
 }

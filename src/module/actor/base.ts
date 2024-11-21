@@ -216,6 +216,7 @@ class ActorPTR2e<
       effects: {},
       toggles: [],
       attackAdjustments: [],
+      tokenOverrides: {},
       preparationWarnings: {
         add: (warning: string) => preparationWarnings.add(warning),
         flush: fu.debounce(() => {

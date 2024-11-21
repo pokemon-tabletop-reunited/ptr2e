@@ -19,6 +19,31 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
     return anyoneCanSee.includes(nameDisplayMode) || this.actor?.alliance === "party";
   }
 
+  override prepareBaseData(): void {
+    super.prepareBaseData();
+
+    const actor = this.actor;
+    if(!actor) return;
+
+    const tokenOverrides = actor.synthetics.tokenOverrides;
+    this.name = tokenOverrides.name ?? this.name;
+    this.alpha = tokenOverrides.alpha ?? this.alpha;
+
+    if(tokenOverrides.texture) {
+      this.texture.src = tokenOverrides.texture.src;
+      if("scaleX" in tokenOverrides.texture) {
+        this.texture.scaleX = tokenOverrides.texture.scaleX;
+        this.texture.scaleY = tokenOverrides.texture.scaleY;
+        this.flags.ptr2e.autoscale = false;
+      }
+      this.texture.tint = tokenOverrides.texture.tint ?? this.texture.tint;
+    }
+
+    if (tokenOverrides.light) {
+      this.light = new foundry.data.LightData(tokenOverrides.light, { parent: this });
+    }
+  }
+
   /**
    * Whenever the token's actor delta changes, or the base actor changes, perform associated refreshes.
    * @param {object} [update]                               The update delta.

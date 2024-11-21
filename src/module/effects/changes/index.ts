@@ -15,5 +15,6 @@ export { default as AddTraitChangeSystem } from "./add-trait.ts";
 export { default as RemoveTraitChangeSystem } from "./remove-trait.ts";
 export { default as AlterAttackChangeSystem } from "./alter-attack.ts";
 export { default as SuppresAbilityChangeSystem } from "./suppress-ability.ts";
+export { default as TokenAlterationsChangeSystem } from "./token-alterations.ts";
 export type * from "./choice-set/change-model.ts";
 export type * from "./data.ts";
