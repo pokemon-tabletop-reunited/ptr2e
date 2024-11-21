@@ -5,14 +5,16 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "interrupt-1"
+        ],
         "name": "Hardened Sheath",
         "slug": "hardened-sheath",
         "type": "generic",
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "<p>The user declares a [Horn] attack.</p>",
+          "trigger": "<p>The user resolves a [Horn] attack.</p>",
           "delay": null,
           "priority": null
         },
@@ -21,7 +23,7 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user declares a [Horn] attack.</p><p>Effect: The user gains +1 ATK Stage for 5 Activations.</p>"
+        "description": "<p>Trigger: The user resolves a [Horn] attack.</p><p>Effect: The user gains +1 ATK Stage for 5 Activations.</p>"
       }
     ],
     "description": "<p>Trigger: The user declares a [Horn] attack.</p><p>Effect: The user gains +1 ATK Stage for 5 Activations.</p>",
