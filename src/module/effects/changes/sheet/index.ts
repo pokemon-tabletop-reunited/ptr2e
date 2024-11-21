@@ -21,11 +21,13 @@ import AddTraitChangeSystem from "../add-trait.ts";
 import AddTraitForm from "./add-trait.ts";
 import RemoveTraitChangeSystem from "../remove-trait.ts";
 import RemoveTraitForm from "./remove-trait.ts";
+import { EphemeralModifierChangeSystem } from "@data";
 // import AlterAttackChangeSystem from "../alter-attack.ts";
 // import AlterAttackForm from "./alter-attack.ts";
 
 const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [FlatModifierChangeSystem.TYPE]: FlatModifierForm,
+    [EphemeralModifierChangeSystem.TYPE]: FlatModifierForm,
     [StageModifierSystem.TYPE]: StageModifierForm,
     [PercentileModifierSystem.TYPE]: PercentileModifierForm,
     [RollOptionChangeSystem.TYPE]: RollOptionForm,

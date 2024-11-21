@@ -114,6 +114,6 @@ export default class EphemeralEffectChangeSystem extends ChangeModel {
     }
 }
 
-export default interface FlatModifierChangeSystem {
+export default interface EphemeralEffectChangeSystem {
     affects: "target" | "origin";
 }

@@ -7,6 +7,7 @@ export { default as GrantEffectChangeSystem } from "./grant-effect.ts";
 export { default as StageModifierSystem } from "./stage-modifier.ts";
 export { default as PercentileModifierSystem } from "./percentile-modifier.ts";
 export { default as EphemeralEffectChangeSystem } from "./ephemeral-effect.ts";
+export { default as EphemeralModifierChangeSystem } from "./ephemeral-modifier.ts";
 export { default as RollNoteChangeSystem } from "./roll-note.ts";
 export { default as EffectRollChangeSystem } from "./effect-roll.ts";
 export { default as ChoiceSetChangeSystem } from "./choice-set/change-model.ts";

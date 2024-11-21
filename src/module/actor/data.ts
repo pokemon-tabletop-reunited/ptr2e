@@ -36,6 +36,7 @@ type DeferredModifier = DeferredValue<ModifierPTR2e>;
 
 interface ActorSynthetics {
   ephemeralEffects: Record<string, { target: DeferredEphemeralEffect[]; origin: DeferredEphemeralEffect[] } | undefined>;
+  ephemeralModifiers: Record<string, DeferredModifier[]>;
   modifierAdjustments: ModifierAdjustmentSynthetics;
   modifiers: ModifierSynthetics;
   preparationWarnings: {

@@ -21,7 +21,7 @@ import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
 import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
-import { extractEffectRolls, extractEphemeralEffects } from "src/util/rule-helpers.ts";
+import { extractEffectRolls, extractEphemeralEffects, extractTargetModifiers } from "src/util/rule-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -199,6 +199,7 @@ class ActorPTR2e<
     const preparationWarnings = new Set<string>();
     this.synthetics = {
       ephemeralEffects: {},
+      ephemeralModifiers: {},
       modifierAdjustments: { all: [], damage: [] },
       modifiers: { all: [], damage: [] },
       afflictions: { data: [], ids: new Set() },
@@ -1310,6 +1311,16 @@ class ActorPTR2e<
       hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
     })
 
+    const targetOriginFlatModifiers = await extractTargetModifiers({
+      origin: this,
+      target: params.target?.actor ?? targetToken?.actor ?? null,
+      item: params.item ?? null,
+      attack: params.attack ?? null,
+      action: params.action ?? null,
+      domains: params.domains,
+      options: [...params.options, ...(params.item?.getRollOptions("item") ?? [])],
+    })
+
     // Clone the actor to recalculate its AC with contextual roll options
     const targetActor = params.viewOnly
       ? null
@@ -1346,7 +1357,7 @@ class ActorPTR2e<
       item: selfItem,
       attack: selfAttack!,
       action: selfAction!,
-      modifiers: [],
+      modifiers: targetOriginFlatModifiers ?? [],
     };
 
     const target =
