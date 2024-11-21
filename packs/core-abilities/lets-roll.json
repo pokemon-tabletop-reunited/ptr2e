@@ -6,7 +6,7 @@
     "actions": [
       {
         "traits": [
-          "connection"
+          "interrupt-4"
         ],
         "name": "Let's Roll",
         "slug": "lets-roll",
@@ -14,7 +14,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "<p>At the start of combat or when the user is switched in.</p>",
+          "trigger": "<p>The user enters combat.</p>",
           "delay": null,
           "priority": null
         },
@@ -23,7 +23,7 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: At the start of combat or when the user is switched in.</p><p>Effect: The user freely uses Defense Curl and may also spend 4 additional PP to instead use Defense Curl (Rolled).</p>"
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user freely uses Defense Curl and may also spend 4 additional PP to instead use Defense Curl (Rolled).</p>"
       },
       {
         "slug": "defense-curl",
@@ -84,7 +84,7 @@
         "slot": null
       }
     ],
-    "description": "<p>Trigger: At the start of combat or when the user is switched in.</p><p>Effect: Connection - Defense Curl. The user freely uses Defense Curl and may also spend 4 additional PP to use Defense Curl (Rolled).</p>",
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Defense Curl. The user freely uses Defense Curl and may also spend 4 additional PP to use Defense Curl (Rolled).</p>",
     "traits": [
       "connection"
     ],
