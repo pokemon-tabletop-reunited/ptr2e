@@ -1,0 +1,111 @@
+{
+  "name": "Juggernaut",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Juggernaut",
+        "slug": "juggernaut",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: The user's [Contact] attacks include +20% of the user's DEF in damage calculation in addition to the original attacking stat.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: The user's [Contact] attacks include +20% of the user's DEF in damage calculation in addition to the original attacking stat.",
+    "traits": [],
+    "slug": "juggernaut",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "Sr1vNIWn1jIl8ol3",
+  "effects": [
+    {
+      "name": "Juggernaut",
+      "type": "passive",
+      "_id": "sdtrcKRYrNP2X3J8",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "contact-trait-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.def.value*((2+@actor.system.attributes.def.stage)/2))*0.2)",
+            "predicate": [
+              {
+                "gt": [
+                  "{actor|system.attributes.def.stage}",
+                  0
+                ]
+              }
+            ],
+            "label": "Juggernaut",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "basic",
+            "key": "contact-trait-attack-damage-flat",
+            "value": "floor((@actor.system.attributes.def.value*(2/(2+abs(@actor.system.attributes.def.stage))))*0.2)",
+            "predicate": [
+              {
+                "lte": [
+                  "{actor|system.attributes.def.stage}",
+                  0
+                ]
+              }
+            ],
+            "label": "Juggernaut",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.4.1",
+        "createdTime": 1732203086427,
+        "modifiedTime": 1732203468631,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
