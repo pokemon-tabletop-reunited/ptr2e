@@ -32,15 +32,13 @@
         "cost": {
           "activation": "free"
         },
-        "description": "<p>Passive: The user is also immune to the @Affliction[poison] and @Affliction[blight] Afflictions.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "Passive: The user is also immune to the @Affliction[poison] and @Affliction[blight] Afflictions. Defensive."
       }
     ],
     "description": "<p>Effect: Increases the Damage of the user's Poison-Type attacks by 50%. Passive: The user is also immune to the @Affliction[poison] and @Affliction[blight] Afflictions.</p>",
     "traits": [
       "innate",
-      "defensive",
-      "partial-automation"
+      "defensive"
     ],
     "slug": "basilisk-fang",
     "_migration": {
@@ -67,6 +65,34 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "affliction:poison",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "affliction:blight",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
           }
         ],
         "slug": null,
@@ -95,11 +121,11 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.330",
+        "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
+        "systemVersion": "0.10.0-alpha.3.4.1",
         "createdTime": 1722258071093,
-        "modifiedTime": 1722258090670,
+        "modifiedTime": 1731721209728,
         "lastModifiedBy": "Kc3DOunCh3ClAeHS"
       }
     }

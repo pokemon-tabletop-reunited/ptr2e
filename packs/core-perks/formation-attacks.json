@@ -12,7 +12,7 @@
       "approach": "finesse",
       "archetype": "Pack Mon"
     },
-    "description": "<p>When within Reach of a creature, you gain +1 ACC on Attacks against that creature for every other Pack Member that is also within Reach of that creature.</p>",
+    "description": "<p>When within Reach of a creature, you gain +1 ACC on Attacks against that creature for every other Pack Member that is also within Reach of that creature.<br><br>Connection: Beat Up</p>",
     "actions": [
       {
         "name": "Formation Attacks",
@@ -28,6 +28,34 @@
           "target": "enemy",
           "unit": "m"
         }
+      },
+      {
+        "slug": "beat-up",
+        "name": "Beat Up",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "x-strike",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "category": "physical",
+        "power": 15,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "<p>This attacks's [X-Stike] value is equal to 1 plus the number of allied creatures that have the target within their Reach, to a maximum of 15 hits.</p>",
+        "free": true,
+        "img": "systems/ptr2e/img/perk-icons/Tactician.svg"
       }
     ],
     "slug": "formation-attacks",

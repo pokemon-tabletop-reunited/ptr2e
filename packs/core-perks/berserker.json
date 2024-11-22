@@ -6,7 +6,7 @@
   "img": "systems/ptr2e/img/icons/physical_icon.png",
   "system": {
     "actions": [],
-    "slug": null,
+    "slug": "berserker",
     "description": "<p>Gain the [Berserker] trait, gain access to the Berserker Tutor List, and immediately learn 3 moves from said Tutor List.</p>",
     "traits": [],
     "prerequisites": [
@@ -41,23 +41,63 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.fTAcIGm5QGWoKB1D",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717163405793,
-    "modifiedTime": 1717179570345,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": [
+    {
+      "name": "Berserker",
+      "type": "passive",
+      "_id": "c7XB9rHsJMCXrIsE",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "Berserker",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.4.1",
+        "createdTime": 1732232360900,
+        "modifiedTime": 1732232368578,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }
