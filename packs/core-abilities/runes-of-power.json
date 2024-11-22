@@ -5,26 +5,8 @@
   "system": {
     "actions": [
       {
-        "traits": [
-          "innate",
-          "connection"
-        ],
-        "name": "Runes of Power",
-        "slug": "runes-of-power",
-        "type": "passive",
-        "cost": {
-          "activation": "free"
-        },
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "description": "<p>Effect: The user's Hidden Power changes its Type to Typeless and is one step super effective against targets.</p>",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "slug": "hidden-power",
-        "name": "Hidden Power",
+        "slug": "hidden-power-rune",
+        "name": "Hidden Power (Rune)",
         "type": "attack",
         "traits": [
           "pp-updated",
@@ -46,9 +28,9 @@
         "power": 60,
         "accuracy": 100,
         "types": [
-          "normal"
+          "typeless"
         ],
-        "description": "<p>Effect: When the user learns this Attack, this Attack's Type permanently changes to a random Type.</p>",
+        "description": "<p>Effect: this attack is one step super effective against targets.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": true,

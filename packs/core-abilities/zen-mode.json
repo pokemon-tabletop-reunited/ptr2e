@@ -9,6 +9,7 @@
           "defensive",
           "forme-change",
           "desperation-1-2",
+          "interrupt-3",
           "innate"
         ],
         "name": "Zen Mode",
@@ -26,10 +27,52 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user changes to Zen Forme. While in Zen Forme, the user takes 50% less damage from all sources.</p>"
+        "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user changes to its Zen Forme. While in Zen Forme, the user takes 50% less damage from all sources.</p>"
+      },
+      {
+        "traits": [
+          "defensive",
+          "innate"
+        ],
+        "name": "Zen Mode",
+        "slug": "zen-mode",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Effect: While in Zen Forme, the user takes 50% less damage from all sources.</p>"
+      },
+      {
+        "traits": [
+          "defensive",
+          "innate"
+        ],
+        "name": "Zen Mode",
+        "slug": "zen-mode",
+        "type": "downtime",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user changes to or from its Zen Forme.</p>"
       }
     ],
-    "description": "T<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user changes to Zen Forme. While in Zen Forme, the user takes 50% less damage from all sources.</p>",
+    "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user changes to its Zen Forme. While in Zen Forme, the user takes 50% less damage from all sources.</p>",
     "traits": [
       "defensive",
       "forme-change",

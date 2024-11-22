@@ -10,8 +10,8 @@
           "defensive",
           "aura"
         ],
-        "name": "Turboblaze",
-        "slug": "turboblaze",
+        "name": "Turboflare",
+        "slug": "turboflare",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -24,10 +24,56 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Effect: The user's attacks are unaffected by the abilities of other creatures on the field. When using Fusion Flare, the user may spend an additional 2 PP to also inflict @Affliction[nullified] 5 on one of the target's abilities. If the user uses Blue Flare, the user may spend an additional 2 PP to inflict @Affliction[nullified] 5 on one of the target's abilities and have them lose -1 ACC Stage for 5 Activations.</p>"
+        "description": "<p>Effect: The user's attacks are unaffected by the abilities of other creatures on the field.</p>"
+      },
+      {
+        "traits": [
+          "legendary",
+          "aura",
+          "interrupt-4"
+        ],
+        "name": "Turboflare (Fusion Flare)",
+        "slug": "turboflare-fusion-flare",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user hits a target with Fusion Flare.</p>",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user hits a target with Fusion Flare.</p><p>The target gains @Affliction[nullified] 5.</p>"
+      },
+      {
+        "traits": [
+          "legendary",
+          "aura",
+          "interrupt-4"
+        ],
+        "name": "Turboflare (Blue flare)",
+        "slug": "turboflare-blue-flare",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user hits a target with Bolt Strike.</p>",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user hits a target with Fusion Bolt.</p><p>The target gains @Affliction[nullified] 5 and loses -1 ACC Stage for 5 Activations.</p>"
       }
     ],
-    "description": "<p>Effect: The user's attacks are unaffected by the abilities of other creatures on the field. When using Fusion Flare, the user may spend an additional 2 PP to also inflict @Affliction[nullified] 5 on one of the target's abilities. If the user uses Blue Flare, the user may spend an additional 2 PP to inflict @Affliction[nullified] 5 on one of the target's abilities and have them lose -1 ACC Stage for 5 Activations.</p>",
+    "description": "<p>Effect: The user's attacks are unaffected by the abilities of other creatures on the field. When using Fusion Flare, the user may spend an additional 2 PP to also inflict @Affliction[nullified] 5 on one of a target's abilities. When using Blue Flare, the user may spend an additional 3 PP to inflict @Affliction[nullified] 5 on one of a target's abilities and have it lose -1 ACC Stage for 5 Activations.</p>",
     "traits": [
       "legendary",
       "defensive",

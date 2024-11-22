@@ -5,6 +5,26 @@
   "system": {
     "actions": [
       {
+        "traits": [
+          "interrupt-3"
+        ],
+        "name": "Triage (Emergency)",
+        "slug": "triage-emergency",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "object",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user may Move, using any Movement they still have for the current Round, and use a [Healing] Action on their Active List as a Free Action.</p>"
+      },
+      {
         "traits": [],
         "name": "Triage",
         "slug": "triage",
@@ -20,10 +40,10 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "<p>Effect: The user's [Healing] attacks can be used as [Priority 3] actions.</p>"
+        "description": "<p>Effect: The user's [Healing] Actions gain [Priority 3] or [Priority X+3].</p>"
       }
     ],
-    "description": "<p>Effect: The user's [Healing] attacks can be used as [Priority 3] actions.</p>",
+    "description": "<p>Effect: Spending 3 PP as a Free Action Interrupt, the user may Move, using any Movement they still have for the current Round, and use a [Healing] Action on their Active List as a Free Action. The user's [Healing] Actions gain [Priority 3] or [Priority X+3].</p>",
     "traits": [],
     "slug": null,
     "container": null

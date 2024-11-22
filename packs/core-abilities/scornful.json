@@ -5,14 +5,17 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          "interrupt-3",
+          "stage-change"
+        ],
         "name": "Scornful",
         "slug": "scornful",
         "type": "generic",
         "cost": {
           "activation": "free",
           "powerPoints": 3,
-          "trigger": "<p>The user inflicts negative Stat Stages on another creature",
+          "trigger": "<p>The user inflicts a negative [Stage Change] effect on another creature.</p>",
           "delay": null,
           "priority": null
         },
@@ -21,10 +24,10 @@
           "distance": 10,
           "unit": "m"
         },
-        "description": "<p>Trigger: The user inflicts negative Stat Stages on another creature</p><p>Effect: The number of negative Stat Stages inflicted are doubled.</p>"
+        "description": "<p>Trigger: The user inflicts a negative [Stage Change] effect on another creature.</p><p>Effect: The intensity of the inflicted effects is doubled.</p>"
       }
     ],
-    "description": "<p>Trigger: The user inflicts negative Stat Stages on another creature</p><p>Effect: The number of negative Stat Stages inflicted are doubled.</p>",
+    "description": "<p>Trigger: The user inflicts a negative [Stage Change] effect on another creature.</p><p>Effect: The intensity of the inflicted effects is doubled.</p>",
     "traits": [],
     "slug": null,
     "container": null
