@@ -6,24 +6,26 @@
     "actions": [
       {
         "traits": [
-          "defensive"
+          "defensive",
+          "interrupt-1"
         ],
         "name": "Cryogenic",
         "slug": "cryogenic",
         "type": "passive",
         "cost": {
-          "activation": "free"
+          "activation": "free",
+          "trigger": "<p>The user is hit by a [Contact] attack.</p>"
         },
         "range": {
           "target": "creature",
           "distance": 1,
           "unit": "m"
         },
-        "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The attacking creature has a 30% chance of gaining @Affliction[frozen] 5.",
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The attacking creature has a 30% chance of gaining @Affliction[frostbite] 5.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The attacking creature has a 30% chance of gaining @Affliction[frozen] 5.",
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The attacking creature has a 30% chance of gaining @Affliction[frostbite] 5.</p>",
     "traits": [
       "defensive"
     ],
@@ -45,7 +47,7 @@
           {
             "type": "roll-effect",
             "key": "contact-trait-attack",
-            "value": "Compendium.ptr2e.core-effects.Item.frozencondititem",
+            "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
             "predicate": [],
             "chance": 30,
             "affects": "origin",

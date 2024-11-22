@@ -5,9 +5,11 @@
   "system": {
     "actions": [
       {
-        "traits": [],
+        "traits": [
+          
+        ],
         "name": "Hypnotist",
-        "slug": "hypnotist",
+        "slug": "hypnotist-active",
         "type": "generic",
         "cost": {
           "activation": "free",
@@ -20,12 +22,12 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: Connection - Hypnosis.  The user freely uses Hypnosis."
+        "description": "<p>The user freely uses Hypnosis.</p>"
       },
       {
         "traits": [],
         "name": "Hypnotist",
-        "slug": "hypnotist",
+        "slug": "hypnotist-passive",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -34,10 +36,35 @@
           "priority": null
         },
         "range": null,
-        "description": "Passive: The user's Hypnosis has +30 Accuracy and has +5 Range."
+        "description": "<p>Passive: The user's Hypnosis has +30 Accuracy and has +5 Range.</p>"
+      },
+      {
+        "slug": "hypnosis",
+        "name": "Hypnosis",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5
+        },
+        "category": "status",
+        "accuracy": 90,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: On hit, the target is afflicted with @Affliction[drowsy] 5.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Effect: Connection - Hypnosis.  The user freely uses Hypnosis. Passive: The user's Hypnosis has +30 Accuracy and has +5 Range.",
+    "description": "<p>Effect: Connection - Hypnosis.  The user spends 5 PP and freely uses Hypnosis. Passive: The user's Hypnosis has +30 Accuracy and has +5 Range.</p>",
     "traits": [],
     "slug": null,
     "container": null

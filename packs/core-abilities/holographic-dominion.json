@@ -7,16 +7,16 @@
       {
         "traits": [
           "legendary",
-          "connection",
-          "defensive"
+          "defensive",
+          "interrupt-7"
         ],
         "name": "Holographic Dominion",
-        "slug": "holographic-dominion",
+        "slug": "holographic-dominion-active",
         "type": "generic",
         "cost": {
           "activation": "simple",
           "powerPoints": 7,
-          "trigger": "The user would be affected by a declared Action, Attack, or Ability.",
+          "trigger": "<p>The user would be affected by a declared Action, Attack, or Ability.</p>",
           "delay": null,
           "priority": null
         },
@@ -25,16 +25,34 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user would be affected by a declared Action, Attack, or Ability.\nEffect: Connection - Shadow Force. The triggering effect does not affect the user, and the user gains @Affliction[transient]. The user may consume a Simple Action to gain or lose @Affliction[transient] as it wishes."
+        "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: The triggering effect does not affect the user, and the user gains @Affliction[transient].</p>"
       },
       {
         "traits": [
-          "legendary",
-          "connection",
-          "defensive"
+          "legendary"
+        ],
+        "name": "distorted-reverse",
+        "slug": "distorted-reverse",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user gains or loses @Affliction[transient].</p>"
+      },
+      {
+        "traits": [
+          "legendary"
         ],
         "name": "Holographic Dominion",
-        "slug": "holographic-dominion",
+        "slug": "holographic-dominion-passive",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -43,10 +61,47 @@
           "priority": null
         },
         "range": null,
-        "description": "Passive: While @Affliction[transient], the user's Attacks deal twice as much damage, and gains 2 PP at the start of each of its Activations."
+        "description": "<p>Passive: While @Affliction[transient], the user's Attacks deal twice as much damage, and the user gains 2 PP at the start of each of its Activations.</p>"
+      },
+      {
+        "slug": "shadow-force",
+        "name": "Shadow Force",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "set-up",
+          "pass-4",
+          "crushing",
+          "pierce",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "physical",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "ghost"
+        ],
+        "description": "<p>Effect: Set-Up: The user gains @Affliction[invisible] 3 and @Affliction[transient] 3, and ends their activation.</p><p>Resolution: On their next activation, the user freely Moves up to two times the Movement Score of their choice, is cured of @Affliction[transient] and @Affliction[invisible], and then attacks with and resolves this attack.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: The user would be affected by a declared Action, Attack, or Ability.\nEffect: Connection - Shadow Force. The triggering effect does not affect the user, and the user gains @Affliction[transient]. The user consume a Simple Action to gain or lose @Affliction[transient] as it wishes. Passive: While @Affliction[transient], the user's Attacks deal twice as much damage, and gains 2 PP at the start of each of its Activations.",
+    "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Shadow Force. The triggering effect does not affect the user, and the user gains @Affliction[transient]. The user consume a Simple Action to gain or lose @Affliction[transient] as it wishes. Passive: While @Affliction[transient], the user's Attacks deal twice as much damage, and the user gains 2 PP at the start of each of its Activations.</p>",
     "traits": [
       "legendary",
       "connection",

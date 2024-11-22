@@ -24,10 +24,56 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: The user's attacks are unaffected by the abilities of other creatures on the field. When using Fusion Bolt, the user may spend an additional 2 PP to also inflict @Affliction[nullified] 5 on one of the target's abilities. If the user uses Bolt Strike, the user may spend an additional 2 PP to inflict @Affliction[nullified] 5 on one of the target's abilities and have them lose -1 ACC stage for 5 Activations."
+        "description": "<p>Effect: The user's attacks are unaffected by the abilities of other creatures on the field.</p>"
+      },
+      {
+        "traits": [
+          "legendary",
+          "aura",
+          "interrupt-4"
+        ],
+        "name": "Teravolt (Fusion Bolt)",
+        "slug": "teravolt-fusion-bolt",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user hits a target with Fusion Bolt.</p>",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user hits a target with Fusion Bolt.</p><p>The target gains @Affliction[nullified] 5.</p>"
+      },
+      {
+        "traits": [
+          "legendary",
+          "aura",
+          "interrupt-4"
+        ],
+        "name": "Teravolt (Bolt Strike)",
+        "slug": "teravolt-bolt-strike",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user hits a target with Bolt Strike.</p>",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user hits a target with Bolt Strike.</p><p>The target gains @Affliction[nullified] 5 and loses -1 ACC Stage for 5 Activations.</p>"
       }
     ],
-    "description": "Effect: The user's attacks are unaffected by the abilities of other creatures on the field. When using Fusion Bolt, the user may spend an additional 2 PP to also inflict @Affliction[nullified] 5 on one of the target's abilities. If the user uses Bolt Strike, the user may spend an additional 2 PP to inflict @Affliction[nullified] 5 on one of the target's abilities and have them lose -1 ACC stage for 5 Activations.",
+    "description": "<p>Effect: The user's attacks are unaffected by the abilities of other creatures on the field. When using Fusion Bolt, the user may spend an additional 2 PP to also inflict @Affliction[nullified] 5 on one of a target's abilities. When using Bolt Strike, the user may spend an additional 3 PP to inflict @Affliction[nullified] 5 on one of a target's abilities and have it lose -1 ACC Stage for 5 Activations.</p>",
     "traits": [
       "legendary",
       "defensive",

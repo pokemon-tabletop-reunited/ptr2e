@@ -6,11 +6,10 @@
     "actions": [
       {
         "traits": [
-          "legendary",
-          "connection"
+          "legendary"
         ],
         "name": "Destructive Design",
-        "slug": "destructive-design",
+        "slug": "destructive-design-active",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -23,15 +22,14 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: Connection - Techno Blast. The user may activate Download, ignoring the ability's normal triggering Affliction."
+        "description": "<p>Effect: The user may activate Download, ignoring the Ability's normal triggering Affliction.</p>"
       },
       {
         "traits": [
-          "legendary",
-          "connection"
+          "legendary"
         ],
         "name": "Destructive Design",
-        "slug": "destructive-design",
+        "slug": "destructive-design-passive",
         "type": "passive",
         "cost": {
           "activation": "free",
@@ -40,10 +38,63 @@
           "priority": null
         },
         "range": null,
-        "description": "Passive: the user gains the Ability Download."
+        "description": "<p>Passive: the user gains the Ability Download.</p>"
+      },
+      {
+        "slug": "techno-blast",
+        "name": "Techno Blast",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "pulse",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: Techno Blast's Type changes to match the <Type> of the user's held [Drive] item.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "traits": [],
+        "name": "Download",
+        "slug": "download",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>At the start of battle, or when switched in.</p>",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "free": true,
+        "description": "<p>Trigger: At the start of battle, or when switched in.</p><p>Effect: If the targeted creature's DEF stat is higher than its SPDEF, the user raises their SPATK Stage by +1 for 5 Activations. If the targeted creature's DEF stat is lower than its SPDEF Stat, the user raises their ATK Stage by +1 for 5 Activations.</p>"
       }
     ],
-    "description": "Effect: Connection - Techno Blast. The user may activate Download, ignoring the ability's normal triggering Affliction. Passive: the user gains the Ability Download.",
+    "description": "<p>Effect: Connection - Techno Blast. The user may activate Download, ignoring the Ability's normal triggering Affliction. Passive: the user gains the Ability Download.</p>",
     "traits": [
       "legendary",
       "connection"

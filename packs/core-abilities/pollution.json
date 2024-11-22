@@ -6,8 +6,8 @@
     "actions": [
       {
         "traits": [
-          "connection",
-          "weather"
+          "weather",
+          "interrupt-2"
         ],
         "name": "Pollution",
         "slug": "pollution",
@@ -15,7 +15,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "The user creates Smoggy Weather.",
+          "trigger": "<p>The user creates Smoggy Weather.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,10 +24,41 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user creates Smoggy Weather.\nEffect: Connection - Smog. The triggering effect's duration is increased by +2."
+        "description": "<p>Trigger: The user creates Smoggy Weather.</p><p>Effect: The triggering effect's duration is increased by +2.</p>"
+      },
+      {
+        "slug": "acid-rain",
+        "name": "Acid Rain",
+        "type": "attack",
+        "traits": [
+          "weather"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Effect: The weather becomes Smoggy for 3 rounds.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: The user creates Smoggy Weather.\nEffect: Connection - Smog. The triggering effect's duration is increased by +2.",
+    "description": "<p>Trigger: The user creates Smoggy Weather.</p><p>Effect: Connection - Acid Rain. The triggering effect's duration is increased by +2.</p>",
     "traits": [
       "connection",
       "weather"

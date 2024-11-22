@@ -6,15 +6,16 @@
     "actions": [
       {
         "traits": [
-          "environ"
+          "environ",
+          "interrupt-3"
         ],
         "name": "North Wind",
-        "slug": "north-wind",
-        "type": "passive",
+        "slug": "north-wind-active",
+        "type": "generic",
         "cost": {
           "activation": "free",
           "powerPoints": 0,
-          "trigger": "The user enters battle, or emerges from stealth.",
+          "trigger": "<p>The user enters battle, or emerges from stealth.</p>",
           "delay": null,
           "priority": null
         },
@@ -23,10 +24,62 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user enters battle, or emerges from stealth.\nEffect: Connection - Aurora Veil. The user freely uses Aurora Veil. The user is immune to negative effects from Snowy Weather."
+        "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: The user freely uses Aurora Veil.</p>"
+      },
+      {
+        "traits": [
+          "environ"
+        ],
+        "name": "North Wind",
+        "slug": "north-wind-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Passive: The user is immune to negative effects from Snowy Weather.</p>"
+      },
+      {
+        "slug": "aurora-veil",
+        "name": "Aurora Veil",
+        "type": "attack",
+        "traits": [
+          "environ",
+          "shield"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Effect: For 3 Rounds, the user and its allies take half damage from damaging attacks. Aurora Veil may only be used in Snow Weather.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: The user enters battle, or emerges from stealth.\nEffect: Connection - Aurora Veil. The user freely uses Aurora Veil. The user is immune to negative effects from Snowy Weather.",
+    "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Aurora Veil. The user freely uses Aurora Veil. </p><p>Passive: The user is immune to negative effects from Snowy Weather.</p>",
     "traits": [
       "environ"
     ],

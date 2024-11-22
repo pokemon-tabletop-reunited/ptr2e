@@ -23,10 +23,34 @@
           "distance": 10,
           "unit": "m"
         },
-        "description": "Effect: The user and allies within range have +1 default ACC. When using V-Create, the user can spend an additional 2 PP to add the [Crit 2] trait to the attack. When rolling to increase Luck at the end of a session, the user rolls a d10 twice and keeps the better result. If the user is an owned Pokemon, the Trainer gets an additional d6 roll for Luck instead."
+        "description": "<p>Effect: The user and allies within range have +1 default ACC. When rolling to increase Luck at the end of a session, the user rolls a d10 twice and keeps the better result. If the user is an owned Pokemon, the Trainer gets an additional d6 roll for Luck instead.</p>"
+      },
+      {
+        "traits": [
+          "legendary",
+          "aura",
+          "interrupt-4"
+        ],
+        "name": "Victory Star (V)",
+        "slug": "victory-star (V)",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user declares V-Create.</p>",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user gains +2 CRIT Stages for 1 Activation.</p>"
       }
+      
     ],
-    "description": "Effect: The user and allies within range have +1 default ACC. When using V-Create, the user can spend an additional 2 PP to add the [Crit 2] trait to the attack. When rolling to increase Luck at the end of a session, the user rolls a d10 twice and keeps the better result. If the user is an owned Pokemon, the Trainer gets an additional d6 roll for Luck instead.",
+    "description": "<p>Effect: The user and allies within range have +1 default ACC. When declaring V-Create, the user can spend an additional 2 PP to gain +2 CRIT Stages for 1 Activation. When rolling to increase Luck at the end of a session, the user rolls a d10 twice and keeps the better result. If the user is an owned Pokemon, the Trainer gets an additional d6 roll for Luck instead.</p>",
     "traits": [
       "legendary",
       "aura"

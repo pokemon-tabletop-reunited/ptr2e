@@ -12,26 +12,11 @@
         "cost": {
           "activation": "free"
         },
-        "range": {
-          "target": "self",
-          "unit": "m"
-        },
-        "description": "Effect: When the user gains a positive ACC stage effect, the duration is increased by 1 activation.",
-        "img": "icons/svg/explosion.svg"
-      },
-      {
-        "traits": [],
-        "name": "Keen Eye",
-        "slug": "keen-eye",
-        "type": "passive",
-        "cost": {
-          "activation": "free"
-        },
-        "description": "Passive: The user is immune to negative ACC stage effects, and the user has +1 default ACC stage.",
+        "description": "<p>Effect: The user is immune to negative ACC [Stage Change] effects, and the user has +1 default ACC Stage. ACC [Stage Change] effects the user gains have their duration increased by +2.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: When the user gains a positive ACC stage effect, the duration is increased by 1 activation. Passive:  The user is immune to negative ACC stage effects, and the user has +1 default ACC stage.",
+    "description": "<p>Effect: The user is immune to negative ACC [Stage Change] effects, and the user has +1 default ACC Stage. ACC [Stage Change] effects the user gains have their duration increased by +2.</p>",
     "traits": [
       "partial-automation"
     ],
@@ -52,7 +37,7 @@
         "changes": [
           {
             "type": "basic",
-            "key": "system.battleStats.accuracy.stage",
+            "key": "system.battleStats.accuracy.Stage",
             "value": 1,
             "predicate": [],
             "mode": 2,
