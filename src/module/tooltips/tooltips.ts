@@ -382,6 +382,19 @@ export default class TooltipsPTR2e {
     }
 
     for (const button of this.tooltip.querySelectorAll("button")) {
+      if(button.classList.contains("delay-attack")) {
+        button.addEventListener("click", async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+    
+          const { attackUuid } = button.dataset;
+          const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+          if (!action) return void ui.notifications.error("Action not found.");
+
+          return action.delayAction();
+        });
+      }
+
       if(button.classList.contains("consume-pp")) {
         button.addEventListener("click", async (event) => {
           event.preventDefault();

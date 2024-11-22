@@ -7,6 +7,8 @@ import { AttackStatisticRollParameters } from "@system/statistics/statistic.ts";
 import { ActorPTR2e } from "@actor";
 import { SlugField } from "../fields/slug-field.ts";
 import { AttackRollResult } from "@system/rolls/check-roll.ts";
+import { ItemPTR2e, SummonPTR2e } from "@item";
+import { CombatantPTR2e } from "@combat";
 
 export default class AttackPTR2e extends ActionPTR2e {
   declare type: "attack" | "summon";
@@ -215,6 +217,62 @@ export default class AttackPTR2e extends ActionPTR2e {
       : rangeIncrement;
   }
 
+  async delayAction(number?: number) {
+    if(!this.actor) return;
+    if(!game.combat) return void ui.notifications.error("You must be in combat to be able to delay an action.");
+    if(game.combat.combatant?.actor !== this.actor) return void ui.notifications.error("You must be the active combatant to delay this action.");
+    if(number === undefined || number === null) {
+      const dialog = await foundry.applications.api.DialogV2.prompt<number>({
+        window: {title: game.i18n.localize("PTR2E.Dialog.DelayActionTitle")},
+        classes: ["center-text"],
+        content: `<p>${game.i18n.localize("PTR2E.Dialog.DelayActionContent")}</p><input type="number" name="delay" min=1 max=3 step=1>`,
+        ok: {
+          action: "ok",
+          label: "Delay Action",
+          callback: (_event, _button, dialog) => {
+            return dialog?.querySelector<HTMLInputElement>("input[name='delay']")?.value
+          }
+        }
+      })
+      if(!dialog) return;
+      number = dialog;
+    }
+    if(number <= 0) return;
+
+    const delay = Math.min(3, number);
+
+    const summonItem = new ItemPTR2e({
+      name: `${this.actor.name}'s Delayed (${delay}) ${this.name}`,
+      type: "summon",
+      img: this.img,
+      system: {
+        owner: this.actor.uuid,
+        actions: [
+          this.clone({
+            type: "summon",
+            targetType: "target"
+          }).toObject()
+        ]
+      }
+    }) as SummonPTR2e;
+
+    const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
+      name: summonItem.name,
+      type: "summon",
+      system: {
+        owner: this.actor?.uuid ?? null,
+        item: summonItem.toObject(),
+        delay
+      }
+    }])
+
+    if (!combatants.length) return void ui.notifications.error("Failed to create delay action.");
+
+    ChatMessage.create({
+      content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
+    });
+  }
+
   override prepareUpdate(data: DeepPartial<SourceFromSchema<ActionSchema>>): ActionPTR2e[] {
     const currentActions = super.prepareUpdate(data);
 
@@ -228,6 +286,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     return currentActions;
   }
 }
+
 export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {
   // update(
   //     data: DeepPartial<SourceFromSchema<AttackSchema>> &

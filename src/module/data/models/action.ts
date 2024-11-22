@@ -127,6 +127,13 @@ class ActionPTR2e extends foundry.abstract.DataModel {
   }
 
   get uuid(): string {
+    // This is a temporary item, this might be due to this being a delayed action
+    // In which case, link to the original item if possible.
+    if(!this.item.id && this.actor?.id) {
+      const originalAction = this.actor.actions.get(this.slug);
+      return originalAction?.uuid ?? "";
+    }
+
     return `${this.item.uuid}.Actions.${this.slug}`
   }
 
@@ -158,7 +165,7 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     const {classes = [], icon} = options;
     // Build dataset
     const documentName = `${formatSlug(this.type)} ${this.name}`;
-    const anchorIcon = icon ?? "fas fa-link";
+    const anchorIcon = icon ?? "fas fa-burst";
     if ( !classes.includes("content-link") ) classes.unshift("content-link");
     attrs = foundry.utils.mergeObject({ draggable: "true" }, attrs);
     dataset = foundry.utils.mergeObject({
@@ -171,14 +178,14 @@ class ActionPTR2e extends foundry.abstract.DataModel {
       "tooltipDirection": "LEFT"
     }, dataset);
 
-    classes.unshift("action", this.type);
+    classes.unshift(this.type, "action");
 
     name ??= this.name;
     return TextEditor.createAnchor({ attrs, dataset, name, classes, icon: anchorIcon });
   }
 
   _onClickDocumentLink() {
-    return new ActionEditor(
+    return void new ActionEditor(
       this.item as ItemPTR2e<ItemSystemsWithActions>,
       this.slug
     ).render(true);

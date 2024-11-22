@@ -287,6 +287,8 @@ class ActiveEffectPTR2e<
     options: DocumentUpdateContext<TParent>,
     user: User
   ): Promise<boolean | void> {
+    if(!changed?.changes && !changed?.system?.changes) return super._preUpdate(changed, options, user);
+    
     const parseChangePath = (expanded: { changes: unknown[]; system?: unknown }) => {
       expanded.system = fu.mergeObject(expanded.system ?? {}, {
         changes: expanded.changes,
@@ -341,8 +343,7 @@ class ActiveEffectPTR2e<
     ) {
       parseIndexPaths(expanded as { system: { changes: Record<number, unknown> } });
     }
-
-    fu.setProperty(changed, "system", expanded.system);
+    fu.setProperty(changed, "system.changes", (expanded.system as Record<string, unknown>).changes);
     delete changed.changes;
 
     return super._preUpdate(changed, options, user);
@@ -416,10 +417,12 @@ class ActiveEffectPTR2e<
       }
     }
 
-    await ItemPTR2e.createDocuments( //@ts-expect-error - this should not error
-      outputItemSources,
-      context as DocumentModificationContext<ActorPTR2e | null>
-    );
+    if(outputItemSources.length) {
+      await ItemPTR2e.createDocuments( //@ts-expect-error - this should not error
+        outputItemSources,
+        context as DocumentModificationContext<ActorPTR2e | null>
+      );
+    }
     // Create the effects
     return super.createDocuments(outputEffectSources, context) as Promise<ActiveEffectPTR2e[]>;
   }

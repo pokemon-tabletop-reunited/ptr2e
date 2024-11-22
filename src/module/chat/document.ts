@@ -126,6 +126,18 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       this.system.activateListeners(html);
     }
 
+    // Delay Button
+    html.find("button.delay-attack").on("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const { attackUuid } = event.currentTarget.dataset;
+      const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+      if (!action) return void ui.notifications.error("Action not found.");
+
+      return action.delayAction();
+    });
+
     // PP Button
     html.find("button.consume-pp").on("click", async (event) => {
       event.preventDefault();
@@ -134,7 +146,6 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       const { attackUuid } = event.currentTarget.dataset;
       const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
       if (!action) return void ui.notifications.error("Action not found.");
-      if (!action) return void ui.notifications.error("Action not found on item.");
 
       const ppCost = action.cost.powerPoints
       if(!ppCost) return void ui.notifications.error("No PP cost found on action.");

@@ -97,6 +97,7 @@ export default abstract class MoveSystem extends HasEmbed(
         return {
           ...v,
           traits: v.traits.map((trait) => ({ value: trait.slug, label: trait.label })),
+          uuid: v.uuid
         }
       }), move: this.parent, attackTraits: traits
     });

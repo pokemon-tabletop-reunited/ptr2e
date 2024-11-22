@@ -183,7 +183,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     }> = {};
 
     // Reduce everyone's initiative by the current combatant's initiative
-    let initiativeReduction = nextCombatant.initiative ?? 0;
+    let initiativeReduction = nextCombatant.type === "summon" && nextCombatant.system.delay !== null ? 0 : nextCombatant.initiative ?? 0;
     if (nextCombatant.type === "round") {
       const afterRound = this.turns[getNext(next)];
       if (!afterRound) {
@@ -212,6 +212,17 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
     }
 
     for (const combatant of this.turns) {
+      if(combatant.type === "summon" && (combatant.system as SummonCombatantSystem).delay !== null && !combatant.isDefeated) {
+        combatantUpdateData[combatant._id] = {
+          _id: combatant._id,
+          initiative: 999,
+          system: {
+            delay: (combatant.system as SummonCombatantSystem).delay! - 1,
+            activationsHad: combatantUpdateData[combatant._id]?.system?.activationsHad ?? combatant.system.activations ?? 0,
+          }
+        };
+        continue;
+      }
       if (combatantUpdateData[combatant._id]) continue;
       if (combatant.isDefeated) continue;
       combatantUpdateData[combatant._id] = {
@@ -282,6 +293,61 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
       await this._onStartTurn(
         this.combatant as CombatantPTR2e<this, TokenDocumentPTR2e | null>
       );
+  }
+
+  /**
+   * Exact copy of the original method, however with added handling for Delay Summons.
+   * Return the Array of combatants sorted into initiative order, breaking ties alphabetically by name.
+   * @returns {Combatant[]}
+   */
+  override setupTurns() {
+    this.turns ||= [];
+
+    // Determine the turn order and the current turn
+    const turns = this.combatants.contents.sort(this._sortCombatants);
+    if (this.turn !== null) this.turn = Math.clamp(this.turn, 0, turns.length - 1);
+
+    const delaySummons = turns.filter(c => c.type === "summon" && (c.system as SummonCombatantSystem).delay !== null).sort(this._sortCombatants) as CombatantPTR2e<this, null, SummonCombatantSystem>[];
+    for (const summon of delaySummons) {
+      // Delayed summons go after X amount of other activations, instead of being based on AV.
+      // Thus, insert the summon at the correct position in the turn order.
+      const delay = (summon.system as SummonCombatantSystem).delay!;
+      if(delay === -2) continue;
+
+      turns.splice(turns.indexOf(delaySummons[0]), 1);
+
+      if(delay === -1) {
+        turns.unshift(summon);
+        continue;
+      }
+
+      let i = 0;
+      let validTurns = 0;
+      while(validTurns < delay) {
+        i++;
+
+        if(i >= turns.length) {
+          break;
+        }
+        const nextTurn = turns[i];
+        // Make sure to exclude other rounds & summons from the delay count
+        if (nextTurn.type === "round" || nextTurn.type === "summon" || nextTurn.isDefeated) {
+          continue;
+        }
+        validTurns++;
+      }
+      turns.splice(i+1, 0, summon);
+    }
+
+    // Update state tracking
+    const c = turns[this.turn!];
+    this.current = this._getCurrentState(c);
+
+    // One-time initialization of the previous state
+    if (!this.previous) this.previous = this.current;
+
+    // Return the array of prepared turns
+    return (this.turns = turns as CollectionValue<this["combatants"]>[]) as CombatantPTR2e<this>[];
   }
 
   async resetEncounter(): Promise<this | undefined> {
@@ -386,7 +452,7 @@ class CombatPTR2e extends Combat<CombatSystemPTR2e> {
 
     const toDelete = [];
     for (const combatant of (this.combatants?.filter(c => c.type === "summon") ?? []) as CombatantPTR2e<this, null, SummonCombatantSystem>[]) {
-      if (combatant.system.activationsHad >= combatant.system.duration) {
+      if (combatant.system.expired) {
         toDelete.push(combatant.id);
       }
     }
