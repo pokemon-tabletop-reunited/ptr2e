@@ -52,11 +52,67 @@
       "type": "normal"
     },
     "_migration": {
-      "version": null,
-      "previous": null
+      "version": 0.108,
+      "previous": {
+        "schema": 0.107,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.3.2.0"
+      }
     }
   },
   "_id": "pqVd47faROt2qSBR",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",
-  "effects": []
+  "effects": [
+    {
+      "name": "Sight Beyond Sight",
+      "type": "passive",
+      "_id": "qrYlisqKU7CyEgKk",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "Blindsense 10",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.4.1",
+        "createdTime": 1732233195168,
+        "modifiedTime": 1732233207504,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

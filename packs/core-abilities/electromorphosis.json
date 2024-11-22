@@ -6,8 +6,7 @@
     "actions": [
       {
         "traits": [
-          "defensive",
-          "connection"
+          "defensive"
         ],
         "name": "Electromorphosis",
         "slug": "electromorphosis",
@@ -15,7 +14,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "The user is hit by a Physical or Special-Category Attack.",
+          "trigger": "<p>The user is damaged by a Physical or Special-Category Attack.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,7 +23,7 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user is hit by a Physical or Special-Category Attack. \nEffect: Connection - Charge. The user freely uses Charge."
+        "description": "<p>Trigger: The user is damaged by a Physical or Special-Category Attack.</p><p>Effect: The user freely uses Charge.</p>"
       },
       {
         "slug": "charge",
@@ -49,14 +48,14 @@
         "types": [
           "electric"
         ],
-        "description": "<p>Effect: The user gains @Affliction[charged] 1 and +1 SPDEF stage 5 activations.</p>",
+        "description": "<p>Effect: The user gains @Affliction[charged] 1 and +1 SPDEF Stage 5 Activations.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": true,
         "slot": null
       }
     ],
-    "description": "Trigger: The user is hit by a Physical or Special-Category Attack. \nEffect: Connection - Charge. The user freely uses Charge.",
+    "description": "<p>Trigger: The user is damaged by a Physical or Special-Category Attack. </p><p>Effect: Connection - Charge. The user freely uses Charge.</p>",
     "traits": [
       "defensive",
       "connection"

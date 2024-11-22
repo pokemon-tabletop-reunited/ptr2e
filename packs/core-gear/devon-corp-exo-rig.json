@@ -1,0 +1,111 @@
+{
+  "name": "DevonCorp Exo-Rig",
+  "type": "equipment",
+  "system": {
+    "_migration": {
+      "version": 0.108,
+      "previous": null
+    },
+    "traits": [
+      "armour",
+      "sci-fi"
+    ],
+    "actions": [],
+    "description": "<p>The DevonCorp Exo-Rig is a piece of technology which enhances the physical strength of the wearer, and in part armours them, but makes them more susceptible to electricity based attacks.</p><p></p><p>Stats: +10 Base Attack, +5 Base Defense, 25% more incoming damage from Electric-type attacks.</p>",
+    "crafting": {
+      "skill": "Handiwork",
+      "spans": 6,
+      "materials": [
+        "tbd"
+      ]
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": 0,
+      "slot": "backpack"
+    },
+    "grade": "E",
+    "fling": {
+      "type": "untyped",
+      "power": 40,
+      "accuracy": 35
+    },
+    "quantity": 1,
+    "rarity": "uncommon",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    }
+  },
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "effects": [
+    {
+      "name": "Exo-Rig",
+      "type": "passive",
+      "_id": "gLJfg4wA5EyRxPvd",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.attributes.atk.base",
+            "value": 10,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.def.base",
+            "value": 5,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.4.1",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "folder": "V4skAU6G3OH5fXad",
+  "flags": {},
+  "_id": "e9TZKDFHvjfrwDfJ"
+}

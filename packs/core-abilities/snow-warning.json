@@ -6,16 +6,16 @@
     "actions": [
       {
         "traits": [
-          "connection",
-          "weather"
+          "weather",
+          "interrupt-2"
         ],
         "name": "Snow Warning",
         "slug": "snow-warning",
         "type": "generic",
         "cost": {
-          "activation": "simple",
+          "activation": "free",
           "powerPoints": 2,
-          "trigger": "The user uses Snowscape.",
+          "trigger": "<p>The user declares Snowscape.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,10 +24,41 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user uses Snowscape.\nEffect: Connection - Snowscape. The set Snowy Weather has its duration increased by +2 Rounds."
+        "description": "<p>Trigger: The user declares Snowscape.</p><p>Effect: The set Snowy Weather has its duration increased by +2 Rounds.</p>"
+      },
+      {
+        "slug": "snowscape",
+        "name": "Snowscape",
+        "type": "attack",
+        "traits": [
+          "weather"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Effect: The Weather becomes Snowy for 3 rounds.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: The user uses Snowscape.\nEffect: Connection - Snowscape. The set Snowy Weather has its duration increased by +2 Rounds.",
+    "description": "<p>Trigger: The user declares Snowscape.</p><p>Effect: Connection - Snowscape. The set Snowy Weather has its duration increased by +2 Rounds.</p>",
     "traits": [
       "connection",
       "weather"
