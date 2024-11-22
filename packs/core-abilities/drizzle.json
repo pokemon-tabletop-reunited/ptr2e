@@ -6,16 +6,16 @@
     "actions": [
       {
         "traits": [
-          "connection",
-          "weather"
+          "weather",
+          "interrupt-2"
         ],
         "name": "Drizzle",
         "slug": "drizzle",
         "type": "generic",
         "cost": {
-          "activation": "simple",
+          "activation": "free",
           "powerPoints": 2,
-          "trigger": "The user uses Rain Dance.",
+          "trigger": "<p>The user declares Rain Dance.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,10 +24,42 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user uses Rain Dance.\nEffect: Connection - Rain Dance. The set Rainy Weather has its duration increased by +2 Rounds."
+        "description": "<p>Trigger: The user declares Rain Dance.</p><p>Effect: The set Rainy Weather has its duration increased by +2 Rounds.</p>"
+      },
+      {
+        "slug": "rain-dance",
+        "name": "Rain Dance",
+        "type": "attack",
+        "traits": [
+          "weather",
+          "dance"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "water"
+        ],
+        "description": "<p>Effect: The Weather becomes Rainy for 3 rounds.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: The user uses Rain Dance.\nEffect: Connection - Rain Dance. The set Rainy Weather has its duration increased by +2 Rounds.",
+    "description": "<p>Trigger: The user declares Rain Dance.</p><p>Effect: Connection - Rain Dance. The set Rainy Weather has its duration increased by +2 Rounds.</p>",
     "traits": [
       "connection",
       "weather"

@@ -10,11 +10,11 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
   declare parent: CombatantPTR2e
 
   override get baseAV(): number {
-    return this.item?.system.baseAV ?? 999;
+    return this.delay !== null ? 999 : this.item?.system.baseAV ?? 999;
   }
 
   get duration() {
-    return this.item?.system.duration ?? 1;
+    return this.delay !== null ? 1 : this.item?.system.duration ?? 1;
   }
 
   get expired() {
@@ -30,7 +30,8 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
     return {
       ...super.defineSchema() as CombatantSystemSchema,
       owner: new fields.DocumentUUIDField({ required: true, nullable: true }),
-      item: new fields.JSONField({ required: true, nullable: false })
+      item: new fields.JSONField({ required: true, nullable: false }),
+      delay: new fields.NumberField({ required: true, initial: null, min: -2, max: 3 })
     }
   }
 
@@ -41,9 +42,9 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
       if (!this._source.item) return null;
       try {
         const jsonData = JSON.parse(this._source.item);
-        if(jsonData.uuid) {
+        if (jsonData.uuid) {
           const item = fromUuidSync<SummonPTR2e>(jsonData.uuid);
-          if(item) return item.clone(jsonData.system.owner ? {"system.owner": jsonData.system.owner} : {}, {keepId: true});
+          if (item) return item.clone(jsonData.system.owner ? { "system.owner": jsonData.system.owner } : {}, { keepId: true });
         }
 
         return ItemPTR2e.fromJSON(this._source.item) as SummonPTR2e;
@@ -59,7 +60,13 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
 
   override async onStartActivation() {
     const messages = [];
-    if (this.item?.system.actions?.size) {
+    if(this.delay !== null) {
+      const action = this.item?.system.actions?.contents?.[0];
+      if(action) {
+        messages.push(game.i18n.format("PTR2E.Combat.Summon.Messages.Delay", { name: action.actor?.link ?? "", action: action.link}));
+      }
+    }
+    else if (this.item?.system.actions?.size) {
       messages.push(game.i18n.localize("PTR2E.Combat.Summon.Messages.HasActions"));
       messages.push("<ul>")
       for (const action of this.item.system.actions) {
@@ -87,7 +94,7 @@ class SummonCombatantSystem extends CombatantSystemPTR2e {
 
       const result = await (action as SummonAttackPTR2e).execute(this, this.combat.combatants.contents);
       // Result is only 'False' if no owner was found and thus the attack couldn't be resolved
-      if(result === false) {
+      if (result === false) {
         console.warn(`Summon ${this.name} failed to execute action ${action.name} because no owner was found.`);
       }
     }
@@ -241,6 +248,7 @@ interface SummonCombatantSystem extends CombatantSystemPTR2e, ModelPropsFromSche
 interface SummonCombatantSchema extends CombatantSystemSchema {
   owner: foundry.data.fields.DocumentUUIDField<string, true, true, false>;
   item: foundry.data.fields.JSONField<SummonPTR2e | null, true, false, false>;
+  delay: foundry.data.fields.NumberField<number, number, true, true, true>;
 }
 
 export default SummonCombatantSystem;

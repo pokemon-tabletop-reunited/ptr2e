@@ -7,7 +7,7 @@
       {
         "traits": [
           "legendary",
-          "connection"
+          "interrupt-2"
         ],
         "name": "Perfect Specimen",
         "slug": "perfect-specimen",
@@ -15,7 +15,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 4,
-          "trigger": "The user declares Psystrike.",
+          "trigger": "<p>The user declares Psystrike.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,12 +24,11 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user declares Psystrike.\nEffect: Connection - Psystrike. The user can select up 5 additional targets with the triggering attack."
+        "description": "<p>Trigger: The user declares Psystrike.</p><p>Effect: The user can select up 5 additional targets with the triggering attack.</p>"
       },
       {
         "traits": [
-          "legendary",
-          "connection"
+          "legendary"
         ],
         "name": "Perfect Specimen",
         "slug": "perfect-specimen",
@@ -41,10 +40,43 @@
           "priority": null
         },
         "range": null,
-        "description": "Passive: The user has +1 default ATK and SPATK stages."
+        "description": "<p>Passive: The user has +1 default ATK and SPATK Stages.</p>"
+      },
+      {
+        "slug": "psystrike",
+        "name": "Psystrike",
+        "type": "attack",
+        "traits": [
+          "push-6",
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: The user declares Psystrike.\nEffect: Connection - Psystrike. The user can select up 5 additional targets with the triggering attack. Passive: The user has +1 default ATK and SPATK stages.",
+    "description": "<p>Trigger: The user declares Psystrike.</p><p>Effect: Connection - Psystrike. The user can select up 5 additional targets with the triggering attack. Passive: The user has +1 default ATK and SPATK Stages.</p>",
     "traits": [
       "legendary",
       "connection"

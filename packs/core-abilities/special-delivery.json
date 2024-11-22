@@ -6,7 +6,6 @@
     "actions": [
       {
         "traits": [
-          "connection"
         ],
         "name": "Special Delivery",
         "slug": "special-delivery",
@@ -22,10 +21,207 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Effect: Connection - Present. Present's Power is always 100 when attacking an enemy creature, and only heals 1/8 HP when used on allies. The user's Fling Power for Gear is increased by 50%."
+        "description": "<p>Effect: The user's Fling Power for Gear is increased by 50%.</p>"
+      },
+      {
+        "slug": "present",
+        "name": "Present",
+        "type": "attack",
+        "traits": [
+          "blast-1",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>User rolls 1 thru 40 on the declaration roll.</p>"
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 90,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: User rolls 1 thru 40 on the declaration roll.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "present-2",
+        "name": "Present x2",
+        "type": "attack",
+        "traits": [
+          "blast-1",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>User rolls 41 thru 60 on the declaration roll.</p>"
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 90,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: User rolls 41 thru 60 on the declaration roll.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "present",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "present-3",
+        "name": "Present x3",
+        "type": "attack",
+        "traits": [
+          "blast-1",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Trigger: User rolls 61 thru 70 on the declaration roll.</p>"
+        },
+        "category": "physical",
+        "power": 120,
+        "accuracy": 90,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: User rolls 61 thru 70 on the declaration roll.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "present",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "present-gift",
+        "name": "Present (Gift)",
+        "type": "attack",
+        "traits": [
+          "blast-1",
+          "healing",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Trigger: User rolls 71 thru 100 on the declaration roll.</p>"
+        },
+        "category": "status",
+        "accuracy": 90,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: User rolls 71 thru 100 on the declaration roll.</p><p>Effect: On hit, all valid targets recover 4 Ticks of HP.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "present",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "present-sp",
+        "name": "Present (Special Delivery)",
+        "type": "attack",
+        "traits": [
+          "blast-1",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Trigger: User rolls 1 thru 60 on the declaration roll.</p>"
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 90,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: User rolls 71 thru 100 on the declaration roll.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "present",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "present-gift-sp",
+        "name": "Present (Special Gift)",
+        "type": "attack",
+        "traits": [
+          "blast-1",
+          "healing",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>Trigger: User rolls 61 thru 100 on the declaration roll.</p>"
+        },
+        "category": "status",
+        "accuracy": 90,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: User rolls 61 thru 100 on the declaration roll.</p><p>Effect: On hit, all valid enemy targets recover 2 Ticks of HP, and all valid allied targets recover 8 Ticks of HP.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "present",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Effect: Connection - Present. Present's Power is always 100 when attacking an enemy creature, and only heals 1/8 HP when used on allies. The user's Fling Power for Gear is increased by 50%.",
+    "description": "<p>Effect: Connection - Present. The user spends 3 extra PP, to use Present (Special Delivery) in place of Present.</p><p>Passive: The user's Fling Power for Gear is increased by 50%.</p>",
     "traits": [
       "connection"
     ],

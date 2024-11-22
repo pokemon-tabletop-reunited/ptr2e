@@ -3,8 +3,12 @@ import { getTypes } from "@scripts/config/effectiveness.ts";
 import { ActionSchema } from "./action.ts";
 import { AttackStatistic } from "@system/statistics/attack.ts";
 import { AttackStatisticRollParameters } from "@system/statistics/statistic.ts";
-import { MovePTR2e } from "@item";
+// import { MovePTR2e } from "@item";
 import { ActorPTR2e } from "@actor";
+import { SlugField } from "../fields/slug-field.ts";
+import { AttackRollResult } from "@system/rolls/check-roll.ts";
+import { ItemPTR2e, SummonPTR2e } from "@item";
+import { CombatantPTR2e } from "@combat";
 
 export default class AttackPTR2e extends ActionPTR2e {
   declare type: "attack" | "summon";
@@ -84,21 +88,26 @@ export default class AttackPTR2e extends ActionPTR2e {
         label: "PTR2E.FIELDS.summon.label",
         hint: "PTR2E.FIELDS.summon.hint",
         type: "Item"
+      }),
+      defaultVariant: new SlugField({ 
+        required: true, 
+        nullable: true, 
+        initial: null,
+        label: "PTR2E.FIELDS.defaultVariant.label",
+        hint: "PTR2E.FIELDS.defaultVariant.hint"
+      }),
+      flingItemId: new foundry.data.fields.StringField({
+        required: true,
+        nullable: true,
+        initial: null,
+        label: "PTR2E.FIELDS.flingItemId.label",
+        hint: "PTR2E.FIELDS.flingItemId.hint",
       })
     };
   }
 
   get isFree(): boolean {
-    if(!this.variant) return this.free;
-    
-    const original = (this.original as AttackPTR2e);
-    if(!original) {
-      console.warn(`The attack '${this.name}' is set as a variant of '${this.variant}', but it does not exist!`);
-      return false;
-    }
-    if(original.free) return true;
-    if(original.slot !== null && this.actor?.attacks.actions[original.slot] == original) return true;
-    return false;
+    return this.free;
   }
 
   static override validateJoint(data: AttackPTR2e["_source"]) {
@@ -127,6 +136,15 @@ export default class AttackPTR2e extends ActionPTR2e {
     };
   }
 
+  get hasVariants(): boolean {
+    return this.variants.length > 0;
+  }
+
+  get variants(): string[] {
+    if(this.variant) return this.actor?.actions.attack.get(this.variant)?.variants ?? [];
+    return this.actor?.actions.attack.filter(a => a.variant == this.slug).map(a => a.slug) ?? [];
+  }
+
   // TODO: This should add any relevant modifiers
   get stab(): 0 | 1 | 1.5 {
     if (!this.actor) return 1;
@@ -139,27 +157,24 @@ export default class AttackPTR2e extends ActionPTR2e {
   }
 
   get rollable(): boolean {
-    return this.accuracy !== null || this.power !== null;
+    return true//this.accuracy !== null || this.power !== null;
   }
 
   getAttackStat(actor: Maybe<ActorPTR2e> = this.actor): number {
     return actor?.getAttackStat(this) ?? 0;
   }
 
-  async roll(args?: AttackStatisticRollParameters) {
+  async roll(args?: AttackStatisticRollParameters): Promise<AttackRollResult['rolls'][] | null | false> {
     if (!this.rollable) return false;
+    if(!args?.modifierDialog && !this.variant && this.defaultVariant) {
+      const variant = this.actor?.actions.attack.get(this.defaultVariant);
+      if(variant) return variant.roll(args);
+    } 
     return this.statistic!.check.roll(args);
   }
 
   override prepareDerivedData(): void {
     super.prepareDerivedData();
-
-    if (
-      this.item.type === "move" &&
-      (this.item as MovePTR2e).system.attack.slug !== this.slug
-    ) {
-      this.free = true;
-    }
 
     this.statistic = this.prepareStatistic();
   }
@@ -202,6 +217,62 @@ export default class AttackPTR2e extends ActionPTR2e {
       : rangeIncrement;
   }
 
+  async delayAction(number?: number) {
+    if(!this.actor) return;
+    if(!game.combat) return void ui.notifications.error("You must be in combat to be able to delay an action.");
+    if(game.combat.combatant?.actor !== this.actor) return void ui.notifications.error("You must be the active combatant to delay this action.");
+    if(number === undefined || number === null) {
+      const dialog = await foundry.applications.api.DialogV2.prompt<number>({
+        window: {title: game.i18n.localize("PTR2E.Dialog.DelayActionTitle")},
+        classes: ["center-text"],
+        content: `<p>${game.i18n.localize("PTR2E.Dialog.DelayActionContent")}</p><input type="number" name="delay" min=1 max=3 step=1>`,
+        ok: {
+          action: "ok",
+          label: "Delay Action",
+          callback: (_event, _button, dialog) => {
+            return dialog?.querySelector<HTMLInputElement>("input[name='delay']")?.value
+          }
+        }
+      })
+      if(!dialog) return;
+      number = dialog;
+    }
+    if(number <= 0) return;
+
+    const delay = Math.min(3, number);
+
+    const summonItem = new ItemPTR2e({
+      name: `${this.actor.name}'s Delayed (${delay}) ${this.name}`,
+      type: "summon",
+      img: this.img,
+      system: {
+        owner: this.actor.uuid,
+        actions: [
+          this.clone({
+            type: "summon",
+            targetType: "target"
+          }).toObject()
+        ]
+      }
+    }) as SummonPTR2e;
+
+    const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
+      name: summonItem.name,
+      type: "summon",
+      system: {
+        owner: this.actor?.uuid ?? null,
+        item: summonItem.toObject(),
+        delay
+      }
+    }])
+
+    if (!combatants.length) return void ui.notifications.error("Failed to create delay action.");
+
+    ChatMessage.create({
+      content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
+    });
+  }
+
   override prepareUpdate(data: DeepPartial<SourceFromSchema<ActionSchema>>): ActionPTR2e[] {
     const currentActions = super.prepareUpdate(data);
 
@@ -215,6 +286,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     return currentActions;
   }
 }
+
 export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {
   // update(
   //     data: DeepPartial<SourceFromSchema<AttackSchema>> &
@@ -247,4 +319,6 @@ interface AttackSchema extends foundry.data.fields.DataSchema {
   free: foundry.data.fields.BooleanField<boolean, boolean>;
   slot: foundry.data.fields.NumberField<number, number, true, true, true>;
   summon: foundry.data.fields.DocumentUUIDField<string>;
+  defaultVariant: SlugField<string, string, true, true, true>;
+  flingItemId: foundry.data.fields.StringField<string, string, true, true, true>;
 }

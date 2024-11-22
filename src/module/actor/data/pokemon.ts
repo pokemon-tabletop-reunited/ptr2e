@@ -13,7 +13,7 @@ class PokemonActorSystem extends ActorSystemPTR2e {
     options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean },
     user: User
   ) {
-    if (!this._source.species) {
+    if (!this.parent.items.has("actorspeciesitem")) {
       const promise = await new Promise<ItemPTR2e<SpeciesSystemModel> | null>((resolve) => {
         const app = new SpeciesDropSheet(resolve);
         app.render(true);

@@ -6,16 +6,16 @@
     "actions": [
       {
         "traits": [
-          "connection",
-          "weather"
+          "weather",
+          "interrupt-2"
         ],
         "name": "Drought",
         "slug": "drought",
         "type": "generic",
         "cost": {
-          "activation": "simple",
+          "activation": "free",
           "powerPoints": 2,
-          "trigger": "The user uses Drought.",
+          "trigger": "<p>The user declares Drought.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,10 +24,41 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user uses Sunny Day.\nEffect: Connection - Sunny Day. The set SunnyWeather has its duration increased by +2 Rounds."
+        "description": "<p>Trigger: The user declares Sunny Day.</p><p>Effect: The set Sunny Weather has its duration increased by +2 Rounds.</p>"
+      },
+      {
+        "slug": "sunny-day",
+        "name": "Sunny Day",
+        "type": "attack",
+        "traits": [
+          "weather"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "fire"
+        ],
+        "description": "<p>Effect: The Weather becomes Sunny for 3 rounds.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "slot": null
       }
     ],
-    "description": "Trigger: The user uses Sunny Day.\nEffect: Connection - Sunny Day. The set SunnyWeather has its duration increased by +2 Rounds.",
+    "description": "<p>Trigger: The user declares Sunny Day.</p><p>Effect: Connection - Sunny Day. The set Sunny Weather has its duration increased by +2 Rounds.</p>",
     "traits": [
       "connection",
       "weather"

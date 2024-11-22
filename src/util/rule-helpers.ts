@@ -31,6 +31,36 @@ function extractModifiers(
   return modifiers;
 }
 
+async function extractTargetModifiers({
+  origin,
+  target,
+  item,
+  attack,
+  action,
+  domains,
+  options,
+}: Omit<ExtractEphemeralEffectsParams, 'affects'>): Promise<ModifierPTR2e[]> {
+  if (!(origin && target)) return [];
+
+  const fullOptions = [
+    ...options,
+    target.getRollOptions(domains),
+    origin.getSelfRollOptions("origin"),
+  ].flat();
+  const resolvables = { item, attack, action };
+  return (
+    await Promise.all(
+      domains
+        .flatMap((s) => target.synthetics.ephemeralModifiers[s] ?? [])
+        .map((d) => d({ test: fullOptions, resolvables }))
+    )
+  ).flatMap((e) => e ?? [])
+  .map(m => {
+    m.appliesTo = new Map([[origin.uuid, true]]);
+    return m;
+  });
+}
+
 function extractModifierAdjustments(
   adjustmentsRecord: ActorSynthetics["modifierAdjustments"],
   selectors: string[],
@@ -242,6 +272,7 @@ export {
   extractModifiers,
   extractModifierAdjustments,
   extractNotes,
+  extractTargetModifiers,
   extractEphemeralEffects,
   isBracketedValue,
   extractEffectRolls,

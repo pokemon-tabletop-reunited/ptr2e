@@ -6,8 +6,7 @@
     "actions": [
       {
         "traits": [
-          "hazard",
-          "connection"
+          "hazard"
         ],
         "name": "Spider Lair",
         "slug": "spider-lair",
@@ -15,7 +14,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 0,
-          "trigger": "At the start of combat or when the user is switched in.",
+          "trigger": "<p>The user enters combat.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,10 +23,42 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: At the start of combat or when the user is switched in.\nEffect: Connection - Sticky Web. The user freely uses Sticky Web. Spider Web Hazards created by the user do not affect the user or their allies."
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user freely uses Sticky Web. Spider Web Hazards created by the user do not affect the user or their allies.</p>"
+      },
+      {
+        "slug": "sticky-web",
+        "name": "Sticky Web",
+        "type": "attack",
+        "traits": [
+          "hazard",
+          "blast-4"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "bug"
+        ],
+        "description": "<p>Effect: A weave of webs covers all surfaces in the [Blast X] area, with squares that have two or more surfaces covered treating the whole space as having the Hazard, not just the surfaces. Each time an enemy creature moves through a space and touches the Hazard, they lose -1 SPD Stage for 5 activations. An enemy creature that starts their Activation touching the Hazard is @Affliction[slowed] 1.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: At the start of combat or when the user is switched in.\nEffect: Connection - Sticky Web. The user freely uses Sticky Web. Spider Web Hazards created by the user do not affect the user or their allies.",
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Sticky Web. The user freely uses Sticky Web. Spider Web Hazards created by the user do not affect the user or their allies.</p>",
     "traits": [
       "hazard",
       "connection"

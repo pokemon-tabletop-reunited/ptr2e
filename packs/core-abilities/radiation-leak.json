@@ -6,8 +6,8 @@
     "actions": [
       {
         "traits": [
-          "connection",
-          "weather"
+          "weather",
+          "interrupt-2"
         ],
         "name": "Radiation Leak",
         "slug": "radiation-leak",
@@ -15,7 +15,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "The user declares Fallout.",
+          "trigger": "<p>The user declares Fallout.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,10 +24,41 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user declares Fallout.\nEffect: Connection - Fallout. The set Glowy Weather has its duration increased by +2 Rounds."
+        "description": "<p>Trigger: The user declares Fallout.</p><p>Effect: The set Glowy Weather has its duration increased by +2 Rounds.</p>"
+      },
+      {
+        "slug": "fallout",
+        "name": "Fallout",
+        "type": "attack",
+        "traits": [
+          "weather"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "nuclear"
+        ],
+        "description": "<p>Effect: The Weather becomes Glowy for 3 rounds.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: The user declares Fallout.\nEffect: Connection - Fallout. The set Glowy Weather has its duration increased by +2 Rounds.",
+    "description": "<p>Trigger: The user declares Fallout.</p><p>Effect: Connection - Fallout. The set Glowy Weather has its duration increased by +2 Rounds.</p>",
     "traits": [
       "connection",
       "weather"

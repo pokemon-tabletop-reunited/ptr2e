@@ -6,15 +6,16 @@
     "actions": [
       {
         "traits": [
-          "defensive"
+          "defensive",
+          "interrupt-1"
         ],
         "name": "Perish Body",
         "slug": "perish-body",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "powerPoints": 5,
-          "trigger": "The user is hit by a [Contact] attack.",
+          "powerPoints": 3,
+          "trigger": "<p>The user is hit by a [Contact] attack.</p>",
           "delay": null,
           "priority": null
         },
@@ -23,10 +24,10 @@
           "distance": 1,
           "unit": "m"
         },
-        "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The user and and the triggering creature gain @Affliction[perish] 7."
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user and and the triggering creature gain @Affliction[perish] 7.</p>"
       }
     ],
-    "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The user and and the triggering creature gain @Affliction[perish] 7.",
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user and and the triggering creature gain @Affliction[perish] 7.</p>",
     "traits": [
       "defensive"
     ],

@@ -36,7 +36,7 @@ class SkillPTR2e extends foundry.abstract.DataModel {
   }
 
   prepareBaseData(): void {
-    const speciesTrait = this.parent.species?.skills?.get(this.slug);
+    const speciesTrait = this.actor.species?.skills?.get(this.slug);
     if (speciesTrait && this.value <= 1) {
       this.value = speciesTrait.value;
     }

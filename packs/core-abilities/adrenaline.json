@@ -18,11 +18,11 @@
           "target": "self",
           "unit": "m"
         },
-        "description": "Effect: While the user meets the [Desperation 1/2] Condition, their SPD stat is increased by 50%.",
+        "description": "<p>Effect: While the user meets the [Desperation 1/2] Condition, their SPD stat is increased by 50% and they have +1 .</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Effect: While the user meets the [Desperation 1/2] Condition, their SPD stat is increased by 50%.",
+    "description": "<p>Effect: While the user meets the [Desperation 1/2] Condition, their SPD stat is increased by 50%.</p>",
     "traits": [
       "desperation-1-2"
     ],
@@ -43,7 +43,7 @@
         "changes": [
           {
             "type": "basic",
-            "key": "system.attributes.spd",
+            "key": "system.attributes.spd.value",
             "value": {
               "brackets": [
                 {
@@ -56,6 +56,24 @@
             },
             "predicate": [],
             "mode": 1,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.attributes.spd.value",
+            "value":  {
+              "brackets": [
+                {
+                  "start": 1,
+                  "end": 50,
+                  "value": 1
+                }
+              ],
+              "field": "actor|system.health.percent"
+            },
+            "predicate": [],
+            "mode": 2,
             "priority": null,
             "ignored": false
           }

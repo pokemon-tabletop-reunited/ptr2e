@@ -7,7 +7,7 @@
       {
         "traits": [
           "terrain",
-          "connection"
+          "interrupt-2"
         ],
         "name": "Psychic Surge",
         "slug": "psychic-surge",
@@ -15,7 +15,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "The user uses Psychic Terrain.",
+          "trigger": "<p>The user declares Psychic Terrain.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,12 +24,11 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user uses Psychic Terrain.\nEffect: Connection - Psychic Terrain. Increase the number of rounds Psychic Terrain persists by 2."
+        "description": "<p>Trigger: The user declares Psychic Terrain.</p><p>Effect: Increase the number of rounds Psychic Terrain persists by 2.</p>"
       },
       {
         "traits": [
           "terrain",
-          "connection",
           "environ"
         ],
         "name": "Psychic Surge",
@@ -46,10 +45,41 @@
           "distance": 5,
           "unit": "m"
         },
-        "description": "Passive: If a space within range possesses Psychic Terrain, the user is affected by Psychic Terrain."
+        "description": "<p>Passive: If a space within range possesses Psychic Terrain, the user is affected by Psychic Terrain.</p>"
+      },
+      {
+        "slug": "psychic-terrain",
+        "name": "Psychic Terrain",
+        "type": "attack",
+        "traits": [
+          "terrain"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: The Terrain type is set to Psychic Terrain for 3 rounds.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: The user uses Psychic Terrain.\nEffect: Connection - Psychic Terrain. Increase the number of rounds Psychic Terrain persists by 2.\nPassive: If a space within range possesses Psychic Terrain, the user is affected by Psychic Terrain.",
+    "description": "<p>Trigger: The user declares Psychic Terrain.</p><p>Effect: Connection - Psychic Terrain. Increase the number of rounds Psychic Terrain persists by 2.</p><p>Passive: If a space within range possesses Psychic Terrain, the user is affected by Psychic Terrain.</p>",
     "traits": [
       "terrain",
       "connection",

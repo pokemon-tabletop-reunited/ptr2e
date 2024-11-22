@@ -6,7 +6,8 @@
     "actions": [
       {
         "traits": [
-          "healing"
+          "healing",
+          "interrupt-2"
         ],
         "name": "Regenerator",
         "slug": "regenerator",
@@ -14,7 +15,7 @@
         "cost": {
           "activation": "free",
           "powerPoints": 4,
-          "trigger": "A new Round begins and the user is not @Affliction[fainted].",
+          "trigger": "<p>A new Round begins and the user is not @Affliction[fainted].</p>",
           "delay": null,
           "priority": null
         },
@@ -23,10 +24,10 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: A new Round begins and the user is not @Affliction[fainted].\nEffect: The user recovers 5 Ticks of HP."
+        "description": "<p>Trigger: A new Round begins and the user is not @Affliction[fainted].</p><p>Effect: The user recovers 5 Ticks of HP.</p>"
       }
     ],
-    "description": "Trigger: A new Round begins and the user is not @Affliction[fainted].\nEffect: The user recovers 5 Ticks of HP.",
+    "description": "<p>Trigger: A new Round begins and the user is not @Affliction[fainted].</p><p>Effect: The user recovers 5 Ticks of HP.</p>",
     "traits": [
       "healing"
     ],

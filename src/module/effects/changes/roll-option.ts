@@ -12,7 +12,7 @@ export default class RollOptionChangeSystem extends ChangeModel {
   constructor(source: ChangeSource, options: ChangeModelOptions) {
     super(source, options);
 
-    this.priority ??= -1;
+    this.priority ??= -10;
   }
 
   static override defineSchema() {

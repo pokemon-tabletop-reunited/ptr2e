@@ -255,11 +255,13 @@ class SpeciesSystem extends SpeciesExtension {
   }
 
   static override migrateData(source: SpeciesSystem['_source']) {
-    for (const abGroup of Object.keys(source.abilities)) {
-      source.abilities[abGroup] = (source.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g => {
-        if (typeof g == "object") return g;
-        return { slug: g, uuid: null };
-      });
+    if(source.abilities) {
+      for (const abGroup of Object.keys(source.abilities)) {
+        source.abilities[abGroup] = (source.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g => {
+          if (typeof g == "object") return g;
+          return { slug: g, uuid: null };
+        });
+      }
     }
     return super.migrateData(source);
   }

@@ -6,8 +6,8 @@
     "actions": [
       {
         "traits": [
-          "connection",
-          "weather"
+          "weather",
+          "interrupt-2"
         ],
         "name": "Windvane",
         "slug": "windvane",
@@ -15,7 +15,7 @@
         "cost": {
           "activation": "simple",
           "powerPoints": 2,
-          "trigger": "The user uses Tailwind.",
+          "trigger": "<p>The user declares Tailwind.</p>",
           "delay": null,
           "priority": null
         },
@@ -24,10 +24,41 @@
           "distance": 0,
           "unit": "m"
         },
-        "description": "Trigger: The user uses Tailwind.\nEffect: Connection - Tailwind. The set Windy Weather has its duration increased by +2 Rounds."
+        "description": "<p>Trigger: The user declares Tailwind.</p><p>Effect: The set Windy Weather has its duration increased by +2 Rounds.</p>"
+      },
+      {
+        "slug": "tailwind",
+        "name": "Tailwind",
+        "type": "attack",
+        "traits": [
+          "weather"
+        ],
+        "range": {
+          "target": "field",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "flying"
+        ],
+        "description": "<p>Effect: The weather becomes Windy for 3 rounds.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Trigger: The user uses Tailwind.\nEffect: Connection - Tailwind. The set Windy Weather has its duration increased by +2 Rounds.",
+    "description": "<p>Trigger: The user declares Tailwind.</p><p>Effect: Connection - Tailwind. The set Windy Weather has its duration increased by +2 Rounds.</p>",
     "traits": [
       "connection",
       "weather"

@@ -112,12 +112,18 @@
       "changes": [
         {
           "type": "basic",
-          "key": "system.attributes.spe.base",
+          "key": "system.attributes.spe.value",
           "value": 0.5,
           "predicate": [],
           "mode": 1,
           "priority": null,
           "ignored": false
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spe.stage",
+          "value": -2,
+          "mode": 2
         },
         {
           "type": "grant-effect",
@@ -228,12 +234,18 @@
         },
         {
           "type": "basic",
-          "key": "system.attributes.spe.base",
+          "key": "system.attributes.spe.value",
           "value": 1.5,
           "predicate": [],
           "mode": 1,
           "priority": null,
           "ignored": false
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spe.stage",
+          "value": 1,
+          "mode": 2
         }
       ],
       "formula": null,
@@ -605,7 +617,20 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "choice-set",
+          "choices": "flags.ptr2e.disableActionOptions.options",
+          "adjustName": true,
+          "rollOption": "disabled"
+        },
+        {
+          "type": "basic",
+          "key": "flags.ptr2e.disableActionOptions.disabled",
+          "value": "{effect|flags.ptr2e.choiceSelections.disabled}",
+          "mode": 2
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -625,7 +650,18 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "choice-set",
+          "choices": "nullifiableAbilities",
+          "adjustName": true,
+          "rollOption": "nullified"
+        },
+        {
+          "type": "suppress-ability",
+          "key": "{effect|flags.ptr2e.choiceSelections.nullified}"
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -645,7 +681,15 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "alter-attack",
+          "value": 1.5,
+          "mode": 1,
+          "property": "pp-cost",
+          "definition": []
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,

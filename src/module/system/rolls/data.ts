@@ -110,6 +110,8 @@ interface CheckRollContext extends BaseRollContext {
         target: EffectRoll[];
         origin: EffectRoll[];
     };
+    /** Attack Variants' slugs */
+    variants?: string[];
 }
 
 export type { AttackRollParams, BaseRollContext, CheckRollContext, DamageRollParams, RollParameters, RollData};

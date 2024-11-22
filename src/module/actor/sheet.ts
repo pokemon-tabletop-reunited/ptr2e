@@ -1,7 +1,5 @@
 import { AbilityPTR2e, ItemPTR2e, ItemSystemPTR, SpeciesPTR2e } from "@item";
 import ActorPTR2e from "./base.ts";
-import { SpeciesDropSheet } from "./sheets/species-drop-sheet.ts";
-import { SpeciesSystemModel } from "@item/data/index.ts";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
 import { Tab } from "@item/sheets/document.ts";
 import { ActorComponentKey, ActorComponents, ComponentPopout } from "./components/sheet.ts";
@@ -53,18 +51,12 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       classes: ["ptr2e", "sheet", "actor", "v2"],
       position: {
         width: 900,
-        height: 660,
+        height: 680,
       },
       window: {
         resizable: true,
         controls: [
           ...(super.DEFAULT_OPTIONS?.window?.controls ?? []),
-          {
-            icon: "fas fa-paw",
-            label: "PTR2E.ActorSheet.Species",
-            action: "species-header",
-            visible: true,
-          },
           {
             icon: "fas fa-cog",
             label: "PTR2E.ActorSheet.Settings.Title",
@@ -110,41 +102,9 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       actions: {
         "species-header": async function (this: ActorSheetPTRV2, event: Event) {
           event.preventDefault();
-          const species = this.actor.system.species!;
-          const sheet = new SpeciesDropSheet((item) => {
-            if (!item) return;
-            if (
-              !(
-                item instanceof CONFIG.Item.documentClass &&
-                item.system instanceof SpeciesSystemModel
-              )
-            )
-              return;
-            if (item.slug !== species.slug) {
-              const species = item.toObject().system;
-              species.slug ||= sluggify(item.name);
-              this.actor.update({ "system.species": species });
-            }
-          });
-          sheet.species = new CONFIG.Item.documentClass(
-            {
-              _id: "actorSpeciesItem",
-              name: species.slug
-                ? Handlebars.helpers.formatSlug(species.slug)
-                : this.actor.name,
-              type: "species",
-              img: this.actor.img,
-              flags: {
-                ptr2e: {
-                  disabled: !this.actor.system._source.species,
-                  virtual: true,
-                },
-              },
-              system: species.toObject(),
-            },
-            { parent: this.document }
-          ) as SpeciesPTR2e;
-          sheet.render(true);
+          const species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
+          if(!species) return;
+          species.sheet.render(true);
         },
         "open-inspector": async function (this: ActorSheetPTRV2, event: Event) {
           event.preventDefault();
@@ -477,6 +437,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   ) {
     if (partId === "overview") {
       context.movement = Object.values(this.actor.system.movement);
+    }
+
+    if (partId === "sidebar") {
+      context.species = this.actor.items.get("actorspeciesitem") as SpeciesPTR2e;
     }
 
     if (partId === "clocks") {
@@ -1014,6 +978,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     ) as HTMLElement;
     if (!abilityDiv) return;
 
+    if(ability.system.isSuppressed) return void ui.notifications.warn("This ability is suppressed and cannot be re-assigned.");
+
     const slot = Number(abilityDiv.dataset.slot);
     if (isNaN(slot)) return;
 
@@ -1023,6 +989,8 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       return;
     }
     if (currentAbility === ability) return;
+
+    if(currentAbility.system.isSuppressed) return void ui.notifications.warn("That slot is filled with a suppressed ability which cannot be re-assigned");
 
     this.actor.updateEmbeddedDocuments("Item", [
       { _id: currentAbility.id, "system.slot": ability.system.slot ?? null },

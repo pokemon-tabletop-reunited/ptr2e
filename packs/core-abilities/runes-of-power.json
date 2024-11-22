@@ -5,25 +5,39 @@
   "system": {
     "actions": [
       {
+        "slug": "hidden-power-rune",
+        "name": "Hidden Power (Rune)",
+        "type": "attack",
         "traits": [
-          "innate",
-          "connection"
+          "pp-updated",
+          "pulse"
         ],
-        "name": "Runes of Power",
-        "slug": "runes-of-power",
-        "type": "passive",
-        "cost": {
-          "activation": "free"
-        },
         "range": {
-          "target": "self",
+          "target": "creature",
+          "distance": 5,
           "unit": "m"
         },
-        "description": "Effect: Connection - Hidden Power. The user's Hidden Power changes its Type to Typeless and is one step super effective against targets.",
-        "img": "icons/svg/explosion.svg"
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "typeless"
+        ],
+        "description": "<p>Effect: this attack is one step super effective against targets.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Effect: Connection - Hidden Power. The user's Hidden Power changes its Type to Typeless and is one step super effective against targets.",
+    "description": "<p>Effect: Connection - Hidden Power. The user's Hidden Power changes its Type to Typeless and is one step super effective against targets.</p>",
     "traits": [
       "innate",
       "connection",

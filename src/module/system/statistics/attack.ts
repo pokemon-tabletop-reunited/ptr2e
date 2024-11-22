@@ -11,6 +11,8 @@ import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import { extractEffectRolls, extractModifierAdjustments, extractModifiers, extractNotes } from "src/util/rule-helpers.ts";
 import { CheckRollContext } from "@system/rolls/data.ts";
 import { CheckPTR2e } from "@system/check.ts";
+import { AttackModifierPopup } from "@module/apps/modifier-popup/attack-modifier-popup.ts";
+import { ActionUUID } from "src/util/uuid.ts";
 
 type AttackStatisticData = StatisticData & Required<Pick<StatisticData, "defferedValueParams" | 'modifiers' | 'domains' | 'rollOptions'>>;
 type AttackRollParameters = AttackStatisticRollParameters
@@ -181,6 +183,9 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       return [...game.user.targets ?? []].map(t => ({ actor: t.actor as ActorPTR2e, token: t as TokenPTR2e }));
     })()
 
+    const variants = args.variants ?? this.attack.variants?.length ? this.attack.variants : [];
+    if(variants.length) args.skipDialog = false; 
+
     // Get context without target for basic information 
     const context = await this.actor.getCheckContext({
       attack: this.attack,
@@ -190,6 +195,11 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       options,
       traits: args.traits ?? this.item.traits,
     }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>;
+
+    if(context.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
+      ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", {name: this.attack.name}));
+      return null;
+    }
 
     const selfEffectRolls = await extractEffectRolls({
       affects: "self",
@@ -218,6 +228,11 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         options: new Set([...options, `origin:${allyOrEnemy}`]),
         traits: args.traits ?? this.item.traits,
       }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
+
+      if(currContext.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
+        ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", {name: this.attack.name}));
+        return null;
+      }
 
       if (this.attack.isRanged && typeof currContext.target?.rangeIncrement === "number") {
         const rip = currContext.target!.rangeIncrement!;
@@ -251,7 +266,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
 
     //TODO: Apply just-in-time roll options from changes
 
-    const checkContext: CheckRollContext & { contexts: Record<ActorUUID, CheckContext> } = {
+    const checkContext: CheckRollContext & { contexts: Record<ActorUUID, CheckContext>, modifierDialog?: AttackModifierPopup } = {
       type: "attack-roll",
       identifier: args.identifier ?? `${context.self.item.slug}.${context.self.attack.slug}`,
       action: args.action || context.self.attack.slug,
@@ -266,6 +281,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       domains: this.domains,
       damaging: args.damaging,
       createMessage: args.createMessage ?? true,
+      variants,
+      modifierDialog: args.modifierDialog,
       skipDialog: args.skipDialog ?? targets.length === 0,
       omittedSubrolls: (() => {
         const ommited = new Set<"damage" | "crit" | "accuracy">();

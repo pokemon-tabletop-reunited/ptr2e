@@ -6,7 +6,7 @@ import TypeDataModel from "types/foundry/common/abstract/type-data.js";
 import { AttackRollResult, CheckRoll, PokeballRollResults } from "../system/rolls/check-roll.ts";
 import AttackMessageSystem from "./models/attack.ts";
 import * as R from "remeda";
-import { ItemPTR2e, SummonPTR2e } from "@item";
+import { SummonPTR2e } from "@item";
 import { AttackPTR2e } from "@data";
 import { CombatantPTR2e } from "@combat";
 
@@ -126,6 +126,41 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
       this.system.activateListeners(html);
     }
 
+    // Delay Button
+    html.find("button.delay-attack").on("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const { attackUuid } = event.currentTarget.dataset;
+      const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+      if (!action) return void ui.notifications.error("Action not found.");
+
+      return action.delayAction();
+    });
+
+    // PP Button
+    html.find("button.consume-pp").on("click", async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const { attackUuid } = event.currentTarget.dataset;
+      const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+      if (!action) return void ui.notifications.error("Action not found.");
+
+      const ppCost = action.cost.powerPoints
+      if(!ppCost) return void ui.notifications.error("No PP cost found on action.");
+
+      const actor = action!.actor;
+      if (!actor) return void ui.notifications.error("Unable to detect actor.");
+
+      if(ppCost > actor.system.powerPoints.value) return void ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: ppCost, current: actor.system.powerPoints.value }));
+
+      await actor.update({
+        "system.powerPoints.value": actor.system.powerPoints.value - ppCost,
+      })
+      ui.notifications.info(`You have ${actor.system.powerPoints.value} power points remaining. (Used ${ppCost})`);
+    });
+
     // Summon Button
     html.find("button.create-summon").on("click", async (event) => {
       event.preventDefault();
@@ -133,9 +168,9 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
 
       if (!game.combat) return void ui.notifications.error("You must be in combat to summon a creature.");
 
-      const { itemUuid, attack: actionSlug } = event.currentTarget.dataset;
-      const item = await fromUuid<ItemPTR2e>(itemUuid);
-      const action = item?.actions?.get(actionSlug);
+      const { attackUuid } = event.currentTarget.dataset;
+      const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+      if (!action) return void ui.notifications.error("Action not found.");
       if (!(action?.type === "attack" && action.summon)) return void ui.notifications.error("Action not found on item.");
 
       const summonItem = await fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
@@ -145,8 +180,8 @@ class ChatMessagePTR2e<TSchema extends TypeDataModel = TypeDataModel> extends Ch
         name: summonItem.name,
         type: "summon",
         system: {
-          owner: item?.actor?.uuid ?? null,
-          item: { ...summonItem.clone({"system.owner": item?.actor?.uuid ?? null}).toObject(), uuid: summonItem.uuid }
+          owner: action.actor?.uuid ?? null,
+          item: { ...summonItem.clone({"system.owner": action.actor?.uuid ?? null}).toObject(), uuid: summonItem.uuid }
         }
       }])
 

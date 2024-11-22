@@ -1,4 +1,4 @@
-import { CombatPTR2e } from "@combat";
+import { CombatPTR2e, SummonCombatantSystem } from "@combat";
 import { htmlQuery } from "@utils";
 
 class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTracker<TEncounter> {
@@ -15,6 +15,9 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
             const combatant = this.viewed?.combatants.get(turn.id);
             if(!combatant) return turn;
             turn.type = combatant?.type;
+            if(combatant.type === "summon" && combatant.system.delay !== null && (combatant.system as SummonCombatantSystem).delay! >= -1) {
+              turn.delay = (combatant.system as SummonCombatantSystem).delay!;
+            }
             return turn;
         })
 
@@ -27,7 +30,8 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
                 ...(data.turns.find((t: {id: string}) => t.id === current.id) || {}),
                 initiative: current.baseAV,
                 css: "preview",
-                preview: true
+                preview: true,
+                delay: undefined
             } as CombatTrackerTurn;
         })();
         
@@ -49,6 +53,35 @@ class CombatTrackerPTR2e<TEncounter extends CombatPTR2e | null> extends CombatTr
                 } : this.viewed!.combatants.get(b.id)!;
                 return this.viewed!._sortCombatants(aCombatant, bCombatant);
             })
+        }
+
+        const delaySummons = data.turns.filter(c => c.delay !== undefined);
+        for (const summon of delaySummons) {
+          // Delayed summons go after X amount of other activations, instead of being based on AV.
+          // Thus, insert the summon at the correct position in the turn order.
+          const delay = summon.delay!;
+          data.turns.splice(data.turns.indexOf(summon), 1);
+
+          if(delay === -1) {
+            data.turns.unshift(summon);
+            continue;
+          }
+
+          let i = 0;
+          let validTurns = 0;
+          while(validTurns < delay) {
+            i++;
+            if(i >= data.turns.length) {
+              break;
+            }
+            const nextTurn = data.turns[i];
+            // Make sure to exclude other rounds & summons from the delay count
+            if (nextTurn.type === "round" || nextTurn.type === "summon" || nextTurn.defeated) {
+              continue;
+            }
+            validTurns++;
+          }
+          data.turns.splice(i+1, 0, summon);
         }
 
         return data;
