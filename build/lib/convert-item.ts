@@ -391,6 +391,7 @@ function perkToMarkdown(perk: any): MarkdownResult | null {
 }
 
 function speciesToMarkdown(species: any): MarkdownResult | null {
+    if(species.folder) return null;
     const path = getMarkdownPath({
         type: "species",
         category: getCategory(species.name),
