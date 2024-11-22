@@ -35,11 +35,6 @@ export class FormConfigSheet extends ActiveEffectConfig {
       template: "systems/ptr2e/templates/effects/form/overview.hbs",
       scrollable: [".scroll"],
     },
-    effects: {
-      id: "effects",
-      template: "systems/ptr2e/templates/effects/form/effects.hbs",
-      scrollable: [".scroll"],
-    },
     changes: {
       id: "changes",
       template: "systems/ptr2e/templates/effects/form/changes.hbs",
@@ -57,12 +52,6 @@ export class FormConfigSheet extends ActiveEffectConfig {
       group: "sheet",
       icon: "fa-solid fa-house",
       label: "PTR2E.EffectSheet.Tabs.overview.label",
-    },
-    details: {
-      id: "effects",
-      group: "sheet",
-      icon: "fa-solid fa-cogs",
-      label: "PTR2E.EffectSheet.Tabs.effects.label",
     },
     changes: {
       id: "changes",

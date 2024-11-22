@@ -24,6 +24,8 @@ import RemoveTraitChangeSystem from "../remove-trait.ts";
 import RemoveTraitForm from "./remove-trait.ts";
 import SuppresAbilityChangeSystem from "../suppress-ability.ts";
 import SuppresAbilityForm from "./suppress-ability.ts";
+import StatsAlterationChangeSystem from "../stats-alteration.ts";
+import StatsAlterationForm from "./stats-alteration.ts";
 // import AlterAttackChangeSystem from "../alter-attack.ts";
 // import AlterAttackForm from "./alter-attack.ts";
 
@@ -41,6 +43,7 @@ const CHANGE_FORMS: Partial<Record<string, ConstructorOf<ChangeForm>>> = {
     [AddTraitChangeSystem.TYPE]: AddTraitForm,
     [RemoveTraitChangeSystem.TYPE]: RemoveTraitForm,
     [SuppresAbilityChangeSystem.TYPE]: SuppresAbilityForm,
+    [StatsAlterationChangeSystem.TYPE]: StatsAlterationForm
     // [AlterAttackChangeSystem.TYPE]: AlterActionForm,
 };
 

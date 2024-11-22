@@ -142,19 +142,15 @@ class FormActiveEffectSystem extends ActiveEffectSystem {
         const conditions = (() => {
           if(change.key === "manual-forme-toggle") return changed?.system?.conditions ?? this.conditions;
 
-          if(changed?.system?.trigger) {
-            if(changed.system.trigger === this.trigger) return changed?.system?.conditions ?? this.conditions;
-
-            if(this.trigger === "automatic") {
-              return [...((changed?.system?.conditions ?? this.conditions) as this['conditions']), this.manualOption];
-            }
+          if(this.trigger === "manual" || changed.system.trigger === "manual") {
+            return [...((changed?.system?.conditions ?? this.conditions) as this['conditions']), this.manualOption];
           }
 
           return changed?.system?.conditions ?? this.conditions;
         })() as this["additionalPredicates"];
         for(const predicate of conditions) {
-          if(typeof predicate === "string" && !totalPredicate.includes(predicate)) {
-            totalPredicate.push(predicate);
+          if(typeof predicate === "string") {
+            if(!totalPredicate.includes(predicate)) totalPredicate.push(predicate);
             continue;
           }
           if(!totalPredicate.some(p => typeof p === "string" ? false : R.isDeepEqual(p, predicate))) {
