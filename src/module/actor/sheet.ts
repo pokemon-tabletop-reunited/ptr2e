@@ -246,34 +246,42 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
     overview: {
       id: "overview",
       template: "systems/ptr2e/templates/actor/actor-overview.hbs",
+      scrollable: [".scroll"]
     },
     actions: {
       id: "actions",
       template: "systems/ptr2e/templates/actor/actor-actions.hbs",
+      scrollable: [".scroll"]
     },
     inventory: {
       id: "inventory",
       template: "systems/ptr2e/templates/actor/actor-inventory.hbs",
+      scrollable: [".scroll"]
     },
     clocks: {
       id: "clocks",
       template: "systems/ptr2e/templates/actor/actor-clocks.hbs",
+      scrollable: [".scroll"]
     },
     skills: {
       id: "skills",
       template: "systems/ptr2e/templates/actor/actor-skills.hbs",
+      scrollable: [".scroll"]
     },
     perks: {
       id: "perks",
       template: "systems/ptr2e/templates/actor/actor-perks.hbs",
+      scrollable: [".scroll"]
     },
     biography: {
       id: "biography",
       template: "systems/ptr2e/templates/actor/actor-biography.hbs",
+      scrollable: [".scroll"]
     },
     effects: {
       id: "effects",
       template: "systems/ptr2e/templates/actor/actor-effects.hbs",
+      scrollable: [".scroll"]
     },
   };
 
