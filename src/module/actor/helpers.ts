@@ -5,7 +5,7 @@ import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { ScenePTR2e } from "@module/canvas/scene.ts";
 
 function auraAffectsActor(data: AuraEffectData, origin: ActorPTR2e, actor: ActorPTR2e): boolean {
-  return (
+  return data.appliesSelfOnly ? origin === actor : (
     (data.includesSelf && origin === actor) ||
     (data.affects === "allies" && actor.isAllyOf(origin)) ||
     (data.affects === "enemies" && actor.isEnemyOf(origin)) ||

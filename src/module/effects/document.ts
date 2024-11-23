@@ -476,6 +476,7 @@ interface ActiveEffectPTR2e<
         slug: string;
         origin: ActorUUID;
         removeOnExit: boolean;
+        amount?: number;
       };
     };
   }

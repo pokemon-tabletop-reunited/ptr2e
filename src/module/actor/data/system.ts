@@ -391,6 +391,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           ...trait,
           virtual: true,
         });
+        this.parent.rollOptions?.addTrait(trait);
       }
     }
 

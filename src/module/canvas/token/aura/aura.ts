@@ -103,7 +103,7 @@ class TokenAura implements TokenAuraData {
 
     const origin = { actor: auraActor, token: this.token };
     for (const actor of affectedActors) {
-      await actor.applyAreaEffects(auraData, origin);
+      await actor.applyAreaEffects(auraData, origin, affectedActors);
     }
   }
 }

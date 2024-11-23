@@ -1463,7 +1463,7 @@ class ActorPTR2e<
   }
 
   /** Apply effects from an aura: will later be expanded to handle effects from measured templates */
-  async applyAreaEffects(aura: AuraData, origin: { actor: ActorPTR2e; token: TokenDocumentPTR2e }): Promise<void> {
+  async applyAreaEffects(aura: AuraData, origin: { actor: ActorPTR2e; token: TokenDocumentPTR2e }, affected: Set<ActorPTR2e>): Promise<void> {
     if (
       game.user !== this.primaryUpdater ||
       origin.token.hidden
@@ -1472,18 +1472,42 @@ class ActorPTR2e<
     }
 
     const toCreate: EffectSourcePTR2e[] = [];
+    const toUpdate = new Map<string, { _id: string; "flags.ptr2e.aura.amount": number }>();
     const rollOptions = aura.effects.some((e) => e.predicate.length > 0)
       ? new Set([...origin.actor.getRollOptions(), ...this.getSelfRollOptions("target")])
       : new Set([]);
 
-    for (const data of aura.effects.filter(e => e.predicate.test(rollOptions))) {
-      if (this.appliedEffects.some(e => e.flags?.core?.sourceId === data.uuid)) continue;
+    // Predicate for appliesSelfOnly is checking how many actors in the aura count, not whether it should apply to this actor.
+    for (const data of aura.effects.filter(e => e.appliesSelfOnly ? origin.actor === this : e.predicate.test(rollOptions))) {
+      const existing = this.appliedEffects.find(e => e.flags?.core?.sourceId === data.uuid) as ActiveEffectPTR2e | undefined;
+      if (existing && !data.appliesSelfOnly) continue;
 
       if (!auraAffectsActor(data, origin.actor, this)) continue;
 
-      const effect = await fromUuid(data.uuid);
+      const effect = existing ?? await fromUuid(data.uuid);
       if (!((effect instanceof ItemPTR2e && effect.type === "effect") || effect instanceof ActiveEffectPTR2e)) {
         console.warn(`Effect from ${data.uuid} not found`);
+        continue;
+      }
+
+      const affectedActors = data.appliesSelfOnly ? affected
+        .filter(actor => auraAffectsActor({ ...data, appliesSelfOnly: false, includesSelf: false }, origin.actor, actor))
+        .filter(actor => {
+          const rollOptions = data.predicate.length > 0
+            ? new Set([
+              ...origin.actor.getRollOptions(),
+              ...actor.getSelfRollOptions("target")
+            ])
+            : new Set([]);
+          return data.predicate.test(rollOptions);
+        }) : new Set([]);
+
+      if (existing) {
+        const current = existing.flags.ptr2e.aura!.amount ?? 0;
+        const newAmount = affectedActors.size;
+        if (current === newAmount) continue;
+        existing.flags.ptr2e.aura!.amount = newAmount;
+        toUpdate.set(existing.uuid, { _id: existing.id, "flags.ptr2e.aura.amount": newAmount });
         continue;
       }
 
@@ -1495,7 +1519,8 @@ class ActorPTR2e<
           aura: {
             slug: aura.slug,
             origin: origin.actor.uuid,
-            removeOnExit: data.removeOnExit
+            removeOnExit: data.removeOnExit,
+            ...(data.appliesSelfOnly ? { amount: affectedActors.size } : {}),
           }
         }
       }
@@ -1507,6 +1532,9 @@ class ActorPTR2e<
 
     if (toCreate.length > 0) {
       await this.createEmbeddedDocuments("ActiveEffect", toCreate);
+    }
+    if (toUpdate.size > 0) {
+      await this.updateEmbeddedDocuments("ActiveEffect", Array.from(toUpdate.values()));
     }
   }
 
