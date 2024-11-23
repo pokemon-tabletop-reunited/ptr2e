@@ -17,5 +17,6 @@ export { default as AlterAttackChangeSystem } from "./alter-attack.ts";
 export { default as SuppresAbilityChangeSystem } from "./suppress-ability.ts";
 export { default as TokenAlterationsChangeSystem } from "./token-alterations.ts";
 export { default as StatsAlterationChangeSystem } from "./stats-alteration.ts";
+export { default as AuraChangeSystem } from "./aura.ts";
 export type * from "./choice-set/change-model.ts";
 export type * from "./data.ts";

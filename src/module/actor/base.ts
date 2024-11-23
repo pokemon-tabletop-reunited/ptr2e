@@ -1,11 +1,14 @@
 /* eslint-disable no-fallthrough */
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import {
+  ActorDimensions,
   ActorSynthetics,
   ActorSystemPTR2e,
   Attribute,
+  AuraData,
   HumanoidActorSystem,
   PokemonActorSystem,
+  Size,
 } from "@actor";
 import { ActiveEffectPTR2e, ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
@@ -33,6 +36,8 @@ import MoveSystem from "@item/data/move.ts";
 import SpeciesSystem from "@item/data/species.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { ActionUUID } from "src/util/uuid.ts";
+import { ActorSizePTR2e } from "./data/size.ts";
+import { auraAffectsActor, checkAreaEffects } from "./helpers.ts";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -45,6 +50,22 @@ class ActorPTR2e<
 > extends Actor<TParent, TSystem> {
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
+
+  constructor(data: object, context: DocumentConstructionContext<TParent> = {}) {
+    super(data, context);
+
+    Object.defineProperties(this, {
+      // Prevent object-recursing code from getting into `_itemTypes`,
+      _itemTypes: {
+        configurable: false,
+        enumerable: false,
+      },
+      // Add debounced checkAreaEffects method
+      checkAreaEffects: {
+        value: fu.debounce(checkAreaEffects, 50),
+      },
+    });
+  }
 
   get traits() {
     return this.system.traits;
@@ -118,9 +139,41 @@ class ActorPTR2e<
     return this._species ??= (this.items.get("actorspeciesitem")?.system as Maybe<SpeciesSystem>) ?? this.system.species ?? null;
   }
 
+  /**
+   * With the exception of vehicles, actor heights aren't specified. For the purpose of three-dimensional
+   * token-distance measurement, however, the system will generally treat actors as cubes.
+   */
+  get dimensions(): ActorDimensions {
+    const size = new ActorSizePTR2e({ value: this.species?.size?.category?.toLowerCase() as Size ?? "medium" });
+    return {
+      length: size.length,
+      width: size.width,
+      height: Math.min(size.length, size.width),
+    };
+  }
+
   /** The recorded schema version of this actor, updated after each data migration */
   get schemaVersion(): number | null {
     return Number(this.system._migration?.version) || null;
+  }
+
+  /** Get an active GM or, failing that, a player who can update this actor */
+  get primaryUpdater(): User | null {
+    // 1. The first active GM, sorted by ID
+    const { activeGM } = game.users;
+    if (activeGM) return activeGM;
+
+    const activeUsers = game.users.filter((u) => u.active);
+    // 2. The user with this actor assigned
+    const primaryPlayer = this.isToken ? null : activeUsers.find((u) => u.character?.id === this.id);
+    if (primaryPlayer) return primaryPlayer;
+
+    // 3. Anyone who can update the actor
+    const firstUpdater = game.users
+      .filter((u) => this.canUserModify(u, "update"))
+      .sort((a, b) => (a.id > b.id ? 1 : -1))
+      .shift();
+    return firstUpdater ?? null;
   }
 
   get party(): ActorParty | null {
@@ -228,6 +281,7 @@ class ActorPTR2e<
       },
     };
 
+    this.auras = new Map();
     this._party = null;
     this._perks = null;
     this._species = null;
@@ -794,7 +848,7 @@ class ActorPTR2e<
         c instanceof RollOptionChangeSystem && c.domain === domain && c.option === option,
     );
     const result = await change?.toggle(value, suboption) ?? null;
-    if(result === null) return result;
+    if (result === null) return result;
 
     await processPreUpdateHooks(this);
     return result;
@@ -1408,6 +1462,54 @@ class ActorPTR2e<
     );
   }
 
+  /** Apply effects from an aura: will later be expanded to handle effects from measured templates */
+  async applyAreaEffects(aura: AuraData, origin: { actor: ActorPTR2e; token: TokenDocumentPTR2e }): Promise<void> {
+    if (
+      game.user !== this.primaryUpdater ||
+      origin.token.hidden
+    ) {
+      return;
+    }
+
+    const toCreate: EffectSourcePTR2e[] = [];
+    const rollOptions = aura.effects.some((e) => e.predicate.length > 0)
+      ? new Set([...origin.actor.getRollOptions(), ...this.getSelfRollOptions("target")])
+      : new Set([]);
+
+    for (const data of aura.effects.filter(e => e.predicate.test(rollOptions))) {
+      if (this.appliedEffects.some(e => e.flags?.core?.sourceId === data.uuid)) continue;
+
+      if (!auraAffectsActor(data, origin.actor, this)) continue;
+
+      const effect = await fromUuid(data.uuid);
+      if (!((effect instanceof ItemPTR2e && effect.type === "effect") || effect instanceof ActiveEffectPTR2e)) {
+        console.warn(`Effect from ${data.uuid} not found`);
+        continue;
+      }
+
+      const flags = {
+        core: {
+          sourceId: data.uuid,
+        },
+        ptr2e: {
+          aura: {
+            slug: aura.slug,
+            origin: origin.actor.uuid,
+            removeOnExit: data.removeOnExit
+          }
+        }
+      }
+
+      const effects = (effect instanceof ItemPTR2e ? effect.effects : [effect]) as ActiveEffectPTR2e[];
+      const sources = effects.map(e => fu.mergeObject(e.toObject(), { flags }) as unknown as EffectSourcePTR2e);
+      toCreate.push(...sources);
+    }
+
+    if (toCreate.length > 0) {
+      await this.createEmbeddedDocuments("ActiveEffect", toCreate);
+    }
+  }
+
   isImmuneToEffect(data: ActiveEffectPTR2e | ActiveEffectPTR2e['_source']): boolean {
     const effect = data instanceof ActiveEffectPTR2e ? data : new ActiveEffectPTR2e(data);
     const immunities = this.rollOptions.getFromDomain("immunities");
@@ -1641,7 +1743,7 @@ class ActorPTR2e<
 
     // 
     try {
-      const updated = this.clone(changed, {keepId: true, addSource: true});
+      const updated = this.clone(changed, { keepId: true, addSource: true });
       await processPreUpdateHooks(updated);
     } catch (err) {
       console.error(err);
@@ -1886,6 +1988,11 @@ interface ActorPTR2e<
   _species: SpeciesSystem | null;
 
   get itemTypes(): Record<string, ItemPTR2e[]>;
+
+  auras: Map<string, AuraData>;
+
+  /** Added as debounced method */
+  checkAreaEffects(): void;
 
   fling: ItemPTR2e<MoveSystem, this>;
 }

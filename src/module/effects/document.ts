@@ -103,8 +103,8 @@ class ActiveEffectPTR2e<
   }
 
   override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
-    if(this.parent instanceof ItemPTR2e && this.parent && this.parent.system instanceof AbilitySystemModel) {
-      if(this.parent.system.suppress) return;
+    if (this.parent instanceof ItemPTR2e && this.parent && this.parent.system instanceof AbilitySystemModel) {
+      if (this.parent.system.suppress) return;
     }
     return this.system.apply(actor, change, options);
   }
@@ -287,8 +287,8 @@ class ActiveEffectPTR2e<
     options: DocumentUpdateContext<TParent>,
     user: User
   ): Promise<boolean | void> {
-    if(!changed?.changes && !changed?.system?.changes) return super._preUpdate(changed, options, user);
-    
+    if (!changed?.changes && !changed?.system?.changes) return super._preUpdate(changed, options, user);
+
     const parseChangePath = (expanded: { changes: unknown[]; system?: unknown }) => {
       expanded.system = fu.mergeObject(expanded.system ?? {}, {
         changes: expanded.changes,
@@ -417,7 +417,7 @@ class ActiveEffectPTR2e<
       }
     }
 
-    if(outputItemSources.length) {
+    if (outputItemSources.length) {
       await ItemPTR2e.createDocuments( //@ts-expect-error - this should not error
         outputItemSources,
         context as DocumentModificationContext<ActorPTR2e | null>
@@ -472,6 +472,11 @@ interface ActiveEffectPTR2e<
       rollOptions: {
         [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
       }
+      aura?: {
+        slug: string;
+        origin: ActorUUID;
+        removeOnExit: boolean;
+      };
     };
   }
 
