@@ -1,7 +1,7 @@
 import { ActorPTR2e, ActorSynthetics, EffectRoll } from "@actor";
-import { ActionPTR2e, AttackPTR2e } from "@data";
-import { BracketedValue, EffectSourcePTR2e } from "@effects";
-import { ItemPTR2e } from "@item";
+import { ActionPTR2e, AttackPTR2e, ChangeModel } from "@data";
+import { ActiveEffectPTR2e, BracketedValue, EffectSourcePTR2e } from "@effects";
+import { ItemPTR2e, ItemSourcePTR2e } from "@item";
 import {
   DeferredValueParams,
   ModifierAdjustment,
@@ -220,53 +220,94 @@ function isBracketedValue(value: unknown): value is BracketedValue {
   );
 }
 
-// async function processPreUpdateActorHooks(
-//     changed: Record<string, unknown>,
-//     { pack }: { pack: string | null }
-// ): Promise<void> {
-//     const actorId = String(changed._id);
-//     const actor = pack
-//         ? await game.packs.get(pack)?.getDocument(actorId)
-//         : game.actors.get(actorId);
-//     if (!(actor instanceof ActorPTR2e)) return;
+async function processPreUpdateHooks(document: ActorPTR2e | ActiveEffectPTR2e | ItemPTR2e) {
+  const actor = (() => {
+    if(document instanceof ActorPTR2e) return document;
+    if(document instanceof ActiveEffectPTR2e) return document.targetsActor() ? document.target : null;
+    if(document instanceof ItemPTR2e) return document.actor;
+    return null;
+  })();
+  if(!(actor instanceof ActorPTR2e)) return;
 
-//     // Run preUpdateActor rule element callbacks
-//     type WithPreUpdateActor = ChangeModel & {
-//         preUpdateActor: NonNullable<ChangeModel["preUpdateActor"]>;
-//     };
-//     const rules = actor.rules.filter((r): r is WithPreUpdateActor => !!r.preUpdateActor);
-//     if (rules.length === 0) return;
+  // Run preUpdateActor rule element callbacks
+  type WithPreUpdateActor = ChangeModel & {
+    preUpdateActor: NonNullable<ChangeModel["preUpdateActor"]>;
+  };
+  const changes = actor.appliedEffects.flatMap(e => e.changes).filter((c): c is WithPreUpdateActor => !!(c as ChangeModel).preUpdateActor);
+  if (changes.length === 0) return;
 
-//     actor.flags.ptr2e.rollOptions = actor.clone(changed, { keepId: true }).flags.ptr2e.rollOptions;
-//     const createDeletes = (
-//         await Promise.all(
-//             rules.map(
-//                 (r): Promise<{ create: ItemSourcePTR2e[]; delete: string[] }> =>
-//                     actor.items.has(r.item.id)
-//                         ? r.preUpdateActor()
-//                         : new Promise(() => ({ create: [], delete: [] }))
-//             )
-//         )
-//     ).reduce(
-//         (combined, cd) => {
-//             combined.create.push(...cd.create);
-//             combined.delete.push(...cd.delete);
-//             return combined;
-//         },
-//         { create: [], delete: [] }
-//     );
-//     createDeletes.delete = R.uniq(createDeletes.delete).filter((id) => actor.items.has(id));
+  // actor.flags.ptr2e.rollOptions = actor.clone(changed, { keepId: true }).flags.ptr2e.rollOptions;
+  const createDeletes = (
+      await Promise.all(
+          changes.map(
+              (c): Promise<{ create: ItemSourcePTR2e[]; delete: string[] }> => c.preUpdateActor()
+          )
+      )
+  ).reduce(
+      (combined, cd) => {
+          combined.create.push(...cd.create);
+          combined.delete.push(...cd.delete);
+          return combined;
+      },
+      { create: [], delete: [] }
+  );
+  createDeletes.delete = R.unique(createDeletes.delete).filter((id) => actor.items.has(id));
 
-//     if (createDeletes.create.length > 0) {
-//         await actor.createEmbeddedDocuments("Item", createDeletes.create, {
-//             keepId: true,
-//             render: false,
-//         });
-//     }
-//     if (createDeletes.delete.length > 0) {
-//         await actor.deleteEmbeddedDocuments("Item", createDeletes.delete, { render: false });
-//     }
-// }
+  if (createDeletes.create.length > 0) {
+      await actor.createEmbeddedDocuments("Item", createDeletes.create, {
+          keepId: true,
+          render: true,
+      });
+  }
+  if (createDeletes.delete.length > 0) {
+      await actor.deleteEmbeddedDocuments("Item", createDeletes.delete, { render: true });
+  }
+}
+
+async function processPreUpdateActorHooks(
+    changed: Record<string, unknown>,
+    { pack }: { pack: string | null }
+): Promise<void> {
+    const actorId = String(changed._id);
+    const actor = pack
+        ? await game.packs.get(pack)?.getDocument(actorId)
+        : game.actors.get(actorId);
+    if (!(actor instanceof ActorPTR2e)) return;
+
+    // Run preUpdateActor rule element callbacks
+    type WithPreUpdateActor = ChangeModel & {
+        preUpdateActor: NonNullable<ChangeModel["preUpdateActor"]>;
+    };
+    const changes = actor.appliedEffects.flatMap(e => e.changes).filter((c): c is WithPreUpdateActor => !!(c as ChangeModel).preUpdateActor);
+    if (changes.length === 0) return;
+
+    actor.flags.ptr2e.rollOptions = actor.clone(changed, { keepId: true }).flags.ptr2e.rollOptions;
+    const createDeletes = (
+        await Promise.all(
+            changes.map(
+                (c): Promise<{ create: ItemSourcePTR2e[]; delete: string[] }> => c.preUpdateActor()
+            )
+        )
+    ).reduce(
+        (combined, cd) => {
+            combined.create.push(...cd.create);
+            combined.delete.push(...cd.delete);
+            return combined;
+        },
+        { create: [], delete: [] }
+    );
+    createDeletes.delete = R.unique(createDeletes.delete).filter((id) => actor.items.has(id));
+
+    if (createDeletes.create.length > 0) {
+        await actor.createEmbeddedDocuments("Item", createDeletes.create, {
+            keepId: true,
+            render: false,
+        });
+    }
+    if (createDeletes.delete.length > 0) {
+        await actor.deleteEmbeddedDocuments("Item", createDeletes.delete, { render: false });
+    }
+}
 
 export {
   extractModifiers,
@@ -276,4 +317,6 @@ export {
   extractEphemeralEffects,
   isBracketedValue,
   extractEffectRolls,
+  processPreUpdateActorHooks,
+  processPreUpdateHooks,
 }

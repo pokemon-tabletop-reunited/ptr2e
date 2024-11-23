@@ -21,7 +21,7 @@ import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
 import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
-import { extractEffectRolls, extractEphemeralEffects, extractTargetModifiers } from "src/util/rule-helpers.ts";
+import { extractEffectRolls, extractEphemeralEffects, extractTargetModifiers, processPreUpdateHooks } from "src/util/rule-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -177,10 +177,10 @@ class ActorPTR2e<
   get nullifiableAbilities(): PickableThing[] {
     //@ts-expect-error - UUID only is valid.
     return this.itemTypes?.ability
-    ?.filter(ability => !ability.system.isSuppressed && (ability.system.free || ability.system.slot !== null))
-    .map(ability => ({
-      value: ability.uuid
-    })) ?? [];
+      ?.filter(ability => !ability.system.isSuppressed && (ability.system.free || ability.system.slot !== null))
+      .map(ability => ({
+        value: ability.uuid
+      })) ?? [];
   }
 
   protected override _initializeSource(
@@ -284,9 +284,9 @@ class ActorPTR2e<
     Object.defineProperty(this.flags.ptr2e.disableActionOptions, "options", {
       get: () => {
         return this.flags.ptr2e.disableActionOptions!.collection.filter(action => {
-          if(!(action instanceof AttackPTR2e)) return true;
+          if (!(action instanceof AttackPTR2e)) return true;
           return action.free ? true : action.slot ? this.attacks.actions[action.slot] === action : action.free;
-        }).map(action => ({value: action.uuid}));
+        }).map(action => ({ value: action.uuid }));
       }
     });
 
@@ -399,9 +399,9 @@ class ActorPTR2e<
 
   generateFlingAttack() {
     function getFlingAttack(
-      {name, slug, power = 25, accuracy = 100, types = ["untyped"], free = false, variant = true, description = "", id=""}: 
-      {name?: string, slug?: string, power?: number, accuracy?: number, types?: DeepPartial<AttackPTR2e['_source']['types']>, free?: boolean, variant?: boolean, description?: string, id?: string}
-      = {name: "", slug: "", power: 25, accuracy: 100, types: ["untyped"], free: false, variant: true, description: "", id:""}
+      { name, slug, power = 25, accuracy = 100, types = ["untyped"], free = false, variant = true, description = "", id = "" }:
+        { name?: string, slug?: string, power?: number, accuracy?: number, types?: DeepPartial<AttackPTR2e['_source']['types']>, free?: boolean, variant?: boolean, description?: string, id?: string }
+        = { name: "", slug: "", power: 25, accuracy: 100, types: ["untyped"], free: false, variant: true, description: "", id: "" }
     ): DeepPartial<AttackPTR2e['_source']> {
       return {
         slug: `fling${name?.length ? `-${slug}` : ""}`,
@@ -454,25 +454,26 @@ class ActorPTR2e<
       "_id": "flingattackitem0",
       "effects": []
     };
-    
+
     const itemNames = new Set<string>();
-    for(const item of this.items?.contents as unknown as ItemPTR2e[]) {
-      if(!["consumable", "equipment", "gear", "weapon"].includes(item.type)) continue;
-      if(!item.system.fling) continue;
-      if(itemNames.has(item.slug)) continue;
-      if(item.system.quantity !== undefined && typeof item.system.quantity === 'number' && item.system.quantity <= 0) continue;
+    for (const item of this.items?.contents as unknown as ItemPTR2e[]) {
+      if (!["consumable", "equipment", "gear", "weapon"].includes(item.type)) continue;
+      if (!item.system.fling) continue;
+      if (itemNames.has(item.slug)) continue;
+      if (item.system.quantity !== undefined && typeof item.system.quantity === 'number' && item.system.quantity <= 0) continue;
       itemNames.add(item.slug);
 
       const flingData = item.system.fling as { power: number, accuracy: number, type: PokemonType, hide: boolean };
-      if(flingData.hide) continue;
+      if (flingData.hide) continue;
 
-      data.system.actions.push(getFlingAttack({name: item.name, slug: item.slug, power: flingData.power, accuracy: flingData.accuracy, types: [flingData.type], id: item.id,
+      data.system.actions.push(getFlingAttack({
+        name: item.name, slug: item.slug, power: flingData.power, accuracy: flingData.accuracy, types: [flingData.type], id: item.id,
         description: `<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item.</p><p>This fling variant is based on ${item.link}</p>`
       }));
     }
 
     const existing = this.items.get(data._id) as Maybe<ItemPTR2e<MoveSystem, this>>;
-    if(existing) {
+    if (existing) {
       existing.updateSource(data);
       existing.reset();
       this.fling = existing;
@@ -792,7 +793,11 @@ class ActorPTR2e<
       (c): c is RollOptionChangeSystem =>
         c instanceof RollOptionChangeSystem && c.domain === domain && c.option === option,
     );
-    return change?.toggle(value, suboption) ?? null;
+    const result = await change?.toggle(value, suboption) ?? null;
+    if(result === null) return result;
+
+    await processPreUpdateHooks(this);
+    return result;
   }
 
   override async modifyTokenAttribute(
@@ -1632,7 +1637,14 @@ class ActorPTR2e<
           }
         }
       }
+    }
 
+    // 
+    try {
+      const updated = this.clone(changed, {keepId: true, addSource: true});
+      await processPreUpdateHooks(updated);
+    } catch (err) {
+      console.error(err);
     }
 
     return super._preUpdate(changed, options, user);

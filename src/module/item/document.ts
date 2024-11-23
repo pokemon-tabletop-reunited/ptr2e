@@ -23,8 +23,6 @@ class ItemPTR2e<
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
 
-  declare sourceId: string;
-
   declare _sheet: ItemSheetPTR2e<this> | null;
 
   override get sheet(): ItemSheetPTR2e<this> {
@@ -412,6 +410,26 @@ class ItemPTR2e<
     if(embeddedName === "Actions" && this.hasActions()) return this.actions as unknown as ReturnType<Item["getEmbeddedCollection"]>;
     return super.getEmbeddedCollection(embeddedName);
   }
+
+  // static override updateDocuments<TDocument extends foundry.abstract.Document>(
+  //   this: ConstructorOf<TDocument>,
+  //   updates?: Record<string, unknown>[],
+  //   operation?: Partial<DocumentModificationContext<TDocument["parent"]>>,
+  // ): Promise<TDocument[]>;
+  // static override async updateDocuments(
+  //   updates: Record<string, unknown>[] = [],
+  //   operation: Partial<DocumentModificationContext<ActorPTR2e | null>> = {},
+  // ): Promise<Item<Actor | null>[]> {
+  //   const isFullReplace = !((operation?.diff ?? true) && (operation?.recursive ?? true));
+  //   if (isFullReplace) return super.updateDocuments(updates, operation);
+
+  //   // Process rule element hooks for each actor update
+  //   for (const changed of updates) {
+  //     await processPreUpdateActorHooks(changed, { pack: operation.pack ?? null, type: 'item' });
+  //   }
+
+  //   return super.updateDocuments(updates, operation);
+  // }
 }
 
 interface ItemPTR2e<

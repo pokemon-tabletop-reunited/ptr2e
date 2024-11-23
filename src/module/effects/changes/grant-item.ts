@@ -17,8 +17,12 @@ import { UUIDUtils } from "src/util/uuid.ts";
 export default class GrantItemChangeSystem extends ChangeModel {
   static override TYPE = "grant-item";
 
+  get grantedId(): string | null {
+    return this._grantedId || this.effect.flags?.ptr2e?.itemGrants?.[this.flag]?.id || null;
+  }
+
   /** The id of the granted item */
-  grantedId: string | null = null;
+  _grantedId: string | null = null;
 
   /**
    * If the granted item has a `ChoiceSet`, its selection may be predetermined. The key of the record must be the
@@ -110,6 +114,10 @@ export default class GrantItemChangeSystem extends ChangeModel {
     if (data.reevaluateOnUpdate && data.predicate.length === 0) {
       throw Error("reevaluateOnUpdate: must have non-empty predicate");
     }
+
+    if(data.reevaluateOnUpdate && data.allowDuplicate) {
+      throw Error("reevaluateOnUpdate: cannot allow duplicates");
+    }
   }
 
   public async getItem(key: string = this.resolveInjectedProperties(this.uuid)): Promise<Maybe<ClientDocument>> {
@@ -147,11 +155,11 @@ export default class GrantItemChangeSystem extends ChangeModel {
     if (!this.test()) return;
 
     // If we shouldn't allow duplicates, check for an existing item with this source ID
-    const existingItem = this.actor.items.find((i) => (i as ItemPTR2e).sourceId === uuid) as ItemPTR2e;
+    const existingItem = this.actor.items.find((i) => (i as ItemPTR2e)?.flags?.core?.sourceId === uuid) as ItemPTR2e;
     if (!this.allowDuplicate && existingItem) {
       this.#setGrantFlags(effectSource, existingItem);
 
-      ui.notifications.info(
+      if(!this.reevaluateOnUpdate) ui.notifications.info(
         game.i18n.format("PTR2E.UI.RuleElements.GrantItem.AlreadyHasItem", {
           actor: this.actor.name,
           item: grantedItem.name,
@@ -166,7 +174,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
     grantedSource._id = fu.randomID();
 
     // An item may grant another copy of itself, but at least strip the copy of its grant REs
-    if (this.item?.sourceId === (grantedSource.flags.core?.sourceId ?? "")) {
+    if (this.item?.flags?.core?.sourceId === (grantedSource.flags.core?.sourceId ?? "")) {
       for (const ae of grantedSource.effects) {
         const effect = ae as EffectSourcePTR2e;
         effect.system.changes = effect.system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
@@ -198,7 +206,7 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
     args.tempItems.push(tempGranted);
 
-    this.grantedId = grantedSource._id;
+    this._grantedId = grantedSource._id;
     context.keepId = true;
 
     this.#setGrantFlags(effectSource, grantedSource as ItemSourcePTR2e);
@@ -240,7 +248,18 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
     if (pendingItems.length > 0) {
       const updatedGrants = effectSource.flags?.ptr2e?.itemGrants ?? {};
-      await this.effect.update({ "flags.ptr2e.itemGrants": updatedGrants }, { render: false });
+      const updatedKey = Object.keys(updatedGrants).find(k => (updatedGrants[k as keyof typeof updatedGrants] as {id: string}).id === this.grantedId);
+      if(updatedKey) {
+        const changes = this.parent.toObject().changes;
+        const index = this.parent.changes.findIndex(c => c === this);
+        if(index >= 0) {
+          changes[index].key = updatedKey;
+        }
+        await this.effect.update({ "flags.ptr2e.itemGrants": updatedGrants, "system.changes": changes }, { render: false });
+      }
+      else {
+        await this.effect.update({ "flags.ptr2e.itemGrants": updatedGrants }, { render: false });
+      }
       return { create: pendingItems, delete: [] };
     }
 

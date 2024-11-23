@@ -144,7 +144,7 @@ class ActiveEffectPTR2e<
    * Override the implementation of ActiveEffect#_requiresDurationUpdate to support activation-based initiative.
    * Duration is purely handled in terms of combat turns elapsed.
    */
-  override _requiresDurationUpdate() {
+  override _requiresDurationUpdate(): boolean {
     const { _combatTime, type } = this.duration;
     if (type === "turns" && game.combat) {
       //@ts-expect-error - This is a private property
@@ -282,7 +282,7 @@ class ActiveEffectPTR2e<
   }
 
   // TODO: Clean this up cause god it's a mess.
-  protected override _preUpdate(
+  protected override async _preUpdate(
     changed: DeepPartial<this["_source"]>,
     options: DocumentUpdateContext<TParent>,
     user: User
