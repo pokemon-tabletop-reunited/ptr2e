@@ -55,10 +55,10 @@ async function extractTargetModifiers({
         .map((d) => d({ test: fullOptions, resolvables }))
     )
   ).flatMap((e) => e ?? [])
-  .map(m => {
-    m.appliesTo = new Map([[origin.uuid, true]]);
-    return m;
-  });
+    .map(m => {
+      m.appliesTo = new Map([[origin.uuid, true]]);
+      return m;
+    });
 }
 
 function extractModifierAdjustments(
@@ -101,12 +101,16 @@ async function extractEphemeralEffects({
     effectsFrom.getRollOptions(domains),
     effectsTo.getSelfRollOptions(affects),
   ].flat();
-  const resolvables = { item, attack, action };
+  const resolvables = { item, attack, action, origin, target };
   return (
     await Promise.all(
       domains
-        .flatMap((s) => effectsFrom.synthetics.ephemeralEffects[s]?.[affects] ?? [])
-        .map((d) => d({ test: fullOptions, resolvables }))
+        .flatMap((s) => {
+          const toReturn = effectsFrom.synthetics.ephemeralEffects[s]?.[affects] ?? [];
+          if (affects === "origin") return [...toReturn, ...(effectsTo.synthetics.ephemeralEffects[s]?.self ?? [])]
+          return toReturn;
+        })
+        .map((d) => d({ test: fullOptions, resolvables })),
     )
   ).flatMap((e) => e ?? []);
 }
@@ -177,9 +181,9 @@ async function extractEffectRolls({
     e.chance += e.chance;
     return e;
   }) : effectRolls).map(e => {
-    if(e.effect.endsWith("-crit")) {
+    if (e.effect.endsWith("-crit")) {
       e.effect = e.effect.slice(0, -5) as ItemUUID;
-    } 
+    }
     return e;
   });
 }
@@ -222,12 +226,12 @@ function isBracketedValue(value: unknown): value is BracketedValue {
 
 async function processPreUpdateHooks(document: ActorPTR2e | ActiveEffectPTR2e | ItemPTR2e) {
   const actor = (() => {
-    if(document instanceof ActorPTR2e) return document;
-    if(document instanceof ActiveEffectPTR2e) return document.targetsActor() ? document.target : null;
-    if(document instanceof ItemPTR2e) return document.actor;
+    if (document instanceof ActorPTR2e) return document;
+    if (document instanceof ActiveEffectPTR2e) return document.targetsActor() ? document.target : null;
+    if (document instanceof ItemPTR2e) return document.actor;
     return null;
   })();
-  if(!(actor instanceof ActorPTR2e)) return;
+  if (!(actor instanceof ActorPTR2e)) return;
 
   // Run preUpdateActor rule element callbacks
   type WithPreUpdateActor = ChangeModel & {
@@ -238,75 +242,75 @@ async function processPreUpdateHooks(document: ActorPTR2e | ActiveEffectPTR2e | 
 
   // actor.flags.ptr2e.rollOptions = actor.clone(changed, { keepId: true }).flags.ptr2e.rollOptions;
   const createDeletes = (
-      await Promise.all(
-          changes.map(
-              (c): Promise<{ create: ItemSourcePTR2e[]; delete: string[] }> => c.preUpdateActor()
-          )
+    await Promise.all(
+      changes.map(
+        (c): Promise<{ create: ItemSourcePTR2e[]; delete: string[] }> => c.preUpdateActor()
       )
+    )
   ).reduce(
-      (combined, cd) => {
-          combined.create.push(...cd.create);
-          combined.delete.push(...cd.delete);
-          return combined;
-      },
-      { create: [], delete: [] }
+    (combined, cd) => {
+      combined.create.push(...cd.create);
+      combined.delete.push(...cd.delete);
+      return combined;
+    },
+    { create: [], delete: [] }
   );
   createDeletes.delete = R.unique(createDeletes.delete).filter((id) => actor.items.has(id));
 
   if (createDeletes.create.length > 0) {
-      await actor.createEmbeddedDocuments("Item", createDeletes.create, {
-          keepId: true,
-          render: true,
-      });
+    await actor.createEmbeddedDocuments("Item", createDeletes.create, {
+      keepId: true,
+      render: true,
+    });
   }
   if (createDeletes.delete.length > 0) {
-      await actor.deleteEmbeddedDocuments("Item", createDeletes.delete, { render: true });
+    await actor.deleteEmbeddedDocuments("Item", createDeletes.delete, { render: true });
   }
 }
 
 async function processPreUpdateActorHooks(
-    changed: Record<string, unknown>,
-    { pack }: { pack: string | null }
+  changed: Record<string, unknown>,
+  { pack }: { pack: string | null }
 ): Promise<void> {
-    const actorId = String(changed._id);
-    const actor = pack
-        ? await game.packs.get(pack)?.getDocument(actorId)
-        : game.actors.get(actorId);
-    if (!(actor instanceof ActorPTR2e)) return;
+  const actorId = String(changed._id);
+  const actor = pack
+    ? await game.packs.get(pack)?.getDocument(actorId)
+    : game.actors.get(actorId);
+  if (!(actor instanceof ActorPTR2e)) return;
 
-    // Run preUpdateActor rule element callbacks
-    type WithPreUpdateActor = ChangeModel & {
-        preUpdateActor: NonNullable<ChangeModel["preUpdateActor"]>;
-    };
-    const changes = actor.appliedEffects.flatMap(e => e.changes).filter((c): c is WithPreUpdateActor => !!(c as ChangeModel).preUpdateActor);
-    if (changes.length === 0) return;
+  // Run preUpdateActor rule element callbacks
+  type WithPreUpdateActor = ChangeModel & {
+    preUpdateActor: NonNullable<ChangeModel["preUpdateActor"]>;
+  };
+  const changes = actor.appliedEffects.flatMap(e => e.changes).filter((c): c is WithPreUpdateActor => !!(c as ChangeModel).preUpdateActor);
+  if (changes.length === 0) return;
 
-    actor.flags.ptr2e.rollOptions = actor.clone(changed, { keepId: true }).flags.ptr2e.rollOptions;
-    const createDeletes = (
-        await Promise.all(
-            changes.map(
-                (c): Promise<{ create: ItemSourcePTR2e[]; delete: string[] }> => c.preUpdateActor()
-            )
-        )
-    ).reduce(
-        (combined, cd) => {
-            combined.create.push(...cd.create);
-            combined.delete.push(...cd.delete);
-            return combined;
-        },
-        { create: [], delete: [] }
-    );
-    createDeletes.delete = R.unique(createDeletes.delete).filter((id) => actor.items.has(id));
+  actor.flags.ptr2e.rollOptions = actor.clone(changed, { keepId: true }).flags.ptr2e.rollOptions;
+  const createDeletes = (
+    await Promise.all(
+      changes.map(
+        (c): Promise<{ create: ItemSourcePTR2e[]; delete: string[] }> => c.preUpdateActor()
+      )
+    )
+  ).reduce(
+    (combined, cd) => {
+      combined.create.push(...cd.create);
+      combined.delete.push(...cd.delete);
+      return combined;
+    },
+    { create: [], delete: [] }
+  );
+  createDeletes.delete = R.unique(createDeletes.delete).filter((id) => actor.items.has(id));
 
-    if (createDeletes.create.length > 0) {
-        await actor.createEmbeddedDocuments("Item", createDeletes.create, {
-            keepId: true,
-            render: false,
-        });
-    }
-    if (createDeletes.delete.length > 0) {
-        await actor.deleteEmbeddedDocuments("Item", createDeletes.delete, { render: false });
-    }
+  if (createDeletes.create.length > 0) {
+    await actor.createEmbeddedDocuments("Item", createDeletes.create, {
+      keepId: true,
+      render: false,
+    });
+  }
+  if (createDeletes.delete.length > 0) {
+    await actor.deleteEmbeddedDocuments("Item", createDeletes.delete, { render: false });
+  }
 }
 
 export {

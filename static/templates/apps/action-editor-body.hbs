@@ -24,6 +24,8 @@
                     <p class="hint">{{localize fields.defaultVariant.hint}}</p>
                   </div>
                 {{/if}}
+                {{formField fields.offensiveStat value=source.offensiveStat localize=true}}
+                {{formField fields.defensiveStat value=source.defensiveStat localize=true}}
             </fieldset>
         {{/if}}
         {{#if (eq action.type "summon")}}

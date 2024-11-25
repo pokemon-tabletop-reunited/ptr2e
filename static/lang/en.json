@@ -1571,6 +1571,14 @@
         "label": "Attack Stat",
         "hint": "The stat used to calculate the damage of this attack, you can use either a direct value, 'owner' to denote it should use the appropriate attacking stat from the Summon's owner, or an injected value (e.g. '@actor.system.attributes.atk.value')."
       },
+      "offensiveStat": {
+        "label": "Offensive Stat",
+        "hint": "The stat that should be used to calculate the 'Attack' portion of the Damage Calculation. Defaults to 'atk'/'spa' depending on the Attack Category if unset."
+      },
+      "defensiveStat": {
+        "label": "Defensive Stat",
+        "hint": "The stat that should be used to calculate the 'Defense' portion of the Damage Calculation. Defaults to 'def'/'spd' depending on the Attack Category if unset."
+      },
       "targetType": {
         "label": "Summon Target Type",
         "hint": "Whom should be targeted, if this is 'Target', it will use the currently targeted token as the target based on when the summon is made, if it is 'Owner', it will use the owner of the summon as the target."

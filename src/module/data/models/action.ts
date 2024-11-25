@@ -221,6 +221,10 @@ class ActionPTR2e extends foundry.abstract.DataModel {
     return dragData;
   }
 
+  getRollOptions(prefix = ""): Set<string> {
+    return new Set([`action:${this.slug}`]).map(key => prefix ? `${prefix}:${key}` : key);
+  }
+
   /**
    * Apply an update to the Action through it's parent Item.
    */

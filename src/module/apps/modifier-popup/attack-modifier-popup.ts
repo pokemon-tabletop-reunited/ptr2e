@@ -76,6 +76,8 @@ export class AttackModifierPopup extends ModifierPopup {
             return method === "percentile" ? "power-percentile" : method === "flat" ? "power-flat" : "invalid";
           case "damage":
             return method === "percentile" ? "damage-percentile" : method === "flat" ? "damage-flat" : "invalid";
+          case "stat":
+            return method === "flat" ? "stat-flat" : "invalid";
           default:
             return "invalid";
         }
@@ -375,6 +377,7 @@ export class AttackModifierPopup extends ModifierPopup {
           "power-flat",
           "damage-percent",
           "damage-flat",
+          "stat-flat"
         ].includes(modifierType)
       ) {
         errors.push("Invalid modifier type. Please select a valid modifier type.");
@@ -405,6 +408,8 @@ export class AttackModifierPopup extends ModifierPopup {
               return { method: "percentile", type: "damage" };
             case "damage-flat":
               return { method: "flat", type: "damage" };
+            case "stat-flat":
+              return { method: "flat", type: "stat" };
           }
           return {};
         })(modifierType);

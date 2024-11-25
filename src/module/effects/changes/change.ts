@@ -167,7 +167,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
       ...(this.item?.getRollOptions() ?? []),
     ]);
 
-    return this.resolveInjectedProperties(this.predicate).test(optionSet);
+    return this.resolveInjectedProperties(this.predicate.clone()).test(optionSet);
   }
 
   /** Send a deferred warning to the console indicating that a rule element's validation failed */

@@ -102,6 +102,22 @@ export default class AttackPTR2e extends ActionPTR2e {
         initial: null,
         label: "PTR2E.FIELDS.flingItemId.label",
         hint: "PTR2E.FIELDS.flingItemId.hint",
+      }),
+      offensiveStat: new fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>({
+        required: true,
+        nullable: true,
+        choices: PTRCONSTS.Stats.reduce((acc, stat) => ({ ...acc, [stat]: stat }), {"":""} as unknown as Record<PTRCONSTS.Stat, string>),
+        initial: null,
+        label: "PTR2E.FIELDS.offensiveStat.label",
+        hint: "PTR2E.FIELDS.offensiveStat.hint",
+      }),
+      defensiveStat: new fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>({
+        required: true,
+        nullable: true,
+        choices: PTRCONSTS.Stats.reduce((acc, stat) => ({ ...acc, [stat]: stat }), {"":""} as unknown as Record<PTRCONSTS.Stat, string>),
+        initial: null,
+        label: "PTR2E.FIELDS.defensiveStat.label",
+        hint: "PTR2E.FIELDS.defensiveStat.hint",
       })
     };
   }
@@ -285,6 +301,15 @@ export default class AttackPTR2e extends ActionPTR2e {
     }
     return currentActions;
   }
+
+  override getRollOptions(prefix = ""): Set<string> {
+    return new Set([
+      `attack:${this.slug}`,
+      `attack:slug:${this.slug}`,
+      `attack:category:${this.category}`,
+      ...(this.types.map(type => `attack:type:${type}`)),
+    ]).map(key => prefix ? `${prefix}:${key}` : key);
+  }
 }
 
 export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {
@@ -321,4 +346,6 @@ interface AttackSchema extends foundry.data.fields.DataSchema {
   summon: foundry.data.fields.DocumentUUIDField<string>;
   defaultVariant: SlugField<string, string, true, true, true>;
   flingItemId: foundry.data.fields.StringField<string, string, true, true, true>;
+  offensiveStat: foundry.data.fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>;
+  defensiveStat: foundry.data.fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>;
 }

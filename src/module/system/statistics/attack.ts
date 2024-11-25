@@ -178,6 +178,12 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     //const consumeAmmo = args.consumeAmmo ?? this.itemConsumesAmmo;
     //TODO: If ammo is consumed, check if there is ammo to consume
 
+    // Add Options from the attack
+    options.add(`attack:${this.attack.slug}`);
+    options.add(`attack:slug:${this.attack.slug}`);
+    options.add(`attack:category:${this.attack.category}`);
+    for(const type of this.attack.types) options.add(`attack:type:${type}`);
+
     const targets: { actor: ActorPTR2e, token?: TokenPTR2e }[] = (() => {
       if (args.targets) return args.targets.map(t => ({ actor: t, token: t.token?.object as TokenPTR2e }));
       return [...game.user.targets ?? []].map(t => ({ actor: t.actor as ActorPTR2e, token: t as TokenPTR2e }));

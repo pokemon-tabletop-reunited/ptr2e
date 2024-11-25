@@ -12,7 +12,7 @@ import {
 } from "@actor";
 import { ActiveEffectPTR2e, ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import { ActionPTR2e, AttackPTR2e, PokemonType, RollOptionChangeSystem, RollOptionManager } from "@data";
+import { ActionPTR2e, AttackPTR2e, PokemonType, PTRCONSTS, RollOptionChangeSystem, RollOptionManager } from "@data";
 import { ActorFlags } from "types/foundry/common/documents/actor.js";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -743,18 +743,21 @@ class ActorPTR2e<
     return this.system.attributes.spe.stage + (this.system.modifiers["speed"] ?? 0);
   }
 
-  getDefenseStat(attack: { category: AttackPTR2e["category"] }, isCrit: boolean) {
-    return attack.category === "physical"
-      ? this.calcStatTotal(this.system.attributes.def, isCrit)
-      : this.calcStatTotal(this.system.attributes.spd, isCrit);
-  }
-  getAttackStat(attack: { category: AttackPTR2e["category"] }) {
-    return attack.category === "physical"
-      ? this.calcStatTotal(this.system.attributes.atk, false)
-      : this.calcStatTotal(this.system.attributes.spa, false);
+  getDefenseStat(attack: { category: AttackPTR2e["category"], defensiveStat: PTRCONSTS.Stat | null }, isCrit: boolean) {
+    const stat: PTRCONSTS.Stat = attack.defensiveStat ?? (attack.category === "physical" ? "def" : "spd");
+    return this.calcStatTotal(this.system.attributes[stat], isCrit);
   }
 
-  calcStatTotal(stat: Attribute, isCrit: boolean) {
+  getAttackStat(attack: { category: AttackPTR2e["category"], offensiveStat: PTRCONSTS.Stat | null }) {
+    const stat: PTRCONSTS.Stat = attack.offensiveStat ?? (attack.category === "physical" ? "atk" : "spa");
+    return this.calcStatTotal(this.system.attributes[stat], false);
+  }
+
+  calcStatTotal(stat: Attribute | Omit<Attribute, 'stage'>, isCrit: boolean) {
+    function isAttribute(attribute: Attribute | Omit<Attribute, 'stage'>): attribute is Attribute {
+      return attribute.slug !== "hp";
+    }
+    if(!isAttribute(stat)) return stat.value;
     const stageModifier = () => {
       const stage = Math.clamp(stat.stage, -6, isCrit ? 0 : 6);
       return stage > 0 ? (2 + stage) / 2 : 2 / (2 + Math.abs(stage));
@@ -1296,10 +1299,12 @@ class ActorPTR2e<
     const selfAction = params.action;
 
     const itemOptions = selfItem?.getRollOptions("item") ?? [];
+    const actionOptions = selfAttack?.getRollOptions() ?? [];
+    const actionRollOptions = Array.from(new Set([...itemOptions, ...actionOptions]));
 
     if (selfAttack) {
       for (const adjustment of selfActor.synthetics.attackAdjustments) {
-        adjustment.adjustAttack?.(selfAttack, itemOptions);
+        adjustment().adjustAttack?.(selfAttack, actionRollOptions);
       }
     }
 
@@ -1308,7 +1313,7 @@ class ActorPTR2e<
 
       if (selfAttack) {
         for (const adjustment of selfActor.synthetics.attackAdjustments) {
-          adjustment.adjustTraits?.(selfAttack, traits, itemOptions);
+          adjustment().adjustTraits?.(selfAttack, traits, actionRollOptions);
         }
       }
 

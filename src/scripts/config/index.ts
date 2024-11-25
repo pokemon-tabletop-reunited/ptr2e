@@ -170,11 +170,14 @@ export const PTRCONFIG = {
     "FLY": "fly"
   },
   actorSizes: {
-    tiny: "PTR2E.ActorSizeTiny",
-    sm: "PTR2E.ActorSizeSmall",
-    med: "PTR2E.ActorSizeMedium",
-    lg: "PTR2E.ActorSizeLarge",
-    huge: "PTR2E.ActorSizeHuge",
-    grg: "PTR2E.ActorSizeGargantuan",
+    diminutive: "PTR2E.ActorSize.Diminutive",
+    tiny: "PTR2E.ActorSize.Tiny",
+    small: "PTR2E.ActorSize.Small",
+    medium: "PTR2E.ActorSize.Medium",
+    large: "PTR2E.ActorSize.Large",
+    huge: "PTR2E.ActorSize.Huge",
+    gigantic: "PTR2E.ActorSize.Gigantic",
+    titanic: "PTR2E.ActorSize.Titanic",
+    max: "PTR2E.ActorSize.Max"
 } as Record<Size, string>
 }

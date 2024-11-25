@@ -306,7 +306,13 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   override prepareBaseData(): void {
     super.prepareBaseData();
     this._initializeModifiers();
-    // this._prepareSpeciesData();
+
+    for(const k in this.attributes) {
+      const key = k as keyof Attributes;
+      Object.defineProperty(this.attributes[key], "final", {
+        get: () => key === "hp" ? this.attributes[key].total : this.parent.calcStatTotal(this.attributes[key], false),
+      });
+    }
 
     this.details.alliance = ["party", "opposition", null].includes(this.details.alliance as string)
       ? this.details.alliance

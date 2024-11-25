@@ -389,6 +389,7 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
                   isCritHit: context.hit === "critical",
                   attack: this.attack,
                   isMultiTarget: this._source.results.length > 1,
+                  useEnemyStats: this.attack.traits.has("use-opponents-stats")
                 });
                 if (damage) {
                   context.damage = damage.value;
