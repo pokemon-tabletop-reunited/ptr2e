@@ -1,0 +1,45 @@
+{
+  "name": "Psyshock",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "slug": "psyshock",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "psyshock",
+        "name": "Psyshock",
+        "type": "attack",
+        "traits": [
+          "push-1",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "defensiveStat": "def"
+      }
+    ],
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "Q5XRmC7JtOuEulXK",
+  "effects": []
+}
