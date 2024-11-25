@@ -329,6 +329,7 @@ class ChangeModel<TSchema extends ChangeSchema = ChangeSchema> extends foundry.a
           Roll.replaceFormulaData(trimmed, {
             ...(this.actor?.getRollData() ?? []),
             item: this.item,
+            effect: this.effect,
             ...resolvables,
           })
         )

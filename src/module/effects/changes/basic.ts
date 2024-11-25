@@ -177,7 +177,7 @@ export default class BasicChangeSystem extends ChangeModel {
         if (!(typeof current === 'number' || current === undefined)) {
             return new foundry.data.validation.DataModelValidationFailure({ message: `Unable to apply mode Multiply on \`${current}\`. This is likely due to an invalid Key.`, invalidValue: current, fallback: false });
         }
-        return Math.trunc((current ?? 0) * change);
+        return change > 1 ? Math.ceil((current ?? 0) * change) : Math.floor((current ?? 0) * change);
     }
 
     /* -------------------------------------------- */

@@ -383,6 +383,8 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       spaMultiplier: 1,
       spdMultiplier: 1,
       speMultiplier: 1,
+      skills: 1,
+      movement: 0
     };
   }
 
@@ -490,6 +492,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
     if (this.type.types.has("electric")) {
       this.parent.rollOptions.addOption("immunities", "affliction:paralysis");
+    }
+
+    if(!isNaN(Number(this.modifiers.movement)) && this.modifiers.movement !== 0) {
+      for (const movement of Object.values(this.movement)) {
+        movement.value = Math.max(1, movement.value + Number(this.modifiers.movement));
+      }
     }
   }
 

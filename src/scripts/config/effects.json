@@ -128,7 +128,7 @@
         {
           "type": "grant-effect",
           "value": "slowed"
-        }        
+        }
       ],
       "formula": null,
       "type": null,
@@ -462,7 +462,7 @@
         }
       ],
       "traits": [
-        "minor-affliction"
+        "pseudo-affliction"
       ],
       "stacks": 1,
       "removeAfterCombat": false
@@ -930,7 +930,7 @@
         {
           "type": "grant-effect",
           "value": "stuck"
-        }        
+        }
       ],
       "formula": null,
       "type": null,
@@ -1768,5 +1768,80 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.charged"
+  },
+  {
+    "id": "loafing",
+    "_id": "loafingcondition",
+    "name": "PTR2E.Effect.Statuses.Labels.loafing",
+    "img": "icons/svg/anchor.svg",
+    "type": "passive",
+    "system": {
+      "changes": [
+        {
+          "type": "flat-modifier",
+          "key": "attack-damage-percentile",
+          "value": "-((@effect.system.stacks * 15) + (max(0, (@effect.system.stacks - 2)) * 5) + (max(0, (@effect.system.stacks - 3)) * 10))"
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.skills",
+          "value": "-((@effect.system.stacks * 0.15) + (max(0, (@effect.system.stacks - 2)) * 0.05) + (max(0, (@effect.system.stacks - 3)) * 0.10))",
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spe.stage",
+          "value": "-(1 + (max(0, (@effect.system.stacks - 2)) * 1) + (max(0, (@effect.system.stacks - 3)) * 1))",
+          "mode": 2
+        },
+        {
+          "type": "alter-attack",
+          "key": "all",
+          "value": "1+((@effect.system.stacks * 0.15) + (max(0, (@effect.system.stacks - 2)) * 0.05) + (max(0, (@effect.system.stacks - 3)) * 0.30))",
+          "mode": 1,
+          "definition": [],
+          "property": "pp-cost"
+        },
+        {
+          "type": "flat-modifier",
+          "key": "attack-accuracy-flat",
+          "value": "-(max(0, (@effect.system.stacks - 1)) * 10)",
+          "predicate": [
+            {
+              "gt": [
+                "{effect|system.stacks}",
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.movement",
+          "value": "-((max(0, (@effect.system.stacks - 2)) * 2) + (max(0, (@effect.system.stacks - 3)) * 1))",
+          "mode": 2
+        },
+        {
+          "type": "grant-effect",
+          "value": "unlucky",
+          "reevaluateOnUpdate": true,
+          "allowDuplicate": false,
+          "predicate": [
+            {
+              "gt": [
+                "{effect|system.stacks}",
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "traits": [
+        "pseudo-affliction"
+      ],
+      "stacks": 1,
+      "removeAfterCombat": false
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.loafing"
   }
 ]
