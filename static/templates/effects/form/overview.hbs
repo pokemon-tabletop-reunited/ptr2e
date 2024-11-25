@@ -1,0 +1,62 @@
+<section class="tab sheet-body {{tabs.overview.cssClass}}" data-tab="overview" data-group="sheet">
+  <div class="scroll">
+    <fieldset>
+      <legend>Forme Triggers</legend>
+      {{formField system.schema.fields.trigger value=source.system.trigger localize=true}}
+
+      <fieldset>
+        <legend>{{localize system.schema.fields.conditions.label}}</legend>
+        <p class="hint">{{localize system.schema.fields.conditions.hint}}</p>
+
+        <div class="conditions">
+          {{#each conditionDisplays as |display|}}
+            <div class="form-group">
+              <label>
+                <select class="condition-type" data-idx="{{display.idx}}">
+                  <option value="weather" {{#if (is display.type "weather")}}selected{{/if}}>{{localize "PTR2E.EffectSheet.Conditions.weather"}}</option>
+                  <option value="item" {{#if (is display.type "item")}}selected{{/if}}>{{localize "PTR2E.EffectSheet.Conditions.item"}}</option>
+                  <option value="ability" {{#if (is display.type "ability")}}selected{{/if}}>{{localize "PTR2E.EffectSheet.Conditions.ability"}}</option>
+                </select>
+              </label>
+              <div class="form-fields">
+                {{#if (is display.type "item")}}
+                  <select data-type="{{display.type}}" data-idx="{{display.idx}}">
+                    <option value="consumable" {{#if (is display.itemType "consumable")}}selected{{/if}}>{{localize "TYPES.Item.consumable"}}</option>
+                    <option value="equipment" {{#if (is display.itemType "equipment")}}selected{{/if}}>{{localize "TYPES.Item.equipment"}}</option>
+                    <option value="gear" {{#if (is display.itemType "gear")}}selected{{/if}}>{{localize "TYPES.Item.gear"}}</option>
+                    <option value="weapon" {{#if (is display.itemType "weapon")}}selected{{/if}}>{{localize "TYPES.Item.weapon"}}</option>
+                  </select>
+                {{/if}}
+                <input type="text" data-type="{{display.type}}" data-idx="{{display.idx}}" value="{{formatSlug display.value}}" />
+                <button class="p-1" type="submit" data-action="remove-condition" data-tooltip="Remove Condition" data-idx="{{display.idx}}">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+
+        <button class="mt-1 mb-1" type="submit" data-action="add-condition">Add Condition</button>
+
+        <div class="form-group">
+          <label class="short">Raw Conditions Data</label>
+          <div class="form-fields">
+            <input type="text" name="system.conditions" value="{{json source.system.conditions spaces=0}}" />
+          </div>
+          <p class="hint">Advanced view of the Conditions Field. Always add new entries at the back of the array.</p>
+        </div>
+      </fieldset>
+    </fieldset>
+    <fieldset>
+      <legend>Basic Effect Settings</legend>
+      {{formField fields.disabled value=data.disabled localize=true}}
+
+      {{formField system.schema.fields.removeAfterCombat value=data.system.removeAfterCombat localize=true}}
+      {{formField system.schema.fields.removeOnRecall value=data.system.removeOnRecall localize=true}}
+
+      {{#if hasDescription}}
+          {{formField fields.description enriched=descriptionHTML value=source.description localize=true toggled=true}}
+      {{/if}}
+    </fieldset>
+  </div>
+</section>

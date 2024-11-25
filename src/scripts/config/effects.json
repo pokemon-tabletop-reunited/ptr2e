@@ -617,7 +617,20 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "choice-set",
+          "choices": "flags.ptr2e.disableActionOptions.options",
+          "adjustName": true,
+          "rollOption": "disabled"
+        },
+        {
+          "type": "basic",
+          "key": "flags.ptr2e.disableActionOptions.disabled",
+          "value": "{effect|flags.ptr2e.choiceSelections.disabled}",
+          "mode": 2
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -637,7 +650,18 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "choice-set",
+          "choices": "nullifiableAbilities",
+          "adjustName": true,
+          "rollOption": "nullified"
+        },
+        {
+          "type": "suppress-ability",
+          "key": "{effect|flags.ptr2e.choiceSelections.nullified}"
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,

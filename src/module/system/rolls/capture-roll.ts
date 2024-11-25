@@ -110,7 +110,7 @@ class CaptureRoll extends CheckRoll {
         return new Roll(this.catchRateFormula, {
             hpMax: data.target.system.health.max,
             hpCurrent: data.target.system.health.value,
-            rate: data.target.system.species?.captureRate || 45,
+            rate: data.target.species?.captureRate || 45,
             bonusBall: data.ballBonus || 1,
             bonusStatus: new Roll(this.bonusStatusFormula, {
                 major: effects.filter((effect) => effect.traits.has("major-affliction")).length,

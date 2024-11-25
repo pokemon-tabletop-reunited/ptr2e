@@ -1,6 +1,6 @@
 import { ActorPTR2e } from "@actor";
 import { ItemSheetPTR2e, ItemSourcePTR2e, ItemSystemPTR, ItemSystemsWithActions } from "@item";
-import { ActionPTR2e, RollOptionManager, Trait } from "@data";
+import { ActionPTR2e, EquipmentData, RollOptionManager, Trait } from "@data";
 import { ActiveEffectPTR2e, EffectSourcePTR2e } from "@effects";
 import { ItemFlagsPTR2e } from "./data/system.ts";
 import { ActionsCollections } from "@actor/actions.ts";
@@ -76,13 +76,21 @@ class ItemPTR2e<
         .map((o) => `${prefix}:${o}`) ?? []
       : [];
 
+    const gearOptions = 'equipped' in this.system 
+    ? [
+      `${this.slug}:${(this.system.equipped as EquipmentData).carryType}`,
+      ...(["held", "worn"].includes((this.system.equipped as EquipmentData).carryType) ? `${this.slug}:equipped`: [])
+    ]
+    : [] as string[];
+
     const options = [
       `${prefix}:id:${this.id}`,
       `${prefix}:${this.slug}`,
       `${prefix}:slug:${this.slug}`,
       ...granterOptions,
-      ...(this.parent?.getRollOptions() ?? []).map((o) => `${prefix}:${o}`),
+      ...(this.parent?.getRollOptions() ?? []).map((o) => `actor:${o}`),
       ...traitOptions.map((o) => `${prefix}:${o}`),
+      ...gearOptions.map((o) => `${prefix}:${o}`),
     ];
 
     return options;
@@ -222,7 +230,11 @@ class ItemPTR2e<
       if (specialTypes.includes(source.type as string)) {
         switch (source.type) {
           case "species": {
-            return [];
+            const speciesItem = actor.items.get("actorspeciesitem") as ItemPTR2e<ItemSystemPTR, ActorPTR2e>;
+            if (speciesItem) {
+              await speciesItem.update({ "system": source.system });
+              return [];
+            }
           }
         }
         return [];
@@ -346,7 +358,7 @@ class ItemPTR2e<
   override async update(data: Record<string, unknown>, context?: DocumentModificationContext<TParent> | undefined): Promise<this | undefined> {
     if (!(this.system instanceof SpeciesSystemModel && this.system.virtual) && !this.flags.ptr2e.virtual) return super.update(data, context);
 
-    await this.actor?.update({ "system.species": fu.expandObject(data).system });
+    await this.actor?.updateEmbeddedDocuments("Item", [{ _id: "actorspeciesitem", "system.species": fu.expandObject(data).system }]);
     this.updateSource(data);
     foundry.applications.instances.get(`SpeciesSheet-${this.uuid}`)?.render({});
     return undefined;
@@ -360,7 +372,7 @@ class ItemPTR2e<
 
   static override async deleteDocuments<TDocument extends foundry.abstract.Document>(this: ConstructorOf<TDocument>, ids?: string[], context?: DocumentModificationContext<TDocument["parent"]> & { pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[] }): Promise<TDocument[]>;
   static override async deleteDocuments(ids: string[] = [], context: DocumentModificationContext<ActorPTR2e | null> & { pendingEffects?: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>[] } = {}): Promise<foundry.abstract.Document[]> {
-    ids = Array.from(new Set(ids));
+    ids = Array.from(new Set(ids)).filter(id => id !== "actorspeciesitem");
     const actor = context.parent;
     if (actor) {
       const items = ids.flatMap(id => actor.items.get(id) ?? []) as ItemPTR2e<ItemSystemPTR, ActorPTR2e>[];
@@ -394,6 +406,11 @@ class ItemPTR2e<
       ids = Array.from(new Set(items.map(i => i.id))).filter(id => actor.items.has(id));
     }
     return super.deleteDocuments(ids, context);
+  }
+
+  override getEmbeddedCollection(embeddedName: string) {
+    if(embeddedName === "Actions" && this.hasActions()) return this.actions as unknown as ReturnType<Item["getEmbeddedCollection"]>;
+    return super.getEmbeddedCollection(embeddedName);
   }
 }
 

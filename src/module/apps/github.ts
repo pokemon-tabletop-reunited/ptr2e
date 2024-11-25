@@ -14,7 +14,8 @@ class GithubManager {
         container: "ptr2e.core-gear",
         equipment: "ptr2e.core-gear",
         gear: "ptr2e.core-gear",
-        weapon: "ptr2e.core-gear"
+        weapon: "ptr2e.core-gear",
+        summon: "ptr2e.core-summons"
     } as const;
 
     static async getExistingItem<TDocument extends ItemPTR2e>(

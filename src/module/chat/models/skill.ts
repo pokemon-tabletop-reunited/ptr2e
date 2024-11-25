@@ -220,7 +220,7 @@ abstract class SkillMessageSystem extends foundry.abstract.TypeDataModel {
     if (!actor) return;
 
     const luck = actor.spendableLuck;
-    if (luck < number) {
+    if (luck < number || luck - number <= 0) {
       ui.notifications.warn("You do not have enough Luck to apply this increase.");
       return;
     }

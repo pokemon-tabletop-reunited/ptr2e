@@ -10,6 +10,7 @@ import { extractModifierAdjustments, extractModifiers, extractNotes } from "src/
 import { CheckPTR2e } from "@system/check.ts";
 import { CheckRollContext } from "@system/rolls/data.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
+import { ActionUUID } from "src/util/uuid.ts";
 
 type PokeballStatisticData = StatisticData &
     Required<Pick<StatisticData, "defferedValueParams" | "modifiers" | "domains" | "rollOptions">>;
@@ -155,6 +156,11 @@ class PokeballCheck<TParent extends PokeballStatistic = PokeballStatistic> imple
             traits: args.traits ?? this.parent.item.traits,
             target
         })
+
+        if(context.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.parent.action.uuid as ActionUUID)) {
+          ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", {name: this.parent.action.name}));
+          return null;
+        }
 
         const notes = extractNotes(context.self.actor.synthetics.rollNotes, this.domains).filter(n => n.predicate.test(options));
 

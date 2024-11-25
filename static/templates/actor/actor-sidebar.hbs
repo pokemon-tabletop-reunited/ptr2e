@@ -93,6 +93,12 @@
             {{selectOptions natures selected=actor.system.nature localize=true}}
         </select>
     </div>
+    <div class="species-link">
+      <label for="species">{{localize "TYPES.Item.species"}}</label>
+      <span class="species">
+        <a class="content-link" draggable="true" data-link="" data-uuid="{{species.uuid}}" data-id="actorspeciesitem" data-type="Item" data-tooltip="Species Item"><i class="fas fa-paw"></i>{{species.name}}</a>
+      </span>
+    </div>
     <div class="perk-web-button">
         <button type="button" class="perk-web-button" data-action="open-perk-web">
             <i class="fas fa-sitemap"></i>

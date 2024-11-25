@@ -16,6 +16,14 @@ class CombatantPTR2e<
     return Math.floor(this.system.baseAV);
   }
 
+  async onStartActivation() {
+    await ChatMessage.create({
+      type: "combat",
+      flavor: game.i18n.format("PTR2E.Combat.Messages.Activation", { name: ('name' in this.system && typeof this.system.name === "string") ? this.system.name : this.name }),
+    })
+    return this.system.onStartActivation();
+  }
+
   protected override async _preCreate(data: this["_source"], options: DocumentModificationContext<TParent>, user: User): Promise<boolean | void> {
     const result = await super._preCreate(data, options, user);
     if (result === false) return false;

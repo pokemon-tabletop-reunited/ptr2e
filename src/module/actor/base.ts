@@ -9,7 +9,7 @@ import {
 } from "@actor";
 import { ActiveEffectPTR2e, ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import { AttackPTR2e, PokemonType, RollOptionChangeSystem, RollOptionManager } from "@data";
+import { ActionPTR2e, AttackPTR2e, PokemonType, RollOptionChangeSystem, RollOptionManager } from "@data";
 import { ActorFlags } from "types/foundry/common/documents/actor.js";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -21,7 +21,7 @@ import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
 import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
-import { extractEffectRolls, extractEphemeralEffects } from "src/util/rule-helpers.ts";
+import { extractEffectRolls, extractEphemeralEffects, extractTargetModifiers } from "src/util/rule-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -30,6 +30,9 @@ import { preImportJSON } from "@module/data/doc-helper.ts";
 import { MigrationRunnerBase } from "@module/migration/runner/base.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import MoveSystem from "@item/data/move.ts";
+import SpeciesSystem from "@item/data/species.ts";
+import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
+import { ActionUUID } from "src/util/uuid.ts";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -42,11 +45,6 @@ class ActorPTR2e<
 > extends Actor<TParent, TSystem> {
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
-
-  // eslint-disable-next-line @typescript-eslint/class-literal-property-style
-  get alliance(): string {
-    return "";
-  }
 
   get traits() {
     return this.system.traits;
@@ -116,6 +114,10 @@ class ActorPTR2e<
     );
   }
 
+  get species() {
+    return this._species ??= (this.items.get("actorspeciesitem")?.system as Maybe<SpeciesSystem>) ?? this.system.species ?? null;
+  }
+
   /** The recorded schema version of this actor, updated after each data migration */
   get schemaVersion(): number | null {
     return Number(this.system._migration?.version) || null;
@@ -155,43 +157,30 @@ class ActorPTR2e<
     return this.system.traits.has("ace");
   }
 
+  get alliance() {
+    return this.system.details.alliance;
+  }
+
   get luck(): number {
     return this.isAce ? this.system.skills.get("luck")!.total : 0;
   }
 
   get spendableLuck(): number {
-    return (!this.party?.owner || this.party?.owner == this)
-      ? this.luck
-      : this.luck + this.party.owner.luck;
+    return Math.max(
+      (
+        (!this.party?.owner || this.party?.owner == this)
+          ? this.luck
+          : this.luck + this.party.owner.luck
+      ) ?? 0 - 1, 0)
   }
 
-  async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = [], notifications: { name: string, amount: number, leftover: number }[] = []): Promise<{ name: string, amount: number, leftover: number }[]> {
-    // no "spending" a negative amount of luck
-    if (amount < 0) return [];
-    // If we can't afford it, don't spend it.
-    if (amount > this.spendableLuck) return [];
-
-    const luck = this.luck;
-    if (luck > 0) {
-      const skills = this.system.toObject().skills;
-      const luckSkill = skills.find((skill) => skill.slug === "luck");
-      if (!luckSkill) return [];
-      luckSkill.value = Math.max(luck - amount, 1);
-
-      amount -= luck;
-      notifications.push({ name: this.name, amount: luck - luckSkill.value, leftover: luckSkill.value });
-      pendingUpdates.push({ _id: this.id, "system.skills": skills });
-    }
-    if (amount <= 0) {
-      if (pendingUpdates.length) await Actor.updateDocuments(pendingUpdates);
-      return notifications;
-    }
-
-    // we need to spend it from our owner, if we have one
-    const owner = this.party?.owner;
-    if (!owner || owner == this) return [];
-
-    return await owner.spendLuck(amount, pendingUpdates, notifications);
+  get nullifiableAbilities(): PickableThing[] {
+    //@ts-expect-error - UUID only is valid.
+    return this.itemTypes?.ability
+    ?.filter(ability => !ability.system.isSuppressed && (ability.system.free || ability.system.slot !== null))
+    .map(ability => ({
+      value: ability.uuid
+    })) ?? [];
   }
 
   protected override _initializeSource(
@@ -219,6 +208,7 @@ class ActorPTR2e<
     const preparationWarnings = new Set<string>();
     this.synthetics = {
       ephemeralEffects: {},
+      ephemeralModifiers: {},
       modifierAdjustments: { all: [], damage: [] },
       modifiers: { all: [], damage: [] },
       afflictions: { data: [], ids: new Set() },
@@ -226,6 +216,7 @@ class ActorPTR2e<
       effects: {},
       toggles: [],
       attackAdjustments: [],
+      tokenOverrides: {},
       preparationWarnings: {
         add: (warning: string) => preparationWarnings.add(warning),
         flush: fu.debounce(() => {
@@ -239,6 +230,7 @@ class ActorPTR2e<
 
     this._party = null;
     this._perks = null;
+    this._species = null;
 
     this.rollOptions = new RollOptionManager(this);
 
@@ -284,6 +276,20 @@ class ActorPTR2e<
     if (this.type === "ptu-actor") return super.prepareBaseData();
     super.prepareBaseData();
 
+    //@ts-expect-error - The getter needs to be added afterwards.
+    this.flags.ptr2e.disableActionOptions = {
+      collection: new Collection(),
+      disabled: []
+    }
+    Object.defineProperty(this.flags.ptr2e.disableActionOptions, "options", {
+      get: () => {
+        return this.flags.ptr2e.disableActionOptions!.collection.filter(action => {
+          if(!(action instanceof AttackPTR2e)) return true;
+          return action.free ? true : action.slot ? this.attacks.actions[action.slot] === action : action.free;
+        }).map(action => ({value: action.uuid}));
+      }
+    });
+
     if (this.system.shield.value > 0) this.rollOptions.addOption("self", "state:shielded");
     switch (true) {
       case this.system.health.value <= Math.floor(this.system.health.max * 0.25): {
@@ -323,7 +329,7 @@ class ActorPTR2e<
    * */
   override prepareEmbeddedDocuments() {
     if (this.type === "ptu-actor") return super.prepareEmbeddedDocuments();
-    return super.prepareEmbeddedDocuments();
+    super.prepareEmbeddedDocuments();
   }
 
   /**
@@ -386,6 +392,96 @@ class ActorPTR2e<
 
       this.abilities.entries[ability.system.slot] = ability;
     }
+
+    // Create Fling Action
+    this.generateFlingAttack();
+  }
+
+  generateFlingAttack() {
+    function getFlingAttack(
+      {name, slug, power = 25, accuracy = 100, types = ["untyped"], free = false, variant = true, description = "", id=""}: 
+      {name?: string, slug?: string, power?: number, accuracy?: number, types?: DeepPartial<AttackPTR2e['_source']['types']>, free?: boolean, variant?: boolean, description?: string, id?: string}
+      = {name: "", slug: "", power: 25, accuracy: 100, types: ["untyped"], free: false, variant: true, description: "", id:""}
+    ): DeepPartial<AttackPTR2e['_source']> {
+      return {
+        slug: `fling${name?.length ? `-${slug}` : ""}`,
+        name: `Fling${name?.length ? ` (${name})` : ""}`,
+        type: "attack",
+        traits: [
+          "adaptable",
+          "basic",
+          "fling",
+          "pp-updated"
+        ],
+        range: {
+          target: "creature",
+          distance: 10,
+          unit: "m"
+        },
+        cost: {
+          activation: "complex",
+          powerPoints: 0
+        },
+        category: "physical",
+        power: power || 25,
+        accuracy: accuracy || 100,
+        types: types?.length ? types : ["untyped"],
+        description: description ? description : "<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item. When using Fling utilizing a Held creature, Fling's Power and Accuracy are as follows:</p><blockquote>Power = 20 + (userLift / 4) + (thrownWC * 3)<br>Accuracy = 75 + (userLift / 5) + userCatMod - (4 * thrownCatMod)<br>Range = 8 + (userLift / 6) + userCatMod - (2* thrownCatMod)</blockquote>",
+        variant: variant ? "fling" : null,
+        free,
+        img: "systems/ptr2e/img/svg/untyped_icon.svg",
+        ...(id ? { flingItemId: id } : {})
+      }
+    }
+    const data = {
+      "name": "Fling",
+      "type": "move",
+      "img": "systems/ptr2e/img/svg/untyped_icon.svg",
+      "system": {
+        "slug": "fling",
+        "description": "<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item. When using Fling utilizing a Held creature, Fling's Power and Accuracy are as follows:</p><blockquote>Power = 20 + (userLift / 4) + (thrownWC * 3)<br>Accuracy = 75 + (userLift / 5) + userCatMod - (4 * thrownCatMod)<br>Range = 8 + (userLift / 6) + userCatMod - (2* thrownCatMod)</blockquote>",
+        "traits": [
+          "adaptable",
+          "basic",
+          "fling"
+        ],
+        "actions": [getFlingAttack({
+          free: true,
+          variant: false
+        })],
+        "grade": "E"
+      },
+      "_id": "flingattackitem0",
+      "effects": []
+    };
+    
+    const itemNames = new Set<string>();
+    for(const item of this.items?.contents as unknown as ItemPTR2e[]) {
+      if(!["consumable", "equipment", "gear", "weapon"].includes(item.type)) continue;
+      if(!item.system.fling) continue;
+      if(itemNames.has(item.slug)) continue;
+      if(item.system.quantity !== undefined && typeof item.system.quantity === 'number' && item.system.quantity <= 0) continue;
+      itemNames.add(item.slug);
+
+      const flingData = item.system.fling as { power: number, accuracy: number, type: PokemonType, hide: boolean };
+      if(flingData.hide) continue;
+
+      data.system.actions.push(getFlingAttack({name: item.name, slug: item.slug, power: flingData.power, accuracy: flingData.accuracy, types: [flingData.type], id: item.id,
+        description: `<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item.</p><p>This fling variant is based on ${item.link}</p>`
+      }));
+    }
+
+    const existing = this.items.get(data._id) as Maybe<ItemPTR2e<MoveSystem, this>>;
+    if(existing) {
+      existing.updateSource(data);
+      existing.reset();
+      this.fling = existing;
+    }
+    else {
+      this.fling = new ItemPTR2e(data, { parent: this });
+    }
+
+    this.items.set(this.fling.id, this.fling);
   }
 
   /**
@@ -393,6 +489,9 @@ class ActorPTR2e<
    */
   override applyActiveEffects() {
     if (this.type === "ptu-actor") return;
+    // First finish preparing embedded documents based on System Information
+    this.system.prepareEmbeddedDocuments();
+
     this.statuses ??= new Set();
 
     // Identify which special statuses had been active
@@ -443,6 +542,23 @@ class ActorPTR2e<
       tokens ??= this.getActiveTokens();
       for (const token of tokens) token._onApplyStatusEffect(statusId, isActive);
     }
+  }
+
+  override *allApplicableEffects(): Generator<ActiveEffectPTR2e<this>> {
+    if (game.ready) {
+      const combatant = this.combatant;
+      if (combatant) {
+        const summons = combatant.parent?.summons;
+        if (summons?.length) {
+          for (const summon of summons) {
+            for (const effect of summon.system.getApplicableEffects(this)) {
+              yield new ActiveEffectPTR2e(effect.toObject(), { parent: this }) as ActiveEffectPTR2e<this>;
+            }
+          }
+        }
+      }
+    }
+    yield* super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>
   }
 
   _calculateEffectiveness(): Record<PokemonType, number> {
@@ -685,6 +801,10 @@ class ActorPTR2e<
     isDelta?: boolean,
     isBar?: boolean
   ): Promise<this> {
+    if (attribute === "health") {
+      if (value >= 0) value = Math.floor(value);
+      if (value < 0) value = Math.ceil(value);
+    }
     if (isDelta && value != 0 && attribute === "health") {
       await this.applyDamage(value * -1);
       return this;
@@ -708,8 +828,41 @@ class ActorPTR2e<
     return this.type === "pokemon";
   }
 
-  hasEmbeddedSpecies(): boolean {
-    return !!this.system._source.species;
+  isAllyOf(actor: ActorPTR2e): boolean {
+    return this.alliance !== null && this !== actor && this.alliance === actor.alliance;
+  }
+
+  isEnemyOf(actor: ActorPTR2e): boolean {
+    return this.alliance !== null && actor.alliance !== null && this.alliance !== actor.alliance;
+  }
+
+  async spendLuck(amount: number, pendingUpdates: Record<string, unknown>[] = [], notifications: { name: string, amount: number, leftover: number }[] = []): Promise<{ name: string, amount: number, leftover: number }[]> {
+    // no "spending" a negative amount of luck
+    if (amount < 0) return [];
+    // If we can't afford it, don't spend it.
+    if (amount > this.spendableLuck || this.spendableLuck - amount <= 0) return [];
+
+    const luck = this.luck;
+    if (luck > 0) {
+      const skills = this.system.toObject().skills;
+      const luckSkill = skills.find((skill) => skill.slug === "luck");
+      if (!luckSkill) return [];
+      luckSkill.value = Math.max(luck - amount, 1);
+
+      amount -= luck;
+      notifications.push({ name: this.name, amount: luck - luckSkill.value, leftover: luckSkill.value });
+      pendingUpdates.push({ _id: this.id, "system.skills": skills });
+    }
+    if (amount <= 0) {
+      if (pendingUpdates.length) await Actor.updateDocuments(pendingUpdates);
+      return notifications;
+    }
+
+    // we need to spend it from our owner, if we have one
+    const owner = this.party?.owner;
+    if (!owner || owner == this) return [];
+
+    return await owner.spendLuck(amount, pendingUpdates, notifications);
   }
 
   async onEndActivation() {
@@ -1168,6 +1321,16 @@ class ActorPTR2e<
       hasSenerenGrace: targetToken?.actor?.rollOptions?.all?.["special:serene-grace"] ?? false
     })
 
+    const targetOriginFlatModifiers = await extractTargetModifiers({
+      origin: this,
+      target: params.target?.actor ?? targetToken?.actor ?? null,
+      item: params.item ?? null,
+      attack: params.attack ?? null,
+      action: params.action ?? null,
+      domains: params.domains,
+      options: [...params.options, ...(params.item?.getRollOptions("item") ?? [])],
+    })
+
     // Clone the actor to recalculate its AC with contextual roll options
     const targetActor = params.viewOnly
       ? null
@@ -1204,7 +1367,7 @@ class ActorPTR2e<
       item: selfItem,
       attack: selfAttack!,
       action: selfAction!,
-      modifiers: [],
+      modifiers: targetOriginFlatModifiers ?? [],
     };
 
     const target =
@@ -1375,7 +1538,7 @@ class ActorPTR2e<
   ): Promise<boolean | void> {
     if (changed.system?.party?.ownerOf) {
       const folder = game.folders.get(changed.system.party.ownerOf as Maybe<string>) as FolderPTR2e;
-      if (folder?.owner && folder.owner !== this.uuid) {
+      if (folder?.owner && !this.uuid?.endsWith(folder.owner)) {
         throw new Error("Cannot change the owner of a party folder to an actor that does not own it. Please remove the current party owner first.");
       }
     }
@@ -1452,7 +1615,7 @@ class ActorPTR2e<
     }
 
     if (changed.system?.advancement?.experience?.current !== undefined) {
-      if (this.system.species?.moves?.levelUp?.length) {
+      if (this.species?.moves?.levelUp?.length) {
         // Check if level-up occurs
         const newExperience = Number(changed.system.advancement.experience.current);
         const nextExperienceThreshold = this.system.advancement.experience.next;
@@ -1460,7 +1623,7 @@ class ActorPTR2e<
           const level = this.system.getLevel(newExperience);
           const currentLevel = this.system.advancement.level;
 
-          const newMoves = this.system.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
+          const newMoves = this.species.moves.levelUp.filter(move => move.level > currentLevel && move.level <= level).filter(move => !this.itemTypes.move.some(item => item.slug == move.name));
           if (newMoves.length) {
             const moves = (await Promise.all(newMoves.map(move => fromUuid<ItemPTR2e<MoveSystem>>(move.uuid)))).flatMap(move => move ?? []);
             changed.items ??= [];
@@ -1708,8 +1871,11 @@ interface ActorPTR2e<
   }
 
   skills: Record<string, Statistic>;
+  _species: SpeciesSystem | null;
 
   get itemTypes(): Record<string, ItemPTR2e[]>;
+
+  fling: ItemPTR2e<MoveSystem, this>;
 }
 
 type ActorFlags2e = ActorFlags & {
@@ -1718,6 +1884,11 @@ type ActorFlags2e = ActorFlags & {
     sheet?: {
       perkFlash?: boolean;
     };
+    disableActionOptions?: {
+      collection: Collection<ActionPTR2e>;
+      get options(): PickableThing[];
+      disabled: ActionUUID[];
+    }
   };
 };
 

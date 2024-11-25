@@ -2,7 +2,8 @@ import { ItemPTR2e, ItemSystemsWithActions } from "@item";
 import Tagify from "@yaireo/tagify";
 import { ApplicationV2Expanded } from "./appv2-expanded.ts";
 import { htmlQuery, htmlQueryAll, sluggify } from "@utils";
-import { Trait } from "@data";
+import { AttackPTR2e, Trait } from "@data";
+import * as R from "remeda";
 
 export class ActionEditor<
   TDocument extends ItemPTR2e<ItemSystemsWithActions>,
@@ -180,6 +181,10 @@ export class ActionEditor<
     })();
 
     this.#allTraits = game.ptr.data.traits.map((trait) => ({ value: trait.slug, label: trait.label, type: trait.type }));
+    const typeOptions = this.action.schema.fields.type.options.choices as Record<string, string>;
+    const variants = this.action.type === "attack"
+      ? (this.action as AttackPTR2e).variants.flatMap(variant => this.action.item.actions.get(variant) ?? [])
+      : false;
 
     return {
       document: this.document,
@@ -188,7 +193,9 @@ export class ActionEditor<
       fields: this.action.schema.fields,
       traits,
       enrichedDescription: await TextEditor.enrichHTML(this.action.description),
-      rangeData: {tooltip: "range-tooltip", range: this.action?.range?.target},
+      rangeData: { tooltip: "range-tooltip", range: this.action?.range?.target },
+      typeOptions: this.action.item.type === "summon" ? R.pick(typeOptions, ["summon", "generic"]) : R.omit(typeOptions, ["summon"]),
+      variants
     };
   }
 
@@ -318,11 +325,11 @@ export class ActionEditor<
         }
       }
       for (const element of htmlQueryAll(content, ".item-controls a")) {
-        if(element.classList.contains("effect-edit") || element.dataset.action == "edit-action") continue;
+        if (element.classList.contains("effect-edit") || element.dataset.action == "edit-action") continue;
         (element as HTMLButtonElement).disabled = true;
         element.attributes.setNamedItem(document.createAttribute("disabled"));
       }
-      for(const element of htmlQueryAll(content, "tags.tagify")) {
+      for (const element of htmlQueryAll(content, "tags.tagify")) {
         (element as HTMLInputElement).readOnly = true;
         element.attributes.setNamedItem(document.createAttribute("readOnly"));
       }

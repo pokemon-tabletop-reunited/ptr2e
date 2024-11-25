@@ -169,8 +169,6 @@ class Blueprint extends foundry.abstract.DataModel {
   async prepareAsyncData(): Promise<void> {
     if (this.preparedAsyncData) return;
 
-    // const type = fu.parseUuid(this._source.species).documentType;
-
     const doc = await fromUuid<ItemPTR2e<SpeciesSystem> | RollTable | ActorPTR2e>(this._source.species);
 
     const { name, img } = doc ?? { name: "Invalid UUID", img: "icons/svg/hazard.svg" };
