@@ -411,7 +411,7 @@ class ActorPTR2e<
         this.attacks.available.push(attack);
         continue;
       }
-      if (this.attacks.actions[attack.slot] !== null) {
+      if (this.attacks.actions[attack.slot]) {
         if (this.attacks.actions[attack.slot].slug !== attack.slug) {
           this.attacks.available.push(this.attacks.actions[attack.slot]);
         }
@@ -437,7 +437,7 @@ class ActorPTR2e<
         continue;
       }
 
-      if (this.abilities.entries[ability.system.slot] !== null) {
+      if (this.abilities.entries[ability.system.slot]) {
         if (this.abilities.entries[ability.system.slot].slug !== ability.slug) {
           this.abilities.available.push(this.abilities.entries[ability.system.slot]);
         }
@@ -2041,6 +2041,7 @@ type ActorFlags2e = ActorFlags & {
       get options(): PickableThing[];
       disabled: ActionUUID[];
     }
+    editedSkills?: boolean
   };
 };
 

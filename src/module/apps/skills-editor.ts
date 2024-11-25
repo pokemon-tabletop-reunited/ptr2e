@@ -82,7 +82,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
           label,
           investment: 0,
           max: 70 - (skill?.rvs ?? 0),
-          min: -(skill?.rvs ?? 0),
+          min: skill?.slug === 'resources' ? -((skill?.value ?? 0) - 10 - ((skill?.rvs ?? 0) < 0 ? -skill.rvs! : 0)) : -(skill?.rvs ?? 0),
         }];
       } else {
         const skillData = game.ptr.data.skills.get(skill.slug);
@@ -92,7 +92,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
             label: skillData.label || Handlebars.helpers.formatSlug(skill.slug),
             investment: 0,
             max: 70 - (skill?.rvs ?? 0),
-            min: -(skill?.rvs ?? 0),
+            min: skill?.slug === 'resources' ? -((skill?.value ?? 0) - 10 - ((skill?.rvs ?? 0) < 0 ? -skill.rvs! : 0)) : -(skill?.rvs ?? 0),
           }];
         }
       }
@@ -122,7 +122,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       })(),
     };
     points.available = points.total - points.spent;
-    const levelOne = this.document.system.advancement.level === 1;
+    const levelOne = this.document.system.advancement.level === 1 || !this.document.flags.ptr2e?.editedSkills;
 
     // clamp the max to not exceed the available points
     const skills = this.skills.map((s) => ({
@@ -224,6 +224,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
                 rvs: 0,
               };
             }),
+            "flags.ptr2e.editedSkills": false,
           });
           this.skills = this.resetSkills();
           this.render({});
@@ -410,6 +411,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
     const data = fu.expandObject<Record<string, { investment: string }>>(formData.object);
     const skills = this.document.system.toObject().skills as SkillPTR2e["_source"][];
     const maxInvestment = this.document.system.advancement.level === 1 ? 90 : 100;
+    const levelOne = this.document.system.advancement.level === 1 || !this.document.flags.ptr2e?.editedSkills;
 
     const avoidValidation = !!((_event as SubmitEvent)?.submitter?.getAttribute("formnovalidate"));
 
@@ -420,7 +422,14 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       const investment = parseInt(skillData.investment);
       if (isNaN(investment) || !investment) continue;
 
-      if (skill.slug === "resources" && investment < 0) resourceMod = investment;
+      if (skill.slug === "resources") {
+        if(investment < 0) resourceMod = investment;
+        if(levelOne) {
+          resourceMod = investment
+          delete data[skill.slug];
+          continue;
+        }
+      };
       if (avoidValidation) {
         skill.rvs = (skill.rvs ?? 0) + investment;
       } else {
@@ -436,7 +445,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       const skillData = game.ptr.data.skills.get(slug);
       if (!skillData || !game.ptr.data.skills.isCustomSkill(skillData)) continue;
 
-      if (slug === "resources" && investment < 0) resourceMod = investment;
+      if (slug === "resources" && (investment < 0 || levelOne)) resourceMod = investment;
 
       const rvs = avoidValidation ? investment : Math.clamp(investment, slug === "resources" ? -maxInvestment : 0, maxInvestment);
 
@@ -450,16 +459,17 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       });
     }
 
-    if (this.document.system.advancement.level === 1) {
+    if (levelOne) {
       const resourceIndex = skills.findIndex((skill) => skill.slug === "resources");
       if (resourceIndex !== -1) {
         const resources = skills[resourceIndex];
-        resources.value += (resources.rvs ?? 0) + resourceMod;
-        resources.rvs = 0;
+        resources.value += resourceMod;
+        resources.rvs = resources.rvs ?? 0;
       }
     }
 
     await this.document.update({
+      "flags.ptr2e.editedSkills": true,
       "system.skills": skills,
     });
   }
