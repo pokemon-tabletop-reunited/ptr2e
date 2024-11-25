@@ -1,0 +1,41 @@
+{
+  "name": "Trick Room",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "slug": "trick-room",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "trick-room",
+        "name": "Trick Room",
+        "type": "attack",
+        "traits": [
+          "room"
+        ],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8
+        },
+        "category": "status",
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: Summons @UUID[Compendium.ptr2e.core-summons.Item.R6JOV2LI9kcG8vSq]{Trick Room}.</p><p>Trick Room causes all Base Action Values to be inversed. <br>This happens by deducting all BaseAVs from 195.</p>",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+        "summon": "Compendium.ptr2e.core-summons.Item.R6JOV2LI9kcG8vSq"
+      }
+    ],
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "0o8uUraEHLc4mDq4",
+  "effects": []
+}
