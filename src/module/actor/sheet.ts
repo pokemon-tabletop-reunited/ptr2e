@@ -51,7 +51,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
       classes: ["ptr2e", "sheet", "actor", "v2"],
       position: {
         width: 900,
-        height: 680,
+        height: 700,
       },
       window: {
         resizable: true,
