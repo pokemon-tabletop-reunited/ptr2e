@@ -13,7 +13,8 @@ class CombatantPTR2e<
   }
 
   get baseAV() {
-    return Math.floor(this.system.baseAV);
+    const baseAv = Math.floor(this.system.baseAV);
+    return this.actor?.rollOptions.getFromDomain("effect")["reverse-initiative"] ? 195 - baseAv : baseAv;
   }
 
   async onStartActivation() {
