@@ -1826,6 +1826,22 @@
           "value": "unlucky",
           "reevaluateOnUpdate": true,
           "allowDuplicate": false,
+          "onDeleteActions": {
+            "grantee": "restrict",
+            "granter": "cascade"
+          },
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "type",
+              "value": "passive"
+            },
+            {
+              "mode": 5,
+              "property": "duration.turns",
+              "value": 0
+            }
+          ],
           "predicate": [
             {
               "gt": [

@@ -65,7 +65,11 @@ export default class GrantItemChangeSystem extends ChangeModel {
       allowDuplicate: new fields.BooleanField({ initial: true, label: "PTR2E.Effect.FIELDS.ChangeAllowDuplicate.label" }),
       alterations: new fields.ArrayField(new fields.EmbeddedDataField(ItemAlteration)),
       track: new fields.BooleanField(),
-      replaceSelf: new fields.BooleanField({label: "PTR2E.Effect.FIELDS.ChangeReplaceSelf.label"}),
+      replaceSelf: new fields.BooleanField({ label: "PTR2E.Effect.FIELDS.ChangeReplaceSelf.label" }),
+      onDeleteActions: new fields.SchemaField({
+        grantee: new fields.StringField({ required:true, choices: GrantItemChangeSystem.ON_DELETE_ACTIONS, initial: "detach" }),
+        granter: new fields.StringField({ required:true, choices: GrantItemChangeSystem.ON_DELETE_ACTIONS, initial: "cascade" }),
+      })
     };
   }
 
@@ -115,14 +119,14 @@ export default class GrantItemChangeSystem extends ChangeModel {
       throw Error("reevaluateOnUpdate: must have non-empty predicate");
     }
 
-    if(data.reevaluateOnUpdate && data.allowDuplicate) {
+    if (data.reevaluateOnUpdate && data.allowDuplicate) {
       throw Error("reevaluateOnUpdate: cannot allow duplicates");
     }
   }
 
   public async getItem(key: string = this.resolveInjectedProperties(this.uuid)): Promise<Maybe<ClientDocument>> {
     try {
-      return (await fromUuid(key+""))?.clone() ?? null
+      return (await fromUuid(key + ""))?.clone() ?? null
     } catch (error) {
       console.error(error);
       return null;
@@ -136,14 +140,14 @@ export default class GrantItemChangeSystem extends ChangeModel {
     const changeSource: GrantItemSource = args.changeSource;
 
     const uuid = this.resolveInjectedProperties(this.uuid);
-    const grantedItem: Maybe<ClientDocument> = await this.getItem(uuid);
-    if (!(grantedItem instanceof ItemPTR2e)) return;
+    const grantedDocument: Maybe<ClientDocument> = await this.getItem(uuid);
+    if (!(grantedDocument instanceof ItemPTR2e || grantedDocument instanceof ActiveEffectPTR2e)) return;
 
     changeSource.key =
       typeof changeSource.key === "string" && changeSource.key.length > 0
         ? sluggify(changeSource.key, { camel: 'dromedary' })
         : ((): string => {
-          const defaultFlag = sluggify(grantedItem.slug ?? grantedItem.name, { camel: 'dromedary' });
+          const defaultFlag = sluggify(grantedDocument.slug ?? grantedDocument.name, { camel: 'dromedary' });
           const flagPattern = new RegExp(`^${defaultFlag}\\d*$`);
           const itemGrants = effectSource.flags?.ptr2e?.itemGrants ?? {};
           const nthGrant = Object.keys(itemGrants).filter(g => flagPattern.test(g)).length;
@@ -155,14 +159,16 @@ export default class GrantItemChangeSystem extends ChangeModel {
     if (!this.test()) return;
 
     // If we shouldn't allow duplicates, check for an existing item with this source ID
-    const existingItem = this.actor.items.find((i) => (i as ItemPTR2e)?.flags?.core?.sourceId === uuid) as ItemPTR2e;
+    const existingItem = this.type === "grant-effect"
+      ? this.actor.effects.find(e => (e as ActiveEffectPTR2e).slug === grantedDocument.slug) as ActiveEffectPTR2e
+      : this.actor.items.find((i) => (i as ItemPTR2e)?.flags?.core?.sourceId === uuid) as ItemPTR2e;
     if (!this.allowDuplicate && existingItem) {
       this.#setGrantFlags(effectSource, existingItem);
 
-      if(!this.reevaluateOnUpdate) ui.notifications.info(
+      if (!this.reevaluateOnUpdate) ui.notifications.info(
         game.i18n.format("PTR2E.UI.RuleElements.GrantItem.AlreadyHasItem", {
           actor: this.actor.name,
-          item: grantedItem.name,
+          item: grantedDocument.name,
         }),
       );
       return;
@@ -170,14 +176,19 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
     // Set ids and flags on the granting effect and granted item
     effectSource._id ??= fu.randomID();
-    const grantedSource = grantedItem.toObject();
+    const grantedSource = grantedDocument.toObject();
     grantedSource._id = fu.randomID();
 
-    // An item may grant another copy of itself, but at least strip the copy of its grant REs
+    // An item may grant another copy of itself, but at least strip the copy of its grant CMs
     if (this.item?.flags?.core?.sourceId === (grantedSource.flags.core?.sourceId ?? "")) {
-      for (const ae of grantedSource.effects) {
-        const effect = ae as EffectSourcePTR2e;
-        effect.system.changes = effect.system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
+      if (this.type === "grant-effect") {
+        (grantedSource as ActiveEffectPTR2e['_source']).system.changes = (grantedSource as ActiveEffectPTR2e['_source']).system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
+      }
+      else {
+        for (const ae of (grantedSource as ItemPTR2e['_source']).effects) {
+          const effect = ae as EffectSourcePTR2e;
+          effect.system.changes = effect.system.changes.filter(c => c.type !== GrantItemChangeSystem.TYPE);
+        }
       }
     }
 
@@ -193,47 +204,50 @@ export default class GrantItemChangeSystem extends ChangeModel {
       if (error instanceof Error) this.failValidation(error.message);
     }
 
-    const tempGranted = new ItemPTR2e(fu.deepClone(grantedSource), { parent: this.actor });
+    const tempGranted = this.type === "grant-effect" ? new ActiveEffectPTR2e(fu.deepClone(grantedSource), { parent: this.actor }) : new ItemPTR2e(fu.deepClone(grantedSource), { parent: this.actor });
     // tempGranted.grantedBy = this.effect;
 
     // TODO: Check for immunity and bail if a match
 
     // TODO: Check if additional data preperation cycles need to be manually triggered
 
-    this.#applyChoicePreselections(tempGranted);
+    // this.#applyChoicePreselections(tempGranted);
 
     if (this.ignored) return;
 
-    args.tempItems.push(tempGranted);
+    if(this.type !== "grant-effect") args.tempItems.push(tempGranted as ItemPTR2e);
 
     this._grantedId = grantedSource._id;
     context.keepId = true;
 
     this.#setGrantFlags(effectSource, grantedSource as ItemSourcePTR2e);
-    this.#trackItem(tempGranted);
+    if(this.type !== "grant-effect") this.#trackItem(tempGranted as ItemPTR2e);
 
     // Add to pending items before running pre-creates to preserve creation order
-    if(this.replaceSelf) {
+    if (this.replaceSelf) {
       pendingEffects.findSplice(i => i._id === this.effect._id);
       pendingItems.findSplice(i => i._id === this.effect.parent?._id);
     }
-    
-    pendingItems.push(grantedSource as ItemSourcePTR2e);
+
+    if (this.type === "grant-effect") pendingEffects.push(grantedSource as EffectSourcePTR2e);
+    else pendingItems.push(grantedSource as ItemSourcePTR2e);
 
     // Run the granted item's preCreate callbacks unless this is a pre-actor-update reevaluation
     if (!args.reevaluation) {
-      await this.#runGrantedItemPreCreates(args, tempGranted, context);
+      if(this.type === "grant-effect") await this.#runGrantedEffectPreCreates(args, tempGranted as ActiveEffectPTR2e, context);
+      else await this.#runGrantedItemPreCreates(args, tempGranted as ItemPTR2e, context);
     }
   }
 
   /** Grant an item if this rule element permits it and the predicate passes */
-  override async preUpdateActor(): Promise<{ create: ItemSourcePTR2e[]; delete: string[]; }> {
+  override async preUpdateActor(): Promise<{ create: ItemSourcePTR2e[]; delete: string[];} | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[];}> {
     const noAction = { create: [], delete: [] };
 
     if (this.ignored || !this.reevaluateOnUpdate || this.inMemoryOnly || !this.actor) return noAction;
 
-    if (this.grantedId && this.actor.items.has(this.grantedId)) {
+    if (this.grantedId && (this.actor.items.has(this.grantedId) || this.actor.effects.has(this.grantedId))) {
       if (!this.test()) {
+        if(this.type === "grant-effect") return { createEffects: [], deleteEffects: [this.grantedId] };
         return { create: [], delete: [this.grantedId] };
       }
       return noAction;
@@ -248,11 +262,11 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
     if (pendingItems.length > 0) {
       const updatedGrants = effectSource.flags?.ptr2e?.itemGrants ?? {};
-      const updatedKey = Object.keys(updatedGrants).find(k => (updatedGrants[k as keyof typeof updatedGrants] as {id: string}).id === this.grantedId);
-      if(updatedKey) {
+      const updatedKey = Object.keys(updatedGrants).find(k => (updatedGrants[k as keyof typeof updatedGrants] as { id: string }).id === this.grantedId);
+      if (updatedKey) {
         const changes = this.parent.toObject().changes;
         const index = this.parent.changes.findIndex(c => c === this);
-        if(index >= 0) {
+        if (index >= 0) {
           changes[index].key = updatedKey;
         }
         await this.effect.update({ "flags.ptr2e.itemGrants": updatedGrants, "system.changes": changes }, { render: false });
@@ -261,6 +275,22 @@ export default class GrantItemChangeSystem extends ChangeModel {
         await this.effect.update({ "flags.ptr2e.itemGrants": updatedGrants }, { render: false });
       }
       return { create: pendingItems, delete: [] };
+    }
+    if(pendingEffects.length > 0) {
+      const updatedGrants = effectSource.flags?.ptr2e?.itemGrants ?? {};
+      const updatedKey = Object.keys(updatedGrants).find(k => (updatedGrants[k as keyof typeof updatedGrants] as { id: string }).id === this.grantedId);
+      if (updatedKey) {
+        const changes = this.parent.toObject().changes;
+        const index = this.parent.changes.findIndex(c => c === this);
+        if (index >= 0) {
+          changes[index].key = updatedKey;
+        }
+        await this.effect.update({ "flags.ptr2e.itemGrants": updatedGrants, "system.changes": changes }, { render: false });
+      }
+      else {
+        await this.effect.update({ "flags.ptr2e.itemGrants": updatedGrants }, { render: false });
+      }
+      return { createEffects: pendingEffects, deleteEffects: [] };
     }
 
     return noAction;
@@ -283,8 +313,8 @@ export default class GrantItemChangeSystem extends ChangeModel {
 
   /** Apply preselected choices to the granted item's choices sets. */
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  #applyChoicePreselections(_grantedItem: ItemPTR2e): void {
-    return;
+  // #applyChoicePreselections(_grantedItem: ItemPTR2e): void {
+  //   return;
     // const source = grantedItem._source;
     // for (const [flag, selection] of Object.entries(this.preselectChoices ?? {})) {
     //     for(const effect of grantedItem.effects) {
@@ -294,10 +324,10 @@ export default class GrantItemChangeSystem extends ChangeModel {
     //         }
     //     }
     // }
-  }
+  // }
 
   /** Set flags on granting and grantee items to indicate relationship between the two */
-  #setGrantFlags(granter: PreCreate<EffectSourcePTR2e>, grantee: ItemSourcePTR2e | ItemPTR2e): void {
+  #setGrantFlags(granter: PreCreate<EffectSourcePTR2e>, grantee: ItemSourcePTR2e | ItemPTR2e | ActiveEffectPTR2e): void {
     const flags = fu.mergeObject(granter.flags ?? {}, { ptr2e: { itemGrants: { [this.flag]: {} } } });
     if (!this.flag) throw new Error("No flag set for granted item");
 
@@ -324,6 +354,9 @@ export default class GrantItemChangeSystem extends ChangeModel {
       grantee.update({ "flags.ptr2e.grantedBy": grantedBy }, { render: false });
     } else {
       grantee.flags = fu.mergeObject(grantee.flags ?? {}, { ptr2e: { grantedBy } });
+      if (this.type === "grant-effect") {
+        grantee.flags = fu.mergeObject(grantee.flags ?? {}, { ptr2e: { grantedBy } });
+      }
     }
   }
 
@@ -341,6 +374,21 @@ export default class GrantItemChangeSystem extends ChangeModel {
           context,
         });
       }
+    }
+  }
+
+  async #runGrantedEffectPreCreates(
+    originalArgs: Omit<ChangeModel.PreCreateParams, "changeSource">,
+    effect: ActiveEffectPTR2e,
+    context: DocumentModificationContext<ActorPTR2e | ItemPTR2e | null>,
+  ): Promise<void> {
+    for (const change of effect.system.changes) {
+      await change.preCreate?.({
+        ...originalArgs,
+        changeSource: change,
+        effectSource: effect.toObject() as EffectSourcePTR2e,
+        context,
+      });
     }
   }
 
@@ -409,7 +457,7 @@ interface OnDeleteActions {
   grantee: ItemGrantDeleteAction;
 }
 
-export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item: Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, pendingItems: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[], pendingEffects: ActiveEffectPTR2e[]): Promise<void> {
+export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item: Maybe<ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, pendingItems: ItemPTR2e<ItemSystemPTR, ActorPTR2e>[], pendingEffects: ActiveEffectPTR2e[], ignoreRestricted: boolean): Promise<void> {
   const actor = effect.targetsActor() ? effect.target : (effect.parent as ItemPTR2e<ItemSystemPTR, ActorPTR2e>).actor;
 
   const granter = actor.effects.get((item ? item.flags.ptr2e.grantedBy?.id : effect.flags.ptr2e.grantedBy?.id) ?? "") as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>;
@@ -417,7 +465,7 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e
   const grants = Object.values(effect.flags.ptr2e.itemGrants ?? {});
 
   // Handle deletion restrictions, aborting early if found in either this item's granter or any of its grants
-  if (granter && parentGrant?.onDelete === "restrict" && !pendingEffects.includes(granter)) {
+  if (!ignoreRestricted && granter && parentGrant?.onDelete === "restrict" && !pendingEffects.includes(granter)) {
     ui.notifications.warn(game.i18n.format("PTR2E.UI.Warnings.GrantItem.RemovalPrevented", { item: item?.name ?? effect.name, preventer: granter.name }));
     if (item) pendingItems.splice(pendingItems.indexOf(item), 1);
     else pendingEffects.splice(pendingEffects.indexOf(effect), 1);
@@ -429,7 +477,7 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e
     if (grantee?.flags.ptr2e.grantedBy?.id !== effect.id) continue;
 
     // @ts-expect-error - Checks will succeed.
-    if (grantee.flags.ptr2e.grantedBy.onDelete === "restrict" && !(pendingItems.includes(grantee) || pendingEffects.includes(grantee))) {
+    if (!ignoreRestricted && grantee.flags.ptr2e.grantedBy.onDelete === "restrict" && !(pendingItems.includes(grantee) || pendingEffects.includes(grantee))) {
       ui.notifications.warn(game.i18n.format("PTR2E.UI.Warnings.GrantItem.RemovalPrevented", { item: item?.name ?? effect.name, preventer: grantee.name }));
       if (item) pendingItems.splice(pendingItems.indexOf(item), 1);
       else pendingEffects.splice(pendingEffects.indexOf(effect), 1);
@@ -440,7 +488,7 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e
   // Handle deletion cascades, pushing additional items onto the `pendingItems` array
   if (granter && parentGrant?.onDelete === "cascade" && !pendingEffects.includes(granter)) {
     pendingEffects.push(granter);
-    await processGrantDeletions(granter, item, pendingItems, pendingEffects);
+    await processGrantDeletions(granter, item, pendingItems, pendingEffects, ignoreRestricted);
   }
 
   for (const grant of grants) {
@@ -451,11 +499,11 @@ export async function processGrantDeletions(effect: ActiveEffectPTR2e<ActorPTR2e
     if (grantee.flags.ptr2e.grantedBy.onDelete === "cascade" && !(pendingItems.includes(grantee) || pendingEffects.includes(grantee))) {
       if (grantee instanceof ItemPTR2e) {
         pendingItems.push(grantee);
-        await processGrantDeletions(effect, grantee, pendingItems, pendingEffects);
+        await processGrantDeletions(effect, grantee, pendingItems, pendingEffects, ignoreRestricted);
       }
       if (grantee instanceof ActiveEffectPTR2e) {
         pendingEffects.push(grantee);
-        await processGrantDeletions(grantee as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, pendingItems, pendingEffects);
+        await processGrantDeletions(grantee as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, pendingItems, pendingEffects, ignoreRestricted);
       }
     }
   }

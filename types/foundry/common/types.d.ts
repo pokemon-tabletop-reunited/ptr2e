@@ -35,6 +35,7 @@ declare global {
         deleteSubfolders?: boolean;
         deleteContents?: boolean;
         restoreDelta?: boolean;
+        [key: string]: unknown;
     }
 
     type DocumentUpdateContext<TParent extends Document | null> = Omit<

@@ -440,7 +440,7 @@ interface ChangeModel<TSchema extends ChangeSchema = ChangeSchema>
   afterRoll?(params: ChangeModel.AfterRollParams): Promise<void>;
 
   /** Runs before the rule's parent effect's owning actor is updated */
-  preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[] }>;
+  preUpdateActor?(): Promise<{ create: ItemSourcePTR2e[]; delete: string[];} | { createEffects: EffectSourcePTR2e[]; deleteEffects: string[];}>;
 
   /**
    * Runs before this rules element's parent effect is created. The effect is temporarilly constructed. A rule element can

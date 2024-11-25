@@ -441,7 +441,7 @@ class ActiveEffectPTR2e<
           await change.preDelete?.({ pendingItems: items, context });
         }
 
-        await processGrantDeletions(effect, null, items, effects);
+        await processGrantDeletions(effect, null, items, effects, !!context.ignoreRestricted);
       }
 
       if (items.length) {

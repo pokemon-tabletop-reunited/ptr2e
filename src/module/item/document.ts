@@ -386,12 +386,12 @@ class ItemPTR2e<
               await change.preDelete?.({ pendingItems: items, context });
             }
 
-            await processGrantDeletions(effect as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects)
+            await processGrantDeletions(effect as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects, !!context.ignoreRestricted)
           }
         }
         else {
           if (item.grantedBy && item.grantedBy instanceof ActiveEffectPTR2e) {
-            await processGrantDeletions(item.grantedBy as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects);
+            await processGrantDeletions(item.grantedBy as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects, !!context.ignoreRestricted);
           }
         }
       }
