@@ -46,6 +46,11 @@ const GamePTR = {
       },
       tokenPanel: new TokenPanel(null, { id: "ptr2e-token-panel" }),
       tutorList: new TutorListApp({id: "ptr2e-tutor-list"}),
+      settings: {
+        tokens: {
+          autoscale: game.settings.get("ptr2e", "tokens.autoscale")
+        }
+      }
     };
 
     // Add reference for 'fainted' to the 'dead' condition

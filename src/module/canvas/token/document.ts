@@ -6,6 +6,7 @@ import { CombatantPTR2e, CombatPTR2e } from "@combat";
 // TODO: Fix circular dependency when imported from @combat
 import CharacterCombatantSystem from "../../combat/combatant/models/character.ts";
 import { TokenAura } from "./aura/aura.ts";
+import { TokenConfigPTR2e } from "./sheet.ts";
 
 class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
 
@@ -76,9 +77,23 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
   override prepareBaseData(): void {
     super.prepareBaseData();
 
+    this.flags = fu.mergeObject(this.flags, { ptr2e: {} });
     const actor = this.actor;
     if (!actor) return;
 
+    // Dimensions and scale
+    const autoscaleDefault = game.ptr.settings.tokens.autoscale;
+    const linkDefault = autoscaleDefault && (["humanoid", "pokemon"] as string[]).includes(actor.type);
+    const linkToActorSize = this.flags.ptr2e?.linkToActorSize ?? linkDefault;
+
+    // Autoscaling is a secondary feature of linking to actor size
+    const autoscale = linkToActorSize ? (this.flags.ptr2e.autoscale ?? autoscaleDefault) : false;
+    this.flags.ptr2e = fu.mergeObject(this.flags.ptr2e ?? {}, { linkToActorSize, autoscale });
+
+    // Token dimensions from actor size
+    TokenDocumentPTR2e.prepareSize(this);
+
+    // Add token overrides from effects
     const tokenOverrides = actor.synthetics.tokenOverrides;
     this.name = tokenOverrides.name ?? this.name;
     this.alpha = tokenOverrides.alpha ?? this.alpha;
@@ -96,6 +111,18 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
     if (tokenOverrides.light) {
       this.light = new foundry.data.LightData(tokenOverrides.light, { parent: this });
     }
+
+    // Alliance coloration, appropriating core token dispositions
+    const alliance = actor.system.details.alliance;
+    this.disposition =
+      this.disposition === CONST.TOKEN_DISPOSITIONS.SECRET
+        ? CONST.TOKEN_DISPOSITIONS.SECRET
+        : alliance
+          ? {
+            party: CONST.TOKEN_DISPOSITIONS.FRIENDLY,
+            opposition: CONST.TOKEN_DISPOSITIONS.HOSTILE,
+          }[alliance]
+          : CONST.TOKEN_DISPOSITIONS.NEUTRAL;
 
     for (const [key, data] of actor.auras.entries()) {
       this.auras.set(key, new TokenAura({ token: this, ...fu.deepClone(data) }));
@@ -122,6 +149,26 @@ class TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> 
       }
     }
   }
+
+  /** Set a TokenData instance's dimensions from actor data. Static so actors can use for their prototypes */
+  static prepareSize(token: TokenDocumentPTR2e /*| PrototypeTokenPTR2e<ActorPTR2e>*/): void {
+    const actor = token.actor;
+    if (!(actor && token.flags.ptr2e.linkToActorSize)) return;
+
+    // If not overridden by an actor override, set according to creature size (skipping gargantuan)
+    const size = actor.dimensions; // In case an AE-like corrupted actor size data
+
+    token.width = size.width;
+    token.height = size.length;
+
+    if (game.ptr.settings.tokens.autoscale && token.flags.ptr2e.autoscale !== false) {
+      const absoluteScale = ["diminutive", "small"].includes(actor.size.value) ? 0.75 : 1;
+      const mirrorX = token.texture.scaleX < 0 ? -1 : 1;
+      token.texture.scaleX = mirrorX * absoluteScale;
+      const mirrorY = token.texture.scaleY < 0 ? -1 : 1;
+      token.texture.scaleY = mirrorY * absoluteScale;
+    }
+  }
 }
 
 interface TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | null> extends TokenDocument<TParent> {
@@ -133,7 +180,7 @@ interface TokenDocumentPTR2e<TParent extends ScenePTR2e | null = ScenePTR2e | nu
   get actor(): ActorPTR2e<ActorSystemPTR2e, this | null> | null;
   get combatant(): Combatant<Combat, this> | null;
   get object(): TokenPTR2e<this> | null;
-  get sheet(): TokenConfig<this>;
+  get sheet(): TokenConfigPTR2e<this>;
 }
 
 export { TokenDocumentPTR2e }

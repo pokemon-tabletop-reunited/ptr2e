@@ -15,9 +15,9 @@ export class ActorSizePTR2e {
 
   /** The default space (in a PTR 2e rules context) of each size */
   private static defaultSpaces: Record<Size, SizeDimensions> = {
-    diminutive: { length: 0.25, width: 0.25 },
+    diminutive: { length: 0.5, width: 0.5 },
     tiny: { length: 0.5, width: 0.5 },
-    small: { length: 0.75, width: 0.75 },
+    small: { length: 1, width: 1 },
     medium: { length: 1, width: 1 },
     large: { length: 2, width: 2 },
     huge: { length: 3, width: 3 },

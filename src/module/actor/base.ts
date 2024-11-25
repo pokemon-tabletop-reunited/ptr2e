@@ -139,12 +139,16 @@ class ActorPTR2e<
     return this._species ??= (this.items.get("actorspeciesitem")?.system as Maybe<SpeciesSystem>) ?? this.system.species ?? null;
   }
 
+  get size() {
+    return new ActorSizePTR2e({ value: this.species?.size?.category?.toLowerCase() as Size ?? "medium" });
+  }
+
   /**
    * With the exception of vehicles, actor heights aren't specified. For the purpose of three-dimensional
    * token-distance measurement, however, the system will generally treat actors as cubes.
    */
   get dimensions(): ActorDimensions {
-    const size = new ActorSizePTR2e({ value: this.species?.size?.category?.toLowerCase() as Size ?? "medium" });
+    const size = this.size;
     return {
       length: size.length,
       width: size.width,
