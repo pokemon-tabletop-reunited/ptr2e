@@ -443,7 +443,7 @@ export class SkillsEditor extends foundry.applications.api.HandlebarsApplication
       if (isNaN(investment) || !investment) continue;
 
       const skillData = game.ptr.data.skills.get(slug);
-      if (!skillData || !game.ptr.data.skills.isCustomSkill(skillData)) continue;
+      if (!skillData) continue;
 
       if (slug === "resources" && (investment < 0 || levelOne)) resourceMod = investment;
 
