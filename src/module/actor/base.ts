@@ -887,11 +887,11 @@ class ActorPTR2e<
   }
 
   isHumanoid(): this is ActorPTR2e<HumanoidActorSystem> {
-    return this.type === "humanoid";
+    return this.traits.has("humanoid");
   }
 
   isPokemon(): this is ActorPTR2e<PokemonActorSystem> {
-    return this.type === "pokemon";
+    return !this.isHumanoid();
   }
 
   isAllyOf(actor: ActorPTR2e): boolean {
