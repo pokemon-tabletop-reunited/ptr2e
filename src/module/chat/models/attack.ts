@@ -659,16 +659,23 @@ abstract class AttackMessageSystem extends foundry.abstract.TypeDataModel {
     });
     await actor.update({ "system.skills": skills });
 
-    ui.notifications.info(game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
+    const notification = game.i18n.format("PTR2E.ChatContext.SpendLuckAttack.spent", {
       amount: number,
       actor: actor.name,
       total: actor.system.skills.get("luck")!.total
-    }));
+    })
+    ui.notifications.info(notification);
 
     //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
     accuracy.total = 0;
 
     await this.parent.update({ "system.results": results });
+
+    await ChatMessagePTR2e.create({
+      whisper: ChatMessagePTR2e.getWhisperRecipients("GM") as unknown as string[],
+      speaker: { alias: actor.name },
+      content: notification,
+    });
   }
 }
 

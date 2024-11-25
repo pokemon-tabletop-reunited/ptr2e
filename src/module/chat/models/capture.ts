@@ -242,15 +242,20 @@ abstract class CaptureMessageSystem extends foundry.abstract.TypeDataModel {
     });
     await actor.update({ "system.skills": skills });
 
-    ui.notifications.info(
-      `Successfully applied Luck to this roll, spending ${number} Luck from ${actor.name
+    const notification = `Successfully applied Luck to this roll, spending ${number} Luck from ${actor.name
       }. New total: ${actor.system.skills.get("luck")!.total}`
-    );
+    ui.notifications.info(notification);
 
     //@ts-expect-error - As this is an object duplicate, the property is no longer read-only.
     roll.total -= number;
 
     await this.parent.update({ "system.rolls.accuracy": roll });
+
+    await ChatMessagePTR2e.create({
+      whisper: ChatMessagePTR2e.getWhisperRecipients("GM") as unknown as string[],
+      speaker: { alias: actor.name },
+      content: notification,
+    });
   }
 }
 
