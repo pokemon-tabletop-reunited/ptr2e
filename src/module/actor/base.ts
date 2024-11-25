@@ -24,7 +24,7 @@ import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
 import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
-import { extractEffectRolls, extractEphemeralEffects, extractTargetModifiers, processPreUpdateHooks } from "src/util/rule-helpers.ts";
+import { extractEffectRolls, extractEphemeralEffects, extractModifiers, extractTargetModifiers, processPreUpdateHooks } from "src/util/rule-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -1324,6 +1324,24 @@ class ActorPTR2e<
       return R.unique(traits).sort();
     })();
 
+    let newFlatModifiers: ModifierPTR2e[] = [];
+    if(selfAttack) {
+      const actionTraitDomains = actionTraits.map((t) => `${t}-trait-${selfAttack.type}`)
+      params.domains = R.unique([...params.domains, ...actionTraitDomains])
+    
+      const originalModifiers = params.statistic?.modifiers ?? [];
+      const flatModsFromTraitDomains = extractModifiers(this.synthetics, actionTraitDomains);
+
+      // Figure out which are new flat modifiers
+      const target = params.target?.actor ?? targetToken?.actor ?? null;
+      newFlatModifiers = flatModsFromTraitDomains.filter(
+        (mod) => !originalModifiers.some((original) => original.slug === mod.slug)
+      ).map(mod => {
+        if(target) mod.appliesTo = new Map([[target.uuid, true]]);
+        return mod;
+      });
+    }
+
     // Calculate distance and range increment, set as a roll option
     const distance = selfToken && targetToken ? selfToken.distanceTo(targetToken) : 0;
     const [originDistance, targetDistance] =
@@ -1435,7 +1453,10 @@ class ActorPTR2e<
       item: selfItem,
       attack: selfAttack!,
       action: selfAction!,
-      modifiers: targetOriginFlatModifiers ?? [],
+      modifiers: [
+        targetOriginFlatModifiers ?? [],
+        newFlatModifiers ?? [],
+      ].flat(),
     };
 
     const target =

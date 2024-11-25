@@ -56,7 +56,7 @@ async function extractTargetModifiers({
     )
   ).flatMap((e) => e ?? [])
     .map(m => {
-      m.appliesTo = new Map([[origin.uuid, true]]);
+      m.appliesTo = new Map([[target.uuid, true]]);
       return m;
     });
 }
