@@ -16,48 +16,53 @@
           "target": "self",
           "unit": "m"
         },
-        "description": "Effect: The user's [Contact] attacks include +20% of the user's DEF in damage calculation in addition to the original attacking stat."
+        "description": "Effect: The user's [Contact] attacks include +20% of the user's DEF in damage calculation in addition to the original attacking stat.",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: The user's [Contact] attacks include +20% of the user's DEF in damage calculation in addition to the original attacking stat.</p>",
+    "description": "Effect: The user's [Contact] attacks include +20% of the user's DEF in damage calculation in addition to the original attacking stat.",
     "traits": [],
     "slug": "juggernaut",
     "_migration": {
-      "version": null,
-      "previous": null
-    }
+      "version": 0.109,
+      "previous": {
+        "schema": 0.109,
+        "foundry": "12.329",
+        "system": "0.10.0-alpha.3.4.1"
+      }
+    },
+    "slot": 1
   },
   "_id": "Sr1vNIWn1jIl8ol3",
   "effects": [
     {
       "name": "Juggernaut",
       "type": "passive",
-      "_id": "sdtrcKRYrNP2X3J8",
+      "_id": "yVUIa8n38pY150ka",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
             "type": "flat-modifier",
             "key": "contact-trait-attack-damage-flat",
-            "value": "floor((@actor.system.attributes.def.value*((2+@actor.system.attributes.def.stage)/2))*0.2)",
+            "value": "floor((@actor.system.attributes.def.value * ((2 + @actor.system.attributes.def.stage) / 2)) * 0.2)",
             "predicate": [
               {
-                "gt": [
+                "gte": [
                   "{actor|system.attributes.def.stage}",
                   0
                 ]
               }
             ],
-            "label": "Juggernaut",
             "mode": 2,
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false
           },
           {
-            "type": "basic",
+            "type": "flat-modifier",
             "key": "contact-trait-attack-damage-flat",
-            "value": "floor((@actor.system.attributes.def.value*(2/(2+abs(@actor.system.attributes.def.stage))))*0.2)",
+            "value": "floor((@actor.system.attributes.def.value * (2 / (2 + abs(@actor.system.attributes.def.stage)))) * 0.2)",
             "predicate": [
               {
                 "lte": [
@@ -66,10 +71,10 @@
                 ]
               }
             ],
-            "label": "Juggernaut",
             "mode": 2,
             "priority": null,
-            "ignored": false
+            "ignored": false,
+            "hideIfDisabled": false
           }
         ],
         "slug": null,
@@ -80,15 +85,15 @@
       },
       "disabled": false,
       "duration": {
-        "startTime": null,
+        "startTime": 0,
         "seconds": null,
         "combat": null,
         "rounds": null,
         "turns": null,
-        "startRound": null,
-        "startTurn": null
+        "startRound": 10,
+        "startTurn": 0
       },
-      "description": "",
+      "description": "<p>Effect: The user's [Contact] attacks include +20% of the user's DEF in damage calculation in addition to the original attacking stat.</p>",
       "origin": null,
       "tint": "#ffffff",
       "transfer": true,
@@ -100,10 +105,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.4.1",
-        "createdTime": 1732203086427,
-        "modifiedTime": 1732203468631,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "systemVersion": "0.10.0-alpha.4.0.0",
+        "createdTime": null,
+        "modifiedTime": 1732550017165,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
       }
     }
   ]
