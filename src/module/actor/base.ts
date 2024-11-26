@@ -1484,7 +1484,7 @@ class ActorPTR2e<
     );
 
     const rangeIncrement = selfAttack
-      ? selfAttack.getRangeIncrement(distance)
+      ? selfAttack.getRangeIncrement(distance, selfActor.size)
       : selfAction &&
         "getRangeIncrement" in selfAction &&
         selfAction.getRangeIncrement &&
