@@ -116,7 +116,6 @@ interface CheckRollContext extends BaseRollContext {
 
 interface CaptureCheckRollContext extends CheckRollContext {
   accuracyRoll: Rolled<CheckRoll>;
-  critRoll: Rolled<CheckRoll>;
 }
 
 export type { AttackRollParams, BaseRollContext, CheckRollContext, CaptureCheckRollContext, DamageRollParams, RollParameters, RollData};

@@ -70,8 +70,9 @@ class CheckPTR2e {
     const data: CaptureRollCreationData = {
       check,
       ballBonus: (context.item?.system instanceof ConsumableSystemModel && context.item.system.consumableType === "pokeball" ? context.item.system.modifier : 1) || 1,
-      critBonus: 1,
-      miscBonus: check.total?.any?.flat ?? 0,
+      critMultiplier: check.total?.crit?.percentile ?? 1,
+      caughtMons: check.total?.crit?.base ?? 1,
+      miscMultiplier: check.total?.capture?.percentile ?? 1,
       target: context.target?.actor,
       user: context.actor
     }
@@ -79,7 +80,7 @@ class CheckPTR2e {
     const rolls: PokeballRollResults["rolls"] = await (async () => {
       const [accuracy, crit, shake1, shake2, shake3, shake4] = await Promise.all([
         context.accuracyRoll ?? null,
-        context.critRoll ?? null,
+        CaptureRoll.createFromData(options, data, "crit")?.evaluate() ?? null,
         CaptureRoll.createFromData(options, data, "shake1")?.evaluate() ?? null,
         CaptureRoll.createFromData(options, data, "shake2")?.evaluate() ?? null,
         CaptureRoll.createFromData(options, data, "shake3")?.evaluate() ?? null,
