@@ -11,7 +11,7 @@ import FolderPTR2e from "@module/folder/document.ts";
 import natureToStatArray from "@scripts/config/natures.ts";
 import SpeciesSystem, { EvolutionData, LevelUpMoveSchema } from "./species.ts";
 import { AbilityPTR2e, MovePTR2e } from "@item";
-import { ImageResolver, sluggify } from "@utils";
+import { ImageResolver, NORMINV, sluggify } from "@utils";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 
 export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(foundry.abstract.TypeDataModel), "blueprint") {
@@ -25,6 +25,39 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
   set slug(_) { return; }
   get description() { return "" }
   set description(_) { return; }
+
+  static readonly HumanoidHeightWeightData = {
+    male: {
+      height: {
+        average: 1.77,
+        deviation: 0.06421
+      },
+      weight: {
+        average: 26.6,
+        deviation: 3.31
+      }
+    },
+    female: {
+      height: {
+        average: 1.63,
+        deviation: 0.05716
+      },
+      weight: {
+        average: 24.0,
+        deviation: 4.18
+      }
+    },
+    genderless: {
+      height: {
+        average: 1.7,
+        deviation: 0.060685
+      },
+      weight: {
+        average: 25.3,
+        deviation: 3.745
+      }
+    }
+  } as const;
 
   static override defineSchema(): BlueprintSchema {
     const fields = foundry.data.fields;
@@ -354,30 +387,19 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         return (await fromUuid<ItemPTR2e<SpeciesSystem>>(evolution.uuid))?.system?.toObject() ?? species;
       })();
 
-      const size = (() => {
-        const size = SpeciesSystem.getSpeciesSize(evolution.size.height, evolution.size.type as "height" | "quad" | "length");
-        switch (size.sizeCategory) {
-          case "Max":
-            return { width: 6, height: 6 };
-          case "Titanic":
-            return { width: 5, height: 5 };
-          case "Gigantic":
-            return { width: 4, height: 4 };
-          case "Huge":
-            return { width: 3, height: 3 };
-          case "Large":
-            return { width: 2, height: 2 };
-          case "Medium":
-            return { width: 1, height: 1 };
-          case "Small":
-            return { width: 0.75, height: 0.75 };
-          case "Tiny":
-            return { width: 0.5, height: 0.5 };
-          case "Diminutive":
-            return { width: 0.25, height: 0.25 };
-          default:
-            return { width: 1, height: 1 };
-        }
+      const { weight, height } = await (async (): Promise<{ weight: number, height: number }> => {
+        const isHumanoid = evolution.traits.includes("humanoid");
+
+        const random = (await new Roll(isHumanoid ? "1d2000" : "2d2000").evaluate()).total;
+        const height = isHumanoid
+          ? NORMINV(random / 2001, BlueprintSystem.HumanoidHeightWeightData[gender].height.average, BlueprintSystem.HumanoidHeightWeightData[gender].height.deviation)
+          : ((random / 2000) * 0.8 + 0.6) * (evolution.size.height ?? 1);
+
+        const weight = isHumanoid
+          ? NORMINV(random / 2001, BlueprintSystem.HumanoidHeightWeightData[gender].weight.average, BlueprintSystem.HumanoidHeightWeightData[gender].weight.deviation) * Math.pow(height, 2)
+          : ((random / 2000) * 0.4 + 8) * height * (evolution.size.weight ?? 1);
+
+        return { height, weight };
       })();
 
       // TODO: Add stat settings
@@ -548,12 +570,16 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
             ownerOf: blueprint.owner ? options.folder?.id : undefined,
             partyMemberOf: hasOwner ? blueprint.owner ? null : options.folder?.id : null,
             teamMemberOf: options.team ? [options.folder?.id] : [],
+          },
+          details: {
+            size: {
+              weight,
+              height
+            }
           }
         },
         items,
         prototypeToken: fu.mergeObject(foundryDefaultTokenSettings, {
-          width: size.width,
-          height: size.height,
           actorLink: linkToken,
           displayBars: foundryDefaultTokenSettings.displayBars ?? CONST.TOKEN_DISPLAY_MODES.OWNER_HOVER,
           displayName: foundryDefaultTokenSettings.displayName ?? CONST.TOKEN_DISPLAY_MODES.OWNER,

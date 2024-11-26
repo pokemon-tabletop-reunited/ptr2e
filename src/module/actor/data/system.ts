@@ -260,6 +260,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
           blank: true,
           label: "PTR2E.FIELDS.details.alliance.label",
           hint: "PTR2E.FIELDS.details.alliance.hint",
+        }),
+        size: new fields.SchemaField({
+          height: new fields.NumberField({required: true, initial: 0, label: "PTR2E.FIELDS.size.height.label", hint: "PTR2E.FIELDS.size.height.hint"}),
+          weight: new fields.NumberField({required: true, initial: 0, label: "PTR2E.FIELDS.size.weight.label", hint: "PTR2E.FIELDS.size.weight.hint"}),
+          heightClass: new fields.NumberField({required: true, initial: 0, min: 0, max: 7}),
+          weightClass: new fields.NumberField({required: true, initial: 1, min: 1, max: 16}),
         })
       })
     };
@@ -366,6 +372,45 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
     this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
+
+    this.details.size.heightClass = SpeciesSystemModel.getSpeciesSize(this.details.size.height || this.parent.species?.size.height || 0, this.parent.species?.size.type as "height" | "quad" | "length" || "height").sizeClass;
+    this.details.size.weightClass = (() => {
+      const weight = this.details.size.weight || this.parent.species?.size.weight || 0;
+      switch (true) {
+        case weight < 10:
+          return 1;
+        case weight < 20:
+          return 2;
+        case weight < 30:
+          return 3;
+        case weight < 40:
+          return 4;
+        case weight < 55:
+          return 5;
+        case weight < 70:
+          return 6;
+        case weight < 85:
+          return 7;
+        case weight < 100:
+          return 8;
+        case weight < 120:
+          return 9;
+        case weight < 145:
+          return 10;
+        case weight < 190:
+          return 11;
+        case weight < 240:
+          return 12;
+        case weight < 305:
+          return 13;
+        case weight < 350:
+          return 14;
+        case weight < 410:
+          return 15;
+        default:
+          return 16;
+      }
+    })();
   }
 
   _initializeModifiers() {
@@ -565,6 +610,12 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
 
   details: {
     alliance: "party" | "opposition" | null | undefined;
+    size: {
+      height: number;
+      weight: number;
+      heightClass: number;
+      weightClass: number;
+    }
   }
 
   movement: Record<string, Movement>;

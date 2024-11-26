@@ -194,26 +194,39 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             party: "PTR2E.ActorSheet.Alliance.Party",
             neutral: "PTR2E.ActorSheet.Alliance.Neutral",
           };
+          //@ts-expect-error - Type incomplete
+          const sizeFields = this.actor.system.schema.fields.details.fields.size.fields as foundry.data.fields.DataSchema;
 
           return void foundry.applications.api.DialogV2.prompt({
             content: `<p>${game.i18n.localize("PTR2E.ActorSheet.Settings.Content")}</p>
             <div class="form-group"><label>${game.i18n.localize("PTR2E.FIELDS.details.alliance.label")}</label><div class="form-fields"><select name="system.details.alliance">
             ${Object.entries(allianceOptions).map(([key, value]) => `<option value="${key}" ${key === alliance ? "selected" : ""}>${game.i18n.localize(value)}</option>`).join("")}
-            </select></div></div>`,
+            </select></div></div>${Handlebars.helpers.formField(sizeFields.height, {hash: {
+              localize: true,
+              value: this.actor._source.system.details.size.height
+            }})}${Handlebars.helpers.formField(sizeFields.weight, {hash: {
+              localize: true,
+              value: this.actor._source.system.details.size.weight
+            }})}`,
             window: { title: game.i18n.localize("PTR2E.ActorSheet.Settings.Title") },
             ok: {
               label: game.i18n.localize("PTR2E.ActorSheet.Settings.Save"),
               action: "ok",
               callback: async (_event, target, element) => {
                 const html = element ?? target;
-                const value = htmlQuery<HTMLInputElement>(html, '[name="system.details.alliance"]')?.value;
-                return void this.actor.update(
-                  value === "default"
+                const alliance = htmlQuery<HTMLInputElement>(html, '[name="system.details.alliance"]')?.value;
+                const height = htmlQuery<HTMLInputElement>(html, '[name="system.details.size.height"]')?.value;
+                const weight = htmlQuery<HTMLInputElement>(html, '[name="system.details.size.weight"]')?.value;
+                const updateData = {
+                  ...(alliance === "default"
                     ? { "system.details.alliance": '' }
-                    : value === "neutral"
+                    : alliance === "neutral"
                       ? { "system.details.alliance": null }
-                      : { "system.details.alliance": value },
-                );
+                      : { "system.details.alliance": alliance }),
+                  "system.details.size.height": height,
+                  "system.details.size.weight": weight,
+                }
+                return void this.actor.update(updateData);
               }
             },
             rejectClose: false

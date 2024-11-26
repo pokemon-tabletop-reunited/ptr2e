@@ -180,7 +180,6 @@ class PokeballCheck<TParent extends PokeballStatistic = PokeballStatistic> imple
       createMessage: args.createMessage ?? true,
       skipDialog: args.skipDialog ?? !context.target?.actor,
       accuracyRoll: args.accuracyRoll,
-      critRoll: args.critRoll,
     }
     const check = new AttackCheckModifier(
       this.parent.slug,

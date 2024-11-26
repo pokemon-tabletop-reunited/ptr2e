@@ -14,7 +14,7 @@ export class ActorSizePTR2e {
   width: number;
 
   /** The default space (in a PTR 2e rules context) of each size */
-  private static defaultSpaces: Record<Size, SizeDimensions> = {
+  public static readonly defaultSpaces: Record<Size, SizeDimensions> = {
     diminutive: { length: 0.5, width: 0.5 },
     tiny: { length: 0.5, width: 0.5 },
     small: { length: 1, width: 1 },
@@ -24,7 +24,7 @@ export class ActorSizePTR2e {
     gigantic: { length: 4, width: 4 },
     titanic: { length: 5, width: 5 },
     max: { length: 6, width: 6 },
-  };
+  } as const;
 
   /**
    * @param value A size category
@@ -43,7 +43,7 @@ export class ActorSizePTR2e {
     this.width = params.width ?? spaces.width;
   }
 
-  private static sizeRanks: Record<Size, number> = {
+  public static readonly sizeRanks: Record<Size, number> = {
     diminutive: 0,
     tiny: 1,
     small: 2,
@@ -53,6 +53,10 @@ export class ActorSizePTR2e {
     gigantic: 6,
     titanic: 7,
     max: 8,
+  } as const;
+
+  public static sizeFromRank(rank: number): Size {
+    return SIZES[rank] || 3;
   }
 
   get rank(): number {

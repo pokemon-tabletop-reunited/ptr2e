@@ -8,7 +8,6 @@ import {
   AuraData,
   HumanoidActorSystem,
   PokemonActorSystem,
-  Size,
 } from "@actor";
 import { ActiveEffectPTR2e, ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
@@ -140,7 +139,7 @@ class ActorPTR2e<
   }
 
   get size() {
-    return new ActorSizePTR2e({ value: this.species?.size?.category?.toLowerCase() as Size ?? "medium" });
+    return new ActorSizePTR2e({ value: ActorSizePTR2e.sizeFromRank(this.system.details.size.heightClass) ?? "medium" });
   }
 
   /**
