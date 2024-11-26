@@ -17,16 +17,38 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         positioned: false,
         minimizable: false,
         resizable: false,
-        controls: [{
-          action: "toggle-edit-mode",
-          label: "PTR2E.ToggleEditMode",
-          icon: "fas fa-edit",
-        }]
       },
       dragDrop: [{ dragSelector: ".perk", dropSelector: `[data-application-part="web"]` }],
       actions: {
-        "toggle-edit-mode": function (this: PerkWebApp) { this.editMode = !this.editMode; this.render({ parts: ['web'] }); },
-        "close-hud": function (this: PerkWebApp) { this.close();}
+        "toggle-edit-mode": function (this: PerkWebApp) {
+          this.editMode = !this.editMode;
+          if (this.editMode) {
+            if (!ui.perksTab.popout || ui.perksTab.popout._minimized) ui.perksTab.renderPopout();
+
+            if (game.settings.get("ptr2e", "dev-mode")) {
+              const pack = game.packs.get("ptr2e.core-perks");
+              if (pack) {
+                pack.configure({ locked: false });
+                pack.render(true, { top: 0, left: window.innerWidth - 310 - 360 });
+              }
+            }
+          }
+          else {
+            ui.perksTab.popout?.close();
+
+            if (game.settings.get("ptr2e", "dev-mode")) {
+              const pack = game.packs.get("ptr2e.core-perks");
+              if (pack) {
+                pack.configure({ locked: true });
+                pack.apps.forEach((app) => app.close());
+              }
+            }
+          }
+          this.currentPerk = null;
+          this.render(true);
+        },
+        "refresh": function (this: PerkWebApp) { this.render(true); },
+        "close-hud": function (this: PerkWebApp) { this.close(); }
       }
     },
     { inplace: false }
@@ -125,28 +147,26 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     interface GridEntry {
       name?: string;
       img?: string;
-      i: number;
-      j: number;
+      x: number;
+      y: number;
     }
 
     if (this._perkStore.size === 0) {
       const perks = await game.ptr.perks.initialize();
       for (const perk of perks.perks.values()) {
-        this._perkStore.set(`${perk.system.node.i}-${perk.system.node.j}`, perk);
+        this._perkStore.set(`${perk.system.node.x}-${perk.system.node.y}`, perk);
       }
     }
 
     const grid: GridEntry[] = [];
-    for (let i = 1; i < maxRow; i++) {
-      for (let j = 1; j < maxCol; j++) {
-        const relativeI = i;
-        const relativeJ = j;
-        const perk = this._perkStore.get(`${relativeI}-${relativeJ}`);
+    for (let x = 1; x < maxRow; x++) {
+      for (let y = 1; y < maxCol; y++) {
+        const perk = this._perkStore.get(`${x}-${y}`);
         if (perk) {
-          grid.push({ name: perk.name, img: perk.system.node.config?.texture ?? perk.img, i, j });
+          grid.push({ name: perk.name, img: perk.system.node.config?.texture ?? perk.img, x, y });
         }
         else {
-          grid.push({ i, j });
+          grid.push({ x, y });
         }
       }
     }
@@ -161,8 +181,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       ...super._prepareContext(options),
       grid,
       actor: this.actor,
-      perk: { 
-        document: this.currentPerk, 
+      perk: {
+        document: this.currentPerk,
         fields: this.currentPerk?.system.schema.fields,
         traits: this.currentPerk?.system.traits.map((trait) => ({ value: trait.slug, label: trait.label, type: trait.type })),
         actions: this.currentPerk?.system?.actions?.map(action => ({
@@ -172,7 +192,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         }))
       },
       filterData: null,
-      zoom: this._zoomAmount
+      zoom: this._zoomAmount,
+      editMode: this.editMode,
     }
   }
 
@@ -181,7 +202,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
 
-    if(partId === "web") {
+    if (partId === "web") {
       const perks = htmlElement.querySelectorAll<HTMLElement>(".perk")
       for (const perk of perks) {
         perk.addEventListener("click", (event) => {
@@ -194,7 +215,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         });
       }
     }
-    if(partId === 'hudPerk') {
+    if (partId === 'hudPerk') {
       for (const input of htmlElement.querySelectorAll<HTMLInputElement>(
         "input.ptr2e-tagify"
       )) {
@@ -268,7 +289,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     const madeConnections = new Set<string>();
 
     for (const el of elements) {
-      const perkKey = `${Number(el.dataset.i)}-${Number(el.dataset.j)}`;
+      const perkKey = `${Number(el.dataset.x)}-${Number(el.dataset.y)}`;
       const perk = this._perkStore.get(perkKey);
       if (!perk) continue;
 
@@ -279,7 +300,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         const connectedPerk = game.ptr.perks.get(connection);
         if (!connectedPerk) continue;
 
-        const connectedKey = `${connectedPerk.system.node.i}-${connectedPerk.system.node.j}`;
+        const connectedKey = `${connectedPerk.system.node.x}-${connectedPerk.system.node.y}`;
         if (!existing) {
           if (madeConnections.has(`${perkKey}-${connectedKey}`)) continue;
         }
@@ -457,6 +478,24 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       return;
     }
     console.log("Perk found at", i, j, perk);
+  }
+
+  override _onFirstRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
+    super._onFirstRender(context, options);
+
+    if(this.actor) {
+      this.actor.sheet.setPosition({left: 270, top: 20});
+      this.actor.sheet.minimize();
+    }
+  }
+
+  override _onClose(options: foundry.applications.api.HandlebarsRenderOptions): void {
+    super._onClose(options);
+    if(this.actor) {
+      this.actor.sheet?.render(false)
+      this.actor.sheet?.maximize();
+      this.actor = null;
+    }
   }
 }
 

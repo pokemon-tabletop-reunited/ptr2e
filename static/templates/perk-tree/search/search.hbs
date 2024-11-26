@@ -1,4 +1,4 @@
-<section>
+<section class="{{#if editMode}}editing{{/if}}">
   {{#if filterData}}
     <div class="search">
         <input name="search" type="search" value="{{filterData.search.text}}" placeholder="Search..." />

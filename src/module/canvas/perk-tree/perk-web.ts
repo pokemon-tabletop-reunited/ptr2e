@@ -1006,11 +1006,11 @@ class PerkWeb extends PIXI.Container {
             if (!ui.perksTab.popout || ui.perksTab.popout._minimized) ui.perksTab.renderPopout();
 
             if (game.settings.get("ptr2e", "dev-mode")) {
-                const pack = game.packs.get("ptr2e.core-perks");
-                if (pack) {
-                    pack.configure({ locked: false });
-                    pack.render(true, { top: 0, left: window.innerWidth - 310 - 360 - 250});
-                }
+              const pack = game.packs.get("ptr2e.core-perks");
+              if (pack) {
+                  pack.configure({ locked: false });
+                  pack.render(true, { top: 0, left: window.innerWidth - 310 - 360});
+              }
             }
 
             this.app.renderer.background.color = 0x851a1a;

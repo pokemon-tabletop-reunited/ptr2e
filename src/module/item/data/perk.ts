@@ -41,6 +41,8 @@ export default abstract class PerkSystem extends PerkExtension {
       }),
 
       node: new fields.SchemaField({
+        x: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.x.label", hint: "PTR2E.FIELDS.node.x.hint" }),
+        y: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.y.label", hint: "PTR2E.FIELDS.node.y.hint" }),
         i: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.i.label", hint: "PTR2E.FIELDS.node.i.hint" }),
         j: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.j.label", hint: "PTR2E.FIELDS.node.j.hint" }),
         connected: new fields.SetField<SlugField<string, string, true, boolean, boolean>, (string)[], Set<string | null>, true>(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.node.connected.label", hint: "PTR2E.FIELDS.node.connected.hint" }),
@@ -134,10 +136,10 @@ export default abstract class PerkSystem extends PerkExtension {
       const node = changed?.system?.node;
       if (!node) return super._preUpdate(changed, options, user);
 
-      if ((node.i || node.j || node.hidden) && (!node.type || node.type === "root")) {
-        ui.notifications.error("Root nodes cannot be moved or hidden");
-        return false;
-      }
+      // if ((node.i || node.j || node.hidden) && (!node.type || node.type === "root")) {
+      //   ui.notifications.error("Root nodes cannot be moved or hidden");
+      //   return false;
+      // }
     }
   }
 
@@ -207,6 +209,8 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
     {
       i: foundry.data.fields.NumberField<number, number, true, true, true>;
       j: foundry.data.fields.NumberField<number, number, true, true, true>;
+      x: foundry.data.fields.NumberField<number, number, true, true, true>;
+      y: foundry.data.fields.NumberField<number, number, true, true, true>;
       connected: foundry.data.fields.SetField<
         SlugField<string, string, true, boolean, boolean>,
         (string | null)[],
@@ -261,6 +265,8 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
       type: foundry.data.fields.StringField<"normal" | "root" | "ranked", "normal", true, false, true>;
     },
     {
+      x: number | null;
+      y: number | null;
       i: number | null;
       j: number | null;
       connected: string[];
@@ -277,6 +283,8 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
       type: "normal" | "root" | "ranked";
     },
     {
+      x: number | null;
+      y: number | null;
       i: number | null;
       j: number | null;
       connected: Set<string>;
