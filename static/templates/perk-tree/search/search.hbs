@@ -1,4 +1,5 @@
 <section>
+  {{#if filterData}}
     <div class="search">
         <input name="search" type="search" value="{{filterData.search.text}}" placeholder="Search..." />
         <dl>
@@ -65,4 +66,5 @@
             </div>
         {{/if}}
     {{/each}}
+  {{/if}}
 </section>
