@@ -1,0 +1,67 @@
+{
+  "name": "Toxic",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/poison_icon.svg",
+  "system": {
+    "slug": "toxic",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "toxic",
+        "name": "Toxic",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "category": "status",
+        "accuracy": 90,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Effect: The target gains @Affliction[blight] 8. If Toxic is used by a Poison-Typed creature, this attack gains [Danger Close].</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "toxic-poison-type",
+        "name": "Toxic (Poison-Type)",
+        "type": "attack",
+        "traits": [
+          "danger-close"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "trigger": "<p>The user has the Poison Type.</p>"
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Trigger: The user has the Poison Type.</p><p>Effect: The target gains @Affliction[blight] 8.</p>",
+        "variant": "toxic",
+        "free": true,
+        "img": "systems/ptr2e/img/svg/poison_icon.svg"
+      }
+    ],
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "oTSFbF32HX101PTb",
+  "effects": []
+}
