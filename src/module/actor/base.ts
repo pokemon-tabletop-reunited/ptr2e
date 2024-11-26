@@ -766,7 +766,7 @@ class ActorPTR2e<
     return this.calcStatTotal(this.system.attributes[stat], false);
   }
 
-  calcStatTotal(stat: Attribute | Omit<Attribute, 'stage'>, isCrit: boolean) {
+  calcStatTotal(stat: Attribute | Omit<Attribute, 'stage'>, isCrit: boolean): number {
     function isAttribute(attribute: Attribute | Omit<Attribute, 'stage'>): attribute is Attribute {
       return attribute.slug !== "hp";
     }
@@ -887,10 +887,17 @@ class ActorPTR2e<
     return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
   }
 
-  getEffectiveness(moveTypes: Set<PokemonType>) {
+  getEffectiveness(moveTypes: Set<PokemonType>, effectivenessStages = 0, ignoreImmune = false): number {
     let effectiveness = 1;
     for (const type of moveTypes) {
       effectiveness *= this.system.type.effectiveness[type] ?? 1;
+    }
+    if(ignoreImmune && effectiveness === 0) effectiveness = 1;
+    if(effectivenessStages !== 0) {
+      const positive = effectiveness > 0;
+      for(let i = 0; i < Math.abs(effectivenessStages); i++) {
+        effectiveness *= positive ? 0.5 : 2;
+      }
     }
     return effectiveness;
   }
@@ -1313,6 +1320,15 @@ class ActorPTR2e<
       return params.item ?? null;
     })();
 
+    // Target roll options
+    const getTargetRollOptions = (actor: Maybe<ActorPTR2e>): string[] => {
+      const targetOptions = actor?.getSelfRollOptions("target") ?? [];
+      if (targetToken) {
+        targetOptions.push("target"); // An indicator that there is any kind of target.
+      }
+      return targetOptions.sort();
+    };
+
     //TODO: Probably needs similar implementation to selfItem
     const selfAttack = params.attack?.clone();
     selfAttack?.prepareDerivedData();
@@ -1320,7 +1336,7 @@ class ActorPTR2e<
 
     const itemOptions = selfItem?.getRollOptions("item") ?? [];
     const actionOptions = selfAttack?.getRollOptions() ?? [];
-    const actionRollOptions = Array.from(new Set([...itemOptions, ...actionOptions]));
+    const actionRollOptions = Array.from(new Set([...itemOptions, ...actionOptions, ...getTargetRollOptions(targetToken?.actor)]));
 
     if (selfAttack) {
       for (const adjustment of selfActor.synthetics.attackAdjustments) {
@@ -1375,14 +1391,6 @@ class ActorPTR2e<
         ]).filter(R.isTruthy)
         : [];
 
-    // Target roll options
-    const getTargetRollOptions = (actor: Maybe<ActorPTR2e>): string[] => {
-      const targetOptions = actor?.getSelfRollOptions("target") ?? [];
-      if (targetToken) {
-        targetOptions.push("target"); // An indicator that there is any kind of target.
-      }
-      return targetOptions.sort();
-    };
     const targetRollOptions = getTargetRollOptions(targetToken?.actor);
 
     // Get ephemeral effects from this actor that affect the target while being attacked

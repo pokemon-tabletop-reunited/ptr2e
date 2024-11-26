@@ -360,7 +360,9 @@ class CheckPTR2e {
         rip: !!targetContext.target?.rangeIncrement,
         outOfRange: !!targetContext.outOfRange,
         flatDamage: targetCheck.total.damage?.flat ?? 0,
-        statMod: targetCheck.total.stat?.flat ?? 0
+        statMod: targetCheck.total.stat?.flat ?? 0,
+        effectivenessStage: targetCheck.total.effectiveness?.stage ?? 0,
+        ignoreImmune: !!targetContext.options.has("self:action:trait:ignore-type-immunity"),
       };
 
       const rolls: {

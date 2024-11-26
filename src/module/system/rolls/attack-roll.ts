@@ -163,7 +163,8 @@ class AttackRoll extends CheckRoll {
     const hasSniper = origin.rollOptions.getFromDomain("item")["ability:sniper:active"];
 
     // Type effectiveness
-    const typeEffectiveness = target.getEffectiveness(attack.types);
+    const effectivenessStage = parseInt(this.options.effectivenessStage+"");
+    const typeEffectiveness = target.getEffectiveness(attack.types, effectivenessStage, this.options.ignoreImmune ?? false);
 
     // Other modifiers
     const otherModifier = this.options.damageMod ?? 1;
@@ -248,6 +249,8 @@ type AttackRollDataPTR2e = CheckRollDataPTR2e & {
   outOfRange: boolean;
   flatDamage?: number;
   statMod: number;
+  effectivenessStage: number;
+  ignoreImmune: boolean;
 } & AccuracyContext
 
 export { AttackRoll, type AttackRollDataPTR2e, type AttackRollCreationData };
