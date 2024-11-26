@@ -531,6 +531,24 @@ export default abstract class Document<
     ): void;
 
     /**
+     * Pre-process an update operation, potentially altering its instructions or input data. Pre-operation events only
+     * occur for the client which requested the operation.
+     *
+     * This batch-wise workflow occurs after individual {@link Document#_preUpdate} workflows and provides a final
+     * pre-flight check before a database operation occurs.
+     *
+     * Modifications to the requested updates are performed by mutating the data array of the operation.
+     * {@link Document#updateSource}.
+     *
+     * @param {Document[]} documents                Document instances to be updated
+     * @param {DatabaseUpdateOperation} operation   Parameters of the database update operation
+     * @param {documents.BaseUser} user             The User requesting the update operation
+     * @returns {Promise<boolean|void>}             Return false to cancel the update operation entirely
+     * @internal
+     */
+    static _preUpdateOperation(documents: Document[], operation: DatabaseUpdateOperation, user: documents.BaseUser): Promise<boolean | void>
+
+    /**
      * Perform follow-up operations after a Document of this type is deleted.
      * Post-deletion operations occur for all clients after the deletion is broadcast.
      * @param options Additional options which modify the deletion request
@@ -653,5 +671,6 @@ declare global {
     interface DocumentSourceUpdateContext extends Omit<DocumentModificationContext<null>, "parent"> {
         dryRun?: boolean;
         fallback?: boolean;
+        restoreDelta?: boolean;
     }
 }

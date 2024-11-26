@@ -26,6 +26,9 @@ type ActionCost = typeof ActivationCost[keyof typeof ActivationCost];
 type Delay = 1 | 2 | 3;
 type Priority = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
+const Stats = ["hp", "atk", "def", "spa", "spd", "spe"] as const;
+type Stat = typeof Stats[number];
+
 const TargetOptions = {
     SELF: "self",
     ALLY: "ally",
@@ -136,7 +139,8 @@ export {
     ContestTypes,
     CarryTypes,
     IdentificationStatuses,
-    AccuracySuccessCategories
+    AccuracySuccessCategories,
+    Stats
 }
 
 export type {
@@ -153,5 +157,6 @@ export type {
     ContestType,
     CarryType,
     IdentificationStatus,
-    AccuracySuccessCategory
+    AccuracySuccessCategory,
+    Stat
 }

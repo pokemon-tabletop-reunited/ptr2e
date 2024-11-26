@@ -1,3 +1,5 @@
+import type * as sources from "../../../../client-esm/canvas/sources/module.d.ts";
+
 export {};
 
 declare global {
@@ -138,7 +140,7 @@ declare global {
         /** Is this polygon constrained by any walls? */
         walls?: boolean;
         /** The object (if any) that spawned this polygon. */
-        source?: PointSource;
+        source?: sources.BaseEffectSource;
         /** Limiting polygon boundary shape*/
         boundaryShape?: (PIXI.Rectangle | PIXI.Circle | PIXI.Polygon)[];
     }

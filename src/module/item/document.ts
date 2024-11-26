@@ -5,8 +5,6 @@ import { ActiveEffectPTR2e, EffectSourcePTR2e } from "@effects";
 import { ItemFlagsPTR2e } from "./data/system.ts";
 import { ActionsCollections } from "@actor/actions.ts";
 import { SpeciesSystemModel } from "./data/index.ts";
-import ConsumableSystem from "./data/consumable.ts";
-import PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
 import { preImportJSON } from "@module/data/doc-helper.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import * as R from "remeda";
@@ -22,8 +20,6 @@ class ItemPTR2e<
 > extends Item<TParent, TSystem> {
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
-
-  declare sourceId: string;
 
   declare _sheet: ItemSheetPTR2e<this> | null;
 
@@ -139,13 +135,19 @@ class ItemPTR2e<
     super.prepareDerivedData();
     if (this.type === "ptu-item") return;
 
+    for(const trait of this.traits ?? []) {
+      if(!trait.changes?.length) continue;
+      const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>
+      this.effects.set(effect.slug, effect);
+    }
+
     if (this.hasActions()) this._actions.addActionsFromItem(this);
     if (!this.parent) return;
     if (this.hasActions()) this.parent._actions.addActionsFromItem(this);
-    if (this.type === "consumable" && (this.system as ConsumableSystem).consumableType === "pokeball") {
-      const action = PokeballActionPTR2e.fromConsumable(this as ItemPTR2e<ConsumableSystem, ActorPTR2e>);
-      this.parent._actions.set(action.slug, action);
-    }
+    // if (this.type === "consumable" && (this.system as ConsumableSystem).consumableType === "pokeball") {
+    //   const action = PokeballActionPTR2e.fromConsumable(this as ItemPTR2e<ConsumableSystem, ActorPTR2e>);
+    //   this.parent._actions.set(action.slug, action);
+    // }
 
     this.rollOptions.addOption("item", `${this.type}:${this.slug}`);
   }
@@ -388,12 +390,12 @@ class ItemPTR2e<
               await change.preDelete?.({ pendingItems: items, context });
             }
 
-            await processGrantDeletions(effect as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects)
+            await processGrantDeletions(effect as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects, !!context.ignoreRestricted)
           }
         }
         else {
           if (item.grantedBy && item.grantedBy instanceof ActiveEffectPTR2e) {
-            await processGrantDeletions(item.grantedBy as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects);
+            await processGrantDeletions(item.grantedBy as ActiveEffectPTR2e<ActorPTR2e | ItemPTR2e<ItemSystemPTR, ActorPTR2e>>, item, items, effects, !!context.ignoreRestricted);
           }
         }
       }
@@ -412,6 +414,26 @@ class ItemPTR2e<
     if(embeddedName === "Actions" && this.hasActions()) return this.actions as unknown as ReturnType<Item["getEmbeddedCollection"]>;
     return super.getEmbeddedCollection(embeddedName);
   }
+
+  // static override updateDocuments<TDocument extends foundry.abstract.Document>(
+  //   this: ConstructorOf<TDocument>,
+  //   updates?: Record<string, unknown>[],
+  //   operation?: Partial<DocumentModificationContext<TDocument["parent"]>>,
+  // ): Promise<TDocument[]>;
+  // static override async updateDocuments(
+  //   updates: Record<string, unknown>[] = [],
+  //   operation: Partial<DocumentModificationContext<ActorPTR2e | null>> = {},
+  // ): Promise<Item<Actor | null>[]> {
+  //   const isFullReplace = !((operation?.diff ?? true) && (operation?.recursive ?? true));
+  //   if (isFullReplace) return super.updateDocuments(updates, operation);
+
+  //   // Process rule element hooks for each actor update
+  //   for (const changed of updates) {
+  //     await processPreUpdateActorHooks(changed, { pack: operation.pack ?? null, type: 'item' });
+  //   }
+
+  //   return super.updateDocuments(updates, operation);
+  // }
 }
 
 interface ItemPTR2e<

@@ -82,6 +82,7 @@
         "Prerequisites": "Prerequisites",
         "LevelUpMoves": "Level Up Moves",
         "TutorMoves": "Tutor Moves",
+        "Abilities": "Abilities",
         "Sort": {
           "Name": "Name",
           "Number": "Number"
@@ -125,7 +126,8 @@
       "FlingItemDestroyed": "The flung {name} was the last in your inventory.",
       "AfflictionDisabled": "The action {name} is currently Disabled and cannot be used!",
       "NotEnoughPP": "Unable to spend {cost} power points. You only have {current}.",
-      "UnableToAct": "{action} Failed! "
+      "UnableToAct": "{action} Failed! ",
+      "FlingTargetNotAlly": "Fling 'Actor-Toss' can only target allies."
     },
     "DataInspector": {
       "DataButton": "Data",
@@ -174,7 +176,13 @@
         "Fuzziness": "Fuzziness",
         "FuzzinessHint": "Search fuzziness. Left is stricter, right is more fuzzy.",
         "Functions": "Functions",
-        "FunctionsHint": "Include getters and functions."
+        "FunctionsHint": "Include getters and functions.",
+        "Tokens": {
+          "Autoscale": {
+            "Name": "Autoscale Tokens",
+            "Hint": "Automatically scale tokens according to their Actor's Size."
+          }
+        }
       },
       "Editor": {
         "Title": "Editor",
@@ -302,7 +310,8 @@
       "specialDefense": "Special Defense Stat",
       "speed": "Speed Stat",
       "rip": "Range Increment Penalty",
-      "crit": "Crit Stages"
+      "crit": "Crit Stages",
+      "size": "Size Accuracy Modifier"
     },
     "Effect": {
       "Immune": "{target} is Immune to {effect}. No effect was applied.",
@@ -327,7 +336,9 @@
           "alter-attack": "Alter Attack",
           "suppress-ability": "Suppress Ability",
           "token-alterations": "Token Alteration",
-          "stats-alteration": "Stats Alteration"
+          "stats-alteration": "Stats Alteration",
+          "aura": "Aura",
+          "token-tag": "Token Tag"
         },
         "ChangeLabel": {
           "label": "Label",
@@ -576,7 +587,8 @@
           "evasive": "Evasive",
           "gambit": "Gambit",
           "stoked": "Stoked",
-          "charged": "Charged"
+          "charged": "Charged",
+          "loafing": "Loafing"
         },
         "Descriptions": {
           "fainted": "<p>When a creature's HP reaches and remains at 0, it is afflicted with Fainted.</p><p>A Fainted creature cannot use Actions, does not benefit from Abilities, and is cured of all @Trait[major-affliction], @Trait[minor-affliction], @Trait[pseudo-affliction], and @Trait[stage-change] effects they possess.</p><p>Fainted is cured when the afflicted creature's HP is greater than 0.</p><p>The creature's @Affliction[weary] count increases by 1 whenever they are cured of Fainted.</p>",
@@ -645,7 +657,8 @@
           "evasive": "While afflicted with Evasive, the creature has +1 default EVA and the Power of its Attacks are decreased by -20%.",
           "gambit": "While afflicted with Gambit, the creature has +2 default CRIT and -1 default ACC.",
           "stoked": "While afflicted with Stoked, the creature's next damaging @Trait[Fire] Attack has +100% Power.",
-          "charged": "While afflicted with Charged, the creature's next damaging @Trait[Electric] Attack has +100% Power."
+          "charged": "While afflicted with Charged, the creature's next damaging @Trait[Electric] Attack has +100% Power.",
+          "loafing": "<p>Automatically applies to creatures 2+ levels above the creature's owner's level. Gaining stacking debuffs for each stack of Loafing.</p><h3>1 Stack</h3><ul><li>-15% to all Damage</li><li>-15% to all Skill checks</li><li>-1 Speed Combat stage</li><li>+15% PP Cost</li></ul><h3>2 Stacks</h3><ul><li>-30% to all Damage</li><li>-30% to all Skill checks</li><li>-1 Speed Combat stage</li><li>+30% PP Cost</li><li>-10 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li></ul><h3>3 Stacks</h3><ul><li>-50% to all Damage</li><li>-50% to all Skill checks</li><li>-2 Speed Combat stage</li><li>+50% PP Cost</li><li>-20 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-2 to all Movement Scores</li></ul><h3>4 Stacks</h3><ul><li>-80% to all Damage</li><li>-80% to all Skill checks</li><li>-2 Speed Combat stage</li><li>+80% PP Cost</li><li>-30 Accuracy on all rolls</li><li>Gain @Affliction[unlucky]</li><li>-5 to all Movement Scores</li></ul>"
         }
       }
     },
@@ -740,6 +753,17 @@
           "TitleEdit": "Edit Clock: {label}",
           "TitleAdd": "Create Clock"
         }
+      }
+    },
+    "CaptureDialog": {
+      "Title": "Capture Resolution",
+      "Instructions": "To which Trainer should this captured actor be assigned?",
+      "Trainer": {
+        "label": "Trainer"
+      },
+      "Party": {
+        "label": "Add to Party",
+        "hint": "Whether the captured actor should be added to the party."
       }
     },
     "MoveSystem": {
@@ -1570,6 +1594,14 @@
         "label": "Attack Stat",
         "hint": "The stat used to calculate the damage of this attack, you can use either a direct value, 'owner' to denote it should use the appropriate attacking stat from the Summon's owner, or an injected value (e.g. '@actor.system.attributes.atk.value')."
       },
+      "offensiveStat": {
+        "label": "Offensive Stat",
+        "hint": "The stat that should be used to calculate the 'Attack' portion of the Damage Calculation. Defaults to 'atk'/'spa' depending on the Attack Category if unset."
+      },
+      "defensiveStat": {
+        "label": "Defensive Stat",
+        "hint": "The stat that should be used to calculate the 'Defense' portion of the Damage Calculation. Defaults to 'def'/'spd' depending on the Attack Category if unset."
+      },
       "targetType": {
         "label": "Summon Target Type",
         "hint": "Whom should be targeted, if this is 'Target', it will use the currently targeted token as the target based on when the summon is made, if it is 'Owner', it will use the owner of the summon as the target."
@@ -1586,6 +1618,22 @@
         "alliance": {
           "label": "Alliance",
           "hint": "The Allegiance of the actor."
+        }
+      }
+    },
+    "Token": {
+      "ActorLinkForced": "{type} actors cannot be unlinked.",
+      "Appearance": "Appearance",
+      "SecretDisposition": {
+        "Label": "Secret Disposition",
+        "Hint": "Activate the \"secret\" disposition, which displays a purple border for owners and no border or cursor change for all others."
+      },
+      "Size": {
+        "Dimensions": "Dimensions",
+        "Label": "Size",
+        "LinkToActorSize": {
+          "Link": "Link to Actor Size",
+          "Unlink": "Unlink from Actor Size"
         }
       }
     },
@@ -1838,6 +1886,11 @@
         "GrantItem": {
           "RemovalPrevented": "Removal of {item} is prevented by {preventer}."
         }
+      },
+      "TokenTagPrompt": {
+        "TargetToken": "Target a token by mouse-hovering one and pressing T. Press Escape to cancel.",
+        "TargetTokenFling": "Target the token you wish to fling by mouse-hovering one and pressing T. Press Escape to cancel.",
+        "Timeout": "Effect creation cancelled due to lack of target."
       }
     },
     "Dialog": {

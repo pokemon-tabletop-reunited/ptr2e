@@ -1,7 +1,7 @@
 import { ActorPTR2e } from "@actor";
 import ChangeModel from "../changes/change.ts";
 import ActiveEffectSystem, { ActiveEffectSystemSchema } from "../system.ts";
-import { extractNotes } from "src/util/rule-helpers.ts";
+import { extractNotes } from "src/util/change-helpers.ts";
 import { RollNote } from "@system/notes.ts";
 
 class AfflictionActiveEffectSystem extends ActiveEffectSystem {

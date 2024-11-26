@@ -9,6 +9,7 @@ import { SlugField } from "../fields/slug-field.ts";
 import { AttackRollResult } from "@system/rolls/check-roll.ts";
 import { ItemPTR2e, SummonPTR2e } from "@item";
 import { CombatantPTR2e } from "@combat";
+import { ActorSizePTR2e } from "@actor/data/size.ts";
 
 export default class AttackPTR2e extends ActionPTR2e {
   declare type: "attack" | "summon";
@@ -102,6 +103,22 @@ export default class AttackPTR2e extends ActionPTR2e {
         initial: null,
         label: "PTR2E.FIELDS.flingItemId.label",
         hint: "PTR2E.FIELDS.flingItemId.hint",
+      }),
+      offensiveStat: new fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>({
+        required: true,
+        nullable: true,
+        choices: PTRCONSTS.Stats.reduce((acc, stat) => ({ ...acc, [stat]: stat }), {"":""} as unknown as Record<PTRCONSTS.Stat, string>),
+        initial: null,
+        label: "PTR2E.FIELDS.offensiveStat.label",
+        hint: "PTR2E.FIELDS.offensiveStat.hint",
+      }),
+      defensiveStat: new fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>({
+        required: true,
+        nullable: true,
+        choices: PTRCONSTS.Stats.reduce((acc, stat) => ({ ...acc, [stat]: stat }), {"":""} as unknown as Record<PTRCONSTS.Stat, string>),
+        initial: null,
+        label: "PTR2E.FIELDS.defensiveStat.label",
+        hint: "PTR2E.FIELDS.defensiveStat.hint",
       })
     };
   }
@@ -195,7 +212,7 @@ export default class AttackPTR2e extends ActionPTR2e {
     return new AttackStatistic(this);
   }
 
-  public getRangeIncrement(distance: number | null): number | null {
+  public getRangeIncrement(distance: number | null, size: ActorSizePTR2e): number | null {
     if (
       distance === null ||
       !this.range ||
@@ -204,9 +221,34 @@ export default class AttackPTR2e extends ActionPTR2e {
       return null;
     const dangerClose = !!this.traits.get("danger-close");
 
-    // TODO: Implement Reach
-    if (this.range.distance <= 1) return distance >= 2 ? Infinity : 0;
-    const increment = this.range.distance;
+    const reach = {
+      0: 1,
+      1: 1,
+      2: 1,
+      3: 1,
+      4: 2,
+      5: 3,
+      6: 4,
+      7: 5,
+      8: 6
+    }[size.rank] ?? 1;
+    const rangeMultiplier = {
+      0: 1,
+      1: 1,
+      2: 1,
+      3: 1,
+      4: 1.1,
+      5: 1.2,
+      6: 1.3,
+      7: 1.4,
+      8: 1.5
+    }[size.rank] ?? 1;
+
+    const isInteger = Number.isInteger(distance);
+    const reachLimit = isInteger ? reach : Math.sqrt(2 * Math.pow(reach, 2));
+
+    if (this.range.distance <= 1) return distance >= reachLimit ? Infinity : 0;
+    const increment = this.range.distance * rangeMultiplier;
 
     const rangeIncrement = Math.max(Math.ceil(distance / increment), 1) - 1;
 
@@ -285,6 +327,15 @@ export default class AttackPTR2e extends ActionPTR2e {
     }
     return currentActions;
   }
+
+  override getRollOptions(prefix = ""): Set<string> {
+    return new Set([
+      `attack:${this.slug}`,
+      `attack:slug:${this.slug}`,
+      `attack:category:${this.category}`,
+      ...(this.types.map(type => `attack:type:${type}`)),
+    ]).map(key => prefix ? `${prefix}:${key}` : key);
+  }
 }
 
 export default interface AttackPTR2e extends ActionPTR2e, ModelPropsFromSchema<AttackSchema> {
@@ -321,4 +372,6 @@ interface AttackSchema extends foundry.data.fields.DataSchema {
   summon: foundry.data.fields.DocumentUUIDField<string>;
   defaultVariant: SlugField<string, string, true, true, true>;
   flingItemId: foundry.data.fields.StringField<string, string, true, true, true>;
+  offensiveStat: foundry.data.fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>;
+  defensiveStat: foundry.data.fields.StringField<PTRCONSTS.Stat, PTRCONSTS.Stat, true, true, true>;
 }

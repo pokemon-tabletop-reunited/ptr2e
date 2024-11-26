@@ -1,5 +1,5 @@
 
-import { ActorPTR2e, ActorSheetPTR2e, HumanoidActorSystem, PokemonActorSystem } from "@actor";
+import { ActorPTR2e, ActorSheetPTR2e, HumanoidActorSystem, PokemonActorSystem, Size } from "@actor";
 import { SummonCombatantSystem, CharacterCombatantSystem, CombatPTR2e, CombatSystemPTR2e, CombatTrackerPTR2e, CombatantPTR2e, RoundCombatantSystem } from "@combat";
 import { ItemPTR2e, data, sheets } from "@item";
 import { PerkDirectory } from "@module/apps/sidebar/perks-directory.ts";
@@ -168,5 +168,16 @@ export const PTRCONFIG = {
     "BURROW": "burrow",
     "HOVER": "raised",
     "FLY": "fly"
-  }
+  },
+  actorSizes: {
+    diminutive: "PTR2E.ActorSize.Diminutive",
+    tiny: "PTR2E.ActorSize.Tiny",
+    small: "PTR2E.ActorSize.Small",
+    medium: "PTR2E.ActorSize.Medium",
+    large: "PTR2E.ActorSize.Large",
+    huge: "PTR2E.ActorSize.Huge",
+    gigantic: "PTR2E.ActorSize.Gigantic",
+    titanic: "PTR2E.ActorSize.Titanic",
+    max: "PTR2E.ActorSize.Max"
+} as Record<Size, string>
 }

@@ -33,8 +33,8 @@ function _registerPTRHelpers() {
             if(urlOnly) return isType ? `systems/ptr2e/img/svg/${img}_icon.svg` : `systems/ptr2e/img/icons/${img}_icon.png`;
 
             return isType
-                ? `<img src="systems/ptr2e/img/svg/${img}_icon.svg" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" loading="lazy"/>`
-                : `<img src="systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}" loading="lazy"/>`;
+                ? `<img src="systems/ptr2e/img/svg/${img}_icon.svg" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}"/>`
+                : `<img src="systems/ptr2e/img/icons/${img}_icon.png" alt="${img}" data-tooltip="${tooltip}" data-tooltip-direction="${direction}" class="icon ${classes}"/>`;
         }
     );
 

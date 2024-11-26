@@ -160,7 +160,7 @@ export default class TooltipsPTR2e {
             ? await TextEditor.enrichHTML(skill.description)
             : null,
           localizedLabel:
-            skill?.label ?? (Handlebars.helpers.formatSlug(skill.slug) || null),
+            skill?.label ?? (Handlebars.helpers.formatSlug(skill?.slug ?? "") || null),
         };
       }
 
@@ -233,7 +233,7 @@ export default class TooltipsPTR2e {
   }
 
   async _onActionTooltip() {
-    const oldMethod = await ( async () => {
+    const oldMethod = await (async () => {
       const attackSlug =
         game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
       if (!attackSlug) return false;
@@ -250,7 +250,7 @@ export default class TooltipsPTR2e {
 
       return await this.#createActionTooltip(attack);
     })();
-    if(oldMethod !== false) return oldMethod;
+    if (oldMethod !== false) return oldMethod;
 
     const attackUuid = game.tooltip.element?.dataset.uuid;
     if (!attackUuid) return false;
@@ -309,7 +309,7 @@ export default class TooltipsPTR2e {
   }
 
   async _onAttackTooltip() {
-    const oldMethod = await ( async () => {
+    const oldMethod = await (async () => {
       const attackSlug =
         game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
       if (!attackSlug) return false;
@@ -326,7 +326,7 @@ export default class TooltipsPTR2e {
 
       return await this.#createAttackTooltip(attack);
     })();
-    if(oldMethod !== false) return oldMethod;
+    if (oldMethod !== false) return oldMethod;
 
     const attackUuid = game.tooltip.element?.dataset.uuid;
     if (!attackUuid) return false;
@@ -382,11 +382,11 @@ export default class TooltipsPTR2e {
     }
 
     for (const button of this.tooltip.querySelectorAll("button")) {
-      if(button.classList.contains("delay-attack")) {
+      if (button.classList.contains("delay-attack")) {
         button.addEventListener("click", async (event) => {
           event.preventDefault();
           event.stopPropagation();
-    
+
           const { attackUuid } = button.dataset;
           const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
           if (!action) return void ui.notifications.error("Action not found.");
@@ -395,7 +395,7 @@ export default class TooltipsPTR2e {
         });
       }
 
-      if(button.classList.contains("consume-pp")) {
+      if (button.classList.contains("consume-pp")) {
         button.addEventListener("click", async (event) => {
           event.preventDefault();
           event.stopPropagation();
@@ -405,12 +405,12 @@ export default class TooltipsPTR2e {
           if (!action) return void ui.notifications.error("Action not found.");
 
           const ppCost = action.cost.powerPoints
-          if(!ppCost) return void ui.notifications.error("No PP cost found on action.");
+          if (!ppCost) return void ui.notifications.error("No PP cost found on action.");
 
           const actor = action.actor;
           if (!actor) return void ui.notifications.error("Unable to detect actor.");
 
-          if(ppCost > actor.system.powerPoints.value) return void ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: ppCost, current: actor.system.powerPoints.value }));
+          if (ppCost > actor.system.powerPoints.value) return void ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: ppCost, current: actor.system.powerPoints.value }));
 
           await actor.update({
             "system.powerPoints.value": actor.system.powerPoints.value - ppCost,
@@ -418,7 +418,7 @@ export default class TooltipsPTR2e {
           ui.notifications.info(`You have ${actor.system.powerPoints.value} power points remaining. (Used ${ppCost})`);
         });
       }
-      else if(button.classList.contains("create-summon")) {
+      else if (button.classList.contains("create-summon")) {
         button.addEventListener("click", async (event) => {
           event.preventDefault();
           event.stopPropagation();
@@ -438,7 +438,7 @@ export default class TooltipsPTR2e {
             type: "summon",
             system: {
               owner: action.actor?.uuid ?? null,
-              item: { ...summonItem.clone({"system.owner": action.actor?.uuid ?? null}).toObject(), uuid: summonItem.uuid }
+              item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
             }
           }])
 

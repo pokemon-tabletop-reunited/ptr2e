@@ -1,15 +1,17 @@
 /* eslint-disable no-fallthrough */
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import {
+  ActorDimensions,
   ActorSynthetics,
   ActorSystemPTR2e,
   Attribute,
+  AuraData,
   HumanoidActorSystem,
   PokemonActorSystem,
 } from "@actor";
 import { ActiveEffectPTR2e, ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import { ActionPTR2e, AttackPTR2e, PokemonType, RollOptionChangeSystem, RollOptionManager } from "@data";
+import { ActionPTR2e, AttackPTR2e, PokemonType, PTRCONSTS, RollOptionChangeSystem, RollOptionManager, Trait } from "@data";
 import { ActorFlags } from "types/foundry/common/documents/actor.js";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -21,7 +23,7 @@ import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
 import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
-import { extractEffectRolls, extractEphemeralEffects, extractTargetModifiers } from "src/util/rule-helpers.ts";
+import { extractEffectRolls, extractEphemeralEffects, extractModifiers, extractTargetModifiers, processPreUpdateHooks } from "src/util/change-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -33,6 +35,8 @@ import MoveSystem from "@item/data/move.ts";
 import SpeciesSystem from "@item/data/species.ts";
 import { PickableThing } from "@module/apps/pick-a-thing-prompt.ts";
 import { ActionUUID } from "src/util/uuid.ts";
+import { ActorSizePTR2e } from "./data/size.ts";
+import { auraAffectsActor, checkAreaEffects } from "./helpers.ts";
 
 interface ActorParty {
   owner: ActorPTR2e<ActorSystemPTR2e, null> | null;
@@ -45,6 +49,22 @@ class ActorPTR2e<
 > extends Actor<TParent, TSystem> {
   /** Has this document completed `DataModel` initialization? */
   declare initialized: boolean;
+
+  constructor(data: object, context: DocumentConstructionContext<TParent> = {}) {
+    super(data, context);
+
+    Object.defineProperties(this, {
+      // Prevent object-recursing code from getting into `_itemTypes`,
+      _itemTypes: {
+        configurable: false,
+        enumerable: false,
+      },
+      // Add debounced checkAreaEffects method
+      checkAreaEffects: {
+        value: fu.debounce(checkAreaEffects, 50),
+      },
+    });
+  }
 
   get traits() {
     return this.system.traits;
@@ -118,9 +138,45 @@ class ActorPTR2e<
     return this._species ??= (this.items.get("actorspeciesitem")?.system as Maybe<SpeciesSystem>) ?? this.system.species ?? null;
   }
 
+  get size() {
+    return new ActorSizePTR2e({ value: ActorSizePTR2e.sizeFromRank(this.system.details.size.heightClass) ?? "medium" });
+  }
+
+  /**
+   * With the exception of vehicles, actor heights aren't specified. For the purpose of three-dimensional
+   * token-distance measurement, however, the system will generally treat actors as cubes.
+   */
+  get dimensions(): ActorDimensions {
+    const size = this.size;
+    return {
+      length: size.length,
+      width: size.width,
+      height: Math.min(size.length, size.width),
+    };
+  }
+
   /** The recorded schema version of this actor, updated after each data migration */
   get schemaVersion(): number | null {
     return Number(this.system._migration?.version) || null;
+  }
+
+  /** Get an active GM or, failing that, a player who can update this actor */
+  get primaryUpdater(): User | null {
+    // 1. The first active GM, sorted by ID
+    const { activeGM } = game.users;
+    if (activeGM) return activeGM;
+
+    const activeUsers = game.users.filter((u) => u.active);
+    // 2. The user with this actor assigned
+    const primaryPlayer = this.isToken ? null : activeUsers.find((u) => u.character?.id === this.id);
+    if (primaryPlayer) return primaryPlayer;
+
+    // 3. Anyone who can update the actor
+    const firstUpdater = game.users
+      .filter((u) => this.canUserModify(u, "update"))
+      .sort((a, b) => (a.id > b.id ? 1 : -1))
+      .shift();
+    return firstUpdater ?? null;
   }
 
   get party(): ActorParty | null {
@@ -177,10 +233,10 @@ class ActorPTR2e<
   get nullifiableAbilities(): PickableThing[] {
     //@ts-expect-error - UUID only is valid.
     return this.itemTypes?.ability
-    ?.filter(ability => !ability.system.isSuppressed && (ability.system.free || ability.system.slot !== null))
-    .map(ability => ({
-      value: ability.uuid
-    })) ?? [];
+      ?.filter(ability => !ability.system.isSuppressed && (ability.system.free || ability.system.slot !== null))
+      .map(ability => ({
+        value: ability.uuid
+      })) ?? [];
   }
 
   protected override _initializeSource(
@@ -216,6 +272,7 @@ class ActorPTR2e<
       effects: {},
       toggles: [],
       attackAdjustments: [],
+      tokenTags: new Map(),
       tokenOverrides: {},
       preparationWarnings: {
         add: (warning: string) => preparationWarnings.add(warning),
@@ -228,6 +285,7 @@ class ActorPTR2e<
       },
     };
 
+    this.auras = new Map();
     this._party = null;
     this._perks = null;
     this._species = null;
@@ -284,9 +342,9 @@ class ActorPTR2e<
     Object.defineProperty(this.flags.ptr2e.disableActionOptions, "options", {
       get: () => {
         return this.flags.ptr2e.disableActionOptions!.collection.filter(action => {
-          if(!(action instanceof AttackPTR2e)) return true;
+          if (!(action instanceof AttackPTR2e)) return true;
           return action.free ? true : action.slot ? this.attacks.actions[action.slot] === action : action.free;
-        }).map(action => ({value: action.uuid}));
+        }).map(action => ({ value: action.uuid }));
       }
     });
 
@@ -357,7 +415,7 @@ class ActorPTR2e<
         this.attacks.available.push(attack);
         continue;
       }
-      if (this.attacks.actions[attack.slot] !== null) {
+      if (this.attacks.actions[attack.slot]) {
         if (this.attacks.actions[attack.slot].slug !== attack.slug) {
           this.attacks.available.push(this.attacks.actions[attack.slot]);
         }
@@ -383,7 +441,7 @@ class ActorPTR2e<
         continue;
       }
 
-      if (this.abilities.entries[ability.system.slot] !== null) {
+      if (this.abilities.entries[ability.system.slot]) {
         if (this.abilities.entries[ability.system.slot].slug !== ability.slug) {
           this.abilities.available.push(this.abilities.entries[ability.system.slot]);
         }
@@ -399,9 +457,9 @@ class ActorPTR2e<
 
   generateFlingAttack() {
     function getFlingAttack(
-      {name, slug, power = 25, accuracy = 100, types = ["untyped"], free = false, variant = true, description = "", id=""}: 
-      {name?: string, slug?: string, power?: number, accuracy?: number, types?: DeepPartial<AttackPTR2e['_source']['types']>, free?: boolean, variant?: boolean, description?: string, id?: string}
-      = {name: "", slug: "", power: 25, accuracy: 100, types: ["untyped"], free: false, variant: true, description: "", id:""}
+      { name, slug, power = 25, accuracy = 100, types = ["untyped"], free = false, variant = true, description = "", id = "" }:
+        { name?: string, slug?: string, power?: number, accuracy?: number, types?: DeepPartial<AttackPTR2e['_source']['types']>, free?: boolean, variant?: boolean, description?: string, id?: string }
+        = { name: "", slug: "", power: 25, accuracy: 100, types: ["untyped"], free: false, variant: true, description: "", id: "" }
     ): DeepPartial<AttackPTR2e['_source']> {
       return {
         slug: `fling${name?.length ? `-${slug}` : ""}`,
@@ -448,31 +506,35 @@ class ActorPTR2e<
         "actions": [getFlingAttack({
           free: true,
           variant: false
+        }),getFlingAttack({
+          name: "Actor Toss",
+          slug: "actor-toss",
         })],
         "grade": "E"
       },
       "_id": "flingattackitem0",
       "effects": []
     };
-    
+
     const itemNames = new Set<string>();
-    for(const item of this.items?.contents as unknown as ItemPTR2e[]) {
-      if(!["consumable", "equipment", "gear", "weapon"].includes(item.type)) continue;
-      if(!item.system.fling) continue;
-      if(itemNames.has(item.slug)) continue;
-      if(item.system.quantity !== undefined && typeof item.system.quantity === 'number' && item.system.quantity <= 0) continue;
+    for (const item of this.items?.contents as unknown as ItemPTR2e[]) {
+      if (!["consumable", "equipment", "gear", "weapon"].includes(item.type)) continue;
+      if (!item.system.fling) continue;
+      if (itemNames.has(item.slug)) continue;
+      if (item.system.quantity !== undefined && typeof item.system.quantity === 'number' && item.system.quantity <= 0) continue;
       itemNames.add(item.slug);
 
       const flingData = item.system.fling as { power: number, accuracy: number, type: PokemonType, hide: boolean };
-      if(flingData.hide) continue;
+      if (flingData.hide) continue;
 
-      data.system.actions.push(getFlingAttack({name: item.name, slug: item.slug, power: flingData.power, accuracy: flingData.accuracy, types: [flingData.type], id: item.id,
+      data.system.actions.push(getFlingAttack({
+        name: item.name, slug: item.slug, power: flingData.power, accuracy: flingData.accuracy, types: [flingData.type], id: item.id,
         description: `<p>Effect: The Type, Power, Accuracy, and Range of this attack are modified by the Fling stats of the utilized item.</p><p>This fling variant is based on ${item.link}</p>`
       }));
     }
 
     const existing = this.items.get(data._id) as Maybe<ItemPTR2e<MoveSystem, this>>;
-    if(existing) {
+    if (existing) {
       existing.updateSource(data);
       existing.reset();
       this.fling = existing;
@@ -557,6 +619,11 @@ class ActorPTR2e<
           }
         }
       }
+    }
+    for(const trait of this.traits) {
+      if(!trait.changes?.length) continue;
+      const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>;
+      if(effect) yield effect;
     }
     yield* super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>
   }
@@ -688,18 +755,21 @@ class ActorPTR2e<
     return this.system.attributes.spe.stage + (this.system.modifiers["speed"] ?? 0);
   }
 
-  getDefenseStat(attack: { category: AttackPTR2e["category"] }, isCrit: boolean) {
-    return attack.category === "physical"
-      ? this.calcStatTotal(this.system.attributes.def, isCrit)
-      : this.calcStatTotal(this.system.attributes.spd, isCrit);
-  }
-  getAttackStat(attack: { category: AttackPTR2e["category"] }) {
-    return attack.category === "physical"
-      ? this.calcStatTotal(this.system.attributes.atk, false)
-      : this.calcStatTotal(this.system.attributes.spa, false);
+  getDefenseStat(attack: { category: AttackPTR2e["category"], defensiveStat: PTRCONSTS.Stat | null }, isCrit: boolean) {
+    const stat: PTRCONSTS.Stat = attack.defensiveStat ?? (attack.category === "physical" ? "def" : "spd");
+    return this.calcStatTotal(this.system.attributes[stat], isCrit);
   }
 
-  calcStatTotal(stat: Attribute, isCrit: boolean) {
+  getAttackStat(attack: { category: AttackPTR2e["category"], offensiveStat: PTRCONSTS.Stat | null }) {
+    const stat: PTRCONSTS.Stat = attack.offensiveStat ?? (attack.category === "physical" ? "atk" : "spa");
+    return this.calcStatTotal(this.system.attributes[stat], false);
+  }
+
+  calcStatTotal(stat: Attribute | Omit<Attribute, 'stage'>, isCrit: boolean): number {
+    function isAttribute(attribute: Attribute | Omit<Attribute, 'stage'>): attribute is Attribute {
+      return attribute.slug !== "hp";
+    }
+    if(!isAttribute(stat)) return stat.value;
     const stageModifier = () => {
       const stage = Math.clamp(stat.stage, -6, isCrit ? 0 : 6);
       return stage > 0 ? (2 + stage) / 2 : 2 / (2 + Math.abs(stage));
@@ -792,7 +862,11 @@ class ActorPTR2e<
       (c): c is RollOptionChangeSystem =>
         c instanceof RollOptionChangeSystem && c.domain === domain && c.option === option,
     );
-    return change?.toggle(value, suboption) ?? null;
+    const result = await change?.toggle(value, suboption) ?? null;
+    if (result === null) return result;
+
+    await processPreUpdateHooks(this);
+    return result;
   }
 
   override async modifyTokenAttribute(
@@ -812,20 +886,27 @@ class ActorPTR2e<
     return super.modifyTokenAttribute(attribute, value, isDelta, isBar);
   }
 
-  getEffectiveness(moveTypes: Set<PokemonType>) {
+  getEffectiveness(moveTypes: Set<PokemonType>, effectivenessStages = 0, ignoreImmune = false): number {
     let effectiveness = 1;
     for (const type of moveTypes) {
       effectiveness *= this.system.type.effectiveness[type] ?? 1;
+    }
+    if(ignoreImmune && effectiveness === 0) effectiveness = 1;
+    if(effectivenessStages !== 0) {
+      const positive = effectivenessStages > 0;
+      for(let i = 0; i < Math.abs(effectivenessStages); i++) {
+        effectiveness *= positive ? 2 : 0.5;
+      }
     }
     return effectiveness;
   }
 
   isHumanoid(): this is ActorPTR2e<HumanoidActorSystem> {
-    return this.type === "humanoid";
+    return this.traits.has("humanoid");
   }
 
   isPokemon(): this is ActorPTR2e<PokemonActorSystem> {
-    return this.type === "pokemon";
+    return !this.isHumanoid();
   }
 
   isAllyOf(actor: ActorPTR2e): boolean {
@@ -1097,6 +1178,30 @@ class ActorPTR2e<
       : null;
     if (rangePenalty) context.self.modifiers.push(rangePenalty);
 
+    const sizePenalty = (() => {
+      const target = context.target?.actor;
+      if (!target) return null;
+      const difference = target.size.difference(context.self.actor.size)
+      if(difference >= 2) return new ModifierPTR2e({
+        label: "PTR2E.Modifiers.size",
+        slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
+        modifier: difference >= 4 ? 2 : 1,
+        method: "stage",
+        type: "accuracy",
+        appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
+      });
+      if(difference <= -2) return new ModifierPTR2e({
+        label: "PTR2E.Modifiers.size",
+        slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
+        modifier: difference <= -4 ? -2 : -1,
+        method: "stage",
+        type: "accuracy",
+        appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
+      });
+      return null;
+    })();
+    if (sizePenalty) context.self.modifiers.push(sizePenalty);
+
     const evasionStages = context.target?.actor?.evasionStage ?? 0;
     if (evasionStages !== 0) {
       const evasionModifier = new ModifierPTR2e({
@@ -1157,6 +1262,13 @@ class ActorPTR2e<
           null,
         ]
         : [null, null];
+
+    if(targetToken?.actor && selfToken?.actor) {
+      const targetMarks = targetToken.actor.synthetics.tokenTags.get(selfToken.document.uuid);
+      const originMarks = selfToken.actor.synthetics.tokenTags.get(targetToken.document.uuid);
+      if(targetMarks) params.options.add(`target:mark:${targetMarks}`);
+      if(originMarks) params.options.add(`origin:mark:${originMarks}`);
+    }
 
     const originEphemeralEffects = await extractEphemeralEffects({
       affects: "origin",
@@ -1231,16 +1343,27 @@ class ActorPTR2e<
       return params.item ?? null;
     })();
 
+    // Target roll options
+    const getTargetRollOptions = (actor: Maybe<ActorPTR2e>): string[] => {
+      const targetOptions = actor?.getSelfRollOptions("target") ?? [];
+      if (targetToken) {
+        targetOptions.push("target"); // An indicator that there is any kind of target.
+      }
+      return targetOptions.sort();
+    };
+
     //TODO: Probably needs similar implementation to selfItem
     const selfAttack = params.attack?.clone();
     selfAttack?.prepareDerivedData();
     const selfAction = params.action;
 
     const itemOptions = selfItem?.getRollOptions("item") ?? [];
+    const actionOptions = selfAttack?.getRollOptions() ?? [];
+    const actionRollOptions = Array.from(new Set([...itemOptions, ...actionOptions, ...getTargetRollOptions(targetToken?.actor)]));
 
     if (selfAttack) {
       for (const adjustment of selfActor.synthetics.attackAdjustments) {
-        adjustment.adjustAttack?.(selfAttack, itemOptions);
+        adjustment().adjustAttack?.(selfAttack, actionRollOptions);
       }
     }
 
@@ -1249,12 +1372,30 @@ class ActorPTR2e<
 
       if (selfAttack) {
         for (const adjustment of selfActor.synthetics.attackAdjustments) {
-          adjustment.adjustTraits?.(selfAttack, traits, itemOptions);
+          adjustment().adjustTraits?.(selfAttack, traits, actionRollOptions);
         }
       }
 
       return R.unique(traits).sort();
     })();
+
+    let newFlatModifiers: ModifierPTR2e[] = [];
+    if(selfAttack) {
+      const actionTraitDomains = actionTraits.map((t) => `${t}-trait-${selfAttack.type}`)
+      params.domains = R.unique([...params.domains, ...actionTraitDomains])
+    
+      const originalModifiers = params.statistic?.modifiers ?? [];
+      const flatModsFromTraitDomains = extractModifiers(this.synthetics, actionTraitDomains);
+
+      // Figure out which are new flat modifiers
+      const target = params.target?.actor ?? targetToken?.actor ?? null;
+      newFlatModifiers = flatModsFromTraitDomains.filter(
+        (mod) => !originalModifiers.some((original) => original.slug === mod.slug)
+      ).map(mod => {
+        if(target) mod.appliesTo = new Map([[target.uuid, true]]);
+        return mod;
+      });
+    }
 
     // Calculate distance and range increment, set as a roll option
     const distance = selfToken && targetToken ? selfToken.distanceTo(targetToken) : 0;
@@ -1273,14 +1414,6 @@ class ActorPTR2e<
         ]).filter(R.isTruthy)
         : [];
 
-    // Target roll options
-    const getTargetRollOptions = (actor: Maybe<ActorPTR2e>): string[] => {
-      const targetOptions = actor?.getSelfRollOptions("target") ?? [];
-      if (targetToken) {
-        targetOptions.push("target"); // An indicator that there is any kind of target.
-      }
-      return targetOptions.sort();
-    };
     const targetRollOptions = getTargetRollOptions(targetToken?.actor);
 
     // Get ephemeral effects from this actor that affect the target while being attacked
@@ -1351,7 +1484,7 @@ class ActorPTR2e<
     );
 
     const rangeIncrement = selfAttack
-      ? selfAttack.getRangeIncrement(distance)
+      ? selfAttack.getRangeIncrement(distance, selfActor.size)
       : selfAction &&
         "getRangeIncrement" in selfAction &&
         selfAction.getRangeIncrement &&
@@ -1367,7 +1500,10 @@ class ActorPTR2e<
       item: selfItem,
       attack: selfAttack!,
       action: selfAction!,
-      modifiers: targetOriginFlatModifiers ?? [],
+      modifiers: [
+        targetOriginFlatModifiers ?? [],
+        newFlatModifiers ?? [],
+      ].flat(),
     };
 
     const target =
@@ -1401,6 +1537,82 @@ class ActorPTR2e<
       },
       { keepId: true }
     );
+  }
+
+  /** Apply effects from an aura: will later be expanded to handle effects from measured templates */
+  async applyAreaEffects(aura: AuraData, origin: { actor: ActorPTR2e; token: TokenDocumentPTR2e }, affected: Set<ActorPTR2e>): Promise<void> {
+    if (
+      game.user !== this.primaryUpdater ||
+      origin.token.hidden
+    ) {
+      return;
+    }
+
+    const toCreate: EffectSourcePTR2e[] = [];
+    const toUpdate = new Map<string, { _id: string; "flags.ptr2e.aura.amount": number }>();
+    const rollOptions = aura.effects.some((e) => e.predicate.length > 0)
+      ? new Set([...origin.actor.getRollOptions(), ...this.getSelfRollOptions("target")])
+      : new Set([]);
+
+    // Predicate for appliesSelfOnly is checking how many actors in the aura count, not whether it should apply to this actor.
+    for (const data of aura.effects.filter(e => e.appliesSelfOnly ? origin.actor === this : e.predicate.test(rollOptions))) {
+      const existing = this.appliedEffects.find(e => e.flags?.core?.sourceId === data.uuid) as ActiveEffectPTR2e | undefined;
+      if (existing && !data.appliesSelfOnly) continue;
+
+      if (!auraAffectsActor(data, origin.actor, this)) continue;
+
+      const effect = existing ?? await fromUuid(data.uuid);
+      if (!((effect instanceof ItemPTR2e && effect.type === "effect") || effect instanceof ActiveEffectPTR2e)) {
+        console.warn(`Effect from ${data.uuid} not found`);
+        continue;
+      }
+
+      const affectedActors = data.appliesSelfOnly ? affected
+        .filter(actor => auraAffectsActor({ ...data, appliesSelfOnly: false, includesSelf: false }, origin.actor, actor))
+        .filter(actor => {
+          const rollOptions = data.predicate.length > 0
+            ? new Set([
+              ...origin.actor.getRollOptions(),
+              ...actor.getSelfRollOptions("target")
+            ])
+            : new Set([]);
+          return data.predicate.test(rollOptions);
+        }) : new Set([]);
+
+      if (existing) {
+        const current = existing.flags.ptr2e.aura!.amount ?? 0;
+        const newAmount = affectedActors.size;
+        if (current === newAmount) continue;
+        existing.flags.ptr2e.aura!.amount = newAmount;
+        toUpdate.set(existing.uuid, { _id: existing.id, "flags.ptr2e.aura.amount": newAmount });
+        continue;
+      }
+
+      const flags = {
+        core: {
+          sourceId: data.uuid,
+        },
+        ptr2e: {
+          aura: {
+            slug: aura.slug,
+            origin: origin.actor.uuid,
+            removeOnExit: data.removeOnExit,
+            ...(data.appliesSelfOnly ? { amount: affectedActors.size } : {}),
+          }
+        }
+      }
+
+      const effects = (effect instanceof ItemPTR2e ? effect.effects : [effect]) as ActiveEffectPTR2e[];
+      const sources = effects.map(e => fu.mergeObject(e.toObject(), { flags }) as unknown as EffectSourcePTR2e);
+      toCreate.push(...sources);
+    }
+
+    if (toCreate.length > 0) {
+      await this.createEmbeddedDocuments("ActiveEffect", toCreate);
+    }
+    if (toUpdate.size > 0) {
+      await this.updateEmbeddedDocuments("ActiveEffect", Array.from(toUpdate.values()));
+    }
   }
 
   isImmuneToEffect(data: ActiveEffectPTR2e | ActiveEffectPTR2e['_source']): boolean {
@@ -1632,7 +1844,14 @@ class ActorPTR2e<
           }
         }
       }
+    }
 
+    // 
+    try {
+      const updated = this.clone(changed, { keepId: true, addSource: true });
+      await processPreUpdateHooks(updated);
+    } catch (err) {
+      console.error(err);
     }
 
     return super._preUpdate(changed, options, user);
@@ -1875,6 +2094,11 @@ interface ActorPTR2e<
 
   get itemTypes(): Record<string, ItemPTR2e[]>;
 
+  auras: Map<string, AuraData>;
+
+  /** Added as debounced method */
+  checkAreaEffects(): void;
+
   fling: ItemPTR2e<MoveSystem, this>;
 }
 
@@ -1889,6 +2113,7 @@ type ActorFlags2e = ActorFlags & {
       get options(): PickableThing[];
       disabled: ActionUUID[];
     }
+    editedSkills?: boolean
   };
 };
 

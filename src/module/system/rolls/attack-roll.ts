@@ -137,12 +137,14 @@ class AttackRoll extends CheckRoll {
     isCritHit,
     attack,
     isMultiTarget,
+    useEnemyStats
   }: {
     origin: ActorPTR2e;
     target: ActorPTR2e;
     isCritHit: boolean;
     attack: AttackPTR2e;
     isMultiTarget: boolean;
+    useEnemyStats: boolean;
   }): Maybe<DamageCalc> {
     if (this.attackType !== "damage") return null;
 
@@ -154,14 +156,15 @@ class AttackRoll extends CheckRoll {
     const damageRoll = Number(this.result);
 
     // Attack & Defense stats of the origin and target
-    const attackStat = attack.getAttackStat();
+    const attackStat = attack.getAttackStat(useEnemyStats ? target : attack.actor);
     const defenseStat = target.getDefenseStat(attack, isCritHit);
 
     // Check for Sniper
     const hasSniper = origin.rollOptions.getFromDomain("item")["ability:sniper:active"];
 
     // Type effectiveness
-    const typeEffectiveness = target.getEffectiveness(attack.types);
+    const effectivenessStage = parseInt(this.options.effectivenessStage+"");
+    const typeEffectiveness = target.getEffectiveness(attack.types, effectivenessStage, this.options.ignoreImmune ?? false);
 
     // Other modifiers
     const otherModifier = this.options.damageMod ?? 1;
@@ -169,11 +172,14 @@ class AttackRoll extends CheckRoll {
     // Flat damage modifier
     const flatDamage = this.options.flatDamage ?? 0;
 
+    // Attack Stat Modifier
+    const attackStatMod = attackStat + (this.options.statMod ?? 0);
+
     // Calculate the damage
     const context = {
       level: origin.level,
       power,
-      attack: attackStat,
+      attack: attackStatMod,
       defense: defenseStat,
       targets: isMultiTarget ? 0.75 : 1,
       critical: isCritHit ? hasSniper ? 2 : 1.5 : 1,
@@ -241,7 +247,10 @@ type AttackRollDataPTR2e = CheckRollDataPTR2e & {
   power?: number;
   damageMod?: number;
   outOfRange: boolean;
-  flatDamage?: number
+  flatDamage?: number;
+  statMod: number;
+  effectivenessStage: number;
+  ignoreImmune: boolean;
 } & AccuracyContext
 
 export { AttackRoll, type AttackRollDataPTR2e, type AttackRollCreationData };

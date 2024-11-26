@@ -103,8 +103,8 @@ class ActiveEffectPTR2e<
   }
 
   override apply(actor: ActorPTR2e, change: ChangeModel, options?: string[]): unknown {
-    if(this.parent instanceof ItemPTR2e && this.parent && this.parent.system instanceof AbilitySystemModel) {
-      if(this.parent.system.suppress) return;
+    if (this.parent instanceof ItemPTR2e && this.parent && this.parent.system instanceof AbilitySystemModel) {
+      if (this.parent.system.suppress) return;
     }
     return this.system.apply(actor, change, options);
   }
@@ -144,7 +144,7 @@ class ActiveEffectPTR2e<
    * Override the implementation of ActiveEffect#_requiresDurationUpdate to support activation-based initiative.
    * Duration is purely handled in terms of combat turns elapsed.
    */
-  override _requiresDurationUpdate() {
+  override _requiresDurationUpdate(): boolean {
     const { _combatTime, type } = this.duration;
     if (type === "turns" && game.combat) {
       //@ts-expect-error - This is a private property
@@ -282,13 +282,13 @@ class ActiveEffectPTR2e<
   }
 
   // TODO: Clean this up cause god it's a mess.
-  protected override _preUpdate(
+  protected override async _preUpdate(
     changed: DeepPartial<this["_source"]>,
     options: DocumentUpdateContext<TParent>,
     user: User
   ): Promise<boolean | void> {
-    if(!changed?.changes && !changed?.system?.changes) return super._preUpdate(changed, options, user);
-    
+    if (!changed?.changes && !changed?.system?.changes) return super._preUpdate(changed, options, user);
+
     const parseChangePath = (expanded: { changes: unknown[]; system?: unknown }) => {
       expanded.system = fu.mergeObject(expanded.system ?? {}, {
         changes: expanded.changes,
@@ -417,7 +417,7 @@ class ActiveEffectPTR2e<
       }
     }
 
-    if(outputItemSources.length) {
+    if (outputItemSources.length) {
       await ItemPTR2e.createDocuments( //@ts-expect-error - this should not error
         outputItemSources,
         context as DocumentModificationContext<ActorPTR2e | null>
@@ -441,7 +441,7 @@ class ActiveEffectPTR2e<
           await change.preDelete?.({ pendingItems: items, context });
         }
 
-        await processGrantDeletions(effect, null, items, effects);
+        await processGrantDeletions(effect, null, items, effects, !!context.ignoreRestricted);
       }
 
       if (items.length) {
@@ -472,6 +472,12 @@ interface ActiveEffectPTR2e<
       rollOptions: {
         [domain in keyof typeof RollOptionDomains]: Record<string, boolean>;
       }
+      aura?: {
+        slug: string;
+        origin: ActorUUID;
+        removeOnExit: boolean;
+        amount?: number;
+      };
     };
   }
 

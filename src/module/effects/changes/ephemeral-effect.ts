@@ -15,7 +15,7 @@ export default class EphemeralEffectChangeSystem extends ChangeModel {
             ...schema,
             affects: new fields.StringField({
                 required: true,
-                choices: ["target", "origin"].reduce<Record<string,string>>((acc, affects) => ({...acc, [affects]: affects}), {}),
+                choices: ["target", "origin", "self"].reduce<Record<string,string>>((acc, affects) => ({...acc, [affects]: affects}), {}),
                 initial: "target",
             }),
         };
@@ -56,6 +56,7 @@ export default class EphemeralEffectChangeSystem extends ChangeModel {
         const synthetics = (this.actor!.synthetics.ephemeralEffects[selector] ??= {
             origin: [],
             target: [],
+            self: [],
         });
         synthetics[this.affects].push(defferedEffect);
     }
@@ -115,5 +116,5 @@ export default class EphemeralEffectChangeSystem extends ChangeModel {
 }
 
 export default interface EphemeralEffectChangeSystem {
-    affects: "target" | "origin";
+    affects: "target" | "origin" | "self";
 }

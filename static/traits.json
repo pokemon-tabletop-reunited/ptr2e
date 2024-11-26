@@ -215,7 +215,20 @@
     "slug": "breathless",
     "label": "Breathless",
     "related": [],
-    "description": "This creature does not need to breathe. This does not grant immunity to [Powder] attacks or attacks that have \"Gas\" in their name."
+    "description": "This creature does not need to breathe. This does not grant immunity to [Powder] attacks or attacks that have \"Gas\" in their name.",
+    "type":"automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "immunities",
+        "value": "trait:powder"
+      },
+      {
+        "type": "roll-option",
+        "domain": "immunities",
+        "value": "trait:gas"
+      }
+    ]
   },
   {
     "slug": "burrower",
@@ -556,11 +569,13 @@
   {
     "slug": "harvester",
     "label": "Harvester",
+    "description":"",
     "related": []
   },
   {
     "slug": "healer",
     "label": "Healer",
+    "description":"",
     "related": []
   },
   {
@@ -609,7 +624,15 @@
     "slug": "hover",
     "label": "Hover",
     "related": [],
-    "description": "This creature naturally floats, granting immunity to damage and effects from [Earthbound] actions. Does not crash if its deliberate flight is interrupted."
+    "description": "This creature naturally floats, granting immunity to damage and effects from [Earthbound] actions. Does not crash if its deliberate flight is interrupted.",
+    "type":"automated",
+    "changes": [
+      {
+        "type": "roll-option",
+        "domain": "immunities",
+        "value": "trait:earthbound"
+      }
+    ]
   },
   {
     "slug": "human",
@@ -950,6 +973,7 @@
   {
     "slug": "no-buoyancy",
     "label": "No Buoyancy",
+    "description":"",
     "related": []
   },
   {
@@ -1045,6 +1069,7 @@
   {
     "slug": "quadrupedal",
     "label": "Quadrupedal",
+    "description":"",
     "related": []
   },
   {
@@ -1597,7 +1622,7 @@
     "slug": "stack-x",
     "label": "Stack X",
     "related": [],
-    "description": "Denotes the number of stacks "
+    "description": "Denotes the number of individual items that make up a stack of that item."
   },
   {
     "slug": "belt",
@@ -1610,6 +1635,12 @@
     "label": "Fling",
     "related": [],
     "description": "Denotes if an item can be used as part of the Fling attack action."
+  },
+  {
+    "slug": "combat",
+    "label": "Combat",
+    "related": [],
+    "description": "Denotes the general use of a item or piece of gear. [Consumable] items cannot be used in a battle if they lack this trait."
   },
   {
     "slug": "x-strike",
@@ -1914,16 +1945,19 @@
   {
     "slug": "delay-1",
     "label": "Delay 1",
+    "description":"",
     "related": []
   },
   {
     "slug": "delay-2",
     "label": "Delay 2",
+    "description":"",
     "related": []
   },
   {
     "slug": "delay-3",
     "label": "Delay 3",
+    "description":"",
     "related": []
   },
   {
@@ -3063,5 +3097,20 @@
     "related": [],
     "description": "<p>Denotes if an Effect should ignore an actor's Immunity. This trait ignores all Actor based immunities while applying an effect.</p><p>If you want to be more specific, you can add a custom [Ignore Immunity X] trait, such as [Ignore Immunity Poison] to denote that the effect ignores Poison Immunity.</p>",
     "type": "automated"
+  },
+  {
+    "slug": "ignore-type-immunity",
+    "label": "Ignore Type Immunity",
+    "related": [],
+    "description": "<p>Denotes if an Attack should ignore effectiveness Immunity and instead set type based effectiveness to 0.</p>",
+    "type": "automated"
+  },
+  {
+    "slug": "use-opponents-stats",
+    "label": "Use Opponent's Stats",
+    "related": [],
+    "description": "An attack with this Trait will calculate the Offensive Stat using the Opponent's stats instead of the user's.",
+    "type": "automated",
+    "changes": []
   }
 ]

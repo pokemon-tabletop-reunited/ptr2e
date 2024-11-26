@@ -2,7 +2,7 @@ import { ActorPTR2e, AttackAdjustment } from "@actor";
 import { BasicChangeSystem, ChangeModel, ChangeSchema, PTRCONSTS, RangePTR2e } from "@data";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
 
-type AttackPropertyOptions = "power" | "accuracy" | "type" | "traits" | "pp-cost" | "range" | "rip";
+type AttackPropertyOptions = "power" | "accuracy" | "type" | "traits" | "pp-cost" | "range" | "rip" | "offensiveStat" | "defensiveStat";
 
 export default class AlterAttackChangeSystem extends ChangeModel {
   static override TYPE = "alter-attack";
@@ -14,7 +14,9 @@ export default class AlterAttackChangeSystem extends ChangeModel {
     "traits",
     "pp-cost",
     "range",
-    "rip"
+    "rip",
+    "offensiveStat",
+    "defensiveStat"
 ] as const);
 
   static override defineSchema() {
@@ -41,8 +43,8 @@ export default class AlterAttackChangeSystem extends ChangeModel {
   override beforePrepareData(
     actor: ActorPTR2e | null = this.actor
   ): void {
-    if(!this.test()) return;
     if (!actor) return;
+    if(!this.test()) return;
 
     const change = this.resolveValue(this.value);
 
@@ -254,8 +256,40 @@ export default class AlterAttackChangeSystem extends ChangeModel {
             }
           }
         }
+        case "offensiveStat": {
+          return {
+            adjustAttack: (attack, options) => {
+              if(!change || typeof change !== "string" || !Object.values(PTRCONSTS.Stats).includes(change as PTRCONSTS.Stat)) {
+                return this.failValidation("An attack alteration of type 'offensiveStat' must have a supported 'Stat' text value.");
+              }
+
+              if (!definition.test(options)) {
+                return;
+              }
+
+              attack.offensiveStat = change as PTRCONSTS.Stat;
+              attack.updateSource({offensiveStat: attack.offensiveStat});
+            }
+          }
+        }
+        case "defensiveStat": {
+          return {
+            adjustAttack: (attack, options) => {
+              if(!change || typeof change !== "string" || !Object.values(PTRCONSTS.Stats).includes(change as PTRCONSTS.Stat)) {
+                return this.failValidation("An attack alteration of type 'defensiveStat' must have a supported 'Stat' text value.");
+              }
+
+              if (!definition.test(options)) {
+                return;
+              }
+
+              attack.defensiveStat = change as PTRCONSTS.Stat;
+              attack.updateSource({defensiveStat: attack.defensiveStat});
+            }
+          }
+        }
       }
-    })();
+    });
 
     actor.synthetics.attackAdjustments.push(adjustment);
   }

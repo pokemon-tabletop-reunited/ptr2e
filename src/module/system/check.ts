@@ -11,7 +11,7 @@ import {
   PokeballRollCallback,
   PokeballRollResults,
 } from "@system/rolls/check-roll.ts";
-import { CheckRollContext } from "@system/rolls/data.ts";
+import { CaptureCheckRollContext, CheckRollContext } from "@system/rolls/data.ts";
 import { DegreeOfSuccess } from "@system/rolls/degree-of-success.ts";
 import { sluggify } from "@utils";
 import { CheckContext } from "./data.ts";
@@ -25,7 +25,7 @@ import { ActiveEffectPTR2e } from "@effects";
 class CheckPTR2e {
   static async rollPokeball(
     check: AttackCheckModifier,
-    context: CheckRollContext,
+    context: CaptureCheckRollContext,
     callback?: PokeballRollCallback
   ): Promise<PokeballRollResults | null> {
     // TODO: Add user setting
@@ -70,15 +70,16 @@ class CheckPTR2e {
     const data: CaptureRollCreationData = {
       check,
       ballBonus: (context.item?.system instanceof ConsumableSystemModel && context.item.system.consumableType === "pokeball" ? context.item.system.modifier : 1) || 1,
-      critBonus: 1,
-      miscBonus: 1,
+      critMultiplier: check.total?.crit?.percentile ?? 1,
+      caughtMons: check.total?.crit?.base ?? 1,
+      miscMultiplier: check.total?.capture?.percentile ?? 1,
       target: context.target?.actor,
       user: context.actor
     }
 
     const rolls: PokeballRollResults["rolls"] = await (async () => {
       const [accuracy, crit, shake1, shake2, shake3, shake4] = await Promise.all([
-        CaptureRoll.createFromData(options, data, "accuracy")?.evaluate() ?? null,
+        context.accuracyRoll ?? null,
         CaptureRoll.createFromData(options, data, "crit")?.evaluate() ?? null,
         CaptureRoll.createFromData(options, data, "shake1")?.evaluate() ?? null,
         CaptureRoll.createFromData(options, data, "shake2")?.evaluate() ?? null,
@@ -172,23 +173,6 @@ class CheckPTR2e {
       await callback(context, results, message);
     }
 
-    const item = context.item ?? null;
-    if (
-      item &&
-      item.type === "consumable" &&
-      item.actor.items.has(item.id) &&
-      (item as ConsumablePTR2e).system.quantity > 0
-    ) {
-      const newQuantity = (item as ConsumablePTR2e).system.quantity - 1;
-      if (newQuantity > 0) {
-        await item.update({
-          "system.quantity": newQuantity,
-        });
-      } else {
-        await item.delete();
-      }
-    }
-
     return results;
   }
 
@@ -247,6 +231,50 @@ class CheckPTR2e {
       modifier.ignored = ignored;
     }
 
+    for (const modifier of check.modifiers.filter(m => m.predicate.length !== 0)) {
+      for (const [uuid, targetContext] of Object.entries(context.contexts)) {
+        if(modifier.ignored) {
+          const sharedMod = sharedModifiers.get(modifier.slug);
+          if (sharedMod && sharedMod.appliesTo.get(uuid as ActorUUID)) continue;
+          if (modifier.predicate.test(targetContext.options)) {
+            if (sharedMod) {
+              sharedMod.appliesTo.set(uuid as ActorUUID, true);
+              sharedMod.ignored = false;
+            }
+            else {
+              const newMod = modifier.clone();
+              newMod.appliesTo.set(uuid as ActorUUID, true);
+              newMod.ignored = false;
+              sharedModifiers.set(newMod.slug, newMod);
+              check.delete(modifier);
+            }
+          }
+          continue;
+        }
+        const sharedMod = sharedModifiers.get(modifier.slug);
+        if(!modifier.predicate.test(targetContext.options)) {
+          if(sharedMod) {
+            sharedMod.appliesTo.set(uuid as ActorUUID, false);
+          }
+          else {
+            const newMod = modifier.clone();
+            newMod.appliesTo.set(uuid as ActorUUID, false);
+            sharedModifiers.set(newMod.slug, newMod);
+            check.delete(modifier);
+          }
+        } else {
+          if(sharedMod) {
+            sharedMod.appliesTo.set(uuid as ActorUUID, true);
+          } else {
+            const newMod = modifier.clone();
+            newMod.appliesTo.set(uuid as ActorUUID, true);
+            sharedModifiers.set(newMod.slug, newMod);
+            check.delete(modifier);
+          }
+        }
+      }
+    }
+
     const rollOptions = context.options ?? new Set();
 
     // Figure out the default roll mode (if not already set by the event)
@@ -259,9 +287,9 @@ class CheckPTR2e {
 
     // If a modifier dialog is provided, update the details and return early
     // The original roll will handle the results.
-    if(context.modifierDialog) {
+    if (context.modifierDialog) {
       const dialog = await context.modifierDialog.updateDetails(check, sharedModifiers, context).wait();
-      
+
       if (!dialog) {
         return null;
       }
@@ -315,7 +343,10 @@ class CheckPTR2e {
         attack: targetContext.self.attack,
         rip: !!targetContext.target?.rangeIncrement,
         outOfRange: !!targetContext.outOfRange,
-        flatDamage: targetCheck.total.damage?.flat ?? 0
+        flatDamage: targetCheck.total.damage?.flat ?? 0,
+        statMod: targetCheck.total.stat?.flat ?? 0,
+        effectivenessStage: targetCheck.total.effectiveness?.stage ?? 0,
+        ignoreImmune: !!targetContext.options.has("self:action:trait:ignore-type-immunity"),
       };
 
       const rolls: {
@@ -411,7 +442,7 @@ class CheckPTR2e {
         const pp = actor.system.powerPoints.value;
 
         if (pp < context.ppCost) {
-          ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.UnableToAct", {action: context.attack?.name ?? context.action ?? ""}) + game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: context.ppCost, current: pp }));
+          ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.UnableToAct", { action: context.attack?.name ?? context.action ?? "" }) + game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: context.ppCost, current: pp }));
           return null;
         }
 
@@ -466,23 +497,23 @@ class CheckPTR2e {
       }
     }
 
-    if(!context.isReroll && context.action?.startsWith("fling")) {
-        const fling = context.actor?.actions.attack.get(context.action);
-        if(fling?.flingItemId) {
-          const flingItem = context.actor?.items.get(fling.flingItemId) as Maybe<ItemPTR2e<ItemSystemsWithFlingStats>>;
-          if(flingItem) {
-            if(flingItem.system.quantity >= 1) {
-              await flingItem.update({ "system.quantity": flingItem.system.quantity - 1 });
-              ui.notifications.info(game.i18n.format("PTR2E.AttackWarning.FlingItemConsumed", { name: flingItem.name, quantity: flingItem.system.quantity }));
-            }
-            //TODO: Add setting for auto-delete.
-            // else {
-            //   await flingItem.delete();
-            //   ui.notifications.info(game.i18n.format("PTR2E.AttackWarning.FlingItemDestroyed", { name: flingItem.name }));
-            // }
+    if (!context.isReroll && context.action?.startsWith("fling")) {
+      const fling = context.actor?.actions.attack.get(context.action);
+      if (fling?.flingItemId) {
+        const flingItem = context.actor?.items.get(fling.flingItemId) as Maybe<ItemPTR2e<ItemSystemsWithFlingStats>>;
+        if (flingItem) {
+          if (flingItem.system.quantity >= 1) {
+            await flingItem.update({ "system.quantity": flingItem.system.quantity - 1 });
+            ui.notifications.info(game.i18n.format("PTR2E.AttackWarning.FlingItemConsumed", { name: flingItem.name, quantity: flingItem.system.quantity }));
           }
+          //TODO: Add setting for auto-delete.
+          // else {
+          //   await flingItem.delete();
+          //   ui.notifications.info(game.i18n.format("PTR2E.AttackWarning.FlingItemDestroyed", { name: flingItem.name }));
+          // }
         }
       }
+    }
 
     if (effectsToApply.length) {
       await context.actor?.applyRollEffects(effectsToApply);

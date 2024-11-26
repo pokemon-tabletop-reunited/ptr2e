@@ -4,15 +4,18 @@ import { StatisticData } from "./data.ts";
 import * as R from "remeda";
 import { CheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
 import { AttackRollResult } from "@system/rolls/check-roll.ts";
-import { ItemPTR2e, ItemSystemsWithActions } from "@item";
+import { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithActions } from "@item";
 import { ActorPTR2e } from "@actor";
 import { CheckContext } from "@system/data.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { extractEffectRolls, extractModifierAdjustments, extractModifiers, extractNotes } from "src/util/rule-helpers.ts";
+import { extractEffectRolls, extractModifierAdjustments, extractModifiers, extractNotes } from "src/util/change-helpers.ts";
 import { CheckRollContext } from "@system/rolls/data.ts";
 import { CheckPTR2e } from "@system/check.ts";
 import { AttackModifierPopup } from "@module/apps/modifier-popup/attack-modifier-popup.ts";
 import { ActionUUID } from "src/util/uuid.ts";
+import { TagTokenPrompt } from "@module/effects/changes/token-tag/prompt.ts";
+import ConsumableSystem from "@item/data/consumable.ts";
+import PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
 
 type AttackStatisticData = StatisticData & Required<Pick<StatisticData, "defferedValueParams" | 'modifiers' | 'domains' | 'rollOptions'>>;
 type AttackRollParameters = AttackStatisticRollParameters
@@ -46,9 +49,9 @@ class AttackStatistic extends Statistic {
     const { actor, item } = attack;
     if (!actor) throw Error("Attack must have an actor for Statistic to be created.");
 
-    if(!data.defferedValueParams) data.defferedValueParams = { resolvables: {}, injectables: {} };
-    if(!data.defferedValueParams.resolvables) data.defferedValueParams.resolvables = {};
-    if(!data.defferedValueParams.injectables) data.defferedValueParams.injectables = {};
+    if (!data.defferedValueParams) data.defferedValueParams = { resolvables: {}, injectables: {} };
+    if (!data.defferedValueParams.resolvables) data.defferedValueParams.resolvables = {};
+    if (!data.defferedValueParams.injectables) data.defferedValueParams.injectables = {};
     data.defferedValueParams.resolvables.actor ??= actor;
     data.defferedValueParams.injectables.actor ??= actor;
     data.defferedValueParams.resolvables.item ??= item;
@@ -178,13 +181,65 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     //const consumeAmmo = args.consumeAmmo ?? this.itemConsumesAmmo;
     //TODO: If ammo is consumed, check if there is ammo to consume
 
+    // Add Options from the attack
+    options.add(`attack:${this.attack.slug}`);
+    options.add(`attack:slug:${this.attack.slug}`);
+    options.add(`attack:category:${this.attack.category}`);
+    for (const type of this.attack.types) options.add(`attack:type:${type}`);
+
     const targets: { actor: ActorPTR2e, token?: TokenPTR2e }[] = (() => {
       if (args.targets) return args.targets.map(t => ({ actor: t, token: t.token?.object as TokenPTR2e }));
       return [...game.user.targets ?? []].map(t => ({ actor: t.actor as ActorPTR2e, token: t as TokenPTR2e }));
     })()
 
+    if (this.attack.slug === "fling-actor-toss") {
+      game.user.targets.clear();
+      const target = await new TagTokenPrompt({ prompt: "PTR2E.UI.TokenTagPrompt.TargetTokenFling", requirements: null }).resolveTarget();
+      if (!target?.actor) return null;
+      if (!target.actor.isAllyOf(this.actor)) {
+        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingTargetNotAlly"));
+        return null;
+      }
+      const index = targets.findIndex(t => t.actor === target.actor);
+      if (index !== -1) {
+        targets.splice(index, 1);
+      }
+
+      const powerModifier = this.modifiers.find(m => m.type === "power" && m.method === "base");
+      if (!powerModifier) {
+        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingNoPower"));
+        return null;
+      }
+      const actorLift = this.actor.skills["lift"]?.mod ?? 1;
+      const targetWC = target.actor.species?.size?.weightClass ?? 1;
+      const power = powerModifier.modifier = Math.floor(20 + (actorLift / 4) + (targetWC * 3));
+
+      const actorCatMod = this.actor.size?.rank ?? 1;
+      const thrownCatMod = target.actor.size?.rank ?? 1;
+      const accuracy = Math.floor(75 + (actorLift / 5) + actorCatMod - (4 * thrownCatMod));
+      if (accuracy < 0) {
+        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingAccuracyTooLow"));
+        return null;
+      }
+
+      const range = Math.floor(8 + (actorLift / 6) + actorCatMod - (2 * thrownCatMod));
+      if (range < 0) {
+        ui.notifications.warn(game.i18n.localize("PTR2E.AttackWarning.FlingRangeTooLow"));
+        return null;
+      }
+
+      this.attack.power = power;
+      this.attack.accuracy = accuracy;
+      if(this.attack.range) {
+        this.attack.range.distance = range;
+      }
+      this.attack.name = `Fling - ${target.actor.name}`;
+      this.attack.updateSource({ name: `Fling - ${target.actor.name}`, power, accuracy, range: {distance: range}, traits: this.attack._source.traits });
+      this.attack.prepareDerivedData();
+    }
+
     const variants = args.variants ?? this.attack.variants?.length ? this.attack.variants : [];
-    if(variants.length) args.skipDialog = false; 
+    if (variants.length) args.skipDialog = false;
 
     // Get context without target for basic information 
     const context = await this.actor.getCheckContext({
@@ -196,8 +251,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
       traits: args.traits ?? this.item.traits,
     }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>;
 
-    if(context.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
-      ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", {name: this.attack.name}));
+    if (context.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
+      ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", { name: this.attack.name }));
       return null;
     }
 
@@ -229,8 +284,8 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         traits: args.traits ?? this.item.traits,
       }) as CheckContext<ActorPTR2e, AttackCheck<TParent>, ItemPTR2e<ItemSystemsWithActions, ActorPTR2e>>
 
-      if(currContext.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
-        ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", {name: this.attack.name}));
+      if (currContext.self.actor.flags.ptr2e.disableActionOptions?.disabled.includes(this.attack.uuid as ActionUUID)) {
+        ui.notifications.warn(game.i18n.format("PTR2E.AttackWarning.AfflictionDisabled", { name: this.attack.name }));
         return null;
       }
 
@@ -289,7 +344,7 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
         if (context.self.attack.category === "status" || !context.self.attack.power) ommited.add("damage");
         if (context.self.attack.category === "status") ommited.add("crit");
         if (!context.self.attack.accuracy) ommited.add("accuracy");
-        if(context.self.attack instanceof SummonAttackPTR2e && context.self.attack.damageType === "flat") ommited.add("crit");
+        if (context.self.attack instanceof SummonAttackPTR2e && context.self.attack.damageType === "flat") ommited.add("crit");
 
         return ommited;
       })(),
@@ -305,6 +360,21 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const rolls = await CheckPTR2e.rolls(check, checkContext, args.callback);
     if (rolls?.length) {
       //TODO: Apply post-roll options from changes
+      if(rolls[0].accuracy && rolls[0].crit) {
+        if (this.attack.slug.startsWith("fling") && this.attack.flingItemId) {
+          const flingItemId = this.attack.flingItemId;
+          const flingItem = this.actor.items.get(flingItemId) as ItemPTR2e;
+          if(flingItem?.type === "consumable" && (flingItem.system as ConsumableSystem).consumableType === "pokeball") {
+            const action = PokeballActionPTR2e.fromConsumable(flingItem as ConsumablePTR2e)
+            await action.roll({ accuracyRoll: rolls[0].accuracy, critRoll: rolls[0].crit});
+          }
+        }
+      }
+    }
+
+    // Reset the fling actor toss attack data.
+    if(this.attack.slug === "fling-actor-toss") {
+      this.actor.generateFlingAttack();
     }
 
     return rolls;

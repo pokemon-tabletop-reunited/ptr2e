@@ -2471,6 +2471,13 @@ body .application.sheet .form-group {
   margin-left: auto;
   align-self: flex-end;
 }
+.application.sheet.skill-sheet .skill-editor .controls .points .skill-filter {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  align-items: center;
+  align-content: center;
+}
 .application.sheet.skill-sheet .skill-editor .skills {
   display: flex;
   flex-direction: column;
@@ -4761,20 +4768,24 @@ body .application.sheet .form-group {
   text-align: center;
 }
 .application.sheet.modifier-popup main .modifier .mod {
-  flex: 0 0 40%;
+  flex: 0 0 38%;
   overflow: hidden;
   text-overflow: ellipsis;
   text-wrap: nowrap;
   padding: 0 0.5rem;
 }
+.application.sheet.modifier-popup main .modifier .type {
+  flex: 0 0 32%;
+}
 .application.sheet.modifier-popup main .modifier .value {
-  flex: 0 0 40%;
+  flex: 0 0 calc(30% - 52px - 0.6rem);
 }
 .application.sheet.modifier-popup main .modifier .exclude {
-  flex: 0 0 45px;
+  flex: 0 0 50px;
   display: flex;
   flex-direction: row;
   justify-content: center;
+  overflow: hidden;
 }
 .application.sheet.modifier-popup main .modifier .exclude input {
   align-content: center;
