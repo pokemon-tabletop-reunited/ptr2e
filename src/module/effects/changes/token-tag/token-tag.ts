@@ -2,7 +2,7 @@ import { ActorPTR2e } from "@actor";
 import { ChangeModel } from "@data";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { UUIDUtils } from "src/util/uuid.ts";
-import { TagTokenPrompt as TokenTagPrompt } from "./prompt.ts";
+import { TagTokenPrompt } from "./prompt.ts";
 
 export default class TokenTagChangeSystem extends ChangeModel {
   static override TYPE = "token-tag";
@@ -22,7 +22,7 @@ export default class TokenTagChangeSystem extends ChangeModel {
       fromUuidSync(this.value ?? "")
       ?? (game.user.targets.size === 1
         ? Array.from(game.user.targets)[0].document
-        : await new TokenTagPrompt({ prompt: null, requirements: null }).resolveTarget());
+        : await new TagTokenPrompt({ prompt: null, requirements: null }).resolveTarget());
 
     if (!(token instanceof TokenDocumentPTR2e)) {
       // No token was targeted: abort creating item

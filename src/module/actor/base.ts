@@ -507,6 +507,9 @@ class ActorPTR2e<
         "actions": [getFlingAttack({
           free: true,
           variant: false
+        }),getFlingAttack({
+          name: "Actor Toss",
+          slug: "actor-toss",
         })],
         "grade": "E"
       },

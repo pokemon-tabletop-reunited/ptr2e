@@ -55,6 +55,10 @@ export class ActorSizePTR2e {
     max: 8,
   }
 
+  get rank(): number {
+    return ActorSizePTR2e.sizeRanks[this.value];
+  }
+
   /**
    * Test for equality between this and another size, falling back to comparing areas in case of a category tie
    * @param size The size to which this size is being compared
