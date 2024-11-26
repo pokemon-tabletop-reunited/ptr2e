@@ -34,7 +34,7 @@ class CaptureRoll extends CheckRoll {
     const dc = new Roll(this.critDcFormula, {
       catchRate: catchRate.total,
       // TODO: Implement
-      caught: Math.max(10, data.caughtMons || 1),
+      caught: data.caughtMons || 0,
       bonus: data.critMultiplier || 1,
     }).evaluateSync();
 
