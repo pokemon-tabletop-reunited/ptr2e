@@ -1178,6 +1178,30 @@ class ActorPTR2e<
       : null;
     if (rangePenalty) context.self.modifiers.push(rangePenalty);
 
+    const sizePenalty = (() => {
+      const target = context.target?.actor;
+      if (!target) return null;
+      const difference = target.size.difference(context.self.actor.size)
+      if(difference >= 2) return new ModifierPTR2e({
+        label: "PTR2E.Modifiers.size",
+        slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
+        modifier: 1,
+        method: "stage",
+        type: "accuracy",
+        appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
+      });
+      if(difference <= -2) return new ModifierPTR2e({
+        label: "PTR2E.Modifiers.size",
+        slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
+        modifier: -1,
+        method: "stage",
+        type: "accuracy",
+        appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
+      });
+      return null;
+    })();
+    if (sizePenalty) context.self.modifiers.push(sizePenalty);
+
     const evasionStages = context.target?.actor?.evasionStage ?? 0;
     if (evasionStages !== 0) {
       const evasionModifier = new ModifierPTR2e({
