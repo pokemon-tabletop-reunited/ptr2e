@@ -21,7 +21,7 @@
         {{#if rolls.shake3}}{{{rolls.shake3}}}{{/if}}
         {{#if rolls.shake4}}{{{rolls.shake4}}}{{/if}}
     </article>
-    <section class="results">
+    <section class="results" {{#if (isGm)}}style="height: 240px;"{{/if}}>
         <header><label>Generating Results...</label></header>
         <div class="accuracy">
             <label>Accuracy Roll</label>{{#if state.accuracy}}<span class="success">Hits!</span>{{else}}<span class="failure"> Misses...</span>{{/if}}
@@ -52,15 +52,20 @@
             {{/unless}}
         {{/if}}
         <footer class="results" style="animation-delay: {{state.delay}}s">
-            {{#if state.accuracy}}
-                {{#if state.success}}
-                    <span class="success">Success! The Pokémon was captured!</span>
-                {{else}}
-                    <span class="failure">Failure! The Pokémon broke free!</span>
-                {{/if}}
+          {{#if state.accuracy}}
+            {{#if state.success}}
+              <span class="success">Success! The Pokémon was captured!</span>
             {{else}}
-                <span class="failure">The Pokéball missed the Pokémon!</span>
+              <span class="failure">Failure! The Pokémon broke free!</span>
             {{/if}}
+          {{else}}
+              <span class="failure">The Pokéball missed the Pokémon!</span>
+          {{/if}}
+          {{#if (isGm)}}
+            <button type="button" class="mt-1" data-action="apply-capture" data-origin-uuid="{{origin.uuid}}" data-target-uuid="{{target.uuid}}" data-success="{{state.success}}">
+              Apply Capture
+            </button>
+          {{/if}}
         </footer>
     </section>
 </main>

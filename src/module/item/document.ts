@@ -5,8 +5,6 @@ import { ActiveEffectPTR2e, EffectSourcePTR2e } from "@effects";
 import { ItemFlagsPTR2e } from "./data/system.ts";
 import { ActionsCollections } from "@actor/actions.ts";
 import { SpeciesSystemModel } from "./data/index.ts";
-import ConsumableSystem from "./data/consumable.ts";
-import PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
 import { preImportJSON } from "@module/data/doc-helper.ts";
 import { MigrationList, MigrationRunner } from "@module/migration/index.ts";
 import * as R from "remeda";
@@ -146,10 +144,10 @@ class ItemPTR2e<
     if (this.hasActions()) this._actions.addActionsFromItem(this);
     if (!this.parent) return;
     if (this.hasActions()) this.parent._actions.addActionsFromItem(this);
-    if (this.type === "consumable" && (this.system as ConsumableSystem).consumableType === "pokeball") {
-      const action = PokeballActionPTR2e.fromConsumable(this as ItemPTR2e<ConsumableSystem, ActorPTR2e>);
-      this.parent._actions.set(action.slug, action);
-    }
+    // if (this.type === "consumable" && (this.system as ConsumableSystem).consumableType === "pokeball") {
+    //   const action = PokeballActionPTR2e.fromConsumable(this as ItemPTR2e<ConsumableSystem, ActorPTR2e>);
+    //   this.parent._actions.set(action.slug, action);
+    // }
 
     this.rollOptions.addOption("item", `${this.type}:${this.slug}`);
   }

@@ -11,7 +11,7 @@ import {
   PokeballRollCallback,
   PokeballRollResults,
 } from "@system/rolls/check-roll.ts";
-import { CheckRollContext } from "@system/rolls/data.ts";
+import { CaptureCheckRollContext, CheckRollContext } from "@system/rolls/data.ts";
 import { DegreeOfSuccess } from "@system/rolls/degree-of-success.ts";
 import { sluggify } from "@utils";
 import { CheckContext } from "./data.ts";
@@ -25,7 +25,7 @@ import { ActiveEffectPTR2e } from "@effects";
 class CheckPTR2e {
   static async rollPokeball(
     check: AttackCheckModifier,
-    context: CheckRollContext,
+    context: CaptureCheckRollContext,
     callback?: PokeballRollCallback
   ): Promise<PokeballRollResults | null> {
     // TODO: Add user setting
@@ -71,15 +71,15 @@ class CheckPTR2e {
       check,
       ballBonus: (context.item?.system instanceof ConsumableSystemModel && context.item.system.consumableType === "pokeball" ? context.item.system.modifier : 1) || 1,
       critBonus: 1,
-      miscBonus: 1,
+      miscBonus: check.total?.any?.flat ?? 0,
       target: context.target?.actor,
       user: context.actor
     }
 
     const rolls: PokeballRollResults["rolls"] = await (async () => {
       const [accuracy, crit, shake1, shake2, shake3, shake4] = await Promise.all([
-        CaptureRoll.createFromData(options, data, "accuracy")?.evaluate() ?? null,
-        CaptureRoll.createFromData(options, data, "crit")?.evaluate() ?? null,
+        context.accuracyRoll ?? null,
+        context.critRoll ?? null,
         CaptureRoll.createFromData(options, data, "shake1")?.evaluate() ?? null,
         CaptureRoll.createFromData(options, data, "shake2")?.evaluate() ?? null,
         CaptureRoll.createFromData(options, data, "shake3")?.evaluate() ?? null,
@@ -170,23 +170,6 @@ class CheckPTR2e {
 
     if (callback) {
       await callback(context, results, message);
-    }
-
-    const item = context.item ?? null;
-    if (
-      item &&
-      item.type === "consumable" &&
-      item.actor.items.has(item.id) &&
-      (item as ConsumablePTR2e).system.quantity > 0
-    ) {
-      const newQuantity = (item as ConsumablePTR2e).system.quantity - 1;
-      if (newQuantity > 0) {
-        await item.update({
-          "system.quantity": newQuantity,
-        });
-      } else {
-        await item.delete();
-      }
     }
 
     return results;

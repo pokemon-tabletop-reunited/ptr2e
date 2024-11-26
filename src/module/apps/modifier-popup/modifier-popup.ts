@@ -83,7 +83,7 @@ export class ModifierPopup extends foundry.applications.api.HandlebarsApplicatio
 
     override async _prepareContext(): Promise<Record<string, unknown>> {
         const challengeRating = (() => {
-            if(this.context.type === "luck-check") return null;
+            if(["luck-check", "attack-roll", "pokeball-check"].includes(this.context.type!)) return null;
             const value = this.check.modifiers.find(s => s.slug === "challenge-rating")?.value;
             switch(value) {
                 case 60: return "effortless";

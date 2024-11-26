@@ -397,6 +397,11 @@ interface StatisticRollParameters<TCallback extends CheckRollCallback | AttackRo
   callback?: TCallback;
 }
 
+interface CaptureStatisticRollParameters extends StatisticRollParameters<PokeballRollCallback> {
+  accuracyRoll: Rolled<CheckRoll>;
+  critRoll: Rolled<CheckRoll>;
+}
+
 interface AttackStatisticRollParameters extends StatisticRollParameters<AttackRollCallback> {
   consumeAmmo?: boolean
   variants?: string[]
@@ -416,4 +421,4 @@ interface RollOptionConfig {
 }
 
 export { Statistic, StatisticCheck };
-export type { StatisticRollParameters, RollOptionConfig, AttackStatisticRollParameters, BaseStatisticCheck }
+export type { StatisticRollParameters, CaptureStatisticRollParameters, RollOptionConfig, AttackStatisticRollParameters, BaseStatisticCheck }

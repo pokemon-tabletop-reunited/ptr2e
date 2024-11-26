@@ -7,81 +7,18 @@ class CaptureRoll extends CheckRoll {
     static override createFromData(
         options: CheckRollDataPTR2e,
         data?: CaptureRollCreationData,
-        type?: "accuracy" | "crit" | "shake1" | "shake2" | "shake3" | "shake4"
+        type?: "shake1" | "shake2" | "shake3" | "shake4"
     ): CheckRoll | null {
         if (!type) throw new Error("CaptureRoll must have a type.");
         if (!data) throw new Error("CaptureRoll must have data.");
 
         switch (type) {
-            case "accuracy":
-                return CaptureRoll.createAccuracyRoll(data, options);
-            case "crit":
-                return CaptureRoll.createCritRoll(data, options);
             case "shake1":
             case "shake2":
             case "shake3":
             case "shake4":
                 return CaptureRoll.createShakeRoll(data, options);
         }
-    }
-
-    static createAccuracyRoll(
-        data: CaptureRollCreationData,
-        options: CheckRollDataPTR2e
-    ): CaptureRoll | null {
-        options.moveAccuracy = 100;
-
-        const formula = "1d100ms@dc";
-        const dc = ((
-            baseAccuracy: number,
-            accuracyModifiers: { flat: number; stage: number },
-            evasionStage: number
-        ) => {
-            const { flat: accuracyFlat, stage: accuracyStage } = accuracyModifiers;
-            const stageBonus = (() => {
-                const accuracy = accuracyStage;
-                if (Math.abs(accuracy) === Infinity) return -Infinity;
-                const evasion = evasionStage;
-                const stages = Math.clamp(accuracy - evasion, -6, 6);
-                options.adjustedStages = stages;
-                return stages >= 0 ? (3 + stages) / 3 : 3 / (3 - stages);
-            })();
-            options.otherModifiers = accuracyFlat;
-            options.stageModifier = stageBonus;
-
-            if (stageBonus === -Infinity) return 0;
-            if (options.outOfRange) return 0;
-
-            return Math.clamp(Math.floor((baseAccuracy + accuracyFlat) * stageBonus), 1, 100);
-        })(
-            options.moveAccuracy,
-            data.check.total?.accuracy ?? { flat: 0, stage: 0 },
-            data.check.total?.evasion?.stage ?? 0
-        );
-
-        options.accuracyDC = dc;
-
-        return new CaptureRoll(formula, { dc }, options);
-    }
-
-    static createCritRoll(
-        data: CaptureRollCreationData,
-        options: CheckRollDataPTR2e
-    ): CaptureRoll | null {
-        const formula = "1d100ms@dc";
-        const catchRate = this.getCatchRate(data);
-        if (!catchRate) return null;
-
-        const dc = new Roll(this.critDcFormula, {
-            catchRate: catchRate.total,
-            // TODO: Implement
-            caught: 0,
-            bonus: data.critBonus || 1,
-        }).evaluateSync();
-
-        options.critDC = dc;
-
-        return new CaptureRoll(formula, { dc: dc.total }, options);
     }
 
     static createShakeRoll(

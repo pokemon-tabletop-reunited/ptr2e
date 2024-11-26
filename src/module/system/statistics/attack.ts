@@ -4,7 +4,7 @@ import { StatisticData } from "./data.ts";
 import * as R from "remeda";
 import { CheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
 import { AttackRollResult } from "@system/rolls/check-roll.ts";
-import { ItemPTR2e, ItemSystemsWithActions } from "@item";
+import { ConsumablePTR2e, ItemPTR2e, ItemSystemsWithActions } from "@item";
 import { ActorPTR2e } from "@actor";
 import { CheckContext } from "@system/data.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
@@ -14,6 +14,8 @@ import { CheckPTR2e } from "@system/check.ts";
 import { AttackModifierPopup } from "@module/apps/modifier-popup/attack-modifier-popup.ts";
 import { ActionUUID } from "src/util/uuid.ts";
 import { TagTokenPrompt } from "@module/effects/changes/token-tag/prompt.ts";
+import ConsumableSystem from "@item/data/consumable.ts";
+import PokeballActionPTR2e from "@module/data/models/pokeball-action.ts";
 
 type AttackStatisticData = StatisticData & Required<Pick<StatisticData, "defferedValueParams" | 'modifiers' | 'domains' | 'rollOptions'>>;
 type AttackRollParameters = AttackStatisticRollParameters
@@ -358,6 +360,16 @@ class AttackCheck<TParent extends AttackStatistic = AttackStatistic> implements 
     const rolls = await CheckPTR2e.rolls(check, checkContext, args.callback);
     if (rolls?.length) {
       //TODO: Apply post-roll options from changes
+      if(rolls[0].accuracy && rolls[0].crit) {
+        if (this.attack.slug.startsWith("fling") && this.attack.flingItemId) {
+          const flingItemId = this.attack.flingItemId;
+          const flingItem = this.actor.items.get(flingItemId) as ItemPTR2e;
+          if(flingItem?.type === "consumable" && (flingItem.system as ConsumableSystem).consumableType === "pokeball") {
+            const action = PokeballActionPTR2e.fromConsumable(flingItem as ConsumablePTR2e)
+            await action.roll({ accuracyRoll: rolls[0].accuracy, critRoll: rolls[0].crit});
+          }
+        }
+      }
     }
 
     // Reset the fling actor toss attack data.
