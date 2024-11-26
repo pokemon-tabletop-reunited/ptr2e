@@ -33,15 +33,13 @@
         "cost": {
           "activation": "free"
         },
-        "description": "<p>Passive: The user is also immune to the damage and effects of damaging Fighting-Type and Normal-Type attacks and uses the attack Curse as if a Ghost-Type.</p>",
-        "img": "icons/svg/explosion.svg"
+        "description": "<p>Pasive: The user is also immune to the damage and effects of damaging Fighting-Type and Normal-Type attacks and uses the attack Curse as if a Ghost-Type.</p>"
       }
     ],
-    "description": "<p>Effect: Increases the Damage of the user's Ghost-Type attacks by 50%. Passive: The user is also immune to the damage and effects of damaging Fighting-Type and Normal-Type attacks and uses the attack Curse as if a Ghost-Type.</p>",
+    "description": "<p>Effect: Increases the Damage of the user's Ghost-Type attacks by 50%. Passive: The user is also immune to the damage and effects of damaging Fighting-Type and Normal-Type attacks and gains the [Ghost] trait without fully becoming Ghost-Type.</p>",
     "traits": [
       "innate",
-      "defensive",
-      "partial-automation"
+      "defensive"
     ],
     "slug": "phantom-body",
     "_migration": {
@@ -68,6 +66,35 @@
             "priority": null,
             "ignored": false,
             "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "fighting-attack-damage-percent",
+            "value": -100,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "normal-attack-damage-percent",
+            "value": -100,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "Ghost",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
           }
         ],
         "slug": null,
@@ -96,12 +123,12 @@
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
-        "coreVersion": "12.330",
+        "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.0.3",
+        "systemVersion": "0.10.0-alpha.4.0.0",
         "createdTime": 1722260902553,
-        "modifiedTime": 1722260917843,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1732573141329,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }
   ]
