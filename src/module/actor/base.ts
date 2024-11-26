@@ -1185,7 +1185,7 @@ class ActorPTR2e<
       if(difference >= 2) return new ModifierPTR2e({
         label: "PTR2E.Modifiers.size",
         slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
-        modifier: 1,
+        modifier: difference >= 4 ? 2 : 1,
         method: "stage",
         type: "accuracy",
         appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
@@ -1193,7 +1193,7 @@ class ActorPTR2e<
       if(difference <= -2) return new ModifierPTR2e({
         label: "PTR2E.Modifiers.size",
         slug: `size-penalty-unicqi-${appliesTo ?? fu.randomID()}`,
-        modifier: -1,
+        modifier: difference <= -4 ? -2 : -1,
         method: "stage",
         type: "accuracy",
         appliesTo: appliesTo ? new Map([[appliesTo, true]]) : null,
