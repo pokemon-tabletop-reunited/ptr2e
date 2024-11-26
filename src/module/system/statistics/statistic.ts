@@ -9,7 +9,7 @@ import {
   extractModifierAdjustments,
   extractModifiers,
   extractNotes,
-} from "src/util/rule-helpers.ts";
+} from "src/util/change-helpers.ts";
 import { TokenDocumentPTR2e } from "@module/canvas/token/document.ts";
 import { CheckDC } from "@system/rolls/degree-of-success.ts";
 import { RollNote, RollNoteSource } from "@system/notes.ts";

@@ -12,7 +12,7 @@ import {
 } from "@actor";
 import { ActiveEffectPTR2e, ActiveEffectSystem, EffectSourcePTR2e } from "@effects";
 import { TypeEffectiveness } from "@scripts/config/effectiveness.ts";
-import { ActionPTR2e, AttackPTR2e, PokemonType, PTRCONSTS, RollOptionChangeSystem, RollOptionManager } from "@data";
+import { ActionPTR2e, AttackPTR2e, PokemonType, PTRCONSTS, RollOptionChangeSystem, RollOptionManager, Trait } from "@data";
 import { ActorFlags } from "types/foundry/common/documents/actor.js";
 import type { RollOptions } from "@module/data/roll-option-manager.ts";
 import FolderPTR2e from "@module/folder/document.ts";
@@ -24,7 +24,7 @@ import { ActionsCollections } from "./actions.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import { BaseStatisticCheck, Statistic, StatisticCheck } from "@system/statistics/statistic.ts";
 import { CheckContext, CheckContextParams, RollContext, RollContextParams } from "@system/data.ts";
-import { extractEffectRolls, extractEphemeralEffects, extractModifiers, extractTargetModifiers, processPreUpdateHooks } from "src/util/rule-helpers.ts";
+import { extractEffectRolls, extractEphemeralEffects, extractModifiers, extractTargetModifiers, processPreUpdateHooks } from "src/util/change-helpers.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
 import * as R from "remeda";
 import { ModifierPTR2e } from "@module/effects/modifiers.ts";
@@ -616,6 +616,11 @@ class ActorPTR2e<
           }
         }
       }
+    }
+    for(const trait of this.traits) {
+      if(!trait.changes?.length) continue;
+      const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>;
+      if(effect) yield effect;
     }
     yield* super.allApplicableEffects() as Generator<ActiveEffectPTR2e<this>>
   }

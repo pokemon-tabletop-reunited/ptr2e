@@ -139,7 +139,8 @@ class TraitsSettingsMenu extends foundry.applications.api.HandlebarsApplicationM
                     label: trait.label,
                     slug: sluggify(trait.label),
                     description: trait.description || "",
-                    related: []
+                    related: [],
+                    changes: []
                 };
                 traits.set(newTrait.slug, newTrait);
                 continue;

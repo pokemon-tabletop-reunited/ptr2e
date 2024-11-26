@@ -137,6 +137,12 @@ class ItemPTR2e<
     super.prepareDerivedData();
     if (this.type === "ptu-item") return;
 
+    for(const trait of this.traits ?? []) {
+      if(!trait.changes?.length) continue;
+      const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>
+      this.effects.set(effect.slug, effect);
+    }
+
     if (this.hasActions()) this._actions.addActionsFromItem(this);
     if (!this.parent) return;
     if (this.hasActions()) this.parent._actions.addActionsFromItem(this);

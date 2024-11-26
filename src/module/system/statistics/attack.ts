@@ -8,7 +8,7 @@ import { ItemPTR2e, ItemSystemsWithActions } from "@item";
 import { ActorPTR2e } from "@actor";
 import { CheckContext } from "@system/data.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import { extractEffectRolls, extractModifierAdjustments, extractModifiers, extractNotes } from "src/util/rule-helpers.ts";
+import { extractEffectRolls, extractModifierAdjustments, extractModifiers, extractNotes } from "src/util/change-helpers.ts";
 import { CheckRollContext } from "@system/rolls/data.ts";
 import { CheckPTR2e } from "@system/check.ts";
 import { AttackModifierPopup } from "@module/apps/modifier-popup/attack-modifier-popup.ts";

@@ -6,7 +6,7 @@ import { StatisticData } from "./data.ts";
 import { PokeballRollCallback, PokeballRollResults } from "@system/rolls/check-roll.ts";
 import { AttackCheckModifier, ModifierPTR2e, StatisticModifier } from "@module/effects/modifiers.ts";
 import * as R from "remeda";
-import { extractModifierAdjustments, extractModifiers, extractNotes } from "src/util/rule-helpers.ts";
+import { extractModifierAdjustments, extractModifiers, extractNotes } from "src/util/change-helpers.ts";
 import { CheckPTR2e } from "@system/check.ts";
 import { CheckRollContext } from "@system/rolls/data.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
