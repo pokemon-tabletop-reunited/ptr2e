@@ -105,7 +105,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
   } | null, dataOnly: boolean): Promise<Partial<ActorPTR2e['_source']>[] | void> {
     if (!canvas.scene && !dataOnly) return void ui.notifications.warn("Cannot generate Actors from Blueprint without an active scene");
 
-    if(dataOnly && !options) {
+    if (dataOnly && !options) {
       options = {} as unknown as typeof options;
     }
 
@@ -310,13 +310,13 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
         function getEvolution(evolution: EvolutionData): EvolutionData {
           if (!evolution?.evolutions) return evolution;
-          
+
           const evolutions = evolution.evolutions.filter((e) => {
             const andCases = e.methods.filter(m => m.operand === "and");
             const orCases = e.methods.filter(m => m.operand === "or");
 
             function validateEvolution(method: typeof e['methods'][number]): boolean {
-              switch(method.type) {
+              switch (method.type) {
                 case "level": {
                   return level >= method.level;
                 }
@@ -340,16 +340,16 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
                   ? orCases.some(validateEvolution)
                   : false;
           });
-          
-          if(!evolutions.length) return evolution;
-          if(evolutions.length > 1) {
+
+          if (!evolutions.length) return evolution;
+          if (evolutions.length > 1) {
             // Pick a random evolution path to follow
             return getEvolution(randomFromList(evolutions));
           }
           return getEvolution(evolutions[0]);
         }
         const evolution = getEvolution(species.evolutions as unknown as EvolutionData)
-        if(!evolution?.uuid) return species;
+        if (!evolution?.uuid) return species;
 
         return (await fromUuid<ItemPTR2e<SpeciesSystem>>(evolution.uuid))?.system?.toObject() ?? species;
       })();
@@ -413,7 +413,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           }
 
           for (let i = 0; i < points; i += 4) {
-            stats[bag.get()]+=4;
+            stats[bag.get()] += 4;
           }
           return stats;
         };
@@ -490,9 +490,9 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         return items;
       })();
 
-      const img = await (async () => {
+      const { portrait: img, token: tokenImage } = await (async () => {
         const config = game.ptr.data.artMap.get(evolution.slug || sluggify(blueprint.name));
-        if (!config) return "icons/svg/mystery-man.svg";
+        if (!config) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
         const resolver = await ImageResolver.createFromSpeciesData(
           {
             dexId: evolution.number,
@@ -501,7 +501,20 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           },
           config
         );
-        return resolver?.result || "icons/svg/mystery-man.svg";
+        if (!resolver?.result) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
+
+        const tokenResolver = await ImageResolver.createFromSpeciesData(
+          {
+            dexId: evolution.number,
+            shiny,
+            forms: evolution.form ? [evolution.form, "token"] : ["token"],
+          },
+          config
+        );
+        return {
+          portrait: resolver.result,
+          token: tokenResolver?.result ?? resolver.result
+        }
       })();
 
       // Add species item
@@ -512,9 +525,6 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
         system: evolution,
         _id: "actorspeciesitem"
       })
-
-      //TODO: Decouple this.
-      const tokenImage = img;
 
       const foundryDefaultTokenSettings = game.settings.get("core", "defaultToken");
 
