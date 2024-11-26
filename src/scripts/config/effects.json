@@ -913,19 +913,30 @@
     "system": {
       "changes": [
         {
+          "type": "token-tag",
+          "key": "duel"
+        },
+        {
           "type": "stage-modifier",
           "key": "all-crit",
           "value": 2,
-          "label": "Duel - targeting Duel partner",
+          "label": "Duel - Duel Partner",
           "mode": 2,
-          "priority": null,
-          "ignored": false
+          "predicate": ["target:mark:duel", "origin:mark:duel"]
         },
         {
           "type": "percentile-modifier",
           "key": "all-damage",
-          "label": "Duel - non-Duel target",
-          "value": -33.33
+          "label": "Duel - non-Duel Partner",
+          "value": -33.33,
+          "predicate": [
+            {
+              "not": "target:mark:duel"
+            },
+            {
+              "not": "origin:mark:duel"
+            }
+          ]
         },
         {
           "type": "grant-effect",

@@ -51,6 +51,7 @@ interface ActorSynthetics {
   effects: Record<string, { self: DeferredEffectRoll[], target: DeferredEffectRoll[], origin: DeferredEffectRoll[] }>;
   toggles: RollOptionToggle[];
   attackAdjustments: (() => AttackAdjustment)[];
+  tokenTags: Map<TokenDocumentUUID, string>;
   tokenOverrides: DeepPartial<Pick<TokenDocument['_source'], "light" | "name">> & {
     alpha?: number | null;
     texture?:

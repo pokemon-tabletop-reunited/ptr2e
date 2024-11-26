@@ -273,6 +273,7 @@ class ActorPTR2e<
       effects: {},
       toggles: [],
       attackAdjustments: [],
+      tokenTags: new Map(),
       tokenOverrides: {},
       preparationWarnings: {
         add: (warning: string) => preparationWarnings.add(warning),
@@ -1228,6 +1229,13 @@ class ActorPTR2e<
           null,
         ]
         : [null, null];
+
+    if(targetToken?.actor && selfToken?.actor) {
+      const targetMarks = targetToken.actor.synthetics.tokenTags.get(selfToken.document.uuid);
+      const originMarks = selfToken.actor.synthetics.tokenTags.get(targetToken.document.uuid);
+      if(targetMarks) params.options.add(`target:mark:${targetMarks}`);
+      if(originMarks) params.options.add(`origin:mark:${originMarks}`);
+    }
 
     const originEphemeralEffects = await extractEphemeralEffects({
       affects: "origin",
