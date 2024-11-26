@@ -894,9 +894,9 @@ class ActorPTR2e<
     }
     if(ignoreImmune && effectiveness === 0) effectiveness = 1;
     if(effectivenessStages !== 0) {
-      const positive = effectiveness > 0;
+      const positive = effectivenessStages > 0;
       for(let i = 0; i < Math.abs(effectivenessStages); i++) {
-        effectiveness *= positive ? 0.5 : 2;
+        effectiveness *= positive ? 2 : 0.5;
       }
     }
     return effectiveness;
