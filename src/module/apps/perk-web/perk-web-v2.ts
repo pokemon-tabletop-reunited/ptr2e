@@ -1,7 +1,7 @@
 import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "../appv2-expanded.ts";
 import { ActorPTR2e } from "@actor";
 import { Trait } from "@data";
-import { PerkPTR2e } from "@item";
+import { ItemPTR2e, PerkPTR2e } from "@item";
 import Tagify from "@yaireo/tagify";
 
 export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
@@ -45,9 +45,10 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             }
           }
           this.currentPerk = null;
+          this.connectionPerk = null;
           this.render(true);
         },
-        "refresh": function (this: PerkWebApp) { this.render(true); },
+        "refresh": PerkWebApp.refresh,
         "close-hud": function (this: PerkWebApp) { this.close(); }
       }
     },
@@ -127,13 +128,14 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
   actor: ActorPTR2e | null = null;
   currentPerk: PerkPTR2e | null = null;
+  connectionPerk: PerkPTR2e | null = null;
   editMode = false;
   zoomLevels = [0.2, 0.4, 0.65, 1, 1.3, 1.65] as const;
 
   _perkStore = new Map<string, PerkPTR2e>();
   _onScroll: () => void | null;
   _lineCache = new Map<string, SVGLineElement>();
-  _zoomAmount: this['zoomLevels'][number] = 0.2;
+  _zoomAmount: this['zoomLevels'][number] = 1;
 
   constructor(actor: ActorPTR2e, options?: Partial<ApplicationConfigurationExpanded>) {
     super(options);
@@ -149,6 +151,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       img?: string;
       x: number;
       y: number;
+      classes: string[]
     }
 
     if (this._perkStore.size === 0) {
@@ -163,10 +166,10 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       for (let y = 1; y < maxCol; y++) {
         const perk = this._perkStore.get(`${x}-${y}`);
         if (perk) {
-          grid.push({ name: perk.name, img: perk.system.node.config?.texture ?? perk.img, x, y });
+          grid.push({ name: perk.name, img: perk.system.node.config?.texture ?? perk.img, x, y, classes: perk === this.connectionPerk ? ["selected"] : [] });
         }
         else {
-          grid.push({ x, y });
+          grid.push({ x, y, classes: [] });
         }
       }
     }
@@ -205,13 +208,77 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     if (partId === "web") {
       const perks = htmlElement.querySelectorAll<HTMLElement>(".perk")
       for (const perk of perks) {
-        perk.addEventListener("click", (event) => {
+        perk.addEventListener("click", async (event) => {
           event.preventDefault();
-          const { i, j } = perk.dataset;
-          if (!i || !j) return;
-          const perkKey = `${Number(i)}-${Number(j)}`;
+          const { x, y } = perk.dataset;
+          if (!x || !y) return;
+          const perkKey = `${Number(x)}-${Number(y)}`;
+
+          if (this.editMode && this.connectionPerk) {
+            const perkDocument = this._perkStore.get(perkKey) ?? null;
+            if (!perkDocument || perkDocument === this.connectionPerk) return;
+
+            const getUpdatedConnections = (a: PerkPTR2e, b: PerkPTR2e, operation?: "add" | "remove") => {
+              const connected = a.system.toObject().node.connected;
+              const index = connected.indexOf(b.slug);
+              if (index === -1) {
+                if (operation === "remove") return { connected, operation };
+                connected.push(b.slug);
+                operation = "add";
+              } else {
+                if (operation === "add") return { connected, operation };
+                connected.splice(index, 1);
+                operation = "remove";
+              }
+              return { connected, operation };
+            };
+
+            const { connected: updateCurrent, operation } = getUpdatedConnections(this.connectionPerk, perkDocument);
+            const { connected: updateTarget } = getUpdatedConnections(perkDocument, this.connectionPerk, operation);
+
+            if (this.connectionPerk.pack === perkDocument.pack) {
+              await ItemPTR2e.updateDocuments([
+                {
+                  _id: this.connectionPerk._id,
+                  "system.node.connected": new Set(updateCurrent)
+                },
+                {
+                  _id: perkDocument._id,
+                  "system.node.connected": new Set(updateTarget)
+                }
+              ], this.connectionPerk.pack ? { pack: this.connectionPerk.pack } : {});
+            }
+            else {
+              await this.connectionPerk.update({ "system.node.connected": updateCurrent }, this.connectionPerk.pack ? { pack: this.connectionPerk.pack } : {});
+              await perkDocument.update({ "system.node.connected": updateTarget }), perkDocument.pack ? { pack: perkDocument.pack } : {};
+            }
+
+            PerkWebApp.refresh.call(this);
+            return;
+          }
+
           this.currentPerk = this._perkStore.get(perkKey) ?? null;
           this.render({ parts: ["hudPerk"] });
+        });
+        perk.addEventListener("dblclick", (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+          const { x, y } = perk.dataset;
+          if (!x || !y) return;
+          const perkKey = `${Number(x)}-${Number(y)}`;
+          const perkDocument = this._perkStore.get(perkKey) ?? null;
+          perkDocument?.sheet?.render(true);
+        });
+        perk.addEventListener("contextmenu", (event) => {
+          if (!this.editMode) return;
+          event.preventDefault();
+          event.stopPropagation();
+          const { x, y } = perk.dataset;
+          if (!x || !y) return;
+          const perkKey = `${Number(x)}-${Number(y)}`;
+          const perkDocument = this._perkStore.get(perkKey) ?? null;
+          this.connectionPerk = perkDocument === this.connectionPerk ? null : perkDocument;
+          this.render({ parts: ["web"] });
         });
       }
     }
@@ -281,9 +348,9 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     const elements = element.querySelectorAll<HTMLElement>(".perk-grid .perk");
     const elementMap = new Map<string, HTMLElement>();
     for (const el of elements) {
-      const { i, j } = el.dataset;
-      if (!i || !j) continue;
-      elementMap.set(`${Number(i)}-${Number(j)}`, el);
+      const { x, y } = el.dataset;
+      if (!x || !y) continue;
+      elementMap.set(`${Number(x)}-${Number(y)}`, el);
     }
 
     const madeConnections = new Set<string>();
@@ -376,18 +443,19 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       scrollLeft = element.scrollLeft;
       scrollTop = element.scrollTop;
 
-      element.style.cursor = this._zoomAmount === this.zoomLevels.at(-1) ? "unset" : "zoom-out";
+      // element.style.cursor = this._zoomAmount === this.zoomLevels.at(-1) ? "unset" : "zoom-out";
     })
 
     element.addEventListener("mouseleave", () => {
       isDown = false;
       isMoving = false;
-      element.style.cursor = this._zoomAmount === this.zoomLevels[0] ? "unset" : "zoom-in";
+      // element.style.cursor = this._zoomAmount === this.zoomLevels[0] ? "unset" : "zoom-in";
     });
 
     element.addEventListener("mouseup", () => {
       isDown = false;
-      element.style.cursor = this._zoomAmount === this.zoomLevels[0] ? "unset" : "zoom-in";
+      // element.style.cursor = this._zoomAmount === this.zoomLevels[0] ? "unset" : "zoom-in";
+      element.style.cursor = "unset";
       setTimeout(() => { isMoving = false }, 50);
     });
 
@@ -449,10 +517,29 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     this.renderSVG()
   }
 
-  override _onDrop(event: DragEvent): void {
+  override _onDragStart(event: DragEvent): void {
+    if (!this.editMode) return;
+
+    const element = event.currentTarget as HTMLElement;
+    if ('x' in element.dataset && 'y' in element.dataset) {
+      const x = Number(element.dataset.x);
+      const y = Number(element.dataset.y);
+      const perk = this._perkStore.get(`${x}-${y}`) ?? null;
+      if (!perk) return;
+
+      event.dataTransfer!.setData("text/plain", JSON.stringify(perk.toDragData()));
+    }
+  }
+
+  override async _onDrop(event: DragEvent) {
+    if (!this.editMode) return;
     const element = this.element;
     const grid = element.querySelector<HTMLElement>(".perk-grid");
     if (!grid) return;
+
+    const dragData = TextEditor.getDragEventData(event) as DropCanvasData;
+    const item = await ItemPTR2e.fromDropData(dragData) as PerkPTR2e;
+    if (!(item instanceof ItemPTR2e && item.type === "perk")) return;
 
     const bounding = grid.getBoundingClientRect();
     const zoom = this._zoomAmount
@@ -473,29 +560,41 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     const j = getGridSpace(y);
 
     const perk = this._perkStore.get(`${i}-${j}`) ?? this._perkStore.get(`${j}-${i}`);
-    if (!perk) {
-      console.log("No perk found at", i, j);
-      return;
+    if (perk) return;
+
+    const currentlyOnWeb = this._perkStore.get(`${item.system.node.x}-${item.system.node.y}`);
+    if (currentlyOnWeb === item) {
+      this._perkStore.delete(`${item.system.node.x}-${item.system.node.y}`);
     }
-    console.log("Perk found at", i, j, perk);
+    await item.update({ "system.node": { x: j, y: i } });
+    this._perkStore.set(`${j}-${i}`, item);
+    this.render({ parts: ["web"] })
+    return;
   }
 
   override _onFirstRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
     super._onFirstRender(context, options);
 
-    if(this.actor) {
-      this.actor.sheet.setPosition({left: 270, top: 20});
+    if (this.actor) {
+      this.actor.sheet.setPosition({ left: 270, top: 20 });
       this.actor.sheet.minimize();
     }
   }
 
   override _onClose(options: foundry.applications.api.HandlebarsRenderOptions): void {
     super._onClose(options);
-    if(this.actor) {
+    if (this.actor) {
       this.actor.sheet?.render(false)
       this.actor.sheet?.maximize();
       this.actor = null;
     }
+  }
+
+  static async refresh(this: PerkWebApp) {
+    this._perkStore.clear();
+    this._lineCache.clear();
+    this.currentPerk = null;
+    this.render(true);
   }
 }
 

@@ -6842,6 +6842,7 @@ ul.item-list.result-list li.item.rarity-unique {
   grid-template-rows: repeat(250, 48px);
   gap: 1.5rem;
   z-index: 2;
+  border: 1px solid var(--border-theme-color);
 }
 #perk-web-app [data-application-part="web"] section.perk-grid .perk {
   height: 48px;
@@ -6850,11 +6851,19 @@ ul.item-list.result-list li.item.rarity-unique {
   cursor: pointer;
   background: var(--appv2-background-opaque);
 }
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.selected {
+  border-color: #973748;
+  filter: drop-shadow(0 0 8px #973748);
+}
 #perk-web-app [data-application-part="web"] section.perk-grid .perk img {
   border: unset;
 }
 #perk-web-app [data-application-part="web"] section.perk-grid.edit-mode .perk.empty {
   border: dashed;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid.edit-mode .perk:hover:not(.selected) {
+  border-color: #379762;
+  filter: drop-shadow(0 0 5px #379762);
 }
 #perk-web-app [data-application-part="searchHeader"] {
   grid-area: searchHeader;

@@ -7026,6 +7026,7 @@ body {
       grid-template-rows: repeat(250, 48px);
       gap: 1.5rem;
       z-index: 2;
+      border: 1px solid var(--border-theme-color);
 
       .perk {
         height: 48px;
@@ -7033,6 +7034,11 @@ body {
         border: 1px solid var(--border-theme-color);
         cursor: pointer;
         background: var(--appv2-background-opaque);
+
+        &.selected {
+          border-color: #973748;
+          filter: drop-shadow(0 0 8px #973748);
+        }
 
         img {
           border: unset;
@@ -7043,6 +7049,11 @@ body {
         .perk {
           &.empty {
             border: dashed;
+          }
+
+          &:hover:not(.selected) {
+            border-color: #379762;
+            filter: drop-shadow(0 0 5px #379762);
           }
         }
       }
