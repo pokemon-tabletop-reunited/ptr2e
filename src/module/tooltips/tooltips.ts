@@ -1,8 +1,9 @@
 import { ActorPTR2e } from "@actor";
 import { AttackMessageSystem, ChatMessagePTR2e, DamageAppliedMessageSystem } from "@chat";
+import { CombatantPTR2e } from "@combat";
 import { ActionPTR2e, AttackPTR2e, Trait } from "@data";
 import { ActiveEffectPTR2e } from "@effects";
-import { EffectPTR2e, ItemPTR2e, MovePTR2e } from "@item";
+import { EffectPTR2e, ItemPTR2e, MovePTR2e, SummonPTR2e } from "@item";
 import { DataInspector } from "@module/apps/data-inspector/data-inspector.ts";
 import { CustomSkill } from "@module/data/models/skill.ts";
 import Tagify from "@yaireo/tagify";
@@ -103,9 +104,9 @@ export default class TooltipsPTR2e {
           return this._onDataElementTooltip();
       }
     }
-    if(game.tooltip.element?.getAttribute("data-tooltip")) {
-      switch(game.tooltip.element?.getAttribute("data-tooltip")) {
-        case "range-tooltip": 
+    if (game.tooltip.element?.getAttribute("data-tooltip")) {
+      switch (game.tooltip.element?.getAttribute("data-tooltip")) {
+        case "range-tooltip":
           return this._onRangeTooltip();
       }
     }
@@ -159,7 +160,7 @@ export default class TooltipsPTR2e {
             ? await TextEditor.enrichHTML(skill.description)
             : null,
           localizedLabel:
-            skill?.label ?? (Handlebars.helpers.formatSlug(skill.slug) || null),
+            skill?.label ?? (Handlebars.helpers.formatSlug(skill?.slug ?? "") || null),
         };
       }
 
@@ -232,19 +233,30 @@ export default class TooltipsPTR2e {
   }
 
   async _onActionTooltip() {
-    const attackSlug =
-      game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
-    if (!attackSlug) return false;
+    const oldMethod = await (async () => {
+      const attackSlug =
+        game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
+      if (!attackSlug) return false;
 
-    const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
-      .parent;
-    if (!parentUuid) return false;
+      const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
+        .parent;
+      if (!parentUuid) return false;
 
-    const parent = (await fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
-    if (!parent) return false;
+      const parent = (await fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
+      if (!parent) return false;
 
-    const attack = parent.actions.get(attackSlug) as ActionPTR2e | undefined;
-    if (!attack) return false;
+      const attack = parent.actions.get(attackSlug) as ActionPTR2e | undefined;
+      if (!attack) return false;
+
+      return await this.#createActionTooltip(attack);
+    })();
+    if (oldMethod !== false) return oldMethod;
+
+    const attackUuid = game.tooltip.element?.dataset.uuid;
+    if (!attackUuid) return false;
+
+    const attack = (await fromUuid(attackUuid)) as unknown as ActionPTR2e | undefined;
+    if (!(attack instanceof ActionPTR2e)) return false;
 
     return await this.#createActionTooltip(attack);
   }
@@ -297,19 +309,30 @@ export default class TooltipsPTR2e {
   }
 
   async _onAttackTooltip() {
-    const attackSlug =
-      game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
-    if (!attackSlug) return false;
+    const oldMethod = await (async () => {
+      const attackSlug =
+        game.tooltip.element?.dataset.slug || game.tooltip.element?.dataset.action;
+      if (!attackSlug) return false;
 
-    const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
-      .parent;
-    if (!parentUuid) return false;
+      const parentUuid = (game.tooltip.element?.closest("[data-parent]") as HTMLElement)?.dataset
+        .parent;
+      if (!parentUuid) return false;
 
-    const parent = (await fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
-    if (!parent) return false;
+      const parent = (await fromUuid(parentUuid)) as ActorPTR2e | ItemPTR2e;
+      if (!parent) return false;
 
-    const attack = parent.actions.attack!.get(attackSlug) as AttackPTR2e | undefined;
-    if (!attack) return false;
+      const attack = parent.actions.attack!.get(attackSlug) as AttackPTR2e | undefined;
+      if (!attack) return false;
+
+      return await this.#createAttackTooltip(attack);
+    })();
+    if (oldMethod !== false) return oldMethod;
+
+    const attackUuid = game.tooltip.element?.dataset.uuid;
+    if (!attackUuid) return false;
+
+    const attack = (await fromUuid(attackUuid)) as unknown as AttackPTR2e | undefined;
+    if (!(attack instanceof AttackPTR2e)) return false;
 
     return await this.#createAttackTooltip(attack);
   }
@@ -356,6 +379,76 @@ export default class TooltipsPTR2e {
         },
         whitelist: traits,
       });
+    }
+
+    for (const button of this.tooltip.querySelectorAll("button")) {
+      if (button.classList.contains("delay-attack")) {
+        button.addEventListener("click", async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          const { attackUuid } = button.dataset;
+          const action = await fromUuid(attackUuid) as unknown as AttackPTR2e;
+          if (!action) return void ui.notifications.error("Action not found.");
+
+          return action.delayAction();
+        });
+      }
+
+      if (button.classList.contains("consume-pp")) {
+        button.addEventListener("click", async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          const { attackUuid } = button.dataset;
+          const action = await fromUuid(attackUuid) as unknown as ActionPTR2e;
+          if (!action) return void ui.notifications.error("Action not found.");
+
+          const ppCost = action.cost.powerPoints
+          if (!ppCost) return void ui.notifications.error("No PP cost found on action.");
+
+          const actor = action.actor;
+          if (!actor) return void ui.notifications.error("Unable to detect actor.");
+
+          if (ppCost > actor.system.powerPoints.value) return void ui.notifications.error(game.i18n.format("PTR2E.AttackWarning.NotEnoughPP", { cost: ppCost, current: actor.system.powerPoints.value }));
+
+          await actor.update({
+            "system.powerPoints.value": actor.system.powerPoints.value - ppCost,
+          })
+          ui.notifications.info(`You have ${actor.system.powerPoints.value} power points remaining. (Used ${ppCost})`);
+        });
+      }
+      else if (button.classList.contains("create-summon")) {
+        button.addEventListener("click", async (event) => {
+          event.preventDefault();
+          event.stopPropagation();
+
+          if (!game.combat) return void ui.notifications.error("You must be in combat to summon a creature.");
+
+          const { attackUuid } = button.dataset;
+          const action = await fromUuid(attackUuid) as unknown as ActionPTR2e;
+          if (!action) return void ui.notifications.error("Action not found.");
+          if (!(action?.type === "attack" && action.summon)) return void ui.notifications.error("Action not found on item.");
+
+          const summonItem = await fromUuid<SummonPTR2e>((action as AttackPTR2e).summon);
+          if (!summonItem) return void ui.notifications.error("Summon not found on action.");
+
+          const combatants = await game.combat.createEmbeddedDocuments("Combatant", [{
+            name: summonItem.name,
+            type: "summon",
+            system: {
+              owner: action.actor?.uuid ?? null,
+              item: { ...summonItem.clone({ "system.owner": action.actor?.uuid ?? null }).toObject(), uuid: summonItem.uuid }
+            }
+          }])
+
+          if (!combatants.length) return void ui.notifications.error("Failed to create summon.");
+
+          ChatMessage.create({
+            content: `Added: ${(combatants as CombatantPTR2e[]).map(c => c.link).join(", ")} to Combat.`,
+          });
+        });
+      }
     }
 
     return 2000;
@@ -437,11 +530,12 @@ export default class TooltipsPTR2e {
     if (!target) return false;
 
     const damage = target.damageRoll;
+    const isFlatDamage = !!damage?.context["health.max"];
 
     this.tooltip.classList.add("damage");
     await this._renderTooltip({
       path: "systems/ptr2e/templates/chat/tooltips/damage.hbs",
-      data: { target, damage },
+      data: { target, damage, isFlatDamage },
       direction: game.tooltip.element?.dataset.tooltipDirection as
         | TooltipDirections
         | undefined,
@@ -575,16 +669,16 @@ export default class TooltipsPTR2e {
     if (!element) return false;
 
     const dataInspectorElement = element.closest(".application.data-inspector")
-    if(!dataInspectorElement) return false;
-    
+    if (!dataInspectorElement) return false;
+
     const path = element.dataset.path;
-    if(!path) return false;
+    if (!path) return false;
 
     const dataInspectorApp = foundry.applications.instances.get(dataInspectorElement.id) as DataInspector | undefined;
-    if(!dataInspectorApp) return false;
+    if (!dataInspectorApp) return false;
 
     const entry = dataInspectorApp.root.getAtPath(path);
-    if(!entry) return false;
+    if (!entry) return false;
 
     const data = {
       path: entry.path,

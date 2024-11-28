@@ -633,5 +633,128 @@
     "slug": "ampharos"
   },
   "_id": "UzZ4RXHwZaKD8QBp",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Ampharos",
+      "type": "form",
+      "_id": "kRq6IKqwujK1z4V6",
+      "img": "modules/ptr2e-pkmn-sprites/sprites/181_MEGA.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-ampharos:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Ampharos Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 20,
+            "def": 20,
+            "spa": 50,
+            "spd": 20,
+            "spe": -10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "",
+            "value": "Dragon",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "token-alterations",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "",
+            "value": 0,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "texture": "modules/ptr2e-pkmn-sprites/sprites/181_MEGA.webp",
+            "tint": null,
+            "scale": null,
+            "name": null,
+            "light": null,
+            "alpha": null
+          },
+          {
+            "type": "grant-item",
+            "predicate": [
+              "forme:mega-ampharos:active"
+            ],
+            "key": "",
+            "value": "Compendium.ptr2e.core-abilities.Item.i2YkuytUf6z6fm34",
+            "allowDuplicate": false,
+            "reevaluateOnUpdate": true,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "inMemoryOnly": false,
+            "alterations": [],
+            "track": false,
+            "replaceSelf": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.0.0",
+        "createdTime": 1732364715309,
+        "modifiedTime": 1732366055468,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

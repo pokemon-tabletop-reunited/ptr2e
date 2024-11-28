@@ -1,0 +1,81 @@
+{
+  "name": "Trick Room",
+  "type": "summon",
+  "system": {
+    "_migration": {
+      "version": 0.109,
+      "previous": null
+    },
+    "traits": [],
+    "description": "<p>Trick Room causes all Base Action Values to be inversed. <br>This happens by deducting all BaseAVs from 195.</p>",
+    "actions": [],
+    "baseAV": 150,
+    "duration": 3
+  },
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "effects": [
+    {
+      "name": "Trick Room",
+      "type": "summon",
+      "_id": "oElQgT2iRjQEqRm0",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "reverse-initiative",
+            "predicate": [],
+            "domain": "effect",
+            "toggleable": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "targetType": "all",
+        "targetUuid": null
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Trick Room causes all Base Action Values to be inversed. <br />This happens by deducting all BaseAVs from 195.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.0.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "R6JOV2LI9kcG8vSq"
+}

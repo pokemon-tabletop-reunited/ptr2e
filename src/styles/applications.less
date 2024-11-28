@@ -244,7 +244,7 @@ body {
                     }
                 }
 
-                .perk-web-button, .nature-dropdown {
+                .perk-web-button, .nature-dropdown, .species-link {
                     display: flex;
                     justify-content: center;
                     flex: 1;
@@ -275,10 +275,10 @@ body {
                     }
                 }
 
-                .nature-dropdown {
+                .nature-dropdown, .species-link {
                     border-bottom: 1px solid var(--border-theme-color);
                     flex: 0;
-                    padding: 0.25rem;
+                    padding: 0.35rem;
 
                     label {
                         color: var(--hint-text-color);
@@ -298,6 +298,13 @@ body {
                         height: min-content;
                         line-height: 1.2rem;
                         padding: 0.25rem;
+                    }
+
+                    span.species {
+                      flex: 1 0 40%;
+                      align-self: center;
+                      align-content: center;
+                      text-align: center;
                     }
                 }
             }
@@ -1068,6 +1075,11 @@ body {
                             }
                         }
                     }
+
+                    .suppressed {
+                      filter: contrast(0.55);
+                      font-style: italic;
+                    }
                 }
 
                 .effects-display {
@@ -1374,7 +1386,7 @@ body {
 
         .window-content {
             display: grid;
-            grid-template-columns: 45% 55%;
+            grid-template-columns: 40% 60%;
             grid-template-rows: calc(1rem + 48px) min-content auto;
             grid-template-areas:
                 "header nav"
@@ -1619,7 +1631,7 @@ body {
                     }
                 }
 
-                &[data-tab="effects"] {
+                &[data-tab="effects"], &[data-tab="forms"] {
 
                     fieldset.can-add {
                         position: relative;
@@ -1829,6 +1841,14 @@ body {
                             margin-left: auto;
                             align-self: flex-end;
                         }
+                    }
+
+                    .skill-filter {
+                      display: flex;
+                      flex-direction: row;
+                      gap: 1rem;
+                      align-items: center;
+                      align-content: center;
                     }
                 }
             }
@@ -4004,6 +4024,8 @@ body {
     }
 
     &.active-effect-sheet {
+      gap: 0;
+
         .window-content {
             display: grid;
             grid-template-columns: 35% 65%;
@@ -4337,170 +4359,219 @@ body {
         }
 
         main {
-            display: flex;
-            flex-direction: column;
+          display: flex;
+          flex-direction: column;
 
-            height: 100%;
-            overflow: hidden;
+          height: 100%;
+          overflow: hidden;
 
-            fieldset {
-                display: flex;
-                flex-direction: column;
+          .variants {
+            select {
+              --option-height: 1.5rem;
 
-                height: 100%;
-                overflow: hidden;
+              min-height: calc(var(--option-height) * 2.8);
+              align-content: center;
+              overflow: hidden;
 
-                padding: 1rem;
-                flex-wrap: nowrap;
-                height: 100%;
-
-                background: var(--appv2-background);
-
-                margin-bottom: 0.5rem;
-                border-radius: 8px;
-                border-color: var(--border-theme-color);
-            }
-
-            legend {
-                font-size: var(--font-size-15);
-                font-weight: bold;
-            }
-            
-            header {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-evenly;
-                align-items: center;
-
-                padding: 0.25rem;
-                border-bottom: 1px solid var(--border-theme-color);
-
-                .label {
-                    flex: 0 0 50%;
-                }
-
-                .item-controls {
-                    flex: 0 0 45px;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: flex-end;
-                    gap: 4px;
-                }
-            }
-
-            article {
-                display: flex;
-                flex-direction: column;
-
-                section {
-                    display: flex;
-                    flex-direction: column;
-                }
-            }
-
-            &.skill-challenge-rating {
-                article {
-                    flex-direction: row;
-                    justify-content: space-evenly;
-                    align-items: center;
-                    text-align: center;
-
-                    // padding: 0.5rem 0.25rem;
-                    label {
-                        flex: 0 0 40%;
-                    }
-                    select {
-                        flex: 0 0 55%;
-                    }
-                }
-            }
-
-            .roll-mode-panel {
-              display: flex;
-              flex-wrap: nowrap;
-              align-items: stretch;
-              justify-content: space-between;
-              white-space: nowrap;
-              gap: 8px;
-      
-              label {
-                  display: flex;
-                  align-items: center;
+              &[size="3"] {
+                min-height: calc(var(--option-height) * 4);
+                overflow: auto;
               }
-      
-              .roll-mode {
-                  flex: 1;
+              
+              option {
+                position: relative;
+                padding-left: 2rem;
+                height: calc(var(--option-height) + 2px);
+                align-content: center;
+                border: 1px solid var(--border-theme-color);
+                margin: 3px 0;
+                border-radius: 8px;
+
+                &::before {
+                  content: '';
+                  position: absolute;
+                  height: var(--option-height);
+                  width: var(--option-height);
+                  left: 0;
+                  top: 0;
+                  background: var(--image-url, transparent);
+                  background-size: contain;
+                  border-radius: 7px 0 0 7px;
+                }
+
+                &:checked {
+                  font-weight: bold;
+                  color: var(--input-text-color);
+                  background: rgba(0, 0, 0, 0.35);
+                }
+              }
+            }
+          }
+
+          fieldset {
+              display: flex;
+              flex-direction: column;
+
+              height: 100%;
+              overflow: hidden;
+
+              padding: 1rem;
+              flex-wrap: nowrap;
+              height: 100%;
+
+              background: var(--appv2-background);
+
+              margin-bottom: 0.5rem;
+              border-radius: 8px;
+              border-color: var(--border-theme-color);
+          }
+
+          legend {
+              font-size: var(--font-size-15);
+              font-weight: bold;
+          }
+          
+          header {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-evenly;
+              align-items: center;
+
+              padding: 0.25rem;
+              border-bottom: 1px solid var(--border-theme-color);
+
+              .label {
+                  flex: 0 0 50%;
+              }
+
+              .item-controls {
+                  flex: 0 0 45px;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: flex-end;
+                  gap: 4px;
+              }
+          }
+
+          article {
+              display: flex;
+              flex-direction: column;
+
+              section {
+                  display: flex;
+                  flex-direction: column;
+              }
+          }
+
+          &.skill-challenge-rating {
+              article {
+                  flex-direction: row;
+                  justify-content: space-evenly;
+                  align-items: center;
+                  text-align: center;
+
+                  // padding: 0.5rem 0.25rem;
+                  label {
+                      flex: 0 0 40%;
+                  }
                   select {
-                      border-radius: 2px;
-                      cursor: pointer;
-                      height: 1.5em;
-                      margin-left: 8px;
-                      width: 100%;
+                      flex: 0 0 55%;
                   }
               }
           }
 
-            .modifier {
+          .roll-mode-panel {
+            display: flex;
+            flex-wrap: nowrap;
+            align-items: stretch;
+            justify-content: space-between;
+            white-space: nowrap;
+            gap: 8px;
+    
+            label {
+                display: flex;
+                align-items: center;
+            }
+    
+            .roll-mode {
+                flex: 1;
+                select {
+                    border-radius: 2px;
+                    cursor: pointer;
+                    height: 1.5em;
+                    margin-left: 8px;
+                    width: 100%;
+                }
+            }
+        }
+
+          .modifier {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-evenly;
+              align-items: center;
+
+              padding: 0.5rem 0.25rem;
+              text-align: center;
+
+              .mod {
+                flex: 0 0 38%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                text-wrap: nowrap;
+                padding: 0 0.5rem;
+              }
+              .type {
+                flex: 0 0 32%;
+              }
+              .value {
+                flex: 0 0 calc(30% - 52px - 0.6rem);
+              }
+
+              .exclude {
+                flex: 0 0 50px;
                 display: flex;
                 flex-direction: row;
-                justify-content: space-evenly;
-                align-items: center;
-
-                padding: 0.5rem 0.25rem;
-                text-align: center;
-
-                .mod {
-                    flex: 0 0 40%;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    text-wrap: nowrap;
-                    padding: 0 0.5rem;
+                justify-content: center;
+                overflow: hidden;
+                
+                input {
+                  align-content: center;
                 }
-                .value {
-                    flex: 0 0 40%;
-                }
+              }
 
-                .exclude {
-                    flex: 0 0 45px;
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    
-                    input {
-                        align-content: center;
-                    }
-                }
-
-                &.ignored input {
-                    --checkbox-checked-color: #666;
-                }
+              &.ignored input {
+                  --checkbox-checked-color: #666;
+              }
+          
+              
             }
-            div.modifier {
-                border-bottom: 1px solid var(--border-theme-color);
+          div.modifier {
+              border-bottom: 1px solid var(--border-theme-color);
 
-                &:last-child {
-                    border-bottom: unset;
-                }
-            }
+              &:last-child {
+                  border-bottom: unset;
+              }
+          }
 
-            section.modifier-panel {
-                border-bottom: 1px solid var(--border-theme-color);
-            }
+          section.modifier-panel {
+              border-bottom: 1px solid var(--border-theme-color);
+          }
 
-            footer {
-                display: flex;
-                flex-direction: row;
-                justify-content: space-evenly;
-                align-items: center;
+          footer {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-evenly;
+              align-items: center;
 
-                .form-group {
-                    flex: 0 0 50%;
-                }
+              .form-group {
+                  flex: 0 0 50%;
+              }
 
-                button {
-                    flex: 0 0 40%;
-                }
-            }
+              button {
+                  flex: 0 0 40%;
+              }
+          }
 
         }
 
@@ -5890,7 +5961,7 @@ body {
                 }
 
                 &:last-child .icon img {
-                  border-radius: 0 8px 0 0;
+                  border-radius: 0 0 0 8px;
                 }
 
                 .icon {
@@ -5903,6 +5974,7 @@ body {
 
                   img {
                       border: unset;
+                      border-radius: unset;
 
                       &.dice {
                           display: none;

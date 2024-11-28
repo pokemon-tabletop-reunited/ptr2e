@@ -1,3 +1,4 @@
+import type { GridlessGrid, HexagonalGrid, SquareGrid } from "../../common/grid/module.d.ts";
 export {};
 
 declare global {
@@ -18,9 +19,6 @@ declare global {
 
         /** A promise that resolves when the canvas is first initialized and ready. */
         initializing: Promise<void> | null;
-
-        /** The current pixel dimensions of the displayed Scene, or null if the Canvas is blank. */
-        dimensions: SceneDimensions;
 
         /** A set of blur filter instances which are modified by the zoom level and the "soft shadows" setting */
         blurFilters: Set<PIXI.Filter>;
@@ -130,7 +128,6 @@ declare global {
         // Layers
         controls: ControlsLayer;
         drawings: DrawingsLayer;
-        grid: GridLayer;
         lighting: TAmbientLight["layer"];
         notes: NotesLayer;
         sounds: SoundsLayer;
@@ -150,6 +147,12 @@ declare global {
 
         /** A reference to the currently displayed Scene document, or null if the Canvas is currently blank. */
         get scene(): TScene | null;
+
+        /** The current pixel dimensions of the displayed Scene, or null if the Canvas is blank. */
+        get dimensions(): SceneDimensions;
+
+        /** A reference to the grid of the currently displayed Scene document, or null if the Canvas is currently blank. */
+        get grid(): SquareGrid | HexagonalGrid | GridlessGrid;
 
         /** A flag for whether the game Canvas is ready to be used. False if the canvas is not yet drawn, true otherwise. */
         get ready(): boolean;

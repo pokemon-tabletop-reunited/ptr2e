@@ -1,15 +1,21 @@
 import CombatantPTR2e from "./document.ts";
 
-export default abstract class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel {
+export default class CombatantSystemPTR2e extends foundry.abstract.TypeDataModel {
   declare parent: CombatantPTR2e;
 
-  abstract get baseAV(): number;
+  get combat() {
+    return this.parent.encounter;
+  }
+
+  get baseAV(): number {
+    throw new Error("CombatantSystemPTR2e#baseAV must be implemented by a subclass");
+  }
 
   get activations() {
     return this.activationsHad;
   }
 
-  static override defineSchema() {
+  static override defineSchema(): CombatantSystemSchema {
     const fields = foundry.data.fields;
     return {
       ...super.defineSchema(),
@@ -66,6 +72,13 @@ export default abstract class CombatantSystemPTR2e extends foundry.abstract.Type
     );
   }
 
+  /**
+   * Overridden by subclasses to perform actions when the combatant's turn starts
+   */
+  async onStartActivation() {
+    return;
+  }
+
   override async _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
     const result = await super._preUpdate(changed, options, user);
     if (result === false) return false;
@@ -99,7 +112,7 @@ export default interface CombatantSystemPTR2e
   _source: SourceFromSchema<CombatantSystemSchema>;
 }
 
-interface CombatantSystemSchema extends foundry.data.fields.DataSchema {
+export interface CombatantSystemSchema extends foundry.data.fields.DataSchema {
   activationsHad: foundry.data.fields.NumberField<number, number, true, false, true>;
   advanceDelayPercent: foundry.data.fields.NumberField<number, number, true, false, true>;
 }

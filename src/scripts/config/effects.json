@@ -128,7 +128,7 @@
         {
           "type": "grant-effect",
           "value": "slowed"
-        }        
+        }
       ],
       "formula": null,
       "type": null,
@@ -462,7 +462,7 @@
         }
       ],
       "traits": [
-        "minor-affliction"
+        "pseudo-affliction"
       ],
       "stacks": 1,
       "removeAfterCombat": false
@@ -617,7 +617,20 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "choice-set",
+          "choices": "flags.ptr2e.disableActionOptions.options",
+          "adjustName": true,
+          "rollOption": "disabled"
+        },
+        {
+          "type": "basic",
+          "key": "flags.ptr2e.disableActionOptions.disabled",
+          "value": "{effect|flags.ptr2e.choiceSelections.disabled}",
+          "mode": 2
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -637,7 +650,18 @@
       "turns": 5
     },
     "system": {
-      "changes": [],
+      "changes": [
+        {
+          "type": "choice-set",
+          "choices": "nullifiableAbilities",
+          "adjustName": true,
+          "rollOption": "nullified"
+        },
+        {
+          "type": "suppress-ability",
+          "key": "{effect|flags.ptr2e.choiceSelections.nullified}"
+        }
+      ],
       "formula": null,
       "type": null,
       "removeOnRecall": false,
@@ -889,24 +913,35 @@
     "system": {
       "changes": [
         {
+          "type": "token-tag",
+          "key": "duel"
+        },
+        {
           "type": "stage-modifier",
           "key": "all-crit",
           "value": 2,
-          "label": "Duel - targeting Duel partner",
+          "label": "Duel - Duel Partner",
           "mode": 2,
-          "priority": null,
-          "ignored": false
+          "predicate": ["target:mark:duel", "origin:mark:duel"]
         },
         {
           "type": "percentile-modifier",
           "key": "all-damage",
-          "label": "Duel - non-Duel target",
-          "value": -33.33
+          "label": "Duel - non-Duel Partner",
+          "value": -33.33,
+          "predicate": [
+            {
+              "not": "target:mark:duel"
+            },
+            {
+              "not": "origin:mark:duel"
+            }
+          ]
         },
         {
           "type": "grant-effect",
           "value": "stuck"
-        }        
+        }
       ],
       "formula": null,
       "type": null,
@@ -1744,5 +1779,96 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.charged"
+  },
+  {
+    "id": "loafing",
+    "_id": "loafingcondition",
+    "name": "PTR2E.Effect.Statuses.Labels.loafing",
+    "img": "icons/svg/anchor.svg",
+    "type": "passive",
+    "system": {
+      "changes": [
+        {
+          "type": "flat-modifier",
+          "key": "attack-damage-percentile",
+          "value": "-((@effect.system.stacks * 15) + (max(0, (@effect.system.stacks - 2)) * 5) + (max(0, (@effect.system.stacks - 3)) * 10))"
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.skills",
+          "value": "-((@effect.system.stacks * 0.15) + (max(0, (@effect.system.stacks - 2)) * 0.05) + (max(0, (@effect.system.stacks - 3)) * 0.10))",
+          "mode": 2
+        },
+        {
+          "type": "basic",
+          "key": "system.attributes.spe.stage",
+          "value": "-(1 + (max(0, (@effect.system.stacks - 2)) * 1) + (max(0, (@effect.system.stacks - 3)) * 1))",
+          "mode": 2
+        },
+        {
+          "type": "alter-attack",
+          "key": "all",
+          "value": "1+((@effect.system.stacks * 0.15) + (max(0, (@effect.system.stacks - 2)) * 0.05) + (max(0, (@effect.system.stacks - 3)) * 0.30))",
+          "mode": 1,
+          "definition": [],
+          "property": "pp-cost"
+        },
+        {
+          "type": "flat-modifier",
+          "key": "attack-accuracy-flat",
+          "value": "-(max(0, (@effect.system.stacks - 1)) * 10)",
+          "predicate": [
+            {
+              "gt": [
+                "{effect|system.stacks}",
+                1
+              ]
+            }
+          ]
+        },
+        {
+          "type": "basic",
+          "key": "system.modifiers.movement",
+          "value": "-((max(0, (@effect.system.stacks - 2)) * 2) + (max(0, (@effect.system.stacks - 3)) * 1))",
+          "mode": 2
+        },
+        {
+          "type": "grant-effect",
+          "value": "unlucky",
+          "reevaluateOnUpdate": true,
+          "allowDuplicate": false,
+          "onDeleteActions": {
+            "grantee": "restrict",
+            "granter": "cascade"
+          },
+          "alterations": [
+            {
+              "mode": 5,
+              "property": "type",
+              "value": "passive"
+            },
+            {
+              "mode": 5,
+              "property": "duration.turns",
+              "value": 0
+            }
+          ],
+          "predicate": [
+            {
+              "gt": [
+                "{effect|system.stacks}",
+                1
+              ]
+            }
+          ]
+        }
+      ],
+      "traits": [
+        "pseudo-affliction"
+      ],
+      "stacks": 1,
+      "removeAfterCombat": false
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.loafing"
   }
 ]

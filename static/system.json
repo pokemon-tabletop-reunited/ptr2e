@@ -2,11 +2,11 @@
   "id": "ptr2e",
   "title": "Pokemon Tabletop Reunited: Evolved",
   "description": "PTR 2e is a fan-made tabletop RPG based on the Pokemon video games. It is a complete overhaul of the original PTR 1e system.",
-  "version": "0.10.0-alpha.3.3.1",
+  "version": "0.10.0-alpha.4.1.0",
   "compatibility": {
-    "minimum": "12.327",
-    "verified": "12.329",
-    "maximum": 13
+    "minimum": "12.329",
+    "verified": "12.331",
+    "maximum": 12
   },
   "authors": [
     {
@@ -52,6 +52,13 @@
       "system": "ptr2e"
     },
     {
+      "name": "core-summons",
+      "label": "PTR 2e Summons",
+      "path": "packs/core-summons",
+      "type": "Item",
+      "system": "ptr2e"
+    },
+    {
       "name": "core-gear",
       "label": "PTR 2e Gear",
       "path": "packs/core-gear",
@@ -88,7 +95,9 @@
   "documentTypes": {
     "ActiveEffect": {
       "affliction": {},
-      "passive": {}
+      "passive": {},
+      "summon": {},
+      "form": {}
     },
     "Actor": {
       "humanoid": {},
@@ -100,11 +109,13 @@
       "attack": {},
       "damage-applied": {},
       "skill": {},
-      "capture": {}
+      "capture": {},
+      "combat": {}
     },
     "Combatant": {
       "character": {},
-      "round": {}
+      "round": {},
+      "summon": {}
     },
     "Item": {
       "ability": {}, 
@@ -118,7 +129,8 @@
       "perk": {}, 
       "species": {},
       "ptu-item": {},
-      "weapon": {}
+      "weapon": {},
+      "summon": {}
     }
   },
   "socket": true,

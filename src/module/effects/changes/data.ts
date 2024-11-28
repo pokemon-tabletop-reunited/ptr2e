@@ -40,6 +40,7 @@ interface ChangeSource {
     label?: string;
     predicate?: RawPredicate;
     ignored?: boolean;
+    [key: string]: unknown;
 }
 
 export type {

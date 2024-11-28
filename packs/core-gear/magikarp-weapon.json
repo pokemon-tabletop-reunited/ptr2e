@@ -1,0 +1,111 @@
+{
+  "folder": "V4skAU6G3OH5fXaf",
+  "name": "Magikarp (Weapon)",
+  "type": "weapon",
+  "system": {
+    "_migration": {
+      "version": 0.109,
+      "previous": null
+    },
+    "traits": [
+      "living-weapon",
+      "weapon",
+      "pokemon",
+      "water"
+    ],
+    "actions": [
+      {
+        "name": "Stunning Slap",
+        "slug": "magikarp-weapon-action-1",
+        "description": "<p>Wielding a Magikarp as a weapon. Humiliating for whomever is on the receiving end. The Stunning Slap has a 40% chance to inflict Flinch 5.</p>",
+        "traits": [
+          "flinch-chance-5",
+          "weapon",
+          "living-weapon",
+          "pokemon",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "modules/ptr2e-pkmn-sprites/sprites/129.webp",
+        "range": {
+          "target": "enemy",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex"
+        },
+        "types": [
+          "water"
+        ],
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "free": true
+      },
+      {
+        "name": "Overhead Karp",
+        "slug": "magikarp-weapon-action-2",
+        "description": "<p>Wielding a Magikarp as a weapon. Humiliating for whomever is on the receiving end. A truly obnoxious attack, with a 20% chance to inflict Confused 5. May use Magikarp's PP instead of the wielder's. This attack requires 2 hands.</p>",
+        "traits": [
+          "living-weapon",
+          "weapon",
+          "pokemon",
+          "contact"
+        ],
+        "type": "attack",
+        "img": "modules/ptr2e-pkmn-sprites/sprites/129.webp",
+        "range": {
+          "target": "enemy",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "types": [
+          "water"
+        ],
+        "category": "physical",
+        "power": 60,
+        "accuracy": 80,
+        "free": true
+      }
+    ],
+    "description": "<p>Wielding a Magikarp as a weapon. Humiliating for whomever is on the receiving end.</p>",
+    "crafting": {
+      "skill": "N/A",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "carryType": "stowed",
+      "handsHeld": 1,
+      "slot": "held"
+    },
+    "grade": "E",
+    "fling": {
+      "type": "water",
+      "power": 40,
+      "accuracy": 100,
+      "hide": false
+    },
+    "quantity": 1,
+    "rarity": "common",
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/gear_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "weaponType": "Living Weapon"
+  },
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "effects": [],
+  "flags": {},
+  "_id": "9pZcnrX9vBP1IvkA"
+}

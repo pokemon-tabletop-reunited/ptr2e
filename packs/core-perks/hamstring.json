@@ -17,16 +17,13 @@
           "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
+          "activation": "free"
         },
         "img": "systems/ptr2e/img/perk-icons/Hunting.svg"
       }
     ],
     "slug": "hamstring",
-    "description": "<p>OThe user's attacks inflict -1 SPD stages for 5 Activations on Critical Hits.</p>",
+    "description": "<p>The user's attacks inflict -1 SPD stages for 5 Activations on Critical Hits.</p>",
     "traits": [],
     "prerequisites": [
       "None"
@@ -58,7 +55,65 @@
       },
       "hidden": false,
       "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Hamstring",
+      "type": "passive",
+      "_id": "TjgG1Kci4HEL4YwT",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "all-crit",
+            "value": "Compendium.ptr2e.core-effects.Item.9FlxAAlUW2PrKOd0",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Actor.zzmajvZtYY3MnEp5.Item.AtZG4R8JQtUwWk3S.ActiveEffect.NxgyQBu4WL1YIix2",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.4.1",
+        "createdTime": 1732232681581,
+        "modifiedTime": 1732232681581,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

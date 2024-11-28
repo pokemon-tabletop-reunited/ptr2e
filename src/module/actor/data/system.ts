@@ -4,7 +4,6 @@ import {
   ActorPTR2e,
   Attribute,
   Attributes,
-  HumanoidActorSystem,
 } from "@actor";
 import { SpeciesSystemModel } from "@item/data/index.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
@@ -249,6 +248,26 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         { required: true, initial: [] }
       ),
       immunities: new fields.SetField(new SlugField(), { required: true, initial: [] }),
+      details: new fields.SchemaField({
+        alliance: new fields.StringField({
+          choices: {
+            "party": "party",
+            "opposition": "opposition"
+          },
+          required: true,
+          nullable: true,
+          initial: "",
+          blank: true,
+          label: "PTR2E.FIELDS.details.alliance.label",
+          hint: "PTR2E.FIELDS.details.alliance.hint",
+        }),
+        size: new fields.SchemaField({
+          height: new fields.NumberField({required: true, initial: 0, label: "PTR2E.FIELDS.size.height.label", hint: "PTR2E.FIELDS.size.height.hint"}),
+          weight: new fields.NumberField({required: true, initial: 0, label: "PTR2E.FIELDS.size.weight.label", hint: "PTR2E.FIELDS.size.weight.hint"}),
+          heightClass: new fields.NumberField({required: true, initial: 0, min: 0, max: 7}),
+          weightClass: new fields.NumberField({required: true, initial: 1, min: 1, max: 16}),
+        })
+      })
     };
   }
 
@@ -257,9 +276,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     addDataFieldMigration(source, "health.shield", "shield");
 
     // Migrate species Abilities data to the new format
-    if(source.species) {
+    if (source.species?.abilities) {
       for (const abGroup of Object.keys(source.species.abilities)) {
-        source.species.abilities[abGroup] = (source.species.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g=>{
+        source.species.abilities[abGroup] = (source.species.abilities[abGroup] as foundry.data.fields.SourcePropFromDataField<foundry.data.fields.SchemaField<AbilityReferenceSchema>>[]).map(g => {
           if (typeof g == "object") return g;
           return { slug: g, uuid: null };
         });
@@ -293,9 +312,21 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   override prepareBaseData(): void {
     super.prepareBaseData();
     this._initializeModifiers();
-    this._prepareSpeciesData();
 
-    for(const clock of this.clocks.contents) {
+    for(const k in this.attributes) {
+      const key = k as keyof Attributes;
+      Object.defineProperty(this.attributes[key], "final", {
+        get: () => key === "hp" ? this.attributes[key].total : this.parent.calcStatTotal(this.attributes[key], false),
+      });
+    }
+
+    this.details.alliance = ["party", "opposition", null].includes(this.details.alliance as string)
+      ? this.details.alliance
+      : this.parent.hasPlayerOwner
+        ? "party"
+        : "opposition";
+
+    for (const clock of this.clocks.contents) {
       const name = sluggify(clock.name);
       this.parent.rollOptions.addOption("clocks", `${name}`)
       this.parent.rollOptions.addOption("clocks", `${name}:value:${clock.value}`)
@@ -336,32 +367,50 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.advancement.advancementPoints.total = this.parent.isHumanoid() ? (19 + this.advancement.level) : (10 + Math.floor(this.advancement.level / 2));
     this.advancement.advancementPoints.spent = 0;
 
-    for (const k in this.attributes) {
-      const key = k as keyof Attributes;
-      if (this.species?.stats[key]) {
-        if(this.parent.isHumanoid()) this.attributes[key].base ??= this.species.stats[key];
-        else this.attributes[key].base = this.species.stats[key];
-      }
-      if(this.attributes[key].base === undefined) this.attributes[key].base = 40;
-      this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
-    }
-
-    for (const skill of this.skills) {
-      skill.prepareBaseData();
-    }
-    for (const skill of game.ptr.data.skills) {
-      if (!this.skills.has(skill.slug)) {
-        const newSkill = new SkillPTR2e(fu.duplicate(skill), { parent: this });
-        newSkill.prepareBaseData();
-        this.skills.set(newSkill.slug, newSkill);
-      }
-    }
-
     this.health.max = this.attributes.hp.value;
     this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
     this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
     this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
+
+    this.details.size.heightClass = SpeciesSystemModel.getSpeciesSize(this.details.size.height || this.parent.species?.size.height || 0, this.parent.species?.size.type as "height" | "quad" | "length" || "height").sizeClass;
+    this.details.size.weightClass = (() => {
+      const weight = this.details.size.weight || this.parent.species?.size.weight || 0;
+      switch (true) {
+        case weight < 10:
+          return 1;
+        case weight < 20:
+          return 2;
+        case weight < 30:
+          return 3;
+        case weight < 40:
+          return 4;
+        case weight < 55:
+          return 5;
+        case weight < 70:
+          return 6;
+        case weight < 85:
+          return 7;
+        case weight < 100:
+          return 8;
+        case weight < 120:
+          return 9;
+        case weight < 145:
+          return 10;
+        case weight < 190:
+          return 11;
+        case weight < 240:
+          return 12;
+        case weight < 305:
+          return 13;
+        case weight < 350:
+          return 14;
+        case weight < 410:
+          return 15;
+        default:
+          return 16;
+      }
+    })();
   }
 
   _initializeModifiers() {
@@ -379,46 +428,35 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       spaMultiplier: 1,
       spdMultiplier: 1,
       speMultiplier: 1,
+      skills: 1,
+      movement: 0
     };
   }
 
   _prepareSpeciesData() {
-    // If the species is not set, they are a humanoid, construct species data for Humanoids.
-    if (!this._source.species) {
-      if (this.parent.isHumanoid()) {
-        this.species = HumanoidActorSystem.constructSpecies(this);
-      } else {
-        const e = new Error("Species not set for non-humanoid actor");
-        (this.parent as ActorPTR2e).synthetics.preparationWarnings.add(e.message);
-        Hooks.onError("ActorSystemPTR2e#_prepareSpeciesData", e, {
-          data: this._source.species ?? undefined,
-        });
-        return;
-      }
-    } else {
-      this.species = new SpeciesSystemModel(this._source.species, { parent: this.parent, virtual: true });
-    }
-    this.species.prepareBaseData();
+    if(!this.parent.species?.prepareBaseData) return;
+    this.parent.species.prepareBaseData();
 
     // Add species traits to actor traits
-    for (const trait of this.species.traits.values()) {
+    for (const trait of this.parent.species.traits.values()) {
       if (!this.traits.has(trait.slug)) {
         this.traits.set(trait.slug, {
           ...trait,
           virtual: true,
         });
+        this.parent.rollOptions?.addTrait(trait);
       }
     }
 
-    for (const type of this.species.types.values()) {
+    for (const type of this.parent.species.types.values()) {
       this.type.types.add(type);
       if (this.type.types.size > 1 && this.type.types.has("untyped"))
         this.type.types.delete("untyped");
     }
 
     this.movement = Object.fromEntries([
-      ...this.species.movement.primary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "primary" }]),
-      ...this.species.movement.secondary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "secondary" }])
+      ...this.parent.species.movement.primary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "primary" }]),
+      ...this.parent.species.movement.secondary.map<(readonly [string, Movement])>(m => [m.type, { method: m.type, value: m.value, type: "secondary" }])
     ]);
 
     // Every creature has a base overland of 3 at least.
@@ -427,9 +465,36 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
   }
 
+  prepareEmbeddedDocuments(): void {
+    this._prepareSpeciesData();
+
+    // Prepare any 'Base' data that (may) need Species Info
+    for (const k in this.attributes) {
+      const key = k as keyof Attributes;
+      if (this.parent.species?.stats[key]) {
+        if(this.parent.isHumanoid()) this.attributes[key].base ??= this.parent.species.stats[key];
+        if(this.parent.isPokemon()) this.attributes[key].base = this.parent.species.stats[key];
+      }
+      if (this.attributes[key].base === undefined) this.attributes[key].base = 40;
+      this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
+    }
+
+    for (const skill of this.skills) {
+      skill.prepareBaseData();
+    }
+    for (const skill of game.ptr.data.skills) {
+      if (!this.skills.has(skill.slug)) {
+        const newSkill = new SkillPTR2e(fu.duplicate(skill), { parent: this });
+        newSkill.prepareBaseData();
+        this.skills.set(newSkill.slug, newSkill);
+      }
+    }
+  }
+
   override prepareDerivedData(): void {
     super.prepareDerivedData();
     this.species?.prepareDerivedData?.();
+    this.parent.species?.prepareDerivedData?.();
 
     // Calculate bonus RVs if applicable
     const isAce = this.traits.has("ace");
@@ -445,10 +510,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     for (const k in this.attributes) {
       const key = k as keyof Attributes;
-      // if (this.species?.stats[key]) this.attributes[key].base = this.species.stats[key];
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
       const modifier = this.modifiers[`${key}Multiplier`];
-      if(modifier && !isNaN(modifier) && modifier !== 1) {
+      if (modifier && !isNaN(modifier) && modifier !== 1) {
         this.attributes[key].value = Math.round(this.attributes[key].value * Number(modifier));
       }
     }
@@ -460,23 +524,32 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10) + (this.modifiers.inventoryPoints ?? 0);
 
     // Apply type based immunities
-    if(this.type.types.has("poison") || this.type.types.has("steel")) {
+    if (this.type.types.has("poison") || this.type.types.has("steel")) {
       this.parent.rollOptions.addOption("immunities", "affliction:poison");
       this.parent.rollOptions.addOption("immunities", "affliction:blight");
     }
-    if(this.type.types.has("fire")) {
+    if (this.type.types.has("fire")) {
       this.parent.rollOptions.addOption("immunities", "affliction:burn");
     }
-    if(this.type.types.has("ice")) {
+    if (this.type.types.has("ice")) {
       this.parent.rollOptions.addOption("immunities", "affliction:frozen");
       this.parent.rollOptions.addOption("immunities", "affliction:frostbite");
     }
-    if(this.type.types.has("electric")) {
+    if (this.type.types.has("electric")) {
       this.parent.rollOptions.addOption("immunities", "affliction:paralysis");
+    }
+
+    if(!isNaN(Number(this.modifiers.movement)) && this.modifiers.movement !== 0) {
+      for (const movement of Object.values(this.movement)) {
+        movement.value = Math.max(1, movement.value + Number(this.modifiers.movement));
+      }
     }
   }
 
   _calculateStatTotal(stat: Attribute | Omit<Attribute, "stage">): number {
+    // Shedinja HP is always 1
+    if (stat.base === 1) return 1;
+
     const nature = (() => {
       const nature = natureToStatArray[this._source.nature as keyof typeof natureToStatArray];
       if (!nature) return 1;
@@ -496,7 +569,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     }
 
     /** Calculate HP */
-    const bulkMod = Math.pow(1 + ((Math.exp(1) - 1) / Math.pow(Math.PI, 3)), (this.species?.size.sizeClass || 1) - 1);
+    const bulkMod = Math.pow(1 + ((Math.exp(1) - 1) / Math.pow(Math.PI, 3)), (this.parent.species?.size.sizeClass || 1) - 1);
 
     return Math.floor(
       (Math.floor(((2 * stat.base + stat.ivs + stat.evs / 4) * level * bulkMod) / 100) +
@@ -504,47 +577,6 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         20) *
       nature
     );
-  }
-
-  override async _preCreate(
-    data: this["parent"]["_source"],
-    options: DocumentModificationContext<this["parent"]["parent"]> & { fail?: boolean },
-    user: User
-  ) {
-    if (this._source.traits.includes("humanoid") && this.parent.type === "pokemon") {
-      this.parent.updateSource({ type: "humanoid" });
-    }
-    if (this._source.traits.includes("pokemon") && this.parent.type === "humanoid") {
-      this.parent.updateSource({ type: "pokemon" });
-    }
-    return await super._preCreate(data, options, user);
-  }
-
-  override _preUpdate(
-    changed: DeepPartial<this["parent"]["_source"]>,
-    options: DocumentUpdateContext<this["parent"]["parent"]>,
-    user: User
-  ) {
-    if (changed.system?.traits) {
-      const hasTrait = (trait: string) => {
-        if (changed.system!.traits instanceof Collection)
-          return changed.system!.traits.has(trait);
-        if (Array.isArray(changed.system!.traits))
-          return changed.system!.traits.includes(trait);
-        return false;
-      };
-      if (hasTrait("humanoid") && hasTrait("pokemon")) {
-        throw new Error("Cannot have both humanoid and pokemon traits");
-      }
-      if (hasTrait("humanoid") && this.parent.type === "pokemon") {
-        changed.type = "humanoid";
-      }
-      if (hasTrait("pokemon") && this.parent.type === "humanoid") {
-        changed.type = "pokemon";
-      }
-    }
-
-    return super._preUpdate(changed, options, user);
   }
 }
 
@@ -574,6 +606,16 @@ interface ActorSystemPTR2e extends ModelPropsFromSchema<ActorSystemSchema> {
       spent: number;
       available: number;
     };
+  }
+
+  details: {
+    alliance: "party" | "opposition" | null | undefined;
+    size: {
+      height: number;
+      weight: number;
+      heightClass: number;
+      weightClass: number;
+    }
   }
 
   movement: Record<string, Movement>;

@@ -1,0 +1,75 @@
+{
+  "name": "Dizzy Daft",
+  "type": "perk",
+  "system": {
+    "_migration": {
+      "version": 0.109,
+      "previous": null
+    },
+    "actions": [
+      {
+        "name": "Dizzy Daft (Active)",
+        "slug": "dizzy-daft-action-1",
+        "description": "<p>You inflict @Affliction[confused] 5 on yourself.</p>",
+        "traits": [],
+        "type": "generic",
+        "img": "modules/ptr2e-pkmn-sprites/sprites/327.webp",
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        }
+      },
+      {
+        "name": "Dizzy Daft (Passive)",
+        "slug": "dizzy-daft-action-2",
+        "description": "<p>You are immune to the negative effects of the Confused condition, and never Fumble as a result of it.</p>",
+        "traits": [],
+        "type": "passive",
+        "img": "modules/ptr2e-pkmn-sprites/sprites/327.webp",
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "free"
+        },
+        "hidden": true
+      }
+    ],
+    "description": "<p>You can confuse yourself, and avoid the ill-effects.</p>",
+    "traits": [],
+    "prerequisites": [
+      "Spinda"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": ""
+    },
+    "node": {
+      "i": null,
+      "j": null,
+      "connected": [],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": null,
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    }
+  },
+  "img": "systems/ptr2e/img/icons/feat_icon.webp",
+  "effects": [],
+  "flags": {},
+  "_id": "y3aSWoyIMrXrn0l1"
+}

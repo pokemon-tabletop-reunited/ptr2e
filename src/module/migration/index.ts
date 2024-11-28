@@ -23,3 +23,6 @@ export class MigrationList {
         return this.#list.filter((M) => M.version >= min && M.version <= max).map((M) => new M());
     }
 }
+
+//@ts-expect-error - temporary
+window.MigrationList = MigrationList;

@@ -16,6 +16,7 @@ type SpeciesPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemP
 type WeaponPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.WeaponSystemModel, TParent>;
 type PTUItem = ItemPTR2e;
 type EffectPTR2e<TParent extends ActorPTR2e | null = ActorPTR2e | null> = ItemPTR2e<data.EffectSystemModel, TParent>;
+type SummonPTR2e<TParent extends ActorPTR2e | null = null> = ItemPTR2e<data.SummonSystemModel, TParent>;
 
 export type {
     AbilityPTR2e,
@@ -30,6 +31,7 @@ export type {
     WeaponPTR2e,
     PTUItem,
     EffectPTR2e,
+    SummonPTR2e,
 };
 
 export type ItemSystemPTR =
@@ -43,7 +45,8 @@ export type ItemSystemPTR =
     | data.PerkSystemModel
     | data.SpeciesSystemModel
     | data.WeaponSystemModel
-    | data.EffectSystemModel;
+    | data.EffectSystemModel
+    | data.SummonSystemModel;
 
 export type ItemSystemsWithActions =
     | data.AbilitySystemModel
@@ -51,6 +54,13 @@ export type ItemSystemsWithActions =
     | data.GearSystemModel
     | data.MoveSystemModel
     | data.PerkSystemModel
+    | data.WeaponSystemModel
+    | data.SummonSystemModel;
+
+export type ItemSystemsWithFlingStats =
+    | data.ConsumableSystemModel
+    | data.EquipmentSystemModel
+    | data.GearSystemModel
     | data.WeaponSystemModel;
 
 export type ItemSourcePTR2e =
@@ -64,7 +74,8 @@ export type ItemSourcePTR2e =
     | data.PerkSystemSource
     | data.SpeciesSystemSource
     | data.WeaponSystemSource
-    | data.EffectSystemSource;
+    | data.EffectSystemSource
+    | data.SummonSystemSource;
 
 // Document
 export * from "./document.ts";

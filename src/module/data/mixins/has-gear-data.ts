@@ -68,6 +68,13 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
             label: "PTR2E.FIELDS.gear.fling.accuracy.label",
             hint: "PTR2E.FIELDS.gear.fling.accuracy.hint",
           }),
+          hide: new fields.BooleanField({
+            required: true,
+            nullable: true,
+            initial: null,
+            label: "PTR2E.FIELDS.gear.fling.hide.label",
+            hint: "PTR2E.FIELDS.gear.fling.hide.hint",
+          }),
         }),
         quantity: new fields.NumberField({
           required: true,
@@ -89,6 +96,20 @@ export default function HasGearData<BaseClass extends TemplateConstructor>(baseC
           hint: "PTR2E.FIELDS.gear.rarity.hint",
         }),
       };
+    }
+
+    override prepareDerivedData(): void {
+      super.prepareDerivedData();
+
+      // Pokeballs should never be hidden from fling dialog
+      if('consumableType' in this && this.consumableType == "pokeball") {
+        this.fling.hide = false;
+        return;
+      }
+      // If the fling 'hide' mode is not set, and the values are the default fling values, set 'hide' to true
+      if(this.fling?.hide === null && (!this.fling.power || this.fling.power === 25) && (!this.fling.accuracy || this.fling.accuracy === 100) && (!this.fling.type || this.fling.type === PTRCONSTS.Types.UNTYPED)) {
+        this.fling.hide = true;
+      }
     }
   }
 
@@ -213,6 +234,7 @@ interface _FlingSchema extends foundry.data.fields.DataSchema {
   type: foundry.data.fields.StringField<PokemonType, PokemonType, true, true, true>;
   power: foundry.data.fields.NumberField<number, number, true, true, true>;
   accuracy: foundry.data.fields.NumberField<number, number, true, false, true>;
+  hide: foundry.data.fields.BooleanField<boolean, boolean, true, true, true>;
 }
 
 export const grades = ["E", "E+", "D-", "D", "D+", "C-", "C", "C+", "B-", "B", "B+", "A-", "A", "A+", "S-", "S", "S+"] as const;

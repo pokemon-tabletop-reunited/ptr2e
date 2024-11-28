@@ -1,5 +1,5 @@
 import { GrantItemChangeSystem } from "@data";
-import { ItemPTR2e } from "@item";
+// import { ItemPTR2e } from "@item";
 import ActiveEffectPTR2e from "../document.ts";
 
 export default class GrantEffectChangeSystem extends GrantItemChangeSystem {
@@ -20,16 +20,16 @@ export default class GrantEffectChangeSystem extends GrantItemChangeSystem {
         // TODO: Implement createInMemoryCondition
     }
 
-    override async getItem(key: string = this.resolveInjectedProperties(this.uuid)): Promise<Maybe<ItemPTR2e>> {
+    override async getItem(key: string = this.resolveInjectedProperties(this.uuid)): Promise<Maybe<ClientDocument>> {
         try {
             const effect = await ActiveEffectPTR2e.fromStatusEffect(key)
-            
-            return new ItemPTR2e({
-                name: effect.name,
-                type: "effect",
-                effects: [effect.toObject()],
-                img: effect.img || "icons/svg/item-bag.svg"
-            })
+            return effect;
+            // return new ItemPTR2e({
+            //     name: effect.name,
+            //     type: "effect",
+            //     effects: [effect.toObject()],
+            //     img: effect.img || "icons/svg/item-bag.svg"
+            // })
         }
         catch (error) {
             console.error(error);

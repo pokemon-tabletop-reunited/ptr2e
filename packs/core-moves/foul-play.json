@@ -4,10 +4,7 @@
   "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "slug": "foul-play",
-    "description": "",
-    "traits": [
-      "contact"
-    ],
+    "traits": [],
     "actions": [
       {
         "slug": "foul-play",
@@ -15,7 +12,8 @@
         "type": "attack",
         "traits": [
           "contact",
-          "pp-updated"
+          "pp-updated",
+          "use-opponents-stats"
         ],
         "range": {
           "target": "creature",
@@ -24,10 +22,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 4,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 4
         },
         "category": "physical",
         "power": 95,
@@ -36,14 +31,19 @@
           "dark"
         ],
         "description": "<p>Effect: This attack uses the target's ATK stat for damage calculation instead of the user's.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "slot": 3,
+        "img": "systems/ptr2e/img/svg/dark_icon.svg"
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "_migration": {
+      "version": 0.109,
+      "previous": {
+        "schema": null,
+        "foundry": "12.331",
+        "system": "0.10.0-alpha.4.0.0"
+      }
+    }
   },
   "_id": "7J7thNHadmUVmeq6",
   "effects": []

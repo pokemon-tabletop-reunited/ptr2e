@@ -663,14 +663,18 @@ export class ItemSheetV2Expanded<
         return;
       }
       case "Item": {
-        const item = await ItemPTR2e.fromDropData(data as DropCanvasData);
-        if (!item || item.type !== "effect") return;
-        const effects = item.effects.map((effect) => effect.toObject());
-        if (effects.length === 0) return;
-        ActiveEffectPTR2e.createDocuments(effects, { parent: this.document });
+        this._onDropItem(event, data);
         return;
       }
     }
+  }
+
+  async _onDropItem(_event: DragEvent, data: object) {
+    const item = await ItemPTR2e.fromDropData(data as DropCanvasData);
+    if (!item || item.type !== "effect") return;
+    const effects = item.effects.map((effect) => effect.toObject());
+    if (effects.length === 0) return;
+    return ActiveEffectPTR2e.createDocuments(effects, { parent: this.document });
   }
 
   async _onDropAffliction(_event: DragEvent, data: object) {
@@ -689,7 +693,14 @@ export class ItemSheetV2Expanded<
     const effect = await ActiveEffectPTR2e.fromDropData(data);
     if (!this.document.isOwner || !effect) return false;
     if (effect.parent === this.document) return false;
-    return ActiveEffectPTR2e.create(effect.toObject(), { parent: this.document });
+    
+    // Change type away from 'Summon' if applicable, as this type is only available for 'Summon' items.
+    const source = effect.toObject();
+    if(source.type === "summon") {
+      // Attempt a best-effor conversion.
+      source.type = source.system.formula || source.duration.turns ? "affliction" : "passive";
+    }
+    return ActiveEffectPTR2e.create(source, { parent: this.document });
   }
 
   protected override async _onSubmitForm(config: foundry.applications.api.ApplicationFormConfiguration, event: Event | SubmitEvent): Promise<void> {

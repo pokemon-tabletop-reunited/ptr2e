@@ -92,7 +92,7 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
   }
 
   override async _prepareContext() {
-    const attacks = this.document.actions.attack.filter(action => !action.free);
+    const attacks = this.document.actions.attack.filter(action => !(action.free || action.variant));
     return {
       document: this.document,
       attacks
@@ -107,7 +107,6 @@ export class KnownActionsApp extends foundry.applications.api.HandlebarsApplicat
     const info = `<button type="button" class="header-control fa-solid fa-circle-question info-tooltip" 
                                 data-tooltip="${infoLabel}" aria-label="${infoLabel}" data-tooltip-direction="UP"></button>`;
     this.window.controls.insertAdjacentHTML("afterend", info);
-
 
     return frame;
   }
