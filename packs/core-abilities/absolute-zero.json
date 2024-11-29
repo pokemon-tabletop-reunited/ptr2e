@@ -1,0 +1,88 @@
+{
+  "name": "Absolute Zero",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "defensive"
+        ],
+        "name": "Absolute Zero",
+        "slug": "absolute-zero",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The user is immune to Fire-type damage.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: While the user has this as an Active Ability and Cold Snap as an Active Move, they may use the (Absolute Zero) variant of Cold Snap.</p><p> Passive: The user is immune to Fire-type damage.<p>",
+    "traits": [
+      "legendary",
+      "defensive"
+    ],
+    "slug": "absolute-zero",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "8eDXdkjBsA7Il4qY",
+  "effects": [
+    {
+      "name": "Absolute Zero",
+      "type": "passive",
+      "_id": "HETatmQmMHMUdeBG",
+      "img": "systems/ptr2e/img/svg/ice_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "fire-attack-damage-percentile",
+            "value": -100,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1732922168351,
+        "modifiedTime": 1732922220777,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
