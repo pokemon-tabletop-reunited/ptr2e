@@ -1,0 +1,40 @@
+{
+  "name": "Anger Shell",
+  "type": "ability",
+  "img": "icons/commodities/biological/shell-turtle-grey.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "desperation-1-2",
+          "interrupt-2"
+        ],
+        "name": "Anger Shell",
+        "slug": "anger-shell",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1,
+          "trigger": "<p>An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: An attack is resolved against the user and the user meets the [Desperation 1/2] Condition.</p><p>Effect: The user gains +1 ATK, SPATK, and SPD Stages and loses -1 DEF and SPDEF Stages for 5 Activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user drops below 50% HP due to damage from a Physical- or Special-Category Attack.</p><p>Effect: The user gains +1 ATK, SPATK, and SPD Stages and loses -1 DEF and SPDEF Stages for 5 Activations.</p>",
+    "traits": [
+      "desperation-1-2"
+    ],
+    "slug": "anger-shell",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "e7Fg0RwRbq71oF53",
+  "effects": []
+}
