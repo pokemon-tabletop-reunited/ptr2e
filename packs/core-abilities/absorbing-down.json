@@ -1,0 +1,52 @@
+{
+  "name": "Absorbing Down",
+  "type": "ability",
+  "img": "icons/equipment/shield/heater-wooden-antlers-blue.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-1"
+        ],
+        "name": "Absorbing Down",
+        "slug": "absorbing-down",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user gains a positive DEF Stage from an effect.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user gains a positive DEF Stage from an effect.</p><p>Effect: The triggering effect's duration increases by 2.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Absorbing Down",
+        "slug": "absorbing-down",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The user ignores negative DEF Stages.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user gains a positive DEF Stage from an effect.</p><p>Effect: The triggering effect's duration increases by 2. Passive: The user ignores negative DEF Stages.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "absorbing-down",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "mEAiYVsBDzH9mRFk",
+  "effects": []
+}
