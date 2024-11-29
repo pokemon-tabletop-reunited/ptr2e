@@ -1,0 +1,55 @@
+{
+  "name": "Aerodynamic",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/flying_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-3",
+          "environ"
+        ],
+        "name": "Aerodynamic",
+        "slug": "aerodynamic-active",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user is hit by a Flying-Type and/or [Wind] attack.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a Flying-Type and/or [Wind] attack.</p><p>Effect: The user takes no damage from the attack and is unaffected by the attack's effects. The user gains +1 SPD Stage for 5 Activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Aerodynamic",
+        "slug": "aerodynamic-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The user is treated as having the Flying Type for the effects of Windy Weather, and has +1 default SPD Stages and a Flight Score of +3 while Windy Weather is Active.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a Flying-Type and/or [Wind] attack.</p><p>Effect: The user takes no damage from the attack and is unaffected by the attack's effects. The user gains +1 SPD Stage for 5 Activations.</p><p>Passive: The user is treated as having the Flying Type for the effects of Windy Weather, and has +1 default SPD Stages and a Flight Score of +3 while Windy Weather is Active.</p>",
+    "traits": [
+      "defensive",
+      "environ"
+    ],
+    "slug": "aerodynamic",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "E4v9kg43PkxWINRi",
+  "effects": []
+}
