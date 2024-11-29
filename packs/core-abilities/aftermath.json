@@ -1,0 +1,94 @@
+{
+  "name": "Aftermath",
+  "type": "ability",
+  "img": "icons/weapons/thrown/bomb-timer.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "explode",
+          "interrupt-2"
+        ],
+        "name": "Aftermath",
+        "slug": "aftermath",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user gains @Affliction[fainted].</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user gains @Affliction[fainted].</p><p>Effect: The user freely uses Self-Destruct. The user cannot use this in response to gaining @Affliction[fainted] from setting its own HP to 0.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "self-destruct",
+        "name": "Self-Destruct",
+        "type": "attack",
+        "traits": [
+          "explode",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11
+        },
+        "category": "physical",
+        "power": 200,
+        "accuracy": 90,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user's HP becomes 0 on attack resolution.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "self-destruct-restrained",
+        "name": "Self-Destruct (Restrained)",
+        "type": "attack",
+        "traits": [
+          "explode",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 4,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 15
+        },
+        "category": "physical",
+        "power": 200,
+        "accuracy": 90,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user loses 8 Ticks of HP.</p>",
+        "variant": "self-destruct",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user gains @Affliction[fainted].</p><p>Effect: Connection - Self-Destruct. The user freely uses Self-Destruct. The user cannot use this in response to gaining @Affliction[fainted] from setting its own HP to 0. When using Self-Destruct (separately from this Ability's Trigger Affliction), the user may spend an additional 4 PP to instead take damage equal to 1/2 their Max HP on resolving Self-Destruct instead of Fainting.</p>",
+    "traits": [
+      "explode",
+      "connection"
+    ],
+    "slug": "aftermath",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "gubM49aBQUdUKGQv",
+  "effects": []
+}
