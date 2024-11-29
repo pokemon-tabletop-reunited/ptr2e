@@ -122,6 +122,9 @@ async function resolveCapture(originUuid: string, targetUuid: string, success: b
             "system.party": {
               partyMemberOf: party ? trainerActor.folder.id : null,
               teamMemberOf: []
+            },
+            prototypeToken: {
+              actorLink: true
             }
           }).toObject());
           if(!newActor) return void ui.notifications.error("Unable to resolve capture; new actor could not be created.");
@@ -137,6 +140,9 @@ async function resolveCapture(originUuid: string, targetUuid: string, success: b
           "system.party": {
             partyMemberOf: party ? trainerActor.folder.id : null,
             teamMemberOf: []
+          },
+          prototypeToken: {
+            actorLink: true
           }
         })
 
