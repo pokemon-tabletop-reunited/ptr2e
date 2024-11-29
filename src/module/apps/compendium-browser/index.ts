@@ -33,8 +33,9 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
           // },
         ]
       },
+      dragDrop: [{ dragSelector: "li.item[data-type]" }],
       actions: {
-        tutorList: () => game.ptr.tutorList.render({ force:true, actor: null})
+        tutorList: () => game.ptr.tutorList.render({ force: true, actor: null })
       }
     },
     { inplace: false }
@@ -294,7 +295,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       const search = htmlElement.querySelector<HTMLInputElement>("input[name=textFilter]");
       if (search) {
         search.addEventListener("input", () => {
-          if(search.value?.length === 1) return;
+          if (search.value?.length === 1) return;
           currentTab.filterData.search.text = search.value;
           this.#clearScrollLimit();
           this.#renderResultList({ replace: true });
@@ -320,11 +321,11 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
           });
         }
 
-        if(currentTab.isOfType("species", "move")) {
+        if (currentTab.isOfType("species", "move")) {
           const selects = currentTab.filterData.selects;
           if (selects) {
             const selectElements = sortContainer.querySelectorAll<HTMLSelectElement>("select[name]");
-            for(const select of selectElements) {
+            for (const select of selectElements) {
               const filterName = select.getAttribute("name");
               if (objectHasKey(selects, filterName)) {
                 const data = selects[filterName] as SelectData;
@@ -382,7 +383,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
           };
           switch (filterType) {
             case "checkboxes": {
-              if(!currentTab.isOfType("species", "gear", "move")) return;
+              if (!currentTab.isOfType("species", "gear", "move")) return;
               if (objectHasKey(currentTab.filterData.checkboxes, filterName)) {
                 toggleFilter(currentTab.filterData.checkboxes[filterName]);
               }
@@ -401,7 +402,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
         if (filterType === "checkboxes") {
           container.querySelectorAll<HTMLInputElement>("input[type=checkbox]").forEach((checkboxElement) => {
             checkboxElement.addEventListener("click", () => {
-              if(!currentTab.isOfType("species", "gear", "move")) return;
+              if (!currentTab.isOfType("species", "gear", "move")) return;
               if (objectHasKey(currentTab.filterData.checkboxes, filterName)) {
                 const optionName = checkboxElement.name;
                 const checkbox = currentTab.filterData.checkboxes[filterName] as CheckboxData;
@@ -526,7 +527,7 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
 
         if (filterType === "sliders") {
           // Slider filters
-          if(!currentTab.isOfType("perk", "gear", "move")) return;
+          if (!currentTab.isOfType("perk", "gear", "move")) return;
           const sliders = currentTab.filterData.sliders;
           if (!sliders) continue;
 
@@ -604,8 +605,8 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
 
   override _onRender(context: foundry.applications.api.ApplicationRenderContext, options: foundry.applications.api.HandlebarsRenderOptions): void {
     super._onRender(context, options);
-    
-    if(options?.parts?.some(p => ["controls", "content"].includes(p))) {
+
+    if (options?.parts?.some(p => ["controls", "content"].includes(p))) {
       this.#renderResultList({ replace: true });
     }
   }
@@ -641,10 +642,10 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
       list.append(fragment);
     }
 
-    // // Re-apply drag drop handler
-    // for (const dragDropHandler of this._dragDrop) {
-    //   dragDropHandler.bind(html);
-    // }
+    // Re-apply drag drop handler
+    for (const dragDropHandler of this._dragDropHandlers) {
+      dragDropHandler.bind(html);
+    }
   }
 
   /** Activate click listeners on loaded actors and items */
@@ -665,14 +666,19 @@ export class CompendiumBrowser extends foundry.applications.api.HandlebarsApplic
     }
   }
 
-  // async #resetInitializedTabs(): Promise<void> {
-  //   for (const tab of Object.values(this.compendiumTabs)) {
-  //     if (tab.isInitialized) {
-  //       await tab.init();
-  //       tab.scrollLimit = 100;
-  //     }
-  //   }
-  // }
+  override _onDragStart(event: DragEvent): void {
+    if (!(event.currentTarget instanceof HTMLElement && event.dataTransfer)) {
+      return super._onDragStart(event);
+    }
+    const item = event.currentTarget;
+    event.dataTransfer.setData(
+      "text/plain",
+      JSON.stringify({
+        type: item.dataset.type,
+        uuid: item.dataset.entryUuid,
+      }),
+    );
+  }
 
   #resetFilters(): void {
     const activeTab = this.activeTab;
