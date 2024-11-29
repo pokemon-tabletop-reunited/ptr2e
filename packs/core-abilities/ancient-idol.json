@@ -1,0 +1,56 @@
+{
+  "name": "Ancient Idol",
+  "type": "ability",
+  "img": "icons/magic/symbols/runes-carved-stone-green.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Ancient Idol",
+        "slug": "ancient-idol",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user uses DEF and SPDEF in place of ATK and SPATK respectively when attacking.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "cosmic-power",
+        "name": "Cosmic Power",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "status",
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: The user gains +1 DEF and SPDEF Stage for 5 Activations.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: Connection - Cosmic Power. The user uses DEF and SPDEF in place of ATK and SPATK respectively when attacking.</p>",
+    "traits": [
+      "connection"
+    ],
+    "slug": "ancient-idol",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "YsTznXpuToM6dqWO",
+  "effects": []
+}
