@@ -1,0 +1,99 @@
+{
+  "name": "Screech",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/normal_icon.svg",
+  "system": {
+    "slug": "screech",
+    "description": "<p>Effect: All valid targets lose -2 DEF Stages for 5 activations.</p>",
+    "traits": [
+      "sonic"
+    ],
+    "actions": [
+      {
+        "slug": "screech",
+        "name": "Screech",
+        "type": "attack",
+        "traits": [
+          "sonic"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "category": "status",
+        "accuracy": 85,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: All valid targets lose -2 DEF Stages for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "ZEV77HNqeXBYRIKR",
+  "effects": [
+    {
+      "name": "Screech",
+      "type": "passive",
+      "_id": "QIMJfzcm2ajm0ngF",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "screech-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.B79G2s6TauIlmsno",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1732969819794,
+        "modifiedTime": 1732969842063,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
