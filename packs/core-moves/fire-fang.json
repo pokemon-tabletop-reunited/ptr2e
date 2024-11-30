@@ -1,0 +1,100 @@
+{
+  "name": "Fire Fang",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "system": {
+    "slug": "fire-fang",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "fire-fang",
+        "name": "Fire Fang",
+        "type": "attack",
+        "traits": [
+          "jaw",
+          "contact",
+          "flinch-chance-4",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "category": "physical",
+        "power": 65,
+        "accuracy": 95,
+        "types": [
+          "fire"
+        ],
+        "description": "<p>Effect: On hit, the target target has a 10% chance of gaining @Affliction[burn] 5, and a 10% chance of being Flinched.</p>",
+        "img": "systems/ptr2e/img/svg/fire_icon.svg"
+      }
+    ],
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "pqZ5P3yI0bOu6Qni",
+  "effects": [
+    {
+      "name": "Fire Fang",
+      "type": "passive",
+      "_id": "fqQXA67bswoLpyA3",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "fire-fang-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.burnconditioitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1732966449975,
+        "modifiedTime": 1732966484551,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
