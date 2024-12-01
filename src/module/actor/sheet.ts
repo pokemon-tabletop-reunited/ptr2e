@@ -211,7 +211,7 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
             }})}${Handlebars.helpers.formField(sizeFields.weight, {hash: {
               localize: true,
               value: this.actor._source.system.details.size.weight
-            }})}`,
+            }})}<div class="form-group"><label>Height Class</label><div class="form-fields"><input readonly type="text" value="${game.i18n.localize(this.actor.size.toString())}"></div></div><div class="form-group"><label>Weight Class</label><div class="form-fields"><input readonly type="text" value="${this.actor.system.details.size.weightClass}"></div></div>`,
             window: { title: game.i18n.localize("PTR2E.ActorSheet.Settings.Title") },
             ok: {
               label: game.i18n.localize("PTR2E.ActorSheet.Settings.Save"),
