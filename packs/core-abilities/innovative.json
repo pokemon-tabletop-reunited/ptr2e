@@ -1,0 +1,86 @@
+{
+  "name": "Innovative",
+  "type": "ability",
+  "img": "icons/weapons/guns/gun-pistol-flintlock.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Innovative",
+        "slug": "innovative",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user's [Weapon] attacks have 30% increased Power.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: The user's [Weapon] attacks have 30% increased Power.</p>",
+    "traits": [],
+    "slug": "innovative",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "jQTWORCBDmI5bfS7",
+  "effects": [
+    {
+      "name": "Innovative",
+      "type": "passive",
+      "_id": "YFvhNzrFWmymIHey",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "percentile-modifier",
+            "key": "weapon-trait-attack-power",
+            "value": 30,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "combat": null,
+        "seconds": null,
+        "rounds": null,
+        "turns": null,
+        "startTurn": null,
+        "startRound": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "12.331",
+        "systemId": null,
+        "systemVersion": null,
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      }
+    }
+  ]
+}
