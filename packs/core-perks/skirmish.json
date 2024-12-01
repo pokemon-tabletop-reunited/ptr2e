@@ -1,0 +1,68 @@
+{
+  "folder": "Et2u8UoXSe2a17oq",
+  "name": "Skirmish",
+  "type": "perk",
+  "_id": "lAzKGhCaE28Nk7gP",
+  "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
+  "system": {
+    "actions": [
+      {
+        "name": "Skirmish",
+        "slug": "skirmish",
+        "description": "<p>The user gains +2 SPD stages for 5 Activations, or removed early if the user takes damage.</p>",
+        "traits": [
+          "interrupt-2"
+        ],
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "The user enters Combat."
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "slug": "skirmish",
+    "description": "<p>Upon entering combat, as a Free Action at [Interrupt 2], you may spend 2 PP to gain +2 SPD stages for 5 Activations, or until you take damage.</p>",
+    "traits": [],
+    "prerequisites": [
+      "None"
+    ],
+    "cost": 2,
+    "design": {
+      "arena": "physical",
+      "approach": "finesse",
+      "archetype": "Hunter"
+    },
+    "node": {
+      "i": 16,
+      "j": -65,
+      "connected": [
+        "sight-beyond-sight",
+        "aura-haze",
+        "keep-fighting",
+        "tubthumping"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#ff0000",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Ninja.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": []
+}
