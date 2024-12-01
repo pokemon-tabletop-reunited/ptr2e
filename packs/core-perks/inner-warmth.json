@@ -1,0 +1,115 @@
+{
+  "name": "Inner Warmth",
+  "type": "perk",
+  "system": {
+    "prerequisites": [
+      "[Fire]"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "physical",
+      "approach": "power",
+      "archetype": "[Fire]"
+    },
+    "description": "<p>You gain the [Heater] trait.</p>",
+    "actions": [
+      {
+        "name": "Inner Warmth",
+        "slug": "inner-warmth",
+        "description": "<p>You gain the [Heater] trait.</p>",
+        "cost": {
+          "activation": "free"
+        },
+        "type": "passive",
+        "traits": [],
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
+      }
+    ],
+    "slug": "inner-warmth",
+    "traits": [],
+    "node": {
+      "i": 10,
+      "j": 39,
+      "connected": [
+        "type-embodiment-type-2",
+        "root-4",
+        "intense-heat",
+        "firefly"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/fire_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal"
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "vgrtXLOiip6DrtUb",
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "effects": [
+    {
+      "name": "Inner Warmth",
+      "type": "passive",
+      "_id": "9sPoZxBVcS4lYsy5",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "Heater",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1733019363144,
+        "modifiedTime": 1733019373225,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
+}
