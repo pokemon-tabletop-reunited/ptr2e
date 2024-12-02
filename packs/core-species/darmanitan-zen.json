@@ -16,17 +16,25 @@
     "movement": {
       "primary": [
         {
-          "type": "overland",
-          "value": 9
+          "type": "flight",
+          "value": 6
         }
       ],
-      "secondary": []
+      "secondary": [
+        {
+          "type": "overland",
+          "value": 3
+        }
+      ]
     },
     "traits": [
       "pokemon",
       "heater",
-      "firestarter",
-      "quadrupedal"
+      "psycher",
+      "bipedal",
+      "hover",
+      "mind-lock",
+      "telekinetic-6"
     ],
     "abilities": {
       "starting": [
@@ -36,23 +44,23 @@
       ],
       "basic": [
         {
-          "slug": "sheer-force"
+          "slug": "flame-body"
         },
         {
-          "slug": "stalwart"
+          "slug": "psychic-surge"
         }
       ],
       "advanced": [
         {
-          "slug": "drought"
+          "slug": "iron-fist"
         },
         {
-          "slug": "sunbathe"
+          "slug": "impenetrable"
         }
       ],
       "master": [
         {
-          "slug": "super-luck"
+          "slug": "equinox"
         },
         {
           "slug": "sun-worship"
@@ -62,7 +70,7 @@
     "skills": [
       {
         "slug": "acrobatics",
-        "value": 60,
+        "value": 35,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -70,7 +78,7 @@
       },
       {
         "slug": "climb",
-        "value": 50,
+        "value": 25,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -78,22 +86,6 @@
       },
       {
         "slug": "conversation",
-        "value": 45,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "intimidate",
-        "value": 40,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": null
-      },
-      {
-        "slug": "lift",
         "value": 55,
         "rvs": 0,
         "favourite": false,
@@ -101,7 +93,15 @@
         "group": null
       },
       {
-        "slug": "listen",
+        "slug": "flying",
+        "value": 40,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "intimidate",
         "value": 30,
         "rvs": 0,
         "favourite": false,
@@ -109,8 +109,24 @@
         "group": null
       },
       {
+        "slug": "lift",
+        "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "listen",
+        "value": 50,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "natural-world",
-        "value": 25,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -125,15 +141,15 @@
         "group": null
       },
       {
-        "slug": "running",
+        "slug": "psychic",
         "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
-        "group": null
+        "group": "occult"
       },
       {
-        "slug": "spot",
+        "slug": "running",
         "value": 25,
         "rvs": 0,
         "favourite": false,
@@ -141,8 +157,16 @@
         "group": null
       },
       {
+        "slug": "spot",
+        "value": 55,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
         "slug": "stealth",
-        "value": 20,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -151,6 +175,14 @@
       {
         "slug": "survival",
         "value": 35,
+        "rvs": 0,
+        "favourite": false,
+        "hidden": false,
+        "group": null
+      },
+      {
+        "slug": "swim",
+        "value": 10,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
