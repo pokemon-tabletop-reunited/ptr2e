@@ -41,10 +41,45 @@
         "types": [
           "dragon"
         ],
-        "description": "<p>Effect: On hit, non-[Legendary] targets are @Affliction[lifted] 3. The user may spend 4 PP to have this attack lose [Blast 6] and change its Range to <q>15m Wide Line<q> until their next Activation.</p>",
+        "description": "<p>Effect: On hit, non-[Legendary] targets are @Affliction[lifted] 3.</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "spacial-rend-wave",
+        "name": "Spacial Rend (Wave)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "crit-2",
+          "sharp",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 13,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "dragon"
+        ],
+        "description": "<p>Effect: On hit, non-[Legendary] targets are @Affliction[lifted] 3.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "variant": "spacial-rend",
+        "free": true,
         "slot": null
       }
     ],
