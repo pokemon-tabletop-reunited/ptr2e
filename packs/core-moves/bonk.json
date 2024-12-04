@@ -1,0 +1,50 @@
+{
+    "name": "Bonk",
+    "type": "move",
+    "img": "systems/ptr2e/img/svg/normal_icon.svg",
+    "system": {
+      "slug": "bonk",
+      "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[drowsy] 5.</p>",
+      "traits": [
+        "contact"
+      ],
+      "actions": [
+        {
+          "slug": "bonk",
+          "name": "Bonk",
+          "type": "attack",
+          "traits": [
+            "contact",
+            "pp-updated"
+          ],
+          "range": {
+            "target": "creature",
+            "distance": 1,
+            "unit": "m"
+          },
+          "cost": {
+            "activation": "complex",
+            "powerPoints": 1,
+            "delay": null,
+            "priority": null,
+            "trigger": null
+          },
+          "category": "physical",
+          "power": 45,
+          "accuracy": 95,
+          "types": [
+            "normal"
+          ],
+          "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[drowsy] 5.</p>",
+          "contestType": "",
+          "contestEffect": "",
+          "free": false,
+          "slot": null
+        }
+      ],
+      "container": null,
+      "grade": "E"
+    },
+    "_id": "hYGnftBlueFsDJlV",
+    "effects": []
+  }
