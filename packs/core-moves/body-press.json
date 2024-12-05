@@ -1,0 +1,47 @@
+{
+  "name": "Body Press",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+  "system": {
+    "slug": "body-press",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "body-press",
+        "name": "Body Press",
+        "type": "attack",
+        "traits": [
+          "crushing",
+          "dash",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "<p>Effect: This Attack uses the user's DEF in calculating damage, rather than their ATK.</p>",
+        "img": "systems/ptr2e/img/svg/fighting_icon.svg",
+        "offensiveStat": "def"
+      }
+    ],
+    "grade": "C",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "14Y2q4Gi9E8pQCHQ",
+  "effects": []
+}
