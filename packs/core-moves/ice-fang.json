@@ -1,0 +1,101 @@
+{
+  "name": "Ice Fang",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "system": {
+    "slug": "ice-fang",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "ice-fang",
+        "name": "Ice Fang",
+        "type": "attack",
+        "traits": [
+          "jaw",
+          "contact",
+          "flinch-chance-4",
+          "pp-updated",
+          "partial-automation"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "category": "physical",
+        "power": 65,
+        "accuracy": 95,
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Effect: On hit, the target has a 10% chance of gaining @Affliction[frostbite] 5, and a 10% chance of being Flinched.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "grade": "E",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "WpolCDpAPNZl7wGS",
+  "effects": [
+    {
+      "name": "Ice Fang",
+      "type": "passive",
+      "_id": "hYXLFPR65C8bLB7S",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "ice-fang-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.frostbiteconitem",
+            "predicate": [],
+            "chance": 10,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1733419084497,
+        "modifiedTime": 1733419104740,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
+}
