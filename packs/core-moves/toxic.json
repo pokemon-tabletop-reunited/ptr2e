@@ -1,0 +1,132 @@
+{
+  "name": "Toxic",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/poison_icon.svg",
+  "system": {
+    "slug": "toxic",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "toxic",
+        "name": "Toxic",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "category": "status",
+        "accuracy": 90,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Effect: The target gains @Affliction[blight] 8. If Toxic is used by a Poison-Typed creature, this attack gains [Danger Close].</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "toxic-poison-type",
+        "name": "Toxic (Poison-Type)",
+        "type": "attack",
+        "traits": [
+          "danger-close"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "trigger": "<p>The user has the Poison Type.</p>"
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Trigger: The user has the Poison Type.</p><p>Effect: The target gains @Affliction[blight] 8.</p>",
+        "variant": "toxic",
+        "free": true,
+        "img": "systems/ptr2e/img/svg/poison_icon.svg"
+      }
+    ],
+    "grade": "A",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "oTSFbF32HX101PTb",
+  "effects": [
+    {
+      "name": "Toxic",
+      "type": "passive",
+      "_id": "3sYmdHEh1TC2lKSD",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "toxic-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.blightcondititem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-effect",
+            "key": "toxic-poison-type-attack",
+            "value": "Compendium.ptr2e.core-effects.Item.blightcondititem",
+            "predicate": [],
+            "chance": 100,
+            "affects": "target",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1733414094011,
+        "modifiedTime": 1733414137714,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
+}
