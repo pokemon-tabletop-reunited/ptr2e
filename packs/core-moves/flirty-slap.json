@@ -1,0 +1,50 @@
+{
+    "name": "Flirty Slap",
+    "type": "move",
+    "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+    "system": {
+      "slug": "flirty-slap",
+      "description": "",
+      "traits": [
+        "contact"
+      ],
+      "actions": [
+        {
+          "slug": "flirty-slap",
+          "name": "Flirty Slap",
+          "type": "attack",
+          "traits": [
+            "contact",
+            "pp-updated"
+          ],
+          "range": {
+            "target": "creature",
+            "distance": 1,
+            "unit": "m"
+          },
+          "cost": {
+            "activation": "complex",
+            "powerPoints": 1,
+            "delay": null,
+            "priority": null,
+            "trigger": null
+          },
+          "category": "physical",
+          "power": 60,
+          "accuracy": 100,
+          "types": [
+            "fairy"
+          ],
+          "description": "<p>Effect: On hit, the target has a 20% chance of gaining @Affliction[charmed] 5.</p>",
+          "contestType": "",
+          "contestEffect": "",
+          "free": false,
+          "slot": null
+        }
+      ],
+      "container": null,
+      "grade": "E"
+    },
+    "_id": "bB1QDHdtZFal3cZH",
+    "effects": []
+  }
