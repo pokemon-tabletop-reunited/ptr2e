@@ -13,7 +13,7 @@
       {
         "slug": "become-giant",
         "name": "Become Giant!",
-        "type": "attack",
+        "type": "generic",
         "traits": [
           "phenomenon",
           "command"
@@ -25,10 +25,10 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 10,
+          "powerPoints": 6,
           "delay": null,
           "priority": null,
-          "trigger": null
+          "trigger": "<p>Triggered by an ally using Crystal Pitch!.</p>"
         },
         "category": "status",
         "power": null,
@@ -36,10 +36,43 @@
         "types": [
           "untyped"
         ],
-        "description": "<p>Effect: The user Dynamaxes. The user may only use Action within 20m of their partner that possesses a Wishing Star. If user is in an area with abundant Galar particles (or similar), they may use this Action without spending PP.</p>",
+        "description": "<p>Trigger: Triggered by an ally using Crystal Pitch!.</p><p>Effect: The user Dynamaxes. If user is in an area with abundant Galar particles (or similar).</p>",
         "contestType": "",
         "contestEffect": "",
         "free": false,
+        "slot": null
+      },
+      {
+        "slug": "become-giant-power-source",
+        "name": "Become Giant! (Power Source)",
+        "type": "generic",
+        "traits": [
+          "phenomenon",
+          "command"
+        ],
+        "range": {
+          "target": "self",
+          "distance": 0,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": "<p>The user is in an area with abundant Galar particles (or similar) or heavily irradiated by them.</p>"
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "untyped"
+        ],
+        "description": "<p>Trigger: The user is in an area with abundant Galar particles (or similar) or heavily irradiated by them.</p><p>Effect: The user Dynamaxes.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": false,
+        "variant": "become-giant",
         "slot": null
       }
     ],

@@ -6,28 +6,45 @@
     "actions": [
       {
         "traits": [
-          "friendly",
           "interrupt-1"
         ],
+        "name": "Fearmonger",
+        "slug": "fearmonger-trigger",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>A creature hits the user with a [Contact] attack.</p>",
+          "delay": null,
+          "priority": null
+        },
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: A creature hits the user with a [Contact] attack.</p><p>Effect: The triggering creature gains @Affliction[fear] 5.</p>"
+      },
+      {
+        "traits": [],
         "name": "Fearmonger",
         "slug": "fearmonger",
         "type": "passive",
         "cost": {
           "activation": "free",
-          "powerPoints": 2,
-          "trigger": "<p>A creature ends their Activation within Range of the user, or attacks the user with a [Contact] attack.</p>",
+          "powerPoints": 0,
           "delay": null,
           "priority": null
         },
         "range": {
-          "target": "emanation",
+          "target": "enemy-aura",
           "distance": 6,
           "unit": "m"
         },
-        "description": "<p>Trigger: A creature ends their Activation within Range of the user, or attacks the user with a [Contact] attack.</p><p>Effect: The triggering creature gains @Affliction[fear] 2, stacking with any @Affliction[fear] they previously had.</p>"
+        "description": "<p>Effect: Valid creatures in range gain @Affliction[fear] 2, at the end of their Activations.</p>"
       }
     ],
-    "description": "<p>Trigger: A creature ends their Activation within Range of the user, or attacks the user with a [Contact] attack.</p><p>Effect: The triggering creature gains @Affliction[fear] 2, stacking with any @Affliction[fear] they previously had.</p>",
+    "description": "<p>Trigger: A creature hits the user with a [Contact] attack.</p><p>Effect: The triggering creature gains @Affliction[fear] 5.</p><p>Passive: Enemy creatures within 6m of the user gain @Affliction[fear] 2 at the end of their Activations.</p>",
     "traits": [
       "friendly"
     ],
