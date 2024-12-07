@@ -1,7 +1,7 @@
 {
   "name": "Adrenaline",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "icons/magic/movement/trail-streak-zigzag-yellow.webp",
   "system": {
     "actions": [
       {
@@ -18,11 +18,11 @@
           "target": "self",
           "unit": "m"
         },
-        "description": "<p>Effect: While the user meets the [Desperation 1/2] Condition, their SPD stat is increased by 50% and they have +1 default SPD Stage.</p>",
+        "description": "<p>Effect: While the user meets the [Desperation 1/2] Condition, their SPD stat is increased by 50% and they have +1 .</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "<p>Effect: While the user meets the [Desperation 1/2] Condition, their SPD stat is increased by 50% and they have +2 default SPD Stages.</p>",
+    "description": "<p>Effect: While the user meets the [Desperation 1/2] Condition, their SPD stat is increased by 50%.</p>",
     "traits": [
       "desperation-1-2"
     ],
@@ -38,12 +38,12 @@
       "name": "Adrenaline",
       "type": "passive",
       "_id": "HiauYnS5CVgTdQRY",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "icons/magic/movement/trail-streak-zigzag-yellow.webp",
       "system": {
         "changes": [
           {
             "type": "basic",
-            "key": "system.attributes.spe.Stage",
+            "key": "system.attributes.spd.value",
             "value": {
               "brackets": [
                 {
@@ -61,13 +61,13 @@
           },
           {
             "type": "basic",
-            "key": "system.attributes.spe.Stage",
-            "value":  {
+            "key": "system.attributes.spd.value",
+            "value": {
               "brackets": [
                 {
                   "start": 1,
                   "end": 50,
-                  "value": 2
+                  "value": 1
                 }
               ],
               "field": "actor|system.health.percent"
@@ -108,8 +108,8 @@
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.4.2",
         "createdTime": 1728597568105,
-        "modifiedTime": 1728635592802,
-        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+        "modifiedTime": 1732922569121,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
       }
     }
   ]
