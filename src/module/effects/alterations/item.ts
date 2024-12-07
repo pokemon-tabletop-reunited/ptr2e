@@ -302,8 +302,11 @@ class ItemAlteration extends foundry.abstract.DataModel<ChangeModel> {
 interface ItemAlteration extends foundry.abstract.DataModel<ChangeModel>, ModelPropsFromSchema<ItemAlterationSchema> { }
 
 interface ItemAlterationSchema extends foundry.data.fields.DataSchema {
+  /** AE Application Mode, valid values are 0-5. See `CONST.ACTIVE_EFFECT_MODES` */
   mode: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
+  /** AE-Like `path` field. */
   property: StringField<string, string, true, false, true>;
+  /** AE-Like `value` field. */
   value: ResolvableValueField<true, false, true>;
 }
 

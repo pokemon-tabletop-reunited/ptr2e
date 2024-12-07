@@ -1203,7 +1203,7 @@ class ActorPTR2e<
     if (sizePenalty) context.self.modifiers.push(sizePenalty);
 
     const evasionStages = context.target?.actor?.evasionStage ?? 0;
-    if (evasionStages !== 0) {
+    if (evasionStages !== 0 && !omittedSubrolls.has("accuracy")) {
       const evasionModifier = new ModifierPTR2e({
         label: "PTR2E.Modifiers.evasion",
         slug: `evasion-modifier-unicqi-${appliesTo ?? fu.randomID()}`,

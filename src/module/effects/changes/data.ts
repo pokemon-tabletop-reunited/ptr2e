@@ -19,16 +19,26 @@ interface ResolveValueParams {
 }
 
 interface ChangeSchema extends foundry.data.fields.DataSchema {
-    key: foundry.data.fields.StringField<string, string, true, false, true>
-    value: ResolvableValueField<true, false, true>
-    mode: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
-    priority: foundry.data.fields.NumberField;
+  // Core Foundry Fields
+  /** Key Field, different functionality for each Change Model */
+  key: foundry.data.fields.StringField<string, string, true, false, true>
+  /** Value Field, different functionality for each Change Model */
+  value: ResolvableValueField<true, false, true>
+  /** AE Application Mode, valid values are 0-5. See `CONST.ACTIVE_EFFECT_MODES` */
+  mode: foundry.data.fields.NumberField<ActiveEffectChangeMode, ActiveEffectChangeMode, false, false, true>
+  /** Unused Field */
+  priority: foundry.data.fields.NumberField;
 
-    type: foundry.data.fields.StringField<string, string, true, false, true>;
+  // Custom Fields
+  /** The Type field, defining which type of change model this is. */
+  type: foundry.data.fields.StringField<string, string, true, false, true>;
 
-    label: foundry.data.fields.StringField<string, string, false, false, true>;
-    predicate: PredicateField;
-    ignored: foundry.data.fields.BooleanField;
+  /** Label field used for most modifier related Changes */
+  label: foundry.data.fields.StringField<string, string, false, false, true>;
+  /** @See[Predicate] */
+  predicate: PredicateField;
+  /** Whether this effect failed its predication or otherwise should be disabled. */
+  ignored: foundry.data.fields.BooleanField;
 };
 
 interface ChangeSource {

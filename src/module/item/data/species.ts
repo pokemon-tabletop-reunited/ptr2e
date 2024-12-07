@@ -273,15 +273,15 @@ class SpeciesSystem extends SpeciesExtension {
           switch (true) {
             case height < 0.3048:
               return 0;
-            case height < 0.6858:
+            case height < 0.6096:
               return 1;
-            case height < 1.3208:
+            case height < 1.2192:
               return 2;
-            case height < 3.048:
+            case height < 2.4384:
               return 3;
-            case height < 5.4864:
+            case height < 4.8768:
               return 4;
-            case height < 10.9728:
+            case height < 9.7536:
               return 5;
             case height < 16.4592:
               return 6;
@@ -293,15 +293,15 @@ class SpeciesSystem extends SpeciesExtension {
           switch (true) {
             case height < 0.1512:
               return 0;
-            case height < 0.3402:
+            case height < 0.3024:
               return 1;
-            case height < 0.6551:
+            case height < 0.6047:
               return 2;
-            case height < 1.5118:
+            case height < 1.2094:
               return 3;
-            case height < 2.7213:
+            case height < 2.4189:
               return 4;
-            case height < 5.4425:
+            case height < 4.8378:
               return 5;
             case height < 8.1638:
               return 6;
@@ -313,15 +313,15 @@ class SpeciesSystem extends SpeciesExtension {
           switch (true) {
             case height < 0.5073:
               return 0;
-            case height < 1.1413:
+            case height < 1.0145:
               return 1;
-            case height < 2.1981:
+            case height < 2.029:
               return 2;
-            case height < 5.0725:
+            case height < 4.058:
               return 3;
-            case height < 9.1305:
+            case height < 8.116:
               return 4;
-            case height < 18.2611:
+            case height < 16.2321:
               return 5;
             case height < 27.3916:
               return 6;
