@@ -23,34 +23,72 @@
     "traits": [
       "phenomenon",
       "slottable",
-      "pp-pool-10"
+      "charge-pool-1"
     ],
     "actions": [
       {
-        "name": "Wishing Star",
-        "slug": "wishing-star",
-        "type": "passive",
-        "description": "Effect: The user may utilize this Item's PP Pool to pay for the PP Cost of Become Giant!",
+        "slug": "max-lob",
+        "name": "Max Lob!",
+        "type": "generic",
         "traits": [
-          "Phenomenon",
-          "Slottable",
-          "PP Pool 10"
+          "phenomenon",
+          "command"
         ],
         "range": {
-          "target": "creature",
-          "distance": 0,
+          "target": "ally",
+          "distance": 20,
           "unit": "m"
         },
         "cost": {
           "activation": "complex",
           "powerPoints": 0,
           "delay": null,
-          "priority": null
+          "priority": null,
+          "trigger": null
         },
-        "variant": null
+        "types": [
+          "untyped"
+        ],
+        "description": "<p>Effect: The user temporarily recalls a target within Range into an energized Max Ball. Then, the user Flings the Max Ball, sending the target out on a centered on a specific space. The target then uses Become Giant!.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
+      },
+      {
+        "slug": "max-lob-wishing-star-charge",
+        "name": "Max Lob! (Wishing Star Charge)",
+        "type": "generic",
+        "traits": [
+          "phenomenon",
+          "command"
+        ],
+        "range": {
+          "target": "ally",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 0,
+          "delay": null,
+          "priority": null,
+          "trigger": null
+        },
+        "category": "status",
+        "power": null,
+        "accuracy": null,
+        "types": [
+          "untyped"
+        ],
+        "description": "<p>Effect: The user temporarily recalls a target within Range into an energized Max Ball. Then, the user Flings the Max Ball, sending the target out on a centered on a specific space. The target then freely uses Become Giant!.</p>",
+        "contestType": "",
+        "contestEffect": "",
+        "free": true,
+        "slot": null
       }
     ],
-    "description": "Effect: The user may utilize this Item's PP Pool to pay for the PP Cost of Become Giant!",
+    "description": "Effect: The user may utilize a charge from this Item to pay the PP Cost of Become Giant! for a creature on their Team.",
     "slug": null,
     "container": null,
     "quantity": 1,

@@ -399,7 +399,9 @@
     "evolutions": {
       "name": "drampa",
       "details": null,
-      "evolutions": []
+      "evolutions": [],
+      "uuid": null,
+      "methods": []
     },
     "number": 780,
     "traits": [
@@ -603,9 +605,69 @@
       }
     ],
     "habitats": [],
-    "slug": "drampa"
+    "slug": "drampa",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "chFOSHC5UcgPgwp2",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Hover",
+      "type": "passive",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "domain": "immunities",
+            "value": "trait:earthbound",
+            "key": "",
+            "mode": 2,
+            "priority": null,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          }
+        ],
+        "traits": [
+          "hover"
+        ],
+        "slug": null,
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "_id": null,
+      "img": null,
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      }
+    }
+  ]
 }

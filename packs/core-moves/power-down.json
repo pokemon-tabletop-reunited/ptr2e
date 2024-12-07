@@ -4,33 +4,34 @@
   "img": "systems/ptr2e/img/svg/untyped_icon.svg",
   "system": {
     "slug": "power-down",
-    "description": "<p>Effect: Deactivates a [Phenomenon] effect on a partnered creature. This may be used as a Command Action.</p>",
+    "description": "<p>Effect: Deactivates a [Phenomenon] effect on the target, and the target is Flinched.</p>",
     "traits": [
       "evolution",
       "phenomenon",
-      "command"
+      "command",
+      "flinch-3"
     ],
     "actions": [
       {
         "slug": "power-down",
         "name": "Power Down!",
-        "type": "attack",
+        "type": "generic",
         "traits": [
           "evolution",
           "phenomenon",
-          "command"
+          "command",
+          "flinch-3"
         ],
-        "types": ["untyped"],
         "range": {
           "target": "ally",
           "distance": 50,
           "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 1
+          "activation": "simple",
+          "powerPoints": 0
         },
-        "description": "<p>Effect: Deactivates a [Phenomenon] effect on a partnered creature.</p>",
+        "description": "<p>Effect: Deactivates a [Phenomenon] effect on the target, and the target is Flinched.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],

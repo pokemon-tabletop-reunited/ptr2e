@@ -1,7 +1,7 @@
 {
   "name": "Wickedness",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
   "system": {
     "actions": [
       {
@@ -27,8 +27,7 @@
     "description": "<p>Effect: The user and all creatures within Range increase the Power of their Dark-Type attacks by 20%.</p>",
     "traits": [
       "domain",
-      "dark",
-      "partial-automation"
+      "dark"
     ],
     "slug": "wickedness",
     "_migration": {
@@ -42,7 +41,7 @@
       "name": "Wickedness",
       "type": "passive",
       "_id": "iv8BCajSNudSRgRh",
-      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "img": "systems/ptr2e/img/svg/dark_icon.svg",
       "system": {
         "changes": [
           {
@@ -81,14 +80,93 @@
       "sort": 0,
       "flags": {},
       "_stats": {
-        "compendiumSource": null,
+        "compendiumSource": "Compendium.ptr2e.core-abilities.Item.6o74KpM7eBLJij3Z.ActiveEffect.iv8BCajSNudSRgRh",
         "duplicateSource": null,
-        "coreVersion": "12.330",
+        "coreVersion": "12.331",
         "systemId": "ptr2e",
         "systemVersion": "0.10.0-alpha.2.0.3",
         "createdTime": 1722263626083,
-        "modifiedTime": 1722263644420,
-        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+        "modifiedTime": 1733415391339,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    },
+    {
+      "name": "Wickedness (Aura)",
+      "type": "passive",
+      "_id": "lckjHwpi6p660QfP",
+      "img": "systems/ptr2e/img/svg/dark_icon.svg",
+      "system": {
+        "changes": [
+          {
+            "type": "aura",
+            "key": "",
+            "value": 0,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "radius": 5,
+            "effects": [
+              {
+                "uuid": "Compendium.ptr2e.core-effects.Item.SPJ5lB8B2MJ17FVC",
+                "affects": "all",
+                "events": [
+                  "enter"
+                ],
+                "removeOnExit": true,
+                "includesSelf": false,
+                "appliesSelfOnly": false,
+                "predicate": [
+                  "target:trait:dark"
+                ]
+              }
+            ],
+            "appearance": {
+              "border": {
+                "color": "#FF0000",
+                "alpha": 0.75
+              },
+              "highlight": {
+                "color": "user-color",
+                "alpha": 0.25
+              },
+              "texture": null
+            },
+            "mergeExisting": true
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1733415511407,
+        "modifiedTime": 1733415572852,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
       }
     }
   ]

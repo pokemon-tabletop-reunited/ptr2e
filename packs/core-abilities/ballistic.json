@@ -6,22 +6,38 @@
       "actions": [
         {
           "traits": [],
-          "name": "Ballistic",
-          "slug": "ballistic",
+          "name": "Ballistic (Contact)",
+          "slug": "ballistic-contact",
           "type": "generic",
           "cost": {
             "activation": "free",
-            "powerPoints": 2
+            "powerPoints": 3
           },
           "range": {
             "target": "self",
             "distance": 0,
             "unit": "m"
           },
-          "description": "The user's next [Contact] Attack loses [Contact], gains [Missile] (if it already had [Missile], its Power increases by +30%), and has its Range multiplied by x6 until it is resolved.</p>"
+          "description": "<p>The user's next declared [Contact] Attack loses [Contact], gains [Missile] (if it already had [Missile], its Power increases by +30%), and has its Range multiplied by x6 until it is resolved.</p>"
+        },
+        {
+          "traits": [],
+          "name": "Ballistic (Missile)",
+          "slug": "ballistic-missile",
+          "type": "generic",
+          "cost": {
+            "activation": "free",
+            "powerPoints": 1
+          },
+          "range": {
+            "target": "self",
+            "distance": 0,
+            "unit": "m"
+          },
+          "description": "<p>The user's next declared AoE [Missile] Attack has its Target change to <q>Creature<q>, and has its Range multiplied by x3 until it is resolved.</p>"
         }
       ],
-      "description": "The user's next [Contact] Attack loses [Contact], gains [Missile] (if it already had [Missile], its Power increases by +30%), and has its Range multiplied by x6 until it is resolved.</p>",
+      "description": "<p>The user may take two Actions on their Activations: <ol><li>The user spends 3 PP. The user's next declared [Contact] Attack loses [Contact], gains [Missile] (if it already had [Missile], its Power increases by +30%), and has its Range multiplied by x6 until it is resolved.</li><li><p>The user spends 1 PP. The user's next declared AoE [Missile] Attack has its Target change to <q>Creature<q>, and has its Range multiplied by x3 until it is resolved.</li></ol></p>",
       "traits": [],
       "slug": null,
       "container": null
