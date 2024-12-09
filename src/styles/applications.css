@@ -6824,6 +6824,9 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 #perk-web-app [data-application-part="web"] {
   grid-area: web;
+  display: contents;
+}
+#perk-web-app [data-application-part="web"] .scroll {
   display: flex;
   overflow: auto;
 }
@@ -6842,7 +6845,7 @@ ul.item-list.result-list li.item.rarity-unique {
   grid-template-rows: repeat(250, 48px);
   gap: 1.5rem;
   z-index: 2;
-  border: 1px solid var(--border-theme-color);
+  height: max-content;
 }
 #perk-web-app [data-application-part="web"] section.perk-grid .perk {
   height: 48px;

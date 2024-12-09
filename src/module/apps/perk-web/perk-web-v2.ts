@@ -79,6 +79,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     web: {
       id: "web",
       template: "systems/ptr2e/templates/apps/perk-web/web.hbs",
+      scrollable: [".scroll"]
     },
     searchHeader: {
       id: "searchHeader",
@@ -326,7 +327,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   }
 
   renderSVG() {
-    const element = this.element.querySelector<HTMLElement>(`[data-application-part="web"]`);
+    const element = this.element.querySelector<HTMLElement>(`[data-application-part="web"] .scroll`);
     if (!element) return;
 
     const existing = element.querySelector<SVGSVGElement>("svg");
@@ -508,12 +509,13 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   }
 
   zoom(zoom = this._zoomAmount) {
+    return;
     const grid = this.element.querySelector<HTMLElement>(".perk-grid");
     const main = this.element.querySelector<HTMLElement>(`[data-application-part="web"]`);
     if (!grid || !main) return;
     this._zoomAmount = zoom;
 
-    grid.style.transform = `scale(${zoom})`;
+    grid!.style.transform = `scale(${zoom})`;
     this.renderSVG()
   }
 

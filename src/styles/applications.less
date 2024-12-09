@@ -7007,8 +7007,12 @@ body {
   [data-application-part="web"] {
     grid-area: web;
 
-    display: flex;
-    overflow: auto;
+    display: contents;
+
+    .scroll {
+      display: flex;
+      overflow: auto;
+    }
     
     svg {
       position: absolute;
@@ -7026,7 +7030,7 @@ body {
       grid-template-rows: repeat(250, 48px);
       gap: 1.5rem;
       z-index: 2;
-      border: 1px solid var(--border-theme-color);
+      height: max-content;
 
       .perk {
         height: 48px;
