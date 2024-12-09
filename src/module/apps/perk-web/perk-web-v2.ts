@@ -568,8 +568,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     if (currentlyOnWeb === item) {
       this._perkStore.delete(`${item.system.node.x}-${item.system.node.y}`);
     }
-    await item.update({ "system.node": { x: j, y: i } });
-    this._perkStore.set(`${j}-${i}`, item);
+    await item.update({ "system.node": { x: i, y: j } });
+    this._perkStore.set(`${i}-${j}`, item);
     this.render({ parts: ["web"] })
     return;
   }
