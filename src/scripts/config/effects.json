@@ -532,7 +532,7 @@
         },
         {
           "type": "basic",
-          "key": "system.attributes.spd.stage",
+          "key": "system.attributes.eva.stage",
           "value": -1,
           "mode": 2
         }
@@ -579,6 +579,34 @@
       ]
     },
     "description": "PTR2E.Effect.Statuses.Descriptions.infested"
+  },
+  {
+    "id": "tased",
+    "name": "PTR2E.Effect.Statuses.Labels.tased",
+    "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+    "type": "affliction",
+    "duration": {
+      "turns": 5
+    },
+    "system": {
+      "changes": [
+        {
+          "type": "basic",
+          "key": "system.attributes.spd.stage",
+          "value": -1,
+          "mode": 2
+        }
+      ],
+      "formula": "1/16",
+      "type": "damage",
+      "removeOnRecall": false,
+      "removeAfterCombat": true,
+      "traits": [
+        "electric",
+        "minor-affliction"
+      ]
+    },
+    "description": "PTR2E.Effect.Statuses.Descriptions.tased"
   },
   {
     "id": "wind-shear",
