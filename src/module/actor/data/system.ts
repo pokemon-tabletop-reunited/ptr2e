@@ -306,7 +306,7 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
   }
 
   getLevel(experience: number = this.advancement.experience.current): number {
-    return this.parent.isHumanoid() ? Math.max(1, Math.floor(Math.cbrt(((experience || 1) * 4) / 5))) : Math.max(1, Math.floor(Math.cbrt(((experience || 1) * 6) / 3)));
+    return this.parent.isHumanoid() ? Math.max(1, Math.floor(Math.cbrt(((experience || 1) * 1) / 1))) : Math.max(1, Math.floor(Math.cbrt(((experience || 1) * 1) / 1)));
   }
 
   override prepareBaseData(): void {
@@ -338,12 +338,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     this.advancement.level = this.getLevel();
     if (this.parent.isHumanoid()) {
-      this.advancement.experience.next = Math.ceil((5 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 4)
+      this.advancement.experience.next = Math.ceil((1 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 1)
       this.advancement.experience.diff =
         this.advancement.experience.next - this.advancement.experience.current;
     }
     else {
-      this.advancement.experience.next = Math.ceil((3 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 6)
+      this.advancement.experience.next = Math.ceil((1 * Math.pow(Math.min(this.advancement.level + 1, 100), 3)) / 1)
       this.advancement.experience.diff =
         this.advancement.experience.next - this.advancement.experience.current;
     }
