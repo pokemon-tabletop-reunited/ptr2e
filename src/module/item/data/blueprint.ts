@@ -409,21 +409,32 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           return points % 4 === 0 ? points : points + (4 - (points % 4));
         })()
 
-        class weightedBag<T> {
-          entries: { entry: T; weight: number }[] = [];
-          total = 0;
+        class WeightedBag<T> {
+          private entries: { entry: T; weight: number }[] = [];
+          private totalWeight = 0;
+        
           addEntry(entry: T, weight: number) {
-            this.total += weight;
-            this.entries.push({ entry, weight: this.total });
+            this.entries.push({ entry, weight });
+            this.totalWeight += weight;
           }
+        
           get() {
-            return this.entries.find((entry) => entry.weight >= Math.random() * this.total)!
-              .entry;
+            const rand = Math.random() * this.totalWeight;
+            let cumulativeWeight = 0;
+        
+            for (const { entry, weight } of this.entries) {
+              cumulativeWeight += weight;
+              if (rand < cumulativeWeight) {
+                return entry;
+              }
+            }
+        
+            return null; // In case there are no entries
           }
         }
 
         const calculateStats = (points: number, weighted: boolean) => {
-          const bag = new weightedBag<keyof typeof stats>();
+          const bag = new WeightedBag<keyof typeof stats>();
           const stats = {} as Record<keyof typeof evolution.stats, number>;
 
           for (const key in evolution.stats) {
@@ -435,7 +446,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
           }
 
           for (let i = 0; i < points; i += 4) {
-            stats[bag.get()] += 4;
+            stats[bag.get()!] += 4;
           }
           return stats;
         };
