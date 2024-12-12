@@ -1,0 +1,76 @@
+{
+  "name": "Reflect",
+  "type": "summon",
+  "system": {
+    "_migration": {
+      "version": 0.109,
+      "previous": null
+    },
+    "traits": [],
+    "actions": [],
+    "baseAV": 150,
+    "duration": 1
+  },
+  "img": "icons/magic/defensive/shield-barrier-deflect-teal.webp",
+  "effects": [
+    {
+      "name": "Reflect",
+      "type": "summon",
+      "_id": "ewv1yXxNEdgfQ5dP",
+      "img": "icons/magic/defensive/shield-barrier-deflect-teal.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "physical-attack-damage-percentile",
+            "value": -50,
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "priority": 50,
+        "formula": "",
+        "type": "damage",
+        "targetType": "ally",
+        "targetUuid": null
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      }
+    }
+  ],
+  "flags": {},
+  "_id": "30Q53j5bOVq0Dy1m"
+}
