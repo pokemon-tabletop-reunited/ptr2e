@@ -1,0 +1,175 @@
+{
+  "folder": "BNELbaUCcBtaiNm1",
+  "name": "Chansey Medicine",
+  "type": "perk",
+  "_id": "OWyKxGQEmvucwXQw",
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "slug": "touch-up",
+        "name": "Touch Up",
+        "type": "attack",
+        "traits": [
+          "healing",
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The target recovers 4 Ticks of HP.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "acutherapy",
+        "name": "Acutherapy",
+        "type": "attack",
+        "traits": [
+          "contact"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: Roll 1d8 and raise the Stages of the stat in the corresponding table by +2 for 5 activations.</p><p><ol><li>ATK</li><li>DEF</li><li>SPATK</li><li>SPDEF</li><li>SPD</li><li>ACC</li><li>EVA</li><li>User Choice<></ol></p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "purify",
+        "name": "Purify",
+        "type": "attack",
+        "traits": [
+          "healing"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5
+        },
+        "category": "status",
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Effect: The target is cured of all [Major Affliction]s. If the target is cured this way, the user recovers HP equal to 1/2 their Max HP.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "slug": "chansey-medicine",
+    "description": "<p> You gain the [Healer] trait, gaining access to the [Healer] Tutor List. The user learns Touch Up, Purify, and Acutherapy.",
+    "traits": [],
+    "prerequisites": [
+      "Medicine 25"
+    ],
+    "cost": 1,
+    "design": {
+      "arena": "mental",
+      "approach": "resilience",
+      "archetype": "Medic"
+    },
+    "node": {
+      "i": 70,
+      "j": 76,
+      "connected": [
+        "healing-hands",
+        "cautious-healer",
+        "holistic-care",
+        "invigorate",
+        "mobilize",
+        "tactician",
+        "guard-up"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": null,
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/svg/fairy_icon.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal",
+      "x": 33,
+      "y": 71
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": [
+    {
+      "name": "Chansey Medicine",
+      "type": "passive",
+      "_id": "jYRRns43LCZAkrHB",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "add-trait",
+            "key": "",
+            "value": "Healer",
+            "predicate": [],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-perks.Item.OWyKxGQEmvucwXQw.ActiveEffect.jYRRns43LCZAkrHB",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.4.1",
+        "createdTime": 1732231695711,
+        "modifiedTime": 1732231705543,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
+}
