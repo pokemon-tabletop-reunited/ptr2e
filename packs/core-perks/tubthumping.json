@@ -1,0 +1,70 @@
+{
+  "folder": "5fu3Z6WrBfwLu3ov",
+  "name": "Tubthumping",
+  "type": "perk",
+  "_id": "NjAYGkmZsg9QxiQY",
+  "img": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
+  "system": {
+    "actions": [
+      {
+        "name": "Tubthumping",
+        "slug": "tubthumping",
+        "traits": [
+          "interrupt-2"
+        ],
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 5,
+          "trigger": "The user gains @Affliction[fainted]."
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: You heal 6 Ticks of HP, accruing a Stack of @Affliction[weary] as normal. If done on your own turn, this becomes a Complex Action.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user gains @Affliction[fainted].<br><br>Effect: You heal 6 Ticks of HP, accruing a Stack of @Affliction[weary] as normal. If done on your own turn, this becomes a Complex Action.</p>",
+    "traits": [],
+    "prerequisites": [
+      "I Get Knocked Down"
+    ],
+    "cost": 4,
+    "design": {
+      "arena": "physical",
+      "approach": "resilience",
+      "archetype": "Destroyer"
+    },
+    "node": {
+      "i": 143,
+      "j": 49,
+      "connected": [
+        "overbooster",
+        "hear-no-bell",
+        "plus-ultra",
+        "offering"
+      ],
+      "config": {
+        "alpha": null,
+        "backgroundColor": "#0000ff",
+        "borderColor": null,
+        "borderWidth": null,
+        "texture": "systems/ptr2e/img/perk-icons/Taskmaster.svg",
+        "tint": null,
+        "scale": null
+      },
+      "hidden": false,
+      "type": "normal",
+      "x": 72,
+      "y": 50
+    },
+    "slug": "tubthumping",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "effects": []
+}
