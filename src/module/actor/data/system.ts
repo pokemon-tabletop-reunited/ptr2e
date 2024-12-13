@@ -368,9 +368,6 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     this.advancement.advancementPoints.total = this.parent.isHumanoid() ? (19 + this.advancement.level) : (10 + Math.floor(this.advancement.level / 2));
     this.advancement.advancementPoints.spent = 0;
 
-    this.health.max = this.attributes.hp.value;
-    this.health.percent = Math.round((this.health.value / this.health.max) * 100);
-
     this.powerPoints.max = 20 + Math.ceil(0.5 * this.advancement.level);
     this.inventoryPoints.max = 12 + Math.floor((this.skills.get('resources')?.total ?? 0) / 10);
 
@@ -479,6 +476,9 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
       if (this.attributes[key].base === undefined) this.attributes[key].base = 40;
       this.attributes[key].value = this._calculateStatTotal(this.attributes[key]);
     }
+
+    this.health.max = this.attributes.hp.value;
+    this.health.percent = Math.round((this.health.value / this.health.max) * 100);
 
     for (const skill of this.skills) {
       skill.prepareBaseData();

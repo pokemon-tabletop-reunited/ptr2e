@@ -347,39 +347,6 @@ class ActorPTR2e<
         }).map(action => ({ value: action.uuid }));
       }
     });
-
-    if (this.system.shield.value > 0) this.rollOptions.addOption("self", "state:shielded");
-    switch (true) {
-      case this.system.health.value <= Math.floor(this.system.health.max * 0.25): {
-        this.rollOptions.addOption("self", "state:desperation-1-4");
-      }
-      case this.system.health.value <= Math.floor(this.system.health.max * (1 / 3)): {
-        this.rollOptions.addOption("self", "state:desperation-1-3");
-      }
-      case this.system.health.value <= Math.floor(this.system.health.max * 0.5): {
-        this.rollOptions.addOption("self", "state:desperation-1-2");
-      }
-      case this.system.health.value <= Math.floor(this.system.health.max * 0.75): {
-        this.rollOptions.addOption("self", "state:desperation-3-4");
-      }
-    }
-    switch (true) {
-      case this.system.health.value == this.system.health.max: {
-        this.rollOptions.addOption("self", "state:healthy");
-      }
-      case this.system.health.value >= Math.floor(this.system.health.max * 0.75): {
-        this.rollOptions.addOption("self", "state:intrepid-3-4");
-      }
-      case this.system.health.value >= Math.floor(this.system.health.max * 0.5): {
-        this.rollOptions.addOption("self", "state:intrepid-1-2");
-      }
-      case this.system.health.value >= Math.floor(this.system.health.max * (1 / 3)): {
-        this.rollOptions.addOption("self", "state:intrepid-1-3");
-      }
-      case this.system.health.value >= Math.floor(this.system.health.max * 0.25): {
-        this.rollOptions.addOption("self", "state:intrepid-1-4");
-      }
-    }
   }
 
   /**
