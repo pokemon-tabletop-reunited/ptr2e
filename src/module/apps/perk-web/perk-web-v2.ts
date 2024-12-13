@@ -430,10 +430,6 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     let scrollLeft: number = element.scrollLeft;
     let scrollTop: number = element.scrollTop;
 
-    element.onscroll = () => {
-      element.scrollTo(scrollLeft, scrollTop);
-    }
-
     element.addEventListener("mousedown", (e) => {
       // If right mouse button is clicked
       if (e.button !== 2) return;
@@ -475,13 +471,13 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
       element.style.cursor = "move";
 
-      element.onscroll = () => {
-        element.scrollTo(left, top);
-      }
+      element.scrollTo(left, top);
     });
 
+    const web = element.firstElementChild as HTMLElement;
+
     element.addEventListener("click", (e) => {
-      if (e.target != element) return;
+      if (!([element, web] as unknown as Maybe<EventTarget>[]).includes(e.target)) return;
       e.preventDefault();
 
       const currentZoomLevel = this.zoomLevels.indexOf(this._zoomAmount);
@@ -495,7 +491,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     element.addEventListener("contextmenu", (e) => {
       if (isMoving) return;
-      if (e.target != element) return;
+      if (!([element, web] as unknown as Maybe<EventTarget>[]).includes(e.target)) return;
       e.preventDefault();
 
       const currentZoomLevel = this.zoomLevels.indexOf(this._zoomAmount);
@@ -509,14 +505,26 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   }
 
   zoom(zoom = this._zoomAmount) {
-    return;
     const grid = this.element.querySelector<HTMLElement>(".perk-grid");
-    const main = this.element.querySelector<HTMLElement>(`[data-application-part="web"]`);
-    if (!grid || !main) return;
-    this._zoomAmount = zoom;
+    const zoomElement = this.element.querySelector<HTMLElement>(`[data-application-part="web"] .scroll`);
+    if (!grid || !zoomElement) return;
+    const oldZoom = this._zoomAmount;
 
-    grid!.style.transform = `scale(${zoom})`;
+    const rect = zoomElement.getBoundingClientRect();
+    const current = { top: zoomElement.scrollTop, left: zoomElement.scrollLeft };
+    const center = {
+      top: (current.top + rect.height / 2) / oldZoom,
+      left: (current.left + rect.width / 2) / oldZoom
+    }
+    const newCenter = {
+      top: center.top * zoom - rect.height / 2,
+      left: center.left * zoom - rect.width / 2
+    }
+
+    this._zoomAmount = zoom;
+    grid!.style.zoom = `${zoom}`;
     this.renderSVG()
+    zoomElement.scrollTo(newCenter);
   }
 
   override _onDragStart(event: DragEvent): void {

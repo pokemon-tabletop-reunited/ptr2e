@@ -1,6 +1,6 @@
 <main>
   <div class="scroll">
-    <section class="perk-grid {{#if editMode}}edit-mode{{/if}}" style="transform: scale({{zoom}});">
+    <section class="perk-grid {{#if editMode}}edit-mode{{/if}}" style="zoom: {{zoom}};">
       {{#each grid as |perk|}}
         {{#if perk.name}}
           <div class="perk{{#each perk.classes}} {{this}}{{/each}}"
