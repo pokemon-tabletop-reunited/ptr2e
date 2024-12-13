@@ -1,0 +1,41 @@
+{
+  "name": "Armor Tail",
+  "type": "ability",
+  "img": "icons/creatures/abilities/tail-swipe-green.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-4"
+        ],
+        "name": "Armor Tail",
+        "slug": "armor-tail",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>An [Interrupt X] Attack is declared, targeting the user or an ally in Range.</p>"
+        },
+        "range": {
+          "target": "aura",
+          "distance": 6,
+          "unit": "m"
+        },
+        "description": "<p>An [Interrupt X] Attack is declared, targeting the user or an ally in Range.</p><p>Effect: The triggering Attack fails.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>An [Interrupt X] Attack is declared, targeting the user or an ally in Range.</p><p>Effect: The triggering Attack fails.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "armor-tail",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "PkohFYLDGZtBCPrN",
+  "effects": []
+}
