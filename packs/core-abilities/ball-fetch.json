@@ -1,0 +1,38 @@
+{
+  "name": "Ball Fetch",
+  "type": "ability",
+  "img": "systems/ptr2e/img/item-icons/basic%20ball.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-2"
+        ],
+        "name": "Ball Fetch",
+        "slug": "ball-fetch",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2,
+          "trigger": "<p>A creature within Range has a Flung item miss it.</p>"
+        },
+        "range": {
+          "target": "object",
+          "distance": 8,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: A creature within Range has a Flung item miss it.</p><p>Effect: The user gains +2 ACC and EVA Stages for 2 Activations. Then the user freely moves to the fallen item and picks it up, making it a Held Item.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: A creature within Range has a Flung item miss it.</p><p>Effect: The user gains +2 ACC and EVA Stages for 2 Activations. Then the user freely moves to the fallen item and picks it up, making it a Held Item.</p>",
+    "traits": [],
+    "slug": "ball-fetch",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "M062FeoBqCYUqs1M",
+  "effects": []
+}
