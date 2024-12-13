@@ -1,0 +1,45 @@
+{
+  "name": "Intimidate Test",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "social",
+          "friendly"
+        ],
+        "name": "Intimidate",
+        "slug": "intimidate",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "At the start of combat or when switched in."
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "Trigger: At the start of combat or when switched in.\nEffect: All valid creatures in range lose -1 ATK stage for 5 activations and gain Fear 2. The user's Intimidate Skill checks have an additional +10 bonus.",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: At the start of combat or when switched in.\nEffect: All valid creatures in range lose -1 ATK stage for 5 activations and gain Fear 2. The user's Intimidate Skill checks have an additional +10 bonus.",
+    "traits": [
+      "social",
+      "friendly"
+    ],
+    "slug": "intimidate",
+    "_migration": {
+      "version": 0.109,
+      "previous": {
+        "schema": 0.109,
+        "foundry": "12.329",
+        "system": "0.10.0-alpha.3.4.1"
+      }
+    }
+  },
+  "_id": "8kQ7BwXp1rUCnwkL",
+  "effects": []
+}
