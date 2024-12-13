@@ -135,19 +135,9 @@ class ItemPTR2e<
     super.prepareDerivedData();
     if (this.type === "ptu-item") return;
 
-    for(const trait of this.traits ?? []) {
-      if(!trait.changes?.length) continue;
-      const effect = Trait.effectsFromChanges.bind(trait)(this) as ActiveEffectPTR2e<this>
-      this.effects.set(effect.slug, effect);
-    }
-
     if (this.hasActions()) this._actions.addActionsFromItem(this);
     if (!this.parent) return;
     if (this.hasActions()) this.parent._actions.addActionsFromItem(this);
-    // if (this.type === "consumable" && (this.system as ConsumableSystem).consumableType === "pokeball") {
-    //   const action = PokeballActionPTR2e.fromConsumable(this as ItemPTR2e<ConsumableSystem, ActorPTR2e>);
-    //   this.parent._actions.set(action.slug, action);
-    // }
 
     this.rollOptions.addOption("item", `${this.type}:${this.slug}`);
   }
