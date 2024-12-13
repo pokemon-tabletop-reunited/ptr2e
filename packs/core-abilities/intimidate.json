@@ -7,39 +7,86 @@
       {
         "traits": [
           "social",
-          "friendly"
+          "friendly",
+          "interrupt-3"
         ],
         "name": "Intimidate",
         "slug": "intimidate",
         "type": "generic",
         "cost": {
           "activation": "free",
-          "trigger": "At the start of combat or when switched in."
+          "trigger": "<p>The user enters combat.</p>"
         },
         "range": {
           "target": "emanation",
           "distance": 10,
           "unit": "m"
         },
-        "description": "Trigger: At the start of combat or when switched in.\nEffect: All valid creatures in range lose -1 ATK stage for 5 activations and gain Fear 2. The user's Intimidate Skill checks have an additional +10 bonus.",
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures in range lose -1 ATK Stage for 5 Activations and gain @Affliction[fear] 2. The user's Intimidate Skill checks have an additional +10 bonus.</p>",
         "img": "icons/svg/explosion.svg"
       }
     ],
-    "description": "Trigger: At the start of combat or when switched in.\nEffect: All valid creatures in range lose -1 ATK stage for 5 activations and gain Fear 2. The user's Intimidate Skill checks have an additional +10 bonus.",
+    "description": "<p>Trigger: The user enters combat. Effect: All valid creatures in range lose -1 ATK Stage for 5 Activations and gain @Affliction[fear] 2. The user's Intimidate Skill checks have an additional +10 bonus.</p>",
     "traits": [
       "social",
       "friendly"
     ],
-    "slug": "intimidate",
-    "_migration": {
-      "version": 0.109,
-      "previous": {
-        "schema": 0.109,
-        "foundry": "12.329",
-        "system": "0.10.0-alpha.3.4.1"
-      }
-    }
+    "slug": "intimidate"
   },
   "_id": "8kQ7BwXp1rUCnwkL",
-  "effects": []
+  "effects": [
+    {
+      "name": "Intimidate",
+      "type": "passive",
+      "_id": "lU9vIQup9KW5HZha",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "flat-modifier",
+            "key": "intimidate",
+            "value": 10,
+            "predicate": [],
+            "label": "Intimidate",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": false,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.327",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.1.1.0",
+        "createdTime": 1717951545219,
+        "modifiedTime": 1717951815687,
+        "lastModifiedBy": "AvKKI5MO51DPYICj"
+      }
+    }
+  ]
 }
