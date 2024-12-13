@@ -157,7 +157,7 @@ class FolderConfigPTR2e extends foundry.applications.api.HandlebarsApplicationMi
     const actor = game.actors.get(data.id) ?? await fromUuid(data.uuid);
     if (!actor || !(actor instanceof ActorPTR2e)) return;
 
-    await actor.update({ "folder": this.document.id, "system.party.ownerOf": this.document.id });
+    await actor.update({ "folder": this.document.id, "system.party.ownerOf": this.document.id, "system.party.partyMemberOf": null });
 
     return this.render({ parts: ["members"] }).then(_ => { this.position.height = "auto"; return _ })
   }
