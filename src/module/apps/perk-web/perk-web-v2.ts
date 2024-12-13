@@ -3,6 +3,7 @@ import { ActorPTR2e } from "@actor";
 import { Trait } from "@data";
 import { ItemPTR2e, PerkPTR2e } from "@item";
 import Tagify from "@yaireo/tagify";
+import Sortable from "sortablejs";
 
 export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -18,7 +19,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         minimizable: false,
         resizable: false,
       },
-      dragDrop: [{ dragSelector: ".perk", dropSelector: `[data-application-part="web"]` }],
+      dragDrop: [{ dropSelector: `[data-application-part="web"]` }],
       actions: {
         "toggle-edit-mode": function (this: PerkWebApp) {
           this.editMode = !this.editMode;
@@ -202,6 +203,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   }
 
   #allTraits: { value: string; label: string, type?: Trait["type"] }[] | undefined;
+  private isSortableDragging = false;
 
   override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
@@ -282,6 +284,57 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           this.render({ parts: ["web"] });
         });
       }
+
+      const main = htmlElement.querySelector<HTMLElement>("section.perk-grid");
+      if (!main) return;
+
+      new Sortable(main, {
+        multiDrag: true,
+        draggable: ".perk",
+        setData: (dataTransfer, dragEl) => {
+          if ('x' in dragEl.dataset && 'y' in dragEl.dataset) {
+            const x = Number(dragEl.dataset.x);
+            const y = Number(dragEl.dataset.y);
+            const perk = this._perkStore.get(`${x}-${y}`) ?? null;
+            if (!perk) return;
+
+            dataTransfer!.setData("text/plain", JSON.stringify(perk.toDragData()));
+          }
+        },
+        onChoose: (event) => {
+          this.isSortableDragging = true;
+          console.log('start', event)
+        },
+        onEnd: (event) => {
+
+          // Grab all items, and make sure that the item at `.item` is sorted as index 0
+          const items = event.items.length ? (() => {
+            const items = event.items;
+            if(items.length > 1) {
+              items.splice(items.indexOf(event.item), 1);
+              items.unshift(event.item);
+              return items;
+            }
+            return items;
+          })() : [event.item];
+
+          const data = items.flatMap(el => {
+            const x = Number(el.dataset.x)
+            const y = Number(el.dataset.y);
+            const perk = this._perkStore.get(`${x}-${y}`) ?? null;
+            return perk ? perk.toDragData() : []
+          })
+
+          //@ts-expect-error - originalEvent exists
+          this._onDrop(event.originalEvent, data);
+
+          event.items.map(el => Sortable.utils.deselect(el));
+
+          console.log('end', event)
+          this.isSortableDragging = false;
+        },
+        selectedClass: "highlighted",
+      })
     }
     if (partId === 'hudPerk') {
       for (const input of htmlElement.querySelectorAll<HTMLInputElement>(
@@ -527,29 +580,20 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     zoomElement.scrollTo(newCenter);
   }
 
-  override _onDragStart(event: DragEvent): void {
+  override async _onDrop(event: DragEvent, itemData?: DropCanvasData[]) {
     if (!this.editMode) return;
-
-    const element = event.currentTarget as HTMLElement;
-    if ('x' in element.dataset && 'y' in element.dataset) {
-      const x = Number(element.dataset.x);
-      const y = Number(element.dataset.y);
-      const perk = this._perkStore.get(`${x}-${y}`) ?? null;
-      if (!perk) return;
-
-      event.dataTransfer!.setData("text/plain", JSON.stringify(perk.toDragData()));
-    }
-  }
-
-  override async _onDrop(event: DragEvent) {
-    if (!this.editMode) return;
+    if (this.isSortableDragging && !itemData?.length) return;
     const element = this.element;
     const grid = element.querySelector<HTMLElement>(".perk-grid");
     if (!grid) return;
 
-    const dragData = TextEditor.getDragEventData(event) as DropCanvasData;
-    const item = await ItemPTR2e.fromDropData(dragData) as PerkPTR2e;
-    if (!(item instanceof ItemPTR2e && item.type === "perk")) return;
+    const items = (itemData?.length ? await Promise.all(itemData.map(data => ItemPTR2e.fromDropData(data))) : await (async () => {
+      const data = TextEditor.getDragEventData(event) as DropCanvasData
+      return data ? [await ItemPTR2e.fromDropData(data)] : [];
+    })()) as PerkPTR2e[];
+
+    const primaryItem = items[0]
+    if (!(primaryItem instanceof ItemPTR2e && primaryItem.type === "perk")) return;
 
     const bounding = grid.getBoundingClientRect();
     const zoom = this._zoomAmount
@@ -570,15 +614,65 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     const j = getGridSpace(y);
 
     const perk = this._perkStore.get(`${i}-${j}`) ?? this._perkStore.get(`${j}-${i}`);
-    if (perk) return;
+    if (perk) return void ui.notifications.error(`Can't move ${primaryItem.name} to ${i}-${j}, as it's already occupied by ${perk.name}`);
 
-    const currentlyOnWeb = this._perkStore.get(`${item.system.node.x}-${item.system.node.y}`);
-    if (currentlyOnWeb === item) {
-      this._perkStore.delete(`${item.system.node.x}-${item.system.node.y}`);
+    const currentlyOnWeb = this._perkStore.get(`${primaryItem.system.node.x}-${primaryItem.system.node.y}`);
+
+    const toDelete = new Set<string>(currentlyOnWeb === primaryItem ? [`${primaryItem.system.node.x}-${primaryItem.system.node.y}`] : []);
+    const toSet: [string, PerkPTR2e][] = [[`${i}-${j}`, primaryItem]];
+    const updates: Record<string, Record<string,unknown>[]> = {
+      world: [],
+    };
+
+    const pack = primaryItem.pack || "world";
+    updates[pack] ??= [];
+    updates[pack].push({_id: primaryItem._id, "system.node": { x: i, y: j }});
+
+    const delta = items.length > 1 ? { x: i - primaryItem.system.node.x!, y: j - primaryItem.system.node.y! } : null;
+
+    for(const item of items) {
+      if(item === primaryItem) continue;
+      if(!delta) return;
+      if(!(item instanceof ItemPTR2e && item.type === "perk")) continue;
+
+      const i = item.system.node.x! + delta.x;
+      const j = item.system.node.y! + delta.y;
+
+      if(i < 1 || j < 1 || i >= 250 || j >= 250) {
+        return void ui.notifications.error("Perk placement out of bounds");
+      };
+
+      const perk = this._perkStore.get(`${i}-${j}`) ?? this._perkStore.get(`${j}-${i}`);
+      if (perk) return void ui.notifications.error(`Can't move ${item.name} to ${i}-${j}, as it's already occupied by ${perk.name}`);
+
+      const currentlyOnWeb = this._perkStore.get(`${item.system.node.x}-${item.system.node.y}`);
+      if (currentlyOnWeb === item) {
+        toDelete.add(`${item.system.node.x}-${item.system.node.y}`);
+      }
+      const pack = item.pack || "world";
+      updates[pack] ??= [];
+      updates[pack].push({_id: item._id, "system.node": { x: i, y: j }});
+
+      toSet.push([`${i}-${j}`, item]);
     }
-    await item.update({ "system.node": { x: i, y: j } });
-    this._perkStore.set(`${i}-${j}`, item);
-    this.render({ parts: ["web"] })
+
+    for (const key of toDelete) {
+      this._perkStore.delete(key);
+    }
+
+    for(const key in updates) {
+      if(key === "world") {
+        await ItemPTR2e.updateDocuments(updates[key]);
+      }
+      else {
+        await ItemPTR2e.updateDocuments(updates[key], { pack: key });
+      }
+    }
+
+    for (const [key, value] of toSet) {
+      this._perkStore.set(key, value);
+    }
+
     return;
   }
 
