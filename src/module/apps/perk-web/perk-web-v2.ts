@@ -582,7 +582,6 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
   override async _onDrop(event: DragEvent, itemData?: DropCanvasData[]) {
     if (!this.editMode) return;
-    if (this.isSortableDragging && !itemData?.length) return;
     const element = this.element;
     const grid = element.querySelector<HTMLElement>(".perk-grid");
     if (!grid) return;
@@ -594,6 +593,11 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     const primaryItem = items[0]
     if (!(primaryItem instanceof ItemPTR2e && primaryItem.type === "perk")) return;
+
+    if (this.isSortableDragging && !itemData?.length) {
+      const currentlyOnWeb = this._perkStore.get(`${primaryItem.system.node.x}-${primaryItem.system.node.y}`);
+      if(currentlyOnWeb === primaryItem) return;
+    }
 
     const bounding = grid.getBoundingClientRect();
     const zoom = this._zoomAmount
@@ -672,6 +676,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     for (const [key, value] of toSet) {
       this._perkStore.set(key, value);
     }
+    this.render({ parts: ["web"] });
 
     return;
   }
@@ -697,6 +702,9 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   static async refresh(this: PerkWebApp) {
     this._perkStore.clear();
     this._lineCache.clear();
+    await game.ptr.perks.reset();
+    this.isSortableDragging = false;
+
     this.currentPerk = null;
     this.render(true);
   }
