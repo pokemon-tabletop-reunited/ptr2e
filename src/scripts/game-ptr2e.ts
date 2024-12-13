@@ -15,6 +15,7 @@ import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import { TutorListApp } from "@module/apps/tutor-list.ts";
 import { CombatPTR2e } from "@combat";
+import GithubManager from "@module/apps/github.ts";
 
 const GamePTR = {
   onInit() {
@@ -27,7 +28,8 @@ const GamePTR = {
         sluggify,
         pokeApi: new Pokedex(),
         uuid: UUIDUtils,
-        image: ImageResolver
+        image: ImageResolver,
+        github: GithubManager
       },
       data: {
         traits: TraitsCollection.create(),

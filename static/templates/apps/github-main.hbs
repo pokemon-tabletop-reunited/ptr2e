@@ -1,0 +1,57 @@
+<div class="d-flex flex-column p-1">
+  <header class="p-2">
+    {{#if ongoing}}
+    <p>You have a pending Commit; you can view the details below, modify them, and commit them as appropriate.</p>
+    <p><b>Please note:</b> Your commit is currently not saved to Github and only to the PTR Bot! You must Finalize the
+      Commit or your changes will be deleted upon the next Bot restart cycle.</p>
+    {{else}}
+    <p>Edit any item and use the 'Commit to Github' button in its toolbar to start a Commit.</p>
+    {{/if}}
+  </header>
+  <main class="scroll pt-2">
+    {{#if ongoing}}
+    <fieldset class="pb-2">
+      <legend>Commit Items</legend>
+      <ul>
+        <li class="blob">
+          <span>Name</span>
+          <span class="message">Message</span>
+        </li>
+        {{#each status.blobs}}
+        <li class="blob">
+          <span>{{this.name}}</span>
+          <span class="message">{{this.message}}</span>
+          <!-- Delete button -->
+          <button type="button" data-action="delete" data-path="{{this.path}}" class="btn btn-danger" data-tooltip="Remove changes in {{this.name}} from commit">
+            <i class="fas fa-trash"></i>
+          </button>
+        </li>
+        {{/each}}
+      </ul>
+    </fieldset>
+    <fieldset>
+      <legend>Commit Details</legend>
+      <div class="form-group">
+        <label for="pr-title">Pull Request Title</label>
+        <div class="form-fields">
+          <input id="pr-title" name="pr-title" class="form-control" type="text">
+        </div>
+        <p class="hint">Title for the PR; something like "Fixing PP Cost for Abilities".</p>
+      </div>
+      <div class="form-group">
+        <label for="commit-message">Commit Message</label>
+        <div class="form-fields">
+          <textarea id="commit-message" name="commit-message" class="form-control" rows="3"></textarea>
+        </div>
+        <p class="hint">Describe the changes you've made; such as "Fixed the PP cost for the abilities A, B & C"</p>
+      </div>
+    {{/if}}
+  </main>
+  <footer class="pt-2 pb-2">
+    <button type="button" data-action="finalize" class="btn btn-primary" data-tooltip="Save all changes to the PR" {{#unless ongoing}}disabled{{/unless}}>Finalize Commit</button>
+    <button type="button" data-action="cancel" class="btn btn-danger"
+      {{#if ongoing}}data-tooltip="Delete all changes that have yet to been saved as a PR">Reset Commit
+      {{else}}data-tooltip="Close this Window">Close
+      {{/if}}</button>
+  </footer>
+</div>

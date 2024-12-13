@@ -19,6 +19,7 @@ import { CompendiumBrowserSettings, CompendiumBrowserSources } from "@module/app
 import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import { TutorListApp } from "@module/apps/tutor-list.ts";
+import GithubManager from "@module/apps/github.ts";
 
 interface GamePTR2e
   extends Game<
@@ -36,6 +37,7 @@ interface GamePTR2e
     util: {
       sluggify: typeof sluggify;
       image: ImageResolver;
+      github: typeof GithubManager
     };
     compendiumBrowser: CompendiumBrowser;
     data: {

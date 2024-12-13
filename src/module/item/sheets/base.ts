@@ -28,7 +28,7 @@ export default class ItemSheetPTR2e<
       },
       actions: {
         toChat: this.#toChat,
-        toGithub: GithubManager.commitItemToGithub,
+        toGithub: GithubManager.commitItemToGithubSheet,
         "open-inspector": async function<TSystem extends ItemSystemPTR>(this: ItemSheetPTR2e<TSystem>, event: Event) {
           event.preventDefault();
           const inspector = new DataInspector(this.item);

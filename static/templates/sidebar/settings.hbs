@@ -59,6 +59,11 @@
         <button data-action="tutor-list">
             <i class="fas fa-list"></i> {{localize 'SETTINGS.TutorList'}}
         </button>
+        {{#if (devMode)}}
+          <button data-action="github-app">
+              <i class="fa-brands fa-github"></i> {{localize 'SETTINGS.Github'}}
+          </button>
+        {{/if}}
     </div>
 
     <h2>{{localize 'SETTINGS.DocsHeader'}}</h2>

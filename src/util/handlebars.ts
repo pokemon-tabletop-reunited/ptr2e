@@ -9,6 +9,10 @@ export function registerHandlebarsHelpers() {
 }
 
 function _registerPTRHelpers() {
+  Handlebars.registerHelper("devMode", function () {
+    return game.settings.get("ptr2e", "dev-mode");
+  });
+
     Handlebars.registerHelper("keywords", function (keywords) {
         return keywords.map((k: string) => `<span class="keyword" >&lt;${k}&gt;</span>`).join("");
     });

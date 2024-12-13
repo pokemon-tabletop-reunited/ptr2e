@@ -6644,6 +6644,49 @@ body .application.sheet .form-group {
   width: 40px;
   height: 40px;
 }
+.application.sheet.github-commit-manager section.window-content {
+  display: flex;
+  flex-direction: column;
+}
+.application.sheet.github-commit-manager main.scroll ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.application.sheet.github-commit-manager main.scroll ul li {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  padding: 0.5rem;
+  border-bottom: 1px solid var(--border-theme-color);
+}
+.application.sheet.github-commit-manager main.scroll ul li span {
+  flex: 0 0 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.application.sheet.github-commit-manager main.scroll ul li span.message {
+  flex: 1;
+  text-wrap: pretty;
+}
+.application.sheet.github-commit-manager main.scroll ul li .hint {
+  text-wrap: pretty;
+}
+.application.sheet.github-commit-manager main.scroll ul li button {
+  flex: 0;
+  padding: 0.25rem;
+}
+.application.sheet.github-commit-manager main.scroll ul li button i {
+  margin: unset;
+}
+.application.sheet.github-commit-manager footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.application.sheet.github-commit-manager footer button {
+  flex: 0 0 35%;
+}
 .directory-item.document .entry-name.document-name.rarity-uncommon,
 ul.item-list.result-list li.item.rarity-uncommon {
   color: #33a7ff;
