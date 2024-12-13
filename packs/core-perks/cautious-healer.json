@@ -1,12 +1,12 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "BNELbaUCcBtaiNm1",
   "name": "Cautious Healer",
   "type": "perk",
   "_id": "ld4fIK2v73fZ0Dy5",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",
   "system": {
     "actions": [],
-    "slug": null,
+    "slug": "cautious-healer",
     "description": "<p>When you heal another creature using a Healing Move, you gain @Affliction[resolved] 3.</p>",
     "traits": [],
     "prerequisites": [
@@ -22,10 +22,9 @@
       "i": 68,
       "j": 84,
       "connected": [
-        "forensic-accountant",
-        "mankey-see-mankey-do",
-        "root-1",
-        "chansey-medicine"
+        "chansey-medicine",
+        "last-aid",
+        "mutual-aid"
       ],
       "config": {
         "alpha": null,
@@ -37,24 +36,14 @@
         "scale": null
       },
       "hidden": false,
-      "type": "normal"
+      "type": "normal",
+      "x": 40,
+      "y": 70
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.ld4fIK2v73fZ0Dy5",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717159513022,
-    "modifiedTime": 1717178146343,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": []
 }
