@@ -1,0 +1,38 @@
+{
+  "name": "Battery",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-2"
+        ],
+        "name": "Battery",
+        "slug": "battery",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1,
+          "trigger": "<p>An ally within Range uses an Electric-Type attack.</p>"
+        },
+        "range": {
+          "target": "ally",
+          "distance": 4,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: An ally within Range uses an Electric-Type attack.</p><p>Effect: The triggering creature does not consume PP for the triggering attack, and that creature freely uses Charge at the end of their Activation.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: An ally within Range uses an Electric-Type attack.</p><p>Effect: The triggering creature does not consume PP for the triggering attack, and that creature freely uses Charge at the end of their Activation.</p>",
+    "traits": [],
+    "slug": "battery",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "kAfVbO0y1DL4hZUY",
+  "effects": []
+}
