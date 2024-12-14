@@ -1,0 +1,62 @@
+{
+  "name": "Pantomime",
+  "type": "ability",
+  "img": "icons/skills/targeting/crosshair-ringed-gray.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-2"
+        ],
+        "name": "Pantomime",
+        "slug": "pantomime",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2,
+          "trigger": "<p>A creature resolves an attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: A creature resolves an attack.</p><p>Effect: The user freely uses Mimic on the triggering creature.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "mimic",
+        "name": "Mimic",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: Mimic copies the last attack the target used, and the attack is added to the user's Active List until the end of combat, the user switches out or the user gains @Affliction[fainted]. Mimic cannot be used if the user has a copied attack on its Active List.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: A creature resolves an attack.</p><p>Effect: Connection - Mimic. The user freely uses Mimic on the triggering creature.</p>",
+    "traits": [
+      "connection"
+    ],
+    "slug": "pantomime",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "7qVETPCsjTWTkXdd",
+  "effects": []
+}
