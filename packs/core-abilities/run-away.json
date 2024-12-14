@@ -1,0 +1,52 @@
+{
+  "name": "Run Away",
+  "type": "ability",
+  "img": "icons/skills/movement/figure-running-gray.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-3"
+        ],
+        "name": "Run Away",
+        "slug": "run-away-active",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1,
+          "trigger": "<p>The user declares Rush or to escape from a @Affliction[grapple].</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares Rush or to escape from a @Affliction[grapple].</p><p>Effect: The DC on the roll increases by +20.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Run Away",
+        "slug": "run-away-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Effect: The user is immune to @Affliction[bound], @Affliction[stuck], and cannot have Attack of Opportunity declared in response to their Movement.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is declares Rush or to escape from a @Affliction[grapple].</p><p>Effect: The DC on the roll increases by +20.</p><p>Passive: The user is immune to @Affliction[bound], @Affliction[stuck], and cannot have Attack of Opportunity declared in response to their Movement.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "run-away",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "Iyq0hYJwLpuCncDP",
+  "effects": []
+}
