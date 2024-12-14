@@ -1,0 +1,41 @@
+{
+  "name": "Perish Body",
+  "type": "ability",
+  "img": "icons/svg/biohazard.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-1"
+        ],
+        "name": "Perish Body",
+        "slug": "perish-body",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user is hit by a [Contact] attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user and and the triggering creature gain @Affliction[perish] 7.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user and and the triggering creature gain @Affliction[perish] 7.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "perish-body",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "KqyPzTljiboUIBaf",
+  "effects": []
+}
