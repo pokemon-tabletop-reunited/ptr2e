@@ -1,0 +1,75 @@
+{
+  "name": "Pickpocket",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/container_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "slug": "thief",
+        "name": "Thief",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "<p>Effect: On hit, the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item is dropped on the ground in a square adjacent to the user.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "thief-pickpocket",
+        "name": "Thief (Pickpocket)",
+        "type": "attack",
+        "traits": [
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "physical",
+        "power": 60,
+        "accuracy": 100,
+        "types": [
+          "dark"
+        ],
+        "description": "<p>Effect: On hit, the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bewstow the item to an allied creature.</p>",
+        "variant": "thief",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: Connection - Thief. On hitting with Thief (Pickpocket), the user steals a random item in the target's [Accessory], [Belt], or [Held] slots and equips it to itself in a [Held] slot. If the user already has a [Held] slot occupied, the stolen item may either be added to the user's Inventory, or the user freely uses Fling to Bewstow the item to an allied creature.</p>",
+    "traits": [
+      "connection"
+    ],
+    "slug": "pickpocket",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "RbNW8PmXowslwwP3",
+  "effects": []
+}
