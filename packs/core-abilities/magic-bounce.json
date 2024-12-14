@@ -1,0 +1,41 @@
+{
+  "name": "Magic Bounce",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/status_icon.png",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-5"
+        ],
+        "name": "Magic Bounce",
+        "slug": "magic-bounce",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user is hit by a Status-Category Attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a Status-Category Attack.</p><p>Effect: The triggering attack fails to hit the user, and the triggering creature is instead targeted and hit with the triggering attack, applying the effects to themself.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a Status-Category Attack.</p><p>Effect: The triggering attack fails to hit the user, and the triggering creature is instead targeted and hit with the triggering attack, applying the effects to themself.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "magic-bounce",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "NCo48ba4RZX6SSTM",
+  "effects": []
+}
