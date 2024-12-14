@@ -1,0 +1,86 @@
+{
+  "name": "Cosmic Luminance",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "defensive"
+        ],
+        "name": "Cosmic Luminance",
+        "slug": "cosmic-luminance",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user declares Sunsteel Strike.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares Sunsteel Strike.</p><p>Effect: The user freely Moves up to half their Overland Score as Teleport Movement before attacking.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "defensive"
+        ],
+        "name": "Cosmic Luminance",
+        "slug": "cosmic-luminance",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The user is immune to negative [Stage Change] effects, and extends the duration of positive [Stage Change] effects by 2 Activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "sunsteel-strike",
+        "name": "Sunsteel Strike",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "crushing",
+          "dash",
+          "pass-5",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "description": "<p>Effect: This attack is unaffected by the abilities of other creatures.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user declares Sunsteel Strike.</p><p>Effect: Connection - Sunsteel Strike. The user freely Moves up to half their Overland Score as Teleport Movement before attacking. Passive: The user is immune to negative [Stage Change] effects, and extends the duration of positive [Stage Change] effects by 2 Activations.</p>",
+    "traits": [
+      "legendary",
+      "defensive"
+    ],
+    "slug": "cosmic-luminance",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "Xvm8FYgSs7r6OmiF",
+  "effects": []
+}
