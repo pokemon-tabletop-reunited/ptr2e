@@ -1,0 +1,119 @@
+{
+  "name": "Chromatic Radiance",
+  "type": "ability",
+  "img": "icons/magic/air/weather-sunlight-sky.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "environ",
+          "interrupt-5"
+        ],
+        "name": "Chromatic Radiance",
+        "slug": "chromatic-radiance-active",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user resolves a Fire-Type attack, and Sunny Weather is present.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user resolves a Fire-Type attack, and Sunny Weather is present.</p><p>Effect: The user recovers 3 Ticks of HP.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Chromatic Radiance",
+        "slug": "chromatic-radiance-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user recovers HP.</p>"
+        },
+        "range": {
+          "target": "allied-aura",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user recovers HP.</p><p>Effect: Allies within Range recover a Tick of HP. In Sunny Weather, this Ability triggers a second time.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "sacred-fire",
+        "name": "Sacred Fire",
+        "type": "attack",
+        "traits": [
+          "defrost",
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "fire"
+        ],
+        "description": "<p>Effect: On hit, all valid targets have a 50% chance of gaining @Affliction[burn] 7.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "sacred-fire-burned",
+        "name": "Sacred Fire (Burned)",
+        "type": "attack",
+        "traits": [
+          "defrost",
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "trigger": "<p>Valid target(s) have @Affliction[burn].</p>"
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "fire"
+        ],
+        "description": "<p>Trigger: Valid target(s) have @Affliction[burn].</p><p>Effect: On hit, all valid targets have a 50% chance of gaining @Affliction[burn] 7 and a 50% chance of gaining @Affliction[splinter] 7.</p>",
+        "variant": "sacred-fire",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p> Effect: Connection - Sacred Fire. When using a Fire-Type attack while Sunny Weather is active, the user recovers 3 Ticks of HP. Any time the user recovers HP, allies within 10m recover a Tick of HP, which is doubled in Sunny Weather.</p>",
+    "traits": [
+      "connection",
+      "legendary",
+      "environ"
+    ],
+    "slug": "chromatic-radiance",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "Z2D1B8HhNUAKWaKa",
+  "effects": []
+}
