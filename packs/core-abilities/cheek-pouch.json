@@ -1,0 +1,54 @@
+{
+  "name": "Cheek Pouch",
+  "type": "ability",
+  "img": "systems/ptr2e/img/item-icons/cheri%20berry.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "healing",
+          "interrupt-1"
+        ],
+        "name": "Cheek Pouch",
+        "slug": "cheek-pouch-active",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user consumes a [Food] item.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user consumes a [Food] item.</p><p>Effect: The user recovers 5 Ticks of HP in addition to the [Food] item's effect.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [],
+        "name": "Cheek Pouch",
+        "slug": "cheek-pouch-passive",
+        "type": "generic",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user possesses an additional [Stash] Slot.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: Whenever the user consumes a [Food] item, they recover 5 Ticks of HP in addition to the [Food] item's effect.</p><p>Passive: The user possesses an additional [Stash] Slot.</p>",
+    "traits": [
+      "healing"
+    ],
+    "slug": "cheek-pouch",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "L7FriVV2nV1w5PhE",
+  "effects": []
+}
