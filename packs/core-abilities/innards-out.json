@@ -1,0 +1,40 @@
+{
+  "name": "Innards Out",
+  "type": "ability",
+  "img": "systems/ptr2e/img/item-icons/poke%20doll.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-1"
+        ],
+        "name": "Innards Out",
+        "slug": "innards-out",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user would be @Affliction[fainted] by an attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user would be @Affliction[fainted] by an attack.</p><p>Effect: The user deals damage to the source of the triggering attack equal to the amount of HP the user lost from the triggering attack.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user would be @Affliction[fainted] by an attack.</p><p>Effect: The user deals damage to the source of the triggering attack equal to the amount of HP the user lost from the triggering attack.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "innards-out",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "slX9donFBumFr05N",
+  "effects": []
+}
