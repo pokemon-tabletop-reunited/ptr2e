@@ -1,0 +1,84 @@
+{
+  "name": "Grassy Surge",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/grass_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "terrain",
+          "interrupt-2"
+        ],
+        "name": "Grassy Surge",
+        "slug": "grassy-surge-active",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user declares Grassy Terrain.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares Grassy Terrain.</p><p>Effect: Increase the number of rounds Grassy Terrain persists by 2.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "terrain",
+          "environ"
+        ],
+        "name": "Grassy Surge",
+        "slug": "grassy-surge-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "object",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "<p>Passive: If a space within range possesses Grassy Terrain, the user is affected by Grassy Terrain.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "grassy-terrain",
+        "name": "Grassy Terrain",
+        "type": "attack",
+        "traits": [
+          "terrain"
+        ],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "status",
+        "types": [
+          "grass"
+        ],
+        "description": "<p>Effect: The Terrain is set to Grassy Terrain for 3 rounds.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user declares Grassy Terrain.</p><p>Effect: Connection - Grassy Terrain. Increase the number of rounds Grassy Terrain persists by 2.</p><p>Passive: If a space within range possesses Grassy Terrain, the user is affected by Grassy Terrain.</p>",
+    "traits": [
+      "terrain",
+      "connection",
+      "environ"
+    ],
+    "slug": "grassy-surge",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "OW4j1PXJrawxWJCJ",
+  "effects": []
+}
