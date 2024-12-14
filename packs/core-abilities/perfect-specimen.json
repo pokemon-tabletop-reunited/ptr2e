@@ -1,0 +1,82 @@
+{
+  "name": "Perfect Specimen",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "interrupt-2"
+        ],
+        "name": "Perfect Specimen",
+        "slug": "perfect-specimen",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "<p>The user declares Psystrike.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares Psystrike.</p><p>Effect: The user can select up 5 additional targets with the triggering attack.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Perfect Specimen",
+        "slug": "perfect-specimen",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The user has +1 default ATK and SPATK Stages.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "psystrike",
+        "name": "Psystrike",
+        "type": "attack",
+        "traits": [
+          "push-6",
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: This attack calculates damage against the target's DEF, rather than SPDEF.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user declares Psystrike.</p><p>Effect: Connection - Psystrike. The user can select up 5 additional targets with the triggering attack. Passive: The user has +1 default ATK and SPATK Stages.</p>",
+    "traits": [
+      "legendary",
+      "connection"
+    ],
+    "slug": "perfect-specimen",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "7hopheHBAxN72Jon",
+  "effects": []
+}
