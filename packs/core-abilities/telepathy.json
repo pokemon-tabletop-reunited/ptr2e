@@ -1,0 +1,53 @@
+{
+  "name": "Telepathy",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-3"
+        ],
+        "name": "Telepathy",
+        "slug": "telepathy",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2,
+          "trigger": "<p>The user would be affected by an ally's area of effect Physical- or Special- Category attack.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user would be affected by an ally's area of effect Physical- or Special- Category attack.</p><p>Effect: The user is unaffected by the triggering attack.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Telepathy",
+        "slug": "telepathy",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The user's area-of-effect Physical- and Special- Category attacks gain [Friendly].</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user would be affected by an ally's area of effect Physical- or Special- Category attack.</p><p>Effect: The user is unaffected by the triggering attack. Passive: The user's area-of-effect Physical- and Special- Category attacks gain [Friendly].</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "telepathy",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "in60hH6GWMZ3vqqs",
+  "effects": []
+}
