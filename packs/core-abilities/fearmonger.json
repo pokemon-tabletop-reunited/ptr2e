@@ -1,0 +1,41 @@
+{
+  "name": "Fearmonger",
+  "type": "ability",
+  "img": "icons/svg/terror.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "friendly",
+          "interrupt-1"
+        ],
+        "name": "Fearmonger",
+        "slug": "fearmonger",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>A creature ends their Activation within Range of the user, or attacks the user with a [Contact] attack.</p>"
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 6,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: A creature ends their Activation within Range of the user, or attacks the user with a [Contact] attack.</p><p>Effect: The triggering creature gains @Affliction[fear] 2, stacking with any @Affliction[fear] they previously had.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: A creature ends their Activation within Range of the user, or attacks the user with a [Contact] attack.</p><p>Effect: The triggering creature gains @Affliction[fear] 2, stacking with any @Affliction[fear] they previously had.</p>",
+    "traits": [
+      "friendly"
+    ],
+    "slug": "fearmonger",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "PM4HEKaK4F3GHfO6",
+  "effects": []
+}
