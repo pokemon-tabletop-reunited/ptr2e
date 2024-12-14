@@ -1,0 +1,74 @@
+{
+  "name": "Power Construct",
+  "type": "ability",
+  "img": "systems/ptr2e/img/item-icons/grass%20gem.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "forme-change",
+          "desperation-1-2",
+          "healing"
+        ],
+        "name": "Power Construct",
+        "slug": "power-construct",
+        "type": "generic",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "trigger": "<p>The user crosses the [Desperation 1/2] threshold, and is not in their Complete Forme.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user crosses the [Desperation 1/2] threshold, and is not in their Complete Forme.</p><p>Effect: The user transforms into their Complete Forme for the the rest of the Combat, gaining @Affliction[braced] 3 and recovering 8 Ticks of HP.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "core-enforcer",
+        "name": "Core Enforcer",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "blast-5",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 10
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "dragon"
+        ],
+        "description": "<p>Effect: On hit, all valid targets gain @Affliction[nullified] 7. On resultion, the user gains a Tick of HP.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user crosses the [Desperation 1/2] threshold, and is not in their Complete Forme.</p><p>Effect: Connection - Core Enforcer. The user transforms into their Complete Forme for the the rest of the Combat, gaining @Affliction[braced] 3 and recovering 8 Ticks of HP.</p><p><Passive: When the resolves Core Enforcer, they recover a Tick of HP.</p>",
+    "traits": [
+      "legendary",
+      "forme-change",
+      "connection",
+      "desperation-1-2",
+      "healing"
+    ],
+    "slug": "power-construct",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "3fzi5kHXfB9DZ2Ew",
+  "effects": []
+}
