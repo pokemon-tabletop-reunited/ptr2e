@@ -1,0 +1,40 @@
+{
+  "name": "Dazzling",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-4"
+        ],
+        "name": "Dazzling",
+        "slug": "dazzling",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>Trigger: A creature within range uses a [Priority X] or [Interrupt X] Action.</p><p>Effect: The triggering creature loses -1 ACC for 3 Activations and loses 1 PP if it was a [Priority X] action, and 3 PP if it was an [Interrupt X] action.</p>"
+        },
+        "range": {
+          "target": "aura",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: A creature within range uses a [Priority X] or [Interrupt X] Action.</p><p>Effect: The triggering creature loses -1 ACC for 3 Activations and loses 1 PP if it was a [Priority X] action, and 3 PP if it was an [Interrupt X] action.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: Other creatures' [Interrupt X] Actions cannot be declared on the user's Activations.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "dazzling",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "kOzKv8FrcV2OdtzQ",
+  "effects": []
+}
