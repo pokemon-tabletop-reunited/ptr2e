@@ -1,0 +1,53 @@
+{
+  "name": "Wind Power",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "environ",
+          "interrupt-2"
+        ],
+        "name": "Wind Power",
+        "slug": "wind-power-trigger",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>Trigger: The user is hit by a [Wind] attack.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a [Wind] attack.</p><p>Effect: The user gains @Affliction[charged] 1.<p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "environ"
+        ],
+        "name": "Wind Power",
+        "slug": "wind-power-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: While Windy Weather is active, the user's Electric-Type attacks have double Power. The trigger effect of this Ability cannot be activated if the user is utilizing this effect.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a [Wind] attack.</p><p>Effect: The user's next Electric-Type attack has double Power. Passive: While Windy Weather is active, the user's Electric-Type attacks have double Power. The trigger effect of this Ability cannot be activated if the user is utilizing the Passive effect.</p>",
+    "traits": [
+      "environ"
+    ],
+    "slug": "wind-power",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "FN8T3zE3RgpHJGi0",
+  "effects": []
+}
