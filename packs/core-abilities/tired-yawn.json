@@ -1,0 +1,41 @@
+{
+  "name": "Tired Yawn",
+  "type": "ability",
+  "img": "systems/ptr2e/img/conditions/sleep.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-1"
+        ],
+        "name": "Tired Yawn",
+        "slug": "tired-yawn",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user is hit by a [Contact] attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The attacking creature has a 30% chance of gaining @Affliction[drowsy] 5.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The attacking creature has a 30% chance of gaining @Affliction[drowsy] 5.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "tired-yawn",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "2EsaUXZjZIflhg5W",
+  "effects": []
+}
