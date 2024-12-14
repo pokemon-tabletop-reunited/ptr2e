@@ -1,0 +1,44 @@
+{
+  "name": "Reverberate",
+  "type": "ability",
+  "img": "icons/magic/sonic/bell-alarm-red-purple.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-2",
+          "flinch-3"
+        ],
+        "name": "Reverberate",
+        "slug": "reverberate",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user is targeted by a [Sonic] attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 8,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is targeted by a [Sonic] attack.</p><p>Effect: If the triggering attack is either a Physical or Special-Category attack, it gains [Recoil 1/4] (or has its [Recoil X] increased by +1/4). If the triggering attack is Status-Category the triggering creature is Flinched.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is targeted by a [Sonic] attack.</p><p>Effect: If the triggering attack is either a Physical or Special-Category attack, it gains [Recoil 1/4] (or has its [Recoil X] increased by +1/4). If the triggering attack is Status-Category the triggering creature is afflicted with @Affliction[flinched] 3.</p>",
+    "traits": [
+      "defensive",
+      "interrupt-2",
+      "flinch-3"
+    ],
+    "slug": "reverberate",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "I8thGyNbCF0gHYl9",
+  "effects": []
+}
