@@ -1,0 +1,43 @@
+{
+  "name": "Lightning Rod",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "draw-in",
+          "interrupt-3"
+        ],
+        "name": "Lightning Rod",
+        "slug": "lightning-rod",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>A creature in range uses an Electric-Type attack.</p>"
+        },
+        "range": {
+          "target": "self",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: A creature in range uses an Electric-Type attack.</p><p>Effect: The triggering attack hits the user instead, dealing no damage and applying no effects. Additionally, the user raises their SPATK Stage by +1 for 5 Activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: A creature in range uses an Electric-Type attack.</p><p>Effect: The triggering attack hits the user instead, dealing no damage and applying no effects. Additionally, the user raises their SPATK Stage by +1 for 5 Activations.</p>",
+    "traits": [
+      "defensive",
+      "draw-in"
+    ],
+    "slug": "lightning-rod",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "zGgfm8CE0qrdcmdf",
+  "effects": []
+}
