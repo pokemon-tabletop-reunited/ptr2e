@@ -1,0 +1,41 @@
+{
+  "name": "Mirror Armor",
+  "type": "ability",
+  "img": "icons/equipment/shield/heater-crystal-blue.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-2"
+        ],
+        "name": "Mirror Armor",
+        "slug": "mirror-armor",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>Another creature applies a negative [Stage Change] effect to the user.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: Another creature applies a negative [Stage Change] effect to the user.</p><p>Effect: The user does not gain the triggering effect and the triggering creature gains it instead with double the duration.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: Another creature applies a negative [Stage Change] effect to the user.</p><p>Effect: The user does not gain the triggering effect and the triggering creature gains it instead with double the duration.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "mirror-armor",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "BYkkkJPO5INaDcdz",
+  "effects": []
+}
