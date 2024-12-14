@@ -1,0 +1,42 @@
+{
+  "name": "Ignite",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/fire_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "type-shift",
+          "interrupt-5",
+          "fire"
+        ],
+        "name": "Ignite",
+        "slug": "ignite",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 1,
+          "trigger": "<p>The user declares a Normal-Type attack.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares a Normal-Type attack.</p><p>Effect: The user increases the Power of the triggering attack by 20% and changes its Type to Fire-Type until the end of their current Activation.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user declares a Normal-Type attack.</p><p>Effect: The user increases the Power of the triggering attack by 20% and changes its Type to Fire-Type until the end of their current Activation.</p>",
+    "traits": [
+      "type-shift",
+      "fire"
+    ],
+    "slug": "ignite",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "2HRhhJt5Z9NXV1pm",
+  "effects": []
+}
