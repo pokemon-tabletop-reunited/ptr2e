@@ -1,0 +1,110 @@
+{
+  "name": "Insomnia",
+  "type": "ability",
+  "img": "systems/ptr2e/img/conditions/bad-sleep.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Insomnia",
+        "slug": "insomnia",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user is immune to the @Affliction[drowsy] and @Affliction[nightmares] Affliction. The user also resists Psychic-Type damage from attacks.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: The user is immune to the @Affliction[drowsy] and @Affliction[nightmares] Affliction. The user also resists Psychic-Type damage from attacks.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "insomnia",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "5YvantY4bHpziXGg",
+  "effects": [
+    {
+      "name": "Insomnia",
+      "type": "passive",
+      "_id": "L5JASDm4CZrSCWxO",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "affliction:drowsy",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "affliction:nightmares",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          }
+        ],
+        "slug": null,
+        "traits": [
+          "defensive"
+        ],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Effect: The user is immune to the @Affliction[drowsy] and @Affliction[nightmares] Affliction. The user also resists Psychic-Type damage from attacks.</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.3.0",
+        "createdTime": 1731340872448,
+        "modifiedTime": 1731341227457,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ]
+}
