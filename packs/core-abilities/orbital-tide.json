@@ -1,0 +1,56 @@
+{
+  "name": "Orbital Tide",
+  "type": "ability",
+  "img": "icons/magic/control/silhouette-fall-slip-prone.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Orbital Tide",
+        "slug": "orbital-tide",
+        "type": "generic",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "Effect: All creatures within Range gain @Affliction[lifted] 5.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "gravity",
+        "name": "Gravity",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8
+        },
+        "category": "status",
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: All creatures are @Affliction[grounded] 5.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: Connection - Gravity. All creatures within Range gain @Affliction[lifted] 5.</p>",
+    "traits": [],
+    "slug": "orbital-tide",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "fwwRKQnqEjKl2jgl",
+  "effects": []
+}
