@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "W85LoOCz3WlwbyhZ",
   "name": "Weak Spot",
   "type": "perk",
   "_id": "1eZASTA0wlCgvJ9v",
@@ -14,15 +14,12 @@
         "type": "passive",
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
-          "activation": "free",
-          "powerPoints": 0,
-          "delay": null,
-          "priority": null
-        }
+          "activation": "free"
+        },
+        "img": "icons/svg/explosion.svg"
       },
       {
         "slug": "focus-energy",
@@ -33,26 +30,19 @@
         ],
         "range": {
           "target": "creature",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "normal"
         ],
         "description": "Effect: The user's gain +1 CRIT stage for 5 activations.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": true
+        "free": true,
+        "img": "icons/svg/explosion.svg"
       },
       {
         "slug": "laser-focus",
@@ -63,30 +53,21 @@
         ],
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "simple",
-          "powerPoints": 3,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 3
         },
         "category": "status",
-        "power": null,
-        "accuracy": null,
         "types": [
           "normal"
         ],
         "description": "Effect: The user gains +4 CRIT stages for 2 activations.",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "slug": null,
+    "slug": "weak-spot",
     "description": "<p>Connection - Focus Energy. The user learns Laser Focus.</p>",
     "traits": [],
     "prerequisites": [
@@ -99,14 +80,9 @@
       "archetype": "Hunter"
     },
     "node": {
-      "i": 127,
-      "j": 129,
       "connected": [
-        "adrenaline-rush",
-        "logicians-wisdom",
         "hit-run",
-        "metamove-empower",
-        "backpacker-5"
+        "dead-eye"
       ],
       "config": {
         "alpha": null,
@@ -118,24 +94,14 @@
         "scale": null
       },
       "hidden": false,
-      "type": "normal"
+      "type": "normal",
+      "x": 160,
+      "y": 154
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
-  "effects": [],
-  "sort": 2900000,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.1eZASTA0wlCgvJ9v",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717146371046,
-    "modifiedTime": 1717179869252,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": []
 }

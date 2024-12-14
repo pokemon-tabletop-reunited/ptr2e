@@ -6,7 +6,7 @@
   "img": "systems/ptr2e/img/perk-icons/Arcana.svg",
   "system": {
     "actions": [],
-    "slug": null,
+    "slug": "metamove-guarded-strike",
     "description": "<p>When you declare an Attack, spend 2PP. The Attack gains the effect \"On hit, the user gains @affliction[resolved] 2.\" until the end of user's Activation.</p>",
     "traits": [],
     "prerequisites": [],
@@ -17,12 +17,9 @@
       "archetype": "Metamove"
     },
     "node": {
-      "i": 136,
-      "j": 87,
       "connected": [
-        "stat-specialist",
-        "quick-switch",
-        "improved-overland-3"
+        "metamove-bullseye",
+        "metamove-empower"
       ],
       "config": {
         "alpha": null,
@@ -34,24 +31,14 @@
         "scale": null
       },
       "hidden": false,
-      "type": "normal"
+      "type": "normal",
+      "x": 215,
+      "y": 108
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
-  "effects": [],
-  "sort": 0,
-  "ownership": {
-    "default": 2,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": null,
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717161886036,
-    "modifiedTime": 1717261338966,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": []
 }

@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "a1w2zpzavg6qtJFn",
   "name": "Suspicious Minds",
   "type": "perk",
   "_id": "3VLINGTzFiKxDsTG",
@@ -20,13 +20,12 @@
         "cost": {
           "activation": "free",
           "powerPoints": 2,
-          "trigger": "A creature in range suffers effect damage from an Affliction due to a Stack being removed.",
-          "delay": null,
-          "priority": null
-        }
+          "trigger": "A creature in range suffers effect damage from an Affliction due to a Stack being removed."
+        },
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "slug": null,
+    "slug": "suspicious-minds",
     "description": "<p>Trigger: A creature in range suffers effect damage from an Affliction due to a Stack being removed. <br><br>Effect: An additonal Stack is removed from the Affliction as if the creature ended their Activation again, proviking all of the pertinent end-of-Activation effects. This may be triggered a number of times on a creature per Affliction they possess, spending PP for each one.</p>",
     "traits": [],
     "prerequisites": [
@@ -39,12 +38,10 @@
       "archetype": "Affliction"
     },
     "node": {
-      "i": 50,
-      "j": 108,
       "connected": [
-        "weaponized-weather",
-        "nurturing-shoots",
-        "mutual-aid"
+        "stage-vampirism",
+        "thug",
+        "lasting-harm"
       ],
       "config": {
         "alpha": null,
@@ -56,24 +53,14 @@
         "scale": 1
       },
       "hidden": false,
-      "type": "normal"
+      "type": "normal",
+      "x": 170,
+      "y": 98
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
-  "effects": [],
-  "sort": 2600000,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.3VLINGTzFiKxDsTG",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717150874101,
-    "modifiedTime": 1717179649322,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": []
 }
