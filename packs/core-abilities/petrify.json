@@ -1,0 +1,45 @@
+{
+  "name": "Petrify",
+  "type": "ability",
+  "img": "icons/svg/terror.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "social",
+          "friendly",
+          "aura",
+          "interrupt-3"
+        ],
+        "name": "Petrify",
+        "slug": "petrify",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user enters combat.</p>"
+        },
+        "range": {
+          "target": "aura",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures within Range lose -1 SPD Stage for 5 Activations. The user's Intimidate Skill checks have an additional +10 bonus.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures within Range lose -1 SPD Stage for 5 Activations. The user's Intimidate Skill checks have an additional +10 bonus.</p>",
+    "traits": [
+      "social",
+      "friendly",
+      "aura"
+    ],
+    "slug": "petrify",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "13JbJwxpMrrdRTMm",
+  "effects": []
+}
