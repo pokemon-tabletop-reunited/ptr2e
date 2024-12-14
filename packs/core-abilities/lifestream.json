@@ -1,0 +1,82 @@
+{
+  "name": "Lifestream",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "aura",
+          "interrupt-1"
+        ],
+        "name": "Lifestream",
+        "slug": "lifestream-active",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 7,
+          "trigger": "<p>The user resolves Geomancy.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user resolves Geomancy.</p><p>Effect: All allies gain the Resolution Effect of the triggering attack.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "aura"
+        ],
+        "name": "Lifestream (Faint)",
+        "slug": "lifestream-faint",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The first time the user would gain @Affliction[fainted] in combat, it does not and recovers 8 Ticks of HP and is cured of all Status Afflictions.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "geomancy",
+        "name": "Geomancy",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "aura",
+          "set-up"
+        ],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "category": "status",
+        "types": [
+          "fairy"
+        ],
+        "description": "<p>Effect: Set-up: The user begins to glow with mystical power, gaining @Affliction[braced] 1 and healing 3 Ticks of HP.</p><p>Resolution: The user gains +2 SPATK, SPDEF, and SPD Stages for 7 activations.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user resolves Geomancy.</p><p>Effect: Connection - Geomancy. All allies gain the Resolution Effect of the triggering attack. Passive: The first time the user would gain @Affliction[fainted] in combat, it does not and recovers 8 Ticks of HP and is cured of all Status Afflictions.</p>",
+    "traits": [
+      "legendary",
+      "aura",
+      "connection"
+    ],
+    "slug": "lifestream",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "rGtND9ArYDiFiJe1",
+  "effects": []
+}
