@@ -1,0 +1,68 @@
+{
+  "name": "Ocean's Wrath",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "environ"
+        ],
+        "name": "Ocean's Wrath",
+        "slug": "oceans-wrath",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "Effect: While Rainy or Windy Weather is active, the user's Water-Type and [Wind] attacks gain [Crit 1] (or have their [Crit X] increased by +1) and the user attacks with them as if they have +2 ACC Stages.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "aeroblast",
+        "name": "Aeroblast",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "crit-3",
+          "wind",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 95,
+        "types": [
+          "flying"
+        ],
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Effect: Connection - Aeroblast. While Rainy or Windy Weather is active, the user's Water-Type and [Wind] attacks gain [Crit 1] (or have their [Crit X] increased by +1) and the user attacks with them as if they have +2 ACC Stages.</p>",
+    "traits": [
+      "legendary",
+      "connection",
+      "environ"
+    ],
+    "slug": "oceans-wrath",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "wVN3NvZnjyL0rhRT",
+  "effects": []
+}
