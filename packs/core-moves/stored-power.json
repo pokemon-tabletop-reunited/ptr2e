@@ -1,0 +1,44 @@
+{
+  "name": "Stored Power",
+  "type": "move",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "slug": "stored-power",
+    "traits": [],
+    "actions": [
+      {
+        "slug": "stored-power",
+        "name": "Stored Power",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 20,
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: This attack's Power increases based on the totals of the user's Stat Stages, increasing if a Stat's total Stages are positive.</p><p></p><blockquote><p>Damage Formula: Power = 20 + 20 x (max(0,ATKStages)+max(0,DEFStages)+max(0,SPATKStages)+max(0,SPDEFStages)+max(0,SPDStages)+max(0,ACCStages)+max(0,EVAStages))</p></blockquote>",
+        "img": "systems/ptr2e/img/svg/psychic_icon.svg"
+      }
+    ],
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "7Mhbg8HQUtPGaWSg",
+  "effects": []
+}
