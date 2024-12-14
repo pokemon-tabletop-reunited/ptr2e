@@ -1,0 +1,62 @@
+{
+  "name": "Orichalcum Pulse",
+  "type": "ability",
+  "img": "icons/magic/light/explosion-star-glow-yellow.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "dash",
+          "interrupt-4"
+        ],
+        "name": "Orichalcum Pulse",
+        "slug": "orichalcum-pulse",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user declares Collision Course.</p>"
+        },
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The triggering attack gains [Push 2], and the user gains +1 SPD Stage for 7 Activations upon resolving the attack.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "weather"
+        ],
+        "name": "Orichalcum Pulse",
+        "slug": "orichalcum-pulse",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>At the start of combat, or when the user switches in.</p>"
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "description": "<p>Passive: While the user is present on the Field, the Weather is set to Sunny and remains Sunny while the user is active on the Field. While affected by Sunny Weather, the user's base ATK increases by +33%. If the user gains @Affliction[fainted] or is switched out, the Sunny Weather set by the user lasts for 3 more rounds.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user declares Collision Course.</p><p>Effect: The triggering attack gains [Push 2], and the user gains +1 SPD Stage for 7 Activations upon resolving the attack.</p><p>Passive: While the user is present on the Field, the Weather is set to Sunny and remains Sunny while the user is active on the Field. While affected by Sunny Weather, the user's base ATK increases by +33%. If the user gains @Affliction[fainted] or is switched out, the Sunny Weather set by the user lasts for 3 more rounds..</p>",
+    "traits": [
+      "legendary",
+      "weather",
+      "dash"
+    ],
+    "slug": "orichalcum-pulse",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "FhH6MhR0j4ganBzU",
+  "effects": []
+}
