@@ -1,0 +1,72 @@
+{
+  "name": "Crackling Fury",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "desperation-1-3",
+          "interrupt-2"
+        ],
+        "name": "Crackling Fury",
+        "slug": "crackling-fury",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user declares an Attack.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: The triggering Attack has its Power increase by 40%, and it gains [Recoil 1/6] until the end of the user's Activation. While the user meets the [Desperation 1/3] Condition, this bonus increases to 70%.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "plasma-fists",
+        "name": "Plasma Fists",
+        "type": "attack",
+        "traits": [
+          "punch",
+          "dash",
+          "legendary",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "electric"
+        ],
+        "description": "<p>Effect: On hit, all of the the user's Normal Type attacks become Electric Type for 5 Activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user declares an Attack.</p><p>Effect: Connection - Plasma Fists. The triggering Attack has its Power increase by 40%, and it gains [Recoil 1/6] until the end of the user's Activation. While the user meets the [Desperation 1/3] Condition, this bonus increases to 70%.</p>",
+    "traits": [
+      "legendary",
+      "connection",
+      "desperation-1-3"
+    ],
+    "slug": "crackling-fury",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "khQIUEZFYnHOyXnu",
+  "effects": []
+}
