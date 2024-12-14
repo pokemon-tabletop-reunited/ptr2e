@@ -1,0 +1,64 @@
+{
+  "name": "Radiation Leak",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/nuclear_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "weather",
+          "interrupt-2"
+        ],
+        "name": "Radiation Leak",
+        "slug": "radiation-leak",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user declares Fallout.</p>"
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares Fallout.</p><p>Effect: The set Glowy Weather has its duration increased by +2 Rounds.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "fallout",
+        "name": "Fallout",
+        "type": "attack",
+        "traits": [
+          "weather"
+        ],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "status",
+        "types": [
+          "nuclear"
+        ],
+        "description": "<p>Effect: The Weather becomes Glowy for 3 rounds.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user declares Fallout.</p><p>Effect: Connection - Fallout. The set Glowy Weather has its duration increased by +2 Rounds.</p>",
+    "traits": [
+      "connection",
+      "weather"
+    ],
+    "slug": "radiation-leak",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "9GMyw26IHKlC83QN",
+  "effects": []
+}
