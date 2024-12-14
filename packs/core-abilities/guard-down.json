@@ -1,0 +1,42 @@
+{
+  "name": "Guard Down",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/physical_icon.png",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "social",
+          "friendly",
+          "interrupt-5"
+        ],
+        "name": "Guard Down",
+        "slug": "guard-down",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user enters combat.</p>"
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures in range lose -1 DEF for 5 Activations and -1 EVA Stage for 2 Activations. The user's Conversation Skill checks have an additional +10 bonus.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: AThe user enters combat.</p><p>Effect: All valid creatures in range lose -1 DEF for 5 Activations and -1 EVA Stage for 2 Activations. The user's Conversation Skill checks have an additional +10 bonus.</p>",
+    "traits": [
+      "social",
+      "friendly"
+    ],
+    "slug": "guard-down",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "WTCc949kqybFx9TU",
+  "effects": []
+}
