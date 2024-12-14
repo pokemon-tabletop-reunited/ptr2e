@@ -1,0 +1,148 @@
+{
+  "name": "Dauntless Shield",
+  "type": "ability",
+  "img": "icons/equipment/shield/heater-steel-gray.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "interrupt-2"
+        ],
+        "name": "Dauntless Shield",
+        "slug": "dauntless-shield-active",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user hits a creature that possess a higher CatMod than the user with Behemoth Bash.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user hits a creature that possess a higher CatMod than the user with Behemoth Bash.</p><p>Effect: The triggering creature gains @Affliction[taunted] 7, and the user gains @Affliction[rebound] 7.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Dauntless Shield",
+        "slug": "dauntless-shield-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Bash for the remainder of the combat. The user's default DEF Stage is +1.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "iron-head",
+        "name": "Iron Head",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "push-2",
+          "flinch-chance-2",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "description": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "behemoth-bash",
+        "name": "Behemoth Bash",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "dash",
+          "crushing",
+          "contact",
+          "pass-4",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "free": true,
+        "variant": "iron-head",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "behemoth-bash-giant",
+        "name": "Behemoth Bash (Giant)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "dash",
+          "crushing",
+          "contact",
+          "pass-4",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "trigger": "The target is Dynamaxed.</p>"
+        },
+        "category": "physical",
+        "power": 200,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "description": "<p>Trigger: The target is Dynamaxed.</p>",
+        "variant": "behemoth-bash",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user hits a creature that possess a higher CatMod than the user with Behemoth Bash.</p><p>Effect: Connection - Iron Head. The triggering creature gains @Affliction[taunted] 7, and the user gains @Affliction[rebound] 7. Passive:  When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Bash for the remainder of the combat. The user's default DEF Stage is +1.</p>",
+    "traits": [
+      "legendary"
+    ],
+    "slug": "dauntless-shield",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "nseOdT3vpRN0AW0K",
+  "effects": []
+}
