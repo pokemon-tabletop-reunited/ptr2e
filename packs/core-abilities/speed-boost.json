@@ -1,0 +1,55 @@
+{
+  "name": "Speed Boost",
+  "type": "ability",
+  "img": "icons/skills/movement/feet-winged-boots-glowing-yellow.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "stage-change"
+        ],
+        "name": "Speed Boost",
+        "slug": "speed-boost",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: At the end of the Round, the user gains +1 SPD Stage for 5 Activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "stage-change"
+        ],
+        "name": "Speed Boost (Active)",
+        "slug": "speed-boost-active",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user gains +1 SPD Stage for 5 Activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: At the end of the Round, the user gains +1 SPD Stage for 5 Activations. As a Simple Action for 3 PP, the user can gain +1 SPD Stage for 5 Activations.</p>",
+    "traits": [
+      "stage-change"
+    ],
+    "slug": "speed-boost",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "LpovBWFJb0J2ggv1",
+  "effects": []
+}
