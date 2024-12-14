@@ -1,0 +1,38 @@
+{
+  "name": "Haunting",
+  "type": "ability",
+  "img": "systems/ptr2e/img/conditions/cursed.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-1"
+        ],
+        "name": "Haunting",
+        "slug": "haunting",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "<p>The user is @Affliction[fainted] from another creature's attack or effect.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is @Affliction[fainted] from another creature's attack or effect.</p><p>Effect: The triggering creature gains @Affliction[cursed] 3.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is @Affliction[fainted] from another creature's attack or effect.</p><p>Effect: The triggering creature gains @Affliction[cursed] 3.</p>",
+    "traits": [],
+    "slug": "haunting",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "p1FwvalPcGzuUlAh",
+  "effects": []
+}
