@@ -1,0 +1,97 @@
+{
+  "name": "Tera Shell",
+  "type": "ability",
+  "img": "systems/ptr2e/img/perk-icons/Touched.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "intrepid-3-4",
+          "defensive"
+        ],
+        "name": "Tera Shell",
+        "slug": "tera-shell",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: While the user meets the [Intrepid 3/4] Condition, the user takes 50% less damage from Physical- and Special-Category Attacks. Upon leaving battle, the user returns to its Normal Forme.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "tera-starstorm",
+        "name": "Tera Starstorm",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "blast-2",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "special",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "tera-starstorm-stellar",
+        "name": "Tera Starstorm (Stellar)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "blast-5",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "trigger": "<p>The user is currently in their Stellar Forme.</p>"
+        },
+        "category": "special",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Tigger: The user is currently in their Stellar Forme.</p>",
+        "variant": "tera-starstorm",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: Connection - Tera Starstorm. While the user meets the [Intrepid 3/4] Condition, the user takes 50% less damage from Physical- and Special-Category Attacks. Upon leaving battle, the user returns to its Normal Forme.</p>",
+    "traits": [
+      "legendary",
+      "connection"
+    ],
+    "slug": "tera-shell",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "YTFTNio0VopMWf0s",
+  "effects": []
+}
