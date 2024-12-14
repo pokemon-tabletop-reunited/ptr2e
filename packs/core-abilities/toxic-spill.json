@@ -1,0 +1,38 @@
+{
+  "name": "Toxic Spill",
+  "type": "ability",
+  "img": "icons/svg/biohazard.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-1"
+        ],
+        "name": "Toxic Spill",
+        "slug": "toxic-spill",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user ends their Activation.</p>"
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 3,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user ends their Activation.</p><p>Effect: @Affliction[grounded] Non-Poison-Type creatures in Range take a Tick of HP damage.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user ends their Activation.</p><p>Effect: @Affliction[grounded] Non-Poison-Type creatures in Range take a Tick of HP damage.</p>",
+    "traits": [],
+    "slug": "toxic-spill",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "53uKmMB9bJ25HC1q",
+  "effects": []
+}
