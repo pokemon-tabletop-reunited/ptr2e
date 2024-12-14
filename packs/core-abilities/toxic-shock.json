@@ -1,0 +1,38 @@
+{
+  "name": "Toxic Shock",
+  "type": "ability",
+  "img": "systems/ptr2e/img/conditions/poisoned.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-2"
+        ],
+        "name": "Toxic Shock",
+        "slug": "toxic-shock",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user applies either @Affliction[poison] or @Affliction[paralysis] to a creature after hitting with a damaging Poison or Electric-Type attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user applies either @Affliction[poison] or @Affliction[paralysis] to a creature after hitting with a damaging Poison or Electric-Type attack.</p><p>Effect: The user applies both @Affliction[poison] and @Affliction[paralysis] for an equal number of Activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user applies either @Affliction[poison] or @Affliction[paralysis] to a creature after hitting with a damaging Poison or Electric-Type attack.</p><p>Effect: The user applies both @Affliction[poison] and @Affliction[paralysis] for an equal number of Activations.</p>",
+    "traits": [],
+    "slug": "toxic-shock",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "653wUPJV1IcZufi1",
+  "effects": []
+}
