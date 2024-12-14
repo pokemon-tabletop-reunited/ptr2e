@@ -1,0 +1,67 @@
+{
+  "name": "Rocky Helmet",
+  "img": "systems/ptr2e/img/icons/equipment_icon.webp",
+  "type": "equipment",
+  "system": {
+    "crafting": {
+      "skill": "",
+      "spans": null,
+      "materials": []
+    },
+    "equipped": {
+      "slot": "accessory",
+      "carryType": "stowed",
+      "handsHeld": null
+    },
+    "grade": "B",
+    "fling": {
+      "type": "untyped",
+      "power": null,
+      "accuracy": 100,
+      "hide": false
+    },
+    "rarity": "uncommon",
+    "traits": [
+      "combat"
+    ],
+    "actions": [
+      {
+        "name": "Rocky Helmet",
+        "slug": "rocky-helmet",
+        "type": "generic",
+        "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The source of the triggering attack takes 3 Ticks of HP damage.",
+        "traits": [
+          "Combat"
+        ],
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "trigger": "The user is hit by a [Contact] attack."
+        },
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "Trigger: The user is hit by a [Contact] attack.\nEffect: The source of the triggering attack takes 3 Ticks of HP damage.",
+    "slug": "rocky-helmet",
+    "quantity": 1,
+    "identification": {
+      "misidentified": null,
+      "status": "identified",
+      "unidentified": {
+        "name": "Unidentified Item",
+        "img": "systems/ptu/css/images/icons/item_icon.png",
+        "description": "<p>Unidentified Item</p>"
+      }
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "Rmp9cDtLcTuRuf9x",
+  "effects": [],
+  "folder": "V4skAU6G3OH5fXad"
+}
