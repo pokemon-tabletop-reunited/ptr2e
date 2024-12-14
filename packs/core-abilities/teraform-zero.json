@@ -1,0 +1,65 @@
+{
+  "name": "Teraform Zero",
+  "type": "ability",
+  "img": "systems/ptr2e/img/perk-icons/Touched.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "environ",
+          "transform",
+          "phenomenon",
+          "legendary"
+        ],
+        "name": "Teraform Zero (Active)",
+        "slug": "teraform-zero-active",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 8
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "description": "<p>Effect: All current [Weather] and [Terrain] effects end. Creatures on the field that have undergone a Phenomenal Transformation other than Terastallization have those Transformations ended.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "environ",
+          "transform",
+          "phenomenon",
+          "legendary"
+        ],
+        "name": "Teraform Zero",
+        "slug": "teraform-zero",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user gains this Ability.</p>"
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user gains this Ability.</p><p>Effect: All current [Weather] and [Terrain] effects end. Creatures on the field that have undergone a Phenomenal Transformation other than Terastallization have those Transformations ended.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user gains this Ability.</p><p>Effect: All current [Weather] and [Terrain] effects end. Creatures on the field that have undergone a Phenomenal Transformation other than Terastallization have those Transformations ended. The user may spend PP as a Simple Action to activate this Ability, ignoring the normal Trigger.</p>",
+    "traits": [
+      "environ",
+      "transform",
+      "phenomenon",
+      "legendary"
+    ],
+    "slug": "teraform-zero",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "nxJJax0yiUKIH40F",
+  "effects": []
+}
