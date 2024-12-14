@@ -1,0 +1,82 @@
+{
+  "name": "Wishmaker",
+  "type": "ability",
+  "img": "systems/ptr2e/img/perk-icons/Touched.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "interrupt-7"
+        ],
+        "name": "Wishmaker",
+        "slug": "wishmaker",
+        "type": "generic",
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5,
+          "trigger": "<p>The user resolves Wish.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user resolves Wish.</p><p>Effect: The user selections to utilize one of the following effects to utilize in place of the triggering attack's normal Resolution effect:<ul><li>The target is healed 12 Ticks of HP, and creatures allied to the target in a 5m Burst of the target are healed 4 Ticks of HP.</li><li>The target gains +3 Stages to a Stat of the target's choice, and creatures allied to the target in a 2m Burst of the target gain +1 Stage in that Stat, all for 7 Activations.</li><li>The target is cured of all its Status Afflictions (except @Affliction[weary]), and creatures allied to the target in a 4m Burst of the target are healed of 1 random Status Affliction they possess.</li><li>The target loses 1 @Affliction[weary] and regains 20% of its max PP, minimum 20, and creatures allied to the target in a Burst 3 of the target regain 10 PP.</li><li>The target loses 4 Ticks of HP, and creatures not allied to the target in a 5m Burst of the target lose 10 Ticks of HP.</li>This Action's Activation Cost is taken from the user's next Activation.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "wish",
+        "name": "Wish",
+        "type": "attack",
+        "traits": [
+          "healing",
+          "set-up"
+        ],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: Set-Up: The user makes a wish, ending their current activation.</p><p>Resolution: On their next activation, they can select 1 creature on the field (which can be the user), to recover HP equal to 1/2 the Wish User's Max HP.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Comatose",
+        "slug": "comatose",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: Major Status Afflictions affecting the user are reduced by 2 every Activation instead of 1. The user is always considered to be affected by the @Affliction[drowsy] Affliction for the application of attack and Ability effects. The user ignores the effects of the @Affliction[drowsy] Affliction.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user resolves Wish.</p><p>Effect: Connection - Wish. The user selections to utilize one of the following effects to utilize in place of triggering attack's normal Resolution effect:<ul><li>The target is healed 12 Ticks of HP, and creatures allied to the target in a 5m Burst of the target are healed 4 Ticks of HP.</li><li>The target gains +3 Stages to a Stat of the target's choice, and creatures allied to the target in a 2m Burst of the target gain +1 Stage in that Stat, all for 7 Activations.</li><li>The target is cured of all its Status Afflictions (except @Affliction[weary]), and creatures allied to the target in a 4m Burst of the target are healed of 1 random Status Affliction they possess.</li><li>The target loses 1 @Affliction[weary] and regains 20% of its max PP, minimum 20, and creatures allied to the target in a Burst 3 of the target regain 10 PP.</li><li>The target loses 4 Ticks of HP, and creatures not allied to the target in a 5m Burst of the target lose 10 Ticks of HP.</li>This Action's Activation Cost is taken from the user's next Activation.</p><p>Passive: The user possesses the Comatose Ability.</p",
+    "traits": [
+      "legendary",
+      "connection"
+    ],
+    "slug": "wishmaker",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "UqcOktU7m7EH2znT",
+  "effects": []
+}
