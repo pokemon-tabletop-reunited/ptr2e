@@ -1,0 +1,94 @@
+{
+  "name": "Cheap Tactics",
+  "type": "ability",
+  "img": "systems/ptr2e/img/perk-icons/Ninja.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-4"
+        ],
+        "name": "Cheap Tactics",
+        "slug": "cheap-tactics",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user enters battle, or emerges from stealth.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p>The user gains +2 CRIT Stages for 2 Activations. Then, the user freely moves up to and using the Movement Score of their choice, and uses Scratch (First Strike).</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "scratch",
+        "name": "Scratch",
+        "type": "attack",
+        "traits": [
+          "sharp",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex"
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "scratch-first-strike",
+        "name": "Scratch (First Strike)",
+        "type": "attack",
+        "traits": [
+          "sharp",
+          "contact",
+          "pass-4",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "trigger": "<p>Activated by an Ability's effect.</p>"
+        },
+        "category": "physical",
+        "power": 40,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: Activated by an Ability's effect.</p>",
+        "variant": "scratch",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user enters battle, or emerges from stealth.</p><p>Effect: Connection - Scratch. The user gains +2 CRIT Stages for 2 Activations. Then, the user freely moves up to and using the Movement Score of their choice, and uses Scratch (First Strike).</p>",
+    "traits": [
+      "connection"
+    ],
+    "slug": "cheap-tactics",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "LT52ALHpGUv5ypbC",
+  "effects": []
+}
