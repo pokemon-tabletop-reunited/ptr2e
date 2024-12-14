@@ -1,0 +1,63 @@
+{
+  "name": "Shell Shield",
+  "type": "ability",
+  "img": "icons/creatures/reptiles/turtle-shell-glowing-green.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-3"
+        ],
+        "name": "Shell Shield",
+        "slug": "shell-shield",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "<p>An adjacent ally creature is hit with a Physical or Special-Category Attack.</p>"
+        },
+        "range": {
+          "target": "ally",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: An adjacent ally creature targeted with a Physical or Special-Category Attack.</p><p>Effect: The user freely uses Withdraw and then Intercept, designating the triggering ally as their target.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "withdraw",
+        "name": "Withdraw",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 1
+        },
+        "category": "status",
+        "types": [
+          "water"
+        ],
+        "description": "<p>Effect: The user gains +1 DEF Stage for 5 activations.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: An adjacent ally creature targeted with a Physical or Special-Category Attack.</p><p>Effect: Connection - Withdraw. The user freely uses Withdraw and then Intercept, designating the triggering ally as their target.</p>",
+    "traits": [
+      "connection",
+      "defensive"
+    ],
+    "slug": "shell-shield",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "UFd3V17cDGer1UQW",
+  "effects": []
+}
