@@ -1,0 +1,86 @@
+{
+  "name": "Dread Wings",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "aura",
+          "interrupt-4"
+        ],
+        "name": "Dread Wings",
+        "slug": "dread-wings",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user causes a creature to gain @Affliction[fainted] with Oblivion Wing.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user causes a creature to gain @Affliction[fainted] with Oblivion Wing.</p><p>Effect: The user gains 4 Ticks of HP.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "aura"
+        ],
+        "name": "Dread Wings",
+        "slug": "dread-wings",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The user's Dark-Type attacks are now Super Effective against Fairy-Type creatures.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "oblivion-wing",
+        "name": "Oblivion Wing",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "drain-3-4",
+          "ray",
+          "aura",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 8,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "flying"
+        ],
+        "description": "<p>Effect: This attack is considered both Flying and Dark Type.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user causes a creature to gain @Affliction[fainted] with Oblivion Wing.</p><p>Effect: Connection - Oblivion Wing. The user gains 4 Ticks of HP.</p><p>Passive: The user's Dark-Type attacks are now Super Effective against Fairy-Type creatures.</p>",
+    "traits": [
+      "legendary",
+      "aura",
+      "connection"
+    ],
+    "slug": "dread-wings",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "5BvWFPMPoP3eGWWs",
+  "effects": []
+}
