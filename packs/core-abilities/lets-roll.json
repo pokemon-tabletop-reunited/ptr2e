@@ -1,0 +1,79 @@
+{
+  "name": "Let's Roll",
+  "type": "ability",
+  "img": "icons/svg/mole.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-4"
+        ],
+        "name": "Let's Roll",
+        "slug": "lets-roll",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user enters combat.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user freely uses Defense Curl and may also spend 4 additional PP to instead use Defense Curl (Rolled).</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "defense-curl",
+        "name": "Defense Curl",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user gains @Affliction[curled] 5.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "defense-curl-rolled",
+        "name": "Defense Curl (Rolled)",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 6
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user gains @Affliction[curled] 9 and +1 SPD Stages for 5 Activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Defense Curl. The user freely uses Defense Curl and may also spend 4 additional PP to use Defense Curl (Rolled).</p>",
+    "traits": [
+      "connection"
+    ],
+    "slug": "lets-roll",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "NKwlORX98U7JMiNa",
+  "effects": []
+}
