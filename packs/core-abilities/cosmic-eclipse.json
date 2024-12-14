@@ -1,0 +1,80 @@
+{
+  "name": "Cosmic Eclipse",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/ghost_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Cosmic Eclipse",
+        "slug": "cosmic-eclipse-active",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user declares Moongeist Beam.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares Moongeist Beam</p><p>Effect: The triggering attack has a 33% chance of inflicting @Affliction[cursed] 3 to valid targets on hit.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Cosmic Eclipse",
+        "slug": "cosmic-eclipse-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The user's Ghost-Type attacks can hit Normal-Type creatures.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "moongeist-beam",
+        "name": "Moongeist Beam",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "ray",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "line",
+          "distance": 15,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "ghost"
+        ],
+        "description": "<p>Effect: This attack is unaffected by the abilities of other creatures.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user declares Moongeist Beam</p><p>Effect: Connection - Moongeist Beam. The triggering attack has a 33% chance of inflicting @Affliction[cursed] 3 to valid targets on hit. Passive: The user's Ghost-Type attacks can hit Normal-Type creatures.</p>",
+    "traits": [
+      "legendary"
+    ],
+    "slug": "cosmic-eclipse",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "k9KxGgxPGZk9ohQj",
+  "effects": []
+}
