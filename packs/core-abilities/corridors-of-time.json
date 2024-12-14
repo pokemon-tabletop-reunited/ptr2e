@@ -1,0 +1,100 @@
+{
+  "name": "Corridors of Time",
+  "type": "ability",
+  "img": "icons/magic/time/hourglass-tilted-gray.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "defensive",
+          "interrupt-7",
+          "flinch-5",
+          "stage-change"
+        ],
+        "name": "Corridors of Time (Reaction)",
+        "slug": "corridors-of-time-reaction",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 7,
+          "trigger": "<p>The user would be affected by a declared Action, Attack, or Ability.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: The user targets the source of Triggering effect, causing them to Flinch. The user is unaffected by the Triggering effect, and then user gains +6 EVA for 2 Activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "interrupt-7",
+          "priority-5"
+        ],
+        "name": "Corridors of Time (Action)",
+        "slug": "corridors-of-time-action",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "<p>The user declares an Action or Ability that consumes at least one Simple Action.</p>",
+          "priority": 5
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares an Action or Ability that consumes at least one Simple Action.</p><p>The number of Simple Actions the Triggering Action consumes are reduced by 1 ([Exhaust] Actions instead just lose [Exhaust]).</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "roar-of-time",
+        "name": "Roar of Time",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "exhaust",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 12
+        },
+        "category": "special",
+        "power": 150,
+        "accuracy": 90,
+        "types": [
+          "dragon"
+        ],
+        "description": "<p>Effect: On hit, all valid targets are @Affliction[slowed] 7. The user may spend 4 PP and change this attack's Range to <q>15m Cone<q> until their next Activation.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user would be affected by a declared Action, Attack, or Ability.</p><p>Effect: Connection - Roar of Time. The triggering effect does not affect the user, and effect's source is affected by Flinch. Then user gains +6 EVA for 2 Activations. When the user declares an Action or Ability that consumes at least one Simple Action, the user may spend 4 PP to reduce the number of Simple Actions that Action consumes by 1 ([Exhaust] Actions instead just lose [Exhaust]).</p>",
+    "traits": [
+      "legendary",
+      "connection",
+      "defensive",
+      "interrupt-7",
+      "priority-5",
+      "flinch-5",
+      "stage-change"
+    ],
+    "slug": "corridors-of-time",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "Zen8fn6P5ibzzf1l",
+  "effects": []
+}
