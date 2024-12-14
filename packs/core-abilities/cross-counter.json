@@ -1,0 +1,40 @@
+{
+  "name": "Cross Counter",
+  "type": "ability",
+  "img": "icons/skills/melee/unarmed-punch-fist-blue.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-3"
+        ],
+        "name": "Cross Counter",
+        "slug": "cross-counter",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user is hit by a [Contact] attack.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user takes 66% of the damage from the triggering Attack, then freely uses a [Punch] attack, targeting the triggering creature.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user takes 66% of the damage from the triggering Attack, then freely uses a [Punch] attack, targeting the triggering creature.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "cross-counter",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "iIBUYi5at6mPDJSt",
+  "effects": []
+}
