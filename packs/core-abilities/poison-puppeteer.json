@@ -1,0 +1,68 @@
+{
+  "name": "Poison Puppeteer",
+  "type": "ability",
+  "img": "icons/magic/control/debuff-chains-shackles-movement-purple.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "interrupt-2"
+        ],
+        "name": "Poison Puppeteer",
+        "slug": "poison-puppeteer",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user @Affliction[poison]s or @Affliction[blight]s a creature.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user @Affliction[poison]s or @Affliction[blight]s a creature.</p><p>Effect: The affected creature is afflicted with @Affliction[confused] 5.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "malignant-chain",
+        "name": "Malignant Chain",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 5,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Effect: On hit, the target has a 50% chance of gaining @Affliction[blight] 8 and a 50% chance of gaining @Affliction[paralysis] 5.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user @Affliction[poison]s or @Affliction[blight]s a creature.</p><p>Effect: Connection - Malignant Chain. The affected creature is afflicted with @Affliction[confused] 5.</p>",
+    "traits": [
+      "legendary",
+      "connection"
+    ],
+    "slug": "poison-puppeteer",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "V5KPS8wGvbHysehP",
+  "effects": []
+}
