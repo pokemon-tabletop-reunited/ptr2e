@@ -1,0 +1,41 @@
+{
+  "name": "Mummy",
+  "type": "ability",
+  "img": "icons/containers/misc/coffin-wood-brown.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-1"
+        ],
+        "name": "Mummy",
+        "slug": "mummy",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "<p>The user is hit by a [Contact] attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature's Basic Ability is replaced with Mummy until the end of combat. If the creature has more than one Basic Ability, the creature chooses which Ability is replaced. If the triggering creature's Basic Ability cannot be replaced, the user chooses of the creature's other abilities to be replaced. A creature can only have one Ability replaced with Mummy at a time.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature's Basic Ability is replaced with Mummy until the end of combat. If the creature has more than one Basic Ability, the creature chooses which Ability is replaced. If the triggering creature's Basic Ability cannot be replaced, the user chooses of the creature's other abilities to be replaced. A creature can only have one Ability replaced with Mummy at a time.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "mummy",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "5DTKiBaBlDswBRrs",
+  "effects": []
+}
