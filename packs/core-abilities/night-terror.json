@@ -1,0 +1,38 @@
+{
+  "name": "Night Terror",
+  "type": "ability",
+  "img": "systems/ptr2e/img/conditions/bad-sleep.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-1"
+        ],
+        "name": "Night Terror",
+        "slug": "night-terror",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>A creature within Range is cured of @Affliction[drowsy] or @Affliction[nightmares].</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: A creature within Range loses the @Affliction[drowsy] or Nightmare Affliction.</p><p>Effect: The triggering creature gains @Affliction[paralysis] 5.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: A creature within Range loses the @Affliction[drowsy] or Nightmare Affliction.</p><p>Effect: The triggering creature gains @Affliction[paralysis] 5.</p>",
+    "traits": [],
+    "slug": "night-terror",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "0tXHHZk6GkZRyTmk",
+  "effects": []
+}
