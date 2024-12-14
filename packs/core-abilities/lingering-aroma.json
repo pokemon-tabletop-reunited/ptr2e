@@ -1,0 +1,41 @@
+{
+  "name": "Lingering Aroma",
+  "type": "ability",
+  "img": "icons/svg/radiation.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-1"
+        ],
+        "name": "Lingering Aroma",
+        "slug": "lingering-aroma",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "<p>The user is hit by a [Contact] attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature's Basic Ability is replaced with Lingering Aroma until the end of combat. If the creature has more than one Basic Ability, the creature chooses which Ability is replaced. A creature can only have one Ability replaced with Lingering Aroma at a time.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The triggering creature's Basic Ability is replaced with Lingering Aroma until the end of combat. If the creature has more than one Basic Ability, the creature chooses which Ability is replaced. A creature can only have one Ability replaced with Lingering Aroma at a time.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "lingering-aroma",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "wkVRHWJtoq4QEczL",
+  "effects": []
+}
