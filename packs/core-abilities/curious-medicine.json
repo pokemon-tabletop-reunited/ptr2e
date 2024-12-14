@@ -1,0 +1,103 @@
+{
+  "name": "Curious Medicine",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-4"
+        ],
+        "name": "Curious Medicine",
+        "slug": "curious-medicine",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user enters combat.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user freely uses Haze.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "haze",
+        "name": "Haze",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "category": "status",
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Effect: The Stat Stages of all creatures in the combat are reset to their default values.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "haze-allies",
+        "name": "Haze (Allies)",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5
+        },
+        "category": "status",
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Effect: The Stat Stages of all allied creatures in the combat are reset to their default values.</p>",
+        "free": true,
+        "variant": "haze",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "haze-foes",
+        "name": "Haze (Foes)",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5
+        },
+        "category": "status",
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Effect: The Stage of all enemy creatures in the combat are reset to their default values.</p>",
+        "free": true,
+        "variant": "haze",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Haze. The user freely uses Haze. Whenever the user uses Haze, they can 2 PP to have either 1) the user and its allies or 2) foes be excluded from Haze's effect.</p>",
+    "traits": [
+      "connection"
+    ],
+    "slug": "curious-medicine",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "AEKdQTZi4O8tBpm5",
+  "effects": []
+}
