@@ -1,0 +1,42 @@
+{
+  "name": "Storm Drain",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/water_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "draw-in"
+        ],
+        "name": "Storm Drain",
+        "slug": "storm-drain",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "<p>A creature within range of the user uses a Water-Type attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: A creature within range of the user uses a Water-Type attack.</p><p>Effect: The triggering attack hits the user instead, dealing no damage and applying no effects. Additionally, the user raises their SPATK Stage by +1 for 5 Activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: A creature within range of the user uses a Water-Type attack.</p><p>Effect: The triggering attack hits the user instead, dealing no damage and applying no effects. Additionally, the user raises their SPATK Stage by +1 for 5 Activations.</p>",
+    "traits": [
+      "defensive",
+      "draw-in"
+    ],
+    "slug": "storm-drain",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "NG80IqZZr9G1P1yA",
+  "effects": []
+}
