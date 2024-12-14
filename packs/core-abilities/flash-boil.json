@@ -1,0 +1,57 @@
+{
+  "name": "Flash Boil",
+  "type": "ability",
+  "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "defensive",
+          "interrupt-3"
+        ],
+        "name": "Flash Boil",
+        "slug": "flash-boil",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 6,
+          "trigger": "<p>The user is hit by a Water-Type Attack.</p>"
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 2,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a Water-Type Attack.</p><p>Effect: The user freely sets Foggy Weather for 3 rounds, and creatures within Range have a 20% chance of gaining @Affliction[burn] 5.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "defensive"
+        ],
+        "name": "Flash Boil",
+        "slug": "flash-boil",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The user is immune to the negative effects of Foggy Weather, and the user's Water-Type Attacks are considered to also have the Fire-Type.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a Water-Type Attack.</p><p>Effect: The user freely sets Foggy Weather for 3 rounds, and creatures within Range have a 20% chance of gaining @Affliction[burn] 5. Passive: The user is immune to the negative effects of Foggy Weather, and the user's Water-Type Attacks are considered to also have the Fire-Type.</p>",
+    "traits": [
+      "legendary",
+      "defensive"
+    ],
+    "slug": "flash-boil",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "lMDQR525FRZE54Xx",
+  "effects": []
+}
