@@ -1,0 +1,64 @@
+{
+  "name": "Snow Warning",
+  "type": "ability",
+  "img": "icons/magic/air/weather-clouds-snow.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "weather",
+          "interrupt-2"
+        ],
+        "name": "Snow Warning",
+        "slug": "snow-warning",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user declares Snowscape.</p>"
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares Snowscape.</p><p>Effect: The set Snowy Weather has its duration increased by +2 Rounds.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "snowscape",
+        "name": "Snowscape",
+        "type": "attack",
+        "traits": [
+          "weather"
+        ],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "status",
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Effect: The Weather becomes Snowy for 3 rounds.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user declares Snowscape.</p><p>Effect: Connection - Snowscape. The set Snowy Weather has its duration increased by +2 Rounds.</p>",
+    "traits": [
+      "connection",
+      "weather"
+    ],
+    "slug": "snow-warning",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "CNKfFD2LtrnuqHQB",
+  "effects": []
+}
