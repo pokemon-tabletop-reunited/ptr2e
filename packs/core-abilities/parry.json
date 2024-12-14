@@ -1,0 +1,40 @@
+{
+  "name": "Parry",
+  "type": "ability",
+  "img": "icons/skills/melee/swords-parry-block-blue.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-3"
+        ],
+        "name": "Parry",
+        "slug": "parr-reaction",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 6,
+          "trigger": "<p>The user is hit by a [Contact] attack.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user takes no damage from the triggering attack and is unaffected by the triggering attack's effect.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a [Contact] attack. Effect: The user takes no damage from the triggering attack and is unaffected by the triggering attack's effect. This costs 6PP to activate.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "parry",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "XDh6j0c8zGFV4aDx",
+  "effects": []
+}
