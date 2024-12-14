@@ -1,0 +1,157 @@
+{
+  "name": "Embody Aspect",
+  "type": "ability",
+  "img": "systems/ptr2e/img/perk-icons/Touched.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "aura",
+          "forme-change",
+          "legendary"
+        ],
+        "name": "Embody Aspect",
+        "slug": "embody-aspect",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: While the user has a specific [Oni Mask] item equipped in a [Worn] slot, they gain benefits from that specific [Oni Mask], providing Extra Abilities, altering the user's Tera Type, modifying the user's Ivy Cudgel, and providing a bonus to the user while they are Terastallized.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "aura",
+          "defensive",
+          "phenomenon",
+          "legendary"
+        ],
+        "name": "Embodied Teal",
+        "slug": "embody-aspect-teal",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>While the user has the Teal Mask equipped in a [Worn] slot.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user possesses Defiant and Antitoxin as Extra Abilities and has its Tera Type replaced with [Grass]. While the user is Terastallized, they have +1 default SPD Stage.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "aura",
+          "defensive",
+          "phenomenon",
+          "legendary"
+        ],
+        "name": "Embodied Wellspring",
+        "slug": "embody-aspect-wellspring",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>While the user has the Wellspring Mask equipped in a [Worn] slot.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user possesses Water Absorb and Seaweed as Extra Abilities, gains the Water Type, may use Ivy Cudgel as Water-Type, and has its Tera Type replaced with Water. While the user is Terastallized, they have +1 default SPDEF Stage.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "aura",
+          "defensive",
+          "phenomenon",
+          "legendary"
+        ],
+        "name": "Embodied Hearthflame",
+        "slug": "embody-aspect-hearthflame",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>While the user has the Wellspring Mask equipped in a [Worn] slot.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user possesses Mold Breaker and Flaming Soul as Extra Abilities. gains the Fire  Type, may use Ivy Cudgel as Fire Type, and has its Tera Type replaced with Fire. While the user is Terastallized, they have +1 default ATK Stage.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "aura",
+          "defensive",
+          "phenomenon",
+          "legendary"
+        ],
+        "name": "Embodied Cornerstone",
+        "slug": "embody-aspect-cornerstone",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>While the user has the Cornerstone Mask equipped in a [Worn] slot.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user possesses Sturdy and Solid Rock as Extra Abilities, gains the Rock Type, may use Ivy Cudgel as Rock Type, and has its Tera Type replaced with Rock. While the user is Terastallized, they have +1 default DEF Stage.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "ivy-cudgel",
+        "name": "Ivy Cudgel",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "crit-2",
+          "blast-1",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 2,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "grass"
+        ],
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: Connection - Ivy Cudgel. While the user has a specific [Oni Mask] item equipped in a [Worn] slot, they gain the following benefits:</p><p>- Teal Mask: the user possesses Defiant and Antitoxin as Extra Abilities and has its Tera Type replaced with Grass. While the user is Terastallized, they have +1 default SPD Stage.</p><p>- Wellspring Mask: the user possesses Water Absorb and Seaweed as Extra Abilities, gains the Water Type, may use Ivy Cudgel as Water Type, and has its Tera Type replaced with Water. While the user is Terastallized, they have +1 default SPDEF Stage.</p><p>- Hearthflame Mask: the user possesses Mold Breaker and Flaming Soul as Extra Abilities. gains the Fire  Type, may use Ivy Cudgel as Fire Type, and has its Tera Type replaced with Fire. While the user is Terastallized, they have +1 default ATK Stage.</p><p>- Cornerstone Mask: the user possesses Sturdy and Solid Rock as Extra Abilities, gains the Rock Type, may use Ivy Cudgel as Rock Type, and has its Tera Type replaced with Rock. While the user is Terastallized, they have +1 default DEF Stage.</p>",
+    "traits": [
+      "aura",
+      "defensive",
+      "connection",
+      "phenomenon",
+      "forme-change",
+      "legendary"
+    ],
+    "slug": "embody-aspect",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "kuCAeacxyPBxz7On",
+  "effects": []
+}
