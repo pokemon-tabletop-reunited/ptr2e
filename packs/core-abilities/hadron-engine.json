@@ -1,0 +1,61 @@
+{
+  "name": "Hadron Engine",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/electric_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "dash",
+          "interrupt-4"
+        ],
+        "name": "Hadron Engine",
+        "slug": "hadron-engine",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user resolves Electro Drift.</p>"
+        },
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user freely relocates itself to a space within the range of the triggering attack, and gains +1 SPD Stage for 7 Activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "terrain"
+        ],
+        "name": "Hadron Engine",
+        "slug": "hadron-engine",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "description": "<p>Passive: While the user is present on the Field, the Terrain is set to Electric Terrain and remains Electric Terrain while the user is active on the Field. While affected by Electric Terrain, the user's base SPATK increases by +30%. If the user gains @Affliction[fainted] or is switched out, the Electric Terrain set by the user lasts for 3 more rounds. The user is always considered to be affected by Electric Terrain if it is active anywhere on the Field.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user resolves Electro Drift.</p><p>Effect: The user relocates itself to a square within the range of the triggering attack, and gains +1 SPD Stage for 7 Activations.</p><p>Passive: While the user is present on the Field, the Terrain is set to Electric Terrain and remains Electric Terrain while the user is active on the field. While affected by Electric Terrain, the user's base SPATK increases by +30%. If the user gains @Affliction[fainted] or is switched out, the Electric Terrain set by the user lasts for 3 more rounds. The user is always considered to be affected by Electric Terrain if it is active anywhere on the Field.</p>",
+    "traits": [
+      "legendary",
+      "terrain",
+      "dash"
+    ],
+    "slug": "hadron-engine",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "GHCZqpOnu7qddjcb",
+  "effects": []
+}
