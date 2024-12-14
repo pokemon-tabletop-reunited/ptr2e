@@ -1,0 +1,40 @@
+{
+  "name": "Rough Skin",
+  "type": "ability",
+  "img": "icons/commodities/leather/scales-white.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-1"
+        ],
+        "name": "Rough Skin",
+        "slug": "rough-skin",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user is hit by a [Contact] attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The source of the triggering attack takes a Tick of HP damage.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The source of the triggering attack takes a Tick of HP damage.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "rough-skin",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "erEO3yCHOSuKy0zL",
+  "effects": []
+}
