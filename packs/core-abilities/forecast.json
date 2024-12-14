@@ -1,0 +1,212 @@
+{
+  "name": "Forecast",
+  "type": "ability",
+  "img": "icons/magic/air/weather-clouds-rainbow.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "environ",
+          "forme-change"
+        ],
+        "name": "Forecast",
+        "slug": "forecast",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The user's Stats increase by 20% while a [Weather] is present, and 40% while an Intense [Weather] is present. The user's Forme changes to match one of the current active [Weather]s (user's choice whenever a Weather is set, returning to its normal Forme in Clear Weather.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "weather-ball",
+        "name": "Weather Ball",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile",
+          "environ",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "weather-ball-weather",
+        "name": "Weather Ball (Weather)",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile",
+          "environ",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "variant": "weather-ball",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "weather-ball-intense-weather",
+        "name": "Weather Ball (Intense Weather)",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile",
+          "environ",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "special",
+        "power": 150,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "variant": "weather-ball",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "weather-ball-casted",
+        "name": "Weather Ball (Casted)",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile",
+          "environ",
+          "blast-3",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "special",
+        "power": 50,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "variant": "weather-ball",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "weather-ball-weather-casted",
+        "name": "Weather Ball (Weather Casted)",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile",
+          "environ",
+          "blast-3",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "special",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "variant": "weather-ball",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "weather-ball-intense-weather-casted",
+        "name": "Weather Ball (Intense Weather Casted)",
+        "type": "attack",
+        "traits": [
+          "pulse",
+          "missile",
+          "environ",
+          "blast-3",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "special",
+        "power": 150,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "variant": "weather-ball",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user declares Weather Ball.</p><p>Effect: Connection - Weather Ball.  The user adds [Blast 3] to the triggering attack for the rest of their Activation. Passive: The user's Stats increase by 20% while a [Weather] is present, and 40% while an Intense [Weather] is present. The user's Forme changes to match one of the current active [Weather]s (user's choice whenever a Weather is set, returning to its normal Forme in Clear Weather.</p>",
+    "traits": [
+      "connection",
+      "environ",
+      "forme-change"
+    ],
+    "slug": "forecast",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "1hYY0Ae6pdN5rN9b",
+  "effects": []
+}
