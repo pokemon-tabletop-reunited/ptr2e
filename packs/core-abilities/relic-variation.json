@@ -1,0 +1,134 @@
+{
+  "name": "Relic Variation",
+  "type": "ability",
+  "img": "systems/ptr2e/img/perk-icons/Coordinator.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Relic Variation",
+        "slug": "relic-variation",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user resolves Relic Dance.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user resolves Relic Dance.</p><p>Effect: The user transforms into its Aria Forme. The user may also change Formes as either a Simple Action (4 PP), or as a Downtime Action.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Relic Variation (Active)",
+        "slug": "relic-variation-active",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 4
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user transforms into its Aria Forme.",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Relic Variation",
+        "slug": "relic-variation-downtime",
+        "type": "downtime",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user transforms into its Aria Forme.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "relic-dance",
+        "name": "Relic Dance",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "dance",
+          "pass-6",
+          "push-2",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "physical",
+        "power": 75,
+        "accuracy": 100,
+        "types": [
+          "fighting"
+        ],
+        "description": "<p>Effect: On hit, all valid targets have a 30% chance of gaining @Affliction[splinter] 7 and @Affliction[confused] 7.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [],
+        "name": "Capoeira",
+        "slug": "capoeira",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user's [Kick] Attacks also have [Dance], and the user's [Dance] Attacks have their Power increased by 30%.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [],
+        "name": "Benevolent Gift",
+        "slug": "benevolent-gift",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The duration of effects caused or created by the user is increased by 2.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user resolves Relic Dance</p><p>Effect: Connection - Relic Dance. The user transforms into its Aria Forme. The user may also change Formes as either a Simple Action (4 PP), or as a Downtime Action. Passive: The user possesses the Abilities - Capoeira and Benevolent Gift",
+    "traits": [
+      "legendary",
+      "connection"
+    ],
+    "slug": "relic-variation",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "PymIM1w7V6kBwEwm",
+  "effects": []
+}
