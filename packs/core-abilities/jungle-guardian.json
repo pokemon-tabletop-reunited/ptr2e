@@ -1,0 +1,54 @@
+{
+  "name": "Jungle Guardian",
+  "type": "ability",
+  "img": "systems/ptr2e/img/conditions/rage.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "interrupt-3"
+        ],
+        "name": "Jungle Guardian",
+        "slug": "jungle-guardian",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 5,
+          "trigger": "<p>The user is hit by an attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by an attack.</p><p>Effect: The user is @Affliction[enraged] 7 and the target is @Affliction[marked] 7.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Jungle Guardian",
+        "slug": "jungle-guardian",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The user's ATK, DEF, SPATK, and SPDEF are increased by 20% while the user is @Affliction[enraged], and the user and its allies deal 30% more damage to creatures afflicted with @Affliction[marked].</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by an attack.</p><p>Effect: The user is @Affliction[enraged] 7 and the target is @Affliction[marked] 7.</p><p>Passive: The user's ATK, DEF, SPATK, and SPDEF are increased by 20% while the user is @Affliction[enraged], and the user and its allies deal 30% more damage to creatures afflicted with @Affliction[marked].</p>",
+    "traits": [
+      "legendary"
+    ],
+    "slug": "jungle-guardian",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "gjmeWpFKWXAPhNr0",
+  "effects": []
+}
