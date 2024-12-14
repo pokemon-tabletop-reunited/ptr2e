@@ -1,0 +1,38 @@
+{
+  "name": "Stench",
+  "type": "ability",
+  "img": "systems/ptr2e/img/conditions/flinched.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "flinch-chance-4"
+        ],
+        "name": "Stench",
+        "slug": "stench",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user hits with a Physical or Special-Category attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user hits target(s) with a Physical or Special-Category attack.</p><p>Effect: All valid target(s) has a 10% chance to be Flinched.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user hits target(s) with a Physical or Special-Category attack.</p><p>Effect: All valid target(s) has a 10% chance to be Flinched.</p>",
+    "traits": [
+      "flinch-chance-4"
+    ],
+    "slug": "stench",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "mNww18uHVxa0yoaz",
+  "effects": []
+}
