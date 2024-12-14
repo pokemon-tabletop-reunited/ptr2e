@@ -1,0 +1,68 @@
+{
+  "name": "Hypnotist",
+  "type": "ability",
+  "img": "icons/magic/control/hypnosis-mesmerism-pendulum.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Hypnotist",
+        "slug": "hypnotist-active",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 5
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>The user freely uses Hypnosis.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [],
+        "name": "Hypnotist",
+        "slug": "hypnotist-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The user's Hypnosis has +30 Accuracy and has +5 Range.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "hypnosis",
+        "name": "Hypnosis",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5
+        },
+        "category": "status",
+        "accuracy": 90,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: On hit, the target is afflicted with @Affliction[drowsy] 5.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: Connection - Hypnosis.  The user spends 5 PP and freely uses Hypnosis. Passive: The user's Hypnosis has +30 Accuracy and has +5 Range.</p>",
+    "traits": [],
+    "slug": "hypnotist",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "NvSkgeJFdm9bintV",
+  "effects": []
+}
