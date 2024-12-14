@@ -1,0 +1,40 @@
+{
+  "name": "Natural Cure",
+  "type": "ability",
+  "img": "systems/ptr2e/img/item-icons/antidote.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "healing",
+          "interrupt-1"
+        ],
+        "name": "Natural Cure",
+        "slug": "natural-cure",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>A new Round begins and the user is not @Affliction[fainted].</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: A new Round begins and the user is not @Affliction[fainted].</p><p>Effect: The user is cured of the Major Status Affliction they possess with the highest Stack amount (if there are more than one, with the same amount, the user chooses which one to remove).</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: A new Round begins and the user is not @Affliction[fainted].</p><p>Effect: The user is cured of the Major Status Affliction they possess with the highest Stack amount (if there are more than one, with the same amount, the user chooses which one to remove).</p>",
+    "traits": [
+      "healing"
+    ],
+    "slug": "natural-cure",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "uNUPrVoXU4pI5VBV",
+  "effects": []
+}
