@@ -4,6 +4,7 @@ import { Trait } from "@data";
 import { ItemPTR2e, PerkPTR2e } from "@item";
 import Tagify from "@yaireo/tagify";
 import Sortable from "sortablejs";
+import PerkStore, { PerkPurchaseState, PerkState } from "./perk-store.ts";
 
 export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -134,7 +135,6 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   editMode = false;
   zoomLevels = [0.2, 0.4, 0.65, 1, 1.3, 1.65] as const;
 
-  _perkStore = new Map<string, PerkPTR2e>();
   _onScroll: () => void | null;
   _lineCache = new Map<string, SVGLineElement>();
   _zoomAmount: this['zoomLevels'][number] = 1;
@@ -153,22 +153,44 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       img?: string;
       x: number;
       y: number;
-      classes: string[]
+      classes: string[],
+      state?: PerkPurchaseState;
     }
 
-    if (this._perkStore.size === 0) {
+    if (!this._perkStore) {
       const perks = await game.ptr.perks.initialize();
-      for (const perk of perks.perks.values()) {
-        this._perkStore.set(`${perk.system.node.x}-${perk.system.node.y}`, perk);
-      }
+      this._perkStore = new PerkStore({ perks: Array.from(perks.perks.values()) });
+    }
+    if(!this._perkStore.initialized) {
+      this._perkStore.updateState(this.actor);
     }
 
     const grid: GridEntry[] = [];
     for (let x = 1; x < maxRow; x++) {
       for (let y = 1; y < maxCol; y++) {
-        const perk = this._perkStore.get(`${x}-${y}`);
+        const node = this._perkStore.get(`${x}-${y}`);
+        const perk = node?.perk;
         if (perk) {
-          grid.push({ name: perk.name, img: perk.system.node.config?.texture ?? perk.img, x, y, classes: perk === this.connectionPerk ? ["selected"] : [] });
+          const classFromState = {
+            [PerkState.unavailable]: "unavailable",
+            [PerkState.connected]: "connected",
+            [PerkState.available]: "available",
+            [PerkState.purchased]: "purchased",
+            [PerkState.invalid]: "invalid",
+          }[node.state];
+          const classes: string[] = [];
+          if(perk === this.connectionPerk) classes.push("selected");
+          if(!this.editMode) classes.push(classFromState);
+          if(perk.system.node.type === "root") classes.push("root");
+          if(perk.system.node.type === "entry") classes.push("entry");
+          grid.push({ 
+            name: perk.name, 
+            img: perk.system.node.config?.texture ?? perk.img, 
+            x, 
+            y, 
+            classes,
+            state: node.state
+          });
         }
         else {
           grid.push({ x, y, classes: [] });
@@ -218,8 +240,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           const perkKey = `${Number(x)}-${Number(y)}`;
 
           if (this.editMode && this.connectionPerk) {
-            const perkDocument = this._perkStore.get(perkKey) ?? null;
-            if (!perkDocument || perkDocument === this.connectionPerk) return;
+            const node = this._perkStore.get(perkKey) ?? null;
+            if (!node || node.perk === this.connectionPerk) return;
 
             const getUpdatedConnections = (a: PerkPTR2e, b: PerkPTR2e, operation?: "add" | "remove") => {
               const connected = a.system.toObject().node.connected;
@@ -236,31 +258,31 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               return { connected, operation };
             };
 
-            const { connected: updateCurrent, operation } = getUpdatedConnections(this.connectionPerk, perkDocument);
-            const { connected: updateTarget } = getUpdatedConnections(perkDocument, this.connectionPerk, operation);
+            const { connected: updateCurrent, operation } = getUpdatedConnections(this.connectionPerk, node.perk);
+            const { connected: updateTarget } = getUpdatedConnections(node.perk, this.connectionPerk, operation);
 
-            if (this.connectionPerk.pack === perkDocument.pack) {
+            if (this.connectionPerk.pack === node.perk.pack) {
               await ItemPTR2e.updateDocuments([
                 {
                   _id: this.connectionPerk._id,
                   "system.node.connected": new Set(updateCurrent)
                 },
                 {
-                  _id: perkDocument._id,
+                  _id: node.perk._id,
                   "system.node.connected": new Set(updateTarget)
                 }
               ], this.connectionPerk.pack ? { pack: this.connectionPerk.pack } : {});
             }
             else {
               await this.connectionPerk.update({ "system.node.connected": updateCurrent }, this.connectionPerk.pack ? { pack: this.connectionPerk.pack } : {});
-              await perkDocument.update({ "system.node.connected": updateTarget }), perkDocument.pack ? { pack: perkDocument.pack } : {};
+              await node.perk.update({ "system.node.connected": updateTarget }), node.perk.pack ? { pack: node.perk.pack } : {};
             }
 
             PerkWebApp.refresh.call(this);
             return;
           }
 
-          this.currentPerk = this._perkStore.get(perkKey) ?? null;
+          this.currentPerk = this._perkStore.get(perkKey)?.perk ?? null;
           this.render({ parts: ["hudPerk"] });
         });
         perk.addEventListener("dblclick", (event) => {
@@ -269,8 +291,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           const { x, y } = perk.dataset;
           if (!x || !y) return;
           const perkKey = `${Number(x)}-${Number(y)}`;
-          const perkDocument = this._perkStore.get(perkKey) ?? null;
-          perkDocument?.sheet?.render(true);
+          const node = this._perkStore.get(perkKey) ?? null;
+          node?.perk?.sheet?.render(true);
         });
         perk.addEventListener("contextmenu", (event) => {
           if (!this.editMode) return;
@@ -279,8 +301,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           const { x, y } = perk.dataset;
           if (!x || !y) return;
           const perkKey = `${Number(x)}-${Number(y)}`;
-          const perkDocument = this._perkStore.get(perkKey) ?? null;
-          this.connectionPerk = perkDocument === this.connectionPerk ? null : perkDocument;
+          const node = this._perkStore.get(perkKey) ?? null;
+          this.connectionPerk = node?.perk === this.connectionPerk ? null : (node?.perk ?? null);
           this.render({ parts: ["web"] });
         });
       }
@@ -295,15 +317,14 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           if ('x' in dragEl.dataset && 'y' in dragEl.dataset) {
             const x = Number(dragEl.dataset.x);
             const y = Number(dragEl.dataset.y);
-            const perk = this._perkStore.get(`${x}-${y}`) ?? null;
-            if (!perk) return;
+            const node = this._perkStore.get(`${x}-${y}`) ?? null;
+            if (!node) return;
 
-            dataTransfer!.setData("text/plain", JSON.stringify(perk.toDragData()));
+            dataTransfer!.setData("text/plain", JSON.stringify(node.perk.toDragData()));
           }
         },
-        onChoose: (event) => {
+        onChoose: () => {
           this.isSortableDragging = true;
-          console.log('start', event)
         },
         onEnd: (event) => {
 
@@ -321,8 +342,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           const data = items.flatMap(el => {
             const x = Number(el.dataset.x)
             const y = Number(el.dataset.y);
-            const perk = this._perkStore.get(`${x}-${y}`) ?? null;
-            return perk ? perk.toDragData() : []
+            const node = this._perkStore.get(`${x}-${y}`) ?? null;
+            return node ? node.perk.toDragData() : []
           })
 
           //@ts-expect-error - originalEvent exists
@@ -330,7 +351,6 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
           event.items.map(el => Sortable.utils.deselect(el));
 
-          console.log('end', event)
           this.isSortableDragging = false;
         },
         selectedClass: "highlighted",
@@ -411,17 +431,17 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     for (const el of elements) {
       const perkKey = `${Number(el.dataset.x)}-${Number(el.dataset.y)}`;
-      const perk = this._perkStore.get(perkKey);
-      if (!perk) continue;
+      const node = this._perkStore.get(perkKey);
+      if (!node) continue;
 
       const perkRect = el.getBoundingClientRect();
-      const connected = perk.system.node.connected;
+      const connected = node.perk.system.node.connected;
 
       for (const connection of connected) {
-        const connectedPerk = game.ptr.perks.get(connection);
-        if (!connectedPerk) continue;
+        const connectedNode = this._perkStore.nodeFromSlug(connection);
+        if (!connectedNode) continue;
 
-        const connectedKey = `${connectedPerk.system.node.x}-${connectedPerk.system.node.y}`;
+        const connectedKey = `${connectedNode.position.x}-${connectedNode.position.y}`;
         if (!existing) {
           if (madeConnections.has(`${perkKey}-${connectedKey}`)) continue;
         }
@@ -438,12 +458,18 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         const x2 = (((connectedRect.x + scroll.x) * zoom) + ((connectedRect.width * zoom) / 2) - (elementRect.x * zoom));
         const y2 = (((connectedRect.y + scroll.y) * zoom) + ((connectedRect.height * zoom) / 2) - (elementRect.y * zoom));
 
+        const color = (() => {
+          if(this.editMode) return "#ffffff";
+          if(node.state === PerkState.purchased || connectedNode.state === PerkState.purchased) return "#ffffff";
+          return "#898989";
+        })();
+
         line.setAttribute("x1", x1.toString());
         line.setAttribute("y1", y1.toString());
         line.setAttribute("x2", x2.toString());
         line.setAttribute("y2", y2.toString());
-        line.setAttribute("stroke", "white");
-        line.setAttribute("stroke-width", (2.5 * zoom * zoom).toString());
+        line.setAttribute("stroke", color);
+        line.setAttribute("stroke-width", (2.5 * zoom * zoom * (color === '#ffffff' ? 1 : 0.85)).toString());
         if (existing) continue;
 
         svg.appendChild(line);
@@ -596,7 +622,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     if (this.isSortableDragging && !itemData?.length) {
       const currentlyOnWeb = this._perkStore.get(`${primaryItem.system.node.x}-${primaryItem.system.node.y}`);
-      if(currentlyOnWeb === primaryItem) return;
+      if(currentlyOnWeb?.perk === primaryItem) return;
     }
 
     const bounding = grid.getBoundingClientRect();
@@ -606,7 +632,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
     const getGridSpace = (number: number) => {
       for (let i = 0; i <= 250; i++) {
-        const r = i * (48 * zoom) + ((i - 1) * (16 * zoom * 1.5))
+        const r = i * (48 * zoom) + ((i - 1) * (16 * zoom * 1))
         if (r > number) {
           return i;
         }
@@ -617,12 +643,12 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     const i = getGridSpace(x);
     const j = getGridSpace(y);
 
-    const perk = this._perkStore.get(`${i}-${j}`) ?? this._perkStore.get(`${j}-${i}`);
-    if (perk) return void ui.notifications.error(`Can't move ${primaryItem.name} to ${i}-${j}, as it's already occupied by ${perk.name}`);
+    const node = this._perkStore.get(`${i}-${j}`) ?? this._perkStore.get(`${j}-${i}`);
+    if (node) return void ui.notifications.error(`Can't move ${primaryItem.name} to ${i}-${j}, as it's already occupied by ${node.perk.name}`);
 
     const currentlyOnWeb = this._perkStore.get(`${primaryItem.system.node.x}-${primaryItem.system.node.y}`);
 
-    const toDelete = new Set<string>(currentlyOnWeb === primaryItem ? [`${primaryItem.system.node.x}-${primaryItem.system.node.y}`] : []);
+    const toDelete = new Set<string>(currentlyOnWeb?.perk === primaryItem ? [`${primaryItem.system.node.x}-${primaryItem.system.node.y}`] : []);
     const toSet: [string, PerkPTR2e][] = [[`${i}-${j}`, primaryItem]];
     const updates: Record<string, Record<string,unknown>[]> = {
       world: [],
@@ -646,11 +672,11 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         return void ui.notifications.error("Perk placement out of bounds");
       };
 
-      const perk = this._perkStore.get(`${i}-${j}`) ?? this._perkStore.get(`${j}-${i}`);
-      if (perk) return void ui.notifications.error(`Can't move ${item.name} to ${i}-${j}, as it's already occupied by ${perk.name}`);
+      const node = this._perkStore.get(`${i}-${j}`) ?? this._perkStore.get(`${j}-${i}`);
+      if (node) return void ui.notifications.error(`Can't move ${item.name} to ${i}-${j}, as it's already occupied by ${node.perk.name}`);
 
       const currentlyOnWeb = this._perkStore.get(`${item.system.node.x}-${item.system.node.y}`);
-      if (currentlyOnWeb === item) {
+      if (currentlyOnWeb?.perk === item) {
         toDelete.add(`${item.system.node.x}-${item.system.node.y}`);
       }
       const pack = item.pack || "world";
@@ -674,7 +700,13 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
 
     for (const [key, value] of toSet) {
-      this._perkStore.set(key, value);
+      this._perkStore.set(key, {
+        perk: value,
+        connected: value.system.node.connected,
+        position: { x: value.system.node.x!, y: value.system.node.y! },
+        state: 0,
+        web: "global",
+      });
     }
     this.render({ parts: ["web"] });
 
@@ -700,10 +732,10 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   }
 
   static async refresh(this: PerkWebApp) {
-    this._perkStore.clear();
     this._lineCache.clear();
     await game.ptr.perks.reset();
     this.isSortableDragging = false;
+    this._perkStore.reinitialize({actor: this.actor ?? undefined});
 
     this.currentPerk = null;
     this.render(true);
@@ -712,4 +744,6 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
 export interface PerkWebApp {
   constructor: typeof PerkWebApp;
+
+  _perkStore: PerkStore;
 }

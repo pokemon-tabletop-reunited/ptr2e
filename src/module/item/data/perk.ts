@@ -64,7 +64,7 @@ export default abstract class PerkSystem extends PerkExtension {
           { required: false }
         ),
         hidden: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.node.hidden.label", hint: "PTR2E.FIELDS.node.hidden.hint" }),
-        type: new fields.StringField({ required: true, choices: ["normal", "root", "ranked"].reduce<Record<string, string>>((acc, type) => ({ ...acc, [type]: type }), {}), initial: "normal" })
+        type: new fields.StringField({ required: true, choices: ["normal", "root", "entry"].reduce<Record<string, string>>((acc, type) => ({ ...acc, [type]: type }), {}), initial: "normal" , label: "PTR2E.FIELDS.node.type.label", hint: "PTR2E.FIELDS.node.type.hint" })
       }),
     };
   }
@@ -99,7 +99,7 @@ export default abstract class PerkSystem extends PerkExtension {
         })
         break;
       }
-      case "ranked": {
+      case "entry": {
         break;
       }
     }
@@ -262,7 +262,7 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
         true
       >;
       hidden: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
-      type: foundry.data.fields.StringField<"normal" | "root" | "ranked", "normal", true, false, true>;
+      type: foundry.data.fields.StringField<"normal" | "root" | "entry", "normal", true, false, true>;
     },
     {
       x: number | null;
@@ -280,7 +280,7 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
         scale: number;
       };
       hidden: boolean;
-      type: "normal" | "root" | "ranked";
+      type: "normal" | "root" | "entry";
     },
     {
       x: number | null;
@@ -290,7 +290,7 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
       connected: Set<string>;
       config: Partial<PerkNodeConfig> | undefined;
       hidden: boolean;
-      type: "normal" | "root" | "ranked";
+      type: "normal" | "root" | "entry";
     }
   >;
 };

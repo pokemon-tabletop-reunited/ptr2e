@@ -1,13 +1,17 @@
-import { PerkState } from "./perk-node.ts";
-import { PerkStore, PTRNode } from "./perks-store.ts";
+import PerkStore, { PerkNode } from "./perk-store.ts";
+import { PerkState } from "./perk-store.ts";
 
 class PerkGraph {
   private matrix: Record<string, GraphNode>;
-  private store: PerkStore;
+  private _store: PerkStore;
+  
+  get store() {
+    return this._store;
+  };
 
   constructor(store: PerkStore) {
     this.matrix = {};
-    this.store = store;
+    this._store = store;
 
     this.initialize();
   }
@@ -35,7 +39,7 @@ class PerkGraph {
     }
   }
 
-  addEdge(node1: PTRNode, node2: PTRNode) {
+  addEdge(node1: PerkNode, node2: PerkNode) {
     this.matrix[node1.perk.slug].connections[node2.perk.slug] = {
       entry: node2,
       value: node2.perk.system.cost,
@@ -46,7 +50,7 @@ class PerkGraph {
     };
   }
 
-  getNeighbors(node: PTRNode): PTRNode[] {
+  getNeighbors(node: PerkNode): PerkNode[] {
     return (
       Object.values(this.matrix[node.perk.slug]?.connections ?? {}).map(
         (connection) => connection?.entry
@@ -54,19 +58,19 @@ class PerkGraph {
     );
   }
 
-  hasEdge(node1: PTRNode, node2: PTRNode): boolean {
+  hasEdge(node1: PerkNode, node2: PerkNode): boolean {
     return (
       this.matrix[node1.perk.slug].connections[node2.perk.slug].value === 1 &&
       this.matrix[node2.perk.slug].connections[node1.perk.slug].value === 1
     );
   }
 
-  removeEdge(node1: PTRNode, node2: PTRNode) {
+  removeEdge(node1: PerkNode, node2: PerkNode) {
     this.matrix[node1.perk.slug].connections[node2.perk.slug].value = 0;
     this.matrix[node2.perk.slug].connections[node1.perk.slug].value = 0;
   }
 
-  getBestPathsToRoot(node: PTRNode): PerkWebPath | null {
+  getBestPathsToRoot(node: PerkNode): PerkWebPath | null {
     // Get the shortest path to each root node
     const rootNodes = this.store.rootNodes;
 
@@ -79,7 +83,7 @@ class PerkGraph {
     return currentCheapest && currentShortest ? new PerkWebPath({ shortest: currentShortest, cheapest: currentCheapest }) : null;
   }
 
-  getPathToRoot(node: PTRNode, mode: ("shortest" | "cheapest")): Path | null {
+  getPathToRoot(node: PerkNode, mode: ("shortest" | "cheapest")): Path | null {
     const func = mode === "shortest" ? this.getShortestPath : this.getCheapestPath;
 
     let currentBest = null;
@@ -96,13 +100,13 @@ class PerkGraph {
     return currentBest;
   }
 
-  getPath(node1: PTRNode, node2: PTRNode): PerkWebPath | null {
+  getPath(node1: PerkNode, node2: PerkNode): PerkWebPath | null {
     const shortest = this.getShortestPath(node1, node2);
     const cheapest = this.getCheapestPath(node1, node2);
     return shortest && cheapest ? new PerkWebPath({ shortest, cheapest }) : null;
   }
 
-  getPurchasedPath(node1: PTRNode, node2: PTRNode): Path | null {
+  getPurchasedPath(node1: PerkNode, node2: PerkNode): Path | null {
     const shortest = this.getShortestPath(node1, node2, true);
     return shortest ?? null;
   }
@@ -110,7 +114,7 @@ class PerkGraph {
   /**
    * Use Dijkstra's algorithm to find the cheapest path between two nodes
    */
-  getCheapestPath(node1: PTRNode, node2: PTRNode): Path | null {
+  getCheapestPath(node1: PerkNode, node2: PerkNode): Path | null {
     const startNode = this.matrix[node1.perk.slug];
     const endNode = this.matrix[node2.perk.slug];
     if (!startNode || !endNode) return null;
@@ -184,7 +188,7 @@ class PerkGraph {
   /**
    * Use Dijkstra's algorithm to find the shortest path between two nodes
    */
-  getShortestPath(node1: PTRNode, node2: PTRNode, purchasedOnly = false): Path | null {
+  getShortestPath(node1: PerkNode, node2: PerkNode, purchasedOnly = false): Path | null {
     const startNode = this.matrix[node1.perk.slug];
     const endNode = this.matrix[node2.perk.slug];
     if (!startNode || !endNode) return null;
@@ -285,27 +289,27 @@ interface PerkWebPath {
   cheapest: Path;
 }
 
-type Path = {
+interface Path {
   startStep: PathStep;
   endStep: PathStep;
   steps: number;
   cost: number;
-};
+}
 
-type PathStep = {
+interface PathStep {
   node: GraphNode;
   previous: PathStep | null;
   next: PathStep | null;
   cost: number;
   total: number;
-};
+}
 
-type GraphNode = {
-  entry: PTRNode;
+interface GraphNode {
+  entry: PerkNode;
   connections: Record<
     string,
     {
-      entry: PTRNode;
+      entry: PerkNode;
       /**
        * The cost to move from this node to the connected node
        * 0 means there is no connection
@@ -313,7 +317,7 @@ type GraphNode = {
       value: number;
     }
   >;
-};
+}
 
 export default PerkGraph;
 export {

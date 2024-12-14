@@ -6887,7 +6887,7 @@ ul.item-list.result-list li.item.rarity-unique {
   display: grid;
   grid-template-columns: repeat(250, 48px);
   grid-template-rows: repeat(250, 48px);
-  gap: 1.5rem;
+  gap: 1rem;
   z-index: 2;
   height: max-content;
   width: max-content;
@@ -6907,6 +6907,55 @@ ul.item-list.result-list li.item.rarity-unique {
 #perk-web-app [data-application-part="web"] section.perk-grid .perk.highlighted {
   border-color: #379762;
   filter: drop-shadow(0 0 8px #379762);
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.unavailable {
+  filter: grayscale(100%);
+  cursor: not-allowed;
+  border-style: dashed;
+  transform: scale(0.9);
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.invalid {
+  filter: grayscale(50%) drop-shadow(0 0 24px #851a1a);
+  border-color: #851a1a;
+  border-width: 3px;
+  border-style: dashed;
+  cursor: not-allowed;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.connected {
+  border-color: #FBA151;
+  filter: grayscale(25%) drop-shadow(0 0 10px #FBA151);
+  border-width: 2px;
+  border-style: dashed;
+  cursor: not-allowed;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.available {
+  border-color: #379762;
+  filter: brightness(150%) drop-shadow(0 0 16px #379762) drop-shadow(0 0 24px #ffffff);
+  border-width: 2px;
+  border-style: inset;
+  transform: scale(1.1);
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.purchased {
+  border-color: #2ECFF5;
+  filter: drop-shadow(0 0 6px #2ECFF5);
+  border-width: 5px;
+  border-style: double;
+  transform: scale(1.1);
+  cursor: auto;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.root {
+  transform: scale(1.5);
+  border-radius: 35%;
+  padding: 5px;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.root img {
+  border-radius: 35%;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.entry {
+  border-radius: 25%;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid .perk.entry img {
+  border-radius: 25%;
 }
 #perk-web-app [data-application-part="web"] section.perk-grid .perk img {
   border: unset;
