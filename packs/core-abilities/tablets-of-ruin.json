@@ -1,0 +1,65 @@
+{
+  "name": "Tablets of Ruin",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/dark_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "aura"
+        ],
+        "name": "Tablets of Ruin",
+        "slug": "tablets-of-ruin",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "description": "<p>Effect: All other creatures have their ATK stat reduced by 25%. This reduction happens before any [Stage Change] effects.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "ruination",
+        "name": "Ruination",
+        "type": "attack",
+        "traits": [
+          "legendary"
+        ],
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "category": "special",
+        "accuracy": 90,
+        "types": [
+          "dark"
+        ],
+        "description": "<p>Effect: On hit, all valid target's HP is cut in half. This attack always deals a minimum of 1 HP in damage.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: Connection - Ruination. All other creatures have their ATK stat reduced by 25%. This reduction happens before any [Stage Change] effects.</p>",
+    "traits": [
+      "legendary",
+      "aura",
+      "connection"
+    ],
+    "slug": "tablets-of-ruin",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "5KUeoSGMw8YWNwDO",
+  "effects": []
+}
