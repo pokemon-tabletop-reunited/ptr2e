@@ -1,0 +1,41 @@
+{
+  "name": "Cloud Nine",
+  "type": "ability",
+  "img": "icons/magic/air/weather-clouds-sunlight.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "environ",
+          "interrupt-1"
+        ],
+        "name": "Cloud Nine",
+        "slug": "cloud-nine",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>A creature on the field uses an attack or Ability to set Weather.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: A creature on the field uses an attack or Ability to set Weather.</p><p>Effect: The triggering action fails and becomes @Affliction[disabled] 5 if it was an attack, or @Affliction[nullified] 5 if it was an Ability. This Ability cannot be triggered against Intense Weathers.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: A creature on the field uses an attack or Ability to set Weather.</p><p>Effect: The triggering action fails and becomes @Affliction[disabled] 5 if it was an attack, or @Affliction[nullified] 5 if it was an Ability. This Ability cannot be triggered against Intense Weathers.</p>",
+    "traits": [
+      "environ"
+    ],
+    "slug": "cloud-nine",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "bIup4FVF98WrIxzw",
+  "effects": []
+}
