@@ -1,0 +1,67 @@
+{
+  "name": "Regression Field",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/status_icon.png",
+  "system": {
+    "actions": [
+      {
+        "slug": "trick-room",
+        "name": "Trick Room",
+        "type": "attack",
+        "traits": [
+          "room"
+        ],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 8
+        },
+        "category": "status",
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: The Room is set to Trick Room for 3 Rounds.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "trick-room",
+        "name": "Trick Room",
+        "type": "attack",
+        "traits": [
+          "room",
+          "priority-5"
+        ],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 11,
+          "priority": 5
+        },
+        "category": "status",
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: The Room is set to Trick Room for 5 Rounds.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user declares Trick Room.</p><p>Effect: Connection - Trick Room. The set Trick Room lasts 5 rounds, and the triggering attack gains [Priority 5] until the end of the user's Activation.</p>",
+    "traits": [
+      "room",
+      "connection"
+    ],
+    "slug": "regression-field",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "vHlzzoEuyzHoBsbT",
+  "effects": []
+}
