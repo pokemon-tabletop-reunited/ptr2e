@@ -1,0 +1,41 @@
+{
+  "name": "Frighten",
+  "type": "ability",
+  "img": "icons/svg/terror.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "social",
+          "friendly"
+        ],
+        "name": "Frighten",
+        "slug": "frighten",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user enters combat.</p>"
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures in range lose -1 SPD Stage for 5 Activations and gain @Affliction[fear] 5.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures in range lose -1 SPD Stage for 5 Activations and gain @Affliction[fear] 5.</p>",
+    "traits": [
+      "social",
+      "friendly"
+    ],
+    "slug": "frighten",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "GlVWzzuSC6kJIil4",
+  "effects": []
+}
