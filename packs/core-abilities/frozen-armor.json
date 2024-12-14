@@ -1,0 +1,40 @@
+{
+  "name": "Frozen Armor",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-`2`"
+        ],
+        "name": "Frozen Armor",
+        "slug": "frozen-armor",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user is hit by a [Contact] attack from a non Ice-Type creature.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a [Contact] attack from a non Ice-Type creature.</p><p>Effect: The triggering creature takes a Tick of HP damage. The user is immune to the @Affliction[burn] Affliction.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a [Contact] attack from a non Ice-Type creature.</p><p>Effect: The triggering creature takes a Tick of HP damage. The user is immune to the @Affliction[burn] Affliction.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "frozen-armor",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "x0xXaOUbac8m2sXY",
+  "effects": []
+}
