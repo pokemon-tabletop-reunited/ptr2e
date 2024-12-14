@@ -1,0 +1,65 @@
+{
+  "name": "Magical Dust",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/psychic_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-1"
+        ],
+        "name": "Magical Dust",
+        "slug": "magical-dust",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user is hit by a creature's [Contact] attack.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a creature's [Contact] attack.</p><p>Effect: The user freely uses Magic Powder on the triggering creature.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "magic-powder",
+        "name": "Magic Powder",
+        "type": "attack",
+        "traits": [
+          "powder"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "psychic"
+        ],
+        "description": "<p>Effect: On hit, all valid targets have one of their Type(s) changed to Psychic for 5 activations. If they already have the Psychic Type, they lose one of their other Type(s), if applicable.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a creature's [Contact] attack.</p><p>Effect: Connection - Magic Powder. The user freely uses Magic Powder on the triggering creature.</p>",
+    "traits": [
+      "connection"
+    ],
+    "slug": "magical-dust",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "rf1hhJ4YmPAxyC8I",
+  "effects": []
+}
