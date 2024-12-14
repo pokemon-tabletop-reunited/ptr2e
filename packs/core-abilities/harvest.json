@@ -1,0 +1,53 @@
+{
+  "name": "Harvest",
+  "type": "ability",
+  "img": "systems/ptr2e/img/item-icons/aguav%20berry.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "environ",
+          "interrupt-1"
+        ],
+        "name": "Harvest",
+        "slug": "harvest",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user's equipped [Natural][Food] item is consumed.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user's equipped [Natural][Food] item is consumed.</p><p>Effect: The user rolls an Easy Natural World skill check and on a success recycles a copy of the consumed item and equips it. If Sunny Weather is active, this is a Trivial Natural World check instead.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "environ"
+        ],
+        "name": "Harvest",
+        "slug": "harvest",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: the creature gains [Berry Grower] if it did not already possess it.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user's equipped [Natural][Food] item is consumed.</p><p>Effect: The user rolls an Easy Natural World skill check and on a success recycles a copy of the consumed item and equips it. If Sunny Weather is active, this is a Trivial Natural World check instead. Passive: the creature gains [Berry Grower] if it did not already possess it.</p>",
+    "traits": [
+      "environ"
+    ],
+    "slug": "harvest",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "ZO9RQ2a15jMpXOuc",
+  "effects": []
+}
