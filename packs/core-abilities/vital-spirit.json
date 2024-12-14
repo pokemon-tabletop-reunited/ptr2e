@@ -1,0 +1,132 @@
+{
+  "name": "Vital Spirit",
+  "type": "ability",
+  "img": "icons/svg/stoned.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive"
+        ],
+        "name": "Vital Spirit",
+        "slug": "vital-spirit",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user is immune to the @Affliction[drowsy] Affliction and @Affliction[nightmares]. The user ignores the effects of @Affliction[weary] 1.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: The user is immune to the @Affliction[drowsy] Affliction and @Affliction[nightmares]. The user gains +1 EVA Stage and +1 ACC Stage while suffering @Affliction[weary].</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "vital-spirit",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "GYQOwsTfBfJoQOfA",
+  "effects": [
+    {
+      "name": "Vital Spirit",
+      "type": "passive",
+      "_id": "mcjcicUSI0FmiLhU",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "basic",
+            "key": "system.battleStats.accuracy.Stage",
+            "value": 1,
+            "predicate": [
+              "effect:passive:weary"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "key": "system.battleStats.evasion.Stage",
+            "value": 1,
+            "predicate": [
+              "effect:passive:weary"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "affliction:drowsy",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          },
+          {
+            "type": "roll-option",
+            "key": "",
+            "value": "affliction:nightmares",
+            "predicate": [],
+            "domain": "immunities",
+            "toggleable": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          }
+        ],
+        "slug": null,
+        "traits": [
+          "defensive"
+        ],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "<p>Effect: The user is immune to the @Affliction[drowsy] Affliction and @Affliction[nightmares]. The user gains +1 EVA Stage and +1 ACC Stage while suffering @Affliction[weary].</p>",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": "Compendium.ptr2e.core-abilities.Item.GYQOwsTfBfJoQOfA.ActiveEffect.mcjcicUSI0FmiLhU",
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.3.3.0",
+        "createdTime": 1731340905735,
+        "modifiedTime": 1731341286115,
+        "lastModifiedBy": "tXAZ3QUgjuwX4gdV"
+      }
+    }
+  ]
+}
