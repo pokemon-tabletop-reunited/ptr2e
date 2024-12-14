@@ -1,0 +1,36 @@
+{
+  "name": "Supervenom",
+  "type": "ability",
+  "img": "systems/ptr2e/img/conditions/badly-poisoned.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [],
+        "name": "Supervenom",
+        "slug": "supervenom",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user inflicts @Affliction[poison] X.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user inflicts @Affliction[poison] X.</p><p>Effect: The user instead inflicts @Affliction[blight] 8.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user inflicts @Affliction[poison] X.</p><p>Effect: The user instead inflicts @Affliction[blight] 8.</p>",
+    "traits": [],
+    "slug": "supervenom",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "xrnkImOZtJom7IZk",
+  "effects": []
+}
