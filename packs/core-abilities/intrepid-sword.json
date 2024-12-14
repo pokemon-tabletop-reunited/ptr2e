@@ -1,0 +1,145 @@
+{
+  "name": "Intrepid Sword",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/weapon_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Intrepid Sword",
+        "slug": "intrepid-sword",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user hits a creature that possesses a higher CatMod than the user with Behemoth Blade.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user hits a creature that possesses a higher CatMod than the user with Behemoth Blade.</p><p>Effect: The triggering creature gains @Affliction[fear] 7, and the user gains @Affliction[chanted] 7.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Intrepid Sword",
+        "slug": "intrepid-sword",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Blade for the remainder of the combat. The user's default ATK Stage is +1.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "iron-head",
+        "name": "Iron Head",
+        "type": "attack",
+        "traits": [
+          "dash",
+          "push-2",
+          "flinch-chance-2",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "physical",
+        "power": 80,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "description": "<p>Effect: On hit, the target has a 30% chance of being Flinched.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "behemoth-blade",
+        "name": "Behemoth Blade",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "pass-4",
+          "sharp",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "physical",
+        "power": 100,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "variant": "iron-head",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "behemoth-blade-giant",
+        "name": "Behemoth Blade (Giant)",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "pass-4",
+          "sharp",
+          "contact",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6,
+          "trigger": "The target is Dynamaxed.</p>"
+        },
+        "category": "physical",
+        "power": 200,
+        "accuracy": 100,
+        "types": [
+          "steel"
+        ],
+        "description": "<p>Trigger: The target is Dynamaxed.</p>",
+        "free": true,
+        "variant": "behemoth-blade",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user hits a creature that possess a higher CatMod than the user with Behemoth Blade.</p><p>Effect: Connection - Iron Head. The triggering creature gains @Affliction[fear] 7, and the user gains @Affliction[chanted] 7. Passive:  When first entering Combat in Crowned Forme, the Iron Head on the user's Active List is replaced with Behemoth Blade for the remainder of the combat. The user's default ATK Stage is +1.</p>",
+    "traits": [
+      "legendary"
+    ],
+    "slug": "intrepid-sword",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "oAcbRHt5mlUrMtux",
+  "effects": []
+}
