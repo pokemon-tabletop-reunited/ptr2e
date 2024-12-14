@@ -1,0 +1,64 @@
+{
+  "name": "Evaporate",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-4"
+        ],
+        "name": "Evaporate",
+        "slug": "evaporate",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 5,
+          "trigger": "<p>The user is hit by a Water-Type attack.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a Water-Type attack.</p><p>Effect: The user takes half damage from the attack and is unaffected by the triggering Attack's effects. Then, the user freely uses Mist.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "mist",
+        "name": "Mist",
+        "type": "attack",
+        "traits": [
+          "shield"
+        ],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "category": "status",
+        "types": [
+          "ice"
+        ],
+        "description": "<p>Effect: For 3 rounds, the user and its allies cannot have their stat Stages reduced.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a Water-Type attack.</p><p>Effect: Connection - Mist. The user takes half damage from the attack and is unaffected the triggering Attack's effects. Then, the user freely uses Mist.</p>",
+    "traits": [
+      "defensive",
+      "connection"
+    ],
+    "slug": "evaporate",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "tSF30sI3iDjAAYyW",
+  "effects": []
+}
