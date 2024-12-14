@@ -1,0 +1,143 @@
+{
+  "name": "Sand Spit",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-3",
+          "defensive"
+        ],
+        "name": "Sand Spit",
+        "slug": "sand-spit",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "<p>The user would hit by an attack.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user would be hit by an attack.</p><p>Effect: The user freely uses Sand Attack or Sand Attack (Dusty) on the attacking creature, and then the triggering attack is rerolled. The rerolled attack does not cost additional PP nor can it trigger this Ability again.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "sand-attack",
+        "name": "Sand Attack",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Effect: On hit, all valid targets lose -1 ACC Stage for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "sand-attack-dusty",
+        "name": "Sand Attack (Dusty)",
+        "type": "attack",
+        "traits": [
+          "environ"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 2,
+          "trigger": "<p>Dusty Weather is present.</p>"
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Trigger: Dusty Weather is present.</p><p>Effect: On hit, all valid targets lose -2 ACC Stage for 5 activations.</p>",
+        "variant": "sand-attack",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "sand-attack-sand-spit",
+        "name": "Sand Attack (Sand Spit)",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4
+        },
+        "category": "physical",
+        "power": 25,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Effect: On hit, all valid targets lose -1 ACC Stage for 5 activations.</p>",
+        "variant": "sand-attack",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "sand-attack-sand-spit-dusty",
+        "name": "Sand Attack (Sand Spit Dusty)",
+        "type": "attack",
+        "traits": [
+          "environ"
+        ],
+        "range": {
+          "target": "cone",
+          "distance": 3,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 4,
+          "trigger": "<p>Dusty Weather is present.</p>"
+        },
+        "category": "physical",
+        "power": 25,
+        "accuracy": 100,
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Trigger: Dusty Weather is present.</p><p>Effect: On hit, all valid targets lose -2 ACC Stage for 5 activations.</p>",
+        "variant": "sand-attack",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user would hit by an attack.</p><p>Effect: Connection - Sand Attack. The user freely uses Sand Attack or Sand Attack (Dusty) on the attacking creature, and then the triggering attack is rerolled. The rerolled attack does not cost additional PP nor can it trigger this Ability again. When using Sand Attack, the user can spend an additional 2 PP to use it as a 25 Power Physical-Category Attack.</p>",
+    "traits": [
+      "connection",
+      "defensive"
+    ],
+    "slug": "sand-spit",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "yWHCeJWiLgFtmIkV",
+  "effects": []
+}
