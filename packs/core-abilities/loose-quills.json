@@ -1,0 +1,89 @@
+{
+  "name": "Loose Quills",
+  "type": "ability",
+  "img": "systems/ptr2e/img/item-icons/wiki%20berry.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-1"
+        ],
+        "name": "Loose Quills",
+        "slug": "loose-quills",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user is hit by a [Contact] attack.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: The user has a 50% chance to freely use Loose Spikes.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "spikes",
+        "name": "Spikes",
+        "type": "attack",
+        "traits": [
+          "hazard",
+          "blast-4"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5
+        },
+        "category": "status",
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Effect: Sharp spikes are scattered in the [Blast X] area on standing surfaces. A creature that starts an Activation on a surface containing the Hazard takes a Tick of HP damage. A creature that moves through through a space touching a surface containing the Hazard takes a Tick of HP damage for every meter they travel. If a creature moves at least 3m through the Hazard this way during one Round, they lose another 4 Tick of HP.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "loose-spikes",
+        "name": "Loose Spikes",
+        "type": "attack",
+        "traits": [
+          "hazard",
+          "blast-2"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3
+        },
+        "category": "status",
+        "types": [
+          "ground"
+        ],
+        "description": "<p>Effect: Sharp spikes are scattered in the [Blast X] area on standing surfaces. A creature that starts an Activation on a surface containing the Hazard takes a Tick of HP damage. A creature that moves through through a space touching a surface containing the Hazard takes a Tick of HP damage for every meter they travel. If a creature moves at least 3m through the Hazard this way during one Round, they lose another 4 Tick of HP.</p>",
+        "variant": "spikes",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user is hit by a [Contact] attack.</p><p>Effect: Connection - Spikes. The user has a 50% chance to freely use Loose Spikes.</p>",
+    "traits": [
+      "connection"
+    ],
+    "slug": "loose-quills",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "rsv5mrwBBagNtAQd",
+  "effects": []
+}
