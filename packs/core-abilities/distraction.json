@@ -1,0 +1,42 @@
+{
+  "name": "Distraction",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/status_icon.png",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "social",
+          "friendly",
+          "interrupt-2"
+        ],
+        "name": "Distraction",
+        "slug": "distraction",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user enters combat.</p>"
+        },
+        "range": {
+          "target": "emanation",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures in range lose -1 SPDEF Stage for 5 Activations and -1 ACC Stage for 2 Activations. The user's Fast Talk Skill checks have an additional +10 bonus.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: All valid creatures in range lose -1 SPDEF Stage for 5 Activations and -1 ACC Stage for 2 Activations. The user's Fast Talk Skill checks have an additional +10 bonus.</p>",
+    "traits": [
+      "social",
+      "friendly"
+    ],
+    "slug": "distraction",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "BV51wZqSGcgzu4yg",
+  "effects": []
+}
