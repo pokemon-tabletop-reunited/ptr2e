@@ -1,0 +1,55 @@
+{
+  "name": "Mind's Eye",
+  "type": "ability",
+  "img": "icons/svg/eye.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "aura"
+        ],
+        "name": "Mind's Eye",
+        "slug": "minds-eye",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Effect: While the user is affected with @Affliction[true-sight], their Normal- and Fighting-Type attacks gain [Danger Close] and deal Super Effective damage to Ghost-Type creatures.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "foresight",
+        "name": "Foresight",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 1
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user gains @Affliction[true-sight] 3 and can hit Ghost-Type creatures with Normal-Type and Fighting Type attacks while they have @Affliction[true-sight].</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: Connection - Foresight. While the user is affected with @Affliction[true-sight], their Normal- and Fighting-Type attacks gain [Danger Close] and deal Super Effective damage to Ghost-Type creatures.</p>",
+    "traits": [
+      "aura",
+      "connection"
+    ],
+    "slug": "minds-eye",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "pQdq1Q6pVQqxKCJX",
+  "effects": []
+}
