@@ -1,0 +1,98 @@
+{
+  "name": "Destructive Design",
+  "type": "ability",
+  "img": "systems/ptr2e/img/item-icons/chill%20drive.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Destructive Design",
+        "slug": "destructive-design-active",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 5
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user may activate Download, ignoring the Ability's normal triggering Affliction.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Destructive Design",
+        "slug": "destructive-design-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: the user gains the Ability Download.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "techno-blast",
+        "name": "Techno Blast",
+        "type": "attack",
+        "traits": [
+          "legendary",
+          "pulse",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "wide-line",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 6
+        },
+        "category": "special",
+        "power": 120,
+        "accuracy": 100,
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: Techno Blast's Type changes to match the <Type> of the user's held [Drive] item.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [],
+        "name": "Download",
+        "slug": "download",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>At the start of battle, or when switched in.</p>"
+        },
+        "range": {
+          "target": "creature",
+          "distance": 15,
+          "unit": "m"
+        },
+        "description": "<p>Trigger: At the start of battle, or when switched in.</p><p>Effect: If the targeted creature's DEF stat is higher than its SPDEF, the user raises their SPATK Stage by +1 for 5 Activations. If the targeted creature's DEF stat is lower than its SPDEF Stat, the user raises their ATK Stage by +1 for 5 Activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: Connection - Techno Blast. The user may activate Download, ignoring the Ability's normal triggering Affliction. Passive: the user gains the Ability Download.</p>",
+    "traits": [
+      "legendary",
+      "connection"
+    ],
+    "slug": "destructive-design",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "kHHBW7Auyfs6t4yE",
+  "effects": []
+}
