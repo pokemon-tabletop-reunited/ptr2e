@@ -1,0 +1,64 @@
+{
+  "name": "Spider Lair",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/bug_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "hazard"
+        ],
+        "name": "Spider Lair",
+        "slug": "spider-lair",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The user enters combat.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user freely uses Sticky Web. Spider Web Hazards created by the user do not affect the user or their allies.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "sticky-web",
+        "name": "Sticky Web",
+        "type": "attack",
+        "traits": [
+          "hazard",
+          "blast-4"
+        ],
+        "range": {
+          "target": "blast",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 5
+        },
+        "category": "status",
+        "types": [
+          "bug"
+        ],
+        "description": "<p>Effect: A weave of webs covers all surfaces in the [Blast X] area, with squares that have two or more surfaces covered treating the whole space as having the Hazard, not just the surfaces. Each time an enemy creature moves through a space and touches the Hazard, they lose -1 SPD Stage for 5 activations. An enemy creature that starts their Activation touching the Hazard is @Affliction[slowed] 1.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Sticky Web. The user freely uses Sticky Web. Spider Web Hazards created by the user do not affect the user or their allies.</p>",
+    "traits": [
+      "hazard",
+      "connection"
+    ],
+    "slug": "spider-lair",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "iY9TDgK15i3JzWpq",
+  "effects": []
+}
