@@ -1,0 +1,89 @@
+{
+  "name": "Imposter",
+  "type": "ability",
+  "img": "icons/svg/cowled.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "interrupt-5"
+        ],
+        "name": "Imposter",
+        "slug": "imposter",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 3,
+          "trigger": "<p>The user enters combat.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user freely uses Transform (Imposter). This cannot be interrupted.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "transform",
+        "name": "Transform",
+        "type": "attack",
+        "traits": [
+          "move-locked",
+          "transform"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 4
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user selects one other creature in range and transforms into the target species, copying the target's Base ATK, DEF, SPATK, SPDEF, and SPD stats. The user also copies the target's current Abilities and Active List, as well as any [Stage Change] effects. The user remains transformed for 5 activations, or until they are switched out, combat ends, or are @Affliction[fainted].</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "transform-imposter",
+        "name": "Transform (Imposter)",
+        "type": "attack",
+        "traits": [
+          "move-locked",
+          "transform"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 20,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 6
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user selects one other creature in range and transforms into the target species, copying the target's Base ATK, DEF, SPATK, SPDEF, and SPD stats. The user also copies the target's current Abilities and Active List, as well as any [Stage Change] effects. The user remains transformed for 10 activations, or until they are switched out, combat ends, or are @Affliction[fainted].</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Transform. The user spends 3 PP and freely uses Transform (Imposter). This cannot be interrupted. When using Transform, the user can spend an additional 2 PP to double the duration of Transform.</p>",
+    "traits": [
+      "connection"
+    ],
+    "slug": "imposter",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "RSCXY3QdUF4xGD7O",
+  "effects": []
+}
