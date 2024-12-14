@@ -1,0 +1,94 @@
+{
+  "name": "Regurgitation",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/species_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "innate"
+        ],
+        "name": "Regurgitation",
+        "slug": "regurgitation",
+        "type": "generic",
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 2
+        },
+        "range": {
+          "target": "creature",
+          "distance": 1,
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user makes a @Affliction[grapple] Maneuver against a creature at least one size smaller than the user, with +10 per CatMod difference. On success, the user Engulfs the target, equipping the creature as a [Stash] item.The user can only have one creature @Affliction[engulfed] at a time. An @Affliction[engulfed] creature cannot act or be affected by actions or effects in any way, except to free itself with a -20 @Affliction[grapple] check.</p><p>When the user hits a target with an attack while it has an @Affliction[engulfed] creature, it deals a Tick of HP damage to the target. This damage possesses the Type(s) of the @Affliction[engulfed] creature.</p><p>If the user gains @Affliction[fainted], the @Affliction[engulfed] creature may freely escape if it chooses, appearing in a space adjacent to the user.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "gulp-missile",
+        "name": "Gulp Missile",
+        "type": "attack",
+        "traits": [
+          "missile",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "physical",
+        "power": 45,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "gulp-missile-engulfed",
+        "name": "Gulp Missile (Engulfed)",
+        "type": "attack",
+        "traits": [
+          "missile",
+          "adaptable",
+          "pp-updated"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 10,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 5
+        },
+        "category": "physical",
+        "power": 90,
+        "accuracy": 100,
+        "types": [
+          "water"
+        ],
+        "description": "<p>Effect: The user launches their equipped @Affliction[engulfed] creature as part of this Attack, and may change the Type of this attack to a Type possessed by the launched creature. On hit, the target and the launched creature have a 20% chance to lose -1 DEF Stage for 5 Activations, a 20% chance to lose -1 SPDEF Stage for 5 Activations, and a 20% chance to gain @Affliction[paralysis] 5. The damage the launched creature takes from this attack is reduced by 2/3.</p><p>Requirement: The user has an @Affliction[engulfed] creature equipped as a [Stash] item.</p>",
+        "variant": "gulp-missile",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: Connection - Gulp Missile. The user makes a @Affliction[grapple] Maneuver against a creature at least one size smaller than the user, with +10 per CatMod difference. On success, the user Engulfs the target, equipping the creature as a [Stash] item.The user can only have one creature @Affliction[engulfed] at a time. An @Affliction[engulfed] creature cannot act or be affected by actions or effects in any way, except to free itself with a -20 @Affliction[grapple] check.</p><p>When the user hits a target with an attack while it has an @Affliction[engulfed] creature, it deals a Tick of HP damage to the target. This damage possesses the Type(s) of the @Affliction[engulfed] creature.</p><p>If the user gains @Affliction[fainted], the @Affliction[engulfed] creature may freely escape if it chooses, appearing in a space adjacent to the user.</p>",
+    "traits": [
+      "innate"
+    ],
+    "slug": "regurgitation",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "HGS3xhATLQ4IKprf",
+  "effects": []
+}
