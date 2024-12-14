@@ -1,0 +1,38 @@
+{
+  "name": "Rebuild",
+  "type": "ability",
+  "img": "icons/environment/settlement/house-construction.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "healing"
+        ],
+        "name": "Rebuild",
+        "slug": "rebuild",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>The start of the user's Activation.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The start of the user's Activation.</p><p>Effect: If the user has not been damaged since its last Activation, it heals a Tick of HP.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The start of the user's Activation.</p><p>Effect: If the user has not been damaged since its last Activation, it heals a Tick of HP.</p>",
+    "traits": [
+      "healing"
+    ],
+    "slug": "rebuild",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "QmRagDTebuH6MJbY",
+  "effects": []
+}
