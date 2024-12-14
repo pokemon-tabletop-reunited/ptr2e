@@ -1,0 +1,88 @@
+{
+  "name": "Toxic Chain",
+  "type": "ability",
+  "img": "icons/magic/control/debuff-chains-shackles-movement-purple.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary"
+        ],
+        "name": "Toxic Chain",
+        "slug": "toxic-chain",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user's attacks have a 30% chance to apply @Affliction[blight] 5.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "toxic",
+        "name": "Toxic",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "category": "status",
+        "accuracy": 90,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Effect: The target gains @Affliction[blight] 8. If Toxic is used by a Poison-Typed creature, this attack gains [Danger Close].</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "toxic-poison-type",
+        "name": "Toxic (Posion-Type)",
+        "type": "attack",
+        "traits": [
+          "danger-close"
+        ],
+        "range": {
+          "target": "creature",
+          "distance": 6,
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "trigger": "<p>The user has the Poison Type.</p>"
+        },
+        "category": "status",
+        "accuracy": 100,
+        "types": [
+          "poison"
+        ],
+        "description": "<p>Trigger: The user has the Poison Type.</p><p>Effect: The target gains @Affliction[blight] 8.</p>",
+        "variant": "toxic",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: Connection - Toxic. The user's attacks have a 30% chance to apply @Affliction[blight] 5.</p>",
+    "traits": [
+      "legendary",
+      "connection"
+    ],
+    "slug": "toxic-chain",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "l1yGOqKO6wB3AXyE",
+  "effects": []
+}
