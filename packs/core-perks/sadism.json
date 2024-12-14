@@ -1,5 +1,5 @@
 {
-  "folder": "Et2u8UoXSe2a17oq",
+  "folder": "a1w2zpzavg6qtJFn",
   "name": "Sadism",
   "type": "perk",
   "_id": "avNUrWp7q1JxxGgW",
@@ -17,19 +17,17 @@
         "type": "generic",
         "range": {
           "target": "self",
-          "distance": 0,
           "unit": "m"
         },
         "cost": {
           "activation": "free",
           "powerPoints": 3,
-          "trigger": "A creature within 5m of you suffers loses a Tick(s) of HP as effect damage from an Affliction.",
-          "delay": null,
-          "priority": null
-        }
+          "trigger": "A creature within 5m of you suffers loses a Tick(s) of HP as effect damage from an Affliction."
+        },
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "slug": null,
+    "slug": "sadism",
     "description": "<p>Trigger: A creature within 5m of you suffers loses a Tick(s) of HP as effect damage from an Affliction.<br><br>Effect: You heal a number of Ticks of HP equal to the number of Ticks the triggering creature lost.</p>",
     "traits": [],
     "prerequisites": [
@@ -45,10 +43,9 @@
       "i": 56,
       "j": 156,
       "connected": [
-        "koffing-class-curry",
-        "improved-burrow-1",
-        "capture-ace-1",
-        "expert-ball-crafting"
+        "lasting-harm",
+        "hexcraft",
+        "acceptance"
       ],
       "config": {
         "alpha": null,
@@ -60,24 +57,14 @@
         "scale": null
       },
       "hidden": false,
-      "type": "normal"
+      "type": "normal",
+      "x": 175,
+      "y": 112
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
-  "effects": [],
-  "sort": 2300000,
-  "ownership": {
-    "default": 0,
-    "Kc3DOunCh3ClAeHS": 3
-  },
-  "flags": {},
-  "_stats": {
-    "compendiumSource": "Item.avNUrWp7q1JxxGgW",
-    "duplicateSource": null,
-    "coreVersion": "12.325",
-    "systemId": "ptr2e",
-    "systemVersion": "0.006",
-    "createdTime": 1717152411795,
-    "modifiedTime": 1717179555856,
-    "lastModifiedBy": "Kc3DOunCh3ClAeHS"
-  }
+  "effects": []
 }
