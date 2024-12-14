@@ -1,0 +1,66 @@
+{
+  "name": "Coward",
+  "type": "ability",
+  "img": "icons/magic/defensive/shield-barrier-glowing-blue.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "defensive",
+          "interrupt-7"
+        ],
+        "name": "Coward",
+        "slug": "coward",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 4,
+          "trigger": "<p>The user enters combat.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user enters combat.</p><p>Effect: The user freely uses Protect.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "protect",
+        "name": "Protect",
+        "type": "attack",
+        "traits": [
+          "shield",
+          "exhaust",
+          "interrupt-4"
+        ],
+        "range": {
+          "target": "creature",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7,
+          "trigger": "<p>The user is targeted by a Physical- or Special-Category Attack.</p>"
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user is targeted by a Physical- or Special-Category Attack.</p><p>Effect: The triggering attack fails, and additional attacks that target the user also fail until the user's next activation. Attacks failing to hit do not deal damage, activate secondary effects, or activate on-miss effects.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user enters combat.</p><p>Effect: Connection - Protect. The user freely uses Protect.</p>",
+    "traits": [
+      "defensive"
+    ],
+    "slug": "coward",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "g680DJ9tRpAx9ou7",
+  "effects": []
+}
