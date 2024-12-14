@@ -1,0 +1,84 @@
+{
+  "name": "Misty Surge",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/fairy_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "terrain",
+          "interrupt-2"
+        ],
+        "name": "Misty Surge",
+        "slug": "misty-surge-active",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user declares Misty Terrain.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: The user declares Misty Terrain.</p><p>Effect: Increase the number of rounds Misty Terrain persists by 2.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "terrain",
+          "environ"
+        ],
+        "name": "Misty Surge",
+        "slug": "misty-surge-passive",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "object",
+          "distance": 5,
+          "unit": "m"
+        },
+        "description": "<p>Passive: If a space within range possesses Misty Terrain, the user is affected by Misty Terrain.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "misty-terrain",
+        "name": "Misty Terrain",
+        "type": "attack",
+        "traits": [
+          "terrain"
+        ],
+        "range": {
+          "target": "field",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 7
+        },
+        "category": "status",
+        "types": [
+          "fairy"
+        ],
+        "description": "<p>Effect: The Terrain becomes Misty for 3 rounds.</p>",
+        "free": true,
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: The user declares Misty Terrain.</p><p>Effect: Connection - Misty Terrain. Increase the number of rounds Misty Terrain persists by 2.</p><p>Passive: If a space within range possesses Misty Terrain, the user is affected by Misty Terrain.</p>",
+    "traits": [
+      "terrain",
+      "connection",
+      "environ"
+    ],
+    "slug": "misty-surge",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "jaJfAYMqABXmyrY0",
+  "effects": []
+}
