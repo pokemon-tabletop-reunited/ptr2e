@@ -1,0 +1,61 @@
+{
+  "name": "Victory Star",
+  "type": "ability",
+  "img": "systems/ptr2e/img/icons/effect_icon.webp",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "aura"
+        ],
+        "name": "Victory Star",
+        "slug": "victory-star",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "range": {
+          "target": "allied-aura",
+          "distance": 10,
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user and allies within range have +1 default ACC. When rolling to increase Luck at the end of a session, the user rolls a d10 twice and keeps the better result. If the user is an owned Pokemon, the Trainer gets an additional d6 roll for Luck instead.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "aura",
+          "interrupt-4"
+        ],
+        "name": "Victory Star (V)",
+        "slug": "victory-star-v",
+        "type": "generic",
+        "cost": {
+          "activation": "free",
+          "powerPoints": 2,
+          "trigger": "<p>The user declares V-Create.</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Effect: The user gains +2 CRIT Stages for 1 Activation.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Effect: The user and allies within range have +1 default ACC. When declaring V-Create, the user can spend an additional 2 PP to gain +2 CRIT Stages for 1 Activation. When rolling to increase Luck at the end of a session, the user rolls a d10 twice and keeps the better result. If the user is an owned Pokemon, the Trainer gets an additional d6 roll for Luck instead.</p>",
+    "traits": [
+      "legendary",
+      "aura"
+    ],
+    "slug": "victory-star",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "WgGgzgRfLXmfmyGw",
+  "effects": []
+}
