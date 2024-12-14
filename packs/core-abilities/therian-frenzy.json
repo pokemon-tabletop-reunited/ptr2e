@@ -1,0 +1,54 @@
+{
+  "name": "Therian Frenzy",
+  "type": "ability",
+  "img": "systems/ptr2e/img/svg/flying_icon.svg",
+  "system": {
+    "actions": [
+      {
+        "traits": [
+          "legendary",
+          "defensive"
+        ],
+        "name": "Therian Frenzy (Rage)",
+        "slug": "therian-frenzy-rage",
+        "type": "passive",
+        "cost": {
+          "activation": "free",
+          "trigger": "<p>While @Affliction[enraged].</p>"
+        },
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "description": "<p>Trigger: While @Affliction[enraged].</p><p>Effect: The user takes 30% less damage, deals 30% more damage, receives triple the bonus to Movement from the Rush Action instead of double, and may use the Rush Action while @Affliction[enraged].</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "traits": [
+          "legendary",
+          "defensive"
+        ],
+        "name": "Therian Frenzy",
+        "slug": "therian-frenzy",
+        "type": "passive",
+        "cost": {
+          "activation": "free"
+        },
+        "description": "<p>Passive: The user receives double the bonus to Movement from the Rush Action. At the end of each of the user's Activations, they have a 30% chance to gain @Affliction[enraged] 3.</p>",
+        "img": "icons/svg/explosion.svg"
+      }
+    ],
+    "description": "<p>Trigger: While @Affliction[enraged].</p><p>Effect: The user takes 30% less damage, deals 30% more damage, receives triple the bonus to Movement from the Rush Action instead of double, and may use the Rush Action while @Affliction[enraged]. Passive: The user receives double the bonus to Movement from the Rush Action. At the end of each of the user's Activations, they have a 30% chance to gain @Affliction[enraged] 3.</p>",
+    "traits": [
+      "legendary",
+      "defensive"
+    ],
+    "slug": "therian-frenzy",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
+  },
+  "_id": "B67qfkwyDqYZoaVZ",
+  "effects": []
+}
