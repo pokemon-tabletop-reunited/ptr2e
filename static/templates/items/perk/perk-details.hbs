@@ -1,45 +1,72 @@
 <section class="tab sheet-body {{tabs.details.cssClass}}" data-tab="details" data-group="sheet">
-    <div class="scroll">
-        <fieldset>
-            <legend>
-                Basic Information
-            </legend>
-            {{formField fields.prerequisites value=source.system.prerequisites localize=true}}
-            {{formField fields.cost value=source.system.cost localize=true}}
+  <div class="scroll">
+    <fieldset>
+      <legend>
+        Basic Information
+      </legend>
+      {{formField fields.prerequisites value=source.system.prerequisites localize=true}}
+      {{formField fields.cost value=source.system.cost localize=true}}
 
-            {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true localize=true}}
-        </fieldset>
+      <div class="form-group">
+        <label>{{localize "PTR2E.FIELDS.perk.variant.label"}}</label>
+        <div class="form-fields">
+          <select name="system.variant">
+            <option value="">{{localize "PTR2E.FIELDS.perk.variant.basic"}}</option>
+            <option value="multi" {{#if (eq source.system.variant "multi")}}selected{{/if}}>{{localize "PTR2E.FIELDS.perk.variant.multi"}}</option>
+            <option value="tiered" {{#if (eq source.system.variant "tiered")}}selected{{/if}}>{{localize "PTR2E.FIELDS.perk.variant.tiered"}}</option>
+          </select>
+        </div>
+        <p class="hint">{{localize "PTR2E.FIELDS.perk.variant.hint"}}</p>
+      </div>
+
+      {{#if source.system.variant}}
+      <div class="form-group">
+        <label>{{localize "PTR2E.FIELDS.perk.mode.label"}}</label>
+        <div class="form-fields">
+          <select name="system.mode">
+            {{#if (eq source.system.variant "multi")}}
+              <option value="shared" {{#if (eq source.system.mode "shared")}}selected{{/if}}>{{localize "PTR2E.FIELDS.perk.mode.shared"}}</option>
+              <option value="individual" {{#if (eq source.system.mode "individual")}}selected{{/if}}>{{localize "PTR2E.FIELDS.perk.mode.individual"}}</option>
+            {{else if (eq source.system.variant "tiered")}}
+              <option value="replace" {{#if (eq source.system.mode "replace")}}selected{{/if}}>{{localize "PTR2E.FIELDS.perk.mode.replace"}}</option>
+              <option value="coexist" {{#if (eq source.system.mode "coexist")}}selected{{/if}}>{{localize "PTR2E.FIELDS.perk.mode.coexist"}}</option>
+            {{/if}}
+          </select>
+        </div>
+        <p class="hint">{{localize "PTR2E.FIELDS.perk.mode.hint"}}</p>
+      </div>
+      {{/if}}
+
+      {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true
+      localize=true}}
+    </fieldset>
+    {{#if debug}}
+    <fieldset>
+      <legend>
+        Node Configuration
+      </legend>
+      {{#each source.system.nodes as |node|}}
+      <div class="entry">
+        {{formField ../fields.nodes.element.fields.x value=node.x localize=true disabled=false name=(concat "system.nodes." @index ".x")}}
+        {{formField ../fields.nodes.element.fields.y value=node.y localize=true disabled=false name=(concat "system.nodes." @index ".y")}}
+        {{formField ../fields.nodes.element.fields.hidden value=node.hidden localize=true name=(concat "system.nodes." @index ".hidden")}}
+        {{formField ../fields.nodes.element.fields.type value=node.type localize=true name=(concat "system.nodes." @index ".type")}}
+        {{formField ../fields.nodes.element.fields.connected value=node.connected localize=true name=(concat "system.nodes." @index ".connected")}}
         <fieldset>
-            <legend>
-                Design
-            </legend>
-            {{formField fields.design.fields.arena value=source.system.design.arena localize=true}}
-            {{formField fields.design.fields.approach value=source.system.design.approach localize=true}}
-            {{formField fields.design.fields.archetype value=source.system.design.archetype localize=true}}
+          <legend>
+            Display Configuration
+          </legend>
+          {{formField ../fields.nodes.element.fields.config.fields.alpha value=node.config.alpha localize=true name=(concat "system.nodes." @index ".config.alpha")}}
+          {{formField ../fields.nodes.element.fields.config.fields.backgroundColor value=node.config.backgroundColor localize=true name=(concat "system.nodes." @index ".config.backgroundColor")}}
+          {{formField ../fields.nodes.element.fields.config.fields.borderColor value=node.config.borderColor localize=true name=(concat "system.nodes." @index ".config.borderColor")}}
+          {{formField ../fields.nodes.element.fields.config.fields.borderWidth value=node.config.borderWidth localize=true name=(concat "system.nodes." @index ".config.borderWidth")}}
+          {{formField ../fields.nodes.element.fields.config.fields.texture value=node.config.texture localize=true name=(concat "system.nodes." @index ".config.texture")}}
+          {{formField ../fields.nodes.element.fields.config.fields.tint value=node.config.tint localize=true name=(concat "system.nodes." @index ".config.tint")}}
+          {{formField ../fields.nodes.element.fields.config.fields.scale value=node.config.scale localize=true name=(concat "system.nodes." @index ".config.scale")}}
         </fieldset>
-        {{#if debug}}
-        <fieldset>
-            <legend>
-                Node Configuration (DEBUG VALUES)
-            </legend>
-            {{formField fields.node.fields.x value=source.system.node.x localize=true disabled=false}}
-            {{formField fields.node.fields.y value=source.system.node.y localize=true disabled=false}}
-            {{formField fields.node.fields.hidden value=source.system.node.hidden localize=true}}
-            {{formField fields.node.fields.type value=source.system.node.type localize=true}}
-            {{formField fields.node.fields.connected value=source.system.node.connected localize=true}}
-            <fieldset>
-                <legend>
-                    Display Configuration
-                </legend>
-                {{formField fields.node.fields.config.fields.alpha value=source.system.node.config.alpha localize=true}}
-                {{formField fields.node.fields.config.fields.backgroundColor value=source.system.node.config.backgroundColor localize=true}}
-                {{formField fields.node.fields.config.fields.borderColor value=source.system.node.config.borderColor localize=true}}
-                {{formField fields.node.fields.config.fields.borderWidth value=source.system.node.config.borderWidth localize=true}}
-                {{formField fields.node.fields.config.fields.texture value=source.system.node.config.texture localize=true}}
-                {{formField fields.node.fields.config.fields.tint value=source.system.node.config.tint localize=true}}
-                {{formField fields.node.fields.config.fields.scale value=source.system.node.config.scale localize=true}}
-            </fieldset>
-        </fieldset>
-        {{/if}}
-    </div>
+      </div>
+      {{/each}}
+    </fieldset>
+    {{/if}}
+  </div>
 </section>

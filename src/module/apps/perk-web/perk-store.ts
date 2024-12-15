@@ -19,9 +19,11 @@ export interface PerkNode {
   };
   element?: HTMLElement;
   perk: PerkPTR2e;
+  node: PerkPTR2e['system']['nodes'][0];
   connected: Set<string>;
   state: PerkPurchaseState;
   web: "global" | string;
+  slug: string;
 }
 
 class PerkStore extends Collection<PerkNode> {
@@ -41,6 +43,21 @@ class PerkStore extends Collection<PerkNode> {
     return this._graph;
   }
 
+  private static perkNodeToNode(perk: PerkPTR2e, node: PerkPTR2e['system']['nodes'][0] | null) {
+    if (!node) return [];
+    if (!node.x || !node.y) return [];
+    const index = perk.system.variant === "multi" ? perk.system.nodes.indexOf(node) : -1;
+    return [{
+      position: { x: node.x, y: node.y },
+      perk,
+      connected: new Set(node.connected),
+      state: PerkState.unavailable,
+      web: "global",
+      node,
+      slug: index > 0 ? `${perk.slug}-${index}` : perk.slug
+    }]
+  }
+
   constructor({ perks, nodes }: { perks?: PerkPTR2e[], nodes?: PerkNode[] } = {}) {
     // If nodes are provided, simply map them to the collection
     if (nodes?.length) {
@@ -48,34 +65,19 @@ class PerkStore extends Collection<PerkNode> {
     }
     // If perks are provided, convert them to nodes and map them to the collection 
     else if (perks?.length) {
-      super(perks.flatMap((perk): PerkNode[] => {
-        if (!perk.system.nodes[0]?.x || !perk.system.nodes[0]?.y) return [];
-
-        // TODO: Multi-node support
-        return [{
-          position: { x: perk.system.nodes[0].x, y: perk.system.nodes[0].y },
-          perk,
-          connected: new Set(perk.system.nodes[0].connected),
-          state: PerkState.unavailable,
-          web: "global",
-        }]
-      }).map((entry) => [`${entry.position.x}-${entry.position.y}`, entry]));
+      super(perks.flatMap((perk): PerkNode[] =>
+        perk.system.variant === "multi"
+          ? perk.system.nodes.flatMap(node => PerkStore.perkNodeToNode(perk, node))
+          : PerkStore.perkNodeToNode(perk, perk.system.primaryNode)
+      ).map((entry) => [`${entry.position.x}-${entry.position.y}`, entry]));
     }
     // If neither perks nor nodes are provided, initialize the store with all perks loaded in the game
     else {
       if (!game.ptr.perks.initialized) throw new Error("PerkStore must be provided with perks or nodes if global perks are not initialized");
-      super(Array.from(game.ptr.perks.perks.values()).flatMap((perk): PerkNode[] => {
-        if (!perk.system.nodes[0]?.x || !perk.system.nodes[0]?.y) return [];
-
-        // TODO: Multi-node support
-        return [{
-          position: { x: perk.system.nodes[0].x, y: perk.system.nodes[0].y },
-          perk,
-          connected: new Set(perk.system.nodes[0].connected),
-          state: PerkState.unavailable,
-          web: "global",
-        }]
-      }).map((entry) => [`${entry.position.x}-${entry.position.y}`, entry]));
+      super(Array.from(game.ptr.perks.perks.values()).flatMap((perk): PerkNode[] => perk.system.variant === "multi"
+        ? perk.system.nodes.flatMap(node => PerkStore.perkNodeToNode(perk, node))
+        : PerkStore.perkNodeToNode(perk, perk.system.primaryNode)
+      ).map((entry) => [`${entry.position.x}-${entry.position.y}`, entry]));
     }
 
     this._graph = new PerkGraph(this);
@@ -94,36 +96,22 @@ class PerkStore extends Collection<PerkNode> {
     }
     // If perks are provided, convert them to nodes and map them to the collection 
     else if (perks?.length) {
-      for (const node of perks.flatMap((perk): PerkNode[] => {
-        if (!perk.system.nodes[0]?.x || !perk.system.nodes[0]?.y) return [];
-
-        // TODO: Multi-node support
-        return [{
-          position: { x: perk.system.nodes[0].x, y: perk.system.nodes[0].y },
-          perk,
-          connected: new Set(perk.system.nodes[0].connected),
-          state: PerkState.unavailable,
-          web: "global",
-        }]
-      })) {
+      for (const node of perks.flatMap((perk): PerkNode[] =>
+        perk.system.variant === "multi"
+          ? perk.system.nodes.flatMap(node => PerkStore.perkNodeToNode(perk, node))
+          : PerkStore.perkNodeToNode(perk, perk.system.primaryNode)
+      )) {
         this.set(`${node.position.x}-${node.position.y}`, node);
       }
     }
     // If neither perks nor nodes are provided, initialize the store with all perks loaded in the game
     else {
       if (!game.ptr.perks.initialized) throw new Error("PerkStore must be provided with perks or nodes if global perks are not initialized");
-      for (const node of Array.from(game.ptr.perks.perks.values()).flatMap((perk): PerkNode[] => {
-        if (!perk.system.nodes[0]?.x || !perk.system.nodes[0]?.y) return [];
-
-        // TODO: Multi-node support
-        return [{
-          position: { x: perk.system.nodes[0].x, y: perk.system.nodes[0].y },
-          perk,
-          connected: new Set(perk.system.nodes[0].connected),
-          state: PerkState.unavailable,
-          web: "global",
-        }]
-      })) {
+      for (const node of Array.from(game.ptr.perks.perks.values()).flatMap((perk): PerkNode[] =>
+        perk.system.variant === "multi"
+          ? perk.system.nodes.flatMap(node => PerkStore.perkNodeToNode(perk, node))
+          : PerkStore.perkNodeToNode(perk, perk.system.primaryNode)
+      )) {
         this.set(`${node.position.x}-${node.position.y}`, node);
       }
     }
@@ -136,9 +124,15 @@ class PerkStore extends Collection<PerkNode> {
     const purchasedNodes: PerkNode[] = [];
 
     for (const node of this) {
-      if (node.perk.system.node && node.perk.system.nodes[0].x !== null && node.perk.system.nodes[0].y !== null) {
-        const isRoot = node.perk.system.nodes[0].type === "root";
-        const actorPerk = actor?.perks.get(node.perk.slug);
+      if (node.node && node.node.x !== null && node.node.y !== null) {
+        const isRoot = node.node.type === "root";
+        const actorPerk = actor?.perks.get(
+          node.perk.system.variant === "multi" 
+            ? node.perk.system.mode === "shared"
+              ? node.perk.slug
+              : node.slug
+            : node.slug
+        );
         const state = actorPerk ? PerkState.purchased : PerkState.unavailable;
 
         if (isRoot) {
@@ -150,12 +144,12 @@ class PerkStore extends Collection<PerkNode> {
         }
 
         node.state = state;
-        if(state === PerkState.purchased) purchasedNodes.push(node);
+        if (state === PerkState.purchased) purchasedNodes.push(node);
 
-        for(const connected of node.connected) {
+        for (const connected of node.connected) {
           const connectedNode = this.nodeFromSlug(connected);
-          if(connectedNode) {
-            connectedNode.connected.add(node.perk.slug);
+          if (connectedNode) {
+            connectedNode.connected.add(node.slug);
           }
         }
       }
@@ -164,23 +158,23 @@ class PerkStore extends Collection<PerkNode> {
     const visited = new Set<string>();
     // Update connections for all purchased roots
     if (purchasedRoots.length) this.updateConnections({ purchasedPerks: purchasedRoots, apAvailable: actor?.system.advancement.advancementPoints.available ?? 0, visited });
-    
+
     // Any nodes that can't be reached from a purchased root are invalid
-    for(const node of purchasedNodes ) {
-      if(visited.has(node.perk.slug)) continue;
-      visited.add(node.perk.slug);
+    for (const node of purchasedNodes) {
+      if (visited.has(node.slug)) continue;
+      visited.add(node.slug);
       node.state = PerkState.invalid
     }
 
     // If no roots are purchased, all roots are available for free
-    if(!purchasedRoots.length) {
-      for(const rootNode of this.rootNodes) {
+    if (!purchasedRoots.length) {
+      for (const rootNode of this.rootNodes) {
         rootNode.perk.system.cost = 0;
         rootNode.state = PerkState.available;
       }
     }
-    for(const rootNode of this.rootNodes) {
-      if(rootNode.state < PerkState.available) {
+    for (const rootNode of this.rootNodes) {
+      if (rootNode.state < PerkState.available) {
         rootNode.state = (actor?.system.advancement.advancementPoints.available ?? 0) >= rootNode.perk.system.cost ? PerkState.available : PerkState.connected;
       }
     }
@@ -199,18 +193,18 @@ class PerkStore extends Collection<PerkNode> {
     apAvailable: number
   }) {
     for (const node of purchasedPerks) {
-      if (visited.has(node.perk.slug)) continue;
-      visited.add(node.perk.slug);
+      if (visited.has(node.slug)) continue;
+      visited.add(node.slug);
 
       for (const connected of node.connected) {
-        if(visited.has(connected)) continue;
+        if (visited.has(connected)) continue;
         const connectedNode = this.nodeFromSlug(connected);
         if (connectedNode) {
-          if(connectedNode.state >= PerkState.purchased) {
+          if (connectedNode.state >= PerkState.purchased) {
             this.updateConnections({ purchasedPerks: [connectedNode], visited, apAvailable });
           }
           else if (connectedNode.state < PerkState.connected) {
-            if(connectedNode.perk.system.nodes[0].type === "root") {
+            if (connectedNode.perk.system.nodes[0].type === "root") {
               connectedNode.perk.system.cost = 1;
             }
 
@@ -223,7 +217,13 @@ class PerkStore extends Collection<PerkNode> {
   }
 
   nodeFromSlug(slug: string) {
-    return this.find((node) => node.perk.slug === slug);
+    return this.find((node) => node.slug === slug);
+  }
+
+  getUpdatedNode(node: PerkNode | null): PerkNode | null {
+    if(!node) return null;
+
+    return this.nodeFromSlug(node.slug) ?? null;
   }
 }
 

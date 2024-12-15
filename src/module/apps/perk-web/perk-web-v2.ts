@@ -4,7 +4,7 @@ import { Trait } from "@data";
 import { ItemPTR2e, PerkPTR2e } from "@item";
 import Tagify from "@yaireo/tagify";
 import Sortable from "sortablejs";
-import PerkStore, { PerkPurchaseState, PerkState } from "./perk-store.ts";
+import PerkStore, { PerkNode, PerkPurchaseState, PerkState } from "./perk-store.ts";
 
 export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -47,7 +47,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             }
           }
           this.currentPerk = null;
-          this.connectionPerk = null;
+          this.connectionNode = null;
           this.render(true);
         },
         "refresh": PerkWebApp.refresh,
@@ -131,7 +131,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
   actor: ActorPTR2e | null = null;
   currentPerk: PerkPTR2e | null = null;
-  connectionPerk: PerkPTR2e | null = null;
+  connectionNode: PerkNode | null = null;
   editMode = false;
   zoomLevels = [0.2, 0.4, 0.65, 1, 1.3, 1.65] as const;
 
@@ -161,7 +161,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       const perks = await game.ptr.perks.initialize();
       this._perkStore = new PerkStore({ perks: Array.from(perks.perks.values()) });
     }
-    if(!this._perkStore.initialized) {
+    if (!this._perkStore.initialized) {
       this._perkStore.updateState(this.actor);
     }
 
@@ -179,15 +179,15 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             [PerkState.invalid]: "invalid",
           }[node.state];
           const classes: string[] = [];
-          if(perk === this.connectionPerk) classes.push("selected");
-          if(!this.editMode) classes.push(classFromState);
-          if(perk.system.nodes[0]?.type === "root") classes.push("root");
-          if(perk.system.nodes[0]?.type === "entry") classes.push("entry");
-          grid.push({ 
-            name: perk.name, 
-            img: perk.system.nodes[0].config?.texture ?? perk.img, 
-            x, 
-            y, 
+          if (node === this.connectionNode) classes.push("selected");
+          if (!this.editMode) classes.push(classFromState);
+          if (node.node.type === "root") classes.push("root");
+          if (node.node.type === "entry") classes.push("entry");
+          grid.push({
+            name: perk.name,
+            img: node.node.config?.texture ?? perk.img,
+            x,
+            y,
             classes,
             state: node.state
           });
@@ -239,12 +239,12 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           if (!x || !y) return;
           const perkKey = `${Number(x)}-${Number(y)}`;
 
-          if (this.editMode && this.connectionPerk) {
+          if (this.editMode && this.connectionNode) {
             const node = this._perkStore.get(perkKey) ?? null;
-            if (!node || node.perk === this.connectionPerk) return;
+            if (!node || node === this.connectionNode) return;
 
-            const getUpdatedConnections = (a: PerkPTR2e, b: PerkPTR2e, operation?: "add" | "remove") => {
-              const connected = a.system.toObject().nodes[0]?.connected ?? []
+            const getUpdatedConnections = (a: PerkNode, b: PerkNode, operation?: "add" | "remove") => {
+              const connected = Array.from(a.connected ?? []);
               const index = connected.indexOf(b.slug);
               if (index === -1) {
                 if (operation === "remove") return { connected, operation };
@@ -258,24 +258,66 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               return { connected, operation };
             };
 
-            const { connected: updateCurrent, operation } = getUpdatedConnections(this.connectionPerk, node.perk);
-            const { connected: updateTarget } = getUpdatedConnections(node.perk, this.connectionPerk, operation);
+            const { connected: updateCurrent, operation } = getUpdatedConnections(this.connectionNode, node);
+            const { connected: updateTarget } = getUpdatedConnections(node, this.connectionNode, operation);
 
-            if (this.connectionPerk.pack === node.perk.pack) {
+            if(this.connectionNode.perk === node.perk) {
+              await this.connectionNode.perk.update({
+                "system.nodes": (() => {
+                  const nodes = this.connectionNode.perk.system.toObject().nodes;
+                  const indexCurrent = this.connectionNode.perk.system.nodes.indexOf(this.connectionNode.node);
+                  const indexTarget = this.connectionNode.perk.system.nodes.indexOf(node.node);
+                  if(indexCurrent === -1 || indexTarget === -1) return nodes;
+                  nodes[indexCurrent].connected = Array.from(new Set(updateCurrent));
+                  nodes[indexTarget].connected = Array.from(new Set(updateTarget));
+                  return nodes;
+                })()
+              })
+            }
+
+            if (this.connectionNode.perk.pack === node.perk.pack) {
               await ItemPTR2e.updateDocuments([
                 {
-                  _id: this.connectionPerk._id,
-                  "system.node.connected": new Set(updateCurrent)
+                  _id: this.connectionNode.perk._id,
+                  "system.nodes": (() => {
+                    const nodes = this.connectionNode.perk.system.toObject().nodes;
+                    const index = this.connectionNode.perk.system.nodes.indexOf(this.connectionNode.node);
+                    if (index === -1) return nodes;
+                    nodes[index].connected = Array.from(new Set(updateCurrent));
+                    return nodes;
+                  })()
                 },
                 {
                   _id: node.perk._id,
-                  "system.node.connected": new Set(updateTarget)
+                  "system.nodes": (() => {
+                    const nodes = node.perk.system.toObject().nodes;
+                    const index = node.perk.system.nodes.indexOf(node.node);
+                    if (index === -1) return nodes;
+                    nodes[index].connected = Array.from(new Set(updateTarget));
+                    return nodes;
+                  })()
                 }
-              ], this.connectionPerk.pack ? { pack: this.connectionPerk.pack } : {});
+              ], this.connectionNode.perk.pack ? { pack: this.connectionNode.perk.pack } : {});
             }
             else {
-              await this.connectionPerk.update({ "system.node.connected": updateCurrent }, this.connectionPerk.pack ? { pack: this.connectionPerk.pack } : {});
-              await node.perk.update({ "system.node.connected": updateTarget }), node.perk.pack ? { pack: node.perk.pack } : {};
+              await this.connectionNode.perk.update({
+                "system.nodes": (() => {
+                  const nodes = this.connectionNode.perk.system.toObject().nodes;
+                  const index = this.connectionNode.perk.system.nodes.indexOf(this.connectionNode.node);
+                  if (index === -1) return nodes;
+                  nodes[index].connected = Array.from(new Set(updateCurrent));
+                  return nodes;
+                })()
+              }, this.connectionNode.perk.pack ? { pack: this.connectionNode.perk.pack } : {});
+              await node.perk.update({
+                "system.nodes": (() => {
+                  const nodes = node.perk.system.toObject().nodes;
+                  const index = node.perk.system.nodes.indexOf(node.node);
+                  if (index === -1) return nodes;
+                  nodes[index].connected = Array.from(new Set(updateTarget));
+                  return nodes;
+                })()
+              }), node.perk.pack ? { pack: node.perk.pack } : {};
             }
 
             PerkWebApp.refresh.call(this);
@@ -302,7 +344,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           if (!x || !y) return;
           const perkKey = `${Number(x)}-${Number(y)}`;
           const node = this._perkStore.get(perkKey) ?? null;
-          this.connectionPerk = node?.perk === this.connectionPerk ? null : (node?.perk ?? null);
+          this.connectionNode = node === this.connectionNode ? null : (node ?? null);
           this.render({ parts: ["web"] });
         });
       }
@@ -320,18 +362,21 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             const node = this._perkStore.get(`${x}-${y}`) ?? null;
             if (!node) return;
 
-            dataTransfer!.setData("text/plain", JSON.stringify(node.perk.toDragData()));
+            dataTransfer!.setData("text/plain", JSON.stringify({
+              ...node.perk.toDragData(),
+              x,
+              y
+            }));
           }
         },
         onChoose: () => {
           this.isSortableDragging = true;
         },
         onEnd: (event) => {
-
           // Grab all items, and make sure that the item at `.item` is sorted as index 0
           const items = event.items.length ? (() => {
             const items = event.items;
-            if(items.length > 1) {
+            if (items.length > 1) {
               items.splice(items.indexOf(event.item), 1);
               items.unshift(event.item);
               return items;
@@ -343,7 +388,11 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             const x = Number(el.dataset.x)
             const y = Number(el.dataset.y);
             const node = this._perkStore.get(`${x}-${y}`) ?? null;
-            return node ? node.perk.toDragData() : []
+            return node ? {
+              ...node.perk.toDragData(),
+              x,
+              y
+            } : []
           })
 
           //@ts-expect-error - originalEvent exists
@@ -435,7 +484,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       if (!node) continue;
 
       const perkRect = el.getBoundingClientRect();
-      const connected = node.perk.system.nodes[0]?.connected ?? [];
+      const connected = node.node.connected ?? [];
 
       for (const connection of connected) {
         const connectedNode = this._perkStore.nodeFromSlug(connection);
@@ -459,8 +508,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         const y2 = (((connectedRect.y + scroll.y) * zoom) + ((connectedRect.height * zoom) / 2) - (elementRect.y * zoom));
 
         const color = (() => {
-          if(this.editMode) return "#ffffff";
-          if(node.state === PerkState.purchased || connectedNode.state === PerkState.purchased) return "#ffffff";
+          if (this.editMode) return "#ffffff";
+          if (node.state === PerkState.purchased || connectedNode.state === PerkState.purchased) return "#ffffff";
           return "#898989";
         })();
 
@@ -614,17 +663,29 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     const grid = element.querySelector<HTMLElement>(".perk-grid");
     if (!grid) return;
 
-    const items = (itemData?.length ? await Promise.all(itemData.map(data => ItemPTR2e.fromDropData(data))) : await (async () => {
-      const data = TextEditor.getDragEventData(event) as DropCanvasData
-      return data ? [await ItemPTR2e.fromDropData(data)] : [];
-    })()) as PerkPTR2e[];
+    const items = (
+      itemData?.length
+        ? await Promise.all(
+          itemData.map(async data => {
+            const item = await fromUuid(data.uuid);
+            return { perk: item as PerkPTR2e, x: data.x, y: data.y };
+          })
+        )
+        : await (async () => {
+          const data = TextEditor.getDragEventData(event) as DropCanvasData
+          if(!data) return [];
+          const perk = await fromUuid(data.uuid) as PerkPTR2e;
+          if(!(perk instanceof ItemPTR2e && perk.type === "perk")) return [];
+          if(perk.system.variant === "multi") return [{perk: perk, x: data.x, y: data.y}];
+          return [{ perk: perk, x: perk.system.primaryNode?.x, y: perk.system.primaryNode?.y }];
+        })()) as { perk: PerkPTR2e, x: number, y: number }[];
 
-    const primaryItem = items[0]
-    if (!(primaryItem instanceof ItemPTR2e && primaryItem.type === "perk")) return;
+    const primaryEntry = items[0]
+    if (!(primaryEntry.perk instanceof ItemPTR2e && primaryEntry.perk.type === "perk")) return;
 
     if (this.isSortableDragging && !itemData?.length) {
-      const currentlyOnWeb = this._perkStore.get(`${primaryItem.system.nodes[0]?.x}-${primaryItem.system.nodes[0]?.y}`);
-      if(currentlyOnWeb?.perk === primaryItem) return;
+      const currentlyOnWeb = this._perkStore.get(`${primaryEntry.x}-${primaryEntry.y}`);
+      if (currentlyOnWeb?.perk === primaryEntry.perk) return;
     }
 
     const bounding = grid.getBoundingClientRect();
@@ -645,55 +706,154 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     const i = getGridSpace(x);
     const j = getGridSpace(y);
 
-    const node = this._perkStore.get(`${i}-${j}`) ?? this._perkStore.get(`${j}-${i}`);
-    if (node) return void ui.notifications.error(`Can't move ${primaryItem.name} to ${i}-${j}, as it's already occupied by ${node.perk.name}`);
+    const node = this._perkStore.get(`${i}-${j}`);
+    if (node) return void ui.notifications.error(`Can't move ${primaryEntry.perk.name} to ${i}-${j}, as it's already occupied by ${node.perk.name}`);
 
-    const currentlyOnWeb = this._perkStore.get(`${primaryItem.system.nodes[0]?.x}-${primaryItem.system.nodes[0]?.y}`);
+    const currentlyOnWeb = this._perkStore.get(`${primaryEntry.x}-${primaryEntry.y}`);
 
-    const toDelete = new Set<string>(currentlyOnWeb?.perk === primaryItem ? [`${primaryItem.system.nodes[0]?.x}-${primaryItem.system.nodes[0]?.y}`] : []);
-    const toSet: [string, PerkPTR2e][] = [[`${i}-${j}`, primaryItem]];
-    const updates: Record<string, Record<string,unknown>[]> = {
+    const toDelete = new Set<string>(currentlyOnWeb?.perk === primaryEntry.perk ? [`${primaryEntry.x}-${primaryEntry.y}`] : []);
+    const toSet: [string, PerkPTR2e, PerkPTR2e['system']['nodes'][0] | null][] = [[`${i}-${j}`, primaryEntry.perk, currentlyOnWeb?.node ?? primaryEntry.perk.system.primaryNode]];
+    const updates: Record<string, Record<string, unknown>[]> = {
       world: [],
     };
 
-    const pack = primaryItem.pack || "world";
+    const pack = primaryEntry.perk.pack || "world";
     updates[pack] ??= [];
-    updates[pack].push({_id: primaryItem._id, "system.node": { x: i, y: j }});
+    updates[pack].push({
+      _id: primaryEntry.perk._id,
+      "system.nodes": (() => {
+        const nodes = primaryEntry.perk.system.toObject().nodes as Required<DeepPartial<PerkPTR2e['system']['nodes']>>;
+        if (!currentlyOnWeb) {
+          if (primaryEntry.perk.system.variant === "multi" || !nodes[0]) {
+            nodes.push({
+              x: i,
+              y: j,
+            })
+          }
+          else {
+            nodes[0].x = i;
+            nodes[0].y = j;
+          }
+          return nodes;
+        }
+        const index = primaryEntry.perk.system.nodes.indexOf(currentlyOnWeb.node);
+        if (index === -1) {
+          if (primaryEntry.perk.system.variant === "multi" || !nodes.length) {
+            nodes.push({
+              x: i,
+              y: j,
+            })
+          }
+          return nodes;
+        };
+        nodes[index].x = i;
+        nodes[index].y = j;
+        return nodes;
+      })()
+    });
 
-    const delta = items.length > 1 ? { x: i - primaryItem.system.nodes[0].x!, y: j - primaryItem.system.nodes[0].y! } : null;
+    const delta = items.length > 1 ? { x: i - primaryEntry.x, y: j - primaryEntry.y } : null;
 
-    for(const item of items) {
-      if(item === primaryItem) continue;
-      if(!delta) return;
-      if(!(item instanceof ItemPTR2e && item.type === "perk")) continue;
+    for (const entry of items) {
+      if (entry.x === primaryEntry.x && entry.y === primaryEntry.y) continue;
+      if (!delta) return;
+      if (!(entry.perk instanceof ItemPTR2e && entry.perk.type === "perk")) continue;
 
-      const i = item.system.nodes[0].x! + delta.x;
-      const j = item.system.nodes[0].y! + delta.y;
+      const i = entry.x + delta.x;
+      const j = entry.y + delta.y;
 
-      if(i < 1 || j < 1 || i >= 250 || j >= 250) {
+      if (i < 1 || j < 1 || i >= 250 || j >= 250) {
         return void ui.notifications.error("Perk placement out of bounds");
       };
 
       const node = this._perkStore.get(`${i}-${j}`) ?? this._perkStore.get(`${j}-${i}`);
-      if (node) return void ui.notifications.error(`Can't move ${item.name} to ${i}-${j}, as it's already occupied by ${node.perk.name}`);
+      if (node) return void ui.notifications.error(`Can't move ${entry.perk.name} to ${i}-${j}, as it's already occupied by ${node.perk.name}`);
 
-      const currentlyOnWeb = this._perkStore.get(`${item.system.nodes[0].x}-${item.system.nodes[0].y}`);
-      if (currentlyOnWeb?.perk === item) {
-        toDelete.add(`${item.system.nodes[0].x}-${item.system.nodes[0].y}`);
+      const currentlyOnWeb = this._perkStore.get(`${entry.x}-${entry.y}`);
+      if (currentlyOnWeb?.perk === entry.perk) {
+        toDelete.add(`${entry.x}-${entry.y}`);
       }
-      const pack = item.pack || "world";
+      const pack = entry.perk.pack || "world";
       updates[pack] ??= [];
-      updates[pack].push({_id: item._id, "system.node": { x: i, y: j }});
+      if(entry.perk.system.variant === "multi") {
+        const update = updates[pack].find(u => u._id === entry.perk._id);
+        if(update) {
+          update["system.nodes"] = (() => {
+            const nodes = update["system.nodes"] as Required<DeepPartial<PerkPTR2e['system']['nodes']>>;
+            if (!currentlyOnWeb) {
+              if (entry.perk.system.variant === "multi" || !nodes[0]) {
+                nodes.push({
+                  x: i,
+                  y: j,
+                })
+              }
+              else {
+                nodes[0].x = i;
+                nodes[0].y = j;
+              }
+              return nodes;
+            }
+            const index = entry.perk.system.nodes.indexOf(currentlyOnWeb.node);
+            if (index === -1) {
+              if (entry.perk.system.variant === "multi" || !nodes.length) {
+                nodes.push({
+                  x: i,
+                  y: j,
+                })
+              }
+              return nodes;
+            };
+            nodes[index].x = i;
+            nodes[index].y = j;
+            return nodes;
+          })()
 
-      toSet.push([`${i}-${j}`, item]);
+          toSet.push([`${i}-${j}`, entry.perk, currentlyOnWeb?.node ?? entry.perk.system.primaryNode]);
+          continue;
+        }
+      }
+      updates[pack].push({
+        _id: entry.perk._id,
+        "system.nodes": (() => {
+          const nodes = entry.perk.system.toObject().nodes as Required<DeepPartial<PerkPTR2e['system']['nodes']>>;
+          if (!currentlyOnWeb) {
+            if (entry.perk.system.variant === "multi" || !nodes[0]) {
+              nodes.push({
+                x: i,
+                y: j,
+              })
+            }
+            else {
+              nodes[0].x = i;
+              nodes[0].y = j;
+            }
+            return nodes;
+          }
+          const index = entry.perk.system.nodes.indexOf(currentlyOnWeb.node);
+          if (index === -1) {
+            if (entry.perk.system.variant === "multi" || !nodes.length) {
+              nodes.push({
+                x: i,
+                y: j,
+              })
+            }
+            return nodes;
+          };
+          nodes[index].x = i;
+          nodes[index].y = j;
+          return nodes;
+        })()
+      });
+
+      toSet.push([`${i}-${j}`, entry.perk, currentlyOnWeb?.node ?? entry.perk.system.primaryNode]);
     }
 
     for (const key of toDelete) {
       this._perkStore.delete(key);
     }
 
-    for(const key in updates) {
-      if(key === "world") {
+    for (const key in updates) {
+      if (key === "world") {
         await ItemPTR2e.updateDocuments(updates[key]);
       }
       else {
@@ -701,16 +861,20 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       }
     }
 
-    for (const [key, value] of toSet) {
+    for (const [key, perk, setNode] of toSet) {
+      const node = setNode ?? perk.system.primaryNode!;
+      const index = perk.system.variant === "multi" ? perk.system.nodes.indexOf(node) : -1;
       this._perkStore.set(key, {
-        perk: value,
-        connected: value.system.nodes[0].connected,
-        position: { x: value.system.nodes[0].x!, y: value.system.nodes[0].y! },
+        perk: perk,
+        connected: node.connected,
+        position: { x: node.x!, y: node.y! },
         state: 0,
         web: "global",
+        node: node,
+        slug: index > 0 ? `${perk.slug}-${index}` : perk.slug
       });
     }
-    this.render({ parts: ["web"] });
+    PerkWebApp.refresh.call(this);
 
     return;
   }
@@ -737,9 +901,10 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     this._lineCache.clear();
     await game.ptr.perks.reset();
     this.isSortableDragging = false;
-    this._perkStore.reinitialize({actor: this.actor ?? undefined});
+    this._perkStore.reinitialize({ actor: this.actor ?? undefined });
 
     this.currentPerk = null;
+    this.connectionNode = this._perkStore.getUpdatedNode(this.connectionNode);
     this.render(true);
   }
 }

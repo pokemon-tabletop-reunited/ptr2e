@@ -33,11 +33,22 @@ export default abstract class PerkSystem extends PerkExtension {
       cost: new fields.NumberField({ required: true, initial: 1, label: "PTR2E.FIELDS.apCost.label", hint: "PTR2E.FIELDS.apCost.hint" }),
       originSlug: new SlugField({ required: true, nullable: true, initial: null }),
 
-      design: new fields.SchemaField({
-        arena: new fields.StringField({ required: true, nullable: true, initial: null, choices: ["physical", "mental", "social"].reduce<Record<string, string>>((acc, arena) => ({ ...acc, [arena]: arena }), {}), label: "PTR2E.FIELDS.design.arena.label", hint: "PTR2E.FIELDS.design.arena.hint" }),
-        approach: new fields.StringField({ required: true, nullable: true, initial: null, choices: ["power", "finesse", "resilience"].reduce<Record<string, string>>((acc, approach) => ({ ...acc, [approach]: approach }), {}), label: "PTR2E.FIELDS.design.approach.label", hint: "PTR2E.FIELDS.design.approach.hint" }),
-        archetype: new fields.StringField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.design.archetype.label", hint: "PTR2E.FIELDS.design.archetype.hint" }),
-      }),
+      variant: new fields.StringField({
+        required: true,
+        nullable: true,
+        initial: null,
+        choices: ["multi", "tiered"].reduce<Record<string, string>>((acc, variant) => ({ ...acc, [variant]: `PTR2E.FIELDS.perk.variant.${variant}` }), { '': '' }),
+        label: "PTR2E.FIELDS.perk.variant.label",
+        hint: "PTR2E.FIELDS.perk.variant.hint"
+      }) as PerkSchema["variant"],
+      mode: new fields.StringField({
+        required: true,
+        nullable: true,
+        initial: null,
+        choices: ["shared", "individual", "replace", "coexist"].reduce<Record<string, string>>((acc, mode) => ({ ...acc, [mode]: `PTR2E.FIELDS.perk.mode.${mode}` }), { '': '' }),
+        label: "PTR2E.FIELDS.perk.mode.label",
+        hint: "PTR2E.FIELDS.perk.mode.hint"
+      }) as PerkSchema["mode"],
 
       nodes: new fields.ArrayField(
         new fields.SchemaField({
@@ -74,6 +85,33 @@ export default abstract class PerkSystem extends PerkExtension {
     };
   }
 
+  get primaryNode() {
+    return this.nodes.length ? this.nodes[0] : null;
+  }
+
+  static override validateJoint(data: PerkSystem["_source"]) {
+    switch (data.variant) {
+      case "multi": {
+        if (!["shared", "individual"].includes(data.mode!)) {
+          throw new Error(`Invalid mode for perk variant ${data.variant}: ${data.mode}. Must be "shared" or "individual".`);
+        }
+        break;
+      }
+      case "tiered": {
+        if (!["replace", "coexist"].includes(data.mode!)) {
+          throw new Error(`Invalid mode for perk variant ${data.variant}: ${data.mode}. Must be "replace" or "coexist".`);
+        }
+        break;
+      }
+      default: {
+        if (data.mode) {
+          throw new Error(`Invalid mode for perk variant ${data.variant}: ${data.mode}. Must be null.`);
+        }
+        break;
+      }
+    }
+  }
+
   override prepareBaseData() {
     super.prepareBaseData();
   }
@@ -84,6 +122,31 @@ export default abstract class PerkSystem extends PerkExtension {
     if (this.parent.actor) {
       this.parent.actor.system.advancement.advancementPoints.spent += this.cost;
     }
+  }
+
+  override _preUpdate(
+    changed: DeepPartial<this["parent"]["_source"]>, 
+    options: DocumentUpdateContext<this["parent"]["parent"]>, 
+    user: User
+  ){
+    if(changed.system?.variant !== undefined) {
+      switch(changed.system.variant) {
+        case "multi": {
+          if(!["shared","individual"].includes(changed.system.mode as string)) changed.system.mode = "shared";
+          break;
+        }
+        case "tiered": {
+          if(!["replace","coexist"].includes(changed.system.mode as string)) changed.system.mode = "replace";
+          break;
+        }
+        default: {
+          changed.system.mode = null;
+          break;
+        }
+      }
+    }
+
+    return super._preUpdate(changed, options, user);
   }
 
   override async _preCreate(
@@ -136,26 +199,6 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
   >;
   cost: foundry.data.fields.NumberField<number, number, true, false, true>;
   originSlug: SlugField<string, string, true, true, true>;
-  design: foundry.data.fields.SchemaField<
-    {
-      arena: foundry.data.fields.StringField<string, string, true, true, true>;
-      approach: foundry.data.fields.StringField<string, string, true, true, true>;
-      archetype: foundry.data.fields.StringField<string, string, true, true, true>;
-    },
-    {
-      arena: string | null;
-      approach: string | null;
-      archetype: string | null;
-    },
-    {
-      arena: string | null;
-      approach: string | null;
-      archetype: string | null;
-    },
-    true,
-    false,
-    true
-  >;
   nodes: foundry.data.fields.ArrayField<
     foundry.data.fields.SchemaField<
       NodeSchema,
@@ -168,6 +211,8 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
     false,
     true
   >;
+  variant: foundry.data.fields.StringField<"multi" | "tiered", "multi" | "tiered", true, true, true>;
+  mode: foundry.data.fields.StringField<"shared" | "individual" | "replace" | "coexist", "shared" | "individual" | "replace" | "coexist", true, true, true>;
 };
 
 interface NodeSchema extends foundry.data.fields.DataSchema {
