@@ -6,11 +6,6 @@
       "Swim 25"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Mobility"
-    },
     "description": "<p>If you previously lacked a Swim Movement Allowance, you gain a Swim Movement Allowance of 3. If you already possessed a Swim Movement Allowance, increase that Movement Allowance by 2.</p>",
     "actions": [
       {
@@ -31,31 +26,33 @@
     ],
     "slug": "swimming-lessons",
     "traits": [],
-    "node": {
-      "connected": [
-        "strong-swimmer",
-        "improved-swim-1",
-        "improved-burrow-1",
-        "sprint"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/water_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 71,
-      "y": 134
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "strong-swimmer",
+          "improved-swim-1",
+          "improved-burrow-1",
+          "sprint"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/water_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 71,
+        "y": 134
+      }
+    ]
   },
   "_id": "xr7XdAhvvd8T08IC",
   "img": "systems/ptr2e/img/svg/water_icon.svg",

@@ -6,11 +6,6 @@
       "None"
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Combat"
-    },
     "description": "<p>Your next non-[Contact] Attack gains [Crit X] or [Crit X+1] until it resolves.</p>",
     "actions": [
       {
@@ -32,30 +27,32 @@
     ],
     "slug": "down-the-sights",
     "traits": [],
-    "node": {
-      "connected": [
-        "dead-eye",
-        "dead-to-rights",
-        "run-down"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 159,
-      "y": 169
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "dead-eye",
+          "dead-to-rights",
+          "run-down"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 159,
+        "y": 169
+      }
+    ]
   },
   "_id": "eHdFNdcyllxflfNA",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",

@@ -7,11 +7,6 @@
       "Occult (Psychic) 60"
     ],
     "cost": 5,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "[Psychic]"
-    },
     "description": "<p>You may fast travel via Teleportation to any settlement that you have previously visited, along with anyone touching you at the moment of transmission.</p>",
     "actions": [
       {
@@ -33,30 +28,32 @@
     ],
     "slug": "long-range-psychoportation",
     "traits": [],
-    "node": {
-      "connected": [
-        "psychoportation",
-        "mindscramble",
-        "telekinetic-potential"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 106,
-      "y": 160
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "psychoportation",
+          "mindscramble",
+          "telekinetic-potential"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 106,
+        "y": 160
+      }
+    ]
   },
   "_id": "clK02KrlSlmoP2Ad",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",

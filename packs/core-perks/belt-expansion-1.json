@@ -6,11 +6,6 @@
       "None"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Gear"
-    },
     "description": "<p>Add an additional Belt slot.</p>",
     "actions": [
       {
@@ -31,30 +26,46 @@
     ],
     "slug": "belt-expansion-1",
     "traits": [],
-    "node": {
-      "connected": [
-        "trained-wielder",
-        "dress-to-impress",
-        "backpacker-1"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#004080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 184,
-      "y": 57
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "variant": "tiered",
+    "mode": "coexist",
+    "nodes": [
+      {
+        "connected": [
+          "trained-wielder",
+          "dress-to-impress",
+          "backpacker-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#004080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 184,
+        "y": 57
+      },
+      {
+        "tier": {
+          "rank": 2,
+          "uuid": "Compendium.ptr2e.core-perks.Item.sJ1B6djHXWc4F5Ez"
+        }
+      },
+      {
+        "tier": {
+          "rank": 3,
+          "uuid": "Compendium.ptr2e.core-perks.Item.wWAAPsxfOC8nGPGm"
+        }
+      }
+    ]
   },
   "_id": "zAKTLdBrA5eeGCsX",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",

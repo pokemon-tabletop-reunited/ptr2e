@@ -6,11 +6,6 @@
       "Acrobatics 45"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Athleticism"
-    },
     "description": "<p>When your Movement would take you into an obstacle that could reasonably be traversed within your Overland Movement Allowance, you may make a Hard (-20) Acrobatics check to temporarily grant yourself [Wallclimber] during that movement. If you have not returned to stable ground before your activation ends, you immediately fall.</p>",
     "actions": [
       {
@@ -31,30 +26,32 @@
     ],
     "slug": "parkour",
     "traits": [],
-    "node": {
-      "connected": [
-        "acrobat",
-        "shovel-hands",
-        "improved-flight-1"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#0000ff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 54,
-      "y": 140
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "acrobat",
+          "shovel-hands",
+          "improved-flight-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#0000ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 54,
+        "y": 140
+      }
+    ]
   },
   "_id": "95OUHWV4eEI4I3Fe",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

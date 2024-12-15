@@ -6,11 +6,6 @@
       "Handiwork 30"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Crafting"
-    },
     "description": "<p>You have trained as a Blacksmith and may craft [Smith] recipes you know.</p>",
     "actions": [
       {
@@ -31,33 +26,33 @@
     ],
     "slug": "blacksmith",
     "traits": [],
-    "node": {
-      "i": 85,
-      "j": 184,
-      "connected": [
-        "basic-ball-crafting",
-        "trained-wielder",
-        "pokeball-repairs",
-        "snare",
-        "improved-overland-1",
-        "secret-ninja-tools"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#400040",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
-        "tint": "#ffff80",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "basic-ball-crafting",
+          "trained-wielder",
+          "pokeball-repairs",
+          "snare",
+          "improved-overland-1",
+          "secret-ninja-tools"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#400040",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
+          "tint": "#ffff80",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal"
+      }
+    ]
   },
   "_id": "AZsIBU1VHzxX4NHx",
   "img": "systems/ptr2e/img/perk-icons/Crafting.svg",

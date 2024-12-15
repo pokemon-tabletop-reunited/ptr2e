@@ -6,11 +6,6 @@
       "None"
     ],
     "cost": 4,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Combat"
-    },
     "description": "<p>Trigger: You hit with a damaging, non-Critical, non-[Contact] Attack. The attack becomes a Critical Hit.</p>",
     "actions": [
       {
@@ -32,30 +27,32 @@
     ],
     "slug": "dead-eye",
     "traits": [],
-    "node": {
-      "connected": [
-        "down-the-sights",
-        "dead-to-rights",
-        "weak-spot"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#0000ff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 158,
-      "y": 160
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "down-the-sights",
+          "dead-to-rights",
+          "weak-spot"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#0000ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 158,
+        "y": 160
+      }
+    ]
   },
   "_id": "XwBEo0SPEQ5UtA0l",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",

@@ -6,11 +6,6 @@
       "Intimidate 40"
     ],
     "cost": 3,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Combat"
-    },
     "description": "<p>When the user hits a creature with a [Social] Action,they may spend 2 PP to cause to the target to be Flinched 3. For multiple targets, you must spend 2 PP to affect each target</p>",
     "actions": [
       {
@@ -36,28 +31,30 @@
     ],
     "slug": "hesitation",
     "traits": [],
-    "node": {
-      "connected": [
-        "condemn"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#8000ff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 127,
-      "y": 86
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "condemn"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#8000ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Socialite.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 127,
+        "y": 86
+      }
+    ]
   },
   "_id": "qslC7XqAQJZt0lxR",
   "img": "systems/ptr2e/img/perk-icons/Socialite.svg",

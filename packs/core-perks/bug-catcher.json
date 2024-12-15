@@ -7,11 +7,6 @@
       "Survival 20"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Capture"
-    },
     "description": "<p>You are skilled with the use of a hand-held net. You may choose to remove [Contact] from your Actions that inflict @Affliction[grapple].</p>",
     "actions": [
       {
@@ -32,28 +27,30 @@
     ],
     "slug": "bug-catcher",
     "traits": [],
-    "node": {
-      "connected": [
-        "snare"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#008000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
-        "tint": "#808000",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 23,
-      "y": 26
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "snare"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#008000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",
+          "tint": "#808000",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 23,
+        "y": 26
+      }
+    ]
   },
   "_id": "3sJf4zRNNWz0vn4n",
   "img": "systems/ptr2e/img/perk-icons/Capture%20Spec.svg",

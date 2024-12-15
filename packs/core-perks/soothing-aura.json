@@ -7,11 +7,6 @@
       "Aura Bonding"
     ],
     "cost": 3,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Aura"
-    },
     "description": "<p>You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked. Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.</p>",
     "actions": [
       {
@@ -33,29 +28,31 @@
     ],
     "slug": "soothing-aura",
     "traits": [],
-    "node": {
-      "connected": [
-        "aura-channeling",
-        "aura-empathy"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#008000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-        "tint": "#151515",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 86,
-      "y": 62
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "aura-channeling",
+          "aura-empathy"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#008000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+          "tint": "#151515",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 86,
+        "y": 62
+      }
+    ]
   },
   "_id": "6m9rPR0KNKTQ2B40",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",

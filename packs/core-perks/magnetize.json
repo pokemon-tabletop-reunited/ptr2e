@@ -6,11 +6,6 @@
       "[Electric]"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "[Electric]"
-    },
     "description": "<p>You may stick to magnetic surfaces and gain the Ability to move freely along them using your Overland Movement Allowance. This effect lasts until the beginning of your next Activation, at which point - provided you are conscious - you may take this action again before falling.</p>",
     "actions": [
       {
@@ -32,29 +27,31 @@
     ],
     "slug": "magnetize",
     "traits": [],
-    "node": {
-      "connected": [
-        "jammer",
-        "watt-burn"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/electric_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 94,
-      "y": 34
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "jammer",
+          "watt-burn"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/electric_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 94,
+        "y": 34
+      }
+    ]
   },
   "_id": "Vi8F4LxUvMqrhrHD",
   "img": "systems/ptr2e/img/svg/electric_icon.svg",

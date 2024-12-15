@@ -6,11 +6,6 @@
       "Electronics 25"
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Crafting"
-    },
     "description": "<p>As a Camp Action, you can craft PokeBalls. This Perk also grants you the Basic Ball recipe.</p>",
     "actions": [
       {
@@ -31,35 +26,35 @@
     ],
     "slug": "basic-ball-crafting",
     "traits": [],
-    "node": {
-      "i": 86,
-      "j": 178,
-      "connected": [
-        "blacksmith",
-        "pokeball-repairs",
-        "weighted-ball-systems",
-        "training-ball-specs",
-        "hunting-ball-specs",
-        "gemcutter",
-        "root-4",
-        "trubbish-class-sandwiches"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#400080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal"
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "blacksmith",
+          "pokeball-repairs",
+          "weighted-ball-systems",
+          "training-ball-specs",
+          "hunting-ball-specs",
+          "gemcutter",
+          "root-4",
+          "trubbish-class-sandwiches"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#400080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Crafting.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal"
+      }
+    ]
   },
   "_id": "nT6V9QuEPMqAy4Xj",
   "img": "systems/ptr2e/img/perk-icons/Crafting.svg",

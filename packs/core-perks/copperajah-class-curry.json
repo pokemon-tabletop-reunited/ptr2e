@@ -7,11 +7,6 @@
       "Milcery-Class Curry"
     ],
     "cost": 4,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Chef"
-    },
     "description": "<p>You are able to make Copperajah-class Curries as a Camp Action. One of these Curries restores 100% of the party's max HP. After making a Copperajah-class Curry, roll a d100. On a 1-20, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",
     "actions": [
       {
@@ -32,30 +27,32 @@
     ],
     "slug": "copperajah-class-curry",
     "traits": [],
-    "node": {
-      "connected": [
-        "wobbufet-class-curry",
-        "charizard-class-curry",
-        "curry-breath"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#808000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 212,
-      "y": 12
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "wobbufet-class-curry",
+          "charizard-class-curry",
+          "curry-breath"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#808000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Chef.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 212,
+        "y": 12
+      }
+    ]
   },
   "_id": "USBRb5Hn6trUXj8n",
   "img": "systems/ptr2e/img/perk-icons/Chef.svg",

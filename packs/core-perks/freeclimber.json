@@ -6,11 +6,6 @@
       "Climb 45"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Athleticism"
-    },
     "description": "<p>You are able to climb without suffering penalties due to lack of equipment.</p>",
     "actions": [
       {
@@ -31,31 +26,33 @@
     ],
     "slug": "freeclimber",
     "traits": [],
-    "node": {
-      "connected": [
-        "hobby-gardener",
-        "all-seasonal",
-        "cyclist",
-        "sprint"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#004000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 60,
-      "y": 138
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "hobby-gardener",
+          "all-seasonal",
+          "cyclist",
+          "sprint"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#004000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 60,
+        "y": 138
+      }
+    ]
   },
   "_id": "sAukVqClITEpjQE3",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

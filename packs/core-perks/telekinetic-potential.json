@@ -6,11 +6,6 @@
       "[Psychic]"
     ],
     "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "[Psychic]"
-    },
     "description": "<p>You gain the [Telekinetic 2] trait.</p>",
     "actions": [
       {
@@ -31,30 +26,32 @@
     ],
     "slug": "telekinetic-potential",
     "traits": [],
-    "node": {
-      "connected": [
-        "long-range-psychoportation",
-        "psychoportation",
-        "detect-minds"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 97,
-      "y": 169
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "long-range-psychoportation",
+          "psychoportation",
+          "detect-minds"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/psychic_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 97,
+        "y": 169
+      }
+    ]
   },
   "_id": "d152HgMF55iaUMiu",
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",

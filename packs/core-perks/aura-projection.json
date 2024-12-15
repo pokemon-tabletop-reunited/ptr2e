@@ -6,11 +6,6 @@
       "Aura Sense 25"
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "Aura"
-    },
     "description": "<p>You are able to outwardly transmit surface thoughts and feelings through Aura.</p>",
     "actions": [
       {
@@ -31,29 +26,31 @@
     ],
     "slug": "aura-projection",
     "traits": [],
-    "node": {
-      "connected": [
-        "aura-channeling",
-        "shift-consciousness-aura"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#c9b5de",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-        "tint": "#735393",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 88,
-      "y": 62
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "aura-channeling",
+          "shift-consciousness-aura"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#c9b5de",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+          "tint": "#735393",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 88,
+        "y": 62
+      }
+    ]
   },
   "_id": "FNa1vZTffzqYCN3p",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",

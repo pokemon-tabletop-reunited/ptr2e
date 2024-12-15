@@ -6,11 +6,6 @@
       "[Poison]"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "[Poison]"
-    },
     "description": "<p>Your Poison-Type Attacks gain +20% chance to inflict @Affliction[poison] 5.</p>",
     "actions": [
       {
@@ -31,28 +26,30 @@
     ],
     "slug": "potent-venom",
     "traits": [],
-    "node": {
-      "connected": [
-        "venomous"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/poison_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 157,
-      "y": 82
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "venomous"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/poison_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 157,
+        "y": 82
+      }
+    ]
   },
   "_id": "TaUuAKRcosusMkC9",
   "img": "systems/ptr2e/img/svg/poison_icon.svg",

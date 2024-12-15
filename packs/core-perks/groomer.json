@@ -6,11 +6,6 @@
       "Husbandry 30"
     ],
     "cost": 1,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Coordinator"
-    },
     "description": "<p>You are a capable Pokemon Groomer. Maybe even good enough to go professional. You may take the Groom camp action, awarding the party +10 to Perform, Conversation and Negotiation skill checks for the next 5 Daytime Spans.</p>",
     "actions": [
       {
@@ -31,29 +26,31 @@
     ],
     "slug": "groomer",
     "traits": [],
-    "node": {
-      "connected": [
-        "beauty",
-        "condemn"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#e0c2ff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Coordinator.svg",
-        "tint": "#7114bd",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 120,
-      "y": 89
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "beauty",
+          "condemn"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#e0c2ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Coordinator.svg",
+          "tint": "#7114bd",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 120,
+        "y": 89
+      }
+    ]
   },
   "_id": "p3pjnE4oCajU1TZQ",
   "img": "systems/ptr2e/img/perk-icons/Coordinator.svg",

@@ -6,11 +6,6 @@
       "Research 25"
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Knowledge"
-    },
     "description": "<p>You gain access to the Research Camp Action. You may not know something then and there in the moment, but with enough dedication and the right resources, you will find out eventually.</p>",
     "actions": [
       {
@@ -31,31 +26,33 @@
     ],
     "slug": "scholar",
     "traits": [],
-    "node": {
-      "connected": [
-        "hobby-gardener",
-        "palaeontologist",
-        "mental-alarm",
-        "pokemaniac"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#808080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 188,
-      "y": 179
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "hobby-gardener",
+          "palaeontologist",
+          "mental-alarm",
+          "pokemaniac"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#808080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 188,
+        "y": 179
+      }
+    ]
   },
   "_id": "KEvYjwxJ3bWLCknR",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",

@@ -7,11 +7,6 @@
       "Survival 50"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Outdoorsman"
-    },
     "description": "<p>The user takes 20% less damage while affected by a [Terrain], and 30% less damage while affected by a [Weather], stacking to 50% when both are present.</p>",
     "actions": [
       {
@@ -32,30 +27,32 @@
     ],
     "slug": "weathered",
     "traits": [],
-    "node": {
-      "connected": [
-        "hobby-gardener",
-        "mankey-see-mankey-do",
-        "powerlifter"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#804000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 62,
-      "y": 126
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "hobby-gardener",
+          "mankey-see-mankey-do",
+          "powerlifter"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#804000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 62,
+        "y": 126
+      }
+    ]
   },
   "_id": "Rd1XQLJhy0o6QtJa",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

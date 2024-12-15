@@ -6,11 +6,6 @@
       "[Fire]"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "[Fire]"
-    },
     "description": "<p>Your Fire-Type moves gain a 20% chance to @Affliction[burn], or increase that chance by +20%.</p>",
     "actions": [
       {
@@ -33,29 +28,31 @@
     "traits": [
       "partial-automation"
     ],
-    "node": {
-      "connected": [
-        "inner-warmth",
-        "firefly"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/fire_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 137,
-      "y": 30
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "inner-warmth",
+          "firefly"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/fire_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 137,
+        "y": 30
+      }
+    ]
   },
   "_id": "TCYfgKMsSUhsv9Tp",
   "img": "systems/ptr2e/img/svg/fire_icon.svg",

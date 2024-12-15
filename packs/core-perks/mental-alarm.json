@@ -6,11 +6,6 @@
       "Science (Parapsychology) 35"
     ],
     "cost": 1,
-    "design": {
-      "arena": "mental",
-      "approach": "resilience",
-      "archetype": "Knowledge"
-    },
     "description": "<p>You become aware when someone attempts to read your mind using Psychic powers. Does not affect Aura.</p>",
     "actions": [
       {
@@ -31,29 +26,31 @@
     ],
     "slug": "mental-alarm",
     "traits": [],
-    "node": {
-      "connected": [
-        "yesterday-and-today",
-        "scholar"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ff0000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 189,
-      "y": 172
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "yesterday-and-today",
+          "scholar"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ff0000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Knowledge.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 189,
+        "y": 172
+      }
+    ]
   },
   "_id": "RU5kwaRv9k4RXj3g",
   "img": "systems/ptr2e/img/perk-icons/Knowledge.svg",

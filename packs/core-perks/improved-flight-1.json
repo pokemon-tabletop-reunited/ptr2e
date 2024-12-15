@@ -7,11 +7,6 @@
       "Flying 20 + 10 x (# of Improved Flight Perks already obtained)"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Mobility"
-    },
     "description": "<p>Improve your Flight Movement Allowance by 2.</p>",
     "actions": [
       {
@@ -32,29 +27,33 @@
     ],
     "slug": "improved-flight-1",
     "traits": [],
-    "node": {
-      "connected": [
-        "parkour",
-        "improved-overland-1"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/flying_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 46,
-      "y": 144
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "variant": "multi",
+    "mode": "individual",
+    "nodes": [
+      {
+        "connected": [
+          "parkour",
+          "improved-overland-1"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/flying_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 46,
+        "y": 144
+      }
+    ]
   },
   "_id": "zMt840jnFxHWURAj",
   "img": "systems/ptr2e/img/svg/flying_icon.svg",

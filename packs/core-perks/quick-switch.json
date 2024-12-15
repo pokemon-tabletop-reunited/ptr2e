@@ -6,11 +6,6 @@
       "[Trainer]"
     ],
     "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "Juggler"
-    },
     "description": "<p>At the cost of 2PP and done across a Simple Action, the user Recalls a creature and selects that or another creature on their Team, freely using Send Out to bring that creature into Combat.</p>",
     "actions": [
       {
@@ -35,28 +30,30 @@
     ],
     "slug": "quick-switch",
     "traits": [],
-    "node": {
-      "connected": [
-        "emergency-retreat"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ff8000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
-        "tint": "#151515",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 26,
-      "y": 206
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "emergency-retreat"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ff8000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Juggler.svg",
+          "tint": "#151515",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 26,
+        "y": 206
+      }
+    ]
   },
   "_id": "kGNc0h7Xs3dmXRjt",
   "img": "systems/ptr2e/img/perk-icons/Juggler.svg",

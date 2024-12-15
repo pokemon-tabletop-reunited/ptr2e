@@ -9,11 +9,6 @@
       "DOES NOT HAVE: Trophy Bagger"
     ],
     "cost": 4,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Hunter"
-    },
     "description": "<p>The user’s Attacks have +1 ACC against creatures that are smaller than itself. The user adds Game Hunter to their Known Abilities List.</p>",
     "actions": [
       {
@@ -34,32 +29,34 @@
     ],
     "slug": "game-specialist",
     "traits": [],
-    "node": {
-      "connected": [
-        "high-noon",
-        "type-hunter",
-        "trophy-bagger",
-        "skirmish",
-        "run-down"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#804000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Hunting.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 146,
-      "y": 170
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "high-noon",
+          "type-hunter",
+          "trophy-bagger",
+          "skirmish",
+          "run-down"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#804000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Hunting.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 146,
+        "y": 170
+      }
+    ]
   },
   "_id": "kZRq2LwzKTWC56PO",
   "img": "systems/ptr2e/img/perk-icons/Hunting.svg",

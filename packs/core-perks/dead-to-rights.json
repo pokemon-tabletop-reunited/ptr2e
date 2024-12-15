@@ -6,11 +6,6 @@
       "None"
     ],
     "cost": 3,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Combat"
-    },
     "description": "<p>The next time you declare a non-[Contact] Attack against a foe without Cover, you gain +3 ACC and +2 CRIT Stages for 1 Activation.</p>",
     "actions": [
       {
@@ -32,31 +27,33 @@
     ],
     "slug": "dead-to-rights",
     "traits": [],
-    "node": {
-      "connected": [
-        "down-the-sights",
-        "dead-eye",
-        "quick-and-the-dead",
-        "run-down"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ff0080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
-        "tint": "#0f0f0f",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 152,
-      "y": 162
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "down-the-sights",
+          "dead-eye",
+          "quick-and-the-dead",
+          "run-down"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ff0080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Combat.svg",
+          "tint": "#0f0f0f",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 152,
+        "y": 162
+      }
+    ]
   },
   "_id": "7Uhx4SiJFnFrbhB6",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",

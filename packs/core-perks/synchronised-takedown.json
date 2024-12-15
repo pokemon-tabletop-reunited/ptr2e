@@ -9,11 +9,6 @@
       "Stealth 50"
     ],
     "cost": 4,
-    "design": {
-      "arena": "social",
-      "approach": "finesse",
-      "archetype": "Pack Leader"
-    },
     "description": "<p>If your Pack has yet to be discovered, you may declare a Synchronised Takedown. All Pack members may get one Attack before combat begins.</p>",
     "actions": [
       {
@@ -35,30 +30,32 @@
     ],
     "slug": "synchronised-takedown",
     "traits": [],
-    "node": {
-      "connected": [
-        "pack-alpha",
-        "packmarked",
-        "formation-attacks"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#111111",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 49,
-      "y": 179
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "pack-alpha",
+          "packmarked",
+          "formation-attacks"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#111111",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 49,
+        "y": 179
+      }
+    ]
   },
   "_id": "F3jNJOuVohlK9fft",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",

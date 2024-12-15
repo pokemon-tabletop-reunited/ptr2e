@@ -8,11 +8,6 @@
       "Science (Meteorology) 50 OR (Survival 70 AND Occult Spiritual 70 AND Level 60)"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Climatology"
-    },
     "description": "<p>Weathers set by you last for +2 additional Rounds, and their numerical effects are increased by 30% (minimum 1).</p>",
     "actions": [
       {
@@ -33,29 +28,31 @@
     ],
     "slug": "perpetual-storm",
     "traits": [],
-    "node": {
-      "connected": [
-        "climate-controller",
-        "climatologist"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#400080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 15,
-      "y": 153
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "climate-controller",
+          "climatologist"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#400080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Elamentalist.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 15,
+        "y": 153
+      }
+    ]
   },
   "_id": "LvxsCjJDbfgyQ7G5",
   "img": "systems/ptr2e/img/perk-icons/Elamentalist.svg",

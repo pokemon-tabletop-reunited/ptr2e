@@ -7,11 +7,6 @@
       "Survival 35"
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Outdoorsman"
-    },
     "description": "<p>Until the start of the next Round, the user is immune to effect damage and negative effects of active Terrains, Weathers, and Hazards. The user adds all [Terrain] Attacks to their Tutor List, learning 2 of them immediately upon taking this Perk.</p>",
     "actions": [
       {
@@ -35,30 +30,32 @@
     ],
     "slug": "hardy-trekker",
     "traits": [],
-    "node": {
-      "connected": [
-        "improved-overland-1",
-        "all-seasonal",
-        "mankey-see-mankey-do"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#808080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 53,
-      "y": 132
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "improved-overland-1",
+          "all-seasonal",
+          "mankey-see-mankey-do"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#808080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 53,
+        "y": 132
+      }
+    ]
   },
   "_id": "iOlwna5vtQnrFxtc",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

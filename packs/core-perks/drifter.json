@@ -6,11 +6,6 @@
       "[Flying] or [Telekinetic]"
     ],
     "cost": 2,
-    "design": {
-      "arena": "mental",
-      "approach": "finesse",
-      "archetype": "[Flying]"
-    },
     "description": "<p>You gain the [Hover] trait, and if you did not already possess a Flight movement, you gain a Flight Movement Allowance equal to that of your highest Primary Movement Score.</p>",
     "actions": [
       {
@@ -31,29 +26,31 @@
     ],
     "slug": "drifter",
     "traits": [],
-    "node": {
-      "connected": [
-        "dustoff",
-        "wingblades"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/flying_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 159,
-      "y": 31
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "dustoff",
+          "wingblades"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/flying_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 159,
+        "y": 31
+      }
+    ]
   },
   "_id": "KxU35Iv6OY04jW0M",
   "img": "systems/ptr2e/img/svg/flying_icon.svg",

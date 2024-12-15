@@ -7,11 +7,6 @@
       "Leadership 25"
     ],
     "cost": 2,
-    "design": {
-      "arena": "social",
-      "approach": "power",
-      "archetype": "Support"
-    },
     "description": "<p>You are practiced in psyching up your allies. You may use Moves which are normally Self-Targeting instead as having Range 10m and able to target yourself or allied creatures.</p>",
     "actions": [
       {
@@ -32,31 +27,33 @@
     ],
     "slug": "cheerleader",
     "traits": [],
-    "node": {
-      "connected": [
-        "mobilize",
-        "tactician",
-        "resolute-watcher",
-        "the-meaning-of-haste"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ff80ff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
-        "tint": "#141414",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 35,
-      "y": 49
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "mobilize",
+          "tactician",
+          "resolute-watcher",
+          "the-meaning-of-haste"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ff80ff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Orders_Training.svg",
+          "tint": "#141414",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 35,
+        "y": 49
+      }
+    ]
   },
   "_id": "mVWaaMJ4l5KVO4IP",
   "img": "systems/ptr2e/img/perk-icons/Orders_Training.svg",

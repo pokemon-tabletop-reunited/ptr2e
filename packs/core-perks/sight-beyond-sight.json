@@ -6,11 +6,6 @@
       "Aura Sense 40"
     ],
     "cost": 3,
-    "design": {
-      "arena": "mental",
-      "approach": "power",
-      "archetype": "Aura"
-    },
     "description": "<p>You are able to tap into your Aura powers to see without the use of your eyes. You gain the [Blindsense 10] trait.</p>",
     "actions": [
       {
@@ -31,25 +26,6 @@
     ],
     "slug": "sight-beyond-sight",
     "traits": [],
-    "node": {
-      "connected": [
-        "aura-haze",
-        "aura-dampening"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#ffffff",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
-        "tint": "#8000ff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 93,
-      "y": 68
-    },
     "_migration": {
       "version": 0.108,
       "previous": {
@@ -57,7 +33,28 @@
         "foundry": "12.331",
         "system": "0.10.0-alpha.3.2.0"
       }
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "aura-haze",
+          "aura-dampening"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#ffffff",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Aura.svg",
+          "tint": "#8000ff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 93,
+        "y": 68
+      }
+    ]
   },
   "_id": "pqVd47faROt2qSBR",
   "img": "systems/ptr2e/img/perk-icons/Aura.svg",

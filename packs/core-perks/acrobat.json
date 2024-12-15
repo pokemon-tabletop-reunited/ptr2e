@@ -6,11 +6,6 @@
       "Acrobatics 30"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Athleticism"
-    },
     "description": "<p>You gain a +10 to Acrobatics checks when benefitting from a running start.</p>",
     "actions": [
       {
@@ -31,29 +26,31 @@
     ],
     "slug": "acrobat",
     "traits": [],
-    "node": {
-      "connected": [
-        "hobby-gardener",
-        "parkour"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#004080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 51,
-      "y": 135
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "hobby-gardener",
+          "parkour"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#004080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 51,
+        "y": 135
+      }
+    ]
   },
   "_id": "MDkJ0KhnAvqw0v3J",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

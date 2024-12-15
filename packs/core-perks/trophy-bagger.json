@@ -9,11 +9,6 @@
       "DOES NOT HAVE: Game Specialist"
     ],
     "cost": 4,
-    "design": {
-      "arena": "physical",
-      "approach": "finesse",
-      "archetype": "Hunter"
-    },
     "description": "<p>The user’s bonuses from Great Hunter increase to +20 when the target is Large or larger.</p><p>The user's Attacks deal more damage the larger the target is compared to the user.</p><blockquote> PowerPercentIncrease = max(0, 7.5 * (targetCatMod-userCatMod))</blockquote>",
     "actions": [
       {
@@ -34,32 +29,34 @@
     ],
     "slug": "trophy-bagger",
     "traits": [],
-    "node": {
-      "connected": [
-        "hobby-gardener",
-        "great-hunter",
-        "type-hunter",
-        "game-specialist",
-        "high-noon"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#804000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Hunting.svg",
-        "tint": "#ffffff",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 142,
-      "y": 168
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "hobby-gardener",
+          "great-hunter",
+          "type-hunter",
+          "game-specialist",
+          "high-noon"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#804000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Hunting.svg",
+          "tint": "#ffffff",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 142,
+        "y": 168
+      }
+    ]
   },
   "_id": "w7jJHaMJtSIg6FrQ",
   "img": "systems/ptr2e/img/perk-icons/Hunting.svg",

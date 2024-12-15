@@ -6,11 +6,6 @@
       "Lack a Wielding slot."
     ],
     "cost": 2,
-    "design": {
-      "arena": "physical",
-      "approach": "resilience",
-      "archetype": "Gear"
-    },
     "description": "<p>Gain a Wielded Item Slot.</p>",
     "actions": [
       {
@@ -31,30 +26,32 @@
     ],
     "slug": "trained-wielder",
     "traits": [],
-    "node": {
-      "connected": [
-        "belt-expansion-1",
-        "dual-wielder",
-        "dress-to-impress"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#808080",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
-        "tint": "#080808",
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 180,
-      "y": 61
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "belt-expansion-1",
+          "dual-wielder",
+          "dress-to-impress"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#808080",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Tactician.svg",
+          "tint": "#080808",
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 180,
+        "y": 61
+      }
+    ]
   },
   "_id": "Noilrz4vhlRIcrO3",
   "img": "systems/ptr2e/img/perk-icons/Tactician.svg",

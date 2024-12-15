@@ -7,11 +7,6 @@
       "Climb 20 + 10 x (# of Improved Burrow Perks already obtained)"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "Mobility"
-    },
     "description": "<p>Improve your Burrow Movement Allowance by 2.</p>",
     "actions": [
       {
@@ -32,31 +27,35 @@
     ],
     "slug": "improved-burrow-1",
     "traits": [],
-    "node": {
-      "connected": [
-        "swimming-lessons",
-        "improved-teleportation-1",
-        "sprint",
-        "powerlifter"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": "#804000",
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 74,
-      "y": 143
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "variant": "multi",
+    "mode": "individual",
+    "nodes": [
+      {
+        "connected": [
+          "swimming-lessons",
+          "improved-teleportation-1",
+          "sprint",
+          "powerlifter"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": "#804000",
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/perk-icons/Exploration.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 74,
+        "y": 143
+      }
+    ]
   },
   "_id": "QmK7pugsgkpdnaHA",
   "img": "systems/ptr2e/img/perk-icons/Exploration.svg",

@@ -6,11 +6,6 @@
       "[Fire]"
     ],
     "cost": 1,
-    "design": {
-      "arena": "physical",
-      "approach": "power",
-      "archetype": "[Fire]"
-    },
     "description": "<p>You gain the [Heater] trait.</p>",
     "actions": [
       {
@@ -31,29 +26,31 @@
     ],
     "slug": "inner-warmth",
     "traits": [],
-    "node": {
-      "connected": [
-        "intense-heat",
-        "midnight-oil"
-      ],
-      "config": {
-        "alpha": null,
-        "backgroundColor": null,
-        "borderColor": null,
-        "borderWidth": null,
-        "texture": "systems/ptr2e/img/svg/fire_icon.svg",
-        "tint": null,
-        "scale": null
-      },
-      "hidden": false,
-      "type": "normal",
-      "x": 130,
-      "y": 23
-    },
     "_migration": {
       "version": null,
       "previous": null
-    }
+    },
+    "nodes": [
+      {
+        "connected": [
+          "intense-heat",
+          "midnight-oil"
+        ],
+        "config": {
+          "alpha": null,
+          "backgroundColor": null,
+          "borderColor": null,
+          "borderWidth": null,
+          "texture": "systems/ptr2e/img/svg/fire_icon.svg",
+          "tint": null,
+          "scale": null
+        },
+        "hidden": false,
+        "type": "normal",
+        "x": 130,
+        "y": 23
+      }
+    ]
   },
   "_id": "vgrtXLOiip6DrtUb",
   "img": "systems/ptr2e/img/svg/fire_icon.svg",
