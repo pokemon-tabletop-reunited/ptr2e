@@ -97,6 +97,7 @@ class ActorPTR2e<
       this._perks ??
       (this._perks = (this.itemTypes.perk as PerkPTR2e[]).reduce((acc, perk) => {
         acc.set(perk.system.originSlug ?? perk.slug, perk);
+        if(perk.flags?.ptr2e?.tierSlug) acc.set(perk.flags.ptr2e.tierSlug+"", perk);
         return acc;
       }, new Map<string, PerkPTR2e>()))
     );

@@ -73,7 +73,15 @@ export default abstract class PerkSystem extends PerkExtension {
             { required: false }
           ),
           hidden: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.node.hidden.label", hint: "PTR2E.FIELDS.node.hidden.hint" }),
-          type: new fields.StringField({ required: true, choices: ["normal", "root", "entry"].reduce<Record<string, string>>((acc, type) => ({ ...acc, [type]: type }), {}), initial: "normal", label: "PTR2E.FIELDS.node.type.label", hint: "PTR2E.FIELDS.node.type.hint" })
+          type: new fields.StringField({ required: true, choices: ["normal", "root", "entry"].reduce<Record<string, string>>((acc, type) => ({ ...acc, [type]: type }), {}), initial: "normal", label: "PTR2E.FIELDS.node.type.label", hint: "PTR2E.FIELDS.node.type.hint" }),
+          tier: new fields.SchemaField({
+            rank: new fields.NumberField({ required: true, initial: 1, min: 1, label: "PTR2E.FIELDS.node.tier.rank.label", hint: "PTR2E.FIELDS.node.tier.rank.hint" }),
+            uuid: new fields.DocumentUUIDField({ required: true, label: "PTR2E.FIELDS.node.tier.uuid.label", hint: "PTR2E.FIELDS.node.tier.uuid.hint", type: "Item" }),
+          }, {
+            required: true,
+            nullable: true,
+            initial: null,
+          })
         }),
         {
           label: "PTR2E.FIELDS.nodes.label",
@@ -125,23 +133,30 @@ export default abstract class PerkSystem extends PerkExtension {
   }
 
   override _preUpdate(
-    changed: DeepPartial<this["parent"]["_source"]>, 
-    options: DocumentUpdateContext<this["parent"]["parent"]>, 
+    changed: DeepPartial<this["parent"]["_source"]>,
+    options: DocumentUpdateContext<this["parent"]["parent"]>,
     user: User
-  ){
-    if(changed.system?.variant !== undefined) {
-      switch(changed.system.variant) {
+  ) {
+    if (changed.system?.variant !== undefined) {
+      switch (changed.system.variant) {
         case "multi": {
-          if(!["shared","individual"].includes(changed.system.mode as string)) changed.system.mode = "shared";
+          if (!["shared", "individual"].includes(changed.system.mode as string)) changed.system.mode = "shared";
           break;
         }
         case "tiered": {
-          if(!["replace","coexist"].includes(changed.system.mode as string)) changed.system.mode = "replace";
+          if (!["replace", "coexist"].includes(changed.system.mode as string)) changed.system.mode = "replace";
           break;
         }
         default: {
           changed.system.mode = null;
           break;
+        }
+      }
+      if (changed.system.variant !== "tiered") {
+        if (changed.system.nodes?.length) {
+          for (const node of changed.system.nodes as unknown as SourceFromSchema<NodeSchema>[]) {
+            node.tier = null;
+          }
         }
       }
     }
@@ -234,6 +249,14 @@ interface NodeSchema extends foundry.data.fields.DataSchema {
     false,
     true
   >;
+  tier: foundry.data.fields.SchemaField<
+    NodeTierSchema,
+    SourceFromSchema<NodeTierSchema>,
+    ModelPropsFromSchema<NodeTierSchema>,
+    true,
+    true,
+    true
+  >
 }
 
 interface NodeConfigSchema extends foundry.data.fields.DataSchema {
@@ -256,6 +279,11 @@ interface NodeConfigSchema extends foundry.data.fields.DataSchema {
   >;
   tint: foundry.data.fields.ColorField<false, false, false>;
   scale: foundry.data.fields.NumberField<number, number, false, false, false>;
+}
+
+interface NodeTierSchema extends foundry.data.fields.DataSchema {
+  rank: foundry.data.fields.NumberField<number, number, true, false, true>;
+  uuid: foundry.data.fields.DocumentUUIDField<string, true, false, true>;
 }
 
 type PerkSystemSchemaExtension = SlugSchema & ActionsSchema & DescriptionSchema & MigrationSchema & TraitsSchema;

@@ -40,33 +40,54 @@
       {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true
       localize=true}}
     </fieldset>
-    {{#if debug}}
-    <fieldset>
-      <legend>
-        Node Configuration
-      </legend>
-      {{#each source.system.nodes as |node|}}
-      <div class="entry">
-        {{formField ../fields.nodes.element.fields.x value=node.x localize=true disabled=false name=(concat "system.nodes." @index ".x")}}
-        {{formField ../fields.nodes.element.fields.y value=node.y localize=true disabled=false name=(concat "system.nodes." @index ".y")}}
-        {{formField ../fields.nodes.element.fields.hidden value=node.hidden localize=true name=(concat "system.nodes." @index ".hidden")}}
-        {{formField ../fields.nodes.element.fields.type value=node.type localize=true name=(concat "system.nodes." @index ".type")}}
-        {{formField ../fields.nodes.element.fields.connected value=node.connected localize=true name=(concat "system.nodes." @index ".connected")}}
-        <fieldset>
-          <legend>
-            Display Configuration
-          </legend>
-          {{formField ../fields.nodes.element.fields.config.fields.alpha value=node.config.alpha localize=true name=(concat "system.nodes." @index ".config.alpha")}}
-          {{formField ../fields.nodes.element.fields.config.fields.backgroundColor value=node.config.backgroundColor localize=true name=(concat "system.nodes." @index ".config.backgroundColor")}}
-          {{formField ../fields.nodes.element.fields.config.fields.borderColor value=node.config.borderColor localize=true name=(concat "system.nodes." @index ".config.borderColor")}}
-          {{formField ../fields.nodes.element.fields.config.fields.borderWidth value=node.config.borderWidth localize=true name=(concat "system.nodes." @index ".config.borderWidth")}}
-          {{formField ../fields.nodes.element.fields.config.fields.texture value=node.config.texture localize=true name=(concat "system.nodes." @index ".config.texture")}}
-          {{formField ../fields.nodes.element.fields.config.fields.tint value=node.config.tint localize=true name=(concat "system.nodes." @index ".config.tint")}}
-          {{formField ../fields.nodes.element.fields.config.fields.scale value=node.config.scale localize=true name=(concat "system.nodes." @index ".config.scale")}}
-        </fieldset>
-      </div>
-      {{/each}}
-    </fieldset>
-    {{/if}}
+    {{#each source.system.nodes as |node|}}
+      <fieldset>
+        <legend>
+          Node #{{@index}} Configuration
+        </legend>
+        <div class="entry">
+          {{formField ../fields.nodes.element.fields.x value=node.x localize=true disabled=false name=(concat "system.nodes." @index ".x")}}
+          {{formField ../fields.nodes.element.fields.y value=node.y localize=true disabled=false name=(concat "system.nodes." @index ".y")}}
+          {{formField ../fields.nodes.element.fields.hidden value=node.hidden localize=true name=(concat "system.nodes." @index ".hidden")}}
+          {{formField ../fields.nodes.element.fields.type value=node.type localize=true name=(concat "system.nodes." @index ".type")}}
+          {{formField ../fields.nodes.element.fields.connected value=node.connected localize=true name=(concat "system.nodes." @index ".connected")}}
+          {{#if (eq ../source.system.variant "tiered")}}
+            <fieldset>
+              <legend>
+                Tier
+              </legend>
+              {{formField ../fields.nodes.element.fields.tier.fields.rank value=node.tier.rank localize=true name=(concat "system.nodes." @index ".tier.rank")}}
+              {{formField ../fields.nodes.element.fields.tier.fields.uuid value=node.tier.uuid localize=true name=(concat "system.nodes." @index ".tier.uuid")}}
+            </fieldset>
+          {{/if}}
+          <fieldset>
+            <legend>
+              Display Configuration
+            </legend>
+            {{formField ../fields.nodes.element.fields.config.fields.alpha value=node.config.alpha localize=true name=(concat "system.nodes." @index ".config.alpha")}}
+            {{formField ../fields.nodes.element.fields.config.fields.backgroundColor value=node.config.backgroundColor localize=true name=(concat "system.nodes." @index ".config.backgroundColor")}}
+            {{formField ../fields.nodes.element.fields.config.fields.borderColor value=node.config.borderColor localize=true name=(concat "system.nodes." @index ".config.borderColor")}}
+            {{formField ../fields.nodes.element.fields.config.fields.borderWidth value=node.config.borderWidth localize=true name=(concat "system.nodes." @index ".config.borderWidth")}}
+            {{formField ../fields.nodes.element.fields.config.fields.texture value=node.config.texture localize=true name=(concat "system.nodes." @index ".config.texture")}}
+            {{formField ../fields.nodes.element.fields.config.fields.tint value=node.config.tint localize=true name=(concat "system.nodes." @index ".config.tint")}}
+            {{formField ../fields.nodes.element.fields.config.fields.scale value=node.config.scale localize=true name=(concat "system.nodes." @index ".config.scale")}}
+          </fieldset>
+        </div>
+        <footer class="d-flex flex-row justify-content-center align-items-center">
+          {{#if (and @last ../source.system.variant)}}
+            <button type="button" class="fb-35" data-action="add-node">
+              <i class="fas fa-plus"></i>
+              Add Node
+            </button>
+          {{/if}}
+          {{#unless (and @first @last)}}
+            <button type="button" class="fb-35" data-action="delete-node" data-index="{{@index}}">
+              <i class="fas fa-trash-alt"></i>
+              Delete Node
+            </button>
+          {{/unless}}
+        </footer>
+      </fieldset>
+    {{/each}}
   </div>
 </section>

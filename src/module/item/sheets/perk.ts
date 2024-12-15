@@ -6,6 +6,27 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
     super.DEFAULT_OPTIONS,
     {
       classes: ["ability-sheet"],
+      actions: {
+        "add-node": async function (this: PerkSheet, event: MouseEvent) {
+          event.preventDefault();
+          const nodes = this.document.system.toObject().nodes as Required<DeepPartial<PerkPTR2e['system']['nodes']>>
+          nodes.push(this.document.system.variant === "tiered" ? {
+            tier: {
+              rank: nodes.length + 1,
+              uuid: ""
+            }
+          } : {});
+          await this.document.update({ "system.nodes": nodes });
+        },
+        "delete-node": async function (this: PerkSheet, event: MouseEvent) {
+          event.preventDefault();
+          const index = Number((event.target as HTMLElement)?.dataset?.index);
+          if (isNaN(index)) return;
+          const nodes = this.document.system.toObject().nodes;
+          nodes.splice(index, 1);
+          await this.document.update({ "system.nodes": nodes });
+        }
+      }
     },
     { inplace: false }
   );

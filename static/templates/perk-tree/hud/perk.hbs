@@ -22,15 +22,16 @@
                 {{/each}}
             </figure>
             <footer>
-                {{#unless (is state 3)}}
-                  <button class="purchase {{#unless purchasable}}unavailable{{/unless}}" data-action="purchase" {{#unless purchasable}}disabled{{/unless}}>
-                      <i class="fas fa-sack-dollar"></i> Purchase Perk ({{document.system.cost}} AP)
-                  </button>
-                {{else}}
-                  <button class="refund" data-action="refund">
-                      <i class="fas fa-sack-dollar"></i> Refund Perk ({{document.system.cost}} AP)
-                  </button>
-                {{/unless}}
+              {{#if state.available}}
+                <button class="purchase {{#unless state.purchasable}}unavailable{{/unless}}" data-action="purchase" {{#unless state.purchasable}}disabled{{/unless}}>
+                  <i class="fas fa-sack-dollar"></i> {{{cost.purchase}}}
+                </button>
+              {{/if}}
+              {{#if state.refundable}}
+                <button class="refund" data-action="refund">
+                  <i class="fas fa-sack-dollar"></i> {{{cost.refund}}}
+                </button>
+              {{/if}}
             </footer>
         {{/if}}
     {{/with}}

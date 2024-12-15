@@ -102,7 +102,11 @@
       }
     },
     "PerkWebApp": {
-      "Title": "Perk Web"
+      "Title": "Perk Web",
+      "PurchaseTier": "Purchase Tier",
+      "PurchasePerk": "Purchase Perk",
+      "RefundTier": "Refund Tier",
+      "RefundPerk": "Refund Perk"
     },
     "TutorList": "Tutor List",
     "OpenTutorList": "Open Tutor List",
@@ -1494,6 +1498,16 @@
         "type": {
           "label": "Type",
           "hint": "The type of node"
+        },
+        "tier": {
+          "rank": {
+            "label": "Rank",
+            "hint": "Which tier is this?"
+          },
+          "uuid": {
+            "label": "UUID",
+            "hint": "The UUID of the Perk Item that represents this Tier"
+          }
         },
         "config": {
           "alpha": {

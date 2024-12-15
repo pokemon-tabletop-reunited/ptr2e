@@ -1,4 +1,4 @@
-import { PerkPTR2e } from "@item";
+import { ItemPTR2e, PerkPTR2e } from "@item";
 import PerkGraph from "./perk-graph.ts";
 import { ActorPTR2e } from "@actor";
 
@@ -24,6 +24,7 @@ export interface PerkNode {
   state: PerkPurchaseState;
   web: "global" | string;
   slug: string;
+  tierInfo?: { tier: number, perk: PerkPTR2e, maxTier: number, maxTierPurchased?: boolean, lastTier: PerkPTR2e, previousTier: PerkPTR2e | null };
 }
 
 class PerkStore extends Collection<PerkNode> {
@@ -127,13 +128,52 @@ class PerkStore extends Collection<PerkNode> {
       if (node.node && node.node.x !== null && node.node.y !== null) {
         const isRoot = node.node.type === "root";
         const actorPerk = actor?.perks.get(
-          node.perk.system.variant === "multi" 
+          node.perk.system.variant === "multi"
             ? node.perk.system.mode === "shared"
               ? node.perk.slug
               : node.slug
             : node.slug
         );
         const state = actorPerk ? PerkState.purchased : PerkState.unavailable;
+        if (actorPerk && node.perk.system.variant === "tiered") {
+          node.tierInfo = (() => {
+            const tiers = node.perk.system.nodes.flatMap(node => {
+              if (!node.tier) return [];
+              const perk = fromUuidSync<ItemPTR2e>(node.tier.uuid);
+              if (!(perk instanceof ItemPTR2e && perk.type === "perk")) return [];
+              return { perk, tier: node.tier.rank }
+            }) as { perk: PerkPTR2e, tier: number }[];
+            tiers.unshift({perk: node.perk, tier: 1});
+
+            const maxTier = tiers.reduce((acc, { tier }) => Math.max(acc, tier), 0);
+            const {tier: lastPurchasedTier, item: lastPurchasedPerk} = tiers.reduce((acc, { perk, tier }) => {
+              const item = actor!.perks.get(perk.slug);
+              if(!item) return acc;
+              return { tier: Math.max(acc.tier, tier), item };
+            }, {tier: 1, item: actorPerk, previous: null} as {tier: number, item: PerkPTR2e});
+            const previousTier = tiers.find(({ tier }) => tier === lastPurchasedTier - 1)?.perk ?? null;
+
+            if (lastPurchasedTier && maxTier === lastPurchasedTier) {
+              const tier = tiers.find(({ tier }) => tier === lastPurchasedTier)!;
+              return {
+                tier: tier.tier,
+                perk: tier.perk,
+                maxTier,
+                maxTierPurchased: true,
+                lastTier: lastPurchasedPerk,
+                previousTier
+              }
+            }
+            const nextTier = tiers.find(({ tier }) => tier === lastPurchasedTier + 1);
+            return nextTier ? {
+              tier: nextTier.tier,
+              perk: nextTier.perk,
+              maxTier,
+              lastTier: lastPurchasedPerk,
+              previousTier
+            } : { tier: 1, perk: node.perk, maxTier, lastTier: lastPurchasedPerk, previousTier };
+          })();
+        }
 
         if (isRoot) {
           if (actorPerk) {
@@ -192,17 +232,27 @@ class PerkStore extends Collection<PerkNode> {
     visited?: Set<string>,
     apAvailable: number
   }) {
+    // Look through perks that are purchased and update their connections
     for (const node of purchasedPerks) {
       if (visited.has(node.slug)) continue;
       visited.add(node.slug);
 
       for (const connected of node.connected) {
+        // Skip if the connected node has already been visited, and thus handled
         if (visited.has(connected)) continue;
+
         const connectedNode = this.nodeFromSlug(connected);
         if (connectedNode) {
+          // If the connected node is already purchased, also update its connections
           if (connectedNode.state >= PerkState.purchased) {
             this.updateConnections({ purchasedPerks: [connectedNode], visited, apAvailable });
+
+            // If the connected node is a tiered perk, handle the tier info
+            if (connectedNode.tierInfo && !connectedNode.tierInfo.maxTierPurchased) {
+              connectedNode.state = apAvailable >= connectedNode.tierInfo.perk.system.cost ? PerkState.available : PerkState.connected;
+            }
           }
+          // If the connected node is not purchased, update its state as appropriate
           else if (connectedNode.state < PerkState.connected) {
             if (connectedNode.perk.system.nodes[0].type === "root") {
               connectedNode.perk.system.cost = 1;
@@ -221,7 +271,7 @@ class PerkStore extends Collection<PerkNode> {
   }
 
   getUpdatedNode(node: PerkNode | null): PerkNode | null {
-    if(!node) return null;
+    if (!node) return null;
 
     return this.nodeFromSlug(node.slug) ?? null;
   }
