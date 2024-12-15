@@ -101,7 +101,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             }
             else {
               if (current) {
-                if(current.effects.size) await current.deleteEmbeddedDocuments("ActiveEffect", current.effects.map(effect => effect.id));
+                if (current.effects.size) await current.deleteEmbeddedDocuments("ActiveEffect", current.effects.map(effect => effect.id));
                 await current.update({
                   name: newPerk.name,
                   img: newPerk.img,
@@ -177,7 +177,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               return void PerkWebApp.refresh.call(this);
             }
             else {
-              if(current.effects.size) await current.deleteEmbeddedDocuments("ActiveEffect", current.effects.map(effect => effect.id));
+              if (current.effects.size) await current.deleteEmbeddedDocuments("ActiveEffect", current.effects.map(effect => effect.id));
               await current.update({
                 name: newPerk.name,
                 img: newPerk.img,
@@ -331,7 +331,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           if (node.node.type === "entry") classes.push("entry");
 
           if (node.tierInfo) {
-            classes.push("tiered");
+            if (!node.tierInfo.maxTierPurchased) classes.push("tiered");
             classes.push(`tier-${node.tierInfo.tier}`);
 
             const tierNode = node.perk.system.nodes.find(n => {
