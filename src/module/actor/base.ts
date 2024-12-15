@@ -81,14 +81,14 @@ class ActorPTR2e<
   get originalRoot(): PerkPTR2e | null {
     return (
       (this.itemTypes.perk as PerkPTR2e[]).find(
-        (p) => p.system.cost === 0 && p.system.node.type === "root"
+        (p) => p.system.cost === 0 && p.system.nodes[0]?.type === "root"
       ) ?? null
     );
   }
 
   get unconnectedRoots(): PerkPTR2e[] {
     return (this.itemTypes.perk as PerkPTR2e[]).filter(
-      (p) => p.system.cost === 5 && p.system.node.type === "root"
+      (p) => p.system.cost === 5 && p.system.nodes[0]?.type === "root"
     );
   }
 
@@ -653,11 +653,11 @@ class ActorPTR2e<
    * Toggle the perk tree for this actor
    * @param {boolean} active
    */
-  async togglePerkTree(active: boolean) {
-    if (game.ptr.web.actor === this && active !== true) return game.ptr.web.close();
-    else if (active !== false) return game.ptr.web.open(this);
-    return;
-  }
+  // async togglePerkTree(active: boolean) {
+  //   if (game.ptr.web.actor === this && active !== true) return game.ptr.web.close();
+  //   else if (active !== false) return game.ptr.web.open(this);
+  //   return;
+  // }
 
   getRollOptions(domains: string[] = []): string[] {
     const withAll = Array.from(new Set(["all", ...domains]));
@@ -1831,7 +1831,7 @@ class ActorPTR2e<
   ): void {
     super._onUpdate(changed, options, userId);
 
-    if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
+    // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
   }
 
   protected override async _onCreateDescendantDocuments(
@@ -1844,7 +1844,7 @@ class ActorPTR2e<
     userId: string
   ) {
     super._onCreateDescendantDocuments(parent, collection, documents, results, options, userId);
-    if (game.ptr.web.actor === this) await game.ptr.web.refresh({ nodeRefresh: true });
+    // if (game.ptr.web.actor === this) await game.ptr.web.refresh({ nodeRefresh: true });
     if (!this.unconnectedRoots.length) return;
 
     function isEffect(
@@ -1859,22 +1859,22 @@ class ActorPTR2e<
     const perks = documents.filter((d) => d.type === "perk") as PerkPTR2e[];
     if (!perks.length) return;
 
-    const updates = [];
-    const originalRoot = this.originalRoot;
-    if (!originalRoot) throw new Error("No original root found.");
-    const originalRootNode = game.ptr.web.collection.getName(originalRoot.slug, {
-      strict: true,
-    });
+    // const updates = [];
+    // const originalRoot = this.originalRoot;
+    // if (!originalRoot) throw new Error("No original root found.");
+    // // const originalRootNode = game.ptr.web.collection.getName(originalRoot.slug, {
+    // //   strict: true,
+    // // });
 
-    for (const root of this.unconnectedRoots) {
-      const rootNode = game.ptr.web.collection.getName(root.slug, { strict: true });
+    // // for (const root of this.unconnectedRoots) {
+    // //   // const rootNode = game.ptr.web.collection.getName(root.slug, { strict: true });
 
-      const path = game.ptr.web.collection.graph.getPurchasedPath(originalRootNode, rootNode);
-      if (path) {
-        updates.push({ _id: root.id, "system.cost": 1 });
-      }
-    }
-    if (updates.length) await this.updateEmbeddedDocuments("Item", updates);
+    // //   // const path = game.ptr.web.collection.graph.getPurchasedPath(originalRootNode, rootNode);
+    // //   if (path) {
+    // //     updates.push({ _id: root.id, "system.cost": 1 });
+    // //   }
+    // // }
+    // if (updates.length) await this.updateEmbeddedDocuments("Item", updates);
   }
 
   protected override _onDeleteDescendantDocuments(
@@ -1888,7 +1888,7 @@ class ActorPTR2e<
     userId: string
   ): void {
     super._onDeleteDescendantDocuments(parent, collection, documents, ids, options, userId);
-    if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
+    // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
   }
 
   protected override _onUpdateDescendantDocuments(
@@ -1901,7 +1901,7 @@ class ActorPTR2e<
     userId: string
   ): void {
     super._onUpdateDescendantDocuments(parent, collection, documents, changes, options, userId);
-    if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
+    // if (game.ptr.web.actor === this) game.ptr.web.refresh({ nodeRefresh: true });
   }
 
   override async toggleStatusEffect(

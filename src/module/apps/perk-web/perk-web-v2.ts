@@ -181,11 +181,11 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           const classes: string[] = [];
           if(perk === this.connectionPerk) classes.push("selected");
           if(!this.editMode) classes.push(classFromState);
-          if(perk.system.node.type === "root") classes.push("root");
-          if(perk.system.node.type === "entry") classes.push("entry");
+          if(perk.system.nodes[0]?.type === "root") classes.push("root");
+          if(perk.system.nodes[0]?.type === "entry") classes.push("entry");
           grid.push({ 
             name: perk.name, 
-            img: perk.system.node.config?.texture ?? perk.img, 
+            img: perk.system.nodes[0].config?.texture ?? perk.img, 
             x, 
             y, 
             classes,
@@ -244,7 +244,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             if (!node || node.perk === this.connectionPerk) return;
 
             const getUpdatedConnections = (a: PerkPTR2e, b: PerkPTR2e, operation?: "add" | "remove") => {
-              const connected = a.system.toObject().node.connected;
+              const connected = a.system.toObject().nodes[0]?.connected ?? []
               const index = connected.indexOf(b.slug);
               if (index === -1) {
                 if (operation === "remove") return { connected, operation };
@@ -435,7 +435,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       if (!node) continue;
 
       const perkRect = el.getBoundingClientRect();
-      const connected = node.perk.system.node.connected;
+      const connected = node.perk.system.nodes[0]?.connected ?? [];
 
       for (const connection of connected) {
         const connectedNode = this._perkStore.nodeFromSlug(connection);
@@ -601,6 +601,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     }
 
     this._zoomAmount = zoom;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore - Zoom is a valid property
     grid!.style.zoom = `${zoom}`;
     this.renderSVG()
     zoomElement.scrollTo(newCenter);
@@ -621,7 +623,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     if (!(primaryItem instanceof ItemPTR2e && primaryItem.type === "perk")) return;
 
     if (this.isSortableDragging && !itemData?.length) {
-      const currentlyOnWeb = this._perkStore.get(`${primaryItem.system.node.x}-${primaryItem.system.node.y}`);
+      const currentlyOnWeb = this._perkStore.get(`${primaryItem.system.nodes[0]?.x}-${primaryItem.system.nodes[0]?.y}`);
       if(currentlyOnWeb?.perk === primaryItem) return;
     }
 
@@ -646,9 +648,9 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     const node = this._perkStore.get(`${i}-${j}`) ?? this._perkStore.get(`${j}-${i}`);
     if (node) return void ui.notifications.error(`Can't move ${primaryItem.name} to ${i}-${j}, as it's already occupied by ${node.perk.name}`);
 
-    const currentlyOnWeb = this._perkStore.get(`${primaryItem.system.node.x}-${primaryItem.system.node.y}`);
+    const currentlyOnWeb = this._perkStore.get(`${primaryItem.system.nodes[0]?.x}-${primaryItem.system.nodes[0]?.y}`);
 
-    const toDelete = new Set<string>(currentlyOnWeb?.perk === primaryItem ? [`${primaryItem.system.node.x}-${primaryItem.system.node.y}`] : []);
+    const toDelete = new Set<string>(currentlyOnWeb?.perk === primaryItem ? [`${primaryItem.system.nodes[0]?.x}-${primaryItem.system.nodes[0]?.y}`] : []);
     const toSet: [string, PerkPTR2e][] = [[`${i}-${j}`, primaryItem]];
     const updates: Record<string, Record<string,unknown>[]> = {
       world: [],
@@ -658,15 +660,15 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     updates[pack] ??= [];
     updates[pack].push({_id: primaryItem._id, "system.node": { x: i, y: j }});
 
-    const delta = items.length > 1 ? { x: i - primaryItem.system.node.x!, y: j - primaryItem.system.node.y! } : null;
+    const delta = items.length > 1 ? { x: i - primaryItem.system.nodes[0].x!, y: j - primaryItem.system.nodes[0].y! } : null;
 
     for(const item of items) {
       if(item === primaryItem) continue;
       if(!delta) return;
       if(!(item instanceof ItemPTR2e && item.type === "perk")) continue;
 
-      const i = item.system.node.x! + delta.x;
-      const j = item.system.node.y! + delta.y;
+      const i = item.system.nodes[0].x! + delta.x;
+      const j = item.system.nodes[0].y! + delta.y;
 
       if(i < 1 || j < 1 || i >= 250 || j >= 250) {
         return void ui.notifications.error("Perk placement out of bounds");
@@ -675,9 +677,9 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       const node = this._perkStore.get(`${i}-${j}`) ?? this._perkStore.get(`${j}-${i}`);
       if (node) return void ui.notifications.error(`Can't move ${item.name} to ${i}-${j}, as it's already occupied by ${node.perk.name}`);
 
-      const currentlyOnWeb = this._perkStore.get(`${item.system.node.x}-${item.system.node.y}`);
+      const currentlyOnWeb = this._perkStore.get(`${item.system.nodes[0].x}-${item.system.nodes[0].y}`);
       if (currentlyOnWeb?.perk === item) {
-        toDelete.add(`${item.system.node.x}-${item.system.node.y}`);
+        toDelete.add(`${item.system.nodes[0].x}-${item.system.nodes[0].y}`);
       }
       const pack = item.pack || "world";
       updates[pack] ??= [];
@@ -702,8 +704,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     for (const [key, value] of toSet) {
       this._perkStore.set(key, {
         perk: value,
-        connected: value.system.node.connected,
-        position: { x: value.system.node.x!, y: value.system.node.y! },
+        connected: value.system.nodes[0].connected,
+        position: { x: value.system.nodes[0].x!, y: value.system.nodes[0].y! },
         state: 0,
         web: "global",
       });

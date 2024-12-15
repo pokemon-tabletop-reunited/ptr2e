@@ -13,7 +13,6 @@ import { ImageResolver, sluggify } from "@utils";
 import type EnJSON from "static/lang/en.json";
 import ClockPanel from "@module/apps/clocks/clock-panel.ts";
 import TokenPanel from "@module/apps/token-panel.ts";
-import PerkWeb from "@module/canvas/perk-tree/perk-web.ts";
 import { remigrate } from "@system/remigrate.ts";
 import { CompendiumBrowserSettings, CompendiumBrowserSources } from "@module/apps/compendium-browser/data.ts";
 import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
@@ -33,7 +32,6 @@ interface GamePTR2e
     User<ActorPTR2e<ActorSystemPTR2e, null>>
   > {
   ptr: {
-    web: PerkWeb;
     util: {
       sluggify: typeof sluggify;
       image: ImageResolver;

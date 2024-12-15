@@ -1,7 +1,6 @@
 import { PerkPTR2e } from "@item";
 import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed, HasMigrations } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
-import { PerkNodeConfig } from "@module/canvas/perk-tree/perk-node.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
 import { SetField } from "@module/data/fields/set-field.ts";
 import { SlugSchema } from "@module/data/mixins/has-slug.ts";
@@ -40,69 +39,43 @@ export default abstract class PerkSystem extends PerkExtension {
         archetype: new fields.StringField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.design.archetype.label", hint: "PTR2E.FIELDS.design.archetype.hint" }),
       }),
 
-      node: new fields.SchemaField({
-        x: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.x.label", hint: "PTR2E.FIELDS.node.x.hint" }),
-        y: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.y.label", hint: "PTR2E.FIELDS.node.y.hint" }),
-        i: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.i.label", hint: "PTR2E.FIELDS.node.i.hint" }),
-        j: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.j.label", hint: "PTR2E.FIELDS.node.j.hint" }),
-        connected: new fields.SetField<SlugField<string, string, true, boolean, boolean>, (string)[], Set<string | null>, true>(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.node.connected.label", hint: "PTR2E.FIELDS.node.connected.hint" }),
-        config: new fields.SchemaField(
-          {
-            alpha: new fields.NumberField({ required: false, min: 0, max: 1, label: "PTR2E.FIELDS.node.config.alpha.label", hint: "PTR2E.FIELDS.node.config.alpha.hint" }),
-            backgroundColor: new fields.ColorField({ required: false, label: "PTR2E.FIELDS.node.config.backgroundColor.label", hint: "PTR2E.FIELDS.node.config.backgroundColor.hint" }),
-            borderColor: new fields.ColorField({ required: false, label: "PTR2E.FIELDS.node.config.borderColor.label", hint: "PTR2E.FIELDS.node.config.borderColor.hint" }),
-            borderWidth: new fields.NumberField({ required: false, min: 0, label: "PTR2E.FIELDS.node.config.borderWidth.label", hint: "PTR2E.FIELDS.node.config.borderWidth.hint" }),
-            texture: new fields.FilePathField({
-              categories: ["IMAGE"],
-              required: false,
-              label: "PTR2E.FIELDS.node.config.texture.label",
-              hint: "PTR2E.FIELDS.node.config.texture.hint",
-            }),
-            tint: new fields.ColorField({ required: false, label: "PTR2E.FIELDS.node.config.tint.label", hint: "PTR2E.FIELDS.node.config.tint.hint" }),
-            scale: new fields.NumberField({ required: false, min: 0.5, max: 1.6, label: "PTR2E.FIELDS.node.config.scale.label", hint: "PTR2E.FIELDS.node.config.scale.hint" }),
-          },
-          { required: false }
-        ),
-        hidden: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.node.hidden.label", hint: "PTR2E.FIELDS.node.hidden.hint" }),
-        type: new fields.StringField({ required: true, choices: ["normal", "root", "entry"].reduce<Record<string, string>>((acc, type) => ({ ...acc, [type]: type }), {}), initial: "normal" , label: "PTR2E.FIELDS.node.type.label", hint: "PTR2E.FIELDS.node.type.hint" })
-      }),
+      nodes: new fields.ArrayField(
+        new fields.SchemaField({
+          x: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.x.label", hint: "PTR2E.FIELDS.node.x.hint" }),
+          y: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.y.label", hint: "PTR2E.FIELDS.node.y.hint" }),
+          connected: new fields.SetField(new SlugField(), { required: true, initial: [], label: "PTR2E.FIELDS.node.connected.label", hint: "PTR2E.FIELDS.node.connected.hint" }),
+          config: new fields.SchemaField(
+            {
+              alpha: new fields.NumberField({ required: false, min: 0, max: 1, label: "PTR2E.FIELDS.node.config.alpha.label", hint: "PTR2E.FIELDS.node.config.alpha.hint" }),
+              backgroundColor: new fields.ColorField({ required: false, label: "PTR2E.FIELDS.node.config.backgroundColor.label", hint: "PTR2E.FIELDS.node.config.backgroundColor.hint" }),
+              borderColor: new fields.ColorField({ required: false, label: "PTR2E.FIELDS.node.config.borderColor.label", hint: "PTR2E.FIELDS.node.config.borderColor.hint" }),
+              borderWidth: new fields.NumberField({ required: false, min: 0, label: "PTR2E.FIELDS.node.config.borderWidth.label", hint: "PTR2E.FIELDS.node.config.borderWidth.hint" }),
+              texture: new fields.FilePathField({
+                categories: ["IMAGE"],
+                required: false,
+                label: "PTR2E.FIELDS.node.config.texture.label",
+                hint: "PTR2E.FIELDS.node.config.texture.hint",
+              }),
+              tint: new fields.ColorField({ required: false, label: "PTR2E.FIELDS.node.config.tint.label", hint: "PTR2E.FIELDS.node.config.tint.hint" }),
+              scale: new fields.NumberField({ required: false, min: 0.5, max: 1.6, label: "PTR2E.FIELDS.node.config.scale.label", hint: "PTR2E.FIELDS.node.config.scale.hint" }),
+            },
+            { required: false }
+          ),
+          hidden: new fields.BooleanField({ required: true, initial: false, label: "PTR2E.FIELDS.node.hidden.label", hint: "PTR2E.FIELDS.node.hidden.hint" }),
+          type: new fields.StringField({ required: true, choices: ["normal", "root", "entry"].reduce<Record<string, string>>((acc, type) => ({ ...acc, [type]: type }), {}), initial: "normal", label: "PTR2E.FIELDS.node.type.label", hint: "PTR2E.FIELDS.node.type.hint" })
+        }),
+        {
+          label: "PTR2E.FIELDS.nodes.label",
+          hint: "PTR2E.FIELDS.nodes.hint",
+          required: true,
+          initial: [],
+        }
+      )
     };
   }
 
   override prepareBaseData() {
     super.prepareBaseData();
-
-    if (this.node.config) {
-      if (this.node.config.backgroundColor)
-        this.node.config.backgroundColor = Color.fromString(
-          this._source.node.config.backgroundColor
-        );
-      if (this.node.config.borderColor)
-        this.node.config.borderColor = Color.fromString(
-          this._source.node.config.borderColor
-        );
-      if (this.node.config.tint)
-        this.node.config.tint = Color.fromString(this._source.node.config.tint);
-      for (const key of Object.keys(this.node.config)) {
-        if (this.node.config[key as keyof typeof this.node.config] === null)
-          // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
-          delete this.node.config[key as keyof typeof this.node.config];
-      }
-    }
-
-    switch (this.node.type) {
-      case "root": {
-        //this.node.hidden = false; TODO: Discuss need of this?
-        this.node.config = fu.mergeObject(this.node.config ?? {}, {
-          borderWidth: 3,
-          scale: 1.6,
-        })
-        break;
-      }
-      case "entry": {
-        break;
-      }
-    }
   }
 
   override prepareDerivedData(): void {
@@ -112,36 +85,6 @@ export default abstract class PerkSystem extends PerkExtension {
       this.parent.actor.system.advancement.advancementPoints.spent += this.cost;
     }
   }
-
-  get visible() {
-    if (game.user.isGM) {
-      return this.hidden
-        ? game.ptr.web.editMode || false //TODO: Replace false with the toggle for hidden nodes in the UI
-          ? true
-          : false
-        : true;
-    }
-
-    // if(!this.parent.visible) return false;
-
-    return !this.hidden;
-  }
-
-  get hidden() {
-    return this.node.hidden;
-  }
-
-  // override async _preUpdate(changed: DeepPartial<this["parent"]["_source"]>, options: DocumentUpdateContext<this["parent"]["parent"]>, user: User): Promise<boolean | void> {
-  //   if (this.node.type === "root") {
-  //     const node = changed?.system?.node;
-  //     if (!node) return super._preUpdate(changed, options, user);
-
-  //     // if ((node.i || node.j || node.hidden) && (!node.type || node.type === "root")) {
-  //     //   ui.notifications.error("Root nodes cannot be moved or hidden");
-  //     //   return false;
-  //     // }
-  //   }
-  // }
 
   override async _preCreate(
     data: this["parent"]["_source"],
@@ -163,8 +106,16 @@ export default abstract class PerkSystem extends PerkExtension {
 
     if (game.ptr.perks.initialized && !this.parent.actor) {
       game.ptr.perks.perks.set(this.slug, this.parent);
-      if (game.ptr.web.actor) game.ptr.web.refresh({ nodeRefresh: true });
     }
+  }
+
+  static override migrateData(source: PerkSystem["_source"]) {
+    // Migrate node data to new format
+    if (source.node && !source.nodes?.length) {
+      source.nodes = [source.node as SourceFromSchema<NodeSchema>];
+    }
+
+    return super.migrateData(source);
   }
 }
 
@@ -205,95 +156,62 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
     false,
     true
   >;
-  node: foundry.data.fields.SchemaField<
-    {
-      i: foundry.data.fields.NumberField<number, number, true, true, true>;
-      j: foundry.data.fields.NumberField<number, number, true, true, true>;
-      x: foundry.data.fields.NumberField<number, number, true, true, true>;
-      y: foundry.data.fields.NumberField<number, number, true, true, true>;
-      connected: foundry.data.fields.SetField<
-        SlugField<string, string, true, boolean, boolean>,
-        (string | null)[],
-        Set<string | null>,
-        true
-      >;
-      config: foundry.data.fields.SchemaField<
-        {
-          alpha: foundry.data.fields.NumberField<number, number, false, false, false>;
-          backgroundColor: foundry.data.fields.ColorField<false, false, false>;
-          borderColor: foundry.data.fields.ColorField<false, false, false>;
-          borderWidth: foundry.data.fields.NumberField<
-            number,
-            number,
-            false,
-            false,
-            false
-          >;
-          texture: foundry.data.fields.FilePathField<
-            ImageFilePath,
-            ImageFilePath,
-            false,
-            false,
-            false
-          >;
-          tint: foundry.data.fields.ColorField<false, false, false>;
-          scale: foundry.data.fields.NumberField<number, number, false, false, false>;
-        },
-        {
-          alpha: number;
-          backgroundColor: HexColorString;
-          borderColor: HexColorString;
-          borderWidth: number;
-          texture: ImageFilePath;
-          tint: HexColorString;
-          scale: number;
-        },
-        {
-          alpha: number;
-          backgroundColor: number;
-          borderColor: number;
-          borderWidth: number;
-          texture: string;
-          tint: number;
-          scale: number;
-        },
-        false,
-        false,
-        true
-      >;
-      hidden: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
-      type: foundry.data.fields.StringField<"normal" | "root" | "entry", "normal", true, false, true>;
-    },
-    {
-      x: number | null;
-      y: number | null;
-      i: number | null;
-      j: number | null;
-      connected: string[];
-      config: {
-        alpha: number;
-        backgroundColor: HexColorString;
-        borderColor: HexColorString;
-        borderWidth: number;
-        texture: ImageFilePath;
-        tint: HexColorString;
-        scale: number;
-      };
-      hidden: boolean;
-      type: "normal" | "root" | "entry";
-    },
-    {
-      x: number | null;
-      y: number | null;
-      i: number | null;
-      j: number | null;
-      connected: Set<string>;
-      config: Partial<PerkNodeConfig> | undefined;
-      hidden: boolean;
-      type: "normal" | "root" | "entry";
-    }
+  nodes: foundry.data.fields.ArrayField<
+    foundry.data.fields.SchemaField<
+      NodeSchema,
+      SourceFromSchema<NodeSchema>,
+      ModelPropsFromSchema<NodeSchema>
+    >,
+    SourceFromSchema<NodeSchema>[],
+    ModelPropsFromSchema<NodeSchema>[],
+    true,
+    false,
+    true
   >;
 };
+
+interface NodeSchema extends foundry.data.fields.DataSchema {
+  x: foundry.data.fields.NumberField<number, number, true, true, true>;
+  y: foundry.data.fields.NumberField<number, number, true, true, true>;
+  connected: foundry.data.fields.SetField<
+    SlugField<string, string, true, boolean, boolean>,
+    (string)[],
+    Set<string>,
+    true
+  >;
+  hidden: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+  type: foundry.data.fields.StringField<"normal" | "root" | "entry", "normal" | "root" | "entry", true, false, true>;
+  config: foundry.data.fields.SchemaField<
+    NodeConfigSchema,
+    SourceFromSchema<NodeConfigSchema>,
+    ModelPropsFromSchema<NodeConfigSchema>,
+    false,
+    false,
+    true
+  >;
+}
+
+interface NodeConfigSchema extends foundry.data.fields.DataSchema {
+  alpha: foundry.data.fields.NumberField<number, number, false, false, false>;
+  backgroundColor: foundry.data.fields.ColorField<false, false, false>;
+  borderColor: foundry.data.fields.ColorField<false, false, false>;
+  borderWidth: foundry.data.fields.NumberField<
+    number,
+    number,
+    false,
+    false,
+    false
+  >;
+  texture: foundry.data.fields.FilePathField<
+    ImageFilePath,
+    ImageFilePath,
+    false,
+    false,
+    false
+  >;
+  tint: foundry.data.fields.ColorField<false, false, false>;
+  scale: foundry.data.fields.NumberField<number, number, false, false, false>;
+}
 
 type PerkSystemSchemaExtension = SlugSchema & ActionsSchema & DescriptionSchema & MigrationSchema & TraitsSchema;
 
@@ -304,9 +222,9 @@ interface PerkSystemSource extends Omit<ItemSystemSource, "container"> {
   cost: number;
 
   node: {
-    i: number;
-    j: number;
+    y: number;
+    x: number;
     connected: Set<string>;
-    config: Partial<PerkNodeConfig> | undefined;
+    hidden: boolean;
   };
 }

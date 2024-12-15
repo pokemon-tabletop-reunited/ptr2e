@@ -7,7 +7,6 @@ import { Pokedex } from "pokeapi-js-wrapper";
 import { UUIDUtils } from "src/util/uuid.ts";
 import TokenPanel from "@module/apps/token-panel.ts";
 import { TokenPTR2e } from "@module/canvas/token/object.ts";
-import PerkWeb from "@module/canvas/perk-tree/perk-web.ts";
 import { TextEnricher } from "./ui/text-enrichers.ts";
 import { remigrate } from "@system/remigrate.ts";
 import { DataStructure } from "@module/apps/data-inspector/data-handler.ts";
@@ -23,7 +22,6 @@ const GamePTR = {
       api: {
         DataStructure
       },
-      web: new PerkWeb(),
       util: {
         sluggify,
         pokeApi: new Pokedex(),

@@ -909,10 +909,10 @@ class ActorSheetPTRV2 extends foundry.applications.api.HandlebarsApplicationMixi
   override async close(
     options: Partial<foundry.applications.api.ApplicationClosingOptions> = {}
   ): Promise<this> {
-    if (game.ptr.web.actor === this.actor) {
-      this.minimize();
-      return this;
-    }
+    // if (game.ptr.web.actor === this.actor) {
+    //   this.minimize();
+    //   return this;
+    // }
     return super.close(options) as Promise<this>;
   }
 
