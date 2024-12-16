@@ -37,8 +37,24 @@
       </div>
       {{/if}}
 
-      {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true
-      localize=true}}
+      {{formField fields.global value=source.system.global localize=true}}
+
+      <div class="form-group webs">
+        <label>{{localize "PTR2E.FIELDS.perk.webs.label"}}</label>
+        <div class="form-fields">
+          <div class="tags input-element-tags">
+            {{#each source.system.webs as |web|}}
+              <div class="tag" data-key="{{web}}">
+                {{{asContentLink web}}}
+                <a data-action="delete-web" data-tooltip="Remove Tag" aria-label="Remove Tag" class="remove fa-solid fa-times"></a>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+        <p class="hint">{{localize "PTR2E.FIELDS.perk.webs.hint"}}</p>
+      </div>
+
+      {{formField fields.description enriched=enrichedDescription value=source.system.description toggled=true localize=true}}
     </fieldset>
     {{#each source.system.nodes as |node|}}
       <fieldset>

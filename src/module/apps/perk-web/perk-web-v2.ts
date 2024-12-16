@@ -1,7 +1,7 @@
 import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "../appv2-expanded.ts";
 import { ActorPTR2e } from "@actor";
 import { ChoiceSetChangeSystem, GrantEffectChangeSystem, GrantItemChangeSystem, Trait } from "@data";
-import { ItemPTR2e, PerkPTR2e } from "@item";
+import { ItemPTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
 import Tagify from "@yaireo/tagify";
 import Sortable from "sortablejs";
 import PerkStore, { PerkNode, PerkPurchaseState, PerkState } from "./perk-store.ts";
@@ -285,6 +285,9 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
   _lineCache = new Map<string, SVGLineElement>();
   _zoomAmount: this['zoomLevels'][number] = 1;
 
+  web: "global" | ItemUUID = "global";
+  private speciesEvolutions: PerkPTR2e[] = [];
+
   constructor(actor: ActorPTR2e, options?: Partial<ApplicationConfigurationExpanded>) {
     super(options);
     this.actor = actor;
@@ -303,9 +306,22 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       state?: PerkPurchaseState;
     }
 
+    const webOptions = [
+      {
+        value: "global",
+        label: this.actor?.name ? `${this.actor.name}'s Global Perk Web` : "Global Perk Web"
+      }
+    ]
+    const uuid = this.actor?.species?.evolutions?.uuid ?? this.actor?.species?.parent?.flags?.core?.sourceId;
+    if (uuid) webOptions.push({
+      value: uuid,
+      label: this.actor?.name ? `${this.actor.name}'s Species Perk Web` : "Species Perk Web"
+    });
+
     if (!this._perkStore) {
-      const perks = await game.ptr.perks.initialize();
-      this._perkStore = new PerkStore({ perks: Array.from(perks.perks.values()) });
+      const perks = Array.from((await game.ptr.perks.initialize()).perks.values());
+      perks.push(...this.speciesEvolutions);
+      this._perkStore = new PerkStore({ perks, web: this.web });
     }
     if (!this._perkStore.initialized) {
       this._perkStore.updateState(this.actor);
@@ -405,6 +421,9 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       filterData: null,
       zoom: this._zoomAmount,
       editMode: this.editMode,
+      global: this.web === "global",
+      webOptions,
+      web: this.web
     }
   }
 
@@ -413,6 +432,23 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
   override _attachPartListeners(partId: string, htmlElement: HTMLElement, options: foundry.applications.api.HandlebarsRenderOptions): void {
     super._attachPartListeners(partId, htmlElement, options);
+
+    if (partId === "hudHeader") {
+      const select = htmlElement.querySelector<HTMLSelectElement>("select[name='web']");
+      if (!select) return;
+
+      select.addEventListener("change", async (event) => {
+        event.preventDefault();
+        const value = select.value as "global" | ItemUUID;
+
+        if (value === this.web) return;
+        if (value === "global") {
+          return this.setWeb(null);
+        }
+        const species = await fromUuid<SpeciesPTR2e>(value);
+        this.setWeb(species ?? null);
+      });
+    }
 
     if (partId === "web") {
       const perks = htmlElement.querySelectorAll<HTMLElement>(".perk")
@@ -446,7 +482,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             const { connected: updateTarget } = getUpdatedConnections(node, this.connectionNode, operation);
 
             if (this.connectionNode.perk === node.perk) {
-              await this.connectionNode.perk.update({
+              if (this.connectionNode.perk.id) await this.connectionNode.perk.update({
                 "system.nodes": (() => {
                   const nodes = this.connectionNode.perk.system.toObject().nodes;
                   const indexCurrent = this.connectionNode.perk.system.nodes.indexOf(this.connectionNode.node);
@@ -461,30 +497,38 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
             if (this.connectionNode.perk.pack === node.perk.pack) {
               await ItemPTR2e.updateDocuments([
-                {
-                  _id: this.connectionNode.perk._id,
-                  "system.nodes": (() => {
-                    const nodes = this.connectionNode.perk.system.toObject().nodes;
-                    const index = this.connectionNode.perk.system.nodes.indexOf(this.connectionNode.node);
-                    if (index === -1) return nodes;
-                    nodes[index].connected = Array.from(new Set(updateCurrent));
-                    return nodes;
-                  })()
-                },
-                {
-                  _id: node.perk._id,
-                  "system.nodes": (() => {
-                    const nodes = node.perk.system.toObject().nodes;
-                    const index = node.perk.system.nodes.indexOf(node.node);
-                    if (index === -1) return nodes;
-                    nodes[index].connected = Array.from(new Set(updateTarget));
-                    return nodes;
-                  })()
-                }
+                ...(
+                  this.connectionNode.perk.id
+                    ? [{
+                      _id: this.connectionNode.perk._id,
+                      "system.nodes": (() => {
+                        const nodes = this.connectionNode.perk.system.toObject().nodes;
+                        const index = this.connectionNode.perk.system.nodes.indexOf(this.connectionNode.node);
+                        if (index === -1) return nodes;
+                        nodes[index].connected = Array.from(new Set(updateCurrent));
+                        return nodes;
+                      })()
+                    }]
+                    : []
+                ),
+                ...(
+                  node.perk.id
+                    ? [{
+                      _id: node.perk._id,
+                      "system.nodes": (() => {
+                        const nodes = node.perk.system.toObject().nodes;
+                        const index = node.perk.system.nodes.indexOf(node.node);
+                        if (index === -1) return nodes;
+                        nodes[index].connected = Array.from(new Set(updateTarget));
+                        return nodes;
+                      })()
+                    }]
+                    : []
+                )
               ], this.connectionNode.perk.pack ? { pack: this.connectionNode.perk.pack } : {});
             }
             else {
-              await this.connectionNode.perk.update({
+              if (this.connectionNode.perk.id) await this.connectionNode.perk.update({
                 "system.nodes": (() => {
                   const nodes = this.connectionNode.perk.system.toObject().nodes;
                   const index = this.connectionNode.perk.system.nodes.indexOf(this.connectionNode.node);
@@ -493,7 +537,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
                   return nodes;
                 })()
               }, this.connectionNode.perk.pack ? { pack: this.connectionNode.perk.pack } : {});
-              await node.perk.update({
+              if (node.perk.id) await node.perk.update({
                 "system.nodes": (() => {
                   const nodes = node.perk.system.toObject().nodes;
                   const index = node.perk.system.nodes.indexOf(node.node);
@@ -809,7 +853,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       const currentZoomLevel = this.zoomLevels.indexOf(this._zoomAmount);
       if (currentZoomLevel === -1) return this.zoom(1);
 
-      const nextZoomLevel = Math.max(0, currentZoomLevel - 1);
+      const nextZoomLevel = Math.max(0, currentZoomLevel - 1, this.web === "global" ? 0 : 0.65);
       if (nextZoomLevel === currentZoomLevel) return;
 
       this.zoom(this.zoomLevels[nextZoomLevel]);
@@ -839,6 +883,29 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     grid!.style.zoom = `${zoom}`;
     this.renderSVG()
     zoomElement.scrollTo(newCenter);
+  }
+
+  async setWeb(species: SpeciesPTR2e | null) {
+    if (species === null) {
+      this.web = "global";
+      this.speciesEvolutions = [];
+      return await PerkWebApp.refresh.call(this);
+    }
+
+    this.web = species.uuid;
+    this.speciesEvolutions = await species.system.getEvolutionPerks(!!this.actor?.system.shiny);
+    await PerkWebApp.refresh.call(this);
+
+    setTimeout(() => {
+      const root = this._perkStore.rootNodes.at(0);
+      if (!root) return;
+
+      this.element.querySelector(`div[data-x='${root.position.x}'][data-y='${root.position.y}']`)?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+        inline: "center"
+      });
+    }, 150);
   }
 
   override async _onDrop(event: DragEvent, itemData?: DropCanvasData[]) {
@@ -905,6 +972,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     updates[pack] ??= [];
     updates[pack].push({
       _id: primaryEntry.perk._id,
+      "system.global": this.web === "global",
       "system.nodes": (() => {
         const nodes = primaryEntry.perk.system.toObject().nodes as Required<DeepPartial<PerkPTR2e['system']['nodes']>>;
         if (!currentlyOnWeb) {
@@ -933,6 +1001,12 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         nodes[index].x = i;
         nodes[index].y = j;
         return nodes;
+      })(),
+      "system.webs": (() => {
+        if(this.web === "global") return primaryEntry.perk.system.webs;
+        const web = new Set((primaryEntry.perk as PerkPTR2e).system.toObject().webs)
+        web.add(this.web);
+        return web;
       })()
     });
 
@@ -1085,7 +1159,11 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
     this._lineCache.clear();
     await game.ptr.perks.reset();
     this.isSortableDragging = false;
-    this._perkStore.reinitialize({ actor: this.actor ?? undefined });
+    const perks = [
+      ...Array.from(game.ptr.perks.perks.values()),
+      ...this.speciesEvolutions
+    ]
+    this._perkStore.reinitialize({ perks, actor: this.actor ?? undefined, web: this.web });
 
     this.currentNode = this._perkStore.getUpdatedNode(this.currentNode);
     this.connectionNode = this._perkStore.getUpdatedNode(this.connectionNode);

@@ -1,4 +1,4 @@
-import { PerkPTR2e } from "@item";
+import { ItemPTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
 
 export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
@@ -25,8 +25,16 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
           const nodes = this.document.system.toObject().nodes;
           nodes.splice(index, 1);
           await this.document.update({ "system.nodes": nodes });
+        },
+        "delete-web": async function (this: PerkSheet, event: MouseEvent) {
+          event.preventDefault();
+          const uuid = (event.target as HTMLElement).parentElement?.dataset?.key;
+          if(!uuid || !this.document.system.webs.has(uuid)) return;
+          const webs = this.document.system.toObject().webs;
+          webs.splice(webs.indexOf(uuid), 1);
+          await this.document.update({ "system.webs": webs });
         }
-      }
+      },
     },
     { inplace: false }
   );
@@ -55,6 +63,23 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
       },
       debug: game.user.isGM && !!game.settings.get("ptr2e", "dev-mode"),
     }
+  }
+
+  override async _onDropItem(event: DragEvent, data: object) {
+    const item = await ItemPTR2e.fromDropData(data as DropCanvasData);
+    if (!item || item.type !== "species") return super._onDropItem(event, data);
+
+    if(this.document.system.webs.has(item.uuid)) return;
+
+    const species = await fromUuid<SpeciesPTR2e>(item.uuid);
+    if(!species) return;
+
+    const uuid = species.system.evolutions?.uuid ?? item.uuid;
+    if(this.document.system.webs.has(uuid)) return;
+
+    const webs = this.document.system.toObject().webs;
+    webs.push(uuid);
+    return void await this.document.update({ "system.webs": webs });
   }
 
   static override PARTS: Record<string, foundry.applications.api.HandlebarsTemplatePart> =

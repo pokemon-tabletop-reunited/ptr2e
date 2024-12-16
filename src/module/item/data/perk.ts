@@ -50,6 +50,9 @@ export default abstract class PerkSystem extends PerkExtension {
         hint: "PTR2E.FIELDS.perk.mode.hint"
       }) as PerkSchema["mode"],
 
+      global: new fields.BooleanField({ required: true, initial: true, label: "PTR2E.FIELDS.perk.global.label", hint: "PTR2E.FIELDS.perk.global.hint" }),
+      webs: new fields.SetField(new fields.DocumentUUIDField({ type: "Item" }), { required: true, initial: [], label: "PTR2E.FIELDS.perk.webs.label", hint: "PTR2E.FIELDS.perk.webs.hint" }),
+
       nodes: new fields.ArrayField(
         new fields.SchemaField({
           x: new fields.NumberField({ required: true, nullable: true, initial: null, label: "PTR2E.FIELDS.node.x.label", hint: "PTR2E.FIELDS.node.x.hint" }),
@@ -81,7 +84,7 @@ export default abstract class PerkSystem extends PerkExtension {
             required: true,
             nullable: true,
             initial: null,
-          })
+          }),
         }),
         {
           label: "PTR2E.FIELDS.nodes.label",
@@ -228,6 +231,15 @@ interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExt
   >;
   variant: foundry.data.fields.StringField<"multi" | "tiered", "multi" | "tiered", true, true, true>;
   mode: foundry.data.fields.StringField<"shared" | "individual" | "replace" | "coexist", "shared" | "individual" | "replace" | "coexist", true, true, true>;
+  global: foundry.data.fields.BooleanField<boolean, boolean, true, false, true>;
+  webs: foundry.data.fields.SetField<
+    foundry.data.fields.DocumentUUIDField<string, true, false, true>,
+    string[],
+    Set<string>,
+    true,
+    false,
+    true
+  >;
 };
 
 interface NodeSchema extends foundry.data.fields.DataSchema {

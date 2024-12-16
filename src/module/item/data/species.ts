@@ -1,10 +1,9 @@
-import { SpeciesPTR2e } from "@item";
+import { ItemPTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
 import { HasDescription, HasEmbed, HasMigrations, HasSlug, HasTraits, PTRCONSTS, Trait } from "@module/data/index.ts";
 import { PokemonType } from "@data";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { getTypes } from "@scripts/config/effectiveness.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
-import { ActorPTR2e } from "@actor";
 import { DataSchema, SourcePropFromDataField } from "types/foundry/common/data/fields.js";
 import SkillPTR2e from "@module/data/models/skill.ts";
 import { CollectionField } from "@module/data/fields/collection-field.ts";
@@ -13,6 +12,8 @@ import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { DescriptionSchema } from "@module/data/mixins/has-description.ts";
 import { SlugSchema } from "@module/data/mixins/has-slug.ts";
 import { getInitialSkillList } from "@scripts/config/skills.ts";
+import { Predicate, PredicateStatement } from "@system/predication/predication.ts";
+import { ImageResolver, sluggify } from "@utils";
 
 const SpeciesExtension = HasEmbed(
   HasMigrations(HasTraits(HasDescription(HasSlug(foundry.abstract.TypeDataModel)))),
@@ -26,7 +27,7 @@ class SpeciesSystem extends SpeciesExtension {
   /**
    * @internal
    */
-  declare parent: SpeciesPTR2e | ActorPTR2e;
+  declare parent: SpeciesPTR2e;
 
   constructor(data?: object, options?: DataModelConstructionOptions<foundry.abstract.Document | null> & { virtual?: boolean }) {
     super(data, options);
@@ -250,7 +251,7 @@ class SpeciesSystem extends SpeciesExtension {
         required: true,
         nullable: true,
         initial: null,
-      }),
+      })
     };
   }
 
@@ -422,6 +423,203 @@ class SpeciesSystem extends SpeciesExtension {
     }
   }
 
+  get shiny(): boolean {
+    if(!this.parent.actor) return false;
+    return this.parent.actor.system.shiny;
+  }
+
+  get allEvolutions(): EvolutionData[] {
+    if(!this.evolutions) return [];
+
+    const evolutions: EvolutionData[] = [this.evolutions];
+    function recursiveEvolutions(data: EvolutionData) {
+      if(!data.evolutions) return;
+      for (const evolution of data.evolutions) {
+        evolutions.push(evolution);
+        recursiveEvolutions(evolution);
+      }
+    }
+    recursiveEvolutions(this.evolutions);
+    return evolutions;
+  }
+
+ private async createEvolutionPerk(evolution: EvolutionData, isShiny = this.shiny): Promise<DeepPartial<PerkPTR2e['_source']>> {
+
+    const img = await (async () => {
+      const species = await fromUuid<SpeciesPTR2e>(evolution.uuid);
+      if(!species) return `systems/ptr2e/img/icons/species_icon.webp`;
+
+      const config = game.ptr.data.artMap.get(species.slug);
+      if(!config) return `systems/ptr2e/img/icons/species_icon.webp`;
+
+      const resolver = await ImageResolver.createFromSpeciesData({
+        dexId: species.system.number,
+        shiny: isShiny,
+        forms: []
+      }, config);
+      return resolver?.result ?? `systems/ptr2e/img/icons/species_icon.webp`;
+    })();
+    
+    return {
+      name: `Evolution: ${evolution.name}`,
+      type: "perk",
+      img,
+      flags: {
+        ptr2e: {
+          evolution: {
+            name: evolution.name,
+            uuid: evolution.uuid,
+          }
+        }
+      },
+      system: {
+        prerequisites: SpeciesSystem.evolutionMethodsToPredicate(evolution.methods).toString(),
+        cost: 0,
+        global: false,
+        webs: [this.evolutions!.uuid],
+        nodes: [
+          {
+            x: evolution.perk.x,
+            y: evolution.perk.y,
+            type: this.evolutions === evolution ? "root" : "normal",
+            connected: new Set(),
+          }
+        ]
+      }
+    } as DeepPartial<PerkPTR2e['_source']>;
+  }
+
+  async getEvolutionPerks(isShiny = this.shiny): Promise<PerkPTR2e[]> {
+    if(!this.evolutions) return [];
+    async function *recursiveEvolution(data: EvolutionData, depth = 0): AsyncGenerator<[EvolutionData, number]> {
+      yield [data, depth];
+      if(!data.evolutions) return;
+      const currentDepth = depth + 1
+      for (const evolution of data.evolutions) {
+        yield *recursiveEvolution(evolution, currentDepth);
+      }
+    }
+
+    const takenCoordinates = new Set<`${number}-${number}`>();
+
+    const perks: DeepPartial<PerkPTR2e['_source']>[] = [];
+    const perksByDepth: Record<number, DeepPartial<PerkPTR2e['_source']>[]> = {};
+    const previousPerks: DeepPartial<PerkPTR2e['_source']>[] = [];
+    const nextPerks: DeepPartial<PerkPTR2e['_source']>[] = [];
+    let lastDepth = 0;
+
+    const evolutions = this.evolutions ? this.evolutions : {
+      name: this.parent.slug,
+      uuid: this.parent.flags?.core?.sourceId ?? this.parent.uuid,
+    } as EvolutionData;
+    if(!evolutions.uuid) evolutions.uuid = this.parent.flags?.core?.sourceId ?? this.parent.uuid;
+
+    for await(const [evolution, depth] of recursiveEvolution(evolutions)) {
+      const data = await this.createEvolutionPerk(evolution, isShiny);
+      (data.flags!.ptr2e!.evolution as Record<string, unknown>).tier = depth;
+
+      const node = data.system!.nodes![0]!;
+      const coords = (() => {
+        if(!takenCoordinates.has(`${node.x!}-${node.y!}`)) return [node.x!, node.y!];
+        let x = node.x!;
+        let y = node.y!;
+        let positive = true;
+        let counter = 0;
+        while(takenCoordinates.has(`${x}-${y}`)) {
+          y = 15 - (2 * depth);
+          x = positive 
+            ? 15 + (2 * counter) 
+            : 15 + (-2 * (counter + 1));
+          
+          if(positive) positive = false;
+          else {
+            counter++;
+            positive = true;
+          };
+
+          if(counter > 7) break;
+        }
+        return [x,y];
+      })()
+      node.x = coords[0];
+      node.y = coords[1];
+      takenCoordinates.add(`${node.x}-${node.y}`);
+
+      if(lastDepth >= depth) {
+        lastDepth = depth;
+        const perks: DeepPartial<PerkPTR2e['_source']>[] = perksByDepth[depth-1] ?? [];
+        previousPerks.splice(0, previousPerks.length, ...perks);
+        nextPerks.splice(0, nextPerks.length, data);
+      }
+      else {
+        lastDepth = depth;
+        previousPerks.splice(0, previousPerks.length, ...nextPerks);
+        nextPerks.splice(0, nextPerks.length, data);
+      }
+
+      for(const perkData of previousPerks) {
+        (data.system!.nodes![0]!.connected as Set<string>).add(sluggify(perkData.name!));
+        (perkData.system!.nodes![0]!.connected as Set<string>).add(sluggify(data.name!));
+      }
+
+      perks.push(data);
+      perksByDepth[depth] ??= [];
+      perksByDepth[depth].push(data);
+    }
+
+    return perks.toReversed().map(data => new ItemPTR2e(data));
+  }
+
+  static evolutionMethodsToPredicate(methods: EvolutionData["methods"]): Predicate {
+    const [and, or] = methods.reduce<[PredicateStatement[], PredicateStatement[]]>(([and, or], method) => {
+      switch(method.type) {
+        case "level": {
+          const predicate = `{"gte": ["@actor.system.advancement.level", ${method.level}]}`;
+
+          if(method.operand === "and") and.push(predicate);
+          else or.push(predicate);
+          
+          break;
+        }
+        case "item": {
+          const item = method.item.toLowerCase();
+          const predicate = `{"or" ["item:consumable:${item}","item:equipment:${item}","item:gear:${item}"]}`; 
+
+          if(method.operand === "and") and.push(predicate);
+          else or.push(predicate);
+          
+          break;
+        }
+        case "move": {
+          const predicate = `{"and": ["item:move:${method.move.toLowerCase()}"]}`;
+
+          if(method.operand === "and") and.push(predicate);
+          else or.push(predicate);
+          
+          break;
+        }
+        case "gender": {
+          //TODO: Add gender prereq support once gender is tracked on actors
+          break;
+          // const predicate = ``;
+
+          // if(method.operand === "and") and.push(predicate);
+          // else or.push(predicate);
+          
+          // break;
+        }
+      }
+      return [and, or];
+    }, [[], []]);
+
+    const andPredicate = and.length > 0 ? `{"and": [${and.join(',')}]}` : "";
+    const orPredicate = or.length > 0 ? `{"or": [${or.join(',')}]}` : "";
+
+    return andPredicate.length && orPredicate.length 
+      ? new Predicate(andPredicate, orPredicate)
+      : new Predicate(andPredicate || orPredicate);
+  }
+
   override async _preCreate(
     data: this["parent"]["_source"],
     options: DocumentModificationContext<this["parent"]["parent"]>,
@@ -544,6 +742,10 @@ export class EvolutionData extends foundry.abstract.DataModel {
         },
         { required: true, nullable: true }
       ),
+      perk: new fields.SchemaField({
+        x: new fields.NumberField({ required: true, initial: 15 }),
+        y: new fields.NumberField({ required: true, initial: 15 }),
+      })
     });
 
     return {
@@ -600,6 +802,7 @@ export interface EvolutionData extends foundry.abstract.DataModel {
       }
     ))[];
   evolutions: EvolutionData[] | null;
+  perk: { x: number; y: number };
 }
 
 interface SpeciesSystem extends ModelPropsFromSchema<SpeciesSchema> {

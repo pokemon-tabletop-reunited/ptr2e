@@ -6947,8 +6947,6 @@ body {
   [data-application-part="hudPerk"] {
     grid-area: hudPerk;
 
-    overflow: auto;
-
     h2 {
       font-family: inherit;
       font-size: 1.25rem;
@@ -6957,6 +6955,8 @@ body {
     .perk-header {
       border-bottom: 1px solid var(--color-light-6);
       padding: 0.5rem 0;
+
+      height: 33px;
 
       h2 {
           border-bottom: unset;
@@ -6971,6 +6971,9 @@ body {
       margin: 0.5rem;
       border: 1px solid var(--color-light-6);
       border-radius: 8px;
+
+      overflow: auto;
+      max-height: calc(100% - 33px - 50px - 1rem);
 
       header {
         margin-bottom: 0.25rem;
@@ -7092,6 +7095,11 @@ body {
       height: max-content;
       width: max-content;
       flex: 1;
+
+      &.species-web {
+        grid-template-columns: repeat(30, 48px);
+        grid-template-rows: repeat(30, 48px);
+      }
 
       .perk {
         height: 48px;

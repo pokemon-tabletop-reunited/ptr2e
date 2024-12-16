@@ -6773,7 +6773,6 @@ ul.item-list.result-list li.item.rarity-unique {
 }
 #perk-web-app [data-application-part="hudPerk"] {
   grid-area: hudPerk;
-  overflow: auto;
 }
 #perk-web-app [data-application-part="hudPerk"] h2 {
   font-family: inherit;
@@ -6782,6 +6781,7 @@ ul.item-list.result-list li.item.rarity-unique {
 #perk-web-app [data-application-part="hudPerk"] .perk-header {
   border-bottom: 1px solid var(--color-light-6);
   padding: 0.5rem 0;
+  height: 33px;
 }
 #perk-web-app [data-application-part="hudPerk"] .perk-header h2 {
   border-bottom: unset;
@@ -6794,6 +6794,8 @@ ul.item-list.result-list li.item.rarity-unique {
   margin: 0.5rem;
   border: 1px solid var(--color-light-6);
   border-radius: 8px;
+  overflow: auto;
+  max-height: calc(100% - 33px - 50px - 1rem);
 }
 #perk-web-app [data-application-part="hudPerk"] figure header {
   margin-bottom: 0.25rem;
@@ -6894,6 +6896,10 @@ ul.item-list.result-list li.item.rarity-unique {
   height: max-content;
   width: max-content;
   flex: 1;
+}
+#perk-web-app [data-application-part="web"] section.perk-grid.species-web {
+  grid-template-columns: repeat(30, 48px);
+  grid-template-rows: repeat(30, 48px);
 }
 #perk-web-app [data-application-part="web"] section.perk-grid .perk {
   height: 48px;
