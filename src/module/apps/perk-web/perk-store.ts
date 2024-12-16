@@ -1,6 +1,8 @@
 import { ItemPTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
 import PerkGraph from "./perk-graph.ts";
 import { ActorPTR2e } from "@actor";
+import { SummonStatistic } from "@system/statistics/summon.ts";
+import { Predicate } from "@system/predication/predication.ts";
 
 export const PerkState = {
   unavailable: 0,
@@ -238,7 +240,7 @@ class PerkStore extends Collection<PerkNode> {
 
     const visited = new Set<string>();
     // Update connections for all purchased roots
-    if (purchasedRoots.length) this.updateConnections({ purchasedPerks: purchasedRoots, apAvailable: actor?.system.advancement.advancementPoints.available ?? 0, visited, currentTier });
+    if (purchasedRoots.length) this.updateConnections({ purchasedPerks: purchasedRoots, apAvailable: actor?.system.advancement.advancementPoints.available ?? 0, visited, currentTier, actor });
 
     // Any nodes that can't be reached from a purchased root are invalid
     for (const node of purchasedNodes) {
@@ -269,13 +271,15 @@ class PerkStore extends Collection<PerkNode> {
     visited = new Set<string>(),
     apAvailable,
     currentTier = 0,
-    highestTier = currentTier
+    highestTier = currentTier,
+    actor
   }: {
     purchasedPerks: PerkNode[],
     visited?: Set<string>,
     apAvailable: number,
     currentTier?: number,
-    highestTier?: number
+    highestTier?: number,
+    actor?: Maybe<ActorPTR2e>
   }) {
     // Look through perks that are purchased and update their connections
     for (const node of purchasedPerks) {
@@ -290,7 +294,7 @@ class PerkStore extends Collection<PerkNode> {
         if (connectedNode) {
           // If the connected node is already purchased, also update its connections
           if (connectedNode.state >= PerkState.purchased) {
-            this.updateConnections({ purchasedPerks: [connectedNode], visited, apAvailable, currentTier});
+            this.updateConnections({ purchasedPerks: [connectedNode], visited, apAvailable, currentTier, highestTier, actor });
 
             // If the connected node is a tiered perk, handle the tier info
             if (connectedNode.tierInfo && !connectedNode.tierInfo.maxTierPurchased) {
@@ -312,23 +316,57 @@ class PerkStore extends Collection<PerkNode> {
 
               if (evolution.tier < currentTier) {
                 connectedNode.state = PerkState.purchased;
-                if(evolution.tier !== 0) this.updateConnections({ purchasedPerks: [connectedNode], visited, apAvailable, currentTier: evolution.tier, highestTier});
+                if (evolution.tier !== 0) this.updateConnections({ purchasedPerks: [connectedNode], visited, apAvailable, currentTier: evolution.tier, highestTier, actor });
               }
               else if (highestTier === currentTier && evolution.tier === currentTier + 1) {
-                connectedNode.state = PerkState.available;
+                connectedNode.state = this.isAvailableOrConnected({
+                  node: connectedNode,
+                  apAvailable,
+                  actor,
+                })
               }
               else {
                 connectedNode.state = PerkState.unavailable;
               }
             }
             else {
-              connectedNode.state = apAvailable >= connectedNode.perk.system.cost ? PerkState.available : PerkState.connected;
+              connectedNode.state = this.isAvailableOrConnected({
+                node: connectedNode,
+                apAvailable,
+                actor,
+              });
             }
           }
         }
         visited.add(connected);
       }
     }
+  }
+
+  isAvailableOrConnected({
+    node,
+    actor,
+    apAvailable
+  }: {
+    node: PerkNode,
+    actor: Maybe<ActorPTR2e>,
+    apAvailable: number
+  }) {
+    if (apAvailable < node.perk.system.cost) return PerkState.connected;
+
+    if(!actor) return PerkState.available;
+
+    const predicate = new Predicate(SummonStatistic.resolveValue(
+      node.perk.system.prerequisites,
+      node.perk.system.prerequisites,
+      { actor, item: node.perk },
+      { evaluate: true, resolvables: { actor, item: node.perk } }
+    ) as unknown as Predicate);
+    if (!predicate.test(actor.getRollOptions())) {
+      return PerkState.connected;
+    }
+
+    return PerkState.available;
   }
 
   nodeFromSlug(slug: string) {

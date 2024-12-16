@@ -283,7 +283,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
   _onScroll: () => void | null;
   _lineCache = new Map<string, SVGLineElement>();
-  _zoomAmount: this['zoomLevels'][number] = 1;
+  _zoomAmount: this['zoomLevels'][number] = 0.4;
 
   web: "global" | ItemUUID = "global";
   private speciesEvolutions: PerkPTR2e[] = [];
