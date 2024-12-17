@@ -327,7 +327,7 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
 
       // TODO: Implement these options
       const { shinyChance, preventEvolution, linkToken } = {
-        shinyChance: 1,
+        shinyChance: blueprint.shiny,
         preventEvolution: blueprint.preventEvolution ?? false,
         linkToken: false,
       }
