@@ -461,7 +461,7 @@ class SpeciesSystem extends SpeciesExtension {
     })();
 
     return {
-      name: `Evolution: ${evolution.name}`,
+      name: `Evolution: ${Handlebars.helpers.capitalizeFirst(evolution.name)}`,
       type: "perk",
       img,
       flags: {

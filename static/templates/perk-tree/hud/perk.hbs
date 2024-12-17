@@ -21,16 +21,22 @@
                   {{> action-embed action=action}}
                 {{/each}}
             </figure>
-            <footer>
-              {{#if state.available}}
-                <button class="purchase {{#unless state.purchasable}}unavailable{{/unless}}" data-action="purchase" {{#unless state.purchasable}}disabled{{/unless}}>
-                  <i class="fas fa-sack-dollar"></i> {{{cost.purchase}}}
+            <footer> {{log this}}
+              {{#if state.evolution}}
+                <button class="purchase {{#unless state.purchasable}}unavailable{{/unless}}" data-action="evolve" {{#unless state.purchasable}}disabled{{/unless}}>
+                  <i class="fas fa-sack-dollar"></i> {{{cost.evolution}}}
                 </button>
-              {{/if}}
-              {{#if state.refundable}}
-                <button class="refund" data-action="refund">
-                  <i class="fas fa-sack-dollar"></i> {{{cost.refund}}}
-                </button>
+              {{else}}
+                {{#if state.available}}
+                  <button class="purchase {{#unless state.purchasable}}unavailable{{/unless}}" data-action="purchase" {{#unless state.purchasable}}disabled{{/unless}}>
+                    <i class="fas fa-sack-dollar"></i> {{{cost.purchase}}}
+                  </button>
+                {{/if}}
+                {{#if state.refundable}}
+                  <button class="refund" data-action="refund">
+                    <i class="fas fa-sack-dollar"></i> {{{cost.refund}}}
+                  </button>
+                {{/if}}
               {{/if}}
             </footer>
         {{/if}}
