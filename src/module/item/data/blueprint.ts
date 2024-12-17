@@ -29,32 +29,32 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
   static readonly HumanoidHeightWeightData = {
     male: {
       height: {
-        average: 1.77,
-        deviation: 0.06421
+        average: 1.784,
+        deviation: 0.0769
       },
       weight: {
-        average: 26.6,
-        deviation: 3.31
+        average: 25.6,
+        deviation: 3.32
       }
     },
     female: {
       height: {
-        average: 1.63,
-        deviation: 0.05716
+        average: 1.638,
+        deviation: 0.0717
       },
       weight: {
-        average: 24.0,
+        average: 23.4,
         deviation: 4.18
       }
     },
     genderless: {
       height: {
-        average: 1.7,
-        deviation: 0.060685
+        average: 1.711,
+        deviation: 0.0743
       },
       weight: {
-        average: 25.3,
-        deviation: 3.745
+        average: 24.5,
+        deviation: 3.75
       }
     }
   } as const;
@@ -396,14 +396,16 @@ export default abstract class BlueprintSystem extends HasEmbed(HasMigrations(fou
       const { weight, height } = await (async (): Promise<{ weight: number, height: number }> => {
         const isHumanoid = evolution.system.traits.includes("humanoid");
 
-        const random = (await new Roll(isHumanoid ? "1d2000" : "2d1000").evaluate()).total;
+        const randomH = (await new Roll(isHumanoid ? "1d10000000000" : "2d20000").evaluate()).total;
+        const randomW = (await new Roll(isHumanoid ? "1d10000000000" : "2d20000").evaluate()).total;
+
         const height = isHumanoid
-          ? NORMINV(random / 2001, BlueprintSystem.HumanoidHeightWeightData[gender].height.average, BlueprintSystem.HumanoidHeightWeightData[gender].height.deviation)
-          : ((random / 2000) * 0.8 + 0.6) * (evolution.system.size.height ?? 1);
+          ? NORMINV(randomH / 10000000000, BlueprintSystem.HumanoidHeightWeightData[gender].height.average, BlueprintSystem.HumanoidHeightWeightData[gender].height.deviation)
+          : ((randomH / 40000) * 0.8 + 0.6) * (evolution.size.height ?? 1);
 
         const weight = isHumanoid
-          ? NORMINV(random / 2001, BlueprintSystem.HumanoidHeightWeightData[gender].weight.average, BlueprintSystem.HumanoidHeightWeightData[gender].weight.deviation) * Math.pow(height, 2)
-          : ((random / 2000) * 0.4 + 8) * height * (evolution.system.size.weight ?? 1);
+          ? NORMINV(randomW / 10000000000, BlueprintSystem.HumanoidHeightWeightData[gender].weight.average, BlueprintSystem.HumanoidHeightWeightData[gender].weight.deviation) * Math.pow(height, 2)
+          : ((randomW / 40000) * 0.4 + 8) * ((randomH / 40000) * 0.8 + 0.6) * (evolution.size.weight ?? 1);
 
         return { height, weight };
       })();
