@@ -1,5 +1,11 @@
 <section class="action">
     <div class="scroll">
+      {{#if (devMode)}}
+        <fieldset>
+          <legend>Dev Mode Info</legend>
+          {{formField fields.slug value=source.slug localize=true}}
+        </fieldset>
+      {{/if}}
         {{#if (eq action.type "attack")}}
             <fieldset>
                 <legend>Attack</legend>

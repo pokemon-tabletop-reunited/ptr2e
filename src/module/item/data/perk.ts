@@ -2,13 +2,13 @@ import { PerkPTR2e } from "@item";
 import { HasTraits, HasActions, HasSlug, HasDescription, HasEmbed, HasMigrations } from "@module/data/index.ts";
 import { BaseItemSourcePTR2e, ItemSystemSource } from "./system.ts";
 import { SlugField } from "@module/data/fields/slug-field.ts";
-import { SetField } from "@module/data/fields/set-field.ts";
 import { SlugSchema } from "@module/data/mixins/has-slug.ts";
 import ActionPTR2e from "@module/data/models/action.ts";
 import { ActionsSchema } from "@module/data/mixins/has-actions.ts";
 import { DescriptionSchema } from "@module/data/mixins/has-description.ts";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
+import { PredicateField } from "@system/predication/schema-data-fields.ts";
 
 const PerkExtension = HasEmbed(
   HasTraits(HasMigrations(HasDescription(HasSlug(HasActions(foundry.abstract.TypeDataModel))))),
@@ -29,7 +29,7 @@ export default abstract class PerkSystem extends PerkExtension {
     return {
       ...super.defineSchema() as PerkSystemSchemaExtension,
 
-      prerequisites: new SetField(new fields.StringField(), { label: "PTR2E.FIELDS.prerequisites.label", hint: "PTR2E.FIELDS.prerequisites.hint" }),
+      prerequisites: new PredicateField(),
       cost: new fields.NumberField({ required: true, initial: 1, label: "PTR2E.FIELDS.apCost.label", hint: "PTR2E.FIELDS.apCost.hint" }),
       originSlug: new SlugField({ required: true, nullable: true, initial: null }),
 
@@ -207,14 +207,7 @@ export default interface PerkSystem extends ModelPropsFromSchema<PerkSchema> {
 }
 
 interface PerkSchema extends foundry.data.fields.DataSchema, PerkSystemSchemaExtension {
-  prerequisites: foundry.data.fields.SetField<
-    foundry.data.fields.StringField,
-    string[],
-    Set<string>,
-    true,
-    false,
-    true
-  >;
+  prerequisites: PredicateField;
   cost: foundry.data.fields.NumberField<number, number, true, false, true>;
   originSlug: SlugField<string, string, true, true, true>;
   nodes: foundry.data.fields.ArrayField<

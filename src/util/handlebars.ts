@@ -100,7 +100,9 @@ function _registerPTRHelpers() {
     });
 
     Handlebars.registerHelper("asContentLink", function (content: string) {
+      try {
         const uuid = content ? fu.parseUuid(content) : null;
+      
         if (!uuid?.id) {
             // Return as raw string
             // But escape the content in case of Keyword strings
@@ -179,6 +181,10 @@ function _registerPTRHelpers() {
         };
 
         return TextEditor.createAnchor(data).outerHTML;
+      } catch (error) {
+        console.warn(error);
+        return content;
+      }
     });
 
     Handlebars.registerHelper("sortFolder", function(folder: Folder) {

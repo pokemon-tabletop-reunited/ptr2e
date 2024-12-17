@@ -43,6 +43,10 @@
         "nature": {
           "label": "Nature",
           "hint": "The nature must be a valid nature, a UUID to a Rolltable or blank (random)."
+        },
+        "shiny": {
+          "label": "Shiny",
+          "hint": "The % chance for the Pokémon to be shiny."
         }
       }
     },
@@ -106,7 +110,8 @@
       "PurchaseTier": "Purchase Tier",
       "PurchasePerk": "Purchase Perk",
       "RefundTier": "Refund Tier",
-      "RefundPerk": "Refund Perk"
+      "RefundPerk": "Refund Perk",
+      "Evolve": "Evolve into {name}"
     },
     "TutorList": "Tutor List",
     "OpenTutorList": "Open Tutor List",
@@ -1248,7 +1253,7 @@
       },
       "slug": {
         "label": "Slug",
-        "hint": "The slug is a unique identifier for this entity."
+        "hint": "The slug is a unique identifier for this entity. Generally should not be edited unless you know what you are doing."
       },
       "description": {
         "label": "Effect Description",

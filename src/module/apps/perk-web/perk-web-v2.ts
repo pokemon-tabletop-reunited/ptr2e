@@ -1,11 +1,13 @@
 import { ApplicationConfigurationExpanded, ApplicationV2Expanded } from "../appv2-expanded.ts";
 import { ActorPTR2e } from "@actor";
 import { ChoiceSetChangeSystem, GrantEffectChangeSystem, GrantItemChangeSystem, Trait } from "@data";
-import { ItemPTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
+import { ItemPTR2e, MovePTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
 import Tagify from "@yaireo/tagify";
 import Sortable from "sortablejs";
 import PerkStore, { PerkNode, PerkPurchaseState, PerkState } from "./perk-store.ts";
 import { ActiveEffectPTR2e } from "@effects";
+import { LevelUpMoveSchema } from "@item/data/species.ts";
+import { ImageResolver, sluggify } from "@utils";
 
 export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -197,6 +199,85 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
               : this.currentNode.tierInfo?.lastTier.slug ?? this.currentNode.tierInfo?.perk.slug ?? this.currentNode.slug
           )?.delete();
           PerkWebApp.refresh.call(this);
+        },
+        "evolve": async function (this: PerkWebApp) {
+          if (!this.currentNode || !this.actor) return;
+          if (!this.currentNode.perk.flags.ptr2e?.evolution) return;
+
+          const perk = this.currentNode.perk;
+          const species = await fromUuid<SpeciesPTR2e>((perk.flags.ptr2e.evolution as {uuid: string}).uuid);
+          if (!species) return;
+
+          const current = this.actor.species;
+          if (!current) return;
+
+          const level = this.actor.system.advancement.level;
+          const currentMoveSlugs = new Set(this.actor.itemTypes.move.map(move => move.slug));
+          const newMoves = await (async () => {
+            const levelUpMoves = (species.system.moves.levelUp as ModelPropsFromSchema<LevelUpMoveSchema>[]).filter((move) => move.level <= level && !currentMoveSlugs.has(sluggify(move.name)));
+    
+            return (await Promise.all(
+              levelUpMoves.map(async (move) => fromUuid<MovePTR2e>(move.uuid))
+            )).flatMap((move) => move ? [move] : []);
+          })();
+          
+          const { portrait: img, token: tokenImage } = await (async () => {
+            const config = game.ptr.data.artMap.get(species.system.slug || sluggify(species.name));
+            if (!config) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
+            const resolver = await ImageResolver.createFromSpeciesData(
+              {
+                dexId: species.system.number,
+                shiny: this.actor!.system.shiny,
+                forms: species.system.form ? [species.system.form] : [],
+              },
+              config
+            );
+            if (!resolver?.result) return { portrait: "icons/svg/mystery-man.svg", token: "icons/svg/mystery-man.svg" };
+    
+            const tokenResolver = await ImageResolver.createFromSpeciesData(
+              {
+                dexId: species.system.number,
+                shiny: this.actor!.system.shiny,
+                forms: species.system.form ? [species.system.form, "token"] : ["token"],
+              },
+              config
+            );
+            return {
+              portrait: resolver.result,
+              token: tokenResolver?.result ?? resolver.result
+            }
+          })();
+
+          const flags = species.flags;
+          flags.core ??= {};
+          flags.core.sourceId = species.uuid;
+
+          await this.actor.update({
+            name: this.actor.name == current.name ? species.name : this.actor.name,
+            img: img,
+            prototypeToken: {
+              img: tokenImage,
+              texture: {
+                src: tokenImage,
+              }
+            }
+          });
+
+          this.actor.updateEmbeddedDocuments("Item", [
+            {
+              flags,
+              name: species.system.slug ? Handlebars.helpers.formatSlug(species.system.slug) : species.name,
+              type: 'species',
+              img: img,
+              system: species.system.toObject(),
+              _id: "actorspeciesitem",
+              effects: species.effects.map(e => e.toObject())
+            }
+          ]);
+
+          await this.actor.createEmbeddedDocuments("Item", newMoves.map(move => move.toObject()));
+
+          return void PerkWebApp.refresh.call(this);
         }
       }
     },
@@ -283,7 +364,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
 
   _onScroll: () => void | null;
   _lineCache = new Map<string, SVGLineElement>();
-  _zoomAmount: this['zoomLevels'][number] = 1;
+  _zoomAmount: this['zoomLevels'][number] = 0.4;
 
   web: "global" | ItemUUID = "global";
   private speciesEvolutions: PerkPTR2e[] = [];
@@ -345,6 +426,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           if (!this.editMode) classes.push(classFromState);
           if (node.node.type === "root") classes.push("root");
           if (node.node.type === "entry") classes.push("entry");
+          if (node.perk.flags.ptr2e?.evolution) classes.push("evolution");
 
           if (node.tierInfo) {
             if (!node.tierInfo.maxTierPurchased) classes.push("tiered");
@@ -408,6 +490,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
           available: [PerkState.connected, PerkState.available].includes(this.currentNode?.state as unknown as 1 | 2),
           purchasable: this.currentNode?.state === PerkState.available,
           refundable: this.currentNode?.tierInfo ? true : this.currentNode?.state === PerkState.purchased,
+          evolution: !!perk?.flags.ptr2e?.evolution,
         },
         cost: {
           purchase: this.currentNode?.tierInfo
@@ -415,7 +498,8 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
             : `${game.i18n.localize("PTR2E.PerkWebApp.PurchasePerk")} (${perk?.system.cost} AP)`,
           refund: this.currentNode?.tierInfo
             ? `${game.i18n.localize("PTR2E.PerkWebApp.RefundTier")} ${this.currentNode.tierInfo.maxTierPurchased ? this.currentNode.tierInfo.maxTier : (this.currentNode.tierInfo.tier - 1)} (${this.currentNode?.tierInfo.lastTier.system.cost} AP)`
-            : `${game.i18n.localize("PTR2E.PerkWebApp.RefundPerk")} (${perk?.system.cost} AP)`
+            : `${game.i18n.localize("PTR2E.PerkWebApp.RefundPerk")} (${perk?.system.cost} AP)`,
+          evolution: perk?.flags.ptr2e?.evolution ? game.i18n.format("PTR2E.PerkWebApp.Evolve", { name: Handlebars.helpers.capitalizeFirst(perk?.name?.replace("Evolution: ", '')) || "" }) : null
         }
       },
       filterData: null,
@@ -1003,7 +1087,7 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
         return nodes;
       })(),
       "system.webs": (() => {
-        if(this.web === "global") return primaryEntry.perk.system.webs;
+        if (this.web === "global") return primaryEntry.perk.system.webs;
         const web = new Set((primaryEntry.perk as PerkPTR2e).system.toObject().webs)
         web.add(this.web);
         return web;

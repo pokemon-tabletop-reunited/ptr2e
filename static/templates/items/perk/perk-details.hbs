@@ -4,7 +4,18 @@
       <legend>
         Basic Information
       </legend>
-      {{formField fields.prerequisites value=source.system.prerequisites localize=true}}
+      {{#if (devMode)}}
+        {{formField fields.slug value=source.system.slug localize=true}}
+      {{/if}}
+
+      <div class="form-group">
+        <label>{{localize "PTR2E.FIELDS.prerequisites.label"}}</label>
+        <div class="form-fields">
+          <input type="text" name="system.prerequisites" value="{{json source.system.prerequisites spaces=0}}"/>
+        </div>
+        <p class="hint">{{localize "PTR2E.FIELDS.prerequisites.hint"}}</p>
+      </div>
+      
       {{formField fields.cost value=source.system.cost localize=true}}
 
       <div class="form-group">

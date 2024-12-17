@@ -35,10 +35,15 @@ export default class BasicChangeSystem extends ChangeModel {
         }
 
         // Handle arrays
-        if (change.mode === CONST.ACTIVE_EFFECT_MODES.ADD && Array.isArray(current)) {
+        if (change.mode === CONST.ACTIVE_EFFECT_MODES.ADD && (Array.isArray(current) || current instanceof Set)) {
+          if(Array.isArray(current)) {
             if (!current.includes(newValue)) {
-                current.push(newValue);
+              current.push(newValue);
             }
+          }
+          else {
+            current.add(newValue);
+          }
         } else {
             try {
                 fu.setProperty(actor, path, newValue);
@@ -153,12 +158,12 @@ export default class BasicChangeSystem extends ChangeModel {
     static _applyAdd(change: unknown, current: unknown): number | unknown | foundry.data.validation.DataModelValidationFailure {
         const isNumericAdd =
             typeof change === "number" && (typeof current === "number" || typeof current === "undefined" || current === null);
-        const isArrayAdd = Array.isArray(current) && current.every(e => typeof e === typeof change);
+        const isArrayAdd = (Array.isArray(current) || current instanceof Set) && (current as unknown[]).every(e => typeof e === typeof change)
 
         if (isNumericAdd) {
             return (current as number ?? 0) + change;
         } else if (isArrayAdd) {
-            return change;
+          return change;
         }
 
         return new foundry.data.validation.DataModelValidationFailure({ message: `Unable to Add \`${change}\` to \`${current}\`. This is likely due to an invalid Key.`, invalidValue: change, fallback: false });

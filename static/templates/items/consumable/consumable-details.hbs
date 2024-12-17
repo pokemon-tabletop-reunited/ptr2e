@@ -4,6 +4,10 @@
             <legend>
                 Details
             </legend>
+            {{#if (devMode)}}
+              {{formField fields.slug value=source.system.slug localize=true}}
+            {{/if}}
+            
             {{formField fields.consumableType value=source.system.consumableType localize=true}}
             {{formField fields.cost value=source.system.cost localize=true}}
             {{#if (eq source.system.consumableType 'pokeball')}}

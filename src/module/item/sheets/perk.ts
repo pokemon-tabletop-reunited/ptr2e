@@ -1,5 +1,6 @@
 import { ItemPTR2e, PerkPTR2e, SpeciesPTR2e } from "@item";
 import { default as ItemSheetPTR2e } from "./base.ts";
+import { sluggify } from "@utils";
 
 export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -29,7 +30,7 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
         "delete-web": async function (this: PerkSheet, event: MouseEvent) {
           event.preventDefault();
           const uuid = (event.target as HTMLElement).parentElement?.dataset?.key;
-          if(!uuid || !this.document.system.webs.has(uuid)) return;
+          if (!uuid || !this.document.system.webs.has(uuid)) return;
           const webs = this.document.system.toObject().webs;
           webs.splice(webs.indexOf(uuid), 1);
           await this.document.update({ "system.webs": webs });
@@ -45,12 +46,13 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
 
   override async _prepareContext() {
     const [itemNames, itemLinks] = await (async () => {
-      const result = await Promise.all(this.document.system.prerequisites.map(async prereq => {
-        const item = await fromUuid<PerkPTR2e>(prereq);
-        if (!item) return [prereq, prereq];
+      // const result = await Promise.all(this.document.system.prerequisites.map(async prereq => {
+      //   const item = await fromUuid<PerkPTR2e>(prereq);
+      //   if (!item) return [prereq, prereq];
 
-        return [item.name, await TextEditor.enrichHTML(item.link)]
-      }));
+      //   return [item.name, await TextEditor.enrichHTML(item.link)]
+      // }));
+      const result = this.document.system.prerequisites.map(prereq => [prereq, prereq]);
 
       return [result.map(r => r[0]), result.map(r => r[1])];
     })();
@@ -69,13 +71,13 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
     const item = await ItemPTR2e.fromDropData(data as DropCanvasData);
     if (!item || item.type !== "species") return super._onDropItem(event, data);
 
-    if(this.document.system.webs.has(item.uuid)) return;
+    if (this.document.system.webs.has(item.uuid)) return;
 
     const species = await fromUuid<SpeciesPTR2e>(item.uuid);
-    if(!species) return;
+    if (!species) return;
 
     const uuid = species.system.evolutions?.uuid ?? item.uuid;
-    if(this.document.system.webs.has(uuid)) return;
+    if (this.document.system.webs.has(uuid)) return;
 
     const webs = this.document.system.toObject().webs;
     webs.push(uuid);
@@ -91,4 +93,51 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
         template: PerkSheet.detailsTemplate,
       },
     }, { inplace: false });
+
+  override _prepareSubmitData(
+    _event: SubmitEvent,
+    _form: HTMLFormElement,
+    formData: FormDataExtended
+  ) {
+    const data = fu.expandObject(formData.object) as {
+      [key: string]: unknown;
+      system?: {
+        prerequisites?: string | [];
+      }
+    }
+
+    if (data?.system?.prerequisites) {
+      const prereqs = data.system.prerequisites;
+      if (typeof prereqs === "string") {
+        if (prereqs.trim() === "") delete data.system.prerequisites;
+        else {
+          try {
+            data.system.prerequisites = JSON.parse(prereqs);
+          } catch (error) {
+            if (error instanceof Error) {
+              ui.notifications.error(
+                game.i18n.format("PTR2E.EffectSheet.ChangeEditor.Errors.ChangeSyntax", { message: error.message }),
+              );
+              throw error; // prevent update, to give the user a chance to correct, and prevent bad data
+            }
+          }
+        }
+      } else data.system.prerequisites = [];
+    }
+
+    if (
+      "system" in data &&
+      data.system &&
+      typeof data.system === "object" &&
+      "traits" in data.system &&
+      Array.isArray(data.system.traits)
+    ) {
+      // Traits are stored as an array of objects, but we only need the values
+      data.system.traits = data.system.traits.map((trait: { value: string }) =>
+        sluggify(trait.value)
+      );
+    }
+
+    return data;
+  }
 }
