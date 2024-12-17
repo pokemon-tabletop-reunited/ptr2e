@@ -1,5 +1,5 @@
 /* eslint-disable no-fallthrough */
-import { HasTraits, HasMigrations, PokemonType, ClockPTR2e } from "@data";
+import { HasTraits, HasMigrations, PokemonType, ClockPTR2e, Trait } from "@data";
 import { getTypes, TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import {
   ActorPTR2e,
@@ -529,6 +529,12 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
     super.prepareDerivedData();
     this.species?.prepareDerivedData?.();
     this.parent.species?.prepareDerivedData?.();
+
+    for (const ptype of this.type.types) {
+      if (!this.traits.has(ptype) && Trait.isValid(ptype) && ptype != "untyped") {
+        this.addTraitFromSlug(ptype, true);
+      }
+    }
 
     // Calculate bonus RVs if applicable
     const isAce = this.traits.has("ace");
