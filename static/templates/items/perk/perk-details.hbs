@@ -4,6 +4,10 @@
       <legend>
         Basic Information
       </legend>
+      {{#if (devMode)}}
+        {{formField fields.slug value=source.system.slug localize=true}}
+      {{/if}}
+
       <div class="form-group">
         <label>{{localize "PTR2E.FIELDS.prerequisites.label"}}</label>
         <div class="form-fields">

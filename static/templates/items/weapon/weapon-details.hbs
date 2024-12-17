@@ -2,8 +2,12 @@
     <div class="scroll">
         <fieldset>
             <legend>
-                Current State
+                Details
             </legend>
+            {{#if (devMode)}}
+              {{formField fields.slug value=source.system.slug localize=true}}
+            {{/if}}
+            
             {{formField fields.quantity value=source.system.quantity localize=true}}
             {{formField fields.equipped.fields.carryType value=source.system.equipped.carryType localize=true}}
             {{formField fields.equipped.fields.slot value=source.system.equipped.slot localize=true}}

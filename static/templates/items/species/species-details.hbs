@@ -4,6 +4,10 @@
             <legend>
                 Base Info
             </legend>
+            {{#if (devMode)}}
+              {{formField fields.slug value=source.system.slug localize=true}}
+            {{/if}}
+
             <!-- Number -->
             {{formField fields.number value=source.system.number localize=true}}
             <!-- Types -->
@@ -174,9 +178,6 @@
             <legend>
                 Abilities
             </legend>
-            {{!-- Starting --}}
-            
-
             <!-- Starting -->
             <div class="form-group">
                 <label>Starting Abilities</label>
