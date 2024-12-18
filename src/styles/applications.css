@@ -2435,6 +2435,118 @@ body .application.sheet .form-group {
 .application.sheet.tutor-list main ul li {
   margin-bottom: 0.35rem;
 }
+.application.sheet.exp-tracker .window-content {
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: calc(1rem + 24px) auto;
+  grid-template-areas: "nav" "main";
+  border-top: unset;
+  border-left: unset;
+  border-right: unset;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active {
+  grid-area: main;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active details {
+  padding: 0.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-theme-color);
+  min-height: 35px;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header {
+  display: inline-table;
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex: 0 1 40%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header:has(details[open]) {
+  height: 100%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin: 0.5rem 0;
+  overflow-y: auto;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details:first-child {
+  margin-top: 0;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details:last-child {
+  margin-bottom: 0;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > header {
+  margin: 0.5rem 0;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > header .actor {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+  align-items: center;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > header .actor img {
+  height: 48px;
+  width: 48px;
+  border: unset;
+  border-radius: 50%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > header .actor label {
+  flex: 1;
+  margin-left: 1rem;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > fieldset {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(4rem + 144px);
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > fieldset .actor {
+  flex: 0 0 48px;
+  height: 48px;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > fieldset .actor img {
+  height: 48px;
+  width: 48px;
+  border: unset;
+  border-radius: 50%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header > details > fieldset .actor.loafing {
+  filter: grayscale(100%);
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active aside.base-experience {
+  margin: 2px;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active aside.base-experience details {
+  padding-left: 1.5rem;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms {
+  display: flex;
+  overflow-x: hidden;
+  overflow-y: auto;
+  flex: 1 0 auto;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms:has(details[open]) {
+  height: 100%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms .form-group > label {
+  flex-basis: 65%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms details {
+  overflow-y: auto;
+  flex: 0 0 auto;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="training"].active {
+  grid-area: main;
+}
 .application.sheet.skill-sheet {
   max-height: 750px;
 }

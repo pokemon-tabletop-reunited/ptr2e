@@ -1,0 +1,55 @@
+<section class="tab sheet-body {{tabs.venture.cssClass}}" data-tab="venture" data-group="sheet">
+  <fieldset class="header">
+    {{#each characters as |character|}}
+      <details>
+        <summary>{{character.pc.name}}'s Characters</summary>
+        <header>
+          <div class="actor">
+            <img src="{{character.pc.img}}" alt="{{character.pc.name}}">
+            <label>{{character.pc.name}} ({{character.pc.level}})</label>
+          </div>
+        </header>
+        <fieldset>
+          <legend>Party & Boxes</legend>
+          {{#each character.data.entries as |member|}}
+            {{#if member.loafing}}
+              <div class="actor loafing" data-uuid="{{member.actor.uuid}}" data-tooltip="{{member.actor.name}} is Loafing {{member.loafing.system.stacks}} and will therefore not gain experience.">
+                <img src="{{member.actor.img}}" alt="{{member.actor.name}}">
+              </div>
+            {{else}}
+              <div class="actor" data-uuid="{{member.actor.uuid}}" data-tooltip="{{member.actor.name}} ({{member.actor.level}})">
+                <img src="{{member.actor.img}}" alt="{{member.actor.name}}">
+              </div>
+            {{/if}}
+          {{/each}}
+        </fieldset>
+      </details>
+    {{/each}}
+  </fieldset>
+  <aside class="base-experience">
+    <details open>
+      <summary>Base Experience Reward</summary>
+      <p class="mt-1 mb-1">The current BER reward is: {{ber}} exp.</p>
+    </details>
+  </aside>
+  <fieldset class="cms">
+    <legend>Circumstance Modifiers</legend>
+    {{#each circumstanceGroups as |group|}} 
+      <details class="{{group.id}}">
+        <summary>{{localize group.title}}</summary>
+
+        {{#each group.modifiers as |modifier|}}
+          <div class="form-group">
+            <label for="{{modifier.name}}" class="short">{{localize modifier.label}} ({{multiply modifier.value 100}}%)</label>
+            <div class="form-fields">
+              <input type="checkbox" id="{{modifier.name}}" name="{{modifier.name}}" {{checked modifier.checked}} />
+            </div>
+            {{#if modifier.hint}}
+              <span class="hint">{{{localize modifier.hint}}}</span>
+            {{/if}}
+          </div>
+        {{/each}}
+      </details>
+    {{/each}}
+  </fieldset>
+</section>
