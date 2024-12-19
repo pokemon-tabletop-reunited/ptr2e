@@ -2,6 +2,7 @@ import { default as TypeEffectiveness } from "./config/effectiveness.ts";
 import { ClockDatabase } from "@data";
 import { SkillsSettingsMenu } from "@module/apps/skills.ts";
 import { TraitsSettingsMenu } from "@module/apps/traits.ts";
+import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 
 export function initializeSettings() {
@@ -183,5 +184,14 @@ export function initializeSettings() {
     onChange: () => {
       game.ptr.data.tutorList = game.settings.get("ptr2e", "tutorListData");
     }
+  })
+
+  game.settings.register("ptr2e", "expTrackerData", {
+    name: "PTR2E.SETTINGS.ExpTrackerData.Name",
+    hint: "PTR2E.SETTINGS.ExpTrackerData.Hint",
+    default: {},
+    config: false,
+    type: ExpTrackerSettings,
+    scope: "world"
   })
 }

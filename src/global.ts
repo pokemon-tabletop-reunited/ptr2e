@@ -19,6 +19,7 @@ import { CompendiumBrowser } from "@module/apps/compendium-browser/index.ts";
 import { TutorListSettings } from "@system/tutor-list/setting-model.ts";
 import { TutorListApp } from "@module/apps/tutor-list.ts";
 import GithubManager from "@module/apps/github.ts";
+import { ExpTrackerSettings } from "@system/exp-tracker-model.ts";
 
 interface GamePTR2e
   extends Game<
@@ -112,7 +113,9 @@ declare global {
     get(module: "ptr2e", key: "compendiumBrowserSources"): CompendiumBrowserSources
     get(module: "ptr2e", key: "compendiumBrowserPacks"): CompendiumBrowserSettings
     get(module: "ptr2e", key: "tutorListData"): TutorListSettings
+    get(module: "ptr2e", key: "expTrackerData"): ExpTrackerSettings
     get(module: "ptr2e", key: "tokens.autoscale"): boolean
+    set(module: "ptr2e", key: "expTrackerData", value: ExpTrackerSettings['_source']): ExpTrackerSettings
   }
 
   // eslint-disable-next-line @typescript-eslint/no-namespace

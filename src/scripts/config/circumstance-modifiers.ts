@@ -379,7 +379,7 @@ export const CircumstanceModifierGroups = Object.freeze({
     title: "PTR2E.CircumstanceModifiers.Custom",
     modifiers: []
   }
-} as Record<string, CircumstanceModifierGroup>);
+} as Record<"combat" | "social" | "exploration" | "contests" | "pokeathlons" | "other" | "custom", CircumstanceModifierGroup>);
 
 export interface CircumstanceModifierGroup {
   id: string;

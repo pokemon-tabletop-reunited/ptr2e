@@ -2438,11 +2438,18 @@ body .application.sheet .form-group {
 .application.sheet.exp-tracker .window-content {
   display: grid;
   grid-template-columns: 100%;
-  grid-template-rows: calc(1rem + 24px) auto;
-  grid-template-areas: "nav" "main";
+  grid-template-rows: calc(1rem + 24px) auto min-content;
+  grid-template-areas: "nav" "main" "footer";
+}
+.application.sheet.exp-tracker .window-content nav.tabs {
   border-top: unset;
   border-left: unset;
   border-right: unset;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="footer"] {
+  grid-area: footer;
+  padding: 0.5rem;
+  border-top: 1px solid var(--border-theme-color);
 }
 .application.sheet.exp-tracker .window-content [data-application-part="venture"].active {
   grid-area: main;
@@ -2463,7 +2470,6 @@ body .application.sheet .form-group {
   display: inline-table;
   overflow-x: hidden;
   overflow-y: auto;
-  flex: 0 1 40%;
 }
 .application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.header:has(details[open]) {
   height: 100%;
@@ -2543,6 +2549,12 @@ body .application.sheet .form-group {
 .application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms details {
   overflow-y: auto;
   flex: 0 0 auto;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms fieldset.custom .form-group label {
+  flex-basis: 50%;
+}
+.application.sheet.exp-tracker .window-content [data-application-part="venture"].active fieldset.cms fieldset.custom .form-group .form-fields {
+  flex-basis: 40%;
 }
 .application.sheet.exp-tracker .window-content [data-application-part="training"].active {
   grid-area: main;
