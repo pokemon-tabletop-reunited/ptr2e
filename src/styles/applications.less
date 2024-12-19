@@ -884,7 +884,7 @@ body {
                     grid-template-rows: repeat(7, 1fr);
 
                     .skill-component {
-                        grid-area: 1 / 1 / span 4 / span 3;
+                        grid-area: 5 / 1 / span 3 / span 4;
                     }
 
                     aside.stats-chart-aside {
@@ -909,7 +909,7 @@ body {
                     }
 
                     .movement-component {
-                        grid-area: 5 / 1 / span 3 / span 3;
+                        grid-area: 5 / 5 / span 3 / span 3;
                         padding: 0.5rem;
 
                         .movement {
@@ -923,6 +923,49 @@ body {
                                 flex: 0 0 45%;
                             }
                         }
+                    }
+
+                    aside.effectiveness {
+                      grid-area: 1 / 1 / span 4 / span 4;
+                      padding: 0.5rem;
+
+                      fieldset {
+                        background: linear-gradient(to right, rgba(7, 7, 10, 0.93), rgba(19, 17, 31, 0.95));
+                        border-radius: 8px;
+                        border: 1px solid var(--border-theme-color);
+
+                        display: flex;
+                        flex-direction: column;
+
+                        overflow-y: auto;
+
+                        &.effectiveness-container {
+                          flex-direction: row;
+                          gap: 0.25rem;
+                          flex-wrap: wrap;
+                          overflow: unset;
+                        }
+                      }
+
+                      div.effectiveness {
+                        display: flex;
+                        flex-direction: row;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        gap: 0.25rem;
+
+                        img {
+                          height: 32px;
+                          width: 32px;
+                          border: unset;
+                        }
+
+                        small {
+                          text-align: center;
+                          color: var(--hint-text-color);
+                        }
+                      }
                     }
                 }
 
