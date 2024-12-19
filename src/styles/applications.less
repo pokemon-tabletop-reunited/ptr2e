@@ -1962,6 +1962,124 @@ body {
         
         [data-application-part="training"].active {
           grid-area: main;
+
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+
+          height: 100%;
+          overflow-x: hidden;
+          overflow-y: auto;
+
+          details {
+            padding: 0.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-theme-color);
+            min-height: 35px;
+          }
+
+          fieldset.header {
+            display: inline-table;
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            &:has(details[open]) {
+              height: 100%;
+            }
+
+            fieldset.training-targets {
+              display: grid;
+              grid-template-columns: 1fr 1fr 1fr;
+              grid-template-rows: 1fr 1fr;
+
+              .slot {
+                place-items: center;
+              }
+
+              .actor {
+                height: 64px;
+                width: 64px;
+
+                border: 1px solid var(--border-theme-color);
+                border-radius: 50%;
+
+                img {
+                  height: 64px;
+                  width: 64px;
+                  border: unset;
+                }
+
+                &.empty {
+                  border-style: dashed;
+                }
+              }
+            }
+
+            > details {
+              display: flex;
+              flex-direction: column;
+              gap: 0.5rem;
+              margin: 0.5rem 0;
+              overflow-y: auto;
+
+              &:first-child {
+                margin-top: 0;
+              }
+
+              &:last-child {
+                margin-bottom: 0;
+              }
+
+              > header {
+                margin: 0.5rem 0;
+
+                .actor {
+                  display: flex;
+                  flex-direction: row;
+                  gap: 0.5rem;
+                  align-items: center;
+
+                  img {
+                    height: 48px;
+                    width: 48px;
+                    border: unset;
+                    border-radius: 50%;
+                  }
+
+                  label {
+                    flex: 1;
+                    margin-left: 1rem;
+                  }
+                }
+              }
+
+              > fieldset {
+                display: flex;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 0.5rem;
+                overflow-y: auto;
+                overflow-x: hidden;
+                max-height: calc(4rem + 144px);
+
+                .actor {
+                  flex: 0 0 48px;
+                  height: 48px;
+
+                  img {
+                    height: 48px;
+                    width: 48px;
+                    border: unset;
+                    border-radius: 50%;
+                  }
+
+                  &.loafing {
+                    filter: grayscale(100%);
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

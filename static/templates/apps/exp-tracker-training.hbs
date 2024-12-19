@@ -1,3 +1,44 @@
 <section class="tab sheet-body {{tabs.training.cssClass}}" data-tab="training" data-group="sheet">
-
+  <fieldset class="header">
+    {{#each characters as |character|}}
+      <details {{#if (is ../open character.pc.uuid)}}open{{/if}}>
+        <summary>{{character.pc.name}}'s Characters</summary>
+        <header>
+          <div class="actor">
+            <img src="{{character.pc.img}}" alt="{{character.pc.name}}">
+            <label>{{character.pc.name}} ({{character.pc.level}})</label>
+          </div>
+        </header>
+        <fieldset class="training-targets">
+          <legend>Training Targets</legend>
+          {{#each character.slots as |slot|}}
+            <div class="slot" data-slot="{{@index}}" data-parent="{{../this.pc.uuid}}">
+              {{#if slot.actor}}
+                <div class="actor" data-uuid="{{slot.actor.uuid}}" data-tooltip="{{slot.actor.name}} ({{slot.actor.level}})">
+                  <img src="{{slot.actor.img}}" alt="{{slot.actor.name}}">
+                </div>
+              {{else}}
+                <div class="actor empty" data-tooltip="Empty Slot">
+                </div>
+              {{/if}}
+            </div>
+          {{/each}}
+        </fieldset>
+        <fieldset class="box">
+          <legend>Party & Boxes</legend>
+          {{#each character.data.entries as |member|}}
+            {{#if member.loafing}}
+              <div class="actor loafing" data-uuid="{{member.actor.uuid}}" data-tooltip="{{member.actor.name}} is Loafing {{member.loafing.system.stacks}} and can therefore not gain experience.">
+                <img src="{{member.actor.img}}" alt="{{member.actor.name}}">
+              </div>
+            {{else}}
+              <div class="actor" data-uuid="{{member.actor.uuid}}" data-tooltip="{{member.actor.name}} ({{member.actor.level}})">
+                <img src="{{member.actor.img}}" alt="{{member.actor.name}}">
+              </div>
+            {{/if}}
+          {{/each}}
+        </fieldset>
+      </details>
+    {{/each}}
+  </fieldset>
 </section>

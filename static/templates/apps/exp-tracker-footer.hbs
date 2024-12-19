@@ -1,3 +1,7 @@
 <footer class="d-flex flex-row justify-content-center align-items-center">
-  <button class="fb-65" type="button" data-action="apply-exp">Apply all EXP</button>
+  {{#if (is tabs.training.active true)}}
+    <button class="fb-65" type="button" data-action="apply-training-exp">Apply Training EXP</button>
+  {{else}}
+    <button class="fb-65" type="button" data-action="apply-venture-exp">Apply Venture EXP</button>
+  {{/if}}
 </footer>
