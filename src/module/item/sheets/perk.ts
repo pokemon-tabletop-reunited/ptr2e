@@ -45,24 +45,9 @@ export default class PerkSheet extends ItemSheetPTR2e<PerkPTR2e["system"]> {
   override noActions = false;
 
   override async _prepareContext() {
-    const [itemNames, itemLinks] = await (async () => {
-      // const result = await Promise.all(this.document.system.prerequisites.map(async prereq => {
-      //   const item = await fromUuid<PerkPTR2e>(prereq);
-      //   if (!item) return [prereq, prereq];
-
-      //   return [item.name, await TextEditor.enrichHTML(item.link)]
-      // }));
-      const result = this.document.system.prerequisites.map(prereq => [prereq, prereq]);
-
-      return [result.map(r => r[0]), result.map(r => r[1])];
-    })();
-
     return {
       ...(await super._prepareContext()),
-      prerequisites: {
-        names: itemNames,
-        links: itemLinks,
-      },
+      prerequisites: this.document.system.getPredicateStrings(),
       debug: game.user.isGM && !!game.settings.get("ptr2e", "dev-mode"),
     }
   }

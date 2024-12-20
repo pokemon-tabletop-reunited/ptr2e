@@ -9,6 +9,7 @@ import { DescriptionSchema } from "@module/data/mixins/has-description.ts";
 import { MigrationSchema } from "@module/data/mixins/has-migrations.ts";
 import { TraitsSchema } from "@module/data/mixins/has-traits.ts";
 import { PredicateField } from "@system/predication/schema-data-fields.ts";
+import { Predicate, PredicateStatement, StatementValidator } from "@system/predication/predication.ts";
 
 const PerkExtension = HasEmbed(
   HasTraits(HasMigrations(HasDescription(HasSlug(HasActions(foundry.abstract.TypeDataModel))))),
@@ -121,6 +122,140 @@ export default abstract class PerkSystem extends PerkExtension {
         break;
       }
     }
+  }
+
+  getPredicateStrings(): string[] {
+    function handlePredicate(predicate: PredicateStatement | PredicateStatement[] | Predicate | number): string | string[] {
+      if (predicate instanceof Predicate) {
+        return Array.from(predicate.flatMap(handlePredicate));
+      }
+
+      // Handle roll-option array
+      if (Array.isArray(predicate)) {
+        return Array.from(new Set(predicate.flatMap(handlePredicate)));
+      }
+
+      // Handle string
+      if (typeof predicate === "string") {
+        const number = Number(predicate);
+        if(!isNaN(number)) {
+          return handlePredicate(number);
+        }
+
+        const itemRollOption = predicate.trim().match(/^(item):(?<type>[-a-z]+):(?<slug>[-a-z]+)$/);
+        if(itemRollOption) {
+          return Handlebars.helpers.formatSlug(itemRollOption.groups?.slug);
+        }
+
+        const traitRollOption = predicate.trim().match(/^(trait):(?<slug>[-a-z]+)$/);
+        if(traitRollOption) {
+          return `[${Handlebars.helpers.formatSlug(traitRollOption.groups?.slug)}]`;
+        }
+        
+        const injected = predicate.trim().match(/^{(?<type>actor|item|effect|change)\|(?<path>[\w.]+)}$/);
+        if(injected) {
+          const path = injected.groups?.path;
+          if(!path) return predicate.toString();
+
+          if(path.startsWith("skills.")) {
+            return `${Handlebars.helpers.formatSlug(path.split(".")[1])}`;
+          }
+          switch(path) {
+            case "level":
+            case "system.advancement.level":
+              return "Level";
+          }
+        }
+
+        return predicate.toString();
+      }
+
+      if(typeof predicate === "number") {
+        return predicate.toString();
+      }
+
+      // Handle object
+      if (predicate && typeof predicate === "object" && Object.keys(predicate).length > 0) {
+        const statement = predicate as object
+        if(StatementValidator.isBinaryOp(statement)) {
+          if('eq' in statement) {
+            //@ts-expect-error - Could be attempting to evaluate truthy value
+            if(statement.eq[1] == true) {
+              return handlePredicate(statement.eq[0]);
+            }
+            //@ts-expect-error - Could be attempting to evaluate falsey value
+            if(statement.eq[1] == false) {
+              return `Not: ${handlePredicate(statement.eq[0])}`;
+            }
+            return `${handlePredicate(statement.eq[0])} == ${handlePredicate(statement.eq[1])}`;
+          }
+          if('gt' in statement) {
+            return `${handlePredicate(statement.gt[0])} > ${handlePredicate(statement.gt[1])}`;
+          }
+          if('gte' in statement) {
+            return `${handlePredicate(statement.gte[0])} >= ${handlePredicate(statement.gte[1])}`;
+          }
+          if('lt' in statement) {
+            return `${handlePredicate(statement.lt[0])} < ${handlePredicate(statement.lt[1])}`;
+          }
+          if('lte' in statement) {
+            return `${handlePredicate(statement.lte[0])} <= ${handlePredicate(statement.lte[1])}`;
+          }
+        }
+        if (StatementValidator.isAnd(statement)) {
+          const and = handlePredicate(statement.and);
+          if(Array.isArray(and)) {
+            return and[0];
+          }
+          return `All of: ${Array.isArray(and) ? and.join(', ') : and}`;
+        }
+        if (StatementValidator.isOr(statement)) {
+          const or = handlePredicate(statement.or);
+          if(Array.isArray(or) && or.length === 1) {
+            return or[0];
+          }
+          return `One of: ${Array.isArray(or) ? or.join(', ') : or}`;
+        }
+        if (StatementValidator.isNand(statement)) {
+          const nand = handlePredicate(statement.nand);
+          if(Array.isArray(nand) && nand.length === 1) {
+            return `Not: ${nand[0]}`;
+          }
+          return `None of: ${Array.isArray(nand) ? nand.join(', ') : nand}`;
+        }
+        if (StatementValidator.isXor(statement)) {
+          const xor = handlePredicate(statement.xor);
+          if(Array.isArray(xor) && xor.length === 1) {
+            return xor[0];
+          }
+          return `Exactly one of: ${Array.isArray(xor) ? xor.join(', ') : xor}`;
+        }
+        if (StatementValidator.isNor(statement)) {
+          const nor = handlePredicate(statement.nor);
+          if(Array.isArray(nor) && nor.length === 1) {
+            return `Not: ${nor[0]}`;
+          }
+          return `Not all of: ${Array.isArray(nor) ? nor.join(', ') : nor}`;
+        }
+        if (StatementValidator.isNot(statement)) {
+          return `Not: ${handlePredicate(statement.not)}`;
+        }
+        if (StatementValidator.isIf(statement)) {
+          return `If: ${handlePredicate(statement.if)} then ${handlePredicate(statement.then)}`;
+        }
+        if (StatementValidator.isXOf(statement)) {
+          if(statement.x === 1) return handlePredicate(statement.xof);
+          const xof = handlePredicate(statement.xof);
+          return `${statement.x} of: ${Array.isArray(xof) ? xof.join(', ') : xof}`;
+        }
+      }
+
+      return predicate.toString();
+    }
+
+    const value = this.prerequisites.flatMap(handlePredicate);
+
+    return value;
   }
 
   override prepareBaseData() {
