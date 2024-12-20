@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 30"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          30
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>The target gains @Affliction[precise] 1.</p>",

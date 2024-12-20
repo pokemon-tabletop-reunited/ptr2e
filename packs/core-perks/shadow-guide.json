@@ -3,8 +3,18 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Trainer] or [Expedition Leader]",
-      "Psychology 30"
+      {
+        "or": [
+          "trait:trainer",
+          "trait:expedition-leader"
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.psychology.mod}",
+          30
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>[Closed Heart] creatures that you are responsible for may gain XP, level up, learn new moves and evolve as normal.</p>",

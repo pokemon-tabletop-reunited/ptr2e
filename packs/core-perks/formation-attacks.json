@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Conversation 25",
-      "[Pack Mon]"
+      {
+        "gte": [
+          "{actor|skills.conversation.mod}",
+          25
+        ]
+      },
+      "trait:pack-mon"
     ],
     "cost": 2,
     "description": "<p>When within Reach of a creature, you gain +1 ACC on Attacks against that creature for every other Pack Member that is also within Reach of that creature.<br><br>Connection: Beat Up</p>",

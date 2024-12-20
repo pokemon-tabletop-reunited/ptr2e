@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Husbandry 25"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          25
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You understand the fundamentals of Pokemon Egg Groups and behaviour well enough to breed Pokemon. You may undertake the Breeding Camp Action to perform a Husbandry skill check and produce an Egg.</p>",

@@ -3,8 +3,23 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 50 OR Survival 30",
-      "Basic Ball Crafting"
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.electronics.mod}",
+              50
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.survival.mod}",
+              30
+            ]
+          }
+        ]
+      },
+      "item:perk:basic-ball-crafting"
     ],
     "cost": 1,
     "description": "<p>You learn three [Hunting Ball] recipies.</p>",

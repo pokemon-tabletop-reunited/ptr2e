@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Climate Change",
-      "Level 25"
+      "item:perk:climate-change",
+      {
+        "gte": [
+          "{actor|level}",
+          25
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>Trigger: A [Weather] Effect the user created is removed by either expiring or due to the effect of an Attack or Ability (but not Intense Weather).<br><br> Effect: The user may use a [Weather] Attack or Ability as a Free Action at [Interrupt 3], if able. If the cancelling effect and its source lack [Legendary], the source creature gains @Affliction[suppressed] 5 and the source Attack/Ability is @Affliction[disabled] 5 or @Affliction[nullified] 5.</p>",

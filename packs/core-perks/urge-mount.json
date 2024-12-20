@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Riding 25"
+      {
+        "gte": [
+          "{actor|skills.riding.mod}",
+          25
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>When you use your Mount to Rush, you may roll Riding instead of the usual Rushing skill (whether Climbing, Running or Swimming skill.)</p>",

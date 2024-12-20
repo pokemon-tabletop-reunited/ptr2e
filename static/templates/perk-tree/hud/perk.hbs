@@ -18,10 +18,10 @@
                   <h2 class="m-0 noborder center-text">Actions</h2>
                 {{/if}}
                 {{#each actions}}
-                  {{> action-embed action=action}}
+                  {{> action-embed action=action noButtons=true}}
                 {{/each}}
             </figure>
-            <footer> {{log this}}
+            <footer>
               {{#if state.evolution}}
                 <button class="purchase {{#unless state.purchasable}}unavailable{{/unless}}" data-action="evolve" {{#unless state.purchasable}}disabled{{/unless}}>
                   <i class="fas fa-sack-dollar"></i> {{{cost.evolution}}}

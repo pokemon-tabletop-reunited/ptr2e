@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Husbandry 40",
-      "Zigzagoon-Class Sandwiches"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          40
+        ]
+      },
+      "item:perk:zigzagoon-class-sandwiches"
     ],
     "cost": 3,
     "description": "<p>You are able to make Lechonk-Class Sandwiches. The staple food of the explorer. These reliable sandwiches confer a +10 to all Skill checks made in the following day.</p>",

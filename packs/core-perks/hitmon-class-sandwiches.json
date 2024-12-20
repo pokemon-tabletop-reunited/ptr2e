@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Husbandry 80"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          80
+        ]
+      }
     ],
     "cost": 5,
     "description": "<p>The ultimate in exploration nutrition. The adventurer with Hitmon-Class Sandwiches for Lunch gains a passive +20 to all skill checks for the following day, and can gain an additional +25 to one skill check that day.</p>",

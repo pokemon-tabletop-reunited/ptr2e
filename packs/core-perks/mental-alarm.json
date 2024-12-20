@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Science (Parapsychology) 35"
+      {
+        "gte": [
+          "{actor|skills.parapsychology.mod}",
+          35
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You become aware when someone attempts to read your mind using Psychic powers. Does not affect Aura.</p>",

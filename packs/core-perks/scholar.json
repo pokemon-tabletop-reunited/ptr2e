@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Research 25"
+      {
+        "gte": [
+          "{actor|skills.research.mod}",
+          25
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You gain access to the Research Camp Action. You may not know something then and there in the moment, but with enough dedication and the right resources, you will find out eventually.</p>",

@@ -54,20 +54,22 @@
                 {{/if}}
             </fieldset>
         </section>
-        <footer class="buttons">
-          <section class="attack-delay">
-            <button class="delay-attack" data-attack-uuid="{{attack.uuid}}" data-tooltip="Delay Attack">Delay Attack</button>
-          </section>
-        {{#if attack.cost.powerPoints}}
-          <section class="attack-pp">
-            <button class="consume-pp" data-attack-uuid="{{attack.uuid}}" data-tooltip="Consume Power Points">Consume PP</button>
-          </section>
-        {{/if}}
-        {{#if attack.summon}}
-          <section class="attack-summon mt-2">
-            <button class="create-summon" data-attack-uuid="{{attack.uuid}}" data-tooltip="Add Summon to Combat (GM Only)" {{#unless (isGm)}}disabled{{/unless}}>Create Summon</button>
-          </section>
-        {{/if}}
-        </footer>
+        {{#unless noButtons}}
+          <footer class="buttons">
+            <section class="attack-delay">
+              <button class="delay-attack" data-attack-uuid="{{attack.uuid}}" data-tooltip="Delay Attack">Delay Attack</button>
+            </section>
+          {{#if attack.cost.powerPoints}}
+            <section class="attack-pp">
+              <button class="consume-pp" data-attack-uuid="{{attack.uuid}}" data-tooltip="Consume Power Points">Consume PP</button>
+            </section>
+          {{/if}}
+          {{#if attack.summon}}
+            <section class="attack-summon mt-2">
+              <button class="create-summon" data-attack-uuid="{{attack.uuid}}" data-tooltip="Add Summon to Combat (GM Only)" {{#unless (isGm)}}disabled{{/unless}}>Create Summon</button>
+            </section>
+          {{/if}}
+          </footer>
+        {{/unless}}
     </main>
 </content> 

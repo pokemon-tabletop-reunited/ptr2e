@@ -27,7 +27,12 @@
     "description": "<p>Spend 6PP and grant a field-wide +2 SPD stages to yourself and all allies for 5 activations as a Complex Action.</p>",
     "traits": [],
     "prerequisites": [
-      "Leadership 40"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          40
+        ]
+      }
     ],
     "cost": 4,
     "_migration": {

@@ -3,7 +3,22 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 40 OR Computers 40"
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.electronics.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.computers.mod}",
+              40
+            ]
+          }
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>As a Camp Action, you can craft TMs.</p>",

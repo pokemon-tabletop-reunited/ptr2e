@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 35",
-      "Basic Ball Crafting"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          35
+        ]
+      },
+      "item:perk:basic-ball-crafting"
     ],
     "cost": 1,
     "description": "<p>You learn the Feather Ball and Heavy Ball recipes.</p>",

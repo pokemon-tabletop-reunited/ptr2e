@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Husbandry 60",
-      "Milcery-Class Curry"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          60
+        ]
+      },
+      "item:perk:milcery-class-curry"
     ],
     "cost": 4,
     "description": "<p>You are able to make Copperajah-class Curries as a Camp Action. One of these Curries restores 100% of the party's max HP. After making a Copperajah-class Curry, roll a d100. On a 1-20, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",

@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Teaching 35",
-      "<Type> Specialty"
+      {
+        "gte": [
+          "{actor|skills.teaching.mod}",
+          35
+        ]
+      },
+      "item:perk:type-specialty"
     ],
     "cost": 2,
     "description": "<p>You are able to tutor [Domain] abilities associated to your chosen &lt;Type&gt; . Only yourself, and creatures that have your chosen Type can learn these abilties. This perk may be purchased multiple times, once per Type Specialty you possess.</p>",

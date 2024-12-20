@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Track 20"
+      {
+        "gte": [
+          "{actor|skills.track.mod}",
+          20
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You gain +10 on Skill Checks used as part of a fishing activity.</p>",

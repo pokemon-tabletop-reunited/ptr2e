@@ -3,8 +3,47 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Science (Palaeontology) 35",
-      "TWO OF: Archaeology 25, Science (Biology) 25, Science (Botany) 25, Science (Geology) 25, Science (Zoology) 25"
+      {
+        "gte": [
+          "{actor|skills.palaeontology.mod}",
+          35
+        ]
+      },
+      {
+        "xof": [
+          {
+            "gte": [
+              "{actor|skills.archaeology.mod}",
+              25
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.biology.mod}",
+              25
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.botany.mod}",
+              25
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.geology.mod}",
+              25
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.zoology.mod}",
+              25
+            ]
+          }
+        ],
+        "x": 2
+      }
     ],
     "cost": 2,
     "description": "<p>You gain +20 on rolls to identify Fossils (Pokemon or otherwise) and operate Reanimation Machines or similar mechanisms (including as part of the \"Revival\" Downtime Action).</p>",

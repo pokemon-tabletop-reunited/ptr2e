@@ -10,7 +10,12 @@
     "description": "<p>Increase your Inventory Point (IP) reservoir by 2.</p>",
     "traits": [],
     "prerequisites": [
-      "Resources 30"
+      {
+        "gte": [
+          "{actor|skills.resources.mod}",
+          30
+        ]
+      }
     ],
     "cost": 1,
     "_migration": {

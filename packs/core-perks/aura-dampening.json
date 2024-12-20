@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 30"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          30
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>You are able to dampen your Aura, making it difficult to read your moods and intentions. You may spend the 2 PP cost as an [Interrupt 3] Free Action when someone attempts to probe your Aura using Aura Empathy to inflict a -20 penalty to any triggering Aura Sense check.</p>",

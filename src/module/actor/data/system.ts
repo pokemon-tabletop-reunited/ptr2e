@@ -448,8 +448,10 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
 
     for (const type of this.parent.species.types.values()) {
       this.type.types.add(type);
-      if (this.type.types.size > 1 && this.type.types.has("untyped"))
+      if (this.type.types.size > 1 && this.type.types.has("untyped")) {
         this.type.types.delete("untyped");
+        this.traits.delete("untyped");
+      }
     }
 
     this.movement = Object.fromEntries([

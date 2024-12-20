@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 35"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          35
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>The target adds this Action's [Type] to the next Attack they declare, lasting until the Attack resolves. The user may also be selected as a target for this Action.</p>",

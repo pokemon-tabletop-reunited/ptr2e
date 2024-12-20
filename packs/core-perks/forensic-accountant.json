@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Accounting 30"
+      {
+        "gte": [
+          "{actor|skills.accounting.mod}",
+          30
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You have a knack for spotting discrepancies when looking through accounts, inventory records and similar. You gain a +10 to Accounting checks to catch errors and \"cooked\" books.</p>",

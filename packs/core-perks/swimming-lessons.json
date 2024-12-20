@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Swim 25"
+      {
+        "gte": [
+          "{actor|skills.swim.mod}",
+          25
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>If you previously lacked a Swim Movement Allowance, you gain a Swim Movement Allowance of 3. If you already possessed a Swim Movement Allowance, increase that Movement Allowance by 2.</p>",

@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Shadow Guide",
-      "Psychology 50"
+      "item:perk:shadow-guide",
+      {
+        "gte": [
+          "{actor|skills.psychology.mod}",
+          50
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>You may activate this perk when a [Closed Heart] creature would gain @Affliction[hyper-mode]. That creature does not gain @Affliction[hyper-mode] and is healed 2 Ticks of HP and 10 PP.</p>",

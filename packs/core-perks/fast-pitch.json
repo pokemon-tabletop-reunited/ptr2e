@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Lift 25"
+      {
+        "gte": [
+          "{actor|skills.lift.mod}",
+          25
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>You may activate Fling with [Priority 3] utilising a [Pokeball], and spend up to 4 additional PP to gain +1 to the [Priority X] of the Fling per PP spent.</p>",

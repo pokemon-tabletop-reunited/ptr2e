@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Hardy Trekker",
-      "Survival 50"
+      "item:perk:hardy-trekker",
+      {
+        "gte": [
+          "{actor|skills.survival.mod}",
+          50
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>The user takes 20% less damage while affected by a [Terrain], and 30% less damage while affected by a [Weather], stacking to 50% when both are present.</p>",

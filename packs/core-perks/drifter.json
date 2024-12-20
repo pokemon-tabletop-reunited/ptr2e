@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Flying] or [Telekinetic]"
+      {
+        "or": [
+          "trait:flying",
+          "trait:telekinetic"
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>You gain the [Hover] trait, and if you did not already possess a Flight movement, you gain a Flight Movement Allowance equal to that of your highest Primary Movement Score.</p>",

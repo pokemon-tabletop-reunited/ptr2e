@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 90",
-      "Expert Ball Crafting"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          90
+        ]
+      },
+      "item:perk:expert-ball-crafting"
     ],
     "cost": 2,
     "description": "<p>You learn the Beast Ball and Strange Ball recipes.</p>",

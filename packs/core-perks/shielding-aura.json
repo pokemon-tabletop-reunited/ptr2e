@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 50"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          50
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>You harden your Aura about yourself. You gain @Affliction[resolved] 5.</p>",

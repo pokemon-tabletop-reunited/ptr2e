@@ -3,8 +3,18 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Science (Zoology) 25",
-      "Teaching 25"
+      {
+        "gte": [
+          "{actor|skills.zoology.mod}",
+          25
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.teaching.mod}",
+          25
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>The user may spend 2 PP as a Free Action to prevent their next Attack from reducing a target's HP below 1.</p>",

@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Natural World 20"
+      {
+        "gte": [
+          "{actor|skills.natural-world.mod}",
+          20
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You understand the basics of caring for and propagating plants. You've even managed to keep a house plant alive for several weeks. You can grow Grade E plants as a Camp Action.</p>",

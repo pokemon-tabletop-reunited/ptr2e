@@ -3,9 +3,44 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Trainer] or [Expedition Leader]",
-      "Science (Meteorology) 25 OR (Survival 40 AND Occult Spiritual 40)",
-      "Level 10"
+      {
+        "or": [
+          "trait:trainer",
+          "trait:expedition-leader"
+        ]
+      },
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.meteorology.mod}",
+              25
+            ]
+          },
+          {
+            "and": [
+              {
+                "gte": [
+                  "{actor|skills.survival.mod}",
+                  40
+                ]
+              },
+              {
+                "gte": [
+                  "{actor|skills.spiritual.mod}",
+                  40
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "gte": [
+          "{actor|level}",
+          10
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>You gain +15 to Skill Rolls pertaining to Weather, and gain all [Climate Clay] recipies. The user adds all [Weather] Attacks to their Tutor List.</p>",

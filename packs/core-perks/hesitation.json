@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Intimidate 40"
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          40
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>When the user hits a creature with a [Social] Action,they may spend 2 PP to cause to the target to be Flinched 3. For multiple targets, you must spend 2 PP to affect each target</p>",

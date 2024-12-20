@@ -142,9 +142,13 @@ export default abstract class PerkSystem extends PerkExtension {
           return handlePredicate(number);
         }
 
+        if(predicate.trim().startsWith("#")) {
+          return `${predicate.replace("#", "")} (Not Automated)`;
+        }
+
         const itemRollOption = predicate.trim().match(/^(item):(?<type>[-a-z]+):(?<slug>[-a-z]+)$/);
         if(itemRollOption) {
-          return Handlebars.helpers.formatSlug(itemRollOption.groups?.slug);
+          return `${Handlebars.helpers.formatSlug(itemRollOption.groups?.slug)} (${Handlebars.helpers.formatSlug(itemRollOption.groups?.type)})`;
         }
 
         const traitRollOption = predicate.trim().match(/^(trait):(?<slug>[-a-z]+)$/);
@@ -157,14 +161,16 @@ export default abstract class PerkSystem extends PerkExtension {
           const path = injected.groups?.path;
           if(!path) return predicate.toString();
 
-          if(path.startsWith("skills.")) {
-            return `${Handlebars.helpers.formatSlug(path.split(".")[1])}`;
+          if(path.startsWith("skills.") && path.endsWith(".mod")) {
+            return `${Handlebars.helpers.formatSlug(path.slice(7, -4))}`;
           }
           switch(path) {
             case "level":
             case "system.advancement.level":
               return "Level";
           }
+
+          return `'${path}'`;
         }
 
         return predicate.toString();
@@ -204,38 +210,39 @@ export default abstract class PerkSystem extends PerkExtension {
         }
         if (StatementValidator.isAnd(statement)) {
           const and = handlePredicate(statement.and);
-          if(Array.isArray(and)) {
+          if(Array.isArray(and) && and.length === 1) {
             return and[0];
           }
-          return `All of: ${Array.isArray(and) ? and.join(', ') : and}`;
+
+          return `All of: ${Array.isArray(and) ? `<ul><li>${and.join('</li><li>')}</li></ul>` : and}`;
         }
         if (StatementValidator.isOr(statement)) {
           const or = handlePredicate(statement.or);
           if(Array.isArray(or) && or.length === 1) {
             return or[0];
           }
-          return `One of: ${Array.isArray(or) ? or.join(', ') : or}`;
+          return `One of: ${Array.isArray(or) ? `<ul><li>${or.join('</li><li>')}</li></ul>`: or}`;
         }
         if (StatementValidator.isNand(statement)) {
           const nand = handlePredicate(statement.nand);
           if(Array.isArray(nand) && nand.length === 1) {
             return `Not: ${nand[0]}`;
           }
-          return `None of: ${Array.isArray(nand) ? nand.join(', ') : nand}`;
+          return `None of: ${Array.isArray(nand) ? `<ul><li>${nand.join('</li><li>')}</li></ul>` : nand}`;
         }
         if (StatementValidator.isXor(statement)) {
           const xor = handlePredicate(statement.xor);
           if(Array.isArray(xor) && xor.length === 1) {
             return xor[0];
           }
-          return `Exactly one of: ${Array.isArray(xor) ? xor.join(', ') : xor}`;
+          return `Exactly one of: ${Array.isArray(xor) ? `<ul><li>${xor.join('</li><li>')}</li></ul>` : xor}`;
         }
         if (StatementValidator.isNor(statement)) {
           const nor = handlePredicate(statement.nor);
           if(Array.isArray(nor) && nor.length === 1) {
             return `Not: ${nor[0]}`;
           }
-          return `Not all of: ${Array.isArray(nor) ? nor.join(', ') : nor}`;
+          return `Not all of: ${Array.isArray(nor) ? `<ul><li>${nor.join('</li><li>')}</li></ul>` : nor}`;
         }
         if (StatementValidator.isNot(statement)) {
           return `Not: ${handlePredicate(statement.not)}`;
@@ -246,16 +253,14 @@ export default abstract class PerkSystem extends PerkExtension {
         if (StatementValidator.isXOf(statement)) {
           if(statement.x === 1) return handlePredicate(statement.xof);
           const xof = handlePredicate(statement.xof);
-          return `${statement.x} of: ${Array.isArray(xof) ? xof.join(', ') : xof}`;
+          return `${statement.x} of: ${Array.isArray(xof) ? `<ul><li>${xof.join('</li><li>')}</li></ul>` : xof}`;
         }
       }
 
       return predicate.toString();
     }
 
-    const value = this.prerequisites.flatMap(handlePredicate);
-
-    return value;
+    return new Predicate(this._source.prerequisites).flatMap(handlePredicate);
   }
 
   override prepareBaseData() {

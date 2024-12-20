@@ -10,7 +10,12 @@
     "description": "<p>You may target allied creatures over whom you have authority (or you possess the Tactician perk). The target ally may be immediately dropped down to 50% health, or 33% health, if they are above the chosen value. This triggers any relevant perks or abilities as if they had been attacked by an enemy. This lost health is converted into shields of equal value.<br><br>Note: Please ensure you have the target ally's out-of-character consent to use this perk on them, if pertinent.</p>",
     "traits": [],
     "prerequisites": [
-      "Intimidate 50"
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          50
+        ]
+      }
     ],
     "cost": 3,
     "slug": "harsh-motivator",

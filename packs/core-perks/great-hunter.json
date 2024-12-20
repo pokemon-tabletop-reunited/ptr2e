@@ -3,9 +3,48 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Track 45",
-      "THREE OF: Listen 40, Navigate 30, Spot 40, Survival 30, Stealth 40",
-      "4 or More \"Hunter\" Archetype Perks"
+      {
+        "gte": [
+          "{actor|skills.track.mod}",
+          45
+        ]
+      },
+      {
+        "xof": [
+          {
+            "gte": [
+              "{actor|skills.listen.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.navigate.mod}",
+              30
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.spot.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.survival.mod}",
+              30
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.stealth.mod}",
+              40
+            ]
+          }
+        ],
+        "x": 3
+      },
+      "#4 or More \"Hunter\" Archetype Perks"
     ],
     "cost": 2,
     "description": "<p>The user gains +10 to rolls that are actively involved with having the user track, locate, inquire about/discern information concerning another creature. This can range from standard wilderness hunter type of activities or pursuits, to even cyberpunk style investigations. The user adds Hunter’s Prowess to their Known Abilities List.</p>",

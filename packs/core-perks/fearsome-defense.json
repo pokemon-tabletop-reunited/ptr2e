@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Intimidate 40"
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          40
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>You may intercept an attack intended for an ally as an [Interrupt 2] by spending the activation cost. On doing so, resist the incoming attack by one step, and inflict the @Affliction[fear] condition on the target for 5 activations. If you also have the Look Out perk, this is improved to a Free Action. You may opt to intercept as a free action in those circumstances without the added benefits of Fearsome Defense if you choose not to spend the activation cost.</p>",

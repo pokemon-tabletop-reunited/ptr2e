@@ -55,7 +55,7 @@ class Predicate extends Array<PredicateStatement> {
   /** Is the provided statement true? */
   #isTrue(statement: PredicateStatement, domain: Set<string>): boolean {
     return (
-      (typeof statement === "string" && domain.has(statement)) ||
+      (typeof statement === "string" && (statement.startsWith("#") || domain.has(statement))) ||
       (StatementValidator.isBinaryOp(statement) && this.#testBinaryOp(statement, domain)) ||
       (StatementValidator.isCompound(statement) && this.#testCompound(statement, domain))
     );

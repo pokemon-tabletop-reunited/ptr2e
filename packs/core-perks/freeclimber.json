@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Climb 45"
+      {
+        "gte": [
+          "{actor|skills.climb.mod}",
+          45
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>You are able to climb without suffering penalties due to lack of equipment.</p>",

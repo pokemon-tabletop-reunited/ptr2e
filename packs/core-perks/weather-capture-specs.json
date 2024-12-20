@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 45",
-      "Advanced Ball Crafting"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          45
+        ]
+      },
+      "item:perk:advanced-ball-crafting"
     ],
     "cost": 1,
     "description": "<p>You learn three [Environ Ball] recipies.</p>",

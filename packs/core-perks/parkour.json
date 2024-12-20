@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Acrobatics 45"
+      {
+        "gte": [
+          "{actor|skills.acrobatics.mod}",
+          45
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>When your Movement would take you into an obstacle that could reasonably be traversed within your Overland Movement Allowance, you may make a Hard (-20) Acrobatics check to temporarily grant yourself [Wallclimber] during that movement. If you have not returned to stable ground before your activation ends, you immediately fall.</p>",

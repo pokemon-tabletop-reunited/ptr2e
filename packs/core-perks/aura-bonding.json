@@ -3,9 +3,14 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 35",
-      "Aura Empathy",
-      "Aura Projection"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          35
+        ]
+      },
+      "item:perk:aura-empathy",
+      "item:perk:aura-projection"
     ],
     "cost": 2,
     "description": "<p>You may substitute Aura Sense in place of the Conversation skill when interacting with creatures that the GM deems to be receptive.</p>",

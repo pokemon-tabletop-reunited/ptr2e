@@ -58,7 +58,12 @@
     "description": "<p>You learn the moves Dragon Cheer and Coaching, and gain them as Connected Moves.</p>",
     "traits": [],
     "prerequisites": [
-      "Leadership 45"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          45
+        ]
+      }
     ],
     "cost": 2,
     "slug": "drill-sergeant",

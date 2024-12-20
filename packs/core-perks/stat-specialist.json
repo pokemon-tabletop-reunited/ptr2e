@@ -3,8 +3,18 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 40",
-      "[Trainer] or [Expedition Leader]"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          40
+        ]
+      },
+      {
+        "or": [
+          "trait:trainer",
+          "trait:expedition-leader"
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>Creatures considered to be under your command or ownership (i.e. owned pokemon, expedition team members, human NPC underlings) gain the <Stat Specialist> keyword, which becomes the relevant Stat Specialist trait. You yourself also gain this trait.</p>",

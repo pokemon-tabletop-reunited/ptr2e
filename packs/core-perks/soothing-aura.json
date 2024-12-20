@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 60",
-      "Aura Bonding"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          60
+        ]
+      },
+      "item:perk:aura-bonding"
     ],
     "cost": 3,
     "description": "<p>You may make a Hard (-20) Aura Sense check to try and assuage the aura of a hostile target and calm it, rendering it non-hostile unless provoked. Please note, this will not function on opponents who are hostile through cold indifference rather than anger or pain.</p>",

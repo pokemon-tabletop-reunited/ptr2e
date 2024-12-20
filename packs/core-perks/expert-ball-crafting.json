@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 70",
-      "Advanced Ball Crafting"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          70
+        ]
+      },
+      "item:perk:advanced-ball-crafting"
     ],
     "cost": 2,
     "description": "<p>You learn the Ultra Ball recipe.</p>",

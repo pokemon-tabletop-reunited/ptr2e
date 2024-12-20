@@ -31,7 +31,17 @@
     "description": "<p>The target gains @Affliction[boosted] 2.</p>",
     "traits": [],
     "prerequisites": [
-      "Conversation 30 or Arts (Music) 30"
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.conversation.mod}",
+              30
+            ]
+          },
+          "#Arts (Music) 30 "
+        ]
+      }
     ],
     "cost": 3,
     "_migration": {

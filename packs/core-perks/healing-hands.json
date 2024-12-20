@@ -10,7 +10,12 @@
     "description": "<p>You heal 25% more HP than normal when utilising [Healing] Actions.</p>",
     "traits": [],
     "prerequisites": [
-      "Medicine 50"
+      {
+        "gte": [
+          "{actor|skills.medicine.mod}",
+          50
+        ]
+      }
     ],
     "cost": 3,
     "_migration": {

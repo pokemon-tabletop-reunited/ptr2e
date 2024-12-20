@@ -3,8 +3,18 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Trainer] or [Expedition Leader]",
-      "Intimidate 40"
+      {
+        "and": [
+          "trait:trainer",
+          "trait:expedition-leader"
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          40
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>The target [Closed Heart] creature gains @Affliction[hyper-mode] 5.</p>",

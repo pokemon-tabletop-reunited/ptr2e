@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Husbandry 20",
-      "Koffing-Class Curry"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          20
+        ]
+      },
+      "item:perk:koffing-class-curry"
     ],
     "cost": 2,
     "description": "<p>You are able to make Wobbufet-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP. After making a Wobbufet-class Curry, roll a d100. On a 1-5, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",

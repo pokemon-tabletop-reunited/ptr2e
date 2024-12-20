@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Ground] or [Rock]"
+      {
+        "or": [
+          "trait:ground",
+          "trait:rock"
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>You gain the [Tremorsense 20] trait.</p>",

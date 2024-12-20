@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 40"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          40
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>Your skill at manipulating your own Aura allows you to create an indistinct haze about yourself. You gain +1 EVA stage for 5 Activations.</p>",

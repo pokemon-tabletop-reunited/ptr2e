@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Lift 35"
+      {
+        "gte": [
+          "{actor|skills.lift.mod}",
+          35
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You have trained your muscles for great weights, and gain +10 on skill checks made with the Lift against targets larger than yourself.</p>",

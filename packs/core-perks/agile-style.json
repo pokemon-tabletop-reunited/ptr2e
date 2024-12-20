@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 25"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          25
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>The target gains @Affliction[agile] 1.</p>",

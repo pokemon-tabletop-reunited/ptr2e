@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Level 30"
+      {
+        "gte": [
+          "{actor|level}",
+          30
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>Your fight or flight response is finely honed - able to get you out of the stickiest of situations. The user gains the Ability Adrenaline as a Tutored Ability, and once during battle, when the user crosses the [Desperation 1/2] threshold, they freely use either U-Turn or No Retreat, as if it was on their Active List.</p>",

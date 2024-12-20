@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 20"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          20
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>The user spends 4 PP as a Simple Action. Allied creatures within 8m cannot have [Interrupt X] Actions or Abilities triggered their by their Movement for 2 Activations.</p>",

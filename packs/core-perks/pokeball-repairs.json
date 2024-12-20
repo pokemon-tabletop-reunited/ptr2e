@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 20"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          20
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You may make a Mechanics check with a penalty based on the Grade of the PokeBall you wish to repair after a failed capture check (-10 for Great Balls, -20 for Ultra Balls, etc). This requires appropriate tools.</p>",

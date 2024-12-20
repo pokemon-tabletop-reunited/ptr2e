@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 25"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          25
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You have a knack for reading the auras of others, allowing you to understand their moods and potentially pick up some surface thoughts. (Skill check may be required)</p>",

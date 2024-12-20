@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Science (Zoology) 20"
+      {
+        "gte": [
+          "{actor|skills.zoology.mod}",
+          20
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>Increases your Critical Capture rate by one stage.</p>",

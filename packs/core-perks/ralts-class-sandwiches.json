@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Husbandry 60",
-      "Lechonk-Class Sandwiches"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          60
+        ]
+      },
+      "item:perk:lechonk-class-sandwiches"
     ],
     "cost": 4,
     "description": "<p>These sandwiches are made with a love for the craft that the diner can really feel. They confer the same benefits as the Lechonk-class sandwich, but for one skill-check in the following day they can instead gain a +30 benefit instead of the +10 passively granted.</p>",

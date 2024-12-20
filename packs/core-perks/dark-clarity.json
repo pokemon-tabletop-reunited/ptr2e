@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Shadow Guide",
-      "Leadership 40"
+      "item:perk:shadow-guide",
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          40
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>You can apply Styles and other Command Actions to [Closed Heart] creatures normally, even if they are in @Affliction[hyper-mode]. This Perk's PP cost is made in addition to the normal cost of a Style and/or Command Action and only applies when the target is in @Affliction[hyper-mode].</p>",

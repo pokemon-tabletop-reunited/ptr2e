@@ -26,7 +26,12 @@
     "description": "<p>Your Attacks with a % effect chance have that chance increased by +10%.</p>",
     "traits": [],
     "prerequisites": [
-      "Fast Talk 35"
+      {
+        "gte": [
+          "{actor|skills.fast-talk.mod}",
+          35
+        ]
+      }
     ],
     "cost": 2,
     "_migration": {

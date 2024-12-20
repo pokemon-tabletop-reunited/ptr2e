@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Husbandry 80"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          80
+        ]
+      }
     ],
     "cost": 5,
     "description": "<p>You are able to make Charizard-class Curries as a Camp Action. One of these Curries restores 50% of the party's max HP and have them recover from Exposure. On a 1-25, you attract a non-hostile Pokemon from the local environment to investigate the camp.</p>",

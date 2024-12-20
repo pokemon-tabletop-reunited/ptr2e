@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Handiwork 30"
+      {
+        "gte": [
+          "{actor|skills.handiwork.mod}",
+          30
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You have trained as a Blacksmith and may craft [Smith] recipes you know.</p>",

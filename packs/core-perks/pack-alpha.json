@@ -3,7 +3,22 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 25 or Intimidate 35"
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.leadership.mod}",
+              25
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.intimidate.mod}",
+              35
+            ]
+          }
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You gain the [Pack Leader] trait, and may designate consenting creatures with the [Pack Mon] trait as members of your pack.</p>",

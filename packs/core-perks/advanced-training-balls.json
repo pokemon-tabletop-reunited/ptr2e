@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 60",
-      "Training Ball Specs"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          60
+        ]
+      },
+      "item:perk:training-ball-specs"
     ],
     "cost": 2,
     "description": "<p>You learn five [Training Ball] recipies.</p>",

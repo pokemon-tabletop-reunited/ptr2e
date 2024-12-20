@@ -3,9 +3,45 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Climate Controller",
-      "Level 40",
-      "Science (Meteorology) 50 OR (Survival 70 AND Occult Spiritual 70 AND Level 60)"
+      "item:perk:climate-controller",
+      {
+        "gte": [
+          "{actor|level}",
+          40
+        ]
+      },
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.meteorology.mod}",
+              50
+            ]
+          },
+          {
+            "and": [
+              {
+                "gte": [
+                  "{actor|skills.survival.mod}",
+                  70
+                ]
+              },
+              {
+                "gte": [
+                  "{actor|skills.spiritual.mod}",
+                  70
+                ]
+              },
+              {
+                "gte": [
+                  "{actor|level}",
+                  60
+                ]
+              }
+            ]
+          }
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>Weathers set by you last for +2 additional Rounds, and their numerical effects are increased by 30% (minimum 1).</p>",

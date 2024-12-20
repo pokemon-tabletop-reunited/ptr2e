@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 25"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          25
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>As a Camp Action, you can craft PokeBalls. This Perk also grants you the Basic Ball recipe.</p>",

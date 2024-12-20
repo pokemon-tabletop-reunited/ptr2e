@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Intimidate 25"
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          25
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>Trigger: You hit a creature with an attack.<br><br>Effect: The target loses -1 Stage in a Stat of the user's choice for 3 Activations..</p>",

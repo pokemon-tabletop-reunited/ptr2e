@@ -3,8 +3,23 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 60 OR Survival 45",
-      "Hunting Ball Specs"
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.electronics.mod}",
+              60
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.survival.mod}",
+              45
+            ]
+          }
+        ]
+      },
+      "item:perk:hunting-ball-specs"
     ],
     "cost": 2,
     "description": "<p>You learn four [Hunting Ball] recipies.</p>",

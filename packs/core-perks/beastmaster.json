@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Intimidate 40"
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          40
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You may substitute Intimidate in place of Leadership for Skill Contests.</p>",

@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 70",
-      "Advanced Ball Weights"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          70
+        ]
+      },
+      "item:perk:advanced-ball-weights"
     ],
     "cost": 2,
     "description": "<p>You learn the Jet Ball and Gigaton Ball recipes.</p>",

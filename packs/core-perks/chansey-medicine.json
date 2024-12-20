@@ -80,7 +80,12 @@
     "description": "<p> You gain the [Healer] trait, gaining access to the [Healer] Tutor List. The user learns Touch Up, Purify, and Acutherapy.",
     "traits": [],
     "prerequisites": [
-      "Medicine 25"
+      {
+        "gte": [
+          "{actor|skills.medicine.mod}",
+          25
+        ]
+      }
     ],
     "cost": 1,
     "_migration": {

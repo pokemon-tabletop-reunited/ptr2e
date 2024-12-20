@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Stealth 40"
+      {
+        "gte": [
+          "{actor|skills.stealth.mod}",
+          40
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>Increase your Capture Power by 1 if the target [Pokemon] is unaware of your presence.</p>",

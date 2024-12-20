@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 50",
-      "Weighted Ball Systems"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          50
+        ]
+      },
+      "item:perk:weighted-ball-systems"
     ],
     "cost": 1,
     "description": "<p>You learn the Wing Ball and Leaden Ball recipes.</p>",

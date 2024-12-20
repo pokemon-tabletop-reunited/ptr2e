@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 70",
-      "Type Ball Specs"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          70
+        ]
+      },
+      "item:perk:type-ball-specs"
     ],
     "cost": 2,
     "description": "<p>You learn four [Type Ball] recipies.</p>",

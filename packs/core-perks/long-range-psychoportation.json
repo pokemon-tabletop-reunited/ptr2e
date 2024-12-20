@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Teleporter]",
-      "Occult (Psychic) 60"
+      "trait:teleporter",
+      {
+        "gte": [
+          "{actor|skills.psychic.mod}",
+          60
+        ]
+      }
     ],
     "cost": 5,
     "description": "<p>You may fast travel via Teleportation to any settlement that you have previously visited, along with anyone touching you at the moment of transmission.</p>",

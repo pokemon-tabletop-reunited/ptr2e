@@ -3,8 +3,18 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Conversation 25",
-      "Leadership 25"
+      {
+        "gte": [
+          "{actor|skills.conversation.mod}",
+          25
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          25
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>You are practiced in psyching up your allies. You may use Moves which are normally Self-Targeting instead as having Range 10m and able to target yourself or allied creatures.</p>",

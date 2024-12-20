@@ -10,8 +10,13 @@
     "description": "<p>You acquire a Heroic Transformation, which you may construct yourself. You gain 100 Base Stat Points to allocate to the Heroic Transformation, and may allocate a maximum of +50 to any one stat. You may not allocate any of these points to HP. <br><br>This transformation functions similarly to a Mega Evolution, and may require a Key Item or Trait appropriate to the setting.</p>",
     "traits": [],
     "prerequisites": [
-      "Humanoid",
-      "Level 40"
+      "trait:humanoid",
+      {
+        "gte": [
+          "{actor|level}",
+          40
+        ]
+      }
     ],
     "cost": 3,
     "slug": "heroic-transformation",

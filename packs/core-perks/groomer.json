@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Husbandry 30"
+      {
+        "gte": [
+          "{actor|skills.husbandry.mod}",
+          30
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You are a capable Pokemon Groomer. Maybe even good enough to go professional. You may take the Groom camp action, awarding the party +10 to Perform, Conversation and Negotiation skill checks for the next 5 Daytime Spans.</p>",

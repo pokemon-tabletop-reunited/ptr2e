@@ -3,8 +3,18 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "[Trainer] or [Expedition Leader]",
-      "Survival 35"
+      {
+        "or": [
+          "trait:trainer",
+          "trait:expedition-leader"
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.survival.mod}",
+          35
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>Until the start of the next Round, the user is immune to effect damage and negative effects of active Terrains, Weathers, and Hazards. The user adds all [Terrain] Attacks to their Tutor List, learning 2 of them immediately upon taking this Perk.</p>",

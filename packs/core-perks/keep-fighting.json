@@ -3,8 +3,18 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Conversation 50",
-      "Leadership 50"
+      {
+        "gte": [
+          "{actor|skills.conversation.mod}",
+          50
+        ]
+      },
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          50
+        ]
+      }
     ],
     "cost": 4,
     "description": "<p>Trigger: An ally gains @Affliction[fainted].</p><p>Effect: The target is healed to 1HP, and is healed of one Stack of @Affliction[weary]. Then, the target is cleared of any [Major Afflictions] and [Minor Afflictions] and recover 5 Ticks of HP.</p>",

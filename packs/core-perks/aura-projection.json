@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 25"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          25
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You are able to outwardly transmit surface thoughts and feelings through Aura.</p>",

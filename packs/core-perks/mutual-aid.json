@@ -10,7 +10,12 @@
     "description": "<p>When healing another creature, you may spend an additional 4PP to also benefit from the healing applied to the creature.</p>",
     "traits": [],
     "prerequisites": [
-      "Medicine 45"
+      {
+        "gte": [
+          "{actor|skills.medicine.mod}",
+          45
+        ]
+      }
     ],
     "cost": 3,
     "_migration": {

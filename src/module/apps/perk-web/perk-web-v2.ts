@@ -8,6 +8,7 @@ import PerkStore, { PerkNode, PerkPurchaseState, PerkState } from "./perk-store.
 import { ActiveEffectPTR2e } from "@effects";
 import { LevelUpMoveSchema } from "@item/data/species.ts";
 import { ImageResolver, sluggify } from "@utils";
+import { ApplicationRenderContext } from "types/foundry/common/applications/api.js";
 
 export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMixin(ApplicationV2Expanded) {
   static override DEFAULT_OPTIONS = fu.mergeObject(
@@ -509,6 +510,16 @@ export class PerkWebApp extends foundry.applications.api.HandlebarsApplicationMi
       webOptions,
       web: this.web
     }
+  }
+
+  override _preparePartContext(partId: string, context: ApplicationRenderContext): Promise<ApplicationRenderContext> {
+  
+    if(partId === "hudPerk" && 'perk' in context && context.perk && typeof context.perk === "object" && 'document' in context.perk && context.perk.document) {
+      const perk = context.perk.document as PerkPTR2e;
+      (context.perk as Record<string, unknown>).prerequisites = perk.system.getPredicateStrings();
+    }
+
+    return super._preparePartContext(partId, context);
   }
 
   #allTraits: { value: string; label: string, type?: Trait["type"] }[] | undefined;

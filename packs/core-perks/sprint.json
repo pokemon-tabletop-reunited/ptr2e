@@ -3,7 +3,34 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Running 30 OR Flying 30 OR Swimming 30 OR Climbing 30"
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.running.mod}",
+              30
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.flying.mod}",
+              30
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.swim.mod}",
+              30
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.climb.mod}",
+              30
+            ]
+          }
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>Trigger: The user declares Rush.<br><br>Effect: The user doubles the amount of Movement Score gained with the triggering Rush, and if they only move in a straight line with that Rush, they gain an additional +3 to that Movement Score.</p>",

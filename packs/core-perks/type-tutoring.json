@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Teaching 30"
+      {
+        "gte": [
+          "{actor|skills.teaching.mod}",
+          30
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>You are able to Tutor Attacks from the <Type> Tutor List as if you knew them already yourself, up to your Grade.</p>",

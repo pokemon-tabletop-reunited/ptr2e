@@ -3,7 +3,32 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Profession (Gemcutter) 30 OR (Handiwork 45 AND Appraise 30)"
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.profession.gemcutter}",
+              30
+            ]
+          },
+          {
+            "and": [
+              {
+                "gte": [
+                  "{actor|skills.handiwork.mod}",
+                  45
+                ]
+              },
+              {
+                "gte": [
+                  "{actor|skills.appraise.mod}",
+                  30
+                ]
+              }
+            ]
+          }
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>You are able to fashion shards into Evolution Stones. You are able to learn [Evolution Stone] Crafting Recipes.</p>",

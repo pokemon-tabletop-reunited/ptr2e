@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 40",
-      "[Pack Leader]"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          40
+        ]
+      },
+      "trait:pack-leader"
     ],
     "cost": 4,
     "description": "<p>You give the order and designate an enemy. All Pack members that have the target within Reach may immediately use one Attack as a Free Action Interrupt. The Pack Leader themselves may not benefit from this additional attack.</p>",

@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 40",
-      "Basic Ball Crafting"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          40
+        ]
+      },
+      "item:perk:basic-ball-crafting"
     ],
     "cost": 1,
     "description": "<p>You learn the Great Ball recipe.</p>",

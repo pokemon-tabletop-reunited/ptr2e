@@ -3,8 +3,42 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Palaeontologist",
-      "THREE OF: Archaeology 40, Science (Biology) 40, Science (Botany) 40, Science (Geology) 40, Science (Zoology) 40"
+      "item:perk:paleontologist",
+      {
+        "xof": [
+          {
+            "gte": [
+              "{actor|skills.archaeology.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.biology.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.botany.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.geology.mod}",
+              40
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.zoology.mod}",
+              40
+            ]
+          }
+        ],
+        "x": 3
+      }
     ],
     "cost": 2,
     "description": "<p>You can access to the [Fossil] Tutor List, and may tutor Attacks from the from that Tutor List as if you knew them already yourself, up to your Grade. You receive +20 on Teaching Checks to Tutor [Fossil] creatures.</p>",

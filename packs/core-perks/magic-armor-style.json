@@ -50,7 +50,12 @@
     "description": "<p>Simple Action, 2 PP cost. Target self or allied creature. The affected creature may use SPDEF in place of their SPATK when using a Special-Category Attack until the end of their next full Activation.</p>",
     "traits": [],
     "prerequisites": [
-      "Leadership 45"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          45
+        ]
+      }
     ],
     "cost": 2,
     "_migration": {

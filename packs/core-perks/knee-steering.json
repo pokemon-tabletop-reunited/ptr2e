@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Riding 35"
+      {
+        "gte": [
+          "{actor|skills.riding.mod}",
+          35
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>You may steer a mount without using one of your hands, freeing that hand up to use for other activities.</p>",

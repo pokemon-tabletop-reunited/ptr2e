@@ -52,7 +52,12 @@
       "command"
     ],
     "prerequisites": [
-      "Leadership 45"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          45
+        ]
+      }
     ],
     "cost": 2,
     "_migration": {

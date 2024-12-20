@@ -26,7 +26,12 @@
     "description": "<p>You may advance a targeted ally's activation forward by 30% as a Simple Action, costing 3PP.</p>",
     "traits": [],
     "prerequisites": [
-      "Intimidate 35"
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          35
+        ]
+      }
     ],
     "cost": 3,
     "_migration": {

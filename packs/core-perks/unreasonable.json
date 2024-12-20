@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Intimidate 30"
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          30
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You are unreasonable to deal with and can sometimes counter people's attempts to undermine you in a social confrontation. When targeted by a Conversation or Deception skill check, you may resist using Intimidate instead of Psychology.</p>",

@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 20"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          20
+        ]
+      }
     ],
     "cost": 1,
     "description": "<p>You gain [Aura User].</p>",

@@ -31,7 +31,12 @@
     "description": "<p>Trigger: A creature within 5m of you suffers loses a Tick(s) of HP as effect damage from an Affliction.<br><br>Effect: You heal a number of Ticks of HP equal to the number of Ticks the triggering creature lost.</p>",
     "traits": [],
     "prerequisites": [
-      "Intimidate 45"
+      {
+        "gte": [
+          "{actor|skills.intimidate.mod}",
+          45
+        ]
+      }
     ],
     "cost": 4,
     "_migration": {

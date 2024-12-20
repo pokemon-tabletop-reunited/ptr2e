@@ -10,7 +10,22 @@
     "description": "<p>You may Intercept an attack against an ally within your available Movement Allowance as a Simple Action Interrupt. This consumes Movement Allowance as normal. If you also possess the perk \"Fearsome Defense\", this instead becomes a Free Action.</p>",
     "traits": [],
     "prerequisites": [
-      "Running or Swim 35"
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.running.mod}",
+              35
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.swim.mod}",
+              35
+            ]
+          }
+        ]
+      }
     ],
     "cost": 2,
     "_migration": {

@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Electronics 65",
-      "Weather Capture Specs"
+      {
+        "gte": [
+          "{actor|skills.electronics.mod}",
+          65
+        ]
+      },
+      "item:perk:weather-capture-specs"
     ],
     "cost": 2,
     "description": "<p>You learn four [Environ Ball] recipies.</p>",

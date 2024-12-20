@@ -10,7 +10,12 @@
     "description": "<p>When healing a creature, you may spend an additional 3PP to remove 1 Stack from any Afflictions the creature may be suffering, without triggering the negative effects of removing those Stacks.</p>",
     "traits": [],
     "prerequisites": [
-      "Medicine 30"
+      {
+        "gte": [
+          "{actor|skills.medicine.mod}",
+          30
+        ]
+      }
     ],
     "cost": 2,
     "_migration": {

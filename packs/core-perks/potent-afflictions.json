@@ -26,7 +26,22 @@
     "description": "<p>When a creature takes effect damage from an Affliction you inflicted, they take an additional Tick of damage.</p>",
     "traits": [],
     "prerequisites": [
-      "Science (Chemistry) or Occult (Psychic) 60"
+      {
+        "or": [
+          {
+            "gte": [
+              "{actor|skills.chemistry.mod}",
+              60
+            ]
+          },
+          {
+            "gte": [
+              "{actor|skills.psychic.mod}",
+              60
+            ]
+          }
+        ]
+      }
     ],
     "cost": 5,
     "_migration": {

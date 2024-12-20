@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Science (Zoology) 40"
+      {
+        "gte": [
+          "{actor|skills.zoology.mod}",
+          40
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>You may make a Science (Zoology) roll to identify the pokemon's level and traits.</p>",

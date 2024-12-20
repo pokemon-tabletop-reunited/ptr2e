@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 50"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          50
+        ]
+      }
     ],
     "cost": 2,
     "description": "<p>You have practiced the technique known as Channeling, and may use it to communicate with the spirits of the dead. You also gain +10 on Aura Sense skill checks pertaining to [Ghost][Pokemon].</p>",

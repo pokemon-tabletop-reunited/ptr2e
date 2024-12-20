@@ -3,10 +3,20 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Leadership 50",
-      "[Pack Leader]",
-      "Pile On!",
-      "Stealth 50"
+      {
+        "gte": [
+          "{actor|skills.leadership.mod}",
+          50
+        ]
+      },
+      "trait:pack-leader",
+      "item:perk:pile-on",
+      {
+        "gte": [
+          "{actor|skills.stealth.mod}",
+          50
+        ]
+      }
     ],
     "cost": 4,
     "description": "<p>If your Pack has yet to be discovered, you may declare a Synchronised Takedown. All Pack members may get one Attack before combat begins.</p>",

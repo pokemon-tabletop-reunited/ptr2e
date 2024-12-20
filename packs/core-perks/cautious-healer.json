@@ -10,7 +10,12 @@
     "description": "<p>When you heal another creature using a Healing Move, you gain @Affliction[resolved] 3.</p>",
     "traits": [],
     "prerequisites": [
-      "Medicine 45"
+      {
+        "gte": [
+          "{actor|skills.medicine.mod}",
+          45
+        ]
+      }
     ],
     "cost": 3,
     "_migration": {

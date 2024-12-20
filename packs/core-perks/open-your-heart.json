@@ -3,8 +3,13 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Shadow Guide",
-      "Psychology 60"
+      "item:perk:shadow-guide",
+      {
+        "gte": [
+          "{actor|skills.psychology.mod}",
+          60
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>You have the necessary knowledge and skill to perform the Purification Ceremony that forms the final stage of cleansing a [Closed Heart] creature.</p>",

@@ -3,7 +3,12 @@
   "type": "perk",
   "system": {
     "prerequisites": [
-      "Aura Sense 40"
+      {
+        "gte": [
+          "{actor|skills.aura-sense.mod}",
+          40
+        ]
+      }
     ],
     "cost": 3,
     "description": "<p>You are able to tap into your Aura powers to see without the use of your eyes. You gain the [Blindsense 10] trait.</p>",

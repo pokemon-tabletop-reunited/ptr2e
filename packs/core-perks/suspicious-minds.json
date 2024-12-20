@@ -29,7 +29,12 @@
     "description": "<p>Trigger: A creature in range suffers effect damage from an Affliction due to a Stack being removed. <br><br>Effect: An additonal Stack is removed from the Affliction as if the creature ended their Activation again, proviking all of the pertinent end-of-Activation effects. This may be triggered a number of times on a creature per Affliction they possess, spending PP for each one.</p>",
     "traits": [],
     "prerequisites": [
-      "Fast Talk 40"
+      {
+        "gte": [
+          "{actor|skills.fast-talk.mod}",
+          40
+        ]
+      }
     ],
     "cost": 4,
     "_migration": {
