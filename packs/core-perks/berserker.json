@@ -29,7 +29,8 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 activations.</p>"
+        "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "slug": "rage",
@@ -54,7 +55,8 @@
         "types": [
           "normal"
         ],
-        "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 activations.</p>"
+        "description": "<p>Effect: The user gains @Affliction[enraged] 2. While @Affliction[enraged], if the user is hit by a damaging attack, they gain +1 ATK Stage for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
       },
       {
         "name": "Frenzy Rush",
@@ -81,22 +83,55 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 2,
-          "delay": null,
-          "priority": null
+          "powerPoints": 2
         },
-        "variant": null,
         "types": [
           "normal"
         ],
         "category": "physical",
         "power": 30,
-        "accuracy": 75,
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null,
-        "description": ""
+        "accuracy": 75
+      },
+      {
+        "slug": "work-up",
+        "name": "Work Up",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "complex",
+          "powerPoints": 3
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Effect: The user raises their ATK and SPATK Stages by +1 for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
+      },
+      {
+        "slug": "work-up-enraged",
+        "name": "Work Up (Enraged)",
+        "type": "attack",
+        "traits": [],
+        "range": {
+          "target": "self",
+          "unit": "m"
+        },
+        "cost": {
+          "activation": "simple",
+          "powerPoints": 3,
+          "trigger": "<p>The user is @Affliction[enraged].</p>"
+        },
+        "category": "status",
+        "types": [
+          "normal"
+        ],
+        "description": "<p>Trigger: The user is @Affliction[enraged].</p><p>Effect: The user gains +1 ATK and SPATK Stages for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
     "slug": "berserker",
@@ -112,8 +147,8 @@
       "archetype": "Berserker"
     },
     "node": {
-      "i": 51,
-      "j": -78,
+      "i": 171,
+      "j": 42,
       "connected": [
         "backpacker-1",
         "berserk",

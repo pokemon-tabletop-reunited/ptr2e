@@ -41,8 +41,7 @@ export const Init: PTRHook = {
         CONFIG.Token.prototypeSheetClass = TokenConfigPTR2e;
       }
 
-      // Set custom combat settings
-      CONFIG.ui.combat = PTRCONFIG.ui.combat
+      
 
       // Define custom Entity classes
       CONFIG.ActiveEffect.documentClass = PTRCONFIG.ActiveEffect.documentClass;
@@ -82,6 +81,7 @@ export const Init: PTRHook = {
       CONFIG.specialStatusEffects = PTRCONFIG.specialStatusEffects;
 
       if (game.release.generation === 12) {
+        CONFIG.ui.combat = PTRCONFIG.ui.combat
         CONFIG.ui.items = PTRCONFIG.ui.items;
         CONFIG.ui.actors = PTRCONFIG.ui.actors;
         CONFIG.ui.compendium = PTRCONFIG.ui.compendium;

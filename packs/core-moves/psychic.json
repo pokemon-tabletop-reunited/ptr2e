@@ -4,7 +4,6 @@
   "img": "systems/ptr2e/img/svg/psychic_icon.svg",
   "system": {
     "slug": "psychic",
-    "description": "",
     "traits": [
       "push-3"
     ],
@@ -24,10 +23,7 @@
         },
         "cost": {
           "activation": "complex",
-          "powerPoints": 5,
-          "delay": null,
-          "priority": null,
-          "trigger": null
+          "powerPoints": 5
         },
         "category": "special",
         "power": 90,
@@ -35,28 +31,28 @@
         "types": [
           "psychic"
         ],
-        "description": "<p>Effect: On hit, the target has a 10% chance of losing -1 SPDEF Stage for 5 Activations.</p>",
-        "contestType": "",
-        "contestEffect": "",
-        "free": false,
-        "slot": null
+        "description": "<p>Effect: On hit, the target has a 10% chance of losing -1 SPDEF Stage for 5 activations.</p>",
+        "img": "icons/svg/explosion.svg"
       }
     ],
-    "container": null,
-    "grade": "B"
+    "grade": "B",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "NO3wo8dZeZsPzeW5",
   "effects": [
     {
       "name": "Psychic",
       "type": "passive",
-      "_id": "ANSuyWG48ZyhdEJv",
+      "_id": "A8PiqE1skC8d1qVE",
       "img": "systems/ptr2e/img/icons/effect_icon.webp",
       "system": {
         "changes": [
           {
             "type": "roll-effect",
-            "key": "psychic-move-attack",
+            "key": "psychic-attack",
             "value": "Compendium.ptr2e.core-effects.Item.qe5aLBJuwb9eYqvv",
             "predicate": [],
             "chance": 10,
@@ -94,9 +90,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.2.4.3",
-        "createdTime": 1729161997232,
-        "modifiedTime": 1729162026266,
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1732970407385,
+        "modifiedTime": 1732970498987,
         "lastModifiedBy": "Kc3DOunCh3ClAeHS"
       }
     }

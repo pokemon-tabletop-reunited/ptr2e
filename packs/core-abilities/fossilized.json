@@ -1,7 +1,7 @@
 {
   "name": "Fossilized",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/rock_icon.svg",
   "system": {
     "actions": [
       {
@@ -21,9 +21,7 @@
       }
     ],
     "description": "<p>Effect: The user takes 30% less damage from Rock-Type attacks or effects. The user's Rock-Type attacks have their Power increased by 20%.</p>",
-    "traits": [
-      "partial-automation"
-    ],
+    "traits": [],
     "slug": "fossilized",
     "_migration": {
       "version": null,
@@ -44,7 +42,18 @@
             "key": "rock-attack-power",
             "value": 20,
             "predicate": [],
-            "label": "Fossilized",
+            "label": "Fossilized (Offense)",
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          },
+          {
+            "type": "ephemeral-modifier",
+            "key": "rock-attack-damage-percentile",
+            "value": -30,
+            "predicate": [],
+            "label": "Fossilized (Defense)",
             "mode": 2,
             "priority": null,
             "ignored": false,
@@ -79,9 +88,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "ptr2e",
-        "systemVersion": "0.10.0-alpha.3.0.0",
+        "systemVersion": "0.10.0-alpha.4.1.0",
         "createdTime": 1729417355393,
-        "modifiedTime": 1729417374592,
+        "modifiedTime": 1734142929842,
         "lastModifiedBy": "Kc3DOunCh3ClAeHS"
       }
     }

@@ -17,10 +17,15 @@
       "primary": [
         {
           "type": "flight",
-          "value": 3
+          "value": 6
         }
       ],
-      "secondary": []
+      "secondary": [
+        {
+          "type": "overland",
+          "value": 3
+        }
+      ]
     },
     "traits": [
       "pokemon",
@@ -29,7 +34,11 @@
       "weapon",
       "breathless",
       "telepath",
-      "natural-steel"
+      "natural-steel",
+      "steel",
+      "ghost",
+      "living-weapon",
+      "bladed"
     ],
     "abilities": {
       "starting": [
@@ -64,8 +73,8 @@
     },
     "skills": [
       {
-        "slug": "conversation",
-        "value": 50,
+        "slug": "ghost",
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -73,7 +82,7 @@
       },
       {
         "slug": "history",
-        "value": 55,
+        "value": 45,
         "rvs": 0,
         "favourite": false,
         "hidden": false,
@@ -110,14 +119,6 @@
         "favourite": false,
         "hidden": false,
         "group": null
-      },
-      {
-        "slug": "ghost",
-        "value": 55,
-        "rvs": 0,
-        "favourite": false,
-        "hidden": false,
-        "group": "occult"
       },
       {
         "slug": "running",
@@ -162,106 +163,151 @@
       "spe": 35
     },
     "types": [
-      "steel",
-      "ghost"
+      "ghost",
+      "steel"
     ],
     "moves": {
       "levelUp": [
         {
-          "name": "tackle",
-          "level": 1,
-          "gen": "sword-shield"
+          "name": "autotomize",
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "fury-cutter",
-          "level": 1,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "shadow-sneak",
-          "level": 1,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 1
         },
         {
-          "name": "autotomize",
-          "level": 1,
-          "gen": "sword-shield"
+          "name": "tackle",
+          "gen": "sword-shield",
+          "level": 1
         },
         {
           "name": "aerial-ace",
-          "level": 12,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 12
         },
         {
           "name": "pursuit",
-          "level": 13,
-          "gen": "ultra-sun-ultra-moon"
+          "gen": "ultra-sun-ultra-moon",
+          "level": 13
         },
         {
           "name": "metal-sound",
-          "level": 16,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 16
         },
         {
           "name": "slash",
-          "level": 20,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 20
         },
         {
           "name": "night-slash",
-          "level": 24,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 24
+        },
+        {
+          "name": "knightly-sword",
+          "level": 26,
+          "gen": null
         },
         {
           "name": "retaliate",
-          "level": 28,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 28
         },
         {
           "name": "iron-defense",
-          "level": 32,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 32
         },
         {
           "name": "iron-head",
-          "level": 38,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 38
         },
         {
           "name": "power-trick",
-          "level": 44,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 44
         },
         {
           "name": "swords-dance",
-          "level": 50,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 50
         },
         {
           "name": "sacred-sword",
-          "level": 56,
-          "gen": "sword-shield"
+          "gen": "sword-shield",
+          "level": 56
         }
       ],
       "tutor": [
         {
-          "name": "snore",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "spite",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "shock-wave",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "magnet-rise",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
           "name": "after-you",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "attract",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "brick-break",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "brutal-swing",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "close-combat",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "confide",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "cut",
+          "gen": "omega-ruby-alpha-sapphire"
+        },
+        {
+          "name": "double-team",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "endure",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "facade",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "false-swipe",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "flash-cannon",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "frustration",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "gyro-ball",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "hidden-power",
           "gen": "ultra-sun-ultra-moon"
         },
         {
@@ -269,24 +315,20 @@
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "steel-beam",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "cut",
-          "gen": "omega-ruby-alpha-sapphire"
-        },
-        {
-          "name": "toxic",
+          "name": "magnet-rise",
           "gen": "ultra-sun-ultra-moon"
         },
         {
-          "name": "screech",
+          "name": "protect",
           "gen": "sword-shield"
         },
         {
-          "name": "double-team",
-          "gen": "ultra-sun-ultra-moon"
+          "name": "psycho-cut",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "rain-dance",
+          "gen": "sword-shield"
         },
         {
           "name": "reflect",
@@ -297,55 +339,15 @@
           "gen": "sword-shield"
         },
         {
-          "name": "rock-slide",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "substitute",
-          "gen": "sword-shield"
+          "name": "return",
+          "gen": "ultra-sun-ultra-moon"
         },
         {
           "name": "reversal",
           "gen": "sword-shield"
         },
         {
-          "name": "protect",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "endure",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "false-swipe",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "swagger",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "attract",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "sleep-talk",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "return",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "frustration",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "hidden-power",
-          "gen": "ultra-sun-ultra-moon"
-        },
-        {
-          "name": "rain-dance",
+          "name": "rock-slide",
           "gen": "sword-shield"
         },
         {
@@ -353,11 +355,11 @@
           "gen": "omega-ruby-alpha-sapphire"
         },
         {
-          "name": "facade",
+          "name": "round",
           "gen": "sword-shield"
         },
         {
-          "name": "brick-break",
+          "name": "screech",
           "gen": "sword-shield"
         },
         {
@@ -365,31 +367,19 @@
           "gen": "omega-ruby-alpha-sapphire"
         },
         {
-          "name": "gyro-ball",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "close-combat",
-          "gen": "sword-shield"
-        },
-        {
           "name": "shadow-claw",
           "gen": "sword-shield"
         },
         {
-          "name": "psycho-cut",
+          "name": "shock-wave",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "sleep-talk",
           "gen": "sword-shield"
         },
         {
-          "name": "flash-cannon",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "round",
-          "gen": "sword-shield"
-        },
-        {
-          "name": "confide",
+          "name": "snore",
           "gen": "ultra-sun-ultra-moon"
         },
         {
@@ -397,8 +387,24 @@
           "gen": "sword-shield"
         },
         {
-          "name": "brutal-swing",
+          "name": "spite",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "steel-beam",
           "gen": "sword-shield"
+        },
+        {
+          "name": "substitute",
+          "gen": "sword-shield"
+        },
+        {
+          "name": "swagger",
+          "gen": "ultra-sun-ultra-moon"
+        },
+        {
+          "name": "toxic",
+          "gen": "ultra-sun-ultra-moon"
         }
       ]
     },
@@ -456,10 +462,139 @@
           ]
         }
       ],
-      "uuid": "Compendium.ptr2e.core-species.Item.tPERYPJLMNt5aub6"
+      "uuid": "Compendium.ptr2e.core-species.Item.tPERYPJLMNt5aub6",
+      "methods": []
+    },
+    "_migration": {
+      "version": null,
+      "previous": null
     }
   },
   "_id": "y4FNsu3YnTNWRILL",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Hover",
+      "type": "passive",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "domain": "immunities",
+            "value": "trait:earthbound",
+            "key": "",
+            "mode": 2,
+            "priority": null,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          }
+        ],
+        "traits": [
+          "hover"
+        ],
+        "slug": null,
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "_id": null,
+      "img": null,
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      }
+    },
+    {
+      "name": "Breathless",
+      "type": "passive",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "domain": "immunities",
+            "value": "trait:powder",
+            "key": "",
+            "mode": 2,
+            "priority": null,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          },
+          {
+            "type": "roll-option",
+            "domain": "immunities",
+            "value": "trait:gas",
+            "key": "",
+            "mode": 2,
+            "priority": null,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          }
+        ],
+        "traits": [
+          "breathless"
+        ],
+        "slug": null,
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "_id": null,
+      "img": null,
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      }
+    }
+  ]
 }

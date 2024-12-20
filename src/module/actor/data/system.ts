@@ -1,3 +1,4 @@
+/* eslint-disable no-fallthrough */
 import { HasTraits, HasMigrations, PokemonType, ClockPTR2e } from "@data";
 import { getTypes, TypeEffectiveness } from "@scripts/config/effectiveness.ts";
 import {
@@ -487,6 +488,39 @@ class ActorSystemPTR2e extends HasMigrations(HasTraits(foundry.abstract.TypeData
         const newSkill = new SkillPTR2e(fu.duplicate(skill), { parent: this });
         newSkill.prepareBaseData();
         this.skills.set(newSkill.slug, newSkill);
+      }
+    }
+
+    if (this.shield.value > 0) this.parent.rollOptions.addOption("self", "state:shielded");
+    switch (true) {
+      case this.health.value <= Math.floor(this.health.max * 0.25): {
+        this.parent.rollOptions.addOption("self", "state:desperation-1-4");
+      }
+      case this.health.value <= Math.floor(this.health.max * (1 / 3)): {
+        this.parent.rollOptions.addOption("self", "state:desperation-1-3");
+      }
+      case this.health.value <= Math.floor(this.health.max * 0.5): {
+        this.parent.rollOptions.addOption("self", "state:desperation-1-2");
+      }
+      case this.health.value <= Math.floor(this.health.max * 0.75): {
+        this.parent.rollOptions.addOption("self", "state:desperation-3-4");
+      }
+    }
+    switch (true) {
+      case this.health.value == this.health.max: {
+        this.parent.rollOptions.addOption("self", "state:healthy");
+      }
+      case this.health.value >= Math.floor(this.health.max * 0.75): {
+        this.parent.rollOptions.addOption("self", "state:intrepid-3-4");
+      }
+      case this.health.value >= Math.floor(this.health.max * 0.5): {
+        this.parent.rollOptions.addOption("self", "state:intrepid-1-2");
+      }
+      case this.health.value >= Math.floor(this.health.max * (1 / 3)): {
+        this.parent.rollOptions.addOption("self", "state:intrepid-1-3");
+      }
+      case this.health.value >= Math.floor(this.health.max * 0.25): {
+        this.parent.rollOptions.addOption("self", "state:intrepid-1-4");
       }
     }
   }

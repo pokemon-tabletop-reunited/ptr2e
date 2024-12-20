@@ -19,8 +19,8 @@
       "archetype": "Tank"
     },
     "node": {
-      "i": 24,
-      "j": -105,
+      "i": 144,
+      "j": 15,
       "connected": [
         "cleansing-shield",
         "improved-shielding",
@@ -43,5 +43,60 @@
       "previous": null
     }
   },
-  "effects": []
+  "effects": [
+    {
+      "name": "Warding Shield",
+      "type": "passive",
+      "_id": "UkzRpXgjJWHA993Y",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "ephemeral-modifier",
+            "key": "system.modifiers.effectChance",
+            "value": -10,
+            "predicate": [
+              "self:state:shielded"
+            ],
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "hideIfDisabled": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1733069809373,
+        "modifiedTime": 1733069890379,
+        "lastModifiedBy": "mK35yvCqCgiTUvKf"
+      }
+    }
+  ]
 }

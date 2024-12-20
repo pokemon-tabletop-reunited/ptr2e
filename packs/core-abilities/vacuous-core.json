@@ -1,7 +1,7 @@
 {
   "name": "Vacuous Core",
   "type": "ability",
-  "img": "systems/ptr2e/img/icons/ability_icon.webp",
+  "img": "systems/ptr2e/img/svg/ice_icon.svg",
   "system": {
     "actions": [
       {
@@ -34,7 +34,11 @@
           "activation": "free"
         },
         "description": "<p>Passive: if the user is White Kyurem, they gain the Turboblaze Ability as an Extra Ability. If the user is Black Kyurem, they gain the Teravolt Ability as an Extra Ability.</p>",
-        "img": "icons/svg/explosion.svg"
+        "img": "icons/svg/explosion.svg",
+        "range": {
+          "target": "enemy",
+          "unit": "m"
+        }
       }
     ],
     "description": "<p>Trigger: The user declares Glaciate, Freeze Shock, or Ice Burn.</p><p>Effect: The triggering attack inflicts @Affliction[frostbite] 7 on all valid targets on hit. If the triggering attack was Freeze Shock or Ice Burn, the attack causes all valid targets to lose -1 ACC Stage for 7 Activations. Passive: if the user is White Kyurem, they gain the Turboblaze Ability as an Extra Ability. If the user is Black Kyurem, they gain the Teravolt Ability as an Extra Ability.</p>",

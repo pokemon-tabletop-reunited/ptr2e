@@ -32,8 +32,8 @@
     "slug": "frenzied-assault",
     "traits": [],
     "node": {
-      "i": 67,
-      "j": -74,
+      "i": 187,
+      "j": 46,
       "connected": [
         "berserk",
         "ultraviolet",
@@ -58,5 +58,61 @@
   },
   "_id": "IMn0UktiyUWZXQty",
   "img": "systems/ptr2e/img/perk-icons/Combat.svg",
-  "effects": []
+  "effects": [
+    {
+      "name": "Frenzied Assault",
+      "type": "passive",
+      "_id": "XwbxmvahwQuGuMzh",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-effect",
+            "key": "attack",
+            "value": "Compendium.ptr2e.core-effects.Item.XeiSuS3APUcN0MLM",
+            "predicate": [
+              "effect:affliction:enraged"
+            ],
+            "chance": 30,
+            "affects": "self",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1734211188522,
+        "modifiedTime": 1734212542084,
+        "lastModifiedBy": "Kc3DOunCh3ClAeHS"
+      }
+    }
+  ]
 }

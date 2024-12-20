@@ -357,7 +357,9 @@
     "evolutions": {
       "name": "dhelmise",
       "details": null,
-      "evolutions": []
+      "evolutions": [],
+      "uuid": null,
+      "methods": []
     },
     "number": 781,
     "traits": [
@@ -397,6 +399,9 @@
       "master": [
         {
           "slug": "amphibious"
+        },
+        {
+          "slug": "desiccation"
         }
       ]
     },
@@ -489,9 +494,81 @@
       }
     ],
     "habitats": [],
-    "slug": "dhelmise"
+    "slug": "dhelmise",
+    "_migration": {
+      "version": null,
+      "previous": null
+    }
   },
   "_id": "YzecIXhSMmCK76GG",
-  "effects": [],
-  "folder": null
+  "effects": [
+    {
+      "name": "Breathless",
+      "type": "passive",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "domain": "immunities",
+            "value": "trait:powder",
+            "key": "",
+            "mode": 2,
+            "priority": null,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          },
+          {
+            "type": "roll-option",
+            "domain": "immunities",
+            "value": "trait:gas",
+            "key": "",
+            "mode": 2,
+            "priority": null,
+            "predicate": [],
+            "ignored": false,
+            "suboptions": [],
+            "state": true
+          }
+        ],
+        "traits": [
+          "breathless"
+        ],
+        "slug": null,
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0
+      },
+      "_id": null,
+      "img": null,
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null
+      }
+    }
+  ]
 }

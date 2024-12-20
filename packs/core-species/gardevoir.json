@@ -17,7 +17,11 @@
       "primary": [
         {
           "type": "overland",
-          "value": 10
+          "value": 8
+        },
+        {
+          "type": "teleport",
+          "value": 12
         }
       ],
       "secondary": [
@@ -36,7 +40,8 @@
       "premonition",
       "aura-user",
       "telepath",
-      "telekinetic-8"
+      "telekinetic-8",
+      "teleporter"
     ],
     "abilities": {
       "starting": [
@@ -65,10 +70,10 @@
       ],
       "master": [
         {
-          "slug": "purity-aura"
+          "slug": "magic-guard"
         },
         {
-          "slug": "purifier"
+          "slug": "pixilate"
         }
       ]
     },
@@ -764,5 +769,127 @@
     "slug": "gardevoir"
   },
   "_id": "YHAeSJtSkBZWlQas",
-  "effects": []
+  "effects": [
+    {
+      "name": "Mega Gardevoir",
+      "type": "form",
+      "_id": "BHAKMYkjCvP5Jv5F",
+      "img": "systems/ptr2e/img/icons/effect_icon.webp",
+      "system": {
+        "changes": [
+          {
+            "type": "roll-option",
+            "key": "manual-forme-toggle",
+            "value": "forme:mega-gardevoir:active",
+            "domain": "all",
+            "toggleable": true,
+            "label": "Toggle: Mega Gardevoir Forme",
+            "predicate": [],
+            "alwaysActive": false,
+            "count": false,
+            "mode": 2,
+            "priority": null,
+            "ignored": false,
+            "suboptions": [],
+            "state": false
+          },
+          {
+            "type": "stats-alteration",
+            "predicate": [
+              "forme:mega-gardevoir:active"
+            ],
+            "key": "",
+            "value": 0,
+            "hp": null,
+            "atk": 20,
+            "def": null,
+            "spa": 40,
+            "spd": 20,
+            "spe": 20,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "add-trait",
+            "predicate": [
+              "forme:mega-gardevoir:active"
+            ],
+            "key": "",
+            "value": "Sparkler",
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-gardevoir:active"
+            ],
+            "key": "system.skills.intimidate.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-gardevoir:active"
+            ],
+            "key": "system.skills.psychic.value",
+            "value": 10,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          },
+          {
+            "type": "basic",
+            "predicate": [
+              "forme:mega-gardevoir:active"
+            ],
+            "key": "system.skills.fairy.value",
+            "value": 15,
+            "mode": 2,
+            "priority": null,
+            "ignored": false
+          }
+        ],
+        "slug": null,
+        "traits": [],
+        "removeAfterCombat": true,
+        "removeOnRecall": false,
+        "stacks": 0,
+        "trigger": "manual",
+        "conditions": []
+      },
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "ptr2e",
+        "systemVersion": "0.10.0-alpha.4.1.0",
+        "createdTime": 1734363226877,
+        "modifiedTime": 1734363493594,
+        "lastModifiedBy": "IcBpMqhFuTck9VpX"
+      }
+    }
+  ]
 }

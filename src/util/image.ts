@@ -110,9 +110,7 @@ class ImageResolver {
                         return result;
                     }
                 } // form matched partially, return shiny result
-                else {
-                    return shinyResult;
-                }
+                return shinyResult;
             }
         }
 
